@@ -483,6 +483,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // reads its statics for that (`auraPolarity`).
   "become-licid-aura": (n, v) => v.touch(n.target, "either", MINOR),
   transform: (n, v) => v.touch(n.target, "either", MINOR),
+  flip: (n, v) => v.touch(n.target, "either", MINOR),
   // What becomes the copy, and what it copies: either may be anyone's
   // (Mirage Mirror copies an opponent's best; Shuri, two of your own). What
   // the source itself becomes a copy of is the best of anyone's (Muddle).
@@ -515,7 +516,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   epic: none,
   "prevent-all-combat-damage": none,
   "prevent-damage-to-you": none,
-  "prevent-damage": (n, v) => v.touch(n.target, "help", MINOR),
+  // The damage prevented is dealt to `redirectTo` instead (Nomads en-Kor,
+  // Outrider en-Kor): that slot takes the hit.
+  "prevent-damage": (n, v) => {
+    v.touch(n.target, "help", MINOR);
+    if (n.redirectTo !== undefined) v.touch(n.redirectTo, "harm", MINOR);
+  },
   "prevent-damage-from-chosen-source": (n, v) => {
     if (typeof n.to === "number") v.touch(n.to, "help", MINOR);
   },

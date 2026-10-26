@@ -46,6 +46,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
+import _poolBasalSliver from "../pool/basal-sliver.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
 import _poolBelligerentSliver from "../pool/belligerent-sliver.js";
@@ -59,6 +60,7 @@ import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBladeJuggler from "../pool/blade-juggler.js";
+import _poolBlademaneBaku from "../pool/blademane-baku.js";
 import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
 import _poolBlanketOfNight from "../pool/blanket-of-night.js";
 import _poolBlastOfGenius from "../pool/blast-of-genius.js";
@@ -73,6 +75,7 @@ import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBodyOfResearch from "../pool/body-of-research.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
+import _poolBonesplitterSliver from "../pool/bonesplitter-sliver.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
 import _poolBoneyardScourge from "../pool/boneyard-scourge.js";
 import _poolBonfireOfTheDamned from "../pool/bonfire-of-the-damned.js";
@@ -332,6 +335,7 @@ import _poolHighMarket from "../pool/high-market.js";
 import _poolHinterlandDrake from "../pool/hinterland-drake.js";
 import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
+import _poolHorobiDeathsWail from "../pool/horobi-deaths-wail.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
 import _poolHurkylsRecall from "../pool/hurkyls-recall.js";
@@ -480,6 +484,7 @@ import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
+import _poolOgreMarauder from "../pool/ogre-marauder.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
 import _poolOppressiveWill from "../pool/oppressive-will.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
@@ -549,6 +554,7 @@ import _poolResupply from "../pool/resupply.js";
 import _poolRevengeOfTheHunted from "../pool/revenge-of-the-hunted.js";
 import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRidgedKusite from "../pool/ridged-kusite.js";
+import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
@@ -686,6 +692,7 @@ import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTimeOfHeroes from "../pool/time-of-heroes.js";
+import _poolTokTokVolcanoBorn from "../pool/tok-tok-volcano-born.js";
 import _poolTomakulHonorGuard from "../pool/tomakul-honor-guard.js";
 import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
@@ -832,6 +839,7 @@ const shard: CardShard = {
     _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
+    _poolBasalSliver,
     _poolBedheadBeastie,
     _poolBelleOfTheBrawl,
     _poolBelligerentSliver,
@@ -845,6 +853,7 @@ const shard: CardShard = {
     _poolBirninZanaPlaza,
     _poolBitterReunion,
     _poolBladeJuggler,
+    _poolBlademaneBaku,
     _poolBladestitchedSkaab,
     _poolBlanketOfNight,
     _poolBlastOfGenius,
@@ -859,6 +868,7 @@ const shard: CardShard = {
     _poolBodyOfResearch,
     _poolBogNaughty,
     _poolBoldwyrAggressor,
+    _poolBonesplitterSliver,
     _poolBoneyardDesecrator,
     _poolBoneyardScourge,
     _poolBonfireOfTheDamned,
@@ -1118,6 +1128,7 @@ const shard: CardShard = {
     _poolHinterlandDrake,
     _poolHollowheadSliver,
     _poolHondenOfInfiniteRage,
+    _poolHorobiDeathsWail,
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
     _poolHurkylsRecall,
@@ -1266,6 +1277,7 @@ const shard: CardShard = {
     _poolOathOfChandra,
     _poolObservantAlseid,
     _poolOgreBerserker,
+    _poolOgreMarauder,
     _poolOgreSiegebreaker,
     _poolOppressiveWill,
     _poolOrderOfTheWhiteShield,
@@ -1335,6 +1347,7 @@ const shard: CardShard = {
     _poolRevengeOfTheHunted,
     _poolRibtrussRoaster,
     _poolRidgedKusite,
+    _poolRiftmarkedKnight,
     _poolRighteousCharge,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
@@ -1472,6 +1485,7 @@ const shard: CardShard = {
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,
     _poolTimeOfHeroes,
+    _poolTokTokVolcanoBorn,
     _poolTomakulHonorGuard,
     _poolTopanAscetic,
     _poolTowerDrake,

@@ -47,6 +47,7 @@ import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
+import _poolAzamukiTreacheryIncarnate from "../pool/azamuki-treachery-incarnate.js";
 import _poolAzoriusGuildmage from "../pool/azorius-guildmage.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
@@ -374,6 +375,7 @@ import _poolJerrardOfTheClosedFist from "../pool/jerrard-of-the-closed-fist.js";
 import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
 import _poolJhoirasToolbox from "../pool/jhoiras-toolbox.js";
+import _poolJuganTheRisingStar from "../pool/jugan-the-rising-star.js";
 import _poolJukaiTrainee from "../pool/jukai-trainee.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
 import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
@@ -394,6 +396,7 @@ import _poolKittKantoMayhemDiva from "../pool/kitt-kanto-mayhem-diva.js";
 import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
 import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
+import _poolKondaLordOfEiganjo from "../pool/konda-lord-of-eiganjo.js";
 import _poolKongmingsContraptions from "../pool/kongmings-contraptions.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
@@ -486,6 +489,7 @@ import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
 import _poolOffspringsRevenge from "../pool/offsprings-revenge.js";
+import _poolOgreRecluse from "../pool/ogre-recluse.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
 import _poolOliviasDragoon from "../pool/olivias-dragoon.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
@@ -495,6 +499,7 @@ import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
+import _poolOrochiHatchery from "../pool/orochi-hatchery.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverbeingOfMyth from "../pool/overbeing-of-myth.js";
 import _poolOverkill from "../pool/overkill.js";
@@ -609,6 +614,7 @@ import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSimicInitiate from "../pool/simic-initiate.js";
 import _poolSimple from "../pool/simple.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
+import _poolSireOfTheStorm from "../pool/sire-of-the-storm.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
 import _poolSkyfireKirin from "../pool/skyfire-kirin.js";
@@ -627,6 +633,7 @@ import _poolSoulOfRavnica from "../pool/soul-of-ravnica.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
+import _poolSpellBurst from "../pool/spell-burst.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
+    _poolAzamukiTreacheryIncarnate,
     _poolAzoriusGuildmage,
     _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
@@ -1176,6 +1184,7 @@ const shard: CardShard = {
     _poolJeskaiStudent,
     _poolJhessianBalmgiver,
     _poolJhoirasToolbox,
+    _poolJuganTheRisingStar,
     _poolJukaiTrainee,
     _poolJungleBarrier,
     _poolJunkbladeBruiser,
@@ -1196,6 +1205,7 @@ const shard: CardShard = {
     _poolKjeldoranOutrider,
     _poolKnowledgeAndPower,
     _poolKodamaOfTheEastTree,
+    _poolKondaLordOfEiganjo,
     _poolKongmingsContraptions,
     _poolKorlessaScaleSinger,
     _poolKorozdaMonitor,
@@ -1288,6 +1298,7 @@ const shard: CardShard = {
     _poolObscuraInterceptor,
     _poolOccultEpiphany,
     _poolOffspringsRevenge,
+    _poolOgreRecluse,
     _poolOkaunEyeOfChaos,
     _poolOliviasDragoon,
     _poolOltecMatterweaver,
@@ -1297,6 +1308,7 @@ const shard: CardShard = {
     _poolOranRiefOoze,
     _poolOrcishVandal,
     _poolOrderOfTheSacredTorch,
+    _poolOrochiHatchery,
     _poolOrochiSustainer,
     _poolOverbeingOfMyth,
     _poolOverkill,
@@ -1411,6 +1423,7 @@ const shard: CardShard = {
     _poolSimicInitiate,
     _poolSimple,
     _poolSireOfStagnation,
+    _poolSireOfTheStorm,
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
     _poolSkyfireKirin,
@@ -1429,6 +1442,7 @@ const shard: CardShard = {
     _poolSowerOfTemptation,
     _poolSparkSpray,
     _poolSparringDummy,
+    _poolSpellBurst,
     _poolSpelunking,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,

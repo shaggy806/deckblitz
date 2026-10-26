@@ -103,6 +103,7 @@ import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
+import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
 import _poolCerodonYearling from "../pool/cerodon-yearling.js";
@@ -121,6 +122,7 @@ import _poolClayStatue from "../pool/clay-statue.js";
 import _poolClearAPath from "../pool/clear-a-path.js";
 import _poolCleaveShadows from "../pool/cleave-shadows.js";
 import _poolCliffThreader from "../pool/cliff-threader.js";
+import _poolCoalStoker from "../pool/coal-stoker.js";
 import _poolCoilingOracle from "../pool/coiling-oracle.js";
 import _poolCollarTheCulprit from "../pool/collar-the-culprit.js";
 import _poolCollisionColossus from "../pool/collision-colossus.js";
@@ -260,6 +262,7 @@ import _poolGoblinAssailant from "../pool/goblin-assailant.js";
 import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGoreHouseChainwalker from "../pool/gore-house-chainwalker.js";
+import _poolGorgonRecluse from "../pool/gorgon-recluse.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGravePeril from "../pool/grave-peril.js";
@@ -321,6 +324,7 @@ import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
 import _poolKalonianBehemoth from "../pool/kalonian-behemoth.js";
 import _poolKamahlHeartOfKrosa from "../pool/kamahl-heart-of-krosa.js";
+import _poolKamiOfTatteredShoji from "../pool/kami-of-tattered-shoji.js";
 import _poolKamiOfWhisperedHopes from "../pool/kami-of-whispered-hopes.js";
 import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js";
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
@@ -349,6 +353,7 @@ import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
 import _poolLichLordOfUnx from "../pool/lich-lord-of-unx.js";
 import _poolLictor from "../pool/lictor.js";
+import _poolLiegeOfThePit from "../pool/liege-of-the-pit.js";
 import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
 import _poolLightningDragon from "../pool/lightning-dragon.js";
@@ -378,6 +383,7 @@ import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
+import _poolMindlashSliver from "../pool/mindlash-sliver.js";
 import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
@@ -397,6 +403,7 @@ import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
+import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNightsoilKami from "../pool/nightsoil-kami.js";
@@ -419,6 +426,7 @@ import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
+import _poolOrochiEggwatcher from "../pool/orochi-eggwatcher.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
@@ -856,6 +864,7 @@ const shard: CardShard = {
     _poolCathodion,
     _poolCausticExhale,
     _poolCavernCrawler,
+    _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,
     _poolCerodonYearling,
@@ -874,6 +883,7 @@ const shard: CardShard = {
     _poolClearAPath,
     _poolCleaveShadows,
     _poolCliffThreader,
+    _poolCoalStoker,
     _poolCoilingOracle,
     _poolCollarTheCulprit,
     _poolCollisionColossus,
@@ -1013,6 +1023,7 @@ const shard: CardShard = {
     _poolGoldenScaleAeronaut,
     _poolGoliathPaladin,
     _poolGoreHouseChainwalker,
+    _poolGorgonRecluse,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
     _poolGravePeril,
@@ -1074,6 +1085,7 @@ const shard: CardShard = {
     _poolJwarIsleRefuge,
     _poolKalonianBehemoth,
     _poolKamahlHeartOfKrosa,
+    _poolKamiOfTatteredShoji,
     _poolKamiOfWhisperedHopes,
     _poolKarlovOfTheGhostCouncil,
     _poolKarnsTemporalSundering,
@@ -1102,6 +1114,7 @@ const shard: CardShard = {
     _poolLibraryOfAlexandria,
     _poolLichLordOfUnx,
     _poolLictor,
+    _poolLiegeOfThePit,
     _poolLiesaForgottenArchangel,
     _poolLightningBolt,
     _poolLightningDragon,
@@ -1131,6 +1144,7 @@ const shard: CardShard = {
     _poolMillennialGargoyle,
     _poolMindRot,
     _poolMindcrank,
+    _poolMindlashSliver,
     _poolMindwarper,
     _poolMinisterOfImpediments,
     _poolMireBoa,
@@ -1150,6 +1164,7 @@ const shard: CardShard = {
     _poolMysticDecree,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
+    _poolNezumiShadowWatcher,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
     _poolNightsoilKami,
@@ -1172,6 +1187,7 @@ const shard: CardShard = {
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,
     _poolOriginOfCaptainAmerica,
+    _poolOrochiEggwatcher,
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,
     _poolPairedTactician,

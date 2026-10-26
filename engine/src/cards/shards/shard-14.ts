@@ -487,6 +487,7 @@ import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
+import _poolPenumbraSpider from "../pool/penumbra-spider.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
 import _poolPhantomGeneral from "../pool/phantom-general.js";
 import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
@@ -550,6 +551,7 @@ import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
+import _poolRuneTailsEssence from "../pool/rune-tails-essence.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
@@ -600,6 +602,7 @@ import _poolSleeperAgent from "../pool/sleeper-agent.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
+import _poolSoratamiSavant from "../pool/soratami-savant.js";
 import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSpawningPool from "../pool/spawning-pool.js";
@@ -663,6 +666,7 @@ import _poolThunderThrashElder from "../pool/thunder-thrash-elder.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
+import _poolTobitaMasterOfWinds from "../pool/tobita-master-of-winds.js";
 import _poolTocatliHonorGuard from "../pool/tocatli-honor-guard.js";
 import _poolTonberry from "../pool/tonberry.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
@@ -1248,6 +1252,7 @@ const shard: CardShard = {
     _poolPatrolSignaler,
     _poolPearledUnicorn,
     _poolPegasusGuardian,
+    _poolPenumbraSpider,
     _poolPerilousShadow,
     _poolPhantomGeneral,
     _poolPhyrexianSwarmlord,
@@ -1311,6 +1316,7 @@ const shard: CardShard = {
     _poolRuinousGremlin,
     _poolRunawayCarriage,
     _poolRunawayTrashBot,
+    _poolRuneTailsEssence,
     _poolRunescaleStormbrood,
     _poolSaheelisArtistry,
     _poolSandmansQuicksand,
@@ -1361,6 +1367,7 @@ const shard: CardShard = {
     _poolSlinnVodaTheRisingDeep,
     _poolSmashingSuccess,
     _poolSnarlingWarg,
+    _poolSoratamiSavant,
     _poolSoulswornSpirit,
     _poolSparringConstruct,
     _poolSpawningPool,
@@ -1424,6 +1431,7 @@ const shard: CardShard = {
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
+    _poolTobitaMasterOfWinds,
     _poolTocatliHonorGuard,
     _poolTonberry,
     _poolTorporOrb,

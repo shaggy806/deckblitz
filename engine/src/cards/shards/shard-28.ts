@@ -233,6 +233,7 @@ import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFontOfProgress from "../pool/font-of-progress.js";
+import _poolFoolsDemise from "../pool/fools-demise.js";
 import _poolForebodingStatue from "../pool/foreboding-statue.js";
 import _poolFoulSpirit from "../pool/foul-spirit.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
@@ -244,6 +245,7 @@ import _poolGallifreyFalls from "../pool/gallifrey-falls.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
+import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
@@ -411,6 +413,7 @@ import _poolMurderInvestigation from "../pool/murder-investigation.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
+import _poolMyojinOfLifesWeb from "../pool/myojin-of-lifes-web.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
@@ -553,6 +556,7 @@ import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarecrow from "../pool/scarecrow.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
+import _poolScarmaker from "../pool/scarmaker.js";
 import _poolScentOfJasmine from "../pool/scent-of-jasmine.js";
 import _poolScourgeOfKherRidges from "../pool/scourge-of-kher-ridges.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
@@ -619,6 +623,7 @@ import _poolSplitUp from "../pool/split-up.js";
 import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
 import _poolSporeBurst from "../pool/spore-burst.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
+import _poolSporesowerThallid from "../pool/sporesower-thallid.js";
 import _poolSproutSwarm from "../pool/sprout-swarm.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
@@ -629,6 +634,7 @@ import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
+import _poolSuddenShock from "../pool/sudden-shock.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
@@ -1009,6 +1015,7 @@ const shard: CardShard = {
     _poolFlurryOfHorns,
     _poolFollowTheLumarets,
     _poolFontOfProgress,
+    _poolFoolsDemise,
     _poolForebodingStatue,
     _poolFoulSpirit,
     _poolFriendlyTeddy,
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _poolGalvanicArc,
     _poolGelatinousGenesis,
     _poolGenesisStorm,
+    _poolGenjuOfTheFens,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
     _poolGideonChampionOfJustice,
@@ -1187,6 +1195,7 @@ const shard: CardShard = {
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
+    _poolMyojinOfLifesWeb,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
     _poolNazarTheVelvetFang,
@@ -1329,6 +1338,7 @@ const shard: CardShard = {
     _poolScaledWurm,
     _poolScarecrow,
     _poolScarletSpiderKaine,
+    _poolScarmaker,
     _poolScentOfJasmine,
     _poolScourgeOfKherRidges,
     _poolScrapyardMongrel,
@@ -1395,6 +1405,7 @@ const shard: CardShard = {
     _poolSpoilsOfAdventure,
     _poolSporeBurst,
     _poolSporeFrog,
+    _poolSporesowerThallid,
     _poolSproutSwarm,
     _poolStarWhale,
     _poolSteelburrChampion,
@@ -1405,6 +1416,7 @@ const shard: CardShard = {
     _poolStormwildCapridor,
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
+    _poolSuddenShock,
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,

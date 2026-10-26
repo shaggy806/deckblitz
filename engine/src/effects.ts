@@ -2159,6 +2159,10 @@ export type EffectSpec =
        * to the battlefield tapped and transformed") — a transforming
        * double-faced card enters with its back face up. */
       readonly transformed?: boolean;
+      /** "…return it to the battlefield **flipped**" (Homura, Human
+       * Ascendant) — it enters with the flipped status (rule 710), so a flip
+       * card is its alternative half from the moment it enters. */
+      readonly flipped?: true;
       /** The card types it has, replacing its own, for as long as it stays
        * on the battlefield — the Enduring cycle's "return it to the
        * battlefield under its owner's control. It's an enchantment. (It's
@@ -4681,6 +4685,13 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
     }
   | {
+      /** Flip `target` (rule 710 — "flip this creature"): it gets the flipped
+       * status, one way, and a flip card shows its alternative half from then
+       * on. Only a permanent flips; an already flipped one stays as it is. */
+      readonly kind: "flip";
+      readonly target: EffectTargetRef;
+    }
+  | {
       /**
        * An existing permanent becomes a copy of `of` (rules 707.2, 613.2 —
        * layer 1), with `exceptions` — Sarkhan, Soul Aflame's "you may have
@@ -7073,6 +7084,8 @@ export interface EffectApi {
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. */
   transform(target: TargetRef): void;
+  /** Flip `target` — see the `"flip"` {@link EffectSpec}. */
+  flip(target: TargetRef): void;
   /** The permanents `targets` become copies of `of` — see the
    * `"become-copy"` {@link EffectSpec}, whose `ofCard`, `until` and
    * `exceptions` `opts` carries. */
@@ -7194,7 +7207,8 @@ export interface EffectApi {
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
     exileIfItWouldLeave?: boolean | "ability",
-    transformed?: boolean,
+    /** It enters transformed (`true`), or flipped (`"flipped"` — rule 710). */
+    transformed?: boolean | "flipped",
     /** The types it enters with — see the effect's `setTypes` and
      * `addSubtypes`. */
     types?: EnterTypes,
@@ -9530,7 +9544,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.enterTapped === true,
           spec.withCounters,
           spec.exileIfItWouldLeave,
-          spec.transformed === true,
+          spec.flipped === true ? "flipped" : spec.transformed === true,
           spec.setTypes !== undefined || spec.addSubtypes !== undefined
             ? {
                 ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
@@ -10893,6 +10907,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "transform": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.transform(target);
+      return;
+    }
+    case "flip": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.flip(target);
       return;
     }
     case "become-copy": {

@@ -290,6 +290,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
+import _poolGriffinGuide from "../pool/griffin-guide.js";
 import _poolGriffinRider from "../pool/griffin-rider.js";
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
@@ -352,6 +353,7 @@ import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
 import _poolJunkyardGenius from "../pool/junkyard-genius.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
+import _poolKamiOfTheHonoredDead from "../pool/kami-of-the-honored-dead.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
 import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
@@ -421,6 +423,7 @@ import _poolMoroii from "../pool/moroii.js";
 import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
+import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
@@ -1093,6 +1096,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
+    _poolGriffinGuide,
     _poolGriffinRider,
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,
@@ -1155,6 +1159,7 @@ const shard: CardShard = {
     _poolJunkyardGenius,
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
+    _poolKamiOfTheHonoredDead,
     _poolKarametrasAcolyte,
     _poolKastralTheWindcrested,
     _poolKataraBendingProdigy,
@@ -1224,6 +1229,7 @@ const shard: CardShard = {
     _poolMorticianBeetle,
     _poolMoxJasper,
     _poolMutantsPrey,
+    _poolMyojinOfSeeingWinds,
     _poolMysticMeditation,
     _poolMysticSnake,
     _poolNantukoTracer,

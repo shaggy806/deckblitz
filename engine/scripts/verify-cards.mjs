@@ -500,7 +500,12 @@ function compare(def, card) {
 
   // A split card's whole face is its halves' costs combined (rule 709.4b);
   // Scryfall writes them apart, "{U/R}{U/R} // {X}{U}{U}{R}{R}".
-  const theirCost = def.split ? (face.mana_cost ?? "").replace(/\s*\/\/\s*/g, "") : (face.mana_cost ?? "");
+  // A flip card's alternative half keeps its normal half's mana cost (rule
+  // 710.1c), which Scryfall prints on the normal half alone.
+  const flipCost = card.layout === "flip" && def.flip === true ? card.card_faces?.[0]?.mana_cost : undefined;
+  const theirCost = def.split
+    ? (face.mana_cost ?? "").replace(/\s*\/\/\s*/g, "")
+    : (face.mana_cost || flipCost || "");
   const ourCost = def.manaCost ?? "";
   if (theirCost.trim() !== ourCost.trim()) {
     issues.push(`manaCost: ours="${ourCost}" scryfall="${theirCost}"`);

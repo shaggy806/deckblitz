@@ -39,6 +39,7 @@ import _poolAsceticism from "../pool/asceticism.js";
 import _poolAshlingThePilgrim from "../pool/ashling-the-pilgrim.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuguryAdept from "../pool/augury-adept.js";
+import _poolAuraOfDominion from "../pool/aura-of-dominion.js";
 import _poolAuraThief from "../pool/aura-thief.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
@@ -105,6 +106,7 @@ import _poolBurningProphet from "../pool/burning-prophet.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolBywayBarterer from "../pool/byway-barterer.js";
+import _poolCalciformPools from "../pool/calciform-pools.js";
 import _poolCallASurpriseWitness from "../pool/call-a-surprise-witness.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
@@ -214,6 +216,7 @@ import _poolEssenceWarden from "../pool/essence-warden.js";
 import _poolEurekaMoment from "../pool/eureka-moment.js";
 import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
+import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
@@ -342,6 +345,7 @@ import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
 import _poolKeeperOfProgenitus from "../pool/keeper-of-progenitus.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
+import _poolKikuNightsFlower from "../pool/kiku-nights-flower.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
@@ -582,6 +586,7 @@ import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
+import _poolSoratamiRainshaper from "../pool/soratami-rainshaper.js";
 import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
@@ -797,6 +802,7 @@ const shard: CardShard = {
     _poolAshlingThePilgrim,
     _poolAssassinGauntlet,
     _poolAuguryAdept,
+    _poolAuraOfDominion,
     _poolAuraThief,
     _poolAuroraShifter,
     _poolAvalanche,
@@ -863,6 +869,7 @@ const shard: CardShard = {
     _poolBurningShieldAskari,
     _poolBurstOfEnergy,
     _poolBywayBarterer,
+    _poolCalciformPools,
     _poolCallASurpriseWitness,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
@@ -972,6 +979,7 @@ const shard: CardShard = {
     _poolEurekaMoment,
     _poolEvacuation,
     _poolEverflowingChalice,
+    _poolEvilEyeOfUrborg,
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,
@@ -1100,6 +1108,7 @@ const shard: CardShard = {
     _poolKathariRemnant,
     _poolKeeperOfProgenitus,
     _poolKessigForgemaster,
+    _poolKikuNightsFlower,
     _poolKimahriValiantGuardian,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
@@ -1340,6 +1349,7 @@ const shard: CardShard = {
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
+    _poolSoratamiRainshaper,
     _poolSorceressQueen,
     _poolSorinsGuide,
     _poolSoulBleed,

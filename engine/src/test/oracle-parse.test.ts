@@ -540,6 +540,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ["~ deals 1 damage to you.", { kind: "damage", amount: 1, who: "you" }],
     ["Regenerate ~.", { kind: "regenerate", target: "source" }],
     ["Transform ~.", { kind: "transform", target: "source" }],
+    ["Flip ~.", { kind: "flip", target: "source" }],
+    ["Flip it.", { kind: "flip", target: "source" }],
     ["The Ring tempts you.", { kind: "the-ring-tempts-you" }],
     ["Empower Jace 2.", { kind: "empower-jace", amount: 2 }],
     ["~ becomes prepared.", { kind: "become-prepared", target: "source" }],

@@ -182,6 +182,7 @@ import _poolDivest from "../pool/divest.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
+import _poolDrainingWhelk from "../pool/draining-whelk.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
 import _poolDromokasGift from "../pool/dromokas-gift.js";
@@ -310,6 +311,7 @@ import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
 import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
+import _poolHiredMuscle from "../pool/hired-muscle.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
 import _poolHollowhengeHuntmaster from "../pool/hollowhenge-huntmaster.js";
 import _poolHolyCow from "../pool/holy-cow.js";
@@ -355,6 +357,7 @@ import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js"
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
+import _poolKaisoMemoryOfLoyalty from "../pool/kaiso-memory-of-loyalty.js";
 import _poolKalemneDiscipleOfIroas from "../pool/kalemne-disciple-of-iroas.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
@@ -380,6 +383,8 @@ import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
+import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
+import _poolKuroPitlord from "../pool/kuro-pitlord.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
 import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
@@ -451,6 +456,7 @@ import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
+import _poolNihilith from "../pool/nihilith.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNoggleBridgebreaker from "../pool/noggle-bridgebreaker.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
@@ -470,6 +476,7 @@ import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
 import _poolOrderOfWhiteclay from "../pool/order-of-whiteclay.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
+import _poolOtherworldlyJourney from "../pool/otherworldly-journey.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
@@ -623,6 +630,7 @@ import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
+import _poolSpriteNoble from "../pool/sprite-noble.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
 import _poolStealTheShow from "../pool/steal-the-show.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
@@ -746,6 +754,7 @@ import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
+import _poolWipeAway from "../pool/wipe-away.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
 import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
 import _poolWojekHalberdiers from "../pool/wojek-halberdiers.js";
@@ -967,6 +976,7 @@ const shard: CardShard = {
     _poolDocOcksHenchmen,
     _poolDowsingDevice,
     _poolDragonflySuit,
+    _poolDrainingWhelk,
     _poolDrixFatemaker,
     _poolDrogskolCaptain,
     _poolDromokasGift,
@@ -1095,6 +1105,7 @@ const shard: CardShard = {
     _poolHighspireMantis,
     _poolHinterlandHarbor,
     _poolHinterlandSanctifier,
+    _poolHiredMuscle,
     _poolHitMonkey,
     _poolHollowhengeHuntmaster,
     _poolHolyCow,
@@ -1140,6 +1151,7 @@ const shard: CardShard = {
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,
+    _poolKaisoMemoryOfLoyalty,
     _poolKalemneDiscipleOfIroas,
     _poolKapow,
     _poolKarganDragonrider,
@@ -1165,6 +1177,8 @@ const shard: CardShard = {
     _poolKomodoRhino,
     _poolKorHookmaster,
     _poolKuldothaFlamefiend,
+    _poolKuonOgreAscendant,
+    _poolKuroPitlord,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
     _poolLagonnaBandStoryteller,
@@ -1236,6 +1250,7 @@ const shard: CardShard = {
     _poolNightmaresThirst,
     _poolNightmarishEnd,
     _poolNightveilPredator,
+    _poolNihilith,
     _poolNinjasBlades,
     _poolNoggleBridgebreaker,
     _poolNorthPolePatrol,
@@ -1255,6 +1270,7 @@ const shard: CardShard = {
     _poolOrderOfWhiteclay,
     _poolOrokuSakiShredderRising,
     _poolOtherworldAtlas,
+    _poolOtherworldlyJourney,
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
@@ -1408,6 +1424,7 @@ const shard: CardShard = {
     _poolSpiritualSanctuary,
     _poolSplashPortal,
     _poolSporewebWeaver,
+    _poolSpriteNoble,
     _poolSproutingRenewal,
     _poolStealTheShow,
     _poolSteamclaw,
@@ -1531,6 +1548,7 @@ const shard: CardShard = {
     _poolWildfireWickerfolk,
     _poolWindSpirit,
     _poolWingnutBatOnTheBelfry,
+    _poolWipeAway,
     _poolWitchOfTheMoors,
     _poolWitherbloomApprentice,
     _poolWojekHalberdiers,

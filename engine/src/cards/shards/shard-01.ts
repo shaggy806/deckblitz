@@ -399,6 +399,7 @@ import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
+import _poolMysticalTeachings from "../pool/mystical-teachings.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNarrowEscape from "../pool/narrow-escape.js";
@@ -420,7 +421,9 @@ import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
+import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
+import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
@@ -610,6 +613,7 @@ import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
+import _poolThallidShellDweller from "../pool/thallid-shell-dweller.js";
 import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
@@ -694,6 +698,7 @@ import _poolWardenOfTheBeyond from "../pool/warden-of-the-beyond.js";
 import _poolWarrantWarden from "../pool/warrant-warden.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWavesifter from "../pool/wavesifter.js";
+import _poolWaxmaneBaku from "../pool/waxmane-baku.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
 import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
@@ -1132,6 +1137,7 @@ const shard: CardShard = {
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
+    _poolMysticalTeachings,
     _poolNamazuTrader,
     _poolNarnamRenegade,
     _poolNarrowEscape,
@@ -1153,7 +1159,9 @@ const shard: CardShard = {
     _poolOpalGargoyle,
     _poolOphidian,
     _poolOrdruunVeteran,
+    _poolOrnateKanzashi,
     _poolOssuaryRats,
+    _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
@@ -1343,6 +1351,7 @@ const shard: CardShard = {
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
     _poolThaliaTheSurvivor,
+    _poolThallidShellDweller,
     _poolThassasRebuff,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
@@ -1427,6 +1436,7 @@ const shard: CardShard = {
     _poolWarrantWarden,
     _poolWastewoodVerge,
     _poolWavesifter,
+    _poolWaxmaneBaku,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
     _poolWeftbladeEnhancer,

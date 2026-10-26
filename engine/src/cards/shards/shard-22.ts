@@ -118,6 +118,7 @@ import _poolCollectiveResistance from "../pool/collective-resistance.js";
 import _poolColossadactyl from "../pool/colossadactyl.js";
 import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
+import _poolCommuneWithNature from "../pool/commune-with-nature.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
 import _poolContestedWarZone from "../pool/contested-war-zone.js";
@@ -263,6 +264,7 @@ import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
+import _poolHeedTheMists from "../pool/heed-the-mists.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHelicaGlider from "../pool/helica-glider.js";
@@ -621,6 +623,7 @@ import _poolSyphonEssence from "../pool/syphon-essence.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
 import _poolTakeInventory from "../pool/take-inventory.js";
+import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
@@ -650,6 +653,7 @@ import _poolThornling from "../pool/thornling.js";
 import _poolThrabenCharm from "../pool/thraben-charm.js";
 import _poolThrillOfPossibility from "../pool/thrill-of-possibility.js";
 import _poolThroneOfDeath from "../pool/throne-of-death.js";
+import _poolThroughTheBreach from "../pool/through-the-breach.js";
 import _poolThumbscrews from "../pool/thumbscrews.js";
 import _poolThunderMagic from "../pool/thunder-magic.js";
 import _poolThunderclapDrake from "../pool/thunderclap-drake.js";
@@ -710,6 +714,7 @@ import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
+import _poolWatcherSliver from "../pool/watcher-sliver.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
@@ -881,6 +886,7 @@ const shard: CardShard = {
     _poolColossadactyl,
     _poolColossalSkyturtle,
     _poolCombatCourier,
+    _poolCommuneWithNature,
     _poolConclaveEvangelist,
     _poolConsign,
     _poolContestedWarZone,
@@ -1026,6 +1032,7 @@ const shard: CardShard = {
     _poolHauntedScreen,
     _poolHavocFestival,
     _poolHeavyBallista,
+    _poolHeedTheMists,
     _poolHeirloomAuntie,
     _poolHeirloomBlade,
     _poolHelicaGlider,
@@ -1384,6 +1391,7 @@ const shard: CardShard = {
     _poolTaigamsScheming,
     _poolTaintedField,
     _poolTakeInventory,
+    _poolTakenumaBleeder,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTattermungeManiac,
@@ -1413,6 +1421,7 @@ const shard: CardShard = {
     _poolThrabenCharm,
     _poolThrillOfPossibility,
     _poolThroneOfDeath,
+    _poolThroughTheBreach,
     _poolThumbscrews,
     _poolThunderMagic,
     _poolThunderclapDrake,
@@ -1473,6 +1482,7 @@ const shard: CardShard = {
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWarehouseTabby,
+    _poolWatcherSliver,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
     _poolWavesOfAggression,

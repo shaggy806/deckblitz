@@ -456,8 +456,14 @@ export interface ActivatedAbility {
    * Derevi cast in response, say, even if she comes back — makes `"source"`
    * name nothing, so the effect does nothing. See
    * `GameObject.zoneChangeCount`.
+   *
+   * - `"suspended"` — Greater Gargadon's "Sacrifice an artifact, creature, or
+   *   land: Remove a time counter from this card. Activate only if this card
+   *   is suspended." Activatable by its owner only while the card is suspended
+   *   (in exile, with suspend and a time counter — rule 702.62b); the cost
+   *   doesn't move it, so `"source"` finds it as with `"command"`.
    */
-  readonly zone?: "hand" | "graveyard" | "command";
+  readonly zone?: "hand" | "graveyard" | "command" | "suspended";
   /**
    * A `zone: "graveyard"` ability whose cost *doesn't* exile the card
    * (Reassembling Skeleton: "{1}{B}: Return this card from your graveyard to
@@ -1917,6 +1923,21 @@ export interface TriggeredAbility {
    * object when the ability resolves (rule 400.7).
    */
   readonly fromGraveyard?: boolean;
+  /**
+   * This ability works while its card is **suspended** — in exile with suspend
+   * and a time counter (rule 702.62b) — and only then (rule 113.6b: it says
+   * the zone it functions in): Deep-Sea Kraken's "whenever an opponent casts
+   * a spell, if this card is suspended, remove a time counter from it",
+   * Riftmarked Knight's "when the last time counter is removed from this card
+   * while it's exiled". The trigger scan adds every suspended card with such
+   * an ability, contributing those abilities alone, never on the battlefield;
+   * its controller is the card's owner. A `counters-removed` trigger of `who:
+   * "self"` sees the card's own time counters coming off in exile (`last`:
+   * the last one). "If this card is suspended" and "while it's exiled" need
+   * nothing more: only a suspended card is scanned, and `"source"` finds it
+   * only while it's the same object (rule 400.7).
+   */
+  readonly whileSuspended?: boolean;
   /**
    * Goes on the stack before its controller's other triggers of the same
    * moment, so it resolves after them. The engine doesn't yet ask a player

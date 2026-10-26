@@ -125,6 +125,7 @@ import _poolCreeperhulk from "../pool/creeperhulk.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
+import _poolCunningBandit from "../pool/cunning-bandit.js";
 import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
@@ -157,6 +158,7 @@ import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDingusStaff from "../pool/dingus-staff.js";
+import _poolDinosaursOnASpaceship from "../pool/dinosaurs-on-a-spaceship.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
@@ -292,6 +294,7 @@ import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHolyLight from "../pool/holy-light.js";
+import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
@@ -378,6 +381,7 @@ import _poolMadProphet from "../pool/mad-prophet.js";
 import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
+import _poolMagusOfTheDisk from "../pool/magus-of-the-disk.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
 import _poolManaReflection from "../pool/mana-reflection.js";
@@ -423,6 +427,7 @@ import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMycologist from "../pool/mycologist.js";
+import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
@@ -480,6 +485,7 @@ import _poolProfit from "../pool/profit.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
+import _poolPusKami from "../pool/pus-kami.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
@@ -614,6 +620,7 @@ import _poolSubtlety from "../pool/subtlety.js";
 import _poolSubversion from "../pool/subversion.js";
 import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
+import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
 import _poolSunscour from "../pool/sunscour.js";
@@ -907,6 +914,7 @@ const shard: CardShard = {
     _poolCreosoteHeath,
     _poolCrossroadsConsecrator,
     _poolCrushOfWurms,
+    _poolCunningBandit,
     _poolCurate,
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
@@ -939,6 +947,7 @@ const shard: CardShard = {
     _poolDevilsPlay,
     _poolDictateOfHeliod,
     _poolDingusStaff,
+    _poolDinosaursOnASpaceship,
     _poolDireFleetCaptain,
     _poolDiscordantDirge,
     _poolDisfigure,
@@ -1074,6 +1083,7 @@ const shard: CardShard = {
     _poolHiddenNecropolis,
     _poolHighlandLake,
     _poolHolyLight,
+    _poolHomuraHumanAscendant,
     _poolHookhandMariner,
     _poolHydraBroodmaster,
     _poolHydroform,
@@ -1160,6 +1170,7 @@ const shard: CardShard = {
     _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
+    _poolMagusOfTheDisk,
     _poolMakindiGriffin,
     _poolManOWar,
     _poolManaReflection,
@@ -1205,6 +1216,7 @@ const shard: CardShard = {
     _poolMummyParamount,
     _poolMurderousRider,
     _poolMycologist,
+    _poolMyojinOfInfiniteRage,
     _poolMysticSpeculation,
     _poolNaturalState,
     _poolNecroticHex,
@@ -1262,6 +1274,7 @@ const shard: CardShard = {
     _poolProtectiveParents,
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,
+    _poolPusKami,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
     _poolQuestForAncientSecrets,
@@ -1396,6 +1409,7 @@ const shard: CardShard = {
     _poolSubversion,
     _poolSuddenStorm,
     _poolSuddenStrength,
+    _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,
     _poolSunscour,

@@ -138,6 +138,7 @@ import _poolDemonmailHauberk from "../pool/demonmail-hauberk.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDestined from "../pool/destined.js";
+import _poolDevouringGreed from "../pool/devouring-greed.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDidactEcho from "../pool/didact-echo.js";
 import _poolDiregrafHorde from "../pool/diregraf-horde.js";
@@ -252,6 +253,7 @@ import _poolGloomwidow from "../pool/gloomwidow.js";
 import _poolGnottvoldRecluse from "../pool/gnottvold-recluse.js";
 import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
 import _poolGoblinBrigand from "../pool/goblin-brigand.js";
+import _poolGoblinCohort from "../pool/goblin-cohort.js";
 import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
 import _poolGodheadOfAwe from "../pool/godhead-of-awe.js";
@@ -294,6 +296,7 @@ import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHomicidalBrute from "../pool/homicidal-brute.js";
+import _poolHomurasEssence from "../pool/homuras-essence.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
@@ -310,6 +313,7 @@ import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
 import _poolInfernalPet from "../pool/infernal-pet.js";
 import _poolIngeniousSmith from "../pool/ingenious-smith.js";
+import _poolInitiateOfBlood from "../pool/initiate-of-blood.js";
 import _poolInsidiousMist from "../pool/insidious-mist.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
@@ -566,6 +570,7 @@ import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolSquallLine from "../pool/squall-line.js";
 import _poolSquareUp from "../pool/square-up.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
@@ -662,6 +667,7 @@ import _poolVileEntomber from "../pool/vile-entomber.js";
 import _poolVinebredBrawler from "../pool/vinebred-brawler.js";
 import _poolVinelasherKudzu from "../pool/vinelasher-kudzu.js";
 import _poolVirulentWound from "../pool/virulent-wound.js";
+import _poolVitalSurge from "../pool/vital-surge.js";
 import _poolVoiceOfTheBlessed from "../pool/voice-of-the-blessed.js";
 import _poolVolcanoImp from "../pool/volcano-imp.js";
 import _poolVolrathsGardens from "../pool/volraths-gardens.js";
@@ -855,6 +861,7 @@ const shard: CardShard = {
     _poolDenyTheWitch,
     _poolDespark,
     _poolDestined,
+    _poolDevouringGreed,
     _poolDiaryOfDreams,
     _poolDidactEcho,
     _poolDiregrafHorde,
@@ -969,6 +976,7 @@ const shard: CardShard = {
     _poolGnottvoldRecluse,
     _poolGoForTheThroat,
     _poolGoblinBrigand,
+    _poolGoblinCohort,
     _poolGoblinFireleaper,
     _poolGoblinSledder,
     _poolGodheadOfAwe,
@@ -1011,6 +1019,7 @@ const shard: CardShard = {
     _poolHillGiant,
     _poolHillGigas,
     _poolHomicidalBrute,
+    _poolHomurasEssence,
     _poolHonor,
     _poolHorrifyingRevelation,
     _poolHostOfTheHereafter,
@@ -1027,6 +1036,7 @@ const shard: CardShard = {
     _poolIndoctrinationAttendant,
     _poolInfernalPet,
     _poolIngeniousSmith,
+    _poolInitiateOfBlood,
     _poolInsidiousMist,
     _poolInsightEngine,
     _poolInvasionOfMercadia,
@@ -1283,6 +1293,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolSquallLine,
     _poolSquareUp,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,
@@ -1379,6 +1390,7 @@ const shard: CardShard = {
     _poolVinebredBrawler,
     _poolVinelasherKudzu,
     _poolVirulentWound,
+    _poolVitalSurge,
     _poolVoiceOfTheBlessed,
     _poolVolcanoImp,
     _poolVolrathsGardens,

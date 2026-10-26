@@ -91,6 +91,7 @@ import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
 import _poolCallerOfTheUntamed from "../pool/caller-of-the-untamed.js";
+import _poolCallowJushi from "../pool/callow-jushi.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
@@ -558,6 +559,7 @@ import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
+import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
@@ -583,6 +585,7 @@ import _poolSilumgarSorcerer from "../pool/silumgar-sorcerer.js";
 import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
+import _poolSkullmaneBaku from "../pool/skullmane-baku.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
@@ -606,6 +609,7 @@ import _poolSphinxBoneWand from "../pool/sphinx-bone-wand.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
+import _poolSpinneretSliver from "../pool/spinneret-sliver.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
@@ -748,6 +752,7 @@ import _poolZodiacTiger from "../pool/zodiac-tiger.js";
 import _poolZulAshurLichLord from "../pool/zul-ashur-lich-lord.js";
 import _tokensBearToken from "../tokens/bear-token.js";
 import _tokensBeastToken22 from "../tokens/beast-token-2-2.js";
+import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flying-haste.js";
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
@@ -844,6 +849,7 @@ const shard: CardShard = {
     _poolBuryInBooks,
     _poolCacklingCounterpart,
     _poolCallerOfTheUntamed,
+    _poolCallowJushi,
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,
@@ -1311,6 +1317,7 @@ const shard: CardShard = {
     _poolSavageGorger,
     _poolSavageLands,
     _poolSavageSwipe,
+    _poolSavageThallid,
     _poolScarredVinebreeder,
     _poolSeedsOfRenewal,
     _poolSelflessSafewright,
@@ -1336,6 +1343,7 @@ const shard: CardShard = {
     _poolSilverflameRitual,
     _poolSireOfInsanity,
     _poolSkitteringCicada,
+    _poolSkullmaneBaku,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,
@@ -1359,6 +1367,7 @@ const shard: CardShard = {
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,
+    _poolSpinneretSliver,
     _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSpirePatrol,
@@ -1503,6 +1512,7 @@ const shard: CardShard = {
   tokens: [
     _tokensBearToken,
     _tokensBeastToken22,
+    _tokensDinosaurToken22FlyingHaste,
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,

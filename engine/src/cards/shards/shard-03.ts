@@ -7,6 +7,7 @@ import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
 import _poolAcidWebSpider from "../pool/acid-web-spider.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAerieWorshippers from "../pool/aerie-worshippers.js";
+import _poolAkkiLavarunner from "../pool/akki-lavarunner.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
@@ -239,6 +240,7 @@ import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGraftedSkullcap from "../pool/grafted-skullcap.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGreenhiltTrainee from "../pool/greenhilt-trainee.js";
+import _poolGreenseeker from "../pool/greenseeker.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
@@ -363,6 +365,7 @@ import _poolMistIntruder from "../pool/mist-intruder.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
+import _poolMoonlace from "../pool/moonlace.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
@@ -457,6 +460,7 @@ import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
 import _poolRuneOfProtectionLands from "../pool/rune-of-protection-lands.js";
 import _poolRunnersBane from "../pool/runners-bane.js";
 import _poolRushwoodElemental from "../pool/rushwood-elemental.js";
+import _poolSachiDaughterOfSeshiro from "../pool/sachi-daughter-of-seshiro.js";
 import _poolSacredPrey from "../pool/sacred-prey.js";
 import _poolSadisticHypnotist from "../pool/sadistic-hypnotist.js";
 import _poolSagesReverie from "../pool/sages-reverie.js";
@@ -613,6 +617,7 @@ import _poolTurnToFrog from "../pool/turn-to-frog.js";
 import _poolTwinferno from "../pool/twinferno.js";
 import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
 import _poolUnderworldCoinsmith from "../pool/underworld-coinsmith.js";
+import _poolUntaidakeTheCloudKeeper from "../pool/untaidake-the-cloud-keeper.js";
 import _poolUpdraft from "../pool/updraft.js";
 import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
@@ -669,6 +674,7 @@ import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
 import _tokensHellionTokenHaste from "../tokens/hellion-token-haste.js";
+import _tokensKnightToken22BlackFlanking from "../tokens/knight-token-2-2-black-flanking.js";
 import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOrbToken from "../tokens/orb-token.js";
@@ -686,6 +692,7 @@ const shard: CardShard = {
     _poolAcidWebSpider,
     _poolAdricMathematicalGenius,
     _poolAerieWorshippers,
+    _poolAkkiLavarunner,
     _poolAkkiWarPaint,
     _poolAlabornMusketeer,
     _poolAlibansTower,
@@ -918,6 +925,7 @@ const shard: CardShard = {
     _poolGraftedSkullcap,
     _poolGravkill,
     _poolGreenhiltTrainee,
+    _poolGreenseeker,
     _poolGridMonitor,
     _poolGrimServant,
     _poolGrislySurvivor,
@@ -1042,6 +1050,7 @@ const shard: CardShard = {
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
     _poolMonasteryLoremaster,
+    _poolMoonlace,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,
@@ -1136,6 +1145,7 @@ const shard: CardShard = {
     _poolRuneOfProtectionLands,
     _poolRunnersBane,
     _poolRushwoodElemental,
+    _poolSachiDaughterOfSeshiro,
     _poolSacredPrey,
     _poolSadisticHypnotist,
     _poolSagesReverie,
@@ -1292,6 +1302,7 @@ const shard: CardShard = {
     _poolTwinferno,
     _poolUndercityDireRat,
     _poolUnderworldCoinsmith,
+    _poolUntaidakeTheCloudKeeper,
     _poolUpdraft,
     _poolUrbanDaggertooth,
     _poolUtopiaTree,
@@ -1350,6 +1361,7 @@ const shard: CardShard = {
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
     _tokensHellionTokenHaste,
+    _tokensKnightToken22BlackFlanking,
     _tokensMutagenToken,
     _tokensMutantToken,
     _tokensOrbToken,

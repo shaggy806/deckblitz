@@ -11511,6 +11511,102 @@
   "effect:set-land-types-all": {
    "family": "effect:add-land-types-all",
    "example": "Nightcreep: until end of turn, all lands become Swamps — setting their land types, for the lands there as it resolves."
+  },
+  "replacement:prevent-damage-dealt-by-enchanted": {
+   "family": "replacement:damage-modification",
+   "example": "Temporal Isolation: prevent all damage that would be dealt by enchanted creature."
+  },
+  "replacement:graveyard-to-library-top-optional": {
+   "family": "replacement:new-event-replacements",
+   "example": "Pulmonic Sliver: All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\""
+  },
+  "cost:exile-from-any-graveyard": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Thelon of Havenwood: \"Exile a Fungus card from a graveyard\" — any player's."
+  },
+  "effect:search-put-under-target-player-control": {
+   "family": "mechanic:search-library-control",
+   "example": "Yavimaya Dryad: the forest found enters tapped under target player's control."
+  },
+  "target:permanent-or-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Jhoira's Timebug: target permanent you control or suspended card you own."
+  },
+  "decision:choose-from-hand-and-library-top": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Psychotic Episode: one card chosen from a revealed hand plus the library's top card, put on the bottom."
+  },
+  "effect:add-time-counters-suspended-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Curse of the Cabal: \"put two time counters on this card\" while it's suspended in exile."
+  },
+  "effect:target-player-gains-no-life-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Flames of the Blood Hand: that player can't gain life this turn"
+  },
+  "replacement:exile-if-damaged-by-attached-dies": {
+   "family": "replacement:exile-instead",
+   "example": "Kumano's Blessing: a creature dealt damage by the enchanted creature this turn is exiled instead if it would die"
+  },
+  "condition:trigger-card-characteristics-in-new-zone": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Oathkeeper, Takeno's Daisho: 'if it's a Samurai card' read in its new zone (the ruling)"
+  },
+  "effect:damage-all-except-trigger-recipient": {
+   "family": "effect:target-other-than-source",
+   "example": "Kusari-Gama: damage to each other creature defending player controls"
+  },
+  "filter:shares-color-with-attached": {
+   "family": "condition:filter-attachments",
+   "example": "Konda's Banner: creatures that share a color with the equipped creature"
+  },
+  "effect:redistribute-life-totals": {
+   "family": "effect:choices-by-other-players",
+   "example": "Reverse the Sands: redistribute any number of players' life totals"
+  },
+  "effect:counter-to-library-top-or-bottom": {
+   "family": "effect:this-way-results",
+   "example": "Hinder: the countered spell goes on top or bottom of its owner's library, controller's choice"
+  },
+  "trigger:one-or-more-creatures-block": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Tide of War: whenever one or more creatures block (once per combat)"
+  },
+  "filter:blocked-attacker": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Tide of War: each blocked creature"
+  },
+  "amount:bushido-value-of-each": {
+   "family": "effect:amount-new-variants",
+   "example": "Takeno, Samurai General: +1/+1 for each 1 of each Samurai's bushido"
+  },
+  "effect:discard-spliced-names": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Minamo's Meddling: discard cards with the same names as the spliced cards"
+  },
+  "static:block-while-tapped": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Masako the Humorless: tapped creatures you control can block as though they were untapped"
+  },
+  "effect:mana-produced-per-same-name-land": {
+   "family": "effect:add-mana-extensions",
+   "example": "Sasaya's Essence: additional mana per other land with the tapped land's name"
+  },
+  "trigger:creature-damaged-by-source-dies": {
+   "family": "stat:object-damage-history",
+   "example": "Bushi Tenderfoot: when a creature dealt damage by this creature this turn dies (Sengir Vampire's shape)"
+  },
+  "filter:auras-attached-count": {
+   "family": "condition:filter-attachments",
+   "example": "Kitsune Mystic: enchanted by two or more Auras"
+  },
+  "effect:attach-aura-to-chosen-creature": {
+   "family": "effect:attach-extensions",
+   "example": "Autumn-Tail, Kitsune Sage: attach target Aura to another creature chosen on resolution"
+  },
+  "condition:target-player-zone-empty": {
+   "family": "condition:player-state-thresholds",
+   "example": "Nezumi Shortfang / Nezumi Graverobber: if the targeted player has no cards in hand / that graveyard is empty"
   }
  }
 }

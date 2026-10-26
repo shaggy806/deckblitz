@@ -125,6 +125,7 @@ import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
+import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
@@ -363,6 +364,7 @@ import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
+import _poolMangaraOfCorondor from "../pool/mangara-of-corondor.js";
 import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduCharm from "../pool/mardu-charm.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
@@ -380,6 +382,7 @@ import _poolMerrowLevitator from "../pool/merrow-levitator.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
+import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
@@ -711,6 +714,7 @@ import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
+import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolWuAdmiral from "../pool/wu-admiral.js";
@@ -867,6 +871,7 @@ const shard: CardShard = {
     _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
+    _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
     _poolCrosissCharm,
     _poolCruelAlliance,
@@ -1105,6 +1110,7 @@ const shard: CardShard = {
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,
+    _poolMangaraOfCorondor,
     _poolMarchesasDecree,
     _poolMarduCharm,
     _poolMarduHordechief,
@@ -1122,6 +1128,7 @@ const shard: CardShard = {
     _poolMesmericGlare,
     _poolMidnightHaunting,
     _poolMilitiaBugler,
+    _poolMinamoSightbender,
     _poolMindsDilation,
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
@@ -1453,6 +1460,7 @@ const shard: CardShard = {
     _poolWillowduskEssenceSeer,
     _poolWitheringTorment,
     _poolWoodlandCemetery,
+    _poolWordOfSeizing,
     _poolWorldBreaker,
     _poolWrapInVigor,
     _poolWuAdmiral,

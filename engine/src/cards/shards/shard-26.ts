@@ -397,6 +397,7 @@ import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
+import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMilitiasPride from "../pool/militias-pride.js";
@@ -453,6 +454,7 @@ import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
+import _poolPeerThroughDepths from "../pool/peer-through-depths.js";
 import _poolPeppersmoke from "../pool/peppersmoke.js";
 import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
@@ -538,6 +540,7 @@ import _poolScatterToTheWinds from "../pool/scatter-to-the-winds.js";
 import _poolScatteredThoughts from "../pool/scattered-thoughts.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
+import _poolScourgeOfNumai from "../pool/scourge-of-numai.js";
 import _poolScrapCompactor from "../pool/scrap-compactor.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSealOfDoom from "../pool/seal-of-doom.js";
@@ -546,6 +549,7 @@ import _poolSear from "../pool/sear.js";
 import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
+import _poolSenseiGoldenTail from "../pool/sensei-golden-tail.js";
 import _poolSequenceEngine from "../pool/sequence-engine.js";
 import _poolSequesteredStash from "../pool/sequestered-stash.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
@@ -561,11 +565,13 @@ import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
 import _poolShellShield from "../pool/shell-shield.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
+import _poolShinkaGatekeeper from "../pool/shinka-gatekeeper.js";
 import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
+import _poolSidewinderSliver from "../pool/sidewinder-sliver.js";
 import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
@@ -584,6 +590,7 @@ import _poolSokkasCharge from "../pool/sokkas-charge.js";
 import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSoltariEmissary from "../pool/soltari-emissary.js";
 import _poolSoltariMonk from "../pool/soltari-monk.js";
+import _poolSoratamiCloudskater from "../pool/soratami-cloudskater.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
@@ -1148,6 +1155,7 @@ const shard: CardShard = {
     _poolMeglonoth,
     _poolMetalworkColossus,
     _poolMidnightScavengers,
+    _poolMightOfOldKrosa,
     _poolMightOfTheMasses,
     _poolMilitantInquisitor,
     _poolMilitiasPride,
@@ -1204,6 +1212,7 @@ const shard: CardShard = {
     _poolParasiticImplant,
     _poolPeaceOfMind,
     _poolPearlMedallion,
+    _poolPeerThroughDepths,
     _poolPeppersmoke,
     _poolPestProblem,
     _poolPharikasDisciple,
@@ -1289,6 +1298,7 @@ const shard: CardShard = {
     _poolScatteredThoughts,
     _poolScepterOfDominance,
     _poolScornfulEgotist,
+    _poolScourgeOfNumai,
     _poolScrapCompactor,
     _poolSeahunter,
     _poolSealOfDoom,
@@ -1297,6 +1307,7 @@ const shard: CardShard = {
     _poolSeedSuture,
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
+    _poolSenseiGoldenTail,
     _poolSequenceEngine,
     _poolSequesteredStash,
     _poolSeraphSanctuary,
@@ -1312,11 +1323,13 @@ const shard: CardShard = {
     _poolShellShield,
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
+    _poolShinkaGatekeeper,
     _poolShipwreckSentry,
     _poolShireiShizosCaretaker,
     _poolShrapnelSlinger,
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
+    _poolSidewinderSliver,
     _poolSilumgarButcher,
     _poolSilverErne,
     _poolSilverbeakGriffin,
@@ -1335,6 +1348,7 @@ const shard: CardShard = {
     _poolSolidarityOfHeroes,
     _poolSoltariEmissary,
     _poolSoltariMonk,
+    _poolSoratamiCloudskater,
     _poolSorinsThirst,
     _poolSpaceMarineDevastator,
     _poolSpawnGangCommander,

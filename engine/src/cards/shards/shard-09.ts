@@ -768,6 +768,7 @@ import _tokensMowu from "../tokens/mowu.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
 import _tokensReflectionToken from "../tokens/reflection-token.js";
 import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
+import _tokensSpiderToken24BlackReach from "../tokens/spider-token-2-4-black-reach.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensVojaFriendToElves from "../tokens/voja-friend-to-elves.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
@@ -1544,6 +1545,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,
     _tokensReflectionToken,
     _tokensRobotTokenAutomatedAssemblyLine,
+    _tokensSpiderToken24BlackReach,
     _tokensTreasureToken,
     _tokensVojaFriendToElves,
     _tokensZombieKnightToken,

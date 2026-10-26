@@ -224,6 +224,7 @@ import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
 import _poolEmperorsVanguard from "../pool/emperors-vanguard.js";
 import _poolEmptiness from "../pool/emptiness.js";
+import _poolEmptyShrineKannushi from "../pool/empty-shrine-kannushi.js";
 import _poolEmpyrealVoyager from "../pool/empyreal-voyager.js";
 import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
@@ -233,6 +234,7 @@ import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
+import _poolFaithfulSquire from "../pool/faithful-squire.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFamiliarGround from "../pool/familiar-ground.js";
 import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
@@ -255,6 +257,7 @@ import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolFrostWalker from "../pool/frost-walker.js";
+import _poolFrostling from "../pool/frostling.js";
 import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
@@ -371,6 +374,7 @@ import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
 import _poolJungleWurm from "../pool/jungle-wurm.js";
+import _poolJushiApprentice from "../pool/jushi-apprentice.js";
 import _poolKamberThePlunderer from "../pool/kamber-the-plunderer.js";
 import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
 import _poolKatsumasaTheAnimator from "../pool/katsumasa-the-animator.js";
@@ -442,6 +446,7 @@ import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMudbrawlerCohort from "../pool/mudbrawler-cohort.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
+import _poolMyojinOfNightsReach from "../pool/myojin-of-nights-reach.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
 import _poolNecrosavant from "../pool/necrosavant.js";
@@ -451,6 +456,7 @@ import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
+import _poolNightOfSoulsBetrayal from "../pool/night-of-souls-betrayal.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
@@ -546,6 +552,7 @@ import _poolScarwoodHag from "../pool/scarwood-hag.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScourgeWolf from "../pool/scourge-wolf.js";
 import _poolScrapyardSalvo from "../pool/scrapyard-salvo.js";
+import _poolScreechingSliver from "../pool/screeching-sliver.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
@@ -970,6 +977,7 @@ const shard: CardShard = {
     _poolEmeraldOryx,
     _poolEmperorsVanguard,
     _poolEmptiness,
+    _poolEmptyShrineKannushi,
     _poolEmpyrealVoyager,
     _poolEmpyrialStorm,
     _poolEndbringer,
@@ -979,6 +987,7 @@ const shard: CardShard = {
     _poolEternalWitness,
     _poolExpeditionSkulker,
     _poolEyeblightAssassin,
+    _poolFaithfulSquire,
     _poolFakeYourOwnDeath,
     _poolFamiliarGround,
     _poolFatalFrenzy,
@@ -1001,6 +1010,7 @@ const shard: CardShard = {
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
     _poolFrostWalker,
+    _poolFrostling,
     _poolFruitOfTheFirstTree,
     _poolFungalBloom,
     _poolGadgetTechnician,
@@ -1117,6 +1127,7 @@ const shard: CardShard = {
     _poolJeskaiRunemark,
     _poolJuganDefendsTheTemple,
     _poolJungleWurm,
+    _poolJushiApprentice,
     _poolKamberThePlunderer,
     _poolKaslaTheBrokenHalo,
     _poolKatsumasaTheAnimator,
@@ -1188,6 +1199,7 @@ const shard: CardShard = {
     _poolMostWanted,
     _poolMudbrawlerCohort,
     _poolMyconidSporeTender,
+    _poolMyojinOfNightsReach,
     _poolMysticSkull,
     _poolMythosOfIlluna,
     _poolNecrosavant,
@@ -1197,6 +1209,7 @@ const shard: CardShard = {
     _poolNetworkDisruptor,
     _poolNiblisOfFrost,
     _poolNicoMinoruRunaway,
+    _poolNightOfSoulsBetrayal,
     _poolNightbladeBrigade,
     _poolNirkanaCutthroat,
     _poolNobleHierarch,
@@ -1292,6 +1305,7 @@ const shard: CardShard = {
     _poolScoriaElemental,
     _poolScourgeWolf,
     _poolScrapyardSalvo,
+    _poolScreechingSliver,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
     _poolSearingTouch,

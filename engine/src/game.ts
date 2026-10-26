@@ -706,6 +706,9 @@ interface EnterOptions {
   /** "…onto the battlefield transformed" — a transforming double-faced card
    * enters with its back face up (rule 712.14). */
   readonly transformed?: boolean;
+  /** "…onto the battlefield flipped" — it enters with the flipped status
+   * (rule 710; Homura, Human Ascendant). */
+  readonly flipped?: boolean;
   /** The card types the effect putting it there says it has — the Enduring
    * cycle's "return it to the battlefield … It's an enchantment. (It's not a
    * creature.)": a lasting layer-4 effect on the permanent it becomes, in
@@ -990,7 +993,7 @@ type PaidConvoke = ConvokePayment & { readonly pays: "generic" | Color };
  * front.
  */
 function castableFaces(def: CardDefinition): readonly (number | undefined)[] {
-  if (def.transform || def.faces === null) return [undefined];
+  if (def.transform || def.flip || def.faces === null) return [undefined];
   return def.faces.flatMap((_n, i) => (def.split && i === 0 ? [] : [i]));
 }
 
@@ -1975,7 +1978,7 @@ export class Game {
       // DFC (which is only ever cast as its front face — 10b), has just one.
       // A split card's whole is cast only as a fused split spell, from the
       // hand (rule 702.102a).
-      const cardFaces = ownDef.transform ? null : ownDef.faces;
+      const cardFaces = ownDef.transform || ownDef.flip ? null : ownDef.faces;
       const fusable = ownDef.fuse && this.state.zones.perPlayer[player].hand.includes(card);
       const faceList: readonly (readonly [number | undefined, string])[] =
         cardFaces !== null
@@ -2705,6 +2708,25 @@ export class Game {
         if (ability.zone === "command") pushActivateAbility(card, def.name, ability, index);
       });
     }
+    // Exile is shared too: the suspended cards `player` owns, for an ability
+    // that works only while its card is suspended (Greater Gargadon).
+    for (const card of this.state.zones.shared.exile) {
+      if (onlySource !== undefined && card !== onlySource) continue;
+      const object = this.state.objects[card];
+      if (object === undefined || object.owner !== player || object.kind !== "card" || !this.isSuspended(card)) continue;
+      const def = this.registry.get(object.cardName);
+      this.effectiveActivated(card).forEach((ability, index) => {
+        if (ability.zone === "suspended") pushActivateAbility(card, def.name, ability, index);
+      });
+    }
+  }
+
+  /** Whether `id` is suspended: in exile, with a time counter, and suspend
+   * (rule 702.62b — the engine's `suspended` mark, set as it was suspended
+   * and cleared once its free cast is passed up). */
+  private isSuspended(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    return object !== undefined && object.zone === "exile" && object.suspended === true && (object.counters.time ?? 0) > 0;
   }
 
   /**
@@ -5030,7 +5052,7 @@ export class Game {
     const spec = this.registry.get(rulesTextName(clone)).copyOnEnter;
     clone.enterChoice = {
       ...clone.enterChoice,
-      copyOf: copied === undefined ? null : printedCardName(copied),
+      copyOf: copied === undefined ? null : this.unflippedName(printedCardName(copied)),
       // Its copy exceptions are part of what's copied (rule 707.9b) — a token
       // copy's "isn't legendary" among them — and then this copy effect's
       // own, which win where they differ.
@@ -11196,6 +11218,9 @@ export class Game {
     const def = this.faceDef(cardId, face);
     const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
     if (prohibited !== null) return prohibited;
+    // A flip card is cast as its normal half only (rule 710.2): its
+    // alternative half exists only on a flipped permanent.
+    if (face !== 0 && def.flip) return `${def.name} is a flip card's alternative half, never cast`;
     // Aftermath (rule 702.127a): "this half of this split card can't be cast
     // from any zone other than a graveyard" — whatever else would allow it.
     if (def.aftermath && this.state.objects[cardId]?.zone !== "graveyard") {
@@ -14068,6 +14093,14 @@ export class Game {
     return has;
   }
 
+  /** Whether `id` is a card with a triggered ability that works while it's
+   * suspended (`TriggeredAbility.whileSuspended`). */
+  private hasSuspendedTrigger(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.kind !== "card") return false;
+    return this.registry.get(printedCardName(object)).triggered.some((ability) => ability.whileSuspended === true);
+  }
+
   /**
    * `objectId`'s printed `triggered` abilities plus any currently granted to
    * it — by a `grantsTriggered` static (Tyrant's Familiar's Lieutenant
@@ -14571,8 +14604,10 @@ export class Game {
       // Channel (702.51a) from hand, a graveyard ability or a command-zone
       // one (Derevi) — activatable only from that zone, never as a
       // permanent's.
-      if (source.zone !== ability.zone) {
-        return `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
+      if (ability.zone === "suspended" ? !this.isSuspended(sourceId) : source.zone !== ability.zone) {
+        return ability.zone === "suspended"
+          ? "that card is not suspended"
+          : `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
       }
       if (source.owner !== player) return `${player} does not own that card`;
     } else {
@@ -15298,7 +15333,7 @@ export class Game {
         ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
       };
     }
-    if (ability.zone === "command" || ability.staysInZone === true) {
+    if (ability.zone === "command" || ability.zone === "suspended" || ability.staysInZone === true) {
       // The source is still sitting in that zone — remember which object it
       // is, so a round trip before this resolves reads as a new one (rule
       // 400.7). See `resolveAbility`.
@@ -19055,6 +19090,16 @@ export class Game {
         graveyardOnly.add(id);
       }
     }
+    // Likewise a suspended card's abilities that work only while it's
+    // suspended (`TriggeredAbility.whileSuspended` — Deep-Sea Kraken).
+    const suspendedOnly = new Set<ObjectId>();
+    // Marked suspended rather than "has a time counter": the last one coming
+    // off is seen by its own "when the last time counter is removed".
+    for (const id of this.state.zones.shared.exile) {
+      if (this.state.objects[id]?.suspended !== true || !this.hasSuspendedTrigger(id)) continue;
+      candidates.add(id);
+      suspendedOnly.add(id);
+    }
     const leaving = isLeaveEvent(event);
     for (const id of candidates) {
       const live = this.state.objects[id];
@@ -19111,6 +19156,10 @@ export class Game {
         if (lost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
+        if ((ability.whileSuspended === true) !== suspendedOnly.has(id)) return;
+        // Any other trigger needs it still suspended, a time counter on it
+        // (rule 702.62b): Deep-Sea Kraken's "if this card is suspended".
+        if (suspendedOnly.has(id) && ability.trigger.on !== "counters-removed" && !this.isSuspended(id)) return;
         if (onlyThisCast && ability.trigger.on !== "this-cast") return;
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
@@ -19993,6 +20042,16 @@ export class Game {
           (spec.byYou !== true || event.by === self.controller)
         );
       case "counters-removed":
+        // A suspended card's own time counters coming off in exile, seen by
+        // its `whileSuspended` abilities alone (Riftmarked Knight).
+        if (event.type === "time-counter-removed") {
+          return (
+            spec.who === "self" &&
+            event.object === self.id &&
+            (spec.counter === undefined || spec.counter === "time") &&
+            (spec.last !== true || event.remaining === 0)
+          );
+        }
         return (
           event.type === "counter-removed" &&
           event.amount > 0 &&
@@ -22876,7 +22935,7 @@ export class Game {
           enterTapped,
           withCounters,
           exileIfLeaves ?? false,
-          transformed === true,
+          transformed ?? false,
           under,
           types,
           attacking,
@@ -24331,6 +24390,10 @@ export class Game {
         const keywords = computeCharacteristics(this.state, this.registry, t.object).keywords;
         if (keywords.has("daybound") || keywords.has("nightbound")) return;
         this.transformPermanent(t.object);
+      },
+      flip: (target) => {
+        const t = this.splitTargetRef(target);
+        if (t.kind === "object") this.flipPermanent(t.object);
       },
       setDayNight: (value) => this.setDayNight(value),
       becomeMonarch: (who, via) => {
@@ -26503,7 +26566,7 @@ export class Game {
   ): void {
     const of = this.state.objects[ofId];
     if (of === undefined && departed === undefined) return;
-    const copyName = departed !== undefined ? departed.name : printedCardName(of!);
+    const copyName = this.unflippedName(departed !== undefined ? departed.name : printedCardName(of!));
     this.registry.get(copyName); // validate it's a known definition
     // The copy defaults to the copied permanent's controller (Miirym), but a
     // card that copies something an *opponent* controls means "under your
@@ -26711,12 +26774,18 @@ export class Game {
     ];
     if (!asCard && departed !== undefined) {
       this.registry.get(departed.name); // validate it's a known definition
-      return { copyOf: departed.name, modifiers: withoutDuration(departed.copiable ?? [], departed.notLegendary === true) };
+      return {
+        copyOf: this.unflippedName(departed.name),
+        modifiers: withoutDuration(departed.copiable ?? [], departed.notLegendary === true),
+      };
     }
     const of = this.state.objects[ofId];
     if (of === undefined || of.kind !== "card") return undefined;
     if (!asCard && (of.zone === "battlefield" || of.zone === "stack")) {
-      return { copyOf: printedCardName(of), modifiers: withoutDuration(of.modifiers, of.notLegendary === true) };
+      return {
+        copyOf: this.unflippedName(printedCardName(of)),
+        modifiers: withoutDuration(of.modifiers, of.notLegendary === true),
+      };
     }
     if (of.isToken === true) return undefined;
     return { copyOf: of.cardName, modifiers: [] };
@@ -26752,6 +26821,9 @@ export class Game {
     ];
     if (values.notLegendary === true) object.notLegendary = true;
     else delete object.notLegendary;
+    // A flipped permanent that becomes a copy of a flip card shows that
+    // card's alternative half (rule 707.3's example).
+    this.refreshFlippedName(object);
   }
 
   /**
@@ -28599,7 +28671,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object.faces === undefined || object.faces.length < 2) return false;
     const front = this.frontFaceDef(id);
-    return !front.adventure && !front.omen && !front.split;
+    return !front.adventure && !front.omen && !front.split && !front.flip;
   }
 
   /** Is `id` a transforming double-faced permanent (rule 712.4)? — only these
@@ -28616,6 +28688,8 @@ export class Game {
     if (front.adventure || front.omen) return false;
     // A Room's halves are doors, not faces (rule 709.5): it never turns over.
     if (front.split) return false;
+    // Nor does a flip card, which isn't double-faced (rule 710.1).
+    if (front.flip) return false;
     const other = this.registry.get(object.faces[(object.face ?? 0) === 0 ? 1 : 0]);
     return other.types.some((type) => PERMANENT_TYPES.has(type));
   }
@@ -28743,6 +28817,44 @@ export class Game {
       front: object.face === 0,
     });
     object.transformedAtSeq = this.state.eventSeq;
+  }
+
+  /** Flip the permanent `id` (rule 710): give it the flipped status, which
+   * nothing takes away while it stays on the battlefield (710.4). A flip
+   * card then has its alternative half's characteristics (710.1b); any other
+   * permanent just keeps the status (110.5c). */
+  private flipPermanent(id: ObjectId): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || object.flipped === true) return;
+    object.flipped = true;
+    this.refreshFlippedName(object);
+    invalidateComputedCache();
+    this.emit({ type: "permanent-flipped", object: id });
+  }
+
+  /** Recompute `object.flippedName` from its flipped status and its current
+   * copiable values — a merged permanent's topmost card (rule 730.2h), else
+   * what it's a copy of, else its own card: their alternative half while it
+   * is flipped and that card is a flip card (rules 707.3, 710.1b). */
+  private refreshFlippedName(object: GameObject): void {
+    delete object.flippedName;
+    if (object.flipped !== true) return;
+    const top = object.merged?.components[0];
+    const base = top !== undefined && !("self" in top) ? top.cardName : (object.copyOf ?? object.cardName);
+    if (!this.registry.has(base)) return;
+    const def = this.registry.get(base);
+    if (def.flip && def.faces !== null && def.faces[0] === base && def.faces[1] !== undefined) {
+      object.flippedName = def.faces[1];
+    }
+  }
+
+  /** The name a copy records for `name` (rule 707.2): a flip card's normal
+   * half for either half — the copy shows the half its own flipped status
+   * picks (707.3, `refreshFlippedName`). */
+  private unflippedName(name: string): string {
+    if (!this.registry.has(name)) return name;
+    const def = this.registry.get(name);
+    return def.flip && def.faces !== null && def.faces[0] !== undefined ? def.faces[0] : name;
   }
 
   /**
@@ -30812,12 +30924,14 @@ export class Game {
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
     exileIfItWouldLeave: boolean | "ability" = false,
-    transformed = false,
+    turned: boolean | "flipped" = false,
     underPlayer?: PlayerId,
     types?: EnterTypes,
     attacking?: ResolvedEnterAttacking,
     attachTo?: ObjectId | null,
   ): boolean {
+    const transformed = turned === true;
+    const flipped = turned === "flipped";
     const under = underPlayer ?? (underYourControl ? controller : undefined);
     if (target.kind !== "object") return false;
     const object = this.state.objects[target.object];
@@ -30838,6 +30952,7 @@ export class Game {
       tapped: enterTapped,
       ...(under !== undefined ? { under } : {}),
       ...(transformed ? { transformed: true } : {}),
+      ...(flipped ? { flipped: true } : {}),
       ...(types?.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
       ...(types?.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
       ...(types?.addColors !== undefined ? { addColors: types.addColors } : {}),
@@ -33729,6 +33844,9 @@ export class Game {
         break;
       case "you":
         if (target.kind !== "player" || target.player !== you) return false;
+        break;
+      case "player":
+        if (target.kind !== "player") return false;
         break;
       case "self":
         if (target.kind !== "object" || target.object !== by.id) return false;
@@ -36772,6 +36890,9 @@ export class Game {
       components: onTop ? [component, ...existing] : [...existing, component],
       timesMutated: (target.merged?.timesMutated ?? 0) + 1,
     };
+    // A flipped permanent shows its new topmost card's flipped half, if any
+    // (rule 730.2h).
+    this.refreshFlippedName(target);
     const stack = this.state.zones.shared.stack;
     const index = stack.indexOf(spellId);
     if (index >= 0) stack.splice(index, 1);
@@ -37442,6 +37563,9 @@ export class Game {
     // So was having transformed (rule 701.28f) — and entering transformed
     // isn't transforming.
     object.transformedAtSeq = undefined;
+    // A flipped permanent that leaves keeps no memory of it (rule 710.4).
+    object.flipped = undefined;
+    object.flippedName = undefined;
     // The adventure "may cast the creature from exile" permission (rule 715.3)
     // ends when the card changes zones. `resolveTopOfStack` re-sets it *after*
     // the move to exile that creates the state.
@@ -37465,6 +37589,10 @@ export class Game {
       // the entry — its replacements, other permanents' replacements judging
       // it, the triggers that see it arrive — sees the face-down 2/2.
       if (enter.faceDown !== undefined) object.faceDown = { kind: enter.faceDown };
+      if (enter.flipped === true) {
+        object.flipped = true;
+        this.refreshFlippedName(object);
+      }
       // A Room enters with the door that was cast unlocked, or with both
       // locked if neither was (rule 709.5d) — before anything sees it arrive,
       // so a locked door's text isn't the permanent's even as it enters.

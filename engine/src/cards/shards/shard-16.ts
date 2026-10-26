@@ -248,6 +248,7 @@ import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
 import _poolFrondlandFelidar from "../pool/frondland-felidar.js";
 import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
 import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
+import _poolFurySliver from "../pool/fury-sliver.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
@@ -426,6 +427,7 @@ import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
+import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
@@ -561,6 +563,7 @@ import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolSentinelsMark from "../pool/sentinels-mark.js";
 import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
+import _poolShadowSliver from "../pool/shadow-sliver.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
@@ -1053,6 +1056,7 @@ const shard: CardShard = {
     _poolFrondlandFelidar,
     _poolFrontlineWarRager,
     _poolFrostbitePyromental,
+    _poolFurySliver,
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
@@ -1231,6 +1235,7 @@ const shard: CardShard = {
     _poolMusesEncouragement,
     _poolMyrSire,
     _poolMyrTurbine,
+    _poolNagaoBoundByHonor,
     _poolNajeelaTheBladeBlossom,
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
@@ -1366,6 +1371,7 @@ const shard: CardShard = {
     _poolSentinelOfTheNamelessCity,
     _poolSentinelsMark,
     _poolSeshirosLivingLegacy,
+    _poolShadowSliver,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShatteredSanctum,

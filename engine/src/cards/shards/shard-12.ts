@@ -118,6 +118,7 @@ import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
+import _poolCloudchaserKestrel from "../pool/cloudchaser-kestrel.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
@@ -153,6 +154,7 @@ import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDeepwaterHypnotist from "../pool/deepwater-hypnotist.js";
 import _poolDefiantGreatmaw from "../pool/defiant-greatmaw.js";
 import _poolDemonWall from "../pool/demon-wall.js";
+import _poolDemonicCollusion from "../pool/demonic-collusion.js";
 import _poolDemonicPact from "../pool/demonic-pact.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDemonsDue from "../pool/demons-due.js";
@@ -505,6 +507,7 @@ import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
 import _poolRecklessHandling from "../pool/reckless-handling.js";
 import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
+import _poolReduceToDreams from "../pool/reduce-to-dreams.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolRescue from "../pool/rescue.js";
@@ -615,6 +618,7 @@ import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
+import _poolSuddenDeath from "../pool/sudden-death.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
 import _poolSunClasp from "../pool/sun-clasp.js";
@@ -670,6 +674,7 @@ import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
 import _poolUnburialRites from "../pool/unburial-rites.js";
 import _poolUncleIroh from "../pool/uncle-iroh.js";
+import _poolUndyingRage from "../pool/undying-rage.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValeronWardens from "../pool/valeron-wardens.js";
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolClericOfTheForwardOrder,
     _poolClickslither,
     _poolCloudPirates,
+    _poolCloudchaserKestrel,
     _poolCloudcrownOak,
     _poolCloudseeder,
     _poolCogworkGrinder,
@@ -898,6 +904,7 @@ const shard: CardShard = {
     _poolDeepwaterHypnotist,
     _poolDefiantGreatmaw,
     _poolDemonWall,
+    _poolDemonicCollusion,
     _poolDemonicPact,
     _poolDemonicTutor,
     _poolDemonsDue,
@@ -1250,6 +1257,7 @@ const shard: CardShard = {
     _poolRecklessHandling,
     _poolRecklessWurm,
     _poolReclaim,
+    _poolReduceToDreams,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
     _poolRescue,
@@ -1360,6 +1368,7 @@ const shard: CardShard = {
     _poolSturdyHatchling,
     _poolSturmgeist,
     _poolSubterraneanSpirit,
+    _poolSuddenDeath,
     _poolSummonAnima,
     _poolSummonedDromedary,
     _poolSunClasp,
@@ -1415,6 +1424,7 @@ const shard: CardShard = {
     _poolUlvenwaldOddity,
     _poolUnburialRites,
     _poolUncleIroh,
+    _poolUndyingRage,
     _poolUneasyPartings,
     _poolUntamedHunger,
     _poolValeronWardens,

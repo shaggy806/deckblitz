@@ -75,6 +75,7 @@ import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
 import _poolBogImp from "../pool/bog-imp.js";
+import _poolBogardanHellkite from "../pool/bogardan-hellkite.js";
 import _poolBoggartBrute from "../pool/boggart-brute.js";
 import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
@@ -293,6 +294,7 @@ import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolHuntingPack from "../pool/hunting-pack.js";
 import _poolHydrolash from "../pool/hydrolash.js";
 import _poolIcefeatherAven from "../pool/icefeather-aven.js";
+import _poolIchigaWhoTopplesOaks from "../pool/ichiga-who-topples-oaks.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIkiralOutrider from "../pool/ikiral-outrider.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
@@ -364,6 +366,7 @@ import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
+import _poolLivingEnd from "../pool/living-end.js";
 import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
@@ -633,6 +636,7 @@ import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
 import _poolSylvanScavenging from "../pool/sylvan-scavenging.js";
 import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
+import _poolTakenosCavalry from "../pool/takenos-cavalry.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
 import _poolTeamAvatar from "../pool/team-avatar.js";
@@ -833,6 +837,7 @@ const shard: CardShard = {
     _poolBloodPact,
     _poolBloodfireExpert,
     _poolBogImp,
+    _poolBogardanHellkite,
     _poolBoggartBrute,
     _poolBoilingRockPrison,
     _poolBoneDevourer,
@@ -1051,6 +1056,7 @@ const shard: CardShard = {
     _poolHuntingPack,
     _poolHydrolash,
     _poolIcefeatherAven,
+    _poolIchigaWhoTopplesOaks,
     _poolIchorclawMyr,
     _poolIkiralOutrider,
     _poolIlluminatedWings,
@@ -1122,6 +1128,7 @@ const shard: CardShard = {
     _poolLightningHelix,
     _poolLightningReflexes,
     _poolLilianasIndignation,
+    _poolLivingEnd,
     _poolLlanowarSentinel,
     _poolLoathsomeCurator,
     _poolLordSkittersButcher,
@@ -1391,6 +1398,7 @@ const shard: CardShard = {
     _poolSylvanScavenging,
     _poolSynchronizedCharge,
     _poolSyrGwynHeroOfAshvale,
+    _poolTakenosCavalry,
     _poolTamiyosJournal,
     _poolTarPitcher,
     _poolTeamAvatar,

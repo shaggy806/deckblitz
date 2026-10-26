@@ -424,6 +424,7 @@ import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
+import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -602,6 +603,7 @@ import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
+import _poolTendrilsOfCorruption from "../pool/tendrils-of-corruption.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
@@ -1172,6 +1174,7 @@ const shard: CardShard = {
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
     _poolOnwardVictory,
+    _poolOpalineSliver,
     _poolOranRiefInvoker,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
@@ -1350,6 +1353,7 @@ const shard: CardShard = {
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTemporalMastery,
+    _poolTendrilsOfCorruption,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,

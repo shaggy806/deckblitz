@@ -94,6 +94,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   prompt, the scaffolder and `reveal-from-hand.test.ts`. 85 authored — Masticore, Donate, Flicker,
   Yavimaya Enchantress, Carnival of Souls, the Scents of Ivy, Jasmine and Brine, Lady Sun, Sima Yi
   among them — and 28 blocked (`B208.json`).
+- **Time Spiral's first half, and abilities that work while a card is suspended** (batch 205, the
+  middle walk, 2026-10-26; `trigger:functions-while-suspended`, rule 702.62b): `whileSuspended`
+  triggers and `zone: "suspended"` activations — Greater Gargadon, Deep-Sea Kraken, Nihilith,
+  Riftmarked Knight, Dinosaurs on a Spaceship — and the exile viewer's Activate. 70 of the set's
+  95 most-played left authored (Draining Whelk, Living End, Bogardan Hellkite, the Slivers), 25
+  blocked (`B205.json`).
+- **Flip cards, the rest of Betrayers of Kamigawa — Betrayers is whole — and Champions of
+  Kamigawa's 52 most-played** (batch 207, the third middle walk, 2026-10-26,
+  `mechanic:flip-cards`): **built** flip cards (rule 710 — `flip: true` halves, the `flip` effect,
+  the flipped status a copy reads by its own status, 707.3; `put-onto-battlefield`'s `flipped`;
+  `flip-cards.test.ts`), taught to the scaffolder, and authored 14 of the 20 flip cards across
+  Saviors, Betrayers and Champions (the ki cycle, Jushi Apprentice, Budoka Gardener, Orochi
+  Eggwatcher, Initiate of Blood, Akki Lavarunner, Student of Elements, Homura, Kuon, Rune-Tail).
+  80 authored with Iname, Death Aspect, the Myojin of Seeing Winds, Night's Reach, Life's Web and
+  Infinite Rage, Night of Souls' Betrayal and Uyo, by five `card-author` agents and the lead; 39
+  blocked (`B207.json`), splice's non-mana costs and temporary protection leading.
 - **The rest of Scars of Mirrodin — Scars of Mirrodin is whole, and the newest-first walk's range
   with it** (batch 204, the newest-first walk, 2026-10-26): no feature built; an engine fix: a
   static's metalcraft condition counts its own artifact (Chrome Steed, Etched Champion and

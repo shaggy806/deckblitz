@@ -1,0 +1,704 @@
+{
+ "batch": "B205",
+ "status": "complete",
+ "ranks": "Time Spiral (TSP, 2006-10-06): its 95 most-played left by EDHREC rank (the middle walk), plus four older suspend cards the feature unblocked; built abilities that work while a card is suspended (rule 702.62b — whileSuspended, zone: \"suspended\")",
+ "authored": [
+  {
+   "name": "Aspect of Mongoose",
+   "files": [
+    "engine/src/cards/pool/aspect-of-mongoose.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barbed Shocker",
+   "files": [
+    "engine/src/cards/pool/barbed-shocker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Basal Sliver",
+   "files": [
+    "engine/src/cards/pool/basal-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bogardan Hellkite",
+   "files": [
+    "engine/src/cards/pool/bogardan-hellkite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bonesplitter Sliver",
+   "files": [
+    "engine/src/cards/pool/bonesplitter-sliver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Calciform Pools",
+   "files": [
+    "engine/src/cards/pool/calciform-pools.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Careful Consideration",
+   "files": [
+    "engine/src/cards/pool/careful-consideration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Crusader",
+   "files": [
+    "engine/src/cards/pool/celestial-crusader.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Clockwork Hydra",
+   "files": [
+    "engine/src/cards/pool/clockwork-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudchaser Kestrel",
+   "files": [
+    "engine/src/cards/pool/cloudchaser-kestrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coal Stoker",
+   "files": [
+    "engine/src/cards/pool/coal-stoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathspore Thallid",
+   "files": [
+    "engine/src/cards/pool/deathspore-thallid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deep-Sea Kraken",
+   "files": [
+    "engine/src/cards/pool/deep-sea-kraken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Collusion",
+   "files": [
+    "engine/src/cards/pool/demonic-collusion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dinosaurs on a Spaceship",
+   "files": [
+    "engine/src/cards/pool/dinosaurs-on-a-spaceship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Draining Whelk",
+   "files": [
+    "engine/src/cards/pool/draining-whelk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadship Reef",
+   "files": [
+    "engine/src/cards/pool/dreadship-reef.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dream Stalker",
+   "files": [
+    "engine/src/cards/pool/dream-stalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Evil Eye of Urborg",
+   "files": [
+    "engine/src/cards/pool/evil-eye-of-urborg.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fallen Ideal",
+   "files": [
+    "engine/src/cards/pool/fallen-ideal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firewake Sliver",
+   "files": [
+    "engine/src/cards/pool/firewake-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fool's Demise",
+   "files": [
+    "engine/src/cards/pool/fools-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fungal Reaches",
+   "files": [
+    "engine/src/cards/pool/fungal-reaches.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fungus Sliver",
+   "files": [
+    "engine/src/cards/pool/fungus-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fury Sliver",
+   "files": [
+    "engine/src/cards/pool/fury-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghitu Firebreathing",
+   "files": [
+    "engine/src/cards/pool/ghitu-firebreathing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gorgon Recluse",
+   "files": [
+    "engine/src/cards/pool/gorgon-recluse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Greater Gargadon",
+   "files": [
+    "engine/src/cards/pool/greater-gargadon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greenseeker",
+   "files": [
+    "engine/src/cards/pool/greenseeker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Griffin Guide",
+   "files": [
+    "engine/src/cards/pool/griffin-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ground Rift",
+   "files": [
+    "engine/src/cards/pool/ground-rift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hivestone",
+   "files": [
+    "engine/src/cards/pool/hivestone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liege of the Pit",
+   "files": [
+    "engine/src/cards/pool/liege-of-the-pit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living End",
+   "files": [
+    "engine/src/cards/pool/living-end.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Magus of the Disk",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-disk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mangara of Corondor",
+   "files": [
+    "engine/src/cards/pool/mangara-of-corondor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Might of Old Krosa",
+   "files": [
+    "engine/src/cards/pool/might-of-old-krosa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindlash Sliver",
+   "files": [
+    "engine/src/cards/pool/mindlash-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonlace",
+   "files": [
+    "engine/src/cards/pool/moonlace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mwonvuli Acid-Moss",
+   "files": [
+    "engine/src/cards/pool/mwonvuli-acid-moss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystical Teachings",
+   "files": [
+    "engine/src/cards/pool/mystical-teachings.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nihilith",
+   "files": [
+    "engine/src/cards/pool/nihilith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Opaline Sliver",
+   "files": [
+    "engine/src/cards/pool/opaline-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outrider en-Kor",
+   "files": [
+    "engine/src/cards/pool/outrider-en-kor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Paradise Plume",
+   "files": [
+    "engine/src/cards/pool/paradise-plume.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penumbra Spider",
+   "files": [
+    "engine/src/cards/pool/penumbra-spider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phthisis",
+   "files": [
+    "engine/src/cards/pool/phthisis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primal Forcemage",
+   "files": [
+    "engine/src/cards/pool/primal-forcemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riftmarked Knight",
+   "files": [
+    "engine/src/cards/pool/riftmarked-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of Epityr",
+   "files": [
+    "engine/src/cards/pool/sage-of-epityr.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saltcrusted Steppe",
+   "files": [
+    "engine/src/cards/pool/saltcrusted-steppe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Savage Thallid",
+   "files": [
+    "engine/src/cards/pool/savage-thallid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screeching Sliver",
+   "files": [
+    "engine/src/cards/pool/screeching-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow Sliver",
+   "files": [
+    "engine/src/cards/pool/shadow-sliver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sidewinder Sliver",
+   "files": [
+    "engine/src/cards/pool/sidewinder-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Burst",
+   "files": [
+    "engine/src/cards/pool/spell-burst.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spinneret Sliver",
+   "files": [
+    "engine/src/cards/pool/spinneret-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sporesower Thallid",
+   "files": [
+    "engine/src/cards/pool/sporesower-thallid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sprite Noble",
+   "files": [
+    "engine/src/cards/pool/sprite-noble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squall Line",
+   "files": [
+    "engine/src/cards/pool/squall-line.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stonewood Invocation",
+   "files": [
+    "engine/src/cards/pool/stonewood-invocation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength in Numbers",
+   "files": [
+    "engine/src/cards/pool/strength-in-numbers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sudden Death",
+   "files": [
+    "engine/src/cards/pool/sudden-death.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sudden Shock",
+   "files": [
+    "engine/src/cards/pool/sudden-shock.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sulfurous Blast",
+   "files": [
+    "engine/src/cards/pool/sulfurous-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Telekinetic Sliver",
+   "files": [
+    "engine/src/cards/pool/telekinetic-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tendrils of Corruption",
+   "files": [
+    "engine/src/cards/pool/tendrils-of-corruption.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thallid Germinator",
+   "files": [
+    "engine/src/cards/pool/thallid-germinator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thallid Shell-Dweller",
+   "files": [
+    "engine/src/cards/pool/thallid-shell-dweller.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undying Rage",
+   "files": [
+    "engine/src/cards/pool/undying-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Watcher Sliver",
+   "files": [
+    "engine/src/cards/pool/watcher-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wipe Away",
+   "files": [
+    "engine/src/cards/pool/wipe-away.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Word of Seizing",
+   "files": [
+    "engine/src/cards/pool/word-of-seizing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wurmcalling",
+   "files": [
+    "engine/src/cards/pool/wurmcalling.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Pull from Eternity",
+   "needs": [
+    "target:card-in-exile",
+    "effect:put-exiled-card-into-graveyard"
+   ],
+   "why": "No target slot picks a face-up card in exile."
+  },
+  {
+   "name": "Curse of the Cabal",
+   "needs": [
+    "effect:add-time-counters-suspended-card"
+   ],
+   "why": "Its upkeep trigger works while suspended now (whileSuspended), but \"put two time counters on this card\" can't add counters to a suspended card in exile."
+  },
+  {
+   "name": "Temporal Isolation",
+   "needs": [
+    "replacement:prevent-damage-dealt-by-enchanted"
+   ],
+   "why": "Preventing all damage the enchanted creature would deal: no damage replacement narrows its source to the Aura's creature."
+  },
+  {
+   "name": "Pulmonic Sliver",
+   "needs": [
+    "replacement:graveyard-to-library-top-optional"
+   ],
+   "why": "All Slivers' optional \"put it on top of its owner's library instead\" replacement isn't expressible as a granted static."
+  },
+  {
+   "name": "Serra Avenger",
+   "needs": [
+    "condition:own-turn-count"
+   ],
+   "why": "\"Can't cast during your first, second, or third turns\": nothing counts a player's turns."
+  },
+  {
+   "name": "Fortune Thief",
+   "needs": [
+    "static:damage-life-floor"
+   ],
+   "why": "\"Damage that would reduce your life below 1 reduces it to 1 instead\" exists only as a one-shot effect."
+  },
+  {
+   "name": "Thelon of Havenwood",
+   "needs": [
+    "cost:exile-from-any-graveyard"
+   ],
+   "why": "\"Exile a Fungus card from a graveyard\": the exile-from-graveyard cost reaches only your own."
+  },
+  {
+   "name": "Truth or Tale",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Piles: one player separates, an opponent chooses."
+  },
+  {
+   "name": "Jaya Ballard, Task Mage",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "\"A creature dealt damage this way can't be regenerated this turn\" on a damage sweep."
+  },
+  {
+   "name": "Detainment Spell",
+   "needs": [
+    "filter:enchanted-by-source"
+   ],
+   "why": "Abilities of the creature this Aura enchants can't be activated: no filter names it."
+  },
+  {
+   "name": "Conflagrate",
+   "needs": [
+    "cost:flashback-discard-cost"
+   ],
+   "why": "Flashback—{R}{R}, Discard X cards."
+  },
+  {
+   "name": "Yavimaya Dryad",
+   "needs": [
+    "effect:search-put-under-target-player-control"
+   ],
+   "why": "The land found enters under a target player's control."
+  },
+  {
+   "name": "Magus of the Mirror",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "Exchange life totals with target opponent."
+  },
+  {
+   "name": "Jhoira's Timebug",
+   "needs": [
+    "target:permanent-or-suspended-card",
+    "effect:remove-time-counters-chosen-suspended"
+   ],
+   "why": "Targets a permanent you control or a suspended card you own; add or remove a time counter, your choice."
+  },
+  {
+   "name": "Brine Elemental",
+   "needs": [
+    "effect:skip-next-untap-step"
+   ],
+   "why": "Each opponent skips their next untap step."
+  },
+  {
+   "name": "Sedge Sliver",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "All Slivers have \"gets +1/+1 as long as you control a Swamp\", read for each Sliver's controller."
+  },
+  {
+   "name": "Ib Halfheart, Goblin Tactician",
+   "needs": [
+    "filter:blocking-trigger-object"
+   ],
+   "why": "The sacrificed Goblin deals 4 damage to each creature blocking it."
+  },
+  {
+   "name": "Hypergenesis",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "Repeat until no one puts a card onto the battlefield."
+  },
+  {
+   "name": "Magus of the Jar",
+   "needs": [
+    "effect:exile-hands-face-down-return-later"
+   ],
+   "why": "Memory Jar's exile hands face down, draw seven, return at end step."
+  },
+  {
+   "name": "Pentarch Paladin",
+   "needs": [
+    "filter:chosen-color"
+   ],
+   "why": "Destroy target permanent of the chosen color."
+  },
+  {
+   "name": "Pentarch Ward",
+   "needs": [
+    "static:protection-doesnt-remove-source"
+   ],
+   "why": "Protection from the chosen color; \"this effect doesn't remove this Aura\"."
+  },
+  {
+   "name": "Ignite Memories",
+   "needs": [
+    "effect:reveal-random-card-from-hand"
+   ],
+   "why": "A card revealed at random from a hand."
+  },
+  {
+   "name": "Nightshade Assassin",
+   "needs": [
+    "cost:reveal-any-number-from-hand"
+   ],
+   "why": "\"You may reveal X black cards in your hand\" as it enters."
+  },
+  {
+   "name": "Psychotic Episode",
+   "needs": [
+    "decision:choose-from-hand-and-library-top"
+   ],
+   "why": "One choice from the revealed hand and the library's top card."
+  },
+  {
+   "name": "Restore Balance",
+   "needs": [
+    "effect:keep-count-equal-to-fewest"
+   ],
+   "why": "Keep as many lands / creatures / cards as the player with the fewest."
+  }
+ ]
+}
