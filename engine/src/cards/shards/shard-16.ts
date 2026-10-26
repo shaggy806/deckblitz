@@ -79,6 +79,7 @@ import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreaking from "../pool/breaking.js";
+import _poolBriarShield from "../pool/briar-shield.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -602,6 +603,7 @@ import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
+import _poolTolarianDrake from "../pool/tolarian-drake.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
@@ -800,6 +802,7 @@ const shard: CardShard = {
     _poolBoundingFelidar,
     _poolBrassclawOrcs,
     _poolBreaking,
+    _poolBriarShield,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
@@ -1323,6 +1326,7 @@ const shard: CardShard = {
     _poolTitheDrinker,
     _poolToadstoolAdmirer,
     _poolTogetherForever,
+    _poolTolarianDrake,
     _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,

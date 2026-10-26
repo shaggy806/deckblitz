@@ -10648,6 +10648,22 @@
   "static:grant-scavenge-to-graveyard": {
    "family": "keyword:scavenge",
    "example": "Varolz, the Scar-Striped: each creature card in your graveyard has scavenge — grantsToGraveyard can grant flashback, escape, mayhem and dredge, not scavenge."
+  },
+  "effect:regenerate-gain-control": {
+   "example": "Debt of Loyalty: \"regenerate target creature. You gain control of that creature if it regenerates this way\" — a follow-up tied to this one shield.",
+   "family": "effect:may-sacrifice-then"
+  },
+  "cost:sacrifice-enchanted-creature": {
+   "example": "Betrothed of Fire: \"Sacrifice enchanted creature: …\" — SacrificeCost has no \"the creature this Aura enchants\".",
+   "family": "cost:sacrifice-multiple"
+  },
+  "effect:sacrifice-greatest-unless-pay-its-mana-cost": {
+   "example": "Tariff: each player sacrifices the creature with the greatest mana value they control unless they pay that creature's mana cost.",
+   "family": "effect:unless-target-controller"
+  },
+  "static:cda-counters-on-self": {
+   "example": "Mwonvuli Ooze: power and toughness each 1 plus twice the age counters on it — setBasePtFromCount counts no counters on itself.",
+   "family": "bug:cda-all-zones"
   }
  }
 }

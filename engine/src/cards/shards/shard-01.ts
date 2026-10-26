@@ -382,6 +382,7 @@ import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOphidian from "../pool/ophidian.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -558,6 +559,7 @@ import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
+import _poolThranForge from "../pool/thran-forge.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
 import _poolThreat from "../pool/threat.js";
 import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.js";
@@ -1040,6 +1042,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOphidian,
     _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
@@ -1216,6 +1219,7 @@ const shard: CardShard = {
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,
     _poolThoughtcast,
+    _poolThranForge,
     _poolThranVigil,
     _poolThreat,
     _poolThreatsAroundEveryCorner,

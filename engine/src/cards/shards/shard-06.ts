@@ -316,6 +316,7 @@ import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
+import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
@@ -545,6 +546,7 @@ import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftKick from "../pool/swift-kick.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
+import _poolSylvanHierophant from "../pool/sylvan-hierophant.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakeHeart from "../pool/take-heart.js";
@@ -983,6 +985,7 @@ const shard: CardShard = {
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLathlissDragonQueen,
+    _poolLavaHounds,
     _poolLayDownArms,
     _poolLegionsLanding,
     _poolLightningShrieker,
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolSwiftKick,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
+    _poolSylvanHierophant,
     _poolSyndicateMessenger,
     _poolTackleArtist,
     _poolTakeHeart,

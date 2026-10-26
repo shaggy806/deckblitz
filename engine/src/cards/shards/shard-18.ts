@@ -392,6 +392,7 @@ import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
 import _poolPentagramOfTheAges from "../pool/pentagram-of-the-ages.js";
 import _poolPeopleOfTheWoods from "../pool/people-of-the-woods.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
+import _poolPhantomWings from "../pool/phantom-wings.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
@@ -494,6 +495,7 @@ import _poolSoltariChampion from "../pool/soltari-champion.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulTether from "../pool/soul-tether.js";
+import _poolSouthernPaladin from "../pool/southern-paladin.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
@@ -1064,6 +1066,7 @@ const shard: CardShard = {
     _poolPentagramOfTheAges,
     _poolPeopleOfTheWoods,
     _poolPhantomNinja,
+    _poolPhantomWings,
     _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,
     _poolPileOn,
@@ -1166,6 +1169,7 @@ const shard: CardShard = {
     _poolSongsOfTheDamned,
     _poolSorinImperiousBloodlord,
     _poolSoulTether,
+    _poolSouthernPaladin,
     _poolSpawnbinderMage,
     _poolSpeakeasyServer,
     _poolSpectrumSentinel,

@@ -329,6 +329,7 @@ import _poolLurkingAutomaton from "../pool/lurking-automaton.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
+import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
 import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
@@ -983,6 +984,7 @@ const shard: CardShard = {
     _poolLysAlanaHuntmaster,
     _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
+    _poolMaraxusOfKeld,
     _poolMarduShadowspear,
     _poolMarkovBaron,
     _poolMarwynTheNurturer,

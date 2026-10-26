@@ -296,6 +296,7 @@ import _poolInfernalContract from "../pool/infernal-contract.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
+import _poolInnerSanctum from "../pool/inner-sanctum.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
@@ -362,6 +363,7 @@ import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
+import _poolManaChains from "../pool/mana-chains.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
@@ -420,6 +422,7 @@ import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
+import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolInfest,
     _poolInformedInkwright,
     _poolInnerDemon,
+    _poolInnerSanctum,
     _poolInspirationFromBeyond,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,
@@ -1064,6 +1068,7 @@ const shard: CardShard = {
     _poolMagesAttendant,
     _poolMagetasBoon,
     _poolMalakirCullblade,
+    _poolManaChains,
     _poolMantleOfTheWolf,
     _poolMarkovCrusader,
     _poolMartialCoup,
@@ -1122,6 +1127,7 @@ const shard: CardShard = {
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
+    _poolParadigmShift,
     _poolParapet,
     _poolPathToExile,
     _poolPathToTheWorldTree,

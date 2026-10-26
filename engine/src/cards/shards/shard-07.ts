@@ -138,6 +138,7 @@ import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
+import _poolDingusStaff from "../pool/dingus-staff.js";
 import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
@@ -403,6 +404,7 @@ import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
@@ -837,6 +839,7 @@ const shard: CardShard = {
     _poolDestructiveDigger,
     _poolDevilsPlay,
     _poolDictateOfHeliod,
+    _poolDingusStaff,
     _poolDireFleetCaptain,
     _poolDisfigure,
     _poolDisplacerKitten,
@@ -1102,6 +1105,7 @@ const shard: CardShard = {
     _poolOverzealousMuscle,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
+    _poolPeacekeeper,
     _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
     _poolPilferingImp,

@@ -22,6 +22,7 @@ import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
+import _poolAncestralKnowledge from "../pool/ancestral-knowledge.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
@@ -120,6 +121,7 @@ import _poolColossification from "../pool/colossification.js";
 import _poolCombustionTechnique from "../pool/combustion-technique.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
+import _poolConeOfFlame from "../pool/cone-of-flame.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
@@ -533,6 +535,7 @@ import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
+import _poolTeferisVeil from "../pool/teferis-veil.js";
 import _poolTempestDjinn from "../pool/tempest-djinn.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolAlchemistsApprentice,
     _poolAlleyAssailant,
     _poolAncestorsAid,
+    _poolAncestralKnowledge,
     _poolAngelsMercy,
     _poolAnnihilatingGlare,
     _poolAnotherChance,
@@ -787,6 +791,7 @@ const shard: CardShard = {
     _poolCombustionTechnique,
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
+    _poolConeOfFlame,
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
     _poolContainmentMembrane,
@@ -1200,6 +1205,7 @@ const shard: CardShard = {
     _poolTangledVale,
     _poolTavernBrawler,
     _poolTeferisProtege,
+    _poolTeferisVeil,
     _poolTempestDjinn,
     _poolTemporalFissure,
     _poolTemporalIntervention,

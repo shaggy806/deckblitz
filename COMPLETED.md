@@ -96,6 +96,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **Weatherlight, whole** (batch 175, the oldest-first walk, 2026-10-26): no feature built. 71 of
+  its last 119 authored by five `card-author` agents and the lead — Null Rod, Abduction, Angelic
+  Renewal, Teferi's Veil, Aether Flash, Gallowbraid, Morinfen, Maraxus of Keld and 63 more (WTH 105
+  of 161); 48 blocked (`B175.json`), graveyard order leading with 11.
 - **Visions, whole** (batch 172, the oldest-first walk, 2026-10-26): **built** the Mirage block's
   "you may cast this spell as though it had flash … sacrifices it at the beginning of the next
   cleanup step" (`flashThenSacrifice`, `effect:flash-cast-sacrifice`) and the cleanup step's

@@ -87,6 +87,7 @@ import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
+import _poolCallOfTheWild from "../pool/call-of-the-wild.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
 import _poolCaltrops from "../pool/caltrops.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
@@ -373,6 +374,7 @@ import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
 import _poolLivingArmor from "../pool/living-armor.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
+import _poolLlanowarDruid from "../pool/llanowar-druid.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLoathsomeCatoblepas from "../pool/loathsome-catoblepas.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
@@ -514,6 +516,7 @@ import _poolSanctifiedCharge from "../pool/sanctified-charge.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
 import _poolSapseepForest from "../pool/sapseep-forest.js";
+import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
@@ -791,6 +794,7 @@ const shard: CardShard = {
     _poolBrotherhoodAmbushers,
     _poolBurnFromWithin,
     _poolCallOfTheFullMoon,
+    _poolCallOfTheWild,
     _poolCallousDismissal,
     _poolCaltrops,
     _poolCampusCrier,
@@ -1077,6 +1081,7 @@ const shard: CardShard = {
     _poolLivingArmor,
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
+    _poolLlanowarDruid,
     _poolLlanowarReborn,
     _poolLoathsomeCatoblepas,
     _poolLockjawSlobberingTeleporter,
@@ -1218,6 +1223,7 @@ const shard: CardShard = {
     _poolSandbarSerpent,
     _poolSanguinaryPriest,
     _poolSapseepForest,
+    _poolSawtoothOgre,
     _poolSazhKatzroy,
     _poolScaledBehemoth,
     _poolScavengingOoze,

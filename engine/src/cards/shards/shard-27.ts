@@ -182,6 +182,7 @@ import _poolFaerieMiscreant from "../pool/faerie-miscreant.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
+import _poolFatalBlow from "../pool/fatal-blow.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFelhideBrawler from "../pool/felhide-brawler.js";
 import _poolFellMire from "../pool/fell-mire.js";
@@ -347,6 +348,7 @@ import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
+import _poolMorinfen from "../pool/morinfen.js";
 import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
@@ -850,6 +852,7 @@ const shard: CardShard = {
     _poolFaerieSlumberParty,
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
+    _poolFatalBlow,
     _poolFatalGrudge,
     _poolFelhideBrawler,
     _poolFellMire,
@@ -1015,6 +1018,7 @@ const shard: CardShard = {
     _poolMomoPlayfulPet,
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
+    _poolMorinfen,
     _poolMorkrutNecropod,
     _poolMosscoatGoriak,
     _poolMouserFoundry,

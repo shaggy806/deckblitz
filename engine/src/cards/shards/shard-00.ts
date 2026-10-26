@@ -221,8 +221,10 @@ import _poolGoShintaiOfLostWisdom from "../pool/go-shintai-of-lost-wisdom.js";
 import _poolGoblinCavaliers from "../pool/goblin-cavaliers.js";
 import _poolGoblinElectromancer from "../pool/goblin-electromancer.js";
 import _poolGoblinGrenade from "../pool/goblin-grenade.js";
+import _poolGoblinGrenadiers from "../pool/goblin-grenadiers.js";
 import _poolGoblinLocksmith from "../pool/goblin-locksmith.js";
 import _poolGoblinTrailblazer from "../pool/goblin-trailblazer.js";
+import _poolGoblinVandal from "../pool/goblin-vandal.js";
 import _poolGoldPan from "../pool/gold-pan.js";
 import _poolGolgariGuildgate from "../pool/golgari-guildgate.js";
 import _poolGolgariRaiders from "../pool/golgari-raiders.js";
@@ -528,6 +530,7 @@ import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
 import _poolStormriderRig from "../pool/stormrider-rig.js";
+import _poolStrawGolem from "../pool/straw-golem.js";
 import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
@@ -627,6 +630,7 @@ import _poolVineSnare from "../pool/vine-snare.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
+import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
@@ -656,6 +660,7 @@ import _poolWitchsCauldron from "../pool/witchs-cauldron.js";
 import _poolWitchstalker from "../pool/witchstalker.js";
 import _poolWoodedRidgeline from "../pool/wooded-ridgeline.js";
 import _poolWreckingGecko from "../pool/wrecking-gecko.js";
+import _poolXanthicStatue from "../pool/xanthic-statue.js";
 import _poolYourFateEndsHere from "../pool/your-fate-ends-here.js";
 import _poolYouthfulKnight from "../pool/youthful-knight.js";
 import _poolYouthfulValkyrie from "../pool/youthful-valkyrie.js";
@@ -897,8 +902,10 @@ const shard: CardShard = {
     _poolGoblinCavaliers,
     _poolGoblinElectromancer,
     _poolGoblinGrenade,
+    _poolGoblinGrenadiers,
     _poolGoblinLocksmith,
     _poolGoblinTrailblazer,
+    _poolGoblinVandal,
     _poolGoldPan,
     _poolGolgariGuildgate,
     _poolGolgariRaiders,
@@ -1204,6 +1211,7 @@ const shard: CardShard = {
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,
     _poolStormriderRig,
+    _poolStrawGolem,
     _poolStrixSerenade,
     _poolStrongarmThug,
     _poolStrongholdAssassin,
@@ -1303,6 +1311,7 @@ const shard: CardShard = {
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVizierOfTheTrue,
+    _poolVodalianIllusionist,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
     _poolVrock,
@@ -1332,6 +1341,7 @@ const shard: CardShard = {
     _poolWitchstalker,
     _poolWoodedRidgeline,
     _poolWreckingGecko,
+    _poolXanthicStatue,
     _poolYourFateEndsHere,
     _poolYouthfulKnight,
     _poolYouthfulValkyrie,

@@ -28,6 +28,7 @@ import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
 import _poolArcRunner from "../pool/arc-runner.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
+import _poolArcticWolves from "../pool/arctic-wolves.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
@@ -241,6 +242,7 @@ import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
+import _poolHarvestWurm from "../pool/harvest-wurm.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
@@ -492,6 +494,7 @@ import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
 import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
+import _poolShatteredCrypt from "../pool/shattered-crypt.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolArcRunner,
     _poolArchaeologicalDig,
     _poolArchfiendOfSorrows,
+    _poolArcticWolves,
     _poolAridMesa,
     _poolArisenGorgon,
     _poolArmoredSkaab,
@@ -915,6 +919,7 @@ const shard: CardShard = {
     _poolGuulDrazVampire,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
+    _poolHarvestWurm,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
@@ -1166,6 +1171,7 @@ const shard: CardShard = {
     _poolShadeOfTrokair,
     _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
+    _poolShatteredCrypt,
     _poolShatterstorm,
     _poolShelteringLandscape,
     _poolShilgengarSireOfFamine,

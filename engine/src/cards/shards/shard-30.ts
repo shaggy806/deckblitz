@@ -12,6 +12,7 @@ import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
+import _poolAetherFlash from "../pool/aether-flash.js";
 import _poolAgentsToolkit from "../pool/agents-toolkit.js";
 import _poolAjaniWiseCounselor from "../pool/ajani-wise-counselor.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
@@ -226,6 +227,7 @@ import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostLynx from "../pool/frost-lynx.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
+import _poolFungusElemental from "../pool/fungus-elemental.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
@@ -418,6 +420,7 @@ import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
+import _poolOdylicWraith from "../pool/odylic-wraith.js";
 import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
@@ -690,6 +693,7 @@ const shard: CardShard = {
     _poolAdventurersInn,
     _poolAegisTurtle,
     _poolAeronautCavalry,
+    _poolAetherFlash,
     _poolAgentsToolkit,
     _poolAjaniWiseCounselor,
     _poolAlabasterWall,
@@ -904,6 +908,7 @@ const shard: CardShard = {
     _poolFrostLynx,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
+    _poolFungusElemental,
     _poolFuriousForebear,
     _poolFurtiveAnalyst,
     _poolGaladhrimGuide,
@@ -1096,6 +1101,7 @@ const shard: CardShard = {
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
+    _poolOdylicWraith,
     _poolOffenderAtLarge,
     _poolOfferImmortality,
     _poolOildeepGearhulk,
