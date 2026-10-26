@@ -499,6 +499,7 @@ import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
+import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
 import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
@@ -1233,6 +1234,7 @@ const shard: CardShard = {
     _poolPumpkinBombardment,
     _poolPurpleCrystalCrab,
     _poolQuicksand,
+    _poolQuietDisrepair,
     _poolQuirionDruid,
     _poolRadiantEssence,
     _poolRakdosKeyrune,

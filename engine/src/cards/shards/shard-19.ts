@@ -65,6 +65,7 @@ import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
+import _poolBloodshotTrainee from "../pool/bloodshot-trainee.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
@@ -272,6 +273,7 @@ import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
+import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -381,6 +383,7 @@ import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLightningMauler from "../pool/lightning-mauler.js";
+import _poolLlanowarAugur from "../pool/llanowar-augur.js";
 import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
@@ -473,6 +476,7 @@ import _poolOverlordOfTheMistmoors from "../pool/overlord-of-the-mistmoors.js";
 import _poolOverwhelmingDenial from "../pool/overwhelming-denial.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
+import _poolPactOfTheTitan from "../pool/pact-of-the-titan.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
 import _poolParagonOfNewDawns from "../pool/paragon-of-new-dawns.js";
 import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
@@ -822,6 +826,7 @@ const shard: CardShard = {
     _poolBlazingRootwalla,
     _poolBlightsowerThallid,
     _poolBlightsteelColossus,
+    _poolBloodshotTrainee,
     _poolBloomvineRegent,
     _poolBlurSliver,
     _poolBobReluctantHydraAgent,
@@ -1029,6 +1034,7 @@ const shard: CardShard = {
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
     _poolGoldenhideOx,
+    _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
@@ -1138,6 +1144,7 @@ const shard: CardShard = {
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLightningMauler,
+    _poolLlanowarAugur,
     _poolLoranDiscipleOfHistory,
     _poolLoreWeaver,
     _poolLoreholdCharm,
@@ -1230,6 +1237,7 @@ const shard: CardShard = {
     _poolOverwhelmingDenial,
     _poolOwlbear,
     _poolPackRat,
+    _poolPactOfTheTitan,
     _poolPaleRiderOfTrostad,
     _poolParagonOfNewDawns,
     _poolPatientRebuilding,

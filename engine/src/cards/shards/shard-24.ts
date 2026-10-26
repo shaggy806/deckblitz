@@ -137,6 +137,7 @@ import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
+import _poolCrypticAnnelid from "../pool/cryptic-annelid.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
 import _poolCumberStone from "../pool/cumber-stone.js";
@@ -257,6 +258,7 @@ import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGoreHouseChainwalker from "../pool/gore-house-chainwalker.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
+import _poolGravePeril from "../pool/grave-peril.js";
 import _poolGravenLore from "../pool/graven-lore.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
@@ -305,6 +307,7 @@ import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
+import _poolInterventionPact from "../pool/intervention-pact.js";
 import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
 import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
@@ -350,6 +353,7 @@ import _poolLoneWolfOfTheNatterknolls from "../pool/lone-wolf-of-the-natterknoll
 import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLotusguardDisciple from "../pool/lotusguard-disciple.js";
 import _poolLumberknot from "../pool/lumberknot.js";
+import _poolLumithreadField from "../pool/lumithread-field.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
@@ -874,6 +878,7 @@ const shard: CardShard = {
     _poolCoralEel,
     _poolCracklingCyclops,
     _poolCruelTruths,
+    _poolCrypticAnnelid,
     _poolCrystacean,
     _poolCullingTheWeak,
     _poolCumberStone,
@@ -994,6 +999,7 @@ const shard: CardShard = {
     _poolGoreHouseChainwalker,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
+    _poolGravePeril,
     _poolGravenLore,
     _poolGreatUglyLookingGoblin,
     _poolGruulLocket,
@@ -1042,6 +1048,7 @@ const shard: CardShard = {
     _poolInfernalReckoning,
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
+    _poolInterventionPact,
     _poolIntrepidProvisioner,
     _poolInvasiveSpecies,
     _poolIrresistiblePrey,
@@ -1087,6 +1094,7 @@ const shard: CardShard = {
     _poolLotusPetal,
     _poolLotusguardDisciple,
     _poolLumberknot,
+    _poolLumithreadField,
     _poolMaestrosCharm,
     _poolMalachiteTalisman,
     _poolMarbleGargoyle,

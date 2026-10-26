@@ -760,6 +760,14 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // "enchanted creature's controller sacrifices it and you create a Myr".
       const steps = ability.effect?.kind === "sequence" ? ability.effect.effects : ability.effect ? [ability.effect] : [];
       if (steps.some((e) => (e.kind === "destroy" || e.kind === "sacrifice-target") && e.target === "attached")) harm = true;
+      // Or offers to, as one mode — Quiet Disrepair's upkeep "destroy
+      // enchanted permanent; or you gain 2 life".
+      if (
+        ability.effect?.kind === "modal" &&
+        ability.effect.modes.some((m) => m.effect.kind === "destroy" && m.effect.target === "attached")
+      ) {
+        harm = true;
+      }
       // Each upkeep of the enchanted permanent's controller, that player is
       // hurt — Parasitic Bond's 2 damage, Power Taint's "loses 2 life unless
       // they pay {2}".
@@ -823,6 +831,9 @@ function hurtsActivePlayer(effect: EffectSpec | null): boolean {
 function enchantedLean(effect: EffectSpec | null): "help" | "harm" | null {
   if (effect === null) return null;
   if (effect.kind === "sequence") {
+    // Taking the enchanted permanent is the point, whatever comes with it —
+    // Frenzied Fugue's and Wellspring's "untap it" serve the thief.
+    if (effect.effects.some((e) => e.kind === "gain-control" && e.target === "attached")) return "harm";
     const leans = effect.effects.map(enchantedLean).filter((l) => l !== null);
     return leans.length > 0 && leans.every((l) => l === leans[0]) ? leans[0] : null;
   }
@@ -836,6 +847,12 @@ function enchantedLean(effect: EffectSpec | null): "help" | "harm" | null {
       return effect.counter === "+1/+1" ? "help" : effect.counter === "-1/-1" ? "harm" : null;
     case "destroy":
       return "harm";
+    // Narcolepsy's upkeep "tap enchanted creature"; an Aura that can do both
+    // (Second Wind) stays the board's call.
+    case "tap":
+      return "harm";
+    case "untap":
+      return "help";
     default:
       return null;
   }

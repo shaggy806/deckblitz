@@ -337,6 +337,7 @@ import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
+import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
@@ -571,6 +572,7 @@ import _poolSoulOfNewPhyrexia from "../pool/soul-of-new-phyrexia.js";
 import _poolSoulShatter from "../pool/soul-shatter.js";
 import _poolSouldrinker from "../pool/souldrinker.js";
 import _poolSoundTheTrumpets from "../pool/sound-the-trumpets.js";
+import _poolSparkspitter from "../pool/sparkspitter.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
@@ -1064,6 +1066,7 @@ const shard: CardShard = {
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
     _poolKorSkyfisher,
+    _poolKorlashHeirToBlackblade,
     _poolKukemssaPirates,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
@@ -1298,6 +1301,7 @@ const shard: CardShard = {
     _poolSoulShatter,
     _poolSouldrinker,
     _poolSoundTheTrumpets,
+    _poolSparkspitter,
     _poolSpawningBed,
     _poolSpecimenFreighter,
     _poolSpiderwigBoggart,

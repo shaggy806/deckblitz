@@ -42,6 +42,7 @@ import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
+import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
@@ -397,6 +398,7 @@ import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLathielTheBounteousDawn from "../pool/lathiel-the-bounteous-dawn.js";
 import _poolLeadBellyChimera from "../pool/lead-belly-chimera.js";
+import _poolLeadenFists from "../pool/leaden-fists.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
@@ -768,10 +770,12 @@ import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
 import _tokensHumanSoldierTokenTorensFistOfTheAngels from "../tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
 import _tokensInsectTokenOverlordOfTheMistmoors from "../tokens/insect-token-overlord-of-the-mistmoors.js";
+import _tokensLlanowarElvesToken from "../tokens/llanowar-elves-token.js";
 import _tokensMoonfolkToken from "../tokens/moonfolk-token.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensPhyrexianWurmToken from "../tokens/phyrexian-wurm-token.js";
+import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
@@ -819,6 +823,7 @@ const shard: CardShard = {
     _poolArterialFlow,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
+    _poolAugurIlVec,
     _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
@@ -1174,6 +1179,7 @@ const shard: CardShard = {
     _poolLanternOfTheLost,
     _poolLathielTheBounteousDawn,
     _poolLeadBellyChimera,
+    _poolLeadenFists,
     _poolLeoninLightbringer,
     _poolLeylineOfTheVoid,
     _poolLilianasSpoils,
@@ -1547,10 +1553,12 @@ const shard: CardShard = {
     _tokensHumanSoldierTokenTorensFistOfTheAngels,
     _tokensIllusionTokenPlain,
     _tokensInsectTokenOverlordOfTheMistmoors,
+    _tokensLlanowarElvesToken,
     _tokensMoonfolkToken,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
     _tokensPhyrexianWurmToken,
+    _tokensRedGiantToken44,
     _tokensRedWhiteSoldierHasteToken,
     _tokensSkeletonToken,
     _tokensSliverToken,

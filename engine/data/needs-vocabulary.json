@@ -1235,7 +1235,8 @@
   "new:you-have-most-life-trigger-condition": "condition:you-have-most-life-trigger-condition",
   "new:zone-entry-prohibition": "static:zone-entry-prohibition",
   "zone:impulse-exile-other-libraries": "effect:impulse-exile-other-libraries",
-  "trigger:valiant": "keyword:valiant"
+  "trigger:valiant": "keyword:valiant",
+  "static:absorb": "replacement:prevent-n-damage-from-each-source"
  },
  "features": {
   "bug:additional-cost-option-affordability": {
@@ -11174,6 +11175,94 @@
   "trigger:blocks-two-or-more": {
    "family": "static:block-additional-creature",
    "example": "Lairwatch Giant: whenever this blocks two or more creatures, it gains first strike until end of turn"
+  },
+  "cost:remove-counter-from-other-permanent-or-suspended-card": {
+   "family": "cost:remove-counters-from-chosen",
+   "example": "Rift Elemental: remove a time counter from a permanent you control or a suspended card you own"
+  },
+  "static:split-second-if-kicked": {
+   "family": "keyword:split-second",
+   "example": "Molten Disaster: split second as long as it was kicked"
+  },
+  "effect:reveal-top-keeps-spell-targets": {
+   "family": "effect:reveal-top-any-library",
+   "example": "Riddle of Lightning: reveal the top card, damage equal to its mana value to the spell's own target"
+  },
+  "cost:spend-only-mana-from-basic-lands": {
+   "family": "cost:mana-restriction-at-cast",
+   "example": "Imperiosaur: spend only mana produced by basic lands to cast it"
+  },
+  "mechanic:transfigure": {
+   "family": "mechanic:transfigure",
+   "example": "Fleshwrither: sacrifice, search for a creature card with the same mana value"
+  },
+  "effect:next-creature-spell-flash-this-turn": {
+   "family": "effect:first-creature-spell-flash",
+   "example": "Scout's Warning: the next creature card you play this turn has flash"
+  },
+  "effect:fateseal": {
+   "family": "effect:look-and-choose-target-opponent-library",
+   "example": "Mesmeric Sliver, Spin into Myth: fateseal — you look at and order an opponent's library top"
+  },
+  "amount:revealed-card-mana-value-keep-targets": {
+   "family": "effect:reveal-top-any-library",
+   "example": "Judge Unworthy: scry, reveal the top card, damage equal to its mana value to the spell's target"
+  },
+  "static:graveyard-cards-lose-abilities": {
+   "family": "effect:animate-all-lose-abilities",
+   "example": "Yixlid Jailer: cards in graveyards lose all abilities"
+  },
+  "trigger:discarded-by-opponent-effect": {
+   "family": "trigger:discards-batch-trigger",
+   "example": "Quagnoth: when a spell or ability an opponent controls causes you to discard this card"
+  },
+  "static:must-be-blocked-by-exactly-one": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Nacatl War-Pride: must be blocked by exactly one creature if able"
+  },
+  "effect:creatures-cant-attack-you-until-next-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Chronomantic Escape: until your next turn, creatures can't attack you"
+  },
+  "static:skip-step": {
+   "family": "static:skip-untap-step",
+   "example": "Gibbering Descent: hellbent — skip your upkeep step"
+  },
+  "effect:prevent-next-damage-each-creature": {
+   "family": "replacement:damage-prevented-to-filter",
+   "example": "Samite Censer-Bearer: prevent the next 1 damage to each creature you control"
+  },
+  "mechanic:assemble-contraptions": {
+   "family": "mechanic:assemble-contraptions",
+   "example": "Steamflogger Boss: assemble a Contraption"
+  },
+  "condition:self-madness-paid": {
+   "family": "keyword:madness",
+   "example": "Grave Scrabbler: if its madness cost was paid"
+  },
+  "effect:restrict-controlled-by-target": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Oriss, Samite Guardian: creatures target player controls can't attack this turn"
+  },
+  "target:suspended-card": {
+   "family": "effect:target-card-in-exile",
+   "example": "Venser's Diffusion: target nonland permanent or suspended card"
+  },
+  "decision:active-player-chooses-target": {
+   "family": "effect:target-opponent-chooses",
+   "example": "Magus of the Abyss: the player whose upkeep it is chooses the target"
+  },
+  "condition:controls-fewer-than-each-opponent": {
+   "family": "effect:each-opponent-exiles-choice",
+   "example": "Even the Odds: you control fewer creatures than each opponent"
+  },
+  "mechanic:aura-swap": {
+   "family": "mechanic:aura-swap",
+   "example": "Arcanum Wings: aura swap"
+  },
+  "cost:morph-discard-card": {
+   "family": "cost:morph-reveal-card",
+   "example": "Gathan Raiders: Morph—Discard a card"
   },
   "duration:until-a-player-casts-creature-spell": {
    "family": "effect:set-types-temporary",

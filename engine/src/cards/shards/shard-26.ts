@@ -52,6 +52,7 @@ import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
 import _poolAtzocanArcher from "../pool/atzocan-archer.js";
 import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
+import _poolAugurOfSkulls from "../pool/augur-of-skulls.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
@@ -305,6 +306,7 @@ import _poolHypersonicDragon from "../pool/hypersonic-dragon.js";
 import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
+import _poolIchorSlick from "../pool/ichor-slick.js";
 import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
 import _poolIllGottenGains from "../pool/ill-gotten-gains.js";
 import _poolIllusionsOfGrandeur from "../pool/illusions-of-grandeur.js";
@@ -407,6 +409,7 @@ import _poolMurmuration from "../pool/murmuration.js";
 import _poolMuseDrake from "../pool/muse-drake.js";
 import _poolMyrScrapling from "../pool/myr-scrapling.js";
 import _poolMysticSanctuary from "../pool/mystic-sanctuary.js";
+import _poolNarcomoeba from "../pool/narcomoeba.js";
 import _poolNarsetJeskaiWaymaster from "../pool/narset-jeskai-waymaster.js";
 import _poolNaturalOrder from "../pool/natural-order.js";
 import _poolNecrologia from "../pool/necrologia.js";
@@ -718,6 +721,7 @@ import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
 import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dragon.js";
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
+import _tokensFesteringGoblinToken from "../tokens/festering-goblin-token.js";
 import _tokensHippoToken from "../tokens/hippo-token.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
@@ -782,6 +786,7 @@ const shard: CardShard = {
     _poolAtomize,
     _poolAtzocanArcher,
     _poolAugmenterPugilist,
+    _poolAugurOfSkulls,
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
     _poolAvariceAmulet,
@@ -1035,6 +1040,7 @@ const shard: CardShard = {
     _poolIcatianScout,
     _poolIceTunnel,
     _poolIchorRats,
+    _poolIchorSlick,
     _poolIdolOfFalseGods,
     _poolIllGottenGains,
     _poolIllusionsOfGrandeur,
@@ -1137,6 +1143,7 @@ const shard: CardShard = {
     _poolMuseDrake,
     _poolMyrScrapling,
     _poolMysticSanctuary,
+    _poolNarcomoeba,
     _poolNarsetJeskaiWaymaster,
     _poolNaturalOrder,
     _poolNecrologia,
@@ -1450,6 +1457,7 @@ const shard: CardShard = {
     _tokensDragonElementalToken,
     _tokensDragonTokenWakeTheDragon,
     _tokensElementalTokenVernalSovereign,
+    _tokensFesteringGoblinToken,
     _tokensHippoToken,
     _tokensNymphToken,
     _tokensOozeToken33,

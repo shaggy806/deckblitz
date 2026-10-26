@@ -138,6 +138,7 @@ import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
+import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
@@ -423,6 +424,7 @@ import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
+import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
 import _poolOakStreetInnkeeper from "../pool/oak-street-innkeeper.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
     _poolDeathpactAngel,
+    _poolDeepcavernImp,
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
     _poolDeepwoodTantiv,
@@ -1205,6 +1208,7 @@ const shard: CardShard = {
     _poolNiblisOfDusk,
     _poolNightClubber,
     _poolNighthawkScavenger,
+    _poolNix,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
     _poolOakStreetInnkeeper,

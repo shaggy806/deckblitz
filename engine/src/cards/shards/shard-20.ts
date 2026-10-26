@@ -253,6 +253,7 @@ import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
+import _poolGhostfire from "../pool/ghostfire.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGiltLeafAmbush from "../pool/gilt-leaf-ambush.js";
 import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-caves.js";
@@ -501,6 +502,7 @@ import _poolRavingDead from "../pool/raving-dead.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolReady from "../pool/ready.js";
+import _poolRealityStrobe from "../pool/reality-strobe.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
     _poolGerminateRecruits,
+    _poolGhostfire,
     _poolGildedSentinel,
     _poolGiltLeafAmbush,
     _poolGimliOfTheGlitteringCaves,
@@ -1282,6 +1285,7 @@ const shard: CardShard = {
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
     _poolReady,
+    _poolRealityStrobe,
     _poolRebelSalvo,
     _poolRecklessAssault,
     _poolRecklessRage,

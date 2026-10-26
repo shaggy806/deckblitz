@@ -345,6 +345,7 @@ import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
 import _poolMagmaMine from "../pool/magma-mine.js";
 import _poolMagmaPhoenix from "../pool/magma-phoenix.js";
 import _poolMagmaRift from "../pool/magma-rift.js";
+import _poolMagusOfTheFuture from "../pool/magus-of-the-future.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
@@ -531,6 +532,7 @@ import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSlabHammer from "../pool/slab-hammer.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
+import _poolSliversmith from "../pool/sliversmith.js";
 import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
@@ -557,6 +559,7 @@ import _poolStensiaInnkeeper from "../pool/stensia-innkeeper.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
+import _poolStormEntity from "../pool/storm-entity.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
 import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
@@ -611,6 +614,7 @@ import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.j
 import _poolToil from "../pool/toil.js";
 import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
+import _poolTombstalker from "../pool/tombstalker.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
@@ -1051,6 +1055,7 @@ const shard: CardShard = {
     _poolMagmaMine,
     _poolMagmaPhoenix,
     _poolMagmaRift,
+    _poolMagusOfTheFuture,
     _poolMakindiAeronaut,
     _poolMakindiStampede,
     _poolMalakirFamiliar,
@@ -1237,6 +1242,7 @@ const shard: CardShard = {
     _poolSkyhunterStrikeForce,
     _poolSlabHammer,
     _poolSliceFromTheShadows,
+    _poolSliversmith,
     _poolSlogurkTheOverslime,
     _poolSmolderingSpires,
     _poolSmugglersBuggy,
@@ -1263,6 +1269,7 @@ const shard: CardShard = {
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
+    _poolStormEntity,
     _poolStormTheSeedcore,
     _poolStructuralCollapse,
     _poolStructuralDistortion,
@@ -1317,6 +1324,7 @@ const shard: CardShard = {
     _poolToil,
     _poolTolarianKraken,
     _poolTolarianTerror,
+    _poolTombstalker,
     _poolTookReaper,
     _poolToxicAbomination,
     _poolTragicPoet,

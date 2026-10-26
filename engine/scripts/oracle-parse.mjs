@@ -2652,6 +2652,14 @@ export function parseFace(face, ctx = {}) {
     };
     linkExiles([out.activated, out.triggered, out.effect]);
   }
+  // "When this creature's echo cost is paid" (Shah of Naar Isle) has to trigger
+  // from the echo trigger's resolution, which `echo()`'s `unless` never says:
+  // that echo is the author's to write, as a `may`.
+  if (/echo cost is paid/i.test(face.oracle_text ?? "")) {
+    for (const t of out.triggered) {
+      if (/^Echo\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its echo has to say when the cost is paid"];
+    }
+  }
   out.complete =
     out.todo.length === 0 &&
     [...out.activated, ...out.triggered].every((a) => a.effect !== null && a.__todo === undefined);

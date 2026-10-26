@@ -50,6 +50,7 @@ import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
 import _poolBaneLordOfDarkness from "../pool/bane-lord-of-darkness.js";
 import _poolBanishIntoFable from "../pool/banish-into-fable.js";
 import _poolBanishingCoils from "../pool/banishing-coils.js";
+import _poolBarrenGlory from "../pool/barren-glory.js";
 import _poolBarretWallace from "../pool/barret-wallace.js";
 import _poolBarrowNaughty from "../pool/barrow-naughty.js";
 import _poolBaseballBat from "../pool/baseball-bat.js";
@@ -571,6 +572,7 @@ import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
+import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
@@ -618,6 +620,7 @@ import _poolTalonsOfWildwood from "../pool/talons-of-wildwood.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTaroxBladewing from "../pool/tarox-bladewing.js";
 import _poolTemurWarShaman from "../pool/temur-war-shaman.js";
 import _poolTenaciousDead from "../pool/tenacious-dead.js";
 import _poolTendershootDryad from "../pool/tendershoot-dryad.js";
@@ -785,6 +788,7 @@ const shard: CardShard = {
     _poolBaneLordOfDarkness,
     _poolBanishIntoFable,
     _poolBanishingCoils,
+    _poolBarrenGlory,
     _poolBarretWallace,
     _poolBarrowNaughty,
     _poolBaseballBat,
@@ -1306,6 +1310,7 @@ const shard: CardShard = {
     _poolSorinsGuide,
     _poolSoulBleed,
     _poolSoulSnuffers,
+    _poolSoultetherGolem,
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,
@@ -1353,6 +1358,7 @@ const shard: CardShard = {
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTaroxBladewing,
     _poolTemurWarShaman,
     _poolTenaciousDead,
     _poolTendershootDryad,
