@@ -1744,7 +1744,19 @@
    "example": "Chthonian Nightmare: Pay X {E} and return this enchantment to its owner's hand as costs."
   },
   "cost:reveal-any-number-from-hand": {
-   "example": "Metalworker: mana scaled by revealing any number of artifact cards from hand"
+   "example": "Scent of Ivy: reveal any number of green cards in your hand as it resolves; built 2026-10-26 (B208) as look-and-choose's \"reveal\" destination"
+  },
+  "effect:reveal-from-hand-in-mana-ability": {
+   "family": "cost:reveal-any-number-from-hand",
+   "example": "Metalworker: a mana ability adding mana for each artifact card revealed from hand — a mana ability resolves at once (rule 605.3b), and the engine's can't stop to ask for a choice"
+  },
+  "effect:gain-life-owner-of-target": {
+   "family": "effect:amount-new-variants",
+   "example": "Misfortune's Gain: destroy target creature; its owner (not its controller) gains 4 life"
+  },
+  "decision:choose-number-on-resolution": {
+   "family": "decision:choose-color-on-resolution",
+   "example": "Scrying Glass: choose a number and a colour as it resolves"
   },
   "cost:reveal-card-as-additional-cost": {
    "example": "Calamity of the Titans: Reveal a colorless creature card as an additional cost, then exile by MV below the revealed card's"

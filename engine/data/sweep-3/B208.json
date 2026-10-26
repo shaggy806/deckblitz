@@ -1,0 +1,801 @@
+{
+ "batch": "B208",
+ "status": "complete",
+ "ranks": "Portal Three Kingdoms (PTK, 1999-05-01): the rest of the set, its 53 cards left, and Urza's Destiny (UDS, 1999-06-07): its 60 most-played (oldest-first walk); built \"reveal any number of <colour> cards in your hand\" (look-and-choose's \"reveal\" destination, rule 701.20a; cost:reveal-any-number-from-hand), which five of the batch's cards have",
+ "authored": [
+  {
+   "name": "Aether Sting",
+   "files": [
+    "engine/src/cards/pool/aether-sting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aura Thief",
+   "files": [
+    "engine/src/cards/pool/aura-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbarian General",
+   "files": [
+    "engine/src/cards/pool/barbarian-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bloodshot Cyclops",
+   "files": [
+    "engine/src/cards/pool/bloodshot-cyclops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borrowing the East Wind",
+   "files": [
+    "engine/src/cards/pool/borrowing-the-east-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Braidwood Sextant",
+   "files": [
+    "engine/src/cards/pool/braidwood-sextant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brine Seer",
+   "files": [
+    "engine/src/cards/pool/brine-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cao Ren, Wei Commander",
+   "files": [
+    "engine/src/cards/pool/cao-ren-wei-commander.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carnival of Souls",
+   "files": [
+    "engine/src/cards/pool/carnival-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champion's Victory",
+   "files": [
+    "engine/src/cards/pool/champions-victory.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chime of Night",
+   "files": [
+    "engine/src/cards/pool/chime-of-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compost",
+   "files": [
+    "engine/src/cards/pool/compost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Counterintelligence",
+   "files": [
+    "engine/src/cards/pool/counterintelligence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Covetous Dragon",
+   "files": [
+    "engine/src/cards/pool/covetous-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cunning Advisor",
+   "files": [
+    "engine/src/cards/pool/cunning-advisor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Donate",
+   "files": [
+    "engine/src/cards/pool/donate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dying Wail",
+   "files": [
+    "engine/src/cards/pool/dying-wail.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eightfold Maze",
+   "files": [
+    "engine/src/cards/pool/eightfold-maze.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emperor Crocodile",
+   "files": [
+    "engine/src/cards/pool/emperor-crocodile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Encroach",
+   "files": [
+    "engine/src/cards/pool/encroach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extruder",
+   "files": [
+    "engine/src/cards/pool/extruder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "False Mourning",
+   "files": [
+    "engine/src/cards/pool/false-mourning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "False Prophet",
+   "files": [
+    "engine/src/cards/pool/false-prophet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festering Wound",
+   "files": [
+    "engine/src/cards/pool/festering-wound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Bowman",
+   "files": [
+    "engine/src/cards/pool/fire-bowman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flicker",
+   "files": [
+    "engine/src/cards/pool/flicker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gamekeeper",
+   "files": [
+    "engine/src/cards/pool/gamekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Festival",
+   "files": [
+    "engine/src/cards/pool/goblin-festival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Marshal",
+   "files": [
+    "engine/src/cards/pool/goblin-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guan Yu's 1,000-Li March",
+   "files": [
+    "engine/src/cards/pool/guan-yus-1-000-li-march.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Huang Zhong, Shu General",
+   "files": [
+    "engine/src/cards/pool/huang-zhong-shu-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hunting Moa",
+   "files": [
+    "engine/src/cards/pool/hunting-moa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impatience",
+   "files": [
+    "engine/src/cards/pool/impatience.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incendiary",
+   "files": [
+    "engine/src/cards/pool/incendiary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iridescent Drake",
+   "files": [
+    "engine/src/cards/pool/iridescent-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Champion",
+   "files": [
+    "engine/src/cards/pool/keldon-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kongming's Contraptions",
+   "files": [
+    "engine/src/cards/pool/kongmings-contraptions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lady Sun",
+   "files": [
+    "engine/src/cards/pool/lady-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lady Zhurong, Warrior Queen",
+   "files": [
+    "engine/src/cards/pool/lady-zhurong-warrior-queen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Landslide",
+   "files": [
+    "engine/src/cards/pool/landslide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lu Meng, Wu General",
+   "files": [
+    "engine/src/cards/pool/lu-meng-wu-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lu Su, Wu Advisor",
+   "files": [
+    "engine/src/cards/pool/lu-su-wu-advisor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marshaling the Troops",
+   "files": [
+    "engine/src/cards/pool/marshaling-the-troops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mask of Law and Grace",
+   "files": [
+    "engine/src/cards/pool/mask-of-law-and-grace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Masticore",
+   "files": [
+    "engine/src/cards/pool/masticore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meng Huo, Barbarian King",
+   "files": [
+    "engine/src/cards/pool/meng-huo-barbarian-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mental Discipline",
+   "files": [
+    "engine/src/cards/pool/mental-discipline.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Momentum",
+   "files": [
+    "engine/src/cards/pool/momentum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multani's Decree",
+   "files": [
+    "engine/src/cards/pool/multanis-decree.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pang Tong, \"Young Phoenix\"",
+   "files": [
+    "engine/src/cards/pool/pang-tong-young-phoenix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Powder Keg",
+   "files": [
+    "engine/src/cards/pool/powder-keg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Private Research",
+   "files": [
+    "engine/src/cards/pool/private-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rescue",
+   "files": [
+    "engine/src/cards/pool/rescue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Riding Red Hare",
+   "files": [
+    "engine/src/cards/pool/riding-red-hare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rockslide Ambush",
+   "files": [
+    "engine/src/cards/pool/rockslide-ambush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rofellos's Gift",
+   "files": [
+    "engine/src/cards/pool/rofelloss-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scent of Brine",
+   "files": [
+    "engine/src/cards/pool/scent-of-brine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scent of Ivy",
+   "files": [
+    "engine/src/cards/pool/scent-of-ivy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scent of Jasmine",
+   "files": [
+    "engine/src/cards/pool/scent-of-jasmine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shu Elite Companions",
+   "files": [
+    "engine/src/cards/pool/shu-elite-companions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shu Farmer",
+   "files": [
+    "engine/src/cards/pool/shu-farmer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shu General",
+   "files": [
+    "engine/src/cards/pool/shu-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sima Yi, Wei Field Marshal",
+   "files": [
+    "engine/src/cards/pool/sima-yi-wei-field-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stone Catapult",
+   "files": [
+    "engine/src/cards/pool/stone-catapult.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taoist Mystic",
+   "files": [
+    "engine/src/cards/pool/taoist-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taunting Elf",
+   "files": [
+    "engine/src/cards/pool/taunting-elf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tethered Griffin",
+   "files": [
+    "engine/src/cards/pool/tethered-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thran Foundry",
+   "files": [
+    "engine/src/cards/pool/thran-foundry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thran Golem",
+   "files": [
+    "engine/src/cards/pool/thran-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trip Wire",
+   "files": [
+    "engine/src/cards/pool/trip-wire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trumpet Blast",
+   "files": [
+    "engine/src/cards/pool/trumpet-blast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wei Elite Companions",
+   "files": [
+    "engine/src/cards/pool/wei-elite-companions.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wei Strike Force",
+   "files": [
+    "engine/src/cards/pool/wei-strike-force.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wu Admiral",
+   "files": [
+    "engine/src/cards/pool/wu-admiral.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wu Elite Cavalry",
+   "files": [
+    "engine/src/cards/pool/wu-elite-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wu Longbowman",
+   "files": [
+    "engine/src/cards/pool/wu-longbowman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Xun Yu, Wei Advisor",
+   "files": [
+    "engine/src/cards/pool/xun-yu-wei-advisor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya Enchantress",
+   "files": [
+    "engine/src/cards/pool/yavimaya-enchantress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yellow Scarves General",
+   "files": [
+    "engine/src/cards/pool/yellow-scarves-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zhang He, Wei General",
+   "files": [
+    "engine/src/cards/pool/zhang-he-wei-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhang Liao, Hero of Hefei",
+   "files": [
+    "engine/src/cards/pool/zhang-liao-hero-of-hefei.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhao Zilong, Tiger General",
+   "files": [
+    "engine/src/cards/pool/zhao-zilong-tiger-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zhuge Jin, Wu Strategist",
+   "files": [
+    "engine/src/cards/pool/zhuge-jin-wu-strategist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zodiac Dragon",
+   "files": [
+    "engine/src/cards/pool/zodiac-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zuo Ci, the Mocking Sage",
+   "files": [
+    "engine/src/cards/pool/zuo-ci-the-mocking-sage.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Red Cliffs Armada",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "\"can't attack unless defending player controls an Island\": attack legality has no per-defender condition"
+  },
+  {
+   "name": "Wake of Destruction",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "\"destroy target land and all other lands with the same name\": no filter for the target's name"
+  },
+  {
+   "name": "Rayne, Academy Chancellor",
+   "needs": [
+    "trigger:player-becomes-target"
+   ],
+   "why": "\"whenever you or a permanent you control becomes the target\": becomes-target fires only on permanents"
+  },
+  {
+   "name": "Wei Assassins",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "\"target opponent chooses a creature or planeswalker they control; destroy it\": another player choosing a permanent for a destroy has no effect"
+  },
+  {
+   "name": "Eunuchs' Intrigues",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "\"target opponent chooses a creature they control; other creatures they control can't block\": the opponent's choice has no effect"
+  },
+  {
+   "name": "Wolf Pack",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "\"you may have it assign its combat damage as though it weren't blocked\""
+  },
+  {
+   "name": "Wu Warship",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "\"can't attack unless defending player controls an Island\": attack legality has no per-defender condition"
+  },
+  {
+   "name": "Opalescence",
+   "needs": [
+    "static:animate-pt-equal-mana-value"
+   ],
+   "why": "each other non-Aura enchantment is a creature with base P/T equal to its own mana value"
+  },
+  {
+   "name": "Archery Training",
+   "needs": [
+    "effect:granted-activated-refers-to-granter"
+   ],
+   "why": "the granted {T} ability deals damage equal to the arrowhead counters on the Aura that grants it"
+  },
+  {
+   "name": "Sanctimony",
+   "needs": [
+    "trigger:tapped-for-mana-nonmana-trigger"
+   ],
+   "why": "\"whenever an opponent taps a Mountain for mana, you may gain 1 life\": a tapped-for-mana trigger that isn't a mana ability"
+  },
+  {
+   "name": "Fend Off",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "\"prevent all combat damage that would be dealt by target creature this turn\""
+  },
+  {
+   "name": "Scrying Glass",
+   "needs": [
+    "decision:choose-color-on-resolution",
+    "decision:choose-number-on-resolution"
+   ],
+   "why": "choose a number and a colour as it resolves, then a target opponent reveals their hand"
+  },
+  {
+   "name": "Ma Chao, Western Warrior",
+   "needs": [
+    "effect:restrict-until-end-of-combat"
+   ],
+   "why": "\"it can't be blocked this combat\": no until-end-of-combat duration (end of turn is wrong with an extra combat)"
+  },
+  {
+   "name": "Yuan Shao's Infantry",
+   "needs": [
+    "effect:restrict-until-end-of-combat"
+   ],
+   "why": "\"can't be blocked this combat\": no until-end-of-combat duration"
+  },
+  {
+   "name": "Zhou Yu, Chief Commander",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "\"can't attack unless defending player controls an Island\": attack legality has no per-defender condition"
+  },
+  {
+   "name": "Phyrexian Negator",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "\"whenever it's dealt damage, sacrifice that many permanents\": the sacrifice count can't be the damage dealt"
+  },
+  {
+   "name": "Body Snatcher",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "\"exile it unless you discard a creature card\": an unless-discard with a card filter"
+  },
+  {
+   "name": "Splinter",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "exile an artifact and search its controller's graveyard, hand and library for all cards with the same name"
+  },
+  {
+   "name": "Plow Under",
+   "needs": [
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "two lands on top of the same owner's library: the owner orders them"
+  },
+  {
+   "name": "Misfortune's Gain",
+   "needs": [
+    "effect:gain-life-owner-of-target"
+   ],
+   "why": "\"destroy target creature; its owner gains 4 life\": gain-life goes to a controller, not an owner"
+  },
+  {
+   "name": "Wu Spy",
+   "needs": [
+    "effect:look-and-choose-target-player"
+   ],
+   "why": "\"look at the top two cards of target player's library; put one into their graveyard\""
+  },
+  {
+   "name": "Burning of Xinye",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "you destroy four lands you control and target opponent destroys four lands they control, all at once: the opponent's choice has no effect"
+  },
+  {
+   "name": "Imperial Edict",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "\"target opponent chooses a creature they control; destroy it\""
+  },
+  {
+   "name": "Storage Matrix",
+   "needs": [
+    "static:untap-step-limit"
+   ],
+   "why": "each player chooses artifact, creature or land and untaps only permanents of that type"
+  },
+  {
+   "name": "Thorn Elemental",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "\"you may have it assign its combat damage as though it weren't blocked\""
+  },
+  {
+   "name": "Eradicate",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "exile a creature and search its controller's graveyard, hand and library for all cards with the same name"
+  },
+  {
+   "name": "Fatigue",
+   "needs": [
+    "effect:skip-next-draw-step"
+   ],
+   "why": "\"target player skips their next draw step\""
+  },
+  {
+   "name": "Rapid Decay",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"exile up to three target cards from a single graveyard\""
+  }
+ ]
+}

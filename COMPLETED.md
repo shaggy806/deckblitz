@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Reveal any number of cards from your hand, the rest of Portal Three Kingdoms and Urza's
+  Destiny's 60 most-played — Portal Three Kingdoms is whole** (batch 208, the oldest-first walk,
+  2026-10-26, `cost:reveal-any-number-from-hand`): **built** "reveal any number of green cards in
+  your hand" (rule 701.20a) — `look-and-choose`'s `"reveal"` destination over the hand, with
+  `{ thisWay: "revealed" }` counting cards revealed from a hand — in the engine, the client's
+  prompt, the scaffolder and `reveal-from-hand.test.ts`. 85 authored — Masticore, Donate, Flicker,
+  Yavimaya Enchantress, Carnival of Souls, the Scents of Ivy, Jasmine and Brine, Lady Sun, Sima Yi
+  among them — and 28 blocked (`B208.json`).
 - **Mirrodin Besieged whole and Scars of Mirrodin's next 50** (batch 199, the newest-first walk,
   2026-10-26): no feature built; a divided amount now survives a decision mid-resolution (Kuldotha
   Flamefiend), and Ashmouth Hound and Inferno Elemental trigger when blocked too. 82 of 104

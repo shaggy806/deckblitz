@@ -502,8 +502,7 @@
   {
    "name": "Sacellum Godspeaker",
    "needs": [
-    "cost:reveal-any-number-from-hand",
-    "amount:cards-revealed-this-way"
+    "effect:reveal-from-hand-in-mana-ability"
    ],
    "why": "a mana ability that reveals any number of creature cards with power 5 or greater from hand and counts them"
   },
