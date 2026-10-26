@@ -599,6 +599,7 @@ import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSpiritBonds from "../pool/spirit-bonds.js";
 import _poolSpittingImage from "../pool/spitting-image.js";
+import _poolSplicersSkill from "../pool/splicers-skill.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -1336,6 +1337,7 @@ const shard: CardShard = {
     _poolSpirePatrol,
     _poolSpiritBonds,
     _poolSpittingImage,
+    _poolSplicersSkill,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,

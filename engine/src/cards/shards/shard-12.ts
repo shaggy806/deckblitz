@@ -201,6 +201,7 @@ import _poolEpochrasite from "../pool/epochrasite.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
+import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
@@ -928,6 +929,7 @@ const shard: CardShard = {
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
+    _poolEverdream,
     _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,

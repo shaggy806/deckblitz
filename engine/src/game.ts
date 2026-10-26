@@ -1643,7 +1643,9 @@ export class Game {
         this.webSlingingReturnChoice = action.webSlingingReturn;
         this.phyrexianLifeChoice = action.phyrexianLife;
         try {
-          this.withWaterbendChoice(action.card, action.waterbend, () =>
+          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? [], action.overload === true);
+          if (spliceWhy !== null) throw new Error(spliceWhy);
+          this.withSplice(action.card, action.face ?? 0, action.splice, () => this.withWaterbendChoice(action.card, action.waterbend, () =>
             this.castSpell(
               action.player,
               action.card,
@@ -1668,7 +1670,7 @@ export class Game {
               action.division,
               action.delve,
             ),
-          );
+          ));
         } finally {
           this.sneakReturnChoice = undefined;
           this.webSlingingReturnChoice = undefined;
@@ -1859,7 +1861,11 @@ export class Game {
             return "web-slinging returns a tapped creature you control";
           }
         }
-        return (
+        {
+          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? [], action.overload === true);
+          if (spliceWhy !== null) return spliceWhy;
+        }
+        return this.withSplice(action.card, action.face ?? 0, action.splice, () =>
           this.withWaterbendChoice(action.card, action.waterbend, () =>
             this.whyCannotCastSpell(
               action.player,
@@ -1885,7 +1891,7 @@ export class Game {
               action.delve,
               action.targets,
             ),
-          ) ?? this.whyCastTargetsInvalid(action)
+          ) ?? this.whyCastTargetsInvalid(action),
         );
       case "activate-ability": {
         const why = this.withWaterbendChoice(action.source, action.waterbend, () =>
@@ -2950,6 +2956,8 @@ export class Game {
       kickCount?: number;
       /** A harmonize variant's creature to tap (rule 702.180a). */
       harmonizeTap?: ObjectId;
+      /** A splice variant's cards spliced onto it (rule 702.47). */
+      splice?: readonly ObjectId[];
     }[] = [{ kicked: false, overload: false, free: false }];
     // Multikicker (rule 702.33c — Everflowing Chalice): one variant per
     // number of times, up to as many as the player's mana could pay for at
@@ -3077,10 +3085,21 @@ export class Game {
         variants.push(v, ...creatures.map((harmonizeTap) => ({ ...v, harmonizeTap })));
       }
     }
-    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, costOption, prototype, offspring, evoke, harmonizeTap } of variants) {
+    // Splice (rule 702.47a): every way to cast it may also splice any set
+    // of the cards in hand that could go onto it — an additional cost, so
+    // each set is its own variant on each that isn't overloaded.
+    const spliceCards = via === "face-down" ? [] : this.spliceCandidates(player, card, face ?? 0).slice(0, Game.MAX_SPLICE_OFFERED);
+    if (spliceCards.length > 0) {
+      const sets: ObjectId[][] = [];
+      for (let mask = 1; mask < 1 << spliceCards.length; mask += 1) {
+        sets.push(spliceCards.filter((_id, i) => (mask & (1 << i)) !== 0));
+      }
+      variants.push(...variants.filter((v) => !v.overload).flatMap((v) => sets.map((splice) => ({ ...v, splice }))));
+    }
+    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, costOption, prototype, offspring, evoke, harmonizeTap, splice } of variants) {
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
-      const kickKey = `${free}|${altCost}|${costOption}|${prototype}|${offspring}|${evoke}`;
+      const kickKey = `${free}|${altCost}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}`;
       if (kickCount !== undefined && kickCount > 1 && kickFailed.has(kickKey)) continue;
       const offeredBefore = out.length;
       // A prototyped variant is worked out as the prototyped spell it is: its
@@ -3090,6 +3109,8 @@ export class Game {
       const undoHarmonize = via === "harmonize" ? this.enterHarmonizeTap(harmonizeTap) : () => {};
       // A kicked variant's own reduction (a bargained Ice Out's {1}).
       const undoKickedReduction = this.enterKickedReduction(card, def, kicked);
+      // A splice variant is priced and targeted with its spliced cards'.
+      const undoSplice = this.enterSplice(card, face ?? 0, splice);
       try {
       const printedOrPrototype =
         prototype === true && def.prototype !== null && costString === def.manaCost ? def.prototype.cost : costString;
@@ -3488,6 +3509,14 @@ export class Game {
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
           : {}),
+        ...(splice !== undefined
+          ? {
+              splice: splice.map((object) => {
+                const name = printedCardName(this.state.objects[object]);
+                return { object, cardName: name, cost: this.registry.get(name).splice?.cost ?? "" };
+              }),
+            }
+          : {}),
         ...(overload && def.overload !== null
           ? {
               overload: true,
@@ -3739,6 +3768,7 @@ export class Game {
         }
       }
       } finally {
+        undoSplice();
         undoPrototype();
         undoHarmonize();
         undoKickedReduction();
@@ -4089,6 +4119,9 @@ export class Game {
    * synchronous dispatch. No human game gets near the cap.
    */
   static readonly MAX_EFFECT_INSTANCES = 1000;
+  /** The most splice cards in one hand offered onto one spell (rule 702.47):
+   * every set of them is its own variant, so 2^N of them. */
+  static readonly MAX_SPLICE_OFFERED = 4;
 
   /** What an airbended card is cast for "rather than paying its mana cost"
    * (rule 701.65a). */
@@ -10821,10 +10854,13 @@ export class Game {
     const spree = modes.map((i) => def.castModal?.modes[i]?.spreeCost ?? "").join("");
     // So is "as an additional cost to cast this spell, waterbend {5}" (rule
     // 701.67a): its mana is paid on top, some of it maybe by tapping.
+    // Splice (rule 702.47a): each spliced card's splice cost is an
+    // additional cost, added to whatever is paid the same way.
     const escalate =
       (escalateCost === undefined || extraModes <= 0 ? "" : escalateCost.repeat(extraModes)) +
       spree +
-      Game.waterbendCostString(def);
+      Game.waterbendCostString(def) +
+      (this.activeSplice?.card === cardId ? this.activeSplice.cost : "");
     // A chosen additional-cost branch that is paid in mana (Redirect
     // Lightning's "or pay {2}") concatenates the same way kicker does, and
     // for the same reason — an additional cost adds to what's being paid,
@@ -10945,6 +10981,11 @@ export class Game {
     // Overload (rule 702.126a): "you can't choose targets for it". Cleave
     // (702.148a) chooses the targets of its rewritten text instead.
     if (overload) return def.overload?.targets ?? [];
+    // Splice (rule 702.47d): the spliced cards' targets after the spell's own.
+    const splice = this.activeSplice;
+    if (splice !== null && splice.spellName === def.name && def.castModal === null && !def.fuse) {
+      return [...(kicked && def.kicker?.targets !== undefined ? def.kicker.targets : def.targets), ...splice.specs];
+    }
     if (kicked && def.kicker?.targets !== undefined) return def.kicker.targets;
     // A fused split spell (rule 702.102b): the left half's targets, then the
     // right half's.
@@ -12296,6 +12337,84 @@ export class Game {
   /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
    * read as its cost is paid; unset otherwise. */
   private sneakReturnChoice: ObjectId | undefined = undefined;
+  /** The cards spliced onto the spell being cast or priced (rule 702.47):
+   * `castCostString` adds their splice costs and `effectiveTargetSpecs`
+   * their targets while it's set — see `withSplice`. */
+  private activeSplice: {
+    readonly card: ObjectId;
+    readonly spellName: string;
+    readonly cost: string;
+    readonly specs: readonly TargetSpec[];
+    readonly names: readonly string[];
+    readonly objects: readonly ObjectId[];
+  } | null = null;
+
+  /** Whether `def` is a spell that `spliceCard`'s splice can go onto
+   * (rule 702.47a): an Arcane spell, or an instant or sorcery spell. Only
+   * a spell whose text is one `effect` — not a modal, fused or custom one,
+   * which have no place to add the spliced text yet. */
+  private spliceFits(spell: CardDefinition, spliceCard: CardDefinition): boolean {
+    if (spliceCard.splice === null) return false;
+    if (spell.castModal !== null || spell.fuse || spell.resolve !== null || spell.effect === null || spell.divided !== null) return false;
+    if (!spell.types.includes("instant") && !spell.types.includes("sorcery")) return false;
+    return spliceCard.splice.onto === "instant-or-sorcery" || spell.subtypes.includes("Arcane");
+  }
+
+  /** The cards in `player`'s hand that could be spliced onto `card` cast as
+   * face `face` (rule 702.47a): not the card itself (it's on the stack as
+   * the spell — the ruling), one per card. */
+  private spliceCandidates(player: PlayerId, card: ObjectId, face: number): ObjectId[] {
+    const hand = this.state.zones.perPlayer[player]?.hand ?? [];
+    if (hand.length === 0) return [];
+    const spell = this.faceDef(card, face);
+    return hand.filter((id) => {
+      if (id === card) return false;
+      const object = this.state.objects[id];
+      if (object === undefined || object.faceDown !== undefined) return false;
+      return this.spliceFits(spell, this.registry.get(printedCardName(object)));
+    });
+  }
+
+  /** Why `splice` can't be spliced onto `card` (rule 702.47), or null. */
+  private whyCannotSplice(player: PlayerId, card: ObjectId, face: number, splice: readonly ObjectId[], overload: boolean): string | null {
+    if (splice.length === 0) return null;
+    if (overload) return "splice isn't offered with an overloaded or alternative-text cast";
+    if (new Set(splice).size !== splice.length) return "each card can be spliced onto a spell only once (rule 702.47b)";
+    const candidates = this.spliceCandidates(player, card, face);
+    for (const id of splice) {
+      if (!candidates.includes(id)) return "that card can't be spliced onto this spell (rule 702.47a)";
+    }
+    return null;
+  }
+
+  /** Runs `fn` with `splice` spliced onto `card` (see `activeSplice`). */
+  private withSplice<T>(card: ObjectId, face: number, splice: readonly ObjectId[] | undefined, fn: () => T): T {
+    const restore = this.enterSplice(card, face, splice);
+    try {
+      return fn();
+    } finally {
+      restore();
+    }
+  }
+
+  /** Sets `activeSplice` for `splice` spliced onto `card`; returns what
+   * puts it back. Nothing for no splice. */
+  private enterSplice(card: ObjectId, face: number, splice: readonly ObjectId[] | undefined): () => void {
+    if (splice === undefined || splice.length === 0) return () => {};
+    const before = this.activeSplice;
+    const defs = splice.map((id) => this.registry.get(printedCardName(this.state.objects[id])));
+    this.activeSplice = {
+      card,
+      spellName: this.faceDef(card, face).name,
+      cost: defs.map((d) => d.splice?.cost ?? "").join(""),
+      specs: defs.flatMap((d) => d.targets),
+      names: defs.map((d) => d.name),
+      objects: [...splice],
+    };
+    return () => {
+      this.activeSplice = before;
+    };
+  }
   /** The `phyrexianLife` of the `cast-spell` or `activate-ability` being
    * dispatched (rule 107.4f), read as its cost is paid; unset otherwise. */
   private phyrexianLifeChoice: number | undefined = undefined;
@@ -12999,6 +13118,12 @@ export class Game {
       if (def.kicker?.multi === true) object.timesKicked = kicked === true ? 1 : kicked;
     }
     if (offspring) object.offspringGrantPaid = true;
+    // Splice (rule 702.47a): the spliced cards are revealed and stay in hand;
+    // the spell has their text until it leaves the stack (702.47e).
+    if (this.activeSplice?.card === cardId) {
+      object.spliced = [...this.activeSplice.names];
+      this.revealCards(player, this.activeSplice.objects, "hand");
+    }
     if (evoke !== null) object.evokePaid = true;
     if (flashSacrificeOwed) object.flashSacrificeOwed = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
@@ -17499,10 +17624,25 @@ export class Game {
       readonly kicked?: boolean;
       readonly overloaded?: boolean;
       readonly xValue?: number | null;
+      readonly spliced?: readonly string[];
     },
   ): readonly TargetSpec[] {
     const def = this.registry.get(cardName);
     const chosenModes = def.castModal !== null ? cast.chosenModes : undefined;
+    // Splice (rule 702.47d): the spliced cards' targets after the spell's own.
+    if (cast.spliced !== undefined && cast.spliced.length > 0 && chosenModes === undefined) {
+      // Its own specs alone: the cast that spliced them may still be under way.
+      const during = this.activeSplice;
+      this.activeSplice = null;
+      try {
+        return [
+          ...specsAtX(this.effectiveTargetSpecs(def, undefined, cast.kicked === true, cast.overloaded === true), cast.xValue ?? 0),
+          ...cast.spliced.flatMap((name) => this.registry.get(name).targets),
+        ];
+      } finally {
+        this.activeSplice = during;
+      }
+    }
     return chosenModes !== undefined
       ? chosenModes.flatMap((mi) => def.castModal?.modes[mi]?.targets ?? [])
       : specsAtX(
@@ -17642,12 +17782,32 @@ export class Game {
       }
       // A fused split spell (rule 702.102d) follows the left half's
       // instructions, then the right half's — each half as a mode is.
-      const parts: readonly ({ readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec } | undefined)[] | null =
+      // A spell with cards spliced onto it (rule 702.47b) follows its own
+      // instructions, then each spliced card's, in order, each with its own
+      // slice of the targets — its own slice whatever is left before the
+      // spliced cards' (an "any number" group of its own included).
+      const spliced = object.spliced !== undefined && object.spliced.length > 0 && chosenModes === undefined && !def.fuse
+        ? object.spliced.map((name) => this.registry.get(name))
+        : null;
+      const mainEffect =
+        object.overloaded === true
+          ? (def.overload?.effect ?? def.effect)
+          : object.kicked === true
+            ? (def.kicker?.effect ?? def.effect)
+            : def.effect;
+      const parts: readonly ({ readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec; readonly count?: number } | undefined)[] | null =
         chosenModes !== undefined && def.castModal !== null
           ? chosenModes.map((mi) => def.castModal?.modes[mi])
           : def.fuse
             ? this.fusedHalves(def).map((half) => (half.effect === null ? undefined : { targets: half.targets, effect: half.effect }))
-            : null;
+            : spliced !== null
+              ? [
+                  mainEffect === null
+                    ? undefined
+                    : { effect: mainEffect, count: targets.length - spliced.reduce((n, d) => n + d.targets.length, 0) },
+                  ...spliced.map((d) => (d.effect === null ? undefined : { targets: d.targets, effect: d.effect })),
+                ]
+              : null;
       if (parts !== null) {
         // A targeted modal spell (rule 700.2 — ROADMAP Phase 11 EG-2): each
         // chosen mode applies with its own slice of `targets`, a target gone
@@ -17660,7 +17820,7 @@ export class Game {
           // An "any number of target …" group is always the last slot of its
           // list, one flat target per member, so the last part's slice runs
           // to the end of the list.
-          const count = k === parts.length - 1 ? targets.length - offset : (mode?.targets?.length ?? 0);
+          const count = mode?.count ?? (k === parts.length - 1 ? targets.length - offset : (mode?.targets?.length ?? 0));
           const slice = targets.slice(offset, offset + count);
           const zoneSlice = (object.targetZones ?? []).slice(offset, offset + count);
           const illegal = legality.illegal.filter((i) => i >= offset && i < offset + count).map((i) => i - offset);
@@ -26885,6 +27045,7 @@ export class Game {
       ...(object.division !== undefined ? { division: [...object.division] } : {}),
       ...(object.kicked === true ? { kicked: true } : {}),
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
+      ...(object.spliced !== undefined ? { spliced: [...object.spliced] } : {}),
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.bestowed === true ? { bestowed: true } : {}),
       ...(object.evokePaid === true ? { evokePaid: true } : {}),
@@ -26955,6 +27116,8 @@ export class Game {
       ...(spell.division !== undefined ? { division: [...spell.division] } : {}),
       ...(spell.kicked === true ? { kicked: true } : {}),
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
+      // A copy has what was spliced onto the original (the splice rulings).
+      ...(spell.spliced !== undefined ? { spliced: [...spell.spliced] } : {}),
       ...(spell.overloaded === true ? { overloaded: true } : {}),
       // A copy of a bestowed Aura spell is one too (rule 702.103c).
       ...(spell.bestowed === true ? { bestowed: true } : {}),
@@ -37194,6 +37357,7 @@ export class Game {
     object.division = undefined;
     object.kicked = undefined;
     object.timesKicked = undefined;
+    object.spliced = undefined;
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;
     object.evokePaid = undefined;

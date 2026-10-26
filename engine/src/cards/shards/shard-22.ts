@@ -291,6 +291,7 @@ import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
+import _poolIntoTheFray from "../pool/into-the-fray.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolInexorableTide,
     _poolInfestedWerewolf,
     _poolInspireAwe,
+    _poolIntoTheFray,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolIntrusivePackbeast,

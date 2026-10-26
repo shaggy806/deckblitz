@@ -157,6 +157,7 @@ import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
+import _poolDesperateRitual from "../pool/desperate-ritual.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
+    _poolDesperateRitual,
     _poolDiscipleOfPerdition,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,

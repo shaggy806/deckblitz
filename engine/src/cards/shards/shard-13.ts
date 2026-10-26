@@ -569,6 +569,7 @@ import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSpiritualVisit from "../pool/spiritual-visit.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolSpringjawTrap from "../pool/springjaw-trap.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSpiritualVisit,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
     _poolSpringjawTrap,

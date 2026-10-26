@@ -400,6 +400,12 @@ export type Action =
       /** With `kicked`, for a multikicker card (rule 702.33c): how many times
        * the kicker cost is paid. 1 when absent. Echoed from the offer. */
       readonly kickCount?: number;
+      /** Cards in the caster's hand spliced onto this spell (rule 702.47):
+       * revealed, their splice costs paid as additional costs, their text
+       * added in this order after the spell's own. Echoed from the offer's
+       * `splice`; `targets` then hold the spell's own targets followed by
+       * each spliced card's. */
+      readonly splice?: readonly ObjectId[];
       /** Pay a granted offspring cost too (`grantsOffspringToSpells` — Zinnia,
        * Valley's Voice): its own additional cost beside any kicker (rule
        * 702.175b). Echoed from the offer's `offspring`. */
@@ -900,6 +906,11 @@ export type LegalAction =
     }
   | {
       readonly kind: "cast-spell";
+      /** A splice variant (rule 702.47): the cards in hand spliced onto it,
+       * in order, each with its splice cost — echoed back as the cast's
+       * `splice` (their ids). `targetSpecs` include their targets after the
+       * spell's own. */
+      readonly splice?: readonly { readonly object: ObjectId; readonly cardName: string; readonly cost: string }[];
       /** How many Phyrexian pips its cost has that the player could pay
        * with 2 life each instead (rule 107.4f) — a driver may send
        * `phyrexianLife` up to this. Absent when there are none or the player

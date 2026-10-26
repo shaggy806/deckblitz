@@ -4856,6 +4856,7 @@ import _poolDesperateLunge from "./pool/desperate-lunge.js";
 import _poolDesperateMeasures from "./pool/desperate-measures.js";
 import _poolDesperateParry from "./pool/desperate-parry.js";
 import _poolDesperateRavings from "./pool/desperate-ravings.js";
+import _poolDesperateRitual from "./pool/desperate-ritual.js";
 import _poolDesperateSentry from "./pool/desperate-sentry.js";
 import _poolDesperateStand from "./pool/desperate-stand.js";
 import _poolDespise from "./pool/despise.js";
@@ -6233,10 +6234,12 @@ import _poolEvendoWakingHaven from "./pool/evendo-waking-haven.js";
 import _poolEverWatchingThreshold from "./pool/ever-watching-threshold.js";
 import _poolEverbarkShaman from "./pool/everbark-shaman.js";
 import _poolEverdawnChampion from "./pool/everdawn-champion.js";
+import _poolEverdream from "./pool/everdream.js";
 import _poolEverethViceroyOfPlunder from "./pool/evereth-viceroy-of-plunder.js";
 import _poolEverflameEidolon from "./pool/everflame-eidolon.js";
 import _poolEverflowingChalice from "./pool/everflowing-chalice.js";
 import _poolEverglades from "./pool/everglades.js";
+import _poolEvermind from "./pool/evermind.js";
 import _poolEvernightShade from "./pool/evernight-shade.js";
 import _poolEverquillPhoenix from "./pool/everquill-phoenix.js";
 import _poolEvershrikesGift from "./pool/evershrikes-gift.js";
@@ -8268,6 +8271,7 @@ import _poolGorionWiseMentor from "./pool/gorion-wise-mentor.js";
 import _poolGormaTheGullet from "./pool/gorma-the-gullet.js";
 import _poolGoroGoroAndSatoru from "./pool/goro-goro-and-satoru.js";
 import _poolGoroGoroDiscipleOfRyusei from "./pool/goro-goro-disciple-of-ryusei.js";
+import _poolGoryosVengeance from "./pool/goryos-vengeance.js";
 import _poolGossipsTalent from "./pool/gossips-talent.js";
 import _poolGostaDirk from "./pool/gosta-dirk.js";
 import _poolGothmogMorgulLieutenant from "./pool/gothmog-morgul-lieutenant.js";
@@ -9930,6 +9934,7 @@ import _poolIntimidatorInitiate from "./pool/intimidator-initiate.js";
 import _poolIntoTheFaeCourt from "./pool/into-the-fae-court.js";
 import _poolIntoTheFire from "./pool/into-the-fire.js";
 import _poolIntoTheFloodMaw from "./pool/into-the-flood-maw.js";
+import _poolIntoTheFray from "./pool/into-the-fray.js";
 import _poolIntoTheMawOfHell from "./pool/into-the-maw-of-hell.js";
 import _poolIntoTheNight from "./pool/into-the-night.js";
 import _poolIntoTheNorth from "./pool/into-the-north.js";
@@ -18413,6 +18418,7 @@ import _poolSpiritcallEnthusiast from "./pool/spiritcall-enthusiast.js";
 import _poolSpiritedCompanion from "./pool/spirited-companion.js";
 import _poolSpiritualGuardian from "./pool/spiritual-guardian.js";
 import _poolSpiritualSanctuary from "./pool/spiritual-sanctuary.js";
+import _poolSpiritualVisit from "./pool/spiritual-visit.js";
 import _poolSpitFlame from "./pool/spit-flame.js";
 import _poolSpiteOfMogis from "./pool/spite-of-mogis.js";
 import _poolSpitebellows from "./pool/spitebellows.js";
@@ -18446,6 +18452,7 @@ import _poolSplatterThug from "./pool/splatter-thug.js";
 import _poolSplendidAgony from "./pool/splendid-agony.js";
 import _poolSplendidReclamation from "./pool/splendid-reclamation.js";
 import _poolSplendorMare from "./pool/splendor-mare.js";
+import _poolSplicersSkill from "./pool/splicers-skill.js";
 import _poolSplinterHamatoYoshi from "./pool/splinter-hamato-yoshi.js";
 import _poolSplinterRadicalRat from "./pool/splinter-radical-rat.js";
 import _poolSplinterTwin from "./pool/splinter-twin.js";
@@ -28414,6 +28421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDesperateMeasures,
   _poolDesperateParry,
   _poolDesperateRavings,
+  _poolDesperateRitual,
   _poolDesperateSentry,
   _poolDesperateStand,
   _poolDespise,
@@ -29791,10 +29799,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEverWatchingThreshold,
   _poolEverbarkShaman,
   _poolEverdawnChampion,
+  _poolEverdream,
   _poolEverethViceroyOfPlunder,
   _poolEverflameEidolon,
   _poolEverflowingChalice,
   _poolEverglades,
+  _poolEvermind,
   _poolEvernightShade,
   _poolEverquillPhoenix,
   _poolEvershrikesGift,
@@ -31826,6 +31836,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGormaTheGullet,
   _poolGoroGoroAndSatoru,
   _poolGoroGoroDiscipleOfRyusei,
+  _poolGoryosVengeance,
   _poolGossipsTalent,
   _poolGostaDirk,
   _poolGothmogMorgulLieutenant,
@@ -33488,6 +33499,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIntoTheFaeCourt,
   _poolIntoTheFire,
   _poolIntoTheFloodMaw,
+  _poolIntoTheFray,
   _poolIntoTheMawOfHell,
   _poolIntoTheNight,
   _poolIntoTheNorth,
@@ -41971,6 +41983,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpiritedCompanion,
   _poolSpiritualGuardian,
   _poolSpiritualSanctuary,
+  _poolSpiritualVisit,
   _poolSpitFlame,
   _poolSpiteOfMogis,
   _poolSpitebellows,
@@ -42004,6 +42017,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSplendidAgony,
   _poolSplendidReclamation,
   _poolSplendorMare,
+  _poolSplicersSkill,
   _poolSplinterHamatoYoshi,
   _poolSplinterRadicalRat,
   _poolSplinterTwin,
@@ -51985,6 +51999,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/desperate-measures": _poolDesperateMeasures,
   "pool/desperate-parry": _poolDesperateParry,
   "pool/desperate-ravings": _poolDesperateRavings,
+  "pool/desperate-ritual": _poolDesperateRitual,
   "pool/desperate-sentry": _poolDesperateSentry,
   "pool/desperate-stand": _poolDesperateStand,
   "pool/despise": _poolDespise,
@@ -53362,10 +53377,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ever-watching-threshold": _poolEverWatchingThreshold,
   "pool/everbark-shaman": _poolEverbarkShaman,
   "pool/everdawn-champion": _poolEverdawnChampion,
+  "pool/everdream": _poolEverdream,
   "pool/evereth-viceroy-of-plunder": _poolEverethViceroyOfPlunder,
   "pool/everflame-eidolon": _poolEverflameEidolon,
   "pool/everflowing-chalice": _poolEverflowingChalice,
   "pool/everglades": _poolEverglades,
+  "pool/evermind": _poolEvermind,
   "pool/evernight-shade": _poolEvernightShade,
   "pool/everquill-phoenix": _poolEverquillPhoenix,
   "pool/evershrikes-gift": _poolEvershrikesGift,
@@ -55397,6 +55414,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gorma-the-gullet": _poolGormaTheGullet,
   "pool/goro-goro-and-satoru": _poolGoroGoroAndSatoru,
   "pool/goro-goro-disciple-of-ryusei": _poolGoroGoroDiscipleOfRyusei,
+  "pool/goryos-vengeance": _poolGoryosVengeance,
   "pool/gossips-talent": _poolGossipsTalent,
   "pool/gosta-dirk": _poolGostaDirk,
   "pool/gothmog-morgul-lieutenant": _poolGothmogMorgulLieutenant,
@@ -57059,6 +57077,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/into-the-fae-court": _poolIntoTheFaeCourt,
   "pool/into-the-fire": _poolIntoTheFire,
   "pool/into-the-flood-maw": _poolIntoTheFloodMaw,
+  "pool/into-the-fray": _poolIntoTheFray,
   "pool/into-the-maw-of-hell": _poolIntoTheMawOfHell,
   "pool/into-the-night": _poolIntoTheNight,
   "pool/into-the-north": _poolIntoTheNorth,
@@ -65542,6 +65561,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spirited-companion": _poolSpiritedCompanion,
   "pool/spiritual-guardian": _poolSpiritualGuardian,
   "pool/spiritual-sanctuary": _poolSpiritualSanctuary,
+  "pool/spiritual-visit": _poolSpiritualVisit,
   "pool/spit-flame": _poolSpitFlame,
   "pool/spite-of-mogis": _poolSpiteOfMogis,
   "pool/spitebellows": _poolSpitebellows,
@@ -65575,6 +65595,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/splendid-agony": _poolSplendidAgony,
   "pool/splendid-reclamation": _poolSplendidReclamation,
   "pool/splendor-mare": _poolSplendorMare,
+  "pool/splicers-skill": _poolSplicersSkill,
   "pool/splinter-hamato-yoshi": _poolSplinterHamatoYoshi,
   "pool/splinter-radical-rat": _poolSplinterRadicalRat,
   "pool/splinter-twin": _poolSplinterTwin,

@@ -198,6 +198,7 @@ import _poolErraticPortal from "../pool/erratic-portal.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
+import _poolEvermind from "../pool/evermind.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditedInheritance from "../pool/expedited-inheritance.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,
+    _poolEvermind,
     _poolEvershrikesGift,
     _poolExorcise,
     _poolExpeditedInheritance,

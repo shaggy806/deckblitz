@@ -714,7 +714,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(rioter.activated[0].effect).toMatchObject({ kind: "exile", linked: true });
     expect(face("{2}: Exile target card from a graveyard.").activated[0].effect.linked).toBeUndefined();
     // A keyword the engine doesn't run leaves the line to a person.
-    expect(face("Splice onto Arcane {1}{R}").complete).toBe(false);
+    expect(face("Splice onto Arcane—Exile four cards from your graveyard.").complete).toBe(false);
   });
 
   it("the intervening-ifs it knows become the ability's condition; others stay a TODO", () => {
@@ -1710,6 +1710,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(spell.kicker).toEqual({ cost: "{3}", keyword: "buyback" });
     expect(spell.complete).toBe(true);
+  });
+
+  it("splice onto Arcane / instant or sorcery (rule 702.47) with a mana cost", () => {
+    const visit = face(
+      "Create a 1/1 colorless Spirit creature token.\nSplice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)",
+      "Instant — Arcane",
+    );
+    expect(visit.splice).toEqual({ onto: "arcane", cost: "{W}" });
+    const everdream = face(
+      "Draw a card.\nSplice onto instant or sorcery {2}{U} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)",
+      "Instant",
+    );
+    expect(everdream.splice).toEqual({ onto: "instant-or-sorcery", cost: "{2}{U}" });
+    expect(everdream.complete).toBe(true);
+    // A non-mana splice cost stays a person's.
+    expect(face("Draw a card.\nSplice onto Arcane—Exile four cards from your graveyard.", "Instant — Arcane").complete).toBe(false);
   });
 
   it("buyback with a non-mana cost: kicker.also", () => {
