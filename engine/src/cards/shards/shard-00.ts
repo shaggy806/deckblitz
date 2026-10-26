@@ -63,6 +63,7 @@ import _poolBlackCat from "../pool/black-cat.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
+import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
@@ -377,6 +378,7 @@ import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
+import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
@@ -423,6 +425,7 @@ import _poolOverwhelmingIntellect from "../pool/overwhelming-intellect.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPainSeer from "../pool/pain-seer.js";
+import _poolPainsmith from "../pool/painsmith.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
@@ -822,6 +825,7 @@ const shard: CardShard = {
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
     _poolBladewingTheRisen,
+    _poolBleakCovenVampires,
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodcrazedNeonate,
@@ -1136,6 +1140,7 @@ const shard: CardShard = {
     _poolMjolnirsMight,
     _poolMoatPiranhas,
     _poolMoltenRavager,
+    _poolMoltenTailMasticore,
     _poolMongooseLizard,
     _poolMonstrousGrowth,
     _poolMoonCircuitHacker,
@@ -1182,6 +1187,7 @@ const shard: CardShard = {
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
     _poolPainSeer,
+    _poolPainsmith,
     _poolPakoArcaneRetriever,
     _poolParadiseDruid,
     _poolParadoxGardens,

@@ -519,6 +519,7 @@ import _poolScanTheClouds from "../pool/scan-the-clouds.js";
 import _poolScholarOfStars from "../pool/scholar-of-stars.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
+import _poolScreechingSilcaw from "../pool/screeching-silcaw.js";
 import _poolScroungedScythe from "../pool/scrounged-scythe.js";
 import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
@@ -1257,6 +1258,7 @@ const shard: CardShard = {
     _poolScholarOfStars,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
+    _poolScreechingSilcaw,
     _poolScroungedScythe,
     _poolScurridColony,
     _poolScuzzbackScrapper,

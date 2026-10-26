@@ -4025,7 +4025,7 @@ clause (section 9):
   Dawn's "can't attack or block unless there are seven or more cards in
   exile" is a `restrictions: ["cant-attack", "cant-block"]` static gated by
   `{ kind: "not", of: { kind: "cards-in-exile", atLeast: 7 } }`.
-- `{ kind: "metalcraft" }` — 3+ artifacts.
+- `{ kind: "metalcraft" }` — 3+ artifacts, the source counted when it is one (Chrome Steed).
 - `{ kind: "opponent-lost-life-this-turn" }` — Theater of Horrors. Reads the
   per-player `lostLifeThisTurn` flag, set in `changeLife` so it catches damage
   and drain alike.

@@ -357,6 +357,7 @@ import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLichenthrope from "../pool/lichenthrope.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
+import _poolLifesmith from "../pool/lifesmith.js";
 import _poolLightOfDay from "../pool/light-of-day.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
 import _poolLionSash from "../pool/lion-sash.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolLeoninOfTheLostPride,
     _poolLichenthrope,
     _poolLiesaShroudOfDusk,
+    _poolLifesmith,
     _poolLightOfDay,
     _poolLinvalaKeeperOfSilence,
     _poolLionSash,

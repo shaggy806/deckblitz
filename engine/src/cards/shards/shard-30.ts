@@ -94,6 +94,7 @@ import _poolCallowJushi from "../pool/callow-jushi.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
+import _poolCarapaceForger from "../pool/carapace-forger.js";
 import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
@@ -210,6 +211,7 @@ import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExperimentOne from "../pool/experiment-one.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
+import _poolEzurisBrigade from "../pool/ezuris-brigade.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
@@ -844,6 +846,7 @@ const shard: CardShard = {
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,
+    _poolCarapaceForger,
     _poolCastOut,
     _poolCaveSense,
     _poolCelestialForce,
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolExperimentOne,
     _poolExplorersCache,
     _poolExuberantFuseling,
+    _poolEzurisBrigade,
     _poolFallowEarth,
     _poolFalseFloor,
     _poolFangGuardian,

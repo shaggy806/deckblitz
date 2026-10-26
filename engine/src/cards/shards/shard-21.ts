@@ -396,6 +396,7 @@ import _poolMishrasDomination from "../pool/mishras-domination.js";
 import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
 import _poolMob from "../pool/mob.js";
 import _poolMoldAdder from "../pool/mold-adder.js";
+import _poolMolderBeast from "../pool/molder-beast.js";
 import _poolMonaLisaScienceGeek from "../pool/mona-lisa-science-geek.js";
 import _poolMondronenShaman from "../pool/mondronen-shaman.js";
 import _poolMonoistSentry from "../pool/monoist-sentry.js";
@@ -533,6 +534,7 @@ import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
+import _poolShapeAnew from "../pool/shape-anew.js";
 import _poolShieldMate from "../pool/shield-mate.js";
 import _poolShieldSphere from "../pool/shield-sphere.js";
 import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
@@ -552,6 +554,7 @@ import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
 import _poolSmashToSmithereens from "../pool/smash-to-smithereens.js";
 import _poolSnappingSailback from "../pool/snapping-sailback.js";
+import _poolSnapsailGlider from "../pool/snapsail-glider.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
@@ -1126,6 +1129,7 @@ const shard: CardShard = {
     _poolMisthoofKirin,
     _poolMob,
     _poolMoldAdder,
+    _poolMolderBeast,
     _poolMonaLisaScienceGeek,
     _poolMondronenShaman,
     _poolMonoistSentry,
@@ -1263,6 +1267,7 @@ const shard: CardShard = {
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,
     _poolShamblingVent,
+    _poolShapeAnew,
     _poolShieldMate,
     _poolShieldSphere,
     _poolShigekiJukaiVisionary,
@@ -1282,6 +1287,7 @@ const shard: CardShard = {
     _poolSlumberingKeepguard,
     _poolSmashToSmithereens,
     _poolSnappingSailback,
+    _poolSnapsailGlider,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,
     _poolSongOfInspiration,
