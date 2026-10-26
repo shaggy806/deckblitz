@@ -101,6 +101,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Apocalypse Hydra, Invincible Hymn and 70 more: Gluttonous Slime and Magma Spray finished by the
   scaffolder, 78 by five `card-author` agents. CON is whole; 54 of Shards of Alara left. 29
   blocked (`B171.json`), the devour count (`amount:creatures-devoured`, 3) the most shared.
+- **Theros, the rest of the set, and Magic 2014, whole** (batch 170, the newest-first walk,
+  2026-10-26): no feature built. 79 of the 95 authored — Garruk, Caller of Beasts, Xathrid
+  Necromancer, Ring of Three Wishes, Banisher Priest, Imposing Sovereign, Pyromancer's Gauntlet,
+  the five Magus staffs, Steelform, Battle, Thorncaster and Groundshaker Sliver and 63 more: four
+  finished by the scaffolder, 75 by five `card-author` agents. THS and M14 are whole; 16 blocked
+  (`B170.json`), one or two each.
 - **Mirage, the rest of the set** (batch 169, the oldest-first walk, 2026-10-26; its first half
   was batch 166): no feature built. 67 of its last 110 authored by five `card-author` agents and the
   lead — Catacomb Dragon, Reign of Terror, Kaervek's Hex, Tidal Wave, Reign of Chaos, Mist Dragon,

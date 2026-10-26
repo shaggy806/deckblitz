@@ -215,6 +215,7 @@ import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
 import _poolFlameElemental from "../pool/flame-elemental.js";
+import _poolFlamespeakerAdept from "../pool/flamespeaker-adept.js";
 import _poolFlametongueYearling from "../pool/flametongue-yearling.js";
 import _poolFlamingFistOfficer from "../pool/flaming-fist-officer.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
@@ -249,6 +250,7 @@ import _poolGlowsporeShaman from "../pool/glowspore-shaman.js";
 import _poolGluttonousZombie from "../pool/gluttonous-zombie.js";
 import _poolGnarlrootPallbearer from "../pool/gnarlroot-pallbearer.js";
 import _poolGnatMiser from "../pool/gnat-miser.js";
+import _poolGoblinDiplomats from "../pool/goblin-diplomats.js";
 import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
 import _poolGoblinSettler from "../pool/goblin-settler.js";
 import _poolGodoBanditWarlord from "../pool/godo-bandit-warlord.js";
@@ -275,6 +277,7 @@ import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
+import _poolHauntedPlateMail from "../pool/haunted-plate-mail.js";
 import _poolHealingGrace from "../pool/healing-grace.js";
 import _poolHedgewitchsMask from "../pool/hedgewitchs-mask.js";
 import _poolHedronCrawler from "../pool/hedron-crawler.js";
@@ -529,6 +532,7 @@ import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
+import _poolSteelformSliver from "../pool/steelform-sliver.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
 import _poolStoneIdolGenerator from "../pool/stone-idol-generator.js";
@@ -878,6 +882,7 @@ const shard: CardShard = {
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
     _poolFlameElemental,
+    _poolFlamespeakerAdept,
     _poolFlametongueYearling,
     _poolFlamingFistOfficer,
     _poolFlawlessManeuver,
@@ -912,6 +917,7 @@ const shard: CardShard = {
     _poolGluttonousZombie,
     _poolGnarlrootPallbearer,
     _poolGnatMiser,
+    _poolGoblinDiplomats,
     _poolGoblinRoughrider,
     _poolGoblinSettler,
     _poolGodoBanditWarlord,
@@ -938,6 +944,7 @@ const shard: CardShard = {
     _poolHallwayHeckler,
     _poolHangarbackWalker,
     _poolHauntedMire,
+    _poolHauntedPlateMail,
     _poolHealingGrace,
     _poolHedgewitchsMask,
     _poolHedronCrawler,
@@ -1192,6 +1199,7 @@ const shard: CardShard = {
     _poolStatusStatue,
     _poolStealerOfSecrets,
     _poolSteamBlast,
+    _poolSteelformSliver,
     _poolStegronTheDinosaurMan,
     _poolStolenStarkTech,
     _poolStoneIdolGenerator,

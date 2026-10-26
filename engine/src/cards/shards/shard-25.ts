@@ -280,6 +280,7 @@ import _poolIllusoryWrappings from "../pool/illusory-wrappings.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
 import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
+import _poolImposingSovereign from "../pool/imposing-sovereign.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
 import _poolInfernoElemental from "../pool/inferno-elemental.js";
@@ -500,6 +501,7 @@ import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
+import _poolShipwreckSinger from "../pool/shipwreck-singer.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolSidarJabari from "../pool/sidar-jabari.js";
@@ -941,6 +943,7 @@ const shard: CardShard = {
     _poolIllvoiGaleblade,
     _poolImpendingFlux,
     _poolImplementsOfSacrifice,
+    _poolImposingSovereign,
     _poolIndomitableWill,
     _poolInfantryShield,
     _poolInfernoElemental,
@@ -1161,6 +1164,7 @@ const shard: CardShard = {
     _poolSharktocrab,
     _poolShepherdOfTheFlock,
     _poolShipwreckDowser,
+    _poolShipwreckSinger,
     _poolShireShirriff,
     _poolShivanDragon,
     _poolSidarJabari,

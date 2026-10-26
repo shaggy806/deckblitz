@@ -67,6 +67,7 @@ import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
+import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
@@ -492,6 +493,7 @@ import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
+import _poolStaunchHeartedWarrior from "../pool/staunch-hearted-warrior.js";
 import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
@@ -686,6 +688,7 @@ const shard: CardShard = {
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
     _poolCemeteryRecruitment,
+    _poolCentaurBattlemaster,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
@@ -1111,6 +1114,7 @@ const shard: CardShard = {
     _poolStarlitAngel,
     _poolStartledAwake,
     _poolStaunchCrewmate,
+    _poolStaunchHeartedWarrior,
     _poolSteamVents,
     _poolSteelcladSpirit,
     _poolSteelyResolve,

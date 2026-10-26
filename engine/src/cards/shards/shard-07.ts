@@ -51,6 +51,7 @@ import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
 import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
+import _poolBlightcaster from "../pool/blightcaster.js";
 import _poolBlightedFen from "../pool/blighted-fen.js";
 import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
 import _poolBlizzard from "../pool/blizzard.js";
@@ -63,6 +64,7 @@ import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBondsOfMortality from "../pool/bonds-of-mortality.js";
 import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
+import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
@@ -77,6 +79,7 @@ import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
 import _poolCatharsis from "../pool/catharsis.js";
+import _poolCavernLampad from "../pool/cavern-lampad.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChandrasRegulator from "../pool/chandras-regulator.js";
@@ -88,6 +91,7 @@ import _poolCheeringCrowd from "../pool/cheering-crowd.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
+import _poolChroniclerOfHeroes from "../pool/chronicler-of-heroes.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
 import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
@@ -742,6 +746,7 @@ const shard: CardShard = {
     _poolBladeBlizzardKitsune,
     _poolBlazingHellhound,
     _poolBlightKeeper,
+    _poolBlightcaster,
     _poolBlightedFen,
     _poolBlizzardBrawl,
     _poolBlizzard,
@@ -754,6 +759,7 @@ const shard: CardShard = {
     _poolBondsOfMortality,
     _poolBonePicker,
     _poolBoonOfBoseiju,
+    _poolBoulderfall,
     _poolBountyAgent,
     _poolBrilliantSpectrum,
     _poolBrinkOfDisaster,
@@ -768,6 +774,7 @@ const shard: CardShard = {
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
     _poolCatharsis,
+    _poolCavernLampad,
     _poolChandrasEmberling,
     _poolChandrasFiremaw,
     _poolChandrasRegulator,
@@ -779,6 +786,7 @@ const shard: CardShard = {
     _poolChildOfAlara,
     _poolChishiroTheShatteredBlade,
     _poolChitinGravestalker,
+    _poolChroniclerOfHeroes,
     _poolCircuitMender,
     _poolCirithUngolPatrol,
     _poolClericOfLifesBond,

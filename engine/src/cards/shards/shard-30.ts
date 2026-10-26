@@ -46,6 +46,7 @@ import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
+import _poolBattleSliver from "../pool/battle-sliver.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBearUmbra from "../pool/bear-umbra.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
@@ -204,6 +205,7 @@ import _poolFirefly from "../pool/firefly.js";
 import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
+import _poolFleshmadSteed from "../pool/fleshmad-steed.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
@@ -291,6 +293,7 @@ import _poolIcyBlast from "../pool/icy-blast.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIguanaParrot from "../pool/iguana-parrot.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
+import _poolIllTemperedCyclops from "../pool/ill-tempered-cyclops.js";
 import _poolImplementOfCombustion from "../pool/implement-of-combustion.js";
 import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
@@ -410,6 +413,7 @@ import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolNomadsAssembly from "../pool/nomads-assembly.js";
+import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
@@ -714,6 +718,7 @@ const shard: CardShard = {
     _poolBannerhideKrushok,
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
+    _poolBattleSliver,
     _poolBazaarTrader,
     _poolBearUmbra,
     _poolBeetleformMage,
@@ -872,6 +877,7 @@ const shard: CardShard = {
     _poolFitOfRage,
     _poolFleetFootedMonk,
     _poolFleetingReflection,
+    _poolFleshmadSteed,
     _poolFloodfarmVerge,
     _poolFlourishingFox,
     _poolFlurryOfWings,
@@ -959,6 +965,7 @@ const shard: CardShard = {
     _poolIfritWardenOfInferno,
     _poolIguanaParrot,
     _poolIlMhegPixie,
+    _poolIllTemperedCyclops,
     _poolImplementOfCombustion,
     _poolIncriminatingImpetus,
     _poolIngeniousSkaab,
@@ -1078,6 +1085,7 @@ const shard: CardShard = {
     _poolNishobaBrawler,
     _poolNobody,
     _poolNomadsAssembly,
+    _poolOathOfTheAncientWood,
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
     _poolOdiousTrow,

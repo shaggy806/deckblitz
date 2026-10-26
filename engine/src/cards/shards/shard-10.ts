@@ -496,6 +496,7 @@ import _poolSeeker from "../pool/seeker.js";
 import _poolSeismicStrike from "../pool/seismic-strike.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
+import _poolSetessanBattlePriest from "../pool/setessan-battle-priest.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
 import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
@@ -579,6 +580,7 @@ import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTemurWarShaman from "../pool/temur-war-shaman.js";
+import _poolTenaciousDead from "../pool/tenacious-dead.js";
 import _poolTendershootDryad from "../pool/tendershoot-dryad.js";
 import _poolTerritoryForge from "../pool/territory-forge.js";
 import _poolTheBloodskyMassacre from "../pool/the-bloodsky-massacre.js";
@@ -1184,6 +1186,7 @@ const shard: CardShard = {
     _poolSeismicStrike,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
+    _poolSetessanBattlePriest,
     _poolShadowfaxLordOfHorses,
     _poolShadowspear,
     _poolShamblingCieth,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
     _poolTemurWarShaman,
+    _poolTenaciousDead,
     _poolTendershootDryad,
     _poolTerritoryForge,
     _poolTheBloodskyMassacre,

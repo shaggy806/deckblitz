@@ -655,6 +655,7 @@ import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWitchsMark from "../pool/witchs-mark.js";
 import _poolWithstand from "../pool/withstand.js";
+import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWrangle from "../pool/wrangle.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolWirewoodHivemaster,
     _poolWitchsMark,
     _poolWithstand,
+    _poolWoodbornBehemoth,
     _poolWrangle,
     _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,

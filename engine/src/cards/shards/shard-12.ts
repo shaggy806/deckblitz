@@ -19,6 +19,7 @@ import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
 import _poolAnointedChorister from "../pool/anointed-chorister.js";
+import _poolAnthousaSetessanHero from "../pool/anthousa-setessan-hero.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
 import _poolAragornHornburgHero from "../pool/aragorn-hornburg-hero.js";
 import _poolArchonOfJustice from "../pool/archon-of-justice.js";
@@ -49,6 +50,7 @@ import _poolBarterInBlood from "../pool/barter-in-blood.js";
 import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattleBrawler from "../pool/battle-brawler.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
+import _poolBattlewiseHoplite from "../pool/battlewise-hoplite.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
 import _poolBeastsOfBogardan from "../pool/beasts-of-bogardan.js";
@@ -121,6 +123,7 @@ import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
+import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
 import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
@@ -181,6 +184,7 @@ import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
+import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
@@ -324,6 +328,7 @@ import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLilianasElite from "../pool/lilianas-elite.js";
+import _poolLilianasReaver from "../pool/lilianas-reaver.js";
 import _poolLilianasScorn from "../pool/lilianas-scorn.js";
 import _poolLivingTwister from "../pool/living-twister.js";
 import _poolLizardBlades from "../pool/lizard-blades.js";
@@ -688,6 +693,7 @@ const shard: CardShard = {
     _poolAncestralStatue,
     _poolAncientDen,
     _poolAnointedChorister,
+    _poolAnthousaSetessanHero,
     _poolAppliedBiomancy,
     _poolAragornHornburgHero,
     _poolArchonOfJustice,
@@ -718,6 +724,7 @@ const shard: CardShard = {
     _poolBasiliskGate,
     _poolBattleBrawler,
     _poolBattlegroundGeist,
+    _poolBattlewiseHoplite,
     _poolBayekOfSiwa,
     _poolBearerOfGlory,
     _poolBeastsOfBogardan,
@@ -790,6 +797,7 @@ const shard: CardShard = {
     _poolCrystalSlipper,
     _poolCunningEvasion,
     _poolCutOfTheProfits,
+    _poolCutthroatManeuver,
     _poolCyclopeanMummy,
     _poolDaringFiendbonder,
     _poolDarkmossBridge,
@@ -850,6 +858,7 @@ const shard: CardShard = {
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
+    _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
     _poolEverflameEidolon,
@@ -993,6 +1002,7 @@ const shard: CardShard = {
     _poolLifelace,
     _poolLightshieldParry,
     _poolLilianasElite,
+    _poolLilianasReaver,
     _poolLilianasScorn,
     _poolLivingTwister,
     _poolLizardBlades,

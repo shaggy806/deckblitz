@@ -42,6 +42,7 @@ import _poolAttentiveSunscribe from "../pool/attentive-sunscribe.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolAvatarOfTheResolute from "../pool/avatar-of-the-resolute.js";
+import _poolAwakenTheAncient from "../pool/awaken-the-ancient.js";
 import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
@@ -221,6 +222,7 @@ import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.j
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
 import _poolGallantPieWielder from "../pool/gallant-pie-wielder.js";
 import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
+import _poolGarrukCallerOfBeasts from "../pool/garruk-caller-of-beasts.js";
 import _poolGauntletsOfLight from "../pool/gauntlets-of-light.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
@@ -420,6 +422,7 @@ import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
+import _poolPyromancersGauntlet from "../pool/pyromancers-gauntlet.js";
 import _poolQarsiSadist from "../pool/qarsi-sadist.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
@@ -490,6 +493,7 @@ import _poolSecretPlans from "../pool/secret-plans.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
+import _poolSeismicStomp from "../pool/seismic-stomp.js";
 import _poolSengirConnoisseur from "../pool/sengir-connoisseur.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
@@ -532,6 +536,7 @@ import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpontaneousArtist from "../pool/spontaneous-artist.js";
 import _poolSporeFlower from "../pool/spore-flower.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
+import _poolStaffOfTheFlameMagus from "../pool/staff-of-the-flame-magus.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
 import _poolStationMonitor from "../pool/station-monitor.js";
@@ -547,6 +552,7 @@ import _poolStingingBarrier from "../pool/stinging-barrier.js";
 import _poolStirTheSands from "../pool/stir-the-sands.js";
 import _poolStitchwingSkaab from "../pool/stitchwing-skaab.js";
 import _poolStolenGrain from "../pool/stolen-grain.js";
+import _poolStoneshockGiant from "../pool/stoneshock-giant.js";
 import _poolStormFleetSprinter from "../pool/storm-fleet-sprinter.js";
 import _poolStormForceOfNature from "../pool/storm-force-of-nature.js";
 import _poolStormfrontPegasus from "../pool/stormfront-pegasus.js";
@@ -576,6 +582,7 @@ import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
 import _poolTheSentryGoldenGuardian from "../pool/the-sentry-golden-guardian.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
+import _poolThorncasterSliver from "../pool/thorncaster-sliver.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
@@ -588,6 +595,7 @@ import _poolTormentedHero from "../pool/tormented-hero.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
+import _poolTrainedCondor from "../pool/trained-condor.js";
 import _poolTraitorousInstinct from "../pool/traitorous-instinct.js";
 import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
@@ -723,6 +731,7 @@ const shard: CardShard = {
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
     _poolAvatarOfTheResolute,
+    _poolAwakenTheAncient,
     _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
@@ -902,6 +911,7 @@ const shard: CardShard = {
     _poolFurtiveHomunculus,
     _poolGallantPieWielder,
     _poolGalliaTheMerrymaker,
+    _poolGarrukCallerOfBeasts,
     _poolGauntletsOfLight,
     _poolGelectrode,
     _poolGenerousVisitor,
@@ -1101,6 +1111,7 @@ const shard: CardShard = {
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,
+    _poolPyromancersGauntlet,
     _poolQarsiSadist,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,
@@ -1171,6 +1182,7 @@ const shard: CardShard = {
     _poolSeedOfHope,
     _poolSeekTheBeast,
     _poolSegmentedKrotiq,
+    _poolSeismicStomp,
     _poolSengirConnoisseur,
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
@@ -1213,6 +1225,7 @@ const shard: CardShard = {
     _poolSpontaneousArtist,
     _poolSporeFlower,
     _poolSpottedGriffin,
+    _poolStaffOfTheFlameMagus,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,
     _poolStationMonitor,
@@ -1228,6 +1241,7 @@ const shard: CardShard = {
     _poolStirTheSands,
     _poolStitchwingSkaab,
     _poolStolenGrain,
+    _poolStoneshockGiant,
     _poolStormFleetSprinter,
     _poolStormForceOfNature,
     _poolStormfrontPegasus,
@@ -1257,6 +1271,7 @@ const shard: CardShard = {
     _poolTheSentryGoldenGuardian,
     _poolTheUrDragon,
     _poolTheWaspWinsomeAvenger,
+    _poolThorncasterSliver,
     _poolThoughtCourier,
     _poolThreadbindClique,
     _poolThrottle,
@@ -1269,6 +1284,7 @@ const shard: CardShard = {
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolToweringWaveMystic,
+    _poolTrainedCondor,
     _poolTraitorousInstinct,
     _poolTrialOfStrength,
     _poolTriumphantAdventurer,

@@ -390,6 +390,7 @@ import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
+import _poolPeakEruption from "../pool/peak-eruption.js";
 import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
 import _poolPelakkaPredation from "../pool/pelakka-predation.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
@@ -646,6 +647,7 @@ import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
 import _poolWuInfantry from "../pool/wu-infantry.js";
 import _poolWydwenTheBitingGale from "../pool/wydwen-the-biting-gale.js";
+import _poolXathridNecromancer from "../pool/xathrid-necromancer.js";
 import _poolXenagosGodOfRevels from "../pool/xenagos-god-of-revels.js";
 import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
@@ -1061,6 +1063,7 @@ const shard: CardShard = {
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
+    _poolPeakEruption,
     _poolPeerlessRopemaster,
     _poolPelakkaPredation,
     _poolPerilousMyr,
@@ -1317,6 +1320,7 @@ const shard: CardShard = {
     _poolWrathfulJailbreaker,
     _poolWuInfantry,
     _poolWydwenTheBitingGale,
+    _poolXathridNecromancer,
     _poolXenagosGodOfRevels,
     _poolYargleAndMultani,
     _poolYargleGluttonOfUrborg,

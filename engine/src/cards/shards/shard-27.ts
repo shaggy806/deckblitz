@@ -139,6 +139,7 @@ import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
+import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDriven from "../pool/driven.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
@@ -434,6 +435,7 @@ import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
 import _poolRibskiff from "../pool/ribskiff.js";
+import _poolRingOfThreeWishes from "../pool/ring-of-three-wishes.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRishadanAirship from "../pool/rishadan-airship.js";
@@ -800,6 +802,7 @@ const shard: CardShard = {
     _poolDocksideChef,
     _poolDonatellosTechnique,
     _poolDragonCursedHalls,
+    _poolDragonEgg,
     _poolDrillworksMole,
     _poolDriven,
     _poolDrumhunter,
@@ -1095,6 +1098,7 @@ const shard: CardShard = {
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
     _poolRibskiff,
+    _poolRingOfThreeWishes,
     _poolRipclawWrangler,
     _poolRiseOfTheDeathbringer,
     _poolRishadanAirship,
