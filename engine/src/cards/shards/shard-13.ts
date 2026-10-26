@@ -271,6 +271,7 @@ import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
+import _poolHeraldOfHoofbeats from "../pool/herald-of-hoofbeats.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
@@ -630,6 +631,7 @@ import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
+import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
@@ -1012,6 +1014,7 @@ const shard: CardShard = {
     _poolHauntedLibrary,
     _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
+    _poolHeraldOfHoofbeats,
     _poolHerosBlade,
     _poolHinataDawnCrowned,
     _poolHivespineWolverine,
@@ -1371,6 +1374,7 @@ const shard: CardShard = {
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
     _poolTheDrossPits,
+    _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,
     _poolThespiansStage,

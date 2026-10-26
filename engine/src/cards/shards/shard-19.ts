@@ -758,6 +758,7 @@ import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
+import _tokensHumanNobleToken from "../tokens/human-noble-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensKnightAllyToken from "../tokens/knight-ally-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
@@ -1528,6 +1529,7 @@ const shard: CardShard = {
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensHeartwoodToken,
+    _tokensHumanNobleToken,
     _tokensJumblebones,
     _tokensKnightAllyToken,
     _tokensPhyrexianMiteToken,

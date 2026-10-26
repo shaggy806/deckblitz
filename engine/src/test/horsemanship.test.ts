@@ -12,6 +12,7 @@ import {
   hand,
   keywords,
   lands,
+  life,
   nextTurn,
   pickModes,
   pt,
@@ -100,5 +101,28 @@ describe("Portal Three Kingdoms' horsemanship cards", () => {
     expect(zone(game, black)).toBe("hand");
     expect(zone(game, dun)).toBe("graveyard");
     expect(hand(game)).toHaveLength(before + 1);
+  });
+});
+
+describe("cards horsemanship unblocked", () => {
+  it("Rolling Earthquake spares creatures with horsemanship, not players", () => {
+    const { game } = table();
+    const cavalry = spawn(game, "Shu Cavalry", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Rolling Earthquake"), { x: 2 });
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, cavalry)).toBe("battlefield");
+    expect(life(game, A)).toBe(18);
+    expect(life(game, B)).toBe(18);
+  });
+
+  it("Herald of Hoofbeats gives other Knights you control horsemanship", () => {
+    const { game } = table();
+    spawn(game, "Herald of Hoofbeats");
+    const knight = spawn(game, "White Knight");
+    const bears = spawn(game, "Grizzly Bears");
+    expect(keywords(game, knight).has("horsemanship")).toBe(true);
+    expect(keywords(game, bears).has("horsemanship")).toBe(false);
   });
 });

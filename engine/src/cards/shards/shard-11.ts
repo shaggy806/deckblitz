@@ -511,6 +511,7 @@ import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
+import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
 import _poolRuinousPath from "../pool/ruinous-path.js";
@@ -1256,6 +1257,7 @@ const shard: CardShard = {
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,
     _poolRockcasterPlatoon,
+    _poolRollingEarthquake,
     _poolRootriderFaun,
     _poolRuinCrab,
     _poolRuinousPath,

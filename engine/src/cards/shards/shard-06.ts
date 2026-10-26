@@ -717,6 +717,7 @@ import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
 import _tokensElementalTokenRekindlingPhoenix from "../tokens/elemental-token-rekindling-phoenix.js";
 import _tokensGolemTokenGolemFoundry from "../tokens/golem-token-golem-foundry.js";
 import _tokensGreenHippoToken11 from "../tokens/green-hippo-token-1-1.js";
+import _tokensHorseTokenTheGirlInTheFireplace from "../tokens/horse-token-the-girl-in-the-fireplace.js";
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _tokensElementalTokenRekindlingPhoenix,
     _tokensGolemTokenGolemFoundry,
     _tokensGreenHippoToken11,
+    _tokensHorseTokenTheGirlInTheFireplace,
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,

@@ -9076,6 +9076,7 @@ import _poolHeraldOfDromoka from "./pool/herald-of-dromoka.js";
 import _poolHeraldOfEternalDawn from "./pool/herald-of-eternal-dawn.js";
 import _poolHeraldOfFaith from "./pool/herald-of-faith.js";
 import _poolHeraldOfHadar from "./pool/herald-of-hadar.js";
+import _poolHeraldOfHoofbeats from "./pool/herald-of-hoofbeats.js";
 import _poolHeraldOfIlharg from "./pool/herald-of-ilharg.js";
 import _poolHeraldOfKozilek from "./pool/herald-of-kozilek.js";
 import _poolHeraldOfSecretStreams from "./pool/herald-of-secret-streams.js";
@@ -16058,6 +16059,7 @@ import _poolRoilmagesTrick from "./pool/roilmages-trick.js";
 import _poolRoilsRetribution from "./pool/roils-retribution.js";
 import _poolRollRollRollRoll from "./pool/roll-roll-roll-roll.js";
 import _poolRollickOfAbandon from "./pool/rollick-of-abandon.js";
+import _poolRollingEarthquake from "./pool/rolling-earthquake.js";
 import _poolRollingHamsphere from "./pool/rolling-hamsphere.js";
 import _poolRollingStones from "./pool/rolling-stones.js";
 import _poolRollingTemblor from "./pool/rolling-temblor.js";
@@ -19945,6 +19947,7 @@ import _poolTheFlux from "./pool/the-flux.js";
 import _poolTheFrightfulFour from "./pool/the-frightful-four.js";
 import _poolTheFugitiveDoctor from "./pool/the-fugitive-doctor.js";
 import _poolTheGaffer from "./pool/the-gaffer.js";
+import _poolTheGirlInTheFireplace from "./pool/the-girl-in-the-fireplace.js";
 import _poolTheGitrogMonster from "./pool/the-gitrog-monster.js";
 import _poolTheGitrogRavenousRide from "./pool/the-gitrog-ravenous-ride.js";
 import _poolTheGoldSaucer from "./pool/the-gold-saucer.js";
@@ -23285,12 +23288,14 @@ import _tokensHorrorTokenBlack00 from "./tokens/horror-token-black-0-0.js";
 import _tokensHorrorTokenBlueBlackFlying from "./tokens/horror-token-blue-black-flying.js";
 import _tokensHorrorTokenTheFinalDays from "./tokens/horror-token-the-final-days.js";
 import _tokensHorrorToken from "./tokens/horror-token.js";
+import _tokensHorseTokenTheGirlInTheFireplace from "./tokens/horse-token-the-girl-in-the-fireplace.js";
 import _tokensHorseToken from "./tokens/horse-token.js";
 import _tokensHumanCitizenToken from "./tokens/human-citizen-token.js";
 import _tokensHumanClericToken from "./tokens/human-cleric-token.js";
 import _tokensHumanKnightTokenThePrydwen from "./tokens/human-knight-token-the-prydwen.js";
 import _tokensHumanKnightToken from "./tokens/human-knight-token.js";
 import _tokensHumanMonkToken from "./tokens/human-monk-token.js";
+import _tokensHumanNobleToken from "./tokens/human-noble-token.js";
 import _tokensHumanRogueToken from "./tokens/human-rogue-token.js";
 import _tokensHumanSoldierTokenTorensFistOfTheAngels from "./tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensHumanSoldierToken from "./tokens/human-soldier-token.js";
@@ -32717,6 +32722,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeraldOfEternalDawn,
   _poolHeraldOfFaith,
   _poolHeraldOfHadar,
+  _poolHeraldOfHoofbeats,
   _poolHeraldOfIlharg,
   _poolHeraldOfKozilek,
   _poolHeraldOfSecretStreams,
@@ -39699,6 +39705,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoilsRetribution,
   _poolRollRollRollRoll,
   _poolRollickOfAbandon,
+  _poolRollingEarthquake,
   _poolRollingHamsphere,
   _poolRollingStones,
   _poolRollingTemblor,
@@ -43586,6 +43593,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheFrightfulFour,
   _poolTheFugitiveDoctor,
   _poolTheGaffer,
+  _poolTheGirlInTheFireplace,
   _poolTheGitrogMonster,
   _poolTheGitrogRavenousRide,
   _poolTheGoldSaucer,
@@ -46932,12 +46940,14 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensHorrorTokenBlueBlackFlying,
   _tokensHorrorTokenTheFinalDays,
   _tokensHorrorToken,
+  _tokensHorseTokenTheGirlInTheFireplace,
   _tokensHorseToken,
   _tokensHumanCitizenToken,
   _tokensHumanClericToken,
   _tokensHumanKnightTokenThePrydwen,
   _tokensHumanKnightToken,
   _tokensHumanMonkToken,
+  _tokensHumanNobleToken,
   _tokensHumanRogueToken,
   _tokensHumanSoldierTokenTorensFistOfTheAngels,
   _tokensHumanSoldierToken,
@@ -56371,6 +56381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/herald-of-eternal-dawn": _poolHeraldOfEternalDawn,
   "pool/herald-of-faith": _poolHeraldOfFaith,
   "pool/herald-of-hadar": _poolHeraldOfHadar,
+  "pool/herald-of-hoofbeats": _poolHeraldOfHoofbeats,
   "pool/herald-of-ilharg": _poolHeraldOfIlharg,
   "pool/herald-of-kozilek": _poolHeraldOfKozilek,
   "pool/herald-of-secret-streams": _poolHeraldOfSecretStreams,
@@ -63353,6 +63364,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roils-retribution": _poolRoilsRetribution,
   "pool/roll-roll-roll-roll": _poolRollRollRollRoll,
   "pool/rollick-of-abandon": _poolRollickOfAbandon,
+  "pool/rolling-earthquake": _poolRollingEarthquake,
   "pool/rolling-hamsphere": _poolRollingHamsphere,
   "pool/rolling-stones": _poolRollingStones,
   "pool/rolling-temblor": _poolRollingTemblor,
@@ -67240,6 +67252,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-frightful-four": _poolTheFrightfulFour,
   "pool/the-fugitive-doctor": _poolTheFugitiveDoctor,
   "pool/the-gaffer": _poolTheGaffer,
+  "pool/the-girl-in-the-fireplace": _poolTheGirlInTheFireplace,
   "pool/the-gitrog-monster": _poolTheGitrogMonster,
   "pool/the-gitrog-ravenous-ride": _poolTheGitrogRavenousRide,
   "pool/the-gold-saucer": _poolTheGoldSaucer,
@@ -70580,12 +70593,14 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/horror-token-blue-black-flying": _tokensHorrorTokenBlueBlackFlying,
   "tokens/horror-token-the-final-days": _tokensHorrorTokenTheFinalDays,
   "tokens/horror-token": _tokensHorrorToken,
+  "tokens/horse-token-the-girl-in-the-fireplace": _tokensHorseTokenTheGirlInTheFireplace,
   "tokens/horse-token": _tokensHorseToken,
   "tokens/human-citizen-token": _tokensHumanCitizenToken,
   "tokens/human-cleric-token": _tokensHumanClericToken,
   "tokens/human-knight-token-the-prydwen": _tokensHumanKnightTokenThePrydwen,
   "tokens/human-knight-token": _tokensHumanKnightToken,
   "tokens/human-monk-token": _tokensHumanMonkToken,
+  "tokens/human-noble-token": _tokensHumanNobleToken,
   "tokens/human-rogue-token": _tokensHumanRogueToken,
   "tokens/human-soldier-token-torens-fist-of-the-angels": _tokensHumanSoldierTokenTorensFistOfTheAngels,
   "tokens/human-soldier-token": _tokensHumanSoldierToken,
