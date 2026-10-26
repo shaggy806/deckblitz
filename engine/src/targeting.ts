@@ -24,7 +24,7 @@ import {
   otherSlotConflict,
   playerAtSeat,
 } from "./target.js";
-import type { OtherThan, TargetFacts } from "./target.js";
+import type { OtherThan, PlayerStat, TargetFacts } from "./target.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 
 /** The colour/type identity of whatever is targeting / damaging / blocking —
@@ -76,7 +76,7 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
   if (spec.kind === "optional" || spec.kind === "other" || spec.kind === "any-number") {
     return targetSpecReadsX(spec.of);
   }
-  if (spec.kind === "ability" || spec.kind === "stack") return false;
+  if (spec.kind === "ability" || spec.kind === "stack" || spec.kind === "opponent-compared") return false;
   return spec.filter !== undefined && filterReadsX(spec.filter);
 }
 
@@ -246,6 +246,32 @@ function isLivingPlayer(state: GameState, ref: TargetRef): boolean {
   );
 }
 
+/** `player`'s life, creatures or lands (a token stack counted as every
+ * token in it), cards in hand, or creature cards in their graveyard — what
+ * an `opponent-compared` target compares. */
+function playerStat(state: GameState, registry: CardRegistry, player: PlayerId, stat: PlayerStat): number {
+  const zones = state.zones.perPlayer[player];
+  switch (stat) {
+    case "life":
+      return state.players[player].life;
+    case "cards-in-hand":
+      return zones.hand.length;
+    case "creature-cards-in-graveyard":
+      return zones.graveyard.filter((id) => matchesFilter(state, registry, id, { type: "creature" }, { you: player })).length;
+    case "creatures":
+    case "lands": {
+      const type = stat === "creatures" ? "creature" : "land";
+      let n = 0;
+      for (const id of state.zones.shared.battlefield) {
+        const object = state.objects[id];
+        if (object === undefined || object.controller !== player) continue;
+        if (matchesFilter(state, registry, id, { type }, { you: player })) n += object.stackCount ?? 1;
+      }
+      return n;
+    }
+  }
+}
+
 /** {@link isLegalTargetUncached} inside a computed-value cache region (a pure read
  * of the board: its characteristics reads share one cache — see
  * `withComputedCache`). */
@@ -397,6 +423,11 @@ function isLegalTargetUncached(
       if (chosen.length !== 1) return false;
     }
     return true;
+  }
+  // "Target opponent who has more life than you do" (the Keepers).
+  if (typeof spec === "object" && spec.kind === "opponent-compared") {
+    if (!isLivingPlayer(state, ref) || ref.kind !== "player" || ref.player === forPlayer) return false;
+    return playerStat(state, registry, ref.player, spec.stat) - playerStat(state, registry, forPlayer, spec.stat) >= spec.by;
   }
   // A narrowed activated or triggered ability on the stack.
   if (typeof spec === "object" && spec.kind === "ability") {

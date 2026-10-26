@@ -194,6 +194,7 @@ import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
+import _poolFlowstoneFlood from "../pool/flowstone-flood.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
 import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
@@ -896,6 +897,7 @@ const shard: CardShard = {
     _poolFirebolt,
     _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
+    _poolFlowstoneFlood,
     _poolFodderCannon,
     _poolFogOnTheBarrowDowns,
     _poolForerunnerOfTheHeralds,

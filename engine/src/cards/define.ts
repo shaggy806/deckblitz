@@ -106,6 +106,15 @@ export interface CopyOnEnter {
  * same mechanism kicker uses (Redirect Lightning: "pay 5 life or pay {2}").
  * It is a cost *increase*, not a replacement.
  */
+/** A kicker's non-mana cost — see `CardDefinition.kicker.also`. */
+export interface KickerAlsoCost {
+  readonly text: string;
+  readonly payLife?: number;
+  readonly discard?: number;
+  readonly discardAtRandom?: boolean;
+  readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+}
+
 export interface AdditionalCostOption {
   /** What this option is called in the UI ("Pay 3 life"). Shown on the
    * variant's button, so it has to read as an imperative on its own. */
@@ -2388,6 +2397,10 @@ export interface CardDefinition {
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     readonly discard?: number;
+    /** `discard`'s cards are discarded at random rather than chosen (Sonic
+     * Burst: "As an additional cost to cast this spell, discard a card at
+     * random") — nothing to ask, so it happens as the cost is paid. */
+    readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     /**
@@ -2539,6 +2552,21 @@ export interface CardDefinition {
      * `self-kicked` asks it on a permanent.
      */
     readonly collectEvidence?: number;
+    /**
+     * The part of the kicker's cost that isn't mana, paid with it when the
+     * spell is kicked — buyback's non-mana costs (rule 702.27a: "Buyback
+     * [cost]" is any cost): Slaughter's "Buyback—Pay 4 life", Pegasus
+     * Stampede's "Buyback—Sacrifice a land", Forbid's "Buyback—Discard two
+     * cards", Flowstone Flood's "Buyback—Pay 3 life, Discard a card at
+     * random". `cost` holds the mana part (`""` for none). The kicked
+     * variant is offered only while every part can be paid: the life (rule
+     * 119.4), the cards in hand other than the spell itself (601.2h), the
+     * permanents to sacrifice. The life and a random discard are paid as
+     * the spell is cast; a chosen discard and the sacrifice are asked for
+     * then, the spell on the stack (601.2h), like the additional cost's.
+     * `text` labels the kicked variant ("Pay 4 life").
+     */
+    readonly also?: KickerAlsoCost;
     /**
      * Teamwork N (rule 702.194a): "as an additional cost to cast this spell,
      * you may tap any number of creatures you control with total power N or
@@ -3463,6 +3491,7 @@ interface CardDraft {
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     readonly discard?: number;
+    readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     readonly waterbend?: number | "x";
@@ -3479,6 +3508,7 @@ interface CardDraft {
     readonly flash?: boolean;
     readonly blight?: number;
     readonly collectEvidence?: number;
+    readonly also?: KickerAlsoCost;
     readonly teamwork?: number;
     readonly multi?: boolean;
   };

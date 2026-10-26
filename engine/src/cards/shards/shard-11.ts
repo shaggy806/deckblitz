@@ -328,6 +328,7 @@ import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
+import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillerBees from "../pool/killer-bees.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolKangeesLieutenant,
     _poolKaslemsStonetree,
     _poolKedissEmberclawFamiliar,
+    _poolKeeperOfTheLight,
     _poolKetriaCrystal,
     _poolKhalniGarden,
     _poolKillerBees,

@@ -10,6 +10,11 @@ export type TargetRef =
   | { readonly kind: "object"; readonly object: ObjectId };
 
 /** What a target slot is allowed to point at. */
+/** What a {@link TargetSpec} `opponent-compared` compares between players:
+ * life, creatures or lands controlled, cards in hand, creature cards in the
+ * graveyard. */
+export type PlayerStat = "life" | "creatures" | "lands" | "cards-in-hand" | "creature-cards-in-graveyard";
+
 export type TargetSpec =
   | "any-target"
   | "creature"
@@ -138,6 +143,23 @@ export type TargetSpec =
        * a planeswalker they control, which is a different thing to attack
        * (rules 506.3, 509.1a). Needs `TargetSource.triggerPlayer`. */
       readonly attacking?: "trigger-player";
+    }
+  /**
+   * "Target opponent who has **more life than you do** as you activate this
+   * ability" — the Keepers' "…who controls more creatures than you do",
+   * "…who has at least two more cards in hand than you do". `stat` is
+   * compared with the targeting player's own: the opponent's must be at
+   * least `by` more (`1` is "more", `2` "at least two more"; a negative `by`
+   * is "at least that many fewer"). Creatures and lands count a token
+   * stack as every token in it. "As you activate this ability": the
+   * comparison is judged only as the target is chosen — as the ability
+   * resolves, any opponent still in the game is a legal target
+   * ({@link resolvingTargetSpec}).
+   */
+  | {
+      readonly kind: "opponent-compared";
+      readonly stat: PlayerStat;
+      readonly by: number;
     }
   /**
    * A card in a graveyard — the general form for a graveyard the way
@@ -418,6 +440,13 @@ export interface TargetSeat {
  * player has nothing left to target). A game seats at most four, so seats
  * 1–3 are every opponent and 0–3 every player.
  */
+/** The spec a target is judged by as its spell or ability resolves: the
+ * same, except that an `opponent-compared` slot's comparison was only "as
+ * you activate this ability" — then any opponent will do. */
+export function resolvingTargetSpec(spec: TargetSpec): TargetSpec {
+  return typeof spec === "object" && spec.kind === "opponent-compared" ? "opponent" : spec;
+}
+
 export function playerAtSeat(
   turnOrder: readonly PlayerId[],
   player: PlayerId,
@@ -727,6 +756,18 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
       : than === "trigger-object"
         ? `${inner} other than that one`
         : `${inner} other than that player`;
+  }
+  if (spec.kind === "opponent-compared") {
+    const what = {
+      life: "life",
+      creatures: "creatures",
+      lands: "lands",
+      "cards-in-hand": "cards in hand",
+      "creature-cards-in-graveyard": "creature cards in their graveyard",
+    }[spec.stat];
+    const more = spec.by < 0 ? "fewer" : "more";
+    const n = Math.abs(spec.by);
+    return `opponent with ${n > 1 ? `at least ${n} ` : ""}${more} ${what} than you`;
   }
   if (spec.kind === "spell-or-permanent") {
     const nonland = spec.filter?.notTypes?.includes("land") === true ? "nonland " : "";

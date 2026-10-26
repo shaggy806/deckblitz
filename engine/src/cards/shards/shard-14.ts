@@ -547,6 +547,7 @@ import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
 import _poolSlaughterSinger from "../pool/slaughter-singer.js";
+import _poolSlaughter from "../pool/slaughter.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
@@ -1242,6 +1243,7 @@ const shard: CardShard = {
     _poolSkithiryxTheBlightDragon,
     _poolSkylineCascade,
     _poolSlaughterSinger,
+    _poolSlaughter,
     _poolSlinnVodaTheRisingDeep,
     _poolSmashingSuccess,
     _poolSnarlingWarg,

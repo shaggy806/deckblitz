@@ -442,6 +442,7 @@ import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
+import _poolPegasusStampede from "../pool/pegasus-stampede.js";
 import _poolPelakkaCaverns from "../pool/pelakka-caverns.js";
 import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolParapet,
     _poolPathToExile,
     _poolPathToTheWorldTree,
+    _poolPegasusStampede,
     _poolPelakkaCaverns,
     _poolPerimeterCaptain,
     _poolPerniciousDeed,

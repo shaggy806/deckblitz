@@ -997,6 +997,8 @@ export function specSide(spec: TargetSpec): SpecSide {
         return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
       case "ability":
         return spec.whose === "you" ? "you" : "any";
+      case "opponent-compared":
+        return "opponent";
       case "spell-or-permanent":
         return spec.whose === "you" ? "you" : spec.whose === "opponent" ? "opponent" : "any";
       case "card-in-graveyard":

@@ -298,6 +298,7 @@ import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKeeperOfKeys from "../pool/keeper-of-keys.js";
+import _poolKeeperOfTheFlame from "../pool/keeper-of-the-flame.js";
 import _poolKefnetTheMindful from "../pool/kefnet-the-mindful.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
@@ -985,6 +986,7 @@ const shard: CardShard = {
     _poolKeenEyedRaven,
     _poolKeenSense,
     _poolKeeperOfKeys,
+    _poolKeeperOfTheFlame,
     _poolKefnetTheMindful,
     _poolKheruGoldkeeper,
     _poolKindleTheInnerFlame,

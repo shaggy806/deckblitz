@@ -1687,7 +1687,9 @@ export function parseSentence(sentence, ctx) {
   // could mean instead.
   const it = ctx.targets.length === 0 ? ctx.it : undefined;
   if (it !== undefined) {
-    if ((m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
+    // A damage source is only the ability's own or the trigger's object
+    // (`DamageFrom`): "enchanted creature deals …" has no shape.
+    if ((it === "source" || it === "trigger-object") && (m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), target: slot(m[2]), ...(it === "source" ? {} : { from: it }) };
     }
     if ((m = re(`it gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {

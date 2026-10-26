@@ -415,6 +415,7 @@ import _poolObsessiveSearch from "../pool/obsessive-search.js";
 import _poolOceanusDragon from "../pool/oceanus-dragon.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOgreMenial from "../pool/ogre-menial.js";
+import _poolOgreShaman from "../pool/ogre-shaman.js";
 import _poolOjutaiMonument from "../pool/ojutai-monument.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
 import _poolOneWithNature from "../pool/one-with-nature.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolOceanusDragon,
     _poolOctoprophet,
     _poolOgreMenial,
+    _poolOgreShaman,
     _poolOjutaiMonument,
     _poolOmegaMyr,
     _poolOneWithNature,

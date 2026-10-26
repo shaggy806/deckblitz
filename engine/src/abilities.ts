@@ -273,9 +273,11 @@ export interface AbilityCost {
    * way a spell's `additionalCost.discard` is paid); the source itself never
    * counts. Gates activation on having enough such cards in hand. `count:
    * "x"` is Gix, Yawgmoth Praetor's "Discard X cards": X announced as it's
-   * activated, capped by the cards there are to discard.
+   * activated, capped by the cards there are to discard. `random` is
+   * "Discard a card at random" (Mage il-Vec, Ogre Shaman): the cards are
+   * picked at random as the cost is paid, so there is nothing to ask.
    */
-  readonly discard?: { readonly count: number | "x"; readonly filter?: CardFilter };
+  readonly discard?: { readonly count: number | "x"; readonly filter?: CardFilter; readonly random?: boolean };
   /**
    * Exile `count` cards from your graveyard, matching `filter` if given, as
    * part of the cost — "{2}, Exile two cards from your graveyard" (Varina,

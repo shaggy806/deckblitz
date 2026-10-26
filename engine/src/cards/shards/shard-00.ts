@@ -156,7 +156,6 @@ import _poolDiresight from "../pool/diresight.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
 import _poolDiversionUnit from "../pool/diversion-unit.js";
-import _poolDizzyingGaze from "../pool/dizzying-gaze.js";
 import _poolDominusOfFealty from "../pool/dominus-of-fealty.js";
 import _poolDoomedDissenter from "../pool/doomed-dissenter.js";
 import _poolDoomedTraveler from "../pool/doomed-traveler.js";
@@ -433,6 +432,7 @@ import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
 import _poolRavensRunDragoon from "../pool/ravens-run-dragoon.js";
+import _poolReapingTheRewards from "../pool/reaping-the-rewards.js";
 import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
 import _poolRecklessCohort from "../pool/reckless-cohort.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
@@ -856,7 +856,6 @@ const shard: CardShard = {
     _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
     _poolDiversionUnit,
-    _poolDizzyingGaze,
     _poolDominusOfFealty,
     _poolDoomedDissenter,
     _poolDoomedTraveler,
@@ -1133,6 +1132,7 @@ const shard: CardShard = {
     _poolRangerEnVec,
     _poolRapturousMoment,
     _poolRavensRunDragoon,
+    _poolReapingTheRewards,
     _poolRebelliousCaptives,
     _poolRecklessCohort,
     _poolRecklessRansacking,

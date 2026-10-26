@@ -326,6 +326,7 @@ import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
+import _poolKeeperOfTheBeasts from "../pool/keeper-of-the-beasts.js";
 import _poolKeldonWarcaller from "../pool/keldon-warcaller.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
 import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
@@ -557,6 +558,7 @@ import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
+import _poolSonicBurst from "../pool/sonic-burst.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
@@ -1049,6 +1051,7 @@ const shard: CardShard = {
     _poolKamisFlare,
     _poolKayasWrath,
     _poolKeeneyeAven,
+    _poolKeeperOfTheBeasts,
     _poolKeldonWarcaller,
     _poolKembaKhaEnduring,
     _poolKeralKeepDisciples,
@@ -1280,6 +1283,7 @@ const shard: CardShard = {
     _poolSoaringDrake,
     _poolSoaringShowOff,
     _poolSoldeviMachinist,
+    _poolSonicBurst,
     _poolSparkTrooper,
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,

@@ -357,6 +357,7 @@ import _poolLunarFrenzy from "../pool/lunar-frenzy.js";
 import _poolLyevDecree from "../pool/lyev-decree.js";
 import _poolMadblindMountain from "../pool/madblind-mountain.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
+import _poolMageIlVec from "../pool/mage-il-vec.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
@@ -1031,6 +1032,7 @@ const shard: CardShard = {
     _poolLyevDecree,
     _poolMadblindMountain,
     _poolMaelstromArtisan,
+    _poolMageIlVec,
     _poolMaggotTherapy,
     _poolMagitekScythe,
     _poolMakeshiftMunitions,

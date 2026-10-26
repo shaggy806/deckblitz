@@ -317,6 +317,7 @@ import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
+import _poolKeeperOfTheMind from "../pool/keeper-of-the-mind.js";
 import _poolKezzerdrix from "../pool/kezzerdrix.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
 import _poolKindlyAncestor from "../pool/kindly-ancestor.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolKamahlsDruidicVow,
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,
+    _poolKeeperOfTheMind,
     _poolKezzerdrix,
     _poolKiboUktabiPrince,
     _poolKindlyAncestor,

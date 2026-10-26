@@ -360,6 +360,7 @@ import {
   normalizeTargets,
   otherThan,
   renumberOtherSlots,
+  resolvingTargetSpec,
   sameTargetRef,
   targetsFillable,
 } from "./target.js";
@@ -3477,7 +3478,9 @@ export class Game {
                   ? String(def.kicker.collectEvidence)
                   : def.kicker.keyword === "behold" && def.kicker.behold !== undefined
                     ? def.kicker.behold.text
-                    : def.kicker.cost.repeat(kickCount ?? 1),
+                    : def.kicker.also !== undefined
+                      ? def.kicker.also.text
+                      : def.kicker.cost.repeat(kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
@@ -11497,6 +11500,28 @@ export class Game {
     if (kicked && def.kicker?.keyword === "bargain" && this.costSacrificeEligible(player, BARGAIN_FILTER, undefined).length === 0) {
       return `${player} has no artifact, enchantment or token to bargain for ${def.name}`;
     }
+    // A kicker's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
+    // "Discard two cards"): only while it can be paid — the life (rule
+    // 119.4), the cards in hand besides the spell itself (601.2h), and what
+    // to sacrifice (checked once the mana is paid too, `spellSacrificeParts`).
+    const kickerAlso = kicked ? def.kicker?.also : undefined;
+    if (kickerAlso !== undefined) {
+      if (kickerAlso.payLife !== undefined && !this.canPayLife(player, kickerAlso.payLife)) {
+        return `${player} has too little life to pay ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
+      }
+      if (
+        kickerAlso.discard !== undefined &&
+        this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length < kickerAlso.discard
+      ) {
+        return `${player} has too few cards in hand to pay ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
+      }
+      if (
+        kickerAlso.sacrifice !== undefined &&
+        this.costSacrificeEligible(player, kickerAlso.sacrifice.filter, undefined).length < kickerAlso.sacrifice.count
+      ) {
+        return `${player} has too few permanents to sacrifice for ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
+      }
+    }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
     // spell itself (on its way to the stack, 601.2a) not among them.
     const kickerBehold = kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined;
@@ -13083,6 +13108,16 @@ export class Game {
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
+    // A kicker's non-mana part (buyback's "Pay 3 life, Discard a card at
+    // random"), paid the same way; its sacrifice is among the parts above.
+    const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
+    if (kickerAlso?.payLife !== undefined) this.changeLife(player, -kickerAlso.payLife);
+    if (kickerAlso?.discard !== undefined) {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, kickerAlso.discard as number, kickerAlso.discardAtRandom === true);
+      });
+      this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscard = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     if (flashbackDiscard !== undefined) {
@@ -13105,7 +13140,7 @@ export class Game {
       // `withDecisionSource` sets, and only around a *resolution*. Without
       // this wrap the prompt named whatever resolved last.
       this.withDecisionSource(cardId, () => {
-        this.discardByEffect({ kind: "player", player }, costDiscard);
+        this.discardByEffect({ kind: "player", player }, costDiscard, def.additionalCost?.discardAtRandom === true);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
@@ -13760,6 +13795,8 @@ export class Game {
     if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "bargain") {
       parts.push({ filter: BARGAIN_FILTER, count: 1 });
     }
+    const kickerSacrifice = kicked !== false && kicked !== 0 ? def.kicker?.also?.sacrifice : undefined;
+    if (kickerSacrifice !== undefined) parts.push({ filter: kickerSacrifice.filter, count: kickerSacrifice.count });
     if (via === "flashback") {
       const flashback = this.flashbackOf(cardId, grant)?.sacrifice;
       if (flashback !== undefined) parts.push({ filter: flashback.filter, count: flashback.count });
@@ -15081,7 +15118,7 @@ export class Game {
     if (costDiscard !== undefined) {
       const n = costDiscard.count === "x" ? chosenX : costDiscard.count;
       this.withDecisionSource(sourceId, () => {
-        this.discardByEffect({ kind: "player", player }, n, false, costDiscard.filter);
+        this.discardByEffect({ kind: "player", player }, n, costDiscard.random === true, costDiscard.filter);
       });
       this.costDiscardPriorityTo(player);
     }
@@ -21309,7 +21346,9 @@ export class Game {
       if (chosen[i] === undefined || autoSlots.includes(i)) return;
       anyChosen = true;
       const ref = now[i];
-      if (ref !== undefined && isLegalTarget(this.state, this.registry, spec, ref, forPlayer, source)) return;
+      // A comparison "as you activate this ability" isn't judged again now.
+      const judged = resolvingTargetSpec(spec);
+      if (ref !== undefined && isLegalTarget(this.state, this.registry, judged, ref, forPlayer, source)) return;
       illegal.push(i);
       targets[i] = undefined;
     });
