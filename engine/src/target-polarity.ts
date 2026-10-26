@@ -729,7 +729,41 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else if (lean === "harm") harm = true;
     }
   }
+  // Still nothing: what its own abilities do to "enchanted creature" —
+  // Crown of Flames' "{R}: enchanted creature gets +1/+0", Sadistic Glee's
+  // "whenever a creature dies, put a +1/+1 counter on enchanted creature".
+  if (!harm && !help) {
+    for (const ability of [...(def.activated ?? []), ...(def.triggered ?? [])]) {
+      const lean = enchantedLean(ability.effect);
+      if (lean === "help") help = true;
+      else if (lean === "harm") harm = true;
+    }
+  }
   return harm === help ? "either" : harm ? "harm" : "help";
+}
+
+/** Which way an effect aimed at the Aura's `attached` permanent leans, or
+ * null when it doesn't touch it (a pump or a +1/+1 counter helps, a shrink
+ * or a -1/-1 counter harms). */
+function enchantedLean(effect: EffectSpec | null): "help" | "harm" | null {
+  if (effect === null) return null;
+  if (effect.kind === "sequence") {
+    const leans = effect.effects.map(enchantedLean).filter((l) => l !== null);
+    return leans.length > 0 && leans.every((l) => l === leans[0]) ? leans[0] : null;
+  }
+  if (!("target" in effect) || effect.target !== "attached") return null;
+  switch (effect.kind) {
+    case "modify-pt": {
+      const sum = (typeof effect.power === "number" ? effect.power : 0) + (typeof effect.toughness === "number" ? effect.toughness : 0);
+      return sum > 0 ? "help" : sum < 0 ? "harm" : null;
+    }
+    case "add-counter":
+      return effect.counter === "+1/+1" ? "help" : effect.counter === "-1/-1" ? "harm" : null;
+    case "destroy":
+      return "harm";
+    default:
+      return null;
+  }
 }
 
 /** Which way an Aura's `who: "attached"` trigger leans on the enchanted

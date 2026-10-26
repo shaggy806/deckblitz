@@ -109,6 +109,11 @@ describe("slot polarity", () => {
     expect(triggered("Snapcaster Mage", 0)).toEqual(["help"]);
   });
 
+  it("reads an Aura by what its own abilities do to the enchanted creature", () => {
+    expect(cast("Crown of Flames")).toEqual(["help"]);
+    expect(cast("Sadistic Glee")).toEqual(["help"]);
+  });
+
   it("splits a fight between the fighter and its victim", () => {
     expect(cast("Prey Upon")).toEqual(["help", "harm"]);
     expect(cast("Rabid Bite")).toEqual(["help", "harm"]);
