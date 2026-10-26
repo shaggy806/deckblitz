@@ -90,6 +90,7 @@ import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCloakOfInvisibility from "../pool/cloak-of-invisibility.js";
+import _poolCobbledLancer from "../pool/cobbled-lancer.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
@@ -472,6 +473,7 @@ import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
+import _poolRelentlessSkaabs from "../pool/relentless-skaabs.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
@@ -776,6 +778,7 @@ const shard: CardShard = {
     _poolClearTheMind,
     _poolCliffsideLookout,
     _poolCloakOfInvisibility,
+    _poolCobbledLancer,
     _poolCodieRavenousCodex,
     _poolCollectedCompany,
     _poolCollision,
@@ -1158,6 +1161,7 @@ const shard: CardShard = {
     _poolReduceToMemory,
     _poolRegenerate,
     _poolRegicide,
+    _poolRelentlessSkaabs,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,

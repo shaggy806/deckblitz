@@ -398,6 +398,7 @@ import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
 import _poolMagusOfTheMoat from "../pool/magus-of-the-moat.js";
 import _poolMajesticHeliopterus from "../pool/majestic-heliopterus.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
+import _poolMakeshiftMauler from "../pool/makeshift-mauler.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolMagusOfTheMoat,
     _poolMajesticHeliopterus,
     _poolMakeYourMove,
+    _poolMakeshiftMauler,
     _poolMakindiSliderunner,
     _poolMandateOfAbaddon,
     _poolManicVandal,

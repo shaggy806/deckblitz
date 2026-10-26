@@ -39,6 +39,7 @@ import _poolAberrantMindSorcerer from "./pool/aberrant-mind-sorcerer.js";
 import _poolAberrantResearcher from "./pool/aberrant-researcher.js";
 import _poolAberrantReturn from "./pool/aberrant-return.js";
 import _poolAberrant from "./pool/aberrant.js";
+import _poolAbhorrentOculus from "./pool/abhorrent-oculus.js";
 import _poolAbhorrentOverlord from "./pool/abhorrent-overlord.js";
 import _poolAbidingGrace from "./pool/abiding-grace.js";
 import _poolAbigaleEloquentFirstYear from "./pool/abigale-eloquent-first-year.js";
@@ -3487,6 +3488,7 @@ import _poolCoatWithVenom from "./pool/coat-with-venom.js";
 import _poolCoatiScavenger from "./pool/coati-scavenger.js";
 import _poolCobaltGolem from "./pool/cobalt-golem.js";
 import _poolCobblebrute from "./pool/cobblebrute.js";
+import _poolCobbledLancer from "./pool/cobbled-lancer.js";
 import _poolCobbledWings from "./pool/cobbled-wings.js";
 import _poolCockatrice from "./pool/cockatrice.js";
 import _poolCocoon from "./pool/cocoon.js";
@@ -8680,6 +8682,7 @@ import _poolHazoretsUndyingFury from "./pool/hazorets-undying-fury.js";
 import _poolHeadOfTheHomestead from "./pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "./pool/headless-horseman.js";
 import _poolHeadlessRider from "./pool/headless-rider.js";
+import _poolHeadlessSkaab from "./pool/headless-skaab.js";
 import _poolHeadlessSpecter from "./pool/headless-specter.js";
 import _poolHeadsplitter from "./pool/headsplitter.js";
 import _poolHeadstone from "./pool/headstone.js";
@@ -11480,6 +11483,7 @@ import _poolMakeYourOwnLuck from "./pool/make-your-own-luck.js";
 import _poolMakeshiftBattalion from "./pool/makeshift-battalion.js";
 import _poolMakeshiftBinding from "./pool/makeshift-binding.js";
 import _poolMakeshiftMannequin from "./pool/makeshift-mannequin.js";
+import _poolMakeshiftMauler from "./pool/makeshift-mauler.js";
 import _poolMakeshiftMunitions from "./pool/makeshift-munitions.js";
 import _poolMakindiAeronaut from "./pool/makindi-aeronaut.js";
 import _poolMakindiGriffin from "./pool/makindi-griffin.js";
@@ -15084,6 +15088,7 @@ import _poolRelentlessAssault from "./pool/relentless-assault.js";
 import _poolRelentlessHunter from "./pool/relentless-hunter.js";
 import _poolRelentlessPursuit from "./pool/relentless-pursuit.js";
 import _poolRelentlessRohirrim from "./pool/relentless-rohirrim.js";
+import _poolRelentlessSkaabs from "./pool/relentless-skaabs.js";
 import _poolRelicAxe from "./pool/relic-axe.js";
 import _poolRelicBarrier from "./pool/relic-barrier.js";
 import _poolRelicBind from "./pool/relic-bind.js";
@@ -17150,6 +17155,8 @@ import _poolSivitriScarzam from "./pool/sivitri-scarzam.js";
 import _poolSixthSense from "./pool/sixth-sense.js";
 import _poolSizzle from "./pool/sizzle.js";
 import _poolSizzlingChangeling from "./pool/sizzling-changeling.js";
+import _poolSkaabGoliath from "./pool/skaab-goliath.js";
+import _poolSkaabRuinator from "./pool/skaab-ruinator.js";
 import _poolSkaabWrangler from "./pool/skaab-wrangler.js";
 import _poolSkallaWolf from "./pool/skalla-wolf.js";
 import _poolSkarrgGoliath from "./pool/skarrg-goliath.js";
@@ -18268,6 +18275,7 @@ import _poolStirringWildwood from "./pool/stirring-wildwood.js";
 import _poolStitchInTime from "./pool/stitch-in-time.js";
 import _poolStitchTogether from "./pool/stitch-together.js";
 import _poolStitchedAssistant from "./pool/stitched-assistant.js";
+import _poolStitchedDrake from "./pool/stitched-drake.js";
 import _poolStitchedMangler from "./pool/stitched-mangler.js";
 import _poolStitchersGraft from "./pool/stitchers-graft.js";
 import _poolStitchersSupplier from "./pool/stitchers-supplier.js";
@@ -22995,6 +23003,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAberrantResearcher,
   _poolAberrantReturn,
   _poolAberrant,
+  _poolAbhorrentOculus,
   _poolAbhorrentOverlord,
   _poolAbidingGrace,
   _poolAbigaleEloquentFirstYear,
@@ -26443,6 +26452,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCoatiScavenger,
   _poolCobaltGolem,
   _poolCobblebrute,
+  _poolCobbledLancer,
   _poolCobbledWings,
   _poolCockatrice,
   _poolCocoon,
@@ -31636,6 +31646,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeadOfTheHomestead,
   _poolHeadlessHorseman,
   _poolHeadlessRider,
+  _poolHeadlessSkaab,
   _poolHeadlessSpecter,
   _poolHeadsplitter,
   _poolHeadstone,
@@ -34436,6 +34447,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMakeshiftBattalion,
   _poolMakeshiftBinding,
   _poolMakeshiftMannequin,
+  _poolMakeshiftMauler,
   _poolMakeshiftMunitions,
   _poolMakindiAeronaut,
   _poolMakindiGriffin,
@@ -38040,6 +38052,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRelentlessHunter,
   _poolRelentlessPursuit,
   _poolRelentlessRohirrim,
+  _poolRelentlessSkaabs,
   _poolRelicAxe,
   _poolRelicBarrier,
   _poolRelicBind,
@@ -40106,6 +40119,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSixthSense,
   _poolSizzle,
   _poolSizzlingChangeling,
+  _poolSkaabGoliath,
+  _poolSkaabRuinator,
   _poolSkaabWrangler,
   _poolSkallaWolf,
   _poolSkarrgGoliath,
@@ -41224,6 +41239,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStitchInTime,
   _poolStitchTogether,
   _poolStitchedAssistant,
+  _poolStitchedDrake,
   _poolStitchedMangler,
   _poolStitchersGraft,
   _poolStitchersSupplier,
@@ -45964,6 +45980,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aberrant-researcher": _poolAberrantResearcher,
   "pool/aberrant-return": _poolAberrantReturn,
   "pool/aberrant": _poolAberrant,
+  "pool/abhorrent-oculus": _poolAbhorrentOculus,
   "pool/abhorrent-overlord": _poolAbhorrentOverlord,
   "pool/abiding-grace": _poolAbidingGrace,
   "pool/abigale-eloquent-first-year": _poolAbigaleEloquentFirstYear,
@@ -49412,6 +49429,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/coati-scavenger": _poolCoatiScavenger,
   "pool/cobalt-golem": _poolCobaltGolem,
   "pool/cobblebrute": _poolCobblebrute,
+  "pool/cobbled-lancer": _poolCobbledLancer,
   "pool/cobbled-wings": _poolCobbledWings,
   "pool/cockatrice": _poolCockatrice,
   "pool/cocoon": _poolCocoon,
@@ -54605,6 +54623,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/head-of-the-homestead": _poolHeadOfTheHomestead,
   "pool/headless-horseman": _poolHeadlessHorseman,
   "pool/headless-rider": _poolHeadlessRider,
+  "pool/headless-skaab": _poolHeadlessSkaab,
   "pool/headless-specter": _poolHeadlessSpecter,
   "pool/headsplitter": _poolHeadsplitter,
   "pool/headstone": _poolHeadstone,
@@ -57405,6 +57424,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/makeshift-battalion": _poolMakeshiftBattalion,
   "pool/makeshift-binding": _poolMakeshiftBinding,
   "pool/makeshift-mannequin": _poolMakeshiftMannequin,
+  "pool/makeshift-mauler": _poolMakeshiftMauler,
   "pool/makeshift-munitions": _poolMakeshiftMunitions,
   "pool/makindi-aeronaut": _poolMakindiAeronaut,
   "pool/makindi-griffin": _poolMakindiGriffin,
@@ -61009,6 +61029,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/relentless-hunter": _poolRelentlessHunter,
   "pool/relentless-pursuit": _poolRelentlessPursuit,
   "pool/relentless-rohirrim": _poolRelentlessRohirrim,
+  "pool/relentless-skaabs": _poolRelentlessSkaabs,
   "pool/relic-axe": _poolRelicAxe,
   "pool/relic-barrier": _poolRelicBarrier,
   "pool/relic-bind": _poolRelicBind,
@@ -63075,6 +63096,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sixth-sense": _poolSixthSense,
   "pool/sizzle": _poolSizzle,
   "pool/sizzling-changeling": _poolSizzlingChangeling,
+  "pool/skaab-goliath": _poolSkaabGoliath,
+  "pool/skaab-ruinator": _poolSkaabRuinator,
   "pool/skaab-wrangler": _poolSkaabWrangler,
   "pool/skalla-wolf": _poolSkallaWolf,
   "pool/skarrg-goliath": _poolSkarrgGoliath,
@@ -64193,6 +64216,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stitch-in-time": _poolStitchInTime,
   "pool/stitch-together": _poolStitchTogether,
   "pool/stitched-assistant": _poolStitchedAssistant,
+  "pool/stitched-drake": _poolStitchedDrake,
   "pool/stitched-mangler": _poolStitchedMangler,
   "pool/stitchers-graft": _poolStitchersGraft,
   "pool/stitchers-supplier": _poolStitchersSupplier,

@@ -539,6 +539,7 @@ import _poolSifterWurm from "../pool/sifter-wurm.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
 import _poolSinisterConcoction from "../pool/sinister-concoction.js";
+import _poolSkaabRuinator from "../pool/skaab-ruinator.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -1264,6 +1265,7 @@ const shard: CardShard = {
     _poolSigiledPaladin,
     _poolSilklashSpider,
     _poolSinisterConcoction,
+    _poolSkaabRuinator,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,
