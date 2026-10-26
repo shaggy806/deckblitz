@@ -713,10 +713,18 @@ function evalStaticCondition(
       // Rule 700.8c: a party of four.
       return partySizeOf(state, registry, you) === 4;
     case "metalcraft":
-      return reaches(3, (id) => {
-        const o = state.objects[id];
-        return o.controller === you && effectiveTypes(state, registry, o).includes("artifact");
-      });
+      // "You control three or more artifacts" counts the source itself when
+      // it's one (Chrome Steed, Rusted Relic): a static's scan puts it back,
+      // as a `controls` condition's `countsSelf` does.
+      return reaches(
+        3,
+        (id) => {
+          const o = state.objects[id];
+          return o.controller === you && effectiveTypes(state, registry, o).includes("artifact");
+        },
+        [],
+        true,
+      );
     case "controls": {
       // A static ability's scan has already skipped the source whole.
       const except: ObjectId[] = [];

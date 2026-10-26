@@ -1,8 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 28803. Metalcraft as a `controls` count with `countsSelf`: a
-// static's `metalcraft` scan leaves its own permanent out, and the Glider is
-// an artifact that counts toward its own three.
+// EDHREC rank 28803.
 
 const TEXT = "Metalcraft — This creature has flying as long as you control three or more artifacts.";
 
@@ -18,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 3, countsSelf: true },
+      condition: { kind: "metalcraft" },
       grantKeywords: ["flying"],
       text: TEXT,
     },
