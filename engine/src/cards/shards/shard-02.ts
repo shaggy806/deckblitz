@@ -213,6 +213,7 @@ import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
 import _poolFlameWreathedPhoenix from "../pool/flame-wreathed-phoenix.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
 import _poolFly from "../pool/fly.js";
+import _poolFogElemental from "../pool/fog-elemental.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
@@ -325,6 +326,7 @@ import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
 import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
+import _poolLavaStorm from "../pool/lava-storm.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
@@ -868,6 +870,7 @@ const shard: CardShard = {
     _poolFlameWreathedPhoenix,
     _poolFlamingSword,
     _poolFly,
+    _poolFogElemental,
     _poolForbiddenLore,
     _poolForceSpike,
     _poolForcefulDenial,
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolLargeBear,
     _poolLashwrithe,
     _poolLatticeLibrary,
+    _poolLavaStorm,
     _poolLavaleaper,
     _poolLichsCaress,
     _poolLifespringDruid,

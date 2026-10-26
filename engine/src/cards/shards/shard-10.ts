@@ -22,6 +22,7 @@ import _poolAnHavvaInn from "../pool/an-havva-inn.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
+import _poolAngelicRenewal from "../pool/angelic-renewal.js";
 import _poolAngusMackenzie from "../pool/angus-mackenzie.js";
 import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
@@ -712,6 +713,7 @@ const shard: CardShard = {
     _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,
+    _poolAngelicRenewal,
     _poolAngusMackenzie,
     _poolAnimarSoulOfElements,
     _poolAnointedProcession,

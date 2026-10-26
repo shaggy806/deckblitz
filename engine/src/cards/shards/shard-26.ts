@@ -379,6 +379,7 @@ import _poolNightsnare from "../pool/nightsnare.js";
 import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
 import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
+import _poolNobleBenefactor from "../pool/noble-benefactor.js";
 import _poolNobleTemplar from "../pool/noble-templar.js";
 import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
@@ -444,6 +445,7 @@ import _poolRiderInNeed from "../pool/rider-in-need.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
 import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
+import _poolRogueElephant from "../pool/rogue-elephant.js";
 import _poolRohirrimLancer from "../pool/rohirrim-lancer.js";
 import _poolRotShambler from "../pool/rot-shambler.js";
 import _poolRovingHarper from "../pool/roving-harper.js";
@@ -483,6 +485,7 @@ import _poolSequenceEngine from "../pool/sequence-engine.js";
 import _poolSequesteredStash from "../pool/sequestered-stash.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolSeraphicGreatsword from "../pool/seraphic-greatsword.js";
+import _poolSerenity from "../pool/serenity.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
@@ -1040,6 +1043,7 @@ const shard: CardShard = {
     _poolNimraiserPaladin,
     _poolNirkanaRevenant,
     _poolNoAdmittance,
+    _poolNobleBenefactor,
     _poolNobleTemplar,
     _poolNorwoodRanger,
     _poolNothic,
@@ -1105,6 +1109,7 @@ const shard: CardShard = {
     _poolRiverpyreVerge,
     _poolRoadsideReliquary,
     _poolRoast,
+    _poolRogueElephant,
     _poolRohirrimLancer,
     _poolRotShambler,
     _poolRovingHarper,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolSequesteredStash,
     _poolSeraphSanctuary,
     _poolSeraphicGreatsword,
+    _poolSerenity,
     _poolSerpentineAmbush,
     _poolShackleSlinger,
     _poolShangChiMartialMentor,

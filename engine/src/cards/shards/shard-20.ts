@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonAttachments from "../pool/abandon-attachments.js";
 import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
+import _poolAbduction from "../pool/abduction.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
@@ -90,6 +91,7 @@ import _poolBroodBirthing from "../pool/brood-birthing.js";
 import _poolBroodwarden from "../pool/broodwarden.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
 import _poolBrownOuphe from "../pool/brown-ouphe.js";
+import _poolBubbleMatrix from "../pool/bubble-matrix.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
 import _poolBumiBash from "../pool/bumi-bash.js";
 import _poolBurnBright from "../pool/burn-bright.js";
@@ -724,6 +726,7 @@ const shard: CardShard = {
   pool: [
     _poolAbandonAttachments,
     _poolAbdelAdrianGorionsWard,
+    _poolAbduction,
     _poolAberrantManawurm,
     _poolAbolisherOfBloodlines,
     _poolAbsorbingMan,
@@ -809,6 +812,7 @@ const shard: CardShard = {
     _poolBroodwarden,
     _poolBrotherhoodsEnd,
     _poolBrownOuphe,
+    _poolBubbleMatrix,
     _poolBullHippo,
     _poolBumiBash,
     _poolBurnBright,

@@ -258,6 +258,7 @@ import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
+import _poolGoblinBomb from "../pool/goblin-bomb.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
 import _poolGoblinChariot from "../pool/goblin-chariot.js";
 import _poolGoblinInstigator from "../pool/goblin-instigator.js";
@@ -608,6 +609,7 @@ import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
+import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
@@ -923,6 +925,7 @@ const shard: CardShard = {
     _poolGlitchInterpreter,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
+    _poolGoblinBomb,
     _poolGoblinChainwhirler,
     _poolGoblinChariot,
     _poolGoblinInstigator,
@@ -1273,6 +1276,7 @@ const shard: CardShard = {
     _poolUnnaturalGrowth,
     _poolUnravel,
     _poolUpTheBeanstalk,
+    _poolUrborgStalker,
     _poolUrzasCave,
     _poolUrzasIncubator,
     _poolVampireNighthawk,

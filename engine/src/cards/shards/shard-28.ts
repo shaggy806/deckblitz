@@ -106,7 +106,9 @@ import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChangeTheEquation from "../pool/change-the-equation.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolChevillBaneOfMonsters from "../pool/chevill-bane-of-monsters.js";
+import _poolChimericSphere from "../pool/chimeric-sphere.js";
 import _poolChitteringHarvester from "../pool/chittering-harvester.js";
+import _poolCinderWall from "../pool/cinder-wall.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
@@ -154,6 +156,7 @@ import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
 import _poolDormantVolcano from "../pool/dormant-volcano.js";
+import _poolDowndraft from "../pool/downdraft.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
@@ -283,6 +286,7 @@ import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
+import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
@@ -790,7 +794,9 @@ const shard: CardShard = {
     _poolChangeTheEquation,
     _poolChanneledDragonfire,
     _poolChevillBaneOfMonsters,
+    _poolChimericSphere,
     _poolChitteringHarvester,
+    _poolCinderWall,
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
@@ -838,6 +844,7 @@ const shard: CardShard = {
     _poolDoggedDetective,
     _poolDomrisAmbush,
     _poolDormantVolcano,
+    _poolDowndraft,
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,
@@ -967,6 +974,7 @@ const shard: CardShard = {
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,
+    _poolJabarisBanner,
     _poolJadelightSpelunker,
     _poolJewelThief,
     _poolJhessianThief,

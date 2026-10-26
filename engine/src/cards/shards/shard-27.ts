@@ -180,6 +180,7 @@ import _poolFaerieMiscreant from "../pool/faerie-miscreant.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
+import _poolFatalBlow from "../pool/fatal-blow.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFelhideBrawler from "../pool/felhide-brawler.js";
 import _poolFellMire from "../pool/fell-mire.js";
@@ -844,6 +845,7 @@ const shard: CardShard = {
     _poolFaerieSlumberParty,
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
+    _poolFatalBlow,
     _poolFatalGrudge,
     _poolFelhideBrawler,
     _poolFellMire,

@@ -239,6 +239,7 @@ import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
+import _poolGerrardsWisdom from "../pool/gerrards-wisdom.js";
 import _poolGeyserDrake from "../pool/geyser-drake.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantOpportunity from "../pool/giant-opportunity.js";
@@ -441,6 +442,7 @@ import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
 import _poolParagonOfNewDawns from "../pool/paragon-of-new-dawns.js";
 import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
 import _poolPeerReview from "../pool/peer-review.js";
+import _poolPendrellMists from "../pool/pendrell-mists.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
@@ -496,6 +498,7 @@ import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
 import _poolRubbleReading from "../pool/rubble-reading.js";
 import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
+import _poolSageOwl from "../pool/sage-owl.js";
 import _poolSagesNouliths from "../pool/sages-nouliths.js";
 import _poolSaltRoadSkirmish from "../pool/salt-road-skirmish.js";
 import _poolSandblast from "../pool/sandblast.js";
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolGeneralThunderboltRoss,
     _poolGenerousGift,
     _poolGenesisUltimatum,
+    _poolGerrardsWisdom,
     _poolGeyserDrake,
     _poolGiantFly,
     _poolGiantOpportunity,
@@ -1135,6 +1139,7 @@ const shard: CardShard = {
     _poolParagonOfNewDawns,
     _poolPatientRebuilding,
     _poolPeerReview,
+    _poolPendrellMists,
     _poolPendulumOfPatterns,
     _poolPerilousLandscape,
     _poolPerilousSnare,
@@ -1190,6 +1195,7 @@ const shard: CardShard = {
     _poolRowanScionOfWar,
     _poolRubbleReading,
     _poolRunawaySteamKin,
+    _poolSageOwl,
     _poolSagesNouliths,
     _poolSaltRoadSkirmish,
     _poolSandblast,

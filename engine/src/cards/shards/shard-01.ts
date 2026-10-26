@@ -555,6 +555,7 @@ import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
+import _poolThranForge from "../pool/thran-forge.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
 import _poolThreat from "../pool/threat.js";
 import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,
     _poolThoughtcast,
+    _poolThranForge,
     _poolThranVigil,
     _poolThreat,
     _poolThreatsAroundEveryCorner,

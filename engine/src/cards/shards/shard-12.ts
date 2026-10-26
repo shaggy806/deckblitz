@@ -458,6 +458,7 @@ import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
+import _poolReveredUnicorn from "../pool/revered-unicorn.js";
 import _poolRevitalize from "../pool/revitalize.js";
 import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolRemnantOfTheRisingStar,
     _poolResearchThief,
     _poolRestlessDead,
+    _poolReveredUnicorn,
     _poolRevitalize,
     _poolRevolutionaryRebuff,
     _poolRiggingRunner,
