@@ -107,6 +107,7 @@ import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
+import _poolCraterHellion from "../pool/crater-hellion.js";
 import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
@@ -494,6 +495,7 @@ import _poolScaldingTongs from "../pool/scalding-tongs.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
+import _poolScoriaWurm from "../pool/scoria-wurm.js";
 import _poolScornedVillager from "../pool/scorned-villager.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
@@ -667,6 +669,7 @@ import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
 import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhereAncientsTread from "../pool/where-ancients-tread.js";
+import _poolWhirlwind from "../pool/whirlwind.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
 import _poolWildHypothesis from "../pool/wild-hypothesis.js";
@@ -805,6 +808,7 @@ const shard: CardShard = {
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
+    _poolCraterHellion,
     _poolCripplingChill,
     _poolCrisisOfConscience,
     _poolCroakingCurse,
@@ -1192,6 +1196,7 @@ const shard: CardShard = {
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,
+    _poolScoriaWurm,
     _poolScornedVillager,
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
@@ -1365,6 +1370,7 @@ const shard: CardShard = {
     _poolWestWindAvatar,
     _poolWestvaleAbbey,
     _poolWhereAncientsTread,
+    _poolWhirlwind,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,
     _poolWildHypothesis,

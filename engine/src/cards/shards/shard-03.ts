@@ -227,6 +227,7 @@ import _poolGoldmeadowHarrier from "../pool/goldmeadow-harrier.js";
 import _poolGontiCannyAcquisitor from "../pool/gonti-canny-acquisitor.js";
 import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGraftedGrowth from "../pool/grafted-growth.js";
+import _poolGraftedSkullcap from "../pool/grafted-skullcap.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
 import _poolGrimServant from "../pool/grim-servant.js";
@@ -250,6 +251,7 @@ import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
+import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
@@ -880,6 +882,7 @@ const shard: CardShard = {
     _poolGontiCannyAcquisitor,
     _poolGorgonsHead,
     _poolGraftedGrowth,
+    _poolGraftedSkullcap,
     _poolGravkill,
     _poolGridMonitor,
     _poolGrimServant,
@@ -903,6 +906,7 @@ const shard: CardShard = {
     _poolHealersHawk,
     _poolHellkiteWhelp,
     _poolHengeOfRamos,
+    _poolHeraldOfSerra,
     _poolHeraldOfTheDreadhorde,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,

@@ -1608,6 +1608,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face(`Cumulative upkeep—Sacrifice a land. ${reminder}`, "Creature — Kraken").complete).toBe(true);
   });
 
+  it("echo (rule 702.30a): a mana cost, a discard or two lands, once after it comes under your control", () => {
+    const reminder =
+      "(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)";
+    const hellion = face(`Echo {4}{R}{R} ${reminder}`, "Creature — Hellion Beast");
+    expect(hellion.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "you" });
+    expect(hellion.triggered[0].condition).toEqual({ kind: "source-came-under-control-since-last-upkeep" });
+    expect(hellion.triggered[0].effect).toMatchObject({ kind: "unless", options: [{ pay: "{4}{R}{R}" }], otherwise: { kind: "sacrifice-source" } });
+    expect(hellion.complete).toBe(true);
+    expect(face(`Echo—Discard a card. ${reminder}`, "Creature — Goblin").triggered[0].effect).toMatchObject({ options: [{ discard: 1 }] });
+    expect(face(`Echo—Sacrifice two lands. ${reminder}`, "Creature — Elemental").complete).toBe(true);
+  });
+
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
     const battery = face(
       "{T}, Remove any number of charge counters from this artifact: Add {U}, then add an additional {U} for each charge counter removed this way.",

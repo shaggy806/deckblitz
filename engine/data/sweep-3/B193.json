@@ -1,0 +1,760 @@
+{
+ "batch": "B193",
+ "status": "complete",
+ "ranks": "Urza's Saga (USG, 1998-10-12): its 90 most-played cards left, the first half of 184 (oldest-first walk); built echo (rule 702.30: the echo() helper and the source-came-under-control-since-last-upkeep condition), with Urza's Saga's echo creatures (Crater Hellion of this half, 13 of the second) and Karmic Guide, Mogg War Marshal, Orcish Hellraiser and Rakdos Headliner from batches 5, 22, 122 and 110",
+ "authored": [
+  {
+   "name": "Absolute Grace",
+   "files": [
+    "engine/src/cards/pool/absolute-grace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Absolute Law",
+   "files": [
+    "engine/src/cards/pool/absolute-law.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acridian",
+   "files": [
+    "engine/src/cards/pool/acridian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Albino Troll",
+   "files": [
+    "engine/src/cards/pool/albino-troll.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arc Lightning",
+   "files": [
+    "engine/src/cards/pool/arc-lightning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Argothian Elder",
+   "files": [
+    "engine/src/cards/pool/argothian-elder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Argothian Wurm",
+   "files": [
+    "engine/src/cards/pool/argothian-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attunement",
+   "files": [
+    "engine/src/cards/pool/attunement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrin's Codex",
+   "files": [
+    "engine/src/cards/pool/barrins-codex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Befoul",
+   "files": [
+    "engine/src/cards/pool/befoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brand",
+   "files": [
+    "engine/src/cards/pool/brand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bravado",
+   "files": [
+    "engine/src/cards/pool/bravado.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brilliant Halo",
+   "files": [
+    "engine/src/cards/pool/brilliant-halo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Catastrophe",
+   "files": [
+    "engine/src/cards/pool/catastrophe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Citanul Centaurs",
+   "files": [
+    "engine/src/cards/pool/citanul-centaurs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Citanul Flute",
+   "files": [
+    "engine/src/cards/pool/citanul-flute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloak of Mists",
+   "files": [
+    "engine/src/cards/pool/cloak-of-mists.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Confiscate",
+   "files": [
+    "engine/src/cards/pool/confiscate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Copper Gnomes",
+   "files": [
+    "engine/src/cards/pool/copper-gnomes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Corrupt",
+   "files": [
+    "engine/src/cards/pool/corrupt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cradle Guard",
+   "files": [
+    "engine/src/cards/pool/cradle-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crater Hellion",
+   "files": [
+    "engine/src/cards/pool/crater-hellion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crystal Chimes",
+   "files": [
+    "engine/src/cards/pool/crystal-chimes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darkest Hour",
+   "files": [
+    "engine/src/cards/pool/darkest-hour.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Despondency",
+   "files": [
+    "engine/src/cards/pool/despondency.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Destructive Urge",
+   "files": [
+    "engine/src/cards/pool/destructive-urge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Douse",
+   "files": [
+    "engine/src/cards/pool/douse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Energy Field",
+   "files": [
+    "engine/src/cards/pool/energy-field.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expunge",
+   "files": [
+    "engine/src/cards/pool/expunge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Faith Healer",
+   "files": [
+    "engine/src/cards/pool/faith-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falter",
+   "files": [
+    "engine/src/cards/pool/falter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fault Line",
+   "files": [
+    "engine/src/cards/pool/fault-line.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fiery Mantle",
+   "files": [
+    "engine/src/cards/pool/fiery-mantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Ants",
+   "files": [
+    "engine/src/cards/pool/fire-ants.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flesh Reaver",
+   "files": [
+    "engine/src/cards/pool/flesh-reaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortitude",
+   "files": [
+    "engine/src/cards/pool/fortitude.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Bounty",
+   "files": [
+    "engine/src/cards/pool/gaeas-bounty.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gaea's Embrace",
+   "files": [
+    "engine/src/cards/pool/gaeas-embrace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Cadets",
+   "files": [
+    "engine/src/cards/pool/goblin-cadets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Patrol",
+   "files": [
+    "engine/src/cards/pool/goblin-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin War Buggy",
+   "files": [
+    "engine/src/cards/pool/goblin-war-buggy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grafted Skullcap",
+   "files": [
+    "engine/src/cards/pool/grafted-skullcap.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Great Whale",
+   "files": [
+    "engine/src/cards/pool/great-whale.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Herald of Serra",
+   "files": [
+    "engine/src/cards/pool/herald-of-serra.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hermetic Study",
+   "files": [
+    "engine/src/cards/pool/hermetic-study.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hibernation",
+   "files": [
+    "engine/src/cards/pool/hibernation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Spider",
+   "files": [
+    "engine/src/cards/pool/hidden-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Humble",
+   "files": [
+    "engine/src/cards/pool/humble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hush",
+   "files": [
+    "engine/src/cards/pool/hush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ill-Gotten Gains",
+   "files": [
+    "engine/src/cards/pool/ill-gotten-gains.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karmic Guide",
+   "files": [
+    "engine/src/cards/pool/karmic-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Karn, Silver Golem",
+   "files": [
+    "engine/src/cards/pool/karn-silver-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Launch",
+   "files": [
+    "engine/src/cards/pool/launch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lifeline",
+   "files": [
+    "engine/src/cards/pool/lifeline.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Dragon",
+   "files": [
+    "engine/src/cards/pool/lightning-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lilting Refrain",
+   "files": [
+    "engine/src/cards/pool/lilting-refrain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lotus Blossom",
+   "files": [
+    "engine/src/cards/pool/lotus-blossom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg War Marshal",
+   "files": [
+    "engine/src/cards/pool/mogg-war-marshal.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Noetic Scales",
+   "files": [
+    "engine/src/cards/pool/noetic-scales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Hellraiser",
+   "files": [
+    "engine/src/cards/pool/orcish-hellraiser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Order of Yawgmoth",
+   "files": [
+    "engine/src/cards/pool/order-of-yawgmoth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Planar Void",
+   "files": [
+    "engine/src/cards/pool/planar-void.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pouncing Jaguar",
+   "files": [
+    "engine/src/cards/pool/pouncing-jaguar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rakdos Headliner",
+   "files": [
+    "engine/src/cards/pool/rakdos-headliner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raze",
+   "files": [
+    "engine/src/cards/pool/raze.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reprocess",
+   "files": [
+    "engine/src/cards/pool/reprocess.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rune of Protection: White",
+   "files": [
+    "engine/src/cards/pool/rune-of-protection-white.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scoria Wurm",
+   "files": [
+    "engine/src/cards/pool/scoria-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shivan Raptor",
+   "files": [
+    "engine/src/cards/pool/shivan-raptor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shiv's Embrace",
+   "files": [
+    "engine/src/cards/pool/shivs-embrace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shower of Sparks",
+   "files": [
+    "engine/src/cards/pool/shower-of-sparks.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sleeper Agent",
+   "files": [
+    "engine/src/cards/pool/sleeper-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spire Owl",
+   "files": [
+    "engine/src/cards/pool/spire-owl.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spreading Algae",
+   "files": [
+    "engine/src/cards/pool/spreading-algae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunder",
+   "files": [
+    "engine/src/cards/pool/sunder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tainted Aether",
+   "files": [
+    "engine/src/cards/pool/tainted-aether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Quarry",
+   "files": [
+    "engine/src/cards/pool/thran-quarry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Turbine",
+   "files": [
+    "engine/src/cards/pool/thran-turbine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titania's Chosen",
+   "files": [
+    "engine/src/cards/pool/titanias-chosen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treefolk Seedlings",
+   "files": [
+    "engine/src/cards/pool/treefolk-seedlings.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vernal Bloom",
+   "files": [
+    "engine/src/cards/pool/vernal-bloom.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Viashino Outrider",
+   "files": [
+    "engine/src/cards/pool/viashino-outrider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vug Lizard",
+   "files": [
+    "engine/src/cards/pool/vug-lizard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whetstone",
+   "files": [
+    "engine/src/cards/pool/whetstone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whirlwind",
+   "files": [
+    "engine/src/cards/pool/whirlwind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winding Wurm",
+   "files": [
+    "engine/src/cards/pool/winding-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Witch Engine",
+   "files": [
+    "engine/src/cards/pool/witch-engine.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Phyrexian Processor",
+   "needs": [
+    "cost:pay-any-amount-of-life-as-enters"
+   ],
+   "why": "pay any amount of life as it enters, remembered for an X/X token later"
+  },
+  {
+   "name": "Fluctuator",
+   "needs": [
+    "static:cycling-cost-reduction"
+   ],
+   "why": "cycling abilities you activate cost {2} less: abilityCostModification can't pick out cycling"
+  },
+  {
+   "name": "No Rest for the Wicked",
+   "needs": [
+    "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "creature cards put into your graveyard from the battlefield this turn"
+  },
+  {
+   "name": "Sporogenesis",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "remove all fungus counters from all creatures as it leaves"
+  },
+  {
+   "name": "Smokestack",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifices a permanent for each soot counter: sacrifice counts are fixed"
+  },
+  {
+   "name": "Worship",
+   "needs": [
+    "static:damage-life-floor"
+   ],
+   "why": "damage that would reduce your life below 1 reduces it to 1, as a static while you control a creature"
+  },
+  {
+   "name": "Remembrance",
+   "needs": [
+    "filter:same-name-as-trigger-object"
+   ],
+   "why": "search for a card with the same name as the creature that died"
+  },
+  {
+   "name": "Diabolic Servitude",
+   "needs": [
+    "effect:leaves-act-on-permanent-put-there-by-source"
+   ],
+   "why": "its leaves trigger exiles the creature put onto the battlefield with it, after it has left"
+  },
+  {
+   "name": "Planar Birth",
+   "needs": [
+    "effect:return-all-graveyards-under-owners-control"
+   ],
+   "why": "basic lands from all graveyards return under their owners' control"
+  },
+  {
+   "name": "Phyrexian Colossus",
+   "needs": [
+    "static:cant-be-blocked-except-by-n"
+   ],
+   "why": "can't be blocked except by three or more creatures"
+  },
+  {
+   "name": "Carrion Beetles",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "up to three target cards from a single graveyard"
+  },
+  {
+   "name": "Curfew",
+   "needs": [
+    "effect:each-player-returns-own-permanent"
+   ],
+   "why": "each player returns a creature of their choice"
+  },
+  {
+   "name": "Umbilicus",
+   "needs": [
+    "effect:each-player-returns-own-permanent"
+   ],
+   "why": "the upkeep player chooses the permanent to return if they don't pay 2 life"
+  },
+  {
+   "name": "Persecute",
+   "needs": [
+    "effect:discard-all-matching",
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "choose a colour; discard all cards of it"
+  },
+  {
+   "name": "Temporal Aperture",
+   "needs": [
+    "static:players-play-with-library-top-revealed",
+    "effect:play-library-top-free-while-on-top"
+   ],
+   "why": "play the top card free while it stays on top"
+  },
+  {
+   "name": "Arcane Laboratory",
+   "needs": [
+    "effect:cast-limit"
+   ],
+   "why": "each player can't cast more than one spell each turn: prohibits reads its condition from the source controller's side only"
+  },
+  {
+   "name": "Outmaneuver",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "X target blocked creatures assign combat damage as though unblocked"
+  },
+  {
+   "name": "Defensive Formation",
+   "needs": [
+    "static:defending-player-assigns-combat-damage"
+   ],
+   "why": "you, not the attacking player, assign the combat damage of creatures attacking you"
+  },
+  {
+   "name": "Vile Requiem",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "up to X targets, X the verse counters: an any-number target's max is a number or x"
+  },
+  {
+   "name": "Urza's Armor",
+   "needs": [
+    "replacement:prevent-n-damage-from-each-source"
+   ],
+   "why": "prevent 1 of each source's damage, in the order the player chooses (616.1) against multipliers"
+  }
+ ]
+}

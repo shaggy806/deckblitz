@@ -487,6 +487,7 @@ import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPollywogSymbiote from "../pool/pollywog-symbiote.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPortcullisVine from "../pool/portcullis-vine.js";
+import _poolPouncingJaguar from "../pool/pouncing-jaguar.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
@@ -553,6 +554,7 @@ import _poolShadowGlider from "../pool/shadow-glider.js";
 import _poolShanidSleepersScourge from "../pool/shanid-sleepers-scourge.js";
 import _poolShatteringBlow from "../pool/shattering-blow.js";
 import _poolShivanHellkite from "../pool/shivan-hellkite.js";
+import _poolShivsEmbrace from "../pool/shivs-embrace.js";
 import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
@@ -1215,6 +1217,7 @@ const shard: CardShard = {
     _poolPollywogSymbiote,
     _poolPolygoyf,
     _poolPortcullisVine,
+    _poolPouncingJaguar,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPresumedDead,
@@ -1281,6 +1284,7 @@ const shard: CardShard = {
     _poolShanidSleepersScourge,
     _poolShatteringBlow,
     _poolShivanHellkite,
+    _poolShivsEmbrace,
     _poolShreddingWinds,
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,

@@ -8,6 +8,8 @@ import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAbduction from "../pool/abduction.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
+import _poolAbsoluteGrace from "../pool/absolute-grace.js";
+import _poolAbsoluteLaw from "../pool/absolute-law.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolAbstruseInterference from "../pool/abstruse-interference.js";
 import _poolAbyssalHunter from "../pool/abyssal-hunter.js";
@@ -239,6 +241,7 @@ import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFullyGrown from "../pool/fully-grown.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
+import _poolGaeasEmbrace from "../pool/gaeas-embrace.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGatstafHowler from "../pool/gatstaf-howler.js";
@@ -260,6 +263,7 @@ import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGlowstoneRecluse from "../pool/glowstone-recluse.js";
 import _poolGnarlbackRhino from "../pool/gnarlback-rhino.js";
 import _poolGnawingCrescendo from "../pool/gnawing-crescendo.js";
+import _poolGoblinCadets from "../pool/goblin-cadets.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
 import _poolGoblinRacketeer from "../pool/goblin-racketeer.js";
@@ -616,6 +620,7 @@ import _poolSubterraneanCavern from "../pool/subterranean-cavern.js";
 import _poolSuddenStrike from "../pool/sudden-strike.js";
 import _poolSultaiAscendancy from "../pool/sultai-ascendancy.js";
 import _poolSunCollaredRaptor from "../pool/sun-collared-raptor.js";
+import _poolSunder from "../pool/sunder.js";
 import _poolSunkenHollow from "../pool/sunken-hollow.js";
 import _poolSunstreakPhoenix from "../pool/sunstreak-phoenix.js";
 import _poolSuperSkrull from "../pool/super-skrull.js";
@@ -777,6 +782,8 @@ const shard: CardShard = {
     _poolAbduction,
     _poolAberrantManawurm,
     _poolAbolisherOfBloodlines,
+    _poolAbsoluteGrace,
+    _poolAbsoluteLaw,
     _poolAbsorbingMan,
     _poolAbstruseInterference,
     _poolAbyssalHunter,
@@ -1008,6 +1015,7 @@ const shard: CardShard = {
     _poolFugitiveDroid,
     _poolFullyGrown,
     _poolFurnaceSpirit,
+    _poolGaeasEmbrace,
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
     _poolGatstafHowler,
@@ -1029,6 +1037,7 @@ const shard: CardShard = {
     _poolGlowstoneRecluse,
     _poolGnarlbackRhino,
     _poolGnawingCrescendo,
+    _poolGoblinCadets,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
     _poolGoblinRacketeer,
@@ -1385,6 +1394,7 @@ const shard: CardShard = {
     _poolSuddenStrike,
     _poolSultaiAscendancy,
     _poolSunCollaredRaptor,
+    _poolSunder,
     _poolSunkenHollow,
     _poolSunstreakPhoenix,
     _poolSuperSkrull,

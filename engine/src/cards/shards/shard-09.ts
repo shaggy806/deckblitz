@@ -18,6 +18,7 @@ import _poolAgentOfAcquisitions from "../pool/agent-of-acquisitions.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAkkiRonin from "../pool/akki-ronin.js";
+import _poolAlbinoTroll from "../pool/albino-troll.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
@@ -105,6 +106,7 @@ import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCarrion from "../pool/carrion.js";
+import _poolCatastrophe from "../pool/catastrophe.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
 import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
@@ -760,6 +762,7 @@ const shard: CardShard = {
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
     _poolAkkiRonin,
+    _poolAlbinoTroll,
     _poolAlleyEvasion,
     _poolAmethystDragon,
     _poolAnUnexpectedParty,
@@ -847,6 +850,7 @@ const shard: CardShard = {
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCarrion,
+    _poolCatastrophe,
     _poolCatlikeCuriosity,
     _poolCeruleanDrake,
     _poolChaplainOfAlms,

@@ -84,6 +84,7 @@ import _poolBorrowedHostility from "../pool/borrowed-hostility.js";
 import _poolBoseijuReachesSkyward from "../pool/boseiju-reaches-skyward.js";
 import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.js";
 import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
+import _poolBravado from "../pool/bravado.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
@@ -323,6 +324,7 @@ import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
+import _poolKarmicGuide from "../pool/karmic-guide.js";
 import _poolKarplusanHound from "../pool/karplusan-hound.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
@@ -800,6 +802,7 @@ const shard: CardShard = {
     _poolBoseijuReachesSkyward,
     _poolBottomlessPoolLockerRoom,
     _poolBraidsConjurerAdept,
+    _poolBravado,
     _poolBreathOfFire,
     _poolBrightglassGearhulk,
     _poolBristlebaneBattler,
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolKaleidoscorch,
     _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
+    _poolKarmicGuide,
     _poolKarplusanHound,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,

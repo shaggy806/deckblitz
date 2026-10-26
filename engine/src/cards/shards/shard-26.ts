@@ -256,6 +256,7 @@ import _poolGloomwidowsFeast from "../pool/gloomwidows-feast.js";
 import _poolGoblinBoarders from "../pool/goblin-boarders.js";
 import _poolGoblinBully from "../pool/goblin-bully.js";
 import _poolGoblinDiggingTeam from "../pool/goblin-digging-team.js";
+import _poolGoblinWarBuggy from "../pool/goblin-war-buggy.js";
 import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
@@ -302,6 +303,7 @@ import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
 import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
+import _poolIllGottenGains from "../pool/ill-gotten-gains.js";
 import _poolIllusionsOfGrandeur from "../pool/illusions-of-grandeur.js";
 import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
@@ -974,6 +976,7 @@ const shard: CardShard = {
     _poolGoblinBoarders,
     _poolGoblinBully,
     _poolGoblinDiggingTeam,
+    _poolGoblinWarBuggy,
     _poolGolemFoundry,
     _poolGolgariFindbroker,
     _poolGoliathBeetle,
@@ -1020,6 +1023,7 @@ const shard: CardShard = {
     _poolIceTunnel,
     _poolIchorRats,
     _poolIdolOfFalseGods,
+    _poolIllGottenGains,
     _poolIllusionsOfGrandeur,
     _poolImmolation,
     _poolImpetuousSunchaser,

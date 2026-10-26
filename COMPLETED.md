@@ -93,6 +93,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Gilt-Leaf Palace and Secluded Glen (their changeling blocker stale), Sylvan Echoes, Rebellion of
   the Flamekin, Entangling Trap, Hearthcage Giant, Gilt-Leaf Ambush and 54 more — and 20 blocked
   (`B192.json`), "reveal a card from your hand" as an additional cost leading with four.
+- **Echo, and Urza's Saga's 90 most-played left** (batch 193, the oldest-first walk, 2026-10-26,
+  `keyword:echo`): **built** echo (rule 702.30 — the `echo(cost)` helper, a mana cost or any
+  `UnlessOption`; its intervening if the `source-came-under-control-since-last-upkeep` condition,
+  over `GameObject.controlSinceSeq` and `PlayerState.previousUpkeepSeq`), taught to the
+  scaffolder; with it Urza's Saga's echo creatures (Crater Hellion, Albino Troll, Lightning Dragon
+  and 11 more) and Karmic Guide, Mogg War Marshal, Orcish Hellraiser and Rakdos Headliner from
+  earlier batches. 70 of the half's 90 authored — Lotus Blossom, Karn, Silver Golem, Confiscate,
+  Ill-Gotten Gains, Thran Turbine, Barrin's Codex and more — by five `card-author` agents and the
+  lead; 20 blocked, two at most per need (`B193.json`). `echo.test.ts`.
 - **The rest of Innistrad and Magic 2012 whole** (batch 191, the newest-first walk, 2026-10-26):
   **built** a spell's additional cost of exiling N cards from your graveyard
   (`cost:exile-from-graveyard-additional` — `additionalCost.exileFromGraveyard`, read by the

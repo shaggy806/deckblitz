@@ -454,7 +454,8 @@
   "target:opponent-compared",
   "mechanic:clash",
   "keyword:champion",
-  "trigger:clash"
+  "trigger:clash",
+  "keyword:echo"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

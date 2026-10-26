@@ -134,6 +134,7 @@ import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
+import _poolCradleGuard from "../pool/cradle-guard.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCropSigil from "../pool/crop-sigil.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
@@ -250,6 +251,7 @@ import _poolGodtoucher from "../pool/godtoucher.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
+import _poolGreatWhale from "../pool/great-whale.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
 import _poolGuma from "../pool/guma.js";
@@ -679,6 +681,7 @@ import _poolVirulentSliver from "../pool/virulent-sliver.js";
 import _poolVividCreek from "../pool/vivid-creek.js";
 import _poolVoidSquall from "../pool/void-squall.js";
 import _poolVolcanicVillain from "../pool/volcanic-villain.js";
+import _poolVugLizard from "../pool/vug-lizard.js";
 import _poolWallOfRunes from "../pool/wall-of-runes.js";
 import _poolWarchiefGiant from "../pool/warchief-giant.js";
 import _poolWardenOfGeometries from "../pool/warden-of-geometries.js";
@@ -853,6 +856,7 @@ const shard: CardShard = {
     _poolCoordinatedCharge,
     _poolCostumeCloset,
     _poolCracklingSpellslinger,
+    _poolCradleGuard,
     _poolCreepingBloodsucker,
     _poolCropSigil,
     _poolCrossbowAmbush,
@@ -969,6 +973,7 @@ const shard: CardShard = {
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
+    _poolGreatWhale,
     _poolGreenwoodSentinel,
     _poolGrimDraugr,
     _poolGuma,
@@ -1398,6 +1403,7 @@ const shard: CardShard = {
     _poolVividCreek,
     _poolVoidSquall,
     _poolVolcanicVillain,
+    _poolVugLizard,
     _poolWallOfRunes,
     _poolWarchiefGiant,
     _poolWardenOfGeometries,

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3815 already implemented / 1185 missing (marks refreshed 2026-10-26)
+3816 already implemented / 1184 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -970,7 +970,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   974  Eerie Interlude                          {2}{W}           Instant
 [ ]   975  Narset, Parter of Veils                  {1}{U}{U}        Legendary Planeswalker — Narset
 [x]   976  Razorkin Needlehead                      {R}{R}           Creature — Human Assassin
-[ ]   977  Karmic Guide                             {3}{W}{W}        Creature — Angel Spirit
+[x]   977  Karmic Guide                             {3}{W}{W}        Creature — Angel Spirit
 [x]   978  Decimate                                 {2}{R}{G}        Sorcery
 [x]   979  Last March of the Ents                   {6}{G}{G}        Sorcery
 [ ]   980  Moraug, Fury of Akoum                    {4}{R}{R}        Legendary Creature — Minotaur Warrior
@@ -3000,7 +3000,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3007  Walking Atlas                            {2}              Artifact Creature — Construct
 [ ]  3008  Daze                                     {1}{U}           Instant
 [x]  3009  Erebos, God of the Dead                  {3}{B}           Legendary Enchantment Creature — God
-[ ]  3010  Mogg War Marshal                         {1}{R}           Creature — Goblin Warrior
+[x]  3010  Mogg War Marshal                         {1}{R}           Creature — Goblin Warrior
 [x]  3011  Iridescent Vinelasher                    {B}              Creature — Lizard Assassin
 [x]  3012  Syr Ginger, the Meal Ender               {2}              Legendary Artifact Creature — Food Knight
 [x]  3013  Tectonic Giant                           {2}{R}{R}        Creature — Elemental Giant
@@ -4926,7 +4926,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4933  Nissa, Vital Force                       {3}{G}{G}        Legendary Planeswalker — Nissa
 [ ]  4934  Toby, Beastie Befriender                 {2}{W}           Legendary Creature — Human Wizard
 [ ]  4935  Baneslayer Angel                         {3}{W}{W}        Creature — Angel
-[x]  4936  Gilt-Leaf Palace                         {0}              Land
+[ ]  4936  Gilt-Leaf Palace                         {0}              Land
 [x]  4937  Hedron Detonator                         {2}{R}           Creature — Goblin Artificer
 [x]  4938  Deadly Recluse                           {1}{G}           Creature — Spider
 [x]  4939  Wolfwillow Haven                         {1}{G}           Enchantment — Aura

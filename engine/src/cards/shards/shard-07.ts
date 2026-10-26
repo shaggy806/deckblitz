@@ -217,6 +217,7 @@ import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
+import _poolFortitude from "../pool/fortitude.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
@@ -390,6 +391,7 @@ import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
+import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
@@ -971,6 +973,7 @@ const shard: CardShard = {
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
+    _poolFortitude,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,
@@ -1144,6 +1147,7 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMirrodinAvenged,
+    _poolMoggWarMarshal,
     _poolMoldgrafScavenger,
     _poolMoltenFrame,
     _poolMomentOfGlory,

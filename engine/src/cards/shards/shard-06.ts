@@ -44,6 +44,7 @@ import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAspectOfHydra from "../pool/aspect-of-hydra.js";
 import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
+import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuthority from "../pool/authority.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
@@ -89,6 +90,7 @@ import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
 import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
 import _poolBriarhorn from "../pool/briarhorn.js";
+import _poolBrilliantHalo from "../pool/brilliant-halo.js";
 import _poolBrimstoneMage from "../pool/brimstone-mage.js";
 import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
 import _poolBrionStoutarm from "../pool/brion-stoutarm.js";
@@ -125,6 +127,7 @@ import _poolClanDefiance from "../pool/clan-defiance.js";
 import _poolClatteringSkeletons from "../pool/clattering-skeletons.js";
 import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
 import _poolCliffgate from "../pool/cliffgate.js";
+import _poolCloakOfMists from "../pool/cloak-of-mists.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
@@ -337,6 +340,7 @@ import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
+import _poolLaunch from "../pool/launch.js";
 import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
@@ -753,6 +757,7 @@ const shard: CardShard = {
     _poolAspectOfHydra,
     _poolAssureAssemble,
     _poolAtog,
+    _poolAttunement,
     _poolAugmentingAutomaton,
     _poolAuthority,
     _poolAvatarsWrath,
@@ -798,6 +803,7 @@ const shard: CardShard = {
     _poolBrazenUpstart,
     _poolBriarberryCohort,
     _poolBriarhorn,
+    _poolBrilliantHalo,
     _poolBrimstoneMage,
     _poolBrimstoneVandal,
     _poolBrionStoutarm,
@@ -834,6 +840,7 @@ const shard: CardShard = {
     _poolClatteringSkeletons,
     _poolCleopatraExiledPharaoh,
     _poolCliffgate,
+    _poolCloakOfMists,
     _poolCloudchaserEagle,
     _poolComfortingCounsel,
     _poolConductElectricity,
@@ -1046,6 +1053,7 @@ const shard: CardShard = {
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLathlissDragonQueen,
+    _poolLaunch,
     _poolLavaHounds,
     _poolLayDownArms,
     _poolLegionsLanding,

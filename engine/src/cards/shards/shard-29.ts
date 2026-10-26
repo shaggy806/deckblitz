@@ -216,6 +216,7 @@ import _poolFightWithFire from "../pool/fight-with-fire.js";
 import _poolFiligreeAngel from "../pool/filigree-angel.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
+import _poolFireAnts from "../pool/fire-ants.js";
 import _poolFirebreathing from "../pool/firebreathing.js";
 import _poolFlameJab from "../pool/flame-jab.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
@@ -340,6 +341,7 @@ import _poolLanternScout from "../pool/lantern-scout.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
+import _poolLifeline from "../pool/lifeline.js";
 import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
 import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
@@ -640,6 +642,7 @@ import _poolToweringWaveMystic from "../pool/towering-wave-mystic.js";
 import _poolTrainedCondor from "../pool/trained-condor.js";
 import _poolTraitorousInstinct from "../pool/traitorous-instinct.js";
 import _poolTreasuryThrull from "../pool/treasury-thrull.js";
+import _poolTreefolkSeedlings from "../pool/treefolk-seedlings.js";
 import _poolTrialOfStrength from "../pool/trial-of-strength.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
 import _poolTroveTracker from "../pool/trove-tracker.js";
@@ -952,6 +955,7 @@ const shard: CardShard = {
     _poolFiligreeAngel,
     _poolFinalDeath,
     _poolFinalVengeance,
+    _poolFireAnts,
     _poolFirebreathing,
     _poolFlameJab,
     _poolFlamebraider,
@@ -1076,6 +1080,7 @@ const shard: CardShard = {
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,
+    _poolLifeline,
     _poolLightfootRogue,
     _poolLightwalker,
     _poolLivingLiesOfLoki,
@@ -1376,6 +1381,7 @@ const shard: CardShard = {
     _poolTrainedCondor,
     _poolTraitorousInstinct,
     _poolTreasuryThrull,
+    _poolTreefolkSeedlings,
     _poolTrialOfStrength,
     _poolTriumphantAdventurer,
     _poolTroveTracker,

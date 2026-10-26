@@ -30,6 +30,7 @@ import {
   rampage,
   renown,
   cumulativeUpkeep,
+  echo,
   annihilator,
   awaken,
   levelBand,
@@ -164,6 +165,13 @@ function keywordPart(part) {
   if ((m = /^cumulative upkeep—pay (\d+) life\.?$/i.exec(p))) return { triggered: [cumulativeUpkeep({ life: Number(m[1]) })] };
   if (/^cumulative upkeep—sacrifice a land\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ sacrifice: { type: "land" }, text: "Sacrifice a land" })] };
+  }
+  // Echo [cost] (rule 702.30a): its upkeep trigger, "if this came under your
+  // control since the beginning of your last upkeep".
+  if ((m = new RegExp(`^echo ${COST}$`, "i").exec(p))) return { triggered: [echo(m[1])] };
+  if (/^echo—discard a card\.?$/i.test(p)) return { triggered: [echo({ discard: 1, text: "Discard a card" })] };
+  if (/^echo—sacrifice two lands\.?$/i.test(p)) {
+    return { triggered: [echo({ sacrifice: { type: "land" }, count: 2, text: "Sacrifice two lands" })] };
   }
   // Rampage N (rule 702.23a): its becomes-blocked trigger.
   if ((m = /^rampage (\d+)$/i.exec(p))) return { triggered: [rampage(Number(m[1]))] };

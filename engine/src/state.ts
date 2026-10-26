@@ -288,6 +288,14 @@ export interface GameObject {
    */
   summoningSick: boolean;
   /**
+   * `GameState.timestampSeq` when this permanent last came under its current
+   * controller's control — as it entered the battlefield, or as its control
+   * changed. Read by echo's "if this permanent came under your control since
+   * the beginning of your last upkeep" (rule 702.30a), against the
+   * controller's `PlayerState.previousUpkeepSeq`.
+   */
+  controlSinceSeq?: number;
+  /**
    * True once a loyalty ability of this permanent has been activated this turn
    * (rule 606.3 — at most one per turn). Reset in the controller's untap step.
    */
@@ -1932,6 +1940,14 @@ export const POISON_LETHAL = 10;
 export interface PlayerState {
   readonly id: PlayerId;
   life: number;
+  /**
+   * `GameState.timestampSeq` as this player's most recent upkeep began, and
+   * as the one before it began — echo's "since the beginning of your last
+   * upkeep" (rule 702.30a), asked during an upkeep, means the one before.
+   * Absent until they've had one (two).
+   */
+  lastUpkeepSeq?: number;
+  previousUpkeepSeq?: number;
   /** How many times the Ring has tempted this player this game (rule
    * 701.54c) — what the Ring emblem's later abilities are gated on. Absent
    * until it first does. */
