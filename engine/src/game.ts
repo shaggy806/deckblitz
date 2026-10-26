@@ -4504,7 +4504,60 @@ export class Game {
       }
     }
 
+    this.beginOpeningHandActions(0);
+  }
+
+  /**
+   * Rule 103.6: once every hand is kept, the starting player and then each
+   * other player in turn order may take the actions their opening hand's
+   * cards allow — 103.6a, beginning the game with a card on the battlefield
+   * (the Leylines, `CardDefinition.beginsOnBattlefield`). Asked as a
+   * `choose-from-zone` over those cards, any number of them, flagged
+   * `openingHand`; a player holding none isn't asked. `from` counts players
+   * from the starting player. Turn 1 begins once nobody is left to ask.
+   */
+  private beginOpeningHandActions(from: number): void {
+    const order = this.state.turnOrder;
+    const start = Math.max(0, order.indexOf(this.state.startingPlayer));
+    for (let i = from; i < order.length; i += 1) {
+      const player = order[(start + i) % order.length];
+      const eligible = this.state.zones.perPlayer[player].hand.filter((id) => {
+        const name = this.state.objects[id]?.cardName;
+        return name !== undefined && this.registry.has(name) && this.registry.get(name).beginsOnBattlefield;
+      });
+      if (eligible.length === 0) continue;
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ids: eligible,
+        eligible,
+        min: 0,
+        max: eligible.length,
+        destination: "battlefield",
+        leftover: "stay",
+        openingHand: { next: i + 1 },
+      };
+      this.prepareForPriority(player);
+      return;
+    }
+    this.state.awaiting = null;
     this.beginTurn();
+  }
+
+  /** The answer to {@link beginOpeningHandActions}' question: the chosen
+   * cards go onto the battlefield together (rule 103.6a), then the next
+   * player is asked. */
+  private applyOpeningHand(
+    player: PlayerId,
+    chosen: readonly ObjectId[],
+    next: number,
+  ): void {
+    this.state.awaiting = null;
+    this.withEnterBatch(() => {
+      for (const id of chosen) this.moveObject(id, "battlefield");
+    });
+    if (chosen.length > 0) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    this.beginOpeningHandActions(next);
   }
 
   /**
@@ -4534,7 +4587,7 @@ export class Game {
     const next = this.state.turnOrder.find((p) => hands[p] !== undefined);
     if (next === undefined) {
       this.state.awaiting = null;
-      this.beginTurn();
+      this.beginOpeningHandActions(0);
       return;
     }
     this.state.awaiting = { kind: "mulligan", player: next, hands };
@@ -6738,6 +6791,11 @@ export class Game {
     // A behold (rule 701.4a) moves nothing by `destination`: its own answer.
     if (awaiting.behold !== undefined) {
       this.applyBehold(player, chosen, awaiting);
+      return;
+    }
+    // Before the game (rule 103.6a): no resolution to go on with.
+    if (awaiting.openingHand !== undefined) {
+      this.applyOpeningHand(player, chosen, awaiting.openingHand.next);
       return;
     }
 

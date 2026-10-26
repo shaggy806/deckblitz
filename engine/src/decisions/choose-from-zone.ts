@@ -56,6 +56,8 @@ export const chooseFromZone = defineDecision({
       // A behold (rule 701.4a): hand cards and permanents at once. A pitch
       // cost's exile from the hand is asked as a plain exile.
       ...(awaiting.behold !== undefined && awaiting.behold.fromHand !== true ? { behold: true as const } : {}),
+      // The Leylines' "begin the game with it on the battlefield" (rule 103.6a).
+      ...(awaiting.openingHand !== undefined ? { openingHand: true as const } : {}),
     },
   ],
 
@@ -118,6 +120,9 @@ export const chooseFromZone = defineDecision({
    */
   candidates: (legal, player, limit, helpers): Action[] => {
     if (legal.kind !== "choose-from-zone") return [];
+    // Before the game a rollout to the end of a turn means nothing, as for
+    // the mulligan: the opening hand's choice is v1's (all of them).
+    if (legal.openingHand === true) return [];
     const together = legal.together;
     // What a cost exiles is given up, so the least valuable go first, as a
     // sacrifice's and a discard's do — a Champion's beheld card or

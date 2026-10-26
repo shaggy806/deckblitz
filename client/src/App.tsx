@@ -348,6 +348,8 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       ? together.text
       : `${action.max === 1 ? 'a card' : `${n} cards`}${together ? ` ${together.text}` : ''}`
   if (action.split === true) return `Choose ${cards}`
+  // Rule 103.6a, before turn 1: the Leylines in an opening hand.
+  if (action.openingHand === true) return 'Opening hand: choose any of these to begin the game with on the battlefield'
   // Choosing for someone else (Tasigur: an opponent picks for its controller).
   const whose = action.forPlayer === undefined ? 'your' : `${nameOf(action.forPlayer)}'s`
   switch (action.destination) {
@@ -6361,6 +6363,7 @@ function Table({
             onConfirm: confirmZoneChoice,
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
+            ...(zoneChoiceAction.openingHand === true ? { noneLabel: 'Keep them in hand' } : {}),
             ...(zoneChoiceAction.together
               ? { fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked) }
               : {}),

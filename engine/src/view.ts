@@ -997,7 +997,13 @@ function viewForUncached(
                     ids: state.awaiting.ids.filter((id) => state.objects[id]?.zone !== "hand"),
                     eligible: state.awaiting.eligible.filter((id) => state.objects[id]?.zone !== "hand"),
                   }
-                : state.awaiting,
+                : // An opening hand's Leylines (rule 103.6a) are hand cards
+                  // until they're put onto the battlefield.
+                  state.awaiting?.kind === "choose-from-zone" &&
+                    state.awaiting.openingHand !== undefined &&
+                    state.awaiting.player !== viewer
+                  ? { ...state.awaiting, ids: [], eligible: [] }
+                  : state.awaiting,
     decisionSource: decisionSourceFor(state),
     result: { ...state.result },
     players,

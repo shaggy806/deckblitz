@@ -10223,6 +10223,10 @@ import _poolLeyWeaver from "./pool/ley-weaver.js";
 import _poolLeylineBinding from "./pool/leyline-binding.js";
 import _poolLeylineDowser from "./pool/leyline-dowser.js";
 import _poolLeylineInvocation from "./pool/leyline-invocation.js";
+import _poolLeylineOfAnticipation from "./pool/leyline-of-anticipation.js";
+import _poolLeylineOfSanctity from "./pool/leyline-of-sanctity.js";
+import _poolLeylineOfTheVoid from "./pool/leyline-of-the-void.js";
+import _poolLeylineOfVitality from "./pool/leyline-of-vitality.js";
 import _poolLeylineProwler from "./pool/leyline-prowler.js";
 import _poolLeylineSurge from "./pool/leyline-surge.js";
 import _poolLeylineTyrant from "./pool/leyline-tyrant.js";
@@ -13615,6 +13619,7 @@ import _poolQuickling from "./pool/quickling.js";
 import _poolQuicksandWhirlpool from "./pool/quicksand-whirlpool.js";
 import _poolQuicksand from "./pool/quicksand.js";
 import _poolQuicksilverAmulet from "./pool/quicksilver-amulet.js";
+import _poolQuicksilverBrashBlur from "./pool/quicksilver-brash-blur.js";
 import _poolQuicksilverFisher from "./pool/quicksilver-fisher.js";
 import _poolQuicksilverPietroMaximoff from "./pool/quicksilver-pietro-maximoff.js";
 import _poolQuicksilverSpeedster from "./pool/quicksilver-speedster.js";
@@ -31702,6 +31707,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeylineBinding,
   _poolLeylineDowser,
   _poolLeylineInvocation,
+  _poolLeylineOfAnticipation,
+  _poolLeylineOfSanctity,
+  _poolLeylineOfTheVoid,
+  _poolLeylineOfVitality,
   _poolLeylineProwler,
   _poolLeylineSurge,
   _poolLeylineTyrant,
@@ -35094,6 +35103,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolQuicksandWhirlpool,
   _poolQuicksand,
   _poolQuicksilverAmulet,
+  _poolQuicksilverBrashBlur,
   _poolQuicksilverFisher,
   _poolQuicksilverPietroMaximoff,
   _poolQuicksilverSpeedster,
@@ -53194,6 +53204,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leyline-binding": _poolLeylineBinding,
   "pool/leyline-dowser": _poolLeylineDowser,
   "pool/leyline-invocation": _poolLeylineInvocation,
+  "pool/leyline-of-anticipation": _poolLeylineOfAnticipation,
+  "pool/leyline-of-sanctity": _poolLeylineOfSanctity,
+  "pool/leyline-of-the-void": _poolLeylineOfTheVoid,
+  "pool/leyline-of-vitality": _poolLeylineOfVitality,
   "pool/leyline-prowler": _poolLeylineProwler,
   "pool/leyline-surge": _poolLeylineSurge,
   "pool/leyline-tyrant": _poolLeylineTyrant,
@@ -56586,6 +56600,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/quicksand-whirlpool": _poolQuicksandWhirlpool,
   "pool/quicksand": _poolQuicksand,
   "pool/quicksilver-amulet": _poolQuicksilverAmulet,
+  "pool/quicksilver-brash-blur": _poolQuicksilverBrashBlur,
   "pool/quicksilver-fisher": _poolQuicksilverFisher,
   "pool/quicksilver-pietro-maximoff": _poolQuicksilverPietroMaximoff,
   "pool/quicksilver-speedster": _poolQuicksilverSpeedster,

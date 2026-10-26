@@ -2457,6 +2457,11 @@ export type AwaitingDecision =
       /** A rule the chosen cards must obey as a set — a `search-library`'s
        * `together` (Myriad Landscape's "that share a land type"). */
       readonly together?: ZoneChoiceTogether;
+      /** Before turn 1 (rule 103.6a — `Game.beginOpeningHandActions`): which
+       * of `player`'s opening-hand cards that may begin the game on the
+       * battlefield do. `next` is the next player to ask, counted from the
+       * starting player. */
+      readonly openingHand?: { readonly next: number };
     }
   | {
       /**

@@ -400,6 +400,7 @@ from the same link.
 | `looksAtOwnLibraryTop` | `boolean` | "You may look at the top card of your library any time" (Glarb, Calamity's Augur; rule 401.5): while this permanent is on the battlefield with its abilities, `viewFor` shows its controller their own top card — in their view only, where `revealsOwnLibraryTop` shows it to everyone. Goes with a `castFromLibraryTop` / `playFromLibraryTop` static (§10), which is what lets them do something with it. |
 | `pairing` | `CommanderPairing` | the partner-family ability that lets this card be one of **two** commanders (rule 702.124) — §12. Never inferred from `text`. |
 | `canBeCommander` | `boolean` | "~ can be your commander." (rule 903.3a) — how a legendary card that isn't a creature, Vehicle or Spacecraft with P/T (a planeswalker) commands a deck — §12. Never inferred from `text`; `pool.test.ts` checks the two agree. |
+| `beginsOnBattlefield` | `boolean` | "If this card is in your opening hand, you may begin the game with it on the battlefield" (rule 103.6a — the Leylines, Quicksilver, Brash Blur). Once every hand is kept, the starting player and then each other player in turn order is asked which such cards to put onto the battlefield (a `choose-from-zone` flagged `openingHand`). Nothing else on the card changes. The scaffolder reads the line. Gemstone Caverns' version (a luck counter, exile a card) is more and isn't this. |
 
 ---
 

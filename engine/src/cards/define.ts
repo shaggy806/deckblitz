@@ -3189,6 +3189,11 @@ export interface CardDefinition {
    * with power/toughness (a planeswalker, say) command a deck. A
    * deckbuilding rule, read by `deck-validation.ts`'s `canCommandAlone`. */
   readonly canBeCommander: boolean;
+  /** "If this card is in your opening hand, you may begin the game with it
+   * on the battlefield" (rule 103.6a — the Leylines): once every hand is
+   * kept, its owner is asked, starting player first, which such cards to put
+   * onto the battlefield (`Game.beginOpeningHandActions`). */
+  readonly beginsOnBattlefield: boolean;
 }
 
 /**
@@ -3309,6 +3314,7 @@ const PRINTED_ABILITY: {
   divided: false,
   pairing: (def) => def.pairing !== null,
   canBeCommander: (def) => def.canBeCommander,
+  beginsOnBattlefield: (def) => def.beginsOnBattlefield,
 };
 
 const PRINTED_ABILITY_TESTS: readonly ((def: CardDefinition) => boolean)[] = Object.values(
@@ -3524,6 +3530,7 @@ interface CardDraft {
   prepareSpellOnly?: boolean;
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
+  beginsOnBattlefield?: boolean;
 }
 
 /** Build a {@link CardDefinition} from a partial draft, filling in defaults. */
@@ -3717,5 +3724,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
     divided: draft.divided ?? null,
     pairing: draft.pairing ?? null,
     canBeCommander: draft.canBeCommander ?? false,
+    beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
   };
 }

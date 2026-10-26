@@ -365,6 +365,7 @@ import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLathielTheBounteousDawn from "../pool/lathiel-the-bounteous-dawn.js";
 import _poolLeadBellyChimera from "../pool/lead-belly-chimera.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
+import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
@@ -1066,6 +1067,7 @@ const shard: CardShard = {
     _poolLathielTheBounteousDawn,
     _poolLeadBellyChimera,
     _poolLeoninLightbringer,
+    _poolLeylineOfTheVoid,
     _poolLilianasSpoils,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,

@@ -319,6 +319,7 @@ import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
+import _poolLeylineOfSanctity from "../pool/leyline-of-sanctity.js";
 import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
@@ -991,6 +992,7 @@ const shard: CardShard = {
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,
+    _poolLeylineOfSanctity,
     _poolLhurgoyf,
     _poolLifeFindsAWay,
     _poolLightningBlast,

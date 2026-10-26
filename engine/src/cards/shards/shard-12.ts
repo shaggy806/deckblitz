@@ -442,6 +442,7 @@ import _poolPullUnder from "../pool/pull-under.js";
 import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPurphorossEmissary from "../pool/purphoross-emissary.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
+import _poolQuicksilverBrashBlur from "../pool/quicksilver-brash-blur.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
@@ -1116,6 +1117,7 @@ const shard: CardShard = {
     _poolPunishingFire,
     _poolPurphorossEmissary,
     _poolPyroceratops,
+    _poolQuicksilverBrashBlur,
     _poolRabbitResponse,
     _poolRadhaCoalitionWarlord,
     _poolRageIntoTheValley,

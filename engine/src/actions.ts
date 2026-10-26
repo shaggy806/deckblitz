@@ -1393,6 +1393,9 @@ export type LegalAction =
        * choose a permanent you control". `destination` is `"behold"`, or
        * `"exile"` for "behold an Elf and exile it" (the Champions). */
       readonly behold?: true;
+      /** Before turn 1 (rule 103.6a): the cards in the chooser's opening hand
+       * that may begin the game on the battlefield (the Leylines). */
+      readonly openingHand?: true;
       /** A split tutor (Cultivate): only the first chosen card goes to
        * `destination`, the rest elsewhere. */
       readonly split?: true;

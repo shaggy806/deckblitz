@@ -116,6 +116,30 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads a Leyline's opening-hand line (rule 103.6a)", () => {
+    const leyline = parseFace({
+      name: "Leyline of Sanctity",
+      type_line: "Enchantment",
+      oracle_text: "If this card is in your opening hand, you may begin the game with it on the battlefield.",
+    });
+    expect(leyline.beginsOnBattlefield).toBe(true);
+    expect(leyline.complete).toBe(true);
+    const quicksilver = parseFace({
+      name: "Quicksilver, Brash Blur",
+      type_line: "Legendary Creature — Mutant Hero",
+      oracle_text: "If Quicksilver, Brash Blur is in your opening hand, you may begin the game with him on the battlefield.",
+    });
+    expect(quicksilver.beginsOnBattlefield).toBe(true);
+    // Gemstone Caverns' version does more than begin on the battlefield.
+    const caverns = parseFace({
+      name: "Gemstone Caverns",
+      type_line: "Legendary Land",
+      oracle_text:
+        "If Gemstone Caverns is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.",
+    });
+    expect(caverns.beginsOnBattlefield).toBeUndefined();
+  });
+
   it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {
     // Two typecyclings on one line are two abilities; `cycling` holds one.
     const rannet = parseFace({ name: "Valley Rannet", type_line: "Creature — Mount", oracle_text: "Mountaincycling {2}, forestcycling {2}" });

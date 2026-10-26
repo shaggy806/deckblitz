@@ -2021,6 +2021,11 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (line === "~ can be your commander.") { out.canBeCommander = true; continue; }
+    // Rule 103.6a, the Leylines ("…with him on the battlefield": Quicksilver).
+    if (/^If (?:~|this card) is in your opening hand, you may begin the game with (?:it|him|her|them) on the battlefield\.$/.test(line)) {
+      out.beginsOnBattlefield = true;
+      continue;
+    }
     if (line === "Partner") { out.pairing = { kind: "partner" }; continue; }
     if ((m = /^Partner with (.+)$/.exec(line))) {
       out.pairing = { kind: "partner-with", name: m[1] };

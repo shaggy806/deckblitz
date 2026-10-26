@@ -317,6 +317,7 @@ import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
+import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
@@ -981,6 +982,7 @@ const shard: CardShard = {
     _poolLathlissDragonQueen,
     _poolLayDownArms,
     _poolLegionsLanding,
+    _poolLeylineOfVitality,
     _poolLightningShrieker,
     _poolLilianasDefeat,
     _poolLingeringTormentor,
