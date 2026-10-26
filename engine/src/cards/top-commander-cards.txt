@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3805 already implemented / 1195 missing (marks refreshed 2026-10-26)
+3810 already implemented / 1190 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1684,7 +1684,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1691  Praetor's Grasp                          {1}{B}{B}        Sorcery
 [x]  1692  Felidar Guardian                         {3}{W}           Creature — Cat Beast
 [x]  1693  Sword of Truth and Justice               {3}              Artifact — Equipment
-[ ]  1694  Reforge the Soul                         {3}{R}{R}        Sorcery
+[x]  1694  Reforge the Soul                         {3}{R}{R}        Sorcery
 [x]  1695  Simulacrum Synthesizer                   {2}{U}           Artifact
 [x]  1696  Kher Keep                                {0}              Legendary Land
 [x]  1697  Lively Dirge                             {1}{B}           Sorcery
@@ -2620,7 +2620,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2627  Survivors' Encampment                    {0}              Land — Desert
 [x]  2628  Darkmoss Bridge                          {0}              Artifact Land
 [x]  2629  Gond Gate                                {0}              Land — Gate
-[ ]  2630  Temporal Mastery                         {5}{U}{U}        Sorcery
+[x]  2630  Temporal Mastery                         {5}{U}{U}        Sorcery
 [x]  2631  Efficient Construction                   {3}{U}           Enchantment
 [x]  2632  Valorous Stance                          {1}{W}           Instant
 [x]  2633  Impulse                                  {1}{U}           Instant
@@ -2840,7 +2840,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2847  Overgrown Battlement                     {1}{G}           Creature — Wall
 [x]  2848  Transcendent Envoy                       {1}{W}           Enchantment Creature — Griffin
 [ ]  2849  Sovereign Okinec Ahau                    {2}{G}{W}        Legendary Creature — Cat Noble
-[ ]  2850  Metamorphosis Fanatic                    {4}{B}{B}        Creature — Human Cleric
+[x]  2850  Metamorphosis Fanatic                    {4}{B}{B}        Creature — Human Cleric
 [x]  2851  Scythecat Cub                            {1}{G}           Creature — Cat
 [x]  2852  Keen Sense                               {G}              Enchantment — Aura
 [x]  2853  Zhulodok, Void Gorger                    {5}{C}           Legendary Creature — Eldrazi
@@ -3560,7 +3560,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3567  Yuna, Grand Summoner                     {1}{G}{W}{U}     Legendary Creature — Human Cleric
 [x]  3568  Thundermane Dragon                       {3}{R}           Creature — Dragon
 [x]  3569  Komainu Battle Armor                     {2}{R}           Artifact Creature — Equipment Dog
-[ ]  3570  Redress Fate                             {6}{W}{W}        Sorcery
+[x]  3570  Redress Fate                             {6}{W}{W}        Sorcery
 [x]  3571  Hoarding Ogre                            {3}{R}           Creature — Ogre
 [x]  3572  Incarnation Technique                    {4}{B}           Sorcery
 [x]  3573  Riverchurn Monument                      {1}{U}           Artifact
@@ -3979,7 +3979,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3986  Selfless Safewright                      {3}{G}{G}        Creature — Elf Warrior
 [ ]  3987  Unsettled Mariner                        {W}{U}           Creature — Shapeshifter
 [x]  3988  Muxus, Goblin Grandee                    {4}{R}{R}        Legendary Creature — Goblin Noble
-[ ]  3989  Devastation Tide                         {3}{U}{U}        Sorcery
+[x]  3989  Devastation Tide                         {3}{U}{U}        Sorcery
 [x]  3990  Swift Reconfiguration                    {W}              Enchantment — Aura
 [ ]  3991  Chaos Dragon                             {1}{R}{R}        Creature — Dragon
 [x]  3992  Virtue of Courage // Embereth Blaze      {3}{R}{R} // {1}{R} Enchantment // Instant — Adventure
