@@ -87,6 +87,7 @@ import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBubbleUp from "../pool/bubble-up.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
 import _poolBurn from "../pool/burn.js";
+import _poolBurningCloak from "../pool/burning-cloak.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
@@ -562,12 +563,14 @@ import _poolSwimmerInNightmares from "../pool/swimmer-in-nightmares.js";
 import _poolSwordOfTheRealms from "../pool/sword-of-the-realms.js";
 import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
+import _poolTalasResearcher from "../pool/talas-researcher.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTeferisVeil from "../pool/teferis-veil.js";
 import _poolTempestDjinn from "../pool/tempest-djinn.js";
+import _poolTempleElder from "../pool/temple-elder.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
@@ -791,6 +794,7 @@ const shard: CardShard = {
     _poolBubbleUp,
     _poolBuildersTalent,
     _poolBurn,
+    _poolBurningCloak,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
     _poolCampusGuide,
@@ -1266,12 +1270,14 @@ const shard: CardShard = {
     _poolSwordOfTheRealms,
     _poolSwordOfWealthAndPower,
     _poolTaintedStrike,
+    _poolTalasResearcher,
     _poolTangledVale,
     _poolTattermungeWitch,
     _poolTavernBrawler,
     _poolTeferisProtege,
     _poolTeferisVeil,
     _poolTempestDjinn,
+    _poolTempleElder,
     _poolTemporalFissure,
     _poolTemporalIntervention,
     _poolTemptWithTreats,

@@ -270,6 +270,7 @@ import _poolGoblinBomb from "../pool/goblin-bomb.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
 import _poolGoblinChariot from "../pool/goblin-chariot.js";
 import _poolGoblinInstigator from "../pool/goblin-instigator.js";
+import _poolGoblinLore from "../pool/goblin-lore.js";
 import _poolGoblinWardriver from "../pool/goblin-wardriver.js";
 import _poolGogglesOfNight from "../pool/goggles-of-night.js";
 import _poolGoldfuryStrider from "../pool/goldfury-strider.js";
@@ -427,6 +428,7 @@ import _poolMutantTown from "../pool/mutant-town.js";
 import _poolMyojinOfCrypticDreams from "../pool/myojin-of-cryptic-dreams.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
+import _poolNaturesRuin from "../pool/natures-ruin.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
@@ -647,6 +649,7 @@ import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
+import _poolValorousCharge from "../pool/valorous-charge.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
 import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolGoblinChainwhirler,
     _poolGoblinChariot,
     _poolGoblinInstigator,
+    _poolGoblinLore,
     _poolGoblinWardriver,
     _poolGogglesOfNight,
     _poolGoldfuryStrider,
@@ -1133,6 +1137,7 @@ const shard: CardShard = {
     _poolMyojinOfCrypticDreams,
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
+    _poolNaturesRuin,
     _poolNecrogenScudder,
     _poolNettleGuard,
     _poolNiblisOfTheBreath,
@@ -1353,6 +1358,7 @@ const shard: CardShard = {
     _poolUrborgStalker,
     _poolUrzasCave,
     _poolUrzasIncubator,
+    _poolValorousCharge,
     _poolVampireNighthawk,
     _poolVampireScrivener,
     _poolVanguardOfTheRose,

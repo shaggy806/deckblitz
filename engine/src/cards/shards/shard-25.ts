@@ -24,6 +24,7 @@ import _poolAlwaysWatching from "../pool/always-watching.js";
 import _poolAmberGristleOmaul from "../pool/amber-gristle-omaul.js";
 import _poolAmrouKithkin from "../pool/amrou-kithkin.js";
 import _poolAncientGrudge from "../pool/ancient-grudge.js";
+import _poolAngelOfFury from "../pool/angel-of-fury.js";
 import _poolAnimatingFaerie from "../pool/animating-faerie.js";
 import _poolAnnihilatingFire from "../pool/annihilating-fire.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
@@ -250,6 +251,7 @@ import _poolGloriousDecay from "../pool/glorious-decay.js";
 import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
 import _poolGloryscaleViashino from "../pool/gloryscale-viashino.js";
 import _poolGoShintaiOfHiddenCruelty from "../pool/go-shintai-of-hidden-cruelty.js";
+import _poolGoblinFirestarter from "../pool/goblin-firestarter.js";
 import _poolGoblinMotivator from "../pool/goblin-motivator.js";
 import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
@@ -300,6 +302,7 @@ import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
+import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
@@ -314,6 +317,7 @@ import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
 import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
+import _poolKingsAssassin from "../pool/kings-assassin.js";
 import _poolKithkinRabble from "../pool/kithkin-rabble.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfCliffhaven from "../pool/knight-of-cliffhaven.js";
@@ -458,6 +462,7 @@ import _poolRefereeSquad from "../pool/referee-squad.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRemoveEnchantments from "../pool/remove-enchantments.js";
+import _poolRenewingTouch from "../pool/renewing-touch.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
@@ -714,6 +719,7 @@ const shard: CardShard = {
     _poolAmberGristleOmaul,
     _poolAmrouKithkin,
     _poolAncientGrudge,
+    _poolAngelOfFury,
     _poolAnimatingFaerie,
     _poolAnnihilatingFire,
     _poolApprenticeNecromancer,
@@ -940,6 +946,7 @@ const shard: CardShard = {
     _poolGloryheathLynx,
     _poolGloryscaleViashino,
     _poolGoShintaiOfHiddenCruelty,
+    _poolGoblinFirestarter,
     _poolGoblinMotivator,
     _poolGoldForgedSentinel,
     _poolGoldenEgg,
@@ -990,6 +997,7 @@ const shard: CardShard = {
     _poolInnerDemonsGangsters,
     _poolInspiringPaladin,
     _poolJacesTriumph,
+    _poolJaggedLightning,
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJudgeMagisterGabranth,
@@ -1004,6 +1012,7 @@ const shard: CardShard = {
     _poolKheruBloodsucker,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
+    _poolKingsAssassin,
     _poolKithkinRabble,
     _poolKitsuneAce,
     _poolKnightOfCliffhaven,
@@ -1148,6 +1157,7 @@ const shard: CardShard = {
     _poolReflectionsOfLittjara,
     _poolRehearsedDebater,
     _poolRemoveEnchantments,
+    _poolRenewingTouch,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolRescuerChwinga,

@@ -78,6 +78,7 @@ import _poolBlackManaBattery from "../pool/black-mana-battery.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
 import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
+import _poolBloodcurdlingScream from "../pool/bloodcurdling-scream.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
@@ -227,6 +228,7 @@ import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolForTheEmperor from "../pool/for-the-emperor.js";
 import _poolForceOfVigor from "../pool/force-of-vigor.js";
+import _poolForkedLightning from "../pool/forked-lightning.js";
 import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
 import _poolFoundryHelix from "../pool/foundry-helix.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
@@ -785,6 +787,7 @@ const shard: CardShard = {
     _poolBlackWidowDaringOperative,
     _poolBladeOfTheBloodchief,
     _poolBlessedWine,
+    _poolBloodcurdlingScream,
     _poolBogSmugglers,
     _poolBogardanDragonheart,
     _poolBoldImpaler,
@@ -934,6 +937,7 @@ const shard: CardShard = {
     _poolFootMystic,
     _poolForTheEmperor,
     _poolForceOfVigor,
+    _poolForkedLightning,
     _poolFoundingTheThirdPath,
     _poolFoundryHelix,
     _poolFracturedRealm,

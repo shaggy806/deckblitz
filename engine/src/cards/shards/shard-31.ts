@@ -224,6 +224,7 @@ import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
 import _poolFiendBinder from "../pool/fiend-binder.js";
 import _poolFierceInvocation from "../pool/fierce-invocation.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
+import _poolFinalStrike from "../pool/final-strike.js";
 import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
@@ -436,7 +437,9 @@ import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
+import _poolNaturalSpring from "../pool/natural-spring.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
+import _poolNeedleStorm from "../pool/needle-storm.js";
 import _poolNetherVoid from "../pool/nether-void.js";
 import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
@@ -599,6 +602,7 @@ import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
+import _poolSternMarshal from "../pool/stern-marshal.js";
 import _poolStingingLicid from "../pool/stinging-licid.js";
 import _poolStinkdrinkerBandit from "../pool/stinkdrinker-bandit.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
@@ -971,6 +975,7 @@ const shard: CardShard = {
     _poolFiendBinder,
     _poolFierceInvocation,
     _poolFightAsOne,
+    _poolFinalStrike,
     _poolFirdochCore,
     _poolFistOfSuns,
     _poolFlameJavelin,
@@ -1183,7 +1188,9 @@ const shard: CardShard = {
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
+    _poolNaturalSpring,
     _poolNebelgastIntruder,
+    _poolNeedleStorm,
     _poolNetherVoid,
     _poolNeutralizingBlast,
     _poolNewHorizons,
@@ -1346,6 +1353,7 @@ const shard: CardShard = {
     _poolStartledRelicSloth,
     _poolStensiaBloodhall,
     _poolSternLesson,
+    _poolSternMarshal,
     _poolStingingLicid,
     _poolStinkdrinkerBandit,
     _poolStoneGiant,

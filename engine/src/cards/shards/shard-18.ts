@@ -167,6 +167,7 @@ import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
+import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
 import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
@@ -220,6 +221,7 @@ import _poolGleamingBarrier from "../pool/gleaming-barrier.js";
 import _poolGleamingOverseer from "../pool/gleaming-overseer.js";
 import _poolGluttonousTroll from "../pool/gluttonous-troll.js";
 import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
+import _poolGoblinGeneral from "../pool/goblin-general.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
 import _poolGoblinWarrens from "../pool/goblin-warrens.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
@@ -875,6 +877,7 @@ const shard: CardShard = {
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
     _poolEmberwildeCaliph,
+    _poolEndlessCockroaches,
     _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
     _poolEntishRestoration,
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolGleamingOverseer,
     _poolGluttonousTroll,
     _poolGoblinFirebomb,
+    _poolGoblinGeneral,
     _poolGoblinSharpshooter,
     _poolGoblinWarrens,
     _poolGoldenBear,

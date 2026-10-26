@@ -533,6 +533,7 @@ import _poolStallionOfAshmouth from "../pool/stallion-of-ashmouth.js";
 import _poolStampedingScurryfoot from "../pool/stampeding-scurryfoot.js";
 import _poolStandFirm from "../pool/stand-firm.js";
 import _poolStandingStones from "../pool/standing-stones.js";
+import _poolSteamCatapult from "../pool/steam-catapult.js";
 import _poolStenchOfDecay from "../pool/stench-of-decay.js";
 import _poolStoneDocent from "../pool/stone-docent.js";
 import _poolStormTheVault from "../pool/storm-the-vault.js";
@@ -1217,6 +1218,7 @@ const shard: CardShard = {
     _poolStampedingScurryfoot,
     _poolStandFirm,
     _poolStandingStones,
+    _poolSteamCatapult,
     _poolStenchOfDecay,
     _poolStoneDocent,
     _poolStormTheVault,

@@ -113,6 +113,7 @@ import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
+import _poolDakmorSorceress from "../pool/dakmor-sorceress.js";
 import _poolDarkEndurance from "../pool/dark-endurance.js";
 import _poolDarkInquiry from "../pool/dark-inquiry.js";
 import _poolDarkRevenant from "../pool/dark-revenant.js";
@@ -191,6 +192,7 @@ import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
+import _poolFireDragon from "../pool/fire-dragon.js";
 import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
 import _poolFlamecastWheel from "../pool/flamecast-wheel.js";
@@ -809,6 +811,7 @@ const shard: CardShard = {
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
+    _poolDakmorSorceress,
     _poolDarkEndurance,
     _poolDarkInquiry,
     _poolDarkRevenant,
@@ -887,6 +890,7 @@ const shard: CardShard = {
     _poolFierceEmpath,
     _poolFigureOfDestiny,
     _poolFiligreeCrawler,
+    _poolFireDragon,
     _poolFiremindsResearch,
     _poolFlameLash,
     _poolFlamecastWheel,

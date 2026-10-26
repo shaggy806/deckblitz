@@ -16,6 +16,7 @@ import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js"
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
+import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
@@ -227,6 +228,7 @@ import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolFrostAugur from "../pool/frost-augur.js";
+import _poolFruition from "../pool/fruition.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
@@ -443,6 +445,7 @@ import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
 import _poolPlagueRats from "../pool/plague-rats.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
+import _poolPredatoryNightstalker from "../pool/predatory-nightstalker.js";
 import _poolPricklyPair from "../pool/prickly-pair.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
 import _poolPrismariCommand from "../pool/prismari-command.js";
@@ -582,6 +585,7 @@ import _poolSwarmSurge from "../pool/swarm-surge.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
+import _poolSylvanYeti from "../pool/sylvan-yeti.js";
 import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
@@ -589,6 +593,7 @@ import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
+import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
     _poolAkroanLineBreaker,
+    _poolAlabasterDragon,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
     _poolAloraMerryThief,
@@ -944,6 +950,7 @@ const shard: CardShard = {
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
     _poolFrostAugur,
+    _poolFruition,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGarenbrigPaladin,
@@ -1160,6 +1167,7 @@ const shard: CardShard = {
     _poolPlagueRats,
     _poolPleaForPower,
     _poolPouncingLynx,
+    _poolPredatoryNightstalker,
     _poolPricklyPair,
     _poolPrimevalShambler,
     _poolPrismariCommand,
@@ -1299,6 +1307,7 @@ const shard: CardShard = {
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
+    _poolSylvanYeti,
     _poolSynchronizedSpellcraft,
     _poolTaintedIsle,
     _poolTallymanOfNurgle,
@@ -1306,6 +1315,7 @@ const shard: CardShard = {
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
+    _poolTemporaryTruce,
     _poolTezzeretsTouch,
     _poolThaumaturgesFamiliar,
     _poolTheAstonishingAntMan,

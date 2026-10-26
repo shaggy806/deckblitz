@@ -186,9 +186,11 @@ import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
 import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
+import _poolExhaustion from "../pool/exhaustion.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolExposeEvil from "../pool/expose-evil.js";
 import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
+import _poolExtinguish from "../pool/extinguish.js";
 import _poolEyeblightMassacre from "../pool/eyeblight-massacre.js";
 import _poolFaerieNoble from "../pool/faerie-noble.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
@@ -257,6 +259,7 @@ import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
+import _poolHarmonyOfNature from "../pool/harmony-of-nature.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
@@ -504,6 +507,7 @@ import _poolScourgeDevil from "../pool/scourge-devil.js";
 import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
 import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
 import _poolSculptorOfWinter from "../pool/sculptor-of-winter.js";
+import _poolSeaDrake from "../pool/sea-drake.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
@@ -616,6 +620,7 @@ import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
+import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
@@ -899,9 +904,11 @@ const shard: CardShard = {
     _poolEnslavedScout,
     _poolEpharasDispersal,
     _poolEtchedFamiliar,
+    _poolExhaustion,
     _poolExperimentalAviator,
     _poolExposeEvil,
     _poolExquisiteHuntmaster,
+    _poolExtinguish,
     _poolEyeblightMassacre,
     _poolFaerieNoble,
     _poolFallOfTheGavel,
@@ -970,6 +977,7 @@ const shard: CardShard = {
     _poolHaazdaVigilante,
     _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,
+    _poolHarmonyOfNature,
     _poolHarnesserOfStorms,
     _poolHauntedLibrary,
     _poolHellishSideswipe,
@@ -1217,6 +1225,7 @@ const shard: CardShard = {
     _poolScrappyBruiser,
     _poolScreechingPhoenix,
     _poolSculptorOfWinter,
+    _poolSeaDrake,
     _poolSeaOfClouds,
     _poolSealOfRemoval,
     _poolSecludedCourtyard,
@@ -1329,6 +1338,7 @@ const shard: CardShard = {
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
+    _poolTidalSurge,
     _poolTimidDrake,
     _poolTitanothRex,
     _poolTogetherAsOne,

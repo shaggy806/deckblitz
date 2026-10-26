@@ -221,6 +221,7 @@ import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
 import _poolFlameWreathedPhoenix from "../pool/flame-wreathed-phoenix.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
+import _poolFlux from "../pool/flux.js";
 import _poolFly from "../pool/fly.js";
 import _poolFogElemental from "../pool/fog-elemental.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
@@ -409,6 +410,7 @@ import _poolNissasEncouragement from "../pool/nissas-encouragement.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
 import _poolNivixGuildmage from "../pool/nivix-guildmage.js";
 import _poolNobleBanneret from "../pool/noble-banneret.js";
+import _poolNorwoodRiders from "../pool/norwood-riders.js";
 import _poolNotionRain from "../pool/notion-rain.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
 import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
@@ -492,6 +494,7 @@ import _poolRunAmok from "../pool/run-amok.js";
 import _poolRunBehind from "../pool/run-behind.js";
 import _poolRustvineCultivator from "../pool/rustvine-cultivator.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
+import _poolSacredKnight from "../pool/sacred-knight.js";
 import _poolSaddledRimestag from "../pool/saddled-rimestag.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
@@ -913,6 +916,7 @@ const shard: CardShard = {
     _poolFlameBlessedBolt,
     _poolFlameWreathedPhoenix,
     _poolFlamingSword,
+    _poolFlux,
     _poolFly,
     _poolFogElemental,
     _poolForbiddenLore,
@@ -1101,6 +1105,7 @@ const shard: CardShard = {
     _poolNissasExpedition,
     _poolNivixGuildmage,
     _poolNobleBanneret,
+    _poolNorwoodRiders,
     _poolNotionRain,
     _poolNoviceInspector,
     _poolNurturingPeatland,
@@ -1184,6 +1189,7 @@ const shard: CardShard = {
     _poolRunBehind,
     _poolRustvineCultivator,
     _poolRuthlessTechnomancer,
+    _poolSacredKnight,
     _poolSaddledRimestag,
     _poolSagesRowSavant,
     _poolSalvationEngine,

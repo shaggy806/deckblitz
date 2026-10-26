@@ -14,6 +14,7 @@ import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAleatory from "../pool/aleatory.js";
+import _poolAlluringScent from "../pool/alluring-scent.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
@@ -377,6 +378,7 @@ import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
+import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
@@ -492,6 +494,7 @@ import _poolSacredNectar from "../pool/sacred-nectar.js";
 import _poolSageOfShailasClaim from "../pool/sage-of-shailas-claim.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
+import _poolSalvage from "../pool/salvage.js";
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
 import _poolSandcrafterMage from "../pool/sandcrafter-mage.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
@@ -730,6 +733,7 @@ const shard: CardShard = {
     _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
     _poolAleatory,
+    _poolAlluringScent,
     _poolAlpharaelStonechosen,
     _poolAlpineGuide,
     _poolAmazingSpiderGirl,
@@ -1093,6 +1097,7 @@ const shard: CardShard = {
     _poolMindlessAutomaton,
     _poolMindwrackDemon,
     _poolMishrasFoundry,
+    _poolMobilize,
     _poolMockingbird,
     _poolMonkClass,
     _poolMoonHeron,
@@ -1208,6 +1213,7 @@ const shard: CardShard = {
     _poolSageOfShailasClaim,
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
+    _poolSalvage,
     _poolSamutTyrantSmasher,
     _poolSandcrafterMage,
     _poolSandstoneOracle,

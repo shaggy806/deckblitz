@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbyssalNightstalker from "../pool/abyssal-nightstalker.js";
 import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
@@ -448,6 +449,7 @@ import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiecesOfThePuzzle from "../pool/pieces-of-the-puzzle.js";
+import _poolPillagingHorde from "../pool/pillaging-horde.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPistonFistCyclops from "../pool/piston-fist-cyclops.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
@@ -761,6 +763,7 @@ import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbyssalNightstalker,
     _poolAbzanMonument,
     _poolAcademyRector,
     _poolAccelerate,
@@ -1206,6 +1209,7 @@ const shard: CardShard = {
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPiecesOfThePuzzle,
+    _poolPillagingHorde,
     _poolPiratesPillage,
     _poolPistonFistCyclops,
     _poolPitOfOfferings,

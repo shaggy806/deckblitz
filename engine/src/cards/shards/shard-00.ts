@@ -456,6 +456,7 @@ import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
+import _poolReturnOfTheNightstalkers from "../pool/return-of-the-nightstalkers.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
@@ -568,6 +569,7 @@ import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-leg
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
+import _poolSwarmOfRats from "../pool/swarm-of-rats.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
@@ -1171,6 +1173,7 @@ const shard: CardShard = {
     _poolRenownedWeaponsmith,
     _poolReset,
     _poolRestlessFortress,
+    _poolReturnOfTheNightstalkers,
     _poolRevelInRiches,
     _poolRhizomeLurcher,
     _poolRideTheShoopuf,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolSunlance,
     _poolSunpetalGrove,
     _poolSunscorchRegent,
+    _poolSwarmOfRats,
     _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,

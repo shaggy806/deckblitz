@@ -552,6 +552,7 @@ import _poolSpurredWolverine from "../pool/spurred-wolverine.js";
 import _poolStalkerHag from "../pool/stalker-hag.js";
 import _poolStallForTime from "../pool/stall-for-time.js";
 import _poolStampedeSurfer from "../pool/stampede-surfer.js";
+import _poolStarlight from "../pool/starlight.js";
 import _poolStasisSnare from "../pool/stasis-snare.js";
 import _poolStaunchShieldmate from "../pool/staunch-shieldmate.js";
 import _poolSteadfastGuard from "../pool/steadfast-guard.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolStalkerHag,
     _poolStallForTime,
     _poolStampedeSurfer,
+    _poolStarlight,
     _poolStasisSnare,
     _poolStaunchShieldmate,
     _poolSteadfastGuard,

@@ -63,6 +63,7 @@ import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
 import _poolBlood from "../pool/blood.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
+import _poolBoilingSeas from "../pool/boiling-seas.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBondsOfMortality from "../pool/bonds-of-mortality.js";
@@ -101,6 +102,7 @@ import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
 import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
+import _poolCoastalWizard from "../pool/coastal-wizard.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolComaVeil from "../pool/coma-veil.js";
@@ -487,6 +489,7 @@ import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRidersOfRohan from "../pool/riders-of-rohan.js";
+import _poolRighteousFury from "../pool/righteous-fury.js";
 import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
@@ -802,6 +805,7 @@ const shard: CardShard = {
     _poolBlood,
     _poolBloodsoakedChampion,
     _poolBlueSunsTwilight,
+    _poolBoilingSeas,
     _poolBojukaBog,
     _poolBoldBiochemist,
     _poolBondsOfMortality,
@@ -840,6 +844,7 @@ const shard: CardShard = {
     _poolCirithUngolPatrol,
     _poolClericOfLifesBond,
     _poolClockworkPercussionist,
+    _poolCoastalWizard,
     _poolCollectorOuphe,
     _poolColossapede,
     _poolComaVeil,
@@ -1226,6 +1231,7 @@ const shard: CardShard = {
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
     _poolRidersOfRohan,
+    _poolRighteousFury,
     _poolRingsOfBrighthearth,
     _poolRoadRuin,
     _poolRoarOfChallenge,

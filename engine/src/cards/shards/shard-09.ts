@@ -205,6 +205,7 @@ import _poolFeedTheSerpent from "../pool/feed-the-serpent.js";
 import _poolFeistySpikeling from "../pool/feisty-spikeling.js";
 import _poolFeralShadow from "../pool/feral-shadow.js";
 import _poolFertileFootsteps from "../pool/fertile-footsteps.js";
+import _poolFestivalOfTrokin from "../pool/festival-of-trokin.js";
 import _poolFettergeist from "../pool/fettergeist.js";
 import _poolFieryImpulse from "../pool/fiery-impulse.js";
 import _poolFight from "../pool/fight.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolFeistySpikeling,
     _poolFeralShadow,
     _poolFertileFootsteps,
+    _poolFestivalOfTrokin,
     _poolFettergeist,
     _poolFieryImpulse,
     _poolFight,

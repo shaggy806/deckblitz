@@ -330,6 +330,7 @@ import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
 import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
 import _poolIronFistPulverizer from "../pool/iron-fist-pulverizer.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
+import _poolIronhoofOx from "../pool/ironhoof-ox.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
@@ -449,6 +450,7 @@ import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
+import _poolOmen from "../pool/omen.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
@@ -689,6 +691,7 @@ import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
 import _poolWear from "../pool/wear.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
+import _poolWickedPact from "../pool/wicked-pact.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
 import _poolWildRicochet from "../pool/wild-ricochet.js";
 import _poolWildwoodPatrol from "../pool/wildwood-patrol.js";
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolIronFistHeroForHire,
     _poolIronFistPulverizer,
     _poolIronManTonyStark,
+    _poolIronhoofOx,
     _poolIsochronScepter,
     _poolItOfTheHorridSwarm,
     _poolIxallisKeeper,
@@ -1165,6 +1169,7 @@ const shard: CardShard = {
     _poolOildeepGearhulk,
     _poolOmenOfTheDead,
     _poolOmenOfTheSun,
+    _poolOmen,
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOrdealOfHeliod,
@@ -1405,6 +1410,7 @@ const shard: CardShard = {
     _poolWavebreakHippocamp,
     _poolWear,
     _poolWhiteSunsTwilight,
+    _poolWickedPact,
     _poolWightOfTheReliquary,
     _poolWildRicochet,
     _poolWildwoodPatrol,

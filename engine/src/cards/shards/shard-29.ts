@@ -442,6 +442,7 @@ import _poolPrimalCocoon from "../pool/primal-cocoon.js";
 import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
+import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
@@ -1168,6 +1169,7 @@ const shard: CardShard = {
     _poolPrizedUnicorn,
     _poolProsperousPartnership,
     _poolProudPackRhino,
+    _poolProwlingNightstalker,
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,

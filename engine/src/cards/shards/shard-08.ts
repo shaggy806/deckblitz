@@ -104,6 +104,7 @@ import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
 import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
+import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
@@ -491,6 +492,7 @@ import _poolRefuteDestiny from "../pool/refute-destiny.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
 import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
 import _poolRenegadeWheelsmith from "../pool/renegade-wheelsmith.js";
+import _poolRenewingDawn from "../pool/renewing-dawn.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
 import _poolReservoirWalker from "../pool/reservoir-walker.js";
@@ -606,6 +608,7 @@ import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSunbladeElf from "../pool/sunblade-elf.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
+import _poolSylvanBasilisk from "../pool/sylvan-basilisk.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
 import _poolTalarasBattalion from "../pool/talaras-battalion.js";
@@ -848,6 +851,7 @@ const shard: CardShard = {
     _poolCallTheGatewatch,
     _poolCandlegroveWitch,
     _poolCandlestick,
+    _poolCapriciousSorcerer,
     _poolCaptiveWeird,
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
@@ -1235,6 +1239,7 @@ const shard: CardShard = {
     _poolRemoveSoul,
     _poolRenataCalledToTheHunt,
     _poolRenegadeWheelsmith,
+    _poolRenewingDawn,
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
     _poolReservoirWalker,
@@ -1350,6 +1355,7 @@ const shard: CardShard = {
     _poolSunbladeElf,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
+    _poolSylvanBasilisk,
     _poolSyphonFuel,
     _poolSyrCarahTheBold,
     _poolTalarasBattalion,
