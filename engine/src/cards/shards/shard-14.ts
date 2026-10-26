@@ -45,6 +45,7 @@ import _poolBadDeal from "../pool/bad-deal.js";
 import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBalothCageTrap from "../pool/baloth-cage-trap.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
+import _poolBanishmentDecree from "../pool/banishment-decree.js";
 import _poolBantSojourners from "../pool/bant-sojourners.js";
 import _poolBardClass from "../pool/bard-class.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
@@ -223,6 +224,7 @@ import _poolExcavationMole from "../pool/excavation-mole.js";
 import _poolExocrine from "../pool/exocrine.js";
 import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
+import _poolEzurisArchers from "../pool/ezuris-archers.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
 import _poolFalkenrathTorturer from "../pool/falkenrath-torturer.js";
 import _poolFallowsage from "../pool/fallowsage.js";
@@ -382,6 +384,7 @@ import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
+import _poolKuldothaPhoenix from "../pool/kuldotha-phoenix.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
@@ -788,6 +791,7 @@ const shard: CardShard = {
     _poolBagOfTricks,
     _poolBalothCageTrap,
     _poolBanishFromEdoras,
+    _poolBanishmentDecree,
     _poolBantSojourners,
     _poolBardClass,
     _poolBarkOfDoran,
@@ -966,6 +970,7 @@ const shard: CardShard = {
     _poolExocrine,
     _poolExplorationBroodship,
     _poolExplosiveImpact,
+    _poolEzurisArchers,
     _poolFaerieFormation,
     _poolFalkenrathTorturer,
     _poolFallowsage,
@@ -1125,6 +1130,7 @@ const shard: CardShard = {
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
     _poolKrosanColossus,
+    _poolKuldothaPhoenix,
     _poolKurbisHarvestCelebrant,
     _poolLassoedByTheLaw,
     _poolLawbringer,

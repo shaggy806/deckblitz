@@ -668,6 +668,7 @@ import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
 import _poolVampireHounds from "../pool/vampire-hounds.js";
+import _poolVaultSkyward from "../pool/vault-skyward.js";
 import _poolVeldt from "../pool/veldt.js";
 import _poolVeneratedLoxodon from "../pool/venerated-loxodon.js";
 import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
@@ -685,6 +686,7 @@ import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
+import _poolVolitionReins from "../pool/volition-reins.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
 import _poolVulturousAven from "../pool/vulturous-aven.js";
@@ -1408,6 +1410,7 @@ const shard: CardShard = {
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
     _poolVampireHounds,
+    _poolVaultSkyward,
     _poolVeldt,
     _poolVeneratedLoxodon,
     _poolVerazolTheSplitCurrent,
@@ -1425,6 +1428,7 @@ const shard: CardShard = {
     _poolVizierOfTheTrue,
     _poolVodalianIllusionist,
     _poolVodalianWaveKnight,
+    _poolVolitionReins,
     _poolVolunteerMilitia,
     _poolVrock,
     _poolVulturousAven,

@@ -253,6 +253,7 @@ import _poolGladewalkerRitualist from "../pool/gladewalker-ritualist.js";
 import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
+import _poolGlimmerpointStag from "../pool/glimmerpoint-stag.js";
 import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
 import _poolGluttonousSlime from "../pool/gluttonous-slime.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
@@ -578,6 +579,7 @@ import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSpeciesGorger from "../pool/species-gorger.js";
+import _poolSphereOfTheSuns from "../pool/sphere-of-the-suns.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolGlassworksShatteredYard,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
+    _poolGlimmerpointStag,
     _poolGloryOfWarfare,
     _poolGluttonousSlime,
     _poolGnottvoldSlumbermound,
@@ -1328,6 +1331,7 @@ const shard: CardShard = {
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
     _poolSpeciesGorger,
+    _poolSphereOfTheSuns,
     _poolSpiketailHatchling,
     _poolSpinedTyrranax,
     _poolSpiritualGuardian,

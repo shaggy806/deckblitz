@@ -491,6 +491,7 @@ import _poolRashidaScalebane from "../pool/rashida-scalebane.js";
 import _poolRaugrinTriome from "../pool/raugrin-triome.js";
 import _poolRavenhillFlock from "../pool/ravenhill-flock.js";
 import _poolRavenousRobots from "../pool/ravenous-robots.js";
+import _poolRazorfieldRhino from "../pool/razorfield-rhino.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
@@ -681,6 +682,7 @@ import _poolVenomsHunger from "../pool/venoms-hunger.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
 import _poolVexingRadgull from "../pool/vexing-radgull.js";
 import _poolVibrance from "../pool/vibrance.js";
+import _poolVictorysHerald from "../pool/victorys-herald.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
@@ -1259,6 +1261,7 @@ const shard: CardShard = {
     _poolRaugrinTriome,
     _poolRavenhillFlock,
     _poolRavenousRobots,
+    _poolRazorfieldRhino,
     _poolRealmOfKoh,
     _poolReanimate,
     _poolReconnaissanceMission,
@@ -1449,6 +1452,7 @@ const shard: CardShard = {
     _poolVenomsacLagac,
     _poolVexingRadgull,
     _poolVibrance,
+    _poolVictorysHerald,
     _poolVigilantBaloth,
     _poolVindictiveTriumph,
     _poolViviOrnitier,

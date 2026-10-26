@@ -142,6 +142,7 @@ import _poolCourtCleric from "../pool/court-cleric.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCovetousCastaway from "../pool/covetous-castaway.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
+import _poolCreepingCorrosion from "../pool/creeping-corrosion.js";
 import _poolCreepingRenaissance from "../pool/creeping-renaissance.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrosstownCourier from "../pool/crosstown-courier.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolCoverOfDarkness,
     _poolCovetousCastaway,
     _poolCrashOfRhinos,
+    _poolCreepingCorrosion,
     _poolCreepingRenaissance,
     _poolCrestedSunmare,
     _poolCrosstownCourier,

@@ -137,6 +137,7 @@ import _poolConsecrateConsume from "../pool/consecrate-consume.js";
 import _poolConsider from "../pool/consider.js";
 import _poolConsignOblivion from "../pool/consign-oblivion.js";
 import _poolConsumingAshes from "../pool/consuming-ashes.js";
+import _poolCopperCarapace from "../pool/copper-carapace.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
@@ -573,6 +574,7 @@ import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpidersilkArmor from "../pool/spidersilk-armor.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
+import _poolSpiralingDuelist from "../pool/spiraling-duelist.js";
 import _poolSpiritLoop from "../pool/spirit-loop.js";
 import _poolSpiritOfTheSpires from "../pool/spirit-of-the-spires.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
@@ -867,6 +869,7 @@ const shard: CardShard = {
     _poolConsider,
     _poolConsignOblivion,
     _poolConsumingAshes,
+    _poolCopperCarapace,
     _poolCopyArtifact,
     _poolCoretapper,
     _poolCorruptCourtOfficial,
@@ -1303,6 +1306,7 @@ const shard: CardShard = {
     _poolSpellseeker,
     _poolSpidersilkArmor,
     _poolSpiketailDrakeling,
+    _poolSpiralingDuelist,
     _poolSpiritLoop,
     _poolSpiritOfTheSpires,
     _poolSpiritcallEnthusiast,

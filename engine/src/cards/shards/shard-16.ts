@@ -71,6 +71,7 @@ import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
 import _poolBlueDragon from "../pool/blue-dragon.js";
+import _poolBluntTheAssault from "../pool/blunt-the-assault.js";
 import _poolBoardTheWeatherlight from "../pool/board-the-weatherlight.js";
 import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
 import _poolBoggartLoggers from "../pool/boggart-loggers.js";
@@ -857,6 +858,7 @@ const shard: CardShard = {
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
     _poolBlueDragon,
+    _poolBluntTheAssault,
     _poolBoardTheWeatherlight,
     _poolBofurReliableGuardian,
     _poolBoggartLoggers,

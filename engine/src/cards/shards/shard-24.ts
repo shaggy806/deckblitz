@@ -269,6 +269,7 @@ import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHallowedSpiritkeeper from "../pool/hallowed-spiritkeeper.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHandOfJustice from "../pool/hand-of-justice.js";
+import _poolHandOfThePraetors from "../pool/hand-of-the-praetors.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
 import _poolHarshScrutiny from "../pool/harsh-scrutiny.js";
@@ -449,6 +450,7 @@ import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuickling from "../pool/quickling.js";
+import _poolQuicksilverGeyser from "../pool/quicksilver-geyser.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
 import _poolQuietContemplation from "../pool/quiet-contemplation.js";
@@ -571,6 +573,7 @@ import _poolStaggeringInsight from "../pool/staggering-insight.js";
 import _poolStampedeRider from "../pool/stampede-rider.js";
 import _poolStarwinder from "../pool/starwinder.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
+import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStolenGoods from "../pool/stolen-goods.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
@@ -1013,6 +1016,7 @@ const shard: CardShard = {
     _poolHallowedSpiritkeeper,
     _poolHammerOfPurphoros,
     _poolHandOfJustice,
+    _poolHandOfThePraetors,
     _poolHanweirGarrison,
     _poolHaradrimSpearmaster,
     _poolHarshScrutiny,
@@ -1193,6 +1197,7 @@ const shard: CardShard = {
     _poolPyrrhicBlast,
     _poolQuarryBeetle,
     _poolQuickling,
+    _poolQuicksilverGeyser,
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,
     _poolQuietContemplation,
@@ -1315,6 +1320,7 @@ const shard: CardShard = {
     _poolStampedeRider,
     _poolStarwinder,
     _poolSteelHellkite,
+    _poolSteelSabotage,
     _poolSteelWall,
     _poolStolenGoods,
     _poolStormFleetSpy,

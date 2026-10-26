@@ -32,6 +32,7 @@ import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
 import _poolArashinForemost from "../pool/arashin-foremost.js";
 import _poolArborArmament from "../pool/arbor-armament.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
+import _poolArgentSphinx from "../pool/argent-sphinx.js";
 import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
@@ -441,6 +442,7 @@ import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
 import _poolPillageTheBog from "../pool/pillage-the-bog.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
 import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
+import _poolPistonSledge from "../pool/piston-sledge.js";
 import _poolPlagueMare from "../pool/plague-mare.js";
 import _poolPlagueNurse from "../pool/plague-nurse.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
@@ -771,6 +773,7 @@ const shard: CardShard = {
     _poolArashinForemost,
     _poolArborArmament,
     _poolArchenemysCharm,
+    _poolArgentSphinx,
     _poolArmTheCathars,
     _poolArmyAnts,
     _poolAsceticism,
@@ -1180,6 +1183,7 @@ const shard: CardShard = {
     _poolPillageTheBog,
     _poolPinToTheEarth,
     _poolPippinWardenOfIsengard,
+    _poolPistonSledge,
     _poolPlagueMare,
     _poolPlagueNurse,
     _poolPlanarBridge,

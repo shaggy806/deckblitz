@@ -347,6 +347,7 @@ import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLastThoughts from "../pool/last-thoughts.js";
+import _poolLeadTheStampede from "../pool/lead-the-stampede.js";
 import _poolLeapfrog from "../pool/leapfrog.js";
 import _poolLeechingSliver from "../pool/leeching-sliver.js";
 import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
@@ -434,6 +435,7 @@ import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
+import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
@@ -1086,6 +1088,7 @@ const shard: CardShard = {
     _poolLandscapePainter,
     _poolLargerThanLife,
     _poolLastThoughts,
+    _poolLeadTheStampede,
     _poolLeapfrog,
     _poolLeechingSliver,
     _poolLeeringGargoyle,
@@ -1173,6 +1176,7 @@ const shard: CardShard = {
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
+    _poolPhyrexianHydra,
     _poolPhyrexianIronworks,
     _poolPhyrexianVivisector,
     _poolPickYourPoison,

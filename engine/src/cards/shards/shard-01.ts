@@ -625,6 +625,7 @@ import _poolTombstalker from "../pool/tombstalker.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
+import _poolTrainingDrone from "../pool/training-drone.js";
 import _poolTranquility from "../pool/tranquility.js";
 import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
@@ -1342,6 +1343,7 @@ const shard: CardShard = {
     _poolTookReaper,
     _poolToxicAbomination,
     _poolTragicPoet,
+    _poolTrainingDrone,
     _poolTranquility,
     _poolTraumatize,
     _poolTravelThroughCaradhras,

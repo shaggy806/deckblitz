@@ -474,6 +474,7 @@ import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRamsesOverdark from "../pool/ramses-overdark.js";
 import _poolRashmiAndRagavan from "../pool/rashmi-and-ragavan.js";
+import _poolRatchetBomb from "../pool/ratchet-bomb.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
@@ -652,6 +653,7 @@ import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntamedKavu from "../pool/untamed-kavu.js";
+import _poolUntamedMight from "../pool/untamed-might.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
@@ -1188,6 +1190,7 @@ const shard: CardShard = {
     _poolRampagingBaloths,
     _poolRamsesOverdark,
     _poolRashmiAndRagavan,
+    _poolRatchetBomb,
     _poolRavenousBaloth,
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
@@ -1366,6 +1369,7 @@ const shard: CardShard = {
     _poolUnderwaterTunnel,
     _poolUnscrupulousContractor,
     _poolUntamedKavu,
+    _poolUntamedMight,
     _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,

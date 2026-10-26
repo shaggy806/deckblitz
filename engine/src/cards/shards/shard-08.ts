@@ -115,6 +115,7 @@ import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChillbringer from "../pool/chillbringer.js";
+import _poolChromeSteed from "../pool/chrome-steed.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
@@ -373,6 +374,7 @@ import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
 import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
+import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
 import _poolLagonnaBandStoryteller from "../pool/lagonna-band-storyteller.js";
@@ -882,6 +884,7 @@ const shard: CardShard = {
     _poolCharmedStray,
     _poolChelonianTackle,
     _poolChillbringer,
+    _poolChromeSteed,
     _poolChronomancer,
     _poolCloakOfTheBat,
     _poolClownCar,
@@ -1140,6 +1143,7 @@ const shard: CardShard = {
     _poolKoboldDrillSergeant,
     _poolKomodoRhino,
     _poolKorHookmaster,
+    _poolKuldothaFlamefiend,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,
     _poolLagonnaBandStoryteller,

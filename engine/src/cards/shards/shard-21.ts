@@ -372,6 +372,7 @@ import _poolMesaEnchantress from "../pool/mesa-enchantress.js";
 import _poolMesmericOrb from "../pool/mesmeric-orb.js";
 import _poolMesmericTrance from "../pool/mesmeric-trance.js";
 import _poolMessengerDrake from "../pool/messenger-drake.js";
+import _poolMetallicMastery from "../pool/metallic-mastery.js";
 import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMicromancer from "../pool/micromancer.js";
@@ -478,6 +479,7 @@ import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
+import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
@@ -1082,6 +1084,7 @@ const shard: CardShard = {
     _poolMesmericOrb,
     _poolMesmericTrance,
     _poolMessengerDrake,
+    _poolMetallicMastery,
     _poolMetathranZombie,
     _poolMethodsOfTheMighty,
     _poolMicromancer,
@@ -1188,6 +1191,7 @@ const shard: CardShard = {
     _poolRedHerring,
     _poolRedeem,
     _poolRefuse,
+    _poolRelicPutrescence,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
     _poolRepulsorBlast,

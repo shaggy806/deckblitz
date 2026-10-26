@@ -171,6 +171,7 @@ import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
 import _poolDismissivePyromancer from "../pool/dismissive-pyromancer.js";
 import _poolDispatch from "../pool/dispatch.js";
+import _poolDispenseJustice from "../pool/dispense-justice.js";
 import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
@@ -231,9 +232,11 @@ import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
 import _poolFoulWatcher from "../pool/foul-watcher.js";
 import _poolFracture from "../pool/fracture.js";
+import _poolFranticSalvage from "../pool/frantic-salvage.js";
 import _poolFranticStrength from "../pool/frantic-strength.js";
 import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
+import _poolFurnaceCelebration from "../pool/furnace-celebration.js";
 import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGalepowderMage from "../pool/galepowder-mage.js";
@@ -429,6 +432,7 @@ import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolMysticRepeal from "../pool/mystic-repeal.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
+import _poolNestedGhoul from "../pool/nested-ghoul.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNightfallPredator from "../pool/nightfall-predator.js";
@@ -584,6 +588,7 @@ import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpikeWeaver from "../pool/spike-weaver.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
+import _poolSpireSerpent from "../pool/spire-serpent.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSpiritMirror from "../pool/spirit-mirror.js";
 import _poolSplashySpellcaster from "../pool/splashy-spellcaster.js";
@@ -915,6 +920,7 @@ const shard: CardShard = {
     _poolDiscipleOfLaw,
     _poolDismissivePyromancer,
     _poolDispatch,
+    _poolDispenseJustice,
     _poolDisplacerBeast,
     _poolDivineTransformation,
     _poolDivineVerdict,
@@ -975,9 +981,11 @@ const shard: CardShard = {
     _poolForsakenDrifters,
     _poolFoulWatcher,
     _poolFracture,
+    _poolFranticSalvage,
     _poolFranticStrength,
     _poolFrenziedRage,
     _poolFrontlineDevastator,
+    _poolFurnaceCelebration,
     _poolGaeasProtector,
     _poolGaiusVanBaelsar,
     _poolGalepowderMage,
@@ -1173,6 +1181,7 @@ const shard: CardShard = {
     _poolMysticRepeal,
     _poolNearheathStalker,
     _poolNessianCourser,
+    _poolNestedGhoul,
     _poolNeurokStealthsuit,
     _poolNightdrinkerMoroii,
     _poolNightfallPredator,
@@ -1328,6 +1337,7 @@ const shard: CardShard = {
     _poolSphinxOfFalseConclusions,
     _poolSpikeWeaver,
     _poolSpinnerOfSouls,
+    _poolSpireSerpent,
     _poolSpiritMantle,
     _poolSpiritMirror,
     _poolSplashySpellcaster,

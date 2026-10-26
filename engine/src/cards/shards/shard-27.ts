@@ -116,6 +116,7 @@ import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolContempt from "../pool/contempt.js";
 import _poolConversionChamber from "../pool/conversion-chamber.js";
 import _poolConvictedKiller from "../pool/convicted-killer.js";
+import _poolCorpseCur from "../pool/corpse-cur.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCorruptingLicid from "../pool/corrupting-licid.js";
 import _poolCosisRavager from "../pool/cosis-ravager.js";
@@ -844,6 +845,7 @@ const shard: CardShard = {
     _poolContempt,
     _poolConversionChamber,
     _poolConvictedKiller,
+    _poolCorpseCur,
     _poolCorruptEunuchs,
     _poolCorruptingLicid,
     _poolCosisRavager,

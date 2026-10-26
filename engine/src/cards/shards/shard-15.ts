@@ -292,6 +292,7 @@ import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHomicidalBrute from "../pool/homicidal-brute.js";
 import _poolHonor from "../pool/honor.js";
+import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
 import _poolHystrodon from "../pool/hystrodon.js";
@@ -405,6 +406,7 @@ import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
 import _poolMonicaRambeau from "../pool/monica-rambeau.js";
 import _poolMoongloveChangeling from "../pool/moonglove-changeling.js";
+import _poolMortarpod from "../pool/mortarpod.js";
 import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
@@ -638,6 +640,7 @@ import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
+import _poolVedalkenAnatomist from "../pool/vedalken-anatomist.js";
 import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolVeiledSentry from "../pool/veiled-sentry.js";
@@ -995,6 +998,7 @@ const shard: CardShard = {
     _poolHillGigas,
     _poolHomicidalBrute,
     _poolHonor,
+    _poolHorrifyingRevelation,
     _poolHostOfTheHereafter,
     _poolHulklingBurgeoningBruiser,
     _poolHystrodon,
@@ -1108,6 +1112,7 @@ const shard: CardShard = {
     _poolMomentousFall,
     _poolMonicaRambeau,
     _poolMoongloveChangeling,
+    _poolMortarpod,
     _poolMortuaryMire,
     _poolMothriderPatrol,
     _poolMoxEmerald,
@@ -1341,6 +1346,7 @@ const shard: CardShard = {
     _poolVandalsEdit,
     _poolVastlandsScavenger,
     _poolVectorGlider,
+    _poolVedalkenAnatomist,
     _poolVedalkenHeretic,
     _poolVegaTheWatcher,
     _poolVeiledSentry,

@@ -256,6 +256,7 @@ import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
+import _poolGalvanoth from "../pool/galvanoth.js";
 import _poolGarruksHorde from "../pool/garruks-horde.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaleSwooper,
+    _poolGalvanoth,
     _poolGarruksHorde,
     _poolGarruksPackleader,
     _poolGateToPhyrexia,

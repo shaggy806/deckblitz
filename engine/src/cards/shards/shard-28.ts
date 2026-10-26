@@ -118,6 +118,7 @@ import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolChevillBaneOfMonsters from "../pool/chevill-bane-of-monsters.js";
 import _poolChimericSphere from "../pool/chimeric-sphere.js";
 import _poolChitteringHarvester from "../pool/chittering-harvester.js";
+import _poolChokingFumes from "../pool/choking-fumes.js";
 import _poolCinderWall from "../pool/cinder-wall.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolClingingMists from "../pool/clinging-mists.js";
@@ -341,6 +342,7 @@ import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLevitatingStatue from "../pool/levitating-statue.js";
+import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
@@ -488,6 +490,7 @@ import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
 import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
+import _poolRedSunsZenith from "../pool/red-suns-zenith.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
 import _poolReefRoads from "../pool/reef-roads.js";
 import _poolRemorselessPunishment from "../pool/remorseless-punishment.js";
@@ -877,6 +880,7 @@ const shard: CardShard = {
     _poolChevillBaneOfMonsters,
     _poolChimericSphere,
     _poolChitteringHarvester,
+    _poolChokingFumes,
     _poolCinderWall,
     _poolCleonMerryChampion,
     _poolClingingMists,
@@ -1100,6 +1104,7 @@ const shard: CardShard = {
     _poolLeoninBattlemage,
     _poolLeoninElder,
     _poolLevitatingStatue,
+    _poolLiegeOfTheTangle,
     _poolLightningCloud,
     _poolLivingWall,
     _poolLlanowarKnight,
@@ -1247,6 +1252,7 @@ const shard: CardShard = {
     _poolRazorvergeThicket,
     _poolRebellionOfTheFlamekin,
     _poolRecklessImpulse,
+    _poolRedSunsZenith,
     _poolRedcapThief,
     _poolReefRoads,
     _poolRemorselessPunishment,

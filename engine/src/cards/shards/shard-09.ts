@@ -95,6 +95,7 @@ import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
 import _poolBurdenOfGuilt from "../pool/burden-of-guilt.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
+import _poolBurnTheImpure from "../pool/burn-the-impure.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
@@ -264,6 +265,7 @@ import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
 import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
 import _poolGoldmeadowNomad from "../pool/goldmeadow-nomad.js";
 import _poolGoldveinHydra from "../pool/goldvein-hydra.js";
+import _poolGolemArtisan from "../pool/golem-artisan.js";
 import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.js";
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
@@ -620,6 +622,7 @@ import _poolSummonIxion from "../pool/summon-ixion.js";
 import _poolSummonersBane from "../pool/summoners-bane.js";
 import _poolSunCrownedHunters from "../pool/sun-crowned-hunters.js";
 import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
+import _poolSunspearShikari from "../pool/sunspear-shikari.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
 import _poolSwerve from "../pool/swerve.js";
@@ -850,6 +853,7 @@ const shard: CardShard = {
     _poolBurdenOfGuilt,
     _poolBurglarRat,
     _poolBurnBurnTreeAndFern,
+    _poolBurnTheImpure,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
     _poolCacophonyScamp,
@@ -1019,6 +1023,7 @@ const shard: CardShard = {
     _poolGoldmawChampion,
     _poolGoldmeadowNomad,
     _poolGoldveinHydra,
+    _poolGolemArtisan,
     _poolGoreclawTerrorOfQalSisma,
     _poolGraftedWargear,
     _poolGrahamObrien,
@@ -1375,6 +1380,7 @@ const shard: CardShard = {
     _poolSummonersBane,
     _poolSunCrownedHunters,
     _poolSunlitHoplite,
+    _poolSunspearShikari,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
     _poolSwerve,

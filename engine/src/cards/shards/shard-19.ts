@@ -155,6 +155,7 @@ import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
+import _poolDecimatorWeb from "../pool/decimator-web.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
 import _poolDemonicTaskmaster from "../pool/demonic-taskmaster.js";
@@ -310,6 +311,7 @@ import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHeartstabberMosquito from "../pool/heartstabber-mosquito.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
+import _poolHeroOfOxidRidge from "../pool/hero-of-oxid-ridge.js";
 import _poolHesitation from "../pool/hesitation.js";
 import _poolHexdrinker from "../pool/hexdrinker.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
@@ -921,6 +923,7 @@ const shard: CardShard = {
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
     _poolDecanterOfEndlessWater,
+    _poolDecimatorWeb,
     _poolDeepForestHermit,
     _poolDelversTorch,
     _poolDemonicTaskmaster,
@@ -1076,6 +1079,7 @@ const shard: CardShard = {
     _poolHeartstabberMosquito,
     _poolHelmutZemoMastermind,
     _poolHeraldOfDromoka,
+    _poolHeroOfOxidRidge,
     _poolHesitation,
     _poolHexdrinker,
     _poolHibernationSliver,

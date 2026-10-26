@@ -574,6 +574,7 @@ import _poolSpelleaterWolverine from "../pool/spelleater-wolverine.js";
 import _poolSpiderMobile from "../pool/spider-mobile.js";
 import _poolSpiderRexDaringDino from "../pool/spider-rex-daring-dino.js";
 import _poolSpiderSpawning from "../pool/spider-spawning.js";
+import _poolSpikeshotElder from "../pool/spikeshot-elder.js";
 import _poolSpinedWurm from "../pool/spined-wurm.js";
 import _poolSpireGarden from "../pool/spire-garden.js";
 import _poolSpireWinder from "../pool/spire-winder.js";
@@ -1316,6 +1317,7 @@ const shard: CardShard = {
     _poolSpiderMobile,
     _poolSpiderRexDaringDino,
     _poolSpiderSpawning,
+    _poolSpikeshotElder,
     _poolSpinedWurm,
     _poolSpireGarden,
     _poolSpireWinder,

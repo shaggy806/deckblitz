@@ -27,6 +27,7 @@ import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
 import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
 import _poolArcRunner from "../pool/arc-runner.js";
+import _poolArcTrail from "../pool/arc-trail.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
 import _poolArcticWolves from "../pool/arctic-wolves.js";
@@ -342,6 +343,7 @@ import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
 import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
+import _poolKuldothaRebirth from "../pool/kuldotha-rebirth.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -760,6 +762,7 @@ const shard: CardShard = {
     _poolAragornTheUniter,
     _poolArastaOfTheEndlessWeb,
     _poolArcRunner,
+    _poolArcTrail,
     _poolArchaeologicalDig,
     _poolArchfiendOfSorrows,
     _poolArcticWolves,
@@ -1075,6 +1078,7 @@ const shard: CardShard = {
     _poolKorlashHeirToBlackblade,
     _poolKrovikanMist,
     _poolKukemssaPirates,
+    _poolKuldothaRebirth,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,

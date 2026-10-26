@@ -119,6 +119,7 @@ import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
+import _poolContestedWarZone from "../pool/contested-war-zone.js";
 import _poolCorruptedRoots from "../pool/corrupted-roots.js";
 import _poolCouncilOfAdvisors from "../pool/council-of-advisors.js";
 import _poolCountryRoads from "../pool/country-roads.js";
@@ -334,6 +335,7 @@ import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
 import _poolLighthouseChronologist from "../pool/lighthouse-chronologist.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
 import _poolLilianasMastery from "../pool/lilianas-mastery.js";
+import _poolLivewireLash from "../pool/livewire-lash.js";
 import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-marvel.js";
 import _poolLivingTempest from "../pool/living-tempest.js";
 import _poolLochDragon from "../pool/loch-dragon.js";
@@ -531,6 +533,7 @@ import _poolSeekersFolly from "../pool/seekers-folly.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
 import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
+import _poolSerumRaker from "../pool/serum-raker.js";
 import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShatteredEgo from "../pool/shattered-ego.js";
@@ -576,6 +579,7 @@ import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
 import _poolSpotterThopter from "../pool/spotter-thopter.js";
+import _poolSpreadTheSickness from "../pool/spread-the-sickness.js";
 import _poolSquall from "../pool/squall.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
@@ -864,6 +868,7 @@ const shard: CardShard = {
     _poolCombatCourier,
     _poolConclaveEvangelist,
     _poolConsign,
+    _poolContestedWarZone,
     _poolCorruptedRoots,
     _poolCouncilOfAdvisors,
     _poolCountryRoads,
@@ -1079,6 +1084,7 @@ const shard: CardShard = {
     _poolLighthouseChronologist,
     _poolLightningJavelin,
     _poolLilianasMastery,
+    _poolLivewireLash,
     _poolLivingBrainMechanicalMarvel,
     _poolLivingTempest,
     _poolLochDragon,
@@ -1276,6 +1282,7 @@ const shard: CardShard = {
     _poolSeismicSpike,
     _poolSentinelsOfGlenElendra,
     _poolSentryOfTheUnderworld,
+    _poolSerumRaker,
     _poolShadewingLaureate,
     _poolSharuumTheHegemon,
     _poolShatteredEgo,
@@ -1321,6 +1328,7 @@ const shard: CardShard = {
     _poolSpiderManifestation,
     _poolSplinterTwin,
     _poolSpotterThopter,
+    _poolSpreadTheSickness,
     _poolSquall,
     _poolStaggershock,
     _poolStarkIndustriesExecutive,

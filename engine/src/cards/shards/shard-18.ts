@@ -355,6 +355,7 @@ import _poolMacabreMockery from "../pool/macabre-mockery.js";
 import _poolMaccreadyLamplightMayor from "../pool/maccready-lamplight-mayor.js";
 import _poolMaelstromNexus from "../pool/maelstrom-nexus.js";
 import _poolMagitekInfantry from "../pool/magitek-infantry.js";
+import _poolMagneticMine from "../pool/magnetic-mine.js";
 import _poolMagnigothSentry from "../pool/magnigoth-sentry.js";
 import _poolMagnusTheRed from "../pool/magnus-the-red.js";
 import _poolMakeDisappear from "../pool/make-disappear.js";
@@ -390,12 +391,14 @@ import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
 import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
+import _poolMorbidPlunder from "../pool/morbid-plunder.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
 import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
+import _poolMyrReservoir from "../pool/myr-reservoir.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
@@ -1087,6 +1090,7 @@ const shard: CardShard = {
     _poolMaccreadyLamplightMayor,
     _poolMaelstromNexus,
     _poolMagitekInfantry,
+    _poolMagneticMine,
     _poolMagnigothSentry,
     _poolMagnusTheRed,
     _poolMakeDisappear,
@@ -1122,12 +1126,14 @@ const shard: CardShard = {
     _poolMoltenNote,
     _poolMoltenRebuke,
     _poolMoonlitScavengers,
+    _poolMorbidPlunder,
     _poolMordenkainensPolymorph,
     _poolMossPitSkeleton,
     _poolMostValuableSlayer,
     _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
+    _poolMyrReservoir,
     _poolMysteriousEgg,
     _poolNacatlOutlander,
     _poolNaelAvizoaAeronaut,

@@ -443,6 +443,7 @@ import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
+import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
@@ -563,6 +564,7 @@ import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
 import _poolSilvergillDouser from "../pool/silvergill-douser.js";
+import _poolSilverskinArmor from "../pool/silverskin-armor.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
@@ -1180,6 +1182,7 @@ const shard: CardShard = {
     _poolOvergrownArch,
     _poolOverwhelmingVictory,
     _poolPacksBetrayal,
+    _poolPanicSpellbomb,
     _poolParasiticImplant,
     _poolPeaceOfMind,
     _poolPearlMedallion,
@@ -1300,6 +1303,7 @@ const shard: CardShard = {
     _poolSilverErne,
     _poolSilverbeakGriffin,
     _poolSilvergillDouser,
+    _poolSilverskinArmor,
     _poolSilverstrike,
     _poolSimicLocket,
     _poolSkeletalChangeling,

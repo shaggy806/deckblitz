@@ -398,6 +398,7 @@ import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
 import _poolMutilate from "../pool/mutilate.js";
 import _poolMyrConvert from "../pool/myr-convert.js";
 import _poolMyrKinsmith from "../pool/myr-kinsmith.js";
+import _poolMyrPropagator from "../pool/myr-propagator.js";
 import _poolMysticVeil from "../pool/mystic-veil.js";
 import _poolNadaarSelflessPaladin from "../pool/nadaar-selfless-paladin.js";
 import _poolNadierAgentOfTheDuskenel from "../pool/nadier-agent-of-the-duskenel.js";
@@ -486,6 +487,7 @@ import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
+import _poolRallyTheForces from "../pool/rally-the-forces.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
 import _poolRangerOfEos from "../pool/ranger-of-eos.js";
 import _poolRatOut from "../pool/rat-out.js";
@@ -719,6 +721,7 @@ import _tokensHamsterToken from "../tokens/hamster-token.js";
 import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shredder.js";
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "../tokens/phyrexian-myr-token-myr-sire.js";
+import _tokensPhyrexianZombieToken from "../tokens/phyrexian-zombie-token.js";
 import _tokensRobotTokenFlying from "../tokens/robot-token-flying.js";
 import _tokensRogueToken from "../tokens/rogue-token.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
@@ -1125,6 +1128,7 @@ const shard: CardShard = {
     _poolMutilate,
     _poolMyrConvert,
     _poolMyrKinsmith,
+    _poolMyrPropagator,
     _poolMysticVeil,
     _poolNadaarSelflessPaladin,
     _poolNadierAgentOfTheDuskenel,
@@ -1213,6 +1217,7 @@ const shard: CardShard = {
     _poolRageIntoTheValley,
     _poolRagingBattleMouse,
     _poolRaidersWake,
+    _poolRallyTheForces,
     _poolRamosDragonEngine,
     _poolRangerOfEos,
     _poolRatOut,
@@ -1448,6 +1453,7 @@ const shard: CardShard = {
     _tokensNinjaTokenDarkLeoShredder,
     _tokensPhyrexianGolemToken,
     _tokensPhyrexianMyrTokenMyrSire,
+    _tokensPhyrexianZombieToken,
     _tokensRobotTokenFlying,
     _tokensRogueToken,
     _tokensSoldierTokenFinaleOfGlory,

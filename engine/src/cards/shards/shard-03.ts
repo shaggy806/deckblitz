@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
+import _poolAcidWebSpider from "../pool/acid-web-spider.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAerieWorshippers from "../pool/aerie-worshippers.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
@@ -574,6 +575,7 @@ import _poolTerminationFacilitator from "../pool/termination-facilitator.js";
 import _poolTerrusWurm from "../pool/terrus-wurm.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTetzimocPrimalDeath from "../pool/tetzimoc-primal-death.js";
+import _poolTezzeretAgentOfBolas from "../pool/tezzeret-agent-of-bolas.js";
 import _poolTezzeretsStrider from "../pool/tezzerets-strider.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
@@ -668,6 +670,7 @@ import _tokensZombieWizardToken from "../tokens/zombie-wizard-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbyssalGatekeeper,
+    _poolAcidWebSpider,
     _poolAdricMathematicalGenius,
     _poolAerieWorshippers,
     _poolAkkiWarPaint,
@@ -1238,6 +1241,7 @@ const shard: CardShard = {
     _poolTerrusWurm,
     _poolTesharAncestorsApostle,
     _poolTetzimocPrimalDeath,
+    _poolTezzeretAgentOfBolas,
     _poolTezzeretsStrider,
     _poolTheFantasticFour,
     _poolTheGaffer,
