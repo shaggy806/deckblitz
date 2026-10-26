@@ -96,6 +96,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **Buyback** (rule 702.27a — batch 178, the oldest-first walk, 2026-10-26): `kicker: { cost, keyword:
+  "buyback" }`, the spell returned to its owner's hand as it resolves; mana costs only (Forbid,
+  Constant Mists and Walk the Aeons wait on `cost:buyback-non-mana`). A scaffolder template;
+  `buyback.test.ts`. With it Capsize, Reiterate, Mystic Speculation, Haze of Rage, Sprout Swarm,
+  Recruit the Worthy and Tempest's six.
+- **Tempest, first half** (batch 178, the oldest-first walk, 2026-10-26): its 90 most-played of
+  178 left — 63 authored by five `card-author` agents and the lead (Eladamri, Lord of Leaves,
+  Apocalypse, Mogg Fanatic, Starke of Rath, Rolling Thunder, Extinction, Choke, Evincar's Justice
+  and 55 more), 27 blocked (`B178.json`); 88 left.
 - **Weatherlight, whole** (batch 175, the oldest-first walk, 2026-10-26): no feature built. 71 of
   its last 119 authored by five `card-author` agents and the lead — Null Rod, Abduction, Angelic
   Renewal, Teferi's Veil, Aether Flash, Gallowbraid, Morinfen, Maraxus of Keld and 63 more (WTH 105

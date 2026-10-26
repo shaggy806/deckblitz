@@ -1,0 +1,710 @@
+{
+ "batch": "B178",
+ "status": "complete",
+ "ranks": "Tempest (TMP, 1997-10-14): its 90 most-played of 178 left (oldest-first walk); buyback built, with the six mana-cost buyback cards it unblocked elsewhere and three non-mana ones re-triaged",
+ "authored": [
+  {
+   "name": "Aftershock",
+   "files": [
+    "engine/src/cards/pool/aftershock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Runes",
+   "files": [
+    "engine/src/cards/pool/ancient-runes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apocalypse",
+   "files": [
+    "engine/src/cards/pool/apocalypse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Frenzy",
+   "files": [
+    "engine/src/cards/pool/blood-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boil",
+   "files": [
+    "engine/src/cards/pool/boil.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bounty Hunter",
+   "files": [
+    "engine/src/cards/pool/bounty-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broken Fall",
+   "files": [
+    "engine/src/cards/pool/broken-fall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Capsize",
+   "files": [
+    "engine/src/cards/pool/capsize.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carrionette",
+   "files": [
+    "engine/src/cards/pool/carrionette.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaotic Goo",
+   "files": [
+    "engine/src/cards/pool/chaotic-goo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chill",
+   "files": [
+    "engine/src/cards/pool/chill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choke",
+   "files": [
+    "engine/src/cards/pool/choke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cinder Marsh",
+   "files": [
+    "engine/src/cards/pool/cinder-marsh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clot Sliver",
+   "files": [
+    "engine/src/cards/pool/clot-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crown of Flames",
+   "files": [
+    "engine/src/cards/pool/crown-of-flames.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dauthi Ghoul",
+   "files": [
+    "engine/src/cards/pool/dauthi-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dauthi Horror",
+   "files": [
+    "engine/src/cards/pool/dauthi-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dauthi Mindripper",
+   "files": [
+    "engine/src/cards/pool/dauthi-mindripper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Death Pits of Rath",
+   "files": [
+    "engine/src/cards/pool/death-pits-of-rath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dirtcowl Wurm",
+   "files": [
+    "engine/src/cards/pool/dirtcowl-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disturbed Burial",
+   "files": [
+    "engine/src/cards/pool/disturbed-burial.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dregs of Sorrow",
+   "files": [
+    "engine/src/cards/pool/dregs-of-sorrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eladamri, Lord of Leaves",
+   "files": [
+    "engine/src/cards/pool/eladamri-lord-of-leaves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elven Warhounds",
+   "files": [
+    "engine/src/cards/pool/elven-warhounds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Fury",
+   "files": [
+    "engine/src/cards/pool/elvish-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Scream",
+   "files": [
+    "engine/src/cards/pool/endless-scream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evincar's Justice",
+   "files": [
+    "engine/src/cards/pool/evincars-justice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Extinction",
+   "files": [
+    "engine/src/cards/pool/extinction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fevered Convulsions",
+   "files": [
+    "engine/src/cards/pool/fevered-convulsions.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Field of Souls",
+   "files": [
+    "engine/src/cards/pool/field-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hanna's Custody",
+   "files": [
+    "engine/src/cards/pool/hannas-custody.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haze of Rage",
+   "files": [
+    "engine/src/cards/pool/haze-of-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Helm of Possession",
+   "files": [
+    "engine/src/cards/pool/helm-of-possession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insight",
+   "files": [
+    "engine/src/cards/pool/insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jackal Pup",
+   "files": [
+    "engine/src/cards/pool/jackal-pup.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jinxed Idol",
+   "files": [
+    "engine/src/cards/pool/jinxed-idol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legacy's Allure",
+   "files": [
+    "engine/src/cards/pool/legacys-allure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Light of Day",
+   "files": [
+    "engine/src/cards/pool/light-of-day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mnemonic Sliver",
+   "files": [
+    "engine/src/cards/pool/mnemonic-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Fanatic",
+   "files": [
+    "engine/src/cards/pool/mogg-fanatic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mongrel Pack",
+   "files": [
+    "engine/src/cards/pool/mongrel-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Speculation",
+   "files": [
+    "engine/src/cards/pool/mystic-speculation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nature's Revolt",
+   "files": [
+    "engine/src/cards/pool/natures-revolt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orim's Prayer",
+   "files": [
+    "engine/src/cards/pool/orims-prayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patchwork Gnomes",
+   "files": [
+    "engine/src/cards/pool/patchwork-gnomes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Perish",
+   "files": [
+    "engine/src/cards/pool/perish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Puppet Strings",
+   "files": [
+    "engine/src/cards/pool/puppet-strings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rats of Rath",
+   "files": [
+    "engine/src/cards/pool/rats-of-rath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Spite",
+   "files": [
+    "engine/src/cards/pool/reckless-spite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recruit the Worthy",
+   "files": [
+    "engine/src/cards/pool/recruit-the-worthy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reiterate",
+   "files": [
+    "engine/src/cards/pool/reiterate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repentance",
+   "files": [
+    "engine/src/cards/pool/repentance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Respite",
+   "files": [
+    "engine/src/cards/pool/respite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rolling Thunder",
+   "files": [
+    "engine/src/cards/pool/rolling-thunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Root Maze",
+   "files": [
+    "engine/src/cards/pool/root-maze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootwater Depths",
+   "files": [
+    "engine/src/cards/pool/rootwater-depths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sadistic Glee",
+   "files": [
+    "engine/src/cards/pool/sadistic-glee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Searing Touch",
+   "files": [
+    "engine/src/cards/pool/searing-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shocker",
+   "files": [
+    "engine/src/cards/pool/shocker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soltari Lancer",
+   "files": [
+    "engine/src/cards/pool/soltari-lancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sprout Swarm",
+   "files": [
+    "engine/src/cards/pool/sprout-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalking Stones",
+   "files": [
+    "engine/src/cards/pool/stalking-stones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starke of Rath",
+   "files": [
+    "engine/src/cards/pool/starke-of-rath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sudden Impact",
+   "files": [
+    "engine/src/cards/pool/sudden-impact.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Talon Sliver",
+   "files": [
+    "engine/src/cards/pool/talon-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tooth and Claw",
+   "files": [
+    "engine/src/cards/pool/tooth-and-claw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twitch",
+   "files": [
+    "engine/src/cards/pool/twitch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whispers of the Muse",
+   "files": [
+    "engine/src/cards/pool/whispers-of-the-muse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Worthy Cause",
+   "files": [
+    "engine/src/cards/pool/worthy-cause.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Reap",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "up to X targets where X counts black permanents the target opponent controls — any-number's max takes a number or the spell's x only"
+  },
+  {
+   "name": "Ertai's Meddling",
+   "needs": [
+    "effect:exile-spell-with-delay-counters"
+   ],
+   "why": "exile a spell with delay counters and put it back on the stack as an uncast copy"
+  },
+  {
+   "name": "Abandon Hope",
+   "needs": [
+    "cost:discard-x-cost",
+    "effect:discard-chosen-count"
+   ],
+   "why": "discard X cards as an additional cost; you choose X cards from the opponent's hand"
+  },
+  {
+   "name": "Maze of Shadows",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target"
+   ],
+   "why": "prevent all combat damage dealt to and by target attacking creature with shadow"
+  },
+  {
+   "name": "Booby Trap",
+   "needs": [
+    "decision:name-a-card",
+    "trigger:chosen-player-draws-named-card"
+   ],
+   "why": "name a card and a player as it enters; the player reveals each draw"
+  },
+  {
+   "name": "Knight of Dusk",
+   "needs": [
+    "effect:target-creature-blocking-source"
+   ],
+   "why": "destroy target creature blocking this creature"
+  },
+  {
+   "name": "Aluren",
+   "needs": [
+    "cost:free-cast-from-hand-static"
+   ],
+   "why": "any player may cast creature spells of MV 3 or less without paying, as though they had flash"
+  },
+  {
+   "name": "Interdict",
+   "needs": [
+    "effect:prohibit-source-of-countered-ability"
+   ],
+   "why": "that permanent's activated abilities can't be activated this turn — the countered ability's source"
+  },
+  {
+   "name": "Marble Titan",
+   "needs": [
+    "static:pt-filtered-static"
+   ],
+   "why": "creatures with power 3 or greater don't untap: a static's affects filter reading power drops out of the layer fold"
+  },
+  {
+   "name": "Legerdemain",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of two target permanents"
+  },
+  {
+   "name": "Vhati il-Dal",
+   "needs": [
+    "effect:set-base-power-only",
+    "effect:set-base-toughness-only"
+   ],
+   "why": "base power or base toughness becomes 1, the other unchanged"
+  },
+  {
+   "name": "Cold Storage",
+   "needs": [
+    "effect:return-linked-under-your-control"
+   ],
+   "why": "return each creature card exiled with it to the battlefield under your control"
+  },
+  {
+   "name": "Rootwater Shaman",
+   "needs": [
+    "filter:aura-enchant-restriction"
+   ],
+   "why": "Aura spells with enchant creature as though they had flash"
+  },
+  {
+   "name": "Magnetic Web",
+   "needs": [
+    "effect:must-block-this-turn",
+    "static:magnet-counter-attack-block-requirement"
+   ],
+   "why": "magnet creatures must block an attacking magnet creature"
+  },
+  {
+   "name": "Oracle en-Vec",
+   "needs": [
+    "effect:target-opponent-chooses",
+    "effect:attacks-if-able-during-target-player-next-turn",
+    "effect:delayed-trigger-next-turn-end-step"
+   ],
+   "why": "the opponent's chosen creatures attack during their next turn, the rest can't; those that didn't are destroyed"
+  },
+  {
+   "name": "Humility",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "all creatures lose all abilities and are 1/1, continuously"
+  },
+  {
+   "name": "Mana Severance",
+   "needs": [
+    "effect:search-library-to-exile"
+   ],
+   "why": "search for any number of lands and exile them"
+  },
+  {
+   "name": "Maddening Imp",
+   "needs": [
+    "condition:cast-timing-condition",
+    "effect:destroy-those-that-didnt-attack"
+   ],
+   "why": "activate only before combat; destroy those that didn't attack"
+  },
+  {
+   "name": "Minion of the Wastes",
+   "needs": [
+    "cost:pay-any-amount-of-life-as-enters"
+   ],
+   "why": "pay any amount of life as it enters; P/T equal to the life paid"
+  },
+  {
+   "name": "Coffin Queen",
+   "needs": [
+    "trigger:lose-control-trigger",
+    "effect:delayed-trigger-rest-of-game"
+   ],
+   "why": "exile the creature when this becomes untapped or you lose control of it"
+  },
+  {
+   "name": "Recycle",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "skip your draw step"
+  },
+  {
+   "name": "Torture Chamber",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "remove all pain counters as a cost; damage equal to the number removed"
+  },
+  {
+   "name": "Wood Sage",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "name a creature card"
+  },
+  {
+   "name": "Phyrexian Splicer",
+   "needs": [
+    "decision:choose-keyword-as-cost"
+   ],
+   "why": "choose flying, first strike, trample or shadow as it's activated; both targets depend on it"
+  },
+  {
+   "name": "Rootwater Matriarch",
+   "needs": [
+    "effect:control-while-condition"
+   ],
+   "why": "control for as long as that creature is enchanted"
+  },
+  {
+   "name": "Corpse Dance",
+   "needs": [
+    "effect:top-creature-card-of-graveyard"
+   ],
+   "why": "return the top creature card of your graveyard (graveyard order)"
+  },
+  {
+   "name": "Whim of Volrath",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "change a colour word or basic land type in a permanent's text"
+  },
+  {
+   "name": "Forbid",
+   "needs": [
+    "cost:buyback-non-mana"
+   ],
+   "why": "Buyback—Discard two cards: buyback is built for mana costs only"
+  },
+  {
+   "name": "Constant Mists",
+   "needs": [
+    "cost:buyback-non-mana"
+   ],
+   "why": "Buyback—Sacrifice a land: buyback is built for mana costs only"
+  },
+  {
+   "name": "Walk the Aeons",
+   "needs": [
+    "cost:buyback-non-mana"
+   ],
+   "why": "Buyback—Sacrifice three Islands: buyback is built for mana costs only"
+  }
+ ]
+}
