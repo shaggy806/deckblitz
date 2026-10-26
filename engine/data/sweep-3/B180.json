@@ -1,0 +1,690 @@
+{
+ "batch": "B180",
+ "status": "complete",
+ "ranks": "Shadowmoor (SHM, 2008-05-02): its 90 most-played cards left, the first half of the 177 left (middle walk, Eventide back to Time Spiral); plus the set's seven other conspire cards, which only conspire blocked",
+ "authored": [
+  {
+   "name": "Aethertow",
+   "files": [
+    "engine/src/cards/pool/aethertow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aphotic Wisps",
+   "files": [
+    "engine/src/cards/pool/aphotic-wisps.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashenmoor Liege",
+   "files": [
+    "engine/src/cards/pool/ashenmoor-liege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Augury Adept",
+   "files": [
+    "engine/src/cards/pool/augury-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barkshell Blessing",
+   "files": [
+    "engine/src/cards/pool/barkshell-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barrenton Medic",
+   "files": [
+    "engine/src/cards/pool/barrenton-medic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blazethorn Scarecrow",
+   "files": [
+    "engine/src/cards/pool/blazethorn-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boartusk Liege",
+   "files": [
+    "engine/src/cards/pool/boartusk-liege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burn Trail",
+   "files": [
+    "engine/src/cards/pool/burn-trail.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cemetery Puca",
+   "files": [
+    "engine/src/cards/pool/cemetery-puca.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainbreaker",
+   "files": [
+    "engine/src/cards/pool/chainbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinderhaze Wretch",
+   "files": [
+    "engine/src/cards/pool/cinderhaze-wretch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corrosive Mentor",
+   "files": [
+    "engine/src/cards/pool/corrosive-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Chains",
+   "files": [
+    "engine/src/cards/pool/curse-of-chains.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepchannel Mentor",
+   "files": [
+    "engine/src/cards/pool/deepchannel-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dire Undercurrents",
+   "files": [
+    "engine/src/cards/pool/dire-undercurrents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disturbing Plot",
+   "files": [
+    "engine/src/cards/pool/disturbing-plot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dramatic Entrance",
+   "files": [
+    "engine/src/cards/pool/dramatic-entrance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drove of Elves",
+   "files": [
+    "engine/src/cards/pool/drove-of-elves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drowner Initiate",
+   "files": [
+    "engine/src/cards/pool/drowner-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elemental Mastery",
+   "files": [
+    "engine/src/cards/pool/elemental-mastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enchanted Evening",
+   "files": [
+    "engine/src/cards/pool/enchanted-evening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Macabre",
+   "files": [
+    "engine/src/cards/pool/faerie-macabre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Swarm",
+   "files": [
+    "engine/src/cards/pool/faerie-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fate Transfer",
+   "files": [
+    "engine/src/cards/pool/fate-transfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fists of the Demigod",
+   "files": [
+    "engine/src/cards/pool/fists-of-the-demigod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fracturing Gust",
+   "files": [
+    "engine/src/cards/pool/fracturing-gust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghastly Discovery",
+   "files": [
+    "engine/src/cards/pool/ghastly-discovery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Giantbaiting",
+   "files": [
+    "engine/src/cards/pool/giantbaiting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gleeful Sabotage",
+   "files": [
+    "engine/src/cards/pool/gleeful-sabotage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Godhead of Awe",
+   "files": [
+    "engine/src/cards/pool/godhead-of-awe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Poppet",
+   "files": [
+    "engine/src/cards/pool/grim-poppet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guttural Response",
+   "files": [
+    "engine/src/cards/pool/guttural-response.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horde of Boggarts",
+   "files": [
+    "engine/src/cards/pool/horde-of-boggarts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Howl of the Night Pack",
+   "files": [
+    "engine/src/cards/pool/howl-of-the-night-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inkfathom Infiltrator",
+   "files": [
+    "engine/src/cards/pool/inkfathom-infiltrator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inkfathom Witch",
+   "files": [
+    "engine/src/cards/pool/inkfathom-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Rabble",
+   "files": [
+    "engine/src/cards/pool/kithkin-rabble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knacksaw Clique",
+   "files": [
+    "engine/src/cards/pool/knacksaw-clique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leech Bonder",
+   "files": [
+    "engine/src/cards/pool/leech-bonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lockjaw Snapper",
+   "files": [
+    "engine/src/cards/pool/lockjaw-snapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lurebound Scarecrow",
+   "files": [
+    "engine/src/cards/pool/lurebound-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madblind Mountain",
+   "files": [
+    "engine/src/cards/pool/madblind-mountain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memory Sluice",
+   "files": [
+    "engine/src/cards/pool/memory-sluice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mercy Killing",
+   "files": [
+    "engine/src/cards/pool/mercy-killing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mine Excavation",
+   "files": [
+    "engine/src/cards/pool/mine-excavation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirrorweave",
+   "files": [
+    "engine/src/cards/pool/mirrorweave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistmeadow Witch",
+   "files": [
+    "engine/src/cards/pool/mistmeadow-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morselhoarder",
+   "files": [
+    "engine/src/cards/pool/morselhoarder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niveous Wisps",
+   "files": [
+    "engine/src/cards/pool/niveous-wisps.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Order of Whiteclay",
+   "files": [
+    "engine/src/cards/pool/order-of-whiteclay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power of Fire",
+   "files": [
+    "engine/src/cards/pool/power-of-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puresight Merrow",
+   "files": [
+    "engine/src/cards/pool/puresight-merrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raking Canopy",
+   "files": [
+    "engine/src/cards/pool/raking-canopy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rattleblaze Scarecrow",
+   "files": [
+    "engine/src/cards/pool/rattleblaze-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resplendent Mentor",
+   "files": [
+    "engine/src/cards/pool/resplendent-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runes of the Deus",
+   "files": [
+    "engine/src/cards/pool/runes-of-the-deus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Safewright Quest",
+   "files": [
+    "engine/src/cards/pool/safewright-quest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scar",
+   "files": [
+    "engine/src/cards/pool/scar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scrapbasket",
+   "files": [
+    "engine/src/cards/pool/scrapbasket.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scuttlemutt",
+   "files": [
+    "engine/src/cards/pool/scuttlemutt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seedcradle Witch",
+   "files": [
+    "engine/src/cards/pool/seedcradle-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smash to Smithereens",
+   "files": [
+    "engine/src/cards/pool/smash-to-smithereens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spawnwrithe",
+   "files": [
+    "engine/src/cards/pool/spawnwrithe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Syphon",
+   "files": [
+    "engine/src/cards/pool/spell-syphon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thistledown Liege",
+   "files": [
+    "engine/src/cards/pool/thistledown-liege.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thornwatch Scarecrow",
+   "files": [
+    "engine/src/cards/pool/thornwatch-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Reflection",
+   "files": [
+    "engine/src/cards/pool/thought-reflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thoughtweft Gambit",
+   "files": [
+    "engine/src/cards/pool/thoughtweft-gambit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traitor's Roar",
+   "files": [
+    "engine/src/cards/pool/traitors-roar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turn to Mist",
+   "files": [
+    "engine/src/cards/pool/turn-to-mist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viridescent Wisps",
+   "files": [
+    "engine/src/cards/pool/viridescent-wisps.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Watchwing Scarecrow",
+   "files": [
+    "engine/src/cards/pool/watchwing-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Windbrisk Raptor",
+   "files": [
+    "engine/src/cards/pool/windbrisk-raptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingrattle Scarecrow",
+   "files": [
+    "engine/src/cards/pool/wingrattle-scarecrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witherscale Wurm",
+   "files": [
+    "engine/src/cards/pool/witherscale-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wort, the Raidmother",
+   "files": [
+    "engine/src/cards/pool/wort-the-raidmother.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Advice from the Fae",
+   "needs": [
+    "condition:player-controls-most"
+   ],
+   "why": "\"If you control more creatures than each other player\": opponent-controls-more is strictly greater, ties wrong."
+  },
+  {
+   "name": "Deus of Calamity",
+   "needs": [
+    "trigger:deals-damage-amount-threshold"
+   ],
+   "why": "\"Deals 6 or more damage to an opponent\": the deals-damage trigger has exactly but no N-or-more."
+  },
+  {
+   "name": "Din of the Fireherd",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "\"Target opponent sacrifices a creature for each black creature you control\": sacrifice's count is a fixed number only."
+  },
+  {
+   "name": "Dream Salvage",
+   "needs": [
+    "effect:turn-stat-cards-discarded"
+   ],
+   "why": "\"Draw cards equal to the number of cards target opponent discarded this turn\": no count of cards a player discarded this turn."
+  },
+  {
+   "name": "Elsewhere Flask",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "Lands you control become the chosen basic land type until end of turn; no such effect (and decision:choose-land-type-on-resolution)."
+  },
+  {
+   "name": "Furystoke Giant",
+   "needs": [
+    "effect:grant-activated-all-except-source"
+   ],
+   "why": "\"Other creatures you control gain …\" an activated ability until end of turn: grant-activated-all has no exceptSource."
+  },
+  {
+   "name": "Ghastlord of Fugue",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "Choose a card from the revealed hand and exile it: discard-chosen only discards."
+  },
+  {
+   "name": "Moonring Island",
+   "needs": [
+    "effect:look-at-target-player-library"
+   ],
+   "why": "\"Look at the top card of target player's library\": look-and-choose reaches only your library or a chosen opponent's."
+  },
+  {
+   "name": "Mossbridge Troll",
+   "needs": [
+    "replacement:regenerate-instead-of-destroy",
+    "cost:tap-creatures-total-power"
+   ],
+   "why": "\"If it would be destroyed, regenerate it\" isn't built, nor tapping any number of other creatures with total power 10 or more as a cost."
+  },
+  {
+   "name": "Prison Term",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "\"Its activated abilities can't be activated\" for the enchanted creature: nothing singles out the Aura's host."
+  },
+  {
+   "name": "Puca's Mischief",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "Exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser mana value: no control exchange, and the second target's mana value reads the first's."
+  },
+  {
+   "name": "Rosheen Meanderer",
+   "needs": [
+    "cost:mana-spend-only-x-costs"
+   ],
+   "why": "\"Spend this mana only on costs that contain {X}\": spendOnly can name spells with {X} in their mana cost, not activated abilities' {X} costs."
+  },
+  {
+   "name": "Runed Halo",
+   "needs": [
+    "decision:choose-card-name",
+    "effect:player-protection"
+   ],
+   "why": "Naming a card, and protection for a player from the chosen name."
+  },
+  {
+   "name": "Savor the Moment",
+   "needs": [
+    "effect:skip-next-untap-step"
+   ],
+   "why": "\"Skip the untap step of that turn\": take-extra-turn can't skip the extra turn's own untap step."
+  },
+  {
+   "name": "Swans of Bryn Argoll",
+   "needs": [
+    "effect:damage-source-controller-draws"
+   ],
+   "why": "Prevent the damage; the source's controller draws that many — nothing names the damage source's controller."
+  },
+  {
+   "name": "Tatterkite",
+   "needs": [
+    "static:cant-have-counters-self"
+   ],
+   "why": "\"Can't have counters put on it\", for itself as it enters (persist's -1/-1 counter): preventsCounters has no self scope."
+  },
+  {
+   "name": "Torrent of Souls",
+   "needs": [
+    "effect:grant-keyword-all-target-player"
+   ],
+   "why": "\"Creatures target player controls gain haste\": grant-keyword-all has no controlledByTarget."
+  },
+  {
+   "name": "Twilight Shepherd",
+   "needs": [
+    "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "\"Return to your hand each card put into your graveyard from the battlefield this turn\": no filter picks those cards out."
+  },
+  {
+   "name": "Wheel of Sun and Moon",
+   "needs": [
+    "replacement:graveyard-to-library-bottom-instead"
+   ],
+   "why": "\"Reveal it and put it on the bottom of its owner's library instead\", scoped to the enchanted player: the replacement only exiles."
+  },
+  {
+   "name": "Wilt-Leaf Liege",
+   "needs": [
+    "replacement:discarded-by-opponent-to-battlefield"
+   ],
+   "why": "Discarded by an opponent's effect, put it onto the battlefield instead."
+  }
+ ]
+}

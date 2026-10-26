@@ -3375,7 +3375,7 @@
   },
   "filter:aura-enchant-restriction": {
    "family": "condition:filter-card-property-clauses",
-   "example": "Rootwater Shaman: \"Aura spells with enchant creature\" \u2014 no CardFilter field reads an Aura's enchant restriction"
+   "example": "Rootwater Shaman: \"Aura spells with enchant creature\" — no CardFilter field reads an Aura's enchant restriction"
   },
   "static:magnet-counter-attack-block-requirement": {
    "family": "static:combat-restriction-extensions",
@@ -3387,7 +3387,7 @@
   },
   "decision:choose-keyword-as-cost": {
    "family": "cost:choose-cards-as-cost",
-   "example": "Phyrexian Splicer: choose flying, ground (sic) \u2014 a keyword chosen as part of the cost, both targets' filters depending on it"
+   "example": "Phyrexian Splicer: choose flying, ground (sic) — a keyword chosen as part of the cost, both targets' filters depending on it"
   },
   "cost:remove-all-counters": {
    "family": "cost:cost-modification-extensions",
@@ -10756,6 +10756,34 @@
   "cost:untap-others": {
    "family": "cost:choose-cards-as-cost",
    "example": "Crackleburr: '{U/R}{U/R}, {Q}, Untap two tapped blue creatures you control' — untapping other permanents as a cost."
+  },
+  "trigger:deals-damage-amount-threshold": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Deus of Calamity: \"Whenever this creature deals 6 or more damage to an opponent\" — the deals-damage trigger has `exactly` but no N-or-more."
+  },
+  "effect:grant-activated-all-except-source": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Furystoke Giant: \"other creatures you control gain '{T}: …' until end of turn\" — grant-activated-all has no exceptSource."
+  },
+  "replacement:regenerate-instead-of-destroy": {
+   "family": "replacement:new-event-replacements",
+   "example": "Mossbridge Troll: \"If this creature would be destroyed, regenerate it\" — a standing regeneration replacement isn't built."
+  },
+  "cost:tap-creatures-total-power": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Mossbridge Troll: \"Tap any number of untapped creatures you control other than this creature with total power 10 or more\" as an activated ability's cost."
+  },
+  "effect:damage-source-controller-draws": {
+   "family": "replacement:damage-modification",
+   "example": "Swans of Bryn Argoll: prevent the damage, and the source's controller draws that many — nothing names the damage source's controller."
+  },
+  "static:cant-have-counters-self": {
+   "family": "trigger:counters-put",
+   "example": "Tatterkite: \"can't have counters put on it\" for itself, entering too (persist's counter) — preventsCounters has no self scope."
+  },
+  "replacement:graveyard-to-library-bottom-instead": {
+   "family": "replacement:exile-instead",
+   "example": "Wheel of Sun and Moon: \"If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of its owner's library\"."
   }
  }
 }
