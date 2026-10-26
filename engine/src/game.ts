@@ -3977,6 +3977,7 @@ export class Game {
     for (const shield of this.state.preventionShields) {
       if (shield.target.kind === "object") pinned.add(shield.target.object);
       if (shield.from !== undefined) pinned.add(shield.from.object);
+      if (shield.redirect?.to.kind === "object") pinned.add(shield.redirect.to.object);
     }
     // A spell or ability on the stack whose target was locked in to one token
     // (`lockInTargets`): a new batch folded into that token would make the
