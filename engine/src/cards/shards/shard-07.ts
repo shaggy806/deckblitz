@@ -171,6 +171,7 @@ import _poolElectrickery from "../pool/electrickery.js";
 import _poolEliteGuardmage from "../pool/elite-guardmage.js";
 import _poolEliteInstructor from "../pool/elite-instructor.js";
 import _poolEliteInterceptor from "../pool/elite-interceptor.js";
+import _poolElvishBerserker from "../pool/elvish-berserker.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
 import _poolEmbraalBruiser from "../pool/embraal-bruiser.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
@@ -364,6 +365,7 @@ import _poolMartyrsCause from "../pool/martyrs-cause.js";
 import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
+import _poolMedicineBag from "../pool/medicine-bag.js";
 import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
@@ -901,6 +903,7 @@ const shard: CardShard = {
     _poolEliteGuardmage,
     _poolEliteInstructor,
     _poolEliteInterceptor,
+    _poolElvishBerserker,
     _poolElvishRanger,
     _poolEmbraalBruiser,
     _poolEmeraldDragonfly,
@@ -1094,6 +1097,7 @@ const shard: CardShard = {
     _poolMaskOfGriselbrand,
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
+    _poolMedicineBag,
     _poolMemorySluice,
     _poolMerchantOfSecrets,
     _poolMercilessJavelineer,

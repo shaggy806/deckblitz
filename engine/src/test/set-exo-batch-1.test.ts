@@ -168,3 +168,40 @@ describe("target opponent who has more … than you do", () => {
     expect(tokensNamed(game, "2/2 Beast Token", A)).toBe(1);
   });
 });
+
+describe("the cards the new costs unblocked", () => {
+  it("Forbid's buyback discards two other cards and comes back", () => {
+    const { game } = table();
+    lands(game, "Island", 3);
+    lands(game, "Mountain", 1);
+    const forbid = toHand(game, "Forbid");
+    toHand(game, "Wastes");
+    toHand(game, "Wastes");
+    // Alice's own Shock, holding priority: it's the spell to counter.
+    const shock = toHand(game, "Shock");
+    cast(game, shock, { targets: [ref(B)], settle: false });
+    const before = hand(game).length;
+    cast(game, forbid, { targets: [ref(shock)], kicked: true });
+    expect(life(game, B)).toBe(20);
+    expect(zone(game, forbid)).toBe("hand");
+    expect(hand(game).length).toBe(before - 2);
+  });
+
+  it("Walk the Aeons' buyback needs three Islands to sacrifice", () => {
+    const { game } = table();
+    lands(game, "Island", 2);
+    lands(game, "Mountain", 4);
+    const walk = toHand(game, "Walk the Aeons");
+    expect(() => cast(game, walk, { targets: [ref(A)], kicked: true })).toThrow(/too few permanents/);
+  });
+
+  it("Stormbind pays {2} and a random card for 2 damage", () => {
+    const { game } = table();
+    const bind = spawn(game, "Stormbind");
+    lands(game, "Mountain", 2);
+    const before = hand(game).length;
+    activate(game, bind, 0, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(18);
+    expect(hand(game).length).toBe(before - 1);
+  });
+});

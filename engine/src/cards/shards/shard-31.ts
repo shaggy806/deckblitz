@@ -400,6 +400,7 @@ import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
+import _poolManabond from "../pool/manabond.js";
 import _poolMarduSkullhunter from "../pool/mardu-skullhunter.js";
 import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
 import _poolMarkerBeetles from "../pool/marker-beetles.js";
@@ -545,6 +546,7 @@ import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
+import _poolSeismicAssault from "../pool/seismic-assault.js";
 import _poolServantOfTymaret from "../pool/servant-of-tymaret.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
@@ -1138,6 +1140,7 @@ const shard: CardShard = {
     _poolMagmaquake,
     _poolMalcolmTheEyes,
     _poolMalevolentRumble,
+    _poolManabond,
     _poolMarduSkullhunter,
     _poolMarisiBreakerOfTheCoil,
     _poolMarkerBeetles,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolSeaGateLoremaster,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
+    _poolSeismicAssault,
     _poolServantOfTymaret,
     _poolSeveredLegion,
     _poolShardlessAgent,

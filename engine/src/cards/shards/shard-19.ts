@@ -144,6 +144,7 @@ import _poolCuboidColony from "../pool/cuboid-colony.js";
 import _poolCultbrandCinder from "../pool/cultbrand-cinder.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
+import _poolCunning from "../pool/cunning.js";
 import _poolDangerous from "../pool/dangerous.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
@@ -175,6 +176,7 @@ import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivineRetribution from "../pool/divine-retribution.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
+import _poolDraconianCylix from "../pool/draconian-cylix.js";
 import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
@@ -412,6 +414,7 @@ import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMinionOfTeveshSzat from "../pool/minion-of-tevesh-szat.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
+import _poolMirozel from "../pool/mirozel.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
 import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
@@ -639,6 +642,7 @@ import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
 import _poolTradeRouteEnvoy from "../pool/trade-route-envoy.js";
 import _poolTradewindRider from "../pool/tradewind-rider.js";
+import _poolTransmogrifyingLicid from "../pool/transmogrifying-licid.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
 import _poolTripUp from "../pool/trip-up.js";
@@ -876,6 +880,7 @@ const shard: CardShard = {
     _poolCultbrandCinder,
     _poolCunningStrike,
     _poolCunningSurvivor,
+    _poolCunning,
     _poolDangerous,
     _poolDaringApprentice,
     _poolDarkRemedy,
@@ -907,6 +912,7 @@ const shard: CardShard = {
     _poolDivineRetribution,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
+    _poolDraconianCylix,
     _poolDragonScarredBear,
     _poolDramaticFinale,
     _poolDreadFugue,
@@ -1144,6 +1150,7 @@ const shard: CardShard = {
     _poolMinionOfTeveshSzat,
     _poolMirarisWake,
     _poolMiresGrasp,
+    _poolMirozel,
     _poolMoldervineReclamation,
     _poolMonoistCircuitFeeder,
     _poolMorlunDevourerOfSpiders,
@@ -1371,6 +1378,7 @@ const shard: CardShard = {
     _poolTowerDrake,
     _poolTradeRouteEnvoy,
     _poolTradewindRider,
+    _poolTransmogrifyingLicid,
     _poolTrashForTreasure,
     _poolTreespringLorian,
     _poolTripUp,

@@ -126,6 +126,7 @@ import _poolConeOfFlame from "../pool/cone-of-flame.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
+import _poolConvalescence from "../pool/convalescence.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
@@ -517,6 +518,7 @@ import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
+import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
@@ -821,6 +823,7 @@ const shard: CardShard = {
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
     _poolContainmentMembrane,
+    _poolConvalescence,
     _poolConvolute,
     _poolConvulsingLicid,
     _poolCoralEel,
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
     _poolSolsticeZealot,
+    _poolSongOfSerenity,
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
     _poolSoulTithe,

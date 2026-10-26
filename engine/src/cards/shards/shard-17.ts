@@ -84,6 +84,7 @@ import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarnageGladiator from "../pool/carnage-gladiator.js";
+import _poolCarnophage from "../pool/carnophage.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCarrionThrash from "../pool/carrion-thrash.js";
 import _poolCartoucheOfAmbition from "../pool/cartouche-of-ambition.js";
@@ -455,6 +456,7 @@ import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
+import _poolRabidWolverines from "../pool/rabid-wolverines.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
@@ -500,6 +502,7 @@ import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolSawbackManticore from "../pool/sawback-manticore.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
+import _poolSchoolOfPiranha from "../pool/school-of-piranha.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
 import _poolScreamerKiller from "../pool/screamer-killer.js";
 import _poolSeafloorDebris from "../pool/seafloor-debris.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolBurrowingRazormaw,
     _poolCapennaExpress,
     _poolCarnageGladiator,
+    _poolCarnophage,
     _poolCarrionLocust,
     _poolCarrionThrash,
     _poolCartoucheOfAmbition,
@@ -1165,6 +1169,7 @@ const shard: CardShard = {
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
     _poolQuickStudy,
+    _poolRabidWolverines,
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,
     _poolRainOfTears,
@@ -1210,6 +1215,7 @@ const shard: CardShard = {
     _poolSarkhanDragonAscendant,
     _poolSawbackManticore,
     _poolScarwoodTreefolk,
+    _poolSchoolOfPiranha,
     _poolScouredBarrens,
     _poolScreamerKiller,
     _poolSeafloorDebris,

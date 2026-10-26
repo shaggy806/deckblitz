@@ -317,6 +317,7 @@ import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js
 import _poolIriniSengir from "../pool/irini-sengir.js";
 import _poolIronsoulEnforcer from "../pool/ironsoul-enforcer.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
+import _poolJackalopeHerd from "../pool/jackalope-herd.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
@@ -689,6 +690,7 @@ import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWaterkinShaman from "../pool/waterkin-shaman.js";
 import _poolWaylayingPirates from "../pool/waylaying-pirates.js";
+import _poolWelkinHawk from "../pool/welkin-hawk.js";
 import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
 import _poolWhipSilk from "../pool/whip-silk.js";
 import _poolWildOx from "../pool/wild-ox.js";
@@ -1051,6 +1053,7 @@ const shard: CardShard = {
     _poolIriniSengir,
     _poolIronsoulEnforcer,
     _poolJackOfHeartsVolatileHero,
+    _poolJackalopeHerd,
     _poolJadeBearer,
     _poolJanJansenChaosCrafter,
     _poolJayemdaeTome,
@@ -1423,6 +1426,7 @@ const shard: CardShard = {
     _poolWatchwolf,
     _poolWaterkinShaman,
     _poolWaylayingPirates,
+    _poolWelkinHawk,
     _poolWellWornSpatula,
     _poolWhipSilk,
     _poolWildOx,

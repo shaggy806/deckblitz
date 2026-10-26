@@ -103,6 +103,7 @@ import _poolCloudSprite from "../pool/cloud-sprite.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
+import _poolConstantMists from "../pool/constant-mists.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolContempt from "../pool/contempt.js";
@@ -585,6 +586,7 @@ import _poolTestOfEndurance from "../pool/test-of-endurance.js";
 import _poolTeysaEnvoyOfGhosts from "../pool/teysa-envoy-of-ghosts.js";
 import _poolTeysaOpulentOligarch from "../pool/teysa-opulent-oligarch.js";
 import _poolTeysaOrzhovScion from "../pool/teysa-orzhov-scion.js";
+import _poolThalakosDrifters from "../pool/thalakos-drifters.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
 import _poolTheFlux from "../pool/the-flux.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
@@ -592,6 +594,7 @@ import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
 import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
+import _poolThrullSurgeon from "../pool/thrull-surgeon.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
 import _poolThuridMareOfDestiny from "../pool/thurid-mare-of-destiny.js";
 import _poolTimberlandAncient from "../pool/timberland-ancient.js";
@@ -654,6 +657,7 @@ import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
 import _poolVoraciousReader from "../pool/voracious-reader.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
+import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
@@ -794,6 +798,7 @@ const shard: CardShard = {
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
     _poolConnive,
+    _poolConstantMists,
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
     _poolContempt,
@@ -1276,6 +1281,7 @@ const shard: CardShard = {
     _poolTeysaEnvoyOfGhosts,
     _poolTeysaOpulentOligarch,
     _poolTeysaOrzhovScion,
+    _poolThalakosDrifters,
     _poolThantisTheWarweaver,
     _poolTheFlux,
     _poolTheLionTurtle,
@@ -1283,6 +1289,7 @@ const shard: CardShard = {
     _poolTheUnderworldCookbook,
     _poolTheWanderingMinstrel,
     _poolThreeTreeRootweaver,
+    _poolThrullSurgeon,
     _poolThunderbreakRegent,
     _poolThuridMareOfDestiny,
     _poolTimberlandAncient,
@@ -1345,6 +1352,7 @@ const shard: CardShard = {
     _poolVoraciousReader,
     _poolVoyagerGlidecar,
     _poolVraskaSchemingGorgon,
+    _poolWalkTheAeons,
     _poolWallOfStone,
     _poolWarriorsHonor,
     _poolWaxenShapethief,

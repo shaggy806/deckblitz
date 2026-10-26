@@ -212,6 +212,7 @@ import _poolFontOfFertility from "../pool/font-of-fertility.js";
 import _poolFoodComa from "../pool/food-coma.js";
 import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
+import _poolForbid from "../pool/forbid.js";
 import _poolForceOfWill from "../pool/force-of-will.js";
 import _poolForkedBolt from "../pool/forked-bolt.js";
 import _poolForktailSweep from "../pool/forktail-sweep.js";
@@ -553,6 +554,7 @@ import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
 import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
+import _poolSpikeWeaver from "../pool/spike-weaver.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSpiritMirror from "../pool/spirit-mirror.js";
@@ -921,6 +923,7 @@ const shard: CardShard = {
     _poolFoodComa,
     _poolFoodFight,
     _poolForatog,
+    _poolForbid,
     _poolForceOfWill,
     _poolForkedBolt,
     _poolForktailSweep,
@@ -1262,6 +1265,7 @@ const shard: CardShard = {
     _poolSowingMycospawn,
     _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,
+    _poolSpikeWeaver,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
     _poolSpiritMirror,

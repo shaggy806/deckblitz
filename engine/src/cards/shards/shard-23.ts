@@ -193,6 +193,7 @@ import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
+import _poolEquilibrium from "../pool/equilibrium.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
 import _poolEtherealGuidance from "../pool/ethereal-guidance.js";
 import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
@@ -895,6 +896,7 @@ const shard: CardShard = {
     _poolEndlessObedience,
     _poolEnfeeblement,
     _poolEnthusiasticMechanaut,
+    _poolEquilibrium,
     _poolErtaiTheCorrupted,
     _poolEtherealGuidance,
     _poolEumidianHatchery,

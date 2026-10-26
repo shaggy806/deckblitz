@@ -129,6 +129,7 @@ import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolConquer from "../pool/conquer.js";
 import _poolControlledInstincts from "../pool/controlled-instincts.js";
+import _poolCoralHelm from "../pool/coral-helm.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
@@ -392,6 +393,7 @@ import _poolMyrScrapling from "../pool/myr-scrapling.js";
 import _poolMysticSanctuary from "../pool/mystic-sanctuary.js";
 import _poolNarsetJeskaiWaymaster from "../pool/narset-jeskai-waymaster.js";
 import _poolNaturalOrder from "../pool/natural-order.js";
+import _poolNecrologia from "../pool/necrologia.js";
 import _poolNecropanther from "../pool/necropanther.js";
 import _poolNecropouncer from "../pool/necropouncer.js";
 import _poolNeedleSpires from "../pool/needle-spires.js";
@@ -420,6 +422,7 @@ import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
+import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
@@ -441,6 +444,7 @@ import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPunctureBolt from "../pool/puncture-bolt.js";
 import _poolPurpleWorm from "../pool/purple-worm.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
+import _poolPygmyTroll from "../pool/pygmy-troll.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
@@ -547,6 +551,7 @@ import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
 import _poolSpectralSteel from "../pool/spectral-steel.js";
+import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
@@ -826,6 +831,7 @@ const shard: CardShard = {
     _poolConclaveEquenaut,
     _poolConquer,
     _poolControlledInstincts,
+    _poolCoralHelm,
     _poolCorpseKnight,
     _poolCountOnLuck,
     _poolCrackedEarthTechnique,
@@ -1089,6 +1095,7 @@ const shard: CardShard = {
     _poolMysticSanctuary,
     _poolNarsetJeskaiWaymaster,
     _poolNaturalOrder,
+    _poolNecrologia,
     _poolNecropanther,
     _poolNecropouncer,
     _poolNeedleSpires,
@@ -1117,6 +1124,7 @@ const shard: CardShard = {
     _poolOvergrownArch,
     _poolOverwhelmingVictory,
     _poolPacksBetrayal,
+    _poolPeaceOfMind,
     _poolPearlMedallion,
     _poolPestProblem,
     _poolPharikasDisciple,
@@ -1138,6 +1146,7 @@ const shard: CardShard = {
     _poolPunctureBolt,
     _poolPurpleWorm,
     _poolPygmyRazorback,
+    _poolPygmyTroll,
     _poolQarsiRevenant,
     _poolQueensAgent,
     _poolRadiantDestiny,
@@ -1244,6 +1253,7 @@ const shard: CardShard = {
     _poolSpearSpewer,
     _poolSpectralReserves,
     _poolSpectralSteel,
+    _poolSphereOfResistance,
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,

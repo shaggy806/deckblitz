@@ -555,6 +555,7 @@ import _poolSkyclaveGeopede from "../pool/skyclave-geopede.js";
 import _poolSkyriderPatrol from "../pool/skyrider-patrol.js";
 import _poolSkyscanner from "../pool/skyscanner.js";
 import _poolSkyshipBuccaneer from "../pool/skyship-buccaneer.js";
+import _poolSkyshroudElite from "../pool/skyshroud-elite.js";
 import _poolSkywaySniper from "../pool/skyway-sniper.js";
 import _poolSlashReptileRampager from "../pool/slash-reptile-rampager.js";
 import _poolSlaughterDrone from "../pool/slaughter-drone.js";
@@ -607,6 +608,7 @@ import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
 import _poolTempleThief from "../pool/temple-thief.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
+import _poolThalakosScout from "../pool/thalakos-scout.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
 import _poolTheAncientOne from "../pool/the-ancient-one.js";
 import _poolTheBrute from "../pool/the-brute.js";
@@ -1275,6 +1277,7 @@ const shard: CardShard = {
     _poolSkyriderPatrol,
     _poolSkyscanner,
     _poolSkyshipBuccaneer,
+    _poolSkyshroudElite,
     _poolSkywaySniper,
     _poolSlashReptileRampager,
     _poolSlaughterDrone,
@@ -1327,6 +1330,7 @@ const shard: CardShard = {
     _poolTempleThief,
     _poolTerritorialRoc,
     _poolTeysaKarlov,
+    _poolThalakosScout,
     _poolThanosDeathsConsort,
     _poolTheAncientOne,
     _poolTheBrute,

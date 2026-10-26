@@ -25,6 +25,7 @@ import _poolAlarum from "../pool/alarum.js";
 import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
 import _poolAltarsLight from "../pool/altars-light.js";
 import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
+import _poolAmok from "../pool/amok.js";
 import _poolAnabaAncestor from "../pool/anaba-ancestor.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
 import _poolAngelOfInvention from "../pool/angel-of-invention.js";
@@ -61,6 +62,7 @@ import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
+import _poolBequeathal from "../pool/bequeathal.js";
 import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
@@ -732,6 +734,7 @@ const shard: CardShard = {
     _poolAlchemistsAssistant,
     _poolAltarsLight,
     _poolAminatouTheFateshifter,
+    _poolAmok,
     _poolAnabaAncestor,
     _poolAncientGreenwarden,
     _poolAngelOfInvention,
@@ -768,6 +771,7 @@ const shard: CardShard = {
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
+    _poolBequeathal,
     _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
     _poolBiteDown,

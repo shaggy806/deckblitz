@@ -138,6 +138,7 @@ import _poolDakmorLancer from "../pool/dakmor-lancer.js";
 import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js";
 import _poolDaringPiracy from "../pool/daring-piracy.js";
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
+import _poolDauthiCutthroat from "../pool/dauthi-cutthroat.js";
 import _poolDavenantHealer from "../pool/davenant-healer.js";
 import _poolDawnOfANewAge from "../pool/dawn-of-a-new-age.js";
 import _poolDawnhandEulogist from "../pool/dawnhand-eulogist.js";
@@ -454,6 +455,7 @@ import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
 import _poolPlagueSpitter from "../pool/plague-spitter.js";
+import _poolPlaguebearer from "../pool/plaguebearer.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
@@ -512,6 +514,7 @@ import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
 import _poolSatyrsCunning from "../pool/satyrs-cunning.js";
 import _poolSavageSilhouette from "../pool/savage-silhouette.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
+import _poolScaldingSalamander from "../pool/scalding-salamander.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScapegoat from "../pool/scapegoat.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
@@ -674,6 +677,7 @@ import _poolWizardsLightning from "../pool/wizards-lightning.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
+import _poolZealotsEnDal from "../pool/zealots-en-dal.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
 import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
@@ -834,6 +838,7 @@ const shard: CardShard = {
     _poolDalakosCrafterOfWonders,
     _poolDaringPiracy,
     _poolDarkslickDrake,
+    _poolDauthiCutthroat,
     _poolDavenantHealer,
     _poolDawnOfANewAge,
     _poolDawnhandEulogist,
@@ -1150,6 +1155,7 @@ const shard: CardShard = {
     _poolPiercingLight,
     _poolPlagueDogs,
     _poolPlagueSpitter,
+    _poolPlaguebearer,
     _poolPlasmaBolt,
     _poolPredictivePreparations,
     _poolPrimeSpeakerVannifar,
@@ -1208,6 +1214,7 @@ const shard: CardShard = {
     _poolSatyrsCunning,
     _poolSavageSilhouette,
     _poolSazacapsBrew,
+    _poolScaldingSalamander,
     _poolScalesOfShale,
     _poolScapegoat,
     _poolScavengerRegent,
@@ -1370,6 +1377,7 @@ const shard: CardShard = {
     _poolYahennisExpertise,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
+    _poolZealotsEnDal,
     _poolZealousLorecaster,
     _poolZhalfirinCommander,
     _poolZopandrelHungerDominus,

@@ -132,6 +132,7 @@ import _poolDarklingStalker from "../pool/darkling-stalker.js";
 import _poolDarksteelAngel from "../pool/darksteel-angel.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
 import _poolDauthiGhoul from "../pool/dauthi-ghoul.js";
+import _poolDauthiWarlord from "../pool/dauthi-warlord.js";
 import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
@@ -468,6 +469,7 @@ import _poolRepurposingBay from "../pool/repurposing-bay.js";
 import _poolRescueLeopard from "../pool/rescue-leopard.js";
 import _poolResilientKhenra from "../pool/resilient-khenra.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
+import _poolResuscitate from "../pool/resuscitate.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
@@ -850,6 +852,7 @@ const shard: CardShard = {
     _poolDarksteelAngel,
     _poolDaughterOfTheDeep,
     _poolDauthiGhoul,
+    _poolDauthiWarlord,
     _poolDawnstrikeVanguard,
     _poolDazzlingDenial,
     _poolDebrisBeetle,
@@ -1186,6 +1189,7 @@ const shard: CardShard = {
     _poolRescueLeopard,
     _poolResilientKhenra,
     _poolRestlessVinestalk,
+    _poolResuscitate,
     _poolRetchedWretch,
     _poolRevealingEye,
     _poolRevivingMelody,

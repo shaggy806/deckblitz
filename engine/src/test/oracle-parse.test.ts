@@ -1594,6 +1594,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.complete).toBe(true);
   });
 
+  it("buyback with a non-mana cost: kicker.also", () => {
+    const flood = face(
+      "Buyback—Pay 3 life, Discard a card at random. (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nDestroy target land.",
+      "Sorcery",
+    );
+    expect(flood.kicker).toEqual({
+      cost: "",
+      keyword: "buyback",
+      also: { text: "Pay 3 life, Discard a card at random", payLife: 3, discard: 1, discardAtRandom: true },
+    });
+    const stampede = face("Buyback—Sacrifice a land. (reminder)\nYou gain 2 life.", "Instant");
+    expect(stampede.kicker?.also).toEqual({ text: "Sacrifice a land", sacrifice: { filter: { type: "land" }, count: 1 } });
+  });
+
+  it("a cost of discarding a card at random", () => {
+    expect(parseCost("{2}, Discard a card at random").cost).toEqual({ mana: "{2}", tap: false, discard: { count: 1, random: true } });
+  });
+
   it("madness (rule 702.35): the keyword line's cost, a mana cost only", () => {
     const imp = face(
       "Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",

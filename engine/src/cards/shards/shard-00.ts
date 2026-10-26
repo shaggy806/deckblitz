@@ -331,6 +331,7 @@ import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
 import _poolMalcatorPurityOverseer from "../pool/malcator-purity-overseer.js";
 import _poolMalcatorsWatcher from "../pool/malcators-watcher.js";
 import _poolManakin from "../pool/manakin.js";
+import _poolManiacalRage from "../pool/maniacal-rage.js";
 import _poolMartyrOfDusk from "../pool/martyr-of-dusk.js";
 import _poolMaskedBlackguard from "../pool/masked-blackguard.js";
 import _poolMassacreGirlKnownKiller from "../pool/massacre-girl-known-killer.js";
@@ -406,6 +407,7 @@ import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
+import _poolPredatoryHunger from "../pool/predatory-hunger.js";
 import _poolPredatoryUrge from "../pool/predatory-urge.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
@@ -630,6 +632,7 @@ import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
+import _poolVampireHounds from "../pool/vampire-hounds.js";
 import _poolVeldt from "../pool/veldt.js";
 import _poolVeneratedLoxodon from "../pool/venerated-loxodon.js";
 import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolMalcatorPurityOverseer,
     _poolMalcatorsWatcher,
     _poolManakin,
+    _poolManiacalRage,
     _poolMartyrOfDusk,
     _poolMaskedBlackguard,
     _poolMassacreGirlKnownKiller,
@@ -1106,6 +1110,7 @@ const shard: CardShard = {
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
     _poolPowerFist,
+    _poolPredatoryHunger,
     _poolPredatoryUrge,
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
@@ -1330,6 +1335,7 @@ const shard: CardShard = {
     _poolUthdenTroll,
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
+    _poolVampireHounds,
     _poolVeldt,
     _poolVeneratedLoxodon,
     _poolVerazolTheSplitCurrent,

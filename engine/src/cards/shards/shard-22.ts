@@ -40,6 +40,7 @@ import _poolAugerSpree from "../pool/auger-spree.js";
 import _poolAutumnalGloom from "../pool/autumnal-gloom.js";
 import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
+import _poolAvengingDruid from "../pool/avenging-druid.js";
 import _poolBackToBasics from "../pool/back-to-basics.js";
 import _poolBackfire from "../pool/backfire.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
@@ -749,6 +750,7 @@ const shard: CardShard = {
     _poolAutumnalGloom,
     _poolAvabruckCaretaker,
     _poolAvenFleetwing,
+    _poolAvengingDruid,
     _poolBackToBasics,
     _poolBackfire,
     _poolBaronAirshipKingdom,

@@ -558,6 +558,7 @@ import _poolSnubhornSentry from "../pool/snubhorn-sentry.js";
 import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
+import _poolSoltariVisionary from "../pool/soltari-visionary.js";
 import _poolSonicBurst from "../pool/sonic-burst.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
@@ -1283,6 +1284,7 @@ const shard: CardShard = {
     _poolSoaringDrake,
     _poolSoaringShowOff,
     _poolSoldeviMachinist,
+    _poolSoltariVisionary,
     _poolSonicBurst,
     _poolSparkTrooper,
     _poolSpectralCloak,

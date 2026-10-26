@@ -106,6 +106,7 @@ import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
+import _poolCinderCrawler from "../pool/cinder-crawler.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolClotSliver from "../pool/clot-sliver.js";
 import _poolCloudpost from "../pool/cloudpost.js";
@@ -858,6 +859,7 @@ const shard: CardShard = {
     _poolChargingWarBoar,
     _poolChildOfNight,
     _poolChillingGrasp,
+    _poolCinderCrawler,
     _poolCityPigeon,
     _poolClotSliver,
     _poolCloudpost,

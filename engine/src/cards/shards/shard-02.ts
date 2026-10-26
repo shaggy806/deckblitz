@@ -265,6 +265,7 @@ import _poolGrimTutor from "../pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
 import _poolGrixisGrimblade from "../pool/grixis-grimblade.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
+import _poolGrollub from "../pool/grollub.js";
 import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
@@ -458,6 +459,7 @@ import _poolRashmiAndRagavan from "../pool/rashmi-and-ragavan.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
+import _poolRecklessOgre from "../pool/reckless-ogre.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
@@ -949,6 +951,7 @@ const shard: CardShard = {
     _poolGrimaSarumansFootman,
     _poolGrixisGrimblade,
     _poolGrizzledLeotau,
+    _poolGrollub,
     _poolGruulRagebeast,
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
@@ -1142,6 +1145,7 @@ const shard: CardShard = {
     _poolRavenousBaloth,
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
+    _poolRecklessOgre,
     _poolRecklessPyrosurfer,
     _poolRecklessSpite,
     _poolReclaimTheWastes,

@@ -716,6 +716,27 @@ const MANA = /^(?:\{(?:\d+|[WUBRGCXS]|[WUBRG]\/[WUBRGP]|2\/[WUBRG])\})+$/;
  * (`extra` holds ability-level fields a cost implies: `otherOnly`, `zone`).
  * `null` when any part is one the engine can't pay.
  */
+/** A buyback's non-mana cost, "Pay 3 life, Discard a card at random" →
+ * `kicker.also`; `null` for any part the engine can't pay. */
+function buybackAlso(text) {
+  const also = { text };
+  for (const part of text.split(/,\s*/)) {
+    let m;
+    if ((m = /^Pay (\d+) life$/i.exec(part))) also.payLife = Number(m[1]);
+    else if (/^Discard a card at random$/i.test(part)) Object.assign(also, { discard: 1, discardAtRandom: true });
+    else if ((m = new RegExp(`^Discard ${N} cards?$`, "i").exec(part))) {
+      const count = numberOf(m[1]);
+      if (typeof count !== "number") return null;
+      also.discard = count;
+    } else if ((m = /^Sacrifice an? (\w+)$/i.exec(part))) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter === null) return null;
+      also.sacrifice = { filter, count: 1 };
+    } else return null;
+  }
+  return also;
+}
+
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
@@ -733,6 +754,8 @@ export function parseCost(text) {
       if (m[1] === "another") extra.otherOnly = true;
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
     else if (part === "Discard your hand") cost.discardHand = true;
+    // "Discard a card at random" (Mage il-Vec): nothing to choose.
+    else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
     else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // X announced as it's activated (rules 601.2b, 602.2b), 0 allowed.
       cost.removeCounter = { kind: m[1], count: "x" };
@@ -2216,6 +2239,12 @@ export function parseFace(face, ctx = {}) {
     // Buyback [cost] (rule 702.27a): a kicker whose cast goes back to its
     // owner's hand as it resolves. A mana cost only.
     if (isSpell && (m = /^Buyback ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "buyback" }; continue; }
+    // Buyback with a non-mana cost (Slaughter's "Buyback—Pay 4 life",
+    // Pegasus Stampede's "Buyback—Sacrifice a land"): `kicker.also`.
+    if (isSpell && (m = /^Buyback—(.+)\.$/.exec(line))) {
+      const also = buybackAlso(m[1]);
+      if (also !== null) { out.kicker = { cost: "", keyword: "buyback", also }; continue; }
+    }
     if (out.kicker?.keyword === "bargain" && (m = /^~ costs \{(\d+)\} less to cast if it's bargained\.$/.exec(line))) {
       out.kicker = { ...out.kicker, reduceGeneric: Number(m[1]) };
       continue;

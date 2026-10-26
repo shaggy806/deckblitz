@@ -188,6 +188,7 @@ import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnduringVictory from "../pool/enduring-victory.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
+import _poolErraticPortal from "../pool/erratic-portal.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
@@ -873,6 +874,7 @@ const shard: CardShard = {
     _poolEnduringVictory,
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
+    _poolErraticPortal,
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,

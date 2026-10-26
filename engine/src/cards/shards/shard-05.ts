@@ -649,6 +649,7 @@ import _poolWarrenWarleader from "../pool/warren-warleader.js";
 import _poolWastelandScorpion from "../pool/wasteland-scorpion.js";
 import _poolWatcherOfTheSpheres from "../pool/watcher-of-the-spheres.js";
 import _poolWatercourser from "../pool/watercourser.js";
+import _poolWaywardSoul from "../pool/wayward-soul.js";
 import _poolWellwisher from "../pool/wellwisher.js";
 import _poolWestfoldRider from "../pool/westfold-rider.js";
 import _poolWhispererOfTheWilds from "../pool/whisperer-of-the-wilds.js";
@@ -1345,6 +1346,7 @@ const shard: CardShard = {
     _poolWastelandScorpion,
     _poolWatcherOfTheSpheres,
     _poolWatercourser,
+    _poolWaywardSoul,
     _poolWellwisher,
     _poolWestfoldRider,
     _poolWhispererOfTheWilds,

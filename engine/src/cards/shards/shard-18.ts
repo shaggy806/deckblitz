@@ -401,6 +401,7 @@ import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
+import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPearlLakeAncient from "../pool/pearl-lake-ancient.js";
@@ -1104,6 +1105,7 @@ const shard: CardShard = {
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
+    _poolParoxysm,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,
     _poolPearlLakeAncient,

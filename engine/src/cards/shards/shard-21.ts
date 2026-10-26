@@ -531,6 +531,7 @@ import _poolStandingStones from "../pool/standing-stones.js";
 import _poolStenchOfDecay from "../pool/stench-of-decay.js";
 import _poolStoneDocent from "../pool/stone-docent.js";
 import _poolStormTheVault from "../pool/storm-the-vault.js";
+import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolStenchOfDecay,
     _poolStoneDocent,
     _poolStormTheVault,
+    _poolStormbind,
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
     _poolStudentOfOjutai,
