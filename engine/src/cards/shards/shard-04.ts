@@ -176,6 +176,7 @@ import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
 import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
+import _poolFlamecastWheel from "../pool/flamecast-wheel.js";
 import _poolFlamekinHarbinger from "../pool/flamekin-harbinger.js";
 import _poolFlankingTroops from "../pool/flanking-troops.js";
 import _poolFlayedOne from "../pool/flayed-one.js";
@@ -824,6 +825,7 @@ const shard: CardShard = {
     _poolFiligreeCrawler,
     _poolFiremindsResearch,
     _poolFlameLash,
+    _poolFlamecastWheel,
     _poolFlamekinHarbinger,
     _poolFlankingTroops,
     _poolFlayedOne,

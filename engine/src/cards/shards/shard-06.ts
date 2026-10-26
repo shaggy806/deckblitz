@@ -160,6 +160,7 @@ import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
 import _poolDesertedBeach from "../pool/deserted-beach.js";
 import _poolDesertedTemple from "../pool/deserted-temple.js";
 import _poolDesynchronization from "../pool/desynchronization.js";
+import _poolDevoutInvocation from "../pool/devout-invocation.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
@@ -199,6 +200,7 @@ import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
 import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
+import _poolFesteringNewt from "../pool/festering-newt.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
@@ -238,6 +240,7 @@ import _poolGlaiveOfTheGuildpact from "../pool/glaive-of-the-guildpact.js";
 import _poolGlamdring from "../pool/glamdring.js";
 import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
+import _poolGlimpseTheFuture from "../pool/glimpse-the-future.js";
 import _poolGnawingZombie from "../pool/gnawing-zombie.js";
 import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
 import _poolGoblinRally from "../pool/goblin-rally.js";
@@ -818,6 +821,7 @@ const shard: CardShard = {
     _poolDesertedBeach,
     _poolDesertedTemple,
     _poolDesynchronization,
+    _poolDevoutInvocation,
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,
     _poolDivineSmite,
@@ -857,6 +861,7 @@ const shard: CardShard = {
     _poolFeastingTrollKing,
     _poolFelidarSovereign,
     _poolFerociousWerefox,
+    _poolFesteringNewt,
     _poolFireNationCadets,
     _poolFireNationSoldier,
     _poolFlameSpill,
@@ -896,6 +901,7 @@ const shard: CardShard = {
     _poolGlamdring,
     _poolGlimmerOfGenius,
     _poolGlimmervoid,
+    _poolGlimpseTheFuture,
     _poolGnawingZombie,
     _poolGoblinGangLeader,
     _poolGoblinRally,

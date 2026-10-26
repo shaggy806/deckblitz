@@ -294,6 +294,7 @@ import _poolIceMagic from "../pool/ice-magic.js";
 import _poolIchorDrinker from "../pool/ichor-drinker.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
+import _poolIllusionaryArmor from "../pool/illusionary-armor.js";
 import _poolIllustriousWanderglyph from "../pool/illustrious-wanderglyph.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
@@ -513,6 +514,7 @@ import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
+import _poolSeraphOfTheSword from "../pool/seraph-of-the-sword.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
 import _poolSerraZealot from "../pool/serra-zealot.js";
@@ -980,6 +982,7 @@ const shard: CardShard = {
     _poolIchorDrinker,
     _poolIgnisScientia,
     _poolIgniteTheFuture,
+    _poolIllusionaryArmor,
     _poolIllustriousWanderglyph,
     _poolImpale,
     _poolImplode,
@@ -1199,6 +1202,7 @@ const shard: CardShard = {
     _poolSeekersSquire,
     _poolSelesnyaSanctuary,
     _poolSelfInflictedWound,
+    _poolSeraphOfTheSword,
     _poolSerpentsPass,
     _poolSerraPaladin,
     _poolSerraZealot,

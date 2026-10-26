@@ -149,6 +149,7 @@ import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElegantRotunda from "../pool/elegant-rotunda.js";
 import _poolElvenPalisade from "../pool/elven-palisade.js";
+import _poolEmberSwallower from "../pool/ember-swallower.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
 import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
@@ -238,6 +239,7 @@ import _poolGrenzosCutthroat from "../pool/grenzos-cutthroat.js";
 import _poolGruesomeFate from "../pool/gruesome-fate.js";
 import _poolGruulCluestone from "../pool/gruul-cluestone.js";
 import _poolGruulNodorog from "../pool/gruul-nodorog.js";
+import _poolGuardianOfTheAges from "../pool/guardian-of-the-ages.js";
 import _poolGuardianOfTheHalls from "../pool/guardian-of-the-halls.js";
 import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
@@ -517,6 +519,7 @@ import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
+import _poolStaffOfTheDeathMagus from "../pool/staff-of-the-death-magus.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
 import _poolStampede from "../pool/stampede.js";
 import _poolSteelExemplar from "../pool/steel-exemplar.js";
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolElectroduplicate,
     _poolElegantRotunda,
     _poolElvenPalisade,
+    _poolEmberSwallower,
     _poolEmbraalGearSmasher,
     _poolEncroachingDragonstorm,
     _poolEndRazeForerunners,
@@ -940,6 +944,7 @@ const shard: CardShard = {
     _poolGruesomeFate,
     _poolGruulCluestone,
     _poolGruulNodorog,
+    _poolGuardianOfTheAges,
     _poolGuardianOfTheHalls,
     _poolGuidingHydra,
     _poolGuulDrazMucklord,
@@ -1219,6 +1224,7 @@ const shard: CardShard = {
     _poolSpinningWheel,
     _poolSpitefulVisions,
     _poolSprout,
+    _poolStaffOfTheDeathMagus,
     _poolStaffOfTheStoryteller,
     _poolStampede,
     _poolSteelExemplar,

@@ -110,6 +110,7 @@ import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
+import _poolColossalWhale from "../pool/colossal-whale.js";
 import _poolCompositeGolem from "../pool/composite-golem.js";
 import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
@@ -808,6 +809,7 @@ const shard: CardShard = {
     _poolCloakOfTheBat,
     _poolClownCar,
     _poolColdEyedSelkie,
+    _poolColossalWhale,
     _poolCompositeGolem,
     _poolConduitGoblin,
     _poolConduitOfRuin,

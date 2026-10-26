@@ -456,9 +456,11 @@ import _poolScabClanBerserker from "../pool/scab-clan-berserker.js";
 import _poolScarletSpiderBenReilly from "../pool/scarlet-spider-ben-reilly.js";
 import _poolScavengedBrawler from "../pool/scavenged-brawler.js";
 import _poolScepterOfFugue from "../pool/scepter-of-fugue.js";
+import _poolScholarOfAthreos from "../pool/scholar-of-athreos.js";
 import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
+import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
@@ -1121,9 +1123,11 @@ const shard: CardShard = {
     _poolScarletSpiderBenReilly,
     _poolScavengedBrawler,
     _poolScepterOfFugue,
+    _poolScholarOfAthreos,
     _poolScientistSupremeOfAIM,
     _poolScourgeOfTheUndercity,
     _poolScrap,
+    _poolSeaGodsRevenge,
     _poolSentinelSpider,
     _poolSeveredStrands,
     _poolShalaisAcolyte,

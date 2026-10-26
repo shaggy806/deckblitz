@@ -282,6 +282,7 @@ import _poolInsidiousBookworms from "../pool/insidious-bookworms.js";
 import _poolInsolentNeonate from "../pool/insolent-neonate.js";
 import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
+import _poolIntoTheWilds from "../pool/into-the-wilds.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
@@ -488,6 +489,7 @@ import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
+import _poolShadowbornDemon from "../pool/shadowborn-demon.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
 import _poolShipbreakerKraken from "../pool/shipbreaker-kraken.js";
@@ -515,6 +517,7 @@ import _poolSoporificSprings from "../pool/soporific-springs.js";
 import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
+import _poolSpearpointOread from "../pool/spearpoint-oread.js";
 import _poolSpellSnuff from "../pool/spell-snuff.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
@@ -951,6 +954,7 @@ const shard: CardShard = {
     _poolInsolentNeonate,
     _poolInspiringBard,
     _poolInstantRamen,
+    _poolIntoTheWilds,
     _poolInvasionSubmersible,
     _poolInvokeTheWinds,
     _poolIsolatedChapel,
@@ -1157,6 +1161,7 @@ const shard: CardShard = {
     _poolSelflessCathar,
     _poolSenselessRage,
     _poolSereneHeart,
+    _poolShadowbornDemon,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
     _poolShipbreakerKraken,
@@ -1184,6 +1189,7 @@ const shard: CardShard = {
     _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,
     _poolSpawningPit,
+    _poolSpearpointOread,
     _poolSpellSnuff,
     _poolSphinxSummoner,
     _poolSpiderGwenFreeSpirit,

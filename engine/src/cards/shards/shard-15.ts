@@ -114,6 +114,7 @@ import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
 import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
 import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
+import _poolDauntlessOnslaught from "../pool/dauntless-onslaught.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDeathTyrant from "../pool/death-tyrant.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
@@ -307,6 +308,7 @@ import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
+import _poolLabyrinthChampion from "../pool/labyrinth-champion.js";
 import _poolLambholtButcher from "../pool/lambholt-butcher.js";
 import _poolLamentation from "../pool/lamentation.js";
 import _poolLanternFlare from "../pool/lantern-flare.js";
@@ -592,6 +594,7 @@ import _poolWalkThePlank from "../pool/walk-the-plank.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
 import _poolWarteyeWitch from "../pool/warteye-witch.js";
+import _poolWavecrashTriton from "../pool/wavecrash-triton.js";
 import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
@@ -744,6 +747,7 @@ const shard: CardShard = {
     _poolCybermenSquadron,
     _poolCynetteJellyDrover,
     _poolDaredevilsBillyClub,
+    _poolDauntlessOnslaught,
     _poolDeathBomb,
     _poolDeathTyrant,
     _poolDefiantBloodlord,
@@ -937,6 +941,7 @@ const shard: CardShard = {
     _poolKitchen,
     _poolKrallenhordeHowler,
     _poolKyoshiIslandPlaza,
+    _poolLabyrinthChampion,
     _poolLambholtButcher,
     _poolLamentation,
     _poolLanternFlare,
@@ -1222,6 +1227,7 @@ const shard: CardShard = {
     _poolWardenOfTheEye,
     _poolWarriorsResolve,
     _poolWarteyeWitch,
+    _poolWavecrashTriton,
     _poolWayOfTheHealer,
     _poolWeatherseedElf,
     _poolWebOfLifeAndDestiny,

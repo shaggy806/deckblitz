@@ -60,6 +60,7 @@ import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
+import _poolBogbrewWitch from "../pool/bogbrew-witch.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
@@ -507,6 +508,7 @@ import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
+import _poolStaffOfTheWildMagus from "../pool/staff-of-the-wild-magus.js";
 import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
@@ -646,6 +648,7 @@ import _poolWindKinRaiders from "../pool/wind-kin-raiders.js";
 import _poolWindriderWizard from "../pool/windrider-wizard.js";
 import _poolWitchingWell from "../pool/witching-well.js";
 import _poolWitchsCauldron from "../pool/witchs-cauldron.js";
+import _poolWitchstalker from "../pool/witchstalker.js";
 import _poolWoodedRidgeline from "../pool/wooded-ridgeline.js";
 import _poolWreckingGecko from "../pool/wrecking-gecko.js";
 import _poolYourFateEndsHere from "../pool/your-fate-ends-here.js";
@@ -728,6 +731,7 @@ const shard: CardShard = {
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
     _poolBoarUmbra,
+    _poolBogbrewWitch,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
     _poolBrainInAJar,
@@ -1175,6 +1179,7 @@ const shard: CardShard = {
     _poolSpellStutter,
     _poolSpinedMegalodon,
     _poolSpringLoadedSawblades,
+    _poolStaffOfTheWildMagus,
     _poolStandUpForYourself,
     _poolStarfieldMystic,
     _poolStarfighterPilot,
@@ -1314,6 +1319,7 @@ const shard: CardShard = {
     _poolWindriderWizard,
     _poolWitchingWell,
     _poolWitchsCauldron,
+    _poolWitchstalker,
     _poolWoodedRidgeline,
     _poolWreckingGecko,
     _poolYourFateEndsHere,

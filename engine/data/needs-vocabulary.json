@@ -3454,6 +3454,10 @@
   "keyword:hexproof-from-abilities": {
    "example": "Volatile Stormdrake: Exchange of control, energy upkeep, and hexproof from activated and triggered abilities."
   },
+  "static:hexproof-from-spells-only": {
+   "family": "keyword:hexproof-from-colors",
+   "example": "Fiendslayer Paladin: can't be the target of black or red spells your opponents control (abilities still can)"
+  },
   "keyword:hexproof-from-colors": {
    "example": "Veil of Summer: 'Spells you control can't be countered this turn', hexproof from blue and black, and 'if an opponent has cast a blue or black spell this turn' all lack vocabulary."
   },
@@ -4330,6 +4334,10 @@
   "static:next-spell-gains-keyword": {
    "family": "static:grant-abilities-to-spells",
    "example": "Storm, Force of Nature: 'The next instant or sorcery spell you cast this turn has storm' needs a one-shot keyword grant to a future spell, and storm's copies must let the player choose new targets."
+  },
+  "static:next-creature-spell-flash": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Savage Summoning: the next creature spell you cast this turn can be cast as though it had flash"
   },
   "static:next-spell-uncounterable": {
    "family": "static:grant-abilities-to-spells",
@@ -9623,6 +9631,10 @@
   },
   "cost:x-capped-by-count": {
    "example": "Winter's Chill"
+  },
+  "cost:x-equals-linked-exiled-mana-value": {
+   "family": "cost:x-fixed-by-source-counters",
+   "example": "Elite Arcanist: {X}, {T}: copy the exiled instant and cast it free, X the exiled card's mana value"
   },
   "effect:discard-one-of-drawn": {
    "example": "Krovikan Sorcerer"

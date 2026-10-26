@@ -126,6 +126,7 @@ import _poolCosmicRebirth from "../pool/cosmic-rebirth.js";
 import _poolCountersquall from "../pool/countersquall.js";
 import _poolCourtOfCunning from "../pool/court-of-cunning.js";
 import _poolCovertOperative from "../pool/covert-operative.js";
+import _poolCracklingTriton from "../pool/crackling-triton.js";
 import _poolCreatureBond from "../pool/creature-bond.js";
 import _poolCrowOfDarkTidings from "../pool/crow-of-dark-tidings.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
@@ -350,6 +351,7 @@ import _poolMalignantGrowth from "../pool/malignant-growth.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
+import _poolMaraudingMaulhorn from "../pool/marauding-maulhorn.js";
 import _poolMarduRunemark from "../pool/mardu-runemark.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
@@ -629,6 +631,7 @@ import _poolVitalize from "../pool/vitalize.js";
 import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
 import _poolVoldarenAmbusher from "../pool/voldaren-ambusher.js";
+import _poolVoraciousWurm from "../pool/voracious-wurm.js";
 import _poolVowOfTorment from "../pool/vow-of-torment.js";
 import _poolVraskaSwarmsEminence from "../pool/vraska-swarms-eminence.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolCountersquall,
     _poolCourtOfCunning,
     _poolCovertOperative,
+    _poolCracklingTriton,
     _poolCreatureBond,
     _poolCrowOfDarkTidings,
     _poolCrudeRampart,
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
+    _poolMaraudingMaulhorn,
     _poolMarduRunemark,
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
@@ -1314,6 +1319,7 @@ const shard: CardShard = {
     _poolVodalianMage,
     _poolVolcanicStrength,
     _poolVoldarenAmbusher,
+    _poolVoraciousWurm,
     _poolVowOfTorment,
     _poolVraskaSwarmsEminence,
     _poolWallOfDenial,

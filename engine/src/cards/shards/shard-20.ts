@@ -160,6 +160,7 @@ import _poolDesperateCastaways from "../pool/desperate-castaways.js";
 import _poolDigUp from "../pool/dig-up.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
+import _poolDismissIntoDream from "../pool/dismiss-into-dream.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
 import _poolDivineOffering from "../pool/divine-offering.js";
@@ -554,6 +555,8 @@ import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
+import _poolStaffOfTheMindMagus from "../pool/staff-of-the-mind-magus.js";
+import _poolStaffOfTheSunMagus from "../pool/staff-of-the-sun-magus.js";
 import _poolStarfall from "../pool/starfall.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
@@ -874,6 +877,7 @@ const shard: CardShard = {
     _poolDigUp,
     _poolDimirLocket,
     _poolDinosaurHunter,
+    _poolDismissIntoDream,
     _poolDispel,
     _poolDistortionStrike,
     _poolDivineOffering,
@@ -1268,6 +1272,8 @@ const shard: CardShard = {
     _poolSquash,
     _poolSquirrelSanctuary,
     _poolSquirrelanoids,
+    _poolStaffOfTheMindMagus,
+    _poolStaffOfTheSunMagus,
     _poolStarfall,
     _poolStargaze,
     _poolStarnheimAspirant,

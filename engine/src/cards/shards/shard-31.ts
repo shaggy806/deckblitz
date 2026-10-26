@@ -35,6 +35,7 @@ import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
+import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
@@ -370,6 +371,7 @@ import _poolLivingArmor from "../pool/living-armor.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
+import _poolLoathsomeCatoblepas from "../pool/loathsome-catoblepas.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
 import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
@@ -727,6 +729,7 @@ const shard: CardShard = {
     _poolArchersParapet,
     _poolArchfiendsVessel,
     _poolArdentPlea,
+    _poolArenaAthlete,
     _poolArgentDais,
     _poolArmoredCancrix,
     _poolArterialFlow,
@@ -1062,6 +1065,7 @@ const shard: CardShard = {
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
     _poolLlanowarReborn,
+    _poolLoathsomeCatoblepas,
     _poolLockjawSlobberingTeleporter,
     _poolLoftyDreams,
     _poolLongshotRebelBowman,

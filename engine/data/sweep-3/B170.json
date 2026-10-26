@@ -1,0 +1,678 @@
+{
+  "batch": "B170",
+  "status": "complete",
+  "ranks": "Theros (THS, 2013-09-27): the rest of the set — its 35 cards left; Magic 2014 (M14, 2013-07-19): whole set — its 60 cards (newest-first walk)",
+  "authored": [
+    {
+      "name": "Scholar of Athreos",
+      "files": [
+        "engine/src/cards/pool/scholar-of-athreos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Erebos's Emissary",
+      "files": [
+        "engine/src/cards/pool/ereboss-emissary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stoneshock Giant",
+      "files": [
+        "engine/src/cards/pool/stoneshock-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cavern Lampad",
+      "files": [
+        "engine/src/cards/pool/cavern-lampad.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chronicler of Heroes",
+      "files": [
+        "engine/src/cards/pool/chronicler-of-heroes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arena Athlete",
+      "files": [
+        "engine/src/cards/pool/arena-athlete.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ember Swallower",
+      "files": [
+        "engine/src/cards/pool/ember-swallower.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Labyrinth Champion",
+      "files": [
+        "engine/src/cards/pool/labyrinth-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battlewise Hoplite",
+      "files": [
+        "engine/src/cards/pool/battlewise-hoplite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dauntless Onslaught",
+      "files": [
+        "engine/src/cards/pool/dauntless-onslaught.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sea God's Revenge",
+      "files": [
+        "engine/src/cards/pool/sea-gods-revenge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Centaur Battlemaster",
+      "files": [
+        "engine/src/cards/pool/centaur-battlemaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wavecrash Triton",
+      "files": [
+        "engine/src/cards/pool/wavecrash-triton.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shipwreck Singer",
+      "files": [
+        "engine/src/cards/pool/shipwreck-singer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spearpoint Oread",
+      "files": [
+        "engine/src/cards/pool/spearpoint-oread.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Setessan Battle Priest",
+      "files": [
+        "engine/src/cards/pool/setessan-battle-priest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anthousa, Setessan Hero",
+      "files": [
+        "engine/src/cards/pool/anthousa-setessan-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cutthroat Maneuver",
+      "files": [
+        "engine/src/cards/pool/cutthroat-maneuver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boulderfall",
+      "files": [
+        "engine/src/cards/pool/boulderfall.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Staunch-Hearted Warrior",
+      "files": [
+        "engine/src/cards/pool/staunch-hearted-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Titan of Eternal Fire",
+      "files": [
+        "engine/src/cards/pool/titan-of-eternal-fire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Returned Phalanx",
+      "files": [
+        "engine/src/cards/pool/returned-phalanx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lagonna-Band Elder",
+      "files": [
+        "engine/src/cards/pool/lagonna-band-elder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ill-Tempered Cyclops",
+      "files": [
+        "engine/src/cards/pool/ill-tempered-cyclops.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Peak Eruption",
+      "files": [
+        "engine/src/cards/pool/peak-eruption.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fleshmad Steed",
+      "files": [
+        "engine/src/cards/pool/fleshmad-steed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamespeaker Adept",
+      "files": [
+        "engine/src/cards/pool/flamespeaker-adept.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamecast Wheel",
+      "files": [
+        "engine/src/cards/pool/flamecast-wheel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crackling Triton",
+      "files": [
+        "engine/src/cards/pool/crackling-triton.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Loathsome Catoblepas",
+      "files": [
+        "engine/src/cards/pool/loathsome-catoblepas.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Staff of the Death Magus",
+      "files": [
+        "engine/src/cards/pool/staff-of-the-death-magus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Garruk, Caller of Beasts",
+      "files": [
+        "engine/src/cards/pool/garruk-caller-of-beasts.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana's Reaver",
+      "files": [
+        "engine/src/cards/pool/lilianas-reaver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Xathrid Necromancer",
+      "files": [
+        "engine/src/cards/pool/xathrid-necromancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ring of Three Wishes",
+      "files": [
+        "engine/src/cards/pool/ring-of-three-wishes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Banisher Priest",
+      "files": [
+        "engine/src/cards/pool/banisher-priest.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Diplomats",
+      "files": [
+        "engine/src/cards/pool/goblin-diplomats.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dragon Egg",
+      "files": [
+        "engine/src/cards/pool/dragon-egg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dismiss into Dream",
+      "files": [
+        "engine/src/cards/pool/dismiss-into-dream.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Imposing Sovereign",
+      "files": [
+        "engine/src/cards/pool/imposing-sovereign.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Colossal Whale",
+      "files": [
+        "engine/src/cards/pool/colossal-whale.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Staff of the Sun Magus",
+      "files": [
+        "engine/src/cards/pool/staff-of-the-sun-magus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tenacious Dead",
+      "files": [
+        "engine/src/cards/pool/tenacious-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Into the Wilds",
+      "files": [
+        "engine/src/cards/pool/into-the-wilds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thorncaster Sliver",
+      "files": [
+        "engine/src/cards/pool/thorncaster-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devout Invocation",
+      "files": [
+        "engine/src/cards/pool/devout-invocation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enlarge",
+      "files": [
+        "engine/src/cards/pool/enlarge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Staff of the Flame Magus",
+      "files": [
+        "engine/src/cards/pool/staff-of-the-flame-magus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pyromancer's Gauntlet",
+      "files": [
+        "engine/src/cards/pool/pyromancers-gauntlet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seraph of the Sword",
+      "files": [
+        "engine/src/cards/pool/seraph-of-the-sword.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shadowborn Demon",
+      "files": [
+        "engine/src/cards/pool/shadowborn-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Groundshaker Sliver",
+      "files": [
+        "engine/src/cards/pool/groundshaker-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bubbling Cauldron",
+      "files": [
+        "engine/src/cards/pool/bubbling-cauldron.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Staff of the Wild Magus",
+      "files": [
+        "engine/src/cards/pool/staff-of-the-wild-magus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Battle Sliver",
+      "files": [
+        "engine/src/cards/pool/battle-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blightcaster",
+      "files": [
+        "engine/src/cards/pool/blightcaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hunt the Weak",
+      "files": [
+        "engine/src/cards/pool/hunt-the-weak.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Staff of the Mind Magus",
+      "files": [
+        "engine/src/cards/pool/staff-of-the-mind-magus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Celestial Flare",
+      "files": [
+        "engine/src/cards/pool/celestial-flare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seismic Stomp",
+      "files": [
+        "engine/src/cards/pool/seismic-stomp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Witchstalker",
+      "files": [
+        "engine/src/cards/pool/witchstalker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oath of the Ancient Wood",
+      "files": [
+        "engine/src/cards/pool/oath-of-the-ancient-wood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindsparker",
+      "files": [
+        "engine/src/cards/pool/mindsparker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Awaken the Ancient",
+      "files": [
+        "engine/src/cards/pool/awaken-the-ancient.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Steelform Sliver",
+      "files": [
+        "engine/src/cards/pool/steelform-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Voracious Wurm",
+      "files": [
+        "engine/src/cards/pool/voracious-wurm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidebinder Mage",
+      "files": [
+        "engine/src/cards/pool/tidebinder-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunted Plate Mail",
+      "files": [
+        "engine/src/cards/pool/haunted-plate-mail.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Festering Newt",
+      "files": [
+        "engine/src/cards/pool/festering-newt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Advocate of the Beast",
+      "files": [
+        "engine/src/cards/pool/advocate-of-the-beast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guardian of the Ages",
+      "files": [
+        "engine/src/cards/pool/guardian-of-the-ages.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodborn Behemoth",
+      "files": [
+        "engine/src/cards/pool/woodborn-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bogbrew Witch",
+      "files": [
+        "engine/src/cards/pool/bogbrew-witch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glimpse the Future",
+      "files": [
+        "engine/src/cards/pool/glimpse-the-future.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Master of Diversion",
+      "files": [
+        "engine/src/cards/pool/master-of-diversion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Illusionary Armor",
+      "files": [
+        "engine/src/cards/pool/illusionary-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trained Condor",
+      "files": [
+        "engine/src/cards/pool/trained-condor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Marauding Maulhorn",
+      "files": [
+        "engine/src/cards/pool/marauding-maulhorn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cyclops Tyrant",
+      "files": [
+        "engine/src/cards/pool/cyclops-tyrant.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Underworld Cerberus",
+      "needs": [
+        "static:cant-be-blocked-except-by-n",
+        "static:graveyard-cards-untargetable"
+      ],
+      "why": "can't be blocked except by three or more creatures; cards in graveyards can't be targeted"
+    },
+    {
+      "name": "Disciple of Phenax",
+      "needs": [
+        "effect:reveal-n-from-hand-you-choose-discard"
+      ],
+      "why": "the player reveals a devotion-sized set of cards of their choice; discard-chosen always reveals the whole hand"
+    },
+    {
+      "name": "Decorated Griffin",
+      "needs": [
+        "effect:prevent-next-n-damage-to-you"
+      ],
+      "why": "prevent the next 1 combat damage that would be dealt to you this turn"
+    },
+    {
+      "name": "Rage of Purphoros",
+      "needs": [
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "the damaged creature can't be regenerated this turn"
+    },
+    {
+      "name": "Coastline Chimera",
+      "needs": [
+        "new:block-additional-creature"
+      ],
+      "why": "can block an additional creature this turn, cumulatively"
+    },
+    {
+      "name": "Savage Summoning",
+      "needs": [
+        "static:next-spell-uncounterable",
+        "static:next-creature-spell-flash"
+      ],
+      "why": "the next creature spell you cast this turn gets flash and can't be countered"
+    },
+    {
+      "name": "Shadowborn Apostle",
+      "needs": [
+        "mechanic:deck-any-number-copies"
+      ],
+      "why": "a deck can have any number of cards named Shadowborn Apostle"
+    },
+    {
+      "name": "Molten Birth",
+      "needs": [
+        "effect:spell-returns-itself-to-hand",
+        "mechanic:coin-flip"
+      ],
+      "why": "on a won flip the resolving spell returns to its owner's hand"
+    },
+    {
+      "name": "Path of Bravery",
+      "needs": [
+        "condition:life-above-starting"
+      ],
+      "why": "\"life total is greater than or equal to your starting life total\": the life-total condition takes only a fixed number"
+    },
+    {
+      "name": "Grim Return",
+      "needs": [
+        "filter:put-into-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "a creature card put into a graveyard from the battlefield this turn"
+    },
+    {
+      "name": "Chandra, Pyromaster",
+      "needs": [
+        "target:controlled-by-target-player",
+        "effect:cast-copies-of-exiled"
+      ],
+      "why": "the +1's creature must be controlled by the first target's player; the −7 casts three copies of one exiled card"
+    },
+    {
+      "name": "Fiendslayer Paladin",
+      "needs": [
+        "static:hexproof-from-spells-only"
+      ],
+      "why": "can't be the target of black or red spells your opponents control — spells only, not abilities"
+    },
+    {
+      "name": "Jace's Mindseeker",
+      "needs": [
+        "zone:cast-from-milled-cards"
+      ],
+      "why": "cast an instant or sorcery from among the cards milled from an opponent's library"
+    },
+    {
+      "name": "Elite Arcanist",
+      "needs": [
+        "cost:x-equals-linked-exiled-mana-value"
+      ],
+      "why": "the {X} activation cost is fixed by the exiled card's mana value"
+    },
+    {
+      "name": "Artificer's Hex",
+      "needs": [
+        "effect:attached-effect-ref"
+      ],
+      "why": "destroys the creature the enchanted Equipment is attached to"
+    },
+    {
+      "name": "Lifebane Zombie",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "reveal a hand and exile a chosen green or white creature card from it"
+    }
+  ]
+}

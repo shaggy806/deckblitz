@@ -171,6 +171,7 @@ import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolEmptyThePits from "../pool/empty-the-pits.js";
+import _poolEnlarge from "../pool/enlarge.js";
 import _poolEraOfInnovation from "../pool/era-of-innovation.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
@@ -299,6 +300,7 @@ import _poolKreeCommandos from "../pool/kree-commandos.js";
 import _poolKrovodHaunch from "../pool/krovod-haunch.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
+import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
@@ -325,6 +327,7 @@ import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
+import _poolMasterOfDiversion from "../pool/master-of-diversion.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
 import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
@@ -814,6 +817,7 @@ const shard: CardShard = {
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolEmptyThePits,
+    _poolEnlarge,
     _poolEraOfInnovation,
     _poolErase,
     _poolEriettesTemptingApple,
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolKrovodHaunch,
     _poolKrumarBondKin,
     _poolKutzilsFlanker,
+    _poolLagonnaBandElder,
     _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLazotepSliver,
@@ -968,6 +973,7 @@ const shard: CardShard = {
     _poolMarkovBaron,
     _poolMarwynTheNurturer,
     _poolMaskOfImmolation,
+    _poolMasterOfDiversion,
     _poolMerfolkSecretkeeper,
     _poolMerfolkWindrobber,
     _poolMerryWardenOfIsengard,

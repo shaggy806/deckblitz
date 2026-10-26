@@ -82,6 +82,7 @@ import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
+import _poolBubblingCauldron from "../pool/bubbling-cauldron.js";
 import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolBurnTogether from "../pool/burn-together.js";
@@ -126,6 +127,7 @@ import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
+import _poolCyclopsTyrant from "../pool/cyclops-tyrant.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
@@ -735,6 +737,7 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
+    _poolBubblingCauldron,
     _poolBuildersBane,
     _poolBulwarkOx,
     _poolBurnTogether,
@@ -779,6 +782,7 @@ const shard: CardShard = {
     _poolCruelSadist,
     _poolCurseOfTheRestlessDead,
     _poolCutIn,
+    _poolCyclopsTyrant,
     _poolDargoTheShipwrecker,
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,

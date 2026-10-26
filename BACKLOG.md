@@ -176,11 +176,11 @@ section keeps only what to do next.
   on parley; batch 161 the rest of Journey into Nyx, on bestow, with the eleven earlier bestow
   cards it unblocked; batch 164 the rest of Born of the Gods, on tribute; batch 167 Commander
   2013 whole and Theros's 76 most-played left, on the Ordeals' "when you sacrifice this Aura");
-  **next, the rest of Theros** (35 left: one or two agents) — Ordeal of Nylea is authorable now
-  (copy `pool/ordeal-of-heliod.ts`, the `sacrifice` trigger's `selfOnly`), and Theros's other
-  mechanics are all in the pool (bestow, heroic, monstrosity, devotion); then Gatecrash, Return
-  to Ravnica and on down to Scars of Mirrodin (`cards:sets -- --set <code>`), stopping before
-  Magic 2011. Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
+  batch 170 the rest of Theros and Magic 2014 whole, no feature built (79 authored, 16 blocked,
+  one or two each — `B170.json`); **next, Dragon's Maze** (83 left: five agents) — its
+  Ravnica mechanics are in the pool from the earlier top-half pass (`cards:sets -- --set DGM`);
+  then Gatecrash (116), Return to Ravnica (122), Magic 2013 and on down to Scars of Mirrodin,
+  stopping before Magic 2011. Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
   attacks enchanted player" (`trigger:creature-attacks-enchanted-player` — the Curses of
   Predation and the Forsaken) and the tempting offers' simultaneity
   (`new:each-player-may-simultaneous` — Tempt with Immortality, beside Tempt with Discovery) lead

@@ -84,6 +84,7 @@ import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCartoucheOfAmbition from "../pool/cartouche-of-ambition.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
+import _poolCelestialFlare from "../pool/celestial-flare.js";
 import _poolChainOfVapor from "../pool/chain-of-vapor.js";
 import _poolChandrasEmbercat from "../pool/chandras-embercat.js";
 import _poolCharge from "../pool/charge.js";
@@ -245,6 +246,7 @@ import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
 import _poolGrotagSiegeRunner from "../pool/grotag-siege-runner.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
+import _poolGroundshakerSliver from "../pool/groundshaker-sliver.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
@@ -356,6 +358,7 @@ import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
 import _poolMidnightEntourage from "../pool/midnight-entourage.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
+import _poolMindsparker from "../pool/mindsparker.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
@@ -571,6 +574,7 @@ import _poolThunderingRebuke from "../pool/thundering-rebuke.js";
 import _poolThunderscapeMaster from "../pool/thunderscape-master.js";
 import _poolTideDrifter from "../pool/tide-drifter.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
+import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
@@ -756,6 +760,7 @@ const shard: CardShard = {
     _poolCarrionLocust,
     _poolCartoucheOfAmbition,
     _poolCascadeBluffs,
+    _poolCelestialFlare,
     _poolChainOfVapor,
     _poolChandrasEmbercat,
     _poolCharge,
@@ -917,6 +922,7 @@ const shard: CardShard = {
     _poolGrizzlyGhoul,
     _poolGrotagSiegeRunner,
     _poolGroundchuckDirtbag,
+    _poolGroundshakerSliver,
     _poolGroundskeeper,
     _poolGuardianOfTazeem,
     _poolGutTrueSoulZealot,
@@ -1028,6 +1034,7 @@ const shard: CardShard = {
     _poolMidnightEntourage,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,
+    _poolMindsparker,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
     _poolMirkwoodChanneler,
@@ -1243,6 +1250,7 @@ const shard: CardShard = {
     _poolThunderscapeMaster,
     _poolTideDrifter,
     _poolTideSkimmer,
+    _poolTitanOfEternalFire,
     _poolTitaniaNaturesForce,
     _poolTombRobber,
     _poolTragicLesson,
