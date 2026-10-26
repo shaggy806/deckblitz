@@ -542,6 +542,64 @@ export const echo = (cost: string | UnlessOption): TriggeredAbility => {
 };
 
 /**
+ * Recover [cost] (rule 702.59a): "When a creature is put into your graveyard
+ * from the battlefield, you may pay [cost]. If you do, return this card from
+ * your graveyard to your hand. Otherwise, exile this card." It functions only
+ * while the card is in its owner's graveyard (`fromGraveyard`), so a card
+ * that went there in the same event — Garza's Assassin sacrificed for its own
+ * ability — doesn't see it. Unpaid, or unpayable, it's exiled. `cost` is a
+ * mana cost or `"half-life"` (Garza's Assassin's "Recover—Pay half your life,
+ * rounded up"). Put the keyword line in `text` as well.
+ */
+export const recover = (cost: string | "half-life"): TriggeredAbility => {
+  const halfLife = cost === "half-life";
+  const shown = halfLife ? "—Pay half your life, rounded up." : ` ${cost}`;
+  return {
+    fromGraveyard: true,
+    trigger: { on: "dies", who: "any", filter: { type: "creature", ownedBy: "you" } },
+    targets: [],
+    effect: {
+      kind: "may",
+      prompt: halfLife ? "Pay half your life, rounded up, to return this card to your hand (recover)?" : `Pay ${cost} to return this card to your hand (recover)?`,
+      ...(halfLife ? { costLife: { half: { lifeTotal: "you" }, round: "up" } as const } : { cost }),
+      effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
+      else: { kind: "exile", target: "source" },
+    },
+    resolve: null,
+    text: `Recover${shown} (When a creature is put into your graveyard from the battlefield, you may pay ${halfLife ? "half your life, rounded up" : cost}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)`,
+  };
+};
+
+/**
+ * Ripple N (rule 702.60a): "When you cast this spell, you may reveal the top
+ * N cards of your library … you may cast any of those cards with the same
+ * name as this spell without paying their mana costs, then put all revealed
+ * cards not cast this way on the bottom of your library in any order" — a
+ * `may`, then a repeating free `cast-now` from the revealed cards limited to
+ * `name`, the rest ordered onto the bottom. Each spell cast this way is cast,
+ * so its own ripple triggers. Each instance triggers separately (702.60b).
+ * Put the keyword line in `text` as well.
+ */
+export const ripple = (n: number, name: string): TriggeredAbility => ({
+  trigger: { on: "this-cast" },
+  targets: [],
+  effect: {
+    kind: "may",
+    prompt: `Reveal the top ${n} cards of your library (ripple ${n})?`,
+    effect: {
+      kind: "cast-now",
+      from: { libraryTop: n, reveal: true },
+      spell: { name },
+      free: true,
+      repeat: true,
+      rest: "bottom-any-order",
+    },
+  },
+  resolve: null,
+  text: `Ripple ${n} (When you cast this spell, you may reveal the top ${n === 4 ? "four" : String(n)} cards of your library. You may cast spells with the same name as this spell from among those cards without paying their mana costs. Put the rest on the bottom of your library.)`,
+});
+
+/**
  * Mentor (rule 702.134a): "Whenever this creature attacks, put a +1/+1
  * counter on target attacking creature with lesser power" — the power
  * compared as the target is chosen and again as it resolves (Legion

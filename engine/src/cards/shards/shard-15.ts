@@ -335,6 +335,7 @@ import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKithkinHarbinger from "../pool/kithkin-harbinger.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
+import _poolKrovikanRot from "../pool/krovikan-rot.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLabyrinthChampion from "../pool/labyrinth-champion.js";
 import _poolLambholtButcher from "../pool/lambholt-butcher.js";
@@ -1030,6 +1031,7 @@ const shard: CardShard = {
     _poolKitchen,
     _poolKithkinHarbinger,
     _poolKrallenhordeHowler,
+    _poolKrovikanRot,
     _poolKyoshiIslandPlaza,
     _poolLabyrinthChampion,
     _poolLambholtButcher,

@@ -590,6 +590,7 @@ import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
 import _poolSunriseCavalier from "../pool/sunrise-cavalier.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSupremePhantom from "../pool/supreme-phantom.js";
+import _poolSurgingFlame from "../pool/surging-flame.js";
 import _poolSwarmSurge from "../pool/swarm-surge.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
@@ -1322,6 +1323,7 @@ const shard: CardShard = {
     _poolSunriseCavalier,
     _poolSuperShredder,
     _poolSupremePhantom,
+    _poolSurgingFlame,
     _poolSwarmSurge,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,

@@ -1,0 +1,13 @@
+import { defineCard } from "../define.js";
+import { ripple } from "../helpers.js";
+
+export default defineCard({
+  name: "Surging Aether",
+  manaCost: "{3}{U}",
+  colors: ["U"],
+  types: ["instant"],
+  text: "Ripple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast spells with the same name as this spell from among those cards without paying their mana costs. Put the rest on the bottom of your library.)\nReturn target permanent to its owner's hand.",
+  targets: ["permanent"],
+  effect: { kind: "return-to-hand", target: 0 },
+  triggered: [ripple(4, "Surging Aether")],
+});

@@ -587,6 +587,7 @@ import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
+import _poolSurgingMight from "../pool/surging-might.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
@@ -1293,6 +1294,7 @@ const shard: CardShard = {
     _poolSummonPrimalGaruda,
     _poolSummonersSending,
     _poolSunderingVitae,
+    _poolSurgingMight,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,
     _poolSynthInfiltrator,

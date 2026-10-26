@@ -233,6 +233,7 @@ import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
+import _poolGarzasAssassin from "../pool/garzas-assassin.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolFuneralCharm,
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
+    _poolGarzasAssassin,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,

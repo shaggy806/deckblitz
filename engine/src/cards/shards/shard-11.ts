@@ -266,6 +266,7 @@ import _poolGrazingWhiptail from "../pool/grazing-whiptail.js";
 import _poolGreatsword from "../pool/greatsword.js";
 import _poolGreenGoblin from "../pool/green-goblin.js";
 import _poolGreenbeltRadical from "../pool/greenbelt-radical.js";
+import _poolGrimHarvest from "../pool/grim-harvest.js";
 import _poolGrowthSpiral from "../pool/growth-spiral.js";
 import _poolGryffVanguard from "../pool/gryff-vanguard.js";
 import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
@@ -998,6 +999,7 @@ const shard: CardShard = {
     _poolGreatsword,
     _poolGreenGoblin,
     _poolGreenbeltRadical,
+    _poolGrimHarvest,
     _poolGrowthSpiral,
     _poolGryffVanguard,
     _poolGuardianOfGhirapur,

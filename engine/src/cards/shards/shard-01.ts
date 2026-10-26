@@ -463,6 +463,7 @@ import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
 import _poolRescueSkiff from "../pool/rescue-skiff.js";
+import _poolResize from "../pool/resize.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
@@ -1164,6 +1165,7 @@ const shard: CardShard = {
     _poolRepercussion,
     _poolRepulse,
     _poolRescueSkiff,
+    _poolResize,
     _poolRestorativeTechnique,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,

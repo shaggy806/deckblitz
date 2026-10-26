@@ -544,6 +544,7 @@ import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
+import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSuspend from "../pool/suspend.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
@@ -1199,6 +1200,7 @@ const shard: CardShard = {
     _poolSunderingArchaic,
     _poolSunspireGriffin,
     _poolSupplyLineCranes,
+    _poolSurgingDementia,
     _poolSurveillanceRoom,
     _poolSuspend,
     _poolSwellOfCourage,

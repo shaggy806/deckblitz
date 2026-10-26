@@ -636,6 +636,8 @@ import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
 import _poolSunriseSeeker from "../pool/sunrise-seeker.js";
 import _poolSupportiveParents from "../pool/supportive-parents.js";
+import _poolSurgingAether from "../pool/surging-aether.js";
+import _poolSurgingSentinels from "../pool/surging-sentinels.js";
 import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
@@ -1389,6 +1391,8 @@ const shard: CardShard = {
     _poolSunbladeSamurai,
     _poolSunriseSeeker,
     _poolSupportiveParents,
+    _poolSurgingAether,
+    _poolSurgingSentinels,
     _poolSurrakarMarauder,
     _poolSweetOblivion,
     _poolSwordOfSinewAndSteel,
