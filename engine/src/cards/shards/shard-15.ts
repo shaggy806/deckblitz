@@ -64,6 +64,7 @@ import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBreakTies from "../pool/break-ties.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
+import _poolBronzeBombshell from "../pool/bronze-bombshell.js";
 import _poolByForce from "../pool/by-force.js";
 import _poolCalamitousTide from "../pool/calamitous-tide.js";
 import _poolCalamitysWake from "../pool/calamitys-wake.js";
@@ -470,6 +471,7 @@ import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
+import _poolPureSimple from "../pool/pure-simple.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
@@ -527,6 +529,7 @@ import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
+import _poolSilverstormSamurai from "../pool/silverstorm-samurai.js";
 import _poolSimianBrawler from "../pool/simian-brawler.js";
 import _poolSirenSongLyre from "../pool/siren-song-lyre.js";
 import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
@@ -553,6 +556,7 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpiritEnDal from "../pool/spirit-en-dal.js";
 import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
@@ -769,6 +773,7 @@ const shard: CardShard = {
     _poolBrainWeevil,
     _poolBreakTies,
     _poolBrenardGingerSculptor,
+    _poolBronzeBombshell,
     _poolByForce,
     _poolCalamitousTide,
     _poolCalamitysWake,
@@ -1175,6 +1180,7 @@ const shard: CardShard = {
     _poolPrizefight,
     _poolPropheticFlamespeaker,
     _poolPsionicSnoop,
+    _poolPureSimple,
     _poolPyreticRebirth,
     _poolPyrotechnicPerformer,
     _poolQuakefootCyclops,
@@ -1232,6 +1238,7 @@ const shard: CardShard = {
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,
+    _poolSilverstormSamurai,
     _poolSimianBrawler,
     _poolSirenSongLyre,
     _poolSizzlingChangeling,
@@ -1258,6 +1265,7 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpiritEnDal,
     _poolSpitefulBlow,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,

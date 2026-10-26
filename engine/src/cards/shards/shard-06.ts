@@ -235,6 +235,7 @@ import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForceOfRage from "../pool/force-of-rage.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
+import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
 import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
@@ -255,6 +256,7 @@ import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
+import _poolGenjuOfTheSpires from "../pool/genju-of-the-spires.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGethsVerdict from "../pool/geths-verdict.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
@@ -270,6 +272,7 @@ import _poolGlassesOfUrza from "../pool/glasses-of-urza.js";
 import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
 import _poolGlimpseTheFuture from "../pool/glimpse-the-future.js";
+import _poolGnatAlleyCreeper from "../pool/gnat-alley-creeper.js";
 import _poolGnawingZombie from "../pool/gnawing-zombie.js";
 import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
 import _poolGoblinRally from "../pool/goblin-rally.js";
@@ -451,6 +454,7 @@ import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPowerWordKill from "../pool/power-word-kill.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
+import _poolPresenceOfTheWise from "../pool/presence-of-the-wise.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
@@ -580,6 +584,7 @@ import _poolSpiritLoop from "../pool/spirit-loop.js";
 import _poolSpiritOfTheSpires from "../pool/spirit-of-the-spires.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
 import _poolSplittingThePowerstone from "../pool/splitting-the-powerstone.js";
+import _poolSporebackTroll from "../pool/sporeback-troll.js";
 import _poolSquiresLightblade from "../pool/squires-lightblade.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
@@ -670,6 +675,7 @@ import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
 import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolVulpikeet from "../pool/vulpikeet.js";
+import _poolWalkingArchive from "../pool/walking-archive.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWanderbrineRootcutters from "../pool/wanderbrine-rootcutters.js";
@@ -969,6 +975,7 @@ const shard: CardShard = {
     _poolFoggySwampSpiritKeeper,
     _poolForceOfRage,
     _poolForgottenCreation,
+    _poolForkedBranchGarami,
     _poolFormAPosse,
     _poolFortify,
     _poolFountainOfRenewal,
@@ -989,6 +996,7 @@ const shard: CardShard = {
     _poolGeistTrappers,
     _poolGenerousEnt,
     _poolGenerousPup,
+    _poolGenjuOfTheSpires,
     _poolGeometersArthropod,
     _poolGethsVerdict,
     _poolGhaltaTheUnstoppable,
@@ -1004,6 +1012,7 @@ const shard: CardShard = {
     _poolGlimmerOfGenius,
     _poolGlimmervoid,
     _poolGlimpseTheFuture,
+    _poolGnatAlleyCreeper,
     _poolGnawingZombie,
     _poolGoblinGangLeader,
     _poolGoblinRally,
@@ -1185,6 +1194,7 @@ const shard: CardShard = {
     _poolPollywogProdigy,
     _poolPowerWordKill,
     _poolPracticedOffense,
+    _poolPresenceOfTheWise,
     _poolPriceOfFame,
     _poolPriestOfTheBloodRite,
     _poolPrimalFrenzy,
@@ -1314,6 +1324,7 @@ const shard: CardShard = {
     _poolSpiritOfTheSpires,
     _poolSpiritcallEnthusiast,
     _poolSplittingThePowerstone,
+    _poolSporebackTroll,
     _poolSquiresLightblade,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
@@ -1404,6 +1415,7 @@ const shard: CardShard = {
     _poolVolcanicHammer,
     _poolVoltstormAngel,
     _poolVulpikeet,
+    _poolWalkingArchive,
     _poolWallOfBlood,
     _poolWallOfOmens,
     _poolWanderbrineRootcutters,

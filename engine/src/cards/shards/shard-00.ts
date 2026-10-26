@@ -141,6 +141,7 @@ import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
+import _poolCutTheEarthlyBond from "../pool/cut-the-earthly-bond.js";
 import _poolCybermat from "../pool/cybermat.js";
 import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
@@ -444,6 +445,7 @@ import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolPrimordialGnawer from "../pool/primordial-gnawer.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
+import _poolProperBurial from "../pool/proper-burial.js";
 import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
@@ -510,6 +512,7 @@ import _poolSamisCuriosity from "../pool/samis-curiosity.js";
 import _poolSamsDesperateRescue from "../pool/sams-desperate-rescue.js";
 import _poolSamutVoiceOfDissent from "../pool/samut-voice-of-dissent.js";
 import _poolSanctumGargoyle from "../pool/sanctum-gargoyle.js";
+import _poolSandstormEidolon from "../pool/sandstorm-eidolon.js";
 import _poolSarkhanSoulAflame from "../pool/sarkhan-soul-aflame.js";
 import _poolSarkhanVol from "../pool/sarkhan-vol.js";
 import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
@@ -554,6 +557,7 @@ import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
 import _poolSnowDevil from "../pool/snow-devil.js";
 import _poolSocialSnub from "../pool/social-snub.js";
+import _poolSokenzanSpellblade from "../pool/sokenzan-spellblade.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
 import _poolSomberwaldSpider from "../pool/somberwald-spider.js";
@@ -568,6 +572,7 @@ import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
+import _poolSquealingDevil from "../pool/squealing-devil.js";
 import _poolStaffOfTheWildMagus from "../pool/staff-of-the-wild-magus.js";
 import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
@@ -652,6 +657,7 @@ import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranspose from "../pool/transpose.js";
+import _poolTraprootKami from "../pool/traproot-kami.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
 import _poolTritonFortuneHunter from "../pool/triton-fortune-hunter.js";
@@ -890,6 +896,7 @@ const shard: CardShard = {
     _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
+    _poolCutTheEarthlyBond,
     _poolCybermat,
     _poolCyclopsElectromancer,
     _poolDanithaBenaliasHope,
@@ -1193,6 +1200,7 @@ const shard: CardShard = {
     _poolPrimordialGnawer,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
+    _poolProperBurial,
     _poolProsperityTycoon,
     _poolPrudentFateseer,
     _poolPryingEyes,
@@ -1259,6 +1267,7 @@ const shard: CardShard = {
     _poolSamsDesperateRescue,
     _poolSamutVoiceOfDissent,
     _poolSanctumGargoyle,
+    _poolSandstormEidolon,
     _poolSarkhanSoulAflame,
     _poolSarkhanVol,
     _poolSarulfsPackmate,
@@ -1303,6 +1312,7 @@ const shard: CardShard = {
     _poolSnappingDrake,
     _poolSnowDevil,
     _poolSocialSnub,
+    _poolSokenzanSpellblade,
     _poolSoldierMilitaryProgram,
     _poolSolitude,
     _poolSomberwaldSpider,
@@ -1317,6 +1327,7 @@ const shard: CardShard = {
     _poolSpellStutter,
     _poolSpinedMegalodon,
     _poolSpringLoadedSawblades,
+    _poolSquealingDevil,
     _poolStaffOfTheWildMagus,
     _poolStandUpForYourself,
     _poolStarfieldMystic,
@@ -1401,6 +1412,7 @@ const shard: CardShard = {
     _poolTrackDown,
     _poolTraitorsRoar,
     _poolTranspose,
+    _poolTraprootKami,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,
     _poolTritonFortuneHunter,

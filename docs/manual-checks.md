@@ -5500,8 +5500,20 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Endless Swarm, then try to cast Grizzly Bears. Pass the turn and come back to your upkeep.
 - **Expect:** You get a Snake for each card in your hand, and an emblem appears. Grizzly Bears can't be cast any more. At your upkeep a copy of Endless Swarm resolves and makes more Snakes; still only one emblem.
 
+## Splice (2026-10-26, Betrayers of Kamigawa)
+
+### Desperate Ritual: splicing Spiritual Visit onto it
+- **Do:** Click Desperate Ritual in your hand and pick the way to cast it that says "splicing Spiritual Visit {W}".
+- **Expect:** All three lands are tapped for it. Spiritual Visit is shown revealed and stays in your hand. You get a 1/1 Spirit token and {R}{R}{R} in your mana pool.
+
 ## Horsemanship (2026-10-26, Portal Three Kingdoms)
 
 ### Shu Cavalry: only horsemanship blocks it
 - **Do:** Attack with Shu Cavalry and Grizzly Bears. Switch to Bob and declare blockers.
 - **Expect:** Serra Angel can block only the Bears (flying doesn't count). Wei Scout can block either attacker.
+
+## Forecast (2026-10-26, Dissension)
+
+### Skyscribing: forecast from your hand in your upkeep, once a turn
+- **Do:** In your main phase, look for Skyscribing's forecast ability, then pass the turn and come back to your upkeep. Use it there, then try it again.
+- **Expect:** It isn't offered in your main phase. In your upkeep it is: everyone draws a card, the card is shown to the table, and Skyscribing stays in your hand. It isn't offered a second time that upkeep; it is again at your next upkeep.

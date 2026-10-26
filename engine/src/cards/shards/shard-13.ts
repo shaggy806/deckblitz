@@ -47,11 +47,13 @@ import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
 import _poolAuraFlux from "../pool/aura-flux.js";
+import _poolAuroraEidolon from "../pool/aurora-eidolon.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
 import _poolAwakenerDruid from "../pool/awakener-druid.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
+import _poolAzoriusAethermage from "../pool/azorius-aethermage.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
@@ -447,12 +449,14 @@ import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
 import _poolPoulticeSliver from "../pool/poultice-sliver.js";
+import _poolPrideOfTheClouds from "../pool/pride-of-the-clouds.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
+import _poolRagamuffyn from "../pool/ragamuffyn.js";
 import _poolRainbowVale from "../pool/rainbow-vale.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
@@ -561,6 +565,7 @@ import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
+import _poolSosukesSummons from "../pool/sosukes-summons.js";
 import _poolSoulShepherd from "../pool/soul-shepherd.js";
 import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
@@ -574,6 +579,7 @@ import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSpiritualVisit from "../pool/spiritual-visit.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolSpringjawTrap from "../pool/springjaw-trap.js";
@@ -792,11 +798,13 @@ const shard: CardShard = {
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,
     _poolAuraFlux,
+    _poolAuroraEidolon,
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
     _poolAvengingHuntbonder,
     _poolAwakenerDruid,
     _poolAxegrinderGiant,
+    _poolAzoriusAethermage,
     _poolAzulaOnTheHunt,
     _poolBadgermole,
     _poolBagOfHolding,
@@ -1192,12 +1200,14 @@ const shard: CardShard = {
     _poolPlanarAlly,
     _poolPlanarVoid,
     _poolPoulticeSliver,
+    _poolPrideOfTheClouds,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolPrisonRealm,
     _poolProtectionMagic,
     _poolRabidAttack,
     _poolRadiantEpicure,
+    _poolRagamuffyn,
     _poolRainbowVale,
     _poolRakdosGuildgate,
     _poolRampantGrowth,
@@ -1306,6 +1316,7 @@ const shard: CardShard = {
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
+    _poolSosukesSummons,
     _poolSoulShepherd,
     _poolSoulStrikeTechnique,
     _poolSoulstoneSanctuary,
@@ -1319,6 +1330,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSpiritualVisit,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
     _poolSpringjawTrap,

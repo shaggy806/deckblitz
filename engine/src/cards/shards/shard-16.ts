@@ -226,6 +226,7 @@ import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
 import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
 import _poolFlamesOfTheFirebrand from "../pool/flames-of-the-firebrand.js";
+import _poolFlaringFlameKin from "../pool/flaring-flame-kin.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
@@ -377,6 +378,7 @@ import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
+import _poolLyzoldaTheBloodWitch from "../pool/lyzolda-the-blood-witch.js";
 import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
 import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
@@ -463,6 +465,7 @@ import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolParagonOfOpenGraves from "../pool/paragon-of-open-graves.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPartTheWaterveil from "../pool/part-the-waterveil.js";
+import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
@@ -1021,6 +1024,7 @@ const shard: CardShard = {
     _poolFlamebornHellion,
     _poolFlameholdGrappler,
     _poolFlamesOfTheFirebrand,
+    _poolFlaringFlameKin,
     _poolFledglingGriffin,
     _poolFleetingImage,
     _poolFleetingMemories,
@@ -1172,6 +1176,7 @@ const shard: CardShard = {
     _poolLoxodonLineBreaker,
     _poolLunarRejection,
     _poolLynx,
+    _poolLyzoldaTheBloodWitch,
     _poolMaalfeldTwins,
     _poolMachineGodsEffigy,
     _poolMachineManModelX51,
@@ -1258,6 +1263,7 @@ const shard: CardShard = {
     _poolParagonOfOpenGraves,
     _poolPardicCollaborator,
     _poolPartTheWaterveil,
+    _poolPatagiaViper,
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,

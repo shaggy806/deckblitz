@@ -188,6 +188,7 @@ import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
 import _poolEelUmbra from "../pool/eel-umbra.js";
 import _poolEffortlessMaster from "../pool/effortless-master.js";
+import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -202,6 +203,7 @@ import _poolEpochrasite from "../pool/epochrasite.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
+import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
@@ -271,6 +273,7 @@ import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCaves from "../pool/goblin-caves.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
+import _poolGodsEyeGateToTheReikai from "../pool/gods-eye-gate-to-the-reikai.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoliathTruck from "../pool/goliath-truck.js";
 import _poolGoneFishing from "../pool/gone-fishing.js";
@@ -583,6 +586,7 @@ import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
 import _poolSouvenirSnatcher from "../pool/souvenir-snatcher.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
+import _poolSpellSnare from "../pool/spell-snare.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
@@ -705,6 +709,7 @@ import _poolWindcallerAven from "../pool/windcaller-aven.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
+import _poolWitsEnd from "../pool/wits-end.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
 import _poolWrapInFlames from "../pool/wrap-in-flames.js";
@@ -919,6 +924,7 @@ const shard: CardShard = {
     _poolEdeaPossessedSorceress,
     _poolEelUmbra,
     _poolEffortlessMaster,
+    _poolEiganjoFreeRiders,
     _poolEladamrisCall,
     _poolElectrify,
     _poolElvishGuidance,
@@ -933,6 +939,7 @@ const shard: CardShard = {
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
+    _poolEverdream,
     _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,
@@ -1002,6 +1009,7 @@ const shard: CardShard = {
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCaves,
     _poolGoblinCommando,
+    _poolGodsEyeGateToTheReikai,
     _poolGoldForgedThopteryx,
     _poolGoliathTruck,
     _poolGoneFishing,
@@ -1314,6 +1322,7 @@ const shard: CardShard = {
     _poolSophiaDoggedDetective,
     _poolSouvenirSnatcher,
     _poolSpectacularSpiderMan,
+    _poolSpellSnare,
     _poolSpellbook,
     _poolSpellgyre,
     _poolSpiderFood,
@@ -1436,6 +1445,7 @@ const shard: CardShard = {
     _poolWitchBlessedMeadow,
     _poolWitherbloomCommand,
     _poolWitheringCurse,
+    _poolWitsEnd,
     _poolWolfbat,
     _poolWolfridersSaddle,
     _poolWrapInFlames,

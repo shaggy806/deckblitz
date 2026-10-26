@@ -118,6 +118,7 @@ import _poolCorrupt from "../pool/corrupt.js";
 import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
+import _poolCrimePunishment from "../pool/crime-punishment.js";
 import _poolCrimsonRoc from "../pool/crimson-roc.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
@@ -179,6 +180,7 @@ import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
 import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
 import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
+import _poolEnshrinedMemories from "../pool/enshrined-memories.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEscapeProtocol from "../pool/escape-protocol.js";
@@ -493,6 +495,7 @@ import _poolRunicShot from "../pool/runic-shot.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSadisticGlee from "../pool/sadistic-glee.js";
 import _poolSadisticObsession from "../pool/sadistic-obsession.js";
+import _poolSakikoMotherOfSummer from "../pool/sakiko-mother-of-summer.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
 import _poolSamiteHerbalist from "../pool/samite-herbalist.js";
@@ -589,6 +592,7 @@ import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
+import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
@@ -854,6 +858,7 @@ const shard: CardShard = {
     _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
+    _poolCrimePunishment,
     _poolCrimsonRoc,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
@@ -915,6 +920,7 @@ const shard: CardShard = {
     _poolEndlessCockroaches,
     _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
+    _poolEnshrinedMemories,
     _poolEntishRestoration,
     _poolEntryDenied,
     _poolEscapeProtocol,
@@ -1229,6 +1235,7 @@ const shard: CardShard = {
     _poolRuthlessWaterbender,
     _poolSadisticGlee,
     _poolSadisticObsession,
+    _poolSakikoMotherOfSummer,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
     _poolSamiteHerbalist,
@@ -1325,6 +1332,7 @@ const shard: CardShard = {
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
     _poolTarnationVista,
+    _poolTeardropKami,
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTemporalMastery,

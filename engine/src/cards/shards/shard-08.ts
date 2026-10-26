@@ -324,6 +324,7 @@ import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
+import _poolIndebtedSamurai from "../pool/indebted-samurai.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfernalContract from "../pool/infernal-contract.js";
 import _poolInfest from "../pool/infest.js";
@@ -418,6 +419,7 @@ import _poolMetamorphosis from "../pool/metamorphosis.js";
 import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
+import _poolMightOfTheNephilim from "../pool/might-of-the-nephilim.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
 import _poolMineExcavation from "../pool/mine-excavation.js";
@@ -504,6 +506,7 @@ import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolRavenFamiliar from "../pool/raven-familiar.js";
+import _poolRavingOniSlave from "../pool/raving-oni-slave.js";
 import _poolReachOfShadows from "../pool/reach-of-shadows.js";
 import _poolRealityAnchor from "../pool/reality-anchor.js";
 import _poolRealitySmasher from "../pool/reality-smasher.js";
@@ -581,15 +584,18 @@ import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilentSkimmer from "../pool/silent-skimmer.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
+import _poolSinkIntoTakenuma from "../pool/sink-into-takenuma.js";
 import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
 import _poolSkatewingSpy from "../pool/skatewing-spy.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
 import _poolSkinbrandGoblin from "../pool/skinbrand-goblin.js";
+import _poolSkyHussar from "../pool/sky-hussar.js";
 import _poolSkyclaveInvader from "../pool/skyclave-invader.js";
 import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
 import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
 import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
+import _poolSlaughterhouseBouncer from "../pool/slaughterhouse-bouncer.js";
 import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
@@ -767,6 +773,7 @@ import _tokensMaskToken from "../tokens/mask-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensReflectionTokenWhite22 from "../tokens/reflection-token-white-2-2.js";
 import _tokensSerfToken from "../tokens/serf-token.js";
+import _tokensSnakeTokenPatagiaViper from "../tokens/snake-token-patagia-viper.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
@@ -1097,6 +1104,7 @@ const shard: CardShard = {
     _poolIlhargTheRazeBoar,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
+    _poolIndebtedSamurai,
     _poolIndomitableAncients,
     _poolInfernalContract,
     _poolInfest,
@@ -1191,6 +1199,7 @@ const shard: CardShard = {
     _poolMeteorCrater,
     _poolMetropolisAngel,
     _poolMidnightReaper,
+    _poolMightOfTheNephilim,
     _poolMilitantMonk,
     _poolMindStone,
     _poolMineExcavation,
@@ -1277,6 +1286,7 @@ const shard: CardShard = {
     _poolRaphaelTheMuscle,
     _poolRaucousTheater,
     _poolRavenFamiliar,
+    _poolRavingOniSlave,
     _poolReachOfShadows,
     _poolRealityAnchor,
     _poolRealitySmasher,
@@ -1354,15 +1364,18 @@ const shard: CardShard = {
     _poolSilentSkimmer,
     _poolSilkenfistFighter,
     _poolSilverMyr,
+    _poolSinkIntoTakenuma,
     _poolSinuousBenthisaur,
     _poolSkatewingSpy,
     _poolSkilledBattlecarver,
     _poolSkinbrandGoblin,
+    _poolSkyHussar,
     _poolSkyclaveInvader,
     _poolSkyshroudForest,
     _poolSkyshroudRanger,
     _poolSkyswirlHarrier,
     _poolSlagwurmArmor,
+    _poolSlaughterhouseBouncer,
     _poolSleep,
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
@@ -1542,6 +1555,7 @@ const shard: CardShard = {
     _tokensOtterToken,
     _tokensReflectionTokenWhite22,
     _tokensSerfToken,
+    _tokensSnakeTokenPatagiaViper,
     _tokensTheBlackjack,
     _tokensThopterToken,
     _tokensWarriorToken,

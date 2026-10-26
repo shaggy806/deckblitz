@@ -229,6 +229,7 @@ import _poolForgebornOreads from "../pool/forgeborn-oreads.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
+import _poolFreewindEquenaut from "../pool/freewind-equenaut.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierMastodon from "../pool/frontier-mastodon.js";
@@ -252,12 +253,15 @@ import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
+import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
+import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreatWhale from "../pool/great-whale.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
+import _poolGuardianOfTheGuildpact from "../pool/guardian-of-the-guildpact.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
@@ -562,6 +566,7 @@ import _poolSkylineDespot from "../pool/skyline-despot.js";
 import _poolSkymarkRoc from "../pool/skymark-roc.js";
 import _poolSlashOfLight from "../pool/slash-of-light.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
+import _poolSlitheringShade from "../pool/slithering-shade.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
 import _poolSlyInstigator from "../pool/sly-instigator.js";
 import _poolSmash from "../pool/smash.js";
@@ -963,6 +968,7 @@ const shard: CardShard = {
     _poolForsakenThresher,
     _poolFortifyingDraught,
     _poolFoulPlay,
+    _poolFreewindEquenaut,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
     _poolFrontierMastodon,
@@ -986,12 +992,15 @@ const shard: CardShard = {
     _poolGoblinMatron,
     _poolGoblinTraprunner,
     _poolGodtoucher,
+    _poolGoryosVengeance,
+    _poolGovernTheGuildless,
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
     _poolGreatWhale,
     _poolGreenwoodSentinel,
     _poolGrimDraugr,
+    _poolGuardianOfTheGuildpact,
     _poolGuma,
     _poolGustSkimmer,
     _poolGuulDrazVampire,
@@ -1296,6 +1305,7 @@ const shard: CardShard = {
     _poolSkymarkRoc,
     _poolSlashOfLight,
     _poolSlipperyBogbonder,
+    _poolSlitheringShade,
     _poolSlobadGoblinTinkerer,
     _poolSlyInstigator,
     _poolSmash,

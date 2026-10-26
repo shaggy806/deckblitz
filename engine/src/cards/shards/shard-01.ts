@@ -62,6 +62,7 @@ import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBoilingEarth from "../pool/boiling-earth.js";
+import _poolBondOfAgony from "../pool/bond-of-agony.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
@@ -116,6 +117,7 @@ import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
+import _poolCytospawnShambler from "../pool/cytospawn-shambler.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDailyRegimen from "../pool/daily-regimen.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
@@ -326,6 +328,7 @@ import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
 import _poolLeadPipe from "../pool/lead-pipe.js";
+import _poolLeafdrakeRoost from "../pool/leafdrake-roost.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
 import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
@@ -340,6 +343,7 @@ import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
 import _poolLittleBear from "../pool/little-bear.js";
+import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
@@ -785,6 +789,7 @@ const shard: CardShard = {
     _poolBloodtracker,
     _poolBloomwielderDryads,
     _poolBoilingEarth,
+    _poolBondOfAgony,
     _poolBontusLastReckoning,
     _poolBorealGriffin,
     _poolBorosStrikeCaptain,
@@ -839,6 +844,7 @@ const shard: CardShard = {
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCursedWindbreaker,
+    _poolCytospawnShambler,
     _poolDailyBugleBuilding,
     _poolDailyRegimen,
     _poolDanceOfTheTumbleweeds,
@@ -1049,6 +1055,7 @@ const shard: CardShard = {
     _poolLavaFlow,
     _poolLavaSpike,
     _poolLeadPipe,
+    _poolLeafdrakeRoost,
     _poolLeonardosTechnique,
     _poolLetsPlayAGame,
     _poolLeylineTyrant,
@@ -1063,6 +1070,7 @@ const shard: CardShard = {
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
     _poolLittleBear,
+    _poolLoamDweller,
     _poolLockAndLoad,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,

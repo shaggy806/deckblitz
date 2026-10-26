@@ -152,6 +152,7 @@ import _poolDauthiMarauder from "../pool/dauthi-marauder.js";
 import _poolDeadWeight from "../pool/dead-weight.js";
 import _poolDeathCultist from "../pool/death-cultist.js";
 import _poolDeathlessAngel from "../pool/deathless-angel.js";
+import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
@@ -165,6 +166,7 @@ import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
+import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
@@ -199,6 +201,7 @@ import _poolErraticPortal from "../pool/erratic-portal.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
+import _poolEvermind from "../pool/evermind.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditedInheritance from "../pool/expedited-inheritance.js";
@@ -278,6 +281,7 @@ import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.
 import _poolGreaterStoneSpirit from "../pool/greater-stone-spirit.js";
 import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
+import _poolHaazdaExonerator from "../pool/haazda-exonerator.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
@@ -466,6 +470,7 @@ import _poolQuakebringer from "../pool/quakebringer.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRadiantArchangel from "../pool/radiant-archangel.js";
+import _poolRakdosIckspitter from "../pool/rakdos-ickspitter.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
@@ -634,6 +639,7 @@ import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
 import _poolTopiaryStomper from "../pool/topiary-stomper.js";
 import _poolTorchGauntlet from "../pool/torch-gauntlet.js";
 import _poolTorchTheWitness from "../pool/torch-the-witness.js";
+import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
@@ -877,6 +883,7 @@ const shard: CardShard = {
     _poolDeadWeight,
     _poolDeathCultist,
     _poolDeathlessAngel,
+    _poolDeathmaskNezumi,
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
@@ -890,6 +897,7 @@ const shard: CardShard = {
     _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
     _poolDonatelloTurtleTechie,
+    _poolDovescape,
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,
@@ -924,6 +932,7 @@ const shard: CardShard = {
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,
+    _poolEvermind,
     _poolEvershrikesGift,
     _poolExorcise,
     _poolExpeditedInheritance,
@@ -1003,6 +1012,7 @@ const shard: CardShard = {
     _poolGreaterStoneSpirit,
     _poolGrimFlayer,
     _poolGuardiansOfOboro,
+    _poolHaazdaExonerator,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,
@@ -1191,6 +1201,7 @@ const shard: CardShard = {
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
     _poolRadiantArchangel,
+    _poolRakdosIckspitter,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
     _poolRampartArchitect,
@@ -1359,6 +1370,7 @@ const shard: CardShard = {
     _poolTopiaryStomper,
     _poolTorchGauntlet,
     _poolTorchTheWitness,
+    _poolToshiroUmezawa,
     _poolTrailOfEvidence,
     _poolTranquilDomain,
     _poolTreadUpon,

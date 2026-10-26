@@ -47,6 +47,7 @@ import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
+import _poolAzoriusGuildmage from "../pool/azorius-guildmage.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
@@ -510,6 +511,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
@@ -600,6 +602,8 @@ import _poolSidisisFaithful from "../pool/sidisis-faithful.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
+import _poolSimicInitiate from "../pool/simic-initiate.js";
+import _poolSimple from "../pool/simple.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
@@ -680,6 +684,7 @@ import _poolThoughtReflection from "../pool/thought-reflection.js";
 import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
 import _poolThranWeaponry from "../pool/thran-weaponry.js";
+import _poolThreadsOfDisloyalty from "../pool/threads-of-disloyalty.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolThunderkinAwakener from "../pool/thunderkin-awakener.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
@@ -696,6 +701,7 @@ import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
 import _poolToxinAnalysis from "../pool/toxin-analysis.js";
 import _poolTradeCaravan from "../pool/trade-caravan.js";
+import _poolTransguildCourier from "../pool/transguild-courier.js";
 import _poolTrawlerDrake from "../pool/trawler-drake.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
@@ -787,6 +793,7 @@ import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
+import _tokensSpiritTokenWhite33Flying from "../tokens/spirit-token-white-3-3-flying.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
 import _tokensWolfTokenSoundTheCall from "../tokens/wolf-token-sound-the-call.js";
@@ -837,6 +844,7 @@ const shard: CardShard = {
     _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
+    _poolAzoriusGuildmage,
     _poolAzraSmokeshaper,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
@@ -1300,6 +1308,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPiercingRays,
     _poolPinnacleOfRage,
     _poolPonderingMage,
     _poolPriestsOfNorn,
@@ -1390,6 +1399,8 @@ const shard: CardShard = {
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
     _poolSilentHallcreeper,
+    _poolSimicInitiate,
+    _poolSimple,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
@@ -1470,6 +1481,7 @@ const shard: CardShard = {
     _poolThrabenStandardBearer,
     _poolThranSpider,
     _poolThranWeaponry,
+    _poolThreadsOfDisloyalty,
     _poolThunderingChariot,
     _poolThunderkinAwakener,
     _poolTidecallerMentor,
@@ -1486,6 +1498,7 @@ const shard: CardShard = {
     _poolToweringIndrik,
     _poolToxinAnalysis,
     _poolTradeCaravan,
+    _poolTransguildCourier,
     _poolTrawlerDrake,
     _poolTreasureCove,
     _poolTreasureDredger,
@@ -1579,6 +1592,7 @@ const shard: CardShard = {
     _tokensRedWhiteSoldierHasteToken,
     _tokensSkeletonToken,
     _tokensSliverToken,
+    _tokensSpiritTokenWhite33Flying,
     _tokensVirtuousRoleToken,
     _tokensWarriorTokenValorsReachTagTeam,
     _tokensWolfTokenSoundTheCall,

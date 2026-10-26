@@ -15,6 +15,7 @@ import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
 import _poolAngelsong from "../pool/angelsong.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
+import _poolAnthemOfRakdos from "../pool/anthem-of-rakdos.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
 import _poolArachnoform from "../pool/arachnoform.js";
 import _poolAradaraExpress from "../pool/aradara-express.js";
@@ -410,6 +411,7 @@ import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
 import _poolPsionicPulse from "../pool/psionic-pulse.js";
+import _poolPure from "../pool/pure.js";
 import _poolPutridImp from "../pool/putrid-imp.js";
 import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
@@ -421,6 +423,7 @@ import _poolQuirionElves from "../pool/quirion-elves.js";
 import _poolRageForger from "../pool/rage-forger.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
+import _poolRakdosPitDragon from "../pool/rakdos-pit-dragon.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
@@ -538,6 +541,8 @@ import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStinkdrinkerDaredevil from "../pool/stinkdrinker-daredevil.js";
+import _poolStirTheGrave from "../pool/stir-the-grave.js";
+import _poolStompAndHowl from "../pool/stomp-and-howl.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
@@ -554,6 +559,7 @@ import _poolSumalaSentry from "../pool/sumala-sentry.js";
 import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
+import _poolSupplyDemand from "../pool/supply-demand.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
@@ -610,7 +616,9 @@ import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
+import _poolVerdantEidolon from "../pool/verdant-eidolon.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
+import _poolVigeanGraftmage from "../pool/vigean-graftmage.js";
 import _poolVineweft from "../pool/vineweft.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
@@ -683,6 +691,7 @@ const shard: CardShard = {
     _poolAngelOfGrace,
     _poolAngelsong,
     _poolAnodetLurker,
+    _poolAnthemOfRakdos,
     _poolAppetiteForTheUnnatural,
     _poolArachnoform,
     _poolAradaraExpress,
@@ -1078,6 +1087,7 @@ const shard: CardShard = {
     _poolProsshSkyraiderOfKher,
     _poolProwlingSerpopard,
     _poolPsionicPulse,
+    _poolPure,
     _poolPutridImp,
     _poolPyreticCharge,
     _poolPyroclasticElemental,
@@ -1089,6 +1099,7 @@ const shard: CardShard = {
     _poolRageForger,
     _poolRagingRegisaur,
     _poolRaidersKarve,
+    _poolRakdosPitDragon,
     _poolRalsDispersal,
     _poolRampagingHippo,
     _poolRaugrinCrystal,
@@ -1206,6 +1217,8 @@ const shard: CardShard = {
     _poolSteelyResolve,
     _poolSterlingHound,
     _poolStinkdrinkerDaredevil,
+    _poolStirTheGrave,
+    _poolStompAndHowl,
     _poolStoneKavu,
     _poolStoneSeederHierophant,
     _poolStrandwalker,
@@ -1222,6 +1235,7 @@ const shard: CardShard = {
     _poolSunSpiderNimbleWebber,
     _poolSunderingArchaic,
     _poolSunspireGriffin,
+    _poolSupplyDemand,
     _poolSupplyLineCranes,
     _poolSurgingDementia,
     _poolSurveillanceRoom,
@@ -1278,7 +1292,9 @@ const shard: CardShard = {
     _poolValakutStoneforge,
     _poolVariableChaser,
     _poolVeneratedRotpriest,
+    _poolVerdantEidolon,
     _poolVialSmasherGleefulGrenadier,
+    _poolVigeanGraftmage,
     _poolVineweft,
     _poolViridianLongbow,
     _poolVoiceOfTruth,

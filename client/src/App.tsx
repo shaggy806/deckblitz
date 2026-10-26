@@ -217,6 +217,7 @@ function graveyardVariantLabel(
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
     if (a.offspring) parts.push(`offspring ${a.offspringCost ?? ''}`.trim())
+    if (a.splice) parts.push(`splicing ${a.splice.map((s) => `${s.cardName} ${s.cost}`).join(' and ')}`)
     if (a.evoke) parts.push(a.altCostText !== undefined ? `evoke: ${a.altCostText}` : `evoke ${a.evokeCost ?? ''}`.trim())
     if (a.altCost && a.altCostText !== undefined) parts.push(a.altCostText)
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
@@ -243,6 +244,8 @@ const castExtras = (cast: CastAction) => ({
   // additional costs that names no branch is refused outright.
   ...(cast.altCost === true ? { altCost: true } : {}),
   ...(cast.costOption !== undefined ? { costOption: cast.costOption } : {}),
+  // Splice (rule 702.47): the offer names the cards; the cast echoes their ids.
+  ...(cast.splice !== undefined ? { splice: cast.splice.map((s) => s.object) } : {}),
   // Which graveyard permission pays for it, when several could.
   ...(cast.graveyardGrant !== undefined ? { graveyardGrant: cast.graveyardGrant } : {}),
   ...(cast.tapCost !== undefined ? { tapCost: cast.tapCost } : {}),
@@ -473,6 +476,8 @@ interface Targeting {
   /** The branch of a choice of additional costs this variant pays (Bitter
    * Triumph's "discard a card or pay 3 life"), echoed back. */
   readonly costOption?: number
+  /** The cards spliced onto this cast (rule 702.47) — echoed back like `kicked`. */
+  readonly splice?: readonly ObjectId[]
   /** The graveyard permission this cast spends (Muldrotha's type, which
    * grantor), echoed back. */
   readonly graveyardGrant?: GraveyardGrant
@@ -2161,6 +2166,7 @@ function Table({
         | 'manaColors'
         | 'altCost'
         | 'costOption'
+        | 'splice'
         | 'graveyardGrant'
         | 'tapCost'
         | 'tap'
@@ -2202,6 +2208,7 @@ function Table({
                 ...(t.free === true ? { free: true } : {}),
                 ...(t.altCost === true ? { altCost: true } : {}),
                 ...(t.costOption !== undefined ? { costOption: t.costOption } : {}),
+                ...(t.splice !== undefined ? { splice: [...t.splice] } : {}),
                 ...(t.graveyardGrant !== undefined ? { graveyardGrant: t.graveyardGrant } : {}),
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.escapeExile !== undefined ? { escapeExile: [...t.escapeExile] } : {}),
@@ -4782,6 +4789,9 @@ function Table({
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
             {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}
+            {c.splice?.map((s) => (
+              <span key={s.object}> (splicing {s.cardName} <Symbols text={s.cost} />)</span>
+            ))}
           </button>
         ))}
         {castNowPicking ? (
@@ -6042,6 +6052,11 @@ function Table({
                       {a.kind === 'cast-spell' && a.costOptionText ? (
                         <> (<Symbols text={a.costOptionText} />)</>
                       ) : null}
+                      {a.kind === 'cast-spell'
+                        ? a.splice?.map((s) => (
+                            <span key={s.object}> (splicing {s.cardName} <Symbols text={s.cost} />)</span>
+                          ))
+                        : null}
                     </button>
                   ))
                 : null}

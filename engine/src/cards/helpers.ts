@@ -975,6 +975,23 @@ export const ninjutsu = (cost: string, text = ninjutsuText(cost)): ActivatedAbil
   text,
 });
 
+/**
+ * Forecast — [activated ability] (rule 702.57): an ability of the card in its
+ * owner's hand (`zone: "hand"`, which it stays in, revealed as it's activated
+ * — 702.57b), activatable only during its owner's upkeep and only once each
+ * turn. Pass the ability as it would be written on a permanent (its cost, its
+ * targets, its effect, its printed line as `text`); spread the result into
+ * `activated`. Rule 400.7: a card cast or discarded in response leaves the
+ * ability nothing to name as `"source"`.
+ */
+export const forecast = (ability: ActivatedAbility): ActivatedAbility => ({
+  ...ability,
+  zone: "hand",
+  staysInZone: true,
+  oncePerTurn: true,
+  condition: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] },
+});
+
 /** Ninjutsu [cost]'s printed line with its reminder text. */
 export const ninjutsuText = (cost: string): string =>
   `Ninjutsu ${cost} (${cost}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)`;

@@ -852,13 +852,6 @@
       "why": "+1/+1 for each other creature sharing a creature type with each creature."
     },
     {
-      "name": "Desperate Ritual",
-      "needs": [
-        "new:splice"
-      ],
-      "why": "Splice onto Arcane."
-    },
-    {
       "name": "Sejiri Shelter // Sejiri Glacier",
       "needs": [
         "new:protection-chosen-color"

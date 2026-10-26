@@ -212,6 +212,7 @@ import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFatedReturn from "../pool/fated-return.js";
+import _poolFeralLightning from "../pool/feral-lightning.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFightWithFire from "../pool/fight-with-fire.js";
@@ -377,6 +378,7 @@ import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
+import _poolMinamoScrollkeeper from "../pool/minamo-scrollkeeper.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
@@ -413,11 +415,13 @@ import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
 import _poolObsidianObelisk from "../pool/obsidian-obelisk.js";
 import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
+import _poolOkibaGangShinobi from "../pool/okiba-gang-shinobi.js";
 import _poolOldGhastbark from "../pool/old-ghastbark.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOraclesVault from "../pool/oracles-vault.js";
 import _poolOranRiefRecluse from "../pool/oran-rief-recluse.js";
+import _poolOrbOfDreams from "../pool/orb-of-dreams.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrchardWarden from "../pool/orchard-warden.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
@@ -736,6 +740,7 @@ import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-wh
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
+import _tokensGoblinTokenRakdosGuildmage from "../tokens/goblin-token-rakdos-guildmage.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
 import _tokensHorrorTokenTheFinalDays from "../tokens/horror-token-the-final-days.js";
 import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
@@ -964,6 +969,7 @@ const shard: CardShard = {
     _poolFallOfTheTitans,
     _poolFangrenMarauder,
     _poolFatedReturn,
+    _poolFeralLightning,
     _poolFertileGround,
     _poolFiendlash,
     _poolFightWithFire,
@@ -1129,6 +1135,7 @@ const shard: CardShard = {
     _poolMessengersSpeed,
     _poolMightstone,
     _poolMightstonesAnimation,
+    _poolMinamoScrollkeeper,
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,
     _poolMistLeopard,
@@ -1165,11 +1172,13 @@ const shard: CardShard = {
     _poolNullBrooch,
     _poolObsidianObelisk,
     _poolOjerAxonilDeepestMight,
+    _poolOkibaGangShinobi,
     _poolOldGhastbark,
     _poolOminousSeas,
     _poolOnyxMage,
     _poolOraclesVault,
     _poolOranRiefRecluse,
+    _poolOrbOfDreams,
     _poolOrbitalPlunge,
     _poolOrchardWarden,
     _poolOrcishMedicine,
@@ -1490,6 +1499,7 @@ const shard: CardShard = {
     _tokensElementalToken53,
     _tokensEtheriumCellToken,
     _tokensFaerieDragonToken,
+    _tokensGoblinTokenRakdosGuildmage,
     _tokensHornetToken,
     _tokensHorrorTokenTheFinalDays,
     _tokensHumanKnightTokenThePrydwen,

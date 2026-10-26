@@ -282,6 +282,7 @@ import _poolGustOfWind from "../pool/gust-of-wind.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
+import _poolHarbingerOfSpring from "../pool/harbinger-of-spring.js";
 import _poolHauntingFigment from "../pool/haunting-figment.js";
 import _poolHazezonTamar from "../pool/hazezon-tamar.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
@@ -498,6 +499,7 @@ import _poolRamroller from "../pool/ramroller.js";
 import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
+import _poolRazorjawOni from "../pool/razorjaw-oni.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolRefuseToYield from "../pool/refuse-to-yield.js";
 import _poolReignOfChaos from "../pool/reign-of-chaos.js";
@@ -1028,6 +1030,7 @@ const shard: CardShard = {
     _poolGutlessGhoul,
     _poolHaggle,
     _poolHallowedHaunting,
+    _poolHarbingerOfSpring,
     _poolHauntingFigment,
     _poolHazezonTamar,
     _poolHearthfireHobgoblin,
@@ -1244,6 +1247,7 @@ const shard: CardShard = {
     _poolRavenousLeucrocota,
     _poolRavineRaider,
     _poolRazorSwine,
+    _poolRazorjawOni,
     _poolRecumbentBliss,
     _poolRefuseToYield,
     _poolReignOfChaos,

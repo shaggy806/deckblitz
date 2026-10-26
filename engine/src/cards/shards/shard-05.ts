@@ -50,6 +50,7 @@ import _poolAudaciousThief from "../pool/audacious-thief.js";
 import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
+import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
@@ -113,6 +114,7 @@ import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCarelessCelebrant from "../pool/careless-celebrant.js";
 import _poolCarnageWurm from "../pool/carnage-wurm.js";
+import _poolCarom from "../pool/carom.js";
 import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
@@ -358,9 +360,11 @@ import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
+import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
+import _poolJaggedPoppet from "../pool/jagged-poppet.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
@@ -412,6 +416,7 @@ import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
+import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
@@ -452,6 +457,7 @@ import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
+import _poolOcularHalo from "../pool/ocular-halo.js";
 import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOliviasMidnightAmbush from "../pool/olivias-midnight-ambush.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
@@ -787,6 +793,7 @@ const shard: CardShard = {
     _poolAuraGnarlid,
     _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
+    _poolAvatarOfDiscord,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
     _poolBairdArgivianRecruiter,
@@ -850,6 +857,7 @@ const shard: CardShard = {
     _poolCaravanHurda,
     _poolCarelessCelebrant,
     _poolCarnageWurm,
+    _poolCarom,
     _poolCaseOfTheGorgonsKiss,
     _poolCastleArdenvale,
     _poolCatharticParting,
@@ -1095,9 +1103,11 @@ const shard: CardShard = {
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
+    _poolIsaoEnlightenedBushi,
     _poolIsolationCell,
     _poolIzzetChemister,
     _poolJacesSanctum,
+    _poolJaggedPoppet,
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
     _poolJeskaiRunemark,
@@ -1149,6 +1159,7 @@ const shard: CardShard = {
     _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
+    _poolMarkOfSakiko,
     _poolMarkovBlademaster,
     _poolMarshalOfTheLost,
     _poolMartyrForTheCause,
@@ -1189,6 +1200,7 @@ const shard: CardShard = {
     _poolNoviceOccultist,
     _poolOakhollowVillage,
     _poolObsidianGiant,
+    _poolOcularHalo,
     _poolOkoShadowmoorScion,
     _poolOliviasMidnightAmbush,
     _poolOperaLoveSong,
