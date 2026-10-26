@@ -8253,4 +8253,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Shadow Slice: encoded on a creature, it casts again when that creature hits',
     board({ you: { bf: ['Swamp*5', 'Grizzly Bears'], hand: ['Shadow Slice'] } }),
   ),
+  preset(
+    'Burn Trail: paying conspire taps two red creatures and copies it',
+    board({ you: { bf: ['Mountain*4', 'Raging Goblin', 'Goblin Piker', 'Grizzly Bears'], hand: ['Burn Trail'] } }),
+  ),
+  preset(
+    "Burn Trail: no conspire prompt without two creatures that share its colour",
+    board({ you: { bf: ['Mountain*4', 'Raging Goblin', 'Grizzly Bears'], hand: ['Burn Trail'] } }),
+  ),
+  preset(
+    'Wort, the Raidmother: two conspire prompts on Burn Trail',
+    board({
+      you: { bf: ['Mountain*4', 'Wort, the Raidmother', 'Raging Goblin', 'Goblin Piker', 'Goblin Warrior Token'], hand: ['Burn Trail'] },
+    }),
+  ),
 ]

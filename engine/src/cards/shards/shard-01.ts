@@ -658,6 +658,7 @@ import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
+import _tokensGoblinWarriorToken from "../tokens/goblin-warrior-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensRatRogueTokenTributeToHorobi from "../tokens/rat-rogue-token-tribute-to-horobi.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
@@ -1325,6 +1326,7 @@ const shard: CardShard = {
     _tokensBatTokenGreedsGambit,
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
+    _tokensGoblinWarriorToken,
     _tokensMutavaultToken,
     _tokensRatRogueTokenTributeToHorobi,
     _tokensTheTigerGod,

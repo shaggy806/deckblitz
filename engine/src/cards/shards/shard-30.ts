@@ -13,6 +13,7 @@ import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
 import _poolAetherFlash from "../pool/aether-flash.js";
+import _poolAethertow from "../pool/aethertow.js";
 import _poolAgentsToolkit from "../pool/agents-toolkit.js";
 import _poolAjaniWiseCounselor from "../pool/ajani-wise-counselor.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
@@ -239,6 +240,7 @@ import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
+import _poolGiantbaiting from "../pool/giantbaiting.js";
 import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
@@ -706,6 +708,7 @@ const shard: CardShard = {
     _poolAegisTurtle,
     _poolAeronautCavalry,
     _poolAetherFlash,
+    _poolAethertow,
     _poolAgentsToolkit,
     _poolAjaniWiseCounselor,
     _poolAlabasterWall,
@@ -932,6 +935,7 @@ const shard: CardShard = {
     _poolGargadon,
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
+    _poolGiantbaiting,
     _poolGiftOfTheDeity,
     _poolGimlisRecklessMight,
     _poolGixYawgmothPraetor,

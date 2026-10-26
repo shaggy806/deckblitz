@@ -2205,6 +2205,24 @@ export interface CasualtyAsk {
   readonly priorityTo: PlayerId;
 }
 
+/**
+ * A spell's conspire costs being offered as it's cast (rule 702.78a): its
+ * caster may tap two untapped creatures they control that each share a
+ * colour with it — asked first as a `choose-modes` of one mode or none
+ * (`conspireAsk`), then, if they pay, as a `choose-permanents` of exactly
+ * two (`conspire`). Each instance is its own optional cost (702.78b), asked
+ * one after another, as {@link CasualtyAsk}'s are. Queued in
+ * `GameState.pendingConspire`.
+ */
+export interface ConspireAsk {
+  readonly spell: ObjectId;
+  /** The caster, who pays. */
+  readonly player: PlayerId;
+  /** How many instances are still to ask about, this one included. */
+  readonly instances: number;
+  readonly priorityTo: PlayerId;
+}
+
 /** A phase an effect added straight after the combat phase under way — see
  * `GameState.phasesAfterThisCombat`. */
 export type AddedPhase =
@@ -2769,6 +2787,9 @@ export type AwaitingDecision =
        * cast, rather than an effect resolving — see {@link CasualtyAsk}.
        * `then` is unused. */
       readonly casualty?: CasualtyAsk;
+      /** Set when the choice is the two creatures tapped for a spell's
+       * conspire cost (see {@link ConspireAsk}). `then` is unused. */
+      readonly conspire?: ConspireAsk;
       /** Set when the choice pays an activated ability's cost (its
        * `returnToHand`), not an effect resolving: the player who activated
        * it, who gets priority once it's made (rule 117.3c). */
@@ -2904,6 +2925,10 @@ export type AwaitingDecision =
        * `about-player`, so it reads as a choice of player). Its modes'
        * effects are unused. */
       readonly giftAsk?: GiftAsk;
+      /** Set when this asks whether to pay a spell's conspire cost (rule
+       * 702.78a — see {@link ConspireAsk}): its one mode pays it. The mode's
+       * effect is unused. */
+      readonly conspireAsk?: ConspireAsk;
       /** The life and energy parts of a `may`'s cost — see `may.costLife`
        * and `may.costEnergy` — paid alongside `cost` as the choice is made. */
       readonly costLife?: number;
@@ -4224,6 +4249,9 @@ export interface GameState {
   /** Spells just cast whose casualty costs (rule 702.153a) are still to be
    * offered — see {@link CasualtyAsk}. Absent when there are none. */
   pendingCasualty?: CasualtyAsk[];
+  /** Spells just cast whose conspire costs (rule 702.78a) are still to be
+   * offered — see {@link ConspireAsk}. Absent when there are none. */
+  pendingConspire?: ConspireAsk[];
   /** Spells just cast with their gift promised whose opponent is still to
    * be chosen — see {@link GiftAsk}. Absent when there are none. */
   pendingGifts?: GiftAsk[];

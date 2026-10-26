@@ -300,6 +300,7 @@ import {
 import type {
   AwaitingDecision,
   CasualtyAsk,
+  ConspireAsk,
   FaceDownKind,
   GiftAsk,
   CombatDamageState,
@@ -5312,6 +5313,12 @@ export class Game {
       return;
     }
 
+    // Whether to pay a spell's conspire cost (rule 702.78a).
+    if (awaiting.conspireAsk !== undefined) {
+      this.applyConspireAsk(modeIndices.length > 0, awaiting.conspireAsk);
+      return;
+    }
+
     // A dredge question (rule 702.52): draw, or dredge the card chosen.
     if (awaiting.dredgeFor !== undefined) {
       this.state.awaiting = null;
@@ -6234,6 +6241,12 @@ export class Game {
       // sacrifice in turn (rule 702.153a), before its copy goes on the stack.
       if ((this.state.pendingCasualty?.length ?? 0) > 0) {
         this.promptNextCasualty();
+        continue;
+      }
+      // And with conspire: whether to tap two creatures sharing its colour
+      // (rule 702.78a), each instance in turn.
+      if ((this.state.pendingConspire?.length ?? 0) > 0) {
+        this.promptNextConspire();
         continue;
       }
       // Work through a sacrifice effect (Diabolic Edict / Fleshbag Marauder):
@@ -13097,6 +13110,7 @@ export class Game {
     }
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
     this.queueCasualty(player, cardId, priorityTo);
+    this.queueConspire(player, cardId, priorityTo);
     this.afterPlayerAction(priorityTo);
   }
 
@@ -13265,30 +13279,156 @@ export class Game {
       this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
       this.dropCastTriggersOf(victim, stackSize, ask.spell);
       const text = `Casualty ${amount} — copy ${nameOf(spell)}. You may choose new targets for the copy.`;
-      this.state.pendingTriggers.push({
-        sourceObjectId: ask.spell,
-        cardName: printedCardName(spell),
-        abilityIndex: 0,
-        controller: player,
-        triggerObject: ask.spell,
-        lastKnownRefs: { triggerSpell: spell.zoneChangeCount ?? 0 },
-        delayed: {
-          id: `casualty-${this.state.nextObjectSeq}-${rest.length}`,
-          controller: player,
-          // Never consulted: the record goes straight on the stack, like a
-          // mana-spend rider's.
-          at: "next-end-step",
-          createdOnTurn: this.state.turn.number,
-          createdDuringEndStep: false,
-          source: ask.spell,
-          sourceName: printedCardName(spell),
-          targets: [],
-          effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true },
-          text,
-        },
-      });
+      this.queuePaidCostCopy(spell, player, text, `casualty-${this.state.nextObjectSeq}-${rest.length}`);
     }
     if (rest.length > 0) (this.state.pendingCasualty ??= []).unshift({ ...ask, amounts: rest });
+    this.prepareForPriority(ask.priorityTo);
+  }
+
+  /** A spell's own "when you cast this spell, if its [casualty / conspire]
+   * cost was paid, copy it. If the spell has any targets, you may choose new
+   * targets for the copy" (rules 702.153a, 702.78a), triggered as the cost
+   * is paid. It's of no card's ability list, so it carries its own record,
+   * as a mana-spend rider does. */
+  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string): void {
+    this.state.pendingTriggers.push({
+      sourceObjectId: spell.id,
+      cardName: printedCardName(spell),
+      abilityIndex: 0,
+      controller: player,
+      triggerObject: spell.id,
+      lastKnownRefs: { triggerSpell: spell.zoneChangeCount ?? 0 },
+      delayed: {
+        id,
+        controller: player,
+        // Never consulted: the record goes straight on the stack, like a
+        // mana-spend rider's.
+        at: "next-end-step",
+        createdOnTurn: this.state.turn.number,
+        createdDuringEndStep: false,
+        source: spell.id,
+        sourceName: printedCardName(spell),
+        targets: [],
+        effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true },
+        text,
+      },
+    });
+  }
+
+  /**
+   * Conspire (rule 702.78a): "As an additional cost to cast this spell, you
+   * may tap two untapped creatures you control that each share a color with
+   * it" — printed on the spell or given to it by a `grantsToSpells` static
+   * (Wort, the Raidmother), each instance its own cost (702.78b). Queued
+   * once the spell is on the stack, as casualty is, and asked by
+   * `promptNextConspire`.
+   */
+  private queueConspire(player: PlayerId, spellId: ObjectId, priorityTo: PlayerId): void {
+    const spell = this.state.objects[spellId];
+    if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
+    let instances = this.registry.get(rulesTextName(spell)).conspire ? 1 : 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.grantsToSpells?.conspire === true && spellGrantReaches(this.state, this.registry, source, ability, spell)) {
+          instances += 1;
+        }
+      }
+    }
+    if (instances === 0) return;
+    (this.state.pendingConspire ??= []).push({ spell: spellId, player, instances, priorityTo });
+  }
+
+  /** The creatures `player` could tap for `spell`'s conspire cost: their
+   * untapped creatures that share a colour with the spell now. Summoning
+   * sick ones count — the cost has no {T} symbol (rule 302.6). */
+  private conspireCandidates(player: PlayerId, spell: GameObject): ObjectId[] {
+    const spellColors = computeCharacteristics(this.state, this.registry, spell.id).colors;
+    if (spellColors.size === 0) return [];
+    return this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).filter((id) => {
+      if (this.state.objects[id]?.tapped !== false) return false;
+      const colors = computeCharacteristics(this.state, this.registry, id).colors;
+      return [...colors].some((c) => spellColors.has(c));
+    });
+  }
+
+  /** Ask the next conspire cost owed (see `queueConspire`): whether to pay
+   * it, a `choose-modes` of its one mode or none. Skipped when its caster
+   * hasn't two creatures to tap, or the spell has left the stack. */
+  private promptNextConspire(): void {
+    const [ask, ...queue] = this.state.pendingConspire ?? [];
+    if (queue.length > 0) this.state.pendingConspire = queue;
+    else delete this.state.pendingConspire;
+    if (ask === undefined) return;
+    const spell = this.state.objects[ask.spell];
+    if (spell === undefined || spell.zone !== "stack" || this.state.players[ask.player]?.hasLost !== false) return;
+    if (this.tapCapacity(this.conspireCandidates(ask.player, spell)) < 2) return;
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player: ask.player,
+      source: ask.spell,
+      minModes: 0,
+      maxModes: 1,
+      modes: [
+        {
+          text: `Conspire — tap two untapped creatures you control that share a color with ${nameOf(spell)} to copy it`,
+          effect: { kind: "sequence", effects: [] },
+        },
+      ],
+      x: 0,
+      targets: [],
+      conspireAsk: ask,
+    };
+  }
+
+  /** Answers whether to pay a conspire cost (`promptNextConspire`): paying
+   * asks which two creatures, as a `choose-permanents` of exactly two;
+   * declining moves on to the next instance, then priority. */
+  private applyConspireAsk(pay: boolean, ask: ConspireAsk): void {
+    this.state.awaiting = null;
+    const spell = this.state.objects[ask.spell];
+    const eligible = spell?.zone === "stack" ? this.conspireCandidates(ask.player, spell) : [];
+    if (pay && spell !== undefined && this.tapCapacity(eligible) >= 2) {
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: ask.player,
+        eligible,
+        min: 2,
+        max: 2,
+        prompt: `Conspire — tap two untapped creatures that share a color with ${nameOf(spell)}`,
+        then: { kind: "sequence", effects: [] },
+        source: ask.spell,
+        x: 0,
+        conspire: ask,
+      };
+      return;
+    }
+    if (ask.instances > 1) (this.state.pendingConspire ??= []).unshift({ ...ask, instances: ask.instances - 1 });
+    this.prepareForPriority(ask.priorityTo);
+  }
+
+  /** Answers a conspire cost's two creatures (`applyConspireAsk`): they're
+   * tapped as the cost (rule 601.2h) — a token peeled off a stack for each
+   * time the stack is named — and the spell's copy trigger goes on the stack.
+   * Then the next instance is asked, and once none is left, `priorityTo`
+   * gets priority. */
+  private applyConspire(player: PlayerId, chosen: readonly ObjectId[], ask: ConspireAsk): void {
+    this.state.awaiting = null;
+    const spell = this.state.objects[ask.spell];
+    if (spell?.zone === "stack" && chosen.length === 2) {
+      const eligible = new Set(this.conspireCandidates(player, spell));
+      if (chosen.every((id) => eligible.has(id))) {
+        for (const named of chosen) {
+          const id = this.splitOneFromStack(named);
+          this.state.objects[id].tapped = true;
+          this.emit({ type: "permanent-tapped", object: id });
+        }
+        const text = `Conspire — copy ${nameOf(spell)}. You may choose new targets for the copy.`;
+        this.queuePaidCostCopy(spell, player, text, `conspire-${this.state.nextObjectSeq}-${ask.instances}`);
+      }
+    }
+    if (ask.instances > 1) (this.state.pendingConspire ??= []).unshift({ ...ask, instances: ask.instances - 1 });
     this.prepareForPriority(ask.priorityTo);
   }
 
@@ -29030,6 +29170,10 @@ export class Game {
     }
     if (awaiting.casualty !== undefined) {
       this.applyCasualty(player, chosen, awaiting.casualty);
+      return;
+    }
+    if (awaiting.conspire !== undefined) {
+      this.applyConspire(player, chosen, awaiting.conspire);
       return;
     }
     // The untap step's "you may choose not to untap" (rule 502.3): what's

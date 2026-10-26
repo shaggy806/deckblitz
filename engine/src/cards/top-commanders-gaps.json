@@ -438,6 +438,7 @@
   "mechanic:begin-game-on-battlefield",
   "keyword:cipher",
   "keyword:retrace",
+  "keyword:conspire",
   "cost:untap-symbol-cost",
   "keyword:buyback"
  ],

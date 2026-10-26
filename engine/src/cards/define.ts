@@ -1766,6 +1766,11 @@ export interface StaticAbility {
      * printed one (`CardDefinition.casualty`) or another grant, each paid
      * and copying separately (702.153b). Read as the spell is cast. */
     readonly casualty?: number;
+    /** The spells have conspire (rule 702.78) — Wort, the Raidmother's
+     * "each red or green instant or sorcery spell you cast has conspire":
+     * one more instance beside a printed one, each paid and copying
+     * separately (702.78b). Read as the spell is cast. */
+    readonly conspire?: boolean;
     /** The spells have freerunning with this cost (rule 702.173) — Ezio
      * Auditore da Firenze's "Assassin spells you cast have freerunning
      * {B}{B}": offered beside a printed freerunning, judged against the card
@@ -2701,6 +2706,18 @@ export interface CardDefinition {
    * `grantsToSpells.casualty` (Silverquill, the Disputant). `null` for none.
    */
   readonly casualty: number | null;
+  /**
+   * Conspire (rule 702.78a — Gleeful Sabotage): "As an additional cost to
+   * cast this spell, you may tap two untapped creatures you control that
+   * each share a color with it" and "When you cast this spell, if its
+   * conspire cost was paid, copy it. If the spell has any targets, you may
+   * choose new targets for the copy." Asked once the spell is on the stack,
+   * as casualty is: first whether to pay, then which two creatures (summoning
+   * sick ones too — no {T} symbol, rule 302.6). A static grants more with
+   * `grantsToSpells.conspire` (Wort, the Raidmother); each instance is paid
+   * and copies separately (702.78b).
+   */
+  readonly conspire: boolean;
   /** Declarative resolution effect, or `null`. */
   readonly effect: EffectSpec | null;
   /** Imperative resolution script (takes precedence over `effect`), or `null`. */
@@ -3282,6 +3299,7 @@ const PRINTED_ABILITY: {
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
   casualty: (def) => def.casualty !== null,
+  conspire: (def) => def.conspire,
   effect: (def) => def.effect !== null,
   resolve: (def) => def.resolve !== null,
   activated: (def) => def.activated.length > 0,
@@ -3493,6 +3511,8 @@ interface CardDraft {
   targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number };
   /** See {@link CardDefinition.casualty}. */
   casualty?: number;
+  /** See {@link CardDefinition.conspire}. */
+  conspire?: boolean;
   effect?: EffectSpec;
   resolve?: SpellResolver;
   activated?: readonly ActivatedAbility[];
@@ -3700,6 +3720,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,
     casualty: draft.casualty ?? null,
+    conspire: draft.conspire ?? false,
     effect: draft.effect ?? null,
     resolve: draft.resolve ?? null,
     activated: draft.activated ?? [],

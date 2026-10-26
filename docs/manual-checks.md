@@ -5410,3 +5410,18 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Shadow Slice at Bob. When asked, pick your Grizzly Bears. Attack Bob with the Bears, and when asked, cast the copy at Bob.
 - **Expect:** Bob goes to 17, and your banner reads "Cipher — exile Shadow Slice encoded on a creature you control?". Shadow Slice goes to exile, not your graveyard. After the Bears' 2 damage, "Whenever this creature deals combat damage to a player, you may copy the encoded card (Shadow Slice) …" goes on the stack; casting the copy for free takes Bob to 12. Shadow Slice is still in exile.
 - **Not a bug:** Choosing no creature puts Shadow Slice in your graveyard.
+
+## Conspire (2026-10-26, Shadowmoor)
+
+### Burn Trail: paying conspire taps two red creatures and copies it
+- **Do:** Cast Burn Trail at Bob. When asked, choose the conspire option, then pick Raging Goblin and Goblin Piker. Keep Bob as the copy's target.
+- **Expect:** The prompt reads "Conspire — tap two untapped creatures you control that share a color with Burn Trail to copy it". Only the two Goblins can be picked, not Grizzly Bears. Both tap, the copy resolves first, and Bob goes to 14.
+
+### Burn Trail: no conspire prompt without two creatures that share its colour
+- **Do:** Cast Burn Trail at Bob (your creatures are one red Goblin and a green Bears).
+- **Expect:** No conspire prompt; Bob goes to 17.
+
+### Wort, the Raidmother: two conspire prompts on Burn Trail
+- **Do:** Cast Burn Trail at Bob. Accept both conspire prompts, tapping two creatures for each.
+- **Expect:** Two conspire prompts, one after the other, and two copies: Bob goes to 11.
+- **Not a bug:** Wort and the Goblin Warrior token can be tapped for it: they're red too.

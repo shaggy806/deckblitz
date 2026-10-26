@@ -249,6 +249,7 @@ import _poolGauntletOfMight from "../pool/gauntlet-of-might.js";
 import _poolGeistflameReservoir from "../pool/geistflame-reservoir.js";
 import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
+import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolGeistflameReservoir,
     _poolGeneralKudroOfDrannith,
     _poolGenesisChamber,
+    _poolGhastlyDiscovery,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsLawkeeper,

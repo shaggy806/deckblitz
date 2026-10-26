@@ -684,6 +684,7 @@ import _tokensConstructTokenKaylasCommand from "../tokens/construct-token-kaylas
 import _tokensDarkstar from "../tokens/darkstar.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
 import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
+import _tokensGiantWarriorToken from "../tokens/giant-warrior-token.js";
 import _tokensGoblinScoutToken from "../tokens/goblin-scout-token.js";
 import _tokensGoblinShamanToken from "../tokens/goblin-shaman-token.js";
 import _tokensGolemToken44 from "../tokens/golem-token-4-4.js";
@@ -1385,6 +1386,7 @@ const shard: CardShard = {
     _tokensDarkstar,
     _tokensEldraziToken,
     _tokensFungusTokenCantBlock,
+    _tokensGiantWarriorToken,
     _tokensGoblinScoutToken,
     _tokensGoblinShamanToken,
     _tokensGolemToken44,

@@ -160,6 +160,7 @@ import _poolDhundOperative from "../pool/dhund-operative.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
+import _poolDisturbingPlot from "../pool/disturbing-plot.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDoomgape from "../pool/doomgape.js";
@@ -848,6 +849,7 @@ const shard: CardShard = {
     _poolDisciplinedDuelist,
     _poolDisinformationCampaign,
     _poolDistinguishedConjurer,
+    _poolDisturbingPlot,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
     _poolDoomgape,

@@ -360,6 +360,7 @@ import _poolMartyrsCause from "../pool/martyrs-cause.js";
 import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
+import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
@@ -1076,6 +1077,7 @@ const shard: CardShard = {
     _poolMaskOfGriselbrand,
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
+    _poolMemorySluice,
     _poolMerchantOfSecrets,
     _poolMercilessJavelineer,
     _poolMidnightSnack,

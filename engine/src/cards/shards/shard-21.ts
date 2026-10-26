@@ -226,6 +226,7 @@ import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
+import _poolGleefulSabotage from "../pool/gleeful-sabotage.js";
 import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGlintNestCrane from "../pool/glint-nest-crane.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
@@ -888,6 +889,7 @@ const shard: CardShard = {
     _poolGiganticBigBear,
     _poolGimlisAxe,
     _poolGlarbCalamitysAugur,
+    _poolGleefulSabotage,
     _poolGliderKids,
     _poolGlintNestCrane,
     _poolGlintWeaver,

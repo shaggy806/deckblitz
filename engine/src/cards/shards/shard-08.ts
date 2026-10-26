@@ -384,6 +384,7 @@ import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
+import _poolMineExcavation from "../pool/mine-excavation.js";
 import _poolMirkwoodPathmaker from "../pool/mirkwood-pathmaker.js";
 import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMirrorStyleMaster from "../pool/mirror-style-master.js";
@@ -1102,6 +1103,7 @@ const shard: CardShard = {
     _poolMidnightReaper,
     _poolMilitantMonk,
     _poolMindStone,
+    _poolMineExcavation,
     _poolMirkwoodPathmaker,
     _poolMirrisGuile,
     _poolMirrorStyleMaster,

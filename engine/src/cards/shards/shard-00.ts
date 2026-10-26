@@ -44,6 +44,7 @@ import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
 import _poolBanesContingency from "../pool/banes-contingency.js";
 import _poolBardsBow from "../pool/bards-bow.js";
+import _poolBarkshellBlessing from "../pool/barkshell-blessing.js";
 import _poolBasaltMonolith from "../pool/basalt-monolith.js";
 import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
@@ -596,6 +597,7 @@ import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
+import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
@@ -731,6 +733,7 @@ const shard: CardShard = {
     _poolBalladOfTheBlackFlag,
     _poolBanesContingency,
     _poolBardsBow,
+    _poolBarkshellBlessing,
     _poolBasaltMonolith,
     _poolBatheInGold,
     _poolBeamsawProspector,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolTorchDrake,
     _poolTorture,
     _poolTrackDown,
+    _poolTraitorsRoar,
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,

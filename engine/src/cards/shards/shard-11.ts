@@ -668,6 +668,7 @@ import _poolWolfOfDevilsBreach from "../pool/wolf-of-devils-breach.js";
 import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
+import _poolWortTheRaidmother from "../pool/wort-the-raidmother.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYisanTheWandererBard from "../pool/yisan-the-wanderer-bard.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
@@ -1362,6 +1363,7 @@ const shard: CardShard = {
     _poolWoodcuttersGrit,
     _poolWoollyMammoths,
     _poolWormholeSerpent,
+    _poolWortTheRaidmother,
     _poolYevaNaturesHerald,
     _poolYisanTheWandererBard,
     _poolYouFindTheVillainsLair,
