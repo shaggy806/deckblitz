@@ -317,7 +317,15 @@ await stopOnFailure(
   ])),
 );
 
-const engineTests = await run("engine tests", "npx", ["vitest", "run", `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
+// A larger heap for vitest's main process: it holds the whole bundled card
+// barrel, and past ~21,400 definitions it ran out of the default ~2 GB at
+// startup on a cloud session (2026-10-26).
+const engineTests = await run(
+  "engine tests",
+  "node",
+  ["--max-old-space-size=4096", path.join(ROOT, "node_modules/vitest/vitest.mjs"), "run", `--maxWorkers=${Math.min(8, CORES)}`],
+  ENGINE,
+);
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
 // Side by side at 4 workers each — but on a small machine one after the
