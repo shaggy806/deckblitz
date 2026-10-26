@@ -200,6 +200,7 @@ import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
 import _poolElspethUndauntedHero from "../pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "../pool/elspeths-devotee.js";
+import _poolElvishBranchbender from "../pool/elvish-branchbender.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
@@ -444,6 +445,7 @@ import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolNuclearFallout from "../pool/nuclear-fallout.js";
 import _poolNullify from "../pool/nullify.js";
+import _poolOakenBrawler from "../pool/oaken-brawler.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
@@ -679,6 +681,7 @@ import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
+import _poolWellgabberApothecary from "../pool/wellgabber-apothecary.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
 import _poolWhisperingMadness from "../pool/whispering-madness.js";
 import _poolWhisperingWizard from "../pool/whispering-wizard.js";
@@ -917,6 +920,7 @@ const shard: CardShard = {
     _poolElephantRat,
     _poolElspethUndauntedHero,
     _poolElspethsDevotee,
+    _poolElvishBranchbender,
     _poolElvishScrapper,
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
@@ -1161,6 +1165,7 @@ const shard: CardShard = {
     _poolNoMercy,
     _poolNuclearFallout,
     _poolNullify,
+    _poolOakenBrawler,
     _poolOasis,
     _poolObeliskOfNaya,
     _poolOldFlitterfang,
@@ -1396,6 +1401,7 @@ const shard: CardShard = {
     _poolWarleadersHelix,
     _poolWeakness,
     _poolWeddingInvitation,
+    _poolWellgabberApothecary,
     _poolWhirlerRogue,
     _poolWhisperingMadness,
     _poolWhisperingWizard,

@@ -125,6 +125,7 @@ import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
 import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
+import _poolConsumingBonfire from "../pool/consuming-bonfire.js";
 import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
@@ -391,6 +392,7 @@ import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysteriousPathlighter from "../pool/mysterious-pathlighter.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
 import _poolNaiadOfHiddenCoves from "../pool/naiad-of-hidden-coves.js";
+import _poolNathsElite from "../pool/naths-elite.js";
 import _poolNecromancersFamiliar from "../pool/necromancers-familiar.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
@@ -823,6 +825,7 @@ const shard: CardShard = {
     _poolConductorOfCacophony,
     _poolConstableOfTheRealm,
     _poolConstrictorSage,
+    _poolConsumingBonfire,
     _poolConsumingVapors,
     _poolContagion,
     _poolContaminatedLandscape,
@@ -1089,6 +1092,7 @@ const shard: CardShard = {
     _poolMysteriousPathlighter,
     _poolMysticArchaeologist,
     _poolNaiadOfHiddenCoves,
+    _poolNathsElite,
     _poolNecromancersFamiliar,
     _poolNeedForSpeed,
     _poolNeedlevergePathway,

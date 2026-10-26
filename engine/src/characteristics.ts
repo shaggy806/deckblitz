@@ -1041,6 +1041,9 @@ function evalStaticCondition(
       // the X a permanent was cast with, which its own enters trigger knows
       // (rule 107.3m) and passes in. Anywhere else there is no X to read.
       return opts.x !== undefined && compareNum(opts.x, condition.compare);
+    case "trigger-value":
+      // Only a resolving triggered ability knows its trigger's value.
+      return false;
     case "trigger-object": {
       // A triggered ability's intervening-if (rule 603.4), asked about the
       // object whose event fired it — passed in as it triggers and as it

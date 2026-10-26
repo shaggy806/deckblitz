@@ -257,6 +257,7 @@ import _poolGrimFlowering from "../pool/grim-flowering.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
 import _poolGryffRider from "../pool/gryff-rider.js";
+import _poolGuardianOfCloverdell from "../pool/guardian-of-cloverdell.js";
 import _poolGylwainCastingDirector from "../pool/gylwain-casting-director.js";
 import _poolHadaSpyPatrol from "../pool/hada-spy-patrol.js";
 import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
@@ -293,6 +294,7 @@ import _poolIndestructibleAura from "../pool/indestructible-aura.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
+import _poolInkfathomDivers from "../pool/inkfathom-divers.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
 import _poolInterjection from "../pool/interjection.js";
@@ -623,6 +625,7 @@ import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
+import _poolThorntoothWitch from "../pool/thorntooth-witch.js";
 import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
@@ -1006,6 +1009,7 @@ const shard: CardShard = {
     _poolGrindingStation,
     _poolGrizzlyBears,
     _poolGryffRider,
+    _poolGuardianOfCloverdell,
     _poolGylwainCastingDirector,
     _poolHadaSpyPatrol,
     _poolHaldirLorienLieutenant,
@@ -1042,6 +1046,7 @@ const shard: CardShard = {
     _poolInfantryVeteran,
     _poolInfectedDefector,
     _poolInfestationSage,
+    _poolInkfathomDivers,
     _poolInnocentBlood,
     _poolInordinateRage,
     _poolInterjection,
@@ -1372,6 +1377,7 @@ const shard: CardShard = {
     _poolTheShire,
     _poolThornMammoth,
     _poolThornglintBridge,
+    _poolThorntoothWitch,
     _poolThousandMoonsCrackshot,
     _poolThunderWall,
     _poolThundertrapTrainer,

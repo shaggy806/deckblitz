@@ -241,12 +241,14 @@ import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
 import _poolGildedCerodon from "../pool/gilded-cerodon.js";
+import _poolGiltLeafPalace from "../pool/gilt-leaf-palace.js";
 import _poolGisasBidding from "../pool/gisas-bidding.js";
 import _poolGishathSunsAvatar from "../pool/gishath-suns-avatar.js";
 import _poolGlimmerlight from "../pool/glimmerlight.js";
 import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
 import _poolGnawToTheBone from "../pool/gnaw-to-the-bone.js";
 import _poolGoForth from "../pool/go-forth.js";
+import _poolGoatnapper from "../pool/goatnapper.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
 import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGoliathPaladin from "../pool/goliath-paladin.js";
@@ -961,12 +963,14 @@ const shard: CardShard = {
     _poolGiftedAetherborn,
     _poolGilacorn,
     _poolGildedCerodon,
+    _poolGiltLeafPalace,
     _poolGisasBidding,
     _poolGishathSunsAvatar,
     _poolGlimmerlight,
     _poolGloriousSunrise,
     _poolGnawToTheBone,
     _poolGoForth,
+    _poolGoatnapper,
     _poolGoblinAssailant,
     _poolGoldenScaleAeronaut,
     _poolGoliathPaladin,

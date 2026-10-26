@@ -280,6 +280,7 @@ import _poolHarvestguardAlseids from "../pool/harvestguard-alseids.js";
 import _poolHarvestriteHost from "../pool/harvestrite-host.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
+import _poolHealTheScars from "../pool/heal-the-scars.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
 import _poolHellfire from "../pool/hellfire.js";
@@ -292,6 +293,7 @@ import _poolHollowhengeSpirit from "../pool/hollowhenge-spirit.js";
 import _poolHoofSkulkin from "../pool/hoof-skulkin.js";
 import _poolHostileInvestigator from "../pool/hostile-investigator.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
+import _poolHostility from "../pool/hostility.js";
 import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
 import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
@@ -546,6 +548,7 @@ import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
 import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
+import _poolSilvergillDouser from "../pool/silvergill-douser.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
@@ -994,6 +997,7 @@ const shard: CardShard = {
     _poolHarvestriteHost,
     _poolHavocSower,
     _poolHazduhrTheAbbot,
+    _poolHealTheScars,
     _poolHeapGate,
     _poolHeartSliver,
     _poolHellfire,
@@ -1006,6 +1010,7 @@ const shard: CardShard = {
     _poolHoofSkulkin,
     _poolHostileInvestigator,
     _poolHostileMinotaur,
+    _poolHostility,
     _poolHulkSmash,
     _poolHumbleDefector,
     _poolHungryMegasloth,
@@ -1260,6 +1265,7 @@ const shard: CardShard = {
     _poolSilumgarButcher,
     _poolSilverErne,
     _poolSilverbeakGriffin,
+    _poolSilvergillDouser,
     _poolSilverstrike,
     _poolSimicLocket,
     _poolSkeletalChangeling,

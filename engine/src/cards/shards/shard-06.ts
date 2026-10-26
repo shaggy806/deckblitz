@@ -193,6 +193,7 @@ import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
+import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
@@ -900,6 +901,7 @@ const shard: CardShard = {
     _poolDynamiteDiver,
     _poolEarthenAlly,
     _poolEbonDragon,
+    _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,

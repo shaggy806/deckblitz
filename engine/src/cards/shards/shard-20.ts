@@ -153,6 +153,7 @@ import _poolDauntlessAvenger from "../pool/dauntless-avenger.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
 import _poolDauthiMercenary from "../pool/dauthi-mercenary.js";
 import _poolDauthiVoidwalker from "../pool/dauthi-voidwalker.js";
+import _poolDawnfluke from "../pool/dawnfluke.js";
 import _poolDaydream from "../pool/daydream.js";
 import _poolDeadlyInsect from "../pool/deadly-insect.js";
 import _poolDeadlyPrecision from "../pool/deadly-precision.js";
@@ -246,6 +247,7 @@ import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
+import _poolGiltLeafAmbush from "../pool/gilt-leaf-ambush.js";
 import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-caves.js";
 import _poolGirderGoons from "../pool/girder-goons.js";
 import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
@@ -312,6 +314,7 @@ import _poolIllusoryGains from "../pool/illusory-gains.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
+import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
 import _poolInvoluntaryEmployment from "../pool/involuntary-employment.js";
@@ -582,6 +585,7 @@ import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
+import _poolSpringjackKnight from "../pool/springjack-knight.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
@@ -713,6 +717,7 @@ import _poolVoyagingSatyr from "../pool/voyaging-satyr.js";
 import _poolVulshokBerserker from "../pool/vulshok-berserker.js";
 import _poolWakeTheDead from "../pool/wake-the-dead.js";
 import _poolWallOfFrost from "../pool/wall-of-frost.js";
+import _poolWarrenPilferers from "../pool/warren-pilferers.js";
 import _poolWarriorAngel from "../pool/warrior-angel.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
 import _poolWearTear from "../pool/wear-tear.js";
@@ -911,6 +916,7 @@ const shard: CardShard = {
     _poolDauntlessScrapbot,
     _poolDauthiMercenary,
     _poolDauthiVoidwalker,
+    _poolDawnfluke,
     _poolDaydream,
     _poolDeadlyInsect,
     _poolDeadlyPrecision,
@@ -1004,6 +1010,7 @@ const shard: CardShard = {
     _poolGeodeGrotto,
     _poolGerminateRecruits,
     _poolGildedSentinel,
+    _poolGiltLeafAmbush,
     _poolGimliOfTheGlitteringCaves,
     _poolGirderGoons,
     _poolGlacialFloodplain,
@@ -1070,6 +1077,7 @@ const shard: CardShard = {
     _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolIncorrigibleYouths,
+    _poolInnerFlameAcolyte,
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
     _poolInvoluntaryEmployment,
@@ -1340,6 +1348,7 @@ const shard: CardShard = {
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,
+    _poolSpringjackKnight,
     _poolSquash,
     _poolSquirrelSanctuary,
     _poolSquirrelanoids,
@@ -1471,6 +1480,7 @@ const shard: CardShard = {
     _poolVulshokBerserker,
     _poolWakeTheDead,
     _poolWallOfFrost,
+    _poolWarrenPilferers,
     _poolWarriorAngel,
     _poolWaytaTrainerProdigy,
     _poolWearTear,

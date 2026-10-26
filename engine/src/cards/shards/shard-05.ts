@@ -186,6 +186,7 @@ import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonloftIdol from "../pool/dragonloft-idol.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
+import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDryadMilitant from "../pool/dryad-militant.js";
@@ -330,6 +331,7 @@ import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
+import _poolInnerFlameIgniter from "../pool/inner-flame-igniter.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
@@ -593,6 +595,7 @@ import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
 import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
+import _poolSylvanEchoes from "../pool/sylvan-echoes.js";
 import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
@@ -691,6 +694,7 @@ import _tokensBirdTokenWhite34 from "../tokens/bird-token-white-3-4.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
 import _tokensDetectiveToken from "../tokens/detective-token.js";
 import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
+import _tokensElementalShamanToken from "../tokens/elemental-shaman-token.js";
 import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
@@ -893,6 +897,7 @@ const shard: CardShard = {
     _poolDragonloftIdol,
     _poolDragonsPresence,
     _poolDreadfulApathy,
+    _poolDreamspoilerWitches,
     _poolDreyKeeper,
     _poolDrillBit,
     _poolDryadMilitant,
@@ -1037,6 +1042,7 @@ const shard: CardShard = {
     _poolIncarnationTechnique,
     _poolIncubationDruid,
     _poolInfernalTribute,
+    _poolInnerFlameIgniter,
     _poolInquisitivePuppet,
     _poolInsectoidExterminator,
     _poolInspiredCharge,
@@ -1300,6 +1306,7 @@ const shard: CardShard = {
     _poolSwordDancer,
     _poolSyggRiverCutthroat,
     _poolSylvanAnthem,
+    _poolSylvanEchoes,
     _poolSylvanParadise,
     _poolTaboraxHopesDemise,
     _poolTandemTakedown,
@@ -1400,6 +1407,7 @@ const shard: CardShard = {
     _tokensDeathtouchSnakeToken,
     _tokensDetectiveToken,
     _tokensDinosaurSoldierToken,
+    _tokensElementalShamanToken,
     _tokensElementalToken10Blue,
     _tokensGalactus,
     _tokensHalflingToken,

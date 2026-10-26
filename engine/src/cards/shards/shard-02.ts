@@ -335,6 +335,7 @@ import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
+import _poolKinsbaileBalloonist from "../pool/kinsbaile-balloonist.js";
 import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
@@ -670,6 +671,7 @@ import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
 import _poolWallOfFaith from "../pool/wall-of-faith.js";
 import _poolWardenOfTheChained from "../pool/warden-of-the-chained.js";
+import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
@@ -1036,6 +1038,7 @@ const shard: CardShard = {
     _poolKherKeep,
     _poolKillianDecisiveMentor,
     _poolKingOfThePride,
+    _poolKinsbaileBalloonist,
     _poolKitesailApprentice,
     _poolKnightOfStromgald,
     _poolKnighthood,
@@ -1371,6 +1374,7 @@ const shard: CardShard = {
     _poolWallOfEarth,
     _poolWallOfFaith,
     _poolWardenOfTheChained,
+    _poolWarrenScourgeElf,
     _poolWarriorsSword,
     _poolWhipOfErebos,
     _poolWhiptailWurm,

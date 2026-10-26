@@ -245,6 +245,7 @@ import _poolGiantStrength from "../pool/giant-strength.js";
 import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
 import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
+import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
@@ -470,6 +471,7 @@ import _poolPrismariCharm from "../pool/prismari-charm.js";
 import _poolProteanThaumaturge from "../pool/protean-thaumaturge.js";
 import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
+import _poolQuillSlingerBoggart from "../pool/quill-slinger-boggart.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRacecourseFury from "../pool/racecourse-fury.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
@@ -712,6 +714,7 @@ import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
 import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
 import _tokensDragonTokenDragonbackAssault from "../tokens/dragon-token-dragonback-assault.js";
+import _tokensElementalShamanTokenHaste from "../tokens/elemental-shaman-token-haste.js";
 import _tokensElementalToken from "../tokens/elemental-token.js";
 import _tokensGreenElementalToken22 from "../tokens/green-elemental-token-2-2.js";
 import _tokensHeroTokenBlackMagesRod from "../tokens/hero-token-black-mages-rod.js";
@@ -971,6 +974,7 @@ const shard: CardShard = {
     _poolGiftOfTheViper,
     _poolGildedAssaultCart,
     _poolGildedGoose,
+    _poolGiltLeafSeer,
     _poolGimliCounterOfKills,
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
@@ -1196,6 +1200,7 @@ const shard: CardShard = {
     _poolProteanThaumaturge,
     _poolPsemillaMeletianPoet,
     _poolQuarrel,
+    _poolQuillSlingerBoggart,
     _poolQuilledSlagwurm,
     _poolRacecourseFury,
     _poolRadiantGrove,
@@ -1440,6 +1445,7 @@ const shard: CardShard = {
     _tokens22BlackBirdToken,
     _tokensCentaurToken33,
     _tokensDragonTokenDragonbackAssault,
+    _tokensElementalShamanTokenHaste,
     _tokensElementalToken,
     _tokensGreenElementalToken22,
     _tokensHeroTokenBlackMagesRod,

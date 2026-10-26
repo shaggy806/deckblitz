@@ -1510,6 +1510,17 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A player clashed (rule 701.30) — "whenever you clash" (Rebellion
+       * of the Flamekin, Entangling Trap), "whenever you clash and win"
+       * (Sylvan Echoes: `won: true`). Either clashing player clashes,
+       * whoever's spell or ability started it. The trigger's value is 1 if
+       * that player won, else 0 — "if you won" is a `trigger-value`
+       * condition `{ op: "gte", n: 1 }`. */
+      readonly on: "clashes";
+      readonly who: TriggerWho;
+      readonly won?: true;
+    }
+  | {
       /**
        * One or more cards were put into exile at once — Ketramose, the New
        * Dawn's "whenever one or more cards are put into exile from

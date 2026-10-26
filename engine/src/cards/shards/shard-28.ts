@@ -475,6 +475,7 @@ import _poolRapierWit from "../pool/rapier-wit.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
+import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
 import _poolReefRoads from "../pool/reef-roads.js";
@@ -1215,6 +1216,7 @@ const shard: CardShard = {
     _poolRazortideBridge,
     _poolRazortrapGorge,
     _poolRazorvergeThicket,
+    _poolRebellionOfTheFlamekin,
     _poolRecklessImpulse,
     _poolRedcapThief,
     _poolReefRoads,

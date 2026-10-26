@@ -53,6 +53,7 @@ import _poolBeck from "../pool/beck.js";
 import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
+import _poolBenthicore from "../pool/benthicore.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
 import _poolBindingGeist from "../pool/binding-geist.js";
 import _poolBitingRain from "../pool/biting-rain.js";
@@ -332,6 +333,7 @@ import _poolLordOfTheUlvenwald from "../pool/lord-of-the-ulvenwald.js";
 import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
+import _poolLowlandOaf from "../pool/lowland-oaf.js";
 import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
@@ -540,6 +542,7 @@ import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSmolderingEgg from "../pool/smoldering-egg.js";
 import _poolSnakeUmbra from "../pool/snake-umbra.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
+import _poolSoaringHope from "../pool/soaring-hope.js";
 import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
@@ -770,6 +773,7 @@ const shard: CardShard = {
     _poolBedeckBedazzle,
     _poolBeeSting,
     _poolBenalishHeralds,
+    _poolBenthicore,
     _poolBespokeBattlegarb,
     _poolBindingGeist,
     _poolBitingRain,
@@ -1049,6 +1053,7 @@ const shard: CardShard = {
     _poolLoseHope,
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
+    _poolLowlandOaf,
     _poolLureboundScarecrow,
     _poolMaestrosGift,
     _poolMaggotCarrier,
@@ -1257,6 +1262,7 @@ const shard: CardShard = {
     _poolSmolderingEgg,
     _poolSnakeUmbra,
     _poolSnowCoveredForest,
+    _poolSoaringHope,
     _poolSolitaryCell,
     _poolSoltariCrusader,
     _poolSongOfCreation,

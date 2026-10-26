@@ -3496,8 +3496,9 @@ export type EffectSpec =
        * `won` / `lost` apply after both cards have moved, with the
        * `"that-player"` scope naming the opponent clashed with (Captivating
        * Glance's "Otherwise, that player gains control of enchanted
-       * creature"). (No "whenever you clash" trigger yet: Sylvan Echoes and
-       * Rebellion of the Flamekin wait on one.)
+       * creature"). Once both cards have moved, each clashing player has
+       * clashed (a `clashed` event apiece, won or not), which a `clashes`
+       * trigger fires on — Sylvan Echoes, Entangling Trap.
        *
        * `repeat` is "if you win, repeat this process" (Hoarder's Greed:
        * "You lose 2 life and draw two cards, then clash with an opponent"):
@@ -3514,6 +3515,9 @@ export type EffectSpec =
       readonly opponent?: PlayerId;
       readonly progress?: {
         readonly won: boolean;
+        /** Whether the opponent won it: a card of greater mana value than
+         * yours (701.30d — either player can win). */
+        readonly theyWon?: boolean;
         readonly toAsk: readonly { readonly player: PlayerId; readonly card: ObjectId }[];
       };
       /** Engine-built: how many clashes `repeat` has already made. */
@@ -6630,6 +6634,9 @@ export interface EffectApi {
   /** Flip a coin for this effect's controller (see the `"flip-coin"`
    * {@link EffectSpec}): `true` if they won the flip. */
   flipCoin(): boolean;
+  /** A clash is over (see the `"clash"` {@link EffectSpec}): a `clashed`
+   * event for each player who clashed, saying whether they won. */
+  clashed(results: readonly { readonly player: PlayerId; readonly won: boolean }[]): void;
   /** Roll `count` `sides`-sided dice for the controller (rule 706), on the
    * seeded stream; returns the result — the natural total plus `modifier` —
    * and keeps the roll for `lastRoll`. */
@@ -7739,6 +7746,7 @@ function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: Resolutio
     const theirs = valueOf(spec.opponent);
     progress = {
       won: mine !== undefined && (theirs === undefined || mine > theirs),
+      theyWon: theirs !== undefined && (mine === undefined || theirs > mine),
       toAsk: revealed.flatMap((r) => (r.card === undefined ? [] : [{ player: r.player, card: r.card }])),
     };
   }
@@ -7765,6 +7773,12 @@ function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: Resolutio
       return;
     }
   }
+  // The clash is over: each of the two has clashed (701.30), for "whenever
+  // you clash" — whoever started it, and either can have won.
+  ctx.clashed([
+    { player: ctx.controller, won: progress.won },
+    { player: spec.opponent, won: progress.theyWon === true },
+  ]);
   const branch = progress.won ? spec.won : spec.lost;
   // "Repeat this process": the rest of it, then a fresh clash — an opponent
   // chosen again, new cards revealed.

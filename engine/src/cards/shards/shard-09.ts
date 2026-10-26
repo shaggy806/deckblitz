@@ -350,6 +350,7 @@ import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
 import _poolLakeTown from "../pool/lake-town.js";
 import _poolLandLeeches from "../pool/land-leeches.js";
+import _poolLashOut from "../pool/lash-out.js";
 import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolLagacLizard,
     _poolLakeTown,
     _poolLandLeeches,
+    _poolLashOut,
     _poolLaurineTheDiversion,
     _poolLazotepPlating,
     _poolLedgerShredder,

@@ -222,6 +222,7 @@ import _poolFireNationPalace from "../pool/fire-nation-palace.js";
 import _poolFirefluxSquad from "../pool/fireflux-squad.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
 import _poolFiremindsForesight from "../pool/fireminds-foresight.js";
+import _poolFistfulOfForce from "../pool/fistful-of-force.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlaxenIntruder from "../pool/flaxen-intruder.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolFirefluxSquad,
     _poolFireglassMentor,
     _poolFiremindsForesight,
+    _poolFistfulOfForce,
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
     _poolFlaxenIntruder,

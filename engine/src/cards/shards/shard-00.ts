@@ -66,6 +66,7 @@ import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
+import _poolBogHoodlums from "../pool/bog-hoodlums.js";
 import _poolBogbrewWitch from "../pool/bogbrew-witch.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
@@ -224,6 +225,7 @@ import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
 import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
 import _poolGixsCaress from "../pool/gixs-caress.js";
 import _poolGixsCommand from "../pool/gixs-command.js";
+import _poolGlarewielder from "../pool/glarewielder.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
 import _poolGloomSurgeon from "../pool/gloom-surgeon.js";
@@ -272,6 +274,7 @@ import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
+import _poolHunterOfEyeblights from "../pool/hunter-of-eyeblights.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIAmIronMan from "../pool/i-am-iron-man.js";
 import _poolIcebergTitan from "../pool/iceberg-titan.js";
@@ -364,6 +367,7 @@ import _poolMongooseLizard from "../pool/mongoose-lizard.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
 import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
+import _poolMoongloveExtract from "../pool/moonglove-extract.js";
 import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
 import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
@@ -373,6 +377,7 @@ import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNearDeathExperience from "../pool/near-death-experience.js";
+import _poolNectarFaerie from "../pool/nectar-faerie.js";
 import _poolNessianHornbeetle from "../pool/nessian-hornbeetle.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
 import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
@@ -786,6 +791,7 @@ const shard: CardShard = {
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
     _poolBoarUmbra,
+    _poolBogHoodlums,
     _poolBogbrewWitch,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
@@ -944,6 +950,7 @@ const shard: CardShard = {
     _poolGitaxianMindstinger,
     _poolGixsCaress,
     _poolGixsCommand,
+    _poolGlarewielder,
     _poolGleamingSplendor,
     _poolGlintSleeveArtisan,
     _poolGloomSurgeon,
@@ -992,6 +999,7 @@ const shard: CardShard = {
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
     _poolHuatlisFinalStrike,
+    _poolHunterOfEyeblights,
     _poolHydraAssaultRobot,
     _poolIAmIronMan,
     _poolIcebergTitan,
@@ -1084,6 +1092,7 @@ const shard: CardShard = {
     _poolMonstrousGrowth,
     _poolMoonCircuitHacker,
     _poolMoonVigilAdherents,
+    _poolMoongloveExtract,
     _poolMorcantsLoyalist,
     _poolMordorTrebuchet,
     _poolMortivore,
@@ -1093,6 +1102,7 @@ const shard: CardShard = {
     _poolNaliaDearnise,
     _poolNaturesLore,
     _poolNearDeathExperience,
+    _poolNectarFaerie,
     _poolNessianHornbeetle,
     _poolNettlecyst,
     _poolNevaStalkedByNightmares,

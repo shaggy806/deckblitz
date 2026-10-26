@@ -50,6 +50,7 @@ import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
+import _poolBlindSpotGiant from "../pool/blind-spot-giant.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
 import _poolBloodChinFanatic from "../pool/blood-chin-fanatic.js";
@@ -216,6 +217,7 @@ import _poolGhostlyCastigator from "../pool/ghostly-castigator.js";
 import _poolGiantCindermaw from "../pool/giant-cindermaw.js";
 import _poolGiantSizedFlyingAnt from "../pool/giant-sized-flying-ant.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
+import _poolGiantsIre from "../pool/giants-ire.js";
 import _poolGlamermite from "../pool/glamermite.js";
 import _poolGlamorousGrapplers from "../pool/glamorous-grapplers.js";
 import _poolGleamOfBattle from "../pool/gleam-of-battle.js";
@@ -767,6 +769,7 @@ const shard: CardShard = {
     _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
+    _poolBlindSpotGiant,
     _poolBlindingMage,
     _poolBlitzAutomaton,
     _poolBloodChinFanatic,
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolGiantCindermaw,
     _poolGiantSizedFlyingAnt,
     _poolGiantSolifuge,
+    _poolGiantsIre,
     _poolGlamermite,
     _poolGlamorousGrapplers,
     _poolGleamOfBattle,

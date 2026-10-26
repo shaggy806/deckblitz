@@ -11079,6 +11079,10 @@
   "effect:damage-player-or-their-planeswalker-choice": {
    "family": "effect:player-scope-extensions",
    "example": "Curse of the Pierced Heart: \"deals 1 damage to that player or a planeswalker that player controls\" — untargeted, chosen as it resolves."
+  },
+  "trigger:clash": {
+   "family": "mechanic:clash",
+   "example": "Sylvan Echoes: \"whenever you clash and win\" — no trigger on a player clashing"
   }
  }
 }

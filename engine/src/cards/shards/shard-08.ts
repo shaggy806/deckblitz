@@ -308,6 +308,7 @@ import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
+import _poolHurlyBurly from "../pool/hurly-burly.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
@@ -356,6 +357,7 @@ import _poolKindle from "../pool/kindle.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
+import _poolKithkinGreatheart from "../pool/kithkin-greatheart.js";
 import _poolKithkinZealot from "../pool/kithkin-zealot.js";
 import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
@@ -1063,6 +1065,7 @@ const shard: CardShard = {
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
     _poolHuntingTriad,
+    _poolHurlyBurly,
     _poolHyalopterousLemure,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
@@ -1111,6 +1114,7 @@ const shard: CardShard = {
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
+    _poolKithkinGreatheart,
     _poolKithkinZealot,
     _poolKnightOfDusksShadow,
     _poolKnightOfTheLastBreath,

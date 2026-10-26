@@ -67,6 +67,7 @@ import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
 import _poolBlueManaBattery from "../pool/blue-mana-battery.js";
 import _poolBlueWard from "../pool/blue-ward.js";
 import _poolBogRats from "../pool/bog-rats.js";
+import _poolBoggartSpriteChaser from "../pool/boggart-sprite-chaser.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -665,6 +666,7 @@ import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWithercrown from "../pool/withercrown.js";
 import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
+import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
@@ -761,6 +763,7 @@ const shard: CardShard = {
     _poolBlueManaBattery,
     _poolBlueWard,
     _poolBogRats,
+    _poolBoggartSpriteChaser,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -1359,6 +1362,7 @@ const shard: CardShard = {
     _poolWillOfTheSultai,
     _poolWithercrown,
     _poolWolfbittenCaptive,
+    _poolWoodlandGuidance,
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,

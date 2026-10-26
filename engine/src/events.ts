@@ -1157,6 +1157,13 @@ export type GameEvent =
       readonly won: boolean;
     })
   | (Base & {
+      /** A player clashed (rule 701.30) — one event per clashing player,
+       * once both revealed cards have moved — and won or not (701.30d). */
+      readonly type: "clashed";
+      readonly player: PlayerId;
+      readonly won: boolean;
+    })
+  | (Base & {
       /** Cards were put into exile **at the same time** — the exile-side
        * twin of `cards-put-into-graveyard`: one per simultaneous move, each
        * card with the zone it came from and its `owner`. Exile is one shared

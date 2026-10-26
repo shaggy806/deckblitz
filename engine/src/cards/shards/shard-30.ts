@@ -9,6 +9,7 @@ import _poolAangsDefense from "../pool/aangs-defense.js";
 import _poolAbsolvingLammasu from "../pool/absolving-lammasu.js";
 import _poolAbyssalHorror from "../pool/abyssal-horror.js";
 import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
+import _poolAdderStaffBoggart from "../pool/adder-staff-boggart.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
@@ -537,6 +538,7 @@ import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
+import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
@@ -731,6 +733,7 @@ const shard: CardShard = {
     _poolAbsolvingLammasu,
     _poolAbyssalHorror,
     _poolAdarkarWastes,
+    _poolAdderStaffBoggart,
     _poolAdventurersInn,
     _poolAegisTurtle,
     _poolAeronautCavalry,
@@ -1259,6 +1262,7 @@ const shard: CardShard = {
     _poolSavageGorger,
     _poolSavageLands,
     _poolSavageSwipe,
+    _poolScarredVinebreeder,
     _poolSeedsOfRenewal,
     _poolSelflessSafewright,
     _poolSephirothsIntervention,

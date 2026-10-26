@@ -394,6 +394,7 @@ import _poolMomentOfTruth from "../pool/moment-of-truth.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMountainYeti from "../pool/mountain-yeti.js";
+import _poolMournwhelk from "../pool/mournwhelk.js";
 import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMudbuttonClanger from "../pool/mudbutton-clanger.js";
@@ -519,6 +520,7 @@ import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolSelfReflection from "../pool/self-reflection.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
 import _poolSenatorPeacock from "../pool/senator-peacock.js";
+import _poolSentryOak from "../pool/sentry-oak.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
@@ -1107,6 +1109,7 @@ const shard: CardShard = {
     _poolMomentaryBlink,
     _poolMothdustChangeling,
     _poolMountainYeti,
+    _poolMournwhelk,
     _poolMouthOfTheStorm,
     _poolMoxOpal,
     _poolMudbuttonClanger,
@@ -1232,6 +1235,7 @@ const shard: CardShard = {
     _poolSelfReflection,
     _poolSelfcraftMechan,
     _poolSenatorPeacock,
+    _poolSentryOak,
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,

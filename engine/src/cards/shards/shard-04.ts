@@ -187,6 +187,7 @@ import _poolFanaticalOffering from "../pool/fanatical-offering.js";
 import _poolFangbladeEviscerator from "../pool/fangblade-eviscerator.js";
 import _poolFatefulDiscovery from "../pool/fateful-discovery.js";
 import _poolFathomFleetCaptain from "../pool/fathom-fleet-captain.js";
+import _poolFaultgrinder from "../pool/faultgrinder.js";
 import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
@@ -642,6 +643,7 @@ import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
+import _poolVeteranOfTheDepths from "../pool/veteran-of-the-depths.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
 import _poolVibrantIdea from "../pool/vibrant-idea.js";
@@ -892,6 +894,7 @@ const shard: CardShard = {
     _poolFangbladeEviscerator,
     _poolFatefulDiscovery,
     _poolFathomFleetCaptain,
+    _poolFaultgrinder,
     _poolFearOfLostTeeth,
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolVaultSkirge,
     _poolVenomizedCat,
     _poolVergeRangers,
+    _poolVeteranOfTheDepths,
     _poolVexingGull,
     _poolViashinoBladescout,
     _poolVibrantIdea,

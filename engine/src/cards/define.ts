@@ -1044,6 +1044,14 @@ export type StaticCondition =
    */
   | { readonly kind: "x"; readonly compare: NumCompare }
   /**
+   * The value the triggering event gave this triggered ability (its
+   * `{ triggerValue: true }` amount) compared — "if you won" off a `clashes`
+   * trigger (1 for a win, 0 for a loss: Rebellion of the Flamekin, Entangling
+   * Trap). Only a triggered ability's resolution can answer it; anywhere else
+   * it is false.
+   */
+  | { readonly kind: "trigger-value"; readonly compare: NumCompare }
+  /**
    * "If a land card is discarded **this way**" (Lord Windgrace), "if you
    * **didn't** draw cards this way" (Mr. Foxglove) — a question about what the
    * resolving spell or ability has done so far, over the same cards the

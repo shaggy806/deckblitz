@@ -207,6 +207,7 @@ import _poolGigantoplasm from "../pool/gigantoplasm.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
+import _poolGlimmerdustNap from "../pool/glimmerdust-nap.js";
 import _poolGlintingCreeper from "../pool/glinting-creeper.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGlisteningOil from "../pool/glistening-oil.js";
@@ -240,6 +241,7 @@ import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarnessByForce from "../pool/harness-by-force.js";
+import _poolHarpoonSniper from "../pool/harpoon-sniper.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
 import _poolHarvestSeason from "../pool/harvest-season.js";
 import _poolHasteMagic from "../pool/haste-magic.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
     _poolGlimmerSeeker,
+    _poolGlimmerdustNap,
     _poolGlintingCreeper,
     _poolGlissasCourier,
     _poolGlisteningOil,
@@ -890,6 +893,7 @@ const shard: CardShard = {
     _poolHammerDropper,
     _poolHaplessResearcher,
     _poolHarnessByForce,
+    _poolHarpoonSniper,
     _poolHarrierNaga,
     _poolHarvestSeason,
     _poolHasteMagic,

@@ -72,6 +72,7 @@ import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
 import _poolBlueDragon from "../pool/blue-dragon.js";
 import _poolBoardTheWeatherlight from "../pool/board-the-weatherlight.js";
 import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
+import _poolBoggartLoggers from "../pool/boggart-loggers.js";
 import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
@@ -222,6 +223,7 @@ import _poolFleetingMemories from "../pool/fleeting-memories.js";
 import _poolFlickerwisp from "../pool/flickerwisp.js";
 import _poolFloodwaterDam from "../pool/floodwater-dam.js";
 import _poolFocusTheMind from "../pool/focus-the-mind.js";
+import _poolFodderLaunch from "../pool/fodder-launch.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
 import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
@@ -276,6 +278,7 @@ import _poolHauntedDead from "../pool/haunted-dead.js";
 import _poolHeadstone from "../pool/headstone.js";
 import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
+import _poolHearthcageGiant from "../pool/hearthcage-giant.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
@@ -583,6 +586,7 @@ import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
 import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
+import _poolStonybrookAngler from "../pool/stonybrook-angler.js";
 import _poolStormFleetAerialist from "../pool/storm-fleet-aerialist.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
@@ -839,6 +843,7 @@ const shard: CardShard = {
     _poolBlueDragon,
     _poolBoardTheWeatherlight,
     _poolBofurReliableGuardian,
+    _poolBoggartLoggers,
     _poolBolracClanBasher,
     _poolBoltHound,
     _poolBoneShards,
@@ -989,6 +994,7 @@ const shard: CardShard = {
     _poolFlickerwisp,
     _poolFloodwaterDam,
     _poolFocusTheMind,
+    _poolFodderLaunch,
     _poolFolkOfThePines,
     _poolFomoriNomad,
     _poolForlornPseudamma,
@@ -1043,6 +1049,7 @@ const shard: CardShard = {
     _poolHeadstone,
     _poolHeartflameDuelist,
     _poolHearthElemental,
+    _poolHearthcageGiant,
     _poolHeartstone,
     _poolHematiteGolem,
     _poolHewTheEntwood,
@@ -1350,6 +1357,7 @@ const shard: CardShard = {
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,
     _poolStonesplitterBolt,
+    _poolStonybrookAngler,
     _poolStormFleetAerialist,
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,

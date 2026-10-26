@@ -18571,6 +18571,9 @@ export class Game {
         ? this.enterBatchMatches(trigger, event, object)
         : event.type === "dice-rolled"
         ? event.results.reduce((n, r) => n + r, 0)
+        : // "If you won": 1 for a clash won, 0 for one lost.
+          trigger.on === "clashes" && event.type === "clashed"
+          ? event.won ? 1 : 0
         : powerOfId !== undefined && this.state.objects[powerOfId] !== undefined
         ? computeCharacteristics(this.state, this.registry, powerOfId).power
         : (trigger.on === "deals-combat-damage-to-player" || trigger.on === "deals-damage") &&
@@ -20102,6 +20105,14 @@ export class Game {
         return (
           event.type === "scried" &&
           event.mode === "surveil" &&
+          (spec.who === "any" ||
+            (spec.who === "you" && event.player === self.controller) ||
+            (spec.who === "opponent" && event.player !== self.controller))
+        );
+      case "clashes":
+        return (
+          event.type === "clashed" &&
+          (spec.won !== true || event.won) &&
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
@@ -21713,6 +21724,9 @@ export class Game {
       }
       // "If X is 10 or more" — the X the resolving spell was cast with.
       if (condition.kind === "x") return compareNum(x, condition.compare, x);
+      // "If you won" (Rebellion of the Flamekin) — the value the triggering
+      // event gave this triggered ability.
+      if (condition.kind === "trigger-value") return compareNum(triggerValue, condition.compare, x);
       // "If ~ is still on the battlefield" — as the same object.
       if (condition.kind === "source-on-battlefield") {
         return opts.sourceLost !== true && this.state.objects[source]?.zone === "battlefield";
@@ -23384,6 +23398,9 @@ export class Game {
         this.state.rngState = this.rng.seed;
         this.emit({ type: "coin-flipped", player: controller, won });
         return won;
+      },
+      clashed: (results) => {
+        for (const { player, won } of results) this.emit({ type: "clashed", player, won });
       },
       rollDice: (sides, count, modifier) => {
         // Each die has `sides` equally likely outcomes, 1 to N (rule 706.1a).

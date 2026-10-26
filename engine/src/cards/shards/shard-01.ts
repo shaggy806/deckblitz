@@ -386,6 +386,7 @@ import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNarrowEscape from "../pool/narrow-escape.js";
+import _poolNathsBuffoon from "../pool/naths-buffoon.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
@@ -557,6 +558,7 @@ import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
 import _poolSuperState from "../pool/super-state.js";
+import _poolSurgeOfThoughtweft from "../pool/surge-of-thoughtweft.js";
 import _poolSwarmShambler from "../pool/swarm-shambler.js";
 import _poolSwiftWarden from "../pool/swift-warden.js";
 import _poolSylvanAdvocate from "../pool/sylvan-advocate.js";
@@ -1080,6 +1082,7 @@ const shard: CardShard = {
     _poolNamazuTrader,
     _poolNarnamRenegade,
     _poolNarrowEscape,
+    _poolNathsBuffoon,
     _poolNeglectedManor,
     _poolNestingGrounds,
     _poolNightscapeMaster,
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolSungrassPrairie,
     _poolSunscapeMaster,
     _poolSuperState,
+    _poolSurgeOfThoughtweft,
     _poolSwarmShambler,
     _poolSwiftWarden,
     _poolSylvanAdvocate,

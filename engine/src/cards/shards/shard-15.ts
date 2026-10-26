@@ -53,6 +53,7 @@ import _poolBloodHost from "../pool/blood-host.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodcrazedGoblin from "../pool/bloodcrazed-goblin.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
+import _poolBogStriderAsh from "../pool/bog-strider-ash.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
 import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
 import _poolBoilingRockRioter from "../pool/boiling-rock-rioter.js";
@@ -181,6 +182,7 @@ import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExpeditionLookout from "../pool/expedition-lookout.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
+import _poolEyesOfTheWisent from "../pool/eyes-of-the-wisent.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
@@ -739,6 +741,7 @@ const shard: CardShard = {
     _poolBloodMoney,
     _poolBloodcrazedGoblin,
     _poolBloodtallowCandle,
+    _poolBogStriderAsh,
     _poolBoggartMischief,
     _poolBogslithersEmbrace,
     _poolBoilingRockRioter,
@@ -867,6 +870,7 @@ const shard: CardShard = {
     _poolExpandTheSphere,
     _poolExpeditionLookout,
     _poolExtendedAbsence,
+    _poolEyesOfTheWisent,
     _poolEzuriClawOfProgress,
     _poolEzzarootChanneler,
     _poolFancyFootwork,

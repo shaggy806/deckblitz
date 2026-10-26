@@ -179,6 +179,7 @@ import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolEnigmaDrake from "../pool/enigma-drake.js";
+import _poolEntanglingTrap from "../pool/entangling-trap.js";
 import _poolEquestrianSkill from "../pool/equestrian-skill.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEsperStormblade from "../pool/esper-stormblade.js";
@@ -910,6 +911,7 @@ const shard: CardShard = {
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,
     _poolEnigmaDrake,
+    _poolEntanglingTrap,
     _poolEquestrianSkill,
     _poolErietteOfTheCharmedApple,
     _poolEsperStormblade,
