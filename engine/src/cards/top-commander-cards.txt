@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3796 already implemented / 1204 missing (marks refreshed 2026-10-26)
+3797 already implemented / 1203 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1032,7 +1032,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1036  Elesh Norn, Mother of Machines           {4}{W}           Legendary Creature — Phyrexian Praetor
 [x]  1037  Wind-Scarred Crag                        {0}              Land
 [x]  1038  Nettlecyst                               {3}              Artifact — Equipment
-[ ]  1039  Wear // Tear                             {1}{R} // {W}    Instant // Instant
+[x]  1039  Wear // Tear                             {1}{R} // {W}    Instant // Instant
 [x]  1040  Oketra's Monument                        {3}              Legendary Artifact
 [x]  1041  Training Grounds                         {U}              Enchantment
 [ ]  1042  Arcane Lighthouse                        {0}              Land
