@@ -43,6 +43,7 @@ import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
+import _poolAvacynianPriest from "../pool/avacynian-priest.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
 import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAwakenedAwareness from "../pool/awakened-awareness.js";
@@ -363,6 +364,7 @@ import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolKrakilin from "../pool/krakilin.js";
+import _poolKrallenhordeWantons from "../pool/krallenhorde-wantons.js";
 import _poolKreshTheBloodbraided from "../pool/kresh-the-bloodbraided.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLandbindRitual from "../pool/landbind-ritual.js";
@@ -636,6 +638,7 @@ import _poolTocasiasOnulet from "../pool/tocasias-onulet.js";
 import _poolToilTrouble from "../pool/toil-trouble.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
 import _poolTophTheFirstMetalbender from "../pool/toph-the-first-metalbender.js";
+import _poolTormentedPariah from "../pool/tormented-pariah.js";
 import _poolTourachDreadCantor from "../pool/tourach-dread-cantor.js";
 import _poolTowerGargoyle from "../pool/tower-gargoyle.js";
 import _poolTowerOfEons from "../pool/tower-of-eons.js";
@@ -661,6 +664,7 @@ import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVampireLacerator from "../pool/vampire-lacerator.js";
+import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
@@ -767,6 +771,7 @@ const shard: CardShard = {
     _poolAtzocanSeer,
     _poolAugurOfAutumn,
     _poolAuriokTransfixer,
+    _poolAvacynianPriest,
     _poolAvenFisher,
     _poolAwakenTheBloodAvatar,
     _poolAwakenedAwareness,
@@ -1087,6 +1092,7 @@ const shard: CardShard = {
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
     _poolKrakilin,
+    _poolKrallenhordeWantons,
     _poolKreshTheBloodbraided,
     _poolLaeliaTheBladeReforged,
     _poolLandbindRitual,
@@ -1360,6 +1366,7 @@ const shard: CardShard = {
     _poolToilTrouble,
     _poolTopazDragon,
     _poolTophTheFirstMetalbender,
+    _poolTormentedPariah,
     _poolTourachDreadCantor,
     _poolTowerGargoyle,
     _poolTowerOfEons,
@@ -1385,6 +1392,7 @@ const shard: CardShard = {
     _poolUnnaturalEndurance,
     _poolValleyFlamecaller,
     _poolVampireLacerator,
+    _poolVampiricFury,
     _poolVaporSnag,
     _poolVault75MiddleSchool,
     _poolVedalkenEngineer,

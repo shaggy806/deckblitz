@@ -71,6 +71,7 @@ import _poolBlightbellyRat from "../pool/blightbelly-rat.js";
 import _poolBlightedGorge from "../pool/blighted-gorge.js";
 import _poolBlisteringFirecat from "../pool/blistering-firecat.js";
 import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
+import _poolBloodOgre from "../pool/blood-ogre.js";
 import _poolBloodPrice from "../pool/blood-price.js";
 import _poolBloodSeeker from "../pool/blood-seeker.js";
 import _poolBloodgiftDemon from "../pool/bloodgift-demon.js";
@@ -797,6 +798,7 @@ const shard: CardShard = {
     _poolBlightedGorge,
     _poolBlisteringFirecat,
     _poolBlizzardElemental,
+    _poolBloodOgre,
     _poolBloodPrice,
     _poolBloodSeeker,
     _poolBloodgiftDemon,

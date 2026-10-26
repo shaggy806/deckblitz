@@ -75,6 +75,7 @@ import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
 import _poolBloodiedGhost from "../pool/bloodied-ghost.js";
+import _poolBloodrageVampire from "../pool/bloodrage-vampire.js";
 import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
@@ -659,6 +660,7 @@ import _poolTremor from "../pool/tremor.js";
 import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
 import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
+import _poolTrollhide from "../pool/trollhide.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
 import _poolTyrantsScorn from "../pool/tyrants-scorn.js";
@@ -716,6 +718,7 @@ import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
+import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
@@ -816,6 +819,7 @@ const shard: CardShard = {
     _poolBloodKnight,
     _poolBloodbraidChallenger,
     _poolBloodiedGhost,
+    _poolBloodrageVampire,
     _poolBloodtitheCollector,
     _poolBoarQPine,
     _poolBogardanPhoenix,
@@ -1400,6 +1404,7 @@ const shard: CardShard = {
     _poolTriangleOfWar,
     _poolTributeToHorobi,
     _poolTributeToUrborg,
+    _poolTrollhide,
     _poolTrynnChampionOfFreedom,
     _poolTuskedColossodon,
     _poolTyrantsScorn,
@@ -1457,6 +1462,7 @@ const shard: CardShard = {
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,
+    _poolWreathOfGeists,
     _poolWritOfReturn,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,

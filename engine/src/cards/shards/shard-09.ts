@@ -317,6 +317,7 @@ import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
 import _poolInvasionOfDominaria from "../pool/invasion-of-dominaria.js";
 import _poolInvasionOfUlgrotha from "../pool/invasion-of-ulgrotha.js";
+import _poolIronfang from "../pool/ironfang.js";
 import _poolIronhoofBoar from "../pool/ironhoof-boar.js";
 import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
@@ -557,6 +558,7 @@ import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
+import _poolSkaabGoliath from "../pool/skaab-goliath.js";
 import _poolSkyScourer from "../pool/sky-scourer.js";
 import _poolSkyclaveBasilica from "../pool/skyclave-basilica.js";
 import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
@@ -1057,6 +1059,7 @@ const shard: CardShard = {
     _poolInspiredSkypainter,
     _poolInvasionOfDominaria,
     _poolInvasionOfUlgrotha,
+    _poolIronfang,
     _poolIronhoofBoar,
     _poolIrrigatedFarmland,
     _poolJackedRabbit,
@@ -1297,6 +1300,7 @@ const shard: CardShard = {
     _poolSilkbindFaerie,
     _poolSilkguard,
     _poolSimicAscendancy,
+    _poolSkaabGoliath,
     _poolSkyScourer,
     _poolSkyclaveBasilica,
     _poolSkyspearCavalry,

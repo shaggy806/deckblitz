@@ -222,6 +222,7 @@ import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
+import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
@@ -244,6 +245,7 @@ import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHackrobat from "../pool/hackrobat.js";
 import _poolHailStorm from "../pool/hail-storm.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
+import _poolHamletCaptain from "../pool/hamlet-captain.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
@@ -421,6 +423,7 @@ import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
 import _poolPelakkaPredation from "../pool/pelakka-predation.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
 import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
+import _poolPhantasmalBear from "../pool/phantasmal-bear.js";
 import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
@@ -532,6 +535,7 @@ import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
+import _poolSlayerOfTheWicked from "../pool/slayer-of-the-wicked.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
 import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolFulminatorMage,
     _poolGargosViciousWatcher,
     _poolGatherTheTownsfolk,
+    _poolGatstafShepherd,
     _poolGhostform,
     _poolGlacialFortress,
     _poolGlazeFiend,
@@ -964,6 +969,7 @@ const shard: CardShard = {
     _poolHackrobat,
     _poolHailStorm,
     _poolHakodaSelflessCommander,
+    _poolHamletCaptain,
     _poolHatcherySpider,
     _poolHauntedScreen,
     _poolHavocFestival,
@@ -1141,6 +1147,7 @@ const shard: CardShard = {
     _poolPelakkaPredation,
     _poolPerilousMyr,
     _poolPesteredWellguard,
+    _poolPhantasmalBear,
     _poolPhantomInterference,
     _poolPhoenixFleetAirship,
     _poolPhyresis,
@@ -1252,6 +1259,7 @@ const shard: CardShard = {
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
     _poolSkyreaping,
+    _poolSlayerOfTheWicked,
     _poolSlipperyBogle,
     _poolSlipperyScoundrel,
     _poolSlithAscendant,

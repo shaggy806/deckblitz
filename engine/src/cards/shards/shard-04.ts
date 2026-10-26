@@ -191,6 +191,7 @@ import _poolFaultgrinder from "../pool/faultgrinder.js";
 import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
+import _poolFesterhideBoar from "../pool/festerhide-boar.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
@@ -256,6 +257,7 @@ import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
 import _poolHazardousConditions from "../pool/hazardous-conditions.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
+import _poolHeadlessSkaab from "../pool/headless-skaab.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
@@ -564,6 +566,7 @@ import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStartle from "../pool/startle.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
+import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
@@ -898,6 +901,7 @@ const shard: CardShard = {
     _poolFearOfLostTeeth,
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
+    _poolFesterhideBoar,
     _poolFieldSurgeon,
     _poolFierceEmpath,
     _poolFigureOfDestiny,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolHardlightContainment,
     _poolHazardousConditions,
     _poolHazeriderDrake,
+    _poolHeadlessSkaab,
     _poolHealerOfThePride,
     _poolHeapDoll,
     _poolHeartwoodTreefolk,
@@ -1271,6 +1276,7 @@ const shard: CardShard = {
     _poolStartle,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
+    _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,
     _poolStreamOfLife,

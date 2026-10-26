@@ -36,6 +36,7 @@ import _poolArchOfOrazca from "../pool/arch-of-orazca.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
+import _poolAshmouthHound from "../pool/ashmouth-hound.js";
 import _poolAvatarOfSlaughter from "../pool/avatar-of-slaughter.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
@@ -536,6 +537,7 @@ import _poolSnowDevil from "../pool/snow-devil.js";
 import _poolSocialSnub from "../pool/social-snub.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
+import _poolSomberwaldSpider from "../pool/somberwald-spider.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSoulshriek from "../pool/soulshriek.js";
@@ -761,6 +763,7 @@ const shard: CardShard = {
     _poolArchiveArbiter,
     _poolArvadTheCursed,
     _poolAscendantPackleader,
+    _poolAshmouthHound,
     _poolAvatarOfSlaughter,
     _poolAvenCloudchaser,
     _poolAvenSentry,
@@ -1261,6 +1264,7 @@ const shard: CardShard = {
     _poolSocialSnub,
     _poolSoldierMilitaryProgram,
     _poolSolitude,
+    _poolSomberwaldSpider,
     _poolSongOfStupefaction,
     _poolSoulherder,
     _poolSoulshriek,

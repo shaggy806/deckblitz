@@ -416,6 +416,7 @@ import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grand
 import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
 import _poolOmitVariables from "../pool/omit-variables.js";
 import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
+import _poolOrchardSpirit from "../pool/orchard-spirit.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
@@ -660,6 +661,7 @@ import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVileManifestation from "../pool/vile-manifestation.js";
+import _poolVillagersOfEstwald from "../pool/villagers-of-estwald.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolViolentEchoes from "../pool/violent-echoes.js";
 import _poolVisageOfDread from "../pool/visage-of-dread.js";
@@ -1140,6 +1142,7 @@ const shard: CardShard = {
     _poolOmenOfTheHunt,
     _poolOmitVariables,
     _poolOnduSkyruins,
+    _poolOrchardSpirit,
     _poolOrcishLumberjack,
     _poolOrphansOfTheWheat,
     _poolOrzhovCluestone,
@@ -1384,6 +1387,7 @@ const shard: CardShard = {
     _poolVibrantOutburst,
     _poolVictorTimelyWilyTycoon,
     _poolVileManifestation,
+    _poolVillagersOfEstwald,
     _poolVillainousWrath,
     _poolViolentEchoes,
     _poolVisageOfDread,

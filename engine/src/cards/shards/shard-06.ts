@@ -232,6 +232,7 @@ import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFumarole from "../pool/fumarole.js";
+import _poolFurybornHellkite from "../pool/furyborn-hellkite.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGalvanize from "../pool/galvanize.js";
@@ -940,6 +941,7 @@ const shard: CardShard = {
     _poolFrostMarsh,
     _poolFrozenShade,
     _poolFumarole,
+    _poolFurybornHellkite,
     _poolFyndhornElves,
     _poolGalvanicBlast,
     _poolGalvanize,

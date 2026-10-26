@@ -282,6 +282,7 @@ import _poolHorizonSeeker from "../pool/horizon-seeker.js";
 import _poolHornbashMentor from "../pool/hornbash-mentor.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
 import _poolHorribleHordes from "../pool/horrible-hordes.js";
+import _poolHowlpackOfEstwald from "../pool/howlpack-of-estwald.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
 import _poolHungerOfTheHowlpack from "../pool/hunger-of-the-howlpack.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
@@ -511,6 +512,7 @@ import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
+import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
@@ -580,6 +582,7 @@ import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
 import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
 import _poolStormHerd from "../pool/storm-herd.js";
+import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -606,6 +609,7 @@ import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
+import _poolTectonicRift from "../pool/tectonic-rift.js";
 import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
@@ -997,6 +1001,7 @@ const shard: CardShard = {
     _poolHornbashMentor,
     _poolHornetQueen,
     _poolHorribleHordes,
+    _poolHowlpackOfEstwald,
     _poolHulkingRaptor,
     _poolHungerOfTheHowlpack,
     _poolHungrySpriggan,
@@ -1226,6 +1231,7 @@ const shard: CardShard = {
     _poolScapeshift,
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
+    _poolScourgeOfGeierReach,
     _poolScrollboost,
     _poolSeeBeyond,
     _poolSeeRed,
@@ -1295,6 +1301,7 @@ const shard: CardShard = {
     _poolStitchersGraft,
     _poolStoneworkPackbeast,
     _poolStormHerd,
+    _poolStormbloodBerserker,
     _poolStormchaserChimera,
     _poolStrawSoldiers,
     _poolStripedRiverwinder,
@@ -1321,6 +1328,7 @@ const shard: CardShard = {
     _poolTarPitWarrior,
     _poolTasseledDromedary,
     _poolTeamTransmitter,
+    _poolTectonicRift,
     _poolTempleOfTheDragonQueen,
     _poolTemporaryLockdown,
     _poolTerraStomper,
