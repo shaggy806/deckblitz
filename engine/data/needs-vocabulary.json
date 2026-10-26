@@ -11042,15 +11042,14 @@
    "example": "Faith's Shield's fateful hour: \"you gain protection from the color of your choice until end of turn\"."
   },
   "effect:tap-all-except-source": {
-   "family": "effect:tap-extensions",
    "example": "Thundermare: 'tap all other creatures' — tap-all has no exceptSource"
   },
   "static:tap-opponents-lands-for-mana": {
-   "family": "static:mana-extensions",
+   "family": "effect:add-mana-extensions",
    "example": "Piracy: 'until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.'"
   },
   "static:unblocked-assign-damage-to-creature": {
-   "family": "static:combat-damage-assignment",
+   "family": "static:combat-restriction-extensions",
    "example": "Cunning Giant: 'if this creature is unblocked, you may have it assign its combat damage to a creature defending player controls'"
   }
  }
