@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import type { TargetRef } from "../state.js";
+import type { TargetRef } from "../target.js";
 import { A, B, activate, destroy, lands, life, pickPermanents, ref, spawn, table, zone } from "./harness.js";
 
 /** `source` deals `amount` damage to `to`. */
