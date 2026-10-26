@@ -163,6 +163,7 @@ import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
+import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
@@ -556,6 +557,7 @@ import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
+import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
@@ -812,6 +814,7 @@ const shard: CardShard = {
     _poolElderDruid,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
+    _poolEmbraceTheUnknown,
     _poolErinisGloomStalker,
     _poolEssenceCapture,
     _poolEssenceDrain,
@@ -1205,6 +1208,7 @@ const shard: CardShard = {
     _poolThermokarst,
     _poolThinkTwice,
     _poolThornLieutenant,
+    _poolThroesOfChaos,
     _poolThunderwolfCavalry,
     _poolTidepoolTurtle,
     _poolTitansVanguard,

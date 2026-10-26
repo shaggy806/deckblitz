@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, activate, cast, graveyard, hand, life, lands, ref, spawn, table, toGraveyard, toHand, tokensNamed, zone } from "./harness.js";
+import { A, B, activate, cast, graveyard, hand, life, lands, pt, ref, spawn, table, toGraveyard, toHand, tokensNamed, zone } from "./harness.js";
 
 // Eventide's retrace (rule 702.81a): cast from your graveyard by discarding a
 // land card as an additional cost; unlike flashback nothing exiles it. And
@@ -77,5 +77,35 @@ describe("the untap symbol {Q}", () => {
     const flayer = spawn(game, "Hateflayer", A, { tapped: true });
     activate(game, flayer, 0, { targets: [ref(B)] });
     expect(life(game, B)).toBe(15);
+  });
+
+  it("Umbral Mantle grants its {Q} pump to the equipped creature", () => {
+    const { game } = table();
+    lands(game, "Wastes", 3);
+    const mantle = spawn(game, "Umbral Mantle");
+    const bears = spawn(game, "Grizzly Bears", A, { tapped: true });
+    activate(game, mantle, 0, { targets: [ref(bears)] });
+    const pump = game
+      .legalActions(A)
+      .find((a) => a.kind === "activate-ability" && a.source === bears);
+    expect(pump).toBeDefined();
+    activate(game, bears, (pump as { abilityIndex: number }).abilityIndex);
+    expect(game.state.objects[bears].tapped).toBe(false);
+    expect(pt(game, bears).power).toBe(4);
+  });
+});
+
+describe("retrace beyond Eventide", () => {
+  it("Formless Genesis makes an X/X for the lands in your graveyard as it resolves", () => {
+    const { game } = table();
+    lands(game, "Forest", 3);
+    const genesis = toGraveyard(game, "Formless Genesis");
+    toGraveyard(game, "Forest");
+    cast(game, genesis, { via: "retrace" });
+    const token = game.state.zones.shared.battlefield.find(
+      (id) => game.state.objects[id].cardName === "Shapeshifter Token (X/X Changeling Deathtouch)",
+    );
+    expect(token).toBeDefined();
+    expect(pt(game, token as ObjectId)).toEqual({ power: 2, toughness: 2 });
   });
 });

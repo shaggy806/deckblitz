@@ -691,6 +691,7 @@ import _tokensMoloidToken from "../tokens/moloid-token.js";
 import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
 import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
+import _tokensShapeshifterTokenChangelingDeathtouch from "../tokens/shapeshifter-token-changeling-deathtouch.js";
 import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
 import _tokensSpiritTokenExperienceCounters from "../tokens/spirit-token-experience-counters.js";
 import _tokensThrullToken from "../tokens/thrull-token.js";
@@ -1388,6 +1389,7 @@ const shard: CardShard = {
     _tokensRedElementalToken31,
     _tokensRedSpiritTokenMenace,
     _tokensScarecrowToken,
+    _tokensShapeshifterTokenChangelingDeathtouch,
     _tokensSpiritTokenAnafenzaUnyieldingLineage,
     _tokensSpiritTokenExperienceCounters,
     _tokensThrullToken,

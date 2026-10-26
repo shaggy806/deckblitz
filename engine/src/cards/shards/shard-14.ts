@@ -147,6 +147,7 @@ import _poolDeathWatch from "../pool/death-watch.js";
 import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
+import _poolDecayingTimeLoop from "../pool/decaying-time-loop.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolDeathbloomThallid,
     _poolDeathcapCultivator,
     _poolDebtorsTransport,
+    _poolDecayingTimeLoop,
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,

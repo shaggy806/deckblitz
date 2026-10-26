@@ -4296,6 +4296,7 @@ import _poolDebtorsKnell from "./pool/debtors-knell.js";
 import _poolDebtorsTransport from "./pool/debtors-transport.js";
 import _poolDecadentDragon from "./pool/decadent-dragon.js";
 import _poolDecanterOfEndlessWater from "./pool/decanter-of-endless-water.js";
+import _poolDecayingTimeLoop from "./pool/decaying-time-loop.js";
 import _poolDeceit from "./pool/deceit.js";
 import _poolDeceiveTheMessenger from "./pool/deceive-the-messenger.js";
 import _poolDeception from "./pool/deception.js";
@@ -5498,6 +5499,7 @@ import _poolEmbraalBruiser from "./pool/embraal-bruiser.js";
 import _poolEmbraalGearSmasher from "./pool/embraal-gear-smasher.js";
 import _poolEmbraceOblivion from "./pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "./pool/embrace-the-paradox.js";
+import _poolEmbraceTheUnknown from "./pool/embrace-the-unknown.js";
 import _poolEmeraldCharm from "./pool/emerald-charm.js";
 import _poolEmeraldDragonfly from "./pool/emerald-dragonfly.js";
 import _poolEmeraldMedallion from "./pool/emerald-medallion.js";
@@ -6069,6 +6071,7 @@ import _poolFaridehsFireball from "./pool/faridehs-fireball.js";
 import _poolFarmMarket from "./pool/farm-market.js";
 import _poolFarm from "./pool/farm.js";
 import _poolFarmerCotton from "./pool/farmer-cotton.js";
+import _poolFarmsteadGleaner from "./pool/farmstead-gleaner.js";
 import _poolFarmstead from "./pool/farmstead.js";
 import _poolFarrelsZealot from "./pool/farrels-zealot.js";
 import _poolFarseek from "./pool/farseek.js";
@@ -6683,6 +6686,7 @@ import _poolFormOfTheDinosaur from "./pool/form-of-the-dinosaur.js";
 import _poolFormationBreaker from "./pool/formation-breaker.js";
 import _poolFormidableCommons from "./pool/formidable-commons.js";
 import _poolFormidableSpeaker from "./pool/formidable-speaker.js";
+import _poolFormlessGenesis from "./pool/formless-genesis.js";
 import _poolForsakeTheWorldly from "./pool/forsake-the-worldly.js";
 import _poolForsakenDrifters from "./pool/forsaken-drifters.js";
 import _poolForsakenMiner from "./pool/forsaken-miner.js";
@@ -18667,6 +18671,7 @@ import _poolThrivingSkyclaw from "./pool/thriving-skyclaw.js";
 import _poolThrivingTurtle from "./pool/thriving-turtle.js";
 import _poolThroatSlitter from "./pool/throat-slitter.js";
 import _poolThroatseeker from "./pool/throatseeker.js";
+import _poolThroesOfChaos from "./pool/throes-of-chaos.js";
 import _poolThroneOfBone from "./pool/throne-of-bone.js";
 import _poolThroneOfDeath from "./pool/throne-of-death.js";
 import _poolThroneOfGeth from "./pool/throne-of-geth.js";
@@ -19404,6 +19409,7 @@ import _poolUmaraWizard from "./pool/umara-wizard.js";
 import _poolUmbralCollarZealot from "./pool/umbral-collar-zealot.js";
 import _poolUmbralExpanse from "./pool/umbral-expanse.js";
 import _poolUmbralJuke from "./pool/umbral-juke.js";
+import _poolUmbralMantle from "./pool/umbral-mantle.js";
 import _poolUmbrisFearManifest from "./pool/umbris-fear-manifest.js";
 import _poolUmezawasCharm from "./pool/umezawas-charm.js";
 import _poolUnassumingSage from "./pool/unassuming-sage.js";
@@ -21661,6 +21667,7 @@ import _tokensSculptureTreasureToken from "./tokens/sculpture-treasure-token.js"
 import _tokensSerfToken from "./tokens/serf-token.js";
 import _tokensServoToken from "./tokens/servo-token.js";
 import _tokensShapeshifterTokenBlue from "./tokens/shapeshifter-token-blue.js";
+import _tokensShapeshifterTokenChangelingDeathtouch from "./tokens/shapeshifter-token-changeling-deathtouch.js";
 import _tokensShapeshifterTokenIrregularCohort from "./tokens/shapeshifter-token-irregular-cohort.js";
 import _tokensShapeshifterToken from "./tokens/shapeshifter-token.js";
 import _tokensShardToken from "./tokens/shard-token.js";
@@ -26110,6 +26117,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDebtorsTransport,
   _poolDecadentDragon,
   _poolDecanterOfEndlessWater,
+  _poolDecayingTimeLoop,
   _poolDeceit,
   _poolDeceiveTheMessenger,
   _poolDeception,
@@ -27312,6 +27320,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmbraalGearSmasher,
   _poolEmbraceOblivion,
   _poolEmbraceTheParadox,
+  _poolEmbraceTheUnknown,
   _poolEmeraldCharm,
   _poolEmeraldDragonfly,
   _poolEmeraldMedallion,
@@ -27883,6 +27892,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFarmMarket,
   _poolFarm,
   _poolFarmerCotton,
+  _poolFarmsteadGleaner,
   _poolFarmstead,
   _poolFarrelsZealot,
   _poolFarseek,
@@ -28497,6 +28507,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFormationBreaker,
   _poolFormidableCommons,
   _poolFormidableSpeaker,
+  _poolFormlessGenesis,
   _poolForsakeTheWorldly,
   _poolForsakenDrifters,
   _poolForsakenMiner,
@@ -40481,6 +40492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThrivingTurtle,
   _poolThroatSlitter,
   _poolThroatseeker,
+  _poolThroesOfChaos,
   _poolThroneOfBone,
   _poolThroneOfDeath,
   _poolThroneOfGeth,
@@ -41218,6 +41230,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUmbralCollarZealot,
   _poolUmbralExpanse,
   _poolUmbralJuke,
+  _poolUmbralMantle,
   _poolUmbrisFearManifest,
   _poolUmezawasCharm,
   _poolUnassumingSage,
@@ -43481,6 +43494,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSerfToken,
   _tokensServoToken,
   _tokensShapeshifterTokenBlue,
+  _tokensShapeshifterTokenChangelingDeathtouch,
   _tokensShapeshifterTokenIrregularCohort,
   _tokensShapeshifterToken,
   _tokensShardToken,
@@ -47937,6 +47951,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/debtors-transport": _poolDebtorsTransport,
   "pool/decadent-dragon": _poolDecadentDragon,
   "pool/decanter-of-endless-water": _poolDecanterOfEndlessWater,
+  "pool/decaying-time-loop": _poolDecayingTimeLoop,
   "pool/deceit": _poolDeceit,
   "pool/deceive-the-messenger": _poolDeceiveTheMessenger,
   "pool/deception": _poolDeception,
@@ -49139,6 +49154,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/embraal-gear-smasher": _poolEmbraalGearSmasher,
   "pool/embrace-oblivion": _poolEmbraceOblivion,
   "pool/embrace-the-paradox": _poolEmbraceTheParadox,
+  "pool/embrace-the-unknown": _poolEmbraceTheUnknown,
   "pool/emerald-charm": _poolEmeraldCharm,
   "pool/emerald-dragonfly": _poolEmeraldDragonfly,
   "pool/emerald-medallion": _poolEmeraldMedallion,
@@ -49710,6 +49726,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/farm-market": _poolFarmMarket,
   "pool/farm": _poolFarm,
   "pool/farmer-cotton": _poolFarmerCotton,
+  "pool/farmstead-gleaner": _poolFarmsteadGleaner,
   "pool/farmstead": _poolFarmstead,
   "pool/farrels-zealot": _poolFarrelsZealot,
   "pool/farseek": _poolFarseek,
@@ -50324,6 +50341,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/formation-breaker": _poolFormationBreaker,
   "pool/formidable-commons": _poolFormidableCommons,
   "pool/formidable-speaker": _poolFormidableSpeaker,
+  "pool/formless-genesis": _poolFormlessGenesis,
   "pool/forsake-the-worldly": _poolForsakeTheWorldly,
   "pool/forsaken-drifters": _poolForsakenDrifters,
   "pool/forsaken-miner": _poolForsakenMiner,
@@ -62308,6 +62326,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thriving-turtle": _poolThrivingTurtle,
   "pool/throat-slitter": _poolThroatSlitter,
   "pool/throatseeker": _poolThroatseeker,
+  "pool/throes-of-chaos": _poolThroesOfChaos,
   "pool/throne-of-bone": _poolThroneOfBone,
   "pool/throne-of-death": _poolThroneOfDeath,
   "pool/throne-of-geth": _poolThroneOfGeth,
@@ -63045,6 +63064,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/umbral-collar-zealot": _poolUmbralCollarZealot,
   "pool/umbral-expanse": _poolUmbralExpanse,
   "pool/umbral-juke": _poolUmbralJuke,
+  "pool/umbral-mantle": _poolUmbralMantle,
   "pool/umbris-fear-manifest": _poolUmbrisFearManifest,
   "pool/umezawas-charm": _poolUmezawasCharm,
   "pool/unassuming-sage": _poolUnassumingSage,
@@ -65302,6 +65322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/serf-token": _tokensSerfToken,
   "tokens/servo-token": _tokensServoToken,
   "tokens/shapeshifter-token-blue": _tokensShapeshifterTokenBlue,
+  "tokens/shapeshifter-token-changeling-deathtouch": _tokensShapeshifterTokenChangelingDeathtouch,
   "tokens/shapeshifter-token-irregular-cohort": _tokensShapeshifterTokenIrregularCohort,
   "tokens/shapeshifter-token": _tokensShapeshifterToken,
   "tokens/shard-token": _tokensShardToken,

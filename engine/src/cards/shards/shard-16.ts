@@ -210,6 +210,7 @@ import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
 import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
+import _poolFormlessGenesis from "../pool/formless-genesis.js";
 import _poolFoulOrchard from "../pool/foul-orchard.js";
 import _poolFrilledCaveWurm from "../pool/frilled-cave-wurm.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolFolkOfThePines,
     _poolFomoriNomad,
     _poolForlornPseudamma,
+    _poolFormlessGenesis,
     _poolFoulOrchard,
     _poolFrilledCaveWurm,
     _poolFrilledOculus,

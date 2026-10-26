@@ -435,7 +435,9 @@
   "trigger:self-sacrifice-trigger",
   "effect:flash-cast-sacrifice",
   "effect:delayed-trigger-next-cleanup",
-  "mechanic:begin-game-on-battlefield"
+  "mechanic:begin-game-on-battlefield",
+  "keyword:retrace",
+  "cost:untap-symbol-cost"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

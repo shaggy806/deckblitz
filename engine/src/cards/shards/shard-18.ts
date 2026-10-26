@@ -176,6 +176,7 @@ import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
 import _poolExplodingBorders from "../pool/exploding-borders.js";
+import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
@@ -855,6 +856,7 @@ const shard: CardShard = {
     _poolExpansion,
     _poolExperimentalConfectioner,
     _poolExplodingBorders,
+    _poolFarmsteadGleaner,
     _poolFascination,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
