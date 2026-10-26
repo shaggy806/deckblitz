@@ -89,8 +89,9 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   wants the worse result — more damage to their own creature for a "dealt damage" trigger, more
   -1/-1 counters for a persist loop — doesn't get it. Asking needs a decision in the middle of
   `dealDamage`/`addCounter`, which are synchronous at every call site. Only Feather's exile
-  beside another exiling replacement asks today. There is also no damage redirection to a
-  third object.
+  beside another exiling replacement asks today. One-shot redirection shields exist
+  (`prevent-damage`'s `redirectTo`, rule 614.9), but a redirection's order is chosen the same
+  way — a plain prevention shield first, never asked.
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.** At a table of three
   or more, when Thieves controlled by different opponents could each take a draw, the drawing
   player chooses which applies first (the ruling), which decides who ends up drawing;

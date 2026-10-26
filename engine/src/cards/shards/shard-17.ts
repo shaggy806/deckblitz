@@ -198,6 +198,7 @@ import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
+import _poolFanningTheFlames from "../pool/fanning-the-flames.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
 import _poolFatesReversal from "../pool/fates-reversal.js";
@@ -906,6 +907,7 @@ const shard: CardShard = {
     _poolFalseDemise,
     _poolFanaticOfXenagos,
     _poolFandanielTelophoroiAscian,
+    _poolFanningTheFlames,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
     _poolFatesReversal,

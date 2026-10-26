@@ -145,6 +145,7 @@ import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
+import _poolDaughterOfAutumn from "../pool/daughter-of-autumn.js";
 import _poolDauthiHorror from "../pool/dauthi-horror.js";
 import _poolDawnsLightArcher from "../pool/dawns-light-archer.js";
 import _poolDeadReveler from "../pool/dead-reveler.js";
@@ -351,6 +352,7 @@ import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
+import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
@@ -361,6 +363,7 @@ import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMoodmarkPainter from "../pool/moodmark-painter.js";
 import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
+import _poolMortuary from "../pool/mortuary.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
@@ -443,6 +446,7 @@ import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
+import _poolRollingStones from "../pool/rolling-stones.js";
 import _poolRooftopNuisance from "../pool/rooftop-nuisance.js";
 import _poolRootSnare from "../pool/root-snare.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
@@ -517,6 +521,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
+import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
@@ -834,6 +839,7 @@ const shard: CardShard = {
     _poolDarkRitual,
     _poolDarksteelJuggernaut,
     _poolDarksteelPlate,
+    _poolDaughterOfAutumn,
     _poolDauthiHorror,
     _poolDawnsLightArcher,
     _poolDeadReveler,
@@ -1040,6 +1046,7 @@ const shard: CardShard = {
     _poolMillennialGargoyle,
     _poolMindRot,
     _poolMindcrank,
+    _poolMindwarper,
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
@@ -1050,6 +1057,7 @@ const shard: CardShard = {
     _poolMoodmarkPainter,
     _poolMoonGirlAndDevilDinosaur,
     _poolMorgueToad,
+    _poolMortuary,
     _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
     _poolMycoloth,
@@ -1132,6 +1140,7 @@ const shard: CardShard = {
     _poolRoccoCabarettiCaterer,
     _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
+    _poolRollingStones,
     _poolRooftopNuisance,
     _poolRootSnare,
     _poolRootwaterDiver,
@@ -1206,6 +1215,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSoulTithe,
     _poolSphinxOfMagosi,
+    _poolSpikeFeeder,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,

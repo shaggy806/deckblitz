@@ -47,6 +47,8 @@ const NO_TOKEN_PRINTING = new Set([
   // Carrion (MIR)'s 0/1 black Insects were never printed as a token.
   "Insect Token (Black, 0/1)",
   "Jellyfish Token",
+  // Spike Breeder (STH)'s 1/1 green Spikes were never printed as a token.
+  "Spike Token",
   // Spirit Mirror (TMP)'s 2/2 white Reflections were never printed as a token.
   "Reflection Token (White, 2/2)",
   "Jumblebones",

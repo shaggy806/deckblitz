@@ -1435,6 +1435,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(trail.complete).toBe(true);
   });
 
+  it("a redirection (rule 614.9) — the en-Kor creatures and Daughter of Autumn", () => {
+    const warrior = face("{0}: The next 1 damage that would be dealt to this creature this turn is dealt to target creature you control instead.", "Creature — Kor Warrior Knight");
+    expect(warrior.activated[0].targets).toEqual(["creature-you-control"]);
+    expect(warrior.activated[0].effect).toEqual({ kind: "prevent-damage", target: "source", amount: 1, redirectTo: 0 });
+    expect(warrior.complete).toBe(true);
+    const daughter = face("{W}: The next 1 damage that would be dealt to target creature this turn is dealt to this creature instead.", "Creature — Avatar");
+    expect(daughter.activated[0].effect).toEqual({ kind: "prevent-damage", target: 0, amount: 1, redirectTo: "source" });
+  });
+
   it("a source of your choice (rule 609.7) and a colour set (layer 5) — Alpha's Circles and Laces", () => {
     const circle = face("{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.", "Enchantment");
     expect(circle.activated[0].effect).toEqual({

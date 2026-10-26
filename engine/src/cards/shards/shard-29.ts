@@ -172,6 +172,7 @@ import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
+import _poolElvenRite from "../pool/elven-rite.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
@@ -387,6 +388,7 @@ import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNikaraLairScavenger from "../pool/nikara-lair-scavenger.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
+import _poolNomadsEnKor from "../pool/nomads-en-kor.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
 import _poolObsidianObelisk from "../pool/obsidian-obelisk.js";
@@ -888,6 +890,7 @@ const shard: CardShard = {
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
     _poolElvenFortress,
+    _poolElvenRite,
     _poolElvishPromenade,
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,
@@ -1103,6 +1106,7 @@ const shard: CardShard = {
     _poolNezumiInformant,
     _poolNikaraLairScavenger,
     _poolNipGwyllion,
+    _poolNomadsEnKor,
     _poolNoxiousDragon,
     _poolNullBrooch,
     _poolObsidianObelisk,

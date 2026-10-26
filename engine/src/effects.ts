@@ -4850,6 +4850,17 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly amount: EffectAmount | "all";
       readonly combatOnly?: boolean;
+      /** A redirection instead (rule 614.9): "The next 1 damage that would
+       * be dealt to this creature this turn is dealt to target creature you
+       * control instead" (Warrior en-Kor) is `{ target: "source", amount: 1,
+       * redirectTo: 0 }`; Daughter of Autumn's "… to target white creature
+       * … is dealt to this creature instead", `{ target: 0, redirectTo:
+       * "source" }`. The damage is dealt to `redirectTo` by the same source
+       * (`"you"`: the controller). While `redirectTo` is off the
+       * battlefield, no longer a creature, planeswalker or battle, or a
+       * player who has left, the shield does nothing (614.9). Not with
+       * `"all"`. */
+      readonly redirectTo?: EffectTargetRef | "you";
     }
   | {
       /** Damage from a source of your choice (rule 609.7): "The next time a
@@ -4874,9 +4885,18 @@ export type EffectSpec =
       readonly to: "you" | number;
       readonly amount: "next-time" | number;
       readonly gainLifePrevented?: true;
+      /** A redirection instead (rule 614.9): "The next time a source of your
+       * choice would deal damage to target creature this turn, that damage
+       * is dealt to this creature instead" (Shaman en-Kor) is `{ to: 0,
+       * amount: "next-time", redirectTo: "source" }`; Jade Monolith's "that
+       * source deals that damage to you instead", `redirectTo: "you"`. As
+       * `prevent-damage`'s `redirectTo`. */
+      readonly redirectTo?: EffectTargetRef | "you";
       /** Set by the engine on the copy the choice's answer applies: what the
        * shield protects, with target 0 the source chosen. */
       readonly protect?: TargetRef;
+      /** Set by the engine beside `protect`: where `redirectTo` sends it. */
+      readonly redirect?: TargetRef;
     }
   | {
       /** "Target spell or permanent becomes black" (Deathlace — rule 613.1e,
@@ -6991,7 +7011,7 @@ export interface EffectApi {
   preventAllCombatDamage(by?: CardFilter): void;
   /** Add a one-shot damage-prevention shield on `target` (a player or object)
    * for `amount` damage this turn — Healing Salve (ROADMAP Phase 11 EG-6). */
-  preventDamage(target: TargetRef, amount: number | "all", combatOnly: boolean): void;
+  preventDamage(target: TargetRef, amount: number | "all", combatOnly: boolean, redirectTo?: TargetRef): void;
   /** Ask for a source of damage (rule 609.7a) — the permanents and spells
    * on the stack matching `filter` — and apply `then` to it as target 0. See
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
@@ -7004,6 +7024,7 @@ export interface EffectApi {
     amount: number | "next-time",
     filter: CardFilter | undefined,
     gainLifePrevented: boolean,
+    redirectTo?: TargetRef,
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
   becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration): void;
@@ -8197,6 +8218,14 @@ function resolveEffectTarget(
     return host === undefined ? undefined : { kind: "object", object: host };
   }
   return ctx.targets[ref];
+}
+
+/** Where a redirection's `redirectTo` sends the damage (rule 614.9), or
+ * `undefined` when it names nothing still legal. */
+function redirectRef(ref: EffectTargetRef | "you", ctx: ResolutionContext): TargetRef | undefined {
+  if (ref === "you") return { kind: "player", player: ctx.controller };
+  if (illegalSlot(ref, ctx)) return undefined;
+  return resolveEffectTarget(ref, ctx);
 }
 
 /** Whether slot `ref` held a target found illegal as the spell or ability
@@ -10730,9 +10759,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "prevent-damage": {
       const ref = resolveEffectTarget(spec.target, ctx);
-      if (ref !== undefined) {
-        ctx.preventDamage(ref, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx), spec.combatOnly ?? false);
+      if (ref === undefined) return;
+      if (spec.redirectTo !== undefined) {
+        // Rule 614.9: nowhere to send it (an illegal target), no shield.
+        const to = redirectRef(spec.redirectTo, ctx);
+        if (to !== undefined && spec.amount !== "all") {
+          ctx.preventDamage(ref, amountValue(spec.amount, ctx), spec.combatOnly ?? false, to);
+        }
+        return;
       }
+      ctx.preventDamage(ref, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx), spec.combatOnly ?? false);
       return;
     }
     case "prevent-damage-from-chosen-source": {
@@ -10740,14 +10776,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.protect !== undefined) {
         const source = resolveEffectTarget(0, ctx);
         if (source !== undefined) {
-          ctx.preventDamageFrom(source, spec.protect, spec.amount, spec.filter, spec.gainLifePrevented === true);
+          ctx.preventDamageFrom(
+            source,
+            spec.protect,
+            spec.amount,
+            spec.filter,
+            spec.gainLifePrevented === true,
+            spec.redirect,
+          );
         }
         return;
       }
       const protect: TargetRef | undefined =
         spec.to === "you" ? { kind: "player", player: ctx.controller } : resolveEffectTarget(spec.to, ctx);
       if (protect === undefined) return;
-      ctx.chooseDamageSource(spec.filter ?? {}, { ...spec, protect });
+      const redirect = spec.redirectTo === undefined ? undefined : redirectRef(spec.redirectTo, ctx);
+      if (spec.redirectTo !== undefined && redirect === undefined) return;
+      ctx.chooseDamageSource(spec.filter ?? {}, { ...spec, protect, ...(redirect !== undefined ? { redirect } : {}) });
       return;
     }
     case "become-color": {

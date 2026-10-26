@@ -645,6 +645,7 @@ import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVengefulReaper from "../pool/vengeful-reaper.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
+import _poolVerdantTouch from "../pool/verdant-touch.js";
 import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
 import _poolVictorValgavothsSeneschal from "../pool/victor-valgavoths-seneschal.js";
 import _poolVineTrellis from "../pool/vine-trellis.js";
@@ -655,6 +656,7 @@ import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
+import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
@@ -1348,6 +1350,7 @@ const shard: CardShard = {
     _poolVengefulReaper,
     _poolVenserShaperSavant,
     _poolVerdantCatacombs,
+    _poolVerdantTouch,
     _poolVernadiShieldmate,
     _poolVictorValgavothsSeneschal,
     _poolVineTrellis,
@@ -1358,6 +1361,7 @@ const shard: CardShard = {
     _poolVorstclaw,
     _poolVowOfDuty,
     _poolWakerootElemental,
+    _poolWallOfEssence,
     _poolWanderingMind,
     _poolWarMammoth,
     _poolWasteland,

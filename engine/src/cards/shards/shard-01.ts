@@ -528,6 +528,7 @@ import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
 import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
+import _poolSpikeColony from "../pool/spike-colony.js";
 import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
@@ -1205,6 +1206,7 @@ const shard: CardShard = {
     _poolSphinxOfTheFinalWord,
     _poolSphinxsHerald,
     _poolSphinxsInsight,
+    _poolSpikeColony,
     _poolSpiritShield,
     _poolStab,
     _poolStarbreachWhale,

@@ -418,6 +418,7 @@ import _poolMiscast from "../pool/miscast.js";
 import _poolMischievousMystic from "../pool/mischievous-mystic.js";
 import _poolMistmeadowVanisher from "../pool/mistmeadow-vanisher.js";
 import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
+import _poolMoggBombers from "../pool/mogg-bombers.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
@@ -582,6 +583,7 @@ import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
+import _poolSpittingHydra from "../pool/spitting-hydra.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
@@ -1154,6 +1156,7 @@ const shard: CardShard = {
     _poolMischievousMystic,
     _poolMistmeadowVanisher,
     _poolMoanOfTheUnhallowed,
+    _poolMoggBombers,
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
     _poolMonstrousVortex,
@@ -1318,6 +1321,7 @@ const shard: CardShard = {
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
     _poolSpitfireBastion,
+    _poolSpittingHydra,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
     _poolStalwartAven,

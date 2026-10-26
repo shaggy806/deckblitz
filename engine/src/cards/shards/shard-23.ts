@@ -298,6 +298,7 @@ import _poolJaceBeleren from "../pool/jace-beleren.js";
 import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
 import _poolJinxedIdol from "../pool/jinxed-idol.js";
+import _poolJinxedRing from "../pool/jinxed-ring.js";
 import _poolJirinaKudro from "../pool/jirina-kudro.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
@@ -510,6 +511,7 @@ import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
+import _poolShamanEnKor from "../pool/shaman-en-kor.js";
 import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolShatteredCrypt from "../pool/shattered-crypt.js";
@@ -552,6 +554,7 @@ import _poolSoundTheTrumpets from "../pool/sound-the-trumpets.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
+import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
 import _poolSplitDecision from "../pool/split-decision.js";
 import _poolSplittingSlime from "../pool/splitting-slime.js";
@@ -997,6 +1000,7 @@ const shard: CardShard = {
     _poolJamesWanderingDad,
     _poolJetFreedomFighter,
     _poolJinxedIdol,
+    _poolJinxedRing,
     _poolJirinaKudro,
     _poolJooDeeOneOfMany,
     _poolJoyfulStormsculptor,
@@ -1209,6 +1213,7 @@ const shard: CardShard = {
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,
+    _poolShamanEnKor,
     _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
     _poolShatteredCrypt,
@@ -1251,6 +1256,7 @@ const shard: CardShard = {
     _poolSpawningBed,
     _poolSpecimenFreighter,
     _poolSpiderwigBoggart,
+    _poolSpikeSoldier,
     _poolSpiritShackle,
     _poolSplitDecision,
     _poolSplittingSlime,

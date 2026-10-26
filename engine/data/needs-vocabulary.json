@@ -3864,7 +3864,7 @@
   },
   "replacement:damage-redirection": {
    "family": "replacement:damage-modification",
-   "example": "Ancient Adamantoise: damage redirection to this creature and 'damage isn't removed during cleanup' not expressible"
+   "example": "Ancient Adamantoise: damage redirection to this creature and 'damage isn't removed during cleanup' not expressible. Built 2026-10-26 (B184) for one-shot shields only — prevent-damage's redirectTo (the en-Kor creatures, Jade Monolith); static and 'all damage by target creature' redirections still need it"
   },
   "replacement:discard-to-library-replacement": {
    "family": "replacement:new-event-replacements",
@@ -10902,6 +10902,38 @@
   "cost:discard-mana-value-x": {
    "family": "cost:discard-x-cost",
    "example": "Knollspine Invocation: \"{X}, Discard a card with mana value X\" — a discard cost whose filter reads the announced X."
+  },
+  "cost:mana-per-counter-on-source": {
+   "family": "cost:ability-cost-modification",
+   "example": "Skeleton Scavengers: an activation cost of {1} for each +1/+1 counter on it"
+  },
+  "cost:put-card-from-hand-on-library-top": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Hidden Retreat: 'Put a card from your hand on top of your library' as an activation cost"
+  },
+  "effect:look-at-target-player-library-reorder": {
+   "family": "decision:library-ordering",
+   "example": "Ransack: look at the top five of target player's library, put any number on the bottom, the rest on top in any order — look-and-choose can't act on a target player's library"
+  },
+  "effect:token-of-chosen-color-and-type": {
+   "family": "effect:missing-tokens",
+   "example": "Volrath's Laboratory: a 2/2 creature token of the color and creature type chosen as it entered"
+  },
+  "replacement:prevent-damage-by-target-spell": {
+   "family": "replacement:damage-modification",
+   "example": "Hidden Retreat: prevent all damage target instant or sorcery spell would deal this turn"
+  },
+  "static:has-full-text-of-graveyard-top-creature": {
+   "family": "effect:become-copy",
+   "example": "Volrath's Shapeshifter: has the full text of the top creature card of your graveyard (a text-changing effect, not a copy)"
+  },
+  "trigger:put-into-graveyard-caused-by-opponent": {
+   "family": "trigger:put-into-graveyard",
+   "example": "Sacred Ground: whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield"
+  },
+  "trigger:regenerated-this-way": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Skeleton Scavengers: 'when it regenerates this way, put a +1/+1 counter on it'"
   }
  }
 }

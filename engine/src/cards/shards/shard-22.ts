@@ -80,6 +80,7 @@ import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodButcher from "../pool/brood-butcher.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBroodspinner from "../pool/broodspinner.js";
+import _poolBullwhip from "../pool/bullwhip.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurningHands from "../pool/burning-hands.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
@@ -788,6 +789,7 @@ const shard: CardShard = {
     _poolBroodButcher,
     _poolBroodcallerScourge,
     _poolBroodspinner,
+    _poolBullwhip,
     _poolBuriedRuin,
     _poolBurningHands,
     _poolBurntOffering,

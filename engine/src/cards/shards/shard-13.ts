@@ -299,6 +299,7 @@ import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJaceCunningCastaway from "../pool/jace-cunning-castaway.js";
 import _poolJacesDefeat from "../pool/jaces-defeat.js";
+import _poolJadeMonolith from "../pool/jade-monolith.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJayaFieryNegotiator from "../pool/jaya-fiery-negotiator.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
@@ -483,6 +484,7 @@ import _poolSaheelisDirective from "../pool/saheelis-directive.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
+import _poolSamiteBlessing from "../pool/samite-blessing.js";
 import _poolSamutTheTested from "../pool/samut-the-tested.js";
 import _poolSandalsOfAbdallah from "../pool/sandals-of-abdallah.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
@@ -544,6 +546,7 @@ import _poolSpellSnuff from "../pool/spell-snuff.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
 import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js";
+import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolIzzetLocket,
     _poolJaceCunningCastaway,
     _poolJacesDefeat,
+    _poolJadeMonolith,
     _poolJadecraftArtisan,
     _poolJayaFieryNegotiator,
     _poolJewelEyedCobra,
@@ -1186,6 +1190,7 @@ const shard: CardShard = {
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
     _poolSalvationSwan,
+    _poolSamiteBlessing,
     _poolSamutTheTested,
     _poolSandalsOfAbdallah,
     _poolSandskitterOutrider,
@@ -1247,6 +1252,7 @@ const shard: CardShard = {
     _poolSphinxSummoner,
     _poolSpiderGwenFreeSpirit,
     _poolSpiderSlayerHatredHoned,
+    _poolSpikeWorker,
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
