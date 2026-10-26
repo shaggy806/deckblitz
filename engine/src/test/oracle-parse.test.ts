@@ -1002,6 +1002,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const whip = face("As an additional cost to cast this spell, waterbend {5}.\nDraw two cards.", "Sorcery — Lesson", {});
     expect(whip.additionalCost).toEqual({ waterbend: 5 });
     expect(whip.complete).toBe(true);
+    // The Skaabs' "exile N [creature] cards from your graveyard".
+    const goliath = face("As an additional cost to cast this spell, exile two creature cards from your graveyard.\nTrample");
+    expect(goliath.additionalCost).toEqual({ exileFromGraveyard: { count: 2, filter: { type: "creature" } } });
+    expect(goliath.complete).toBe(true);
+    expect(face("As an additional cost to cast this spell, exile six cards from your graveyard.\nFlying").additionalCost).toEqual({
+      exileFromGraveyard: { count: 6 },
+    });
     // Any spell's, a creature's too; "{X}" makes it an X spell.
     expect(face("As an additional cost to cast this spell, waterbend {X}.\nFlying").additionalCost).toEqual({
       waterbend: "x",

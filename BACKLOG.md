@@ -207,14 +207,15 @@ section keeps only what to do next.
   one or two each — `B185.json`): Avacyn Restored is whole; batch 188 the rest of Dark Ascension
   and Innistrad's next 60, on "at the beginning of enchanted player's upkeep" (with the four
   earlier Curses it unblocked — 83 authored, 21 blocked, one to three each — `B188.json`): Dark
-  Ascension is whole. **Next, the rest of Innistrad** (`cards:sets -- --set ISD`, ~52 left:
-  werewolves, flashback, morbid and the enchanted-player Curses are in the pool), then Magic
-  2012, Commander 2011, New Phyrexia, Mirrodin Besieged and Scars of Mirrodin, stopping before
-  Magic 2011. The Curses' blockers left: a static over "creatures enchanted player controls"
-  (`static:static-over-enchanted-player` — 4 now: Curses of Death's Hold, the Nightly Hunt,
-  Exhaustion, Bloodletting) is worth a look if the rest of Innistrad adds to it; a spell's
-  additional cost of exiling cards from your graveyard (`cost:exile-from-graveyard-additional`)
-  blocks the three Skaabs. Every Return to Ravnica block mechanic is now in the pool (scavenge, evolve, extort,
+  Ascension is whole; batch 191 the rest of Innistrad and Magic 2012 whole, on a spell's
+  additional cost of exiling cards from your graveyard (the Skaabs, with five earlier cards it
+  unblocked — 77 authored, 23 blocked, one each — `B191.json`): Innistrad and Magic 2012 are
+  whole. **Next, Commander 2011** (`cards:sets -- --set CMD`, 23 left), then New Phyrexia (76),
+  Mirrodin Besieged and Scars of Mirrodin, stopping before Magic 2011 — phyrexian mana,
+  infect, proliferate, metalcraft, living weapon and the Commander 2011 vote cards are worth a
+  `card:vocab` check first. The Curses' blocker left: a static over "creatures enchanted player
+  controls" (`static:static-over-enchanted-player` — 4: Curses of Death's Hold, the Nightly
+  Hunt, Exhaustion, Bloodletting). Every Return to Ravnica block mechanic is now in the pool (scavenge, evolve, extort,
   bloodrush, battalion, populate, overload, cipher, unleash, detain). Batch 167's blockers are one or two each (`B167.json`): "whenever a creature
   attacks enchanted player" (`trigger:creature-attacks-enchanted-player` — the Curses of
   Predation and the Forsaken) and the tempting offers' simultaneity

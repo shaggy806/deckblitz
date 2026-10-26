@@ -128,6 +128,7 @@ import _poolCratersClaws from "../pool/craters-claws.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
+import _poolCrownOfEmpires from "../pool/crown-of-empires.js";
 import _poolCruelBargain from "../pool/cruel-bargain.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
@@ -376,6 +377,7 @@ import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
 import _poolMilitaryDiscipline from "../pool/military-discipline.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
+import _poolMindUnbound from "../pool/mind-unbound.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMiriamHerdWhisperer from "../pool/miriam-herd-whisperer.js";
@@ -843,6 +845,7 @@ const shard: CardShard = {
     _poolCreepingTarPit,
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
+    _poolCrownOfEmpires,
     _poolCruelBargain,
     _poolCrystalSlipper,
     _poolCunningEvasion,
@@ -1091,6 +1094,7 @@ const shard: CardShard = {
     _poolMigratoryRoute,
     _poolMilitaryDiscipline,
     _poolMindSculpt,
+    _poolMindUnbound,
     _poolMinesOfMoria,
     _poolMireTriton,
     _poolMiriamHerdWhisperer,

@@ -399,6 +399,7 @@ import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
 import _poolMagusOfTheMoat from "../pool/magus-of-the-moat.js";
 import _poolMajesticHeliopterus from "../pool/majestic-heliopterus.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
+import _poolMakeshiftMauler from "../pool/makeshift-mauler.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
@@ -480,6 +481,7 @@ import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhabineBosssConfidant from "../pool/phabine-bosss-confidant.js";
+import _poolPhantasmalDragon from "../pool/phantasmal-dragon.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPineWalker from "../pool/pine-walker.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
@@ -1150,6 +1152,7 @@ const shard: CardShard = {
     _poolMagusOfTheMoat,
     _poolMajesticHeliopterus,
     _poolMakeYourMove,
+    _poolMakeshiftMauler,
     _poolMakindiSliderunner,
     _poolMandateOfAbaddon,
     _poolManicVandal,
@@ -1231,6 +1234,7 @@ const shard: CardShard = {
     _poolPestilentWolf,
     _poolPettyLarceny,
     _poolPhabineBosssConfidant,
+    _poolPhantasmalDragon,
     _poolPhenaxGodOfDeception,
     _poolPineWalker,
     _poolPiratePeddlers,

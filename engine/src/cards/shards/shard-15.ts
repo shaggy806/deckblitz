@@ -90,6 +90,7 @@ import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCloakOfInvisibility from "../pool/cloak-of-invisibility.js";
+import _poolCobbledLancer from "../pool/cobbled-lancer.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
@@ -286,6 +287,7 @@ import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
+import _poolHomicidalBrute from "../pool/homicidal-brute.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
@@ -415,6 +417,7 @@ import _poolNecropolisFiend from "../pool/necropolis-fiend.js";
 import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
+import _poolNightRevelers from "../pool/night-revelers.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
 import _poolNoMore from "../pool/no-more.js";
 import _poolNoggleHedgeMage from "../pool/noggle-hedge-mage.js";
@@ -438,6 +441,7 @@ import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPatagiaTiger from "../pool/patagia-tiger.js";
 import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
+import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
@@ -474,6 +478,7 @@ import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
+import _poolRelentlessSkaabs from "../pool/relentless-skaabs.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
@@ -778,6 +783,7 @@ const shard: CardShard = {
     _poolClearTheMind,
     _poolCliffsideLookout,
     _poolCloakOfInvisibility,
+    _poolCobbledLancer,
     _poolCodieRavenousCodex,
     _poolCollectedCompany,
     _poolCollision,
@@ -974,6 +980,7 @@ const shard: CardShard = {
     _poolHighlandWeald,
     _poolHillGiant,
     _poolHillGigas,
+    _poolHomicidalBrute,
     _poolHonor,
     _poolHostOfTheHereafter,
     _poolHulklingBurgeoningBruiser,
@@ -1103,6 +1110,7 @@ const shard: CardShard = {
     _poolNeurokInvisimancer,
     _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,
+    _poolNightRevelers,
     _poolNimbusOfTheIsles,
     _poolNoMore,
     _poolNoggleHedgeMage,
@@ -1126,6 +1134,7 @@ const shard: CardShard = {
     _poolPatagiaTiger,
     _poolPauseForReflection,
     _poolPearlOfWisdom,
+    _poolPersonalSanctuary,
     _poolPetrifyingMeddler,
     _poolPiercingExhale,
     _poolPilgrimOfTheAges,
@@ -1162,6 +1171,7 @@ const shard: CardShard = {
     _poolReduceToMemory,
     _poolRegenerate,
     _poolRegicide,
+    _poolRelentlessSkaabs,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,

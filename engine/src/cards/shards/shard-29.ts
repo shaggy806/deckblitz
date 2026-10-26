@@ -257,6 +257,8 @@ import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
 import _poolGoblinScouts from "../pool/goblin-scouts.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
+import _poolGorehornMinotaurs from "../pool/gorehorn-minotaurs.js";
+import _poolGraveBramble from "../pool/grave-bramble.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
 import _poolGrayOgre from "../pool/gray-ogre.js";
@@ -653,6 +655,7 @@ import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUginsConstruct from "../pool/ugins-construct.js";
 import _poolUlrichsKindred from "../pool/ulrichs-kindred.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
+import _poolUlvenwaldPrimordials from "../pool/ulvenwald-primordials.js";
 import _poolUmbralMantle from "../pool/umbral-mantle.js";
 import _poolUnassumingSage from "../pool/unassuming-sage.js";
 import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
@@ -702,6 +705,7 @@ import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
+import _poolWoodenStake from "../pool/wooden-stake.js";
 import _poolWorldsoulColossus from "../pool/worldsoul-colossus.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
@@ -991,6 +995,8 @@ const shard: CardShard = {
     _poolGoblinOffensive,
     _poolGoblinScouts,
     _poolGodPharaohsStatue,
+    _poolGorehornMinotaurs,
+    _poolGraveBramble,
     _poolGravelgillScoundrel,
     _poolGraveshifter,
     _poolGrayOgre,
@@ -1387,6 +1393,7 @@ const shard: CardShard = {
     _poolUginsConstruct,
     _poolUlrichsKindred,
     _poolUlvenwaldBear,
+    _poolUlvenwaldPrimordials,
     _poolUmbralMantle,
     _poolUnassumingSage,
     _poolUndercoverCrocodelf,
@@ -1436,6 +1443,7 @@ const shard: CardShard = {
     _poolWispdrinkerVampire,
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,
+    _poolWoodenStake,
     _poolWorldsoulColossus,
     _poolWortBoggartAuntie,
     _poolYellowScarvesTroops,

@@ -287,6 +287,7 @@ import _poolGrimaWormtongue from "../pool/grima-wormtongue.js";
 import _poolGrimgrinCorpseBorn from "../pool/grimgrin-corpse-born.js";
 import _poolGristleGrinner from "../pool/gristle-grinner.js";
 import _poolGrixisSlavedriver from "../pool/grixis-slavedriver.js";
+import _poolGrizzledOutcasts from "../pool/grizzled-outcasts.js";
 import _poolGuildThief from "../pool/guild-thief.js";
 import _poolHagiMob from "../pool/hagi-mob.js";
 import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
@@ -1046,6 +1047,7 @@ const shard: CardShard = {
     _poolGrimgrinCorpseBorn,
     _poolGristleGrinner,
     _poolGrixisSlavedriver,
+    _poolGrizzledOutcasts,
     _poolGuildThief,
     _poolHagiMob,
     _poolHarmattanEfreet,

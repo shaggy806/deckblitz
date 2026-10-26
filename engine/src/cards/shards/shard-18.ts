@@ -37,6 +37,7 @@ import _poolAvianChangeling from "../pool/avian-changeling.js";
 import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
 import _poolAyarasOathsworn from "../pool/ayaras-oathsworn.js";
 import _poolAzoriusSignet from "../pool/azorius-signet.js";
+import _poolBaneOfHanweir from "../pool/bane-of-hanweir.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBanishingStroke from "../pool/banishing-stroke.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
@@ -756,6 +757,7 @@ const shard: CardShard = {
     _poolAyaOfAlexandria,
     _poolAyarasOathsworn,
     _poolAzoriusSignet,
+    _poolBaneOfHanweir,
     _poolBanishingBetrayal,
     _poolBanishingStroke,
     _poolBarbedBattlegear,

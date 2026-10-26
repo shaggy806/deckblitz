@@ -2466,6 +2466,17 @@ export interface CardDefinition {
      */
     readonly behold?: BeholdSpec;
     /**
+     * "As an additional cost to cast this spell, **exile two creature cards
+     * from your graveyard**" (Skaab Ruinator; rule 601.2b): castable only
+     * with `count` matching cards in the caster's graveyard (never the spell
+     * itself, cast from there), and which ones is chosen as the cost is paid,
+     * once the spell is on the stack (601.2h), with the `choose-from-zone`
+     * decision — the same payment as an activated ability's
+     * `AbilityCost.exileFromGraveyard`. No more matching cards than that is
+     * no choice. Exiled for good even if the spell is countered.
+     */
+    readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+    /**
      * A **choice** between whole costs, of which the caster pays exactly one
      * (Bitter Triumph: "discard a card **or** pay 3 life").
      *
@@ -3534,6 +3545,7 @@ interface CardDraft {
     readonly payLifeX?: boolean;
     readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
+    readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
     readonly options?: readonly AdditionalCostOption[];
   };
   kicker?: {

@@ -2380,6 +2380,13 @@ export function parseFace(face, ctx = {}) {
       out.kicker = { cost: m[1], keyword: "waterbend" };
       continue;
     }
+    // "Exile two creature cards from your graveyard" (the Skaabs): which,
+    // chosen as the cost is paid (`additionalCost.exileFromGraveyard`).
+    if (castable && (m = /^As an additional cost to cast ~, exile (a|an|one|two|three|four|five|six|seven|eight) (creature )?cards? from your graveyard\.$/.exec(line))) {
+      const count = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8 }[m[1]];
+      out.additionalCost = { exileFromGraveyard: { count, ...(m[2] ? { filter: { type: "creature" } } : {}) } };
+      continue;
+    }
     if (castable && (m = /^As an additional cost to cast ~, behold (.+) and exile it\.$/.exec(line)) && beholdOf(m[1]) !== null) {
       out.additionalCost = { behold: { ...beholdOf(m[1]), exile: true } };
       continue;

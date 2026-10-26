@@ -11658,6 +11658,13 @@ export class Game {
           return `${player} has too few cards in hand to cast ${def.name}`;
         }
       }
+      const exileCost = def.additionalCost.exileFromGraveyard;
+      if (
+        exileCost !== undefined &&
+        this.graveyardCostCandidates(player, exileCost.filter, cardId).length < exileCost.count
+      ) {
+        return `${player} has too few cards in their graveyard to cast ${def.name}`;
+      }
       const payLife = def.additionalCost.payLife;
       // Rule 118.4 — a player may pay any life they have, down to 0.
       if (payLife !== undefined && !this.canPayLife(player, payLife)) {
@@ -13243,6 +13250,12 @@ export class Game {
       (kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined) ??
       def.additionalCost?.behold ??
       flashback?.behold;
+    // "Exile two creature cards from your graveyard" (Skaab Ruinator):
+    // which, chosen now as the cost is paid (601.2h).
+    const graveyardExile = def.additionalCost?.exileFromGraveyard;
+    if (graveyardExile !== undefined) {
+      this.withDecisionSource(cardId, () => this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo));
+    }
     if (beholdCost !== undefined) {
       const onStack = this.state.objects[cardId];
       this.withDecisionSource(cardId, () =>
@@ -15256,6 +15269,7 @@ export class Game {
     player: PlayerId,
     source: ObjectId,
     cost: { readonly count: number; readonly filter?: CardFilter },
+    priorityTo: PlayerId = player,
   ): void {
     if (cost.count <= 0) return;
     const eligible = this.graveyardCostCandidates(player, cost.filter, source);
@@ -15276,7 +15290,7 @@ export class Game {
       max: cost.count,
       destination: "exile",
       leftover: "stay",
-      priorityTo: player,
+      priorityTo,
     };
   }
 

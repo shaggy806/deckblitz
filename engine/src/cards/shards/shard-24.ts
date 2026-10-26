@@ -112,6 +112,7 @@ import _poolChandrasFury from "../pool/chandras-fury.js";
 import _poolChandrasPyrohelix from "../pool/chandras-pyrohelix.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
+import _poolCivilizedScholar from "../pool/civilized-scholar.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
@@ -444,6 +445,7 @@ import _poolQuietContemplation from "../pool/quiet-contemplation.js";
 import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
+import _poolRampagingWerewolf from "../pool/rampaging-werewolf.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRapaciousOne from "../pool/rapacious-one.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
@@ -544,6 +546,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
+import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpikeHatcher from "../pool/spike-hatcher.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
@@ -643,6 +646,7 @@ import _poolUntamedWilds from "../pool/untamed-wilds.js";
 import _poolUnyaroGriffin from "../pool/unyaro-griffin.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
+import _poolUrgentExorcism from "../pool/urgent-exorcism.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
 import _poolUrzasTower from "../pool/urzas-tower.js";
 import _poolVampireOpportunist from "../pool/vampire-opportunist.js";
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolChandrasPyrohelix,
     _poolChitteringSkitterling,
     _poolChromeCourier,
+    _poolCivilizedScholar,
     _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
@@ -1170,6 +1175,7 @@ const shard: CardShard = {
     _poolRaggedShortSpear,
     _poolRakdosLordOfRiots,
     _poolRampagingFerocidon,
+    _poolRampagingWerewolf,
     _poolRankRat,
     _poolRapaciousOne,
     _poolRecklessDetective,
@@ -1270,6 +1276,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSoulTithe,
     _poolSphinxOfMagosi,
+    _poolSpideryGrasp,
     _poolSpikeFeeder,
     _poolSpikeHatcher,
     _poolSpiresOfOrazca,
@@ -1369,6 +1376,7 @@ const shard: CardShard = {
     _poolUnyaroGriffin,
     _poolUproot,
     _poolUrGolemsEye,
+    _poolUrgentExorcism,
     _poolUrtetRemnantOfMemnarch,
     _poolUrzasTower,
     _poolVampireOpportunist,
