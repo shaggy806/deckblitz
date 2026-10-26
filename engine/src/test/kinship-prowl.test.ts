@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { activePlayerOf } from "../state.js";
 import {
   A,
   B,
@@ -19,6 +20,8 @@ import {
   table,
   toHand,
   toLibrary,
+  pickTargets,
+  tokensNamed,
   toStep,
   zone,
 } from "./harness.js";
@@ -155,5 +158,31 @@ describe("prowl", () => {
     const held = hand(game, A).length;
     cast(game, prowled, { targets: [ref(B)], altCost: true });
     expect(hand(game, A).length).toBe(held);
+  });
+
+  it("Notorious Throng: X is the damage dealt to opponents this turn, and prowl adds an extra turn", () => {
+    const { game, a } = table();
+    const boggart = spawn(game, "Prickly Boggart");
+    attack(game, a, [boggart]);
+    const throng = toHand(game, "Notorious Throng");
+    lands(game, "Island", 6);
+    cast(game, throng, { altCost: true });
+    expect(tokensNamed(game, "Faerie Rogue Token", A)).toBe(1);
+    const turn = game.state.turn.number;
+    nextTurn(game);
+    expect(game.state.turn.number).toBe(turn + 1);
+    expect(activePlayerOf(game.state)).toBe(A);
+  });
+
+  it("Enigma Thief: one optional target per opponent, returned together", () => {
+    const { game, a } = table({ players: 3 });
+    const bears = spawn(game, "Grizzly Bears", B);
+    const own = spawn(game, "Grizzly Bears");
+    lands(game, "Island", 7);
+    const thief = toHand(game, "Enigma Thief");
+    pickTargets(a, bears);
+    cast(game, thief);
+    expect(zone(game, bears)).toBe("hand");
+    expect(zone(game, own)).toBe("battlefield");
   });
 });

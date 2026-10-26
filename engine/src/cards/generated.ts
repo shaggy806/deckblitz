@@ -5781,6 +5781,7 @@ import _poolEngulfingEruption from "./pool/engulfing-eruption.js";
 import _poolEnhancedAwareness from "./pool/enhanced-awareness.js";
 import _poolEnigmaDrake from "./pool/enigma-drake.js";
 import _poolEnigmaSphinx from "./pool/enigma-sphinx.js";
+import _poolEnigmaThief from "./pool/enigma-thief.js";
 import _poolEnigmaticIncarnation from "./pool/enigmatic-incarnation.js";
 import _poolEnlarge from "./pool/enlarge.js";
 import _poolEnlightenedAscetic from "./pool/enlightened-ascetic.js";
@@ -12779,6 +12780,7 @@ import _poolNotOnMyWatch from "./pool/not-on-my-watch.js";
 import _poolNothic from "./pool/nothic.js";
 import _poolNotionRain from "./pool/notion-rain.js";
 import _poolNotionThief from "./pool/notion-thief.js";
+import _poolNotoriousThrong from "./pool/notorious-throng.js";
 import _poolNourish from "./pool/nourish.js";
 import _poolNovaFlame from "./pool/nova-flame.js";
 import _poolNovaHellkite from "./pool/nova-hellkite.js";
@@ -28301,6 +28303,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnhancedAwareness,
   _poolEnigmaDrake,
   _poolEnigmaSphinx,
+  _poolEnigmaThief,
   _poolEnigmaticIncarnation,
   _poolEnlarge,
   _poolEnlightenedAscetic,
@@ -35299,6 +35302,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNothic,
   _poolNotionRain,
   _poolNotionThief,
+  _poolNotoriousThrong,
   _poolNourish,
   _poolNovaFlame,
   _poolNovaHellkite,
@@ -50834,6 +50838,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enhanced-awareness": _poolEnhancedAwareness,
   "pool/enigma-drake": _poolEnigmaDrake,
   "pool/enigma-sphinx": _poolEnigmaSphinx,
+  "pool/enigma-thief": _poolEnigmaThief,
   "pool/enigmatic-incarnation": _poolEnigmaticIncarnation,
   "pool/enlarge": _poolEnlarge,
   "pool/enlightened-ascetic": _poolEnlightenedAscetic,
@@ -57832,6 +57837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nothic": _poolNothic,
   "pool/notion-rain": _poolNotionRain,
   "pool/notion-thief": _poolNotionThief,
+  "pool/notorious-throng": _poolNotoriousThrong,
   "pool/nourish": _poolNourish,
   "pool/nova-flame": _poolNovaFlame,
   "pool/nova-hellkite": _poolNovaHellkite,

@@ -5451,3 +5451,11 @@ engine terms. A second thing to check is a second test.
 ### Thunderous Wrath: keeping a miracle hidden
 - **Do:** Cast Divination and choose Keep hidden for Thunderous Wrath, then switch to Bob.
 - **Expect:** No trigger goes on the stack and Wrath stays in your hand. Bob's view never names it; while you were asked, Bob's banner only said you were deciding on a miracle.
+
+### Latchkey Faerie: its prowl cost is offered once a Rogue has hit a player
+- **Do:** Attack with Prickly Boggart, then in your second main phase look at Latchkey Faerie in your hand.
+- **Expect:** Before combat it costs {3}{U} only. After the Boggart deals damage, a "prowl {2}{U}" way to cast it appears; cast that way, it draws you a card as it enters.
+
+### Waterspout Weavers: kinship reveals the top card at your upkeep
+- **Do:** Pass the turn and come back to your upkeep.
+- **Expect:** You're shown the top card of your library (a Merfolk) and may reveal it; if you do, your creatures gain flying until end of turn, and the card stays on top to be drawn.

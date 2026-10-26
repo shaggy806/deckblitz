@@ -393,6 +393,7 @@ import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
+import _poolNotoriousThrong from "../pool/notorious-throng.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
 import _poolOathswornKnight from "../pool/oathsworn-knight.js";
 import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
@@ -1080,6 +1081,7 @@ const shard: CardShard = {
     _poolNoggleRobber,
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
+    _poolNotoriousThrong,
     _poolNyxbornSeaguard,
     _poolOathswornKnight,
     _poolObeliskOfUndoing,

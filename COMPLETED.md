@@ -94,6 +94,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   more); `damage-all` scoped to a targeted planeswalker's controller (Chandra's Fury). 83
   authored — Bonfire of the Damned, Sublime Archangel, Vexing Devil, Tibalt, Diabolic Revelation
   and 78 more — and 27 blocked, soulbond the most (`B182.json`). Magic 2013 is whole.
+- **Morningtide whole** (batch 186, the middle walk's second range, 2026-10-26): **built** prowl
+  (rule 702.76a, `keyword:prowl` — `prowl(mana)`, the `prowl` condition over the creature types
+  each player dealt combat damage to a player with this turn, and `self-prowl-paid`) and kinship
+  (`kinship()`, the `sharesCreatureTypeWith: "source"` filter), both read by the scaffolder. 78
+  authored — the 12 kinship cards, Latchkey Faerie, Morsel Theft, Rhys the Exiled, Sage's
+  Dousing, Stomping Slabs, the bannerets and kindred Equipment, with Enigma Thief and Notorious
+  Throng from earlier batches — and 30 blocked, clash leading with 8 (`B186.json`). Morningtide is
+  whole.
 - **Shadowmoor, the rest of the set** (batch 183, the middle walk's second range, 2026-10-26,
   `2c35e3ea`): no feature built — hybrid mana, {Q}, -1/-1 counters, wither, persist and conspire
   (batch 180's) were all in. 60 of its last 80 authored by four `card-author` agents and the

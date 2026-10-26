@@ -10934,6 +10934,30 @@
   "trigger:regenerated-this-way": {
    "family": "trigger:damage-trigger-extensions",
    "example": "Skeleton Scavengers: 'when it regenerates this way, put a +1/+1 counter on it'"
+  },
+  "static:players-cant-draw": {
+   "family": "static:draw-restriction",
+   "example": "Maralen of the Mornsong: 'Players can't draw cards' — a static stopping every draw, the draw step's included (the would-draw replacement only redirects or multiplies a draw)."
+  },
+  "keyword:champion": {
+   "family": "keyword:champion",
+   "example": "Lightning Crafter, Supreme Exemplar: Champion a [type] (rule 702.72): when it enters, sacrifice it unless you exile another [type] you control; when it leaves, the exiled card returns to the battlefield under its owner's control."
+  },
+  "filter:targets-share-no-creature-type": {
+   "family": "filter:targets-relation",
+   "example": "Rivals' Duel: 'two target creatures that share no creature types' — a constraint between two target slots, the mirror of effect:targets-share-type."
+  },
+  "cost:tap-creatures-sharing-creature-type": {
+   "family": "cost:tap-creatures",
+   "example": "Weight of Conscience: 'Tap two untapped creatures you control that share a creature type' — tapOthers with a count and a filter, but no rule that the tapped creatures share a type."
+  },
+  "effect:counter-all-spells-named-linked-exile": {
+   "family": "effect:counter-all-spells",
+   "example": "Grimoire Thief: 'counter all spells with the same name as a card exiled with this creature' — the names of a linked face-down exile, read for a counter over every spell on the stack."
+  },
+  "static:grant-prowl-to-spells": {
+   "family": "static:grant-keyword-to-spells",
+   "example": "Hunting Velociraptor: 'Dinosaur spells you cast have prowl {2}{R}' — a static granting an alternative cost (prowl) to other spells; prowl itself is built (`prowl()`), only as a card's own alternativeCost."
   }
  }
 }
