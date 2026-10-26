@@ -714,7 +714,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(rioter.activated[0].effect).toMatchObject({ kind: "exile", linked: true });
     expect(face("{2}: Exile target card from a graveyard.").activated[0].effect.linked).toBeUndefined();
     // A keyword the engine doesn't run leaves the line to a person.
-    expect(face("Bushido 2").complete).toBe(false);
+    expect(face("Splice onto Arcane {1}{R}").complete).toBe(false);
   });
 
   it("the intervening-ifs it knows become the ability's condition; others stay a TODO", () => {
