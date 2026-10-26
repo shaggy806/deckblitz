@@ -325,6 +325,7 @@ import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
+import _poolMentalVapors from "../pool/mental-vapors.js";
 import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
@@ -951,6 +952,7 @@ const shard: CardShard = {
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
+    _poolMentalVapors,
     _poolMercilessEternal,
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,

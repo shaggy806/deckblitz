@@ -210,6 +210,7 @@ function faceSource(face, ctx) {
     overload: parsed.overload,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
+    cipher: parsed.cipher,
     becomesDayAsEnters: parsed.becomesDayAsEnters,
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,

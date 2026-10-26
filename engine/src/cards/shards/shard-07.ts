@@ -247,6 +247,7 @@ import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
+import _poolHandsOfBinding from "../pool/hands-of-binding.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
 import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
@@ -951,6 +952,7 @@ const shard: CardShard = {
     _poolHaliyaAscendantCadet,
     _poolHaloHopper,
     _poolHandOfDeath,
+    _poolHandsOfBinding,
     _poolHapatraVizierOfPoisons,
     _poolHavocEater,
     _poolHeartlessSummoning,

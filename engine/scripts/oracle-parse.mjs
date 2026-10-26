@@ -2143,6 +2143,8 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
+    // Cipher (rule 702.99a) — Gatecrash's encoded instants and sorceries.
+    if (isSpell && line === "Cipher") { out.cipher = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.

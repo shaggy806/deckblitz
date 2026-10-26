@@ -566,6 +566,7 @@ import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
 import _poolStockingThePantry from "../pool/stocking-the-pantry.js";
 import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
+import _poolStolenIdentity from "../pool/stolen-identity.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
@@ -1273,6 +1274,7 @@ const shard: CardShard = {
     _poolStingerquillAnnex,
     _poolStockingThePantry,
     _poolStokeTheFlames,
+    _poolStolenIdentity,
     _poolStormStrike,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,

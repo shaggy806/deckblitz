@@ -256,6 +256,7 @@ import _poolHematiteTalisman from "../pool/hematite-talisman.js";
 import _poolHeraldOfTheFair from "../pool/herald-of-the-fair.js";
 import _poolHiddenBlade from "../pool/hidden-blade.js";
 import _poolHiddenStockpile from "../pool/hidden-stockpile.js";
+import _poolHiddenStrings from "../pool/hidden-strings.js";
 import _poolHideousEnd from "../pool/hideous-end.js";
 import _poolHighbornGhoul from "../pool/highborn-ghoul.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
@@ -935,6 +936,7 @@ const shard: CardShard = {
     _poolHeraldOfTheFair,
     _poolHiddenBlade,
     _poolHiddenStockpile,
+    _poolHiddenStrings,
     _poolHideousEnd,
     _poolHighbornGhoul,
     _poolHiredBlade,

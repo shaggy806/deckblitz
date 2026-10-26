@@ -662,6 +662,7 @@ import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
 import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
+import _tokensHorrorTokenBlueBlackFlying from "../tokens/horror-token-blue-black-flying.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
 import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.js";
 import _tokensJaceToken from "../tokens/jace-token.js";
@@ -1338,6 +1339,7 @@ const shard: CardShard = {
     _tokensElementalToken10Blue,
     _tokensGalactus,
     _tokensHalflingToken,
+    _tokensHorrorTokenBlueBlackFlying,
     _tokensHumanSoldierToken,
     _tokensInsectTokenFlyingHaste,
     _tokensJaceToken,

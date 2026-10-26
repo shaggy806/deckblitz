@@ -94,6 +94,7 @@ import _poolBurnout from "../pool/burnout.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
+import _poolCallOfTheNightwing from "../pool/call-of-the-nightwing.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
@@ -668,6 +669,7 @@ import _poolWillowSatyr from "../pool/willow-satyr.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
+import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
@@ -786,6 +788,7 @@ const shard: CardShard = {
     _poolCacklingCulprit,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
+    _poolCallOfTheNightwing,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
@@ -1360,6 +1363,7 @@ const shard: CardShard = {
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,
+    _poolWritOfReturn,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,

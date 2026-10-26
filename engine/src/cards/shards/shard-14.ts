@@ -636,6 +636,7 @@ import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
+import _poolWhisperingMadness from "../pool/whispering-madness.js";
 import _poolWhisperingWizard from "../pool/whispering-wizard.js";
 import _poolWhitesunsPassage from "../pool/whitesuns-passage.js";
 import _poolWickersmithsTools from "../pool/wickersmiths-tools.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolWeakness,
     _poolWeddingInvitation,
     _poolWhirlerRogue,
+    _poolWhisperingMadness,
     _poolWhisperingWizard,
     _poolWhitesunsPassage,
     _poolWickersmithsTools,

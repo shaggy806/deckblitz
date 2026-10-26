@@ -263,6 +263,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Homunculus Token",
   "Horror Token",
   "Horror Token (Black 0/0)",
+  "Horror Token (Blue Black Flying)",
   "Horror Token (The Final Days)",
   "Horse Token",
   "Human Citizen Token",

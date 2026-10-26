@@ -338,6 +338,7 @@ import _poolMemnarch from "../pool/memnarch.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
 import _poolMentorOfTheMeek from "../pool/mentor-of-the-meek.js";
 import _poolMeteorSword from "../pool/meteor-sword.js";
+import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
 import _poolMindRot from "../pool/mind-rot.js";
@@ -583,6 +584,7 @@ import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
 import _poolUmaraMystic from "../pool/umara-mystic.js";
 import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
+import _poolUndercityPlague from "../pool/undercity-plague.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnexplainedVision from "../pool/unexplained-vision.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
@@ -1009,6 +1011,7 @@ const shard: CardShard = {
     _poolMemoryDrain,
     _poolMentorOfTheMeek,
     _poolMeteorSword,
+    _poolMidnightRecovery,
     _poolMijaeDjinn,
     _poolMillennialGargoyle,
     _poolMindRot,
@@ -1254,6 +1257,7 @@ const shard: CardShard = {
     _poolTwoHandedAxe,
     _poolUmaraMystic,
     _poolUnchartedVoyage,
+    _poolUndercityPlague,
     _poolUnderdarkRift,
     _poolUnexplainedVision,
     _poolUnnaturalSpeed,

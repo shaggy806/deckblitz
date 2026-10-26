@@ -669,6 +669,24 @@ const DECAYED_TRIGGER: TriggeredAbility = {
 
 const EMPTY_ID_SET: ReadonlySet<ObjectId> = new Set();
 
+/** What a cipher spell may be encoded on (rule 702.99a): "a creature you
+ * control". */
+const CIPHER_HOSTS: CardFilter = { type: "creature", controlledBy: "you" };
+
+/** The ability a card encoded on a creature gives it (rule 702.99a), for
+ * that card in that exile stint: "Whenever this creature deals combat damage
+ * to a player, you may copy the encoded card and you may cast the copy
+ * without paying its mana cost." */
+function cipherTrigger(card: ObjectId, zoneChangeCount: number, name: string): TriggeredAbility {
+  return {
+    trigger: { on: "deals-combat-damage-to-player", who: "self" },
+    targets: [],
+    effect: { kind: "cast-now", encoded: { card, zoneChangeCount }, copies: 1, free: true },
+    resolve: null,
+    text: `Whenever this creature deals combat damage to a player, you may copy the encoded card (${name}) and you may cast the copy without paying its mana cost.`,
+  };
+}
+
 /** How the effect moving a permanent onto the battlefield says it enters —
  * read by the enters-battlefield replacements (rule 614.1c) as it does,
  * rather than applied after the move, so a replacement can still override
@@ -13627,7 +13645,8 @@ export class Game {
       target.modifiers.length === 0 &&
       !decayedCandidate &&
       (grantors !== undefined && grantors.length === 0) &&
-      target.zone !== "stack"
+      target.zone !== "stack" &&
+      target.encodedCards === undefined
     ) {
       return EMPTY_TRIGGERED_ENTRIES;
     }
@@ -13669,6 +13688,15 @@ export class Game {
       for (const g of grants) granted.push(...g.entries);
       if (decayedCandidate && this.characteristics(target.id).keywords.has("decayed")) {
         granted.push({ ability: DECAYED_TRIGGER, ref: { kind: "modifier", ability: DECAYED_TRIGGER } });
+      }
+      // Cipher (rule 702.99a): each card still encoded on it — exiled in the
+      // stint it was encoded in (702.99c) — gives it the trigger.
+      for (const { card, zoneChangeCount, timestamp } of target.encodedCards ?? []) {
+        const encoded = this.state.objects[card];
+        if (encoded?.zone !== "exile" || (encoded.zoneChangeCount ?? 0) !== zoneChangeCount) continue;
+        if (!grantOutlastsLoss(lostAt, timestamp)) continue;
+        const ability = cipherTrigger(card, zoneChangeCount, printedCardName(encoded));
+        granted.push({ ability, ref: { kind: "modifier", ability } });
       }
     }
     // A spell on the stack: what grants abilities to its controller's spells
@@ -17403,7 +17431,7 @@ export class Game {
    * exile on an adventure, the library, exile — and a copy ceases to exist.
    * Nothing, if it has left already.
    */
-  private leaveStackAfterResolving(id: ObjectId): void {
+  private leaveStackAfterResolving(id: ObjectId, encodeAsked = false): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
     // An ability, done resolving, ceases to exist (rule 608.2n).
@@ -17429,6 +17457,28 @@ export class Game {
       return;
     }
     const def = this.registry.get(printedCardName(object));
+    // Cipher (rule 702.99a): "you may exile this card encoded on a creature
+    // you control" is the spell's own last instruction, so it comes before
+    // anything that would replace its going to the graveyard. Asked with the
+    // spell waiting on the stack; `finishCipher` carries on with the answer.
+    if (!encodeAsked && def.cipher) {
+      const hosts = this.battlefieldMatching(object.controller, CIPHER_HOSTS);
+      if (hosts.length > 0) {
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: object.controller,
+          eligible: hosts,
+          min: 0,
+          max: 1,
+          prompt: `Cipher — exile ${printedCardName(object)} encoded on a creature you control?`,
+          then: { kind: "sequence", effects: [] },
+          source: id,
+          x: 0,
+          cipher: true,
+        };
+        return;
+      }
+    }
     // Adventure (rule 715.3) — the adventure half (face 1) resolving exiles
     // the card with a "you may cast the creature later" permission, instead
     // of going to the graveyard.
@@ -17525,6 +17575,31 @@ export class Game {
       [{ kind: "object", object: id }],
       ["exile"],
     );
+  }
+
+  /** The answer to a resolving cipher spell's choice (rule 702.99a): exiled
+   * encoded on `creature`, or — with none, or one gone since — on to its
+   * owner's graveyard as usual, whatever would replace that applying. */
+  private finishCipher(id: ObjectId, creature: ObjectId | undefined): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "stack") return;
+    if (creature === undefined || this.state.objects[creature]?.zone !== "battlefield") {
+      this.leaveStackAfterResolving(id, true);
+      return;
+    }
+    const host = this.splitOneFromStack(creature);
+    const before = object.zoneChangeCount ?? 0;
+    this.moveObject(id, "exile");
+    object.targets = null;
+    // Re-read: `moveObject` changed its zone under the narrowing above.
+    const exiled: GameObject = object;
+    if (exiled.zone !== "exile" || (exiled.zoneChangeCount ?? 0) === before) return;
+    const hostObject = this.state.objects[host];
+    hostObject.encodedCards = [
+      ...(hostObject.encodedCards ?? []),
+      { card: id, zoneChangeCount: object.zoneChangeCount ?? 0, timestamp: this.freshTimestamp() },
+    ];
+    invalidateComputedCache();
   }
 
   /** Whether rebound (rule 702.88a) applies to the resolving spell `object`:
@@ -23080,6 +23155,10 @@ export class Game {
         ),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
+      stillExiled: (card, zoneChangeCount) => {
+        const object = this.state.objects[card];
+        return object?.zone === "exile" && (object.zoneChangeCount ?? 0) === zoneChangeCount ? [card] : [];
+      },
       cardsExiledThisWay: () =>
         thisWayEntries(this.state, "exiled", since)
           .filter((e) => !e.departed)
@@ -28935,6 +29014,12 @@ export class Game {
       this.state.awaiting = null;
       this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...chosen];
       if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
+      return;
+    }
+    if (awaiting.cipher === true) {
+      this.state.awaiting = null;
+      this.finishCipher(awaiting.source, chosen[0]);
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
     const { then, source, x, priorityTo, costOf, blight, bolster } = awaiting;
@@ -36339,6 +36424,8 @@ export class Game {
     delete object.doors;
     delete object.classLevel;
     object.exiledWith = undefined;
+    // What was encoded on it stays exiled, encoded on nothing (rule 702.99c).
+    delete object.encodedCards;
     // Modes chosen for a targeted modal spell (Phase 11 EG-2) and a kicker
     // paid as it was cast (P8) both end with the stack.
     object.chosenModes = undefined;

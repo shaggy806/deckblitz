@@ -948,6 +948,20 @@ export interface GameObject {
    */
   exiledWith?: { readonly source: ObjectId; readonly zoneChangeCount: number };
   /**
+   * The cards encoded on this permanent (rule 702.99b — cipher), each with
+   * the exile stint it was encoded in. One still exiled in that stint gives
+   * it the cipher trigger (`Game.effectiveTriggeredEntries`), whoever
+   * controls it now; one that has left exile is encoded on nothing (702.99c).
+   * Cleared on any zone change.
+   */
+  encodedCards?: readonly {
+    readonly card: ObjectId;
+    readonly zoneChangeCount: number;
+    /** When it was encoded: the timestamp of the ability it grants (rule
+     * 613.7), which a loss of all abilities before then doesn't remove. */
+    readonly timestamp: number;
+  }[];
+  /**
    * How many cards have been exiled *with* this permanent (an `exile {
    * linked }` — rule 607.2a) in its battlefield stint `stint`, ever — a card
    * that has left exile since still counts (the Colfenor's Urn ruling: "over
@@ -2792,6 +2806,12 @@ export type AwaitingDecision =
        * bolsters this many (rule 701.39a — `Game.beginBolster`): exactly one,
        * singled out of a token stack, and `then` puts the counters on it. */
       readonly bolster?: number;
+      /** Set when the choice is the creature a resolving cipher spell is
+       * encoded on (rule 702.99a): up to one of its controller's creatures.
+       * `source` is the spell, waiting on the stack for the answer, which
+       * then leaves it — exiled encoded on the creature picked, or as usual
+       * with none. `then` is unused. */
+      readonly cipher?: true;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"

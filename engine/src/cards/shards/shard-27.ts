@@ -478,6 +478,7 @@ import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
+import _poolShadowSlice from "../pool/shadow-slice.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
@@ -1150,6 +1151,7 @@ const shard: CardShard = {
     _poolSergeantJohnBenton,
     _poolSerraAscendant,
     _poolShadowAlleyDenizen,
+    _poolShadowSlice,
     _poolShamblingRemains,
     _poolShieldhideDragon,
     _poolShivanDevastator,

@@ -629,6 +629,7 @@ import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
 import _poolVoidMirror from "../pool/void-mirror.js";
+import _poolVoidwalk from "../pool/voidwalk.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
 import _poolVolcanicRush from "../pool/volcanic-rush.js";
 import _poolVoltaicKey from "../pool/voltaic-key.js";
@@ -1300,6 +1301,7 @@ const shard: CardShard = {
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,
     _poolVoidMirror,
+    _poolVoidwalk,
     _poolVolatileFjord,
     _poolVolcanicRush,
     _poolVoltaicKey,
