@@ -48,6 +48,7 @@ import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
+import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
@@ -70,6 +71,7 @@ import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.j
 import _poolBestialMenace from "../pool/bestial-menace.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
+import _poolBladeTribeBerserkers from "../pool/blade-tribe-berserkers.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
@@ -296,7 +298,9 @@ import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHailOfArrows from "../pool/hail-of-arrows.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
+import _poolHaltOrder from "../pool/halt-order.js";
 import _poolHarshJustice from "../pool/harsh-justice.js";
+import _poolHeavyArbalest from "../pool/heavy-arbalest.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -390,6 +394,7 @@ import _poolMeadowboon from "../pool/meadowboon.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
+import _poolMeltTerrain from "../pool/melt-terrain.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
@@ -793,6 +798,7 @@ const shard: CardShard = {
     _poolAtog,
     _poolAttunement,
     _poolAugmentingAutomaton,
+    _poolAuriokSunchaser,
     _poolAuthority,
     _poolAvatarsWrath,
     _poolBackToNature,
@@ -815,6 +821,7 @@ const shard: CardShard = {
     _poolBestialMenace,
     _poolBifurMelodicRider,
     _poolBigApple3AM,
+    _poolBladeTribeBerserkers,
     _poolBlessedOrator,
     _poolBlightRot,
     _poolBlindCreeper,
@@ -1041,7 +1048,9 @@ const shard: CardShard = {
     _poolGuulDrazAssassin,
     _poolHailOfArrows,
     _poolHalimarExcavator,
+    _poolHaltOrder,
     _poolHarshJustice,
+    _poolHeavyArbalest,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
@@ -1135,6 +1144,7 @@ const shard: CardShard = {
     _poolMeetingOfMinds,
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
+    _poolMeltTerrain,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMinionOfLeshrac,

@@ -233,6 +233,7 @@ import _poolGlamorousGrapplers from "../pool/glamorous-grapplers.js";
 import _poolGleamOfBattle from "../pool/gleam-of-battle.js";
 import _poolGleamingBarrier from "../pool/gleaming-barrier.js";
 import _poolGleamingOverseer from "../pool/gleaming-overseer.js";
+import _poolGlintHawkIdol from "../pool/glint-hawk-idol.js";
 import _poolGluttonousTroll from "../pool/gluttonous-troll.js";
 import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
 import _poolGoblinGeneral from "../pool/goblin-general.js";
@@ -673,6 +674,7 @@ import _poolVestigeOfEmrakul from "../pool/vestige-of-emrakul.js";
 import _poolViashinoPyromancer from "../pool/viashino-pyromancer.js";
 import _poolViashinoRunner from "../pool/viashino-runner.js";
 import _poolVictualSliver from "../pool/victual-sliver.js";
+import _poolVigilForTheLost from "../pool/vigil-for-the-lost.js";
 import _poolVillainousSyndication from "../pool/villainous-syndication.js";
 import _poolVillainousWealth from "../pool/villainous-wealth.js";
 import _poolViolentImpact from "../pool/violent-impact.js";
@@ -979,6 +981,7 @@ const shard: CardShard = {
     _poolGleamOfBattle,
     _poolGleamingBarrier,
     _poolGleamingOverseer,
+    _poolGlintHawkIdol,
     _poolGluttonousTroll,
     _poolGoblinFirebomb,
     _poolGoblinGeneral,
@@ -1419,6 +1422,7 @@ const shard: CardShard = {
     _poolViashinoPyromancer,
     _poolViashinoRunner,
     _poolVictualSliver,
+    _poolVigilForTheLost,
     _poolVillainousSyndication,
     _poolVillainousWealth,
     _poolViolentImpact,

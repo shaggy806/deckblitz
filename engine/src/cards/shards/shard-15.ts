@@ -627,6 +627,7 @@ import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTrigonOfMending from "../pool/trigon-of-mending.js";
 import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTuktukScrapper from "../pool/tuktuk-scrapper.js";
@@ -1341,6 +1342,7 @@ const shard: CardShard = {
     _poolTransguildPromenade,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTrigonOfMending,
     _poolTrostanisSummoner,
     _poolTruckToss,
     _poolTuktukScrapper,

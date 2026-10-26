@@ -527,6 +527,7 @@ import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
 import _poolRuinousMinotaur from "../pool/ruinous-minotaur.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
 import _poolRumblingRockslide from "../pool/rumbling-rockslide.js";
+import _poolRustedRelic from "../pool/rusted-relic.js";
 import _poolSafeholdDuo from "../pool/safehold-duo.js";
 import _poolSalvationColossus from "../pool/salvation-colossus.js";
 import _poolSamiteHealer from "../pool/samite-healer.js";
@@ -645,6 +646,7 @@ import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
+import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
@@ -1260,6 +1262,7 @@ const shard: CardShard = {
     _poolRuinousMinotaur,
     _poolRumblingBaloth,
     _poolRumblingRockslide,
+    _poolRustedRelic,
     _poolSafeholdDuo,
     _poolSalvationColossus,
     _poolSamiteHealer,
@@ -1378,6 +1381,7 @@ const shard: CardShard = {
     _poolTrailOfEvidence,
     _poolTranquilDomain,
     _poolTreadUpon,
+    _poolTrigonOfInfestation,
     _poolTrygonPrime,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,
