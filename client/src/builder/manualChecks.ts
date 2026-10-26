@@ -8268,6 +8268,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Enraging Licid: it becomes an Aura, and you can pay to make it a creature again',
+    board({ you: { bf: ['Mountain*3', 'Enraging Licid', 'Grizzly Bears'] } }),
+  ),
+  preset(
     'Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking',
     board({ you: { bf: ['Mountain*2'], hand: ['Gore-House Chainwalker'] }, opp: { bf: ['Grizzly Bears'] } }),
   ),

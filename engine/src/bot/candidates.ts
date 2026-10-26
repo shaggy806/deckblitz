@@ -260,6 +260,10 @@ export function candidateActions(
       return [{ type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) }];
     case "unlock-door":
       return [{ type: "unlock-door", player, permanent: legal.permanent, door: legal.door }];
+    // Ending a Licid's Aura effect: weighed like any other play (saving it
+    // from a host about to die, say).
+    case "end-licid-effect":
+      return [{ type: "end-licid-effect", player, permanent: legal.permanent }];
     case "cycle":
       return [{ type: "cycle", player, card: legal.card }];
     default:

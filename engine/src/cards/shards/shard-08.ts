@@ -66,6 +66,7 @@ import _poolBaldursGate from "../pool/baldurs-gate.js";
 import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
 import _poolBansheeOfTheDreadChoir from "../pool/banshee-of-the-dread-choir.js";
 import _poolBarTheGate from "../pool/bar-the-gate.js";
+import _poolBarbedSliver from "../pool/barbed-sliver.js";
 import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
@@ -114,6 +115,7 @@ import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
 import _poolColossalWhale from "../pool/colossal-whale.js";
+import _poolCommanderGrevenIlVec from "../pool/commander-greven-il-vec.js";
 import _poolCompositeGolem from "../pool/composite-golem.js";
 import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
@@ -334,6 +336,7 @@ import _poolKenkuArtificer from "../pool/kenku-artificer.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
+import _poolKindle from "../pool/kindle.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
@@ -466,6 +469,7 @@ import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolReachOfShadows from "../pool/reach-of-shadows.js";
+import _poolRealityAnchor from "../pool/reality-anchor.js";
 import _poolRealitySmasher from "../pool/reality-smasher.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
@@ -717,6 +721,7 @@ import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.j
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensMaskToken from "../tokens/mask-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
+import _tokensReflectionTokenWhite22 from "../tokens/reflection-token-white-2-2.js";
 import _tokensSerfToken from "../tokens/serf-token.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
@@ -790,6 +795,7 @@ const shard: CardShard = {
     _poolBalduvianBarbarians,
     _poolBansheeOfTheDreadChoir,
     _poolBarTheGate,
+    _poolBarbedSliver,
     _poolBarrenMoor,
     _poolBattleflySwarm,
     _poolBenevolentAncestor,
@@ -838,6 +844,7 @@ const shard: CardShard = {
     _poolClownCar,
     _poolColdEyedSelkie,
     _poolColossalWhale,
+    _poolCommanderGrevenIlVec,
     _poolCompositeGolem,
     _poolConduitGoblin,
     _poolConduitOfRuin,
@@ -1058,6 +1065,7 @@ const shard: CardShard = {
     _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
     _poolKillZoneAcrobat,
+    _poolKindle,
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
@@ -1190,6 +1198,7 @@ const shard: CardShard = {
     _poolRaphaelTheMuscle,
     _poolRaucousTheater,
     _poolReachOfShadows,
+    _poolRealityAnchor,
     _poolRealitySmasher,
     _poolRealmScorcherHellkite,
     _poolReapersScythe,
@@ -1443,6 +1452,7 @@ const shard: CardShard = {
     _tokensLeviathanToken,
     _tokensMaskToken,
     _tokensOtterToken,
+    _tokensReflectionTokenWhite22,
     _tokensSerfToken,
     _tokensTheBlackjack,
     _tokensThopterToken,

@@ -33,6 +33,7 @@ import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
+import _poolApesOfRath from "../pool/apes-of-rath.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
@@ -439,6 +440,7 @@ import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
+import _poolRathiDragon from "../pool/rathi-dragon.js";
 import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
@@ -717,6 +719,7 @@ const shard: CardShard = {
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
     _poolAntlerSkulkin,
+    _poolApesOfRath,
     _poolApexDevastator,
     _poolApocalypseHydra,
     _poolAranaHeartOfTheSpider,
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolRaidersSpoils,
     _poolRallyTheAncestors,
     _poolRasputinTheOneiromancer,
+    _poolRathiDragon,
     _poolRavagingBlaze,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,

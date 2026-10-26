@@ -4585,6 +4585,18 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
     }
   | {
+      /** A Licid's ability (`licid: true` on it): "~ loses this ability and
+       * becomes an Aura enchantment with enchant creature. Attach it to
+       * target creature. You may pay `endCost` to end this effect." The
+       * source becomes the Aura (`GameObject.licid`), then is attached to
+       * `target` — or, if it can't enchant that, stays an unattached Aura and
+       * goes to the graveyard (rule 704.5m). Nothing once the source has left
+       * (rule 400.7). */
+      readonly kind: "become-licid-aura";
+      readonly target: EffectTargetRef;
+      readonly endCost: string;
+    }
+  | {
       /** Transform `target` — turn a transforming double-faced permanent over
        * to its other face (rule 701.28 / 712.10 — ROADMAP Phase 10b). No-op
        * for a permanent that isn't a transforming DFC. `"source"` transforms
@@ -6899,6 +6911,9 @@ export interface EffectApi {
   attach(target: TargetRef, attachment?: TargetRef): void;
   /** Unattach `target` — see the `"unattach"` {@link EffectSpec}. */
   unattach(target: TargetRef): void;
+  /** The source becomes a Licid's Aura and is attached to `target` — see
+   * the `"become-licid-aura"` {@link EffectSpec}. */
+  becomeLicidAura(target: TargetRef, endCost: string): void;
   /** Attach every permanent matching `filter` (from the source's
    * controller's view) to `target`, each in turn — the `"attach"`
    * {@link EffectSpec}'s `attachments`. */
@@ -10545,6 +10560,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "unattach": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.unattach(target);
+      return;
+    }
+    case "become-licid-aura": {
+      if (ctx.sourceLost === true) return;
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.becomeLicidAura(target, spec.endCost);
       return;
     }
     case "attach": {

@@ -20,6 +20,7 @@ import _poolAngryMob from "../pool/angry-mob.js";
 import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
 import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
+import _poolAnoint from "../pool/anoint.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
@@ -639,6 +640,7 @@ import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
 import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
+import _poolWarmth from "../pool/warmth.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
@@ -695,6 +697,7 @@ const shard: CardShard = {
     _poolAnheloThePainter,
     _poolAnimateWall,
     _poolAnkleBiter,
+    _poolAnoint,
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolWardenOfTheWoods,
     _poolWarden,
     _poolWarehouseThief,
+    _poolWarmth,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,

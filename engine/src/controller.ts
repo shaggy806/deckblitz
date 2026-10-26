@@ -1514,6 +1514,8 @@ export class RandomController extends AutomaticController {
         return { type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) };
       case "unlock-door":
         return { type: "unlock-door", player, permanent: legal.permanent, door: legal.door };
+      case "end-licid-effect":
+        return { type: "end-licid-effect", player, permanent: legal.permanent };
       case "cycle":
         return { type: "cycle", player, card: legal.card };
       case "cast-spell": {

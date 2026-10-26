@@ -315,6 +315,7 @@ import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
+import _poolKezzerdrix from "../pool/kezzerdrix.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
 import _poolKindlyAncestor from "../pool/kindly-ancestor.js";
 import _poolKiorasFollower from "../pool/kioras-follower.js";
@@ -375,6 +376,7 @@ import _poolMischiefAndMayhem from "../pool/mischief-and-mayhem.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolModeration from "../pool/moderation.js";
+import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
@@ -595,6 +597,7 @@ import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
+import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
@@ -1011,6 +1014,7 @@ const shard: CardShard = {
     _poolKamahlsDruidicVow,
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,
+    _poolKezzerdrix,
     _poolKiboUktabiPrince,
     _poolKindlyAncestor,
     _poolKiorasFollower,
@@ -1071,6 +1075,7 @@ const shard: CardShard = {
     _poolMishrasFactory,
     _poolMithrilCoat,
     _poolModeration,
+    _poolMoggSquad,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMoonrageBrute,
@@ -1291,6 +1296,7 @@ const shard: CardShard = {
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
     _poolTevalsJudgment,
+    _poolThalakosMistfolk,
     _poolTheDrossPits,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,

@@ -2086,6 +2086,19 @@ export function parseFace(face, ctx = {}) {
       );
       continue;
     }
+    // A Licid's ability (`licid: true`, `become-licid-aura`): it becomes an Aura on target
+    // creature until its controller pays the cost to end the effect.
+    if ((m = /^((?:\{[^}]+\})+), \{T\}: (?:~|This creature) loses this ability and becomes an Aura enchantment with enchant creature\. Attach it to target creature\. You may pay ((?:\{[^}]+\})+) to end this effect\.$/.exec(line))) {
+      out.activated.push({
+        cost: { mana: m[1], tap: true },
+        targets: ["creature"],
+        effect: { kind: "become-licid-aura", target: 0, endCost: m[2] },
+        resolve: null,
+        text: printed(raw),
+        licid: true,
+      });
+      continue;
+    }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
     // Jump-start (rule 702.133a): the graveyard cast for the card's own mana

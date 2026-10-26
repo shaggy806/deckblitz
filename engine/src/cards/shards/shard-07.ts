@@ -133,6 +133,7 @@ import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
+import _poolDeadshot from "../pool/deadshot.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
@@ -858,6 +859,7 @@ const shard: CardShard = {
     _poolDawnbringerCharioteers,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
+    _poolDeadshot,
     _poolDeathcultRogue,
     _poolDeepchannelMentor,
     _poolDefenderOfChaos,

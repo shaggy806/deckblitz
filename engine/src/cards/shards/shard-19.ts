@@ -495,6 +495,7 @@ import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
+import _poolRenegadeWarlord from "../pool/renegade-warlord.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
 import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
@@ -578,6 +579,7 @@ import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSphinxSovereign from "../pool/sphinx-sovereign.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
+import _poolSpikeDrone from "../pool/spike-drone.js";
 import _poolSpittingEarth from "../pool/spitting-earth.js";
 import _poolSporebackWolf from "../pool/sporeback-wolf.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
@@ -645,6 +647,7 @@ import _poolUnderTheSkin from "../pool/under-the-skin.js";
 import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
 import _poolUnforgivingOne from "../pool/unforgiving-one.js";
 import _poolUnleashTheInferno from "../pool/unleash-the-inferno.js";
+import _poolUnstableShapeshifter from "../pool/unstable-shapeshifter.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolRedElementalBlast,
     _poolRelicCrush,
     _poolRenegadeBull,
+    _poolRenegadeWarlord,
     _poolRepulsiveMutation,
     _poolResupply,
     _poolRibtrussRoaster,
@@ -1295,6 +1299,7 @@ const shard: CardShard = {
     _poolSpellPierce,
     _poolSphinxSovereign,
     _poolSpiderWomanStunningSavior,
+    _poolSpikeDrone,
     _poolSpittingEarth,
     _poolSporebackWolf,
     _poolSquirmingEmergence,
@@ -1362,6 +1367,7 @@ const shard: CardShard = {
     _poolUndercoverSkrull,
     _poolUnforgivingOne,
     _poolUnleashTheInferno,
+    _poolUnstableShapeshifter,
     _poolUnsubtleMockery,
     _poolUrborgDrake,
     _poolUrzaPrinceOfKroog,

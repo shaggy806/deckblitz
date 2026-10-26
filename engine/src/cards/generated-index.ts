@@ -426,6 +426,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Red-White Soldier Token",
   "Redwing",
   "Reflection Token",
+  "Reflection Token (White, 2/2)",
   "Reliquary Dragon",
   "Rhino Token",
   "Rhino Warrior Token",

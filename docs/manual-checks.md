@@ -5426,6 +5426,12 @@ engine terms. A second thing to check is a second test.
 - **Expect:** Two conspire prompts, one after the other, and two copies: Bob goes to 11.
 - **Not a bug:** Wort and the Goblin Warrior token can be tapped for it: they're red too.
 
+## Licids (2026-10-26, batch 181)
+
+### Enraging Licid: it becomes an Aura, and you can pay to make it a creature again
+- **Do:** Click Enraging Licid and use its ability on your Grizzly Bears. Then click the Licid (now on the Bears) and choose "End the effect — pay {R}".
+- **Expect:** The Licid attaches to the Bears as an Aura and the Bears have haste. After paying {R} it's a 1/1 creature again on its own, and the Bears lose haste.
+
 ## Unleash and detain (2026-10-26, Return to Ravnica)
 
 ### Gore-House Chainwalker: unleash asks before it enters, and the counter stops it blocking

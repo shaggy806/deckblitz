@@ -442,7 +442,8 @@
   "keyword:retrace",
   "keyword:conspire",
   "cost:untap-symbol-cost",
-  "keyword:buyback"
+  "keyword:buyback",
+  "keyword:licid"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

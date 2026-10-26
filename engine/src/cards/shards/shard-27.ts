@@ -39,6 +39,7 @@ import _poolAstrologiansPlanisphere from "../pool/astrologians-planisphere.js";
 import _poolAtraxiWarden from "../pool/atraxi-warden.js";
 import _poolAutomatedAssemblyLine from "../pool/automated-assembly-line.js";
 import _poolAvatarRoku from "../pool/avatar-roku.js";
+import _poolAvengingAngel from "../pool/avenging-angel.js";
 import _poolAway from "../pool/away.js";
 import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
 import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
@@ -104,6 +105,7 @@ import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolConvictedKiller from "../pool/convicted-killer.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
+import _poolCorruptingLicid from "../pool/corrupting-licid.js";
 import _poolCosisRavager from "../pool/cosis-ravager.js";
 import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
@@ -722,6 +724,7 @@ const shard: CardShard = {
     _poolAtraxiWarden,
     _poolAutomatedAssemblyLine,
     _poolAvatarRoku,
+    _poolAvengingAngel,
     _poolAway,
     _poolBahamutWardenOfLight,
     _poolBakersbaneDuo,
@@ -787,6 +790,7 @@ const shard: CardShard = {
     _poolConsumptiveGoo,
     _poolConvictedKiller,
     _poolCorruptEunuchs,
+    _poolCorruptingLicid,
     _poolCosisRavager,
     _poolCosmicEpiphany,
     _poolCourageInCrisis,

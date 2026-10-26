@@ -26,6 +26,7 @@ import _poolAncientSpider from "../pool/ancient-spider.js";
 import _poolAncientStoneIdol from "../pool/ancient-stone-idol.js";
 import _poolAngelheartProtector from "../pool/angelheart-protector.js";
 import _poolAngelicGift from "../pool/angelic-gift.js";
+import _poolAngelicProtector from "../pool/angelic-protector.js";
 import _poolAnnexSentry from "../pool/annex-sentry.js";
 import _poolApocalypseRunner from "../pool/apocalypse-runner.js";
 import _poolAquitectsDefenses from "../pool/aquitects-defenses.js";
@@ -49,6 +50,7 @@ import _poolBasaltMonolith from "../pool/basalt-monolith.js";
 import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
+import _poolBellowingFiend from "../pool/bellowing-fiend.js";
 import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
 import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
@@ -207,6 +209,7 @@ import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolFussBother from "../pool/fuss-bother.js";
+import _poolFylamarid from "../pool/fylamarid.js";
 import _poolGaeasCourser from "../pool/gaeas-courser.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
@@ -414,6 +417,7 @@ import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
 import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
+import _poolQuickeningLicid from "../pool/quickening-licid.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
 import _poolRadiantFountain from "../pool/radiant-fountain.js";
 import _poolRagefire from "../pool/ragefire.js";
@@ -717,6 +721,7 @@ const shard: CardShard = {
     _poolAncientStoneIdol,
     _poolAngelheartProtector,
     _poolAngelicGift,
+    _poolAngelicProtector,
     _poolAnnexSentry,
     _poolApocalypseRunner,
     _poolAquitectsDefenses,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolBatheInGold,
     _poolBeamsawProspector,
     _poolBeastAttack,
+    _poolBellowingFiend,
     _poolBigfinBouncer,
     _poolBiomathematician,
     _poolBiomechanEngineer,
@@ -898,6 +904,7 @@ const shard: CardShard = {
     _poolFuneralLongboat,
     _poolFurnaceReins,
     _poolFussBother,
+    _poolFylamarid,
     _poolGaeasCourser,
     _poolGalazethPrismari,
     _poolGatewayShade,
@@ -1105,6 +1112,7 @@ const shard: CardShard = {
     _poolPunishingPunch,
     _poolPurgeTheProfane,
     _poolQuakestriderCeratops,
+    _poolQuickeningLicid,
     _poolQuietPurity,
     _poolRadiantFountain,
     _poolRagefire,

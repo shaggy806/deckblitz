@@ -123,6 +123,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **Licids** (batch 181, the oldest-first walk, 2026-10-26): the `become-licid-aura` effect
+  (`GameObject.licid` — an Aura enchantment at its timestamp, without that ability, attached to
+  the target) and the `end-licid-effect` special action (rule 116.2c), in the client's ability
+  menu; a scaffolder template; `licid.test.ts`. With it Tempest's five and Stronghold's six.
+- **Tempest, the rest — Tempest whole** (batch 181, the oldest-first walk, 2026-10-26): 59 of its
+  last 88 authored — Unstable Shapeshifter, Magmasaur, Spirit Mirror, Flowstone Sculpture, the five
+  Licids, Excavator, Commander Greven il-Vec and more, by five `card-author` agents and the lead —
+  29 blocked (`B181.json`).
 - **Buyback** (rule 702.27a — batch 178, the oldest-first walk, 2026-10-26): `kicker: { cost, keyword:
   "buyback" }`, the spell returned to its owner's hand as it resolves; mana costs only (Forbid,
   Constant Mists and Walk the Aeons wait on `cost:buyback-non-mana`). A scaffolder template;

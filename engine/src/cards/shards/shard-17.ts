@@ -422,6 +422,7 @@ import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
+import _poolPegasusRefuge from "../pool/pegasus-refuge.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolPassagewaySeer,
     _poolPathOfTheEnigma,
     _poolPatronOfTheVein,
+    _poolPegasusRefuge,
     _poolPeregrineDrake,
     _poolPestilentSouleater,
     _poolPharaohRamaTut,

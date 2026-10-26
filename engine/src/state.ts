@@ -1204,6 +1204,12 @@ export interface GameObject {
    * `reconfiguredOnto`, whatever happens to its abilities meanwhile. */
   reconfiguredOnto?: ObjectId;
   reconfiguredAt?: number;
+  /** A Licid that became an Aura (its `licid: true` ability):
+   * from `at` it is an Aura enchantment with enchant creature, not a
+   * creature, and has lost that ability, until `controller` pays `endCost`
+   * to end the effect (a special action, rule 116.2c — `end-licid-effect`)
+   * or it leaves the battlefield. */
+  licid?: { readonly controller: PlayerId; readonly endCost: string; readonly at: number };
   /** The player this Aura is attached to — a Curse's "Enchant player" (rule
    * 303.4: an Aura can be attached to a player). Set instead of
    * `attachedTo`, never with it; cleared on any zone change. */

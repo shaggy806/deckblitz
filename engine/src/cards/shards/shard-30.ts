@@ -161,8 +161,10 @@ import _poolDireFleetPoisoner from "../pool/dire-fleet-poisoner.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
 import _poolDisperse from "../pool/disperse.js";
+import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
 import _poolDraconicLore from "../pool/draconic-lore.js";
+import _poolDreadOfNight from "../pool/dread-of-night.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
 import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
@@ -196,6 +198,7 @@ import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEtherwroughtPage from "../pool/etherwrought-page.js";
 import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
+import _poolExcavator from "../pool/excavator.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExperimentOne from "../pool/experiment-one.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
@@ -220,6 +223,7 @@ import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
 import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
+import _poolFoolsTome from "../pool/fools-tome.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
 import _poolForceVoid from "../pool/force-void.js";
@@ -280,6 +284,7 @@ import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
 import _poolHarriedSpearguard from "../pool/harried-spearguard.js";
 import _poolHarvesterOfSouls from "../pool/harvester-of-souls.js";
 import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
+import _poolHavoc from "../pool/havoc.js";
 import _poolHazoretsUndyingFury from "../pool/hazorets-undying-fury.js";
 import _poolHeadlessRider from "../pool/headless-rider.js";
 import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
@@ -349,6 +354,7 @@ import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
+import _poolKrakilin from "../pool/krakilin.js";
 import _poolKreshTheBloodbraided from "../pool/kresh-the-bloodbraided.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLandbindRitual from "../pool/landbind-ritual.js";
@@ -428,6 +434,7 @@ import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolNomadsAssembly from "../pool/nomads-assembly.js";
+import _poolNurturingLicid from "../pool/nurturing-licid.js";
 import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
@@ -862,8 +869,10 @@ const shard: CardShard = {
     _poolDiregrafColossus,
     _poolDirtwaterWraith,
     _poolDisperse,
+    _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
     _poolDraconicLore,
+    _poolDreadOfNight,
     _poolDreadhordeInvasion,
     _poolDreamBeavers,
     _poolDreamrootCascade,
@@ -897,6 +906,7 @@ const shard: CardShard = {
     _poolEtherwroughtPage,
     _poolEvaporate,
     _poolEverythingPizza,
+    _poolExcavator,
     _poolExecutionersHood,
     _poolExperimentOne,
     _poolExplorersCache,
@@ -921,6 +931,7 @@ const shard: CardShard = {
     _poolFlourishingFox,
     _poolFlurryOfWings,
     _poolFogwellsGym,
+    _poolFoolsTome,
     _poolForceAway,
     _poolForceOfVirtue,
     _poolForceVoid,
@@ -981,6 +992,7 @@ const shard: CardShard = {
     _poolHarriedSpearguard,
     _poolHarvesterOfSouls,
     _poolHavenOfTheHarvest,
+    _poolHavoc,
     _poolHazoretsUndyingFury,
     _poolHeadlessRider,
     _poolHeliodsPilgrim,
@@ -1050,6 +1062,7 @@ const shard: CardShard = {
     _poolKnowledgeSeeker,
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
+    _poolKrakilin,
     _poolKreshTheBloodbraided,
     _poolLaeliaTheBladeReforged,
     _poolLandbindRitual,
@@ -1129,6 +1142,7 @@ const shard: CardShard = {
     _poolNishobaBrawler,
     _poolNobody,
     _poolNomadsAssembly,
+    _poolNurturingLicid,
     _poolOathOfTheAncientWood,
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,

@@ -3651,6 +3651,24 @@ export function bestowedDefinition(def: CardDefinition): CardDefinition {
   return bestowed;
 }
 
+const licidDefinitions = new WeakMap<CardDefinition, CardDefinition>();
+
+/**
+ * A Licid while its ability's effect lasts (`GameObject.licid`): "an Aura
+ * enchantment with enchant creature" — an enchantment and no longer a
+ * creature, its only subtype Aura (205.1a), its enchant ability
+ * {@link BESTOW_TARGET}'s. What every Aura question (`Game.canEnchant`, the
+ * Aura state-based actions) is asked of for it; the layer fold reaches the
+ * same types at the effect's timestamp (`characteristics.ts`).
+ */
+export function licidDefinition(def: CardDefinition): CardDefinition {
+  const known = licidDefinitions.get(def);
+  if (known !== undefined) return known;
+  const licid: CardDefinition = { ...def, types: ["enchantment"], subtypes: ["Aura"], targets: [BESTOW_TARGET] };
+  licidDefinitions.set(def, licid);
+  return licid;
+}
+
 export function defineCard(draft: CardDraft): CardDefinition {
   const loyalty = draft.loyalty ?? null;
   // A planeswalker enters with `loyalty` loyalty counters (rule 306.5b) —

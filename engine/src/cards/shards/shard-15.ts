@@ -29,6 +29,7 @@ import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
 import _poolArenaTrickster from "../pool/arena-trickster.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
+import _poolArmorSliver from "../pool/armor-sliver.js";
 import _poolArmorWars from "../pool/armor-wars.js";
 import _poolArmoryMice from "../pool/armory-mice.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
@@ -286,6 +287,7 @@ import _poolIdleThoughts from "../pool/idle-thoughts.js";
 import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
+import _poolImpsTaunt from "../pool/imps-taunt.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
 import _poolInfernalPet from "../pool/infernal-pet.js";
@@ -492,6 +494,7 @@ import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
+import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolArenaTrickster,
     _poolAresGodOfWar,
     _poolArgivianFind,
+    _poolArmorSliver,
     _poolArmorWars,
     _poolArmoryMice,
     _poolArtisanOfKozilek,
@@ -948,6 +952,7 @@ const shard: CardShard = {
     _poolImpedeMomentum,
     _poolImpossibleInferno,
     _poolImprovisedClub,
+    _poolImpsTaunt,
     _poolIncandescentSoulstoke,
     _poolIndoctrinationAttendant,
     _poolInfernalPet,
@@ -1154,6 +1159,7 @@ const shard: CardShard = {
     _poolSeedbornMuse,
     _poolSelflessSpirit,
     _poolSerraRedeemer,
+    _poolServantOfVolrath,
     _poolSethronHurloonGeneral,
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,

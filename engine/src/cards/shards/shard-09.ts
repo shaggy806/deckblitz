@@ -381,6 +381,7 @@ import _poolMinersGuidewing from "../pool/miners-guidewing.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
+import _poolMoggConscripts from "../pool/mogg-conscripts.js";
 import _poolMonasteryRaid from "../pool/monastery-raid.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolMirageMirror,
     _poolMistralCharger,
     _poolMizzixsMastery,
+    _poolMoggConscripts,
     _poolMonasteryRaid,
     _poolMonasterySwiftspear,
     _poolMoonSprite,

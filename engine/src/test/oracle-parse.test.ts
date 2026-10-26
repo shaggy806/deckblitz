@@ -1618,6 +1618,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(delver.complete).toBe(true);
   });
 
+  it("a Licid's ability: it becomes an Aura on target creature until the cost is paid", () => {
+    const licid = face(
+      "{U}, {T}: This creature loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nEnchanted creature has flying.",
+      "Creature — Licid",
+    );
+    expect(licid.activated[0]).toMatchObject({
+      cost: { mana: "{U}", tap: true },
+      targets: ["creature"],
+      effect: { kind: "become-licid-aura", target: 0, endCost: "{U}" },
+      licid: true,
+    });
+    expect(licid.complete).toBe(true);
+  });
+
   it("reconfigure (rule 702.151): the keyword line's two abilities", () => {
     const boar = face("Equipped creature gets +3/+2.\nReconfigure {5}", "Artifact Creature — Equipment Boar");
     expect([boar.activated[0].reconfigure, boar.activated[1].reconfigure]).toEqual(["attach", "unattach"]);

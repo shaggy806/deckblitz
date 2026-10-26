@@ -381,6 +381,7 @@ import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
 import _poolMnemonicSliver from "../pool/mnemonic-sliver.js";
 import _poolMobileGarrison from "../pool/mobile-garrison.js";
+import _poolMoggCannon from "../pool/mogg-cannon.js";
 import _poolMogissFavor from "../pool/mogiss-favor.js";
 import _poolMolderhulk from "../pool/molderhulk.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
@@ -1126,6 +1127,7 @@ const shard: CardShard = {
     _poolMiserysShadow,
     _poolMnemonicSliver,
     _poolMobileGarrison,
+    _poolMoggCannon,
     _poolMogissFavor,
     _poolMolderhulk,
     _poolMorgulKnifeWound,
