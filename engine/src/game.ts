@@ -24240,6 +24240,7 @@ export class Game {
           controller,
         );
       },
+      epic: () => this.applyEpic(controller, source),
       preventAllCombatDamage: (by, toYou) => {
         if (by !== undefined) {
           (this.state.combatDamagePreventedBy ??= []).push({
@@ -26885,6 +26886,7 @@ export class Game {
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
+      ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
   }
 
@@ -26972,6 +26974,7 @@ export class Game {
       timestamp: 0,
       isToken: false,
       isCopy: true,
+      ...(spell.withoutEpic === true ? { withoutEpic: true } : {}),
       attachedTo: null,
       isCommander: false,
       xValue: spell.xValue,
@@ -27827,6 +27830,10 @@ export class Game {
       if (spellHasSplitSecond(this.state, this.registry, spell)) {
         return `${printedCardName(spell)} has split second`;
       }
+    }
+    // Epic (rule 702.50b).
+    if (this.state.players[player]?.cantCastSpellsForGame === true) {
+      return `${player} can't cast spells for the rest of the game`;
     }
     for (const p of this.state.turnProhibitions?.players ?? []) {
       if (p.player !== player) continue;
@@ -34489,6 +34496,39 @@ export class Game {
       ...(createdBy !== owner ? { createdBy } : {}),
     });
     this.emit({ type: "emblem-created", player: owner, text });
+  }
+
+  /**
+   * Epic (rule 702.50a) as `sourceId`, an epic spell `controller` controls,
+   * resolves: they can't cast spells for the rest of the game (702.50b), and
+   * at the beginning of each of their upkeeps a copy of the spell as it is
+   * now — its targets, {X} and choices — goes on the stack without its epic
+   * ability, its targets open to change (707.10c). The upkeep trigger rides
+   * an emblem so it shows on the table. Nothing on a copy made by epic.
+   */
+  private applyEpic(controller: PlayerId, sourceId: ObjectId): void {
+    const spell = this.state.objects[sourceId];
+    if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card" || spell.withoutEpic === true) return;
+    const player = this.state.players[controller];
+    if (player === undefined) return;
+    player.cantCastSpellsForGame = true;
+    const name = printedCardName(spell);
+    const snapshot: SpellSnapshot = { ...this.spellSnapshot(spell), withoutEpic: true };
+    const text = `For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy ${name} except for its epic ability.`;
+    this.createEmblem(controller, text, null, name, [
+      {
+        trigger: { on: "step-begins", step: "upkeep", who: "you" },
+        targets: [],
+        effect: {
+          kind: "copy-spell",
+          target: "trigger-spell",
+          newTargets: true,
+          spell: { snapshot, original: sourceId },
+        },
+        resolve: null,
+        text: `At the beginning of your upkeep, copy ${name} except for its epic ability. You may choose new targets for the copy.`,
+      },
+    ]);
   }
 
   // --- state-based actions -----------------------------------

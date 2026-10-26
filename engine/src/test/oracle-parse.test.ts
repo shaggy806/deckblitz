@@ -1620,6 +1620,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face(`Echo—Sacrifice two lands. ${reminder}`, "Creature — Elemental").complete).toBe(true);
   });
 
+  it("bushido (702.45a) and soulshift (702.46a): Kamigawa's keyword lines, their triggers", () => {
+    const samurai = face(
+      "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",
+      "Creature — Human Samurai",
+    );
+    expect(samurai.triggered.map((t) => t.trigger)).toEqual([
+      { on: "blocks", who: "self" },
+      { on: "becomes-blocked", who: "self" },
+    ]);
+    expect(samurai.triggered[1].effect).toEqual({ kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" });
+    expect(samurai.complete).toBe(true);
+    const kami = face(
+      "Soulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)",
+      "Creature — Spirit",
+    );
+    expect(kami.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    expect(kami.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { subtype: "Spirit", manaValue: { op: "lte", n: 3 } } },
+    ]);
+    expect(kami.complete).toBe(true);
+  });
+
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
     const battery = face(
       "{T}, Remove any number of charge counters from this artifact: Add {U}, then add an additional {U} for each charge counter removed this way.",

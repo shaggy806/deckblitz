@@ -27,6 +27,8 @@ import {
   affinity,
   afflict,
   afterlife,
+  bushido,
+  soulshift,
   rampage,
   renown,
   cumulativeUpkeep,
@@ -157,6 +159,10 @@ function keywordPart(part) {
   // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
   if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
+  // Bushido N (rule 702.45a): its blocks and becomes-blocked triggers.
+  if ((m = /^bushido (\d+)$/i.exec(p))) return { triggered: bushido(Number(m[1])) };
+  // Soulshift N (rule 702.46a): its dies trigger, a Spirit card back to hand.
+  if ((m = /^soulshift (\d+)$/i.exec(p))) return { triggered: [soulshift(Number(m[1]))] };
   // Afterlife N (rule 702.135a): its dies trigger.
   if ((m = /^afterlife (\d+)$/i.exec(p))) return { triggered: [afterlife(Number(m[1]))] };
   // Cumulative upkeep [cost] (rule 702.24a): its upkeep trigger, the cost

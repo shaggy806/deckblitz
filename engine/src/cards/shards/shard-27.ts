@@ -185,6 +185,7 @@ import _poolElvishLookout from "../pool/elvish-lookout.js";
 import _poolElvishVatkeeper from "../pool/elvish-vatkeeper.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEmergentSequence from "../pool/emergent-sequence.js";
+import _poolEndlessSwarm from "../pool/endless-swarm.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
@@ -899,6 +900,7 @@ const shard: CardShard = {
     _poolElvishVatkeeper,
     _poolEmberethBlaze,
     _poolEmergentSequence,
+    _poolEndlessSwarm,
     _poolEpicProportions,
     _poolEriettesWhisper,
     _poolErrantDoomsayers,

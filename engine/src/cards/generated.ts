@@ -5915,6 +5915,7 @@ import _poolEndlessOne from "./pool/endless-one.js";
 import _poolEndlessRanksOfHydra from "./pool/endless-ranks-of-hydra.js";
 import _poolEndlessRanksOfTheDead from "./pool/endless-ranks-of-the-dead.js";
 import _poolEndlessScream from "./pool/endless-scream.js";
+import _poolEndlessSwarm from "./pool/endless-swarm.js";
 import _poolEndling from "./pool/endling.js";
 import _poolEndrekSahrMasterBreeder from "./pool/endrek-sahr-master-breeder.js";
 import _poolEndriderCatalyzer from "./pool/endrider-catalyzer.js";
@@ -5922,6 +5923,7 @@ import _poolEndriderSpikespitter from "./pool/endrider-spikespitter.js";
 import _poolEnduringBondwarden from "./pool/enduring-bondwarden.js";
 import _poolEnduringCourage from "./pool/enduring-courage.js";
 import _poolEnduringCuriosity from "./pool/enduring-curiosity.js";
+import _poolEnduringIdeal from "./pool/enduring-ideal.js";
 import _poolEnduringInnocence from "./pool/enduring-innocence.js";
 import _poolEnduringSliver from "./pool/enduring-sliver.js";
 import _poolEnduringTenacity from "./pool/enduring-tenacity.js";
@@ -29109,6 +29111,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEndlessRanksOfHydra,
   _poolEndlessRanksOfTheDead,
   _poolEndlessScream,
+  _poolEndlessSwarm,
   _poolEndling,
   _poolEndrekSahrMasterBreeder,
   _poolEndriderCatalyzer,
@@ -29116,6 +29119,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnduringBondwarden,
   _poolEnduringCourage,
   _poolEnduringCuriosity,
+  _poolEnduringIdeal,
   _poolEnduringInnocence,
   _poolEnduringSliver,
   _poolEnduringTenacity,
@@ -52316,6 +52320,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/endless-ranks-of-hydra": _poolEndlessRanksOfHydra,
   "pool/endless-ranks-of-the-dead": _poolEndlessRanksOfTheDead,
   "pool/endless-scream": _poolEndlessScream,
+  "pool/endless-swarm": _poolEndlessSwarm,
   "pool/endling": _poolEndling,
   "pool/endrek-sahr-master-breeder": _poolEndrekSahrMasterBreeder,
   "pool/endrider-catalyzer": _poolEndriderCatalyzer,
@@ -52323,6 +52328,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enduring-bondwarden": _poolEnduringBondwarden,
   "pool/enduring-courage": _poolEnduringCourage,
   "pool/enduring-curiosity": _poolEnduringCuriosity,
+  "pool/enduring-ideal": _poolEnduringIdeal,
   "pool/enduring-innocence": _poolEnduringInnocence,
   "pool/enduring-sliver": _poolEnduringSliver,
   "pool/enduring-tenacity": _poolEnduringTenacity,
