@@ -109,6 +109,7 @@ import _poolCatacombCrocodile from "../pool/catacomb-crocodile.js";
 import _poolCatapultSquad from "../pool/catapult-squad.js";
 import _poolCatchRelease from "../pool/catch-release.js";
 import _poolCausticCrawler from "../pool/caustic-crawler.js";
+import _poolCaveTiger from "../pool/cave-tiger.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
@@ -295,6 +296,7 @@ import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIlluminateHistory from "../pool/illuminate-history.js";
 import _poolIllusoryDemon from "../pool/illusory-demon.js";
+import _poolImaginaryPet from "../pool/imaginary-pet.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
@@ -365,6 +367,7 @@ import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
 import _poolMakeYourMark from "../pool/make-your-mark.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
+import _poolManaLeech from "../pool/mana-leech.js";
 import _poolManaPrism from "../pool/mana-prism.js";
 import _poolMandibleJusticiar from "../pool/mandible-justiciar.js";
 import _poolManticore from "../pool/manticore.js";
@@ -595,6 +598,7 @@ import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
 import _poolSubmerge from "../pool/submerge.js";
 import _poolSuddenReclamation from "../pool/sudden-reclamation.js";
+import _poolSulfuricVapors from "../pool/sulfuric-vapors.js";
 import _poolSummitApes from "../pool/summit-apes.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
@@ -834,6 +838,7 @@ const shard: CardShard = {
     _poolCatapultSquad,
     _poolCatchRelease,
     _poolCausticCrawler,
+    _poolCaveTiger,
     _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
@@ -1020,6 +1025,7 @@ const shard: CardShard = {
     _poolIgneousCur,
     _poolIlluminateHistory,
     _poolIllusoryDemon,
+    _poolImaginaryPet,
     _poolImmolatingGlare,
     _poolIncandescentAria,
     _poolIncitedRabble,
@@ -1090,6 +1096,7 @@ const shard: CardShard = {
     _poolMakeYourMark,
     _poolMakindiOx,
     _poolMammothSpider,
+    _poolManaLeech,
     _poolManaPrism,
     _poolMandibleJusticiar,
     _poolManticore,
@@ -1320,6 +1327,7 @@ const shard: CardShard = {
     _poolSublimeExhalation,
     _poolSubmerge,
     _poolSuddenReclamation,
+    _poolSulfuricVapors,
     _poolSummitApes,
     _poolSunBlessedHealer,
     _poolSunTitan,

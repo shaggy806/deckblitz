@@ -925,7 +925,7 @@
     {
       "name": "Lay Bare",
       "needs": [
-        "effect:look-at-target-player-hand"
+        "effect:look-at-hand-of-target-spell-controller"
       ],
       "why": "\"Counter target spell. Look at its controller's hand\": there's no plain look-at-hand effect for a player who isn't a target."
     },

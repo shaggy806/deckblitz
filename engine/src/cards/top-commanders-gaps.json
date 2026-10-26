@@ -456,7 +456,8 @@
   "keyword:champion",
   "trigger:clash",
   "keyword:echo",
-  "keyword:ripple"
+  "keyword:ripple",
+  "effect:look-at-target-player-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

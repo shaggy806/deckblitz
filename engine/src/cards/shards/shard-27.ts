@@ -490,10 +490,12 @@ import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
+import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
@@ -546,6 +548,7 @@ import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
 import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
+import _poolSomnophore from "../pool/somnophore.js";
 import _poolSoulSalvage from "../pool/soul-salvage.js";
 import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
@@ -1208,10 +1211,12 @@ const shard: CardShard = {
     _poolRodOfRuin,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
+    _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
     _poolSagesKnowledge,
     _poolSaguMauler,
+    _poolSanctumGuardian,
     _poolSangriteBacklash,
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
@@ -1264,6 +1269,7 @@ const shard: CardShard = {
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
     _poolSolsticeRevelations,
+    _poolSomnophore,
     _poolSoulSalvage,
     _poolSoulreaperOfMogis,
     _poolSoulsMajesty,

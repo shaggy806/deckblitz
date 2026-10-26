@@ -289,6 +289,7 @@ import _poolHelvault from "../pool/helvault.js";
 import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
 import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHeronsGraceChampion from "../pool/herons-grace-champion.js";
+import _poolHiddenAncients from "../pool/hidden-ancients.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
@@ -664,6 +665,7 @@ import _poolVelukanDragon from "../pool/velukan-dragon.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
+import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
@@ -999,6 +1001,7 @@ const shard: CardShard = {
     _poolHeraldOfHadar,
     _poolHeroOfTheDunes,
     _poolHeronsGraceChampion,
+    _poolHiddenAncients,
     _poolHiddenCourtyard,
     _poolHobblingZombie,
     _poolHollowhengeBeast,
@@ -1374,6 +1377,7 @@ const shard: CardShard = {
     _poolVerixBladewing,
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
+    _poolViashinoSandswimmer,
     _poolVinelasherAdept,
     _poolVirtusTheVeiled,
     _poolVisionOfLove,

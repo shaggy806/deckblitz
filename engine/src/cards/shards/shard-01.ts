@@ -407,6 +407,7 @@ import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
@@ -468,6 +469,7 @@ import _poolRepulse from "../pool/repulse.js";
 import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolResize from "../pool/resize.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
+import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
@@ -1114,6 +1116,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOpalGargoyle,
     _poolOphidian,
     _poolOrdruunVeteran,
     _poolOssuaryRats,
@@ -1175,6 +1178,7 @@ const shard: CardShard = {
     _poolRescueSkiff,
     _poolResize,
     _poolRestorativeTechnique,
+    _poolRetromancer,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,

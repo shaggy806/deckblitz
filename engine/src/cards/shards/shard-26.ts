@@ -32,6 +32,7 @@ import _poolAngelheartVial from "../pool/angelheart-vial.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
+import _poolAntagonism from "../pool/antagonism.js";
 import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
 import _poolApesOfRath from "../pool/apes-of-rath.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
@@ -140,6 +141,7 @@ import _poolCrashAndBurn from "../pool/crash-and-burn.js";
 import _poolCreativeOutburst from "../pool/creative-outburst.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
+import _poolCrosswinds from "../pool/crosswinds.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
@@ -448,6 +450,7 @@ import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
 import _poolPorcuparrot from "../pool/porcuparrot.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
+import _poolPowerTaint from "../pool/power-taint.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
 import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
@@ -662,6 +665,7 @@ import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVaultPlunderer from "../pool/vault-plunderer.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
+import _poolVeilOfBirds from "../pool/veil-of-birds.js";
 import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
@@ -754,6 +758,7 @@ const shard: CardShard = {
     _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
+    _poolAntagonism,
     _poolAntlerSkulkin,
     _poolApesOfRath,
     _poolApexDevastator,
@@ -862,6 +867,7 @@ const shard: CardShard = {
     _poolCreativeOutburst,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
+    _poolCrosswinds,
     _poolCruelSadist,
     _poolCurseOfTheRestlessDead,
     _poolCutIn,
@@ -1170,6 +1176,7 @@ const shard: CardShard = {
     _poolPorcuparrot,
     _poolPortTown,
     _poolPostmortemProfessor,
+    _poolPowerTaint,
     _poolPrayerOfBinding,
     _poolPredatorsHour,
     _poolPriestOfTheHauntedEdge,
@@ -1384,6 +1391,7 @@ const shard: CardShard = {
     _poolVaultOfTheArchangel,
     _poolVaultPlunderer,
     _poolVedalkenMesmerist,
+    _poolVeilOfBirds,
     _poolVengevine,
     _poolVenomousWords,
     _poolViashinoSlasher,

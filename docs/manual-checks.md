@@ -5483,3 +5483,13 @@ engine terms. A second thing to check is a second test.
 ### Surging Sentinels: ripple casts the copy it reveals for free
 - **Do:** Cast Surging Sentinels. Say yes to revealing the top four cards, cast the second Surging Sentinels offered, then order the other three cards when asked.
 - **Expect:** Only the Surging Sentinels among the four is offered, cast without paying. Both Sentinels end up on the battlefield, and Grizzly Bears, Hill Giant and Island go to the bottom of your library in the order you picked. The second Sentinels asks to reveal again.
+
+## Looking at a player's hand (2026-10-26, Urza's Saga)
+
+### Sorcerous Sight: looking at an opponent's hand
+- **Do:** Cast Sorcerous Sight targeting the opponent.
+- **Expect:** A popup titled "Looking at Bob's hand" shows every card in their hand, with nothing to pick and a "Done" button. Closing it draws you a card; the opponent's hand is unchanged.
+
+### Discordant Dirge: choose up to as many cards as its verse counters
+- **Do:** Activate Discordant Dirge (it has 2 verse counters), targeting the opponent.
+- **Expect:** A popup shows the opponent's whole hand and lets you pick up to 2 cards (or none). The cards you pick go to their graveyard.
