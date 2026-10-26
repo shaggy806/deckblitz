@@ -558,6 +558,7 @@ import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSoulsMight from "../pool/souls-might.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
+import _poolSphinxSovereign from "../pool/sphinx-sovereign.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
 import _poolSpittingEarth from "../pool/spitting-earth.js";
 import _poolSporebackWolf from "../pool/sporeback-wolf.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolSoulsMight,
     _poolSpaceMarineScout,
     _poolSpellPierce,
+    _poolSphinxSovereign,
     _poolSpiderWomanStunningSavior,
     _poolSpittingEarth,
     _poolSporebackWolf,

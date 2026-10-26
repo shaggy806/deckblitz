@@ -320,6 +320,7 @@ import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
+import _poolKissOfTheAmesha from "../pool/kiss-of-the-amesha.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
@@ -431,6 +432,7 @@ import _poolProfaneTutor from "../pool/profane-tutor.js";
 import _poolPteronGhost from "../pool/pteron-ghost.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
+import _poolQuagSickness from "../pool/quag-sickness.js";
 import _poolQuagmireDruid from "../pool/quagmire-druid.js";
 import _poolQuagmire from "../pool/quagmire.js";
 import _poolQuandrixCharm from "../pool/quandrix-charm.js";
@@ -616,6 +618,7 @@ import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedst
 import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
+import _poolThornThrashViashino from "../pool/thorn-thrash-viashino.js";
 import _poolThoughtGorger from "../pool/thought-gorger.js";
 import _poolThoughtHarvester from "../pool/thought-harvester.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolKazanduMammoth,
     _poolKindlyCustomer,
     _poolKingHaraldsRevenge,
+    _poolKissOfTheAmesha,
     _poolKolodinTriumphCaster,
     _poolKrangUtromWarlord,
     _poolKraulStinger,
@@ -1150,6 +1154,7 @@ const shard: CardShard = {
     _poolPteronGhost,
     _poolPutridGoblin,
     _poolQasaliPridemage,
+    _poolQuagSickness,
     _poolQuagmireDruid,
     _poolQuagmire,
     _poolQuandrixCharm,
@@ -1335,6 +1340,7 @@ const shard: CardShard = {
     _poolThiefsKnife,
     _poolThorOdinson,
     _poolThornThallid,
+    _poolThornThrashViashino,
     _poolThoughtGorger,
     _poolThoughtHarvester,
     _poolThoughtVessel,

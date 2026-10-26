@@ -74,6 +74,7 @@ import _poolBlessedLight from "../pool/blessed-light.js";
 import _poolBlightPile from "../pool/blight-pile.js";
 import _poolBlightning from "../pool/blightning.js";
 import _poolBlisterpod from "../pool/blisterpod.js";
+import _poolBloodTithe from "../pool/blood-tithe.js";
 import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
@@ -238,6 +239,7 @@ import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGiantSlug from "../pool/giant-slug.js";
 import _poolGiantsSkewer from "../pool/giants-skewer.js";
+import _poolGiftOfTheGargantuan from "../pool/gift-of-the-gargantuan.js";
 import _poolGiftOfTheWoods from "../pool/gift-of-the-woods.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
@@ -643,6 +645,7 @@ import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js"
 import _poolZodiacRooster from "../pool/zodiac-rooster.js";
 import _poolZodiacSnake from "../pool/zodiac-snake.js";
 import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
+import _tokens33WhiteBirdToken from "../tokens/3-3-white-bird-token.js";
 import _tokensAngelWarriorTokenFlyingVigilance from "../tokens/angel-warrior-token-flying-vigilance.js";
 import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of-alexandria.js";
 import _tokensAssassinTokenVraskaTheUnseen from "../tokens/assassin-token-vraska-the-unseen.js";
@@ -741,6 +744,7 @@ const shard: CardShard = {
     _poolBlightPile,
     _poolBlightning,
     _poolBlisterpod,
+    _poolBloodTithe,
     _poolBloodlineRecollector,
     _poolBlossomingTortoise,
     _poolBlueMarvelAdamBrashear,
@@ -905,6 +909,7 @@ const shard: CardShard = {
     _poolGiantOx,
     _poolGiantSlug,
     _poolGiantsSkewer,
+    _poolGiftOfTheGargantuan,
     _poolGiftOfTheWoods,
     _poolGild,
     _poolGingerbreadHunter,
@@ -1312,6 +1317,7 @@ const shard: CardShard = {
     _poolZurgoStormrender,
   ],
   tokens: [
+    _tokens33WhiteBirdToken,
     _tokensAngelWarriorTokenFlyingVigilance,
     _tokensAssassinTokenAyaOfAlexandria,
     _tokensAssassinTokenVraskaTheUnseen,

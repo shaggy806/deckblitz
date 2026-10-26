@@ -145,6 +145,7 @@ import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDefossilize from "../pool/defossilize.js";
+import _poolDemonsHerald from "../pool/demons-herald.js";
 import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
 import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
@@ -201,6 +202,7 @@ import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
 import _poolFinestHour from "../pool/finest-hour.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
+import _poolFireServant from "../pool/fire-servant.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
@@ -829,6 +831,7 @@ const shard: CardShard = {
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
     _poolDefossilize,
+    _poolDemonsHerald,
     _poolDenryKlinEditorInChief,
     _poolDiamondKnight,
     _poolDiregrafGhoul,
@@ -885,6 +888,7 @@ const shard: CardShard = {
     _poolFeySteed,
     _poolFinestHour,
     _poolFireNationWarship,
+    _poolFireServant,
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
     _poolFlubsTheFool,

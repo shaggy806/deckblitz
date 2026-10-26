@@ -338,6 +338,7 @@ import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
+import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMonsoon from "../pool/monsoon.js";
@@ -441,12 +442,14 @@ import _poolRelearn from "../pool/relearn.js";
 import _poolReleaseToMemory from "../pool/release-to-memory.js";
 import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
+import _poolResoundingScream from "../pool/resounding-scream.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
+import _poolRocEgg from "../pool/roc-egg.js";
 import _poolRockslideSorcerer from "../pool/rockslide-sorcerer.js";
 import _poolRoilSpout from "../pool/roil-spout.js";
 import _poolRooftopBypass from "../pool/rooftop-bypass.js";
@@ -659,6 +662,7 @@ import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZagothMamba from "../pool/zagoth-mamba.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
+import _tokens11OozeToken from "../tokens/1-1-ooze-token.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
@@ -1011,6 +1015,7 @@ const shard: CardShard = {
     _poolMirenTheMoaningWell,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
+    _poolMitoticSlime,
     _poolMizziumMortars,
     _poolMoltenVortex,
     _poolMonsoon,
@@ -1114,12 +1119,14 @@ const shard: CardShard = {
     _poolReleaseToMemory,
     _poolReptilDinomorpher,
     _poolRepurposedEnforcer,
+    _poolResoundingScream,
     _poolResurrection,
     _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRiotDevils,
     _poolRiseOfExtus,
     _poolRishkarsExpertise,
+    _poolRocEgg,
     _poolRockslideSorcerer,
     _poolRoilSpout,
     _poolRooftopBypass,
@@ -1334,6 +1341,7 @@ const shard: CardShard = {
     _poolZiatoraTheIncinerator,
   ],
   tokens: [
+    _tokens11OozeToken,
     _tokensAlienTokenAlienInvasion,
     _tokensAxeToken,
     _tokensDragonEggToken,

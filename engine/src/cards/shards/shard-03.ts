@@ -85,6 +85,7 @@ import _poolConfrontThePast from "../pool/confront-the-past.js";
 import _poolConsulateTurret from "../pool/consulate-turret.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
+import _poolCovenantOfMinds from "../pool/covenant-of-minds.js";
 import _poolCranialRam from "../pool/cranial-ram.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
@@ -359,6 +360,7 @@ import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
 import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
+import _poolOozeGarden from "../pool/ooze-garden.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
@@ -706,6 +708,7 @@ const shard: CardShard = {
     _poolConsulateTurret,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
+    _poolCovenantOfMinds,
     _poolCranialRam,
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolOfferingToAsha,
     _poolOgreResister,
     _poolOkoLorwynLiege,
+    _poolOozeGarden,
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,

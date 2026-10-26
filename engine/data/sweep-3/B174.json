@@ -1,0 +1,680 @@
+{
+ "batch": "B174",
+ "status": "complete",
+ "ranks": "Shards of Alara (ALA, 2008-10-03) and Magic 2011 (M11, 2010-07-16): the rest of each set — their 54 and 37 cards left (middle walk, the last of its range); with mechanic:begin-game-on-battlefield built and the earlier Leylines and Quicksilver, Brash Blur it unblocked",
+ "authored": [
+  {
+   "name": "Ancient Hellkite",
+   "files": [
+    "engine/src/cards/pool/ancient-hellkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel's Herald",
+   "files": [
+    "engine/src/cards/pool/angels-herald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Archdemon of Unx",
+   "files": [
+    "engine/src/cards/pool/archdemon-of-unx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Back to Nature",
+   "files": [
+    "engine/src/cards/pool/back-to-nature.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Banewasp Affliction",
+   "files": [
+    "engine/src/cards/pool/banewasp-affliction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Behemoth's Herald",
+   "files": [
+    "engine/src/cards/pool/behemoths-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Tithe",
+   "files": [
+    "engine/src/cards/pool/blood-tithe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodcrazed Goblin",
+   "files": [
+    "engine/src/cards/pool/bloodcrazed-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodpyre Elemental",
+   "files": [
+    "engine/src/cards/pool/bloodpyre-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Branching Bolt",
+   "files": [
+    "engine/src/cards/pool/branching-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caldera Hellion",
+   "files": [
+    "engine/src/cards/pool/caldera-hellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carrion Thrash",
+   "files": [
+    "engine/src/cards/pool/carrion-thrash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Spitfire",
+   "files": [
+    "engine/src/cards/pool/chandras-spitfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coma Veil",
+   "files": [
+    "engine/src/cards/pool/coma-veil.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Covenant of Minds",
+   "files": [
+    "engine/src/cards/pool/covenant-of-minds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyclops Gladiator",
+   "files": [
+    "engine/src/cards/pool/cyclops-gladiator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon's Herald",
+   "files": [
+    "engine/src/cards/pool/demons-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diminish",
+   "files": [
+    "engine/src/cards/pool/diminish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dragon's Herald",
+   "files": [
+    "engine/src/cards/pool/dragons-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Servant",
+   "files": [
+    "engine/src/cards/pool/earth-servant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ember Hauler",
+   "files": [
+    "engine/src/cards/pool/ember-hauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exuberant Firestoker",
+   "files": [
+    "engine/src/cards/pool/exuberant-firestoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Servant",
+   "files": [
+    "engine/src/cards/pool/fire-servant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frost Titan",
+   "files": [
+    "engine/src/cards/pool/frost-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gargoyle Sentinel",
+   "files": [
+    "engine/src/cards/pool/gargoyle-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gift of the Gargantuan",
+   "files": [
+    "engine/src/cards/pool/gift-of-the-gargantuan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Godtoucher",
+   "files": [
+    "engine/src/cards/pool/godtoucher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gustrider Exuberant",
+   "files": [
+    "engine/src/cards/pool/gustrider-exuberant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunters' Feast",
+   "files": [
+    "engine/src/cards/pool/hunters-feast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incite",
+   "files": [
+    "engine/src/cards/pool/incite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kiss of the Amesha",
+   "files": [
+    "engine/src/cards/pool/kiss-of-the-amesha.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of Anticipation",
+   "files": [
+    "engine/src/cards/pool/leyline-of-anticipation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of Sanctity",
+   "files": [
+    "engine/src/cards/pool/leyline-of-sanctity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of Vitality",
+   "files": [
+    "engine/src/cards/pool/leyline-of-vitality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of the Void",
+   "files": [
+    "engine/src/cards/pool/leyline-of-the-void.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mass Polymorph",
+   "files": [
+    "engine/src/cards/pool/mass-polymorph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mighty Emergence",
+   "files": [
+    "engine/src/cards/pool/mighty-emergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mitotic Slime",
+   "files": [
+    "engine/src/cards/pool/mitotic-slime.ts",
+    "engine/src/cards/tokens/2-2-splitting-ooze-token.ts",
+    "engine/src/cards/tokens/1-1-ooze-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ooze Garden",
+   "files": [
+    "engine/src/cards/pool/ooze-garden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Beast",
+   "files": [
+    "engine/src/cards/pool/phantom-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Predator Dragon",
+   "files": [
+    "engine/src/cards/pool/predator-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Primal Cocoon",
+   "files": [
+    "engine/src/cards/pool/primal-cocoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Punish Ignorance",
+   "files": [
+    "engine/src/cards/pool/punish-ignorance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Puppet Conjurer",
+   "files": [
+    "engine/src/cards/pool/puppet-conjurer.ts",
+    "engine/src/cards/tokens/homunculus-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quag Sickness",
+   "files": [
+    "engine/src/cards/pool/quag-sickness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver, Brash Blur",
+   "files": [
+    "engine/src/cards/pool/quicksilver-brash-blur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redirect",
+   "files": [
+    "engine/src/cards/pool/redirect.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Resounding Roar",
+   "files": [
+    "engine/src/cards/pool/resounding-roar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resounding Scream",
+   "files": [
+    "engine/src/cards/pool/resounding-scream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resounding Silence",
+   "files": [
+    "engine/src/cards/pool/resounding-silence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Resounding Thunder",
+   "files": [
+    "engine/src/cards/pool/resounding-thunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resounding Wave",
+   "files": [
+    "engine/src/cards/pool/resounding-wave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roc Egg",
+   "files": [
+    "engine/src/cards/pool/roc-egg.ts",
+    "engine/src/cards/tokens/3-3-white-bird-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rockcaster Platoon",
+   "files": [
+    "engine/src/cards/pool/rockcaster-platoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sedraxis Specter",
+   "files": [
+    "engine/src/cards/pool/sedraxis-specter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sigil Blessing",
+   "files": [
+    "engine/src/cards/pool/sigil-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skeletonize",
+   "files": [
+    "engine/src/cards/pool/skeletonize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx Sovereign",
+   "files": [
+    "engine/src/cards/pool/sphinx-sovereign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx's Herald",
+   "files": [
+    "engine/src/cards/pool/sphinxs-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squadron Hawk",
+   "files": [
+    "engine/src/cards/pool/squadron-hawk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stabbing Pain",
+   "files": [
+    "engine/src/cards/pool/stabbing-pain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steelclad Serpent",
+   "files": [
+    "engine/src/cards/pool/steelclad-serpent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunseed Nurturer",
+   "files": [
+    "engine/src/cards/pool/sunseed-nurturer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thorn-Thrash Viashino",
+   "files": [
+    "engine/src/cards/pool/thorn-thrash-viashino.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thunder-Thrash Elder",
+   "files": [
+    "engine/src/cards/pool/thunder-thrash-elder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Viashino Skeleton",
+   "files": [
+    "engine/src/cards/pool/viashino-skeleton.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Violent Ultimatum",
+   "files": [
+    "engine/src/cards/pool/violent-ultimatum.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Windwright Mage",
+   "files": [
+    "engine/src/cards/pool/windwright-mage.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Call to Heel",
+   "needs": [
+    "effect:draw-controller-of-target"
+   ],
+   "why": "its controller draws a card — the draw effect can't send the draw to the target's controller"
+  },
+  {
+   "name": "Lush Growth",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "setting the enchanted land's types must remove its other abilities (rule 305.7)"
+  },
+  {
+   "name": "Sacellum Godspeaker",
+   "needs": [
+    "cost:reveal-any-number-from-hand",
+    "amount:cards-revealed-this-way"
+   ],
+   "why": "a mana ability that reveals any number of creature cards with power 5 or greater from hand and counts them"
+  },
+  {
+   "name": "Esper Battlemage",
+   "needs": [
+    "effect:prevent-next-n-damage-to-you"
+   ],
+   "why": "'prevent the next 2 damage that would be dealt to you this turn' — no untargeted shield on the controller"
+  },
+  {
+   "name": "Wild Evocation",
+   "needs": [
+    "effect:must-cast-if-able"
+   ],
+   "why": "the random card revealed must be cast if it's a nonland card — the free cast is always optional"
+  },
+  {
+   "name": "Phylactery Lich",
+   "needs": [
+    "decision:as-enters-choose-permanent"
+   ],
+   "why": "'as this enters, put a phylactery counter on an artifact you control' — an untargeted choice as it enters"
+  },
+  {
+   "name": "Gaea's Revenge",
+   "needs": [
+    "static:untargetable-by-nongreen"
+   ],
+   "why": "can't be the target of nongreen spells or abilities from nongreen sources — your own too, which hexproof from isn't"
+  },
+  {
+   "name": "Combust",
+   "needs": [
+    "effect:damage-cant-be-prevented"
+   ],
+   "why": "'the damage can't be prevented'"
+  },
+  {
+   "name": "Conundrum Sphinx",
+   "needs": [
+    "decision:name-a-card"
+   ],
+   "why": "each player names a card"
+  },
+  {
+   "name": "Necrotic Plague",
+   "needs": [
+    "target:chosen-by-other-player"
+   ],
+   "why": "the dead creature's controller chooses which opponent's creature the Aura returns attached to"
+  },
+  {
+   "name": "Obstinate Baloth",
+   "needs": [
+    "replacement:discarded-by-opponent-to-battlefield"
+   ],
+   "why": "put onto the battlefield instead when an opponent's spell or ability makes you discard it"
+  },
+  {
+   "name": "Mindlock Orb",
+   "needs": [
+    "static:cant-search-library"
+   ],
+   "why": "'players can't search libraries'"
+  },
+  {
+   "name": "Vein Drinker",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "'whenever a creature dealt damage by this creature this turn dies'"
+  },
+  {
+   "name": "Tidehollow Sculler",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves",
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "exile a nonland card you choose from the opponent's revealed hand until the Sculler leaves"
+  },
+  {
+   "name": "Tar Fiend",
+   "needs": [
+    "amount:creatures-devoured"
+   ],
+   "why": "'target player discards a card for each creature it devoured'"
+  },
+  {
+   "name": "Merfolk Spy",
+   "needs": [
+    "effect:reveal-random-card-from-hand"
+   ],
+   "why": "'that player reveals a card at random from their hand'"
+  },
+  {
+   "name": "Harbor Serpent",
+   "needs": [
+    "condition:condition-count-all-permanents"
+   ],
+   "why": "'five or more Islands on the battlefield' counts every player's"
+  },
+  {
+   "name": "Vengeful Archon",
+   "needs": [
+    "replacement:prevent-and-reflect-damage"
+   ],
+   "why": "prevent the next X damage to you and deal that much to target player"
+  },
+  {
+   "name": "Empyrial Archangel",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "all damage that would be dealt to you is dealt to it instead"
+  },
+  {
+   "name": "Realm Razer",
+   "needs": [
+    "effect:flicker-lands-return-tapped"
+   ],
+   "why": "the exiled lands return tapped when it leaves — return-exiled-by-source can't return them tapped"
+  },
+  {
+   "name": "Clarion Ultimatum",
+   "needs": [
+    "effect:search-same-name-as-chosen-permanents"
+   ],
+   "why": "choose five permanents you control, search for a card with each one's name"
+  },
+  {
+   "name": "Thoughtcutter Agent",
+   "needs": [
+    "effect:target-player-reveals-hand"
+   ],
+   "why": "'target player loses 1 life and reveals their hand' — no reveal-a-hand effect"
+  },
+  {
+   "name": "Hoarding Dragon",
+   "needs": [
+    "effect:search-to-linked-exile"
+   ],
+   "why": "search for an artifact and exile it, linked to the Dragon, returned to hand when it dies"
+  },
+  {
+   "name": "Demon of Death's Gate",
+   "needs": [
+    "cost:alt-cost-sacrifice"
+   ],
+   "why": "'pay 6 life and sacrifice three black creatures rather than pay this spell's mana cost'"
+  },
+  {
+   "name": "Salvage Titan",
+   "needs": [
+    "cost:alt-cost-sacrifice"
+   ],
+   "why": "'sacrifice three artifacts rather than pay this spell's mana cost'"
+  },
+  {
+   "name": "Skill Borrower",
+   "needs": [
+    "static:gain-top-card-activated-abilities"
+   ],
+   "why": "has the activated abilities of the top card of your library while it's an artifact or creature card"
+  },
+  {
+   "name": "Leyline of Punishment",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "'damage can't be prevented' — its opening-hand line is built now"
+  }
+ ]
+}

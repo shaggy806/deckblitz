@@ -276,6 +276,7 @@ import _poolImpactTremors from "../pool/impact-tremors.js";
 import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImperiousOligarch from "../pool/imperious-oligarch.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
+import _poolIncite from "../pool/incite.js";
 import _poolInfestedThrinax from "../pool/infested-thrinax.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
@@ -542,6 +543,7 @@ import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolStarlitMantle from "../pool/starlit-mantle.js";
 import _poolStartTheTardis from "../pool/start-the-tardis.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
+import _poolSteelcladSerpent from "../pool/steelclad-serpent.js";
 import _poolStirge from "../pool/stirge.js";
 import _poolStitchedAssistant from "../pool/stitched-assistant.js";
 import _poolStitchedMangler from "../pool/stitched-mangler.js";
@@ -956,6 +958,7 @@ const shard: CardShard = {
     _poolImperialSeal,
     _poolImperiousOligarch,
     _poolImprovisedAct,
+    _poolIncite,
     _poolInfestedThrinax,
     _poolInfiltratorIlKor,
     _poolInnocuousRat,
@@ -1222,6 +1225,7 @@ const shard: CardShard = {
     _poolStarlitMantle,
     _poolStartTheTardis,
     _poolSteadfastSentry,
+    _poolSteelcladSerpent,
     _poolStirge,
     _poolStitchedAssistant,
     _poolStitchedMangler,

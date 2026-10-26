@@ -44,6 +44,7 @@ import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
 import _poolBedlamReveler from "../pool/bedlam-reveler.js";
+import _poolBehemothsHerald from "../pool/behemoths-herald.js";
 import _poolBeholdTheBeyond from "../pool/behold-the-beyond.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
@@ -509,6 +510,7 @@ import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
+import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
 import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
@@ -697,6 +699,7 @@ const shard: CardShard = {
     _poolBattleOfFrostAndFire,
     _poolBeastWhisperer,
     _poolBedlamReveler,
+    _poolBehemothsHerald,
     _poolBeholdTheBeyond,
     _poolBelenonWarAnthem,
     _poolBellowsLizard,
@@ -1162,6 +1165,7 @@ const shard: CardShard = {
     _poolSpellSwindle,
     _poolSpewFlame,
     _poolSphinxOfTheFinalWord,
+    _poolSphinxsHerald,
     _poolSphinxsInsight,
     _poolSpiritShield,
     _poolStab,

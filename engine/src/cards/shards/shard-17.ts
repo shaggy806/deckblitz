@@ -82,6 +82,7 @@ import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
+import _poolCarrionThrash from "../pool/carrion-thrash.js";
 import _poolCartoucheOfAmbition from "../pool/cartouche-of-ambition.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
 import _poolCelestialFlare from "../pool/celestial-flare.js";
@@ -343,6 +344,7 @@ import _poolMapTheWastes from "../pool/map-the-wastes.js";
 import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMaskOfRiddles from "../pool/mask-of-riddles.js";
+import _poolMassPolymorph from "../pool/mass-polymorph.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterOfPearls from "../pool/master-of-pearls.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
@@ -447,6 +449,7 @@ import _poolReasonBelieve from "../pool/reason-believe.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
+import _poolRedirect from "../pool/redirect.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
 import _poolRenownedWeaver from "../pool/renowned-weaver.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
@@ -527,6 +530,7 @@ import _poolSpinedWurm from "../pool/spined-wurm.js";
 import _poolSpireGarden from "../pool/spire-garden.js";
 import _poolSpireWinder from "../pool/spire-winder.js";
 import _poolSplendorMare from "../pool/splendor-mare.js";
+import _poolSquadronHawk from "../pool/squadron-hawk.js";
 import _poolStarlightInvoker from "../pool/starlight-invoker.js";
 import _poolSteadfastPaladin from "../pool/steadfast-paladin.js";
 import _poolSteelOverseer from "../pool/steel-overseer.js";
@@ -670,6 +674,7 @@ import _tokensGoblinScoutToken from "../tokens/goblin-scout-token.js";
 import _tokensGoblinShamanToken from "../tokens/goblin-shaman-token.js";
 import _tokensGolemToken44 from "../tokens/golem-token-4-4.js";
 import _tokensGriffinToken from "../tokens/griffin-token.js";
+import _tokensHomunculusToken from "../tokens/homunculus-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
 import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolBurrowingRazormaw,
     _poolCapennaExpress,
     _poolCarrionLocust,
+    _poolCarrionThrash,
     _poolCartoucheOfAmbition,
     _poolCascadeBluffs,
     _poolCelestialFlare,
@@ -1022,6 +1028,7 @@ const shard: CardShard = {
     _poolMarket,
     _poolMarketwatchPhantom,
     _poolMaskOfRiddles,
+    _poolMassPolymorph,
     _poolMasterApothecary,
     _poolMasterOfPearls,
     _poolMasterworkOfIngenuity,
@@ -1126,6 +1133,7 @@ const shard: CardShard = {
     _poolRecruiterOfTheGuard,
     _poolRecuperate,
     _poolRedMagesRapier,
+    _poolRedirect,
     _poolRelmsSketching,
     _poolRenownedWeaver,
     _poolResoluteWatchdog,
@@ -1206,6 +1214,7 @@ const shard: CardShard = {
     _poolSpireGarden,
     _poolSpireWinder,
     _poolSplendorMare,
+    _poolSquadronHawk,
     _poolStarlightInvoker,
     _poolSteadfastPaladin,
     _poolSteelOverseer,
@@ -1351,6 +1360,7 @@ const shard: CardShard = {
     _tokensGoblinShamanToken,
     _tokensGolemToken44,
     _tokensGriffinToken,
+    _tokensHomunculusToken,
     _tokensKnightToken,
     _tokensMoloidToken,
     _tokensRedElementalToken31,

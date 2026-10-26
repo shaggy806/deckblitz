@@ -23,6 +23,7 @@ import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
 import _poolAnepVizierOfHazoret from "../pool/anep-vizier-of-hazoret.js";
 import _poolAngelOfTheDawn from "../pool/angel-of-the-dawn.js";
+import _poolAngelsHerald from "../pool/angels-herald.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
 import _poolAnkleShanker from "../pool/ankle-shanker.js";
 import _poolAnointerPriest from "../pool/anointer-priest.js";
@@ -695,6 +696,7 @@ const shard: CardShard = {
     _poolAnabaShaman,
     _poolAnepVizierOfHazoret,
     _poolAngelOfTheDawn,
+    _poolAngelsHerald,
     _poolAngrathsMarauders,
     _poolAnkleShanker,
     _poolAnointerPriest,

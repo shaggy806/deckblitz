@@ -12,6 +12,7 @@ import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolAmyRose from "../pool/amy-rose.js";
+import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
@@ -502,6 +503,7 @@ import _poolSpiderClimb from "../pool/spider-climb.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
+import _poolStabbingPain from "../pool/stabbing-pain.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
 import _poolStallionOfAshmouth from "../pool/stallion-of-ashmouth.js";
 import _poolStampedingScurryfoot from "../pool/stampeding-scurryfoot.js";
@@ -665,6 +667,7 @@ const shard: CardShard = {
     _poolAllAboard,
     _poolAlpineWatchdog,
     _poolAmyRose,
+    _poolAncientHellkite,
     _poolAngelOfSanctions,
     _poolAnointedDeacon,
     _poolArachnogenesis,
@@ -1155,6 +1158,7 @@ const shard: CardShard = {
     _poolSpikedBaloth,
     _poolSpikedRipsaw,
     _poolSpringleafParade,
+    _poolStabbingPain,
     _poolStalkingAssassin,
     _poolStallionOfAshmouth,
     _poolStampedingScurryfoot,

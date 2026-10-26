@@ -200,6 +200,7 @@ import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
 import _poolFountainOfIchor from "../pool/fountain-of-ichor.js";
 import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFriendlyRivalry from "../pool/friendly-rivalry.js";
+import _poolFrostTitan from "../pool/frost-titan.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolFuturistSentinel from "../pool/futurist-sentinel.js";
 import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
@@ -430,6 +431,7 @@ import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRelicSeeker from "../pool/relic-seeker.js";
+import _poolResoundingThunder from "../pool/resounding-thunder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetaliatorGriffin from "../pool/retaliator-griffin.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
@@ -863,6 +865,7 @@ const shard: CardShard = {
     _poolFountainOfIchor,
     _poolFrenziedTrapbreaker,
     _poolFriendlyRivalry,
+    _poolFrostTitan,
     _poolFumeSpitter,
     _poolFuturistSentinel,
     _poolGaladrielElvenQueen,
@@ -1093,6 +1096,7 @@ const shard: CardShard = {
     _poolRejoinder,
     _poolRelicBind,
     _poolRelicSeeker,
+    _poolResoundingThunder,
     _poolRestlessCottage,
     _poolRetaliatorGriffin,
     _poolRetreatToKazandu,

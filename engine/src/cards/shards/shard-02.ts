@@ -175,6 +175,7 @@ import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolDutifulReturn from "../pool/dutiful-return.js";
+import _poolEarthServant from "../pool/earth-servant.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
@@ -357,6 +358,7 @@ import _poolMeneldorSwiftSavior from "../pool/meneldor-swift-savior.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
 import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
+import _poolMightyEmergence from "../pool/mighty-emergence.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMindTwist from "../pool/mind-twist.js";
@@ -830,6 +832,7 @@ const shard: CardShard = {
     _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
     _poolDutifulReturn,
+    _poolEarthServant,
     _poolEarthblighter,
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
@@ -1012,6 +1015,7 @@ const shard: CardShard = {
     _poolMetallurgicSummonings,
     _poolMicaReaderOfRuins,
     _poolMidnightCharm,
+    _poolMightyEmergence,
     _poolMightyMutanimals,
     _poolMindSpring,
     _poolMindTwist,

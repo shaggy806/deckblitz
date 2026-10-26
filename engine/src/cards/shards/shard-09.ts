@@ -166,6 +166,7 @@ import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
 import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
+import _poolEmberHauler from "../pool/ember-hauler.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
@@ -183,6 +184,7 @@ import _poolEvolutionaryEscalation from "../pool/evolutionary-escalation.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
+import _poolExuberantFirestoker from "../pool/exuberant-firestoker.js";
 import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFabledHero from "../pool/fabled-hero.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
@@ -433,6 +435,7 @@ import _poolPorcelainZealot from "../pool/porcelain-zealot.js";
 import _poolPotholeMole from "../pool/pothole-mole.js";
 import _poolPotionersTrove from "../pool/potioners-trove.js";
 import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
+import _poolPredatorDragon from "../pool/predator-dragon.js";
 import _poolPriceOfBeauty from "../pool/price-of-beauty.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
@@ -859,6 +862,7 @@ const shard: CardShard = {
     _poolEdricSpymasterOfTrest,
     _poolElendaAndAzor,
     _poolEliminateTheImpossible,
+    _poolEmberHauler,
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
@@ -876,6 +880,7 @@ const shard: CardShard = {
     _poolExclude,
     _poolExcoriate,
     _poolExpensiveTaste,
+    _poolExuberantFirestoker,
     _poolEyetwitch,
     _poolFabledHero,
     _poolFaerieInvaders,
@@ -1126,6 +1131,7 @@ const shard: CardShard = {
     _poolPotholeMole,
     _poolPotionersTrove,
     _poolPrakhataClubSecurity,
+    _poolPredatorDragon,
     _poolPriceOfBeauty,
     _poolPriceOfFreedom,
     _poolPricklyBoggart,

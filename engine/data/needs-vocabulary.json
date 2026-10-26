@@ -10640,6 +10640,26 @@
   "replacement:enters-under-your-control-instead": {
    "family": "effect:gain-control-spell",
    "example": "Gather Specimens: \"If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.\""
+  },
+  "effect:must-cast-if-able": {
+   "family": "effect:cast-during-resolution",
+   "example": "Wild Evocation: the random card revealed from hand must be cast without paying its mana cost if able — the engine's free cast is always optional."
+  },
+  "effect:reveal-random-card-from-hand": {
+   "family": "effect:target-spec-additions",
+   "example": "Merfolk Spy: 'that player reveals a card at random from their hand'."
+  },
+  "effect:search-same-name-as-chosen-permanents": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Clarion Ultimatum: choose five permanents you control, then search for up to five cards, one with each chosen permanent's name, and put them onto the battlefield tapped."
+  },
+  "effect:target-player-reveals-hand": {
+   "family": "effect:target-spec-additions",
+   "example": "Thoughtcutter Agent: 'target player loses 1 life and reveals their hand' — a whole hand revealed with no choice after it."
+  },
+  "static:untargetable-by-nongreen": {
+   "family": "effect:target-spec-additions",
+   "example": "Gaea's Revenge: 'can't be the target of nongreen spells or abilities from nongreen sources' — its controller's too, which hexproof from a colour isn't."
   }
  }
 }

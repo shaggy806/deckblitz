@@ -44,6 +44,7 @@ import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuthority from "../pool/authority.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
+import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
@@ -103,6 +104,7 @@ import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
+import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
 import _poolCharmedSleep from "../pool/charmed-sleep.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
@@ -276,6 +278,7 @@ import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
+import _poolHuntersFeast from "../pool/hunters-feast.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
@@ -643,6 +646,7 @@ import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
 import _poolZhurTaaGoblin from "../pool/zhur-taa-goblin.js";
 import _poolZodiacMonkey from "../pool/zodiac-monkey.js";
+import _tokens22SplittingOozeToken from "../tokens/2-2-splitting-ooze-token.js";
 import _tokensBeastToken33 from "../tokens/beast-token-3-3.js";
 import _tokensBlueBirdToken from "../tokens/blue-bird-token.js";
 import _tokensCadet from "../tokens/cadet.js";
@@ -709,6 +713,7 @@ const shard: CardShard = {
     _poolAugmentingAutomaton,
     _poolAuthority,
     _poolAvatarsWrath,
+    _poolBackToNature,
     _poolBalambTRexaur,
     _poolBallLightning,
     _poolBalothPrime,
@@ -768,6 +773,7 @@ const shard: CardShard = {
     _poolCazurRuthlessStalker,
     _poolCentaurHealer,
     _poolChandraNovicePyromancer,
+    _poolChandrasSpitfire,
     _poolCharcoalDiamond,
     _poolCharmedSleep,
     _poolChasmSkulker,
@@ -941,6 +947,7 @@ const shard: CardShard = {
     _poolHourOfReckoning,
     _poolHowlingGalefang,
     _poolHuatliRadiantChampion,
+    _poolHuntersFeast,
     _poolHypnoticGrifter,
     _poolHypnoticSiren,
     _poolIcatianJavelineers,
@@ -1310,6 +1317,7 @@ const shard: CardShard = {
     _poolZodiacMonkey,
   ],
   tokens: [
+    _tokens22SplittingOozeToken,
     _tokensBeastToken33,
     _tokensBlueBirdToken,
     _tokensCadet,

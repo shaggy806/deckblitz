@@ -246,6 +246,7 @@ import _poolGruulNodorog from "../pool/gruul-nodorog.js";
 import _poolGuardianOfTheAges from "../pool/guardian-of-the-ages.js";
 import _poolGuardianOfTheHalls from "../pool/guardian-of-the-halls.js";
 import _poolGuidingHydra from "../pool/guiding-hydra.js";
+import _poolGustriderExuberant from "../pool/gustrider-exuberant.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
@@ -496,6 +497,7 @@ import _poolShipwreckMarsh from "../pool/shipwreck-marsh.js";
 import _poolShriekingDrake from "../pool/shrieking-drake.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
+import _poolSigilBlessing from "../pool/sigil-blessing.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilkenStrength from "../pool/silken-strength.js";
 import _poolSilkwrap from "../pool/silkwrap.js";
@@ -962,6 +964,7 @@ const shard: CardShard = {
     _poolGuardianOfTheAges,
     _poolGuardianOfTheHalls,
     _poolGuidingHydra,
+    _poolGustriderExuberant,
     _poolGuulDrazMucklord,
     _poolHaazdaMarshal,
     _poolHarmlessOffering,
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolShriekingDrake,
     _poolShrink,
     _poolShroudedShepherd,
+    _poolSigilBlessing,
     _poolSigilOfMyrkul,
     _poolSilkenStrength,
     _poolSilkwrap,

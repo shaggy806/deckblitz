@@ -70,6 +70,7 @@ import _poolBurningTreeEmissary from "../pool/burning-tree-emissary.js";
 import _poolBurningYardTrainer from "../pool/burning-yard-trainer.js";
 import _poolCabalStronghold from "../pool/cabal-stronghold.js";
 import _poolCactarantula from "../pool/cactarantula.js";
+import _poolCalderaHellion from "../pool/caldera-hellion.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
@@ -127,6 +128,7 @@ import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
 import _poolDimensionalInfiltrator from "../pool/dimensional-infiltrator.js";
+import _poolDiminish from "../pool/diminish.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
@@ -433,6 +435,7 @@ import _poolRelentlessHunter from "../pool/relentless-hunter.js";
 import _poolRelicsRoar from "../pool/relics-roar.js";
 import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
+import _poolResoundingSilence from "../pool/resounding-silence.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiseFromTheTides from "../pool/rise-from-the-tides.js";
@@ -740,6 +743,7 @@ const shard: CardShard = {
     _poolBurningYardTrainer,
     _poolCabalStronghold,
     _poolCactarantula,
+    _poolCalderaHellion,
     _poolCallOfTheHerd,
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
@@ -797,6 +801,7 @@ const shard: CardShard = {
     _poolDevoutChaplain,
     _poolDiligentExcavator,
     _poolDimensionalInfiltrator,
+    _poolDiminish,
     _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
@@ -1103,6 +1108,7 @@ const shard: CardShard = {
     _poolRelicsRoar,
     _poolRepeatingBarrage,
     _poolResoluteRider,
+    _poolResoundingSilence,
     _poolRiftSower,
     _poolRipApart,
     _poolRiseFromTheTides,

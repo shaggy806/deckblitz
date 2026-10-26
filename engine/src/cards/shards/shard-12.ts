@@ -439,6 +439,7 @@ import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
+import _poolPunishIgnorance from "../pool/punish-ignorance.js";
 import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPurphorossEmissary from "../pool/purphoross-emissary.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
+    _poolPunishIgnorance,
     _poolPunishingFire,
     _poolPurphorossEmissary,
     _poolPyroceratops,

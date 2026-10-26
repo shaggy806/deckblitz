@@ -95,6 +95,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Bogardan Phoenix, Teferi's Realm, Spider Climb and 60 more (VIS 112 of 167) — plus Mirage's
   Lightning Reflexes, Armor of Thorns, Grave Servitude and Soar and Alliances' Thawing Glaciers;
   46 blocked.
+- **The rest of Shards of Alara and Magic 2011** (batch 174, the middle walk's last, 2026-10-26):
+  "begin the game with it on the battlefield" (rule 103.6a, the Leylines) built. 68 authored —
+  Frost Titan, Mitotic Slime, Sphinx Sovereign, Covenant of Minds, the Heralds and 59 more, with
+  Leyline of Anticipation, Sanctity, the Void and Vitality and Quicksilver, Brash Blur; 27 blocked.
+  The middle walk's range (M11 and ROE back to ALA) is done.
 - **Conflux, whole, and Shards of Alara's most-played** (batch 171, the middle walk, 2026-10-26):
   no engine change. 80 of the 109 authored — Ranger of Eos, Kresh the Bloodbraided, Rafiq of the
   Many, Sarkhan Vol, Mayael the Anima, Goblin Assault, Wild Nacatl, Knight-Captain of Eos,

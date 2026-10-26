@@ -578,6 +578,7 @@ import _poolTheFirstEruption from "../pool/the-first-eruption.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
+import _poolThunderThrashElder from "../pool/thunder-thrash-elder.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
@@ -617,6 +618,7 @@ import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
+import _poolViolentUltimatum from "../pool/violent-ultimatum.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVoidGrafter from "../pool/void-grafter.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
@@ -1243,6 +1245,7 @@ const shard: CardShard = {
     _poolTheGitrogMonster,
     _poolTheTriumphOfAnax,
     _poolThickestInTheThicket,
+    _poolThunderThrashElder,
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
@@ -1282,6 +1285,7 @@ const shard: CardShard = {
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,
     _poolVinereapMentor,
+    _poolViolentUltimatum,
     _poolVnwxtVerboseHost,
     _poolVoidGrafter,
     _poolVoldarenEstate,

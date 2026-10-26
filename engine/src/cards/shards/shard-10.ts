@@ -164,6 +164,7 @@ import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
+import _poolDragonsHerald from "../pool/dragons-herald.js";
 import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
@@ -445,6 +446,7 @@ import _poolRelentlessRohirrim from "../pool/relentless-rohirrim.js";
 import _poolRenegadeDoppelganger from "../pool/renegade-doppelganger.js";
 import _poolRenegadesGetaway from "../pool/renegades-getaway.js";
 import _poolReptilianRecruiter from "../pool/reptilian-recruiter.js";
+import _poolResoundingWave from "../pool/resounding-wave.js";
 import _poolResplendentAngel from "../pool/resplendent-angel.js";
 import _poolRestlessVents from "../pool/restless-vents.js";
 import _poolRiddlesmith from "../pool/riddlesmith.js";
@@ -854,6 +856,7 @@ const shard: CardShard = {
     _poolDovinsDismissal,
     _poolDownInTheValley,
     _poolDragonbackAssault,
+    _poolDragonsHerald,
     _poolDramaticAccusation,
     _poolDreadShade,
     _poolDryadsRevival,
@@ -1135,6 +1138,7 @@ const shard: CardShard = {
     _poolRenegadeDoppelganger,
     _poolRenegadesGetaway,
     _poolReptilianRecruiter,
+    _poolResoundingWave,
     _poolResplendentAngel,
     _poolRestlessVents,
     _poolRiddlesmith,

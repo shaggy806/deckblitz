@@ -416,6 +416,7 @@ import _poolPrescientChimera from "../pool/prescient-chimera.js";
 import _poolPreysVengeance from "../pool/preys-vengeance.js";
 import _poolPricklyMarmoset from "../pool/prickly-marmoset.js";
 import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
+import _poolPrimalCocoon from "../pool/primal-cocoon.js";
 import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolPreysVengeance,
     _poolPricklyMarmoset,
     _poolPriestOfAncientLore,
+    _poolPrimalCocoon,
     _poolPrizedUnicorn,
     _poolProsperousPartnership,
     _poolProudPackRhino,

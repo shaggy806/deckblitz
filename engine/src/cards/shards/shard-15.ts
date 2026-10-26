@@ -48,6 +48,7 @@ import _poolBlight from "../pool/blight.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodHost from "../pool/blood-host.js";
 import _poolBloodMoney from "../pool/blood-money.js";
+import _poolBloodcrazedGoblin from "../pool/bloodcrazed-goblin.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
 import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
@@ -585,6 +586,7 @@ import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolVenarianGold from "../pool/venarian-gold.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
+import _poolViashinoSkeleton from "../pool/viashino-skeleton.js";
 import _poolViashivanDragon from "../pool/viashivan-dragon.js";
 import _poolVileEntomber from "../pool/vile-entomber.js";
 import _poolVinebredBrawler from "../pool/vinebred-brawler.js";
@@ -687,6 +689,7 @@ const shard: CardShard = {
     _poolBlightstepPathway,
     _poolBloodHost,
     _poolBloodMoney,
+    _poolBloodcrazedGoblin,
     _poolBloodtallowCandle,
     _poolBoggartMischief,
     _poolBogslithersEmbrace,
@@ -1224,6 +1227,7 @@ const shard: CardShard = {
     _poolVegaTheWatcher,
     _poolVenarianGold,
     _poolViashinoGrappler,
+    _poolViashinoSkeleton,
     _poolViashivanDragon,
     _poolVileEntomber,
     _poolVinebredBrawler,

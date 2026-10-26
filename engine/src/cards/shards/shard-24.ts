@@ -482,6 +482,7 @@ import _poolSigiledContender from "../pool/sigiled-contender.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
+import _poolSkeletonize from "../pool/skeletonize.js";
 import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkoaEmbermage from "../pool/skoa-embermage.js";
 import _poolSkullFracture from "../pool/skull-fracture.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolSilverSableMercenaryLeader,
     _poolSimicGuildgate,
     _poolSinkhole,
+    _poolSkeletonize,
     _poolSkinrender,
     _poolSkoaEmbermage,
     _poolSkullFracture,

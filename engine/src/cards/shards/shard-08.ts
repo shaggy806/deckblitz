@@ -41,6 +41,7 @@ import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolAquaticIngress from "../pool/aquatic-ingress.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
+import _poolArchdemonOfUnx from "../pool/archdemon-of-unx.js";
 import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -496,6 +497,7 @@ import _poolSeaScryer from "../pool/sea-scryer.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
 import _poolSecretsOfTheGoldenCity from "../pool/secrets-of-the-golden-city.js";
+import _poolSedraxisSpecter from "../pool/sedraxis-specter.js";
 import _poolSeersLantern from "../pool/seers-lantern.js";
 import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
@@ -742,6 +744,7 @@ const shard: CardShard = {
     _poolAnzragTheQuakeMole,
     _poolAquaticIngress,
     _poolArcanisTheOmnipotent,
+    _poolArchdemonOfUnx,
     _poolArchitectOfTheUntamed,
     _poolArgothianPixies,
     _poolArtificersAssistant,
@@ -1197,6 +1200,7 @@ const shard: CardShard = {
     _poolSeasonalRitual,
     _poolSecretRendezvous,
     _poolSecretsOfTheGoldenCity,
+    _poolSedraxisSpecter,
     _poolSeersLantern,
     _poolSegovianAngel,
     _poolSeizeTheInitiative,

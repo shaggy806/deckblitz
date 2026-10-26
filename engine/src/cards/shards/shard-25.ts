@@ -50,6 +50,7 @@ import _poolBadMoon from "../pool/bad-moon.js";
 import _poolBafflingEnd from "../pool/baffling-end.js";
 import _poolBalduvianConjurer from "../pool/balduvian-conjurer.js";
 import _poolBandage from "../pool/bandage.js";
+import _poolBanewaspAffliction from "../pool/banewasp-affliction.js";
 import _poolBasrisAegis from "../pool/basris-aegis.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
@@ -403,6 +404,7 @@ import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
+import _poolPhantomBeast from "../pool/phantom-beast.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
@@ -713,6 +715,7 @@ const shard: CardShard = {
     _poolBafflingEnd,
     _poolBalduvianConjurer,
     _poolBandage,
+    _poolBanewaspAffliction,
     _poolBasrisAegis,
     _poolBastionOfRemembrance,
     _poolBastionProtector,
@@ -1066,6 +1069,7 @@ const shard: CardShard = {
     _poolParkHeightsPegasus,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
+    _poolPhantomBeast,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
     _poolPhyrexianBoon,

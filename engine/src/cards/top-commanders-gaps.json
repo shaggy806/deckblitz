@@ -433,7 +433,8 @@
   "static:set-color-attached",
   "trigger:self-sacrifice-trigger",
   "effect:flash-cast-sacrifice",
-  "effect:delayed-trigger-next-cleanup"
+  "effect:delayed-trigger-next-cleanup",
+  "mechanic:begin-game-on-battlefield"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

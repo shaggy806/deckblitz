@@ -464,6 +464,7 @@ import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
+import _poolPuppetConjurer from "../pool/puppet-conjurer.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
@@ -483,6 +484,7 @@ import _poolRenegadeSilent from "../pool/renegade-silent.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRescueTheFoal from "../pool/rescue-the-foal.js";
+import _poolResoundingRoar from "../pool/resounding-roar.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
 import _poolReturnFromTheWilds from "../pool/return-from-the-wilds.js";
@@ -574,6 +576,7 @@ import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
 import _poolSummonUndead from "../pool/summon-undead.js";
 import _poolSunBlessedMount from "../pool/sun-blessed-mount.js";
+import _poolSunseedNurturer from "../pool/sunseed-nurturer.js";
 import _poolSunspringExpedition from "../pool/sunspring-expedition.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
@@ -1166,6 +1169,7 @@ const shard: CardShard = {
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
     _poolPsychomancer,
+    _poolPuppetConjurer,
     _poolRabidBite,
     _poolRaidingNightstalker,
     _poolRallyForTheThrone,
@@ -1185,6 +1189,7 @@ const shard: CardShard = {
     _poolRepeatOffender,
     _poolReputableMerchant,
     _poolRescueTheFoal,
+    _poolResoundingRoar,
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,
     _poolReturnFromTheWilds,
@@ -1276,6 +1281,7 @@ const shard: CardShard = {
     _poolSummerBloom,
     _poolSummonUndead,
     _poolSunBlessedMount,
+    _poolSunseedNurturer,
     _poolSunspringExpedition,
     _poolSuperAdaptoid,
     _poolSurrakDragonclaw,

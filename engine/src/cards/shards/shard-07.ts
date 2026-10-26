@@ -98,6 +98,7 @@ import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
+import _poolComaVeil from "../pool/coma-veil.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
 import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
 import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
@@ -116,6 +117,7 @@ import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
 import _poolCutthroatNegotiator from "../pool/cutthroat-negotiator.js";
+import _poolCyclopsGladiator from "../pool/cyclops-gladiator.js";
 import _poolDaggersailAeronaut from "../pool/daggersail-aeronaut.js";
 import _poolDanceOfTheSkywise from "../pool/dance-of-the-skywise.js";
 import _poolDancingScimitar from "../pool/dancing-scimitar.js";
@@ -202,6 +204,7 @@ import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolFutureSight from "../pool/future-sight.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
+import _poolGargoyleSentinel from "../pool/gargoyle-sentinel.js";
 import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
 import _poolGateColossus from "../pool/gate-colossus.js";
 import _poolGemhideSliver from "../pool/gemhide-sliver.js";
@@ -793,6 +796,7 @@ const shard: CardShard = {
     _poolClockworkPercussionist,
     _poolCollectorOuphe,
     _poolColossapede,
+    _poolComaVeil,
     _poolConclaveCavalier,
     _poolConduitOfEmrakul,
     _poolConfrontTheUnknown,
@@ -811,6 +815,7 @@ const shard: CardShard = {
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
     _poolCutthroatNegotiator,
+    _poolCyclopsGladiator,
     _poolDaggersailAeronaut,
     _poolDanceOfTheSkywise,
     _poolDancingScimitar,
@@ -897,6 +902,7 @@ const shard: CardShard = {
     _poolFuriousStrength,
     _poolFutureSight,
     _poolGalecasterColossus,
+    _poolGargoyleSentinel,
     _poolGarrisonSergeant,
     _poolGateColossus,
     _poolGemhideSliver,
