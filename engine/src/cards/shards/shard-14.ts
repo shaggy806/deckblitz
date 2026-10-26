@@ -311,6 +311,7 @@ import _poolHieromancersCage from "../pool/hieromancers-cage.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
+import _poolHollowsage from "../pool/hollowsage.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
 import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
@@ -333,6 +334,7 @@ import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
 import _poolIshkanahGrafwidow from "../pool/ishkanah-grafwidow.js";
+import _poolIslebackSpawn from "../pool/isleback-spawn.js";
 import _poolIsperiaSupremeJudge from "../pool/isperia-supreme-judge.js";
 import _poolIvoraInsatiableHeir from "../pool/ivora-insatiable-heir.js";
 import _poolJJonahJameson from "../pool/j-jonah-jameson.js";
@@ -1000,6 +1002,7 @@ const shard: CardShard = {
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHollowScavenger,
+    _poolHollowsage,
     _poolHomicideInvestigator,
     _poolHonoredHydra,
     _poolHotheadedGiant,
@@ -1022,6 +1025,7 @@ const shard: CardShard = {
     _poolIronShieldElf,
     _poolIronshellBeetle,
     _poolIshkanahGrafwidow,
+    _poolIslebackSpawn,
     _poolIsperiaSupremeJudge,
     _poolIvoraInsatiableHeir,
     _poolJJonahJameson,

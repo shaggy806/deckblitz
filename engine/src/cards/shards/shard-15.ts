@@ -371,6 +371,7 @@ import _poolMazeGlider from "../pool/maze-glider.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
+import _poolMerrowWavebreakers from "../pool/merrow-wavebreakers.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
 import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
@@ -474,6 +475,7 @@ import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRootsOfLife from "../pool/roots-of-life.js";
+import _poolRoughshodMentor from "../pool/roughshod-mentor.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
@@ -557,6 +559,7 @@ import _poolTajuruBeastmaster from "../pool/tajuru-beastmaster.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
+import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
 import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
 import _poolTempestOwl from "../pool/tempest-owl.js";
@@ -598,6 +601,7 @@ import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTwinbladeGeist from "../pool/twinblade-geist.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
+import _poolTyrannize from "../pool/tyrannize.js";
 import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
 import _poolUndo from "../pool/undo.js";
@@ -1040,6 +1044,7 @@ const shard: CardShard = {
     _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMercilessHarlequin,
+    _poolMerrowWavebreakers,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,
     _poolMidnightPathlighter,
@@ -1143,6 +1148,7 @@ const shard: CardShard = {
     _poolRockSoldiers,
     _poolRoilCartographer,
     _poolRootsOfLife,
+    _poolRoughshodMentor,
     _poolRuneboggle,
     _poolRuneforgeChampion,
     _poolRushOfAdrenaline,
@@ -1226,6 +1232,7 @@ const shard: CardShard = {
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,
+    _poolTattermungeDuo,
     _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,
     _poolTempestOwl,
@@ -1267,6 +1274,7 @@ const shard: CardShard = {
     _poolTurbulentCrater,
     _poolTwinbladeGeist,
     _poolTymorasInvoker,
+    _poolTyrannize,
     _poolTyrsBlessing,
     _poolUnderwaterTunnelSlimyAquarium,
     _poolUndo,

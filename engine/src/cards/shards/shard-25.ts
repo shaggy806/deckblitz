@@ -490,6 +490,7 @@ import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
 import _poolRuinousMinotaur from "../pool/ruinous-minotaur.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
 import _poolRumblingRockslide from "../pool/rumbling-rockslide.js";
+import _poolSafeholdDuo from "../pool/safehold-duo.js";
 import _poolSalvationColossus from "../pool/salvation-colossus.js";
 import _poolSamiteHealer from "../pool/samite-healer.js";
 import _poolSandScout from "../pool/sand-scout.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolRuinousMinotaur,
     _poolRumblingBaloth,
     _poolRumblingRockslide,
+    _poolSafeholdDuo,
     _poolSalvationColossus,
     _poolSamiteHealer,
     _poolSandScout,

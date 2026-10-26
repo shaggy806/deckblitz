@@ -1,0 +1,572 @@
+{
+ "batch": "B183",
+ "status": "complete",
+ "ranks": "Shadowmoor (SHM, 2008-05-02): the rest of the set, its 80 cards left after batch 180 (middle walk, Eventide back to Time Spiral)",
+ "authored": [
+  {
+   "name": "Apothecary Initiate",
+   "files": [
+    "engine/src/cards/pool/apothecary-initiate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashenmoor Cohort",
+   "files": [
+    "engine/src/cards/pool/ashenmoor-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ballynock Cohort",
+   "files": [
+    "engine/src/cards/pool/ballynock-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrenton Cragtreads",
+   "files": [
+    "engine/src/cards/pool/barrenton-cragtreads.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Biting Tether",
+   "files": [
+    "engine/src/cards/pool/biting-tether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodshed Fever",
+   "files": [
+    "engine/src/cards/pool/bloodshed-fever.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boggart Arsonists",
+   "files": [
+    "engine/src/cards/pool/boggart-arsonists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briarberry Cohort",
+   "files": [
+    "engine/src/cards/pool/briarberry-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consign to Dream",
+   "files": [
+    "engine/src/cards/pool/consign-to-dream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crabapple Cohort",
+   "files": [
+    "engine/src/cards/pool/crabapple-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crowd of Cinders",
+   "files": [
+    "engine/src/cards/pool/crowd-of-cinders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cultbrand Cinder",
+   "files": [
+    "engine/src/cards/pool/cultbrand-cinder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dawnglow Infusion",
+   "files": [
+    "engine/src/cards/pool/dawnglow-infusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep-Slumber Titan",
+   "files": [
+    "engine/src/cards/pool/deep-slumber-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demigod of Revenge",
+   "files": [
+    "engine/src/cards/pool/demigod-of-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emberstrike Duo",
+   "files": [
+    "engine/src/cards/pool/emberstrike-duo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firespout",
+   "files": [
+    "engine/src/cards/pool/firespout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloomwidow's Feast",
+   "files": [
+    "engine/src/cards/pool/gloomwidows-feast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnarled Effigy",
+   "files": [
+    "engine/src/cards/pool/gnarled-effigy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gravelgill Duo",
+   "files": [
+    "engine/src/cards/pool/gravelgill-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grief Tyrant",
+   "files": [
+    "engine/src/cards/pool/grief-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hollowsage",
+   "files": [
+    "engine/src/cards/pool/hollowsage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impromptu Raid",
+   "files": [
+    "engine/src/cards/pool/impromptu-raid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inescapable Brute",
+   "files": [
+    "engine/src/cards/pool/inescapable-brute.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Intimidator Initiate",
+   "files": [
+    "engine/src/cards/pool/intimidator-initiate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Isleback Spawn",
+   "files": [
+    "engine/src/cards/pool/isleback-spawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kinscaer Harpoonist",
+   "files": [
+    "engine/src/cards/pool/kinscaer-harpoonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merrow Grimeblotter",
+   "files": [
+    "engine/src/cards/pool/merrow-grimeblotter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Merrow Wavebreakers",
+   "files": [
+    "engine/src/cards/pool/merrow-wavebreakers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mudbrawler Cohort",
+   "files": [
+    "engine/src/cards/pool/mudbrawler-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mudbrawler Raiders",
+   "files": [
+    "engine/src/cards/pool/mudbrawler-raiders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nurturer Initiate",
+   "files": [
+    "engine/src/cards/pool/nurturer-initiate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oversoul of Dusk",
+   "files": [
+    "engine/src/cards/pool/oversoul-of-dusk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Poison the Well",
+   "files": [
+    "engine/src/cards/pool/poison-the-well.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismwake Merrow",
+   "files": [
+    "engine/src/cards/pool/prismwake-merrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puncture Bolt",
+   "files": [
+    "engine/src/cards/pool/puncture-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Put Away",
+   "files": [
+    "engine/src/cards/pool/put-away.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven's Run Dragoon",
+   "files": [
+    "engine/src/cards/pool/ravens-run-dragoon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Repel Intruders",
+   "files": [
+    "engine/src/cards/pool/repel-intruders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River's Grasp",
+   "files": [
+    "engine/src/cards/pool/rivers-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roughshod Mentor",
+   "files": [
+    "engine/src/cards/pool/roughshod-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Safehold Duo",
+   "files": [
+    "engine/src/cards/pool/safehold-duo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Safehold Sentry",
+   "files": [
+    "engine/src/cards/pool/safehold-sentry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scarscale Ritual",
+   "files": [
+    "engine/src/cards/pool/scarscale-ritual.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silkbind Faerie",
+   "files": [
+    "engine/src/cards/pool/silkbind-faerie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sinking Feeling",
+   "files": [
+    "engine/src/cards/pool/sinking-feeling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slinking Giant",
+   "files": [
+    "engine/src/cards/pool/slinking-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smolder Initiate",
+   "files": [
+    "engine/src/cards/pool/smolder-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sootstoke Kindler",
+   "files": [
+    "engine/src/cards/pool/sootstoke-kindler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sootwalkers",
+   "files": [
+    "engine/src/cards/pool/sootwalkers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Splitting Headache",
+   "files": [
+    "engine/src/cards/pool/splitting-headache.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tattermunge Duo",
+   "files": [
+    "engine/src/cards/pool/tattermunge-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tattermunge Witch",
+   "files": [
+    "engine/src/cards/pool/tattermunge-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thistledown Duo",
+   "files": [
+    "engine/src/cards/pool/thistledown-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Toil to Renown",
+   "files": [
+    "engine/src/cards/pool/toil-to-renown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyrannize",
+   "files": [
+    "engine/src/cards/pool/tyrannize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderbrine Rootcutters",
+   "files": [
+    "engine/src/cards/pool/wanderbrine-rootcutters.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wicker Warcrawler",
+   "files": [
+    "engine/src/cards/pool/wicker-warcrawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Swing",
+   "files": [
+    "engine/src/cards/pool/wild-swing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woeleecher",
+   "files": [
+    "engine/src/cards/pool/woeleecher.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Manaforge Cinder",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "\"Activate no more than three times each turn\": activated abilities can be limited to once a turn only."
+  },
+  {
+   "name": "Tower Above",
+   "needs": [
+    "effect:forced-block-this-combat"
+   ],
+   "why": "The granted attack trigger's \"target creature blocks it this turn if able\": nothing makes one creature block a particular attacker."
+  },
+  {
+   "name": "Pale Wayfarer",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Protection from the colour the target's controller chooses: no effect grants protection from a chosen colour."
+  },
+  {
+   "name": "Hollowborn Barghest",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "The second trigger's \"if that player has no cards in hand\" reads the active opponent's hand; the hand-size condition reads only you or each player."
+  },
+  {
+   "name": "Cragganwick Cremator",
+   "needs": [
+    "amount:this-way-total-power-of-cards"
+   ],
+   "why": "\"Damage equal to the discarded card's power\": a discarded card's power reads 0 once it's in the graveyard."
+  },
+  {
+   "name": "Jaws of Stone",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "Damage divided as you choose, X the Mountains you control as you cast it: a divided total is a number or the spell's X only."
+  },
+  {
+   "name": "Strip Bare",
+   "needs": [
+    "filter:attached-to-target"
+   ],
+   "why": "\"Destroy all Auras and Equipment attached to target creature\": a filter's attachedTo takes a filter, not a target slot."
+  },
+  {
+   "name": "Ember Gale",
+   "needs": [
+    "effect:restrict-all-target-player"
+   ],
+   "why": "\"Creatures target player controls can't block this turn\", binding creatures entering later: the filter restriction has no target-player controller."
+  },
+  {
+   "name": "Valleymaker",
+   "needs": [
+    "effect:mana-ability-chosen-player-adds",
+    "decision:choose-player"
+   ],
+   "why": "\"Choose a player. That player adds {G}{G}{G}\": a mana ability adding mana to a chosen player."
+  },
+  {
+   "name": "Glamer Spinners",
+   "needs": [
+    "filter:attached-to-target",
+    "effect:move-auras-to-chosen-permanent"
+   ],
+   "why": "Moves all Auras enchanting target permanent onto another permanent with the same controller chosen as it resolves."
+  },
+  {
+   "name": "Worldpurge",
+   "needs": [
+    "effect:each-player-keeps-n-shuffles-rest",
+    "effect:empty-mana-pool"
+   ],
+   "why": "Each player keeps up to seven cards and shuffles the rest of their hand in, then everyone loses unspent mana."
+  },
+  {
+   "name": "Heartmender",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "\"Remove a -1/-1 counter from each creature you control\": remove-counter reaches one permanent only."
+  },
+  {
+   "name": "Illuminated Folio",
+   "needs": [
+    "cost:reveal-cards-sharing-color"
+   ],
+   "why": "Its cost reveals two cards from your hand that share a colour."
+  },
+  {
+   "name": "Counterbore",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "Searches the spell controller's graveyard, hand and library for cards with the countered spell's name and exiles them."
+  },
+  {
+   "name": "Gloomlance",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "\"Its controller discards a card\" for a destroyed creature: discard reads only a player target slot."
+  },
+  {
+   "name": "Fossil Find",
+   "needs": [
+    "effect:reorder-graveyard"
+   ],
+   "why": "\"Then reorder your graveyard as you choose\": the engine keeps no player-chosen graveyard order."
+  },
+  {
+   "name": "Inquisitor's Snare",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn"
+   ],
+   "why": "Prevents all damage the target attacking or blocking creature would deal this turn (even after it leaves, a ruling): prevent-damage shields a receiver only."
+  },
+  {
+   "name": "Medicine Runner",
+   "needs": [
+    "effect:remove-counter-chosen-kind"
+   ],
+   "why": "\"Remove a counter from target permanent\" of any kind the player chooses: remove-counter names one fixed kind."
+  },
+  {
+   "name": "Knollspine Invocation",
+   "needs": [
+    "cost:discard-mana-value-x"
+   ],
+   "why": "\"{X}, Discard a card with mana value X\": the discard cost's filter can't read the announced X."
+  },
+  {
+   "name": "Whimwader",
+   "needs": [
+    "static:attack-restriction-defending-player-condition"
+   ],
+   "why": "\"Can't attack unless defending player controls a blue permanent\": no condition reads what the defending player controls."
+  }
+ ]
+}

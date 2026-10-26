@@ -10878,6 +10878,30 @@
   "effect:prevent-all-combat-damage-except-target": {
    "family": "effect:prevent-combat-damage-by-target",
    "example": "Terrifying Presence: prevent all combat damage but that dealt by the target creature."
+  },
+  "effect:mana-ability-chosen-player-adds": {
+   "family": "decision:choose-player",
+   "example": "Valleymaker: \"{T}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}\" — a mana ability adding mana to a player chosen as it resolves."
+  },
+  "effect:move-auras-to-chosen-permanent": {
+   "family": "filter:attached-to-target",
+   "example": "Glamer Spinners: \"attach all Auras enchanting target permanent to another permanent with the same controller\" — the receiver chosen as it resolves, one each Aura can enchant."
+  },
+  "effect:each-player-keeps-n-shuffles-rest": {
+   "family": "effect:shuffle-hand-and-graveyard-into-library",
+   "example": "Worldpurge: \"each player chooses up to seven cards in their hand, then shuffles the rest of their hand into their library\"."
+  },
+  "cost:reveal-cards-sharing-color": {
+   "family": "cost:reveal-card-as-additional-cost",
+   "example": "Illuminated Folio: \"{1}, {T}, Reveal two cards from your hand that share a color\" — an activation cost revealing a pair that shares a colour."
+  },
+  "effect:reorder-graveyard": {
+   "family": "effect:top-card-of-graveyard",
+   "example": "Fossil Find: \"then reorder your graveyard as you choose\" — the engine keeps no player-chosen graveyard order."
+  },
+  "cost:discard-mana-value-x": {
+   "family": "cost:discard-x-cost",
+   "example": "Knollspine Invocation: \"{X}, Discard a card with mana value X\" — a discard cost whose filter reads the announced X."
   }
  }
 }

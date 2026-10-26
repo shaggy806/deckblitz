@@ -484,6 +484,7 @@ import _poolRecruitTheWorthy from "../pool/recruit-the-worthy.js";
 import _poolReigningVictor from "../pool/reigning-victor.js";
 import _poolRekindlingPhoenix from "../pool/rekindling-phoenix.js";
 import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
+import _poolRepelIntruders from "../pool/repel-intruders.js";
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
 import _poolResoluteSurvivors from "../pool/resolute-survivors.js";
@@ -541,6 +542,7 @@ import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
+import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
 import _poolSkyScourer from "../pool/sky-scourer.js";
@@ -1203,6 +1205,7 @@ const shard: CardShard = {
     _poolReigningVictor,
     _poolRekindlingPhoenix,
     _poolRenariMerchantOfMarvels,
+    _poolRepelIntruders,
     _poolRepel,
     _poolReplenish,
     _poolResoluteSurvivors,
@@ -1260,6 +1263,7 @@ const shard: CardShard = {
     _poolShizoDeathsStorehouse,
     _poolShorelineSalvager,
     _poolSidisisPet,
+    _poolSilkbindFaerie,
     _poolSilkguard,
     _poolSimicAscendancy,
     _poolSkyScourer,
