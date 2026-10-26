@@ -166,6 +166,7 @@ import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
 import _poolDranaKalastriaBloodchief from "../pool/drana-kalastria-bloodchief.js";
 import _poolDraugrsHelm from "../pool/draugrs-helm.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
+import _poolDreadWarlock from "../pool/dread-warlock.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
@@ -249,6 +250,7 @@ import _poolGreatWall from "../pool/great-wall.js";
 import _poolGreensleevesMaroSorcerer from "../pool/greensleeves-maro-sorcerer.js";
 import _poolGrimTutor from "../pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
+import _poolGrixisGrimblade from "../pool/grixis-grimblade.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
@@ -813,6 +815,7 @@ const shard: CardShard = {
     _poolDranaKalastriaBloodchief,
     _poolDraugrsHelm,
     _poolDreadReaper,
+    _poolDreadWarlock,
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
@@ -896,6 +899,7 @@ const shard: CardShard = {
     _poolGreensleevesMaroSorcerer,
     _poolGrimTutor,
     _poolGrimaSarumansFootman,
+    _poolGrixisGrimblade,
     _poolGrizzledLeotau,
     _poolGruulRagebeast,
     _poolGruulSignet,

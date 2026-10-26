@@ -509,6 +509,7 @@ import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
 import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
 import _poolShardlessOutlander from "../pool/shardless-outlander.js";
 import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
+import _poolShieldOfTheRighteous from "../pool/shield-of-the-righteous.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
 import _poolShimmer from "../pool/shimmer.js";
 import _poolShreddedSails from "../pool/shredded-sails.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolShamanicRevelation,
     _poolShardlessOutlander,
     _poolSheoldredsEdict,
+    _poolShieldOfTheRighteous,
     _poolShimmerMyr,
     _poolShimmer,
     _poolShreddedSails,

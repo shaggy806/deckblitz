@@ -305,6 +305,7 @@ import _poolLedevChampion from "../pool/ledev-champion.js";
 import _poolLeechGauntlet from "../pool/leech-gauntlet.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
+import _poolLichLordOfUnx from "../pool/lich-lord-of-unx.js";
 import _poolLictor from "../pool/lictor.js";
 import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
@@ -383,6 +384,7 @@ import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPolukranosWorldEater from "../pool/polukranos-world-eater.js";
 import _poolPortentOfBetrayal from "../pool/portent-of-betrayal.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
+import _poolPredatoryAdvantage from "../pool/predatory-advantage.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
@@ -481,6 +483,7 @@ import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullSkaab from "../pool/skull-skaab.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
+import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSoShiny from "../pool/so-shiny.js";
@@ -543,6 +546,7 @@ import _poolThornado from "../pool/thornado.js";
 import _poolThornwealdArcher from "../pool/thornweald-archer.js";
 import _poolThoughtMonitor from "../pool/thought-monitor.js";
 import _poolThrabenInspector from "../pool/thraben-inspector.js";
+import _poolThraximundar from "../pool/thraximundar.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
 import _poolThrowingKnife from "../pool/throwing-knife.js";
 import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
@@ -615,6 +619,7 @@ import _poolWildgrowthWalker from "../pool/wildgrowth-walker.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWindgraceAcolyte from "../pool/windgrace-acolyte.js";
+import _poolWindstorm from "../pool/windstorm.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
@@ -630,6 +635,7 @@ import _poolZephyrSprite from "../pool/zephyr-sprite.js";
 import _poolZhalfirinDecoy from "../pool/zhalfirin-decoy.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
 import _poolZurgosVanguard from "../pool/zurgos-vanguard.js";
+import _tokens22GreenLizardToken from "../tokens/2-2-green-lizard-token.js";
 import _tokens32ShapeshifterToken from "../tokens/3-2-shapeshifter-token.js";
 import _tokensAngelToken44 from "../tokens/angel-token-4-4.js";
 import _tokensAngelVigilanceToken from "../tokens/angel-vigilance-token.js";
@@ -956,6 +962,7 @@ const shard: CardShard = {
     _poolLeechGauntlet,
     _poolLegionLieutenant,
     _poolLibraryOfAlexandria,
+    _poolLichLordOfUnx,
     _poolLictor,
     _poolLiesaForgottenArchangel,
     _poolLightningBolt,
@@ -1034,6 +1041,7 @@ const shard: CardShard = {
     _poolPolukranosWorldEater,
     _poolPortentOfBetrayal,
     _poolPramikonSkyRampart,
+    _poolPredatoryAdvantage,
     _poolPrepareFight,
     _poolPressurePoint,
     _poolPrideOfThePerfect,
@@ -1132,6 +1140,7 @@ const shard: CardShard = {
     _poolSkullSkaab,
     _poolSkullsnapNuisance,
     _poolSkyscytheEngulfer,
+    _poolSlaveOfBolas,
     _poolSlay,
     _poolSmashToDust,
     _poolSoShiny,
@@ -1194,6 +1203,7 @@ const shard: CardShard = {
     _poolThornwealdArcher,
     _poolThoughtMonitor,
     _poolThrabenInspector,
+    _poolThraximundar,
     _poolThroneOfTheHighCity,
     _poolThrowingKnife,
     _poolThrunTheLastTroll,
@@ -1266,6 +1276,7 @@ const shard: CardShard = {
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWindgraceAcolyte,
+    _poolWindstorm,
     _poolWirewoodElf,
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
@@ -1283,6 +1294,7 @@ const shard: CardShard = {
     _poolZurgosVanguard,
   ],
   tokens: [
+    _tokens22GreenLizardToken,
     _tokens32ShapeshifterToken,
     _tokensAngelToken44,
     _tokensAngelVigilanceToken,

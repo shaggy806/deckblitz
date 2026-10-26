@@ -62,6 +62,7 @@ import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
+import _poolBrainbite from "../pool/brainbite.js";
 import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
 import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
@@ -274,6 +275,7 @@ import _poolJuzamDjinn from "../pool/juzam-djinn.js";
 import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
+import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
@@ -317,6 +319,7 @@ import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
 import _poolLuminousWake from "../pool/luminous-wake.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
+import _poolMagmaPhoenix from "../pool/magma-phoenix.js";
 import _poolMagmaRift from "../pool/magma-rift.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
@@ -701,6 +704,7 @@ const shard: CardShard = {
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,
+    _poolBrainbite,
     _poolBrallinSkysharkRider,
     _poolBreakDownTheDoor,
     _poolBreathWeapon,
@@ -913,6 +917,7 @@ const shard: CardShard = {
     _poolKaitosPursuit,
     _poolKaradorGhostChieftain,
     _poolKarakas,
+    _poolKarrthusTyrantOfJund,
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeldonWarlord,
@@ -956,6 +961,7 @@ const shard: CardShard = {
     _poolLuminousBonds,
     _poolLuminousWake,
     _poolMach1SwoopingScoundrel,
+    _poolMagmaPhoenix,
     _poolMagmaRift,
     _poolMakindiAeronaut,
     _poolMakindiStampede,

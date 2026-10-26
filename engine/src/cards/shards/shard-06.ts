@@ -359,6 +359,7 @@ import _poolMyrsmith from "../pool/myrsmith.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
+import _poolNayaSojourners from "../pool/naya-sojourners.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
 import _poolNessianAsp from "../pool/nessian-asp.js";
@@ -1013,6 +1014,7 @@ const shard: CardShard = {
     _poolMysteriousTome,
     _poolMysticMelting,
     _poolNaturalConnection,
+    _poolNayaSojourners,
     _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,
     _poolNessianAsp,

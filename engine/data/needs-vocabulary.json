@@ -10456,6 +10456,34 @@
   "static:players-no-max-hand-size": {
    "family": "static:max-hand-size",
    "example": "Price of Knowledge: \"players have no maximum hand size\" — noMaxHandSize applies only to its controller."
+  },
+  "effect:must-attack-specific-player": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Alluring Siren: \"target creature an opponent controls attacks you this turn if able\" — restrict's must-attack names no player to attack."
+  },
+  "effect:turn-restriction-except-target": {
+   "family": "effect:extra-combat-attack-restriction",
+   "example": "Intimidation Bolt: \"other creatures can't attack this turn\" — restrict's turn-long filter can't leave out the targeted object, and must bind creatures that enter later."
+  },
+  "effect:damage-all-scoped-to-target-planeswalker-controller": {
+   "family": "effect:player-scope-extensions",
+   "example": "Lavalanche: \"target player or planeswalker and each creature that player or that planeswalker's controller controls\" — damage-all's controlledByTarget does nothing when the target is a planeswalker."
+  },
+  "amount:creatures-devoured": {
+   "family": "effect:amount-new-variants",
+   "example": "Marrow Chomper: \"gain 2 life for each creature it devoured\" — the devoured count is recorded but no amount reads it."
+  },
+  "decision:controller-of-target-divides-damage": {
+   "family": "effect:divide-among-targets",
+   "example": "Master of the Wild Hunt: the target creature's controller divides its damage among the Wolves tapped this way, at resolution."
+  },
+  "effect:return-all-graveyard-cards-to-owners-hands": {
+   "family": "effect:return-to-hand-extensions",
+   "example": "Soulquake: \"return all creatures on the battlefield and all creature cards in graveyards to their owners' hands\" — return-from-graveyard from all graveyards only goes to the battlefield."
+  },
+  "effect:search-library-attach-to-trigger-object": {
+   "family": "effect:attach-extensions",
+   "example": "Sovereigns of Lost Alara: search for an Aura that could enchant the attacking creature and attach it to that creature — search-library attaches only to its source."
   }
  }
 }

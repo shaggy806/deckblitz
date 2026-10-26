@@ -178,6 +178,7 @@ import _poolEnterTheUnknown from "../pool/enter-the-unknown.js";
 import _poolEnvoyOfTheAncestors from "../pool/envoy-of-the-ancestors.js";
 import _poolEscapeTunnel from "../pool/escape-tunnel.js";
 import _poolEsikaGodOfTheTree from "../pool/esika-god-of-the-tree.js";
+import _poolEsperSojourners from "../pool/esper-sojourners.js";
 import _poolEternalSkylord from "../pool/eternal-skylord.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
 import _poolExplore from "../pool/explore.js";
@@ -194,6 +195,7 @@ import _poolFelidarCub from "../pool/felidar-cub.js";
 import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
+import _poolFinestHour from "../pool/finest-hour.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
@@ -848,6 +850,7 @@ const shard: CardShard = {
     _poolEnvoyOfTheAncestors,
     _poolEscapeTunnel,
     _poolEsikaGodOfTheTree,
+    _poolEsperSojourners,
     _poolEternalSkylord,
     _poolExoticOrchard,
     _poolExplore,
@@ -864,6 +867,7 @@ const shard: CardShard = {
     _poolFestergloom,
     _poolFestiveFuneral,
     _poolFeySteed,
+    _poolFinestHour,
     _poolFireNationWarship,
     _poolFlameChainMauler,
     _poolFleshpulperGiant,

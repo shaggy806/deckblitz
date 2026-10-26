@@ -48,6 +48,7 @@ import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAvacynianMissionaries from "../pool/avacynian-missionaries.js";
 import _poolAvengingHuntbonder from "../pool/avenging-huntbonder.js";
+import _poolAwakenerDruid from "../pool/awakener-druid.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
@@ -109,6 +110,7 @@ import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
+import _poolClovenCasting from "../pool/cloven-casting.js";
 import _poolClutchOfCurrents from "../pool/clutch-of-currents.js";
 import _poolCoastalBreach from "../pool/coastal-breach.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
@@ -139,6 +141,7 @@ import _poolDarkstarAugur from "../pool/darkstar-augur.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
+import _poolDeathbringerThoctar from "../pool/deathbringer-thoctar.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
 import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
@@ -710,6 +713,7 @@ const shard: CardShard = {
     _poolAuthorityOfTheConsuls,
     _poolAvacynianMissionaries,
     _poolAvengingHuntbonder,
+    _poolAwakenerDruid,
     _poolAxegrinderGiant,
     _poolAzulaOnTheHunt,
     _poolBadgermole,
@@ -771,6 +775,7 @@ const shard: CardShard = {
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
+    _poolClovenCasting,
     _poolClutchOfCurrents,
     _poolCoastalBreach,
     _poolCoastalTower,
@@ -801,6 +806,7 @@ const shard: CardShard = {
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
     _poolDeathSpeakers,
+    _poolDeathbringerThoctar,
     _poolDeathcapMarionette,
     _poolDeathlessKnight,
     _poolDebtToTheDeathless,

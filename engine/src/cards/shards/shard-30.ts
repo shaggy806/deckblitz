@@ -182,6 +182,7 @@ import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEssenceBurn from "../pool/essence-burn.js";
 import _poolEtaliPrimalSickness from "../pool/etali-primal-sickness.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
+import _poolEtherwroughtPage from "../pool/etherwrought-page.js";
 import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
@@ -204,6 +205,7 @@ import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
+import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
@@ -337,6 +339,7 @@ import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
 import _poolLightningVolley from "../pool/lightning-volley.js";
+import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
@@ -552,6 +555,7 @@ import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolEssenceBurn,
     _poolEtaliPrimalSickness,
     _poolEtalisFavor,
+    _poolEtherwroughtPage,
     _poolEvaporate,
     _poolEverythingPizza,
     _poolExecutionersHood,
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolFleetingReflection,
     _poolFloodfarmVerge,
     _poolFlourishingFox,
+    _poolFlurryOfWings,
     _poolFogwellsGym,
     _poolForceAway,
     _poolForceOfVirtue,
@@ -993,6 +999,7 @@ const shard: CardShard = {
     _poolLeylineBinding,
     _poolLightOfHope,
     _poolLightningVolley,
+    _poolLightwielderPaladin,
     _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
     _poolLitaLittleOrphanAmphibian,
@@ -1208,6 +1215,7 @@ const shard: CardShard = {
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolSyndicateTrafficker,
+    _poolTaintedSigil,
     _poolTajuruStalwart,
     _poolTangleMantis,
     _poolTeleport,

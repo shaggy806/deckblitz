@@ -194,6 +194,7 @@ import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
+import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
 import _poolFireCovenant from "../pool/fire-covenant.js";
 import _poolFirescreamer from "../pool/firescreamer.js";
@@ -264,6 +265,7 @@ import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIlluminateHistory from "../pool/illuminate-history.js";
+import _poolIllusoryDemon from "../pool/illusory-demon.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolFateholdChronologist,
     _poolFearOfImmobility,
     _poolFiendishDuo,
+    _poolFightToTheDeath,
     _poolFiligreeFamiliar,
     _poolFireCovenant,
     _poolFirescreamer,
@@ -927,6 +930,7 @@ const shard: CardShard = {
     _poolIdyllicTutor,
     _poolIgneousCur,
     _poolIlluminateHistory,
+    _poolIllusoryDemon,
     _poolImmolatingGlare,
     _poolIncandescentAria,
     _poolIncitedRabble,

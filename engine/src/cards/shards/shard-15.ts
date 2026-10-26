@@ -406,6 +406,7 @@ import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitScorpion from "../pool/pit-scorpion.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
+import _poolPlanarCleansing from "../pool/planar-cleansing.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
@@ -433,6 +434,7 @@ import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
+import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
@@ -570,6 +572,7 @@ import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
+import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolVenarianGold from "../pool/venarian-gold.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolPiranhaMarsh,
     _poolPitScorpion,
     _poolPitchburnDevils,
+    _poolPlanarCleansing,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
     _poolPopularEntertainer,
@@ -1058,6 +1062,7 @@ const shard: CardShard = {
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
     _poolReduceToMemory,
+    _poolRegenerate,
     _poolRegicide,
     _poolRerouteSystems,
     _poolRescind,
@@ -1195,6 +1200,7 @@ const shard: CardShard = {
     _poolVandalsEdit,
     _poolVastlandsScavenger,
     _poolVectorGlider,
+    _poolVedalkenHeretic,
     _poolVegaTheWatcher,
     _poolVenarianGold,
     _poolViashinoGrappler,

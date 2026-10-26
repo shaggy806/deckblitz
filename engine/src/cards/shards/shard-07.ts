@@ -124,6 +124,7 @@ import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
+import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDemonicRuckus from "../pool/demonic-ruckus.js";
 import _poolDepose from "../pool/depose.js";
@@ -138,6 +139,7 @@ import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
 import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
 import _poolDosansOldestChant from "../pool/dosans-oldest-chant.js";
+import _poolDoubleNegative from "../pool/double-negative.js";
 import _poolDragonstormForecaster from "../pool/dragonstorm-forecaster.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
 import _poolDrakeHatcher from "../pool/drake-hatcher.js";
@@ -207,6 +209,7 @@ import _poolGhituChronicler from "../pool/ghitu-chronicler.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGiantKoi from "../pool/giant-koi.js";
 import _poolGilaCourser from "../pool/gila-courser.js";
+import _poolGlassdustHulk from "../pool/glassdust-hulk.js";
 import _poolGlimpseTheSunGod from "../pool/glimpse-the-sun-god.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
@@ -214,6 +217,7 @@ import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
 import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
+import _poolGodtrackerOfJund from "../pool/godtracker-of-jund.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldhound from "../pool/goldhound.js";
 import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
@@ -807,6 +811,7 @@ const shard: CardShard = {
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDefenderOfChaos,
+    _poolDefilerOfSouls,
     _poolDeflectingSwat,
     _poolDemonicRuckus,
     _poolDepose,
@@ -821,6 +826,7 @@ const shard: CardShard = {
     _poolDivineResilience,
     _poolDocOcksTentacles,
     _poolDosansOldestChant,
+    _poolDoubleNegative,
     _poolDragonstormForecaster,
     _poolDragonstorm,
     _poolDrakeHatcher,
@@ -890,6 +896,7 @@ const shard: CardShard = {
     _poolGhorClanWrecker,
     _poolGiantKoi,
     _poolGilaCourser,
+    _poolGlassdustHulk,
     _poolGlimpseTheSunGod,
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
@@ -897,6 +904,7 @@ const shard: CardShard = {
     _poolGloomStalker,
     _poolGoblinGathering,
     _poolGoblinShortcutter,
+    _poolGodtrackerOfJund,
     _poolGoldMyr,
     _poolGoldhound,
     _poolGoldmaneGriffin,

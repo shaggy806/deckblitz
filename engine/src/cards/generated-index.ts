@@ -30,6 +30,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "2/2 Blue Enchantment Bird Token (Flying)",
   "2/2 Green Cat Token",
   "2/2 Green Elemental Token",
+  "2/2 Green Lizard Token",
   "2/2 Green Spider Token (Reach)",
   "2/2 Gremlin Token",
   "2/2 Pegasus Token",
@@ -103,6 +104,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Beast Token (Garruk, Veiled Butcher)",
   "Beast Token (Red-Green)",
   "Bird Illusion Token",
+  "Bird Soldier Token",
   "Bird Token",
   "Bird Token (Gwaihir, Greatest of the Eagles)",
   "Bird Token (Hermes, Overseer of Elpis)",
@@ -217,6 +219,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Fungus Beast Token",
   "Fungus Token (Can't Block)",
   "Galactus",
+  "Gargoyle Token",
   "Giant Token",
   "Giant Wizard Token",
   "Glimmer Token",
@@ -569,6 +572,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Zombie Token (Transmogrant Altar)",
   "Zombie Token (Wilhelt, the Rotcleaver)",
   "Zombie Warrior Token",
+  "Zombie Wizard Token",
 ];
 
 /** Each card's own `art`, for the cards (`pool/`) that pin a printing, so
