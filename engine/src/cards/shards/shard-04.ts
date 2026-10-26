@@ -167,6 +167,7 @@ import _poolExtractTheTruth from "../pool/extract-the-truth.js";
 import _poolEyesOfGitaxias from "../pool/eyes-of-gitaxias.js";
 import _poolFabricate from "../pool/fabricate.js";
 import _poolFaerieBladecrafter from "../pool/faerie-bladecrafter.js";
+import _poolFaerieMacabre from "../pool/faerie-macabre.js";
 import _poolFailedConversion from "../pool/failed-conversion.js";
 import _poolFalkenrathCelebrants from "../pool/falkenrath-celebrants.js";
 import _poolFanaticalOffering from "../pool/fanatical-offering.js";
@@ -353,6 +354,7 @@ import _poolMogissWarhound from "../pool/mogiss-warhound.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
+import _poolMorselhoarder from "../pool/morselhoarder.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
@@ -836,6 +838,7 @@ const shard: CardShard = {
     _poolEyesOfGitaxias,
     _poolFabricate,
     _poolFaerieBladecrafter,
+    _poolFaerieMacabre,
     _poolFailedConversion,
     _poolFalkenrathCelebrants,
     _poolFanaticalOffering,
@@ -1022,6 +1025,7 @@ const shard: CardShard = {
     _poolMomentOfValor,
     _poolMoonriseIntruder,
     _poolMoonshadow,
+    _poolMorselhoarder,
     _poolMortalsResolve,
     _poolMoxJet,
     _poolMukotaiAmbusher,

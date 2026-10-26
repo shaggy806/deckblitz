@@ -272,6 +272,7 @@ import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
+import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
@@ -309,6 +310,7 @@ import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
 import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
+import _poolKithkinRabble from "../pool/kithkin-rabble.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfCliffhaven from "../pool/knight-of-cliffhaven.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
@@ -644,6 +646,7 @@ import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWinterEladrin from "../pool/winter-eladrin.js";
 import _poolWinterSky from "../pool/winter-sky.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
+import _poolWitherscaleWurm from "../pool/witherscale-wurm.js";
 import _poolWolverinePack from "../pool/wolverine-pack.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
@@ -948,6 +951,7 @@ const shard: CardShard = {
     _poolHauntedGuardian,
     _poolHeartfireImmolator,
     _poolHermitOfTheNatterknolls,
+    _poolHordeOfBoggarts,
     _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
@@ -985,6 +989,7 @@ const shard: CardShard = {
     _poolKheruBloodsucker,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
+    _poolKithkinRabble,
     _poolKitsuneAce,
     _poolKnightOfCliffhaven,
     _poolKnightOfNewBenalia,
@@ -1320,6 +1325,7 @@ const shard: CardShard = {
     _poolWinterEladrin,
     _poolWinterSky,
     _poolWintersGrasp,
+    _poolWitherscaleWurm,
     _poolWolverinePack,
     _poolWondrousRevival,
     _poolWoodedBastion,

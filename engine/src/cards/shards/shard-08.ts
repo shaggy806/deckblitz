@@ -425,6 +425,7 @@ import _poolOldThrush from "../pool/old-thrush.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
 import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
+import _poolOrderOfWhiteclay from "../pool/order-of-whiteclay.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
@@ -452,6 +453,7 @@ import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
+import _poolPuresightMerrow from "../pool/puresight-merrow.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagemonger from "../pool/ragemonger.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
@@ -501,6 +503,7 @@ import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
 import _poolSavageBeating from "../pool/savage-beating.js";
+import _poolScrapbasket from "../pool/scrapbasket.js";
 import _poolScrollshift from "../pool/scrollshift.js";
 import _poolSculptedPerfection from "../pool/sculpted-perfection.js";
 import _poolSeaEagle from "../pool/sea-eagle.js";
@@ -1144,6 +1147,7 @@ const shard: CardShard = {
     _poolOpenTheArmory,
     _poolOphiomancer,
     _poolOptimisticScavenger,
+    _poolOrderOfWhiteclay,
     _poolOrokuSakiShredderRising,
     _poolOtherworldAtlas,
     _poolOverflowingBasin,
@@ -1171,6 +1175,7 @@ const shard: CardShard = {
     _poolProfessorsWarning,
     _poolProfoundJourney,
     _poolPuppeteerClique,
+    _poolPuresightMerrow,
     _poolPygmyAllosaurus,
     _poolRagemonger,
     _poolRagingKavu,
@@ -1220,6 +1225,7 @@ const shard: CardShard = {
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,
     _poolSavageBeating,
+    _poolScrapbasket,
     _poolScrollshift,
     _poolSculptedPerfection,
     _poolSeaEagle,

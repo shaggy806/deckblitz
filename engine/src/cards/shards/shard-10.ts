@@ -35,6 +35,7 @@ import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
+import _poolAuguryAdept from "../pool/augury-adept.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
@@ -120,6 +121,7 @@ import _poolCoordinatedAssault from "../pool/coordinated-assault.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
+import _poolCorrosiveMentor from "../pool/corrosive-mentor.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
@@ -739,6 +741,7 @@ const shard: CardShard = {
     _poolArmyAnts,
     _poolAsceticism,
     _poolAssassinGauntlet,
+    _poolAuguryAdept,
     _poolAuroraShifter,
     _poolAvalanche,
     _poolAvengersQuinjet,
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
+    _poolCorrosiveMentor,
     _poolCouncilsJudgment,
     _poolCountervailingWinds,
     _poolCovertTechnician,

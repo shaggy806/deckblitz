@@ -28,6 +28,7 @@ import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
+import _poolAphoticWisps from "../pool/aphotic-wisps.js";
 import _poolArcadesSabboth from "../pool/arcades-sabboth.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
 import _poolArmsRace from "../pool/arms-race.js";
@@ -195,6 +196,7 @@ import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
+import _poolFistsOfTheDemigod from "../pool/fists-of-the-demigod.js";
 import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
@@ -707,6 +709,7 @@ const shard: CardShard = {
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
+    _poolAphoticWisps,
     _poolArcadesSabboth,
     _poolArcaneFlight,
     _poolArmsRace,
@@ -874,6 +877,7 @@ const shard: CardShard = {
     _poolFieryTemper,
     _poolFiliThePathfinder,
     _poolFirefistStriker,
+    _poolFistsOfTheDemigod,
     _poolFiveAlarmFire,
     _poolFlood,
     _poolFloodwaters,

@@ -313,6 +313,7 @@ import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
 import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
+import _poolHowlOfTheNightPack from "../pool/howl-of-the-night-pack.js";
 import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
@@ -540,6 +541,7 @@ import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
+import _poolSpellSyphon from "../pool/spell-syphon.js";
 import _poolSpellboundDragon from "../pool/spellbound-dragon.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
 import _poolSpiderIslanders from "../pool/spider-islanders.js";
@@ -992,6 +994,7 @@ const shard: CardShard = {
     _poolHomicideInvestigator,
     _poolHonoredHydra,
     _poolHotheadedGiant,
+    _poolHowlOfTheNightPack,
     _poolHowlpackWolf,
     _poolHulldrifter,
     _poolHumbleBudoka,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolSmashingSuccess,
     _poolSnarlingWarg,
     _poolSparringConstruct,
+    _poolSpellSyphon,
     _poolSpellboundDragon,
     _poolSphinxOfTheSteelWind,
     _poolSpiderIslanders,

@@ -93,6 +93,7 @@ import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
+import _poolChainbreaker from "../pool/chainbreaker.js";
 import _poolChampionOfStraySouls from "../pool/champion-of-stray-souls.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
@@ -788,6 +789,7 @@ const shard: CardShard = {
     _poolCelestialForce,
     _poolCemeteryTampering,
     _poolChainToMemory,
+    _poolChainbreaker,
     _poolChampionOfStraySouls,
     _poolChannelerInitiate,
     _poolChariotOfVictory,

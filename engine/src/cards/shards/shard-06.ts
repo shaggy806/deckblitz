@@ -264,6 +264,7 @@ import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
+import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
@@ -384,6 +385,7 @@ import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
 import _poolNissasDefeat from "../pool/nissas-defeat.js";
+import _poolNiveousWisps from "../pool/niveous-wisps.js";
 import _poolNoblesPurse from "../pool/nobles-purse.js";
 import _poolObeliskOfAlara from "../pool/obelisk-of-alara.js";
 import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
@@ -943,6 +945,7 @@ const shard: CardShard = {
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
     _poolGuidelightOptimizer,
+    _poolGutturalResponse,
     _poolGuulDrazAssassin,
     _poolHalimarExcavator,
     _poolHeroInTraining,
@@ -1063,6 +1066,7 @@ const shard: CardShard = {
     _poolNightshadeDryad,
     _poolNightveilSprite,
     _poolNissasDefeat,
+    _poolNiveousWisps,
     _poolNoblesPurse,
     _poolObeliskOfAlara,
     _poolObeliskOfBant,

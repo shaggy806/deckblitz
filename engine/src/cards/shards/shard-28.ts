@@ -103,6 +103,7 @@ import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
+import _poolCemeteryPuca from "../pool/cemetery-puca.js";
 import _poolCeruleanWisps from "../pool/cerulean-wisps.js";
 import _poolChampionOfWits from "../pool/champion-of-wits.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
@@ -464,6 +465,7 @@ import _poolRepelTheVile from "../pool/repel-the-vile.js";
 import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
 import _poolResplendentGriffin from "../pool/resplendent-griffin.js";
+import _poolResplendentMentor from "../pool/resplendent-mentor.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolRestorationSpecialist from "../pool/restoration-specialist.js";
 import _poolReturnToTheRanks from "../pool/return-to-the-ranks.js";
@@ -512,6 +514,7 @@ import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
+import _poolSeedcradleWitch from "../pool/seedcradle-witch.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSelflessSamurai from "../pool/selfless-samurai.js";
 import _poolSelhoffEntomber from "../pool/selhoff-entomber.js";
@@ -807,6 +810,7 @@ const shard: CardShard = {
     _poolCatharsCall,
     _poolCelesRuneKnight,
     _poolCelestineTheLivingSaint,
+    _poolCemeteryPuca,
     _poolCeruleanWisps,
     _poolChampionOfWits,
     _poolChancellorOfTales,
@@ -1168,6 +1172,7 @@ const shard: CardShard = {
     _poolResistanceSkywarden,
     _poolResoluteReinforcements,
     _poolResplendentGriffin,
+    _poolResplendentMentor,
     _poolRestlessReef,
     _poolRestorationSpecialist,
     _poolReturnToTheRanks,
@@ -1216,6 +1221,7 @@ const shard: CardShard = {
     _poolScribeOfTheMindful,
     _poolScuttlingButler,
     _poolSecuritronSquadron,
+    _poolSeedcradleWitch,
     _poolSelesnyaSentry,
     _poolSelflessSamurai,
     _poolSelhoffEntomber,

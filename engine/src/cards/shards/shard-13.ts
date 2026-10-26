@@ -321,6 +321,7 @@ import _poolKiorasFollower from "../pool/kioras-follower.js";
 import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
 import _poolKishlaVillage from "../pool/kishla-village.js";
 import _poolKitesailScout from "../pool/kitesail-scout.js";
+import _poolKnacksawClique from "../pool/knacksaw-clique.js";
 import _poolKnightOfGrace from "../pool/knight-of-grace.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
 import _poolKotisSibsigChampion from "../pool/kotis-sibsig-champion.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolKishlaTrawlers,
     _poolKishlaVillage,
     _poolKitesailScout,
+    _poolKnacksawClique,
     _poolKnightOfGrace,
     _poolKnightOfMeadowgrain,
     _poolKotisSibsigChampion,

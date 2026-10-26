@@ -40,6 +40,7 @@ import _poolBadRiver from "../pool/bad-river.js";
 import _poolBalaGedRecovery from "../pool/bala-ged-recovery.js";
 import _poolBalefulAmmit from "../pool/baleful-ammit.js";
 import _poolBanishingLight from "../pool/banishing-light.js";
+import _poolBarrentonMedic from "../pool/barrenton-medic.js";
 import _poolBarrowinOfClanUndurr from "../pool/barrowin-of-clan-undurr.js";
 import _poolBaskingBroodscale from "../pool/basking-broodscale.js";
 import _poolBastionMastodon from "../pool/bastion-mastodon.js";
@@ -65,6 +66,7 @@ import _poolBloodboilSorcerer from "../pool/bloodboil-sorcerer.js";
 import _poolBloodfireEnforcers from "../pool/bloodfire-enforcers.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
 import _poolBloodyBetrayal from "../pool/bloody-betrayal.js";
+import _poolBoartuskLiege from "../pool/boartusk-liege.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
@@ -295,6 +297,7 @@ import _poolIncubatorDrone from "../pool/incubator-drone.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
+import _poolInkfathomInfiltrator from "../pool/inkfathom-infiltrator.js";
 import _poolInquisitorGreyfax from "../pool/inquisitor-greyfax.js";
 import _poolInsideSource from "../pool/inside-source.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
@@ -590,6 +593,8 @@ import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
+import _poolThornwatchScarecrow from "../pool/thornwatch-scarecrow.js";
+import _poolThoughtweftGambit from "../pool/thoughtweft-gambit.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
@@ -712,6 +717,7 @@ const shard: CardShard = {
     _poolBalaGedRecovery,
     _poolBalefulAmmit,
     _poolBanishingLight,
+    _poolBarrentonMedic,
     _poolBarrowinOfClanUndurr,
     _poolBaskingBroodscale,
     _poolBastionMastodon,
@@ -737,6 +743,7 @@ const shard: CardShard = {
     _poolBloodfireEnforcers,
     _poolBloodhunterBat,
     _poolBloodyBetrayal,
+    _poolBoartuskLiege,
     _poolBogWraith,
     _poolBoonOfTheWishGiver,
     _poolBoostedSloop,
@@ -967,6 +974,7 @@ const shard: CardShard = {
     _poolIndomitableArchangel,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
+    _poolInkfathomInfiltrator,
     _poolInquisitorGreyfax,
     _poolInsideSource,
     _poolInvasionOfKaladesh,
@@ -1262,6 +1270,8 @@ const shard: CardShard = {
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
     _poolThopterArrest,
+    _poolThornwatchScarecrow,
+    _poolThoughtweftGambit,
     _poolThousandMoonsInfantry,
     _poolThrillingDiscovery,
     _poolThroatSlitter,

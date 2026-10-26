@@ -321,6 +321,7 @@ import _poolLordOfTheUlvenwald from "../pool/lord-of-the-ulvenwald.js";
 import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
+import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
@@ -342,6 +343,7 @@ import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
+import _poolMistmeadowWitch from "../pool/mistmeadow-witch.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMitoticSlime from "../pool/mitotic-slime.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolLoseHope,
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
+    _poolLureboundScarecrow,
     _poolMaestrosGift,
     _poolMaggotCarrier,
     _poolMagusOfTheMind,
@@ -1035,6 +1038,7 @@ const shard: CardShard = {
     _poolMinotaurWarrior,
     _poolMintstrosity,
     _poolMirenTheMoaningWell,
+    _poolMistmeadowWitch,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMitoticSlime,

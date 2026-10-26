@@ -113,6 +113,7 @@ import _poolChokingRestraints from "../pool/choking-restraints.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
 import _poolCinderCloud from "../pool/cinder-cloud.js";
+import _poolCinderhazeWretch from "../pool/cinderhaze-wretch.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
@@ -162,6 +163,7 @@ import _poolDreadfeastDemon from "../pool/dreadfeast-demon.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
 import _poolDrider from "../pool/drider.js";
 import _poolDrossclaw from "../pool/drossclaw.js";
+import _poolDrownerInitiate from "../pool/drowner-initiate.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
 import _poolDutifulThrull from "../pool/dutiful-thrull.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
@@ -192,6 +194,7 @@ import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFabledHero from "../pool/fabled-hero.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
+import _poolFaerieSwarm from "../pool/faerie-swarm.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
 import _poolFalconsWingHarness from "../pool/falcons-wing-harness.js";
 import _poolFamilyReunion from "../pool/family-reunion.js";
@@ -301,6 +304,7 @@ import _poolImprobableAlliance from "../pool/improbable-alliance.js";
 import _poolIncubation from "../pool/incubation.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
+import _poolInkfathomWitch from "../pool/inkfathom-witch.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
 import _poolInvasionOfDominaria from "../pool/invasion-of-dominaria.js";
@@ -819,6 +823,7 @@ const shard: CardShard = {
     _poolChromeCompanion,
     _poolChulane,
     _poolCinderCloud,
+    _poolCinderhazeWretch,
     _poolCitanulDruid,
     _poolClarionConqueror,
     _poolClericClass,
@@ -868,6 +873,7 @@ const shard: CardShard = {
     _poolDreamTrawler,
     _poolDrider,
     _poolDrossclaw,
+    _poolDrownerInitiate,
     _poolDrumbellower,
     _poolDutifulThrull,
     _poolEcstaticElectromancer,
@@ -898,6 +904,7 @@ const shard: CardShard = {
     _poolFabledHero,
     _poolFaerieInvaders,
     _poolFaerieMastermind,
+    _poolFaerieSwarm,
     _poolFalconAndRedwing,
     _poolFalconsWingHarness,
     _poolFamilyReunion,
@@ -1007,6 +1014,7 @@ const shard: CardShard = {
     _poolIncubation,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
+    _poolInkfathomWitch,
     _poolInsatiableSouleater,
     _poolInspiredSkypainter,
     _poolInvasionOfDominaria,

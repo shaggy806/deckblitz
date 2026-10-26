@@ -29,6 +29,7 @@ import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolAshenmoorLiege from "../pool/ashenmoor-liege.js";
 import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
@@ -49,6 +50,7 @@ import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
 import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
+import _poolBlazethornScarecrow from "../pool/blazethorn-scarecrow.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
 import _poolBlightcaster from "../pool/blightcaster.js";
@@ -132,6 +134,7 @@ import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
+import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
@@ -363,6 +366,7 @@ import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
 import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
+import _poolMercyKilling from "../pool/mercy-killing.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
@@ -488,6 +492,7 @@ import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js"
 import _poolSacellumArchers from "../pool/sacellum-archers.js";
 import _poolSacredWolf from "../pool/sacred-wolf.js";
 import _poolSafewrightCavalry from "../pool/safewright-cavalry.js";
+import _poolSafewrightQuest from "../pool/safewright-quest.js";
 import _poolSageOfMysteries from "../pool/sage-of-mysteries.js";
 import _poolSanctumOfStoneFangs from "../pool/sanctum-of-stone-fangs.js";
 import _poolSanctumSeeker from "../pool/sanctum-seeker.js";
@@ -746,6 +751,7 @@ const shard: CardShard = {
     _poolArdozCobblerOfWar,
     _poolArenaOfTheAncients,
     _poolArmasaurGuide,
+    _poolAshenmoorLiege,
     _poolAshnodsBattleGear,
     _poolAspiringChampion,
     _poolAssassinInitiate,
@@ -766,6 +772,7 @@ const shard: CardShard = {
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,
     _poolBladeBlizzardKitsune,
+    _poolBlazethornScarecrow,
     _poolBlazingHellhound,
     _poolBlightKeeper,
     _poolBlightcaster,
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDeathcultRogue,
+    _poolDeepchannelMentor,
     _poolDefenderOfChaos,
     _poolDefilerOfSouls,
     _poolDeflectingSwat,
@@ -1080,6 +1088,7 @@ const shard: CardShard = {
     _poolMemorySluice,
     _poolMerchantOfSecrets,
     _poolMercilessJavelineer,
+    _poolMercyKilling,
     _poolMidnightSnack,
     _poolMightyLeap,
     _poolMindeyeDrake,
@@ -1205,6 +1214,7 @@ const shard: CardShard = {
     _poolSacellumArchers,
     _poolSacredWolf,
     _poolSafewrightCavalry,
+    _poolSafewrightQuest,
     _poolSageOfMysteries,
     _poolSanctumOfStoneFangs,
     _poolSanctumSeeker,

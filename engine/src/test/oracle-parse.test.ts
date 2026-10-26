@@ -1418,7 +1418,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
   });
 
   it("conspire (rule 702.78)", () => {
-    const trail = face("Burn Trail deals 3 damage to any target.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)", "Sorcery");
+    const trail = face("Target player mills four cards.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)", "Sorcery");
     expect(trail.conspire).toBe(true);
     expect(trail.complete).toBe(true);
   });

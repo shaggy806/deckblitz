@@ -122,6 +122,7 @@ import _poolCrossbonesMaliciousMercenary from "../pool/crossbones-malicious-merc
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
+import _poolCurseOfChains from "../pool/curse-of-chains.js";
 import _poolCustodiSoulbinders from "../pool/custodi-soulbinders.js";
 import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
@@ -630,6 +631,7 @@ import _poolTrustedPegasus from "../pool/trusted-pegasus.js";
 import _poolTukatongueThallid from "../pool/tukatongue-thallid.js";
 import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
 import _poolTurnStones from "../pool/turn-stones.js";
+import _poolTurnToMist from "../pool/turn-to-mist.js";
 import _poolTurtleSeals from "../pool/turtle-seals.js";
 import _poolTwinSilkSpider from "../pool/twin-silk-spider.js";
 import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
@@ -856,6 +858,7 @@ const shard: CardShard = {
     _poolCruxOfFate,
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
+    _poolCurseOfChains,
     _poolCustodiSoulbinders,
     _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
@@ -1364,6 +1367,7 @@ const shard: CardShard = {
     _poolTukatongueThallid,
     _poolTunnelingGeopede,
     _poolTurnStones,
+    _poolTurnToMist,
     _poolTurtleSeals,
     _poolTwinSilkSpider,
     _poolTwinscrollShaman,

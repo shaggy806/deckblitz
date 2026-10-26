@@ -419,6 +419,7 @@ import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
 import _poolPonder from "../pool/ponder.js";
 import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
+import _poolPowerOfFire from "../pool/power-of-fire.js";
 import _poolPrairieStream from "../pool/prairie-stream.js";
 import _poolPrescientChimera from "../pool/prescient-chimera.js";
 import _poolPreysVengeance from "../pool/preys-vengeance.js";
@@ -1125,6 +1126,7 @@ const shard: CardShard = {
     _poolPlatedSlagwurm,
     _poolPonder,
     _poolPortraitOfMichiko,
+    _poolPowerOfFire,
     _poolPrairieStream,
     _poolPrescientChimera,
     _poolPreysVengeance,

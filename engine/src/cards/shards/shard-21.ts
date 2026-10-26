@@ -437,6 +437,7 @@ import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
 import _poolQuicksmithSpy from "../pool/quicksmith-spy.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
+import _poolRakingCanopy from "../pool/raking-canopy.js";
 import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
 import _poolRaphLeoSiblingRivals from "../pool/raph-leo-sibling-rivals.js";
 import _poolRaphaelTheNightwatcher from "../pool/raphael-the-nightwatcher.js";
@@ -499,6 +500,7 @@ import _poolSkybind from "../pool/skybind.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
+import _poolSmashToSmithereens from "../pool/smash-to-smithereens.js";
 import _poolSnappingSailback from "../pool/snapping-sailback.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
@@ -1100,6 +1102,7 @@ const shard: CardShard = {
     _poolQuicksmithSpy,
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
+    _poolRakingCanopy,
     _poolRakshasaDebaser,
     _poolRaphLeoSiblingRivals,
     _poolRaphaelTheNightwatcher,
@@ -1162,6 +1165,7 @@ const shard: CardShard = {
     _poolSlashingTiger,
     _poolSlinkingSerpent,
     _poolSlumberingKeepguard,
+    _poolSmashToSmithereens,
     _poolSnappingSailback,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,

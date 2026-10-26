@@ -165,6 +165,7 @@ import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
+import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
 import _poolDirgeBat from "../pool/dirge-bat.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
 import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
@@ -382,6 +383,7 @@ import _poolLlanowarDruid from "../pool/llanowar-druid.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLoathsomeCatoblepas from "../pool/loathsome-catoblepas.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
+import _poolLockjawSnapper from "../pool/lockjaw-snapper.js";
 import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
@@ -518,6 +520,7 @@ import _poolRuin from "../pool/ruin.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
 import _poolRumblingRuin from "../pool/rumbling-ruin.js";
 import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
+import _poolRunesOfTheDeus from "../pool/runes-of-the-deus.js";
 import _poolRysorianBadger from "../pool/rysorian-badger.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
@@ -617,6 +620,7 @@ import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
 import _poolThievingOtter from "../pool/thieving-otter.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
+import _poolThoughtReflection from "../pool/thought-reflection.js";
 import _poolThrabenStandardBearer from "../pool/thraben-standard-bearer.js";
 import _poolThranSpider from "../pool/thran-spider.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
@@ -684,6 +688,7 @@ import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
 import _poolWindsOfRebuke from "../pool/winds-of-rebuke.js";
+import _poolWingrattleScarecrow from "../pool/wingrattle-scarecrow.js";
 import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
 import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
@@ -885,6 +890,7 @@ const shard: CardShard = {
     _poolDimirHouseGuard,
     _poolDinotomaton,
     _poolDiplomaticImmunity,
+    _poolDireUndercurrents,
     _poolDirgeBat,
     _poolDiscerningPeddler,
     _poolDiscreetRetreat,
@@ -1102,6 +1108,7 @@ const shard: CardShard = {
     _poolLlanowarReborn,
     _poolLoathsomeCatoblepas,
     _poolLockjawSlobberingTeleporter,
+    _poolLockjawSnapper,
     _poolLoftyDreams,
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
@@ -1238,6 +1245,7 @@ const shard: CardShard = {
     _poolRuinousRampage,
     _poolRumblingRuin,
     _poolRunadiBehemothCaller,
+    _poolRunesOfTheDeus,
     _poolRysorianBadger,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
@@ -1337,6 +1345,7 @@ const shard: CardShard = {
     _poolTheyCameFromThePipes,
     _poolThievingOtter,
     _poolThorinsLastStand,
+    _poolThoughtReflection,
     _poolThrabenStandardBearer,
     _poolThranSpider,
     _poolThunderingChariot,
@@ -1404,6 +1413,7 @@ const shard: CardShard = {
     _poolWeddingCrasher,
     _poolWickTheWhorledMind,
     _poolWindsOfRebuke,
+    _poolWingrattleScarecrow,
     _poolWingsOfHubris,
     _poolWintermoorCommander,
     _poolWipeClean,

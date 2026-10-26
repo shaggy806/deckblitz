@@ -141,6 +141,7 @@ import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonscaleBoon from "../pool/dragonscale-boon.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
+import _poolDramaticEntrance from "../pool/dramatic-entrance.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDreamStrix from "../pool/dream-strix.js";
 import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
@@ -224,6 +225,7 @@ import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
 import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGreenManaBattery from "../pool/green-mana-battery.js";
+import _poolGrimPoppet from "../pool/grim-poppet.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
@@ -429,6 +431,7 @@ import _poolRainveilRejuvenator from "../pool/rainveil-rejuvenator.js";
 import _poolRaisedByWolves from "../pool/raised-by-wolves.js";
 import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
+import _poolRattleblazeScarecrow from "../pool/rattleblaze-scarecrow.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
@@ -565,6 +568,7 @@ import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolTheloniteHermit from "../pool/thelonite-hermit.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
+import _poolThistledownLiege from "../pool/thistledown-liege.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
@@ -828,6 +832,7 @@ const shard: CardShard = {
     _poolDragonlordsServant,
     _poolDragonscaleBoon,
     _poolDragonwingGlider,
+    _poolDramaticEntrance,
     _poolDreadmawsIre,
     _poolDreamStrix,
     _poolDreamcallerSiren,
@@ -911,6 +916,7 @@ const shard: CardShard = {
     _poolGrayHarborMerfolk,
     _poolGreedyFreebooter,
     _poolGreenManaBattery,
+    _poolGrimPoppet,
     _poolGrinningDemon,
     _poolGroundlingPouncer,
     _poolGuidelightMatrix,
@@ -1116,6 +1122,7 @@ const shard: CardShard = {
     _poolRaisedByWolves,
     _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
+    _poolRattleblazeScarecrow,
     _poolRavenousBaboons,
     _poolRazorclawBear,
     _poolRazorkinHordecaller,
@@ -1252,6 +1259,7 @@ const shard: CardShard = {
     _poolTheWaspJanetVanDyne,
     _poolTheloniteHermit,
     _poolThirstingRoots,
+    _poolThistledownLiege,
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
     _poolThoughtflare,

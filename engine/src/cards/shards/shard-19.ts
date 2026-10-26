@@ -232,6 +232,7 @@ import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFractalSummoning from "../pool/fractal-summoning.js";
+import _poolFracturingGust from "../pool/fracturing-gust.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
@@ -941,6 +942,7 @@ const shard: CardShard = {
     _poolFortifiedVillage,
     _poolFractalAnomaly,
     _poolFractalSummoning,
+    _poolFracturingGust,
     _poolFugue,
     _poolFurtiveCourier,
     _poolFuryOfTheHorde,

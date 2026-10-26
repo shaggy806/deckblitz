@@ -238,6 +238,7 @@ import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
 import _poolGoblinBrigand from "../pool/goblin-brigand.js";
 import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
+import _poolGodheadOfAwe from "../pool/godhead-of-awe.js";
 import _poolGoldRush from "../pool/gold-rush.js";
 import _poolGoldenGuardian from "../pool/golden-guardian.js";
 import _poolGolgariCharm from "../pool/golgari-charm.js";
@@ -346,6 +347,7 @@ import _poolLostVale from "../pool/lost-vale.js";
 import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
 import _poolLoyalInventor from "../pool/loyal-inventor.js";
 import _poolLunarFrenzy from "../pool/lunar-frenzy.js";
+import _poolMadblindMountain from "../pool/madblind-mountain.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
@@ -481,6 +483,7 @@ import _poolSavageHunger from "../pool/savage-hunger.js";
 import _poolSavagebornHydra from "../pool/savageborn-hydra.js";
 import _poolScionOfUgin from "../pool/scion-of-ugin.js";
 import _poolScroungingSkyray from "../pool/scrounging-skyray.js";
+import _poolScuttlemutt from "../pool/scuttlemutt.js";
 import _poolSealOfCleansing from "../pool/seal-of-cleansing.js";
 import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
@@ -508,6 +511,7 @@ import _poolSoltariFootSoldier from "../pool/soltari-foot-soldier.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
+import _poolSpawnwrithe from "../pool/spawnwrithe.js";
 import _poolSpellSatchel from "../pool/spell-satchel.js";
 import _poolSpellscornCoven from "../pool/spellscorn-coven.js";
 import _poolSpellstutterSprite from "../pool/spellstutter-sprite.js";
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolGoblinBrigand,
     _poolGoblinFireleaper,
     _poolGoblinSledder,
+    _poolGodheadOfAwe,
     _poolGoldRush,
     _poolGoldenGuardian,
     _poolGolgariCharm,
@@ -1002,6 +1007,7 @@ const shard: CardShard = {
     _poolLothoCorruptShirriff,
     _poolLoyalInventor,
     _poolLunarFrenzy,
+    _poolMadblindMountain,
     _poolMaelstromArtisan,
     _poolMaggotTherapy,
     _poolMagitekScythe,
@@ -1137,6 +1143,7 @@ const shard: CardShard = {
     _poolSavagebornHydra,
     _poolScionOfUgin,
     _poolScroungingSkyray,
+    _poolScuttlemutt,
     _poolSealOfCleansing,
     _poolSealOfPrimordium,
     _poolSeasideHaven,
@@ -1164,6 +1171,7 @@ const shard: CardShard = {
     _poolSoulGuideLantern,
     _poolSoulWarden,
     _poolSpartanVeteran,
+    _poolSpawnwrithe,
     _poolSpellSatchel,
     _poolSpellscornCoven,
     _poolSpellstutterSprite,

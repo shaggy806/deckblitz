@@ -170,6 +170,7 @@ import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
 import _poolDragonrage from "../pool/dragonrage.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
+import _poolDroveOfElves from "../pool/drove-of-elves.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
 import _poolDungeonMap from "../pool/dungeon-map.js";
@@ -184,6 +185,7 @@ import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
+import _poolElementalMastery from "../pool/elemental-mastery.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
@@ -859,6 +861,7 @@ const shard: CardShard = {
     _poolDragonlordSilumgar,
     _poolDragonrage,
     _poolDrivnodCarnageDominus,
+    _poolDroveOfElves,
     _poolDrownyardAmalgam,
     _poolDualStrike,
     _poolDungeonMap,
@@ -873,6 +876,7 @@ const shard: CardShard = {
     _poolEiganjoSeatOfTheEmpire,
     _poolElderAuntie,
     _poolEldraziConscription,
+    _poolElementalMastery,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,
     _poolEndlessObedience,

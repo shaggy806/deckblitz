@@ -327,6 +327,7 @@ import _poolLaughingMad from "../pool/laughing-mad.js";
 import _poolLazavTheMultifarious from "../pool/lazav-the-multifarious.js";
 import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
+import _poolLeechBonder from "../pool/leech-bonder.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
@@ -364,6 +365,7 @@ import _poolMindSculpt from "../pool/mind-sculpt.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMiriamHerdWhisperer from "../pool/miriam-herd-whisperer.js";
+import _poolMirrorweave from "../pool/mirrorweave.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
 import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
@@ -497,6 +499,7 @@ import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavagePunch from "../pool/savage-punch.js";
 import _poolSavaiSabertooth from "../pool/savai-sabertooth.js";
 import _poolSavor from "../pool/savor.js";
+import _poolScar from "../pool/scar.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
 import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
@@ -1014,6 +1017,7 @@ const shard: CardShard = {
     _poolLazavTheMultifarious,
     _poolLeafArrow,
     _poolLeafCrownedVisionary,
+    _poolLeechBonder,
     _poolLeylineProwler,
     _poolLifecraftersGift,
     _poolLifelace,
@@ -1051,6 +1055,7 @@ const shard: CardShard = {
     _poolMinesOfMoria,
     _poolMireTriton,
     _poolMiriamHerdWhisperer,
+    _poolMirrorweave,
     _poolMishrasWorkshop,
     _poolMogisGodOfSlaughter,
     _poolMoltenBlast,
@@ -1184,6 +1189,7 @@ const shard: CardShard = {
     _poolSavagePunch,
     _poolSavaiSabertooth,
     _poolSavor,
+    _poolScar,
     _poolScarletWitchWandaMaximoff,
     _poolScrollThief,
     _poolSeaGateWreckage,
