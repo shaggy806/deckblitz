@@ -70,6 +70,8 @@ const NO_TOKEN_PRINTING = new Set([
   // exists (checked 2026-10-19).
   "Pirate Token (Daring Piracy)",
   "Zeppelin",
+  // Nested Ghoul (MBS) lists no token printing (the Oracle snapshot, 2026-10-26).
+  "Phyrexian Zombie Token",
   // Bottle of Suleiman lists no token printing (the Oracle snapshot, 2026-10-21).
   "5/5 Djinn Artifact Token",
   // Serpent Generator lists none either.

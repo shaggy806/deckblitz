@@ -1,0 +1,740 @@
+{
+ "batch": "B199",
+ "status": "complete",
+ "ranks": "Mirrodin Besieged (MBS, 2011-02-04): whole set, 54; Scars of Mirrodin (SOM, 2010-10-01): next 50 by EDHREC rank (newest-first walk); engine fix: a divided amount survives a decision mid-resolution",
+ "authored": [
+  {
+   "name": "Acid Web Spider",
+   "files": [
+    "engine/src/cards/pool/acid-web-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arc Trail",
+   "files": [
+    "engine/src/cards/pool/arc-trail.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Argent Sphinx",
+   "files": [
+    "engine/src/cards/pool/argent-sphinx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banishment Decree",
+   "files": [
+    "engine/src/cards/pool/banishment-decree.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blunt the Assault",
+   "files": [
+    "engine/src/cards/pool/blunt-the-assault.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Burn the Impure",
+   "files": [
+    "engine/src/cards/pool/burn-the-impure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choking Fumes",
+   "files": [
+    "engine/src/cards/pool/choking-fumes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chrome Steed",
+   "files": [
+    "engine/src/cards/pool/chrome-steed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Contested War Zone",
+   "files": [
+    "engine/src/cards/pool/contested-war-zone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Copper Carapace",
+   "files": [
+    "engine/src/cards/pool/copper-carapace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Corpse Cur",
+   "files": [
+    "engine/src/cards/pool/corpse-cur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creeping Corrosion",
+   "files": [
+    "engine/src/cards/pool/creeping-corrosion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cryptoplasm",
+   "files": [
+    "engine/src/cards/pool/cryptoplasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Decimator Web",
+   "files": [
+    "engine/src/cards/pool/decimator-web.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dispense Justice",
+   "files": [
+    "engine/src/cards/pool/dispense-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Engulfing Slagwurm",
+   "files": [
+    "engine/src/cards/pool/engulfing-slagwurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etched Champion",
+   "files": [
+    "engine/src/cards/pool/etched-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezuri's Archers",
+   "files": [
+    "engine/src/cards/pool/ezuris-archers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flight Spellbomb",
+   "files": [
+    "engine/src/cards/pool/flight-spellbomb.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frantic Salvage",
+   "files": [
+    "engine/src/cards/pool/frantic-salvage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Celebration",
+   "files": [
+    "engine/src/cards/pool/furnace-celebration.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Galvanoth",
+   "files": [
+    "engine/src/cards/pool/galvanoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glimmerpoint Stag",
+   "files": [
+    "engine/src/cards/pool/glimmerpoint-stag.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glint Hawk",
+   "files": [
+    "engine/src/cards/pool/glint-hawk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golden Urn",
+   "files": [
+    "engine/src/cards/pool/golden-urn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Golem Artisan",
+   "files": [
+    "engine/src/cards/pool/golem-artisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gore Vassal",
+   "files": [
+    "engine/src/cards/pool/gore-vassal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grindclock",
+   "files": [
+    "engine/src/cards/pool/grindclock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruesome Encore",
+   "files": [
+    "engine/src/cards/pool/gruesome-encore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hand of the Praetors",
+   "files": [
+    "engine/src/cards/pool/hand-of-the-praetors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of Oxid Ridge",
+   "files": [
+    "engine/src/cards/pool/hero-of-oxid-ridge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horizon Spellbomb",
+   "files": [
+    "engine/src/cards/pool/horizon-spellbomb.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Horrifying Revelation",
+   "files": [
+    "engine/src/cards/pool/horrifying-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Into the Core",
+   "files": [
+    "engine/src/cards/pool/into-the-core.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kuldotha Flamefiend",
+   "files": [
+    "engine/src/cards/pool/kuldotha-flamefiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kuldotha Phoenix",
+   "files": [
+    "engine/src/cards/pool/kuldotha-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kuldotha Rebirth",
+   "files": [
+    "engine/src/cards/pool/kuldotha-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lead the Stampede",
+   "files": [
+    "engine/src/cards/pool/lead-the-stampede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liege of the Tangle",
+   "files": [
+    "engine/src/cards/pool/liege-of-the-tangle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Livewire Lash",
+   "files": [
+    "engine/src/cards/pool/livewire-lash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magnetic Mine",
+   "files": [
+    "engine/src/cards/pool/magnetic-mine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metallic Mastery",
+   "files": [
+    "engine/src/cards/pool/metallic-mastery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirran Mettle",
+   "files": [
+    "engine/src/cards/pool/mirran-mettle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morbid Plunder",
+   "files": [
+    "engine/src/cards/pool/morbid-plunder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moriok Replica",
+   "files": [
+    "engine/src/cards/pool/moriok-replica.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mortarpod",
+   "files": [
+    "engine/src/cards/pool/mortarpod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myr Propagator",
+   "files": [
+    "engine/src/cards/pool/myr-propagator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myr Reservoir",
+   "files": [
+    "engine/src/cards/pool/myr-reservoir.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Necropede",
+   "files": [
+    "engine/src/cards/pool/necropede.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nested Ghoul",
+   "files": [
+    "engine/src/cards/pool/nested-ghoul.ts",
+    "engine/src/cards/tokens/phyrexian-zombie-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin Spellbomb",
+   "files": [
+    "engine/src/cards/pool/origin-spellbomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Panic Spellbomb",
+   "files": [
+    "engine/src/cards/pool/panic-spellbomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Hydra",
+   "files": [
+    "engine/src/cards/pool/phyrexian-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Vatmother",
+   "files": [
+    "engine/src/cards/pool/phyrexian-vatmother.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Piston Sledge",
+   "files": [
+    "engine/src/cards/pool/piston-sledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver Gargantuan",
+   "files": [
+    "engine/src/cards/pool/quicksilver-gargantuan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver Geyser",
+   "files": [
+    "engine/src/cards/pool/quicksilver-geyser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally the Forces",
+   "files": [
+    "engine/src/cards/pool/rally-the-forces.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ratchet Bomb",
+   "files": [
+    "engine/src/cards/pool/ratchet-bomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razorfield Rhino",
+   "files": [
+    "engine/src/cards/pool/razorfield-rhino.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Red Sun's Zenith",
+   "files": [
+    "engine/src/cards/pool/red-suns-zenith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Putrescence",
+   "files": [
+    "engine/src/cards/pool/relic-putrescence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serum Raker",
+   "files": [
+    "engine/src/cards/pool/serum-raker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shriekhorn",
+   "files": [
+    "engine/src/cards/pool/shriekhorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silverskin Armor",
+   "files": [
+    "engine/src/cards/pool/silverskin-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of the Suns",
+   "files": [
+    "engine/src/cards/pool/sphere-of-the-suns.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spikeshot Elder",
+   "files": [
+    "engine/src/cards/pool/spikeshot-elder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spiraling Duelist",
+   "files": [
+    "engine/src/cards/pool/spiraling-duelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spire Serpent",
+   "files": [
+    "engine/src/cards/pool/spire-serpent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spread the Sickness",
+   "files": [
+    "engine/src/cards/pool/spread-the-sickness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steel Sabotage",
+   "files": [
+    "engine/src/cards/pool/steel-sabotage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunspear Shikari",
+   "files": [
+    "engine/src/cards/pool/sunspear-shikari.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tezzeret, Agent of Bolas",
+   "files": [
+    "engine/src/cards/pool/tezzeret-agent-of-bolas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Training Drone",
+   "files": [
+    "engine/src/cards/pool/training-drone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treasure Mage",
+   "files": [
+    "engine/src/cards/pool/treasure-mage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Untamed Might",
+   "files": [
+    "engine/src/cards/pool/untamed-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault Skyward",
+   "files": [
+    "engine/src/cards/pool/vault-skyward.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vedalken Anatomist",
+   "files": [
+    "engine/src/cards/pool/vedalken-anatomist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vedalken Infuser",
+   "files": [
+    "engine/src/cards/pool/vedalken-infuser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Victory's Herald",
+   "files": [
+    "engine/src/cards/pool/victorys-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Virulent Wound",
+   "files": [
+    "engine/src/cards/pool/virulent-wound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volition Reins",
+   "files": [
+    "engine/src/cards/pool/volition-reins.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Chimeric Mass",
+   "needs": [
+    "effect:animate-with-cda-pt"
+   ],
+   "why": "becomes a creature with P/T tracking its charge counters"
+  },
+  {
+   "name": "Clone Shell",
+   "needs": [
+    "effect:linked-face-down-exile-to-battlefield"
+   ],
+   "why": "when it dies, turn the exiled card face up and put it onto the battlefield if a creature"
+  },
+  {
+   "name": "Concussive Bolt",
+   "needs": [
+    "effect:restrict-controlled-by-target"
+   ],
+   "why": "metalcraft: creatures the targeted player controls can't block this turn (including ones they get later)"
+  },
+  {
+   "name": "Distant Memories",
+   "needs": [
+    "decision:any-opponent-may"
+   ],
+   "why": "any opponent may have you put the exiled card into your hand; if no one does, draw three"
+  },
+  {
+   "name": "Echo Circlet",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "equipped creature can block an additional creature each combat"
+  },
+  {
+   "name": "Geth, Lord of the Vault",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "then that player (the card's owner) mills X"
+  },
+  {
+   "name": "Goblin Gaveleer",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "+2/+0 for each Equipment attached to it"
+  },
+  {
+   "name": "Kemba, Kha Regent",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "create a Cat for each Equipment attached to this creature"
+  },
+  {
+   "name": "Kemba's Legion",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "can block an additional creature for each Equipment attached"
+  },
+  {
+   "name": "Koth of the Hammer",
+   "needs": [
+    "effect:emblem-grants-activated"
+   ],
+   "why": "−5 emblem gives Mountains a {T} damage ability"
+  },
+  {
+   "name": "Melira's Keepers",
+   "needs": [
+    "static:cant-have-counters-self"
+   ],
+   "why": "this creature can't have counters put on it"
+  },
+  {
+   "name": "Mitotic Manipulation",
+   "needs": [
+    "filter:same-name-as-a-permanent"
+   ],
+   "why": "put a card with the same name as a permanent onto the battlefield"
+  },
+  {
+   "name": "Pistus Strike",
+   "needs": [
+    "effect:player-counters-controller-of-target"
+   ],
+   "why": "poison counter to the controller of the targeted creature, even if it survives"
+  },
+  {
+   "name": "Precursor Golem",
+   "needs": [
+    "effect:copy-spell-for-each-by-caster"
+   ],
+   "why": "the spell's controller copies it for each other Golem"
+  },
+  {
+   "name": "Prototype Portal",
+   "needs": [
+    "effect:token-copy-of-exiled-card",
+    "amount:exiled-card-mana-value",
+    "keyword:imprint"
+   ],
+   "why": "X is the imprinted card's mana value; token copy of the exiled card"
+  },
+  {
+   "name": "Rot Wolf",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "whenever a creature dealt damage by this creature this turn dies"
+  },
+  {
+   "name": "Scrapdiver Serpent",
+   "needs": [
+    "static:unblockable-defending-player-condition"
+   ],
+   "why": "can't be blocked as long as defending player controls an artifact"
+  },
+  {
+   "name": "Septic Rats",
+   "needs": [
+    "condition:defending-player-poisoned"
+   ],
+   "why": "intervening if: defending player is poisoned"
+  },
+  {
+   "name": "Spin Engine",
+   "needs": [
+    "effect:target-cant-block-source-this-turn"
+   ],
+   "why": "target creature can't block this creature this turn"
+  },
+  {
+   "name": "Strata Scythe",
+   "needs": [
+    "keyword:imprint-same-name"
+   ],
+   "why": "+1/+1 for each land with the same name as the exiled card"
+  },
+  {
+   "name": "Tangle Angler",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "target creature blocks this creature this turn if able"
+  },
+  {
+   "name": "Tunnel Ignus",
+   "needs": [
+    "condition:turn-history-that-player"
+   ],
+   "why": "if that player had another land enter this turn"
+  }
+ ]
+}

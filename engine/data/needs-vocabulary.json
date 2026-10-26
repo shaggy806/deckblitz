@@ -11347,6 +11347,22 @@
   "filter:phyrexian-mana-in-cost": {
    "family": "condition:filter-card-property-clauses",
    "example": "Rage Extractor: whenever you cast a spell with {P} in its mana cost, it deals damage equal to that spell's mana value"
+  },
+  "effect:player-counters-controller-of-target": {
+   "family": "effect:player-scope-extensions",
+   "example": "Pistus Strike: destroy target creature with flying; its controller gets a poison counter"
+  },
+  "condition:defending-player-poisoned": {
+   "family": "condition:player-state-thresholds",
+   "example": "Septic Rats: whenever this attacks, if defending player is poisoned, it gets +1/+1"
+  },
+  "filter:same-name-as-a-permanent": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Mitotic Manipulation: look at the top seven; you may put one with the same name as a permanent onto the battlefield"
+  },
+  "effect:linked-face-down-exile-to-battlefield": {
+   "family": "effect:linked-exiled-card",
+   "example": "Clone Shell: when it dies, turn the exiled card face up; if it is a creature card, put it onto the battlefield"
   }
  }
 }

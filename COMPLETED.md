@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Mirrodin Besieged whole and Scars of Mirrodin's next 50** (batch 199, the newest-first walk,
+  2026-10-26): no feature built; a divided amount now survives a decision mid-resolution (Kuldotha
+  Flamefiend), and Ashmouth Hound and Inferno Elemental trigger when blocked too. 82 of 104
+  authored — Tezzeret, Agent of Bolas, Treasure Mage, Galvanoth, Quicksilver Gargantuan, Phyrexian
+  Hydra, Hero of Oxid Ridge, Victory's Herald, Red Sun's Zenith, Mortarpod, Ratchet Bomb, the
+  Spellbombs — four finished by the scaffolder, the rest by five `card-author` agents and the lead;
+  22 blocked (`B199.json`), "for each Equipment attached" and "can block an additional creature"
+  leading with two each. Mirrodin Besieged is whole.
 - **Ripple and recover, and Coldsnap whole** (batch 196, the second middle walk, 2026-10-26,
   `keyword:ripple`): **built** ripple (rule 702.60 — the `ripple(n, name)`
   helper: a `this-cast` trigger, a `may` reveal and a repeating free `cast-now` from the library
