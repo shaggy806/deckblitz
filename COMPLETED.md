@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Dark Ascension and Innistrad's next 60** (batch 188, the newest-first walk,
+  2026-10-26): **built** "at the beginning of enchanted player's upkeep / draw step / end step"
+  (`trigger:enchanted-player-step-begins` — `step-begins` with `who: "attached"`, read by the
+  scaffolder), with Curse of the Bloody Tome, Curse of Oblivion and four Curses triaged earlier on
+  it alone (Curse of Obsession, Curse of Unbinding, Torment of Scarabs, Cruel Reality). 83
+  authored — Geist of Saint Traft, Garruk Relentless, Delver of Secrets, Helvault, Mayor of
+  Avabruck and 78 more — and 21 blocked, one or two each (`B188.json`). Dark Ascension is whole.
 - **The rest of Avacyn Restored and Dark Ascension's 40 most-played** (batch 185, the
   newest-first walk, 2026-10-26): **built** soulbond (rule 702.95, `keyword:soulbond` —
   `soulbond()`'s two triggers, a `{ scope: "paired" }` static, the `paired` filter clause, the
