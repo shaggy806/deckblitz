@@ -11165,7 +11165,7 @@
    "example": "Okk: can't attack unless a creature with greater power also attacks"
   },
   "effect:sacrifice-unless-pay-its-mana-cost": {
-   "family": "effect:unless",
+   "family": "effect:lose-life-unless-pay",
    "example": "Pendrell Flux: enchanted creature has \"at the beginning of your upkeep, sacrifice this creature unless you pay its mana cost\""
   },
   "effect:look-at-hand-of-target-spell-controller": {
