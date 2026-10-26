@@ -599,6 +599,7 @@ import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
+import _poolThievesFortune from "../pool/thieves-fortune.js";
 import _poolThinkTank from "../pool/think-tank.js";
 import _poolThinkingCap from "../pool/thinking-cap.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
@@ -1294,6 +1295,7 @@ const shard: CardShard = {
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,
     _poolTheWaterCrystal,
+    _poolThievesFortune,
     _poolThinkTank,
     _poolThinkingCap,
     _poolThranduilsCompany,

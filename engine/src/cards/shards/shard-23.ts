@@ -389,6 +389,7 @@ import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMountainYeti from "../pool/mountain-yeti.js";
 import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
+import _poolMudbuttonClanger from "../pool/mudbutton-clanger.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticMight from "../pool/mystic-might.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
@@ -1091,6 +1092,7 @@ const shard: CardShard = {
     _poolMountainYeti,
     _poolMouthOfTheStorm,
     _poolMoxOpal,
+    _poolMudbuttonClanger,
     _poolMurmuringVolume,
     _poolMysticMight,
     _poolMysticPeak,

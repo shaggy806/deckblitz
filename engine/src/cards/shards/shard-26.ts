@@ -331,6 +331,7 @@ import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
 import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
+import _poolLeafCrownedElder from "../pool/leaf-crowned-elder.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
@@ -1029,6 +1030,7 @@ const shard: CardShard = {
     _poolKnife,
     _poolKnightsOfDolAmroth,
     _poolKyodaiSoulOfKamigawa,
+    _poolLeafCrownedElder,
     _poolLegacyWeapon,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,

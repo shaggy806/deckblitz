@@ -129,6 +129,10 @@ export interface GameObject {
    * kept across the move as `enteredSpectacle` is — Reckless Bushwhacker's
    * "if its surge cost was paid". */
   enteredSurge?: boolean;
+  /** This permanent's spell was cast for its prowl cost (rule 702.76),
+   * kept across the move as `enteredSpectacle` is — Earwig Squad's "if its
+   * prowl cost was paid". */
+  enteredProwl?: boolean;
   /** Tribute wasn't paid as it entered (rule 702.104b — `tribute-not-paid`):
    * set by the entry, gone with its next move. */
   tributeUnpaid?: true;
@@ -825,6 +829,10 @@ export interface GameObject {
    * `alternativeCost` with `keyword: "surge"`), for "if its surge cost was
    * paid" (`self-surge-paid`). A copy has it too (707.10). */
   surgePaid?: boolean;
+  /** This spell was cast for its prowl cost (rule 702.76 — the
+   * `alternativeCost` with `keyword: "prowl"`), for "if its prowl cost was
+   * paid" (`self-prowl-paid`). A copy has it too (707.10). */
+  prowlPaid?: boolean;
   /** This spell was cast for its overload cost (rule 702.126 — Cyclonic
    * Rift): its overload cost was paid instead of its mana cost, with no
    * targets, so `resolveTopOfStack` applies `CardDefinition.overload.effect`.
@@ -1250,6 +1258,7 @@ export interface SpellSnapshot {
   readonly evokePaid?: boolean;
   readonly spectaclePaid?: boolean;
   readonly surgePaid?: boolean;
+  readonly prowlPaid?: boolean;
   readonly offspringGrantPaid?: boolean;
   /** Who its gift was promised to — a copy's is promised to them too. */
   readonly giftTo?: PlayerId;
@@ -1562,6 +1571,8 @@ export interface LastKnownInfo {
   readonly enteredSpectacle?: boolean;
   /** Its spell was cast for its surge cost — `enteredSurge`. */
   readonly enteredSurge?: boolean;
+  /** Its spell was cast for its prowl cost — `enteredProwl`. */
+  readonly enteredProwl?: boolean;
   /** Tribute wasn't paid as it entered — `tributeUnpaid`. */
   readonly tributeUnpaid?: true;
   /** How many times its spell's multikicker or squad cost was paid —
@@ -2027,6 +2038,15 @@ export interface PlayerState {
    * Resplendent Angel, Lathiel: "if you gained N or more life this turn").
    * Reset in `beginTurn`. */
   lifeGainedThisTurn: number;
+  /**
+   * The creature types of the sources this player controlled that dealt
+   * combat damage to a player this turn, each read as it dealt the damage —
+   * a changeling's as its every-creature-type marker (`hasSubtype`). Prowl's
+   * "if you dealt combat damage to a player this turn with a Goblin or
+   * Rogue" (rule 702.76a — the `prowl` condition). Reset in `beginTurn`;
+   * absent is none.
+   */
+  combatDamageCreatureTypesThisTurn?: string[];
   /** How many cards this player has drawn this turn (Kydele's "{T}: Add {C}
    * for each card you've drawn this turn", Fists of Flame). Counts the draw
    * itself, not cards put into hand another way — a tutor to hand is not a

@@ -885,6 +885,22 @@ function evalStaticCondition(
         source.surgePaid === true ||
         opts.sourceLastKnown?.enteredSurge === true
       );
+    case "self-prowl-paid":
+      return (
+        source.enteredProwl === true ||
+        source.prowlPaid === true ||
+        opts.sourceLastKnown?.enteredProwl === true
+      );
+    case "prowl": {
+      // Rule 702.76a: any of the source's creature types against those
+      // recorded as each source dealt its combat damage. `hasSubtype` reads
+      // a changeling's marker on either side as every creature type.
+      const dealtWith = state.players[you]?.combatDamageCreatureTypesThisTurn ?? [];
+      if (dealtWith.length === 0) return false;
+      return effectiveSubtypes(state, registry, source).some(
+        (s) => (s === EVERY_CREATURE_TYPE || isCreatureType(s)) && hasSubtype(dealtWith, s),
+      );
+    }
     case "self-kicked":
       // On the battlefield it's `enteredKicked` (the stack flag is cleared by
       // the move that put the permanent here); `kicked` still answers for a

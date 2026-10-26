@@ -543,6 +543,7 @@ import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
+import _poolSensationGorger from "../pool/sensation-gorger.js";
 import _poolSeraphOfTheSword from "../pool/seraph-of-the-sword.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
@@ -1275,6 +1276,7 @@ const shard: CardShard = {
     _poolSeekersSquire,
     _poolSelesnyaSanctuary,
     _poolSelfInflictedWound,
+    _poolSensationGorger,
     _poolSeraphOfTheSword,
     _poolSerpentsPass,
     _poolSerraPaladin,

@@ -701,6 +701,7 @@ import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWashAway from "../pool/wash-away.js";
 import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
+import _poolWaterspoutWeavers from "../pool/waterspout-weavers.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
 import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
@@ -1452,6 +1453,7 @@ const shard: CardShard = {
     _poolWashAway,
     _poolWatchfulNaga,
     _poolWaterTribeCaptain,
+    _poolWaterspoutWeavers,
     _poolWeaponsManufacturing,
     _poolWellspring,
     _poolWerewolfOfAncientHunger,

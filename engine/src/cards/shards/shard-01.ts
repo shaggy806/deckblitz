@@ -296,6 +296,7 @@ import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
+import _poolKithkinZephyrnaut from "../pool/kithkin-zephyrnaut.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
@@ -656,6 +657,7 @@ import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
+import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
@@ -974,6 +976,7 @@ const shard: CardShard = {
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
     _poolKioraMasterOfTheDepths,
+    _poolKithkinZephyrnaut,
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
     _poolKodamaOfTheWestTree,
@@ -1334,6 +1337,7 @@ const shard: CardShard = {
     _poolWildwoodMentor,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
+    _poolWolfSkullShaman,
     _poolWorkshopElders,
     _poolWorldQueller,
     _poolWrennsResolve,

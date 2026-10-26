@@ -582,9 +582,11 @@ export interface CardFilter {
    * a plain `subtypes` of its creature types as the effect applies
    * (`bindDynamicCompares`), so a changeling on either side shares one with
    * anything that has a creature type (`hasSubtype`). Unbound, it matches
-   * nothing.
+   * nothing. `"source"` is the resolving ability's source instead, the same
+   * way — kinship's "if it shares a creature type with this creature"
+   * (Morningtide's ability word: Waterspout Weavers).
    */
-  readonly sharesCreatureTypeWith?: "trigger-object";
+  readonly sharesCreatureTypeWith?: "trigger-object" | "source";
   /**
    * One of the objects the spell or ability now resolving has done this to
    * (see `ThisWayKind`) — choosing among the cards just moved: "you may put

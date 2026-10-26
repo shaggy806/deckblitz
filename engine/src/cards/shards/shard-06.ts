@@ -431,6 +431,7 @@ import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
+import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolProwlerClawedThief,
     _poolPursueGlory,
     _poolPutrefax,
+    _poolPyroclastConsul,
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,

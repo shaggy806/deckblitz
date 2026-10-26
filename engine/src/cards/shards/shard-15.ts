@@ -631,6 +631,7 @@ import _poolVoraciousVermin from "../pool/voracious-vermin.js";
 import _poolVorapede from "../pool/vorapede.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWalkThePlank from "../pool/walk-the-plank.js";
+import _poolWanderingGraybeard from "../pool/wandering-graybeard.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
 import _poolWarteyeWitch from "../pool/warteye-witch.js";
@@ -1305,6 +1306,7 @@ const shard: CardShard = {
     _poolVorapede,
     _poolVraskasFinalMercy,
     _poolWalkThePlank,
+    _poolWanderingGraybeard,
     _poolWardenOfTheEye,
     _poolWarriorsResolve,
     _poolWarteyeWitch,

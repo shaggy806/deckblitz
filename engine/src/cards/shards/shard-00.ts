@@ -280,6 +280,7 @@ import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
 import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
+import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
 import _poolIronLance from "../pool/iron-lance.js";
@@ -310,6 +311,7 @@ import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
 import _poolLatNamsLegacy from "../pool/lat-nams-legacy.js";
 import _poolLatchSeeker from "../pool/latch-seeker.js";
+import _poolLatchkeyFaerie from "../pool/latchkey-faerie.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavaTubes from "../pool/lava-tubes.js";
 import _poolLavastepRaider from "../pool/lavastep-raider.js";
@@ -979,6 +981,7 @@ const shard: CardShard = {
     _poolInGarruksWake,
     _poolIncreasingVengeance,
     _poolInfestedFleshcutter,
+    _poolInkDissolver,
     _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
     _poolIronLance,
@@ -1009,6 +1012,7 @@ const shard: CardShard = {
     _poolLanternSpirit,
     _poolLatNamsLegacy,
     _poolLatchSeeker,
+    _poolLatchkeyFaerie,
     _poolLavaSerpent,
     _poolLavaTubes,
     _poolLavastepRaider,

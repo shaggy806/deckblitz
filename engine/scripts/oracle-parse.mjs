@@ -49,6 +49,8 @@ import {
   outlast,
   persist,
   saddle,
+  kinship,
+  prowl,
   spectacle,
   surge,
   undying,
@@ -90,6 +92,9 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  * grant their line conditionally, Forecast works only from your hand in your
  * upkeep, and the others are Sagas, Attractions and companions. (Exhaust and
  * Boast are read, as activated-ability flags.) */
+const KINSHIP =
+  /^Kinship — At the beginning of your upkeep, you may look at the top card of your library\. If it shares a creature type with ~, you may reveal it\. If you do, (.+\.)$/;
+
 const MEANINGFUL_LABEL = /^(Power-up|Max speed|Forecast|Solved|To solve|Companion|Visit|[IVX]+(?:, [IVX]+)*) — /;
 
 /** "Add {G}. Draw a card." → its sentences, each ending in its period. A
@@ -166,6 +171,8 @@ function keywordPart(part) {
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   // Surge [cost] (rule 702.117a): an alternative cost.
   if ((m = new RegExp(`^surge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: surge(m[1]) } };
+  // Prowl [cost] (rule 702.76a): an alternative cost.
+  if ((m = new RegExp(`^prowl ${COST}$`, "i").exec(p))) return { card: { alternativeCost: prowl(m[1]) } };
   // Awaken N—[cost] (rule 702.113a): an alternative cost adding a target and
   // an effect — `awaken()` over the spell's own targets and effect, once
   // they're read (`parseFace`).
@@ -1967,6 +1974,19 @@ export function parseFace(face, ctx = {}) {
     if (/^\d+\+ \| /.test(raw)) inStriation = true;
     if (inStriation) { out.todo.push(printed(raw)); continue; }
     const whole = normalize(raw, face.name);
+    // Kinship (Morningtide's ability word): the upkeep look and reveal is
+    // `kinship()`; its last sentence, read on its own, is the effect — one
+    // with no target (the revealed card is the `then`'s only one).
+    const kin = KINSHIP.exec(whole);
+    if (kin !== null) {
+      const targets = [];
+      const r = parseEffect(kin[1], { targets, tokenFor, onStack: ctx.onStack });
+      const said = /If you do, (.+)\.$/.exec(raw)?.[1];
+      if (r.effect !== null && targets.length === 0 && !containsTarget(r.effect) && said !== undefined) {
+        out.triggered.push(kinship(r.effect, said));
+      } else out.todo.push(printed(raw));
+      continue;
+    }
     // "Max speed — [ability]" (rule 702.178a): the ability, had only while
     // its controller's speed is 4 — the line read on its own, then given
     // the condition: a static on the card itself carrying it (`maxSpeed()`),
@@ -2724,6 +2744,9 @@ const INTERVENING_IFS = {
   // Rule 702.117a: the permanent's spell was cast for its surge cost.
   "if its surge cost was paid,": { kind: "self-surge-paid" },
   "if ~'s surge cost was paid,": { kind: "self-surge-paid" },
+  // Rule 702.76a: the permanent's spell was cast for its prowl cost.
+  "if its prowl cost was paid,": { kind: "self-prowl-paid" },
+  "if ~'s prowl cost was paid,": { kind: "self-prowl-paid" },
   // Rule 702.104b: the chosen opponent didn't pay the tribute.
   "if tribute wasn't paid,": { kind: "tribute-not-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).

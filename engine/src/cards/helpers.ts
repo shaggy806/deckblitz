@@ -542,6 +542,49 @@ export const surge = (mana: string): NonNullable<CardDefinition["alternativeCost
 });
 
 /**
+ * Prowl [cost] (rule 702.76a): "You may cast this spell for its prowl cost
+ * if you dealt combat damage to a player this turn with a [its creature
+ * types]" — the card's `alternativeCost`, offered under the `prowl`
+ * condition: a source you controlled had any of this card's creature types
+ * as it dealt the damage. A spell cast this way answers `self-prowl-paid`
+ * ("if its prowl cost was paid"). Put the "Prowl [cost] (…)" line in `text`
+ * as well.
+ */
+export const prowl = (mana: string): NonNullable<CardDefinition["alternativeCost"]> => ({
+  mana,
+  keyword: "prowl",
+  condition: { kind: "prowl" },
+});
+
+/**
+ * Kinship — Morningtide's ability word (no rules of its own): "At the
+ * beginning of your upkeep, you may look at the top card of your library.
+ * If it shares a creature type with this creature, you may reveal it. If
+ * you do, [effect]." The card stays on top either way (the rulings), and
+ * `then` applies only when it was revealed, with the revealed card as its
+ * `target: 0` (Leaf-Crowned Elder's "play that card"). Pass the last
+ * sentence's text as `effectText`, e.g. "each opponent loses 2 life".
+ */
+export const kinship = (effect: EffectSpec, effectText: string): TriggeredAbility => ({
+  trigger: { on: "step-begins", step: "upkeep", who: "you" },
+  targets: [],
+  effect: {
+    kind: "look-and-choose",
+    zone: "library",
+    count: 1,
+    reveal: "chosen",
+    min: 0,
+    max: 1,
+    filter: { sharesCreatureTypeWith: "source" },
+    destination: "library-top",
+    leftover: "stay",
+    then: effect,
+  },
+  resolve: null,
+  text: `Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with this creature, you may reveal it. If you do, ${effectText}.`,
+});
+
+/**
  * Awaken N—[cost] (rule 702.113a): "If you cast this spell for [cost], also
  * put N +1/+1 counters on target land you control and it becomes a 0/0
  * Elemental creature with haste. It's still a land." — the card's

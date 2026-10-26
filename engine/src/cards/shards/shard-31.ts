@@ -592,6 +592,7 @@ import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolStingingLicid from "../pool/stinging-licid.js";
+import _poolStinkdrinkerBandit from "../pool/stinkdrinker-bandit.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
@@ -1330,6 +1331,7 @@ const shard: CardShard = {
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolStingingLicid,
+    _poolStinkdrinkerBandit,
     _poolStoneGiant,
     _poolStoneskin,
     _poolStormTheFestival,

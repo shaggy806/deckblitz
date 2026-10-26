@@ -374,6 +374,7 @@ import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNightmare from "../pool/nightmare.js";
+import _poolNightshadeSchemers from "../pool/nightshade-schemers.js";
 import _poolNimbusNaiad from "../pool/nimbus-naiad.js";
 import _poolNissaNaturesArtisan from "../pool/nissa-natures-artisan.js";
 import _poolNissaRevane from "../pool/nissa-revane.js";
@@ -1083,6 +1084,7 @@ const shard: CardShard = {
     _poolNevThePracticalDean,
     _poolNexusWardens,
     _poolNightmare,
+    _poolNightshadeSchemers,
     _poolNimbusNaiad,
     _poolNissaNaturesArtisan,
     _poolNissaRevane,

@@ -1360,6 +1360,34 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(unread.todo).toContain("Awaken 2—{4}{W}");
   });
 
+  it("prowl (rule 702.76a) and kinship (Morningtide's ability word)", () => {
+    const faerie = face(
+      "Flying\nProwl {2}{U} (reminder)\nWhen ~ enters, if its prowl cost was paid, draw a card.",
+      "Creature — Faerie Rogue",
+    );
+    expect(faerie.alternativeCost).toEqual({ mana: "{2}{U}", keyword: "prowl", condition: { kind: "prowl" } });
+    expect(faerie.triggered[0].condition).toEqual({ kind: "self-prowl-paid" });
+    const clanger = face(
+      "Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with this creature, you may reveal it. If you do, this creature gets +1/+1 until end of turn.",
+      "Creature — Goblin Warrior",
+    );
+    expect(clanger.todo).toEqual([]);
+    expect(clanger.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "you" });
+    expect(clanger.triggered[0].effect).toMatchObject({
+      kind: "look-and-choose",
+      filter: { sharesCreatureTypeWith: "source" },
+      destination: "library-top",
+      then: { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
+    });
+    // "Play that card" isn't read: the line is a person's.
+    const elder = face(
+      "Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with this creature, you may reveal it. If you do, you may play that card without paying its mana cost.",
+      "Creature — Treefolk Shaman",
+    );
+    expect(elder.triggered).toEqual([]);
+    expect(elder.todo).toHaveLength(1);
+  });
+
   it("surge (rule 702.117a) and 'if that creature would die this turn, exile it instead' (rule 614.1a)", () => {
     const tyrant = face("Surge {3}{R}{R}\nFlying\nWhen ~ enters, if its surge cost was paid, it deals 3 damage to any target.", "Creature — Dragon");
     expect(tyrant.alternativeCost).toEqual({

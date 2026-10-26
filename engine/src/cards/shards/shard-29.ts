@@ -559,6 +559,7 @@ import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpontaneousArtist from "../pool/spontaneous-artist.js";
 import _poolSporeFlower from "../pool/spore-flower.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
+import _poolSqueakingPieGrubfellows from "../pool/squeaking-pie-grubfellows.js";
 import _poolStaffOfTheFlameMagus from "../pool/staff-of-the-flame-magus.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
@@ -1277,6 +1278,7 @@ const shard: CardShard = {
     _poolSpontaneousArtist,
     _poolSporeFlower,
     _poolSpottedGriffin,
+    _poolSqueakingPieGrubfellows,
     _poolStaffOfTheFlameMagus,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,

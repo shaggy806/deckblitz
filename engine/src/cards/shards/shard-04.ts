@@ -27,6 +27,7 @@ import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
+import _poolAuntiesSnitch from "../pool/aunties-snitch.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAutomatedArtificer from "../pool/automated-artificer.js";
 import _poolAuxiliaryBoosters from "../pool/auxiliary-boosters.js";
@@ -714,6 +715,7 @@ const shard: CardShard = {
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
     _poolAtraxasSkitterfang,
+    _poolAuntiesSnitch,
     _poolAuroralProcession,
     _poolAutomatedArtificer,
     _poolAuxiliaryBoosters,
