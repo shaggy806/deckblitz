@@ -158,6 +158,12 @@ export type GameEvent =
       readonly front: boolean;
     })
   | (Base & {
+      /** A permanent flipped (rule 710 — the `flip` effect). Same object,
+       * same timestamp; not a transform. */
+      readonly type: "permanent-flipped";
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** A mutating creature spell merged with this permanent (rule
        * 702.140c — `Game.mergeMutatingSpell`): "whenever this creature
        * mutates" (702.140d). Same object, no entry. `player` is its

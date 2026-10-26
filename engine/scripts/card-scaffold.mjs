@@ -125,6 +125,9 @@ function splitSubtypes(right) {
  * under `/back/`. */
 const backArt = (printing) =>
   `https://cards.scryfall.io/art_crop/back/${printing[0]}/${printing[1]}/${printing}.jpg`;
+/** A flip card's one printed image, which both halves show (rule 710.1). */
+const frontArt = (printing) =>
+  `https://cards.scryfall.io/art_crop/front/${printing[0]}/${printing[1]}/${printing}.jpg`;
 
 const BASIC_MANA = { Plains: "W", Island: "U", Swamp: "B", Mountain: "R", Forest: "G" };
 
@@ -301,7 +304,7 @@ function wrap(text, prefix) {
   return out;
 }
 
-const LAYOUT_FLAG = { transform: "transform", adventure: "adventure", modal_dfc: null };
+const LAYOUT_FLAG = { transform: "transform", adventure: "adventure", modal_dfc: null, flip: "flip" };
 const SUPPORTED_LAYOUTS = new Set(["normal", "transform", "modal_dfc", "adventure", "saga", "token", "mutate", "leveler"]);
 
 // ------------------------------------------------------------------ tokens
@@ -373,7 +376,8 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
     report.skipped.push(`${entry.name}: already scaffolded`);
     return;
   }
-  const multi = entry.faces !== undefined && ["transform", "modal_dfc", "adventure"].includes(entry.layout);
+  const multi = entry.faces !== undefined && ["transform", "modal_dfc", "adventure", "flip"].includes(entry.layout);
+  const flip = multi && entry.layout === "flip";
   // Scryfall files an Omen (Tarkir: Dragonstorm) under the adventure layout,
   // but an Omen spell is shuffled into its owner's library as it resolves
   // rather than exiled to be cast later: the engine's `omen` flag, not
@@ -429,7 +433,9 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
 
   const results = faces.map((face, i) => ({
     face,
-    ...faceSource(face, {
+    // A flip card's alternative half keeps its normal half's mana cost and
+    // colour (rule 710.1c), which Scryfall prints on the normal half alone.
+    ...faceSource(flip && i > 0 ? { ...face, mana_cost: faces[0].mana_cost } : face, {
       tokenFor,
       // An Adventure's or an Omen's spell half has no colours of its own on
       // Scryfall, whose card colours are the creature's: the half is the
@@ -438,7 +444,7 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
         (entry.layout === "adventure" || prepare) && i > 0 && face.colors === undefined
           ? [...new Set((face.mana_cost ?? "").match(/[WUBRG]/g) ?? [])]
           : entry.colors,
-      art: multi && i > 0 ? backArt(entry.printing) : undefined,
+      art: multi && i > 0 ? (flip ? frontArt(entry.printing) : backArt(entry.printing)) : undefined,
       faces: multi ? faces.map((f) => f.name) : undefined,
       flag: multi ? (omen ? "omen" : LAYOUT_FLAG[entry.layout]) : undefined,
       prepareSpell: prepare && i === 0 ? faces[1].name : undefined,

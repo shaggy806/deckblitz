@@ -584,8 +584,18 @@ function visible(
         ? null
         : object.merged !== undefined && printedName !== (object.copyOf ?? faceName(object))
           ? printedName
-          : object.copyOf,
-    faceName: faceDown !== undefined ? printedName : roomDoors !== undefined ? object.cardName : faceName(object),
+          : object.copyOf !== null && object.flippedName !== undefined
+            ? object.flippedName
+            : object.copyOf,
+    // A flipped flip card shows its alternative half (rule 710.1b).
+    faceName:
+      faceDown !== undefined
+        ? printedName
+        : roomDoors !== undefined
+          ? object.cardName
+          : object.copyOf === null && object.merged === undefined && object.flippedName !== undefined
+            ? object.flippedName
+            : faceName(object),
     ...(nameOf(object) !== printedCardName(object) ? { name: nameOf(object) } : {}),
     faces: object.faces === undefined || faceDown !== undefined ? null : [...object.faces],
     ...(faceDown !== undefined ? {} : spellFaceOf(registry, object)),
