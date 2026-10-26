@@ -29,6 +29,7 @@ export default defineCard({
           text: "{3}, {Q}: This creature gets +2/+2 until end of turn.",
         },
       ],
+      text: 'Equipped creature has "{3}, {Q}: This creature gets +2/+2 until end of turn."',
     },
   ],
 });
