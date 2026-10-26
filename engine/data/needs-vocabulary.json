@@ -11405,7 +11405,7 @@
    "example": "Damping Engine: a player may sacrifice a permanent to ignore this effect until end of turn"
   },
   "effect:delayed-trigger-target-deals-damage": {
-   "family": "effect:grant-triggered-to-target",
+   "family": "effect:delayed-trigger-target-deals-damage",
    "example": "Paladin of Prahv: forecast's 'whenever target creature deals damage this turn, you gain that much life' — a delayed trigger keyed to a target creature, for the activator; grant-triggered gives the creature's controller the life."
   },
   "replacement:gain-life-from-spell-or-ability": {
@@ -11413,7 +11413,7 @@
    "example": "Rain of Gore: 'if a spell or ability would cause its controller to gain life' — the would-gain-life replacement can't tell a spell's or ability's gain from lifelink (the ruling excludes lifelink)."
   },
   "effect:other-spells-cant-be-countered-this-turn": {
-   "family": "new:grant-uncounterable",
+   "family": "effect:other-spells-cant-be-countered-this-turn",
    "example": "Bound // Determined: 'other spells you control can't be countered this turn', spells already on the stack included."
   },
   "amount:colors-of-sacrificed": {
