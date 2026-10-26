@@ -709,7 +709,6 @@ export function auraPolarity(def: CardDefinition): Polarity {
   if ((def.subtypes ?? []).includes("Curse")) return "harm";
   let harm = false;
   let help = false;
-  let vowed = false;
   for (const ability of def.static ?? []) {
     if (ability.affects.scope !== "attached") continue;
     // Goad is the point of an Aura that goads: its pump is the consolation
@@ -744,14 +743,9 @@ export function auraPolarity(def: CardDefinition): Polarity {
     }
     if (ability.grantPtPerCount !== undefined) help = true;
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
-    if (ability.doesntUntap === true) harm = true;
-    if (ability.cantAttackController === true) vowed = true;
+    if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
     if (ability.prohibits !== undefined) harm = true;
   }
-  // "Can't attack you" costs nothing on your own creature, so it harms only
-  // an Aura that gives nothing else: a Vow's +2/+2 and keyword make it yours
-  // to put on your own (Vow of Duty, Vow of Flight).
-  if (vowed && !help) harm = true;
   // Nothing in its statics: what its own "enchanted creature" triggers do to
   // that creature — Bestial Fury's "+4/+0 and trample when it becomes
   // blocked", False Demise's "return that card under your control".
@@ -841,6 +835,10 @@ function attachedTriggerLean(effect: EffectSpec | null): "help" | "harm" | null 
     }
     case "grant-keyword":
       return effect.keyword === "defender" ? "harm" : "help";
+    // The Ordeals' "whenever enchanted creature attacks, put a +1/+1 counter
+    // on it".
+    case "add-counter":
+      return effect.counter === "+1/+1" ? "help" : effect.counter === "-1/-1" ? "harm" : null;
     case "put-onto-battlefield":
       return "help";
     case "destroy":

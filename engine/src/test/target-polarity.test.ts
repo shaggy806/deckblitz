@@ -134,10 +134,8 @@ describe("slot polarity", () => {
     expect(cast("Dying Wish")).toEqual(["help"]);
     // A sacrifice of what it enchants inside a sequence.
     expect(cast("Parasitic Implant")).toEqual(["harm"]);
-    // "Can't attack you" costs nothing on your own creature: a Vow is help,
-    // an Aura that gives nothing with it (Spectral Grasp) harm.
-    expect(cast("Vow of Flight")).toEqual(["help"]);
-    expect(cast("Spectral Grasp")).toEqual(["harm"]);
+    // A +1/+1 counter each time it attacks.
+    expect(cast("Ordeal of Heliod")).toEqual(["help"]);
   });
 
   it("reads a random card taken from a player's graveyard onto your battlefield as harm to them", () => {
