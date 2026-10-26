@@ -455,7 +455,8 @@
   "mechanic:clash",
   "keyword:champion",
   "trigger:clash",
-  "keyword:echo"
+  "keyword:echo",
+  "keyword:epic"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

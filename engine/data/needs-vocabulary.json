@@ -3652,6 +3652,33 @@
   "keyword:sneak": {
    "example": "Splinter's Technique: sneak alt cost isn't modeled"
   },
+  "condition:more-cards-in-hand-than-each-opponent": {
+   "family": "condition:player-state-thresholds",
+   "example": "Akuta, Born of Ash: 'if you have more cards in hand than each opponent' — no condition compares your hand with every opponent's."
+  },
+  "effect:reveal-until-then-keeps-targets": {
+   "family": "effect:reveal-until",
+   "example": "Undying Flames: reveal-until's `then` has only the card found as its target, so the spell's own any-target slot is out of reach for 'deals damage to any target equal to that card's mana value'."
+  },
+  "cost:sacrifice-all-lands": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Tomb of Urami: 'Sacrifice all lands you control' as an activation cost."
+  },
+  "condition:target-player-life-total": {
+   "family": "condition:player-state-thresholds",
+   "example": "Hidetsugu's Second Rite: 'if target player has exactly 10 life' — life-total reads no target slot."
+  },
+  "effect:search-library-to-exile-linked": {
+   "family": "effect:this-way-results",
+   "example": "Kaho, Minamo Historian: search for up to three instant cards and exile them, linked to the source for a later 'cast a card with mana value X from among cards exiled with Kaho'."
+  },
+  "static:graveyard-cards-gain-chosen-type": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Ashes of the Fallen: 'Each creature card in your graveyard has the chosen creature type in addition to its other types.'"
+  },
+  "keyword:epic": {
+   "example": "Enduring Ideal: Epic — can't cast spells for the rest of the game; copy this spell at each of your upkeeps without its epic ability."
+  },
   "keyword:soulbond": {
    "example": "Deadeye Navigator: Soulbond."
   },
