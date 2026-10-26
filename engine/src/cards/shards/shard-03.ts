@@ -227,6 +227,7 @@ import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
 import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
+import _poolGoblinFlectomancer from "../pool/goblin-flectomancer.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
 import _poolGoblinslide from "../pool/goblinslide.js";
@@ -359,6 +360,7 @@ import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMirrorSheen from "../pool/mirror-sheen.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMistIntruder from "../pool/mist-intruder.js";
+import _poolMizziumTransreliquat from "../pool/mizzium-transreliquat.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
@@ -502,6 +504,7 @@ import _poolSilverBolt from "../pool/silver-bolt.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSinisterConcierge from "../pool/sinister-concierge.js";
 import _poolSirenLookout from "../pool/siren-lookout.js";
+import _poolSkarrganFirebird from "../pool/skarrgan-firebird.js";
 import _poolSkinwing from "../pool/skinwing.js";
 import _poolSkophosReaver from "../pool/skophos-reaver.js";
 import _poolSkullOfOrm from "../pool/skull-of-orm.js";
@@ -905,6 +908,7 @@ const shard: CardShard = {
     _poolGoShintaiOfBoundlessVigor,
     _poolGoblinBushwhacker,
     _poolGoblinCannon,
+    _poolGoblinFlectomancer,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
     _poolGoblinslide,
@@ -1037,6 +1041,7 @@ const shard: CardShard = {
     _poolMirrorSheen,
     _poolMishraExcavationProdigy,
     _poolMistIntruder,
+    _poolMizziumTransreliquat,
     _poolMoltenExhale,
     _poolMoltenMonstrosity,
     _poolMonasteryLoremaster,
@@ -1180,6 +1185,7 @@ const shard: CardShard = {
     _poolSilverbackShaman,
     _poolSinisterConcierge,
     _poolSirenLookout,
+    _poolSkarrganFirebird,
     _poolSkinwing,
     _poolSkophosReaver,
     _poolSkullOfOrm,

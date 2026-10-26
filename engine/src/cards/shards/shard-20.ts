@@ -553,6 +553,7 @@ import _poolScaleDeflection from "../pool/scale-deflection.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolScathingShadelock from "../pool/scathing-shadelock.js";
 import _poolScavengingHarpy from "../pool/scavenging-harpy.js";
+import _poolSchismotivate from "../pool/schismotivate.js";
 import _poolScionOfVituGhazi from "../pool/scion-of-vitu-ghazi.js";
 import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearchForDagger from "../pool/search-for-dagger.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolScarecrowGuide,
     _poolScathingShadelock,
     _poolScavengingHarpy,
+    _poolSchismotivate,
     _poolScionOfVituGhazi,
     _poolScragnoth,
     _poolSearchForDagger,

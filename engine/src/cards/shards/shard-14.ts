@@ -591,6 +591,7 @@ import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilumgarAssassin from "../pool/silumgar-assassin.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
+import _poolSkySwallower from "../pool/sky-swallower.js";
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
 import _poolSlaughterSinger from "../pool/slaughter-singer.js";
 import _poolSlaughter from "../pool/slaughter.js";
@@ -598,6 +599,7 @@ import _poolSleeperAgent from "../pool/sleeper-agent.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
+import _poolSoulsOfTheFaultless from "../pool/souls-of-the-faultless.js";
 import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSpawningPool from "../pool/spawning-pool.js";
@@ -754,6 +756,7 @@ import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensMetallicSliverToken from "../tokens/metallic-sliver-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
+import _tokensSandToken from "../tokens/sand-token.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
 import _tokensTentacleToken from "../tokens/tentacle-token.js";
@@ -1350,6 +1353,7 @@ const shard: CardShard = {
     _poolSilumgarAssassin,
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
+    _poolSkySwallower,
     _poolSkylineCascade,
     _poolSlaughterSinger,
     _poolSlaughter,
@@ -1357,6 +1361,7 @@ const shard: CardShard = {
     _poolSlinnVodaTheRisingDeep,
     _poolSmashingSuccess,
     _poolSnarlingWarg,
+    _poolSoulsOfTheFaultless,
     _poolSoulswornSpirit,
     _poolSparringConstruct,
     _poolSpawningPool,
@@ -1515,6 +1520,7 @@ const shard: CardShard = {
     _tokensKrakenToken,
     _tokensMetallicSliverToken,
     _tokensNinjaTokenKaitoShizuki,
+    _tokensSandToken,
     _tokensScorpionDragonToken,
     _tokensSpiritTokenGhostlyDancers,
     _tokensTentacleToken,

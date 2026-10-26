@@ -58,6 +58,7 @@ import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBarbedFoliage from "../pool/barbed-foliage.js";
 import _poolBasriDevotedPaladin from "../pool/basri-devoted-paladin.js";
+import _poolBatteringWurm from "../pool/battering-wurm.js";
 import _poolBattleRattleShaman from "../pool/battle-rattle-shaman.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
@@ -542,6 +543,7 @@ import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSetessanTactics from "../pool/setessan-tactics.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
+import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
@@ -801,6 +803,7 @@ const shard: CardShard = {
     _poolBaralsExpertise,
     _poolBarbedFoliage,
     _poolBasriDevotedPaladin,
+    _poolBatteringWurm,
     _poolBattleRattleShaman,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
@@ -1285,6 +1288,7 @@ const shard: CardShard = {
     _poolSetessanChampion,
     _poolSetessanTactics,
     _poolSeymourFlux,
+    _poolShadowLance,
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,

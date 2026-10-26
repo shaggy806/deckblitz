@@ -209,6 +209,7 @@ import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFeastOfBlood from "../pool/feast-of-blood.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
+import _poolFencersMagemark from "../pool/fencers-magemark.js";
 import _poolFeralThallid from "../pool/feral-thallid.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
 import _poolFieldMarshal from "../pool/field-marshal.js";
@@ -403,6 +404,7 @@ import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
+import _poolMourningThrull from "../pool/mourning-thrull.js";
 import _poolMundaAmbushLeader from "../pool/munda-ambush-leader.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
@@ -422,6 +424,7 @@ import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
 import _poolNyxbornShieldmate from "../pool/nyxborn-shieldmate.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
+import _poolOgreSavant from "../pool/ogre-savant.js";
 import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
 import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
@@ -963,6 +966,7 @@ const shard: CardShard = {
     _poolFeastOfBlood,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
+    _poolFencersMagemark,
     _poolFeralThallid,
     _poolFieldCreeper,
     _poolFieldMarshal,
@@ -1157,6 +1161,7 @@ const shard: CardShard = {
     _poolMonstrousCarabid,
     _poolMoonrageBrute,
     _poolMorphling,
+    _poolMourningThrull,
     _poolMundaAmbushLeader,
     _poolMutantSurveyor,
     _poolMysticMonstrosity,
@@ -1176,6 +1181,7 @@ const shard: CardShard = {
     _poolNoviceDissector,
     _poolNyxbornShieldmate,
     _poolOakenBoon,
+    _poolOgreSavant,
     _poolOhabiCaleria,
     _poolOkinaTempleToTheGrandfathers,
     _poolOmenOfTheHunt,

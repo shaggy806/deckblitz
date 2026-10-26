@@ -316,6 +316,7 @@ import _poolInterventionPact from "../pool/intervention-pact.js";
 import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
 import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
+import _poolIzzetGuildmage from "../pool/izzet-guildmage.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
@@ -539,6 +540,7 @@ import _poolSicken from "../pool/sicken.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
 import _poolSigiledContender from "../pool/sigiled-contender.js";
+import _poolSilhanaStarfletcher from "../pool/silhana-starfletcher.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
@@ -715,6 +717,7 @@ import _poolWindbriskRaptor from "../pool/windbrisk-raptor.js";
 import _poolWindgraceAcolyte from "../pool/windgrace-acolyte.js";
 import _poolWindstorm from "../pool/windstorm.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
+import _poolWitchMawNephilim from "../pool/witch-maw-nephilim.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
 import _poolWoollyRazorback from "../pool/woolly-razorback.js";
@@ -1068,6 +1071,7 @@ const shard: CardShard = {
     _poolIntrepidProvisioner,
     _poolInvasiveSpecies,
     _poolIrresistiblePrey,
+    _poolIzzetGuildmage,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
     _poolJwarIsleRefuge,
@@ -1291,6 +1295,7 @@ const shard: CardShard = {
     _poolSidequestRaiseAChocobo,
     _poolSidisiBroodTyrant,
     _poolSigiledContender,
+    _poolSilhanaStarfletcher,
     _poolSilverSableMercenaryLeader,
     _poolSimicGuildgate,
     _poolSinkhole,
@@ -1467,6 +1472,7 @@ const shard: CardShard = {
     _poolWindgraceAcolyte,
     _poolWindstorm,
     _poolWirewoodElf,
+    _poolWitchMawNephilim,
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
     _poolWoollyRazorback,

@@ -394,6 +394,7 @@ import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarkOfAsylum from "../pool/mark-of-asylum.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarshViper from "../pool/marsh-viper.js";
+import _poolMartyredRusalka from "../pool/martyred-rusalka.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
@@ -671,6 +672,7 @@ import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
+import _poolTinStreetHooligan from "../pool/tin-street-hooligan.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolMarkOfAsylum,
     _poolMarketbackWalker,
     _poolMarshViper,
+    _poolMartyredRusalka,
     _poolMarwynTheClearcutter,
     _poolMasterTrinketeer,
     _poolMasteryOfTheUnseen,
@@ -1471,6 +1474,7 @@ const shard: CardShard = {
     _poolThunderingTanadon,
     _poolTigerSharkAbyssalHunter,
     _poolTimidShieldbearer,
+    _poolTinStreetHooligan,
     _poolTitheDrinker,
     _poolToadstoolAdmirer,
     _poolTogetherForever,

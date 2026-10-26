@@ -159,6 +159,7 @@ import _poolDreamStrix from "../pool/dream-strix.js";
 import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
+import _poolDuneBroodNephilim from "../pool/dune-brood-nephilim.js";
 import _poolDuskCharger from "../pool/dusk-charger.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
@@ -536,6 +537,7 @@ import _poolSkitteringHeartstopper from "../pool/skittering-heartstopper.js";
 import _poolSkullCatapult from "../pool/skull-catapult.js";
 import _poolSkullRaid from "../pool/skull-raid.js";
 import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
+import _poolSkyriderTrainee from "../pool/skyrider-trainee.js";
 import _poolSkystrikeOfficer from "../pool/skystrike-officer.js";
 import _poolSkywatcherAdept from "../pool/skywatcher-adept.js";
 import _poolSlimyAquarium from "../pool/slimy-aquarium.js";
@@ -903,6 +905,7 @@ const shard: CardShard = {
     _poolDreamcallerSiren,
     _poolDrelnoch,
     _poolDroverGrizzly,
+    _poolDuneBroodNephilim,
     _poolDuskCharger,
     _poolDuskmantleOperative,
     _poolDutyBoundDead,
@@ -1280,6 +1283,7 @@ const shard: CardShard = {
     _poolSkullCatapult,
     _poolSkullRaid,
     _poolSkyclaveApparition,
+    _poolSkyriderTrainee,
     _poolSkystrikeOfficer,
     _poolSkywatcherAdept,
     _poolSlimyAquarium,

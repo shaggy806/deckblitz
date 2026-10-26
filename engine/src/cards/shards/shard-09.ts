@@ -173,6 +173,7 @@ import _poolDrossclaw from "../pool/drossclaw.js";
 import _poolDrownerInitiate from "../pool/drowner-initiate.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
 import _poolDutifulThrull from "../pool/dutiful-thrull.js";
+import _poolEarthSurge from "../pool/earth-surge.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
@@ -946,6 +947,7 @@ const shard: CardShard = {
     _poolDrownerInitiate,
     _poolDrumbellower,
     _poolDutifulThrull,
+    _poolEarthSurge,
     _poolEcstaticElectromancer,
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,

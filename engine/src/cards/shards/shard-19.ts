@@ -84,6 +84,7 @@ import _poolBrigoneSoldierOfMeletis from "../pool/brigone-soldier-of-meletis.js"
 import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
 import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
 import _poolBuoyancy from "../pool/buoyancy.js";
+import _poolBurningTreeShaman from "../pool/burning-tree-shaman.js";
 import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
@@ -101,6 +102,7 @@ import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCaveOfTheFrostDragon from "../pool/cave-of-the-frost-dragon.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
+import _poolCerebralVortex from "../pool/cerebral-vortex.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
@@ -139,6 +141,7 @@ import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCovetedPrize from "../pool/coveted-prize.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
+import _poolCrashLanding from "../pool/crash-landing.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
 import _poolCrusherZendikon from "../pool/crusher-zendikon.js";
@@ -763,6 +766,7 @@ import _poolWyluliWolf from "../pool/wyluli-wolf.js";
 import _poolYathanTombguard from "../pool/yathan-tombguard.js";
 import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
+import _poolYoreTillerNephilim from "../pool/yore-tiller-nephilim.js";
 import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZhalfirinCrusader from "../pool/zhalfirin-crusader.js";
@@ -866,6 +870,7 @@ const shard: CardShard = {
     _poolBrimstoneDragon,
     _poolBroodmateDragon,
     _poolBuoyancy,
+    _poolBurningTreeShaman,
     _poolButchDeloriaTunnelSnake,
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
@@ -883,6 +888,7 @@ const shard: CardShard = {
     _poolCaveOfTheFrostDragon,
     _poolCecilyHauntedMage,
     _poolCephalidInkmage,
+    _poolCerebralVortex,
     _poolChallengerTroll,
     _poolChanceMetElves,
     _poolChandraAblaze,
@@ -921,6 +927,7 @@ const shard: CardShard = {
     _poolCourierGriffin,
     _poolCovetedPrize,
     _poolCowlProwler,
+    _poolCrashLanding,
     _poolCrawlingBarrens,
     _poolCreakwoodGhoul,
     _poolCrusherZendikon,
@@ -1545,6 +1552,7 @@ const shard: CardShard = {
     _poolYathanTombguard,
     _poolYavimayaWurm,
     _poolYawgmothsVileOffering,
+    _poolYoreTillerNephilim,
     _poolYouHappenOnAGlade,
     _poolZenithFestival,
     _poolZhalfirinCrusader,

@@ -39,6 +39,8 @@ describe("art pins", () => {
 // Tokens Scryfall has no printing of (checked 2026-10-18, a token search by
 // name): nothing to pin, so they draw as a text panel.
 const NO_TOKEN_PRINTING = new Set([
+  // Dune-Brood Nephilim (GPT)'s 1/1 colorless Sand was never printed as a token.
+  "Sand Token",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",

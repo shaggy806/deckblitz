@@ -268,6 +268,7 @@ import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
+import _poolGhostCouncilOfOrzhova from "../pool/ghost-council-of-orzhova.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGiantSlug from "../pool/giant-slug.js";
@@ -390,6 +391,7 @@ import _poolLancerSliver from "../pool/lancer-sliver.js";
 import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
+import _poolLeylineOfLifeforce from "../pool/leyline-of-lifeforce.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
 import _poolLiltingRefrain from "../pool/lilting-refrain.js";
 import _poolLithatog from "../pool/lithatog.js";
@@ -602,6 +604,7 @@ import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
+import _poolSteamcoreWeird from "../pool/steamcore-weird.js";
 import _poolSteelformSliver from "../pool/steelform-sliver.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
@@ -1012,6 +1015,7 @@ const shard: CardShard = {
     _poolGenemorphImago,
     _poolGenjiGlove,
     _poolGhituAmplifier,
+    _poolGhostCouncilOfOrzhova,
     _poolGhostlyChangeling,
     _poolGiantOx,
     _poolGiantSlug,
@@ -1134,6 +1138,7 @@ const shard: CardShard = {
     _poolLaunchTheFleet,
     _poolLeapingMaster,
     _poolLeyDruid,
+    _poolLeylineOfLifeforce,
     _poolLightningStrike,
     _poolLiltingRefrain,
     _poolLithatog,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _poolStatusStatue,
     _poolStealerOfSecrets,
     _poolSteamBlast,
+    _poolSteamcoreWeird,
     _poolSteelformSliver,
     _poolStegronTheDinosaurMan,
     _poolStolenStarkTech,

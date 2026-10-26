@@ -473,6 +473,7 @@ import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolPyrophobia from "../pool/pyrophobia.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
+import _poolRabbleRouser from "../pool/rabble-rouser.js";
 import _poolRacersRing from "../pool/racers-ring.js";
 import _poolRafterDemon from "../pool/rafter-demon.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
@@ -1230,6 +1231,7 @@ const shard: CardShard = {
     _poolPunkFrogs,
     _poolPyrophobia,
     _poolQuantumMisalignment,
+    _poolRabbleRouser,
     _poolRacersRing,
     _poolRafterDemon,
     _poolRampagingGrowth,

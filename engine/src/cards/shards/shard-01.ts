@@ -270,6 +270,7 @@ import _poolHuntTheWeak from "../pool/hunt-the-weak.js";
 import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
 import _poolHylderblade from "../pool/hylderblade.js";
+import _poolHypervoltGrasp from "../pool/hypervolt-grasp.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
 import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
@@ -999,6 +1000,7 @@ const shard: CardShard = {
     _poolHuntersAxe,
     _poolHuntersTalent,
     _poolHylderblade,
+    _poolHypervoltGrasp,
     _poolHypnoticSpecter,
     _poolIcebindPillar,
     _poolIconicShield,

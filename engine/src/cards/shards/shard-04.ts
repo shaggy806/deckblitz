@@ -306,6 +306,7 @@ import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
 import _poolInfectiousHorror from "../pool/infectious-horror.js";
 import _poolInferno from "../pool/inferno.js";
+import _poolInfiltratorsMagemark from "../pool/infiltrators-magemark.js";
 import _poolInsurrection from "../pool/insurrection.js";
 import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
@@ -1044,6 +1045,7 @@ const shard: CardShard = {
     _poolIndrikStomphowler,
     _poolInfectiousHorror,
     _poolInferno,
+    _poolInfiltratorsMagemark,
     _poolInsurrection,
     _poolIntrepidHero,
     _poolIntroductionToProphecy,

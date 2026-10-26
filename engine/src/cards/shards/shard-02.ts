@@ -10,6 +10,7 @@ import _poolAdrixAndNev from "../pool/adrix-and-nev.js";
 import _poolAdvancedHoverguard from "../pool/advanced-hoverguard.js";
 import _poolAerialManeuver from "../pool/aerial-maneuver.js";
 import _poolAetherMeltdown from "../pool/aether-meltdown.js";
+import _poolAgentOfMasks from "../pool/agent-of-masks.js";
 import _poolAhnCropInvader from "../pool/ahn-crop-invader.js";
 import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
@@ -126,6 +127,7 @@ import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
+import _poolCryptwailing from "../pool/cryptwailing.js";
 import _poolCrystalChimes from "../pool/crystal-chimes.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
@@ -459,6 +461,7 @@ import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
+import _poolPoisonbellyOgre from "../pool/poisonbelly-ogre.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
@@ -490,6 +493,7 @@ import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
+import _poolRepeal from "../pool/repeal.js";
 import _poolResistanceReunited from "../pool/resistance-reunited.js";
 import _poolResistanceSquad from "../pool/resistance-squad.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
@@ -544,8 +548,10 @@ import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
 import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
+import _poolShriekingGrotesque from "../pool/shrieking-grotesque.js";
 import _poolShrineOfPiercingVision from "../pool/shrine-of-piercing-vision.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
+import _poolSilhanaLedgewalker from "../pool/silhana-ledgewalker.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSilumgarMonument from "../pool/silumgar-monument.js";
@@ -562,6 +568,7 @@ import _poolSkyrakerGiant from "../pool/skyraker-giant.js";
 import _poolSlashPanther from "../pool/slash-panther.js";
 import _poolSlitherborePathway from "../pool/slitherbore-pathway.js";
 import _poolSmileAtDeath from "../pool/smile-at-death.js";
+import _poolSmogsteedRider from "../pool/smogsteed-rider.js";
 import _poolSnowCoveredIsland from "../pool/snow-covered-island.js";
 import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
 import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
@@ -739,6 +746,7 @@ const shard: CardShard = {
     _poolAdvancedHoverguard,
     _poolAerialManeuver,
     _poolAetherMeltdown,
+    _poolAgentOfMasks,
     _poolAhnCropInvader,
     _poolAinokStrikeLeader,
     _poolAirServant,
@@ -855,6 +863,7 @@ const shard: CardShard = {
     _poolCremate,
     _poolCribSwap,
     _poolCruelReality,
+    _poolCryptwailing,
     _poolCrystalChimes,
     _poolCudgelTroll,
     _poolCulminationOfStudies,
@@ -1188,6 +1197,7 @@ const shard: CardShard = {
     _poolPlasmaElemental,
     _poolPlatypusBear,
     _poolPlunderingPredator,
+    _poolPoisonbellyOgre,
     _poolPressTheAdvantage,
     _poolPrimaryResearch,
     _poolPrimordialSage,
@@ -1219,6 +1229,7 @@ const shard: CardShard = {
     _poolReclaimTheWastes,
     _poolRefute,
     _poolReitoLantern,
+    _poolRepeal,
     _poolResistanceReunited,
     _poolResistanceSquad,
     _poolRestorationAngel,
@@ -1273,8 +1284,10 @@ const shard: CardShard = {
     _poolShiftingCeratops,
     _poolShivanRaptor,
     _poolShoulderToShoulder,
+    _poolShriekingGrotesque,
     _poolShrineOfPiercingVision,
     _poolSickleRipper,
+    _poolSilhanaLedgewalker,
     _poolSilhanaWayfinder,
     _poolSilkWebWeaver,
     _poolSilumgarMonument,
@@ -1291,6 +1304,7 @@ const shard: CardShard = {
     _poolSlashPanther,
     _poolSlitherborePathway,
     _poolSmileAtDeath,
+    _poolSmogsteedRider,
     _poolSnowCoveredIsland,
     _poolSoldierOfTheGreyHost,
     _poolSomberwaldBeastmaster,

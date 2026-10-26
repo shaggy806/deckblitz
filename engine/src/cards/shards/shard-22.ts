@@ -320,6 +320,7 @@ import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKessigNaturalist from "../pool/kessig-naturalist.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
+import _poolKillerInstinct from "../pool/killer-instinct.js";
 import _poolKinTreeInvocation from "../pool/kin-tree-invocation.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
@@ -1080,6 +1081,7 @@ const shard: CardShard = {
     _poolKessDissidentMage,
     _poolKessigNaturalist,
     _poolKikiJikiMirrorBreaker,
+    _poolKillerInstinct,
     _poolKinTreeInvocation,
     _poolKindredDominance,
     _poolKithkinHealer,

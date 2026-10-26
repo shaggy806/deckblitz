@@ -445,6 +445,7 @@ import _poolParaselene from "../pool/paraselene.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
+import _poolPetrahydrox from "../pool/petrahydrox.js";
 import _poolPhantomBeast from "../pool/phantom-beast.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
@@ -535,6 +536,7 @@ import _poolSandsower from "../pool/sandsower.js";
 import _poolSanguineSacrament from "../pool/sanguine-sacrament.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
+import _poolScabClanMauler from "../pool/scab-clan-mauler.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScourglass from "../pool/scourglass.js";
@@ -1177,6 +1179,7 @@ const shard: CardShard = {
     _poolParkHeightsPegasus,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
+    _poolPetrahydrox,
     _poolPhantomBeast,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolSanguineSacrament,
     _poolSarkhansUnsealing,
     _poolSauronDinoDevotee,
+    _poolScabClanMauler,
     _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScourglass,

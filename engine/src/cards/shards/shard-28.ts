@@ -219,6 +219,7 @@ import _poolFatedConflagration from "../pool/fated-conflagration.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
+import _poolFeralAnimist from "../pool/feral-animist.js";
 import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
@@ -263,6 +264,7 @@ import _poolGodsire from "../pool/godsire.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
+import _poolGristleback from "../pool/gristleback.js";
 import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
 import _poolHaazdaShieldMate from "../pool/haazda-shield-mate.js";
@@ -446,6 +448,7 @@ import _poolPaladinClass from "../pool/paladin-class.js";
 import _poolPaladinEnVec from "../pool/paladin-en-vec.js";
 import _poolPanickedBystander from "../pool/panicked-bystander.js";
 import _poolParadoxEngine from "../pool/paradox-engine.js";
+import _poolParallectricFeedback from "../pool/parallectric-feedback.js";
 import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
@@ -659,6 +662,7 @@ import _poolThrivingIbex from "../pool/thriving-ibex.js";
 import _poolThrunBreakerOfSilence from "../pool/thrun-breaker-of-silence.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
+import _poolTiborAndLumia from "../pool/tibor-and-lumia.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTidyConclusion from "../pool/tidy-conclusion.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
@@ -988,6 +992,7 @@ const shard: CardShard = {
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,
+    _poolFeralAnimist,
     _poolFestergloom,
     _poolFestiveFuneral,
     _poolFeySteed,
@@ -1032,6 +1037,7 @@ const shard: CardShard = {
     _poolGreenSunsZenith,
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
+    _poolGristleback,
     _poolGrowthChamberGuardian,
     _poolGurmagSwiftwing,
     _poolHaazdaShieldMate,
@@ -1215,6 +1221,7 @@ const shard: CardShard = {
     _poolPaladinEnVec,
     _poolPanickedBystander,
     _poolParadoxEngine,
+    _poolParallectricFeedback,
     _poolPestRescuer,
     _poolPeterParker,
     _poolPhantomTrain,
@@ -1428,6 +1435,7 @@ const shard: CardShard = {
     _poolThrunBreakerOfSilence,
     _poolThunderclapWyvern,
     _poolThundermawHellkite,
+    _poolTiborAndLumia,
     _poolTickedOff,
     _poolTidyConclusion,
     _poolTillerOfFlesh,

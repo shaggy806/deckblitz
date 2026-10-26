@@ -180,6 +180,7 @@ import _poolDragonlordSilumgar from "../pool/dragonlord-silumgar.js";
 import _poolDragonrage from "../pool/dragonrage.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDroveOfElves from "../pool/drove-of-elves.js";
+import _poolDrownedRusalka from "../pool/drowned-rusalka.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDualStrike from "../pool/dual-strike.js";
 import _poolDungeonMap from "../pool/dungeon-map.js";
@@ -246,6 +247,7 @@ import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
 import _poolGhoulcallersChant from "../pool/ghoulcallers-chant.js";
 import _poolGiantCockroach from "../pool/giant-cockroach.js";
 import _poolGleefulDemolition from "../pool/gleeful-demolition.js";
+import _poolGlintEyeNephilim from "../pool/glint-eye-nephilim.js";
 import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
 import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoHogWild from "../pool/go-hog-wild.js";
@@ -360,6 +362,7 @@ import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
 import _poolLeylineOfSanctity from "../pool/leyline-of-sanctity.js";
+import _poolLeylineOfTheMeek from "../pool/leyline-of-the-meek.js";
 import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
@@ -588,6 +591,7 @@ import _poolSoundTheTrumpets from "../pool/sound-the-trumpets.js";
 import _poolSparkspitter from "../pool/sparkspitter.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
+import _poolSpelltitheEnforcer from "../pool/spelltithe-enforcer.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
@@ -923,6 +927,7 @@ const shard: CardShard = {
     _poolDragonrage,
     _poolDrivnodCarnageDominus,
     _poolDroveOfElves,
+    _poolDrownedRusalka,
     _poolDrownyardAmalgam,
     _poolDualStrike,
     _poolDungeonMap,
@@ -989,6 +994,7 @@ const shard: CardShard = {
     _poolGhoulcallersChant,
     _poolGiantCockroach,
     _poolGleefulDemolition,
+    _poolGlintEyeNephilim,
     _poolGlintHornBuccaneer,
     _poolGlowingAnemone,
     _poolGoHogWild,
@@ -1103,6 +1109,7 @@ const shard: CardShard = {
     _poolLeopardSpottedJiao,
     _poolLeylineInvocation,
     _poolLeylineOfSanctity,
+    _poolLeylineOfTheMeek,
     _poolLhurgoyf,
     _poolLifeFindsAWay,
     _poolLightningBlast,
@@ -1331,6 +1338,7 @@ const shard: CardShard = {
     _poolSparkspitter,
     _poolSpawningBed,
     _poolSpecimenFreighter,
+    _poolSpelltitheEnforcer,
     _poolSpiderwigBoggart,
     _poolSpikeSoldier,
     _poolSpiritShackle,

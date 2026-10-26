@@ -290,6 +290,7 @@ import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeEncore from "../pool/gruesome-encore.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
+import _poolGruulWarPlow from "../pool/gruul-war-plow.js";
 import _poolGuardChange from "../pool/guard-change.js";
 import _poolGuidingVoice from "../pool/guiding-voice.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
@@ -384,6 +385,7 @@ import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaCoil from "../pool/lava-coil.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
+import _poolLeylineOfLightning from "../pool/leyline-of-lightning.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
 import _poolLightningVolley from "../pool/lightning-volley.js";
 import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
@@ -473,6 +475,7 @@ import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
+import _poolOrzhovGuildmage from "../pool/orzhov-guildmage.js";
 import _poolOtherworldlyOutburst from "../pool/otherworldly-outburst.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutnumber from "../pool/outnumber.js";
@@ -1039,6 +1042,7 @@ const shard: CardShard = {
     _poolGrubStoriedMatriarch,
     _poolGruesomeEncore,
     _poolGruesomeRealization,
+    _poolGruulWarPlow,
     _poolGuardChange,
     _poolGuidingVoice,
     _poolGwennaEyesOfGaea,
@@ -1133,6 +1137,7 @@ const shard: CardShard = {
     _poolLavaCoil,
     _poolLavaglidePathway,
     _poolLeylineBinding,
+    _poolLeylineOfLightning,
     _poolLightOfHope,
     _poolLightningVolley,
     _poolLightwielderPaladin,
@@ -1222,6 +1227,7 @@ const shard: CardShard = {
     _poolOrdealOfHeliod,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
+    _poolOrzhovGuildmage,
     _poolOtherworldlyOutburst,
     _poolOutlandBoar,
     _poolOutnumber,

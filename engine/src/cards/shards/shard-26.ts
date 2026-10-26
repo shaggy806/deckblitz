@@ -274,6 +274,7 @@ import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGroundedForLife from "../pool/grounded-for-life.js";
+import _poolGruulScrapper from "../pool/gruul-scrapper.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolGuulDrazOverseer from "../pool/guul-draz-overseer.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
@@ -444,6 +445,7 @@ import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
+import _poolOrderOfTheStars from "../pool/order-of-the-stars.js";
 import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
@@ -458,6 +460,7 @@ import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
 import _poolPigmentStorm from "../pool/pigment-storm.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
+import _poolPilloryOfTheSleepless from "../pool/pillory-of-the-sleepless.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPlanarAtlas from "../pool/planar-atlas.js";
 import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
@@ -1024,6 +1027,7 @@ const shard: CardShard = {
     _poolGreed,
     _poolGriffinProtector,
     _poolGroundedForLife,
+    _poolGruulScrapper,
     _poolGutterSkulk,
     _poolGuulDrazOverseer,
     _poolHaakonStromgaldScourge,
@@ -1194,6 +1198,7 @@ const shard: CardShard = {
     _poolOpt,
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
+    _poolOrderOfTheStars,
     _poolOriginOfTheHiddenOnes,
     _poolOvergrownArch,
     _poolOverwhelmingVictory,
@@ -1208,6 +1213,7 @@ const shard: CardShard = {
     _poolPigmentStorm,
     _poolPilferedPlans,
     _poolPillarOfTheParuns,
+    _poolPilloryOfTheSleepless,
     _poolPixieQueen,
     _poolPlanarAtlas,
     _poolPonybackBrigade,

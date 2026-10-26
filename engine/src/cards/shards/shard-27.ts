@@ -431,6 +431,7 @@ import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
 import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
+import _poolPetrifiedWoodKin from "../pool/petrified-wood-kin.js";
 import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
@@ -540,6 +541,7 @@ import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
+import _poolSkarrganSkybreaker from "../pool/skarrgan-skybreaker.js";
 import _poolSkitterEel from "../pool/skitter-eel.js";
 import _poolSkolaGrovedancer from "../pool/skola-grovedancer.js";
 import _poolSkullportMerchant from "../pool/skullport-merchant.js";
@@ -1167,6 +1169,7 @@ const shard: CardShard = {
     _poolPerilousResearch,
     _poolPerimeterSergeant,
     _poolPestilence,
+    _poolPetrifiedWoodKin,
     _poolPheresBandTromper,
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
@@ -1276,6 +1279,7 @@ const shard: CardShard = {
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
+    _poolSkarrganSkybreaker,
     _poolSkitterEel,
     _poolSkolaGrovedancer,
     _poolSkullportMerchant,

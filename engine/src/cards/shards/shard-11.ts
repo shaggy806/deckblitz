@@ -288,6 +288,7 @@ import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
 import _poolHarbingerOfSpring from "../pool/harbinger-of-spring.js";
+import _poolHatchingPlans from "../pool/hatching-plans.js";
 import _poolHauntingFigment from "../pool/haunting-figment.js";
 import _poolHazezonTamar from "../pool/hazezon-tamar.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
@@ -1044,6 +1045,7 @@ const shard: CardShard = {
     _poolHaggle,
     _poolHallowedHaunting,
     _poolHarbingerOfSpring,
+    _poolHatchingPlans,
     _poolHauntingFigment,
     _poolHazezonTamar,
     _poolHearthfireHobgoblin,

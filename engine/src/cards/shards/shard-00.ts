@@ -65,6 +65,7 @@ import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
+import _poolBloodscaleProwler from "../pool/bloodscale-prowler.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
@@ -279,6 +280,7 @@ import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
+import _poolHissingMiasma from "../pool/hissing-miasma.js";
 import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
@@ -822,6 +824,7 @@ const shard: CardShard = {
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodcrazedNeonate,
+    _poolBloodscaleProwler,
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
     _poolBoarUmbra,
@@ -1036,6 +1039,7 @@ const shard: CardShard = {
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,
+    _poolHissingMiasma,
     _poolHopeCharm,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,

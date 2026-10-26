@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
+import _poolAbyssalNocturnus from "../pool/abyssal-nocturnus.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAethertideWhale from "../pool/aethertide-whale.js";
@@ -140,6 +141,7 @@ import _poolCrovaxAscendantHero from "../pool/crovax-ascendant-hero.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCrystallization from "../pool/crystallization.js";
 import _poolCullingDrone from "../pool/culling-drone.js";
+import _poolCullingSun from "../pool/culling-sun.js";
 import _poolCurseOfBounty from "../pool/curse-of-bounty.js";
 import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
 import _poolDaemogothTitan from "../pool/daemogoth-titan.js";
@@ -730,6 +732,7 @@ const shard: CardShard = {
   pool: [
     _poolAangAtTheCrossroads,
     _poolAbueloAncestralEcho,
+    _poolAbyssalNocturnus,
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
     _poolAethertideWhale,
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolCrystalShard,
     _poolCrystallization,
     _poolCullingDrone,
+    _poolCullingSun,
     _poolCurseOfBounty,
     _poolCurseOfTheSwine,
     _poolDaemogothTitan,

@@ -255,6 +255,7 @@ import _poolFootfallCrater from "../pool/footfall-crater.js";
 import _poolFoundryInspector from "../pool/foundry-inspector.js";
 import _poolFountainportBell from "../pool/fountainport-bell.js";
 import _poolFoxfireOak from "../pool/foxfire-oak.js";
+import _poolFrazzle from "../pool/frazzle.js";
 import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
@@ -273,6 +274,7 @@ import _poolGeneralKudroOfDrannith from "../pool/general-kudro-of-drannith.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
+import _poolGhorClanSavage from "../pool/ghor-clan-savage.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsAvenger from "../pool/gideons-avenger.js";
@@ -309,6 +311,7 @@ import _poolGroundswell from "../pool/groundswell.js";
 import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
+import _poolGuardiansMagemark from "../pool/guardians-magemark.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
@@ -606,6 +609,7 @@ import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSimicInitiate from "../pool/simic-initiate.js";
 import _poolSimple from "../pool/simple.js";
+import _poolSinstrikersWill from "../pool/sinstrikers-will.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
@@ -767,6 +771,7 @@ import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
+import _poolWurmweaverCoil from "../pool/wurmweaver-coil.js";
 import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
@@ -1054,6 +1059,7 @@ const shard: CardShard = {
     _poolFoundryInspector,
     _poolFountainportBell,
     _poolFoxfireOak,
+    _poolFrazzle,
     _poolFreshFacedRecruit,
     _poolFrontierSeeker,
     _poolFrostveilAmbush,
@@ -1072,6 +1078,7 @@ const shard: CardShard = {
     _poolGenesisChamber,
     _poolGhastlyDiscovery,
     _poolGhastlyHaunting,
+    _poolGhorClanSavage,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsAvenger,
@@ -1108,6 +1115,7 @@ const shard: CardShard = {
     _poolGrovetenderDruids,
     _poolGrowExtraArms,
     _poolGuardianOfTheGreatConduit,
+    _poolGuardiansMagemark,
     _poolGuidingBolt,
     _poolGuildSummit,
     _poolGysahlGreens,
@@ -1405,6 +1413,7 @@ const shard: CardShard = {
     _poolSilentHallcreeper,
     _poolSimicInitiate,
     _poolSimple,
+    _poolSinstrikersWill,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
@@ -1566,6 +1575,7 @@ const shard: CardShard = {
     _poolWormwoodTreefolk,
     _poolWreckRemover,
     _poolWuLightCavalry,
+    _poolWurmweaverCoil,
     _poolYavimayaSapherd,
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,

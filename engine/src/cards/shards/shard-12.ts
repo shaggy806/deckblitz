@@ -133,6 +133,7 @@ import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrownOfEmpires from "../pool/crown-of-empires.js";
 import _poolCruelBargain from "../pool/cruel-bargain.js";
+import _poolCrystalSeer from "../pool/crystal-seer.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
@@ -531,6 +532,7 @@ import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSandbarCrocodile from "../pool/sandbar-crocodile.js";
+import _poolSanguinePraetor from "../pool/sanguine-praetor.js";
 import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
 import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavagePunch from "../pool/savage-punch.js";
@@ -872,6 +874,7 @@ const shard: CardShard = {
     _poolCrossoverCollaboration,
     _poolCrownOfEmpires,
     _poolCruelBargain,
+    _poolCrystalSeer,
     _poolCrystalSlipper,
     _poolCunningEvasion,
     _poolCutOfTheProfits,
@@ -1270,6 +1273,7 @@ const shard: CardShard = {
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
     _poolSandbarCrocodile,
+    _poolSanguinePraetor,
     _poolSarpadianSimulacrum,
     _poolSatyaAetherfluxGenius,
     _poolSavagePunch,
