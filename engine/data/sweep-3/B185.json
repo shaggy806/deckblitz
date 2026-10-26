@@ -1,0 +1,836 @@
+{
+  "batch": "B185",
+  "status": "complete",
+  "ranks": "Avacyn Restored (AVR, 2012-05-04): the rest of the set, 63 cards; Dark Ascension (DKA, 2012-02-03): the 40 most-played of its 80 left (newest-first walk); soulbond built, with the 11 soulbond cards it unblocked from earlier batches (Deadeye Navigator, Tandem Lookout, Silverblade Paladin, Wolfir Silverheart and more)",
+  "authored": [
+    {
+      "name": "Afflicted Deserter // Werewolf Ransacker",
+      "files": [
+        "engine/src/cards/pool/afflicted-deserter.ts",
+        "engine/src/cards/pool/werewolf-ransacker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Archangel's Light",
+      "files": [
+        "engine/src/cards/pool/archangels-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacyn's Collar",
+      "files": [
+        "engine/src/cards/pool/avacyns-collar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Beguiler of Wills",
+      "files": [
+        "engine/src/cards/pool/beguiler-of-wills.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Black Cat",
+      "files": [
+        "engine/src/cards/pool/black-cat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clinging Mists",
+      "files": [
+        "engine/src/cards/pool/clinging-mists.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpse Traders",
+      "files": [
+        "engine/src/cards/pool/corpse-traders.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadeye Navigator",
+      "files": [
+        "engine/src/cards/pool/deadeye-navigator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadly Allure",
+      "files": [
+        "engine/src/cards/pool/deadly-allure.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Demonic Rising",
+      "files": [
+        "engine/src/cards/pool/demonic-rising.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Demonlord of Ashmouth",
+      "files": [
+        "engine/src/cards/pool/demonlord-of-ashmouth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Diregraf Escort",
+      "files": [
+        "engine/src/cards/pool/diregraf-escort.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Doom Weaver",
+      "files": [
+        "engine/src/cards/pool/doom-weaver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drogskol Captain",
+      "files": [
+        "engine/src/cards/pool/drogskol-captain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Druid's Familiar",
+      "files": [
+        "engine/src/cards/pool/druids-familiar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dungeon Geists",
+      "files": [
+        "engine/src/cards/pool/dungeon-geists.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elgaud Shieldmate",
+      "files": [
+        "engine/src/cards/pool/elgaud-shieldmate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Falkenrath Aristocrat",
+      "files": [
+        "engine/src/cards/pool/falkenrath-aristocrat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feed the Pack",
+      "files": [
+        "engine/src/cards/pool/feed-the-pack.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fettergeist",
+      "files": [
+        "engine/src/cards/pool/fettergeist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gallows at Willow Hill",
+      "files": [
+        "engine/src/cards/pool/gallows-at-willow-hill.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Galvanic Alchemist",
+      "files": [
+        "engine/src/cards/pool/galvanic-alchemist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gang of Devils",
+      "files": [
+        "engine/src/cards/pool/gang-of-devils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gather the Townsfolk",
+      "files": [
+        "engine/src/cards/pool/gather-the-townsfolk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Geist Snatch",
+      "files": [
+        "engine/src/cards/pool/geist-snatch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Geist Trappers",
+      "files": [
+        "engine/src/cards/pool/geist-trappers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ghoultree",
+      "files": [
+        "engine/src/cards/pool/ghoultree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gloom Surgeon",
+      "files": [
+        "engine/src/cards/pool/gloom-surgeon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grave Exchange",
+      "files": [
+        "engine/src/cards/pool/grave-exchange.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grounded",
+      "files": [
+        "engine/src/cards/pool/grounded.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guise of Fire",
+      "files": [
+        "engine/src/cards/pool/guise-of-fire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hanweir Lancer",
+      "files": [
+        "engine/src/cards/pool/hanweir-lancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Havengul Runebinder",
+      "files": [
+        "engine/src/cards/pool/havengul-runebinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Havengul Skaab",
+      "files": [
+        "engine/src/cards/pool/havengul-skaab.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Holy Justiciar",
+      "files": [
+        "engine/src/cards/pool/holy-justiciar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Homicidal Seclusion",
+      "files": [
+        "engine/src/cards/pool/homicidal-seclusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Howlgeist",
+      "files": [
+        "engine/src/cards/pool/howlgeist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Human Frailty",
+      "files": [
+        "engine/src/cards/pool/human-frailty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hunger of the Howlpack",
+      "files": [
+        "engine/src/cards/pool/hunger-of-the-howlpack.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunted Ghoul",
+      "files": [
+        "engine/src/cards/pool/hunted-ghoul.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Imperious Mindbreaker",
+      "files": [
+        "engine/src/cards/pool/imperious-mindbreaker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Increasing Ambition",
+      "files": [
+        "engine/src/cards/pool/increasing-ambition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Increasing Confusion",
+      "files": [
+        "engine/src/cards/pool/increasing-confusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Increasing Savagery",
+      "files": [
+        "engine/src/cards/pool/increasing-savagery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Into the Void",
+      "files": [
+        "engine/src/cards/pool/into-the-void.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kessig Malcontents",
+      "files": [
+        "engine/src/cards/pool/kessig-malcontents.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lair Delve",
+      "files": [
+        "engine/src/cards/pool/lair-delve.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lambholt Elder // Silverpelt Werewolf",
+      "files": [
+        "engine/src/cards/pool/lambholt-elder.ts",
+        "engine/src/cards/pool/silverpelt-werewolf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Leap of Faith",
+      "files": [
+        "engine/src/cards/pool/leap-of-faith.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lightning Mauler",
+      "files": [
+        "engine/src/cards/pool/lightning-mauler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightning Prowess",
+      "files": [
+        "engine/src/cards/pool/lightning-prowess.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lone Revenant",
+      "files": [
+        "engine/src/cards/pool/lone-revenant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mad Prophet",
+      "files": [
+        "engine/src/cards/pool/mad-prophet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Malicious Intent",
+      "files": [
+        "engine/src/cards/pool/malicious-intent.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mental Agony",
+      "files": [
+        "engine/src/cards/pool/mental-agony.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Midnight Duelist",
+      "files": [
+        "engine/src/cards/pool/midnight-duelist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mondronen Shaman // Tovolar's Magehunter",
+      "files": [
+        "engine/src/cards/pool/mondronen-shaman.ts",
+        "engine/src/cards/pool/tovolars-magehunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moonveil Dragon",
+      "files": [
+        "engine/src/cards/pool/moonveil-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nearheath Pilgrim",
+      "files": [
+        "engine/src/cards/pool/nearheath-pilgrim.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Niblis of the Breath",
+      "files": [
+        "engine/src/cards/pool/niblis-of-the-breath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightshade Peddler",
+      "files": [
+        "engine/src/cards/pool/nightshade-peddler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Outwit",
+      "files": [
+        "engine/src/cards/pool/outwit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pathbreaker Wurm",
+      "files": [
+        "engine/src/cards/pool/pathbreaker-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Requiem Angel",
+      "files": [
+        "engine/src/cards/pool/requiem-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Riot Ringleader",
+      "files": [
+        "engine/src/cards/pool/riot-ringleader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rite of Ruin",
+      "files": [
+        "engine/src/cards/pool/rite-of-ruin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scorned Villager // Moonscarred Werewolf",
+      "files": [
+        "engine/src/cards/pool/moonscarred-werewolf.ts",
+        "engine/src/cards/pool/scorned-villager.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scroll of Griselbrand",
+      "files": [
+        "engine/src/cards/pool/scroll-of-griselbrand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shattered Perception",
+      "files": [
+        "engine/src/cards/pool/shattered-perception.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silverblade Paladin",
+      "files": [
+        "engine/src/cards/pool/silverblade-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Somberwald Vigilante",
+      "files": [
+        "engine/src/cards/pool/somberwald-vigilante.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spectral Gateguards",
+      "files": [
+        "engine/src/cards/pool/spectral-gateguards.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spectral Prison",
+      "files": [
+        "engine/src/cards/pool/spectral-prison.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spirit Away",
+      "files": [
+        "engine/src/cards/pool/spirit-away.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stern Mentor",
+      "files": [
+        "engine/src/cards/pool/stern-mentor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stonewright",
+      "files": [
+        "engine/src/cards/pool/stonewright.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tandem Lookout",
+      "files": [
+        "engine/src/cards/pool/tandem-lookout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thatcher Revolt",
+      "files": [
+        "engine/src/cards/pool/thatcher-revolt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thraben Doomsayer",
+      "files": [
+        "engine/src/cards/pool/thraben-doomsayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thundering Mightmare",
+      "files": [
+        "engine/src/cards/pool/thundering-mightmare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tormentor's Trident",
+      "files": [
+        "engine/src/cards/pool/tormentors-trident.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Triumph of Cruelty",
+      "files": [
+        "engine/src/cards/pool/triumph-of-cruelty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trusted Forcemage",
+      "files": [
+        "engine/src/cards/pool/trusted-forcemage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Undead Executioner",
+      "files": [
+        "engine/src/cards/pool/undead-executioner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wildwood Geist",
+      "files": [
+        "engine/src/cards/pool/wildwood-geist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wingcrafter",
+      "files": [
+        "engine/src/cards/pool/wingcrafter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wolfbitten Captive // Krallenhorde Killer",
+      "files": [
+        "engine/src/cards/pool/krallenhorde-killer.ts",
+        "engine/src/cards/pool/wolfbitten-captive.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wolfir Silverheart",
+      "files": [
+        "engine/src/cards/pool/wolfir-silverheart.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yew Spirit",
+      "files": [
+        "engine/src/cards/pool/yew-spirit.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Flowering Lumberknot",
+      "needs": [
+        "condition:paired-with-soulbond-creature"
+      ],
+      "why": "\"Unless it's paired with a creature with soulbond\": soulbond isn't a Keyword, so no filter reads whether the partner has it."
+    },
+    {
+      "name": "Joint Assault",
+      "needs": [
+        "effect:paired-creature-of-target"
+      ],
+      "why": "\"If it's paired with a creature, that creature also gets +2/+2\": no effect target reads the creature a target is paired with."
+    },
+    {
+      "name": "Chalice of Life // Chalice of Death",
+      "needs": [
+        "condition:life-above-starting"
+      ],
+      "why": "The life-total condition takes fixed numbers; \"10 life more than your starting life total\" can't be said."
+    },
+    {
+      "name": "Elbrus, the Binding Blade // Withengar Unbound",
+      "needs": [
+        "trigger:player-loses-game-trigger"
+      ],
+      "why": "No trigger fires when a player loses the game."
+    },
+    {
+      "name": "Fiend of the Shadows",
+      "needs": [
+        "zone:exile-player-hand-play-exiled"
+      ],
+      "why": "Playing (lands included) a card another player exiled from their hand, for as long as it stays exiled."
+    },
+    {
+      "name": "Aggravate",
+      "needs": [
+        "effect:damage-dealt-this-way"
+      ],
+      "why": "\"Each creature dealt damage this way blocks this turn if able\" needs a dealt-damage-this-way filter on a mass restriction."
+    },
+    {
+      "name": "Immerwolf",
+      "needs": [
+        "static:cant-transform"
+      ],
+      "why": "Nothing can say \"non-Human Werewolves you control can't transform\"."
+    },
+    {
+      "name": "Curse of Echoes",
+      "needs": [
+        "trigger:enchanted-player-casts",
+        "effect:copy-spell-for-other-player"
+      ],
+      "why": "No \"whenever enchanted player casts\" trigger, nor copies for each other player."
+    },
+    {
+      "name": "Counterlash",
+      "needs": [
+        "filter:shares-card-type-with-target"
+      ],
+      "why": "\"A spell that shares a card type with it\" — sharesCardTypeWith reads only a sacrificed or trigger object."
+    },
+    {
+      "name": "Alpha Brawl",
+      "needs": [
+        "effect:each-creature-deals-power-damage-to-target"
+      ],
+      "why": "Each creature dealt damage then deals damage equal to its power to that creature, each its own source."
+    },
+    {
+      "name": "Descent into Madness",
+      "needs": [
+        "effect:each-player-exiles-permanents-or-hand-cards"
+      ],
+      "why": "Each player picks X among their permanents and hand cards together, all exiled at once."
+    },
+    {
+      "name": "Predator's Gambit",
+      "needs": [
+        "condition:enchanted-controller-controls-no-other-creatures"
+      ],
+      "why": "\"If its controller controls no non-Human creatures\" reads the enchanted creature's controller, not the Aura's."
+    },
+    {
+      "name": "Moonlight Geist",
+      "needs": [
+        "effect:prevent-combat-damage-to-and-by-source"
+      ],
+      "why": "Preventing combat damage dealt by this one object until end of turn."
+    },
+    {
+      "name": "Curse of Misfortunes",
+      "needs": [
+        "effect:curse-attach-player",
+        "mechanic:curses"
+      ],
+      "why": "Searching for a Curse and putting it onto the battlefield attached to a player, with a not-same-name filter over the Curses on that player."
+    },
+    {
+      "name": "Curse of Thirst",
+      "needs": [
+        "trigger:enchanted-player-step-begins",
+        "amount:curses-attached-to-player"
+      ],
+      "why": "\"At the beginning of enchanted player's upkeep\" and a count of the Curses attached to them."
+    },
+    {
+      "name": "Appetite for Brains",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "Choosing a card from an opponent's revealed hand to exile."
+    },
+    {
+      "name": "Second Guess",
+      "needs": [
+        "condition:was-nth-spell-cast-this-turn"
+      ],
+      "why": "\"Counter target spell that's the second spell cast this turn.\""
+    },
+    {
+      "name": "Midvast Protector",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "\"Gains protection from the color of your choice until end of turn.\""
+    },
+    {
+      "name": "Huntmaster of the Fells // Ravager of the Fells",
+      "needs": [
+        "target:controlled-by-target-player"
+      ],
+      "why": "Ravager's second target is limited by the first's player."
+    },
+    {
+      "name": "Curse of Exhaustion",
+      "needs": [
+        "static:static-over-enchanted-player"
+      ],
+      "why": "A prohibition that names the enchanted player."
+    },
+    {
+      "name": "Call to the Kindred",
+      "needs": [
+        "filter:shares-creature-type-with-attached"
+      ],
+      "why": "\"Shares a creature type with enchanted creature\" — sharesCreatureTypeWith reads only a trigger object."
+    },
+    {
+      "name": "Faith's Shield",
+      "needs": [
+        "effect:player-protection-from-color"
+      ],
+      "why": "Fateful hour gives you protection from a chosen color."
+    },
+    {
+      "name": "Eaten by Spiders",
+      "needs": [
+        "filter:attached-to-target"
+      ],
+      "why": "\"And all Equipment attached to that creature.\""
+    },
+    {
+      "name": "Defang",
+      "needs": [
+        "replacement:prevent-damage-by-attached"
+      ],
+      "why": "Preventing the damage the enchanted creature would deal: the replacement's source filter can't name it."
+    },
+    {
+      "name": "Ghoulflesh",
+      "needs": [
+        "static:add-color-to-attached"
+      ],
+      "why": "\"Is a black Zombie in addition to its other colors and types\": no static adds a color."
+    },
+    {
+      "name": "Breathkeeper Seraph",
+      "needs": [
+        "effect:delayed-return-from-graveyard-your-next-upkeep"
+      ],
+      "why": "Re-triaged now soulbond is built: the granted dies trigger returns the card at the beginning of your next upkeep, a delayed return from the graveyard nothing expresses."
+    },
+    {
+      "name": "Mirage Phalanx",
+      "needs": [
+        "effect:copy-exception-loses-ability"
+      ],
+      "why": "Re-triaged now soulbond is built: the token copy \"loses soulbond\" — no copy exception removes an ability."
+    },
+    {
+      "name": "Donna Noble",
+      "needs": [
+        "trigger:paired-creature-dealt-damage"
+      ],
+      "why": "Re-triaged now soulbond is built: \"or a creature it's paired with is dealt damage\" — no trigger reads the partner."
+    }
+  ]
+}

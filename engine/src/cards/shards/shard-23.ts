@@ -205,6 +205,7 @@ import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
+import _poolFeedThePack from "../pool/feed-the-pack.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
@@ -277,6 +278,7 @@ import _poolHornbashMentor from "../pool/hornbash-mentor.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
 import _poolHorribleHordes from "../pool/horrible-hordes.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
+import _poolHungerOfTheHowlpack from "../pool/hunger-of-the-howlpack.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
@@ -909,6 +911,7 @@ const shard: CardShard = {
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
+    _poolFeedThePack,
     _poolFiendishDuo,
     _poolFightToTheDeath,
     _poolFiligreeFamiliar,
@@ -981,6 +984,7 @@ const shard: CardShard = {
     _poolHornetQueen,
     _poolHorribleHordes,
     _poolHulkingRaptor,
+    _poolHungerOfTheHowlpack,
     _poolHungrySpriggan,
     _poolIcatianPriest,
     _poolIdyllicTutor,

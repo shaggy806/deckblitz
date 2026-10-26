@@ -4761,6 +4761,17 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
     }
   | {
+      /**
+       * Soulbond's pairing (rule 702.95a): the effect's source becomes paired
+       * with `target` — the creature chosen, or the one that entered. Built
+       * by `soulbond()`; never author it. Neither becomes paired unless both
+       * are still creatures on the battlefield under the ability's
+       * controller (702.95c), different, and both unpaired (702.95d).
+       */
+      readonly kind: "pair";
+      readonly target: EffectTargetRef;
+    }
+  | {
       /** The temptation completes (rule 701.54d) — the last step of
        * `the-ring-tempts-you`. */
       readonly kind: "ring-tempted";
@@ -6988,6 +6999,9 @@ export interface EffectApi {
   ringTemptBegin(): void;
   /** `object` becomes the controller's Ring-bearer (rule 701.54a). */
   becomeRingBearer(object: ObjectId): void;
+  /** The source and `object` become paired by soulbond (rule 702.95a),
+   * if 702.95c and 702.95d allow it. */
+  pairWithSource(object: ObjectId): void;
   /** The temptation completes: the count, the emblem's text, the event. */
   ringTemptFinish(): void;
   /** `who` gets `amount` energy counters (rule 122). */
@@ -10712,6 +10726,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "become-ring-bearer": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target?.kind === "object") ctx.becomeRingBearer(target.object);
+      return;
+    }
+    case "pair": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target?.kind === "object") ctx.pairWithSource(target.object);
       return;
     }
     case "ring-tempted":

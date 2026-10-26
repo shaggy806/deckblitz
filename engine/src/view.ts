@@ -20,6 +20,7 @@ import {
   inactiveStandIn,
   intrinsicManaColors,
   modifierGrantApplies,
+  pairedPartner,
   restrictionsOf,
   withComputedCache,
 } from "./characteristics.js";
@@ -308,6 +309,9 @@ export interface VisibleObject {
   /** Its controller's Ring-bearer (rule 701.54) — a designation; the Ring
    * emblem says what that gives it. */
   readonly ringBearer: boolean;
+  /** The creature it's paired with by soulbond (rule 702.95b). Absent when
+   * it's unpaired. */
+  readonly pairedWith?: ObjectId;
   /** On a permanent: it's prepared (rule 722.3a) — its controller may cast
    * `preparedSpell`, its prepare spell's copy in exile (722.3c). On that
    * copy in exile: `preparedBy`, the permanent it belongs to. */
@@ -667,6 +671,7 @@ function visible(
     saddled: zone === "battlefield" && object.saddled === true,
     ...(zone === "battlefield" && object.solved === true ? { solved: true as const } : {}),
     ringBearer: hasRingBearerDesignation(object),
+    ...(pairedPartner(state, object) !== undefined ? { pairedWith: pairedPartner(state, object)!.id } : {}),
     ...(zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
     ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),
   };

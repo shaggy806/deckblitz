@@ -241,6 +241,7 @@ import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGeyadroneDihada from "../pool/geyadrone-dihada.js";
+import _poolGhoultree from "../pool/ghoultree.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
 import _poolGibberingHyenas from "../pool/gibbering-hyenas.js";
@@ -471,6 +472,7 @@ import _poolReverseEngineer from "../pool/reverse-engineer.js";
 import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
+import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
 import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
@@ -941,6 +943,7 @@ const shard: CardShard = {
     _poolGerrardsBattleCry,
     _poolGetThePoint,
     _poolGeyadroneDihada,
+    _poolGhoultree,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
     _poolGibberingHyenas,
@@ -1171,6 +1174,7 @@ const shard: CardShard = {
     _poolRhoxCharger,
     _poolRhoxOracle,
     _poolRiderInNeed,
+    _poolRiteOfRuin,
     _poolRiverpyreVerge,
     _poolRoadsideReliquary,
     _poolRoast,

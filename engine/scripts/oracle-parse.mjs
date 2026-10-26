@@ -51,6 +51,7 @@ import {
   saddle,
   kinship,
   prowl,
+  soulbond,
   spectacle,
   surge,
   undying,
@@ -283,6 +284,7 @@ function keywordPart(part) {
     myriad: () => ({ triggered: [myriad()] }),
     extort: () => ({ triggered: [extort()] }),
     evolve: () => ({ triggered: [evolve()] }),
+    soulbond: () => ({ triggered: soulbond() }),
     increment: () => ({ triggered: [increment()] }),
     "living weapon": () => ({ triggered: [livingWeapon()] }),
     // For Mirrodin! (rule 702.163a): a 2/2 red Rebel, then this attaches to it
@@ -3053,6 +3055,14 @@ function parseStatic(line, text) {
       grantKeywords: [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
       text,
     };
+  }
+  // Soulbond's pairing statics (rule 702.95b): "both creatures have …",
+  // "each of those creatures gets …" — the `paired` scope.
+  if ((m = new RegExp(`^As long as (?:~|this creature) is paired with another creature, both creatures have ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
+    return { affects: { scope: "paired" }, grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]), text };
+  }
+  if ((m = /^As long as (?:~|this creature) is paired with another creature, each of those creatures gets ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    return { affects: { scope: "paired" }, grantPt: [Number(m[1]), Number(m[2])], text };
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);

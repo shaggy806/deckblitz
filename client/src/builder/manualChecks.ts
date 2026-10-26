@@ -8295,4 +8295,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Waterspout Weavers: kinship reveals the top card at your upkeep',
     board({ you: { bf: ['Waterspout Weavers', 'Grizzly Bears'], lib: ['Merrow Witsniper', 'Island'] } }),
   ),
+  preset(
+    'Silverblade Paladin: soulbond pairs it with a creature you choose',
+    board({ you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant'], hand: ['Silverblade Paladin'] } }),
+  ),
 ]

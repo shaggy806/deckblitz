@@ -54,6 +54,7 @@ import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBearTrap from "../pool/bear-trap.js";
+import _poolBeguilerOfWills from "../pool/beguiler-of-wills.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
@@ -248,6 +249,7 @@ import _poolGaeasTouch from "../pool/gaeas-touch.js";
 import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
+import _poolGangOfDevils from "../pool/gang-of-devils.js";
 import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
 import _poolGatebreakerRam from "../pool/gatebreaker-ram.js";
 import _poolGeistwave from "../pool/geistwave.js";
@@ -426,6 +428,7 @@ import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
+import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
 import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
@@ -495,6 +498,7 @@ import _poolRibbons from "../pool/ribbons.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
 import _poolRingOfImmortals from "../pool/ring-of-immortals.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
+import _poolRiotRingleader from "../pool/riot-ringleader.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
@@ -565,6 +569,7 @@ import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStabWound from "../pool/stab-wound.js";
+import _poolSternMentor from "../pool/stern-mentor.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
@@ -750,6 +755,7 @@ const shard: CardShard = {
     _poolBattleMastery,
     _poolBattleRampart,
     _poolBearTrap,
+    _poolBeguilerOfWills,
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
     _poolBenthicInfiltrator,
@@ -944,6 +950,7 @@ const shard: CardShard = {
     _poolGaladhrimBrigade,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
+    _poolGangOfDevils,
     _poolGarrukUnleashed,
     _poolGatebreakerRam,
     _poolGeistwave,
@@ -1122,6 +1129,7 @@ const shard: CardShard = {
     _poolNanogeneConversion,
     _poolNecrogenScudder,
     _poolNettleGuard,
+    _poolNiblisOfTheBreath,
     _poolNikyaOfTheOldWays,
     _poolNivMizzetParun,
     _poolNoMercy,
@@ -1191,6 +1199,7 @@ const shard: CardShard = {
     _poolRinAndSeriInseparable,
     _poolRingOfImmortals,
     _poolRingOfXathrid,
+    _poolRiotRingleader,
     _poolRiteOfOblivion,
     _poolRoccoStreetChef,
     _poolRocketVolley,
@@ -1261,6 +1270,7 @@ const shard: CardShard = {
     _poolSplendidAgony,
     _poolSpreadingFlames,
     _poolStabWound,
+    _poolSternMentor,
     _poolStingingHivemaster,
     _poolStingingShot,
     _poolStitchTogether,

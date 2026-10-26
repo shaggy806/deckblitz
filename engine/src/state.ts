@@ -1223,6 +1223,13 @@ export interface GameObject {
    * `attachedTo`, never with it; cleared on any zone change. */
   attachedToPlayer?: PlayerId;
   /**
+   * The creature this one is paired with by soulbond (rule 702.95b), set on
+   * both, each naming the other. Cleared on any zone change; the state-based
+   * check (`unpairBrokenPairs`) clears both halves once 702.95e ends the
+   * pairing. Ask `pairedPartner` (`characteristics.ts`), never this field.
+   */
+  pairedWith?: ObjectId;
+  /**
    * True for a player's designated commander (intrinsic, like `isToken` —
    * never reset by `moveObject`). Lets it be cast from the command zone
    * (rule 903.4, with tax) and redirects it back to the command zone

@@ -56,6 +56,7 @@ import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
 import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
+import _poolBlackCat from "../pool/black-cat.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
@@ -214,6 +215,7 @@ import _poolFussBother from "../pool/fuss-bother.js";
 import _poolFylamarid from "../pool/fylamarid.js";
 import _poolGaeasCourser from "../pool/gaeas-courser.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
+import _poolGallowsAtWillowHill from "../pool/gallows-at-willow-hill.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
@@ -223,6 +225,7 @@ import _poolGixsCaress from "../pool/gixs-caress.js";
 import _poolGixsCommand from "../pool/gixs-command.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
+import _poolGloomSurgeon from "../pool/gloom-surgeon.js";
 import _poolGoShintaiOfAncientWars from "../pool/go-shintai-of-ancient-wars.js";
 import _poolGoShintaiOfLostWisdom from "../pool/go-shintai-of-lost-wisdom.js";
 import _poolGoblinCavaliers from "../pool/goblin-cavaliers.js";
@@ -763,6 +766,7 @@ const shard: CardShard = {
     _poolBiomathematician,
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
+    _poolBlackCat,
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
     _poolBladewingTheRisen,
@@ -921,6 +925,7 @@ const shard: CardShard = {
     _poolFylamarid,
     _poolGaeasCourser,
     _poolGalazethPrismari,
+    _poolGallowsAtWillowHill,
     _poolGatewayShade,
     _poolGempalmIncinerator,
     _poolGhaltaPrimalHunger,
@@ -930,6 +935,7 @@ const shard: CardShard = {
     _poolGixsCommand,
     _poolGleamingSplendor,
     _poolGlintSleeveArtisan,
+    _poolGloomSurgeon,
     _poolGoShintaiOfAncientWars,
     _poolGoShintaiOfLostWisdom,
     _poolGoblinCavaliers,

@@ -167,6 +167,7 @@ import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
 import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
+import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
@@ -559,6 +560,7 @@ import _poolSyncopate from "../pool/syncopate.js";
 import _poolTajuruBeastmaster from "../pool/tajuru-beastmaster.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
+import _poolTandemLookout from "../pool/tandem-lookout.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
 import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
@@ -579,6 +581,7 @@ import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
 import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
+import _poolThunderingMightmare from "../pool/thundering-mightmare.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
@@ -842,6 +845,7 @@ const shard: CardShard = {
     _poolEasterlingVanguard,
     _poolEiganjoUprising,
     _poolElderDruid,
+    _poolElgaudShieldmate,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolEmbraceTheUnknown,
@@ -1234,6 +1238,7 @@ const shard: CardShard = {
     _poolTajuruBeastmaster,
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
+    _poolTandemLookout,
     _poolTangleSpider,
     _poolTattermungeDuo,
     _poolTelimtorsEdict,
@@ -1254,6 +1259,7 @@ const shard: CardShard = {
     _poolThinkTwice,
     _poolThornLieutenant,
     _poolThroesOfChaos,
+    _poolThunderingMightmare,
     _poolThunderwolfCavalry,
     _poolTidepoolTurtle,
     _poolTitansVanguard,

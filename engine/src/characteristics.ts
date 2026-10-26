@@ -1521,6 +1521,28 @@ function spellGrantedKeywords(state: GameState, registry: CardRegistry, spell: G
   return out;
 }
 
+/**
+ * The creature `object` is paired with by soulbond (rule 702.95b), or
+ * undefined if it's unpaired: both on the battlefield, each naming the other,
+ * under one controller (702.95e). That either stopped being a creature is
+ * left to the state-based check (`Game.unpairBrokenPairs`), which ends the
+ * pairing for good — reading types here would fold the very statics a
+ * pairing grants.
+ */
+export function pairedPartner(state: GameState, object: GameObject): GameObject | undefined {
+  if (object.zone !== "battlefield" || object.pairedWith === undefined) return undefined;
+  const partner = state.objects[object.pairedWith];
+  if (
+    partner === undefined ||
+    partner.zone !== "battlefield" ||
+    partner.pairedWith !== object.id ||
+    partner.controller !== object.controller
+  ) {
+    return undefined;
+  }
+  return partner;
+}
+
 /** True if this permanent has lost its own abilities (layer 6 — Turn to Frog). */
 export function hasLostAbilities(object: GameObject): boolean {
   return object.modifiers.some((m) => m.loseAbilities === true);
@@ -2365,6 +2387,10 @@ export function staticAffects(
     view.subtypes ?? effectiveSubtypes(state, registry, target);
   if (affects.scope === "self") return source.id === target.id;
   if (affects.scope === "attached") return source.attachedTo === target.id;
+  if (affects.scope === "paired") {
+    const partner = pairedPartner(state, source);
+    return partner !== undefined && (target.id === source.id || target.id === partner.id);
+  }
   if (affects.scope === "filter") {
     if (target.zone !== "battlefield") return false;
     if (affects.excludeSelf === true && source.id === target.id) return false;

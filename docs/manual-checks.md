@@ -5459,3 +5459,9 @@ engine terms. A second thing to check is a second test.
 ### Waterspout Weavers: kinship reveals the top card at your upkeep
 - **Do:** Pass the turn and come back to your upkeep.
 - **Expect:** You're shown the top card of your library (a Merfolk) and may reveal it; if you do, your creatures gain flying until end of turn, and the card stays on top to be drawn.
+
+## Soulbond (2026-10-26, batch 185)
+
+### Silverblade Paladin: soulbond pairs it with a creature you choose
+- **Do:** Cast Silverblade Paladin. When its soulbond trigger resolves, pick Hill Giant on the board.
+- **Expect:** You're asked to choose one of Grizzly Bears or Hill Giant (or none). Paladin and Hill Giant both have double strike; Grizzly Bears doesn't.

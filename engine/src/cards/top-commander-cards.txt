@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3811 already implemented / 1189 missing (marks refreshed 2026-10-26)
+3812 already implemented / 1188 missing (marks refreshed 2026-10-26)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1474,7 +1474,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1481  Monumental Henge                         {0}              Land
 [x]  1482  Fauna Shaman                             {1}{G}           Creature — Elf Shaman
 [x]  1483  Diamond Pick-Axe                         {R}              Artifact — Equipment
-[ ]  1484  Deadeye Navigator                        {4}{U}{U}        Creature — Spirit
+[x]  1484  Deadeye Navigator                        {4}{U}{U}        Creature — Spirit
 [x]  1485  Sunbaked Canyon                          {0}              Land
 [x]  1486  Witty Roastmaster                        {2}{R}           Creature — Devil Citizen
 [x]  1487  Twitching Doll                           {1}{G}           Artifact Creature — Spider Toy
@@ -2220,7 +2220,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2227  Valgavoth, Harrower of Souls             {2}{B}{R}        Legendary Creature — Elder Demon
 [x]  2228  Electroduplicate                         {2}{R}           Sorcery
 [ ]  2229  Invert Polarity                          {U}{U}{R}        Instant
-[ ]  2230  Tandem Lookout                           {2}{U}           Creature — Human Scout
+[x]  2230  Tandem Lookout                           {2}{U}           Creature — Human Scout
 [x]  2231  Jetmir, Nexus of Revels                  {1}{R}{G}{W}     Legendary Creature — Cat Demon
 [ ]  2232  Glacial Chasm                            {0}              Land
 [ ]  2233  Bubbling Muck                            {B}              Sorcery
@@ -4263,7 +4263,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4270  Sandstone Oracle                         {7}              Artifact Creature — Sphinx
 [x]  4271  Ninja Pizza                              {2}{G}           Enchantment
 [x]  4272  Remote Isle                              {0}              Land
-[x]  4273  Notorious Throng                         {3}{U}           Kindred Sorcery — Rogue
+[ ]  4273  Notorious Throng                         {3}{U}           Kindred Sorcery — Rogue
 [x]  4274  Vraan, Executioner Thane                 {1}{B}           Legendary Creature — Phyrexian Vampire
 [x]  4275  Baeloth Barrityl, Entertainer            {4}{R}           Legendary Creature — Elf Shaman
 [x]  4276  Tavern Brawler                           {2}{R}           Legendary Enchantment — Background

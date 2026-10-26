@@ -144,6 +144,7 @@ import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
+import _poolDoomWeaver from "../pool/doom-weaver.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
@@ -341,6 +342,7 @@ import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLidlessGaze from "../pool/lidless-gaze.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
+import _poolLightningProwess from "../pool/lightning-prowess.js";
 import _poolLilianasInfluence from "../pool/lilianas-influence.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
@@ -349,6 +351,7 @@ import _poolLivingHistory from "../pool/living-history.js";
 import _poolLobberCrew from "../pool/lobber-crew.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
+import _poolLoneRevenant from "../pool/lone-revenant.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
@@ -634,6 +637,7 @@ import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTorstenFounderOfBenalia from "../pool/torsten-founder-of-benalia.js";
+import _poolTovolarsMagehunter from "../pool/tovolars-magehunter.js";
 import _poolTradingPost from "../pool/trading-post.js";
 import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
@@ -896,6 +900,7 @@ const shard: CardShard = {
     _poolDiscipleOfMalice,
     _poolDivineGambit,
     _poolDomriRade,
+    _poolDoomWeaver,
     _poolDoorOfDestinies,
     _poolDragonTempest,
     _poolDragonTurtle,
@@ -1093,6 +1098,7 @@ const shard: CardShard = {
     _poolLibrary,
     _poolLidlessGaze,
     _poolLifecreedDuo,
+    _poolLightningProwess,
     _poolLilianasInfluence,
     _poolLiminalHold,
     _poolLionsEyeDiamond,
@@ -1101,6 +1107,7 @@ const shard: CardShard = {
     _poolLobberCrew,
     _poolLodestoneGolem,
     _poolLokisScepter,
+    _poolLoneRevenant,
     _poolLongtuskCub,
     _poolLoreSeeker,
     _poolLoxodonLineBreaker,
@@ -1386,6 +1393,7 @@ const shard: CardShard = {
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,
     _poolTorstenFounderOfBenalia,
+    _poolTovolarsMagehunter,
     _poolTradingPost,
     _poolTragicFall,
     _poolTreeOfPerdition,

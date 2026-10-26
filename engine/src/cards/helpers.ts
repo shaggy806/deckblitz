@@ -1617,6 +1617,68 @@ export const evolve = (): TriggeredAbility => {
   };
 };
 
+const SOULBOND_TEXT =
+  "Soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)";
+
+const UNPAIRED_CREATURE: CardFilter = { type: "creature", controlledBy: "you", paired: false };
+
+/**
+ * Soulbond (rule 702.95a), as the two triggered abilities it is. "When this
+ * creature enters, if you control both this creature and another creature
+ * and both are unpaired, you may pair this creature with another unpaired
+ * creature you control" — the creature chosen as it resolves, not targeted
+ * (choosing none is the "may") — and "whenever another creature you control
+ * enters, if you control both that creature and this one and both are
+ * unpaired, you may pair that creature with this creature". Both conditions
+ * are intervening-ifs (rule 603.4), asked again as the ability resolves, and
+ * the pairing itself checks rule 702.95c (the `pair` effect). What a pairing
+ * grants is a static with `affects: { scope: "paired" }` — "both creatures
+ * have …", "each of those creatures has …"; the pairing ends as 702.95e says
+ * (`Game.unpairBrokenPairs`). Spread it into `triggered`; the keyword line
+ * goes in `text`.
+ */
+export const soulbond = (): TriggeredAbility[] => [
+  {
+    trigger: { on: "enters-battlefield", who: "self" },
+    condition: {
+      kind: "all",
+      of: [
+        { kind: "source", filter: UNPAIRED_CREATURE },
+        { kind: "controls", filter: UNPAIRED_CREATURE, atLeast: 1, excludeSelf: true },
+      ],
+    },
+    targets: [],
+    effect: {
+      kind: "choose-permanents",
+      filter: UNPAIRED_CREATURE,
+      upTo: 1,
+      exceptSource: true,
+      then: { kind: "pair", target: 0 },
+      prompt: "Soulbond: you may pair this creature with another unpaired creature you control",
+    },
+    resolve: null,
+    text: SOULBOND_TEXT,
+  },
+  {
+    trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "creature" }, otherOnly: true },
+    condition: {
+      kind: "all",
+      of: [
+        { kind: "source", filter: UNPAIRED_CREATURE },
+        { kind: "trigger-object", filter: UNPAIRED_CREATURE },
+      ],
+    },
+    targets: [],
+    effect: {
+      kind: "may",
+      effect: { kind: "pair", target: "trigger-object" },
+      prompt: "Soulbond: pair this creature with the creature that entered?",
+    },
+    resolve: null,
+    text: SOULBOND_TEXT,
+  },
+];
+
 /**
  * Increment (rule 702.191a): "Whenever you cast a spell, if this permanent is
  * a creature and the amount of mana spent to cast that spell is greater than

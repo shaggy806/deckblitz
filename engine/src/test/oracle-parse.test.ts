@@ -14,7 +14,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS, createDefaultRegistry, defineCard } from "../cards.js";
-import { learn } from "../cards/helpers.js";
+import { learn, soulbond } from "../cards/helpers.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -1641,6 +1641,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(spell.miracle).toEqual({ cost: "{R}" });
     expect(spell.complete).toBe(true);
+  });
+
+  it("soulbond (rule 702.95a): the keyword's two triggers, and the pairing static in the `paired` scope", () => {
+    const reminder =
+      "Soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)";
+    const paladin = face(
+      `${reminder}\nAs long as this creature is paired with another creature, both creatures have double strike.`,
+      "Creature — Human Knight",
+    );
+    expect(paladin.triggered).toEqual(soulbond());
+    expect(paladin.static[0]).toMatchObject({ affects: { scope: "paired" }, grantKeywords: ["double-strike"] });
+    expect(paladin.complete).toBe(true);
+    const familiar = face(
+      `${reminder}\nAs long as this creature is paired with another creature, each of those creatures gets +2/+2.`,
+      "Creature — Bear",
+    );
+    expect(familiar.static[0]).toMatchObject({ affects: { scope: "paired" }, grantPt: [2, 2] });
+    expect(familiar.complete).toBe(true);
   });
 
   it("learn (rule 701.48a): the rummage alone, as `learn()` writes it — no sideboard, so no Lesson to fetch", () => {
