@@ -88,7 +88,7 @@ describe("detain", () => {
   });
 
   it("a detained creature's mana ability can't be activated either (the ruling)", () => {
-    const { game, a } = table();
+    const { game } = table();
     lands(game, "Plains", 5);
     lands(game, "Island", 2);
     const elves = spawn(game, "Llanowar Elves", B);
