@@ -4,7 +4,8 @@
 // a cloud session (4 cores, 15 GB) out of memory: in batch 164 they had their
 // cards written by 22:25 and spent until 22:59 in OOM kills (exit 137) and
 // retries. The engine's tests typecheck (`tsc -p tsconfig.tests.json`) peaks
-// at ~6.3 GB (measured 2026-10-26), so slots are one per ~7 GB of RAM beyond
+// at ~6.3 GB (measured 2026-10-26; 6.2-6.6 GB resident again after it became
+// one pass, a lower heap limit or not), so slots are one per ~7 GB of RAM beyond
 // 3 GB, at least one: one on a cloud session.
 //
 // Slots are directories under the OS temp dir, shared by every worktree on

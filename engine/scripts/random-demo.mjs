@@ -17,7 +17,8 @@
 // pool (`fuzz-decks.mjs`), so a new card needs no edit here to be fuzzed.
 //
 // Each game runs in a worker thread with a wall-clock limit. A game that
-// never finishes is killed and reported as a failure naming its seed, instead
+// never finishes is killed and reported as a failure naming its seed and how
+// the game last looked (the worker's once-a-second heartbeat), instead
 // of stalling the whole run — a runaway loop inside one `tick()` never yields,
 // so nothing short of terminating the thread can stop it. Any failure (a
 // timeout, or a thrown error) makes the process exit non-zero.
@@ -83,20 +84,28 @@ const workerUrl = new URL("./random-game-worker.mjs", import.meta.url);
 const spawn = () => new Worker(workerUrl);
 let worker = spawn();
 
-/** Play one seed in the worker, or kill it after `timeoutMs`. */
+/** Play one seed in the worker, or kill it after `timeoutMs` — reporting the
+ * worker's last heartbeat, the game as it last looked. */
 const play = (seed) =>
   new Promise((resolve) => {
+    let last = null;
     const timer = setTimeout(() => {
       worker.removeAllListeners("message");
       // Terminate and replace: the thread may be stuck mid-tick forever.
       void worker.terminate();
       worker = spawn();
-      resolve({ seed, ok: false, timedOut: true, ms: timeoutMs });
+      resolve({ seed, ok: false, timedOut: true, ms: timeoutMs, last });
     }, timeoutMs);
-    worker.once("message", (result) => {
+    const onMessage = (result) => {
+      if (result.heartbeat !== undefined) {
+        last = result.heartbeat;
+        return;
+      }
+      worker.off("message", onMessage);
       clearTimeout(timer);
       resolve(result);
-    });
+    };
+    worker.on("message", onMessage);
     worker.postMessage({ seed, seats: seatsForSeed(seed) });
   });
 
@@ -125,7 +134,11 @@ for (const seed of seedsToPlay) {
     results.push(result);
     bar.tick();
   } else if (result.timedOut) {
-    const line = `FAILED seed ${seed}: TIMED OUT after ${timeoutMs / 1000}s (replay with --seed ${seed})`;
+    // Where it was when killed: a turn in the hundreds or a battlefield of
+    // one card's copies is a game running long, not a hang; the same picture
+    // at a longer --timeout only says it again.
+    const where = result.last === null ? "before its first heartbeat (still starting, or stuck inside one tick)" : `last seen at ${result.last}`;
+    const line = `FAILED seed ${seed}: TIMED OUT after ${timeoutMs / 1000}s, ${where} (replay with --seed ${seed})`;
     process.stderr.write(`${showProgress ? "\n" : ""}${line}\n`);
     failures.push(line);
     bar.tick({ failed: true });

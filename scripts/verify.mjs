@@ -43,13 +43,28 @@
 // when the change touches `server/`, `client/` or `protocol/` — the bot gate
 // too when it touches the bots (`engine/src/bot/`, `controller.ts`,
 // `effect-worth.ts`, `target-polarity.ts`). `--full` or `--quick` forces one.
+// A full run skips the plain fuzzer and the bot gate too when nothing but
+// cards has changed since the last full run (`lastFullCommit` in the state
+// file): over batches 173-175 they found nothing a card batch broke — the
+// new-cards fuzzer found both bugs — and CI fuzzes every push to main anyway.
 //
-// Usage: node scripts/verify.mjs [--full | --quick] [--with "Card Name"]... [--skip step,step]
-//   steps for --skip: marks, lint, server, client, cardverify,
-//   fuzz, fuzzwith, gate
+// **The new-cards fuzzer, early.** It is the step that finds bugs, and on a
+// small machine it runs last, alone, for 5-10 minutes. `--fuzz-new` runs just
+// it (gen:cards, build, then the fuzzer) as soon as a batch's cards are
+// written, while the lead writes the batch record; on a pass it leaves a stamp
+// in the OS temp dir naming the cards, their files and the engine source it
+// ran against, and a later verify skips the step while all three still match
+// (a merge that brings engine code in, or an edited card, runs it again).
+//
+// Usage: node scripts/verify.mjs [--full | --quick | --fuzz-new] [--with "Card Name"]...
+//                                [--skip step,step | --only step,step] [--games N]
+//   steps for --skip / --only: marks, lint, server, client, cardverify,
+//   fuzz, fuzzwith, gate (gen:cards, build, typecheck and the engine suite
+//   always run; `--only fuzzwith` re-checks a fix to what that step found)
 //   --games N   2-player fuzz games (default 60; 4-player gets half)
 
 import { spawn, spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -65,16 +80,45 @@ const withFile = (names) => {
   return file;
 };
 
+const USAGE = `usage: node scripts/verify.mjs [--full | --quick | --fuzz-new] [--with "Card Name"]...
+                               [--skip step,step | --only step,step] [--games N]
+  steps: ${"marks, lint, server, client, cardverify, fuzz, fuzzwith, gate"}`;
+const STEPS = new Set(["marks", "lint", "server", "client", "cardverify", "fuzz", "fuzzwith", "gate"]);
 const args = process.argv.slice(2);
 const withNames = [];
 let skip = new Set();
+let only = null;
 let games = 60;
+const stepList = (value, flag) => {
+  const list = (value ?? "").split(",").filter(Boolean);
+  const bad = list.filter((s) => !STEPS.has(s));
+  if (list.length === 0 || bad.length > 0) {
+    console.error(`verify: ${flag} takes steps from: ${[...STEPS].join(", ")}${bad.length ? ` (not ${bad.join(", ")})` : ""}`);
+    process.exit(2);
+  }
+  return new Set(list);
+};
+// An unknown flag stops here rather than starting a run (a `--help` once
+// started a full one).
 for (let i = 0; i < args.length; i++) {
-  if (args[i] === "--with") withNames.push(args[++i]);
-  else if (args[i] === "--skip") skip = new Set(args[++i].split(","));
-  else if (args[i] === "--games") games = Number(args[++i]);
+  const a = args[i];
+  if (a === "--with") withNames.push(args[++i]);
+  else if (a === "--skip") skip = stepList(args[++i], "--skip");
+  else if (a === "--only") only = stepList(args[++i], "--only");
+  else if (a === "--games") games = Number(args[++i]);
+  else if (a === "--help" || a === "-h") {
+    console.log(USAGE);
+    process.exit(0);
+  } else if (!["--full", "--quick", "--fuzz-new"].includes(a)) {
+    console.error(`verify: unknown argument ${a}\n${USAGE}`);
+    process.exit(2);
+  }
 }
 const forced = args.includes("--full") ? "full" : args.includes("--quick") ? "quick" : null;
+const fuzzNewOnly = args.includes("--fuzz-new");
+/** A step left out by hand: such a full run isn't recorded as one. */
+const userSkipped = skip.size > 0 || only !== null;
+if (only !== null) for (const step of STEPS) if (!only.has(step)) skip.add(step);
 
 const failures = [];
 const started = Date.now();
@@ -149,7 +193,9 @@ function baseRef() {
 }
 
 /** Pool cards this change adds: files under engine/src/cards/pool not on the
- * base (`baseRef`) — added in a commit since it, or not committed yet. */
+ * base (`baseRef`) — added in a commit since it, or not committed yet. Each
+ * card's name, with every file read for it in `addedFiles`. */
+const addedFiles = [];
 function addedCards() {
   const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
   const pool = "engine/src/cards/pool";
@@ -166,6 +212,7 @@ function addedCards() {
     const file = path.join(ROOT, rel);
     if (!file.endsWith(".ts") || !existsSync(file)) continue;
     const source = readFileSync(file, "utf8");
+    addedFiles.push(rel);
     // A Room's whole card is `roomCard("Name", left, right)`, with no `name:`.
     const m = /^\s*name:\s*"((?:[^"\\]|\\.)*)"/m.exec(source) ?? /roomCard\(\s*"((?:[^"\\]|\\.)*)"/.exec(source);
     if (m === null) continue;
@@ -197,6 +244,42 @@ function changedFiles() {
   return [...new Set(files.filter(Boolean))];
 }
 
+/** Engine code that isn't card data: everything under `engine/src` but the
+ * pool, the tokens, the scaffolds, the generated barrel and shards, the
+ * card lists, and tests — plus the fuzzer's own scripts. */
+const CARD_DATA = /^engine\/src\/(cards\/(pool|tokens|scaffold|shards)\/|cards\/generated[^/]*\.ts$|cards\/[^/]*\.(txt|json|md)$|test\/|sample-decks\.ts$)|\.test\.ts$/;
+const isEngineCode = (f) =>
+  (/^engine\/src\//.test(f) && !CARD_DATA.test(f)) || /^engine\/scripts\/(random-|fuzz-decks)/.test(f);
+
+/** Files changed since `ref` (committed or not), or `null` if `ref` isn't a
+ * commit this checkout has. */
+function changedSince(ref) {
+  if (typeof ref !== "string" || spawnSync("git", ["cat-file", "-e", `${ref}^{commit}`], { cwd: ROOT }).status !== 0) return null;
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" }).stdout.split("\n");
+  return [...new Set([...git("diff", "--name-only", ref), ...git("ls-files", "--others", "--exclude-standard")].filter(Boolean))];
+}
+
+/** What the new-cards fuzzer ran against: the forced cards, their files'
+ * contents and the engine code's (`isEngineCode`), as one hash. */
+function fuzzKey(cards) {
+  const hash = createHash("sha1");
+  hash.update(JSON.stringify([...cards].sort()));
+  const files = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "engine/src", "engine/scripts"], {
+    cwd: ROOT,
+    encoding: "utf8",
+  })
+    .stdout.split("\n")
+    .filter((f) => f && isEngineCode(f));
+  for (const f of [...new Set([...files, ...addedFiles])].sort()) {
+    const file = path.join(ROOT, f);
+    if (!existsSync(file)) continue;
+    hash.update(f);
+    hash.update(readFileSync(file));
+  }
+  return hash.digest("hex");
+}
+const FUZZ_STAMP = path.join(LOGS, "verify-fuzzwith-pass.json");
+
 const STATE = path.join(ROOT, "scripts", "verify-state.json");
 /** The newest batch record's number (`engine/data/sweep-3/B<N>.json`). */
 const newestBatch = () =>
@@ -207,12 +290,24 @@ const newestBatch = () =>
       .filter(Boolean)
       .map((m) => Number(m[1])),
   );
-const lastFull = existsSync(STATE) ? (JSON.parse(readFileSync(STATE, "utf8")).lastFullBatch ?? 0) : 0;
+const state = existsSync(STATE) ? JSON.parse(readFileSync(STATE, "utf8")) : {};
+const lastFull = state.lastFullBatch ?? 0;
 const EVERY = 3;
 const batch = newestBatch();
-const mode = forced ?? (batch - lastFull >= EVERY ? "full" : "quick");
+const mode = fuzzNewOnly ? "fuzz-new" : (forced ?? (batch - lastFull >= EVERY ? "full" : "quick"));
 let fuzzWithGames = 40;
-if (mode === "quick") {
+if (mode === "fuzz-new") {
+  for (const step of STEPS) if (step !== "fuzzwith") skip.add(step);
+} else if (mode === "full" && forced === null) {
+  // Only cards since the last full run: the plain fuzzer and the bot gate
+  // have nothing new to find (see the header).
+  const since = changedSince(state.lastFullCommit);
+  if (since !== null && !since.some(isEngineCode)) {
+    skip.add("fuzz");
+    if (!since.some((f) => /^engine\/src\/(bot\/|controller\.ts|effect-worth\.ts|target-polarity\.ts)/.test(f))) skip.add("gate");
+    console.log(`verify: nothing but cards since the last full run (${state.lastFullCommit.slice(0, 8)}): no plain fuzzer${skip.has("gate") ? " or bot gate" : ""}`);
+  }
+} else if (mode === "quick") {
   const touched = changedFiles();
   const touches = (re) => touched === null || touched.some((f) => re.test(f));
   skip.add("fuzz");
@@ -222,14 +317,52 @@ if (mode === "quick") {
   if (!touches(/^(client|protocol)\//)) skip.add("client");
 }
 console.log(
-  `verify: ${mode}${forced ? "" : ` (last full run at batch ${lastFull}, newest batch ${batch}; full every ${EVERY})`}`,
+  `verify: ${mode}${forced || fuzzNewOnly ? "" : ` (last full run at batch ${lastFull}, newest batch ${batch}; full every ${EVERY})`}`,
 );
 
 const cards = [...new Set([...withNames, ...addedCards()])];
-console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : "no new cards"}${skip.size ? `; skipping ${[...skip].join(", ")}` : ""}\n`);
+if (fuzzNewOnly && cards.length === 0) {
+  console.error("verify --fuzz-new: no new cards (commit or write the batch's card files first, or name them with --with)");
+  process.exit(2);
+}
+// The new-cards fuzzer already passed on these cards and this engine code
+// (`--fuzz-new`, earlier in this session): not again.
+const key = cards.length > 0 ? fuzzKey(cards) : null;
+let stamped = false;
+if (!fuzzNewOnly && !skip.has("fuzzwith") && key !== null && existsSync(FUZZ_STAMP)) {
+  const stamp = JSON.parse(readFileSync(FUZZ_STAMP, "utf8"));
+  if (stamp.key === key && stamp.games >= fuzzWithGames) {
+    skip.add("fuzzwith");
+    stamped = true;
+  }
+}
+console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : "no new cards"}${skip.size ? `; skipping ${[...skip].join(", ")}` : ""}`);
+if (stamped) console.log(`verify: the new-cards fuzzer passed on these cards and this engine code earlier (--fuzz-new): not run again`);
+console.log("");
 
 await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
+
+if (fuzzNewOnly) {
+  // Alone on the machine, so split in two even on a small one, at the games a
+  // full run plays (which covers a quick run's too).
+  const half = Math.ceil(40 / 2);
+  const forcedArgs = cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]);
+  const runs = await Promise.all(
+    [
+      [1, half],
+      [half + 1, 40 - half],
+    ].map(([start, n], i) =>
+      run(`fuzz with new cards (${i + 1} of 2)`, "node", ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", "--timeout", "120", ...forcedArgs], ENGINE),
+    ),
+  );
+  for (const r of runs) report(r, grab(r.out, /games —|avg turns|FAILED seed/));
+  if (failures.length === 0) {
+    writeFileSync(FUZZ_STAMP, JSON.stringify({ key, games: 40, cards, date: new Date().toISOString() }) + "\n");
+    console.log(`\nThe new-cards fuzzer passed (${secs(started)}): verify skips it while these cards and the engine code stay as they are.`);
+  } else console.log(`\nFailed: ${failures.join(", ")} (${secs(started)}).`);
+  process.exit(failures.length === 0 ? 0 : 1);
+}
 
 // The fuzzers and the bot gate need only the build: they run in the
 // background beside everything from here on, and report at the end.
@@ -355,8 +488,9 @@ console.log(failures.length === 0 ? `
 All green (${secs(started)}).` : `
 Failed: ${failures.join(", ")} (${secs(started)}).`);
 // A full run that passed is the one the next quick runs count from.
-if (failures.length === 0 && mode === "full" && skip.size === 0) {
-  writeFileSync(STATE, JSON.stringify({ lastFullBatch: batch, date: new Date().toISOString().slice(0, 10) }, null, 1) + "\n");
+if (failures.length === 0 && mode === "full" && !userSkipped) {
+  const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).stdout.trim();
+  writeFileSync(STATE, JSON.stringify({ lastFullBatch: batch, lastFullCommit: head, date: new Date().toISOString().slice(0, 10) }, null, 1) + "\n");
   console.log(`Recorded a full run at batch ${batch} in scripts/verify-state.json — commit it.`);
 }
 process.exit(failures.length === 0 ? 0 : 1);
