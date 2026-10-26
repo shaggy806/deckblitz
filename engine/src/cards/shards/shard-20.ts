@@ -112,6 +112,7 @@ import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChamberSentry from "../pool/chamber-sentry.js";
+import _poolChargingRhino from "../pool/charging-rhino.js";
 import _poolChocoComet from "../pool/choco-comet.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
@@ -213,6 +214,7 @@ import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
+import _poolFeelingOfDread from "../pool/feeling-of-dread.js";
 import _poolFellFlagship from "../pool/fell-flagship.js";
 import _poolFendeepSummoner from "../pool/fendeep-summoner.js";
 import _poolFerocification from "../pool/ferocification.js";
@@ -397,6 +399,7 @@ import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
 import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
+import _poolNaturesCloak from "../pool/natures-cloak.js";
 import _poolNaturesRhythm from "../pool/natures-rhythm.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
@@ -663,6 +666,7 @@ import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
 import _poolToppleTheStatue from "../pool/topple-the-statue.js";
+import _poolTormentOfScarabs from "../pool/torment-of-scarabs.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
 import _poolTourachsCanticle from "../pool/tourachs-canticle.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
@@ -719,6 +723,7 @@ import _poolWerewolfRansacker from "../pool/werewolf-ransacker.js";
 import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
+import _poolWindSail from "../pool/wind-sail.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWitchesEye from "../pool/witches-eye.js";
 import _poolWitchsVengeance from "../pool/witchs-vengeance.js";
@@ -865,6 +870,7 @@ const shard: CardShard = {
     _poolChainwebAracnir,
     _poolChakramSlinger,
     _poolChamberSentry,
+    _poolChargingRhino,
     _poolChocoComet,
     _poolCircleOfProtectionWhite,
     _poolCivicGuildmage,
@@ -966,6 +972,7 @@ const shard: CardShard = {
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,
+    _poolFeelingOfDread,
     _poolFellFlagship,
     _poolFendeepSummoner,
     _poolFerocification,
@@ -1150,6 +1157,7 @@ const shard: CardShard = {
     _poolNantukoTracer,
     _poolNarfiBetrayerKing,
     _poolNarwhal,
+    _poolNaturesCloak,
     _poolNaturesRhythm,
     _poolNecroskitter,
     _poolNehebDreadhordeChampion,
@@ -1416,6 +1424,7 @@ const shard: CardShard = {
     _poolTollsOfWar,
     _poolTomeBlast,
     _poolToppleTheStatue,
+    _poolTormentOfScarabs,
     _poolTormodsCrypt,
     _poolTourachsCanticle,
     _poolTrailOfCrumbs,
@@ -1472,6 +1481,7 @@ const shard: CardShard = {
     _poolWidowsWalk,
     _poolWildCantor,
     _poolWillowrushVerge,
+    _poolWindSail,
     _poolWirewoodGuardian,
     _poolWitchesEye,
     _poolWitchsVengeance,

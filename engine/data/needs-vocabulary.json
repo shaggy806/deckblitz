@@ -11052,6 +11052,33 @@
   "effect:delayed-trigger-fixed-amount": {
    "family": "effect:delayed-trigger-extensions",
    "example": "Scattering Stroke: at your next main phase, add {C} equal to the countered spell's mana value — fixed when the delayed trigger is made."
+  },
+  "effect:tap-all-except-source": {
+   "example": "Thundermare: 'tap all other creatures' — tap-all has no exceptSource"
+  },
+  "static:tap-opponents-lands-for-mana": {
+   "family": "effect:add-mana-extensions",
+   "example": "Piracy: 'until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.'"
+  },
+  "static:unblocked-assign-damage-to-creature": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Cunning Giant: 'if this creature is unblocked, you may have it assign its combat damage to a creature defending player controls'"
+  },
+  "effect:reveal-until-source-owners-library": {
+   "family": "effect:reveal-until",
+   "example": "Mirror-Mad Phantasm: \"its owner shuffles it into their library … reveal cards from the top of their library until a card named Mirror-Mad Phantasm\" — `reveal-until`'s `whose` can't name the source's owner."
+  },
+  "static:token-pt-from-creator-counters": {
+   "family": "effect:linked-token-leaves",
+   "example": "Gutter Grime: its Ooze tokens' P/T is the number of slime counters on the Gutter Grime that made each one."
+  },
+  "filter:attached-to-player": {
+   "family": "condition:filter-attachments",
+   "example": "Witchbane Orb: \"destroy all Curses attached to you\" — no filter selects Auras attached to a player."
+  },
+  "effect:damage-player-or-their-planeswalker-choice": {
+   "family": "effect:player-scope-extensions",
+   "example": "Curse of the Pierced Heart: \"deals 1 damage to that player or a planeswalker that player controls\" — untargeted, chosen as it resolves."
   }
  }
 }

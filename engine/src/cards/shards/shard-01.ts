@@ -71,6 +71,7 @@ import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
+import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
 import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
@@ -125,6 +126,7 @@ import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDeftDismissal from "../pool/deft-dismissal.js";
 import _poolDejaVu from "../pool/deja-vu.js";
+import _poolDelverOfSecrets from "../pool/delver-of-secrets.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
 import _poolDevourerOfMemory from "../pool/devourer-of-memory.js";
@@ -365,6 +367,7 @@ import _poolMeteorGolem from "../pool/meteor-golem.js";
 import _poolMeteoricMace from "../pool/meteoric-mace.js";
 import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
+import _poolMindKnives from "../pool/mind-knives.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMindlessNull from "../pool/mindless-null.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
@@ -392,6 +395,7 @@ import _poolNoEscape from "../pool/no-escape.js";
 import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
+import _poolNorwoodPriestess from "../pool/norwood-priestess.js";
 import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -578,6 +582,7 @@ import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
+import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
 import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
@@ -760,6 +765,7 @@ const shard: CardShard = {
     _poolBreathWeapon,
     _poolBrokenBond,
     _poolBrokersHideout,
+    _poolBrutalNightstalker,
     _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,
@@ -814,6 +820,7 @@ const shard: CardShard = {
     _poolDefiantSalvager,
     _poolDeftDismissal,
     _poolDejaVu,
+    _poolDelverOfSecrets,
     _poolDerangedAssistant,
     _poolDesperateFarmer,
     _poolDevourerOfMemory,
@@ -1054,6 +1061,7 @@ const shard: CardShard = {
     _poolMeteoricMace,
     _poolMightBeyondReason,
     _poolMightformHarmonizer,
+    _poolMindKnives,
     _poolMindRavel,
     _poolMindlessNull,
     _poolMinotaurSureshot,
@@ -1081,6 +1089,7 @@ const shard: CardShard = {
     _poolNoOneLeftBehind,
     _poolNoWayOut,
     _poolNornsWellspring,
+    _poolNorwoodPriestess,
     _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -1267,6 +1276,7 @@ const shard: CardShard = {
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
+    _poolTheftOfDreams,
     _poolThicketBasilisk,
     _poolThievesGuildEnforcer,
     _poolThoughtShucker,

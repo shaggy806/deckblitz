@@ -127,6 +127,7 @@ import _poolCratersClaws from "../pool/craters-claws.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
+import _poolCruelBargain from "../pool/cruel-bargain.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
@@ -583,6 +584,7 @@ import _poolStreetSpasm from "../pool/street-spasm.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
+import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
@@ -838,6 +840,7 @@ const shard: CardShard = {
     _poolCreepingTarPit,
     _poolCrewCaptain,
     _poolCrossoverCollaboration,
+    _poolCruelBargain,
     _poolCrystalSlipper,
     _poolCunningEvasion,
     _poolCutOfTheProfits,
@@ -1294,6 +1297,7 @@ const shard: CardShard = {
     _poolStringOfDisappearances,
     _poolStrixLookout,
     _poolSturdyHatchling,
+    _poolSturmgeist,
     _poolSubterraneanSpirit,
     _poolSummonAnima,
     _poolSummonedDromedary,

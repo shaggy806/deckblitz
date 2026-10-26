@@ -942,6 +942,15 @@ function evalStaticCondition(
       return state.turnOrder.some(
         (p) => p !== you && state.players[p].lifeLostThisTurn > 0,
       );
+    case "attacked-this-step": {
+      const attacked = state.players[you]?.attackedInCombat;
+      return (
+        state.turn.step === "declare-attackers" &&
+        attacked !== undefined &&
+        attacked.turn === state.turn.number &&
+        attacked.combat === (state.turn.combatPhases ?? 1)
+      );
+    }
     case "turn-structure": {
       const step = state.turn.step;
       const inCombat = COMBAT_STEPS.has(step);

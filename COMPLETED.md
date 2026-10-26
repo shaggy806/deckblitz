@@ -97,6 +97,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Incendiary Command and 76 more, with eight Morningtide cards batch 186 blocked on clash or
   champion (Release the Ants, Titan's Revenge, Lightning Crafter and five more) — and 19 blocked,
   one or two each (`B189.json`).
+- **The rest of Dark Ascension and Innistrad's next 60** (batch 188, the newest-first walk,
+  2026-10-26): **built** "at the beginning of enchanted player's upkeep / draw step / end step"
+  (`trigger:enchanted-player-step-begins` — `step-begins` with `who: "attached"`, read by the
+  scaffolder), with Curse of the Bloody Tome, Curse of Oblivion and four Curses triaged earlier on
+  it alone (Curse of Obsession, Curse of Unbinding, Torment of Scarabs, Cruel Reality). 83
+  authored — Geist of Saint Traft, Garruk Relentless, Delver of Secrets, Helvault, Mayor of
+  Avabruck and 78 more — and 21 blocked, one or two each (`B188.json`). Dark Ascension is whole.
 - **The rest of Avacyn Restored and Dark Ascension's 40 most-played** (batch 185, the
   newest-first walk, 2026-10-26): **built** soulbond (rule 702.95, `keyword:soulbond` —
   `soulbond()`'s two triggers, a `{ scope: "paired" }` static, the `paired` filter clause, the
@@ -165,6 +172,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Insanity, Savageborn Hydra and the Gatekeepers and Maze creatures among them: 47 by four
   `card-author` agents, the rest the lead. DGM is whole; 21 blocked (`B173.json`), unleash and
   detain two each.
+- **"Only if you've been attacked this step", "creatures attacking you", "prevent all damage
+  dealt to you this turn by …"** (batch 190, the oldest-first walk, 2026-10-26,
+  `effect:prevent-damage-to-you-by-filter-this-turn`): the `attacked-this-step` condition (rule
+  508.3b, per combat — Portal's eleven declare-attackers instants: Just Fate, Harsh Justice, Deep
+  Wood, Command of Unsummoning …), the `attackingYou` filter (Blessed Reversal),
+  `prevent-damage-to-you { by }` (Deep Wood, Scarecrow, Al-abara's Carpet) and
+  `BEFORE_ATTACKERS_DECLARED` (Portal's eleven "activate only during your turn, before attackers
+  are declared"). Fixed: a trigger's any-number group with fewer options than its minimum is
+  removed (603.3d — Sea Drake), and a shuffle-into-library whose card has gone still shuffles
+  (Angel of Fury). `attacked-this-step.test.ts`.
+- **Portal and Portal Second Age, whole** (batch 190, the oldest-first walk, 2026-10-26): 89 of
+  their 113 left authored — Flux, Exhaustion, Temporary Truce, Cruel Bargain, Harsh Justice, Sea
+  Drake, Magma Giant, Return of the Nightstalkers and more — by five `card-author` agents and the
+  lead; 24 blocked (`B190.json`). Both sets are whole.
 - **Random-discard costs, buyback's non-mana costs, the compared-opponent target** (batch 187,
   the oldest-first walk, 2026-10-26, `cost:discard-at-random`, `cost:buyback-non-mana`,
   `target:opponent-compared`): an activated ability's `cost.discard.random` and a spell's

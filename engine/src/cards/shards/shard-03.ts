@@ -386,6 +386,7 @@ import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
 import _poolPilfer from "../pool/pilfer.js";
+import _poolPlantElemental from "../pool/plant-elemental.js";
 import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolPersist,
     _poolPiggyBank,
     _poolPilfer,
+    _poolPlantElemental,
     _poolPompousGadabout,
     _poolPopularEgotist,
     _poolPoxwalkers,

@@ -186,9 +186,11 @@ import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
 import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
+import _poolExhaustion from "../pool/exhaustion.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolExposeEvil from "../pool/expose-evil.js";
 import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
+import _poolExtinguish from "../pool/extinguish.js";
 import _poolEyeblightMassacre from "../pool/eyeblight-massacre.js";
 import _poolFaerieNoble from "../pool/faerie-noble.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
@@ -196,6 +198,7 @@ import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
+import _poolFavorOfTheWoods from "../pool/favor-of-the-woods.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFeastOfBlood from "../pool/feast-of-blood.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
@@ -257,6 +260,7 @@ import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
+import _poolHarmonyOfNature from "../pool/harmony-of-nature.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
@@ -476,6 +480,7 @@ import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRuneboundWolf from "../pool/runebound-wolf.js";
+import _poolRunechantersPike from "../pool/runechanters-pike.js";
 import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
@@ -504,6 +509,7 @@ import _poolScourgeDevil from "../pool/scourge-devil.js";
 import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
 import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
 import _poolSculptorOfWinter from "../pool/sculptor-of-winter.js";
+import _poolSeaDrake from "../pool/sea-drake.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
@@ -617,6 +623,7 @@ import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
+import _poolTidalSurge from "../pool/tidal-surge.js";
 import _poolTimidDrake from "../pool/timid-drake.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
@@ -636,6 +643,7 @@ import _poolUndeadServant from "../pool/undead-servant.js";
 import _poolUndercitysEmbrace from "../pool/undercitys-embrace.js";
 import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
+import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUsherToSafety from "../pool/usher-to-safety.js";
@@ -682,6 +690,7 @@ import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
+import _poolWolfhuntersQuiver from "../pool/wolfhunters-quiver.js";
 import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
@@ -900,9 +909,11 @@ const shard: CardShard = {
     _poolEnslavedScout,
     _poolEpharasDispersal,
     _poolEtchedFamiliar,
+    _poolExhaustion,
     _poolExperimentalAviator,
     _poolExposeEvil,
     _poolExquisiteHuntmaster,
+    _poolExtinguish,
     _poolEyeblightMassacre,
     _poolFaerieNoble,
     _poolFallOfTheGavel,
@@ -910,6 +921,7 @@ const shard: CardShard = {
     _poolFamishedWorldsire,
     _poolFatalFumes,
     _poolFatestitcher,
+    _poolFavorOfTheWoods,
     _poolFearOfBeingHunted,
     _poolFeastOfBlood,
     _poolFelhideMinotaur,
@@ -971,6 +983,7 @@ const shard: CardShard = {
     _poolHaazdaVigilante,
     _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,
+    _poolHarmonyOfNature,
     _poolHarnesserOfStorms,
     _poolHauntedLibrary,
     _poolHellishSideswipe,
@@ -1190,6 +1203,7 @@ const shard: CardShard = {
     _poolRulikMonsWarrenChief,
     _poolRunThePlay,
     _poolRuneboundWolf,
+    _poolRunechantersPike,
     _poolRuralRecruit,
     _poolRushbladeCommander,
     _poolRussetWolves,
@@ -1218,6 +1232,7 @@ const shard: CardShard = {
     _poolScrappyBruiser,
     _poolScreechingPhoenix,
     _poolSculptorOfWinter,
+    _poolSeaDrake,
     _poolSeaOfClouds,
     _poolSealOfRemoval,
     _poolSecludedCourtyard,
@@ -1331,6 +1346,7 @@ const shard: CardShard = {
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,
+    _poolTidalSurge,
     _poolTimidDrake,
     _poolTitanothRex,
     _poolTogetherAsOne,
@@ -1350,6 +1366,7 @@ const shard: CardShard = {
     _poolUndercitysEmbrace,
     _poolUneasyAlliance,
     _poolUnexpectedFangs,
+    _poolUnhallowedCathar,
     _poolUnhinge,
     _poolUnswervingSloth,
     _poolUsherToSafety,
@@ -1396,6 +1413,7 @@ const shard: CardShard = {
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
     _poolWizardsRockets,
+    _poolWolfhuntersQuiver,
     _poolWolfirSilverheart,
     _poolWoodlandPatrol,
     _poolWorthyCause,

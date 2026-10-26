@@ -123,6 +123,7 @@ import _poolCracklingPerimeter from "../pool/crackling-perimeter.js";
 import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
 import _poolCrazedArmodon from "../pool/crazed-armodon.js";
 import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
+import _poolCreepyDoll from "../pool/creepy-doll.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCruelFeeding from "../pool/cruel-feeding.js";
@@ -619,6 +620,7 @@ import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
 import _poolTivitSellerOfSecrets from "../pool/tivit-seller-of-secrets.js";
 import _poolTorchCourier from "../pool/torch-courier.js";
 import _poolTormentedAngel from "../pool/tormented-angel.js";
+import _poolTowerGeist from "../pool/tower-geist.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
 import _poolTrainTroops from "../pool/train-troops.js";
@@ -838,6 +840,7 @@ const shard: CardShard = {
     _poolCradleOfTheAccursed,
     _poolCrazedArmodon,
     _poolCreakwoodSafewright,
+    _poolCreepyDoll,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
     _poolCruelFeeding,
@@ -1334,6 +1337,7 @@ const shard: CardShard = {
     _poolTivitSellerOfSecrets,
     _poolTorchCourier,
     _poolTormentedAngel,
+    _poolTowerGeist,
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,
     _poolTrainTroops,

@@ -24,6 +24,7 @@ import _poolAnoint from "../pool/anoint.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
+import _poolAssassinsBlade from "../pool/assassins-blade.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
@@ -69,6 +70,7 @@ import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolBuiltToSmash from "../pool/built-to-smash.js";
 import _poolBurnTrail from "../pool/burn-trail.js";
 import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
+import _poolButchersCleaver from "../pool/butchers-cleaver.js";
 import _poolBygoneBishop from "../pool/bygone-bishop.js";
 import _poolCachedDefenses from "../pool/cached-defenses.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
@@ -113,6 +115,7 @@ import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
+import _poolDakmorSorceress from "../pool/dakmor-sorceress.js";
 import _poolDarkEndurance from "../pool/dark-endurance.js";
 import _poolDarkInquiry from "../pool/dark-inquiry.js";
 import _poolDarkRevenant from "../pool/dark-revenant.js";
@@ -191,6 +194,7 @@ import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
+import _poolFireDragon from "../pool/fire-dragon.js";
 import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
 import _poolFlamecastWheel from "../pool/flamecast-wheel.js";
@@ -496,6 +500,7 @@ import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolScattershotArcher from "../pool/scattershot-archer.js";
+import _poolScorchingWinds from "../pool/scorching-winds.js";
 import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
@@ -546,6 +551,7 @@ import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpikeBreeder from "../pool/spike-breeder.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
+import _poolSpitefulShadows from "../pool/spiteful-shadows.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSplittingHeadache from "../pool/splitting-headache.js";
 import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
@@ -723,6 +729,7 @@ const shard: CardShard = {
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
+    _poolAssassinsBlade,
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
     _poolAtraxasSkitterfang,
@@ -768,6 +775,7 @@ const shard: CardShard = {
     _poolBuiltToSmash,
     _poolBurnTrail,
     _poolBurningSunCavalry,
+    _poolButchersCleaver,
     _poolBygoneBishop,
     _poolCachedDefenses,
     _poolCaprichrome,
@@ -812,6 +820,7 @@ const shard: CardShard = {
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
+    _poolDakmorSorceress,
     _poolDarkEndurance,
     _poolDarkInquiry,
     _poolDarkRevenant,
@@ -890,6 +899,7 @@ const shard: CardShard = {
     _poolFierceEmpath,
     _poolFigureOfDestiny,
     _poolFiligreeCrawler,
+    _poolFireDragon,
     _poolFiremindsResearch,
     _poolFlameLash,
     _poolFlamecastWheel,
@@ -1195,6 +1205,7 @@ const shard: CardShard = {
     _poolScarbladeScout,
     _poolScatteredGroves,
     _poolScattershotArcher,
+    _poolScorchingWinds,
     _poolScorchmark,
     _poolSeafloorOracle,
     _poolSeedguideAsh,
@@ -1245,6 +1256,7 @@ const shard: CardShard = {
     _poolSpikeBreeder,
     _poolSpiritOfTheAldergard,
     _poolSpitFlame,
+    _poolSpitefulShadows,
     _poolSplatterTechnique,
     _poolSplittingHeadache,
     _poolSpringheartNantuko,

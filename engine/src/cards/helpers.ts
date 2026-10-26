@@ -105,6 +105,29 @@ export const CELEBRATION_CONDITION: StaticCondition = {
 };
 
 /**
+ * Portal's "Activate only during your turn, before attackers are declared":
+ * your upkeep and draw step, your first main phase, and the beginning of
+ * combat step of your first combat phase — with several combat phases, only
+ * before the first declare attackers step (the Capricious Sorcerer ruling).
+ * Attackers are declared even when none are chosen (rule 508.1), so the
+ * second main phase is after it whether or not anything attacked.
+ */
+export const BEFORE_ATTACKERS_DECLARED: StaticCondition = {
+  kind: "all",
+  of: [
+    { kind: "your-turn" },
+    {
+      kind: "any",
+      of: [
+        { kind: "turn-structure", steps: ["upkeep", "draw"] },
+        { kind: "turn-structure", mainPhase: 1 },
+        { kind: "turn-structure", steps: ["begin-combat"], combatPhase: 1 },
+      ],
+    },
+  ],
+};
+
+/**
  * Ward (rule 702.21a): "Whenever this permanent becomes the target of a spell
  * or ability an opponent controls, counter that spell or ability unless that
  * player pays [cost]." A real triggered ability, so each instance triggers

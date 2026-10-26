@@ -104,6 +104,7 @@ import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
 import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
+import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
@@ -138,6 +139,7 @@ import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
+import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
@@ -244,6 +246,7 @@ import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFoundryAssembler from "../pool/foundry-assembler.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
+import _poolFullMoonsRise from "../pool/full-moons-rise.js";
 import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
 import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
@@ -254,6 +257,7 @@ import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
+import _poolGhoulraiser from "../pool/ghoulraiser.js";
 import _poolGiantHarbinger from "../pool/giant-harbinger.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
@@ -316,6 +320,7 @@ import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInnerSanctum from "../pool/inner-sanctum.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
+import _poolInstigatorGang from "../pool/instigator-gang.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
 import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
@@ -494,6 +499,7 @@ import _poolRefuteDestiny from "../pool/refute-destiny.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
 import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
 import _poolRenegadeWheelsmith from "../pool/renegade-wheelsmith.js";
+import _poolRenewingDawn from "../pool/renewing-dawn.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
 import _poolReservoirWalker from "../pool/reservoir-walker.js";
@@ -609,6 +615,7 @@ import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSunbladeElf from "../pool/sunblade-elf.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
+import _poolSylvanBasilisk from "../pool/sylvan-basilisk.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
 import _poolTalarasBattalion from "../pool/talaras-battalion.js";
@@ -647,6 +654,7 @@ import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
+import _poolTreetopDefense from "../pool/treetop-defense.js";
 import _poolTrialOfZeal from "../pool/trial-of-zeal.js";
 import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTrustworthyScout from "../pool/trustworthy-scout.js";
@@ -851,6 +859,7 @@ const shard: CardShard = {
     _poolCallTheGatewatch,
     _poolCandlegroveWitch,
     _poolCandlestick,
+    _poolCapriciousSorcerer,
     _poolCaptiveWeird,
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
@@ -885,6 +894,7 @@ const shard: CardShard = {
     _poolCrypticSerpent,
     _poolCrystalGrotto,
     _poolCrystalRod,
+    _poolCurseOfOblivion,
     _poolCursebreak,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
@@ -991,6 +1001,7 @@ const shard: CardShard = {
     _poolFoundryAssembler,
     _poolFromTheRubble,
     _poolFrostOgre,
+    _poolFullMoonsRise,
     _poolFurnaceBlessedConqueror,
     _poolFuturistOperative,
     _poolGadrakTheCrownScourge,
@@ -1001,6 +1012,7 @@ const shard: CardShard = {
     _poolGeneralLeoCristophe,
     _poolGhostlyTouch,
     _poolGhoulcallersBell,
+    _poolGhoulraiser,
     _poolGiantHarbinger,
     _poolGildedScuttler,
     _poolGiltgroveStalker,
@@ -1063,6 +1075,7 @@ const shard: CardShard = {
     _poolInnerDemon,
     _poolInnerSanctum,
     _poolInspirationFromBeyond,
+    _poolInstigatorGang,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,
     _poolInvasionOfLorwyn,
@@ -1241,6 +1254,7 @@ const shard: CardShard = {
     _poolRemoveSoul,
     _poolRenataCalledToTheHunt,
     _poolRenegadeWheelsmith,
+    _poolRenewingDawn,
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
     _poolReservoirWalker,
@@ -1356,6 +1370,7 @@ const shard: CardShard = {
     _poolSunbladeElf,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
+    _poolSylvanBasilisk,
     _poolSyphonFuel,
     _poolSyrCarahTheBold,
     _poolTalarasBattalion,
@@ -1394,6 +1409,7 @@ const shard: CardShard = {
     _poolToxicNim,
     _poolTragicTrajectory,
     _poolTreeshakerChimera,
+    _poolTreetopDefense,
     _poolTrialOfZeal,
     _poolTributaryInstructor,
     _poolTrustworthyScout,

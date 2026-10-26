@@ -1,0 +1,751 @@
+{
+ "batch": "B188",
+ "status": "complete",
+ "ranks": "Dark Ascension (DKA, 2012-02-03): the rest of the set, its last 40; Innistrad (ISD, 2011-09-30): the next 60 by EDHREC rank of the 112 left (newest-first walk); built \"at the beginning of enchanted player's upkeep / draw step / end step\" (step-begins with who: \"attached\"), with the four earlier-batch Curses it unblocked (Curse of Obsession, Curse of Unbinding, Torment of Scarabs, Cruel Reality)",
+ "authored": [
+  {
+   "name": "Angelic Overseer",
+   "files": [
+    "engine/src/cards/pool/angelic-overseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Feud",
+   "files": [
+    "engine/src/cards/pool/blood-feud.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bonds of Faith",
+   "files": [
+    "engine/src/cards/pool/bonds-of-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boneyard Wurm",
+   "files": [
+    "engine/src/cards/pool/boneyard-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bramblecrush",
+   "files": [
+    "engine/src/cards/pool/bramblecrush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Break of Day",
+   "files": [
+    "engine/src/cards/pool/break-of-day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brimstone Volley",
+   "files": [
+    "engine/src/cards/pool/brimstone-volley.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burden of Guilt",
+   "files": [
+    "engine/src/cards/pool/burden-of-guilt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Burning Vengeance",
+   "files": [
+    "engine/src/cards/pool/burning-vengeance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Butcher's Cleaver",
+   "files": [
+    "engine/src/cards/pool/butchers-cleaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chill of Foreboding",
+   "files": [
+    "engine/src/cards/pool/chill-of-foreboding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Claustrophobia",
+   "files": [
+    "engine/src/cards/pool/claustrophobia.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Creepy Doll",
+   "files": [
+    "engine/src/cards/pool/creepy-doll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cruel Reality",
+   "files": [
+    "engine/src/cards/pool/cruel-reality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Oblivion",
+   "files": [
+    "engine/src/cards/pool/curse-of-oblivion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Obsession",
+   "files": [
+    "engine/src/cards/pool/curse-of-obsession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of the Bloody Tome",
+   "files": [
+    "engine/src/cards/pool/curse-of-the-bloody-tome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Unbinding",
+   "files": [
+    "engine/src/cards/pool/curse-of-unbinding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daybreak Ranger // Nightfall Predator",
+   "files": [
+    "engine/src/cards/pool/daybreak-ranger.ts",
+    "engine/src/cards/pool/nightfall-predator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death's Caress",
+   "files": [
+    "engine/src/cards/pool/deaths-caress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delver of Secrets // Insectile Aberration",
+   "files": [
+    "engine/src/cards/pool/delver-of-secrets.ts",
+    "engine/src/cards/pool/insectile-aberration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonmail Hauberk",
+   "files": [
+    "engine/src/cards/pool/demonmail-hauberk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desperate Ravings",
+   "files": [
+    "engine/src/cards/pool/desperate-ravings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciple of Griselbrand",
+   "files": [
+    "engine/src/cards/pool/disciple-of-griselbrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder of Laurels",
+   "files": [
+    "engine/src/cards/pool/elder-of-laurels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falkenrath Torturer",
+   "files": [
+    "engine/src/cards/pool/falkenrath-torturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Favor of the Woods",
+   "files": [
+    "engine/src/cards/pool/favor-of-the-woods.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Feeling of Dread",
+   "files": [
+    "engine/src/cards/pool/feeling-of-dread.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Forge Devil",
+   "files": [
+    "engine/src/cards/pool/forge-devil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Full Moon's Rise",
+   "files": [
+    "engine/src/cards/pool/full-moons-rise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furor of the Bitten",
+   "files": [
+    "engine/src/cards/pool/furor-of-the-bitten.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Garruk Relentless // Garruk, the Veil-Cursed",
+   "files": [
+    "engine/src/cards/pool/garruk-relentless.ts",
+    "engine/src/cards/pool/garruk-the-veil-cursed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gavony Ironwright",
+   "files": [
+    "engine/src/cards/pool/gavony-ironwright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geist of Saint Traft",
+   "files": [
+    "engine/src/cards/pool/geist-of-saint-traft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geist-Honored Monk",
+   "files": [
+    "engine/src/cards/pool/geist-honored-monk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghoulcaller's Chant",
+   "files": [
+    "engine/src/cards/pool/ghoulcallers-chant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghoulraiser",
+   "files": [
+    "engine/src/cards/pool/ghoulraiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnaw to the Bone",
+   "files": [
+    "engine/src/cards/pool/gnaw-to-the-bone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravetiller Wurm",
+   "files": [
+    "engine/src/cards/pool/gravetiller-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Flowering",
+   "files": [
+    "engine/src/cards/pool/grim-flowering.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Harrowing Journey",
+   "files": [
+    "engine/src/cards/pool/harrowing-journey.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heavy Mattock",
+   "files": [
+    "engine/src/cards/pool/heavy-mattock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heckling Fiends",
+   "files": [
+    "engine/src/cards/pool/heckling-fiends.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Helvault",
+   "files": [
+    "engine/src/cards/pool/helvault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hinterland Hermit // Hinterland Scourge",
+   "files": [
+    "engine/src/cards/pool/hinterland-hermit.ts",
+    "engine/src/cards/pool/hinterland-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hollowhenge Spirit",
+   "files": [
+    "engine/src/cards/pool/hollowhenge-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Instigator Gang // Wildblood Pack",
+   "files": [
+    "engine/src/cards/pool/instigator-gang.ts",
+    "engine/src/cards/pool/wildblood-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kessig Cagebreakers",
+   "files": [
+    "engine/src/cards/pool/kessig-cagebreakers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kruin Outlaw // Terror of Kruin Pass",
+   "files": [
+    "engine/src/cards/pool/kruin-outlaw.ts",
+    "engine/src/cards/pool/terror-of-kruin-pass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost in the Woods",
+   "files": [
+    "engine/src/cards/pool/lost-in-the-woods.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loyal Cathar // Unhallowed Cathar",
+   "files": [
+    "engine/src/cards/pool/loyal-cathar.ts",
+    "engine/src/cards/pool/unhallowed-cathar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ludevic's Test Subject // Ludevic's Abomination",
+   "files": [
+    "engine/src/cards/pool/ludevics-abomination.ts",
+    "engine/src/cards/pool/ludevics-test-subject.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Markov Warlord",
+   "files": [
+    "engine/src/cards/pool/markov-warlord.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mayor of Avabruck // Howlpack Alpha",
+   "files": [
+    "engine/src/cards/pool/howlpack-alpha.ts",
+    "engine/src/cards/pool/mayor-of-avabruck.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindshrieker",
+   "files": [
+    "engine/src/cards/pool/mindshrieker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Murder of Crows",
+   "files": [
+    "engine/src/cards/pool/murder-of-crows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One-Eyed Scarecrow",
+   "files": [
+    "engine/src/cards/pool/one-eyed-scarecrow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravenous Demon // Archdemon of Greed",
+   "files": [
+    "engine/src/cards/pool/archdemon-of-greed.ts",
+    "engine/src/cards/pool/ravenous-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Waif // Merciless Predator",
+   "files": [
+    "engine/src/cards/pool/merciless-predator.ts",
+    "engine/src/cards/pool/reckless-waif.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Runechanter's Pike",
+   "files": [
+    "engine/src/cards/pool/runechanters-pike.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saving Grasp",
+   "files": [
+    "engine/src/cards/pool/saving-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorch the Fields",
+   "files": [
+    "engine/src/cards/pool/scorch-the-fields.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Séance",
+   "files": [
+    "engine/src/cards/pool/seance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shriekgeist",
+   "files": [
+    "engine/src/cards/pool/shriekgeist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skeletal Grimace",
+   "files": [
+    "engine/src/cards/pool/skeletal-grimace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skirsdag High Priest",
+   "files": [
+    "engine/src/cards/pool/skirsdag-high-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Seizer // Ghastly Haunting",
+   "files": [
+    "engine/src/cards/pool/ghastly-haunting.ts",
+    "engine/src/cards/pool/soul-seizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiteful Shadows",
+   "files": [
+    "engine/src/cards/pool/spiteful-shadows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stromkirk Noble",
+   "files": [
+    "engine/src/cards/pool/stromkirk-noble.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sturmgeist",
+   "files": [
+    "engine/src/cards/pool/sturmgeist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sudden Disappearance",
+   "files": [
+    "engine/src/cards/pool/sudden-disappearance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talons of Falkenrath",
+   "files": [
+    "engine/src/cards/pool/talons-of-falkenrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torment of Scarabs",
+   "files": [
+    "engine/src/cards/pool/torment-of-scarabs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tower Geist",
+   "files": [
+    "engine/src/cards/pool/tower-geist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tracker's Instincts",
+   "files": [
+    "engine/src/cards/pool/trackers-instincts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traitorous Blood",
+   "files": [
+    "engine/src/cards/pool/traitorous-blood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trepanation Blade",
+   "files": [
+    "engine/src/cards/pool/trepanation-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribute to Hunger",
+   "files": [
+    "engine/src/cards/pool/tribute-to-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Victim of Night",
+   "files": [
+    "engine/src/cards/pool/victim-of-night.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Village Survivors",
+   "files": [
+    "engine/src/cards/pool/village-survivors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warden of the Wall",
+   "files": [
+    "engine/src/cards/pool/warden-of-the-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wolfhunter's Quiver",
+   "files": [
+    "engine/src/cards/pool/wolfhunters-quiver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wrack with Madness",
+   "files": [
+    "engine/src/cards/pool/wrack-with-madness.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Jar of Eyeballs",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "\"{3}, {T}, Remove all eyeball counters: look at the top X cards, where X is the number removed\" — a cost removing all counters, X their count."
+  },
+  {
+   "name": "Nevermore",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "\"As this enters, choose a nonland card name. Spells with the chosen name can't be cast.\""
+  },
+  {
+   "name": "Gruesome Discovery",
+   "needs": [
+    "effect:discard-chosen-count"
+   ],
+   "why": "Morbid: \"you look at their hand and choose two cards from it\" — discard-chosen picks only one."
+  },
+  {
+   "name": "Curse of the Nightly Hunt",
+   "needs": [
+    "static:static-over-enchanted-player"
+   ],
+   "why": "\"Creatures enchanted player controls attack each combat if able\": no static scope names the enchanted player's creatures."
+  },
+  {
+   "name": "Caravan Vigil",
+   "needs": [
+    "effect:search-destination-choice"
+   ],
+   "why": "Morbid: the found land goes onto the battlefield instead of into hand, chosen after the search."
+  },
+  {
+   "name": "Mirror-Mad Phantasm",
+   "needs": [
+    "effect:reveal-until-source-owners-library"
+   ],
+   "why": "\"its owner shuffles it into their library. If that player does, they reveal cards … until a card named Mirror-Mad Phantasm\": reveal-until can't name the source's owner (the rulings: the owner's library when someone else controls it)."
+  },
+  {
+   "name": "Skaab Ruinator",
+   "needs": [
+    "cost:exile-from-graveyard-additional"
+   ],
+   "why": "A spell's additional cost of exiling three creature cards from your graveyard."
+  },
+  {
+   "name": "Relentless Skaabs",
+   "needs": [
+    "cost:exile-from-graveyard-additional"
+   ],
+   "why": "A spell's additional cost of exiling a creature card from your graveyard."
+  },
+  {
+   "name": "Headless Skaab",
+   "needs": [
+    "cost:exile-from-graveyard-additional"
+   ],
+   "why": "A spell's additional cost of exiling a creature card from your graveyard."
+  },
+  {
+   "name": "Gutter Grime",
+   "needs": [
+    "static:token-pt-from-creator-counters"
+   ],
+   "why": "Its Ooze tokens' P/T is the number of slime counters on the Gutter Grime that made each one (the ruling)."
+  },
+  {
+   "name": "Memory's Journey",
+   "needs": [
+    "effect:shuffle-graveyard-targets-into-library"
+   ],
+   "why": "\"Target player shuffles up to three target cards from their graveyard into their library\": a card slot bound to the targeted player's graveyard, and that player shuffles even with no cards targeted."
+  },
+  {
+   "name": "Witchbane Orb",
+   "needs": [
+    "filter:attached-to-player"
+   ],
+   "why": "\"When this enters, destroy all Curses attached to you\": no filter selects Auras attached to a player (its hexproof half alone would drop a clause)."
+  },
+  {
+   "name": "Cellar Door",
+   "needs": [
+    "effect:mill-from-bottom"
+   ],
+   "why": "Puts the bottom card of target player's library into their graveyard."
+  },
+  {
+   "name": "Curse of Death's Hold",
+   "needs": [
+    "static:static-over-enchanted-player"
+   ],
+   "why": "\"Creatures enchanted player controls get -1/-1\": no static scope names the enchanted player's creatures."
+  },
+  {
+   "name": "Sever the Bloodline",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "\"Exile target creature and all other creatures with the same name as that creature.\""
+  },
+  {
+   "name": "Altar of the Lost",
+   "needs": [
+    "cost:mana-restriction-cast-from-graveyard",
+    "condition:filter-has-flashback"
+   ],
+   "why": "Mana spendable only on spells with flashback cast from a graveyard (any graveyard, the rulings)."
+  },
+  {
+   "name": "Bitterheart Witch",
+   "needs": [
+    "effect:put-onto-battlefield-attached"
+   ],
+   "why": "Search for a Curse and put it onto the battlefield attached to target player."
+  },
+  {
+   "name": "Curse of Stalked Prey",
+   "needs": [
+    "trigger:combat-damage-to-enchanted-player"
+   ],
+   "why": "\"Whenever a creature deals combat damage to enchanted player\": the damaged player can't be narrowed to the enchanted one."
+  },
+  {
+   "name": "Dearly Departed",
+   "needs": [
+    "zone:graveyard-static"
+   ],
+   "why": "\"As long as this is in your graveyard, each Human creature you control enters with an additional +1/+1 counter\": a replacement from the graveyard."
+  },
+  {
+   "name": "Runic Repetition",
+   "needs": [
+    "target:card-in-exile",
+    "condition:filter-has-flashback"
+   ],
+   "why": "\"Return target exiled card with flashback you own to your hand.\""
+  },
+  {
+   "name": "Curse of the Pierced Heart",
+   "needs": [
+    "effect:damage-player-or-their-planeswalker-choice"
+   ],
+   "why": "\"Deals 1 damage to that player or a planeswalker that player controls\": untargeted, the choice of the player or one of their planeswalkers made as it resolves. Its trigger (enchanted player's upkeep) is built."
+  }
+ ]
+}

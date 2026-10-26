@@ -60,6 +60,7 @@ import _poolBlackChocobo from "../pool/black-chocobo.js";
 import _poolBlackbloomRogue from "../pool/blackbloom-rogue.js";
 import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
 import _poolBlaringRecruiter from "../pool/blaring-recruiter.js";
+import _poolBlessedReversal from "../pool/blessed-reversal.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
 import _poolBlisterBeetle from "../pool/blister-beetle.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
@@ -278,6 +279,7 @@ import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
 import _poolHiddenHideout from "../pool/hidden-hideout.js";
 import _poolHiddenNursery from "../pool/hidden-nursery.js";
 import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
+import _poolHinterlandHermit from "../pool/hinterland-hermit.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
@@ -442,6 +444,7 @@ import _poolPrimalCocoon from "../pool/primal-cocoon.js";
 import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
+import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
@@ -467,6 +470,7 @@ import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolReleaseTheAnts from "../pool/release-the-ants.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
+import _poolRemove from "../pool/remove.js";
 import _poolRendingFlame from "../pool/rending-flame.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
@@ -787,6 +791,7 @@ const shard: CardShard = {
     _poolBlackbloomRogue,
     _poolBlacksmithsTalent,
     _poolBlaringRecruiter,
+    _poolBlessedReversal,
     _poolBlightedBat,
     _poolBlisterBeetle,
     _poolBloodcrusherOfKhorne,
@@ -1005,6 +1010,7 @@ const shard: CardShard = {
     _poolHiddenHideout,
     _poolHiddenNursery,
     _poolHideousTaskmaster,
+    _poolHinterlandHermit,
     _poolHithlainKnots,
     _poolHobbitHole,
     _poolHowToStartARiot,
@@ -1169,6 +1175,7 @@ const shard: CardShard = {
     _poolPrizedUnicorn,
     _poolProsperousPartnership,
     _poolProudPackRhino,
+    _poolProwlingNightstalker,
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,
@@ -1194,6 +1201,7 @@ const shard: CardShard = {
     _poolReignOfThePit,
     _poolReleaseTheAnts,
     _poolRelicOfSauron,
+    _poolRemove,
     _poolRendingFlame,
     _poolRenegadeDemon,
     _poolReprieve,

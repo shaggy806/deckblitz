@@ -823,7 +823,16 @@ const STEPS = {
   "postcombat main phase": "postcombat-main",
   "postcombat main phases": "postcombat-main",
 };
-const WHO_STEP = { your: "you", "each of your": "you", each: "any", the: "any", "each opponent's": "opponent", "each player's": "any" };
+const WHO_STEP = {
+  your: "you",
+  "each of your": "you",
+  each: "any",
+  the: "any",
+  "each opponent's": "opponent",
+  "each player's": "any",
+  // A Curse's "enchanted player's upkeep": the step of the player it's attached to.
+  "enchanted player's": "attached",
+};
 
 /**
  * A trigger clause ("Whenever another creature you control enters") as one or
@@ -1039,7 +1048,7 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
-  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
+  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
   return null;

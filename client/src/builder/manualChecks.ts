@@ -8303,4 +8303,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Silverblade Paladin: soulbond pairs it with a creature you choose',
     board({ you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant'], hand: ['Silverblade Paladin'] } }),
   ),
+  preset(
+    "Just Fate: castable only once you've been attacked",
+    board({ you: { bf: ['Plains*3'], hand: ['Just Fate'] }, opp: { bf: ['Hill Giant'] } }),
+  ),
 ]

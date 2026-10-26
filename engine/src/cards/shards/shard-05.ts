@@ -93,6 +93,7 @@ import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBretagardStronghold from "../pool/bretagard-stronghold.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
+import _poolBrimstoneVolley from "../pool/brimstone-volley.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
 import _poolBrokenConcentration from "../pool/broken-concentration.js";
 import _poolBuriedTreasure from "../pool/buried-treasure.js";
@@ -154,6 +155,7 @@ import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCrocodileOfTheCrossing from "../pool/crocodile-of-the-crossing.js";
 import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
+import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
@@ -171,6 +173,7 @@ import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
+import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
@@ -376,6 +379,7 @@ import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordMagnus from "../pool/lord-magnus.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
+import _poolLoyalCathar from "../pool/loyal-cathar.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumaretsFavor from "../pool/lumarets-favor.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
@@ -461,6 +465,7 @@ import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
 import _poolRaccoonRallier from "../pool/raccoon-rallier.js";
 import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
+import _poolRallyTheTroops from "../pool/rally-the-troops.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
@@ -795,6 +800,7 @@ const shard: CardShard = {
     _poolBreakerOfArmies,
     _poolBretagardStronghold,
     _poolBrightReprisal,
+    _poolBrimstoneVolley,
     _poolBrineShaman,
     _poolBrokenConcentration,
     _poolBuriedTreasure,
@@ -856,6 +862,7 @@ const shard: CardShard = {
     _poolCrocodileOfTheCrossing,
     _poolCryptCreeper,
     _poolCryptbreaker,
+    _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
     _poolDangerousWager,
@@ -873,6 +880,7 @@ const shard: CardShard = {
     _poolDemonsDisciple,
     _poolDemonsGrasp,
     _poolDesculptingBlast,
+    _poolDevastation,
     _poolDeviantGlee,
     _poolDigsiteEngineer,
     _poolDireStrainDemolisher,
@@ -1078,6 +1086,7 @@ const shard: CardShard = {
     _poolLordMagnus,
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
+    _poolLoyalCathar,
     _poolLoyalGuardian,
     _poolLumaretsFavor,
     _poolLumraBellowOfTheWoods,
@@ -1163,6 +1172,7 @@ const shard: CardShard = {
     _poolQuicksilverPietroMaximoff,
     _poolRaccoonRallier,
     _poolRakdosShredFreak,
+    _poolRallyTheTroops,
     _poolRampartSmasher,
     _poolRapidAugmenter,
     _poolRavenousIntruder,

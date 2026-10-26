@@ -145,6 +145,7 @@ import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeathlyRide from "../pool/deathly-ride.js";
 import _poolDecimatorBeetle from "../pool/decimator-beetle.js";
+import _poolDeepWood from "../pool/deep-wood.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDeeprootWayfinder from "../pool/deeproot-wayfinder.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
@@ -260,6 +261,7 @@ import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
 import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
+import _poolHarrowingJourney from "../pool/harrowing-journey.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
@@ -310,6 +312,7 @@ import _poolKithkinShielddare from "../pool/kithkin-shielddare.js";
 import _poolKnucklesTheEchidna from "../pool/knuckles-the-echidna.js";
 import _poolKoskunFalls from "../pool/koskun-falls.js";
 import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
+import _poolKruinOutlaw from "../pool/kruin-outlaw.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
 import _poolLanternSpirit from "../pool/lantern-spirit.js";
@@ -455,6 +458,7 @@ import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
+import _poolReturnOfTheNightstalkers from "../pool/return-of-the-nightstalkers.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
@@ -568,6 +572,7 @@ import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunriseSovereign from "../pool/sunrise-sovereign.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
+import _poolSwarmOfRats from "../pool/swarm-of-rats.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolDeadlyDispute,
     _poolDeathlyRide,
     _poolDecimatorBeetle,
+    _poolDeepWood,
     _poolDeepchannelDuelist,
     _poolDeeprootWayfinder,
     _poolDefenestratedPhantom,
@@ -975,6 +981,7 @@ const shard: CardShard = {
     _poolHannasCustody,
     _poolHarbingerOfNight,
     _poolHarmonizedCrescendo,
+    _poolHarrowingJourney,
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
     _poolHealingSalve,
@@ -1025,6 +1032,7 @@ const shard: CardShard = {
     _poolKnucklesTheEchidna,
     _poolKoskunFalls,
     _poolKravTheUnredeemed,
+    _poolKruinOutlaw,
     _poolLaceWithMoonglove,
     _poolLanguish,
     _poolLanternSpirit,
@@ -1170,6 +1178,7 @@ const shard: CardShard = {
     _poolRenownedWeaponsmith,
     _poolReset,
     _poolRestlessFortress,
+    _poolReturnOfTheNightstalkers,
     _poolRevelInRiches,
     _poolRhizomeLurcher,
     _poolRideTheShoopuf,
@@ -1283,6 +1292,7 @@ const shard: CardShard = {
     _poolSunpetalGrove,
     _poolSunriseSovereign,
     _poolSunscorchRegent,
+    _poolSwarmOfRats,
     _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,

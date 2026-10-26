@@ -352,6 +352,7 @@ import {
   concreteTargetSpecs,
   differentControllerOf,
   divisionOf as spellDivision,
+  groupBounds,
   groupPowerExceeded,
   groupReadsX,
   otherThanSlots,
@@ -20227,7 +20228,10 @@ export class Game {
             (spec.who === "you" && this.activePlayer === self.controller) ||
             // "Each opponent's end step" — the step belongs to an opponent,
             // so it fires once on each of their turns.
-            (spec.who === "opponent" && this.activePlayer !== self.controller))
+            (spec.who === "opponent" && this.activePlayer !== self.controller) ||
+            // "Enchanted player's upkeep" (a Curse): the step belongs to the
+            // player this Aura is attached to.
+            (spec.who === "attached" && this.matchesWhoPlayer("attached", this.activePlayer, self)))
         );
       case "cast-spell": {
         if (spec.copyOnly === true && event.type !== "spell-copied") return false;
@@ -21137,6 +21141,12 @@ export class Game {
         continue;
       }
       const options = legalTargets(this.state, this.registry, spec, trigger.controller, triggerSource);
+      // "Two target lands you control" as one group (`any-number`, `min:
+      // 2`) with one land to point at: no legal choice (rule 603.3d).
+      if (options.length < groupBounds(spec).min) {
+        this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no legal targets" });
+        return "done";
+      }
       if (options.length === 0) {
         // "Up to one" or "any number of" with nothing to point at: none is
         // a legal choice, so the ability still goes on the stack (rule
@@ -22780,9 +22790,18 @@ export class Game {
       putOnLibrary: (target, position) => {
         if (target.kind === "object") this.putOnLibrary(target.object, position);
       },
-      shuffleIntoLibrary: (target) => {
+      shuffleIntoLibrary: (target, ownerOnly) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
+        // Gone from the zone it was in (a new object, rule 400.7): it stays
+        // where it is, and its owner shuffles their library all the same
+        // (Angel of Fury's ruling: "it will remain in its zone when its owner
+        // shuffles their library").
+        if (ownerOnly === true) {
+          const owner = object?.owner ?? lastKnownOf(target)?.owner;
+          if (owner !== undefined && this.state.players[owner]?.hasLost === false) this.shuffleLibraryOf(owner);
+          return;
+        }
         // A permanent, or a card in a graveyard: Worldspine Wurm's "shuffle
         // it into its owner's library" as it's put there.
         if (object === undefined || (object.zone !== "battlefield" && object.zone !== "graveyard")) return;
@@ -24181,9 +24200,13 @@ export class Game {
           controller,
         );
       },
-      preventAllCombatDamage: (by) => {
+      preventAllCombatDamage: (by, toYou) => {
         if (by !== undefined) {
-          (this.state.combatDamagePreventedBy ??= []).push({ filter: by, you: controller });
+          (this.state.combatDamagePreventedBy ??= []).push({
+            filter: by,
+            you: controller,
+            ...(toYou === true ? { toYou: true as const } : {}),
+          });
           this.emit({ type: "combat-damage-prevention-set", partialBy: source });
           return;
         }
@@ -31706,6 +31729,7 @@ export class Game {
           const defender = typeof attacked === "string" ? this.state.players[attacked as PlayerId] : undefined;
           if (defender !== undefined) {
             defender.attackedByOnTurn = { ...defender.attackedByOnTurn, [event.player]: this.state.turn.number };
+            defender.attackedInCombat = { turn: this.state.turn.number, combat: this.state.turn.combatPhases ?? 1 };
           }
         }
         const history = historyOf(event.player);
@@ -33630,14 +33654,17 @@ export class Game {
     const by = dealtBy === undefined ? {} : { by: dealtBy };
 
     // Fog (rule 614): a turn-scoped shield prevents all combat damage — or
-    // what sources matching a filter would deal, matched now (rule 615.1).
+    // what sources matching a filter would deal, matched now (rule 615.1);
+    // Deep Wood's (`toYou`), all damage those sources would deal to its
+    // controller.
     if (
-      combat &&
-      (this.state.preventAllCombatDamage ||
-        (this.state.combatDamagePreventedBy?.some(({ filter, you }) =>
+      (combat && this.state.preventAllCombatDamage) ||
+      (this.state.combatDamagePreventedBy?.some(
+        ({ filter, you, toYou }) =>
+          (toYou === true ? target.kind === "player" && target.player === you : combat) &&
           matchesFilter(this.state, this.registry, source, filter, { you }),
-        ) ??
-          false))
+      ) ??
+        false)
     ) {
       this.emit({ type: "damage-prevented", source, target, amount: amount * sources });
       return 0;

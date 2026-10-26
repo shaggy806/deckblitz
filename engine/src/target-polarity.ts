@@ -505,6 +505,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "get-energy": none,
   "create-emblem": none,
   "prevent-all-combat-damage": none,
+  "prevent-damage-to-you": none,
   "prevent-damage": (n, v) => v.touch(n.target, "help", MINOR),
   "prevent-damage-from-chosen-source": (n, v) => {
     if (typeof n.to === "number") v.touch(n.to, "help", MINOR);

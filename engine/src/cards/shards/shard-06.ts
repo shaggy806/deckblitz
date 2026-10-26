@@ -192,6 +192,7 @@ import _poolDuskwatchRecruiter from "../pool/duskwatch-recruiter.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
+import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
@@ -275,6 +276,7 @@ import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
+import _poolHarshJustice from "../pool/harsh-justice.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -282,6 +284,7 @@ import _poolHiddenDragonslayer from "../pool/hidden-dragonslayer.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
+import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
@@ -647,6 +650,7 @@ import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWanderbrineRootcutters from "../pool/wanderbrine-rootcutters.js";
 import _poolWantedScoundrels from "../pool/wanted-scoundrels.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
+import _poolWardenOfTheWall from "../pool/warden-of-the-wall.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarmindInfantry from "../pool/warmind-infantry.js";
 import _poolWarrant from "../pool/warrant.js";
@@ -895,6 +899,7 @@ const shard: CardShard = {
     _poolDutifulServants,
     _poolDynamiteDiver,
     _poolEarthenAlly,
+    _poolEbonDragon,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
@@ -978,6 +983,7 @@ const shard: CardShard = {
     _poolGutturalResponse,
     _poolGuulDrazAssassin,
     _poolHalimarExcavator,
+    _poolHarshJustice,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
@@ -985,6 +991,7 @@ const shard: CardShard = {
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
+    _poolHinterlandScourge,
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
@@ -1350,6 +1357,7 @@ const shard: CardShard = {
     _poolWanderbrineRootcutters,
     _poolWantedScoundrels,
     _poolWarMachineLegacyOfIron,
+    _poolWardenOfTheWall,
     _poolWarlockClass,
     _poolWarmindInfantry,
     _poolWarrant,

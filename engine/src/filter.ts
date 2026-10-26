@@ -246,6 +246,10 @@ export interface CardFilter {
   /** Attacking a battle (Rampaging Geoderm's "if it's **attacking a
    * battle**"). */
   readonly attackingBattle?: boolean;
+  /** Attacking the filtering player — the player, not a planeswalker or
+   * battle of theirs (Blessed Reversal's "each creature **attacking you**").
+   * Off the battlefield nothing is attacking anyone. */
+  readonly attackingYou?: boolean;
   /** Currently blocking — the mirror of `attacking` (Kangee, Sky Warden's
    * "blocking creatures with flying get +0/+2"). */
   readonly blocking?: boolean;
@@ -1031,6 +1035,10 @@ export function matchesFilter(
     const battle =
       defender !== null && defender !== undefined && state.objects[defender as ObjectId]?.protector !== undefined;
     if (battle !== filter.attackingBattle) return false;
+  }
+  if (filter.attackingYou !== undefined) {
+    const attackingYou = live?.zone === "battlefield" && live.attacking === ctx.you;
+    if (attackingYou !== filter.attackingYou) return false;
   }
   if (filter.unblocked !== undefined) {
     const step = state.turn.step;
