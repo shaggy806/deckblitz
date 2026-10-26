@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Innistrad and Magic 2012 whole** (batch 191, the newest-first walk, 2026-10-26):
+  **built** a spell's additional cost of exiling N cards from your graveyard
+  (`cost:exile-from-graveyard-additional` — `additionalCost.exileFromGraveyard`, read by the
+  scaffolder), with the Skaabs: Skaab Goliath, Stitched Drake, Makeshift Mauler and five triaged
+  earlier on it alone (Skaab Ruinator, Relentless Skaabs, Headless Skaab, Cobbled Lancer, Abhorrent
+  Oculus). 77 authored — Chandra, the Firebrand, Master Thief, Chandra's Phoenix, the Empires
+  cycle, the werewolves and bloodthirst's cards (an enters-with-counters replacement, rule
+  702.54a) — and 23 blocked, one each (`B191.json`). Innistrad and Magic 2012 are whole.
 - **Lorwyn's 90 most-played left** (batch 189, the middle walk's second range, 2026-10-26):
   **built** clash (rule 701.30, `mechanic:clash` — the `clash` effect: the opponent chosen, both
   top cards revealed, each player's top-or-bottom choice in APNAP order, `won` / `lost` with

@@ -1,0 +1,719 @@
+{
+ "batch": "B191",
+ "status": "complete",
+ "ranks": "Innistrad (ISD, 2011-09-30): the rest of the set, its last 52; Magic 2012 (M12, 2011-07-15): whole set, 43 (newest-first walk); built a spell's additional cost of exiling N cards from your graveyard (additionalCost.exileFromGraveyard), with the five earlier-batch cards it unblocked (Skaab Ruinator, Relentless Skaabs, Headless Skaab, Cobbled Lancer, Abhorrent Oculus)",
+ "authored": [
+  {
+   "name": "Abhorrent Oculus",
+   "files": [
+    "engine/src/cards/pool/abhorrent-oculus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashmouth Hound",
+   "files": [
+    "engine/src/cards/pool/ashmouth-hound.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Avacynian Priest",
+   "files": [
+    "engine/src/cards/pool/avacynian-priest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blood Ogre",
+   "files": [
+    "engine/src/cards/pool/blood-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodrage Vampire",
+   "files": [
+    "engine/src/cards/pool/bloodrage-vampire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carnage Wurm",
+   "files": [
+    "engine/src/cards/pool/carnage-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Phoenix",
+   "files": [
+    "engine/src/cards/pool/chandras-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, the Firebrand",
+   "files": [
+    "engine/src/cards/pool/chandra-the-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Circle of Flame",
+   "files": [
+    "engine/src/cards/pool/circle-of-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Civilized Scholar",
+   "files": [
+    "engine/src/cards/pool/civilized-scholar.ts",
+    "engine/src/cards/pool/homicidal-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cobbled Lancer",
+   "files": [
+    "engine/src/cards/pool/cobbled-lancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crown of Empires",
+   "files": [
+    "engine/src/cards/pool/crown-of-empires.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crumbling Colossus",
+   "files": [
+    "engine/src/cards/pool/crumbling-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Druidic Satchel",
+   "files": [
+    "engine/src/cards/pool/druidic-satchel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskhunter Bat",
+   "files": [
+    "engine/src/cards/pool/duskhunter-bat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Cathar",
+   "files": [
+    "engine/src/cards/pool/elder-cathar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elite Inquisitor",
+   "files": [
+    "engine/src/cards/pool/elite-inquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festerhide Boar",
+   "files": [
+    "engine/src/cards/pool/festerhide-boar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frost Breath",
+   "files": [
+    "engine/src/cards/pool/frost-breath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Furyborn Hellkite",
+   "files": [
+    "engine/src/cards/pool/furyborn-hellkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galvanic Juggernaut",
+   "files": [
+    "engine/src/cards/pool/galvanic-juggernaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garruk's Horde",
+   "files": [
+    "engine/src/cards/pool/garruks-horde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gatstaf Shepherd",
+   "files": [
+    "engine/src/cards/pool/gatstaf-howler.ts",
+    "engine/src/cards/pool/gatstaf-shepherd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Geistcatcher's Rig",
+   "files": [
+    "engine/src/cards/pool/geistcatchers-rig.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gideon's Avenger",
+   "files": [
+    "engine/src/cards/pool/gideons-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorehorn Minotaurs",
+   "files": [
+    "engine/src/cards/pool/gorehorn-minotaurs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Bramble",
+   "files": [
+    "engine/src/cards/pool/grave-bramble.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Griffin Rider",
+   "files": [
+    "engine/src/cards/pool/griffin-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grizzled Outcasts",
+   "files": [
+    "engine/src/cards/pool/grizzled-outcasts.ts",
+    "engine/src/cards/pool/krallenhorde-wantons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guardians' Pledge",
+   "files": [
+    "engine/src/cards/pool/guardians-pledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hamlet Captain",
+   "files": [
+    "engine/src/cards/pool/hamlet-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hanweir Watchkeep",
+   "files": [
+    "engine/src/cards/pool/bane-of-hanweir.ts",
+    "engine/src/cards/pool/hanweir-watchkeep.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Headless Skaab",
+   "files": [
+    "engine/src/cards/pool/headless-skaab.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lord of the Unreal",
+   "files": [
+    "engine/src/cards/pool/lord-of-the-unreal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lurking Crocodile",
+   "files": [
+    "engine/src/cards/pool/lurking-crocodile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Make a Wish",
+   "files": [
+    "engine/src/cards/pool/make-a-wish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Makeshift Mauler",
+   "files": [
+    "engine/src/cards/pool/makeshift-mauler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Manor Gargoyle",
+   "files": [
+    "engine/src/cards/pool/manor-gargoyle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Thief",
+   "files": [
+    "engine/src/cards/pool/master-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Unbound",
+   "files": [
+    "engine/src/cards/pool/mind-unbound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monomania",
+   "files": [
+    "engine/src/cards/pool/monomania.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Night Revelers",
+   "files": [
+    "engine/src/cards/pool/night-revelers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightbird's Clutches",
+   "files": [
+    "engine/src/cards/pool/nightbirds-clutches.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orchard Spirit",
+   "files": [
+    "engine/src/cards/pool/orchard-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Paraselene",
+   "files": [
+    "engine/src/cards/pool/paraselene.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Personal Sanctuary",
+   "files": [
+    "engine/src/cards/pool/personal-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantasmal Bear",
+   "files": [
+    "engine/src/cards/pool/phantasmal-bear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantasmal Dragon",
+   "files": [
+    "engine/src/cards/pool/phantasmal-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relentless Skaabs",
+   "files": [
+    "engine/src/cards/pool/relentless-skaabs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scepter of Empires",
+   "files": [
+    "engine/src/cards/pool/scepter-of-empires.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scourge of Geier Reach",
+   "files": [
+    "engine/src/cards/pool/scourge-of-geier-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screeching Bat",
+   "files": [
+    "engine/src/cards/pool/screeching-bat.ts",
+    "engine/src/cards/pool/stalking-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selhoff Occultist",
+   "files": [
+    "engine/src/cards/pool/selhoff-occultist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sharpened Pitchfork",
+   "files": [
+    "engine/src/cards/pool/sharpened-pitchfork.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver-Inlaid Dagger",
+   "files": [
+    "engine/src/cards/pool/silver-inlaid-dagger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skaab Goliath",
+   "files": [
+    "engine/src/cards/pool/skaab-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skaab Ruinator",
+   "files": [
+    "engine/src/cards/pool/skaab-ruinator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slayer of the Wicked",
+   "files": [
+    "engine/src/cards/pool/slayer-of-the-wicked.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Somberwald Spider",
+   "files": [
+    "engine/src/cards/pool/somberwald-spider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spidery Grasp",
+   "files": [
+    "engine/src/cards/pool/spidery-grasp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stitched Drake",
+   "files": [
+    "engine/src/cards/pool/stitched-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stitcher's Apprentice",
+   "files": [
+    "engine/src/cards/pool/stitchers-apprentice.ts",
+    "engine/src/cards/tokens/homunculus-token-2-2.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormblood Berserker",
+   "files": [
+    "engine/src/cards/pool/stormblood-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tectonic Rift",
+   "files": [
+    "engine/src/cards/pool/tectonic-rift.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Throne of Empires",
+   "files": [
+    "engine/src/cards/pool/throne-of-empires.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tormented Pariah",
+   "files": [
+    "engine/src/cards/pool/rampaging-werewolf.ts",
+    "engine/src/cards/pool/tormented-pariah.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Travel Preparations",
+   "files": [
+    "engine/src/cards/pool/travel-preparations.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trollhide",
+   "files": [
+    "engine/src/cards/pool/trollhide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ulvenwald Mystics",
+   "files": [
+    "engine/src/cards/pool/ulvenwald-mystics.ts",
+    "engine/src/cards/pool/ulvenwald-primordials.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urgent Exorcism",
+   "files": [
+    "engine/src/cards/pool/urgent-exorcism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampire Outcasts",
+   "files": [
+    "engine/src/cards/pool/vampire-outcasts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampiric Fury",
+   "files": [
+    "engine/src/cards/pool/vampiric-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Village Ironsmith",
+   "files": [
+    "engine/src/cards/pool/ironfang.ts",
+    "engine/src/cards/pool/village-ironsmith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Villagers of Estwald",
+   "files": [
+    "engine/src/cards/pool/howlpack-of-estwald.ts",
+    "engine/src/cards/pool/villagers-of-estwald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wooden Stake",
+   "files": [
+    "engine/src/cards/pool/wooden-stake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woodland Sleuth",
+   "files": [
+    "engine/src/cards/pool/woodland-sleuth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wreath of Geists",
+   "files": [
+    "engine/src/cards/pool/wreath-of-geists.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Abattoir Ghoul",
+   "needs": [
+    "filter:damaged-this-turn-by-source"
+   ],
+   "why": "'Whenever a creature dealt damage by this creature this turn dies' — damagedThisTurnBy matches a source's type, subtype or controller, never this source itself."
+  },
+  {
+   "name": "Heretic's Punishment",
+   "needs": [
+    "amount:greatest-mana-value-this-way"
+   ],
+   "why": "'damage equal to the highest mana value among the milled cards' — the milled cards' amount can only sum mana values."
+  },
+  {
+   "name": "Frightful Delusion",
+   "needs": [
+    "effect:discard-controller-of-target"
+   ],
+   "why": "'Counter target spell unless its controller pays {1}. That player discards a card.' — discard can't name the controller of the spell in slot 0."
+  },
+  {
+   "name": "Graveyard Shovel",
+   "needs": [
+    "effect:target-player-exiles-from-graveyard"
+   ],
+   "why": "'Target player exiles a card from their graveyard. If it's a creature card, you gain 2 life.' — the targeted player can't be the chooser."
+  },
+  {
+   "name": "Bloodlord of Vaasgoth",
+   "needs": [
+    "effect:cast-spell-gains-bloodthirst"
+   ],
+   "why": "'Whenever you cast a Vampire creature spell, it gains bloodthirst 3' — nothing gives a spell an enters-with-counters replacement for the permanent it becomes."
+  },
+  {
+   "name": "Arachnus Web",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "'Enchanted creature can't attack or block, and its activated abilities can't be activated' — prohibits.abilitiesOf can't name the enchanted creature."
+  },
+  {
+   "name": "Spare from Evil",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "'Creatures you control gain protection from non-Human creatures until end of turn' — no effect grants protection until end of turn."
+  },
+  {
+   "name": "Essence of the Wild",
+   "needs": [
+    "replacement:others-enter-as-copy"
+   ],
+   "why": "'Creatures you control enter as a copy of Essence of the Wild' — copyOnEnter covers only the permanent itself."
+  },
+  {
+   "name": "Arachnus Spinner",
+   "needs": [
+    "effect:search-library-attach-to-trigger-object"
+   ],
+   "why": "'search … for a card named Arachnus Web and put it onto the battlefield attached to target creature' — search-library attaches only to its source."
+  },
+  {
+   "name": "Timely Reinforcements",
+   "needs": [
+    "condition:opponent-more-life"
+   ],
+   "why": "'If you have less life than an opponent, you gain 6 life' — no condition compares life totals."
+  },
+  {
+   "name": "Harvest Pyre",
+   "needs": [
+    "cost:exile-x-from-graveyard-additional"
+   ],
+   "why": "'As an additional cost to cast this spell, exile X cards from your graveyard' — additionalCost.exileFromGraveyard (built this batch) takes a fixed count, not an X."
+  },
+  {
+   "name": "Corpse Lunge",
+   "needs": [
+    "cost:exiled-card-ref"
+   ],
+   "why": "'exile a creature card from your graveyard … damage equal to the exiled card's power' — nothing reads which card a cost exiled."
+  },
+  {
+   "name": "Scrambleverse",
+   "needs": [
+    "effect:random-choice"
+   ],
+   "why": "'For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen' — no random player choice."
+  },
+  {
+   "name": "Vengeful Pharaoh",
+   "needs": [
+    "trigger:damage-trigger-extensions"
+   ],
+   "why": "'Whenever combat damage is dealt to you or a planeswalker you control' from the graveyard — deals-damage-batch's to: 'you' doesn't cover your planeswalkers."
+  },
+  {
+   "name": "Stave Off",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "'Target creature gains protection from the color of your choice until end of turn' — no granted protection from a colour chosen as it resolves."
+  },
+  {
+   "name": "Skinshifter",
+   "needs": [
+    "effect:modal-activated-ability"
+   ],
+   "why": "'{G}: Choose one — … Activate only once each turn' — an activated ability can't announce its mode as it's activated (rule 700.2b)."
+  },
+  {
+   "name": "Ghostly Possession",
+   "needs": [
+    "replacement:prevent-damage-by-attached"
+   ],
+   "why": "'Prevent all combat damage that would be dealt to and dealt by enchanted creature' — a would-deal-damage replacement can't name the enchanted creature."
+  },
+  {
+   "name": "Back from the Brink",
+   "needs": [
+    "cost:exile-from-graveyard-pay-its-mana-cost"
+   ],
+   "why": "'Exile a creature card from your graveyard and pay its mana cost: create a token that's a copy of that card' — a cost whose mana is the exiled card's."
+  },
+  {
+   "name": "Night Terrors",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "'Target player reveals their hand. You choose a nonland card from it. Exile that card.' — the chosen card can only be discarded."
+  },
+  {
+   "name": "Sphinx of Uthuun",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Fact or Fiction's 'an opponent separates those cards into two piles' — no piles decision."
+  },
+  {
+   "name": "Goblin Bangchuckers",
+   "needs": [
+    "effect:damage-to-source"
+   ],
+   "why": "'flip a coin. If you win, it deals 2 damage to any target. If you lose, it deals 2 damage to itself' — damage can't name its own source."
+  },
+  {
+   "name": "Doubling Chant",
+   "needs": [
+    "effect:search-same-name-as-chosen-permanents"
+   ],
+   "why": "'For each creature you control, you may search your library for a creature card with the same name' — no per-permanent same-name search."
+  },
+  {
+   "name": "Arbalest Elite",
+   "needs": [
+    "effect:doesnt-untap-your-next-untap-step"
+   ],
+   "why": "'This creature doesn't untap during your next untap step' — the engine waits for its controller's next untap step, not yours (the ruling: under another player's control, nothing)."
+  }
+ ]
+}
