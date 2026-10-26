@@ -549,6 +549,7 @@ import _poolShadowGlider from "../pool/shadow-glider.js";
 import _poolShanidSleepersScourge from "../pool/shanid-sleepers-scourge.js";
 import _poolShatteringBlow from "../pool/shattering-blow.js";
 import _poolShivanHellkite from "../pool/shivan-hellkite.js";
+import _poolShivsEmbrace from "../pool/shivs-embrace.js";
 import _poolShreddingWinds from "../pool/shredding-winds.js";
 import _poolShrineOfTheForsakenGods from "../pool/shrine-of-the-forsaken-gods.js";
 import _poolShuSoldierFarmers from "../pool/shu-soldier-farmers.js";
@@ -1271,6 +1272,7 @@ const shard: CardShard = {
     _poolShanidSleepersScourge,
     _poolShatteringBlow,
     _poolShivanHellkite,
+    _poolShivsEmbrace,
     _poolShreddingWinds,
     _poolShrineOfTheForsakenGods,
     _poolShuSoldierFarmers,

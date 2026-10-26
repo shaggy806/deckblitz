@@ -15763,6 +15763,7 @@ import _poolRunawaySteamKin from "./pool/runaway-steam-kin.js";
 import _poolRunawayTrashBot from "./pool/runaway-trash-bot.js";
 import _poolRuneBrandJuggler from "./pool/rune-brand-juggler.js";
 import _poolRuneCervinRider from "./pool/rune-cervin-rider.js";
+import _poolRuneOfProtectionWhite from "./pool/rune-of-protection-white.js";
 import _poolRuneScarredDemon from "./pool/rune-scarred-demon.js";
 import _poolRuneSealedWall from "./pool/rune-sealed-wall.js";
 import _poolRuneboggle from "./pool/runeboggle.js";
@@ -16869,6 +16870,7 @@ import _poolShivanMeteor from "./pool/shivan-meteor.js";
 import _poolShivanOasis from "./pool/shivan-oasis.js";
 import _poolShivanReef from "./pool/shivan-reef.js";
 import _poolShivanZombie from "./pool/shivan-zombie.js";
+import _poolShivsEmbrace from "./pool/shivs-embrace.js";
 import _poolShizoDeathsStorehouse from "./pool/shizo-deaths-storehouse.js";
 import _poolShoalKraken from "./pool/shoal-kraken.js";
 import _poolShoalSerpent from "./pool/shoal-serpent.js";
@@ -38719,6 +38721,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRunawayTrashBot,
   _poolRuneBrandJuggler,
   _poolRuneCervinRider,
+  _poolRuneOfProtectionWhite,
   _poolRuneScarredDemon,
   _poolRuneSealedWall,
   _poolRuneboggle,
@@ -39825,6 +39828,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShivanOasis,
   _poolShivanReef,
   _poolShivanZombie,
+  _poolShivsEmbrace,
   _poolShizoDeathsStorehouse,
   _poolShoalKraken,
   _poolShoalSerpent,
@@ -61688,6 +61692,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/runaway-trash-bot": _poolRunawayTrashBot,
   "pool/rune-brand-juggler": _poolRuneBrandJuggler,
   "pool/rune-cervin-rider": _poolRuneCervinRider,
+  "pool/rune-of-protection-white": _poolRuneOfProtectionWhite,
   "pool/rune-scarred-demon": _poolRuneScarredDemon,
   "pool/rune-sealed-wall": _poolRuneSealedWall,
   "pool/runeboggle": _poolRuneboggle,
@@ -62794,6 +62799,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shivan-oasis": _poolShivanOasis,
   "pool/shivan-reef": _poolShivanReef,
   "pool/shivan-zombie": _poolShivanZombie,
+  "pool/shivs-embrace": _poolShivsEmbrace,
   "pool/shizo-deaths-storehouse": _poolShizoDeathsStorehouse,
   "pool/shoal-kraken": _poolShoalKraken,
   "pool/shoal-serpent": _poolShoalSerpent,
