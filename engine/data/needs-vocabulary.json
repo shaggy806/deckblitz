@@ -11347,6 +11347,34 @@
   "filter:phyrexian-mana-in-cost": {
    "family": "condition:filter-card-property-clauses",
    "example": "Rage Extractor: whenever you cast a spell with {P} in its mana cost, it deals damage equal to that spell's mana value"
+  },
+  "effect:put-from-opponent-hand-onto-battlefield": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Treacherous Urge: target opponent reveals their hand; you may put a creature card from it onto the battlefield under your control"
+  },
+  "effect:skip-next-draw-step": {
+   "family": "static:skip-untap-step",
+   "example": "Molten Firebird: when it dies, return it to the battlefield and you skip your next draw step"
+  },
+  "bug:controller-of-target-countered-copy": {
+   "family": "bug:zone-change-object-identity",
+   "example": "Spellshift: a countered spell copy is deleted at once, so \"its controller\" (controllerOfTarget) finds no player; rule 608.2h wants the spell as it last existed"
+  },
+  "mechanic:suspend-x": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Benalish Commander: Suspend X—{X}{W}{W}, X can't be 0 (the suspend field takes a fixed number of counters)"
+  },
+  "filter:least-power-among-all-creatures": {
+   "family": "filter:least-among-its-controller",
+   "example": "Porphyry Nodes: destroy the creature with the least power among all creatures (you choose among ties)"
+  },
+  "target:player-planeswalker-or-filtered-creature": {
+   "family": "effect:target-spec-additions",
+   "example": "Cautery Sliver: prevent the next 1 damage that would be dealt to target Sliver creature or player this turn"
+  },
+  "amount:auras-attached-to-enchanted": {
+   "family": "static:pt-per-amount",
+   "example": "Auramancer's Guise: enchanted creature gets +2/+2 for each Aura attached to it"
   }
  }
 }

@@ -97,6 +97,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   cumulative upkeeps as a hybrid cost — by five `card-author` agents and the lead; 33 blocked
   (`B196.json`), cumulative upkeep's other costs (six) and the Martyrs' reveal cost (five)
   leading. Coldsnap is whole. `ripple-recover.test.ts`.
+- **Planar Chaos, whole** (batch 200, the middle walk's second range, 2026-10-26): no feature
+  built. 73 authored — Teneb, the Harvester, Intet, the Dreamer, Life and Limb, Mirri the Cursed,
+  Numot, the Devastator, the three split cards, eight Slivers and 65 more — by five `card-author`
+  agents; 43 blocked (`B200.json`), suspend's exile-zone triggers and Suspend X leading.
 - **Future Sight, whole** (batch 195, the middle walk's second range, 2026-10-26): no feature
   built. 76 authored — Korlash, Heir to Blackblade, Baru, Fist of Krosa, Bridge from Below,
   Narcomoeba, Storm Entity, Epochrasite, Barren Glory, Tarox Bladewing, Shah of Naar Isle and 67
