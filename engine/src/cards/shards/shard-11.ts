@@ -14,6 +14,7 @@ import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAfterlife from "../pool/afterlife.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAkoumFirebird from "../pool/akoum-firebird.js";
+import _poolAlAbarasCarpet from "../pool/al-abaras-carpet.js";
 import _poolAlchemistsVial from "../pool/alchemists-vial.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
@@ -326,6 +327,7 @@ import _poolJayasGreeting from "../pool/jayas-greeting.js";
 import _poolJennikasTechnique from "../pool/jennikas-technique.js";
 import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
 import _poolJinSakaiGhostOfTsushima from "../pool/jin-sakai-ghost-of-tsushima.js";
+import _poolJustFate from "../pool/just-fate.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
@@ -726,6 +728,7 @@ const shard: CardShard = {
     _poolAfterlife,
     _poolAkkiRockspeaker,
     _poolAkoumFirebird,
+    _poolAlAbarasCarpet,
     _poolAlchemistsVial,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
@@ -1038,6 +1041,7 @@ const shard: CardShard = {
     _poolJennikasTechnique,
     _poolJhoirasFamiliar,
     _poolJinSakaiGhostOfTsushima,
+    _poolJustFate,
     _poolJusticiarsPortal,
     _poolKangeesLieutenant,
     _poolKaslemsStonetree,

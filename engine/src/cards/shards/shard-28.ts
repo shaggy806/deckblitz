@@ -522,6 +522,7 @@ import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
+import _poolScarecrow from "../pool/scarecrow.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolSawbladeScamp,
     _poolScalebanesElite,
     _poolScaledWurm,
+    _poolScarecrow,
     _poolScarletSpiderKaine,
     _poolScrapyardMongrel,
     _poolScreamreachBrawler,

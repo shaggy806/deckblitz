@@ -459,6 +459,7 @@ import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
 import _poolRaccoonRallier from "../pool/raccoon-rallier.js";
 import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
+import _poolRallyTheTroops from "../pool/rally-the-troops.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
@@ -1159,6 +1160,7 @@ const shard: CardShard = {
     _poolQuicksilverPietroMaximoff,
     _poolRaccoonRallier,
     _poolRakdosShredFreak,
+    _poolRallyTheTroops,
     _poolRampartSmasher,
     _poolRapidAugmenter,
     _poolRavenousIntruder,

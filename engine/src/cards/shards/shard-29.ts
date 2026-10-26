@@ -60,6 +60,7 @@ import _poolBlackChocobo from "../pool/black-chocobo.js";
 import _poolBlackbloomRogue from "../pool/blackbloom-rogue.js";
 import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
 import _poolBlaringRecruiter from "../pool/blaring-recruiter.js";
+import _poolBlessedReversal from "../pool/blessed-reversal.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
 import _poolBlisterBeetle from "../pool/blister-beetle.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
@@ -465,6 +466,7 @@ import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
+import _poolRemove from "../pool/remove.js";
 import _poolRendingFlame from "../pool/rending-flame.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
@@ -784,6 +786,7 @@ const shard: CardShard = {
     _poolBlackbloomRogue,
     _poolBlacksmithsTalent,
     _poolBlaringRecruiter,
+    _poolBlessedReversal,
     _poolBlightedBat,
     _poolBlisterBeetle,
     _poolBloodcrusherOfKhorne,
@@ -1189,6 +1192,7 @@ const shard: CardShard = {
     _poolRedshiftRocketeerChief,
     _poolReignOfThePit,
     _poolRelicOfSauron,
+    _poolRemove,
     _poolRendingFlame,
     _poolRenegadeDemon,
     _poolReprieve,

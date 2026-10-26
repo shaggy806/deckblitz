@@ -2137,6 +2137,11 @@ export interface PlayerState {
    * `attackedYouDuringTheirLastTurn`). Absent until someone does.
    */
   attackedByOnTurn?: Partial<Record<PlayerId, number>>;
+  /** The turn and combat phase (`TurnState.combatPhases`) in which a creature
+   * was last declared attacking this player — the player, not a planeswalker
+   * of theirs (rule 508.3b). Portal's "only if you've been attacked this
+   * step" (the `attacked-this-step` condition). Absent until it happens. */
+  attackedInCombat?: { readonly turn: number; readonly combat: number };
   /** The number of the most recent turn this player took, the one under way
    * included — "their last turn". Set as each of their turns begins, and as
    * they declare attackers (so a first turn counts). */
@@ -4337,8 +4342,10 @@ export interface GameState {
    * `by` (Arachnogenesis: "by non-Spider creatures"): combat damage a source
    * matching one of these filters would deal is prevented, each matched as
    * the damage would be dealt from `you`'s side. Cleared with
-   * `preventAllCombatDamage`; absent when there are none. */
-  combatDamagePreventedBy?: { readonly filter: CardFilter; readonly you: PlayerId }[];
+   * `preventAllCombatDamage`; absent when there are none. An entry with
+   * `toYou` (a `prevent-damage-to-you` — Deep Wood) is all damage, combat or
+   * not, dealt to `you` the player instead. */
+  combatDamagePreventedBy?: { readonly filter: CardFilter; readonly you: PlayerId; readonly toYou?: true }[];
   /**
    * Players with hexproof until end of turn (Lazotep Plating: "**You** and
    * permanents you control gain hexproof"). Turn-scoped rather than a

@@ -94,6 +94,7 @@ import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
+import _poolCommandOfUnsummoning from "../pool/command-of-unsummoning.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
 import _poolCompassGnome from "../pool/compass-gnome.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
@@ -638,6 +639,7 @@ import _poolWalkThePlank from "../pool/walk-the-plank.js";
 import _poolWanderingGraybeard from "../pool/wandering-graybeard.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
+import _poolWarriorsStand from "../pool/warriors-stand.js";
 import _poolWarteyeWitch from "../pool/warteye-witch.js";
 import _poolWavecrashTriton from "../pool/wavecrash-triton.js";
 import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
@@ -773,6 +775,7 @@ const shard: CardShard = {
     _poolCollectedCompany,
     _poolCollision,
     _poolCometCrawler,
+    _poolCommandOfUnsummoning,
     _poolCommandingPresence,
     _poolCompassGnome,
     _poolCompulsiveResearch,
@@ -1317,6 +1320,7 @@ const shard: CardShard = {
     _poolWanderingGraybeard,
     _poolWardenOfTheEye,
     _poolWarriorsResolve,
+    _poolWarriorsStand,
     _poolWarteyeWitch,
     _poolWavecrashTriton,
     _poolWayOfTheHealer,

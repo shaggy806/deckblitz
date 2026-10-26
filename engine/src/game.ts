@@ -24179,9 +24179,13 @@ export class Game {
           controller,
         );
       },
-      preventAllCombatDamage: (by) => {
+      preventAllCombatDamage: (by, toYou) => {
         if (by !== undefined) {
-          (this.state.combatDamagePreventedBy ??= []).push({ filter: by, you: controller });
+          (this.state.combatDamagePreventedBy ??= []).push({
+            filter: by,
+            you: controller,
+            ...(toYou === true ? { toYou: true as const } : {}),
+          });
           this.emit({ type: "combat-damage-prevention-set", partialBy: source });
           return;
         }
@@ -31699,6 +31703,7 @@ export class Game {
           const defender = typeof attacked === "string" ? this.state.players[attacked as PlayerId] : undefined;
           if (defender !== undefined) {
             defender.attackedByOnTurn = { ...defender.attackedByOnTurn, [event.player]: this.state.turn.number };
+            defender.attackedInCombat = { turn: this.state.turn.number, combat: this.state.turn.combatPhases ?? 1 };
           }
         }
         const history = historyOf(event.player);
@@ -33623,14 +33628,17 @@ export class Game {
     const by = dealtBy === undefined ? {} : { by: dealtBy };
 
     // Fog (rule 614): a turn-scoped shield prevents all combat damage — or
-    // what sources matching a filter would deal, matched now (rule 615.1).
+    // what sources matching a filter would deal, matched now (rule 615.1);
+    // Deep Wood's (`toYou`), all damage those sources would deal to its
+    // controller.
     if (
-      combat &&
-      (this.state.preventAllCombatDamage ||
-        (this.state.combatDamagePreventedBy?.some(({ filter, you }) =>
+      (combat && this.state.preventAllCombatDamage) ||
+      (this.state.combatDamagePreventedBy?.some(
+        ({ filter, you, toYou }) =>
+          (toYou === true ? target.kind === "player" && target.player === you : combat) &&
           matchesFilter(this.state, this.registry, source, filter, { you }),
-        ) ??
-          false))
+      ) ??
+        false)
     ) {
       this.emit({ type: "damage-prevented", source, target, amount: amount * sources });
       return 0;

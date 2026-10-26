@@ -273,6 +273,7 @@ import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
 import _poolHalimarExcavator from "../pool/halimar-excavator.js";
+import _poolHarshJustice from "../pool/harsh-justice.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -972,6 +973,7 @@ const shard: CardShard = {
     _poolGutturalResponse,
     _poolGuulDrazAssassin,
     _poolHalimarExcavator,
+    _poolHarshJustice,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,

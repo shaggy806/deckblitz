@@ -972,6 +972,14 @@ export type StaticCondition =
   /** An opponent of the source's controller has lost life this turn (Theater
    * of Horrors). Reads the per-player `lifeLostThisTurn` amount as `> 0`. */
   | { readonly kind: "opponent-lost-life-this-turn" }
+  /** Portal's "Cast this spell only during the declare attackers step and
+   * only if **you've been attacked this step**": it's a declare attackers
+   * step, and a creature was declared attacking you — the player, not a
+   * planeswalker of yours, and not one put onto the battlefield attacking
+   * (rule 508.3b's "is attacked") — as this combat's attackers were
+   * declared. It stays true though that creature has left combat since.
+   * See `PlayerState.attackedInCombat`. */
+  | { readonly kind: "attacked-this-step" }
   /**
    * The object whose event fired the *triggered ability* currently resolving
    * matches `filter` — Akoum Hellkite's "Whenever a land you control enters,

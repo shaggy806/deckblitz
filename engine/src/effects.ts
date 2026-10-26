@@ -4849,6 +4849,18 @@ export type EffectSpec =
       readonly by?: CardFilter;
     }
   | {
+      /** "Prevent all damage that would be dealt to you this turn by
+       * attacking creatures" (Deep Wood; Scarecrow's "by creatures with
+       * flying", Al-abara's Carpet's "by attacking creatures without
+       * flying"): combat and noncombat damage to the effect's controller —
+       * the player, not their permanents — from sources matching `by`, each
+       * asked as its damage would be dealt (rule 615.1), from the
+       * controller's side. A rule for the turn, beside Fog's
+       * (`GameState.combatDamagePreventedBy`, `toYou`). */
+      readonly kind: "prevent-damage-to-you";
+      readonly by: CardFilter;
+    }
+  | {
       /** "Prevent the next `amount` damage that would be dealt to `target`
        * this turn" (Healing Salve — rule 614.9 / ROADMAP Phase 11 EG-6). A
        * one-shot prevention *shield* on `GameState.preventionShields`, consumed
@@ -7021,8 +7033,9 @@ export interface EffectApi {
     owner?: PlayerId,
   ): void;
   /** Prevent all combat damage this turn (Fog) — or only what sources
-   * matching `by` would deal. */
-  preventAllCombatDamage(by?: CardFilter): void;
+   * matching `by` would deal; with `toYou`, all damage they'd deal to the
+   * effect's controller, combat or not (`prevent-damage-to-you`). */
+  preventAllCombatDamage(by?: CardFilter, toYou?: boolean): void;
   /** Add a one-shot damage-prevention shield on `target` (a player or object)
    * for `amount` damage this turn — Healing Salve (ROADMAP Phase 11 EG-6). */
   preventDamage(target: TargetRef, amount: number | "all", combatOnly: boolean, redirectTo?: TargetRef): void;
@@ -10777,6 +10790,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "prevent-all-combat-damage":
       ctx.preventAllCombatDamage(spec.by);
+      return;
+    case "prevent-damage-to-you":
+      ctx.preventAllCombatDamage(spec.by, true);
       return;
     case "prevent-damage": {
       const ref = resolveEffectTarget(spec.target, ctx);

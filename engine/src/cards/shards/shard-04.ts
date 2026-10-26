@@ -24,6 +24,7 @@ import _poolAnoint from "../pool/anoint.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
+import _poolAssassinsBlade from "../pool/assassins-blade.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
@@ -493,6 +494,7 @@ import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolScattershotArcher from "../pool/scattershot-archer.js";
+import _poolScorchingWinds from "../pool/scorching-winds.js";
 import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
@@ -718,6 +720,7 @@ const shard: CardShard = {
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
+    _poolAssassinsBlade,
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
     _poolAtraxasSkitterfang,
@@ -1187,6 +1190,7 @@ const shard: CardShard = {
     _poolScarbladeScout,
     _poolScatteredGroves,
     _poolScattershotArcher,
+    _poolScorchingWinds,
     _poolScorchmark,
     _poolSeafloorOracle,
     _poolSeedguideAsh,

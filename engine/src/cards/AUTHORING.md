@@ -1537,6 +1537,7 @@ target slot holding the player who gets it, "target opponent gets an emblem" —
 Reignited), `prevent-all-combat-damage` (Fog; `by: CardFilter` is only what
 sources matching it would deal — Arachnogenesis's "by non-Spider creatures", matched as
 each damage would be dealt, rule 615.1),
+`prevent-damage-to-you { by }` (Deep Wood's "prevent all damage that would be dealt to you this turn by attacking creatures", Scarecrow's "by creatures with flying": combat and noncombat damage to you the player, not your permanents, each source matched as its damage would be dealt — `attacked-this-step.test.ts`),
 `prevent-damage { target, amount, combatOnly? }` (Healing Salve; `target` may be `"source"`, and `amount: "all"` is "prevent all damage that would be dealt to [it] this turn", never used up — Gideon Jura's 0. A shield on an object covers only that object, not the card back from another zone, rule 400.7).
 
 `prevent-damage`'s **`redirectTo: slot | "source" | "you"`** is a redirection instead (rule 614.9): "The next 1 damage that would be dealt to this creature this turn is dealt to target creature you control instead" (the en-Kor creatures) is `{ target: "source", amount: 1, redirectTo: 0 }`; Daughter of Autumn's "… to target white creature … is dealt to this creature instead", `{ target: 0, amount: 1, redirectTo: "source" }`. The same source deals it to `redirectTo` (combat damage stays combat damage); while `redirectTo` is off the battlefield, no longer a creature/planeswalker/battle, or a player who has left, the shield does nothing and stays. A plain prevention shield is used before a redirection. `prevent-damage-from-chosen-source` takes `redirectTo` too (Shaman en-Kor's second ability, Jade Monolith's `"you"`). Not yet: static redirections (Palisade Giant, Veteran Bodyguard), "all damage … by target creature" (Shimian Night Stalker) — still `replacement:damage-redirection`. `damage-redirection.test.ts`.
@@ -4011,7 +4012,17 @@ clause (section 9):
   phase" is `mainPhase: 2`, which is the first postcombat main unless an
   additional one came before it). Every clause given has to hold; pair it
   with `your-turn` for "your". The counts are `TurnState.combatPhases` /
-  `mainPhases`, the phase under way included.
+  `mainPhases`, the phase under way included. Portal's "Activate only during
+  your turn, before attackers are declared" is `BEFORE_ATTACKERS_DECLARED`
+  from `helpers.ts` (upkeep, draw, the first main phase, the first beginning
+  of combat).
+- `{ kind: "attacked-this-step" }` — Portal's "Cast this spell only during
+  the declare attackers step and only if you've been attacked this step"
+  (`castOnlyIf`; Just Fate, Harsh Justice): a declare attackers step in which
+  a creature was declared attacking you — you, not a planeswalker of yours,
+  and never one put onto the battlefield attacking (rule 508.3b) — though it
+  has left combat since. "Each creature attacking you" (Blessed Reversal) is
+  the filter `attackingYou: true`, which also leaves planeswalkers out.
 - `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf? }` —
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: Éowyn, Shieldmaiden's "if another Human entered the battlefield
