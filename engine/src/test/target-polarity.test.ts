@@ -12,6 +12,7 @@ import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
 import { licidDefinition } from "../cards/define.js";
+import { haunt } from "../cards/helpers.js";
 import {
   abilityPolarities,
   auraPolarity,
@@ -159,6 +160,10 @@ describe("slot polarity", () => {
 
   it("reads a delayed 'when it dies, return it' as a save", () => {
     expect(cast("Graceful Reprieve")).toEqual(["help"]);
+  });
+
+  it("reads haunt's target as the opponent's creature, the one likelier to die", () => {
+    expect(abilityPolarities(haunt())).toEqual(["harm"]);
   });
 
   it("classifies nearly every targeted slot in the pool", () => {

@@ -225,7 +225,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "return-to-hand-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
   "exile-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
-  exile: (n, v) => v.touch(n.target, "harm", DECISIVE),
+  exile: (n, v) => {
+    v.touch(n.target, "harm", DECISIVE);
+    // Haunt (rule 702.55): the creature haunted is the one whose death
+    // fires the card again — best an opponent's, the one likelier to die.
+    if (n.haunting !== undefined) v.touch(n.haunting, "harm", MINOR);
+  },
   "choose-creature-type": (n, v) => v.child(n.then),
   "return-exiled-by-source": none,
   "put-onto-battlefield": (n, v) => {
