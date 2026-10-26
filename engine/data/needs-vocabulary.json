@@ -11391,6 +11391,18 @@
   "static:grant-pt-per-cards-in-hand": {
    "family": "static:pt-per-cards-in-hand",
    "example": "Kagemaro's Clutch: enchanted creature gets -X/-X, X the cards in your hand"
+  },
+  "trigger:spell-countered": {
+   "family": "trigger:counters-a-spell-trigger",
+   "example": "Multani's Presence: whenever a spell you've cast is countered, draw a card"
+  },
+  "effect:put-on-top-of-library-all": {
+   "family": "decision:library-ordering",
+   "example": "Harmonic Convergence: put all enchantments on top of their owners' libraries"
+  },
+  "mechanic:special-action-sacrifice-to-ignore-effect": {
+   "family": "mechanic:special-action-sacrifice-to-ignore-effect",
+   "example": "Damping Engine: a player may sacrifice a permanent to ignore this effect until end of turn"
   }
  }
 }

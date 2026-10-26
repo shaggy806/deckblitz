@@ -274,6 +274,7 @@ import _poolHarrowingJourney from "../pool/harrowing-journey.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
+import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
@@ -383,6 +384,7 @@ import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
+import _poolMultaniMaroSorcerer from "../pool/multani-maro-sorcerer.js";
 import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
@@ -480,9 +482,11 @@ import _poolReturnOfTheNightstalkers from "../pool/return-of-the-nightstalkers.j
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
+import _poolRidingTheDiluHorse from "../pool/riding-the-dilu-horse.js";
 import _poolRigForWar from "../pool/rig-for-war.js";
 import _poolRighteousAura from "../pool/righteous-aura.js";
 import _poolRimefireTorque from "../pool/rimefire-torque.js";
+import _poolRingOfGix from "../pool/ring-of-gix.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
@@ -511,6 +515,7 @@ import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
 import _poolSatyrHedonist from "../pool/satyr-hedonist.js";
 import _poolScaldingDevil from "../pool/scalding-devil.js";
 import _poolScoutingHawk from "../pool/scouting-hawk.js";
+import _poolScrapheap from "../pool/scrapheap.js";
 import _poolScreechingBuzzard from "../pool/screeching-buzzard.js";
 import _poolScreechingSkaab from "../pool/screeching-skaab.js";
 import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
@@ -532,6 +537,7 @@ import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolShrillHowler from "../pool/shrill-howler.js";
+import _poolSickAndTired from "../pool/sick-and-tired.js";
 import _poolSidewinderNaga from "../pool/sidewinder-naga.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
@@ -600,6 +606,7 @@ import _poolTajuruParagon from "../pool/tajuru-paragon.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
 import _poolTarielReckonerOfSouls from "../pool/tariel-reckoner-of-souls.js";
+import _poolTauntingChallenge from "../pool/taunting-challenge.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
 import _poolTectonicHazard from "../pool/tectonic-hazard.js";
 import _poolTeferisSentinel from "../pool/teferis-sentinel.js";
@@ -1017,6 +1024,7 @@ const shard: CardShard = {
     _poolHaughtyDjinn,
     _poolHeadlessSpecter,
     _poolHealingSalve,
+    _poolHeavyFog,
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,
@@ -1126,6 +1134,7 @@ const shard: CardShard = {
     _poolMortivore,
     _poolMountainTitan,
     _poolMourning,
+    _poolMultaniMaroSorcerer,
     _poolMurasaPyromancer,
     _poolNaliaDearnise,
     _poolNaturesLore,
@@ -1223,9 +1232,11 @@ const shard: CardShard = {
     _poolRevelInRiches,
     _poolRhizomeLurcher,
     _poolRideTheShoopuf,
+    _poolRidingTheDiluHorse,
     _poolRigForWar,
     _poolRighteousAura,
     _poolRimefireTorque,
+    _poolRingOfGix,
     _poolRiotPiker,
     _poolRiseOfTheAnts,
     _poolRiseOfTheDreadMarn,
@@ -1254,6 +1265,7 @@ const shard: CardShard = {
     _poolSatyrHedonist,
     _poolScaldingDevil,
     _poolScoutingHawk,
+    _poolScrapheap,
     _poolScreechingBuzzard,
     _poolScreechingSkaab,
     _poolScroungerOfSouls,
@@ -1275,6 +1287,7 @@ const shard: CardShard = {
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
     _poolShrillHowler,
+    _poolSickAndTired,
     _poolSidewinderNaga,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
@@ -1343,6 +1356,7 @@ const shard: CardShard = {
     _poolTalonTrooper,
     _poolTaoistHermit,
     _poolTarielReckonerOfSouls,
+    _poolTauntingChallenge,
     _poolTavernSmasher,
     _poolTectonicHazard,
     _poolTeferisSentinel,

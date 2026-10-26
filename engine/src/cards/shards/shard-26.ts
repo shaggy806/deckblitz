@@ -199,6 +199,7 @@ import _poolEstridTheMasked from "../pool/estrid-the-masked.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExpeditionRaptor from "../pool/expedition-raptor.js";
+import _poolExpendableTroops from "../pool/expendable-troops.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
@@ -299,6 +300,7 @@ import _poolHoofSkulkin from "../pool/hoof-skulkin.js";
 import _poolHostileInvestigator from "../pool/hostile-investigator.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
 import _poolHostility from "../pool/hostility.js";
+import _poolHuaTuoHonoredPhysician from "../pool/hua-tuo-honored-physician.js";
 import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
 import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
@@ -568,6 +570,8 @@ import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
+import _poolSlowMotion from "../pool/slow-motion.js";
+import _poolSluggishness from "../pool/sluggishness.js";
 import _poolSnowCoveredPlains from "../pool/snow-covered-plains.js";
 import _poolSokkasCharge from "../pool/sokkas-charge.js";
 import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
@@ -631,6 +635,7 @@ import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
+import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThrivingRats from "../pool/thriving-rats.js";
@@ -696,6 +701,7 @@ import _poolVoltaicKey from "../pool/voltaic-key.js";
 import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
 import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
+import _poolWalkingSponge from "../pool/walking-sponge.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWanderersTwig from "../pool/wanderers-twig.js";
 import _poolWarFalcon from "../pool/war-falcon.js";
@@ -714,6 +720,7 @@ import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
 import _poolWreckingOgre from "../pool/wrecking-ogre.js";
 import _poolWringFlesh from "../pool/wring-flesh.js";
+import _poolYavimayaGranger from "../pool/yavimaya-granger.js";
 import _poolYawgmothDemon from "../pool/yawgmoth-demon.js";
 import _poolYokedOx from "../pool/yoked-ox.js";
 import _poolZagothTriome from "../pool/zagoth-triome.js";
@@ -935,6 +942,7 @@ const shard: CardShard = {
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
     _poolExpeditionRaptor,
+    _poolExpendableTroops,
     _poolExploration,
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,
@@ -1035,6 +1043,7 @@ const shard: CardShard = {
     _poolHostileInvestigator,
     _poolHostileMinotaur,
     _poolHostility,
+    _poolHuaTuoHonoredPhysician,
     _poolHulkSmash,
     _poolHumbleDefector,
     _poolHungryMegasloth,
@@ -1304,6 +1313,8 @@ const shard: CardShard = {
     _poolSkred,
     _poolSkyclaveRelic,
     _poolSlickImitator,
+    _poolSlowMotion,
+    _poolSluggishness,
     _poolSnowCoveredPlains,
     _poolSokkasCharge,
     _poolSolidarityOfHeroes,
@@ -1367,6 +1378,7 @@ const shard: CardShard = {
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
+    _poolThranLens,
     _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,
     _poolThrivingRats,
@@ -1432,6 +1444,7 @@ const shard: CardShard = {
     _poolVoraciousGreatshark,
     _poolVoraciousHatchling,
     _poolVorracBattlehorns,
+    _poolWalkingSponge,
     _poolWallOfLight,
     _poolWanderersTwig,
     _poolWarFalcon,
@@ -1450,6 +1463,7 @@ const shard: CardShard = {
     _poolWolfCoveVillager,
     _poolWreckingOgre,
     _poolWringFlesh,
+    _poolYavimayaGranger,
     _poolYawgmothDemon,
     _poolYokedOx,
     _poolZagothTriome,

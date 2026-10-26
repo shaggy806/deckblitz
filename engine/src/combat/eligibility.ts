@@ -372,6 +372,15 @@ function whyCannotBlockUncached(
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} (shadow)`;
   }
+  // Horsemanship (rule 702.31b): only by a creature with horsemanship; one
+  // with it blocks anything.
+  if (
+    objHasKeyword(state, registry, attackerId, "horsemanship") &&
+    !objHasKeyword(state, registry, blockerId, "horsemanship")
+  ) {
+    const attackerDef = registry.get(printedCardName(attacker));
+    return `${blockerDef.name} can't block ${attackerDef.name} (horsemanship)`;
+  }
   // Skulk (rule 702.118b): not by a creature with greater power, compared as
   // the block is declared — a change afterwards undoes nothing (the ruling).
   if (

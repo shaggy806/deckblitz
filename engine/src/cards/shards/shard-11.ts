@@ -57,6 +57,7 @@ import _poolBasrisLieutenant from "../pool/basris-lieutenant.js";
 import _poolBattleCry from "../pool/battle-cry.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
+import _poolBeastOfBurden from "../pool/beast-of-burden.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
 import _poolBelligerentOfTheBall from "../pool/belligerent-of-the-ball.js";
 import _poolBereavedSurvivor from "../pool/bereaved-survivor.js";
@@ -512,6 +513,7 @@ import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
+import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
 import _poolRuinousPath from "../pool/ruinous-path.js";
@@ -554,6 +556,7 @@ import _poolShipwreckPatrol from "../pool/shipwreck-patrol.js";
 import _poolShoreUp from "../pool/shore-up.js";
 import _poolShowOfValor from "../pool/show-of-valor.js";
 import _poolShriekTreblemaker from "../pool/shriek-treblemaker.js";
+import _poolShuCavalry from "../pool/shu-cavalry.js";
 import _poolSickleDancer from "../pool/sickle-dancer.js";
 import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
 import _poolSiegeMastodon from "../pool/siege-mastodon.js";
@@ -802,6 +805,7 @@ const shard: CardShard = {
     _poolBattleCry,
     _poolBattlemagesBracers,
     _poolBeaconOfUnrest,
+    _poolBeastOfBurden,
     _poolBehindTheScenes,
     _poolBelligerentOfTheBall,
     _poolBereavedSurvivor,
@@ -1257,6 +1261,7 @@ const shard: CardShard = {
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,
     _poolRockcasterPlatoon,
+    _poolRollingEarthquake,
     _poolRootriderFaun,
     _poolRuinCrab,
     _poolRuinousPath,
@@ -1299,6 +1304,7 @@ const shard: CardShard = {
     _poolShoreUp,
     _poolShowOfValor,
     _poolShriekTreblemaker,
+    _poolShuCavalry,
     _poolSickleDancer,
     _poolSidarKondoOfJamuraa,
     _poolSiegeMastodon,

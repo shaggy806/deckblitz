@@ -137,6 +137,7 @@ export const KEYWORDS = {
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
   changeling: "changeling", daybound: "daybound", nightbound: "nightbound", shadow: "shadow",
+  horsemanship: "horsemanship",
 };
 
 const COST = "((?:\\{[^}]+\\})+)";

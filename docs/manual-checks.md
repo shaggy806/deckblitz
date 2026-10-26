@@ -5505,3 +5505,9 @@ engine terms. A second thing to check is a second test.
 ### Desperate Ritual: splicing Spiritual Visit onto it
 - **Do:** Click Desperate Ritual in your hand and pick the way to cast it that says "splicing Spiritual Visit {W}".
 - **Expect:** All three lands are tapped for it. Spiritual Visit is shown revealed and stays in your hand. You get a 1/1 Spirit token and {R}{R}{R} in your mana pool.
+
+## Horsemanship (2026-10-26, Portal Three Kingdoms)
+
+### Shu Cavalry: only horsemanship blocks it
+- **Do:** Attack with Shu Cavalry and Grizzly Bears. Switch to Bob and declare blockers.
+- **Expect:** Serra Angel can block only the Bears (flying doesn't count). Wei Scout can block either attacker.

@@ -1691,7 +1691,7 @@ export interface LandReach {
 const NO_REACH: LandReach = { together: 0, castable: 0 };
 
 /** Keywords that get a Ring-bearer past most blockers (`bestRingBearer`). */
-const RING_BEARER_EVASION: readonly Keyword[] = ["flying", "unblockable", "menace", "shadow", "fear", "intimidate", "skulk"];
+const RING_BEARER_EVASION: readonly Keyword[] = ["flying", "unblockable", "menace", "shadow", "fear", "intimidate", "skulk", "horsemanship"];
 
 /** The look ahead's copy `from`, one step (or several) further on, keeping
  * the look's own events (`ControllerView.continueAfter`); `null` if the

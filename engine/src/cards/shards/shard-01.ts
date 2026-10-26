@@ -285,6 +285,7 @@ import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIreShaman from "../pool/ire-shaman.js";
+import _poolIronMaiden from "../pool/iron-maiden.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
@@ -536,6 +537,7 @@ import _poolSkyclaveShadowcat from "../pool/skyclave-shadowcat.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSlabHammer from "../pool/slab-hammer.js";
+import _poolSleepersGuile from "../pool/sleepers-guile.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSliversmith from "../pool/sliversmith.js";
 import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
@@ -594,6 +596,7 @@ import _poolTelethopter from "../pool/telethopter.js";
 import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
 import _poolTemporalMachinations from "../pool/temporal-machinations.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
+import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolInvasionOfZendikar,
     _poolInvokeDespair,
     _poolIreShaman,
+    _poolIronMaiden,
     _poolIronManArmoredAvenger,
     _poolIvoryCharm,
     _poolJaddiOffshoot,
@@ -1253,6 +1257,7 @@ const shard: CardShard = {
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
     _poolSlabHammer,
+    _poolSleepersGuile,
     _poolSliceFromTheShadows,
     _poolSliversmith,
     _poolSlogurkTheOverslime,
@@ -1311,6 +1316,7 @@ const shard: CardShard = {
     _poolTempleOfEpiphany,
     _poolTemporalMachinations,
     _poolTemptWithVengeance,
+    _poolTetheredSkirge,
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
     _poolThaliaTheSurvivor,

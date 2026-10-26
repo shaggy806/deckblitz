@@ -502,6 +502,7 @@ import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
+import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
@@ -603,6 +604,7 @@ import _poolSpirePatrol from "../pool/spire-patrol.js";
 import _poolSpiritBonds from "../pool/spirit-bonds.js";
 import _poolSpittingImage from "../pool/spitting-image.js";
 import _poolSplicersSkill from "../pool/splicers-skill.js";
+import _poolSpoilsOfVictory from "../pool/spoils-of-victory.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
@@ -1243,6 +1245,7 @@ const shard: CardShard = {
     _poolPterafractyl,
     _poolPugnaciousPugilist,
     _poolPumpkinBombardment,
+    _poolPurify,
     _poolPurpleCrystalCrab,
     _poolQuicksand,
     _poolQuietDisrepair,
@@ -1344,6 +1347,7 @@ const shard: CardShard = {
     _poolSpiritBonds,
     _poolSpittingImage,
     _poolSplicersSkill,
+    _poolSpoilsOfVictory,
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,

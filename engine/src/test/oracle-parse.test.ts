@@ -1100,6 +1100,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)";
     expect(face(engines).keywords).toEqual(["start-your-engines"]);
     expect(face("Start your engines!").keywords).toEqual(["start-your-engines"]);
+    // Horsemanship (rule 702.31), Portal Three Kingdoms' evasion keyword.
+    expect(face("Horsemanship (This creature can't be blocked except by creatures with horsemanship.)").keywords).toEqual([
+      "horsemanship",
+    ]);
     // A bonus of its own: the static, given the condition.
     const raider = face(`${engines}\nMax speed — This creature gets +1/+1 and has menace.`);
     expect(raider.static).toEqual([
