@@ -76,6 +76,7 @@ import _poolBorosGarrison from "../pool/boros-garrison.js";
 import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
 import _poolBreakneckRider from "../pool/breakneck-rider.js";
+import _poolBrigidHeroOfKinsbaile from "../pool/brigid-hero-of-kinsbaile.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolButchersGlee from "../pool/butchers-glee.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
@@ -92,6 +93,7 @@ import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
 import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
+import _poolChangelingHero from "../pool/changeling-hero.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
@@ -478,6 +480,7 @@ import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
@@ -567,6 +570,7 @@ import _poolStormSpirit from "../pool/storm-spirit.js";
 import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
+import _poolSummonTheSchool from "../pool/summon-the-school.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
@@ -776,6 +780,7 @@ const shard: CardShard = {
     _poolBraidssFrightfulReturn,
     _poolBrambleFamiliar,
     _poolBreakneckRider,
+    _poolBrigidHeroOfKinsbaile,
     _poolBrilliantPlan,
     _poolButchersGlee,
     _poolCabarettiInitiate,
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _poolCephalopodSentry,
     _poolChainflailCentipede,
     _poolChameleonMasterOfDisguise,
+    _poolChangelingHero,
     _poolChantOfTheSkifsang,
     _poolChromeCat,
     _poolCinderHellion,
@@ -1178,6 +1184,7 @@ const shard: CardShard = {
     _poolRodOfRuin,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
+    _poolRunedStalactite,
     _poolRustGoliath,
     _poolSagesKnowledge,
     _poolSaguMauler,
@@ -1267,6 +1274,7 @@ const shard: CardShard = {
     _poolStormscapeFamiliar,
     _poolStrengthOfThePack,
     _poolSultaiScavenger,
+    _poolSummonTheSchool,
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
     _poolSwashbucklersWhip,

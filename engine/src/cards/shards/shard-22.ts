@@ -105,6 +105,7 @@ import _poolCircularLogic from "../pool/circular-logic.js";
 import _poolCitizensArrest from "../pool/citizens-arrest.js";
 import _poolClashOfTitans from "../pool/clash-of-titans.js";
 import _poolClericOfChillDepths from "../pool/cleric-of-chill-depths.js";
+import _poolCloudgoatRanger from "../pool/cloudgoat-ranger.js";
 import _poolCoalGolem from "../pool/coal-golem.js";
 import _poolColdsteelHeart from "../pool/coldsteel-heart.js";
 import _poolCollectiveDefiance from "../pool/collective-defiance.js";
@@ -819,6 +820,7 @@ const shard: CardShard = {
     _poolCitizensArrest,
     _poolClashOfTitans,
     _poolClericOfChillDepths,
+    _poolCloudgoatRanger,
     _poolCoalGolem,
     _poolColdsteelHeart,
     _poolCollectiveDefiance,

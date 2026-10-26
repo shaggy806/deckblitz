@@ -225,6 +225,7 @@ import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
+import _poolGalepowderMage from "../pool/galepowder-mage.js";
 import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
 import _poolGargantuanGorilla from "../pool/gargantuan-gorilla.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
@@ -336,6 +337,7 @@ import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillerBees from "../pool/killer-bees.js";
 import _poolKirdApe from "../pool/kird-ape.js";
 import _poolKithkinBillyrider from "../pool/kithkin-billyrider.js";
+import _poolKnuckleboneWitch from "../pool/knucklebone-witch.js";
 import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKolaghanSkirmisher from "../pool/kolaghan-skirmisher.js";
 import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
@@ -359,6 +361,7 @@ import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolLorthosTheTidemaker from "../pool/lorthos-the-tidemaker.js";
+import _poolLysAlanaScarblade from "../pool/lys-alana-scarblade.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
@@ -634,6 +637,7 @@ import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
 import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
+import _poolTriclopeanSight from "../pool/triclopean-sight.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
 import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
@@ -686,6 +690,7 @@ import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolWortTheRaidmother from "../pool/wort-the-raidmother.js";
+import _poolWrensRunPackmaster from "../pool/wrens-run-packmaster.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYisanTheWandererBard from "../pool/yisan-the-wanderer-bard.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
@@ -937,6 +942,7 @@ const shard: CardShard = {
     _poolFrontlineDevastator,
     _poolGaeasProtector,
     _poolGaiusVanBaelsar,
+    _poolGalepowderMage,
     _poolGandalfsSanction,
     _poolGargantuanGorilla,
     _poolGarruksGorehorn,
@@ -1048,6 +1054,7 @@ const shard: CardShard = {
     _poolKillerBees,
     _poolKirdApe,
     _poolKithkinBillyrider,
+    _poolKnuckleboneWitch,
     _poolKoboldsOfKherKeep,
     _poolKolaghanSkirmisher,
     _poolKollTheForgemaster,
@@ -1071,6 +1078,7 @@ const shard: CardShard = {
     _poolLootDispute,
     _poolLootTheKeyToEverything,
     _poolLorthosTheTidemaker,
+    _poolLysAlanaScarblade,
     _poolManaCylix,
     _poolManaMatrix,
     _poolManifestationSage,
@@ -1346,6 +1354,7 @@ const shard: CardShard = {
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
     _poolTricksOfTheTrade,
+    _poolTriclopeanSight,
     _poolTundraWall,
     _poolTwilightProphet,
     _poolTwinbladeInvocation,
@@ -1398,6 +1407,7 @@ const shard: CardShard = {
     _poolWoollyMammoths,
     _poolWormholeSerpent,
     _poolWortTheRaidmother,
+    _poolWrensRunPackmaster,
     _poolYevaNaturesHerald,
     _poolYisanTheWandererBard,
     _poolYouFindTheVillainsLair,

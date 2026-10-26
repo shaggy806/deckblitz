@@ -163,6 +163,7 @@ import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
 import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
+import _poolDeathrender from "../pool/deathrender.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
 import _poolDefyDeath from "../pool/defy-death.js";
@@ -260,6 +261,7 @@ import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
 import _poolGlacialRevelation from "../pool/glacial-revelation.js";
+import _poolGlenElendraPranksters from "../pool/glen-elendra-pranksters.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
@@ -863,6 +865,7 @@ const shard: CardShard = {
     _poolDawnToDusk,
     _poolDealGoneBad,
     _poolDeathgrip,
+    _poolDeathrender,
     _poolDeeprootWarrior,
     _poolDefiantElf,
     _poolDefyDeath,
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
     _poolGlacialRevelation,
+    _poolGlenElendraPranksters,
     _poolGlimmerbell,
     _poolGlisterBairn,
     _poolGlorySeeker,

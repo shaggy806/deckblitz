@@ -364,6 +364,7 @@ import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMarshCasualties from "../pool/marsh-casualties.js";
+import _poolMarshFlitter from "../pool/marsh-flitter.js";
 import _poolMarshalOfZhalfir from "../pool/marshal-of-zhalfir.js";
 import _poolMastersManufactory from "../pool/masters-manufactory.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
@@ -1056,6 +1057,7 @@ const shard: CardShard = {
     _poolMalevolentWitchkite,
     _poolMarangRiverSkeleton,
     _poolMarshCasualties,
+    _poolMarshFlitter,
     _poolMarshalOfZhalfir,
     _poolMastersManufactory,
     _poolMaulfistSquad,

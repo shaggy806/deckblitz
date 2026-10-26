@@ -285,6 +285,7 @@ import _poolJanjeetSentry from "../pool/janjeet-sentry.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolJoustingLance from "../pool/jousting-lance.js";
+import _poolJudgeOfCurrents from "../pool/judge-of-currents.js";
 import _poolJuniperOrderAdvocate from "../pool/juniper-order-advocate.js";
 import _poolJunktroller from "../pool/junktroller.js";
 import _poolJuzamDjinn from "../pool/juzam-djinn.js";
@@ -664,6 +665,7 @@ import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
+import _poolWispmare from "../pool/wispmare.js";
 import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
@@ -972,6 +974,7 @@ const shard: CardShard = {
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
     _poolJoustingLance,
+    _poolJudgeOfCurrents,
     _poolJuniperOrderAdvocate,
     _poolJunktroller,
     _poolJuzamDjinn,
@@ -1351,6 +1354,7 @@ const shard: CardShard = {
     _poolWildwoodMentor,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
+    _poolWispmare,
     _poolWolfSkullShaman,
     _poolWorkshopElders,
     _poolWorldQueller,

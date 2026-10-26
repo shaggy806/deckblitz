@@ -11040,6 +11040,18 @@
   "effect:player-protection-from-color": {
    "family": "effect:temporary-player-effect",
    "example": "Faith's Shield's fateful hour: \"you gain protection from the color of your choice until end of turn\"."
+  },
+  "static:prohibit-cast-by-face": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Gaddock Teeg: the can't-cast check reads the card, not the face or half being cast (split cards, Adventures, MDFC back faces, bestow)."
+  },
+  "decision:choose-permanents-keeps-targets": {
+   "family": "decision:choose-permanent",
+   "example": "Crush Underfoot: \"choose a Giant creature you control. It deals damage equal to its power to target creature\" — choose-permanents replaces the targets its then sees."
+  },
+  "effect:delayed-trigger-fixed-amount": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Scattering Stroke: at your next main phase, add {C} equal to the countered spell's mana value — fixed when the delayed trigger is made."
   }
  }
 }

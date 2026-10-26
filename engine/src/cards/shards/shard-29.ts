@@ -264,6 +264,7 @@ import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
+import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
 import _poolHeartWolf from "../pool/heart-wolf.js";
@@ -464,6 +465,7 @@ import _poolRavenousBloodseeker from "../pool/ravenous-bloodseeker.js";
 import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
+import _poolReleaseTheAnts from "../pool/release-the-ants.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
 import _poolRendingFlame from "../pool/rending-flame.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
@@ -705,6 +707,7 @@ import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
+import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-white-flying.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
@@ -988,6 +991,7 @@ const shard: CardShard = {
     _poolGurmagNightwatch,
     _poolGyreEngineer,
     _poolHERBIELovableRobot,
+    _poolHamletbackGoliath,
     _poolHardenedAcademic,
     _poolHavocDevils,
     _poolHeartWolf,
@@ -1188,6 +1192,7 @@ const shard: CardShard = {
     _poolReconnaissance,
     _poolRedshiftRocketeerChief,
     _poolReignOfThePit,
+    _poolReleaseTheAnts,
     _poolRelicOfSauron,
     _poolRendingFlame,
     _poolRenegadeDemon,
@@ -1431,6 +1436,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelWarriorToken,
     _tokensBirdSoldierToken,
+    _tokensElementalToken44WhiteFlying,
     _tokensElementalToken53,
     _tokensEtheriumCellToken,
     _tokensFaerieDragonToken,

@@ -1,0 +1,711 @@
+{
+ "batch": "B189",
+ "status": "complete",
+ "ranks": "Lorwyn (LRW, 2007-10-12): the 90 most-played of the 170 left (the middle walk); clash (rule 701.30) and champion (rule 702.72) built; with ten Morningtide cards batch 186 blocked on clash or champion (eight authored, a spell returning itself to its owner's hand as it resolves built for five of them)",
+ "authored": [
+  {
+   "name": "Treefolk Harbinger",
+   "files": [
+    "engine/src/cards/pool/treefolk-harbinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brion Stoutarm",
+   "files": [
+    "engine/src/cards/pool/brion-stoutarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incendiary Command",
+   "files": [
+    "engine/src/cards/pool/incendiary-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surgespanner",
+   "files": [
+    "engine/src/cards/pool/surgespanner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shapesharer",
+   "files": [
+    "engine/src/cards/pool/shapesharer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hamletback Goliath",
+   "files": [
+    "engine/src/cards/pool/hamletback-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merrow Harbinger",
+   "files": [
+    "engine/src/cards/pool/merrow-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wanderwine Prophets",
+   "files": [
+    "engine/src/cards/pool/wanderwine-prophets.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eyeblight's Ending",
+   "files": [
+    "engine/src/cards/pool/eyeblights-ending.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hoofprints of the Stag",
+   "files": [
+    "engine/src/cards/pool/hoofprints-of-the-stag.ts",
+    "engine/src/cards/tokens/elemental-token-4-4-white-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hoarder's Greed",
+   "files": [
+    "engine/src/cards/pool/hoarders-greed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fallowsage",
+   "files": [
+    "engine/src/cards/pool/fallowsage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mad Auntie",
+   "files": [
+    "engine/src/cards/pool/mad-auntie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auntie's Hovel",
+   "files": [
+    "engine/src/cards/pool/aunties-hovel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistbind Clique",
+   "files": [
+    "engine/src/cards/pool/mistbind-clique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Harbinger",
+   "files": [
+    "engine/src/cards/pool/boggart-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deathrender",
+   "files": [
+    "engine/src/cards/pool/deathrender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pestermite",
+   "files": [
+    "engine/src/cards/pool/pestermite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Tauntings",
+   "files": [
+    "engine/src/cards/pool/faerie-tauntings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Trickery",
+   "files": [
+    "engine/src/cards/pool/faerie-trickery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aethersnipe",
+   "files": [
+    "engine/src/cards/pool/aethersnipe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Amphitheater",
+   "files": [
+    "engine/src/cards/pool/ancient-amphitheater.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wren's Run Packmaster",
+   "files": [
+    "engine/src/cards/pool/wrens-run-packmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashling the Pilgrim",
+   "files": [
+    "engine/src/cards/pool/ashling-the-pilgrim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Footbottom Feast",
+   "files": [
+    "engine/src/cards/pool/footbottom-feast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broken Ambitions",
+   "files": [
+    "engine/src/cards/pool/broken-ambitions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blades of Velis Vel",
+   "files": [
+    "engine/src/cards/pool/blades-of-velis-vel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protective Bubble",
+   "files": [
+    "engine/src/cards/pool/protective-bubble.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nath of the Gilt-Leaf",
+   "files": [
+    "engine/src/cards/pool/nath-of-the-gilt-leaf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whirlpool Whelm",
+   "files": [
+    "engine/src/cards/pool/whirlpool-whelm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captivating Glance",
+   "files": [
+    "engine/src/cards/pool/captivating-glance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread",
+   "files": [
+    "engine/src/cards/pool/dread.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lys Alana Scarblade",
+   "files": [
+    "engine/src/cards/pool/lys-alana-scarblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galepowder Mage",
+   "files": [
+    "engine/src/cards/pool/galepowder-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brigid, Hero of Kinsbaile",
+   "files": [
+    "engine/src/cards/pool/brigid-hero-of-kinsbaile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Changeling Berserker",
+   "files": [
+    "engine/src/cards/pool/changeling-berserker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wings of Velis Vel",
+   "files": [
+    "engine/src/cards/pool/wings-of-velis-vel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderwine Hub",
+   "files": [
+    "engine/src/cards/pool/wanderwine-hub.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stinkdrinker Daredevil",
+   "files": [
+    "engine/src/cards/pool/stinkdrinker-daredevil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunrise Sovereign",
+   "files": [
+    "engine/src/cards/pool/sunrise-sovereign.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boggart Mob",
+   "files": [
+    "engine/src/cards/pool/boggart-mob.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Runed Stalactite",
+   "files": [
+    "engine/src/cards/pool/runed-stalactite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thundercloud Shaman",
+   "files": [
+    "engine/src/cards/pool/thundercloud-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weed Strangle",
+   "files": [
+    "engine/src/cards/pool/weed-strangle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knucklebone Witch",
+   "files": [
+    "engine/src/cards/pool/knucklebone-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ringskipper",
+   "files": [
+    "engine/src/cards/pool/ringskipper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triclopean Sight",
+   "files": [
+    "engine/src/cards/pool/triclopean-sight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wispmare",
+   "files": [
+    "engine/src/cards/pool/wispmare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Changeling Titan",
+   "files": [
+    "engine/src/cards/pool/changeling-titan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Peppersmoke",
+   "files": [
+    "engine/src/cards/pool/peppersmoke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Masked Admirers",
+   "files": [
+    "engine/src/cards/pool/masked-admirers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Harbinger",
+   "files": [
+    "engine/src/cards/pool/giant-harbinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Poplar Shaman",
+   "files": [
+    "engine/src/cards/pool/black-poplar-shaman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Purity",
+   "files": [
+    "engine/src/cards/pool/purity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marsh Flitter",
+   "files": [
+    "engine/src/cards/pool/marsh-flitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caterwauling Boggart",
+   "files": [
+    "engine/src/cards/pool/caterwauling-boggart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paperfin Rascal",
+   "files": [
+    "engine/src/cards/pool/paperfin-rascal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudthresher",
+   "files": [
+    "engine/src/cards/pool/cloudthresher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Militia's Pride",
+   "files": [
+    "engine/src/cards/pool/militias-pride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Changeling Hero",
+   "files": [
+    "engine/src/cards/pool/changeling-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootgrapple",
+   "files": [
+    "engine/src/cards/pool/rootgrapple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incremental Growth",
+   "files": [
+    "engine/src/cards/pool/incremental-growth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glen Elendra Pranksters",
+   "files": [
+    "engine/src/cards/pool/glen-elendra-pranksters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudgoat Ranger",
+   "files": [
+    "engine/src/cards/pool/cloudgoat-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Judge of Currents",
+   "files": [
+    "engine/src/cards/pool/judge-of-currents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Harbinger",
+   "files": [
+    "engine/src/cards/pool/kithkin-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Makeshift Mannequin",
+   "files": [
+    "engine/src/cards/pool/makeshift-mannequin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pollen Lullaby",
+   "files": [
+    "engine/src/cards/pool/pollen-lullaby.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon the School",
+   "files": [
+    "engine/src/cards/pool/summon-the-school.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Mourncaller",
+   "files": [
+    "engine/src/cards/pool/kithkin-mourncaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spring Cleaning",
+   "files": [
+    "engine/src/cards/pool/spring-cleaning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nova Chaser",
+   "files": [
+    "engine/src/cards/pool/nova-chaser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briarhorn",
+   "files": [
+    "engine/src/cards/pool/briarhorn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pulling Teeth",
+   "files": [
+    "engine/src/cards/pool/pulling-teeth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Release the Ants",
+   "files": [
+    "engine/src/cards/pool/release-the-ants.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Research the Deep",
+   "files": [
+    "engine/src/cards/pool/research-the-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revive the Fallen",
+   "files": [
+    "engine/src/cards/pool/revive-the-fallen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Titan's Revenge",
+   "files": [
+    "engine/src/cards/pool/titans-revenge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lightning Crafter",
+   "files": [
+    "engine/src/cards/pool/lightning-crafter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Supreme Exemplar",
+   "files": [
+    "engine/src/cards/pool/supreme-exemplar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unstoppable Ash",
+   "files": [
+    "engine/src/cards/pool/unstoppable-ash.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Gaddock Teeg",
+   "needs": [
+    "static:prohibit-cast-by-face"
+   ],
+   "why": "the can't-cast check reads the card's own characteristics, not the face or half being cast: Fire // Ice's half (mana value 2 per its ruling) would be stopped, and a noncreature Adventure, MDFC back face or bestowed Aura of mana value 4+ on a creature card wrongly allowed"
+  },
+  {
+   "name": "Arbiter of Knollridge",
+   "needs": [
+    "amount:highest-life-total"
+   ],
+   "why": "no amount for the highest life total among all players"
+  },
+  {
+   "name": "Ajani Goldmane",
+   "needs": [
+    "static:cda-life-total"
+   ],
+   "why": "the −6 Avatar's power and toughness are each equal to your life total: no CDA reads a life total"
+  },
+  {
+   "name": "Cairn Wanderer",
+   "needs": [
+    "static:gain-abilities-from-graveyard"
+   ],
+   "why": "keywords copied from creature cards in all graveyards — each protection and every landwalk — have no static"
+  },
+  {
+   "name": "Silvergill Adept",
+   "needs": [
+    "cost:additional-cost-reveal"
+   ],
+   "why": "\"reveal a Merfolk card from your hand or pay {3}\": no reveal-from-hand additional cost (behold also allows a Merfolk you control, and exiles)"
+  },
+  {
+   "name": "Sygg, River Guide",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "nothing grants protection from a chosen colour until end of turn"
+  },
+  {
+   "name": "Colfenor's Plans",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "\"skip your draw step\", and the face-down exile you may look at and play from while it stays"
+  },
+  {
+   "name": "Shields of Velis Vel",
+   "needs": [
+    "effect:gain-lose-all-creature-types"
+   ],
+   "why": "every creature type can be granted to one target (`add-types`), not to the creatures a target player controls"
+  },
+  {
+   "name": "Guile",
+   "needs": [
+    "static:cant-be-blocked-except-by-n",
+    "effect:counter-exile-instead"
+   ],
+   "why": "\"can't be blocked except by three or more creatures\" (only menace's two), and \"counter\" replaced by exile-and-play-free"
+  },
+  {
+   "name": "Dauntless Dourbark",
+   "needs": [
+    "bug:cda-sum-of-counts"
+   ],
+   "why": "P/T = Forests plus Treefolk (a Forest Treefolk counted twice, the ruling): `setBasePtFromCount` takes one count"
+  },
+  {
+   "name": "Chandra Nalaar",
+   "needs": [
+    "cost:loyalty-x"
+   ],
+   "why": "its −X loyalty ability: `loyaltyCost` is a fixed number"
+  },
+  {
+   "name": "Crush Underfoot",
+   "needs": [
+    "decision:choose-permanents-keeps-targets"
+   ],
+   "why": "\"choose a Giant creature you control\" with `choose-permanents` replaces the spell's targets, so its `then` can't reach target creature"
+  },
+  {
+   "name": "Ashling's Prerogative",
+   "needs": [
+    "decision:choose-odd-or-even"
+   ],
+   "why": "no odd/even choice as it enters, nor a mana-value parity filter"
+  },
+  {
+   "name": "Fire-Belly Changeling",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "\"activate no more than twice each turn\": only once-per-turn exists"
+  },
+  {
+   "name": "Streambed Aquitects",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "\"target land becomes an Island until end of turn\" sets its land type (rule 305.7); `add-types` only adds, and `animate`'s set needs a P/T"
+  },
+  {
+   "name": "Thoughtweft Trio",
+   "needs": [
+    "static:can-block-any-number"
+   ],
+   "why": "\"can block any number of creatures\" — no static lets a creature block more than one (rule 509.1a)"
+  },
+  {
+   "name": "Scattering Stroke",
+   "needs": [
+    "effect:delayed-trigger-fixed-amount"
+   ],
+   "why": "the delayed \"add {C} equal to that spell's mana value\" at your next main phase must keep the countered spell's mana value; a delayed trigger has no amount fixed as it's made"
+  },
+  {
+   "name": "Fire Juggler",
+   "needs": [
+    "effect:damage-each-creature-blocking-source"
+   ],
+   "why": "clash is built; \"deals 4 damage to each creature blocking it\" has no filter for the creatures blocking the source"
+  },
+  {
+   "name": "Redeem the Lost",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "clash and its self-return are built; protection from the color of your choice until end of turn isn't"
+  }
+ ]
+}

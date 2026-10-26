@@ -80,6 +80,7 @@ import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
+import _poolChangelingBerserker from "../pool/changeling-berserker.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
@@ -261,6 +262,7 @@ import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
 import _poolHidetsuguDevouringChaos from "../pool/hidetsugu-devouring-chaos.js";
 import _poolHighSpeedHoverbike from "../pool/high-speed-hoverbike.js";
+import _poolHoofprintsOfTheStag from "../pool/hoofprints-of-the-stag.js";
 import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
@@ -471,6 +473,7 @@ import _poolRockBasilisk from "../pool/rock-basilisk.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
 import _poolRootSliver from "../pool/root-sliver.js";
+import _poolRootgrapple from "../pool/rootgrapple.js";
 import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
 import _poolRubblebeltRunner from "../pool/rubblebelt-runner.js";
@@ -660,11 +663,13 @@ import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
+import _poolWhirlpoolWhelm from "../pool/whirlpool-whelm.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
 import _poolWildGuess from "../pool/wild-guess.js";
 import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
+import _poolWingsOfVelisVel from "../pool/wings-of-velis-vel.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
@@ -774,6 +779,7 @@ const shard: CardShard = {
     _poolCelestialPrism,
     _poolChainersEdict,
     _poolChakramRetriever,
+    _poolChangelingBerserker,
     _poolChardalynDragon,
     _poolChasmDrake,
     _poolChillOfTheGrave,
@@ -955,6 +961,7 @@ const shard: CardShard = {
     _poolHerosDownfall,
     _poolHidetsuguDevouringChaos,
     _poolHighSpeedHoverbike,
+    _poolHoofprintsOfTheStag,
     _poolHorizonOfProgress,
     _poolHornOfGreed,
     _poolHornOfValhalla,
@@ -1165,6 +1172,7 @@ const shard: CardShard = {
     _poolRohgahhKherKeepOverlord,
     _poolRoilmagesTrick,
     _poolRootSliver,
+    _poolRootgrapple,
     _poolRowanFearlessSparkmage,
     _poolRoyalTreatment,
     _poolRubblebeltRunner,
@@ -1354,11 +1362,13 @@ const shard: CardShard = {
     _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,
     _poolWheelOfFortune,
+    _poolWhirlpoolWhelm,
     _poolWhispersilkCloak,
     _poolWhiteGloveGourmand,
     _poolWickedVisitor,
     _poolWildGuess,
     _poolWildwoodTracker,
+    _poolWingsOfVelisVel,
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,

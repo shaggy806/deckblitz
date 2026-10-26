@@ -428,6 +428,7 @@ import _poolOverwhelmingForces from "../pool/overwhelming-forces.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
+import _poolPaperfinRascal from "../pool/paperfin-rascal.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
@@ -1138,6 +1139,7 @@ const shard: CardShard = {
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,
     _poolPantlazaSunFavored,
+    _poolPaperfinRascal,
     _poolPatagiaGolem,
     _poolPathToTheFestival,
     _poolPathbreakerIbex,

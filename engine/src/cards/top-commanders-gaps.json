@@ -448,7 +448,9 @@
   "keyword:soulbond",
   "cost:buyback-non-mana",
   "cost:discard-at-random",
-  "target:opponent-compared"
+  "target:opponent-compared",
+  "mechanic:clash",
+  "keyword:champion"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

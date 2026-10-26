@@ -74,6 +74,7 @@ import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
 import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
 import _poolBogRaiders from "../pool/bog-raiders.js";
+import _poolBoggartMob from "../pool/boggart-mob.js";
 import _poolBoonOfTheSpiritRealm from "../pool/boon-of-the-spirit-realm.js";
 import _poolBornToDrive from "../pool/born-to-drive.js";
 import _poolBottomlessPool from "../pool/bottomless-pool.js";
@@ -95,6 +96,7 @@ import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainRipleyVance from "../pool/captain-ripley-vance.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
+import _poolCaptivatingGlance from "../pool/captivating-glance.js";
 import _poolCarapace from "../pool/carapace.js";
 import _poolCarefulCultivation from "../pool/careful-cultivation.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
@@ -511,6 +513,7 @@ import _poolRenegadeSilent from "../pool/renegade-silent.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRescueTheFoal from "../pool/rescue-the-foal.js";
+import _poolResearchTheDeep from "../pool/research-the-deep.js";
 import _poolResoundingRoar from "../pool/resounding-roar.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
@@ -821,6 +824,7 @@ const shard: CardShard = {
     _poolBloodthornTaunter,
     _poolBloodthroneVampire,
     _poolBogRaiders,
+    _poolBoggartMob,
     _poolBoonOfTheSpiritRealm,
     _poolBornToDrive,
     _poolBottomlessPool,
@@ -842,6 +846,7 @@ const shard: CardShard = {
     _poolCandelabraOfTawnos,
     _poolCaptainRipleyVance,
     _poolCaptainsCall,
+    _poolCaptivatingGlance,
     _poolCarapace,
     _poolCarefulCultivation,
     _poolCargoShip,
@@ -1258,6 +1263,7 @@ const shard: CardShard = {
     _poolRepeatOffender,
     _poolReputableMerchant,
     _poolRescueTheFoal,
+    _poolResearchTheDeep,
     _poolResoundingRoar,
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,

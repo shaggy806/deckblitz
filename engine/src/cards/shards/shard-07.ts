@@ -21,6 +21,7 @@ import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
 import _poolAncestralMemories from "../pool/ancestral-memories.js";
+import _poolAncientAmphitheater from "../pool/ancient-amphitheater.js";
 import _poolAntagonize from "../pool/antagonize.js";
 import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
@@ -160,6 +161,7 @@ import _poolDragonstormForecaster from "../pool/dragonstorm-forecaster.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
 import _poolDrakeHatcher from "../pool/drake-hatcher.js";
 import _poolDreadRider from "../pool/dread-rider.js";
+import _poolDread from "../pool/dread.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
@@ -488,6 +490,7 @@ import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRidersOfRohan from "../pool/riders-of-rohan.js";
 import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
+import _poolRingskipper from "../pool/ringskipper.js";
 import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
@@ -760,6 +763,7 @@ const shard: CardShard = {
     _poolAlteredEgo,
     _poolAmbushGigapede,
     _poolAncestralMemories,
+    _poolAncientAmphitheater,
     _poolAntagonize,
     _poolAntiquitiesOnTheLoose,
     _poolAprilOneilKunoichiTrainee,
@@ -899,6 +903,7 @@ const shard: CardShard = {
     _poolDragonstorm,
     _poolDrakeHatcher,
     _poolDreadRider,
+    _poolDread,
     _poolDreadmalkin,
     _poolDreamdrinkerVampire,
     _poolDruidOfTheAnima,
@@ -1227,6 +1232,7 @@ const shard: CardShard = {
     _poolRhoxVeteran,
     _poolRidersOfRohan,
     _poolRingsOfBrighthearth,
+    _poolRingskipper,
     _poolRoadRuin,
     _poolRoarOfChallenge,
     _poolRoguesGloves,

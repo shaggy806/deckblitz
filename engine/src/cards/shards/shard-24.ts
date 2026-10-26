@@ -65,6 +65,7 @@ import _poolBirthingHulk from "../pool/birthing-hulk.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
 import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
+import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
@@ -199,6 +200,7 @@ import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
+import _poolFaerieTrickery from "../pool/faerie-trickery.js";
 import _poolFatedRetribution from "../pool/fated-retribution.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
 import _poolFeedTheCauldron from "../pool/feed-the-cauldron.js";
@@ -417,8 +419,10 @@ import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
 import _poolPrimalOrder from "../pool/primal-order.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
+import _poolProtectiveBubble from "../pool/protective-bubble.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
+import _poolPullingTeeth from "../pool/pulling-teeth.js";
 import _poolPuncturingBlow from "../pool/puncturing-blow.js";
 import _poolPuncturingLight from "../pool/puncturing-light.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
@@ -554,6 +558,7 @@ import _poolSultaiRunemark from "../pool/sultai-runemark.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
 import _poolSunkenCity from "../pool/sunken-city.js";
+import _poolSupremeExemplar from "../pool/supreme-exemplar.js";
 import _poolSupremeWill from "../pool/supreme-will.js";
 import _poolSurgehackerMech from "../pool/surgehacker-mech.js";
 import _poolSuspensionField from "../pool/suspension-field.js";
@@ -768,6 +773,7 @@ const shard: CardShard = {
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,
     _poolBlackOakOfOdunos,
+    _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
     _poolBlinkOfAnEye,
@@ -902,6 +908,7 @@ const shard: CardShard = {
     _poolExtusOriqOverlord,
     _poolEyeOfJace,
     _poolEzioBrashNovice,
+    _poolFaerieTrickery,
     _poolFatedRetribution,
     _poolFatefulTempest,
     _poolFeedTheCauldron,
@@ -1120,8 +1127,10 @@ const shard: CardShard = {
     _poolPrideOfThePerfect,
     _poolPrimalOrder,
     _poolPrologueToPhyresis,
+    _poolProtectiveBubble,
     _poolProwlingFelidar,
     _poolPullFromTheGrave,
+    _poolPullingTeeth,
     _poolPuncturingBlow,
     _poolPuncturingLight,
     _poolPurifyTheGrave,
@@ -1257,6 +1266,7 @@ const shard: CardShard = {
     _poolSunbladeAngel,
     _poolSunblastAngel,
     _poolSunkenCity,
+    _poolSupremeExemplar,
     _poolSupremeWill,
     _poolSurgehackerMech,
     _poolSuspensionField,

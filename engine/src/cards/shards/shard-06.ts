@@ -88,8 +88,10 @@ import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
 import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
+import _poolBriarhorn from "../pool/briarhorn.js";
 import _poolBrimstoneMage from "../pool/brimstone-mage.js";
 import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
+import _poolBrionStoutarm from "../pool/brion-stoutarm.js";
 import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
 import _poolBruvacTheGrandiloquent from "../pool/bruvac-the-grandiloquent.js";
 import _poolBulwarkGiant from "../pool/bulwark-giant.js";
@@ -624,6 +626,7 @@ import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
+import _poolUnstoppableAsh from "../pool/unstoppable-ash.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
 import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
@@ -649,6 +652,7 @@ import _poolWarmindInfantry from "../pool/warmind-infantry.js";
 import _poolWarrant from "../pool/warrant.js";
 import _poolWaterknot from "../pool/waterknot.js";
 import _poolWeakstone from "../pool/weakstone.js";
+import _poolWeedStrangle from "../pool/weed-strangle.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -787,8 +791,10 @@ const shard: CardShard = {
     _poolBountifulPromenade,
     _poolBrazenUpstart,
     _poolBriarberryCohort,
+    _poolBriarhorn,
     _poolBrimstoneMage,
     _poolBrimstoneVandal,
+    _poolBrionStoutarm,
     _poolBroodbirthViper,
     _poolBruvacTheGrandiloquent,
     _poolBulwarkGiant,
@@ -1323,6 +1329,7 @@ const shard: CardShard = {
     _poolUnfinishedBusiness,
     _poolUnnerve,
     _poolUnrulyMob,
+    _poolUnstoppableAsh,
     _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,
     _poolUrgorosTheEmptyOne,
@@ -1348,6 +1355,7 @@ const shard: CardShard = {
     _poolWarrant,
     _poolWaterknot,
     _poolWeakstone,
+    _poolWeedStrangle,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

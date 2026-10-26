@@ -17824,7 +17824,8 @@ export class Game {
       mark !== undefined &&
       object.owner === mark.player &&
       (adventure || (!def.shuffleIntoLibraryOnResolve && !def.exileOnResolve)) &&
-      !this.boughtBack(object)
+      !this.boughtBack(object) &&
+      object.returnToHandAsItResolves !== true
     ) {
       const competing =
         adventure ||
@@ -17873,9 +17874,10 @@ export class Game {
         this.shuffleLibraryOf(object.owner);
       } else if (this.rebounds(object)) {
         this.reboundAsItResolves(id);
-      } else if (this.boughtBack(object)) {
-        // Buyback (rule 702.27a): into its owner's hand as it resolves. Cast
-        // with flashback too, it's exiled instead (`moveObject`, 702.34a).
+      } else if (this.boughtBack(object) || object.returnToHandAsItResolves === true) {
+        // Buyback (rule 702.27a), or the spell's own "return ~ to its
+        // owner's hand": into its owner's hand as it resolves. Cast with
+        // flashback too, it's exiled instead (`moveObject`, 702.34a).
         this.moveObject(id, "hand");
       } else {
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
@@ -30491,7 +30493,12 @@ export class Game {
       // down is a spell a triggered ability of its own is acting on ("when
       // you cast this spell, …"), which is fair game.
       const stack = this.state.zones.shared.stack;
-      if (id === resolving && stack[stack.length - 1] === id) return;
+      if (id === resolving && stack[stack.length - 1] === id) {
+        // "Return ~ to its owner's hand" (Release the Ants): it goes there
+        // as the last part of its resolution, instead of the graveyard.
+        object.returnToHandAsItResolves = true;
+        return;
+      }
       if (object.isCopy) {
         const index = stack.indexOf(id);
         if (index >= 0) stack.splice(index, 1);
@@ -37115,6 +37122,7 @@ export class Game {
     object.graveyardCastTypesUsedThisTurn = undefined;
     object.exileIfWouldGoToGraveyard = undefined;
     object.exileAsItResolves = undefined;
+    object.returnToHandAsItResolves = undefined;
     // Its "exile it if it would leave" replacement was about the permanent
     // that just left (rule 400.7).
     object.exileIfItWouldLeave = undefined;

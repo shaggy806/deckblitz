@@ -376,6 +376,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.won);
     v.child(n.lost);
   },
+  clash: (n, v) => {
+    v.child(n.won);
+    v.child(n.lost);
+    v.child(n.repeat);
+  },
   prohibit: (n, v) => {
     v.touch(n.target, "harm", MINOR);
     v.touch(n.who, "harm", MINOR);

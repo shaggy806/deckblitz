@@ -1951,8 +1951,11 @@ export type EffectSpec =
        *   (rule 701.5): "can't be countered" doesn't stop it, and nothing
        *   that watches for a spell being countered sees it. A copy of a spell
        *   ceases to exist instead (rule 707.10c); an ability on the stack
-       *   isn't a card and is left alone, and so is the spell that is itself
-       *   resolving.
+       *   isn't a card and is left alone. With `"source"`, the spell that is
+       *   itself resolving — "return Release the Ants to its owner's hand"
+       *   — goes to its owner's hand instead of their graveyard as the final
+       *   part of its resolution (rule 608.2n), as a bought-back spell does
+       *   (exiled instead if it was cast with flashback).
        *
        * A commander returned to hand from any of these may go to the command
        * zone instead (rule 903.9b), exactly like a bounced one.
@@ -2418,7 +2421,10 @@ export type EffectSpec =
       readonly kind: "mill";
       /** A target slot holding a player, or a scope — `"you"` (Aftermath
        * Analyst) or `"each-opponent"` (Hope Estheim: "each opponent mills X
-       * cards"), a per-player amount read for each. */
+       * cards"), a per-player amount read for each. A slot holding an
+       * object is "**its controller** mills …" (Broken Ambitions' "that
+       * spell's controller mills four cards"): whoever controls it, or did
+       * as it last existed (rule 608.2h). */
       readonly target: number | PlayerScope;
       readonly amount: EffectAmount;
     }
@@ -3477,6 +3483,41 @@ export type EffectSpec =
       readonly won?: EffectSpec;
       readonly lost?: EffectSpec;
       readonly untilLose?: boolean;
+    }
+  | {
+      /**
+       * "Clash with an opponent. If you win, [won]" (rule 701.30, Lorwyn
+       * block): the effect's controller chooses an opponent (701.30b — not a
+       * target; with one opponent nobody is asked), then both reveal the top
+       * card of their library (701.30c), and each, in APNAP order, chooses
+       * to leave it on top or put it on the bottom. You win if you revealed
+       * a card with a greater mana value than theirs (701.30d) — an empty
+       * library reveals nothing, which can't win, and loses to any card.
+       * `won` / `lost` apply after both cards have moved, with the
+       * `"that-player"` scope naming the opponent clashed with (Captivating
+       * Glance's "Otherwise, that player gains control of enchanted
+       * creature"). (No "whenever you clash" trigger yet: Sylvan Echoes and
+       * Rebellion of the Flamekin wait on one.)
+       *
+       * `repeat` is "if you win, repeat this process" (Hoarder's Greed:
+       * "You lose 2 life and draw two cards, then clash with an opponent"):
+       * on a win, `repeat` (the rest of the process) applies and then the
+       * clash again, until a clash is lost.
+       */
+      readonly kind: "clash";
+      readonly won?: EffectSpec;
+      readonly lost?: EffectSpec;
+      readonly repeat?: EffectSpec;
+      /** Engine-built, never authored: the opponent chosen, and — once the
+       * cards are revealed — whether you won and who is still to choose
+       * where their card goes. */
+      readonly opponent?: PlayerId;
+      readonly progress?: {
+        readonly won: boolean;
+        readonly toAsk: readonly { readonly player: PlayerId; readonly card: ObjectId }[];
+      };
+      /** Engine-built: how many clashes `repeat` has already made. */
+      readonly round?: number;
     }
   | {
       /**
@@ -7639,6 +7680,90 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
   ctx.finishVoting();
 }
 
+/** How many times "if you win, repeat this process" clashes at most — a
+ * guard, like `MAX_FLIPS`; a library runs out long before. */
+const MAX_CLASHES = 200;
+
+/**
+ * A `clash` (rule 701.30): choose the opponent, reveal both top cards, then
+ * ask each clashing player in APNAP order whether theirs goes on the bottom
+ * — each question parks the rest as a copy carrying its `progress` — and
+ * apply `won` or `lost` once both have chosen.
+ */
+function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: ResolutionContext): void {
+  if (spec.opponent === undefined) {
+    // "Choose an opponent" (701.30b): not a target; asked only among several.
+    const opponents = ctx.playersInScope("each-opponent");
+    if (opponents.length === 0) return;
+    if (opponents.length === 1) {
+      applyClash({ ...spec, opponent: opponents[0] }, ctx);
+      return;
+    }
+    ctx.chooseModes(
+      1,
+      1,
+      opponents.map((player) => ({
+        text: `Clash with ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
+        effect: { ...spec, opponent: player },
+      })),
+    );
+    return;
+  }
+  if (!ctx.playersInScope("each-player").includes(spec.opponent)) return;
+  const about = ctx.aboutPlayer(spec.opponent);
+  let progress = spec.progress;
+  if (progress === undefined) {
+    // Both reveal at the same time (701.30c); the higher mana value wins
+    // (701.30d) — read now, while the cards are still the revealed ones.
+    const clashing = ctx.playersInScope("each-player").filter((p) => p === ctx.controller || p === spec.opponent);
+    const revealed = clashing.map((player) => ({ player, card: ctx.libraryTop(player, 1, true)[0] }));
+    const valueOf = (player: PlayerId): number | undefined => {
+      const card = revealed.find((r) => r.player === player)?.card;
+      return card === undefined ? undefined : ctx.manaValueOf({ kind: "object", object: card });
+    };
+    const mine = valueOf(ctx.controller);
+    const theirs = valueOf(spec.opponent);
+    progress = {
+      won: mine !== undefined && (theirs === undefined || mine > theirs),
+      toAsk: revealed.flatMap((r) => (r.card === undefined ? [] : [{ player: r.player, card: r.card }])),
+    };
+  }
+  let toAsk = progress.toAsk;
+  while (toAsk.length > 0) {
+    const { card } = toAsk[0];
+    toAsk = toAsk.slice(1);
+    const parked = about.parkedCount();
+    const pendingBefore = about.decisionPending();
+    // Its owner chooses: leave it on top, or put it on the bottom (701.30a).
+    applyEffectSpec(
+      {
+        kind: "each-player-may",
+        who: { ownerOfTarget: 0 },
+        choices: [
+          { text: "Leave it on top of your library", effect: { kind: "sequence", effects: [] } },
+          { text: "Put it on the bottom of your library", effect: { kind: "put-on-library", target: 0, position: "bottom" } },
+        ],
+      },
+      about.withTargets([{ kind: "object", object: card }]),
+    );
+    if (!pendingBefore && about.decisionPending()) {
+      about.resumeAfterDecisions({ ...spec, progress: { ...progress, toAsk } }, parked);
+      return;
+    }
+  }
+  const branch = progress.won ? spec.won : spec.lost;
+  // "Repeat this process": the rest of it, then a fresh clash — an opponent
+  // chosen again, new cards revealed.
+  const { progress: _done, opponent: _with, ...fresh } = spec;
+  const round = (spec.round ?? 0) + 1;
+  const again: EffectSpec | undefined =
+    progress.won && spec.repeat !== undefined && round < MAX_CLASHES
+      ? { kind: "sequence", effects: [spec.repeat, { ...fresh, round }] }
+      : undefined;
+  const steps = [branch, again].filter((s): s is EffectSpec => s !== undefined);
+  if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, about);
+}
+
 /** A `for-each-voted`: the players or permanents the vote was for, by how
  * many votes each got. */
 function applyForEachVoted(spec: Extract<EffectSpec, { kind: "for-each-voted" }>, ctx: ResolutionContext): void {
@@ -9426,8 +9551,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "mill": {
-      for (const target of scopedOrTargetedPlayers(spec.target, ctx)) {
-        ctx.mill(target, amountValue(spec.amount, ctx, target.kind === "player" ? target.player : undefined));
+      for (const slot of scopedOrTargetedPlayers(spec.target, ctx)) {
+        const who = slot.kind === "player" ? slot.player : ctx.controllerOf(slot);
+        if (who === undefined) continue;
+        const target: TargetRef = { kind: "player", player: who };
+        ctx.mill(target, amountValue(spec.amount, ctx, who));
       }
       return;
     }
@@ -10087,6 +10215,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "clash":
+      applyClash(spec, ctx);
+      return;
     case "prohibit": {
       if (spec.target !== undefined) {
         const target = resolveEffectTarget(spec.target, ctx);

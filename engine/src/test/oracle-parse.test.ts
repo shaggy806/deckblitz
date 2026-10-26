@@ -1388,6 +1388,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(elder.todo).toHaveLength(1);
   });
 
+  it("champion (rule 702.72a): its two linked triggers", () => {
+    const hero = face("Champion a creature (reminder)\nLifelink", "Creature — Shapeshifter");
+    expect(hero.todo).toEqual([]);
+    expect(hero.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "leaves-battlefield", who: "self" },
+    ]);
+    expect(hero.triggered[0].effect).toMatchObject({ kind: "conditional", condition: { filter: { type: "creature" } } });
+    const chaser = face("Trample\nChampion an Elemental (reminder)", "Creature — Elemental Warrior");
+    expect(chaser.triggered[0].effect).toMatchObject({ condition: { filter: { subtype: "Elemental" } } });
+  });
+
   it("surge (rule 702.117a) and 'if that creature would die this turn, exile it instead' (rule 614.1a)", () => {
     const tyrant = face("Surge {3}{R}{R}\nFlying\nWhen ~ enters, if its surge cost was paid, it deals 3 damage to any target.", "Creature — Dragon");
     expect(tyrant.alternativeCost).toEqual({

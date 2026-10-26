@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
+import _poolAethersnipe from "../pool/aethersnipe.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
 import _poolAgentOfErebos from "../pool/agent-of-erebos.js";
 import _poolAgentOfTheFates from "../pool/agent-of-the-fates.js";
@@ -70,6 +71,7 @@ import _poolBiteOfTheBlackRose from "../pool/bite-of-the-black-rose.js";
 import _poolBlackDragon from "../pool/black-dragon.js";
 import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
+import _poolBladesOfVelisVel from "../pool/blades-of-velis-vel.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
@@ -425,6 +427,7 @@ import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
+import _poolPestermite from "../pool/pestermite.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
@@ -481,6 +484,7 @@ import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
 import _poolReturnToTheEarth from "../pool/return-to-the-earth.js";
+import _poolReviveTheFallen from "../pool/revive-the-fallen.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRile from "../pool/rile.js";
@@ -713,6 +717,7 @@ const shard: CardShard = {
     _poolAatchikEmeraldRadian,
     _poolAccomplishedAlchemist,
     _poolAetherSearcher,
+    _poolAethersnipe,
     _poolAgadeemOccultist,
     _poolAgentOfErebos,
     _poolAgentOfTheFates,
@@ -777,6 +782,7 @@ const shard: CardShard = {
     _poolBlackDragon,
     _poolBlacksnagBuzzard,
     _poolBladedBattleFan,
+    _poolBladesOfVelisVel,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
     _poolBlessingOfBelzenlok,
@@ -1132,6 +1138,7 @@ const shard: CardShard = {
     _poolParkHeightsMaverick,
     _poolPassengerFerry,
     _poolPerigeeBeckoner,
+    _poolPestermite,
     _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
@@ -1188,6 +1195,7 @@ const shard: CardShard = {
     _poolRenegadeTroops,
     _poolReprisal,
     _poolReturnToTheEarth,
+    _poolReviveTheFallen,
     _poolRhoxPummeler,
     _poolRicochetTrap,
     _poolRile,

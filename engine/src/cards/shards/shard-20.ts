@@ -442,6 +442,7 @@ import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
 import _poolPixieDust from "../pool/pixie-dust.js";
+import _poolPollenLullaby from "../pool/pollen-lullaby.js";
 import _poolPontiffOfBlight from "../pool/pontiff-of-blight.js";
 import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolProfaneTutor from "../pool/profane-tutor.js";
@@ -1194,6 +1195,7 @@ const shard: CardShard = {
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
     _poolPixieDust,
+    _poolPollenLullaby,
     _poolPontiffOfBlight,
     _poolPristineTalisman,
     _poolProfaneTutor,

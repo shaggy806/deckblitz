@@ -191,6 +191,7 @@ import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
 import _poolExuberantFirestoker from "../pool/exuberant-firestoker.js";
+import _poolEyeblightsEnding from "../pool/eyeblights-ending.js";
 import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFabledHero from "../pool/fabled-hero.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
@@ -286,6 +287,7 @@ import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeraldOfTorment from "../pool/herald-of-torment.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHistorianOfZhalfir from "../pool/historian-of-zhalfir.js";
+import _poolHoardersGreed from "../pool/hoarders-greed.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
@@ -334,6 +336,7 @@ import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
 import _poolKitchenImp from "../pool/kitchen-imp.js";
+import _poolKithkinMourncaller from "../pool/kithkin-mourncaller.js";
 import _poolKlothyssDesign from "../pool/klothyss-design.js";
 import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
@@ -636,6 +639,7 @@ import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
 import _poolTilonallisSummoner from "../pool/tilonallis-summoner.js";
 import _poolTimeStretch from "../pool/time-stretch.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
+import _poolTitansRevenge from "../pool/titans-revenge.js";
 import _poolTocasiasWelcome from "../pool/tocasias-welcome.js";
 import _poolTombOfHorrorsAdventurer from "../pool/tomb-of-horrors-adventurer.js";
 import _poolTombTyrant from "../pool/tomb-tyrant.js";
@@ -921,6 +925,7 @@ const shard: CardShard = {
     _poolExcoriate,
     _poolExpensiveTaste,
     _poolExuberantFirestoker,
+    _poolEyeblightsEnding,
     _poolEyetwitch,
     _poolFabledHero,
     _poolFaerieInvaders,
@@ -1016,6 +1021,7 @@ const shard: CardShard = {
     _poolHeraldOfTorment,
     _poolHeroOfBladehold,
     _poolHistorianOfZhalfir,
+    _poolHoardersGreed,
     _poolHogMonkey,
     _poolHoldAtBay,
     _poolHollowhengeScavenger,
@@ -1064,6 +1070,7 @@ const shard: CardShard = {
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
     _poolKitchenImp,
+    _poolKithkinMourncaller,
     _poolKlothyssDesign,
     _poolKnightErrantOfEos,
     _poolKnightfisher,
@@ -1366,6 +1373,7 @@ const shard: CardShard = {
     _poolTilonallisSummoner,
     _poolTimeStretch,
     _poolTitaniasBoon,
+    _poolTitansRevenge,
     _poolTocasiasWelcome,
     _poolTombOfHorrorsAdventurer,
     _poolTombTyrant,

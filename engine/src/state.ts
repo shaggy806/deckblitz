@@ -218,6 +218,12 @@ export interface GameObject {
    * .exileAfterwards`). Consulted by `moveObject` for the move off the
    * stack, and cleared by any move after that. */
   exileIfWouldGoToGraveyard?: boolean;
+  /** "Return ~ to its owner's hand" in this spell's own text, as it
+   * resolves (Release the Ants): it goes to its owner's hand instead of
+   * their graveyard as the final part of its resolution (rule 608.2n), as
+   * a bought-back spell does. Set by `return-to-hand` on the resolving
+   * spell itself; cleared by any move. */
+  returnToHandAsItResolves?: boolean;
   /** This spell is to be exiled instead of put into `player`'s graveyard as
    * it resolves, and, with `returnAtNextEndStep`, returned to their hand at
    * the beginning of the next end step — Feather, the Redeemed (`source`),

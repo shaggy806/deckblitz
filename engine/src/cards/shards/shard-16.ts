@@ -461,6 +461,7 @@ import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
 import _poolPurelace from "../pool/purelace.js";
+import _poolPurity from "../pool/purity.js";
 import _poolPurphorosGodOfTheForge from "../pool/purphoros-god-of-the-forge.js";
 import _poolPursueThePast from "../pool/pursue-the-past.js";
 import _poolPutAway from "../pool/put-away.js";
@@ -1219,6 +1220,7 @@ const shard: CardShard = {
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,
     _poolPurelace,
+    _poolPurity,
     _poolPurphorosGodOfTheForge,
     _poolPursueThePast,
     _poolPutAway,

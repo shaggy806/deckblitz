@@ -647,17 +647,17 @@ describe("return-to-hand from exile", () => {
   });
 });
 
-describe("return-to-hand from the stack never takes the resolving spell itself", () => {
-  it("the spell finishes resolving into its graveyard", () => {
+describe("return-to-hand from the stack on the resolving spell itself", () => {
+  it("sends it to its owner's hand as the last part of its resolution (rule 608.2n), not its graveyard", () => {
     const game = mkGame();
     lands(game, "Island", A, 1);
     const spell = toHand(game, SELF_RETURN, A);
     game.dispatch({ type: "cast-spell", player: A, card: spell });
     game.advanceUntil(quiet);
 
-    expect(zoneOf(game, spell)).toBe("graveyard");
-    expect(game.state.zones.perPlayer[A].hand).not.toContain(spell);
-    // …and never went to the hand on the way.
+    expect(zoneOf(game, spell)).toBe("hand");
+    expect(game.state.zones.perPlayer[A].graveyard).not.toContain(spell);
+    // Not bounced mid-resolution: it moved once, as it finished.
     expect(game.eventsOfType("permanent-returned-to-hand")).toHaveLength(0);
   });
 });

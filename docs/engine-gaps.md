@@ -39,6 +39,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   so none hits it; Truce (batch 160) is authored on the `effect` form around it. The likely fix
   is to keep `modesController` whenever it's set; it needs a test with an `each-player`
   `choices` spell.
+- **A cast prohibition reads the card, not the face or half being cast.** `whyProhibitedFromCasting`
+  (`game.ts`) tests the card object's characteristics, so a split card's half (rule 709.3: Fire //
+  Ice's half has mana value 2), an Adventure (715.3), an MDFC's back face (712.11) or a bestowed
+  Aura spell is judged as the whole card. Found authoring Gaddock Teeg (batch 189,
+  `static:prohibit-cast-by-face`); unverified whether Archon of Valor's Reach and Nikya of the Old
+  Ways misjudge such spells today.
 - **A mana-value cast prohibition reads an X spell before X is chosen.** On the stack an X
   spell's mana value counts the X chosen (rule 202.3e), and Sanctum Prelate's ruling has X
   chosen before its mana value is checked. `whyProhibitedFromCasting` (game.ts) matches a

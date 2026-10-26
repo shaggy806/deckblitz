@@ -49,6 +49,7 @@ import {
   outlast,
   persist,
   saddle,
+  champion,
   kinship,
   prowl,
   soulbond,
@@ -172,6 +173,11 @@ function keywordPart(part) {
   if ((m = new RegExp(`^spectacle ${COST}$`, "i").exec(p))) return { card: { alternativeCost: spectacle(m[1]) } };
   // Surge [cost] (rule 702.117a): an alternative cost.
   if ((m = new RegExp(`^surge ${COST}$`, "i").exec(p))) return { card: { alternativeCost: surge(m[1]) } };
+  // Champion a [type] (rule 702.72a): its two linked triggers.
+  if ((m = /^champion (an? )(creature|[a-z]+)$/i.exec(p))) {
+    const what = m[2].toLowerCase() === "creature" ? { type: "creature" } : { subtype: m[2][0].toUpperCase() + m[2].slice(1) };
+    return { triggered: champion(what, `${m[1]}${m[2]}`.trim()) };
+  }
   // Prowl [cost] (rule 702.76a): an alternative cost.
   if ((m = new RegExp(`^prowl ${COST}$`, "i").exec(p))) return { card: { alternativeCost: prowl(m[1]) } };
   // Awaken N—[cost] (rule 702.113a): an alternative cost adding a target and
@@ -2062,7 +2068,11 @@ export function parseFace(face, ctx = {}) {
       // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
       // engine offers no face-down cast for one.
       (cardFields.includes("morph") && /\bLand\b/.test(face.type_line ?? ""));
-    if (!twice && parts.every(known)) {
+    // "When a Faerie is championed with this creature, …" (Mistbind
+    // Clique) rides on the champion trigger itself — the helper's
+    // `onChampioned` — so a card with one leaves its champion line to a person.
+    const championedToo = parts.some((p) => /^champion /i.test(p)) && lines.some((l) => /is championed with/i.test(l));
+    if (!twice && !championedToo && parts.every(known)) {
       for (const p of parts) {
         if (KEYWORDS[p.toLowerCase()] !== undefined) out.keywords.push(KEYWORDS[p.toLowerCase()]);
         else if (isProwess(p)) out.triggered.push(prowessAbility());

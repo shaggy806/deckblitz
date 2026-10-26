@@ -91,6 +91,7 @@ import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
+import _poolBrokenAmbitions from "../pool/broken-ambitions.js";
 import _poolBubblingCauldron from "../pool/bubbling-cauldron.js";
 import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
@@ -379,6 +380,7 @@ import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
+import _poolMilitiasPride from "../pool/militias-pride.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMirrorMockery from "../pool/mirror-mockery.js";
@@ -427,6 +429,7 @@ import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
+import _poolPeppersmoke from "../pool/peppersmoke.js";
 import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
 import _poolPigmentStorm from "../pool/pigment-storm.js";
@@ -798,6 +801,7 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
+    _poolBrokenAmbitions,
     _poolBubblingCauldron,
     _poolBuildersBane,
     _poolBulwarkOx,
@@ -1086,6 +1090,7 @@ const shard: CardShard = {
     _poolMidnightScavengers,
     _poolMightOfTheMasses,
     _poolMilitantInquisitor,
+    _poolMilitiasPride,
     _poolMindMeanderer,
     _poolMirageMockery,
     _poolMirrorMockery,
@@ -1134,6 +1139,7 @@ const shard: CardShard = {
     _poolPacksBetrayal,
     _poolPeaceOfMind,
     _poolPearlMedallion,
+    _poolPeppersmoke,
     _poolPestProblem,
     _poolPharikasDisciple,
     _poolPigmentStorm,

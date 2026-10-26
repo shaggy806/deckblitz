@@ -395,6 +395,7 @@ import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
+import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
@@ -615,6 +616,7 @@ import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
+import _poolTreefolkHarbinger from "../pool/treefolk-harbinger.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
 import _poolTrialOfAmbition from "../pool/trial-of-ambition.js";
 import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
@@ -1112,6 +1114,7 @@ const shard: CardShard = {
     _poolMonkIdealist,
     _poolMountainValley,
     _poolNardoleResourcefulCyborg,
+    _poolNathOfTheGiltLeaf,
     _poolNayaPanorama,
     _poolNecroticWound,
     _poolNemaSiltlurker,
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolTragicLesson,
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
+    _poolTreefolkHarbinger,
     _poolTrestleTroll,
     _poolTrialOfAmbition,
     _poolTriarchPraetorian,

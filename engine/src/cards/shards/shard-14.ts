@@ -214,6 +214,7 @@ import _poolExocrine from "../pool/exocrine.js";
 import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
+import _poolFallowsage from "../pool/fallowsage.js";
 import _poolFame from "../pool/fame.js";
 import _poolFangbladeBrigand from "../pool/fangblade-brigand.js";
 import _poolFar from "../pool/far.js";
@@ -327,6 +328,7 @@ import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
+import _poolIncendiaryCommand from "../pool/incendiary-command.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
 import _poolInsidiousWill from "../pool/insidious-will.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolExplorationBroodship,
     _poolExplosiveImpact,
     _poolFaerieFormation,
+    _poolFallowsage,
     _poolFame,
     _poolFangbladeBrigand,
     _poolFar,
@@ -1033,6 +1036,7 @@ const shard: CardShard = {
     _poolIllunaApexOfWishes,
     _poolImpassionedOrator,
     _poolImposingVisage,
+    _poolIncendiaryCommand,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
     _poolInsidiousWill,

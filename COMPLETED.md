@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Lorwyn's 90 most-played left** (batch 189, the middle walk's second range, 2026-10-26):
+  **built** clash (rule 701.30, `mechanic:clash` — the `clash` effect: the opponent chosen, both
+  top cards revealed, each player's top-or-bottom choice in APNAP order, `won` / `lost` with
+  `"that-player"` the opponent, `repeat` for Hoarder's Greed), champion (rule 702.72,
+  `keyword:champion` — the `champion()` helper over existing shapes, Mistbind Clique's "when a
+  Faerie is championed" a reflexive trigger), a spell returning itself to its owner's hand as it
+  resolves (rule 608.2n — `return-to-hand` of `"source"` from the stack), and `mill` of an object
+  slot's controller. 81 authored — Mistbind Clique, Pestermite, Cloudthresher, Brion Stoutarm,
+  Incendiary Command and 76 more, with eight Morningtide cards batch 186 blocked on clash or
+  champion (Release the Ants, Titan's Revenge, Lightning Crafter and five more) — and 19 blocked,
+  one or two each (`B189.json`).
 - **The rest of Avacyn Restored and Dark Ascension's 40 most-played** (batch 185, the
   newest-first walk, 2026-10-26): **built** soulbond (rule 702.95, `keyword:soulbond` —
   `soulbond()`'s two triggers, a `{ scope: "paired" }` static, the `paired` filter clause, the

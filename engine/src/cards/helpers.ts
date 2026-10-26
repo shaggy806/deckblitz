@@ -585,6 +585,77 @@ export const kinship = (effect: EffectSpec, effectText: string): TriggeredAbilit
 });
 
 /**
+ * Champion an [object] (rule 702.72a): its two linked triggered abilities
+ * (702.72b) — "When this permanent enters, sacrifice it unless you exile
+ * another [object] you control" and "When this permanent leaves the
+ * battlefield, return the exiled card to the battlefield under its owner's
+ * control". As the first resolves, a player who controls another `what`
+ * chooses whether to exile one (not a target: a hexproof one can be chosen),
+ * linked to this permanent (rule 607.2a); one who doesn't, or can't,
+ * sacrifices it. If it left before then, the leaves trigger has already
+ * found nothing, and a card exiled after stays exiled (as Journey to
+ * Nowhere). A token exiled this way ceases to exist (rule 111.7).
+ *
+ * `label` is the reminder text's object ("a Faerie", "an Elf", "a
+ * creature"). `onChampioned` is "When a Faerie is championed with this
+ * creature, …" (rule 702.72c — Mistbind Clique): a reflexive trigger with
+ * its own targets, created as the card is exiled. Put the whole "Champion
+ * a …" line, with its reminder, in the card's `text` as well.
+ */
+export const champion = (
+  what: CardFilter,
+  label: string,
+  onChampioned?: { readonly targets: readonly TargetSpec[]; readonly effect: EffectSpec; readonly text: string },
+): TriggeredAbility[] => {
+  const yours: CardFilter = { ...what, controlledBy: "you" };
+  const exile: EffectSpec = { kind: "exile", target: 0, linked: true };
+  const noun = label.replace(/^an? /, "");
+  return [
+    {
+      trigger: { on: "enters-battlefield", who: "self" },
+      targets: [],
+      effect: {
+        kind: "conditional",
+        condition: { kind: "controls", filter: what, atLeast: 1, excludeSelf: true },
+        then: {
+          kind: "may",
+          prompt: `Exile another ${noun} you control? (If you don't, sacrifice this.)`,
+          effect: {
+            kind: "choose-permanents",
+            filter: yours,
+            upTo: 1,
+            min: 1,
+            exceptSource: true,
+            prompt: `Choose another ${noun} you control to exile`,
+            then:
+              onChampioned === undefined
+                ? exile
+                : {
+                    kind: "sequence",
+                    effects: [
+                      exile,
+                      { kind: "reflexive-trigger", targets: onChampioned.targets, effect: onChampioned.effect, text: onChampioned.text },
+                    ],
+                  },
+          },
+          else: { kind: "sacrifice-source" },
+        },
+        else: { kind: "sacrifice-source" },
+      },
+      resolve: null,
+      text: `When this enters, sacrifice it unless you exile another ${noun} you control.`,
+    },
+    {
+      trigger: { on: "leaves-battlefield", who: "self" },
+      targets: [],
+      effect: { kind: "return-exiled-by-source", linked: "battlefield" },
+      resolve: null,
+      text: "When this leaves the battlefield, return the exiled card to the battlefield under its owner's control.",
+    },
+  ];
+};
+
+/**
  * Awaken N—[cost] (rule 702.113a): "If you cast this spell for [cost], also
  * put N +1/+1 counters on target land you control and it becomes a 0/0
  * Elemental creature with haste. It's still a land." — the card's

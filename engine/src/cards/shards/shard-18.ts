@@ -366,6 +366,7 @@ import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMistRaven from "../pool/mist-raven.js";
+import _poolMistbindClique from "../pool/mistbind-clique.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolMoggManiac from "../pool/mogg-maniac.js";
@@ -556,6 +557,7 @@ import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
 import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
+import _poolSurgespanner from "../pool/surgespanner.js";
 import _poolSustainerOfTheRealm from "../pool/sustainer-of-the-realm.js";
 import _poolSusurSecundiVoidAltar from "../pool/susur-secundi-void-altar.js";
 import _poolSuturePriest from "../pool/suture-priest.js";
@@ -1074,6 +1076,7 @@ const shard: CardShard = {
     _poolMirrorshellCrab,
     _poolMisleadingMotes,
     _poolMistRaven,
+    _poolMistbindClique,
     _poolMistmeadowCouncil,
     _poolModelOfUnity,
     _poolMoggManiac,
@@ -1264,6 +1267,7 @@ const shard: CardShard = {
     _poolSummonKujata,
     _poolSuqataLancer,
     _poolSureFootedInfiltrator,
+    _poolSurgespanner,
     _poolSustainerOfTheRealm,
     _poolSusurSecundiVoidAltar,
     _poolSuturePriest,

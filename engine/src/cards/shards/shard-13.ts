@@ -515,6 +515,7 @@ import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
 import _poolSerratedBiskelion from "../pool/serrated-biskelion.js";
 import _poolShadowbornDemon from "../pool/shadowborn-demon.js";
+import _poolShapesharer from "../pool/shapesharer.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
 import _poolShipbreakerKraken from "../pool/shipbreaker-kraken.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolSereneHeart,
     _poolSerratedBiskelion,
     _poolShadowbornDemon,
+    _poolShapesharer,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
     _poolShipbreakerKraken,

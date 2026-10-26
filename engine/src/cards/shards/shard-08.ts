@@ -220,6 +220,7 @@ import _poolExtractAConfession from "../pool/extract-a-confession.js";
 import _poolEyeOfVecna from "../pool/eye-of-vecna.js";
 import _poolEzuriRenegadeLeader from "../pool/ezuri-renegade-leader.js";
 import _poolFaerieConclave from "../pool/faerie-conclave.js";
+import _poolFaerieTauntings from "../pool/faerie-tauntings.js";
 import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
 import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
@@ -253,6 +254,7 @@ import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
+import _poolGiantHarbinger from "../pool/giant-harbinger.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
 import _poolGitaxianAnatomist from "../pool/gitaxian-anatomist.js";
@@ -367,6 +369,7 @@ import _poolLeaveInTheDust from "../pool/leave-in-the-dust.js";
 import _poolLectureHall from "../pool/lecture-hall.js";
 import _poolLegionWarboss from "../pool/legion-warboss.js";
 import _poolLessonsFromLife from "../pool/lessons-from-life.js";
+import _poolLightningCrafter from "../pool/lightning-crafter.js";
 import _poolLilianaVess from "../pool/liliana-vess.js";
 import _poolLlanowarEnvoy from "../pool/llanowar-envoy.js";
 import _poolLockerRoom from "../pool/locker-room.js";
@@ -634,6 +637,7 @@ import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
 import _poolThoughtweftImbuer from "../pool/thoughtweft-imbuer.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThroneWarden from "../pool/throne-warden.js";
+import _poolThundercloudShaman from "../pool/thundercloud-shaman.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTimelyHordemate from "../pool/timely-hordemate.js";
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolEyeOfVecna,
     _poolEzuriRenegadeLeader,
     _poolFaerieConclave,
+    _poolFaerieTauntings,
     _poolFallajiChaindancer,
     _poolFallajiExcavation,
     _poolFallajiVanguard,
@@ -996,6 +1001,7 @@ const shard: CardShard = {
     _poolGeneralLeoCristophe,
     _poolGhostlyTouch,
     _poolGhoulcallersBell,
+    _poolGiantHarbinger,
     _poolGildedScuttler,
     _poolGiltgroveStalker,
     _poolGitaxianAnatomist,
@@ -1110,6 +1116,7 @@ const shard: CardShard = {
     _poolLectureHall,
     _poolLegionWarboss,
     _poolLessonsFromLife,
+    _poolLightningCrafter,
     _poolLilianaVess,
     _poolLlanowarEnvoy,
     _poolLockerRoom,
@@ -1377,6 +1384,7 @@ const shard: CardShard = {
     _poolThoughtweftImbuer,
     _poolThroneOfGeth,
     _poolThroneWarden,
+    _poolThundercloudShaman,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,
     _poolTimelyHordemate,

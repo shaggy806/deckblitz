@@ -34,6 +34,7 @@ import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmTheCathars from "../pool/arm-the-cathars.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
+import _poolAshlingThePilgrim from "../pool/ashling-the-pilgrim.js";
 import _poolAssassinGauntlet from "../pool/assassin-gauntlet.js";
 import _poolAuguryAdept from "../pool/augury-adept.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
@@ -296,6 +297,7 @@ import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIncreasingConfusion from "../pool/increasing-confusion.js";
+import _poolIncrementalGrowth from "../pool/incremental-growth.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
@@ -750,6 +752,7 @@ const shard: CardShard = {
     _poolArmTheCathars,
     _poolArmyAnts,
     _poolAsceticism,
+    _poolAshlingThePilgrim,
     _poolAssassinGauntlet,
     _poolAuguryAdept,
     _poolAuroraShifter,
@@ -1012,6 +1015,7 @@ const shard: CardShard = {
     _poolIllGottenInheritance,
     _poolImperialCosmographer,
     _poolIncreasingConfusion,
+    _poolIncrementalGrowth,
     _poolIndathaCrystal,
     _poolIndestructibility,
     _poolInescapableBlaze,

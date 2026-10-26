@@ -103,6 +103,7 @@ import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCastle from "../pool/castle.js";
+import _poolCaterwaulingBoggart from "../pool/caterwauling-boggart.js";
 import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
@@ -224,6 +225,7 @@ import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
 import _poolFoggySwampVinebender from "../pool/foggy-swamp-vinebender.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
+import _poolFootbottomFeast from "../pool/footbottom-feast.js";
 import _poolFortressKinGuard from "../pool/fortress-kin-guard.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFreestriderLookout from "../pool/freestrider-lookout.js";
@@ -354,6 +356,7 @@ import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
 import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
 import _poolMarthaJones from "../pool/martha-jones.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
+import _poolMaskedAdmirers from "../pool/masked-admirers.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
@@ -793,6 +796,7 @@ const shard: CardShard = {
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
     _poolCastle,
+    _poolCaterwaulingBoggart,
     _poolCavalryPegasus,
     _poolCeaselessConflict,
     _poolChamberedNautilus,
@@ -914,6 +918,7 @@ const shard: CardShard = {
     _poolFlushOut,
     _poolFoggySwampVinebender,
     _poolFontOfFortunes,
+    _poolFootbottomFeast,
     _poolFortressKinGuard,
     _poolFoundryOfTheConsuls,
     _poolFreestriderLookout,
@@ -1044,6 +1049,7 @@ const shard: CardShard = {
     _poolMaritLagesSlumber,
     _poolMarthaJones,
     _poolMaryReadAndAnneBonny,
+    _poolMaskedAdmirers,
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
     _poolMeltstridersGear,

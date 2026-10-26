@@ -566,6 +566,7 @@ import _poolSunderingStroke from "../pool/sundering-stroke.js";
 import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-legion.js";
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
+import _poolSunriseSovereign from "../pool/sunrise-sovereign.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolSunhomeFortressOfTheLegion,
     _poolSunlance,
     _poolSunpetalGrove,
+    _poolSunriseSovereign,
     _poolSunscorchRegent,
     _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,

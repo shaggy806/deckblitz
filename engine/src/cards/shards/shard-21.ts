@@ -36,6 +36,7 @@ import _poolAtraxasFall from "../pool/atraxas-fall.js";
 import _poolAttendantOfVraska from "../pool/attendant-of-vraska.js";
 import _poolAttentiveSkywarden from "../pool/attentive-skywarden.js";
 import _poolAudienceWithTrostani from "../pool/audience-with-trostani.js";
+import _poolAuntiesHovel from "../pool/aunties-hovel.js";
 import _poolAvalancheCaller from "../pool/avalanche-caller.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
@@ -340,7 +341,9 @@ import _poolLullmagesFamiliar from "../pool/lullmages-familiar.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLurkingAutomaton from "../pool/lurking-automaton.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
+import _poolMadAuntie from "../pool/mad-auntie.js";
 import _poolMagmasaur from "../pool/magmasaur.js";
+import _poolMakeshiftMannequin from "../pool/makeshift-mannequin.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
@@ -396,6 +399,7 @@ import _poolNicolBolasTheDeceiver from "../pool/nicol-bolas-the-deceiver.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
 import _poolNimbleBrigand from "../pool/nimble-brigand.js";
 import _poolNobleQuarry from "../pool/noble-quarry.js";
+import _poolNovaChaser from "../pool/nova-chaser.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousAssault from "../pool/noxious-assault.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
@@ -720,6 +724,7 @@ const shard: CardShard = {
     _poolAttendantOfVraska,
     _poolAttentiveSkywarden,
     _poolAudienceWithTrostani,
+    _poolAuntiesHovel,
     _poolAvalancheCaller,
     _poolAvelineDeGrandpre,
     _poolAvenWindMage,
@@ -1024,7 +1029,9 @@ const shard: CardShard = {
     _poolLuminousRebuke,
     _poolLurkingAutomaton,
     _poolLysAlanaHuntmaster,
+    _poolMadAuntie,
     _poolMagmasaur,
+    _poolMakeshiftMannequin,
     _poolMalevolentWhispers,
     _poolMangaraTheDiplomat,
     _poolMaraxusOfKeld,
@@ -1080,6 +1087,7 @@ const shard: CardShard = {
     _poolNightmareShepherd,
     _poolNimbleBrigand,
     _poolNobleQuarry,
+    _poolNovaChaser,
     _poolNovaHellkite,
     _poolNoxiousAssault,
     _poolNoxiousRevival,

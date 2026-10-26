@@ -325,6 +325,7 @@ import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
 import _poolKinTreeNurturer from "../pool/kin-tree-nurturer.js";
 import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
+import _poolKithkinHarbinger from "../pool/kithkin-harbinger.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLabyrinthChampion from "../pool/labyrinth-champion.js";
@@ -374,6 +375,7 @@ import _poolMazeGlider from "../pool/maze-glider.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
+import _poolMerrowHarbinger from "../pool/merrow-harbinger.js";
 import _poolMerrowWavebreakers from "../pool/merrow-wavebreakers.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
@@ -1004,6 +1006,7 @@ const shard: CardShard = {
     _poolKinTreeNurturer,
     _poolKirinTouchedOrochi,
     _poolKitchen,
+    _poolKithkinHarbinger,
     _poolKrallenhordeHowler,
     _poolKyoshiIslandPlaza,
     _poolLabyrinthChampion,
@@ -1053,6 +1056,7 @@ const shard: CardShard = {
     _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMercilessHarlequin,
+    _poolMerrowHarbinger,
     _poolMerrowWavebreakers,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,

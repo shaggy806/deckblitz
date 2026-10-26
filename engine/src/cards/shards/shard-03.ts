@@ -48,6 +48,7 @@ import _poolBlessedRespite from "../pool/blessed-respite.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBlinkDog from "../pool/blink-dog.js";
 import _poolBloodhallPriest from "../pool/bloodhall-priest.js";
+import _poolBoggartHarbinger from "../pool/boggart-harbinger.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBorosChallenger from "../pool/boros-challenger.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
@@ -71,6 +72,7 @@ import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
+import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
@@ -80,6 +82,7 @@ import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
+import _poolCloudthresher from "../pool/cloudthresher.js";
 import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolCondemn from "../pool/condemn.js";
@@ -517,6 +520,7 @@ import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSteelcladSpirit from "../pool/steelclad-spirit.js";
 import _poolSteelyResolve from "../pool/steely-resolve.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
+import _poolStinkdrinkerDaredevil from "../pool/stinkdrinker-daredevil.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
@@ -693,6 +697,7 @@ const shard: CardShard = {
     _poolBlightedCataract,
     _poolBlinkDog,
     _poolBloodhallPriest,
+    _poolBoggartHarbinger,
     _poolBoggartPrankster,
     _poolBorosChallenger,
     _poolBoroughBackup,
@@ -716,6 +721,7 @@ const shard: CardShard = {
     _poolCavesOfKoilos,
     _poolCemeteryRecruitment,
     _poolCentaurBattlemaster,
+    _poolChangelingTitan,
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
@@ -725,6 +731,7 @@ const shard: CardShard = {
     _poolChubToad,
     _poolCinderBarrens,
     _poolCleverConcealment,
+    _poolCloudthresher,
     _poolCommandTower,
     _poolCompelBrutality,
     _poolCondemn,
@@ -1162,6 +1169,7 @@ const shard: CardShard = {
     _poolSteelcladSpirit,
     _poolSteelyResolve,
     _poolSterlingHound,
+    _poolStinkdrinkerDaredevil,
     _poolStoneKavu,
     _poolStoneSeederHierophant,
     _poolStrandwalker,

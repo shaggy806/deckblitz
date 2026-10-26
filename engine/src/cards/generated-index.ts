@@ -195,6 +195,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Eldrazi Token",
   "Elemental Token",
   "Elemental Token (3/3 Blue-Red Flying)",
+  "Elemental Token (4/4 White Flying)",
   "Elemental Token (5/5 Blue-Red Flying)",
   "Elemental Token (All Colors)",
   "Elemental Token (Dance of the Tumbleweeds)",
