@@ -197,6 +197,7 @@ function faceSource(face, ctx) {
     pairing: parsed.pairing,
     canBeCommander: parsed.canBeCommander,
     cantBeCountered: parsed.cantBeCountered,
+    flashThenSacrifice: parsed.flashThenSacrifice,
     cycling: parsed.cycling,
     flashback: parsed.flashback,
     plot: parsed.plot,

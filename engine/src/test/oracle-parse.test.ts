@@ -627,6 +627,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(dasher.dash).toEqual({ cost: "{2}{R}" });
     expect(dasher.complete).toBe(true);
+    // The Mirage block's "as though it had flash … sacrifices it at the
+    // beginning of the next cleanup step" (Spider Climb).
+    const climb = face(
+      "You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nCreatures you control get +0/+1.",
+    );
+    expect(climb.flashThenSacrifice).toBe(true);
     // Impending N—[cost] (rule 702.176a): the cost, and its two abilities — not a
     // creature while it has a time counter, and the end step's removal.
     const overlord = face(

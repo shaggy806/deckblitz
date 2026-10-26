@@ -3084,6 +3084,17 @@ export interface CardDefinition {
    * ward "counter it" clause does nothing to this spell. `false` for normal
    * cards. */
   readonly cantBeCountered: boolean;
+  /** "You may cast this spell as though it had flash. If you cast it any time
+   * a sorcery couldn't have been cast, the controller of the permanent it
+   * becomes sacrifices it at the beginning of the next cleanup step" (the
+   * Mirage block: Armor of Thorns, Parapet, Spider Climb). Its own permission
+   * to ignore sorcery timing (rule 601.3c); the sacrifice is owed only when
+   * that permission is what let it be cast — not when it's cast at sorcery
+   * timing, or through another effect's flash (the ruling: Leyline of
+   * Anticipation, Vedalken Orrery), which the caster would always choose.
+   * The permanent gets a delayed trigger at "next-cleanup" (rule 514.3a).
+   * `false` for normal cards. */
+  readonly flashThenSacrifice: boolean;
   /** The commander tax is paid in life instead of mana (Liesa, Shroud of
    * Dusk: "Rather than pay {2} for each previous time you've cast this spell
    * from the command zone this game, pay 2 life that many times."). Only a
@@ -3281,6 +3292,7 @@ const PRINTED_ABILITY: {
   readAhead: (def) => def.readAhead,
   faces: false,
   cantBeCountered: (def) => def.cantBeCountered,
+  flashThenSacrifice: (def) => def.flashThenSacrifice,
   commanderTaxAsLife: (def) => def.commanderTaxAsLife,
   exileOnResolve: (def) => def.exileOnResolve,
   shuffleIntoLibraryOnResolve: (def) => def.shuffleIntoLibraryOnResolve,
@@ -3496,6 +3508,8 @@ interface CardDraft {
   readAhead?: true;
   faces?: readonly string[];
   cantBeCountered?: boolean;
+  /** See {@link CardDefinition.flashThenSacrifice}. */
+  flashThenSacrifice?: true;
   commanderTaxAsLife?: boolean;
   exileOnResolve?: boolean;
   shuffleIntoLibraryOnResolve?: boolean;
@@ -3688,6 +3702,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     readAhead: draft.readAhead === true,
     faces: draft.faces ?? null,
     cantBeCountered: draft.cantBeCountered ?? false,
+    flashThenSacrifice: draft.flashThenSacrifice === true,
     commanderTaxAsLife: draft.commanderTaxAsLife ?? false,
     exileOnResolve: draft.exileOnResolve ?? false,
     shuffleIntoLibraryOnResolve: draft.shuffleIntoLibraryOnResolve ?? false,

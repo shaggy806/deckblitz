@@ -510,6 +510,7 @@ import _poolSlurrkAllIngesting from "../pool/slurrk-all-ingesting.js";
 import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
+import _poolSoar from "../pool/soar.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSphinxsDisciple from "../pool/sphinxs-disciple.js";
@@ -1212,6 +1213,7 @@ const shard: CardShard = {
     _poolSmaugTheGreatCalamity,
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
+    _poolSoar,
     _poolSphinxOfLostTruths,
     _poolSphinxOfTheGuildpact,
     _poolSphinxsDisciple,

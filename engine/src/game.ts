@@ -6065,8 +6065,9 @@ export class Game {
 
     // Delayed triggered abilities waiting on this step (rule 603.7). Before
     // the turn-based actions, so an "at the beginning of the end step" ability
-    // is on the stack when that step's priority window opens.
-    this.fireDelayedTriggers(step);
+    // is on the stack when that step's priority window opens. The cleanup
+    // step's wait for its turn-based actions (rule 514.3a — `finishCleanup`).
+    if (step !== "cleanup") this.fireDelayedTriggers(step);
 
     this.performTurnBasedActions(step);
 
@@ -6284,6 +6285,13 @@ export class Game {
       this.state.extraCombats -= 1;
       this.emit({ type: "additional-combat-phase" });
       this.enterStep("begin-combat");
+      return;
+    }
+    // A player got priority in this cleanup step: another one begins (rule
+    // 514.3a).
+    if (this.state.turn.step === "cleanup" && this.state.turn.cleanupHadPriority === true) {
+      delete this.state.turn.cleanupHadPriority;
+      this.enterStep("cleanup");
       return;
     }
     const next = nextStep(this.state.turn.step);
@@ -6684,6 +6692,10 @@ export class Game {
     }
 
     this.finishCleanup();
+    if (this.state.result.over) return;
+    // Something triggered or happened in it, and priority is the active
+    // player's (rule 514.3a).
+    if (this.state.turn.cleanupHadPriority === true) return;
     // The cleanup step normally grants no priority; move straight on.
     this.state.priority.active = false;
     this.state.priority.holder = null;
@@ -7297,6 +7309,25 @@ export class Game {
     // back to a comparable resting state: fold interchangeable ones together
     // again (engine resource safety — see `recompactTokens`).
     this.recompactTokens();
+
+    // Rule 514.3a: with the turn-based actions done, "at the beginning of the
+    // next cleanup step" abilities trigger; if any state-based action is
+    // performed or any ability is waiting, the active player gets priority,
+    // and once the stack is empty and all pass another cleanup step begins
+    // (`endStep`, on `cleanupHadPriority`). Otherwise no one gets priority.
+    this.fireDelayedTriggers("cleanup");
+    const seq = this.state.eventSeq;
+    this.runStateBasedActions();
+    if (this.state.result.over) return;
+    if (
+      this.state.eventSeq !== seq ||
+      this.state.pendingTriggers.length > 0 ||
+      this.state.zones.shared.stack.length > 0 ||
+      this.state.awaiting !== null
+    ) {
+      this.state.turn.cleanupHadPriority = true;
+      this.prepareForPriority(this.state.awaiting?.player ?? this.activePlayer);
+    }
   }
 
   // --- combat -----------------------------------------------------
@@ -11226,6 +11257,10 @@ export class Game {
       // "As though it had flash if you behold a Dragon as an additional
       // cost" (Molten Exhale): the kicked cast may begin any time (601.3c).
       !(kicked && def.kicker?.flash === true) &&
+      // "You may cast this spell as though it had flash. If you cast it any
+      // time a sorcery couldn't have been cast, … sacrifices it" (Spider
+      // Climb) — `flashSacrificeOwed` says which casts owe the sacrifice.
+      !def.flashThenSacrifice &&
       // Judged as the spell it would be — an Omen or an adventure is its
       // instant or sorcery half (rules 715.3, 720.3a).
       !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))
@@ -12370,6 +12405,9 @@ export class Game {
     // the chosen face for the rest of this method and while on the stack.
     if (object.faces !== undefined) object.face = face;
     const def = this.registry.get(printedCardName(object));
+    // Read before the move to the stack, which would make every cast look
+    // like one a sorcery couldn't be.
+    const flashSacrificeOwed = def.flashThenSacrifice && this.castsByOwnFlashOnly(player, cardId, def, via, face, kicked);
     // Read while the card is still where it's cast from: a granted escape or
     // alternative cost belongs to it there.
     const escape = via === "escape" ? this.escapeOf(cardId, face, graveyardGrant) : null;
@@ -12680,6 +12718,7 @@ export class Game {
     }
     if (offspring) object.offspringGrantPaid = true;
     if (evoke !== null) object.evokePaid = true;
+    if (flashSacrificeOwed) object.flashSacrificeOwed = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
     if (overload) object.overloaded = true;
@@ -16767,6 +16806,7 @@ export class Game {
     // Read before the move, which ends it with the stack.
     const offspringPaid = object.offspringGrantPaid === true;
     const evoked = object.evokePaid === true;
+    const flashSacrifice = object.flashSacrificeOwed === true;
     // A permanent spell resolves onto the battlefield under its controller's
     // control (rule 608.3a) — the caster's, for one cast from a card they
     // don't own (Maralen). Default control, like "put it onto the
@@ -16884,6 +16924,20 @@ export class Game {
         "next-end-step",
         { kind: "sacrifice-source" },
         "Blitz — sacrifice it at the beginning of the next end step.",
+        [],
+      );
+    }
+    // Cast by its own "as though it had flash" when a sorcery couldn't have
+    // been (Spider Climb): "the controller of the permanent it becomes
+    // sacrifices it at the beginning of the next cleanup step" — a delayed
+    // trigger (rule 514.3a), which finds nothing once it has left (400.7).
+    if (flashSacrifice && this.state.objects[id]?.zone === "battlefield") {
+      this.createDelayedTrigger(
+        id,
+        object.controller,
+        "next-cleanup",
+        { kind: "sacrifice-source" },
+        `Sacrifice ${def.name} at the beginning of the next cleanup step.`,
         [],
       );
     }
@@ -27143,6 +27197,27 @@ export class Game {
 
   /** "You may cast spells as though they had flash" (Heliod, the Warped
    * Eclipse) — a static of `player`'s that reaches `cardId`. */
+  /** Whether a cast of a `flashThenSacrifice` card owes its sacrifice: a
+   * sorcery couldn't be cast now, and nothing but its own permission lets it
+   * be — not an instant's or flash's timing, an effect's "cast it now", or
+   * another effect's "as though it had flash", any of which the caster would
+   * rather use (the ruling: "the sacrifice occurs only if you cast it using
+   * its own ability"). */
+  private castsByOwnFlashOnly(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    via: CastVia | undefined,
+    face: number | undefined,
+    kicked: boolean | number,
+  ): boolean {
+    if (via === "effect" || via === "sneak" || via === "plot") return false;
+    if (def.types.includes("instant") || def.keywords.includes("flash")) return false;
+    if (kicked && def.kicker?.flash === true) return false;
+    if (this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))) return false;
+    return this.whyNotSorcerySpeed(player, "cast it") !== null;
+  }
+
   private castsAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
@@ -30531,6 +30606,11 @@ export class Game {
       // one: this step began before it existed.
       case "end-of-combat":
         return step === "end-combat";
+      // Fired only once the cleanup step's turn-based actions are done (rule
+      // 514.3a); one made in that step's priority window waits for the
+      // cleanup step that follows it.
+      case "next-cleanup":
+        return step === "cleanup";
       case "your-next-main-phase":
         // The first main phase of yours to *begin* after it was created. This
         // only runs as a step begins, and one created during a main phase was
@@ -36176,6 +36256,7 @@ export class Game {
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;
     object.evokePaid = undefined;
+    object.flashSacrificeOwed = undefined;
     object.spectaclePaid = undefined;
     object.surgePaid = undefined;
     // "That spell can't be countered" was about this casting, so it ends when

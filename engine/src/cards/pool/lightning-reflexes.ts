@@ -1,0 +1,20 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Lightning Reflexes",
+  manaCost: "{1}{R}",
+  colors: ["R"],
+  types: ["enchantment"],
+  subtypes: ["Aura"],
+  flashThenSacrifice: true,
+  text: "You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +1/+0 and has first strike.",
+  targets: ["creature"],
+  static: [
+    {
+      affects: { scope: "attached" },
+      grantPt: [1, 0],
+      grantKeywords: ["first-strike"],
+      text: "Enchanted creature gets +1/+0 and has first strike.",
+    },
+  ],
+});

@@ -458,6 +458,7 @@ import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRegenesis from "../pool/regenesis.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRelicRunner from "../pool/relic-runner.js";
+import _poolRelicWard from "../pool/relic-ward.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
 import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolRegenesis,
     _poolRegress,
     _poolRelicRunner,
+    _poolRelicWard,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
     _poolResoluteBlademaster,

@@ -490,6 +490,7 @@ import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
+import _poolSpiderClimb from "../pool/spider-climb.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
@@ -1133,6 +1134,7 @@ const shard: CardShard = {
     _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
+    _poolSpiderClimb,
     _poolSpikedBaloth,
     _poolSpikedRipsaw,
     _poolSpringleafParade,

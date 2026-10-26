@@ -808,6 +808,12 @@ export interface GameObject {
    * becomes gets evoke's sacrifice trigger as it enters. Cleared on any
    * zone change after that. */
   evokePaid?: boolean;
+  /** This spell was cast by its own "as though it had flash" when a sorcery
+   * couldn't have been (`CardDefinition.flashThenSacrifice`): the permanent
+   * it becomes is sacrificed at the beginning of the next cleanup step. Not
+   * carried by a copy (it wasn't cast). Cleared on any zone change after
+   * that. */
+  flashSacrificeOwed?: boolean;
   /** This spell was cast for its spectacle cost (rule 702.137 — the
    * `alternativeCost` with `keyword: "spectacle"`), for "if its spectacle
    * cost was paid" (`self-spectacle-paid`). A copy has it too (707.10). */
@@ -2211,6 +2217,11 @@ export interface TurnState {
    * combat (Grim Reaper's Sprint cast there): when it ends, the turn goes on
    * to the end step rather than to another main phase. */
   endsAfterAddedCombat?: boolean;
+  /** A player got priority in the cleanup step under way (rule 514.3a: state-
+   * based actions were performed, or triggered abilities were waiting, once
+   * its turn-based actions were done): when it ends, another cleanup step
+   * begins rather than the next turn. */
+  cleanupHadPriority?: boolean;
   /** True when this turn was taken via an extra-turn effect (Time Warp) rather
    * than the normal rotation — ROADMAP Phase 7. */
   isExtra: boolean;
@@ -3030,7 +3041,11 @@ export type DelayedTriggerTiming =
   | "your-next-main-phase"
   /** "At end of combat" — the beginning of the next end of combat step
    * (rule 511.2): myriad's "exile the tokens at end of combat". */
-  | "end-of-combat";
+  | "end-of-combat"
+  /** "At the beginning of the next cleanup step" — put on the stack once that
+   * step's turn-based actions are done (rule 514.3a), the Mirage block's
+   * flash-and-sacrifice (`CardDefinition.flashThenSacrifice`). */
+  | "next-cleanup";
 
 /** Which combat phase: the turn's number, and which of that turn's combat
  * phases (`TurnState.combatPhases` as it began — 1 for the first). */

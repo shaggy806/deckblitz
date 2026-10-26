@@ -417,6 +417,7 @@ import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
+import _poolParapet from "../pool/parapet.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
 import _poolPelakkaCaverns from "../pool/pelakka-caverns.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
+    _poolParapet,
     _poolPathToExile,
     _poolPathToTheWorldTree,
     _poolPelakkaCaverns,

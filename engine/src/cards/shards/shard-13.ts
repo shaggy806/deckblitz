@@ -237,6 +237,7 @@ import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGodFavoredGeneral from "../pool/god-favored-general.js";
+import _poolGraveServitude from "../pool/grave-servitude.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
 import _poolGripOfTheRoil from "../pool/grip-of-the-roil.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
@@ -327,6 +328,7 @@ import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
+import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
@@ -906,6 +908,7 @@ const shard: CardShard = {
     _poolGoblinDarkDwellers,
     _poolGoblinPiker,
     _poolGodFavoredGeneral,
+    _poolGraveServitude,
     _poolGreatHornKrushok,
     _poolGripOfTheRoil,
     _poolGroveRumbler,
@@ -996,6 +999,7 @@ const shard: CardShard = {
     _poolLegionLoyalty,
     _poolLeylineDowser,
     _poolLightningHelix,
+    _poolLightningReflexes,
     _poolLilianasIndignation,
     _poolLoathsomeCurator,
     _poolLordSkittersButcher,

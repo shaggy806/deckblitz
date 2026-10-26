@@ -431,7 +431,9 @@
   "cost:exile-top-of-library",
   "amount:times-kicked",
   "static:set-color-attached",
-  "trigger:self-sacrifice-trigger"
+  "trigger:self-sacrifice-trigger",
+  "effect:flash-cast-sacrifice",
+  "effect:delayed-trigger-next-cleanup"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

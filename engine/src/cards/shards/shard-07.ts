@@ -565,6 +565,7 @@ import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThallidDevourer from "../pool/thallid-devourer.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
+import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
@@ -1254,6 +1255,7 @@ const shard: CardShard = {
     _poolThaliasGeistcaller,
     _poolThallidDevourer,
     _poolThassasOracle,
+    _poolThawingGlaciers,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,
     _poolTheLegendOfKyoshi,
