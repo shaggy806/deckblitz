@@ -383,6 +383,7 @@ import _poolMessengerJays from "../pool/messenger-jays.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
+import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
@@ -1101,6 +1102,7 @@ const shard: CardShard = {
     _poolMineRaider,
     _poolMinisterOfPain,
     _poolMinotaurAbomination,
+    _poolMirranMettle,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,
     _poolMistralSinger,

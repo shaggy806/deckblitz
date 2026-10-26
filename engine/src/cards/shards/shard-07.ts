@@ -305,6 +305,7 @@ import _poolInkfathomDivers from "../pool/inkfathom-divers.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
 import _poolInterjection from "../pool/interjection.js";
+import _poolIntoTheCore from "../pool/into-the-core.js";
 import _poolIntoTheFaeCourt from "../pool/into-the-fae-court.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
@@ -1072,6 +1073,7 @@ const shard: CardShard = {
     _poolInnocentBlood,
     _poolInordinateRage,
     _poolInterjection,
+    _poolIntoTheCore,
     _poolIntoTheFaeCourt,
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,

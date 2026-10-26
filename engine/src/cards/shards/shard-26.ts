@@ -403,6 +403,7 @@ import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMomentumRumbler from "../pool/momentum-rumbler.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
+import _poolMoriokReplica from "../pool/moriok-replica.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
 import _poolMurder from "../pool/murder.js";
 import _poolMurmuration from "../pool/murmuration.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolMomentumRumbler,
     _poolMoorlandInquisitor,
     _poolMorbiusTheLivingVampire,
+    _poolMoriokReplica,
     _poolMossfireValley,
     _poolMurder,
     _poolMurmuration,

@@ -212,6 +212,7 @@ import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
 import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
 import _poolEndling from "../pool/endling.js";
+import _poolEngulfingSlagwurm from "../pool/engulfing-slagwurm.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
@@ -954,6 +955,7 @@ const shard: CardShard = {
     _poolEmissaryOfTheSleepless,
     _poolEncumberedReejerey,
     _poolEndling,
+    _poolEngulfingSlagwurm,
     _poolEntityTracker,
     _poolEomerOfTheRiddermark,
     _poolErrantEphemeron,

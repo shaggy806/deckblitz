@@ -424,6 +424,7 @@ import _poolPegasusCharger from "../pool/pegasus-charger.js";
 import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
 import _poolPharikasLibation from "../pool/pharikas-libation.js";
 import _poolPhelddagrif from "../pool/phelddagrif.js";
+import _poolPhyrexianVatmother from "../pool/phyrexian-vatmother.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolPeterParkersCamera,
     _poolPharikasLibation,
     _poolPhelddagrif,
+    _poolPhyrexianVatmother,
     _poolPillardropWarden,
     _poolPlanarOutburst,
     _poolPlanarPortal,

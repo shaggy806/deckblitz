@@ -626,6 +626,7 @@ import _poolTomeScour from "../pool/tome-scour.js";
 import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
+import _poolTreasureMage from "../pool/treasure-mage.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
 import _poolTrespassingSouleater from "../pool/trespassing-souleater.js";
@@ -1357,6 +1358,7 @@ const shard: CardShard = {
     _poolTorment,
     _poolToughCookie,
     _poolTowerDefense,
+    _poolTreasureMage,
     _poolTreasureMap,
     _poolTremble,
     _poolTrespassingSouleater,

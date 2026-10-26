@@ -219,6 +219,7 @@ import _poolFireProphecy from "../pool/fire-prophecy.js";
 import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
+import _poolFlightSpellbomb from "../pool/flight-spellbomb.js";
 import _poolFling from "../pool/fling.js";
 import _poolFlourish from "../pool/flourish.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
@@ -973,6 +974,7 @@ const shard: CardShard = {
     _poolFireSnake,
     _poolFishliverOil,
     _poolFlatten,
+    _poolFlightSpellbomb,
     _poolFling,
     _poolFlourish,
     _poolFoggyNelsonOnRetainer,

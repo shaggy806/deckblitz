@@ -648,6 +648,7 @@ import _poolViashivanDragon from "../pool/viashivan-dragon.js";
 import _poolVileEntomber from "../pool/vile-entomber.js";
 import _poolVinebredBrawler from "../pool/vinebred-brawler.js";
 import _poolVinelasherKudzu from "../pool/vinelasher-kudzu.js";
+import _poolVirulentWound from "../pool/virulent-wound.js";
 import _poolVoiceOfTheBlessed from "../pool/voice-of-the-blessed.js";
 import _poolVolcanoImp from "../pool/volcano-imp.js";
 import _poolVolrathsGardens from "../pool/volraths-gardens.js";
@@ -1350,6 +1351,7 @@ const shard: CardShard = {
     _poolVileEntomber,
     _poolVinebredBrawler,
     _poolVinelasherKudzu,
+    _poolVirulentWound,
     _poolVoiceOfTheBlessed,
     _poolVolcanoImp,
     _poolVolrathsGardens,

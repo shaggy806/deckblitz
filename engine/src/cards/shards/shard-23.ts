@@ -468,6 +468,7 @@ import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
 import _poolPython from "../pool/python.js";
+import _poolQuicksilverGargantuan from "../pool/quicksilver-gargantuan.js";
 import _poolQuicksmithRebel from "../pool/quicksmith-rebel.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
@@ -1200,6 +1201,7 @@ const shard: CardShard = {
     _poolPurphorosBronzeBlooded,
     _poolPyreSledgeArsonist,
     _poolPython,
+    _poolQuicksilverGargantuan,
     _poolQuicksmithRebel,
     _poolRainOfFilth,
     _poolRaiseThePalisade,

@@ -273,6 +273,7 @@ import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHonoredHierarch from "../pool/honored-hierarch.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
+import _poolHorizonSpellbomb from "../pool/horizon-spellbomb.js";
 import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
@@ -1017,6 +1018,7 @@ const shard: CardShard = {
     _poolHonorGuard,
     _poolHonoredHierarch,
     _poolHoppingAutomaton,
+    _poolHorizonSpellbomb,
     _poolHospitalRoom,
     _poolHostileDesert,
     _poolHourOfVictory,

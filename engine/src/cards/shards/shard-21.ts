@@ -196,6 +196,7 @@ import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
 import _poolEstwaldShieldbasher from "../pool/estwald-shieldbasher.js";
+import _poolEtchedChampion from "../pool/etched-champion.js";
 import _poolEternityVessel from "../pool/eternity-vessel.js";
 import _poolEtherWell from "../pool/ether-well.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
@@ -905,6 +906,7 @@ const shard: CardShard = {
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,
     _poolEstwaldShieldbasher,
+    _poolEtchedChampion,
     _poolEternityVessel,
     _poolEtherWell,
     _poolExperimentalSynthesizer,

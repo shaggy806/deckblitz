@@ -244,6 +244,7 @@ import _poolGoblinSpelunkers from "../pool/goblin-spelunkers.js";
 import _poolGohnTownOfRuin from "../pool/gohn-town-of-ruin.js";
 import _poolGoldberryRiverDaughter from "../pool/goldberry-river-daughter.js";
 import _poolGondGate from "../pool/gond-gate.js";
+import _poolGoreVassal from "../pool/gore-vassal.js";
 import _poolGratefulApparition from "../pool/grateful-apparition.js";
 import _poolGravelSlinger from "../pool/gravel-slinger.js";
 import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
@@ -969,6 +970,7 @@ const shard: CardShard = {
     _poolGohnTownOfRuin,
     _poolGoldberryRiverDaughter,
     _poolGondGate,
+    _poolGoreVassal,
     _poolGratefulApparition,
     _poolGravelSlinger,
     _poolGriffinSentinel,

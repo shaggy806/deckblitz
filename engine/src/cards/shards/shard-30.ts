@@ -283,6 +283,7 @@ import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
 import _poolGridlock from "../pool/gridlock.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
+import _poolGruesomeEncore from "../pool/gruesome-encore.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
 import _poolGuardChange from "../pool/guard-change.js";
 import _poolGuidingVoice from "../pool/guiding-voice.js";
@@ -1020,6 +1021,7 @@ const shard: CardShard = {
     _poolGridlock,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
+    _poolGruesomeEncore,
     _poolGruesomeRealization,
     _poolGuardChange,
     _poolGuidingVoice,
