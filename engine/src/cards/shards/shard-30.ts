@@ -654,6 +654,7 @@ import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
+import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
@@ -1420,6 +1421,7 @@ const shard: CardShard = {
     _poolTangleMantis,
     _poolTeleport,
     _poolTempleOfMalice,
+    _poolTemporalFirestorm,
     _poolTheBalrogOfMoria,
     _poolTheFloodOfMars,
     _poolTheLonelyMountain,

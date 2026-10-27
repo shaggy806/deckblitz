@@ -418,6 +418,7 @@ import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
 import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
+import _poolNecravolver from "../pool/necravolver.js";
 import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
@@ -1176,6 +1177,7 @@ const shard: CardShard = {
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
     _poolNantukoDisciple,
+    _poolNecravolver,
     _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,

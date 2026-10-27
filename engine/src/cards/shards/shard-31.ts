@@ -355,6 +355,7 @@ import _poolHuntingMoa from "../pool/hunting-moa.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
+import _poolIlluminate from "../pool/illuminate.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
@@ -1173,6 +1174,7 @@ const shard: CardShard = {
     _poolHydroelectricLaboratory,
     _poolIcehideTroll,
     _poolIcewindElemental,
+    _poolIlluminate,
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
     _poolImmersturmRaider,

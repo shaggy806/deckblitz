@@ -84,6 +84,7 @@ import _poolCarnivalCarnage from "../pool/carnival-carnage.js";
 import _poolCatacombSifter from "../pool/catacomb-sifter.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
+import _poolCetavolver from "../pool/cetavolver.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
@@ -612,6 +613,7 @@ import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
+import _poolStrongholdArena from "../pool/stronghold-arena.js";
 import _poolSuddenImpact from "../pool/sudden-impact.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
 import _poolSultaiSoothsayer from "../pool/sultai-soothsayer.js";
@@ -843,6 +845,7 @@ const shard: CardShard = {
     _poolCatacombSifter,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
+    _poolCetavolver,
     _poolChainersEdict,
     _poolChakramRetriever,
     _poolChangelingBerserker,
@@ -1371,6 +1374,7 @@ const shard: CardShard = {
     _poolStonehands,
     _poolStreamOfLife,
     _poolStrifeScholar,
+    _poolStrongholdArena,
     _poolSuddenImpact,
     _poolSultaiSkullkeeper,
     _poolSultaiSoothsayer,

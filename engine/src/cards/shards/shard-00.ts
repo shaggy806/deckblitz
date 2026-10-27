@@ -162,6 +162,7 @@ import _poolDeepWood from "../pool/deep-wood.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDeeprootWayfinder from "../pool/deeproot-wayfinder.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
+import _poolDegavolver from "../pool/degavolver.js";
 import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
@@ -945,6 +946,7 @@ const shard: CardShard = {
     _poolDeepchannelDuelist,
     _poolDeeprootWayfinder,
     _poolDefenestratedPhantom,
+    _poolDegavolver,
     _poolDeluxeDragster,
     _poolDesertTwister,
     _poolDesertsDue,

@@ -26,6 +26,7 @@ import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
+import _poolAnaBattlemage from "../pool/ana-battlemage.js";
 import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
 import _poolAngelicOverseer from "../pool/angelic-overseer.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
@@ -713,6 +714,7 @@ import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
+import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
@@ -779,6 +781,7 @@ const shard: CardShard = {
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
     _poolAmuletOfVigor,
+    _poolAnaBattlemage,
     _poolAngelOfRenewal,
     _poolAngelicOverseer,
     _poolAngelicSleuth,
@@ -1466,6 +1469,7 @@ const shard: CardShard = {
     _poolWalkTheAeons,
     _poolWallOfStone,
     _poolWarriorsHonor,
+    _poolWastescapeBattlemage,
     _poolWaxenShapethief,
     _poolWayOfTheWarlord,
     _poolWaywardServant,
