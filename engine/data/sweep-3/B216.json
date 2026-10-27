@@ -1,0 +1,646 @@
+{
+  "batch": "B216",
+  "status": "complete",
+  "ranks": "Scourge (SCG, 2003-05-26): whole set, 90 (the fourth middle walk's first batch, round seventeen); no engine change — storm, morph, cycling triggers and the Dragon Auras' graveyard return were all in the pool",
+  "authored": [
+    {
+      "name": "Accelerated Mutation",
+      "files": [
+        "engine/src/cards/pool/accelerated-mutation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ambush Commander",
+      "files": [
+        "engine/src/cards/pool/ambush-commander.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aphetto Runecaster",
+      "files": [
+        "engine/src/cards/pool/aphetto-runecaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aven Farseer",
+      "files": [
+        "engine/src/cards/pool/aven-farseer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bladewing's Thrall",
+      "files": [
+        "engine/src/cards/pool/bladewings-thrall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bonethorn Valesk",
+      "files": [
+        "engine/src/cards/pool/bonethorn-valesk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cabal Conditioning",
+      "files": [
+        "engine/src/cards/pool/cabal-conditioning.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Call to the Grave",
+      "files": [
+        "engine/src/cards/pool/call-to-the-grave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Claws of Wirewood",
+      "files": [
+        "engine/src/cards/pool/claws-of-wirewood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clutch of Undeath",
+      "files": [
+        "engine/src/cards/pool/clutch-of-undeath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daru Spiritualist",
+      "files": [
+        "engine/src/cards/pool/daru-spiritualist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daru Warchief",
+      "files": [
+        "engine/src/cards/pool/daru-warchief.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dawn Elemental",
+      "files": [
+        "engine/src/cards/pool/dawn-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Decree of Justice",
+      "files": [
+        "engine/src/cards/pool/decree-of-justice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Decree of Savagery",
+      "files": [
+        "engine/src/cards/pool/decree-of-savagery.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Decree of Silence",
+      "files": [
+        "engine/src/cards/pool/decree-of-silence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dispersal Shield",
+      "files": [
+        "engine/src/cards/pool/dispersal-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Divergent Growth",
+      "files": [
+        "engine/src/cards/pool/divergent-growth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dragon Breath",
+      "files": [
+        "engine/src/cards/pool/dragon-breath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon Fangs",
+      "files": [
+        "engine/src/cards/pool/dragon-fangs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon Scales",
+      "files": [
+        "engine/src/cards/pool/dragon-scales.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon Shadow",
+      "files": [
+        "engine/src/cards/pool/dragon-shadow.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dragon Tyrant",
+      "files": [
+        "engine/src/cards/pool/dragon-tyrant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon Wings",
+      "files": [
+        "engine/src/cards/pool/dragon-wings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonstalker",
+      "files": [
+        "engine/src/cards/pool/dragonstalker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Edgewalker",
+      "files": [
+        "engine/src/cards/pool/edgewalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enrage",
+      "files": [
+        "engine/src/cards/pool/enrage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eternal Dragon",
+      "files": [
+        "engine/src/cards/pool/eternal-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Extra Arms",
+      "files": [
+        "engine/src/cards/pool/extra-arms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Faces of the Past",
+      "files": [
+        "engine/src/cards/pool/faces-of-the-past.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fatal Mutation",
+      "files": [
+        "engine/src/cards/pool/fatal-mutation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Final Punishment",
+      "files": [
+        "engine/src/cards/pool/final-punishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Force Bubble",
+      "files": [
+        "engine/src/cards/pool/force-bubble.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frontline Strategist",
+      "files": [
+        "engine/src/cards/pool/frontline-strategist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frozen Solid",
+      "files": [
+        "engine/src/cards/pool/frozen-solid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Karona, False God",
+      "files": [
+        "engine/src/cards/pool/karona-false-god.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Krosan Drover",
+      "files": [
+        "engine/src/cards/pool/krosan-drover.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Krosan Warchief",
+      "files": [
+        "engine/src/cards/pool/krosan-warchief.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kurgadon",
+      "files": [
+        "engine/src/cards/pool/kurgadon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lingering Death",
+      "files": [
+        "engine/src/cards/pool/lingering-death.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mercurial Kite",
+      "files": [
+        "engine/src/cards/pool/mercurial-kite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Metamorphose",
+      "files": [
+        "engine/src/cards/pool/metamorphose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nefashu",
+      "files": [
+        "engine/src/cards/pool/nefashu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyrostatic Pillar",
+      "files": [
+        "engine/src/cards/pool/pyrostatic-pillar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rain of Blades",
+      "files": [
+        "engine/src/cards/pool/rain-of-blades.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Raven Guild Master",
+      "files": [
+        "engine/src/cards/pool/raven-guild-master.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reward the Faithful",
+      "files": [
+        "engine/src/cards/pool/reward-the-faithful.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Riptide Survivor",
+      "files": [
+        "engine/src/cards/pool/riptide-survivor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Root Elemental",
+      "files": [
+        "engine/src/cards/pool/root-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rush of Knowledge",
+      "files": [
+        "engine/src/cards/pool/rush-of-knowledge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sprouting Vines",
+      "files": [
+        "engine/src/cards/pool/sprouting-vines.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Torrent of Fire",
+      "files": [
+        "engine/src/cards/pool/torrent-of-fire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trap Digger",
+      "files": [
+        "engine/src/cards/pool/trap-digger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Treetop Scout",
+      "files": [
+        "engine/src/cards/pool/treetop-scout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Uncontrolled Infestation",
+      "files": [
+        "engine/src/cards/pool/uncontrolled-infestation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wing Shards",
+      "files": [
+        "engine/src/cards/pool/wing-shards.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Woodcloaker",
+      "files": [
+        "engine/src/cards/pool/woodcloaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Xantid Swarm",
+      "files": [
+        "engine/src/cards/pool/xantid-swarm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zealous Inquisitor",
+      "files": [
+        "engine/src/cards/pool/zealous-inquisitor.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Ageless Sentinels",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "Becomes a Bird Giant permanently, replacing its creature types."
+    },
+    {
+      "name": "Alpha Status",
+      "needs": [
+        "static:shares-creature-type-count"
+      ],
+      "why": "Counting creatures that share a creature type with the enchanted creature: sharesCreatureTypeWith reads only the trigger object or source."
+    },
+    {
+      "name": "Ancient Ooze",
+      "needs": [
+        "amount:cda-aggregate-sum-excluding-self"
+      ],
+      "why": "P/T equal to the total mana value of other creatures you control."
+    },
+    {
+      "name": "Aven Liberator",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Protection from a color chosen as the ability resolves."
+    },
+    {
+      "name": "Cabal Interrogator",
+      "needs": [
+        "effect:reveal-n-from-hand-you-choose-discard"
+      ],
+      "why": "Target player reveals X cards of their choice; you choose one to discard."
+    },
+    {
+      "name": "Carbonize",
+      "needs": [
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "A lasting \"can't be regenerated this turn\"."
+    },
+    {
+      "name": "Chill Haunting",
+      "needs": [
+        "cost:exile-x-from-graveyard-additional"
+      ],
+      "why": "Exile X creature cards from your graveyard as an additional cost: the count takes a number only."
+    },
+    {
+      "name": "Day of the Dragons",
+      "needs": [
+        "effect:return-exiled-under-your-control"
+      ],
+      "why": "The exiled cards come back under your control, not their owners'."
+    },
+    {
+      "name": "Decree of Annihilation",
+      "needs": [
+        "effect:exile-all-hands"
+      ],
+      "why": "Exiling all cards from all hands."
+    },
+    {
+      "name": "Dimensional Breach",
+      "needs": [
+        "effect:exile-all-linked",
+        "trigger:linked-exile-each-upkeep-return-one"
+      ],
+      "why": "Each upkeep, while any remain exiled, each player returns one of their own exiled cards."
+    },
+    {
+      "name": "Exiled Doomsayer",
+      "needs": [
+        "static:morph-cost-increase"
+      ],
+      "why": "Morph costs cost {2} more."
+    },
+    {
+      "name": "Form of the Dragon",
+      "needs": [
+        "static:cant-attack-you-player-only"
+      ],
+      "why": "\"Creatures without flying can't attack you\" — cantAttackController also covers your planeswalkers, which the ruling allows."
+    },
+    {
+      "name": "Gilded Light",
+      "needs": [
+        "effect:player-shroud-until-end-of-turn"
+      ],
+      "why": "You gain shroud until end of turn (only player hexproof exists)."
+    },
+    {
+      "name": "Goblin Psychopath",
+      "needs": [
+        "replacement:redirect-own-next-combat-damage-to-controller"
+      ],
+      "why": "After a lost flip, its next combat damage is dealt to its controller instead."
+    },
+    {
+      "name": "Grip of Chaos",
+      "needs": [
+        "effect:random-target",
+        "trigger:spell-or-ability-put-on-stack"
+      ],
+      "why": "Triggers on every spell or ability put on the stack and reselects its single target at random."
+    },
+    {
+      "name": "Karona's Zealot",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "Redirecting all damage that would be dealt to it this turn."
+    },
+    {
+      "name": "Lethal Vapors",
+      "needs": [
+        "cost:any-player-may-activate",
+        "effect:skip-next-turn"
+      ],
+      "why": "Any player may activate it, and \"skip your next turn\"."
+    },
+    {
+      "name": "Mischievous Quanar",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "\"{3}{U}{U}: Turn this creature face down\" has no effect."
+    },
+    {
+      "name": "Mistform Warchief",
+      "needs": [
+        "condition:filter-shares-creature-type-with-source",
+        "effect:set-creature-type"
+      ],
+      "why": "A cost reduction for spells sharing a creature type with it, and \"becomes the creature type of your choice\"."
+    },
+    {
+      "name": "Parallel Thoughts",
+      "needs": [
+        "mechanic:face-down-pile",
+        "replacement:next-draw-from-exiled-pile"
+      ],
+      "why": "A searched face-down exile pile, and an optional draw replacement taking its top card."
+    },
+    {
+      "name": "Primitive Etchings",
+      "needs": [
+        "static:reveal-first-draw-every-turn"
+      ],
+      "why": "Reveal the first card you draw each turn, on every turn: revealsFirstDrawEachTurn covers only your own turns."
+    },
+    {
+      "name": "Proteus Machine",
+      "needs": [
+        "effect:set-creature-type",
+        "decision:choose-creature-type-on-resolution"
+      ],
+      "why": "Becomes the creature type of your choice indefinitely, chosen as the trigger resolves."
+    },
+    {
+      "name": "Putrid Raptor",
+      "needs": [
+        "cost:morph-discard-card"
+      ],
+      "why": "Morph—Discard a Zombie card: morph takes a mana cost only."
+    },
+    {
+      "name": "Raven Guild Initiate",
+      "needs": [
+        "cost:morph-return-permanent"
+      ],
+      "why": "Morph—Return a Bird you control to its owner's hand: morph takes a mana cost only."
+    },
+    {
+      "name": "Rock Jockey",
+      "needs": [
+        "effect:prohibit-land-plays",
+        "condition:played-land-this-turn"
+      ],
+      "why": "Can't stop land plays this turn, and can't-cast-if-you-played-a-land has no history kind."
+    },
+    {
+      "name": "Skirk Volcanist",
+      "needs": [
+        "cost:morph-sacrifice"
+      ],
+      "why": "Morph—Sacrifice two Mountains: morph takes a mana cost only."
+    },
+    {
+      "name": "Soul Collector",
+      "needs": [
+        "trigger:creature-damaged-by-source-dies"
+      ],
+      "why": "No trigger for \"a creature dealt damage by this creature this turn dies\"."
+    },
+    {
+      "name": "Stabilizer",
+      "needs": [
+        "static:players-cant-cycle"
+      ],
+      "why": "Players can't cycle cards."
+    },
+    {
+      "name": "Thundercloud Elemental",
+      "needs": [
+        "effect:lose-keywords-all-except-source"
+      ],
+      "why": "\"All other creatures lose flying\": lose-keywords over a filter has no exceptSource."
+    },
+    {
+      "name": "Upwelling",
+      "needs": [
+        "replacement:mana-pool-emptying"
+      ],
+      "why": "Every player's mana pool keeps its mana: keepsUnspentMana covers only its controller."
+    },
+    {
+      "name": "Zombie Cutthroat",
+      "needs": [
+        "cost:morph-pay-life"
+      ],
+      "why": "Morph—Pay 5 life: morph takes a mana cost only."
+    }
+  ]
+}
