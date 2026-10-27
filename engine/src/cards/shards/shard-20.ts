@@ -26,6 +26,7 @@ import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
 import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
 import _poolAlexiZephyrMage from "../pool/alexi-zephyr-mage.js";
 import _poolAlistairTheBrigadier from "../pool/alistair-the-brigadier.js";
+import _poolAlleyGrifters from "../pool/alley-grifters.js";
 import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
@@ -33,6 +34,7 @@ import _poolAncientSpring from "../pool/ancient-spring.js";
 import _poolAndurilNarsilReforged from "../pool/anduril-narsil-reforged.js";
 import _poolAngelOfTheDireHour from "../pool/angel-of-the-dire-hour.js";
 import _poolAngelicDestiny from "../pool/angelic-destiny.js";
+import _poolAnimalMagnetism from "../pool/animal-magnetism.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAnthroplasm from "../pool/anthroplasm.js";
@@ -251,6 +253,7 @@ import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFirjasRetribution from "../pool/firjas-retribution.js";
 import _poolFirmamentSage from "../pool/firmament-sage.js";
 import _poolFissure from "../pool/fissure.js";
+import _poolFlailingOgre from "../pool/flailing-ogre.js";
 import _poolFlamekinHerald from "../pool/flamekin-herald.js";
 import _poolFlareOfFaith from "../pool/flare-of-faith.js";
 import _poolFleshtaker from "../pool/fleshtaker.js";
@@ -319,6 +322,7 @@ import _poolGuardianIdol from "../pool/guardian-idol.js";
 import _poolGuardianOfSolitude from "../pool/guardian-of-solitude.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
+import _poolGustcloakRunner from "../pool/gustcloak-runner.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHaloChargedSkaab from "../pool/halo-charged-skaab.js";
@@ -426,6 +430,7 @@ import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
 import _poolMeandersGuide from "../pool/meanders-guide.js";
 import _poolMechanicalMobster from "../pool/mechanical-mobster.js";
 import _poolMentalJourney from "../pool/mental-journey.js";
+import _poolMercadianLift from "../pool/mercadian-lift.js";
 import _poolMercurialTransformation from "../pool/mercurial-transformation.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
@@ -514,6 +519,7 @@ import _poolPristineAngel from "../pool/pristine-angel.js";
 import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolProfaneTutor from "../pool/profane-tutor.js";
 import _poolPteronGhost from "../pool/pteron-ghost.js";
+import _poolPufferExtract from "../pool/puffer-extract.js";
 import _poolPunishment from "../pool/punishment.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
@@ -524,6 +530,7 @@ import _poolQuandrixCharm from "../pool/quandrix-charm.js";
 import _poolQueensCommission from "../pool/queens-commission.js";
 import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRabbitBattery from "../pool/rabbit-battery.js";
+import _poolRabidElephant from "../pool/rabid-elephant.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
 import _poolRadiatingLightning from "../pool/radiating-lightning.js";
@@ -655,6 +662,7 @@ import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSparringCollar from "../pool/sparring-collar.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
+import _poolSpectersWail from "../pool/specters-wail.js";
 import _poolSpectralPrison from "../pool/spectral-prison.js";
 import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpireGolem from "../pool/spire-golem.js";
@@ -882,6 +890,7 @@ const shard: CardShard = {
     _poolAleshasLegacy,
     _poolAlexiZephyrMage,
     _poolAlistairTheBrigadier,
+    _poolAlleyGrifters,
     _poolAmarantCoral,
     _poolAnaconda,
     _poolAncestorsProphet,
@@ -889,6 +898,7 @@ const shard: CardShard = {
     _poolAndurilNarsilReforged,
     _poolAngelOfTheDireHour,
     _poolAngelicDestiny,
+    _poolAnimalMagnetism,
     _poolAnnihilate,
     _poolAntQueen,
     _poolAnthroplasm,
@@ -1107,6 +1117,7 @@ const shard: CardShard = {
     _poolFirjasRetribution,
     _poolFirmamentSage,
     _poolFissure,
+    _poolFlailingOgre,
     _poolFlamekinHerald,
     _poolFlareOfFaith,
     _poolFleshtaker,
@@ -1175,6 +1186,7 @@ const shard: CardShard = {
     _poolGuardianOfSolitude,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
+    _poolGustcloakRunner,
     _poolHairStrungKoto,
     _poolHaldanAvidArcanist,
     _poolHaloChargedSkaab,
@@ -1282,6 +1294,7 @@ const shard: CardShard = {
     _poolMeandersGuide,
     _poolMechanicalMobster,
     _poolMentalJourney,
+    _poolMercadianLift,
     _poolMercurialTransformation,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
@@ -1370,6 +1383,7 @@ const shard: CardShard = {
     _poolPristineTalisman,
     _poolProfaneTutor,
     _poolPteronGhost,
+    _poolPufferExtract,
     _poolPunishment,
     _poolPutridGoblin,
     _poolQasaliPridemage,
@@ -1380,6 +1394,7 @@ const shard: CardShard = {
     _poolQueensCommission,
     _poolQuintoriusHistoryChaser,
     _poolRabbitBattery,
+    _poolRabidElephant,
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
     _poolRadiatingLightning,
@@ -1511,6 +1526,7 @@ const shard: CardShard = {
     _poolSpaceTimeAnomaly,
     _poolSparringCollar,
     _poolSpearbreakerBehemoth,
+    _poolSpectersWail,
     _poolSpectralPrison,
     _poolSpireBarrage,
     _poolSpireGolem,

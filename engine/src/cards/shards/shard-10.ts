@@ -305,10 +305,12 @@ import _poolGrimPhysician from "../pool/grim-physician.js";
 import _poolGrowingDread from "../pool/growing-dread.js";
 import _poolGryffwingCavalry from "../pool/gryffwing-cavalry.js";
 import _poolGuardianAugmenter from "../pool/guardian-augmenter.js";
+import _poolHallowedHealer from "../pool/hallowed-healer.js";
 import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
 import _poolHanweirLancer from "../pool/hanweir-lancer.js";
 import _poolHardenedEscort from "../pool/hardened-escort.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
+import _poolHauntedCadaver from "../pool/haunted-cadaver.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHaviTheAllFather from "../pool/havi-the-all-father.js";
 import _poolHazeOfPollen from "../pool/haze-of-pollen.js";
@@ -561,6 +563,7 @@ import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
 import _poolRustvaleBridge from "../pool/rustvale-bridge.js";
 import _poolRuthlessWinnower from "../pool/ruthless-winnower.js";
 import _poolSacredNectar from "../pool/sacred-nectar.js";
+import _poolSacredRites from "../pool/sacred-rites.js";
 import _poolSageOfShailasClaim from "../pool/sage-of-shailas-claim.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
@@ -579,6 +582,7 @@ import _poolScavengerDrake from "../pool/scavenger-drake.js";
 import _poolScorchingDragonfire from "../pool/scorching-dragonfire.js";
 import _poolScrapshooter from "../pool/scrapshooter.js";
 import _poolScrapworkRager from "../pool/scrapwork-rager.js";
+import _poolScreamsOfTheDamned from "../pool/screams-of-the-damned.js";
 import _poolScuttlegator from "../pool/scuttlegator.js";
 import _poolSeaGateBanneret from "../pool/sea-gate-banneret.js";
 import _poolSealAway from "../pool/seal-away.js";
@@ -701,6 +705,7 @@ import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
 import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
+import _poolThermalBlast from "../pool/thermal-blast.js";
 import _poolThisTownAintBigEnough from "../pool/this-town-aint-big-enough.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
@@ -1118,10 +1123,12 @@ const shard: CardShard = {
     _poolGrowingDread,
     _poolGryffwingCavalry,
     _poolGuardianAugmenter,
+    _poolHallowedHealer,
     _poolHammerOfNazahn,
     _poolHanweirLancer,
     _poolHardenedEscort,
     _poolHarriedArtisan,
+    _poolHauntedCadaver,
     _poolHaveABite,
     _poolHaviTheAllFather,
     _poolHazeOfPollen,
@@ -1374,6 +1381,7 @@ const shard: CardShard = {
     _poolRustvaleBridge,
     _poolRuthlessWinnower,
     _poolSacredNectar,
+    _poolSacredRites,
     _poolSageOfShailasClaim,
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
@@ -1392,6 +1400,7 @@ const shard: CardShard = {
     _poolScorchingDragonfire,
     _poolScrapshooter,
     _poolScrapworkRager,
+    _poolScreamsOfTheDamned,
     _poolScuttlegator,
     _poolSeaGateBanneret,
     _poolSealAway,
@@ -1514,6 +1523,7 @@ const shard: CardShard = {
     _poolTheMistyMountainsCold,
     _poolTheSeriema,
     _poolTheWondrousWasp,
+    _poolThermalBlast,
     _poolThisTownAintBigEnough,
     _poolThopterArchitect,
     _poolThoughtScour,

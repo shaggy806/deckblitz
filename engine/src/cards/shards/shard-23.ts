@@ -132,6 +132,7 @@ import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolCharnelhoardWurm from "../pool/charnelhoard-wurm.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
+import _poolChoArrimBruiser from "../pool/cho-arrim-bruiser.js";
 import _poolChoke from "../pool/choke.js";
 import _poolChopDown from "../pool/chop-down.js";
 import _poolChurningEddy from "../pool/churning-eddy.js";
@@ -148,6 +149,7 @@ import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
+import _poolCorruptOfficial from "../pool/corrupt-official.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCradleGuard from "../pool/cradle-guard.js";
@@ -230,6 +232,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
+import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFacelessDevourer from "../pool/faceless-devourer.js";
@@ -391,6 +394,7 @@ import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
+import _poolLavaRunner from "../pool/lava-runner.js";
 import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLeechingLicid from "../pool/leeching-licid.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
@@ -432,6 +436,7 @@ import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
+import _poolMetamorphicWurm from "../pool/metamorphic-wurm.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
@@ -453,6 +458,7 @@ import _poolMournwhelk from "../pool/mournwhelk.js";
 import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMudbuttonClanger from "../pool/mudbutton-clanger.js";
+import _poolMudhole from "../pool/mudhole.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticFamiliar from "../pool/mystic-familiar.js";
 import _poolMysticMight from "../pool/mystic-might.js";
@@ -647,6 +653,7 @@ import _poolSparkspitter from "../pool/sparkspitter.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpelltitheEnforcer from "../pool/spelltithe-enforcer.js";
+import _poolSphereOfDuty from "../pool/sphere-of-duty.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
@@ -690,6 +697,7 @@ import _poolTakeIntoCustody from "../pool/take-into-custody.js";
 import _poolTandemTactics from "../pool/tandem-tactics.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
+import _poolTaskForce from "../pool/task-force.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
 import _poolTectonicRift from "../pool/tectonic-rift.js";
@@ -781,6 +789,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWax from "../pool/wax.js";
+import _poolWaywardAngel from "../pool/wayward-angel.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
@@ -951,6 +960,7 @@ const shard: CardShard = {
     _poolCharnelhoardWurm,
     _poolChatterOfTheSquirrel,
     _poolChildOfTheVolcano,
+    _poolChoArrimBruiser,
     _poolChoke,
     _poolChopDown,
     _poolChurningEddy,
@@ -967,6 +977,7 @@ const shard: CardShard = {
     _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
+    _poolCorruptOfficial,
     _poolCostumeCloset,
     _poolCracklingSpellslinger,
     _poolCradleGuard,
@@ -1049,6 +1060,7 @@ const shard: CardShard = {
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
+    _poolExtravagantSpirit,
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
     _poolFacelessDevourer,
@@ -1210,6 +1222,7 @@ const shard: CardShard = {
     _poolKyoshiBattleFan,
     _poolLarvalScoutlander,
     _poolLavaAxe,
+    _poolLavaRunner,
     _poolLeafkinAvenger,
     _poolLeechingLicid,
     _poolLegionsJudgment,
@@ -1251,6 +1264,7 @@ const shard: CardShard = {
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
     _poolMesaUnicorn,
+    _poolMetamorphicWurm,
     _poolMetathranSoldier,
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
@@ -1272,6 +1286,7 @@ const shard: CardShard = {
     _poolMouthOfTheStorm,
     _poolMoxOpal,
     _poolMudbuttonClanger,
+    _poolMudhole,
     _poolMurmuringVolume,
     _poolMysticFamiliar,
     _poolMysticMight,
@@ -1466,6 +1481,7 @@ const shard: CardShard = {
     _poolSpawningBed,
     _poolSpecimenFreighter,
     _poolSpelltitheEnforcer,
+    _poolSphereOfDuty,
     _poolSpiderwigBoggart,
     _poolSpikeSoldier,
     _poolSpiritShackle,
@@ -1509,6 +1525,7 @@ const shard: CardShard = {
     _poolTandemTactics,
     _poolTanglespanLookout,
     _poolTarPitWarrior,
+    _poolTaskForce,
     _poolTasseledDromedary,
     _poolTeamTransmitter,
     _poolTectonicRift,
@@ -1600,6 +1617,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWax,
+    _poolWaywardAngel,
     _poolWebWarriors,
     _poolWeirdingWood,
     _poolWhack,

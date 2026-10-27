@@ -132,6 +132,7 @@ import _poolCharRumbler from "../pool/char-rumbler.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
 import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
 import _poolChiefOfTheFoundry from "../pool/chief-of-the-foundry.js";
+import _poolChildhoodHorror from "../pool/childhood-horror.js";
 import _poolChill from "../pool/chill.js";
 import _poolChitteringWitch from "../pool/chittering-witch.js";
 import _poolChorusOfWoe from "../pool/chorus-of-woe.js";
@@ -522,7 +523,9 @@ import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
+import _poolPulsatingIllusion from "../pool/pulsating-illusion.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
+import _poolPutrefaction from "../pool/putrefaction.js";
 import _poolPutridPals from "../pool/putrid-pals.js";
 import _poolPyknite from "../pool/pyknite.js";
 import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
@@ -572,7 +575,9 @@ import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
+import _poolSandSquid from "../pool/sand-squid.js";
 import _poolSandstormSalvager from "../pool/sandstorm-salvager.js";
+import _poolSaprazzanBreaker from "../pool/saprazzan-breaker.js";
 import _poolSarkhanDragonsoul from "../pool/sarkhan-dragonsoul.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolChargingGriffin,
     _poolCharismaticVanguard,
     _poolChiefOfTheFoundry,
+    _poolChildhoodHorror,
     _poolChill,
     _poolChitteringWitch,
     _poolChorusOfWoe,
@@ -1318,7 +1324,9 @@ const shard: CardShard = {
     _poolPrimordialPlasm,
     _poolProphetOfDistortion,
     _poolProtomatterPowder,
+    _poolPulsatingIllusion,
     _poolPuresteelPaladin,
+    _poolPutrefaction,
     _poolPutridPals,
     _poolPyknite,
     _poolQuicksilverAmulet,
@@ -1368,7 +1376,9 @@ const shard: CardShard = {
     _poolSageOfTheFang,
     _poolSaltFlats,
     _poolSamutsSprint,
+    _poolSandSquid,
     _poolSandstormSalvager,
+    _poolSaprazzanBreaker,
     _poolSarkhanDragonsoul,
     _poolSarkhanUnbroken,
     _poolSauronTheDarkLord,

@@ -104,11 +104,14 @@ import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
 import _poolCephalidBroker from "../pool/cephalid-broker.js";
+import _poolChameleonSpirit from "../pool/chameleon-spirit.js";
 import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
+import _poolCharmPeddler from "../pool/charm-peddler.js";
+import _poolCharmedGriffin from "../pool/charmed-griffin.js";
 import _poolCinderPyromancer from "../pool/cinder-pyromancer.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
@@ -164,6 +167,8 @@ import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDecreeOfSavagery from "../pool/decree-of-savagery.js";
+import _poolDeepwoodDrummer from "../pool/deepwood-drummer.js";
+import _poolDeepwoodLegate from "../pool/deepwood-legate.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
@@ -214,6 +219,7 @@ import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
+import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
@@ -339,6 +345,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
+import _poolInvigoratingBoon from "../pool/invigorating-boon.js";
 import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
@@ -438,6 +445,7 @@ import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolMysticGenesis from "../pool/mystic-genesis.js";
+import _poolMysticVisionary from "../pool/mystic-visionary.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNaturalAffinity from "../pool/natural-affinity.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
@@ -896,11 +904,14 @@ const shard: CardShard = {
     _poolCavernousMaw,
     _poolCelebornTheWise,
     _poolCephalidBroker,
+    _poolChameleonSpirit,
     _poolChampionOfRhonas,
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
     _poolCharitableLevy,
+    _poolCharmPeddler,
+    _poolCharmedGriffin,
     _poolCinderPyromancer,
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,
@@ -956,6 +967,8 @@ const shard: CardShard = {
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
     _poolDecreeOfSavagery,
+    _poolDeepwoodDrummer,
+    _poolDeepwoodLegate,
     _poolDeerDog,
     _poolDefiantStrike,
     _poolDefiantSurvivor,
@@ -1006,6 +1019,7 @@ const shard: CardShard = {
     _poolEliteVanguard,
     _poolElusiveSpellfist,
     _poolElusiveTormentor,
+    _poolElvishPathcutter,
     _poolEnatuGolem,
     _poolEnshroudingMist,
     _poolEphemeralShields,
@@ -1131,6 +1145,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
+    _poolInvigoratingBoon,
     _poolInvigoratingFalls,
     _poolInvisibleWoman,
     _poolIonasJudgment,
@@ -1230,6 +1245,7 @@ const shard: CardShard = {
     _poolMycosynthWellspring,
     _poolMyojinOfToweringMight,
     _poolMysticGenesis,
+    _poolMysticVisionary,
     _poolNarsetsReversal,
     _poolNaturalAffinity,
     _poolNavigatorsRuin,

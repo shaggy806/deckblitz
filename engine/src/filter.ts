@@ -317,7 +317,17 @@ export interface CardFilter {
    * effect applies; anywhere else it matches nothing.
    */
   readonly sameNameAsTarget?: number;
-  /** `sameNameAsTarget` bound — written by `bindDynamicCompares`, never
+  /**
+   * Has the same name as the trigger object (rule 201.2a) — the Odyssey
+   * Shrines' "the number of cards in all graveyards **with the same name as
+   * that spell**", the spell whose casting fired the trigger: a `count` of `{
+   * zone: "graveyard", sameNameAsTriggerObject: true }` with `"all"`. Bound
+   * like `sameNameAsTarget`, to `sameNameAs`, as the effect applies (its name
+   * as it is then, or as it last existed); an effect's filter only, and with
+   * no trigger object it matches nothing.
+   */
+  readonly sameNameAsTriggerObject?: true;
+  /** `sameNameAsTarget` / `sameNameAsTriggerObject` bound — written by `bindDynamicCompares`, never
    * authored: the target itself, and the name it has (`null` for none — a
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
   readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
@@ -1027,7 +1037,7 @@ export function matchesFilter(
   // The name it has — a copy exception's, if one renamed it (`nameOf`).
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
   if (filter.name !== undefined && named !== filter.name) return false;
-  if (filter.sameNameAsTarget !== undefined) return false;
+  if (filter.sameNameAsTarget !== undefined || filter.sameNameAsTriggerObject !== undefined) return false;
   if (filter.sameNameAs !== undefined && id !== filter.sameNameAs.object) {
     // Rule 201.2a: an object with no name shares it with nothing — a
     // face-down permanent, or a Room with both doors locked (709.5).

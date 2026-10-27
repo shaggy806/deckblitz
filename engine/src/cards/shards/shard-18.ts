@@ -51,6 +51,7 @@ import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
 import _poolBehindTheMask from "../pool/behind-the-mask.js";
 import _poolBelonging from "../pool/belonging.js";
+import _poolBifurcate from "../pool/bifurcate.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
@@ -87,6 +88,7 @@ import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
 import _poolCastleDoom from "../pool/castle-doom.js";
+import _poolCateranKidnappers from "../pool/cateran-kidnappers.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCavalcadeOfCalamity from "../pool/cavalcade-of-calamity.js";
@@ -418,6 +420,7 @@ import _poolMiracleWorker from "../pool/miracle-worker.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
+import _poolMisstep from "../pool/misstep.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistbindClique from "../pool/mistbind-clique.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
@@ -699,6 +702,7 @@ import _poolTruefirePaladin from "../pool/truefire-paladin.js";
 import _poolTuneTheNarrative from "../pool/tune-the-narrative.js";
 import _poolTurbulentWetlands from "../pool/turbulent-wetlands.js";
 import _poolTurnInsideOut from "../pool/turn-inside-out.js";
+import _poolTwigwalker from "../pool/twigwalker.js";
 import _poolTyphoidRats from "../pool/typhoid-rats.js";
 import _poolUkkimaStalkingShadow from "../pool/ukkima-stalking-shadow.js";
 import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
@@ -851,6 +855,7 @@ const shard: CardShard = {
     _poolBedevil,
     _poolBehindTheMask,
     _poolBelonging,
+    _poolBifurcate,
     _poolBighornerRancher,
     _poolBindingAgony,
     _poolBirdMaiden,
@@ -887,6 +892,7 @@ const shard: CardShard = {
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
     _poolCastleDoom,
+    _poolCateranKidnappers,
     _poolCatharticAdept,
     _poolCauldronFamiliar,
     _poolCavalcadeOfCalamity,
@@ -1218,6 +1224,7 @@ const shard: CardShard = {
     _poolMirkwoodSpider,
     _poolMirrorshellCrab,
     _poolMisleadingMotes,
+    _poolMisstep,
     _poolMistRaven,
     _poolMistbindClique,
     _poolMistmeadowCouncil,
@@ -1499,6 +1506,7 @@ const shard: CardShard = {
     _poolTuneTheNarrative,
     _poolTurbulentWetlands,
     _poolTurnInsideOut,
+    _poolTwigwalker,
     _poolTyphoidRats,
     _poolUkkimaStalkingShadow,
     _poolUlamogsCrusher,

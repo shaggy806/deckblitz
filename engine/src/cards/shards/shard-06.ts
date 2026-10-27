@@ -38,6 +38,7 @@ import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
 import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
+import _poolArmistice from "../pool/armistice.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
@@ -55,6 +56,7 @@ import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
+import _poolBalloonPeddler from "../pool/balloon-peddler.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
 import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
@@ -183,9 +185,11 @@ import _poolDaruWarchief from "../pool/daru-warchief.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
+import _poolDawningPurist from "../pool/dawning-purist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
+import _poolDeathgazer from "../pool/deathgazer.js";
 import _poolDeepSight from "../pool/deep-sight.js";
 import _poolDeflection from "../pool/deflection.js";
 import _poolDeliveryMoogle from "../pool/delivery-moogle.js";
@@ -246,6 +250,7 @@ import _poolFesteringNewt from "../pool/festering-newt.js";
 import _poolFiligreeFracture from "../pool/filigree-fracture.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
+import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
 import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
@@ -395,6 +400,7 @@ import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
+import _poolLithophage from "../pool/lithophage.js";
 import _poolLivingAirship from "../pool/living-airship.js";
 import _poolLivingHive from "../pool/living-hive.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
@@ -833,6 +839,7 @@ const shard: CardShard = {
     _poolArchangel,
     _poolArcusAcolyte,
     _poolAriaOfFlame,
+    _poolArmistice,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolArtificersEpiphany,
@@ -850,6 +857,7 @@ const shard: CardShard = {
     _poolBackToNature,
     _poolBalambTRexaur,
     _poolBallLightning,
+    _poolBalloonPeddler,
     _poolBalothPrime,
     _poolBanishment,
     _poolBantBattlemage,
@@ -978,9 +986,11 @@ const shard: CardShard = {
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,
+    _poolDawningPurist,
     _poolDawnwingMarshal,
     _poolDeadfall,
     _poolDeadlyRiposte,
+    _poolDeathgazer,
     _poolDeepSight,
     _poolDeflection,
     _poolDeliveryMoogle,
@@ -1041,6 +1051,7 @@ const shard: CardShard = {
     _poolFiligreeFracture,
     _poolFireNationCadets,
     _poolFireNationSoldier,
+    _poolFlameBurst,
     _poolFlameSpill,
     _poolFlashback,
     _poolFlowOfIdeas,
@@ -1190,6 +1201,7 @@ const shard: CardShard = {
     _poolLightningShrieker,
     _poolLilianasDefeat,
     _poolLingeringTormentor,
+    _poolLithophage,
     _poolLivingAirship,
     _poolLivingHive,
     _poolLoamDryad,

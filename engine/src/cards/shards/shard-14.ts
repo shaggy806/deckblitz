@@ -136,6 +136,7 @@ import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
 import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
 import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
 import _poolCrabUmbra from "../pool/crab-umbra.js";
+import _poolCrashingCentaur from "../pool/crashing-centaur.js";
 import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCreepingMold from "../pool/creeping-mold.js";
@@ -337,6 +338,7 @@ import _poolGrozoth from "../pool/grozoth.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
+import _poolGustcloakSentinel from "../pool/gustcloak-sentinel.js";
 import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
@@ -411,6 +413,7 @@ import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
+import _poolKrisMage from "../pool/kris-mage.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
 import _poolKuldothaPhoenix from "../pool/kuldotha-phoenix.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
@@ -542,6 +545,7 @@ import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
 import _poolQuagVampires from "../pool/quag-vampires.js";
+import _poolQuagmireLamprey from "../pool/quagmire-lamprey.js";
 import _poolQuandrixApprentice from "../pool/quandrix-apprentice.js";
 import _poolQuandrixCultivator from "../pool/quandrix-cultivator.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
@@ -580,6 +584,7 @@ import _poolRottingRats from "../pool/rotting-rats.js";
 import _poolRough from "../pool/rough.js";
 import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
+import _poolRunWild from "../pool/run-wild.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
 import _poolRuneTailsEssence from "../pool/rune-tails-essence.js";
@@ -617,6 +622,7 @@ import _poolShieldOfDutyAndReason from "../pool/shield-of-duty-and-reason.js";
 import _poolShieldedByFaith from "../pool/shielded-by-faith.js";
 import _poolShivanGorge from "../pool/shivan-gorge.js";
 import _poolShivanMeteor from "../pool/shivan-meteor.js";
+import _poolShockTroops from "../pool/shock-troops.js";
 import _poolShorecomberCrab from "../pool/shorecomber-crab.js";
 import _poolShortCircuit from "../pool/short-circuit.js";
 import _poolShriekmaw from "../pool/shriekmaw.js";
@@ -948,6 +954,7 @@ const shard: CardShard = {
     _poolCouncilOfEchoes,
     _poolCouriersBriefcase,
     _poolCrabUmbra,
+    _poolCrashingCentaur,
     _poolCrawlingInfestation,
     _poolCreativeTechnique,
     _poolCreepingMold,
@@ -1149,6 +1156,7 @@ const shard: CardShard = {
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolGuanYuSaintedWarrior,
+    _poolGustcloakSentinel,
     _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
     _poolHarshSustenance,
@@ -1223,6 +1231,7 @@ const shard: CardShard = {
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
+    _poolKrisMage,
     _poolKrosanColossus,
     _poolKuldothaPhoenix,
     _poolKurbisHarvestCelebrant,
@@ -1354,6 +1363,7 @@ const shard: CardShard = {
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
     _poolQuagVampires,
+    _poolQuagmireLamprey,
     _poolQuandrixApprentice,
     _poolQuandrixCultivator,
     _poolRabbleRousing,
@@ -1392,6 +1402,7 @@ const shard: CardShard = {
     _poolRough,
     _poolRoyalHerbalist,
     _poolRuinousGremlin,
+    _poolRunWild,
     _poolRunawayCarriage,
     _poolRunawayTrashBot,
     _poolRuneTailsEssence,
@@ -1429,6 +1440,7 @@ const shard: CardShard = {
     _poolShieldedByFaith,
     _poolShivanGorge,
     _poolShivanMeteor,
+    _poolShockTroops,
     _poolShorecomberCrab,
     _poolShortCircuit,
     _poolShriekmaw,
