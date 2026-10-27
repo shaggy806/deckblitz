@@ -99,6 +99,7 @@ import _poolClementTheWorrywort from "../pool/clement-the-worrywort.js";
 import _poolCloudheathDrake from "../pool/cloudheath-drake.js";
 import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
 import _poolCoastWatcher from "../pool/coast-watcher.js";
+import _poolCoastalDrake from "../pool/coastal-drake.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
@@ -414,6 +415,7 @@ import _poolNarrowEscape from "../pool/narrow-escape.js";
 import _poolNathsBuffoon from "../pool/naths-buffoon.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
+import _poolNight from "../pool/night.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
@@ -733,6 +735,7 @@ import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYamabushisStorm from "../pool/yamabushis-storm.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
+import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
@@ -849,6 +852,7 @@ const shard: CardShard = {
     _poolCloudheathDrake,
     _poolCloudsculptTechnician,
     _poolCoastWatcher,
+    _poolCoastalDrake,
     _poolCodexShredder,
     _poolComeBackWrong,
     _poolCommuneWithBeavers,
@@ -1164,6 +1168,7 @@ const shard: CardShard = {
     _poolNathsBuffoon,
     _poolNeglectedManor,
     _poolNestingGrounds,
+    _poolNight,
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
@@ -1483,6 +1488,7 @@ const shard: CardShard = {
     _poolYamabushisStorm,
     _poolYavimayaHollow,
     _poolYavimayaSojourner,
+    _poolYavimayasEmbrace,
     _poolYgraEaterOfAll,
     _poolYoureAmbushedOnTheRoad,
     _poolZadasCommando,

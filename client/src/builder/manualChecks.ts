@@ -8359,4 +8359,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Matsu-Tribe Sniper: the flier it damages stays tapped',
     board({ you: { bf: ['Matsu-Tribe Sniper'] }, opp: { bf: ['Serra Angel'] } }),
   ),
+  // --- Two kicker costs (2026-10-27, Apocalypse) ------------------------------
+  preset(
+    'Anavolver: kick it with either kicker, or both',
+    board({ you: { bf: ['Forest*4', 'Island*2', 'Swamp'], hand: ['Anavolver'] } }),
+  ),
 ]

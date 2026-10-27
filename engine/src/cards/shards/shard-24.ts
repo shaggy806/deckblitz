@@ -311,6 +311,7 @@ import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
+import _poolIllusionReality from "../pool/illusion-reality.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
@@ -369,6 +370,7 @@ import _poolLumberknot from "../pool/lumberknot.js";
 import _poolLumithreadField from "../pool/lumithread-field.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
+import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
@@ -1081,6 +1083,7 @@ const shard: CardShard = {
     _poolHotfootGnome,
     _poolHuntersProwess,
     _poolIceFangCoatl,
+    _poolIllusionReality,
     _poolImpoliteEntrance,
     _poolIncubationSac,
     _poolInfernalReckoning,
@@ -1139,6 +1142,7 @@ const shard: CardShard = {
     _poolLumithreadField,
     _poolMaestrosCharm,
     _poolMalachiteTalisman,
+    _poolManaclesOfDecay,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
     _poolMasterSymmetrist,

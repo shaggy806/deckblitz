@@ -246,6 +246,7 @@ import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
+import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
@@ -495,6 +496,7 @@ import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
+import _poolQuicksilverDagger from "../pool/quicksilver-dagger.js";
 import _poolRabidWolverines from "../pool/rabid-wolverines.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
     _poolGenesisHydra,
+    _poolGerrardsVerdict,
     _poolGhostLitWarder,
     _poolGiantGrowth,
     _poolGideonsBattleCry,
@@ -1267,6 +1270,7 @@ const shard: CardShard = {
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
     _poolQuickStudy,
+    _poolQuicksilverDagger,
     _poolRabidWolverines,
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,

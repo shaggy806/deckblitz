@@ -461,6 +461,8 @@ import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPegasusCourser from "../pool/pegasus-courser.js";
+import _poolPenumbraBobcat from "../pool/penumbra-bobcat.js";
+import _poolPenumbraKavu from "../pool/penumbra-kavu.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
 import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
@@ -718,6 +720,7 @@ import _poolWeiEliteCompanions from "../pool/wei-elite-companions.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
+import _poolWildResearch from "../pool/wild-research.js";
 import _poolWildWurm from "../pool/wild-wurm.js";
 import _poolWilfredMott from "../pool/wilfred-mott.js";
 import _poolWillScionOfPeace from "../pool/will-scion-of-peace.js";
@@ -755,6 +758,7 @@ import _tokensHorseTokenTheGirlInTheFireplace from "../tokens/horse-token-the-gi
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
+import _tokensKavuTokenBlack33 from "../tokens/kavu-token-black-3-3.js";
 import _tokensLanderToken from "../tokens/lander-token.js";
 import _tokensMeteoriteToken from "../tokens/meteorite-token.js";
 import _tokensNinjaToken from "../tokens/ninja-token.js";
@@ -1227,6 +1231,8 @@ const shard: CardShard = {
     _poolPartingThoughts,
     _poolPeerIntoTheAbyss,
     _poolPegasusCourser,
+    _poolPenumbraBobcat,
+    _poolPenumbraKavu,
     _poolPersistentSpecimen,
     _poolPhalanxFormation,
     _poolPharikasMender,
@@ -1484,6 +1490,7 @@ const shard: CardShard = {
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,
+    _poolWildResearch,
     _poolWildWurm,
     _poolWilfredMott,
     _poolWillScionOfPeace,
@@ -1523,6 +1530,7 @@ const shard: CardShard = {
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,
+    _tokensKavuTokenBlack33,
     _tokensLanderToken,
     _tokensMeteoriteToken,
     _tokensNinjaToken,

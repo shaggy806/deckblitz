@@ -6685,7 +6685,7 @@
   },
   "keyword:two-kicker-costs": {
    "family": "keyword:multikicker",
-   "example": "Two different kicker costs on one card ('Kicker {G} and/or {1}{U}', rule 702.33d), each payable once, with conditions that name which kicker was paid (Wastescape Battlemage, the Zendikar Rising-style 'kicked with its {X} kicker' cards)."
+   "example": "Two different kicker costs on one card ('Kicker {G} and/or {1}{U}', rule 702.33d), each payable once, with conditions that name which kicker was paid (Wastescape Battlemage, the Zendikar Rising-style 'kicked with its {X} kicker' cards). Built 2026-10-27 (B218): kicker.second, self-kicked's with."
   },
   "replacement:as-enters-choose-characteristics": {
    "family": "replacement:copy-on-enter-options",
@@ -11659,6 +11659,34 @@
   },
   "condition:countered-this-way": {
    "example": "Fold into Aether: 'Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield' — nothing when the spell can't be countered."
+  },
+  "decision:choose-creature-type-excluding": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "example": "Choose a creature type other than Wall as it resolves (Unnatural Selection)."
+  },
+  "static:must-target-flagbearer": {
+   "family": "static:cant-be-targeted-by-filter",
+   "example": "Flagbearer (APC): 'While choosing targets as part of casting a spell or activating an ability, your opponents must choose at least one Flagbearer on the battlefield if able' (Standard Bearer, Coalition Flag, Coalition Honor Guard)."
+  },
+  "condition:targets-same-colors": {
+   "family": "effect:targets-share-type",
+   "example": "At resolution, two targets are exactly the same colours (Dead Ringers: 'destroy two target nonblack creatures unless either one is a color the other isn't')."
+  },
+  "effect:set-land-type": {
+   "family": "decision:choose-land-type-on-resolution",
+   "example": "A target land becomes a chosen basic land type, replacing its land types and abilities (rule 305.7) — Reef Shaman, Tundra Kavu; the one-shot counterpart of static:land-type-setting."
+  },
+  "target:creature-planeswalker-or-player": {
+   "family": "effect:target-spec-additions",
+   "example": "One target slot for 'creature, planeswalker, or player' — any-target without battles (Captain's Maneuver)."
+  },
+  "effect:other-player-may-pay-spell-mana-cost": {
+   "family": "effect:unless-target-controller",
+   "example": "Whenever a player casts a spell, any other player may pay that spell's mana cost; if one does, counter it (Ice Cave)."
+  },
+  "filter:shares-color-with-sacrificed": {
+   "family": "effect:targets-share-type",
+   "example": "A card that shares a colour with the creature sacrificed as a cost (Mind Extraction's discard)."
   },
   "trigger:spell-or-ability-put-on-stack": {
    "example": "Grip of Chaos: Triggers on every spell or ability put on the stack and reselects its single target at random."

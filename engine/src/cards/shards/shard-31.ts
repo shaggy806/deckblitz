@@ -77,6 +77,7 @@ import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
+import _poolBloodfireDwarf from "../pool/bloodfire-dwarf.js";
 import _poolBloodhallOoze from "../pool/bloodhall-ooze.js";
 import _poolBloodswornKnight from "../pool/bloodsworn-knight.js";
 import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
@@ -116,6 +117,7 @@ import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
 import _poolCertainDeath from "../pool/certain-death.js";
 import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
+import _poolChaos from "../pool/chaos.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
@@ -359,6 +361,7 @@ import _poolHuntingMoa from "../pool/hunting-moa.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
+import _poolIlluminate from "../pool/illuminate.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
@@ -484,6 +487,7 @@ import _poolNetherVoid from "../pool/nether-void.js";
 import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
+import _poolNightDay from "../pool/night-day.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNimbusSwimmer from "../pool/nimbus-swimmer.js";
 import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
@@ -539,6 +543,7 @@ import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
 import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
 import _poolPuppetConjurer from "../pool/puppet-conjurer.js";
+import _poolPutridWarrior from "../pool/putrid-warrior.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRakdosHeadliner from "../pool/rakdos-headliner.js";
@@ -677,6 +682,7 @@ import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
+import _poolSylvanMessenger from "../pool/sylvan-messenger.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolSymbiosis from "../pool/symbiosis.js";
 import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
@@ -900,6 +906,7 @@ const shard: CardShard = {
     _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,
     _poolBloodCrypt,
+    _poolBloodfireDwarf,
     _poolBloodhallOoze,
     _poolBloodswornKnight,
     _poolBloodthornTaunter,
@@ -939,6 +946,7 @@ const shard: CardShard = {
     _poolCertainDeath,
     _poolChandrasDefeat,
     _poolChaosTerminatorLord,
+    _poolChaos,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolCharmbreakerDevils,
@@ -1182,6 +1190,7 @@ const shard: CardShard = {
     _poolHydroelectricLaboratory,
     _poolIcehideTroll,
     _poolIcewindElemental,
+    _poolIlluminate,
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
     _poolImmersturmRaider,
@@ -1307,6 +1316,7 @@ const shard: CardShard = {
     _poolNeutralizingBlast,
     _poolNewHorizons,
     _poolNezumiBladeblesser,
+    _poolNightDay,
     _poolNimReplica,
     _poolNimbusSwimmer,
     _poolNinthBridgePatrol,
@@ -1362,6 +1372,7 @@ const shard: CardShard = {
     _poolPsychomancer,
     _poolPunishTheEnemy,
     _poolPuppetConjurer,
+    _poolPutridWarrior,
     _poolRabidBite,
     _poolRaidingNightstalker,
     _poolRakdosHeadliner,
@@ -1500,6 +1511,7 @@ const shard: CardShard = {
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSwirlingSpriggan,
+    _poolSylvanMessenger,
     _poolSylvanSafekeeper,
     _poolSymbiosis,
     _poolSyrFarenTheHengehammer,

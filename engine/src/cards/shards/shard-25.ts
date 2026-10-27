@@ -227,6 +227,7 @@ import _poolFieryFinish from "../pool/fiery-finish.js";
 import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
+import _poolFire from "../pool/fire.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFirewingPhoenix from "../pool/firewing-phoenix.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
@@ -332,6 +333,7 @@ import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
+import _poolKavuHowler from "../pool/kavu-howler.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
@@ -395,6 +397,7 @@ import _poolMessengerJays from "../pool/messenger-jays.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
+import _poolMinotaurIllusionist from "../pool/minotaur-illusionist.js";
 import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -974,6 +977,7 @@ const shard: CardShard = {
     _poolFinaleOfDevastation,
     _poolFirbolgFlutist,
     _poolFireDiamond,
+    _poolFire,
     _poolFirebrandArcher,
     _poolFirewingPhoenix,
     _poolFlameSlash,
@@ -1079,6 +1083,7 @@ const shard: CardShard = {
     _poolKarametrasFavor,
     _poolKarplusanWolverine,
     _poolKataraTheFearless,
+    _poolKavuHowler,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,
     _poolKeeperOfTresserhorn,
@@ -1142,6 +1147,7 @@ const shard: CardShard = {
     _poolMineRaider,
     _poolMinisterOfPain,
     _poolMinotaurAbomination,
+    _poolMinotaurIllusionist,
     _poolMirranMettle,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,

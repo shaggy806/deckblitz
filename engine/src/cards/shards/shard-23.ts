@@ -280,6 +280,7 @@ import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
+import _poolHauntedAngel from "../pool/haunted-angel.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
@@ -453,6 +454,7 @@ import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js";
+import _poolOrder from "../pool/order.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
@@ -1053,6 +1055,7 @@ const shard: CardShard = {
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
     _poolHarvestWurm,
+    _poolHauntedAngel,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
@@ -1226,6 +1229,7 @@ const shard: CardShard = {
     _poolOmenOfTheForge,
     _poolOminousSphinx,
     _poolOrderOfTheGoldenCricket,
+    _poolOrder,
     _poolOrdruunMentor,
     _poolOrneryGoblin,
     _poolOutCold,

@@ -2375,6 +2375,12 @@ export function parseFace(face, ctx = {}) {
     // permanent's "When this enters, if it was kicked, …" (`self-kicked`); a
     // spell's "if this spell was kicked" stays a person's.
     if (!isSpell && (m = /^Kicker ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1] }; continue; }
+    // "Kicker [A] and/or [B]" (rule 702.33b): two kicker costs, each payable
+    // once; "if it was kicked with its [A] kicker" reads `self-kicked`'s `with`.
+    if (!isSpell && (m = /^Kicker ((?:\{[^}]+\})+) and\/or ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.kicker = { cost: m[1], second: m[2] };
+      continue;
+    }
     // Entwine [cost] (rule 702.42a): a kicker that chooses every mode — the
     // modal spell's `kickedModes`, set once its modes are read.
     if (isSpell && (m = /^Entwine ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "entwine" }; continue; }
@@ -2648,7 +2654,7 @@ export function parseFace(face, ctx = {}) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.
         const clause = rest.slice(0, rest.indexOf(",") + 1);
-        const condition = INTERVENING_IFS[clause.toLowerCase()] ?? devotionIf(clause);
+        const condition = INTERVENING_IFS[clause.toLowerCase()] ?? devotionIf(clause) ?? kickedWithIf(clause, out.kicker);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
@@ -2964,6 +2970,18 @@ const INTERVENING_IFS = {
 
 /** "If your devotion to white and black is seven or greater," (March of the
  * Canonized — rule 700.5) as a `devotion` condition, or `undefined`. */
+/** "if it was kicked with its [A] kicker," / "… twice," on a card with two
+ * kicker costs (rule 702.33f — `kicker.second`). */
+function kickedWithIf(clause, kicker) {
+  if (kicker?.second === undefined) return undefined;
+  const m = /^if (?:it|~) was kicked (?:with its ((?:\{[^}]+\})+) kicker|(twice)),$/.exec(clause);
+  if (m === null) return undefined;
+  if (m[2] === "twice") return { kind: "self-kicked", with: "both" };
+  if (m[1] === kicker.cost) return { kind: "self-kicked", with: "first" };
+  if (m[1] === kicker.second) return { kind: "self-kicked", with: "second" };
+  return undefined;
+}
+
 function devotionIf(clause) {
   const m = new RegExp(`^if your devotion to ${DEVOTION} is ${N} or (greater|less),$`).exec(clause);
   if (m === null) return undefined;

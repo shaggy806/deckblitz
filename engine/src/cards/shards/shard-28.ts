@@ -89,6 +89,7 @@ import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
 import _poolBrainGorgers from "../pool/brain-gorgers.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
+import _poolBrassHerald from "../pool/brass-herald.js";
 import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
 import _poolBringToTrial from "../pool/bring-to-trial.js";
@@ -402,6 +403,7 @@ import _poolMindControl from "../pool/mind-control.js";
 import _poolMindRoots from "../pool/mind-roots.js";
 import _poolMineWorker from "../pool/mine-worker.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
+import _poolMinotaurTactician from "../pool/minotaur-tactician.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMizziumTank from "../pool/mizzium-tank.js";
@@ -625,6 +627,7 @@ import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
 import _poolSpawnOfRixMaadi from "../pool/spawn-of-rix-maadi.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
+import _poolSpiritmonger from "../pool/spiritmonger.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolBrackwaterElemental,
     _poolBrainGorgers,
     _poolBramblesnap,
+    _poolBrassHerald,
     _poolBreachingDragonstorm,
     _poolBrighthearthBanneret,
     _poolBringToTrial,
@@ -1195,6 +1199,7 @@ const shard: CardShard = {
     _poolMindRoots,
     _poolMineWorker,
     _poolMinecartDaredevil,
+    _poolMinotaurTactician,
     _poolMirrorworks,
     _poolMistfireAdept,
     _poolMizziumTank,
@@ -1418,6 +1423,7 @@ const shard: CardShard = {
     _poolSpawnOfRixMaadi,
     _poolSpecimenCollector,
     _poolSpiritOfTheNight,
+    _poolSpiritmonger,
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,

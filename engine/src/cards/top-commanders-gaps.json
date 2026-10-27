@@ -467,7 +467,8 @@
   "trigger:functions-while-suspended",
   "cost:reveal-any-number-from-hand",
   "keyword:sunburst",
-  "condition:same-name-as-target"
+  "condition:same-name-as-target",
+  "keyword:two-kicker-costs"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

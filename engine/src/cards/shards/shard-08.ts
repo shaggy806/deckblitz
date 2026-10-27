@@ -165,6 +165,7 @@ import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathmark from "../pool/deathmark.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
+import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
@@ -372,6 +373,7 @@ import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
+import _poolKavuMauler from "../pool/kavu-mauler.js";
 import _poolKavuPrimarch from "../pool/kavu-primarch.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
@@ -427,6 +429,7 @@ import _poolManaChains from "../pool/mana-chains.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
+import _poolMaskOfIntolerance from "../pool/mask-of-intolerance.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
@@ -690,6 +693,7 @@ import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThroneWarden from "../pool/throne-warden.js";
 import _poolThundercloudShaman from "../pool/thundercloud-shaman.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
+import _poolTidalCourier from "../pool/tidal-courier.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTimelyHordemate from "../pool/timely-hordemate.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
@@ -970,6 +974,7 @@ const shard: CardShard = {
     _poolDeathmark,
     _poolDeathsprout,
     _poolDeception,
+    _poolDegaSanctuary,
     _poolDenziloreFatehold,
     _poolDeputyOfAcquittals,
     _poolDesertCerodon,
@@ -1177,6 +1182,7 @@ const shard: CardShard = {
     _poolKarnSilverGolem,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
+    _poolKavuMauler,
     _poolKavuPrimarch,
     _poolKaylasCommand,
     _poolKellanJoinsUp,
@@ -1232,6 +1238,7 @@ const shard: CardShard = {
     _poolMantleOfTheWolf,
     _poolMarkovCrusader,
     _poolMartialCoup,
+    _poolMaskOfIntolerance,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
     _poolMercurialGeists,
@@ -1495,6 +1502,7 @@ const shard: CardShard = {
     _poolThroneWarden,
     _poolThundercloudShaman,
     _poolThunderdrumSoloist,
+    _poolTidalCourier,
     _poolTidehollowStrix,
     _poolTimelyHordemate,
     _poolTocasiasDigSite,

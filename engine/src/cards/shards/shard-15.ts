@@ -25,6 +25,7 @@ import _poolAnglerDrake from "../pool/angler-drake.js";
 import _poolAnjesRavager from "../pool/anjes-ravager.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
+import _poolArchangelOfWrath from "../pool/archangel-of-wrath.js";
 import _poolArcticAven from "../pool/arctic-aven.js";
 import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
 import _poolArenaTrickster from "../pool/arena-trickster.js";
@@ -54,6 +55,7 @@ import _poolBloodHost from "../pool/blood-host.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodcrazedGoblin from "../pool/bloodcrazed-goblin.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
+import _poolBogGnarr from "../pool/bog-gnarr.js";
 import _poolBogStriderAsh from "../pool/bog-strider-ash.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
 import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
@@ -710,6 +712,7 @@ import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
+import _tokensBlackCatToken21 from "../tokens/black-cat-token-2-1.js";
 import _tokensBlackWolfTokenDeathtouch from "../tokens/black-wolf-token-deathtouch.js";
 import _tokensCatDragonToken from "../tokens/cat-dragon-token.js";
 import _tokensDemonToken66FlyingTrampleUpkeepSacrifice from "../tokens/demon-token-6-6-flying-trample-upkeep-sacrifice.js";
@@ -733,6 +736,7 @@ import _tokensSquirrelToken from "../tokens/squirrel-token.js";
 import _tokensTrollWarriorToken from "../tokens/troll-warrior-token.js";
 import _tokensTyranidToken from "../tokens/tyranid-token.js";
 import _tokensWickedRoleToken from "../tokens/wicked-role-token.js";
+import _tokensWurmTokenBlack66Trample from "../tokens/wurm-token-black-6-6-trample.js";
 
 const shard: CardShard = {
   pool: [
@@ -758,6 +762,7 @@ const shard: CardShard = {
     _poolAnjesRavager,
     _poolAqueousAria,
     _poolArcboundWhelp,
+    _poolArchangelOfWrath,
     _poolArcticAven,
     _poolArdenvaleTactician,
     _poolArenaTrickster,
@@ -787,6 +792,7 @@ const shard: CardShard = {
     _poolBloodMoney,
     _poolBloodcrazedGoblin,
     _poolBloodtallowCandle,
+    _poolBogGnarr,
     _poolBogStriderAsh,
     _poolBoggartMischief,
     _poolBogslithersEmbrace,
@@ -1445,6 +1451,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBadgerToken,
+    _tokensBlackCatToken21,
     _tokensBlackWolfTokenDeathtouch,
     _tokensCatDragonToken,
     _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
@@ -1468,6 +1475,7 @@ const shard: CardShard = {
     _tokensTrollWarriorToken,
     _tokensTyranidToken,
     _tokensWickedRoleToken,
+    _tokensWurmTokenBlack66Trample,
   ],
 };
 

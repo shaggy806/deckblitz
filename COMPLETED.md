@@ -96,6 +96,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   of Darksteel's 102 authored — Gemini Engine, Spellbinder, Vex, Furnace Dragon, Myr Matrix,
   Wirefly Hive, Pristine Angel — by five `card-author` agents and the lead, and 34 blocked
   (`B214.json`).
+- **Two kicker costs, and Apocalypse — Apocalypse is whole** (batch 218, the sixth middle walk,
+  2026-10-27, `keyword:two-kicker-costs`): **built** "Kicker [A] and/or [B]" (rule 702.33b, f —
+  `kicker.second`, offered as the first, the second or both; `self-kicked`'s `with` for "kicked
+  with its [A] kicker" and "kicked twice"), read by the scaffolder, with the five volvers,
+  Illuminate and six earlier cards (Archangel of Wrath, Ana Battlemage, Wastescape Battlemage,
+  Vodalian Mindsinger, Stronghold Arena, Temporal Firestorm). 75 of Apocalypse's 100 authored —
+  Fire // Ice, Spiritmonger, Prophetic Bolt, the Sanctuaries, the Penumbras, Gaea's Balance — by
+  five `card-author` agents and the lead, and 25 blocked (`B218.json`). Forked Bolt, which had no
+  `divided`, deals its damage again.
 - **Scourge — Scourge is whole** (batch 216, the fourth middle walk's first batch, 2026-10-27):
   no engine change. 59 of Scourge's 90 authored — Decree of Justice, Karona False God, Ambush
   Commander, Pyrostatic Pillar, Xantid Swarm, Eternal Dragon, the Dragon Auras — by five

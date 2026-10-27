@@ -57,6 +57,7 @@ import _poolBlightspeaker from "../pool/blightspeaker.js";
 import _poolBlistergrub from "../pool/blistergrub.js";
 import _poolBloatedToad from "../pool/bloated-toad.js";
 import _poolBloodRites from "../pool/blood-rites.js";
+import _poolBloodfireKavu from "../pool/bloodfire-kavu.js";
 import _poolBloodghast from "../pool/bloodghast.js";
 import _poolBloodpyreElemental from "../pool/bloodpyre-elemental.js";
 import _poolBloodstainedMire from "../pool/bloodstained-mire.js";
@@ -84,6 +85,7 @@ import _poolCarnivalCarnage from "../pool/carnival-carnage.js";
 import _poolCatacombSifter from "../pool/catacomb-sifter.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
+import _poolCetavolver from "../pool/cetavolver.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
@@ -254,6 +256,7 @@ import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
 import _poolGoblinOutlander from "../pool/goblin-outlander.js";
 import _poolGoblinPiledriver from "../pool/goblin-piledriver.js";
 import _poolGoblinSpelunkers from "../pool/goblin-spelunkers.js";
+import _poolGoblinTrenches from "../pool/goblin-trenches.js";
 import _poolGohnTownOfRuin from "../pool/gohn-town-of-ruin.js";
 import _poolGoldberryRiverDaughter from "../pool/goldberry-river-daughter.js";
 import _poolGondGate from "../pool/gond-gate.js";
@@ -470,6 +473,7 @@ import _poolPrideGuardian from "../pool/pride-guardian.js";
 import _poolPriestOfTheCrossing from "../pool/priest-of-the-crossing.js";
 import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
 import _poolPromisingDuskmage from "../pool/promising-duskmage.js";
+import _poolPropheticBolt from "../pool/prophetic-bolt.js";
 import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
@@ -619,6 +623,7 @@ import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
+import _poolStrongholdArena from "../pool/stronghold-arena.js";
 import _poolSuddenImpact from "../pool/sudden-impact.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
 import _poolSultaiSoothsayer from "../pool/sultai-soothsayer.js";
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolBlistergrub,
     _poolBloatedToad,
     _poolBloodRites,
+    _poolBloodfireKavu,
     _poolBloodghast,
     _poolBloodpyreElemental,
     _poolBloodstainedMire,
@@ -850,6 +856,7 @@ const shard: CardShard = {
     _poolCatacombSifter,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
+    _poolCetavolver,
     _poolChainersEdict,
     _poolChakramRetriever,
     _poolChangelingBerserker,
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _poolGoblinOutlander,
     _poolGoblinPiledriver,
     _poolGoblinSpelunkers,
+    _poolGoblinTrenches,
     _poolGohnTownOfRuin,
     _poolGoldberryRiverDaughter,
     _poolGondGate,
@@ -1236,6 +1244,7 @@ const shard: CardShard = {
     _poolPriestOfTheCrossing,
     _poolPrimalHuntbeast,
     _poolPromisingDuskmage,
+    _poolPropheticBolt,
     _poolPropheticPrism,
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
@@ -1385,6 +1394,7 @@ const shard: CardShard = {
     _poolStonehands,
     _poolStreamOfLife,
     _poolStrifeScholar,
+    _poolStrongholdArena,
     _poolSuddenImpact,
     _poolSultaiSkullkeeper,
     _poolSultaiSoothsayer,

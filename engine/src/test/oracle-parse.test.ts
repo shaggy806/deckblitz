@@ -1563,6 +1563,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Kicker {4}\nDeal 2 damage.", "Instant").kicker).toBeUndefined();
   });
 
+  it("two kicker costs (rule 702.33b, f): 'kicked with its [A] kicker' and 'kicked twice'", () => {
+    const mage = face(
+      "Kicker {2}{U} and/or {1}{B} (You may pay an additional {2}{U} and/or {1}{B} as you cast this spell.)\nWhen this creature enters, if it was kicked with its {2}{U} kicker, target player discards three cards.\nWhen this creature enters, if it was kicked with its {1}{B} kicker, target player discards three cards.",
+      "Creature — Human Wizard",
+    );
+    expect(mage.kicker).toEqual({ cost: "{2}{U}", second: "{1}{B}" });
+    expect(mage.triggered[0].condition).toEqual({ kind: "self-kicked", with: "first" });
+    expect(mage.triggered[1].condition).toEqual({ kind: "self-kicked", with: "second" });
+    const angel = face(
+      "Kicker {B} and/or {R}\nWhen this creature enters, if it was kicked twice, it deals 2 damage to any target.",
+      "Creature — Angel",
+    );
+    expect(angel.triggered[0].condition).toEqual({ kind: "self-kicked", with: "both" });
+  });
+
   it("jump-start and mentor (rules 702.133, 702.134)", () => {
     const idea = face("Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)", "Instant", { mana_cost: "{1}{U}" });
     expect(idea.flashback).toEqual({ cost: "{1}{U}", discard: 1, keyword: "jump-start" });
