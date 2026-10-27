@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Planeshift — Planeshift is whole** (batch 221, the sixth middle walk, 2026-10-27): 76 of its
+  108 remaining new cards authored — the scaffolder finished the three kicker Battlemages and
+  Stratadon; five `card-author` agents the rest: the five Lairs, the gating creatures (Cavern
+  Harpy, Silver Drake, Horned Kavu…), the Familiars, Phyrexian Tyranny, Tahngarth, Nemata,
+  Shifting Sky, Voice of All — and 32 blocked (`B221.json`), no feature built. Found and fixed:
+  the five Medallions (`medallion()`) made every player's spells of their colour cost {1} less.
 - **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
   remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
   Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic

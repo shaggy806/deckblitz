@@ -11867,6 +11867,42 @@
   "condition:hand-size-at-turn-start": {
    "family": "condition:that-player-hand-size",
    "example": "Mindstorm Crown: 'If you had no cards in hand at the beginning of this turn, draw a card. Otherwise, this deals 1 damage to you.'"
+  },
+  "amount:domain-of-target-player": {
+   "family": "amount:basic-land-types",
+   "example": "Domain counted over a target player's lands, not yours — Allied Strategies (PLS)."
+  },
+  "condition:most-common-color-among-all-permanents": {
+   "family": "condition:most-common-color-among-chosen-player-permanents",
+   "example": "The most common color (or one tied for it) among all permanents — Heroic Defiance (PLS)."
+  },
+  "condition:target-shares-color-with-chosen-permanent": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "A target sharing a color with a permanent chosen as the spell resolves — Guard Dogs (PLS)."
+  },
+  "cost:self-cost-reduction-domain-times-n": {
+   "family": "cost:self-cost-reduction",
+   "example": "A spell costing {N} less per basic land type, N above 1 — Draco (PLS, {2} each)."
+  },
+  "decision:choose-land-of-each-basic-type": {
+   "family": "decision:choose-permanent",
+   "example": "Each player chooses a land of each basic land type they control (a dual may count for both) — Planar Overlay (PLS)."
+  },
+  "decision:keep-one-of-each-color-discard-rest": {
+   "family": "decision:choose-permanent",
+   "example": "Each player keeps one card of each color from hand and discards the other nonland cards — Noxious Vapors (PLS)."
+  },
+  "effect:discard-chosen-trigger-player": {
+   "family": "effect:discard-chosen",
+   "example": "Look at the damaged/triggering player's hand and choose a card they discard, with no target slot — Doomsday Specter (PLS)."
+  },
+  "effect:trigger-object-owner-player-ref": {
+   "family": "effect:discard-chosen",
+   "example": "'That player' read as the owner of the trigger's object rather than its last controller — Warped Devotion (PLS)."
+  },
+  "replacement:redirect-next-damage-event": {
+   "family": "replacement:prevent-damage-redirect",
+   "example": "The next time damage would be dealt to it this turn, the whole event is dealt to another target instead — Mirrorwood Treefolk (PLS)."
   }
  }
 }
