@@ -1568,6 +1568,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **The need-keys plan's model trial, Phase 0.5** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`
+  → *Trial results*): Sonnet and Haiku, two runs each, against an Opus answer key that was checked
+  by hand. The existence check covered 40 keys and the merge three families. **Haiku takes both
+  steps.** It made 0–1 false *exists* to Sonnet's 2, and no model made a wrong alias, at a sixth to
+  a fourteenth of the cost. The existence check runs twice per page and counts *exists* only when
+  both runs agree. The prompts are in `engine/scripts/needs-prompts/`.
 - **The need-keys plan's tooling, Phase 0** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`):
   `cards:needs -- --audit` (records with every need built, since triage or before; cards whose
   records disagree; undocumented open keys; merge candidates by family, to `needs-audit.txt` in

@@ -1,7 +1,7 @@
 <!-- The need-keys plan's key merge (docs/plans/need-keys-after-the-walk.md, Phase 1 step 3).
      Give the agent this text with {{BRIEF}} naming a file of `cards:needs -- --brief <family>`'s
      output (every page) and {{CANDIDATES}} one of `--audit`'s merge candidates for that family.
-     Settled by the Phase 0.5 trial. -->
+     Settled by the Phase 0.5 trial: run it on Haiku. -->
 
 You are cleaning up the vocabulary of "need keys" for a Magic: The Gathering rules engine. Each
 key names an engine feature that some unimplemented cards are waiting on. People wrote the keys

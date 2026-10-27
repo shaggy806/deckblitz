@@ -1,6 +1,7 @@
 <!-- The need-keys plan's existence check (docs/plans/need-keys-after-the-walk.md, Phase 1 step 4).
      Give the agent this text with {{BRIEF}} replaced by a file of about 20 keys in `--brief`'s
-     key format (key, description, up to two `why`s). Settled by the Phase 0.5 trial. -->
+     key format (key, description, up to two `why`s). Settled by the Phase 0.5 trial: run it on
+     Haiku, twice per page, and count a key as exists only when both runs say so. -->
 
 You are checking whether a Magic: The Gathering rules engine can already do what some "need keys"
 describe. The repo is at /home/user/deckblitz; the engine is `engine/src` (TypeScript). Cards are
@@ -13,10 +14,12 @@ were blocked. The engine has grown since then, so some of these keys may already
 
 For each key decide:
 
-- **exists**: a card author could write the quoted cards' part of the key today with what the
-  engine has, with no engine change. Name the file and the symbol (effect kind, field, keyword)
-  that does it.
-- **partial**: some of it is there. Say in one line what is still missing, and name what's there.
+- **exists**: a card author could write **every** quoted card's part of the key today with what
+  the engine has, with no engine change. Name the file and the symbol (effect kind, field,
+  keyword) that does it. Check each quoted line, not just the description: a key's own example
+  often works while another card quoted under it needs more, and that key is **partial**.
+- **partial**: some of it is there. Say in one line what is still missing, naming the card that
+  needs it, and name what's there.
 - **missing**: the engine has nothing that does it.
 
 How to look, cheapest first:

@@ -1,8 +1,8 @@
 # Working down the need keys, after the set walk
 
-**Status:** in progress. Phase 0 (the tooling) is done (2026-10-27); Phase 0.5, the
-Sonnet-against-Haiku trial, is next, in a session of its own. The set walk ended 2026-10-27
-(batch 234).
+**Status:** in progress. Phase 0 (the tooling) and Phase 0.5 (the Sonnet-against-Haiku trial)
+are done (2026-10-27): Haiku takes both judging steps (*Trial results*, below). Phase 1 is next.
+The set walk ended 2026-10-27 (batch 234).
 
 Once the walk ends, every Commander-legal first printing has been either authored or triaged with
 a blocked record (`{ name, needs, why }` in `engine/data/sweep-2/`, `sweep-3/` and
@@ -100,7 +100,7 @@ multi-face names. The pool index caches its answer, so the index's `VERSION` wen
 These stay in one script beside `--rank`, `--stale` and `--feature`. No new data files: the
 vocabulary JSON stays the single store.
 
-## Phase 0.5: a trial of Sonnet against Haiku (one session, before Phase 1)
+## Phase 0.5: a trial of Sonnet against Haiku (one session, before Phase 1) — done 2026-10-27
 
 Steps 1.3 and 1.4 below are where the cheap agents do the judging. Before they run at scale, a
 small trial picks the model for each step. It runs on Phase 0's `--brief` output, so it costs
@@ -133,6 +133,93 @@ nothing more to set up.
   and the choice go into this file under a *Trial results* heading. The prompts the trial
   settled on go beside `--brief`, so Phase 1 runs them unchanged.
 
+### Trial results (2026-10-27)
+
+**Haiku takes both judging steps.** For the existence check (step 1.4), run it **twice per page and
+count a key as *exists* only when both runs say so**. The prompts are
+`engine/scripts/needs-prompts/exists.md` and `merge.md`, beside `--brief`. Each agent got a
+one-line pointer to its prompt file, the same for every model.
+
+**The sample.** For the existence check, 40 keys in two pages of 20, shuffled, with card counts
+left out so built keys didn't stand out:
+- 20 open keys of five or more cards, evenly spaced down the count ranking;
+- 10 keys built before 2026-10-22, in their current wording;
+- 10 keys built since 2026-10-22 by an engine commit, in the wording they had before it.
+
+For merging, three families: combat-restriction extensions (50 open keys), damage modification
+(54) and token-copy options (16).
+
+**The answer key needed hand-checking.** Opus answered every key once, and the coordinator checked by
+hand wherever runs disagreed. Opus was wrong three times: twice a false *exists*, once a false
+*partial*.
+- `keyword:emerge` is partial: nothing grants emerge to another spell, so Herigast is still
+  blocked.
+- `cost:exile-from-graveyard-additional` is partial: Gorex needs "any number, {2} less each" and
+  only a fixed count exists.
+- `trigger:deals-damage-once-per-event` is built (commit `e25db3585`). Opus read the separate
+  batched trigger instead.
+
+**Controls.** Eight of the 20 built controls came back **partial**, and correctly so. Each key's
+own card works, but another card still filed under that key needs more:
+- Elvish Soultiller needs a filtered graveyard shuffle;
+- Ao, the Dawn Sky needs a total-mana-value cap on look-and-choose;
+- Everything Comes to Dust needs a filter for "shares a type with a convoker";
+- Aggravate needs a "dealt damage this way" mass filter;
+- and four more like them.
+
+The 704 records whose keys were all built before triage are mostly this: a key built for one
+card and reused for a broader need. Phase 1 step 2 should expect most of them to stay blocked
+under a narrower new key.
+
+Existence check, 40 keys per run (Haiku and Sonnet ran twice each):
+
+| Run | False *exists* (costly) | False *missing* | Partial ↔ missing swaps | Parsed | Wall time | Cost |
+|---|---|---|---|---|---|---|
+| Haiku A | 1 | 1 | 4 | yes | 6.6 min | $0.27 |
+| Haiku B | 0 | 1 | 4 | yes | 5.4 min | $0.19 |
+| Sonnet A | 2 | 0 | 6 | yes | 7.5 min | $3.26 |
+| Sonnet B | 2 | 1 | 4 | yes | 6.1 min | $3.13 |
+| Opus (before the hand check) | 2 | 1 | — | yes | 3.7 min | $3.42 |
+
+Merging, per family (combat, damage, token-copy):
+
+| Model | Wrong aliases (costly) | Missed aliases | Group pairs agreeing with the key (precision / recall) | Parsed | Time | Cost |
+|---|---|---|---|---|---|---|
+| Haiku ×2 | 0, 0, 0 | 0, 1, 0 (both runs) | 0.65–1.0 / 0.19–0.65 | yes | 0.5–2.2 min | $0.007–0.021 |
+| Sonnet ×2 | 0, 0, 0 | 0, 1, 0 (both runs) | 0.66–0.77 / 0.25–0.66 | yes | 0.2–0.5 min | $0.10–0.16 |
+| Opus (the key) | — | — | — | yes | 0.3–0.8 min | $0.18–0.33 |
+
+Costs use list prices per million tokens: Sonnet 5.5 $2 in, $0.20 cache read, $10 out; Haiku 5.5
+$0.10 in, $0.50 out, with its cache read taken as $0.01. Cache writes are counted at 1.25× input.
+Most of every agent's input is its own cached context read again on each request (4–8M tokens a
+page for the existence check), which is why Sonnet costs so much more there.
+
+**What decided it.**
+- **Existence check.** Haiku's costly errors (1 and 0) are under Sonnet's (2 and 2), it parsed
+  every time, and it costs about a fourteenth as much. The two Haiku runs never made the same
+  false *exists*, so requiring both to agree removes it. That is still ~7× cheaper than one
+  Sonnet run.
+- **Merging.** No model made a wrong alias. Every Sonnet and Haiku run missed the same subtle
+  one: `effect:prevent-combat-damage-to-and-by-source` →
+  `effect:prevent-combat-damage-by-source`, where only the "by" half is missing. A missed alias
+  is the cheap error. Groups agree with Opus about as well from either model. Haiku costs a
+  sixth as much and needs one run.
+- **Haiku writes far more output.** It used ~28K output tokens on a 50-key family against
+  Sonnet's ~4K, and was 4–5× slower. Its price absorbs that, and the steps run in parallel.
+
+**The prompt changed after the trial.** Every false *exists* came from judging a key by its
+description or its own example card while another quoted card still needed more. `exists.md` now
+says *exists* must hold for every quoted card, and that *partial* names the card that needs
+more. That wording is untested, so Phase 1's first pages should be spot-checked.
+
+**Projected Phase 1 cost.** Step 1.4 is 336 keys, or 17 pages, at two Haiku runs a page: about
+$4–8. Step 1.3 is 43 families at one Haiku run each: about $1.
+
+**Found on the way.** Cecil, Dark Knight waits only on `trigger:deals-damage-once-per-event`,
+which was built 2026-10-25, so it belongs in the first recheck batch. Strict Proctor is all that
+keeps `effect:counter-ability` (nine cards waiting) partial. Disallow and the other plain
+"counter target activated or triggered ability" cards look writable now.
+
 ## Phase 1: check that every record is really blocked
 
 Run in order, cheapest first.
@@ -146,14 +233,14 @@ Run in order, cheapest first.
    (`card-author` agents, the digest, one verify), up to six batches in one parallel round.
    A card that is still blocked gets a new, correctly narrow key, and its key's `description` is
    tightened, so the next record doesn't repeat the mistake.
-3. **Merge keys (the trial's model for this step, by family).** Each of the 43 families with ten or more keys gets
+3. **Merge keys (Haiku, one run, by family; `needs-prompts/merge.md`).** Each of the 43 families with ten or more keys gets
    one agent with `--brief <family>` and `--audit`'s merge candidates for it.
    The smaller families go in pages of about 40 keys. The agent returns only alias additions for
    `needs-vocabulary.json` (`"old-key": "kept-key"`), plus **generalisation groups**: keys one
    general implementation would cover (three "can't block unless" variants are one static with
    a condition). The coordinator applies the JSON. Nobody re-edits the records: the aliases
    resolve their keys.
-4. **"Does the engine already do this?" for keys with five or more cards (336).** Agents (the trial's model for this step) get 20
+4. **"Does the engine already do this?" for keys with five or more cards (336).** Haiku agents (`needs-prompts/exists.md`, two runs a page, *exists* only when both agree) get 20
    keys each from `--brief` plus the vocabulary digest (`card-digest.mjs`), about 16 agent runs.
    Each key comes back **exists**, **partial** (what's missing, in one line) or **missing**. An
    *exists* key's cards go into the step-2 recheck batches. A *partial* key's description is
