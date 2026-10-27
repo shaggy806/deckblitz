@@ -34,6 +34,7 @@ import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
+import _poolAnuridBarkripper from "../pool/anurid-barkripper.js";
 import _poolArabaMothrider from "../pool/araba-mothrider.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
@@ -696,6 +697,7 @@ import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
 import _poolTrapEssence from "../pool/trap-essence.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
+import _poolTreacherousVampire from "../pool/treacherous-vampire.js";
 import _poolTremor from "../pool/tremor.js";
 import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
@@ -825,6 +827,7 @@ const shard: CardShard = {
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
+    _poolAnuridBarkripper,
     _poolArabaMothrider,
     _poolArachnoid,
     _poolArbaazMir,
@@ -1487,6 +1490,7 @@ const shard: CardShard = {
     _poolTrapEssence,
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
+    _poolTreacherousVampire,
     _poolTremor,
     _poolTriangleOfWar,
     _poolTributeToHorobi,

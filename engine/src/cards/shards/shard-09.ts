@@ -466,6 +466,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
@@ -691,6 +692,7 @@ import _poolTombTyrant from "../pool/tomb-tyrant.js";
 import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
+import _poolTrainedPronghorn from "../pool/trained-pronghorn.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
@@ -1249,6 +1251,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
+    _poolPhantomTiger,
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
     _poolPhytoburst,
@@ -1474,6 +1477,7 @@ const shard: CardShard = {
     _poolTorporDust,
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
+    _poolTrainedPronghorn,
     _poolTraxosScourgeEternal,
     _poolTreacherousPitDweller,
     _poolTrenchpost,

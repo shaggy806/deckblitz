@@ -330,6 +330,7 @@ import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHungryFlames from "../pool/hungry-flames.js";
+import _poolHuntingGrounds from "../pool/hunting-grounds.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHymnOfRebirth from "../pool/hymn-of-rebirth.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
@@ -752,6 +753,7 @@ import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
 import _poolVeteransReflexes from "../pool/veterans-reflexes.js";
+import _poolVigilantSentry from "../pool/vigilant-sentry.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
@@ -1146,6 +1148,7 @@ const shard: CardShard = {
     _poolHowlingMine,
     _poolHulkingOgre,
     _poolHungryFlames,
+    _poolHuntingGrounds,
     _poolHydroelectricSpecimen,
     _poolHymnOfRebirth,
     _poolHypnoticSprite,
@@ -1568,6 +1571,7 @@ const shard: CardShard = {
     _poolVerdantSunsAvatar,
     _poolVesselOfNascency,
     _poolVeteransReflexes,
+    _poolVigilantSentry,
     _poolVileMutilator,
     _poolVillageWatch,
     _poolViridianAcolyte,

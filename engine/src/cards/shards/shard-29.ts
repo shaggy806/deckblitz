@@ -54,6 +54,7 @@ import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
+import _poolBattlewiseAven from "../pool/battlewise-aven.js";
 import _poolBazaarKrovod from "../pool/bazaar-krovod.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
@@ -454,6 +455,7 @@ import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
+import _poolPhantomNomad from "../pool/phantom-nomad.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPillarOfFlame from "../pool/pillar-of-flame.js";
@@ -827,6 +829,7 @@ const shard: CardShard = {
     _poolBargain,
     _poolBargeIn,
     _poolBarkKnuckleBoxer,
+    _poolBattlewiseAven,
     _poolBazaarKrovod,
     _poolBeatrixLoyalGeneral,
     _poolBetorKinToAll,
@@ -1227,6 +1230,7 @@ const shard: CardShard = {
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
     _poolPhantasmalSphere,
+    _poolPhantomNomad,
     _poolPharikaGodOfAffliction,
     _poolPileatedProvisioner,
     _poolPillarOfFlame,

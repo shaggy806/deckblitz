@@ -32,6 +32,7 @@ import _poolAntManColonyCommander from "../pool/ant-man-colony-commander.js";
 import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js";
 import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArcaneOmens from "../pool/arcane-omens.js";
+import _poolArcaneTeachings from "../pool/arcane-teachings.js";
 import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
@@ -110,6 +111,7 @@ import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
+import _poolCephalidInkshrouder from "../pool/cephalid-inkshrouder.js";
 import _poolCertainDeath from "../pool/certain-death.js";
 import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
@@ -204,6 +206,7 @@ import _poolDrownInFilth from "../pool/drown-in-filth.js";
 import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
+import _poolEarsplittingRats from "../pool/earsplitting-rats.js";
 import _poolEarthCultElemental from "../pool/earth-cult-elemental.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
@@ -472,6 +475,7 @@ import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
+import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
 import _poolNaturalSpring from "../pool/natural-spring.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNeedleStorm from "../pool/needle-storm.js";
@@ -850,6 +854,7 @@ const shard: CardShard = {
     _poolApostleOfPurifyingLight,
     _poolAppaSteadfastGuardian,
     _poolArcaneOmens,
+    _poolArcaneTeachings,
     _poolArchelosLagoonMystic,
     _poolArchersParapet,
     _poolArchfiendsVessel,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolCatalystElemental,
     _poolCatapultFodder,
     _poolCelestialEnforcer,
+    _poolCephalidInkshrouder,
     _poolCertainDeath,
     _poolChandrasDefeat,
     _poolChaosTerminatorLord,
@@ -1022,6 +1028,7 @@ const shard: CardShard = {
     _poolDruidsRepository,
     _poolDungeonDescent,
     _poolDunlandCrebain,
+    _poolEarsplittingRats,
     _poolEarthCultElemental,
     _poolEastWindAvatar,
     _poolEchoPerceptiveProdigy,
@@ -1290,6 +1297,7 @@ const shard: CardShard = {
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
+    _poolNantukoMonastery,
     _poolNaturalSpring,
     _poolNebelgastIntruder,
     _poolNeedleStorm,

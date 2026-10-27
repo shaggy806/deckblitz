@@ -280,6 +280,7 @@ import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
 import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
+import _poolGraveConsequences from "../pool/grave-consequences.js";
 import _poolGraveResearcher from "../pool/grave-researcher.js";
 import _poolGraveTitan from "../pool/grave-titan.js";
 import _poolGravenCairns from "../pool/graven-cairns.js";
@@ -1099,6 +1100,7 @@ const shard: CardShard = {
     _poolGrafReaver,
     _poolGrapeshot,
     _poolGraspOfDarkness,
+    _poolGraveConsequences,
     _poolGraveResearcher,
     _poolGraveTitan,
     _poolGravenCairns,

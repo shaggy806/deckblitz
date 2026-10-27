@@ -180,6 +180,7 @@ import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
+import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
@@ -570,6 +571,7 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpiritCairn from "../pool/spirit-cairn.js";
 import _poolSpiritEnDal from "../pool/spirit-en-dal.js";
 import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
@@ -908,6 +910,7 @@ const shard: CardShard = {
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolEmbraceTheUnknown,
+    _poolEpicStruggle,
     _poolErinisGloomStalker,
     _poolEssenceCapture,
     _poolEssenceDrain,
@@ -1298,6 +1301,7 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpiritCairn,
     _poolSpiritEnDal,
     _poolSpitefulBlow,
     _poolSpitefulPrankster,

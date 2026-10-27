@@ -34,6 +34,7 @@ import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolAntagonism from "../pool/antagonism.js";
 import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
+import _poolAnuridBrushhopper from "../pool/anurid-brushhopper.js";
 import _poolApesOfRath from "../pool/apes-of-rath.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
@@ -223,6 +224,7 @@ import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
+import _poolFledglingDragon from "../pool/fledgling-dragon.js";
 import _poolFleetfeatherCockatrice from "../pool/fleetfeather-cockatrice.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
 import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
@@ -701,6 +703,7 @@ import _poolVaultPlunderer from "../pool/vault-plunderer.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
 import _poolVeilOfBirds from "../pool/veil-of-birds.js";
 import _poolVengevine from "../pool/vengevine.js";
+import _poolVenomousVines from "../pool/venomous-vines.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
 import _poolViashinoWarrior from "../pool/viashino-warrior.js";
@@ -739,6 +742,7 @@ import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
+import _poolWormfangNewt from "../pool/wormfang-newt.js";
 import _poolWreckingOgre from "../pool/wrecking-ogre.js";
 import _poolWringFlesh from "../pool/wring-flesh.js";
 import _poolYavimayaGranger from "../pool/yavimaya-granger.js";
@@ -798,6 +802,7 @@ const shard: CardShard = {
     _poolAntMansArmy,
     _poolAntagonism,
     _poolAntlerSkulkin,
+    _poolAnuridBrushhopper,
     _poolApesOfRath,
     _poolApexDevastator,
     _poolApocalypseHydra,
@@ -987,6 +992,7 @@ const shard: CardShard = {
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
+    _poolFledglingDragon,
     _poolFleetfeatherCockatrice,
     _poolFleetfootDancer,
     _poolFlopsieBumisBuddy,
@@ -1465,6 +1471,7 @@ const shard: CardShard = {
     _poolVedalkenMesmerist,
     _poolVeilOfBirds,
     _poolVengevine,
+    _poolVenomousVines,
     _poolVenomousWords,
     _poolViashinoSlasher,
     _poolViashinoWarrior,
@@ -1503,6 +1510,7 @@ const shard: CardShard = {
     _poolWingsOfHope,
     _poolWitchEnchanter,
     _poolWolfCoveVillager,
+    _poolWormfangNewt,
     _poolWreckingOgre,
     _poolWringFlesh,
     _poolYavimayaGranger,

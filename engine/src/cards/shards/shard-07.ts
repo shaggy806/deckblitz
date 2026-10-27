@@ -473,6 +473,7 @@ import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
+import _poolPhantomFlock from "../pool/phantom-flock.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
@@ -638,6 +639,7 @@ import _poolSurgicalPrecision from "../pool/surgical-precision.js";
 import _poolSuspiciousBookcase from "../pool/suspicious-bookcase.js";
 import _poolSweepAway from "../pool/sweep-away.js";
 import _poolSwiftResponse from "../pool/swift-response.js";
+import _poolSwirlingSandstorm from "../pool/swirling-sandstorm.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
 import _poolSymbioteSpiderMan from "../pool/symbiote-spider-man.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
@@ -1270,6 +1272,7 @@ const shard: CardShard = {
     _poolPeacekeeper,
     _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
+    _poolPhantomFlock,
     _poolPilferingImp,
     _poolPitilessCarnage,
     _poolPlagueWind,
@@ -1435,6 +1438,7 @@ const shard: CardShard = {
     _poolSuspiciousBookcase,
     _poolSweepAway,
     _poolSwiftResponse,
+    _poolSwirlingSandstorm,
     _poolSwordOfFireAndIce,
     _poolSymbioteSpiderMan,
     _poolSyphonSliver,

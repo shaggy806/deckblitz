@@ -195,6 +195,7 @@ import _poolEffortlessMaster from "../pool/effortless-master.js";
 import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
+import _poolElephantGuide from "../pool/elephant-guide.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
@@ -463,6 +464,7 @@ import _poolPerilousPredicament from "../pool/perilous-predicament.js";
 import _poolPerish from "../pool/perish.js";
 import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
+import _poolPhantomNishoba from "../pool/phantom-nishoba.js";
 import _poolPhaseDolphin from "../pool/phase-dolphin.js";
 import _poolPhyrexianArchivist from "../pool/phyrexian-archivist.js";
 import _poolPhyrexianDigester from "../pool/phyrexian-digester.js";
@@ -951,6 +953,7 @@ const shard: CardShard = {
     _poolEiganjoFreeRiders,
     _poolEladamrisCall,
     _poolElectrify,
+    _poolElephantGuide,
     _poolElvishGuidance,
     _poolElvishHerder,
     _poolEmberShot,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolPerish,
     _poolPestControl,
     _poolPetrifiedPlating,
+    _poolPhantomNishoba,
     _poolPhaseDolphin,
     _poolPhyrexianArchivist,
     _poolPhyrexianDigester,

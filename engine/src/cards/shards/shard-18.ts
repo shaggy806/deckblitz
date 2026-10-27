@@ -186,6 +186,7 @@ import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
 import _poolEnshrinedMemories from "../pool/enshrined-memories.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
+import _poolEnvelop from "../pool/envelop.js";
 import _poolEscapeProtocol from "../pool/escape-protocol.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
@@ -944,6 +945,7 @@ const shard: CardShard = {
     _poolEnshrinedMemories,
     _poolEntishRestoration,
     _poolEntryDenied,
+    _poolEnvelop,
     _poolEscapeProtocol,
     _poolEsikasChariot,
     _poolEssenceExtraction,

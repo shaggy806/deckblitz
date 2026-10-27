@@ -252,6 +252,7 @@ import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrostwebSpider from "../pool/frostweb-spider.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFumarole from "../pool/fumarole.js";
+import _poolFuneralPyre from "../pool/funeral-pyre.js";
 import _poolFurybornHellkite from "../pool/furyborn-hellkite.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
@@ -294,6 +295,7 @@ import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
+import _poolGrizzlyFate from "../pool/grizzly-fate.js";
 import _poolGrotagNightRunner from "../pool/grotag-night-runner.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
@@ -1012,6 +1014,7 @@ const shard: CardShard = {
     _poolFrostwebSpider,
     _poolFrozenShade,
     _poolFumarole,
+    _poolFuneralPyre,
     _poolFurybornHellkite,
     _poolFyndhornElves,
     _poolGalvanicBlast,
@@ -1054,6 +1057,7 @@ const shard: CardShard = {
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
     _poolGrislySalvage,
+    _poolGrizzlyFate,
     _poolGrotagNightRunner,
     _poolGroundbreaker,
     _poolGuacMarshmallowPizza,

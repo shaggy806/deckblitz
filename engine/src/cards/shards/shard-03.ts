@@ -79,6 +79,7 @@ import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
+import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
@@ -148,6 +149,7 @@ import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
+import _poolDwarvenScorcher from "../pool/dwarven-scorcher.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEarthshaker from "../pool/earthshaker.js";
@@ -775,6 +777,7 @@ const shard: CardShard = {
     _poolCemeteryRecruitment,
     _poolCentaurBattlemaster,
     _poolCentaurOmenreader,
+    _poolCentaurRootcaster,
     _poolChangelingTitan,
     _poolCharmedClothier,
     _poolChitterspitter,
@@ -844,6 +847,7 @@ const shard: CardShard = {
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
+    _poolDwarvenScorcher,
     _poolDwarvenWeaponsmith,
     _poolEarthbrawn,
     _poolEarthshaker,

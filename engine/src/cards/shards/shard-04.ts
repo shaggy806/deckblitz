@@ -387,6 +387,7 @@ import _poolManaConfluence from "../pool/mana-confluence.js";
 import _poolMarkovRetribution from "../pool/markov-retribution.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMartyrsCry from "../pool/martyrs-cry.js";
+import _poolMaskedGorgon from "../pool/masked-gorgon.js";
 import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolMarkovRetribution,
     _poolMarneusCalgar,
     _poolMartyrsCry,
+    _poolMaskedGorgon,
     _poolMasterHealer,
     _poolMawcor,
     _poolMeetingOfTheFive,

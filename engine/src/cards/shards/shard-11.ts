@@ -235,6 +235,7 @@ import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
 import _poolForbid from "../pool/forbid.js";
 import _poolForceOfWill from "../pool/force-of-will.js";
+import _poolForcemageAdvocate from "../pool/forcemage-advocate.js";
 import _poolForkedBolt from "../pool/forked-bolt.js";
 import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
@@ -689,6 +690,7 @@ import _poolTrainOfThought from "../pool/train-of-thought.js";
 import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
+import _poolTreacherousWerewolf from "../pool/treacherous-werewolf.js";
 import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
 import _poolTriclopeanSight from "../pool/triclopean-sight.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
@@ -1009,6 +1011,7 @@ const shard: CardShard = {
     _poolForatog,
     _poolForbid,
     _poolForceOfWill,
+    _poolForcemageAdvocate,
     _poolForkedBolt,
     _poolForktailSweep,
     _poolForsakenDrifters,
@@ -1463,6 +1466,7 @@ const shard: CardShard = {
     _poolTrainedOrgg,
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
+    _poolTreacherousWerewolf,
     _poolTricksOfTheTrade,
     _poolTriclopeanSight,
     _poolTundraWall,

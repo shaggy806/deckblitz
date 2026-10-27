@@ -338,6 +338,7 @@ import _poolKulrathMystic from "../pool/kulrath-mystic.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLabyrinthGuardian from "../pool/labyrinth-guardian.js";
 import _poolLanternOfRevealing from "../pool/lantern-of-revealing.js";
+import _poolLaquatussDisdain from "../pool/laquatuss-disdain.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLavaclawReaches from "../pool/lavaclaw-reaches.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
@@ -1091,6 +1092,7 @@ const shard: CardShard = {
     _poolKyoshiWarriors,
     _poolLabyrinthGuardian,
     _poolLanternOfRevealing,
+    _poolLaquatussDisdain,
     _poolLathnuSailback,
     _poolLavaclawReaches,
     _poolLeapingLizard,

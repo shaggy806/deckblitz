@@ -179,6 +179,7 @@ import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExavaRakdosBloodWitch from "../pool/exava-rakdos-blood-witch.js";
+import _poolExoskeletalArmor from "../pool/exoskeletal-armor.js";
 import _poolExpel from "../pool/expel.js";
 import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
@@ -574,6 +575,7 @@ import _poolSoundTheCall from "../pool/sound-the-call.js";
 import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
+import _poolSpellgorgerBarbarian from "../pool/spellgorger-barbarian.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
 import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
@@ -675,6 +677,7 @@ import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolUtopiaVow from "../pool/utopia-vow.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
+import _poolValor from "../pool/valor.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
@@ -927,6 +930,7 @@ const shard: CardShard = {
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
     _poolExavaRakdosBloodWitch,
+    _poolExoskeletalArmor,
     _poolExpel,
     _poolEyekite,
     _poolEzekielSimsSpiderTotem,
@@ -1322,6 +1326,7 @@ const shard: CardShard = {
     _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,
+    _poolSpellgorgerBarbarian,
     _poolSpewFlame,
     _poolSphinxOfTheFinalWord,
     _poolSphinxsHerald,
@@ -1423,6 +1428,7 @@ const shard: CardShard = {
     _poolUrzasPowerPlant,
     _poolUtopiaVow,
     _poolValakutTheMoltenPinnacle,
+    _poolValor,
     _poolVampireInterloper,
     _poolVampiricFeast,
     _poolVanquishTheHorde,

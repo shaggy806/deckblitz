@@ -720,6 +720,7 @@ import _poolWithercrown from "../pool/withercrown.js";
 import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
 import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
+import _poolWormfangDrake from "../pool/wormfang-drake.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolXenograft from "../pool/xenograft.js";
@@ -1470,6 +1471,7 @@ const shard: CardShard = {
     _poolWolfbittenCaptive,
     _poolWoodlandGuidance,
     _poolWoodworkProdigy,
+    _poolWormfangDrake,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolXenograft,

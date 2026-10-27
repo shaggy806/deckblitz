@@ -97,6 +97,7 @@ import _poolCelestialFlare from "../pool/celestial-flare.js";
 import _poolChainOfVapor from "../pool/chain-of-vapor.js";
 import _poolChandrasEmbercat from "../pool/chandras-embercat.js";
 import _poolCharge from "../pool/charge.js";
+import _poolChastise from "../pool/chastise.js";
 import _poolCheckpointOfficer from "../pool/checkpoint-officer.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
 import _poolChitinousCloak from "../pool/chitinous-cloak.js";
@@ -115,6 +116,7 @@ import _poolColfenorTheLastYew from "../pool/colfenor-the-last-yew.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
 import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
+import _poolCommanderEesha from "../pool/commander-eesha.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
 import _poolConsulsShieldguard from "../pool/consuls-shieldguard.js";
@@ -622,6 +624,7 @@ import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSupremePhantom from "../pool/supreme-phantom.js";
 import _poolSurgingFlame from "../pool/surging-flame.js";
 import _poolSwarmSurge from "../pool/swarm-surge.js";
+import _poolSwelter from "../pool/swelter.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
@@ -866,6 +869,7 @@ const shard: CardShard = {
     _poolChainOfVapor,
     _poolChandrasEmbercat,
     _poolCharge,
+    _poolChastise,
     _poolCheckpointOfficer,
     _poolChildrenOfKorlis,
     _poolChitinousCloak,
@@ -884,6 +888,7 @@ const shard: CardShard = {
     _poolCollateralDamage,
     _poolColonelAutumn,
     _poolColossalCollision,
+    _poolCommanderEesha,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
     _poolConsulsShieldguard,
@@ -1391,6 +1396,7 @@ const shard: CardShard = {
     _poolSupremePhantom,
     _poolSurgingFlame,
     _poolSwarmSurge,
+    _poolSwelter,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
