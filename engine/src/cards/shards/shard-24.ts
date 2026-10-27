@@ -390,6 +390,7 @@ import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
+import _poolMirrodinsCore from "../pool/mirrodins-core.js";
 import _poolMirrorGallery from "../pool/mirror-gallery.js";
 import _poolMoat from "../pool/moat.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
@@ -1157,6 +1158,7 @@ const shard: CardShard = {
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
+    _poolMirrodinsCore,
     _poolMirrorGallery,
     _poolMoat,
     _poolMobLookout,

@@ -57,6 +57,7 @@ import _poolBallroom from "../pool/ballroom.js";
 import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
+import _poolBarbedLightning from "../pool/barbed-lightning.js";
 import _poolBashfulBeastie from "../pool/bashful-beastie.js";
 import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
@@ -875,6 +876,7 @@ const shard: CardShard = {
     _poolBanshee,
     _poolBaradDur,
     _poolBarbarianRiftcutter,
+    _poolBarbedLightning,
     _poolBashfulBeastie,
     _poolBasicConjuration,
     _poolBatteringCraghorn,

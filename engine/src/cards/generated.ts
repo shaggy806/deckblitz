@@ -1529,6 +1529,7 @@ import _poolBarbedBatterfist from "./pool/barbed-batterfist.js";
 import _poolBarbedBattlegear from "./pool/barbed-battlegear.js";
 import _poolBarbedBloodletter from "./pool/barbed-bloodletter.js";
 import _poolBarbedFoliage from "./pool/barbed-foliage.js";
+import _poolBarbedLightning from "./pool/barbed-lightning.js";
 import _poolBarbedServitor from "./pool/barbed-servitor.js";
 import _poolBarbedSextant from "./pool/barbed-sextant.js";
 import _poolBarbedShocker from "./pool/barbed-shocker.js";
@@ -12989,6 +12990,7 @@ import _poolMirriTheCursed from "./pool/mirri-the-cursed.js";
 import _poolMirrisGuile from "./pool/mirris-guile.js";
 import _poolMirrodinAvenged from "./pool/mirrodin-avenged.js";
 import _poolMirrodinBesieged from "./pool/mirrodin-besieged.js";
+import _poolMirrodinsCore from "./pool/mirrodins-core.js";
 import _poolMirrorEntity from "./pool/mirror-entity.js";
 import _poolMirrorGallery from "./pool/mirror-gallery.js";
 import _poolMirrorImage from "./pool/mirror-image.js";
@@ -26094,6 +26096,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarbedBattlegear,
   _poolBarbedBloodletter,
   _poolBarbedFoliage,
+  _poolBarbedLightning,
   _poolBarbedServitor,
   _poolBarbedSextant,
   _poolBarbedShocker,
@@ -37554,6 +37557,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirrisGuile,
   _poolMirrodinAvenged,
   _poolMirrodinBesieged,
+  _poolMirrodinsCore,
   _poolMirrorEntity,
   _poolMirrorGallery,
   _poolMirrorImage,
@@ -50672,6 +50676,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/barbed-battlegear": _poolBarbedBattlegear,
   "pool/barbed-bloodletter": _poolBarbedBloodletter,
   "pool/barbed-foliage": _poolBarbedFoliage,
+  "pool/barbed-lightning": _poolBarbedLightning,
   "pool/barbed-servitor": _poolBarbedServitor,
   "pool/barbed-sextant": _poolBarbedSextant,
   "pool/barbed-shocker": _poolBarbedShocker,
@@ -62132,6 +62137,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirris-guile": _poolMirrisGuile,
   "pool/mirrodin-avenged": _poolMirrodinAvenged,
   "pool/mirrodin-besieged": _poolMirrodinBesieged,
+  "pool/mirrodins-core": _poolMirrodinsCore,
   "pool/mirror-entity": _poolMirrorEntity,
   "pool/mirror-gallery": _poolMirrorGallery,
   "pool/mirror-image": _poolMirrorImage,
