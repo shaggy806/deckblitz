@@ -94,6 +94,9 @@ describe("\"you may search\" — the pool", () => {
     const searches = (node: unknown, inMay: boolean, out: Found[]): void => {
       if (Array.isArray(node)) for (const each of node) searches(each, inMay, out);
       else if (node !== null && typeof node === "object") {
+        // Transmute's search (rule 702.53a) isn't a "you may search" line —
+        // Grozoth has both.
+        if (/^Transmute\b/.test(String((node as { text?: unknown }).text ?? ""))) return;
         const kind = (node as { kind?: unknown }).kind;
         if (kind === "search-library") out.push({ inMay });
         for (const value of Object.values(node)) searches(value, inMay || kind === "may", out);

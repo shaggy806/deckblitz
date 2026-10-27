@@ -113,6 +113,7 @@ import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarnivalOfSouls from "../pool/carnival-of-souls.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
+import _poolCastleRaptors from "../pool/castle-raptors.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCausticTar from "../pool/caustic-tar.js";
 import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
@@ -176,6 +177,7 @@ import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
+import _poolDivineCongregation from "../pool/divine-congregation.js";
 import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
@@ -274,6 +276,7 @@ import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinFirebug from "../pool/goblin-firebug.js";
 import _poolGoblinMarshal from "../pool/goblin-marshal.js";
+import _poolGoblinSkycutter from "../pool/goblin-skycutter.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGoblinWarWagon from "../pool/goblin-war-wagon.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
@@ -381,6 +384,7 @@ import _poolLowlandTracker from "../pool/lowland-tracker.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
+import _poolLurkingJackals from "../pool/lurking-jackals.js";
 import _poolLurkingSkirge from "../pool/lurking-skirge.js";
 import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
@@ -513,6 +517,7 @@ import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
+import _poolQuirionTrailblazer from "../pool/quirion-trailblazer.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRadiantFlames from "../pool/radiant-flames.js";
 import _poolRaggedVeins from "../pool/ragged-veins.js";
@@ -568,6 +573,7 @@ import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRushOfBlood from "../pool/rush-of-blood.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
+import _poolSaberAnts from "../pool/saber-ants.js";
 import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSageEyeAvengers from "../pool/sage-eye-avengers.js";
@@ -758,6 +764,7 @@ import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
 import _poolVoidBeckoner from "../pool/void-beckoner.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
+import _poolVoidmageHusher from "../pool/voidmage-husher.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
@@ -939,6 +946,7 @@ const shard: CardShard = {
     _poolCarnivalOfSouls,
     _poolCarrierPigeons,
     _poolCarrionCrow,
+    _poolCastleRaptors,
     _poolCatharsCall,
     _poolCausticTar,
     _poolCelesRuneKnight,
@@ -1002,6 +1010,7 @@ const shard: CardShard = {
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
+    _poolDivineCongregation,
     _poolDjerusRenunciation,
     _poolDoggedDetective,
     _poolDomrisAmbush,
@@ -1100,6 +1109,7 @@ const shard: CardShard = {
     _poolGoblinArtillery,
     _poolGoblinFirebug,
     _poolGoblinMarshal,
+    _poolGoblinSkycutter,
     _poolGoblinWarPaint,
     _poolGoblinWarWagon,
     _poolGodEternalRhonas,
@@ -1207,6 +1217,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
+    _poolLurkingJackals,
     _poolLurkingSkirge,
     _poolLustForWar,
     _poolLuxurySuite,
@@ -1339,6 +1350,7 @@ const shard: CardShard = {
     _poolQarsiHighPriest,
     _poolQuagFeast,
     _poolQuarrelsEnd,
+    _poolQuirionTrailblazer,
     _poolQumulox,
     _poolRadiantFlames,
     _poolRaggedVeins,
@@ -1394,6 +1406,7 @@ const shard: CardShard = {
     _poolRunehornHellkite,
     _poolRushOfBlood,
     _poolRustedSlasher,
+    _poolSaberAnts,
     _poolSabertoothMauler,
     _poolSabotender,
     _poolSageEyeAvengers,
@@ -1584,6 +1597,7 @@ const shard: CardShard = {
     _poolVoidBeckoner,
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
+    _poolVoidmageHusher,
     _poolVolcanicUpheaval,
     _poolVraskasScorn,
     _poolWakerOfWaves,

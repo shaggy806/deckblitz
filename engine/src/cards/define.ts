@@ -2788,12 +2788,26 @@ export interface CardDefinition {
    * have cast another spell this turn"; it answers `self-surge-paid`.
    * `keyword: "prowl"` is **Prowl [cost]** (rule 702.76a — Earwig Squad):
    * `prowl(mana)`, the `prowl` condition; it answers `self-prowl-paid`.
+   *
+   * `sacrifice` is "you may sacrifice a Mountain rather than pay this
+   * spell's mana cost" (Crash, Fireblast's "two Mountains"): `mana` `"{0}"`,
+   * `sacrifice: { filter, count?, text }` (`text` "a Mountain"), offered
+   * only while the caster controls that many, and which ones is chosen as
+   * the cost is paid, once the spell is on the stack (601.2h) — a cost
+   * sacrifice of several, as `additionalCost.sacrificeCount`'s is.
+   * `returnToHand` is "you may return three Islands you control to their
+   * owner's hand rather than pay" (Thwart, Gush; the Borderposts' "pay {1}
+   * and return a basic land you control" with `mana` `"{1}"`): the same,
+   * paid as an activated ability's `returnToHand` cost is. Neither goes
+   * beside another cost that asks as it's paid.
    */
   readonly alternativeCost: {
     readonly mana: string;
     readonly keyword?: "spectacle" | "surge" | "prowl";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;
     readonly condition?: StaticCondition;
   } | null;

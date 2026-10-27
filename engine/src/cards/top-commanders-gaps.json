@@ -473,6 +473,8 @@
   "effect:unless-any-player-pays",
   "effect:any-player-may-activate",
   "cost:any-player-may-activate",
+  "cost:alt-cost-sacrifice",
+  "cost:alt-cost-return-lands",
   "cost:morph-pay-life",
   "cost:morph-sacrifice",
   "cost:morph-discard-card",

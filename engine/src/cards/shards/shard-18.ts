@@ -8,6 +8,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAgonizingDemise from "../pool/agonizing-demise.js";
 import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
@@ -54,6 +55,7 @@ import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
+import _poolBlazingSpecter from "../pool/blazing-specter.js";
 import _poolBlindSpotGiant from "../pool/blind-spot-giant.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
@@ -219,6 +221,7 @@ import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFinish from "../pool/finish.js";
 import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
+import _poolFlamecoreElemental from "../pool/flamecore-elemental.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFlowstoneFlood from "../pool/flowstone-flood.js";
@@ -270,6 +273,7 @@ import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
+import _poolGush from "../pool/gush.js";
 import _poolGustcloakSavior from "../pool/gustcloak-savior.js";
 import _poolHall from "../pool/hall.js";
 import _poolHammerOfRuin from "../pool/hammer-of-ruin.js";
@@ -293,6 +297,7 @@ import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
+import _poolHonorTheFallen from "../pool/honor-the-fallen.js";
 import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
@@ -509,6 +514,7 @@ import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReadyWilling from "../pool/ready-willing.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
 import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
+import _poolRecollect from "../pool/recollect.js";
 import _poolRedHulk from "../pool/red-hulk.js";
 import _poolRedManaBattery from "../pool/red-mana-battery.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
@@ -672,6 +678,7 @@ import _poolThunderousWrath from "../pool/thunderous-wrath.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
+import _poolTivadarOfThorn from "../pool/tivadar-of-thorn.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTombTrawler from "../pool/tomb-trawler.js";
 import _poolTomeAnima from "../pool/tome-anima.js";
@@ -797,6 +804,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAgonizingDemise,
     _poolAjaniMentorOfHeroes,
     _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
@@ -843,6 +851,7 @@ const shard: CardShard = {
     _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
+    _poolBlazingSpecter,
     _poolBlindSpotGiant,
     _poolBlindingMage,
     _poolBlitzAutomaton,
@@ -1008,6 +1017,7 @@ const shard: CardShard = {
     _poolFinish,
     _poolFireRimForm,
     _poolFirebolt,
+    _poolFlamecoreElemental,
     _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
     _poolFlowstoneFlood,
@@ -1059,6 +1069,7 @@ const shard: CardShard = {
     _poolGroundlingPouncer,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
+    _poolGush,
     _poolGustcloakSavior,
     _poolHall,
     _poolHammerOfRuin,
@@ -1082,6 +1093,7 @@ const shard: CardShard = {
     _poolHinderingTouch,
     _poolHippoCows,
     _poolHoardingRecluse,
+    _poolHonorTheFallen,
     _poolHopefulEidolon,
     _poolHornOfGondor,
     _poolHotshotInvestigators,
@@ -1298,6 +1310,7 @@ const shard: CardShard = {
     _poolReadyWilling,
     _poolReapingTheGraves,
     _poolReclusiveArtificer,
+    _poolRecollect,
     _poolRedHulk,
     _poolRedManaBattery,
     _poolRegalBunnicorn,
@@ -1461,6 +1474,7 @@ const shard: CardShard = {
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,
+    _poolTivadarOfThorn,
     _poolTolarianWinds,
     _poolTombTrawler,
     _poolTomeAnima,

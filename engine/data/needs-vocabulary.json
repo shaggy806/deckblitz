@@ -12016,6 +12016,60 @@
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
   },
+  "cost:alt-cost-reveal-hand": {
+   "example": "Land Grant: Alternative cost: reveal your hand if it holds no land cards; no such alternative cost."
+  },
+  "cost:exile-from-graveyard-including-source": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Salvage Titan: Exile three artifact cards from your graveyard, Titan among them if you choose (ruling); the cost never counts its source."
+  },
+  "cost:x-equals-chosen-opponent-hand": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Bargaining Table: X is the number of cards in a chosen opponent's hand, the opponent chosen as it's activated (ruling)."
+  },
+  "effect:gain-control-trigger-recipient": {
+   "family": "effect:control-change-extensions",
+   "example": "Charisma: Gain control of the creature enchanted creature dealt damage to: gain-control can't name the damage trigger's recipient."
+  },
+  "effect:prevent-next-damage-by-source": {
+   "family": "replacement:damage-modification",
+   "example": "Barbed Wire: {2}: Prevent the next 1 damage that would be dealt by this artifact this turn."
+  },
+  "filter:static-affects-by-power": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Crackdown: Nonwhite creatures with power 3 or greater don't untap: a static's affects filter can't read power."
+  },
+  "replacement:damage-to-player-exiles-library": {
+   "family": "replacement:damage-modification",
+   "example": "Crumbling Sanctuary: Damage to a player is replaced by exiling that many cards from the top of their library."
+  },
+  "replacement:enters-tapped-if-cast": {
+   "family": "replacement:new-event-replacements",
+   "example": "Uphill Battle: Creatures played (cast) by opponents enter tapped; no enters-tapped replacement filters on whether the creature was cast."
+  },
+  "effect:add-subtypes-if-creature-on-entry": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Lim-Dûl the Necromancer: 'return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types' — put-onto-battlefield's addSubtypes is unconditional."
+  },
+  "effect:animate-grants-protection": {
+   "example": "Opal Guardian: 'becomes a 3/4 Gargoyle creature with flying and protection from red' — animate carries keywords only, no protection quality."
+  },
+  "effect:return-exiled-card-named": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Sengir Nosferatu's Bat token: 'Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.'"
+  },
+  "filter:entered-since-your-last-turn-ended": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Premature Burial: 'Destroy target nonblack creature that entered since your last turn ended.'"
+  },
+  "replacement:damage-to-self-sacrifice-instead": {
+   "family": "replacement:damage-modification",
+   "example": "Dralnu, Lich Lord: 'If damage would be dealt to Dralnu, sacrifice that many permanents instead' — prevent-then-sacrifice lets the damage's triggers fire; the ruling says the sacrifice replaces it."
+  },
+  "static:echo-cost-zero-alternative": {
+   "family": "keyword:echo",
+   "example": "Thick-Skinned Goblin: 'You may pay {0} rather than pay the echo cost for permanents you control' — echo is an upkeep unless-trigger with nothing marking its cost as an echo cost."
+  },
   "static:protection-from-own-colors": {
    "family": "effect:grant-protection-choice",
    "example": "Earnest Fellowship: protection takes only fixed colours, types or a filter; nothing makes each creature's protection follow its own colours."
@@ -12055,6 +12109,56 @@
   "condition:shares-card-type-with-cost-exiled": {
    "family": "condition:filter-card-property-clauses",
    "example": "Holistic Wisdom: No \"exile a card from your hand\" activation cost, and nothing compares a target with the card the cost exiled."
+  },
+  "effect:swap-tapped-state": {
+   "example": "Breaking Wave: \"Simultaneously untap all tapped creatures and tap all untapped creatures\" — a tap-all then an untap-all undoes itself, and nothing records which were tapped."
+  },
+  "static:prohibit-color-of-last-spell-cast": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Mana Maze: players can't cast spells that share a color with the spell most recently cast this turn."
+  },
+  "effect:prevent-chosen-source-sharing-spent-mana-color": {
+   "family": "replacement:damage-modification",
+   "example": "Protective Sphere: prevent the damage a chosen source of a color of the mana spent on the activation would deal to you."
+  },
+  "trigger:player-chooses-targets": {
+   "example": "Psychic Battle: whenever a player chooses targets, each player reveals their top card and the highest mana value may change the targets."
+  },
+  "filter:shares-color-with-trigger-object": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Spreading Plague: destroy all other creatures that share a color with the creature that entered."
+  },
+  "keyword:chosen-land-type-landwalk": {
+   "family": "keyword:landwalk",
+   "example": "Traveler's Cloak: choose any land type (nonbasic too) as it enters; enchanted creature has landwalk of that type."
+  },
+  "replacement:prevent-damage-between-creatures-sharing-color": {
+   "family": "replacement:damage-modification",
+   "example": "Well-Laid Plans: prevent all damage a creature would deal to another creature that shares a color with it."
+  },
+  "effect:token-copy-of-enchanted": {
+   "family": "effect:token-copy-options",
+   "example": "Followed Footsteps: a token copy of the enchanted creature, none if that creature left before the Aura did"
+  },
+  "effect:prevent-all-damage-by-filter": {
+   "family": "replacement:prevent-combat-damage-by-filter",
+   "example": "Chant of Vitu-Ghazi: prevent all damage creatures would deal this turn, gaining life equal to the damage prevented"
+  },
+  "effect:share-protection-and-landwalk": {
+   "family": "effect:grant-protection-choice",
+   "example": "Concerted Effort: creatures you control gain flying, fear, first strike, double strike, landwalk and protection if any creature you control has it"
+  },
+  "cost:ability-cost-modification-all-zones": {
+   "family": "cost:ability-cost-modification",
+   "example": "Suppression Field: activated abilities cost {2} more, from hand and graveyard too"
+  },
+  "target:activated-ability-single-target": {
+   "family": "effect:change-target",
+   "example": "Reroute: change the target of target activated ability with a single target"
+  },
+  "trigger:self-put-into-hand-from-graveyard": {
+   "family": "trigger:leaves-graveyard",
+   "example": "Golgari Brownscale: when this card is put into your hand from your graveyard"
   },
   "replacement:next-draw-this-turn": {
    "family": "replacement:next-draw-from-exiled-pile",

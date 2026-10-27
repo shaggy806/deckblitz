@@ -36,6 +36,7 @@ import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
 import _poolArtifactMutation from "../pool/artifact-mutation.js";
 import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
+import _poolAssemblyWorker from "../pool/assembly-worker.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
@@ -192,6 +193,7 @@ import _poolEject from "../pool/eject.js";
 import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
+import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
@@ -284,6 +286,7 @@ import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
 import _poolHeroesBane from "../pool/heroes-bane.js";
+import _poolHeroesReunion from "../pool/heroes-reunion.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHiddenSpider from "../pool/hidden-spider.js";
 import _poolHideousLaughter from "../pool/hideous-laughter.js";
@@ -394,6 +397,7 @@ import _poolMathasFiendSeeker from "../pool/mathas-fiend-seeker.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
 import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMentalDiscipline from "../pool/mental-discipline.js";
+import _poolMercadianBazaar from "../pool/mercadian-bazaar.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
@@ -406,6 +410,7 @@ import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
+import _poolMoggAlarm from "../pool/mogg-alarm.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
@@ -594,7 +599,9 @@ import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkirkVolcanist from "../pool/skirk-volcanist.js";
+import _poolSkitteringMonstrosity from "../pool/skittering-monstrosity.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
+import _poolSkizzik from "../pool/skizzik.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
 import _poolSkyshooter from "../pool/skyshooter.js";
@@ -638,6 +645,7 @@ import _poolStoneQuarry from "../pool/stone-quarry.js";
 import _poolStoneforgeMystic from "../pool/stoneforge-mystic.js";
 import _poolStormReading from "../pool/storm-reading.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
+import _poolStormcloudDjinn from "../pool/stormcloud-djinn.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
 import _poolStratusWalk from "../pool/stratus-walk.js";
@@ -737,6 +745,7 @@ import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
+import _poolVigorMortis from "../pool/vigor-mortis.js";
 import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
@@ -846,6 +855,7 @@ const shard: CardShard = {
     _poolArkOfBlight,
     _poolArtifactMutation,
     _poolAshenmoorGouger,
+    _poolAssemblyWorker,
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
     _poolAugerSpree,
@@ -1002,6 +1012,7 @@ const shard: CardShard = {
     _poolElectryte,
     _poolElementalMasterpiece,
     _poolElvishFury,
+    _poolEmbargo,
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
     _poolEndTheFestivities,
@@ -1094,6 +1105,7 @@ const shard: CardShard = {
     _poolHellSwarm,
     _poolHeroOfIroas,
     _poolHeroesBane,
+    _poolHeroesReunion,
     _poolHeronbladeElite,
     _poolHiddenSpider,
     _poolHideousLaughter,
@@ -1204,6 +1216,7 @@ const shard: CardShard = {
     _poolMazirekKraulDeathPriest,
     _poolMeldwebStrider,
     _poolMentalDiscipline,
+    _poolMercadianBazaar,
     _poolMidnightMayhem,
     _poolMindscourDragon,
     _poolMinersBane,
@@ -1216,6 +1229,7 @@ const shard: CardShard = {
     _poolMistyRainforest,
     _poolMitoticSlime,
     _poolMizziumMortars,
+    _poolMoggAlarm,
     _poolMoltenVortex,
     _poolMongrelPack,
     _poolMonsoon,
@@ -1404,7 +1418,9 @@ const shard: CardShard = {
     _poolSkimmingStrike,
     _poolSkirkProspector,
     _poolSkirkVolcanist,
+    _poolSkitteringMonstrosity,
     _poolSkitteringSurveyor,
+    _poolSkizzik,
     _poolSkycatSovereign,
     _poolSkyreaping,
     _poolSkyshooter,
@@ -1448,6 +1464,7 @@ const shard: CardShard = {
     _poolStoneforgeMystic,
     _poolStormReading,
     _poolStormcatchMentor,
+    _poolStormcloudDjinn,
     _poolStranglingSpores,
     _poolStrategicIntervention,
     _poolStratusWalk,
@@ -1547,6 +1564,7 @@ const shard: CardShard = {
     _poolVexingDevil,
     _poolViashinoRacketeer,
     _poolViciousKavu,
+    _poolVigorMortis,
     _poolVillagePillagers,
     _poolVirtuousCharge,
     _poolVirulentSwipe,

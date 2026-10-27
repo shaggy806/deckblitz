@@ -213,6 +213,15 @@ describe("kicked spells", () => {
     expect(zone(game, shield)).toBe("hand");
   });
 
+  it("Murasa Sproutling doesn't count buyback as a kicker ability", () => {
+    const { game } = table();
+    // Allay's buyback is authored as `kicker.keyword: "buyback"` — not kicker (rule 702.33).
+    const allay = toGraveyard(game, "Allay");
+    lands(game, "Forest", 5);
+    cast(game, toHand(game, "Murasa Sproutling"), { kicked: true });
+    expect(zone(game, allay)).toBe("graveyard");
+  });
+
   it("Verazol enters with a counter per mana spent and pays two of them to copy a kicked spell", () => {
     const { game, a } = table();
     lands(game, "Island", 6);

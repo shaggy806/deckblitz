@@ -146,6 +146,35 @@ describe("costs and triggers", () => {
     expect(ruin.effect).toEqual({ kind: "destroy-all", filter: { type: "artifact", sameNameAsTarget: 0 } });
   });
 
+  it("reads radiance's \"target X and each other X that shares a color with it\" as one -all effect", () => {
+    const trace = parseFace({
+      name: "Leave No Trace",
+      type_line: "Instant",
+      oracle_text: "Radiance — Destroy target enchantment and each other enchantment that shares a color with it.",
+    });
+    expect(trace.complete).toBe(true);
+    expect(trace.targets).toEqual(["enchantment"]);
+    expect(trace.effect).toEqual({ kind: "destroy-all", filter: { type: "enchantment", sharesColorWithTarget: 0 } });
+    const beam = parseFace({
+      name: "Cleansing Beam",
+      type_line: "Instant",
+      oracle_text: "Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.",
+    });
+    expect(beam.effect).toEqual({ kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWithTarget: 0 } });
+    const siren = parseFace({
+      name: "Wojek Siren",
+      type_line: "Instant",
+      oracle_text: "Radiance — Target creature and each other creature that shares a color with it get +1/+1 until end of turn.",
+    });
+    expect(siren.effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sharesColorWithTarget: 0 },
+      power: 1,
+      toughness: 1,
+      duration: "end-of-turn",
+    });
+  });
+
   it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
     const jasmine = parseFace({
       name: "Scent of Jasmine",
@@ -1427,6 +1456,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Evoke—Exile a green card from your hand.", "Creature — Elemental Incarnation").evoke).toEqual({
       cost: "",
       exileFromHand: { filter: { colors: ["G"] }, text: "a green card" },
+    });
+  });
+
+  it("sacrifice or return lands rather than pay (rule 118.9): Crash, Thwart, the Borderposts", () => {
+    expect(face("You may sacrifice a Mountain rather than pay this spell's mana cost.\nDestroy target artifact.", "Instant").alternativeCost).toEqual({
+      mana: "{0}",
+      sacrifice: { filter: { type: "land", subtype: "Mountain" }, text: "a Mountain" },
+    });
+    expect(face("You may sacrifice two Mountains rather than pay this spell's mana cost.", "Instant").alternativeCost?.sacrifice).toEqual({
+      filter: { type: "land", subtype: "Mountain" },
+      count: 2,
+      text: "two Mountains",
+    });
+    expect(
+      face("You may return three Islands you control to their owner's hand rather than pay this spell's mana cost.", "Instant").alternativeCost,
+    ).toEqual({
+      mana: "{0}",
+      returnToHand: { filter: { type: "land", subtype: "Island" }, count: 3, text: "three Islands you control" },
+    });
+    expect(
+      face("You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.", "Artifact").alternativeCost,
+    ).toEqual({
+      mana: "{1}",
+      returnToHand: { filter: { type: "land", supertype: "basic" }, text: "a basic land you control" },
     });
   });
 

@@ -91,6 +91,7 @@ import _poolChainOfAcid from "../pool/chain-of-acid.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
+import _poolChaoticStrike from "../pool/chaotic-strike.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
@@ -141,6 +142,7 @@ import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
 import _poolDeglamer from "../pool/deglamer.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
+import _poolDemonOfDeathsGate from "../pool/demon-of-deaths-gate.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesertNomads from "../pool/desert-nomads.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
@@ -492,6 +494,7 @@ import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
 import _poolPucasCovenant from "../pool/pucas-covenant.js";
+import _poolPuppetsVerdict from "../pool/puppets-verdict.js";
 import _poolPurge from "../pool/purge.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
@@ -695,6 +698,7 @@ import _poolTransplantTheorist from "../pool/transplant-theorist.js";
 import _poolTrapjawTyrant from "../pool/trapjaw-tyrant.js";
 import _poolTreachery from "../pool/treachery.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
+import _poolTrevaTheRenewer from "../pool/treva-the-renewer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
@@ -773,6 +777,7 @@ import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
+import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
@@ -780,6 +785,7 @@ import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
+import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
@@ -882,6 +888,7 @@ const shard: CardShard = {
     _poolChainersEdict,
     _poolChakramRetriever,
     _poolChangelingBerserker,
+    _poolChaoticStrike,
     _poolChardalynDragon,
     _poolChasmDrake,
     _poolChillOfTheGrave,
@@ -932,6 +939,7 @@ const shard: CardShard = {
     _poolDefiledCrypt,
     _poolDeglamer,
     _poolDelneyStreetwiseLookout,
+    _poolDemonOfDeathsGate,
     _poolDemonicLore,
     _poolDesertNomads,
     _poolDesperateParry,
@@ -1283,6 +1291,7 @@ const shard: CardShard = {
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
     _poolPucasCovenant,
+    _poolPuppetsVerdict,
     _poolPurge,
     _poolPutridLeech,
     _poolPyreticRitual,
@@ -1486,6 +1495,7 @@ const shard: CardShard = {
     _poolTrapjawTyrant,
     _poolTreachery,
     _poolTrelasarraMoonDancer,
+    _poolTrevaTheRenewer,
     _poolTritonWaverider,
     _poolTriumphantChomp,
     _poolTrollsOfTelJilad,
@@ -1566,6 +1576,7 @@ const shard: CardShard = {
     _poolZulaportEnforcer,
   ],
   tokens: [
+    _tokens11ThrullToken,
     _tokens55ElephantToken,
     _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,
@@ -1573,6 +1584,7 @@ const shard: CardShard = {
     _tokensGoblinWizardToken,
     _tokensGremlinToken,
     _tokensInsectTokenBlack01,
+    _tokensKnightTokenFirstStrike,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,

@@ -173,6 +173,7 @@ import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
+import _poolDaze from "../pool/daze.js";
 import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDecimatorWeb from "../pool/decimator-web.js";
@@ -267,6 +268,7 @@ import _poolFerventCharge from "../pool/fervent-charge.js";
 import _poolFireBowman from "../pool/fire-bowman.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
+import _poolFiremaneAngel from "../pool/firemane-angel.js";
 import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlameKinWarScout from "../pool/flame-kin-war-scout.js";
@@ -388,6 +390,7 @@ import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolItemShopkeep from "../pool/item-shopkeep.js";
+import _poolIvoryGiant from "../pool/ivory-giant.js";
 import _poolIxallisDiviner from "../pool/ixallis-diviner.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
@@ -543,6 +546,7 @@ import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhabineBosssConfidant from "../pool/phabine-bosss-confidant.js";
 import _poolPhantasmalDragon from "../pool/phantasmal-dragon.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
+import _poolPhytohydra from "../pool/phytohydra.js";
 import _poolPineWalker from "../pool/pine-walker.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPiratesCutlass from "../pool/pirates-cutlass.js";
@@ -673,6 +677,7 @@ import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSoldeviSimulacrum from "../pool/soldevi-simulacrum.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
+import _poolSoulChanneling from "../pool/soul-channeling.js";
 import _poolSoulsMight from "../pool/souls-might.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
+    _poolDaze,
     _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDecimatorWeb,
@@ -1106,6 +1112,7 @@ const shard: CardShard = {
     _poolFireBowman,
     _poolFireLordZuko,
     _poolFireNationRaider,
+    _poolFiremaneAngel,
     _poolFirstTimeFlyer,
     _poolFissureWizard,
     _poolFlameKinWarScout,
@@ -1227,6 +1234,7 @@ const shard: CardShard = {
     _poolIronManModernMarvel,
     _poolIronrootTreefolk,
     _poolItemShopkeep,
+    _poolIvoryGiant,
     _poolIxallisDiviner,
     _poolIzzetChronarch,
     _poolJadedAnalyst,
@@ -1382,6 +1390,7 @@ const shard: CardShard = {
     _poolPhabineBosssConfidant,
     _poolPhantasmalDragon,
     _poolPhenaxGodOfDeception,
+    _poolPhytohydra,
     _poolPineWalker,
     _poolPiratePeddlers,
     _poolPiratesCutlass,
@@ -1512,6 +1521,7 @@ const shard: CardShard = {
     _poolSokkaTenaciousTactician,
     _poolSoldeviSimulacrum,
     _poolSomberwaldDryad,
+    _poolSoulChanneling,
     _poolSoulsMight,
     _poolSpaceMarineScout,
     _poolSpellPierce,

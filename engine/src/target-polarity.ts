@@ -199,10 +199,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-if-dies-this-turn": (n, v) => v.touch(n.target, "harm", MINOR),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   // "… target player controls": that player is the one hurt. "Target X and
-  // all other Xs with the same name" (`sameNameAsTarget`): the target is.
+  // all other Xs with the same name" (`sameNameAsTarget`), or radiance's
+  // "and each other X that shares a color with it" (`sharesColorWithTarget`):
+  // the target is.
   "destroy-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
   },
   regenerate: (n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
@@ -211,6 +214,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // "Each creature target player controls": that player is the one hurt.
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", MAJOR);
+    v.touch(n.filter.sharesColorWithTarget, "harm", MAJOR);
   },
   "creatures-damage-controllers": none,
   // An edict: the targeted player picks what goes, so it is major rather
@@ -234,10 +238,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "return-to-hand-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
   },
   "exile-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
   },
   exile: (n, v) => {
     v.touch(n.target, "harm", DECISIVE);
@@ -336,6 +342,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const shrinks = amountSign(n.toughness) < 0 || amountSign(n.power) < 0;
     v.touch(n.controlledByTarget, shrinks ? "harm" : "help", MINOR);
     v.touch(n.filter.sameNameAsTarget, shrinks ? "harm" : "help", MAJOR);
+    v.touch(n.filter.sharesColorWithTarget, shrinks ? "harm" : "help", MAJOR);
   },
   "double-pt-all": none,
   "double-counters-all": none,
@@ -466,8 +473,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
   // +1/+1 counters help; a stun counter (Crashing Wave) harms.
   "counters-divided": (n, v) => v.touch(n.from, n.counter === "+1/+1" ? "help" : "harm", MAJOR),
-  "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),
-  "tap-all": (n, v) => v.touch(n.controlledByTarget, "harm", MINOR),
+  "untap-all": (n, v) => {
+    v.touch(n.controlledByTarget, "help", MINOR);
+    v.touch(n.filter.sharesColorWithTarget, "help", MINOR);
+  },
+  "tap-all": (n, v) => {
+    v.touch(n.controlledByTarget, "harm", MINOR);
+    v.touch(n.filter.sharesColorWithTarget, "harm", MINOR);
+  },
   // Phasing out is a blocker gone for a turn when it's theirs (rule
   // 702.26b) — read as that, a minor harm; one that can only be yours says
   // so in its spec (Guardian of Faith, Haystack), and a counter put on first

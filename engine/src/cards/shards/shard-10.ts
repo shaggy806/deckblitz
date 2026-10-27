@@ -46,6 +46,7 @@ import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
+import _poolBacklash from "../pool/backlash.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
@@ -144,6 +145,7 @@ import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCourtHussar from "../pool/court-hussar.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
+import _poolCreditVoucher from "../pool/credit-voucher.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
@@ -425,6 +427,7 @@ import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
+import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
@@ -467,6 +470,7 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
@@ -639,6 +643,7 @@ import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
+import _poolSpiritOfResistance from "../pool/spirit-of-resistance.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -850,6 +855,7 @@ const shard: CardShard = {
     _poolAvalanche,
     _poolAvengersQuinjet,
     _poolAysenAbbey,
+    _poolBacklash,
     _poolBadlands,
     _poolBalduvianBears,
     _poolBalefireDragon,
@@ -948,6 +954,7 @@ const shard: CardShard = {
     _poolCourtHussar,
     _poolCovertTechnician,
     _poolCrawlingChorus,
+    _poolCreditVoucher,
     _poolCrescendoOfWar,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
@@ -1229,6 +1236,7 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMobilize,
     _poolMockingbird,
+    _poolMoldervineCloak,
     _poolMonkClass,
     _poolMoonHeron,
     _poolMoonfolkPuzzlemaker,
@@ -1271,6 +1279,7 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOvertaker,
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,
@@ -1443,6 +1452,7 @@ const shard: CardShard = {
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
     _poolSpiritEnKor,
+    _poolSpiritOfResistance,
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,

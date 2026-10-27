@@ -1266,6 +1266,16 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Damage.
+  // Radiance (Ravnica: City of Guilds): "target X and each other X that
+  // shares a color with it" — one `-all` effect over the target and the
+  // others sharing a color with it (`sharesColorWithTarget`).
+  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a color with it`;
+  const kin = (type, target) =>
+    target === undefined ? undefined : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), sharesColorWithTarget: target };
+  if ((m = re(`~ deals ${N} damage to (${TARGET}) ${KIN}`).exec(s))) {
+    const filter = kin(m[3], slot(m[2]));
+    return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+  }
   if ((m = re(`~ deals ${N} damage to (${TARGET})`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), target: slot(m[2]) };
   }
@@ -1407,6 +1417,16 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`(${TARGET}) ${NAMESAKES} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     const filter = namesakes(m[2], slot(m[1]));
+    return filter === undefined
+      ? null
+      : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+  }
+  if ((m = re(`(destroy|untap|tap) (${TARGET}) ${KIN}`).exec(s))) {
+    const filter = kin(m[3], slot(m[2]));
+    return filter === undefined ? null : { kind: `${m[1].toLowerCase()}-all`, filter };
+  }
+  if ((m = re(`(${TARGET}) ${KIN} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    const filter = kin(m[2], slot(m[1]));
     return filter === undefined
       ? null
       : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
@@ -2364,6 +2384,26 @@ export function parseFace(face, ctx = {}) {
         ...(m[1] !== "Y" ? { condition: { kind: "not", of: { kind: "your-turn" } } } : {}),
       };
       continue;
+    }
+    // Mercadian Masques' free spells (rule 118.9): "you may sacrifice a
+    // Mountain rather than pay this spell's mana cost" (Crash, Fireblast's
+    // two), "you may return three Islands you control to their owner's hand
+    // rather than pay" (Thwart, Gush), the Borderposts' "pay {1} and return a
+    // basic land you control to its owner's hand". Lands of a basic type, or
+    // basic lands, only.
+    if ((m = /^You may (?:pay ((?:\{[^}]+\})+) and )?(sacrifice|return) (an?|two|three|four) (Plains|Island|Swamp|Mountain|Forest|basic land)s? (?:you control )?(?:to (?:its|their) owner's hand )?rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      const returning = m[2] === "return";
+      const from = line.indexOf(`${m[2]} ${m[3]} `) + m[2].length + 1;
+      const said = line.slice(from, returning ? line.indexOf(" to ", from) : line.indexOf(" rather"));
+      if (returning === / to (?:its|their) owner's hand /.test(line)) {
+        const count = { a: 1, an: 1, two: 2, three: 3, four: 4 }[m[3]];
+        const filter = m[4] === "basic land" ? { type: "land", supertype: "basic" } : { type: "land", subtype: m[4] };
+        out.alternativeCost = {
+          mana: m[1] ?? "{0}",
+          [returning ? "returnToHand" : "sacrifice"]: { filter, ...(count > 1 ? { count } : {}), text: said },
+        };
+        continue;
+      }
     }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }

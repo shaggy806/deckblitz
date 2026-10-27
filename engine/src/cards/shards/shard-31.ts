@@ -77,6 +77,7 @@ import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBladedBracers from "../pool/bladed-bracers.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
+import _poolBlindSeer from "../pool/blind-seer.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
@@ -390,6 +391,7 @@ import _poolIntruderAlarm from "../pool/intruder-alarm.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
 import _poolIronHills from "../pool/iron-hills.js";
+import _poolIronclawBuzzardiers from "../pool/ironclaw-buzzardiers.js";
 import _poolIshaiOjutaiDragonspeaker from "../pool/ishai-ojutai-dragonspeaker.js";
 import _poolItThatBetrays from "../pool/it-that-betrays.js";
 import _poolIthilienKingfisher from "../pool/ithilien-kingfisher.js";
@@ -547,6 +549,7 @@ import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
+import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
@@ -557,6 +560,7 @@ import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
+import _poolPowerMatrix from "../pool/power-matrix.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
@@ -683,6 +687,7 @@ import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpittingHydra from "../pool/spitting-hydra.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolSquallmonger from "../pool/squallmonger.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
@@ -695,6 +700,7 @@ import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
+import _poolStreamOfAcid from "../pool/stream-of-acid.js";
 import _poolStrengthOfCedars from "../pool/strength-of-cedars.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolStrongholdBiologist from "../pool/stronghold-biologist.js";
@@ -819,6 +825,7 @@ import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
+import _poolWormwoodDryad from "../pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
@@ -932,6 +939,7 @@ const shard: CardShard = {
     _poolBlackWidowDeadlyHunter,
     _poolBladedBracers,
     _poolBlightedAgent,
+    _poolBlindSeer,
     _poolBlinkmothWell,
     _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,
@@ -1245,6 +1253,7 @@ const shard: CardShard = {
     _poolIronBully,
     _poolIronCrawCrusher,
     _poolIronHills,
+    _poolIronclawBuzzardiers,
     _poolIshaiOjutaiDragonspeaker,
     _poolItThatBetrays,
     _poolIthilienKingfisher,
@@ -1402,6 +1411,7 @@ const shard: CardShard = {
     _poolPatriarsSeal,
     _poolPearlShard,
     _poolPedanticLearning,
+    _poolPendelhavenElder,
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
@@ -1412,6 +1422,7 @@ const shard: CardShard = {
     _poolPiercingRays,
     _poolPinnacleOfRage,
     _poolPonderingMage,
+    _poolPowerMatrix,
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
@@ -1538,6 +1549,7 @@ const shard: CardShard = {
     _poolSpittingHydra,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
+    _poolSquallmonger,
     _poolStalwartAven,
     _poolStart,
     _poolStartledRelicSloth,
@@ -1550,6 +1562,7 @@ const shard: CardShard = {
     _poolStoneskin,
     _poolStormTheFestival,
     _poolStranglerootGeist,
+    _poolStreamOfAcid,
     _poolStrengthOfCedars,
     _poolStrokeOfGenius,
     _poolStrongholdBiologist,
@@ -1674,6 +1687,7 @@ const shard: CardShard = {
     _poolWispweaverAngel,
     _poolWoodlandLiege,
     _poolWormHarvest,
+    _poolWormwoodDryad,
     _poolWormwoodTreefolk,
     _poolWreckRemover,
     _poolWuLightCavalry,

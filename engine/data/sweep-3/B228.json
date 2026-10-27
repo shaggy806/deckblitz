@@ -1,0 +1,638 @@
+{
+  "batch": "B228",
+  "status": "complete",
+  "ranks": "Time Spiral (TSP, 2006-10-06): the rest of the set, 89 left (the middle walk's last batch — Time Spiral is whole and the walk's range done); no engine change",
+  "authored": [
+    {
+      "name": "Amrou Scout",
+      "files": [
+        "engine/src/cards/pool/amrou-scout.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Amrou Seekers",
+      "files": [
+        "engine/src/cards/pool/amrou-seekers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Assembly-Worker",
+      "files": [
+        "engine/src/cards/pool/assembly-worker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Basalt Gargoyle",
+      "files": [
+        "engine/src/cards/pool/basalt-gargoyle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blazing Blade Askari",
+      "files": [
+        "engine/src/cards/pool/blazing-blade-askari.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brass Gnat",
+      "files": [
+        "engine/src/cards/pool/brass-gnat.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Candles of Leng",
+      "files": [
+        "engine/src/cards/pool/candles-of-leng.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Castle Raptors",
+      "files": [
+        "engine/src/cards/pool/castle-raptors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cavalry Master",
+      "files": [
+        "engine/src/cards/pool/cavalry-master.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coral Trickster",
+      "files": [
+        "engine/src/cards/pool/coral-trickster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Divine Congregation",
+      "files": [
+        "engine/src/cards/pool/divine-congregation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drifter il-Dal",
+      "files": [
+        "engine/src/cards/pool/drifter-il-dal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Durkwood Tracker",
+      "files": [
+        "engine/src/cards/pool/durkwood-tracker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eternity Snare",
+      "files": [
+        "engine/src/cards/pool/eternity-snare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Faceless Devourer",
+      "files": [
+        "engine/src/cards/pool/faceless-devourer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Firemaw Kavu",
+      "files": [
+        "engine/src/cards/pool/firemaw-kavu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flamecore Elemental",
+      "files": [
+        "engine/src/cards/pool/flamecore-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flickering Spirit",
+      "files": [
+        "engine/src/cards/pool/flickering-spirit.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flowstone Channeler",
+      "files": [
+        "engine/src/cards/pool/flowstone-channeler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghostflame Sliver",
+      "files": [
+        "engine/src/cards/pool/ghostflame-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Skycutter",
+      "files": [
+        "engine/src/cards/pool/goblin-skycutter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gustcloak Cavalier",
+      "files": [
+        "engine/src/cards/pool/gustcloak-cavalier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunting Hymn",
+      "files": [
+        "engine/src/cards/pool/haunting-hymn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Icatian Crier",
+      "files": [
+        "engine/src/cards/pool/icatian-crier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ironclaw Buzzardiers",
+      "files": [
+        "engine/src/cards/pool/ironclaw-buzzardiers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ivory Giant",
+      "files": [
+        "engine/src/cards/pool/ivory-giant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mana Skimmer",
+      "files": [
+        "engine/src/cards/pool/mana-skimmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Molder",
+      "files": [
+        "engine/src/cards/pool/molder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nantuko Shaman",
+      "files": [
+        "engine/src/cards/pool/nantuko-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pendelhaven Elder",
+      "files": [
+        "engine/src/cards/pool/pendelhaven-elder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Wurm",
+      "files": [
+        "engine/src/cards/pool/phantom-wurm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Totem",
+      "files": [
+        "engine/src/cards/pool/phyrexian-totem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pit Keeper",
+      "files": [
+        "engine/src/cards/pool/pit-keeper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plague Sliver",
+      "files": [
+        "engine/src/cards/pool/plague-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plated Pegasus",
+      "files": [
+        "engine/src/cards/pool/plated-pegasus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quilled Sliver",
+      "files": [
+        "engine/src/cards/pool/quilled-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sangrophage",
+      "files": [
+        "engine/src/cards/pool/sangrophage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sarpadian Empires, Vol. VII",
+      "files": [
+        "engine/src/cards/pool/sarpadian-empires-vol-vii.ts",
+        "engine/src/cards/tokens/1-1-thrull-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skittering Monstrosity",
+      "files": [
+        "engine/src/cards/pool/skittering-monstrosity.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skulking Knight",
+      "files": [
+        "engine/src/cards/pool/skulking-knight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spike Tiller",
+      "files": [
+        "engine/src/cards/pool/spike-tiller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stonebrow, Krosan Hero",
+      "files": [
+        "engine/src/cards/pool/stonebrow-krosan-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stormcloud Djinn",
+      "files": [
+        "engine/src/cards/pool/stormcloud-djinn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stronghold Overseer",
+      "files": [
+        "engine/src/cards/pool/stronghold-overseer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Subterranean Shambler",
+      "files": [
+        "engine/src/cards/pool/subterranean-shambler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tectonic Fiend",
+      "files": [
+        "engine/src/cards/pool/tectonic-fiend.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thunder Totem",
+      "files": [
+        "engine/src/cards/pool/thunder-totem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tivadar of Thorn",
+      "files": [
+        "engine/src/cards/pool/tivadar-of-thorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tolarian Sentinel",
+      "files": [
+        "engine/src/cards/pool/tolarian-sentinel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Traitor's Clutch",
+      "files": [
+        "engine/src/cards/pool/traitors-clutch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trespasser il-Vec",
+      "files": [
+        "engine/src/cards/pool/trespasser-il-vec.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Triskelavus",
+      "files": [
+        "engine/src/cards/pool/triskelavus.ts",
+        "engine/src/cards/tokens/triskelavite-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tromp the Domains",
+      "files": [
+        "engine/src/cards/pool/tromp-the-domains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unyaro Bees",
+      "files": [
+        "engine/src/cards/pool/unyaro-bees.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Urborg Syphon-Mage",
+      "files": [
+        "engine/src/cards/pool/urborg-syphon-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Voidmage Husher",
+      "files": [
+        "engine/src/cards/pool/voidmage-husher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Weatherseed Totem",
+      "files": [
+        "engine/src/cards/pool/weatherseed-totem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wormwood Dryad",
+      "files": [
+        "engine/src/cards/pool/wormwood-dryad.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Fathom Seer",
+      "needs": [
+        "cost:morph-return-permanent"
+      ],
+      "why": "Morph's cost is \"Return two Islands you control to their owner's hand\"; morph.cost is a mana string only."
+    },
+    {
+      "name": "Chronatog Totem",
+      "needs": [
+        "effect:skip-next-turn"
+      ],
+      "why": "Its animated creature's \"You skip your next turn\" ability: no skip-turn effect."
+    },
+    {
+      "name": "Mishra, Artificer Prodigy",
+      "needs": [
+        "effect:search-hand-graveyard-library",
+        "filter:same-name-as-trigger-spell"
+      ],
+      "why": "Searches graveyard, hand and/or library together for a card with the cast artifact spell's name."
+    },
+    {
+      "name": "Weathered Bodyguards",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "Combat damage unblocked creatures would deal to you is dealt to it instead while untapped."
+    },
+    {
+      "name": "Crookclaw Transmuter",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "Switch target creature's power and toughness: no switch effect."
+    },
+    {
+      "name": "Chameleon Blur",
+      "needs": [
+        "replacement:prevent-all-damage-to-player"
+      ],
+      "why": "Prevent all damage creatures would deal to players this turn — prevent-damage-to-you covers only you and only combat damage."
+    },
+    {
+      "name": "Premature Burial",
+      "needs": [
+        "filter:entered-since-your-last-turn-ended"
+      ],
+      "why": "\"Target nonblack creature that entered since your last turn ended\": enteredThisTurn can't say it."
+    },
+    {
+      "name": "Cyclopean Giant",
+      "needs": [
+        "effect:set-land-type"
+      ],
+      "why": "Target land becomes a Swamp: setting the subtype doesn't remove its rules-text abilities (rule 305.7)."
+    },
+    {
+      "name": "Dralnu, Lich Lord",
+      "needs": [
+        "replacement:damage-to-self-sacrifice-instead"
+      ],
+      "why": "Sacrifice that many permanents instead of the damage — the prevent-then-sacrifice shape lets damage triggers fire, the ruling says they don't."
+    },
+    {
+      "name": "Gaze of Justice",
+      "needs": [
+        "cost:additional-cost-tap-permanents",
+        "cost:flashback-tap-creatures-cost"
+      ],
+      "why": "Additional cost \"tap three untapped white creatures you control\" (and flashback with it)."
+    },
+    {
+      "name": "Sengir Nosferatu",
+      "needs": [
+        "effect:return-exiled-card-named"
+      ],
+      "why": "Its Bat token returns an exiled card named Sengir Nosferatu: no choosing a card in exile by name."
+    },
+    {
+      "name": "Thick-Skinned Goblin",
+      "needs": [
+        "static:echo-cost-zero-alternative",
+        "keyword:echo"
+      ],
+      "why": "\"You may pay {0} rather than pay the echo cost for permanents you control\": echo is an upkeep unless-trigger with nothing marking it as an echo cost."
+    },
+    {
+      "name": "Lim-Dûl the Necromancer",
+      "needs": [
+        "effect:add-subtypes-if-creature-on-entry"
+      ],
+      "why": "Returns the card and makes it a Zombie \"if it's a creature\" — addSubtypes on put-onto-battlefield is unconditional."
+    },
+    {
+      "name": "Psionic Sliver",
+      "needs": [
+        "effect:damage-to-source"
+      ],
+      "why": "Granted \"deals 2 damage to any target and 3 damage to itself\": a damage effect can't target its own source."
+    },
+    {
+      "name": "Aether Web",
+      "needs": [
+        "static:block-as-though-shadow"
+      ],
+      "why": "Enchanted creature can block creatures with shadow as though they didn't have shadow."
+    },
+    {
+      "name": "Zealot il-Vec",
+      "needs": [
+        "effect:prevent-combat-damage-by-source"
+      ],
+      "why": "\"If it does, prevent all combat damage it would deal this turn\": no CardFilter names the source for prevent-all-combat-damage's by."
+    },
+    {
+      "name": "Foriysian Totem",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "Its animated creature can block an additional creature each combat."
+    },
+    {
+      "name": "Dementia Sliver",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Granted ability: \"Choose a card name. Target opponent reveals a card at random…\"."
+    },
+    {
+      "name": "Chronosavant",
+      "needs": [
+        "effect:skip-next-turn"
+      ],
+      "why": "Returns from the graveyard tapped and you skip your next turn."
+    },
+    {
+      "name": "Knight of the Holy Nimbus",
+      "needs": [
+        "replacement:regenerate-instead-of-destroy",
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "\"If it would be destroyed, regenerate it\" as a standing replacement, and an opponents-only activation making it unregenerable."
+    },
+    {
+      "name": "Aetherflame Wall",
+      "needs": [
+        "static:block-as-though-shadow"
+      ],
+      "why": "Can block creatures with shadow as though they didn't have shadow."
+    },
+    {
+      "name": "Foriysian Interceptor",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "Can block an additional creature each combat."
+    },
+    {
+      "name": "Spectral Force",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "\"If defending player controls no black permanents\": opponent-controls is wrong in multiplayer."
+    },
+    {
+      "name": "Magus of the Scroll",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Name a card, reveal one at random from your hand, damage if it's the named card."
+    },
+    {
+      "name": "Ith, High Arcanist",
+      "needs": [
+        "replacement:prevent-damage-by-and-to-permanent"
+      ],
+      "why": "Untap target attacking creature; prevent all combat damage dealt to and by it this turn (Maze of Ith)."
+    },
+    {
+      "name": "Vampiric Sliver",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "Granted Sengir Vampire trigger: a creature dealt damage by this creature this turn dies."
+    },
+    {
+      "name": "Evangelize",
+      "needs": [
+        "decision:opponent-chooses-target"
+      ],
+      "why": "\"Gain control of target creature of an opponent's choice\" — the chosen opponent picks the target as it's cast."
+    },
+    {
+      "name": "Glass Asp",
+      "needs": [
+        "effect:pay-before-delayed-deadline"
+      ],
+      "why": "\"Unless that player pays {2} before your next draw step\": a special action cancelling a delayed life loss."
+    },
+    {
+      "name": "Slipstream Serpent",
+      "needs": [
+        "static:attack-restriction-defending-player-condition"
+      ],
+      "why": "Can't attack unless defending player controls an Island."
+    },
+    {
+      "name": "Opal Guardian",
+      "needs": [
+        "effect:animate-grants-protection"
+      ],
+      "why": "Becomes a 3/4 Gargoyle with flying and protection from red: animate carries only keywords."
+    },
+    {
+      "name": "Pardic Dragon",
+      "needs": [
+        "effect:add-time-counters-suspended-card"
+      ],
+      "why": "An opponent may put a time counter on it while suspended: add-counter does nothing to a card in exile (game.ts addCounter)."
+    }
+  ]
+}

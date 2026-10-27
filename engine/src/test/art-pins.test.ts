@@ -112,6 +112,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Caribou Token",
   // Keeper of the Beasts' 2/2 green Beast: Scryfall has no such token (checked 2026-10-26).
   "2/2 Beast Token",
+  // Monkey Cage's 2/2 green Monkey: Scryfall's only Monkey tokens are the Ragavans (checked 2026-10-27).
+  "Monkey Token",
 ]);
 
 describe("token art", () => {

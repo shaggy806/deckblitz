@@ -10,6 +10,7 @@ import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
+import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAlabasterPotion from "../pool/alabaster-potion.js";
@@ -175,6 +176,7 @@ import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
+import _poolEnslavedHorror from "../pool/enslaved-horror.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
@@ -239,6 +241,7 @@ import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
 import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
+import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
@@ -405,6 +408,7 @@ import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindKnives from "../pool/mind-knives.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMindSludge from "../pool/mind-sludge.js";
+import _poolMindSwords from "../pool/mind-swords.js";
 import _poolMindlessNull from "../pool/mindless-null.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
@@ -515,6 +519,7 @@ import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
 import _poolRitesOfRefusal from "../pool/rites-of-refusal.js";
+import _poolRithTheAwakener from "../pool/rith-the-awakener.js";
 import _poolRithsGrove from "../pool/riths-grove.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
@@ -674,6 +679,7 @@ import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTombstalker from "../pool/tombstalker.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
+import _poolTradeRoutes from "../pool/trade-routes.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
 import _poolTrainingDrone from "../pool/training-drone.js";
 import _poolTranquility from "../pool/tranquility.js";
@@ -788,6 +794,7 @@ const shard: CardShard = {
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
+    _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
     _poolAjanisPridemate,
     _poolAlabasterPotion,
@@ -953,6 +960,7 @@ const shard: CardShard = {
     _poolEmbodimentOfSpring,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
+    _poolEnslavedHorror,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
     _poolEssenceChanneler,
@@ -1017,6 +1025,7 @@ const shard: CardShard = {
     _poolGleamingBastion,
     _poolGluttonousGuest,
     _poolGoblinBattleJester,
+    _poolGoblinMasons,
     _poolGoblinRaider,
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
@@ -1183,6 +1192,7 @@ const shard: CardShard = {
     _poolMindKnives,
     _poolMindRavel,
     _poolMindSludge,
+    _poolMindSwords,
     _poolMindlessNull,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
@@ -1293,6 +1303,7 @@ const shard: CardShard = {
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,
     _poolRitesOfRefusal,
+    _poolRithTheAwakener,
     _poolRithsGrove,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,
@@ -1452,6 +1463,7 @@ const shard: CardShard = {
     _poolTombstalker,
     _poolTookReaper,
     _poolToxicAbomination,
+    _poolTradeRoutes,
     _poolTragicPoet,
     _poolTrainingDrone,
     _poolTranquility,

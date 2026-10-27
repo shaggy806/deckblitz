@@ -138,6 +138,7 @@ import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
 import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
+import _poolConclavesBlessing from "../pool/conclaves-blessing.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolConviction from "../pool/conviction.js";
@@ -238,7 +239,9 @@ import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFinalStingFaerie from "../pool/final-sting-faerie.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
+import _poolFireblast from "../pool/fireblast.js";
 import _poolFiredrinkerSatyr from "../pool/firedrinker-satyr.js";
+import _poolFiremawKavu from "../pool/firemaw-kavu.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
@@ -363,6 +366,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
+import _poolLastBreath from "../pool/last-breath.js";
 import _poolLavacoreElemental from "../pool/lavacore-elemental.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
 import _poolLeagueGuildmage from "../pool/league-guildmage.js";
@@ -720,6 +724,7 @@ import _poolVedalkenInfuser from "../pool/vedalken-infuser.js";
 import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
+import _poolVerduranEmissary from "../pool/verduran-emissary.js";
 import _poolVernalSovereign from "../pool/vernal-sovereign.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
@@ -921,6 +926,7 @@ const shard: CardShard = {
     _poolCommonBond,
     _poolComplexAutomaton,
     _poolConclaveTribunal,
+    _poolConclavesBlessing,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
     _poolConviction,
@@ -1021,7 +1027,9 @@ const shard: CardShard = {
     _poolFinalStingFaerie,
     _poolFireLitThicket,
     _poolFirebendingStudent,
+    _poolFireblast,
     _poolFiredrinkerSatyr,
+    _poolFiremawKavu,
     _poolFiveHundredYearDiary,
     _poolFlameOfAnor,
     _poolFlameshape,
@@ -1146,6 +1154,7 @@ const shard: CardShard = {
     _poolLagonnaBandElder,
     _poolLakesideShack,
     _poolLambholtHarrier,
+    _poolLastBreath,
     _poolLavacoreElemental,
     _poolLazotepSliver,
     _poolLeagueGuildmage,
@@ -1503,6 +1512,7 @@ const shard: CardShard = {
     _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
     _poolVensersJournal,
+    _poolVerduranEmissary,
     _poolVernalSovereign,
     _poolVesperGhoul,
     _poolVesselOfEphemera,

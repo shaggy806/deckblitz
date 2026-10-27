@@ -96,6 +96,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   authored — Exalted Angel, Rotlung Reanimator, Astral Slide, Krosan Tusker, Voice of the Woods,
   Lightning Rift, the Chains — by five `card-author` agents, and 40 blocked (`B224.json`); the
   rest of Onslaught (94) is round twenty's.
+- **The rest of Time Spiral — Time Spiral is whole** (batch 228, the middle walk's last batch,
+  2026-10-27): no engine change. 58 of the set's last 89 authored — Triskelavus (with its
+  Triskelavite token), Sarpadian Empires, Vol. VII, Phyrexian and Weatherseed Totem, Candles of
+  Leng, Cavalry Master, Plague and Quilled Sliver — by five `card-author` agents and the
+  scaffolder's four echo cards, and 31 blocked (`B228.json`). The middle walk's second range
+  (Eventide back to Time Spiral) is done.
+- **Radiance, and Ravnica: City of Guilds' ~76 most-played** (batch 229, the second middle
+  walk, 2026-10-27): **built** radiance's "target X and each other X that shares a color with it"
+  (`CardFilter.sharesColorWithTarget`, rule 105.2 — bound to the target and its colors as the
+  effect applies, like `sameNameAsTarget`), taught to the scaffolder (destroy/untap/tap, damage
+  and +N/+N forms). 50 of the 76 authored — Brightflame, Leave No Trace, Rally the Righteous,
+  Firemane Angel, Razia, Nullstone Gargoyle, Dimir Doppelganger, Loxodon Hierarch, Tolsimir
+  Wolfblood, the Hunted creatures — by four `card-author` agents and the lead; 26 blocked
+  (`B229.json`). `set-rav-batch-1.test.ts`.
 - **Amplify and provoke, and Legions — Legions and Mirrodin are whole** (batch 219, the fourth
   middle walk, 2026-10-27, `effect:must-block-this-turn`): **built** amplify (rule 702.38 —
   `CardDefinition.amplify`, the hand's cards sharing a creature type revealed as it enters),
@@ -183,6 +197,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Birdstalker). 120 of Champions' last 145 authored — the five Zubera, Brothers Yamazaki, Hisoka's
   Guard, Shimatsu, Iname, Life Aspect, the Deceivers and the Kodama of the South Tree among them,
   by six `card-author` agents and the lead — and 25 blocked (`B212.json`).
+- **Sacrifice or return lands as an alternative cost; the rest of Urza's Destiny, Starter 1999
+  and Mercadian Masques' 95 most-played — Urza's Destiny and Starter 1999 are whole** (batch 227,
+  the oldest-first walk, 2026-10-27, `cost:alt-cost-sacrifice`, `cost:alt-cost-return-lands`):
+  **built** `alternativeCost.sacrifice` and `.returnToHand` (rule 118.9; paid as the cost is paid,
+  601.2h), in the engine, the scaffolder and `alt-cost-sacrifice-return.test.ts`. 109 authored —
+  Fireblast, Daze, Gush, Thwart, Crash, the five Flares, Hand of Emrakul, Demon of Death's Gate,
+  the Borderposts, the storage lands, Larceny, Toymaker, the Rebels among them — and 33 blocked
+  (`B227.json`).
 - **Reveal any number of cards from your hand, the rest of Portal Three Kingdoms and Urza's
   Destiny's 60 most-played — Portal Three Kingdoms is whole** (batch 208, the oldest-first walk,
   2026-10-26, `cost:reveal-any-number-from-hand`): **built** "reveal any number of green cards in

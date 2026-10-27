@@ -1,0 +1,545 @@
+{
+  "batch": "B229",
+  "status": "complete",
+  "ranks": "Ravnica: City of Guilds (RAV, 2005-10-07): the rest of the set's ~76 most-played, 76 of 153 left (the second middle walk's sixth batch); radiance built — CardFilter.sharesColorWithTarget, \"target X and each other X that shares a color with it\" — with its scaffolder templates",
+  "authored": [
+    {
+      "name": "Voyager Staff",
+      "files": [
+        "engine/src/cards/pool/voyager-staff.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Perilous Forays",
+      "files": [
+        "engine/src/cards/pool/perilous-forays.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tolsimir Wolfblood",
+      "files": [
+        "engine/src/cards/pool/tolsimir-wolfblood.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frenzied Goblin",
+      "files": [
+        "engine/src/cards/pool/frenzied-goblin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flow of Ideas",
+      "files": [
+        "engine/src/cards/pool/flow-of-ideas.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Three Dreams",
+      "files": [
+        "engine/src/cards/pool/three-dreams.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lore Broker",
+      "files": [
+        "engine/src/cards/pool/lore-broker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunted Troll",
+      "files": [
+        "engine/src/cards/pool/hunted-troll.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stoneshaker Shaman",
+      "files": [
+        "engine/src/cards/pool/stoneshaker-shaman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Terrarion",
+      "files": [
+        "engine/src/cards/pool/terrarion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Loxodon Gatekeeper",
+      "files": [
+        "engine/src/cards/pool/loxodon-gatekeeper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hunted Phantasm",
+      "files": [
+        "engine/src/cards/pool/hunted-phantasm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dimir Doppelganger",
+      "files": [
+        "engine/src/cards/pool/dimir-doppelganger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunted Dragon",
+      "files": [
+        "engine/src/cards/pool/hunted-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flame Fusillade",
+      "files": [
+        "engine/src/cards/pool/flame-fusillade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phytohydra",
+      "files": [
+        "engine/src/cards/pool/phytohydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Recollect",
+      "files": [
+        "engine/src/cards/pool/recollect.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Peel from Reality",
+      "files": [
+        "engine/src/cards/pool/peel-from-reality.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brainspoil",
+      "files": [
+        "engine/src/cards/pool/brainspoil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Clutch of the Undercity",
+      "files": [
+        "engine/src/cards/pool/clutch-of-the-undercity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oathsworn Giant",
+      "files": [
+        "engine/src/cards/pool/oathsworn-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pollenbright Wings",
+      "files": [
+        "engine/src/cards/pool/pollenbright-wings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nullstone Gargoyle",
+      "files": [
+        "engine/src/cards/pool/nullstone-gargoyle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunted Lammasu",
+      "files": [
+        "engine/src/cards/pool/hunted-lammasu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindmoil",
+      "files": [
+        "engine/src/cards/pool/mindmoil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Necroplasm",
+      "files": [
+        "engine/src/cards/pool/necroplasm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood Funnel",
+      "files": [
+        "engine/src/cards/pool/blood-funnel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coalhauler Swine",
+      "files": [
+        "engine/src/cards/pool/coalhauler-swine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dimir Cutpurse",
+      "files": [
+        "engine/src/cards/pool/dimir-cutpurse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dogpile",
+      "files": [
+        "engine/src/cards/pool/dogpile.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vulturous Zombie",
+      "files": [
+        "engine/src/cards/pool/vulturous-zombie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ethereal Usher",
+      "files": [
+        "engine/src/cards/pool/ethereal-usher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grozoth",
+      "files": [
+        "engine/src/cards/pool/grozoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Agrus Kos, Wojek Veteran",
+      "files": [
+        "engine/src/cards/pool/agrus-kos-wojek-veteran.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vigor Mortis",
+      "files": [
+        "engine/src/cards/pool/vigor-mortis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loxodon Hierarch",
+      "files": [
+        "engine/src/cards/pool/loxodon-hierarch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brightflame",
+      "files": [
+        "engine/src/cards/pool/brightflame.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moldervine Cloak",
+      "files": [
+        "engine/src/cards/pool/moldervine-cloak.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Firemane Angel",
+      "files": [
+        "engine/src/cards/pool/firemane-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conclave's Blessing",
+      "files": [
+        "engine/src/cards/pool/conclaves-blessing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grave-Shell Scarab",
+      "files": [
+        "engine/src/cards/pool/grave-shell-scarab.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Greater Mossdog",
+      "files": [
+        "engine/src/cards/pool/greater-mossdog.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hammerfist Giant",
+      "files": [
+        "engine/src/cards/pool/hammerfist-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Psychic Drain",
+      "files": [
+        "engine/src/cards/pool/psychic-drain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rally the Righteous",
+      "files": [
+        "engine/src/cards/pool/rally-the-righteous.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Belltower Sphinx",
+      "files": [
+        "engine/src/cards/pool/belltower-sphinx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Razia, Boros Archangel",
+      "files": [
+        "engine/src/cards/pool/razia-boros-archangel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conclave Phalanx",
+      "files": [
+        "engine/src/cards/pool/conclave-phalanx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Leave No Trace",
+      "files": [
+        "engine/src/cards/pool/leave-no-trace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidewater Minion",
+      "files": [
+        "engine/src/cards/pool/tidewater-minion.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Shred Memory",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "Exile up to four target cards from a single graveyard — no single-graveyard restriction on a target group."
+    },
+    {
+      "name": "Followed Footsteps",
+      "needs": [
+        "effect:token-copy-of-enchanted"
+      ],
+      "why": "Copy of the enchanted creature at upkeep — create-token-copy of \"equipped\" still copies a creature that died before the Aura went to the graveyard; the ruling says no copy then."
+    },
+    {
+      "name": "Flickerform",
+      "needs": [
+        "effect:aura-returns-attached"
+      ],
+      "why": "Exiles the creature and all Auras attached to it, returning the Auras attached to it."
+    },
+    {
+      "name": "Dimir Machinations",
+      "needs": [
+        "effect:look-at-target-player-library-reorder"
+      ],
+      "why": "Look at a target player's top three, exile any number, put the rest back in any order."
+    },
+    {
+      "name": "Eye of the Storm",
+      "needs": [
+        "effect:exile-cast-spell-then-cast-linked-exiled",
+        "effect:cast-copies-of-exiled"
+      ],
+      "why": "Exiles each instant or sorcery cast, linked to it, then that player may copy and cast every linked card for free."
+    },
+    {
+      "name": "Chant of Vitu-Ghazi",
+      "needs": [
+        "effect:prevent-all-damage-by-filter",
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "Prevent all damage creatures would deal this turn, gaining life equal to the damage prevented (amount:damage-prevented-this-way)."
+    },
+    {
+      "name": "Concerted Effort",
+      "needs": [
+        "effect:share-protection-and-landwalk"
+      ],
+      "why": "Shares each creature's protection qualities and landwalk with the others; the engine can't grant those copied from another creature."
+    },
+    {
+      "name": "Svogthos, the Restless Tomb",
+      "needs": [
+        "effect:animate-with-cda-pt"
+      ],
+      "why": "Becomes a creature whose P/T keep tracking the creature cards in your graveyard; animate reads P/T once."
+    },
+    {
+      "name": "Faith's Fetters",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "Enchanted permanent's activated abilities can't be activated unless they're mana abilities."
+    },
+    {
+      "name": "Suppression Field",
+      "needs": [
+        "cost:ability-cost-modification-all-zones",
+        "cost:ability-cost-modification"
+      ],
+      "why": "Its {2} increase applies to abilities activated from hand or graveyard too (cycling, transmute); abilityCostModification reaches only permanents' abilities."
+    },
+    {
+      "name": "Tunnel Vision",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Name a card, then reveal until that name."
+    },
+    {
+      "name": "Wizened Snitches",
+      "needs": [
+        "static:players-play-with-library-top-revealed"
+      ],
+      "why": "Every player plays with their library's top card revealed; revealsOwnLibraryTop is the controller's only."
+    },
+    {
+      "name": "Netherborn Phalanx",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "Each opponent loses 1 life for each creature that player controls — a per-player count."
+    },
+    {
+      "name": "Moonlight Bargain",
+      "needs": [
+        "decision:per-card-discard-unless-pay-life"
+      ],
+      "why": "For each of the top five, put it into your graveyard unless you pay 2 life: a per-card life payment choice."
+    },
+    {
+      "name": "Reroute",
+      "needs": [
+        "target:activated-ability-single-target"
+      ],
+      "why": "Change the target of target activated ability with a single target."
+    },
+    {
+      "name": "Boros Fury-Shield",
+      "needs": [
+        "effect:prevent-combat-damage-by-target"
+      ],
+      "why": "Prevent all combat damage the target creature would deal this turn."
+    },
+    {
+      "name": "Auratouched Mage",
+      "needs": [
+        "filter:aura-enchant-restriction"
+      ],
+      "why": "An Aura card that could enchant it goes onto the battlefield attached to it; otherwise into your hand — needs \"could enchant it\"."
+    },
+    {
+      "name": "Bloodbond March",
+      "needs": [
+        "filter:same-name-as-trigger-spell"
+      ],
+      "why": "Each player returns all cards with the same name as the cast creature spell from their graveyard."
+    },
+    {
+      "name": "Thoughtpicker Witch",
+      "needs": [
+        "effect:look-and-choose-target-opponent-library"
+      ],
+      "why": "Look at a target opponent's top two, exile one."
+    },
+    {
+      "name": "Gleancrawler",
+      "needs": [
+        "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "No filter for creature cards put into a graveyard from the battlefield this turn."
+    },
+    {
+      "name": "Bathe in Light",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Choose a color; target creature and each other creature sharing a color with it gain protection from it until end of turn — no one-shot protection grant (radiance itself is built)."
+    },
+    {
+      "name": "Sisters of Stone Death",
+      "needs": [
+        "filter:blocking-or-blocked-by-source",
+        "effect:put-exiled-with-source-onto-battlefield"
+      ],
+      "why": "\"Creature blocking or blocked by this\" target, and choosing a card exiled with it to put onto the battlefield (effect:put-exiled-with-source-onto-battlefield)."
+    },
+    {
+      "name": "Circu, Dimir Lobotomist",
+      "needs": [
+        "filter:same-name-as-exiled-with-source"
+      ],
+      "why": "Opponents can't cast spells with the same name as a card exiled with it."
+    },
+    {
+      "name": "Golgari Brownscale",
+      "needs": [
+        "trigger:self-put-into-hand-from-graveyard"
+      ],
+      "why": "\"When this card is put into your hand from your graveyard\" — no trigger for that move."
+    },
+    {
+      "name": "Szadek, Lord of Secrets",
+      "needs": [
+        "decision:replacement-order-choice"
+      ],
+      "why": "The defending player may apply prevention before its replacement (the ruling), and the replacement mills that player instead."
+    },
+    {
+      "name": "Shadow of Doubt",
+      "needs": [
+        "static:cant-search-library"
+      ],
+      "why": "Players can't search libraries this turn."
+    }
+  ]
+}
