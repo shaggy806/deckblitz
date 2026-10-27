@@ -13,6 +13,20 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   back to just before the event, and Decaying Soil's ruling says threshold must already be met.
   Reborn Hero is right, its own death being the event. Found by batch 225's group C; blocks
   Decaying Soil (`trigger:conditional-grant-look-back`).
+- **An emblem's static applies only as a creatures-you-control anthem.** `characteristics.ts`
+  (the emblem loop after the battlefield statics, "Only the `creatures-you-control` scope is
+  supported") skips an emblem whose `affects.scope` is anything else. Nissa, Who Shakes the
+  World is in the pool with a −8 emblem written `scope: "filter"` (lands you control, grant
+  indestructible), so that emblem does nothing: a wrong card until the scope is read (or the card
+  comes out). Found by batch 235's group E, whose Elspeth, Knight-Errant ("Artifacts, creatures,
+  enchantments, and lands you control have indestructible") was tested and destroyed. Blocks
+  Elspeth (`effect:emblem-static-abilities`); Nissa is the only pool card with such an emblem.
+- **`destroy-all` doesn't fix indestructibility before anything leaves.** Rule 701.8 with 608.2:
+  a "destroy all" decides which permanents are destroyed, and which are indestructible, once,
+  then moves them together. Batch 235's group D tested Knight Exemplar ("Other Knight creatures
+  you control get +1/+1 and have indestructible") under a Wrath: the other Knight was destroyed
+  along with Exemplar, where its ruling keeps it. Not yet reproduced outside that draft; blocks
+  Knight Exemplar (`bug:destroy-all-indestructible-snapshot`).
 - **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
   `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
   context without the enclosing loop's player binding (game.ts, where the choice's `then` is
@@ -25,7 +39,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   return up to two target Bird and/or Cleric permanent cards from your graveyard to the
   battlefield" — targeting itself, it was exiled and then returned from exile, where its ruling
   says it stays exiled. Not yet checked against other `put-onto-battlefield` /
-  `return-to-hand` sequences. Blocks Celestial Gatekeeper (`bug:zone-change-object-identity`).
+  `return-to-hand` sequences. Blocks Celestial Gatekeeper (`bug:moved-target-card-still-acted-on`; batch 235 found it again).
   Found 2026-10-26 authoring Duskmantle Seer (B176), written with `who: "you"` instead — right
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.

@@ -485,7 +485,7 @@
   "bug:as-enters-choices-any-entry": {
    "size": "medium",
    "ui": false,
-   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent."
+   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent. Not covered (2026-10-27, recheck R1): a token copy is never asked the copied card's as-enters choices — bug:token-copy-skips-as-enters-choices."
   },
   "bug:cda-all-zones": {
    "size": "small",
@@ -530,7 +530,7 @@
   "bug:lki-object-reads": {
    "size": "medium",
    "ui": false,
-   "description": "When a resolving ability reads an object that has left the battlefield, it uses last-known information (rule 608.2h). This covers powerOf/toughnessOf of the source, trigger object or target, 'that creature's controller', and the source's keywords (lifelink) for damage it dealt. It includes tokens that were deleted. Built: powerOf/toughnessOf/manaValueOf/manaSpentOf/controllerOf, trigger-object and target conditions and a departed source's damage (colours, lifelink, deathtouch, controller) read the snapshot, picked by the battlefield stint the reference names (LastKnownRefs); a deleted token's is kept in GameState.ceasedTokens."
+   "description": "When a resolving ability reads an object that has left the battlefield, it uses last-known information (rule 608.2h). This covers powerOf/toughnessOf of the source, trigger object or target, 'that creature's controller', and the source's keywords (lifelink) for damage it dealt. It includes tokens that were deleted. Built: powerOf/toughnessOf/manaValueOf/manaSpentOf/controllerOf, trigger-object and target conditions and a departed source's damage (colours, lifelink, deathtouch, controller) read the snapshot, picked by the battlefield stint the reference names (LastKnownRefs); a deleted token's is kept in GameState.ceasedTokens. Not covered (recheck R1): the mana value of a spell copy countered in response — bug:mana-value-of-countered-copy."
   },
   "bug:lore-counters-fire-chapters": {
    "size": "small",
@@ -570,7 +570,7 @@
   "bug:simultaneous-zone-moves": {
    "size": "large",
    "ui": false,
-   "description": "Moves of several targets from one instruction ('destroy two target creatures', 'return X and Y') still happen one after another, and replacement effects don't look back at the group. Built so far: mass destruction, one sweep of state-based graveyard moves (lethal damage, 0 loyalty, unattached Auras, the legend rule, finished Sagas), edicts once every player has chosen, and overloaded or 'return all' bounces each move as one leave batch whose members see each other leave (rule 603.10a, withLeaveBatch), with commanders deferred by 903.9a still counted in their batch. Entering together is the same gap: permanents put onto the battlefield by one instruction enter one at a time, so a 'whenever another creature enters' ability among them misses the ones that entered before it (the Elas il-Kor ruling)."
+   "description": "Moves of several targets from one instruction ('destroy two target creatures', 'return X and Y') still happen one after another, and replacement effects don't look back at the group. Built so far: mass destruction, one sweep of state-based graveyard moves (lethal damage, 0 loyalty, unattached Auras, the legend rule, finished Sagas), edicts once every player has chosen, and overloaded or 'return all' bounces each move as one leave batch whose members see each other leave (rule 603.10a, withLeaveBatch), with commanders deferred by 903.9a still counted in their batch. Entering together is the same gap: permanents put onto the battlefield by one instruction enter one at a time, so a 'whenever another creature enters' ability among them misses the ones that entered before it (the Elas il-Kor ruling). Not covered (recheck R1): a simultaneous move after a choice (bug:simultaneous-move-with-choice), destroy-all fixing indestructibility first (bug:destroy-all-indestructible-snapshot), and simultaneous discards (bug:simultaneous-discards)."
   },
   "bug:static-scope-computed-keywords": {
    "size": "small",
@@ -600,7 +600,7 @@
   "bug:zone-change-object-identity": {
    "size": "medium",
    "ui": false,
-   "description": "Rule 400.7: an object that changes zones becomes a new object. Built: GameObject.zoneChangeCount (bumped by every moveObject); a stack object's targetStints and sourceZoneChangeCount, so at resolution a target that has changed zones since it was targeted is gone (a spell whose every target went fizzles) and a changed source is sourceLost — reads of either still use last-known information (LastKnownRefs), so Juri still deals the power it died with and Mana Drain still reads the countered spell; a delayed trigger's sourceStint, so The Locust God's 'return it' finds nothing once the card has left and come back; and an until-the-source-leaves exile whose source has already left exiles nothing (rule 610.3a/b). Left: a card that left, came back and left again before an ability about its first departure resolved keeps only its later snapshot."
+   "description": "Rule 400.7: an object that changes zones becomes a new object. Built: GameObject.zoneChangeCount (bumped by every moveObject); a stack object's targetStints and sourceZoneChangeCount, so at resolution a target that has changed zones since it was targeted is gone (a spell whose every target went fizzles) and a changed source is sourceLost — reads of either still use last-known information (LastKnownRefs), so Juri still deals the power it died with and Mana Drain still reads the countered spell; a delayed trigger's sourceStint, so The Locust God's 'return it' finds nothing once the card has left and come back; and an until-the-source-leaves exile whose source has already left exiles nothing (rule 610.3a/b). Left: a card that left, came back and left again before an ability about its first departure resolved keeps only its later snapshot. Not covered (recheck R1): a target card moved by an earlier step of the same resolution is still acted on — bug:moved-target-card-still-acted-on."
   },
   "condition:cast-spell-targets": {
    "size": "medium",
@@ -615,7 +615,7 @@
   "condition:defending-player-life-rank": {
    "size": "small",
    "ui": false,
-   "description": "Attack-trigger conditions on how the defending player's life compares with the other opponents: dethrone (most life or tied, players only) and 'not the lowest life'."
+   "description": "Attack-trigger conditions on how the defending player's life compares with the other opponents: dethrone (most life or tied, players only) and 'not the lowest life'. Not covered (recheck R1): 'no opponent has more life than that player', among the attacker's opponents only — condition:defender-no-opponent-more-life."
   },
   "condition:devotion": {
    "size": "small",
@@ -630,7 +630,7 @@
   "condition:filter-attachments": {
    "size": "small",
    "ui": false,
-   "description": "CardFilter clauses about attachments: equipped, enchanted, enchanted by an Aura you control, and modified (has a counter, is equipped, or is enchanted by an Aura you control). Also a 'source is equipped' condition. Used by attack, combat-damage and cast triggers."
+   "description": "CardFilter clauses about attachments: equipped, enchanted, enchanted by an Aura you control, and modified (has a counter, is equipped, or is enchanted by an Aura you control). Also a 'source is equipped' condition. Used by attack, combat-damage and cast triggers. Not covered (recheck R1): 'with another Aura attached', not counting itself — filter:enchanted-by-another-aura."
   },
   "condition:filter-card-property-clauses": {
    "size": "medium",
@@ -1070,7 +1070,7 @@
   "effect:reflexive-trigger": {
    "size": "medium",
    "ui": false,
-   "description": "Real reflexive triggers (rule 603.12): after an optional payment or action ('when you do'), a new triggered ability goes on the stack and chooses its targets and modes then."
+   "description": "Real reflexive triggers (rule 603.12): after an optional payment or action ('when you do'), a new triggered ability goes on the stack and chooses its targets and modes then. Not covered (recheck R1): a reflexive target filter comparing with the source's live power is bound when the trigger is created — bug:reflexive-target-compare-bound-at-creation."
   },
   "effect:regenerate": {
    "size": "medium",
@@ -1582,7 +1582,7 @@
   "static:pt-per-amount": {
    "size": "small",
    "ui": false,
-   "description": "grantPtPerCount counts things other than battlefield permanents: counters on the affected object itself, and cards in exile."
+   "description": "grantPtPerCount counts things other than battlefield permanents: counters on the affected object itself, and cards in exile. Not covered (recheck R1): a count of the Auras and Equipment attached to the static's own source — static:pt-per-attachments-on-source."
   },
   "static:self-type-changes": {
    "size": "medium",

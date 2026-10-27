@@ -2581,6 +2581,56 @@
    "example": "Tamiyo, the Moon Sage: an emblem's static other than a creatures-you-control anthem ('You have no maximum hand size') — read by its rule only off battlefield permanents (AUTHORING §15). The triggered half is built (2026-10-09).",
    "checked": "2026-10-27: missing"
   },
+  "bug:token-copy-skips-as-enters-choices": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Nexus of Becoming: the token copy of the exiled card must be asked its as-enters choices (ruling); Ardyn, Yenna, Rebuild the City, Kindred Charge, Ember Island Production and Abyssal Harvester wait on the same.",
+   "description": "create-token-copy never runs the copied card's \"as this enters\" choices (chooseOnEnter, copyOnEnter, a chosen creature type, riot): a token copy enters with nothing chosen, though the rulings say those abilities work (AUTHORING §15). Needs the copy made off the battlefield, asked, and the rest of the resolution resumed."
+  },
+  "condition:defender-no-opponent-more-life": {
+   "family": "condition:defending-player-life-rank",
+   "example": "Sword Coast Sailor: 'attacks a player, if no opponent has more life than that player' (also Hardy Outlander, Agent of the Shadow Thieves, Guild Artisan, Veteran Soldier).",
+   "description": "An attack condition: no opponent of the attacking player has more life than the defending player (ties allowed, the attacker's own life left out). DefenderLife's \"most\" counts every player, the attacker included."
+  },
+  "bug:simultaneous-move-with-choice": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Avatar Destiny: returns itself and the chosen milled creature card together.",
+   "description": "A simultaneous move that needs a choice first: a `simultaneous` sequence can't hold a step that asks, so 'return this card and up to one creature card milled this way' becomes two leave events."
+  },
+  "bug:destroy-all-indestructible-snapshot": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Knight Exemplar: under a Wrath the other Knights stay indestructible as Exemplar dies with them (ruling); a test showed them destroyed.",
+   "description": "destroy-all must fix which permanents are indestructible before any of them leaves (rule 701.8 with 608.2): today a Wrath destroys a creature whose indestructible came from a lord destroyed in the same sweep."
+  },
+  "bug:simultaneous-discards": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Burning Inquiry: each player discards three at random, all at the same time (ruling). Noggle Ransacker, in the pool, has the same gap without a ruling saying so.",
+   "description": "Every player's discard from one instruction is one event: ctx.simultaneously batches battlefield and graveyard leaves and entries and damage, not hand-to-graveyard moves."
+  },
+  "bug:mana-value-of-countered-copy": {
+   "family": "bug:lki-object-reads",
+   "example": "Deekah, Fractal Theorist: a copied spell's mana value when the copy is countered in response.",
+   "description": "A spell copy is deleted as it leaves the stack, so manaValueOf a copy countered in response reads 0; lastStackManaValue covers real cards only. Same root as bug:controller-of-target-countered-copy."
+  },
+  "filter:enchanted-by-another-aura": {
+   "family": "condition:filter-attachments",
+   "example": "Daybreak Coronet: 'Enchant creature with another Aura attached to it'.",
+   "description": "An enchant or target filter for a creature with another Aura attached (not counting the Aura itself): CardFilter.enchanted is a yes/no that counts the Aura once attached."
+  },
+  "bug:moved-target-card-still-acted-on": {
+   "family": "bug:zone-change-object-identity",
+   "example": "Celestial Gatekeeper: targeting itself, it is exiled by the first step and must stay exiled (ruling), but is returned.",
+   "description": "A targeted card moved by an earlier step of the same resolution is a new object (rules 400.7, 608.2b): put-onto-battlefield on a graveyard-card target still acts on it from its new zone."
+  },
+  "bug:reflexive-target-compare-bound-at-creation": {
+   "family": "effect:reflexive-trigger",
+   "example": "Auron, Venerated Guardian: shrinking Auron in response must make a target with power not less than its power illegal.",
+   "description": "A reflexive trigger's target filter comparing with a live amount (power less than the source's) is bound to a number when the trigger is created (bindDynamicCompares), so the resolution recheck reads a stale value."
+  },
+  "static:pt-per-attachments-on-source": {
+   "family": "static:pt-per-amount",
+   "example": "Kellan, the Fae-Blooded: 'other creatures you control get +1/+0 for each Aura and Equipment attached to Kellan'.",
+   "description": "A static P/T bonus per Aura and Equipment attached to the static's own source: grantPtPerCount's attachedTo matches a host only by filter and can't name the source."
+  },
   "effect:emblem-no-max-hand-size": {
    "family": "effect:emblem-triggered-abilities",
    "example": "Wrenn and Seven: maxHandSizeOf reads only battlefield statics, so the −8 emblem's 'no maximum hand size' wouldn't apply"

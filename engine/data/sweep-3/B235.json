@@ -1,0 +1,715 @@
+{
+  "batch": "B235",
+  "status": "complete",
+  "ranks": "The need-keys recheck list R1 (Phase 1 step 2)",
+  "authored": [
+    {
+      "name": "Accumulate Wisdom",
+      "files": [
+        "engine/src/cards/pool/accumulate-wisdom.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aether Vial",
+      "files": [
+        "engine/src/cards/pool/aether-vial.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Awaken the Honored Dead",
+      "files": [
+        "engine/src/cards/pool/awaken-the-honored-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Azusa's Many Journeys",
+      "files": [
+        "engine/src/cards/pool/azusas-many-journeys.ts",
+        "engine/src/cards/pool/likeness-of-the-seeker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Berserk",
+      "files": [
+        "engine/src/cards/pool/berserk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Black Sun's Twilight",
+      "files": [
+        "engine/src/cards/pool/black-suns-twilight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brood Sliver",
+      "files": [
+        "engine/src/cards/pool/brood-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carnivorous Canopy",
+      "files": [
+        "engine/src/cards/pool/carnivorous-canopy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cavalier of Thorns",
+      "files": [
+        "engine/src/cards/pool/cavalier-of-thorns.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clash of the Eikons",
+      "files": [
+        "engine/src/cards/pool/clash-of-the-eikons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conjurer's Bauble",
+      "files": [
+        "engine/src/cards/pool/conjurers-bauble.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Copycrook",
+      "files": [
+        "engine/src/cards/pool/copycrook.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Counterbalance",
+      "files": [
+        "engine/src/cards/pool/counterbalance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Court of Embereth",
+      "files": [
+        "engine/src/cards/pool/court-of-embereth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cruel Ultimatum",
+      "files": [
+        "engine/src/cards/pool/cruel-ultimatum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cryptolith Fragment",
+      "files": [
+        "engine/src/cards/pool/aurora-of-emrakul.ts",
+        "engine/src/cards/pool/cryptolith-fragment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dark Petition",
+      "files": [
+        "engine/src/cards/pool/dark-petition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dire Tactics",
+      "files": [
+        "engine/src/cards/pool/dire-tactics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Docent of Perfection",
+      "files": [
+        "engine/src/cards/pool/docent-of-perfection.ts",
+        "engine/src/cards/pool/final-iteration.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Droning Bureaucrats",
+      "files": [
+        "engine/src/cards/pool/droning-bureaucrats.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elena, Turk Recruit",
+      "files": [
+        "engine/src/cards/pool/elena-turk-recruit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ensnared by the Mara",
+      "files": [
+        "engine/src/cards/pool/ensnared-by-the-mara.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Éomer, Marshal of Rohan",
+      "files": [
+        "engine/src/cards/pool/eomer-marshal-of-rohan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Far Wanderings",
+      "files": [
+        "engine/src/cards/pool/far-wanderings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fiend Hunter",
+      "files": [
+        "engine/src/cards/pool/fiend-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Find // Finality",
+      "files": [
+        "engine/src/cards/pool/finality.ts",
+        "engine/src/cards/pool/find-finality.ts",
+        "engine/src/cards/pool/find.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flow State",
+      "files": [
+        "engine/src/cards/pool/flow-state.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fumulus, the Infestation",
+      "files": [
+        "engine/src/cards/pool/fumulus-the-infestation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fungal Rebirth",
+      "files": [
+        "engine/src/cards/pool/fungal-rebirth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gift of Estates",
+      "files": [
+        "engine/src/cards/pool/gift-of-estates.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gyome, Master Chef",
+      "files": [
+        "engine/src/cards/pool/gyome-master-chef.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Helm of the Ghastlord",
+      "files": [
+        "engine/src/cards/pool/helm-of-the-ghastlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hour of Promise",
+      "files": [
+        "engine/src/cards/pool/hour-of-promise.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kulrath Knight",
+      "files": [
+        "engine/src/cards/pool/kulrath-knight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mana Echoes",
+      "files": [
+        "engine/src/cards/pool/mana-echoes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "March of Progress",
+      "files": [
+        "engine/src/cards/pool/march-of-progress.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mavren Fein, Dusk Apostle",
+      "files": [
+        "engine/src/cards/pool/mavren-fein-dusk-apostle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Might of the Meek",
+      "files": [
+        "engine/src/cards/pool/might-of-the-meek.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Moseo, Vein's New Dean",
+      "files": [
+        "engine/src/cards/pool/moseo-veins-new-dean.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nazgûl Battle-Mace",
+      "files": [
+        "engine/src/cards/pool/nazgul-battle-mace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Necrogen Mists",
+      "files": [
+        "engine/src/cards/pool/necrogen-mists.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oblivion Ring",
+      "files": [
+        "engine/src/cards/pool/oblivion-ring.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Of Herbs and Stewed Rabbit",
+      "files": [
+        "engine/src/cards/pool/of-herbs-and-stewed-rabbit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Palani's Hatcher",
+      "files": [
+        "engine/src/cards/pool/palanis-hatcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Scriptures",
+      "files": [
+        "engine/src/cards/pool/phyrexian-scriptures.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Planar Engineering",
+      "files": [
+        "engine/src/cards/pool/planar-engineering.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Preston, the Vanisher",
+      "files": [
+        "engine/src/cards/pool/preston-the-vanisher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prishe's Wanderings",
+      "files": [
+        "engine/src/cards/pool/prishes-wanderings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reject Imperfection",
+      "files": [
+        "engine/src/cards/pool/reject-imperfection.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rite of the Raging Storm",
+      "files": [
+        "engine/src/cards/pool/rite-of-the-raging-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rundvelt Hordemaster",
+      "files": [
+        "engine/src/cards/pool/rundvelt-hordemaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ruthless Lawbringer",
+      "files": [
+        "engine/src/cards/pool/ruthless-lawbringer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Satsuki, the Living Lore",
+      "files": [
+        "engine/src/cards/pool/satsuki-the-living-lore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Savage Stomp",
+      "files": [
+        "engine/src/cards/pool/savage-stomp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sephiroth, Fallen Hero",
+      "files": [
+        "engine/src/cards/pool/sephiroth-fallen-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Servo Schematic",
+      "files": [
+        "engine/src/cards/pool/servo-schematic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shadow, Mysterious Assassin",
+      "files": [
+        "engine/src/cards/pool/shadow-mysterious-assassin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shelinda, Yevon Acolyte",
+      "files": [
+        "engine/src/cards/pool/shelinda-yevon-acolyte.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smothering Abomination",
+      "files": [
+        "engine/src/cards/pool/smothering-abomination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Star Compass",
+      "files": [
+        "engine/src/cards/pool/star-compass.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Summon: Shiva",
+      "files": [
+        "engine/src/cards/pool/summon-shiva.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sunken Citadel",
+      "files": [
+        "engine/src/cards/pool/sunken-citadel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tail Swipe",
+      "files": [
+        "engine/src/cards/pool/tail-swipe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The First Iroan Games",
+      "files": [
+        "engine/src/cards/pool/the-first-iroan-games.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Ooze",
+      "files": [
+        "engine/src/cards/pool/the-ooze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thraben Watcher",
+      "files": [
+        "engine/src/cards/pool/thraben-watcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tomb Fortress",
+      "files": [
+        "engine/src/cards/pool/tomb-fortress.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Traverse the Ulvenwald",
+      "files": [
+        "engine/src/cards/pool/traverse-the-ulvenwald.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Venarian Glimmer",
+      "files": [
+        "engine/src/cards/pool/venarian-glimmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Volcanic Vision",
+      "files": [
+        "engine/src/cards/pool/volcanic-vision.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodland Bellower",
+      "files": [
+        "engine/src/cards/pool/woodland-bellower.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yorvo, Lord of Garenbrig",
+      "files": [
+        "engine/src/cards/pool/yorvo-lord-of-garenbrig.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Auron, Venerated Guardian",
+      "needs": [
+        "bug:reflexive-target-compare-bound-at-creation"
+      ],
+      "why": "A reflexive trigger's target filter comparing with the source's live power is bound to a number when the trigger is created, so the resolution recheck reads a stale value."
+    },
+    {
+      "name": "Ardyn, the Usurper",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "create-token-copy never asks the copied card's as-enters choices, so a token copy enters with nothing chosen."
+    },
+    {
+      "name": "Avatar Destiny",
+      "needs": [
+        "bug:simultaneous-move-with-choice"
+      ],
+      "why": "A simultaneous move can't hold a step that asks a question, so \"return this card and up to one creature card milled this way\" splits into two leave events."
+    },
+    {
+      "name": "Kellan, the Fae-Blooded",
+      "needs": [
+        "static:pt-per-attachments-on-source"
+      ],
+      "why": "A static +N/+0 per Aura and Equipment attached to the static's own source: grantPtPerCount's attachedTo can't name the source."
+    },
+    {
+      "name": "Continue?",
+      "needs": [
+        "filter:put-into-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "No filter clause for a card put into a graveyard from the battlefield this turn."
+    },
+    {
+      "name": "Elspeth, Knight-Errant",
+      "needs": [
+        "effect:emblem-static-abilities"
+      ],
+      "why": "An emblem static applies only with scope creatures-you-control: \"Artifacts, creatures, enchantments, and lands you control have indestructible\" does nothing."
+    },
+    {
+      "name": "Liliana's Triumph",
+      "needs": [
+        "effect:hidden-simultaneous-choices"
+      ],
+      "why": "The each-opponent discard resolves one player at a time in view of the next; the ruling has all choose hidden, then discard at once."
+    },
+    {
+      "name": "Show and Tell",
+      "needs": [
+        "effect:each-player-chooses-then-all-act"
+      ],
+      "why": "each-player-may putFromHand puts each player's card in as they choose; the ruling has all choose first, then all enter at once."
+    },
+    {
+      "name": "Abyssal Harvester",
+      "needs": [
+        "condition:put-into-graveyard-this-turn-any-zone",
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "Only putIntoGraveyardFromLibraryThisTurn exists; and the token copy's as-enters abilities must work (ruling)."
+    },
+    {
+      "name": "Rebuild the City",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "A token copy of a land with an as-enters choice is never asked it (ruling: the copy's as-enters choices work)."
+    },
+    {
+      "name": "Yenna, Redtooth Regent",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "A token copy's as-enters abilities must work (ruling); create-token-copy never asks them."
+    },
+    {
+      "name": "Sword Coast Sailor",
+      "needs": [
+        "condition:defender-no-opponent-more-life"
+      ],
+      "why": "\"If no opponent has more life than that player\", among the attacker's opponents only: DefenderLife's most counts the attacker too."
+    },
+    {
+      "name": "Hardy Outlander",
+      "needs": [
+        "condition:defender-no-opponent-more-life"
+      ],
+      "why": "Same comparison as Sword Coast Sailor: no opponent has more life than the defending player."
+    },
+    {
+      "name": "Knight Exemplar",
+      "needs": [
+        "bug:destroy-all-indestructible-snapshot"
+      ],
+      "why": "destroy-all must fix which permanents are indestructible before any leave (ruling); a Wrath destroyed a Knight the Exemplar made indestructible along with it."
+    },
+    {
+      "name": "Nexus of Becoming",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "A token copy of the exiled card is never asked its as-enters choices (ruling: they work)."
+    },
+    {
+      "name": "Kindred Charge",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "Its rulings say the copies' as-enters abilities work; create-token-copy never asks them."
+    },
+    {
+      "name": "Guild Artisan",
+      "needs": [
+        "condition:defender-no-opponent-more-life"
+      ],
+      "why": "\"Attacks a player with the most life or tied\", among the attacker's opponents: DefenderLife's most counts the attacker too."
+    },
+    {
+      "name": "Veteran Soldier",
+      "needs": [
+        "condition:defender-no-opponent-more-life"
+      ],
+      "why": "Same comparison: the defending player has the most life among the attacker's opponents or is tied."
+    },
+    {
+      "name": "Ember Island Production",
+      "needs": [
+        "bug:token-copy-skips-as-enters-choices"
+      ],
+      "why": "Its ruling says the token copy's as-enters abilities work; create-token-copy never asks them."
+    },
+    {
+      "name": "Deekah, Fractal Theorist",
+      "needs": [
+        "bug:mana-value-of-countered-copy"
+      ],
+      "why": "A spell copy is deleted as it leaves the stack, so manaValueOf a copy countered in response reads 0; lastStackManaValue covers real cards only."
+    },
+    {
+      "name": "Burning Inquiry",
+      "needs": [
+        "bug:simultaneous-discards"
+      ],
+      "why": "Every player's random discard happens at once (ruling); simultaneously() batches no hand-to-graveyard moves."
+    },
+    {
+      "name": "Agent of the Shadow Thieves",
+      "needs": [
+        "condition:defender-no-opponent-more-life"
+      ],
+      "why": "\"If no opponent has more life than that player\", leaving the attacker out (ruling): DefenderLife's most counts the attacker too."
+    },
+    {
+      "name": "Daybreak Coronet",
+      "needs": [
+        "filter:enchanted-by-another-aura"
+      ],
+      "why": "\"Enchant creature with another Aura attached to it\": CardFilter.enchanted is a yes/no that counts the Coronet itself once attached."
+    },
+    {
+      "name": "Brought Back",
+      "needs": [
+        "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "No filter for permanent cards put into your graveyard from the battlefield this turn."
+    },
+    {
+      "name": "Celestial Gatekeeper",
+      "needs": [
+        "bug:moved-target-card-still-acted-on"
+      ],
+      "why": "A graveyard-card target moved by an earlier step of the same resolution is still put onto the battlefield from its new zone (rules 400.7, 608.2b): targeting itself, it's exiled and then returned."
+    },
+    {
+      "name": "Eldrazi Confluence",
+      "needs": [
+        "effect:modal-repeat-modes"
+      ],
+      "why": "castModal can't choose the same mode more than once."
+    },
+    {
+      "name": "Monastery Siege",
+      "needs": [
+        "cost:cost-modification-by-spell-targets"
+      ],
+      "why": "Cost modification sees only the card and a target count, never the spell's targets: \"spells that target you or a permanent you control cost {2} more\"."
+    },
+    {
+      "name": "Thanos, the Mad Titan",
+      "needs": [
+        "decision:choose-odd-or-even"
+      ],
+      "why": "No odd/even mana-value choice or filter."
+    }
+  ]
+}
