@@ -652,6 +652,7 @@ import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSparkHarvest from "../pool/spark-harvest.js";
+import _poolSphereOfAnnihilation from "../pool/sphere-of-annihilation.js";
 import _poolSpikeTiller from "../pool/spike-tiller.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
@@ -1503,6 +1504,7 @@ const shard: CardShard = {
     _poolSouredSprings,
     _poolSpaceshift,
     _poolSparkHarvest,
+    _poolSphereOfAnnihilation,
     _poolSpikeTiller,
     _poolSpitfireLagac,
     _poolSpreadingRot,

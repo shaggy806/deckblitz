@@ -177,6 +177,7 @@ import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
+import _poolDovinArchitectOfLaw from "../pool/dovin-architect-of-law.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDreamshaperShaman from "../pool/dreamshaper-shaman.js";
 import _poolDreamtideWhale from "../pool/dreamtide-whale.js";
@@ -550,6 +551,7 @@ import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js"
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
+import _poolSavorTheMoment from "../pool/savor-the-moment.js";
 import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
@@ -980,6 +982,7 @@ const shard: CardShard = {
     _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
+    _poolDovinArchitectOfLaw,
     _poolDragonlordAtarka,
     _poolDreamshaperShaman,
     _poolDreamtideWhale,
@@ -1353,6 +1356,7 @@ const shard: CardShard = {
     _poolSarevoksTome,
     _poolSarumansTrickery,
     _poolSatyrNyxSmith,
+    _poolSavorTheMoment,
     _poolSawtoothThresher,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,

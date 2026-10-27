@@ -572,6 +572,7 @@ import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
 import _poolScrollOfOrigins from "../pool/scroll-of-origins.js";
 import _poolScryingSheets from "../pool/scrying-sheets.js";
+import _poolScuttlingSentinel from "../pool/scuttling-sentinel.js";
 import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolScreechingHarpy,
     _poolScrollOfOrigins,
     _poolScryingSheets,
+    _poolScuttlingSentinel,
     _poolSeafloorStalker,
     _poolSealOfStrength,
     _poolSearchThePremises,

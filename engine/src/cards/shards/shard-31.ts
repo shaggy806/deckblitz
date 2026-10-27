@@ -192,6 +192,7 @@ import _poolDiabolicRevelation from "../pool/diabolic-revelation.js";
 import _poolDiamondLion from "../pool/diamond-lion.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
+import _poolDinosaurEgg from "../pool/dinosaur-egg.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
@@ -1061,6 +1062,7 @@ const shard: CardShard = {
     _poolDiamondLion,
     _poolDiffusionSliver,
     _poolDimirHouseGuard,
+    _poolDinosaurEgg,
     _poolDinotomaton,
     _poolDiplomaticImmunity,
     _poolDireUndercurrents,

@@ -805,6 +805,7 @@ import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flyi
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
+import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
 import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
 import _tokensTwinToken from "../tokens/twin-token.js";
@@ -1616,6 +1617,7 @@ const shard: CardShard = {
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
+    _tokensKrakenTokenKioraBestsTheSeaGod,
     _tokensMinionToken,
     _tokensMyrToken,
     _tokensTwinToken,
