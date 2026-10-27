@@ -12175,6 +12175,18 @@
   "trigger:gains-control-of-this": {
    "family": "trigger:lose-control-trigger",
    "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
+  },
+  "replacement:prevent-damage-dealt-by-enchanted-creature": {
+   "family": "replacement:damage-modification",
+   "example": "Muzzle: prevent all damage that would be dealt by enchanted creature — a would-deal-damage replacement can't name the creature the Aura enchants as the source."
+  },
+  "effect:each-player-reveals-top-all-match": {
+   "family": "effect:this-way-results",
+   "example": "Game Preserve: each player reveals their top card; if all are creature cards, put them all onto the battlefield."
+  },
+  "condition:all-matching-share-a-color": {
+   "family": "condition:filter-combinators",
+   "example": "Common Cause: nonartifact creatures get +2/+2 as long as they all share a color."
   }
  }
 }

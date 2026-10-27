@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Mercadian Masques — Mercadian Masques is whole, and the oldest-first walk's range
+  is done** (batch 233, the oldest-first walk, 2026-10-27): no engine change. 99 of its last 123
+  authored — Delraich, Rishadan Pawnshop, Indentured Djinn, Bifurcate, Kyren Toy, Mercadian Lift,
+  Chameleon Spirit, Nether Spirit, the Legates, the Cateran and Ramosian searchers, the
+  spellshapers, the Flailing three — and 24 blocked (`B233.json`). Every set from Alpha to
+  Mercadian Masques is walked.
 - **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
   walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
   `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",
