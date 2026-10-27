@@ -170,7 +170,9 @@ import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
+import _poolDragonWings from "../pool/dragon-wings.js";
 import _poolDragonskullSummit from "../pool/dragonskull-summit.js";
+import _poolDragonstalker from "../pool/dragonstalker.js";
 import _poolDrakeHaven from "../pool/drake-haven.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDreadLinnorm from "../pool/dread-linnorm.js";
@@ -688,6 +690,7 @@ import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTreetopRangers from "../pool/treetop-rangers.js";
+import _poolTreetopScout from "../pool/treetop-scout.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrigonOfThought from "../pool/trigon-of-thought.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
@@ -699,6 +702,7 @@ import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
 import _poolUncontrollableAnger from "../pool/uncontrollable-anger.js";
+import _poolUncontrolledInfestation from "../pool/uncontrolled-infestation.js";
 import _poolUnhallowedPact from "../pool/unhallowed-pact.js";
 import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
@@ -955,7 +959,9 @@ const shard: CardShard = {
     _poolDoomBlade,
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
+    _poolDragonWings,
     _poolDragonskullSummit,
+    _poolDragonstalker,
     _poolDrakeHaven,
     _poolDramaticReversal,
     _poolDreadLinnorm,
@@ -1473,6 +1479,7 @@ const shard: CardShard = {
     _poolTravelersAmulet,
     _poolTreeguardDuo,
     _poolTreetopRangers,
+    _poolTreetopScout,
     _poolTresserhornSinks,
     _poolTrigonOfThought,
     _poolTrinketMage,
@@ -1484,6 +1491,7 @@ const shard: CardShard = {
     _poolUnburden,
     _poolUncannySpeed,
     _poolUncontrollableAnger,
+    _poolUncontrolledInfestation,
     _poolUnhallowedPact,
     _poolUnnervingAssault,
     _poolUnravelTheAether,

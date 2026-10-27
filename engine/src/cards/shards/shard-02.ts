@@ -157,6 +157,7 @@ import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
+import _poolDecreeOfSavagery from "../pool/decree-of-savagery.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
@@ -236,6 +237,7 @@ import _poolFlux from "../pool/flux.js";
 import _poolFly from "../pool/fly.js";
 import _poolFogElemental from "../pool/fog-elemental.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
+import _poolForceBubble from "../pool/force-bubble.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolForgeDevil from "../pool/forge-devil.js";
@@ -909,6 +911,7 @@ const shard: CardShard = {
     _poolDeathforgeShaman,
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
+    _poolDecreeOfSavagery,
     _poolDeerDog,
     _poolDefiantStrike,
     _poolDefiantSurvivor,
@@ -988,6 +991,7 @@ const shard: CardShard = {
     _poolFly,
     _poolFogElemental,
     _poolForbiddenLore,
+    _poolForceBubble,
     _poolForceSpike,
     _poolForcefulDenial,
     _poolForgeDevil,

@@ -164,6 +164,7 @@ import _poolDistress from "../pool/distress.js";
 import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
+import _poolDragonTyrant from "../pool/dragon-tyrant.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
 import _poolDreadbringerLampads from "../pool/dreadbringer-lampads.js";
@@ -669,6 +670,7 @@ import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolTitanForge from "../pool/titan-forge.js";
 import _poolToArms from "../pool/to-arms.js";
+import _poolTorrentOfFire from "../pool/torrent-of-fire.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
 import _poolTraitorousGreed from "../pool/traitorous-greed.js";
@@ -928,6 +930,7 @@ const shard: CardShard = {
     _poolDownwindAmbusher,
     _poolDrEggman,
     _poolDragonFodder,
+    _poolDragonTyrant,
     _poolDragonlordDromoka,
     _poolDrakewingKrasis,
     _poolDreadbringerLampads,
@@ -1433,6 +1436,7 @@ const shard: CardShard = {
     _poolTirelessTracker,
     _poolTitanForge,
     _poolToArms,
+    _poolTorrentOfFire,
     _poolTorrentialGearhulk,
     _poolTrainedCheetah,
     _poolTraitorousGreed,

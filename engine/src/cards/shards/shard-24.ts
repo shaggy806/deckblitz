@@ -330,6 +330,7 @@ import _poolKamiOfTatteredShoji from "../pool/kami-of-tattered-shoji.js";
 import _poolKamiOfWhisperedHopes from "../pool/kami-of-whispered-hopes.js";
 import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js";
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
+import _poolKaronaFalseGod from "../pool/karona-false-god.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
@@ -1097,6 +1098,7 @@ const shard: CardShard = {
     _poolKamiOfWhisperedHopes,
     _poolKarlovOfTheGhostCouncil,
     _poolKarnsTemporalSundering,
+    _poolKaronaFalseGod,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
     _poolKhenraScrapper,

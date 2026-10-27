@@ -217,6 +217,7 @@ import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
+import _poolEnrage from "../pool/enrage.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEntering from "../pool/entering.js";
 import _poolEntropicEidolon from "../pool/entropic-eidolon.js";
@@ -237,6 +238,7 @@ import _poolExpunge from "../pool/expunge.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
+import _poolFacesOfThePast from "../pool/faces-of-the-past.js";
 import _poolFaeFlight from "../pool/fae-flight.js";
 import _poolFaeOffering from "../pool/fae-offering.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
@@ -1025,6 +1027,7 @@ const shard: CardShard = {
     _poolElvenRaftSteerer,
     _poolElvishHealer,
     _poolEmrakulsMessenger,
+    _poolEnrage,
     _poolEnslavedDwarf,
     _poolEntering,
     _poolEntropicEidolon,
@@ -1045,6 +1048,7 @@ const shard: CardShard = {
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
+    _poolFacesOfThePast,
     _poolFaeFlight,
     _poolFaeOffering,
     _poolFalkenrathNoble,

@@ -46,6 +46,7 @@ import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
+import _poolAvenFarseer from "../pool/aven-farseer.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzamukiTreacheryIncarnate from "../pool/azamuki-treachery-incarnate.js";
 import _poolAzoriusGuildmage from "../pool/azorius-guildmage.js";
@@ -450,6 +451,7 @@ import _poolMechHangar from "../pool/mech-hangar.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
+import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMinorMisstep from "../pool/minor-misstep.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolAugurIlVec,
     _poolAuntieBlyteBadInfluence,
     _poolAvatarRokuFirebender,
+    _poolAvenFarseer,
     _poolAvengersTower,
     _poolAzamukiTreacheryIncarnate,
     _poolAzoriusGuildmage,
@@ -1268,6 +1271,7 @@ const shard: CardShard = {
     _poolMechanizedWarfare,
     _poolMendTheWilds,
     _poolMerchantOfTruth,
+    _poolMetamorphose,
     _poolMidnightCovenant,
     _poolMindstatic,
     _poolMinorMisstep,
