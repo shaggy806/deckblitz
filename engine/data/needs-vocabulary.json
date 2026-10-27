@@ -11867,6 +11867,29 @@
   "condition:hand-size-at-turn-start": {
    "family": "condition:that-player-hand-size",
    "example": "Mindstorm Crown: 'If you had no cards in hand at the beginning of this turn, draw a card. Otherwise, this deals 1 damage to you.'"
+  },
+  "effect:player-taps-chosen-permanents": {
+   "family": "decision:that-player-chooses-permanent",
+   "example": "Tangle Wire: 'that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire.'"
+  },
+  "effect:active-player-chooses-permanent": {
+   "family": "decision:that-player-chooses-permanent",
+   "example": "Rising Waters: 'Each player untaps a land they control of their choice during their untap step.'"
+  },
+  "filter:greatest-power-on-battlefield": {
+   "family": "condition:greatest-power-condition",
+   "example": "Topple: 'Exile target creature with the greatest power among creatures on the battlefield.'"
+  },
+  "filter:has-fading": {
+   "example": "Parallax Inhibitor: 'Put a fade counter on each permanent with fading you control.'"
+  },
+  "replacement:as-enters-sacrifice-permanents": {
+   "family": "new:enters-sacrifice-lands-replacement",
+   "example": "Overlaid Terrain: 'As this enchantment enters, sacrifice all lands you control.'"
+  },
+  "static:token-pt-from-source-counters": {
+   "family": "effect:tokens-created-with-source",
+   "example": "Saproling Burst: 'This token's power and toughness are each equal to the number of fade counters on Saproling Burst.'"
   }
  }
 }

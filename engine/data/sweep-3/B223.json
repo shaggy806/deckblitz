@@ -1,0 +1,742 @@
+{
+  "batch": "B223",
+  "status": "complete",
+  "ranks": "Nemesis (NEM, 2000-02-14): whole set, 104 left (the seventh middle walk's first batch); no engine change — fading authored as its two pieces (an enters-with fade counters replacement and an upkeep remove-or-sacrifice trigger)",
+  "authored": [
+    {
+      "name": "Accumulated Knowledge",
+      "files": [
+        "engine/src/cards/pool/accumulated-knowledge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aether Barrier",
+      "files": [
+        "engine/src/cards/pool/aether-barrier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Air Bladder",
+      "files": [
+        "engine/src/cards/pool/air-bladder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ancient Hydra",
+      "files": [
+        "engine/src/cards/pool/ancient-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angelic Favor",
+      "files": [
+        "engine/src/cards/pool/angelic-favor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Animate Land",
+      "files": [
+        "engine/src/cards/pool/animate-land.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arc Mage",
+      "files": [
+        "engine/src/cards/pool/arc-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ascendant Evincar",
+      "files": [
+        "engine/src/cards/pool/ascendant-evincar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avenger en-Dal",
+      "files": [
+        "engine/src/cards/pool/avenger-en-dal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Belbe's Armor",
+      "files": [
+        "engine/src/cards/pool/belbes-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Belbe's Portal",
+      "files": [
+        "engine/src/cards/pool/belbes-portal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blastoderm",
+      "files": [
+        "engine/src/cards/pool/blastoderm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bola Warrior",
+      "files": [
+        "engine/src/cards/pool/bola-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chieftain en-Dal",
+      "files": [
+        "engine/src/cards/pool/chieftain-en-dal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cloudskate",
+      "files": [
+        "engine/src/cards/pool/cloudskate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Coiling Woodworm",
+      "files": [
+        "engine/src/cards/pool/coiling-woodworm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Complex Automaton",
+      "files": [
+        "engine/src/cards/pool/complex-automaton.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Death Pit Offering",
+      "files": [
+        "engine/src/cards/pool/death-pit-offering.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defender en-Vec",
+      "files": [
+        "engine/src/cards/pool/defender-en-vec.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defiant Falcon",
+      "files": [
+        "engine/src/cards/pool/defiant-falcon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dominate",
+      "files": [
+        "engine/src/cards/pool/dominate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eye of Yawgmoth",
+      "files": [
+        "engine/src/cards/pool/eye-of-yawgmoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flint Golem",
+      "files": [
+        "engine/src/cards/pool/flint-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flowstone Armor",
+      "files": [
+        "engine/src/cards/pool/flowstone-armor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flowstone Slide",
+      "files": [
+        "engine/src/cards/pool/flowstone-slide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flowstone Surge",
+      "files": [
+        "engine/src/cards/pool/flowstone-surge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jolting Merfolk",
+      "files": [
+        "engine/src/cards/pool/jolting-merfolk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Laccolith Grunt",
+      "files": [
+        "engine/src/cards/pool/laccolith-grunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Laccolith Rig",
+      "files": [
+        "engine/src/cards/pool/laccolith-rig.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Laccolith Titan",
+      "files": [
+        "engine/src/cards/pool/laccolith-titan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Laccolith Warrior",
+      "files": [
+        "engine/src/cards/pool/laccolith-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Laccolith Whelp",
+      "files": [
+        "engine/src/cards/pool/laccolith-whelp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lashknife",
+      "files": [
+        "engine/src/cards/pool/lashknife.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lin Sivvi, Defiant Hero",
+      "files": [
+        "engine/src/cards/pool/lin-sivvi-defiant-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Massacre",
+      "files": [
+        "engine/src/cards/pool/massacre.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mind Slash",
+      "files": [
+        "engine/src/cards/pool/mind-slash.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nesting Wurm",
+      "files": [
+        "engine/src/cards/pool/nesting-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Netter en-Dal",
+      "files": [
+        "engine/src/cards/pool/netter-en-dal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Noble Stand",
+      "files": [
+        "engine/src/cards/pool/noble-stand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Off Balance",
+      "files": [
+        "engine/src/cards/pool/off-balance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pack Hunt",
+      "files": [
+        "engine/src/cards/pool/pack-hunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Parallax Dementia",
+      "files": [
+        "engine/src/cards/pool/parallax-dementia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Parallax Tide",
+      "files": [
+        "engine/src/cards/pool/parallax-tide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Parallax Wave",
+      "files": [
+        "engine/src/cards/pool/parallax-wave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Driver",
+      "files": [
+        "engine/src/cards/pool/phyrexian-driver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Prowler",
+      "files": [
+        "engine/src/cards/pool/phyrexian-prowler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plague Witch",
+      "files": [
+        "engine/src/cards/pool/plague-witch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rackling",
+      "files": [
+        "engine/src/cards/pool/rackling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rathi Assassin",
+      "files": [
+        "engine/src/cards/pool/rathi-assassin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rathi Fiend",
+      "files": [
+        "engine/src/cards/pool/rathi-fiend.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rathi Intimidator",
+      "files": [
+        "engine/src/cards/pool/rathi-intimidator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Refreshing Rain",
+      "files": [
+        "engine/src/cards/pool/refreshing-rain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rejuvenation Chamber",
+      "files": [
+        "engine/src/cards/pool/rejuvenation-chamber.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rupture",
+      "files": [
+        "engine/src/cards/pool/rupture.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seal of Fire",
+      "files": [
+        "engine/src/cards/pool/seal-of-fire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skyshroud Behemoth",
+      "files": [
+        "engine/src/cards/pool/skyshroud-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyshroud Ridgeback",
+      "files": [
+        "engine/src/cards/pool/skyshroud-ridgeback.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyshroud Sentinel",
+      "files": [
+        "engine/src/cards/pool/skyshroud-sentinel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sneaky Homunculus",
+      "files": [
+        "engine/src/cards/pool/sneaky-homunculus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spiritual Asylum",
+      "files": [
+        "engine/src/cards/pool/spiritual-asylum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stampede Driver",
+      "files": [
+        "engine/src/cards/pool/stampede-driver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stronghold Biologist",
+      "files": [
+        "engine/src/cards/pool/stronghold-biologist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stronghold Machinist",
+      "files": [
+        "engine/src/cards/pool/stronghold-machinist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Treetop Bracers",
+      "files": [
+        "engine/src/cards/pool/treetop-bracers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Trickster Mage",
+      "files": [
+        "engine/src/cards/pool/trickster-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Viseling",
+      "files": [
+        "engine/src/cards/pool/viseling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Woodripper",
+      "files": [
+        "engine/src/cards/pool/woodripper.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Tangle Wire",
+      "needs": [
+        "effect:player-taps-chosen-permanents"
+      ],
+      "why": "The upkeep player chooses and taps N of their own untapped artifacts, creatures or lands (N = fade counters); choose-permanents has no chooser but the effect's controller."
+    },
+    {
+      "name": "Mogg Alarm",
+      "needs": [
+        "cost:alt-cost-sacrifice"
+      ],
+      "why": "Alternative cost: sacrifice two Mountains."
+    },
+    {
+      "name": "Sivvi's Valor",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "All damage that would be dealt to target creature this turn is dealt to you instead; prevent-damage's redirectTo is not available with all."
+    },
+    {
+      "name": "Stronghold Discipline",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "Each player loses 1 life for each creature they control: no per-player count inside for-each-player."
+    },
+    {
+      "name": "Stronghold Gambit",
+      "needs": [
+        "decision:secret-choice"
+      ],
+      "why": "Each player secretly chooses a card in hand, then all reveal; the lowest-mana-value creatures enter."
+    },
+    {
+      "name": "Topple",
+      "needs": [
+        "filter:greatest-power-on-battlefield"
+      ],
+      "why": "Target creature with the greatest power among creatures on the battlefield: no battlefield-wide greatest-power target filter."
+    },
+    {
+      "name": "Rusting Golem",
+      "needs": [
+        "static:cda-counters-on-self"
+      ],
+      "why": "P/T each equal to the number of fade counters on it (a characteristic-defining count of its own counters)."
+    },
+    {
+      "name": "Parallax Inhibitor",
+      "needs": [
+        "filter:has-fading"
+      ],
+      "why": "Put a fade counter on each permanent with fading you control: no filter for having fading (not an engine keyword)."
+    },
+    {
+      "name": "Kill Switch",
+      "needs": [
+        "effect:doesnt-untap-while-source-tapped",
+        "effect:tap-all-except-source"
+      ],
+      "why": "Tap all other artifacts; they don't untap for as long as Kill Switch remains tapped."
+    },
+    {
+      "name": "Wandering Eye",
+      "needs": [
+        "static:players-play-with-hands-revealed"
+      ],
+      "why": "Players play with their hands revealed."
+    },
+    {
+      "name": "Rhox",
+      "needs": [
+        "static:assign-damage-as-though-unblocked"
+      ],
+      "why": "You may have Rhox assign its combat damage as though it weren't blocked."
+    },
+    {
+      "name": "Shrieking Mogg",
+      "needs": [
+        "effect:tap-all-except-source"
+      ],
+      "why": "Tap all other creatures: tap-all can't leave out its own source (a name filter would spare other Shrieking Moggs)."
+    },
+    {
+      "name": "Sivvi's Ruse",
+      "needs": [
+        "replacement:prevent-damage-to-filter-this-turn"
+      ],
+      "why": "Prevent all damage that would be dealt this turn to creatures you control, checked as damage is dealt (rule 615), not fixed at resolution."
+    },
+    {
+      "name": "Ensnare",
+      "needs": [
+        "cost:alt-cost-return-lands"
+      ],
+      "why": "Alternative cost: return two Islands you control to their owner's hand."
+    },
+    {
+      "name": "Saproling Cluster",
+      "needs": [
+        "cost:any-player-may-activate"
+      ],
+      "why": "Any player may activate this ability."
+    },
+    {
+      "name": "Saproling Burst",
+      "needs": [
+        "effect:tokens-created-with-source",
+        "static:token-pt-from-source-counters"
+      ],
+      "why": "The tokens' P/T equal the fade counters on Saproling Burst, and they're destroyed when it leaves: no link from a token to the permanent that made it."
+    },
+    {
+      "name": "Overlaid Terrain",
+      "needs": [
+        "replacement:as-enters-sacrifice-permanents"
+      ],
+      "why": "As it enters, sacrifice all lands you control (a replacement, so they can't be tapped first)."
+    },
+    {
+      "name": "Defiant Vanguard",
+      "needs": [
+        "filter:blocked-by-source"
+      ],
+      "why": "When it blocks, at end of combat destroy it and all creatures it blocked this turn."
+    },
+    {
+      "name": "Dark Triumph",
+      "needs": [
+        "cost:alt-cost-sacrifice",
+        "cost:conditional-alternative-cost"
+      ],
+      "why": "If you control a Swamp, you may sacrifice a creature rather than pay the mana cost."
+    },
+    {
+      "name": "Mind Swords",
+      "needs": [
+        "cost:alt-cost-sacrifice",
+        "cost:conditional-alternative-cost"
+      ],
+      "why": "If you control a Swamp, you may sacrifice a creature rather than pay the mana cost."
+    },
+    {
+      "name": "Murderous Betrayal",
+      "needs": [
+        "cost:dynamic-life-cost"
+      ],
+      "why": "Pay half your life, rounded up: an ability's payLife takes only a fixed number."
+    },
+    {
+      "name": "Oracle's Attendants",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "All damage a chosen source would deal to target creature this turn is dealt to Oracle's Attendants instead."
+    },
+    {
+      "name": "Mogg Toady",
+      "needs": [
+        "static:attack-restriction-defending-player-condition",
+        "static:block-restriction-attacking-player-condition"
+      ],
+      "why": "Can't attack unless you control more creatures than defending player; can't block unless you control more creatures than attacking player."
+    },
+    {
+      "name": "Blinding Angel",
+      "needs": [
+        "effect:skip-next-combat-phase"
+      ],
+      "why": "Whenever it deals combat damage to a player, that player skips their next combat phase."
+    },
+    {
+      "name": "Divining Witch",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Name a card, then reveal from the top until you reveal a card with that name."
+    },
+    {
+      "name": "Rising Waters",
+      "needs": [
+        "effect:active-player-chooses-permanent"
+      ],
+      "why": "Each player untaps a land they control of their choice during their untap step: the active player chooses, not the effect's controller."
+    },
+    {
+      "name": "Mana Cache",
+      "needs": [
+        "cost:any-player-may-activate"
+      ],
+      "why": "Any player may remove a charge counter: Add {C} (only during their turn, before end of combat)."
+    },
+    {
+      "name": "Rootwater Thief",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "Search that player's library for a card and exile it: search-library has a player search only their own library."
+    },
+    {
+      "name": "Volrath the Fallen",
+      "needs": [
+        "effect:cost-discarded-card-ref"
+      ],
+      "why": "+X/+X where X is the discarded creature card's mana value: no amount reads a card discarded as a cost."
+    },
+    {
+      "name": "Skyshroud Cutter",
+      "needs": [
+        "cost:alt-cost-opponent-gains-life"
+      ],
+      "why": "If you control a Forest, you may have an opponent gain 5 life rather than pay its mana cost."
+    },
+    {
+      "name": "Harvest Mage",
+      "needs": [
+        "replacement:tap-for-mana-produces-color-instead"
+      ],
+      "why": "Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount."
+    },
+    {
+      "name": "Downhill Charge",
+      "needs": [
+        "cost:alt-cost-sacrifice"
+      ],
+      "why": "You may sacrifice a Mountain rather than pay its mana cost."
+    },
+    {
+      "name": "Reverent Silence",
+      "needs": [
+        "cost:alt-cost-opponent-gains-life"
+      ],
+      "why": "If you control a Forest, you may have each other player gain 6 life rather than pay its mana cost."
+    },
+    {
+      "name": "Fog Patch",
+      "needs": [
+        "effect:becomes-blocked"
+      ],
+      "why": "Attacking creatures become blocked: no effect makes a creature blocked."
+    },
+    {
+      "name": "Pale Moon",
+      "needs": [
+        "replacement:land-mana-type-replacement"
+      ],
+      "why": "Until end of turn, if a nonbasic land is tapped for mana, it produces colorless mana instead of any other type."
+    },
+    {
+      "name": "Parallax Nexus",
+      "needs": [
+        "effect:target-player-exiles-from-hand"
+      ],
+      "why": "Remove a fade counter: target opponent exiles a card from their hand (their choice)."
+    },
+    {
+      "name": "Wild Mammoth",
+      "needs": [
+        "condition:player-controls-most"
+      ],
+      "why": "At the beginning of your upkeep, if a player controls more creatures than each other player, that player gains control of Wild Mammoth."
+    }
+  ]
+}
