@@ -4060,6 +4060,8 @@ export class Game {
       if (shield.from !== undefined) pinned.add(shield.from.object);
       if (shield.redirect?.to.kind === "object") pinned.add(shield.redirect.to.object);
     }
+    // A token bound to block (provoke): another folded into it would be bound too.
+    for (const r of this.state.blockRequirements ?? []) pinned.add(r.blocker);
     // A spell or ability on the stack whose target was locked in to one token
     // (`lockInTargets`): a new batch folded into that token would make the
     // target a whole stack again, and each step of its effect would peel off
@@ -6042,6 +6044,7 @@ export class Game {
     };
     this.state.spellsCastThisTurn = 0;
     delete this.state.turnRestrictions;
+    delete this.state.blockRequirements;
     delete this.state.turnDefenderAttacks;
     delete this.state.turnProhibitions;
     delete this.state.phasesAfterThisCombat;
@@ -6967,6 +6970,17 @@ export class Game {
       this.applyBehold(player, chosen, awaiting);
       return;
     }
+    // Amplify (rule 702.38a): the cards are revealed where they are, and how
+    // many waits on the entering permanent for its counters; its entry
+    // carries on once priority is next looked at, as devour's does.
+    if (awaiting.amplifyOf !== undefined) {
+      if (chosen.length > 0) this.revealCards(player, chosen, "hand");
+      const entering = this.state.objects[awaiting.amplifyOf];
+      if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, amplified: chosen.length };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
       this.applyOpeningHand(player, chosen, awaiting.openingHand.next);
@@ -7447,6 +7461,10 @@ export class Game {
   /** End every modifier that lasts "until end of combat" (rule 500.5a) —
    * Legion Warboss's token's "attacks this combat if able". */
   private expireUntilEndOfCombat(): void {
+    // "Blocks it this combat if able" (Avalanche Tusker).
+    if (this.state.blockRequirements?.some((r) => r.thisCombat === true) === true) {
+      this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
+    }
     const expired: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
@@ -9070,6 +9088,7 @@ export class Game {
     | { readonly kind: "tribute"; readonly amount: number }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | { readonly kind: "devour"; readonly filter: CardFilter }
+    | { readonly kind: "amplify"; readonly as: CardDefinition }
     | { readonly kind: "protector"; readonly siege: boolean }
     | null {
     const object = this.state.objects[id];
@@ -9091,6 +9110,12 @@ export class Game {
     // creatures" — printed, or a copy's.
     if (answered?.devoured === undefined && becoming.devour !== null) {
       return { kind: "devour", filter: becoming.devour.filter };
+    }
+    // Amplify (rule 702.38a): "as this enters, reveal any number of cards
+    // from your hand that share a creature type with it" — printed, or a
+    // copy's.
+    if (answered?.amplified === undefined && becoming.amplify !== null) {
+      return { kind: "amplify", as: becoming };
     }
     // A battle's protector (rule 310.9a), chosen as it enters.
     if (answered?.protector === undefined && becoming.types.includes("battle")) {
@@ -9226,6 +9251,42 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, devoured: 0 };
+        continue;
+      }
+      if (next.kind === "amplify") {
+        // The cards in the hand of the player it enters under that share a
+        // creature type with it (a changeling on either side shares every
+        // one) — never itself, nor a card entering at the same time
+        // (702.38a). One with no creature type shares none.
+        const creatureTypes = (subtypes: readonly string[]): readonly string[] =>
+          subtypes.filter((s) => s === EVERY_CREATURE_TYPE || isCreatureType(s));
+        const its = creatureTypes(
+          object.enterChoice?.copyOf !== undefined && object.enterChoice.copyOf !== null
+            ? next.as.subtypes
+            : effectiveSubtypes(this.state, this.registry, object),
+        );
+        const eligible = this.state.zones.perPlayer[chooser].hand.filter((card) => {
+          if (card === id || this.enterBatch?.has(card) === true) return false;
+          const o = this.state.objects[card];
+          if (o === undefined) return false;
+          const theirs = effectiveSubtypes(this.state, this.registry, o);
+          return its.some((t) => hasSubtype(theirs, t));
+        });
+        if (eligible.length > 0) {
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player: chooser,
+            ids: eligible,
+            eligible,
+            min: 0,
+            max: eligible.length,
+            destination: "reveal",
+            leftover: "stay",
+            amplifyOf: id,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, amplified: 0 };
         continue;
       }
       if (next.kind === "riot") {
@@ -23731,6 +23792,7 @@ export class Game {
       restrict: (target, filter, restrictions, duration) =>
         this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn")),
       detain: (target) => this.detain(controller, target),
+      blockIfAble: (target, attacker, thisCombat) => this.blockIfAble(target, attacker, thisCombat),
       attackDespiteDefender: (target, filter) => {
         if (filter !== undefined) {
           (this.state.turnDefenderAttacks ??= []).push({ filter, you: controller });
@@ -28409,6 +28471,33 @@ export class Game {
    * 800.4m). Any permanent can be: a noncreature one that becomes a
    * creature later still can't attack or block (the ruling).
    */
+  /**
+   * `target` blocks this turn if able — `attacker` if given (rule 509.1c; the
+   * `block-if-able` effect, provoke's 702.39a). Kept as a requirement in
+   * `GameState.blockRequirements`, each creature by its `zoneChangeCount`, so
+   * one that leaves the battlefield takes no requirement back with it (rule
+   * 400.7); `combat/blocking.ts` weighs it when blockers are declared.
+   */
+  private blockIfAble(target: TargetRef, attacker: TargetRef | undefined, thisCombat: boolean): void {
+    if (target.kind !== "object") return;
+    const id = this.splitOneFromStack(target.object);
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield") return;
+    let mustBlock: { readonly attacker: ObjectId; readonly attackerZoneChangeCount: number } | undefined;
+    if (attacker !== undefined) {
+      if (attacker.kind !== "object") return;
+      const other = this.state.objects[attacker.object];
+      if (other === undefined || other.zone !== "battlefield") return;
+      mustBlock = { attacker: attacker.object, attackerZoneChangeCount: other.zoneChangeCount ?? 0 };
+    }
+    (this.state.blockRequirements ??= []).push({
+      blocker: id,
+      zoneChangeCount: object.zoneChangeCount ?? 0,
+      ...(mustBlock ?? {}),
+      ...(thisCombat ? { thisCombat: true } : {}),
+    });
+  }
+
   private detain(detainer: PlayerId, target: TargetRef): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
@@ -36160,12 +36249,13 @@ export class Game {
     devoured?: number,
     tributePaid?: boolean,
     unleash?: boolean,
+    amplified?: number,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
     // devotion that decides whether it's a creature (a Theros God's ruling).
     const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid, unleash),
+      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured, tributePaid, unleash, amplified),
     );
     this.enterBatch?.add(id);
     // "Counters can't be put on" it (Solemnity): it enters without them —
@@ -36187,6 +36277,7 @@ export class Game {
     devoured?: number,
     tributePaid?: boolean,
     unleash?: boolean,
+    amplified?: number,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     const def = this.registry.get(printedCardName(object));
@@ -36312,6 +36403,9 @@ export class Game {
     // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
     // as it was about to enter (`askEnterChoice`).
     if (def.devour !== null && devoured !== undefined) addCounters("+1/+1", devoured * def.devour.multiplier);
+    // Amplify (rule 702.38a): N for each card revealed as it was about to
+    // enter (`askEnterChoice`).
+    if (def.amplify !== null && amplified !== undefined) addCounters("+1/+1", amplified * def.amplify);
     // Other permanents' replacements (rule 614.12). Never its own — a
     // permanent's ability over a general set of permanents doesn't modify how
     // that permanent itself enters — and never one entering alongside it,
@@ -37772,6 +37866,7 @@ export class Game {
         enterChoice?.devoured,
         enterChoice?.tributePaid,
         enterChoice?.unleash,
+        enterChoice?.amplified,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {

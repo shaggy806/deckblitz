@@ -366,6 +366,7 @@ import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLlanowarMentor from "../pool/llanowar-mentor.js";
 import _poolLoamLarva from "../pool/loam-larva.js";
+import _poolLowlandTracker from "../pool/lowland-tracker.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
@@ -745,6 +746,7 @@ import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWalkingWall from "../pool/walking-wall.js";
 import _poolWallOfPutridFlesh from "../pool/wall-of-putrid-flesh.js";
 import _poolWallOff from "../pool/wall-off.js";
+import _poolWanderguardSentry from "../pool/wanderguard-sentry.js";
 import _poolWanderingWolf from "../pool/wandering-wolf.js";
 import _poolWanderwineProphets from "../pool/wanderwine-prophets.js";
 import _poolWarchanterOfMogis from "../pool/warchanter-of-mogis.js";
@@ -1168,6 +1170,7 @@ const shard: CardShard = {
     _poolLlanowarKnight,
     _poolLlanowarMentor,
     _poolLoamLarva,
+    _poolLowlandTracker,
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
@@ -1547,6 +1550,7 @@ const shard: CardShard = {
     _poolWalkingWall,
     _poolWallOfPutridFlesh,
     _poolWallOff,
+    _poolWanderguardSentry,
     _poolWanderingWolf,
     _poolWanderwineProphets,
     _poolWarchanterOfMogis,

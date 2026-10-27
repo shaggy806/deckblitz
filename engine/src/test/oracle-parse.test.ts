@@ -2115,6 +2115,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toEqual({ kind: "put-on-library", target: 0, position: { ownerChooses: ["top", "bottom"] } });
   });
 
+  it("amplify N (rule 702.38a) and provoke (rule 702.39a)", () => {
+    const throwback = face(
+      "Amplify 2 (As this creature enters, put two +1/+1 counters on it for each Beast card you reveal in your hand.)\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)",
+      "Creature — Beast",
+    );
+    expect(throwback.amplify).toBe(2);
+    expect(throwback.triggered[0].trigger).toEqual({ on: "attacks", who: "self" });
+    expect(throwback.triggered[0].effect.effect.effects[1]).toEqual({ kind: "block-if-able", target: 0, attacker: "source" });
+    expect(throwback.complete).toBe(true);
+  });
+
   it("devour N, devour land N and devour Food N (rule 702.82)", () => {
     const myco = face(
       "Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +1/+1 counters on it.)",

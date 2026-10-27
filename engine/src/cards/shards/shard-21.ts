@@ -267,6 +267,7 @@ import _poolGoBlank from "../pool/go-blank.js";
 import _poolGoblinAssault from "../pool/goblin-assault.js";
 import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
+import _poolGoblinGrappler from "../pool/goblin-grappler.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
 import _poolGoblinMedics from "../pool/goblin-medics.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolGoblinAssault,
     _poolGoblinBlastRunner,
     _poolGoblinChampion,
+    _poolGoblinGrappler,
     _poolGoblinKing,
     _poolGoblinLackey,
     _poolGoblinMedics,

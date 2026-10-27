@@ -515,6 +515,22 @@ control have unleash" — Tesak) isn't asked as they enter (§15).
 helper in `triggered` — the keyword is what "a creature without flanking"
 asks, the helper the trigger (`blocked-by`, §9).
 
+**Provoke** (rule 702.39): the `provoke()` helper in `triggered` (Goblin
+Grappler; `grantsTriggered: [provoke("Provoke")]` for "All Sliver creatures
+have provoke" — Hunter Sliver). It's an attack trigger whose "may" untaps the
+target and then a **`block-if-able`** effect: a blocking requirement on one
+creature (rule 509.1c), weighed with Lure's and the rest as blockers are
+declared (`combat/blocking.ts`). The same effect is "target creature blocks
+this turn if able" (no `attacker`), "blocks it/this creature this turn if
+able" (`attacker: "source"`), "blocks target creature" (`attacker: 1`), and
+"this combat" (`thisCombat: true`). A creature that can't block (that
+attacker) is simply under no requirement. `amplify-provoke.test.ts`.
+
+**Amplify N** (rule 702.38): `amplify: N` on the card. As it's about to
+enter, its controller reveals any number of cards from their hand sharing a
+creature type with it (never itself) — a `choose-from-zone` with destination
+`"reveal"` — and it enters with N +1/+1 counters for each.
+
 **Landwalk** (rule 702.14): `plainswalk`, `islandwalk`, `swampwalk`,
 `mountainwalk`, `forestwalk`, `desertwalk` — can't be blocked as long as the
 defending player controls a land of that *type* (a Breeding Pool is a Forest).

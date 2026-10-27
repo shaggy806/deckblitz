@@ -5186,6 +5186,8 @@ function Table({
       v.kind === 'must-be-blocked-if-able' ? [v.attacker] : [],
     )
     const overBlocked = violations.flatMap((v) => (v.kind === 'single-blocker' ? [v.attacker] : []))
+    // A creature that has to block if able (provoke) and isn't.
+    const requiredBlockers = violations.flatMap((v) => (v.kind === 'block-requirement' ? [v.blocker] : []))
     // A folded tile of yours with blocks out: a count to set, rather than a
     // click per creature (game/blockGroups.ts).
     const pairs = blockPairs(blockAction, blockAssign, tileOf)
@@ -5205,6 +5207,11 @@ function Table({
             ? ` · ${unforcedBlockers
                 .map((id) => game.nameOf(id))
                 .join(', ')} must block (Lure)`
+            : ''}
+          {requiredBlockers.length > 0
+            ? ` · ${requiredBlockers
+                .map((id) => game.nameOf(id))
+                .join(', ')} must block if able`
             : ''}
           {unblockedMusts.length > 0
             ? ` · ${unblockedMusts
@@ -5282,6 +5289,7 @@ function Table({
           disabled={
             loneMenace.length > 0 ||
             unforcedBlockers.length > 0 ||
+            requiredBlockers.length > 0 ||
             unblockedMusts.length > 0 ||
             overBlocked.length > 0
           }

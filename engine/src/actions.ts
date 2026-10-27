@@ -1365,6 +1365,14 @@ export type LegalAction =
        * works out how many of them can be at once. Absent when there are
        * none. */
       readonly mustBeBlockedIfAble?: readonly ObjectId[];
+      /** Creatures of this defender's that have to block if able — any
+       * attacker, or `attacker` (provoke, rule 702.39a) — from the
+       * `block-if-able` effect (`GameState.blockRequirements`). Only the
+       * ones still able to: a requirement on a creature that can't block,
+       * or can't block that attacker, is left out. `combat/blocking.ts`
+       * weighs them against the rest (rule 509.1c). Absent when there are
+       * none. */
+      readonly blockRequirements?: readonly { readonly blocker: ObjectId; readonly attacker?: ObjectId }[];
     }
   | {
       /** A blocked attacker's controller assigns its combat damage (rule

@@ -746,6 +746,10 @@ export interface GameObject {
      * 702.82a — `CardDefinition.devour`): sacrificed then, and counted for
      * its +1/+1 counters as it enters. */
     readonly devoured?: number;
+    /** How many cards its controller revealed for its amplify as it was
+     * about to enter (rule 702.38a — `CardDefinition.amplify`), counted for
+     * its +1/+1 counters as it enters. */
+    readonly amplified?: number;
     /** The protector its controller chose for it as it was about to enter
      * (rule 310.9a — a Siege's, among their opponents, 310.12a). */
     readonly protector?: PlayerId;
@@ -2615,6 +2619,12 @@ export type AwaitingDecision =
        * battlefield do. `next` is the next player to ask, counted from the
        * starting player. */
       readonly openingHand?: { readonly next: number };
+      /** An entering permanent's amplify (rule 702.38a —
+       * `CardDefinition.amplify`): `ids` are the cards in `player`'s hand
+       * that share a creature type with it, and the answer is how many are
+       * revealed (`destination: "reveal"`), recorded on it
+       * (`enterChoice.amplified`) for its counters as it enters. */
+      readonly amplifyOf?: ObjectId;
     }
   | {
       /**
@@ -4374,6 +4384,20 @@ export interface GameState {
     readonly filter: CardFilter;
     readonly you: PlayerId;
     readonly restrictions: readonly CombatRestriction[];
+  }[];
+  /** Blocking requirements on one creature each (rule 509.1c) — "target
+   * creature blocks this turn if able", or blocks `attacker` if able
+   * (provoke, rule 702.39a): the `block-if-able` effect. Each creature is
+   * held by its `zoneChangeCount`, so one that has left the battlefield is
+   * no longer bound or blocked (rule 400.7). Read by
+   * `decisions/blockers.ts` into the offer's `blockRequirements`.
+   * Turn-scoped; a `thisCombat` one ends with the combat phase. */
+  blockRequirements?: {
+    readonly blocker: ObjectId;
+    readonly zoneChangeCount: number;
+    readonly attacker?: ObjectId;
+    readonly attackerZoneChangeCount?: number;
+    readonly thisCombat?: boolean;
   }[];
   /** "Creatures you control with defender can attack this turn as though
    * they didn't have defender" (the `attack-despite-defender` effect's

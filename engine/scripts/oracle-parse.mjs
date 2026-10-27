@@ -57,6 +57,7 @@ import {
   champion,
   kinship,
   prowl,
+  provoke,
   soulbond,
   spectacle,
   sunburst,
@@ -314,6 +315,8 @@ function keywordPart(part, faceName, typeLine = "") {
     persist: () => ({ triggered: [persist()] }),
     mentor: () => ({ triggered: [mentor()] }),
     flanking: () => ({ keywords: ["flanking"], triggered: [flanking()] }),
+    // Provoke (rule 702.39a): the attack trigger's untap and block-if-able.
+    provoke: () => ({ triggered: [provoke("Provoke")] }),
     dethrone: () => ({ triggered: [dethrone()] }),
     myriad: () => ({ triggered: [myriad()] }),
     extort: () => ({ triggered: [extort()] }),
@@ -433,6 +436,8 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
   // Tribute N (rule 702.104a): the opponent's counters, asked as it enters.
   if ((m = /^tribute (\d+)$/i.exec(p))) return { card: { tribute: Number(m[1]) } };
+  // Amplify N (rule 702.38a): the cards revealed as it enters.
+  if ((m = /^amplify (\d+)$/i.exec(p))) return { card: { amplify: Number(m[1]) } };
   // Devour N, devour land N, devour Food N (rule 702.82): what may be eaten.
   if ((m = /^devour (?:(land|food) )?(\d+)$/i.exec(p))) {
     const quality = m[1]?.toLowerCase();

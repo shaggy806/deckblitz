@@ -50,7 +50,10 @@ export type BlockingViolation =
   /** `blocker` could have blocked a must-be-blocked attacker and didn't. */
   | { readonly kind: "must-be-blocked"; readonly blocker: ObjectId }
   /** `attacker` must be blocked if able, could have been, and wasn't. */
-  | { readonly kind: "must-be-blocked-if-able"; readonly attacker: ObjectId };
+  | { readonly kind: "must-be-blocked-if-able"; readonly attacker: ObjectId }
+  /** `blocker` has to block (a given attacker — provoke) if able
+   * (`offer.blockRequirements`), could have, and didn't. */
+  | { readonly kind: "block-requirement"; readonly blocker: ObjectId };
 
 /** How many creatures a declaration has to have blocking must-be-blocked
  * attackers, and one way of getting there. */
@@ -268,10 +271,16 @@ export function blockingViolations(
     }
     let obeyed = 0;
     for (const n of blockingAMust.values()) obeyed += n;
+    // A creature the plan has on a Lured attacker that obeys a requirement of
+    // its own instead (blocking the creature that provoked it) trades one
+    // requirement for another: rule 509.1c counts both alike.
+    for (const blocker of plan.assignment.keys()) {
+      if (!blockingAMust.has(blocker) && obeysOwnRequirement(blocker, blocks, offer)) obeyed += copies.get(blocker) ?? 1;
+    }
     if (obeyed < plan.required) {
       for (const entry of offer.eligible) {
         const short = (blockingAMust.get(entry.blocker) ?? 0) < (entry.copies ?? 1);
-        if (short && plan.assignment.has(entry.blocker)) {
+        if (short && plan.assignment.has(entry.blocker) && !obeysOwnRequirement(entry.blocker, blocks, offer)) {
           out.push({ kind: "must-be-blocked", blocker: entry.blocker });
         }
       }
@@ -298,7 +307,52 @@ export function blockingViolations(
       }
     }
   }
+
+  // A creature's own requirement — "blocks this turn if able", "blocks it if
+  // able" (provoke): it blocks (that attacker) whenever it can. Blocking one
+  // a Lure or "must be blocked if able" asks it to instead obeys a
+  // requirement just the same (rule 509.1c), so that isn't a violation.
+  const required = new Set((offer.blockRequirements ?? []).map((r) => r.blocker));
+  for (const blocker of required) {
+    if (obeysOwnRequirement(blocker, blocks, offer)) continue;
+    const mine = blocks.filter((b) => b.blocker === blocker).map((b) => b.attacker);
+    if (mine.some((a) => offer.mustBlock.includes(a) || (offer.mustBeBlockedIfAble ?? []).includes(a))) continue;
+    if (requirementTargets(blocker, offer).length > 0) out.push({ kind: "block-requirement", blocker });
+  }
   return out;
+}
+
+/** Whether `blocker`, as `blocks` declares it, obeys one of its own
+ * requirements (`offer.blockRequirements`): it blocks the attacker one names,
+ * or anything at all for one that names none. */
+function obeysOwnRequirement(blocker: ObjectId, blocks: readonly BlockerDeclaration[], offer: BlockOffer): boolean {
+  const mine = blocks.filter((b) => b.blocker === blocker).map((b) => b.attacker);
+  if (mine.length === 0) return false;
+  return (offer.blockRequirements ?? []).some(
+    (r) => r.blocker === blocker && (r.attacker === undefined || mine.includes(r.attacker)),
+  );
+}
+
+/**
+ * The attackers `blocker` can obey one of its own requirements by blocking:
+ * each it's able to block that a requirement names (any, for one naming
+ * none). One with menace only when some other creature could block it too
+ * (or `blocker` is a stack of two or more) — alone it's an illegal block,
+ * and a requirement never forces breaking a restriction (rule 509.1c).
+ */
+export function requirementTargets(blocker: ObjectId, offer: BlockOffer): ObjectId[] {
+  const entry = offer.eligible.find((e) => e.blocker === blocker);
+  if (entry === undefined) return [];
+  const reqs = (offer.blockRequirements ?? []).filter((r) => r.blocker === blocker);
+  const named = reqs.some((r) => r.attacker === undefined)
+    ? entry.canBlock
+    : entry.canBlock.filter((a) => reqs.some((r) => r.attacker === a));
+  return named.filter(
+    (a) =>
+      !offer.menaceAttackers.includes(a) ||
+      (entry.copies ?? 1) >= 2 ||
+      offer.eligible.some((e) => e.blocker !== blocker && e.canBlock.includes(a)),
+  );
 }
 
 /**
@@ -381,8 +435,34 @@ export function obeyingLure(
   // "must be blocked if able" plan's (see `ifAblePlan`, which leaves Lure's
   // alone).
   const assignment = new Map([...lurePlan(offer).assignment, ...ifAblePlan(offer).assignment]);
+  // Then each creature's own requirement it isn't obeying (provoke): onto
+  // the first attacker it can obey it on — a non-menace one first — with a
+  // second creature beside it against menace. Ahead of the rest, so an
+  // attacker that can't be blocked by more than one keeps this one.
+  const required: [ObjectId, ObjectId][] = [];
+  const taken = new Set<ObjectId>();
+  for (const r of offer.blockRequirements ?? []) {
+    const blocker = r.blocker;
+    if (assignment.has(blocker) || taken.has(blocker) || obeysOwnRequirement(blocker, blocks, offer)) continue;
+    const options = requirementTargets(blocker, offer);
+    const attacker = options.find((a) => !offer.menaceAttackers.includes(a)) ?? options[0];
+    if (attacker === undefined) continue;
+    required.push([blocker, attacker]);
+    taken.add(blocker);
+    const entry = offer.eligible.find((e) => e.blocker === blocker);
+    if (offer.menaceAttackers.includes(attacker) && (entry?.copies ?? 1) < 2) {
+      const helper = offer.eligible.find(
+        (e) => e.blocker !== blocker && !assignment.has(e.blocker) && !taken.has(e.blocker) && e.canBlock.includes(attacker),
+      );
+      if (helper !== undefined) {
+        required.push([helper.blocker, attacker]);
+        taken.add(helper.blocker);
+      }
+    }
+  }
   const moved: BlockerDeclaration[] = [
-    ...blocks.filter((b) => !assignment.has(b.blocker)),
+    ...required.map(([blocker, attacker]) => ({ blocker, attacker })),
+    ...blocks.filter((b) => !assignment.has(b.blocker) && !taken.has(b.blocker)),
     ...[...assignment].map(([blocker, attacker]) => ({ blocker, attacker })),
   ];
   const copies = new Map(offer.eligible.map((e) => [e.blocker, e.copies ?? 1]));

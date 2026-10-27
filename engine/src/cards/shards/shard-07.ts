@@ -79,6 +79,7 @@ import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBringerOfTheWhiteDawn from "../pool/bringer-of-the-white-dawn.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
+import _poolBrontotherium from "../pool/brontotherium.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBrothersYamazaki from "../pool/brothers-yamazaki.js";
 import _poolBrowse from "../pool/browse.js";
@@ -885,6 +886,7 @@ const shard: CardShard = {
     _poolBrilliantSpectrum,
     _poolBringerOfTheWhiteDawn,
     _poolBrinkOfDisaster,
+    _poolBrontotherium,
     _poolBronzebeakMoa,
     _poolBrothersYamazaki,
     _poolBrowse,

@@ -342,6 +342,7 @@ import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
 import _poolKheruBloodsucker from "../pool/kheru-bloodsucker.js";
+import _poolKilnmouthDragon from "../pool/kilnmouth-dragon.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKingsAssassin from "../pool/kings-assassin.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolKazuulsFury,
     _poolKeeperOfTresserhorn,
     _poolKheruBloodsucker,
+    _poolKilnmouthDragon,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
     _poolKingsAssassin,

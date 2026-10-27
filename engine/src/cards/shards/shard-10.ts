@@ -315,6 +315,7 @@ import _poolHostileRealm from "../pool/hostile-realm.js";
 import _poolHouseGuildmage from "../pool/house-guildmage.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
+import _poolHunterSliver from "../pool/hunter-sliver.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
 import _poolIcatianMoneychanger from "../pool/icatian-moneychanger.js";
 import _poolIceOver from "../pool/ice-over.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolHouseGuildmage,
     _poolHullbreakerHorror,
     _poolHuntedWitness,
+    _poolHunterSliver,
     _poolIanTheReckless,
     _poolIcatianMoneychanger,
     _poolIceOver,

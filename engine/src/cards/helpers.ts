@@ -890,6 +890,35 @@ export const flanking = (): TriggeredAbility => ({
 });
 
 /**
+ * Provoke (rule 702.39a): "Whenever this creature attacks, you may have
+ * target creature defending player controls untap and block it if able."
+ * The target is chosen as the trigger goes on the stack, the "may" as it
+ * resolves; the requirement is the `block-if-able` effect's, on this
+ * creature (`attacker: "source"`), weighed with the rest as blockers are
+ * declared (rule 509.1c). Each instance triggers on its own (702.39b). Put
+ * the printed line (with its reminder) as `text`.
+ */
+export const provoke = (
+  text = "Provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)",
+): TriggeredAbility => ({
+  trigger: { on: "attacks", who: "self" },
+  targets: ["creature-defending-player-controls"],
+  effect: {
+    kind: "may",
+    prompt: "Provoke: untap that creature and have it block this one if able?",
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "untap", target: 0 },
+        { kind: "block-if-able", target: 0, attacker: "source" },
+      ],
+    },
+  },
+  resolve: null,
+  text,
+});
+
+/**
  * Afflict N (rule 702.130a): "Whenever this creature becomes blocked,
  * defending player loses N life" — once however many creatures block it,
  * the defending player being the one who blocked (`becomes-blocked`'s

@@ -144,6 +144,7 @@ import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
 import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
+import _poolCrestedCraghorn from "../pool/crested-craghorn.js";
 import _poolCrevasse from "../pool/crevasse.js";
 import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
@@ -933,6 +934,7 @@ const shard: CardShard = {
     _poolCounterpoint,
     _poolCrashTheParty,
     _poolCrashTheRamparts,
+    _poolCrestedCraghorn,
     _poolCrevasse,
     _poolCripplingBlight,
     _poolCripplingFear,

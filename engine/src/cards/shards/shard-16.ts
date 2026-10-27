@@ -222,6 +222,7 @@ import _poolFeastOfSuccession from "../pool/feast-of-succession.js";
 import _poolFeldonsCane from "../pool/feldons-cane.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
+import _poolFeralThrowback from "../pool/feral-throwback.js";
 import _poolFerozsBan from "../pool/ferozs-ban.js";
 import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
@@ -368,6 +369,7 @@ import _poolKolaghanTheStormsFury from "../pool/kolaghan-the-storms-fury.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
 import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
 import _poolKraulWarrior from "../pool/kraul-warrior.js";
+import _poolKrosanVorine from "../pool/krosan-vorine.js";
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
@@ -1050,6 +1052,7 @@ const shard: CardShard = {
     _poolFeldonsCane,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
+    _poolFeralThrowback,
     _poolFerozsBan,
     _poolFertilidsFavor,
     _poolFerventCathar,
@@ -1196,6 +1199,7 @@ const shard: CardShard = {
     _poolKorSkyClimber,
     _poolKoseiPenitentWarlord,
     _poolKraulWarrior,
+    _poolKrosanVorine,
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLashOfThorns,

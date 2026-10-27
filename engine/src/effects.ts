@@ -3642,6 +3642,26 @@ export type EffectSpec =
     }
   | {
       /**
+       * "`target` blocks this turn if able", or "blocks `attacker` this turn
+       * if able" — a blocking requirement (rule 509.1c) on that one
+       * creature, held in `GameState.blockRequirements`: when its controller
+       * declares blockers it has to block (that attacker) whenever it can,
+       * as many requirements obeyed as can be without breaking a
+       * restriction. Not a characteristic: a creature that can't block, or
+       * can't block that attacker (flying, tapped), simply doesn't, and one
+       * that's left the battlefield (or an attacker that has) is free of it
+       * (rule 400.7). Provoke (rule 702.39a) is `attacker: "source"` after
+       * an `untap` (`provoke()` in `cards/helpers.ts`); Hunt Down's "target
+       * creature blocks target creature" is `attacker: 1`. `thisCombat`:
+       * "this combat" (Avalanche Tusker) — ends with the combat phase.
+       */
+      readonly kind: "block-if-able";
+      readonly target: EffectTargetRef;
+      readonly attacker?: EffectTargetRef;
+      readonly thisCombat?: boolean;
+    }
+  | {
+      /**
        * "Can attack this turn as though it didn't have defender" (rule
        * 702.3b): `target` until end of turn, as a modifier (Assault
        * Formation); or with `filter`, a rule for the rest of the turn over
@@ -6751,6 +6771,9 @@ export interface EffectApi {
   ): void;
   /** See the `"detain"` {@link EffectSpec}. */
   detain(target: TargetRef): void;
+  /** See the `"block-if-able"` {@link EffectSpec}: `attacker` undefined is
+   * "blocks this turn if able" (any attacker). */
+  blockIfAble(target: TargetRef, attacker: TargetRef | undefined, thisCombat: boolean): void;
   /** See the `"attack-despite-defender"` {@link EffectSpec}. */
   attackDespiteDefender(target: TargetRef | undefined, filter: CardFilter | undefined): void;
   /** See the `"damage-by-toughness"` {@link EffectSpec}. */
@@ -10413,6 +10436,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "detain": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.detain(target);
+      return;
+    }
+    case "block-if-able": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target === undefined || illegalSlot(spec.target, ctx)) return;
+      let attacker: TargetRef | undefined;
+      if (spec.attacker !== undefined) {
+        attacker = resolveEffectTarget(spec.attacker, ctx);
+        // The creature to block is gone (or no longer a legal target): no
+        // requirement is left to impose.
+        if (attacker === undefined || illegalSlot(spec.attacker, ctx)) return;
+      }
+      ctx.blockIfAble(target, attacker, spec.thisCombat === true);
       return;
     }
     case "attack-despite-defender": {

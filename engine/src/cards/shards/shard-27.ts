@@ -35,6 +35,7 @@ import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolAphoticWisps from "../pool/aphotic-wisps.js";
 import _poolArashiTheSkyAsunder from "../pool/arashi-the-sky-asunder.js";
+import _poolArcSlogger from "../pool/arc-slogger.js";
 import _poolArcadesSabboth from "../pool/arcades-sabboth.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
 import _poolArmsRace from "../pool/arms-race.js";
@@ -797,6 +798,7 @@ const shard: CardShard = {
     _poolAnvilwroughtRaptor,
     _poolAphoticWisps,
     _poolArashiTheSkyAsunder,
+    _poolArcSlogger,
     _poolArcadesSabboth,
     _poolArcaneFlight,
     _poolArmsRace,

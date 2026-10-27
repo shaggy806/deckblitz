@@ -71,6 +71,20 @@ function blockersOffer(
       restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-if-able") ||
       (lured.includes(id) && singleBlockerAttackers.includes(id)),
   );
+  // Creatures that have to block if able (provoke: that attacker), each the
+  // same object it was when the requirement was made (rule 400.7), and only
+  // while it's able to.
+  const blockRequirements: { blocker: ObjectId; attacker?: ObjectId }[] = [];
+  for (const r of ctx.state.blockRequirements ?? []) {
+    const entry = eligible.find((e) => e.blocker === r.blocker);
+    if (entry === undefined || (ctx.state.objects[r.blocker]?.zoneChangeCount ?? 0) !== r.zoneChangeCount) continue;
+    if (r.attacker === undefined) {
+      blockRequirements.push({ blocker: r.blocker });
+      continue;
+    }
+    if ((ctx.state.objects[r.attacker]?.zoneChangeCount ?? 0) !== r.attackerZoneChangeCount) continue;
+    if (entry.canBlock.includes(r.attacker)) blockRequirements.push({ blocker: r.blocker, attacker: r.attacker });
+  }
   // Token stacks attacking as one counted object (`Game.attackingStackPart`).
   const attackerTokens: Record<ObjectId, number> = {};
   for (const id of attacking) {
@@ -84,6 +98,7 @@ function blockersOffer(
     ...(singleBlockerAttackers.length > 0 ? { singleBlockerAttackers } : {}),
     mustBlock,
     ...(mustBeBlockedIfAble.length > 0 ? { mustBeBlockedIfAble } : {}),
+    ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
   };
 }
@@ -135,6 +150,8 @@ export const blockers = defineDecision({
         ? `${name(violation.attacker)} can't be blocked by more than one creature`
       : violation.kind === "must-be-blocked"
         ? `${name(violation.blocker)} must block (a "must be blocked" attacker)`
+      : violation.kind === "block-requirement"
+        ? `${name(violation.blocker)} must block if able`
         : `${name(violation.attacker)} must be blocked if able`;
   },
 

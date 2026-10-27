@@ -652,6 +652,7 @@ import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.
 import _poolSwerve from "../pool/swerve.js";
 import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSwiftWarkite from "../pool/swift-warkite.js";
+import _poolSwoopingTalon from "../pool/swooping-talon.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSylvokLifestaff from "../pool/sylvok-lifestaff.js";
@@ -1444,6 +1445,7 @@ const shard: CardShard = {
     _poolSwerve,
     _poolSwiftSpiral,
     _poolSwiftWarkite,
+    _poolSwoopingTalon,
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSylvokLifestaff,

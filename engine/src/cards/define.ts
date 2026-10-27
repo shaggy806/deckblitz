@@ -2923,6 +2923,15 @@ export interface CardDefinition {
    */
   readonly devour: { readonly multiplier: number; readonly filter: CardFilter } | null;
   /**
+   * Amplify N (rule 702.38a): "As this object enters, reveal any number of
+   * cards from your hand that share a creature type with it. This permanent
+   * enters with N +1/+1 counters on it for each card revealed this way. You
+   * can't reveal this card or any other cards that are entering the
+   * battlefield at the same time as this card." N, or `null` for none. Asked
+   * as it's about to enter (rule 614.12), of the player it enters under.
+   */
+  readonly amplify: number | null;
+  /**
    * Tribute N (rule 702.104a): "As this creature enters, choose an opponent.
    * That player may put an additional N +1/+1 counters on it as it enters."
    * Asked as it's about to enter (rule 614.12): its controller picks the
@@ -3469,6 +3478,7 @@ const PRINTED_ABILITY: {
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
   shufflesIntoLibraryInstead: (def) => def.shufflesIntoLibraryInstead,
   devour: (def) => def.devour !== null,
+  amplify: (def) => def.amplify !== null,
   tribute: (def) => def.tribute !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
@@ -3689,6 +3699,7 @@ interface CardDraft {
   exchangeTextOnEnter?: CardFilter;
   shufflesIntoLibraryInstead?: boolean;
   devour?: { readonly multiplier: number; readonly filter: CardFilter };
+  amplify?: number;
   tribute?: number;
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
@@ -3919,6 +3930,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
     shufflesIntoLibraryInstead: draft.shufflesIntoLibraryInstead ?? false,
     devour: draft.devour ?? null,
+    amplify: draft.amplify ?? null,
     tribute: draft.tribute ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),

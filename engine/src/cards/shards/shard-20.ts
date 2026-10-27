@@ -265,6 +265,7 @@ import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGhalmasWarden from "../pool/ghalmas-warden.js";
+import _poolGhastlyRemains from "../pool/ghastly-remains.js";
 import _poolGhostfire from "../pool/ghostfire.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGiltLeafAmbush from "../pool/gilt-leaf-ambush.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolGeodeGrotto,
     _poolGerminateRecruits,
     _poolGhalmasWarden,
+    _poolGhastlyRemains,
     _poolGhostfire,
     _poolGildedSentinel,
     _poolGiltLeafAmbush,

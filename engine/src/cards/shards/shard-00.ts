@@ -255,6 +255,7 @@ import _poolGlarewielder from "../pool/glarewielder.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
 import _poolGloomSurgeon from "../pool/gloom-surgeon.js";
+import _poolGloweringRogon from "../pool/glowering-rogon.js";
 import _poolGoShintaiOfAncientWars from "../pool/go-shintai-of-ancient-wars.js";
 import _poolGoShintaiOfLostWisdom from "../pool/go-shintai-of-lost-wisdom.js";
 import _poolGoblinCavaliers from "../pool/goblin-cavaliers.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolGleamingSplendor,
     _poolGlintSleeveArtisan,
     _poolGloomSurgeon,
+    _poolGloweringRogon,
     _poolGoShintaiOfAncientWars,
     _poolGoShintaiOfLostWisdom,
     _poolGoblinCavaliers,

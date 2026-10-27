@@ -86,6 +86,7 @@ import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
+import _poolCanopyCrawler from "../pool/canopy-crawler.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarnageGladiator from "../pool/carnage-gladiator.js";
 import _poolCarnophage from "../pool/carnophage.js";
@@ -326,6 +327,7 @@ import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
+import _poolInertiaBubble from "../pool/inertia-bubble.js";
 import _poolInexorableBlob from "../pool/inexorable-blob.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
+    _poolCanopyCrawler,
     _poolCapennaExpress,
     _poolCarnageGladiator,
     _poolCarnophage,
@@ -1104,6 +1107,7 @@ const shard: CardShard = {
     _poolImpsMischief,
     _poolIncendiarySabotage,
     _poolIndulgentTormentor,
+    _poolInertiaBubble,
     _poolInexorableBlob,
     _poolInfernalGrasp,
     _poolInjectorCrocodile,
