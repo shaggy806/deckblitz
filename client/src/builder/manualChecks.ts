@@ -8364,4 +8364,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Anavolver: kick it with either kicker, or both',
     board({ you: { bf: ['Forest*4', 'Island*2', 'Swamp'], hand: ['Anavolver'] } }),
   ),
+  // --- Discard X cards as a spell's cost (2026-10-27, Torment) ---------------
+  preset(
+    'Sickening Dreams: choose X, then discard that many',
+    board({ you: { bf: ['Swamp*2'], hand: ['Sickening Dreams', 'Wastes', 'Island', 'Mountain'] }, opp: { bf: ['Grizzly Bears'] } }),
+  ),
 ]

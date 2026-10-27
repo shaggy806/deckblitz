@@ -1240,6 +1240,10 @@
   "static:block-any-number": "static:can-block-any-number"
  },
  "features": {
+  "amount:coin-flips-won-this-way": {
+   "family": "effect:amount-new-variants",
+   "example": "Crazed Firecat: flip until you lose, then one placement of a +1/+1 counter for each flip won — flip-coin's untilLose applies its won effect once per win."
+  },
   "bug:additional-cost-option-affordability": {
    "example": "Eaten Alive: Its \"pay {3}{B}\" additional-cost option is offered even when the mana can't be paid, and taking it throws (fuzzer seeds 4, 27, 31)."
   },
@@ -1746,6 +1750,18 @@
   },
   "cost:reveal-any-number-from-hand": {
    "example": "Scent of Ivy: reveal any number of green cards in your hand as it resolves; built 2026-10-26 (B208) as look-and-choose's \"reveal\" destination"
+  },
+  "effect:delayed-remove-counters-placed-this-way": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Shambling Swarm: at the next end step, remove one -1/-1 counter for each placed this way — nothing remembers counters placed by an earlier effect."
+  },
+  "effect:leaves-trigger-reads-enter-target": {
+   "family": "effect:this-way-results",
+   "example": "Laquatus's Champion: the leaves trigger gives life to the player its enters trigger targeted (still that target while the enters trigger is on the stack, the ruling); nothing links the two."
+  },
+  "effect:prevent-all-damage-from-chosen-source": {
+   "family": "replacement:damage-modification",
+   "example": "Pay No Heed: prevent all damage a source of your choice would deal this turn, to anything — prevent-damage-from-chosen-source only covers damage to you or a target."
   },
   "effect:reveal-from-hand-in-mana-ability": {
    "family": "cost:reveal-any-number-from-hand",
@@ -3354,6 +3370,10 @@
    "family": "effect:amount-fields-dynamic",
    "example": "Open the Way: X capped at the number of players, and revealing until X land cards."
   },
+  "filter:graveyard-choice-other-than-source": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Ichorid: exile another black creature card from your graveyard — a graveyard choice can't leave out the source card itself (another Ichorid may be chosen)."
+  },
   "keyword:addendum": {
    "example": "Unbreakable Formation: Addendum needs 'this spell was cast during your main phase'; a resolution-time main-phase check would wrongly give a copy the bonus (ruling)."
   },
@@ -3395,9 +3415,17 @@
    "family": "effect:delayed-trigger-extensions",
    "example": "Ertai's Meddling: exile target spell with X delay counters, removing one each upkeep and putting it back on the stack as an uncast copy at the last"
   },
+  "replacement:damage-becomes-fixed-amount-this-turn": {
+   "family": "replacement:damage-modification",
+   "example": "Equal Treatment: this turn, damage a source would deal is 2 instead — would-deal-damage has only multiplier/plus/atLeast, and no spell sets one up for the turn."
+  },
   "replacement:prevent-n-damage-from-each-source": {
    "family": "replacement:prevent-damage-from-colored-sources",
    "example": "Urza's Armor: 'prevent 1 of that damage' from each source — a reduction (plus: -1) is applied after every multiplier, where the affected player chooses the order (rule 616.1)."
+  },
+  "replacement:temporary-draw-replacement-target-player": {
+   "family": "effect:temporary-player-effect",
+   "example": "Plagiarize: until end of turn, if target player would draw, you draw instead — Notion Thief's draw replacement exists only as a static."
   },
   "static:cycling-cost-reduction": {
    "family": "cost:ability-cost-modification",
@@ -11868,6 +11896,65 @@
   "condition:hand-size-at-turn-start": {
    "family": "condition:that-player-hand-size",
    "example": "Mindstorm Crown: 'If you had no cards in hand at the beginning of this turn, draw a card. Otherwise, this deals 1 damage to you.'"
+  },
+  "effect:player-taps-chosen-permanents": {
+   "family": "decision:that-player-chooses-permanent",
+   "example": "Tangle Wire: 'that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire.'"
+  },
+  "effect:active-player-chooses-permanent": {
+   "family": "decision:that-player-chooses-permanent",
+   "example": "Rising Waters: 'Each player untaps a land they control of their choice during their untap step.'"
+  },
+  "filter:greatest-power-on-battlefield": {
+   "family": "condition:greatest-power-condition",
+   "example": "Topple: 'Exile target creature with the greatest power among creatures on the battlefield.'"
+  },
+  "filter:has-fading": {
+   "example": "Parallax Inhibitor: 'Put a fade counter on each permanent with fading you control.'"
+  },
+  "replacement:as-enters-sacrifice-permanents": {
+   "family": "replacement:enter-replacement-discard",
+   "example": "Overlaid Terrain: 'As this enchantment enters, sacrifice all lands you control.'"
+  },
+  "static:token-pt-from-source-counters": {
+   "family": "effect:tokens-created-with-source",
+   "example": "Saproling Burst: 'This token's power and toughness are each equal to the number of fade counters on Saproling Burst.'"
+  },
+  "amount:domain-of-target-player": {
+   "family": "effect:amount-new-variants",
+   "example": "Domain counted over a target player's lands, not yours — Allied Strategies (PLS)."
+  },
+  "condition:most-common-color-among-all-permanents": {
+   "family": "condition:most-common-color-among-chosen-player-permanents",
+   "example": "The most common color (or one tied for it) among all permanents — Heroic Defiance (PLS)."
+  },
+  "condition:target-shares-color-with-chosen-permanent": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "A target sharing a color with a permanent chosen as the spell resolves — Guard Dogs (PLS)."
+  },
+  "cost:self-cost-reduction-domain-times-n": {
+   "family": "cost:cost-modification-extensions",
+   "example": "A spell costing {N} less per basic land type, N above 1 — Draco (PLS, {2} each)."
+  },
+  "decision:choose-land-of-each-basic-type": {
+   "family": "decision:choose-permanent",
+   "example": "Each player chooses a land of each basic land type they control (a dual may count for both) — Planar Overlay (PLS)."
+  },
+  "decision:keep-one-of-each-color-discard-rest": {
+   "family": "decision:choose-permanent",
+   "example": "Each player keeps one card of each color from hand and discards the other nonland cards — Noxious Vapors (PLS)."
+  },
+  "effect:discard-chosen-trigger-player": {
+   "family": "effect:target-spec-additions",
+   "example": "Look at the damaged/triggering player's hand and choose a card they discard, with no target slot — Doomsday Specter (PLS)."
+  },
+  "effect:trigger-object-owner-player-ref": {
+   "family": "effect:target-spec-additions",
+   "example": "'That player' read as the owner of the trigger's object rather than its last controller — Warped Devotion (PLS)."
+  },
+  "replacement:redirect-next-damage-event": {
+   "family": "replacement:damage-modification",
+   "example": "The next time damage would be dealt to it this turn, the whole event is dealt to another target instead — Mirrorwood Treefolk (PLS)."
   },
   "static:untargetable-by-color-any-player": {
    "family": "keyword:hexproof-from-colors",

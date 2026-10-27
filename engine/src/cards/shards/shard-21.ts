@@ -17,6 +17,7 @@ import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
+import _poolAnimateLand from "../pool/animate-land.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -133,6 +134,7 @@ import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
+import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
@@ -164,6 +166,7 @@ import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
 import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
+import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
@@ -577,6 +580,7 @@ import _poolSkybind from "../pool/skybind.js";
 import _poolSkyshroudVampire from "../pool/skyshroud-vampire.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
+import _poolSlitheryStalker from "../pool/slithery-stalker.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
 import _poolSmashToSmithereens from "../pool/smash-to-smithereens.js";
 import _poolSnappingSailback from "../pool/snapping-sailback.js";
@@ -608,6 +612,7 @@ import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
+import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
@@ -782,6 +787,7 @@ const shard: CardShard = {
     _poolAncientHellkite,
     _poolAngelOfSanctions,
     _poolAngelsTrumpet,
+    _poolAnimateLand,
     _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -898,6 +904,7 @@ const shard: CardShard = {
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
     _poolCommonBond,
+    _poolComplexAutomaton,
     _poolConclaveTribunal,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
@@ -929,6 +936,7 @@ const shard: CardShard = {
     _poolDeduce,
     _poolDeepSeaKraken,
     _poolDeeprootWaters,
+    _poolDefiantFalcon,
     _poolDegaDisciple,
     _poolDemogorgonsClutches,
     _poolDescendUponTheSinful,
@@ -1342,6 +1350,7 @@ const shard: CardShard = {
     _poolSkyshroudVampire,
     _poolSlashingTiger,
     _poolSlinkingSerpent,
+    _poolSlitheryStalker,
     _poolSlumberingKeepguard,
     _poolSmashToSmithereens,
     _poolSnappingSailback,
@@ -1373,6 +1382,7 @@ const shard: CardShard = {
     _poolStormbind,
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
+    _poolStrengthOfLunacy,
     _poolStudentOfOjutai,
     _poolStumpStomp,
     _poolStymiedHopes,

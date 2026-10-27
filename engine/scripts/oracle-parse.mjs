@@ -2484,6 +2484,13 @@ export function parseFace(face, ctx = {}) {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
       continue;
     }
+    // "Discard a card" (Thrill of Possibility), "discard two cards", "discard
+    // X cards" (Sickening Dreams — an X the mana cost needn't have), "… at random".
+    if (isSpell && (m = /^As an additional cost to cast ~, discard (a card|two cards|three cards|X cards)( at random)?\.$/.exec(line))) {
+      const count = { "a card": 1, "two cards": 2, "three cards": 3, "X cards": "x" }[m[1]];
+      out.additionalCost = { discard: count, ...(m[2] ? { discardAtRandom: true } : {}) };
+      continue;
+    }
     // "Blight N or pay {M}" (rule 701.68a): a choice of whole costs.
     if (isSpell && (m = /^As an additional cost to cast ~, blight (\d+) or pay ((?:\{[^}]+\})+)\.$/.exec(line))) {
       out.additionalCost = { options: [{ text: `Blight ${m[1]}`, blight: Number(m[1]) }, { text: `Pay ${m[2]}`, mana: m[2] }] };

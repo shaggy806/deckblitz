@@ -98,6 +98,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Hourglass). 78 of Prophecy's 113 authored — Rhystic Tutor, Infernal Genesis, Excavation, the
   Spellshapers Alexi, Greel and Latulla, Avatar of Fury, Rhystic Lightning, Elephant Resurgence —
   by five `card-author` agents and the lead, and 35 blocked (`B222.json`).
+- **Planeshift — Planeshift is whole** (batch 221, the sixth middle walk, 2026-10-27): 76 of its
+  108 remaining new cards authored — the scaffolder finished the three kicker Battlemages and
+  Stratadon; five `card-author` agents the rest: the five Lairs, the gating creatures (Cavern
+  Harpy, Silver Drake, Horned Kavu…), the Familiars, Phyrexian Tyranny, Tahngarth, Nemata,
+  Shifting Sky, Voice of All — and 32 blocked (`B221.json`), no feature built. Found and fixed:
+  the five Medallions (`medallion()`) made every player's spells of their colour cost {1} less.
+- **Torment — Torment is whole** (batch 220, the fifth middle walk, 2026-10-27): 85 of its 115
+  remaining new cards authored — **built "discard X cards" as a spell's additional cost**
+  (`cost:discard-x-cost`: `additionalCost.discard: "x"`, rules 601.2b and 601.2h, with a sacrifice
+  effect's `count` and a search's `min` as amounts; the scaffolder reads the line;
+  `discard-x-cost.test.ts`), on which the lead authored the seven Dreams and Firestorm (B175) and
+  Channeled Force (B117); the scaffolder finished six, five `card-author` agents 72 — Grim
+  Lavamancer, Faceless Butcher, Mortal Combat, Parallel Evolution, Llawan, the Possessed cycle,
+  Krosan Restorer, Cephalid Aristocrat, Basking Rootwalla — and 30 blocked (`B220.json`).
 - **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
   remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
   Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
@@ -112,6 +126,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   of Darksteel's 102 authored — Gemini Engine, Spellbinder, Vex, Furnace Dragon, Myr Matrix,
   Wirefly Hive, Pristine Angel — by five `card-author` agents and the lead, and 34 blocked
   (`B214.json`).
+- **Nemesis — Nemesis is whole** (batch 223, the seventh middle walk's first batch, 2026-10-27):
+  no engine change; fading authored as its two pieces (an enters-with fade counters replacement
+  and an upkeep remove-or-sacrifice trigger). 67 of Nemesis's 104 left authored — Parallax Wave,
+  Parallax Tide, Blastoderm, Massacre, Lin Sivvi, Ascendant Evincar, Accumulated Knowledge — by
+  five `card-author` agents and the lead, and 37 blocked (`B223.json`), the sacrifice alternative
+  cost (`cost:alt-cost-sacrifice`, four) leading.
 - **Two kicker costs, and Apocalypse — Apocalypse is whole** (batch 218, the sixth middle walk,
   2026-10-27, `keyword:two-kicker-costs`): **built** "Kicker [A] and/or [B]" (rule 702.33b, f —
   `kicker.second`, offered as the first, the second or both; `self-kicked`'s `with` for "kicked

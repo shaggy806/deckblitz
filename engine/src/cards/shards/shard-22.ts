@@ -95,12 +95,14 @@ import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCagemail from "../pool/cagemail.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
+import _poolCalderaKavu from "../pool/caldera-kavu.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
+import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChillerpillar from "../pool/chillerpillar.js";
@@ -290,6 +292,7 @@ import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHonoredHierarch from "../pool/honored-hierarch.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
 import _poolHorizonSpellbomb from "../pool/horizon-spellbomb.js";
+import _poolHornedKavu from "../pool/horned-kavu.js";
 import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
@@ -468,6 +471,7 @@ import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
+import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPineconeStrike from "../pool/pinecone-strike.js";
@@ -516,6 +520,7 @@ import _poolReleaseToMemory from "../pool/release-to-memory.js";
 import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResoundingScream from "../pool/resounding-scream.js";
+import _poolRestlessDreams from "../pool/restless-dreams.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolRetract from "../pool/retract.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
@@ -895,12 +900,14 @@ const shard: CardShard = {
     _poolCaesarLegionsEmperor,
     _poolCagemail,
     _poolCalamityOfCinders,
+    _poolCalderaKavu,
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
     _poolCaptainAmericasMotorcycle,
     _poolCareeningMineCart,
     _poolCartographersHawk,
     _poolCatharticReunion,
+    _poolCentaurVeteran,
     _poolChameleonColossus,
     _poolChargingCinderhorn,
     _poolChillerpillar,
@@ -1090,6 +1097,7 @@ const shard: CardShard = {
     _poolHonoredHierarch,
     _poolHoppingAutomaton,
     _poolHorizonSpellbomb,
+    _poolHornedKavu,
     _poolHospitalRoom,
     _poolHostileDesert,
     _poolHourOfVictory,
@@ -1268,6 +1276,7 @@ const shard: CardShard = {
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPhyrexianAtlas,
+    _poolPhyrexianProwler,
     _poolPillarOfLight,
     _poolPillarfieldOx,
     _poolPineconeStrike,
@@ -1316,6 +1325,7 @@ const shard: CardShard = {
     _poolReptilDinomorpher,
     _poolRepurposedEnforcer,
     _poolResoundingScream,
+    _poolRestlessDreams,
     _poolResurrection,
     _poolRetract,
     _poolReturnToAction,

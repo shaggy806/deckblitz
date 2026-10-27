@@ -133,6 +133,7 @@ import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
+import _poolCripplingFatigue from "../pool/crippling-fatigue.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
 import _poolCryptwailing from "../pool/cryptwailing.js";
 import _poolCrystalChimes from "../pool/crystal-chimes.js";
@@ -332,6 +333,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
+import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
@@ -368,6 +370,7 @@ import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLashknife from "../pool/lashknife.js";
 import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
@@ -511,6 +514,7 @@ import _poolRecklessOgre from "../pool/reckless-ogre.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
+import _poolRefreshingRain from "../pool/refreshing-rain.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolRepeal from "../pool/repeal.js";
@@ -558,6 +562,7 @@ import _poolSearingBarrage from "../pool/searing-barrage.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
+import _poolShadesForm from "../pool/shades-form.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
@@ -680,6 +685,7 @@ import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTransitMage from "../pool/transit-mage.js";
+import _poolTrevasRuins from "../pool/trevas-ruins.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
@@ -899,6 +905,7 @@ const shard: CardShard = {
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
+    _poolCripplingFatigue,
     _poolCruelReality,
     _poolCryptwailing,
     _poolCrystalChimes,
@@ -1098,6 +1105,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
+    _poolInvigoratingFalls,
     _poolInvisibleWoman,
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
@@ -1134,6 +1142,7 @@ const shard: CardShard = {
     _poolLambholtRavager,
     _poolLapisLazuliTalisman,
     _poolLargeBear,
+    _poolLashknife,
     _poolLashwrithe,
     _poolLatticeLibrary,
     _poolLavaStorm,
@@ -1277,6 +1286,7 @@ const shard: CardShard = {
     _poolRecklessPyrosurfer,
     _poolRecklessSpite,
     _poolReclaimTheWastes,
+    _poolRefreshingRain,
     _poolRefute,
     _poolReitoLantern,
     _poolRepeal,
@@ -1324,6 +1334,7 @@ const shard: CardShard = {
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
+    _poolShadesForm,
     _poolShadowsVerdict,
     _poolShadowstorm,
     _poolShakedownHeavy,
@@ -1446,6 +1457,7 @@ const shard: CardShard = {
     _poolTowashiSongshaper,
     _poolToweringBaloth,
     _poolTransitMage,
+    _poolTrevasRuins,
     _poolTributeToTheWild,
     _poolTritonShorethief,
     _poolTriumphOfFerocity,

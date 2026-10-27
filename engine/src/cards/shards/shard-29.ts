@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAcceleratedEvolution from "../pool/accelerated-evolution.js";
+import _poolAccumulatedKnowledge from "../pool/accumulated-knowledge.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAetherstreamLeopard from "../pool/aetherstream-leopard.js";
@@ -54,6 +55,7 @@ import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
+import _poolBaskingRootwalla from "../pool/basking-rootwalla.js";
 import _poolBattlewiseAven from "../pool/battlewise-aven.js";
 import _poolBazaarKrovod from "../pool/bazaar-krovod.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
@@ -114,6 +116,7 @@ import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolConcealingCurtains from "../pool/concealing-curtains.js";
 import _poolConfirmSuspicions from "../pool/confirm-suspicions.js";
+import _poolConfound from "../pool/confound.js";
 import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
@@ -237,12 +240,14 @@ import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
+import _poolFlowstoneArmor from "../pool/flowstone-armor.js";
 import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolForcedAdaptation from "../pool/forced-adaptation.js";
+import _poolForsakenCity from "../pool/forsaken-city.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
@@ -343,6 +348,7 @@ import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
+import _poolKamahlsSledge from "../pool/kamahls-sledge.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
@@ -452,6 +458,7 @@ import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
+import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
@@ -462,6 +469,7 @@ import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
 import _poolPersonOfInterest from "../pool/person-of-interest.js";
 import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
+import _poolPetravark from "../pool/petravark.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
@@ -793,6 +801,7 @@ const shard: CardShard = {
   pool: [
     _poolAIMSynthoids,
     _poolAcceleratedEvolution,
+    _poolAccumulatedKnowledge,
     _poolAdaptiveGemguard,
     _poolAetherSyphon,
     _poolAetherstreamLeopard,
@@ -842,6 +851,7 @@ const shard: CardShard = {
     _poolBargain,
     _poolBargeIn,
     _poolBarkKnuckleBoxer,
+    _poolBaskingRootwalla,
     _poolBattlewiseAven,
     _poolBazaarKrovod,
     _poolBeatrixLoyalGeneral,
@@ -902,6 +912,7 @@ const shard: CardShard = {
     _poolCompleatedConjurer,
     _poolConcealingCurtains,
     _poolConfirmSuspicions,
+    _poolConfound,
     _poolConsumingBlob,
     _poolContractHero,
     _poolCoralBarrier,
@@ -1025,12 +1036,14 @@ const shard: CardShard = {
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
     _poolFloriferousVinewall,
+    _poolFlowstoneArmor,
     _poolFlowstoneSculpture,
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolForcedAdaptation,
+    _poolForsakenCity,
     _poolFoulRebirth,
     _poolFracturedSanity,
     _poolFrogTongue,
@@ -1131,6 +1144,7 @@ const shard: CardShard = {
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
+    _poolKamahlsSledge,
     _poolKamizObscuraOculus,
     _poolKazanduNectarpot,
     _poolKazarovSengirPureblood,
@@ -1240,6 +1254,7 @@ const shard: CardShard = {
     _poolOutcasterTrailblazer,
     _poolOverride,
     _poolOwlinHistorian,
+    _poolPackHunt,
     _poolPain101,
     _poolParalyze,
     _poolParhelionIi,
@@ -1250,6 +1265,7 @@ const shard: CardShard = {
     _poolPersonOfInterest,
     _poolPestbroodSloth,
     _poolPetAvengers,
+    _poolPetravark,
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
     _poolPhantasmalSphere,

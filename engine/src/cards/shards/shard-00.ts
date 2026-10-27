@@ -205,6 +205,7 @@ import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
 import _poolEnlistmentOfficer from "../pool/enlistment-officer.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
 import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
+import _poolEscapeRoutes from "../pool/escape-routes.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
 import _poolExplorersScope from "../pool/explorers-scope.js";
 import _poolExplosion from "../pool/explosion.js";
@@ -466,6 +467,7 @@ import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPitFight from "../pool/pit-fight.js";
+import _poolPlagueWitch from "../pool/plague-witch.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -675,6 +677,7 @@ import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
+import _poolThornscapeBattlemage from "../pool/thornscape-battlemage.js";
 import _poolThragtusk from "../pool/thragtusk.js";
 import _poolThranDynamo from "../pool/thran-dynamo.js";
 import _poolThrasherBrute from "../pool/thrasher-brute.js";
@@ -1002,6 +1005,7 @@ const shard: CardShard = {
     _poolEnlistmentOfficer,
     _poolEnragedCeratok,
     _poolErebosBleakHearted,
+    _poolEscapeRoutes,
     _poolEverethViceroyOfPlunder,
     _poolExplorersScope,
     _poolExplosion,
@@ -1263,6 +1267,7 @@ const shard: CardShard = {
     _poolPipBoy3000,
     _poolPippinsBravery,
     _poolPitFight,
+    _poolPlagueWitch,
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
@@ -1472,6 +1477,7 @@ const shard: CardShard = {
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThirstForIdentity,
+    _poolThornscapeBattlemage,
     _poolThragtusk,
     _poolThranDynamo,
     _poolThrasherBrute,

@@ -73,6 +73,7 @@ import _poolBloodshedFever from "../pool/bloodshed-fever.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBoil from "../pool/boil.js";
+import _poolBolaWarrior from "../pool/bola-warrior.js";
 import _poolBomberCorps from "../pool/bomber-corps.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
@@ -129,6 +130,7 @@ import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
+import _poolCrosissCatacombs from "../pool/crosiss-catacombs.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
@@ -247,6 +249,7 @@ import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhastlyGloomhunter from "../pool/ghastly-gloomhunter.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
+import _poolGhostlyWings from "../pool/ghostly-wings.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGiantBeaver from "../pool/giant-beaver.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
@@ -364,6 +367,7 @@ import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
+import _poolMagnigothTreefolk from "../pool/magnigoth-treefolk.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
 import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
 import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
@@ -390,6 +394,7 @@ import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
+import _poolMireKavu from "../pool/mire-kavu.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
@@ -435,6 +440,7 @@ import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
+import _poolParallelEvolution from "../pool/parallel-evolution.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
@@ -458,6 +464,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
+import _poolPsychoticHaze from "../pool/psychotic-haze.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
@@ -514,6 +521,7 @@ import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRoad from "../pool/road.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRootGreevil from "../pool/root-greevil.js";
 import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
@@ -837,6 +845,7 @@ const shard: CardShard = {
     _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBoil,
+    _poolBolaWarrior,
     _poolBomberCorps,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
@@ -893,6 +902,7 @@ const shard: CardShard = {
     _poolCowabunga,
     _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
+    _poolCrosissCatacombs,
     _poolCrosissCharm,
     _poolCruelAlliance,
     _poolCryptRipper,
@@ -1011,6 +1021,7 @@ const shard: CardShard = {
     _poolGhaltaTheImmovable,
     _poolGhastlyGloomhunter,
     _poolGhostSpectralSaboteur,
+    _poolGhostlyWings,
     _poolGhoulcallerGisa,
     _poolGiantBeaver,
     _poolGiantScorpion,
@@ -1128,6 +1139,7 @@ const shard: CardShard = {
     _poolLurkingCrocodile,
     _poolLuxCannon,
     _poolMagmaw,
+    _poolMagnigothTreefolk,
     _poolMagusLuceaKane,
     _poolMakeYourOwnLuck,
     _poolMakeshiftBattalion,
@@ -1154,6 +1166,7 @@ const shard: CardShard = {
     _poolMilitiaBugler,
     _poolMinamoSightbender,
     _poolMindsDilation,
+    _poolMireKavu,
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
     _poolMistDancer,
@@ -1199,6 +1212,7 @@ const shard: CardShard = {
     _poolOriginOfTheHulk,
     _poolOstiaryThrull,
     _poolOverlordOfTheBoilerbilges,
+    _poolParallelEvolution,
     _poolParch,
     _poolPartWater,
     _poolPartingGust,
@@ -1222,6 +1236,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
+    _poolPsychoticHaze,
     _poolPuppetMaster,
     _poolPurpleDragonPunks,
     _poolPyreticPrankster,
@@ -1278,6 +1293,7 @@ const shard: CardShard = {
     _poolRoad,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRootGreevil,
     _poolRootrunner,
     _poolRotTideGargantua,
     _poolRotisserieElemental,

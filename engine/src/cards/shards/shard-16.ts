@@ -46,6 +46,7 @@ import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
 import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
 import _poolAvenRiftwatcher from "../pool/aven-riftwatcher.js";
+import _poolAvengerEnDal from "../pool/avenger-en-dal.js";
 import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
@@ -397,6 +398,7 @@ import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
 import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
 import _poolMageRingBully from "../pool/mage-ring-bully.js";
+import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
@@ -441,6 +443,7 @@ import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
+import _poolNantukoBlightcutter from "../pool/nantuko-blightcutter.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
@@ -565,6 +568,7 @@ import _poolSalvageSlasher from "../pool/salvage-slasher.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
 import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
+import _poolSawtoothLoon from "../pool/sawtooth-loon.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
@@ -615,6 +619,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSoar from "../pool/soar.js";
+import _poolSonicSeizure from "../pool/sonic-seizure.js";
 import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
@@ -656,6 +661,7 @@ import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
+import _poolTahngarthTalruumHero from "../pool/tahngarth-talruum-hero.js";
 import _poolTakeFlight from "../pool/take-flight.js";
 import _poolTakeToTheStreets from "../pool/take-to-the-streets.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
@@ -749,6 +755,7 @@ import _poolVindictiveLich from "../pool/vindictive-lich.js";
 import _poolViridianEmissary from "../pool/viridian-emissary.js";
 import _poolVisageOfBolas from "../pool/visage-of-bolas.js";
 import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
+import _poolViseling from "../pool/viseling.js";
 import _poolVitalizingCascade from "../pool/vitalizing-cascade.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
@@ -876,6 +883,7 @@ const shard: CardShard = {
     _poolAvenArcher,
     _poolAvenRedeemer,
     _poolAvenRiftwatcher,
+    _poolAvengerEnDal,
     _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,
@@ -1227,6 +1235,7 @@ const shard: CardShard = {
     _poolMachineGodsEffigy,
     _poolMachineManModelX51,
     _poolMageRingBully,
+    _poolMagmaBurst,
     _poolMagmaVein,
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
@@ -1271,6 +1280,7 @@ const shard: CardShard = {
     _poolMyrTurbine,
     _poolNagaoBoundByHonor,
     _poolNajeelaTheBladeBlossom,
+    _poolNantukoBlightcutter,
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
     _poolNaturesChant,
@@ -1395,6 +1405,7 @@ const shard: CardShard = {
     _poolSamutTheDrivingForce,
     _poolSanctuaryLockdown,
     _poolSavagePackmate,
+    _poolSawtoothLoon,
     _poolScaldingCauldron,
     _poolScatterTheSeeds,
     _poolScrapheapScrounger,
@@ -1445,6 +1456,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSoar,
+    _poolSonicSeizure,
     _poolSoullessRevival,
     _poolSoulsGrace,
     _poolSphinxOfLostTruths,
@@ -1486,6 +1498,7 @@ const shard: CardShard = {
     _poolSwordsmansSteel,
     _poolSylviaBrightspear,
     _poolSymmetryMatrix,
+    _poolTahngarthTalruumHero,
     _poolTakeFlight,
     _poolTakeToTheStreets,
     _poolTakeVengeance,
@@ -1579,6 +1592,7 @@ const shard: CardShard = {
     _poolViridianEmissary,
     _poolVisageOfBolas,
     _poolVisceridDeepwalker,
+    _poolViseling,
     _poolVitalizingCascade,
     _poolVividGrove,
     _poolVivisection,

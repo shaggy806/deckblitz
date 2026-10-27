@@ -24,6 +24,8 @@ is still unscoped.
 
 `set-walk-last-rounds` (**planned**) splits the set walk's last 1,652 cards into three rounds of parallel cloud sessions (eighteen to twenty): each walk's range, each round's batches, and what to do about round sixteen's unlanded local batches before round nineteen.
 
+`need-keys-after-the-walk` (**planned**) works down the blocked records once the set walk ends: tooling (`--audit`, `--greedy`, `--brief`), a check that every record is really blocked with keys merged by family, then building in greedy order a family per session, with cheap agents for the judging and scripts for the counting.
+
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
 `initiative-dungeons` (built 2026-10-19, but for its animation and the Forgotten Realms dungeons) designs venture into the dungeon and the

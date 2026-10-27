@@ -113,6 +113,7 @@ import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCarrion from "../pool/carrion.js";
 import _poolCatastrophe from "../pool/catastrophe.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
+import _poolCephalidVandal from "../pool/cephalid-vandal.js";
 import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
@@ -127,6 +128,7 @@ import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
+import _poolCloudCover from "../pool/cloud-cover.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
@@ -157,6 +159,7 @@ import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
+import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
@@ -509,11 +512,13 @@ import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
+import _poolQuirionExplorer from "../pool/quirion-explorer.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
+import _poolRathiIntimidator from "../pool/rathi-intimidator.js";
 import _poolRavenousDemon from "../pool/ravenous-demon.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
@@ -596,6 +601,7 @@ import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
+import _poolSinisterStrength from "../pool/sinister-strength.js";
 import _poolSkaabGoliath from "../pool/skaab-goliath.js";
 import _poolSkyScourer from "../pool/sky-scourer.js";
 import _poolSkyclaveBasilica from "../pool/skyclave-basilica.js";
@@ -621,6 +627,7 @@ import _poolSpindriftDrake from "../pool/spindrift-drake.js";
 import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSpireTracer from "../pool/spire-tracer.js";
+import _poolSpiritualAsylum from "../pool/spiritual-asylum.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
@@ -908,6 +915,7 @@ const shard: CardShard = {
     _poolCarrion,
     _poolCatastrophe,
     _poolCatlikeCuriosity,
+    _poolCephalidVandal,
     _poolCeruleanDrake,
     _poolChaplainOfAlms,
     _poolChargeTheSanctum,
@@ -922,6 +930,7 @@ const shard: CardShard = {
     _poolClarionConqueror,
     _poolClericClass,
     _poolClingingDarkness,
+    _poolCloudCover,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
@@ -952,6 +961,7 @@ const shard: CardShard = {
     _poolDefiantKhenra,
     _poolDescentOfTheDragons,
     _poolDesiccatedNaga,
+    _poolDevastatingDreams,
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
@@ -1304,11 +1314,13 @@ const shard: CardShard = {
     _poolQuestForTheGemblades,
     _poolQuicksilverBehemoth,
     _poolQuilledCharger,
+    _poolQuirionExplorer,
     _poolRageReflection,
     _poolRainSlickedCopse,
     _poolRakkaMar,
     _poolRakshasasBargain,
     _poolRallyThePeasants,
+    _poolRathiIntimidator,
     _poolRavenousDemon,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
@@ -1391,6 +1403,7 @@ const shard: CardShard = {
     _poolSilkbindFaerie,
     _poolSilkguard,
     _poolSimicAscendancy,
+    _poolSinisterStrength,
     _poolSkaabGoliath,
     _poolSkyScourer,
     _poolSkyclaveBasilica,
@@ -1416,6 +1429,7 @@ const shard: CardShard = {
     _poolSpinewoodsPaladin,
     _poolSpireMechcycle,
     _poolSpireTracer,
+    _poolSpiritualAsylum,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
     _poolSpontaneousMutation,

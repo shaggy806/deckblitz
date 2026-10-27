@@ -70,6 +70,7 @@ import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlastoderm from "../pool/blastoderm.js";
 import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
@@ -105,6 +106,7 @@ import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
+import _poolCavernHarpy from "../pool/cavern-harpy.js";
 import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
@@ -182,6 +184,7 @@ import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
+import _poolDominate from "../pool/dominate.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -375,6 +378,7 @@ import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
 import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
+import _poolMarshCrocodile from "../pool/marsh-crocodile.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
@@ -454,6 +458,7 @@ import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPolukranosWorldEater from "../pool/polukranos-world-eater.js";
 import _poolPortentOfBetrayal from "../pool/portent-of-betrayal.js";
+import _poolPossessedCentaur from "../pool/possessed-centaur.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPredatoryAdvantage from "../pool/predatory-advantage.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
@@ -555,6 +560,7 @@ import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShowdownOfTheSkalds from "../pool/showdown-of-the-skalds.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
+import _poolSickeningDreams from "../pool/sickening-dreams.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
 import _poolSigiledContender from "../pool/sigiled-contender.js";
@@ -570,6 +576,7 @@ import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullSkaab from "../pool/skull-skaab.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
+import _poolSkyshroudBlessing from "../pool/skyshroud-blessing.js";
 import _poolSlagFiend from "../pool/slag-fiend.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
@@ -638,6 +645,7 @@ import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
 import _poolTenaciousTomeseeker from "../pool/tenacious-tomeseeker.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
+import _poolTerminalMoraine from "../pool/terminal-moraine.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheBrokenSky from "../pool/the-broken-sky.js";
@@ -848,6 +856,7 @@ const shard: CardShard = {
     _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlastoderm,
     _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
@@ -883,6 +892,7 @@ const shard: CardShard = {
     _poolCathodion,
     _poolCausticExhale,
     _poolCavernCrawler,
+    _poolCavernHarpy,
     _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,
@@ -960,6 +970,7 @@ const shard: CardShard = {
     _poolDireStrainBrawler,
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
+    _poolDominate,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
@@ -1153,6 +1164,7 @@ const shard: CardShard = {
     _poolManaclesOfDecay,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
+    _poolMarshCrocodile,
     _poolMasterSymmetrist,
     _poolMausoleumGuard,
     _poolMausoleumSecrets,
@@ -1232,6 +1244,7 @@ const shard: CardShard = {
     _poolPolliwallop,
     _poolPolukranosWorldEater,
     _poolPortentOfBetrayal,
+    _poolPossessedCentaur,
     _poolPramikonSkyRampart,
     _poolPredatoryAdvantage,
     _poolPrepareFight,
@@ -1333,6 +1346,7 @@ const shard: CardShard = {
     _poolShowdownOfTheSkalds,
     _poolShrikeForce,
     _poolSicken,
+    _poolSickeningDreams,
     _poolSidequestRaiseAChocobo,
     _poolSidisiBroodTyrant,
     _poolSigiledContender,
@@ -1348,6 +1362,7 @@ const shard: CardShard = {
     _poolSkullSkaab,
     _poolSkullsnapNuisance,
     _poolSkyscytheEngulfer,
+    _poolSkyshroudBlessing,
     _poolSlagFiend,
     _poolSlaveOfBolas,
     _poolSlay,
@@ -1416,6 +1431,7 @@ const shard: CardShard = {
     _poolTemptWithTreats,
     _poolTenaciousTomeseeker,
     _poolTenuredTethermage,
+    _poolTerminalMoraine,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
     _poolTheBrokenSky,

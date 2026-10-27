@@ -1,0 +1,772 @@
+{
+ "batch": "B221",
+ "status": "complete",
+ "ranks": "Planeshift (PLS, 2001-02-05): whole set, 108 (the sixth middle walk's second batch); fixed the Medallions' discount reaching every player's spells (medallion() lacked caster: \"you\")",
+ "authored": [
+  {
+   "name": "Alpha Kavu",
+   "files": [
+    "engine/src/cards/pool/alpha-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurora Griffin",
+   "files": [
+    "engine/src/cards/pool/aurora-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bog Down",
+   "files": [
+    "engine/src/cards/pool/bog-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caldera Kavu",
+   "files": [
+    "engine/src/cards/pool/caldera-kavu.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cavern Harpy",
+   "files": [
+    "engine/src/cards/pool/cavern-harpy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloud Cover",
+   "files": [
+    "engine/src/cards/pool/cloud-cover.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confound",
+   "files": [
+    "engine/src/cards/pool/confound.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crosis's Catacombs",
+   "files": [
+    "engine/src/cards/pool/crosiss-catacombs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darigaaz's Caldera",
+   "files": [
+    "engine/src/cards/pool/darigaazs-caldera.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Suspicions",
+   "files": [
+    "engine/src/cards/pool/dark-suspicions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Destructive Flow",
+   "files": [
+    "engine/src/cards/pool/destructive-flow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciple of Kangee",
+   "files": [
+    "engine/src/cards/pool/disciple-of-kangee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dralnu's Crusade",
+   "files": [
+    "engine/src/cards/pool/dralnus-crusade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dromar's Cavern",
+   "files": [
+    "engine/src/cards/pool/dromars-cavern.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ertai's Trickery",
+   "files": [
+    "engine/src/cards/pool/ertais-trickery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escape Routes",
+   "files": [
+    "engine/src/cards/pool/escape-routes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exotic Disease",
+   "files": [
+    "engine/src/cards/pool/exotic-disease.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fleetfoot Panther",
+   "files": [
+    "engine/src/cards/pool/fleetfoot-panther.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forsaken City",
+   "files": [
+    "engine/src/cards/pool/forsaken-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Herald",
+   "files": [
+    "engine/src/cards/pool/gaeas-herald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gaea's Might",
+   "files": [
+    "engine/src/cards/pool/gaeas-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gainsay",
+   "files": [
+    "engine/src/cards/pool/gainsay.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gerrard's Command",
+   "files": [
+    "engine/src/cards/pool/gerrards-command.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hobble",
+   "files": [
+    "engine/src/cards/pool/hobble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Honorable Scout",
+   "files": [
+    "engine/src/cards/pool/honorable-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horned Kavu",
+   "files": [
+    "engine/src/cards/pool/horned-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunting Drake",
+   "files": [
+    "engine/src/cards/pool/hunting-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insolence",
+   "files": [
+    "engine/src/cards/pool/insolence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Keldon Mantle",
+   "files": [
+    "engine/src/cards/pool/keldon-mantle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lashknife Barrier",
+   "files": [
+    "engine/src/cards/pool/lashknife-barrier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lava Zombie",
+   "files": [
+    "engine/src/cards/pool/lava-zombie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Magma Burst",
+   "files": [
+    "engine/src/cards/pool/magma-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magnigoth Treefolk",
+   "files": [
+    "engine/src/cards/pool/magnigoth-treefolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malicious Advice",
+   "files": [
+    "engine/src/cards/pool/malicious-advice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "March of Souls",
+   "files": [
+    "engine/src/cards/pool/march-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marsh Crocodile",
+   "files": [
+    "engine/src/cards/pool/marsh-crocodile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mire Kavu",
+   "files": [
+    "engine/src/cards/pool/mire-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multani's Harmony",
+   "files": [
+    "engine/src/cards/pool/multanis-harmony.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Natural Emergence",
+   "files": [
+    "engine/src/cards/pool/natural-emergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nemata, Grove Guardian",
+   "files": [
+    "engine/src/cards/pool/nemata-grove-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightscape Battlemage",
+   "files": [
+    "engine/src/cards/pool/nightscape-battlemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Scuta",
+   "files": [
+    "engine/src/cards/pool/phyrexian-scuta.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Tyranny",
+   "files": [
+    "engine/src/cards/pool/phyrexian-tyranny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pygmy Kavu",
+   "files": [
+    "engine/src/cards/pool/pygmy-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quirion Dryad",
+   "files": [
+    "engine/src/cards/pool/quirion-dryad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quirion Explorer",
+   "files": [
+    "engine/src/cards/pool/quirion-explorer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Radiant Kavu",
+   "files": [
+    "engine/src/cards/pool/radiant-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razing Snidd",
+   "files": [
+    "engine/src/cards/pool/razing-snidd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rith's Grove",
+   "files": [
+    "engine/src/cards/pool/riths-grove.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Root Greevil",
+   "files": [
+    "engine/src/cards/pool/root-greevil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rushing River",
+   "files": [
+    "engine/src/cards/pool/rushing-river.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samite Pilgrim",
+   "files": [
+    "engine/src/cards/pool/samite-pilgrim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sawtooth Loon",
+   "files": [
+    "engine/src/cards/pool/sawtooth-loon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shifting Sky",
+   "files": [
+    "engine/src/cards/pool/shifting-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shivan Wurm",
+   "files": [
+    "engine/src/cards/pool/shivan-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver Drake",
+   "files": [
+    "engine/src/cards/pool/silver-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Singe",
+   "files": [
+    "engine/src/cards/pool/singe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinister Strength",
+   "files": [
+    "engine/src/cards/pool/sinister-strength.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sisay's Ingenuity",
+   "files": [
+    "engine/src/cards/pool/sisays-ingenuity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyshroud Blessing",
+   "files": [
+    "engine/src/cards/pool/skyshroud-blessing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sleeping Potion",
+   "files": [
+    "engine/src/cards/pool/sleeping-potion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sparkcaster",
+   "files": [
+    "engine/src/cards/pool/sparkcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steel Leaf Paladin",
+   "files": [
+    "engine/src/cards/pool/steel-leaf-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stormscape Battlemage",
+   "files": [
+    "engine/src/cards/pool/stormscape-battlemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stratadon",
+   "files": [
+    "engine/src/cards/pool/stratadon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunscape Battlemage",
+   "files": [
+    "engine/src/cards/pool/sunscape-battlemage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surprise Deployment",
+   "files": [
+    "engine/src/cards/pool/surprise-deployment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tahngarth, Talruum Hero",
+   "files": [
+    "engine/src/cards/pool/tahngarth-talruum-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terminal Moraine",
+   "files": [
+    "engine/src/cards/pool/terminal-moraine.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thornscape Battlemage",
+   "files": [
+    "engine/src/cards/pool/thornscape-battlemage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thornscape Familiar",
+   "files": [
+    "engine/src/cards/pool/thornscape-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderscape Battlemage",
+   "files": [
+    "engine/src/cards/pool/thunderscape-battlemage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thunderscape Familiar",
+   "files": [
+    "engine/src/cards/pool/thunderscape-familiar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treva's Ruins",
+   "files": [
+    "engine/src/cards/pool/trevas-ruins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza's Guilt",
+   "files": [
+    "engine/src/cards/pool/urzas-guilt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voice of All",
+   "files": [
+    "engine/src/cards/pool/voice-of-all.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Meddling Mage",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "As it enters, choose a nonland card name; spells with the chosen name can't be cast."
+  },
+  {
+   "name": "Planeswalker's Fury",
+   "needs": [
+    "effect:reveal-random-card-from-hand"
+   ],
+   "why": "Target opponent reveals a card at random from their hand; it deals damage equal to that card's mana value to that player."
+  },
+  {
+   "name": "Noxious Vapors",
+   "needs": [
+    "decision:keep-one-of-each-color-discard-rest"
+   ],
+   "why": "Each player reveals their hand, chooses one card of each color, and discards all other nonland cards."
+  },
+  {
+   "name": "Planar Overlay",
+   "needs": [
+    "decision:choose-land-of-each-basic-type"
+   ],
+   "why": "Each player chooses a land they control of each basic land type (one dual may count for both) and returns them to hand."
+  },
+  {
+   "name": "Dralnu's Pet",
+   "needs": [
+    "new:kicker-nonmana-cost",
+    "effect:cost-discarded-card-ref"
+   ],
+   "why": "Kicker—{2}{B}, discard a creature card; enters with +1/+1 counters equal to the discarded card's mana value."
+  },
+  {
+   "name": "Allied Strategies",
+   "needs": [
+    "amount:domain-of-target-player"
+   ],
+   "why": "Target player draws a card for each basic land type among lands THEY control; basicLandTypes counts only 'you'."
+  },
+  {
+   "name": "Doomsday Specter",
+   "needs": [
+    "effect:discard-chosen-trigger-player"
+   ],
+   "why": "On combat damage, look at that player's hand and choose a card for them to discard — discard-chosen names a target slot only."
+  },
+  {
+   "name": "Falling Timber",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "Prevent all combat damage target creature (and, kicked, another) would deal this turn."
+  },
+  {
+   "name": "Questing Phelddagrif",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "Gains protection from black and from red until end of turn."
+  },
+  {
+   "name": "Skyship Weatherlight",
+   "needs": [
+    "effect:random-card-from-linked-exile"
+   ],
+   "why": "Choose a card at random among the cards exiled with it and put it into your hand."
+  },
+  {
+   "name": "Planeswalker's Mischief",
+   "needs": [
+    "effect:random-card-from-hand",
+    "effect:cast-from-linked-exile-free-this-turn"
+   ],
+   "why": "Exile a random card from target opponent's hand; you may cast it free this turn, else it returns at end of turn."
+  },
+  {
+   "name": "Planeswalker's Scorn",
+   "needs": [
+    "effect:random-card-from-hand",
+    "amount:revealed-card-mana-value-keep-targets"
+   ],
+   "why": "Target opponent reveals a card at random from their hand; target creature gets -X/-X, X its mana value."
+  },
+  {
+   "name": "Heroic Defiance",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "+3/+3 unless it shares a color with the most common color among all permanents (or a color tied for it)."
+  },
+  {
+   "name": "Mogg Jailer",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "Can't attack if the defending player controls an untapped creature with power 2 or less."
+  },
+  {
+   "name": "Goblin Game",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "Each player hides at least one object, then all reveal at once; each loses life equal to the number they revealed."
+  },
+  {
+   "name": "Pollen Remedy",
+   "needs": [
+    "effect:prevention-divided"
+   ],
+   "why": "Prevent the next 3 (kicked, 6) damage, divided as you choose among any number of targets."
+  },
+  {
+   "name": "Sunken Hope",
+   "needs": [
+    "decision:that-player-chooses-permanent"
+   ],
+   "why": "At each player's upkeep, that player returns a creature they control to hand — they choose, not the enchantment's controller."
+  },
+  {
+   "name": "Dominaria's Judgment",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "Until end of turn, creatures you control gain protection from each color for which you control a basic land of the matching type."
+  },
+  {
+   "name": "Amphibious Kavu",
+   "needs": [
+    "trigger:becomes-blocked-by-filtered"
+   ],
+   "why": "Once per combat, whenever it blocks or becomes blocked by one or more blue and/or black creatures."
+  },
+  {
+   "name": "Kavu Recluse",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "Target land becomes a Forest until end of turn, losing its other land types."
+  },
+  {
+   "name": "Sea Snidd",
+   "needs": [
+    "effect:set-land-type",
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "Target land becomes the basic land type of your choice until end of turn."
+  },
+  {
+   "name": "Rith's Charm",
+   "needs": [
+    "replacement:prevent-all-damage-from-chosen-source-this-turn"
+   ],
+   "why": "Third mode: prevent all damage a source of your choice would deal this turn — to everything, all turn."
+  },
+  {
+   "name": "Warped Devotion",
+   "needs": [
+    "effect:trigger-object-owner-player-ref"
+   ],
+   "why": "'That player' discards is the returned permanent's owner; the only scope reads its last controller."
+  },
+  {
+   "name": "Arctic Merfolk",
+   "needs": [
+    "new:kicker-nonmana-cost"
+   ],
+   "why": "Kicker—Return a creature you control to its owner's hand: a non-mana kicker cost the kicker's extra costs don't cover."
+  },
+  {
+   "name": "Planeswalker's Favor",
+   "needs": [
+    "effect:reveal-random-card-from-hand",
+    "amount:revealed-card-mana-value-keep-targets"
+   ],
+   "why": "Target opponent reveals a card at random from their hand; target creature gets +X/+X where X is its mana value."
+  },
+  {
+   "name": "Waterspout Elemental",
+   "needs": [
+    "effect:skip-next-turn"
+   ],
+   "why": "Kicked: return all other creatures to their owners' hands and you skip your next turn."
+  },
+  {
+   "name": "Draco",
+   "needs": [
+    "cost:self-cost-reduction-domain-times-n",
+    "effect:sacrifice-unless-pay-reduced-mana-cost"
+   ],
+   "why": "Costs {2} less per basic land type (the domain reduction takes off {1} per type), and its upkeep 'unless you pay {10}' is reduced by the same domain count."
+  },
+  {
+   "name": "Samite Elder",
+   "needs": [
+    "effect:protection-from-target-colors"
+   ],
+   "why": "Creatures you control gain protection from the colors of target permanent you control, read as it resolves."
+  },
+  {
+   "name": "Keldon Twilight",
+   "needs": [
+    "condition:controlled-since-turn-start"
+   ],
+   "why": "Sacrifices a creature you've controlled continuously since your turn began, if no creatures attacked this turn."
+  },
+  {
+   "name": "Guard Dogs",
+   "needs": [
+    "effect:prevent-combat-damage-by-target",
+    "condition:target-shares-color-with-chosen-permanent"
+   ],
+   "why": "Choose a permanent you control as it resolves; prevent the combat damage the target creature would deal if it shares a color with it."
+  },
+  {
+   "name": "Planeswalker's Mirth",
+   "needs": [
+    "effect:reveal-random-card-from-hand"
+   ],
+   "why": "Target opponent reveals a card at random from their hand; you gain life equal to its mana value."
+  },
+  {
+   "name": "Mirrorwood Treefolk",
+   "needs": [
+    "replacement:redirect-next-damage-event"
+   ],
+   "why": "The next time damage would be dealt to it this turn, that damage is dealt to any target instead — the whole next event, not a fixed amount."
+  }
+ ]
+}

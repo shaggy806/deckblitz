@@ -1851,7 +1851,9 @@ export type EffectSpec =
       readonly kind: "sacrifice";
       readonly who: PlayerScope | "target";
       readonly filter: CardFilter;
-      readonly count: number;
+      /** An amount: "each player sacrifices **X** lands" (Devastating
+       * Dreams) reads the spell's X, as it resolves. */
+      readonly count: EffectAmount;
       /** Exclude the effect's own source ("sacrifice **another** permanent" —
        * Korvold). needed-cards P6. */
       readonly exceptSource?: boolean;
@@ -5607,7 +5609,9 @@ export type EffectSpec =
        * *after* the shuffle the search itself causes (rule 701.24b — the
        * shuffle comes first, or the card wouldn't stay on top). */
       readonly destination: "hand" | "battlefield" | "library-top" | "graveyard";
-      readonly min: number;
+      /** An amount: "search your library for **X** cards" (Insidious Dreams)
+       * must find X while there are X (rule 701.23d — no quality named). */
+      readonly min: EffectAmount;
       /** An `EffectAmount` so a tutor can find "up to X" where X is a live
        * count — Harvest Season's "up to X basic land cards, where X is the
        * number of tapped creatures you control". */
@@ -9428,14 +9432,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ctx.sacrificePermanents(
             { player: target.player },
             spec.filter,
-            spec.count,
+            amountValue(spec.count, ctx),
             exceptId,
             spec.exploit === true,
             spec.andEach,
           );
         }
       } else {
-        ctx.sacrificePermanents(spec.who, spec.filter, spec.count, exceptId, spec.exploit === true, spec.andEach);
+        ctx.sacrificePermanents(spec.who, spec.filter, amountValue(spec.count, ctx), exceptId, spec.exploit === true, spec.andEach);
       }
       return;
     }
@@ -11385,7 +11389,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         searcher,
         spec.filter,
         spec.destination,
-        spec.min,
+        amountValue(spec.min, ctx),
         amountValue(spec.max, ctx),
         spec.enterTapped === true,
         spec.restDestination,
