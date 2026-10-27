@@ -476,6 +476,7 @@ import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
+import _poolMindBurst from "../pool/mind-burst.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMinorMisstep from "../pool/minor-misstep.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
@@ -681,6 +682,7 @@ import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpellBurst from "../pool/spell-burst.js";
 import _poolSpelunking from "../pool/spelunking.js";
+import _poolSphereOfReason from "../pool/sphere-of-reason.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
@@ -1338,6 +1340,7 @@ const shard: CardShard = {
     _poolMerchantOfTruth,
     _poolMetamorphose,
     _poolMidnightCovenant,
+    _poolMindBurst,
     _poolMindstatic,
     _poolMinorMisstep,
     _poolMirkwoodElk,
@@ -1543,6 +1546,7 @@ const shard: CardShard = {
     _poolSparringDummy,
     _poolSpellBurst,
     _poolSpelunking,
+    _poolSphereOfReason,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
     _poolSpitfireBastion,

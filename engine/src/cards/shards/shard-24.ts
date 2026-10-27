@@ -99,6 +99,7 @@ import _poolBurn from "../pool/burn.js";
 import _poolBurningCloak from "../pool/burning-cloak.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
+import _poolCabalPatriarch from "../pool/cabal-patriarch.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
 import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
@@ -352,10 +353,12 @@ import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
+import _poolKirtarsDesire from "../pool/kirtars-desire.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
 import _poolKronchWrangler from "../pool/kronch-wrangler.js";
+import _poolKrosanArcher from "../pool/krosan-archer.js";
 import _poolKrosanVerge from "../pool/krosan-verge.js";
 import _poolKuldothaForgemaster from "../pool/kuldotha-forgemaster.js";
 import _poolKwendePrideOfFemeref from "../pool/kwende-pride-of-femeref.js";
@@ -452,6 +455,7 @@ import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOrochiEggwatcher from "../pool/orochi-eggwatcher.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
+import _poolPainbringer from "../pool/painbringer.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
 import _poolPanicAttack from "../pool/panic-attack.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
@@ -905,6 +909,7 @@ const shard: CardShard = {
     _poolBurningCloak,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
+    _poolCabalPatriarch,
     _poolCampusGuide,
     _poolCaptainSisay,
     _poolCaptainStormCosmiumRaider,
@@ -1158,10 +1163,12 @@ const shard: CardShard = {
     _poolKillingGlare,
     _poolKingSuleiman,
     _poolKinnanBonderProdigy,
+    _poolKirtarsDesire,
     _poolKitesailCorsair,
     _poolKnightOfGlory,
     _poolKoglaTheTitanApe,
     _poolKronchWrangler,
+    _poolKrosanArcher,
     _poolKrosanVerge,
     _poolKuldothaForgemaster,
     _poolKwendePrideOfFemeref,
@@ -1258,6 +1265,7 @@ const shard: CardShard = {
     _poolOrochiEggwatcher,
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,
+    _poolPainbringer,
     _poolPairedTactician,
     _poolPanicAttack,
     _poolParcelMyr,

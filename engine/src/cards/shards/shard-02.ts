@@ -437,6 +437,7 @@ import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolMysticGenesis from "../pool/mystic-genesis.js";
+import _poolMysticVisionary from "../pool/mystic-visionary.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNaturalAffinity from "../pool/natural-affinity.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolMycosynthWellspring,
     _poolMyojinOfToweringMight,
     _poolMysticGenesis,
+    _poolMysticVisionary,
     _poolNarsetsReversal,
     _poolNaturalAffinity,
     _poolNavigatorsRuin,

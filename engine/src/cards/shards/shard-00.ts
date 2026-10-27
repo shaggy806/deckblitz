@@ -72,6 +72,7 @@ import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
+import _poolBloodcurdler from "../pool/bloodcurdler.js";
 import _poolBloodfireColossus from "../pool/bloodfire-colossus.js";
 import _poolBloodscaleProwler from "../pool/bloodscale-prowler.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
@@ -108,6 +109,7 @@ import _poolCageOfHands from "../pool/cage-of-hands.js";
 import _poolCalderaPyremaw from "../pool/caldera-pyremaw.js";
 import _poolCallTheMountainChocobo from "../pool/call-the-mountain-chocobo.js";
 import _poolCallousBloodmage from "../pool/callous-bloodmage.js";
+import _poolCantivore from "../pool/cantivore.js";
 import _poolCaparoctiSunborn from "../pool/caparocti-sunborn.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
@@ -316,6 +318,7 @@ import _poolHissingMiasma from "../pool/hissing-miasma.js";
 import _poolHivestone from "../pool/hivestone.js";
 import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
+import _poolHowlingGale from "../pool/howling-gale.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
 import _poolHunterOfEyeblights from "../pool/hunter-of-eyeblights.js";
@@ -479,6 +482,7 @@ import _poolPeaceStrider from "../pool/peace-strider.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
 import _poolPhalanxTactics from "../pool/phalanx-tactics.js";
 import _poolPhantasmagorian from "../pool/phantasmagorian.js";
+import _poolPhantomWhelp from "../pool/phantom-whelp.js";
 import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
@@ -893,6 +897,7 @@ const shard: CardShard = {
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodcrazedNeonate,
+    _poolBloodcurdler,
     _poolBloodfireColossus,
     _poolBloodscaleProwler,
     _poolBloodsporeThrinax,
@@ -929,6 +934,7 @@ const shard: CardShard = {
     _poolCalderaPyremaw,
     _poolCallTheMountainChocobo,
     _poolCallousBloodmage,
+    _poolCantivore,
     _poolCaparoctiSunborn,
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
@@ -1137,6 +1143,7 @@ const shard: CardShard = {
     _poolHivestone,
     _poolHopeCharm,
     _poolHornetHarasser,
+    _poolHowlingGale,
     _poolHowlsquadHeavy,
     _poolHuatlisFinalStrike,
     _poolHunterOfEyeblights,
@@ -1300,6 +1307,7 @@ const shard: CardShard = {
     _poolPettyTheft,
     _poolPhalanxTactics,
     _poolPhantasmagorian,
+    _poolPhantomWhelp,
     _poolPhotonMightyMarvel,
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,

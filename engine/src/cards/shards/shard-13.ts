@@ -230,6 +230,7 @@ import _poolFirjaJudgeOfValor from "../pool/firja-judge-of-valor.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlashCounter from "../pool/flash-counter.js";
+import _poolFledglingImp from "../pool/fledgling-imp.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
 import _poolFleshAllergy from "../pool/flesh-allergy.js";
 import _poolFlesh from "../pool/flesh.js";
@@ -734,6 +735,7 @@ import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
 import _poolVolcanicSpray from "../pool/volcanic-spray.js";
 import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
+import _poolVolleyOfBoulders from "../pool/volley-of-boulders.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
@@ -1026,6 +1028,7 @@ const shard: CardShard = {
     _poolFlamekinBrawler,
     _poolFlaringCinder,
     _poolFlashCounter,
+    _poolFledglingImp,
     _poolFlensingRaptor,
     _poolFleshAllergy,
     _poolFlesh,
@@ -1530,6 +1533,7 @@ const shard: CardShard = {
     _poolVoidwielder,
     _poolVolcanicSpray,
     _poolVoldarenPariah,
+    _poolVolleyOfBoulders,
     _poolVoltaicWhip,
     _poolVowToErebor,
     _poolVulshokMorningstar,

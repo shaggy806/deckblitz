@@ -53,6 +53,7 @@ import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBantSureblade from "../pool/bant-sureblade.js";
+import _poolBarbarianLunatic from "../pool/barbarian-lunatic.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
@@ -143,6 +144,7 @@ import _poolClutchOfTheUndercity from "../pool/clutch-of-the-undercity.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
+import _poolCognivore from "../pool/cognivore.js";
 import _poolComboAttack from "../pool/combo-attack.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
@@ -465,10 +467,12 @@ import _poolMurderersAxe from "../pool/murderers-axe.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
 import _poolMyPrecious from "../pool/my-precious.js";
 import _poolMysidianElder from "../pool/mysidian-elder.js";
+import _poolMysticCrusader from "../pool/mystic-crusader.js";
 import _poolMysticDenial from "../pool/mystic-denial.js";
 import _poolMysticForge from "../pool/mystic-forge.js";
 import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolMysticRepeal from "../pool/mystic-repeal.js";
+import _poolMysticZealot from "../pool/mystic-zealot.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNestedGhoul from "../pool/nested-ghoul.js";
@@ -866,6 +870,7 @@ const shard: CardShard = {
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
     _poolBantSureblade,
+    _poolBarbarianLunatic,
     _poolBarbaryApes,
     _poolBarbedBatterfist,
     _poolBarbedServitor,
@@ -956,6 +961,7 @@ const shard: CardShard = {
     _poolCoatWithVenom,
     _poolCodecrackerHound,
     _poolCoffinPurge,
+    _poolCognivore,
     _poolComboAttack,
     _poolCommanderMustard,
     _poolConclaveMentor,
@@ -1278,10 +1284,12 @@ const shard: CardShard = {
     _poolMusterTheDeparted,
     _poolMyPrecious,
     _poolMysidianElder,
+    _poolMysticCrusader,
     _poolMysticDenial,
     _poolMysticForge,
     _poolMysticGate,
     _poolMysticRepeal,
+    _poolMysticZealot,
     _poolNearheathStalker,
     _poolNessianCourser,
     _poolNestedGhoul,

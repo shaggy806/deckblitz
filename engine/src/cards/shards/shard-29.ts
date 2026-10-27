@@ -349,6 +349,7 @@ import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
+import _poolKamahlsDesire from "../pool/kamahls-desire.js";
 import _poolKamahlsSledge from "../pool/kamahls-sledge.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
@@ -671,6 +672,7 @@ import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
+import _poolTestamentOfFaith from "../pool/testament-of-faith.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
 import _poolTheArchimandrite from "../pool/the-archimandrite.js";
@@ -1155,6 +1157,7 @@ const shard: CardShard = {
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
+    _poolKamahlsDesire,
     _poolKamahlsSledge,
     _poolKamizObscuraOculus,
     _poolKazanduNectarpot,
@@ -1477,6 +1480,7 @@ const shard: CardShard = {
     _poolTemperedInSolitude,
     _poolTempleAcolyte,
     _poolTendrilOfTheMycotyrant,
+    _poolTestamentOfFaith,
     _poolThalakosSeer,
     _poolThaliasLieutenant,
     _poolTheArchimandrite,

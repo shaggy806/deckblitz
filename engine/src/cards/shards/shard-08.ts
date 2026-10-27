@@ -460,6 +460,7 @@ import _poolMossbornHydra from "../pool/mossborn-hydra.js";
 import _poolMosswortBridge from "../pool/mosswort-bridge.js";
 import _poolMountainBandit from "../pool/mountain-bandit.js";
 import _poolMuzzioVisionaryArchitect from "../pool/muzzio-visionary-architect.js";
+import _poolMysticEnforcer from "../pool/mystic-enforcer.js";
 import _poolMysticRetrieval from "../pool/mystic-retrieval.js";
 import _poolMythicProportions from "../pool/mythic-proportions.js";
 import _poolNahirisMachinations from "../pool/nahiris-machinations.js";
@@ -610,6 +611,7 @@ import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShiftingSky from "../pool/shifting-sky.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
+import _poolShowerOfCoals from "../pool/shower-of-coals.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
@@ -1288,6 +1290,7 @@ const shard: CardShard = {
     _poolMosswortBridge,
     _poolMountainBandit,
     _poolMuzzioVisionaryArchitect,
+    _poolMysticEnforcer,
     _poolMysticRetrieval,
     _poolMythicProportions,
     _poolNahirisMachinations,
@@ -1438,6 +1441,7 @@ const shard: CardShard = {
     _poolShiftingSky,
     _poolShoalKraken,
     _poolShoreKeeper,
+    _poolShowerOfCoals,
     _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,

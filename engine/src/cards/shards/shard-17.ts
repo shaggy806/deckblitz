@@ -493,6 +493,7 @@ import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
+import _poolPatrolHound from "../pool/patrol-hound.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPegasusRefuge from "../pool/pegasus-refuge.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
@@ -628,6 +629,7 @@ import _poolSparkJolt from "../pool/spark-jolt.js";
 import _poolSpecterOfTheFens from "../pool/specter-of-the-fens.js";
 import _poolSpectralFlight from "../pool/spectral-flight.js";
 import _poolSpelleaterWolverine from "../pool/spelleater-wolverine.js";
+import _poolSphereOfLaw from "../pool/sphere-of-law.js";
 import _poolSpiderMobile from "../pool/spider-mobile.js";
 import _poolSpiderRexDaringDino from "../pool/spider-rex-daring-dino.js";
 import _poolSpiderSpawning from "../pool/spider-spawning.js";
@@ -643,6 +645,7 @@ import _poolSteelOverseer from "../pool/steel-overseer.js";
 import _poolSteepleCreeper from "../pool/steeple-creeper.js";
 import _poolSteppeLynx from "../pool/steppe-lynx.js";
 import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
+import _poolStillLife from "../pool/still-life.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolStormCaller from "../pool/storm-caller.js";
@@ -1307,6 +1310,7 @@ const shard: CardShard = {
     _poolPalianoTheHighCity,
     _poolPassagewaySeer,
     _poolPathOfTheEnigma,
+    _poolPatrolHound,
     _poolPatronOfTheVein,
     _poolPegasusRefuge,
     _poolPeregrineDrake,
@@ -1442,6 +1446,7 @@ const shard: CardShard = {
     _poolSpecterOfTheFens,
     _poolSpectralFlight,
     _poolSpelleaterWolverine,
+    _poolSphereOfLaw,
     _poolSpiderMobile,
     _poolSpiderRexDaringDino,
     _poolSpiderSpawning,
@@ -1457,6 +1462,7 @@ const shard: CardShard = {
     _poolSteepleCreeper,
     _poolSteppeLynx,
     _poolStewardOfValeron,
+    _poolStillLife,
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
     _poolStormCaller,

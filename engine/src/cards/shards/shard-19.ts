@@ -114,6 +114,7 @@ import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolCerebralVortex from "../pool/cerebral-vortex.js";
 import _poolChainOfPlasma from "../pool/chain-of-plasma.js";
+import _poolChainflinger from "../pool/chainflinger.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
@@ -399,6 +400,7 @@ import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJundHackblade from "../pool/jund-hackblade.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
+import _poolJunkGolem from "../pool/junk-golem.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
@@ -477,6 +479,7 @@ import _poolMidnightAngelArmor from "../pool/midnight-angel-armor.js";
 import _poolMindbladeRender from "../pool/mindblade-render.js";
 import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMinionOfTeveshSzat from "../pool/minion-of-tevesh-szat.js";
+import _poolMinotaurExplorer from "../pool/minotaur-explorer.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
@@ -958,6 +961,7 @@ const shard: CardShard = {
     _poolCephalidInkmage,
     _poolCerebralVortex,
     _poolChainOfPlasma,
+    _poolChainflinger,
     _poolChallengerTroll,
     _poolChanceMetElves,
     _poolChandraAblaze,
@@ -1243,6 +1247,7 @@ const shard: CardShard = {
     _poolJoustThrough,
     _poolJundHackblade,
     _poolJungleTroll,
+    _poolJunkGolem,
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
     _poolKarnArgentDefender,
@@ -1321,6 +1326,7 @@ const shard: CardShard = {
     _poolMindbladeRender,
     _poolMineshaftSpider,
     _poolMinionOfTeveshSzat,
+    _poolMinotaurExplorer,
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMirozel,

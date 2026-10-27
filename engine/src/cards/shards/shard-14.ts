@@ -136,6 +136,7 @@ import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
 import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
 import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
 import _poolCrabUmbra from "../pool/crab-umbra.js";
+import _poolCrashingCentaur from "../pool/crashing-centaur.js";
 import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
 import _poolCreepingMold from "../pool/creeping-mold.js";
@@ -946,6 +947,7 @@ const shard: CardShard = {
     _poolCouncilOfEchoes,
     _poolCouriersBriefcase,
     _poolCrabUmbra,
+    _poolCrashingCentaur,
     _poolCrawlingInfestation,
     _poolCreativeTechnique,
     _poolCreepingMold,

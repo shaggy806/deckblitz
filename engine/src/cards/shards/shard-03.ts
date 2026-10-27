@@ -219,6 +219,7 @@ import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolFlowstoneSlide from "../pool/flowstone-slide.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFracturedLoyalty from "../pool/fractured-loyalty.js";
+import _poolFrightcrawler from "../pool/frightcrawler.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFrostRaptor from "../pool/frost-raptor.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
@@ -574,6 +575,7 @@ import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
+import _poolSpringingTiger from "../pool/springing-tiger.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStandTogether from "../pool/stand-together.js";
@@ -950,6 +952,7 @@ const shard: CardShard = {
     _poolFlowstoneSlide,
     _poolForsakenMonument,
     _poolFracturedLoyalty,
+    _poolFrightcrawler,
     _poolFrogmyrEnforcer,
     _poolFrostRaptor,
     _poolFurybladeVampire,
@@ -1305,6 +1308,7 @@ const shard: CardShard = {
     _poolSpiritOfTheHunt,
     _poolSpitefulSquad,
     _poolSplendidReclamation,
+    _poolSpringingTiger,
     _poolStaffOfTheAges,
     _poolStalkingTiger,
     _poolStandTogether,

@@ -26,6 +26,7 @@ import _poolAlertHeedbonder from "../pool/alert-heedbonder.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
+import _poolAmugaba from "../pool/amugaba.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
 import _poolAnaBattlemage from "../pool/ana-battlemage.js";
 import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
@@ -769,6 +770,7 @@ import _poolZhugeJinWuStrategist from "../pool/zhuge-jin-wu-strategist.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
+import _poolZombieCannibal from "../pool/zombie-cannibal.js";
 import _tokensAngelTokenBlack33Flying from "../tokens/angel-token-black-3-3-flying.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
@@ -814,6 +816,7 @@ const shard: CardShard = {
     _poolAltarsReap,
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
+    _poolAmugaba,
     _poolAmuletOfVigor,
     _poolAnaBattlemage,
     _poolAngelOfRenewal,
@@ -1557,6 +1560,7 @@ const shard: CardShard = {
     _poolZhurTaaSwine,
     _poolZiatorasProvingGround,
     _poolZodiacRabbit,
+    _poolZombieCannibal,
   ],
   tokens: [
     _tokensAngelTokenBlack33Flying,

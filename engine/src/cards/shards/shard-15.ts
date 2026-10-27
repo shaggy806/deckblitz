@@ -327,6 +327,7 @@ import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIdentityThief from "../pool/identity-thief.js";
 import _poolIdleThoughts from "../pool/idle-thoughts.js";
+import _poolImmobilizingInk from "../pool/immobilizing-ink.js";
 import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
@@ -1101,6 +1102,7 @@ const shard: CardShard = {
     _poolIcemanAndFirestar,
     _poolIdentityThief,
     _poolIdleThoughts,
+    _poolImmobilizingInk,
     _poolImpedeMomentum,
     _poolImpossibleInferno,
     _poolImprovisedClub,

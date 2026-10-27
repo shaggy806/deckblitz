@@ -119,6 +119,7 @@ import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChillToTheBone from "../pool/chill-to-the-bone.js";
 import _poolChimericStaff from "../pool/chimeric-staff.js";
+import _poolChlorophant from "../pool/chlorophant.js";
 import _poolChokingTethers from "../pool/choking-tethers.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
@@ -710,6 +711,7 @@ import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadGladiator from "../pool/undead-gladiator.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
 import _poolUnholyStrength from "../pool/unholy-strength.js";
+import _poolUnifyingTheory from "../pool/unifying-theory.js";
 import _poolUnitedFront from "../pool/united-front.js";
 import _poolUnstoppablePlan from "../pool/unstoppable-plan.js";
 import _poolUnworthyDead from "../pool/unworthy-dead.js";
@@ -907,6 +909,7 @@ const shard: CardShard = {
     _poolChaseInspiration,
     _poolChillToTheBone,
     _poolChimericStaff,
+    _poolChlorophant,
     _poolChokingTethers,
     _poolChromaticLantern,
     _poolCircleOfFlame,
@@ -1498,6 +1501,7 @@ const shard: CardShard = {
     _poolUndeadGladiator,
     _poolUndeadMinotaur,
     _poolUnholyStrength,
+    _poolUnifyingTheory,
     _poolUnitedFront,
     _poolUnstoppablePlan,
     _poolUnworthyDead,

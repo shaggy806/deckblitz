@@ -431,6 +431,7 @@ import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
+import _poolMetamorphicWurm from "../pool/metamorphic-wurm.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
@@ -452,6 +453,7 @@ import _poolMournwhelk from "../pool/mournwhelk.js";
 import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMudbuttonClanger from "../pool/mudbutton-clanger.js";
+import _poolMudhole from "../pool/mudhole.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticFamiliar from "../pool/mystic-familiar.js";
 import _poolMysticMight from "../pool/mystic-might.js";
@@ -645,6 +647,7 @@ import _poolSparkspitter from "../pool/sparkspitter.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpelltitheEnforcer from "../pool/spelltithe-enforcer.js";
+import _poolSphereOfDuty from "../pool/sphere-of-duty.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
@@ -779,6 +782,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWax from "../pool/wax.js";
+import _poolWaywardAngel from "../pool/wayward-angel.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
@@ -1247,6 +1251,7 @@ const shard: CardShard = {
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
     _poolMesaUnicorn,
+    _poolMetamorphicWurm,
     _poolMetathranSoldier,
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
@@ -1268,6 +1273,7 @@ const shard: CardShard = {
     _poolMouthOfTheStorm,
     _poolMoxOpal,
     _poolMudbuttonClanger,
+    _poolMudhole,
     _poolMurmuringVolume,
     _poolMysticFamiliar,
     _poolMysticMight,
@@ -1461,6 +1467,7 @@ const shard: CardShard = {
     _poolSpawningBed,
     _poolSpecimenFreighter,
     _poolSpelltitheEnforcer,
+    _poolSphereOfDuty,
     _poolSpiderwigBoggart,
     _poolSpikeSoldier,
     _poolSpiritShackle,
@@ -1595,6 +1602,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWax,
+    _poolWaywardAngel,
     _poolWebWarriors,
     _poolWeirdingWood,
     _poolWhack,

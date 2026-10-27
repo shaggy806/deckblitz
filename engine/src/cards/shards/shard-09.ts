@@ -212,6 +212,7 @@ import _poolExuberantFirestoker from "../pool/exuberant-firestoker.js";
 import _poolEyeblightsEnding from "../pool/eyeblights-ending.js";
 import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFabledHero from "../pool/fabled-hero.js";
+import _poolFaceOfFear from "../pool/face-of-fear.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
 import _poolFaerieSwarm from "../pool/faerie-swarm.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolEyeblightsEnding,
     _poolEyetwitch,
     _poolFabledHero,
+    _poolFaceOfFear,
     _poolFaerieInvaders,
     _poolFaerieMastermind,
     _poolFaerieSwarm,

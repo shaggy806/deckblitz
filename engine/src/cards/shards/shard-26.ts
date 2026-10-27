@@ -61,6 +61,7 @@ import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
 import _poolAvenBrigadier from "../pool/aven-brigadier.js";
 import _poolAvenWarhawk from "../pool/aven-warhawk.js";
+import _poolAvenWindreader from "../pool/aven-windreader.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAwakening from "../pool/awakening.js";
 import _poolAysenCrusader from "../pool/aysen-crusader.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolAvariceAmulet,
     _poolAvenBrigadier,
     _poolAvenWarhawk,
+    _poolAvenWindreader,
     _poolAwakenTheInferno,
     _poolAwakening,
     _poolAysenCrusader,
