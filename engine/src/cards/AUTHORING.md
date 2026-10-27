@@ -2073,7 +2073,7 @@ enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, sameNameAsTarget, ofChosenType, targets, greatestAmongItsController }`,
+nameUnlike, sameNameAsTarget, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
 the greatest power among creatures **that player** controls" — a maximum per
 controller, read live of each permanent against its own controller's others
@@ -2115,6 +2115,15 @@ sameNameAsTarget: 0 }`, Homing Lightning `damage-all`, Deputy of Detention an
 `exile-all` with `controlledBy: "you"` and `controlledByTarget: 0` ("that player
 controls"). The namesakes aren't targeted (hexproof doesn't save them); a
 face-down target has no name and goes alone.
+`sharesColorWithTarget: n` is radiance's "target X **and each other** X **that
+shares a color with it**" (rule 105.2; Ravnica: City of Guilds' ability word),
+the same way: the target itself, or one sharing any of its colors as the
+effect applies — an effect's filter only, one `-all` effect for the line.
+Leave No Trace is `destroy-all` of `{ type: "enchantment",
+sharesColorWithTarget: 0 }`, Brightflame `damage-all` then `gain-life` of
+`{ damageDealtThisWay: true }`, Rally the Righteous `untap-all` then
+`modify-pt-all` over the same filter ("those creatures"). A colorless target
+goes alone; the others aren't targeted.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this

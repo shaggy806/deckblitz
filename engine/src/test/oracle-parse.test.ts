@@ -146,6 +146,35 @@ describe("costs and triggers", () => {
     expect(ruin.effect).toEqual({ kind: "destroy-all", filter: { type: "artifact", sameNameAsTarget: 0 } });
   });
 
+  it("reads radiance's \"target X and each other X that shares a color with it\" as one -all effect", () => {
+    const trace = parseFace({
+      name: "Leave No Trace",
+      type_line: "Instant",
+      oracle_text: "Radiance — Destroy target enchantment and each other enchantment that shares a color with it.",
+    });
+    expect(trace.complete).toBe(true);
+    expect(trace.targets).toEqual(["enchantment"]);
+    expect(trace.effect).toEqual({ kind: "destroy-all", filter: { type: "enchantment", sharesColorWithTarget: 0 } });
+    const beam = parseFace({
+      name: "Cleansing Beam",
+      type_line: "Instant",
+      oracle_text: "Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.",
+    });
+    expect(beam.effect).toEqual({ kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWithTarget: 0 } });
+    const siren = parseFace({
+      name: "Wojek Siren",
+      type_line: "Instant",
+      oracle_text: "Radiance — Target creature and each other creature that shares a color with it get +1/+1 until end of turn.",
+    });
+    expect(siren.effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sharesColorWithTarget: 0 },
+      power: 1,
+      toughness: 1,
+      duration: "end-of-turn",
+    });
+  });
+
   it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
     const jasmine = parseFace({
       name: "Scent of Jasmine",

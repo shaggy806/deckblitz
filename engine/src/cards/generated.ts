@@ -2682,6 +2682,7 @@ import _poolBrightcapBadger from "./pool/brightcap-badger.js";
 import _poolBrightclimbPathway from "./pool/brightclimb-pathway.js";
 import _poolBrightfieldGlider from "./pool/brightfield-glider.js";
 import _poolBrightfieldMustang from "./pool/brightfield-mustang.js";
+import _poolBrightflame from "./pool/brightflame.js";
 import _poolBrightglassGearhulk from "./pool/brightglass-gearhulk.js";
 import _poolBrighthearthBanneret from "./pool/brighthearth-banneret.js";
 import _poolBrightling from "./pool/brightling.js";
@@ -11969,6 +11970,7 @@ import _poolLeatherbackBaloth from "./pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "./pool/leatherhead-iron-gator.js";
 import _poolLeaveChance from "./pool/leave-chance.js";
 import _poolLeaveInTheDust from "./pool/leave-in-the-dust.js";
+import _poolLeaveNoTrace from "./pool/leave-no-trace.js";
 import _poolLeave from "./pool/leave.js";
 import _poolLeavesFromTheVine from "./pool/leaves-from-the-vine.js";
 import _poolLectureHall from "./pool/lecture-hall.js";
@@ -16296,6 +16298,7 @@ import _poolRallyTheForces from "./pool/rally-the-forces.js";
 import _poolRallyTheMonastery from "./pool/rally-the-monastery.js";
 import _poolRallyThePeasants from "./pool/rally-the-peasants.js";
 import _poolRallyTheRanks from "./pool/rally-the-ranks.js";
+import _poolRallyTheRighteous from "./pool/rally-the-righteous.js";
 import _poolRallyTheTroops from "./pool/rally-the-troops.js";
 import _poolRallyToBattle from "./pool/rally-to-battle.js";
 import _poolRally from "./pool/rally.js";
@@ -28022,6 +28025,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrightclimbPathway,
   _poolBrightfieldGlider,
   _poolBrightfieldMustang,
+  _poolBrightflame,
   _poolBrightglassGearhulk,
   _poolBrighthearthBanneret,
   _poolBrightling,
@@ -37309,6 +37313,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeatherheadIronGator,
   _poolLeaveChance,
   _poolLeaveInTheDust,
+  _poolLeaveNoTrace,
   _poolLeave,
   _poolLeavesFromTheVine,
   _poolLectureHall,
@@ -41636,6 +41641,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRallyTheMonastery,
   _poolRallyThePeasants,
   _poolRallyTheRanks,
+  _poolRallyTheRighteous,
   _poolRallyTheTroops,
   _poolRallyToBattle,
   _poolRally,
@@ -53375,6 +53381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brightclimb-pathway": _poolBrightclimbPathway,
   "pool/brightfield-glider": _poolBrightfieldGlider,
   "pool/brightfield-mustang": _poolBrightfieldMustang,
+  "pool/brightflame": _poolBrightflame,
   "pool/brightglass-gearhulk": _poolBrightglassGearhulk,
   "pool/brighthearth-banneret": _poolBrighthearthBanneret,
   "pool/brightling": _poolBrightling,
@@ -62662,6 +62669,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leatherhead-iron-gator": _poolLeatherheadIronGator,
   "pool/leave-chance": _poolLeaveChance,
   "pool/leave-in-the-dust": _poolLeaveInTheDust,
+  "pool/leave-no-trace": _poolLeaveNoTrace,
   "pool/leave": _poolLeave,
   "pool/leaves-from-the-vine": _poolLeavesFromTheVine,
   "pool/lecture-hall": _poolLectureHall,
@@ -66989,6 +66997,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rally-the-monastery": _poolRallyTheMonastery,
   "pool/rally-the-peasants": _poolRallyThePeasants,
   "pool/rally-the-ranks": _poolRallyTheRanks,
+  "pool/rally-the-righteous": _poolRallyTheRighteous,
   "pool/rally-the-troops": _poolRallyTheTroops,
   "pool/rally-to-battle": _poolRallyToBattle,
   "pool/rally": _poolRally,

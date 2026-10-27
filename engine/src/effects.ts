@@ -8628,6 +8628,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
       "sameNameAsTarget" in value ||
+      "sharesColorWithTarget" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
@@ -8725,6 +8726,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       walked =
         target?.kind === "object"
           ? { ...rest, sameNameAs: { object: target.object, name: ctx.nameForMatching(target.object) } }
+          : walked;
+    }
+    // Radiance's "and each other … that shares a color with it": the target
+    // and its colors now (rule 105.2), as for the name above.
+    if (typeof walked["sharesColorWithTarget"] === "number") {
+      const { sharesColorWithTarget: slot, ...rest } = walked;
+      const target = ctx.targets[slot as number];
+      walked =
+        target?.kind === "object"
+          ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
           : walked;
     }
     if (!("sharesCardTypeWith" in walked)) return walked;

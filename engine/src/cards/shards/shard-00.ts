@@ -86,6 +86,7 @@ import _poolBreakThroughTheLine from "../pool/break-through-the-line.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
 import _poolBreezekeeper from "../pool/breezekeeper.js";
 import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
+import _poolBrightflame from "../pool/brightflame.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
 import _poolBrigidDounsMind from "../pool/brigid-douns-mind.js";
 import _poolBrilliantRestoration from "../pool/brilliant-restoration.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolBreechesEagerPillager,
     _poolBreezekeeper,
     _poolBrightfieldGlider,
+    _poolBrightflame,
     _poolBrigidClachansHeart,
     _poolBrigidDounsMind,
     _poolBrilliantRestoration,
