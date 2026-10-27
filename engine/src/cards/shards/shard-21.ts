@@ -227,6 +227,7 @@ import _poolEtherWell from "../pool/ether-well.js";
 import _poolExoticCurse from "../pool/exotic-curse.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
+import _poolFableOfTheMirrorBreaker from "../pool/fable-of-the-mirror-breaker.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFamishedForagers from "../pool/famished-foragers.js";
 import _poolFarewell from "../pool/farewell.js";
@@ -1025,6 +1026,7 @@ const shard: CardShard = {
     _poolExoticCurse,
     _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
+    _poolFableOfTheMirrorBreaker,
     _poolFalseSummoning,
     _poolFamishedForagers,
     _poolFarewell,

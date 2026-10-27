@@ -67,6 +67,7 @@ import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlessedReincarnation from "../pool/blessed-reincarnation.js";
 import _poolBlindblast from "../pool/blindblast.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
+import _poolBlinkmothUrn from "../pool/blinkmoth-urn.js";
 import _poolBloodswornSteward from "../pool/bloodsworn-steward.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolBlessedReincarnation,
     _poolBlindblast,
     _poolBlindingDrone,
+    _poolBlinkmothUrn,
     _poolBloodswornSteward,
     _poolBloomTender,
     _poolBloomingBlast,

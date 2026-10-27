@@ -146,6 +146,7 @@ import _poolCuriousHerd from "../pool/curious-herd.js";
 import _poolCurseOfChaos from "../pool/curse-of-chaos.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolCutRibbons from "../pool/cut-ribbons.js";
+import _poolDarettiScrapSavant from "../pool/daretti-scrap-savant.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolCurseOfChaos,
     _poolCutADeal,
     _poolCutRibbons,
+    _poolDarettiScrapSavant,
     _poolDaringDiscovery,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,

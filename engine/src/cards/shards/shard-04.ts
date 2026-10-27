@@ -611,6 +611,7 @@ import _poolSlimebind from "../pool/slimebind.js";
 import _poolSlitherBlade from "../pool/slither-blade.js";
 import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSnowDay from "../pool/snow-day.js";
+import _poolSokkaBoldBoomeranger from "../pool/sokka-bold-boomeranger.js";
 import _poolSolitaryHunter from "../pool/solitary-hunter.js";
 import _poolSomberwaldVigilante from "../pool/somberwald-vigilante.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolSlitherBlade,
     _poolSnowCoveredWastes,
     _poolSnowDay,
+    _poolSokkaBoldBoomeranger,
     _poolSolitaryHunter,
     _poolSomberwaldVigilante,
     _poolSongMadRuins,

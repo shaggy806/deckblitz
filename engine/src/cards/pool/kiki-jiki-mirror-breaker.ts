@@ -17,7 +17,7 @@ export default defineCard({
   activated: [
     {
       cost: { mana: null, tap: true },
-      targets: ["creature-you-control"],
+      targets: [{ kind: "permanent", whose: "you", filter: { type: "creature", notSupertype: "legendary" } }],
       effect: {
         kind: "create-token-copy",
         of: 0,

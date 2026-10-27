@@ -273,6 +273,7 @@ import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
 import _poolGoblinBrigand from "../pool/goblin-brigand.js";
 import _poolGoblinCohort from "../pool/goblin-cohort.js";
 import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
+import _poolGoblinRecruiter from "../pool/goblin-recruiter.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
 import _poolGodheadOfAwe from "../pool/godhead-of-awe.js";
 import _poolGoldRush from "../pool/gold-rush.js";
@@ -532,6 +533,7 @@ import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolRecoup from "../pool/recoup.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
+import _poolReflectionOfKikiJiki from "../pool/reflection-of-kiki-jiki.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
 import _poolReiverDemon from "../pool/reiver-demon.js";
@@ -1053,6 +1055,7 @@ const shard: CardShard = {
     _poolGoblinBrigand,
     _poolGoblinCohort,
     _poolGoblinFireleaper,
+    _poolGoblinRecruiter,
     _poolGoblinSledder,
     _poolGodheadOfAwe,
     _poolGoldRush,
@@ -1312,6 +1315,7 @@ const shard: CardShard = {
     _poolReasonableDoubt,
     _poolRecoup,
     _poolReduceToMemory,
+    _poolReflectionOfKikiJiki,
     _poolRegenerate,
     _poolRegicide,
     _poolReiverDemon,

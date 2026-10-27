@@ -2189,6 +2189,7 @@ import _poolBlinkOfAnEye from "./pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "./pool/blinking-spirit.js";
 import _poolBlinkmothInfusion from "./pool/blinkmoth-infusion.js";
 import _poolBlinkmothNexus from "./pool/blinkmoth-nexus.js";
+import _poolBlinkmothUrn from "./pool/blinkmoth-urn.js";
 import _poolBlinkmothWell from "./pool/blinkmoth-well.js";
 import _poolBlisterBeetle from "./pool/blister-beetle.js";
 import _poolBlistercoilWeird from "./pool/blistercoil-weird.js";
@@ -3316,6 +3317,7 @@ import _poolCatharsShield from "./pool/cathars-shield.js";
 import _poolCatharsis from "./pool/catharsis.js";
 import _poolCatharticAdept from "./pool/cathartic-adept.js";
 import _poolCatharticParting from "./pool/cathartic-parting.js";
+import _poolCatharticPyre from "./pool/cathartic-pyre.js";
 import _poolCatharticReunion from "./pool/cathartic-reunion.js";
 import _poolCathedralAcolyte from "./pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "./pool/cathedral-of-war.js";
@@ -4812,6 +4814,7 @@ import _poolDaredevilFearlessFighter from "./pool/daredevil-fearless-fighter.js"
 import _poolDaredevilManWithoutFear from "./pool/daredevil-man-without-fear.js";
 import _poolDaredevilsBillyClub from "./pool/daredevils-billy-club.js";
 import _poolDarettiRocketeerEngineer from "./pool/daretti-rocketeer-engineer.js";
+import _poolDarettiScrapSavant from "./pool/daretti-scrap-savant.js";
 import _poolDargoTheShipwrecker from "./pool/dargo-the-shipwrecker.js";
 import _poolDarigaazsAttendant from "./pool/darigaazs-attendant.js";
 import _poolDarigaazsCaldera from "./pool/darigaazs-caldera.js";
@@ -6388,6 +6391,7 @@ import _poolElectroduplicate from "./pool/electroduplicate.js";
 import _poolElectrolyze from "./pool/electrolyze.js";
 import _poolElectropotence from "./pool/electropotence.js";
 import _poolElectrosBolt from "./pool/electros-bolt.js";
+import _poolElectrosiphon from "./pool/electrosiphon.js";
 import _poolElectrostaticBolt from "./pool/electrostatic-bolt.js";
 import _poolElectrostaticField from "./pool/electrostatic-field.js";
 import _poolElectrostaticInfantry from "./pool/electrostatic-infantry.js";
@@ -7078,6 +7082,7 @@ import _poolEzuriRenegadeLeader from "./pool/ezuri-renegade-leader.js";
 import _poolEzurisArchers from "./pool/ezuris-archers.js";
 import _poolEzurisBrigade from "./pool/ezuris-brigade.js";
 import _poolEzzarootChanneler from "./pool/ezzaroot-channeler.js";
+import _poolFableOfTheMirrorBreaker from "./pool/fable-of-the-mirror-breaker.js";
 import _poolFableOfWolfAndOwl from "./pool/fable-of-wolf-and-owl.js";
 import _poolFabledHero from "./pool/fabled-hero.js";
 import _poolFabledPassage from "./pool/fabled-passage.js";
@@ -8989,6 +8994,7 @@ import _poolGoblinRacketeer from "./pool/goblin-racketeer.js";
 import _poolGoblinRaider from "./pool/goblin-raider.js";
 import _poolGoblinRally from "./pool/goblin-rally.js";
 import _poolGoblinRazerunners from "./pool/goblin-razerunners.js";
+import _poolGoblinRecruiter from "./pool/goblin-recruiter.js";
 import _poolGoblinReplica from "./pool/goblin-replica.js";
 import _poolGoblinRimerunner from "./pool/goblin-rimerunner.js";
 import _poolGoblinRingleader from "./pool/goblin-ringleader.js";
@@ -17158,6 +17164,7 @@ import _poolReefRoads from "./pool/reef-roads.js";
 import _poolReefWorm from "./pool/reef-worm.js";
 import _poolRefereeSquad from "./pool/referee-squad.js";
 import _poolReflectingPool from "./pool/reflecting-pool.js";
+import _poolReflectionOfKikiJiki from "./pool/reflection-of-kiki-jiki.js";
 import _poolReflectionsOfLittjara from "./pool/reflections-of-littjara.js";
 import _poolReflectiveGolem from "./pool/reflective-golem.js";
 import _poolReflexSliver from "./pool/reflex-sliver.js";
@@ -20006,6 +20013,7 @@ import _poolSojournersCompanion from "./pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "./pool/sokenzan-bruiser.js";
 import _poolSokenzanCrucibleOfDefiance from "./pool/sokenzan-crucible-of-defiance.js";
 import _poolSokenzanSpellblade from "./pool/sokenzan-spellblade.js";
+import _poolSokkaBoldBoomeranger from "./pool/sokka-bold-boomeranger.js";
 import _poolSokkaLateralStrategist from "./pool/sokka-lateral-strategist.js";
 import _poolSokkaTenaciousTactician from "./pool/sokka-tenacious-tactician.js";
 import _poolSokkaWolfCovesProtector from "./pool/sokka-wolf-coves-protector.js";
@@ -28321,6 +28329,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlinkingSpirit,
   _poolBlinkmothInfusion,
   _poolBlinkmothNexus,
+  _poolBlinkmothUrn,
   _poolBlinkmothWell,
   _poolBlisterBeetle,
   _poolBlistercoilWeird,
@@ -29448,6 +29457,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCatharsis,
   _poolCatharticAdept,
   _poolCatharticParting,
+  _poolCatharticPyre,
   _poolCatharticReunion,
   _poolCathedralAcolyte,
   _poolCathedralOfWar,
@@ -30944,6 +30954,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDaredevilManWithoutFear,
   _poolDaredevilsBillyClub,
   _poolDarettiRocketeerEngineer,
+  _poolDarettiScrapSavant,
   _poolDargoTheShipwrecker,
   _poolDarigaazsAttendant,
   _poolDarigaazsCaldera,
@@ -32520,6 +32531,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElectrolyze,
   _poolElectropotence,
   _poolElectrosBolt,
+  _poolElectrosiphon,
   _poolElectrostaticBolt,
   _poolElectrostaticField,
   _poolElectrostaticInfantry,
@@ -33210,6 +33222,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEzurisArchers,
   _poolEzurisBrigade,
   _poolEzzarootChanneler,
+  _poolFableOfTheMirrorBreaker,
   _poolFableOfWolfAndOwl,
   _poolFabledHero,
   _poolFabledPassage,
@@ -35121,6 +35134,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinRaider,
   _poolGoblinRally,
   _poolGoblinRazerunners,
+  _poolGoblinRecruiter,
   _poolGoblinReplica,
   _poolGoblinRimerunner,
   _poolGoblinRingleader,
@@ -43290,6 +43304,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReefWorm,
   _poolRefereeSquad,
   _poolReflectingPool,
+  _poolReflectionOfKikiJiki,
   _poolReflectionsOfLittjara,
   _poolReflectiveGolem,
   _poolReflexSliver,
@@ -46138,6 +46153,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSokenzanBruiser,
   _poolSokenzanCrucibleOfDefiance,
   _poolSokenzanSpellblade,
+  _poolSokkaBoldBoomeranger,
   _poolSokkaLateralStrategist,
   _poolSokkaTenaciousTactician,
   _poolSokkaWolfCovesProtector,
@@ -54466,6 +54482,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blinking-spirit": _poolBlinkingSpirit,
   "pool/blinkmoth-infusion": _poolBlinkmothInfusion,
   "pool/blinkmoth-nexus": _poolBlinkmothNexus,
+  "pool/blinkmoth-urn": _poolBlinkmothUrn,
   "pool/blinkmoth-well": _poolBlinkmothWell,
   "pool/blister-beetle": _poolBlisterBeetle,
   "pool/blistercoil-weird": _poolBlistercoilWeird,
@@ -55593,6 +55610,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/catharsis": _poolCatharsis,
   "pool/cathartic-adept": _poolCatharticAdept,
   "pool/cathartic-parting": _poolCatharticParting,
+  "pool/cathartic-pyre": _poolCatharticPyre,
   "pool/cathartic-reunion": _poolCatharticReunion,
   "pool/cathedral-acolyte": _poolCathedralAcolyte,
   "pool/cathedral-of-war": _poolCathedralOfWar,
@@ -57089,6 +57107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/daredevil-man-without-fear": _poolDaredevilManWithoutFear,
   "pool/daredevils-billy-club": _poolDaredevilsBillyClub,
   "pool/daretti-rocketeer-engineer": _poolDarettiRocketeerEngineer,
+  "pool/daretti-scrap-savant": _poolDarettiScrapSavant,
   "pool/dargo-the-shipwrecker": _poolDargoTheShipwrecker,
   "pool/darigaazs-attendant": _poolDarigaazsAttendant,
   "pool/darigaazs-caldera": _poolDarigaazsCaldera,
@@ -58665,6 +58684,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/electrolyze": _poolElectrolyze,
   "pool/electropotence": _poolElectropotence,
   "pool/electros-bolt": _poolElectrosBolt,
+  "pool/electrosiphon": _poolElectrosiphon,
   "pool/electrostatic-bolt": _poolElectrostaticBolt,
   "pool/electrostatic-field": _poolElectrostaticField,
   "pool/electrostatic-infantry": _poolElectrostaticInfantry,
@@ -59355,6 +59375,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ezuris-archers": _poolEzurisArchers,
   "pool/ezuris-brigade": _poolEzurisBrigade,
   "pool/ezzaroot-channeler": _poolEzzarootChanneler,
+  "pool/fable-of-the-mirror-breaker": _poolFableOfTheMirrorBreaker,
   "pool/fable-of-wolf-and-owl": _poolFableOfWolfAndOwl,
   "pool/fabled-hero": _poolFabledHero,
   "pool/fabled-passage": _poolFabledPassage,
@@ -61266,6 +61287,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-raider": _poolGoblinRaider,
   "pool/goblin-rally": _poolGoblinRally,
   "pool/goblin-razerunners": _poolGoblinRazerunners,
+  "pool/goblin-recruiter": _poolGoblinRecruiter,
   "pool/goblin-replica": _poolGoblinReplica,
   "pool/goblin-rimerunner": _poolGoblinRimerunner,
   "pool/goblin-ringleader": _poolGoblinRingleader,
@@ -69435,6 +69457,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reef-worm": _poolReefWorm,
   "pool/referee-squad": _poolRefereeSquad,
   "pool/reflecting-pool": _poolReflectingPool,
+  "pool/reflection-of-kiki-jiki": _poolReflectionOfKikiJiki,
   "pool/reflections-of-littjara": _poolReflectionsOfLittjara,
   "pool/reflective-golem": _poolReflectiveGolem,
   "pool/reflex-sliver": _poolReflexSliver,
@@ -72283,6 +72306,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sokenzan-bruiser": _poolSokenzanBruiser,
   "pool/sokenzan-crucible-of-defiance": _poolSokenzanCrucibleOfDefiance,
   "pool/sokenzan-spellblade": _poolSokenzanSpellblade,
+  "pool/sokka-bold-boomeranger": _poolSokkaBoldBoomeranger,
   "pool/sokka-lateral-strategist": _poolSokkaLateralStrategist,
   "pool/sokka-tenacious-tactician": _poolSokkaTenaciousTactician,
   "pool/sokka-wolf-coves-protector": _poolSokkaWolfCovesProtector,

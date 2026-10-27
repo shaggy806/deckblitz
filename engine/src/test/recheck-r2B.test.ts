@@ -120,6 +120,18 @@ describe("R2 group B rechecks", () => {
     expect(keywords(game, copies[0]).has("haste")).toBe(true);
   });
 
+  it("Kiki-Jiki, Mirror Breaker can't copy a legendary creature", () => {
+    const { game } = table();
+    const kiki = spawn(game, "Kiki-Jiki, Mirror Breaker");
+    const legend = spawn(game, "Sokka, Bold Boomeranger");
+    const bears = spawn(game, "Grizzly Bears");
+    const refuse = (target: string) =>
+      game.canDispatch({ type: "activate-ability", player: A, source: kiki, abilityIndex: 0, targets: [ref(target as never)] });
+    expect(refuse(kiki)).not.toBeNull();
+    expect(refuse(legend)).not.toBeNull();
+    expect(refuse(bears)).toBeNull();
+  });
+
   it("Electrosiphon gives energy equal to the countered spell's mana value, X included", () => {
     const { game } = table();
     lands(game, "Mountain", 6);

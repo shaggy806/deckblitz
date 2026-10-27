@@ -974,6 +974,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Rampant Growth": "b7c47024-5e08-4b17-b41a-7647f8b814b9",
   "Razorgrass Field": "https://cards.scryfall.io/art_crop/back/5/7/57065dca-f90e-4184-bbc4-95d726a4160b.jpg",
   "Reanimate": "368b6903-5fc4-43e7-bd44-46b8107c8bb4",
+  "Reflection of Kiki-Jiki": "https://cards.scryfall.io/art_crop/back/2/4/24c0d87b-0049-4beb-b9cb-6f813b7aa7dc.jpg",
   "Refraction Elemental": "https://cards.scryfall.io/art_crop/back/7/7/776b8951-cf15-47ff-b36f-f47706eddb6f.jpg",
   "Regrowth": "d771fc5d-b9a1-4637-8241-3f54616b64af",
   "Remnant of the Rising Star": "https://cards.scryfall.io/art_crop/back/a/2/a22b5f27-f9e7-49e1-8e96-dc5d8e7fbe27.jpg",
