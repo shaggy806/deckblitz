@@ -713,6 +713,7 @@ import _poolVedalkenInfuser from "../pool/vedalken-infuser.js";
 import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
+import _poolVerduranEmissary from "../pool/verduran-emissary.js";
 import _poolVernalSovereign from "../pool/vernal-sovereign.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
@@ -1488,6 +1489,7 @@ const shard: CardShard = {
     _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
     _poolVensersJournal,
+    _poolVerduranEmissary,
     _poolVernalSovereign,
     _poolVesperGhoul,
     _poolVesselOfEphemera,

@@ -23098,6 +23098,7 @@ import _poolVerdantRebirth from "./pool/verdant-rebirth.js";
 import _poolVerdantSunsAvatar from "./pool/verdant-suns-avatar.js";
 import _poolVerdantTouch from "./pool/verdant-touch.js";
 import _poolVerdigris from "./pool/verdigris.js";
+import _poolVerduranEmissary from "./pool/verduran-emissary.js";
 import _poolVerduranEnchantress from "./pool/verduran-enchantress.js";
 import _poolVerdurousGearhulk from "./pool/verdurous-gearhulk.js";
 import _poolVergeRangers from "./pool/verge-rangers.js";
@@ -48435,6 +48436,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVerdantSunsAvatar,
   _poolVerdantTouch,
   _poolVerdigris,
+  _poolVerduranEmissary,
   _poolVerduranEnchantress,
   _poolVerdurousGearhulk,
   _poolVergeRangers,
@@ -73785,6 +73787,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/verdant-suns-avatar": _poolVerdantSunsAvatar,
   "pool/verdant-touch": _poolVerdantTouch,
   "pool/verdigris": _poolVerdigris,
+  "pool/verduran-emissary": _poolVerduranEmissary,
   "pool/verduran-enchantress": _poolVerduranEnchantress,
   "pool/verdurous-gearhulk": _poolVerdurousGearhulk,
   "pool/verge-rangers": _poolVergeRangers,
