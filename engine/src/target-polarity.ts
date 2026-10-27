@@ -805,6 +805,16 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // The enchanted permanent's controller pays — Corrupted Roots' "whenever
       // enchanted land becomes tapped, its controller loses 2 life".
       if (ability.effect?.kind === "lose-life" && ability.effect.who === "trigger-controller") harm = true;
+      // The enchanted creature changes hands — Fractured Loyalty's "whenever
+      // enchanted creature becomes the target of a spell or ability, that
+      // spell or ability's controller gains control of that creature": its
+      // controller is the one who stands to lose it.
+      if (
+        ability.effect?.kind === "gain-control" &&
+        (ability.effect.target === "attached" || ability.effect.target === "trigger-object")
+      ) {
+        harm = true;
+      }
       const lean = attachedTriggerLean(ability.effect);
       if (lean === "help") help = true;
       else if (lean === "harm") harm = true;

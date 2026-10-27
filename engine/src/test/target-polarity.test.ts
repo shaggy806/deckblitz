@@ -178,6 +178,10 @@ describe("slot polarity", () => {
     expect(cast("Traitor's Roar")).toEqual(["harm"]);
   });
 
+  it("reads an Aura that hands its creature to whoever targets it as harm", () => {
+    expect(cast("Fractured Loyalty")).toEqual(["harm"]);
+  });
+
   it("classifies nearly every targeted slot in the pool", () => {
     // A ratchet, not a target: 98.6% when this was written (1,771 slots).
     // What's left is genuinely the board's call — a transform, an animated
