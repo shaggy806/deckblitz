@@ -673,6 +673,7 @@ import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
+import _poolThornscapeBattlemage from "../pool/thornscape-battlemage.js";
 import _poolThragtusk from "../pool/thragtusk.js";
 import _poolThranDynamo from "../pool/thran-dynamo.js";
 import _poolThrasherBrute from "../pool/thrasher-brute.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThirstForIdentity,
+    _poolThornscapeBattlemage,
     _poolThragtusk,
     _poolThranDynamo,
     _poolThrasherBrute,

@@ -636,6 +636,7 @@ import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
+import _poolSunscapeBattlemage from "../pool/sunscape-battlemage.js";
 import _poolSunscour from "../pool/sunscour.js";
 import _poolSunsetPyramid from "../pool/sunset-pyramid.js";
 import _poolSunshowerDruid from "../pool/sunshower-druid.js";
@@ -1442,6 +1443,7 @@ const shard: CardShard = {
     _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,
+    _poolSunscapeBattlemage,
     _poolSunscour,
     _poolSunsetPyramid,
     _poolSunshowerDruid,

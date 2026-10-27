@@ -20027,6 +20027,7 @@ import _poolStrangledCemetery from "./pool/strangled-cemetery.js";
 import _poolStranglerootGeist from "./pool/strangleroot-geist.js";
 import _poolStranglingSoot from "./pool/strangling-soot.js";
 import _poolStranglingSpores from "./pool/strangling-spores.js";
+import _poolStratadon from "./pool/stratadon.js";
 import _poolStrategicIntervention from "./pool/strategic-intervention.js";
 import _poolStrategicPlanning from "./pool/strategic-planning.js";
 import _poolStratosoarer from "./pool/stratosoarer.js";
@@ -20268,6 +20269,7 @@ import _poolSunriseSeeker from "./pool/sunrise-seeker.js";
 import _poolSunriseSovereign from "./pool/sunrise-sovereign.js";
 import _poolSunsBounty from "./pool/suns-bounty.js";
 import _poolSunscapeApprentice from "./pool/sunscape-apprentice.js";
+import _poolSunscapeBattlemage from "./pool/sunscape-battlemage.js";
 import _poolSunscapeFamiliar from "./pool/sunscape-familiar.js";
 import _poolSunscapeMaster from "./pool/sunscape-master.js";
 import _poolSunscorchRegent from "./pool/sunscorch-regent.js";
@@ -21266,6 +21268,7 @@ import _poolThornhideWolves from "./pool/thornhide-wolves.js";
 import _poolThornling from "./pool/thornling.js";
 import _poolThornplateIntimidator from "./pool/thornplate-intimidator.js";
 import _poolThornscapeApprentice from "./pool/thornscape-apprentice.js";
+import _poolThornscapeBattlemage from "./pool/thornscape-battlemage.js";
 import _poolThornspireVerge from "./pool/thornspire-verge.js";
 import _poolThorntoothWitch from "./pool/thorntooth-witch.js";
 import _poolThornwatchScarecrow from "./pool/thornwatch-scarecrow.js";
@@ -21441,6 +21444,7 @@ import _poolThunderousSnapper from "./pool/thunderous-snapper.js";
 import _poolThunderousVelocipede from "./pool/thunderous-velocipede.js";
 import _poolThunderousWrath from "./pool/thunderous-wrath.js";
 import _poolThunderscapeApprentice from "./pool/thunderscape-apprentice.js";
+import _poolThunderscapeBattlemage from "./pool/thunderscape-battlemage.js";
 import _poolThunderscapeMaster from "./pool/thunderscape-master.js";
 import _poolThundersteelColossus from "./pool/thundersteel-colossus.js";
 import _poolThundertrapTrainer from "./pool/thundertrap-trainer.js";
@@ -44955,6 +44959,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStranglerootGeist,
   _poolStranglingSoot,
   _poolStranglingSpores,
+  _poolStratadon,
   _poolStrategicIntervention,
   _poolStrategicPlanning,
   _poolStratosoarer,
@@ -45196,6 +45201,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSunriseSovereign,
   _poolSunsBounty,
   _poolSunscapeApprentice,
+  _poolSunscapeBattlemage,
   _poolSunscapeFamiliar,
   _poolSunscapeMaster,
   _poolSunscorchRegent,
@@ -46194,6 +46200,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThornling,
   _poolThornplateIntimidator,
   _poolThornscapeApprentice,
+  _poolThornscapeBattlemage,
   _poolThornspireVerge,
   _poolThorntoothWitch,
   _poolThornwatchScarecrow,
@@ -46369,6 +46376,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThunderousVelocipede,
   _poolThunderousWrath,
   _poolThunderscapeApprentice,
+  _poolThunderscapeBattlemage,
   _poolThunderscapeMaster,
   _poolThundersteelColossus,
   _poolThundertrapTrainer,
@@ -69896,6 +69904,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/strangleroot-geist": _poolStranglerootGeist,
   "pool/strangling-soot": _poolStranglingSoot,
   "pool/strangling-spores": _poolStranglingSpores,
+  "pool/stratadon": _poolStratadon,
   "pool/strategic-intervention": _poolStrategicIntervention,
   "pool/strategic-planning": _poolStrategicPlanning,
   "pool/stratosoarer": _poolStratosoarer,
@@ -70137,6 +70146,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sunrise-sovereign": _poolSunriseSovereign,
   "pool/suns-bounty": _poolSunsBounty,
   "pool/sunscape-apprentice": _poolSunscapeApprentice,
+  "pool/sunscape-battlemage": _poolSunscapeBattlemage,
   "pool/sunscape-familiar": _poolSunscapeFamiliar,
   "pool/sunscape-master": _poolSunscapeMaster,
   "pool/sunscorch-regent": _poolSunscorchRegent,
@@ -71135,6 +71145,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thornling": _poolThornling,
   "pool/thornplate-intimidator": _poolThornplateIntimidator,
   "pool/thornscape-apprentice": _poolThornscapeApprentice,
+  "pool/thornscape-battlemage": _poolThornscapeBattlemage,
   "pool/thornspire-verge": _poolThornspireVerge,
   "pool/thorntooth-witch": _poolThorntoothWitch,
   "pool/thornwatch-scarecrow": _poolThornwatchScarecrow,
@@ -71310,6 +71321,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thunderous-velocipede": _poolThunderousVelocipede,
   "pool/thunderous-wrath": _poolThunderousWrath,
   "pool/thunderscape-apprentice": _poolThunderscapeApprentice,
+  "pool/thunderscape-battlemage": _poolThunderscapeBattlemage,
   "pool/thunderscape-master": _poolThunderscapeMaster,
   "pool/thundersteel-colossus": _poolThundersteelColossus,
   "pool/thundertrap-trainer": _poolThundertrapTrainer,

@@ -615,6 +615,7 @@ import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolStormCaller from "../pool/storm-caller.js";
+import _poolStratadon from "../pool/stratadon.js";
 import _poolStrengthInNumbers from "../pool/strength-in-numbers.js";
 import _poolStromkirkOccultist from "../pool/stromkirk-occultist.js";
 import _poolStudyBreak from "../pool/study-break.js";
@@ -1393,6 +1394,7 @@ const shard: CardShard = {
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
     _poolStormCaller,
+    _poolStratadon,
     _poolStrengthInNumbers,
     _poolStromkirkOccultist,
     _poolStudyBreak,

@@ -680,6 +680,7 @@ import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderOfUnity from "../pool/thunder-of-unity.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
 import _poolThunderingSpineback from "../pool/thundering-spineback.js";
+import _poolThunderscapeBattlemage from "../pool/thunderscape-battlemage.js";
 import _poolTibaltRakishInstigator from "../pool/tibalt-rakish-instigator.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
@@ -1458,6 +1459,7 @@ const shard: CardShard = {
     _poolThunderOfUnity,
     _poolThunderingBroodwagon,
     _poolThunderingSpineback,
+    _poolThunderscapeBattlemage,
     _poolTibaltRakishInstigator,
     _poolTidalKraken,
     _poolTigraFelineFury,
