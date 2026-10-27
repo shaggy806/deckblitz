@@ -66,5 +66,6 @@ export const DEFENSIVE: Champion = {
     crackbackParanoia: 1,
     crackbackMargin: 6,
     crackbackGrowth: 0,
+    crackbackKillShot: 0,
   },
 };

@@ -239,6 +239,9 @@ export function isLethal(
  * opponent's damage is weighted by `paranoia`, except the one whose turn is
  * next, which always counts in full: at a four-player table the others have
  * each other to attack as well. Commander damage is summed per commander.
+ * A later opponent whose swing alone would kill `me` (life within `margin`
+ * of it, or 21 from one commander) counts at least `killShot`: a player who
+ * can take an elimination mostly does, whoever else is at the table.
  *
  * `lost` are blockers to count as gone — ones a cost is about to tap or
  * sacrifice — or `"all"`, for the crackback with nothing left home.
@@ -249,6 +252,7 @@ export function crackback(
   me: PlayerId,
   paranoia: number,
   lost?: ReadonlySet<ObjectId> | "all",
+  killShot: { readonly weight: number; readonly margin: number } = { weight: 0, margin: 0 },
 ): DamageThrough {
   const blockers =
     lost === "all"
@@ -260,11 +264,15 @@ export function crackback(
 
   let damage = 0;
   const commanderDamage = new Map<ObjectId, number>();
+  const shared = Math.max(0, Math.min(1, paranoia));
+  const killWeight = Math.max(0, Math.min(1, killShot.weight));
   opponents.forEach((opponent, i) => {
-    const weight = i === 0 ? 1 : Math.max(0, Math.min(1, paranoia));
-    if (weight === 0) return;
+    if (i > 0 && shared === 0 && killWeight === 0) return;
     const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
     const through = damageThrough(attackers, blockers);
+    const weight =
+      i === 0 ? 1 : killWeight > shared && isLethal(state, me, through, -killShot.margin) ? killWeight : shared;
+    if (weight === 0) return;
     damage += through.damage * weight;
     for (const [commander, amount] of through.commanderDamage) {
       commanderDamage.set(commander, (commanderDamage.get(commander) ?? 0) + amount * weight);

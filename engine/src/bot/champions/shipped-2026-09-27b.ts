@@ -65,5 +65,6 @@ export const SHIPPED_2026_09_27B: Champion = {
     crackbackParanoia: 0.5,
     crackbackMargin: 2,
     crackbackGrowth: 0,
+    crackbackKillShot: 0,
   },
 };

@@ -18,7 +18,8 @@
  * - `opponent` and `otherOpponents` are how per-player scores are *aggregated*
  *   across a table, above this layer. Fitting happens on two-player positions,
  *   where there is exactly one opponent and the aggregation is a free scale.
- * - `crackbackParanoia`, `crackbackMargin` and `crackbackGrowth` aren't
+ * - `crackbackParanoia`, `crackbackMargin`, `crackbackGrowth` and
+ *   `crackbackKillShot` aren't
  *   evaluation terms at all — they're knobs on the attack builder's combat
  *   arithmetic (`combat-math.ts`).
  *

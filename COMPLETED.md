@@ -1024,6 +1024,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **A later opponent who could kill the bot alone counts in full** (2026-10-26, the
+  `crackbackKillShot` weight, 1): the crackback check weighed every opponent but the next at
+  `crackbackParanoia`'s half, so 166 full swings in 198 four-player games passed it into a board
+  one later opponent could finish alone, and 17% died before the bot's next turn (2026-10-05).
+  Now a later opponent whose swing alone is lethal (within `crackbackMargin`) counts at least
+  `crackbackKillShot`. A training scenario and `eval-bot-combat.test.ts` pin it; gate 202/202,
+  `bot:diff` against main one disagreement in 12,967 decisions (a Dragon token kept home at 9
+  life). Not benched with `bot:ab`.
 - **A decision overruns its second, mostly fixed** (2026-10-18): in 16 four-player self-play
   games at the live 1 s, decisions past it went from 381 of 37,136 to 29 of 36,466 and the
   slowest from 3.05 s to 1.58 s. The clock now starts when the decision is asked (`onClock`), not

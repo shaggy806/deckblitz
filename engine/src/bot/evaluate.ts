@@ -210,6 +210,13 @@ export interface EvalWeights {
    * through, 11% with three quarters or more — and those that died took a
    * median 25 against 10 projected (four-player self-play, 2026-10-05). */
   readonly crackbackGrowth: number;
+  /** The least weight a later opponent's swing gets when it alone would
+   * kill us (keeping `crackbackMargin`): a player who can take an elimination
+   * mostly does, so `crackbackParanoia`'s share undercounts exactly those.
+   * Measured before it: 166 full swings into such a board in 198 four-player
+   * games passed the paranoia-weighted check, and 17% died before the bot's
+   * next turn (2026-10-05). 0 leaves it to `crackbackParanoia`. */
+  readonly crackbackKillShot: number;
 }
 
 export const DEFAULT_WEIGHTS: EvalWeights = {
@@ -419,6 +426,7 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   crackbackParanoia: 0.5,
   crackbackMargin: 2,
   crackbackGrowth: 0.5,
+  crackbackKillShot: 1,
 };
 
 /**

@@ -5,6 +5,7 @@ import { canBlock, damageThrough, isLethal } from "../bot/combat-math.js";
 import { simulateAction } from "../bot/simulate.js";
 import { combinations, decisionCandidates } from "../bot/decisions.js";
 import type { CombatCreature } from "../bot/combat-math.js";
+import { DEFAULT_WEIGHTS } from "../bot/evaluate.js";
 import { createDefaultRegistry } from "../cards.js";
 import type { Keyword } from "../cards/define.js";
 import type { ControllerView, PlayerController } from "../controller.js";
@@ -167,6 +168,31 @@ describe("EvalBotController combat", () => {
     // At 5 life the Baloth swinging back into an empty board is lethal (with
     // the 2-life margin); kept home, the bear blocks it.
     expect(bot().declareAttackers(viewOf(board(5), A))).toHaveLength(0);
+  });
+
+  it("counts a later opponent who could kill it alone in full", () => {
+    // Carol's turn comes after Bob's, so her swing counts at
+    // `crackbackParanoia` (half) — 2 of her Baloth's 4, 3 grown by
+    // `crackbackGrowth`, short of Alice's 6 life less the 2-life margin. But
+    // 4 alone is lethal within the margin, and a player who can take an
+    // elimination mostly does (`crackbackKillShot`): the bear stays home to
+    // block it.
+    const C = asPlayerId("carol");
+    const board = (life: number) => {
+      const game = Game.create({ seed: 3, registry, decks: [deckFor(A), deckFor(B), deckFor(C)] });
+      game.advanceUntil((s) => s.priority.holder !== null);
+      game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+      game.debugSpawn("Rumbling Baloth", C, "battlefield", { summoningSick: false, tapped: true });
+      game.state.players[A].life = life;
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      return game;
+    };
+    const withKillShot = (weight: number) =>
+      new EvalBotController(A, registry, { weights: { ...DEFAULT_WEIGHTS, crackbackKillShot: weight } });
+    expect(withKillShot(1).declareAttackers(viewOf(board(40), A))).toHaveLength(1);
+    expect(withKillShot(1).declareAttackers(viewOf(board(6), A))).toHaveLength(0);
+    // Without it, Carol's half share reads as safe and the bear swings.
+    expect(withKillShot(0).declareAttackers(viewOf(board(6), A))).toHaveLength(1);
   });
 
   it("races when the crackback is lethal whatever it holds back", () => {

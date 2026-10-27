@@ -110,6 +110,7 @@ describe("features", () => {
       "crackbackParanoia",
       "crackbackMargin",
       "crackbackGrowth",
+      "crackbackKillShot",
     ];
     expect([...FEATURE_KEYS].sort()).toEqual(
       Object.keys(DEFAULT_WEIGHTS)

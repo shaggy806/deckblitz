@@ -2292,7 +2292,10 @@ export class EvalBotController extends HeuristicBotController {
    * damage through scaled up by `crackbackGrowth`? With `lost`, as though
    * those blockers (or all of them) weren't home. */
   private crackbackLethal(state: GameState, grown = true, lost?: ReadonlySet<ObjectId> | "all"): boolean {
-    const through = crackback(state, this.cards, this.playerId, this.weights.crackbackParanoia, lost);
+    const through = crackback(state, this.cards, this.playerId, this.weights.crackbackParanoia, lost, {
+      weight: this.weights.crackbackKillShot,
+      margin: this.weights.crackbackMargin,
+    });
     const scale = grown ? 1 + this.weights.crackbackGrowth : 1;
     const scaled =
       scale === 1

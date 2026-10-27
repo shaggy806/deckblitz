@@ -787,6 +787,27 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "does not swing into a later opponent's lethal crackback",
+    rule: "A player who could kill us alone mostly will, whoever else is at the table.",
+    run(weights, registry, makeBot) {
+      // Carol plays after Bob, so `crackbackParanoia` counts her swing at
+      // half — short of lethal. But her 4/4 alone kills Alice at 6 (with
+      // the margin), and of the full swings that check passed in four-player
+      // self-play, 17% died before their next turn (2026-10-05). Kept home,
+      // the bear blocks it (`crackbackKillShot`).
+      const game = table(registry, [A, B, C], A);
+      game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+      game.debugSpawn("Rumbling Baloth", C, "battlefield", { summoningSick: false, tapped: true });
+      game.state.players[A].life = 6;
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.length === 0,
+        detail: `attacked with ${attackers.length} at 6 life into carol's 4/4`,
+      };
+    },
+  },
+  {
     name: "chump-blocks only against lethal",
     rule: "Throwing a creature under an attacker is right facing death and wrong otherwise.",
     run(weights, registry, makeBot) {

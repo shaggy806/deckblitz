@@ -68,5 +68,6 @@ export const RAMP: Champion = {
     crackbackParanoia: 0.75,
     crackbackMargin: 4,
     crackbackGrowth: 0,
+    crackbackKillShot: 0,
   },
 };
