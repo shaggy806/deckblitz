@@ -211,6 +211,7 @@ import _poolFarsightAdept from "../pool/farsight-adept.js";
 import _poolFast from "../pool/fast.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFathomFeeder from "../pool/fathom-feeder.js";
+import _poolFathomSeer from "../pool/fathom-seer.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
 import _poolFellBeastOfMordor from "../pool/fell-beast-of-mordor.js";
 import _poolFeralAppetite from "../pool/feral-appetite.js";
@@ -969,6 +970,7 @@ const shard: CardShard = {
     _poolFast,
     _poolFatefulEnd,
     _poolFathomFeeder,
+    _poolFathomSeer,
     _poolFelixFiveBoots,
     _poolFellBeastOfMordor,
     _poolFeralAppetite,

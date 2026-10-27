@@ -612,6 +612,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const vehicle = face("Crew 3", "Artifact — Vehicle");
     expect(vehicle.activated[0].cost.tapOthers).toEqual({ count: 0, totalPower: 3, filter: { type: "creature" } });
     expect(face("Morph {2}{G}").morph).toEqual({ keyword: "morph", cost: "{2}{G}" });
+    // A morph cost that isn't mana: `also`, with the printed cost to show.
+    expect(face("Morph—Sacrifice two Mountains.").morph).toEqual({
+      keyword: "morph",
+      cost: "",
+      also: { sacrifice: { filter: { subtype: "Mountain" }, count: 2 } },
+      text: "Sacrifice two Mountains",
+    });
+    expect(face("Morph—Pay 5 life.").morph?.also).toEqual({ payLife: 5 });
+    expect(face("Morph—Discard a Zombie card.").morph?.also).toEqual({ discard: { count: 1, filter: { subtype: "Zombie" } } });
+    expect(face("Morph—Return a Bird you control to its owner's hand.").morph?.also).toEqual({
+      returnToHand: { count: 1, filter: { subtype: "Bird" } },
+    });
+    expect(face("Morph—Reveal a blue card in your hand.").morph).toBeUndefined();
     expect(face("Convoke", "Instant", {}).convoke).toBe(true);
     expect(face("Improvise", "Sorcery", {}).improvise).toBe(true);
     expect(face("Undaunted", "Sorcery", {}).selfCostReduction?.reduceGeneric).toEqual({ opponents: true });

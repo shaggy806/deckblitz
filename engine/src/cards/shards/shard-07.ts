@@ -507,6 +507,7 @@ import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
 import _poolPusKami from "../pool/pus-kami.js";
+import _poolPutridRaptor from "../pool/putrid-raptor.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
@@ -1327,6 +1328,7 @@ const shard: CardShard = {
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,
     _poolPusKami,
+    _poolPutridRaptor,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
     _poolQuestForAncientSecrets,

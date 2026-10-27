@@ -472,7 +472,11 @@
   "effect:must-block-this-turn",
   "effect:unless-any-player-pays",
   "effect:any-player-may-activate",
-  "cost:any-player-may-activate"
+  "cost:any-player-may-activate",
+  "cost:morph-pay-life",
+  "cost:morph-sacrifice",
+  "cost:morph-discard-card",
+  "cost:morph-return-permanent"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

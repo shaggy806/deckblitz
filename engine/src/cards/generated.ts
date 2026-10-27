@@ -7055,6 +7055,7 @@ import _poolFathomFleetCaptain from "./pool/fathom-fleet-captain.js";
 import _poolFathomFleetCutthroat from "./pool/fathom-fleet-cutthroat.js";
 import _poolFathomFleetFirebrand from "./pool/fathom-fleet-firebrand.js";
 import _poolFathomFleetSwordjack from "./pool/fathom-fleet-swordjack.js";
+import _poolFathomSeer from "./pool/fathom-seer.js";
 import _poolFaultLine from "./pool/fault-line.js";
 import _poolFaultRiders from "./pool/fault-riders.js";
 import _poolFaultgrinder from "./pool/faultgrinder.js";
@@ -8121,6 +8122,7 @@ import _poolGatewatchBeacon from "./pool/gatewatch-beacon.js";
 import _poolGatewayPlaza from "./pool/gateway-plaza.js";
 import _poolGatewayShade from "./pool/gateway-shade.js";
 import _poolGatewaySneak from "./pool/gateway-sneak.js";
+import _poolGathanRaiders from "./pool/gathan-raiders.js";
 import _poolGatherCourage from "./pool/gather-courage.js";
 import _poolGatherThePack from "./pool/gather-the-pack.js";
 import _poolGatherTheTownsfolk from "./pool/gather-the-townsfolk.js";
@@ -15996,6 +15998,7 @@ import _poolPutridGoblin from "./pool/putrid-goblin.js";
 import _poolPutridImp from "./pool/putrid-imp.js";
 import _poolPutridLeech from "./pool/putrid-leech.js";
 import _poolPutridPals from "./pool/putrid-pals.js";
+import _poolPutridRaptor from "./pool/putrid-raptor.js";
 import _poolPutridWarrior from "./pool/putrid-warrior.js";
 import _poolPygmyAllosaurus from "./pool/pygmy-allosaurus.js";
 import _poolPygmyKavu from "./pool/pygmy-kavu.js";
@@ -16407,6 +16410,7 @@ import _poolRavagingRiftwurm from "./pool/ravaging-riftwurm.js";
 import _poolRavenClanWarAxe from "./pool/raven-clan-war-axe.js";
 import _poolRavenEagle from "./pool/raven-eagle.js";
 import _poolRavenFamiliar from "./pool/raven-familiar.js";
+import _poolRavenGuildInitiate from "./pool/raven-guild-initiate.js";
 import _poolRavenGuildMaster from "./pool/raven-guild-master.js";
 import _poolRavenOfFellOmens from "./pool/raven-of-fell-omens.js";
 import _poolRavenWings from "./pool/raven-wings.js";
@@ -19010,6 +19014,7 @@ import _poolSkirkOutrider from "./pool/skirk-outrider.js";
 import _poolSkirkProspector from "./pool/skirk-prospector.js";
 import _poolSkirkRidgeExhumer from "./pool/skirk-ridge-exhumer.js";
 import _poolSkirkShaman from "./pool/skirk-shaman.js";
+import _poolSkirkVolcanist from "./pool/skirk-volcanist.js";
 import _poolSkirmishRhino from "./pool/skirmish-rhino.js";
 import _poolSkirsdagCultist from "./pool/skirsdag-cultist.js";
 import _poolSkirsdagFlayer from "./pool/skirsdag-flayer.js";
@@ -24660,6 +24665,7 @@ import _poolZofShade from "./pool/zof-shade.js";
 import _poolZogTriceratonCastaway from "./pool/zog-triceraton-castaway.js";
 import _poolZombieApocalypse from "./pool/zombie-apocalypse.js";
 import _poolZombieBrute from "./pool/zombie-brute.js";
+import _poolZombieCutthroat from "./pool/zombie-cutthroat.js";
 import _poolZombieGoliath from "./pool/zombie-goliath.js";
 import _poolZombieMaster from "./pool/zombie-master.js";
 import _poolZombieMob from "./pool/zombie-mob.js";
@@ -32393,6 +32399,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFathomFleetCutthroat,
   _poolFathomFleetFirebrand,
   _poolFathomFleetSwordjack,
+  _poolFathomSeer,
   _poolFaultLine,
   _poolFaultRiders,
   _poolFaultgrinder,
@@ -33459,6 +33466,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGatewayPlaza,
   _poolGatewayShade,
   _poolGatewaySneak,
+  _poolGathanRaiders,
   _poolGatherCourage,
   _poolGatherThePack,
   _poolGatherTheTownsfolk,
@@ -41334,6 +41342,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPutridImp,
   _poolPutridLeech,
   _poolPutridPals,
+  _poolPutridRaptor,
   _poolPutridWarrior,
   _poolPygmyAllosaurus,
   _poolPygmyKavu,
@@ -41745,6 +41754,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRavenClanWarAxe,
   _poolRavenEagle,
   _poolRavenFamiliar,
+  _poolRavenGuildInitiate,
   _poolRavenGuildMaster,
   _poolRavenOfFellOmens,
   _poolRavenWings,
@@ -44348,6 +44358,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkirkProspector,
   _poolSkirkRidgeExhumer,
   _poolSkirkShaman,
+  _poolSkirkVolcanist,
   _poolSkirmishRhino,
   _poolSkirsdagCultist,
   _poolSkirsdagFlayer,
@@ -49998,6 +50009,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZogTriceratonCastaway,
   _poolZombieApocalypse,
   _poolZombieBrute,
+  _poolZombieCutthroat,
   _poolZombieGoliath,
   _poolZombieMaster,
   _poolZombieMob,
@@ -57744,6 +57756,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fathom-fleet-cutthroat": _poolFathomFleetCutthroat,
   "pool/fathom-fleet-firebrand": _poolFathomFleetFirebrand,
   "pool/fathom-fleet-swordjack": _poolFathomFleetSwordjack,
+  "pool/fathom-seer": _poolFathomSeer,
   "pool/fault-line": _poolFaultLine,
   "pool/fault-riders": _poolFaultRiders,
   "pool/faultgrinder": _poolFaultgrinder,
@@ -58810,6 +58823,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gateway-plaza": _poolGatewayPlaza,
   "pool/gateway-shade": _poolGatewayShade,
   "pool/gateway-sneak": _poolGatewaySneak,
+  "pool/gathan-raiders": _poolGathanRaiders,
   "pool/gather-courage": _poolGatherCourage,
   "pool/gather-the-pack": _poolGatherThePack,
   "pool/gather-the-townsfolk": _poolGatherTheTownsfolk,
@@ -66685,6 +66699,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/putrid-imp": _poolPutridImp,
   "pool/putrid-leech": _poolPutridLeech,
   "pool/putrid-pals": _poolPutridPals,
+  "pool/putrid-raptor": _poolPutridRaptor,
   "pool/putrid-warrior": _poolPutridWarrior,
   "pool/pygmy-allosaurus": _poolPygmyAllosaurus,
   "pool/pygmy-kavu": _poolPygmyKavu,
@@ -67096,6 +67111,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/raven-clan-war-axe": _poolRavenClanWarAxe,
   "pool/raven-eagle": _poolRavenEagle,
   "pool/raven-familiar": _poolRavenFamiliar,
+  "pool/raven-guild-initiate": _poolRavenGuildInitiate,
   "pool/raven-guild-master": _poolRavenGuildMaster,
   "pool/raven-of-fell-omens": _poolRavenOfFellOmens,
   "pool/raven-wings": _poolRavenWings,
@@ -69699,6 +69715,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skirk-prospector": _poolSkirkProspector,
   "pool/skirk-ridge-exhumer": _poolSkirkRidgeExhumer,
   "pool/skirk-shaman": _poolSkirkShaman,
+  "pool/skirk-volcanist": _poolSkirkVolcanist,
   "pool/skirmish-rhino": _poolSkirmishRhino,
   "pool/skirsdag-cultist": _poolSkirsdagCultist,
   "pool/skirsdag-flayer": _poolSkirsdagFlayer,
@@ -75349,6 +75366,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zog-triceraton-castaway": _poolZogTriceratonCastaway,
   "pool/zombie-apocalypse": _poolZombieApocalypse,
   "pool/zombie-brute": _poolZombieBrute,
+  "pool/zombie-cutthroat": _poolZombieCutthroat,
   "pool/zombie-goliath": _poolZombieGoliath,
   "pool/zombie-master": _poolZombieMaster,
   "pool/zombie-mob": _poolZombieMob,

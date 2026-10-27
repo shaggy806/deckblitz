@@ -2500,7 +2500,7 @@ export class Game {
         out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.manaCost ?? "" });
       }
       if (card.morph !== null && this.whyCannotTurnFaceUp(player, id, true) === null) {
-        out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.morph.cost, morph: card.morph.keyword });
+        out.push({ kind: "turn-face-up", permanent: id, cardName: card.name, cost: card.morph.text ?? card.morph.cost, morph: card.morph.keyword });
       }
     }
     // Unlocking a Room's locked door (rule 709.5e) — a special action too,
@@ -15609,13 +15609,15 @@ export class Game {
     player: PlayerId,
     source: ObjectId,
     cost: NonNullable<AbilityCost["returnToHand"]>,
-    ability: ObjectId,
+    /** The ability object paying it — absent for a morph cost, which has
+     * none (and never returns the permanent being turned face up). */
+    ability?: ObjectId,
   ): void {
     const filter: CardFilter = { ...cost.filter, controlledBy: "you" };
-    const eligible = this.battlefieldMatching(player, filter);
+    const eligible = this.battlefieldMatching(player, filter).filter((id) => ability !== undefined || id !== source);
     if (permanentCount(this.state, eligible) <= cost.count) {
       for (const id of eligible) {
-        this.recordReturnedAttacking(ability, id);
+        if (ability !== undefined) this.recordReturnedAttacking(ability, id);
         const n = this.state.objects[id]?.stackCount ?? 1;
         for (let i = 0; i < n; i += 1) this.returnToHandByEffect({ kind: "object", object: id });
       }
@@ -15630,10 +15632,11 @@ export class Game {
       cost.count,
       { kind: "return-to-hand", target: 0 },
       cost.count === 1 ? "Choose one to return to its owner's hand" : `Choose ${cost.count} to return to their owner's hand`,
+      ability === undefined,
     );
     const awaiting = this.state.awaiting;
     if (awaiting?.kind === "choose-permanents" && awaiting.player === player) {
-      this.state.awaiting = { ...awaiting, priorityTo: player, costOf: ability };
+      this.state.awaiting = { ...awaiting, priorityTo: player, ...(ability !== undefined ? { costOf: ability } : {}) };
     }
   }
 
@@ -31310,7 +31313,35 @@ export class Game {
       if (!card.types.includes("creature")) return "that card isn't a creature card";
       return "that card has no mana cost to pay";
     }
-    if (this.payMana(player, parseManaCost(cost)) === null) return `${player} cannot pay ${cost}`;
+    const plan = this.payMana(player, parseManaCost(cost));
+    if (plan === null) return `${player} cannot pay ${cost}`;
+    const also = morph ? card.morph?.also : undefined;
+    if (also !== undefined) {
+      // One part that asks at a time, as an activated ability's cost.
+      const asks = [also.sacrifice, also.discard, also.returnToHand].filter((part) => part !== undefined).length;
+      if (asks > 1) return `${card.name}'s morph cost can't ask for two choices at once yet`;
+      if (also.payLife !== undefined && !this.canPayLife(player, also.payLife)) {
+        return `${player} does not have ${also.payLife} life to pay`;
+      }
+      if (also.sacrifice !== undefined) {
+        const parts = [{ filter: also.sacrifice.filter, count: also.sacrifice.count }];
+        const remaining = this.costSacrificeLeftAfter(this.costSacrificeCandidates(player, parts, id), plan);
+        if (!this.costSacrificeFillable(player, parts, id, remaining)) {
+          return `${player} has too few permanents to sacrifice to turn it face up`;
+        }
+      }
+      if (also.discard !== undefined && this.discardCandidates(player, also.discard.filter).length < also.discard.count) {
+        return `${player} has too few cards in hand to turn it face up`;
+      }
+      if (
+        also.returnToHand !== undefined &&
+        this.battlefieldMatching(player, { ...also.returnToHand.filter, controlledBy: "you" })
+          .filter((other) => other !== id)
+          .reduce((n, other) => n + (this.state.objects[other]?.stackCount ?? 1), 0) < also.returnToHand.count
+      ) {
+        return `${player} controls too few permanents to return to turn it face up`;
+      }
+    }
     return null;
   }
 
@@ -31373,6 +31404,24 @@ export class Game {
     const payment = this.payMana(player, parseManaCost(cost));
     if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
     this.executePayment(player, payment);
+    // A morph cost that isn't only mana ("Morph—Sacrifice another creature"):
+    // its life paid, and its choice asked, while the permanent is still face
+    // down — what may pay it is worked out now, when it has no name or
+    // subtypes and so never pays for itself. The choice is answered before
+    // anyone gets priority (116.3c).
+    const also = morph ? card.morph?.also : undefined;
+    if (also?.payLife !== undefined) this.changeLife(player, -also.payLife);
+    if (also?.sacrifice !== undefined) {
+      this.beginCostSacrifice(player, id, [{ filter: also.sacrifice.filter, count: also.sacrifice.count }], id, player);
+    }
+    const discard = also?.discard;
+    if (discard !== undefined) {
+      this.withDecisionSource(id, () => {
+        this.discardByEffect({ kind: "player", player }, discard.count, false, discard.filter);
+      });
+      this.costDiscardPriorityTo(player);
+    }
+    if (also?.returnToHand !== undefined) this.payReturnToHandCost(player, id, also.returnToHand);
     delete object.faceDown;
     invalidateComputedCache();
     this.revealFaceDown(id);

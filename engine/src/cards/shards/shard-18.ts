@@ -236,6 +236,7 @@ import _poolFurnaceDragon from "../pool/furnace-dragon.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
 import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
+import _poolGathanRaiders from "../pool/gathan-raiders.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
 import _poolGhostlyCastigator from "../pool/ghostly-castigator.js";
@@ -1020,6 +1021,7 @@ const shard: CardShard = {
     _poolFurnaceSkullbomb,
     _poolFuss,
     _poolGastalRaider,
+    _poolGathanRaiders,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
     _poolGhostlyCastigator,

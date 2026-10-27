@@ -425,6 +425,13 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = new RegExp(`^(morph|megamorph) ${COST}$`, "i").exec(p))) {
     return { card: { morph: { keyword: m[1].toLowerCase(), cost: m[2] } } };
   }
+  // A morph cost that isn't mana ("Morph—Pay 5 life", "Morph—Sacrifice two
+  // Mountains"): `morph.also`, paid as it's turned face up.
+  if ((m = /^(morph|megamorph)—(.+?)\.?$/i.exec(p))) {
+    const also = morphNonManaCost(m[2]);
+    if (also === null) return null;
+    return { card: { morph: { keyword: m[1].toLowerCase(), cost: "", also, text: m[2] } } };
+  }
   if ((m = new RegExp(`^disturb ${COST}$`, "i").exec(p))) return { card: { disturb: { cost: m[1] } } };
   // Toxic N (rule 702.164a): the card's own `toxic` field.
   if ((m = /^toxic (\d+)$/i.exec(p))) return { card: { toxic: Number(m[1]) } };
@@ -783,6 +790,31 @@ function buybackAlso(text) {
     } else return null;
   }
   return also;
+}
+
+/** A morph cost that isn't mana, as `MorphCost.also` — one part, never one
+ * that reveals ("Morph—Reveal a blue card in your hand" isn't modeled). */
+function morphNonManaCost(text) {
+  let m;
+  if ((m = /^Pay (\d+) life$/.exec(text))) return { payLife: Number(m[1]) };
+  if ((m = new RegExp(`^Sacrifice (another|${N.slice(1, -1)}) (.+)$`).exec(text))) {
+    const count = m[1] === "another" ? 1 : numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof count !== "number" || filter === null) return null;
+    return { sacrifice: { filter, count } };
+  }
+  if ((m = /^Discard an? (?:(\w+) )?card$/.exec(text))) {
+    if (m[1] === undefined) return { discard: { count: 1 } };
+    const filter = parseTypePhrase(m[1], { cards: true });
+    return filter === null ? null : { discard: { count: 1, filter } };
+  }
+  if ((m = new RegExp(`^Return ${N} (.+) you control to (?:its|their) owner's hand$`).exec(text))) {
+    const count = numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof count !== "number" || filter === null) return null;
+    return { returnToHand: { count, filter } };
+  }
+  return null;
 }
 
 export function parseCost(text) {

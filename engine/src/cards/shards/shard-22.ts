@@ -590,6 +590,7 @@ import _poolSinkingFeeling from "../pool/sinking-feeling.js";
 import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
+import _poolSkirkVolcanist from "../pool/skirk-volcanist.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
@@ -1395,6 +1396,7 @@ const shard: CardShard = {
     _poolSkarrgGuildmage,
     _poolSkimmingStrike,
     _poolSkirkProspector,
+    _poolSkirkVolcanist,
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
     _poolSkyreaping,

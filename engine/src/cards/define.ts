@@ -2329,6 +2329,32 @@ export interface CastModalSpec {
   readonly modes: readonly ModeOption[];
 }
 
+
+/**
+ * A morph, megamorph or disguise cost (rules 702.37, 702.168): `cost` is its
+ * mana (`""` for none), `also` the parts that aren't mana — "Morph—Pay 5
+ * life" (Zombie Cutthroat), "Morph—Sacrifice another creature" (Gift of
+ * Doom), "Morph—Discard a Zombie card" (Putrid Raptor), "Morph—Return a Bird
+ * you control to its owner's hand" (Raven Guild Initiate). Paid as the
+ * permanent is turned face up (702.37e), the choices made then: a face-down
+ * permanent has no name or subtypes, so it never pays its own cost (it isn't
+ * a Bird or an Island while face down). `text` is the cost as printed, which
+ * the turn-face-up offer shows.
+ */
+export interface MorphCost {
+  readonly keyword: "morph" | "megamorph" | "disguise";
+  readonly cost: string;
+  readonly also?: {
+    readonly payLife?: number;
+    /** Permanents you control matching `filter`, `count` of them, all at once. */
+    readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+    /** Cards from your hand matching `filter`, your choice. */
+    readonly discard?: { readonly count: number; readonly filter?: CardFilter };
+    /** Permanents you control matching `filter`, returned to their owner's hand. */
+    readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
+  };
+  readonly text?: string;
+}
 /** Printed characteristics of a card. Immutable reference data. */
 export interface CardDefinition {
   readonly name: string;
@@ -3215,11 +3241,11 @@ export interface CardDefinition {
    * and the face-down permanent turned face up any time its controller has
    * priority for `cost` (the `turn-face-up` special action). Disguise's
    * face-down 2/2 has ward {2} (702.168a); megamorph puts a +1/+1 counter on
-   * it as it's turned face up for its megamorph cost (702.37b). A mana cost
-   * only: a morph cost that isn't mana (Gift of Doom's sacrifice) isn't
-   * modeled. `null` for none.
+   * it as it's turned face up for its megamorph cost (702.37b). A morph
+   * cost that isn't mana, or isn't only mana ("Morph—Sacrifice another
+   * creature"), is `also` beside it — see {@link MorphCost}. `null` for none.
    */
-  readonly morph: { readonly keyword: "morph" | "megamorph" | "disguise"; readonly cost: string } | null;
+  readonly morph: MorphCost | null;
   /**
    * "As this creature is turned face up, put N +1/+1 counters on it" (Hooded
    * Hydra): a replacement on turning it face up (rule 708.8 — it doesn't
@@ -3737,7 +3763,7 @@ interface CardDraft {
   freerunning?: { readonly cost: string };
   evoke?: NonNullable<CardDefinition["evoke"]>;
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
-  morph?: { readonly keyword: "morph" | "megamorph" | "disguise"; readonly cost: string };
+  morph?: MorphCost;
   asTurnedFaceUp?: { readonly counters: number };
   suspend?: { readonly n: number; readonly cost: string };
   cycling?: { readonly cost: string; readonly search?: CardFilter };
