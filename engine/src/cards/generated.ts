@@ -8449,6 +8449,7 @@ import _poolGoblinTown from "./pool/goblin-town.js";
 import _poolGoblinTrailblazer from "./pool/goblin-trailblazer.js";
 import _poolGoblinTraprunner from "./pool/goblin-traprunner.js";
 import _poolGoblinTrashmaster from "./pool/goblin-trashmaster.js";
+import _poolGoblinTrenches from "./pool/goblin-trenches.js";
 import _poolGoblinTunneler from "./pool/goblin-tunneler.js";
 import _poolGoblinTurncoat from "./pool/goblin-turncoat.js";
 import _poolGoblinVandal from "./pool/goblin-vandal.js";
@@ -33014,6 +33015,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinTrailblazer,
   _poolGoblinTraprunner,
   _poolGoblinTrashmaster,
+  _poolGoblinTrenches,
   _poolGoblinTunneler,
   _poolGoblinTurncoat,
   _poolGoblinVandal,
@@ -57592,6 +57594,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-trailblazer": _poolGoblinTrailblazer,
   "pool/goblin-traprunner": _poolGoblinTraprunner,
   "pool/goblin-trashmaster": _poolGoblinTrashmaster,
+  "pool/goblin-trenches": _poolGoblinTrenches,
   "pool/goblin-tunneler": _poolGoblinTunneler,
   "pool/goblin-turncoat": _poolGoblinTurncoat,
   "pool/goblin-vandal": _poolGoblinVandal,
