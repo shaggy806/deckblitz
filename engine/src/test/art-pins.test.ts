@@ -45,6 +45,9 @@ const NO_TOKEN_PRINTING = new Set([
   // no token printing in the Oracle snapshot.
   "Kaldra",
   "Pincher Token",
+  // One Dozen Eyes (MRD)'s vanilla green 5/5 Beast: no token printing in the
+  // Oracle snapshot.
+  "5/5 Beast Token",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",

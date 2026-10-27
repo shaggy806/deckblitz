@@ -1,9 +1,6 @@
 import { defineCard } from "../define.js";
 
-// SCAFFOLD — written by `npm run card:scaffold` from the Oracle snapshot. Not in the
-// registry: author each TODO(scaffold), move this file into cards/pool/ (or
-// tokens/), then run `npm run gen:cards -w engine`. See cards/AUTHORING.md.
-// Pentavus's Pentavite token.
+/** 1/1 colorless Pentavite artifact creature token with flying — Pentavus's. */
 
 export default defineCard({
   name: "Pentavite Token",
