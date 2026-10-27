@@ -675,7 +675,7 @@
   "cost:ability-cost-modification": {
    "size": "small",
    "ui": false,
-   "description": "A static that changes the activation cost of other permanents' activated abilities matching a filter ('Activated abilities of Foods you control cost {1} less to activate'), read in the activation cost path and in legalActions' affordability."
+   "description": "A static that changes the activation cost of other permanents' activated abilities matching a filter ('Activated abilities of Foods you control cost {1} less to activate'), read in the activation cost path and in legalActions' affordability. Does not cover a reduction read off the source's power (cost:ability-cost-reduction-source-power), equip or power-up abilities alone (cost:equip-ability-cost-reduction, cost:power-up-cost-reduction), an ability's targets (cost:ability-cost-reduction-targeting-source), or added non-mana costs (cost:ability-additional-sacrifice-cost)."
   },
   "cost:choose-cards-as-cost": {
    "size": "medium",
@@ -695,7 +695,7 @@
   "cost:cost-modification-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Cost modifications that depend on more than a count: only the first matching spell each turn, the chosen targets, removing a coloured pip, reducing the generic half of a twobrid pip. Built so far: a reduction that scales with a general amount (counters on the source, a filtered count, graveyard size)."
+   "description": "Cost modifications that depend on more than a count: only the first matching spell each turn, the chosen targets, removing a coloured pip, reducing the generic half of a twobrid pip. Built so far: a reduction that scales with a general amount (counters on the source, a filtered count, graveyard size). Does not cover reductions keyed to the chosen targets (cost:spell-cost-reduction-by-chosen-targets, cost:ability-cost-reduction-by-target-stats), spells cast from anywhere but the hand (cost:cost-reduction-cast-not-from-hand), a mana value counting X (cost:cost-modification-mana-value-with-x), or a cost floor (cost:minimum-total-cost)."
   },
   "cost:mana-ability-complex-costs": {
    "size": "medium",
@@ -705,7 +705,7 @@
   "cost:mana-spending-rules": {
    "size": "medium",
    "ui": false,
-   "description": "Rules for what mana may pay for: 'spend mana as though it were mana of any colour/type' for particular spells (in the planner and spendFromPool), and deny-list restrictions ('can't be spent to cast nonartifact spells')."
+   "description": "Rules for what mana may pay for: 'spend mana as though it were mana of any colour/type' for particular spells (in the planner and spendFromPool), and deny-list restrictions ('can't be spent to cast nonartifact spells'). Does not cover spending one colour as another (mana:spend-color-as-another-color), chosen-colour-only spending (mana:spend-only-chosen-color), or any-type spending for cast-now / allow-cast-from-exile (effect:cast-now-spend-any-mana, zone:allow-cast-from-exile-spend-any-type)."
   },
   "cost:may-cost-non-mana": {
    "size": "small",
@@ -775,7 +775,7 @@
   "decision:discard-any-number": {
    "size": "small",
    "ui": true,
-   "description": "Discard any number of cards (0 up to hand size, optionally filtered) as a real discard, including an as-enters discard that decides the counters the permanent enters with."
+   "description": "Discard any number of cards (0 up to hand size, optionally filtered) as a real discard, including an as-enters discard that decides the counters the permanent enters with. Does not cover a filtered any-number discard (effect:discard-any-number-filtered), up to a variable X (decision:discard-up-to-x), or one as a permanent enters (replacement:as-enters-discard-any-number); 'up to two' is Kinetic Augur's 0/1/2 modal."
   },
   "decision:free-cast-choices": {
    "size": "medium",
@@ -817,7 +817,7 @@
   "effect:add-mana-extensions": {
    "size": "medium",
    "ui": true,
-   "description": "Extensions to add-mana: the player chooses the colour split when mana is added outside cost payment, exactly one of each of several colours ({B}{R}{G}), colours taken from a referenced card, and 'each player adds'."
+   "description": "Extensions to add-mana: the player chooses the colour split when mana is added outside cost payment, exactly one of each of several colours ({B}{R}{G}), colours taken from a referenced card, and 'each player adds'. Does not cover two mana of different colors (effect:add-mana-two-different-colors), mana that makes a spell uncounterable (mana:spent-makes-spell-uncounterable), or any type a sacrificed land could produce (mana:any-type-sacrificed-land-could-produce)."
   },
   "effect:add-subtype": {
    "size": "small",

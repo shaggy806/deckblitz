@@ -10368,7 +10368,8 @@
   },
   "cost:any-player-may-activate": {
    "family": "effect:opponents-may-activate",
-   "example": "Deadly Designs: \"Any player may activate this ability.\""
+   "example": "Deadly Designs: \"Any player may activate this ability.\"",
+   "description": " Built for standalone activations; does not cover another player's mana ability used to pay a cost (cost:any-player-mana-ability)."
   },
   "trigger:attacks-with-another-at-different-player": {
    "family": "trigger:attacks-player-filter",
@@ -12830,6 +12831,181 @@
   "static:cant-attack-unless-matching-also-attacks": {
    "family": "static:attack-limit",
    "example": "Scarred Puma: \"can't attack unless a black or green creature also attacks\""
+  },
+  "condition:counter-put-on-source-this-turn": {
+   "family": "condition:source-state",
+   "example": "Wakka, Devoted Guardian",
+   "description": "An intervening-if 'if a counter was put on this permanent this turn' — the turn history has no per-object counters-put list (not the player's counters-put turn stat)."
+  },
+  "condition:top-card-of-library-matches": {
+   "family": "condition:top-card-of-library",
+   "example": "Vampire Nocturnus",
+   "description": "A static condition on what the top card of your library is ('as long as the top card of your library is black')."
+  },
+  "cost:ability-cost-reduction-source-power": {
+   "family": "cost:ability-cost-modification",
+   "example": "Agatha of the Vile Cauldron",
+   "description": "abilityCostModification.reduceGeneric is a fixed number: no 'cost {X} less, where X is this creature's power'."
+  },
+  "effect:adapt-ignores-counters": {
+   "family": "cost:ability-cost-modification",
+   "example": "Biomancer's Familiar",
+   "description": "Adapt is authored as a conditional add-counter, not an action: nothing can make 'the next time target creature adapts this turn, it adapts as though it had no +1/+1 counters'."
+  },
+  "cost:ability-additional-sacrifice-cost": {
+   "family": "cost:ability-cost-modification",
+   "example": "Brutal Suppression",
+   "description": "A static that adds a non-mana cost ('an additional \"Sacrifice a land\"') to other permanents' activated abilities."
+  },
+  "cost:power-up-cost-reduction": {
+   "family": "cost:ability-cost-modification",
+   "example": "Hulk, Gamma Goliath",
+   "description": "abilityCostModification narrows to ninjutsu or unlock only: no 'power-up abilities of other creatures you control cost {3} less'."
+  },
+  "cost:first-targeting-ability-cost-reduction": {
+   "family": "cost:ability-cost-modification",
+   "example": "Professor Hojo",
+   "description": "'The first activated ability you activate during your turn that targets a creature you control costs {2} less' — no first-each-turn or target-dependent ability cost reduction."
+  },
+  "cost:ability-cost-reduction-targeting-source": {
+   "family": "cost:ability-cost-modification",
+   "example": "Bladegraft Aspirant",
+   "description": "'Activated abilities of Equipment you control that target this creature cost {1} less': abilityCostModification can't read the ability's targets."
+  },
+  "cost:any-player-mana-ability": {
+   "family": "cost:any-player-may-activate",
+   "example": "Mana Cache",
+   "description": "anyPlayer works for a standalone activation, but another player's mana ability isn't offered to pay their costs (manaSources reads only the payer's permanents)."
+  },
+  "cost:ability-cost-choice": {
+   "family": "cost:any-player-may-activate",
+   "example": "Tidal Control",
+   "description": "An activated ability with a choice of whole costs ('Pay 2 life or {2}:') — AbilityCost has no options branch like a spell's additionalCost.options."
+  },
+  "zone:graveyard-cast-permission-one-use": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Chainer, Nightmare Adept",
+   "description": "'You may cast a creature spell from your graveyard this turn' as a one-use permission per resolution (Chainer's ruling): player-effect castFromGraveyard is never used up."
+  },
+  "cost:ability-cost-reduction-by-target-stats": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Belt of Giant Strength",
+   "description": "An ability's cost reduced by a number read off its target ('{X} less, where X is the power of the creature it targets', '{1} less for each +1/+1 counter on the creature it targets'): targetCostReduction is a fixed number."
+  },
+  "cost:reduction-per-type-shared-with-exiled": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Cemetery Prowler",
+   "description": "'Spells you cast cost {1} less for each card type they share with cards exiled with this creature' — no CostReductionAmount reads the spell against the linked exile."
+  },
+  "cost:spell-cost-reduction-by-chosen-targets": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Killian, Ink Duelist",
+   "description": "A static cost reduction on other spells keyed to what they target ('spells you cast that target a creature', 'spells that target this creature'): costModification is matched before targets are chosen and has no targets clause."
+  },
+  "cost:cost-modification-mana-value-with-x": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Thryx, the Sudden Storm",
+   "description": "costModification's manaValue filter is read without the chosen X, but a spell's mana value on the stack counts X (Thryx's ruling)."
+  },
+  "cost:minimum-total-cost": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Trinisphere",
+   "description": "A floor on the total cost applied after every other change ('each spell that would cost less than three mana to cast costs three mana')."
+  },
+  "cost:additional-cost-option-exile-graveyard": {
+   "family": "cost:exile-from-graveyard-additional",
+   "example": "Soaring Stoneglider",
+   "description": "An additionalCost.options branch that exiles cards from the graveyard ('exile two cards from your graveyard or pay {1}{W}'); exileFromGraveyard exists only as a mandatory additional cost."
+  },
+  "effect:trigger-object-owner-scope": {
+   "family": "cost:mana-spending-rules",
+   "example": "Brainstealer Dragon",
+   "description": "'Whenever a nonland permanent an opponent owns enters under your control, they lose life' — no PlayerScope names the trigger object's owner."
+  },
+  "mana:spend-color-as-another-color": {
+   "family": "cost:mana-spending-rules",
+   "example": "Sunglasses of Urza",
+   "description": "spendManaAs is any-color or any-type only: no 'you may spend white mana as though it were red mana'."
+  },
+  "mana:spend-only-chosen-color": {
+   "family": "cost:mana-spending-rules",
+   "example": "Throne of Eldraine",
+   "description": "'Spend only mana of the chosen color to activate this ability' and mana spendable only on monocolored spells of the chosen color."
+  },
+  "cost:may-remove-counters-cost": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Mercurial Spelldancer",
+   "description": "A may whose cost removes counters from the source ('you may remove two oil counters from it. If you do, …'): may takes mana, life or energy only."
+  },
+  "static:double-triggers-of-spells": {
+   "family": "decision:copy-new-targets",
+   "example": "Echoes of Eternity",
+   "description": "Trigger doubling that reaches a colorless *spell's* own triggered abilities ('a triggered ability of a colorless spell you control or another colorless permanent'): doubleTriggersOf reads permanents only."
+  },
+  "replacement:copy-spell-additional-time": {
+   "family": "decision:copy-new-targets",
+   "example": "Twinning Staff",
+   "description": "A replacement on copying a spell: 'if you would copy a spell one or more times, instead copy it that many times plus an additional time'."
+  },
+  "replacement:as-enters-discard-any-number": {
+   "family": "decision:discard-any-number",
+   "example": "Indominus Rex, Alpha",
+   "description": "'As this enters, discard any number of creature cards' with keyword counters by what was discarded — no as-enters discard of a chosen number."
+  },
+  "decision:discard-up-to-x": {
+   "family": "decision:discard-any-number",
+   "example": "Mishra's Command",
+   "description": "'They may discard up to X cards' with X variable — Kinetic Augur's 0/1/2 modal works only for a small fixed N."
+  },
+  "effect:exile-from-hand-any-number-swap": {
+   "family": "decision:library-ordering",
+   "example": "Scroll Rack",
+   "description": "Exile any number of cards from your hand face down, put that many from the top of your library into your hand, then put the exiled cards on top in any order."
+  },
+  "decision:replacement-order-draw": {
+   "family": "decision:replacement-order-choice",
+   "example": "Living Conundrum",
+   "description": "The drawing player orders draw replacements (rule 616.1) — 'skip that draw' against Laboratory Maniac's 'win instead'; the engine applies a fixed order."
+  },
+  "decision:replacement-order-damage": {
+   "family": "decision:replacement-order-choice",
+   "example": "Phantom Centaur",
+   "description": "The affected player (or the affected object's controller) orders damage prevention/protection against another replacement on the same damage (rule 616.1); the engine applies a fixed order."
+  },
+  "mana:spent-makes-spell-uncounterable": {
+   "family": "effect:add-mana-extensions",
+   "example": "Boseiju, Who Shelters All",
+   "description": "'If that mana is spent on an instant or sorcery spell, that spell can't be countered' — add-mana's spellGains grants keywords only."
+  },
+  "mana:any-type-sacrificed-land-could-produce": {
+   "family": "effect:add-mana-extensions",
+   "example": "Squandered Resources",
+   "description": "'Add one mana of any type the sacrificed land could produce' — no add-mana reading the sacrificed land's mana abilities."
+  },
+  "replacement:others-enter-as-subtype": {
+   "family": "effect:add-subtype",
+   "example": "Master Biomancer",
+   "description": "An enters replacement for other creatures that adds a creature type as they enter ('and as a Mutant in addition to its other types')."
+  },
+  "effect:additional-combat-only-in-main-phase": {
+   "family": "effect:additional-combat-after-this-phase",
+   "example": "Response // Resurgence",
+   "description": "'After this main phase, there is an additional combat phase' adds nothing when resolved outside a main phase (its ruling); additional-combat always adds one."
+  },
+  "static:anthem-per-all-counters-on-source": {
+   "family": "effect:amount-counters-on-object",
+   "example": "Hancock, Ghoulish Mayor",
+   "description": "grantPtPerCount's countersOnSource counts one kind: no '+X/+X where X is the number of counters on this' over every kind."
+  },
+  "amount:total-mana-value-of-targets": {
+   "family": "effect:amount-new-variants",
+   "example": "Command the Dreadhorde",
+   "description": "An amount for the total mana value of an any-number target group ('damage to you equal to the total mana value of those cards')."
+  },
+  "amount:per-object-controller-player-counters": {
+   "family": "effect:amount-new-variants",
+   "example": "Phyresis Outbreak",
+   "description": "A per-permanent amount read off its own controller ('-1/-1 for each poison counter its controller has')."
   }
  },
  "groups": [

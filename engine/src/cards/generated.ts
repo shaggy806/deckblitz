@@ -12980,6 +12980,7 @@ import _poolMageHunter from "./pool/mage-hunter.js";
 import _poolMageHuntersOnslaught from "./pool/mage-hunters-onslaught.js";
 import _poolMageIlVec from "./pool/mage-il-vec.js";
 import _poolMageRingBully from "./pool/mage-ring-bully.js";
+import _poolMageRingNetwork from "./pool/mage-ring-network.js";
 import _poolMageRingResponder from "./pool/mage-ring-responder.js";
 import _poolMageSlayer from "./pool/mage-slayer.js";
 import _poolMageTowerReferee from "./pool/mage-tower-referee.js";
@@ -15898,6 +15899,7 @@ import _poolPilferingImp from "./pool/pilfering-imp.js";
 import _poolPilgrimOfTheAges from "./pool/pilgrim-of-the-ages.js";
 import _poolPilgrimOfTheFires from "./pool/pilgrim-of-the-fires.js";
 import _poolPilgrimsEye from "./pool/pilgrims-eye.js";
+import _poolPiliPala from "./pool/pili-pala.js";
 import _poolPillageTheBog from "./pool/pillage-the-bog.js";
 import _poolPillage from "./pool/pillage.js";
 import _poolPillagingHorde from "./pool/pillaging-horde.js";
@@ -39110,6 +39112,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMageHuntersOnslaught,
   _poolMageIlVec,
   _poolMageRingBully,
+  _poolMageRingNetwork,
   _poolMageRingResponder,
   _poolMageSlayer,
   _poolMageTowerReferee,
@@ -42028,6 +42031,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPilgrimOfTheAges,
   _poolPilgrimOfTheFires,
   _poolPilgrimsEye,
+  _poolPiliPala,
   _poolPillageTheBog,
   _poolPillage,
   _poolPillagingHorde,
@@ -65253,6 +65257,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mage-hunters-onslaught": _poolMageHuntersOnslaught,
   "pool/mage-il-vec": _poolMageIlVec,
   "pool/mage-ring-bully": _poolMageRingBully,
+  "pool/mage-ring-network": _poolMageRingNetwork,
   "pool/mage-ring-responder": _poolMageRingResponder,
   "pool/mage-slayer": _poolMageSlayer,
   "pool/mage-tower-referee": _poolMageTowerReferee,
@@ -68171,6 +68176,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pilgrim-of-the-ages": _poolPilgrimOfTheAges,
   "pool/pilgrim-of-the-fires": _poolPilgrimOfTheFires,
   "pool/pilgrims-eye": _poolPilgrimsEye,
+  "pool/pili-pala": _poolPiliPala,
   "pool/pillage-the-bog": _poolPillageTheBog,
   "pool/pillage": _poolPillage,
   "pool/pillaging-horde": _poolPillagingHorde,

@@ -416,6 +416,7 @@ import _poolLovestruckBeast from "../pool/lovestruck-beast.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLunarchInquisitors from "../pool/lunarch-inquisitors.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
+import _poolMageRingNetwork from "../pool/mage-ring-network.js";
 import _poolMageRingResponder from "../pool/mage-ring-responder.js";
 import _poolMajorTeroh from "../pool/major-teroh.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolLuminousAngel,
     _poolLunarchInquisitors,
     _poolLydiaFrye,
+    _poolMageRingNetwork,
     _poolMageRingResponder,
     _poolMajorTeroh,
     _poolMammothHarness,
