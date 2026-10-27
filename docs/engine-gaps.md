@@ -6,6 +6,15 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A delayed "whenever" on a batched damage event fires once per source.** A `DelayedWhenever`
+  on `deals-damage-batch` goes through `fireWheneverWatchers`, which has none of the
+  `damageBatch` grouping a permanent's own triggers get (rule 603.2c: one trigger per player dealt
+  damage in the batch), nor their per-card handling of `put-into-graveyard`. Found by batch 237's
+  group E: Aphelia, Viper Whisperer's delayed trigger halved a player's life twice when two Snakes
+  connected (18 to 4, where 9 is right). Jace, Cunning Castaway (in the pool, same `whenever`)
+  likely draws and discards once per connecting creature, not once per player; not yet checked by
+  a test. Blocks Aphelia and Forth Eorlingas! (`effect:delayed-whenever-batched-damage`) and
+  Duskmantle Guildmage (`effect:delayed-whenever-per-card-graveyard`).
 - **A threshold-gated granted dies trigger doesn't look back.** A `grantsTriggered` static
   with a `condition` (threshold) is checked after the event when the granting permanent stays on
   the battlefield and another creature dies, so the creature whose death makes the seventh card

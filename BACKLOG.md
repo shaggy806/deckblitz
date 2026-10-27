@@ -62,7 +62,7 @@ section keeps only what to do next.
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
   lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
   to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
-  "A recheck round", one list per child under the `author-recheck` skill. Lists done: none.
+  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R3 (B237: 23 authored, 77 still blocked on narrow keys).
   Assigned (round one, 2026-10-27): R1 → B235, R2 → B236, R3 → B237, R4 → B238, R5 → B239 (a
   batch number taken by then: the highest `B<N>` on `origin/main` plus one, checked again before
   landing). Then build in greedy order, a family per session, with
@@ -135,6 +135,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A delayed "whenever" on a batched damage event fires once per source** (603.2c): Aphelia's halving twice; Jace, Cunning Castaway likely over-triggers (`effect:delayed-whenever-batched-damage`, batch 237).
 - **A threshold-gated granted dies trigger doesn't look back** (603.10a): Decaying Soil's granted trigger fires for the creature whose death makes the seventh card (`trigger:conditional-grant-look-back`, batch 225).
 - **A look-and-choose's `then` loses `"that-player"`** inside a `for-each-player`: it silently does nothing (Duskmantle Seer works around it).
 - **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:zone-change-object-identity`, batch 219).
