@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **A damage trigger's "that creature" for tap and exile, and the rest of Champions of Kamigawa —
+  Champions is whole** (batch 212, the third middle walk's range taken by the newest-first
+  walk's session, 2026-10-26, part of `trigger:trigger-recipient-ref`): **built** `tap` and
+  `exile` taking `"trigger-recipient"` as `destroy` did — "whenever this creature deals combat
+  damage to a creature, tap that creature and it doesn't untap during its controller's next
+  untap step", "exile that creature" — and authored the seven earlier cards it unblocked (Kaldra
+  Compleat, Queen of Ice, Frostwalk Bastion, Pit Spawn, Kashi-Tribe Elite, Matsu-Tribe Sniper and
+  Birdstalker). 120 of Champions' last 145 authored — the five Zubera, Brothers Yamazaki, Hisoka's
+  Guard, Shimatsu, Iname, Life Aspect, the Deceivers and the Kodama of the South Tree among them,
+  by six `card-author` agents and the lead — and 25 blocked (`B212.json`).
 - **Reveal any number of cards from your hand, the rest of Portal Three Kingdoms and Urza's
   Destiny's 60 most-played — Portal Three Kingdoms is whole** (batch 208, the oldest-first walk,
   2026-10-26, `cost:reveal-any-number-from-hand`): **built** "reveal any number of green cards in

@@ -1,0 +1,1077 @@
+{
+  "batch": "B212",
+  "status": "complete",
+  "ranks": "Champions of Kamigawa (CHK, 2004-10-01): the rest of the set, 145 (third middle walk's range, taken by the newest-first walk's session in round sixteen while the third middle walk sat out); built tap and exile reaching a damage trigger's recipient (trigger:trigger-recipient-ref, partly), and authored the seven earlier cards it unblocks (Kaldra Compleat, Queen of Ice, Frostwalk Bastion, Pit Spawn, Kashi-Tribe Elite, Matsu-Tribe Sniper, Matsu-Tribe Birdstalker)",
+  "authored": [
+    {
+      "name": "Akki Coalflinger",
+      "files": [
+        "engine/src/cards/pool/akki-coalflinger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Akki Underminer",
+      "files": [
+        "engine/src/cards/pool/akki-underminer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ashen-Skin Zubera",
+      "files": [
+        "engine/src/cards/pool/ashen-skin-zubera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Battle-Mad Ronin",
+      "files": [
+        "engine/src/cards/pool/battle-mad-ronin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ben-Ben, Akki Hermit",
+      "files": [
+        "engine/src/cards/pool/ben-ben-akki-hermit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blind with Anger",
+      "files": [
+        "engine/src/cards/pool/blind-with-anger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodthirsty Ogre",
+      "files": [
+        "engine/src/cards/pool/bloodthirsty-ogre.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brothers Yamazaki",
+      "files": [
+        "engine/src/cards/pool/brothers-yamazaki.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brutal Deceiver",
+      "files": [
+        "engine/src/cards/pool/brutal-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burr Grafter",
+      "files": [
+        "engine/src/cards/pool/burr-grafter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Callous Deceiver",
+      "files": [
+        "engine/src/cards/pool/callous-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cleanfall",
+      "files": [
+        "engine/src/cards/pool/cleanfall.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cloudcrest Lake",
+      "files": [
+        "engine/src/cards/pool/cloudcrest-lake.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Consuming Vortex",
+      "files": [
+        "engine/src/cards/pool/consuming-vortex.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cruel Deceiver",
+      "files": [
+        "engine/src/cards/pool/cruel-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crushing Pain",
+      "files": [
+        "engine/src/cards/pool/crushing-pain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cursed Ronin",
+      "files": [
+        "engine/src/cards/pool/cursed-ronin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dampen Thought",
+      "files": [
+        "engine/src/cards/pool/dampen-thought.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dance of Shadows",
+      "files": [
+        "engine/src/cards/pool/dance-of-shadows.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Devoted Retainer",
+      "files": [
+        "engine/src/cards/pool/devoted-retainer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Devouring Rage",
+      "files": [
+        "engine/src/cards/pool/devouring-rage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Distress",
+      "files": [
+        "engine/src/cards/pool/distress.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dripping-Tongue Zubera",
+      "files": [
+        "engine/src/cards/pool/dripping-tongue-zubera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Earthshaker",
+      "files": [
+        "engine/src/cards/pool/earthshaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eerie Procession",
+      "files": [
+        "engine/src/cards/pool/eerie-procession.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eight-and-a-Half-Tails",
+      "files": [
+        "engine/src/cards/pool/pious-kitsune.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ember-Fist Zubera",
+      "files": [
+        "engine/src/cards/pool/ember-fist-zubera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feral Deceiver",
+      "files": [
+        "engine/src/cards/pool/feral-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Field of Reality",
+      "files": [
+        "engine/src/cards/pool/field-of-reality.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Floating-Dream Zubera",
+      "files": [
+        "engine/src/cards/pool/floating-dream-zubera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frostwalk Bastion",
+      "files": [
+        "engine/src/cards/pool/frostwalk-bastion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gale Force",
+      "files": [
+        "engine/src/cards/pool/gale-force.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gibbering Kami",
+      "files": [
+        "engine/src/cards/pool/gibbering-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glacial Ray",
+      "files": [
+        "engine/src/cards/pool/glacial-ray.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guardian of Solitude",
+      "files": [
+        "engine/src/cards/pool/guardian-of-solitude.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gutwrencher Oni",
+      "files": [
+        "engine/src/cards/pool/gutwrencher-oni.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Harsh Deceiver",
+      "files": [
+        "engine/src/cards/pool/harsh-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "He Who Hungers",
+      "files": [
+        "engine/src/cards/pool/he-who-hungers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hearth Kami",
+      "files": [
+        "engine/src/cards/pool/hearth-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hideous Laughter",
+      "files": [
+        "engine/src/cards/pool/hideous-laughter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hikari, Twilight Guardian",
+      "files": [
+        "engine/src/cards/pool/hikari-twilight-guardian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hisoka's Defiance",
+      "files": [
+        "engine/src/cards/pool/hisokas-defiance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hisoka's Guard",
+      "files": [
+        "engine/src/cards/pool/hisokas-guard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hold the Line",
+      "files": [
+        "engine/src/cards/pool/hold-the-line.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Horizon Seed",
+      "files": [
+        "engine/src/cards/pool/horizon-seed.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hundred-Talon Kami",
+      "files": [
+        "engine/src/cards/pool/hundred-talon-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Iname, Life Aspect",
+      "files": [
+        "engine/src/cards/pool/iname-life-aspect.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Innocence Kami",
+      "files": [
+        "engine/src/cards/pool/innocence-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jade Idol",
+      "files": [
+        "engine/src/cards/pool/jade-idol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Joyous Respite",
+      "files": [
+        "engine/src/cards/pool/joyous-respite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Junkyo Bell",
+      "files": [
+        "engine/src/cards/pool/junkyo-bell.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kaldra Compleat",
+      "files": [
+        "engine/src/cards/pool/kaldra-compleat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kami of Fire's Roar",
+      "files": [
+        "engine/src/cards/pool/kami-of-fires-roar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kami of Lunacy",
+      "files": [
+        "engine/src/cards/pool/kami-of-lunacy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kami of the Hunt",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-hunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kami of the Palace Fields",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-palace-fields.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kami of the Waning Moon",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-waning-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kashi-Tribe Elite",
+      "files": [
+        "engine/src/cards/pool/kashi-tribe-elite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kashi-Tribe Reaver",
+      "files": [
+        "engine/src/cards/pool/kashi-tribe-reaver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kashi-Tribe Warriors",
+      "files": [
+        "engine/src/cards/pool/kashi-tribe-warriors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kitsune Blademaster",
+      "files": [
+        "engine/src/cards/pool/kitsune-blademaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kitsune Diviner",
+      "files": [
+        "engine/src/cards/pool/kitsune-diviner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kitsune Healer",
+      "files": [
+        "engine/src/cards/pool/kitsune-healer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kitsune Riftwalker",
+      "files": [
+        "engine/src/cards/pool/kitsune-riftwalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kodama of the South Tree",
+      "files": [
+        "engine/src/cards/pool/kodama-of-the-south-tree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kodama's Might",
+      "files": [
+        "engine/src/cards/pool/kodamas-might.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Konda's Hatamoto",
+      "files": [
+        "engine/src/cards/pool/kondas-hatamoto.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lantern-Lit Graveyard",
+      "files": [
+        "engine/src/cards/pool/lantern-lit-graveyard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lifted by Clouds",
+      "files": [
+        "engine/src/cards/pool/lifted-by-clouds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mana Seism",
+      "files": [
+        "engine/src/cards/pool/mana-seism.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Matsu-Tribe Birdstalker",
+      "files": [
+        "engine/src/cards/pool/matsu-tribe-birdstalker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Matsu-Tribe Sniper",
+      "files": [
+        "engine/src/cards/pool/matsu-tribe-sniper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Midnight Covenant",
+      "files": [
+        "engine/src/cards/pool/midnight-covenant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mothrider Samurai",
+      "files": [
+        "engine/src/cards/pool/mothrider-samurai.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mystic Restraints",
+      "files": [
+        "engine/src/cards/pool/mystic-restraints.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nezumi Ronin",
+      "files": [
+        "engine/src/cards/pool/nezumi-ronin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Night Dealings",
+      "files": [
+        "engine/src/cards/pool/night-dealings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nine-Ringed Bo",
+      "files": [
+        "engine/src/cards/pool/nine-ringed-bo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Numai Outcast",
+      "files": [
+        "engine/src/cards/pool/numai-outcast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oni Possession",
+      "files": [
+        "engine/src/cards/pool/oni-possession.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Orbweaver Kumo",
+      "files": [
+        "engine/src/cards/pool/orbweaver-kumo.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ore Gorger",
+      "files": [
+        "engine/src/cards/pool/ore-gorger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Orochi Ranger",
+      "files": [
+        "engine/src/cards/pool/orochi-ranger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pain Kami",
+      "files": [
+        "engine/src/cards/pool/pain-kami.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Painwracker Oni",
+      "files": [
+        "engine/src/cards/pool/painwracker-oni.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Part the Veil",
+      "files": [
+        "engine/src/cards/pool/part-the-veil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Petals of Insight",
+      "files": [
+        "engine/src/cards/pool/petals-of-insight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pinecrest Ridge",
+      "files": [
+        "engine/src/cards/pool/pinecrest-ridge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pit Spawn",
+      "files": [
+        "engine/src/cards/pool/pit-spawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Psychic Puppetry",
+      "files": [
+        "engine/src/cards/pool/psychic-puppetry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Queen of Ice // Rage of Winter",
+      "files": [
+        "engine/src/cards/pool/queen-of-ice.ts",
+        "engine/src/cards/pool/rage-of-winter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ragged Veins",
+      "files": [
+        "engine/src/cards/pool/ragged-veins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rend Flesh",
+      "files": [
+        "engine/src/cards/pool/rend-flesh.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rend Spirit",
+      "files": [
+        "engine/src/cards/pool/rend-spirit.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ronin Houndmaster",
+      "files": [
+        "engine/src/cards/pool/ronin-houndmaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rootrunner",
+      "files": [
+        "engine/src/cards/pool/rootrunner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Samurai Enforcers",
+      "files": [
+        "engine/src/cards/pool/samurai-enforcers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scuttling Death",
+      "files": [
+        "engine/src/cards/pool/scuttling-death.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Serpent Skin",
+      "files": [
+        "engine/src/cards/pool/serpent-skin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shell of the Last Kappa",
+      "files": [
+        "engine/src/cards/pool/shell-of-the-last-kappa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shimatsu the Bloodcloaked",
+      "files": [
+        "engine/src/cards/pool/shimatsu-the-bloodcloaked.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sift Through Sands",
+      "files": [
+        "engine/src/cards/pool/sift-through-sands.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silent-Chant Zubera",
+      "files": [
+        "engine/src/cards/pool/silent-chant-zubera.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soilshaper",
+      "files": [
+        "engine/src/cards/pool/soilshaper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soratami Mirror-Guard",
+      "files": [
+        "engine/src/cards/pool/soratami-mirror-guard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soratami Seer",
+      "files": [
+        "engine/src/cards/pool/soratami-seer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul of Magma",
+      "files": [
+        "engine/src/cards/pool/soul-of-magma.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soulless Revival",
+      "files": [
+        "engine/src/cards/pool/soulless-revival.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Squelch",
+      "files": [
+        "engine/src/cards/pool/squelch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Strength of Cedars",
+      "files": [
+        "engine/src/cards/pool/strength-of-cedars.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swallowing Plague",
+      "files": [
+        "engine/src/cards/pool/swallowing-plague.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teller of Tales",
+      "files": [
+        "engine/src/cards/pool/teller-of-tales.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Terashi's Cry",
+      "files": [
+        "engine/src/cards/pool/terashis-cry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thief of Hope",
+      "files": [
+        "engine/src/cards/pool/thief-of-hope.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thoughtbind",
+      "files": [
+        "engine/src/cards/pool/thoughtbind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thousand-legged Kami",
+      "files": [
+        "engine/src/cards/pool/thousand-legged-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tranquil Garden",
+      "files": [
+        "engine/src/cards/pool/tranquil-garden.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Uncontrollable Anger",
+      "files": [
+        "engine/src/cards/pool/uncontrollable-anger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Unearthly Blizzard",
+      "files": [
+        "engine/src/cards/pool/unearthly-blizzard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vassal's Duty",
+      "files": [
+        "engine/src/cards/pool/vassals-duty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Venerable Kumo",
+      "files": [
+        "engine/src/cards/pool/venerable-kumo.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Villainous Ogre",
+      "files": [
+        "engine/src/cards/pool/villainous-ogre.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vine Kami",
+      "files": [
+        "engine/src/cards/pool/vine-kami.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Waterveil Cavern",
+      "files": [
+        "engine/src/cards/pool/waterveil-cavern.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wear Away",
+      "files": [
+        "engine/src/cards/pool/wear-away.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Yamabushi's Flame",
+      "files": [
+        "engine/src/cards/pool/yamabushis-flame.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Yamabushi's Storm",
+      "files": [
+        "engine/src/cards/pool/yamabushis-storm.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Candles' Glow",
+      "needs": [
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "prevent-damage has no \"gain life equal to the damage prevented this way\" (only the chosen-source prevention does)."
+    },
+    {
+      "name": "Cranial Extraction",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Naming a card, then searching graveyard, hand and library for every card with that name."
+    },
+    {
+      "name": "Cut the Tethers",
+      "needs": [
+        "effect:per-permanent-bounce-unless-owner-pays"
+      ],
+      "why": "Each Spirit returns unless its owner pays {3}: an unless once per permanent, its owner paying."
+    },
+    {
+      "name": "Feast of Worms",
+      "needs": [
+        "effect:sacrifice-controller-of-target"
+      ],
+      "why": "The controller of the targeted land sacrifices another land: the sacrifice effect's who: \"target\" takes only a player target, and \"another land\" can't exclude the targeted land."
+    },
+    {
+      "name": "Frostwielder",
+      "needs": [
+        "filter:damaged-this-turn-by-source"
+      ],
+      "why": "damagedThisTurnBy can't name the creature itself (\"a creature dealt damage by this creature this turn would die\")."
+    },
+    {
+      "name": "Hanabi Blast",
+      "needs": [
+        "effect:spell-returns-itself-to-hand"
+      ],
+      "why": "The return to hand comes before \"then discard a card at random\" (which can take it); return-to-hand from the stack happens only as the final part of resolution (608.2n)."
+    },
+    {
+      "name": "Hankyu",
+      "needs": [
+        "cost:remove-all-counters",
+        "effect:counter-on-granting-source"
+      ],
+      "why": "The granted abilities put aim counters on, and remove all of them from, the Equipment granting them."
+    },
+    {
+      "name": "Hisoka, Minamo Sensei",
+      "needs": [
+        "effect:cost-discarded-card-ref"
+      ],
+      "why": "Comparing mana value with the card discarded to pay the cost."
+    },
+    {
+      "name": "Imi Statue",
+      "needs": [
+        "static:untap-step-limit"
+      ],
+      "why": "\"Players can't untap more than one artifact during their untap steps.\""
+    },
+    {
+      "name": "Kami of the Painted Road",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Protection from the color of your choice until end of turn."
+    },
+    {
+      "name": "Kumano, Master Yamabushi",
+      "needs": [
+        "filter:damaged-this-turn-by-source"
+      ],
+      "why": "\"If a creature dealt damage by Kumano this turn would die, exile it instead\": damagedThisTurnBy can't name the source itself."
+    },
+    {
+      "name": "Kumano's Pupils",
+      "needs": [
+        "filter:damaged-this-turn-by-source"
+      ],
+      "why": "damagedThisTurnBy can't name the creature itself (\"a creature dealt damage by this creature this turn\")."
+    },
+    {
+      "name": "Matsu-Tribe Decoy",
+      "needs": [
+        "effect:must-block-this-turn"
+      ],
+      "why": "\"Target creature blocks this creature this turn if able\" (its damage trigger's tap is authorable now)."
+    },
+    {
+      "name": "Mindblaze",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Choosing a card name and a number as the spell resolves."
+    },
+    {
+      "name": "Moonring Mirror",
+      "needs": [
+        "zone:exile-face-down",
+        "effect:exile-hands-face-down-return-later"
+      ],
+      "why": "Face-down exile linked to the artifact, swapped back for the hand while leaving out the cards just exiled (its ruling)."
+    },
+    {
+      "name": "Rag Dealer",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "\"Up to three target cards from a single graveyard.\""
+    },
+    {
+      "name": "Reciprocate",
+      "needs": [
+        "stat:filter-dealt-damage-to-you-this-turn"
+      ],
+      "why": "No target filter for \"creature that dealt damage to you this turn\"."
+    },
+    {
+      "name": "Shisato, Whispering Hunter",
+      "needs": [
+        "effect:skip-next-untap-step"
+      ],
+      "why": "\"That player skips their next untap step\": skip-next-untap stops their permanents untapping but not the step (phasing, other players' untapsDuringOthersUntap)."
+    },
+    {
+      "name": "Sideswipe",
+      "needs": [
+        "effect:change-any-targets"
+      ],
+      "why": "\"Change any targets\" (rule 115.7c): change-targets offers only 115.7a, 115.7b and 115.7d."
+    },
+    {
+      "name": "Soulblast",
+      "needs": [
+        "cost:additional-cost-sacrifice-all-and-discard-hand",
+        "amount:total-power-sacrificed-as-cost"
+      ],
+      "why": "\"Sacrifice all creatures you control\" as an additional cost, and the sacrificed creatures' total power."
+    },
+    {
+      "name": "Strange Inversion",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "Switching power and toughness isn't in the layer system."
+    },
+    {
+      "name": "Struggle for Sanity",
+      "needs": [
+        "effect:alternating-hand-exile"
+      ],
+      "why": "The opponent and you take turns exiling from one hand until it's empty, then each player's picks go to different zones."
+    },
+    {
+      "name": "Swirl the Mists",
+      "needs": [
+        "effect:text-change-color-or-land-words"
+      ],
+      "why": "Changing the color words in the text of spells and permanents (rule 612.2)."
+    },
+    {
+      "name": "Tatsumasa, the Dragon's Fang",
+      "needs": [
+        "effect:linked-token-leaves"
+      ],
+      "why": "\"Return Tatsumasa to the battlefield when that token dies\" needs a delayed trigger tied to that one token returning the exiled source."
+    },
+    {
+      "name": "Wicked Akuba",
+      "needs": [
+        "filter:player-previously-dealt-damage-by-source"
+      ],
+      "why": "Target player limited to players this creature dealt damage to this turn."
+    }
+  ]
+}

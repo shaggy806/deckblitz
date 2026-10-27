@@ -5535,3 +5535,9 @@ engine terms. A second thing to check is a second test.
 ### Scent of Ivy: reveal green cards from your hand, which stay there
 - **Do:** Cast Scent of Ivy on your Grizzly Bears. When asked, pick Llanowar Elves and Giant Growth.
 - **Expect:** The prompt reads "Choose any number of cards to reveal from your hand" and offers only the two green cards, not Lightning Bolt. The Bears become 4/4 and both green cards are still in your hand, shown as revealed.
+
+## A damage trigger's "that creature" (2026-10-26, Champions of Kamigawa)
+
+### Matsu-Tribe Sniper: the flier it damages stays tapped
+- **Do:** Tap Matsu-Tribe Sniper to deal 1 damage to the opponent's Serra Angel, then pass the turn.
+- **Expect:** The Angel is tapped as soon as the trigger resolves, and it stays tapped through the opponent's untap step (it still has 1 damage marked until the turn ends).

@@ -8354,4 +8354,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Scent of Ivy: reveal green cards from your hand, which stay there',
     board({ you: { bf: ['Forest', 'Grizzly Bears'], hand: ['Scent of Ivy', 'Llanowar Elves', 'Giant Growth', 'Lightning Bolt'] } }),
   ),
+  // --- A damage trigger's "that creature" (2026-10-26, Champions of Kamigawa) -
+  preset(
+    'Matsu-Tribe Sniper: the flier it damages stays tapped',
+    board({ you: { bf: ['Matsu-Tribe Sniper'] }, opp: { bf: ['Serra Angel'] } }),
+  ),
 ]

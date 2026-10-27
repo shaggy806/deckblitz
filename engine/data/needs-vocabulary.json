@@ -4798,7 +4798,7 @@
   },
   "trigger:trigger-recipient-ref": {
    "family": "trigger:damage-trigger-extensions",
-   "example": "Kaldra Compleat: 'Whenever this creature deals combat damage to a creature, exile that creature': only a damage effect can reach the trigger's recipient."
+   "example": "Ohran Viper: 'whenever this creature deals combat damage to a creature, destroy that creature at end of combat': damage, destroy, tap and exile reach the trigger's recipient (B212), but nothing else does — a delayed trigger, a copy effect (Permeating Mass), a lasting doesn't-untap (Neko-Te)."
   },
   "trigger:unblocked-attackers-trigger": {
    "example": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.'"
@@ -11626,6 +11626,24 @@
   "condition:target-player-zone-empty": {
    "family": "condition:player-state-thresholds",
    "example": "Nezumi Shortfang / Nezumi Graverobber: if the targeted player has no cards in hand / that graveyard is empty"
+  },
+  "effect:sacrifice-controller-of-target": {
+   "family": "effect:sacrifice-amount",
+   "example": "Feast of Worms: destroy target land; if it was legendary, its controller sacrifices another land — the sacrifice effect's who: \"target\" takes only a player target, and \"another\" can't exclude the targeted land."
+  },
+  "effect:change-any-targets": {
+   "family": "effect:change-target",
+   "example": "Sideswipe: \"you may change any targets of target Arcane spell\" (rule 115.7c) — change-targets offers 115.7a, 115.7b and 115.7d only."
+  },
+  "effect:alternating-hand-exile": {
+   "example": "Struggle for Sanity: the target opponent and you take turns exiling a card from their hand until it's empty; they get back the cards they exiled and the ones you exiled go to their graveyard."
+  },
+  "effect:counter-on-granting-source": {
+   "example": "Hankyu: the equipped creature's granted abilities put an aim counter on, and remove all aim counters from, the Equipment that grants them."
+  },
+  "effect:per-permanent-bounce-unless-owner-pays": {
+   "family": "effect:per-creature-sacrifice-unless-pay",
+   "example": "Cut the Tethers: for each Spirit, return it to its owner's hand unless that player pays {3} — an unless once per permanent, its owner paying."
   }
  }
 }

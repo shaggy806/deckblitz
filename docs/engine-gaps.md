@@ -14,6 +14,14 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.
 
+- **A spell filter's `targets` never matches a copy of a spell.** `spellTargetsMatch`
+  (filter.ts) returns false for any stack object whose `kind` isn't `"card"`, so a copy of a
+  spell (rule 707.10) that targets you, or a permanent, is never "a spell that targets you": Dawn
+  Charm's "counter target spell that targets you" and Shell of the Last Kappa's "exile target
+  instant or sorcery spell that targets you" can't be aimed at a copy, though a copy is a spell
+  (rule 707.10) with the copied targets. Found 2026-10-26 authoring Shell of the Last Kappa (B212).
+  The fix reads a copy's own `targets` the same way.
+
 - **Splice's limits.** Splice (rule 702.47, `CardDefinition.splice`, `Game.spliceFits` and
   `castSpellActions` in game.ts) is offered only onto a spell with one plain `effect` — not a
   modal (`castModal`), fused, divided or `resolve` spell, where the spliced text has no place to
