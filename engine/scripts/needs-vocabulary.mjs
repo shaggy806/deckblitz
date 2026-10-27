@@ -81,7 +81,9 @@ export function loadVocabulary() {
   const vocab = JSON.parse(readFileSync(VOCAB_PATH, "utf8"));
   const features = new Map();
   for (const [key, f] of Object.entries(gaps.features)) features.set(key, { ...f, from: "gaps" });
-  for (const [key, f] of Object.entries(vocab.features)) features.set(key, { ...f, from: "vocabulary" });
+  // A feature merged into another (`mergedInto`, Phase 1 of the need-keys
+  // plan) stays in the file for the record but resolves through its alias.
+  for (const [key, f] of Object.entries(vocab.features)) if (f.mergedInto === undefined) features.set(key, { ...f, from: "vocabulary" });
   const aliases = new Map(Object.entries(vocab.aliases));
   const built = new Set(gaps.built ?? []);
   const canonical = (raw) => {
@@ -100,7 +102,10 @@ export function loadVocabulary() {
   /** Built after `date` (a record's triage date): the record didn't know.
    * A record with no date counts as older than everything. */
   const builtSince = (key, date) => built.has(key) && (date === undefined || (dates.get(key) ?? "") > date);
-  return { features, aliases, built, builtDates: dates, canonical, familyOf, isBuilt, builtSince, isMeta };
+  /** Generalisation groups: keys one general implementation would cover,
+   * each `{ keys, shape, from }` (the need-keys plan's step 1.3). */
+  const groups = vocab.groups ?? [];
+  return { features, aliases, built, builtDates: dates, canonical, familyOf, isBuilt, builtSince, isMeta, groups };
 }
 
 /**
