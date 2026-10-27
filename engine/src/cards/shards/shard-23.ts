@@ -160,6 +160,7 @@ import _poolDarwinAdaptiveMutant from "../pool/darwin-adaptive-mutant.js";
 import _poolDauntlessUnity from "../pool/dauntless-unity.js";
 import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
+import _poolDeadlyDesigns from "../pool/deadly-designs.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
 import _poolDeathgorgeScavenger from "../pool/deathgorge-scavenger.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolDauntlessUnity,
     _poolDawnhartRejuvenator,
     _poolDazzlingLights,
+    _poolDeadlyDesigns,
     _poolDeadlyPlot,
     _poolDeathStroke,
     _poolDeathgorgeScavenger,

@@ -77,6 +77,7 @@ import _poolBloodmarkMentor from "../pool/bloodmark-mentor.js";
 import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
 import _poolBonehoard from "../pool/bonehoard.js";
+import _poolBookBurning from "../pool/book-burning.js";
 import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
@@ -866,6 +867,7 @@ const shard: CardShard = {
     _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
     _poolBonehoard,
+    _poolBookBurning,
     _poolBoomerang,
     _poolBorderPatrol,
     _poolBorosGuildmage,

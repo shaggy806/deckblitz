@@ -464,6 +464,7 @@ import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
 import _poolQuasiduplicate from "../pool/quasiduplicate.js";
 import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
+import _poolQuicksilverWall from "../pool/quicksilver-wall.js";
 import _poolQuintoriusFieldHistorian from "../pool/quintorius-field-historian.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolQuakeAgentOfSHIELD,
     _poolQuasiduplicate,
     _poolQuestForTheNecropolis,
+    _poolQuicksilverWall,
     _poolQuintoriusFieldHistorian,
     _poolQuirionRanger,
     _poolRadioactiveSpider,

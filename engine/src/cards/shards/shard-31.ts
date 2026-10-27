@@ -366,6 +366,7 @@ import _poolHuntingMoa from "../pool/hunting-moa.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
+import _poolIcyPrison from "../pool/icy-prison.js";
 import _poolIlluminate from "../pool/illuminate.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
@@ -373,6 +374,7 @@ import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolImpalerShrike from "../pool/impaler-shrike.js";
 import _poolInactionInjunction from "../pool/inaction-injunction.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
+import _poolInfiniteHourglass from "../pool/infinite-hourglass.js";
 import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInheritedFiend from "../pool/inherited-fiend.js";
@@ -1202,6 +1204,7 @@ const shard: CardShard = {
     _poolHydroelectricLaboratory,
     _poolIcehideTroll,
     _poolIcewindElemental,
+    _poolIcyPrison,
     _poolIlluminate,
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
@@ -1209,6 +1212,7 @@ const shard: CardShard = {
     _poolImpalerShrike,
     _poolInactionInjunction,
     _poolInfestationExpert,
+    _poolInfiniteHourglass,
     _poolInfuseWithTheElements,
     _poolInheritedEnvelope,
     _poolInheritedFiend,

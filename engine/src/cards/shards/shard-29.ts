@@ -522,6 +522,7 @@ import _poolResuscitate from "../pool/resuscitate.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
+import _poolRhysticTutor from "../pool/rhystic-tutor.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRisonaAsariCommander from "../pool/risona-asari-commander.js";
 import _poolRiverDarter from "../pool/river-darter.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolRetchedWretch,
     _poolRevealingEye,
     _poolRevivingMelody,
+    _poolRhysticTutor,
     _poolRingwraiths,
     _poolRisonaAsariCommander,
     _poolRiverDarter,

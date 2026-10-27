@@ -729,6 +729,7 @@ import _poolWetlandSambar from "../pool/wetland-sambar.js";
 import _poolWheelOfTorture from "../pool/wheel-of-torture.js";
 import _poolWhispersOfTheMuse from "../pool/whispers-of-the-muse.js";
 import _poolWhiteSunsZenith from "../pool/white-suns-zenith.js";
+import _poolWildMight from "../pool/wild-might.js";
 import _poolWillOfTheJeskai from "../pool/will-of-the-jeskai.js";
 import _poolWillOfTheMardu from "../pool/will-of-the-mardu.js";
 import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
@@ -1501,6 +1502,7 @@ const shard: CardShard = {
     _poolWheelOfTorture,
     _poolWhispersOfTheMuse,
     _poolWhiteSunsZenith,
+    _poolWildMight,
     _poolWillOfTheJeskai,
     _poolWillOfTheMardu,
     _poolWiltLeafCavaliers,

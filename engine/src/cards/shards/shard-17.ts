@@ -52,6 +52,7 @@ import _poolBadlandsRevival from "../pool/badlands-revival.js";
 import _poolBalduvianDead from "../pool/balduvian-dead.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
+import _poolBarbarianBully from "../pool/barbarian-bully.js";
 import _poolBarrageTyrant from "../pool/barrage-tyrant.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
 import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
@@ -830,6 +831,7 @@ const shard: CardShard = {
     _poolBalduvianDead,
     _poolBalefireLiege,
     _poolBalinLoremaster,
+    _poolBarbarianBully,
     _poolBarrageTyrant,
     _poolBarrensteppeSiege,
     _poolBastionEnforcer,

@@ -744,6 +744,7 @@ import _poolWaterbendingScroll from "../pool/waterbending-scroll.js";
 import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
 import _poolWear from "../pool/wear.js";
+import _poolWellOfKnowledge from "../pool/well-of-knowledge.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
 import _poolWickedPact from "../pool/wicked-pact.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
@@ -1520,6 +1521,7 @@ const shard: CardShard = {
     _poolWateryGrave,
     _poolWavebreakHippocamp,
     _poolWear,
+    _poolWellOfKnowledge,
     _poolWhiteSunsTwilight,
     _poolWickedPact,
     _poolWightOfTheReliquary,

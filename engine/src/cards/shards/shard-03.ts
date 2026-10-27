@@ -178,6 +178,7 @@ import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtchingOfKumano from "../pool/etching-of-kumano.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
+import _poolExcavation from "../pool/excavation.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolEyeGouge from "../pool/eye-gouge.js";
@@ -194,6 +195,7 @@ import _poolFeedTheInfection from "../pool/feed-the-infection.js";
 import _poolFelidarUmbra from "../pool/felidar-umbra.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
 import _poolFenHauler from "../pool/fen-hauler.js";
+import _poolFeralHydra from "../pool/feral-hydra.js";
 import _poolFerociousTigorilla from "../pool/ferocious-tigorilla.js";
 import _poolFesteringWound from "../pool/festering-wound.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
@@ -389,6 +391,7 @@ import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolMurderousCut from "../pool/murderous-cut.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
+import _poolNakayaShade from "../pool/nakaya-shade.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNaturesPanoply from "../pool/natures-panoply.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
@@ -407,6 +410,7 @@ import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
 import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
+import _poolOonasProwler from "../pool/oonas-prowler.js";
 import _poolOozeGarden from "../pool/ooze-garden.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
@@ -884,6 +888,7 @@ const shard: CardShard = {
     _poolEtchingOfKumano,
     _poolEtheriumHornSorcerer,
     _poolEvidenceExaminer,
+    _poolExcavation,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
     _poolEyeGouge,
@@ -900,6 +905,7 @@ const shard: CardShard = {
     _poolFelidarUmbra,
     _poolFellHorseman,
     _poolFenHauler,
+    _poolFeralHydra,
     _poolFerociousTigorilla,
     _poolFesteringWound,
     _poolFireFieldOgre,
@@ -1095,6 +1101,7 @@ const shard: CardShard = {
     _poolMurderousCut,
     _poolNadirKraken,
     _poolNajalTheStormRunner,
+    _poolNakayaShade,
     _poolNaruMehaMasterWizard,
     _poolNaturesPanoply,
     _poolNecraDisciple,
@@ -1113,6 +1120,7 @@ const shard: CardShard = {
     _poolOfferingToAsha,
     _poolOgreResister,
     _poolOkoLorwynLiege,
+    _poolOonasProwler,
     _poolOozeGarden,
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,

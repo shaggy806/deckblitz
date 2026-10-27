@@ -70,6 +70,7 @@ import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBreakTies from "../pool/break-ties.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
 import _poolBronzeBombshell from "../pool/bronze-bombshell.js";
+import _poolBrowbeat from "../pool/browbeat.js";
 import _poolByForce from "../pool/by-force.js";
 import _poolCalamitousTide from "../pool/calamitous-tide.js";
 import _poolCalamitysWake from "../pool/calamitys-wake.js";
@@ -715,6 +716,7 @@ import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYuanTiMalison from "../pool/yuan-ti-malison.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
 import _poolZaltoFireGiantDuke from "../pool/zalto-fire-giant-duke.js";
+import _poolZerapaMinotaur from "../pool/zerapa-minotaur.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
@@ -814,6 +816,7 @@ const shard: CardShard = {
     _poolBreakTies,
     _poolBrenardGingerSculptor,
     _poolBronzeBombshell,
+    _poolBrowbeat,
     _poolByForce,
     _poolCalamitousTide,
     _poolCalamitysWake,
@@ -1459,6 +1462,7 @@ const shard: CardShard = {
     _poolYuanTiMalison,
     _poolYumaProudProtector,
     _poolZaltoFireGiantDuke,
+    _poolZerapaMinotaur,
     _poolZimoneQuandrixProdigy,
     _poolZoyowaLavaTongue,
     _poolZuranSpellcaster,

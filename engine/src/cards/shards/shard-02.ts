@@ -539,6 +539,7 @@ import _poolSacredKnight from "../pool/sacred-knight.js";
 import _poolSaddledRimestag from "../pool/saddled-rimestag.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
+import _poolSamiteSanctuary from "../pool/samite-sanctuary.js";
 import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
@@ -1300,6 +1301,7 @@ const shard: CardShard = {
     _poolSaddledRimestag,
     _poolSagesRowSavant,
     _poolSalvationEngine,
+    _poolSamiteSanctuary,
     _poolSamutVizierOfNaktamun,
     _poolSandstoneWarrior,
     _poolSangriteSurge,

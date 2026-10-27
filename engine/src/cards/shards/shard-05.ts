@@ -707,6 +707,7 @@ import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
 import _poolVialOfDragonfire from "../pool/vial-of-dragonfire.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolVinesOfTheRecluse from "../pool/vines-of-the-recluse.js";
+import _poolVintaraElephant from "../pool/vintara-elephant.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
 import _poolViridianShaman from "../pool/viridian-shaman.js";
 import _poolVodalianZombie from "../pool/vodalian-zombie.js";
@@ -1475,6 +1476,7 @@ const shard: CardShard = {
     _poolVialOfDragonfire,
     _poolVindictiveWarden,
     _poolVinesOfTheRecluse,
+    _poolVintaraElephant,
     _poolViridianRevel,
     _poolViridianShaman,
     _poolVodalianZombie,
