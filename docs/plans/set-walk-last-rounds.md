@@ -1,6 +1,6 @@
 # The set walk's last three rounds
 
-**Status:** planned (2026-10-27): rounds eighteen, nineteen and twenty not started. Each round
+**Status:** planned (2026-10-27): round eighteen started (B219–B223, five cloud sessions); nineteen and twenty not started. Each round
 is one run of the `author-walks-parallel` skill from a fresh session. Its step 1, choosing the
 walks and their ranges, is already decided below. The coordinator reads its round off this file,
 records the batch numbers in `BACKLOG.md`'s `author-by-set` line (step 2) and starts the
