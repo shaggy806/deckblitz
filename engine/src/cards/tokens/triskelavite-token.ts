@@ -14,7 +14,7 @@ export default defineCard({
   text: "Flying\nSacrifice this token: This token deals 1 damage to any target.",
   activated: [
     {
-      cost: { tap: false, sacrifice: "self" },
+      cost: { mana: null, tap: false, sacrifice: "self" },
       targets: ["any-target"],
       effect: { kind: "damage", amount: 1, target: 0 },
       resolve: null,
