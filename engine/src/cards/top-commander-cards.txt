@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3827 already implemented / 1173 missing (marks refreshed 2026-10-27)
+3830 already implemented / 1170 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2516,7 +2516,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2523  Esika, God of the Tree // The Prismatic Bridge {3}              Legendary Creature — God // Legendary Enchantment
 [x]  2524  Karn, Legacy Reforged                    {5}              Legendary Artifact Creature — Golem
 [x]  2525  Life's Legacy                            {1}{G}           Sorcery
-[ ]  2526  Astral Dragon                            {6}{U}{U}        Creature — Dragon
+[x]  2526  Astral Dragon                            {6}{U}{U}        Creature — Dragon
 [x]  2527  Emrakul's Messenger                      {1}{U}           Creature — Eldrazi Faerie Rogue
 [x]  2528  Diresight                                {2}{B}           Sorcery
 [x]  2529  Giant Adephage                           {5}{G}{G}        Creature — Insect
@@ -2709,7 +2709,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2716  Sword of War and Peace                   {3}              Artifact — Equipment
 [ ]  2717  Nalfeshnee                               {5}{R}           Creature — Beast Demon
 [x]  2718  Step Through                             {3}{U}{U}        Sorcery
-[ ]  2719  Persistent Constrictor                   {4}{B}           Creature — Zombie Snake
+[x]  2719  Persistent Constrictor                   {4}{B}           Creature — Zombie Snake
 [x]  2720  Reckless Handling                        {1}{R}           Sorcery
 [x]  2721  Fynn, the Fangbearer                     {1}{G}           Legendary Creature — Human Warrior
 [x]  2722  Ygra, Eater of All                       {3}{B}{G}        Legendary Creature — Elemental Cat
@@ -4638,7 +4638,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4645  Gilraen, Dúnedain Protector              {2}{W}           Legendary Creature — Human Noble
 [ ]  4646  Phyrexian Scriptures                     {2}{B}{B}        Enchantment — Saga
 [x]  4647  Wizard's Retort                          {1}{U}{U}        Instant
-[ ]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
+[x]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
 [ ]  4649  Assemble the Players                     {1}{W}           Enchantment
 [x]  4650  Slaughter Specialist                     {1}{B}           Creature — Vampire Warrior
 [x]  4651  Darksteel Juggernaut                     {5}              Artifact Creature — Juggernaut
