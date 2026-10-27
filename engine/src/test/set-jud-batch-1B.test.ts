@@ -39,7 +39,7 @@ describe("Phantom Tiger", () => {
     settle(game);
     expect(zone(game, tiger)).toBe("battlefield");
     expect(counters(game, tiger)).toBe(1);
-    expect(game.state.objects[tiger].damage ?? 0).toBe(0);
+    expect(game.state.objects[tiger].damageMarked ?? 0).toBe(0);
   });
 });
 
