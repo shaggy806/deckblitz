@@ -308,6 +308,7 @@ import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
 import _poolHanweirLancer from "../pool/hanweir-lancer.js";
 import _poolHardenedEscort from "../pool/hardened-escort.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
+import _poolHauntedCadaver from "../pool/haunted-cadaver.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHaviTheAllFather from "../pool/havi-the-all-father.js";
 import _poolHazeOfPollen from "../pool/haze-of-pollen.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolHanweirLancer,
     _poolHardenedEscort,
     _poolHarriedArtisan,
+    _poolHauntedCadaver,
     _poolHaveABite,
     _poolHaviTheAllFather,
     _poolHazeOfPollen,

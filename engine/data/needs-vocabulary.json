@@ -12211,6 +12211,30 @@
   "cost:choose-number-additional": {
    "family": "decision:choose-number-on-resolution",
    "example": "Liquid Fire: 'As an additional cost to cast this spell, choose a number between 0 and 5' — a castModal of six modes makes it a modal spell."
+  },
+  "effect:delayed-trigger-about-trigger-recipient": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Serpentine Basilisk: 'whenever it deals combat damage to a creature, destroy that creature at end of combat' — a delayed trigger made by a deals-damage trigger keeps only the trigger object, so \"trigger-recipient\" resolves to nothing when it fires."
+  },
+  "effect:gain-control-to-player-with-most-wizards": {
+   "family": "effect:control-change-extensions",
+   "example": "Thoughtbound Primoc: 'at the beginning of your upkeep, if a player controls more Wizards than each other player, that player gains control of it'."
+  },
+  "effect:prevent-next-damage-to-you-from-filter": {
+   "family": "replacement:damage-modification",
+   "example": "Circle of Solace: 'the next time a creature of the chosen type would deal damage to you this turn, prevent that damage' — next-time prevention covers one chosen source only."
+  },
+  "filter:shares-creature-type-with-sacrificed": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Endemic Plague: 'destroy all creatures that share a creature type with the sacrificed creature' — only card types are compared with a sacrificed creature."
+  },
+  "static:assign-combat-damage-divided-among-defending-player-and-creatures": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Butcher Orgg: 'you may assign its combat damage divided as you choose among defending player and/or any number of creatures they control', blocked or not."
+  },
+  "static:cant-be-blocked-unless-defender-controls-shared-type": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Graxiplon: 'can't be blocked unless defending player controls three or more creatures that share a creature type'."
   }
  }
 }

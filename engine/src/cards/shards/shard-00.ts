@@ -168,6 +168,7 @@ import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDawnstrider from "../pool/dawnstrider.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
+import _poolDeathPulse from "../pool/death-pulse.js";
 import _poolDeathlyRide from "../pool/deathly-ride.js";
 import _poolDecimatorBeetle from "../pool/decimator-beetle.js";
 import _poolDeepWood from "../pool/deep-wood.js";
@@ -277,6 +278,7 @@ import _poolGoblinGrenade from "../pool/goblin-grenade.js";
 import _poolGoblinGrenadiers from "../pool/goblin-grenadiers.js";
 import _poolGoblinLocksmith from "../pool/goblin-locksmith.js";
 import _poolGoblinPatrol from "../pool/goblin-patrol.js";
+import _poolGoblinPyromancer from "../pool/goblin-pyromancer.js";
 import _poolGoblinTrailblazer from "../pool/goblin-trailblazer.js";
 import _poolGoblinVandal from "../pool/goblin-vandal.js";
 import _poolGoldPan from "../pool/gold-pan.js";
@@ -615,6 +617,7 @@ import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSlithermuse from "../pool/slithermuse.js";
 import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
+import _poolSnappingThragg from "../pool/snapping-thragg.js";
 import _poolSnowDevil from "../pool/snow-devil.js";
 import _poolSocialSnub from "../pool/social-snub.js";
 import _poolSokenzanSpellblade from "../pool/sokenzan-spellblade.js";
@@ -993,6 +996,7 @@ const shard: CardShard = {
     _poolDawnstrider,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
+    _poolDeathPulse,
     _poolDeathlyRide,
     _poolDecimatorBeetle,
     _poolDeepWood,
@@ -1102,6 +1106,7 @@ const shard: CardShard = {
     _poolGoblinGrenadiers,
     _poolGoblinLocksmith,
     _poolGoblinPatrol,
+    _poolGoblinPyromancer,
     _poolGoblinTrailblazer,
     _poolGoblinVandal,
     _poolGoldPan,
@@ -1440,6 +1445,7 @@ const shard: CardShard = {
     _poolSlithermuse,
     _poolSmitingHelix,
     _poolSnappingDrake,
+    _poolSnappingThragg,
     _poolSnowDevil,
     _poolSocialSnub,
     _poolSokenzanSpellblade,

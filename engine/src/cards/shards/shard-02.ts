@@ -213,6 +213,7 @@ import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
+import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
@@ -338,6 +339,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
+import _poolInvigoratingBoon from "../pool/invigorating-boon.js";
 import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolEliteVanguard,
     _poolElusiveSpellfist,
     _poolElusiveTormentor,
+    _poolElvishPathcutter,
     _poolEnatuGolem,
     _poolEnshroudingMist,
     _poolEphemeralShields,
@@ -1128,6 +1131,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
+    _poolInvigoratingBoon,
     _poolInvigoratingFalls,
     _poolInvisibleWoman,
     _poolIonasJudgment,

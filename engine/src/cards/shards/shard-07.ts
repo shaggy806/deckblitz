@@ -91,6 +91,7 @@ import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
 import _poolBurrentonBombardier from "../pool/burrenton-bombardier.js";
+import _poolCabalSlaver from "../pool/cabal-slaver.js";
 import _poolCabalTorturer from "../pool/cabal-torturer.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
@@ -240,6 +241,7 @@ import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
 import _poolFortitude from "../pool/fortitude.js";
+import _poolFrightshroudCourier from "../pool/frightshroud-courier.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
@@ -455,6 +457,7 @@ import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticPenitent from "../pool/mystic-penitent.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
+import _poolNamelessOne from "../pool/nameless-one.js";
 import _poolNantukoShaman from "../pool/nantuko-shaman.js";
 import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
@@ -931,6 +934,7 @@ const shard: CardShard = {
     _poolBurnTheAccursed,
     _poolBurningAnger,
     _poolBurrentonBombardier,
+    _poolCabalSlaver,
     _poolCabalTorturer,
     _poolCaligoSkinWitch,
     _poolCallTheScions,
@@ -1080,6 +1084,7 @@ const shard: CardShard = {
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
     _poolFortitude,
+    _poolFrightshroudCourier,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,
@@ -1295,6 +1300,7 @@ const shard: CardShard = {
     _poolMyojinOfInfiniteRage,
     _poolMysticPenitent,
     _poolMysticSpeculation,
+    _poolNamelessOne,
     _poolNantukoShaman,
     _poolNaturalEmergence,
     _poolNaturalState,

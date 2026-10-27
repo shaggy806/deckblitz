@@ -125,6 +125,7 @@ import _poolCollateralDamage from "../pool/collateral-damage.js";
 import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolCommanderEesha from "../pool/commander-eesha.js";
+import _poolCommandoRaid from "../pool/commando-raid.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
 import _poolConsulsShieldguard from "../pool/consuls-shieldguard.js";
@@ -213,6 +214,7 @@ import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
+import _poolEvergloveCourier from "../pool/everglove-courier.js";
 import _poolEvolutionVat from "../pool/evolution-vat.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
@@ -221,6 +223,7 @@ import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFallenCleric from "../pool/fallen-cleric.js";
 import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
@@ -466,6 +469,7 @@ import _poolNimanaSellSword from "../pool/nimana-sell-sword.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
+import _poolNosyGoblin from "../pool/nosy-goblin.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
 import _poolNullRod from "../pool/null-rod.js";
 import _poolNurturerInitiate from "../pool/nurturer-initiate.js";
@@ -942,6 +946,7 @@ const shard: CardShard = {
     _poolColonelAutumn,
     _poolColossalCollision,
     _poolCommanderEesha,
+    _poolCommandoRaid,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
     _poolConsulsShieldguard,
@@ -1030,6 +1035,7 @@ const shard: CardShard = {
     _poolEpharasWarden,
     _poolEtherealAbsolution,
     _poolEtherealAmbush,
+    _poolEvergloveCourier,
     _poolEvolutionVat,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
@@ -1038,6 +1044,7 @@ const shard: CardShard = {
     _poolFableOfWolfAndOwl,
     _poolFaebloomTrick,
     _poolFaerieVandal,
+    _poolFallenCleric,
     _poolFalseDemise,
     _poolFanaticOfXenagos,
     _poolFandanielTelophoroiAscian,
@@ -1283,6 +1290,7 @@ const shard: CardShard = {
     _poolNimanaSkydancer,
     _poolNissaGenesisMage,
     _poolNornsInquisitor,
+    _poolNosyGoblin,
     _poolNoxiousGrasp,
     _poolNullRod,
     _poolNurturerInitiate,

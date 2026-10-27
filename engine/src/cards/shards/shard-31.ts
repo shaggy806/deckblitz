@@ -293,6 +293,7 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
 import _poolGhorClanSavage from "../pool/ghor-clan-savage.js";
+import _poolGhosthelmCourier from "../pool/ghosthelm-courier.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsAvenger from "../pool/gideons-avenger.js";
@@ -385,6 +386,7 @@ import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInheritedFiend from "../pool/inherited-fiend.js";
 import _poolInsatiableHemophage from "../pool/insatiable-hemophage.js";
+import _poolInspirit from "../pool/inspirit.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIntruderAlarm from "../pool/intruder-alarm.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolGhastlyDiscovery,
     _poolGhastlyHaunting,
     _poolGhorClanSavage,
+    _poolGhosthelmCourier,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsAvenger,
@@ -1249,6 +1252,7 @@ const shard: CardShard = {
     _poolInheritedEnvelope,
     _poolInheritedFiend,
     _poolInsatiableHemophage,
+    _poolInspirit,
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIntruderAlarm,
