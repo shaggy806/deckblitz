@@ -113,6 +113,7 @@ import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCapsize from "../pool/capsize.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
+import _poolCarrionWurm from "../pool/carrion-wurm.js";
 import _poolCarryAway from "../pool/carry-away.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
@@ -120,6 +121,7 @@ import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
 import _poolChandler from "../pool/chandler.js";
 import _poolChangeOfHeart from "../pool/change-of-heart.js";
+import _poolChanneledForce from "../pool/channeled-force.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
@@ -282,6 +284,7 @@ import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
 import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
+import _poolGrimLavamancer from "../pool/grim-lavamancer.js";
 import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGruulScrapper from "../pool/gruul-scrapper.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
@@ -891,6 +894,7 @@ const shard: CardShard = {
     _poolCapsize,
     _poolCarnageInterpreter,
     _poolCarrionCruiser,
+    _poolCarrionWurm,
     _poolCarryAway,
     _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
@@ -898,6 +902,7 @@ const shard: CardShard = {
     _poolCaughtInTheBrights,
     _poolChandler,
     _poolChangeOfHeart,
+    _poolChanneledForce,
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
@@ -1060,6 +1065,7 @@ const shard: CardShard = {
     _poolGreatSableStag,
     _poolGreed,
     _poolGriffinProtector,
+    _poolGrimLavamancer,
     _poolGroundedForLife,
     _poolGruulScrapper,
     _poolGutterSkulk,

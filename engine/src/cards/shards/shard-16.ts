@@ -441,6 +441,7 @@ import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
+import _poolNantukoBlightcutter from "../pool/nantuko-blightcutter.js";
 import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
@@ -615,6 +616,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSoar from "../pool/soar.js";
+import _poolSonicSeizure from "../pool/sonic-seizure.js";
 import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolMyrTurbine,
     _poolNagaoBoundByHonor,
     _poolNajeelaTheBladeBlossom,
+    _poolNantukoBlightcutter,
     _poolNaomiPillarOfOrder,
     _poolNaturalize,
     _poolNaturesChant,
@@ -1445,6 +1448,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSoar,
+    _poolSonicSeizure,
     _poolSoullessRevival,
     _poolSoulsGrace,
     _poolSphinxOfLostTruths,

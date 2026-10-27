@@ -247,6 +247,7 @@ import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhastlyGloomhunter from "../pool/ghastly-gloomhunter.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
+import _poolGhostlyWings from "../pool/ghostly-wings.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGiantBeaver from "../pool/giant-beaver.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
@@ -435,6 +436,7 @@ import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
+import _poolParallelEvolution from "../pool/parallel-evolution.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
@@ -458,6 +460,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
+import _poolPsychoticHaze from "../pool/psychotic-haze.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
@@ -1010,6 +1013,7 @@ const shard: CardShard = {
     _poolGhaltaTheImmovable,
     _poolGhastlyGloomhunter,
     _poolGhostSpectralSaboteur,
+    _poolGhostlyWings,
     _poolGhoulcallerGisa,
     _poolGiantBeaver,
     _poolGiantScorpion,
@@ -1198,6 +1202,7 @@ const shard: CardShard = {
     _poolOriginOfTheHulk,
     _poolOstiaryThrull,
     _poolOverlordOfTheBoilerbilges,
+    _poolParallelEvolution,
     _poolParch,
     _poolPartWater,
     _poolPartingGust,
@@ -1221,6 +1226,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
+    _poolPsychoticHaze,
     _poolPuppetMaster,
     _poolPurpleDragonPunks,
     _poolPyreticPrankster,

@@ -45,6 +45,7 @@ import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
 import _poolAvacynianPriest from "../pool/avacynian-priest.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
+import _poolAvenTrooper from "../pool/aven-trooper.js";
 import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAwakenedAwareness from "../pool/awakened-awareness.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
@@ -349,6 +350,7 @@ import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolInfestedRoothold from "../pool/infested-roothold.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
+import _poolInsidiousDreams from "../pool/insidious-dreams.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
 import _poolIntimidation from "../pool/intimidation.js";
@@ -601,6 +603,7 @@ import _poolSilverflameRitual from "../pool/silverflame-ritual.js";
 import _poolSireOfInsanity from "../pool/sire-of-insanity.js";
 import _poolSkitteringCicada from "../pool/skittering-cicada.js";
 import _poolSkullmaneBaku from "../pool/skullmane-baku.js";
+import _poolSkullscorch from "../pool/skullscorch.js";
 import _poolSkyshroudElf from "../pool/skyshroud-elf.js";
 import _poolSkysovereignConsulFlagship from "../pool/skysovereign-consul-flagship.js";
 import _poolSkywarpSkaab from "../pool/skywarp-skaab.js";
@@ -825,6 +828,7 @@ const shard: CardShard = {
     _poolAuriokTransfixer,
     _poolAvacynianPriest,
     _poolAvenFisher,
+    _poolAvenTrooper,
     _poolAwakenTheBloodAvatar,
     _poolAwakenedAwareness,
     _poolAzoriusGuildgate,
@@ -1129,6 +1133,7 @@ const shard: CardShard = {
     _poolInfestedRoothold,
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
+    _poolInsidiousDreams,
     _poolInspiringCall,
     _poolIntetTheDreamer,
     _poolIntimidation,
@@ -1381,6 +1386,7 @@ const shard: CardShard = {
     _poolSireOfInsanity,
     _poolSkitteringCicada,
     _poolSkullmaneBaku,
+    _poolSkullscorch,
     _poolSkyshroudElf,
     _poolSkysovereignConsulFlagship,
     _poolSkywarpSkaab,

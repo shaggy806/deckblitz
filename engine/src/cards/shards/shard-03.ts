@@ -103,6 +103,7 @@ import _poolConsulateTurret from "../pool/consulate-turret.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
 import _poolCovenantOfMinds from "../pool/covenant-of-minds.js";
+import _poolCracklingClub from "../pool/crackling-club.js";
 import _poolCranialRam from "../pool/cranial-ram.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
@@ -113,6 +114,7 @@ import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDacksDuplicate from "../pool/dacks-duplicate.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
+import _poolDawnOfTheDead from "../pool/dawn-of-the-dead.js";
 import _poolDeadlockTrap from "../pool/deadlock-trap.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
@@ -202,6 +204,7 @@ import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
 import _poolFlamewakePhoenix from "../pool/flamewake-phoenix.js";
 import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
+import _poolFlashOfDefiance from "../pool/flash-of-defiance.js";
 import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
@@ -383,6 +386,7 @@ import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMonasteryLoremaster from "../pool/monastery-loremaster.js";
 import _poolMoonlace from "../pool/moonlace.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
+import _poolMorningtide from "../pool/morningtide.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
@@ -418,6 +422,7 @@ import _poolOrosTheAvenger from "../pool/oros-the-avenger.js";
 import _poolOvercome from "../pool/overcome.js";
 import _poolPalianoVanguard from "../pool/paliano-vanguard.js";
 import _poolPalladiaMors from "../pool/palladia-mors.js";
+import _poolPardicLancer from "../pool/pardic-lancer.js";
 import _poolPathbreakerWurm from "../pool/pathbreaker-wurm.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
@@ -811,6 +816,7 @@ const shard: CardShard = {
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
     _poolCovenantOfMinds,
+    _poolCracklingClub,
     _poolCranialRam,
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
@@ -821,6 +827,7 @@ const shard: CardShard = {
     _poolDacksDuplicate,
     _poolDalekSquadron,
     _poolDarkBargain,
+    _poolDawnOfTheDead,
     _poolDeadlockTrap,
     _poolDeadlyDerision,
     _poolDeadlyVisit,
@@ -910,6 +917,7 @@ const shard: CardShard = {
     _poolFireSprites,
     _poolFlamewakePhoenix,
     _poolFlamewaveInvoker,
+    _poolFlashOfDefiance,
     _poolFlayerHusk,
     _poolFlight,
     _poolFlockImpostor,
@@ -1091,6 +1099,7 @@ const shard: CardShard = {
     _poolMonasteryLoremaster,
     _poolMoonlace,
     _poolMorbidHunger,
+    _poolMorningtide,
     _poolMortify,
     _poolMossKami,
     _poolMossViper,
@@ -1126,6 +1135,7 @@ const shard: CardShard = {
     _poolOvercome,
     _poolPalianoVanguard,
     _poolPalladiaMors,
+    _poolPardicLancer,
     _poolPathbreakerWurm,
     _poolPenregonStrongbull,
     _poolPersist,

@@ -478,6 +478,7 @@ import _poolPentadPrism from "../pool/pentad-prism.js";
 import _poolPerilousPredicament from "../pool/perilous-predicament.js";
 import _poolPerish from "../pool/perish.js";
 import _poolPestControl from "../pool/pest-control.js";
+import _poolPetradon from "../pool/petradon.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
 import _poolPhantomNishoba from "../pool/phantom-nishoba.js";
 import _poolPhaseDolphin from "../pool/phase-dolphin.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolPerilousPredicament,
     _poolPerish,
     _poolPestControl,
+    _poolPetradon,
     _poolPetrifiedPlating,
     _poolPhantomNishoba,
     _poolPhaseDolphin,
