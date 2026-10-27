@@ -420,6 +420,7 @@ import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
+import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
@@ -1215,6 +1216,7 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMobilize,
     _poolMockingbird,
+    _poolMoldervineCloak,
     _poolMonkClass,
     _poolMoonHeron,
     _poolMoonfolkPuzzlemaker,

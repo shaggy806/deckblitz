@@ -331,6 +331,7 @@ import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
 import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
+import _poolHuntedDragon from "../pool/hunted-dragon.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
 import _poolHurlyBurly from "../pool/hurly-burly.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
@@ -758,6 +759,7 @@ import _poolViviensCrocodile from "../pool/viviens-crocodile.js";
 import _poolVivisectionEvangelist from "../pool/vivisection-evangelist.js";
 import _poolVolatileArsonist from "../pool/volatile-arsonist.js";
 import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
+import _poolVoyagerStaff from "../pool/voyager-staff.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
@@ -1144,6 +1146,7 @@ const shard: CardShard = {
     _poolHourOfEternity,
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
+    _poolHuntedDragon,
     _poolHuntingTriad,
     _poolHurlyBurly,
     _poolHyalopterousLemure,
@@ -1571,6 +1574,7 @@ const shard: CardShard = {
     _poolVivisectionEvangelist,
     _poolVolatileArsonist,
     _poolVolatileWanderglyph,
+    _poolVoyagerStaff,
     _poolVronosMaskedInquisitor,
     _poolVulshokSplitter,
     _poolWatchwolf,

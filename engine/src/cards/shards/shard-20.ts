@@ -425,6 +425,7 @@ import _poolMerrowCommerce from "../pool/merrow-commerce.js";
 import _poolMightOfMurasa from "../pool/might-of-murasa.js";
 import _poolMillikin from "../pool/millikin.js";
 import _poolMindTransferProtocol from "../pool/mind-transfer-protocol.js";
+import _poolMindmoil from "../pool/mindmoil.js";
 import _poolMindspliceApparatus from "../pool/mindsplice-apparatus.js";
 import _poolMirageMesa from "../pool/mirage-mesa.js";
 import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
@@ -494,6 +495,7 @@ import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
 import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
 import _poolPensiveProfessor from "../pool/pensive-professor.js";
+import _poolPerilousForays from "../pool/perilous-forays.js";
 import _poolPestSummoning from "../pool/pest-summoning.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
@@ -1268,6 +1270,7 @@ const shard: CardShard = {
     _poolMightOfMurasa,
     _poolMillikin,
     _poolMindTransferProtocol,
+    _poolMindmoil,
     _poolMindspliceApparatus,
     _poolMirageMesa,
     _poolMirriCatWarrior,
@@ -1337,6 +1340,7 @@ const shard: CardShard = {
     _poolPeacewalkerColossus,
     _poolPeerPastTheVeil,
     _poolPensiveProfessor,
+    _poolPerilousForays,
     _poolPestSummoning,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,

@@ -612,6 +612,7 @@ import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStolenGoods from "../pool/stolen-goods.js";
+import _poolStoneshakerShaman from "../pool/stoneshaker-shaman.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
@@ -1401,6 +1402,7 @@ const shard: CardShard = {
     _poolSteelSabotage,
     _poolSteelWall,
     _poolStolenGoods,
+    _poolStoneshakerShaman,
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,
     _poolStormshriekFeral,

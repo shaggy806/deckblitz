@@ -327,6 +327,7 @@ import _poolGrimRepriser from "../pool/grim-repriser.js";
 import _poolGripOfDesolation from "../pool/grip-of-desolation.js";
 import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
+import _poolGrozoth from "../pool/grozoth.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
@@ -692,6 +693,7 @@ import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThranQuarry from "../pool/thran-quarry.js";
 import _poolThunderThrashElder from "../pool/thunder-thrash-elder.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
+import _poolTidewaterMinion from "../pool/tidewater-minion.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
 import _poolTobitaMasterOfWinds from "../pool/tobita-master-of-winds.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolGripOfDesolation,
     _poolGriselbrand,
     _poolGrislyRitual,
+    _poolGrozoth,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolGuanYuSaintedWarrior,
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolThranQuarry,
     _poolThunderThrashElder,
     _poolThunderboltsConspiracy,
+    _poolTidewaterMinion,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
     _poolTobitaMasterOfWinds,

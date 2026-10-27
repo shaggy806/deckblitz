@@ -309,6 +309,7 @@ import _poolGostaDirk from "../pool/gosta-dirk.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
+import _poolGraveShellScarab from "../pool/grave-shell-scarab.js";
 import _poolGravespawnSovereign from "../pool/gravespawn-sovereign.js";
 import _poolGraySlaad from "../pool/gray-slaad.js";
 import _poolGreasefangOkibaBoss from "../pool/greasefang-okiba-boss.js";
@@ -350,6 +351,7 @@ import _poolHowlingChorus from "../pool/howling-chorus.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
+import _poolHuntedLammasu from "../pool/hunted-lammasu.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
 import _poolHuntingDrake from "../pool/hunting-drake.js";
 import _poolHush from "../pool/hush.js";
@@ -1087,6 +1089,7 @@ const shard: CardShard = {
     _poolGrandCrescendo,
     _poolGrappleWithThePast,
     _poolGrasslands,
+    _poolGraveShellScarab,
     _poolGravespawnSovereign,
     _poolGraySlaad,
     _poolGreasefangOkibaBoss,
@@ -1128,6 +1131,7 @@ const shard: CardShard = {
     _poolHowlingGolem,
     _poolHumbleNaturalist,
     _poolHumblingElder,
+    _poolHuntedLammasu,
     _poolHuntersBow,
     _poolHuntingDrake,
     _poolHush,

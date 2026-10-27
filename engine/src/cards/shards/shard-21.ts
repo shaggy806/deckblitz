@@ -136,6 +136,7 @@ import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
 import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
+import _poolConclavesBlessing from "../pool/conclaves-blessing.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolConviction from "../pool/conviction.js";
@@ -911,6 +912,7 @@ const shard: CardShard = {
     _poolCommonBond,
     _poolComplexAutomaton,
     _poolConclaveTribunal,
+    _poolConclavesBlessing,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
     _poolConviction,

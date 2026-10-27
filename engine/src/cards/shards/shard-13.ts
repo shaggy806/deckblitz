@@ -454,6 +454,7 @@ import _poolOverloadedMageRing from "../pool/overloaded-mage-ring.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
 import _poolPathOfPeril from "../pool/path-of-peril.js";
+import _poolPeelFromReality from "../pool/peel-from-reality.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
@@ -662,6 +663,7 @@ import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
+import _poolTerrarion from "../pool/terrarion.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
@@ -1234,6 +1236,7 @@ const shard: CardShard = {
     _poolOwlinSpiralmancer,
     _poolPaladinElizabethTaggerdy,
     _poolPathOfPeril,
+    _poolPeelFromReality,
     _poolPersonalTutor,
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
@@ -1442,6 +1445,7 @@ const shard: CardShard = {
     _poolTeleminPerformance,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
+    _poolTerrarion,
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
     _poolTheDrossPits,

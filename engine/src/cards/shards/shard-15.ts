@@ -318,6 +318,7 @@ import _poolHonor from "../pool/honor.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
+import _poolHuntedPhantasm from "../pool/hunted-phantasm.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIdentityThief from "../pool/identity-thief.js";
@@ -1076,6 +1077,7 @@ const shard: CardShard = {
     _poolHorrifyingRevelation,
     _poolHostOfTheHereafter,
     _poolHulklingBurgeoningBruiser,
+    _poolHuntedPhantasm,
     _poolHystrodon,
     _poolIcemanAndFirestar,
     _poolIdentityThief,

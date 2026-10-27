@@ -132,6 +132,7 @@ import _poolChurningEddy from "../pool/churning-eddy.js";
 import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
+import _poolCoalhaulerSwine from "../pool/coalhauler-swine.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
@@ -456,6 +457,7 @@ import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNostalgicDreams from "../pool/nostalgic-dreams.js";
+import _poolNullstoneGargoyle from "../pool/nullstone-gargoyle.js";
 import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolCliffrunnerBehemoth,
     _poolClipWings,
     _poolCloudboundMoogle,
+    _poolCoalhaulerSwine,
     _poolCoalstokeGearhulk,
     _poolCoeurl,
     _poolCogworkAssembler,
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolNightMarket,
     _poolNighthowlPursuer,
     _poolNostalgicDreams,
+    _poolNullstoneGargoyle,
     _poolNyleasDisciple,
     _poolNyxLotus,
     _poolOakheartDryads,

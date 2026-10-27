@@ -170,6 +170,7 @@ import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
 import _poolDiabolicVision from "../pool/diabolic-vision.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
 import _poolDimirAqueduct from "../pool/dimir-aqueduct.js";
+import _poolDimirDoppelganger from "../pool/dimir-doppelganger.js";
 import _poolDireFleetPoisoner from "../pool/dire-fleet-poisoner.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
@@ -956,6 +957,7 @@ const shard: CardShard = {
     _poolDiabolicVision,
     _poolDiminisherWitch,
     _poolDimirAqueduct,
+    _poolDimirDoppelganger,
     _poolDireFleetPoisoner,
     _poolDiregrafColossus,
     _poolDirtwaterWraith,

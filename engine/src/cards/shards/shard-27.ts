@@ -228,6 +228,7 @@ import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
 import _poolFistsOfTheDemigod from "../pool/fists-of-the-demigod.js";
 import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
+import _poolFlameFusillade from "../pool/flame-fusillade.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
@@ -363,6 +364,7 @@ import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
 import _poolLordOfTheUnreal from "../pool/lord-of-the-unreal.js";
 import _poolLoseCalm from "../pool/lose-calm.js";
+import _poolLoxodonGatekeeper from "../pool/loxodon-gatekeeper.js";
 import _poolLuMengWuGeneral from "../pool/lu-meng-wu-general.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolFirefistStriker,
     _poolFistsOfTheDemigod,
     _poolFiveAlarmFire,
+    _poolFlameFusillade,
     _poolFlood,
     _poolFloodwaters,
     _poolFlowstoneWyvern,
@@ -1138,6 +1141,7 @@ const shard: CardShard = {
     _poolLordOfTheForsaken,
     _poolLordOfTheUnreal,
     _poolLoseCalm,
+    _poolLoxodonGatekeeper,
     _poolLuMengWuGeneral,
     _poolLumengridWarden,
     _poolLurkingCrocodile,

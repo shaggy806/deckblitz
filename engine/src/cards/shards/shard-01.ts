@@ -10,6 +10,7 @@ import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
+import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAlabasterPotion from "../pool/alabaster-potion.js";
@@ -785,6 +786,7 @@ const shard: CardShard = {
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
+    _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
     _poolAjanisPridemate,
     _poolAlabasterPotion,

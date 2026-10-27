@@ -63,6 +63,7 @@ import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
 import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
+import _poolBelltowerSphinx from "../pool/belltower-sphinx.js";
 import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBigPlay from "../pool/big-play.js";
 import _poolBiovisionary from "../pool/biovisionary.js";
@@ -167,6 +168,7 @@ import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
+import _poolDogpile from "../pool/dogpile.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDoubleJumpFlyingKick from "../pool/double-jump-flying-kick.js";
@@ -241,6 +243,7 @@ import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFoundryChampion from "../pool/foundry-champion.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
+import _poolFrenziedGoblin from "../pool/frenzied-goblin.js";
 import _poolFretworkColony from "../pool/fretwork-colony.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
@@ -279,6 +282,7 @@ import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
 import _poolGreatDefender from "../pool/great-defender.js";
+import _poolGreaterMossdog from "../pool/greater-mossdog.js";
 import _poolGretchenTitchwillow from "../pool/gretchen-titchwillow.js";
 import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
@@ -441,6 +445,7 @@ import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
+import _poolNecroplasm from "../pool/necroplasm.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNessianDemolok from "../pool/nessian-demolok.js";
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
     _poolBelligerentBrontodon,
+    _poolBelltowerSphinx,
     _poolBeyondTheQuiet,
     _poolBigPlay,
     _poolBiovisionary,
@@ -964,6 +970,7 @@ const shard: CardShard = {
     _poolDistractingGeist,
     _poolDiversionaryTactics,
     _poolDoctorSpectrum,
+    _poolDogpile,
     _poolDone,
     _poolDoomwakeGiant,
     _poolDoubleJumpFlyingKick,
@@ -1038,6 +1045,7 @@ const shard: CardShard = {
     _poolFoulmireKnight,
     _poolFoundryChampion,
     _poolFowlStrike,
+    _poolFrenziedGoblin,
     _poolFretworkColony,
     _poolFriendlyGhost,
     _poolFromTheCatacombs,
@@ -1076,6 +1084,7 @@ const shard: CardShard = {
     _poolGraspingShadows,
     _poolGrazingKelpie,
     _poolGreatDefender,
+    _poolGreaterMossdog,
     _poolGretchenTitchwillow,
     _poolGreyKnightParagon,
     _poolGrimBounty,
@@ -1238,6 +1247,7 @@ const shard: CardShard = {
     _poolNardoleResourcefulCyborg,
     _poolNathOfTheGiltLeaf,
     _poolNayaPanorama,
+    _poolNecroplasm,
     _poolNecroticWound,
     _poolNemaSiltlurker,
     _poolNessianDemolok,

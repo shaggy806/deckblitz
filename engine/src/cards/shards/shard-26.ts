@@ -384,6 +384,7 @@ import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLoss from "../pool/loss.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
+import _poolLoxodonHierarch from "../pool/loxodon-hierarch.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolLupinePrototype from "../pool/lupine-prototype.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolLoss,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
+    _poolLoxodonHierarch,
     _poolLoyalGryff,
     _poolLumengridSentinel,
     _poolLupinePrototype,

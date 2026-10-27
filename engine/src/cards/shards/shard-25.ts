@@ -79,6 +79,7 @@ import _poolBladewingsThrall from "../pool/bladewings-thrall.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
+import _poolBloodFunnel from "../pool/blood-funnel.js";
 import _poolBloodReckoning from "../pool/blood-reckoning.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
@@ -168,6 +169,7 @@ import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
+import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
@@ -445,6 +447,7 @@ import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNotoriousThrong from "../pool/notorious-throng.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
+import _poolOathswornGiant from "../pool/oathsworn-giant.js";
 import _poolOathswornKnight from "../pool/oathsworn-knight.js";
 import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
@@ -849,6 +852,7 @@ const shard: CardShard = {
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
+    _poolBloodFunnel,
     _poolBloodReckoning,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
@@ -938,6 +942,7 @@ const shard: CardShard = {
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,
+    _poolDimirCutpurse,
     _poolDimirKeyrune,
     _poolDissectionTools,
     _poolDoggedPursuit,
@@ -1215,6 +1220,7 @@ const shard: CardShard = {
     _poolNorwoodArchers,
     _poolNotoriousThrong,
     _poolNyxbornSeaguard,
+    _poolOathswornGiant,
     _poolOathswornKnight,
     _poolObeliskOfUndoing,
     _poolObscuraAscendancy,

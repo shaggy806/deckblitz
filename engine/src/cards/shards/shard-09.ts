@@ -698,6 +698,7 @@ import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThranWarMachine from "../pool/thran-war-machine.js";
 import _poolThrashThreat from "../pool/thrash-threat.js";
+import _poolThreeDreams from "../pool/three-dreams.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
 import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
@@ -1503,6 +1504,7 @@ const shard: CardShard = {
     _poolThoseWhoServe,
     _poolThranWarMachine,
     _poolThrashThreat,
+    _poolThreeDreams,
     _poolThrivingIsle,
     _poolThundermaneDragon,
     _poolThunderousSnapper,

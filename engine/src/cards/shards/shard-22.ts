@@ -732,6 +732,7 @@ import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
+import _poolVigorMortis from "../pool/vigor-mortis.js";
 import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
@@ -1537,6 +1538,7 @@ const shard: CardShard = {
     _poolVexingDevil,
     _poolViashinoRacketeer,
     _poolViciousKavu,
+    _poolVigorMortis,
     _poolVillagePillagers,
     _poolVirtuousCharge,
     _poolVirulentSwipe,

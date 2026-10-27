@@ -247,6 +247,7 @@ import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
+import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
 import _poolFlower from "../pool/flower.js";
 import _poolFlycatcherGiraffid from "../pool/flycatcher-giraffid.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
@@ -496,6 +497,7 @@ import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
+import _poolPsychicDrain from "../pool/psychic-drain.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
 import _poolPyriteSpellbomb from "../pool/pyrite-spellbomb.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolFireNationSoldier,
     _poolFlameSpill,
     _poolFlashback,
+    _poolFlowOfIdeas,
     _poolFlower,
     _poolFlycatcherGiraffid,
     _poolFlyingOctobot,
@@ -1283,6 +1286,7 @@ const shard: CardShard = {
     _poolPrismaticVista,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
+    _poolPsychicDrain,
     _poolPursueGlory,
     _poolPutrefax,
     _poolPyriteSpellbomb,
