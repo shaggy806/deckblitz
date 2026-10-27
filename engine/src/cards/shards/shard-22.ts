@@ -55,6 +55,7 @@ import _poolBearerOfTheHeavens from "../pool/bearer-of-the-heavens.js";
 import _poolBeck from "../pool/beck.js";
 import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
+import _poolBelovedChaplain from "../pool/beloved-chaplain.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBenthicore from "../pool/benthicore.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
@@ -244,6 +245,7 @@ import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
+import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
@@ -352,6 +354,7 @@ import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
+import _poolLavaBlister from "../pool/lava-blister.js";
 import _poolLesserGargadon from "../pool/lesser-gargadon.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
@@ -595,6 +598,7 @@ import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkizzik from "../pool/skizzik.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
+import _poolSkyshooter from "../pool/skyshooter.js";
 import _poolSlayerOfTheWicked from "../pool/slayer-of-the-wicked.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
 import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
@@ -862,6 +866,7 @@ const shard: CardShard = {
     _poolBeck,
     _poolBedeckBedazzle,
     _poolBeeSting,
+    _poolBelovedChaplain,
     _poolBenalishHeralds,
     _poolBenthicore,
     _poolBespokeBattlegarb,
@@ -1051,6 +1056,7 @@ const shard: CardShard = {
     _poolGargosViciousWatcher,
     _poolGatherTheTownsfolk,
     _poolGatstafShepherd,
+    _poolGhastlyDemise,
     _poolGhostform,
     _poolGlacialFortress,
     _poolGlazeFiend,
@@ -1159,6 +1165,7 @@ const shard: CardShard = {
     _poolLashOfTheBalrog,
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
+    _poolLavaBlister,
     _poolLesserGargadon,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
@@ -1402,6 +1409,7 @@ const shard: CardShard = {
     _poolSkizzik,
     _poolSkycatSovereign,
     _poolSkyreaping,
+    _poolSkyshooter,
     _poolSlayerOfTheWicked,
     _poolSlipperyBogle,
     _poolSlipperyScoundrel,

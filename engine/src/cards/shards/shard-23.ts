@@ -63,6 +63,7 @@ import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
 import _poolBearsCompanion from "../pool/bears-companion.js";
+import _poolBearscape from "../pool/bearscape.js";
 import _poolBeastMode from "../pool/beast-mode.js";
 import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
@@ -122,6 +123,7 @@ import _poolCaveTiger from "../pool/cave-tiger.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
+import _poolChamberOfManipulation from "../pool/chamber-of-manipulation.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
@@ -862,6 +864,7 @@ const shard: CardShard = {
     _poolBaxterStockman,
     _poolBayouDragonfly,
     _poolBearsCompanion,
+    _poolBearscape,
     _poolBeastMode,
     _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
@@ -921,6 +924,7 @@ const shard: CardShard = {
     _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
+    _poolChamberOfManipulation,
     _poolChaosWand,
     _poolChaosWarp,
     _poolCharismaBobblehead,

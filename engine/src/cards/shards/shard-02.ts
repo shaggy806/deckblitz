@@ -103,6 +103,7 @@ import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
+import _poolCephalidBroker from "../pool/cephalid-broker.js";
 import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
@@ -178,6 +179,7 @@ import _poolDisdainfulStroke from "../pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "../pool/disease-carriers.js";
 import _poolDisentomb from "../pool/disentomb.js";
 import _poolDivineFavor from "../pool/divine-favor.js";
+import _poolDivineSacrament from "../pool/divine-sacrament.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDokaiWeaverOfLife from "../pool/dokai-weaver-of-life.js";
@@ -359,6 +361,7 @@ import _poolKherKeep from "../pool/kher-keep.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
 import _poolKinsbaileBalloonist from "../pool/kinsbaile-balloonist.js";
+import _poolKirtarsWrath from "../pool/kirtars-wrath.js";
 import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
@@ -564,6 +567,7 @@ import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShadesForm from "../pool/shades-form.js";
+import _poolShadowbloodEgg from "../pool/shadowblood-egg.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
@@ -877,6 +881,7 @@ const shard: CardShard = {
     _poolCautiousSurvivor,
     _poolCavernousMaw,
     _poolCelebornTheWise,
+    _poolCephalidBroker,
     _poolChampionOfRhonas,
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
@@ -952,6 +957,7 @@ const shard: CardShard = {
     _poolDiseaseCarriers,
     _poolDisentomb,
     _poolDivineFavor,
+    _poolDivineSacrament,
     _poolDivineVisitation,
     _poolDivinersPortent,
     _poolDokaiWeaverOfLife,
@@ -1133,6 +1139,7 @@ const shard: CardShard = {
     _poolKillianDecisiveMentor,
     _poolKingOfThePride,
     _poolKinsbaileBalloonist,
+    _poolKirtarsWrath,
     _poolKitesailApprentice,
     _poolKnightOfStromgald,
     _poolKnighthood,
@@ -1338,6 +1345,7 @@ const shard: CardShard = {
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
     _poolShadesForm,
+    _poolShadowbloodEgg,
     _poolShadowsVerdict,
     _poolShadowstorm,
     _poolShakedownHeavy,

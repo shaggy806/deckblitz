@@ -24,6 +24,7 @@ import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
 import _poolAmorphousAxe from "../pool/amorphous-axe.js";
+import _poolAncestralTribute from "../pool/ancestral-tribute.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAncientExcavation from "../pool/ancient-excavation.js";
@@ -114,6 +115,7 @@ import _poolCastIntoDarkness from "../pool/cast-into-darkness.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCauldronHaze from "../pool/cauldron-haze.js";
 import _poolCavePeople from "../pool/cave-people.js";
+import _poolCeaseFire from "../pool/cease-fire.js";
 import _poolCensor from "../pool/censor.js";
 import _poolCerebralConfiscation from "../pool/cerebral-confiscation.js";
 import _poolChainedBrute from "../pool/chained-brute.js";
@@ -290,6 +292,7 @@ import _poolGoliathSphinx from "../pool/goliath-sphinx.js";
 import _poolGorillaWarrior from "../pool/gorilla-warrior.js";
 import _poolGraazUnstoppableJuggernaut from "../pool/graaz-unstoppable-juggernaut.js";
 import _poolGrapplingSundew from "../pool/grappling-sundew.js";
+import _poolGravestorm from "../pool/gravestorm.js";
 import _poolGravpackMonoist from "../pool/gravpack-monoist.js";
 import _poolGraypeltRefuge from "../pool/graypelt-refuge.js";
 import _poolGrazingWhiptail from "../pool/grazing-whiptail.js";
@@ -467,6 +470,7 @@ import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNestedGhoul from "../pool/nested-ghoul.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
+import _poolNewFrontiers from "../pool/new-frontiers.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNightfallPredator from "../pool/nightfall-predator.js";
 import _poolNighthaze from "../pool/nighthaze.js";
@@ -511,6 +515,7 @@ import _poolPhyrexianGargantua from "../pool/phyrexian-gargantua.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
 import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
+import _poolPiannaNomadCaptain from "../pool/pianna-nomad-captain.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
@@ -827,6 +832,7 @@ const shard: CardShard = {
     _poolAlloyAnimist,
     _poolAlpineMeadow,
     _poolAmorphousAxe,
+    _poolAncestralTribute,
     _poolAncientCarp,
     _poolAncientCrab,
     _poolAncientExcavation,
@@ -917,6 +923,7 @@ const shard: CardShard = {
     _poolCathedralSanctifier,
     _poolCauldronHaze,
     _poolCavePeople,
+    _poolCeaseFire,
     _poolCensor,
     _poolCerebralConfiscation,
     _poolChainedBrute,
@@ -1093,6 +1100,7 @@ const shard: CardShard = {
     _poolGorillaWarrior,
     _poolGraazUnstoppableJuggernaut,
     _poolGrapplingSundew,
+    _poolGravestorm,
     _poolGravpackMonoist,
     _poolGraypeltRefuge,
     _poolGrazingWhiptail,
@@ -1270,6 +1278,7 @@ const shard: CardShard = {
     _poolNessianCourser,
     _poolNestedGhoul,
     _poolNeurokStealthsuit,
+    _poolNewFrontiers,
     _poolNightdrinkerMoroii,
     _poolNightfallPredator,
     _poolNighthaze,
@@ -1314,6 +1323,7 @@ const shard: CardShard = {
     _poolPhyrexianJuggernaut,
     _poolPhyrexianRebirth,
     _poolPhyrexianSkyflayer,
+    _poolPiannaNomadCaptain,
     _poolPigmentWrangler,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,

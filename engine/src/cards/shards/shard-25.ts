@@ -45,6 +45,7 @@ import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
+import _poolAtogatog from "../pool/atogatog.js";
 import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
@@ -133,6 +134,7 @@ import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
+import _poolConfessor from "../pool/confessor.js";
 import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolConsumingBonfire from "../pool/consuming-bonfire.js";
@@ -164,6 +166,7 @@ import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
+import _poolDemoralize from "../pool/demoralize.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
 import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
@@ -419,6 +422,7 @@ import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
+import _poolMoltenInfluence from "../pool/molten-influence.js";
 import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMonoskelion from "../pool/monoskelion.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
@@ -817,6 +821,7 @@ const shard: CardShard = {
     _poolAssimilateEssence,
     _poolAstralDrift,
     _poolAstralSteel,
+    _poolAtogatog,
     _poolAvenWindGuide,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
@@ -905,6 +910,7 @@ const shard: CardShard = {
     _poolConcertedCare,
     _poolConclaveSledgeCaptain,
     _poolConductorOfCacophony,
+    _poolConfessor,
     _poolConstableOfTheRealm,
     _poolConstrictorSage,
     _poolConsumingBonfire,
@@ -936,6 +942,7 @@ const shard: CardShard = {
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
+    _poolDemoralize,
     _poolDespoilerOfSouls,
     _poolDestructiveFlow,
     _poolDevilishValet,
@@ -1191,6 +1198,7 @@ const shard: CardShard = {
     _poolMoggInfestation,
     _poolMoggcatcher,
     _poolMoltenCollapse,
+    _poolMoltenInfluence,
     _poolMonkOfTheOpenHand,
     _poolMonoskelion,
     _poolMorbidOpportunist,

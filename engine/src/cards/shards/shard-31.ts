@@ -7,6 +7,7 @@ import _poolAangsIceberg from "../pool/aangs-iceberg.js";
 import _poolAardvarkSloth from "../pool/aardvark-sloth.js";
 import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
 import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
+import _poolAboshanCephalidEmperor from "../pool/aboshan-cephalid-emperor.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
 import _poolActOnImpulse from "../pool/act-on-impulse.js";
@@ -458,6 +459,7 @@ import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
+import _poolMagnivore from "../pool/magnivore.js";
 import _poolMagusOfTheTabernacle from "../pool/magus-of-the-tabernacle.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
@@ -545,6 +547,7 @@ import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
+import _poolPedanticLearning from "../pool/pedantic-learning.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
@@ -859,6 +862,7 @@ const shard: CardShard = {
     _poolAardvarkSloth,
     _poolAbbeyGargoyles,
     _poolAberrantMindSorcerer,
+    _poolAboshanCephalidEmperor,
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
     _poolActOnImpulse,
@@ -1310,6 +1314,7 @@ const shard: CardShard = {
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
     _poolMagmaquake,
+    _poolMagnivore,
     _poolMagusOfTheTabernacle,
     _poolMalcolmTheEyes,
     _poolMalevolentRumble,
@@ -1397,6 +1402,7 @@ const shard: CardShard = {
     _poolParcelbeast,
     _poolPatriarsSeal,
     _poolPearlShard,
+    _poolPedanticLearning,
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,

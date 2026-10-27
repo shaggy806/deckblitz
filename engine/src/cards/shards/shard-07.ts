@@ -56,6 +56,7 @@ import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
 import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
 import _poolBlazethornScarecrow from "../pool/blazethorn-scarecrow.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
+import _poolBlazingSalvo from "../pool/blazing-salvo.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
 import _poolBlightcaster from "../pool/blightcaster.js";
 import _poolBlightedFen from "../pool/blighted-fen.js";
@@ -765,6 +766,7 @@ import _poolWhiptongueFrog from "../pool/whiptongue-frog.js";
 import _poolWhitePlumeAdventurer from "../pool/white-plume-adventurer.js";
 import _poolWickerfolkThresher from "../pool/wickerfolk-thresher.js";
 import _poolWightOfPrecinctSix from "../pool/wight-of-precinct-six.js";
+import _poolWildMongrel from "../pool/wild-mongrel.js";
 import _poolWildSwing from "../pool/wild-swing.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
@@ -879,6 +881,7 @@ const shard: CardShard = {
     _poolBladeBlizzardKitsune,
     _poolBlazethornScarecrow,
     _poolBlazingHellhound,
+    _poolBlazingSalvo,
     _poolBlightKeeper,
     _poolBlightcaster,
     _poolBlightedFen,
@@ -1588,6 +1591,7 @@ const shard: CardShard = {
     _poolWhitePlumeAdventurer,
     _poolWickerfolkThresher,
     _poolWightOfPrecinctSix,
+    _poolWildMongrel,
     _poolWildSwing,
     _poolWildfireAwakener,
     _poolWillowDryad,
