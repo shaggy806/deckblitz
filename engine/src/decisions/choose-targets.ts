@@ -23,7 +23,7 @@ import type { Action, LegalAction } from "../actions.js";
 import type { PlayerId } from "../primitives.js";
 import { divisionOf, normalizeTargets, otherSlotConflict, sameTargetRef } from "../target.js";
 import type { ResolvedTargets, TargetRef } from "../target.js";
-import { cardSource, invalidTargetReason } from "../targeting.js";
+import { invalidTargetReason } from "../targeting.js";
 import type { TargetSource } from "../targeting.js";
 import type { ObjectId } from "../primitives.js";
 import { defineDecision } from "./define.js";
@@ -82,7 +82,9 @@ function whyNotCopyTargets(
     const conflict = otherSlotConflict(awaiting.specs, chosen);
     return conflict === null ? null : `target ${conflict.slot + 1} must be another than target ${conflict.than + 1}`;
   }
-  const source = cardSource(ctx.registry.get(awaiting.cardName), awaiting.source);
+  // The source the options were judged from (`Game.stackTargetSlots`), with
+  // what a filter's `{ amount }` reads.
+  const source = ctx.spellTargetSource(awaiting.source);
   const whole = invalidTargetReason(ctx.state, ctx.registry, awaiting.specs, chosen, player, awaiting.cardName, source);
   // A target kept although it's no longer legal fails the whole-set check,
   // and is still allowed: it's the one choice that needs no legality.

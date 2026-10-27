@@ -198,6 +198,14 @@ export interface DecisionReadCtx {
    * still around, and none once it has left (rule 608.2b).
    */
   readonly pendingTriggerTargetSource: () => TargetSource | undefined;
+  /**
+   * The {@link TargetSource} a spell on the stack targets from (`Game`'s
+   * `cardSource`) — its colours and types, its X, and the `amount` reader
+   * that a target filter's `{ amount }` operand needs (Lay Down Arms' "the
+   * number of Plains you control"). New targets for a spell or its copy
+   * (rule 115.7, 707.10c) are offered from it, so they're judged from it too.
+   */
+  readonly spellTargetSource: (spell: ObjectId) => TargetSource;
   /** Why `cast` isn't a legal answer to the pending `cast-now` decision —
    * the whole of `whyCannotCastSpell`, which only `Game` can run. */
   readonly whyCannotCastNow: (cast: Extract<Action, { type: "cast-spell" }>) => string | null;

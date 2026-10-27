@@ -1353,6 +1353,7 @@ export class Game {
         const pending = this.state.pendingTargetedTrigger;
         return pending === null ? undefined : this.abilityTargetSource(pending);
       },
+      spellTargetSource: (spell) => this.cardSource(this.registry.get(this.state.objects[spell].cardName), spell),
       whyCannotCastNow: (cast) => this.canDispatch(cast),
       whyCannotPlayLandNow: (land) => this.whyCannotPlayLandNow(land.player, land.card, land.face ?? 0),
       attackTaxOf: (defender) => this.attackTaxPerCreature(defender),

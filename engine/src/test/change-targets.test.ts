@@ -314,3 +314,26 @@ describe("Hydroelectric Specimen", () => {
     expect(targetsOf(game, bolt)).toEqual([objectRef(specimen)]);
   });
 });
+
+describe("a new target is judged from the spell, with what its filter reads", () => {
+  it("Misdirection moves Lay Down Arms, whose filter counts the Plains its controller controls", () => {
+    // Fuzzer seed 14 (batch 215): the options came from the spell's full
+    // source and the answer was judged without its `amount` reader, so every
+    // offered creature was refused.
+    const game = setUp();
+    for (let i = 0; i < 2; i += 1) game.debugSpawn("Plains", A, "battlefield", { tapped: false });
+    const first = game.debugSpawn("Grizzly Bears", B, "battlefield");
+    const second = game.debugSpawn("Grizzly Bears", B, "battlefield");
+    game.debugSpawn("Grizzly Bears", A, "battlefield");
+    const arms = castBy(game, A, "Lay Down Arms", [objectRef(first)]);
+    passTo(game, B);
+    castBy(game, B, "Misdirection", [objectRef(arms)]);
+    resolveTop(game);
+    const awaiting = game.state.awaiting;
+    expect(awaiting?.kind).toBe("choose-targets");
+    if (awaiting?.kind !== "choose-targets") return;
+    expect(awaiting.options[0]).toContainEqual(objectRef(second));
+    game.dispatch({ type: "choose-targets", player: B, targets: [objectRef(second)] });
+    expect(targetsOf(game, arms)).toEqual([objectRef(second)]);
+  });
+});
