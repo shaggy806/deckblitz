@@ -417,8 +417,11 @@ import _poolMentalAgony from "../pool/mental-agony.js";
 import _poolMercurialPretender from "../pool/mercurial-pretender.js";
 import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
 import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
+import _poolMetathranTransport from "../pool/metathran-transport.js";
+import _poolMeteorStorm from "../pool/meteor-storm.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
+import _poolMightWeaver from "../pool/might-weaver.js";
 import _poolMindCarver from "../pool/mind-carver.js";
 import _poolMindControl from "../pool/mind-control.js";
 import _poolMindRoots from "../pool/mind-roots.js";
@@ -488,6 +491,7 @@ import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
+import _poolPhyrexianReaper from "../pool/phyrexian-reaper.js";
 import _poolPhyrexianTyranny from "../pool/phyrexian-tyranny.js";
 import _poolPhyrexianWarhorse from "../pool/phyrexian-warhorse.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
@@ -525,6 +529,7 @@ import _poolRadiantFlames from "../pool/radiant-flames.js";
 import _poolRaggedVeins from "../pool/ragged-veins.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRainOfSalt from "../pool/rain-of-salt.js";
+import _poolRainbowCrow from "../pool/rainbow-crow.js";
 import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRakshaGoldenCub from "../pool/raksha-golden-cub.js";
@@ -656,6 +661,7 @@ import _poolSpawnOfRixMaadi from "../pool/spawn-of-rix-maadi.js";
 import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpiritFlare from "../pool/spirit-flare.js";
 import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
+import _poolSpiritWeaver from "../pool/spirit-weaver.js";
 import _poolSpiritmonger from "../pool/spiritmonger.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSpittingSpider from "../pool/spitting-spider.js";
@@ -1254,8 +1260,11 @@ const shard: CardShard = {
     _poolMercurialPretender,
     _poolMeriaScholarOfAntiquity,
     _poolMerrowSkyswimmer,
+    _poolMetathranTransport,
+    _poolMeteorStorm,
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
+    _poolMightWeaver,
     _poolMindCarver,
     _poolMindControl,
     _poolMindRoots,
@@ -1325,6 +1334,7 @@ const shard: CardShard = {
     _poolPeterParker,
     _poolPhantomTrain,
     _poolPhyrexianMetamorph,
+    _poolPhyrexianReaper,
     _poolPhyrexianTyranny,
     _poolPhyrexianWarhorse,
     _poolPillarvergePathway,
@@ -1362,6 +1372,7 @@ const shard: CardShard = {
     _poolRaggedVeins,
     _poolRagingMinotaur,
     _poolRainOfSalt,
+    _poolRainbowCrow,
     _poolRainbowEfreet,
     _poolRakdosRagemutt,
     _poolRakshaGoldenCub,
@@ -1493,6 +1504,7 @@ const shard: CardShard = {
     _poolSpecimenCollector,
     _poolSpiritFlare,
     _poolSpiritOfTheNight,
+    _poolSpiritWeaver,
     _poolSpiritmonger,
     _poolSpitefulSliver,
     _poolSpittingSpider,

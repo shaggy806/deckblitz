@@ -224,6 +224,7 @@ import _poolEstwaldShieldbasher from "../pool/estwald-shieldbasher.js";
 import _poolEtchedChampion from "../pool/etched-champion.js";
 import _poolEternityVessel from "../pool/eternity-vessel.js";
 import _poolEtherWell from "../pool/ether-well.js";
+import _poolExoticCurse from "../pool/exotic-curse.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
@@ -477,6 +478,7 @@ import _poolOutwit from "../pool/outwit.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOvergrowthElemental from "../pool/overgrowth-elemental.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
+import _poolPain from "../pool/pain.js";
 import _poolPalinchron from "../pool/palinchron.js";
 import _poolParadisePlume from "../pool/paradise-plume.js";
 import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
@@ -505,6 +507,7 @@ import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
 import _poolPrimalForcemage from "../pool/primal-forcemage.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
+import _poolPrisonBarricade from "../pool/prison-barricade.js";
 import _poolProclamationOfRebirth from "../pool/proclamation-of-rebirth.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
@@ -1019,6 +1022,7 @@ const shard: CardShard = {
     _poolEtchedChampion,
     _poolEternityVessel,
     _poolEtherWell,
+    _poolExoticCurse,
     _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
@@ -1272,6 +1276,7 @@ const shard: CardShard = {
     _poolOvalchaseDragster,
     _poolOvergrowthElemental,
     _poolOverwriteTheMultiverse,
+    _poolPain,
     _poolPalinchron,
     _poolParadisePlume,
     _poolParadoxSurveyor,
@@ -1300,6 +1305,7 @@ const shard: CardShard = {
     _poolPrecipitousDrop,
     _poolPrimalForcemage,
     _poolPrimalWellspring,
+    _poolPrisonBarricade,
     _poolProclamationOfRebirth,
     _poolProctorsGaze,
     _poolPromisingVein,

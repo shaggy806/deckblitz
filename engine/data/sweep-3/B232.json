@@ -1,0 +1,723 @@
+{
+ "batch": "B232",
+ "status": "complete",
+ "ranks": "Invasion (INV, 2000-10-02): the rest of the set, 101 of 201 (the sixth middle walk's last batch; Invasion is whole)",
+ "authored": [
+  {
+   "name": "Ancient Kavu",
+   "files": [
+    "engine/src/cards/pool/ancient-kavu.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ardent Soldier",
+   "files": [
+    "engine/src/cards/pool/ardent-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assault // Battery",
+   "files": [
+    "engine/src/cards/pool/assault-battery.ts",
+    "engine/src/cards/pool/assault.ts",
+    "engine/src/cards/pool/battery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benalish Emissary",
+   "files": [
+    "engine/src/cards/pool/benalish-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Benalish Lancer",
+   "files": [
+    "engine/src/cards/pool/benalish-lancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Shade",
+   "files": [
+    "engine/src/cards/pool/cinder-shade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crypt Angel",
+   "files": [
+    "engine/src/cards/pool/crypt-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiling Tears",
+   "files": [
+    "engine/src/cards/pool/defiling-tears.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskwalker",
+   "files": [
+    "engine/src/cards/pool/duskwalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exotic Curse",
+   "files": [
+    "engine/src/cards/pool/exotic-curse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Growth",
+   "files": [
+    "engine/src/cards/pool/explosive-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Squadron",
+   "files": [
+    "engine/src/cards/pool/faerie-squadron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firebrand Ranger",
+   "files": [
+    "engine/src/cards/pool/firebrand-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hate Weaver",
+   "files": [
+    "engine/src/cards/pool/hate-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horned Cheetah",
+   "files": [
+    "engine/src/cards/pool/horned-cheetah.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunting Kavu",
+   "files": [
+    "engine/src/cards/pool/hunting-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hypnotic Cloud",
+   "files": [
+    "engine/src/cards/pool/hypnotic-cloud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Aggressor",
+   "files": [
+    "engine/src/cards/pool/kavu-aggressor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kavu Chameleon",
+   "files": [
+    "engine/src/cards/pool/kavu-chameleon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kavu Monarch",
+   "files": [
+    "engine/src/cards/pool/kavu-monarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Runner",
+   "files": [
+    "engine/src/cards/pool/kavu-runner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Scout",
+   "files": [
+    "engine/src/cards/pool/kavu-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Dart",
+   "files": [
+    "engine/src/cards/pool/lightning-dart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marauding Knight",
+   "files": [
+    "engine/src/cards/pool/marauding-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metathran Aerostat",
+   "files": [
+    "engine/src/cards/pool/metathran-aerostat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metathran Transport",
+   "files": [
+    "engine/src/cards/pool/metathran-transport.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Meteor Storm",
+   "files": [
+    "engine/src/cards/pool/meteor-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Might Weaver",
+   "files": [
+    "engine/src/cards/pool/might-weaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ordered Migration",
+   "files": [
+    "engine/src/cards/pool/ordered-migration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orim's Touch",
+   "files": [
+    "engine/src/cards/pool/orims-touch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pain // Suffering",
+   "files": [
+    "engine/src/cards/pool/pain-suffering.ts",
+    "engine/src/cards/pool/pain.ts",
+    "engine/src/cards/pool/suffering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Reaper",
+   "files": [
+    "engine/src/cards/pool/phyrexian-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Slayer",
+   "files": [
+    "engine/src/cards/pool/phyrexian-slayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pincer Spider",
+   "files": [
+    "engine/src/cards/pool/pincer-spider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plague Spores",
+   "files": [
+    "engine/src/cards/pool/plague-spores.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pouncing Kavu",
+   "files": [
+    "engine/src/cards/pool/pouncing-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power Armor",
+   "files": [
+    "engine/src/cards/pool/power-armor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prison Barricade",
+   "files": [
+    "engine/src/cards/pool/prison-barricade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pure Reflection",
+   "files": [
+    "engine/src/cards/pool/pure-reflection.ts",
+    "engine/src/cards/tokens/x-x-reflection-token-white.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyre Zombie",
+   "files": [
+    "engine/src/cards/pool/pyre-zombie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rage Weaver",
+   "files": [
+    "engine/src/cards/pool/rage-weaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rainbow Crow",
+   "files": [
+    "engine/src/cards/pool/rainbow-crow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rampant Elephant",
+   "files": [
+    "engine/src/cards/pool/rampant-elephant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reviving Vapors",
+   "files": [
+    "engine/src/cards/pool/reviving-vapors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rogue Kavu",
+   "files": [
+    "engine/src/cards/pool/rogue-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shivan Emissary",
+   "files": [
+    "engine/src/cards/pool/shivan-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shoreline Raider",
+   "files": [
+    "engine/src/cards/pool/shoreline-raider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skittish Kavu",
+   "files": [
+    "engine/src/cards/pool/skittish-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sky Weaver",
+   "files": [
+    "engine/src/cards/pool/sky-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smoldering Tar",
+   "files": [
+    "engine/src/cards/pool/smoldering-tar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sparring Golem",
+   "files": [
+    "engine/src/cards/pool/sparring-golem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spirit Weaver",
+   "files": [
+    "engine/src/cards/pool/spirit-weaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stand // Deliver",
+   "files": [
+    "engine/src/cards/pool/deliver.ts",
+    "engine/src/cards/pool/stand-deliver.ts",
+    "engine/src/cards/pool/stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength of Unity",
+   "files": [
+    "engine/src/cards/pool/strength-of-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi's Care",
+   "files": [
+    "engine/src/cards/pool/teferis-care.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tek",
+   "files": [
+    "engine/src/cards/pool/tek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Emissary",
+   "files": [
+    "engine/src/cards/pool/tolarian-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urborg Emissary",
+   "files": [
+    "engine/src/cards/pool/urborg-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urborg Shambler",
+   "files": [
+    "engine/src/cards/pool/urborg-shambler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Voracious Cobra",
+   "files": [
+    "engine/src/cards/pool/voracious-cobra.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wallop",
+   "files": [
+    "engine/src/cards/pool/wallop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wandering Stream",
+   "files": [
+    "engine/src/cards/pool/wandering-stream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wayfaring Giant",
+   "files": [
+    "engine/src/cards/pool/wayfaring-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winnow",
+   "files": [
+    "engine/src/cards/pool/winnow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya Kavu",
+   "files": [
+    "engine/src/cards/pool/yavimaya-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yawgmoth's Agenda",
+   "files": [
+    "engine/src/cards/pool/yawgmoths-agenda.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Rooting Kavu",
+   "needs": [
+    "effect:shuffle-graveyard-filter-into-library"
+   ],
+   "why": "Shuffle all creature cards from your graveyard into your library: shuffle-graveyard-into-library takes the whole graveyard."
+  },
+  {
+   "name": "Armored Guardian",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Target creature you control gains protection from the colour of your choice until end of turn."
+  },
+  {
+   "name": "Slimy Kavu",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "Target land becomes a Swamp until end of turn (replacing its land types)."
+  },
+  {
+   "name": "Callous Giant",
+   "needs": [
+    "replacement:prevent-damage-at-most-n"
+   ],
+   "why": "If a source would deal 3 or less damage to it, prevent that damage: the damage replacement has no amount threshold."
+  },
+  {
+   "name": "Ruham Djinn",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Gets -2/-2 as long as white is the most common colour among all permanents or tied."
+  },
+  {
+   "name": "Urborg Phantom",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-source"
+   ],
+   "why": "Prevent all combat damage that would be dealt to and dealt by this creature this turn."
+  },
+  {
+   "name": "Phyrexian Battleflies",
+   "needs": [
+    "cost:activate-no-more-than-n-times-each-turn"
+   ],
+   "why": "Activate no more than twice each turn: only oncePerTurn exists."
+  },
+  {
+   "name": "Searing Rays",
+   "needs": [
+    "amount:count-per-player"
+   ],
+   "why": "Each player is dealt damage equal to the number of creatures of the chosen colour they control."
+  },
+  {
+   "name": "Barrin's Spite",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "Two target creatures controlled by the same player; their controller chooses one to sacrifice, the other returns."
+  },
+  {
+   "name": "Barrin's Unmaking",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Return target permanent if it shares a colour with the most common colour among all permanents or a tied one."
+  },
+  {
+   "name": "Sulam Djinn",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Gets -2/-2 as long as green is the most common colour among all permanents or tied."
+  },
+  {
+   "name": "Jade Leech",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "Green spells you cast cost {G} more: costModification adds only generic mana."
+  },
+  {
+   "name": "Essence Leak",
+   "needs": [
+    "effect:sacrifice-unless-pay-its-mana-cost"
+   ],
+   "why": "As long as enchanted permanent is red or green, it has an upkeep trigger: sacrifice it unless you pay its mana cost."
+  },
+  {
+   "name": "Temporal Distortion",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "Remove all hourglass counters from permanents that player controls: no all-matching counter removal."
+  },
+  {
+   "name": "Ruby Leech",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "Red spells you cast cost {R} more."
+  },
+  {
+   "name": "Andradite Leech",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "Black spells you cast cost {B} more."
+  },
+  {
+   "name": "Scarred Puma",
+   "needs": [
+    "static:cant-attack-unless-matching-also-attacks"
+   ],
+   "why": "Can't attack unless a black or green creature also attacks."
+  },
+  {
+   "name": "Goham Djinn",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Gets -2/-2 as long as black is the most common colour among all permanents or tied."
+  },
+  {
+   "name": "Crimson Acolyte",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "Target creature gains protection from green until end of turn."
+  },
+  {
+   "name": "Vigorous Charge",
+   "needs": [
+    "effect:delayed-combat-damage-that-much"
+   ],
+   "why": "Kicked: whenever the creature deals combat damage this turn, you gain that much life."
+  },
+  {
+   "name": "Harsh Judgment",
+   "needs": [
+    "replacement:damage-reflection"
+   ],
+   "why": "As it enters choose a colour; an instant or sorcery of that colour's damage to you is dealt to its controller instead."
+  },
+  {
+   "name": "Desperate Research",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "Choose a card name other than a basic land card name."
+  },
+  {
+   "name": "Vodalian Serpent",
+   "needs": [
+    "static:cant-attack-unless-defender-controls"
+   ],
+   "why": "Can't attack unless defending player controls an Island."
+  },
+  {
+   "name": "Halam Djinn",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Gets -2/-2 as long as red is the most common colour among all permanents or tied."
+  },
+  {
+   "name": "Obsidian Acolyte",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "Target creature gains protection from black until end of turn."
+  },
+  {
+   "name": "Stormscape Master",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Target creature gains protection from the colour of your choice until end of turn."
+  },
+  {
+   "name": "Thornscape Master",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Target creature gains protection from the colour of your choice until end of turn."
+  },
+  {
+   "name": "Restrain",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "Prevent all combat damage that would be dealt by target attacking creature this turn."
+  },
+  {
+   "name": "Loafing Giant",
+   "needs": [
+    "effect:prevent-combat-damage-by-target"
+   ],
+   "why": "Prevent all combat damage this creature would deal this turn (on a milled land)."
+  },
+  {
+   "name": "Samite Ministration",
+   "needs": [
+    "replacement:prevent-all-damage-from-chosen-source-this-turn"
+   ],
+   "why": "Prevent all damage a source of your choice would deal to you this turn; gain life if it was black or red."
+  },
+  {
+   "name": "Sapphire Leech",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "Blue spells you cast cost {U} more."
+  },
+  {
+   "name": "Turf Wound",
+   "needs": [
+    "effect:prohibit-land-plays"
+   ],
+   "why": "Target player can't play land cards this turn."
+  },
+  {
+   "name": "Pulse of Llanowar",
+   "needs": [
+    "replacement:land-mana-type-replacement"
+   ],
+   "why": "A basic land you control tapped for mana adds one mana of any colour instead."
+  },
+  {
+   "name": "Alloy Golem",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "As it enters choose a colour; it's that colour."
+  },
+  {
+   "name": "Zanam Djinn",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Gets -2/-2 as long as blue is the most common colour among all permanents or tied."
+  }
+ ]
+}

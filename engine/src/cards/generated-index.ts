@@ -632,6 +632,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "X/X Golem Token",
   "X/X Golem Token (Haste)",
   "X/X Red Elemental Token",
+  "X/X Reflection Token (White)",
   "X/X Spirit Token (Black)",
   "X/X Vampire Token (Black)",
   "Young Hero Role Token",

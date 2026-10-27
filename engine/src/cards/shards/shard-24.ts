@@ -817,6 +817,7 @@ import _tokensSoldierAllyToken from "../tokens/soldier-ally-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
 import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
 import _tokensWallTokenArtifactDefender from "../tokens/wall-token-artifact-defender.js";
+import _tokensXXReflectionTokenWhite from "../tokens/x-x-reflection-token-white.js";
 
 const shard: CardShard = {
   pool: [
@@ -1636,6 +1637,7 @@ const shard: CardShard = {
     _tokensSquidToken,
     _tokensStormCrowToken,
     _tokensWallTokenArtifactDefender,
+    _tokensXXReflectionTokenWhite,
   ],
 };
 

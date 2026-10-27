@@ -660,6 +660,7 @@ import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
 import _poolStormriderRig from "../pool/stormrider-rig.js";
 import _poolStrawGolem from "../pool/straw-golem.js";
+import _poolStrengthOfUnity from "../pool/strength-of-unity.js";
 import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
@@ -1494,6 +1495,7 @@ const shard: CardShard = {
     _poolStormkeldVanguard,
     _poolStormriderRig,
     _poolStrawGolem,
+    _poolStrengthOfUnity,
     _poolStrixSerenade,
     _poolStrongarmThug,
     _poolStrongholdAssassin,

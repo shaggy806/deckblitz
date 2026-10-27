@@ -617,6 +617,7 @@ import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js
 import _poolShaperParasite from "../pool/shaper-parasite.js";
 import _poolShardingSphinx from "../pool/sharding-sphinx.js";
 import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
+import _poolShivanEmissary from "../pool/shivan-emissary.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolShaperParasite,
     _poolShardingSphinx,
     _poolShikoAndNarsetUnified,
+    _poolShivanEmissary,
     _poolShizoDeathsStorehouse,
     _poolShorelineSalvager,
     _poolSidisisPet,

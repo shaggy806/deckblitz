@@ -657,6 +657,7 @@ import _poolSpoilsOfVictory from "../pool/spoils-of-victory.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
+import _poolStandDeliver from "../pool/stand-deliver.js";
 import _poolStarCharter from "../pool/star-charter.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
@@ -1465,6 +1466,7 @@ const shard: CardShard = {
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
+    _poolStandDeliver,
     _poolStarCharter,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,

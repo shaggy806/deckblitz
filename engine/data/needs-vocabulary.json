@@ -12267,6 +12267,14 @@
   "static:cant-be-blocked-unless-defender-controls-shared-type": {
    "family": "static:combat-restriction-extensions",
    "example": "Graxiplon: 'can't be blocked unless defending player controls three or more creatures that share a creature type'."
+  },
+  "replacement:prevent-damage-at-most-n": {
+   "family": "replacement:damage-prevented-to-filter",
+   "example": "Callous Giant: 'If a source would deal 3 or less damage to this creature, prevent that damage' — no amount threshold on the damage replacement."
+  },
+  "static:cant-attack-unless-matching-also-attacks": {
+   "family": "static:attack-limit",
+   "example": "Scarred Puma: \"can't attack unless a black or green creature also attacks\""
   }
  }
 }

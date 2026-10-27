@@ -369,6 +369,8 @@ import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
+import _poolKavuChameleon from "../pool/kavu-chameleon.js";
+import _poolKavuMonarch from "../pool/kavu-monarch.js";
 import _poolKavuTitan from "../pool/kavu-titan.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
@@ -630,6 +632,7 @@ import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
 import _poolSkulkingKnight from "../pool/skulking-knight.js";
+import _poolSkyWeaver from "../pool/sky-weaver.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
 import _poolSlowMotion from "../pool/slow-motion.js";
@@ -774,6 +777,7 @@ import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
 import _poolWalkingSponge from "../pool/walking-sponge.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
+import _poolWallop from "../pool/wallop.js";
 import _poolWanderersTwig from "../pool/wanderers-twig.js";
 import _poolWarFalcon from "../pool/war-falcon.js";
 import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
@@ -1185,6 +1189,8 @@ const shard: CardShard = {
     _poolKardursViciousReturn,
     _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
+    _poolKavuChameleon,
+    _poolKavuMonarch,
     _poolKavuTitan,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
@@ -1446,6 +1452,7 @@ const shard: CardShard = {
     _poolSkeletalChangeling,
     _poolSkred,
     _poolSkulkingKnight,
+    _poolSkyWeaver,
     _poolSkyclaveRelic,
     _poolSlickImitator,
     _poolSlowMotion,
@@ -1590,6 +1597,7 @@ const shard: CardShard = {
     _poolVorracBattlehorns,
     _poolWalkingSponge,
     _poolWallOfLight,
+    _poolWallop,
     _poolWanderersTwig,
     _poolWarFalcon,
     _poolWarSpikeChangeling,

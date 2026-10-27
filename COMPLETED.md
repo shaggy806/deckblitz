@@ -93,6 +93,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   scaffolder; Surge of Zeal) and the "if {X} was spent" riders — by four `card-author` agents,
   and 24 blocked (`B234.json`). `set-rav-batch-2A`…`2D`. The second middle walk's range
   (Coldsnap back to Ravnica: City of Guilds) is done.
+- **Invasion — Invasion is whole** (batch 232, the sixth middle walk, 2026-10-27): 66 of its
+  last 101 new cards authored — the scaffolder finished the four kicker Emissaries; five
+  `card-author` agents and the lead the rest: Yawgmoth's Agenda, Pure Reflection (an X/X white
+  Reflection, never printed), Winnow, Metathran Aerostat, the split cards Stand // Deliver,
+  Pain // Suffering and Assault // Battery, the domain cards (Kavu Scout, Strength of Unity,
+  Exotic Curse, Wayfaring Giant, Ordered Migration, Wandering Stream) — and 35 blocked
+  (`B232.json`), no feature built. The sixth middle walk's range (Apocalypse back to Invasion)
+  is done.
 - **The rest of Mercadian Masques — Mercadian Masques is whole, and the oldest-first walk's range
   is done** (batch 233, the oldest-first walk, 2026-10-27): no engine change. 99 of its last 123
   authored — Delraich, Rishadan Pawnshop, Indentured Djinn, Bifurcate, Kyren Toy, Mercadian Lift,

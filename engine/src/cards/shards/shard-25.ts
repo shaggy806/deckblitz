@@ -490,6 +490,7 @@ import _poolPhantomBeast from "../pool/phantom-beast.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
+import _poolPhyrexianSlayer from "../pool/phyrexian-slayer.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
 import _poolPlatedPegasus from "../pool/plated-pegasus.js";
@@ -500,6 +501,7 @@ import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
 import _poolPossessedNomad from "../pool/possessed-nomad.js";
 import _poolPouncingWurm from "../pool/pouncing-wurm.js";
+import _poolPowerArmor from "../pool/power-armor.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrideSovereign from "../pool/pride-sovereign.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
@@ -722,6 +724,7 @@ import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrbanUtopia from "../pool/urban-utopia.js";
+import _poolUrborgEmissary from "../pool/urborg-emissary.js";
 import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
 import _poolVampireAristocrat from "../pool/vampire-aristocrat.js";
 import _poolVampireNeonate from "../pool/vampire-neonate.js";
@@ -1284,6 +1287,7 @@ const shard: CardShard = {
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
     _poolPhyrexianBoon,
+    _poolPhyrexianSlayer,
     _poolPitilessPlunderer,
     _poolPlanarIncision,
     _poolPlatedPegasus,
@@ -1294,6 +1298,7 @@ const shard: CardShard = {
     _poolPorcelainLegionnaire,
     _poolPossessedNomad,
     _poolPouncingWurm,
+    _poolPowerArmor,
     _poolPriceOfLoyalty,
     _poolPrideSovereign,
     _poolPrimevalProtector,
@@ -1516,6 +1521,7 @@ const shard: CardShard = {
     _poolUnravelingMummy,
     _poolUnwillingIngredient,
     _poolUrbanUtopia,
+    _poolUrborgEmissary,
     _poolUrzaChiefArtificer,
     _poolVampireAristocrat,
     _poolVampireNeonate,

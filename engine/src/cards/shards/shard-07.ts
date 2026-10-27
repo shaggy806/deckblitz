@@ -622,12 +622,14 @@ import _poolShiftingWall from "../pool/shifting-wall.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolShorecrasherMimic from "../pool/shorecrasher-mimic.js";
+import _poolShorelineRaider from "../pool/shoreline-raider.js";
 import _poolShrikeHarpy from "../pool/shrike-harpy.js";
 import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
 import _poolSimianGrunts from "../pool/simian-grunts.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
 import _poolSkitterOfLizards from "../pool/skitter-of-lizards.js";
+import _poolSkittishKavu from "../pool/skittish-kavu.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
 import _poolSkyboxFerry from "../pool/skybox-ferry.js";
 import _poolSkyscribing from "../pool/skyscribing.js";
@@ -1471,12 +1473,14 @@ const shard: CardShard = {
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
     _poolShorecrasherMimic,
+    _poolShorelineRaider,
     _poolShrikeHarpy,
     _poolShuYunTheSilentTempest,
     _poolSibsigMuckdraggers,
     _poolSimianGrunts,
     _poolSimicCharm,
     _poolSkitterOfLizards,
+    _poolSkittishKavu,
     _poolSkullStorm,
     _poolSkyboxFerry,
     _poolSkyscribing,

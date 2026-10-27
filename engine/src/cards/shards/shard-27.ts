@@ -216,6 +216,7 @@ import _poolEverbarkShaman from "../pool/everbark-shaman.js";
 import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
+import _poolExplosiveGrowth from "../pool/explosive-growth.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
 import _poolFaerieMiscreant from "../pool/faerie-miscreant.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
@@ -284,6 +285,7 @@ import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHarvestHand from "../pool/harvest-hand.js";
+import _poolHateWeaver from "../pool/hate-weaver.js";
 import _poolHauntingHymn from "../pool/haunting-hymn.js";
 import _poolHavengulRunebinder from "../pool/havengul-runebinder.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
@@ -469,6 +471,7 @@ import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPitilessVizier from "../pool/pitiless-vizier.js";
+import _poolPlagueSpores from "../pool/plague-spores.js";
 import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
@@ -657,6 +660,7 @@ import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
+import _poolTek from "../pool/tek.js";
 import _poolTelJiladOutrider from "../pool/tel-jilad-outrider.js";
 import _poolTellerOfTales from "../pool/teller-of-tales.js";
 import _poolTellingTime from "../pool/telling-time.js";
@@ -759,6 +763,7 @@ import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
 import _poolWeirdHarvest from "../pool/weird-harvest.js";
 import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
+import _poolWinnow from "../pool/winnow.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWordOfSeizing from "../pool/word-of-seizing.js";
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolEvolvedSpinoderm,
     _poolExpansionExplosion,
     _poolExpedite,
+    _poolExplosiveGrowth,
     _poolExtremisElite,
     _poolFaerieMiscreant,
     _poolFaerieSlumberParty,
@@ -1080,6 +1086,7 @@ const shard: CardShard = {
     _poolHaloHunter,
     _poolHarvestGwyllion,
     _poolHarvestHand,
+    _poolHateWeaver,
     _poolHauntingHymn,
     _poolHavengulRunebinder,
     _poolHavenwoodBattleground,
@@ -1265,6 +1272,7 @@ const shard: CardShard = {
     _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPitilessVizier,
+    _poolPlagueSpores,
     _poolPlowThroughReito,
     _poolPoisedPractitioner,
     _poolPreordain,
@@ -1453,6 +1461,7 @@ const shard: CardShard = {
     _poolTalismanOfIndulgence,
     _poolTarriansSoulcleaver,
     _poolTawnossWand,
+    _poolTek,
     _poolTelJiladOutrider,
     _poolTellerOfTales,
     _poolTellingTime,
@@ -1555,6 +1564,7 @@ const shard: CardShard = {
     _poolWeirdHarvest,
     _poolWillowGeist,
     _poolWillowduskEssenceSeer,
+    _poolWinnow,
     _poolWitheringTorment,
     _poolWoodlandCemetery,
     _poolWordOfSeizing,

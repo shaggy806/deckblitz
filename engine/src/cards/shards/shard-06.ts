@@ -191,6 +191,7 @@ import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeathgazer from "../pool/deathgazer.js";
 import _poolDeepSight from "../pool/deep-sight.js";
+import _poolDefilingTears from "../pool/defiling-tears.js";
 import _poolDeflection from "../pool/deflection.js";
 import _poolDeliveryMoogle from "../pool/delivery-moogle.js";
 import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
@@ -239,6 +240,7 @@ import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFacelessButcher from "../pool/faceless-butcher.js";
+import _poolFaerieSquadron from "../pool/faerie-squadron.js";
 import _poolFallenIdeal from "../pool/fallen-ideal.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
@@ -397,6 +399,7 @@ import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLeaveNoTrace from "../pool/leave-no-trace.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
+import _poolLightningDart from "../pool/lightning-dart.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
@@ -418,6 +421,7 @@ import _poolMajorTeroh from "../pool/major-teroh.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
+import _poolMaraudingKnight from "../pool/marauding-knight.js";
 import _poolMaraudingLooter from "../pool/marauding-looter.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
@@ -992,6 +996,7 @@ const shard: CardShard = {
     _poolDeadlyRiposte,
     _poolDeathgazer,
     _poolDeepSight,
+    _poolDefilingTears,
     _poolDeflection,
     _poolDeliveryMoogle,
     _poolDepthsOfDesire,
@@ -1040,6 +1045,7 @@ const shard: CardShard = {
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
     _poolFacelessButcher,
+    _poolFaerieSquadron,
     _poolFallenIdeal,
     _poolFatedIntervention,
     _poolFateshaperAspirant,
@@ -1198,6 +1204,7 @@ const shard: CardShard = {
     _poolLeaveNoTrace,
     _poolLegionsLanding,
     _poolLeylineOfVitality,
+    _poolLightningDart,
     _poolLightningShrieker,
     _poolLilianasDefeat,
     _poolLingeringTormentor,
@@ -1219,6 +1226,7 @@ const shard: CardShard = {
     _poolMammothHarness,
     _poolManaCrypt,
     _poolManifoldMouse,
+    _poolMaraudingKnight,
     _poolMaraudingLooter,
     _poolMarduBanner,
     _poolMaritimeGuard,
