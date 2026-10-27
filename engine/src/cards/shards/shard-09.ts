@@ -32,6 +32,7 @@ import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
 import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
 import _poolArcaneSubtraction from "../pool/arcane-subtraction.js";
 import _poolArcboundHybrid from "../pool/arcbound-hybrid.js";
+import _poolArcboundWanderer from "../pool/arcbound-wanderer.js";
 import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
 import _poolArcticFlats from "../pool/arctic-flats.js";
@@ -88,6 +89,7 @@ import _poolBoulderSalvo from "../pool/boulder-salvo.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
+import _poolBringerOfTheGreenDawn from "../pool/bringer-of-the-green-dawn.js";
 import _poolBrokenFall from "../pool/broken-fall.js";
 import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
@@ -813,6 +815,7 @@ const shard: CardShard = {
     _poolArcadesTheStrategist,
     _poolArcaneSubtraction,
     _poolArcboundHybrid,
+    _poolArcboundWanderer,
     _poolArchmageOfRunes,
     _poolArchonOfSunsGrace,
     _poolArcticFlats,
@@ -869,6 +872,7 @@ const shard: CardShard = {
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
+    _poolBringerOfTheGreenDawn,
     _poolBrokenFall,
     _poolBroodhatchNantuko,
     _poolBrothersOfFire,

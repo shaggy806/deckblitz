@@ -458,6 +458,7 @@ import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPatternOfRebirth from "../pool/pattern-of-rebirth.js";
 import _poolPemminsAura from "../pool/pemmins-aura.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
+import _poolPentadPrism from "../pool/pentad-prism.js";
 import _poolPerilousPredicament from "../pool/perilous-predicament.js";
 import _poolPerish from "../pool/perish.js";
 import _poolPestControl from "../pool/pest-control.js";
@@ -1213,6 +1214,7 @@ const shard: CardShard = {
     _poolPatternOfRebirth,
     _poolPemminsAura,
     _poolPendrellDrake,
+    _poolPentadPrism,
     _poolPerilousPredicament,
     _poolPerish,
     _poolPestControl,

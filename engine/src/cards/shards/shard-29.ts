@@ -149,6 +149,7 @@ import _poolDeepwoodWolverine from "../pool/deepwood-wolverine.js";
 import _poolDemandAnswers from "../pool/demand-answers.js";
 import _poolDemigodOfRevenge from "../pool/demigod-of-revenge.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
+import _poolDesecrationElemental from "../pool/desecration-elemental.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDesperateSentry from "../pool/desperate-sentry.js";
@@ -700,6 +701,7 @@ import _poolVacuumelt from "../pool/vacuumelt.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
 import _poolVedalkenCertarch from "../pool/vedalken-certarch.js";
+import _poolVedalkenMastermind from "../pool/vedalken-mastermind.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolVenserFerventForger from "../pool/venser-fervent-forger.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolDemandAnswers,
     _poolDemigodOfRevenge,
     _poolDemolitionStomper,
+    _poolDesecrationElemental,
     _poolDesertDrake,
     _poolDesolationTwin,
     _poolDesperateSentry,
@@ -1471,6 +1474,7 @@ const shard: CardShard = {
     _poolVampiricTouch,
     _poolVault12TheNecropolis,
     _poolVedalkenCertarch,
+    _poolVedalkenMastermind,
     _poolVenomSliver,
     _poolVenserFerventForger,
     _poolViciousConquistador,

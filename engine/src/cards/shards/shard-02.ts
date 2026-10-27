@@ -46,6 +46,7 @@ import _poolBarrentonMedic from "../pool/barrenton-medic.js";
 import _poolBarrowinOfClanUndurr from "../pool/barrowin-of-clan-undurr.js";
 import _poolBaskingBroodscale from "../pool/basking-broodscale.js";
 import _poolBastionMastodon from "../pool/bastion-mastodon.js";
+import _poolBatonOfCourage from "../pool/baton-of-courage.js";
 import _poolBatterhorn from "../pool/batterhorn.js";
 import _poolBattlePlan from "../pool/battle-plan.js";
 import _poolBattlefieldPercher from "../pool/battlefield-percher.js";
@@ -488,6 +489,7 @@ import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolQuillmaneBaku from "../pool/quillmane-baku.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRageOfWinter from "../pool/rage-of-winter.js";
+import _poolRainOfRust from "../pool/rain-of-rust.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRamsesOverdark from "../pool/ramses-overdark.js";
@@ -574,6 +576,7 @@ import _poolSkullsnatcher from "../pool/skullsnatcher.js";
 import _poolSkyDiamond from "../pool/sky-diamond.js";
 import _poolSkyhunterPatrol from "../pool/skyhunter-patrol.js";
 import _poolSkyrakerGiant from "../pool/skyraker-giant.js";
+import _poolSkyreachManta from "../pool/skyreach-manta.js";
 import _poolSlashPanther from "../pool/slash-panther.js";
 import _poolSlitherborePathway from "../pool/slitherbore-pathway.js";
 import _poolSmileAtDeath from "../pool/smile-at-death.js";
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolBarrowinOfClanUndurr,
     _poolBaskingBroodscale,
     _poolBastionMastodon,
+    _poolBatonOfCourage,
     _poolBatterhorn,
     _poolBattlePlan,
     _poolBattlefieldPercher,
@@ -1237,6 +1241,7 @@ const shard: CardShard = {
     _poolQuillmaneBaku,
     _poolRacersScoreboard,
     _poolRageOfWinter,
+    _poolRainOfRust,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
     _poolRamsesOverdark,
@@ -1323,6 +1328,7 @@ const shard: CardShard = {
     _poolSkyDiamond,
     _poolSkyhunterPatrol,
     _poolSkyrakerGiant,
+    _poolSkyreachManta,
     _poolSlashPanther,
     _poolSlitherborePathway,
     _poolSmileAtDeath,

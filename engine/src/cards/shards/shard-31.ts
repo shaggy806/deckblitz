@@ -333,6 +333,7 @@ import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
 import _poolHellholeFlailer from "../pool/hellhole-flailer.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
+import _poolHelmOfKaldra from "../pool/helm-of-kaldra.js";
 import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
 import _poolHighspireInfusion from "../pool/highspire-infusion.js";
@@ -1150,6 +1151,7 @@ const shard: CardShard = {
     _poolHellholeFlailer,
     _poolHellkiteCharger,
     _poolHellkiteTyrant,
+    _poolHelmOfKaldra,
     _poolHerosResolve,
     _poolHideousVisage,
     _poolHighspireInfusion,

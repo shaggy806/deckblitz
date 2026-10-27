@@ -98,6 +98,7 @@ import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js"
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolClashOfWills from "../pool/clash-of-wills.js";
 import _poolClatteringAugur from "../pool/clattering-augur.js";
+import _poolClearwaterGoblet from "../pool/clearwater-goblet.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolCoilingStalker from "../pool/coiling-stalker.js";
@@ -855,6 +856,7 @@ const shard: CardShard = {
     _poolClamorousIronclad,
     _poolClashOfWills,
     _poolClatteringAugur,
+    _poolClearwaterGoblet,
     _poolCloudspireSkycycle,
     _poolCodsworthHandyHelper,
     _poolCoilingStalker,

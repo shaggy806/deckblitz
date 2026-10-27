@@ -72,6 +72,7 @@ import _poolBladeBanish from "../pool/blade-banish.js";
 import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
+import _poolBlinkmothInfusion from "../pool/blinkmoth-infusion.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
@@ -568,6 +569,7 @@ import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
+import _poolSolarion from "../pool/solarion.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
@@ -610,6 +612,7 @@ import _poolSuspensionField from "../pool/suspension-field.js";
 import _poolSwimmerInNightmares from "../pool/swimmer-in-nightmares.js";
 import _poolSwordOfTheRealms from "../pool/sword-of-the-realms.js";
 import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
+import _poolSylvokExplorer from "../pool/sylvok-explorer.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTalasResearcher from "../pool/talas-researcher.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
@@ -836,6 +839,7 @@ const shard: CardShard = {
     _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
+    _poolBlinkmothInfusion,
     _poolBlur,
     _poolBoggartShenanigans,
     _poolBonesplitter,
@@ -1332,6 +1336,7 @@ const shard: CardShard = {
     _poolSoShiny,
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
+    _poolSolarion,
     _poolSolsticeZealot,
     _poolSongOfSerenity,
     _poolSoothsayerAdept,
@@ -1374,6 +1379,7 @@ const shard: CardShard = {
     _poolSwimmerInNightmares,
     _poolSwordOfTheRealms,
     _poolSwordOfWealthAndPower,
+    _poolSylvokExplorer,
     _poolTaintedStrike,
     _poolTalasResearcher,
     _poolTangledVale,

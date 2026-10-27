@@ -72,6 +72,7 @@ import _poolBrainbite from "../pool/brainbite.js";
 import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
 import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
+import _poolBringerOfTheBlackDawn from "../pool/bringer-of-the-black-dawn.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
 import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
@@ -189,6 +190,7 @@ import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFaridehsFireball from "../pool/faridehs-fireball.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
+import _poolFeedbackBolt from "../pool/feedback-bolt.js";
 import _poolFesterleech from "../pool/festerleech.js";
 import _poolFinalJudgment from "../pool/final-judgment.js";
 import _poolFinalPayment from "../pool/final-payment.js";
@@ -355,6 +357,7 @@ import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
 import _poolLuminousWake from "../pool/luminous-wake.js";
+import _poolLunarAvenger from "../pool/lunar-avenger.js";
 import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
 import _poolMagmaMine from "../pool/magma-mine.js";
 import _poolMagmaPhoenix from "../pool/magma-phoenix.js";
@@ -817,6 +820,7 @@ const shard: CardShard = {
     _poolBrallinSkysharkRider,
     _poolBreakDownTheDoor,
     _poolBreathWeapon,
+    _poolBringerOfTheBlackDawn,
     _poolBrokenBond,
     _poolBrokersHideout,
     _poolBrutalNightstalker,
@@ -934,6 +938,7 @@ const shard: CardShard = {
     _poolFarbogExplorer,
     _poolFaridehsFireball,
     _poolFarmerCotton,
+    _poolFeedbackBolt,
     _poolFesterleech,
     _poolFinalJudgment,
     _poolFinalPayment,
@@ -1100,6 +1105,7 @@ const shard: CardShard = {
     _poolLoxodonWayfarer,
     _poolLuminousBonds,
     _poolLuminousWake,
+    _poolLunarAvenger,
     _poolMach1SwoopingScoundrel,
     _poolMagmaMine,
     _poolMagmaPhoenix,

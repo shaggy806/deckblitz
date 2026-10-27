@@ -1746,6 +1746,31 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(kami.complete).toBe(true);
   });
 
+  it("sunburst (702.44a) and Modular—Sunburst (702.44c): Fifth Dawn's keyword lines", () => {
+    const myr = face(
+      "Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.)",
+      "Artifact Creature — Myr",
+    );
+    expect(myr.static[0].replacement).toEqual({ event: "enters-battlefield", sunburst: true });
+    expect(myr.static[0].text).toMatch(/^Sunburst \(This creature enters with a \+1\/\+1 counter/);
+    expect(myr.complete).toBe(true);
+    const prism = face(
+      "Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)",
+      "Artifact",
+    );
+    expect(prism.static[0].text).toMatch(/^Sunburst \(This artifact enters with a charge counter/);
+    const wanderer = face(
+      "Modular—Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)",
+      "Artifact Creature — Golem",
+    );
+    expect(wanderer.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } },
+    });
+    expect(wanderer.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    expect(wanderer.complete).toBe(true);
+  });
+
   it("'remove any number of counters' as a cost (count 'x'), and the mana it makes", () => {
     const battery = face(
       "{T}, Remove any number of charge counters from this artifact: Add {U}, then add an additional {U} for each charge counter removed this way.",

@@ -36244,6 +36244,16 @@ export class Game {
                 : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
       }
+      // Sunburst (rule 702.44a): +1/+1 counters if it's entering as a
+      // creature ignoring type-changing effects — its copiable types, which
+      // `def` is (a copy's, layer 1) — else charge counters; each instance on
+      // its own (702.44d).
+      if (r.sunburst === true) {
+        addCounters(
+          def.types.includes("creature") ? "+1/+1" : "charge",
+          this.enteringCounterAmount(id, object.controller, id, { colorsSpentOf: "source" }),
+        );
+      }
     }
     // Riot (rule 702.136a): the +1/+1 counter its controller chose as it was
     // about to enter (`askEnterChoice`), or else haste. Entering some way

@@ -465,7 +465,8 @@
   "keyword:replicate",
   "keyword:haunt",
   "trigger:functions-while-suspended",
-  "cost:reveal-any-number-from-hand"
+  "cost:reveal-any-number-from-hand",
+  "keyword:sunburst"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

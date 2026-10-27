@@ -56,6 +56,7 @@ import _poolBasilicaGuards from "../pool/basilica-guards.js";
 import _poolBasrisLieutenant from "../pool/basris-lieutenant.js";
 import _poolBattleCry from "../pool/battle-cry.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
+import _poolBeaconOfCreation from "../pool/beacon-of-creation.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBeastOfBurden from "../pool/beast-of-burden.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
@@ -168,6 +169,7 @@ import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
 import _poolDescendantOfSoramaro from "../pool/descendant-of-soramaro.js";
 import _poolDespondency from "../pool/despondency.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
+import _poolDevourInShadow from "../pool/devour-in-shadow.js";
 import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDiningRoom from "../pool/dining-room.js";
@@ -200,6 +202,7 @@ import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnchantedEvening from "../pool/enchanted-evening.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
+import _poolEnergyChamber from "../pool/energy-chamber.js";
 import _poolEnervate from "../pool/enervate.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
@@ -827,6 +830,7 @@ const shard: CardShard = {
     _poolBasrisLieutenant,
     _poolBattleCry,
     _poolBattlemagesBracers,
+    _poolBeaconOfCreation,
     _poolBeaconOfUnrest,
     _poolBeastOfBurden,
     _poolBehindTheScenes,
@@ -939,6 +943,7 @@ const shard: CardShard = {
     _poolDescendantOfSoramaro,
     _poolDespondency,
     _poolDevoteeOfStrength,
+    _poolDevourInShadow,
     _poolDevouringTendrils,
     _poolDimirGuildmage,
     _poolDiningRoom,
@@ -971,6 +976,7 @@ const shard: CardShard = {
     _poolEnchantedEvening,
     _poolEnduringCourage,
     _poolEnduringVitality,
+    _poolEnergyChamber,
     _poolEnervate,
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,

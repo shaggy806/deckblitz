@@ -351,6 +351,7 @@ import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
 import _poolKitsuneDiviner from "../pool/kitsune-diviner.js";
 import _poolKorOutfitter from "../pool/kor-outfitter.js";
+import _poolKrarkClanEngineers from "../pool/krark-clan-engineers.js";
 import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
 import _poolKratosStoicFather from "../pool/kratos-stoic-father.js";
 import _poolKrosanConstrictor from "../pool/krosan-constrictor.js";
@@ -396,6 +397,7 @@ import _poolMazemindTome from "../pool/mazemind-tome.js";
 import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
+import _poolMephidrossVampire from "../pool/mephidross-vampire.js";
 import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMerfolkRaiders from "../pool/merfolk-raiders.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
@@ -758,6 +760,7 @@ import _tokensGriffinToken from "../tokens/griffin-token.js";
 import _tokensHomunculusToken from "../tokens/homunculus-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
+import _tokensPincherToken from "../tokens/pincher-token.js";
 import _tokensRedElementalToken31 from "../tokens/red-elemental-token-3-1.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
 import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
@@ -1117,6 +1120,7 @@ const shard: CardShard = {
     _poolKishlaSkimmer,
     _poolKitsuneDiviner,
     _poolKorOutfitter,
+    _poolKrarkClanEngineers,
     _poolKrarkClanGrunt,
     _poolKratosStoicFather,
     _poolKrosanConstrictor,
@@ -1162,6 +1166,7 @@ const shard: CardShard = {
     _poolMechanShieldmate,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
+    _poolMephidrossVampire,
     _poolMerfolkBranchwalker,
     _poolMerfolkRaiders,
     _poolMeriasOutrider,
@@ -1526,6 +1531,7 @@ const shard: CardShard = {
     _tokensHomunculusToken,
     _tokensKnightToken,
     _tokensMoloidToken,
+    _tokensPincherToken,
     _tokensRedElementalToken31,
     _tokensRedSpiritTokenMenace,
     _tokensScarecrowToken,

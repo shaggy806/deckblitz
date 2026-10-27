@@ -81,6 +81,7 @@ import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
 import _poolBridgeFromBelow from "../pool/bridge-from-below.js";
+import _poolBringerOfTheRedDawn from "../pool/bringer-of-the-red-dawn.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBrushwagg from "../pool/brushwagg.js";
@@ -134,6 +135,7 @@ import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolConviction from "../pool/conviction.js";
 import _poolCorneredCrook from "../pool/cornered-crook.js";
+import _poolCosmicLarva from "../pool/cosmic-larva.js";
 import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
@@ -521,6 +523,7 @@ import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSageOfEpityr from "../pool/sage-of-epityr.js";
+import _poolSalvagingStation from "../pool/salvaging-station.js";
 import _poolSandsteppeWarRiders from "../pool/sandsteppe-war-riders.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
@@ -828,6 +831,7 @@ const shard: CardShard = {
     _poolBrazenBlademaster,
     _poolBreathOfTheSleepless,
     _poolBridgeFromBelow,
+    _poolBringerOfTheRedDawn,
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBrushwagg,
@@ -881,6 +885,7 @@ const shard: CardShard = {
     _poolConsultTheStarCharts,
     _poolConviction,
     _poolCorneredCrook,
+    _poolCosmicLarva,
     _poolCouriersCapsule,
     _poolCourtOfArdenvale,
     _poolCravenGiant,
@@ -1268,6 +1273,7 @@ const shard: CardShard = {
     _poolRunawayBoulder,
     _poolRustwingFalcon,
     _poolSageOfEpityr,
+    _poolSalvagingStation,
     _poolSandsteppeWarRiders,
     _poolSandstoneBridge,
     _poolSatoruUmezawa,

@@ -216,6 +216,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
+import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
@@ -300,6 +301,7 @@ import _poolHomewardPath from "../pool/homeward-path.js";
 import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
 import _poolHornbashMentor from "../pool/hornbash-mentor.js";
+import _poolHornedHelm from "../pool/horned-helm.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
 import _poolHorribleHordes from "../pool/horrible-hordes.js";
 import _poolHowlpackOfEstwald from "../pool/howlpack-of-estwald.js";
@@ -633,6 +635,7 @@ import _poolSulfuricVapors from "../pool/sulfuric-vapors.js";
 import _poolSummitApes from "../pool/summit-apes.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
+import _poolSuncrusher from "../pool/suncrusher.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
 import _poolSuperSpeed from "../pool/super-speed.js";
 import _poolSurgeOfRighteousness from "../pool/surge-of-righteousness.js";
@@ -706,6 +709,7 @@ import _poolVandalblast from "../pool/vandalblast.js";
 import _poolVandalize from "../pool/vandalize.js";
 import _poolVanishingVerse from "../pool/vanishing-verse.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
+import _poolVedalkenShackles from "../pool/vedalken-shackles.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVeldraneOfSengir from "../pool/veldrane-of-sengir.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
@@ -979,6 +983,7 @@ const shard: CardShard = {
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
+    _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
@@ -1063,6 +1068,7 @@ const shard: CardShard = {
     _poolHopeTender,
     _poolHorizonSeeker,
     _poolHornbashMentor,
+    _poolHornedHelm,
     _poolHornetQueen,
     _poolHorribleHordes,
     _poolHowlpackOfEstwald,
@@ -1396,6 +1402,7 @@ const shard: CardShard = {
     _poolSummitApes,
     _poolSunBlessedHealer,
     _poolSunTitan,
+    _poolSuncrusher,
     _poolSundialDawnTyrant,
     _poolSuperSpeed,
     _poolSurgeOfRighteousness,
@@ -1469,6 +1476,7 @@ const shard: CardShard = {
     _poolVandalize,
     _poolVanishingVerse,
     _poolVashtaNerada,
+    _poolVedalkenShackles,
     _poolVeinRipper,
     _poolVeldraneOfSengir,
     _poolVelvetwingButterflies,

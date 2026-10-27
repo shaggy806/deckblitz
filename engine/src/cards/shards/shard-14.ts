@@ -7,6 +7,7 @@ import _poolALittleChat from "../pool/a-little-chat.js";
 import _poolAberrant from "../pool/aberrant.js";
 import _poolAbominationOfGudul from "../pool/abomination-of-gudul.js";
 import _poolAbsorbVis from "../pool/absorb-vis.js";
+import _poolAbunasChant from "../pool/abunas-chant.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
 import _poolAetherHerder from "../pool/aether-herder.js";
 import _poolAetherwindBasker from "../pool/aetherwind-basker.js";
@@ -36,6 +37,7 @@ import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
 import _poolAspectOfManticore from "../pool/aspect-of-manticore.js";
 import _poolAureliaTheLawAbove from "../pool/aurelia-the-law-above.js";
+import _poolAuriokSalvagers from "../pool/auriok-salvagers.js";
 import _poolAvenMimeomancer from "../pool/aven-mimeomancer.js";
 import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
@@ -53,6 +55,7 @@ import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
 import _poolBarrinsCodex from "../pool/barrins-codex.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
+import _poolBatteredGolem from "../pool/battered-golem.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBearTrap from "../pool/bear-trap.js";
@@ -216,6 +219,7 @@ import _poolEmberFistZubera from "../pool/ember-fist-zubera.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
 import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
+import _poolEndlessWhispers from "../pool/endless-whispers.js";
 import _poolEndling from "../pool/endling.js";
 import _poolEngulfingSlagwurm from "../pool/engulfing-slagwurm.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
@@ -250,6 +254,7 @@ import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
 import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
 import _poolFleetingSpirit from "../pool/fleeting-spirit.js";
 import _poolFleshToDust from "../pool/flesh-to-dust.js";
+import _poolFleshgrafter from "../pool/fleshgrafter.js";
 import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
 import _poolFlowstoneWall from "../pool/flowstone-wall.js";
@@ -638,6 +643,7 @@ import _poolStrategicPlanning from "../pool/strategic-planning.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
 import _poolStrongholdTaskmaster from "../pool/stronghold-taskmaster.js";
 import _poolStudy from "../pool/study.js";
+import _poolSummoningStation from "../pool/summoning-station.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSunstone from "../pool/sunstone.js";
 import _poolSupply from "../pool/supply.js";
@@ -778,6 +784,7 @@ const shard: CardShard = {
     _poolAberrant,
     _poolAbominationOfGudul,
     _poolAbsorbVis,
+    _poolAbunasChant,
     _poolAeronautsWings,
     _poolAetherHerder,
     _poolAetherwindBasker,
@@ -807,6 +814,7 @@ const shard: CardShard = {
     _poolAshcoatOfTheShadowSwarm,
     _poolAspectOfManticore,
     _poolAureliaTheLawAbove,
+    _poolAuriokSalvagers,
     _poolAvenMimeomancer,
     _poolAvenOfEnduringHope,
     _poolAxebaneGuardian,
@@ -824,6 +832,7 @@ const shard: CardShard = {
     _poolBarrinsCodex,
     _poolBartizanBats,
     _poolBastPantherGoddess,
+    _poolBatteredGolem,
     _poolBattleMastery,
     _poolBattleRampart,
     _poolBearTrap,
@@ -987,6 +996,7 @@ const shard: CardShard = {
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
     _poolEncumberedReejerey,
+    _poolEndlessWhispers,
     _poolEndling,
     _poolEngulfingSlagwurm,
     _poolEntityTracker,
@@ -1021,6 +1031,7 @@ const shard: CardShard = {
     _poolFleetfeatherSandals,
     _poolFleetingSpirit,
     _poolFleshToDust,
+    _poolFleshgrafter,
     _poolFloraColossus,
     _poolFlowstoneCrusher,
     _poolFlowstoneWall,
@@ -1409,6 +1420,7 @@ const shard: CardShard = {
     _poolStrikeItRich,
     _poolStrongholdTaskmaster,
     _poolStudy,
+    _poolSummoningStation,
     _poolSunsetSaboteur,
     _poolSunstone,
     _poolSupply,

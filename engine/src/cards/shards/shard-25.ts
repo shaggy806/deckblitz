@@ -37,6 +37,7 @@ import _poolArcoFlagellant from "../pool/arco-flagellant.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
 import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolArrogantPoet from "../pool/arrogant-poet.js";
+import _poolArtificersIntuition from "../pool/artificers-intuition.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
@@ -781,6 +782,7 @@ const shard: CardShard = {
     _poolArmoredPegasus,
     _poolArnimZolaBioFanatic,
     _poolArrogantPoet,
+    _poolArtificersIntuition,
     _poolAshenMonstrosity,
     _poolAssaultIntercessor,
     _poolAssaultZeppelid,

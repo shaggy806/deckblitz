@@ -56,6 +56,7 @@ import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBattleSliver from "../pool/battle-sliver.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
+import _poolBeaconOfDestruction from "../pool/beacon-of-destruction.js";
 import _poolBearUmbra from "../pool/bear-umbra.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
 import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
@@ -185,6 +186,7 @@ import _poolDuneMover from "../pool/dune-mover.js";
 import _poolDungeoneersPack from "../pool/dungeoneers-pack.js";
 import _poolDwarvenArmory from "../pool/dwarven-armory.js";
 import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
+import _poolEarlyFrost from "../pool/early-frost.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
 import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
@@ -196,6 +198,7 @@ import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
 import _poolEnroot from "../pool/enroot.js";
+import _poolEnsouledScimitar from "../pool/ensouled-scimitar.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolErosion from "../pool/erosion.js";
@@ -325,6 +328,7 @@ import _poolHorridVigor from "../pool/horrid-vigor.js";
 import _poolHotSprings from "../pool/hot-springs.js";
 import _poolHotshotMechanic from "../pool/hotshot-mechanic.js";
 import _poolHourOfDevastation from "../pool/hour-of-devastation.js";
+import _poolHoverguardSweepers from "../pool/hoverguard-sweepers.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
 import _poolHraesvelgrOfTheFirstBrood from "../pool/hraesvelgr-of-the-first-brood.js";
 import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
@@ -818,6 +822,7 @@ const shard: CardShard = {
     _poolBasimIbnIshaq,
     _poolBattleSliver,
     _poolBazaarTrader,
+    _poolBeaconOfDestruction,
     _poolBearUmbra,
     _poolBeetleformMage,
     _poolBelunaGrandsquall,
@@ -947,6 +952,7 @@ const shard: CardShard = {
     _poolDungeoneersPack,
     _poolDwarvenArmory,
     _poolEagleOfTheGreatShelf,
+    _poolEarlyFrost,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,
     _poolElvishWarmaster,
@@ -958,6 +964,7 @@ const shard: CardShard = {
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
     _poolEnroot,
+    _poolEnsouledScimitar,
     _poolEreborFlamesmith,
     _poolEriettesLullaby,
     _poolErosion,
@@ -1087,6 +1094,7 @@ const shard: CardShard = {
     _poolHotSprings,
     _poolHotshotMechanic,
     _poolHourOfDevastation,
+    _poolHoverguardSweepers,
     _poolHowltoothHollow,
     _poolHraesvelgrOfTheFirstBrood,
     _poolHuatlisRaptor,

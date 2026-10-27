@@ -11,6 +11,7 @@ import _poolAjaniInspiringLeader from "../pool/ajani-inspiring-leader.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
 import _poolAlenaKessigTrapper from "../pool/alena-kessig-trapper.js";
 import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
+import _poolAllSunsDawn from "../pool/all-suns-dawn.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAmuletOfUnmaking from "../pool/amulet-of-unmaking.js";
@@ -253,6 +254,7 @@ import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGoremand from "../pool/goremand.js";
 import _poolGrafHarvest from "../pool/graf-harvest.js";
 import _poolGrandArchitect from "../pool/grand-architect.js";
+import _poolGranulate from "../pool/granulate.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -313,6 +315,7 @@ import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
 import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
+import _poolJoinerAdept from "../pool/joiner-adept.js";
 import _poolJoragaBard from "../pool/joraga-bard.js";
 import _poolJoragaTreespeaker from "../pool/joraga-treespeaker.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
@@ -520,6 +523,7 @@ import _poolRosethornAcolyte from "../pool/rosethorn-acolyte.js";
 import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
 import _poolRubblebeltRaiders from "../pool/rubblebelt-raiders.js";
+import _poolRudeAwakening from "../pool/rude-awakening.js";
 import _poolRunAwayTogether from "../pool/run-away-together.js";
 import _poolRuneOfProtectionArtifacts from "../pool/rune-of-protection-artifacts.js";
 import _poolRuneOfProtectionBlack from "../pool/rune-of-protection-black.js";
@@ -637,6 +641,7 @@ import _poolTakeInventory from "../pool/take-inventory.js";
 import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
+import _poolTangleAsp from "../pool/tangle-asp.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
@@ -791,6 +796,7 @@ const shard: CardShard = {
     _poolAkoumWarrior,
     _poolAlenaKessigTrapper,
     _poolAllOfHistoryAllAtOnce,
+    _poolAllSunsDawn,
     _poolAlmostPerfect,
     _poolAmateurHero,
     _poolAmuletOfUnmaking,
@@ -1033,6 +1039,7 @@ const shard: CardShard = {
     _poolGoremand,
     _poolGrafHarvest,
     _poolGrandArchitect,
+    _poolGranulate,
     _poolGravestoneStrider,
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
@@ -1093,6 +1100,7 @@ const shard: CardShard = {
     _poolIsarethTheAwakener,
     _poolJadelightRanger,
     _poolJeskaiDevotee,
+    _poolJoinerAdept,
     _poolJoragaBard,
     _poolJoragaTreespeaker,
     _poolJourneyToOblivion,
@@ -1300,6 +1308,7 @@ const shard: CardShard = {
     _poolRubblebackRhino,
     _poolRubblebeltMaverick,
     _poolRubblebeltRaiders,
+    _poolRudeAwakening,
     _poolRunAwayTogether,
     _poolRuneOfProtectionArtifacts,
     _poolRuneOfProtectionBlack,
@@ -1417,6 +1426,7 @@ const shard: CardShard = {
     _poolTakenumaBleeder,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
+    _poolTangleAsp,
     _poolTattermungeManiac,
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,

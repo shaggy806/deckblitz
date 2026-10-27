@@ -75,6 +75,7 @@ import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
+import _poolBringerOfTheWhiteDawn from "../pool/bringer-of-the-white-dawn.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolBrothersYamazaki from "../pool/brothers-yamazaki.js";
@@ -359,6 +360,7 @@ import _poolLeeringEmblem from "../pool/leering-emblem.js";
 import _poolLegacysAllure from "../pool/legacys-allure.js";
 import _poolLegionVanguard from "../pool/legion-vanguard.js";
 import _poolLenaSelflessChampion from "../pool/lena-selfless-champion.js";
+import _poolLeoninSquire from "../pool/leonin-squire.js";
 import _poolLeovoldsOperative from "../pool/leovolds-operative.js";
 import _poolLeyWeaver from "../pool/ley-weaver.js";
 import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
@@ -870,6 +872,7 @@ const shard: CardShard = {
     _poolBountyAgent,
     _poolBreakOfDay,
     _poolBrilliantSpectrum,
+    _poolBringerOfTheWhiteDawn,
     _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
     _poolBrothersYamazaki,
@@ -1154,6 +1157,7 @@ const shard: CardShard = {
     _poolLegacysAllure,
     _poolLegionVanguard,
     _poolLenaSelflessChampion,
+    _poolLeoninSquire,
     _poolLeovoldsOperative,
     _poolLeyWeaver,
     _poolLightOfTheLegion,

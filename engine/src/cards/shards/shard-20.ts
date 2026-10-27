@@ -301,6 +301,7 @@ import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuanYus1000LiMarch from "../pool/guan-yus-1-000-li-march.js";
 import _poolGuardGomazoa from "../pool/guard-gomazoa.js";
+import _poolGuardianIdol from "../pool/guardian-idol.js";
 import _poolGuardianOfSolitude from "../pool/guardian-of-solitude.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
@@ -621,6 +622,7 @@ import _poolSorcerersWand from "../pool/sorcerers-wand.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
+import _poolSparringCollar from "../pool/sparring-collar.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
 import _poolSpectralPrison from "../pool/spectral-prison.js";
 import _poolSpireBarrage from "../pool/spire-barrage.js";
@@ -1115,6 +1117,7 @@ const shard: CardShard = {
     _poolGrizzledOutrider,
     _poolGuanYus1000LiMarch,
     _poolGuardGomazoa,
+    _poolGuardianIdol,
     _poolGuardianOfSolitude,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
@@ -1435,6 +1438,7 @@ const shard: CardShard = {
     _poolSoulcageFiend,
     _poolSourbreadAuntie,
     _poolSpaceTimeAnomaly,
+    _poolSparringCollar,
     _poolSpearbreakerBehemoth,
     _poolSpectralPrison,
     _poolSpireBarrage,

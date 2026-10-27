@@ -59,6 +59,7 @@ import {
   prowl,
   soulbond,
   spectacle,
+  sunburst,
   surge,
   undying,
   unearth,
@@ -155,9 +156,12 @@ function pitchExile(what) {
  * `Keyword` — what it adds to the face, or `null`. Each shape is the one the
  * pool's own cards use (the helper, or the card field).
  */
-function keywordPart(part, faceName) {
+function keywordPart(part, faceName, typeLine = "") {
   const p = part.trim();
   let m;
+  // Sunburst (rule 702.44a): +1/+1 counters on a creature, charge counters
+  // otherwise — the helper's reminder names which.
+  if (/^sunburst$/i.test(p)) return { static: [sunburst(/\bCreature\b/.test(typeLine) ? "creature" : "artifact")] };
   if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
   // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
   if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
@@ -247,15 +251,18 @@ function keywordPart(part, faceName) {
       ],
     };
   }
-  if ((m = /^modular (\d+)$/i.exec(p))) {
-    // Arcbound Ravager's shape: enters with the counters; may move them as it dies.
-    const n = Number(m[1]);
+  if ((m = /^modular(?: (\d+)|—sunburst)$/i.exec(p))) {
+    // Arcbound Ravager's shape: enters with the counters; may move them as it
+    // dies. "Modular—Sunburst" is a +1/+1 counter per colour spent to cast it,
+    // creature or not (rule 702.44c).
+    const n = m[1] !== undefined ? Number(m[1]) : { colorsSpentOf: "source" };
+    const label = typeof n === "number" ? `Modular ${n}` : "Modular—Sunburst";
     return {
       static: [
         {
           affects: { scope: "self" },
           replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: n } },
-          text: `Modular ${n}`,
+          text: label,
         },
       ],
       triggered: [
@@ -268,7 +275,7 @@ function keywordPart(part, faceName) {
             effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { countersOn: "source", counter: "+1/+1" } },
           },
           resolve: null,
-          text: `Modular ${n}`,
+          text: label,
         },
       ],
     };
@@ -2134,10 +2141,10 @@ export function parseFace(face, ctx = {}) {
     };
     const isProwess = (p) => p.toLowerCase() === "prowess";
     const known = (p) =>
-      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name) !== null;
+      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name, face.type_line) !== null;
     // Two typecyclings on one line ("Mountaincycling {2}, forestcycling {2}")
     // are two abilities, and `cycling` holds one: such a line is a person's.
-    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name)?.card ?? {}) : []));
+    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name, face.type_line)?.card ?? {}) : []));
     const twice =
       cardFields.some((f, i) => cardFields.indexOf(f) !== i) ||
       // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
@@ -2154,7 +2161,7 @@ export function parseFace(face, ctx = {}) {
         else if (protectionOf(p) !== null) out.static.push(protectionOf(p));
         else if (wardOf(p) !== null) out.triggered.push(wardAbility(wardOf(p)));
         else {
-          const k = keywordPart(p, face.name);
+          const k = keywordPart(p, face.name, face.type_line);
           out.keywords.push(...(k.keywords ?? []));
           out.triggered.push(...(k.triggered ?? []));
           out.activated.push(...(k.activated ?? []));

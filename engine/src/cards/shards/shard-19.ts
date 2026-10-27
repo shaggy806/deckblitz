@@ -30,6 +30,7 @@ import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcaneMelee from "../pool/arcane-melee.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
+import _poolArmedResponse from "../pool/armed-response.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
 import _poolArmyOfAllah from "../pool/army-of-allah.js";
 import _poolArnjlotsAscent from "../pool/arnjlots-ascent.js";
@@ -493,6 +494,7 @@ import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreMarauder from "../pool/ogre-marauder.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
+import _poolOpalineBracers from "../pool/opaline-bracers.js";
 import _poolOppressiveWill from "../pool/oppressive-will.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
 import _poolOreScaleGuardian from "../pool/ore-scale-guardian.js";
@@ -687,6 +689,7 @@ import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
+import _poolSynodCenturion from "../pool/synod-centurion.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
@@ -738,10 +741,12 @@ import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolVerdantCrescendo from "../pool/verdant-crescendo.js";
 import _poolVerdantHaven from "../pool/verdant-haven.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
+import _poolViciousBetrayal from "../pool/vicious-betrayal.js";
 import _poolVigilance from "../pool/vigilance.js";
 import _poolVildinPackAlpha from "../pool/vildin-pack-alpha.js";
 import _poolVillageElder from "../pool/village-elder.js";
 import _poolViridianCorrupter from "../pool/viridian-corrupter.js";
+import _poolViridianLorebearers from "../pool/viridian-lorebearers.js";
 import _poolVirtueOfLoyalty from "../pool/virtue-of-loyalty.js";
 import _poolVisceridArmor from "../pool/viscerid-armor.js";
 import _poolVoidStalker from "../pool/void-stalker.js";
@@ -833,6 +838,7 @@ const shard: CardShard = {
     _poolArcaneMelee,
     _poolArcboundSlasher,
     _poolArgothSanctumOfNature,
+    _poolArmedResponse,
     _poolArmillarySphere,
     _poolArmyOfAllah,
     _poolArnjlotsAscent,
@@ -1296,6 +1302,7 @@ const shard: CardShard = {
     _poolOgreBerserker,
     _poolOgreMarauder,
     _poolOgreSiegebreaker,
+    _poolOpalineBracers,
     _poolOppressiveWill,
     _poolOrderOfTheWhiteShield,
     _poolOreScaleGuardian,
@@ -1490,6 +1497,7 @@ const shard: CardShard = {
     _poolSweetOblivion,
     _poolSwordOfSinewAndSteel,
     _poolSynapseSliver,
+    _poolSynodCenturion,
     _poolTajuruSnarecaster,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
@@ -1541,10 +1549,12 @@ const shard: CardShard = {
     _poolVerdantCrescendo,
     _poolVerdantHaven,
     _poolViashinoLashclaw,
+    _poolViciousBetrayal,
     _poolVigilance,
     _poolVildinPackAlpha,
     _poolVillageElder,
     _poolViridianCorrupter,
+    _poolViridianLorebearers,
     _poolVirtueOfLoyalty,
     _poolVisceridArmor,
     _poolVoidStalker,

@@ -89,6 +89,7 @@ import _poolBowerPassage from "../pool/bower-passage.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreaking from "../pool/breaking.js";
 import _poolBriarShield from "../pool/briar-shield.js";
+import _poolBringerOfTheBlueDawn from "../pool/bringer-of-the-blue-dawn.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
@@ -257,6 +258,7 @@ import _poolGalestrike from "../pool/galestrike.js";
 import _poolGalvanicJuggernaut from "../pool/galvanic-juggernaut.js";
 import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
+import _poolGemstoneArray from "../pool/gemstone-array.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
@@ -444,6 +446,7 @@ import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNightDealings from "../pool/night-dealings.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
+import _poolNimGrotesque from "../pool/nim-grotesque.js";
 import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
@@ -800,6 +803,7 @@ import _tokensGargoyleToken from "../tokens/gargoyle-token.js";
 import _tokensGoblinTokenBoggartMischief from "../tokens/goblin-token-boggart-mischief.js";
 import _tokensInsectTokenRiseOfTheAnts from "../tokens/insect-token-rise-of-the-ants.js";
 import _tokensInsectToken from "../tokens/insect-token.js";
+import _tokensKaldra from "../tokens/kaldra.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
@@ -904,6 +908,7 @@ const shard: CardShard = {
     _poolBrassclawOrcs,
     _poolBreaking,
     _poolBriarShield,
+    _poolBringerOfTheBlueDawn,
     _poolBrokersInitiate,
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
@@ -1072,6 +1077,7 @@ const shard: CardShard = {
     _poolGalvanicJuggernaut,
     _poolGatekeeperOfMalakir,
     _poolGearsmithGuardian,
+    _poolGemstoneArray,
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,
@@ -1259,6 +1265,7 @@ const shard: CardShard = {
     _poolNightClubber,
     _poolNightDealings,
     _poolNighthawkScavenger,
+    _poolNimGrotesque,
     _poolNix,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
@@ -1617,6 +1624,7 @@ const shard: CardShard = {
     _tokensGoblinTokenBoggartMischief,
     _tokensInsectTokenRiseOfTheAnts,
     _tokensInsectToken,
+    _tokensKaldra,
     _tokensLifelinkVampireToken,
     _tokensMunitionsToken,
     _tokensPhyrexianWurmLifelink,

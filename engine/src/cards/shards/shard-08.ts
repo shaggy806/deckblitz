@@ -223,6 +223,7 @@ import _poolEruditeWizard from "../pool/erudite-wizard.js";
 import _poolEsperSentinel from "../pool/esper-sentinel.js";
 import _poolEssenceInfusion from "../pool/essence-infusion.js";
 import _poolEssenceOfAntiquity from "../pool/essence-of-antiquity.js";
+import _poolEtchedOracle from "../pool/etched-oracle.js";
 import _poolEthercasteKnight from "../pool/ethercaste-knight.js";
 import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
 import _poolEvernightShade from "../pool/evernight-shade.js";
@@ -306,6 +307,7 @@ import _poolHatchetBully from "../pool/hatchet-bully.js";
 import _poolHeartlashCinder from "../pool/heartlash-cinder.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
 import _poolHeavyweightDemolisher from "../pool/heavyweight-demolisher.js";
+import _poolHeliophial from "../pool/heliophial.js";
 import _poolHexhavenBattalion from "../pool/hexhaven-battalion.js";
 import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolEsperSentinel,
     _poolEssenceInfusion,
     _poolEssenceOfAntiquity,
+    _poolEtchedOracle,
     _poolEthercasteKnight,
     _poolEtherswornSphinx,
     _poolEvernightShade,
@@ -1101,6 +1104,7 @@ const shard: CardShard = {
     _poolHeartlashCinder,
     _poolHeatShimmer,
     _poolHeavyweightDemolisher,
+    _poolHeliophial,
     _poolHexhavenBattalion,
     _poolHierophantsChalice,
     _poolHighspireMantis,

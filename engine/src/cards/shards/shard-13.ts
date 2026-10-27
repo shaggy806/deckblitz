@@ -530,6 +530,7 @@ import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js"
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
+import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScionSummoner from "../pool/scion-summoner.js";
@@ -629,6 +630,7 @@ import _poolSummaryJudgment from "../pool/summary-judgment.js";
 import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
+import _poolSuntouchedMyr from "../pool/suntouched-myr.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
 import _poolSurvivorOfTheUnseen from "../pool/survivor-of-the-unseen.js";
 import _poolSvyelunOfSeaAndSky from "../pool/svyelun-of-sea-and-sky.js";
@@ -1298,6 +1300,7 @@ const shard: CardShard = {
     _poolSarevoksTome,
     _poolSarumansTrickery,
     _poolSatyrNyxSmith,
+    _poolSawtoothThresher,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,
     _poolScionSummoner,
@@ -1397,6 +1400,7 @@ const shard: CardShard = {
     _poolSunBlessedGuardian,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
+    _poolSuntouchedMyr,
     _poolSurlyFarrier,
     _poolSurvivorOfTheUnseen,
     _poolSvyelunOfSeaAndSky,

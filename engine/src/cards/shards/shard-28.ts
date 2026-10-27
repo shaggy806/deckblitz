@@ -48,6 +48,7 @@ import _poolAssassinate from "../pool/assassinate.js";
 import _poolAssertPerfection from "../pool/assert-perfection.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
 import _poolAtarkaBeastbreaker from "../pool/atarka-beastbreaker.js";
+import _poolAuriokWindwalker from "../pool/auriok-windwalker.js";
 import _poolAvacynThePurifier from "../pool/avacyn-the-purifier.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
 import _poolAvenSurveyor from "../pool/aven-surveyor.js";
@@ -499,6 +500,7 @@ import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRainOfSalt from "../pool/rain-of-salt.js";
 import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
+import _poolRakshaGoldenCub from "../pool/raksha-golden-cub.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
@@ -837,6 +839,7 @@ const shard: CardShard = {
     _poolAssertPerfection,
     _poolAtalanJackal,
     _poolAtarkaBeastbreaker,
+    _poolAuriokWindwalker,
     _poolAvacynThePurifier,
     _poolAvenSmokeweaver,
     _poolAvenSurveyor,
@@ -1288,6 +1291,7 @@ const shard: CardShard = {
     _poolRainOfSalt,
     _poolRainbowEfreet,
     _poolRakdosRagemutt,
+    _poolRakshaGoldenCub,
     _poolRamunapExcavator,
     _poolRapaciousGuest,
     _poolRapierWit,

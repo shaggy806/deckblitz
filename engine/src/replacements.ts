@@ -125,6 +125,17 @@ export interface EntersBattlefieldReplacement {
     readonly kind: string;
     readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value";
   };
+  /**
+   * Sunburst (rule 702.44a): it enters with a counter for each colour of mana
+   * spent to cast it — +1/+1 counters if it's entering as a creature, ignoring
+   * type-changing effects (so by its copiable types, layer 1: March of the
+   * Machines doesn't make Engineered Explosives' counters +1/+1), charge
+   * counters otherwise. None unless it's entering from the stack as a
+   * resolving spell (702.44b: the colours spent are cleared by any other zone
+   * change). The `sunburst()` helper. "Modular—Sunburst" is always +1/+1
+   * (702.44c) and is `counters` with `{ colorsSpentOf: "source" }` instead.
+   */
+  readonly sunburst?: true;
   /** It enters transformed — a transforming DFC that says "enters the
    * battlefield transformed" unconditionally (rule 712.10 — ROADMAP Phase
    * 10b). Daybound's conditional "if it's night" is handled by the engine,

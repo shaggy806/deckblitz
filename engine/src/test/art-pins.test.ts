@@ -41,6 +41,10 @@ describe("art pins", () => {
 const NO_TOKEN_PRINTING = new Set([
   // Dune-Brood Nephilim (GPT)'s 1/1 colorless Sand was never printed as a token.
   "Sand Token",
+  // Helm of Kaldra (5DN)'s Kaldra and Summoning Station (5DN)'s 2/2 Pincher:
+  // no token printing in the Oracle snapshot.
+  "Kaldra",
+  "Pincher Token",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",

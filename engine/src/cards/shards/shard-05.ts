@@ -353,6 +353,7 @@ import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
+import _poolInfusedArrows from "../pool/infused-arrows.js";
 import _poolInnerFlameIgniter from "../pool/inner-flame-igniter.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
@@ -578,6 +579,7 @@ import _poolShamanOfSpring from "../pool/shaman-of-spring.js";
 import _poolShamblingGoblin from "../pool/shambling-goblin.js";
 import _poolSharkShredderKillerClone from "../pool/shark-shredder-killer-clone.js";
 import _poolSharlayanNationOfScholars from "../pool/sharlayan-nation-of-scholars.js";
+import _poolShatteredDreams from "../pool/shattered-dreams.js";
 import _poolShatterskullCharger from "../pool/shatterskull-charger.js";
 import _poolShatterskullRecruit from "../pool/shatterskull-recruit.js";
 import _poolShelteredAerie from "../pool/sheltered-aerie.js";
@@ -1113,6 +1115,7 @@ const shard: CardShard = {
     _poolIncarnationTechnique,
     _poolIncubationDruid,
     _poolInfernalTribute,
+    _poolInfusedArrows,
     _poolInnerFlameIgniter,
     _poolInquisitivePuppet,
     _poolInsectoidExterminator,
@@ -1338,6 +1341,7 @@ const shard: CardShard = {
     _poolShamblingGoblin,
     _poolSharkShredderKillerClone,
     _poolSharlayanNationOfScholars,
+    _poolShatteredDreams,
     _poolShatterskullCharger,
     _poolShatterskullRecruit,
     _poolShelteredAerie,

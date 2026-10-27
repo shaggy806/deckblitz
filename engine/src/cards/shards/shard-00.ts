@@ -207,6 +207,7 @@ import _poolExposeToDaylight from "../pool/expose-to-daylight.js";
 import _poolExultantCultist from "../pool/exultant-cultist.js";
 import _poolFaithlessLooting from "../pool/faithless-looting.js";
 import _poolFaithlessSalvaging from "../pool/faithless-salvaging.js";
+import _poolFangrenPathcutter from "../pool/fangren-pathcutter.js";
 import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
@@ -989,6 +990,7 @@ const shard: CardShard = {
     _poolExultantCultist,
     _poolFaithlessLooting,
     _poolFaithlessSalvaging,
+    _poolFangrenPathcutter,
     _poolFearfulVillager,
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,

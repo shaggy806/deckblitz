@@ -85,6 +85,7 @@ import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolChandrasRevolution from "../pool/chandras-revolution.js";
 import _poolChandrasTriumph from "../pool/chandras-triumph.js";
 import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
+import _poolChimericCoils from "../pool/chimeric-coils.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCircleOfElders from "../pool/circle-of-elders.js";
@@ -493,6 +494,7 @@ import _poolRathsEdge from "../pool/raths-edge.js";
 import _poolRayOfDistortion from "../pool/ray-of-distortion.js";
 import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
+import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
@@ -811,6 +813,7 @@ const shard: CardShard = {
     _poolChandrasRevolution,
     _poolChandrasTriumph,
     _poolChatterfangSquirrelGeneral,
+    _poolChimericCoils,
     _poolCidFreeflierPilot,
     _poolCinderbones,
     _poolCircleOfElders,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolRayOfDistortion,
     _poolRayOfErasure,
     _poolRazakethsRite,
+    _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
     _poolReduceToMemory,

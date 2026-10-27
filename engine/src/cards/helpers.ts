@@ -478,6 +478,20 @@ export const soulshift = (n: number): TriggeredAbility => ({
 });
 
 /**
+ * Sunburst (rule 702.44a): "If this object is entering as a creature, ignoring
+ * any type-changing effects that would affect it, it enters with a +1/+1
+ * counter on it for each color of mana spent to cast it. Otherwise, it enters
+ * with a charge counter on it for each color of mana spent to cast it." A
+ * self `enters-battlefield` replacement; `noun` is the reminder text's "This
+ * creature" or "This artifact". Put "Sunburst" in `text` as well.
+ */
+export const sunburst = (noun: "creature" | "artifact"): StaticAbility => ({
+  affects: { scope: "self" },
+  replacement: { event: "enters-battlefield", sunburst: true },
+  text: `Sunburst (This ${noun} enters with a ${noun === "creature" ? "+1/+1" : "charge"} counter on it for each color of mana spent to cast it.)`,
+});
+
+/**
  * Rampage N (rule 702.23a): "Whenever this creature becomes blocked, it gets
  * +N/+N until end of turn for each creature blocking it beyond the first" —
  * counted once, as the trigger resolves (702.23b). Each instance triggers on

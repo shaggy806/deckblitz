@@ -165,6 +165,7 @@ import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
 import _poolEndHostilities from "../pool/end-hostilities.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
+import _poolEngineeredExplosives from "../pool/engineered-explosives.js";
 import _poolEphemerate from "../pool/ephemerate.js";
 import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErebossTitan from "../pool/ereboss-titan.js";
@@ -263,6 +264,7 @@ import _poolHasteMagic from "../pool/haste-magic.js";
 import _poolHawkeyeBowslinger from "../pool/hawkeye-bowslinger.js";
 import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
+import _poolHealersHeaddress from "../pool/healers-headdress.js";
 import _poolHellkiteWhelp from "../pool/hellkite-whelp.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
@@ -637,6 +639,7 @@ import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grena
 import _poolVigeanGraftmage from "../pool/vigean-graftmage.js";
 import _poolVineweft from "../pool/vineweft.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
+import _poolViridianScout from "../pool/viridian-scout.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
@@ -858,6 +861,7 @@ const shard: CardShard = {
     _poolEndHostilities,
     _poolEndlessOne,
     _poolEndriderCatalyzer,
+    _poolEngineeredExplosives,
     _poolEphemerate,
     _poolEquilibriumAdept,
     _poolErebossTitan,
@@ -956,6 +960,7 @@ const shard: CardShard = {
     _poolHawkeyeBowslinger,
     _poolHazelsNocturne,
     _poolHealersHawk,
+    _poolHealersHeaddress,
     _poolHellkiteWhelp,
     _poolHengeOfRamos,
     _poolHeraldOfSerra,
@@ -1330,6 +1335,7 @@ const shard: CardShard = {
     _poolVigeanGraftmage,
     _poolVineweft,
     _poolViridianLongbow,
+    _poolViridianScout,
     _poolVoiceOfTruth,
     _poolVolleyVeteran,
     _poolVonaButcherOfMagan,
