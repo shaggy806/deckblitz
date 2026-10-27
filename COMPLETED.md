@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"And all other permanents with the same name as that permanent", and Darksteel — Darksteel
+  is whole** (batch 214, the third middle walk, 2026-10-27, `condition:same-name-as-target`):
+  **built** `CardFilter.sameNameAsTarget` (rule 201.2a — the target and its untargeted namesakes
+  in one `-all` effect, a face-down target alone; the scaffolder reads the destroy, exile,
+  return-to-hand and +N/+N forms) and authored the Echoing cycle with it and ten earlier cards:
+  Maelstrom Pulse, Detention Sphere, Bile Blight, Declaration in Stone, Deputy of Detention,
+  Banishment, Sever the Bloodline, Homing Lightning, Izzet Staticaster, Wake of Destruction. 68
+  of Darksteel's 102 authored — Gemini Engine, Spellbinder, Vex, Furnace Dragon, Myr Matrix,
+  Wirefly Hive, Pristine Angel — by five `card-author` agents and the lead, and 34 blocked
+  (`B214.json`).
 - **Sunburst, and Fifth Dawn — Fifth Dawn is whole** (batch 213, the third middle walk's range
   taken by a newest-first session, 2026-10-26, `keyword:sunburst`): **built** sunburst (rule
   702.44 — the `sunburst()` helper, +1/+1 counters by its copiable creature type or charge

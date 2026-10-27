@@ -11659,6 +11659,50 @@
   },
   "condition:countered-this-way": {
    "example": "Fold into Aether: 'Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield' — nothing when the spell can't be countered."
+  },
+  "condition:same-name-as-target-off-battlefield": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Echoing Return: the target's namesakes are cards in a graveyard, hand or library — sameNameAsTarget is bound only in a battlefield -all effect."
+  },
+  "condition:same-name-as-target-tokens-only": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Legions to Ashes: 'the target and all tokens that player controls with its name' — no filter says 'is the target, or a token sharing its name'."
+  },
+  "effect:reveal-until-or-x-cards": {
+   "family": "effect:reveal-until-count",
+   "example": "Thought Dissector: reveal until an artifact card or X cards are revealed, whichever comes first."
+  },
+  "effect:remove-card-type-until-eot": {
+   "family": "effect:type-changing-effects",
+   "example": "Neurok Transmuter: '… loses artifact type until end of turn' — removeTypes is static-only."
+  },
+  "effect:host-of-destroyed-target": {
+   "family": "effect:attached-effect-ref",
+   "example": "Unforge: damage to the creature the destroyed Equipment was attached to."
+  },
+  "mechanic:mulligan-hand-ability": {
+   "family": "mechanic:opening-hand-actions",
+   "example": "Serum Powder: an ability usable from the hand while a mulligan is decided."
+  },
+  "condition:target-player-more-life-than-you": {
+   "family": "condition:opponent-more-cards-in-hand",
+   "example": "Pulse of the Forge: 'if that player or that planeswalker's controller has more life than you'."
+  },
+  "condition:target-player-more-cards-in-hand-than-you": {
+   "family": "condition:opponent-more-cards-in-hand",
+   "example": "Pulse of the Dross: 'if that player has more cards in hand than you'."
+  },
+  "decision:choose-one-exiled-with-source-to-copy": {
+   "family": "effect:cast-during-resolution",
+   "example": "Panoptic Mirror: copy one chosen card of those exiled with it and cast the copy."
+  },
+  "effect:target-must-block-source-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Auriok Siege Sled: 'target artifact creature blocks this creature this turn if able'."
+  },
+  "effect:delayed-sacrifice-modified-this-way": {
+   "family": "effect:delayed-trigger-refs",
+   "example": "Tears of Rage: 'sacrifice those creatures at end of combat' — a delayed sacrifice of the creatures the pump affected."
   }
  }
 }

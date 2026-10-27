@@ -1,0 +1,886 @@
+{
+  "batch": "B214",
+  "status": "complete",
+  "ranks": "Darksteel (DST, 2004-02-06): whole set, 102 (the third middle walk's range); built \"and all other permanents with the same name as that permanent\" (condition:same-name-as-target — CardFilter.sameNameAsTarget, rule 201.2a), with the ten earlier cards it unblocked (Maelstrom Pulse, Detention Sphere, Bile Blight, Declaration in Stone, Deputy of Detention, Banishment, Sever the Bloodline, Homing Lightning, Izzet Staticaster, Wake of Destruction) and twelve earlier ones re-triaged to what still blocks them",
+  "authored": [
+    {
+      "name": "Ageless Entity",
+      "files": [
+        "engine/src/cards/pool/ageless-entity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Angel's Feather",
+      "files": [
+        "engine/src/cards/pool/angels-feather.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arcane Spyglass",
+      "files": [
+        "engine/src/cards/pool/arcane-spyglass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arcbound Fiend",
+      "files": [
+        "engine/src/cards/pool/arcbound-fiend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Auriok Glaivemaster",
+      "files": [
+        "engine/src/cards/pool/auriok-glaivemaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Banishment",
+      "files": [
+        "engine/src/cards/pool/banishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Barbed Lightning",
+      "files": [
+        "engine/src/cards/pool/barbed-lightning.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bile Blight",
+      "files": [
+        "engine/src/cards/pool/bile-blight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Burden of Greed",
+      "files": [
+        "engine/src/cards/pool/burden-of-greed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carry Away",
+      "files": [
+        "engine/src/cards/pool/carry-away.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chimeric Egg",
+      "files": [
+        "engine/src/cards/pool/chimeric-egg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chromescale Drake",
+      "files": [
+        "engine/src/cards/pool/chromescale-drake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Darksteel Brute",
+      "files": [
+        "engine/src/cards/pool/darksteel-brute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Declaration in Stone",
+      "files": [
+        "engine/src/cards/pool/declaration-in-stone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deputy of Detention",
+      "files": [
+        "engine/src/cards/pool/deputy-of-detention.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Detention Sphere",
+      "files": [
+        "engine/src/cards/pool/detention-sphere.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragon's Claw",
+      "files": [
+        "engine/src/cards/pool/dragons-claw.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drill-Skimmer",
+      "files": [
+        "engine/src/cards/pool/drill-skimmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drooling Ogre",
+      "files": [
+        "engine/src/cards/pool/drooling-ogre.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dross Golem",
+      "files": [
+        "engine/src/cards/pool/dross-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoing Calm",
+      "files": [
+        "engine/src/cards/pool/echoing-calm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoing Courage",
+      "files": [
+        "engine/src/cards/pool/echoing-courage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoing Decay",
+      "files": [
+        "engine/src/cards/pool/echoing-decay.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoing Ruin",
+      "files": [
+        "engine/src/cards/pool/echoing-ruin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echoing Truth",
+      "files": [
+        "engine/src/cards/pool/echoing-truth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fangren Firstborn",
+      "files": [
+        "engine/src/cards/pool/fangren-firstborn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Furnace Dragon",
+      "files": [
+        "engine/src/cards/pool/furnace-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gemini Engine",
+      "files": [
+        "engine/src/cards/pool/gemini-engine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Archaeologist",
+      "files": [
+        "engine/src/cards/pool/goblin-archaeologist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Greater Harvester",
+      "files": [
+        "engine/src/cards/pool/greater-harvester.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Homing Lightning",
+      "files": [
+        "engine/src/cards/pool/homing-lightning.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunger of the Nim",
+      "files": [
+        "engine/src/cards/pool/hunger-of-the-nim.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infested Roothold",
+      "files": [
+        "engine/src/cards/pool/infested-roothold.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Izzet Staticaster",
+      "files": [
+        "engine/src/cards/pool/izzet-staticaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Karstoderm",
+      "files": [
+        "engine/src/cards/pool/karstoderm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kraken's Eye",
+      "files": [
+        "engine/src/cards/pool/krakens-eye.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Machinate",
+      "files": [
+        "engine/src/cards/pool/machinate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maelstrom Pulse",
+      "files": [
+        "engine/src/cards/pool/maelstrom-pulse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magnetic Flux",
+      "files": [
+        "engine/src/cards/pool/magnetic-flux.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mephitic Ooze",
+      "files": [
+        "engine/src/cards/pool/mephitic-ooze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Metal Fatigue",
+      "files": [
+        "engine/src/cards/pool/metal-fatigue.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mirrodin's Core",
+      "files": [
+        "engine/src/cards/pool/mirrodins-core.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Myr Landshaper",
+      "files": [
+        "engine/src/cards/pool/myr-landshaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myr Matrix",
+      "files": [
+        "engine/src/cards/pool/myr-matrix.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Neurok Prodigy",
+      "files": [
+        "engine/src/cards/pool/neurok-prodigy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nim Abomination",
+      "files": [
+        "engine/src/cards/pool/nim-abomination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oxidda Golem",
+      "files": [
+        "engine/src/cards/pool/oxidda-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pristine Angel",
+      "files": [
+        "engine/src/cards/pool/pristine-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Psychic Overload",
+      "files": [
+        "engine/src/cards/pool/psychic-overload.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pulse of the Tangle",
+      "files": [
+        "engine/src/cards/pool/pulse-of-the-tangle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Purge",
+      "files": [
+        "engine/src/cards/pool/purge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quicksilver Behemoth",
+      "files": [
+        "engine/src/cards/pool/quicksilver-behemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Razor Golem",
+      "files": [
+        "engine/src/cards/pool/razor-golem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reap and Sow",
+      "files": [
+        "engine/src/cards/pool/reap-and-sow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Retract",
+      "files": [
+        "engine/src/cards/pool/retract.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roaring Slagwurm",
+      "files": [
+        "engine/src/cards/pool/roaring-slagwurm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sever the Bloodline",
+      "files": [
+        "engine/src/cards/pool/sever-the-bloodline.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shield of Kaldra",
+      "files": [
+        "engine/src/cards/pool/shield-of-kaldra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shriveling Rot",
+      "files": [
+        "engine/src/cards/pool/shriveling-rot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shunt",
+      "files": [
+        "engine/src/cards/pool/shunt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soulscour",
+      "files": [
+        "engine/src/cards/pool/soulscour.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Specter's Shroud",
+      "files": [
+        "engine/src/cards/pool/specters-shroud.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spellbinder",
+      "files": [
+        "engine/src/cards/pool/spellbinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spire Golem",
+      "files": [
+        "engine/src/cards/pool/spire-golem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stand Together",
+      "files": [
+        "engine/src/cards/pool/stand-together.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Steelshaper Apprentice",
+      "files": [
+        "engine/src/cards/pool/steelshaper-apprentice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stir the Pride",
+      "files": [
+        "engine/src/cards/pool/stir-the-pride.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Synod Artificer",
+      "files": [
+        "engine/src/cards/pool/synod-artificer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Talon of Pain",
+      "files": [
+        "engine/src/cards/pool/talon-of-pain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tangle Golem",
+      "files": [
+        "engine/src/cards/pool/tangle-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tel-Jilad Outrider",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-outrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tel-Jilad Wolf",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-wolf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vex",
+      "files": [
+        "engine/src/cards/pool/vex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vulshok War Boar",
+      "files": [
+        "engine/src/cards/pool/vulshok-war-boar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wake of Destruction",
+      "files": [
+        "engine/src/cards/pool/wake-of-destruction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wand of the Elements",
+      "files": [
+        "engine/src/cards/pool/wand-of-the-elements.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wirefly Hive",
+      "files": [
+        "engine/src/cards/pool/wirefly-hive.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wurm's Tooth",
+      "files": [
+        "engine/src/cards/pool/wurms-tooth.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Death Cloud",
+      "needs": [
+        "effect:sacrifice-amount"
+      ],
+      "why": "The sacrifice effect's count is a fixed number; 'each player sacrifices X creatures / X lands' can't be said."
+    },
+    {
+      "name": "Surestrike Trident",
+      "needs": [
+        "cost:unattach-equipment"
+      ],
+      "why": "The granted ability's cost includes 'Unattach Surestrike Trident'; no ability cost unattaches."
+    },
+    {
+      "name": "Hallow",
+      "needs": [
+        "replacement:prevent-damage-by-target-spell"
+      ],
+      "why": "Nothing prevents all damage a target spell would deal, gaining life equal to the damage prevented."
+    },
+    {
+      "name": "Dismantle",
+      "needs": [
+        "decision:choose-counter-kind",
+        "effect:amount-counters-on-object"
+      ],
+      "why": "The counter kind (+1/+1 or charge) is chosen as it resolves, and the destroyed artifact's counter total can't be read inside the choice."
+    },
+    {
+      "name": "Emissary of Hope",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "countOf can't count the artifacts the damaged player controls (controlledBy takes only you/opponent/active-player)."
+    },
+    {
+      "name": "Thought Dissector",
+      "needs": [
+        "effect:reveal-until-or-x-cards"
+      ],
+      "why": "reveal-until has no 'or X cards are revealed, whichever comes first' limit."
+    },
+    {
+      "name": "Arcbound Overseer",
+      "needs": [
+        "keyword:modular"
+      ],
+      "why": "Modular is two plain abilities with no keyword marker, so no filter finds 'creatures you control with modular'."
+    },
+    {
+      "name": "Leonin Bola",
+      "needs": [
+        "cost:unattach-equipment"
+      ],
+      "why": "No ability cost unattaches the source Equipment in the ability it grants."
+    },
+    {
+      "name": "Neurok Transmuter",
+      "needs": [
+        "effect:remove-card-type-until-eot"
+      ],
+      "why": "Nothing removes the artifact type until end of turn (removeTypes is static-only; animate's setTypes would wipe other types)."
+    },
+    {
+      "name": "Pulse of the Grid",
+      "needs": [
+        "condition:opponent-more-cards-in-hand"
+      ],
+      "why": "No condition checks whether an opponent has more cards in hand than you."
+    },
+    {
+      "name": "Pulse of the Fields",
+      "needs": [
+        "condition:opponent-more-life"
+      ],
+      "why": "The life-total condition compares only with a fixed number, not with your own life."
+    },
+    {
+      "name": "Unforge",
+      "needs": [
+        "effect:host-of-destroyed-target"
+      ],
+      "why": "Nothing reads what the target Equipment was attached to as it was destroyed."
+    },
+    {
+      "name": "Aether Snap",
+      "needs": [
+        "effect:remove-all-counters"
+      ],
+      "why": "remove-counter removes one named kind from one permanent; nothing removes every counter from every permanent."
+    },
+    {
+      "name": "Serum Powder",
+      "needs": [
+        "mechanic:mulligan-hand-ability"
+      ],
+      "why": "Nothing lets a card act from the hand while a mulligan is decided."
+    },
+    {
+      "name": "Chittering Rats",
+      "needs": [
+        "effect:target-player-hand-card-to-library-top"
+      ],
+      "why": "look-and-choose from a hand can't be aimed at a targeted opponent (the opponent chooses a card from their own hand)."
+    },
+    {
+      "name": "Emissary of Despair",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "countOf can't count the artifacts the damaged player controls."
+    },
+    {
+      "name": "Pulse of the Forge",
+      "needs": [
+        "condition:target-player-more-life-than-you"
+      ],
+      "why": "No condition compares the targeted player's (or planeswalker controller's) life with yours."
+    },
+    {
+      "name": "Pulse of the Dross",
+      "needs": [
+        "effect:reveal-n-from-hand-you-choose-discard",
+        "condition:target-player-more-cards-in-hand-than-you"
+      ],
+      "why": "Nothing makes a player reveal three cards of their choice for you to pick from, and the hand-size comparison is missing."
+    },
+    {
+      "name": "Turn the Tables",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "Combat damage to you can't be redirected to a target creature."
+    },
+    {
+      "name": "Death-Mask Duplicant",
+      "needs": [
+        "static:keywords-of-linked-exile"
+      ],
+      "why": "Nothing grants the keywords of linked exiled cards; only their activated abilities can be granted."
+    },
+    {
+      "name": "Panoptic Mirror",
+      "needs": [
+        "decision:choose-one-exiled-with-source-to-copy"
+      ],
+      "why": "'Copy a card exiled with this artifact' is one chosen card; cast-now from exiled-with-source copies every imprinted card in turn."
+    },
+    {
+      "name": "Heartseeker",
+      "needs": [
+        "cost:unattach-equipment"
+      ],
+      "why": "The granted ability's cost '{T}, Unattach Heartseeker' has no AbilityCost field."
+    },
+    {
+      "name": "Flamebreak",
+      "needs": [
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "damage-all has no 'creatures dealt damage this way can't be regenerated this turn' rider."
+    },
+    {
+      "name": "Test of Faith",
+      "needs": [
+        "replacement:prevention-then-per-damage"
+      ],
+      "why": "A prevent-damage shield has no '+1/+1 counter for each 1 damage prevented this way' rider."
+    },
+    {
+      "name": "Auriok Siege Sled",
+      "needs": [
+        "effect:target-must-block-source-this-turn",
+        "effect:target-cant-block-source-this-turn"
+      ],
+      "why": "No combat restriction is tied to one particular attacker: neither 'blocks this creature if able' nor 'can't block this creature'."
+    },
+    {
+      "name": "Rebuking Ceremony",
+      "needs": [
+        "decision:owner-orders-library-placements"
+      ],
+      "why": "When both artifacts have one owner, that owner orders them on top (the ruling); two put-on-library steps fix the caster's target order instead."
+    },
+    {
+      "name": "Eater of Days",
+      "needs": [
+        "effect:skip-next-turn"
+      ],
+      "why": "No effect skips turns; this card skips two."
+    },
+    {
+      "name": "Lich's Tomb",
+      "needs": [
+        "static:dont-lose-for-zero-life"
+      ],
+      "why": "cantLoseGame is broader than 'don't lose for having 0 or less life'."
+    },
+    {
+      "name": "Tears of Rage",
+      "needs": [
+        "effect:delayed-sacrifice-modified-this-way"
+      ],
+      "why": "A delayed sacrifice can't refer to 'those creatures' the pump affected."
+    },
+    {
+      "name": "Thunderstaff",
+      "needs": [
+        "replacement:prevent-n-damage-from-each-source"
+      ],
+      "why": "Damage replacements prevent all of the damage only; a -1 reduction isn't prevention."
+    },
+    {
+      "name": "Second Sight",
+      "needs": [
+        "effect:look-and-choose-target-player"
+      ],
+      "why": "look-and-choose can't look at a target opponent's library for you to reorder."
+    },
+    {
+      "name": "Murderous Spoils",
+      "needs": [
+        "effect:gain-control-attachments"
+      ],
+      "why": "No way to gain control of the Equipment that were attached to the destroyed target."
+    },
+    {
+      "name": "Scrounge",
+      "needs": [
+        "effect:opponent-chooses-from-graveyard"
+      ],
+      "why": "No shape where the target opponent picks from their own graveyard and the card enters under your control."
+    },
+    {
+      "name": "Tanglewalker",
+      "needs": [
+        "keyword:artifact-landwalk"
+      ],
+      "why": "No 'can't be blocked as long as defending player controls an artifact land' condition (not true landwalk)."
+    },
+    {
+      "name": "Legion's End",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged after sameNameAsTarget (B214): the battlefield part is buildable, but the cards with that name in the player's hand and graveyard aren't — the clause binds a battlefield -all effect only."
+    },
+    {
+      "name": "Secret Salvage",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged (B214): search the library for cards with the target graveyard card's name — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Mask of the Mimic",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged (B214): a library search for the target's name — sameNameAsTarget isn't bound in a search."
+    },
+    {
+      "name": "Moratorium Stone",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged (B214): graveyard cards with the target card's name — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Echoing Return",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged (B214): the namesakes are graveyard cards — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Rat King, Verminister",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield"
+      ],
+      "why": "Re-triaged (B214): the namesakes are graveyard cards — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Legions to Ashes",
+      "needs": [
+        "condition:same-name-as-target-tokens-only"
+      ],
+      "why": "Re-triaged (B214): 'the target and all tokens with its name' — a filter can't say 'is the target, or a token sharing its name'."
+    },
+    {
+      "name": "March of Burgeoning Life",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield",
+        "cost:exile-cards-from-hand-cost-reduction"
+      ],
+      "why": "Re-triaged (B214): a library search for the target's name — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Hour of Glory",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield",
+        "effect:exile-from-hand-by-filter"
+      ],
+      "why": "Re-triaged (B214): the namesakes are cards in the player's hand — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Crumble to Dust",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield",
+        "effect:search-hand-graveyard-library-exile"
+      ],
+      "why": "Re-triaged (B214): the namesakes are in graveyard, hand and library — sameNameAsTarget is bound for battlefield -all effects only."
+    },
+    {
+      "name": "Mimeofacture",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield",
+        "effect:search-opponent-library"
+      ],
+      "why": "Re-triaged (B214): a search of the target's controller's library for its name — sameNameAsTarget isn't bound in a search."
+    },
+    {
+      "name": "Tibalt's Trickery",
+      "needs": [
+        "condition:same-name-as-target-off-battlefield",
+        "effect:cast-now-other-player",
+        "effect:random-choice"
+      ],
+      "why": "Re-triaged (B214): 'a nonland card with a different name than that spell', revealed from a library — sameNameAsTarget is bound for battlefield -all effects only; and the countered spell's controller casts it."
+    }
+  ]
+}
