@@ -1,6 +1,6 @@
 # The set walk's last three rounds
 
-**Status:** planned (2026-10-27): round eighteen **landed** 2026-10-27 (B219–B223: 396 authored, earlier batches' cards among them, 162 blocked; amplify, provoke and "blocks this turn if able", the discard-X additional cost, "any player may activate" and "unless any player pays" built); nineteen and twenty not started. Each round
+**Status:** planned (2026-10-27): round eighteen **landed** 2026-10-27 (B219–B223: 396 authored, earlier batches' cards among them, 162 blocked; amplify, provoke and "blocks this turn if able", the discard-X additional cost, "any player may activate" and "unless any player pays" built); round nineteen started (B224–B229, six cloud sessions); twenty not started. Each round
 is one run of the `author-walks-parallel` skill from a fresh session. Its step 1, choosing the
 walks and their ranges, is already decided below. The coordinator reads its round off this file,
 records the batch numbers in `BACKLOG.md`'s `author-by-set` line (step 2) and starts the
@@ -48,7 +48,7 @@ oldest-first walk goes forward (`author-by-set-oldest`).
 | B222 | Seventh middle | Prophecy whole | 113 |
 | B223 | Seventh middle | Nemesis whole. The same walk takes two batches on disjoint sets, as the third middle walk did with Darksteel and Mirrodin in round seventeen. | 104 |
 
-**Round nineteen: six sessions, ~585 cards.** The batch numbers are the highest `B<N>` on
+**Round nineteen: six sessions, ~585 cards. Batch numbers B224–B229, in the table's order.** The batch numbers are the highest `B<N>` on
 `origin/main` plus one, in this order.
 
 | Walk | Batch's sets | Cards |
