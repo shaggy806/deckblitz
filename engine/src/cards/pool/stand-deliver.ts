@@ -7,7 +7,7 @@ const FACES = ["Stand // Deliver", "Stand", "Deliver"];
 
 export default defineCard({
   name: "Stand // Deliver",
-  manaCost: "{2}{W}{U}",
+  manaCost: "{W}{2}{U}",
   colors: ["W", "U"],
   types: ["instant"],
   text: "Prevent the next 2 damage that would be dealt to target creature this turn.\n//\nReturn target permanent to its owner's hand.",
