@@ -114,6 +114,7 @@ import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolCerebralVortex from "../pool/cerebral-vortex.js";
 import _poolChainOfPlasma from "../pool/chain-of-plasma.js";
+import _poolChainflinger from "../pool/chainflinger.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
@@ -273,12 +274,14 @@ import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlameKinWarScout from "../pool/flame-kin-war-scout.js";
 import _poolFlamebladeAngel from "../pool/flameblade-angel.js";
+import _poolFlamestickCourier from "../pool/flamestick-courier.js";
 import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
 import _poolFontOfIre from "../pool/font-of-ire.js";
+import _poolForcedMarch from "../pool/forced-march.js";
 import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
@@ -335,6 +338,7 @@ import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGuiseOfFire from "../pool/guise-of-fire.js";
+import _poolGustcloakHarrier from "../pool/gustcloak-harrier.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
 import _poolHagHedgeMage from "../pool/hag-hedge-mage.js";
@@ -399,6 +403,7 @@ import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJundHackblade from "../pool/jund-hackblade.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
+import _poolJunkGolem from "../pool/junk-golem.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
@@ -477,6 +482,7 @@ import _poolMidnightAngelArmor from "../pool/midnight-angel-armor.js";
 import _poolMindbladeRender from "../pool/mindblade-render.js";
 import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMinionOfTeveshSzat from "../pool/minion-of-tevesh-szat.js";
+import _poolMinotaurExplorer from "../pool/minotaur-explorer.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
@@ -576,6 +582,7 @@ import _poolQuestingDruid from "../pool/questing-druid.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
+import _poolRamosianRally from "../pool/ramosian-rally.js";
 import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
@@ -593,6 +600,7 @@ import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRidgedKusite from "../pool/ridged-kusite.js";
 import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
+import _poolRighteousIndignation from "../pool/righteous-indignation.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
@@ -959,6 +967,7 @@ const shard: CardShard = {
     _poolCephalidInkmage,
     _poolCerebralVortex,
     _poolChainOfPlasma,
+    _poolChainflinger,
     _poolChallengerTroll,
     _poolChanceMetElves,
     _poolChandraAblaze,
@@ -1118,12 +1127,14 @@ const shard: CardShard = {
     _poolFissureWizard,
     _poolFlameKinWarScout,
     _poolFlamebladeAngel,
+    _poolFlamestickCourier,
     _poolFlamingFist,
     _poolFlamingTyrannosaurus,
     _poolFlipTheSwitch,
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
     _poolFontOfIre,
+    _poolForcedMarch,
     _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
@@ -1180,6 +1191,7 @@ const shard: CardShard = {
     _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
     _poolGuiseOfFire,
+    _poolGustcloakHarrier,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
     _poolHagHedgeMage,
@@ -1244,6 +1256,7 @@ const shard: CardShard = {
     _poolJoustThrough,
     _poolJundHackblade,
     _poolJungleTroll,
+    _poolJunkGolem,
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
     _poolKarnArgentDefender,
@@ -1322,6 +1335,7 @@ const shard: CardShard = {
     _poolMindbladeRender,
     _poolMineshaftSpider,
     _poolMinionOfTeveshSzat,
+    _poolMinotaurExplorer,
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMirozel,
@@ -1421,6 +1435,7 @@ const shard: CardShard = {
     _poolRabarooTroop,
     _poolRagamuffinRaptor,
     _poolRaiseDead,
+    _poolRamosianRally,
     _poolRandomEncounter,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
@@ -1438,6 +1453,7 @@ const shard: CardShard = {
     _poolRidgedKusite,
     _poolRiftmarkedKnight,
     _poolRighteousCharge,
+    _poolRighteousIndignation,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
     _poolRiteOfFlame,

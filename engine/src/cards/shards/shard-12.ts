@@ -344,6 +344,7 @@ import _poolInfernalOffering from "../pool/infernal-offering.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
+import _poolIridescentAngel from "../pool/iridescent-angel.js";
 import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
 import _poolIronManMasterOfMachines from "../pool/iron-man-master-of-machines.js";
 import _poolIsland from "../pool/island.js";
@@ -401,6 +402,7 @@ import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
 import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolLunarMystic from "../pool/lunar-mystic.js";
+import _poolLunge from "../pool/lunge.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
@@ -455,6 +457,7 @@ import _poolNighthowler from "../pool/nighthowler.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNivMizzetDracogenius from "../pool/niv-mizzet-dracogenius.js";
+import _poolNomadDecoy from "../pool/nomad-decoy.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNotForgotten from "../pool/not-forgotten.js";
 import _poolNoxiousHatchling from "../pool/noxious-hatchling.js";
@@ -603,6 +606,7 @@ import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShinestriker from "../pool/shinestriker.js";
 import _poolShiningArmor from "../pool/shining-armor.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
+import _poolShovingMatch from "../pool/shoving-match.js";
 import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
@@ -779,6 +783,7 @@ import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
 import _poolZealotsConviction from "../pool/zealots-conviction.js";
+import _poolZombieAssassin from "../pool/zombie-assassin.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
 import _tokensCatWarriorTokenAjaniFellsTheGodsire from "../tokens/cat-warrior-token-ajani-fells-the-godsire.js";
 import _tokensCentaurToken from "../tokens/centaur-token.js";
@@ -1142,6 +1147,7 @@ const shard: CardShard = {
     _poolInfernalRebirth,
     _poolIngotChewer,
     _poolInspiringVantage,
+    _poolIridescentAngel,
     _poolIronLadYoungAvenger,
     _poolIronManMasterOfMachines,
     _poolIsland,
@@ -1199,6 +1205,7 @@ const shard: CardShard = {
     _poolLorescaleCoatl,
     _poolLosDiablosMissileBase,
     _poolLunarMystic,
+    _poolLunge,
     _poolLysAlanaInformant,
     _poolManaTithe,
     _poolManifestDread,
@@ -1253,6 +1260,7 @@ const shard: CardShard = {
     _poolNightscapeFamiliar,
     _poolNightwhorlHermit,
     _poolNivMizzetDracogenius,
+    _poolNomadDecoy,
     _poolNorthernAirTemple,
     _poolNotForgotten,
     _poolNoxiousHatchling,
@@ -1401,6 +1409,7 @@ const shard: CardShard = {
     _poolShinestriker,
     _poolShiningArmor,
     _poolShockingGrasp,
+    _poolShovingMatch,
     _poolSiblingRivalry,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
@@ -1577,6 +1586,7 @@ const shard: CardShard = {
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,
     _poolZealotsConviction,
+    _poolZombieAssassin,
   ],
   tokens: [
     _tokensBoarToken,

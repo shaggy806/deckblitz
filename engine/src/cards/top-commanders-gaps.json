@@ -478,7 +478,8 @@
   "cost:morph-pay-life",
   "cost:morph-sacrifice",
   "cost:morph-discard-card",
-  "cost:morph-return-permanent"
+  "cost:morph-return-permanent",
+  "amount:count-in-graveyards-same-name-as-trigger-spell"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

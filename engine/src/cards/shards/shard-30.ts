@@ -261,6 +261,7 @@ import _poolFountainOfCho from "../pool/fountain-of-cho.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
+import _poolFreneticOgre from "../pool/frenetic-ogre.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
@@ -592,6 +593,7 @@ import _poolSavageSwipe from "../pool/savage-swipe.js";
 import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
+import _poolSeismicMage from "../pool/seismic-mage.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
 import _poolSerpentWarrior from "../pool/serpent-warrior.js";
@@ -631,6 +633,7 @@ import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSolarTide from "../pool/solar-tide.js";
 import _poolSoltariLancer from "../pool/soltari-lancer.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
+import _poolSoothingBalm from "../pool/soothing-balm.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
@@ -695,6 +698,7 @@ import _poolThoughtNibbler from "../pool/thought-nibbler.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
+import _poolThunderOfHooves from "../pool/thunder-of-hooves.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
@@ -735,6 +739,7 @@ import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
+import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
 import _poolVentSentinel from "../pool/vent-sentinel.js";
 import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
@@ -1063,6 +1068,7 @@ const shard: CardShard = {
     _poolFourKnocks,
     _poolFranticInventory,
     _poolFreestriderCommando,
+    _poolFreneticOgre,
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
@@ -1394,6 +1400,7 @@ const shard: CardShard = {
     _poolSavageThallid,
     _poolScarredVinebreeder,
     _poolSeedsOfRenewal,
+    _poolSeismicMage,
     _poolSelflessSafewright,
     _poolSephirothsIntervention,
     _poolSerpentWarrior,
@@ -1433,6 +1440,7 @@ const shard: CardShard = {
     _poolSolarTide,
     _poolSoltariLancer,
     _poolSoltariPriest,
+    _poolSoothingBalm,
     _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
@@ -1497,6 +1505,7 @@ const shard: CardShard = {
     _poolThousandYearStorm,
     _poolThranGolem,
     _poolThrowALine,
+    _poolThunderOfHooves,
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
     _poolTigerSeal,
@@ -1537,6 +1546,7 @@ const shard: CardShard = {
     _poolVault75MiddleSchool,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
+    _poolVenomspoutBrackus,
     _poolVentSentinel,
     _poolVermiculos,
     _poolVialOfPoison,

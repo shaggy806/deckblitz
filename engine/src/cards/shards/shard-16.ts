@@ -356,6 +356,7 @@ import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
+import _poolKarnsTouch from "../pool/karns-touch.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKathariBomber from "../pool/kathari-bomber.js";
 import _poolKaysa from "../pool/kaysa.js";
@@ -541,6 +542,7 @@ import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRagingSpirit from "../pool/raging-spirit.js";
 import _poolRakdosCackler from "../pool/rakdos-cackler.js";
 import _poolRakdosRingleader from "../pool/rakdos-ringleader.js";
+import _poolRamosianSkyMarshal from "../pool/ramosian-sky-marshal.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
@@ -563,6 +565,7 @@ import _poolRevive from "../pool/revive.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
+import _poolRiptideBiologist from "../pool/riptide-biologist.js";
 import _poolRiptide from "../pool/riptide.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
@@ -591,6 +594,7 @@ import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
+import _poolSecurityDetail from "../pool/security-detail.js";
 import _poolSedgeTroll from "../pool/sedge-troll.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
@@ -635,6 +639,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSoar from "../pool/soar.js";
+import _poolSolarBlast from "../pool/solar-blast.js";
 import _poolSonicSeizure from "../pool/sonic-seizure.js";
 import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
@@ -1215,6 +1220,7 @@ const shard: CardShard = {
     _poolJwariShapeshifter,
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
+    _poolKarnsTouch,
     _poolKataraHeroicHealer,
     _poolKathariBomber,
     _poolKaysa,
@@ -1400,6 +1406,7 @@ const shard: CardShard = {
     _poolRagingSpirit,
     _poolRakdosCackler,
     _poolRakdosRingleader,
+    _poolRamosianSkyMarshal,
     _poolRampartHunter,
     _poolRansackTheLab,
     _poolRazeToTheGround,
@@ -1422,6 +1429,7 @@ const shard: CardShard = {
     _poolRhysticStudy,
     _poolRidesEnd,
     _poolRipTheSeams,
+    _poolRiptideBiologist,
     _poolRiptide,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
@@ -1450,6 +1458,7 @@ const shard: CardShard = {
     _poolScroungingBandar,
     _poolScurryOak,
     _poolSealFromExistence,
+    _poolSecurityDetail,
     _poolSedgeTroll,
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
@@ -1494,6 +1503,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSoar,
+    _poolSolarBlast,
     _poolSonicSeizure,
     _poolSoullessRevival,
     _poolSoulsGrace,

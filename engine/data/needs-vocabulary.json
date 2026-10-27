@@ -12176,6 +12176,78 @@
    "family": "trigger:lose-control-trigger",
    "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
   },
+  "replacement:prevent-damage-dealt-by-enchanted-creature": {
+   "family": "replacement:damage-modification",
+   "example": "Muzzle: prevent all damage that would be dealt by enchanted creature — a would-deal-damage replacement can't name the creature the Aura enchants as the source."
+  },
+  "effect:each-player-reveals-top-all-match": {
+   "family": "effect:this-way-results",
+   "example": "Game Preserve: each player reveals their top card; if all are creature cards, put them all onto the battlefield."
+  },
+  "condition:all-matching-share-a-color": {
+   "family": "condition:filter-combinators",
+   "example": "Common Cause: nonartifact creatures get +2/+2 as long as they all share a color."
+  },
+  "effect:discard-chosen-exact-count": {
+   "family": "effect:discard-chosen-count",
+   "example": "Last Rites: 'Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way' — discard-chosen's upTo lets the caster choose fewer."
+  },
+  "static:protection-except-this-aura": {
+   "family": "keyword:protection-from-everything",
+   "example": "Tattoo Ward: 'Enchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove Tattoo Ward.'"
+  },
+  "amount:damage-dealt-to-target-creature-this-turn": {
+   "family": "effect:amount-new-variants",
+   "example": "Whipkeeper: 'Target creature deals damage to itself equal to the damage already dealt to it this turn' — damage regenerated away still counts."
+  },
+  "replacement:prevent-next-damage-from-chosen-source-any-recipient": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Pilgrim of Virtue: 'the next time a black source of your choice would deal damage this turn, prevent that damage' — to anything, not only you or a target."
+  },
+  "effect:unless-discard-filtered-card": {
+   "family": "effect:unless-target-controller",
+   "example": "Cursed Monstrosity: 'sacrifice it unless you discard a land card' — the unless discard option takes no filter."
+  },
+  "effect:discard-duplicate-names": {
+   "family": "decision:discard-any-number",
+   "example": "Hint of Insanity: 'discards all nonland cards with the same name as another card in their hand'."
+  },
+  "effect:attach-aura-to-land-chosen-by-player": {
+   "family": "effect:attach-extensions",
+   "example": "Steam Vines: 'that land's controller attaches Steam Vines to a land of their choice' — chosen, not targeted, by another player."
+  },
+  "effect:reveal-top-opponent-library-you-choose-to-graveyard": {
+   "family": "effect:look-and-choose-target-opponent-library",
+   "example": "Balshan Beguiler: 'that player reveals the top two cards of their library. Choose one of them and put it into their graveyard.'"
+  },
+  "cost:choose-number-additional": {
+   "family": "decision:choose-number-on-resolution",
+   "example": "Liquid Fire: 'As an additional cost to cast this spell, choose a number between 0 and 5' — a castModal of six modes makes it a modal spell."
+  },
+  "effect:delayed-trigger-about-trigger-recipient": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Serpentine Basilisk: 'whenever it deals combat damage to a creature, destroy that creature at end of combat' — a delayed trigger made by a deals-damage trigger keeps only the trigger object, so \"trigger-recipient\" resolves to nothing when it fires."
+  },
+  "effect:gain-control-to-player-with-most-wizards": {
+   "family": "effect:control-change-extensions",
+   "example": "Thoughtbound Primoc: 'at the beginning of your upkeep, if a player controls more Wizards than each other player, that player gains control of it'."
+  },
+  "effect:prevent-next-damage-to-you-from-filter": {
+   "family": "replacement:damage-modification",
+   "example": "Circle of Solace: 'the next time a creature of the chosen type would deal damage to you this turn, prevent that damage' — next-time prevention covers one chosen source only."
+  },
+  "filter:shares-creature-type-with-sacrificed": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Endemic Plague: 'destroy all creatures that share a creature type with the sacrificed creature' — only card types are compared with a sacrificed creature."
+  },
+  "static:assign-combat-damage-divided-among-defending-player-and-creatures": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Butcher Orgg: 'you may assign its combat damage divided as you choose among defending player and/or any number of creatures they control', blocked or not."
+  },
+  "static:cant-be-blocked-unless-defender-controls-shared-type": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Graxiplon: 'can't be blocked unless defending player controls three or more creatures that share a creature type'."
+  },
   "replacement:prevent-damage-at-most-n": {
    "family": "replacement:damage-prevented-to-filter",
    "example": "Callous Giant: 'If a source would deal 3 or less damage to this creature, prevent that damage' — no amount threshold on the damage replacement."

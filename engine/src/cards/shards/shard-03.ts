@@ -88,6 +88,7 @@ import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
+import _poolChoArrimAlchemist from "../pool/cho-arrim-alchemist.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
 import _poolChromanticore from "../pool/chromanticore.js";
 import _poolChronostutter from "../pool/chronostutter.js";
@@ -160,6 +161,7 @@ import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenScorcher from "../pool/dwarven-scorcher.js";
+import _poolDwarvenShrine from "../pool/dwarven-shrine.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEarthshaker from "../pool/earthshaker.js";
@@ -188,6 +190,7 @@ import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExcavation from "../pool/excavation.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
+import _poolExtortion from "../pool/extortion.js";
 import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
@@ -219,6 +222,7 @@ import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolFlowstoneSlide from "../pool/flowstone-slide.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFracturedLoyalty from "../pool/fractured-loyalty.js";
+import _poolFrightcrawler from "../pool/frightcrawler.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFrostRaptor from "../pool/frost-raptor.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
@@ -557,6 +561,7 @@ import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
+import _poolSnarlingUndorak from "../pool/snarling-undorak.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
@@ -573,7 +578,9 @@ import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
+import _poolSpitfireHandler from "../pool/spitfire-handler.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
+import _poolSpringingTiger from "../pool/springing-tiger.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStandTogether from "../pool/stand-together.js";
@@ -677,6 +684,7 @@ import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
+import _poolWalkingDesecration from "../pool/walking-desecration.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWalltopSentries from "../pool/walltop-sentries.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
@@ -698,6 +706,7 @@ import _poolWingShards from "../pool/wing-shards.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
+import _poolWitheringHex from "../pool/withering-hex.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
@@ -820,6 +829,7 @@ const shard: CardShard = {
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
+    _poolChoArrimAlchemist,
     _poolChocoboCamp,
     _poolChromanticore,
     _poolChronostutter,
@@ -892,6 +902,7 @@ const shard: CardShard = {
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
     _poolDwarvenScorcher,
+    _poolDwarvenShrine,
     _poolDwarvenWeaponsmith,
     _poolEarthbrawn,
     _poolEarthshaker,
@@ -920,6 +931,7 @@ const shard: CardShard = {
     _poolExcavation,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
+    _poolExtortion,
     _poolEyeGouge,
     _poolEyelessWatcher,
     _poolFaerieDuelist,
@@ -951,6 +963,7 @@ const shard: CardShard = {
     _poolFlowstoneSlide,
     _poolForsakenMonument,
     _poolFracturedLoyalty,
+    _poolFrightcrawler,
     _poolFrogmyrEnforcer,
     _poolFrostRaptor,
     _poolFurybladeVampire,
@@ -1289,6 +1302,7 @@ const shard: CardShard = {
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
     _poolSnakeOfTheGoldenGrove,
+    _poolSnarlingUndorak,
     _poolSolemnOffering,
     _poolSomberwaldAlpha,
     _poolSoulOfTheRapids,
@@ -1305,7 +1319,9 @@ const shard: CardShard = {
     _poolSpiritMascot,
     _poolSpiritOfTheHunt,
     _poolSpitefulSquad,
+    _poolSpitfireHandler,
     _poolSplendidReclamation,
+    _poolSpringingTiger,
     _poolStaffOfTheAges,
     _poolStalkingTiger,
     _poolStandTogether,
@@ -1409,6 +1425,7 @@ const shard: CardShard = {
     _poolVolleyVeteran,
     _poolVonaButcherOfMagan,
     _poolVraskasContempt,
+    _poolWalkingDesecration,
     _poolWallOfRoots,
     _poolWalltopSentries,
     _poolWanderingArchaic,
@@ -1430,6 +1447,7 @@ const shard: CardShard = {
     _poolWingbladeDisciple,
     _poolWingcrafter,
     _poolWingspanMentor,
+    _poolWitheringHex,
     _poolWittyRoastmaster,
     _poolWizardMentor,
     _poolWoeStrider,
