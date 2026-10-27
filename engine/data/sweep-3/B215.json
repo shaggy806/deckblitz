@@ -1,7 +1,7 @@
 {
   "batch": "B215",
   "status": "complete",
-  "ranks": "Mirrodin (MRD, 2003-10-02): its ~110 most-played left of 131 (the third middle walk, round seventeen); no engine change",
+  "ranks": "Mirrodin (MRD, 2003-10-02): its ~110 most-played left of 131 (the third middle walk, round seventeen); no engine feature (one engine fix the new-cards fuzzer found: a spell's new targets, rule 115.7, are judged from the source they were offered from — Misdirection on Lay Down Arms)",
   "authored": [
     {
       "name": "Altar of Shadows",
