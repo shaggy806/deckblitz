@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3821 already implemented / 1179 missing (marks refreshed 2026-10-27)
+3827 already implemented / 1173 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -736,7 +736,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   737  Lion's Eye Diamond                       {0}              Artifact
 [x]   738  Abrupt Decay                             {B}{G}           Instant
 [ ]   739  Drannith Magistrate                      {1}{W}           Creature — Human Wizard
-[ ]   740  Flare of Fortitude                       {2}{W}{W}        Instant
+[x]   740  Flare of Fortitude                       {2}{W}{W}        Instant
 [x]   741  Palladium Myr                            {3}              Artifact Creature — Myr
 [x]   742  Spelunking                               {2}{G}           Enchantment
 [ ]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
@@ -1125,7 +1125,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1130  Lumra, Bellow of the Woods               {4}{G}{G}        Legendary Creature — Elemental Bear
 [ ]  1131  Well of Lost Dreams                      {4}              Artifact
 [x]  1132  Ravenous Chupacabra                      {2}{B}{B}        Creature — Beast Horror
-[ ]  1133  Flare of Duplication                     {1}{R}{R}        Instant
+[x]  1133  Flare of Duplication                     {1}{R}{R}        Instant
 [x]  1134  Twilight Prophet                         {2}{B}{B}        Creature — Vampire Cleric
 [x]  1135  Enduring Courage                         {2}{R}{R}        Enchantment Creature — Dog Glimmer
 [ ]  1136  Deflecting Palm                          {R}{W}           Instant
@@ -1286,7 +1286,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1292  Flux Channeler                           {2}{U}           Creature — Human Wizard
 [x]  1293  Windcrag Siege                           {1}{R}{W}        Enchantment
 [x]  1294  Dakmor Salvage                           {0}              Land
-[ ]  1295  Flare of Malice                          {2}{B}{B}        Instant
+[x]  1295  Flare of Malice                          {2}{B}{B}        Instant
 [x]  1296  Haunted Mire                             {0}              Land — Swamp Forest
 [ ]  1297  Electro, Assaulting Battery              {1}{R}{R}        Legendary Creature — Human Villain
 [x]  1298  Simic Ascendancy                         {G}{U}           Enchantment
@@ -1426,7 +1426,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1433  Rugged Highlands                         {0}              Land
 [ ]  1434  Grab the Prize                           {1}{R}           Sorcery
 [ ]  1435  Caduceus, Staff of Hermes                {2}{W}           Legendary Artifact — Equipment
-[ ]  1436  Flare of Denial                          {1}{U}{U}        Instant
+[x]  1436  Flare of Denial                          {1}{U}{U}        Instant
 [x]  1437  Corpse Knight                            {W}{B}           Creature — Zombie Knight
 [x]  1438  Weathered Wayfarer                       {W}              Creature — Human Nomad Cleric
 [x]  1439  Goldvein Hydra                           {X}{G}           Creature — Hydra
@@ -2175,7 +2175,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2182  Desolate Lighthouse                      {0}              Land
 [ ]  2183  Jidoor, Aristocratic Capital // Overture {4}{U}{U}        Land — Town // Sorcery — Adventure
 [x]  2184  Aura of Silence                          {1}{W}{W}        Enchantment
-[ ]  2185  Flare of Cultivation                     {1}{G}{G}        Sorcery
+[x]  2185  Flare of Cultivation                     {1}{G}{G}        Sorcery
 [ ]  2186  Archangel of Tithes                      {1}{W}{W}{W}     Creature — Angel
 [x]  2187  Niv-Mizzet, Visionary                    {4}{U}{R}        Legendary Creature — Dragon Wizard
 [ ]  2188  Descendants' Path                        {2}{G}           Enchantment
@@ -2998,7 +2998,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3005  Black Waltz No. 3                        {2}{B}{R}        Legendary Creature — Wizard
 [ ]  3006  Emet-Selch of the Third Seat             {2}{U}{B}        Legendary Creature — Elder Wizard
 [x]  3007  Walking Atlas                            {2}              Artifact Creature — Construct
-[ ]  3008  Daze                                     {1}{U}           Instant
+[x]  3008  Daze                                     {1}{U}           Instant
 [x]  3009  Erebos, God of the Dead                  {3}{B}           Legendary Enchantment Creature — God
 [x]  3010  Mogg War Marshal                         {1}{R}           Creature — Goblin Warrior
 [x]  3011  Iridescent Vinelasher                    {B}              Creature — Lizard Assassin
