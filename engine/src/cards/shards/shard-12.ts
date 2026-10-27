@@ -181,6 +181,7 @@ import _poolDragonMage from "../pool/dragon-mage.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
 import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
+import _poolDroolingOgre from "../pool/drooling-ogre.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
 import _poolDrownyardLurker from "../pool/drownyard-lurker.js";
 import _poolDuelistOfDeepFaith from "../pool/duelist-of-deep-faith.js";
@@ -312,6 +313,7 @@ import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolHundredTalonKami from "../pool/hundred-talon-kami.js";
+import _poolHungerOfTheNim from "../pool/hunger-of-the-nim.js";
 import _poolHuntedGhoul from "../pool/hunted-ghoul.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIllusionaryForces from "../pool/illusionary-forces.js";
@@ -448,6 +450,7 @@ import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js"
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOverwhelmedArchivist from "../pool/overwhelmed-archivist.js";
 import _poolOverwhelmingForces from "../pool/overwhelming-forces.js";
+import _poolOxiddaGolem from "../pool/oxidda-golem.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
@@ -602,6 +605,7 @@ import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
 import _poolSouvenirSnatcher from "../pool/souvenir-snatcher.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
+import _poolSpectersShroud from "../pool/specters-shroud.js";
 import _poolSpellSnare from "../pool/spell-snare.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
@@ -937,6 +941,7 @@ const shard: CardShard = {
     _poolDranasEmissary,
     _poolDreamsOfLaguna,
     _poolDregReaver,
+    _poolDroolingOgre,
     _poolDrossHopper,
     _poolDrownyardLurker,
     _poolDuelistOfDeepFaith,
@@ -1068,6 +1073,7 @@ const shard: CardShard = {
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
     _poolHundredTalonKami,
+    _poolHungerOfTheNim,
     _poolHuntedGhoul,
     _poolIcehideGolem,
     _poolIllusionaryForces,
@@ -1204,6 +1210,7 @@ const shard: CardShard = {
     _poolOverwhelm,
     _poolOverwhelmedArchivist,
     _poolOverwhelmingForces,
+    _poolOxiddaGolem,
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,
     _poolPantlazaSunFavored,
@@ -1358,6 +1365,7 @@ const shard: CardShard = {
     _poolSophiaDoggedDetective,
     _poolSouvenirSnatcher,
     _poolSpectacularSpiderMan,
+    _poolSpectersShroud,
     _poolSpellSnare,
     _poolSpellbook,
     _poolSpellgyre,

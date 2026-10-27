@@ -392,6 +392,7 @@ import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
 import _poolMerrowGrimeblotter from "../pool/merrow-grimeblotter.js";
+import _poolMetalFatigue from "../pool/metal-fatigue.js";
 import _poolMeteorSwarm from "../pool/meteor-swarm.js";
 import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
@@ -1162,6 +1163,7 @@ const shard: CardShard = {
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
     _poolMerrowGrimeblotter,
+    _poolMetalFatigue,
     _poolMeteorSwarm,
     _poolMichelangeloGameMaster,
     _poolMidnightBanshee,

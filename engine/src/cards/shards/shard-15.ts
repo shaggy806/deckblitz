@@ -272,6 +272,7 @@ import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
+import _poolGreaterHarvester from "../pool/greater-harvester.js";
 import _poolGreensideWatcher from "../pool/greenside-watcher.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
@@ -497,6 +498,7 @@ import _poolRathsEdge from "../pool/raths-edge.js";
 import _poolRayOfDistortion from "../pool/ray-of-distortion.js";
 import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
+import _poolRazorGolem from "../pool/razor-golem.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,
+    _poolGreaterHarvester,
     _poolGreensideWatcher,
     _poolGrimoireOfTheDead,
     _poolGruulBeastmaster,
@@ -1228,6 +1231,7 @@ const shard: CardShard = {
     _poolRayOfDistortion,
     _poolRayOfErasure,
     _poolRazakethsRite,
+    _poolRazorGolem,
     _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,

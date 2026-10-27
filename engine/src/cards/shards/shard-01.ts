@@ -312,6 +312,7 @@ import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
+import _poolKarstoderm from "../pool/karstoderm.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
@@ -695,6 +696,7 @@ import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVortexRunner from "../pool/vortex-runner.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolVraskasStoneglare from "../pool/vraskas-stoneglare.js";
+import _poolVulshokWarBoar from "../pool/vulshok-war-boar.js";
 import _poolWanderInDeath from "../pool/wander-in-death.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
@@ -1060,6 +1062,7 @@ const shard: CardShard = {
     _poolKaradorGhostChieftain,
     _poolKarakas,
     _poolKarrthusTyrantOfJund,
+    _poolKarstoderm,
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeldonWarlord,
@@ -1443,6 +1446,7 @@ const shard: CardShard = {
     _poolVortexRunner,
     _poolVoteOut,
     _poolVraskasStoneglare,
+    _poolVulshokWarBoar,
     _poolWanderInDeath,
     _poolWanderOff,
     _poolWandertaleMentor,

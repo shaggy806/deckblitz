@@ -31,6 +31,7 @@ import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolApexHawks from "../pool/apex-hawks.js";
 import _poolApprenticeSorcerer from "../pool/apprentice-sorcerer.js";
 import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
+import _poolArcaneSpyglass from "../pool/arcane-spyglass.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
@@ -268,6 +269,7 @@ import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
+import _poolGoblinArchaeologist from "../pool/goblin-archaeologist.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
 import _poolGodPharaohsGift from "../pool/god-pharaohs-gift.js";
 import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
@@ -519,6 +521,7 @@ import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRazorjawOni from "../pool/razorjaw-oni.js";
+import _poolReapAndSow from "../pool/reap-and-sow.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolRefuseToYield from "../pool/refuse-to-yield.js";
 import _poolReignOfChaos from "../pool/reign-of-chaos.js";
@@ -805,6 +808,7 @@ const shard: CardShard = {
     _poolApexHawks,
     _poolApprenticeSorcerer,
     _poolAquaticAlchemist,
+    _poolArcaneSpyglass,
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
@@ -1042,6 +1046,7 @@ const shard: CardShard = {
     _poolGlacialPlating,
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
+    _poolGoblinArchaeologist,
     _poolGoblinChieftain,
     _poolGodPharaohsGift,
     _poolGoddricCloakedReveler,
@@ -1293,6 +1298,7 @@ const shard: CardShard = {
     _poolRavineRaider,
     _poolRazorSwine,
     _poolRazorjawOni,
+    _poolReapAndSow,
     _poolRecumbentBliss,
     _poolRefuseToYield,
     _poolReignOfChaos,

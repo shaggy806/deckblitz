@@ -563,6 +563,7 @@ import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShieldOfKaldra from "../pool/shield-of-kaldra.js";
 import _poolShinewend from "../pool/shinewend.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShriekhorn from "../pool/shriekhorn.js";
@@ -1325,6 +1326,7 @@ const shard: CardShard = {
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,
+    _poolShieldOfKaldra,
     _poolShinewend,
     _poolShortcutSeeker,
     _poolShriekhorn,

@@ -616,6 +616,7 @@ import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
 import _poolSylvokExplorer from "../pool/sylvok-explorer.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTalasResearcher from "../pool/talas-researcher.js";
+import _poolTalonOfPain from "../pool/talon-of-pain.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolSylvokExplorer,
     _poolTaintedStrike,
     _poolTalasResearcher,
+    _poolTalonOfPain,
     _poolTangledVale,
     _poolTattermungeWitch,
     _poolTavernBrawler,

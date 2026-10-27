@@ -110,6 +110,7 @@ import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCapsize from "../pool/capsize.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
+import _poolCarryAway from "../pool/carry-away.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
@@ -119,6 +120,7 @@ import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
+import _poolChromescaleDrake from "../pool/chromescale-drake.js";
 import _poolCircleOfDespair from "../pool/circle-of-despair.js";
 import _poolCircleOfProtectionGreen from "../pool/circle-of-protection-green.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
@@ -875,6 +877,7 @@ const shard: CardShard = {
     _poolCapsize,
     _poolCarnageInterpreter,
     _poolCarrionCruiser,
+    _poolCarryAway,
     _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
@@ -884,6 +887,7 @@ const shard: CardShard = {
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
+    _poolChromescaleDrake,
     _poolCircleOfDespair,
     _poolCircleOfProtectionGreen,
     _poolCityOfBrass,

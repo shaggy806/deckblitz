@@ -126,6 +126,7 @@ import _poolDarkEndurance from "../pool/dark-endurance.js";
 import _poolDarkInquiry from "../pool/dark-inquiry.js";
 import _poolDarkRevenant from "../pool/dark-revenant.js";
 import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
+import _poolDarksteelBrute from "../pool/darksteel-brute.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
@@ -470,6 +471,7 @@ import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
 import _poolPucasCovenant from "../pool/pucas-covenant.js";
+import _poolPurge from "../pool/purge.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
 import _poolPyricSalamander from "../pool/pyric-salamander.js";
@@ -606,6 +608,7 @@ import _poolSteelingStance from "../pool/steeling-stance.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
 import _poolStingscourger from "../pool/stingscourger.js";
+import _poolStirThePride from "../pool/stir-the-pride.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
@@ -884,6 +887,7 @@ const shard: CardShard = {
     _poolDarkInquiry,
     _poolDarkRevenant,
     _poolDarklightPhoenix,
+    _poolDarksteelBrute,
     _poolDarksteelMyr,
     _poolDauntlessSurvivor,
     _poolDeadbridgeShaman,
@@ -1228,6 +1232,7 @@ const shard: CardShard = {
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
     _poolPucasCovenant,
+    _poolPurge,
     _poolPutridLeech,
     _poolPyreticRitual,
     _poolPyricSalamander,
@@ -1364,6 +1369,7 @@ const shard: CardShard = {
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
     _poolStingscourger,
+    _poolStirThePride,
     _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,
