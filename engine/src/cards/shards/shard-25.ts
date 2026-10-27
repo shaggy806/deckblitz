@@ -161,6 +161,7 @@ import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
+import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
@@ -203,6 +204,7 @@ import _poolEnduringVictory from "../pool/enduring-victory.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolErraticPortal from "../pool/erratic-portal.js";
+import _poolErtaisTrickery from "../pool/ertais-trickery.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
@@ -917,6 +919,7 @@ const shard: CardShard = {
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
     _poolDespoilerOfSouls,
+    _poolDestructiveFlow,
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,
@@ -959,6 +962,7 @@ const shard: CardShard = {
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
     _poolErraticPortal,
+    _poolErtaisTrickery,
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,

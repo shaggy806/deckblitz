@@ -722,6 +722,7 @@ import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
+import _poolUrzasGuilt from "../pool/urzas-guilt.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolValorousCharge from "../pool/valorous-charge.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
@@ -1512,6 +1513,7 @@ const shard: CardShard = {
     _poolUpTheBeanstalk,
     _poolUrborgStalker,
     _poolUrzasCave,
+    _poolUrzasGuilt,
     _poolUrzasIncubator,
     _poolValorousCharge,
     _poolVampireNighthawk,

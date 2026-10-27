@@ -105,6 +105,7 @@ import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
+import _poolCavernHarpy from "../pool/cavern-harpy.js";
 import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
@@ -375,6 +376,7 @@ import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
 import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
+import _poolMarshCrocodile from "../pool/marsh-crocodile.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
@@ -568,6 +570,7 @@ import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullSkaab from "../pool/skull-skaab.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
+import _poolSkyshroudBlessing from "../pool/skyshroud-blessing.js";
 import _poolSlagFiend from "../pool/slag-fiend.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
@@ -636,6 +639,7 @@ import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
 import _poolTenaciousTomeseeker from "../pool/tenacious-tomeseeker.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
+import _poolTerminalMoraine from "../pool/terminal-moraine.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheBrokenSky from "../pool/the-broken-sky.js";
@@ -881,6 +885,7 @@ const shard: CardShard = {
     _poolCathodion,
     _poolCausticExhale,
     _poolCavernCrawler,
+    _poolCavernHarpy,
     _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,
@@ -1151,6 +1156,7 @@ const shard: CardShard = {
     _poolManaclesOfDecay,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
+    _poolMarshCrocodile,
     _poolMasterSymmetrist,
     _poolMausoleumGuard,
     _poolMausoleumSecrets,
@@ -1344,6 +1350,7 @@ const shard: CardShard = {
     _poolSkullSkaab,
     _poolSkullsnapNuisance,
     _poolSkyscytheEngulfer,
+    _poolSkyshroudBlessing,
     _poolSlagFiend,
     _poolSlaveOfBolas,
     _poolSlay,
@@ -1412,6 +1419,7 @@ const shard: CardShard = {
     _poolTemptWithTreats,
     _poolTenaciousTomeseeker,
     _poolTenuredTethermage,
+    _poolTerminalMoraine,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
     _poolTheBrokenSky,

@@ -95,6 +95,7 @@ import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCagemail from "../pool/cagemail.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
+import _poolCalderaKavu from "../pool/caldera-kavu.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolCaesarLegionsEmperor,
     _poolCagemail,
     _poolCalamityOfCinders,
+    _poolCalderaKavu,
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
     _poolCaptainAmericasMotorcycle,

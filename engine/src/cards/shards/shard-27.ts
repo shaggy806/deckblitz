@@ -389,6 +389,7 @@ import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
+import _poolMireKavu from "../pool/mire-kavu.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
@@ -512,6 +513,7 @@ import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRoad from "../pool/road.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRootGreevil from "../pool/root-greevil.js";
 import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
@@ -1151,6 +1153,7 @@ const shard: CardShard = {
     _poolMilitiaBugler,
     _poolMinamoSightbender,
     _poolMindsDilation,
+    _poolMireKavu,
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
     _poolMistDancer,
@@ -1274,6 +1277,7 @@ const shard: CardShard = {
     _poolRoad,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRootGreevil,
     _poolRootrunner,
     _poolRotTideGargantua,
     _poolRotisserieElemental,

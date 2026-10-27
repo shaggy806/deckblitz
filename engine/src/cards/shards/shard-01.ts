@@ -217,11 +217,13 @@ import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
 import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolFury from "../pool/fury.js";
+import _poolGainsay from "../pool/gainsay.js";
 import _poolGalvanicBombardment from "../pool/galvanic-bombardment.js";
 import _poolGamekeeper from "../pool/gamekeeper.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
+import _poolGerrardsCommand from "../pool/gerrards-command.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
@@ -503,6 +505,7 @@ import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
+import _poolRithsGrove from "../pool/riths-grove.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
 import _poolRoamingGhostlight from "../pool/roaming-ghostlight.js";
@@ -555,6 +558,8 @@ import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
 import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
+import _poolSilverDrake from "../pool/silver-drake.js";
+import _poolSinge from "../pool/singe.js";
 import _poolSixthSense from "../pool/sixth-sense.js";
 import _poolSkeletonKey from "../pool/skeleton-key.js";
 import _poolSkemfarElderhall from "../pool/skemfar-elderhall.js";
@@ -976,11 +981,13 @@ const shard: CardShard = {
     _poolFrillscareMentor,
     _poolFumingEffigy,
     _poolFury,
+    _poolGainsay,
     _poolGalvanicBombardment,
     _poolGamekeeper,
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
+    _poolGerrardsCommand,
     _poolGhastlyDeathTyrant,
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
@@ -1262,6 +1269,7 @@ const shard: CardShard = {
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,
+    _poolRithsGrove,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,
     _poolRoamingGhostlight,
@@ -1314,6 +1322,8 @@ const shard: CardShard = {
     _poolSigardasImprisonment,
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
+    _poolSilverDrake,
+    _poolSinge,
     _poolSixthSense,
     _poolSkeletonKey,
     _poolSkemfarElderhall,

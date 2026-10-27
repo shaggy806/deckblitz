@@ -469,6 +469,7 @@ import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
+import _poolPhyrexianTyranny from "../pool/phyrexian-tyranny.js";
 import _poolPhyrexianWarhorse from "../pool/phyrexian-warhorse.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
@@ -686,6 +687,7 @@ import _poolThrivingIbex from "../pool/thriving-ibex.js";
 import _poolThrunBreakerOfSilence from "../pool/thrun-breaker-of-silence.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
+import _poolThunderscapeFamiliar from "../pool/thunderscape-familiar.js";
 import _poolTiborAndLumia from "../pool/tibor-and-lumia.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTidyConclusion from "../pool/tidy-conclusion.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolPeterParker,
     _poolPhantomTrain,
     _poolPhyrexianMetamorph,
+    _poolPhyrexianTyranny,
     _poolPhyrexianWarhorse,
     _poolPillarvergePathway,
     _poolPinnacleEmissary,
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolThrunBreakerOfSilence,
     _poolThunderclapWyvern,
     _poolThundermawHellkite,
+    _poolThunderscapeFamiliar,
     _poolTiborAndLumia,
     _poolTickedOff,
     _poolTidyConclusion,

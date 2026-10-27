@@ -16,6 +16,7 @@ import _poolAirResponseUnit from "../pool/air-response-unit.js";
 import _poolAkoumRefuge from "../pool/akoum-refuge.js";
 import _poolAladdinsRing from "../pool/aladdins-ring.js";
 import _poolAlmsOfTheVein from "../pool/alms-of-the-vein.js";
+import _poolAlphaKavu from "../pool/alpha-kavu.js";
 import _poolAncestralStatue from "../pool/ancestral-statue.js";
 import _poolAncientDen from "../pool/ancient-den.js";
 import _poolAngelicCurator from "../pool/angelic-curator.js";
@@ -170,6 +171,7 @@ import _poolDevoutDecree from "../pool/devout-decree.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
 import _poolDirgurFocusmage from "../pool/dirgur-focusmage.js";
 import _poolDisaTheRestless from "../pool/disa-the-restless.js";
+import _poolDiscipleOfKangee from "../pool/disciple-of-kangee.js";
 import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
 import _poolDivination from "../pool/divination.js";
@@ -595,6 +597,7 @@ import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
+import _poolSisaysIngenuity from "../pool/sisays-ingenuity.js";
 import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _poolAkoumRefuge,
     _poolAladdinsRing,
     _poolAlmsOfTheVein,
+    _poolAlphaKavu,
     _poolAncestralStatue,
     _poolAncientDen,
     _poolAngelicCurator,
@@ -938,6 +942,7 @@ const shard: CardShard = {
     _poolDimirCluestone,
     _poolDirgurFocusmage,
     _poolDisaTheRestless,
+    _poolDiscipleOfKangee,
     _poolDisenchant,
     _poolDisorderInTheCourt,
     _poolDivination,
@@ -1363,6 +1368,7 @@ const shard: CardShard = {
     _poolSinisterHideout,
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
+    _poolSisaysIngenuity,
     _poolSkemfarAvenger,
     _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,

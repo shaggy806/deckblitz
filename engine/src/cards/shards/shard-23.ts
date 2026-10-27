@@ -154,6 +154,7 @@ import _poolDanceWithDevils from "../pool/dance-with-devils.js";
 import _poolDapperShieldmate from "../pool/dapper-shieldmate.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
+import _poolDarkSuspicions from "../pool/dark-suspicions.js";
 import _poolDarksteelIngot from "../pool/darksteel-ingot.js";
 import _poolDarksteelRelic from "../pool/darksteel-relic.js";
 import _poolDarwinAdaptiveMutant from "../pool/darwin-adaptive-mutant.js";
@@ -440,6 +441,7 @@ import _poolNacreTalisman from "../pool/nacre-talisman.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNecrite from "../pool/necrite.js";
+import _poolNemataGroveGuardian from "../pool/nemata-grove-guardian.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
@@ -578,6 +580,7 @@ import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
+import _poolShivanWurm from "../pool/shivan-wurm.js";
 import _poolShyft from "../pool/shyft.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolDapperShieldmate,
     _poolDaringEscape,
     _poolDaringThunderThief,
+    _poolDarkSuspicions,
     _poolDarksteelIngot,
     _poolDarksteelRelic,
     _poolDarwinAdaptiveMutant,
@@ -1219,6 +1223,7 @@ const shard: CardShard = {
     _poolNantukoElder,
     _poolNarnamCobra,
     _poolNecrite,
+    _poolNemataGroveGuardian,
     _poolNeoExdeathDimensionsEnd,
     _poolNewsHelicopter,
     _poolNezumiLinkbreaker,
@@ -1357,6 +1362,7 @@ const shard: CardShard = {
     _poolShimatsuTheBloodcloaked,
     _poolShimmeringGrotto,
     _poolShinyImpetus,
+    _poolShivanWurm,
     _poolShyft,
     _poolSibsigAppraiser,
     _poolSibyllineSoothsayer,

@@ -433,6 +433,7 @@ import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
+import _poolMultanisHarmony from "../pool/multanis-harmony.js";
 import _poolMultiformWonder from "../pool/multiform-wonder.js";
 import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
 import _poolMurasaRanger from "../pool/murasa-ranger.js";
@@ -474,6 +475,7 @@ import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
+import _poolPhyrexianScuta from "../pool/phyrexian-scuta.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
@@ -565,6 +567,7 @@ import _poolSkarrgTheRagePits from "../pool/skarrg-the-rage-pits.js";
 import _poolSkateboard from "../pool/skateboard.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
 import _poolSkycoachWaypoint from "../pool/skycoach-waypoint.js";
+import _poolSleepingPotion from "../pool/sleeping-potion.js";
 import _poolSliverOverlord from "../pool/sliver-overlord.js";
 import _poolSlumReaper from "../pool/slum-reaper.js";
 import _poolSmiteTheDeathless from "../pool/smite-the-deathless.js";
@@ -1177,6 +1180,7 @@ const shard: CardShard = {
     _poolMothriderPatrol,
     _poolMoxEmerald,
     _poolMuldrothaTheGravetide,
+    _poolMultanisHarmony,
     _poolMultiformWonder,
     _poolMultiversalRecruitment,
     _poolMurasaRanger,
@@ -1218,6 +1222,7 @@ const shard: CardShard = {
     _poolPearlOfWisdom,
     _poolPersonalSanctuary,
     _poolPetrifyingMeddler,
+    _poolPhyrexianScuta,
     _poolPiercingExhale,
     _poolPilgrimOfTheAges,
     _poolPiranhaMarsh,
@@ -1309,6 +1314,7 @@ const shard: CardShard = {
     _poolSkateboard,
     _poolSkorpekhDestroyer,
     _poolSkycoachWaypoint,
+    _poolSleepingPotion,
     _poolSliverOverlord,
     _poolSlumReaper,
     _poolSmiteTheDeathless,

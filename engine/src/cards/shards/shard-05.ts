@@ -235,6 +235,7 @@ import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
+import _poolExoticDisease from "../pool/exotic-disease.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFaithfulSquire from "../pool/faithful-squire.js";
@@ -265,6 +266,7 @@ import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaeasBalance from "../pool/gaeas-balance.js";
+import _poolGaeasHerald from "../pool/gaeas-herald.js";
 import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
@@ -1003,6 +1005,7 @@ const shard: CardShard = {
     _poolEpicDownfall,
     _poolEssenceFlare,
     _poolEternalWitness,
+    _poolExoticDisease,
     _poolExpeditionSkulker,
     _poolEyeblightAssassin,
     _poolFaithfulSquire,
@@ -1033,6 +1036,7 @@ const shard: CardShard = {
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaeasBalance,
+    _poolGaeasHerald,
     _poolGaleForce,
     _poolGaleSwooper,
     _poolGalvanoth,

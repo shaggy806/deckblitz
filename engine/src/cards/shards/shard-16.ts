@@ -564,6 +564,7 @@ import _poolSalvageSlasher from "../pool/salvage-slasher.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
 import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
+import _poolSawtoothLoon from "../pool/sawtooth-loon.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
@@ -655,6 +656,7 @@ import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
+import _poolTahngarthTalruumHero from "../pool/tahngarth-talruum-hero.js";
 import _poolTakeFlight from "../pool/take-flight.js";
 import _poolTakeToTheStreets from "../pool/take-to-the-streets.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
@@ -1392,6 +1394,7 @@ const shard: CardShard = {
     _poolSamutTheDrivingForce,
     _poolSanctuaryLockdown,
     _poolSavagePackmate,
+    _poolSawtoothLoon,
     _poolScaldingCauldron,
     _poolScatterTheSeeds,
     _poolScrapheapScrounger,
@@ -1483,6 +1486,7 @@ const shard: CardShard = {
     _poolSwordsmansSteel,
     _poolSylviaBrightspear,
     _poolSymmetryMatrix,
+    _poolTahngarthTalruumHero,
     _poolTakeFlight,
     _poolTakeToTheStreets,
     _poolTakeVengeance,

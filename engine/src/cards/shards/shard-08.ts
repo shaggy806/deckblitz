@@ -594,6 +594,7 @@ import _poolShamblingShell from "../pool/shambling-shell.js";
 import _poolShardPhoenix from "../pool/shard-phoenix.js";
 import _poolSharpEyedRookie from "../pool/sharp-eyed-rookie.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
+import _poolShiftingSky from "../pool/shifting-sky.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
@@ -1403,6 +1404,7 @@ const shard: CardShard = {
     _poolShardPhoenix,
     _poolSharpEyedRookie,
     _poolShieldmatesBlessing,
+    _poolShiftingSky,
     _poolShoalKraken,
     _poolShoreKeeper,
     _poolShreddersRevenge,

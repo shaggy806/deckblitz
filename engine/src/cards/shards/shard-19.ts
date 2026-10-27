@@ -205,6 +205,7 @@ import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDregMangler from "../pool/dreg-mangler.js";
+import _poolDromarsCavern from "../pool/dromars-cavern.js";
 import _poolDromosaur from "../pool/dromosaur.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
@@ -409,6 +410,7 @@ import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
 import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
 import _poolLashOfMalice from "../pool/lash-of-malice.js";
+import _poolLavaZombie from "../pool/lava-zombie.js";
 import _poolLayWaste from "../pool/lay-waste.js";
 import _poolLeap from "../pool/leap.js";
 import _poolLeapingAmbush from "../pool/leaping-ambush.js";
@@ -441,6 +443,7 @@ import _poolMajesticHeliopterus from "../pool/majestic-heliopterus.js";
 import _poolMakeYourMove from "../pool/make-your-move.js";
 import _poolMakeshiftMauler from "../pool/makeshift-mauler.js";
 import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
+import _poolMaliciousAdvice from "../pool/malicious-advice.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
@@ -591,6 +594,7 @@ import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
 import _poolRubbleReading from "../pool/rubble-reading.js";
 import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
+import _poolRushingRiver from "../pool/rushing-river.js";
 import _poolSageOwl from "../pool/sage-owl.js";
 import _poolSagesNouliths from "../pool/sages-nouliths.js";
 import _poolSaltRoadSkirmish from "../pool/salt-road-skirmish.js";
@@ -1025,6 +1029,7 @@ const shard: CardShard = {
     _poolDramaticFinale,
     _poolDreadFugue,
     _poolDregMangler,
+    _poolDromarsCavern,
     _poolDromosaur,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
@@ -1229,6 +1234,7 @@ const shard: CardShard = {
     _poolKykarWindsFury,
     _poolLaboratoryManiac,
     _poolLashOfMalice,
+    _poolLavaZombie,
     _poolLayWaste,
     _poolLeap,
     _poolLeapingAmbush,
@@ -1261,6 +1267,7 @@ const shard: CardShard = {
     _poolMakeYourMove,
     _poolMakeshiftMauler,
     _poolMakindiSliderunner,
+    _poolMaliciousAdvice,
     _poolMandateOfAbaddon,
     _poolManicVandal,
     _poolMarcusMutantMayor,
@@ -1411,6 +1418,7 @@ const shard: CardShard = {
     _poolRowanScionOfWar,
     _poolRubbleReading,
     _poolRunawaySteamKin,
+    _poolRushingRiver,
     _poolSageOwl,
     _poolSagesNouliths,
     _poolSaltRoadSkirmish,

@@ -114,6 +114,7 @@ import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolConcealingCurtains from "../pool/concealing-curtains.js";
 import _poolConfirmSuspicions from "../pool/confirm-suspicions.js";
+import _poolConfound from "../pool/confound.js";
 import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
@@ -242,6 +243,7 @@ import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolForcedAdaptation from "../pool/forced-adaptation.js";
+import _poolForsakenCity from "../pool/forsaken-city.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
@@ -899,6 +901,7 @@ const shard: CardShard = {
     _poolCompleatedConjurer,
     _poolConcealingCurtains,
     _poolConfirmSuspicions,
+    _poolConfound,
     _poolConsumingBlob,
     _poolContractHero,
     _poolCoralBarrier,
@@ -1027,6 +1030,7 @@ const shard: CardShard = {
     _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolForcedAdaptation,
+    _poolForsakenCity,
     _poolFoulRebirth,
     _poolFracturedSanity,
     _poolFrogTongue,

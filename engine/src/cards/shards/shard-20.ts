@@ -658,6 +658,7 @@ import _poolStonehornChanter from "../pool/stonehorn-chanter.js";
 import _poolStormShaman from "../pool/storm-shaman.js";
 import _poolStormcloudSpirit from "../pool/stormcloud-spirit.js";
 import _poolStormscaleScion from "../pool/stormscale-scion.js";
+import _poolStormscapeBattlemage from "../pool/stormscape-battlemage.js";
 import _poolStorvaldFrostGiantJarl from "../pool/storvald-frost-giant-jarl.js";
 import _poolStrixhavenSkycoach from "../pool/strixhaven-skycoach.js";
 import _poolStromkirkMentor from "../pool/stromkirk-mentor.js";
@@ -1486,6 +1487,7 @@ const shard: CardShard = {
     _poolStormShaman,
     _poolStormcloudSpirit,
     _poolStormscaleScion,
+    _poolStormscapeBattlemage,
     _poolStorvaldFrostGiantJarl,
     _poolStrixhavenSkycoach,
     _poolStromkirkMentor,

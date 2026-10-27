@@ -127,6 +127,7 @@ import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
+import _poolCloudCover from "../pool/cloud-cover.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
@@ -506,6 +507,7 @@ import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
+import _poolQuirionExplorer from "../pool/quirion-explorer.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
@@ -919,6 +921,7 @@ const shard: CardShard = {
     _poolClarionConqueror,
     _poolClericClass,
     _poolClingingDarkness,
+    _poolCloudCover,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
@@ -1298,6 +1301,7 @@ const shard: CardShard = {
     _poolQuestForTheGemblades,
     _poolQuicksilverBehemoth,
     _poolQuilledCharger,
+    _poolQuirionExplorer,
     _poolRageReflection,
     _poolRainSlickedCopse,
     _poolRakkaMar,

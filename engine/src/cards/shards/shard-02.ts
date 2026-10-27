@@ -675,6 +675,7 @@ import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTransitMage from "../pool/transit-mage.js";
+import _poolTrevasRuins from "../pool/trevas-ruins.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
@@ -1436,6 +1437,7 @@ const shard: CardShard = {
     _poolTowashiSongshaper,
     _poolToweringBaloth,
     _poolTransitMage,
+    _poolTrevasRuins,
     _poolTributeToTheWild,
     _poolTritonShorethief,
     _poolTriumphOfFerocity,

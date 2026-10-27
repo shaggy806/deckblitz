@@ -359,6 +359,7 @@ import _poolKutzilMalametExemplar from "../pool/kutzil-malamet-exemplar.js";
 import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
+import _poolLashknifeBarrier from "../pool/lashknife-barrier.js";
 import _poolLastThoughts from "../pool/last-thoughts.js";
 import _poolLeadAstray from "../pool/lead-astray.js";
 import _poolLeadTheStampede from "../pool/lead-the-stampede.js";
@@ -1134,6 +1135,7 @@ const shard: CardShard = {
     _poolLabyrinthMinotaur,
     _poolLandscapePainter,
     _poolLargerThanLife,
+    _poolLashknifeBarrier,
     _poolLastThoughts,
     _poolLeadAstray,
     _poolLeadTheStampede,

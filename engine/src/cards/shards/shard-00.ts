@@ -205,6 +205,7 @@ import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
 import _poolEnlistmentOfficer from "../pool/enlistment-officer.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
 import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
+import _poolEscapeRoutes from "../pool/escape-routes.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
 import _poolExplorersScope from "../pool/explorers-scope.js";
 import _poolExplosion from "../pool/explosion.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolEnlistmentOfficer,
     _poolEnragedCeratok,
     _poolErebosBleakHearted,
+    _poolEscapeRoutes,
     _poolEverethViceroyOfPlunder,
     _poolExplorersScope,
     _poolExplosion,

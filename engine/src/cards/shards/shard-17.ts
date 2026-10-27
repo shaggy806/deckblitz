@@ -74,6 +74,7 @@ import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
 import _poolBloodthirstyOgre from "../pool/bloodthirsty-ogre.js";
 import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
 import _poolBlueScarab from "../pool/blue-scarab.js";
+import _poolBogDown from "../pool/bog-down.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
 import _poolBoggartBog from "../pool/boggart-bog.js";
 import _poolBondedFetch from "../pool/bonded-fetch.js";
@@ -500,6 +501,7 @@ import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
 import _poolQuicksilverDagger from "../pool/quicksilver-dagger.js";
 import _poolRabidWolverines from "../pool/rabid-wolverines.js";
+import _poolRadiantKavu from "../pool/radiant-kavu.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
@@ -853,6 +855,7 @@ const shard: CardShard = {
     _poolBloodthirstyOgre,
     _poolBloodwaterEntity,
     _poolBlueScarab,
+    _poolBogDown,
     _poolBogardanFirefiend,
     _poolBoggartBog,
     _poolBondedFetch,
@@ -1279,6 +1282,7 @@ const shard: CardShard = {
     _poolQuickStudy,
     _poolQuicksilverDagger,
     _poolRabidWolverines,
+    _poolRadiantKavu,
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,
     _poolRainOfTears,

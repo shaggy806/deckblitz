@@ -192,6 +192,7 @@ import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDragonsHerald from "../pool/dragons-herald.js";
+import _poolDralnusCrusade from "../pool/dralnus-crusade.js";
 import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
@@ -248,6 +249,7 @@ import _poolFortifiedBeachhead from "../pool/fortified-beachhead.js";
 import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
+import _poolGaeasMight from "../pool/gaeas-might.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGarrukRelentless from "../pool/garruk-relentless.js";
 import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
@@ -538,6 +540,7 @@ import _poolSageOfShailasClaim from "../pool/sage-of-shailas-claim.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
 import _poolSalvage from "../pool/salvage.js";
+import _poolSamitePilgrim from "../pool/samite-pilgrim.js";
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
 import _poolSandcrafterMage from "../pool/sandcrafter-mage.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
@@ -970,6 +973,7 @@ const shard: CardShard = {
     _poolDownInTheValley,
     _poolDragonbackAssault,
     _poolDragonsHerald,
+    _poolDralnusCrusade,
     _poolDramaticAccusation,
     _poolDreadShade,
     _poolDryadsRevival,
@@ -1026,6 +1030,7 @@ const shard: CardShard = {
     _poolFranciscoFowlMarauder,
     _poolFruitOfTizerus,
     _poolFurious,
+    _poolGaeasMight,
     _poolGaeasSkyfolk,
     _poolGarrukRelentless,
     _poolGarrulousSycophant,
@@ -1316,6 +1321,7 @@ const shard: CardShard = {
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
     _poolSalvage,
+    _poolSamitePilgrim,
     _poolSamutTyrantSmasher,
     _poolSandcrafterMage,
     _poolSandstoneOracle,
