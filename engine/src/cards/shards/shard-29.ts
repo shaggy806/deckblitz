@@ -676,6 +676,7 @@ import _poolTahngarthsRage from "../pool/tahngarths-rage.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTalionsMessenger from "../pool/talions-messenger.js";
+import _poolTangleAngler from "../pool/tangle-angler.js";
 import _poolTangledSkyline from "../pool/tangled-skyline.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
@@ -1494,6 +1495,7 @@ const shard: CardShard = {
     _poolTaiga,
     _poolTakeUpTheShield,
     _poolTalionsMessenger,
+    _poolTangleAngler,
     _poolTangledSkyline,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,

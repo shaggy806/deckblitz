@@ -121,6 +121,7 @@ import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
 import _poolCephalidInkshrouder from "../pool/cephalid-inkshrouder.js";
 import _poolCertainDeath from "../pool/certain-death.js";
+import _poolChandraSparkHunter from "../pool/chandra-spark-hunter.js";
 import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChaos from "../pool/chaos.js";
@@ -990,6 +991,7 @@ const shard: CardShard = {
     _poolCelestialEnforcer,
     _poolCephalidInkshrouder,
     _poolCertainDeath,
+    _poolChandraSparkHunter,
     _poolChandrasDefeat,
     _poolChaosTerminatorLord,
     _poolChaos,

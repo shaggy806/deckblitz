@@ -42,6 +42,7 @@ import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
 import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
+import _poolAvalancheTusker from "../pool/avalanche-tusker.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
@@ -562,6 +563,7 @@ import _poolRevitalize from "../pool/revitalize.js";
 import _poolRevolutionaryRebuff from "../pool/revolutionary-rebuff.js";
 import _poolRiggingRunner from "../pool/rigging-runner.js";
 import _poolRimeboundDead from "../pool/rimebound-dead.js";
+import _poolRimehornAurochs from "../pool/rimehorn-aurochs.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
@@ -741,6 +743,7 @@ import _poolVectisDominator from "../pool/vectis-dominator.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVengefulReaper from "../pool/vengeful-reaper.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
+import _poolVenserTheSojourner from "../pool/venser-the-sojourner.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
 import _poolVerdantTouch from "../pool/verdant-touch.js";
 import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolAuratog,
     _poolAuriokEdgewright,
     _poolAuronsInspiration,
+    _poolAvalancheTusker,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
     _poolAvenFogbringer,
@@ -1371,6 +1375,7 @@ const shard: CardShard = {
     _poolRevolutionaryRebuff,
     _poolRiggingRunner,
     _poolRimeboundDead,
+    _poolRimehornAurochs,
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
     _poolRiseAgain,
@@ -1550,6 +1555,7 @@ const shard: CardShard = {
     _poolVengefulBloodwitch,
     _poolVengefulReaper,
     _poolVenserShaperSavant,
+    _poolVenserTheSojourner,
     _poolVerdantCatacombs,
     _poolVerdantTouch,
     _poolVernadiShieldmate,

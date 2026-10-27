@@ -193,6 +193,7 @@ import _poolDistortingLens from "../pool/distorting-lens.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
 import _poolDominate from "../pool/dominate.js";
+import _poolDomineeringWill from "../pool/domineering-will.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -261,6 +262,7 @@ import _poolGanglyStompling from "../pool/gangly-stompling.js";
 import _poolGastalThrillroller from "../pool/gastal-thrillroller.js";
 import _poolGatesAblaze from "../pool/gates-ablaze.js";
 import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
+import _poolGemstoneMine from "../pool/gemstone-mine.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
 import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
@@ -1011,6 +1013,7 @@ const shard: CardShard = {
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
     _poolDominate,
+    _poolDomineeringWill,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
@@ -1079,6 +1082,7 @@ const shard: CardShard = {
     _poolGastalThrillroller,
     _poolGatesAblaze,
     _poolGeistOfSaintThalia,
+    _poolGemstoneMine,
     _poolGeothermalCrevice,
     _poolGibberingFiend,
     _poolGiftedAetherborn,

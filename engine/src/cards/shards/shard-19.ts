@@ -153,6 +153,7 @@ import _poolCorpseweft from "../pool/corpseweft.js";
 import _poolCorruptedZendikon from "../pool/corrupted-zendikon.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
+import _poolCourtlyProvocateur from "../pool/courtly-provocateur.js";
 import _poolCovetedPrize from "../pool/coveted-prize.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
 import _poolCrashLanding from "../pool/crash-landing.js";
@@ -164,6 +165,7 @@ import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js"
 import _poolCrystallineResonance from "../pool/crystalline-resonance.js";
 import _poolCuboidColony from "../pool/cuboid-colony.js";
 import _poolCultbrandCinder from "../pool/cultbrand-cinder.js";
+import _poolCulvertAmbusher from "../pool/culvert-ambusher.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolCunning from "../pool/cunning.js";
@@ -1008,6 +1010,7 @@ const shard: CardShard = {
     _poolCorruptedZendikon,
     _poolCourageousGoblin,
     _poolCourierGriffin,
+    _poolCourtlyProvocateur,
     _poolCovetedPrize,
     _poolCowlProwler,
     _poolCrashLanding,
@@ -1019,6 +1022,7 @@ const shard: CardShard = {
     _poolCrystallineResonance,
     _poolCuboidColony,
     _poolCultbrandCinder,
+    _poolCulvertAmbusher,
     _poolCunningStrike,
     _poolCunningSurvivor,
     _poolCunning,

@@ -487,6 +487,7 @@ import _poolPeachGardenOath from "../pool/peach-garden-oath.js";
 import _poolPeltCollector from "../pool/pelt-collector.js";
 import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
+import _poolPersistentMarshstalker from "../pool/persistent-marshstalker.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhantatog from "../pool/phantatog.js";
@@ -1318,6 +1319,7 @@ const shard: CardShard = {
     _poolPeltCollector,
     _poolPerforatingArtist,
     _poolPerplexingTest,
+    _poolPersistentMarshstalker,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
     _poolPhantatog,

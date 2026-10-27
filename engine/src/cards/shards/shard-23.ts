@@ -343,6 +343,7 @@ import _poolIlluminateHistory from "../pool/illuminate-history.js";
 import _poolIllusoryDemon from "../pool/illusory-demon.js";
 import _poolImaginaryPet from "../pool/imaginary-pet.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
+import _poolImpetuousDevils from "../pool/impetuous-devils.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
@@ -583,6 +584,7 @@ import _poolSadisticAugermage from "../pool/sadistic-augermage.js";
 import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSandStrangler from "../pool/sand-strangler.js";
+import _poolSandstoneNeedle from "../pool/sandstone-needle.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -1174,6 +1176,7 @@ const shard: CardShard = {
     _poolIllusoryDemon,
     _poolImaginaryPet,
     _poolImmolatingGlare,
+    _poolImpetuousDevils,
     _poolIncandescentAria,
     _poolIncitedRabble,
     _poolIncurableOgre,
@@ -1414,6 +1417,7 @@ const shard: CardShard = {
     _poolSageOfTheFalls,
     _poolSanctuaryRaptor,
     _poolSandStrangler,
+    _poolSandstoneNeedle,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,

@@ -119,6 +119,7 @@ import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
+import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
@@ -423,6 +424,7 @@ import _poolModeration from "../pool/moderation.js";
 import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
+import _poolMonstrousStep from "../pool/monstrous-step.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolMourningThrull from "../pool/mourning-thrull.js";
@@ -509,6 +511,7 @@ import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolReturnedReveler from "../pool/returned-reveler.js";
+import _poolRhinoTerribleTrampler from "../pool/rhino-terrible-trampler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRibbonsOfNight from "../pool/ribbons-of-night.js";
@@ -922,6 +925,7 @@ const shard: CardShard = {
     _poolCheerfulOsteomancer,
     _poolChoArrimLegate,
     _poolCinderGiant,
+    _poolClackbridgeTroll,
     _poolClamorShaman,
     _poolCleavingSliver,
     _poolCloakwoodHermit,
@@ -1226,6 +1230,7 @@ const shard: CardShard = {
     _poolMoggSquad,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
+    _poolMonstrousStep,
     _poolMoonrageBrute,
     _poolMorphling,
     _poolMourningThrull,
@@ -1312,6 +1317,7 @@ const shard: CardShard = {
     _poolResurgentBelief,
     _poolResurrectedCultist,
     _poolReturnedReveler,
+    _poolRhinoTerribleTrampler,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRibbonsOfNight,

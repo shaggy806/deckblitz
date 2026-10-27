@@ -619,6 +619,7 @@ import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSuspend from "../pool/suspend.js";
+import _poolSuspendedSentence from "../pool/suspended-sentence.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
@@ -1362,6 +1363,7 @@ const shard: CardShard = {
     _poolSurgingDementia,
     _poolSurveillanceRoom,
     _poolSuspend,
+    _poolSuspendedSentence,
     _poolSwellOfCourage,
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,

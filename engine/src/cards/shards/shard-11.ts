@@ -152,6 +152,7 @@ import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
 import _poolContortionistTroupe from "../pool/contortionist-troupe.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
+import _poolCountermand from "../pool/countermand.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
 import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
@@ -270,6 +271,7 @@ import _poolGaeasProtector from "../pool/gaeas-protector.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGalepowderMage from "../pool/galepowder-mage.js";
 import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
+import _poolGardenOfFreyalise from "../pool/garden-of-freyalise.js";
 import _poolGargantuanGorilla from "../pool/gargantuan-gorilla.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGavonySilversmith from "../pool/gavony-silversmith.js";
@@ -286,6 +288,7 @@ import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
+import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
@@ -735,6 +738,7 @@ import _poolTreacherousWerewolf from "../pool/treacherous-werewolf.js";
 import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
 import _poolTriclopeanSight from "../pool/triclopean-sight.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
+import _poolTurntimberBasilisk from "../pool/turntimber-basilisk.js";
 import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
 import _poolTwistedRiddlekeeper from "../pool/twisted-riddlekeeper.js";
@@ -974,6 +978,7 @@ const shard: CardShard = {
     _poolContortionistTroupe,
     _poolCordialVampire,
     _poolCorpulentCorpse,
+    _poolCountermand,
     _poolCounterpoint,
     _poolCrashTheParty,
     _poolCrashTheRamparts,
@@ -1092,6 +1097,7 @@ const shard: CardShard = {
     _poolGaiusVanBaelsar,
     _poolGalepowderMage,
     _poolGandalfsSanction,
+    _poolGardenOfFreyalise,
     _poolGargantuanGorilla,
     _poolGarruksGorehorn,
     _poolGavonySilversmith,
@@ -1108,6 +1114,7 @@ const shard: CardShard = {
     _poolGildedGoose,
     _poolGiltLeafSeer,
     _poolGimliCounterOfKills,
+    _poolGlacialGrasp,
     _poolGlacialPlating,
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
@@ -1557,6 +1564,7 @@ const shard: CardShard = {
     _poolTricksOfTheTrade,
     _poolTriclopeanSight,
     _poolTundraWall,
+    _poolTurntimberBasilisk,
     _poolTwilightProphet,
     _poolTwinbladeInvocation,
     _poolTwistedRiddlekeeper,

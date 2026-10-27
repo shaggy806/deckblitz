@@ -405,6 +405,7 @@ import _poolLordSkittersBlessing from "../pool/lord-skitters-blessing.js";
 import _poolLotusBloom from "../pool/lotus-bloom.js";
 import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
+import _poolLurkingArynx from "../pool/lurking-arynx.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
 import _poolLuxknightBreacher from "../pool/luxknight-breacher.js";
 import _poolMadProphet from "../pool/mad-prophet.js";
@@ -728,6 +729,7 @@ import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTorGiant from "../pool/tor-giant.js";
 import _poolTormentorsHelm from "../pool/tormentors-helm.js";
+import _poolTowerAbove from "../pool/tower-above.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
 import _poolToweringGibbon from "../pool/towering-gibbon.js";
 import _poolTrainingGrounds from "../pool/training-grounds.js";
@@ -1256,6 +1258,7 @@ const shard: CardShard = {
     _poolLotusBloom,
     _poolLounge,
     _poolLure,
+    _poolLurkingArynx,
     _poolLurkingNightstalker,
     _poolLuxknightBreacher,
     _poolMadProphet,
@@ -1579,6 +1582,7 @@ const shard: CardShard = {
     _poolToothyImaginaryFriend,
     _poolTorGiant,
     _poolTormentorsHelm,
+    _poolTowerAbove,
     _poolTowerOfFortunes,
     _poolToweringGibbon,
     _poolTrainingGrounds,

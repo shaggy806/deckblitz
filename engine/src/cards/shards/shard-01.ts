@@ -684,6 +684,7 @@ import _poolThrummingbird from "../pool/thrummingbird.js";
 import _poolThundersteelColossus from "../pool/thundersteel-colossus.js";
 import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTidebinderMage from "../pool/tidebinder-mage.js";
+import _poolTimelyInterference from "../pool/timely-interference.js";
 import _poolTinWingChimera from "../pool/tin-wing-chimera.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
 import _poolToil from "../pool/toil.js";
@@ -1483,6 +1484,7 @@ const shard: CardShard = {
     _poolThundersteelColossus,
     _poolTicketBooth,
     _poolTidebinderMage,
+    _poolTimelyInterference,
     _poolTinWingChimera,
     _poolTitaniaProtectorOfArgoth,
     _poolToil,

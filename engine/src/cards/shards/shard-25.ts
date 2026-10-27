@@ -178,6 +178,7 @@ import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
 import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
+import _poolDiscipleOfFreyalise from "../pool/disciple-of-freyalise.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
@@ -673,6 +674,7 @@ import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTalasExplorer from "../pool/talas-explorer.js";
+import _poolTaleOfTinuviel from "../pool/tale-of-tinuviel.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
@@ -975,6 +977,7 @@ const shard: CardShard = {
     _poolDictateOfKruphix,
     _poolDimirCutpurse,
     _poolDimirKeyrune,
+    _poolDiscipleOfFreyalise,
     _poolDissectionTools,
     _poolDoggedPursuit,
     _poolDomesticatedHydra,
@@ -1470,6 +1473,7 @@ const shard: CardShard = {
     _poolSynthInfiltrator,
     _poolTaintedPeak,
     _poolTalasExplorer,
+    _poolTaleOfTinuviel,
     _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,
