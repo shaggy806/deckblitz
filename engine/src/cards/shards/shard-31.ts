@@ -77,6 +77,7 @@ import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBladedBracers from "../pool/bladed-bracers.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
+import _poolBlindSeer from "../pool/blind-seer.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
@@ -390,6 +391,7 @@ import _poolIntruderAlarm from "../pool/intruder-alarm.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
 import _poolIronHills from "../pool/iron-hills.js";
+import _poolIronclawBuzzardiers from "../pool/ironclaw-buzzardiers.js";
 import _poolIshaiOjutaiDragonspeaker from "../pool/ishai-ojutai-dragonspeaker.js";
 import _poolItThatBetrays from "../pool/it-that-betrays.js";
 import _poolIthilienKingfisher from "../pool/ithilien-kingfisher.js";
@@ -547,6 +549,7 @@ import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
+import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
@@ -821,6 +824,7 @@ import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
+import _poolWormwoodDryad from "../pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
 import _poolWreckRemover from "../pool/wreck-remover.js";
 import _poolWuLightCavalry from "../pool/wu-light-cavalry.js";
@@ -934,6 +938,7 @@ const shard: CardShard = {
     _poolBlackWidowDeadlyHunter,
     _poolBladedBracers,
     _poolBlightedAgent,
+    _poolBlindSeer,
     _poolBlinkmothWell,
     _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,
@@ -1247,6 +1252,7 @@ const shard: CardShard = {
     _poolIronBully,
     _poolIronCrawCrusher,
     _poolIronHills,
+    _poolIronclawBuzzardiers,
     _poolIshaiOjutaiDragonspeaker,
     _poolItThatBetrays,
     _poolIthilienKingfisher,
@@ -1404,6 +1410,7 @@ const shard: CardShard = {
     _poolPatriarsSeal,
     _poolPearlShard,
     _poolPedanticLearning,
+    _poolPendelhavenElder,
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
@@ -1678,6 +1685,7 @@ const shard: CardShard = {
     _poolWispweaverAngel,
     _poolWoodlandLiege,
     _poolWormHarvest,
+    _poolWormwoodDryad,
     _poolWormwoodTreefolk,
     _poolWreckRemover,
     _poolWuLightCavalry,

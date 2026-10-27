@@ -80,6 +80,7 @@ import _poolBladewingsThrall from "../pool/bladewings-thrall.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
+import _poolBloodFunnel from "../pool/blood-funnel.js";
 import _poolBloodReckoning from "../pool/blood-reckoning.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
@@ -95,6 +96,7 @@ import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
 import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
+import _poolBreathOfDarigaaz from "../pool/breath-of-darigaaz.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
@@ -171,6 +173,7 @@ import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
+import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
@@ -449,6 +452,7 @@ import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNotoriousThrong from "../pool/notorious-throng.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
+import _poolOathswornGiant from "../pool/oathsworn-giant.js";
 import _poolOathswornKnight from "../pool/oathsworn-knight.js";
 import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
@@ -480,6 +484,7 @@ import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
+import _poolPlatedPegasus from "../pool/plated-pegasus.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
@@ -674,6 +679,7 @@ import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
+import _poolTidalVisionary from "../pool/tidal-visionary.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTinStreetMarket from "../pool/tin-street-market.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -685,6 +691,7 @@ import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
+import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -855,6 +862,7 @@ const shard: CardShard = {
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
+    _poolBloodFunnel,
     _poolBloodReckoning,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
@@ -870,6 +878,7 @@ const shard: CardShard = {
     _poolBrazenBorrower,
     _poolBrazenScourge,
     _poolBreakerOfCreation,
+    _poolBreathOfDarigaaz,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
@@ -946,6 +955,7 @@ const shard: CardShard = {
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,
+    _poolDimirCutpurse,
     _poolDimirKeyrune,
     _poolDissectionTools,
     _poolDoggedPursuit,
@@ -1224,6 +1234,7 @@ const shard: CardShard = {
     _poolNorwoodArchers,
     _poolNotoriousThrong,
     _poolNyxbornSeaguard,
+    _poolOathswornGiant,
     _poolOathswornKnight,
     _poolObeliskOfUndoing,
     _poolObscuraAscendancy,
@@ -1255,6 +1266,7 @@ const shard: CardShard = {
     _poolPhyrexianBoon,
     _poolPitilessPlunderer,
     _poolPlanarIncision,
+    _poolPlatedPegasus,
     _poolPloverKnights,
     _poolPlunder,
     _poolPointTheWay,
@@ -1449,6 +1461,7 @@ const shard: CardShard = {
     _poolThunderStrike,
     _poolThunderblust,
     _poolThunderousMight,
+    _poolTidalVisionary,
     _poolTimeElemental,
     _poolTinStreetMarket,
     _poolTitanHunter,
@@ -1460,6 +1473,7 @@ const shard: CardShard = {
     _poolTrailOfEvidence,
     _poolTranquilDomain,
     _poolTreadUpon,
+    _poolTrespasserIlVec,
     _poolTrigonOfInfestation,
     _poolTrygonPrime,
     _poolTuskguardCaptain,

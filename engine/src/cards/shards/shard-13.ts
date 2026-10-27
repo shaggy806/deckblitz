@@ -136,6 +136,7 @@ import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCooperate from "../pool/cooperate.js";
 import _poolCopperGnomes from "../pool/copper-gnomes.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
+import _poolCoralTrickster from "../pool/coral-trickster.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
 import _poolCoruscationMage from "../pool/coruscation-mage.js";
 import _poolCragcrownPathway from "../pool/cragcrown-pathway.js";
@@ -458,6 +459,7 @@ import _poolOverloadedMageRing from "../pool/overloaded-mage-ring.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
 import _poolPathOfPeril from "../pool/path-of-peril.js";
+import _poolPeelFromReality from "../pool/peel-from-reality.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
@@ -606,6 +608,7 @@ import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSpinalEmbrace from "../pool/spinal-embrace.js";
 import _poolSpiritualVisit from "../pool/spiritual-visit.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
@@ -647,6 +650,7 @@ import _poolSuntouchedMyr from "../pool/suntouched-myr.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
 import _poolSurvivorOfTheUnseen from "../pool/survivor-of-the-unseen.js";
 import _poolSvyelunOfSeaAndSky from "../pool/svyelun-of-sea-and-sky.js";
+import _poolSwayOfIllusion from "../pool/sway-of-illusion.js";
 import _poolSwiftEnd from "../pool/swift-end.js";
 import _poolSwiftReconfiguration from "../pool/swift-reconfiguration.js";
 import _poolSwiftSpinner from "../pool/swift-spinner.js";
@@ -666,6 +670,7 @@ import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
+import _poolTerrarion from "../pool/terrarion.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
@@ -702,6 +707,7 @@ import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
+import _poolUrzasFilter from "../pool/urzas-filter.js";
 import _poolUsherToSafety from "../pool/usher-to-safety.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
@@ -923,6 +929,7 @@ const shard: CardShard = {
     _poolCooperate,
     _poolCopperGnomes,
     _poolCopyEnchantment,
+    _poolCoralTrickster,
     _poolCoreProwler,
     _poolCoruscationMage,
     _poolCragcrownPathway,
@@ -1245,6 +1252,7 @@ const shard: CardShard = {
     _poolOwlinSpiralmancer,
     _poolPaladinElizabethTaggerdy,
     _poolPathOfPeril,
+    _poolPeelFromReality,
     _poolPersonalTutor,
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
@@ -1393,6 +1401,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSpinalEmbrace,
     _poolSpiritualVisit,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
@@ -1434,6 +1443,7 @@ const shard: CardShard = {
     _poolSurlyFarrier,
     _poolSurvivorOfTheUnseen,
     _poolSvyelunOfSeaAndSky,
+    _poolSwayOfIllusion,
     _poolSwiftEnd,
     _poolSwiftReconfiguration,
     _poolSwiftSpinner,
@@ -1453,6 +1463,7 @@ const shard: CardShard = {
     _poolTeleminPerformance,
     _poolTempleGarden,
     _poolTenthDistrictVeteran,
+    _poolTerrarion,
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
     _poolTheDrossPits,
@@ -1489,6 +1500,7 @@ const shard: CardShard = {
     _poolUnhallowedCathar,
     _poolUnhinge,
     _poolUnswervingSloth,
+    _poolUrzasFilter,
     _poolUsherToSafety,
     _poolUtromScientists,
     _poolValiantGuard,

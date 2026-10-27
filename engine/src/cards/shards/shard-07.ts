@@ -93,6 +93,7 @@ import _poolCabalTorturer from "../pool/cabal-torturer.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
+import _poolCanopySurge from "../pool/canopy-surge.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
@@ -431,6 +432,7 @@ import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
 import _poolMishrasHelix from "../pool/mishras-helix.js";
 import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
+import _poolMolimoMaroSorcerer from "../pool/molimo-maro-sorcerer.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
@@ -449,6 +451,7 @@ import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
+import _poolNantukoShaman from "../pool/nantuko-shaman.js";
 import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
@@ -482,6 +485,7 @@ import _poolOteclanLandmark from "../pool/oteclan-landmark.js";
 import _poolOteclanLevitator from "../pool/oteclan-levitator.js";
 import _poolOutflank from "../pool/outflank.js";
 import _poolOutlandColossus from "../pool/outland-colossus.js";
+import _poolOverload from "../pool/overload.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
@@ -491,6 +495,7 @@ import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
 import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPhantomFlock from "../pool/phantom-flock.js";
+import _poolPhantomWurm from "../pool/phantom-wurm.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
@@ -630,6 +635,7 @@ import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSparkHarvest from "../pool/spark-harvest.js";
+import _poolSpikeTiller from "../pool/spike-tiller.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
 import _poolSquadCommander from "../pool/squad-commander.js";
@@ -919,6 +925,7 @@ const shard: CardShard = {
     _poolCaligoSkinWitch,
     _poolCallTheScions,
     _poolCallousInspector,
+    _poolCanopySurge,
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
@@ -1257,6 +1264,7 @@ const shard: CardShard = {
     _poolMishrasHelix,
     _poolMoggWarMarshal,
     _poolMoldgrafScavenger,
+    _poolMolimoMaroSorcerer,
     _poolMoltenFrame,
     _poolMomentOfGlory,
     _poolMomentumBreaker,
@@ -1275,6 +1283,7 @@ const shard: CardShard = {
     _poolMycologist,
     _poolMyojinOfInfiniteRage,
     _poolMysticSpeculation,
+    _poolNantukoShaman,
     _poolNaturalEmergence,
     _poolNaturalState,
     _poolNecroticHex,
@@ -1308,6 +1317,7 @@ const shard: CardShard = {
     _poolOteclanLevitator,
     _poolOutflank,
     _poolOutlandColossus,
+    _poolOverload,
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,
@@ -1317,6 +1327,7 @@ const shard: CardShard = {
     _poolPerilousVoyage,
     _poolPhantasmalDreadmaw,
     _poolPhantomFlock,
+    _poolPhantomWurm,
     _poolPilferingImp,
     _poolPitilessCarnage,
     _poolPlagueWind,
@@ -1456,6 +1467,7 @@ const shard: CardShard = {
     _poolSouredSprings,
     _poolSpaceshift,
     _poolSparkHarvest,
+    _poolSpikeTiller,
     _poolSpitfireLagac,
     _poolSpreadingRot,
     _poolSquadCommander,

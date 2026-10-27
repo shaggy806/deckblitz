@@ -21,6 +21,7 @@ import _poolAkkiRonin from "../pool/akki-ronin.js";
 import _poolAlbinoTroll from "../pool/albino-troll.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
+import _poolAmrouScout from "../pool/amrou-scout.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
@@ -129,6 +130,7 @@ import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolCloudCover from "../pool/cloud-cover.js";
+import _poolCoalitionVictory from "../pool/coalition-victory.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
@@ -164,6 +166,7 @@ import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
+import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
@@ -707,6 +710,7 @@ import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThranWarMachine from "../pool/thran-war-machine.js";
 import _poolThrashThreat from "../pool/thrash-threat.js";
+import _poolThreeDreams from "../pool/three-dreams.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
 import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
@@ -721,6 +725,7 @@ import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTrainedPronghorn from "../pool/trained-pronghorn.js";
+import _poolTraitorsClutch from "../pool/traitors-clutch.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
@@ -837,6 +842,7 @@ const shard: CardShard = {
     _poolAlbinoTroll,
     _poolAlleyEvasion,
     _poolAmethystDragon,
+    _poolAmrouScout,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
@@ -945,6 +951,7 @@ const shard: CardShard = {
     _poolClericClass,
     _poolClingingDarkness,
     _poolCloudCover,
+    _poolCoalitionVictory,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
@@ -980,6 +987,7 @@ const shard: CardShard = {
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDiscordantSpirit,
+    _poolDismantlingBlow,
     _poolDisownedAncestor,
     _poolDivideByZero,
     _poolDoomWhisperer,
@@ -1523,6 +1531,7 @@ const shard: CardShard = {
     _poolThoseWhoServe,
     _poolThranWarMachine,
     _poolThrashThreat,
+    _poolThreeDreams,
     _poolThrivingIsle,
     _poolThundermaneDragon,
     _poolThunderousSnapper,
@@ -1537,6 +1546,7 @@ const shard: CardShard = {
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
     _poolTrainedPronghorn,
+    _poolTraitorsClutch,
     _poolTraxosScourgeEternal,
     _poolTreacherousPitDweller,
     _poolTrenchpost,

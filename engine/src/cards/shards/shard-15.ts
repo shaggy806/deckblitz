@@ -19,6 +19,7 @@ import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
 import _poolAltarGolem from "../pool/altar-golem.js";
+import _poolAmrouSeekers from "../pool/amrou-seekers.js";
 import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
@@ -237,6 +238,7 @@ import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFoulRenewal from "../pool/foul-renewal.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
+import _poolFrenziedTilling from "../pool/frenzied-tilling.js";
 import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
@@ -319,6 +321,7 @@ import _poolHonor from "../pool/honor.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
+import _poolHuntedPhantasm from "../pool/hunted-phantasm.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIdentityThief from "../pool/identity-thief.js";
@@ -673,7 +676,9 @@ import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTribalFlames from "../pool/tribal-flames.js";
 import _poolTrigonOfMending from "../pool/trigon-of-mending.js";
+import _poolTrompTheDomains from "../pool/tromp-the-domains.js";
 import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTuktukScrapper from "../pool/tuktuk-scrapper.js";
@@ -784,6 +789,7 @@ const shard: CardShard = {
     _poolAlexWilderRunaway,
     _poolAlignedHedronNetwork,
     _poolAltarGolem,
+    _poolAmrouSeekers,
     _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
@@ -1002,6 +1008,7 @@ const shard: CardShard = {
     _poolFortressCrab,
     _poolFoulRenewal,
     _poolFreeFromFlesh,
+    _poolFrenziedTilling,
     _poolFrostpeakYeti,
     _poolFuneralRoom,
     _poolFunnelWebRecluse,
@@ -1084,6 +1091,7 @@ const shard: CardShard = {
     _poolHorrifyingRevelation,
     _poolHostOfTheHereafter,
     _poolHulklingBurgeoningBruiser,
+    _poolHuntedPhantasm,
     _poolHystrodon,
     _poolIcemanAndFirestar,
     _poolIdentityThief,
@@ -1438,7 +1446,9 @@ const shard: CardShard = {
     _poolTransguildPromenade,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTribalFlames,
     _poolTrigonOfMending,
+    _poolTrompTheDomains,
     _poolTrostanisSummoner,
     _poolTruckToss,
     _poolTuktukScrapper,

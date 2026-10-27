@@ -10,6 +10,7 @@ import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
+import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAlabasterPotion from "../pool/alabaster-potion.js";
@@ -518,6 +519,7 @@ import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
 import _poolRitesOfRefusal from "../pool/rites-of-refusal.js";
+import _poolRithTheAwakener from "../pool/rith-the-awakener.js";
 import _poolRithsGrove from "../pool/riths-grove.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
@@ -792,6 +794,7 @@ const shard: CardShard = {
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
+    _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
     _poolAjanisPridemate,
     _poolAlabasterPotion,
@@ -1300,6 +1303,7 @@ const shard: CardShard = {
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,
     _poolRitesOfRefusal,
+    _poolRithTheAwakener,
     _poolRithsGrove,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,

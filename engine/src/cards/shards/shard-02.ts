@@ -240,6 +240,7 @@ import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
 import _poolFlameWreathedPhoenix from "../pool/flame-wreathed-phoenix.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
+import _poolFlowstoneChanneler from "../pool/flowstone-channeler.js";
 import _poolFlux from "../pool/flux.js";
 import _poolFly from "../pool/fly.js";
 import _poolFogElemental from "../pool/fog-elemental.js";
@@ -315,6 +316,7 @@ import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHornswoggle from "../pool/hornswoggle.js";
+import _poolHuntedTroll from "../pool/hunted-troll.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
@@ -384,6 +386,7 @@ import _poolLilianasCaress from "../pool/lilianas-caress.js";
 import _poolLimDulsPaladin from "../pool/lim-duls-paladin.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
+import _poolLoreBroker from "../pool/lore-broker.js";
 import _poolLoreDrakkis from "../pool/lore-drakkis.js";
 import _poolLorienRevealed from "../pool/lorien-revealed.js";
 import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
@@ -396,6 +399,7 @@ import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
+import _poolManaSkimmer from "../pool/mana-skimmer.js";
 import _poolManorGargoyle from "../pool/manor-gargoyle.js";
 import _poolMantleOfLeadership from "../pool/mantle-of-leadership.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
@@ -456,6 +460,7 @@ import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
 import _poolNyxHerald from "../pool/nyx-herald.js";
 import _poolOathswornVampire from "../pool/oathsworn-vampire.js";
 import _poolObeliskOfJund from "../pool/obelisk-of-jund.js";
+import _poolObliterate from "../pool/obliterate.js";
 import _poolObsessiveSkinner from "../pool/obsessive-skinner.js";
 import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
@@ -673,6 +678,7 @@ import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
+import _poolThicketElemental from "../pool/thicket-elemental.js";
 import _poolThiefOfHope from "../pool/thief-of-hope.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
 import _poolThopterSquadron from "../pool/thopter-squadron.js";
@@ -736,6 +742,7 @@ import _poolVivienReid from "../pool/vivien-reid.js";
 import _poolVoraciousTyphon from "../pool/voracious-typhon.js";
 import _poolVowOfLightning from "../pool/vow-of-lightning.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
+import _poolVulturousZombie from "../pool/vulturous-zombie.js";
 import _poolWakeOfDestruction from "../pool/wake-of-destruction.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
@@ -1018,6 +1025,7 @@ const shard: CardShard = {
     _poolFlameBlessedBolt,
     _poolFlameWreathedPhoenix,
     _poolFlamingSword,
+    _poolFlowstoneChanneler,
     _poolFlux,
     _poolFly,
     _poolFogElemental,
@@ -1093,6 +1101,7 @@ const shard: CardShard = {
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
     _poolHornswoggle,
+    _poolHuntedTroll,
     _poolHuntersEdge,
     _poolHurloonShaman,
     _poolHyraxTowerScout,
@@ -1162,6 +1171,7 @@ const shard: CardShard = {
     _poolLimDulsPaladin,
     _poolLokiTheDeceiver,
     _poolLonisGeneticsExpert,
+    _poolLoreBroker,
     _poolLoreDrakkis,
     _poolLorienRevealed,
     _poolLostInALabyrinth,
@@ -1174,6 +1184,7 @@ const shard: CardShard = {
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,
+    _poolManaSkimmer,
     _poolManorGargoyle,
     _poolMantleOfLeadership,
     _poolMarangRiverSkeleton,
@@ -1234,6 +1245,7 @@ const shard: CardShard = {
     _poolNyxHerald,
     _poolOathswornVampire,
     _poolObeliskOfJund,
+    _poolObliterate,
     _poolObsessiveSkinner,
     _poolOketrasMonument,
     _poolOloroAgelessAscetic,
@@ -1451,6 +1463,7 @@ const shard: CardShard = {
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
+    _poolThicketElemental,
     _poolThiefOfHope,
     _poolThopterArrest,
     _poolThopterSquadron,
@@ -1514,6 +1527,7 @@ const shard: CardShard = {
     _poolVoraciousTyphon,
     _poolVowOfLightning,
     _poolVrenTheRelentless,
+    _poolVulturousZombie,
     _poolWakeOfDestruction,
     _poolWakedancer,
     _poolWallOfEarth,

@@ -94,6 +94,7 @@ import _poolBorborygmosEnraged from "../pool/borborygmos-enraged.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBorosMastiff from "../pool/boros-mastiff.js";
 import _poolBranchingBolt from "../pool/branching-bolt.js";
+import _poolBrassGnat from "../pool/brass-gnat.js";
 import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
@@ -109,6 +110,7 @@ import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCallousSellSword from "../pool/callous-sell-sword.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
+import _poolCandlesOfLeng from "../pool/candles-of-leng.js";
 import _poolCankerousThirst from "../pool/cankerous-thirst.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCapsize from "../pool/capsize.js";
@@ -264,6 +266,7 @@ import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGeyadroneDihada from "../pool/geyadrone-dihada.js";
+import _poolGhostflameSliver from "../pool/ghostflame-sliver.js";
 import _poolGhoultree from "../pool/ghoultree.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
@@ -357,6 +360,7 @@ import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
+import _poolKavuTitan from "../pool/kavu-titan.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
@@ -386,6 +390,7 @@ import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLoss from "../pool/loss.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
+import _poolLoxodonHierarch from "../pool/loxodon-hierarch.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolLupinePrototype from "../pool/lupine-prototype.js";
@@ -511,6 +516,7 @@ import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
+import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRathiDragon from "../pool/rathi-dragon.js";
 import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
@@ -609,6 +615,7 @@ import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
+import _poolSkulkingKnight from "../pool/skulking-knight.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
 import _poolSlowMotion from "../pool/slow-motion.js";
@@ -629,6 +636,7 @@ import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
+import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
@@ -781,6 +789,7 @@ import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dra
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensFesteringGoblinToken from "../tokens/festering-goblin-token.js";
 import _tokensHippoToken from "../tokens/hippo-token.js";
+import _tokensHorrorToken44 from "../tokens/horror-token-4-4.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
@@ -886,6 +895,7 @@ const shard: CardShard = {
     _poolBorealShelf,
     _poolBorosMastiff,
     _poolBranchingBolt,
+    _poolBrassGnat,
     _poolBrassTalonChimera,
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
@@ -901,6 +911,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCallousSellSword,
     _poolCampusComposer,
+    _poolCandlesOfLeng,
     _poolCankerousThirst,
     _poolCanyonJerboa,
     _poolCapsize,
@@ -1056,6 +1067,7 @@ const shard: CardShard = {
     _poolGerrardsBattleCry,
     _poolGetThePoint,
     _poolGeyadroneDihada,
+    _poolGhostflameSliver,
     _poolGhoultree,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
@@ -1149,6 +1161,7 @@ const shard: CardShard = {
     _poolKardursViciousReturn,
     _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
+    _poolKavuTitan,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKelsFightFixer,
@@ -1178,6 +1191,7 @@ const shard: CardShard = {
     _poolLoss,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
+    _poolLoxodonHierarch,
     _poolLoyalGryff,
     _poolLumengridSentinel,
     _poolLupinePrototype,
@@ -1303,6 +1317,7 @@ const shard: CardShard = {
     _poolRaftSecurityOfficer,
     _poolRaidersSpoils,
     _poolRallyTheAncestors,
+    _poolRallyTheRighteous,
     _poolRasputinTheOneiromancer,
     _poolRathiDragon,
     _poolRavagingBlaze,
@@ -1401,6 +1416,7 @@ const shard: CardShard = {
     _poolSimicLocket,
     _poolSkeletalChangeling,
     _poolSkred,
+    _poolSkulkingKnight,
     _poolSkyclaveRelic,
     _poolSlickImitator,
     _poolSlowMotion,
@@ -1421,6 +1437,7 @@ const shard: CardShard = {
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
+    _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,
     _poolSporeSwarm,
@@ -1575,6 +1592,7 @@ const shard: CardShard = {
     _tokensElementalTokenVernalSovereign,
     _tokensFesteringGoblinToken,
     _tokensHippoToken,
+    _tokensHorrorToken44,
     _tokensNymphToken,
     _tokensOozeToken33,
     _tokensPegasusToken,

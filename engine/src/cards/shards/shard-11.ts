@@ -138,6 +138,7 @@ import _poolCloakedCadet from "../pool/cloaked-cadet.js";
 import _poolClockworkBeetle from "../pool/clockwork-beetle.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolClockworkVorrac from "../pool/clockwork-vorrac.js";
+import _poolClutchOfTheUndercity from "../pool/clutch-of-the-undercity.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
@@ -552,6 +553,7 @@ import _poolRendclawTrow from "../pool/rendclaw-trow.js";
 import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
 import _poolRevengeOfTheRats from "../pool/revenge-of-the-rats.js";
+import _poolRewardsOfDiversity from "../pool/rewards-of-diversity.js";
 import _poolRibCageSpider from "../pool/rib-cage-spider.js";
 import _poolRimewindTaskmage from "../pool/rimewind-taskmage.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
@@ -802,7 +804,9 @@ import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
 import _tokensTheAtropal from "../tokens/the-atropal.js";
 import _tokensTiny from "../tokens/tiny.js";
+import _tokensTriskelaviteToken from "../tokens/triskelavite-token.js";
 import _tokensTyranidGargoyleToken from "../tokens/tyranid-gargoyle-token.js";
+import _tokensVoja from "../tokens/voja.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
 import _tokensWhiteEnchantmentSoldierToken from "../tokens/white-enchantment-soldier-token.js";
 import _tokensWolfTokenGarrukCursedHuntsman from "../tokens/wolf-token-garruk-cursed-huntsman.js";
@@ -945,6 +949,7 @@ const shard: CardShard = {
     _poolClockworkBeetle,
     _poolClockworkDrawbridge,
     _poolClockworkVorrac,
+    _poolClutchOfTheUndercity,
     _poolCoatWithVenom,
     _poolCodecrackerHound,
     _poolCoffinPurge,
@@ -1359,6 +1364,7 @@ const shard: CardShard = {
     _poolRepulsorBots,
     _poolRevelsongHorn,
     _poolRevengeOfTheRats,
+    _poolRewardsOfDiversity,
     _poolRibCageSpider,
     _poolRimewindTaskmage,
     _poolRiseToTheChallenge,
@@ -1611,7 +1617,9 @@ const shard: CardShard = {
     _tokensSpiderToken22Reach,
     _tokensTheAtropal,
     _tokensTiny,
+    _tokensTriskelaviteToken,
     _tokensTyranidGargoyleToken,
+    _tokensVoja,
     _tokensWarriorTokenVigilance,
     _tokensWhiteEnchantmentSoldierToken,
     _tokensWolfTokenGarrukCursedHuntsman,

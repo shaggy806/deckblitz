@@ -268,6 +268,7 @@ import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGuildscornWard from "../pool/guildscorn-ward.js";
+import _poolGustcloakCavalier from "../pool/gustcloak-cavalier.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
@@ -438,6 +439,7 @@ import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
 import _poolPilfer from "../pool/pilfer.js";
 import _poolPlantElemental from "../pool/plant-elemental.js";
+import _poolPollenbrightWings from "../pool/pollenbright-wings.js";
 import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
@@ -681,6 +683,7 @@ import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWeatherlightCompleated from "../pool/weatherlight-compleated.js";
+import _poolWeatherseedTotem from "../pool/weatherseed-totem.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhisperSquad from "../pool/whisper-squad.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
@@ -697,6 +700,7 @@ import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
 import _poolWoodlandChasm from "../pool/woodland-chasm.js";
+import _poolWorldlyCounsel from "../pool/worldly-counsel.js";
 import _poolWorldspineWurm from "../pool/worldspine-wurm.js";
 import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
@@ -993,6 +997,7 @@ const shard: CardShard = {
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGuildscornWard,
+    _poolGustcloakCavalier,
     _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHammerDropper,
@@ -1163,6 +1168,7 @@ const shard: CardShard = {
     _poolPiggyBank,
     _poolPilfer,
     _poolPlantElemental,
+    _poolPollenbrightWings,
     _poolPompousGadabout,
     _poolPopularEgotist,
     _poolPoxwalkers,
@@ -1406,6 +1412,7 @@ const shard: CardShard = {
     _poolWaspShrinkingSavior,
     _poolWeatherMaker,
     _poolWeatherlightCompleated,
+    _poolWeatherseedTotem,
     _poolWebShot,
     _poolWhisperSquad,
     _poolWhiteKnight,
@@ -1422,6 +1429,7 @@ const shard: CardShard = {
     _poolWoeStrider,
     _poolWondrousCrucible,
     _poolWoodlandChasm,
+    _poolWorldlyCounsel,
     _poolWorldspineWurm,
     _poolWornPowerstone,
     _poolWraithViciousVigilante,

@@ -160,6 +160,7 @@ import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
+import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
@@ -173,6 +174,7 @@ import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDromokaCaptain from "../pool/dromoka-captain.js";
 import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
+import _poolDurkwoodTracker from "../pool/durkwood-tracker.js";
 import _poolDuskFeaster from "../pool/dusk-feaster.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
@@ -303,6 +305,7 @@ import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGustriderExuberant from "../pool/gustrider-exuberant.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
+import _poolHammerfistGiant from "../pool/hammerfist-giant.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHauntedDead from "../pool/haunted-dead.js";
 import _poolHeadstone from "../pool/headstone.js";
@@ -407,6 +410,7 @@ import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
+import _poolMalice from "../pool/malice.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolManrikiGusari from "../pool/manriki-gusari.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
@@ -539,6 +543,7 @@ import _poolRakdosRingleader from "../pool/rakdos-ringleader.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
+import _poolRaziaBorosArchangel from "../pool/razia-boros-archangel.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
 import _poolRebuild from "../pool/rebuild.js";
@@ -716,6 +721,7 @@ import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
 import _poolTolarianDrake from "../pool/tolarian-drake.js";
+import _poolTolsimirWolfblood from "../pool/tolsimir-wolfblood.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
@@ -1011,6 +1017,7 @@ const shard: CardShard = {
     _poolDemonicDread,
     _poolDerangedHermit,
     _poolDesolateLighthouse,
+    _poolDevouringStrossus,
     _poolDiscipleOfMalice,
     _poolDivineGambit,
     _poolDomriRade,
@@ -1024,6 +1031,7 @@ const shard: CardShard = {
     _poolDromokaCaptain,
     _poolDub,
     _poolDuelForDominance,
+    _poolDurkwoodTracker,
     _poolDuskFeaster,
     _poolDuskwielder,
     _poolDwarvenArmorer,
@@ -1154,6 +1162,7 @@ const shard: CardShard = {
     _poolGustriderExuberant,
     _poolGuulDrazMucklord,
     _poolHaazdaMarshal,
+    _poolHammerfistGiant,
     _poolHarmlessOffering,
     _poolHauntedDead,
     _poolHeadstone,
@@ -1258,6 +1267,7 @@ const shard: CardShard = {
     _poolMagmaVein,
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
+    _poolMalice,
     _poolManaformHellkite,
     _poolManrikiGusari,
     _poolMarchesasEmissary,
@@ -1390,6 +1400,7 @@ const shard: CardShard = {
     _poolRampartHunter,
     _poolRansackTheLab,
     _poolRazeToTheGround,
+    _poolRaziaBorosArchangel,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
     _poolRebuild,
@@ -1567,6 +1578,7 @@ const shard: CardShard = {
     _poolToadstoolAdmirer,
     _poolTogetherForever,
     _poolTolarianDrake,
+    _poolTolsimirWolfblood,
     _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,

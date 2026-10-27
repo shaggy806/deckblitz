@@ -104,6 +104,7 @@ import _poolCaptainsHook from "../pool/captains-hook.js";
 import _poolCatCollector from "../pool/cat-collector.js";
 import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
+import _poolCauldronDance from "../pool/cauldron-dance.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
 import _poolCavernHarpy from "../pool/cavern-harpy.js";
@@ -622,6 +623,7 @@ import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStolenGoods from "../pool/stolen-goods.js";
+import _poolStoneshakerShaman from "../pool/stoneshaker-shaman.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
@@ -710,6 +712,7 @@ import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
 import _poolUntamedWilds from "../pool/untamed-wilds.js";
+import _poolUnyaroBees from "../pool/unyaro-bees.js";
 import _poolUnyaroGriffin from "../pool/unyaro-griffin.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
@@ -904,6 +907,7 @@ const shard: CardShard = {
     _poolCatCollector,
     _poolCatalog,
     _poolCathodion,
+    _poolCauldronDance,
     _poolCausticExhale,
     _poolCavernCrawler,
     _poolCavernHarpy,
@@ -1422,6 +1426,7 @@ const shard: CardShard = {
     _poolSteelSabotage,
     _poolSteelWall,
     _poolStolenGoods,
+    _poolStoneshakerShaman,
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,
     _poolStormshriekFeral,
@@ -1510,6 +1515,7 @@ const shard: CardShard = {
     _poolUnrootedAncestor,
     _poolUntamedPup,
     _poolUntamedWilds,
+    _poolUnyaroBees,
     _poolUnyaroGriffin,
     _poolUproot,
     _poolUrGolemsEye,

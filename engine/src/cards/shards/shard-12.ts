@@ -54,6 +54,7 @@ import _poolBalustradeSpy from "../pool/balustrade-spy.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
 import _poolBarbedSextant from "../pool/barbed-sextant.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
+import _poolBasaltGargoyle from "../pool/basalt-gargoyle.js";
 import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattleBrawler from "../pool/battle-brawler.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
@@ -210,6 +211,7 @@ import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
+import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
@@ -650,6 +652,7 @@ import _poolStratusDancer from "../pool/stratus-dancer.js";
 import _poolStreetSpasm from "../pool/street-spasm.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
+import _poolStrongholdOverseer from "../pool/stronghold-overseer.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
@@ -714,6 +717,7 @@ import _poolUncleIroh from "../pool/uncle-iroh.js";
 import _poolUndyingRage from "../pool/undying-rage.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
+import _poolUrborgSyphonMage from "../pool/urborg-syphon-mage.js";
 import _poolValeronWardens from "../pool/valeron-wardens.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
@@ -737,6 +741,7 @@ import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
 import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
+import _poolWane from "../pool/wane.js";
 import _poolWaningWurm from "../pool/waning-wurm.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWarpedResearcher from "../pool/warped-researcher.js";
@@ -843,6 +848,7 @@ const shard: CardShard = {
     _poolBanishingKnack,
     _poolBarbedSextant,
     _poolBarterInBlood,
+    _poolBasaltGargoyle,
     _poolBasiliskGate,
     _poolBattleBrawler,
     _poolBattlegroundGeist,
@@ -999,6 +1005,7 @@ const shard: CardShard = {
     _poolElvishHerder,
     _poolEmberShot,
     _poolEmberethPaladin,
+    _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
     _poolEnterprisingScallywag,
@@ -1439,6 +1446,7 @@ const shard: CardShard = {
     _poolStreetSpasm,
     _poolStringOfDisappearances,
     _poolStrixLookout,
+    _poolStrongholdOverseer,
     _poolSturdyHatchling,
     _poolSturmgeist,
     _poolSubterraneanSpirit,
@@ -1503,6 +1511,7 @@ const shard: CardShard = {
     _poolUndyingRage,
     _poolUneasyPartings,
     _poolUntamedHunger,
+    _poolUrborgSyphonMage,
     _poolValeronWardens,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,
@@ -1526,6 +1535,7 @@ const shard: CardShard = {
     _poolWakerootElemental,
     _poolWallOfEssence,
     _poolWanderingMind,
+    _poolWane,
     _poolWaningWurm,
     _poolWarMammoth,
     _poolWarpedResearcher,

@@ -46,6 +46,7 @@ import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
+import _poolBacklash from "../pool/backlash.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
@@ -423,6 +424,7 @@ import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
+import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
@@ -637,6 +639,7 @@ import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
+import _poolSpiritOfResistance from "../pool/spirit-of-resistance.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -848,6 +851,7 @@ const shard: CardShard = {
     _poolAvalanche,
     _poolAvengersQuinjet,
     _poolAysenAbbey,
+    _poolBacklash,
     _poolBadlands,
     _poolBalduvianBears,
     _poolBalefireDragon,
@@ -1225,6 +1229,7 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMobilize,
     _poolMockingbird,
+    _poolMoldervineCloak,
     _poolMonkClass,
     _poolMoonHeron,
     _poolMoonfolkPuzzlemaker,
@@ -1439,6 +1444,7 @@ const shard: CardShard = {
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
     _poolSpiritEnKor,
+    _poolSpiritOfResistance,
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
