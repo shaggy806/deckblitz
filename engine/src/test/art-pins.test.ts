@@ -48,6 +48,9 @@ const NO_TOKEN_PRINTING = new Set([
   // One Dozen Eyes (MRD)'s vanilla green 5/5 Beast: no token printing in the
   // Oracle snapshot.
   "5/5 Beast Token",
+  // Nuisance Engine (MRD)'s 0/1 colorless artifact Pest: no token printing in
+  // the Oracle snapshot.
+  "Pest Token (Colorless Artifact, 0/1)",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",
