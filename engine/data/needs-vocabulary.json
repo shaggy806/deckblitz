@@ -12015,6 +12015,46 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "static:protection-from-own-colors": {
+   "family": "effect:grant-protection-choice",
+   "example": "Earnest Fellowship: protection takes only fixed colours, types or a filter; nothing makes each creature's protection follow its own colours."
+  },
+  "amount:remembered-number": {
+   "family": "effect:amount-new-variants",
+   "example": "Laquatus's Creativity: \"Discards that many\" is the count before the draw; thisWay \"drawn\" differs when a draw is replaced or the library runs short."
+  },
+  "effect:add-mana-of-milled-card-colored-symbols": {
+   "family": "effect:add-mana-extensions",
+   "example": "Charmed Pendant: Nothing adds mana from the colored symbols of the card milled to pay the cost."
+  },
+  "filter:counts-as-named-card": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Diligent Farmhand: \"Effects from spells named Muscle Burst count it as a card named Muscle Burst\": nothing makes a card count as another name for a spell's count."
+  },
+  "replacement:next-combat-damage-double-or-prevent": {
+   "family": "replacement:damage-modification",
+   "example": "Impulsive Maneuvers: A coin flip per attacker setting up \"the next time that creature would deal combat damage this turn\" doubled or prevented: no such one-shot replacement."
+  },
+  "replacement:damage-to-you-becomes-exile-graveyard": {
+   "family": "replacement:new-event-replacements",
+   "example": "Nefarious Lich: \"Exile that many graveyard cards instead of damage, or lose the game\" has no replacement, and the would-draw replacement doesn't cover life gain."
+  },
+  "amount:count-in-graveyards-same-name-as-trigger-spell": {
+   "family": "effect:amount-new-variants",
+   "example": "Nantuko Shrine: sameNameAsTarget works only on a target slot, so nothing counts graveyard cards named like the triggering spell."
+  },
+  "effect:discard-any-number-at-random": {
+   "family": "decision:discard-any-number",
+   "example": "Rites of Initiation: The discard effect's anyNumber lets the player pick the cards and ignores random."
+  },
+  "effect:attach-to-chosen-permanent-it-can-enchant": {
+   "family": "effect:attach-extensions",
+   "example": "Aura Graft: attach needs a targeted destination; nothing chooses, on resolution, a permanent the Aura can legally enchant."
+  },
+  "condition:shares-card-type-with-cost-exiled": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Holistic Wisdom: No \"exile a card from your hand\" activation cost, and nothing compares a target with the card the cost exiled."
   }
  }
 }

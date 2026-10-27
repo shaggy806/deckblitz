@@ -1,0 +1,747 @@
+{
+ "batch": "B225",
+ "status": "complete",
+ "ranks": "Odyssey (ODY, 2001-10-01): its 105 most-played of the 211 cards left (the fifth middle walk's range, round nineteen); fixed an each-player-may choice's \"that-player\" when its chooser is the effect's controller (Dwarven Driller, Dwarven Scorcher and Combustion Man on their controller's own permanents)",
+ "authored": [
+  {
+   "name": "Aboshan, Cephalid Emperor",
+   "files": [
+    "engine/src/cards/pool/aboshan-cephalid-emperor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aboshan's Desire",
+   "files": [
+    "engine/src/cards/pool/aboshans-desire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ancestral Tribute",
+   "files": [
+    "engine/src/cards/pool/ancestral-tribute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Animal Boneyard",
+   "files": [
+    "engine/src/cards/pool/animal-boneyard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atogatog",
+   "files": [
+    "engine/src/cards/pool/atogatog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle of Wits",
+   "files": [
+    "engine/src/cards/pool/battle-of-wits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle Strain",
+   "files": [
+    "engine/src/cards/pool/battle-strain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bearscape",
+   "files": [
+    "engine/src/cards/pool/bearscape.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beloved Chaplain",
+   "files": [
+    "engine/src/cards/pool/beloved-chaplain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blazing Salvo",
+   "files": [
+    "engine/src/cards/pool/blazing-salvo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Sands",
+   "files": [
+    "engine/src/cards/pool/burning-sands.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Caustic Tar",
+   "files": [
+    "engine/src/cards/pool/caustic-tar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cease-Fire",
+   "files": [
+    "engine/src/cards/pool/cease-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Centaur Garden",
+   "files": [
+    "engine/src/cards/pool/centaur-garden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Broker",
+   "files": [
+    "engine/src/cards/pool/cephalid-broker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Looter",
+   "files": [
+    "engine/src/cards/pool/cephalid-looter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chamber of Manipulation",
+   "files": [
+    "engine/src/cards/pool/chamber-of-manipulation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confessor",
+   "files": [
+    "engine/src/cards/pool/confessor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darkwater Egg",
+   "files": [
+    "engine/src/cards/pool/darkwater-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep Reconnaissance",
+   "files": [
+    "engine/src/cards/pool/deep-reconnaissance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deluge",
+   "files": [
+    "engine/src/cards/pool/deluge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demoralize",
+   "files": [
+    "engine/src/cards/pool/demoralize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dirty Wererat",
+   "files": [
+    "engine/src/cards/pool/dirty-wererat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divert",
+   "files": [
+    "engine/src/cards/pool/divert.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Divine Sacrament",
+   "files": [
+    "engine/src/cards/pool/divine-sacrament.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Druid's Call",
+   "files": [
+    "engine/src/cards/pool/druids-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Recruiter",
+   "files": [
+    "engine/src/cards/pool/dwarven-recruiter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epicenter",
+   "files": [
+    "engine/src/cards/pool/epicenter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escape Artist",
+   "files": [
+    "engine/src/cards/pool/escape-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghastly Demise",
+   "files": [
+    "engine/src/cards/pool/ghastly-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorilla Titan",
+   "files": [
+    "engine/src/cards/pool/gorilla-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravestorm",
+   "files": [
+    "engine/src/cards/pool/gravestorm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infected Vermin",
+   "files": [
+    "engine/src/cards/pool/infected-vermin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ivy Elemental",
+   "files": [
+    "engine/src/cards/pool/ivy-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirtar's Wrath",
+   "files": [
+    "engine/src/cards/pool/kirtars-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krosan Beast",
+   "files": [
+    "engine/src/cards/pool/krosan-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lava Blister",
+   "files": [
+    "engine/src/cards/pool/lava-blister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magnivore",
+   "files": [
+    "engine/src/cards/pool/magnivore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirari",
+   "files": [
+    "engine/src/cards/pool/mirari.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Molten Influence",
+   "files": [
+    "engine/src/cards/pool/molten-influence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mossfire Egg",
+   "files": [
+    "engine/src/cards/pool/mossfire-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nantuko Mentor",
+   "files": [
+    "engine/src/cards/pool/nantuko-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "New Frontiers",
+   "files": [
+    "engine/src/cards/pool/new-frontiers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nomad Stadium",
+   "files": [
+    "engine/src/cards/pool/nomad-stadium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overeager Apprentice",
+   "files": [
+    "engine/src/cards/pool/overeager-apprentice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pedantic Learning",
+   "files": [
+    "engine/src/cards/pool/pedantic-learning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Persuasion",
+   "files": [
+    "engine/src/cards/pool/persuasion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phantatog",
+   "files": [
+    "engine/src/cards/pool/phantatog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pianna, Nomad Captain",
+   "files": [
+    "engine/src/cards/pool/pianna-nomad-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piper's Melody",
+   "files": [
+    "engine/src/cards/pool/pipers-melody.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psionic Gift",
+   "files": [
+    "engine/src/cards/pool/psionic-gift.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psychatog",
+   "files": [
+    "engine/src/cards/pool/psychatog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puppeteer",
+   "files": [
+    "engine/src/cards/pool/puppeteer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Recoup",
+   "files": [
+    "engine/src/cards/pool/recoup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rites of Refusal",
+   "files": [
+    "engine/src/cards/pool/rites-of-refusal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rites of Spring",
+   "files": [
+    "engine/src/cards/pool/rites-of-spring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarcatog",
+   "files": [
+    "engine/src/cards/pool/sarcatog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seton's Desire",
+   "files": [
+    "engine/src/cards/pool/setons-desire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadowblood Egg",
+   "files": [
+    "engine/src/cards/pool/shadowblood-egg.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skycloud Egg",
+   "files": [
+    "engine/src/cards/pool/skycloud-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyshooter",
+   "files": [
+    "engine/src/cards/pool/skyshooter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulcatcher",
+   "files": [
+    "engine/src/cards/pool/soulcatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spark Mage",
+   "files": [
+    "engine/src/cards/pool/spark-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sungrass Egg",
+   "files": [
+    "engine/src/cards/pool/sungrass-egg.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Terravore",
+   "files": [
+    "engine/src/cards/pool/terravore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Devourer",
+   "files": [
+    "engine/src/cards/pool/thought-devourer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thought Eater",
+   "files": [
+    "engine/src/cards/pool/thought-eater.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thought Nibbler",
+   "files": [
+    "engine/src/cards/pool/thought-nibbler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tireless Tribe",
+   "files": [
+    "engine/src/cards/pool/tireless-tribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volcanic Spray",
+   "files": [
+    "engine/src/cards/pool/volcanic-spray.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Mongrel",
+   "files": [
+    "engine/src/cards/pool/wild-mongrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Infestation",
+   "files": [
+    "engine/src/cards/pool/zombie-infestation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zoologist",
+   "files": [
+    "engine/src/cards/pool/zoologist.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Bomb Squad",
+   "needs": [
+    "trigger:state-trigger"
+   ],
+   "why": "\"Whenever a creature has four or more fuse counters\" is a per-creature state trigger; on: \"state\" takes only a StaticCondition with no creature for \"that creature\"."
+  },
+  {
+   "name": "Earnest Fellowship",
+   "needs": [
+    "static:protection-from-own-colors"
+   ],
+   "why": "protection takes only fixed colours, types or a filter; nothing makes each creature's protection follow its own colours."
+  },
+  {
+   "name": "Devoted Caretaker",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "No effect grants protection until end of turn; protection exists only as a static."
+  },
+  {
+   "name": "Aegis of Honor",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "The next damage from an instant or sorcery spell redirected to its controller: prevent-damage-from-chosen-source asks for a chosen source and its redirectTo can't name the source's controller."
+  },
+  {
+   "name": "Laquatus's Creativity",
+   "needs": [
+    "amount:remembered-number"
+   ],
+   "why": "\"Discards that many\" is the count before the draw; thisWay \"drawn\" differs when a draw is replaced or the library runs short."
+  },
+  {
+   "name": "Embolden",
+   "needs": [
+    "effect:prevention-divided"
+   ],
+   "why": "The divided field and *-divided effects cover damage and counters only, not prevention."
+  },
+  {
+   "name": "Pardic Miner",
+   "needs": [
+    "effect:prohibit-land-plays"
+   ],
+   "why": "prohibit covers spells and abilities only; no \"can't play lands this turn\"."
+  },
+  {
+   "name": "Standstill",
+   "needs": [
+    "effect:opponents-of-trigger-controller-scope"
+   ],
+   "why": "\"Each of that player's opponents\" for the spell's caster: each-other-opponent reads the trigger-player, which a cast-spell event doesn't set."
+  },
+  {
+   "name": "Ground Seal",
+   "needs": [
+    "static:graveyard-cards-untargetable"
+   ],
+   "why": "No static stops cards in graveyards being targeted."
+  },
+  {
+   "name": "Cultural Exchange",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "No effect swaps chosen, equal-sized sets of creatures between two target players."
+  },
+  {
+   "name": "Vampiric Dragon",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "The damagedThisTurnBy filter matches the source's subtype, type or controller, not \"this creature\"."
+  },
+  {
+   "name": "Balancing Act",
+   "needs": [
+    "effect:keep-count-equal-to-fewest"
+   ],
+   "why": "sacrifice-all-but keeps only a fixed number, and there's no discard version."
+  },
+  {
+   "name": "Charmed Pendant",
+   "needs": [
+    "effect:add-mana-of-milled-card-colored-symbols"
+   ],
+   "why": "Nothing adds mana from the colored symbols of the card milled to pay the cost."
+  },
+  {
+   "name": "Decaying Soil",
+   "needs": [
+    "trigger:conditional-grant-look-back"
+   ],
+   "why": "A threshold-gated grantsTriggered dies trigger is checked after the event, so the creature that makes the 7th card still triggers (rule 603.10a; the ruling says it shouldn't)."
+  },
+  {
+   "name": "Predict",
+   "needs": [
+    "decision:name-a-card"
+   ],
+   "why": "No way to choose a card name and compare the milled card against it."
+  },
+  {
+   "name": "Aven Shrine",
+   "needs": [
+    "filter:same-name-as-trigger-spell"
+   ],
+   "why": "It can't count graveyard cards with the same name as the spell that fired the trigger."
+  },
+  {
+   "name": "Verdant Succession",
+   "needs": [
+    "filter:same-name-as-trigger-object"
+   ],
+   "why": "It can't search for a card with the same name as the creature that died."
+  },
+  {
+   "name": "Spiritualize",
+   "needs": [
+    "effect:delayed-trigger-keyed-to-target"
+   ],
+   "why": "A delayed \"whenever\" can't follow a target creature; granting the trigger to the creature would give the life to its controller instead of the caster."
+  },
+  {
+   "name": "Bamboozle",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "look-and-choose can't reveal a target player's library while the caster picks two cards and that player orders the rest."
+  },
+  {
+   "name": "Diligent Farmhand",
+   "needs": [
+    "filter:counts-as-named-card"
+   ],
+   "why": "\"Effects from spells named Muscle Burst count it as a card named Muscle Burst\": nothing makes a card count as another name for a spell's count."
+  },
+  {
+   "name": "Impulsive Maneuvers",
+   "needs": [
+    "replacement:next-combat-damage-double-or-prevent"
+   ],
+   "why": "A coin flip per attacker setting up \"the next time that creature would deal combat damage this turn\" doubled or prevented: no such one-shot replacement."
+  },
+  {
+   "name": "Nefarious Lich",
+   "needs": [
+    "replacement:gain-life-becomes-draw",
+    "replacement:damage-to-you-becomes-exile-graveyard"
+   ],
+   "why": "\"Exile that many graveyard cards instead of damage, or lose the game\" has no replacement, and the would-draw replacement doesn't cover life gain."
+  },
+  {
+   "name": "Extract",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "search-library searches only its controller's library (or a target permanent's controller's) and can't exile what it finds."
+  },
+  {
+   "name": "Mine Layer",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "\"Remove all mine counters from all lands\": remove-counter acts on one target only."
+  },
+  {
+   "name": "Obstinate Familiar",
+   "needs": [
+    "replacement:draw-replacement-optional-skip"
+   ],
+   "why": "The would-draw replacement has no \"you may skip that draw\"."
+  },
+  {
+   "name": "Skeletal Scrying",
+   "needs": [
+    "cost:exile-x-from-graveyard-additional"
+   ],
+   "why": "A spell's additional exileFromGraveyard cost takes a fixed number only, not X."
+  },
+  {
+   "name": "Catalyst Stone",
+   "needs": [
+    "cost:flashback-cost-reduction"
+   ],
+   "why": "costModification can't tell a flashback cast apart; castFrom \"graveyard\" would change other graveyard casts too."
+  },
+  {
+   "name": "Delaying Shield",
+   "needs": [
+    "effect:repeat-effect-x-times",
+    "effect:counters-removed-this-way"
+   ],
+   "why": "The upkeep needs a separate \"lose 1 unless you pay {1}{W}\" for each counter removed."
+  },
+  {
+   "name": "Nantuko Shrine",
+   "needs": [
+    "amount:count-in-graveyards-same-name-as-trigger-spell"
+   ],
+   "why": "sameNameAsTarget works only on a target slot, so nothing counts graveyard cards named like the triggering spell."
+  },
+  {
+   "name": "Rites of Initiation",
+   "needs": [
+    "effect:discard-any-number-at-random"
+   ],
+   "why": "The discard effect's anyNumber lets the player pick the cards and ignores random."
+  },
+  {
+   "name": "Aura Graft",
+   "needs": [
+    "effect:attach-to-chosen-permanent-it-can-enchant"
+   ],
+   "why": "attach needs a targeted destination; nothing chooses, on resolution, a permanent the Aura can legally enchant."
+  },
+  {
+   "name": "Holistic Wisdom",
+   "needs": [
+    "cost:exile-card-from-hand",
+    "condition:shares-card-type-with-cost-exiled"
+   ],
+   "why": "No \"exile a card from your hand\" activation cost, and nothing compares a target with the card the cost exiled."
+  }
+ ]
+}
