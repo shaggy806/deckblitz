@@ -1,6 +1,6 @@
 # The set walk's last three rounds
 
-**Status:** planned (2026-10-27): round eighteen **landed** 2026-10-27 (B219–B223: 396 authored, earlier batches' cards among them, 162 blocked; amplify, provoke and "blocks this turn if able", the discard-X additional cost, "any player may activate" and "unless any player pays" built); round nineteen **landed** 2026-10-27 (B224–B229: 418 authored, earlier batches' cards among them, 206 blocked; non-mana morph costs, the sacrifice and return-lands alternative costs and radiance built); twenty not started. Each round
+**Status:** planned (2026-10-27): round eighteen **landed** 2026-10-27 (B219–B223: 396 authored, earlier batches' cards among them, 162 blocked; amplify, provoke and "blocks this turn if able", the discard-X additional cost, "any player may activate" and "unless any player pays" built); round nineteen **landed** 2026-10-27 (B224–B229: 418 authored, earlier batches' cards among them, 206 blocked; non-mana morph costs, the sacrifice and return-lands alternative costs and radiance built); round twenty started (B230–B234, five cloud sessions). Each round
 is one run of the `author-walks-parallel` skill from a fresh session. Its step 1, choosing the
 walks and their ranges, is already decided below. The coordinator reads its round off this file,
 records the batch numbers in `BACKLOG.md`'s `author-by-set` line (step 2) and starts the
@@ -60,7 +60,7 @@ oldest-first walk goes forward (`author-by-set-oldest`).
 | Middle | the rest of Time Spiral | 89 |
 | Second middle | Ravnica: City of Guilds' ~76 most-played | 76 |
 
-**Round twenty: five sessions, ~511 cards.** This round finishes the walk.
+**Round twenty: five sessions, ~511 cards (501 on 2026-10-27). Batch numbers B230–B234, in the table's order.** This round finishes the walk.
 
 | Walk | Batch's sets | Cards |
 |---|---|---|
