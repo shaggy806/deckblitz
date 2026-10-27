@@ -209,6 +209,7 @@ import _poolDrowsingTyrannodon from "../pool/drowsing-tyrannodon.js";
 import _poolDruidOfHorns from "../pool/druid-of-horns.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDuskwatchRecruiter from "../pool/duskwatch-recruiter.js";
+import _poolDuskworker from "../pool/duskworker.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
@@ -443,6 +444,7 @@ import _poolNiambiEsteemedSpeaker from "../pool/niambi-esteemed-speaker.js";
 import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
+import _poolNimLasher from "../pool/nim-lasher.js";
 import _poolNissasDefeat from "../pool/nissas-defeat.js";
 import _poolNiveousWisps from "../pool/niveous-wisps.js";
 import _poolNoblesPurse from "../pool/nobles-purse.js";
@@ -985,6 +987,7 @@ const shard: CardShard = {
     _poolDruidOfHorns,
     _poolDualSunTechnique,
     _poolDuskwatchRecruiter,
+    _poolDuskworker,
     _poolDutifulServants,
     _poolDynamiteDiver,
     _poolEarthenAlly,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolNickFurySpymaster,
     _poolNightshadeDryad,
     _poolNightveilSprite,
+    _poolNimLasher,
     _poolNissasDefeat,
     _poolNiveousWisps,
     _poolNoblesPurse,

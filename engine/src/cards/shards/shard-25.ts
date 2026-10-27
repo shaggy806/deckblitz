@@ -362,6 +362,7 @@ import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
+import _poolLiegeOfTheAxe from "../pool/liege-of-the-axe.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
@@ -1119,6 +1120,7 @@ const shard: CardShard = {
     _poolLeatherArmor,
     _poolLeechCollector,
     _poolLiberatingCombustion,
+    _poolLiegeOfTheAxe,
     _poolLifecraftCavalry,
     _poolLightOfPromise,
     _poolLightfootTechnique,

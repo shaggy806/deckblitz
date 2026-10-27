@@ -421,6 +421,7 @@ import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMistDragon from "../pool/mist-dragon.js";
+import _poolMistformUltimus from "../pool/mistform-ultimus.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
 import _poolMoggFanatic from "../pool/mogg-fanatic.js";
 import _poolMoldShambler from "../pool/mold-shambler.js";
@@ -564,6 +565,7 @@ import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
 import _poolSkallaWolf from "../pool/skalla-wolf.js";
 import _poolSkarrgTheRagePits from "../pool/skarrg-the-rage-pits.js";
 import _poolSkateboard from "../pool/skateboard.js";
+import _poolSkirkDrillSergeant from "../pool/skirk-drill-sergeant.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
 import _poolSkycoachWaypoint from "../pool/skycoach-waypoint.js";
 import _poolSliverOverlord from "../pool/sliver-overlord.js";
@@ -1166,6 +1168,7 @@ const shard: CardShard = {
     _poolMischievousChimera,
     _poolMisshapenFiend,
     _poolMistDragon,
+    _poolMistformUltimus,
     _poolMoaningSpirit,
     _poolMoggFanatic,
     _poolMoldShambler,
@@ -1309,6 +1312,7 @@ const shard: CardShard = {
     _poolSkallaWolf,
     _poolSkarrgTheRagePits,
     _poolSkateboard,
+    _poolSkirkDrillSergeant,
     _poolSkorpekhDestroyer,
     _poolSkycoachWaypoint,
     _poolSliverOverlord,

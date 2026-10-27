@@ -130,6 +130,7 @@ import _poolCurseOfUnbinding from "../pool/curse-of-unbinding.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
+import _poolDaruMender from "../pool/daru-mender.js";
 import _poolDeathbringerLiege from "../pool/deathbringer-liege.js";
 import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
@@ -664,6 +665,7 @@ import _poolTomeScour from "../pool/tome-scour.js";
 import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
+import _poolToxinSliver from "../pool/toxin-sliver.js";
 import _poolTreasureMage from "../pool/treasure-mage.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
@@ -902,6 +904,7 @@ const shard: CardShard = {
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
+    _poolDaruMender,
     _poolDeathbringerLiege,
     _poolDeathknellBerserker,
     _poolDecadentDragon,
@@ -1436,6 +1439,7 @@ const shard: CardShard = {
     _poolTorment,
     _poolToughCookie,
     _poolTowerDefense,
+    _poolToxinSliver,
     _poolTreasureMage,
     _poolTreasureMap,
     _poolTremble,

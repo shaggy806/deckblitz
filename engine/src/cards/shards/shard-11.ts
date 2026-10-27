@@ -100,6 +100,7 @@ import _poolCabalRitual from "../pool/cabal-ritual.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
 import _poolCallToGlory from "../pool/call-to-glory.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
+import _poolCallerOfTheClaw from "../pool/caller-of-the-claw.js";
 import _poolCamaraderie from "../pool/camaraderie.js";
 import _poolCapashenTemplar from "../pool/capashen-templar.js";
 import _poolCaptainVargusWrath from "../pool/captain-vargus-wrath.js";
@@ -890,6 +891,7 @@ const shard: CardShard = {
     _poolCabarettiCourtyard,
     _poolCallToGlory,
     _poolCallerOfGales,
+    _poolCallerOfTheClaw,
     _poolCamaraderie,
     _poolCapashenTemplar,
     _poolCaptainVargusWrath,

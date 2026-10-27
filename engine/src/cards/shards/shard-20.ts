@@ -62,6 +62,7 @@ import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
 import _poolBatteringSliver from "../pool/battering-sliver.js";
 import _poolBatterskull from "../pool/batterskull.js";
+import _poolBeaconOfDestiny from "../pool/beacon-of-destiny.js";
 import _poolBearerOfOverwhelmingTruths from "../pool/bearer-of-overwhelming-truths.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
@@ -175,6 +176,7 @@ import _poolDeathMutation from "../pool/death-mutation.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
+import _poolDefenderOfTheOrder from "../pool/defender-of-the-order.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDenseCanopy from "../pool/dense-canopy.js";
 import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
@@ -201,6 +203,7 @@ import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
 import _poolDriftOfTheDead from "../pool/drift-of-the-dead.js";
+import _poolDrippingDead from "../pool/dripping-dead.js";
 import _poolDrudgeSpell from "../pool/drudge-spell.js";
 import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
@@ -560,6 +563,7 @@ import _poolRitualOfSoot from "../pool/ritual-of-soot.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRouseTheMob from "../pool/rouse-the-mob.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
+import _poolRustsporeRam from "../pool/rustspore-ram.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
 import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
 import _poolSaltRoadQuartermasters from "../pool/salt-road-quartermasters.js";
@@ -589,6 +593,7 @@ import _poolServe from "../pool/serve.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
 import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
 import _poolShalaiAndHallar from "../pool/shalai-and-hallar.js";
+import _poolShaleskinPlower from "../pool/shaleskin-plower.js";
 import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
 import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
 import _poolShardlessOutlander from "../pool/shardless-outlander.js";
@@ -891,6 +896,7 @@ const shard: CardShard = {
     _poolBastionInventor,
     _poolBatteringSliver,
     _poolBatterskull,
+    _poolBeaconOfDestiny,
     _poolBearerOfOverwhelmingTruths,
     _poolBeckonApparition,
     _poolBelbesPercher,
@@ -1004,6 +1010,7 @@ const shard: CardShard = {
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDecimatorOfTheProvinces,
+    _poolDefenderOfTheOrder,
     _poolDelayedBlastFireball,
     _poolDenseCanopy,
     _poolDepalaPilotExemplar,
@@ -1030,6 +1037,7 @@ const shard: CardShard = {
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,
     _poolDriftOfTheDead,
+    _poolDrippingDead,
     _poolDrudgeSpell,
     _poolDubiousDelicacy,
     _poolDuelistsHeritage,
@@ -1389,6 +1397,7 @@ const shard: CardShard = {
     _poolRottedHystrix,
     _poolRouseTheMob,
     _poolRubyMedallion,
+    _poolRustsporeRam,
     _poolRuthlessKnave,
     _poolRuthlessSniper,
     _poolSaltRoadQuartermasters,
@@ -1418,6 +1427,7 @@ const shard: CardShard = {
     _poolSevinnesReclamation,
     _poolShadowsOfThePast,
     _poolShalaiAndHallar,
+    _poolShaleskinPlower,
     _poolShamanOfThePack,
     _poolShamanicRevelation,
     _poolShardlessOutlander,

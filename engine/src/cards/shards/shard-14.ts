@@ -71,6 +71,7 @@ import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
 import _poolBloodchiefsThirst from "../pool/bloodchiefs-thirst.js";
+import _poolBloodstokeHowler from "../pool/bloodstoke-howler.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
 import _poolBlossomDryad from "../pool/blossom-dryad.js";
 import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
@@ -613,6 +614,7 @@ import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilumgarAssassin from "../pool/silumgar-assassin.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkeletonShard from "../pool/skeleton-shard.js";
+import _poolSkirkMarauder from "../pool/skirk-marauder.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSkySwallower from "../pool/sky-swallower.js";
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
@@ -861,6 +863,7 @@ const shard: CardShard = {
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
     _poolBloodchiefsThirst,
+    _poolBloodstokeHowler,
     _poolBloodthirstyConqueror,
     _poolBlossomDryad,
     _poolBoltwingMarauder,
@@ -1403,6 +1406,7 @@ const shard: CardShard = {
     _poolSilumgarAssassin,
     _poolSilverRaven,
     _poolSkeletonShard,
+    _poolSkirkMarauder,
     _poolSkithiryxTheBlightDragon,
     _poolSkySwallower,
     _poolSkylineCascade,

@@ -16,6 +16,7 @@ import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAjanisPresence from "../pool/ajanis-presence.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
+import _poolAkromasDevoted from "../pool/akromas-devoted.js";
 import _poolAllyEncampment from "../pool/ally-encampment.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
@@ -135,6 +136,7 @@ import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudhoofKirin from "../pool/cloudhoof-kirin.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
+import _poolCloudreachCavalry from "../pool/cloudreach-cavalry.js";
 import _poolCoercedConfession from "../pool/coerced-confession.js";
 import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
@@ -162,6 +164,7 @@ import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
+import _poolDaruSanctifier from "../pool/daru-sanctifier.js";
 import _poolDavenantTrapper from "../pool/davenant-trapper.js";
 import _poolDawnEvangel from "../pool/dawn-evangel.js";
 import _poolDeathPitsOfRath from "../pool/death-pits-of-rath.js";
@@ -534,6 +537,7 @@ import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
+import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
@@ -609,6 +613,7 @@ import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
 import _poolScentOfBrine from "../pool/scent-of-brine.js";
+import _poolScionOfDarkness from "../pool/scion-of-darkness.js";
 import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
@@ -852,6 +857,7 @@ const shard: CardShard = {
     _poolAirCultElemental,
     _poolAjanisPresence,
     _poolAkkiBattleSquad,
+    _poolAkromasDevoted,
     _poolAllyEncampment,
     _poolAlongTheCrookedWay,
     _poolAlphaMyr,
@@ -971,6 +977,7 @@ const shard: CardShard = {
     _poolCloudElemental,
     _poolCloudhoofKirin,
     _poolCloudkinSeer,
+    _poolCloudreachCavalry,
     _poolCoercedConfession,
     _poolCoercedToKill,
     _poolColossodonYearling,
@@ -998,6 +1005,7 @@ const shard: CardShard = {
     _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
+    _poolDaruSanctifier,
     _poolDavenantTrapper,
     _poolDawnEvangel,
     _poolDeathPitsOfRath,
@@ -1370,6 +1378,7 @@ const shard: CardShard = {
     _poolParasiticStrix,
     _poolParcelbeast,
     _poolPatriarsSeal,
+    _poolPearlShard,
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
@@ -1445,6 +1454,7 @@ const shard: CardShard = {
     _poolScaledBehemoth,
     _poolScavengingOoze,
     _poolScentOfBrine,
+    _poolScionOfDarkness,
     _poolScorchTheFields,
     _poolScornfulAetherLich,
     _poolScrapMastery,

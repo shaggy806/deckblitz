@@ -558,6 +558,7 @@ import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
 import _poolSkarrganSkybreaker from "../pool/skarrgan-skybreaker.js";
+import _poolSkirkOutrider from "../pool/skirk-outrider.js";
 import _poolSkitterEel from "../pool/skitter-eel.js";
 import _poolSkolaGrovedancer from "../pool/skola-grovedancer.js";
 import _poolSkullportMerchant from "../pool/skullport-merchant.js";
@@ -709,6 +710,7 @@ import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVeteranCathar from "../pool/veteran-cathar.js";
 import _poolVeteranWarleader from "../pool/veteran-warleader.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
+import _poolVileDeacon from "../pool/vile-deacon.js";
 import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
@@ -1321,6 +1323,7 @@ const shard: CardShard = {
     _poolSilverbackElder,
     _poolSilverchaseFox,
     _poolSkarrganSkybreaker,
+    _poolSkirkOutrider,
     _poolSkitterEel,
     _poolSkolaGrovedancer,
     _poolSkullportMerchant,
@@ -1472,6 +1475,7 @@ const shard: CardShard = {
     _poolVeteranCathar,
     _poolVeteranWarleader,
     _poolVigorbloomVanguard,
+    _poolVileDeacon,
     _poolVilespawnSpider,
     _poolVirulentEmissary,
     _poolVisceraSeer,

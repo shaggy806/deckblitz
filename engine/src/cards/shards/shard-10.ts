@@ -255,6 +255,7 @@ import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGeistSnatch from "../pool/geist-snatch.js";
+import _poolGempalmAvenger from "../pool/gempalm-avenger.js";
 import _poolGemrazer from "../pool/gemrazer.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
 import _poolGenesisWave from "../pool/genesis-wave.js";
@@ -734,6 +735,7 @@ import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarDance from "../pool/war-dance.js";
 import _poolWarWingSiren from "../pool/war-wing-siren.js";
+import _poolWardSliver from "../pool/ward-sliver.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
     _poolGeistSnatch,
+    _poolGempalmAvenger,
     _poolGemrazer,
     _poolGenerousStray,
     _poolGenesisWave,
@@ -1513,6 +1516,7 @@ const shard: CardShard = {
     _poolWanderingMusicians,
     _poolWarDance,
     _poolWarWingSiren,
+    _poolWardSliver,
     _poolWarhornBlast,
     _poolWarrenInstigator,
     _poolWaterspoutWarden,

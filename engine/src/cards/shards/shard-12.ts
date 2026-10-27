@@ -213,6 +213,7 @@ import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
 import _poolEpochrasite from "../pool/epochrasite.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
+import _poolEssenceSliver from "../pool/essence-sliver.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
@@ -719,6 +720,7 @@ import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWaningWurm from "../pool/waning-wurm.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
+import _poolWarpedResearcher from "../pool/warped-researcher.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterspoutDjinn from "../pool/waterspout-djinn.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
@@ -981,6 +983,7 @@ const shard: CardShard = {
     _poolEpochrasite,
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
+    _poolEssenceSliver,
     _poolEtchedHostDoombringer,
     _poolEverdream,
     _poolEverflameEidolon,
@@ -1487,6 +1490,7 @@ const shard: CardShard = {
     _poolWanderingMind,
     _poolWaningWurm,
     _poolWarMammoth,
+    _poolWarpedResearcher,
     _poolWasteland,
     _poolWaterspoutDjinn,
     _poolWaterwindScout,

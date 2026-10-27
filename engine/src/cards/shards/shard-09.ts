@@ -240,6 +240,7 @@ import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFourthBridgeProwler from "../pool/fourth-bridge-prowler.js";
 import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
 import _poolFreelanceMuscle from "../pool/freelance-muscle.js";
+import _poolFreneticRaptor from "../pool/frenetic-raptor.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFungusaur from "../pool/fungusaur.js";
@@ -254,6 +255,7 @@ import _poolGarruksCompanion from "../pool/garruks-companion.js";
 import _poolGasGuzzler from "../pool/gas-guzzler.js";
 import _poolGearsmithProdigy from "../pool/gearsmith-prodigy.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
+import _poolGempalmStrider from "../pool/gempalm-strider.js";
 import _poolGethThaneOfContracts from "../pool/geth-thane-of-contracts.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
@@ -1033,6 +1035,7 @@ const shard: CardShard = {
     _poolFourthBridgeProwler,
     _poolFranticFirebolt,
     _poolFreelanceMuscle,
+    _poolFreneticRaptor,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
     _poolFungusaur,
@@ -1047,6 +1050,7 @@ const shard: CardShard = {
     _poolGasGuzzler,
     _poolGearsmithProdigy,
     _poolGeistOfTheMoors,
+    _poolGempalmStrider,
     _poolGethThaneOfContracts,
     _poolGiantBadger,
     _poolGiantKiller,

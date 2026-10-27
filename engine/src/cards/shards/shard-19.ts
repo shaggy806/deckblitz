@@ -143,6 +143,7 @@ import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolControlOfTheCourt from "../pool/control-of-the-court.js";
 import _poolCoralSword from "../pool/coral-sword.js";
+import _poolCorpseHarvester from "../pool/corpse-harvester.js";
 import _poolCorpseweft from "../pool/corpseweft.js";
 import _poolCorruptedZendikon from "../pool/corrupted-zendikon.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
@@ -300,6 +301,7 @@ import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
+import _poolGoblinLookout from "../pool/goblin-lookout.js";
 import _poolGoblinRimerunner from "../pool/goblin-rimerunner.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
@@ -964,6 +966,7 @@ const shard: CardShard = {
     _poolContractKilling,
     _poolControlOfTheCourt,
     _poolCoralSword,
+    _poolCorpseHarvester,
     _poolCorpseweft,
     _poolCorruptedZendikon,
     _poolCourageousGoblin,
@@ -1121,6 +1124,7 @@ const shard: CardShard = {
     _poolGlistenerElf,
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
+    _poolGoblinLookout,
     _poolGoblinRimerunner,
     _poolGoldenhideOx,
     _poolGoldmeadowLookout,

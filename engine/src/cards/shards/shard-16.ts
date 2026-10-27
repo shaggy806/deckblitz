@@ -322,6 +322,7 @@ import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
 import _poolIllusionaryWall from "../pool/illusionary-wall.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
+import _poolImperialHellkite from "../pool/imperial-hellkite.js";
 import _poolImperialMoth from "../pool/imperial-moth.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIncubationIncongruity from "../pool/incubation-incongruity.js";
@@ -450,6 +451,7 @@ import _poolNefaroxOverlordOfGrixis from "../pool/nefarox-overlord-of-grixis.js"
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
 import _poolNessianWanderer from "../pool/nessian-wanderer.js";
 import _poolNestingDragon from "../pool/nesting-dragon.js";
+import _poolNeurokFamiliar from "../pool/neurok-familiar.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNightDealings from "../pool/night-dealings.js";
@@ -709,6 +711,7 @@ import _poolTradingPost from "../pool/trading-post.js";
 import _poolTragicFall from "../pool/tragic-fall.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTrialOfKnowledge from "../pool/trial-of-knowledge.js";
+import _poolTribalForcemage from "../pool/tribal-forcemage.js";
 import _poolTrigonOfRage from "../pool/trigon-of-rage.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
@@ -790,6 +793,7 @@ import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWindsOfQalSisma from "../pool/winds-of-qal-sisma.js";
 import _poolWingCommando from "../pool/wing-commando.js";
+import _poolWingbeatWarrior from "../pool/wingbeat-warrior.js";
 import _poolWintersRest from "../pool/winters-rest.js";
 import _poolWitchsWeb from "../pool/witchs-web.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
@@ -1152,6 +1156,7 @@ const shard: CardShard = {
     _poolIkraShidiqiTheUsurper,
     _poolIllusionaryWall,
     _poolImmolatingSouleater,
+    _poolImperialHellkite,
     _poolImperialMoth,
     _poolImperiousInkmage,
     _poolIncubationIncongruity,
@@ -1280,6 +1285,7 @@ const shard: CardShard = {
     _poolNellyBorcaImpulsiveAccuser,
     _poolNessianWanderer,
     _poolNestingDragon,
+    _poolNeurokFamiliar,
     _poolNiblisOfDusk,
     _poolNightClubber,
     _poolNightDealings,
@@ -1539,6 +1545,7 @@ const shard: CardShard = {
     _poolTragicFall,
     _poolTreeOfPerdition,
     _poolTrialOfKnowledge,
+    _poolTribalForcemage,
     _poolTrigonOfRage,
     _poolTriplicateTitan,
     _poolTroopOfPonies,
@@ -1620,6 +1627,7 @@ const shard: CardShard = {
     _poolWillOfTheTemur,
     _poolWindsOfQalSisma,
     _poolWingCommando,
+    _poolWingbeatWarrior,
     _poolWintersRest,
     _poolWitchsWeb,
     _poolWitheringBoon,

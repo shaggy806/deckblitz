@@ -178,6 +178,7 @@ import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDreadshipReef from "../pool/dreadship-reef.js";
 import _poolDreamFighter from "../pool/dream-fighter.js";
+import _poolDrinkerOfSorrow from "../pool/drinker-of-sorrow.js";
 import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
@@ -267,6 +268,7 @@ import _poolGoBlank from "../pool/go-blank.js";
 import _poolGoblinAssault from "../pool/goblin-assault.js";
 import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
+import _poolGoblinDirigible from "../pool/goblin-dirigible.js";
 import _poolGoblinGrappler from "../pool/goblin-grappler.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
@@ -627,6 +629,7 @@ import _poolTapestryOfTheAges from "../pool/tapestry-of-the-ages.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
+import _poolTelJiladChosen from "../pool/tel-jilad-chosen.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
@@ -725,6 +728,7 @@ import _poolWhirlpoolRider from "../pool/whirlpool-rider.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
+import _poolWillbender from "../pool/willbender.js";
 import _poolWithercrown from "../pool/withercrown.js";
 import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
 import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
@@ -938,6 +942,7 @@ const shard: CardShard = {
     _poolDranasChosen,
     _poolDreadshipReef,
     _poolDreamFighter,
+    _poolDrinkerOfSorrow,
     _poolDrogskolInfantry,
     _poolDuress,
     _poolDuskLegionZealot,
@@ -1027,6 +1032,7 @@ const shard: CardShard = {
     _poolGoblinAssault,
     _poolGoblinBlastRunner,
     _poolGoblinChampion,
+    _poolGoblinDirigible,
     _poolGoblinGrappler,
     _poolGoblinKing,
     _poolGoblinLackey,
@@ -1387,6 +1393,7 @@ const shard: CardShard = {
     _poolTarkirDuneshaper,
     _poolTeamTactics,
     _poolTeferisWavecaster,
+    _poolTelJiladChosen,
     _poolTemporalCleansing,
     _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,
@@ -1485,6 +1492,7 @@ const shard: CardShard = {
     _poolWhiskerquillScribe,
     _poolWhiteDragon,
     _poolWillOfTheSultai,
+    _poolWillbender,
     _poolWithercrown,
     _poolWolfbittenCaptive,
     _poolWoodlandGuidance,

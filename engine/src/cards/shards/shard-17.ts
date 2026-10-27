@@ -248,6 +248,7 @@ import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
+import _poolGempalmSorcerer from "../pool/gempalm-sorcerer.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
@@ -278,6 +279,7 @@ import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
+import _poolGroffskithur from "../pool/groffskithur.js";
 import _poolGrotagSiegeRunner from "../pool/grotag-siege-runner.js";
 import _poolGroundRift from "../pool/ground-rift.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
@@ -389,6 +391,7 @@ import _poolMaelstromWanderer from "../pool/maelstrom-wanderer.js";
 import _poolMagdaBrazenOutlaw from "../pool/magda-brazen-outlaw.js";
 import _poolMagmaJet from "../pool/magma-jet.js";
 import _poolMagmaOpus from "../pool/magma-opus.js";
+import _poolMagmaSliver from "../pool/magma-sliver.js";
 import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMapTheWastes from "../pool/map-the-wastes.js";
@@ -1028,6 +1031,7 @@ const shard: CardShard = {
     _poolGavonyTrapper,
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
+    _poolGempalmSorcerer,
     _poolGenesisHydra,
     _poolGerrardsVerdict,
     _poolGhostLitWarder,
@@ -1058,6 +1062,7 @@ const shard: CardShard = {
     _poolGrimBounty,
     _poolGrimReapersSprint,
     _poolGrizzlyGhoul,
+    _poolGroffskithur,
     _poolGrotagSiegeRunner,
     _poolGroundRift,
     _poolGroundchuckDirtbag,
@@ -1169,6 +1174,7 @@ const shard: CardShard = {
     _poolMagdaBrazenOutlaw,
     _poolMagmaJet,
     _poolMagmaOpus,
+    _poolMagmaSliver,
     _poolMagmaticSprinter,
     _poolManamorphose,
     _poolMapTheWastes,

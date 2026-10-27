@@ -634,6 +634,7 @@ import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpawningGrounds from "../pool/spawning-grounds.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
 import _poolSpectralGuardian from "../pool/spectral-guardian.js";
+import _poolSpectralSliver from "../pool/spectral-sliver.js";
 import _poolSpellContortion from "../pool/spell-contortion.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolSpawningGrounds,
     _poolSpeakSecrets,
     _poolSpectralGuardian,
+    _poolSpectralSliver,
     _poolSpellContortion,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,

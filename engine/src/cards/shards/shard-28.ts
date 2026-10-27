@@ -263,12 +263,15 @@ import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
 import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
+import _poolGlowrider from "../pool/glowrider.js";
 import _poolGluttonousCyclops from "../pool/gluttonous-cyclops.js";
 import _poolGnarledGrovestrider from "../pool/gnarled-grovestrider.js";
 import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
+import _poolGoblinFirebug from "../pool/goblin-firebug.js";
 import _poolGoblinMarshal from "../pool/goblin-marshal.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
+import _poolGoblinWarWagon from "../pool/goblin-war-wagon.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
 import _poolGodsire from "../pool/godsire.js";
 import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
@@ -776,6 +779,7 @@ import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWrenchMind from "../pool/wrench-mind.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolWurmsTooth from "../pool/wurms-tooth.js";
+import _poolWurmskinForger from "../pool/wurmskin-forger.js";
 import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
@@ -1067,12 +1071,15 @@ const shard: CardShard = {
     _poolGlasswingGrace,
     _poolGlidediveDuo,
     _poolGlorifierOfSuffering,
+    _poolGlowrider,
     _poolGluttonousCyclops,
     _poolGnarledGrovestrider,
     _poolGnarlwoodDryad,
     _poolGoblinArtillery,
+    _poolGoblinFirebug,
     _poolGoblinMarshal,
     _poolGoblinWarPaint,
+    _poolGoblinWarWagon,
     _poolGodEternalRhonas,
     _poolGodsire,
     _poolGreenSunsZenith,
@@ -1580,6 +1587,7 @@ const shard: CardShard = {
     _poolWrenchMind,
     _poolWritOfReturn,
     _poolWurmsTooth,
+    _poolWurmskinForger,
     _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,

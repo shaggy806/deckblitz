@@ -64,6 +64,7 @@ import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackCat from "../pool/black-cat.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
+import _poolBladeSliver from "../pool/blade-sliver.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
@@ -639,6 +640,7 @@ import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunriseSovereign from "../pool/sunrise-sovereign.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
+import _poolSunstrikeLegionnaire from "../pool/sunstrike-legionnaire.js";
 import _poolSwarmOfRats from "../pool/swarm-of-rats.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
@@ -860,6 +862,7 @@ const shard: CardShard = {
     _poolBlackCat,
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
+    _poolBladeSliver,
     _poolBladewingTheRisen,
     _poolBleakCovenVampires,
     _poolBlindObedience,
@@ -1435,6 +1438,7 @@ const shard: CardShard = {
     _poolSunpetalGrove,
     _poolSunriseSovereign,
     _poolSunscorchRegent,
+    _poolSunstrikeLegionnaire,
     _poolSwarmOfRats,
     _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,

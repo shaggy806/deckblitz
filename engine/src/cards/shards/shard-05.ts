@@ -175,6 +175,7 @@ import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
 import _poolDeathRattle from "../pool/death-rattle.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
+import _poolDeathmarkPrelate from "../pool/deathmark-prelate.js";
 import _poolDeathrender from "../pool/deathrender.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
@@ -943,6 +944,7 @@ const shard: CardShard = {
     _poolDealGoneBad,
     _poolDeathRattle,
     _poolDeathgrip,
+    _poolDeathmarkPrelate,
     _poolDeathrender,
     _poolDeeprootWarrior,
     _poolDefiantElf,

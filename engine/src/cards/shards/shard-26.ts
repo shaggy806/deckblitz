@@ -361,6 +361,7 @@ import _poolKingMacarTheGoldCursed from "../pool/king-macar-the-gold-cursed.js";
 import _poolKitnap from "../pool/kitnap.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
+import _poolKrosanCloudscraper from "../pool/krosan-cloudscraper.js";
 import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
 import _poolLeafCrownedElder from "../pool/leaf-crowned-elder.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
@@ -633,6 +634,7 @@ import _poolStensiaMasquerade from "../pool/stensia-masquerade.js";
 import _poolStifle from "../pool/stifle.js";
 import _poolStingerflingSpider from "../pool/stingerfling-spider.js";
 import _poolStockUp from "../pool/stock-up.js";
+import _poolStoicChampion from "../pool/stoic-champion.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
@@ -1138,6 +1140,7 @@ const shard: CardShard = {
     _poolKitnap,
     _poolKnife,
     _poolKnightsOfDolAmroth,
+    _poolKrosanCloudscraper,
     _poolKyodaiSoulOfKamigawa,
     _poolLeafCrownedElder,
     _poolLegacyWeapon,
@@ -1410,6 +1413,7 @@ const shard: CardShard = {
     _poolStifle,
     _poolStingerflingSpider,
     _poolStockUp,
+    _poolStoicChampion,
     _poolStoneOfErech,
     _poolStormboundGeist,
     _poolStrokeOfMidnight,

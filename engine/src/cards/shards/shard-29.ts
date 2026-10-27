@@ -399,6 +399,7 @@ import _poolMinamoScrollkeeper from "../pool/minamo-scrollkeeper.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
+import _poolMistformSliver from "../pool/mistform-sliver.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistmeadowSkulk from "../pool/mistmeadow-skulk.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
@@ -481,6 +482,7 @@ import _poolPreysVengeance from "../pool/preys-vengeance.js";
 import _poolPricklyMarmoset from "../pool/prickly-marmoset.js";
 import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
 import _poolPrimalCocoon from "../pool/primal-cocoon.js";
+import _poolPrimalWhisperer from "../pool/primal-whisperer.js";
 import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
@@ -599,6 +601,7 @@ import _poolSneakAttack from "../pool/sneak-attack.js";
 import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
+import _poolSoldierReplica from "../pool/soldier-replica.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
 import _poolSoulNet from "../pool/soul-net.js";
 import _poolSoulRend from "../pool/soul-rend.js";
@@ -1185,6 +1188,7 @@ const shard: CardShard = {
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,
     _poolMistLeopard,
+    _poolMistformSliver,
     _poolMisthiossFury,
     _poolMistmeadowSkulk,
     _poolMistvaultBridge,
@@ -1267,6 +1271,7 @@ const shard: CardShard = {
     _poolPricklyMarmoset,
     _poolPriestOfAncientLore,
     _poolPrimalCocoon,
+    _poolPrimalWhisperer,
     _poolPrizedUnicorn,
     _poolProsperousPartnership,
     _poolProudPackRhino,
@@ -1385,6 +1390,7 @@ const shard: CardShard = {
     _poolSnoopingPage,
     _poolSnortingGahr,
     _poolSolarTransformer,
+    _poolSoldierReplica,
     _poolSonicScrewdriver,
     _poolSoulNet,
     _poolSoulRend,

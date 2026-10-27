@@ -249,6 +249,7 @@ import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
+import _poolGempalmPolluter from "../pool/gempalm-polluter.js";
 import _poolGenjuOfTheFields from "../pool/genju-of-the-fields.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
@@ -464,6 +465,7 @@ import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
+import _poolPatronOfTheWild from "../pool/patron-of-the-wild.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
 import _poolPestermite from "../pool/pestermite.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
@@ -728,6 +730,7 @@ import _poolVerdantKraken from "../pool/verdant-kraken.js";
 import _poolVerdurousGearhulk from "../pool/verdurous-gearhulk.js";
 import _poolVertigo from "../pool/vertigo.js";
 import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
+import _poolVexingBeetle from "../pool/vexing-beetle.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
 import _poolVirulentSliver from "../pool/virulent-sliver.js";
@@ -1027,6 +1030,7 @@ const shard: CardShard = {
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
     _poolGarzasAssassin,
+    _poolGempalmPolluter,
     _poolGenjuOfTheFields,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
@@ -1242,6 +1246,7 @@ const shard: CardShard = {
     _poolPainfulQuandary,
     _poolParkHeightsMaverick,
     _poolPassengerFerry,
+    _poolPatronOfTheWild,
     _poolPerigeeBeckoner,
     _poolPestermite,
     _poolPhlageTitanOfFiresFury,
@@ -1506,6 +1511,7 @@ const shard: CardShard = {
     _poolVerdurousGearhulk,
     _poolVertigo,
     _poolVeteransPowerblade,
+    _poolVexingBeetle,
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,
     _poolVirulentSliver,

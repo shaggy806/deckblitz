@@ -21,6 +21,7 @@ import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
 import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolAnoint from "../pool/anoint.js";
+import _poolAphettoExterminator from "../pool/aphetto-exterminator.js";
 import _poolArmWithAether from "../pool/arm-with-aether.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
@@ -252,7 +253,9 @@ import _poolGlintHawk from "../pool/glint-hawk.js";
 import _poolGlyphElemental from "../pool/glyph-elemental.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
+import _poolGoblinClearcutter from "../pool/goblin-clearcutter.js";
 import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
+import _poolGoblinDynamo from "../pool/goblin-dynamo.js";
 import _poolGoblinOutlander from "../pool/goblin-outlander.js";
 import _poolGoblinPiledriver from "../pool/goblin-piledriver.js";
 import _poolGoblinSpelunkers from "../pool/goblin-spelunkers.js";
@@ -466,6 +469,7 @@ import _poolPillarTombsOfAku from "../pool/pillar-tombs-of-aku.js";
 import _poolPineBarrens from "../pool/pine-barrens.js";
 import _poolPlanarGate from "../pool/planar-gate.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
+import _poolPlatedSliver from "../pool/plated-sliver.js";
 import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
@@ -574,6 +578,7 @@ import _poolSigiledSkink from "../pool/sigiled-skink.js";
 import _poolSimicManipulator from "../pool/simic-manipulator.js";
 import _poolSisterHospitaller from "../pool/sister-hospitaller.js";
 import _poolSkilledAnimator from "../pool/skilled-animator.js";
+import _poolSkinthinner from "../pool/skinthinner.js";
 import _poolSkirkRidgeExhumer from "../pool/skirk-ridge-exhumer.js";
 import _poolSkitteringSkirge from "../pool/skittering-skirge.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
@@ -720,6 +725,7 @@ import _poolVitalizingWind from "../pool/vitalizing-wind.js";
 import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
+import _poolVoidmageApprentice from "../pool/voidmage-apprentice.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
 import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
 import _poolWalkerOfTheGrove from "../pool/walker-of-the-grove.js";
@@ -796,6 +802,7 @@ const shard: CardShard = {
     _poolAnimateWall,
     _poolAnkleBiter,
     _poolAnoint,
+    _poolAphettoExterminator,
     _poolArmWithAether,
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
@@ -1027,7 +1034,9 @@ const shard: CardShard = {
     _poolGlyphElemental,
     _poolGoForBlood,
     _poolGoblinAnarchomancer,
+    _poolGoblinClearcutter,
     _poolGoblinDeathraiders,
+    _poolGoblinDynamo,
     _poolGoblinOutlander,
     _poolGoblinPiledriver,
     _poolGoblinSpelunkers,
@@ -1241,6 +1250,7 @@ const shard: CardShard = {
     _poolPineBarrens,
     _poolPlanarGate,
     _poolPlatedGeopede,
+    _poolPlatedSliver,
     _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
     _poolPowerstoneEngineer,
@@ -1349,6 +1359,7 @@ const shard: CardShard = {
     _poolSimicManipulator,
     _poolSisterHospitaller,
     _poolSkilledAnimator,
+    _poolSkinthinner,
     _poolSkirkRidgeExhumer,
     _poolSkitteringSkirge,
     _poolSkyTerror,
@@ -1495,6 +1506,7 @@ const shard: CardShard = {
     _poolVivienOfTheArkbow,
     _poolVoiceOfTheProvinces,
     _poolVoiceOfVictory,
+    _poolVoidmageApprentice,
     _poolVoltaicServant,
     _poolWakeTheReflections,
     _poolWalkerOfTheGrove,

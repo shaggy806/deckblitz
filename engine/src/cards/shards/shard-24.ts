@@ -424,6 +424,7 @@ import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObliteratingBolt from "../pool/obliterating-bolt.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolObsidianFireheart from "../pool/obsidian-fireheart.js";
+import _poolOgreLeadfoot from "../pool/ogre-leadfoot.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
 import _poolOjutaisCommand from "../pool/ojutais-command.js";
@@ -492,6 +493,7 @@ import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
+import _poolRiptideDirector from "../pool/riptide-director.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
 import _poolRiversGrasp from "../pool/rivers-grasp.js";
 import _poolRoadRage from "../pool/road-rage.js";
@@ -715,6 +717,7 @@ import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
 import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
 import _poolWakerOfTheWilds from "../pool/waker-of-the-wilds.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
+import _poolWallOfHope from "../pool/wall-of-hope.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWanderlust from "../pool/wanderlust.js";
 import _poolWarRoom from "../pool/war-room.js";
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolObliteratingBolt,
     _poolObscuraStorefront,
     _poolObsidianFireheart,
+    _poolOgreLeadfoot,
     _poolOgreSlumlord,
     _poolOgreWarrior,
     _poolOjutaisCommand,
@@ -1268,6 +1272,7 @@ const shard: CardShard = {
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,
     _poolRikuOfManyPaths,
+    _poolRiptideDirector,
     _poolRisenSanctuary,
     _poolRiversGrasp,
     _poolRoadRage,
@@ -1491,6 +1496,7 @@ const shard: CardShard = {
     _poolWakeningSunsAvatar,
     _poolWakerOfTheWilds,
     _poolWalkingBulwark,
+    _poolWallOfHope,
     _poolWallOfSpears,
     _poolWanderlust,
     _poolWarRoom,

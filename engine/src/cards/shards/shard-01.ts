@@ -420,6 +420,7 @@ import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNight from "../pool/night.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
+import _poolNimShambler from "../pool/nim-shambler.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
 import _poolNoEscape from "../pool/no-escape.js";
@@ -512,6 +513,7 @@ import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
 import _poolRusticClachan from "../pool/rustic-clachan.js";
+import _poolRustmouthOgre from "../pool/rustmouth-ogre.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
 import _poolSacredCat from "../pool/sacred-cat.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
@@ -1179,6 +1181,7 @@ const shard: CardShard = {
     _poolNestingGrounds,
     _poolNight,
     _poolNightscapeMaster,
+    _poolNimShambler,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
     _poolNoEscape,
@@ -1271,6 +1274,7 @@ const shard: CardShard = {
     _poolRowansBattleguard,
     _poolRummagingWizard,
     _poolRusticClachan,
+    _poolRustmouthOgre,
     _poolRuthlessDeathfang,
     _poolSacredCat,
     _poolSakashimaOfAThousandFaces,
