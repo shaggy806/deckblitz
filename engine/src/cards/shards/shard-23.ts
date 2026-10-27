@@ -38,6 +38,7 @@ import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAshenSkinZubera from "../pool/ashen-skin-zubera.js";
 import _poolAspectOfMongoose from "../pool/aspect-of-mongoose.js";
+import _poolAstralSlide from "../pool/astral-slide.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAttuneWithAether from "../pool/attune-with-aether.js";
@@ -212,6 +213,7 @@ import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
+import _poolEntrailsFeaster from "../pool/entrails-feaster.js";
 import _poolEquilibrium from "../pool/equilibrium.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
 import _poolEtherealGuidance from "../pool/ethereal-guidance.js";
@@ -583,6 +585,7 @@ import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
 import _poolShamanEnKor from "../pool/shaman-en-kor.js";
 import _poolShamanOfTheGreatHunt from "../pool/shaman-of-the-great-hunt.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
+import _poolSharedTriumph from "../pool/shared-triumph.js";
 import _poolShatteredCrypt from "../pool/shattered-crypt.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
@@ -833,6 +836,7 @@ const shard: CardShard = {
     _poolArrestersZeal,
     _poolAshenSkinZubera,
     _poolAspectOfMongoose,
+    _poolAstralSlide,
     _poolAtlasSizableStooge,
     _poolAttercop,
     _poolAttuneWithAether,
@@ -1007,6 +1011,7 @@ const shard: CardShard = {
     _poolEndlessObedience,
     _poolEnfeeblement,
     _poolEnthusiasticMechanaut,
+    _poolEntrailsFeaster,
     _poolEquilibrium,
     _poolErtaiTheCorrupted,
     _poolEtherealGuidance,
@@ -1378,6 +1383,7 @@ const shard: CardShard = {
     _poolShamanEnKor,
     _poolShamanOfTheGreatHunt,
     _poolShamblingGhast,
+    _poolSharedTriumph,
     _poolShatteredCrypt,
     _poolShatterstorm,
     _poolShelteringLandscape,

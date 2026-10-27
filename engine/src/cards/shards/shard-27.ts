@@ -217,6 +217,7 @@ import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFatalBlow from "../pool/fatal-blow.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
+import _poolFeedingFrenzy from "../pool/feeding-frenzy.js";
 import _poolFelhideBrawler from "../pool/felhide-brawler.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
@@ -725,6 +726,7 @@ import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
+import _poolVoiceOfTheWoods from "../pool/voice-of-the-woods.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
 import _poolVoraciousReader from "../pool/voracious-reader.js";
@@ -738,6 +740,7 @@ import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
 import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
+import _poolWeirdHarvest from "../pool/weird-harvest.js";
 import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
@@ -992,6 +995,7 @@ const shard: CardShard = {
     _poolFalseDefeat,
     _poolFatalBlow,
     _poolFatalGrudge,
+    _poolFeedingFrenzy,
     _poolFelhideBrawler,
     _poolFellMire,
     _poolFeralInvocation,
@@ -1500,6 +1504,7 @@ const shard: CardShard = {
     _poolVirulentEmissary,
     _poolVisceraSeer,
     _poolVodalianMerchant,
+    _poolVoiceOfTheWoods,
     _poolVolcanicFissure,
     _poolVolcanicSalvo,
     _poolVoraciousReader,
@@ -1513,6 +1518,7 @@ const shard: CardShard = {
     _poolWayOfTheWarlord,
     _poolWaywardServant,
     _poolWeatheredSentinels,
+    _poolWeirdHarvest,
     _poolWillowGeist,
     _poolWillowduskEssenceSeer,
     _poolWitheringTorment,

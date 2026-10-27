@@ -403,6 +403,7 @@ import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMinamoScrollkeeper from "../pool/minamo-scrollkeeper.js";
+import _poolMiseryCharm from "../pool/misery-charm.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
@@ -632,6 +633,7 @@ import _poolSporeFlower from "../pool/spore-flower.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
 import _poolSqueakingPieGrubfellows from "../pool/squeaking-pie-grubfellows.js";
 import _poolStaffOfTheFlameMagus from "../pool/staff-of-the-flame-magus.js";
+import _poolStagBeetle from "../pool/stag-beetle.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
 import _poolStationMonitor from "../pool/station-monitor.js";
@@ -719,6 +721,7 @@ import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUnderworldCharger from "../pool/underworld-charger.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
+import _poolUnifiedStrike from "../pool/unified-strike.js";
 import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolMightstone,
     _poolMightstonesAnimation,
     _poolMinamoScrollkeeper,
+    _poolMiseryCharm,
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,
     _poolMistLeopard,
@@ -1433,6 +1437,7 @@ const shard: CardShard = {
     _poolSpottedGriffin,
     _poolSqueakingPieGrubfellows,
     _poolStaffOfTheFlameMagus,
+    _poolStagBeetle,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,
     _poolStationMonitor,
@@ -1520,6 +1525,7 @@ const shard: CardShard = {
     _poolUnderworldCharger,
     _poolUndulatingWitness,
     _poolUnholyAnnexRitualChamber,
+    _poolUnifiedStrike,
     _poolUnsettlingTwins,
     _poolUnsparingBoltcaster,
     _poolUnstoppableOgre,

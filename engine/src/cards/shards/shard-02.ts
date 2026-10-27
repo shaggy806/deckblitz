@@ -191,6 +191,7 @@ import _poolDranaKalastriaBloodchief from "../pool/drana-kalastria-bloodchief.js
 import _poolDraugrsHelm from "../pool/draugrs-helm.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
 import _poolDreadWarlock from "../pool/dread-warlock.js";
+import _poolDreamChisel from "../pool/dream-chisel.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
@@ -523,6 +524,7 @@ import _poolResistanceSquad from "../pool/resistance-squad.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
 import _poolRevolutionist from "../pool/revolutionist.js";
+import _poolRighteousCause from "../pool/righteous-cause.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
@@ -533,6 +535,7 @@ import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js
 import _poolRookieMistake from "../pool/rookie-mistake.js";
 import _poolRoots from "../pool/roots.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
+import _poolRotlungReanimator from "../pool/rotlung-reanimator.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRuinRaider from "../pool/ruin-raider.js";
 import _poolRukhEgg from "../pool/rukh-egg.js";
@@ -964,6 +967,7 @@ const shard: CardShard = {
     _poolDraugrsHelm,
     _poolDreadReaper,
     _poolDreadWarlock,
+    _poolDreamChisel,
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
@@ -1296,6 +1300,7 @@ const shard: CardShard = {
     _poolRestorationAngel,
     _poolReverberate,
     _poolRevolutionist,
+    _poolRighteousCause,
     _poolRigoStreetwiseMentor,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,
@@ -1306,6 +1311,7 @@ const shard: CardShard = {
     _poolRookieMistake,
     _poolRoots,
     _poolRootwaterCommando,
+    _poolRotlungReanimator,
     _poolRoughRhinoCavalry,
     _poolRuinRaider,
     _poolRukhEgg,

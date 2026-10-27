@@ -376,6 +376,7 @@ import _poolLifetap from "../pool/lifetap.js";
 import _poolLiftedByClouds from "../pool/lifted-by-clouds.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLightningMare from "../pool/lightning-mare.js";
+import _poolLightningRift from "../pool/lightning-rift.js";
 import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLoseFocus from "../pool/lose-focus.js";
@@ -407,6 +408,7 @@ import _poolMireBlight from "../pool/mire-blight.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
+import _poolMobilization from "../pool/mobilization.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
 import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
@@ -515,6 +517,7 @@ import _poolRelicAxe from "../pool/relic-axe.js";
 import _poolRelicBane from "../pool/relic-bane.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
+import _poolReminisce from "../pool/reminisce.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
@@ -742,6 +745,7 @@ import _poolVineSnare from "../pool/vine-snare.js";
 import _poolViridianHarvest from "../pool/viridian-harvest.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
+import _poolVitalityCharm from "../pool/vitality-charm.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
@@ -1179,6 +1183,7 @@ const shard: CardShard = {
     _poolLiftedByClouds,
     _poolLightningAngel,
     _poolLightningMare,
+    _poolLightningRift,
     _poolLlanowarEmpath,
     _poolLluwenExchangeStudent,
     _poolLoseFocus,
@@ -1210,6 +1215,7 @@ const shard: CardShard = {
     _poolMirrormereGuardian,
     _poolMjolnirsMight,
     _poolMoatPiranhas,
+    _poolMobilization,
     _poolMoltenRavager,
     _poolMoltenTailMasticore,
     _poolMongooseLizard,
@@ -1318,6 +1324,7 @@ const shard: CardShard = {
     _poolRelicBane,
     _poolReliquaryMonk,
     _poolReliquaryTower,
+    _poolReminisce,
     _poolRenownedWeaponsmith,
     _poolReset,
     _poolRestlessFortress,
@@ -1545,6 +1552,7 @@ const shard: CardShard = {
     _poolViridianHarvest,
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
+    _poolVitalityCharm,
     _poolVizierOfTheTrue,
     _poolVodalianIllusionist,
     _poolVodalianWaveKnight,

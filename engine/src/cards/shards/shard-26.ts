@@ -59,6 +59,7 @@ import _poolAugurOfSkulls from "../pool/augur-of-skulls.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
+import _poolAvenBrigadier from "../pool/aven-brigadier.js";
 import _poolAvenWarhawk from "../pool/aven-warhawk.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAwakening from "../pool/awakening.js";
@@ -165,6 +166,7 @@ import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
 import _poolDiscipleOfTheSun from "../pool/disciple-of-the-sun.js";
+import _poolDiscombobulate from "../pool/discombobulate.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
@@ -844,6 +846,7 @@ const shard: CardShard = {
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
     _poolAvariceAmulet,
+    _poolAvenBrigadier,
     _poolAvenWarhawk,
     _poolAwakenTheInferno,
     _poolAwakening,
@@ -950,6 +953,7 @@ const shard: CardShard = {
     _poolDinaEssenceBrewer,
     _poolDireMimic,
     _poolDiscipleOfTheSun,
+    _poolDiscombobulate,
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,

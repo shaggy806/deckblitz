@@ -183,6 +183,7 @@ import _poolDogUmbra from "../pool/dog-umbra.js";
 import _poolDomineer from "../pool/domineer.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
+import _poolDoubtlessOne from "../pool/doubtless-one.js";
 import _poolDownsize from "../pool/downsize.js";
 import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolDomineer,
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
+    _poolDoubtlessOne,
     _poolDownsize,
     _poolDragonBreath,
     _poolDragonHatchling,

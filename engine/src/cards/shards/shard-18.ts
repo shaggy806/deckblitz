@@ -113,6 +113,7 @@ import _poolCommandBeacon from "../pool/command-beacon.js";
 import _poolCommenceTheEndgame from "../pool/commence-the-endgame.js";
 import _poolCommodoreGuff from "../pool/commodore-guff.js";
 import _poolCompanionOfTheTrials from "../pool/companion-of-the-trials.js";
+import _poolComplicate from "../pool/complicate.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
 import _poolConquerorsPledge from "../pool/conquerors-pledge.js";
@@ -212,6 +213,7 @@ import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFenStalker from "../pool/fen-stalker.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
+import _poolFeverCharm from "../pool/fever-charm.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFinish from "../pool/finish.js";
@@ -268,6 +270,7 @@ import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
+import _poolGustcloakSavior from "../pool/gustcloak-savior.js";
 import _poolHall from "../pool/hall.js";
 import _poolHammerOfRuin from "../pool/hammer-of-ruin.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
@@ -898,6 +901,7 @@ const shard: CardShard = {
     _poolCommenceTheEndgame,
     _poolCommodoreGuff,
     _poolCompanionOfTheTrials,
+    _poolComplicate,
     _poolCongregate,
     _poolConquerorsFoothold,
     _poolConquerorsPledge,
@@ -997,6 +1001,7 @@ const shard: CardShard = {
     _poolFellSpecter,
     _poolFenStalker,
     _poolFeralMaaka,
+    _poolFeverCharm,
     _poolFierceRetribution,
     _poolFinaleOfGlory,
     _poolFinish,
@@ -1053,6 +1058,7 @@ const shard: CardShard = {
     _poolGroundlingPouncer,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
+    _poolGustcloakSavior,
     _poolHall,
     _poolHammerOfRuin,
     _poolHamzaGuardianOfArashin,

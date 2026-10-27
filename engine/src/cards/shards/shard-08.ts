@@ -513,6 +513,7 @@ import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPressForAnswers from "../pool/press-for-answers.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
+import _poolProfanePrayers from "../pool/profane-prayers.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolPreemptiveStrike,
     _poolPressForAnswers,
     _poolPrimalDruid,
+    _poolProfanePrayers,
     _poolProfessionalWrestler,
     _poolProfessorsWarning,
     _poolProfoundJourney,

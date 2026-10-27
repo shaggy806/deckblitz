@@ -565,6 +565,7 @@ import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
 import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
+import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
@@ -579,6 +580,7 @@ import _poolSkirkDrillSergeant from "../pool/skirk-drill-sergeant.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
 import _poolSkycoachWaypoint from "../pool/skycoach-waypoint.js";
 import _poolSleepingPotion from "../pool/sleeping-potion.js";
+import _poolSliceAndDice from "../pool/slice-and-dice.js";
 import _poolSliverOverlord from "../pool/sliver-overlord.js";
 import _poolSlumReaper from "../pool/slum-reaper.js";
 import _poolSmiteTheDeathless from "../pool/smite-the-deathless.js";
@@ -719,6 +721,7 @@ import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
 import _poolWingedPortent from "../pool/winged-portent.js";
+import _poolWirewoodPride from "../pool/wirewood-pride.js";
 import _poolWistfulThinking from "../pool/wistful-thinking.js";
 import _poolWitchsMist from "../pool/witchs-mist.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
@@ -1324,6 +1327,7 @@ const shard: CardShard = {
     _poolSerraRedeemer,
     _poolServantOfVolrath,
     _poolSethronHurloonGeneral,
+    _poolShaleskinBruiser,
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,
@@ -1338,6 +1342,7 @@ const shard: CardShard = {
     _poolSkorpekhDestroyer,
     _poolSkycoachWaypoint,
     _poolSleepingPotion,
+    _poolSliceAndDice,
     _poolSliverOverlord,
     _poolSlumReaper,
     _poolSmiteTheDeathless,
@@ -1478,6 +1483,7 @@ const shard: CardShard = {
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
     _poolWingedPortent,
+    _poolWirewoodPride,
     _poolWistfulThinking,
     _poolWitchsMist,
     _poolWorthyKnight,

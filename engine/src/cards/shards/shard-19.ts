@@ -113,6 +113,7 @@ import _poolCaveOfTheFrostDragon from "../pool/cave-of-the-frost-dragon.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolCerebralVortex from "../pool/cerebral-vortex.js";
+import _poolChainOfPlasma from "../pool/chain-of-plasma.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
@@ -949,6 +950,7 @@ const shard: CardShard = {
     _poolCecilyHauntedMage,
     _poolCephalidInkmage,
     _poolCerebralVortex,
+    _poolChainOfPlasma,
     _poolChallengerTroll,
     _poolChanceMetElves,
     _poolChandraAblaze,

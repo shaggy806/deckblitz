@@ -578,6 +578,7 @@ import _poolReignOfTerror from "../pool/reign-of-terror.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
 import _poolRenegadeFirebrand from "../pool/renegade-firebrand.js";
 import _poolRenegadeSilent from "../pool/renegade-silent.js";
+import _poolRenewedFaith from "../pool/renewed-faith.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRescueTheFoal from "../pool/rescue-the-foal.js";
@@ -1429,6 +1430,7 @@ const shard: CardShard = {
     _poolRemorsefulCleric,
     _poolRenegadeFirebrand,
     _poolRenegadeSilent,
+    _poolRenewedFaith,
     _poolRepeatOffender,
     _poolReputableMerchant,
     _poolRescueTheFoal,

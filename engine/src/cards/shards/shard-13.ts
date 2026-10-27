@@ -33,6 +33,7 @@ import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
 import _poolAngelicVoices from "../pool/angelic-voices.js";
 import _poolAngerOfTheGods from "../pool/anger-of-the-gods.js";
+import _poolAnnex from "../pool/annex.js";
 import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
@@ -263,6 +264,7 @@ import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGoblinRazerunners from "../pool/goblin-razerunners.js";
+import _poolGoblinTaskmaster from "../pool/goblin-taskmaster.js";
 import _poolGodFavoredGeneral from "../pool/god-favored-general.js";
 import _poolGraveServitude from "../pool/grave-servitude.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
@@ -614,6 +616,7 @@ import _poolStalkingYeti from "../pool/stalking-yeti.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolStarlitMantle from "../pool/starlit-mantle.js";
+import _poolStarlitSanctum from "../pool/starlit-sanctum.js";
 import _poolStartTheTardis from "../pool/start-the-tardis.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
 import _poolSteelcladSerpent from "../pool/steelclad-serpent.js";
@@ -813,6 +816,7 @@ const shard: CardShard = {
     _poolAngelicSkirmisher,
     _poolAngelicVoices,
     _poolAngerOfTheGods,
+    _poolAnnex,
     _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArcaneSignet,
@@ -1043,6 +1047,7 @@ const shard: CardShard = {
     _poolGoblinDarkDwellers,
     _poolGoblinPiker,
     _poolGoblinRazerunners,
+    _poolGoblinTaskmaster,
     _poolGodFavoredGeneral,
     _poolGraveServitude,
     _poolGreatHornKrushok,
@@ -1394,6 +1399,7 @@ const shard: CardShard = {
     _poolStallOut,
     _poolStampedingRhino,
     _poolStarlitMantle,
+    _poolStarlitSanctum,
     _poolStartTheTardis,
     _poolSteadfastSentry,
     _poolSteelcladSerpent,

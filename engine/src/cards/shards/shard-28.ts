@@ -199,6 +199,7 @@ import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
+import _poolElvishPioneer from "../pool/elvish-pioneer.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
 import _poolEnchantresssPresence from "../pool/enchantresss-presence.js";
@@ -547,6 +548,7 @@ import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingOfEvosIsle from "../pool/ring-of-evos-isle.js";
 import _poolRingOfRenewal from "../pool/ring-of-renewal.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
+import _poolRiptideShapeshifter from "../pool/riptide-shapeshifter.js";
 import _poolRiseOfTheVarmints from "../pool/rise-of-the-varmints.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
 import _poolRockalanche from "../pool/rockalanche.js";
@@ -1020,6 +1022,7 @@ const shard: CardShard = {
     _poolEldritchPact,
     _poolElectricEel,
     _poolElminstersSimulacrum,
+    _poolElvishPioneer,
     _poolElvishPiper,
     _poolEmberEyeWolf,
     _poolEnchantresssPresence,
@@ -1368,6 +1371,7 @@ const shard: CardShard = {
     _poolRingOfEvosIsle,
     _poolRingOfRenewal,
     _poolRingwardenOwl,
+    _poolRiptideShapeshifter,
     _poolRiseOfTheVarmints,
     _poolRobeOfMirrors,
     _poolRockalanche,

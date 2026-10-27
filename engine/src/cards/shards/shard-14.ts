@@ -206,6 +206,7 @@ import _poolDustAnimus from "../pool/dust-animus.js";
 import _poolEagerConstruct from "../pool/eager-construct.js";
 import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
+import _poolEbonbladeReaper from "../pool/ebonblade-reaper.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
@@ -408,6 +409,7 @@ import _poolKrosanColossus from "../pool/krosan-colossus.js";
 import _poolKuldothaPhoenix from "../pool/kuldotha-phoenix.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
+import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
@@ -1002,6 +1004,7 @@ const shard: CardShard = {
     _poolEagerConstruct,
     _poolEaglesRescue,
     _poolEbonDrake,
+    _poolEbonbladeReaper,
     _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
     _poolEidolonOfTheGreatRevel,
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolKuldothaPhoenix,
     _poolKurbisHarvestCelebrant,
     _poolLassoedByTheLaw,
+    _poolLavamancersSkill,
     _poolLawbringer,
     _poolLeoninVanguard,
     _poolLeveler,

@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
+import _poolAccursedCentaur from "../pool/accursed-centaur.js";
 import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
 import _poolAerialModification from "../pool/aerial-modification.js";
@@ -72,6 +73,7 @@ import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodCursedKnight from "../pool/blood-cursed-knight.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
+import _poolBloodlineShaman from "../pool/bloodline-shaman.js";
 import _poolBloodthirstyOgre from "../pool/bloodthirsty-ogre.js";
 import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
 import _poolBlueScarab from "../pool/blue-scarab.js";
@@ -589,6 +591,7 @@ import _poolShock from "../pool/shock.js";
 import _poolShoreLurker from "../pool/shore-lurker.js";
 import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
 import _poolSifterWurm from "../pool/sifter-wurm.js";
+import _poolSigilOfTheNewDawn from "../pool/sigil-of-the-new-dawn.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
 import _poolSiltCrawler from "../pool/silt-crawler.js";
@@ -802,6 +805,7 @@ const shard: CardShard = {
   pool: [
     _poolAangTheLastAirbender,
     _poolAbandonedOutpost,
+    _poolAccursedCentaur,
     _poolAdeptWatershaper,
     _poolAdewaleBreakerOfChains,
     _poolAerialModification,
@@ -869,6 +873,7 @@ const shard: CardShard = {
     _poolBloodCursedKnight,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
+    _poolBloodlineShaman,
     _poolBloodthirstyOgre,
     _poolBloodwaterEntity,
     _poolBlueScarab,
@@ -1386,6 +1391,7 @@ const shard: CardShard = {
     _poolShoreLurker,
     _poolSidequestHuntTheMark,
     _poolSifterWurm,
+    _poolSigilOfTheNewDawn,
     _poolSigiledPaladin,
     _poolSilklashSpider,
     _poolSiltCrawler,

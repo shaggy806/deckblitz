@@ -48,6 +48,7 @@ import _poolBalduvianHorde from "../pool/balduvian-horde.js";
 import _poolBanewhipPunisher from "../pool/banewhip-punisher.js";
 import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
+import _poolBattlefieldMedic from "../pool/battlefield-medic.js";
 import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
 import _poolBelakorTheDarkMaster from "../pool/belakor-the-dark-master.js";
 import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
@@ -528,6 +529,7 @@ import _poolRavenousRobots from "../pool/ravenous-robots.js";
 import _poolRazorfieldRhino from "../pool/razorfield-rhino.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
+import _poolRecklessOne from "../pool/reckless-one.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
 import _poolRecruitmentOfficer from "../pool/recruitment-officer.js";
 import _poolRedirectLightning from "../pool/redirect-lightning.js";
@@ -752,6 +754,7 @@ import _poolWarkiteMarauder from "../pool/warkite-marauder.js";
 import _poolWarthog from "../pool/warthog.js";
 import _poolWaryFarmer from "../pool/wary-farmer.js";
 import _poolWaryWatchdog from "../pool/wary-watchdog.js";
+import _poolWaveOfIndifference from "../pool/wave-of-indifference.js";
 import _poolWayOfTheWildspeaker from "../pool/way-of-the-wildspeaker.js";
 import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
 import _poolWeaponsTrainer from "../pool/weapons-trainer.js";
@@ -869,6 +872,7 @@ const shard: CardShard = {
     _poolBanewhipPunisher,
     _poolBarTheDoor,
     _poolBardTheBowman,
+    _poolBattlefieldMedic,
     _poolBattlesongBerserker,
     _poolBelakorTheDarkMaster,
     _poolBishopOfRebirth,
@@ -1349,6 +1353,7 @@ const shard: CardShard = {
     _poolRazorfieldRhino,
     _poolRealmOfKoh,
     _poolReanimate,
+    _poolRecklessOne,
     _poolReconnaissanceMission,
     _poolRecruitmentOfficer,
     _poolRedirectLightning,
@@ -1573,6 +1578,7 @@ const shard: CardShard = {
     _poolWarthog,
     _poolWaryFarmer,
     _poolWaryWatchdog,
+    _poolWaveOfIndifference,
     _poolWayOfTheWildspeaker,
     _poolWeSayTheeNay,
     _poolWeaponsTrainer,

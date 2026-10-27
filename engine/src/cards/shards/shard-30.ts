@@ -78,6 +78,7 @@ import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
 import _poolBogElemental from "../pool/bog-elemental.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
+import _poolBoneknitter from "../pool/boneknitter.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
 import _poolBoomerangBladeFlinger from "../pool/boomerang-blade-flinger.js";
 import _poolBoonOfSafety from "../pool/boon-of-safety.js";
@@ -365,6 +366,7 @@ import _poolIronhoofOx from "../pool/ironhoof-ox.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
+import _poolIxidorsWill from "../pool/ixidors-will.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolBogElemental,
     _poolBogwaterLumaret,
     _poolBolgsCompany,
+    _poolBoneknitter,
     _poolBonescytheSliver,
     _poolBoomerangBladeFlinger,
     _poolBoonOfSafety,
@@ -1151,6 +1154,7 @@ const shard: CardShard = {
     _poolIsochronScepter,
     _poolItOfTheHorridSwarm,
     _poolIxallisKeeper,
+    _poolIxidorsWill,
     _poolJadeGuardian,
     _poolJadziStewardOfFate,
     _poolJemLightfooteSkyExplorer,

@@ -138,6 +138,7 @@ import _poolConsumingBonfire from "../pool/consuming-bonfire.js";
 import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
+import _poolContestedCliffs from "../pool/contested-cliffs.js";
 import _poolCoralNet from "../pool/coral-net.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -908,6 +909,7 @@ const shard: CardShard = {
     _poolConsumingVapors,
     _poolContagion,
     _poolContaminatedLandscape,
+    _poolContestedCliffs,
     _poolCoralNet,
     _poolCorpsehatch,
     _poolCovetedPeacock,

@@ -152,6 +152,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolCustodyBattle from "../pool/custody-battle.js";
 import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
@@ -278,6 +279,7 @@ import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
+import _poolGoblinBurrows from "../pool/goblin-burrows.js";
 import _poolGoblinFreerunner from "../pool/goblin-freerunner.js";
 import _poolGoblinGuide from "../pool/goblin-guide.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
@@ -336,6 +338,7 @@ import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInescapableBrute from "../pool/inescapable-brute.js";
+import _poolInformationDealer from "../pool/information-dealer.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
@@ -595,6 +598,7 @@ import _poolSibilantSpirit from "../pool/sibilant-spirit.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
 import _poolSilburlindSnapper from "../pool/silburlind-snapper.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
+import _poolSilentSpecter from "../pool/silent-specter.js";
 import _poolSilundiIsle from "../pool/silundi-isle.js";
 import _poolSimplify from "../pool/simplify.js";
 import _poolSkewerTheCritics from "../pool/skewer-the-critics.js";
@@ -947,6 +951,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolCustodyBattle,
     _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,
     _poolDanithaSwordOfHope,
@@ -1073,6 +1078,7 @@ const shard: CardShard = {
     _poolGlassCasket,
     _poolGlittermonger,
     _poolGloryBoundInitiate,
+    _poolGoblinBurrows,
     _poolGoblinFreerunner,
     _poolGoblinGuide,
     _poolGoblinHero,
@@ -1131,6 +1137,7 @@ const shard: CardShard = {
     _poolIndestructibility,
     _poolInescapableBlaze,
     _poolInescapableBrute,
+    _poolInformationDealer,
     _poolInspiringRoar,
     _poolInvocationOfSaintTraft,
     _poolIrencragPyromancer,
@@ -1390,6 +1397,7 @@ const shard: CardShard = {
     _poolSiegeRhino,
     _poolSilburlindSnapper,
     _poolSilentArtisan,
+    _poolSilentSpecter,
     _poolSilundiIsle,
     _poolSimplify,
     _poolSkewerTheCritics,

@@ -476,6 +476,7 @@ import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
+import _poolNovaCleric from "../pool/nova-cleric.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
@@ -1254,6 +1255,7 @@ const shard: CardShard = {
     _poolNirkanaCutthroat,
     _poolNobleHierarch,
     _poolNorinTheWary,
+    _poolNovaCleric,
     _poolNoviceOccultist,
     _poolOakhollowVillage,
     _poolObsidianGiant,

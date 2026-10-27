@@ -10,6 +10,7 @@ import _poolAdantoTheFirstFort from "../pool/adanto-the-first-fort.js";
 import _poolAdventurousEater from "../pool/adventurous-eater.js";
 import _poolAerialAssault from "../pool/aerial-assault.js";
 import _poolAesthirGlider from "../pool/aesthir-glider.js";
+import _poolAetherCharge from "../pool/aether-charge.js";
 import _poolAgentOfAtlas from "../pool/agent-of-atlas.js";
 import _poolAgentOfStromgald from "../pool/agent-of-stromgald.js";
 import _poolAgentOfTreachery from "../pool/agent-of-treachery.js";
@@ -682,6 +683,7 @@ import _poolTransmogrifyingWand from "../pool/transmogrifying-wand.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTrepanationBlade from "../pool/trepanation-blade.js";
+import _poolTribalUnity from "../pool/tribal-unity.js";
 import _poolTributeToHunger from "../pool/tribute-to-hunger.js";
 import _poolTrigonOfCorruption from "../pool/trigon-of-corruption.js";
 import _poolTrollbredGuardian from "../pool/trollbred-guardian.js";
@@ -799,6 +801,7 @@ const shard: CardShard = {
     _poolAdventurousEater,
     _poolAerialAssault,
     _poolAesthirGlider,
+    _poolAetherCharge,
     _poolAgentOfAtlas,
     _poolAgentOfStromgald,
     _poolAgentOfTreachery,
@@ -1471,6 +1474,7 @@ const shard: CardShard = {
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
     _poolTrepanationBlade,
+    _poolTribalUnity,
     _poolTributeToHunger,
     _poolTrigonOfCorruption,
     _poolTrollbredGuardian,

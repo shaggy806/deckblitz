@@ -163,6 +163,7 @@ import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
+import _poolDirgeOfDread from "../pool/dirge-of-dread.js";
 import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
@@ -266,6 +267,7 @@ import _poolGiantKiller from "../pool/giant-killer.js";
 import _poolGiantTortoise from "../pool/giant-tortoise.js";
 import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGigadrowse from "../pool/gigadrowse.js";
+import _poolGigapede from "../pool/gigapede.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
@@ -968,6 +970,7 @@ const shard: CardShard = {
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
+    _poolDirgeOfDread,
     _poolDiscordantSpirit,
     _poolDisownedAncestor,
     _poolDivideByZero,
@@ -1071,6 +1074,7 @@ const shard: CardShard = {
     _poolGiantTortoise,
     _poolGiftOfCompleation,
     _poolGigadrowse,
+    _poolGigapede,
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,

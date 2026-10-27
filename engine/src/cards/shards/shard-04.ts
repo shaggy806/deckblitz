@@ -87,6 +87,7 @@ import _poolCatacombSifter from "../pool/catacomb-sifter.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
 import _poolCetavolver from "../pool/cetavolver.js";
+import _poolChainOfAcid from "../pool/chain-of-acid.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
@@ -339,6 +340,7 @@ import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
 import _poolJoltingMerfolk from "../pool/jolting-merfolk.js";
 import _poolJovialEvil from "../pool/jovial-evil.js";
+import _poolKamahlFistOfKrosa from "../pool/kamahl-fist-of-krosa.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
@@ -525,6 +527,7 @@ import _poolRevivingDose from "../pool/reviving-dose.js";
 import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
+import _poolRiptideEntrancer from "../pool/riptide-entrancer.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRockBasilisk from "../pool/rock-basilisk.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
@@ -874,6 +877,7 @@ const shard: CardShard = {
     _poolCauldronOfSouls,
     _poolCelestialPrism,
     _poolCetavolver,
+    _poolChainOfAcid,
     _poolChainersEdict,
     _poolChakramRetriever,
     _poolChangelingBerserker,
@@ -1126,6 +1130,7 @@ const shard: CardShard = {
     _poolJeongJeongTheDeserter,
     _poolJoltingMerfolk,
     _poolJovialEvil,
+    _poolKamahlFistOfKrosa,
     _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
     _poolKeenEyedRaven,
@@ -1312,6 +1317,7 @@ const shard: CardShard = {
     _poolRhinosRampage,
     _poolRhovanionRampager,
     _poolRidgeRannet,
+    _poolRiptideEntrancer,
     _poolRitualOfSteel,
     _poolRockBasilisk,
     _poolRohgahhKherKeepOverlord,

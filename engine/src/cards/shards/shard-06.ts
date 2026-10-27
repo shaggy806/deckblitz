@@ -317,6 +317,7 @@ import _poolHalimarExcavator from "../pool/halimar-excavator.js";
 import _poolHaltOrder from "../pool/halt-order.js";
 import _poolHarshJustice from "../pool/harsh-justice.js";
 import _poolHeavyArbalest from "../pool/heavy-arbalest.js";
+import _poolHeedlessOne from "../pool/heedless-one.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -1103,6 +1104,7 @@ const shard: CardShard = {
     _poolHaltOrder,
     _poolHarshJustice,
     _poolHeavyArbalest,
+    _poolHeedlessOne,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,

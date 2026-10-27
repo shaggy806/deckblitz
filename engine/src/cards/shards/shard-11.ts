@@ -218,6 +218,7 @@ import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEther from "../pool/ether.js";
 import _poolEverglades from "../pool/everglades.js";
+import _poolExaltedAngel from "../pool/exalted-angel.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
@@ -1020,6 +1021,7 @@ const shard: CardShard = {
     _poolEpistolaryLibrarian,
     _poolEther,
     _poolEverglades,
+    _poolExaltedAngel,
     _poolExtractPower,
     _poolFacetReader,
     _poolFailedFording,

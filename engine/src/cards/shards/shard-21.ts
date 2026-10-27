@@ -118,6 +118,7 @@ import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChillToTheBone from "../pool/chill-to-the-bone.js";
 import _poolChimericStaff from "../pool/chimeric-staff.js";
+import _poolChokingTethers from "../pool/choking-tethers.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
@@ -354,6 +355,7 @@ import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKragmaButcher from "../pool/kragma-butcher.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
+import _poolKrosanTusker from "../pool/krosan-tusker.js";
 import _poolKrovodHaunch from "../pool/krovod-haunch.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
@@ -595,6 +597,7 @@ import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
+import _poolSparksmith from "../pool/sparksmith.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
 import _poolSpellbinder from "../pool/spellbinder.js";
 import _poolSpiderClimb from "../pool/spider-climb.js";
@@ -617,6 +620,7 @@ import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
 import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
+import _poolStrongarmTactics from "../pool/strongarm-tactics.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
@@ -698,6 +702,7 @@ import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
+import _poolUndeadGladiator from "../pool/undead-gladiator.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
 import _poolUnholyStrength from "../pool/unholy-strength.js";
 import _poolUnitedFront from "../pool/united-front.js";
@@ -741,6 +746,7 @@ import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWillbender from "../pool/willbender.js";
 import _poolWintermoonMesa from "../pool/wintermoon-mesa.js";
+import _poolWirewoodHerald from "../pool/wirewood-herald.js";
 import _poolWithercrown from "../pool/withercrown.js";
 import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
 import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
@@ -894,6 +900,7 @@ const shard: CardShard = {
     _poolChaseInspiration,
     _poolChillToTheBone,
     _poolChimericStaff,
+    _poolChokingTethers,
     _poolChromaticLantern,
     _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,
@@ -1130,6 +1137,7 @@ const shard: CardShard = {
     _poolKodamaOfTheNorthTree,
     _poolKragmaButcher,
     _poolKreeCommandos,
+    _poolKrosanTusker,
     _poolKrovodHaunch,
     _poolKrumarBondKin,
     _poolKutzilsFlanker,
@@ -1371,6 +1379,7 @@ const shard: CardShard = {
     _poolSontaranGeneral,
     _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
+    _poolSparksmith,
     _poolSpectacularTactics,
     _poolSpellbinder,
     _poolSpiderClimb,
@@ -1393,6 +1402,7 @@ const shard: CardShard = {
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
     _poolStrengthOfLunacy,
+    _poolStrongarmTactics,
     _poolStudentOfOjutai,
     _poolStumpStomp,
     _poolStymiedHopes,
@@ -1474,6 +1484,7 @@ const shard: CardShard = {
     _poolTymaretCallsTheDead,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,
+    _poolUndeadGladiator,
     _poolUndeadMinotaur,
     _poolUnholyStrength,
     _poolUnitedFront,
@@ -1517,6 +1528,7 @@ const shard: CardShard = {
     _poolWillOfTheSultai,
     _poolWillbender,
     _poolWintermoonMesa,
+    _poolWirewoodHerald,
     _poolWithercrown,
     _poolWolfbittenCaptive,
     _poolWoodlandGuidance,
