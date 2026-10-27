@@ -63,7 +63,9 @@ section keeps only what to do next.
   lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
   to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
   "A recheck round", one list per child under the `author-recheck` skill. Lists done: none.
-  Assigned: none. Then build in greedy order, a family per session, with
+  Assigned (round one, 2026-10-27): R1 → B235, R2 → B236, R3 → B237, R4 → B238, R5 → B239 (a
+  batch number taken by then: the highest `B<N>` on `origin/main` plus one, checked again before
+  landing). Then build in greedy order, a family per session, with
   the 617 merge groups (100 keys free ~1,470 cards).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
