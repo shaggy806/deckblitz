@@ -1,7 +1,6 @@
 # Working down the need keys, after the set walk
 
-**Status:** planned (2026-10-27; a Sonnet-against-Haiku trial added as Phase 0.5). Starts when the set walk's round twenty is on `main`
-(`set-walk-last-rounds.md`). No phase started yet.
+**Status:** planned (2026-10-27; a Sonnet-against-Haiku trial added as Phase 0.5). The set walk ended 2026-10-27 (batch 234), so it can start. No phase started yet.
 
 Once the walk ends, every Commander-legal first printing has been either authored or triaged with
 a blocked record (`{ name, needs, why }` in `engine/data/sweep-2/`, `sweep-3/` and
