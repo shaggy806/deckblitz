@@ -12015,6 +12015,30 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "effect:token-copy-of-enchanted": {
+   "family": "effect:token-copy-options",
+   "example": "Followed Footsteps: a token copy of the enchanted creature, none if that creature left before the Aura did"
+  },
+  "effect:prevent-all-damage-by-filter": {
+   "family": "replacement:prevent-combat-damage-by-filter",
+   "example": "Chant of Vitu-Ghazi: prevent all damage creatures would deal this turn, gaining life equal to the damage prevented"
+  },
+  "effect:share-protection-and-landwalk": {
+   "family": "effect:grant-protection-choice",
+   "example": "Concerted Effort: creatures you control gain flying, fear, first strike, double strike, landwalk and protection if any creature you control has it"
+  },
+  "cost:ability-cost-modification-all-zones": {
+   "family": "cost:ability-cost-modification",
+   "example": "Suppression Field: activated abilities cost {2} more, from hand and graveyard too"
+  },
+  "target:activated-ability-single-target": {
+   "family": "effect:change-target",
+   "example": "Reroute: change the target of target activated ability with a single target"
+  },
+  "trigger:self-put-into-hand-from-graveyard": {
+   "family": "trigger:leaves-graveyard",
+   "example": "Golgari Brownscale: when this card is put into your hand from your graveyard"
   }
  }
 }
