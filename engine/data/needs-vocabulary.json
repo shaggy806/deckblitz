@@ -6685,7 +6685,7 @@
   },
   "keyword:two-kicker-costs": {
    "family": "keyword:multikicker",
-   "example": "Two different kicker costs on one card ('Kicker {G} and/or {1}{U}', rule 702.33d), each payable once, with conditions that name which kicker was paid (Wastescape Battlemage, the Zendikar Rising-style 'kicked with its {X} kicker' cards)."
+   "example": "Two different kicker costs on one card ('Kicker {G} and/or {1}{U}', rule 702.33d), each payable once, with conditions that name which kicker was paid (Wastescape Battlemage, the Zendikar Rising-style 'kicked with its {X} kicker' cards). Built 2026-10-27 (B218): kicker.second, self-kicked's with."
   },
   "replacement:as-enters-choose-characteristics": {
    "family": "replacement:copy-on-enter-options",
