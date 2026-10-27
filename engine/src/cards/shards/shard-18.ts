@@ -8,6 +8,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAgonizingDemise from "../pool/agonizing-demise.js";
 import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
@@ -54,6 +55,7 @@ import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
+import _poolBlazingSpecter from "../pool/blazing-specter.js";
 import _poolBlindSpotGiant from "../pool/blind-spot-giant.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
@@ -344,6 +346,7 @@ import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
 import _poolKrenkoBaronOfTinStreet from "../pool/krenko-baron-of-tin-street.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
+import _poolKrosanBeast from "../pool/krosan-beast.js";
 import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
@@ -505,6 +508,7 @@ import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReadyWilling from "../pool/ready-willing.js";
 import _poolReapingTheGraves from "../pool/reaping-the-graves.js";
 import _poolReclusiveArtificer from "../pool/reclusive-artificer.js";
+import _poolRecollect from "../pool/recollect.js";
 import _poolRedHulk from "../pool/red-hulk.js";
 import _poolRedManaBattery from "../pool/red-mana-battery.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
@@ -794,6 +798,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAgonizingDemise,
     _poolAjaniMentorOfHeroes,
     _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
@@ -840,6 +845,7 @@ const shard: CardShard = {
     _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
+    _poolBlazingSpecter,
     _poolBlindSpotGiant,
     _poolBlindingMage,
     _poolBlitzAutomaton,
@@ -1130,6 +1136,7 @@ const shard: CardShard = {
     _poolKraumViolentCacophony,
     _poolKrenkoBaronOfTinStreet,
     _poolKrenkoMobBoss,
+    _poolKrosanBeast,
     _poolKroxaAndKunoros,
     _poolKynaiosAndTiroOfMeletis,
     _poolLacerateFlesh,
@@ -1291,6 +1298,7 @@ const shard: CardShard = {
     _poolReadyWilling,
     _poolReapingTheGraves,
     _poolReclusiveArtificer,
+    _poolRecollect,
     _poolRedHulk,
     _poolRedManaBattery,
     _poolRegalBunnicorn,

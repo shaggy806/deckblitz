@@ -15,6 +15,7 @@ import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAetherPoisoner from "../pool/aether-poisoner.js";
+import _poolAetherRift from "../pool/aether-rift.js";
 import _poolAethermagesTouch from "../pool/aethermages-touch.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
@@ -229,6 +230,7 @@ import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
 import _poolFistsOfTheDemigod from "../pool/fists-of-the-demigod.js";
 import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
+import _poolFlameFusillade from "../pool/flame-fusillade.js";
 import _poolFlood from "../pool/flood.js";
 import _poolFloodwaters from "../pool/floodwaters.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
@@ -365,6 +367,7 @@ import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
 import _poolLordOfTheUnreal from "../pool/lord-of-the-unreal.js";
 import _poolLoseCalm from "../pool/lose-calm.js";
+import _poolLoxodonGatekeeper from "../pool/loxodon-gatekeeper.js";
 import _poolLuMengWuGeneral from "../pool/lu-meng-wu-general.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
@@ -426,6 +429,7 @@ import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNissasRenewal from "../pool/nissas-renewal.js";
+import _poolNomadStadium from "../pool/nomad-stadium.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
@@ -536,6 +540,7 @@ import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
+import _poolSavageOffensive from "../pool/savage-offensive.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
 import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _poolAeolipile,
     _poolAerieMystics,
     _poolAetherPoisoner,
+    _poolAetherRift,
     _poolAethermagesTouch,
     _poolAhnCropCrasher,
     _poolAhriman,
@@ -1006,6 +1012,7 @@ const shard: CardShard = {
     _poolFirefistStriker,
     _poolFistsOfTheDemigod,
     _poolFiveAlarmFire,
+    _poolFlameFusillade,
     _poolFlood,
     _poolFloodwaters,
     _poolFlowstoneWyvern,
@@ -1142,6 +1149,7 @@ const shard: CardShard = {
     _poolLordOfTheForsaken,
     _poolLordOfTheUnreal,
     _poolLoseCalm,
+    _poolLoxodonGatekeeper,
     _poolLuMengWuGeneral,
     _poolLumengridWarden,
     _poolLurkingCrocodile,
@@ -1203,6 +1211,7 @@ const shard: CardShard = {
     _poolNicolBolas,
     _poolNightScythe,
     _poolNissasRenewal,
+    _poolNomadStadium,
     _poolNoosegrafMob,
     _poolNullCaller,
     _poolNurglesRot,
@@ -1313,6 +1322,7 @@ const shard: CardShard = {
     _poolSaguMauler,
     _poolSanctumGuardian,
     _poolSangriteBacklash,
+    _poolSavageOffensive,
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
     _poolSawbladeSkinripper,

@@ -247,6 +247,7 @@ import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
+import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
 import _poolFlower from "../pool/flower.js";
 import _poolFlycatcherGiraffid from "../pool/flycatcher-giraffid.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
@@ -384,6 +385,7 @@ import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLaunch from "../pool/launch.js";
 import _poolLavaHounds from "../pool/lava-hounds.js";
 import _poolLayDownArms from "../pool/lay-down-arms.js";
+import _poolLeaveNoTrace from "../pool/leave-no-trace.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
@@ -475,6 +477,7 @@ import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPenumbraBobcat from "../pool/penumbra-bobcat.js";
 import _poolPenumbraKavu from "../pool/penumbra-kavu.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
+import _poolPersuasion from "../pool/persuasion.js";
 import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
@@ -493,8 +496,10 @@ import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
+import _poolProhibit from "../pool/prohibit.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
+import _poolPsychicDrain from "../pool/psychic-drain.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
 import _poolPyriteSpellbomb from "../pool/pyrite-spellbomb.js";
@@ -1033,6 +1038,7 @@ const shard: CardShard = {
     _poolFireNationSoldier,
     _poolFlameSpill,
     _poolFlashback,
+    _poolFlowOfIdeas,
     _poolFlower,
     _poolFlycatcherGiraffid,
     _poolFlyingOctobot,
@@ -1170,6 +1176,7 @@ const shard: CardShard = {
     _poolLaunch,
     _poolLavaHounds,
     _poolLayDownArms,
+    _poolLeaveNoTrace,
     _poolLegionsLanding,
     _poolLeylineOfVitality,
     _poolLightningShrieker,
@@ -1261,6 +1268,7 @@ const shard: CardShard = {
     _poolPenumbraBobcat,
     _poolPenumbraKavu,
     _poolPersistentSpecimen,
+    _poolPersuasion,
     _poolPhalanxFormation,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
@@ -1279,8 +1287,10 @@ const shard: CardShard = {
     _poolPrimalFrenzy,
     _poolPrimarisEliminator,
     _poolPrismaticVista,
+    _poolProhibit,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
+    _poolPsychicDrain,
     _poolPursueGlory,
     _poolPutrefax,
     _poolPyriteSpellbomb,

@@ -46,6 +46,7 @@ import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
+import _poolBacklash from "../pool/backlash.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
@@ -117,6 +118,8 @@ import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
 import _poolCatacombDragon from "../pool/catacomb-dragon.js";
 import _poolCelestialArchon from "../pool/celestial-archon.js";
 import _poolCelestialMessenger from "../pool/celestial-messenger.js";
+import _poolCentaurGarden from "../pool/centaur-garden.js";
+import _poolCephalidLooter from "../pool/cephalid-looter.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
@@ -420,6 +423,7 @@ import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
+import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
@@ -600,6 +604,7 @@ import _poolSimplify from "../pool/simplify.js";
 import _poolSkewerTheCritics from "../pool/skewer-the-critics.js";
 import _poolSkullslitherWorm from "../pool/skullslither-worm.js";
 import _poolSkyTether from "../pool/sky-tether.js";
+import _poolSkycloudEgg from "../pool/skycloud-egg.js";
 import _poolSkymarcherAspirant from "../pool/skymarcher-aspirant.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
@@ -620,6 +625,7 @@ import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
 import _poolSoulOfMagma from "../pool/soul-of-magma.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
+import _poolSoulcatcher from "../pool/soulcatcher.js";
 import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
@@ -631,6 +637,7 @@ import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
+import _poolSpiritOfResistance from "../pool/spirit-of-resistance.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -693,6 +700,7 @@ import _poolThunderbolt from "../pool/thunderbolt.js";
 import _poolTigereyeCameo from "../pool/tigereye-cameo.js";
 import _poolTinkersTote from "../pool/tinkers-tote.js";
 import _poolTirelessMissionaries from "../pool/tireless-missionaries.js";
+import _poolTirelessTribe from "../pool/tireless-tribe.js";
 import _poolTitaniumGolem from "../pool/titanium-golem.js";
 import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
@@ -841,6 +849,7 @@ const shard: CardShard = {
     _poolAvalanche,
     _poolAvengersQuinjet,
     _poolAysenAbbey,
+    _poolBacklash,
     _poolBadlands,
     _poolBalduvianBears,
     _poolBalefireDragon,
@@ -912,6 +921,8 @@ const shard: CardShard = {
     _poolCatacombDragon,
     _poolCelestialArchon,
     _poolCelestialMessenger,
+    _poolCentaurGarden,
+    _poolCephalidLooter,
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
     _poolChangelingWayfinder,
@@ -1215,6 +1226,7 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMobilize,
     _poolMockingbird,
+    _poolMoldervineCloak,
     _poolMonkClass,
     _poolMoonHeron,
     _poolMoonfolkPuzzlemaker,
@@ -1395,6 +1407,7 @@ const shard: CardShard = {
     _poolSkewerTheCritics,
     _poolSkullslitherWorm,
     _poolSkyTether,
+    _poolSkycloudEgg,
     _poolSkymarcherAspirant,
     _poolSkyshroudArcher,
     _poolSkywinderDrake,
@@ -1415,6 +1428,7 @@ const shard: CardShard = {
     _poolSoulBleed,
     _poolSoulOfMagma,
     _poolSoulSnuffers,
+    _poolSoulcatcher,
     _poolSoultetherGolem,
     _poolSozinsComet,
     _poolSpatialContortion,
@@ -1426,6 +1440,7 @@ const shard: CardShard = {
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
     _poolSpiritEnKor,
+    _poolSpiritOfResistance,
     _poolSplatterThug,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
@@ -1488,6 +1503,7 @@ const shard: CardShard = {
     _poolTigereyeCameo,
     _poolTinkersTote,
     _poolTirelessMissionaries,
+    _poolTirelessTribe,
     _poolTitaniumGolem,
     _poolTolarianSerpent,
     _poolTomakulScrapsmith,

@@ -66,6 +66,7 @@ import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
+import _poolBind from "../pool/bind.js";
 import _poolBirthOfTheImperium from "../pool/birth-of-the-imperium.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
@@ -227,6 +228,7 @@ import _poolEndling from "../pool/endling.js";
 import _poolEngulfingSlagwurm from "../pool/engulfing-slagwurm.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
+import _poolEpicenter from "../pool/epicenter.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
 import _poolEvasiveAction from "../pool/evasive-action.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
@@ -328,6 +330,7 @@ import _poolGrimRepriser from "../pool/grim-repriser.js";
 import _poolGripOfDesolation from "../pool/grip-of-desolation.js";
 import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
+import _poolGrozoth from "../pool/grozoth.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
@@ -553,6 +556,7 @@ import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.j
 import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
 import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
+import _poolRestock from "../pool/restock.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRewind from "../pool/rewind.js";
@@ -562,6 +566,7 @@ import _poolRingOfImmortals from "../pool/ring-of-immortals.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
 import _poolRiotRingleader from "../pool/riot-ringleader.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
+import _poolRitesOfSpring from "../pool/rites-of-spring.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
@@ -695,6 +700,7 @@ import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThranQuarry from "../pool/thran-quarry.js";
 import _poolThunderThrashElder from "../pool/thunder-thrash-elder.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
+import _poolTidewaterMinion from "../pool/tidewater-minion.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
 import _poolTobitaMasterOfWinds from "../pool/tobita-master-of-winds.js";
@@ -866,6 +872,7 @@ const shard: CardShard = {
     _poolBenthicBiomancer,
     _poolBenthicInfiltrator,
     _poolBileUrchin,
+    _poolBind,
     _poolBirthOfTheImperium,
     _poolBlackTomCassidy,
     _poolBlightedBurgeoning,
@@ -1027,6 +1034,7 @@ const shard: CardShard = {
     _poolEngulfingSlagwurm,
     _poolEntityTracker,
     _poolEomerOfTheRiddermark,
+    _poolEpicenter,
     _poolErrantEphemeron,
     _poolEvasiveAction,
     _poolEvendoBrushrazer,
@@ -1128,6 +1136,7 @@ const shard: CardShard = {
     _poolGripOfDesolation,
     _poolGriselbrand,
     _poolGrislyRitual,
+    _poolGrozoth,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolGuanYuSaintedWarrior,
@@ -1353,6 +1362,7 @@ const shard: CardShard = {
     _poolResoluteBlademaster,
     _poolResourcefulReturn,
     _poolRestlessPrairie,
+    _poolRestock,
     _poolReturnUponTheTide,
     _poolReverseDamage,
     _poolRewind,
@@ -1362,6 +1372,7 @@ const shard: CardShard = {
     _poolRingOfXathrid,
     _poolRiotRingleader,
     _poolRiteOfOblivion,
+    _poolRitesOfSpring,
     _poolRoccoStreetChef,
     _poolRocketVolley,
     _poolRoilElemental,
@@ -1495,6 +1506,7 @@ const shard: CardShard = {
     _poolThranQuarry,
     _poolThunderThrashElder,
     _poolThunderboltsConspiracy,
+    _poolTidewaterMinion,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
     _poolTobitaMasterOfWinds,

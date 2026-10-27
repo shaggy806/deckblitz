@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
+import _poolAddle from "../pool/addle.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
 import _poolAethersnipe from "../pool/aethersnipe.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
@@ -20,6 +21,7 @@ import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
+import _poolAngelicShield from "../pool/angelic-shield.js";
 import _poolAngrathTheFlameChained from "../pool/angrath-the-flame-chained.js";
 import _poolAngrathsAmbusher from "../pool/angraths-ambusher.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
@@ -61,6 +63,7 @@ import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
 import _poolBearsCompanion from "../pool/bears-companion.js";
+import _poolBearscape from "../pool/bearscape.js";
 import _poolBeastMode from "../pool/beast-mode.js";
 import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
@@ -120,6 +123,7 @@ import _poolCaveTiger from "../pool/cave-tiger.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
+import _poolChamberOfManipulation from "../pool/chamber-of-manipulation.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
@@ -132,6 +136,7 @@ import _poolChurningEddy from "../pool/churning-eddy.js";
 import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
+import _poolCoalhaulerSwine from "../pool/coalhauler-swine.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
@@ -458,6 +463,7 @@ import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNostalgicDreams from "../pool/nostalgic-dreams.js";
+import _poolNullstoneGargoyle from "../pool/nullstone-gargoyle.js";
 import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
@@ -568,6 +574,7 @@ import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
+import _poolScoutingTrek from "../pool/scouting-trek.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
@@ -761,6 +768,7 @@ import _poolWarpathGhoul from "../pool/warpath-ghoul.js";
 import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
+import _poolWax from "../pool/wax.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
@@ -803,6 +811,7 @@ const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
     _poolAccomplishedAlchemist,
+    _poolAddle,
     _poolAetherSearcher,
     _poolAethersnipe,
     _poolAgadeemOccultist,
@@ -818,6 +827,7 @@ const shard: CardShard = {
     _poolAncestorsEmbrace,
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
+    _poolAngelicShield,
     _poolAngrathTheFlameChained,
     _poolAngrathsAmbusher,
     _poolAngrathsRampage,
@@ -859,6 +869,7 @@ const shard: CardShard = {
     _poolBaxterStockman,
     _poolBayouDragonfly,
     _poolBearsCompanion,
+    _poolBearscape,
     _poolBeastMode,
     _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
@@ -918,6 +929,7 @@ const shard: CardShard = {
     _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
+    _poolChamberOfManipulation,
     _poolChaosWand,
     _poolChaosWarp,
     _poolCharismaBobblehead,
@@ -930,6 +942,7 @@ const shard: CardShard = {
     _poolCliffrunnerBehemoth,
     _poolClipWings,
     _poolCloudboundMoogle,
+    _poolCoalhaulerSwine,
     _poolCoalstokeGearhulk,
     _poolCoeurl,
     _poolCogworkAssembler,
@@ -1256,6 +1269,7 @@ const shard: CardShard = {
     _poolNightMarket,
     _poolNighthowlPursuer,
     _poolNostalgicDreams,
+    _poolNullstoneGargoyle,
     _poolNyleasDisciple,
     _poolNyxLotus,
     _poolOakheartDryads,
@@ -1366,6 +1380,7 @@ const shard: CardShard = {
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScourgeOfGeierReach,
+    _poolScoutingTrek,
     _poolScrollboost,
     _poolSecondChance,
     _poolSeeBeyond,
@@ -1559,6 +1574,7 @@ const shard: CardShard = {
     _poolWarpedLandscape,
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
+    _poolWax,
     _poolWebWarriors,
     _poolWeirdingWood,
     _poolWhack,

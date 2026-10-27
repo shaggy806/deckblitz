@@ -92,6 +92,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Leng, Cavalry Master, Plague and Quilled Sliver — by five `card-author` agents and the
   scaffolder's four echo cards, and 31 blocked (`B228.json`). The middle walk's second range
   (Eventide back to Time Spiral) is done.
+- **Radiance, and Ravnica: City of Guilds' ~76 most-played** (batch 229, the second middle
+  walk, 2026-10-27): **built** radiance's "target X and each other X that shares a color with it"
+  (`CardFilter.sharesColorWithTarget`, rule 105.2 — bound to the target and its colors as the
+  effect applies, like `sameNameAsTarget`), taught to the scaffolder (destroy/untap/tap, damage
+  and +N/+N forms). 50 of the 76 authored — Brightflame, Leave No Trace, Rally the Righteous,
+  Firemane Angel, Razia, Nullstone Gargoyle, Dimir Doppelganger, Loxodon Hierarch, Tolsimir
+  Wolfblood, the Hunted creatures — by four `card-author` agents and the lead; 26 blocked
+  (`B229.json`). `set-rav-batch-1.test.ts`.
 - **Amplify and provoke, and Legions — Legions and Mirrodin are whole** (batch 219, the fourth
   middle walk, 2026-10-27, `effect:must-block-this-turn`): **built** amplify (rule 702.38 —
   `CardDefinition.amplify`, the hand's cards sharing a creature type revealed as it enters),

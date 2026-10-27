@@ -322,6 +322,21 @@ export interface CardFilter {
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
   readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
   /**
+   * It is the object in this target slot of the resolving spell or ability,
+   * or shares a color with it (rule 105.2) — radiance's "target creature
+   * **and each other creature that shares a color with it**" (Ravnica:
+   * City of Guilds' ability word, rule 207.2c) is an effect over `{ type:
+   * "creature", sharesColorWithTarget: 0 }`. Only the target is targeted:
+   * protection or hexproof doesn't save the others. A colorless target goes
+   * alone. An effect's filter only: `bindDynamicCompares` binds it to
+   * `sharesColorWith` (the target's colors as the effect applies); anywhere
+   * else it matches nothing.
+   */
+  readonly sharesColorWithTarget?: number;
+  /** `sharesColorWithTarget` bound — written by `bindDynamicCompares`, never
+   * authored: the target itself, and its colors. */
+  readonly sharesColorWith?: { readonly object: ObjectId; readonly colors: readonly Color[] };
+  /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
    * opponent sacrifices a creature with the greatest power among creatures
@@ -1021,6 +1036,12 @@ export function matchesFilter(
     if (filter.sameNameAs.name === null || nameless || named !== filter.sameNameAs.name) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
+  if (filter.sharesColorWithTarget !== undefined) return false;
+  if (filter.sharesColorWith !== undefined && id !== filter.sharesColorWith.object) {
+    const colors: ReadonlySet<Color> =
+      live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
+    if (!filter.sharesColorWith.colors.some((col) => colors.has(col))) return false;
+  }
 
   if (
     filter.colors !== undefined ||
@@ -1335,7 +1356,11 @@ export function matchesFilter(
   }
   if (filter.hasKicker !== undefined) {
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).kicker !== null;
+    // A `kicker` with a `keyword` is another optional additional cost (buyback,
+    // entwine, bargain…) the engine models the same way — not a kicker ability
+    // (rule 702.33; multikicker has no `keyword` and counts).
+    const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
+    const has = kicker !== null && kicker.keyword === undefined;
     if (has !== filter.hasKicker) return false;
   }
   if (filter.hasCycling !== undefined) {

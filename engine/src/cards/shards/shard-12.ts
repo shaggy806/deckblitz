@@ -211,6 +211,7 @@ import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
+import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
@@ -736,6 +737,7 @@ import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
 import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
+import _poolWane from "../pool/wane.js";
 import _poolWaningWurm from "../pool/waning-wurm.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWarpedResearcher from "../pool/warped-researcher.js";
@@ -999,6 +1001,7 @@ const shard: CardShard = {
     _poolElvishHerder,
     _poolEmberShot,
     _poolEmberethPaladin,
+    _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
     _poolEnterprisingScallywag,
@@ -1524,6 +1527,7 @@ const shard: CardShard = {
     _poolWakerootElemental,
     _poolWallOfEssence,
     _poolWanderingMind,
+    _poolWane,
     _poolWaningWurm,
     _poolWarMammoth,
     _poolWarpedResearcher,

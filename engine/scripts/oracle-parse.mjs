@@ -1234,6 +1234,16 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Damage.
+  // Radiance (Ravnica: City of Guilds): "target X and each other X that
+  // shares a color with it" — one `-all` effect over the target and the
+  // others sharing a color with it (`sharesColorWithTarget`).
+  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a color with it`;
+  const kin = (type, target) =>
+    target === undefined ? undefined : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), sharesColorWithTarget: target };
+  if ((m = re(`~ deals ${N} damage to (${TARGET}) ${KIN}`).exec(s))) {
+    const filter = kin(m[3], slot(m[2]));
+    return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+  }
   if ((m = re(`~ deals ${N} damage to (${TARGET})`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), target: slot(m[2]) };
   }
@@ -1375,6 +1385,16 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`(${TARGET}) ${NAMESAKES} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     const filter = namesakes(m[2], slot(m[1]));
+    return filter === undefined
+      ? null
+      : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+  }
+  if ((m = re(`(destroy|untap|tap) (${TARGET}) ${KIN}`).exec(s))) {
+    const filter = kin(m[3], slot(m[2]));
+    return filter === undefined ? null : { kind: `${m[1].toLowerCase()}-all`, filter };
+  }
+  if ((m = re(`(${TARGET}) ${KIN} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    const filter = kin(m[2], slot(m[1]));
     return filter === undefined
       ? null
       : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };

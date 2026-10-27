@@ -45,6 +45,7 @@ import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
+import _poolAtogatog from "../pool/atogatog.js";
 import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
@@ -79,6 +80,7 @@ import _poolBladewingsThrall from "../pool/bladewings-thrall.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
+import _poolBloodFunnel from "../pool/blood-funnel.js";
 import _poolBloodReckoning from "../pool/blood-reckoning.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
@@ -94,6 +96,7 @@ import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
 import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
+import _poolBreathOfDarigaaz from "../pool/breath-of-darigaaz.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
@@ -132,6 +135,7 @@ import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
+import _poolConfessor from "../pool/confessor.js";
 import _poolConstableOfTheRealm from "../pool/constable-of-the-realm.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolConsumingBonfire from "../pool/consuming-bonfire.js";
@@ -163,11 +167,13 @@ import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
+import _poolDemoralize from "../pool/demoralize.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
 import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
+import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
@@ -418,6 +424,7 @@ import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
+import _poolMoltenInfluence from "../pool/molten-influence.js";
 import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMonoskelion from "../pool/monoskelion.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
@@ -445,6 +452,7 @@ import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNotoriousThrong from "../pool/notorious-throng.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
+import _poolOathswornGiant from "../pool/oathsworn-giant.js";
 import _poolOathswornKnight from "../pool/oathsworn-knight.js";
 import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
@@ -670,6 +678,7 @@ import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
+import _poolTidalVisionary from "../pool/tidal-visionary.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTinStreetMarket from "../pool/tin-street-market.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -817,6 +826,7 @@ const shard: CardShard = {
     _poolAssimilateEssence,
     _poolAstralDrift,
     _poolAstralSteel,
+    _poolAtogatog,
     _poolAvenWindGuide,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
@@ -851,6 +861,7 @@ const shard: CardShard = {
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
+    _poolBloodFunnel,
     _poolBloodReckoning,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
@@ -866,6 +877,7 @@ const shard: CardShard = {
     _poolBrazenBorrower,
     _poolBrazenScourge,
     _poolBreakerOfCreation,
+    _poolBreathOfDarigaaz,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
@@ -904,6 +916,7 @@ const shard: CardShard = {
     _poolConcertedCare,
     _poolConclaveSledgeCaptain,
     _poolConductorOfCacophony,
+    _poolConfessor,
     _poolConstableOfTheRealm,
     _poolConstrictorSage,
     _poolConsumingBonfire,
@@ -935,11 +948,13 @@ const shard: CardShard = {
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
+    _poolDemoralize,
     _poolDespoilerOfSouls,
     _poolDestructiveFlow,
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,
+    _poolDimirCutpurse,
     _poolDimirKeyrune,
     _poolDissectionTools,
     _poolDoggedPursuit,
@@ -1190,6 +1205,7 @@ const shard: CardShard = {
     _poolMoggInfestation,
     _poolMoggcatcher,
     _poolMoltenCollapse,
+    _poolMoltenInfluence,
     _poolMonkOfTheOpenHand,
     _poolMonoskelion,
     _poolMorbidOpportunist,
@@ -1217,6 +1233,7 @@ const shard: CardShard = {
     _poolNorwoodArchers,
     _poolNotoriousThrong,
     _poolNyxbornSeaguard,
+    _poolOathswornGiant,
     _poolOathswornKnight,
     _poolObeliskOfUndoing,
     _poolObscuraAscendancy,
@@ -1442,6 +1459,7 @@ const shard: CardShard = {
     _poolThunderStrike,
     _poolThunderblust,
     _poolThunderousMight,
+    _poolTidalVisionary,
     _poolTimeElemental,
     _poolTinStreetMarket,
     _poolTitanHunter,

@@ -90,6 +90,7 @@ import _poolCetavolver from "../pool/cetavolver.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
+import _poolChaoticStrike from "../pool/chaotic-strike.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
@@ -453,6 +454,7 @@ import _poolOngoingInvestigation from "../pool/ongoing-investigation.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
+import _poolOvereagerApprentice from "../pool/overeager-apprentice.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
 import _poolOverpoweringAttack from "../pool/overpowering-attack.js";
 import _poolOxiddaFinisher from "../pool/oxidda-finisher.js";
@@ -691,6 +693,7 @@ import _poolTransplantTheorist from "../pool/transplant-theorist.js";
 import _poolTrapjawTyrant from "../pool/trapjaw-tyrant.js";
 import _poolTreachery from "../pool/treachery.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
+import _poolTrevaTheRenewer from "../pool/treva-the-renewer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
@@ -777,6 +780,7 @@ import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
+import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
@@ -878,6 +882,7 @@ const shard: CardShard = {
     _poolChainersEdict,
     _poolChakramRetriever,
     _poolChangelingBerserker,
+    _poolChaoticStrike,
     _poolChardalynDragon,
     _poolChasmDrake,
     _poolChillOfTheGrave,
@@ -1241,6 +1246,7 @@ const shard: CardShard = {
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
     _poolOtterPenguin,
+    _poolOvereagerApprentice,
     _poolOvergrownTomb,
     _poolOverpoweringAttack,
     _poolOxiddaFinisher,
@@ -1479,6 +1485,7 @@ const shard: CardShard = {
     _poolTrapjawTyrant,
     _poolTreachery,
     _poolTrelasarraMoonDancer,
+    _poolTrevaTheRenewer,
     _poolTritonWaverider,
     _poolTriumphantChomp,
     _poolTrollsOfTelJilad,
@@ -1567,6 +1574,7 @@ const shard: CardShard = {
     _tokensGoblinWizardToken,
     _tokensGremlinToken,
     _tokensInsectTokenBlack01,
+    _tokensKnightTokenFirstStrike,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,

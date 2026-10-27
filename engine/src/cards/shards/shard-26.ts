@@ -358,6 +358,7 @@ import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
+import _poolKavuTitan from "../pool/kavu-titan.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
@@ -387,6 +388,7 @@ import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLoss from "../pool/loss.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
+import _poolLoxodonHierarch from "../pool/loxodon-hierarch.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolLupinePrototype from "../pool/lupine-prototype.js";
@@ -511,6 +513,7 @@ import _poolRadiantDestiny from "../pool/radiant-destiny.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
+import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRathiDragon from "../pool/rathi-dragon.js";
 import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
@@ -582,6 +585,7 @@ import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolSeraphicGreatsword from "../pool/seraphic-greatsword.js";
 import _poolSerenity from "../pool/serenity.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
+import _poolSetonsDesire from "../pool/setons-desire.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
@@ -628,6 +632,7 @@ import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
+import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
@@ -678,6 +683,7 @@ import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
+import _poolThoughtDevourer from "../pool/thought-devourer.js";
 import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
@@ -778,6 +784,7 @@ import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dra
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensFesteringGoblinToken from "../tokens/festering-goblin-token.js";
 import _tokensHippoToken from "../tokens/hippo-token.js";
+import _tokensHorrorToken44 from "../tokens/horror-token-4-4.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
@@ -1147,6 +1154,7 @@ const shard: CardShard = {
     _poolKardursViciousReturn,
     _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
+    _poolKavuTitan,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKelsFightFixer,
@@ -1176,6 +1184,7 @@ const shard: CardShard = {
     _poolLoss,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
+    _poolLoxodonHierarch,
     _poolLoyalGryff,
     _poolLumengridSentinel,
     _poolLupinePrototype,
@@ -1300,6 +1309,7 @@ const shard: CardShard = {
     _poolRaftSecurityOfficer,
     _poolRaidersSpoils,
     _poolRallyTheAncestors,
+    _poolRallyTheRighteous,
     _poolRasputinTheOneiromancer,
     _poolRathiDragon,
     _poolRavagingBlaze,
@@ -1371,6 +1381,7 @@ const shard: CardShard = {
     _poolSeraphicGreatsword,
     _poolSerenity,
     _poolSerpentineAmbush,
+    _poolSetonsDesire,
     _poolShackleSlinger,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,
@@ -1417,6 +1428,7 @@ const shard: CardShard = {
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
+    _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,
     _poolSporeSwarm,
@@ -1467,6 +1479,7 @@ const shard: CardShard = {
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
+    _poolThoughtDevourer,
     _poolThranLens,
     _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,
@@ -1569,6 +1582,7 @@ const shard: CardShard = {
     _tokensElementalTokenVernalSovereign,
     _tokensFesteringGoblinToken,
     _tokensHippoToken,
+    _tokensHorrorToken44,
     _tokensNymphToken,
     _tokensOozeToken33,
     _tokensPegasusToken,
