@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
+import _poolAddle from "../pool/addle.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
 import _poolAethersnipe from "../pool/aethersnipe.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
@@ -20,6 +21,7 @@ import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
+import _poolAngelicShield from "../pool/angelic-shield.js";
 import _poolAngrathTheFlameChained from "../pool/angrath-the-flame-chained.js";
 import _poolAngrathsAmbusher from "../pool/angraths-ambusher.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
@@ -566,6 +568,7 @@ import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
+import _poolScoutingTrek from "../pool/scouting-trek.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
@@ -758,6 +761,7 @@ import _poolWarpathGhoul from "../pool/warpath-ghoul.js";
 import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
+import _poolWax from "../pool/wax.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
@@ -800,6 +804,7 @@ const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
     _poolAccomplishedAlchemist,
+    _poolAddle,
     _poolAetherSearcher,
     _poolAethersnipe,
     _poolAgadeemOccultist,
@@ -815,6 +820,7 @@ const shard: CardShard = {
     _poolAncestorsEmbrace,
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
+    _poolAngelicShield,
     _poolAngrathTheFlameChained,
     _poolAngrathsAmbusher,
     _poolAngrathsRampage,
@@ -1361,6 +1367,7 @@ const shard: CardShard = {
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScourgeOfGeierReach,
+    _poolScoutingTrek,
     _poolScrollboost,
     _poolSecondChance,
     _poolSeeBeyond,
@@ -1553,6 +1560,7 @@ const shard: CardShard = {
     _poolWarpedLandscape,
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
+    _poolWax,
     _poolWebWarriors,
     _poolWeirdingWood,
     _poolWhack,

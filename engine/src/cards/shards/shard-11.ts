@@ -547,6 +547,7 @@ import _poolRendclawTrow from "../pool/rendclaw-trow.js";
 import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
 import _poolRevengeOfTheRats from "../pool/revenge-of-the-rats.js";
+import _poolRewardsOfDiversity from "../pool/rewards-of-diversity.js";
 import _poolRibCageSpider from "../pool/rib-cage-spider.js";
 import _poolRimewindTaskmage from "../pool/rimewind-taskmage.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
@@ -1349,6 +1350,7 @@ const shard: CardShard = {
     _poolRepulsorBots,
     _poolRevelsongHorn,
     _poolRevengeOfTheRats,
+    _poolRewardsOfDiversity,
     _poolRibCageSpider,
     _poolRimewindTaskmage,
     _poolRiseToTheChallenge,

@@ -94,6 +94,7 @@ import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
 import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
+import _poolBreathOfDarigaaz from "../pool/breath-of-darigaaz.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
@@ -669,6 +670,7 @@ import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
+import _poolTidalVisionary from "../pool/tidal-visionary.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTinStreetMarket from "../pool/tin-street-market.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolBrazenBorrower,
     _poolBrazenScourge,
     _poolBreakerOfCreation,
+    _poolBreathOfDarigaaz,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
@@ -1439,6 +1442,7 @@ const shard: CardShard = {
     _poolThunderStrike,
     _poolThunderblust,
     _poolThunderousMight,
+    _poolTidalVisionary,
     _poolTimeElemental,
     _poolTinStreetMarket,
     _poolTitanHunter,

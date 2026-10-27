@@ -66,6 +66,7 @@ import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
+import _poolBind from "../pool/bind.js";
 import _poolBirthOfTheImperium from "../pool/birth-of-the-imperium.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
@@ -551,6 +552,7 @@ import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.j
 import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
 import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
+import _poolRestock from "../pool/restock.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRewind from "../pool/rewind.js";
@@ -862,6 +864,7 @@ const shard: CardShard = {
     _poolBenthicBiomancer,
     _poolBenthicInfiltrator,
     _poolBileUrchin,
+    _poolBind,
     _poolBirthOfTheImperium,
     _poolBlackTomCassidy,
     _poolBlightedBurgeoning,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolResoluteBlademaster,
     _poolResourcefulReturn,
     _poolRestlessPrairie,
+    _poolRestock,
     _poolReturnUponTheTide,
     _poolReverseDamage,
     _poolRewind,

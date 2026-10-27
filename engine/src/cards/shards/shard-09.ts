@@ -129,6 +129,7 @@ import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolCloudCover from "../pool/cloud-cover.js";
+import _poolCoalitionVictory from "../pool/coalition-victory.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
@@ -164,6 +165,7 @@ import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
+import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
@@ -934,6 +936,7 @@ const shard: CardShard = {
     _poolClericClass,
     _poolClingingDarkness,
     _poolCloudCover,
+    _poolCoalitionVictory,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDiscordantSpirit,
+    _poolDismantlingBlow,
     _poolDisownedAncestor,
     _poolDivideByZero,
     _poolDoomWhisperer,

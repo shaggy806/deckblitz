@@ -236,6 +236,7 @@ import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFoulRenewal from "../pool/foul-renewal.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
+import _poolFrenziedTilling from "../pool/frenzied-tilling.js";
 import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
@@ -666,6 +667,7 @@ import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTribalFlames from "../pool/tribal-flames.js";
 import _poolTrigonOfMending from "../pool/trigon-of-mending.js";
 import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
@@ -994,6 +996,7 @@ const shard: CardShard = {
     _poolFortressCrab,
     _poolFoulRenewal,
     _poolFreeFromFlesh,
+    _poolFrenziedTilling,
     _poolFrostpeakYeti,
     _poolFuneralRoom,
     _poolFunnelWebRecluse,
@@ -1424,6 +1427,7 @@ const shard: CardShard = {
     _poolTransguildPromenade,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTribalFlames,
     _poolTrigonOfMending,
     _poolTrostanisSummoner,
     _poolTruckToss,

@@ -76,6 +76,7 @@ import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBladedBracers from "../pool/bladed-bracers.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
+import _poolBlindSeer from "../pool/blind-seer.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
 import _poolBlitzHellion from "../pool/blitz-hellion.js";
 import _poolBlitzOfTheThunderRaptor from "../pool/blitz-of-the-thunder-raptor.js";
@@ -927,6 +928,7 @@ const shard: CardShard = {
     _poolBlackWidowDeadlyHunter,
     _poolBladedBracers,
     _poolBlightedAgent,
+    _poolBlindSeer,
     _poolBlinkmothWell,
     _poolBlitzHellion,
     _poolBlitzOfTheThunderRaptor,

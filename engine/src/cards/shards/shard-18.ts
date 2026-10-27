@@ -8,6 +8,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAgonizingDemise from "../pool/agonizing-demise.js";
 import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
@@ -54,6 +55,7 @@ import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
+import _poolBlazingSpecter from "../pool/blazing-specter.js";
 import _poolBlindSpotGiant from "../pool/blind-spot-giant.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
@@ -792,6 +794,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAgonizingDemise,
     _poolAjaniMentorOfHeroes,
     _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
@@ -838,6 +841,7 @@ const shard: CardShard = {
     _poolBindingAgony,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
+    _poolBlazingSpecter,
     _poolBlindSpotGiant,
     _poolBlindingMage,
     _poolBlitzAutomaton,

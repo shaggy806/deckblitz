@@ -182,6 +182,7 @@ import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
 import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
 import _poolDreamsGrip from "../pool/dreams-grip.js";
+import _poolDredge from "../pool/dredge.js";
 import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
@@ -572,6 +573,7 @@ import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSaheeliRai from "../pool/saheeli-rai.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
+import _poolSaprolingInfestation from "../pool/saproling-infestation.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
 import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
@@ -968,6 +970,7 @@ const shard: CardShard = {
     _poolDreamBeavers,
     _poolDreamrootCascade,
     _poolDreamsGrip,
+    _poolDredge,
     _poolDredgersInsight,
     _poolDrillTooDeep,
     _poolDromokaWarrior,
@@ -1358,6 +1361,7 @@ const shard: CardShard = {
     _poolSaheeliRai,
     _poolSandstormCharger,
     _poolSanguinaryMage,
+    _poolSaprolingInfestation,
     _poolSaurianSymbiote,
     _poolSavaenElves,
     _poolSavageGorger,

@@ -282,6 +282,7 @@ import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
 import _poolHeroesBane from "../pool/heroes-bane.js";
+import _poolHeroesReunion from "../pool/heroes-reunion.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHiddenSpider from "../pool/hidden-spider.js";
 import _poolHideousLaughter from "../pool/hideous-laughter.js";
@@ -591,6 +592,7 @@ import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
+import _poolSkizzik from "../pool/skizzik.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
 import _poolSlayerOfTheWicked from "../pool/slayer-of-the-wicked.js";
@@ -1087,6 +1089,7 @@ const shard: CardShard = {
     _poolHellSwarm,
     _poolHeroOfIroas,
     _poolHeroesBane,
+    _poolHeroesReunion,
     _poolHeronbladeElite,
     _poolHiddenSpider,
     _poolHideousLaughter,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolSkimmingStrike,
     _poolSkirkProspector,
     _poolSkitteringSurveyor,
+    _poolSkizzik,
     _poolSkycatSovereign,
     _poolSkyreaping,
     _poolSlayerOfTheWicked,

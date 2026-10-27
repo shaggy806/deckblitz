@@ -202,6 +202,7 @@ import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDriftingDjinn from "../pool/drifting-djinn.js";
 import _poolDrillBit from "../pool/drill-bit.js";
+import _poolDromarTheBanisher from "../pool/dromar-the-banisher.js";
 import _poolDryadMilitant from "../pool/dryad-militant.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
@@ -612,6 +613,7 @@ import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
 import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
+import _poolSleepersRobe from "../pool/sleepers-robe.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
@@ -625,6 +627,7 @@ import _poolSpellshock from "../pool/spellshock.js";
 import _poolSpellskite from "../pool/spellskite.js";
 import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
+import _poolSpiteMalice from "../pool/spite-malice.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolSporolothAncient from "../pool/sporoloth-ancient.js";
 import _poolSqueesEmbrace from "../pool/squees-embrace.js";
@@ -706,6 +709,7 @@ import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolUninvitedGeist from "../pool/uninvited-geist.js";
 import _poolUnnaturalAggression from "../pool/unnatural-aggression.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
+import _poolUrborgSkeleton from "../pool/urborg-skeleton.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
 import _poolVampiresZeal from "../pool/vampires-zeal.js";
 import _poolVatEmergence from "../pool/vat-emergence.js";
@@ -980,6 +984,7 @@ const shard: CardShard = {
     _poolDreyKeeper,
     _poolDriftingDjinn,
     _poolDrillBit,
+    _poolDromarTheBanisher,
     _poolDryadMilitant,
     _poolDryadsFavor,
     _poolDuergarHedgeMage,
@@ -1390,6 +1395,7 @@ const shard: CardShard = {
     _poolSkyfirePhoenix,
     _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
+    _poolSleepersRobe,
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,
@@ -1403,6 +1409,7 @@ const shard: CardShard = {
     _poolSpellskite,
     _poolSpinewoodsArmadillo,
     _poolSpiritSummoning,
+    _poolSpiteMalice,
     _poolSpitefulBully,
     _poolSporolothAncient,
     _poolSqueesEmbrace,
@@ -1484,6 +1491,7 @@ const shard: CardShard = {
     _poolUninvitedGeist,
     _poolUnnaturalAggression,
     _poolUnnaturalMoonrise,
+    _poolUrborgSkeleton,
     _poolVampireNoble,
     _poolVampiresZeal,
     _poolVatEmergence,

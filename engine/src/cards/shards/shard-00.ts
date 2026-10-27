@@ -343,6 +343,7 @@ import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
 import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
 import _poolKamiOfTheHunt from "../pool/kami-of-the-hunt.js";
+import _poolKavuLair from "../pool/kavu-lair.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
 import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
 import _poolKeldonFirebombers from "../pool/keldon-firebombers.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolKabiraCrossroads,
     _poolKabiraVindicator,
     _poolKamiOfTheHunt,
+    _poolKavuLair,
     _poolKayasOnslaught,
     _poolKeeperOfTheCadence,
     _poolKeldonFirebombers,

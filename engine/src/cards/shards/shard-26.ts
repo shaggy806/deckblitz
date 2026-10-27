@@ -355,6 +355,7 @@ import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
+import _poolKavuTitan from "../pool/kavu-titan.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
@@ -624,6 +625,7 @@ import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
+import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
@@ -1140,6 +1142,7 @@ const shard: CardShard = {
     _poolKardursViciousReturn,
     _poolKatakiWarsWage,
     _poolKataraWaterTribesHope,
+    _poolKavuTitan,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKelsFightFixer,
@@ -1409,6 +1412,7 @@ const shard: CardShard = {
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
+    _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,
     _poolSporeSwarm,

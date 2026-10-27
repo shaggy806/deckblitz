@@ -104,6 +104,7 @@ import _poolCaptainsHook from "../pool/captains-hook.js";
 import _poolCatCollector from "../pool/cat-collector.js";
 import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
+import _poolCauldronDance from "../pool/cauldron-dance.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
 import _poolCavernHarpy from "../pool/cavern-harpy.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolCatCollector,
     _poolCatalog,
     _poolCathodion,
+    _poolCauldronDance,
     _poolCausticExhale,
     _poolCavernCrawler,
     _poolCavernHarpy,

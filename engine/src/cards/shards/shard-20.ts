@@ -160,6 +160,7 @@ import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
 import _poolCrownedCeratok from "../pool/crowned-ceratok.js";
 import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
+import _poolCrusadingKnight from "../pool/crusading-knight.js";
 import _poolCrush from "../pool/crush.js";
 import _poolCrushingPain from "../pool/crushing-pain.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
@@ -191,6 +192,7 @@ import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
 import _poolDismissIntoDream from "../pool/dismiss-into-dream.js";
 import _poolDispel from "../pool/dispel.js";
+import _poolDistortingWake from "../pool/distorting-wake.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
 import _poolDivineOffering from "../pool/divine-offering.js";
 import _poolDivinityOfPride from "../pool/divinity-of-pride.js";
@@ -401,6 +403,7 @@ import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningBerserker from "../pool/lightning-berserker.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
+import _poolLlanowarElite from "../pool/llanowar-elite.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
 import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
@@ -1003,6 +1006,7 @@ const shard: CardShard = {
     _poolCrowdsFavor,
     _poolCrownedCeratok,
     _poolCrumblingAshes,
+    _poolCrusadingKnight,
     _poolCrush,
     _poolCrushingPain,
     _poolCrystalDragon,
@@ -1034,6 +1038,7 @@ const shard: CardShard = {
     _poolDinosaurHunter,
     _poolDismissIntoDream,
     _poolDispel,
+    _poolDistortingWake,
     _poolDistortionStrike,
     _poolDivineOffering,
     _poolDivinityOfPride,
@@ -1244,6 +1249,7 @@ const shard: CardShard = {
     _poolLifesLegacy,
     _poolLightningBerserker,
     _poolLightningSpear,
+    _poolLlanowarElite,
     _poolLochKorrigan,
     _poolLongGoodbye,
     _poolLongLakeNuisance,

@@ -159,6 +159,7 @@ import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
+import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
@@ -405,6 +406,7 @@ import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
+import _poolMalice from "../pool/malice.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolManrikiGusari from "../pool/manriki-gusari.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
@@ -1002,6 +1004,7 @@ const shard: CardShard = {
     _poolDemonicDread,
     _poolDerangedHermit,
     _poolDesolateLighthouse,
+    _poolDevouringStrossus,
     _poolDiscipleOfMalice,
     _poolDivineGambit,
     _poolDomriRade,
@@ -1248,6 +1251,7 @@ const shard: CardShard = {
     _poolMagmaVein,
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
+    _poolMalice,
     _poolManaformHellkite,
     _poolManrikiGusari,
     _poolMarchesasEmissary,

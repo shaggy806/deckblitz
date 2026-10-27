@@ -512,6 +512,7 @@ import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
+import _poolRithTheAwakener from "../pool/rith-the-awakener.js";
 import _poolRithsGrove from "../pool/riths-grove.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,
+    _poolRithTheAwakener,
     _poolRithsGrove,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,
