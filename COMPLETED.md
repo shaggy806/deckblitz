@@ -1568,6 +1568,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **The need-keys plan's tooling, Phase 0** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`):
+  `cards:needs -- --audit` (records with every need built, since triage or before; cards whose
+  records disagree; undocumented open keys; merge candidates by family, to `needs-audit.txt` in
+  the OS temp dir), `--greedy [--top N] [--family F]` (the build order over every record, a pair
+  of keys as one step when two free more together, with milestones and the two-key pairs) and
+  `--brief <family> [--open-only] [--page N]` (a family's open keys with counts, descriptions and
+  whys, paged at ~4K tokens). `poolNames` now matches a multi-face card by any face that names no
+  other card (Oracle snapshot). The numbers they report are in the plan.
 - **`client/e2e/put-down.spec.ts` was flaky** (2026-10-24): not the test — a card landing froze
   short of its tile or the stack for 100–250 ms on a 4-player board. Timers ran out a frame or more
   before the flights they timed (a flight starts on a later frame), so the frame's end, and with it

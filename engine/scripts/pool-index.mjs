@@ -41,7 +41,7 @@ export const ENGINE = path.join(here, "..");
 const CACHE = path.join(ENGINE, ".cache");
 export const INDEX_FILE = path.join(CACHE, "pool-index.jsonl");
 export const VOCAB_FILE = path.join(CACHE, "pool-vocab.json");
-const VERSION = 2;
+const VERSION = 3; // 3: `names` carries a multi-face card's every name (poolNames' faces)
 const SUBDIRS = ["pool", "tokens"];
 /** Besides the card files themselves, what shapes a definition: the helpers
  * and vocabulary a card file calls (`src/cards/*.ts`, `src/*.ts`). */

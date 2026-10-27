@@ -29,13 +29,32 @@
 //   --next [N]         the next N (default 60) Commander-legal cards by EDHREC
 //                      rank that are neither in the pool nor triaged — the
 //                      next batch to look at
+//   --audit            what to fix before building from the records: counts,
+//                      and to needs-audit.txt in the OS temp dir the lists —
+//                      records with every need built (since triage or before),
+//                      cards whose records disagree, undocumented open keys,
+//                      and merge candidates (same suffix under two prefixes;
+//                      in one family, one suffix inside another or most tokens
+//                      shared)
+//   --greedy [--top N] [--family F]
+//                      the build order over every record, each step what fully
+//                      unblocks the most cards — a pair of keys when two free
+//                      more together than the best one key would per key —
+//                      with milestones, and the pairs (cards needing exactly
+//                      two keys); --family builds only F's keys
+//   --brief <family> [--open-only] [--page N]
+//                      the compact text a model judges a family from: each
+//                      open key with its cards waiting, description and up to
+//                      two whys, then the family's built keys; paged at ~4K
+//                      tokens
 //
 // The library half (`loadVocabulary`, `loadRecords`, `poolNames`) is what
 // `card-brief.mjs` reads records through (`poolNames` by way of the pool
 // index, `pool-index.mjs`, which stores its answer).
 
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -174,8 +193,10 @@ export function loadRecords() {
 }
 
 /** Card names in the pool, front faces, read from the sources (no build
- * needed): the first `name:` of each file's `defineCard`, and every face's. */
-export function poolNames() {
+ * needed): the first `name:` of each file's `defineCard`, and every face's —
+ * and, with `faces` (the default), every name of a multi-face card authored
+ * under one face's (from the Oracle snapshot). */
+export function poolNames({ faces = true } = {}) {
   const names = new Map();
   for (const file of readdirSync(POOL_DIR).filter((n) => n.endsWith(".ts"))) {
     const src = readFileSync(path.join(POOL_DIR, file), "utf8");
@@ -186,7 +207,42 @@ export function poolNames() {
       if (!names.has(name)) names.set(name, `src/cards/pool/${file}`);
     }
   }
+  // A multi-face card authored under one face's name is in the pool by its
+  // full name and every face, so a record naming it any way drops out. Only a
+  // face that names no other card counts: a prepare card's back face can be a
+  // card of its own (Stensian Sanguinist // Exsanguinate beside Exsanguinate),
+  // or shared by several fronts (Soul Tether).
+  if (!faces) return names;
+  const byCard = new Map();
+  for (const [face, full] of uniqueFaces()) byCard.set(full, [...(byCard.get(full) ?? []), face]);
+  for (const [full, cardFaces] of byCard) {
+    const file = [full, ...cardFaces].map((n) => names.get(n)).find((f) => f !== undefined);
+    if (file === undefined) continue;
+    for (const n of [full, ...cardFaces]) if (!names.has(n)) names.set(n, file);
+  }
   return names;
+}
+
+/** Each face name of the Oracle snapshot's multi-face cards that names only
+ * that one card, mapped to the card's full name. Empty without a snapshot. */
+function uniqueFaces() {
+  let entries;
+  try {
+    entries = loadSnapshot().entries;
+  } catch {
+    return new Map();
+  }
+  const whole = new Set(entries.map((e) => e.name));
+  const owners = new Map();
+  for (const e of entries) {
+    if (!e.name.includes(" // ")) continue;
+    for (const face of new Set(e.name.split(" // ").map((f) => f.trim()))) {
+      owners.set(face, [...new Set([...(owners.get(face) ?? []), e.name])]);
+    }
+  }
+  const unique = new Map();
+  for (const [face, cards] of owners) if (cards.length === 1 && !whole.has(face)) unique.set(face, cards[0]);
+  return unique;
 }
 
 // ------------------------------------------------------------------ CLI
@@ -290,15 +346,17 @@ function main() {
     return;
   }
 
+  if (args.includes("--audit")) return audit(vocab, records, pool, waiting);
+  if (args.includes("--greedy")) return greedy(vocab, waiting, Number(opt("--top", 50)), opt("--family", undefined));
+  if (args.includes("--brief")) {
+    return brief(vocab, waiting, opt("--brief", ""), args.includes("--open-only"), Number(opt("--page", 1)));
+  }
+
   // --rank (the default)
   const top = Number(opt("--top", 40));
   const cardsByNeed = new Map();
   const onlyNeed = new Map();
-  const latest = new Map();
-  for (const r of waiting) {
-    const prev = latest.get(frontName(r.name));
-    if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) latest.set(frontName(r.name), r);
-  }
+  const latest = latestByCard(waiting);
   for (const r of latest.values()) {
     const open = [...new Set(openNeeds(r, vocab))];
     for (const k of open) cardsByNeed.set(k, (cardsByNeed.get(k) ?? 0) + 1);
@@ -315,6 +373,299 @@ function main() {
   for (const [k, n] of [...families].sort((a, b) => b[1] - a[1]).slice(0, Math.min(top, 25))) {
     console.log(`${String(n).padStart(4)}  ${k}`);
   }
+}
+
+/** Each card's newest record, keyed by its front face: a later triage saw a
+ * later engine, and a split card's record by its full name supersedes an
+ * older one by its first half. */
+function latestByCard(records) {
+  const latest = new Map();
+  for (const r of records) {
+    const prev = latest.get(frontName(r.name));
+    if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) latest.set(frontName(r.name), r);
+  }
+  return latest;
+}
+
+/** A record's needs as canonical keys, meta keys dropped, each once. */
+const keysOf = (record, vocab) => [
+  ...new Set(record.needs.map((raw) => vocab.canonical(raw) ?? raw).filter((k) => !vocab.isMeta(k))),
+];
+
+const clip = (text, n) => {
+  const flat = String(text ?? "").replace(/\s+/g, " ").trim();
+  return flat.length <= n ? flat : `${flat.slice(0, n - 1)}…`;
+};
+
+/**
+ * `--audit`: what in the records is wrong or worth merging before anything is
+ * built from them. Counts to stdout, the lists to `needs-audit.txt` in the OS
+ * temp dir.
+ */
+function audit(vocab, records, pool, waiting) {
+  const out = [];
+  const section = (title, lines) => out.push(`## ${title} (${lines.length})`, ...lines, "");
+
+  // Records whose card is in the pool only by a face name (poolNames' faces).
+  const byFile = poolNames({ faces: false });
+  const faceNamed = records.filter((r) => pool.has(frontName(r.name)) && !byFile.has(frontName(r.name)));
+  section(
+    "Records whose card is in the pool by a face name (dropped everywhere)",
+    faceNamed.map((r) => `- ${r.name} [${r.batch}] → ${pool.get(frontName(r.name))}`),
+  );
+
+  const latest = latestByCard(waiting);
+  const noneOpen = [...latest.values()].filter((r) => keysOf(r, vocab).every((k) => vocab.isBuilt(k)));
+  const metaOnly = noneOpen.filter((r) => keysOf(r, vocab).length === 0);
+  const since = noneOpen.filter((r) => keysOf(r, vocab).some((k) => vocab.builtSince(k, r.date)));
+  const before = noneOpen.filter((r) => !metaOnly.includes(r) && !since.includes(r));
+  const line = (r) => `- ${r.name} [${r.batch}${r.date ? `, ${r.date}` : ""}] ${keysOf(r, vocab).join(", ")}`;
+  section("Every need built since triage (--stale's recheck list)", since.map(line));
+  section("Every need built before triage (key too coarse, or never rechecked)", before.map(line));
+  section("Only meta needs (no feature named)", metaOnly.map((r) => `- ${r.name} [${r.batch}] ${r.needs.join(", ")}`));
+
+  const groups = new Map();
+  for (const r of waiting) groups.set(frontName(r.name), [...(groups.get(frontName(r.name)) ?? []), r]);
+  const multi = [...groups].filter(([, rs]) => rs.length > 1);
+  const sig = (r) => keysOf(r, vocab).sort().join(",");
+  const disagree = multi.filter(([, rs]) => new Set(rs.map(sig)).size > 1);
+  section(
+    "Cards with more than one record whose needs disagree (the latest wins)",
+    disagree.map(([name, rs]) => `- ${name}: ${rs.map((r) => `[${r.batch}${r.date ? ` ${r.date}` : ""}] ${sig(r) || "—"}`).join("  |  ")}`),
+  );
+
+  // Open keys: named by a latest record and not built.
+  const cards = new Map();
+  for (const r of latest.values()) for (const k of keysOf(r, vocab)) if (!vocab.isBuilt(k)) cards.set(k, (cards.get(k) ?? 0) + 1);
+  const bare = (k) => {
+    const f = vocab.features.get(k);
+    return f === undefined || (!f.description && !f.example);
+  };
+  const undocumented = [...cards.keys()].filter(bare).sort((a, b) => cards.get(b) - cards.get(a) || a.localeCompare(b));
+  section("Open keys with no description and no example", undocumented.map((k) => `- ${k} (${cards.get(k)})`));
+
+  const candidates = mergeCandidates(vocab, cards);
+  section(
+    "Merge candidates (keys in one family sharing most suffix tokens, differing only by prefix, or one suffix inside another)",
+    candidates.map((c) => `- [${c.family}] ${c.a} (${c.na}) ~ ${c.b} (${c.nb}) — ${c.rule}`),
+  );
+
+  const file = path.join(tmpdir(), "needs-audit.txt");
+  writeFileSync(file, out.join("\n"));
+  const rules = (rule) => candidates.filter((c) => c.rule === rule).length;
+  console.log(`${latest.size} unimplemented cards with a record, ${cards.size} open keys.`);
+  console.log(`Records in the pool by a face name: ${faceNamed.length} (dropped everywhere now).`);
+  console.log(
+    `No open need: ${noneOpen.length} — every need built since triage ${since.length}, before triage ${before.length}, only meta needs ${metaOnly.length}.`,
+  );
+  console.log(`Cards with more than one record: ${multi.length}; their needs disagree: ${disagree.length}.`);
+  console.log(`Open keys with no description and no example: ${undocumented.length}.`);
+  console.log(
+    `Merge candidates: ${candidates.length} pairs (prefix only ${rules("prefix only")}, suffix inside ${rules("suffix inside")}, shared tokens ${rules("shared tokens")}) in ${new Set(candidates.map((c) => c.family)).size} families.`,
+  );
+  console.log(`Lists: ${file}`);
+}
+
+const STOP = new Set(["a", "an", "the", "of", "to", "as", "on", "in", "for", "with", "from", "or", "and", "by", "per"]);
+
+/**
+ * Pairs of keys that may mean one feature, at least one of them open (`cards`:
+ * open key → cards waiting). Three tests: the same suffix under two prefixes
+ * (`effect:x`, `static:x`, any family); within a family, one suffix's tokens a
+ * run inside the other's; or most tokens shared (Jaccard ≥ 0.6, two or more).
+ */
+function mergeCandidates(vocab, cards) {
+  const split = (k) => {
+    const i = k.indexOf(":");
+    const suffix = i < 0 ? k : k.slice(i + 1);
+    return { suffix, tokens: suffix.split("-").filter((t) => t !== "" && !STOP.has(t)) };
+  };
+  const keys = new Set([...cards.keys(), ...vocab.built]);
+  const out = [];
+  const seen = new Set();
+  const add = (a, b, family, rule) => {
+    const id = [a, b].sort().join("|");
+    if (seen.has(id) || (!cards.has(a) && !cards.has(b))) return;
+    seen.add(id);
+    const n = (k) => (cards.has(k) ? String(cards.get(k)) : "built");
+    out.push({ a, b, na: n(a), nb: n(b), family, rule });
+  };
+  const bySuffix = new Map();
+  for (const k of keys) bySuffix.set(split(k).suffix, [...(bySuffix.get(split(k).suffix) ?? []), k]);
+  for (const [, ks] of bySuffix) {
+    for (let i = 0; i < ks.length; i += 1) for (let j = i + 1; j < ks.length; j += 1) {
+      add(ks[i], ks[j], vocab.familyOf(ks[i]) === vocab.familyOf(ks[j]) ? vocab.familyOf(ks[i]) : "—", "prefix only");
+    }
+  }
+  const families = new Map();
+  for (const k of keys) families.set(vocab.familyOf(k), [...(families.get(vocab.familyOf(k)) ?? []), k]);
+  for (const [family, ks] of families) {
+    const parts = ks.map((k) => ({ k, ...split(k) }));
+    for (let i = 0; i < parts.length; i += 1) for (let j = i + 1; j < parts.length; j += 1) {
+      const [x, y] = [parts[i], parts[j]];
+      if (x.suffix === y.suffix) continue;
+      const [short, long] = x.tokens.length <= y.tokens.length ? [x, y] : [y, x];
+      if (short.tokens.length > 0 && `-${long.tokens.join("-")}-`.includes(`-${short.tokens.join("-")}-`)) {
+        add(x.k, y.k, family, "suffix inside");
+        continue;
+      }
+      const shared = x.tokens.filter((t) => y.tokens.includes(t)).length;
+      const union = new Set([...x.tokens, ...y.tokens]).size;
+      if (shared >= 2 && shared / union >= 0.6) add(x.k, y.k, family, "shared tokens");
+    }
+  }
+  const weight = (c) => (c.na === "built" ? 0 : Number(c.na)) + (c.nb === "built" ? 0 : Number(c.nb));
+  return out.sort((p, q) => p.family.localeCompare(q.family) || weight(q) - weight(p) || p.a.localeCompare(q.a));
+}
+
+/**
+ * `--greedy`: the build order over every record — each step builds what fully
+ * unblocks the most cards. A step is one key, or a **pair** when two keys
+ * free more cards together (cards needing exactly those two) than the best
+ * single key would free per key built. `--family F` builds only F's keys.
+ */
+function greedy(vocab, waiting, top, familyArg) {
+  const family = familyArg === undefined ? undefined : (vocab.canonical(familyArg) ?? familyArg);
+  const buildable = (k) => family === undefined || k === family || vocab.familyOf(k) === family;
+  const cards = [...latestByCard(waiting).values()]
+    .map((r) => ({ name: r.name, open: new Set(keysOf(r, vocab).filter((k) => !vocab.isBuilt(k))) }))
+    .filter((c) => c.open.size > 0);
+
+  const run = (withPairs) => {
+    const left = cards.map((c) => new Set(c.open));
+    const steps = [];
+    let total = 0;
+    for (;;) {
+      const single = new Map();
+      const joint = new Map();
+      for (const open of left) {
+        if (open.size === 0 || ![...open].every(buildable)) continue;
+        if (open.size === 1) {
+          const [k] = open;
+          single.set(k, (single.get(k) ?? 0) + 1);
+        } else if (open.size === 2 && withPairs) {
+          const id = [...open].sort().join("|");
+          joint.set(id, (joint.get(id) ?? 0) + 1);
+        }
+      }
+      const better = (cand, best) => best === null || cand.gain > best.gain || (cand.gain === best.gain && cand.id < best.id);
+      let one = null;
+      for (const [k, n] of single) if (better({ id: k, gain: n }, one)) one = { id: k, keys: [k], gain: n };
+      let two = null;
+      for (const [id, n] of joint) {
+        const keys = id.split("|");
+        const cand = { id, keys, gain: n + keys.reduce((s, k) => s + (single.get(k) ?? 0), 0) };
+        if (better(cand, two)) two = cand;
+      }
+      const best = two !== null && two.gain / 2 > (one?.gain ?? 0) ? two : one;
+      if (best === null) break;
+      for (const open of left) for (const k of best.keys) open.delete(k);
+      total += best.gain;
+      steps.push({ ...best, total });
+    }
+    return steps;
+  };
+
+  const steps = run(true);
+  const milestones = (list) => {
+    const at = [10, 25, 50, 100, 200, 400];
+    let keys = 0;
+    const hit = [];
+    for (const s of list) {
+      const before = keys;
+      keys += s.keys.length;
+      for (const m of at) if (before < m && keys >= m) hit.push(`${m} keys free ${s.total}`);
+    }
+    const last = list.at(-1);
+    return `${hit.join(", ")}${last ? `; all ${keys} keys free ${last.total}` : ""}`;
+  };
+  const twoNeed = cards.filter((c) => c.open.size === 2 && [...c.open].every(buildable)).length;
+  console.log(
+    `${cards.length} cards with an open need${family ? `; building only family ${family}` : ""}. Greedy order (cards freed, running total; a + b is a pair built together):`,
+  );
+  let keys = 0;
+  for (const [i, s] of steps.slice(0, top).entries()) {
+    keys += s.keys.length;
+    console.log(`${String(i + 1).padStart(4)}  ${String(keys).padStart(4)}  +${String(s.gain).padStart(3)}  ${String(s.total).padStart(5)}  ${s.keys.join(" + ")}`);
+  }
+  console.log(`\nWith pairs:   ${milestones(steps)}`);
+  console.log(`Single keys:  ${milestones(run(false))}`);
+
+  // Pairs from the start: two keys that free cards only together.
+  const single = new Map();
+  const joint = new Map();
+  for (const c of cards) {
+    if (![...c.open].every(buildable)) continue;
+    if (c.open.size === 1) single.set([...c.open][0], (single.get([...c.open][0]) ?? 0) + 1);
+    if (c.open.size === 2) {
+      const id = [...c.open].sort().join("|");
+      joint.set(id, (joint.get(id) ?? 0) + 1);
+    }
+  }
+  const pairs = [...joint].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  console.log(`\n${twoNeed} cards wait on exactly two keys, ${pairs.length} distinct pairs; the top ${Math.min(top, 25)} (alone, alone, together):`);
+  for (const [id, n] of pairs.slice(0, Math.min(top, 25))) {
+    const [a, b] = id.split("|");
+    const sa = single.get(a) ?? 0;
+    const sb = single.get(b) ?? 0;
+    console.log(`  ${String(sa).padStart(3)} ${String(sb).padStart(3)} → ${String(sa + sb + n).padStart(3)}  ${a} + ${b}`);
+  }
+}
+
+/**
+ * `--brief <family>`: what a model judges a family from — each open key with
+ * its cards waiting, description and up to two short `why`s, then the family's
+ * built keys (`--open-only` leaves those out). Paged at ~4K tokens
+ * (`--page N`).
+ */
+function brief(vocab, waiting, familyArg, openOnly, page) {
+  const BUDGET = 14000;
+  const family = vocab.canonical(familyArg) ?? familyArg;
+  const inFamily = (k) => k === family || vocab.familyOf(k) === family;
+  const open = new Map();
+  for (const r of latestByCard(waiting).values()) {
+    const keys = keysOf(r, vocab).filter((k) => !vocab.isBuilt(k));
+    for (const k of keys.filter(inFamily)) {
+      const e = open.get(k) ?? { cards: 0, only: 0, whys: [] };
+      e.cards += 1;
+      if (keys.length === 1) e.only += 1;
+      // A why that repeats the key's own example adds nothing.
+      const said = clip(`${r.name}: ${r.why}`, 150);
+      const example = clip(vocab.features.get(k)?.example ?? "", 150);
+      if (e.whys.length < 2 && r.why && said !== example) e.whys.push(said);
+      open.set(k, e);
+    }
+  }
+  const built = [...vocab.built].filter(inFamily).sort();
+  if (open.size === 0 && built.length === 0) {
+    console.log(`No keys in family ${family}.`);
+    process.exitCode = 1;
+    return;
+  }
+  const what = (k) => clip(vocab.features.get(k)?.description || vocab.features.get(k)?.example || "(no description)", 200);
+  const blocks = [...open]
+    .sort((a, b) => b[1].cards - a[1].cards || a[0].localeCompare(b[0]))
+    .map(([k, e]) => [`- ${k} [${e.cards} card${e.cards === 1 ? "" : "s"}, ${e.only} only this] ${what(k)}`, ...e.whys.map((w) => `    · ${w}`)].join("\n"));
+  if (!openOnly && built.length > 0) {
+    blocks.push(`Built in this family (${built.length}):`);
+    for (const k of built) blocks.push(`- ${k}: ${clip(vocab.features.get(k)?.description ?? "", 110)}`);
+  }
+  const pages = [[]];
+  let size = 0;
+  for (const b of blocks) {
+    if (size + b.length > BUDGET && pages.at(-1).length > 0) {
+      pages.push([]);
+      size = 0;
+    }
+    pages.at(-1).push(b);
+    size += b.length + 1;
+  }
+  const n = Math.min(Math.max(1, page), pages.length);
+  const cardsWaiting = [...open.values()].reduce((s, e) => s + e.cards, 0);
+  const head = vocab.features.get(family)?.description;
+  console.log(`# ${family}${head ? ` — ${clip(head, 200)}` : ""}`);
+  console.log(`${open.size} open keys (${cardsWaiting} card-needs), ${built.length} built. Page ${n} of ${pages.length}${n < pages.length ? ` (next: --page ${n + 1})` : ""}.\n`);
+  console.log(pages[n - 1].join("\n"));
 }
 
 /** How many records give `needs` as a bare string — for `--check`. */

@@ -58,10 +58,11 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
-  planned 2026-10-27): `needs-vocabulary.mjs` gains `--audit`, `--greedy` (pairs included) and
-  `--brief`; a trial of Sonnet against Haiku on a sample with known answers picks the model for the judging steps; then check every record is really blocked (the ~673 whose keys are all built, then
-  cheap agents merging keys by family and confirming the ~320 keys of five or more cards are
-  missing); then build in greedy order, a family per session (100 keys free ~1,350 cards).
+  in progress; the tooling, Phase 0, landed 2026-10-27): next, a trial of Sonnet against Haiku
+  on a sample with known answers picks the model for the judging steps (Phase 0.5, its own
+  session); then check every record is really blocked (the 836 with no open need, then cheap
+  agents merging keys by family and confirming the 336 keys of five or more cards are missing);
+  then build in greedy order, a family per session (100 keys free ~1,440 cards).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

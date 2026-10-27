@@ -1,6 +1,8 @@
 # Working down the need keys, after the set walk
 
-**Status:** planned (2026-10-27; a Sonnet-against-Haiku trial added as Phase 0.5). The set walk ended 2026-10-27 (batch 234), so it can start. No phase started yet.
+**Status:** in progress. Phase 0 (the tooling) is done (2026-10-27); Phase 0.5, the
+Sonnet-against-Haiku trial, is next, in a session of its own. The set walk ended 2026-10-27
+(batch 234).
 
 Once the walk ends, every Commander-legal first printing has been either authored or triaged with
 a blocked record (`{ name, needs, why }` in `engine/data/sweep-2/`, `sweep-3/` and
@@ -9,28 +11,50 @@ come first: check that each record is still really blocked, merge keys that mean
 feature, find which builds unblock the most (pairs included), and then build in that order. Most
 of the counting is done by scripts, with the model only judging, so tokens per card stay low.
 
-## Where the records stand (2026-10-27, before rounds eighteen to twenty)
+## Where the records stand (2026-10-27, after the set walk, measured by Phase 0's tools)
 
-From `scripts/needs-vocabulary.mjs`'s library (`loadVocabulary`, `loadRecords`, `poolNames`).
-For each card not in the pool, its latest record:
+From `scripts/needs-vocabulary.mjs` (`--audit`, `--greedy`, `--rank`). For each card not in the
+pool, its latest record:
 
-- **6,531 blocked cards** and **2,548 open keys**. Round eighteen to twenty will add ~600 cards.
-- Keys by cards waiting: **1,431 block one card**, 800 block 2–4, 228 block 5–9, 89 block 10 or
-  more. 1,169 cards wait only on a key no other card shares.
-- Open needs per card: 5,268 cards have one, 563 have two, 27 have three. Three quarters of
-  the cards are one feature away.
-- **673 records list no open need**: every key they name is in `built`. `--stale` shows only 38
-  of them, the ones whose key was built *after* the record was written. The other ~635 name
-  keys that were built before triage, so each key is too coarse (the card needs a variant the
-  key doesn't name) or the card was never rechecked. 21 of them are double-faced cards whose
-  front face is in the pool under its face name, which `poolNames` misses. Those are already
-  done.
-- Greedy order (each step builds the key that fully unblocks the most cards): **10 keys free
-  299 cards, 25 free 583, 50 free 908, 100 free 1,349, 200 free 1,991, 400 free 2,856**. The
-  first ~100 keys are where the cards are. Past ~400 each feature frees two cards or fewer.
-- 43 families hold ten or more open keys. The largest are combat-restriction extensions (171
-  cards), choices by other players (167), damage modification (149) and new amount variants
-  (133).
+- **6,932 cards with a record**: **6,096 still blocked** and **836 with no open need**.
+  **2,602 open keys**. (The first count, before rounds eighteen to twenty, was 6,531 cards and
+  2,548 keys.)
+- Keys by cards waiting: **1,463 block one card**, 803 block 2–4, 239 block 5–9, 97 block 10 or
+  more. **336 keys block five or more** (Phase 1 step 4's set). 1,432 cards wait on at least one
+  key no other card shares, and 1,206 wait on nothing else.
+- Open needs per card: 5,485 cards have one, 587 have two, 24 have three. Nine in ten blocked
+  cards are one feature away.
+- **The 836 with no open need** split three ways: **71** whose key was built *after* the record
+  (`--stale`'s recheck list), **704** whose keys were all built *before* triage (each key too
+  coarse, or the card never rechecked), and **61** that name only a meta key
+  (`new:unverified-in-mass-pass` and the like: never really triaged).
+- **Face names: none now.** `poolNames` now matches a multi-face card by its full name and every
+  face, from the Oracle snapshot. It counts only a face that names no other card, because a
+  prepare card's back face can be a card of its own (Stensian Sanguinist // Exsanguinate beside
+  Exsanguinate) or shared by several fronts (Soul Tether). On today's records it drops nothing.
+  The ~21 the first count gave did not reproduce; matching by any face without that guard finds
+  only those three prepare cards, which are not in the pool.
+- **371 cards have more than one record**, and for 298 of them the needs disagree. The latest
+  record wins, but an older record often names a need the newer one dropped.
+- No open key lacks both a `description` and an `example`.
+- **Merge candidates: 316 pairs** in 133 families. 10 have the same suffix under two prefixes
+  (`static:damage-cant-be-prevented` 16 and `effect:damage-cant-be-prevented` 9), 143 have one
+  suffix inside another and 163 share most tokens. These are candidates for step 1.3, not
+  merges: many pairs are a narrow open key beside the built general one.
+- **Greedy order** (each step builds what fully unblocks the most): **10 keys free 323 cards, 25
+  free 632, 50 free 978, 100 free 1,440, 200 free 2,120, 400 free 3,020**, and all 2,602 free
+  6,096. Pairs first matter at step 57 (`cost:kicker-nonmana-cost` + `effect:cost-discarded-card-ref`,
+  21 cards). Built one key at a time, the order strands 36 cards that only a pair frees (2,535
+  keys free 6,060). The top three are `decision:choose-card-name` (46), `keyword:banding` (46)
+  and `effect:grant-protection-choice` (41).
+- **587 cards wait on exactly two keys**, over 554 distinct pairs, nearly all one card each.
+  No pair frees more than four cards of its own: `amount:count-for-chosen-player` +
+  `decision:choose-player` and `decision:choose-creature-type-excluding` +
+  `effect:set-creature-type` (the latter 24 cards with its keys' own 20).
+- **43 families hold ten or more open keys.** The largest by cards waiting are choices by other
+  players (58 keys, 177 cards), damage modification (54, 173), combat-restriction extensions
+  (50, 162), new amount variants (61, 139), target-spec additions (43, 131) and cast-and-activate
+  restrictions (39, 127). `--brief static:combat-restriction-extensions` runs to two pages.
 
 ## Rules that keep tokens low
 
@@ -48,9 +72,12 @@ For each card not in the pool, its latest record:
 - **Singletons wait for the card.** A key that blocks one card is checked when that card is
   attempted, never on its own.
 
-## Phase 0: tooling (one session, script work only)
+## Phase 0: tooling (one session, script work only) — done 2026-10-27
 
-Add to `scripts/needs-vocabulary.mjs`, tested on the current records:
+Added to `scripts/needs-vocabulary.mjs` and tested on the current records (the numbers are
+above). `--greedy` takes a pair as one step when the two free more together than the best
+single key would free per key built. The `poolNames` fix keys on the Oracle snapshot's
+multi-face names. The pool index caches its answer, so the index's `VERSION` went up.
 
 1. **`--audit`** prints counts, then lists to a file in the OS temp dir:
    - records whose card is in the pool by a face name (fix `poolNames` to match faces, so these
@@ -112,7 +139,7 @@ Run in order, cheapest first.
 
 1. **Mechanical (no model).** After the `poolNames` fix, the face-named records drop out.
    Duplicate records keep the latest.
-2. **The ~673 all-built records.** First the parser: `oracle-parse` and
+2. **The 836 records with no open need** (~673 at the first count). First the parser: `oracle-parse` and
    `card:scaffold -- --report` over these names say which ones the scaffolder reads whole. Those
    are auto-finished into `review/` and checked the way the set walk checks its auto-finished
    cards. The rest are authoring work: recheck batches of ~100, worked like a set-walk batch
@@ -126,7 +153,7 @@ Run in order, cheapest first.
    general implementation would cover (three "can't block unless" variants are one static with
    a condition). The coordinator applies the JSON. Nobody re-edits the records: the aliases
    resolve their keys.
-4. **"Does the engine already do this?" for keys with five or more cards (~320).** Agents (the trial's model for this step) get 20
+4. **"Does the engine already do this?" for keys with five or more cards (336).** Agents (the trial's model for this step) get 20
    keys each from `--brief` plus the vocabulary digest (`card-digest.mjs`), about 16 agent runs.
    Each key comes back **exists**, **partial** (what's missing, in one line) or **missing**. An
    *exists* key's cards go into the step-2 recheck batches. A *partial* key's description is
