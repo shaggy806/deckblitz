@@ -21,6 +21,7 @@ import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
+import _poolAnaSanctuary from "../pool/ana-sanctuary.js";
 import _poolAncestralMemories from "../pool/ancestral-memories.js";
 import _poolAncientAmphitheater from "../pool/ancient-amphitheater.js";
 import _poolAntagonize from "../pool/antagonize.js";
@@ -260,6 +261,7 @@ import _poolGoldhound from "../pool/goldhound.js";
 import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
 import _poolGollumsBite from "../pool/gollums-bite.js";
 import _poolGothmogMorgulLieutenant from "../pool/gothmog-morgul-lieutenant.js";
+import _poolGraveDefiler from "../pool/grave-defiler.js";
 import _poolGraveExchange from "../pool/grave-exchange.js";
 import _poolGravityNegator from "../pool/gravity-negator.js";
 import _poolGravityWell from "../pool/gravity-well.js";
@@ -818,6 +820,7 @@ const shard: CardShard = {
     _poolAlterFate,
     _poolAlteredEgo,
     _poolAmbushGigapede,
+    _poolAnaSanctuary,
     _poolAncestralMemories,
     _poolAncientAmphitheater,
     _poolAntagonize,
@@ -1057,6 +1060,7 @@ const shard: CardShard = {
     _poolGoldmaneGriffin,
     _poolGollumsBite,
     _poolGothmogMorgulLieutenant,
+    _poolGraveDefiler,
     _poolGraveExchange,
     _poolGravityNegator,
     _poolGravityWell,

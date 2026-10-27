@@ -554,6 +554,7 @@ import _poolRaiseDead from "../pool/raise-dead.js";
 import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
+import _poolReality from "../pool/reality.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
@@ -1363,6 +1364,7 @@ const shard: CardShard = {
     _poolRandomEncounter,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
+    _poolReality,
     _poolRecklessBrute,
     _poolRedElementalBlast,
     _poolRelicCrush,

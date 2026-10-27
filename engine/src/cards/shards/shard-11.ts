@@ -328,6 +328,7 @@ import _poolImplementOfImprovement from "../pool/implement-of-improvement.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndebtedSpirit from "../pool/indebted-spirit.js";
+import _poolIndex from "../pool/index.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
 import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
 import _poolInfernalMedusa from "../pool/infernal-medusa.js";
@@ -488,6 +489,7 @@ import _poolPestilentKathari from "../pool/pestilent-kathari.js";
 import _poolPestsOfHonor from "../pool/pests-of-honor.js";
 import _poolPettyRevenge from "../pool/petty-revenge.js";
 import _poolPharikasChosen from "../pool/pharikas-chosen.js";
+import _poolPhyrexianGargantua from "../pool/phyrexian-gargantua.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
 import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
@@ -631,6 +633,7 @@ import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStoneIdolTrap from "../pool/stone-idol-trap.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
+import _poolStrengthOfNight from "../pool/strength-of-night.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
 import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
@@ -1103,6 +1106,7 @@ const shard: CardShard = {
     _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
     _poolIndebtedSpirit,
+    _poolIndex,
     _poolIndulgingPatrician,
     _poolInevitableDefeat,
     _poolInfernalMedusa,
@@ -1263,6 +1267,7 @@ const shard: CardShard = {
     _poolPestsOfHonor,
     _poolPettyRevenge,
     _poolPharikasChosen,
+    _poolPhyrexianGargantua,
     _poolPhyrexianJuggernaut,
     _poolPhyrexianRebirth,
     _poolPhyrexianSkyflayer,
@@ -1406,6 +1411,7 @@ const shard: CardShard = {
     _poolStoneIdolTrap,
     _poolStormfistCrusader,
     _poolStreetbreakerWurm,
+    _poolStrengthOfNight,
     _poolStrengthOfTheHarvest,
     _poolSummonPrimalOdin,
     _poolSummonersGrimoire,

@@ -423,6 +423,7 @@ import _poolMysticSanctuary from "../pool/mystic-sanctuary.js";
 import _poolNarcomoeba from "../pool/narcomoeba.js";
 import _poolNarsetJeskaiWaymaster from "../pool/narset-jeskai-waymaster.js";
 import _poolNaturalOrder from "../pool/natural-order.js";
+import _poolNecraSanctuary from "../pool/necra-sanctuary.js";
 import _poolNecrologia from "../pool/necrologia.js";
 import _poolNecropanther from "../pool/necropanther.js";
 import _poolNecropouncer from "../pool/necropouncer.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolNarcomoeba,
     _poolNarsetJeskaiWaymaster,
     _poolNaturalOrder,
+    _poolNecraSanctuary,
     _poolNecrologia,
     _poolNecropanther,
     _poolNecropouncer,

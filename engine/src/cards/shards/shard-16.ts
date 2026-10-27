@@ -336,6 +336,7 @@ import _poolIvoryCraneNetsuke from "../pool/ivory-crane-netsuke.js";
 import _poolJaceArcaneStrategist from "../pool/jace-arcane-strategist.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJaddiLifestrider from "../pool/jaddi-lifestrider.js";
+import _poolJadedResponse from "../pool/jaded-response.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolJaceArcaneStrategist,
     _poolJaceWielderOfMysteries,
     _poolJaddiLifestrider,
+    _poolJadedResponse,
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
     _poolJungleWeaver,

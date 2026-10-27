@@ -420,6 +420,7 @@ import _poolManaChains from "../pool/mana-chains.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
+import _poolMaskOfIntolerance from "../pool/mask-of-intolerance.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
@@ -683,6 +684,7 @@ import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThroneWarden from "../pool/throne-warden.js";
 import _poolThundercloudShaman from "../pool/thundercloud-shaman.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
+import _poolTidalCourier from "../pool/tidal-courier.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTimelyHordemate from "../pool/timely-hordemate.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
@@ -1217,6 +1219,7 @@ const shard: CardShard = {
     _poolMantleOfTheWolf,
     _poolMarkovCrusader,
     _poolMartialCoup,
+    _poolMaskOfIntolerance,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
     _poolMercurialGeists,
@@ -1480,6 +1483,7 @@ const shard: CardShard = {
     _poolThroneWarden,
     _poolThundercloudShaman,
     _poolThunderdrumSoloist,
+    _poolTidalCourier,
     _poolTidehollowStrix,
     _poolTimelyHordemate,
     _poolTocasiasDigSite,

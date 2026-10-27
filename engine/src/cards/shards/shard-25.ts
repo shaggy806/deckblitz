@@ -225,6 +225,7 @@ import _poolFieryFinish from "../pool/fiery-finish.js";
 import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
+import _poolFire from "../pool/fire.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFirewingPhoenix from "../pool/firewing-phoenix.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
@@ -330,6 +331,7 @@ import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
+import _poolKavuHowler from "../pool/kavu-howler.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
@@ -970,6 +972,7 @@ const shard: CardShard = {
     _poolFinaleOfDevastation,
     _poolFirbolgFlutist,
     _poolFireDiamond,
+    _poolFire,
     _poolFirebrandArcher,
     _poolFirewingPhoenix,
     _poolFlameSlash,
@@ -1075,6 +1078,7 @@ const shard: CardShard = {
     _poolKarametrasFavor,
     _poolKarplusanWolverine,
     _poolKataraTheFearless,
+    _poolKavuHowler,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,
     _poolKeeperOfTresserhorn,

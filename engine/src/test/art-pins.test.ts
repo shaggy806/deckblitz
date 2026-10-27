@@ -45,6 +45,10 @@ const NO_TOKEN_PRINTING = new Set([
   // no token printing in the Oracle snapshot.
   "Kaldra",
   "Pincher Token",
+  // Penumbra Kavu (APC)'s 3/3 black Kavu and Haunted Angel (APC)'s 3/3 black
+  // flying Angel: no token printing in the Oracle snapshot.
+  "Kavu Token (Black, 3/3)",
+  "Angel Token (black 3/3 flying)",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",

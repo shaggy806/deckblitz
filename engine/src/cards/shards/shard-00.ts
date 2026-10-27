@@ -69,6 +69,7 @@ import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
+import _poolBloodfireColossus from "../pool/bloodfire-colossus.js";
 import _poolBloodscaleProwler from "../pool/bloodscale-prowler.js";
 import _poolBloodsporeThrinax from "../pool/bloodspore-thrinax.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
@@ -166,6 +167,7 @@ import _poolDegavolver from "../pool/degavolver.js";
 import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
+import _poolDesolationAngel from "../pool/desolation-angel.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDingusEgg from "../pool/dingus-egg.js";
 import _poolDireDowndraft from "../pool/dire-downdraft.js";
@@ -199,6 +201,7 @@ import _poolElvishHandservant from "../pool/elvish-handservant.js";
 import _poolElvishHarbinger from "../pool/elvish-harbinger.js";
 import _poolEmbercleave from "../pool/embercleave.js";
 import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
+import _poolEnlistmentOfficer from "../pool/enlistment-officer.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
 import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
@@ -226,6 +229,7 @@ import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
 import _poolFormationBreaker from "../pool/formation-breaker.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
+import _poolFoulPresence from "../pool/foul-presence.js";
 import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFrozenAether from "../pool/frozen-aether.js";
@@ -302,6 +306,7 @@ import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
 import _poolHunterOfEyeblights from "../pool/hunter-of-eyeblights.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIAmIronMan from "../pool/i-am-iron-man.js";
+import _poolIce from "../pool/ice.js";
 import _poolIcebergTitan from "../pool/iceberg-titan.js";
 import _poolIchorSynthesizer from "../pool/ichor-synthesizer.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
@@ -619,6 +624,7 @@ import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
 import _poolStuntDouble from "../pool/stunt-double.js";
+import _poolSuffocatingBlast from "../pool/suffocating-blast.js";
 import _poolSultaiMonument from "../pool/sultai-monument.js";
 import _poolSummonGFCerberus from "../pool/summon-g-f-cerberus.js";
 import _poolSunbond from "../pool/sunbond.js";
@@ -853,6 +859,7 @@ const shard: CardShard = {
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodcrazedNeonate,
+    _poolBloodfireColossus,
     _poolBloodscaleProwler,
     _poolBloodsporeThrinax,
     _poolBlowflyInfestation,
@@ -950,6 +957,7 @@ const shard: CardShard = {
     _poolDeluxeDragster,
     _poolDesertTwister,
     _poolDesertsDue,
+    _poolDesolationAngel,
     _poolDinaSoulSteeper,
     _poolDingusEgg,
     _poolDireDowndraft,
@@ -983,6 +991,7 @@ const shard: CardShard = {
     _poolElvishHarbinger,
     _poolEmbercleave,
     _poolEnigmaticIncarnation,
+    _poolEnlistmentOfficer,
     _poolEnragedCeratok,
     _poolErebosBleakHearted,
     _poolEverethViceroyOfPlunder,
@@ -1010,6 +1019,7 @@ const shard: CardShard = {
     _poolForest,
     _poolFormationBreaker,
     _poolFormidableCommons,
+    _poolFoulPresence,
     _poolFreyalisesRadiance,
     _poolFrontlineRush,
     _poolFrozenAether,
@@ -1086,6 +1096,7 @@ const shard: CardShard = {
     _poolHunterOfEyeblights,
     _poolHydraAssaultRobot,
     _poolIAmIronMan,
+    _poolIce,
     _poolIcebergTitan,
     _poolIchorSynthesizer,
     _poolIdentityEcho,
@@ -1403,6 +1414,7 @@ const shard: CardShard = {
     _poolStrongarmThug,
     _poolStrongholdAssassin,
     _poolStuntDouble,
+    _poolSuffocatingBlast,
     _poolSultaiMonument,
     _poolSummonGFCerberus,
     _poolSunbond,

@@ -265,6 +265,7 @@ import _poolGlorybringer from "../pool/glorybringer.js";
 import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
+import _poolGoblinLegionnaire from "../pool/goblin-legionnaire.js";
 import _poolGoblinRuinblaster from "../pool/goblin-ruinblaster.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
@@ -703,6 +704,7 @@ import _poolUnblinkingBleb from "../pool/unblinking-bleb.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
+import _poolUrborgUprising from "../pool/urborg-uprising.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
 import _poolVampireSlayer from "../pool/vampire-slayer.js";
@@ -1048,6 +1050,7 @@ const shard: CardShard = {
     _poolGnarledScarhide,
     _poolGoatnap,
     _poolGoblinGloryChaser,
+    _poolGoblinLegionnaire,
     _poolGoblinRuinblaster,
     _poolGoblinTown,
     _poolGoblinWarDrums,
@@ -1486,6 +1489,7 @@ const shard: CardShard = {
     _poolUnclaimedTerritory,
     _poolUnleashShell,
     _poolUnrulyKrasis,
+    _poolUrborgUprising,
     _poolValleyDasher,
     _poolValleyFloodcaller,
     _poolVampireSlayer,

@@ -225,6 +225,7 @@ import _poolEngulfingSlagwurm from "../pool/engulfing-slagwurm.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
+import _poolEvasiveAction from "../pool/evasive-action.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
 import _poolEvincarsJustice from "../pool/evincars-justice.js";
 import _poolEvolvingWilds from "../pool/evolving-wilds.js";
@@ -246,6 +247,7 @@ import _poolFelotharDawnOfTheAbzan from "../pool/felothar-dawn-of-the-abzan.js";
 import _poolFemerefScouts from "../pool/femeref-scouts.js";
 import _poolFeralDeceiver from "../pool/feral-deceiver.js";
 import _poolFerociousZheng from "../pool/ferocious-zheng.js";
+import _poolFireIce from "../pool/fire-ice.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
 import _poolFlamebladeAdept from "../pool/flameblade-adept.js";
@@ -285,6 +287,7 @@ import _poolGideonsCompany from "../pool/gideons-company.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
 import _poolGigantomancer from "../pool/gigantomancer.js";
 import _poolGilderBairn from "../pool/gilder-bairn.js";
+import _poolGladeGnarr from "../pool/glade-gnarr.js";
 import _poolGladeWatcher from "../pool/glade-watcher.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
@@ -357,6 +360,7 @@ import _poolHumble from "../pool/humble.js";
 import _poolIdeasUnbound from "../pool/ideas-unbound.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
+import _poolIllusion from "../pool/illusion.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolIncendiaryCommand from "../pool/incendiary-command.js";
@@ -589,6 +593,7 @@ import _poolShatterTheSource from "../pool/shatter-the-source.js";
 import _poolShatter from "../pool/shatter.js";
 import _poolShelteringLight from "../pool/sheltering-light.js";
 import _poolShelteringWord from "../pool/sheltering-word.js";
+import _poolShieldOfDutyAndReason from "../pool/shield-of-duty-and-reason.js";
 import _poolShieldedByFaith from "../pool/shielded-by-faith.js";
 import _poolShivanGorge from "../pool/shivan-gorge.js";
 import _poolShivanMeteor from "../pool/shivan-meteor.js";
@@ -1002,6 +1007,7 @@ const shard: CardShard = {
     _poolEntityTracker,
     _poolEomerOfTheRiddermark,
     _poolErrantEphemeron,
+    _poolEvasiveAction,
     _poolEvendoBrushrazer,
     _poolEvincarsJustice,
     _poolEvolvingWilds,
@@ -1023,6 +1029,7 @@ const shard: CardShard = {
     _poolFemerefScouts,
     _poolFeralDeceiver,
     _poolFerociousZheng,
+    _poolFireIce,
     _poolFireOmenCrane,
     _poolFireShrineKeeper,
     _poolFlamebladeAdept,
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolGiftOfTusks,
     _poolGigantomancer,
     _poolGilderBairn,
+    _poolGladeGnarr,
     _poolGladeWatcher,
     _poolGliderStaff,
     _poolGlimpseTheCore,
@@ -1134,6 +1142,7 @@ const shard: CardShard = {
     _poolIdeasUnbound,
     _poolIdolOfTheDeepKing,
     _poolIllunaApexOfWishes,
+    _poolIllusion,
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolIncendiaryCommand,
@@ -1366,6 +1375,7 @@ const shard: CardShard = {
     _poolShatter,
     _poolShelteringLight,
     _poolShelteringWord,
+    _poolShieldOfDutyAndReason,
     _poolShieldedByFaith,
     _poolShivanGorge,
     _poolShivanMeteor,

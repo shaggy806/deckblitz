@@ -398,6 +398,7 @@ import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMorinfen from "../pool/morinfen.js";
 import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
+import _poolMournfulZombie from "../pool/mournful-zombie.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolMunitionsExpert from "../pool/munitions-expert.js";
@@ -737,6 +738,7 @@ import _poolZhugeJinWuStrategist from "../pool/zhuge-jin-wu-strategist.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
+import _tokensAngelTokenBlack33Flying from "../tokens/angel-token-black-3-3-flying.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
@@ -1153,6 +1155,7 @@ const shard: CardShard = {
     _poolMorinfen,
     _poolMorkrutNecropod,
     _poolMosscoatGoriak,
+    _poolMournfulZombie,
     _poolMouserFoundry,
     _poolMultiversalIncursion,
     _poolMunitionsExpert,
@@ -1494,6 +1497,7 @@ const shard: CardShard = {
     _poolZodiacRabbit,
   ],
   tokens: [
+    _tokensAngelTokenBlack33Flying,
     _tokensClownRobotToken,
     _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,

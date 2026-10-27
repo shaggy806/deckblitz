@@ -122,6 +122,7 @@ import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolCommuneWithNature from "../pool/commune-with-nature.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
+import _poolConsumeStrength from "../pool/consume-strength.js";
 import _poolConsumingVortex from "../pool/consuming-vortex.js";
 import _poolContestedWarZone from "../pool/contested-war-zone.js";
 import _poolCorruptedRoots from "../pool/corrupted-roots.js";
@@ -907,6 +908,7 @@ const shard: CardShard = {
     _poolCommuneWithNature,
     _poolConclaveEvangelist,
     _poolConsign,
+    _poolConsumeStrength,
     _poolConsumingVortex,
     _poolContestedWarZone,
     _poolCorruptedRoots,

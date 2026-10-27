@@ -57,6 +57,7 @@ import _poolBlightspeaker from "../pool/blightspeaker.js";
 import _poolBlistergrub from "../pool/blistergrub.js";
 import _poolBloatedToad from "../pool/bloated-toad.js";
 import _poolBloodRites from "../pool/blood-rites.js";
+import _poolBloodfireKavu from "../pool/bloodfire-kavu.js";
 import _poolBloodghast from "../pool/bloodghast.js";
 import _poolBloodpyreElemental from "../pool/bloodpyre-elemental.js";
 import _poolBloodstainedMire from "../pool/bloodstained-mire.js";
@@ -468,6 +469,7 @@ import _poolPrideGuardian from "../pool/pride-guardian.js";
 import _poolPriestOfTheCrossing from "../pool/priest-of-the-crossing.js";
 import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
 import _poolPromisingDuskmage from "../pool/promising-duskmage.js";
+import _poolPropheticBolt from "../pool/prophetic-bolt.js";
 import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
@@ -818,6 +820,7 @@ const shard: CardShard = {
     _poolBlistergrub,
     _poolBloatedToad,
     _poolBloodRites,
+    _poolBloodfireKavu,
     _poolBloodghast,
     _poolBloodpyreElemental,
     _poolBloodstainedMire,
@@ -1229,6 +1232,7 @@ const shard: CardShard = {
     _poolPriestOfTheCrossing,
     _poolPrimalHuntbeast,
     _poolPromisingDuskmage,
+    _poolPropheticBolt,
     _poolPropheticPrism,
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,

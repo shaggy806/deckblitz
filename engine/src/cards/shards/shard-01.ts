@@ -99,6 +99,7 @@ import _poolClementTheWorrywort from "../pool/clement-the-worrywort.js";
 import _poolCloudheathDrake from "../pool/cloudheath-drake.js";
 import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
 import _poolCoastWatcher from "../pool/coast-watcher.js";
+import _poolCoastalDrake from "../pool/coastal-drake.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
@@ -731,6 +732,7 @@ import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYamabushisStorm from "../pool/yamabushis-storm.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
+import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
@@ -847,6 +849,7 @@ const shard: CardShard = {
     _poolCloudheathDrake,
     _poolCloudsculptTechnician,
     _poolCoastWatcher,
+    _poolCoastalDrake,
     _poolCodexShredder,
     _poolComeBackWrong,
     _poolCommuneWithBeavers,
@@ -1479,6 +1482,7 @@ const shard: CardShard = {
     _poolYamabushisStorm,
     _poolYavimayaHollow,
     _poolYavimayaSojourner,
+    _poolYavimayasEmbrace,
     _poolYgraEaterOfAll,
     _poolYoureAmbushedOnTheRoad,
     _poolZadasCommando,

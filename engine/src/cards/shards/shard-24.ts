@@ -311,6 +311,7 @@ import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
+import _poolIllusionReality from "../pool/illusion-reality.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
@@ -1078,6 +1079,7 @@ const shard: CardShard = {
     _poolHotfootGnome,
     _poolHuntersProwess,
     _poolIceFangCoatl,
+    _poolIllusionReality,
     _poolImpoliteEntrance,
     _poolIncubationSac,
     _poolInfernalReckoning,

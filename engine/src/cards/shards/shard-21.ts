@@ -713,6 +713,7 @@ import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeiStrikeForce from "../pool/wei-strike-force.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
+import _poolWhirlpoolRider from "../pool/whirlpool-rider.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
@@ -1463,6 +1464,7 @@ const shard: CardShard = {
     _poolWeiStrikeForce,
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
+    _poolWhirlpoolRider,
     _poolWhiskerquillScribe,
     _poolWhiteDragon,
     _poolWillOfTheSultai,

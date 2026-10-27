@@ -245,6 +245,7 @@ import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
+import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
     _poolGenesisHydra,
+    _poolGerrardsVerdict,
     _poolGhostLitWarder,
     _poolGiantGrowth,
     _poolGideonsBattleCry,
