@@ -38,8 +38,10 @@ first check-in.
   from 2026-10-26), **and verifies before taking it** (from round fifteen): it merges
   `origin/main` and runs its one plain `npm run verify` on its own branch, beside the other
   children's; then it takes the lock, merges `origin/main` again, runs the short
-  `npm run verify -- --only marks,fuzzwith` if the merge brought anything (the new-cards fuzzer
-  re-runs only for engine code, its stamp skipping it otherwise), pushes to `main` and
+  `npm run verify -- --landing` if the merge brought anything (the new-cards fuzzer
+  re-runs only for engine code, its stamp skipping it otherwise; the engine suite narrows to its
+  pool-wide tests and the merge's test files when the merge brought no engine code — from
+  2026-10-27, about one landing in five by the 34 before it), pushes to `main` and
   releases. Holds are a few minutes. Round thirteen, without the lock, paid nine merges and five
   `--only fuzzwith` re-checks (B194 three merges over half an hour); round fourteen, verifying
   whole *under* the lock, paid none, but its five batches, ready within 20 minutes of each

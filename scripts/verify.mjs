@@ -60,12 +60,15 @@
 // ran against, and a later verify skips the step while all three still match
 // (a merge that brings engine code in, or an edited card, runs it again).
 //
-// Usage: node scripts/verify.mjs [--full | --quick | --fuzz-new] [--with "Card Name"]...
+// Usage: node scripts/verify.mjs [--full | --quick | --fuzz-new | --landing] [--with "Card Name"]...
 //                                [--skip step,step | --only step,step] [--games N]
 //   steps for --skip / --only: marks, lint, server, client, cardverify,
 //   fuzz, fuzzwith, gate (gen:cards, build, typecheck and the engine suite
 //   always run; `--only fuzzwith` re-checks a fix to what that step found)
 //   --games N   2-player fuzz games (default 60; 4-player gets half)
+//   --landing   the landing lock's check after a merge: --only marks,fuzzwith,
+//               and the engine suite cut to its pool-wide tests and the
+//               merge's test files when the merge brought no engine code
 
 import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -85,7 +88,7 @@ const withFile = (names) => {
   return file;
 };
 
-const USAGE = `usage: node scripts/verify.mjs [--full | --quick | --fuzz-new] [--with "Card Name"]...
+const USAGE = `usage: node scripts/verify.mjs [--full | --quick | --fuzz-new | --landing] [--with "Card Name"]...
                                [--skip step,step | --only step,step] [--games N]
   steps: ${"marks, lint, server, client, cardverify, fuzz, fuzzwith, gate"}`;
 const STEPS = new Set(["marks", "lint", "server", "client", "cardverify", "fuzz", "fuzzwith", "gate"]);
@@ -110,17 +113,19 @@ for (let i = 0; i < args.length; i++) {
   if (a === "--with") withNames.push(args[++i]);
   else if (a === "--skip") skip = stepList(args[++i], "--skip");
   else if (a === "--only") only = stepList(args[++i], "--only");
+  else if (a === "--landing") only = new Set(["marks", "fuzzwith"]);
   else if (a === "--games") games = Number(args[++i]);
   else if (a === "--help" || a === "-h") {
     console.log(USAGE);
     process.exit(0);
-  } else if (!["--full", "--quick", "--fuzz-new"].includes(a)) {
+  } else if (!["--full", "--quick", "--fuzz-new", "--landing"].includes(a)) {
     console.error(`verify: unknown argument ${a}\n${USAGE}`);
     process.exit(2);
   }
 }
 const forced = args.includes("--full") ? "full" : args.includes("--quick") ? "quick" : null;
 const fuzzNewOnly = args.includes("--fuzz-new");
+const landing = args.includes("--landing");
 /** A step left out by hand: such a full run isn't recorded as one. */
 const userSkipped = skip.size > 0 || only !== null;
 if (only !== null) for (const step of STEPS) if (!only.has(step)) skip.add(step);
@@ -468,11 +473,65 @@ await stopOnFailure(
   ])),
 );
 
+/** `--landing`: the engine tests a merge needs. When everything since the
+ * last merge's first parent (the branch's own tip, verified whole before the
+ * lock) leaves the engine's source and config alone, no engine code changed
+ * under the branch's tests, so they stand: the tests that read the whole pool (names,
+ * shards, the bundle, the vocabulary, the decks and their stand-ins) run, and
+ * the test files the merge brought, against this branch's engine. Anything
+ * else, or no merge to measure from: `null`, the whole suite. B219's landing
+ * check (2026-10-27) ran all 21,500 tests, ~10 minutes, under the lock. */
+function landingTests() {
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8", maxBuffer: GIT_MAX_BUFFER });
+  // The newest merge on the first-parent line, a few commits back at most
+  // (gen:cards' regenerated files may be committed after it).
+  let base = null;
+  for (let i = 0; i < 5 && base === null; i++) {
+    const parents = git("rev-list", "--parents", "-n", "1", `HEAD~${i}`).stdout.trim().split(" ");
+    if (parents.length === 0 || parents[0] === "") break;
+    if (parents.length > 2) base = parents[1];
+  }
+  if (base === null) {
+    console.log("verify --landing: no merge in the last 5 commits to measure from: the whole engine suite");
+    return null;
+  }
+  const changed = git("diff", "--name-only", `${base}...HEAD`).stdout.split("\n").filter(Boolean);
+  // What the engine's tests run against: its source and its config. Cards,
+  // card data and tests aside, a change there means the whole suite. Client,
+  // server and protocol code isn't in an engine test; the scaffolder's scripts
+  // are, by their own test files, which run when they change.
+  const CARD_SOURCE = [
+    /^engine\/src\/cards\/(pool|tokens|shards|review|scaffold)\//,
+    /^engine\/src\/cards\/generated[^/]*\.ts$/,
+    /^engine\/src\/cards\/[^/]+\.(json|txt)$/,
+    /^engine\/src\/.+\.test\.ts$/,
+  ];
+  const ENGINE_INPUT = [/^engine\/src\//, /^engine\/[^/]+\.(json|ts|mjs)$/, /^package(-lock)?\.json$/];
+  const code = changed.filter((f) => ENGINE_INPUT.some((re) => re.test(f)) && !CARD_SOURCE.some((re) => re.test(f)));
+  if (code.length > 0) {
+    console.log(`verify --landing: the merge brought engine code (${code.slice(0, 3).join(", ")}${code.length > 3 ? ", …" : ""}): the whole engine suite`);
+    return null;
+  }
+  const brought = changed
+    .filter((f) => /^engine\/src\/.+\.test\.ts$/.test(f) && existsSync(path.join(ROOT, f)))
+    .map((f) => f.slice("engine/".length));
+  const scripts = changed.some((f) => /^engine\/scripts\//.test(f)) ? ["src/test/oracle-parse.test.ts"] : [];
+  const POOL_WIDE = ["src/cards/pool.test.ts", "src/test/needs-vocabulary.test.ts", "src/test/sample-decks.test.ts", "src/test/precon-standins.test.ts", "src/test/local-bundle.test.ts"];
+  console.log(`verify --landing: the merge brought no engine code: the pool-wide tests and the ${brought.length + scripts.length} test file(s) it brought or touched`);
+  return [...new Set([...POOL_WIDE, ...scripts, ...brought])];
+}
+
 // A larger heap for vitest's main process: it holds the whole bundled card
 // barrel, and past ~21,400 definitions it ran out of the default ~2 GB at
 // startup on a cloud session (2026-10-26).
 const vitestArgs = ["--max-old-space-size=4096", path.join(ROOT, "node_modules/vitest/vitest.mjs"), "run"];
-let engineTests = await run("engine tests", "node", [...vitestArgs, `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
+const narrowed = landing ? landingTests() : null;
+let engineTests = await run(
+  narrowed ? "engine tests (cards-only merge)" : "engine tests",
+  "node",
+  [...vitestArgs, `--maxWorkers=${Math.min(8, CORES)}`, ...(narrowed ?? [])],
+  ENGINE,
+);
 // Every failure a timeout: those files again, alone, once — not the whole
 // suite. A random-games test that takes 17 s alone passed its 30 s under the
 // full suite's load on a 4-core session, and B219 (2026-10-27) re-ran the
