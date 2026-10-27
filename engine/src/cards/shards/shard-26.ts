@@ -44,6 +44,7 @@ import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
+import _poolArmoredSkyhunter from "../pool/armored-skyhunter.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
@@ -688,6 +689,7 @@ import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
+    _poolArmoredSkyhunter,
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAshenmoorCohort,
@@ -1508,6 +1511,7 @@ const shard: CardShard = {
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
+    _poolTamiyoMeetsTheStoryCircle,
     _poolTawnossTinkering,
     _poolTeapotSlinger,
     _poolTemporalTrespass,

@@ -670,6 +670,7 @@ import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -1479,6 +1480,7 @@ const shard: CardShard = {
     _poolStormfrontRiders,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
+    _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,
     _poolSwarmCuller,

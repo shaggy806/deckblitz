@@ -170,6 +170,7 @@ import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
+import _poolDalkovanEncampment from "../pool/dalkovan-encampment.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
@@ -972,6 +973,7 @@ const shard: CardShard = {
     _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
+    _poolDalkovanEncampment,
     _poolDangerousWager,
     _poolDarkConfidant,
     _poolDarksteelColossus,

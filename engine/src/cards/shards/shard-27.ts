@@ -791,6 +791,7 @@ import _tokensElementalToken71TrampleHaste from "../tokens/elemental-token-7-1-t
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHomunculusToken22 from "../tokens/homunculus-token-2-2.js";
 import _tokensHumanToken from "../tokens/human-token.js";
+import _tokensMarkOfTheRaniToken from "../tokens/mark-of-the-rani-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
@@ -1594,6 +1595,7 @@ const shard: CardShard = {
     _tokensFractalToken,
     _tokensHomunculusToken22,
     _tokensHumanToken,
+    _tokensMarkOfTheRaniToken,
     _tokensOozeToken,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,

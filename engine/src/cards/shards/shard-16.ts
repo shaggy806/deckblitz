@@ -38,6 +38,7 @@ import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAshasFavor from "../pool/ashas-favor.js";
 import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
+import _poolAssembledAlphas from "../pool/assembled-alphas.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
 import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
@@ -112,6 +113,7 @@ import _poolCelestialSword from "../pool/celestial-sword.js";
 import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
+import _poolChainLightning from "../pool/chain-lightning.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
@@ -903,6 +905,7 @@ const shard: CardShard = {
     _poolAshasFavor,
     _poolAshnodFleshMechanist,
     _poolAssembleTheLegion,
+    _poolAssembledAlphas,
     _poolAtlaPalaniNestTender,
     _poolAugustaDeanOfOrder,
     _poolAuraOfSilence,
@@ -977,6 +980,7 @@ const shard: CardShard = {
     _poolCentaurArcher,
     _poolCentaurCourser,
     _poolCentaurNurturer,
+    _poolChainLightning,
     _poolChargeThrough,
     _poolChargingWarBoar,
     _poolChildOfNight,

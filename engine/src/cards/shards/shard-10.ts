@@ -156,6 +156,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolCursedTotem from "../pool/cursed-totem.js";
 import _poolCustodyBattle from "../pool/custody-battle.js";
 import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolCursedTotem,
     _poolCustodyBattle,
     _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,

@@ -540,6 +540,7 @@ import _poolRhysticShield from "../pool/rhystic-shield.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
+import _poolRiteOfHarmony from "../pool/rite-of-harmony.js";
 import _poolRocEgg from "../pool/roc-egg.js";
 import _poolRockslideSorcerer from "../pool/rockslide-sorcerer.js";
 import _poolRoilSpout from "../pool/roil-spout.js";
@@ -1365,6 +1366,7 @@ const shard: CardShard = {
     _poolRiotDevils,
     _poolRiseOfExtus,
     _poolRishkarsExpertise,
+    _poolRiteOfHarmony,
     _poolRocEgg,
     _poolRockslideSorcerer,
     _poolRoilSpout,

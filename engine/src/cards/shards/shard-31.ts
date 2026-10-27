@@ -523,6 +523,7 @@ import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolNyxbornEidolon from "../pool/nyxborn-eidolon.js";
 import _poolNyxbornTriton from "../pool/nyxborn-triton.js";
 import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
+import _poolOKagachiMadeManifest from "../pool/o-kagachi-made-manifest.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
@@ -813,6 +814,7 @@ import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
+import _poolWaltzOfRage from "../pool/waltz-of-rage.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
 import _poolWarmongersChariot from "../pool/warmongers-chariot.js";
 import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
@@ -1392,6 +1394,7 @@ const shard: CardShard = {
     _poolNyxbornEidolon,
     _poolNyxbornTriton,
     _poolNyxbornUnicorn,
+    _poolOKagachiMadeManifest,
     _poolOathOfJace,
     _poolObscuraInterceptor,
     _poolOccultEpiphany,
@@ -1682,6 +1685,7 @@ const shard: CardShard = {
     _poolWalkingAtlas,
     _poolWallOfMist,
     _poolWallOfWood,
+    _poolWaltzOfRage,
     _poolWarmakerGunship,
     _poolWarmongersChariot,
     _poolWaspOfTheBitterEnd,

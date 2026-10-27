@@ -290,6 +290,7 @@ import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
 import _poolGrayOgre from "../pool/gray-ogre.js";
 import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
+import _poolGrovesBounty from "../pool/groves-bounty.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
@@ -432,6 +433,7 @@ import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
+import _poolMurmursFromBeyond from "../pool/murmurs-from-beyond.js";
 import _poolMyrLandshaper from "../pool/myr-landshaper.js";
 import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
@@ -1108,6 +1110,7 @@ const shard: CardShard = {
     _poolGraveshifter,
     _poolGrayOgre,
     _poolGrazingGladehart,
+    _poolGrovesBounty,
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
     _poolGurmagNightwatch,
@@ -1250,6 +1253,7 @@ const shard: CardShard = {
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,
+    _poolMurmursFromBeyond,
     _poolMyrLandshaper,
     _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,

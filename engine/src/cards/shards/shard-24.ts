@@ -353,6 +353,7 @@ import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKaronaFalseGod from "../pool/karona-false-god.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
+import _poolKelloggDangerousMind from "../pool/kellogg-dangerous-mind.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
@@ -408,6 +409,7 @@ import _poolMeteorSword from "../pool/meteor-sword.js";
 import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
+import _poolMindFlayer from "../pool/mind-flayer.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMindlashSliver from "../pool/mindlash-sliver.js";
@@ -677,6 +679,7 @@ import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheBrokenSky from "../pool/the-broken-sky.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
+import _poolTheKamiWar from "../pool/the-kami-war.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
@@ -1171,6 +1174,7 @@ const shard: CardShard = {
     _poolKaronaFalseGod,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
+    _poolKelloggDangerousMind,
     _poolKhenraScrapper,
     _poolKillingGlare,
     _poolKingSuleiman,
@@ -1226,6 +1230,7 @@ const shard: CardShard = {
     _poolMidnightRecovery,
     _poolMijaeDjinn,
     _poolMillennialGargoyle,
+    _poolMindFlayer,
     _poolMindRot,
     _poolMindcrank,
     _poolMindlashSliver,
@@ -1495,6 +1500,7 @@ const shard: CardShard = {
     _poolTheBrokenSky,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
+    _poolTheKamiWar,
     _poolTheNecrobloom,
     _poolTheNotaryHobbits,
     _poolTheSpotsPortal,

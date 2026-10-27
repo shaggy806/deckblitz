@@ -83,6 +83,7 @@ import _poolBlurOfBlades from "../pool/blur-of-blades.js";
 import _poolBogGlider from "../pool/bog-glider.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
+import _poolBonusRound from "../pool/bonus-round.js";
 import _poolBookDevourer from "../pool/book-devourer.js";
 import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
@@ -210,6 +211,7 @@ import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElephantGuide from "../pool/elephant-guide.js";
+import _poolElusiveOtter from "../pool/elusive-otter.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
 import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
@@ -892,6 +894,7 @@ const shard: CardShard = {
     _poolBogGlider,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
+    _poolBonusRound,
     _poolBookDevourer,
     _poolBookOfRass,
     _poolBootleggersStash,
@@ -1019,6 +1022,7 @@ const shard: CardShard = {
     _poolEladamrisCall,
     _poolElectrify,
     _poolElephantGuide,
+    _poolElusiveOtter,
     _poolElvishGuidance,
     _poolElvishHerder,
     _poolEmberShot,
