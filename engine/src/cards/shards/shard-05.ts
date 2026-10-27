@@ -199,6 +199,7 @@ import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonloftIdol from "../pool/dragonloft-idol.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
+import _poolDrakeFamiliar from "../pool/drake-familiar.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
 import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
@@ -739,6 +740,7 @@ import _poolVolcanicIsland from "../pool/volcanic-island.js";
 import _poolVoraciousVarmint from "../pool/voracious-varmint.js";
 import _poolWalkWithTheAncestors from "../pool/walk-with-the-ancestors.js";
 import _poolWalkingSkyscraper from "../pool/walking-skyscraper.js";
+import _poolWarTorchGoblin from "../pool/war-torch-goblin.js";
 import _poolWarmonger from "../pool/warmonger.js";
 import _poolWarrenWarleader from "../pool/warren-warleader.js";
 import _poolWastelandScorpion from "../pool/wasteland-scorpion.js";
@@ -993,6 +995,7 @@ const shard: CardShard = {
     _poolDragonkinBerserker,
     _poolDragonloftIdol,
     _poolDragonsPresence,
+    _poolDrakeFamiliar,
     _poolDreadfulApathy,
     _poolDreamspoilerWitches,
     _poolDreyKeeper,
@@ -1533,6 +1536,7 @@ const shard: CardShard = {
     _poolVoraciousVarmint,
     _poolWalkWithTheAncestors,
     _poolWalkingSkyscraper,
+    _poolWarTorchGoblin,
     _poolWarmonger,
     _poolWarrenWarleader,
     _poolWastelandScorpion,

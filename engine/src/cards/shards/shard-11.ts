@@ -544,6 +544,7 @@ import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
 import _poolRamroller from "../pool/ramroller.js";
 import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
+import _poolRaziasPurification from "../pool/razias-purification.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRazorjawOni from "../pool/razorjaw-oni.js";
 import _poolReapAndSow from "../pool/reap-and-sow.js";
@@ -1356,6 +1357,7 @@ const shard: CardShard = {
     _poolRamroller,
     _poolRavenousLeucrocota,
     _poolRavineRaider,
+    _poolRaziasPurification,
     _poolRazorSwine,
     _poolRazorjawOni,
     _poolReapAndSow,

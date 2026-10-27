@@ -86,6 +86,7 @@ import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative
 import _poolBladeOfTheBloodchief from "../pool/blade-of-the-bloodchief.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBloodcurdlingScream from "../pool/bloodcurdling-scream.js";
+import _poolBloodletterQuill from "../pool/bloodletter-quill.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
@@ -438,6 +439,7 @@ import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMoriokReplica from "../pool/moriok-replica.js";
 import _poolMoriokRigger from "../pool/moriok-rigger.js";
+import _poolMortipede from "../pool/mortipede.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
 import _poolMurder from "../pool/murder.js";
 import _poolMurmuration from "../pool/murmuration.js";
@@ -889,6 +891,7 @@ const shard: CardShard = {
     _poolBladeOfTheBloodchief,
     _poolBlessedWine,
     _poolBloodcurdlingScream,
+    _poolBloodletterQuill,
     _poolBogSmugglers,
     _poolBogardanDragonheart,
     _poolBoldImpaler,
@@ -1241,6 +1244,7 @@ const shard: CardShard = {
     _poolMorbiusTheLivingVampire,
     _poolMoriokReplica,
     _poolMoriokRigger,
+    _poolMortipede,
     _poolMossfireValley,
     _poolMurder,
     _poolMurmuration,

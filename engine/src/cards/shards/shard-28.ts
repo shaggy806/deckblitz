@@ -814,6 +814,7 @@ import _poolZardaThePowerPrincess from "../pool/zarda-the-power-princess.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _poolZendikarIncarnate from "../pool/zendikar-incarnate.js";
+import _poolZephyrSpirit from "../pool/zephyr-spirit.js";
 import _poolZhangLiaoHeroOfHefei from "../pool/zhang-liao-hero-of-hefei.js";
 import _poolZuoCiTheMockingSage from "../pool/zuo-ci-the-mocking-sage.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
@@ -1647,6 +1648,7 @@ const shard: CardShard = {
     _poolZeganaUtopianSpeaker,
     _poolZendikarFarguide,
     _poolZendikarIncarnate,
+    _poolZephyrSpirit,
     _poolZhangLiaoHeroOfHefei,
     _poolZuoCiTheMockingSage,
   ],

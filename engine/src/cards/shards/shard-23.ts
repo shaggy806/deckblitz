@@ -84,6 +84,7 @@ import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
 import _poolBlightedSteppe from "../pool/blighted-steppe.js";
+import _poolBlockbuster from "../pool/blockbuster.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
 import _poolBloodcrazedPaladin from "../pool/bloodcrazed-paladin.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
@@ -569,6 +570,7 @@ import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRowansStalwarts from "../pool/rowans-stalwarts.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
+import _poolSadisticAugermage from "../pool/sadistic-augermage.js";
 import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSandStrangler from "../pool/sand-strangler.js";
@@ -795,6 +797,7 @@ import _poolWitchsMark from "../pool/witchs-mark.js";
 import _poolWithdraw from "../pool/withdraw.js";
 import _poolWithstand from "../pool/withstand.js";
 import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
+import _poolWoodwraithStrangler from "../pool/woodwraith-strangler.js";
 import _poolWrangle from "../pool/wrangle.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
@@ -900,6 +903,7 @@ const shard: CardShard = {
     _poolBlessedSpirits,
     _poolBlessingOfBelzenlok,
     _poolBlightedSteppe,
+    _poolBlockbuster,
     _poolBloodForBones,
     _poolBloodcrazedPaladin,
     _poolBloodflowConnoisseur,
@@ -1385,6 +1389,7 @@ const shard: CardShard = {
     _poolRowansStalwarts,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
+    _poolSadisticAugermage,
     _poolSageOfTheFalls,
     _poolSanctuaryRaptor,
     _poolSandStrangler,
@@ -1611,6 +1616,7 @@ const shard: CardShard = {
     _poolWithdraw,
     _poolWithstand,
     _poolWoodbornBehemoth,
+    _poolWoodwraithStrangler,
     _poolWrangle,
     _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,

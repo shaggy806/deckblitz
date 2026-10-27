@@ -145,6 +145,7 @@ import _poolDirtyWererat from "../pool/dirty-wererat.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDisplacementWave from "../pool/displacement-wave.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
+import _poolDivebomberGriffin from "../pool/divebomber-griffin.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDoctorDoom from "../pool/doctor-doom.js";
@@ -300,6 +301,7 @@ import _poolIgnitionTeam from "../pool/ignition-team.js";
 import _poolImminentDoom from "../pool/imminent-doom.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
+import _poolIndenturedOaf from "../pool/indentured-oaf.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
 import _poolInsolence from "../pool/insolence.js";
 import _poolInsomniaCrownCity from "../pool/insomnia-crown-city.js";
@@ -875,6 +877,7 @@ const shard: CardShard = {
     _poolDiscipleOfTheOldWays,
     _poolDisplacementWave,
     _poolDistrictGuide,
+    _poolDivebomberGriffin,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
     _poolDoctorDoom,
@@ -1030,6 +1033,7 @@ const shard: CardShard = {
     _poolImminentDoom,
     _poolImperialLancer,
     _poolImperiousPerfect,
+    _poolIndenturedOaf,
     _poolInfiniteGuidelineStation,
     _poolInsolence,
     _poolInsomniaCrownCity,

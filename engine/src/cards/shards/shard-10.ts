@@ -201,6 +201,7 @@ import _poolDragonsHerald from "../pool/dragons-herald.js";
 import _poolDralnusCrusade from "../pool/dralnus-crusade.js";
 import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
+import _poolDroolingGroodion from "../pool/drooling-groodion.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
@@ -245,6 +246,7 @@ import _poolFinalReward from "../pool/final-reward.js";
 import _poolFirestorm from "../pool/firestorm.js";
 import _poolFirstVolley from "../pool/first-volley.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
+import _poolFlameKinZealot from "../pool/flame-kin-zealot.js";
 import _poolFlamerushRider from "../pool/flamerush-rider.js";
 import _poolFlashfires from "../pool/flashfires.js";
 import _poolFleshReaver from "../pool/flesh-reaver.js";
@@ -425,6 +427,7 @@ import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
+import _poolMnemonicNexus from "../pool/mnemonic-nexus.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
@@ -446,6 +449,7 @@ import _poolNaturesRevolt from "../pool/natures-revolt.js";
 import _poolNebelgastHerald from "../pool/nebelgast-herald.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
+import _poolNecromanticThirst from "../pool/necromantic-thirst.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNetterEnDal from "../pool/netter-en-dal.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
@@ -1010,6 +1014,7 @@ const shard: CardShard = {
     _poolDralnusCrusade,
     _poolDramaticAccusation,
     _poolDreadShade,
+    _poolDroolingGroodion,
     _poolDryadsRevival,
     _poolDuelTactics,
     _poolDuelcraftTrainer,
@@ -1054,6 +1059,7 @@ const shard: CardShard = {
     _poolFirestorm,
     _poolFirstVolley,
     _poolFixerTechnoTerror,
+    _poolFlameKinZealot,
     _poolFlamerushRider,
     _poolFlashfires,
     _poolFleshReaver,
@@ -1234,6 +1240,7 @@ const shard: CardShard = {
     _poolMindlessAutomaton,
     _poolMindwrackDemon,
     _poolMishrasFoundry,
+    _poolMnemonicNexus,
     _poolMobilize,
     _poolMockingbird,
     _poolMoldervineCloak,
@@ -1255,6 +1262,7 @@ const shard: CardShard = {
     _poolNebelgastHerald,
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
+    _poolNecromanticThirst,
     _poolNeedleshotGourna,
     _poolNetterEnDal,
     _poolNightMarketLookout,

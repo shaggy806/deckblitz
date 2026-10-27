@@ -681,6 +681,7 @@ import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
 import _poolTopanFreeblade from "../pool/topan-freeblade.js";
 import _poolTopiaryPanther from "../pool/topiary-panther.js";
+import _poolTorpidMoloch from "../pool/torpid-moloch.js";
 import _poolTotemSpeaker from "../pool/totem-speaker.js";
 import _poolToweringViewpoint from "../pool/towering-viewpoint.js";
 import _poolTragicSlip from "../pool/tragic-slip.js";
@@ -1469,6 +1470,7 @@ const shard: CardShard = {
     _poolTolarianScholar,
     _poolTopanFreeblade,
     _poolTopiaryPanther,
+    _poolTorpidMoloch,
     _poolTotemSpeaker,
     _poolToweringViewpoint,
     _poolTragicSlip,

@@ -104,6 +104,7 @@ import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
+import _poolCeruleanSphinx from "../pool/cerulean-sphinx.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChainbreaker from "../pool/chainbreaker.js";
 import _poolChampionOfStraySouls from "../pool/champion-of-stray-souls.js";
@@ -781,6 +782,7 @@ import _poolWinterTormentedLoner from "../pool/winter-tormented-loner.js";
 import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
+import _poolWoebringerDemon from "../pool/woebringer-demon.js";
 import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
 import _poolWoodripper from "../pool/woodripper.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
@@ -905,6 +907,7 @@ const shard: CardShard = {
     _poolCaveSense,
     _poolCelestialForce,
     _poolCemeteryTampering,
+    _poolCeruleanSphinx,
     _poolChainToMemory,
     _poolChainbreaker,
     _poolChampionOfStraySouls,
@@ -1582,6 +1585,7 @@ const shard: CardShard = {
     _poolWizardClass,
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
+    _poolWoebringerDemon,
     _poolWoodlurkerMimic,
     _poolWoodripper,
     _poolWordsOfWisdom,

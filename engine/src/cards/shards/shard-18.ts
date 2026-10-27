@@ -558,6 +558,7 @@ import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
 import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
+import _poolSearingMeditation from "../pool/searing-meditation.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
@@ -630,8 +631,10 @@ import _poolStruggle from "../pool/struggle.js";
 import _poolStuffedBear from "../pool/stuffed-bear.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
+import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
 import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
+import _poolSurgeOfZeal from "../pool/surge-of-zeal.js";
 import _poolSurgespanner from "../pool/surgespanner.js";
 import _poolSustainerOfTheRealm from "../pool/sustainer-of-the-realm.js";
 import _poolSusurSecundiVoidAltar from "../pool/susur-secundi-void-altar.js";
@@ -675,6 +678,7 @@ import _poolThunderheadGunner from "../pool/thunderhead-gunner.js";
 import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
 import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
 import _poolThunderousWrath from "../pool/thunderous-wrath.js";
+import _poolThundersongTrumpeter from "../pool/thundersong-trumpeter.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
@@ -1354,6 +1358,7 @@ const shard: CardShard = {
     _poolScourgeOfTheUndercity,
     _poolScrap,
     _poolSeaGodsRevenge,
+    _poolSearingMeditation,
     _poolSelesnyaKeyrune,
     _poolSentinelSpider,
     _poolSeveredStrands,
@@ -1426,8 +1431,10 @@ const shard: CardShard = {
     _poolStuffedBear,
     _poolSuffocatingFumes,
     _poolSummonKujata,
+    _poolSunhomeEnforcer,
     _poolSuqataLancer,
     _poolSureFootedInfiltrator,
+    _poolSurgeOfZeal,
     _poolSurgespanner,
     _poolSustainerOfTheRealm,
     _poolSusurSecundiVoidAltar,
@@ -1471,6 +1478,7 @@ const shard: CardShard = {
     _poolThunderingCeratok,
     _poolThunderousVelocipede,
     _poolThunderousWrath,
+    _poolThundersongTrumpeter,
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,

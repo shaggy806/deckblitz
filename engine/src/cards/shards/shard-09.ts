@@ -596,6 +596,7 @@ import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSeaLegs from "../pool/sea-legs.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
+import _poolSeedSpark from "../pool/seed-spark.js";
 import _poolSeizeTheSoul from "../pool/seize-the-soul.js";
 import _poolSekkiSeasonsGuide from "../pool/sekki-seasons-guide.js";
 import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolSeaLegs,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
+    _poolSeedSpark,
     _poolSeizeTheSoul,
     _poolSekkiSeasonsGuide,
     _poolSelvalaExplorerReturned,

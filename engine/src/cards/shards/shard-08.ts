@@ -504,6 +504,7 @@ import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
 import _poolPeaceAndQuiet from "../pool/peace-and-quiet.js";
 import _poolPegasusStampede from "../pool/pegasus-stampede.js";
 import _poolPelakkaCaverns from "../pool/pelakka-caverns.js";
+import _poolPeregrineMask from "../pool/peregrine-mask.js";
 import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
@@ -1331,6 +1332,7 @@ const shard: CardShard = {
     _poolPeaceAndQuiet,
     _poolPegasusStampede,
     _poolPelakkaCaverns,
+    _poolPeregrineMask,
     _poolPerimeterCaptain,
     _poolPerniciousDeed,
     _poolPhantomMonster,

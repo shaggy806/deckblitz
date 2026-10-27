@@ -196,6 +196,7 @@ import _poolDesynchronization from "../pool/desynchronization.js";
 import _poolDevoutInvocation from "../pool/devout-invocation.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
+import _poolDisembowel from "../pool/disembowel.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
@@ -990,6 +991,7 @@ const shard: CardShard = {
     _poolDevoutInvocation,
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,
+    _poolDisembowel,
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,

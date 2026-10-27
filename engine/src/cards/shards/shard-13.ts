@@ -508,6 +508,7 @@ import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolReturnedReveler from "../pool/returned-reveler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
+import _poolRibbonsOfNight from "../pool/ribbons-of-night.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
 import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
@@ -1304,6 +1305,7 @@ const shard: CardShard = {
     _poolReturnedReveler,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
+    _poolRibbonsOfNight,
     _poolRideTheRails,
     _poolRimewoodFalls,
     _poolRipscalePredator,

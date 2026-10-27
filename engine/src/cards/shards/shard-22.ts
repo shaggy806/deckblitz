@@ -196,6 +196,7 @@ import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
+import _poolEmptyTheCatacombs from "../pool/empty-the-catacombs.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
 import _poolEnduringIdeal from "../pool/enduring-ideal.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolEmbargo,
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
+    _poolEmptyTheCatacombs,
     _poolEndTheFestivities,
     _poolEnduringIdeal,
     _poolEnterTheAvatarState,

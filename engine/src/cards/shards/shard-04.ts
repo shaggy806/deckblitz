@@ -172,6 +172,7 @@ import _poolDreamStalker from "../pool/dream-stalker.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
+import _poolDryadsCaress from "../pool/dryads-caress.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
 import _poolDustElemental from "../pool/dust-elemental.js";
 import _poolDystopia from "../pool/dystopia.js";
@@ -640,6 +641,7 @@ import _poolStirThePride from "../pool/stir-the-pride.js";
 import _poolStitchedDrake from "../pool/stitched-drake.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
+import _poolStrandsOfUndeath from "../pool/strands-of-undeath.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
 import _poolStrongholdArena from "../pool/stronghold-arena.js";
@@ -969,6 +971,7 @@ const shard: CardShard = {
     _poolDrossHarvester,
     _poolDrownedDiner,
     _poolDrySpell,
+    _poolDryadsCaress,
     _poolDungeonShade,
     _poolDustElemental,
     _poolDystopia,
@@ -1437,6 +1440,7 @@ const shard: CardShard = {
     _poolStitchedDrake,
     _poolStokeGenius,
     _poolStonehands,
+    _poolStrandsOfUndeath,
     _poolStreamOfLife,
     _poolStrifeScholar,
     _poolStrongholdArena,

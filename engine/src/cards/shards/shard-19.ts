@@ -600,6 +600,7 @@ import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
+import _poolRollingSpoil from "../pool/rolling-spoil.js";
 import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRoninHoundmaster from "../pool/ronin-houndmaster.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
@@ -744,6 +745,7 @@ import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
 import _poolTradeRouteEnvoy from "../pool/trade-route-envoy.js";
 import _poolTradewindRider from "../pool/tradewind-rider.js";
+import _poolTransluminant from "../pool/transluminant.js";
 import _poolTransmogrifyingLicid from "../pool/transmogrifying-licid.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
@@ -1444,6 +1446,7 @@ const shard: CardShard = {
     _poolRoaringEarth,
     _poolRoaringPrimadox,
     _poolRoguesPassage,
+    _poolRollingSpoil,
     _poolRoninCliffrider,
     _poolRoninHoundmaster,
     _poolRootwaterAlligator,
@@ -1588,6 +1591,7 @@ const shard: CardShard = {
     _poolTowerDrake,
     _poolTradeRouteEnvoy,
     _poolTradewindRider,
+    _poolTransluminant,
     _poolTransmogrifyingLicid,
     _poolTrashForTreasure,
     _poolTreespringLorian,

@@ -283,6 +283,7 @@ import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
 import _poolGuidestoneCompass from "../pool/guidestone-compass.js";
 import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
+import _poolHalcyonGlaze from "../pool/halcyon-glaze.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHallowedSpiritkeeper from "../pool/hallowed-spiritkeeper.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
@@ -326,6 +327,7 @@ import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolIllusionReality from "../pool/illusion-reality.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
+import _poolInduceParanoia from "../pool/induce-paranoia.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
@@ -461,6 +463,7 @@ import _poolPhantasmalForces from "../pool/phantasmal-forces.js";
 import _poolPhyrexianEtchings from "../pool/phyrexian-etchings.js";
 import _poolPillarOfWar from "../pool/pillar-of-war.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
+import _poolPlagueBoiler from "../pool/plague-boiler.js";
 import _poolPlagueEngineer from "../pool/plague-engineer.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
@@ -704,6 +707,7 @@ import _poolTrouble from "../pool/trouble.js";
 import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
+import _poolTwistedJustice from "../pool/twisted-justice.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
 import _poolUmaraMystic from "../pool/umara-mystic.js";
 import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
@@ -1088,6 +1092,7 @@ const shard: CardShard = {
     _poolGruulLocket,
     _poolGuidestoneCompass,
     _poolGurmagRakshasa,
+    _poolHalcyonGlaze,
     _poolHallMonitor,
     _poolHallowedSpiritkeeper,
     _poolHammerOfPurphoros,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolIllusionReality,
     _poolImpoliteEntrance,
     _poolIncubationSac,
+    _poolInduceParanoia,
     _poolInfernalReckoning,
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
@@ -1266,6 +1272,7 @@ const shard: CardShard = {
     _poolPhyrexianEtchings,
     _poolPillarOfWar,
     _poolPitilessGorgon,
+    _poolPlagueBoiler,
     _poolPlagueEngineer,
     _poolPointedDiscussion,
     _poolPoisonArrow,
@@ -1509,6 +1516,7 @@ const shard: CardShard = {
     _poolTvaBureaucrat,
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,
+    _poolTwistedJustice,
     _poolTwoHandedAxe,
     _poolUmaraMystic,
     _poolUnchartedVoyage,

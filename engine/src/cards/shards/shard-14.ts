@@ -658,6 +658,7 @@ import _poolSpreadingAlgae from "../pool/spreading-algae.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStabWound from "../pool/stab-wound.js";
 import _poolStampedeDriver from "../pool/stampede-driver.js";
+import _poolStasisCell from "../pool/stasis-cell.js";
 import _poolSternMentor from "../pool/stern-mentor.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
@@ -780,6 +781,7 @@ import _poolWitchHunter from "../pool/witch-hunter.js";
 import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
 import _poolWizardsLightning from "../pool/wizards-lightning.js";
+import _poolWojekEmbermage from "../pool/wojek-embermage.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYavimayaScion from "../pool/yavimaya-scion.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
@@ -1468,6 +1470,7 @@ const shard: CardShard = {
     _poolSpreadingFlames,
     _poolStabWound,
     _poolStampedeDriver,
+    _poolStasisCell,
     _poolSternMentor,
     _poolStingingHivemaster,
     _poolStingingShot,
@@ -1590,6 +1593,7 @@ const shard: CardShard = {
     _poolWitchsClinic,
     _poolWitherbloomCharm,
     _poolWizardsLightning,
+    _poolWojekEmbermage,
     _poolYahennisExpertise,
     _poolYavimayaScion,
     _poolYoureConfrontedByRobbers,

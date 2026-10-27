@@ -549,6 +549,7 @@ import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScaldingTongs from "../pool/scalding-tongs.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
+import _poolScionOfTheWild from "../pool/scion-of-the-wild.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
 import _poolScoriaWurm from "../pool/scoria-wurm.js";
 import _poolScornedVillager from "../pool/scorned-villager.js";
@@ -759,6 +760,7 @@ import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWispmare from "../pool/wispmare.js";
 import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
+import _poolWoodwraithCorrupter from "../pool/woodwraith-corrupter.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
@@ -1333,6 +1335,7 @@ const shard: CardShard = {
     _poolScaldingTongs,
     _poolScarbladesMalice,
     _poolScattershot,
+    _poolScionOfTheWild,
     _poolScoldingAdministrator,
     _poolScoriaWurm,
     _poolScornedVillager,
@@ -1543,6 +1546,7 @@ const shard: CardShard = {
     _poolWillOfTheAbzan,
     _poolWispmare,
     _poolWolfSkullShaman,
+    _poolWoodwraithCorrupter,
     _poolWorkshopElders,
     _poolWorldQueller,
     _poolWrennsResolve,

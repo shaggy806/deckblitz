@@ -144,6 +144,7 @@ import _poolCuriousObsession from "../pool/curious-obsession.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
 import _poolCycloneSummoner from "../pool/cyclone-summoner.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
+import _poolCyclopeanSnare from "../pool/cyclopean-snare.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
 import _poolDamningVerdict from "../pool/damning-verdict.js";
@@ -737,6 +738,7 @@ import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
 import _poolVigeanIntuition from "../pool/vigean-intuition.js";
+import _poolVindictiveMob from "../pool/vindictive-mob.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
@@ -769,6 +771,7 @@ import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
 import _poolWitheredWretch from "../pool/withered-wretch.js";
 import _poolWithoutWeakness from "../pool/without-weakness.js";
 import _poolWizardsRetort from "../pool/wizards-retort.js";
+import _poolWojekSiren from "../pool/wojek-siren.js";
 import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolCycleOfRenewal,
     _poolCycloneSummoner,
     _poolCyclonicRift,
+    _poolCyclopeanSnare,
     _poolCyclopsOfOneEyedPass,
     _poolDaggermawMegalodon,
     _poolDamningVerdict,
@@ -1526,6 +1530,7 @@ const shard: CardShard = {
     _poolViashinoSandstalker,
     _poolViashinoSandswimmer,
     _poolVigeanIntuition,
+    _poolVindictiveMob,
     _poolVinelasherAdept,
     _poolVirtusTheVeiled,
     _poolVisionOfLove,
@@ -1558,6 +1563,7 @@ const shard: CardShard = {
     _poolWitheredWretch,
     _poolWithoutWeakness,
     _poolWizardsRetort,
+    _poolWojekSiren,
     _poolWoodlandSleuth,
     _poolWoollyLoxodon,
     _poolWoollyThoctar,

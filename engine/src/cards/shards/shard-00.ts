@@ -306,6 +306,7 @@ import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
 import _poolHeavyFog from "../pool/heavy-fog.js";
+import _poolHelldozer from "../pool/helldozer.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
@@ -1125,6 +1126,7 @@ const shard: CardShard = {
     _poolHeadlessSpecter,
     _poolHealingSalve,
     _poolHeavyFog,
+    _poolHelldozer,
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,

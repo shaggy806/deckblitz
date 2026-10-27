@@ -120,6 +120,7 @@ import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolClanGuildmage from "../pool/clan-guildmage.js";
 import _poolClawsOfWirewood from "../pool/claws-of-wirewood.js";
+import _poolCleansingBeam from "../pool/cleansing-beam.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
@@ -274,6 +275,7 @@ import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGalvanicAlchemist from "../pool/galvanic-alchemist.js";
 import _poolGarrukApexPredator from "../pool/garruk-apex-predator.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
+import _poolGateHound from "../pool/gate-hound.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeneralsRegalia from "../pool/generals-regalia.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
@@ -343,6 +345,7 @@ import _poolInfernalOffering from "../pool/infernal-offering.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
+import _poolInstillFuror from "../pool/instill-furor.js";
 import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
 import _poolIronManMasterOfMachines from "../pool/iron-man-master-of-machines.js";
 import _poolIsland from "../pool/island.js";
@@ -450,6 +453,7 @@ import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNighthowler from "../pool/nighthowler.js";
+import _poolNightmareVoid from "../pool/nightmare-void.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNivMizzetDracogenius from "../pool/niv-mizzet-dracogenius.js";
@@ -466,6 +470,7 @@ import _poolOminousRoost from "../pool/ominous-roost.js";
 import _poolOneOfThePack from "../pool/one-of-the-pack.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
+import _poolOrdruunCommando from "../pool/ordruun-commando.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOrnamentalCourage from "../pool/ornamental-courage.js";
@@ -525,6 +530,7 @@ import _poolPunishingFire from "../pool/punishing-fire.js";
 import _poolPurphorossEmissary from "../pool/purphoross-emissary.js";
 import _poolPursuitOfFlight from "../pool/pursuit-of-flight.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
+import _poolQuickchange from "../pool/quickchange.js";
 import _poolQuicksilverBrashBlur from "../pool/quicksilver-brash-blur.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
@@ -915,6 +921,7 @@ const shard: CardShard = {
     _poolCitadelOfPain,
     _poolClanGuildmage,
     _poolClawsOfWirewood,
+    _poolCleansingBeam,
     _poolCleanupCrew,
     _poolClericOfTheForwardOrder,
     _poolClickslither,
@@ -1069,6 +1076,7 @@ const shard: CardShard = {
     _poolGalvanicAlchemist,
     _poolGarrukApexPredator,
     _poolGarrukWildspeaker,
+    _poolGateHound,
     _poolGatecreeperVine,
     _poolGeneralsRegalia,
     _poolGeologicalAppraiser,
@@ -1138,6 +1146,7 @@ const shard: CardShard = {
     _poolInfernalRebirth,
     _poolIngotChewer,
     _poolInspiringVantage,
+    _poolInstillFuror,
     _poolIronLadYoungAvenger,
     _poolIronManMasterOfMachines,
     _poolIsland,
@@ -1245,6 +1254,7 @@ const shard: CardShard = {
     _poolNecropolisRegent,
     _poolNightMarketAeronaut,
     _poolNighthowler,
+    _poolNightmareVoid,
     _poolNightscapeFamiliar,
     _poolNightwhorlHermit,
     _poolNivMizzetDracogenius,
@@ -1261,6 +1271,7 @@ const shard: CardShard = {
     _poolOneOfThePack,
     _poolOozeSpill,
     _poolOphidianEye,
+    _poolOrdruunCommando,
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOrnamentalCourage,
@@ -1320,6 +1331,7 @@ const shard: CardShard = {
     _poolPurphorossEmissary,
     _poolPursuitOfFlight,
     _poolPyroceratops,
+    _poolQuickchange,
     _poolQuicksilverBrashBlur,
     _poolRabbitResponse,
     _poolRadhaCoalitionWarlord,

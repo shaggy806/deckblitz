@@ -565,6 +565,7 @@ import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicElemental from "../pool/seismic-elemental.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
 import _poolSelesnyaLocket from "../pool/selesnya-locket.js";
+import _poolSellSwordBrute from "../pool/sell-sword-brute.js";
 import _poolSelvalasEnforcer from "../pool/selvalas-enforcer.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
 import _poolSereneSteward from "../pool/serene-steward.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolSeismicElemental,
     _poolSeismicShudder,
     _poolSelesnyaLocket,
+    _poolSellSwordBrute,
     _poolSelvalasEnforcer,
     _poolSeparatistVoidmage,
     _poolSereneSteward,
