@@ -11659,6 +11659,35 @@
   },
   "condition:countered-this-way": {
    "example": "Fold into Aether: 'Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield' — nothing when the spell can't be countered."
+  },
+  "amount:life-lost-when-source-entered": {
+   "example": "Soulgorger Orgg: when it leaves, you gain the life you lost when it entered — nothing remembers that amount"
+  },
+  "effect:opponent-chooses-your-permanent-to-exile": {
+   "family": "effect:choices-by-other-players",
+   "example": "Wormfang Crab: an opponent chooses a permanent you control other than it and exiles it until it leaves"
+  },
+  "effect:damage-from-exiled-card": {
+   "example": "Selfless Exorcist: the creature card it exiles from a graveyard deals damage equal to its power to it"
+  },
+  "cost:put-graveyard-cards-on-library-bottom": {
+   "example": "Battlefield Scrounger: put three cards from your graveyard on the bottom of your library as a cost"
+  },
+  "effect:exchange-graveyard-and-library": {
+   "family": "effect:exchange-hand-and-graveyard",
+   "example": "Morality Shift: exchange your graveyard and library"
+  },
+  "effect:unless-exile-graveyard": {
+   "family": "effect:choices-by-other-players",
+   "example": "Grip of Amnesia: counter target spell unless its controller exiles all cards from their graveyard (allowed with an empty graveyard)"
+  },
+  "cost:flashback-sacrifice-x": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Firecat Blitz: Flashback—{R}{R}, Sacrifice X Mountains, X feeding the spell"
+  },
+  "mechanic:special-action-exile-to-ignore-effect": {
+   "family": "mechanic:special-action-sacrifice-to-ignore-effect",
+   "example": "Lost in Thought: its controller may exile three cards from their graveyard to ignore its effect until end of turn"
   }
  }
 }

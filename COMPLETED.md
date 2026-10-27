@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
+  remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
+  Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
+  Struggle, Silver Seraph — and 47 blocked (`B217.json`), no feature built.
 - **Sunburst, and Fifth Dawn — Fifth Dawn is whole** (batch 213, the third middle walk's range
   taken by a newest-first session, 2026-10-26, `keyword:sunburst`): **built** sunburst (rule
   702.44 — the `sunburst()` helper, +1/+1 counters by its copiable creature type or charge
