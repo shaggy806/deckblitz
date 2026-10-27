@@ -129,6 +129,7 @@ import _poolCollectiveBlessing from "../pool/collective-blessing.js";
 import _poolColossalGraveReaver from "../pool/colossal-grave-reaver.js";
 import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
+import _poolConjurersBauble from "../pool/conjurers-bauble.js";
 import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
@@ -314,6 +315,7 @@ import _poolGruulWarPlow from "../pool/gruul-war-plow.js";
 import _poolGuardChange from "../pool/guard-change.js";
 import _poolGuidingVoice from "../pool/guiding-voice.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
+import _poolGyomeMasterChef from "../pool/gyome-master-chef.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
 import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
@@ -628,6 +630,7 @@ import _poolSlateStreetRuffian from "../pool/slate-street-ruffian.js";
 import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
+import _poolSmotheringAbomination from "../pool/smothering-abomination.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSnakePit from "../pool/snake-pit.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
@@ -687,6 +690,7 @@ import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
+import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
@@ -938,6 +942,7 @@ const shard: CardShard = {
     _poolColossalGraveReaver,
     _poolConclaveNaturalists,
     _poolConduitPylons,
+    _poolConjurersBauble,
     _poolContaminatedDrink,
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
@@ -1123,6 +1128,7 @@ const shard: CardShard = {
     _poolGuardChange,
     _poolGuidingVoice,
     _poolGwennaEyesOfGaea,
+    _poolGyomeMasterChef,
     _poolHagraSharpshooter,
     _poolHammerhand,
     _poolHardenedScaleArmor,
@@ -1437,6 +1443,7 @@ const shard: CardShard = {
     _poolSleepParalysis,
     _poolSmaugTheMagnificent,
     _poolSmolderingEfreet,
+    _poolSmotheringAbomination,
     _poolSmugglersSurprise,
     _poolSnakePit,
     _poolSneeringShadewriter,
@@ -1496,6 +1503,7 @@ const shard: CardShard = {
     _poolTempleOfMalice,
     _poolTemporalFirestorm,
     _poolTheBalrogOfMoria,
+    _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,

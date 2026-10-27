@@ -277,6 +277,7 @@ import _poolFrazzle from "../pool/frazzle.js";
 import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
+import _poolFumulusTheInfestation from "../pool/fumulus-the-infestation.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
@@ -544,6 +545,7 @@ import _poolOverkill from "../pool/overkill.js";
 import _poolOvinize from "../pool/ovinize.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
+import _poolPalanisHatcher from "../pool/palanis-hatcher.js";
 import _poolPaleoloth from "../pool/paleoloth.js";
 import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
@@ -1146,6 +1148,7 @@ const shard: CardShard = {
     _poolFreshFacedRecruit,
     _poolFrontierSeeker,
     _poolFrostveilAmbush,
+    _poolFumulusTheInfestation,
     _poolFungalInfection,
     _poolGaeasAvenger,
     _poolGallifreyCouncilChamber,
@@ -1413,6 +1416,7 @@ const shard: CardShard = {
     _poolOvinize,
     _poolPacifism,
     _poolPaladinsShield,
+    _poolPalanisHatcher,
     _poolPaleoloth,
     _poolPantherPounce,
     _poolParadoxicalOutcome,

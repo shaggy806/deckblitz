@@ -107,6 +107,7 @@ import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
 import _poolBrightclimbPathway from "../pool/brightclimb-pathway.js";
 import _poolBrightwoodTracker from "../pool/brightwood-tracker.js";
 import _poolBroodBirthing from "../pool/brood-birthing.js";
+import _poolBroodSliver from "../pool/brood-sliver.js";
 import _poolBroodwarden from "../pool/broodwarden.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
 import _poolBrownOuphe from "../pool/brown-ouphe.js";
@@ -120,6 +121,7 @@ import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
 import _poolCanopyDragon from "../pool/canopy-dragon.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
 import _poolCarnifexDemon from "../pool/carnifex-demon.js";
+import _poolCarnivorousCanopy from "../pool/carnivorous-canopy.js";
 import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
 import _poolCaveIn from "../pool/cave-in.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
@@ -266,6 +268,7 @@ import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFullyGrown from "../pool/fully-grown.js";
+import _poolFungalRebirth from "../pool/fungal-rebirth.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaeasEmbrace from "../pool/gaeas-embrace.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
@@ -973,6 +976,7 @@ const shard: CardShard = {
     _poolBrightclimbPathway,
     _poolBrightwoodTracker,
     _poolBroodBirthing,
+    _poolBroodSliver,
     _poolBroodwarden,
     _poolBrotherhoodsEnd,
     _poolBrownOuphe,
@@ -986,6 +990,7 @@ const shard: CardShard = {
     _poolCanopyDragon,
     _poolCanopyVista,
     _poolCarnifexDemon,
+    _poolCarnivorousCanopy,
     _poolCaseOfTheRansackedLab,
     _poolCaveIn,
     _poolCemeteryGate,
@@ -1132,6 +1137,7 @@ const shard: CardShard = {
     _poolFrostwalla,
     _poolFugitiveDroid,
     _poolFullyGrown,
+    _poolFungalRebirth,
     _poolFurnaceSpirit,
     _poolGaeasEmbrace,
     _poolGaladrielGiftGiver,

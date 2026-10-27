@@ -495,6 +495,7 @@ import _poolPoreOverThePages from "../pool/pore-over-the-pages.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
+import _poolPrishesWanderings from "../pool/prishes-wanderings.js";
 import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
 import _poolPromiseOfPower from "../pool/promise-of-power.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
@@ -1320,6 +1321,7 @@ const shard: CardShard = {
     _poolPrecisionBolt,
     _poolPredatorsStrike,
     _poolPrimordialHydra,
+    _poolPrishesWanderings,
     _poolPrismwakeMerrow,
     _poolPromiseOfPower,
     _poolProudMentor,

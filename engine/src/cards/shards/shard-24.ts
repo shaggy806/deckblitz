@@ -214,6 +214,7 @@ import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEnigmaEidolon from "../pool/enigma-eidolon.js";
+import _poolEnsnaredByTheMara from "../pool/ensnared-by-the-mara.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
@@ -1032,6 +1033,7 @@ const shard: CardShard = {
     _poolEndoskeleton,
     _poolEnergyFlux,
     _poolEnigmaEidolon,
+    _poolEnsnaredByTheMara,
     _poolEntrancingMelody,
     _poolEntsFury,
     _poolErode,

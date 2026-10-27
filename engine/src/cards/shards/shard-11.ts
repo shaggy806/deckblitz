@@ -48,6 +48,7 @@ import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolAuriokSurvivors from "../pool/auriok-survivors.js";
+import _poolAuroraOfEmrakul from "../pool/aurora-of-emrakul.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
@@ -674,6 +675,7 @@ import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfNight from "../pool/strength-of-night.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
+import _poolSummonShiva from "../pool/summon-shiva.js";
 import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
 import _poolSunbathingRootwalla from "../pool/sunbathing-rootwalla.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
@@ -870,6 +872,7 @@ const shard: CardShard = {
     _poolAudacity,
     _poolAuraExtraction,
     _poolAuriokSurvivors,
+    _poolAuroraOfEmrakul,
     _poolAvacynsMemorial,
     _poolAvatarOfFury,
     _poolAvenTrailblazer,
@@ -1496,6 +1499,7 @@ const shard: CardShard = {
     _poolStrengthOfNight,
     _poolStrengthOfTheHarvest,
     _poolSummonPrimalOdin,
+    _poolSummonShiva,
     _poolSummonersGrimoire,
     _poolSunbathingRootwalla,
     _poolSunderingGrowth,

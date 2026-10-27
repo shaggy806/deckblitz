@@ -53,6 +53,7 @@ import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
+import _poolAwakenTheHonoredDead from "../pool/awaken-the-honored-dead.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
@@ -230,6 +231,7 @@ import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEnclaveElite from "../pool/enclave-elite.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
+import _poolEomerMarshalOfRohan from "../pool/eomer-marshal-of-rohan.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
 import _poolEtherealChampion from "../pool/ethereal-champion.js";
@@ -242,6 +244,7 @@ import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFacelessButcher from "../pool/faceless-butcher.js";
 import _poolFaerieSquadron from "../pool/faerie-squadron.js";
 import _poolFallenIdeal from "../pool/fallen-ideal.js";
+import _poolFarWanderings from "../pool/far-wanderings.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
@@ -858,6 +861,7 @@ const shard: CardShard = {
     _poolAuriokSunchaser,
     _poolAuthority,
     _poolAvatarsWrath,
+    _poolAwakenTheHonoredDead,
     _poolBackToNature,
     _poolBalambTRexaur,
     _poolBallLightning,
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolEmpyreanEagle,
     _poolEnclaveElite,
     _poolEntrustTheSpark,
+    _poolEomerMarshalOfRohan,
     _poolEshkiTemursRoar,
     _poolEternalThirst,
     _poolEtherealChampion,
@@ -1047,6 +1052,7 @@ const shard: CardShard = {
     _poolFacelessButcher,
     _poolFaerieSquadron,
     _poolFallenIdeal,
+    _poolFarWanderings,
     _poolFatedIntervention,
     _poolFateshaperAspirant,
     _poolFavorOfTheOverbeing,

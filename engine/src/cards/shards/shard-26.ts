@@ -239,6 +239,7 @@ import _poolFertileThicket from "../pool/fertile-thicket.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
+import _poolFind from "../pool/find.js";
 import _poolFinishingBlow from "../pool/finishing-blow.js";
 import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
@@ -555,6 +556,7 @@ import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
 import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
+import _poolRiteOfTheRagingStorm from "../pool/rite-of-the-raging-storm.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
 import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
@@ -803,6 +805,7 @@ import _poolZagothTriome from "../pool/zagoth-triome.js";
 import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js";
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
+import _tokensDinosaurEggToken from "../tokens/dinosaur-egg-token.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
 import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dragon.js";
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
@@ -1059,6 +1062,7 @@ const shard: CardShard = {
     _poolFertilid,
     _poolFetidPools,
     _poolFieryEmancipation,
+    _poolFind,
     _poolFinishingBlow,
     _poolFireAtWill,
     _poolFirecannonBlast,
@@ -1375,6 +1379,7 @@ const shard: CardShard = {
     _poolRhoxOracle,
     _poolRiderInNeed,
     _poolRiteOfRuin,
+    _poolRiteOfTheRagingStorm,
     _poolRiverpyreVerge,
     _poolRoadsideReliquary,
     _poolRoast,
@@ -1625,6 +1630,7 @@ const shard: CardShard = {
     _poolZombieApocalypse,
   ],
   tokens: [
+    _tokensDinosaurEggToken,
     _tokensDragonElementalToken,
     _tokensDragonTokenWakeTheDragon,
     _tokensElementalTokenVernalSovereign,

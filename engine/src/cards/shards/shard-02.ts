@@ -181,6 +181,7 @@ import _poolDiamondCity from "../pool/diamond-city.js";
 import _poolDiamondValley from "../pool/diamond-valley.js";
 import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
 import _poolDireFleetHoarder from "../pool/dire-fleet-hoarder.js";
+import _poolDireTactics from "../pool/dire-tactics.js";
 import _poolDiscordantPiper from "../pool/discordant-piper.js";
 import _poolDisdainfulStroke from "../pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "../pool/disease-carriers.js";
@@ -984,6 +985,7 @@ const shard: CardShard = {
     _poolDiamondValley,
     _poolDiluvianPrimordial,
     _poolDireFleetHoarder,
+    _poolDireTactics,
     _poolDiscordantPiper,
     _poolDisdainfulStroke,
     _poolDiseaseCarriers,

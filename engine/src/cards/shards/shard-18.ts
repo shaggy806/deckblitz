@@ -485,6 +485,7 @@ import _poolPileOn from "../pool/pile-on.js";
 import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
+import _poolPlanarEngineering from "../pool/planar-engineering.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
@@ -696,6 +697,7 @@ import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
 import _poolToxinSliver from "../pool/toxin-sliver.js";
+import _poolTraverseTheUlvenwald from "../pool/traverse-the-ulvenwald.js";
 import _poolTreasureMage from "../pool/treasure-mage.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
@@ -1291,6 +1293,7 @@ const shard: CardShard = {
     _poolPitchstoneWall,
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
+    _poolPlanarEngineering,
     _poolPlatedRootwalla,
     _poolPlowThrough,
     _poolPossibilityTechnician,
@@ -1502,6 +1505,7 @@ const shard: CardShard = {
     _poolToughCookie,
     _poolTowerDefense,
     _poolToxinSliver,
+    _poolTraverseTheUlvenwald,
     _poolTreasureMage,
     _poolTreasureMap,
     _poolTremble,

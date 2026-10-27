@@ -311,6 +311,7 @@ import _poolHealingHands from "../pool/healing-hands.js";
 import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
+import _poolHelmOfTheGhastlord from "../pool/helm-of-the-ghastlord.js";
 import _poolHelpingHand from "../pool/helping-hand.js";
 import _poolHematiteTalisman from "../pool/hematite-talisman.js";
 import _poolHeraldOfTheFair from "../pool/herald-of-the-fair.js";
@@ -391,6 +392,7 @@ import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js"
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuldothaRebirth from "../pool/kuldotha-rebirth.js";
+import _poolKulrathKnight from "../pool/kulrath-knight.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -482,6 +484,7 @@ import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
+import _poolOblivionRing from "../pool/oblivion-ring.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
@@ -1142,6 +1145,7 @@ const shard: CardShard = {
     _poolHeartsOnFire,
     _poolHecteyes,
     _poolHeirsOfStromkirk,
+    _poolHelmOfTheGhastlord,
     _poolHelpingHand,
     _poolHematiteTalisman,
     _poolHeraldOfTheFair,
@@ -1222,6 +1226,7 @@ const shard: CardShard = {
     _poolKrovikanMist,
     _poolKukemssaPirates,
     _poolKuldothaRebirth,
+    _poolKulrathKnight,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
@@ -1313,6 +1318,7 @@ const shard: CardShard = {
     _poolNyxLotus,
     _poolOakheartDryads,
     _poolObNixilisReignited,
+    _poolOblivionRing,
     _poolObscuraCharm,
     _poolOchranAssassin,
     _poolOhranFrostfang,

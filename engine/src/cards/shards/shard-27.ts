@@ -545,6 +545,7 @@ import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
+import _poolRundveltHordemaster from "../pool/rundvelt-hordemaster.js";
 import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
@@ -568,6 +569,7 @@ import _poolSeekTheWilds from "../pool/seek-the-wilds.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelOfTheEternalWatch from "../pool/sentinel-of-the-eternal-watch.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
+import _poolSephirothFallenHero from "../pool/sephiroth-fallen-hero.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
@@ -765,6 +767,7 @@ import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWinnow from "../pool/winnow.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
+import _poolWoodlandBellower from "../pool/woodland-bellower.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
@@ -1346,6 +1349,7 @@ const shard: CardShard = {
     _poolRotTideGargantua,
     _poolRotisserieElemental,
     _poolRuhanOfTheFomori,
+    _poolRundveltHordemaster,
     _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
@@ -1369,6 +1373,7 @@ const shard: CardShard = {
     _poolSeekerOfTheWay,
     _poolSentinelOfTheEternalWatch,
     _poolSentinelsEyes,
+    _poolSephirothFallenHero,
     _poolSergeantJohnBenton,
     _poolSerraAscendant,
     _poolShadowAlleyDenizen,
@@ -1566,6 +1571,7 @@ const shard: CardShard = {
     _poolWillowduskEssenceSeer,
     _poolWinnow,
     _poolWitheringTorment,
+    _poolWoodlandBellower,
     _poolWoodlandCemetery,
     _poolWordOfSeizing,
     _poolWorldBreaker,

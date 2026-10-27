@@ -683,6 +683,7 @@ import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
 import _poolSylvanEchoes from "../pool/sylvan-echoes.js";
 import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
+import _poolTailSwipe from "../pool/tail-swipe.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
@@ -1485,6 +1486,7 @@ const shard: CardShard = {
     _poolSylvanEchoes,
     _poolSylvanParadise,
     _poolTaboraxHopesDemise,
+    _poolTailSwipe,
     _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,

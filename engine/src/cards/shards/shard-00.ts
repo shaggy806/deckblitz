@@ -64,6 +64,7 @@ import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackCat from "../pool/black-cat.js";
+import _poolBlackSunsTwilight from "../pool/black-suns-twilight.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladeSliver from "../pool/blade-sliver.js";
@@ -241,6 +242,7 @@ import _poolFirewakeSliver from "../pool/firewake-sliver.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFlayerDrone from "../pool/flayer-drone.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
+import _poolFlowState from "../pool/flow-state.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
@@ -899,6 +901,7 @@ const shard: CardShard = {
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
     _poolBlackCat,
+    _poolBlackSunsTwilight,
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
     _poolBladeSliver,
@@ -1076,6 +1079,7 @@ const shard: CardShard = {
     _poolFishingGear,
     _poolFlayerDrone,
     _poolFloodpitsDrowner,
+    _poolFlowState,
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
     _poolForest,

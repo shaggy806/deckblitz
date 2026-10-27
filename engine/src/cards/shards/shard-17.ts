@@ -144,6 +144,7 @@ import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCrumblingColossus from "../pool/crumbling-colossus.js";
 import _poolCrushTheWeak from "../pool/crush-the-weak.js";
+import _poolCryptolithFragment from "../pool/cryptolith-fragment.js";
 import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolCrosissAttendant,
     _poolCrumblingColossus,
     _poolCrushTheWeak,
+    _poolCryptolithFragment,
     _poolCrystalGolem,
     _poolCurioVendor,
     _poolCursedFlesh,

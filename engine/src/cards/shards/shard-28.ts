@@ -152,6 +152,7 @@ import _poolCourtArchers from "../pool/court-archers.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
 import _poolCragsmasherYeti from "../pool/cragsmasher-yeti.js";
 import _poolCrimsonMage from "../pool/crimson-mage.js";
+import _poolCruelUltimatum from "../pool/cruel-ultimatum.js";
 import _poolCultGuildmage from "../pool/cult-guildmage.js";
 import _poolCuratorBeastie from "../pool/curator-beastie.js";
 import _poolCuriousInquiry from "../pool/curious-inquiry.js";
@@ -235,6 +236,7 @@ import _poolFeralAnimist from "../pool/feral-animist.js";
 import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
+import _poolFinalIteration from "../pool/final-iteration.js";
 import _poolFinestHour from "../pool/finest-hour.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFireServant from "../pool/fire-servant.js";
@@ -401,6 +403,7 @@ import _poolManaGeode from "../pool/mana-geode.js";
 import _poolMandroidSquadron from "../pool/mandroid-squadron.js";
 import _poolMaralenFaeAscendant from "../pool/maralen-fae-ascendant.js";
 import _poolMarangRiverProwler from "../pool/marang-river-prowler.js";
+import _poolMarchOfProgress from "../pool/march-of-progress.js";
 import _poolMarchesaTheBlackRose from "../pool/marchesa-the-black-rose.js";
 import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
@@ -421,6 +424,7 @@ import _poolMetathranTransport from "../pool/metathran-transport.js";
 import _poolMeteorStorm from "../pool/meteor-storm.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
+import _poolMightOfTheMeek from "../pool/might-of-the-meek.js";
 import _poolMightWeaver from "../pool/might-weaver.js";
 import _poolMindCarver from "../pool/mind-carver.js";
 import _poolMindControl from "../pool/mind-control.js";
@@ -995,6 +999,7 @@ const shard: CardShard = {
     _poolCowerInFear,
     _poolCragsmasherYeti,
     _poolCrimsonMage,
+    _poolCruelUltimatum,
     _poolCultGuildmage,
     _poolCuratorBeastie,
     _poolCuriousInquiry,
@@ -1078,6 +1083,7 @@ const shard: CardShard = {
     _poolFestergloom,
     _poolFestiveFuneral,
     _poolFeySteed,
+    _poolFinalIteration,
     _poolFinestHour,
     _poolFireNationWarship,
     _poolFireServant,
@@ -1244,6 +1250,7 @@ const shard: CardShard = {
     _poolMandroidSquadron,
     _poolMaralenFaeAscendant,
     _poolMarangRiverProwler,
+    _poolMarchOfProgress,
     _poolMarchesaTheBlackRose,
     _poolMarionetteApprentice,
     _poolMarkOfTheVampire,
@@ -1264,6 +1271,7 @@ const shard: CardShard = {
     _poolMeteorStorm,
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
+    _poolMightOfTheMeek,
     _poolMightWeaver,
     _poolMindCarver,
     _poolMindControl,

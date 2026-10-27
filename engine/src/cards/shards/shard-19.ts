@@ -503,6 +503,7 @@ import _poolNarsetOfTheAncientWay from "../pool/narset-of-the-ancient-way.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
 import _poolNaturesWay from "../pool/natures-way.js";
 import _poolNavSquadCommandos from "../pool/nav-squad-commandos.js";
+import _poolNazgulBattleMace from "../pool/nazgul-battle-mace.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolNaturalReclamation,
     _poolNaturesWay,
     _poolNavSquadCommandos,
+    _poolNazgulBattleMace,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
     _poolNekusarTheMindrazer,

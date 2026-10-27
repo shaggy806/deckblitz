@@ -8,6 +8,7 @@ import _poolAbsolverThrull from "../pool/absolver-thrull.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
+import _poolAccumulateWisdom from "../pool/accumulate-wisdom.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAetherTheorist from "../pool/aether-theorist.js";
@@ -814,6 +815,7 @@ import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
 import _tokensKithkinSoldierToken from "../tokens/kithkin-soldier-token.js";
+import _tokensKnightToken31 from "../tokens/knight-token-3-1.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -829,6 +831,7 @@ const shard: CardShard = {
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
     _poolAbzanBeastmaster,
+    _poolAccumulateWisdom,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAetherTheorist,
@@ -1637,6 +1640,7 @@ const shard: CardShard = {
     _tokensEverywhereToken,
     _tokensHydraTokenBlackGreen,
     _tokensKithkinSoldierToken,
+    _tokensKnightToken31,
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,

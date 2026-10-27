@@ -490,6 +490,7 @@ import _poolMyojinOfCrypticDreams from "../pool/myojin-of-cryptic-dreams.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNaturesRuin from "../pool/natures-ruin.js";
+import _poolNecrogenMists from "../pool/necrogen-mists.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
     _poolNaturesRuin,
+    _poolNecrogenMists,
     _poolNecrogenScudder,
     _poolNettleGuard,
     _poolNiblisOfTheBreath,

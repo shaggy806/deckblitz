@@ -318,6 +318,7 @@ import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
+import _poolHourOfPromise from "../pool/hour-of-promise.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
@@ -784,6 +785,7 @@ import _tokensGoblinSoldierToken from "../tokens/goblin-soldier-token.js";
 import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
+import _tokensLightningRagerToken from "../tokens/lightning-rager-token.js";
 import _tokensMinotaurToken from "../tokens/minotaur-token.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
@@ -1115,6 +1117,7 @@ const shard: CardShard = {
     _poolHenchfiendOfUkor,
     _poolHermitOfTheNatterknolls,
     _poolHordeOfBoggarts,
+    _poolHourOfPromise,
     _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
@@ -1583,6 +1586,7 @@ const shard: CardShard = {
     _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,
+    _tokensLightningRagerToken,
     _tokensMinotaurToken,
     _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,

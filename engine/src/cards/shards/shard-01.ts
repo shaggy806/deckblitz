@@ -118,6 +118,7 @@ import _poolControlMagic from "../pool/control-magic.js";
 import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
+import _poolCounterbalance from "../pool/counterbalance.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCraterHellion from "../pool/crater-hellion.js";
 import _poolCripplingChill from "../pool/crippling-chill.js";
@@ -482,6 +483,7 @@ import _poolPowderKeg from "../pool/powder-keg.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrecognitivePerception from "../pool/precognitive-perception.js";
 import _poolPressIntoService from "../pool/press-into-service.js";
+import _poolPrestonTheVanisher from "../pool/preston-the-vanisher.js";
 import _poolPriestOfYawgmoth from "../pool/priest-of-yawgmoth.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
@@ -515,6 +517,7 @@ import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
 import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRegentsAuthority from "../pool/regents-authority.js";
+import _poolRejectImperfection from "../pool/reject-imperfection.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
 import _poolRenounceTheGuilds from "../pool/renounce-the-guilds.js";
 import _poolReparations from "../pool/reparations.js";
@@ -917,6 +920,7 @@ const shard: CardShard = {
     _poolCoordinatedBarrage,
     _poolCorpseConnoisseur,
     _poolCosmicSpiderMan,
+    _poolCounterbalance,
     _poolCourierHawk,
     _poolCraterHellion,
     _poolCripplingChill,
@@ -1281,6 +1285,7 @@ const shard: CardShard = {
     _poolPowerBoost,
     _poolPrecognitivePerception,
     _poolPressIntoService,
+    _poolPrestonTheVanisher,
     _poolPriestOfYawgmoth,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
@@ -1314,6 +1319,7 @@ const shard: CardShard = {
     _poolRecurringNightmare,
     _poolRedwoodTreefolk,
     _poolRegentsAuthority,
+    _poolRejectImperfection,
     _poolRemnantElemental,
     _poolRenounceTheGuilds,
     _poolReparations,

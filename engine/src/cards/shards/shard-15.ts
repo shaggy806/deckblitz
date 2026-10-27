@@ -491,6 +491,7 @@ import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
+import _poolPhyrexianScriptures from "../pool/phyrexian-scriptures.js";
 import _poolPhyrexianScuta from "../pool/phyrexian-scuta.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
@@ -661,6 +662,7 @@ import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
+import _poolTheOoze from "../pool/the-ooze.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolPearlOfWisdom,
     _poolPersonalSanctuary,
     _poolPetrifyingMeddler,
+    _poolPhyrexianScriptures,
     _poolPhyrexianScuta,
     _poolPiercingExhale,
     _poolPilgrimOfTheAges,
@@ -1441,6 +1444,7 @@ const shard: CardShard = {
     _poolTezzeretsAmbition,
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
+    _poolTheOoze,
     _poolTheTerrorOfSerpentsPass,
     _poolThermokarst,
     _poolThinkTwice,

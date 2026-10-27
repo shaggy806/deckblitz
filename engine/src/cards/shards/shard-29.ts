@@ -124,6 +124,7 @@ import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
+import _poolCourtOfEmbereth from "../pool/court-of-embereth.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
 import _poolCrookOfCondemnation from "../pool/crook-of-condemnation.js";
 import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
@@ -234,6 +235,7 @@ import _poolFarsightMask from "../pool/farsight-mask.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
+import _poolFiendHunter from "../pool/fiend-hunter.js";
 import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFightWithFire from "../pool/fight-with-fire.js";
 import _poolFiligreeAngel from "../pool/filigree-angel.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolContractHero,
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
+    _poolCourtOfEmbereth,
     _poolCravenKnight,
     _poolCrookOfCondemnation,
     _poolCrumblingVestige,
@@ -1052,6 +1055,7 @@ const shard: CardShard = {
     _poolFatedReturn,
     _poolFeralLightning,
     _poolFertileGround,
+    _poolFiendHunter,
     _poolFiendlash,
     _poolFightWithFire,
     _poolFiligreeAngel,

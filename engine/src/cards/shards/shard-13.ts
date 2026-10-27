@@ -68,6 +68,7 @@ import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
 import _poolBequeathal from "../pool/bequeathal.js";
+import _poolBerserk from "../pool/berserk.js";
 import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
     _poolBequeathal,
+    _poolBerserk,
     _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
     _poolBiteDown,

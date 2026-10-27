@@ -404,6 +404,7 @@ import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
 import _poolMasterOfDiversion from "../pool/master-of-diversion.js";
+import _poolMavrenFeinDuskApostle from "../pool/mavren-fein-dusk-apostle.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
 import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
@@ -558,6 +559,7 @@ import _poolSalvagingStation from "../pool/salvaging-station.js";
 import _poolSandsteppeWarRiders from "../pool/sandsteppe-war-riders.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
+import _poolSatsukiTheLivingLore from "../pool/satsuki-the-living-lore.js";
 import _poolSauroformHybrid from "../pool/sauroform-hybrid.js";
 import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
@@ -582,6 +584,7 @@ import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
 import _poolShapeAnew from "../pool/shape-anew.js";
+import _poolShelindaYevonAcolyte from "../pool/shelinda-yevon-acolyte.js";
 import _poolShieldMate from "../pool/shield-mate.js";
 import _poolShieldSphere from "../pool/shield-sphere.js";
 import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
@@ -642,6 +645,7 @@ import _poolSuddenSetback from "../pool/sudden-setback.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunfireBalm from "../pool/sunfire-balm.js";
+import _poolSunkenCitadel from "../pool/sunken-citadel.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
@@ -1202,6 +1206,7 @@ const shard: CardShard = {
     _poolMarwynTheNurturer,
     _poolMaskOfImmolation,
     _poolMasterOfDiversion,
+    _poolMavrenFeinDuskApostle,
     _poolMerfolkSecretkeeper,
     _poolMerfolkWindrobber,
     _poolMerryWardenOfIsengard,
@@ -1356,6 +1361,7 @@ const shard: CardShard = {
     _poolSandsteppeWarRiders,
     _poolSandstoneBridge,
     _poolSatoruUmezawa,
+    _poolSatsukiTheLivingLore,
     _poolSauroformHybrid,
     _poolScaledHerbalist,
     _poolScarletWitchChaoticAvenger,
@@ -1380,6 +1386,7 @@ const shard: CardShard = {
     _poolSetzerWanderingGambler,
     _poolShamblingVent,
     _poolShapeAnew,
+    _poolShelindaYevonAcolyte,
     _poolShieldMate,
     _poolShieldSphere,
     _poolShigekiJukaiVisionary,
@@ -1440,6 +1447,7 @@ const shard: CardShard = {
     _poolSukiCourageousRescuer,
     _poolSunastianFalconer,
     _poolSunfireBalm,
+    _poolSunkenCitadel,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwarmOfBloodflies,
