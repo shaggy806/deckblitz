@@ -1,0 +1,1006 @@
+{
+  "batch": "B227",
+  "status": "complete",
+  "ranks": "Urza's Destiny (UDS, 1999-06-07): the rest of the set, 18 left; Starter 1999 (S99, 1999-07-01): whole set, 7; Mercadian Masques (MMQ, 1999-10-04): its 95 most-played of 218 left (oldest-first walk); building the sacrifice and return-lands alternative costs (cost:alt-cost-sacrifice, cost:alt-cost-return-lands) and authoring 20 earlier-triaged cards they unblocked",
+  "authored": [
+    {
+      "name": "Battle Squadron",
+      "files": [
+        "engine/src/cards/pool/battle-squadron.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cateran Summons",
+      "files": [
+        "engine/src/cards/pool/cateran-summons.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Caustic Wasps",
+      "files": [
+        "engine/src/cards/pool/caustic-wasps.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cave-In",
+      "files": [
+        "engine/src/cards/pool/cave-in.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Champion Lancer",
+      "files": [
+        "engine/src/cards/pool/champion-lancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cho-Manno, Revolutionary",
+      "files": [
+        "engine/src/cards/pool/cho-manno-revolutionary.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cinder Seer",
+      "files": [
+        "engine/src/cards/pool/cinder-seer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Close Quarters",
+      "files": [
+        "engine/src/cards/pool/close-quarters.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cowardice",
+      "files": [
+        "engine/src/cards/pool/cowardice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crash",
+      "files": [
+        "engine/src/cards/pool/crash.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Credit Voucher",
+      "files": [
+        "engine/src/cards/pool/credit-voucher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dark Triumph",
+      "files": [
+        "engine/src/cards/pool/dark-triumph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dawnstrider",
+      "files": [
+        "engine/src/cards/pool/dawnstrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Daze",
+      "files": [
+        "engine/src/cards/pool/daze.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Demon of Death's Gate",
+      "files": [
+        "engine/src/cards/pool/demon-of-deaths-gate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devout Witness",
+      "files": [
+        "engine/src/cards/pool/devout-witness.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Disappear",
+      "files": [
+        "engine/src/cards/pool/disappear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Distorting Lens",
+      "files": [
+        "engine/src/cards/pool/distorting-lens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Downhill Charge",
+      "files": [
+        "engine/src/cards/pool/downhill-charge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Embargo",
+      "files": [
+        "engine/src/cards/pool/embargo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enslaved Horror",
+      "files": [
+        "engine/src/cards/pool/enslaved-horror.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ensnare",
+      "files": [
+        "engine/src/cards/pool/ensnare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fieldmist Borderpost",
+      "files": [
+        "engine/src/cards/pool/fieldmist-borderpost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fireblast",
+      "files": [
+        "engine/src/cards/pool/fireblast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Firewild Borderpost",
+      "files": [
+        "engine/src/cards/pool/firewild-borderpost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flare of Cultivation",
+      "files": [
+        "engine/src/cards/pool/flare-of-cultivation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flare of Denial",
+      "files": [
+        "engine/src/cards/pool/flare-of-denial.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flare of Duplication",
+      "files": [
+        "engine/src/cards/pool/flare-of-duplication.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flare of Fortitude",
+      "files": [
+        "engine/src/cards/pool/flare-of-fortitude.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flare of Malice",
+      "files": [
+        "engine/src/cards/pool/flare-of-malice.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fledgling Osprey",
+      "files": [
+        "engine/src/cards/pool/fledgling-osprey.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Foster",
+      "files": [
+        "engine/src/cards/pool/foster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fountain Watch",
+      "files": [
+        "engine/src/cards/pool/fountain-watch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fountain of Cho",
+      "files": [
+        "engine/src/cards/pool/fountain-of-cho.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "General's Regalia",
+      "files": [
+        "engine/src/cards/pool/generals-regalia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Masons",
+      "files": [
+        "engine/src/cards/pool/goblin-masons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gush",
+      "files": [
+        "engine/src/cards/pool/gush.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hammer Mage",
+      "files": [
+        "engine/src/cards/pool/hammer-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hand of Emrakul",
+      "files": [
+        "engine/src/cards/pool/hand-of-emrakul.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunted Crossroads",
+      "files": [
+        "engine/src/cards/pool/haunted-crossroads.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hired Giant",
+      "files": [
+        "engine/src/cards/pool/hired-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Honor the Fallen",
+      "files": [
+        "engine/src/cards/pool/honor-the-fallen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hoodwink",
+      "files": [
+        "engine/src/cards/pool/hoodwink.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hunted Wumpus",
+      "files": [
+        "engine/src/cards/pool/hunted-wumpus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ivy Seer",
+      "files": [
+        "engine/src/cards/pool/ivy-seer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jasmine Seer",
+      "files": [
+        "engine/src/cards/pool/jasmine-seer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Keldon Vandals",
+      "files": [
+        "engine/src/cards/pool/keldon-vandals.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Larceny",
+      "files": [
+        "engine/src/cards/pool/larceny.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Last Breath",
+      "files": [
+        "engine/src/cards/pool/last-breath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loyal Sentry",
+      "files": [
+        "engine/src/cards/pool/loyal-sentry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lumbering Satyr",
+      "files": [
+        "engine/src/cards/pool/lumbering-satyr.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lurking Jackals",
+      "files": [
+        "engine/src/cards/pool/lurking-jackals.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mercadian Bazaar",
+      "files": [
+        "engine/src/cards/pool/mercadian-bazaar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Metathran Elite",
+      "files": [
+        "engine/src/cards/pool/metathran-elite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mind Swords",
+      "files": [
+        "engine/src/cards/pool/mind-swords.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mine Collapse",
+      "files": [
+        "engine/src/cards/pool/mine-collapse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistvein Borderpost",
+      "files": [
+        "engine/src/cards/pool/mistvein-borderpost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mogg Alarm",
+      "files": [
+        "engine/src/cards/pool/mogg-alarm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Monkey Cage",
+      "files": [
+        "engine/src/cards/pool/monkey-cage.ts",
+        "engine/src/cards/tokens/monkey-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Natural Affinity",
+      "files": [
+        "engine/src/cards/pool/natural-affinity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightshade Seer",
+      "files": [
+        "engine/src/cards/pool/nightshade-seer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Noble Purpose",
+      "files": [
+        "engine/src/cards/pool/noble-purpose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Overtaker",
+      "files": [
+        "engine/src/cards/pool/overtaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pangosaur",
+      "files": [
+        "engine/src/cards/pool/pangosaur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Power Matrix",
+      "files": [
+        "engine/src/cards/pool/power-matrix.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Puppet's Verdict",
+      "files": [
+        "engine/src/cards/pool/puppets-verdict.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ramosian Captain",
+      "files": [
+        "engine/src/cards/pool/ramosian-captain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ramosian Lieutenant",
+      "files": [
+        "engine/src/cards/pool/ramosian-lieutenant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ramosian Sergeant",
+      "files": [
+        "engine/src/cards/pool/ramosian-sergeant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Renounce",
+      "files": [
+        "engine/src/cards/pool/renounce.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Revive",
+      "files": [
+        "engine/src/cards/pool/revive.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rishadan Brigand",
+      "files": [
+        "engine/src/cards/pool/rishadan-brigand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rishadan Cutpurse",
+      "files": [
+        "engine/src/cards/pool/rishadan-cutpurse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rishadan Footpad",
+      "files": [
+        "engine/src/cards/pool/rishadan-footpad.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rushwood Grove",
+      "files": [
+        "engine/src/cards/pool/rushwood-grove.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Saber Ants",
+      "files": [
+        "engine/src/cards/pool/saber-ants.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Saprazzan Cove",
+      "files": [
+        "engine/src/cards/pool/saprazzan-cove.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Saprazzan Legate",
+      "files": [
+        "engine/src/cards/pool/saprazzan-legate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scent of Cinder",
+      "files": [
+        "engine/src/cards/pool/scent-of-cinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scent of Nightshade",
+      "files": [
+        "engine/src/cards/pool/scent-of-nightshade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shrieking Specter",
+      "files": [
+        "engine/src/cards/pool/shrieking-specter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silverglade Elemental",
+      "files": [
+        "engine/src/cards/pool/silverglade-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silverglade Pathfinder",
+      "files": [
+        "engine/src/cards/pool/silverglade-pathfinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skittering Horror",
+      "files": [
+        "engine/src/cards/pool/skittering-horror.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Snake Pit",
+      "files": [
+        "engine/src/cards/pool/snake-pit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soothsaying",
+      "files": [
+        "engine/src/cards/pool/soothsaying.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Channeling",
+      "files": [
+        "engine/src/cards/pool/soul-channeling.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spontaneous Generation",
+      "files": [
+        "engine/src/cards/pool/spontaneous-generation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Squall",
+      "files": [
+        "engine/src/cards/pool/squall-sorcery.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Squallmonger",
+      "files": [
+        "engine/src/cards/pool/squallmonger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Statecraft",
+      "files": [
+        "engine/src/cards/pool/statecraft.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stream of Acid",
+      "files": [
+        "engine/src/cards/pool/stream-of-acid.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Subterranean Hangar",
+      "files": [
+        "engine/src/cards/pool/subterranean-hangar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tectonic Break",
+      "files": [
+        "engine/src/cards/pool/tectonic-break.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Telepathic Spies",
+      "files": [
+        "engine/src/cards/pool/telepathic-spies.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thunder Dragon",
+      "files": [
+        "engine/src/cards/pool/thunder-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thunderclap",
+      "files": [
+        "engine/src/cards/pool/thunderclap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thwart",
+      "files": [
+        "engine/src/cards/pool/thwart.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidal Bore",
+      "files": [
+        "engine/src/cards/pool/tidal-bore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Toymaker",
+      "files": [
+        "engine/src/cards/pool/toymaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trade Routes",
+      "files": [
+        "engine/src/cards/pool/trade-routes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Undertaker",
+      "files": [
+        "engine/src/cards/pool/undertaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unmask",
+      "files": [
+        "engine/src/cards/pool/unmask.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Veinfire Borderpost",
+      "files": [
+        "engine/src/cards/pool/veinfire-borderpost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vendetta",
+      "files": [
+        "engine/src/cards/pool/vendetta.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Warmonger",
+      "files": [
+        "engine/src/cards/pool/warmonger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Waterfront Bouncer",
+      "files": [
+        "engine/src/cards/pool/waterfront-bouncer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wildfield Borderpost",
+      "files": [
+        "engine/src/cards/pool/wildfield-borderpost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Worry Beads",
+      "files": [
+        "engine/src/cards/pool/worry-beads.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Bubbling Beebles",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "Can't be blocked as long as defending player controls an enchantment: no condition reads what the defending player controls."
+    },
+    {
+      "name": "Land Grant",
+      "needs": [
+        "cost:alt-cost-reveal-hand"
+      ],
+      "why": "Alternative cost: reveal your hand if it holds no land cards; no such alternative cost."
+    },
+    {
+      "name": "Uphill Battle",
+      "needs": [
+        "replacement:enters-tapped-if-cast"
+      ],
+      "why": "Creatures played (cast) by opponents enter tapped; no enters-tapped replacement filters on whether the creature was cast."
+    },
+    {
+      "name": "Charisma",
+      "needs": [
+        "effect:gain-control-trigger-recipient"
+      ],
+      "why": "Gain control of the creature enchanted creature dealt damage to: gain-control can't name the damage trigger's recipient."
+    },
+    {
+      "name": "Vernal Equinox",
+      "needs": [
+        "effect:flash-for-each-player"
+      ],
+      "why": "Any player may cast creatures and enchantments as though they had flash; castAsThoughFlash covers only the controller."
+    },
+    {
+      "name": "Bargaining Table",
+      "needs": [
+        "cost:x-equals-chosen-opponent-hand"
+      ],
+      "why": "X is the number of cards in a chosen opponent's hand, the opponent chosen as it's activated (ruling)."
+    },
+    {
+      "name": "Sowing Salt",
+      "needs": [
+        "effect:extract-same-name"
+      ],
+      "why": "Search the controller's graveyard, hand and library for every card with the land's name."
+    },
+    {
+      "name": "Remote Farm",
+      "needs": [
+        "cost:depletion-counter-lands",
+        "effect:mana-ability-side-effects"
+      ],
+      "why": "A depletion land: its mana ability removes a counter and sacrifices it when none are left."
+    },
+    {
+      "name": "Thieves' Auction",
+      "needs": [
+        "effect:each-player-chooses-in-turn-order",
+        "effect:repeat-process"
+      ],
+      "why": "Players take turns choosing exiled cards to put onto the battlefield until none are left."
+    },
+    {
+      "name": "Crackdown",
+      "needs": [
+        "filter:static-affects-by-power"
+      ],
+      "why": "Nonwhite creatures with power 3 or greater don't untap: a static's affects filter can't read power."
+    },
+    {
+      "name": "Crooked Scales",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "Flip a coin; unless you pay {3} and repeat this process."
+    },
+    {
+      "name": "War Tax",
+      "needs": [
+        "cost:attack-tax-amount"
+      ],
+      "why": "This turn, creatures can't attack unless their controller pays {X} each: no attack tax from a resolving effect."
+    },
+    {
+      "name": "Mercadia's Downfall",
+      "needs": [
+        "effect:count-defending-player-controls"
+      ],
+      "why": "Each attacking creature gets +1/+0 for each nonbasic land its defending player controls."
+    },
+    {
+      "name": "Clear the Land",
+      "needs": [
+        "effect:look-and-choose-leftover"
+      ],
+      "why": "Reveal the top five, put the lands onto the battlefield tapped and exile the rest: no plain exile leftover."
+    },
+    {
+      "name": "Quash",
+      "needs": [
+        "effect:search-hand-graveyard-library-exile"
+      ],
+      "why": "Search the spell's controller's graveyard, hand and library for cards with its name and exile them."
+    },
+    {
+      "name": "Scour",
+      "needs": [
+        "effect:search-hand-graveyard-library-exile"
+      ],
+      "why": "Search the enchantment's controller's graveyard, hand and library for cards with its name and exile them."
+    },
+    {
+      "name": "Pride of Lions",
+      "needs": [
+        "static:assign-damage-as-though-unblocked"
+      ],
+      "why": "You may have it assign combat damage as though it weren't blocked."
+    },
+    {
+      "name": "Tower of the Magistrate",
+      "needs": [
+        "effect:grant-protection-temporary"
+      ],
+      "why": "Target creature gains protection from artifacts until end of turn."
+    },
+    {
+      "name": "Wishmonger",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "Target creature gains protection from the color of its controller's choice until end of turn."
+    },
+    {
+      "name": "War Cadence",
+      "needs": [
+        "static:block-tax"
+      ],
+      "why": "This turn, creatures can't block unless their controller pays {X} for each."
+    },
+    {
+      "name": "Inviolability",
+      "needs": [
+        "replacement:prevent-damage-to-attached"
+      ],
+      "why": "Prevent all damage that would be dealt to enchanted creature."
+    },
+    {
+      "name": "Caller of the Hunt",
+      "needs": [
+        "cost:choose-creature-type-as-cast"
+      ],
+      "why": "As an additional cost, choose a creature type; its P/T counts that type."
+    },
+    {
+      "name": "Cho-Manno's Blessing",
+      "needs": [
+        "static:protection-doesnt-remove-source"
+      ],
+      "why": "Protection from the chosen color that doesn't remove this Aura."
+    },
+    {
+      "name": "Ivory Mask",
+      "needs": [
+        "static:player-shroud-static"
+      ],
+      "why": "You have shroud."
+    },
+    {
+      "name": "Barbed Wire",
+      "needs": [
+        "effect:prevent-next-damage-by-source"
+      ],
+      "why": "{2}: Prevent the next 1 damage that would be dealt by this artifact this turn."
+    },
+    {
+      "name": "Crumbling Sanctuary",
+      "needs": [
+        "replacement:damage-to-player-exiles-library"
+      ],
+      "why": "Damage to a player is replaced by exiling that many cards from the top of their library."
+    },
+    {
+      "name": "Arrest",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "Enchanted creature can't attack or block, and its activated abilities can't be activated."
+    },
+    {
+      "name": "Reverent Mantra",
+      "needs": [
+        "effect:grant-protection-temporary"
+      ],
+      "why": "All creatures gain protection from the chosen color until end of turn."
+    },
+    {
+      "name": "Moment of Silence",
+      "needs": [
+        "effect:skip-next-combat-phase"
+      ],
+      "why": "Target player skips their next combat phase this turn."
+    },
+    {
+      "name": "Diplomatic Escort",
+      "needs": [
+        "effect:counter-targeting-spell-or-ability"
+      ],
+      "why": "Counter target spell or ability that targets a creature."
+    },
+    {
+      "name": "Story Circle",
+      "needs": [
+        "filter:chosen-color"
+      ],
+      "why": "The next time a source of the chosen color would deal damage to you, prevent it."
+    },
+    {
+      "name": "Two-Headed Dragon",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "Can block an additional creature each combat."
+    },
+    {
+      "name": "Salvage Titan",
+      "needs": [
+        "cost:exile-from-graveyard-including-source"
+      ],
+      "why": "Exile three artifact cards from your graveyard, Titan among them if you choose (ruling); the cost never counts its source."
+    }
+  ]
+}

@@ -472,7 +472,9 @@
   "effect:must-block-this-turn",
   "effect:unless-any-player-pays",
   "effect:any-player-may-activate",
-  "cost:any-player-may-activate"
+  "cost:any-player-may-activate",
+  "cost:alt-cost-sacrifice",
+  "cost:alt-cost-return-lands"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

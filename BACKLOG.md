@@ -154,9 +154,15 @@ section keeps only what to do next.
   `"reveal"` destination; 85 authored, 28 blocked, "target opponent chooses … destroy it" —
   `effect:target-opponent-chooses` — leading with 4 and "can't attack unless defending player
   controls an Island" — `condition:defending-player-controls` — with 3). Portal Three Kingdoms is
-  whole. **Next, the rest of Urza's Destiny** (`cards:sets -- --set UDS`, 18 left: its four Seers
-  and two Scents now come pre-drafted on the reveal), then Mercadian Masques;
-  `decision:x-targets` (8) is the feature to build first if a set adds to it. This walk's range
+  whole. Batch 227 the rest of Urza's Destiny (18), Starter 1999 (7) and Mercadian Masques' 95
+  most-played, on the sacrifice and return-lands alternative costs (`alternativeCost.sacrifice` /
+  `.returnToHand` — Crash, Thwart, Daze, Gush, Fireblast, the Flares, the Borderposts; 109
+  authored with 21 earlier cards they unblocked, 33 blocked, temporary protection —
+  `effect:grant-protection-temporary`, 21 over the pool — and "search its controller's graveyard,
+  hand and library" leading with two each). Urza's Destiny and Starter 1999 are whole. **Next, the
+  rest of Mercadian Masques** (`cards:sets -- --set MMQ`, ~123 left: round twenty's batch in
+  `docs/plans/set-walk-last-rounds.md`), which ends this walk's range; its free spells now come
+  pre-drafted. `decision:x-targets` (8) is the feature to build first if a set adds to it. This walk's range
   ends at Mercadian Masques (1999-10-04; from 2026-10-27's seventeenth round three more middle walks own Invasion to Scourge, and the third middle walk owns Mirrodin on; from round eighteen a seventh middle walk owns Prophecy and Nemesis — `docs/plans/set-walk-last-rounds.md`). Leads over the whole pool now:
   graveyard order (`effect:top-creature-card-of-graveyard`/`effect:top-card-of-graveyard` — 14, with rule 404.3's
   simultaneous arrivals), banding (46 — needs the multi-blocking line below), cumulative upkeep's unbuilt forms

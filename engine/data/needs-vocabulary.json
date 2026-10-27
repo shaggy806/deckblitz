@@ -12015,6 +12015,37 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "cost:alt-cost-reveal-hand": {
+   "example": "Land Grant: Alternative cost: reveal your hand if it holds no land cards; no such alternative cost."
+  },
+  "cost:exile-from-graveyard-including-source": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Salvage Titan: Exile three artifact cards from your graveyard, Titan among them if you choose (ruling); the cost never counts its source."
+  },
+  "cost:x-equals-chosen-opponent-hand": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Bargaining Table: X is the number of cards in a chosen opponent's hand, the opponent chosen as it's activated (ruling)."
+  },
+  "effect:gain-control-trigger-recipient": {
+   "family": "effect:control-change-extensions",
+   "example": "Charisma: Gain control of the creature enchanted creature dealt damage to: gain-control can't name the damage trigger's recipient."
+  },
+  "effect:prevent-next-damage-by-source": {
+   "family": "replacement:damage-modification",
+   "example": "Barbed Wire: {2}: Prevent the next 1 damage that would be dealt by this artifact this turn."
+  },
+  "filter:static-affects-by-power": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Crackdown: Nonwhite creatures with power 3 or greater don't untap: a static's affects filter can't read power."
+  },
+  "replacement:damage-to-player-exiles-library": {
+   "family": "replacement:damage-modification",
+   "example": "Crumbling Sanctuary: Damage to a player is replaced by exiling that many cards from the top of their library."
+  },
+  "replacement:enters-tapped-if-cast": {
+   "family": "replacement:new-event-replacements",
+   "example": "Uphill Battle: Creatures played (cast) by opponents enter tapped; no enters-tapped replacement filters on whether the creature was cast."
   }
  }
 }
