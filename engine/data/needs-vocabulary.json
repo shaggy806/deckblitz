@@ -12175,6 +12175,26 @@
   "trigger:gains-control-of-this": {
    "family": "trigger:lose-control-trigger",
    "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
+  },
+  "effect:return-enchanted-and-its-auras": {
+   "family": "condition:filter-attachments",
+   "example": "Mark of Eviction: returns the creature this Aura enchants and all Auras attached to it — no filter for the Auras attached to the enchanted creature."
+  },
+  "replacement:halve-damage": {
+   "family": "replacement:damage-modification",
+   "example": "Ghosts of the Innocent: damage is halved, rounded down — not prevention (the ruling), and ordered by the affected player against doublers (616.1)."
+  },
+  "filter:shares-color-with-library-top": {
+   "family": "filter:shares-color-with-attached",
+   "example": "Crown of Convergence: while the top card of your library is a creature card, your creatures that share a color with it get +1/+1."
+  },
+  "effect:grant-graveyard-cast-free": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Sins of the Past: may cast target instant or sorcery from your graveyard this turn without paying its mana cost — grant-graveyard-cast can't waive the cost."
+  },
+  "target:cast-only-target-restriction": {
+   "family": "effect:target-spec-additions",
+   "example": "Dream Leash: 'you can't choose an untapped permanent as this spell's target' binds only the cast, not the enchant restriction the state check re-reads."
   }
  }
 }

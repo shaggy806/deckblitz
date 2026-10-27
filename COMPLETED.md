@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Ravnica: City of Guilds — Ravnica is whole** (batch 234, the second middle walk's
+  last batch, 2026-10-27): no engine change. 53 of the set's last 77 authored — Plague Boiler,
+  Woebringer Demon, Razia's Purification, Flash Conscription, Light of Sanction, the radiance
+  cards batch 229 left (Cleansing Beam, Wojek Embermage and Wojek Siren finished by the
+  scaffolder; Surge of Zeal) and the "if {X} was spent" riders — by four `card-author` agents,
+  and 24 blocked (`B234.json`). `set-rav-batch-2A`…`2D`. The second middle walk's range
+  (Coldsnap back to Ravnica: City of Guilds) is done.
 - **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
   walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
   `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",

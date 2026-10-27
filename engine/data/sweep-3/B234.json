@@ -1,0 +1,550 @@
+{
+  "batch": "B234",
+  "status": "complete",
+  "ranks": "Ravnica: City of Guilds (RAV, 2005-10-07): the rest of the set, 77 left after batch 229 (the second middle walk's seventh batch, which finishes its range); no engine change",
+  "authored": [
+    {
+      "name": "Blockbuster",
+      "files": [
+        "engine/src/cards/pool/blockbuster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodletter Quill",
+      "files": [
+        "engine/src/cards/pool/bloodletter-quill.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cerulean Sphinx",
+      "files": [
+        "engine/src/cards/pool/cerulean-sphinx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cleansing Beam",
+      "files": [
+        "engine/src/cards/pool/cleansing-beam.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cyclopean Snare",
+      "files": [
+        "engine/src/cards/pool/cyclopean-snare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Disembowel",
+      "files": [
+        "engine/src/cards/pool/disembowel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Divebomber Griffin",
+      "files": [
+        "engine/src/cards/pool/divebomber-griffin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drake Familiar",
+      "files": [
+        "engine/src/cards/pool/drake-familiar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drooling Groodion",
+      "files": [
+        "engine/src/cards/pool/drooling-groodion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dryad's Caress",
+      "files": [
+        "engine/src/cards/pool/dryads-caress.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Empty the Catacombs",
+      "files": [
+        "engine/src/cards/pool/empty-the-catacombs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flame-Kin Zealot",
+      "files": [
+        "engine/src/cards/pool/flame-kin-zealot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flash Conscription",
+      "files": [
+        "engine/src/cards/pool/flash-conscription.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gate Hound",
+      "files": [
+        "engine/src/cards/pool/gate-hound.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Fire Fiend",
+      "files": [
+        "engine/src/cards/pool/goblin-fire-fiend.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Halcyon Glaze",
+      "files": [
+        "engine/src/cards/pool/halcyon-glaze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Helldozer",
+      "files": [
+        "engine/src/cards/pool/helldozer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Indentured Oaf",
+      "files": [
+        "engine/src/cards/pool/indentured-oaf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Induce Paranoia",
+      "files": [
+        "engine/src/cards/pool/induce-paranoia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Instill Furor",
+      "files": [
+        "engine/src/cards/pool/instill-furor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Light of Sanction",
+      "files": [
+        "engine/src/cards/pool/light-of-sanction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mnemonic Nexus",
+      "files": [
+        "engine/src/cards/pool/mnemonic-nexus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mortipede",
+      "files": [
+        "engine/src/cards/pool/mortipede.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Necromantic Thirst",
+      "files": [
+        "engine/src/cards/pool/necromantic-thirst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightmare Void",
+      "files": [
+        "engine/src/cards/pool/nightmare-void.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ordruun Commando",
+      "files": [
+        "engine/src/cards/pool/ordruun-commando.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Peregrine Mask",
+      "files": [
+        "engine/src/cards/pool/peregrine-mask.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Plague Boiler",
+      "files": [
+        "engine/src/cards/pool/plague-boiler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quickchange",
+      "files": [
+        "engine/src/cards/pool/quickchange.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Razia's Purification",
+      "files": [
+        "engine/src/cards/pool/razias-purification.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ribbons of Night",
+      "files": [
+        "engine/src/cards/pool/ribbons-of-night.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rolling Spoil",
+      "files": [
+        "engine/src/cards/pool/rolling-spoil.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sadistic Augermage",
+      "files": [
+        "engine/src/cards/pool/sadistic-augermage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scion of the Wild",
+      "files": [
+        "engine/src/cards/pool/scion-of-the-wild.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Searing Meditation",
+      "files": [
+        "engine/src/cards/pool/searing-meditation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Seed Spark",
+      "files": [
+        "engine/src/cards/pool/seed-spark.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sell-Sword Brute",
+      "files": [
+        "engine/src/cards/pool/sell-sword-brute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stasis Cell",
+      "files": [
+        "engine/src/cards/pool/stasis-cell.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Strands of Undeath",
+      "files": [
+        "engine/src/cards/pool/strands-of-undeath.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunhome Enforcer",
+      "files": [
+        "engine/src/cards/pool/sunhome-enforcer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surge of Zeal",
+      "files": [
+        "engine/src/cards/pool/surge-of-zeal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thundersong Trumpeter",
+      "files": [
+        "engine/src/cards/pool/thundersong-trumpeter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Torpid Moloch",
+      "files": [
+        "engine/src/cards/pool/torpid-moloch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Transluminant",
+      "files": [
+        "engine/src/cards/pool/transluminant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Twisted Justice",
+      "files": [
+        "engine/src/cards/pool/twisted-justice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vindictive Mob",
+      "files": [
+        "engine/src/cards/pool/vindictive-mob.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "War-Torch Goblin",
+      "files": [
+        "engine/src/cards/pool/war-torch-goblin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Woebringer Demon",
+      "files": [
+        "engine/src/cards/pool/woebringer-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wojek Embermage",
+      "files": [
+        "engine/src/cards/pool/wojek-embermage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wojek Siren",
+      "files": [
+        "engine/src/cards/pool/wojek-siren.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Woodwraith Corrupter",
+      "files": [
+        "engine/src/cards/pool/woodwraith-corrupter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodwraith Strangler",
+      "files": [
+        "engine/src/cards/pool/woodwraith-strangler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zephyr Spirit",
+      "files": [
+        "engine/src/cards/pool/zephyr-spirit.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Spawnbroker",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "Exchange control of target creature you control and target creature with power less than or equal to its power — no exchange of control, and no target filter comparing one target's power with another's."
+    },
+    {
+      "name": "Bottled Cloister",
+      "needs": [
+        "effect:exile-hands-face-down-return-later"
+      ],
+      "why": "Exiles its controller's hand face down and returns those cards at the next upkeep — no linked face-down exile of a whole hand."
+    },
+    {
+      "name": "Chorus of the Conclave",
+      "needs": [
+        "cost:optional-additional-mana-cost"
+      ],
+      "why": "Creature spells you cast may be cast paying any amount of additional mana, entering with that many +1/+1 counters — no such optional cost."
+    },
+    {
+      "name": "Mark of Eviction",
+      "needs": [
+        "effect:return-enchanted-and-its-auras"
+      ],
+      "why": "Returns the enchanted creature and all Auras attached to it — no filter for the Auras attached to the creature this Aura enchants."
+    },
+    {
+      "name": "Grifter's Blade",
+      "needs": [
+        "decision:as-enters-choose-permanent"
+      ],
+      "why": "As this Equipment enters, you may attach it to a creature you control — a replacement choice on entering, which an enters trigger would not be."
+    },
+    {
+      "name": "Ghosts of the Innocent",
+      "needs": [
+        "replacement:halve-damage"
+      ],
+      "why": "Damage dealt is halved, rounded down — not prevention (the ruling), and the affected player orders it against doublers (616.1); the damage replacement has only integer multipliers."
+    },
+    {
+      "name": "Screeching Griffin",
+      "needs": [
+        "effect:target-cant-block-source-this-turn"
+      ],
+      "why": "Target creature can't block this creature this turn — no restriction tying \"can't block\" to one attacker."
+    },
+    {
+      "name": "Molten Sentry",
+      "needs": [
+        "replacement:as-enters-choose-characteristics"
+      ],
+      "why": "As it enters, flip a coin: a 5/2 with haste or a 2/5 with defender — chooseOnEnter can't flip a coin or set base P/T and keywords."
+    },
+    {
+      "name": "Trophy Hunter",
+      "needs": [
+        "trigger:dies-after-dealt-damage-by-source"
+      ],
+      "why": "Whenever a creature with flying dealt damage by this creature this turn dies — damagedThisTurnBy can't name \"this creature\"."
+    },
+    {
+      "name": "Festival of the Guildpact",
+      "needs": [
+        "effect:prevent-next-damage-to-you"
+      ],
+      "why": "Prevent the next X damage that would be dealt to you this turn — prevent-damage has no untargeted shield on \"you\"."
+    },
+    {
+      "name": "Lurking Informant",
+      "needs": [
+        "effect:look-at-top-of-target-players-library"
+      ],
+      "why": "Look at the top card of target player's library, you may put it into the graveyard — look-and-choose reads only your own library outside a for-each-player."
+    },
+    {
+      "name": "Crown of Convergence",
+      "needs": [
+        "filter:shares-color-with-library-top"
+      ],
+      "why": "As long as the top card of your library is a creature card, creatures you control that share a color with it get +1/+1 — no such condition or filter."
+    },
+    {
+      "name": "Sabertooth Alley Cat",
+      "needs": [
+        "effect:cant-be-blocked-by-filter-until-eot"
+      ],
+      "why": "Creatures without defender can't block this creature this turn — cantBeBlockedBy is static only."
+    },
+    {
+      "name": "Terraformer",
+      "needs": [
+        "effect:set-land-types-all",
+        "decision:choose-land-type-on-resolution"
+      ],
+      "why": "Each land you control becomes the basic land type of your choice until end of turn — no effect sets land types en masse."
+    },
+    {
+      "name": "Gaze of the Gorgon",
+      "needs": [
+        "filter:blocked-or-blocked-by-filter-this-turn"
+      ],
+      "why": "Destroy each creature that blocked or was blocked by the target this turn (the ruling: blocks before the spell count) — no such filter."
+    },
+    {
+      "name": "Selesnya Sagittars",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "Can block an additional creature each combat — no such static."
+    },
+    {
+      "name": "Bramble Elemental",
+      "needs": [
+        "trigger:becomes-attached"
+      ],
+      "why": "Whenever an Aura becomes attached to this creature — no such trigger."
+    },
+    {
+      "name": "Leashling",
+      "needs": [
+        "cost:put-card-from-hand-on-library-top"
+      ],
+      "why": "Put a card from your hand on top of your library: return this to its owner's hand — no such cost."
+    },
+    {
+      "name": "Excruciator",
+      "needs": [
+        "static:damage-cant-be-prevented"
+      ],
+      "why": "Damage that would be dealt by this creature can't be prevented — no such effect."
+    },
+    {
+      "name": "Sins of the Past",
+      "needs": [
+        "zone:graveyard-cast-exile-replacement",
+        "effect:grant-graveyard-cast-free"
+      ],
+      "why": "Until end of turn, you may cast target instant or sorcery from your graveyard without paying its mana cost, exiling it instead — grant-graveyard-cast can neither waive the cost nor exile it."
+    },
+    {
+      "name": "Wojek Apothecary",
+      "needs": [
+        "effect:prevent-next-damage-each-creature"
+      ],
+      "why": "Radiance: prevent the next 1 damage to target creature and each other creature that shares a color with it — prevent-damage covers one target only."
+    },
+    {
+      "name": "Dream Leash",
+      "needs": [
+        "target:cast-only-target-restriction"
+      ],
+      "why": "\"You can't choose an untapped permanent as this spell's target\" binds only the cast; an Aura's target spec is also its enchant restriction, which the state check re-reads, so a tapped filter would drop it once the permanent untaps (the ruling)."
+    },
+    {
+      "name": "Incite Hysteria",
+      "needs": [
+        "effect:restrict-each-matching-at-resolution"
+      ],
+      "why": "Radiance: the target and each creature sharing a color with it can't block this turn — a fixed set at resolution (611.2c); restrict with a filter is a turn-wide rule that catches later creatures."
+    },
+    {
+      "name": "Mausoleum Turnkey",
+      "needs": [
+        "decision:opponent-chooses-target"
+      ],
+      "why": "Return target creature card of an opponent's choice from your graveyard — an opponent picks the target."
+    }
+  ]
+}
