@@ -847,7 +847,11 @@ export type UnlessOption =
   | { readonly discard: number; readonly text: string }
   /** "Put a land card from your hand onto the battlefield" (Kynaios and
    * Tiro of Meletis). */
-  | { readonly putFromHand: CardFilter; readonly text: string };
+  | { readonly putFromHand: CardFilter; readonly text: string }
+  /** "Any player may have Browbeat **deal 5 damage to them**": the effect's
+   * source deals that much damage to the player who takes it. Always open —
+   * being dealt damage needs nothing (prevented, it was still chosen). */
+  | { readonly takeDamage: number; readonly text: string };
 
 /** An {@link UnlessOption} with any generic amount fixed — what the engine
  * offers. `"each-player-may"`'s options are these already. */
@@ -5217,8 +5221,21 @@ export type EffectSpec =
        * of the permanent whose event fired this trigger (Kazuul's attacker),
        * the player the triggering event names, the effect's own controller
        * (The Gitrog Monster's "sacrifice ~ unless **you** sacrifice a land"),
-       * or the player whose turn it is. */
-      readonly chooser: number | "trigger-controller" | "trigger-player" | "you" | "active-player";
+       * or the player whose turn it is. `"any-player"` is "unless **any
+       * player** pays {2}" (the rhystic cards — Rhystic Tutor, Icy Prison):
+       * each player still in the game is asked in turn order from the active
+       * player (rule 101.4), the next only once the one before declines, and
+       * `otherwise` happens only if none of them took an option.
+       * `{ player }` is the engine's own, naming one of them as it asks in
+       * turn — never authored. */
+      readonly chooser:
+        | number
+        | "trigger-controller"
+        | "trigger-player"
+        | "you"
+        | "active-player"
+        | "any-player"
+        | { readonly player: PlayerId };
       /** What they may do to avoid `otherwise`. At most one mana option, since
        * the mana cost rides on the decision itself. */
       readonly options: readonly UnlessOption[];

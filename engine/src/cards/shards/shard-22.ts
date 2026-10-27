@@ -95,6 +95,7 @@ import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCagemail from "../pool/cagemail.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
+import _poolCalderaKavu from "../pool/caldera-kavu.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
@@ -291,6 +292,7 @@ import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHonoredHierarch from "../pool/honored-hierarch.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
 import _poolHorizonSpellbomb from "../pool/horizon-spellbomb.js";
+import _poolHornedKavu from "../pool/horned-kavu.js";
 import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
@@ -349,6 +351,7 @@ import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
+import _poolLesserGargadon from "../pool/lesser-gargadon.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
@@ -468,6 +471,7 @@ import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
+import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPineconeStrike from "../pool/pinecone-strike.js";
@@ -521,6 +525,7 @@ import _poolResurrection from "../pool/resurrection.js";
 import _poolRetract from "../pool/retract.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
+import _poolRhysticShield from "../pool/rhystic-shield.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
@@ -895,6 +900,7 @@ const shard: CardShard = {
     _poolCaesarLegionsEmperor,
     _poolCagemail,
     _poolCalamityOfCinders,
+    _poolCalderaKavu,
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
     _poolCaptainAmericasMotorcycle,
@@ -1091,6 +1097,7 @@ const shard: CardShard = {
     _poolHonoredHierarch,
     _poolHoppingAutomaton,
     _poolHorizonSpellbomb,
+    _poolHornedKavu,
     _poolHospitalRoom,
     _poolHostileDesert,
     _poolHourOfVictory,
@@ -1149,6 +1156,7 @@ const shard: CardShard = {
     _poolLashOfTheBalrog,
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
+    _poolLesserGargadon,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
     _poolLifecraftAwakening,
@@ -1268,6 +1276,7 @@ const shard: CardShard = {
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPhyrexianAtlas,
+    _poolPhyrexianProwler,
     _poolPillarOfLight,
     _poolPillarfieldOx,
     _poolPineconeStrike,
@@ -1321,6 +1330,7 @@ const shard: CardShard = {
     _poolRetract,
     _poolReturnToAction,
     _poolReturnToTheSewers,
+    _poolRhysticShield,
     _poolRiotDevils,
     _poolRiseOfExtus,
     _poolRishkarsExpertise,

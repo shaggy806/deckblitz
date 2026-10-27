@@ -12,6 +12,7 @@ import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
 import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
+import _poolAirBladder from "../pool/air-bladder.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
@@ -163,6 +164,7 @@ import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
+import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
@@ -205,6 +207,7 @@ import _poolEnduringVictory from "../pool/enduring-victory.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolErraticPortal from "../pool/erratic-portal.js";
+import _poolErtaisTrickery from "../pool/ertais-trickery.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
@@ -499,6 +502,7 @@ import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
+import _poolRathiFiend from "../pool/rathi-fiend.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolRavagesOfWar from "../pool/ravages-of-war.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
@@ -525,6 +529,7 @@ import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
+import _poolRibbonSnake from "../pool/ribbon-snake.js";
 import _poolRictusRobber from "../pool/rictus-robber.js";
 import _poolRiddlekeeper from "../pool/riddlekeeper.js";
 import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
@@ -631,11 +636,13 @@ import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrengthOfIsolation from "../pool/strength-of-isolation.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
+import _poolStrongholdMachinist from "../pool/stronghold-machinist.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
+import _poolSunkenField from "../pool/sunken-field.js";
 import _poolSurgingMight from "../pool/surging-might.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
@@ -775,6 +782,7 @@ const shard: CardShard = {
     _poolAchillesDavenport,
     _poolAethergeodeMiner,
     _poolAetherstormRoc,
+    _poolAirBladder,
     _poolAislingLeprechaun,
     _poolAjanisComrade,
     _poolAkoumStonewaker,
@@ -926,6 +934,7 @@ const shard: CardShard = {
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
     _poolDespoilerOfSouls,
+    _poolDestructiveFlow,
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,
@@ -968,6 +977,7 @@ const shard: CardShard = {
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
     _poolErraticPortal,
+    _poolErtaisTrickery,
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,
@@ -1262,6 +1272,7 @@ const shard: CardShard = {
     _poolRampartArchitect,
     _poolRankOfficer,
     _poolRaphaelToughTurtle,
+    _poolRathiFiend,
     _poolRaucousAudience,
     _poolRavagesOfWar,
     _poolReachForTheSky,
@@ -1288,6 +1299,7 @@ const shard: CardShard = {
     _poolReverentHoplite,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
+    _poolRibbonSnake,
     _poolRictusRobber,
     _poolRiddlekeeper,
     _poolRiptideLaboratory,
@@ -1394,11 +1406,13 @@ const shard: CardShard = {
     _poolStorySeeker,
     _poolStrengthOfIsolation,
     _poolStrionicResonator,
+    _poolStrongholdMachinist,
     _poolStunningShot,
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,
     _poolSummonersSending,
     _poolSunderingVitae,
+    _poolSunkenField,
     _poolSurgingMight,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,

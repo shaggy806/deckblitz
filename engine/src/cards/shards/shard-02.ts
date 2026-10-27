@@ -129,6 +129,7 @@ import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
+import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
@@ -369,6 +370,7 @@ import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLashknife from "../pool/lashknife.js";
 import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
@@ -473,6 +475,7 @@ import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
+import _poolPitRaptor from "../pool/pit-raptor.js";
 import _poolPitfallTrap from "../pool/pitfall-trap.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
@@ -511,6 +514,7 @@ import _poolRecklessOgre from "../pool/reckless-ogre.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
+import _poolRefreshingRain from "../pool/refreshing-rain.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolRepeal from "../pool/repeal.js";
@@ -541,6 +545,7 @@ import _poolSacredKnight from "../pool/sacred-knight.js";
 import _poolSaddledRimestag from "../pool/saddled-rimestag.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
+import _poolSamiteSanctuary from "../pool/samite-sanctuary.js";
 import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
@@ -571,6 +576,7 @@ import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolShriekingGrotesque from "../pool/shrieking-grotesque.js";
 import _poolShrineOfPiercingVision from "../pool/shrine-of-piercing-vision.js";
+import _poolShroudedSerpent from "../pool/shrouded-serpent.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaLedgewalker from "../pool/silhana-ledgewalker.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
@@ -598,6 +604,7 @@ import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSootImp from "../pool/soot-imp.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
+import _poolSoulCharmer from "../pool/soul-charmer.js";
 import _poolSoulRead from "../pool/soul-read.js";
 import _poolSoulStairExpedition from "../pool/soul-stair-expedition.js";
 import _poolSpawningBreath from "../pool/spawning-breath.js";
@@ -678,6 +685,7 @@ import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTransitMage from "../pool/transit-mage.js";
+import _poolTrevasRuins from "../pool/trevas-ruins.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTriumphOfFerocity from "../pool/triumph-of-ferocity.js";
@@ -893,6 +901,7 @@ const shard: CardShard = {
     _poolConsumingFervor,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
+    _poolCopperLeafAngel,
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
@@ -1133,6 +1142,7 @@ const shard: CardShard = {
     _poolLambholtRavager,
     _poolLapisLazuliTalisman,
     _poolLargeBear,
+    _poolLashknife,
     _poolLashwrithe,
     _poolLatticeLibrary,
     _poolLavaStorm,
@@ -1237,6 +1247,7 @@ const shard: CardShard = {
     _poolPheresBandRaiders,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
+    _poolPitRaptor,
     _poolPitfallTrap,
     _poolPlacidRottentail,
     _poolPlasmaElemental,
@@ -1275,6 +1286,7 @@ const shard: CardShard = {
     _poolRecklessPyrosurfer,
     _poolRecklessSpite,
     _poolReclaimTheWastes,
+    _poolRefreshingRain,
     _poolRefute,
     _poolReitoLantern,
     _poolRepeal,
@@ -1305,6 +1317,7 @@ const shard: CardShard = {
     _poolSaddledRimestag,
     _poolSagesRowSavant,
     _poolSalvationEngine,
+    _poolSamiteSanctuary,
     _poolSamutVizierOfNaktamun,
     _poolSandstoneWarrior,
     _poolSangriteSurge,
@@ -1335,6 +1348,7 @@ const shard: CardShard = {
     _poolShoulderToShoulder,
     _poolShriekingGrotesque,
     _poolShrineOfPiercingVision,
+    _poolShroudedSerpent,
     _poolSickleRipper,
     _poolSilhanaLedgewalker,
     _poolSilhanaWayfinder,
@@ -1362,6 +1376,7 @@ const shard: CardShard = {
     _poolSongOfTotentanz,
     _poolSootImp,
     _poolSorinTheMirthless,
+    _poolSoulCharmer,
     _poolSoulRead,
     _poolSoulStairExpedition,
     _poolSpawningBreath,
@@ -1442,6 +1457,7 @@ const shard: CardShard = {
     _poolTowashiSongshaper,
     _poolToweringBaloth,
     _poolTransitMage,
+    _poolTrevasRuins,
     _poolTributeToTheWild,
     _poolTritonShorethief,
     _poolTriumphOfFerocity,

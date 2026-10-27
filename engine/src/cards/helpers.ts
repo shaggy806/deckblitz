@@ -2716,7 +2716,9 @@ export const medallion = (name: string, color: Color): CardDefinition => {
     static: [
       {
         affects: { scope: "self" },
-        costModification: { applies: { colors: [color] }, reduceGeneric: 1 },
+        // `caster: "you"`: without it the discount reached every player's
+        // spells of the colour (found in batch 221).
+        costModification: { applies: { colors: [color] }, caster: "you", reduceGeneric: 1 },
         text,
       },
     ],

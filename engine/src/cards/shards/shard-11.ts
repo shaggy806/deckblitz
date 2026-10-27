@@ -48,6 +48,7 @@ import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolAuriokSurvivors from "../pool/auriok-survivors.js";
 import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
+import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBantSureblade from "../pool/bant-sureblade.js";
@@ -79,6 +80,7 @@ import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
 import _poolBonehoard from "../pool/bonehoard.js";
 import _poolBoneshardSlasher from "../pool/boneshard-slasher.js";
+import _poolBookBurning from "../pool/book-burning.js";
 import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
@@ -292,6 +294,7 @@ import _poolGravpackMonoist from "../pool/gravpack-monoist.js";
 import _poolGraypeltRefuge from "../pool/graypelt-refuge.js";
 import _poolGrazingWhiptail from "../pool/grazing-whiptail.js";
 import _poolGreatsword from "../pool/greatsword.js";
+import _poolGreelMindRaker from "../pool/greel-mind-raker.js";
 import _poolGreenGoblin from "../pool/green-goblin.js";
 import _poolGreenbeltRadical from "../pool/greenbelt-radical.js";
 import _poolGrimHarvest from "../pool/grim-harvest.js";
@@ -492,6 +495,7 @@ import _poolOuroboroid from "../pool/ouroboroid.js";
 import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
+import _poolParallaxDementia from "../pool/parallax-dementia.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
 import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
@@ -640,6 +644,7 @@ import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolStalactiteStalker from "../pool/stalactite-stalker.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolStarseerMentor from "../pool/starseer-mentor.js";
+import _poolSteelLeafPaladin from "../pool/steel-leaf-paladin.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolSterlingSupplier from "../pool/sterling-supplier.js";
 import _poolStoicSphinx from "../pool/stoic-sphinx.js";
@@ -689,6 +694,7 @@ import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThoughtleech from "../pool/thoughtleech.js";
 import _poolThranFoundry from "../pool/thran-foundry.js";
 import _poolThrash from "../pool/thrash.js";
+import _poolThresherBeast from "../pool/thresher-beast.js";
 import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
@@ -751,6 +757,7 @@ import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
 import _poolWeddingSecurity from "../pool/wedding-security.js";
 import _poolWedgelightRammer from "../pool/wedgelight-rammer.js";
+import _poolWhipstitchedZombie from "../pool/whipstitched-zombie.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
 import _poolWhirlingCatapult from "../pool/whirling-catapult.js";
 import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
@@ -843,6 +850,7 @@ const shard: CardShard = {
     _poolAuraExtraction,
     _poolAuriokSurvivors,
     _poolAvacynsMemorial,
+    _poolAvatarOfFury,
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
     _poolBantSureblade,
@@ -874,6 +882,7 @@ const shard: CardShard = {
     _poolBlueSunsZenith,
     _poolBonehoard,
     _poolBoneshardSlasher,
+    _poolBookBurning,
     _poolBoomerang,
     _poolBorderPatrol,
     _poolBorosGuildmage,
@@ -1087,6 +1096,7 @@ const shard: CardShard = {
     _poolGraypeltRefuge,
     _poolGrazingWhiptail,
     _poolGreatsword,
+    _poolGreelMindRaker,
     _poolGreenGoblin,
     _poolGreenbeltRadical,
     _poolGrimHarvest,
@@ -1287,6 +1297,7 @@ const shard: CardShard = {
     _poolPacesetterParagon,
     _poolParadiseMantle,
     _poolParadoxShaper,
+    _poolParallaxDementia,
     _poolParameciaColoniex,
     _poolParanoidDelusions,
     _poolPathOfTheAnimist,
@@ -1435,6 +1446,7 @@ const shard: CardShard = {
     _poolStalactiteStalker,
     _poolStarryEyedSkyrider,
     _poolStarseerMentor,
+    _poolSteelLeafPaladin,
     _poolSteelshapersGift,
     _poolSterlingSupplier,
     _poolStoicSphinx,
@@ -1484,6 +1496,7 @@ const shard: CardShard = {
     _poolThoughtleech,
     _poolThranFoundry,
     _poolThrash,
+    _poolThresherBeast,
     _poolThrullWizard,
     _poolThunderfootBaloth,
     _poolThunderousOrator,
@@ -1546,6 +1559,7 @@ const shard: CardShard = {
     _poolWaywardGiant,
     _poolWeddingSecurity,
     _poolWedgelightRammer,
+    _poolWhipstitchedZombie,
     _poolWhiptongueHydra,
     _poolWhirlingCatapult,
     _poolWhirlwindTechnique,

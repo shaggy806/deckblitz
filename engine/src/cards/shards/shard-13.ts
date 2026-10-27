@@ -271,6 +271,7 @@ import _poolGripOfTheRoil from "../pool/grip-of-the-roil.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
 import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
+import _poolGulfSquid from "../pool/gulf-squid.js";
 import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
@@ -360,6 +361,7 @@ import _poolKutzilMalametExemplar from "../pool/kutzil-malamet-exemplar.js";
 import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
+import _poolLashknifeBarrier from "../pool/lashknife-barrier.js";
 import _poolLastThoughts from "../pool/last-thoughts.js";
 import _poolLeadAstray from "../pool/lead-astray.js";
 import _poolLeadTheStampede from "../pool/lead-the-stampede.js";
@@ -385,6 +387,7 @@ import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
+import _poolMarchOfSouls from "../pool/march-of-souls.js";
 import _poolMarchOfTheReturned from "../pool/march-of-the-returned.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
@@ -455,6 +458,7 @@ import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
+import _poolPhyrexianDriver from "../pool/phyrexian-driver.js";
 import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
@@ -1047,6 +1051,7 @@ const shard: CardShard = {
     _poolGroveRumbler,
     _poolGrubNotoriousAuntie,
     _poolGuidedStrike,
+    _poolGulfSquid,
     _poolGulpingScraptrap,
     _poolGurmagDrowner,
     _poolHaazdaVigilante,
@@ -1136,6 +1141,7 @@ const shard: CardShard = {
     _poolLabyrinthMinotaur,
     _poolLandscapePainter,
     _poolLargerThanLife,
+    _poolLashknifeBarrier,
     _poolLastThoughts,
     _poolLeadAstray,
     _poolLeadTheStampede,
@@ -1161,6 +1167,7 @@ const shard: CardShard = {
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
+    _poolMarchOfSouls,
     _poolMarchOfTheReturned,
     _poolMarduAscendancy,
     _poolMarshGas,
@@ -1231,6 +1238,7 @@ const shard: CardShard = {
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
+    _poolPhyrexianDriver,
     _poolPhyrexianHydra,
     _poolPhyrexianIronworks,
     _poolPhyrexianVivisector,

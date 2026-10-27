@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAcceleratedEvolution from "../pool/accelerated-evolution.js";
+import _poolAccumulatedKnowledge from "../pool/accumulated-knowledge.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAetherstreamLeopard from "../pool/aetherstream-leopard.js";
@@ -115,6 +116,7 @@ import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolConcealingCurtains from "../pool/concealing-curtains.js";
 import _poolConfirmSuspicions from "../pool/confirm-suspicions.js";
+import _poolConfound from "../pool/confound.js";
 import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
@@ -181,6 +183,7 @@ import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
 import _poolElementalAppeal from "../pool/elemental-appeal.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
+import _poolElephantResurgence from "../pool/elephant-resurgence.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
@@ -238,12 +241,14 @@ import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
+import _poolFlowstoneArmor from "../pool/flowstone-armor.js";
 import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolForcedAdaptation from "../pool/forced-adaptation.js";
+import _poolForsakenCity from "../pool/forsaken-city.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
@@ -455,6 +460,7 @@ import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
+import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
@@ -528,6 +534,7 @@ import _poolResuscitate from "../pool/resuscitate.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
+import _poolRhysticTutor from "../pool/rhystic-tutor.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRisonaAsariCommander from "../pool/risona-asari-commander.js";
 import _poolRiverDarter from "../pool/river-darter.js";
@@ -565,6 +572,7 @@ import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolScoutTheBorders from "../pool/scout-the-borders.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
+import _poolSearchForSurvivors from "../pool/search-for-survivors.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
 import _poolSeasonedTactician from "../pool/seasoned-tactician.js";
 import _poolSecretPlans from "../pool/secret-plans.js";
@@ -797,6 +805,7 @@ const shard: CardShard = {
   pool: [
     _poolAIMSynthoids,
     _poolAcceleratedEvolution,
+    _poolAccumulatedKnowledge,
     _poolAdaptiveGemguard,
     _poolAetherSyphon,
     _poolAetherstreamLeopard,
@@ -907,6 +916,7 @@ const shard: CardShard = {
     _poolCompleatedConjurer,
     _poolConcealingCurtains,
     _poolConfirmSuspicions,
+    _poolConfound,
     _poolConsumingBlob,
     _poolContractHero,
     _poolCoralBarrier,
@@ -973,6 +983,7 @@ const shard: CardShard = {
     _poolEdgewallInnkeeper,
     _poolElementalAppeal,
     _poolElementalMascot,
+    _poolElephantResurgence,
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
     _poolElvenFortress,
@@ -1030,12 +1041,14 @@ const shard: CardShard = {
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
     _poolFloriferousVinewall,
+    _poolFlowstoneArmor,
     _poolFlowstoneSculpture,
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolForcedAdaptation,
+    _poolForsakenCity,
     _poolFoulRebirth,
     _poolFracturedSanity,
     _poolFrogTongue,
@@ -1247,6 +1260,7 @@ const shard: CardShard = {
     _poolOutcasterTrailblazer,
     _poolOverride,
     _poolOwlinHistorian,
+    _poolPackHunt,
     _poolPain101,
     _poolParalyze,
     _poolParhelionIi,
@@ -1320,6 +1334,7 @@ const shard: CardShard = {
     _poolRetchedWretch,
     _poolRevealingEye,
     _poolRevivingMelody,
+    _poolRhysticTutor,
     _poolRingwraiths,
     _poolRisonaAsariCommander,
     _poolRiverDarter,
@@ -1357,6 +1372,7 @@ const shard: CardShard = {
     _poolScoutTheBorders,
     _poolSeaSpirit,
     _poolSeaSprite,
+    _poolSearchForSurvivors,
     _poolSeasonedPyromancer,
     _poolSeasonedTactician,
     _poolSecretPlans,

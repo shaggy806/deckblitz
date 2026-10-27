@@ -226,6 +226,7 @@ import _poolFirebladeCharger from "../pool/fireblade-charger.js";
 import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFlayEssence from "../pool/flay-essence.js";
+import _poolFleetfootPanther from "../pool/fleetfoot-panther.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFloralSpuzzem from "../pool/floral-spuzzem.js";
 import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
@@ -364,6 +365,7 @@ import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
+import _poolLatullasOrders from "../pool/latullas-orders.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLeeringEmblem from "../pool/leering-emblem.js";
 import _poolLegacysAllure from "../pool/legacys-allure.js";
@@ -443,11 +445,13 @@ import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
+import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNewPrahvGuildmage from "../pool/new-prahv-guildmage.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
+import _poolNightscapeBattlemage from "../pool/nightscape-battlemage.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
@@ -547,6 +551,7 @@ import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
+import _poolRootCage from "../pool/root-cage.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
@@ -642,6 +647,7 @@ import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
+import _poolSunscapeBattlemage from "../pool/sunscape-battlemage.js";
 import _poolSunscour from "../pool/sunscour.js";
 import _poolSunsetPyramid from "../pool/sunset-pyramid.js";
 import _poolSunshowerDruid from "../pool/sunshower-druid.js";
@@ -678,6 +684,7 @@ import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
+import _poolThornscapeFamiliar from "../pool/thornscape-familiar.js";
 import _poolThorntoothWitch from "../pool/thorntooth-witch.js";
 import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
@@ -1039,6 +1046,7 @@ const shard: CardShard = {
     _poolFirstResponder,
     _poolFlamebornViron,
     _poolFlayEssence,
+    _poolFleetfootPanther,
     _poolFleshBurrower,
     _poolFloralSpuzzem,
     _poolFlourishingBloomKin,
@@ -1177,6 +1185,7 @@ const shard: CardShard = {
     _poolLashweedLurker,
     _poolLastWord,
     _poolLatNamAdept,
+    _poolLatullasOrders,
     _poolLaviniaFoilToConspiracy,
     _poolLeeringEmblem,
     _poolLegacysAllure,
@@ -1256,11 +1265,13 @@ const shard: CardShard = {
     _poolMycologist,
     _poolMyojinOfInfiniteRage,
     _poolMysticSpeculation,
+    _poolNaturalEmergence,
     _poolNaturalState,
     _poolNecroticHex,
     _poolNestOfScarabs,
     _poolNewPrahvGuildmage,
     _poolNightpackAmbusher,
+    _poolNightscapeBattlemage,
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
     _poolNocturnalRaid,
@@ -1360,6 +1371,7 @@ const shard: CardShard = {
     _poolRoarOfChallenge,
     _poolRoguesGloves,
     _poolRonasVortex,
+    _poolRootCage,
     _poolRootbornDefenses,
     _poolRosemaneCentaur,
     _poolRoyalTrooper,
@@ -1455,6 +1467,7 @@ const shard: CardShard = {
     _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,
+    _poolSunscapeBattlemage,
     _poolSunscour,
     _poolSunsetPyramid,
     _poolSunshowerDruid,
@@ -1491,6 +1504,7 @@ const shard: CardShard = {
     _poolTheShire,
     _poolThornMammoth,
     _poolThornglintBridge,
+    _poolThornscapeFamiliar,
     _poolThorntoothWitch,
     _poolThousandMoonsCrackshot,
     _poolThunderWall,

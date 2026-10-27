@@ -41,6 +41,7 @@ import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
+import _poolAscendantEvincar from "../pool/ascendant-evincar.js";
 import _poolAshZealot from "../pool/ash-zealot.js";
 import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAspectOfHydra from "../pool/aspect-of-hydra.js";
@@ -95,6 +96,7 @@ import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
+import _poolBreakingPoint from "../pool/breaking-point.js";
 import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
 import _poolBriarhorn from "../pool/briarhorn.js";
 import _poolBrilliantHalo from "../pool/brilliant-halo.js";
@@ -500,6 +502,7 @@ import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
+import _poolRackling from "../pool/rackling.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
@@ -648,6 +651,7 @@ import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakeHeart from "../pool/take-heart.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
+import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtor from "../pool/telimtor.js";
@@ -823,6 +827,7 @@ const shard: CardShard = {
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolArtificersEpiphany,
+    _poolAscendantEvincar,
     _poolAshZealot,
     _poolAshnodsTransmogrant,
     _poolAspectOfHydra,
@@ -877,6 +882,7 @@ const shard: CardShard = {
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
+    _poolBreakingPoint,
     _poolBriarberryCohort,
     _poolBriarhorn,
     _poolBrilliantHalo,
@@ -1282,6 +1288,7 @@ const shard: CardShard = {
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
+    _poolRackling,
     _poolRadiantStrike,
     _poolRadjanSpirit,
     _poolRaffinesInformant,
@@ -1430,6 +1437,7 @@ const shard: CardShard = {
     _poolTakeHeart,
     _poolTakenumaAbandonedMire,
     _poolTanufelRimespeaker,
+    _poolTaskMageAssembly,
     _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
     _poolTelimtor,

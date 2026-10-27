@@ -29,6 +29,7 @@ import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
 import _poolAngelheartVial from "../pool/angelheart-vial.js";
+import _poolAngelicFavor from "../pool/angelic-favor.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
@@ -470,6 +471,7 @@ import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
+import _poolParallaxTide from "../pool/parallax-tide.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
@@ -497,6 +499,7 @@ import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPunctureBolt from "../pool/puncture-bolt.js";
 import _poolPurpleWorm from "../pool/purple-worm.js";
+import _poolPygmyKavu from "../pool/pygmy-kavu.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolPygmyTroll from "../pool/pygmy-troll.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
     _poolAngelheartVial,
+    _poolAngelicFavor,
     _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
@@ -1252,6 +1256,7 @@ const shard: CardShard = {
     _poolOverwhelmingVictory,
     _poolPacksBetrayal,
     _poolPanicSpellbomb,
+    _poolParallaxTide,
     _poolParasiticImplant,
     _poolPeaceOfMind,
     _poolPearlMedallion,
@@ -1279,6 +1284,7 @@ const shard: CardShard = {
     _poolPulseOfMurasa,
     _poolPunctureBolt,
     _poolPurpleWorm,
+    _poolPygmyKavu,
     _poolPygmyRazorback,
     _poolPygmyTroll,
     _poolQarsiRevenant,

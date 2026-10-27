@@ -154,6 +154,7 @@ import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
+import _poolDarigaazsCaldera from "../pool/darigaazs-caldera.js";
 import _poolDarkDabbling from "../pool/dark-dabbling.js";
 import _poolDarkMaze from "../pool/dark-maze.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
@@ -526,6 +527,7 @@ import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
+import _poolRathiAssassin from "../pool/rathi-assassin.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolRavenFamiliar from "../pool/raven-familiar.js";
 import _poolRavingOniSlave from "../pool/raving-oni-slave.js";
@@ -594,6 +596,7 @@ import _poolShamblingShell from "../pool/shambling-shell.js";
 import _poolShardPhoenix from "../pool/shard-phoenix.js";
 import _poolSharpEyedRookie from "../pool/sharp-eyed-rookie.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
+import _poolShiftingSky from "../pool/shifting-sky.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
@@ -964,6 +967,7 @@ const shard: CardShard = {
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
+    _poolDarigaazsCaldera,
     _poolDarkDabbling,
     _poolDarkMaze,
     _poolDarksteelAxe,
@@ -1336,6 +1340,7 @@ const shard: CardShard = {
     _poolRampageOfTheValkyries,
     _poolRangingRaptors,
     _poolRaphaelTheMuscle,
+    _poolRathiAssassin,
     _poolRaucousTheater,
     _poolRavenFamiliar,
     _poolRavingOniSlave,
@@ -1404,6 +1409,7 @@ const shard: CardShard = {
     _poolShardPhoenix,
     _poolSharpEyedRookie,
     _poolShieldmatesBlessing,
+    _poolShiftingSky,
     _poolShoalKraken,
     _poolShoreKeeper,
     _poolShreddersRevenge,

@@ -236,6 +236,7 @@ import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
+import _poolExoticDisease from "../pool/exotic-disease.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFaithfulSquire from "../pool/faithful-squire.js";
@@ -266,6 +267,7 @@ import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaeasBalance from "../pool/gaeas-balance.js";
+import _poolGaeasHerald from "../pool/gaeas-herald.js";
 import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
@@ -349,6 +351,7 @@ import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
+import _poolHuntingDrake from "../pool/hunting-drake.js";
 import _poolHush from "../pool/hush.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
 import _poolIcingdeathFrostTyrant from "../pool/icingdeath-frost-tyrant.js";
@@ -524,6 +527,7 @@ import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolReinterpret from "../pool/reinterpret.js";
+import _poolRejuvenationChamber from "../pool/rejuvenation-chamber.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
@@ -606,6 +610,7 @@ import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkyclawThrash from "../pool/skyclaw-thrash.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
+import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
@@ -646,6 +651,7 @@ import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
+import _poolSurpriseDeployment from "../pool/surprise-deployment.js";
 import _poolSurvive from "../pool/survive.js";
 import _poolSwanSong from "../pool/swan-song.js";
 import _poolSwarmbornGiant from "../pool/swarmborn-giant.js";
@@ -710,6 +716,7 @@ import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
 import _poolVialOfDragonfire from "../pool/vial-of-dragonfire.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolVinesOfTheRecluse from "../pool/vines-of-the-recluse.js";
+import _poolVintaraElephant from "../pool/vintara-elephant.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
 import _poolViridianShaman from "../pool/viridian-shaman.js";
 import _poolVodalianZombie from "../pool/vodalian-zombie.js";
@@ -1007,6 +1014,7 @@ const shard: CardShard = {
     _poolEpicDownfall,
     _poolEssenceFlare,
     _poolEternalWitness,
+    _poolExoticDisease,
     _poolExpeditionSkulker,
     _poolEyeblightAssassin,
     _poolFaithfulSquire,
@@ -1037,6 +1045,7 @@ const shard: CardShard = {
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaeasBalance,
+    _poolGaeasHerald,
     _poolGaleForce,
     _poolGaleSwooper,
     _poolGalvanoth,
@@ -1120,6 +1129,7 @@ const shard: CardShard = {
     _poolHumbleNaturalist,
     _poolHumblingElder,
     _poolHuntersBow,
+    _poolHuntingDrake,
     _poolHush,
     _poolIceCreamKitty,
     _poolIcingdeathFrostTyrant,
@@ -1295,6 +1305,7 @@ const shard: CardShard = {
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,
     _poolReinterpret,
+    _poolRejuvenationChamber,
     _poolRememberTheFallen,
     _poolRenegadeReaper,
     _poolRepelCalamity,
@@ -1377,6 +1388,7 @@ const shard: CardShard = {
     _poolSkyclawThrash,
     _poolSkycoachConductor,
     _poolSkyfirePhoenix,
+    _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
     _poolSnapcasterMage,
     _poolSolRing,
@@ -1417,6 +1429,7 @@ const shard: CardShard = {
     _poolSupplyRunners,
     _poolSupremeVerdict,
     _poolSurgeEngine,
+    _poolSurpriseDeployment,
     _poolSurvive,
     _poolSwanSong,
     _poolSwarmbornGiant,
@@ -1481,6 +1494,7 @@ const shard: CardShard = {
     _poolVialOfDragonfire,
     _poolVindictiveWarden,
     _poolVinesOfTheRecluse,
+    _poolVintaraElephant,
     _poolViridianRevel,
     _poolViridianShaman,
     _poolVodalianZombie,

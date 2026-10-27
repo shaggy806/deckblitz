@@ -2024,10 +2024,37 @@ export function parseEffect(text, outer) {
       continue;
     }
     const before = ctx.targets.length;
+    // The rhystic cards (Prophecy): "[effect] unless any player pays {2}." /
+    // "Unless any player pays {2}, [effect]." — the effect behind an
+    // `unless` every player is asked in turn, from the active player.
+    const after = /^(.+) unless any player pays (\{(?:\d+|X)\})\.$/.exec(sentence);
+    const ahead = /^Unless any player pays (\{(?:\d+|X)\}), (.+)\.$/.exec(sentence);
+    const rhystic =
+      after !== null
+        ? [sentence, after[1], after[2]]
+        : ahead !== null
+          ? [sentence, `${ahead[2][0].toUpperCase()}${ahead[2].slice(1)}`, ahead[1]]
+          : null;
     // "It" names the ability's object only in its first sentence: after
     // another ("Create a 0/0 token. Put a +1/+1 counter on it.") it's
     // whatever that sentence was about.
-    const effect = parseSentence(sentence, i === 0 ? ctx : { ...ctx, it: undefined, departed: undefined });
+    const sentenceCtx = i === 0 ? ctx : { ...ctx, it: undefined, departed: undefined };
+    const inner = rhystic === null ? null : parseSentence(`${rhystic[1]}.`, sentenceCtx);
+    const effect =
+      rhystic === null
+        ? parseSentence(sentence, sentenceCtx)
+        : inner === null
+          ? null
+          : {
+              kind: "unless",
+              chooser: "any-player",
+              options: [
+                rhystic[2] === "{X}"
+                  ? { payGeneric: "x", text: "Pay {X}" }
+                  : { pay: rhystic[2], text: `Pay ${rhystic[2]}` },
+              ],
+              otherwise: inner,
+            };
     if (effect === null || containsUndefined(effect)) {
       ctx.targets.length = before;
       todo.push(sentence);
@@ -2612,6 +2639,13 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // "Any player may activate this ability [but only as a sorcery]" (rule
+      // 602.2 — Prophecy's Glittering Lion, Excavation).
+      rest = rest.replace(/ Any player may activate this ability( but only as a sorcery)?\.$/, (_x, sorcery) => {
+        ability.anyPlayer = true;
+        if (sorcery !== undefined) ability.sorcerySpeed = true;
+        return "";
+      });
       // Coven's "Activate only if you control three or more creatures with
       // different powers" (Midnight Hunt).
       rest = rest.replace(/ Activate only if you control three or more creatures with different powers\.$/, () => {

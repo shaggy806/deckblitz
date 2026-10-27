@@ -206,6 +206,7 @@ import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
 import _poolEnlistmentOfficer from "../pool/enlistment-officer.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
 import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
+import _poolEscapeRoutes from "../pool/escape-routes.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
 import _poolExplorersScope from "../pool/explorers-scope.js";
 import _poolExplosion from "../pool/explosion.js";
@@ -344,6 +345,7 @@ import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
 import _poolKamiOfTheHunt from "../pool/kami-of-the-hunt.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
 import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
+import _poolKeldonFirebombers from "../pool/keldon-firebombers.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
 import _poolKessigWolfRun from "../pool/kessig-wolf-run.js";
 import _poolKindledFury from "../pool/kindled-fury.js";
@@ -467,6 +469,7 @@ import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPitFight from "../pool/pit-fight.js";
+import _poolPlagueWitch from "../pool/plague-witch.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -598,6 +601,7 @@ import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSolitude from "../pool/solitude.js";
 import _poolSomberwaldSpider from "../pool/somberwald-spider.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
+import _poolSoulStrings from "../pool/soul-strings.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSoulshriek from "../pool/soulshriek.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
@@ -676,6 +680,7 @@ import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
+import _poolThornscapeBattlemage from "../pool/thornscape-battlemage.js";
 import _poolThragtusk from "../pool/thragtusk.js";
 import _poolThranDynamo from "../pool/thran-dynamo.js";
 import _poolThrasherBrute from "../pool/thrasher-brute.js";
@@ -1004,6 +1009,7 @@ const shard: CardShard = {
     _poolEnlistmentOfficer,
     _poolEnragedCeratok,
     _poolErebosBleakHearted,
+    _poolEscapeRoutes,
     _poolEverethViceroyOfPlunder,
     _poolExplorersScope,
     _poolExplosion,
@@ -1142,6 +1148,7 @@ const shard: CardShard = {
     _poolKamiOfTheHunt,
     _poolKayasOnslaught,
     _poolKeeperOfTheCadence,
+    _poolKeldonFirebombers,
     _poolKellanInquisitiveProdigy,
     _poolKessigWolfRun,
     _poolKindledFury,
@@ -1265,6 +1272,7 @@ const shard: CardShard = {
     _poolPipBoy3000,
     _poolPippinsBravery,
     _poolPitFight,
+    _poolPlagueWitch,
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
@@ -1396,6 +1404,7 @@ const shard: CardShard = {
     _poolSolitude,
     _poolSomberwaldSpider,
     _poolSongOfStupefaction,
+    _poolSoulStrings,
     _poolSoulherder,
     _poolSoulshriek,
     _poolSowerOfChaos,
@@ -1474,6 +1483,7 @@ const shard: CardShard = {
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThirstForIdentity,
+    _poolThornscapeBattlemage,
     _poolThragtusk,
     _poolThranDynamo,
     _poolThrasherBrute,

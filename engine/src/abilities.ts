@@ -384,6 +384,13 @@ export interface ActivatedAbility {
   readonly text: string;
   /** True for abilities like Equip that function only as a sorcery (rule 602.3). */
   readonly sorcerySpeed?: boolean;
+  /** "Any player may activate this ability" (rule 602.2 — "unless the object
+   * specifically says otherwise"; Glittering Lion, Excavation): a battlefield
+   * ability any player with priority may activate, not only the permanent's
+   * controller. Whoever activates it controls it (602.2a) and pays its costs,
+   * so "you" in it is them. With `sorcerySpeed`, "but only as a sorcery" — the
+   * activator's main phase. */
+  readonly anyPlayer?: true;
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";

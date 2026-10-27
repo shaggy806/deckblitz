@@ -1,0 +1,879 @@
+{
+  "batch": "B222",
+  "status": "complete",
+  "ranks": "Prophecy (PCY, 2000-06-05): whole set, 113 (the rest after earlier walks took 30; the seventh middle walk, Prophecy back to Nemesis); built \"any player may activate this ability\" (effect:any-player-may-activate, cost:any-player-may-activate — ActivatedAbility.anyPlayer, rule 602.2) and \"unless any player pays\" (effect:unless-any-player-pays — unless chooser \"any-player\", with Browbeat's takeDamage option), and authored the 11 earlier-triaged cards they unblocked (Icy Prison, Browbeat, Breaking Point, Book Burning, Barbarian Bully, Feral Hydra, Oona's Prowler, Well of Knowledge, Deadly Designs, Aether Storm, Infinite Hourglass)",
+  "authored": [
+    {
+      "name": "Rhystic Tutor",
+      "files": [
+        "engine/src/cards/pool/rhystic-tutor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infernal Genesis",
+      "files": [
+        "engine/src/cards/pool/infernal-genesis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Noxious Field",
+      "files": [
+        "engine/src/cards/pool/noxious-field.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Calming Verse",
+      "files": [
+        "engine/src/cards/pool/calming-verse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Squirrel Wrangler",
+      "files": [
+        "engine/src/cards/pool/squirrel-wrangler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avatar of Fury",
+      "files": [
+        "engine/src/cards/pool/avatar-of-fury.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thrive",
+      "files": [
+        "engine/src/cards/pool/thrive.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keldon Firebombers",
+      "files": [
+        "engine/src/cards/pool/keldon-firebombers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Excavation",
+      "files": [
+        "engine/src/cards/pool/excavation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reveille Squad",
+      "files": [
+        "engine/src/cards/pool/reveille-squad.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sunken Field",
+      "files": [
+        "engine/src/cards/pool/sunken-field.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Latulla's Orders",
+      "files": [
+        "engine/src/cards/pool/latullas-orders.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spitting Spider",
+      "files": [
+        "engine/src/cards/pool/spitting-spider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fickle Efreet",
+      "files": [
+        "engine/src/cards/pool/fickle-efreet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mana Vapors",
+      "files": [
+        "engine/src/cards/pool/mana-vapors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rethink",
+      "files": [
+        "engine/src/cards/pool/rethink.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Withdraw",
+      "files": [
+        "engine/src/cards/pool/withdraw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lesser Gargadon",
+      "files": [
+        "engine/src/cards/pool/lesser-gargadon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Endbringer's Revel",
+      "files": [
+        "engine/src/cards/pool/endbringers-revel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Alexi, Zephyr Mage",
+      "files": [
+        "engine/src/cards/pool/alexi-zephyr-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhystic Deluge",
+      "files": [
+        "engine/src/cards/pool/rhystic-deluge.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Greel, Mind Raker",
+      "files": [
+        "engine/src/cards/pool/greel-mind-raker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Panic Attack",
+      "files": [
+        "engine/src/cards/pool/panic-attack.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Barbed Field",
+      "files": [
+        "engine/src/cards/pool/barbed-field.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Inflame",
+      "files": [
+        "engine/src/cards/pool/inflame.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jolrael's Favor",
+      "files": [
+        "engine/src/cards/pool/jolraels-favor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Plague Fiend",
+      "files": [
+        "engine/src/cards/pool/plague-fiend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Copper-Leaf Angel",
+      "files": [
+        "engine/src/cards/pool/copper-leaf-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thresher Beast",
+      "files": [
+        "engine/src/cards/pool/thresher-beast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhystic Lightning",
+      "files": [
+        "engine/src/cards/pool/rhystic-lightning.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Living Terrain",
+      "files": [
+        "engine/src/cards/pool/living-terrain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chilling Apparition",
+      "files": [
+        "engine/src/cards/pool/chilling-apparition.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Well of Discovery",
+      "files": [
+        "engine/src/cards/pool/well-of-discovery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Strings",
+      "files": [
+        "engine/src/cards/pool/soul-strings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhystic Circle",
+      "files": [
+        "engine/src/cards/pool/rhystic-circle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Elephant Resurgence",
+      "files": [
+        "engine/src/cards/pool/elephant-resurgence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wintermoon Mesa",
+      "files": [
+        "engine/src/cards/pool/wintermoon-mesa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Excise",
+      "files": [
+        "engine/src/cards/pool/excise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gulf Squid",
+      "files": [
+        "engine/src/cards/pool/gulf-squid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vintara Snapper",
+      "files": [
+        "engine/src/cards/pool/vintara-snapper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quicksilver Wall",
+      "files": [
+        "engine/src/cards/pool/quicksilver-wall.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Latulla, Keldon Overseer",
+      "files": [
+        "engine/src/cards/pool/latulla-keldon-overseer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Search for Survivors",
+      "files": [
+        "engine/src/cards/pool/search-for-survivors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Task Mage Assembly",
+      "files": [
+        "engine/src/cards/pool/task-mage-assembly.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shrouded Serpent",
+      "files": [
+        "engine/src/cards/pool/shrouded-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keldon Battlewagon",
+      "files": [
+        "engine/src/cards/pool/keldon-battlewagon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Well of Life",
+      "files": [
+        "engine/src/cards/pool/well-of-life.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Death Charmer",
+      "files": [
+        "engine/src/cards/pool/death-charmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wild Might",
+      "files": [
+        "engine/src/cards/pool/wild-might.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chimeric Idol",
+      "files": [
+        "engine/src/cards/pool/chimeric-idol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bog Glider",
+      "files": [
+        "engine/src/cards/pool/bog-glider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keldon Arsonist",
+      "files": [
+        "engine/src/cards/pool/keldon-arsonist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhystic Syphon",
+      "files": [
+        "engine/src/cards/pool/rhystic-syphon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhystic Shield",
+      "files": [
+        "engine/src/cards/pool/rhystic-shield.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul Charmer",
+      "files": [
+        "engine/src/cards/pool/soul-charmer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nakaya Shade",
+      "files": [
+        "engine/src/cards/pool/nakaya-shade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Samite Sanctuary",
+      "files": [
+        "engine/src/cards/pool/samite-sanctuary.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Flowering Field",
+      "files": [
+        "engine/src/cards/pool/flowering-field.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Troublesome Spirit",
+      "files": [
+        "engine/src/cards/pool/troublesome-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flay",
+      "files": [
+        "engine/src/cards/pool/flay.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bog Elemental",
+      "files": [
+        "engine/src/cards/pool/bog-elemental.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Coffin Puppets",
+      "files": [
+        "engine/src/cards/pool/coffin-puppets.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Steal Strength",
+      "files": [
+        "engine/src/cards/pool/steal-strength.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Silt Crawler",
+      "files": [
+        "engine/src/cards/pool/silt-crawler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forgotten Harvest",
+      "files": [
+        "engine/src/cards/pool/forgotten-harvest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ribbon Snake",
+      "files": [
+        "engine/src/cards/pool/ribbon-snake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zerapa Minotaur",
+      "files": [
+        "engine/src/cards/pool/zerapa-minotaur.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Verdant Field",
+      "files": [
+        "engine/src/cards/pool/verdant-field.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Darba",
+      "files": [
+        "engine/src/cards/pool/darba.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pit Raptor",
+      "files": [
+        "engine/src/cards/pool/pit-raptor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Keldon Berserker",
+      "files": [
+        "engine/src/cards/pool/keldon-berserker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scoria Cat",
+      "files": [
+        "engine/src/cards/pool/scoria-cat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vintara Elephant",
+      "files": [
+        "engine/src/cards/pool/vintara-elephant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Root Cage",
+      "files": [
+        "engine/src/cards/pool/root-cage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Windscouter",
+      "files": [
+        "engine/src/cards/pool/windscouter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Whipstitched Zombie",
+      "files": [
+        "engine/src/cards/pool/whipstitched-zombie.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fen Stalker",
+      "files": [
+        "engine/src/cards/pool/fen-stalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spur Grappler",
+      "files": [
+        "engine/src/cards/pool/spur-grappler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Icy Prison",
+      "files": [
+        "engine/src/cards/pool/icy-prison.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Browbeat",
+      "files": [
+        "engine/src/cards/pool/browbeat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breaking Point",
+      "files": [
+        "engine/src/cards/pool/breaking-point.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Book Burning",
+      "files": [
+        "engine/src/cards/pool/book-burning.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Barbarian Bully",
+      "files": [
+        "engine/src/cards/pool/barbarian-bully.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feral Hydra",
+      "files": [
+        "engine/src/cards/pool/feral-hydra.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Oona's Prowler",
+      "files": [
+        "engine/src/cards/pool/oonas-prowler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Well of Knowledge",
+      "files": [
+        "engine/src/cards/pool/well-of-knowledge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadly Designs",
+      "files": [
+        "engine/src/cards/pool/deadly-designs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aether Storm",
+      "files": [
+        "engine/src/cards/pool/aether-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infinite Hourglass",
+      "files": [
+        "engine/src/cards/pool/infinite-hourglass.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Entangler",
+      "needs": [
+        "static:can-block-any-number"
+      ],
+      "why": "Enchanted creature can block any number of creatures."
+    },
+    {
+      "name": "Overburden",
+      "needs": [
+        "effect:that-player-returns-land"
+      ],
+      "why": "The player whose creature entered chooses which of their lands to return; choose-permanents and for-each-player let only the effect's controller choose."
+    },
+    {
+      "name": "Abolish",
+      "needs": [
+        "cost:alt-cost-discard-cards"
+      ],
+      "why": "You may discard a Plains card rather than pay its mana cost."
+    },
+    {
+      "name": "Wing Storm",
+      "needs": [
+        "amount:count-that-player-controls"
+      ],
+      "why": "Damage to each player equal to twice the creatures with flying that player controls."
+    },
+    {
+      "name": "Mirror Strike",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "All combat damage the creature would deal to you this turn is dealt to its controller instead."
+    },
+    {
+      "name": "Snag",
+      "needs": [
+        "cost:alt-cost-discard-cards"
+      ],
+      "why": "You may discard a Forest card rather than pay its mana cost."
+    },
+    {
+      "name": "Jolrael, Empress of Beasts",
+      "needs": [
+        "effect:animate-all-controlled-by-target"
+      ],
+      "why": "All lands target player controls become 3/3 creatures until end of turn."
+    },
+    {
+      "name": "Celestial Convergence",
+      "needs": [
+        "amount:highest-life-total",
+        "effect:highest-life-wins-or-draw"
+      ],
+      "why": "The player with the highest life total wins; a tie is a draw."
+    },
+    {
+      "name": "Avatar of Might",
+      "needs": [
+        "condition:opponent-controls-at-least-n-more"
+      ],
+      "why": "Costs {6} less if an opponent controls at least four more creatures than you."
+    },
+    {
+      "name": "Dual Nature",
+      "needs": [
+        "effect:tokens-created-with-source"
+      ],
+      "why": "Nothing tracks the tokens created with this enchantment, nor exiles the tokens named like a leaving creature."
+    },
+    {
+      "name": "Rhystic Cave",
+      "needs": [
+        "effect:mana-ability-unless-any-player-pays"
+      ],
+      "why": "A mana ability that adds mana unless any player pays {1}: it can't stop to ask the other players."
+    },
+    {
+      "name": "Mageta the Lion",
+      "needs": [
+        "effect:destroy-all-except-source"
+      ],
+      "why": "Destroy all creatures except for Mageta: destroy-all has no exceptSource."
+    },
+    {
+      "name": "Denying Wind",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "You search target player's library for up to seven cards and exile them."
+    },
+    {
+      "name": "Glittering Lynx",
+      "needs": [
+        "effect:lose-specific-ability"
+      ],
+      "why": "Until end of turn it loses 'Prevent all damage that would be dealt to this creature' — one non-keyword static."
+    },
+    {
+      "name": "Blessed Wind",
+      "needs": [
+        "effect:life-total-becomes"
+      ],
+      "why": "Target player's life total becomes 20."
+    },
+    {
+      "name": "Shield Dancer",
+      "needs": [
+        "replacement:damage-reflection",
+        "replacement:redirect-own-next-combat-damage-to-controller"
+      ],
+      "why": "The next combat damage an attacker would deal to it is dealt by that attacker to itself instead."
+    },
+    {
+      "name": "Flameshot",
+      "needs": [
+        "cost:alt-cost-discard-cards"
+      ],
+      "why": "You may discard a Mountain card rather than pay its mana cost."
+    },
+    {
+      "name": "Avatar of Hope",
+      "needs": [
+        "static:can-block-any-number"
+      ],
+      "why": "Can block any number of creatures."
+    },
+    {
+      "name": "Hazy Homunculus",
+      "needs": [
+        "static:unblockable-defending-player-condition"
+      ],
+      "why": "Can't be blocked as long as defending player controls an untapped land."
+    },
+    {
+      "name": "Heightened Awareness",
+      "needs": [
+        "replacement:as-enters-discard-hand"
+      ],
+      "why": "As this enchantment enters, discard your hand."
+    },
+    {
+      "name": "Glittering Lion",
+      "needs": [
+        "effect:lose-specific-ability"
+      ],
+      "why": "Until end of turn it loses 'Prevent all damage that would be dealt to this creature' — one non-keyword static."
+    },
+    {
+      "name": "Avatar of Will",
+      "needs": [
+        "condition:opponent-hand-size"
+      ],
+      "why": "Costs {6} less if an opponent has no cards in hand."
+    },
+    {
+      "name": "Rhystic Scrying",
+      "needs": [
+        "effect:if-any-player-pays"
+      ],
+      "why": "Then if any player pays {2}, discard three cards."
+    },
+    {
+      "name": "Veteran Brawlers",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "Can't attack if defending player controls an untapped land."
+    },
+    {
+      "name": "Psychic Theft",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "Exile an instant or sorcery from a revealed hand, castable while exiled, returned at end of turn if not cast."
+    },
+    {
+      "name": "Wall of Vipers",
+      "needs": [
+        "effect:target-creature-blocking-source"
+      ],
+      "why": "Destroy this creature and target creature it's blocking."
+    },
+    {
+      "name": "Mercenary Informer",
+      "needs": [
+        "static:untargetable-by-color-any-player"
+      ],
+      "why": "Can't be the target of black spells or abilities from black sources — any player's, not only opponents'."
+    },
+    {
+      "name": "Outbreak",
+      "needs": [
+        "cost:alt-cost-discard-cards"
+      ],
+      "why": "You may discard a Swamp card rather than pay its mana cost."
+    },
+    {
+      "name": "Rebel Informer",
+      "needs": [
+        "static:cant-be-targeted-by-filter"
+      ],
+      "why": "Can't be the target of white spells or abilities from white sources — any player's."
+    },
+    {
+      "name": "Mungha Wurm",
+      "needs": [
+        "static:untap-step-limit"
+      ],
+      "why": "You can't untap more than one land during your untap step."
+    },
+    {
+      "name": "Branded Brawlers",
+      "needs": [
+        "static:cant-attack-if-defender-controls"
+      ],
+      "why": "Can't attack if defending player controls an untapped land."
+    },
+    {
+      "name": "Hollow Warrior",
+      "needs": [
+        "static:attack-cost-for-creature"
+      ],
+      "why": "Can't attack or block unless you tap an untapped creature you control not declared as an attacking or blocking creature this combat."
+    },
+    {
+      "name": "Brutal Suppression",
+      "needs": [
+        "cost:ability-cost-modification"
+      ],
+      "why": "Activated abilities of nontoken Rebels cost an additional 'Sacrifice a land'."
+    },
+    {
+      "name": "Jeweled Spirit",
+      "needs": [
+        "effect:grant-protection-temporary"
+      ],
+      "why": "Gains protection from artifacts or from the color of your choice until end of turn."
+    },
+    {
+      "name": "Sheltering Prayers",
+      "needs": [
+        "condition:that-player-controls"
+      ],
+      "why": "Basic lands of each player who controls three or fewer lands have shroud — the condition is per land's controller."
+    }
+  ]
+}

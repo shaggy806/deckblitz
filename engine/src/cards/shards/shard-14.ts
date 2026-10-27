@@ -484,6 +484,7 @@ import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolNoeticScales from "../pool/noetic-scales.js";
+import _poolNoxiousField from "../pool/noxious-field.js";
 import _poolNuclearFallout from "../pool/nuclear-fallout.js";
 import _poolNullify from "../pool/nullify.js";
 import _poolOakenBrawler from "../pool/oaken-brawler.js";
@@ -644,6 +645,7 @@ import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolSpreadingAlgae from "../pool/spreading-algae.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStabWound from "../pool/stab-wound.js";
+import _poolStampedeDriver from "../pool/stampede-driver.js";
 import _poolSternMentor from "../pool/stern-mentor.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
@@ -725,6 +727,7 @@ import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
+import _poolUrzasGuilt from "../pool/urzas-guilt.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolValorousCharge from "../pool/valorous-charge.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
@@ -1277,6 +1280,7 @@ const shard: CardShard = {
     _poolNivMizzetParun,
     _poolNoMercy,
     _poolNoeticScales,
+    _poolNoxiousField,
     _poolNuclearFallout,
     _poolNullify,
     _poolOakenBrawler,
@@ -1437,6 +1441,7 @@ const shard: CardShard = {
     _poolSpreadingAlgae,
     _poolSpreadingFlames,
     _poolStabWound,
+    _poolStampedeDriver,
     _poolSternMentor,
     _poolStingingHivemaster,
     _poolStingingShot,
@@ -1518,6 +1523,7 @@ const shard: CardShard = {
     _poolUpTheBeanstalk,
     _poolUrborgStalker,
     _poolUrzasCave,
+    _poolUrzasGuilt,
     _poolUrzasIncubator,
     _poolValorousCharge,
     _poolVampireNighthawk,

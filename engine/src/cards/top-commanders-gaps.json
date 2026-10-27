@@ -469,7 +469,10 @@
   "keyword:sunburst",
   "condition:same-name-as-target",
   "keyword:two-kicker-costs",
-  "effect:must-block-this-turn"
+  "effect:must-block-this-turn",
+  "effect:unless-any-player-pays",
+  "effect:any-player-may-activate",
+  "cost:any-player-may-activate"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

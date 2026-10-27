@@ -2668,8 +2668,14 @@ export class Game {
     for (const source of this.state.zones.shared.battlefield) {
       if (onlySource !== undefined && source !== onlySource) continue;
       const object = this.state.objects[source];
-      if (object.controller !== player) continue;
+      const own = object.controller === player;
+      // Cheaply first: only a printed "any player may activate" ability
+      // (none is ever granted) opens another player's permanent.
+      if (!own && !this.registry.get(rulesTextName(object)).activated.some((a) => a.anyPlayer === true)) continue;
       this.effectiveActivated(source, abilityGrantors).forEach((ability, index) => {
+        // Another player's permanent: only what says any player may activate
+        // it (rule 602.2).
+        if (!own && ability.anyPlayer !== true) return;
         // "Add one mana of any color" (Command Tower) is one ability with
         // several outcomes; enumerate it once per outcome so activating it on
         // its own is a real choice rather than whatever the engine's default
@@ -14733,7 +14739,8 @@ export class Game {
       if (source.zone !== "battlefield") {
         return "that permanent is not on the battlefield";
       }
-      if (source.controller !== player) {
+      // "Any player may activate this ability" (rule 602.2).
+      if (source.controller !== player && ability.anyPlayer !== true) {
         return `${player} does not control that permanent`;
       }
       // What was granted it after it lost them, it has (rule 613.7) — those
@@ -14767,9 +14774,16 @@ export class Game {
       // Keeper is one of the five Vampires its own transform ability counts.
       // (A *static* ability's condition is the one that skips itself, to keep
       // "as long as you control another …" from reading itself.)
-      !staticConditionMet(this.state, this.registry, source, ability.condition, {
-        includeSelf: true,
-      })
+      // An ability any player may activate reads "you" as whoever activates
+      // it: Volrath's Dungeon's "only during their turn", Well of
+      // Knowledge's "only during their draw step" (written `your-turn`).
+      !staticConditionMet(
+        this.state,
+        this.registry,
+        ability.anyPlayer === true && source.controller !== player ? { ...source, controller: player } : source,
+        ability.condition,
+        { includeSelf: true },
+      )
     ) {
       return `${def.name}'s ability's activation condition isn't met`;
     }
@@ -25382,8 +25396,21 @@ export class Game {
       readonly triggerController: PlayerId | undefined;
     },
   ): void {
+    if (chooser === "any-player") {
+      // "Unless any player pays": each player in turn order from the active
+      // player (rule 101.4), the next asked only once the one before has
+      // declined — a chain of one-player `unless`es ending in `otherwise`.
+      const [first, ...rest] = this.apnapOrder().filter((p) => this.state.players[p]?.hasLost === false);
+      for (const player of rest.reverse()) {
+        otherwise = { kind: "unless", chooser: { player }, options, otherwise };
+      }
+      // Nobody left to ask: `decide` comes out undefined, and it happens.
+      chooser = first === undefined ? -1 : { player: first };
+    }
     const decide =
-      chooser === "trigger-controller"
+      typeof chooser === "object"
+        ? chooser.player
+        : chooser === "trigger-controller"
         ? (known.triggerController ??
           (triggerObject !== undefined
             ? this.state.objects[triggerObject]?.controller
@@ -25480,6 +25507,7 @@ export class Game {
       if ("exileFromGraveyard" in option) {
         return this.state.zones.perPlayer[player].graveyard.length >= option.exileFromGraveyard;
       }
+      if ("takeDamage" in option) return true;
       return (
         this.eligibleSacrifices(player, option.sacrifice, option.exceptSource === true ? source : undefined).length >=
         (option.count ?? 1)
@@ -25507,6 +25535,8 @@ export class Game {
                 destination: "exile",
                 leftover: "stay",
               }
+            : "takeDamage" in option
+            ? { kind: "damage", amount: option.takeDamage, who: "you" }
             : "payLife" in option
             ? { kind: "lose-life", amount: option.payLife, who: "you" }
             : "sacrifice" in option

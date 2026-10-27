@@ -1009,7 +1009,22 @@ player (Trespasser's Curse's "that player loses 1 life"). "At the beginning of
 with `who: "attached"`: it fires only in that player's own step, so "that
 player" is `"active-player"` (Curse of the Bloody Tome, Cruel Reality, Torment
 of Scarabs' `unless` with `chooser: "active-player"`); the scaffolder reads the
-trigger clause. None of these is a target, so hexproof doesn't stop them.
+trigger clause.
+
+**"Unless any player pays {N}"** (Prophecy's rhystic cards — Rhystic Tutor,
+Wild Might, Icy Prison, Soul Strings' `payGeneric: "x"`) is `unless` with
+`chooser: "any-player"`: each player still in the game is asked in turn from
+the active player (rule 101.4, and the rulings), the next only once the one
+before has declined or couldn't pay, and `otherwise` happens only if none did.
+"Any player may have Browbeat **deal 5 damage to them**. If no one does, …" is
+the same with the option `{ takeDamage: 5, text }` — the effect's source deals
+it to whoever takes it, always open to anyone (Breaking Point, Book Burning,
+Barbarian Bully's "unless a player has this creature deal 4 damage to them").
+Not yet: "**if** any player pays {2}, [effect]" (Rhystic Scrying), "unless an
+**opponent** pays" (Scarwood Bandits), or one asked per object (Cleansing's
+"for each land … unless any player pays 1 life"). The scaffolder reads the
+"[effect] unless any player pays {N}." and "Unless any player pays {N}, [effect]."
+sentences. None of these is a target, so hexproof doesn't stop them.
 
 ### Movement / removal
 
@@ -2923,6 +2938,18 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   (Equip). An Equipment is `types: ["artifact"], subtypes: ["Equipment"]` with
   an `activated` ability `{ effect: { kind: "attach", target: 0 }, targets:
   ["creature-you-control"], sorcerySpeed: true }`.
+- `anyPlayer: true` — "**Any player may activate this ability**" (rule 602.2:
+  only an object's controller may, "unless the object specifically says
+  otherwise" — Glittering Lion, Excavation, Ribbon Snake, Feral Hydra). It's
+  offered to every player with priority. Whoever activates it controls the
+  ability (602.2a): they pay its costs (Excavation's "Sacrifice a land" is one
+  of **their** lands, Oona's Prowler's discard from **their** hand), "you" in
+  its effect is them, and so is "your" in its `condition` — Well of
+  Knowledge's "only during their draw step" is `your-turn` with
+  `turn-structure` `["draw"]` (Volrath's Dungeon's "only during their turn" would be
+  `your-turn`). "…but only as a sorcery" adds `sorcerySpeed` (the activator's
+  main phase). Battlefield abilities only, and only printed ones (none is ever
+  granted). The scaffolder reads the sentence. `any-player-rhystic.test.ts`.
 - `loyaltyCost: 1` (or `-3`) — marks a **loyalty ability**: `cost.mana` /
   `cost.tap` are ignored, it's sorcery-speed, once per planeswalker per turn,
   and paid by adding/removing loyalty counters. Requires `loyalty` on the card.

@@ -24,6 +24,7 @@ import _poolAkiriLineSlinger from "../pool/akiri-line-slinger.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
 import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
+import _poolAlexiZephyrMage from "../pool/alexi-zephyr-mage.js";
 import _poolAlistairTheBrigadier from "../pool/alistair-the-brigadier.js";
 import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
@@ -347,6 +348,7 @@ import _poolIllusoryGains from "../pool/illusory-gains.js";
 import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
+import _poolInfernalGenesis from "../pool/infernal-genesis.js";
 import _poolIngeniousThief from "../pool/ingenious-thief.js";
 import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
@@ -383,6 +385,8 @@ import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
 import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
+import _poolLaccolithTitan from "../pool/laccolith-titan.js";
+import _poolLaccolithWhelp from "../pool/laccolith-whelp.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
@@ -581,6 +585,7 @@ import _poolScathingShadelock from "../pool/scathing-shadelock.js";
 import _poolScavengingHarpy from "../pool/scavenging-harpy.js";
 import _poolSchismotivate from "../pool/schismotivate.js";
 import _poolScionOfVituGhazi from "../pool/scion-of-vitu-ghazi.js";
+import _poolScoriaCat from "../pool/scoria-cat.js";
 import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearchForDagger from "../pool/search-for-dagger.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
@@ -647,6 +652,7 @@ import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSpringjackKnight from "../pool/springjack-knight.js";
+import _poolSpurGrappler from "../pool/spur-grappler.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
@@ -665,6 +671,7 @@ import _poolStonehornChanter from "../pool/stonehorn-chanter.js";
 import _poolStormShaman from "../pool/storm-shaman.js";
 import _poolStormcloudSpirit from "../pool/stormcloud-spirit.js";
 import _poolStormscaleScion from "../pool/stormscale-scion.js";
+import _poolStormscapeBattlemage from "../pool/stormscape-battlemage.js";
 import _poolStorvaldFrostGiantJarl from "../pool/storvald-frost-giant-jarl.js";
 import _poolStrixhavenSkycoach from "../pool/strixhaven-skycoach.js";
 import _poolStromkirkMentor from "../pool/stromkirk-mentor.js";
@@ -860,6 +867,7 @@ const shard: CardShard = {
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
     _poolAleshasLegacy,
+    _poolAlexiZephyrMage,
     _poolAlistairTheBrigadier,
     _poolAmarantCoral,
     _poolAnaconda,
@@ -1183,6 +1191,7 @@ const shard: CardShard = {
     _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolIncorrigibleYouths,
+    _poolInfernalGenesis,
     _poolIngeniousThief,
     _poolInnerFlameAcolyte,
     _poolInnovativeCommons,
@@ -1219,6 +1228,8 @@ const shard: CardShard = {
     _poolKruinStriker,
     _poolKyrenFlamewright,
     _poolLabyrinthOfSkophos,
+    _poolLaccolithTitan,
+    _poolLaccolithWhelp,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLavakinBrawler,
@@ -1417,6 +1428,7 @@ const shard: CardShard = {
     _poolScavengingHarpy,
     _poolSchismotivate,
     _poolScionOfVituGhazi,
+    _poolScoriaCat,
     _poolScragnoth,
     _poolSearchForDagger,
     _poolSearingFlesh,
@@ -1483,6 +1495,7 @@ const shard: CardShard = {
     _poolSpitefulBanditry,
     _poolSplintersTechnique,
     _poolSpringjackKnight,
+    _poolSpurGrappler,
     _poolSquash,
     _poolSquirrelSanctuary,
     _poolSquirrelanoids,
@@ -1501,6 +1514,7 @@ const shard: CardShard = {
     _poolStormShaman,
     _poolStormcloudSpirit,
     _poolStormscaleScion,
+    _poolStormscapeBattlemage,
     _poolStorvaldFrostGiantJarl,
     _poolStrixhavenSkycoach,
     _poolStromkirkMentor,

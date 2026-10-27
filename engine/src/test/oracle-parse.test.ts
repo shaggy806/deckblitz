@@ -2151,6 +2151,26 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(hobbit.devour).toEqual({ multiplier: 3, filter: { type: "artifact", subtype: "Food" } });
   });
 
+  it("'any player may activate this ability' (rule 602.2) and 'unless any player pays' (Prophecy)", () => {
+    const snake = face("{2}: This creature loses flying until end of turn. Any player may activate this ability.", "Creature — Snake");
+    expect(snake.activated[0].anyPlayer).toBe(true);
+    const revel = face(
+      "{4}: Return target creature card from a graveyard to its owner's hand. Any player may activate this ability but only as a sorcery.",
+      "Enchantment",
+    );
+    expect(revel.activated[0].anyPlayer).toBe(true);
+    expect(revel.activated[0].sorcerySpeed).toBe(true);
+    const tutor = face("Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.", "Sorcery");
+    expect(tutor.effect).toMatchObject({ kind: "unless", chooser: "any-player", options: [{ pay: "{2}", text: "Pay {2}" }] });
+    const shade = face("{B}: This creature gets +1/+1 until end of turn unless any player pays {2}.", "Creature — Shade");
+    expect(shade.activated[0].effect).toEqual({
+      kind: "unless",
+      chooser: "any-player",
+      options: [{ pay: "{2}", text: "Pay {2}" }],
+      otherwise: { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
+    });
+  });
+
   it("a Role token created attached (rule 303.7): to a target, to up to one other target, to it", () => {
     const genealogist = face(
       "When this creature enters, create a Royal Role token attached to another target creature you control.",

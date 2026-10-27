@@ -32,6 +32,7 @@ import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
 import _poolArrowVolleyTrap from "../pool/arrow-volley-trap.js";
 import _poolAstrolabe from "../pool/astrolabe.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
+import _poolAuroraGriffin from "../pool/aurora-griffin.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
 import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
@@ -137,6 +138,7 @@ import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
+import _poolDefenderEnVec from "../pool/defender-en-vec.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
@@ -208,6 +210,7 @@ import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
+import _poolFenStalker from "../pool/fen-stalker.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
@@ -437,6 +440,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOffBalance from "../pool/off-balance.js";
 import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
@@ -480,6 +484,7 @@ import _poolProtocolKnight from "../pool/protocol-knight.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
+import _poolQuirionDryad from "../pool/quirion-dryad.js";
 import _poolQuirionSentinel from "../pool/quirion-sentinel.js";
 import _poolRabidBloodsucker from "../pool/rabid-bloodsucker.js";
 import _poolRadiantsJudgment from "../pool/radiants-judgment.js";
@@ -493,6 +498,7 @@ import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.j
 import _poolRancidEarth from "../pool/rancid-earth.js";
 import _poolRattleblazeScarecrow from "../pool/rattleblaze-scarecrow.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
+import _poolRazingSnidd from "../pool/razing-snidd.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
 import _poolRazorkinHordecaller from "../pool/razorkin-hordecaller.js";
 import _poolReadyWilling from "../pool/ready-willing.js";
@@ -579,6 +585,7 @@ import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSoulscour from "../pool/soulscour.js";
 import _poolSouthernPaladin from "../pool/southern-paladin.js";
+import _poolSparkcaster from "../pool/sparkcaster.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
@@ -733,6 +740,7 @@ import _poolWetlandSambar from "../pool/wetland-sambar.js";
 import _poolWheelOfTorture from "../pool/wheel-of-torture.js";
 import _poolWhispersOfTheMuse from "../pool/whispers-of-the-muse.js";
 import _poolWhiteSunsZenith from "../pool/white-suns-zenith.js";
+import _poolWildMight from "../pool/wild-might.js";
 import _poolWillOfTheJeskai from "../pool/will-of-the-jeskai.js";
 import _poolWillOfTheMardu from "../pool/will-of-the-mardu.js";
 import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
@@ -808,6 +816,7 @@ const shard: CardShard = {
     _poolArrowVolleyTrap,
     _poolAstrolabe,
     _poolAuntiesSentence,
+    _poolAuroraGriffin,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
     _poolAyaOfAlexandria,
@@ -913,6 +922,7 @@ const shard: CardShard = {
     _poolDeepGoblinSkulltaker,
     _poolDeepSlumberTitan,
     _poolDeeprootChampion,
+    _poolDefenderEnVec,
     _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDestructiveRevelry,
@@ -984,6 +994,7 @@ const shard: CardShard = {
     _poolFascination,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
+    _poolFenStalker,
     _poolFeralMaaka,
     _poolFierceRetribution,
     _poolFinaleOfGlory,
@@ -1213,6 +1224,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOffBalance,
     _poolOgreJailbreaker,
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
@@ -1256,6 +1268,7 @@ const shard: CardShard = {
     _poolPsychosisCrawler,
     _poolPutrefy,
     _poolQuandrixPledgemage,
+    _poolQuirionDryad,
     _poolQuirionSentinel,
     _poolRabidBloodsucker,
     _poolRadiantsJudgment,
@@ -1269,6 +1282,7 @@ const shard: CardShard = {
     _poolRancidEarth,
     _poolRattleblazeScarecrow,
     _poolRavenousBaboons,
+    _poolRazingSnidd,
     _poolRazorclawBear,
     _poolRazorkinHordecaller,
     _poolReadyWilling,
@@ -1355,6 +1369,7 @@ const shard: CardShard = {
     _poolSoulTether,
     _poolSoulscour,
     _poolSouthernPaladin,
+    _poolSparkcaster,
     _poolSpawnbinderMage,
     _poolSpeakeasyServer,
     _poolSpectrumSentinel,
@@ -1509,6 +1524,7 @@ const shard: CardShard = {
     _poolWheelOfTorture,
     _poolWhispersOfTheMuse,
     _poolWhiteSunsZenith,
+    _poolWildMight,
     _poolWillOfTheJeskai,
     _poolWillOfTheMardu,
     _poolWiltLeafCavaliers,

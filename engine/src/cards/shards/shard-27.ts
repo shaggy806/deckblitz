@@ -74,6 +74,7 @@ import _poolBloodshedFever from "../pool/bloodshed-fever.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBoil from "../pool/boil.js";
+import _poolBolaWarrior from "../pool/bola-warrior.js";
 import _poolBomberCorps from "../pool/bomber-corps.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
@@ -110,6 +111,7 @@ import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolClawingTorment from "../pool/clawing-torment.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
+import _poolCoffinPuppets from "../pool/coffin-puppets.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
@@ -129,6 +131,7 @@ import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
+import _poolCrosissCatacombs from "../pool/crosiss-catacombs.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
@@ -365,6 +368,7 @@ import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
+import _poolMagnigothTreefolk from "../pool/magnigoth-treefolk.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
 import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
 import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
@@ -391,6 +395,7 @@ import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
+import _poolMireKavu from "../pool/mire-kavu.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
@@ -468,6 +473,7 @@ import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
 import _poolQuasiduplicate from "../pool/quasiduplicate.js";
 import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
+import _poolQuicksilverWall from "../pool/quicksilver-wall.js";
 import _poolQuintoriusFieldHistorian from "../pool/quintorius-field-historian.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
@@ -516,6 +522,7 @@ import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRoad from "../pool/road.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRootGreevil from "../pool/root-greevil.js";
 import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
@@ -842,6 +849,7 @@ const shard: CardShard = {
     _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBoil,
+    _poolBolaWarrior,
     _poolBomberCorps,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
@@ -878,6 +886,7 @@ const shard: CardShard = {
     _poolClachanFestival,
     _poolClawingTorment,
     _poolCloudSprite,
+    _poolCoffinPuppets,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
     _poolConnive,
@@ -897,6 +906,7 @@ const shard: CardShard = {
     _poolCowabunga,
     _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
+    _poolCrosissCatacombs,
     _poolCrosissCharm,
     _poolCruelAlliance,
     _poolCryptRipper,
@@ -1133,6 +1143,7 @@ const shard: CardShard = {
     _poolLurkingCrocodile,
     _poolLuxCannon,
     _poolMagmaw,
+    _poolMagnigothTreefolk,
     _poolMagusLuceaKane,
     _poolMakeYourOwnLuck,
     _poolMakeshiftBattalion,
@@ -1159,6 +1170,7 @@ const shard: CardShard = {
     _poolMilitiaBugler,
     _poolMinamoSightbender,
     _poolMindsDilation,
+    _poolMireKavu,
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
     _poolMistDancer,
@@ -1236,6 +1248,7 @@ const shard: CardShard = {
     _poolQuakeAgentOfSHIELD,
     _poolQuasiduplicate,
     _poolQuestForTheNecropolis,
+    _poolQuicksilverWall,
     _poolQuintoriusFieldHistorian,
     _poolQuirionRanger,
     _poolRadioactiveSpider,
@@ -1284,6 +1297,7 @@ const shard: CardShard = {
     _poolRoad,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRootGreevil,
     _poolRootrunner,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
