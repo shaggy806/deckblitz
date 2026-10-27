@@ -8628,6 +8628,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
       "sameNameAsTarget" in value ||
+      "sameNameAsTriggerObject" in value ||
       "sharesColorWithTarget" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
@@ -8727,6 +8728,15 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         target?.kind === "object"
           ? { ...rest, sameNameAs: { object: target.object, name: ctx.nameForMatching(target.object) } }
           : walked;
+    }
+    // "With the same name as that spell" (the Shrines): the trigger object
+    // and its name now — `nameForMatching` reads a spell that has since left
+    // the stack under the same id, so a countered one still has its name.
+    if (walked["sameNameAsTriggerObject"] === true) {
+      const { sameNameAsTriggerObject: _trigger, ...rest } = walked;
+      const object = ctx.triggerObject;
+      walked =
+        object !== undefined ? { ...rest, sameNameAs: { object, name: ctx.nameForMatching(object) } } : walked;
     }
     // Radiance's "and each other … that shares a color with it": the target
     // and its colors now (rule 105.2), as for the name above.

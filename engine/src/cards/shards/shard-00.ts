@@ -42,6 +42,7 @@ import _poolAshmouthHound from "../pool/ashmouth-hound.js";
 import _poolAvatarOfSlaughter from "../pool/avatar-of-slaughter.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
+import _poolAvenShrine from "../pool/aven-shrine.js";
 import _poolAwakeningZone from "../pool/awakening-zone.js";
 import _poolAyulasInfluence from "../pool/ayulas-influence.js";
 import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
@@ -115,6 +116,7 @@ import _poolCascadeSeer from "../pool/cascade-seer.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolCelestialKirin from "../pool/celestial-kirin.js";
+import _poolCephalidShrine from "../pool/cephalid-shrine.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
@@ -861,6 +863,7 @@ const shard: CardShard = {
     _poolAvatarOfSlaughter,
     _poolAvenCloudchaser,
     _poolAvenSentry,
+    _poolAvenShrine,
     _poolAwakeningZone,
     _poolAyulasInfluence,
     _poolAzcantaTheSunkenRuin,
@@ -934,6 +937,7 @@ const shard: CardShard = {
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
     _poolCelestialKirin,
+    _poolCephalidShrine,
     _poolChiefWargsCompany,
     _poolChildOfGaea,
     _poolChildOfThorns,

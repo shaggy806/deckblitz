@@ -160,6 +160,7 @@ import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenScorcher from "../pool/dwarven-scorcher.js";
+import _poolDwarvenShrine from "../pool/dwarven-shrine.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEarthshaker from "../pool/earthshaker.js";
@@ -890,6 +891,7 @@ const shard: CardShard = {
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
     _poolDwarvenScorcher,
+    _poolDwarvenShrine,
     _poolDwarvenWeaponsmith,
     _poolEarthbrawn,
     _poolEarthshaker,

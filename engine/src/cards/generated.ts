@@ -1369,6 +1369,7 @@ import _poolAvenRedeemer from "./pool/aven-redeemer.js";
 import _poolAvenReedstalker from "./pool/aven-reedstalker.js";
 import _poolAvenRiftwatcher from "./pool/aven-riftwatcher.js";
 import _poolAvenSentry from "./pool/aven-sentry.js";
+import _poolAvenShrine from "./pool/aven-shrine.js";
 import _poolAvenSkirmisher from "./pool/aven-skirmisher.js";
 import _poolAvenSmokeweaver from "./pool/aven-smokeweaver.js";
 import _poolAvenSquire from "./pool/aven-squire.js";
@@ -2973,6 +2974,7 @@ import _poolCabalInitiate from "./pool/cabal-initiate.js";
 import _poolCabalPaladin from "./pool/cabal-paladin.js";
 import _poolCabalPit from "./pool/cabal-pit.js";
 import _poolCabalRitual from "./pool/cabal-ritual.js";
+import _poolCabalShrine from "./pool/cabal-shrine.js";
 import _poolCabalStronghold from "./pool/cabal-stronghold.js";
 import _poolCabalSurgeon from "./pool/cabal-surgeon.js";
 import _poolCabalTorturer from "./pool/cabal-torturer.js";
@@ -3379,6 +3381,7 @@ import _poolCephalidLooter from "./pool/cephalid-looter.js";
 import _poolCephalidPathmage from "./pool/cephalid-pathmage.js";
 import _poolCephalidSage from "./pool/cephalid-sage.js";
 import _poolCephalidScout from "./pool/cephalid-scout.js";
+import _poolCephalidShrine from "./pool/cephalid-shrine.js";
 import _poolCephalidVandal from "./pool/cephalid-vandal.js";
 import _poolCephalopodSentry from "./pool/cephalopod-sentry.js";
 import _poolCerebralConfiscation from "./pool/cerebral-confiscation.js";
@@ -6095,6 +6098,7 @@ import _poolDwarvenReinforcements from "./pool/dwarven-reinforcements.js";
 import _poolDwarvenRuins from "./pool/dwarven-ruins.js";
 import _poolDwarvenScorcher from "./pool/dwarven-scorcher.js";
 import _poolDwarvenShortsword from "./pool/dwarven-shortsword.js";
+import _poolDwarvenShrine from "./pool/dwarven-shrine.js";
 import _poolDwarvenSong from "./pool/dwarven-song.js";
 import _poolDwarvenStrikeForce from "./pool/dwarven-strike-force.js";
 import _poolDwarvenTrader from "./pool/dwarven-trader.js";
@@ -14210,6 +14214,7 @@ import _poolNantukoMentor from "./pool/nantuko-mentor.js";
 import _poolNantukoMonastery from "./pool/nantuko-monastery.js";
 import _poolNantukoShade from "./pool/nantuko-shade.js";
 import _poolNantukoShaman from "./pool/nantuko-shaman.js";
+import _poolNantukoShrine from "./pool/nantuko-shrine.js";
 import _poolNantukoTracer from "./pool/nantuko-tracer.js";
 import _poolNantukoVigilante from "./pool/nantuko-vigilante.js";
 import _poolNaomiPillarOfOrder from "./pool/naomi-pillar-of-order.js";
@@ -27138,6 +27143,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvenReedstalker,
   _poolAvenRiftwatcher,
   _poolAvenSentry,
+  _poolAvenShrine,
   _poolAvenSkirmisher,
   _poolAvenSmokeweaver,
   _poolAvenSquire,
@@ -28742,6 +28748,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCabalPaladin,
   _poolCabalPit,
   _poolCabalRitual,
+  _poolCabalShrine,
   _poolCabalStronghold,
   _poolCabalSurgeon,
   _poolCabalTorturer,
@@ -29148,6 +29155,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCephalidPathmage,
   _poolCephalidSage,
   _poolCephalidScout,
+  _poolCephalidShrine,
   _poolCephalidVandal,
   _poolCephalopodSentry,
   _poolCerebralConfiscation,
@@ -31864,6 +31872,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDwarvenRuins,
   _poolDwarvenScorcher,
   _poolDwarvenShortsword,
+  _poolDwarvenShrine,
   _poolDwarvenSong,
   _poolDwarvenStrikeForce,
   _poolDwarvenTrader,
@@ -39979,6 +39988,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNantukoMonastery,
   _poolNantukoShade,
   _poolNantukoShaman,
+  _poolNantukoShrine,
   _poolNantukoTracer,
   _poolNantukoVigilante,
   _poolNaomiPillarOfOrder,
@@ -52920,6 +52930,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aven-reedstalker": _poolAvenReedstalker,
   "pool/aven-riftwatcher": _poolAvenRiftwatcher,
   "pool/aven-sentry": _poolAvenSentry,
+  "pool/aven-shrine": _poolAvenShrine,
   "pool/aven-skirmisher": _poolAvenSkirmisher,
   "pool/aven-smokeweaver": _poolAvenSmokeweaver,
   "pool/aven-squire": _poolAvenSquire,
@@ -54524,6 +54535,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cabal-paladin": _poolCabalPaladin,
   "pool/cabal-pit": _poolCabalPit,
   "pool/cabal-ritual": _poolCabalRitual,
+  "pool/cabal-shrine": _poolCabalShrine,
   "pool/cabal-stronghold": _poolCabalStronghold,
   "pool/cabal-surgeon": _poolCabalSurgeon,
   "pool/cabal-torturer": _poolCabalTorturer,
@@ -54930,6 +54942,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cephalid-pathmage": _poolCephalidPathmage,
   "pool/cephalid-sage": _poolCephalidSage,
   "pool/cephalid-scout": _poolCephalidScout,
+  "pool/cephalid-shrine": _poolCephalidShrine,
   "pool/cephalid-vandal": _poolCephalidVandal,
   "pool/cephalopod-sentry": _poolCephalopodSentry,
   "pool/cerebral-confiscation": _poolCerebralConfiscation,
@@ -57646,6 +57659,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dwarven-ruins": _poolDwarvenRuins,
   "pool/dwarven-scorcher": _poolDwarvenScorcher,
   "pool/dwarven-shortsword": _poolDwarvenShortsword,
+  "pool/dwarven-shrine": _poolDwarvenShrine,
   "pool/dwarven-song": _poolDwarvenSong,
   "pool/dwarven-strike-force": _poolDwarvenStrikeForce,
   "pool/dwarven-trader": _poolDwarvenTrader,
@@ -65761,6 +65775,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nantuko-monastery": _poolNantukoMonastery,
   "pool/nantuko-shade": _poolNantukoShade,
   "pool/nantuko-shaman": _poolNantukoShaman,
+  "pool/nantuko-shrine": _poolNantukoShrine,
   "pool/nantuko-tracer": _poolNantukoTracer,
   "pool/nantuko-vigilante": _poolNantukoVigilante,
   "pool/naomi-pillar-of-order": _poolNaomiPillarOfOrder,

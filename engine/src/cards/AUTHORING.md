@@ -2073,7 +2073,7 @@ enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, sameNameAsTarget, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
+nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
 the greatest power among creatures **that player** controls" — a maximum per
 controller, read live of each permanent against its own controller's others
@@ -2115,6 +2115,12 @@ sameNameAsTarget: 0 }`, Homing Lightning `damage-all`, Deputy of Detention an
 `exile-all` with `controlledBy: "you"` and `controlledByTarget: 0` ("that player
 controls"). The namesakes aren't targeted (hexproof doesn't save them); a
 face-down target has no name and goes alone.
+`sameNameAsTriggerObject: true` is the same for the trigger object — the
+Shrines' "where X is the number of cards in all graveyards **with the same name
+as that spell**" (Aven Shrine): `{ countInGraveyard: { sameNameAsTriggerObject:
+true } }` on a `cast-spell` trigger, bound to the spell's name as the effect
+applies (a spell countered in response still has its name, and counts itself
+from the graveyard).
 `sharesColorWithTarget: n` is radiance's "target X **and each other** X **that
 shares a color with it**" (rule 105.2; Ravnica: City of Guilds' ability word),
 the same way: the target itself, or one sharing any of its colors as the
