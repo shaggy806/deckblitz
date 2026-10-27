@@ -272,6 +272,7 @@ import _poolGalvanicAlchemist from "../pool/galvanic-alchemist.js";
 import _poolGarrukApexPredator from "../pool/garruk-apex-predator.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
+import _poolGeneralsRegalia from "../pool/generals-regalia.js";
 import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
@@ -315,6 +316,7 @@ import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
 import _poolHallOfTriumph from "../pool/hall-of-triumph.js";
 import _poolHallowedGround from "../pool/hallowed-ground.js";
+import _poolHandOfEmrakul from "../pool/hand-of-emrakul.js";
 import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
 import _poolHeadsplitter from "../pool/headsplitter.js";
@@ -600,6 +602,7 @@ import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
+import _poolSilvergladePathfinder from "../pool/silverglade-pathfinder.js";
 import _poolSilverpeltWerewolf from "../pool/silverpelt-werewolf.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
 import _poolSimaYiWeiFieldMarshal from "../pool/sima-yi-wei-field-marshal.js";
@@ -686,6 +689,7 @@ import _poolThornplateIntimidator from "../pool/thornplate-intimidator.js";
 import _poolThornspireVerge from "../pool/thornspire-verge.js";
 import _poolThrasiosTritonHero from "../pool/thrasios-triton-hero.js";
 import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
+import _poolThunderDragon from "../pool/thunder-dragon.js";
 import _poolThunderheadSquadron from "../pool/thunderhead-squadron.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
 import _poolTicketTortoise from "../pool/ticket-tortoise.js";
@@ -1057,6 +1061,7 @@ const shard: CardShard = {
     _poolGarrukApexPredator,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
+    _poolGeneralsRegalia,
     _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
@@ -1100,6 +1105,7 @@ const shard: CardShard = {
     _poolHallOfOracles,
     _poolHallOfTriumph,
     _poolHallowedGround,
+    _poolHandOfEmrakul,
     _poolHandThatFeeds,
     _poolHarrierStrix,
     _poolHeadsplitter,
@@ -1385,6 +1391,7 @@ const shard: CardShard = {
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
     _poolSilvanRally,
+    _poolSilvergladePathfinder,
     _poolSilverpeltWerewolf,
     _poolSilverquillPledgemage,
     _poolSimaYiWeiFieldMarshal,
@@ -1471,6 +1478,7 @@ const shard: CardShard = {
     _poolThornspireVerge,
     _poolThrasiosTritonHero,
     _poolThreeTreeMascot,
+    _poolThunderDragon,
     _poolThunderheadSquadron,
     _poolThunderscapeApprentice,
     _poolTicketTortoise,

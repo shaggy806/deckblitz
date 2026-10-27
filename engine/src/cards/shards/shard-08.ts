@@ -255,6 +255,7 @@ import _poolFindThePath from "../pool/find-the-path.js";
 import _poolFireDrake from "../pool/fire-drake.js";
 import _poolFireUrchin from "../pool/fire-urchin.js";
 import _poolFirstSliversChosen from "../pool/first-slivers-chosen.js";
+import _poolFlareOfDuplication from "../pool/flare-of-duplication.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
@@ -556,6 +557,7 @@ import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
 import _poolRimeTender from "../pool/rime-tender.js";
 import _poolRisenNecroregent from "../pool/risen-necroregent.js";
+import _poolRishadanFootpad from "../pool/rishadan-footpad.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
@@ -1068,6 +1070,7 @@ const shard: CardShard = {
     _poolFireDrake,
     _poolFireUrchin,
     _poolFirstSliversChosen,
+    _poolFlareOfDuplication,
     _poolFlawlessForgery,
     _poolFledglingMawcor,
     _poolFlickACoin,
@@ -1369,6 +1372,7 @@ const shard: CardShard = {
     _poolRighteousAvengers,
     _poolRimeTender,
     _poolRisenNecroregent,
+    _poolRishadanFootpad,
     _poolRishadanPort,
     _poolRisingPopulace,
     _poolRiteOfPassage,

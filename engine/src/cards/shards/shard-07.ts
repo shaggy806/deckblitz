@@ -95,6 +95,7 @@ import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
+import _poolCateranSummons from "../pool/cateran-summons.js";
 import _poolCatharsis from "../pool/catharsis.js";
 import _poolCavernLampad from "../pool/cavern-lampad.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
@@ -225,6 +226,7 @@ import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
 import _poolFirebladeCharger from "../pool/fireblade-charger.js";
 import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
+import _poolFlareOfDenial from "../pool/flare-of-denial.js";
 import _poolFlayEssence from "../pool/flay-essence.js";
 import _poolFleetfootPanther from "../pool/fleetfoot-panther.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
@@ -670,6 +672,7 @@ import _poolTaniwha from "../pool/taniwha.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTavernSwindler from "../pool/tavern-swindler.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
+import _poolTectonicBreak from "../pool/tectonic-break.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolTendoIceBridge from "../pool/tendo-ice-bridge.js";
@@ -916,6 +919,7 @@ const shard: CardShard = {
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
+    _poolCateranSummons,
     _poolCatharsis,
     _poolCavernLampad,
     _poolChandrasEmberling,
@@ -1046,6 +1050,7 @@ const shard: CardShard = {
     _poolFirebladeCharger,
     _poolFirstResponder,
     _poolFlamebornViron,
+    _poolFlareOfDenial,
     _poolFlayEssence,
     _poolFleetfootPanther,
     _poolFleshBurrower,
@@ -1491,6 +1496,7 @@ const shard: CardShard = {
     _poolTatteredHaunter,
     _poolTavernSwindler,
     _poolTchallaTheBlackPanther,
+    _poolTectonicBreak,
     _poolTempestHarvester,
     _poolTemporalAdept,
     _poolTendoIceBridge,

@@ -87,6 +87,7 @@ import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
 import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js";
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
+import _poolCausticWasps from "../pool/caustic-wasps.js";
 import _poolCentaursHerald from "../pool/centaurs-herald.js";
 import _poolCephalidSage from "../pool/cephalid-sage.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
@@ -603,6 +604,7 @@ import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
 import _poolSquallLine from "../pool/squall-line.js";
+import _poolSquallSorcery from "../pool/squall-sorcery.js";
 import _poolSquareUp from "../pool/square-up.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
@@ -846,6 +848,7 @@ const shard: CardShard = {
     _poolCarrionWall,
     _poolCaseOfTheTrampledGarden,
     _poolCaughtInTheCrossfire,
+    _poolCausticWasps,
     _poolCentaursHerald,
     _poolCephalidSage,
     _poolChampionOfThePath,
@@ -1362,6 +1365,7 @@ const shard: CardShard = {
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
     _poolSquallLine,
+    _poolSquallSorcery,
     _poolSquareUp,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,

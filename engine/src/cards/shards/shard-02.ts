@@ -703,6 +703,7 @@ import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
+import _poolUnmask from "../pool/unmask.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntamedKavu from "../pool/untamed-kavu.js";
 import _poolUntamedMight from "../pool/untamed-might.js";
@@ -1476,6 +1477,7 @@ const shard: CardShard = {
     _poolUncheckedGrowth,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
+    _poolUnmask,
     _poolUnscrupulousContractor,
     _poolUntamedKavu,
     _poolUntamedMight,

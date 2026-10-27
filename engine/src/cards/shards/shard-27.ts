@@ -107,6 +107,7 @@ import _poolChillOfForeboding from "../pool/chill-of-foreboding.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
 import _poolCinderMarsh from "../pool/cinder-marsh.js";
+import _poolCinderSeer from "../pool/cinder-seer.js";
 import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolClawingTorment from "../pool/clawing-torment.js";
@@ -162,6 +163,7 @@ import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
 import _poolDetentionChariot from "../pool/detention-chariot.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
+import _poolDevoutWitness from "../pool/devout-witness.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
 import _poolDirty from "../pool/dirty.js";
 import _poolDispersalShield from "../pool/dispersal-shield.js";
@@ -744,6 +746,7 @@ import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
+import _poolWorryBeads from "../pool/worry-beads.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolWuAdmiral from "../pool/wu-admiral.js";
 import _poolWuScout from "../pool/wu-scout.js";
@@ -882,6 +885,7 @@ const shard: CardShard = {
     _poolChromeCat,
     _poolCinderHellion,
     _poolCinderMarsh,
+    _poolCinderSeer,
     _poolCityOfTraitors,
     _poolClachanFestival,
     _poolClawingTorment,
@@ -937,6 +941,7 @@ const shard: CardShard = {
     _poolDesecratedTomb,
     _poolDetentionChariot,
     _poolDevoutMonk,
+    _poolDevoutWitness,
     _poolDigThroughTime,
     _poolDirty,
     _poolDispersalShield,
@@ -1519,6 +1524,7 @@ const shard: CardShard = {
     _poolWoodlandCemetery,
     _poolWordOfSeizing,
     _poolWorldBreaker,
+    _poolWorryBeads,
     _poolWrapInVigor,
     _poolWuAdmiral,
     _poolWuScout,

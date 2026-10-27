@@ -554,6 +554,7 @@ import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
+import _poolPowerMatrix from "../pool/power-matrix.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
@@ -679,6 +680,7 @@ import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpittingHydra from "../pool/spitting-hydra.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolSquallmonger from "../pool/squallmonger.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
@@ -691,6 +693,7 @@ import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
+import _poolStreamOfAcid from "../pool/stream-of-acid.js";
 import _poolStrengthOfCedars from "../pool/strength-of-cedars.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolStrongholdBiologist from "../pool/stronghold-biologist.js";
@@ -1405,6 +1408,7 @@ const shard: CardShard = {
     _poolPiercingRays,
     _poolPinnacleOfRage,
     _poolPonderingMage,
+    _poolPowerMatrix,
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
@@ -1530,6 +1534,7 @@ const shard: CardShard = {
     _poolSpittingHydra,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
+    _poolSquallmonger,
     _poolStalwartAven,
     _poolStart,
     _poolStartledRelicSloth,
@@ -1542,6 +1547,7 @@ const shard: CardShard = {
     _poolStoneskin,
     _poolStormTheFestival,
     _poolStranglerootGeist,
+    _poolStreamOfAcid,
     _poolStrengthOfCedars,
     _poolStrokeOfGenius,
     _poolStrongholdBiologist,

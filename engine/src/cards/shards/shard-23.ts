@@ -211,6 +211,7 @@ import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
+import _poolEnsnare from "../pool/ensnare.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
 import _poolEquilibrium from "../pool/equilibrium.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
@@ -516,6 +517,7 @@ import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
 import _poolRally from "../pool/rally.js";
 import _poolRalsStaticaster from "../pool/rals-staticaster.js";
+import _poolRamosianCaptain from "../pool/ramosian-captain.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRatsOfRath from "../pool/rats-of-rath.js";
@@ -593,6 +595,7 @@ import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolShivanWurm from "../pool/shivan-wurm.js";
+import _poolShriekingSpecter from "../pool/shrieking-specter.js";
 import _poolShyft from "../pool/shyft.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
@@ -1010,6 +1013,7 @@ const shard: CardShard = {
     _poolEncouragingAviator,
     _poolEndlessObedience,
     _poolEnfeeblement,
+    _poolEnsnare,
     _poolEnthusiasticMechanaut,
     _poolEquilibrium,
     _poolErtaiTheCorrupted,
@@ -1315,6 +1319,7 @@ const shard: CardShard = {
     _poolRakingClaws,
     _poolRally,
     _poolRalsStaticaster,
+    _poolRamosianCaptain,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
     _poolRatsOfRath,
@@ -1392,6 +1397,7 @@ const shard: CardShard = {
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolShivanWurm,
+    _poolShriekingSpecter,
     _poolShyft,
     _poolSibsigAppraiser,
     _poolSibyllineSoothsayer,

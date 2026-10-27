@@ -461,6 +461,7 @@ import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
+import _poolPangosaur from "../pool/pangosaur.js";
 import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParaselene from "../pool/paraselene.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolOrthionHeroOfLavabrink,
     _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
+    _poolPangosaur,
     _poolParanoidParishBlade,
     _poolParaselene,
     _poolParkHeightsPegasus,

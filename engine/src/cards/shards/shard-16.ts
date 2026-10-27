@@ -238,6 +238,7 @@ import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
 import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
 import _poolFlamesOfTheFirebrand from "../pool/flames-of-the-firebrand.js";
+import _poolFlareOfCultivation from "../pool/flare-of-cultivation.js";
 import _poolFlaringFlameKin from "../pool/flaring-flame-kin.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
@@ -578,6 +579,7 @@ import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolSawtoothLoon from "../pool/sawtooth-loon.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
+import _poolScentOfNightshade from "../pool/scent-of-nightshade.js";
 import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScroungingBandar from "../pool/scrounging-bandar.js";
@@ -604,6 +606,7 @@ import _poolSigilBlessing from "../pool/sigil-blessing.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilkenStrength from "../pool/silken-strength.js";
 import _poolSilkwrap from "../pool/silkwrap.js";
+import _poolSilvergladeElemental from "../pool/silverglade-elemental.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
@@ -748,6 +751,7 @@ import _poolUrzasChalice from "../pool/urzas-chalice.js";
 import _poolUrzasCommand from "../pool/urzas-command.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
+import _poolVendetta from "../pool/vendetta.js";
 import _poolVenerableMonk from "../pool/venerable-monk.js";
 import _poolVerminGorger from "../pool/vermin-gorger.js";
 import _poolVesperlark from "../pool/vesperlark.js";
@@ -1084,6 +1088,7 @@ const shard: CardShard = {
     _poolFlamebornHellion,
     _poolFlameholdGrappler,
     _poolFlamesOfTheFirebrand,
+    _poolFlareOfCultivation,
     _poolFlaringFlameKin,
     _poolFledglingGriffin,
     _poolFleetingImage,
@@ -1424,6 +1429,7 @@ const shard: CardShard = {
     _poolSawtoothLoon,
     _poolScaldingCauldron,
     _poolScatterTheSeeds,
+    _poolScentOfNightshade,
     _poolScrapheapScrounger,
     _poolScroungeForEternity,
     _poolScroungingBandar,
@@ -1450,6 +1456,7 @@ const shard: CardShard = {
     _poolSigilOfMyrkul,
     _poolSilkenStrength,
     _poolSilkwrap,
+    _poolSilvergladeElemental,
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
@@ -1594,6 +1601,7 @@ const shard: CardShard = {
     _poolUrzasCommand,
     _poolUrzasMine,
     _poolVaultbornTyrant,
+    _poolVendetta,
     _poolVenerableMonk,
     _poolVerminGorger,
     _poolVesperlark,

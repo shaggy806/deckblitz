@@ -164,6 +164,7 @@ import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
+import _poolDisappear from "../pool/disappear.js";
 import _poolDiscipleOfTheSun from "../pool/disciple-of-the-sun.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
@@ -321,6 +322,7 @@ import _poolHuaTuoHonoredPhysician from "../pool/hua-tuo-honored-physician.js";
 import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
 import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
+import _poolHuntedWumpus from "../pool/hunted-wumpus.js";
 import _poolHypersonicDragon from "../pool/hypersonic-dragon.js";
 import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
@@ -412,6 +414,7 @@ import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
+import _poolMetathranElite from "../pool/metathran-elite.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
@@ -561,6 +564,7 @@ import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
 import _poolScatterToTheWinds from "../pool/scatter-to-the-winds.js";
 import _poolScatteredThoughts from "../pool/scattered-thoughts.js";
+import _poolScentOfCinder from "../pool/scent-of-cinder.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
 import _poolScourgeOfNumai from "../pool/scourge-of-numai.js";
@@ -950,6 +954,7 @@ const shard: CardShard = {
     _poolDelifsCone,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
+    _poolDisappear,
     _poolDiscipleOfTheSun,
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
@@ -1107,6 +1112,7 @@ const shard: CardShard = {
     _poolHulkSmash,
     _poolHumbleDefector,
     _poolHungryMegasloth,
+    _poolHuntedWumpus,
     _poolHypersonicDragon,
     _poolIcatianScout,
     _poolIceTunnel,
@@ -1198,6 +1204,7 @@ const shard: CardShard = {
     _poolMechanNavigator,
     _poolMeglonoth,
     _poolMetalworkColossus,
+    _poolMetathranElite,
     _poolMidnightScavengers,
     _poolMightOfOldKrosa,
     _poolMightOfTheMasses,
@@ -1347,6 +1354,7 @@ const shard: CardShard = {
     _poolScatheZombies,
     _poolScatterToTheWinds,
     _poolScatteredThoughts,
+    _poolScentOfCinder,
     _poolScepterOfDominance,
     _poolScornfulEgotist,
     _poolScourgeOfNumai,

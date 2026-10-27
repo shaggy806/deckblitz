@@ -290,6 +290,7 @@ import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
+import _poolHonorTheFallen from "../pool/honor-the-fallen.js";
 import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
@@ -1075,6 +1076,7 @@ const shard: CardShard = {
     _poolHinderingTouch,
     _poolHippoCows,
     _poolHoardingRecluse,
+    _poolHonorTheFallen,
     _poolHopefulEidolon,
     _poolHornOfGondor,
     _poolHotshotInvestigators,

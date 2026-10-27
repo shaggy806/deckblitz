@@ -258,6 +258,7 @@ import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFoster from "../pool/foster.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
+import _poolFountainWatch from "../pool/fountain-watch.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrostwebSpider from "../pool/frostweb-spider.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolFortify,
     _poolFoster,
     _poolFountainOfRenewal,
+    _poolFountainWatch,
     _poolFrostMarsh,
     _poolFrostwebSpider,
     _poolFrozenShade,

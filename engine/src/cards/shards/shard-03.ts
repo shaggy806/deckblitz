@@ -497,6 +497,7 @@ import _poolSaguWildling from "../pool/sagu-wildling.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
 import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
+import _poolSaprazzanLegate from "../pool/saprazzan-legate.js";
 import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
@@ -1218,6 +1219,7 @@ const shard: CardShard = {
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
     _poolSanitariumSkeleton,
+    _poolSaprazzanLegate,
     _poolSatyrHoplite,
     _poolScamperingSurveyor,
     _poolScavengedBlade,

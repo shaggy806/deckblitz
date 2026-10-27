@@ -113,6 +113,7 @@ import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCennsHeir from "../pool/cenns-heir.js";
 import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
+import _poolChampionLancer from "../pool/champion-lancer.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
@@ -430,6 +431,7 @@ import _poolNervousGardener from "../pool/nervous-gardener.js";
 import _poolNettleSentinel from "../pool/nettle-sentinel.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
+import _poolNightshadeSeer from "../pool/nightshade-seer.js";
 import _poolNissaAscendedAnimist from "../pool/nissa-ascended-animist.js";
 import _poolNoblePurpose from "../pool/noble-purpose.js";
 import _poolNoiseMarine from "../pool/noise-marine.js";
@@ -731,6 +733,7 @@ import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
 import _poolWarriorsCharge from "../pool/warriors-charge.js";
 import _poolWarshipScout from "../pool/warship-scout.js";
 import _poolWaspLancer from "../pool/wasp-lancer.js";
+import _poolWaterfrontBouncer from "../pool/waterfront-bouncer.js";
 import _poolWaveOfTerror from "../pool/wave-of-terror.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
 import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
@@ -774,6 +777,7 @@ import _tokensHellionToken from "../tokens/hellion-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
+import _tokensMonkeyToken from "../tokens/monkey-token.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensPirateTokenNettlingNuisance from "../tokens/pirate-token-nettling-nuisance.js";
 import _tokensSatyrToken from "../tokens/satyr-token.js";
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolCelestialUnicorn,
     _poolCennsHeir,
     _poolChainedToTheRocks,
+    _poolChampionLancer,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolCinderGiant,
@@ -1211,6 +1216,7 @@ const shard: CardShard = {
     _poolNettleSentinel,
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
+    _poolNightshadeSeer,
     _poolNissaAscendedAnimist,
     _poolNoblePurpose,
     _poolNoiseMarine,
@@ -1512,6 +1518,7 @@ const shard: CardShard = {
     _poolWarriorsCharge,
     _poolWarshipScout,
     _poolWaspLancer,
+    _poolWaterfrontBouncer,
     _poolWaveOfTerror,
     _poolWeftstalkerArdent,
     _poolWestCoastExpansion,
@@ -1557,6 +1564,7 @@ const shard: CardShard = {
     _tokensHumanWarriorToken,
     _tokensMerfolkTokenSilvergillMentor,
     _tokensMonkTokenCrescentIslandTemple,
+    _tokensMonkeyToken,
     _tokensPegasusToken22,
     _tokensPirateTokenNettlingNuisance,
     _tokensSatyrToken,

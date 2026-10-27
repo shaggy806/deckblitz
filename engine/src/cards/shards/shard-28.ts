@@ -378,6 +378,7 @@ import _poolLowlandTracker from "../pool/lowland-tracker.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLunarForce from "../pool/lunar-force.js";
+import _poolLurkingJackals from "../pool/lurking-jackals.js";
 import _poolLurkingSkirge from "../pool/lurking-skirge.js";
 import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
@@ -563,6 +564,7 @@ import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRushOfBlood from "../pool/rush-of-blood.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
+import _poolSaberAnts from "../pool/saber-ants.js";
 import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSageEyeAvengers from "../pool/sage-eye-avengers.js";
@@ -1199,6 +1201,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLunarForce,
+    _poolLurkingJackals,
     _poolLurkingSkirge,
     _poolLustForWar,
     _poolLuxurySuite,
@@ -1384,6 +1387,7 @@ const shard: CardShard = {
     _poolRunehornHellkite,
     _poolRushOfBlood,
     _poolRustedSlasher,
+    _poolSaberAnts,
     _poolSabertoothMauler,
     _poolSabotender,
     _poolSageEyeAvengers,

@@ -173,6 +173,7 @@ import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
+import _poolEnslavedHorror from "../pool/enslaved-horror.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
@@ -237,6 +238,7 @@ import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
 import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
+import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
@@ -403,6 +405,7 @@ import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindKnives from "../pool/mind-knives.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMindSludge from "../pool/mind-sludge.js";
+import _poolMindSwords from "../pool/mind-swords.js";
 import _poolMindlessNull from "../pool/mindless-null.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
@@ -949,6 +952,7 @@ const shard: CardShard = {
     _poolEmbodimentOfSpring,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
+    _poolEnslavedHorror,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
     _poolEssenceChanneler,
@@ -1013,6 +1017,7 @@ const shard: CardShard = {
     _poolGleamingBastion,
     _poolGluttonousGuest,
     _poolGoblinBattleJester,
+    _poolGoblinMasons,
     _poolGoblinRaider,
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
@@ -1179,6 +1184,7 @@ const shard: CardShard = {
     _poolMindKnives,
     _poolMindRavel,
     _poolMindSludge,
+    _poolMindSwords,
     _poolMindlessNull,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,

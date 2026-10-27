@@ -361,6 +361,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
+import _poolLastBreath from "../pool/last-breath.js";
 import _poolLavacoreElemental from "../pool/lavacore-elemental.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
 import _poolLeagueGuildmage from "../pool/league-guildmage.js";
@@ -1137,6 +1138,7 @@ const shard: CardShard = {
     _poolLagonnaBandElder,
     _poolLakesideShack,
     _poolLambholtHarrier,
+    _poolLastBreath,
     _poolLavacoreElemental,
     _poolLazotepSliver,
     _poolLeagueGuildmage,

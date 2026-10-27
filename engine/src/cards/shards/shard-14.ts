@@ -151,6 +151,7 @@ import _poolDaiLiAgents from "../pool/dai-li-agents.js";
 import _poolDakmorLancer from "../pool/dakmor-lancer.js";
 import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js";
 import _poolDaringPiracy from "../pool/daring-piracy.js";
+import _poolDarkTriumph from "../pool/dark-triumph.js";
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
 import _poolDauthiCutthroat from "../pool/dauthi-cutthroat.js";
 import _poolDavenantHealer from "../pool/davenant-healer.js";
@@ -186,6 +187,7 @@ import _poolDjinnOfWishes from "../pool/djinn-of-wishes.js";
 import _poolDominatorDrone from "../pool/dominator-drone.js";
 import _poolDontMove from "../pool/dont-move.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
+import _poolDownhillCharge from "../pool/downhill-charge.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
 import _poolDrannithHealer from "../pool/drannith-healer.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
@@ -947,6 +949,7 @@ const shard: CardShard = {
     _poolDakmorLancer,
     _poolDalakosCrafterOfWonders,
     _poolDaringPiracy,
+    _poolDarkTriumph,
     _poolDarkslickDrake,
     _poolDauthiCutthroat,
     _poolDavenantHealer,
@@ -982,6 +985,7 @@ const shard: CardShard = {
     _poolDominatorDrone,
     _poolDontMove,
     _poolDouseInGloom,
+    _poolDownhillCharge,
     _poolDragonBellMonk,
     _poolDrannithHealer,
     _poolDrannithRuins,

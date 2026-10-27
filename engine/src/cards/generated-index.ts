@@ -387,6 +387,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Moloid",
   "Monk Token",
   "Monk Token (Crescent Island Temple)",
+  "Monkey Token",
   "Monster Role Token",
   "Moogle Token",
   "Moonfolk Token",

@@ -228,6 +228,7 @@ import _poolFireLordAzula from "../pool/fire-lord-azula.js";
 import _poolFireProphecy from "../pool/fire-prophecy.js";
 import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
+import _poolFlareOfMalice from "../pool/flare-of-malice.js";
 import _poolFlatten from "../pool/flatten.js";
 import _poolFlay from "../pool/flay.js";
 import _poolFlightSpellbomb from "../pool/flight-spellbomb.js";
@@ -379,6 +380,7 @@ import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
 import _poolLakeTown from "../pool/lake-town.js";
 import _poolLandLeeches from "../pool/land-leeches.js";
+import _poolLarceny from "../pool/larceny.js";
 import _poolLashOut from "../pool/lash-out.js";
 import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
@@ -393,6 +395,7 @@ import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLoyalSentry from "../pool/loyal-sentry.js";
+import _poolLumberingSatyr from "../pool/lumbering-satyr.js";
 import _poolLushPortico from "../pool/lush-portico.js";
 import _poolLyevSkyknight from "../pool/lyev-skyknight.js";
 import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
@@ -622,6 +625,7 @@ import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
 import _poolSoltariVisionary from "../pool/soltari-visionary.js";
 import _poolSonicBurst from "../pool/sonic-burst.js";
+import _poolSoothsaying from "../pool/soothsaying.js";
 import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
@@ -1037,6 +1041,7 @@ const shard: CardShard = {
     _poolFireProphecy,
     _poolFireSnake,
     _poolFishliverOil,
+    _poolFlareOfMalice,
     _poolFlatten,
     _poolFlay,
     _poolFlightSpellbomb,
@@ -1188,6 +1193,7 @@ const shard: CardShard = {
     _poolLagacLizard,
     _poolLakeTown,
     _poolLandLeeches,
+    _poolLarceny,
     _poolLashOut,
     _poolLaurineTheDiversion,
     _poolLazotepPlating,
@@ -1202,6 +1208,7 @@ const shard: CardShard = {
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLoyalSentry,
+    _poolLumberingSatyr,
     _poolLushPortico,
     _poolLyevSkyknight,
     _poolLysAlanaDignitary,
@@ -1431,6 +1438,7 @@ const shard: CardShard = {
     _poolSoldeviMachinist,
     _poolSoltariVisionary,
     _poolSonicBurst,
+    _poolSoothsaying,
     _poolSorcerousSight,
     _poolSparkTrooper,
     _poolSpectralCloak,

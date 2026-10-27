@@ -138,6 +138,7 @@ import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCountNefaria from "../pool/count-nefaria.js";
 import _poolCounterintelligence from "../pool/counterintelligence.js";
+import _poolCowardice from "../pool/cowardice.js";
 import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
@@ -156,6 +157,7 @@ import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkIntimations from "../pool/dark-intimations.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
+import _poolDawnstrider from "../pool/dawnstrider.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeathlyRide from "../pool/deathly-ride.js";
@@ -302,6 +304,7 @@ import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
+import _poolHiredGiant from "../pool/hired-giant.js";
 import _poolHissingMiasma from "../pool/hissing-miasma.js";
 import _poolHivestone from "../pool/hivestone.js";
 import _poolHopeCharm from "../pool/hope-charm.js";
@@ -410,6 +413,7 @@ import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
 import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
+import _poolMonkeyCage from "../pool/monkey-cage.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
 import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
@@ -530,6 +534,7 @@ import _poolRingOfGix from "../pool/ring-of-gix.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
+import _poolRishadanCutpurse from "../pool/rishadan-cutpurse.js";
 import _poolRiteOfTheSerpent from "../pool/rite-of-the-serpent.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
 import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
@@ -941,6 +946,7 @@ const shard: CardShard = {
     _poolCosmicCube,
     _poolCountNefaria,
     _poolCounterintelligence,
+    _poolCowardice,
     _poolCradleClearcutter,
     _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
@@ -959,6 +965,7 @@ const shard: CardShard = {
     _poolDanithaBenaliasHope,
     _poolDarkIntimations,
     _poolDarkTutelage,
+    _poolDawnstrider,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
     _poolDeathlyRide,
@@ -1105,6 +1112,7 @@ const shard: CardShard = {
     _poolHellkiteCourser,
     _poolHellsCaretaker,
     _poolHiredClaw,
+    _poolHiredGiant,
     _poolHissingMiasma,
     _poolHivestone,
     _poolHopeCharm,
@@ -1213,6 +1221,7 @@ const shard: CardShard = {
     _poolMoltenRavager,
     _poolMoltenTailMasticore,
     _poolMongooseLizard,
+    _poolMonkeyCage,
     _poolMonstrousGrowth,
     _poolMoonCircuitHacker,
     _poolMoonVigilAdherents,
@@ -1333,6 +1342,7 @@ const shard: CardShard = {
     _poolRiotPiker,
     _poolRiseOfTheAnts,
     _poolRiseOfTheDreadMarn,
+    _poolRishadanCutpurse,
     _poolRiteOfTheSerpent,
     _poolRitualChamber,
     _poolRoadsideBlowout,

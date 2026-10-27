@@ -451,6 +451,7 @@ import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
 import _poolMightOfTheOldWays from "../pool/might-of-the-old-ways.js";
 import _poolMindPeel from "../pool/mind-peel.js";
+import _poolMineCollapse from "../pool/mine-collapse.js";
 import _poolMiresMalice from "../pool/mires-malice.js";
 import _poolMirriTheCursed from "../pool/mirri-the-cursed.js";
 import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
@@ -726,6 +727,7 @@ import _poolVolcanicIsland from "../pool/volcanic-island.js";
 import _poolVoraciousVarmint from "../pool/voracious-varmint.js";
 import _poolWalkWithTheAncestors from "../pool/walk-with-the-ancestors.js";
 import _poolWalkingSkyscraper from "../pool/walking-skyscraper.js";
+import _poolWarmonger from "../pool/warmonger.js";
 import _poolWarrenWarleader from "../pool/warren-warleader.js";
 import _poolWastelandScorpion from "../pool/wasteland-scorpion.js";
 import _poolWatcherOfTheSpheres from "../pool/watcher-of-the-spheres.js";
@@ -1231,6 +1233,7 @@ const shard: CardShard = {
     _poolMightOfOaks,
     _poolMightOfTheOldWays,
     _poolMindPeel,
+    _poolMineCollapse,
     _poolMiresMalice,
     _poolMirriTheCursed,
     _poolMishraEminentOne,
@@ -1506,6 +1509,7 @@ const shard: CardShard = {
     _poolVoraciousVarmint,
     _poolWalkWithTheAncestors,
     _poolWalkingSkyscraper,
+    _poolWarmonger,
     _poolWarrenWarleader,
     _poolWastelandScorpion,
     _poolWatcherOfTheSpheres,

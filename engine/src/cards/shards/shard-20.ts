@@ -63,6 +63,7 @@ import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
 import _poolBatteringSliver from "../pool/battering-sliver.js";
 import _poolBatterskull from "../pool/batterskull.js";
+import _poolBattleSquadron from "../pool/battle-squadron.js";
 import _poolBeaconOfDestiny from "../pool/beacon-of-destiny.js";
 import _poolBearerOfOverwhelmingTruths from "../pool/bearer-of-overwhelming-truths.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
@@ -552,6 +553,7 @@ import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolReliefCaptain from "../pool/relief-captain.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
+import _poolRenounce from "../pool/renounce.js";
 import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolReptilianReflection from "../pool/reptilian-reflection.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
@@ -652,6 +654,7 @@ import _poolSpireGolem from "../pool/spire-golem.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
+import _poolSpontaneousGeneration from "../pool/spontaneous-generation.js";
 import _poolSpringjackKnight from "../pool/springjack-knight.js";
 import _poolSpurGrappler from "../pool/spur-grappler.js";
 import _poolSquash from "../pool/squash.js";
@@ -765,6 +768,7 @@ import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolTyrantOfValakut from "../pool/tyrant-of-valakut.js";
 import _poolUncageTheMenagerie from "../pool/uncage-the-menagerie.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
+import _poolUndertaker from "../pool/undertaker.js";
 import _poolUnstableMutation from "../pool/unstable-mutation.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
@@ -907,6 +911,7 @@ const shard: CardShard = {
     _poolBastionInventor,
     _poolBatteringSliver,
     _poolBatterskull,
+    _poolBattleSquadron,
     _poolBeaconOfDestiny,
     _poolBearerOfOverwhelmingTruths,
     _poolBeckonApparition,
@@ -1396,6 +1401,7 @@ const shard: CardShard = {
     _poolRefresh,
     _poolReliefCaptain,
     _poolRenderSpeechless,
+    _poolRenounce,
     _poolRentIsDue,
     _poolReptilianReflection,
     _poolRestrictedOffice,
@@ -1496,6 +1502,7 @@ const shard: CardShard = {
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,
+    _poolSpontaneousGeneration,
     _poolSpringjackKnight,
     _poolSpurGrappler,
     _poolSquash,
@@ -1609,6 +1616,7 @@ const shard: CardShard = {
     _poolTyrantOfValakut,
     _poolUncageTheMenagerie,
     _poolUndeadAugur,
+    _poolUndertaker,
     _poolUnstableMutation,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,

@@ -140,6 +140,7 @@ import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
 import _poolDeglamer from "../pool/deglamer.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
+import _poolDemonOfDeathsGate from "../pool/demon-of-deaths-gate.js";
 import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesertNomads from "../pool/desert-nomads.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
@@ -489,6 +490,7 @@ import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
 import _poolPucasCovenant from "../pool/pucas-covenant.js";
+import _poolPuppetsVerdict from "../pool/puppets-verdict.js";
 import _poolPurge from "../pool/purge.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolDefiledCrypt,
     _poolDeglamer,
     _poolDelneyStreetwiseLookout,
+    _poolDemonOfDeathsGate,
     _poolDemonicLore,
     _poolDesertNomads,
     _poolDesperateParry,
@@ -1276,6 +1279,7 @@ const shard: CardShard = {
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
     _poolPucasCovenant,
+    _poolPuppetsVerdict,
     _poolPurge,
     _poolPutridLeech,
     _poolPyreticRitual,

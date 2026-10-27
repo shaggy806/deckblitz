@@ -540,6 +540,7 @@ import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
+import _poolRamosianSergeant from "../pool/ramosian-sergeant.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
@@ -617,6 +618,7 @@ import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
+import _poolSnakePit from "../pool/snake-pit.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSolarTide from "../pool/solar-tide.js";
 import _poolSoltariLancer from "../pool/soltari-lancer.js";
@@ -1329,6 +1331,7 @@ const shard: CardShard = {
     _poolRadiantEssence,
     _poolRakdosKeyrune,
     _poolRakdosPatronOfChaos,
+    _poolRamosianSergeant,
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,
@@ -1406,6 +1409,7 @@ const shard: CardShard = {
     _poolSmaugTheMagnificent,
     _poolSmolderingEfreet,
     _poolSmugglersSurprise,
+    _poolSnakePit,
     _poolSneeringShadewriter,
     _poolSolarTide,
     _poolSoltariLancer,

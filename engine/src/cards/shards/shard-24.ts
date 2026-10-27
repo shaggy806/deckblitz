@@ -184,6 +184,7 @@ import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDistortingLens from "../pool/distorting-lens.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
 import _poolDominate from "../pool/dominate.js";
@@ -239,6 +240,7 @@ import _poolFirstDayOfClass from "../pool/first-day-of-class.js";
 import _poolFlailingDrake from "../pool/flailing-drake.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
+import _poolFlareOfFortitude from "../pool/flare-of-fortitude.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFleecemaneLion from "../pool/fleecemane-lion.js";
 import _poolFleshCarver from "../pool/flesh-carver.js";
@@ -314,6 +316,7 @@ import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
+import _poolHoodwink from "../pool/hoodwink.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
@@ -328,6 +331,7 @@ import _poolInterventionPact from "../pool/intervention-pact.js";
 import _poolIntrepidProvisioner from "../pool/intrepid-provisioner.js";
 import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
+import _poolIvySeer from "../pool/ivy-seer.js";
 import _poolIzzetGuildmage from "../pool/izzet-guildmage.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
 import _poolJunkWinder from "../pool/junk-winder.js";
@@ -486,6 +490,7 @@ import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
 import _poolQuietContemplation from "../pool/quiet-contemplation.js";
 import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
+import _poolRamosianLieutenant from "../pool/ramosian-lieutenant.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRampagingWerewolf from "../pool/rampaging-werewolf.js";
 import _poolRankRat from "../pool/rank-rat.js";
@@ -504,6 +509,7 @@ import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRiptideDirector from "../pool/riptide-director.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
+import _poolRishadanBrigand from "../pool/rishadan-brigand.js";
 import _poolRiversGrasp from "../pool/rivers-grasp.js";
 import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
@@ -610,6 +616,7 @@ import _poolSpringSplasher from "../pool/spring-splasher.js";
 import _poolStaggeringInsight from "../pool/staggering-insight.js";
 import _poolStampedeRider from "../pool/stampede-rider.js";
 import _poolStarwinder from "../pool/starwinder.js";
+import _poolStatecraft from "../pool/statecraft.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
@@ -976,6 +983,7 @@ const shard: CardShard = {
     _poolDiamondKaleidoscope,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDistortingLens,
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
     _poolDominate,
@@ -1031,6 +1039,7 @@ const shard: CardShard = {
     _poolFlailingDrake,
     _poolFlameOn,
     _poolFlameSweep,
+    _poolFlareOfFortitude,
     _poolFlatline,
     _poolFleecemaneLion,
     _poolFleshCarver,
@@ -1106,6 +1115,7 @@ const shard: CardShard = {
     _poolHollowmurkSiege,
     _poolHomicidalSeclusion,
     _poolHondenOfLifesWeb,
+    _poolHoodwink,
     _poolHotDogCart,
     _poolHotfootGnome,
     _poolHuntersProwess,
@@ -1120,6 +1130,7 @@ const shard: CardShard = {
     _poolIntrepidProvisioner,
     _poolInvasiveSpecies,
     _poolIrresistiblePrey,
+    _poolIvySeer,
     _poolIzzetGuildmage,
     _poolJoriEnRuinDiver,
     _poolJunkWinder,
@@ -1278,6 +1289,7 @@ const shard: CardShard = {
     _poolQuietContemplation,
     _poolRaggedShortSpear,
     _poolRakdosLordOfRiots,
+    _poolRamosianLieutenant,
     _poolRampagingFerocidon,
     _poolRampagingWerewolf,
     _poolRankRat,
@@ -1296,6 +1308,7 @@ const shard: CardShard = {
     _poolRikuOfManyPaths,
     _poolRiptideDirector,
     _poolRisenSanctuary,
+    _poolRishadanBrigand,
     _poolRiversGrasp,
     _poolRoadRage,
     _poolRoccoCabarettiCaterer,
@@ -1402,6 +1415,7 @@ const shard: CardShard = {
     _poolStaggeringInsight,
     _poolStampedeRider,
     _poolStarwinder,
+    _poolStatecraft,
     _poolSteelHellkite,
     _poolSteelSabotage,
     _poolSteelWall,
