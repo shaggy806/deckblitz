@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Torment — Torment is whole** (batch 220, the fifth middle walk, 2026-10-27): 85 of its 115
+  remaining new cards authored — **built "discard X cards" as a spell's additional cost**
+  (`cost:discard-x-cost`: `additionalCost.discard: "x"`, rules 601.2b and 601.2h, with a sacrifice
+  effect's `count` and a search's `min` as amounts; the scaffolder reads the line;
+  `discard-x-cost.test.ts`), on which the lead authored the seven Dreams and Firestorm (B175) and
+  Channeled Force (B117); the scaffolder finished six, five `card-author` agents 72 — Grim
+  Lavamancer, Faceless Butcher, Mortal Combat, Parallel Evolution, Llawan, the Possessed cycle,
+  Krosan Restorer, Cephalid Aristocrat, Basking Rootwalla — and 30 blocked (`B220.json`).
 - **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
   remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
   Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
