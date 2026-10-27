@@ -191,6 +191,7 @@ import _poolEject from "../pool/eject.js";
 import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
+import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
@@ -404,6 +405,7 @@ import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
+import _poolMoggAlarm from "../pool/mogg-alarm.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
@@ -997,6 +999,7 @@ const shard: CardShard = {
     _poolElectryte,
     _poolElementalMasterpiece,
     _poolElvishFury,
+    _poolEmbargo,
     _poolEmeriaShatteredSkyclave,
     _poolEmielTheBlessed,
     _poolEndTheFestivities,
@@ -1210,6 +1213,7 @@ const shard: CardShard = {
     _poolMistyRainforest,
     _poolMitoticSlime,
     _poolMizziumMortars,
+    _poolMoggAlarm,
     _poolMoltenVortex,
     _poolMongrelPack,
     _poolMonsoon,

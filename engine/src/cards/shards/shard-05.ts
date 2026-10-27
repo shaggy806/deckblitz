@@ -693,6 +693,7 @@ import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolToolcraftExemplar from "../pool/toolcraft-exemplar.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
 import _poolToxicScorpion from "../pool/toxic-scorpion.js";
+import _poolToymaker from "../pool/toymaker.js";
 import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
@@ -1472,6 +1473,7 @@ const shard: CardShard = {
     _poolToolcraftExemplar,
     _poolTopiaryLecturer,
     _poolToxicScorpion,
+    _poolToymaker,
     _poolTraverseEternity,
     _poolTraxosAcademyGuardian,
     _poolTriskelion,

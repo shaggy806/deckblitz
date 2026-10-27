@@ -233,8 +233,10 @@ import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
 import _poolFireCovenant from "../pool/fire-covenant.js";
 import _poolFirescreamer from "../pool/firescreamer.js";
+import _poolFirewildBorderpost from "../pool/firewild-borderpost.js";
 import _poolFiskTower from "../pool/fisk-tower.js";
 import _poolFlare from "../pool/flare.js";
+import _poolFledglingOsprey from "../pool/fledgling-osprey.js";
 import _poolFleetSwallower from "../pool/fleet-swallower.js";
 import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
@@ -1030,8 +1032,10 @@ const shard: CardShard = {
     _poolFiligreeFamiliar,
     _poolFireCovenant,
     _poolFirescreamer,
+    _poolFirewildBorderpost,
     _poolFiskTower,
     _poolFlare,
+    _poolFledglingOsprey,
     _poolFleetSwallower,
     _poolFlensermite,
     _poolFomoriVault,

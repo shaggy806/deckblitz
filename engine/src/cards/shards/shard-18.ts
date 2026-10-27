@@ -267,6 +267,7 @@ import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
+import _poolGush from "../pool/gush.js";
 import _poolHall from "../pool/hall.js";
 import _poolHammerOfRuin from "../pool/hammer-of-ruin.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
@@ -1051,6 +1052,7 @@ const shard: CardShard = {
     _poolGroundlingPouncer,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
+    _poolGush,
     _poolHall,
     _poolHammerOfRuin,
     _poolHamzaGuardianOfArashin,

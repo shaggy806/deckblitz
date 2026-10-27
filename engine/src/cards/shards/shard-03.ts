@@ -268,6 +268,7 @@ import _poolGuildscornWard from "../pool/guildscorn-ward.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
+import _poolHammerMage from "../pool/hammer-mage.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarnessByForce from "../pool/harness-by-force.js";
 import _poolHarpoonSniper from "../pool/harpoon-sniper.js";
@@ -988,6 +989,7 @@ const shard: CardShard = {
     _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHammerDropper,
+    _poolHammerMage,
     _poolHaplessResearcher,
     _poolHarnessByForce,
     _poolHarpoonSniper,

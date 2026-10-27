@@ -392,6 +392,7 @@ import _poolLivingTerrain from "../pool/living-terrain.js";
 import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
+import _poolLoyalSentry from "../pool/loyal-sentry.js";
 import _poolLushPortico from "../pool/lush-portico.js";
 import _poolLyevSkyknight from "../pool/lyev-skyknight.js";
 import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
@@ -733,6 +734,7 @@ import _poolVampireSovereign from "../pool/vampire-sovereign.js";
 import _poolVanquishTheWeak from "../pool/vanquish-the-weak.js";
 import _poolVanquishersAxe from "../pool/vanquishers-axe.js";
 import _poolVastwoodFortification from "../pool/vastwood-fortification.js";
+import _poolVeinfireBorderpost from "../pool/veinfire-borderpost.js";
 import _poolVenerableLammasu from "../pool/venerable-lammasu.js";
 import _poolVeteranBeastrider from "../pool/veteran-beastrider.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
@@ -761,6 +763,7 @@ import _poolWell from "../pool/well.js";
 import _poolWhirlingStrike from "../pool/whirling-strike.js";
 import _poolWhiteLotusHideout from "../pool/white-lotus-hideout.js";
 import _poolWickerboughElder from "../pool/wickerbough-elder.js";
+import _poolWildfieldBorderpost from "../pool/wildfield-borderpost.js";
 import _poolWildfire from "../pool/wildfire.js";
 import _poolWildheartInvoker from "../pool/wildheart-invoker.js";
 import _poolWilyGoblin from "../pool/wily-goblin.js";
@@ -1198,6 +1201,7 @@ const shard: CardShard = {
     _poolLivingTotem,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
+    _poolLoyalSentry,
     _poolLushPortico,
     _poolLyevSkyknight,
     _poolLysAlanaDignitary,
@@ -1539,6 +1543,7 @@ const shard: CardShard = {
     _poolVanquishTheWeak,
     _poolVanquishersAxe,
     _poolVastwoodFortification,
+    _poolVeinfireBorderpost,
     _poolVenerableLammasu,
     _poolVeteranBeastrider,
     _poolVeteransSidearm,
@@ -1567,6 +1572,7 @@ const shard: CardShard = {
     _poolWhirlingStrike,
     _poolWhiteLotusHideout,
     _poolWickerboughElder,
+    _poolWildfieldBorderpost,
     _poolWildfire,
     _poolWildheartInvoker,
     _poolWilyGoblin,

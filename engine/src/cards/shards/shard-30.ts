@@ -233,6 +233,7 @@ import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
 import _poolFeralKrushok from "../pool/feral-krushok.js";
+import _poolFieldmistBorderpost from "../pool/fieldmist-borderpost.js";
 import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
 import _poolFirespout from "../pool/firespout.js";
@@ -448,6 +449,7 @@ import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
 import _poolMindsEye from "../pool/minds-eye.js";
 import _poolMirkwoodMeditator from "../pool/mirkwood-meditator.js";
 import _poolMirrex from "../pool/mirrex.js";
+import _poolMistveinBorderpost from "../pool/mistvein-borderpost.js";
 import _poolMoaningWall from "../pool/moaning-wall.js";
 import _poolMockingSprite from "../pool/mocking-sprite.js";
 import _poolMoggRaider from "../pool/mogg-raider.js";
@@ -1020,6 +1022,7 @@ const shard: CardShard = {
     _poolFencingAce,
     _poolFeralGhoul,
     _poolFeralKrushok,
+    _poolFieldmistBorderpost,
     _poolFireMagic,
     _poolFirefly,
     _poolFirespout,
@@ -1235,6 +1238,7 @@ const shard: CardShard = {
     _poolMindsEye,
     _poolMirkwoodMeditator,
     _poolMirrex,
+    _poolMistveinBorderpost,
     _poolMoaningWall,
     _poolMockingSprite,
     _poolMoggRaider,

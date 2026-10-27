@@ -117,6 +117,7 @@ import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingApparition from "../pool/chilling-apparition.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
+import _poolChoMannoRevolutionary from "../pool/cho-manno-revolutionary.js";
 import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
@@ -551,6 +552,7 @@ import _poolRemand from "../pool/remand.js";
 import _poolRendFlesh from "../pool/rend-flesh.js";
 import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
+import _poolRevive from "../pool/revive.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
@@ -961,6 +963,7 @@ const shard: CardShard = {
     _poolChildOfNight,
     _poolChillingApparition,
     _poolChillingGrasp,
+    _poolChoMannoRevolutionary,
     _poolChronozoa,
     _poolCinderCrawler,
     _poolCityPigeon,
@@ -1395,6 +1398,7 @@ const shard: CardShard = {
     _poolRendFlesh,
     _poolRetributiveWand,
     _poolReturnToDust,
+    _poolRevive,
     _poolRhysticStudy,
     _poolRidesEnd,
     _poolRipTheSeams,

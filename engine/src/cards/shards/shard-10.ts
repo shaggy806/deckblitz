@@ -462,6 +462,7 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
@@ -1257,6 +1258,7 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOvertaker,
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,

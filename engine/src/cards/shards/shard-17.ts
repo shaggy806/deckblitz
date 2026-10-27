@@ -300,6 +300,7 @@ import _poolHapatrasMark from "../pool/hapatras-mark.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHatred from "../pool/hatred.js";
+import _poolHauntedCrossroads from "../pool/haunted-crossroads.js";
 import _poolHazeOfRage from "../pool/haze-of-rage.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
@@ -595,6 +596,7 @@ import _poolSiltCrawler from "../pool/silt-crawler.js";
 import _poolSinisterConcoction from "../pool/sinister-concoction.js";
 import _poolSkaabRuinator from "../pool/skaab-ruinator.js";
 import _poolSkirkShaman from "../pool/skirk-shaman.js";
+import _poolSkitteringHorror from "../pool/skittering-horror.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
@@ -1097,6 +1099,7 @@ const shard: CardShard = {
     _poolHashepOasis,
     _poolHasranOgress,
     _poolHatred,
+    _poolHauntedCrossroads,
     _poolHazeOfRage,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
@@ -1392,6 +1395,7 @@ const shard: CardShard = {
     _poolSinisterConcoction,
     _poolSkaabRuinator,
     _poolSkirkShaman,
+    _poolSkitteringHorror,
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,

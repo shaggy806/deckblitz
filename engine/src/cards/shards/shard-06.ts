@@ -256,6 +256,7 @@ import _poolForgottenCreation from "../pool/forgotten-creation.js";
 import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
 import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
+import _poolFoster from "../pool/foster.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrostwebSpider from "../pool/frostweb-spider.js";
@@ -1042,6 +1043,7 @@ const shard: CardShard = {
     _poolForkedBranchGarami,
     _poolFormAPosse,
     _poolFortify,
+    _poolFoster,
     _poolFountainOfRenewal,
     _poolFrostMarsh,
     _poolFrostwebSpider,
