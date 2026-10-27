@@ -85,6 +85,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "6/6 Black Demon Token (Flying, Trample, Upkeep Sacrifice)",
   "6/6 Dragon Token",
   "6/6 Wurm Token",
+  "7/7 Green Elemental Token with Trample",
   "8/8 Red Green White Beast Token",
   "9/9 Golem Token",
   "Ajani's Pridemate Token",

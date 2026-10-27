@@ -767,6 +767,7 @@ import _tokensBeastToken55 from "../tokens/beast-token-5-5.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
+import _tokensGreenElementalToken77Trample from "../tokens/green-elemental-token-7-7-trample.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
 import _tokensKorAllyToken from "../tokens/kor-ally-token.js";
 import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles.js";
@@ -1541,6 +1542,7 @@ const shard: CardShard = {
     _tokensElementalToken33BlueRedFlying,
     _tokensGnomeToken,
     _tokensGolemToken,
+    _tokensGreenElementalToken77Trample,
     _tokensKnightTokenChivalricAlliance,
     _tokensKorAllyToken,
     _tokensPilotTokenCrewsVehicles,

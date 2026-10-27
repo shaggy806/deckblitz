@@ -24933,6 +24933,7 @@ import _tokensGreenCatToken11 from "./tokens/green-cat-token-1-1.js";
 import _tokensGreenDogToken11 from "./tokens/green-dog-token-1-1.js";
 import _tokensGreenElementalToken22 from "./tokens/green-elemental-token-2-2.js";
 import _tokensGreenElementalToken44 from "./tokens/green-elemental-token-4-4.js";
+import _tokensGreenElementalToken77Trample from "./tokens/green-elemental-token-7-7-trample.js";
 import _tokensGreenEnchantmentCentaurToken33 from "./tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensGreenEnchantmentSpiderTokenReach from "./tokens/green-enchantment-spider-token-reach.js";
 import _tokensGreenHippoToken11 from "./tokens/green-hippo-token-1-1.js";
@@ -50276,6 +50277,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGreenDogToken11,
   _tokensGreenElementalToken22,
   _tokensGreenElementalToken44,
+  _tokensGreenElementalToken77Trample,
   _tokensGreenEnchantmentCentaurToken33,
   _tokensGreenEnchantmentSpiderTokenReach,
   _tokensGreenHippoToken11,
@@ -75620,6 +75622,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/green-dog-token-1-1": _tokensGreenDogToken11,
   "tokens/green-elemental-token-2-2": _tokensGreenElementalToken22,
   "tokens/green-elemental-token-4-4": _tokensGreenElementalToken44,
+  "tokens/green-elemental-token-7-7-trample": _tokensGreenElementalToken77Trample,
   "tokens/green-enchantment-centaur-token-3-3": _tokensGreenEnchantmentCentaurToken33,
   "tokens/green-enchantment-spider-token-reach": _tokensGreenEnchantmentSpiderTokenReach,
   "tokens/green-hippo-token-1-1": _tokensGreenHippoToken11,
