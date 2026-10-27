@@ -195,14 +195,19 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-on-bottom-of-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   "exile-if-dies-this-turn": (n, v) => v.touch(n.target, "harm", MINOR),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
-  // "… target player controls": that player is the one hurt.
-  "destroy-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
+  // "… target player controls": that player is the one hurt. "Target X and
+  // all other Xs with the same name" (`sameNameAsTarget`): the target is.
+  "destroy-all": (n, v) => {
+    v.touch(n.controlledByTarget, "harm", MAJOR);
+    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+  },
   regenerate: (n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
   "damage-all": (n, v) => {
     v.touch(n.from, "help", MINOR);
     // "Each creature target player controls": that player is the one hurt.
     v.touch(n.controlledByTarget, "harm", MAJOR);
+    v.touch(n.filter.sameNameAsTarget, "harm", MAJOR);
   },
   "creatures-damage-controllers": none,
   // An edict: the targeted player picks what goes, so it is major rather
@@ -223,8 +228,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (from === "battlefield" || from === "stack") v.touch(n.target, "harm", DECISIVE);
     else v.touch(n.target, "help", MAJOR);
   },
-  "return-to-hand-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
-  "exile-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
+  "return-to-hand-all": (n, v) => {
+    v.touch(n.controlledByTarget, "harm", MAJOR);
+    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+  },
+  "exile-all": (n, v) => {
+    v.touch(n.controlledByTarget, "harm", MAJOR);
+    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
+  },
   exile: (n, v) => {
     v.touch(n.target, "harm", DECISIVE);
     // Haunt (rule 702.55): the creature haunted is the one whose death
@@ -321,6 +332,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "modify-pt-all": (n, v) => {
     const shrinks = amountSign(n.toughness) < 0 || amountSign(n.power) < 0;
     v.touch(n.controlledByTarget, shrinks ? "harm" : "help", MINOR);
+    v.touch(n.filter.sameNameAsTarget, shrinks ? "harm" : "help", MAJOR);
   },
   "double-pt-all": none,
   "double-counters-all": none,
@@ -757,7 +769,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
     }
     // "Enchanted creature loses flying" (Grounded).
     if ((ability.loseKeywords ?? []).length > 0) harm = true;
-    if ((ability.grantsActivated ?? []).length > 0) help = true;
+    // A granted "untap this permanent" is the way out of the Aura's own lock
+    // (Psychic Overload's "discard two artifact cards: untap this"), not a gift.
+    const escapes = (ability.grantsActivated ?? []).every(
+      (granted) => granted.effect?.kind === "untap" && granted.effect.target === "source",
+    );
+    if ((ability.grantsActivated ?? []).length > 0 && !escapes) help = true;
     for (const granted of ability.grantsTriggered ?? []) {
       if (grantedTriggerHarms(granted)) harm = true;
       else help = true;

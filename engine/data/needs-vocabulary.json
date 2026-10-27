@@ -11722,7 +11722,7 @@
    "example": "Thought Dissector: reveal until an artifact card or X cards are revealed, whichever comes first."
   },
   "effect:remove-card-type-until-eot": {
-   "family": "effect:type-changing-effects",
+   "family": "static:type-change-all-zones",
    "example": "Neurok Transmuter: '… loses artifact type until end of turn' — removeTypes is static-only."
   },
   "effect:host-of-destroyed-target": {
@@ -11730,7 +11730,7 @@
    "example": "Unforge: damage to the creature the destroyed Equipment was attached to."
   },
   "mechanic:mulligan-hand-ability": {
-   "family": "mechanic:opening-hand-actions",
+   "family": "mechanic:leyline-opening-hand",
    "example": "Serum Powder: an ability usable from the hand while a mulligan is decided."
   },
   "condition:target-player-more-life-than-you": {
@@ -11750,7 +11750,7 @@
    "example": "Auriok Siege Sled: 'target artifact creature blocks this creature this turn if able'."
   },
   "effect:delayed-sacrifice-modified-this-way": {
-   "family": "effect:delayed-trigger-refs",
+   "family": "effect:delayed-trigger-own-targets",
    "example": "Tears of Rage: 'sacrifice those creatures at end of combat' — a delayed sacrifice of the creatures the pump affected."
   }
  }
