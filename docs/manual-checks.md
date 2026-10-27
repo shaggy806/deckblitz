@@ -5547,3 +5547,13 @@ engine terms. A second thing to check is a second test.
 ### Anavolver: kick it with either kicker, or both
 - **Do:** Click Anavolver in your hand.
 - **Expect:** Four ways to cast it: unkicked, and kicked for {1}{U}, for {B} and for {1}{U}{B}. Cast it with {1}{U}{B}: it enters as a 6/6 with flying and "Pay 3 life: Regenerate this creature."
+
+## Amplify and provoke (2026-10-27, Legions)
+
+### Glowering Rogon: amplify reveals Beasts from your hand
+- **Do:** Cast Glowering Rogon. When asked, pick Krosan Vorine and Brontotherium.
+- **Expect:** The prompt offers the two Beasts, not Grizzly Bears. Both stay in your hand, shown as revealed, and the Rogon enters as a 6/6 with two +1/+1 counters.
+
+### Goblin Grappler: the provoked creature has to block it
+- **Do:** Attack with Goblin Grappler, target the tapped Grizzly Bears with its trigger and say yes. As Bob, try to confirm blockers with none, then with Hill Giant blocking.
+- **Expect:** The Bears untap. Confirm stays disabled with "Grizzly Bears must block if able" until the Bears block the Grappler.

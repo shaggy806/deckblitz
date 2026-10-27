@@ -10,6 +10,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
   context without the enclosing loop's player binding (game.ts, where the choice's `then` is
   applied), so `who: "that-player"` in the `then` reaches nobody and does nothing, silently.
+- **`put-onto-battlefield` follows a target that changed zones during the resolution.** A
+  target is checked once, as the spell or ability begins to resolve (`illegalSlot` reads the
+  `illegalTargets` found then, rule 608.2b); a step of the same resolution that moves it first
+  leaves the next step pointing at the new object, which rule 400.7 says it isn't. Found authoring
+  Celestial Gatekeeper (batch 219, a test of group A's): "When this creature dies, exile it, then
+  return up to two target Bird and/or Cleric permanent cards from your graveyard to the
+  battlefield" — targeting itself, it was exiled and then returned from exile, where its ruling
+  says it stays exiled. Not yet checked against other `put-onto-battlefield` /
+  `return-to-hand` sequences. Blocks Celestial Gatekeeper (`bug:zone-change-object-identity`).
   Found 2026-10-26 authoring Duskmantle Seer (B176), written with `who: "you"` instead — right
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.

@@ -1,0 +1,822 @@
+{
+  "batch": "B219",
+  "status": "complete",
+  "ranks": "Mirrodin (MRD, 2003-10-02): the rest of the set, 21 (taken over from the third middle walk), and Legions (LGN, 2003-02-03): whole set, 95 — the fourth middle walk's second batch, round eighteen; built amplify (rule 702.38), provoke (702.39) and the `block-if-able` blocking requirement (509.1c)",
+  "authored": [
+    {
+      "name": "Akroma's Devoted",
+      "files": [
+        "engine/src/cards/pool/akromas-devoted.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aphetto Exterminator",
+      "files": [
+        "engine/src/cards/pool/aphetto-exterminator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arc-Slogger",
+      "files": [
+        "engine/src/cards/pool/arc-slogger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Warhawk",
+      "files": [
+        "engine/src/cards/pool/aven-warhawk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Beacon of Destiny",
+      "files": [
+        "engine/src/cards/pool/beacon-of-destiny.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blade Sliver",
+      "files": [
+        "engine/src/cards/pool/blade-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bloodstoke Howler",
+      "files": [
+        "engine/src/cards/pool/bloodstoke-howler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brontotherium",
+      "files": [
+        "engine/src/cards/pool/brontotherium.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Caller of the Claw",
+      "files": [
+        "engine/src/cards/pool/caller-of-the-claw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Canopy Crawler",
+      "files": [
+        "engine/src/cards/pool/canopy-crawler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cloudreach Cavalry",
+      "files": [
+        "engine/src/cards/pool/cloudreach-cavalry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corpse Harvester",
+      "files": [
+        "engine/src/cards/pool/corpse-harvester.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crested Craghorn",
+      "files": [
+        "engine/src/cards/pool/crested-craghorn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Daru Mender",
+      "files": [
+        "engine/src/cards/pool/daru-mender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daru Sanctifier",
+      "files": [
+        "engine/src/cards/pool/daru-sanctifier.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Daru Stinger",
+      "files": [
+        "engine/src/cards/pool/daru-stinger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deathmark Prelate",
+      "files": [
+        "engine/src/cards/pool/deathmark-prelate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defender of the Order",
+      "files": [
+        "engine/src/cards/pool/defender-of-the-order.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Drinker of Sorrow",
+      "files": [
+        "engine/src/cards/pool/drinker-of-sorrow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dripping Dead",
+      "files": [
+        "engine/src/cards/pool/dripping-dead.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Duskworker",
+      "files": [
+        "engine/src/cards/pool/duskworker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echo Tracer",
+      "files": [
+        "engine/src/cards/pool/echo-tracer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Embalmed Brawler",
+      "files": [
+        "engine/src/cards/pool/embalmed-brawler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Essence Sliver",
+      "files": [
+        "engine/src/cards/pool/essence-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Feral Throwback",
+      "files": [
+        "engine/src/cards/pool/feral-throwback.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frenetic Raptor",
+      "files": [
+        "engine/src/cards/pool/frenetic-raptor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gempalm Avenger",
+      "files": [
+        "engine/src/cards/pool/gempalm-avenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gempalm Polluter",
+      "files": [
+        "engine/src/cards/pool/gempalm-polluter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gempalm Sorcerer",
+      "files": [
+        "engine/src/cards/pool/gempalm-sorcerer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gempalm Strider",
+      "files": [
+        "engine/src/cards/pool/gempalm-strider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghastly Remains",
+      "files": [
+        "engine/src/cards/pool/ghastly-remains.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glowering Rogon",
+      "files": [
+        "engine/src/cards/pool/glowering-rogon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glowrider",
+      "files": [
+        "engine/src/cards/pool/glowrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Clearcutter",
+      "files": [
+        "engine/src/cards/pool/goblin-clearcutter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Dirigible",
+      "files": [
+        "engine/src/cards/pool/goblin-dirigible.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Dynamo",
+      "files": [
+        "engine/src/cards/pool/goblin-dynamo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Firebug",
+      "files": [
+        "engine/src/cards/pool/goblin-firebug.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Grappler",
+      "files": [
+        "engine/src/cards/pool/goblin-grappler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Lookout",
+      "files": [
+        "engine/src/cards/pool/goblin-lookout.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin War Wagon",
+      "files": [
+        "engine/src/cards/pool/goblin-war-wagon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Groffskithur",
+      "files": [
+        "engine/src/cards/pool/groffskithur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hunter Sliver",
+      "files": [
+        "engine/src/cards/pool/hunter-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Imperial Hellkite",
+      "files": [
+        "engine/src/cards/pool/imperial-hellkite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Inertia Bubble",
+      "files": [
+        "engine/src/cards/pool/inertia-bubble.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kilnmouth Dragon",
+      "files": [
+        "engine/src/cards/pool/kilnmouth-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Krosan Cloudscraper",
+      "files": [
+        "engine/src/cards/pool/krosan-cloudscraper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Krosan Vorine",
+      "files": [
+        "engine/src/cards/pool/krosan-vorine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liege of the Axe",
+      "files": [
+        "engine/src/cards/pool/liege-of-the-axe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lowland Tracker",
+      "files": [
+        "engine/src/cards/pool/lowland-tracker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Magma Sliver",
+      "files": [
+        "engine/src/cards/pool/magma-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mistform Sliver",
+      "files": [
+        "engine/src/cards/pool/mistform-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mistform Ultimus",
+      "files": [
+        "engine/src/cards/pool/mistform-ultimus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Neurok Familiar",
+      "files": [
+        "engine/src/cards/pool/neurok-familiar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nim Lasher",
+      "files": [
+        "engine/src/cards/pool/nim-lasher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nim Shambler",
+      "files": [
+        "engine/src/cards/pool/nim-shambler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ogre Leadfoot",
+      "files": [
+        "engine/src/cards/pool/ogre-leadfoot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Patron of the Wild",
+      "files": [
+        "engine/src/cards/pool/patron-of-the-wild.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pearl Shard",
+      "files": [
+        "engine/src/cards/pool/pearl-shard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Plated Sliver",
+      "files": [
+        "engine/src/cards/pool/plated-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Primal Whisperer",
+      "files": [
+        "engine/src/cards/pool/primal-whisperer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Riptide Director",
+      "files": [
+        "engine/src/cards/pool/riptide-director.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rustmouth Ogre",
+      "files": [
+        "engine/src/cards/pool/rustmouth-ogre.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rustspore Ram",
+      "files": [
+        "engine/src/cards/pool/rustspore-ram.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Scion of Darkness",
+      "files": [
+        "engine/src/cards/pool/scion-of-darkness.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shaleskin Plower",
+      "files": [
+        "engine/src/cards/pool/shaleskin-plower.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skinthinner",
+      "files": [
+        "engine/src/cards/pool/skinthinner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skirk Drill Sergeant",
+      "files": [
+        "engine/src/cards/pool/skirk-drill-sergeant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skirk Marauder",
+      "files": [
+        "engine/src/cards/pool/skirk-marauder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skirk Outrider",
+      "files": [
+        "engine/src/cards/pool/skirk-outrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soldier Replica",
+      "files": [
+        "engine/src/cards/pool/soldier-replica.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spectral Sliver",
+      "files": [
+        "engine/src/cards/pool/spectral-sliver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stoic Champion",
+      "files": [
+        "engine/src/cards/pool/stoic-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sunstrike Legionnaire",
+      "files": [
+        "engine/src/cards/pool/sunstrike-legionnaire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swooping Talon",
+      "files": [
+        "engine/src/cards/pool/swooping-talon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tel-Jilad Chosen",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-chosen.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Toxin Sliver",
+      "files": [
+        "engine/src/cards/pool/toxin-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tribal Forcemage",
+      "files": [
+        "engine/src/cards/pool/tribal-forcemage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vexing Beetle",
+      "files": [
+        "engine/src/cards/pool/vexing-beetle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vile Deacon",
+      "files": [
+        "engine/src/cards/pool/vile-deacon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Voidmage Apprentice",
+      "files": [
+        "engine/src/cards/pool/voidmage-apprentice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Hope",
+      "files": [
+        "engine/src/cards/pool/wall-of-hope.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wanderguard Sentry",
+      "files": [
+        "engine/src/cards/pool/wanderguard-sentry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ward Sliver",
+      "files": [
+        "engine/src/cards/pool/ward-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Warped Researcher",
+      "files": [
+        "engine/src/cards/pool/warped-researcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Willbender",
+      "files": [
+        "engine/src/cards/pool/willbender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wingbeat Warrior",
+      "files": [
+        "engine/src/cards/pool/wingbeat-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wurmskin Forger",
+      "files": [
+        "engine/src/cards/pool/wurmskin-forger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Zombie Brute",
+      "files": [
+        "engine/src/cards/pool/zombie-brute.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Deftblade Elite",
+      "needs": [
+        "effect:prevent-combat-damage-by-source"
+      ],
+      "why": "\"Prevent all combat damage that would be dealt to and dealt by this creature this turn\": the dealt-by half has no per-object form (provoke itself is built)."
+    },
+    {
+      "name": "Sphere of Purity",
+      "needs": [
+        "replacement:prevent-n-of-damage"
+      ],
+      "why": "\"If an artifact would deal damage to you, prevent 1 of that damage\": a damage replacement prevents all or adds, never prevents 1."
+    },
+    {
+      "name": "Master of the Veil",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "No effect turns a permanent face down."
+    },
+    {
+      "name": "Dark Supplicant",
+      "needs": [
+        "effect:search-hand-graveyard-library"
+      ],
+      "why": "Searching the graveyard, hand and/or library for a card named Scion of Darkness: `SearchZones` has no hand."
+    },
+    {
+      "name": "Berserk Murlodont",
+      "needs": [
+        "amount:creatures-blocking-it",
+        "filter:blocking-trigger-object"
+      ],
+      "why": "\"Whenever a Beast becomes blocked, it gets +1/+1 for each creature blocking it\": the blocker count reads only the source."
+    },
+    {
+      "name": "Infernal Caretaker",
+      "needs": [
+        "effect:return-from-all-graveyards-to-hand"
+      ],
+      "why": "\"Return all Zombie cards from all graveyards to their owners' hands\": `return-from-graveyard` over all graveyards goes only to the battlefield."
+    },
+    {
+      "name": "Hollow Specter",
+      "needs": [
+        "decision:reveal-x-chosen-cards-from-hand"
+      ],
+      "why": "The damaged player reveals X cards of their choice and the attacker picks one: no choice of which cards are revealed."
+    },
+    {
+      "name": "Soul Nova",
+      "needs": [
+        "effect:exile-target-and-attached-equipment"
+      ],
+      "why": "\"Exile target attacking creature and all Equipment attached to it\": no filter names Equipment attached to a target."
+    },
+    {
+      "name": "Chromeshell Crab",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "Exchange control of target creature you control and target creature an opponent controls."
+    },
+    {
+      "name": "Goblin Assassin",
+      "needs": [
+        "mechanic:coin-flip-by-other-player"
+      ],
+      "why": "Each player flips a coin, with no winner or loser (its ruling)."
+    },
+    {
+      "name": "Skirk Alarmist",
+      "needs": [
+        "effect:turn-face-up"
+      ],
+      "why": "\"Turn target face-down creature you control face up\": no such effect."
+    },
+    {
+      "name": "Lavaborn Muse",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "\"At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand\": the hand-size condition reads only you or each player."
+    },
+    {
+      "name": "Unstable Hulk",
+      "needs": [
+        "effect:skip-next-turn"
+      ],
+      "why": "\"You skip your next turn\"."
+    },
+    {
+      "name": "Bane of the Living",
+      "needs": [
+        "cost:morph-x"
+      ],
+      "why": "Morph {X}{B}{B} with \"all creatures get -X/-X\" when turned face up: a morph cost has no X."
+    },
+    {
+      "name": "Weaver of Lies",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "\"Turn any number of target creatures with morph abilities other than this one face down.\""
+    },
+    {
+      "name": "Wall of Deceit",
+      "needs": [
+        "effect:turn-face-down"
+      ],
+      "why": "\"{3}: Turn this creature face down.\""
+    },
+    {
+      "name": "Whipgrass Entangler",
+      "needs": [
+        "cost:attack-tax-amount"
+      ],
+      "why": "A granted attack/block tax of {1} per Cleric on the battlefield, adding up across activations."
+    },
+    {
+      "name": "Riptide Mangler",
+      "needs": [
+        "effect:set-base-power-only"
+      ],
+      "why": "\"Change this creature's base power to target creature's power\": no effect sets base power alone."
+    },
+    {
+      "name": "Chimney Imp",
+      "needs": [
+        "effect:target-player-hand-card-to-library-top"
+      ],
+      "why": "\"Target opponent puts a card from their hand on top of their library\"."
+    },
+    {
+      "name": "Planar Guide",
+      "needs": [
+        "effect:flicker-generalized"
+      ],
+      "why": "Exile all creatures and return them at the next end step: flicker takes target slots only."
+    },
+    {
+      "name": "Warbreak Trumpeter",
+      "needs": [
+        "cost:morph-x"
+      ],
+      "why": "Morph {X}{X}{R}, creating X Goblins when turned face up: a morph cost has no X."
+    },
+    {
+      "name": "Mistform Wakecaster",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "\"Each creature you control becomes the creature type of your choice\": no effect replaces only creature types."
+    },
+    {
+      "name": "Mistform Seaswift",
+      "needs": [
+        "effect:set-creature-type"
+      ],
+      "why": "Morph creature whose ability makes it \"the creature type of your choice\": no effect replaces only creature types."
+    },
+    {
+      "name": "Grim Reminder",
+      "needs": [
+        "effect:search-reveal-punish-same-name-cast-this-turn"
+      ],
+      "why": "A card revealed from the library that stays there, and life loss for each opponent who cast a spell with that name this turn."
+    },
+    {
+      "name": "Goblin Goon",
+      "needs": [
+        "condition:controls-more-creatures-than-defending-player"
+      ],
+      "why": "\"Can't attack/block unless you control more creatures than defending/attacking player\": no such comparison."
+    },
+    {
+      "name": "Dermoplasm",
+      "needs": [
+        "filter:has-morph"
+      ],
+      "why": "\"Put a creature card with a morph ability from your hand onto the battlefield face up\": no filter for a morph ability."
+    },
+    {
+      "name": "Elvish Soultiller",
+      "needs": [
+        "effect:shuffle-graveyard-into-library"
+      ],
+      "why": "\"Shuffle all creature cards of the chosen type from your graveyard into your library\": `return-from-graveyard` goes only to the battlefield or hand."
+    },
+    {
+      "name": "Celestial Gatekeeper",
+      "needs": [
+        "bug:zone-change-object-identity"
+      ],
+      "why": "\"Exile it, then return up to two target Bird and/or Cleric permanent cards\": targeting itself, the exiled card is returned from exile (a group A test; rule 400.7, its ruling says it isn't)."
+    }
+  ]
+}

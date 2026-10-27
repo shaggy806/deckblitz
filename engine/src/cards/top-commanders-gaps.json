@@ -468,7 +468,8 @@
   "cost:reveal-any-number-from-hand",
   "keyword:sunburst",
   "condition:same-name-as-target",
-  "keyword:two-kicker-costs"
+  "keyword:two-kicker-costs",
+  "effect:must-block-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

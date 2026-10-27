@@ -8364,4 +8364,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Anavolver: kick it with either kicker, or both',
     board({ you: { bf: ['Forest*4', 'Island*2', 'Swamp'], hand: ['Anavolver'] } }),
   ),
+  // --- Amplify and provoke (2026-10-27, Legions) ------------------------------
+  preset(
+    'Glowering Rogon: amplify reveals Beasts from your hand',
+    board({ you: { bf: ['Forest*6'], hand: ['Glowering Rogon', 'Krosan Vorine', 'Brontotherium', 'Grizzly Bears'] } }),
+  ),
+  preset(
+    'Goblin Grappler: the provoked creature has to block it',
+    board({
+      you: { bf: ['Goblin Grappler'] },
+      opp: { human: true, bf: [{ name: 'Grizzly Bears', tapped: true }, 'Hill Giant'] },
+    }),
+  ),
 ]

@@ -11867,6 +11867,34 @@
   "condition:hand-size-at-turn-start": {
    "family": "condition:that-player-hand-size",
    "example": "Mindstorm Crown: 'If you had no cards in hand at the beginning of this turn, draw a card. Otherwise, this deals 1 damage to you.'"
+  },
+  "effect:return-from-all-graveyards-to-hand": {
+   "family": "effect:return-all-graveyards-under-owners-control",
+   "example": "Infernal Caretaker: 'return all Zombie cards from all graveyards to their owners' hands'"
+  },
+  "decision:reveal-x-chosen-cards-from-hand": {
+   "family": "cost:reveal-any-number-from-hand",
+   "example": "Hollow Specter: the damaged player reveals X cards of their choice, the attacker picks one to discard"
+  },
+  "effect:exile-target-and-attached-equipment": {
+   "family": "effect:attached-effect-ref",
+   "example": "Soul Nova: 'exile target attacking creature and all Equipment attached to it'"
+  },
+  "cost:morph-x": {
+   "family": "cost:morph-reveal-card",
+   "example": "Bane of the Living: Morph {X}{B}{B}, X read by the turned-face-up trigger"
+  },
+  "effect:search-reveal-punish-same-name-cast-this-turn": {
+   "family": "condition:same-name-as-target",
+   "example": "Grim Reminder: reveal a nonland card from the library, each opponent who cast a spell with that name this turn loses 6 life"
+  },
+  "condition:controls-more-creatures-than-defending-player": {
+   "family": "condition:defending-player-controls",
+   "example": "Goblin Goon: can't attack unless you control more creatures than defending player"
+  },
+  "filter:has-morph": {
+   "family": "mechanic:morph",
+   "example": "Dermoplasm: 'a creature card with a morph ability'"
   }
  }
 }

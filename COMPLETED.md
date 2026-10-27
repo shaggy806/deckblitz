@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Amplify and provoke, and Legions — Legions and Mirrodin are whole** (batch 219, the fourth
+  middle walk, 2026-10-27, `effect:must-block-this-turn`): **built** amplify (rule 702.38 —
+  `CardDefinition.amplify`, the hand's cards sharing a creature type revealed as it enters),
+  provoke (702.39 — the `provoke()` helper) and the `block-if-able` effect under it, a blocking
+  requirement on one creature (509.1c — `GameState.blockRequirements`, weighed beside Lure in
+  `combat/blocking.ts`), which the 34 triaged "blocks (it) this turn if able" cards waited on;
+  the scaffolder reads both keywords. 88 of 116 authored — the rest of Mirrodin (Arc-Slogger,
+  Inertia Bubble) and Legions (Willbender, Essence Sliver, Toxin Sliver, Imperial Hellkite,
+  Hunter Sliver, the amplify and provoke cards) — by five `card-author` agents and the lead, and
+  28 blocked (`B219.json`).
 - **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
   remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
   Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
