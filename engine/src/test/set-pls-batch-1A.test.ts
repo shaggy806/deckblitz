@@ -67,6 +67,18 @@ describe("Thornscape Familiar", () => {
   });
 });
 
+describe("Ruby Medallion", () => {
+  it("discounts only its controller's red spells", () => {
+    const { game } = table();
+    spawn(game, "Ruby Medallion", B);
+    lands(game, "Mountain", 1);
+    expect(() => cast(game, toHand(game, "Searing Spear"), { targets: [ref(B)] })).toThrow();
+    lands(game, "Mountain", 1);
+    cast(game, toHand(game, "Searing Spear"), { targets: [ref(B)] });
+    expect(life(game, B)).toBe(17);
+  });
+});
+
 describe("Tahngarth, Talruum Hero", () => {
   it("deals its power to a creature and takes that creature's power back", () => {
     const { game } = table();
