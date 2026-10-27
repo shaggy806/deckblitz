@@ -7,7 +7,8 @@ You are cleaning up the vocabulary of "need keys" for a Magic: The Gathering rul
 key names an engine feature that some unimplemented cards are waiting on. People wrote the keys
 card by card, so several keys often name the same feature in different words.
 
-{{BRIEF}} is one family of keys. Each open key has its card count, its description and up to two
+{{BRIEF}} is one family of keys, or a page of small families, each under its own `#` heading.
+Each open key has its card count, its description and up to two
 quoted reasons why a card was blocked. The family's built keys are listed at the end, with what
 each does. {{CANDIDATES}} lists pairs a script flagged because their names look alike. Use them
 as hints only: many flagged pairs are different features.

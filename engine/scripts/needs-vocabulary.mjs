@@ -378,7 +378,7 @@ function main() {
 /** Each card's newest record, keyed by its front face: a later triage saw a
  * later engine, and a split card's record by its full name supersedes an
  * older one by its first half. */
-function latestByCard(records) {
+export function latestByCard(records) {
   const latest = new Map();
   for (const r of records) {
     const prev = latest.get(frontName(r.name));
@@ -388,7 +388,7 @@ function latestByCard(records) {
 }
 
 /** A record's needs as canonical keys, meta keys dropped, each once. */
-const keysOf = (record, vocab) => [
+export const keysOf = (record, vocab) => [
   ...new Set(record.needs.map((raw) => vocab.canonical(raw) ?? raw).filter((k) => !vocab.isMeta(k))),
 ];
 
@@ -474,7 +474,7 @@ const STOP = new Set(["a", "an", "the", "of", "to", "as", "on", "in", "for", "wi
  * (`effect:x`, `static:x`, any family); within a family, one suffix's tokens a
  * run inside the other's; or most tokens shared (Jaccard ≥ 0.6, two or more).
  */
-function mergeCandidates(vocab, cards) {
+export function mergeCandidates(vocab, cards) {
   const split = (k) => {
     const i = k.indexOf(":");
     const suffix = i < 0 ? k : k.slice(i + 1);
@@ -613,58 +613,89 @@ function greedy(vocab, waiting, top, familyArg) {
 }
 
 /**
- * `--brief <family>`: what a model judges a family from — each open key with
- * its cards waiting, description and up to two short `why`s, then the family's
- * built keys (`--open-only` leaves those out). Paged at ~4K tokens
- * (`--page N`).
+ * Every open key over the cards' latest records: `{ cards, only, whys }` — the
+ * cards waiting, those it alone blocks, and up to two short `why`s (one that
+ * repeats the key's own example adds nothing). What `--brief` and the
+ * judging agents' pages are made of.
  */
-function brief(vocab, waiting, familyArg, openOnly, page) {
-  const BUDGET = 14000;
-  const family = vocab.canonical(familyArg) ?? familyArg;
-  const inFamily = (k) => k === family || vocab.familyOf(k) === family;
+export function openKeyStats(vocab, waiting) {
   const open = new Map();
   for (const r of latestByCard(waiting).values()) {
     const keys = keysOf(r, vocab).filter((k) => !vocab.isBuilt(k));
-    for (const k of keys.filter(inFamily)) {
+    for (const k of keys) {
       const e = open.get(k) ?? { cards: 0, only: 0, whys: [] };
       e.cards += 1;
       if (keys.length === 1) e.only += 1;
-      // A why that repeats the key's own example adds nothing.
       const said = clip(`${r.name}: ${r.why}`, 150);
       const example = clip(vocab.features.get(k)?.example ?? "", 150);
       if (e.whys.length < 2 && r.why && said !== example) e.whys.push(said);
       open.set(k, e);
     }
   }
-  const built = [...vocab.built].filter(inFamily).sort();
-  if (open.size === 0 && built.length === 0) {
-    console.log(`No keys in family ${family}.`);
-    process.exitCode = 1;
-    return;
-  }
-  const what = (k) => clip(vocab.features.get(k)?.description || vocab.features.get(k)?.example || "(no description)", 200);
-  const blocks = [...open]
-    .sort((a, b) => b[1].cards - a[1].cards || a[0].localeCompare(b[0]))
-    .map(([k, e]) => [`- ${k} [${e.cards} card${e.cards === 1 ? "" : "s"}, ${e.only} only this] ${what(k)}`, ...e.whys.map((w) => `    · ${w}`)].join("\n"));
-  if (!openOnly && built.length > 0) {
-    blocks.push(`Built in this family (${built.length}):`);
-    for (const k of built) blocks.push(`- ${k}: ${clip(vocab.features.get(k)?.description ?? "", 110)}`);
-  }
+  return open;
+}
+
+/** One open key as a brief shows it: count, description, then its whys. */
+export function keyBlock(vocab, key, e) {
+  const what = clip(vocab.features.get(key)?.description || vocab.features.get(key)?.example || "(no description)", 200);
+  const head = `- ${key} [${e.cards} card${e.cards === 1 ? "" : "s"}, ${e.only} only this] ${what}`;
+  return [head, ...e.whys.map((w) => `    · ${w}`)].join("\n");
+}
+
+/** Text blocks packed into pages of at most `budget` characters. */
+export function pageBlocks(blocks, budget = 14000) {
   const pages = [[]];
   let size = 0;
   for (const b of blocks) {
-    if (size + b.length > BUDGET && pages.at(-1).length > 0) {
+    if (size + b.length > budget && pages.at(-1).length > 0) {
       pages.push([]);
       size = 0;
     }
     pages.at(-1).push(b);
     size += b.length + 1;
   }
+  return pages;
+}
+
+/**
+ * A family's brief as blocks: each open key (most cards first), then — unless
+ * `openOnly` — its built keys. `null` for a family with neither.
+ */
+export function familyBrief(vocab, waiting, familyArg, { openOnly = false, stats } = {}) {
+  const family = vocab.canonical(familyArg) ?? familyArg;
+  const inFamily = (k) => k === family || vocab.familyOf(k) === family;
+  const open = [...(stats ?? openKeyStats(vocab, waiting))].filter(([k]) => inFamily(k));
+  const built = [...vocab.built].filter(inFamily).sort();
+  if (open.length === 0 && built.length === 0) return null;
+  const blocks = open
+    .sort((a, b) => b[1].cards - a[1].cards || a[0].localeCompare(b[0]))
+    .map(([k, e]) => keyBlock(vocab, k, e));
+  if (!openOnly && built.length > 0) {
+    blocks.push(`Built in this family (${built.length}):`);
+    for (const k of built) blocks.push(`- ${k}: ${clip(vocab.features.get(k)?.description ?? "", 110)}`);
+  }
+  const cardNeeds = open.reduce((n, [, e]) => n + e.cards, 0);
+  const desc = vocab.features.get(family)?.description;
+  return { family, head: `# ${family}${desc ? ` — ${clip(desc, 200)}` : ""}`, openKeys: open.length, cardNeeds, built: built.length, blocks };
+}
+
+/**
+ * `--brief <family>`: what a model judges a family from — each open key with
+ * its cards waiting, description and up to two short `why`s, then the family's
+ * built keys (`--open-only` leaves those out). Paged at ~4K tokens
+ * (`--page N`).
+ */
+function brief(vocab, waiting, familyArg, openOnly, page) {
+  const b = familyBrief(vocab, waiting, familyArg, { openOnly });
+  if (b === null) {
+    console.log(`No keys in family ${vocab.canonical(familyArg) ?? familyArg}.`);
+    process.exitCode = 1;
+    return;
+  }
+  const pages = pageBlocks(b.blocks);
   const n = Math.min(Math.max(1, page), pages.length);
-  const cardsWaiting = [...open.values()].reduce((s, e) => s + e.cards, 0);
-  const head = vocab.features.get(family)?.description;
-  console.log(`# ${family}${head ? ` — ${clip(head, 200)}` : ""}`);
-  console.log(`${open.size} open keys (${cardsWaiting} card-needs), ${built.length} built. Page ${n} of ${pages.length}${n < pages.length ? ` (next: --page ${n + 1})` : ""}.\n`);
+  console.log(b.head);
+  console.log(`${b.openKeys} open keys (${b.cardNeeds} card-needs), ${b.built} built. Page ${n} of ${pages.length}${n < pages.length ? ` (next: --page ${n + 1})` : ""}.\n`);
   console.log(pages[n - 1].join("\n"));
 }
 
