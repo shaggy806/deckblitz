@@ -51,6 +51,11 @@ const NO_TOKEN_PRINTING = new Set([
   // Nuisance Engine (MRD)'s 0/1 colorless artifact Pest: no token printing in
   // the Oracle snapshot.
   "Pest Token (Colorless Artifact, 0/1)",
+  // Wirefly Hive (DST)'s Wirefly and Wand of the Elements (DST)'s Elementals:
+  // no token printing on Scryfall or in the Oracle snapshot.
+  "Wirefly Token",
+  "2/2 Blue Elemental Token (Flying)",
+  "3/3 Red Elemental Token",
   // Penumbra Kavu (APC)'s 3/3 black Kavu and Haunted Angel (APC)'s 3/3 black
   // flying Angel: no token printing in the Oracle snapshot.
   "Kavu Token (Black, 3/3)",

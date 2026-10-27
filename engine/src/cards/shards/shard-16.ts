@@ -260,6 +260,7 @@ import _poolGalestrike from "../pool/galestrike.js";
 import _poolGalvanicJuggernaut from "../pool/galvanic-juggernaut.js";
 import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
+import _poolGeminiEngine from "../pool/gemini-engine.js";
 import _poolGemstoneArray from "../pool/gemstone-array.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
@@ -282,6 +283,7 @@ import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
 import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
+import _poolGraveConsequences from "../pool/grave-consequences.js";
 import _poolGraveResearcher from "../pool/grave-researcher.js";
 import _poolGraveTitan from "../pool/grave-titan.js";
 import _poolGravenCairns from "../pool/graven-cairns.js";
@@ -433,6 +435,7 @@ import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMuckDrubb from "../pool/muck-drubb.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
+import _poolMyrMatrix from "../pool/myr-matrix.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNagaoBoundByHonor from "../pool/nagao-bound-by-honor.js";
@@ -760,6 +763,7 @@ import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
 import _poolWallOfHeat from "../pool/wall-of-heat.js";
 import _poolWallOfLava from "../pool/wall-of-lava.js";
+import _poolWandOfTheElements from "../pool/wand-of-the-elements.js";
 import _poolWandOfVertebrae from "../pool/wand-of-vertebrae.js";
 import _poolWanderingGoblins from "../pool/wandering-goblins.js";
 import _poolWarbriarBlessing from "../pool/warbriar-blessing.js";
@@ -820,6 +824,7 @@ import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
 import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
 import _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin from "../tokens/vampire-token-edgar-charmed-groom-edgar-markovs-coffin.js";
 import _tokensWallTokenBuildersTalent from "../tokens/wall-token-builders-talent.js";
+import _tokensWireflyToken from "../tokens/wirefly-token.js";
 import _tokensXXDemonTokenFlying from "../tokens/x-x-demon-token-flying.js";
 import _tokensZombieHorrorToken from "../tokens/zombie-horror-token.js";
 import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
@@ -1083,6 +1088,7 @@ const shard: CardShard = {
     _poolGalvanicJuggernaut,
     _poolGatekeeperOfMalakir,
     _poolGearsmithGuardian,
+    _poolGeminiEngine,
     _poolGemstoneArray,
     _poolGenghisFrog,
     _poolGeomancersGambit,
@@ -1105,6 +1111,7 @@ const shard: CardShard = {
     _poolGrafReaver,
     _poolGrapeshot,
     _poolGraspOfDarkness,
+    _poolGraveConsequences,
     _poolGraveResearcher,
     _poolGraveTitan,
     _poolGravenCairns,
@@ -1256,6 +1263,7 @@ const shard: CardShard = {
     _poolMuckDrubb,
     _poolMundasVanguard,
     _poolMusesEncouragement,
+    _poolMyrMatrix,
     _poolMyrSire,
     _poolMyrTurbine,
     _poolNagaoBoundByHonor,
@@ -1583,6 +1591,7 @@ const shard: CardShard = {
     _poolWallOfGranite,
     _poolWallOfHeat,
     _poolWallOfLava,
+    _poolWandOfTheElements,
     _poolWandOfVertebrae,
     _poolWanderingGoblins,
     _poolWarbriarBlessing,
@@ -1645,6 +1654,7 @@ const shard: CardShard = {
     _tokensTyranidToken55,
     _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin,
     _tokensWallTokenBuildersTalent,
+    _tokensWireflyToken,
     _tokensXXDemonTokenFlying,
     _tokensZombieHorrorToken,
     _tokensZombieWarriorToken,

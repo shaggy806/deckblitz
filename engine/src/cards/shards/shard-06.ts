@@ -55,6 +55,7 @@ import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
+import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBarbedFoliage from "../pool/barbed-foliage.js";
@@ -212,6 +213,7 @@ import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
+import _poolEchoingRuin from "../pool/echoing-ruin.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -254,6 +256,7 @@ import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrostwebSpider from "../pool/frostweb-spider.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFumarole from "../pool/fumarole.js";
+import _poolFuneralPyre from "../pool/funeral-pyre.js";
 import _poolFurybornHellkite from "../pool/furyborn-hellkite.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
@@ -296,6 +299,7 @@ import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
+import _poolGrizzlyFate from "../pool/grizzly-fate.js";
 import _poolGrotagNightRunner from "../pool/grotag-night-runner.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
@@ -568,6 +572,7 @@ import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShieldOfKaldra from "../pool/shield-of-kaldra.js";
 import _poolShinewend from "../pool/shinewend.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShriekhorn from "../pool/shriekhorn.js";
@@ -826,6 +831,7 @@ const shard: CardShard = {
     _poolBalambTRexaur,
     _poolBallLightning,
     _poolBalothPrime,
+    _poolBanishment,
     _poolBantBattlemage,
     _poolBaralsExpertise,
     _poolBarbedFoliage,
@@ -983,6 +989,7 @@ const shard: CardShard = {
     _poolDynamiteDiver,
     _poolEarthenAlly,
     _poolEbonDragon,
+    _poolEchoingRuin,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
@@ -1025,6 +1032,7 @@ const shard: CardShard = {
     _poolFrostwebSpider,
     _poolFrozenShade,
     _poolFumarole,
+    _poolFuneralPyre,
     _poolFurybornHellkite,
     _poolFyndhornElves,
     _poolGalvanicBlast,
@@ -1067,6 +1075,7 @@ const shard: CardShard = {
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
     _poolGrislySalvage,
+    _poolGrizzlyFate,
     _poolGrotagNightRunner,
     _poolGroundbreaker,
     _poolGuacMarshmallowPizza,
@@ -1339,6 +1348,7 @@ const shard: CardShard = {
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,
+    _poolShieldOfKaldra,
     _poolShinewend,
     _poolShortcutSeeker,
     _poolShriekhorn,

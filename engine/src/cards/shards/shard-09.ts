@@ -469,6 +469,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
@@ -503,6 +504,7 @@ import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
+import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
@@ -696,6 +698,7 @@ import _poolTombTyrant from "../pool/tomb-tyrant.js";
 import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
+import _poolTrainedPronghorn from "../pool/trained-pronghorn.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
@@ -1258,6 +1261,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
+    _poolPhantomTiger,
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
     _poolPhytoburst,
@@ -1292,6 +1296,7 @@ const shard: CardShard = {
     _poolPterodonKnight,
     _poolPunySnack,
     _poolQuestForTheGemblades,
+    _poolQuicksilverBehemoth,
     _poolQuilledCharger,
     _poolRageReflection,
     _poolRainSlickedCopse,
@@ -1485,6 +1490,7 @@ const shard: CardShard = {
     _poolTorporDust,
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
+    _poolTrainedPronghorn,
     _poolTraxosScourgeEternal,
     _poolTreacherousPitDweller,
     _poolTrenchpost,

@@ -193,6 +193,7 @@ import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
 import _poolEarthshape from "../pool/earthshape.js";
+import _poolEchoingCourage from "../pool/echoing-courage.js";
 import _poolEddymurkCrab from "../pool/eddymurk-crab.js";
 import _poolEdgeRover from "../pool/edge-rover.js";
 import _poolElfhameWurm from "../pool/elfhame-wurm.js";
@@ -349,6 +350,7 @@ import _poolKithkinShielddare from "../pool/kithkin-shielddare.js";
 import _poolKnucklesTheEchidna from "../pool/knuckles-the-echidna.js";
 import _poolKoskunFalls from "../pool/koskun-falls.js";
 import _poolKravTheUnredeemed from "../pool/krav-the-unredeemed.js";
+import _poolKrosanWayfarer from "../pool/krosan-wayfarer.js";
 import _poolKruinOutlaw from "../pool/kruin-outlaw.js";
 import _poolLaceWithMoonglove from "../pool/lace-with-moonglove.js";
 import _poolLanguish from "../pool/languish.js";
@@ -986,6 +988,7 @@ const shard: CardShard = {
     _poolEagerTrufflesnout,
     _poolEarthquake,
     _poolEarthshape,
+    _poolEchoingCourage,
     _poolEddymurkCrab,
     _poolEdgeRover,
     _poolElfhameWurm,
@@ -1142,6 +1145,7 @@ const shard: CardShard = {
     _poolKnucklesTheEchidna,
     _poolKoskunFalls,
     _poolKravTheUnredeemed,
+    _poolKrosanWayfarer,
     _poolKruinOutlaw,
     _poolLaceWithMoonglove,
     _poolLanguish,

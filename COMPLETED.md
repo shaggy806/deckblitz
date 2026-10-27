@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
+  remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
+  Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
+  Struggle, Silver Seraph — and 47 blocked (`B217.json`), no feature built.
+- **"And all other permanents with the same name as that permanent", and Darksteel — Darksteel
+  is whole** (batch 214, the third middle walk, 2026-10-27, `condition:same-name-as-target`):
+  **built** `CardFilter.sameNameAsTarget` (rule 201.2a — the target and its untargeted namesakes
+  in one `-all` effect, a face-down target alone; the scaffolder reads the destroy, exile,
+  return-to-hand and +N/+N forms) and authored the Echoing cycle with it and ten earlier cards:
+  Maelstrom Pulse, Detention Sphere, Bile Blight, Declaration in Stone, Deputy of Detention,
+  Banishment, Sever the Bloodline, Homing Lightning, Izzet Staticaster, Wake of Destruction. 68
+  of Darksteel's 102 authored — Gemini Engine, Spellbinder, Vex, Furnace Dragon, Myr Matrix,
+  Wirefly Hive, Pristine Angel — by five `card-author` agents and the lead, and 34 blocked
+  (`B214.json`).
 - **Two kicker costs, and Apocalypse — Apocalypse is whole** (batch 218, the sixth middle walk,
   2026-10-27, `keyword:two-kicker-costs`): **built** "Kicker [A] and/or [B]" (rule 702.33b, f —
   `kicker.second`, offered as the first, the second or both; `self-kicked`'s `with` for "kicked

@@ -93,6 +93,7 @@ import _poolBurningHands from "../pool/burning-hands.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
 import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
+import _poolCagemail from "../pool/cagemail.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
@@ -392,6 +393,7 @@ import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
+import _poolMirrorWall from "../pool/mirror-wall.js";
 import _poolMistmeadowWitch from "../pool/mistmeadow-witch.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
@@ -514,6 +516,7 @@ import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResoundingScream from "../pool/resounding-scream.js";
 import _poolResurrection from "../pool/resurrection.js";
+import _poolRetract from "../pool/retract.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
@@ -759,6 +762,7 @@ import _poolWindbornMuse from "../pool/windborn-muse.js";
 import _poolWingsOfTheGuard from "../pool/wings-of-the-guard.js";
 import _poolWirewoodLodge from "../pool/wirewood-lodge.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
+import _poolWormfangTurtle from "../pool/wormfang-turtle.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
 import _poolWuInfantry from "../pool/wu-infantry.js";
 import _poolWydwenTheBitingGale from "../pool/wydwen-the-biting-gale.js";
@@ -887,6 +891,7 @@ const shard: CardShard = {
     _poolBurntOffering,
     _poolBurrogBarrage,
     _poolCaesarLegionsEmperor,
+    _poolCagemail,
     _poolCalamityOfCinders,
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
@@ -1186,6 +1191,7 @@ const shard: CardShard = {
     _poolMinotaurWarrior,
     _poolMintstrosity,
     _poolMirenTheMoaningWell,
+    _poolMirrorWall,
     _poolMistmeadowWitch,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
@@ -1308,6 +1314,7 @@ const shard: CardShard = {
     _poolRepurposedEnforcer,
     _poolResoundingScream,
     _poolResurrection,
+    _poolRetract,
     _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRiotDevils,
@@ -1553,6 +1560,7 @@ const shard: CardShard = {
     _poolWingsOfTheGuard,
     _poolWirewoodLodge,
     _poolWitnessOfTheAges,
+    _poolWormfangTurtle,
     _poolWrathfulJailbreaker,
     _poolWuInfantry,
     _poolWydwenTheBitingGale,

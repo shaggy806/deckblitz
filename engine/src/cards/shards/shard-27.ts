@@ -340,6 +340,7 @@ import _poolKulrathMystic from "../pool/kulrath-mystic.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLabyrinthGuardian from "../pool/labyrinth-guardian.js";
 import _poolLanternOfRevealing from "../pool/lantern-of-revealing.js";
+import _poolLaquatussDisdain from "../pool/laquatuss-disdain.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLavaclawReaches from "../pool/lavaclaw-reaches.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
@@ -549,6 +550,8 @@ import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolShowOfConfidence from "../pool/show-of-confidence.js";
 import _poolShowstopper from "../pool/showstopper.js";
 import _poolShredsOfSanity from "../pool/shreds-of-sanity.js";
+import _poolShrivelingRot from "../pool/shriveling-rot.js";
+import _poolShunt from "../pool/shunt.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
@@ -626,6 +629,7 @@ import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
+import _poolTelJiladOutrider from "../pool/tel-jilad-outrider.js";
 import _poolTellerOfTales from "../pool/teller-of-tales.js";
 import _poolTellingTime from "../pool/telling-time.js";
 import _poolTempleOfEnlightenment from "../pool/temple-of-enlightenment.js";
@@ -1098,6 +1102,7 @@ const shard: CardShard = {
     _poolKyoshiWarriors,
     _poolLabyrinthGuardian,
     _poolLanternOfRevealing,
+    _poolLaquatussDisdain,
     _poolLathnuSailback,
     _poolLavaclawReaches,
     _poolLeapingLizard,
@@ -1307,6 +1312,8 @@ const shard: CardShard = {
     _poolShowOfConfidence,
     _poolShowstopper,
     _poolShredsOfSanity,
+    _poolShrivelingRot,
+    _poolShunt,
     _poolSigardianSavior,
     _poolSilverShroudCostume,
     _poolSilverbackElder,
@@ -1384,6 +1391,7 @@ const shard: CardShard = {
     _poolTalismanOfIndulgence,
     _poolTarriansSoulcleaver,
     _poolTawnossWand,
+    _poolTelJiladOutrider,
     _poolTellerOfTales,
     _poolTellingTime,
     _poolTempleOfEnlightenment,

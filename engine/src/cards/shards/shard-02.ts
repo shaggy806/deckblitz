@@ -36,6 +36,7 @@ import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAttemptedMurder from "../pool/attempted-murder.js";
+import _poolAuriokGlaivemaster from "../pool/auriok-glaivemaster.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
 import _poolBadRiver from "../pool/bad-river.js";
@@ -718,6 +719,7 @@ import _poolVivienReid from "../pool/vivien-reid.js";
 import _poolVoraciousTyphon from "../pool/voracious-typhon.js";
 import _poolVowOfLightning from "../pool/vow-of-lightning.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
+import _poolWakeOfDestruction from "../pool/wake-of-destruction.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
 import _poolWallOfFaith from "../pool/wall-of-faith.js";
@@ -795,6 +797,7 @@ const shard: CardShard = {
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
     _poolAttemptedMurder,
+    _poolAuriokGlaivemaster,
     _poolAvenEnvoy,
     _poolAxebaneStag,
     _poolBadRiver,
@@ -1477,6 +1480,7 @@ const shard: CardShard = {
     _poolVoraciousTyphon,
     _poolVowOfLightning,
     _poolVrenTheRelentless,
+    _poolWakeOfDestruction,
     _poolWakedancer,
     _poolWallOfEarth,
     _poolWallOfFaith,

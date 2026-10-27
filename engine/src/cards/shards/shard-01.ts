@@ -181,6 +181,7 @@ import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExavaRakdosBloodWitch from "../pool/exava-rakdos-blood-witch.js";
+import _poolExoskeletalArmor from "../pool/exoskeletal-armor.js";
 import _poolExpel from "../pool/expel.js";
 import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
@@ -314,6 +315,7 @@ import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
+import _poolKarstoderm from "../pool/karstoderm.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
@@ -578,6 +580,7 @@ import _poolSoundTheCall from "../pool/sound-the-call.js";
 import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
+import _poolSpellgorgerBarbarian from "../pool/spellgorger-barbarian.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
 import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
@@ -680,6 +683,7 @@ import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolUtopiaVow from "../pool/utopia-vow.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
+import _poolValor from "../pool/valor.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
@@ -700,6 +704,7 @@ import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVortexRunner from "../pool/vortex-runner.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolVraskasStoneglare from "../pool/vraskas-stoneglare.js";
+import _poolVulshokWarBoar from "../pool/vulshok-war-boar.js";
 import _poolWanderInDeath from "../pool/wander-in-death.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
     _poolExavaRakdosBloodWitch,
+    _poolExoskeletalArmor,
     _poolExpel,
     _poolEyekite,
     _poolEzekielSimsSpiderTotem,
@@ -1068,6 +1074,7 @@ const shard: CardShard = {
     _poolKaradorGhostChieftain,
     _poolKarakas,
     _poolKarrthusTyrantOfJund,
+    _poolKarstoderm,
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeldonWarlord,
@@ -1332,6 +1339,7 @@ const shard: CardShard = {
     _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,
+    _poolSpellgorgerBarbarian,
     _poolSpewFlame,
     _poolSphinxOfTheFinalWord,
     _poolSphinxsHerald,
@@ -1434,6 +1442,7 @@ const shard: CardShard = {
     _poolUrzasPowerPlant,
     _poolUtopiaVow,
     _poolValakutTheMoltenPinnacle,
+    _poolValor,
     _poolVampireInterloper,
     _poolVampiricFeast,
     _poolVanquishTheHorde,
@@ -1454,6 +1463,7 @@ const shard: CardShard = {
     _poolVortexRunner,
     _poolVoteOut,
     _poolVraskasStoneglare,
+    _poolVulshokWarBoar,
     _poolWanderInDeath,
     _poolWanderOff,
     _poolWandertaleMentor,

@@ -105,6 +105,7 @@ import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
 import _poolCacophodon from "../pool/cacophodon.js";
+import _poolCanopyClaws from "../pool/canopy-claws.js";
 import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
@@ -238,6 +239,7 @@ import _poolFlowstoneInfusion from "../pool/flowstone-infusion.js";
 import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
 import _poolFoggySwampVinebender from "../pool/foggy-swamp-vinebender.js";
+import _poolFolkMedicine from "../pool/folk-medicine.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
 import _poolFootbottomFeast from "../pool/footbottom-feast.js";
 import _poolFortressKinGuard from "../pool/fortress-kin-guard.js";
@@ -292,6 +294,7 @@ import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js"
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
 import _poolHaruspex from "../pool/haruspex.js";
+import _poolHarvesterDruid from "../pool/harvester-druid.js";
 import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
@@ -578,6 +581,7 @@ import _poolShrineOfBoundlessGrowth from "../pool/shrine-of-boundless-growth.js"
 import _poolShuGeneral from "../pool/shu-general.js";
 import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
+import _poolSilverSeraph from "../pool/silver-seraph.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
@@ -857,6 +861,7 @@ const shard: CardShard = {
     _poolBumpInTheNight,
     _poolCabalPit,
     _poolCacophodon,
+    _poolCanopyClaws,
     _poolCanyonCrab,
     _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
@@ -990,6 +995,7 @@ const shard: CardShard = {
     _poolFlumph,
     _poolFlushOut,
     _poolFoggySwampVinebender,
+    _poolFolkMedicine,
     _poolFontOfFortunes,
     _poolFootbottomFeast,
     _poolFortressKinGuard,
@@ -1044,6 +1050,7 @@ const shard: CardShard = {
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,
     _poolHaruspex,
+    _poolHarvesterDruid,
     _poolHarvesterOfMisery,
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
@@ -1330,6 +1337,7 @@ const shard: CardShard = {
     _poolShuGeneral,
     _poolSidarJabari,
     _poolSilundiVision,
+    _poolSilverSeraph,
     _poolSimicRagworm,
     _poolSinuousStriker,
     _poolSirensRuse,

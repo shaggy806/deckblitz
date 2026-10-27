@@ -22,6 +22,7 @@ import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
+import _poolAncestorsChosen from "../pool/ancestors-chosen.js";
 import _poolAncestralKnowledge from "../pool/ancestral-knowledge.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
@@ -394,6 +395,7 @@ import _poolMindwarper from "../pool/mindwarper.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
+import _poolMirrodinsCore from "../pool/mirrodins-core.js";
 import _poolMirrorGallery from "../pool/mirror-gallery.js";
 import _poolMoat from "../pool/moat.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
@@ -621,6 +623,7 @@ import _poolSwordOfWealthAndPower from "../pool/sword-of-wealth-and-power.js";
 import _poolSylvokExplorer from "../pool/sylvok-explorer.js";
 import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTalasResearcher from "../pool/talas-researcher.js";
+import _poolTalonOfPain from "../pool/talon-of-pain.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolAlchemistsApprentice,
     _poolAlleyAssailant,
     _poolAncestorsAid,
+    _poolAncestorsChosen,
     _poolAncestralKnowledge,
     _poolAngelsMercy,
     _poolAnnihilatingGlare,
@@ -1167,6 +1171,7 @@ const shard: CardShard = {
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
+    _poolMirrodinsCore,
     _poolMirrorGallery,
     _poolMoat,
     _poolMobLookout,
@@ -1394,6 +1399,7 @@ const shard: CardShard = {
     _poolSylvokExplorer,
     _poolTaintedStrike,
     _poolTalasResearcher,
+    _poolTalonOfPain,
     _poolTangledVale,
     _poolTattermungeWitch,
     _poolTavernBrawler,

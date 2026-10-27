@@ -1,0 +1,727 @@
+{
+  "batch": "B217",
+  "status": "complete",
+  "ranks": "Judgment (JUD, 2002-05-27): whole set, 102 (the rest after earlier walks took 39; the fifth middle walk, Judgment back to Odyssey)",
+  "authored": [
+    {
+      "name": "Ancestor's Chosen",
+      "files": [
+        "engine/src/cards/pool/ancestors-chosen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anurid Barkripper",
+      "files": [
+        "engine/src/cards/pool/anurid-barkripper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Anurid Brushhopper",
+      "files": [
+        "engine/src/cards/pool/anurid-brushhopper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arcane Teachings",
+      "files": [
+        "engine/src/cards/pool/arcane-teachings.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Battlewise Aven",
+      "files": [
+        "engine/src/cards/pool/battlewise-aven.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cagemail",
+      "files": [
+        "engine/src/cards/pool/cagemail.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Canopy Claws",
+      "files": [
+        "engine/src/cards/pool/canopy-claws.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Centaur Rootcaster",
+      "files": [
+        "engine/src/cards/pool/centaur-rootcaster.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cephalid Inkshrouder",
+      "files": [
+        "engine/src/cards/pool/cephalid-inkshrouder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chastise",
+      "files": [
+        "engine/src/cards/pool/chastise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Commander Eesha",
+      "files": [
+        "engine/src/cards/pool/commander-eesha.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Driller",
+      "files": [
+        "engine/src/cards/pool/dwarven-driller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Scorcher",
+      "files": [
+        "engine/src/cards/pool/dwarven-scorcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Earsplitting Rats",
+      "files": [
+        "engine/src/cards/pool/earsplitting-rats.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Elephant Guide",
+      "files": [
+        "engine/src/cards/pool/elephant-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Envelop",
+      "files": [
+        "engine/src/cards/pool/envelop.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Epic Struggle",
+      "files": [
+        "engine/src/cards/pool/epic-struggle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Exoskeletal Armor",
+      "files": [
+        "engine/src/cards/pool/exoskeletal-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fledgling Dragon",
+      "files": [
+        "engine/src/cards/pool/fledgling-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Folk Medicine",
+      "files": [
+        "engine/src/cards/pool/folk-medicine.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Forcemage Advocate",
+      "files": [
+        "engine/src/cards/pool/forcemage-advocate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Funeral Pyre",
+      "files": [
+        "engine/src/cards/pool/funeral-pyre.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grave Consequences",
+      "files": [
+        "engine/src/cards/pool/grave-consequences.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grizzly Fate",
+      "files": [
+        "engine/src/cards/pool/grizzly-fate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harvester Druid",
+      "files": [
+        "engine/src/cards/pool/harvester-druid.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hunting Grounds",
+      "files": [
+        "engine/src/cards/pool/hunting-grounds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Krosan Wayfarer",
+      "files": [
+        "engine/src/cards/pool/krosan-wayfarer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Laquatus's Disdain",
+      "files": [
+        "engine/src/cards/pool/laquatuss-disdain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lead Astray",
+      "files": [
+        "engine/src/cards/pool/lead-astray.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Masked Gorgon",
+      "files": [
+        "engine/src/cards/pool/masked-gorgon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mirror Wall",
+      "files": [
+        "engine/src/cards/pool/mirror-wall.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nantuko Monastery",
+      "files": [
+        "engine/src/cards/pool/nantuko-monastery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Flock",
+      "files": [
+        "engine/src/cards/pool/phantom-flock.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Nantuko",
+      "files": [
+        "engine/src/cards/pool/phantom-nantuko.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Nishoba",
+      "files": [
+        "engine/src/cards/pool/phantom-nishoba.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Nomad",
+      "files": [
+        "engine/src/cards/pool/phantom-nomad.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantom Tiger",
+      "files": [
+        "engine/src/cards/pool/phantom-tiger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seedtime",
+      "files": [
+        "engine/src/cards/pool/seedtime.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silver Seraph",
+      "files": [
+        "engine/src/cards/pool/silver-seraph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spellgorger Barbarian",
+      "files": [
+        "engine/src/cards/pool/spellgorger-barbarian.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spirit Cairn",
+      "files": [
+        "engine/src/cards/pool/spirit-cairn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swelter",
+      "files": [
+        "engine/src/cards/pool/swelter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Swirling Sandstorm",
+      "files": [
+        "engine/src/cards/pool/swirling-sandstorm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Telekinetic Bonds",
+      "files": [
+        "engine/src/cards/pool/telekinetic-bonds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Toxic Stench",
+      "files": [
+        "engine/src/cards/pool/toxic-stench.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trained Pronghorn",
+      "files": [
+        "engine/src/cards/pool/trained-pronghorn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Treacherous Vampire",
+      "files": [
+        "engine/src/cards/pool/treacherous-vampire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Treacherous Werewolf",
+      "files": [
+        "engine/src/cards/pool/treacherous-werewolf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tunneler Wurm",
+      "files": [
+        "engine/src/cards/pool/tunneler-wurm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Valor",
+      "files": [
+        "engine/src/cards/pool/valor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Venomous Vines",
+      "files": [
+        "engine/src/cards/pool/venomous-vines.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vigilant Sentry",
+      "files": [
+        "engine/src/cards/pool/vigilant-sentry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wormfang Drake",
+      "files": [
+        "engine/src/cards/pool/wormfang-drake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wormfang Newt",
+      "files": [
+        "engine/src/cards/pool/wormfang-newt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wormfang Turtle",
+      "files": [
+        "engine/src/cards/pool/wormfang-turtle.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Anurid Swarmsnapper",
+      "needs": [
+        "static:block-additional-creature"
+      ],
+      "why": "It can block an additional creature this turn."
+    },
+    {
+      "name": "Aven Warcraft",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "With threshold, creatures you control also gain protection from a chosen color until end of turn."
+    },
+    {
+      "name": "Balthor the Defiled",
+      "needs": [
+        "effect:return-all-graveyards-under-owners-control"
+      ],
+      "why": "Its exile ability returns every black and red creature card from every graveyard to the battlefield under each owner's control; return-from-graveyard reads only the controller's graveyard and all-graveyards returns under the controller's control."
+    },
+    {
+      "name": "Barbarian Bully",
+      "needs": [
+        "effect:unless-any-player-pays"
+      ],
+      "why": "It gets +2/+2 unless a player has it deal 4 damage to them; once one player does, no one else is asked."
+    },
+    {
+      "name": "Battlefield Scrounger",
+      "needs": [
+        "cost:put-graveyard-cards-on-library-bottom"
+      ],
+      "why": "Its threshold ability costs putting three cards from your graveyard on the bottom of your library; no cost does that."
+    },
+    {
+      "name": "Book Burning",
+      "needs": [
+        "effect:unless-any-player-pays"
+      ],
+      "why": "Any player may have it deal 6 damage to them; mill six only if no one does."
+    },
+    {
+      "name": "Breaking Point",
+      "needs": [
+        "effect:unless-any-player-pays"
+      ],
+      "why": "Any player may have it deal 6 damage to them; destroy all creatures only if no one does — each-player-may has no single 'if no one did'."
+    },
+    {
+      "name": "Browbeat",
+      "needs": [
+        "effect:unless-any-player-pays"
+      ],
+      "why": "Any player may have it deal 5 damage to them; target player draws three only if no one does."
+    },
+    {
+      "name": "Burning Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "Takes a sorcery card you own from outside the game."
+    },
+    {
+      "name": "Cabal Therapy",
+      "needs": [
+        "decision:name-a-card"
+      ],
+      "why": "Names a nonland card."
+    },
+    {
+      "name": "Cephalid Constable",
+      "needs": [
+        "decision:variable-target-count"
+      ],
+      "why": "Returns up to that many target permanents, the combat damage dealt; a target group's max can't be that amount."
+    },
+    {
+      "name": "Cunning Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "Takes an instant card you own from outside the game."
+    },
+    {
+      "name": "Death Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "Takes a card you own from outside the game."
+    },
+    {
+      "name": "Firecat Blitz",
+      "needs": [
+        "cost:flashback-sacrifice-x"
+      ],
+      "why": "Flashback sacrifices X Mountains, and X feeds the spell; flashback's sacrifice count is fixed."
+    },
+    {
+      "name": "Flaring Pain",
+      "needs": [
+        "effect:damage-cant-be-prevented"
+      ],
+      "why": "Damage can't be prevented this turn."
+    },
+    {
+      "name": "Flash of Insight",
+      "needs": [
+        "cost:flashback-exile-x-cost"
+      ],
+      "why": "Flashback exiles X blue cards from your graveyard; flashback costs can't exile X cards."
+    },
+    {
+      "name": "Glory",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "From the graveyard, creatures you control gain protection from a chosen color until end of turn; no effect grants protection for a duration."
+    },
+    {
+      "name": "Golden Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "Takes an artifact or enchantment card you own from outside the game."
+    },
+    {
+      "name": "Grip of Amnesia",
+      "needs": [
+        "effect:unless-exile-graveyard"
+      ],
+      "why": "Counter unless its controller exiles all cards from their graveyard (allowed with an empty graveyard)."
+    },
+    {
+      "name": "Infectious Rage",
+      "needs": [
+        "effect:random-permanent"
+      ],
+      "why": "Returns to the battlefield attached to a creature chosen at random."
+    },
+    {
+      "name": "Krosan Reclamation",
+      "needs": [
+        "effect:shuffle-graveyard-targets-into-library"
+      ],
+      "why": "Shuffles up to two target cards from a player's graveyard into their library; shuffle-into-library moves only permanents."
+    },
+    {
+      "name": "Lightning Surge",
+      "needs": [
+        "effect:damage-cant-be-prevented"
+      ],
+      "why": "With threshold, its damage can't be prevented."
+    },
+    {
+      "name": "Living Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "why": "Takes a creature or land card you own from outside the game."
+    },
+    {
+      "name": "Lost in Thought",
+      "needs": [
+        "mechanic:special-action-exile-to-ignore-effect"
+      ],
+      "why": "Its controller may exile three cards from their graveyard to ignore its effect until end of turn — a special action."
+    },
+    {
+      "name": "Mist of Stagnation",
+      "needs": [
+        "decision:that-player-chooses-permanent"
+      ],
+      "why": "The active player untaps a permanent for each card in their graveyard, chosen by them; choose-permanents' min is fixed and its chooser is the controller."
+    },
+    {
+      "name": "Morality Shift",
+      "needs": [
+        "effect:exchange-graveyard-and-library"
+      ],
+      "why": "Exchanges your graveyard and library."
+    },
+    {
+      "name": "Nomad Mythmaker",
+      "needs": [
+        "effect:attach-aura-to-chosen-creature"
+      ],
+      "why": "Puts an Aura card from a graveyard onto the battlefield attached to a creature you control that it can enchant, chosen as it resolves."
+    },
+    {
+      "name": "Nullmage Advocate",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "Both target cards must come from one opponent's graveyard."
+    },
+    {
+      "name": "Phantom Centaur",
+      "needs": [
+        "decision:replacement-order-choice"
+      ],
+      "why": "Its ruling lets protection from black prevent damage before its own prevention, so no counter is lost; the engine always applies damage replacements before protection (rule 616.1)."
+    },
+    {
+      "name": "Prismatic Strands",
+      "needs": [
+        "cost:flashback-tap-creatures-cost",
+        "replacement:prevent-damage-from-colored-sources"
+      ],
+      "why": "Flashback by tapping an untapped white creature, and prevents all damage from sources of a chosen color this turn."
+    },
+    {
+      "name": "Pulsemage Advocate",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "Three target cards must all come from one opponent's graveyard."
+    },
+    {
+      "name": "Quiet Speculation",
+      "needs": [
+        "effect:search-opponent-library",
+        "condition:filter-has-flashback"
+      ],
+      "why": "Searches a target player's library yourself for cards with flashback; search-library's who has the target player search, and no filter reads flashback."
+    },
+    {
+      "name": "Rats' Feast",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "X target cards must all come from one graveyard."
+    },
+    {
+      "name": "Riftstone Portal",
+      "needs": [
+        "zone:graveyard-static"
+      ],
+      "why": "From the graveyard, lands you control have mana abilities; a fromGraveyard static can't grant activated abilities."
+    },
+    {
+      "name": "Scalpelexis",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "Exiles the top four cards, repeating while two of them share a name."
+    },
+    {
+      "name": "Selfless Exorcist",
+      "needs": [
+        "effect:damage-from-exiled-card"
+      ],
+      "why": "The exiled creature card deals damage equal to its power; damage from a target reads a permanent's last-known state, not a card exiled from a graveyard."
+    },
+    {
+      "name": "Serene Sunset",
+      "needs": [
+        "effect:prevent-combat-damage-by-target",
+        "decision:x-targets"
+      ],
+      "why": "Prevents all combat damage X target creatures would deal; prevent-all-combat-damage's by is a filter, not target slots."
+    },
+    {
+      "name": "Shaman's Trance",
+      "needs": [
+        "static:opponents-cant-play-from-graveyard",
+        "effect:cast-now-from-each-opponent-graveyard"
+      ],
+      "why": "Other players can't play cards from their graveyards this turn, and you may play cards from theirs as if from yours."
+    },
+    {
+      "name": "Shieldmage Advocate",
+      "needs": [
+        "replacement:prevent-all-damage-from-chosen-source-this-turn"
+      ],
+      "why": "Prevents all damage a chosen source would deal this turn; prevent-damage-from-chosen-source takes a number or next-time only."
+    },
+    {
+      "name": "Soulgorger Orgg",
+      "needs": [
+        "amount:life-lost-when-source-entered"
+      ],
+      "why": "Its leaves trigger gains the life lost to its enters trigger; nothing remembers that amount."
+    },
+    {
+      "name": "Spelljack",
+      "needs": [
+        "effect:cast-free-while-exiled"
+      ],
+      "why": "You may play the exiled spell without paying its mana cost for as long as it remains exiled."
+    },
+    {
+      "name": "Spurnmage Advocate",
+      "needs": [
+        "effect:targets-from-single-graveyard"
+      ],
+      "why": "Both target cards must come from one opponent's graveyard."
+    },
+    {
+      "name": "Sutured Ghoul",
+      "needs": [
+        "replacement:as-enters-exile-from-graveyard"
+      ],
+      "why": "As it enters, exiles any number of creature cards from your graveyard; its P/T are their total power and toughness."
+    },
+    {
+      "name": "Web of Inertia",
+      "needs": [
+        "effect:player-cant-attack-you-this-turn"
+      ],
+      "why": "A player who doesn't exile a card from their graveyard can't attack you this turn."
+    },
+    {
+      "name": "Wormfang Behemoth",
+      "needs": [
+        "effect:exile-from-hand-until-source-leaves"
+      ],
+      "why": "Exiles your whole hand until it leaves, then returns it to your hand."
+    },
+    {
+      "name": "Wormfang Crab",
+      "needs": [
+        "effect:opponent-chooses-your-permanent-to-exile"
+      ],
+      "why": "An opponent chooses the permanent of yours it exiles; choose-permanents is always chosen by the effect's controller."
+    },
+    {
+      "name": "Wormfang Manta",
+      "needs": [
+        "effect:skip-next-turn"
+      ],
+      "why": "You skip your next turn when it enters."
+    }
+  ]
+}

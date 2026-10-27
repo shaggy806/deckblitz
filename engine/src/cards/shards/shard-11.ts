@@ -32,6 +32,7 @@ import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolApexHawks from "../pool/apex-hawks.js";
 import _poolApprenticeSorcerer from "../pool/apprentice-sorcerer.js";
 import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
+import _poolArcaneSpyglass from "../pool/arcane-spyglass.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
@@ -238,6 +239,7 @@ import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
 import _poolForbid from "../pool/forbid.js";
 import _poolForceOfWill from "../pool/force-of-will.js";
+import _poolForcemageAdvocate from "../pool/forcemage-advocate.js";
 import _poolForkedBolt from "../pool/forked-bolt.js";
 import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
@@ -271,6 +273,7 @@ import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
+import _poolGoblinArchaeologist from "../pool/goblin-archaeologist.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
 import _poolGodPharaohsGift from "../pool/god-pharaohs-gift.js";
 import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
@@ -526,6 +529,7 @@ import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRazorjawOni from "../pool/razorjaw-oni.js";
+import _poolReapAndSow from "../pool/reap-and-sow.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolRefuseToYield from "../pool/refuse-to-yield.js";
 import _poolReignOfChaos from "../pool/reign-of-chaos.js";
@@ -697,6 +701,7 @@ import _poolTrainOfThought from "../pool/train-of-thought.js";
 import _poolTrainedOrgg from "../pool/trained-orgg.js";
 import _poolTranquilExpanse from "../pool/tranquil-expanse.js";
 import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
+import _poolTreacherousWerewolf from "../pool/treacherous-werewolf.js";
 import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
 import _poolTriclopeanSight from "../pool/triclopean-sight.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolApexHawks,
     _poolApprenticeSorcerer,
     _poolAquaticAlchemist,
+    _poolArcaneSpyglass,
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
@@ -1022,6 +1028,7 @@ const shard: CardShard = {
     _poolForatog,
     _poolForbid,
     _poolForceOfWill,
+    _poolForcemageAdvocate,
     _poolForkedBolt,
     _poolForktailSweep,
     _poolForsakenDrifters,
@@ -1055,6 +1062,7 @@ const shard: CardShard = {
     _poolGlacialPlating,
     _poolGloom,
     _poolGoShintaiOfLifesOrigin,
+    _poolGoblinArchaeologist,
     _poolGoblinChieftain,
     _poolGodPharaohsGift,
     _poolGoddricCloakedReveler,
@@ -1310,6 +1318,7 @@ const shard: CardShard = {
     _poolRavineRaider,
     _poolRazorSwine,
     _poolRazorjawOni,
+    _poolReapAndSow,
     _poolRecumbentBliss,
     _poolRefuseToYield,
     _poolReignOfChaos,
@@ -1481,6 +1490,7 @@ const shard: CardShard = {
     _poolTrainedOrgg,
     _poolTranquilExpanse,
     _poolTranscendentEnvoy,
+    _poolTreacherousWerewolf,
     _poolTricksOfTheTrade,
     _poolTriclopeanSight,
     _poolTundraWall,

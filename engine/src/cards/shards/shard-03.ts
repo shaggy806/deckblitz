@@ -15,6 +15,7 @@ import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
+import _poolAngelsFeather from "../pool/angels-feather.js";
 import _poolAngelsong from "../pool/angelsong.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAnthemOfRakdos from "../pool/anthem-of-rakdos.js";
@@ -62,6 +63,7 @@ import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBriarknitKami from "../pool/briarknit-kami.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
+import _poolBurdenOfGreed from "../pool/burden-of-greed.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
 import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
@@ -79,6 +81,7 @@ import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
+import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
@@ -149,6 +152,7 @@ import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
+import _poolDwarvenScorcher from "../pool/dwarven-scorcher.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEarthshaker from "../pool/earthshaker.js";
@@ -550,6 +554,7 @@ import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
+import _poolStandTogether from "../pool/stand-together.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
@@ -588,6 +593,7 @@ import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
 import _poolSylvanMight from "../pool/sylvan-might.js";
 import _poolSylvanShepherd from "../pool/sylvan-shepherd.js";
 import _poolSymbioticWurm from "../pool/symbiotic-wurm.js";
+import _poolSynodArtificer from "../pool/synod-artificer.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
 import _poolTarpan from "../pool/tarpan.js";
@@ -715,6 +721,7 @@ const shard: CardShard = {
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
     _poolAngelOfGrace,
+    _poolAngelsFeather,
     _poolAngelsong,
     _poolAnodetLurker,
     _poolAnthemOfRakdos,
@@ -762,6 +769,7 @@ const shard: CardShard = {
     _poolBranchblightStalker,
     _poolBriarknitKami,
     _poolBrotherhoodPatriarch,
+    _poolBurdenOfGreed,
     _poolBurnDownTheHouse,
     _poolBurstOfStrength,
     _poolBuzzardWaspColony,
@@ -779,6 +787,7 @@ const shard: CardShard = {
     _poolCemeteryRecruitment,
     _poolCentaurBattlemaster,
     _poolCentaurOmenreader,
+    _poolCentaurRootcaster,
     _poolChangelingTitan,
     _poolCharmedClothier,
     _poolChitterspitter,
@@ -849,6 +858,7 @@ const shard: CardShard = {
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
+    _poolDwarvenScorcher,
     _poolDwarvenWeaponsmith,
     _poolEarthbrawn,
     _poolEarthshaker,
@@ -1250,6 +1260,7 @@ const shard: CardShard = {
     _poolSplendidReclamation,
     _poolStaffOfTheAges,
     _poolStalkingTiger,
+    _poolStandTogether,
     _poolStarlitAngel,
     _poolStartledAwake,
     _poolStaunchCrewmate,
@@ -1288,6 +1299,7 @@ const shard: CardShard = {
     _poolSylvanMight,
     _poolSylvanShepherd,
     _poolSymbioticWurm,
+    _poolSynodArtificer,
     _poolTakeAGlance,
     _poolTangledIslet,
     _poolTarpan,

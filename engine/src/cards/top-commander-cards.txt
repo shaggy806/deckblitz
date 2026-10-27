@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3820 already implemented / 1180 missing (marks refreshed 2026-10-27)
+3821 already implemented / 1179 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3649,7 +3649,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3656  Smile at Death                           {3}{W}{W}        Enchantment
 [x]  3657  Seizan, Perverter of Truth               {3}{B}{B}        Legendary Creature — Demon Spirit
 [ ]  3658  Bumi, Unleashed                          {3}{R}{G}        Legendary Creature — Human Noble Ally
-[ ]  3659  Maelstrom Pulse                          {1}{B}{G}        Sorcery
+[x]  3659  Maelstrom Pulse                          {1}{B}{G}        Sorcery
 [x]  3660  Saruman, the White Hand                  {1}{U}{B}{R}     Legendary Creature — Avatar Wizard
 [x]  3661  Markov Baron                             {2}{B}           Creature — Vampire Noble
 [x]  3662  Sakashima's Student                      {2}{U}{U}        Creature — Human Ninja

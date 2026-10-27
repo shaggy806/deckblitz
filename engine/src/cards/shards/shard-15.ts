@@ -46,6 +46,7 @@ import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
 import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
+import _poolBileBlight from "../pool/bile-blight.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
@@ -179,12 +180,14 @@ import _poolEagerGlyphmage from "../pool/eager-glyphmage.js";
 import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
+import _poolEchoingCalm from "../pool/echoing-calm.js";
 import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
 import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
+import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
@@ -276,6 +279,7 @@ import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
+import _poolGreaterHarvester from "../pool/greater-harvester.js";
 import _poolGreensideWatcher from "../pool/greenside-watcher.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
@@ -303,6 +307,7 @@ import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHomicidalBrute from "../pool/homicidal-brute.js";
+import _poolHomingLightning from "../pool/homing-lightning.js";
 import _poolHomurasEssence from "../pool/homuras-essence.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
@@ -500,6 +505,7 @@ import _poolRathsEdge from "../pool/raths-edge.js";
 import _poolRayOfDistortion from "../pool/ray-of-distortion.js";
 import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
+import _poolRazorGolem from "../pool/razor-golem.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
@@ -577,6 +583,7 @@ import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpiralIntoSolitude from "../pool/spiral-into-solitude.js";
 import _poolSpiresideInfiltrator from "../pool/spireside-infiltrator.js";
+import _poolSpiritCairn from "../pool/spirit-cairn.js";
 import _poolSpiritEnDal from "../pool/spirit-en-dal.js";
 import _poolSpitefulBlow from "../pool/spiteful-blow.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
@@ -783,6 +790,7 @@ const shard: CardShard = {
     _poolBetrayersBargain,
     _poolBetrothTheBeast,
     _poolBiblioplexKraken,
+    _poolBileBlight,
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
     _poolBlessedHippogriff,
@@ -916,12 +924,14 @@ const shard: CardShard = {
     _poolEardrumRattler,
     _poolEarthbendingStudent,
     _poolEasterlingVanguard,
+    _poolEchoingCalm,
     _poolEiganjoUprising,
     _poolElderDruid,
     _poolElgaudShieldmate,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolEmbraceTheUnknown,
+    _poolEpicStruggle,
     _poolErinisGloomStalker,
     _poolEssenceCapture,
     _poolEssenceDrain,
@@ -1013,6 +1023,7 @@ const shard: CardShard = {
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,
+    _poolGreaterHarvester,
     _poolGreensideWatcher,
     _poolGrimoireOfTheDead,
     _poolGruulBeastmaster,
@@ -1040,6 +1051,7 @@ const shard: CardShard = {
     _poolHillGiant,
     _poolHillGigas,
     _poolHomicidalBrute,
+    _poolHomingLightning,
     _poolHomurasEssence,
     _poolHonor,
     _poolHorrifyingRevelation,
@@ -1237,6 +1249,7 @@ const shard: CardShard = {
     _poolRayOfDistortion,
     _poolRayOfErasure,
     _poolRazakethsRite,
+    _poolRazorGolem,
     _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
@@ -1314,6 +1327,7 @@ const shard: CardShard = {
     _poolSpincrusher,
     _poolSpiralIntoSolitude,
     _poolSpiresideInfiltrator,
+    _poolSpiritCairn,
     _poolSpiritEnDal,
     _poolSpitefulBlow,
     _poolSpitefulPrankster,

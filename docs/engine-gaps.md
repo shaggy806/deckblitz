@@ -101,6 +101,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   built. ROADMAP's Phase 10 deferred the rest as large or niche. None of them
   blocks ordinary Commander play. The alt-cast long tail left by Phase 6 (retrace, Warp,
   Bestow, Prototype, …) is in AUTHORING §15 and the limitation ledger.
+- **Protection's prevention always comes after a creature's own damage replacements.** Rule 616.1
+  lets the controller apply protection's prevention (rule 702.16e) before a "prevent that damage and
+  remove a +1/+1 counter" replacement, so a black source's damage to Phantom Centaur (protection
+  from black) costs no counter (its ruling); `Game`'s damage path runs `damageSteps`/`bestDamageOrder`
+  before the protection check, so the counter would be removed. Blocks Phantom Centaur (B217).
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
   affected player (or the controller of the affected object) order the replacement and
   prevention effects that apply to one event. The engine picks the order best for them, as

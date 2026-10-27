@@ -360,6 +360,7 @@ import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLastThoughts from "../pool/last-thoughts.js";
+import _poolLeadAstray from "../pool/lead-astray.js";
 import _poolLeadTheStampede from "../pool/lead-the-stampede.js";
 import _poolLeapfrog from "../pool/leapfrog.js";
 import _poolLeechingSliver from "../pool/leeching-sliver.js";
@@ -392,6 +393,7 @@ import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
 import _poolMerrowGrimeblotter from "../pool/merrow-grimeblotter.js";
+import _poolMetalFatigue from "../pool/metal-fatigue.js";
 import _poolMeteorSwarm from "../pool/meteor-swarm.js";
 import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
@@ -546,6 +548,7 @@ import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
 import _poolSecretIdentity from "../pool/secret-identity.js";
 import _poolSeeTheUnwritten from "../pool/see-the-unwritten.js";
+import _poolSeedtime from "../pool/seedtime.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
@@ -678,6 +681,7 @@ import _poolTrailblazer from "../pool/trailblazer.js";
 import _poolTriumphOfTheHordes from "../pool/triumph-of-the-hordes.js";
 import _poolTrollHornCameo from "../pool/troll-horn-cameo.js";
 import _poolTrygonPredator from "../pool/trygon-predator.js";
+import _poolTunnelerWurm from "../pool/tunneler-wurm.js";
 import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUltimateNullification from "../pool/ultimate-nullification.js";
@@ -1131,6 +1135,7 @@ const shard: CardShard = {
     _poolLandscapePainter,
     _poolLargerThanLife,
     _poolLastThoughts,
+    _poolLeadAstray,
     _poolLeadTheStampede,
     _poolLeapfrog,
     _poolLeechingSliver,
@@ -1163,6 +1168,7 @@ const shard: CardShard = {
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
     _poolMerrowGrimeblotter,
+    _poolMetalFatigue,
     _poolMeteorSwarm,
     _poolMichelangeloGameMaster,
     _poolMidnightBanshee,
@@ -1317,6 +1323,7 @@ const shard: CardShard = {
     _poolSecludedCourtyard,
     _poolSecretIdentity,
     _poolSeeTheUnwritten,
+    _poolSeedtime,
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSenselessRage,
@@ -1449,6 +1456,7 @@ const shard: CardShard = {
     _poolTriumphOfTheHordes,
     _poolTrollHornCameo,
     _poolTrygonPredator,
+    _poolTunnelerWurm,
     _poolTurtleLair,
     _poolUkudCobra,
     _poolUltimateNullification,

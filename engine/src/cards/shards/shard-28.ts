@@ -34,6 +34,7 @@ import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
+import _poolAnuridBarkripper from "../pool/anurid-barkripper.js";
 import _poolArabaMothrider from "../pool/araba-mothrider.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
@@ -641,6 +642,7 @@ import _poolSporesowerThallid from "../pool/sporesower-thallid.js";
 import _poolSproutSwarm from "../pool/sprout-swarm.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
+import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormSculptor from "../pool/storm-sculptor.js";
@@ -702,6 +704,7 @@ import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
 import _poolTrapEssence from "../pool/trap-essence.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
+import _poolTreacherousVampire from "../pool/treacherous-vampire.js";
 import _poolTremor from "../pool/tremor.js";
 import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
@@ -770,6 +773,7 @@ import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWrenchMind from "../pool/wrench-mind.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
+import _poolWurmsTooth from "../pool/wurms-tooth.js";
 import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
@@ -832,6 +836,7 @@ const shard: CardShard = {
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
+    _poolAnuridBarkripper,
     _poolArabaMothrider,
     _poolArachnoid,
     _poolArbaazMir,
@@ -1439,6 +1444,7 @@ const shard: CardShard = {
     _poolSproutSwarm,
     _poolStarWhale,
     _poolSteelburrChampion,
+    _poolSteelshaperApprentice,
     _poolStickyFingers,
     _poolStonybrookBanneret,
     _poolStormSculptor,
@@ -1500,6 +1506,7 @@ const shard: CardShard = {
     _poolTrapEssence,
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
+    _poolTreacherousVampire,
     _poolTremor,
     _poolTriangleOfWar,
     _poolTributeToHorobi,
@@ -1568,6 +1575,7 @@ const shard: CardShard = {
     _poolWreathOfGeists,
     _poolWrenchMind,
     _poolWritOfReturn,
+    _poolWurmsTooth,
     _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
