@@ -16,6 +16,7 @@ import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
+import _poolAnimateLand from "../pool/animate-land.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -131,6 +132,7 @@ import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
+import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
@@ -162,6 +164,7 @@ import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
 import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
+import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
@@ -775,6 +778,7 @@ const shard: CardShard = {
     _poolAncientHellkite,
     _poolAngelOfSanctions,
     _poolAngelsTrumpet,
+    _poolAnimateLand,
     _poolAnointedDeacon,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -890,6 +894,7 @@ const shard: CardShard = {
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
     _poolCommonBond,
+    _poolComplexAutomaton,
     _poolConclaveTribunal,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
@@ -921,6 +926,7 @@ const shard: CardShard = {
     _poolDeduce,
     _poolDeepSeaKraken,
     _poolDeeprootWaters,
+    _poolDefiantFalcon,
     _poolDegaDisciple,
     _poolDemogorgonsClutches,
     _poolDescendUponTheSinful,

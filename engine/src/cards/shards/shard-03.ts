@@ -14,6 +14,7 @@ import _poolAlibansTower from "../pool/alibans-tower.js";
 import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
+import _poolAncientHydra from "../pool/ancient-hydra.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
 import _poolAngelsFeather from "../pool/angels-feather.js";
 import _poolAngelsong from "../pool/angelsong.js";
@@ -205,6 +206,7 @@ import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
+import _poolFlowstoneSlide from "../pool/flowstone-slide.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFracturedLoyalty from "../pool/fractured-loyalty.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
@@ -720,6 +722,7 @@ const shard: CardShard = {
     _poolAmberPrison,
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
+    _poolAncientHydra,
     _poolAngelOfGrace,
     _poolAngelsFeather,
     _poolAngelsong,
@@ -911,6 +914,7 @@ const shard: CardShard = {
     _poolFlight,
     _poolFlockImpostor,
     _poolFlourishingHunter,
+    _poolFlowstoneSlide,
     _poolForsakenMonument,
     _poolFracturedLoyalty,
     _poolFrogmyrEnforcer,

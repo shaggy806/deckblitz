@@ -26,6 +26,7 @@ import _poolAngrathsRampage from "../pool/angraths-rampage.js";
 import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
 import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
+import _poolArcMage from "../pool/arc-mage.js";
 import _poolArcRunner from "../pool/arc-runner.js";
 import _poolArcTrail from "../pool/arc-trail.js";
 import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
@@ -804,6 +805,7 @@ const shard: CardShard = {
     _poolApothecaryStomper,
     _poolAragornTheUniter,
     _poolArastaOfTheEndlessWeb,
+    _poolArcMage,
     _poolArcRunner,
     _poolArcTrail,
     _poolArchaeologicalDig,

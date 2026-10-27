@@ -641,6 +641,7 @@ import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolSpreadingAlgae from "../pool/spreading-algae.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStabWound from "../pool/stab-wound.js";
+import _poolStampedeDriver from "../pool/stampede-driver.js";
 import _poolSternMentor from "../pool/stern-mentor.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
@@ -1431,6 +1432,7 @@ const shard: CardShard = {
     _poolSpreadingAlgae,
     _poolSpreadingFlames,
     _poolStabWound,
+    _poolStampedeDriver,
     _poolSternMentor,
     _poolStingingHivemaster,
     _poolStingingShot,

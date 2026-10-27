@@ -486,6 +486,7 @@ import _poolOuroboroid from "../pool/ouroboroid.js";
 import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
+import _poolParallaxDementia from "../pool/parallax-dementia.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
 import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
@@ -1275,6 +1276,7 @@ const shard: CardShard = {
     _poolPacesetterParagon,
     _poolParadiseMantle,
     _poolParadoxShaper,
+    _poolParallaxDementia,
     _poolParameciaColoniex,
     _poolParanoidDelusions,
     _poolPathOfTheAnimist,

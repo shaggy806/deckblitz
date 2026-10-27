@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAcceleratedEvolution from "../pool/accelerated-evolution.js";
+import _poolAccumulatedKnowledge from "../pool/accumulated-knowledge.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAetherstreamLeopard from "../pool/aetherstream-leopard.js";
@@ -236,6 +237,7 @@ import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
+import _poolFlowstoneArmor from "../pool/flowstone-armor.js";
 import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
@@ -451,6 +453,7 @@ import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
+import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
@@ -790,6 +793,7 @@ const shard: CardShard = {
   pool: [
     _poolAIMSynthoids,
     _poolAcceleratedEvolution,
+    _poolAccumulatedKnowledge,
     _poolAdaptiveGemguard,
     _poolAetherSyphon,
     _poolAetherstreamLeopard,
@@ -1021,6 +1025,7 @@ const shard: CardShard = {
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
     _poolFloriferousVinewall,
+    _poolFlowstoneArmor,
     _poolFlowstoneSculpture,
     _poolFocusFire,
     _poolFoeRazerRegent,
@@ -1236,6 +1241,7 @@ const shard: CardShard = {
     _poolOutcasterTrailblazer,
     _poolOverride,
     _poolOwlinHistorian,
+    _poolPackHunt,
     _poolPain101,
     _poolParalyze,
     _poolParhelionIi,

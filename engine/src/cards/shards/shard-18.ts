@@ -136,6 +136,7 @@ import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
+import _poolDefenderEnVec from "../pool/defender-en-vec.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
@@ -436,6 +437,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOffBalance from "../pool/off-balance.js";
 import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
@@ -908,6 +910,7 @@ const shard: CardShard = {
     _poolDeepGoblinSkulltaker,
     _poolDeepSlumberTitan,
     _poolDeeprootChampion,
+    _poolDefenderEnVec,
     _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDestructiveRevelry,
@@ -1208,6 +1211,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOffBalance,
     _poolOgreJailbreaker,
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,

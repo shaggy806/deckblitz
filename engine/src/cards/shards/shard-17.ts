@@ -99,6 +99,7 @@ import _poolChandrasEmbercat from "../pool/chandras-embercat.js";
 import _poolCharge from "../pool/charge.js";
 import _poolChastise from "../pool/chastise.js";
 import _poolCheckpointOfficer from "../pool/checkpoint-officer.js";
+import _poolChieftainEnDal from "../pool/chieftain-en-dal.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
 import _poolChitinousCloak from "../pool/chitinous-cloak.js";
 import _poolChromium from "../pool/chromium.js";
@@ -877,6 +878,7 @@ const shard: CardShard = {
     _poolCharge,
     _poolChastise,
     _poolCheckpointOfficer,
+    _poolChieftainEnDal,
     _poolChildrenOfKorlis,
     _poolChitinousCloak,
     _poolChromium,

@@ -73,6 +73,7 @@ import _poolBloodshedFever from "../pool/bloodshed-fever.js";
 import _poolBloodstoneGoblin from "../pool/bloodstone-goblin.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBoil from "../pool/boil.js";
+import _poolBolaWarrior from "../pool/bola-warrior.js";
 import _poolBomberCorps from "../pool/bomber-corps.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
@@ -835,6 +836,7 @@ const shard: CardShard = {
     _poolBloodstoneGoblin,
     _poolBogstomper,
     _poolBoil,
+    _poolBolaWarrior,
     _poolBomberCorps,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,

@@ -12,6 +12,7 @@ import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
 import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
+import _poolAirBladder from "../pool/air-bladder.js";
 import _poolAislingLeprechaun from "../pool/aisling-leprechaun.js";
 import _poolAjanisComrade from "../pool/ajanis-comrade.js";
 import _poolAkoumStonewaker from "../pool/akoum-stonewaker.js";
@@ -493,6 +494,7 @@ import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
+import _poolRathiFiend from "../pool/rathi-fiend.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolRavagesOfWar from "../pool/ravages-of-war.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
@@ -624,6 +626,7 @@ import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
+import _poolStrongholdMachinist from "../pool/stronghold-machinist.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
@@ -768,6 +771,7 @@ const shard: CardShard = {
     _poolAchillesDavenport,
     _poolAethergeodeMiner,
     _poolAetherstormRoc,
+    _poolAirBladder,
     _poolAislingLeprechaun,
     _poolAjanisComrade,
     _poolAkoumStonewaker,
@@ -1249,6 +1253,7 @@ const shard: CardShard = {
     _poolRampartArchitect,
     _poolRankOfficer,
     _poolRaphaelToughTurtle,
+    _poolRathiFiend,
     _poolRaucousAudience,
     _poolRavagesOfWar,
     _poolReachForTheSky,
@@ -1380,6 +1385,7 @@ const shard: CardShard = {
     _poolStormTheCitadel,
     _poolStorySeeker,
     _poolStrionicResonator,
+    _poolStrongholdMachinist,
     _poolStunningShot,
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,

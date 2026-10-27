@@ -166,6 +166,7 @@ import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
 import _poolDeadeyeQuartermaster from "../pool/deadeye-quartermaster.js";
+import _poolDeathPitOffering from "../pool/death-pit-offering.js";
 import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
 import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
@@ -429,6 +430,7 @@ import _poolNebelgastHerald from "../pool/nebelgast-herald.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
+import _poolNetterEnDal from "../pool/netter-en-dal.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
 import _poolNightmareLash from "../pool/nightmare-lash.js";
 import _poolNikkoOnna from "../pool/nikko-onna.js";
@@ -528,6 +530,7 @@ import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRunAshore from "../pool/run-ashore.js";
 import _poolRun from "../pool/run.js";
+import _poolRupture from "../pool/rupture.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
 import _poolRustElemental from "../pool/rust-elemental.js";
 import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
@@ -944,6 +947,7 @@ const shard: CardShard = {
     _poolDeadbridgeChant,
     _poolDeadeyePlunderers,
     _poolDeadeyeQuartermaster,
+    _poolDeathPitOffering,
     _poolDeathlessBehemoth,
     _poolDeathsCaress,
     _poolDecodeTransmissions,
@@ -1207,6 +1211,7 @@ const shard: CardShard = {
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
+    _poolNetterEnDal,
     _poolNightMarketLookout,
     _poolNightmareLash,
     _poolNikkoOnna,
@@ -1306,6 +1311,7 @@ const shard: CardShard = {
     _poolRumblingSentry,
     _poolRunAshore,
     _poolRun,
+    _poolRupture,
     _poolRushwoodDryad,
     _poolRustElemental,
     _poolRustShieldRampager,

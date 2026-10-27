@@ -454,6 +454,7 @@ import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
+import _poolPhyrexianDriver from "../pool/phyrexian-driver.js";
 import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
@@ -1229,6 +1230,7 @@ const shard: CardShard = {
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
+    _poolPhyrexianDriver,
     _poolPhyrexianHydra,
     _poolPhyrexianIronworks,
     _poolPhyrexianVivisector,

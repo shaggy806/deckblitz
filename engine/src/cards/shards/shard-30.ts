@@ -404,6 +404,7 @@ import _poolLightningVolley from "../pool/lightning-volley.js";
 import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
+import _poolLinSivviDefiantHero from "../pool/lin-sivvi-defiant-hero.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
@@ -464,6 +465,7 @@ import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNeckBreaker from "../pool/neck-breaker.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
+import _poolNestingWurm from "../pool/nesting-wurm.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
@@ -689,6 +691,7 @@ import _poolTrapjawKelpie from "../pool/trapjaw-kelpie.js";
 import _poolTravelingMinister from "../pool/traveling-minister.js";
 import _poolTreatsToShare from "../pool/treats-to-share.js";
 import _poolTributeToTheWorldTree from "../pool/tribute-to-the-world-tree.js";
+import _poolTricksterMage from "../pool/trickster-mage.js";
 import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
@@ -759,6 +762,7 @@ import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
 import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
+import _poolWoodripper from "../pool/woodripper.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
@@ -1180,6 +1184,7 @@ const shard: CardShard = {
     _poolLightwielderPaladin,
     _poolLilianaTheLastHope,
     _poolLimitsOfSolidarity,
+    _poolLinSivviDefiantHero,
     _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,
     _poolLongRiversPull,
@@ -1240,6 +1245,7 @@ const shard: CardShard = {
     _poolNayaBattlemage,
     _poolNeckBreaker,
     _poolNessianBoar,
+    _poolNestingWurm,
     _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
@@ -1465,6 +1471,7 @@ const shard: CardShard = {
     _poolTravelingMinister,
     _poolTreatsToShare,
     _poolTributeToTheWorldTree,
+    _poolTricksterMage,
     _poolTrickstersStratagem,
     _poolTripNoose,
     _poolTunnelTipster,
@@ -1535,6 +1542,7 @@ const shard: CardShard = {
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
     _poolWoodlurkerMimic,
+    _poolWoodripper,
     _poolWordsOfWisdom,
     _poolYathanRoadwatcher,
     _poolZahidDjinnOfTheLamp,

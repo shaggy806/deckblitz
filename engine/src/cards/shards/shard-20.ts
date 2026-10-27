@@ -378,6 +378,8 @@ import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
 import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
+import _poolLaccolithTitan from "../pool/laccolith-titan.js";
+import _poolLaccolithWhelp from "../pool/laccolith-whelp.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
@@ -1206,6 +1208,8 @@ const shard: CardShard = {
     _poolKruinStriker,
     _poolKyrenFlamewright,
     _poolLabyrinthOfSkophos,
+    _poolLaccolithTitan,
+    _poolLaccolithWhelp,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLavakinBrawler,

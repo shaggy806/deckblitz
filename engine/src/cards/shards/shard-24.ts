@@ -70,6 +70,7 @@ import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlastoderm from "../pool/blastoderm.js";
 import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
@@ -182,6 +183,7 @@ import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
+import _poolDominate from "../pool/dominate.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -846,6 +848,7 @@ const shard: CardShard = {
     _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlastoderm,
     _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
@@ -958,6 +961,7 @@ const shard: CardShard = {
     _poolDireStrainBrawler,
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
+    _poolDominate,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,

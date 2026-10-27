@@ -51,6 +51,7 @@ import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBasalSliver from "../pool/basal-sliver.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
+import _poolBelbesPortal from "../pool/belbes-portal.js";
 import _poolBelleOfTheBrawl from "../pool/belle-of-the-brawl.js";
 import _poolBelligerentSliver from "../pool/belligerent-sliver.js";
 import _poolBenalishTrapper from "../pool/benalish-trapper.js";
@@ -649,9 +650,11 @@ import _poolSkyBlessedSamurai from "../pool/sky-blessed-samurai.js";
 import _poolSkyknightVanguard from "../pool/skyknight-vanguard.js";
 import _poolSkyriderElf from "../pool/skyrider-elf.js";
 import _poolSkyshaper from "../pool/skyshaper.js";
+import _poolSkyshroudRidgeback from "../pool/skyshroud-ridgeback.js";
 import _poolSlaughterhorn from "../pool/slaughterhorn.js";
 import _poolSliverConstruct from "../pool/sliver-construct.js";
 import _poolSmokeShroud from "../pool/smoke-shroud.js";
+import _poolSneakyHomunculus from "../pool/sneaky-homunculus.js";
 import _poolSneakySnacker from "../pool/sneaky-snacker.js";
 import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
@@ -871,6 +874,7 @@ const shard: CardShard = {
     _poolBarbarianHorde,
     _poolBasalSliver,
     _poolBedheadBeastie,
+    _poolBelbesPortal,
     _poolBelleOfTheBrawl,
     _poolBelligerentSliver,
     _poolBenalishTrapper,
@@ -1469,9 +1473,11 @@ const shard: CardShard = {
     _poolSkyknightVanguard,
     _poolSkyriderElf,
     _poolSkyshaper,
+    _poolSkyshroudRidgeback,
     _poolSlaughterhorn,
     _poolSliverConstruct,
     _poolSmokeShroud,
+    _poolSneakyHomunculus,
     _poolSneakySnacker,
     _poolSoaringSeacliff,
     _poolSokkaTenaciousTactician,

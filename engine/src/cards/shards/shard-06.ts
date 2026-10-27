@@ -41,6 +41,7 @@ import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolArtificersEpiphany from "../pool/artificers-epiphany.js";
+import _poolAscendantEvincar from "../pool/ascendant-evincar.js";
 import _poolAshZealot from "../pool/ash-zealot.js";
 import _poolAshnodsTransmogrant from "../pool/ashnods-transmogrant.js";
 import _poolAspectOfHydra from "../pool/aspect-of-hydra.js";
@@ -494,6 +495,7 @@ import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
+import _poolRackling from "../pool/rackling.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
@@ -817,6 +819,7 @@ const shard: CardShard = {
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
     _poolArtificersEpiphany,
+    _poolAscendantEvincar,
     _poolAshZealot,
     _poolAshnodsTransmogrant,
     _poolAspectOfHydra,
@@ -1270,6 +1273,7 @@ const shard: CardShard = {
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
+    _poolRackling,
     _poolRadiantStrike,
     _poolRadjanSpirit,
     _poolRaffinesInformant,

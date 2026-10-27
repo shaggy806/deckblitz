@@ -367,6 +367,7 @@ import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLashknife from "../pool/lashknife.js";
 import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
@@ -509,6 +510,7 @@ import _poolRecklessOgre from "../pool/reckless-ogre.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
+import _poolRefreshingRain from "../pool/refreshing-rain.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolRepeal from "../pool/repeal.js";
@@ -1128,6 +1130,7 @@ const shard: CardShard = {
     _poolLambholtRavager,
     _poolLapisLazuliTalisman,
     _poolLargeBear,
+    _poolLashknife,
     _poolLashwrithe,
     _poolLatticeLibrary,
     _poolLavaStorm,
@@ -1270,6 +1273,7 @@ const shard: CardShard = {
     _poolRecklessPyrosurfer,
     _poolRecklessSpite,
     _poolReclaimTheWastes,
+    _poolRefreshingRain,
     _poolRefute,
     _poolReitoLantern,
     _poolRepeal,

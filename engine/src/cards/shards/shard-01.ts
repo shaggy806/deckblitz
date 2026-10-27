@@ -183,6 +183,7 @@ import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExavaRakdosBloodWitch from "../pool/exava-rakdos-blood-witch.js";
 import _poolExoskeletalArmor from "../pool/exoskeletal-armor.js";
 import _poolExpel from "../pool/expel.js";
+import _poolEyeOfYawgmoth from "../pool/eye-of-yawgmoth.js";
 import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
 import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
@@ -942,6 +943,7 @@ const shard: CardShard = {
     _poolExavaRakdosBloodWitch,
     _poolExoskeletalArmor,
     _poolExpel,
+    _poolEyeOfYawgmoth,
     _poolEyekite,
     _poolEzekielSimsSpiderTotem,
     _poolFaithfulWatchdog,

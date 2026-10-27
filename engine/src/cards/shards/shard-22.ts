@@ -467,6 +467,7 @@ import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
+import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPineconeStrike from "../pool/pinecone-strike.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPhyrexianAtlas,
+    _poolPhyrexianProwler,
     _poolPillarOfLight,
     _poolPillarfieldOx,
     _poolPineconeStrike,

@@ -349,6 +349,8 @@ import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolKozileksSentinel from "../pool/kozileks-sentinel.js";
 import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
+import _poolLaccolithRig from "../pool/laccolith-rig.js";
+import _poolLaccolithWarrior from "../pool/laccolith-warrior.js";
 import _poolLadyZhurongWarriorQueen from "../pool/lady-zhurong-warrior-queen.js";
 import _poolLakeTownLookout from "../pool/lake-town-lookout.js";
 import _poolLathnuHellion from "../pool/lathnu-hellion.js";
@@ -705,6 +707,7 @@ import _poolTrapEssence from "../pool/trap-essence.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTreacherousVampire from "../pool/treacherous-vampire.js";
+import _poolTreetopBracers from "../pool/treetop-bracers.js";
 import _poolTremor from "../pool/tremor.js";
 import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
@@ -1151,6 +1154,8 @@ const shard: CardShard = {
     _poolKnotvineMystic,
     _poolKozileksSentinel,
     _poolKumanoFacesKakkazan,
+    _poolLaccolithRig,
+    _poolLaccolithWarrior,
     _poolLadyZhurongWarriorQueen,
     _poolLakeTownLookout,
     _poolLathnuHellion,
@@ -1507,6 +1512,7 @@ const shard: CardShard = {
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTreacherousVampire,
+    _poolTreetopBracers,
     _poolTremor,
     _poolTriangleOfWar,
     _poolTributeToHorobi,

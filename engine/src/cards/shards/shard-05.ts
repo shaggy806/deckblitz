@@ -521,6 +521,7 @@ import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolReinterpret from "../pool/reinterpret.js";
+import _poolRejuvenationChamber from "../pool/rejuvenation-chamber.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
@@ -603,6 +604,7 @@ import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkyclawThrash from "../pool/skyclaw-thrash.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
+import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
@@ -1289,6 +1291,7 @@ const shard: CardShard = {
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,
     _poolReinterpret,
+    _poolRejuvenationChamber,
     _poolRememberTheFallen,
     _poolRenegadeReaper,
     _poolRepelCalamity,
@@ -1371,6 +1374,7 @@ const shard: CardShard = {
     _poolSkyclawThrash,
     _poolSkycoachConductor,
     _poolSkyfirePhoenix,
+    _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
     _poolSnapcasterMage,
     _poolSolRing,
