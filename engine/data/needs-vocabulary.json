@@ -12016,7 +12016,6 @@
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
   },
-<<<<<<< HEAD
   "cost:alt-cost-reveal-hand": {
    "example": "Land Grant: Alternative cost: reveal your hand if it holds no land cards; no such alternative cost."
   },
@@ -12047,7 +12046,7 @@
   "replacement:enters-tapped-if-cast": {
    "family": "replacement:new-event-replacements",
    "example": "Uphill Battle: Creatures played (cast) by opponents enter tapped; no enters-tapped replacement filters on whether the creature was cast."
-=======
+  },
   "static:protection-from-own-colors": {
    "family": "effect:grant-protection-choice",
    "example": "Earnest Fellowship: protection takes only fixed colours, types or a filter; nothing makes each creature's protection follow its own colours."
@@ -12087,7 +12086,6 @@
   "condition:shares-card-type-with-cost-exiled": {
    "family": "condition:filter-card-property-clauses",
    "example": "Holistic Wisdom: No \"exile a card from your hand\" activation cost, and nothing compares a target with the card the cost exiled."
->>>>>>> origin/main
   }
  }
 }
