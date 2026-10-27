@@ -308,6 +308,7 @@ import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
+import _poolHypnoticCloud from "../pool/hypnotic-cloud.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
 import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolHurloonBattleHymn,
     _poolHydraOmnivore,
     _poolHydraulicHelper,
+    _poolHypnoticCloud,
     _poolIconOfAncestry,
     _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,

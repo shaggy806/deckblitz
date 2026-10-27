@@ -40,6 +40,7 @@ import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
 import _poolAshenSkinZubera from "../pool/ashen-skin-zubera.js";
 import _poolAspectOfMongoose from "../pool/aspect-of-mongoose.js";
+import _poolAssaultBattery from "../pool/assault-battery.js";
 import _poolAstralSlide from "../pool/astral-slide.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
@@ -322,6 +323,7 @@ import _poolHomewardPath from "../pool/homeward-path.js";
 import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
 import _poolHornbashMentor from "../pool/hornbash-mentor.js";
+import _poolHornedCheetah from "../pool/horned-cheetah.js";
 import _poolHornedHelm from "../pool/horned-helm.js";
 import _poolHornetQueen from "../pool/hornet-queen.js";
 import _poolHorribleHordes from "../pool/horrible-hordes.js";
@@ -518,6 +520,7 @@ import _poolPulseOfTheTangle from "../pool/pulse-of-the-tangle.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
+import _poolPyreZombie from "../pool/pyre-zombie.js";
 import _poolPython from "../pool/python.js";
 import _poolQuicksilverGargantuan from "../pool/quicksilver-gargantuan.js";
 import _poolQuicksmithRebel from "../pool/quicksmith-rebel.js";
@@ -856,6 +859,7 @@ const shard: CardShard = {
     _poolArrestersZeal,
     _poolAshenSkinZubera,
     _poolAspectOfMongoose,
+    _poolAssaultBattery,
     _poolAstralSlide,
     _poolAtlasSizableStooge,
     _poolAttercop,
@@ -1138,6 +1142,7 @@ const shard: CardShard = {
     _poolHopeTender,
     _poolHorizonSeeker,
     _poolHornbashMentor,
+    _poolHornedCheetah,
     _poolHornedHelm,
     _poolHornetQueen,
     _poolHorribleHordes,
@@ -1334,6 +1339,7 @@ const shard: CardShard = {
     _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,
     _poolPyreSledgeArsonist,
+    _poolPyreZombie,
     _poolPython,
     _poolQuicksilverGargantuan,
     _poolQuicksmithRebel,

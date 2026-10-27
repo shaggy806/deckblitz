@@ -38,6 +38,7 @@ import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
+import _poolAncientKavu from "../pool/ancient-kavu.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
 import _poolAngrathsFury from "../pool/angraths-fury.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
@@ -74,6 +75,7 @@ import _poolBarTheGate from "../pool/bar-the-gate.js";
 import _poolBarbedSliver from "../pool/barbed-sliver.js";
 import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
+import _poolBenalishEmissary from "../pool/benalish-emissary.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
 import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
@@ -497,6 +499,7 @@ import _poolOtherworldlyJourney from "../pool/otherworldly-journey.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
+import _poolPainSuffering from "../pool/pain-suffering.js";
 import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
@@ -527,6 +530,7 @@ import _poolPsionicGift from "../pool/psionic-gift.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPuresightMerrow from "../pool/puresight-merrow.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
+import _poolRageWeaver from "../pool/rage-weaver.js";
 import _poolRagemonger from "../pool/ragemonger.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
 import _poolRagingSwordtooth from "../pool/raging-swordtooth.js";
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
     _poolAnaraWolvidFamiliar,
+    _poolAncientKavu,
     _poolAngelicQuartermaster,
     _poolAngrathsFury,
     _poolAnnieFlashTheVeteran,
@@ -901,6 +906,7 @@ const shard: CardShard = {
     _poolBarbedSliver,
     _poolBarrenMoor,
     _poolBattleflySwarm,
+    _poolBenalishEmissary,
     _poolBenevolentAncestor,
     _poolBenthicBehemoth,
     _poolBeornTheFierce,
@@ -1324,6 +1330,7 @@ const shard: CardShard = {
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
+    _poolPainSuffering,
     _poolParadigmShift,
     _poolParapet,
     _poolPathToExile,
@@ -1354,6 +1361,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPuresightMerrow,
     _poolPygmyAllosaurus,
+    _poolRageWeaver,
     _poolRagemonger,
     _poolRagingKavu,
     _poolRagingSwordtooth,

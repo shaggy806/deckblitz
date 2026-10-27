@@ -70,6 +70,7 @@ import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingElk from "../pool/bellowing-elk.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
+import _poolBenalishLancer from "../pool/benalish-lancer.js";
 import _poolBenedictionOfMoons from "../pool/benediction-of-moons.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
@@ -806,6 +807,7 @@ import _poolVoyagingSatyr from "../pool/voyaging-satyr.js";
 import _poolVulshokBerserker from "../pool/vulshok-berserker.js";
 import _poolWakeTheDead from "../pool/wake-the-dead.js";
 import _poolWallOfFrost from "../pool/wall-of-frost.js";
+import _poolWanderingStream from "../pool/wandering-stream.js";
 import _poolWarrenPilferers from "../pool/warren-pilferers.js";
 import _poolWarriorAngel from "../pool/warrior-angel.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
@@ -925,6 +927,7 @@ const shard: CardShard = {
     _poolBelbesPercher,
     _poolBellowingElk,
     _poolBellowingTanglewurm,
+    _poolBenalishLancer,
     _poolBenedictionOfMoons,
     _poolBillowingShriekmass,
     _poolBiomanticMastery,
@@ -1661,6 +1664,7 @@ const shard: CardShard = {
     _poolVulshokBerserker,
     _poolWakeTheDead,
     _poolWallOfFrost,
+    _poolWanderingStream,
     _poolWarrenPilferers,
     _poolWarriorAngel,
     _poolWaytaTrainerProdigy,

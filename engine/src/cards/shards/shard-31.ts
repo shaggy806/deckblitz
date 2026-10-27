@@ -409,6 +409,7 @@ import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
+import _poolKavuAggressor from "../pool/kavu-aggressor.js";
 import _poolKavuPredator from "../pool/kavu-predator.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKazanduStomper from "../pool/kazandu-stomper.js";
@@ -575,6 +576,7 @@ import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
 import _poolRampageOfTheClans from "../pool/rampage-of-the-clans.js";
+import _poolRampantElephant from "../pool/rampant-elephant.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
 import _poolRavenform from "../pool/ravenform.js";
 import _poolReapersTalisman from "../pool/reapers-talisman.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolKalonianTwingrove,
     _poolKarplusanForest,
     _poolKathariScreecher,
+    _poolKavuAggressor,
     _poolKavuPredator,
     _poolKazanduRefuge,
     _poolKazanduStomper,
@@ -1437,6 +1440,7 @@ const shard: CardShard = {
     _poolRamirezDepietroPillager,
     _poolRamosianGreatsword,
     _poolRampageOfTheClans,
+    _poolRampantElephant,
     _poolRangerCaptainOfEos,
     _poolRavenform,
     _poolReapersTalisman,

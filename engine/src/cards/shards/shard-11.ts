@@ -519,6 +519,7 @@ import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
 import _poolPiannaNomadCaptain from "../pool/pianna-nomad-captain.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
+import _poolPincerSpider from "../pool/pincer-spider.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
@@ -1331,6 +1332,7 @@ const shard: CardShard = {
     _poolPhyrexianSkyflayer,
     _poolPiannaNomadCaptain,
     _poolPigmentWrangler,
+    _poolPincerSpider,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
     _poolPolukranosReborn,

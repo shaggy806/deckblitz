@@ -36,6 +36,7 @@ import _poolArtillerize from "../pool/artillerize.js";
 import _poolArwensGift from "../pool/arwens-gift.js";
 import _poolAshmouthBlade from "../pool/ashmouth-blade.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
+import _poolAssault from "../pool/assault.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
@@ -415,6 +416,7 @@ import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
+import _poolMetathranAerostat from "../pool/metathran-aerostat.js";
 import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
 import _poolMilitaryDiscipline from "../pool/military-discipline.js";
@@ -624,6 +626,7 @@ import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSmolderInitiate from "../pool/smolder-initiate.js";
+import _poolSmolderingTar from "../pool/smoldering-tar.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSnowHound from "../pool/snow-hound.js";
@@ -831,6 +834,7 @@ const shard: CardShard = {
     _poolArwensGift,
     _poolAshmouthBlade,
     _poolAspectOfLamprey,
+    _poolAssault,
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
@@ -1210,6 +1214,7 @@ const shard: CardShard = {
     _poolMentorsGuidance,
     _poolMerrowReejerey,
     _poolMetamorphicBlast,
+    _poolMetathranAerostat,
     _poolMightOfAlara,
     _poolMigratoryRoute,
     _poolMilitaryDiscipline,
@@ -1419,6 +1424,7 @@ const shard: CardShard = {
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
     _poolSmolderInitiate,
+    _poolSmolderingTar,
     _poolSmolderingWerewolf,
     _poolSnareTheSkies,
     _poolSnowHound,

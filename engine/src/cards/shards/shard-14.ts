@@ -57,6 +57,7 @@ import _poolBarrinsCodex from "../pool/barrins-codex.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBatteredGolem from "../pool/battered-golem.js";
+import _poolBattery from "../pool/battery.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBearTrap from "../pool/bear-trap.js";
@@ -167,6 +168,7 @@ import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
 import _poolDecayingTimeLoop from "../pool/decaying-time-loop.js";
+import _poolDeliver from "../pool/deliver.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
@@ -563,6 +565,7 @@ import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolRestock from "../pool/restock.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
+import _poolRevivingVapors from "../pool/reviving-vapors.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRibbons from "../pool/ribbons.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
@@ -739,6 +742,7 @@ import _poolUnlivingPsychopath from "../pool/unliving-psychopath.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
+import _poolUrborgShambler from "../pool/urborg-shambler.js";
 import _poolUrborgStalker from "../pool/urborg-stalker.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasGuilt from "../pool/urzas-guilt.js";
@@ -867,6 +871,7 @@ const shard: CardShard = {
     _poolBartizanBats,
     _poolBastPantherGoddess,
     _poolBatteredGolem,
+    _poolBattery,
     _poolBattleMastery,
     _poolBattleRampart,
     _poolBearTrap,
@@ -977,6 +982,7 @@ const shard: CardShard = {
     _poolDeathcapCultivator,
     _poolDebtorsTransport,
     _poolDecayingTimeLoop,
+    _poolDeliver,
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,
@@ -1373,6 +1379,7 @@ const shard: CardShard = {
     _poolRestock,
     _poolReturnUponTheTide,
     _poolReverseDamage,
+    _poolRevivingVapors,
     _poolRewind,
     _poolRibbons,
     _poolRinAndSeriInseparable,
@@ -1549,6 +1556,7 @@ const shard: CardShard = {
     _poolUnnaturalGrowth,
     _poolUnravel,
     _poolUpTheBeanstalk,
+    _poolUrborgShambler,
     _poolUrborgStalker,
     _poolUrzasCave,
     _poolUrzasGuilt,

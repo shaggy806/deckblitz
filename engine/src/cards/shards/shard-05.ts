@@ -39,6 +39,7 @@ import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
+import _poolArdentSoldier from "../pool/ardent-soldier.js";
 import _poolArgothianWurm from "../pool/argothian-wurm.js";
 import _poolArmorOfThorns from "../pool/armor-of-thorns.js";
 import _poolArniSlaysTheTroll from "../pool/arni-slays-the-troll.js";
@@ -833,6 +834,7 @@ const shard: CardShard = {
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
+    _poolArdentSoldier,
     _poolArgothianWurm,
     _poolArmorOfThorns,
     _poolArniSlaysTheTroll,

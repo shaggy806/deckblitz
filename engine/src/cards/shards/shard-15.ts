@@ -478,6 +478,7 @@ import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
+import _poolOrimsTouch from "../pool/orims-touch.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
 import _poolOverchargedAmalgam from "../pool/overcharged-amalgam.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
@@ -740,6 +741,7 @@ import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
 import _poolYanlingsHarbinger from "../pool/yanlings-harbinger.js";
+import _poolYavimayaKavu from "../pool/yavimaya-kavu.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYuanTiMalison from "../pool/yuan-ti-malison.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
@@ -1252,6 +1254,7 @@ const shard: CardShard = {
     _poolOlogHaiCrusher,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
+    _poolOrimsTouch,
     _poolOstrichHorse,
     _poolOverchargedAmalgam,
     _poolPackAPunch,
@@ -1514,6 +1517,7 @@ const shard: CardShard = {
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,
     _poolYanlingsHarbinger,
+    _poolYavimayaKavu,
     _poolYoungPyromancer,
     _poolYuanTiMalison,
     _poolYumaProudProtector,

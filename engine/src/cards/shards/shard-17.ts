@@ -110,6 +110,7 @@ import _poolChieftainEnDal from "../pool/chieftain-en-dal.js";
 import _poolChildrenOfKorlis from "../pool/children-of-korlis.js";
 import _poolChitinousCloak from "../pool/chitinous-cloak.js";
 import _poolChromium from "../pool/chromium.js";
+import _poolCinderShade from "../pool/cinder-shade.js";
 import _poolCityOnFire from "../pool/city-on-fire.js";
 import _poolCitywideBust from "../pool/citywide-bust.js";
 import _poolCleansingNova from "../pool/cleansing-nova.js";
@@ -334,6 +335,7 @@ import _poolHornetNest from "../pool/hornet-nest.js";
 import _poolHowlgeist from "../pool/howlgeist.js";
 import _poolHundingGjornersen from "../pool/hunding-gjornersen.js";
 import _poolHungryMist from "../pool/hungry-mist.js";
+import _poolHuntingKavu from "../pool/hunting-kavu.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
@@ -671,6 +673,7 @@ import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
+import _poolTeferisCare from "../pool/teferis-care.js";
 import _poolTelJiladArchers from "../pool/tel-jilad-archers.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
@@ -776,6 +779,7 @@ import _poolWretchedBanquet from "../pool/wretched-banquet.js";
 import _poolWrongTurn from "../pool/wrong-turn.js";
 import _poolXantidSwarm from "../pool/xantid-swarm.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
+import _poolYawgmothsAgenda from "../pool/yawgmoths-agenda.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
 import _poolYotianTactician from "../pool/yotian-tactician.js";
@@ -923,6 +927,7 @@ const shard: CardShard = {
     _poolChildrenOfKorlis,
     _poolChitinousCloak,
     _poolChromium,
+    _poolCinderShade,
     _poolCityOnFire,
     _poolCitywideBust,
     _poolCleansingNova,
@@ -1147,6 +1152,7 @@ const shard: CardShard = {
     _poolHowlgeist,
     _poolHundingGjornersen,
     _poolHungryMist,
+    _poolHuntingKavu,
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
@@ -1484,6 +1490,7 @@ const shard: CardShard = {
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
+    _poolTeferisCare,
     _poolTelJiladArchers,
     _poolTemporaryTruce,
     _poolTezzeretsTouch,
@@ -1589,6 +1596,7 @@ const shard: CardShard = {
     _poolWrongTurn,
     _poolXantidSwarm,
     _poolYahenniUndyingPartisan,
+    _poolYawgmothsAgenda,
     _poolYawningFissure,
     _poolYevasForcemage,
     _poolYotianTactician,

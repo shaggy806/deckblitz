@@ -104,6 +104,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Orb Token",
   // Broken Visage lists none (the Oracle snapshot, 2026-10-25).
   "X/X Spirit Token (Black)",
+  // Pure Reflection's X/X Reflection lists none (the Oracle snapshot, 2026-10-27).
+  "X/X Reflection Token (White)",
   // Wall of Kelp lists none.
   "Kelp Token",
   // Jungle Patrol's Wood lists none.

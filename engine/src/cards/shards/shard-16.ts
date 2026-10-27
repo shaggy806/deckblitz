@@ -524,6 +524,7 @@ import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
+import _poolPureReflection from "../pool/pure-reflection.js";
 import _poolPurelace from "../pool/purelace.js";
 import _poolPurity from "../pool/purity.js";
 import _poolPurphorosGodOfTheForge from "../pool/purphoros-god-of-the-forge.js";
@@ -721,6 +722,7 @@ import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
 import _poolTolarianDrake from "../pool/tolarian-drake.js";
+import _poolTolarianEmissary from "../pool/tolarian-emissary.js";
 import _poolTolsimirWolfblood from "../pool/tolsimir-wolfblood.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
@@ -1381,6 +1383,7 @@ const shard: CardShard = {
     _poolPridefulParent,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,
+    _poolPureReflection,
     _poolPurelace,
     _poolPurity,
     _poolPurphorosGodOfTheForge,
@@ -1578,6 +1581,7 @@ const shard: CardShard = {
     _poolToadstoolAdmirer,
     _poolTogetherForever,
     _poolTolarianDrake,
+    _poolTolarianEmissary,
     _poolTolsimirWolfblood,
     _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,

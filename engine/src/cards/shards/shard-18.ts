@@ -335,6 +335,7 @@ import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKamiOfFiresRoar from "../pool/kami-of-fires-roar.js";
+import _poolKavuScout from "../pool/kavu-scout.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
@@ -457,6 +458,7 @@ import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
+import _poolOrderedMigration from "../pool/ordered-migration.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
@@ -1131,6 +1133,7 @@ const shard: CardShard = {
     _poolJyotiMoagAncient,
     _poolKalonianHydra,
     _poolKamiOfFiresRoar,
+    _poolKavuScout,
     _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
@@ -1253,6 +1256,7 @@ const shard: CardShard = {
     _poolOnwardVictory,
     _poolOpalineSliver,
     _poolOranRiefInvoker,
+    _poolOrderedMigration,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,

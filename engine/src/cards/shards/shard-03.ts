@@ -208,6 +208,7 @@ import _poolFesteringWound from "../pool/festering-wound.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
+import _poolFirebrandRanger from "../pool/firebrand-ranger.js";
 import _poolFlamewakePhoenix from "../pool/flamewake-phoenix.js";
 import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
 import _poolFlashOfDefiance from "../pool/flash-of-defiance.js";
@@ -576,6 +577,7 @@ import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
 import _poolStandTogether from "../pool/stand-together.js";
+import _poolStand from "../pool/stand.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStartledAwake from "../pool/startled-awake.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
@@ -938,6 +940,7 @@ const shard: CardShard = {
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,
+    _poolFirebrandRanger,
     _poolFlamewakePhoenix,
     _poolFlamewaveInvoker,
     _poolFlashOfDefiance,
@@ -1306,6 +1309,7 @@ const shard: CardShard = {
     _poolStaffOfTheAges,
     _poolStalkingTiger,
     _poolStandTogether,
+    _poolStand,
     _poolStarlitAngel,
     _poolStartledAwake,
     _poolStaunchCrewmate,

@@ -136,6 +136,7 @@ import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCripplingFatigue from "../pool/crippling-fatigue.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
+import _poolCryptAngel from "../pool/crypt-angel.js";
 import _poolCryptwailing from "../pool/cryptwailing.js";
 import _poolCrystalChimes from "../pool/crystal-chimes.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
@@ -201,6 +202,7 @@ import _poolDungeonGeists from "../pool/dungeon-geists.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolDuskmantleSeer from "../pool/duskmantle-seer.js";
+import _poolDuskwalker from "../pool/duskwalker.js";
 import _poolDutifulReturn from "../pool/dutiful-return.js";
 import _poolEarthServant from "../pool/earth-servant.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
@@ -644,6 +646,7 @@ import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolStudentOfElements from "../pool/student-of-elements.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
+import _poolSuffering from "../pool/suffering.js";
 import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
 import _poolSultaiFlayer from "../pool/sultai-flayer.js";
@@ -925,6 +928,7 @@ const shard: CardShard = {
     _poolCribSwap,
     _poolCripplingFatigue,
     _poolCruelReality,
+    _poolCryptAngel,
     _poolCryptwailing,
     _poolCrystalChimes,
     _poolCudgelTroll,
@@ -990,6 +994,7 @@ const shard: CardShard = {
     _poolDurableHandicraft,
     _poolDuskmantleHouseOfShadow,
     _poolDuskmantleSeer,
+    _poolDuskwalker,
     _poolDutifulReturn,
     _poolEarthServant,
     _poolEarthblighter,
@@ -1433,6 +1438,7 @@ const shard: CardShard = {
     _poolStudentOfElements,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
+    _poolSuffering,
     _poolSukiKyoshiWarrior,
     _poolSulfurFalls,
     _poolSultaiFlayer,

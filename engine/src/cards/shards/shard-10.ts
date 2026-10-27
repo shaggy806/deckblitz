@@ -362,6 +362,7 @@ import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
 import _poolKarametrasBlessing from "../pool/karametras-blessing.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
+import _poolKavuRunner from "../pool/kavu-runner.js";
 import _poolKeeperOfProgenitus from "../pool/keeper-of-progenitus.js";
 import _poolKeldonBattlewagon from "../pool/keldon-battlewagon.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
@@ -539,6 +540,7 @@ import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
+import _poolRogueKavu from "../pool/rogue-kavu.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
@@ -768,6 +770,7 @@ import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
 import _poolWaxingMoon from "../pool/waxing-moon.js";
+import _poolWayfaringGiant from "../pool/wayfaring-giant.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
 import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
 import _poolWhetwheel from "../pool/whetwheel.js";
@@ -1171,6 +1174,7 @@ const shard: CardShard = {
     _poolKarametrasBlessing,
     _poolKarnLegacyReforged,
     _poolKathariRemnant,
+    _poolKavuRunner,
     _poolKeeperOfProgenitus,
     _poolKeldonBattlewagon,
     _poolKessigForgemaster,
@@ -1348,6 +1352,7 @@ const shard: CardShard = {
     _poolRiverwalkTechnique,
     _poolRiveteersDecoy,
     _poolRobTheArchives,
+    _poolRogueKavu,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
     _poolRoninCavekeeper,
@@ -1577,6 +1582,7 @@ const shard: CardShard = {
     _poolWarrenInstigator,
     _poolWaterspoutWarden,
     _poolWaxingMoon,
+    _poolWayfaringGiant,
     _poolWeddingAnnouncement,
     _poolWelcomingVampire,
     _poolWhetwheel,
