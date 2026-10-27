@@ -514,6 +514,7 @@ import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResoundingScream from "../pool/resounding-scream.js";
 import _poolResurrection from "../pool/resurrection.js";
+import _poolRetract from "../pool/retract.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolRepurposedEnforcer,
     _poolResoundingScream,
     _poolResurrection,
+    _poolRetract,
     _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRiotDevils,

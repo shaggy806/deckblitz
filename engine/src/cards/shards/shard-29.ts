@@ -217,6 +217,7 @@ import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
 import _poolFalseMourning from "../pool/false-mourning.js";
+import _poolFangrenFirstborn from "../pool/fangren-firstborn.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
@@ -371,6 +372,7 @@ import _poolLuminatePrimordial from "../pool/luminate-primordial.js";
 import _poolLurkingRoper from "../pool/lurking-roper.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
 import _poolMabelsMettle from "../pool/mabels-mettle.js";
+import _poolMachinate from "../pool/machinate.js";
 import _poolMachineOverMatter from "../pool/machine-over-matter.js";
 import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dragon.js";
 import _poolMagesGuile from "../pool/mages-guile.js";
@@ -410,6 +412,7 @@ import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
+import _poolMyrLandshaper from "../pool/myr-landshaper.js";
 import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNearheathPilgrim from "../pool/nearheath-pilgrim.js";
@@ -739,6 +742,7 @@ import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
 import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
+import _poolWireflyHive from "../pool/wirefly-hive.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
@@ -994,6 +998,7 @@ const shard: CardShard = {
     _poolFalkenrathMarauders,
     _poolFallOfTheTitans,
     _poolFalseMourning,
+    _poolFangrenFirstborn,
     _poolFangrenMarauder,
     _poolFatedReturn,
     _poolFeralLightning,
@@ -1148,6 +1153,7 @@ const shard: CardShard = {
     _poolLurkingRoper,
     _poolLyraArchangelOfDawn,
     _poolMabelsMettle,
+    _poolMachinate,
     _poolMachineOverMatter,
     _poolMaelstromOfTheSpiritDragon,
     _poolMagesGuile,
@@ -1187,6 +1193,7 @@ const shard: CardShard = {
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,
+    _poolMyrLandshaper,
     _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,
     _poolNearheathPilgrim,
@@ -1516,6 +1523,7 @@ const shard: CardShard = {
     _poolWhiteWidowYelenaBelova,
     _poolWildRide,
     _poolWingsOfTheCosmos,
+    _poolWireflyHive,
     _poolWispdrinkerVampire,
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,

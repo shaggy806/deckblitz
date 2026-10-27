@@ -124,6 +124,7 @@ import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
+import _poolChimericEgg from "../pool/chimeric-egg.js";
 import _poolCinderclasm from "../pool/cinderclasm.js";
 import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
 import _poolCircleOfProtectionRed from "../pool/circle-of-protection-red.js";
@@ -430,6 +431,7 @@ import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
 import _poolNikkoOnna from "../pool/nikko-onna.js";
+import _poolNimAbomination from "../pool/nim-abomination.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNivixCyclops from "../pool/nivix-cyclops.js";
@@ -898,6 +900,7 @@ const shard: CardShard = {
     _poolChapelGeist,
     _poolChargeAcrossTheAraba,
     _poolChildOfThePack,
+    _poolChimericEgg,
     _poolCinderclasm,
     _poolCinderingCutthroat,
     _poolCircleOfProtectionRed,
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolNeedleshotGourna,
     _poolNightMarketLookout,
     _poolNikkoOnna,
+    _poolNimAbomination,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
     _poolNivixCyclops,

@@ -1353,6 +1353,27 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Removal and movement.
+  // "Target X and all other Xs with the same name as that X" (rule 201.2a):
+  // one `-all` effect over the target and its namesakes (`sameNameAsTarget`).
+  const NAMESAKES = `and all other (permanents|creatures|artifacts|enchantments|lands) with the same name as that (?:permanent|creature|artifact|enchantment|land)`;
+  const namesakes = (plural, target) => {
+    const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
+    return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
+  };
+  if ((m = re(`(destroy|exile) (${TARGET}) ${NAMESAKES}`).exec(s))) {
+    const filter = namesakes(m[3], slot(m[2]));
+    return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
+  }
+  if ((m = re(`return (${TARGET}) ${NAMESAKES} to their owners' hands`).exec(s))) {
+    const filter = namesakes(m[2], slot(m[1]));
+    return filter === undefined ? null : { kind: "return-to-hand-all", filter };
+  }
+  if ((m = re(`(${TARGET}) ${NAMESAKES} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    const filter = namesakes(m[2], slot(m[1]));
+    return filter === undefined
+      ? null
+      : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+  }
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };
   // Airbend (rule 701.65a): exiled, its owner may cast it for {2}. Several

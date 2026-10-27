@@ -32,7 +32,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
+import { LOCKED_ROOM, activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { hasSubtype } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
@@ -306,6 +306,21 @@ export interface CardFilter {
   /** `saddledSource` bound to the permanent it means — written by
    * `bindDynamicCompares`, never authored. */
   readonly saddledBy?: ObjectId;
+  /**
+   * It is the object in this target slot of the resolving spell or ability,
+   * or has the same name as it (rule 201.2a) — Maelstrom Pulse's "destroy
+   * target nonland permanent **and all other permanents with the same name
+   * as that permanent**" is a `destroy-all` of `{ sameNameAsTarget: 0 }`,
+   * so the target and its namesakes go in one event (the ruling: an
+   * indestructible target still takes the others with it). An effect's
+   * filter only: `bindDynamicCompares` binds it to `sameNameAs` as the
+   * effect applies; anywhere else it matches nothing.
+   */
+  readonly sameNameAsTarget?: number;
+  /** `sameNameAsTarget` bound — written by `bindDynamicCompares`, never
+   * authored: the target itself, and the name it has (`null` for none — a
+   * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
+  readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
   /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
@@ -997,6 +1012,14 @@ export function matchesFilter(
   // The name it has — a copy exception's, if one renamed it (`nameOf`).
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
   if (filter.name !== undefined && named !== filter.name) return false;
+  if (filter.sameNameAsTarget !== undefined) return false;
+  if (filter.sameNameAs !== undefined && id !== filter.sameNameAs.object) {
+    // Rule 201.2a: an object with no name shares it with nothing — a
+    // face-down permanent, or a Room with both doors locked (709.5).
+    const nameless =
+      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
+    if (filter.sameNameAs.name === null || nameless || named !== filter.sameNameAs.name) return false;
+  }
   if (filter.notName !== undefined && named === filter.notName) return false;
 
   if (

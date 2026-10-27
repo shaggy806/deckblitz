@@ -639,6 +639,7 @@ import _poolSporesowerThallid from "../pool/sporesower-thallid.js";
 import _poolSproutSwarm from "../pool/sprout-swarm.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
+import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormSculptor from "../pool/storm-sculptor.js";
@@ -768,6 +769,7 @@ import _poolWirecat from "../pool/wirecat.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
+import _poolWurmsTooth from "../pool/wurms-tooth.js";
 import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
@@ -1435,6 +1437,7 @@ const shard: CardShard = {
     _poolSproutSwarm,
     _poolStarWhale,
     _poolSteelburrChampion,
+    _poolSteelshaperApprentice,
     _poolStickyFingers,
     _poolStonybrookBanneret,
     _poolStormSculptor,
@@ -1564,6 +1567,7 @@ const shard: CardShard = {
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,
     _poolWritOfReturn,
+    _poolWurmsTooth,
     _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,

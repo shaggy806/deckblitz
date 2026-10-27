@@ -184,6 +184,7 @@ import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
 import _poolDustStalker from "../pool/dust-stalker.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
+import _poolEchoingTruth from "../pool/echoing-truth.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
 import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
@@ -424,6 +425,7 @@ import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNecrosquito from "../pool/necrosquito.js";
 import _poolNephaliaSmuggler from "../pool/nephalia-smuggler.js";
 import _poolNetcasterSpider from "../pool/netcaster-spider.js";
+import _poolNeurokProdigy from "../pool/neurok-prodigy.js";
 import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
@@ -579,6 +581,7 @@ import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
+import _poolSpellbinder from "../pool/spellbinder.js";
 import _poolSpiderClimb from "../pool/spider-climb.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
@@ -937,6 +940,7 @@ const shard: CardShard = {
     _poolDustStalker,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
+    _poolEchoingTruth,
     _poolEclipsedFlamekin,
     _poolEfflorescence,
     _poolEgonGodOfDeath,
@@ -1177,6 +1181,7 @@ const shard: CardShard = {
     _poolNecrosquito,
     _poolNephaliaSmuggler,
     _poolNetcasterSpider,
+    _poolNeurokProdigy,
     _poolNexusOfFate,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
@@ -1332,6 +1337,7 @@ const shard: CardShard = {
     _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
+    _poolSpellbinder,
     _poolSpiderClimb,
     _poolSpikedBaloth,
     _poolSpikedRipsaw,

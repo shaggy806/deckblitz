@@ -402,6 +402,7 @@ import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMephidrossVampire from "../pool/mephidross-vampire.js";
+import _poolMephiticOoze from "../pool/mephitic-ooze.js";
 import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMerfolkRaiders from "../pool/merfolk-raiders.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
@@ -1178,6 +1179,7 @@ const shard: CardShard = {
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
     _poolMephidrossVampire,
+    _poolMephiticOoze,
     _poolMerfolkBranchwalker,
     _poolMerfolkRaiders,
     _poolMeriasOutrider,

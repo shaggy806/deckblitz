@@ -192,6 +192,7 @@ import _poolDreadwurm from "../pool/dreadwurm.js";
 import _poolDreamCache from "../pool/dream-cache.js";
 import _poolDromokaTheEternal from "../pool/dromoka-the-eternal.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
+import _poolDrossGolem from "../pool/dross-golem.js";
 import _poolDrossforgeBridge from "../pool/drossforge-bridge.js";
 import _poolDrownedCatacomb from "../pool/drowned-catacomb.js";
 import _poolDrudgeSentinel from "../pool/drudge-sentinel.js";
@@ -427,6 +428,7 @@ import _poolLuxaRiverShrine from "../pool/luxa-river-shrine.js";
 import _poolLychguard from "../pool/lychguard.js";
 import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
+import _poolMagneticFlux from "../pool/magnetic-flux.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolMakindiPatrol from "../pool/makindi-patrol.js";
 import _poolManaFlare from "../pool/mana-flare.js";
@@ -522,6 +524,7 @@ import _poolProfitLoss from "../pool/profit-loss.js";
 import _poolProtectTheNegotiators from "../pool/protect-the-negotiators.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
+import _poolPsychicOverload from "../pool/psychic-overload.js";
 import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
@@ -663,6 +666,7 @@ import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
 import _poolTailSlash from "../pool/tail-slash.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
+import _poolTangleGolem from "../pool/tangle-golem.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTatteredRatter from "../pool/tattered-ratter.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
@@ -976,6 +980,7 @@ const shard: CardShard = {
     _poolDreamCache,
     _poolDromokaTheEternal,
     _poolDrossCrocodile,
+    _poolDrossGolem,
     _poolDrossforgeBridge,
     _poolDrownedCatacomb,
     _poolDrudgeSentinel,
@@ -1211,6 +1216,7 @@ const shard: CardShard = {
     _poolLychguard,
     _poolMadameHydraReanimated,
     _poolMagitekArmor,
+    _poolMagneticFlux,
     _poolMakeObsolete,
     _poolMakindiPatrol,
     _poolManaFlare,
@@ -1306,6 +1312,7 @@ const shard: CardShard = {
     _poolProtectTheNegotiators,
     _poolProwessOfTheFair,
     _poolProwlingCaracal,
+    _poolPsychicOverload,
     _poolPublicThoroughfare,
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
@@ -1447,6 +1454,7 @@ const shard: CardShard = {
     _poolTailSlash,
     _poolTalrand,
     _poolTanaTheBloodsower,
+    _poolTangleGolem,
     _poolTasigurTheGoldenFang,
     _poolTatteredRatter,
     _poolTemperedSteel,

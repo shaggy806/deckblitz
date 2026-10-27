@@ -6077,6 +6077,10 @@ export interface EffectApi {
   onBattlefield(object: ObjectId): boolean;
   /** `object`'s name, as a player sees it (a choice's text). */
   objectName(object: ObjectId): string;
+  /** `object`'s name as rule 201.2a compares names — a copy's, if one renamed
+   * it — or `null` when it has none (a face-down permanent, a Room with both
+   * doors locked). See `CardFilter.sameNameAsTarget`. */
+  nameForMatching(object: ObjectId): string | null;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -8579,6 +8583,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCardTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
+      "sameNameAsTarget" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
@@ -8665,6 +8670,18 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
+    }
+    // "And all other permanents with the same name as that permanent": the
+    // target itself and its name now (rule 201.2a). A target that's gone
+    // leaves the clause matching nothing — the spell has no other target, so
+    // it doesn't resolve at all (rule 608.2b).
+    if (typeof walked["sameNameAsTarget"] === "number") {
+      const { sameNameAsTarget: slot, ...rest } = walked;
+      const target = ctx.targets[slot as number];
+      walked =
+        target?.kind === "object"
+          ? { ...rest, sameNameAs: { object: target.object, name: ctx.nameForMatching(target.object) } }
+          : walked;
     }
     if (!("sharesCardTypeWith" in walked)) return walked;
     const { sharesCardTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;

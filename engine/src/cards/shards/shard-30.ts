@@ -345,6 +345,7 @@ import _poolIllTemperedCyclops from "../pool/ill-tempered-cyclops.js";
 import _poolImplementOfCombustion from "../pool/implement-of-combustion.js";
 import _poolInTheWebOfWar from "../pool/in-the-web-of-war.js";
 import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
+import _poolInfestedRoothold from "../pool/infested-roothold.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
@@ -765,11 +766,13 @@ import _poolZodiacTiger from "../pool/zodiac-tiger.js";
 import _poolZulAshurLichLord from "../pool/zul-ashur-lich-lord.js";
 import _tokensBearToken from "../tokens/bear-token.js";
 import _tokensBeastToken22 from "../tokens/beast-token-2-2.js";
+import _tokensBlueElementalToken22Flying from "../tokens/blue-elemental-token-2-2-flying.js";
 import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flying-haste.js";
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
+import _tokensTwinToken from "../tokens/twin-token.js";
 import _tokensYoungHeroRoleToken from "../tokens/young-hero-role-token.js";
 
 const shard: CardShard = {
@@ -1116,6 +1119,7 @@ const shard: CardShard = {
     _poolImplementOfCombustion,
     _poolInTheWebOfWar,
     _poolIncriminatingImpetus,
+    _poolInfestedRoothold,
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
     _poolInspiringCall,
@@ -1538,11 +1542,13 @@ const shard: CardShard = {
   tokens: [
     _tokensBearToken,
     _tokensBeastToken22,
+    _tokensBlueElementalToken22Flying,
     _tokensDinosaurToken22FlyingHaste,
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
     _tokensMyrToken,
+    _tokensTwinToken,
     _tokensYoungHeroRoleToken,
   ],
 };

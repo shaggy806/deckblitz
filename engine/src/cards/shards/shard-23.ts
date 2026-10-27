@@ -488,6 +488,7 @@ import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProgenitus from "../pool/progenitus.js";
 import _poolPromptoArgentum from "../pool/prompto-argentum.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
+import _poolPulseOfTheTangle from "../pool/pulse-of-the-tangle.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
@@ -531,6 +532,7 @@ import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
+import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
@@ -657,6 +659,7 @@ import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
 import _poolTectonicRift from "../pool/tectonic-rift.js";
+import _poolTelJiladWolf from "../pool/tel-jilad-wolf.js";
 import _poolTelekineticSliver from "../pool/telekinetic-sliver.js";
 import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
@@ -768,6 +771,7 @@ import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-toke
 import _tokensElementalToken88Vigilance from "../tokens/elemental-token-8-8-vigilance.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
 import _tokensRedElementalToken31Haste from "../tokens/red-elemental-token-3-1-haste.js";
+import _tokensRedElementalToken33 from "../tokens/red-elemental-token-3-3.js";
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
@@ -1260,6 +1264,7 @@ const shard: CardShard = {
     _poolProgenitus,
     _poolPromptoArgentum,
     _poolProtectorOfGondor,
+    _poolPulseOfTheTangle,
     _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,
     _poolPyreSledgeArsonist,
@@ -1303,6 +1308,7 @@ const shard: CardShard = {
     _poolRimefurReindeer,
     _poolRiteOfConsumption,
     _poolRitualOfHope,
+    _poolRoaringSlagwurm,
     _poolRoilingCanopy,
     _poolRooftopAssassin,
     _poolRoryWilliams,
@@ -1429,6 +1435,7 @@ const shard: CardShard = {
     _poolTasseledDromedary,
     _poolTeamTransmitter,
     _poolTectonicRift,
+    _poolTelJiladWolf,
     _poolTelekineticSliver,
     _poolTempleOfTheDragonQueen,
     _poolTemporaryLockdown,
@@ -1542,6 +1549,7 @@ const shard: CardShard = {
     _tokensElementalToken88Vigilance,
     _tokensPlainKnightToken,
     _tokensRedElementalToken31Haste,
+    _tokensRedElementalToken33,
     _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,

@@ -55,6 +55,7 @@ import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
+import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBarbedFoliage from "../pool/barbed-foliage.js";
@@ -212,6 +213,7 @@ import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
+import _poolEchoingRuin from "../pool/echoing-ruin.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -568,6 +570,7 @@ import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
+import _poolShieldOfKaldra from "../pool/shield-of-kaldra.js";
 import _poolShinewend from "../pool/shinewend.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShriekhorn from "../pool/shriekhorn.js";
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolBalambTRexaur,
     _poolBallLightning,
     _poolBalothPrime,
+    _poolBanishment,
     _poolBantBattlemage,
     _poolBaralsExpertise,
     _poolBarbedFoliage,
@@ -981,6 +985,7 @@ const shard: CardShard = {
     _poolDynamiteDiver,
     _poolEarthenAlly,
     _poolEbonDragon,
+    _poolEchoingRuin,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
@@ -1337,6 +1342,7 @@ const shard: CardShard = {
     _poolShambleshark,
     _poolShenanigans,
     _poolSheriffOfSafePassage,
+    _poolShieldOfKaldra,
     _poolShinewend,
     _poolShortcutSeeker,
     _poolShriekhorn,

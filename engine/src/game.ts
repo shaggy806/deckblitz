@@ -297,6 +297,7 @@ import {
   rulesTextName,
   textNameOf,
   nameOf,
+  LOCKED_ROOM,
   tokenFoldKey,
   speedOf,
 } from "./state.js";
@@ -22555,6 +22556,11 @@ export class Game {
       objectName: (object) => {
         const it = this.state.objects[object];
         return it === undefined ? "That permanent" : printedCardName(it);
+      },
+      nameForMatching: (object) => {
+        const it = this.state.objects[object];
+        if (it === undefined || it.faceDown !== undefined || printedCardName(it) === LOCKED_ROOM) return null;
+        return nameOf(it);
       },
       explored: (result) =>
         this.emit({

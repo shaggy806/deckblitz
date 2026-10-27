@@ -33,6 +33,7 @@ import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js"
 import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArcaneOmens from "../pool/arcane-omens.js";
 import _poolArcaneTeachings from "../pool/arcane-teachings.js";
+import _poolArcboundFiend from "../pool/arcbound-fiend.js";
 import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArchfiendsVessel from "../pool/archfiends-vessel.js";
@@ -59,6 +60,7 @@ import _poolBallroom from "../pool/ballroom.js";
 import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
+import _poolBarbedLightning from "../pool/barbed-lightning.js";
 import _poolBashfulBeastie from "../pool/bashful-beastie.js";
 import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
@@ -200,6 +202,7 @@ import _poolDouse from "../pool/douse.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
 import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
+import _poolDragonsClaw from "../pool/dragons-claw.js";
 import _poolDragonsguardElite from "../pool/dragonsguard-elite.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolAppaSteadfastGuardian,
     _poolArcaneOmens,
     _poolArcaneTeachings,
+    _poolArcboundFiend,
     _poolArchelosLagoonMystic,
     _poolArchersParapet,
     _poolArchfiendsVessel,
@@ -889,6 +893,7 @@ const shard: CardShard = {
     _poolBanshee,
     _poolBaradDur,
     _poolBarbarianRiftcutter,
+    _poolBarbedLightning,
     _poolBashfulBeastie,
     _poolBasicConjuration,
     _poolBatteringCraghorn,
@@ -1030,6 +1035,7 @@ const shard: CardShard = {
     _poolDrMadisonLi,
     _poolDragonMoose,
     _poolDragonlairSpider,
+    _poolDragonsClaw,
     _poolDragonsguardElite,
     _poolDragonspeakerShaman,
     _poolDreadReturn,

@@ -170,6 +170,13 @@ describe("slot polarity", () => {
     expect(cast("Fencer's Magemark")).toEqual(["help"]);
   });
 
+  it("reads a same-name sweep's target as the one it hits, and an Aura's own escape as no gift", () => {
+    expect(cast("Maelstrom Pulse")).toEqual(["harm"]);
+    expect(cast("Echoing Decay")).toEqual(["harm"]);
+    expect(cast("Echoing Courage")).toEqual(["help"]);
+    expect(cast("Psychic Overload")).toEqual(["harm"]);
+  });
+
   it("reads haunt's target as the opponent's creature, the one likelier to die", () => {
     expect(abilityPolarities(haunt())).toEqual(["harm"]);
   });

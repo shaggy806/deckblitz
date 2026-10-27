@@ -22,6 +22,7 @@ import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAetherChaser from "../pool/aether-chaser.js";
 import _poolAetherbornMarauder from "../pool/aetherborn-marauder.js";
 import _poolAgateAssault from "../pool/agate-assault.js";
+import _poolAgelessEntity from "../pool/ageless-entity.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
@@ -391,6 +392,7 @@ import _poolKnightOfTheLastBreath from "../pool/knight-of-the-last-breath.js";
 import _poolKoboldDrillSergeant from "../pool/kobold-drill-sergeant.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKorHookmaster from "../pool/kor-hookmaster.js";
+import _poolKrakensEye from "../pool/krakens-eye.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
 import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
 import _poolKuroPitlord from "../pool/kuro-pitlord.js";
@@ -829,6 +831,7 @@ const shard: CardShard = {
     _poolAetherChaser,
     _poolAetherbornMarauder,
     _poolAgateAssault,
+    _poolAgelessEntity,
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
@@ -1198,6 +1201,7 @@ const shard: CardShard = {
     _poolKoboldDrillSergeant,
     _poolKomodoRhino,
     _poolKorHookmaster,
+    _poolKrakensEye,
     _poolKuldothaFlamefiend,
     _poolKuonOgreAscendant,
     _poolKuroPitlord,

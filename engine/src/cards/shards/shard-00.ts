@@ -193,6 +193,7 @@ import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
 import _poolEarthshape from "../pool/earthshape.js";
+import _poolEchoingCourage from "../pool/echoing-courage.js";
 import _poolEddymurkCrab from "../pool/eddymurk-crab.js";
 import _poolEdgeRover from "../pool/edge-rover.js";
 import _poolElfhameWurm from "../pool/elfhame-wurm.js";
@@ -985,6 +986,7 @@ const shard: CardShard = {
     _poolEagerTrufflesnout,
     _poolEarthquake,
     _poolEarthshape,
+    _poolEchoingCourage,
     _poolEddymurkCrab,
     _poolEdgeRover,
     _poolElfhameWurm,

@@ -170,6 +170,7 @@ import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDecimatorWeb from "../pool/decimator-web.js";
+import _poolDeclarationInStone from "../pool/declaration-in-stone.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
 import _poolDemonicTaskmaster from "../pool/demonic-taskmaster.js";
@@ -180,6 +181,7 @@ import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyExistence from "../pool/deny-existence.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
+import _poolDeputyOfDetention from "../pool/deputy-of-detention.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
 import _poolDesecrationDemon from "../pool/desecration-demon.js";
 import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
@@ -616,6 +618,7 @@ import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
 import _poolSerraZealot from "../pool/serra-zealot.js";
 import _poolSetAdrift from "../pool/set-adrift.js";
+import _poolSeverTheBloodline from "../pool/sever-the-bloodline.js";
 import _poolSewerShambler from "../pool/sewer-shambler.js";
 import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
@@ -983,6 +986,7 @@ const shard: CardShard = {
     _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDecimatorWeb,
+    _poolDeclarationInStone,
     _poolDeepForestHermit,
     _poolDelversTorch,
     _poolDemonicTaskmaster,
@@ -993,6 +997,7 @@ const shard: CardShard = {
     _poolDenyExistence,
     _poolDenyReality,
     _poolDepower,
+    _poolDeputyOfDetention,
     _poolDerelictAtticWidowsWalk,
     _poolDesecrationDemon,
     _poolDestinedConfrontation,
@@ -1429,6 +1434,7 @@ const shard: CardShard = {
     _poolSerraPaladin,
     _poolSerraZealot,
     _poolSetAdrift,
+    _poolSeverTheBloodline,
     _poolSewerShambler,
     _poolShadowInTheWarp,
     _poolShadowTheHedgehog,

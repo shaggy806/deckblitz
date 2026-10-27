@@ -227,6 +227,7 @@ import _poolFreneticSliver from "../pool/frenetic-sliver.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolFungalShambler from "../pool/fungal-shambler.js";
+import _poolFurnaceDragon from "../pool/furnace-dragon.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
 import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
@@ -569,6 +570,7 @@ import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulLink from "../pool/soul-link.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulTether from "../pool/soul-tether.js";
+import _poolSoulscour from "../pool/soulscour.js";
 import _poolSouthernPaladin from "../pool/southern-paladin.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
@@ -993,6 +995,7 @@ const shard: CardShard = {
     _poolFromFatherToSon,
     _poolFungalPlots,
     _poolFungalShambler,
+    _poolFurnaceDragon,
     _poolFurnaceSkullbomb,
     _poolFuss,
     _poolGastalRaider,
@@ -1335,6 +1338,7 @@ const shard: CardShard = {
     _poolSoulLink,
     _poolSoulSeizer,
     _poolSoulTether,
+    _poolSoulscour,
     _poolSouthernPaladin,
     _poolSpawnbinderMage,
     _poolSpeakeasyServer,
