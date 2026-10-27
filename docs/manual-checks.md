@@ -5563,3 +5563,9 @@ engine terms. A second thing to check is a second test.
 ### Sickening Dreams: choose X, then discard that many
 - **Do:** Cast Sickening Dreams and choose X = 2.
 - **Expect:** X goes no higher than 3 (the other cards in your hand). You're asked to discard two cards as it's cast; it then deals 2 damage to each creature and each player, and the Grizzly Bears die.
+
+## Skipping an untap step (2026-10-27, recheck list R5)
+
+### Avizoa: you skip your next untap step
+- **Do:** Activate Avizoa's {0} ability, then pass until your next turn.
+- **Expect:** Avizoa is 4/4 until end of turn. On your next turn the log says "Alice skips their untap step" and your tapped Islands stay tapped; on the turn after that they untap as usual.

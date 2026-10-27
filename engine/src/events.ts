@@ -99,6 +99,12 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `player` skipped their untap step (rule 614.10 — the
+       * `skip-untap-step` effect, Savor the Moment's extra turn). */
+      readonly type: "untap-step-skipped";
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** Aggravated Assault queued an extra combat phase this turn. */
       readonly type: "additional-combat-queued";
       readonly player: PlayerId;

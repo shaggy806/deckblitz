@@ -38,6 +38,7 @@ import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAshasFavor from "../pool/ashas-favor.js";
 import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
+import _poolAssembledAlphas from "../pool/assembled-alphas.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
 import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
@@ -91,6 +92,7 @@ import _poolBowerPassage from "../pool/bower-passage.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreaking from "../pool/breaking.js";
 import _poolBriarShield from "../pool/briar-shield.js";
+import _poolBrineElemental from "../pool/brine-elemental.js";
 import _poolBringerOfTheBlueDawn from "../pool/bringer-of-the-blue-dawn.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
@@ -112,6 +114,7 @@ import _poolCelestialSword from "../pool/celestial-sword.js";
 import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
+import _poolChainLightning from "../pool/chain-lightning.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
@@ -504,6 +507,7 @@ import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
+import _poolPersistentConstrictor from "../pool/persistent-constrictor.js";
 import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
@@ -904,6 +908,7 @@ const shard: CardShard = {
     _poolAshasFavor,
     _poolAshnodFleshMechanist,
     _poolAssembleTheLegion,
+    _poolAssembledAlphas,
     _poolAtlaPalaniNestTender,
     _poolAugustaDeanOfOrder,
     _poolAuraOfSilence,
@@ -957,6 +962,7 @@ const shard: CardShard = {
     _poolBrassclawOrcs,
     _poolBreaking,
     _poolBriarShield,
+    _poolBrineElemental,
     _poolBringerOfTheBlueDawn,
     _poolBrokersInitiate,
     _poolBrutalCathar,
@@ -978,6 +984,7 @@ const shard: CardShard = {
     _poolCentaurArcher,
     _poolCentaurCourser,
     _poolCentaurNurturer,
+    _poolChainLightning,
     _poolChargeThrough,
     _poolChargingWarBoar,
     _poolChildOfNight,
@@ -1370,6 +1377,7 @@ const shard: CardShard = {
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
+    _poolPersistentConstrictor,
     _poolPhantomBlade,
     _poolPhantomWarrior,
     _poolPharikasSpawn,

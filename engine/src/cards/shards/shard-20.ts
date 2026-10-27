@@ -525,6 +525,7 @@ import _poolPteronGhost from "../pool/pteron-ghost.js";
 import _poolPufferExtract from "../pool/puffer-extract.js";
 import _poolPunishment from "../pool/punishment.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
+import _poolPyreswipeHawk from "../pool/pyreswipe-hawk.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
 import _poolQuagSickness from "../pool/quag-sickness.js";
 import _poolQuagmireDruid from "../pool/quagmire-druid.js";
@@ -627,6 +628,7 @@ import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
 import _poolShieldOfTheRighteous from "../pool/shield-of-the-righteous.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
 import _poolShimmer from "../pool/shimmer.js";
+import _poolShisatoWhisperingHunter from "../pool/shisato-whispering-hunter.js";
 import _poolShreddedSails from "../pool/shredded-sails.js";
 import _poolShuDefender from "../pool/shu-defender.js";
 import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
@@ -1393,6 +1395,7 @@ const shard: CardShard = {
     _poolPufferExtract,
     _poolPunishment,
     _poolPutridGoblin,
+    _poolPyreswipeHawk,
     _poolQasaliPridemage,
     _poolQuagSickness,
     _poolQuagmireDruid,
@@ -1495,6 +1498,7 @@ const shard: CardShard = {
     _poolShieldOfTheRighteous,
     _poolShimmerMyr,
     _poolShimmer,
+    _poolShisatoWhisperingHunter,
     _poolShreddedSails,
     _poolShuDefender,
     _poolShuriTheBlackPanther,

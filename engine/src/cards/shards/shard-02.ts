@@ -134,6 +134,7 @@ import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
+import _poolCourtOfAmbition from "../pool/court-of-ambition.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
@@ -939,6 +940,7 @@ const shard: CardShard = {
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
     _poolCopperLeafAngel,
+    _poolCourtOfAmbition,
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,

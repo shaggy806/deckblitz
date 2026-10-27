@@ -305,6 +305,7 @@ import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
 import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
+import _poolHappyHoganBodyguard from "../pool/happy-hogan-bodyguard.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardEvidence from "../pool/hard-evidence.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
@@ -1137,6 +1138,7 @@ const shard: CardShard = {
     _poolGuardiansOfKoilos,
     _poolHammerheimDeadeye,
     _poolHamperingSnare,
+    _poolHappyHoganBodyguard,
     _poolHarbinVanguardAviator,
     _poolHardEvidence,
     _poolHardenedScales,

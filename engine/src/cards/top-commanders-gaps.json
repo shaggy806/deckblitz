@@ -479,13 +479,14 @@
   "cost:morph-sacrifice",
   "cost:morph-discard-card",
   "cost:morph-return-permanent",
-  "amount:count-in-graveyards-same-name-as-trigger-spell"
+  "amount:count-in-graveyards-same-name-as-trigger-spell",
+  "effect:skip-next-untap-step"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
    "size": "medium",
    "ui": false,
-   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent."
+   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent. Not covered (B237): a token copy of an Aura isn't asked what it enchants (bug:token-copy-aura-attach-choice)."
   },
   "bug:cda-all-zones": {
    "size": "small",
@@ -859,7 +860,7 @@
   "effect:amount-turn-stat": {
    "size": "small",
    "ui": false,
-   "description": "EffectAmounts that read turn stats: your life lost, gained or cards drawn this turn, the total across opponents, and the number of players or opponents who lost life this turn."
+   "description": "EffectAmounts that read turn stats: your life lost, gained or cards drawn this turn, the total across opponents, and the number of players or opponents who lost life this turn. Not covered (B237): opponentsAttacked reads this combat's attackers, not the turn's (amount:opponents-attacked-this-turn)."
   },
   "effect:attach-extensions": {
    "size": "medium",
@@ -871,7 +872,7 @@
   "effect:aura-enters-choice": {
    "size": "medium Also built (2026-10-10, B46): attaching to the trigger's object or the ability's source rather than a target (`attach`'s `target: \"trigger-object\" | \"source\"`: Hero's Blade, Shielded by Faith, Sword of the Squeak, Cloud, Ex-SOLDIER) and every match at once (`attachments`: Balan, Wandering Knight).",
    "ui": true,
-   "description": "An Aura put onto the battlefield without being cast chooses what it enchants as it enters (rule 303.4f), and stays where it was with nothing to enchant (303.4g); an Aura attached to nothing or to something it can no longer enchant goes to the graveyard (704.5m), and attaching checks the enchant restriction and Equipment's creatures-only rule (701.3b)."
+   "description": "An Aura put onto the battlefield without being cast chooses what it enchants as it enters (rule 303.4f), and stays where it was with nothing to enchant (303.4g); an Aura attached to nothing or to something it can no longer enchant goes to the graveyard (704.5m), and attaching checks the enchant restriction and Equipment's creatures-only rule (701.3b). Not covered (B237): protection sparing your own attachments, or reveal-until onto the battlefield else into hand (narrow keys under this family)."
   },
   "effect:become-copy": {
    "size": "medium",
@@ -893,7 +894,7 @@
   "effect:choices-by-other-players": {
    "size": "medium",
    "ui": false,
-   "description": "Choices that belong to players other than the controller, in APNAP order: a 'may' answered by the active player or the entering creature's controller, 'each player may', tempting offer, villainous choice, and 'unless' punishers. The punishers can be asked of each opponent in turn, can have the controller as chooser, and can offer 'or discard a card'."
+   "description": "Choices that belong to players other than the controller, in APNAP order: a 'may' answered by the active player or the entering creature's controller, 'each player may', tempting offer, villainous choice, and 'unless' punishers. The punishers can be asked of each opponent in turn, can have the controller as chooser, and can offer 'or discard a card'. Not covered (B237): the hold-until-all-have-chosen machinery covers discards and sacrifices chosen through options and the deferred draw/discard-hand/life cases, not `choices` (each outcome applies as it's chosen: effect:each-player-chooses-then-all-act) or an exile; and no chooser is an opponent for a search, sacrifice or creature-type choice (narrow keys under this family)."
   },
   "effect:control-change-extensions": {
    "size": "medium",
@@ -908,7 +909,7 @@
   "effect:copy-exceptions": {
    "size": "large",
    "ui": false,
-   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions."
+   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions. Not covered (B237): conditional exceptions (effect:copy-exception-if-creature, -if-copied-lacks-ability), a granted static or unprinted triggered ability, or replacing every subtype (setSubtypes keeps other kinds)."
   },
   "effect:copy-permanent-spell": {
    "size": "medium",
@@ -933,7 +934,7 @@
   "effect:delayed-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { dealsCombatDamage } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker)."
+   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { dealsCombatDamage } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker). Not covered (B237): DelayedWhenever handles single-object events only — not a batched-damage event per player (effect:delayed-whenever-batched-damage), a per-card graveyard arrival, a one-shot 'next attack', another player's or an extra turn's end step, or carrying X or 'that player' from the creating ability."
   },
   "effect:divide-among-targets": {
    "size": "medium",
@@ -1097,7 +1098,7 @@
   "effect:sacrificed-object-lki": {
    "size": "medium",
    "ui": false,
-   "description": "Snapshot the permanent sacrificed to pay a cost, or by a preceding step, and expose its last-known power, mana value, types, subtypes and isCommander. These feed amounts (the Fling family), conditions ('if it was a commander' or 'a Hamster') and dynamic filters ('shares a card type with it'). Built for a sacrifice paid as a cost (activated ability or spell) and a sacrifice-source step: the AmountRef \"sacrificed\" (powerOf/toughnessOf/manaValueOf), the \"sacrificed\" StaticCondition and CardFilter.sharesCardTypeWith. A sacrifice *chosen* by an earlier step, optional (\"you may sacrifice …; when you do\") or not (Minsc & Boo's \"Sacrifice a creature. When you do\"), is effect:may-sacrifice-then's."
+   "description": "Snapshot the permanent sacrificed to pay a cost, or by a preceding step, and expose its last-known power, mana value, types, subtypes and isCommander. These feed amounts (the Fling family), conditions ('if it was a commander' or 'a Hamster') and dynamic filters ('shares a card type with it'). Built for a sacrifice paid as a cost (activated ability or spell) and a sacrifice-source step: the AmountRef \"sacrificed\" (powerOf/toughnessOf/manaValueOf), the \"sacrificed\" StaticCondition and CardFilter.sharesCardTypeWith. A sacrifice *chosen* by an earlier step, optional (\"you may sacrifice …; when you do\") or not (Minsc & Boo's \"Sacrifice a creature. When you do\"), is effect:may-sacrifice-then's. Not a filter sharing a creature type with the sacrificed creature (filter:shares-creature-type-with-sacrificed, open), a token copy of it (effect:token-copy-of-sacrificed), or sacrificing one of a trigger's batch (effect:sacrifice-one-of-trigger-batch)."
   },
   "effect:shuffle-library": {
    "size": "small",
@@ -1109,7 +1110,7 @@
   "effect:target-other-than-source": {
    "size": "medium",
    "ui": false,
-   "description": "An 'another / other target' exclusion for triggered as well as activated abilities: drop the source (or an earlier slot's pick, or the triggering player) from a slot's options. Split it from the 'sacrifice another' cost flag, which otherOnly controls too today."
+   "description": "An 'another / other target' exclusion for triggered as well as activated abilities: drop the source (or an earlier slot's pick, or the triggering player) from a slot's options. Split it from the 'sacrifice another' cost flag, which otherOnly controls too today. Not 'other' only in one type, the source still targetable as a creature (target:other-than-source-unless-creature)."
   },
   "effect:target-spec-additions": {
    "size": "small",

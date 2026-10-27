@@ -2174,6 +2174,14 @@ export interface PlayerState {
    * their control since included (the rulings). Cleared by that untap step.
    * Absent with none. See the `skip-next-untap` effect. */
   untapSkips?: readonly CardFilter[];
+  /** "That player skips their next untap step" (Brine Elemental, Dovin,
+   * Architect of Law — rule 614.10): how many of this player's untap steps
+   * are still to be skipped whole — no phasing, no day/night check, nothing
+   * untapping — each effect satisfied by one (614.10a: two skip the next
+   * two). Anything waiting for "their next untap step" (`untapSkips`, a
+   * permanent that doesn't untap during it, an exert) waits for the first one
+   * that isn't skipped. Absent with none. See the `skip-untap-step` effect. */
+  untapStepsToSkip?: number;
   /** What this player's turn so far has held — see {@link TurnHistory}.
    * Absent until something is recorded; reset as each turn begins. */
   turnHistory?: TurnHistory;
@@ -4470,6 +4478,11 @@ export interface GameState {
    * ROADMAP Phase 7). `beginTurn` shifts the front instead of advancing the
    * active-player rotation. Time Warp pushes the caster. */
   extraTurns: PlayerId[];
+  /** The extra turns whose untap step is skipped (Savor the Moment: "Take an
+   * extra turn after this one. Skip the untap step of that turn.") — each the
+   * index in `extraTurns` its turn was queued at, which a stack's push and
+   * pop keep. Absent with none. */
+  extraTurnsSkippingUntap?: number[];
   /** Additional combat phases still owed *this turn* (Aggravated Assault —
    * ROADMAP Phase 7). When the postcombat main phase ends with this > 0,
    * `endStep` decrements it and re-enters `begin-combat` (a combat phase then

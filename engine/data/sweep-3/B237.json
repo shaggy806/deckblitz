@@ -1,0 +1,726 @@
+{
+  "batch": "B237",
+  "status": "complete",
+  "ranks": "The need-keys recheck list R3 (Phase 1 step 2)",
+  "authored": [
+    {
+      "name": "Armored Skyhunter",
+      "files": [
+        "engine/src/cards/pool/armored-skyhunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Assault Suit",
+      "files": [
+        "engine/src/cards/pool/assault-suit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Assembled Alphas",
+      "files": [
+        "engine/src/cards/pool/assembled-alphas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bonus Round",
+      "files": [
+        "engine/src/cards/pool/bonus-round.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chain Lightning",
+      "files": [
+        "engine/src/cards/pool/chain-lightning.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Court of Ambition",
+      "files": [
+        "engine/src/cards/pool/court-of-ambition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cursed Totem",
+      "files": [
+        "engine/src/cards/pool/cursed-totem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dalkovan Encampment",
+      "files": [
+        "engine/src/cards/pool/dalkovan-encampment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Depthshaker Titan",
+      "files": [
+        "engine/src/cards/pool/depthshaker-titan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elusive Otter // Grove's Bounty",
+      "files": [
+        "engine/src/cards/pool/elusive-otter.ts",
+        "engine/src/cards/pool/groves-bounty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Happy Hogan, Bodyguard",
+      "files": [
+        "engine/src/cards/pool/happy-hogan-bodyguard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kellogg, Dangerous Mind",
+      "files": [
+        "engine/src/cards/pool/kellogg-dangerous-mind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mind Flayer",
+      "files": [
+        "engine/src/cards/pool/mind-flayer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Murmurs from Beyond",
+      "files": [
+        "engine/src/cards/pool/murmurs-from-beyond.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyreswipe Hawk",
+      "files": [
+        "engine/src/cards/pool/pyreswipe-hawk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rite of Harmony",
+      "files": [
+        "engine/src/cards/pool/rite-of-harmony.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Summon: Leviathan",
+      "files": [
+        "engine/src/cards/pool/summon-leviathan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tamiyo Meets the Story Circle",
+      "files": [
+        "engine/src/cards/pool/tamiyo-meets-the-story-circle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tempt with Mayhem",
+      "files": [
+        "engine/src/cards/pool/tempt-with-mayhem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Kami War",
+      "files": [
+        "engine/src/cards/pool/the-kami-war.ts",
+        "engine/src/cards/pool/o-kagachi-made-manifest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Rani",
+      "files": [
+        "engine/src/cards/pool/the-rani.ts",
+        "engine/src/cards/tokens/mark-of-the-rani-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Waltz of Rage",
+      "files": [
+        "engine/src/cards/pool/waltz-of-rage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Willbreaker",
+      "files": [
+        "engine/src/cards/pool/willbreaker.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Adagia, Windswept Bastion",
+      "needs": [
+        "bug:token-copy-aura-attach-choice"
+      ],
+      "why": "createTokenCopy asks no as-enters choice, so a token copy of an Aura isn't attached and dies (rule 303.4f; the ruling says you choose)."
+    },
+    {
+      "name": "Aggravate",
+      "needs": [
+        "effect:restrict-dealt-damage-this-way"
+      ],
+      "why": "'Each creature dealt damage this way attacks this turn if able': restrict has no dealt-damage-this-way group."
+    },
+    {
+      "name": "All-Out Assault",
+      "needs": [
+        "effect:delayed-trigger-next-attack"
+      ],
+      "why": "'When you next attack this turn' fires once; DelayedWhenever repeats all turn and nextSpell covers spells only."
+    },
+    {
+      "name": "Angelic Arbiter",
+      "needs": [
+        "static:prohibit-by-player-turn-history"
+      ],
+      "why": "Each opponent's prohibition depends on what that opponent did this turn; prohibits can't be conditioned per player."
+    },
+    {
+      "name": "Aphelia, Viper Whisperer",
+      "needs": [
+        "effect:delayed-whenever-batched-damage"
+      ],
+      "why": "A delayed 'whenever' on deals-damage-batch fires once per source, not once per player: two Snakes halve a player's life twice (tested: 18 to 4, should be 9)."
+    },
+    {
+      "name": "Artificer's Hex",
+      "needs": [
+        "effect:host-of-attached-permanent"
+      ],
+      "why": "Nothing names the creature the enchanted Equipment is attached to."
+    },
+    {
+      "name": "Benevolent Blessing",
+      "needs": [
+        "static:protection-spares-own-attachments"
+      ],
+      "why": "Protection from the chosen color would knock off your own Auras and Equipment of that color; the card exempts them."
+    },
+    {
+      "name": "Bounty of the Hunt",
+      "needs": [
+        "effect:delayed-remove-counters-placed-this-way"
+      ],
+      "why": "Next cleanup's timing is built, but removing one counter per counter this spell put on each creature has no per-target share."
+    },
+    {
+      "name": "Burning-Rune Demon",
+      "needs": [
+        "effect:opponent-chooses-from-found"
+      ],
+      "why": "search-library has no opponent chooser splitting the found cards between hand and graveyard."
+    },
+    {
+      "name": "Callous Oppressor",
+      "needs": [
+        "replacement:opponent-chooses-creature-type-as-enters"
+      ],
+      "why": "chooseCreatureTypeOnEnter is the controller's choice; an opponent chooses here."
+    },
+    {
+      "name": "Chef's Kiss",
+      "needs": [
+        "effect:gain-control-spell",
+        "effect:copy-spell-random-retarget"
+      ],
+      "why": "Gain control of a spell, copy it, and choose the targets at random excluding you and your permanents: none of it exists."
+    },
+    {
+      "name": "Demonic Hordes",
+      "needs": [
+        "effect:sacrifice-permanent-of-opponents-choice"
+      ],
+      "why": "sacrifice and its unless forms are always the sacrificer's own choice; an opponent picks the land here."
+    },
+    {
+      "name": "Dino DNA",
+      "needs": [
+        "target:card-exiled-with-source"
+      ],
+      "why": "No target spec for 'target creature card exiled with this'; the copy exceptions themselves exist."
+    },
+    {
+      "name": "Disorienting Choice",
+      "needs": [
+        "effect:each-player-chooses-then-all-act",
+        "amount:chosen-targets-remaining"
+      ],
+      "why": "Each controller's 'may exile it' must be chosen first and done together; and nothing counts the chosen targets still on the battlefield."
+    },
+    {
+      "name": "Display of Power",
+      "needs": [
+        "static:spell-cant-be-copied",
+        "effect:copy-spell-each-target"
+      ],
+      "why": "copy-spell copies one target slot, not any number of spells; and 'this spell can't be copied' is missing."
+    },
+    {
+      "name": "Dosan the Falling Leaf",
+      "needs": [
+        "static:prohibit-outside-own-turn"
+      ],
+      "why": "The prohibition is relative to each player's own turn, not the controller's."
+    },
+    {
+      "name": "Double Major",
+      "needs": [
+        "effect:copy-spell-except-nonlegendary"
+      ],
+      "why": "The copy of a creature spell must be nonlegendary: copy-spell has no exception."
+    },
+    {
+      "name": "Duskmantle Guildmage",
+      "needs": [
+        "effect:delayed-whenever-per-card-graveyard"
+      ],
+      "why": "A delayed 'whenever a card is put into an opponent's graveyard' fires once per move, with no trigger object or 'that player'."
+    },
+    {
+      "name": "Elemental Teachings",
+      "needs": [
+        "effect:opponent-chooses-from-found"
+      ],
+      "why": "An opponent picks two of the searched cards for the graveyard: no opponent chooser on search-library."
+    },
+    {
+      "name": "Everything Comes to Dust",
+      "needs": [
+        "filter:shares-creature-type-with-convokers"
+      ],
+      "why": "Convoke support is for-each-convoker and a {convokers} count; no filter reads the convoking creatures' types."
+    },
+    {
+      "name": "Faramir, Prince of Ithilien",
+      "needs": [
+        "effect:delayed-trigger-chosen-players-next-end-step"
+      ],
+      "why": "A delayed trigger at the chosen opponent's next end step, checking they didn't attack you that turn: no timing names another player's end step."
+    },
+    {
+      "name": "Fatal Attraction",
+      "needs": [
+        "effect:damage-to-attached"
+      ],
+      "why": "damage's target takes a slot or the trigger object, not the enchanted creature."
+    },
+    {
+      "name": "Finale of Promise",
+      "needs": [
+        "effect:copy-spells-cast-this-way"
+      ],
+      "why": "Nothing refers to the spells a cast-now just cast, to copy them twice if X is 10 or more."
+    },
+    {
+      "name": "Firebender Ascension",
+      "needs": [
+        "trigger:attacking-causes-own-triggered-ability"
+      ],
+      "why": "No trigger for a creature's attack triggering one of its own triggered abilities, with that ability to copy."
+    },
+    {
+      "name": "Firion, Wild Rose Warrior",
+      "needs": [
+        "effect:copy-exception-static-ability",
+        "effect:token-copy-sacrifice-at-next-upkeep"
+      ],
+      "why": "Copy exceptions can't grant a static (the equip cost reduction), and create-token-copy has only an end-step sacrifice."
+    },
+    {
+      "name": "Flesh Duplicate",
+      "needs": [
+        "effect:copy-exception-if-copied-lacks-ability"
+      ],
+      "why": "The exception (vanishing 3) applies only if the copied creature lacks vanishing; exceptions are unconditional."
+    },
+    {
+      "name": "Forth Eorlingas!",
+      "needs": [
+        "effect:delayed-whenever-batched-damage"
+      ],
+      "why": "Same delayed batched-damage over-trigger: two creatures connecting would make you the monarch twice."
+    },
+    {
+      "name": "Fraying Line",
+      "needs": [
+        "effect:target-opponent-chooses",
+        "effect:remove-counters-all"
+      ],
+      "why": "The active player chooses one of their own creatures for the counter (choose-permanents is the controller's); no mass remove-all-counters-of-a-kind."
+    },
+    {
+      "name": "Frontline Heroism",
+      "needs": [
+        "effect:copy-spell-retarget-created-token"
+      ],
+      "why": "retargetTo takes only the source or a target slot, not the token the same effect just made."
+    },
+    {
+      "name": "Gilded Drake",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "Exchange control, and sacrifice it if you can't: no exchange of control."
+    },
+    {
+      "name": "Gogo, Master of Mimicry",
+      "needs": [
+        "effect:copy-ability-count",
+        "static:spell-cant-be-copied"
+      ],
+      "why": "copy-ability can't copy X times, and nothing says 'this ability can't be copied'."
+    },
+    {
+      "name": "Guided Passage",
+      "needs": [
+        "effect:look-and-choose-one-per-type"
+      ],
+      "why": "An opponent picks a creature, a land and a noncreature nonland card from the revealed library: three picks under three filters, by an opponent."
+    },
+    {
+      "name": "Horn of Plenty",
+      "needs": [
+        "effect:delayed-trigger-remembers-that-player"
+      ],
+      "why": "The delayed draw belongs to the caster who paid; the delayed trigger keeps no 'that player'."
+    },
+    {
+      "name": "Karn, Scion of Urza",
+      "needs": [
+        "effect:look-and-choose-leftover-exile-with-counters",
+        "effect:return-from-exile-with-counter"
+      ],
+      "why": "look-and-choose's leftover can't exile with a silver counter, and nothing returns a card with a silver counter from exile to hand."
+    },
+    {
+      "name": "Land's Edge",
+      "needs": [
+        "effect:cost-discarded-card-ref"
+      ],
+      "why": "Nothing reads the card discarded as a cost (if it's a land, 2 damage); any-player activation exists."
+    },
+    {
+      "name": "Last Chance",
+      "needs": [
+        "effect:delayed-trigger-extra-turn-end-step"
+      ],
+      "why": "'At the beginning of that turn's end step' for the extra turn: no delayed timing tied to the extra turn."
+    },
+    {
+      "name": "Manifold Insights",
+      "needs": [
+        "effect:each-opponent-picks-from-shared-reveal"
+      ],
+      "why": "Each opponent in turn picks a different card from one shared reveal; look-and-choose gives one chooser one pick."
+    },
+    {
+      "name": "Master of Ceremonies",
+      "needs": [
+        "effect:each-player-chooses-then-all-act"
+      ],
+      "why": "each-player-may's choices path applies each opponent's outcome as they choose; the card needs every choice first, then all the outcomes together."
+    },
+    {
+      "name": "Meddle",
+      "needs": [
+        "effect:change-target-new-target-restricted"
+      ],
+      "why": "change-targets accepts any legal new target; Meddle's new target must be a creature."
+    },
+    {
+      "name": "Mercenaries",
+      "needs": [
+        "effect:prevent-next-damage-from-source-to-you"
+      ],
+      "why": "Prevention offers only a source of your choice, never this fixed creature, to the activating player."
+    },
+    {
+      "name": "Mocking Doppelganger",
+      "needs": [
+        "effect:copy-exception-static-ability",
+        "mechanic:static-goad"
+      ],
+      "why": "Copy exceptions can't grant a static, and nothing goads 'other creatures with the same name' continuously."
+    },
+    {
+      "name": "Moritte of the Frost",
+      "needs": [
+        "effect:copy-exception-if-creature"
+      ],
+      "why": "Changeling applies only if the copy is a creature; except.keywords is unconditional."
+    },
+    {
+      "name": "Nalfeshnee",
+      "needs": [
+        "effect:copy-spell-grants"
+      ],
+      "why": "copy-spell can't give the resulting token haste and an end-step sacrifice."
+    },
+    {
+      "name": "Nicol Bolas, God-Pharaoh",
+      "needs": [
+        "target:opponent-or-creature-or-planeswalker-an-opponent-controls"
+      ],
+      "why": "The -4's 'target opponent, creature an opponent controls, or planeswalker an opponent controls' has no target spec; the rest is expressible."
+    },
+    {
+      "name": "Nihiloor",
+      "needs": [
+        "effect:per-opponent-tap-then-reflexive-steal",
+        "trigger:attack-with-creature-opponent-owns-owner-ref"
+      ],
+      "why": "For each opponent tap up to one creature, then a reflexive steal by tapped power; and the attack trigger's 'that player' is the attacker's owner."
+    },
+    {
+      "name": "Orzhov Advokist",
+      "needs": [
+        "effect:player-cant-attack-you-next-turn",
+        "effect:each-player-may-chosen-creature-counters-simultaneous"
+      ],
+      "why": "Each player may put counters on a creature, chosen in turn and placed together, and those players' creatures can't attack you until your next turn."
+    },
+    {
+      "name": "Perplexing Chimera",
+      "needs": [
+        "effect:exchange-control-permanent-and-spell"
+      ],
+      "why": "Exchange control of this permanent and a spell on the stack, then the new controller may choose new targets."
+    },
+    {
+      "name": "Phyrexian Censor",
+      "needs": [
+        "effect:per-player-cast-limit"
+      ],
+      "why": "No per-player 'already cast a non-Phyrexian spell this turn' limit."
+    },
+    {
+      "name": "Planar Disruption",
+      "needs": [
+        "static:attached-activated-abilities-prohibited"
+      ],
+      "why": "prohibits.abilitiesOf can't name the enchanted permanent."
+    },
+    {
+      "name": "Prisoner's Dilemma",
+      "needs": [
+        "effect:secret-choices-with-aggregate-outcome"
+      ],
+      "why": "Opponents choose secretly and the result depends on all the choices together; vote is a vote, and each-player-may applies each choice on its own."
+    },
+    {
+      "name": "Realms Uncharted",
+      "needs": [
+        "effect:opponent-chooses-from-found"
+      ],
+      "why": "An opponent splits the found lands between hand and graveyard: no opponent chooser on search-library."
+    },
+    {
+      "name": "Rebound",
+      "needs": [
+        "effect:change-target-new-target-restricted"
+      ],
+      "why": "The new target must be a player; for an any-target spell change-targets would allow a creature."
+    },
+    {
+      "name": "Reflector Mage",
+      "needs": [
+        "effect:prohibit-cast-same-name-until-your-next-turn"
+      ],
+      "why": "The owner can't cast spells with the bounced card's name until your next turn; prohibit lasts this turn and has no name filter."
+    },
+    {
+      "name": "Relic of Progenitus",
+      "needs": [
+        "effect:target-player-exiles-from-own-graveyard"
+      ],
+      "why": "Target player exiles a card of their choice from their graveyard: no targeted player's own choice from a graveyard."
+    },
+    {
+      "name": "Reversal of Fortune",
+      "needs": [
+        "effect:cast-copy-from-opponents-hand"
+      ],
+      "why": "cast-now's from has no opponent's-hand source, and a card in a revealed hand can't be chosen as a target."
+    },
+    {
+      "name": "Rose, Cutthroat Raider",
+      "needs": [
+        "amount:opponents-attacked-this-turn"
+      ],
+      "why": "opponentsAttacked reads this combat's attackers; 'each opponent you attacked' this turn undercounts after an extra combat."
+    },
+    {
+      "name": "Sadistic Shell Game",
+      "needs": [
+        "effect:each-player-chooses-in-turn-order",
+        "filter:chosen-permanents-not-controlled-by-caster"
+      ],
+      "why": "Each player in turn order chooses a creature the caster doesn't control, then all are destroyed."
+    },
+    {
+      "name": "Scion of the Ur-Dragon",
+      "needs": [
+        "effect:search-then-act-on-found"
+      ],
+      "why": "search-library has no follow-up referring to the found card (to become a copy of it)."
+    },
+    {
+      "name": "Selective Obliteration",
+      "needs": [
+        "effect:each-player-chooses-color-for-own-permanents"
+      ],
+      "why": "Each player chooses a color in turn order, then each permanent is exiled unless colorless or only its controller's color."
+    },
+    {
+      "name": "Silver Wyvern",
+      "needs": [
+        "effect:change-target-new-target-restricted",
+        "target:stack-object-targets-filter"
+      ],
+      "why": "The new target must be a creature; and the stack target spec can't say 'spell or ability that targets only this creature' (SpellTargetsFilter matches spells only)."
+    },
+    {
+      "name": "Songbirds' Blessing",
+      "needs": [
+        "effect:reveal-until-may-battlefield-else-hand"
+      ],
+      "why": "The found Aura may go onto the battlefield, else into your hand; reveal-until puts into one fixed zone."
+    },
+    {
+      "name": "Spelltwine",
+      "needs": [
+        "effect:must-cast-if-able"
+      ],
+      "why": "\"Cast the copies if able\" is mandatory; cast-now is always a may."
+    },
+    {
+      "name": "Storm King's Thunder",
+      "needs": [
+        "effect:delayed-trigger-reads-creator-x"
+      ],
+      "why": "The delayed copy trigger doesn't keep its spell's X, so 'copy that spell X times' can't count."
+    },
+    {
+      "name": "Storm of Saruman",
+      "needs": [
+        "effect:copy-spell-except-nonlegendary"
+      ],
+      "why": "The copy must be nonlegendary (the second-spell trigger exists)."
+    },
+    {
+      "name": "Sunken Palace",
+      "needs": [
+        "effect:when-spent-on-ability"
+      ],
+      "why": "add-mana's whenSpent takes only a spell filter; this copies the activated ability the mana pays for."
+    },
+    {
+      "name": "Teferi, Mage of Zhalfir",
+      "needs": [
+        "effect:opponents-sorcery-timing"
+      ],
+      "why": "No static limiting opponents to sorcery timing; and 'creature cards you own have flash' differs from castAsThoughFlash."
+    },
+    {
+      "name": "Teferi, Temporal Pilgrim",
+      "needs": [
+        "effect:target-opponent-chooses",
+        "effect:shuffle-into-library-all"
+      ],
+      "why": "The -2 has an opponent choose one of their own permanents; the -12 shuffles every nonland permanent a player controls (shuffle-into-library takes one target)."
+    },
+    {
+      "name": "Tempting Contract",
+      "needs": [
+        "effect:each-player-chooses-then-all-act"
+      ],
+      "why": "Every opponent's Treasure is made at once, then yours (the ruling); each-player-may makes each as it is answered."
+    },
+    {
+      "name": "The Eleventh Hour",
+      "needs": [
+        "effect:copy-exception-set-all-subtypes"
+      ],
+      "why": "\"Except it's a legendary Alien\" replaces every subtype; setSubtypes keeps other kinds (a Vehicle copy stays a Vehicle, against the ruling)."
+    },
+    {
+      "name": "The Everflowing Well",
+      "needs": [
+        "trigger:cast-with-mana-from-source"
+      ],
+      "why": "whenSpent fires once per mana unit and has no target slot, so the Myriad Pools' copy trigger can't be built."
+    },
+    {
+      "name": "The Immortal Sun",
+      "needs": [
+        "effect:prohibit-loyalty-abilities"
+      ],
+      "why": "abilitiesOf bars every ability of a permanent, not loyalty abilities only."
+    },
+    {
+      "name": "Tilonalli's Crown",
+      "needs": [
+        "effect:damage-to-attached"
+      ],
+      "why": "The enters trigger's 1 damage to the enchanted creature: no untargeted damage to the attached creature."
+    },
+    {
+      "name": "Valki, God of Lies",
+      "needs": [
+        "effect:exile-until-leaves-per-opponent",
+        "effect:choose-card-exiled-with-source"
+      ],
+      "why": "No per-opponent exile from a revealed hand until Valki leaves, and no choosing a card exiled with it by mana value X."
+    },
+    {
+      "name": "Vesuvan Doppelganger",
+      "needs": [
+        "effect:copy-exception-grants-unprinted-self-ability"
+      ],
+      "why": "The copy gains a re-copying upkeep trigger not printed on the card; thisAbility needs it printed, which would give it to an uncopied Doppelganger."
+    },
+    {
+      "name": "Whiplash, Vengeful Engineer",
+      "needs": [
+        "effect:count-equipment-attached-to-source"
+      ],
+      "why": "No amount counts the Equipment attached to the source itself."
+    },
+    {
+      "name": "Wojek Investigator",
+      "needs": [
+        "amount:opponents-with-more-cards-in-hand"
+      ],
+      "why": "No amount counts the opponents with more cards in hand than you (opponentsControllingFewer compares permanents)."
+    },
+    {
+      "name": "Yasharn, Implacable Earth",
+      "needs": [
+        "static:cant-pay-life-or-sacrifice-nonland-for-costs"
+      ],
+      "why": "Nothing forbids paying life or sacrificing nonland permanents for costs."
+    }
+  ]
+}

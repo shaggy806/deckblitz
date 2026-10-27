@@ -800,6 +800,7 @@ import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
+import _poolWillbreaker from "../pool/willbreaker.js";
 import _poolWindZendikon from "../pool/wind-zendikon.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
@@ -1633,6 +1634,7 @@ const shard: CardShard = {
     _poolWhack,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
+    _poolWillbreaker,
     _poolWindZendikon,
     _poolWindriderEel,
     _poolWindurstFederationCenter,

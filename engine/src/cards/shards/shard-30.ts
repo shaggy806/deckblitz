@@ -671,6 +671,7 @@ import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -807,6 +808,7 @@ import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flyi
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
+import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
 import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
 import _tokensTwinToken from "../tokens/twin-token.js";
@@ -1482,6 +1484,7 @@ const shard: CardShard = {
     _poolStormfrontRiders,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
+    _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,
     _poolSwarmCuller,
@@ -1620,6 +1623,7 @@ const shard: CardShard = {
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
+    _tokensKrakenTokenKioraBestsTheSeaGod,
     _tokensMinionToken,
     _tokensMyrToken,
     _tokensTwinToken,

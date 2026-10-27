@@ -48,6 +48,7 @@ import _poolAshmouthDragon from "../pool/ashmouth-dragon.js";
 import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
+import _poolAstralDragon from "../pool/astral-dragon.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
 import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
@@ -55,6 +56,7 @@ import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
+import _poolAvizoa from "../pool/avizoa.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
@@ -170,6 +172,7 @@ import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
+import _poolDalkovanEncampment from "../pool/dalkovan-encampment.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolAssaultOnOsgiliath,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
+    _poolAstralDragon,
     _poolAudaciousThief,
     _poolAuraGnarlid,
     _poolAvacynAngelOfHorror,
@@ -858,6 +862,7 @@ const shard: CardShard = {
     _poolAvatarOfDiscord,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
+    _poolAvizoa,
     _poolBairdArgivianRecruiter,
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
+    _poolDalkovanEncampment,
     _poolDangerousWager,
     _poolDarkConfidant,
     _poolDarksteelColossus,
