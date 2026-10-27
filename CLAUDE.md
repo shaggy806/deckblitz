@@ -63,7 +63,10 @@ for:
   walked before; and the same walk the other way, oldest set first and forward in time (the
   `author-by-set-oldest` skill since 2026-10-21; `cards:sets -- --oldest`), until the two meet.
   Several walks can run at once, each in its own cloud session on a range of sets of its own
-  (the `author-walks-parallel` skill since 2026-10-25).
+  (the `author-walks-parallel` skill since 2026-10-25), or each in its own local session and
+  worktree on this PC (the `author-walks-local` skill since 2026-10-26), sharing its memory
+  through `scripts/machine-slots.mjs`: typechecks and builds take a slot, a verify the whole
+  machine.
   The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
   what blocks the most triaged ones). The bots' decks' stand-ins (the

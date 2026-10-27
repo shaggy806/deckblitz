@@ -115,8 +115,10 @@ in batch 164 the agents had their cards written by 22:25 and spent until 22:59
 in OOM kills, heap tweaks and retry loops. So agents typecheck through
 `scripts/typecheck-turn.mjs`, a queue shared by every worktree on the machine
 (one slot per ~7 GB of RAM beyond 3 GB: one on a cloud session, more on a
-bigger machine; `TYPECHECK_SLOTS` overrides it), and wait their turn instead
-of fighting. Five agents stay the cloud session's ceiling: a typecheck is
+bigger machine, beside other slots only while ~7 GB is free; `TYPECHECK_SLOTS`
+overrides the count), and wait their turn instead of fighting. A `verify`
+takes every slot (`scripts/machine-slots.mjs`), so a typecheck also waits
+while one runs. Five agents stay the cloud session's ceiling: a typecheck is
 ~40 s since it became one pass (2026-10-26: the engine's `typecheck` was a
 source pass and then a tests pass over the same source, ~70 s), and each
 agent typechecks once its tests pass rather than after every fix. Two slots

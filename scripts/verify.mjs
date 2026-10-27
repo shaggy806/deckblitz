@@ -19,6 +19,10 @@
 //      side by side
 //   6. card:verify against the Oracle snapshot (offline)
 //
+// Before step 1 it takes the machine (`machine-slots.mjs`): one verify at a
+// time, with no typecheck or build beside it — several sessions on one PC
+// share it (the `author-walks-local` skill).
+//
 // Steps 1, 2, 4 and 5 stop the run on failure (later results would mean
 // nothing), stopping the background runs too; the rest all run, and the exit
 // code is 1 if anything failed. Logs go to the OS temp dir, one per step,
@@ -69,6 +73,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { release, takeMachine, takeSlot } from "./machine-slots.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ENGINE = path.join(ROOT, "engine");
@@ -345,6 +350,13 @@ if (!fuzzNewOnly && !skip.has("fuzzwith") && key !== null && existsSync(FUZZ_STA
 console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : "no new cards"}${skip.size ? `; skipping ${[...skip].join(", ")}` : ""}`);
 if (stamped) console.log(`verify: the new-cards fuzzer passed on these cards and this engine code earlier (--fuzz-new): not run again`);
 console.log("");
+
+// The machine to itself (`machine-slots.mjs`): the engine suite alone is
+// ~18.5 GB, so a verify waits for any other on the machine and for the
+// typechecks and builds already running, and holds new ones off until it's
+// done. `--fuzz-new` is a build and two fuzzer processes: one slot.
+const held = fuzzNewOnly ? await takeSlot((m) => console.log(m)) : await takeMachine();
+process.on("exit", () => release(held));
 
 await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
