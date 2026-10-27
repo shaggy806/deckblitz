@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3818 already implemented / 1182 missing (marks refreshed 2026-10-26)
+3819 already implemented / 1181 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1661,7 +1661,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1668  Runaway Steam-Kin                        {1}{R}           Creature — Elemental
 [x]  1669  Allosaurus Shepherd                      {G}              Creature — Elf Shaman
 [x]  1670  Giada, Font of Hope                      {1}{W}           Legendary Creature — Angel
-[ ]  1671  Kaldra Compleat                          {7}              Legendary Artifact — Equipment
+[x]  1671  Kaldra Compleat                          {7}              Legendary Artifact — Equipment
 [x]  1672  Ba Sing Se                               {0}              Land
 [x]  1673  Metalwork Colossus                       {11}             Artifact Creature — Construct
 [x]  1674  Moonsilver Key                           {2}              Artifact
