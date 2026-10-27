@@ -11884,7 +11884,7 @@
    "example": "Parallax Inhibitor: 'Put a fade counter on each permanent with fading you control.'"
   },
   "replacement:as-enters-sacrifice-permanents": {
-   "family": "new:enters-sacrifice-lands-replacement",
+   "family": "replacement:enter-replacement-discard",
    "example": "Overlaid Terrain: 'As this enchantment enters, sacrifice all lands you control.'"
   },
   "static:token-pt-from-source-counters": {
