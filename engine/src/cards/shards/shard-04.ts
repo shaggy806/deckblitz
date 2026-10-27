@@ -207,6 +207,7 @@ import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
 import _poolFesterhideBoar from "../pool/festerhide-boar.js";
+import _poolFickleEfreet from "../pool/fickle-efreet.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
@@ -225,6 +226,7 @@ import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
 import _poolFlyingKick from "../pool/flying-kick.js";
 import _poolForceOfNature from "../pool/force-of-nature.js";
 import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
+import _poolForgottenHarvest from "../pool/forgotten-harvest.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
@@ -982,6 +984,7 @@ const shard: CardShard = {
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
     _poolFesterhideBoar,
+    _poolFickleEfreet,
     _poolFieldSurgeon,
     _poolFierceEmpath,
     _poolFigureOfDestiny,
@@ -1000,6 +1003,7 @@ const shard: CardShard = {
     _poolFlyingKick,
     _poolForceOfNature,
     _poolForgingTheTyriteSword,
+    _poolForgottenHarvest,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
     _poolFractalize,

@@ -521,6 +521,7 @@ import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolRetreatToValakut from "../pool/retreat-to-valakut.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
+import _poolRhysticCircle from "../pool/rhystic-circle.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRiverBoa from "../pool/river-boa.js";
@@ -1267,6 +1268,7 @@ const shard: CardShard = {
     _poolRestlessBivouac,
     _poolRetreatToValakut,
     _poolReunionOfTheHouse,
+    _poolRhysticCircle,
     _poolRiftburstHellion,
     _poolRighteousWar,
     _poolRiverBoa,

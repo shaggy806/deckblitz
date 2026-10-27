@@ -464,6 +464,7 @@ import _poolRenewal from "../pool/renewal.js";
 import _poolReplicationTechnique from "../pool/replication-technique.js";
 import _poolResculpt from "../pool/resculpt.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
+import _poolRhysticLightning from "../pool/rhystic-lightning.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRingOfKalonia from "../pool/ring-of-kalonia.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
@@ -651,6 +652,7 @@ import _poolVerdantEidolon from "../pool/verdant-eidolon.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
 import _poolVigeanGraftmage from "../pool/vigean-graftmage.js";
 import _poolVineweft from "../pool/vineweft.js";
+import _poolVintaraSnapper from "../pool/vintara-snapper.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolViridianScout from "../pool/viridian-scout.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
@@ -1174,6 +1176,7 @@ const shard: CardShard = {
     _poolReplicationTechnique,
     _poolResculpt,
     _poolRestlessApparition,
+    _poolRhysticLightning,
     _poolRighteousBlow,
     _poolRingOfKalonia,
     _poolRithsAttendant,
@@ -1361,6 +1364,7 @@ const shard: CardShard = {
     _poolVialSmasherGleefulGrenadier,
     _poolVigeanGraftmage,
     _poolVineweft,
+    _poolVintaraSnapper,
     _poolViridianLongbow,
     _poolViridianScout,
     _poolVoiceOfTruth,

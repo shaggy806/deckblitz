@@ -342,6 +342,7 @@ import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
 import _poolKamiOfTheHunt from "../pool/kami-of-the-hunt.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
 import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
+import _poolKeldonFirebombers from "../pool/keldon-firebombers.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
 import _poolKessigWolfRun from "../pool/kessig-wolf-run.js";
 import _poolKindledFury from "../pool/kindled-fury.js";
@@ -1138,6 +1139,7 @@ const shard: CardShard = {
     _poolKamiOfTheHunt,
     _poolKayasOnslaught,
     _poolKeeperOfTheCadence,
+    _poolKeldonFirebombers,
     _poolKellanInquisitiveProdigy,
     _poolKessigWolfRun,
     _poolKindledFury,

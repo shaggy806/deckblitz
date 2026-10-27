@@ -590,6 +590,7 @@ import _poolSpiritShield from "../pool/spirit-shield.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
+import _poolStealStrength from "../pool/steal-strength.js";
 import _poolStensiaInnkeeper from "../pool/stensia-innkeeper.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
@@ -663,6 +664,7 @@ import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
+import _poolTroublesomeSpirit from "../pool/troublesome-spirit.js";
 import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
@@ -1349,6 +1351,7 @@ const shard: CardShard = {
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,
+    _poolStealStrength,
     _poolStensiaInnkeeper,
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
@@ -1422,6 +1425,7 @@ const shard: CardShard = {
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
+    _poolTroublesomeSpirit,
     _poolTrustedForcemage,
     _poolTunnelRats,
     _poolTurbulentShore,

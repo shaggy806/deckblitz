@@ -129,6 +129,7 @@ import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
+import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
@@ -471,6 +472,7 @@ import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
+import _poolPitRaptor from "../pool/pit-raptor.js";
 import _poolPitfallTrap from "../pool/pitfall-trap.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
@@ -569,6 +571,7 @@ import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolShriekingGrotesque from "../pool/shrieking-grotesque.js";
 import _poolShrineOfPiercingVision from "../pool/shrine-of-piercing-vision.js";
+import _poolShroudedSerpent from "../pool/shrouded-serpent.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilhanaLedgewalker from "../pool/silhana-ledgewalker.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
@@ -596,6 +599,7 @@ import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSootImp from "../pool/soot-imp.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
+import _poolSoulCharmer from "../pool/soul-charmer.js";
 import _poolSoulRead from "../pool/soul-read.js";
 import _poolSoulStairExpedition from "../pool/soul-stair-expedition.js";
 import _poolSpawningBreath from "../pool/spawning-breath.js";
@@ -891,6 +895,7 @@ const shard: CardShard = {
     _poolConsumingFervor,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
+    _poolCopperLeafAngel,
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
@@ -1233,6 +1238,7 @@ const shard: CardShard = {
     _poolPheresBandRaiders,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
+    _poolPitRaptor,
     _poolPitfallTrap,
     _poolPlacidRottentail,
     _poolPlasmaElemental,
@@ -1331,6 +1337,7 @@ const shard: CardShard = {
     _poolShoulderToShoulder,
     _poolShriekingGrotesque,
     _poolShrineOfPiercingVision,
+    _poolShroudedSerpent,
     _poolSickleRipper,
     _poolSilhanaLedgewalker,
     _poolSilhanaWayfinder,
@@ -1358,6 +1365,7 @@ const shard: CardShard = {
     _poolSongOfTotentanz,
     _poolSootImp,
     _poolSorinTheMirthless,
+    _poolSoulCharmer,
     _poolSoulRead,
     _poolSoulStairExpedition,
     _poolSpawningBreath,

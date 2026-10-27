@@ -138,6 +138,7 @@ import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
+import _poolDarba from "../pool/darba.js";
 import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js";
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDaringArchaeologist from "../pool/daring-archaeologist.js";
@@ -148,6 +149,7 @@ import _poolDeadapult from "../pool/deadapult.js";
 import _poolDeadeyeNavigator from "../pool/deadeye-navigator.js";
 import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
+import _poolDeathCharmer from "../pool/death-charmer.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
@@ -329,6 +331,7 @@ import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInexorableBlob from "../pool/inexorable-blob.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
+import _poolInflame from "../pool/inflame.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
 import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
@@ -389,6 +392,7 @@ import _poolMagdaBrazenOutlaw from "../pool/magda-brazen-outlaw.js";
 import _poolMagmaJet from "../pool/magma-jet.js";
 import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
+import _poolManaVapors from "../pool/mana-vapors.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMapTheWastes from "../pool/map-the-wastes.js";
 import _poolMarket from "../pool/market.js";
@@ -577,6 +581,7 @@ import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
 import _poolSifterWurm from "../pool/sifter-wurm.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSilklashSpider from "../pool/silklash-spider.js";
+import _poolSiltCrawler from "../pool/silt-crawler.js";
 import _poolSinisterConcoction from "../pool/sinister-concoction.js";
 import _poolSkaabRuinator from "../pool/skaab-ruinator.js";
 import _poolSkirkShaman from "../pool/skirk-shaman.js";
@@ -917,6 +922,7 @@ const shard: CardShard = {
     _poolCurioVendor,
     _poolCursedFlesh,
     _poolCutYourLosses,
+    _poolDarba,
     _poolDaredevilFearlessFighter,
     _poolDarigaazsCharm,
     _poolDaringArchaeologist,
@@ -927,6 +933,7 @@ const shard: CardShard = {
     _poolDeadeyeNavigator,
     _poolDeadlyEmbrace,
     _poolDeathBaron,
+    _poolDeathCharmer,
     _poolDeceptiveLandscape,
     _poolDeclareDominance,
     _poolDecoyPloy,
@@ -1108,6 +1115,7 @@ const shard: CardShard = {
     _poolIndulgentTormentor,
     _poolInexorableBlob,
     _poolInfernalGrasp,
+    _poolInflame,
     _poolInjectorCrocodile,
     _poolInvertedIceberg,
     _poolIronManFuturistParagon,
@@ -1168,6 +1176,7 @@ const shard: CardShard = {
     _poolMagmaJet,
     _poolMagmaOpus,
     _poolMagmaticSprinter,
+    _poolManaVapors,
     _poolManamorphose,
     _poolMapTheWastes,
     _poolMarket,
@@ -1356,6 +1365,7 @@ const shard: CardShard = {
     _poolSifterWurm,
     _poolSigiledPaladin,
     _poolSilklashSpider,
+    _poolSiltCrawler,
     _poolSinisterConcoction,
     _poolSkaabRuinator,
     _poolSkirkShaman,

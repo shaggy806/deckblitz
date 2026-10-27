@@ -439,6 +439,7 @@ import _poolOrochiEggwatcher from "../pool/orochi-eggwatcher.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolOviyaPashiriSageLifecrafter from "../pool/oviya-pashiri-sage-lifecrafter.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
+import _poolPanicAttack from "../pool/panic-attack.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
@@ -488,6 +489,7 @@ import _poolReknit from "../pool/reknit.js";
 import _poolRelicVial from "../pool/relic-vial.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRepudiate from "../pool/repudiate.js";
+import _poolRethink from "../pool/rethink.js";
 import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
@@ -1215,6 +1217,7 @@ const shard: CardShard = {
     _poolOverlordOfTheFloodpits,
     _poolOviyaPashiriSageLifecrafter,
     _poolPairedTactician,
+    _poolPanicAttack,
     _poolParcelMyr,
     _poolPathToRedemption,
     _poolPedalToTheMetal,
@@ -1264,6 +1267,7 @@ const shard: CardShard = {
     _poolRelicVial,
     _poolRenegadeMap,
     _poolRepudiate,
+    _poolRethink,
     _poolRhetCropSpearmaster,
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,

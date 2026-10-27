@@ -482,6 +482,7 @@ import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolNoeticScales from "../pool/noetic-scales.js";
+import _poolNoxiousField from "../pool/noxious-field.js";
 import _poolNuclearFallout from "../pool/nuclear-fallout.js";
 import _poolNullify from "../pool/nullify.js";
 import _poolOakenBrawler from "../pool/oaken-brawler.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolNivMizzetParun,
     _poolNoMercy,
     _poolNoeticScales,
+    _poolNoxiousField,
     _poolNuclearFallout,
     _poolNullify,
     _poolOakenBrawler,

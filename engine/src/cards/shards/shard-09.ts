@@ -226,6 +226,7 @@ import _poolFireProphecy from "../pool/fire-prophecy.js";
 import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
+import _poolFlay from "../pool/flay.js";
 import _poolFlightSpellbomb from "../pool/flight-spellbomb.js";
 import _poolFling from "../pool/fling.js";
 import _poolFlourish from "../pool/flourish.js";
@@ -354,6 +355,7 @@ import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKeeperOfTheBeasts from "../pool/keeper-of-the-beasts.js";
+import _poolKeldonBerserker from "../pool/keldon-berserker.js";
 import _poolKeldonWarcaller from "../pool/keldon-warcaller.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
 import _poolKeralKeepDisciples from "../pool/keral-keep-disciples.js";
@@ -381,6 +383,7 @@ import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
+import _poolLivingTerrain from "../pool/living-terrain.js";
 import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
@@ -1018,6 +1021,7 @@ const shard: CardShard = {
     _poolFireSnake,
     _poolFishliverOil,
     _poolFlatten,
+    _poolFlay,
     _poolFlightSpellbomb,
     _poolFling,
     _poolFlourish,
@@ -1146,6 +1150,7 @@ const shard: CardShard = {
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKeeperOfTheBeasts,
+    _poolKeldonBerserker,
     _poolKeldonWarcaller,
     _poolKembaKhaEnduring,
     _poolKeralKeepDisciples,
@@ -1173,6 +1178,7 @@ const shard: CardShard = {
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLilianaDeathWielder,
+    _poolLivingTerrain,
     _poolLivingTotem,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,

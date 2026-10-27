@@ -124,6 +124,7 @@ import _poolChaos from "../pool/chaos.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
+import _poolChimericIdol from "../pool/chimeric-idol.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChorusOfMight from "../pool/chorus-of-might.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
@@ -580,6 +581,7 @@ import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-
 import _poolReturnFromTheWilds from "../pool/return-from-the-wilds.js";
 import _poolReturn from "../pool/return.js";
 import _poolReyaDawnbringer from "../pool/reya-dawnbringer.js";
+import _poolRhysticDeluge from "../pool/rhystic-deluge.js";
 import _poolRidersOfTheMark from "../pool/riders-of-the-mark.js";
 import _poolRidgelineRager from "../pool/ridgeline-rager.js";
 import _poolRimrockKnight from "../pool/rimrock-knight.js";
@@ -962,6 +964,7 @@ const shard: CardShard = {
     _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolCharmbreakerDevils,
+    _poolChimericIdol,
     _poolChitteringDispatcher,
     _poolChorusOfMight,
     _poolChromaticStar,
@@ -1418,6 +1421,7 @@ const shard: CardShard = {
     _poolReturnFromTheWilds,
     _poolReturn,
     _poolReyaDawnbringer,
+    _poolRhysticDeluge,
     _poolRidersOfTheMark,
     _poolRidgelineRager,
     _poolRimrockKnight,

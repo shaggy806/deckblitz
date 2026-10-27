@@ -242,6 +242,7 @@ import _poolFlashfires from "../pool/flashfires.js";
 import _poolFleshReaver from "../pool/flesh-reaver.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
+import _poolFloweringField from "../pool/flowering-field.js";
 import _poolFogOfWar from "../pool/fog-of-war.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
 import _poolFortifiedBeachhead from "../pool/fortified-beachhead.js";
@@ -349,6 +350,7 @@ import _poolKarametrasBlessing from "../pool/karametras-blessing.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
 import _poolKeeperOfProgenitus from "../pool/keeper-of-progenitus.js";
+import _poolKeldonBattlewagon from "../pool/keldon-battlewagon.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
 import _poolKikuNightsFlower from "../pool/kiku-nights-flower.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
@@ -361,6 +363,7 @@ import _poolKraumLudevicsOpus from "../pool/kraum-ludevics-opus.js";
 import _poolLadyOfLaughter from "../pool/lady-of-laughter.js";
 import _poolLadyOrca from "../pool/lady-orca.js";
 import _poolLateToDinner from "../pool/late-to-dinner.js";
+import _poolLatullaKeldonOverseer from "../pool/latulla-keldon-overseer.js";
 import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
@@ -507,6 +510,7 @@ import _poolReptilianRecruiter from "../pool/reptilian-recruiter.js";
 import _poolResoundingWave from "../pool/resounding-wave.js";
 import _poolResplendentAngel from "../pool/resplendent-angel.js";
 import _poolRestlessVents from "../pool/restless-vents.js";
+import _poolRhysticSyphon from "../pool/rhystic-syphon.js";
 import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
@@ -1020,6 +1024,7 @@ const shard: CardShard = {
     _poolFleshReaver,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
+    _poolFloweringField,
     _poolFogOfWar,
     _poolFoggyBottomSwamp,
     _poolFortifiedBeachhead,
@@ -1127,6 +1132,7 @@ const shard: CardShard = {
     _poolKarnLegacyReforged,
     _poolKathariRemnant,
     _poolKeeperOfProgenitus,
+    _poolKeldonBattlewagon,
     _poolKessigForgemaster,
     _poolKikuNightsFlower,
     _poolKimahriValiantGuardian,
@@ -1139,6 +1145,7 @@ const shard: CardShard = {
     _poolLadyOfLaughter,
     _poolLadyOrca,
     _poolLateToDinner,
+    _poolLatullaKeldonOverseer,
     _poolLavaspurBoots,
     _poolLayOfTheLand,
     _poolLazavDimirMastermind,
@@ -1285,6 +1292,7 @@ const shard: CardShard = {
     _poolResoundingWave,
     _poolResplendentAngel,
     _poolRestlessVents,
+    _poolRhysticSyphon,
     _poolRiddlesmith,
     _poolRilingDawnbreaker,
     _poolRiotSpikes,

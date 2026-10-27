@@ -633,6 +633,7 @@ import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpiritOfTheNight from "../pool/spirit-of-the-night.js";
 import _poolSpiritmonger from "../pool/spiritmonger.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
+import _poolSpittingSpider from "../pool/spitting-spider.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
 import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
@@ -756,6 +757,7 @@ import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
 import _poolWaterwhirl from "../pool/waterwhirl.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
+import _poolWellOfDiscovery from "../pool/well-of-discovery.js";
 import _poolWestgateRegent from "../pool/westgate-regent.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
@@ -766,6 +768,7 @@ import _poolWildernessElemental from "../pool/wilderness-elemental.js";
 import _poolWildwoodGeist from "../pool/wildwood-geist.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWillowSatyr from "../pool/willow-satyr.js";
+import _poolWindscouter from "../pool/windscouter.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWirecat from "../pool/wirecat.js";
@@ -1435,6 +1438,7 @@ const shard: CardShard = {
     _poolSpiritOfTheNight,
     _poolSpiritmonger,
     _poolSpitefulSliver,
+    _poolSpittingSpider,
     _poolSplinterfright,
     _poolSplitUp,
     _poolSpoilsOfAdventure,
@@ -1558,6 +1562,7 @@ const shard: CardShard = {
     _poolWaterwhirl,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
+    _poolWellOfDiscovery,
     _poolWestgateRegent,
     _poolWhirlermaker,
     _poolWhisperAgent,
@@ -1568,6 +1573,7 @@ const shard: CardShard = {
     _poolWildwoodGeist,
     _poolWillScholarOfFrost,
     _poolWillowSatyr,
+    _poolWindscouter,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWirecat,

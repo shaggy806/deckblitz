@@ -74,6 +74,7 @@ import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
 import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
+import _poolBogElemental from "../pool/bog-elemental.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
@@ -774,6 +775,7 @@ import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flyi
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
+import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
 import _tokensTwinToken from "../tokens/twin-token.js";
 import _tokensYoungHeroRoleToken from "../tokens/young-hero-role-token.js";
@@ -851,6 +853,7 @@ const shard: CardShard = {
     _poolBloodPet,
     _poolBloodbraidElf,
     _poolBloodshotCyclops,
+    _poolBogElemental,
     _poolBogwaterLumaret,
     _poolBolgsCompany,
     _poolBonescytheSliver,
@@ -1553,6 +1556,7 @@ const shard: CardShard = {
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
+    _tokensMinionToken,
     _tokensMyrToken,
     _tokensTwinToken,
     _tokensYoungHeroRoleToken,

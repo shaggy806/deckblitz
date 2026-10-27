@@ -114,6 +114,7 @@ import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
+import _poolChillingApparition from "../pool/chilling-apparition.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
 import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
@@ -775,6 +776,7 @@ import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWaterspoutWeavers from "../pool/waterspout-weavers.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWellOfLife from "../pool/well-of-life.js";
 import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolChargeThrough,
     _poolChargingWarBoar,
     _poolChildOfNight,
+    _poolChillingApparition,
     _poolChillingGrasp,
     _poolChronozoa,
     _poolCinderCrawler,
@@ -1603,6 +1606,7 @@ const shard: CardShard = {
     _poolWaterTribeCaptain,
     _poolWaterspoutWeavers,
     _poolWeaponsManufacturing,
+    _poolWellOfLife,
     _poolWellspring,
     _poolWerewolfOfAncientHunger,
     _poolWhenWeWereYoung,

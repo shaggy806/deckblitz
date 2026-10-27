@@ -348,6 +348,7 @@ import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
+import _poolLesserGargadon from "../pool/lesser-gargadon.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
@@ -1147,6 +1148,7 @@ const shard: CardShard = {
     _poolLashOfTheBalrog,
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
+    _poolLesserGargadon,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
     _poolLifecraftAwakening,

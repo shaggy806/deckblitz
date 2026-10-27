@@ -270,6 +270,7 @@ import _poolGripOfTheRoil from "../pool/grip-of-the-roil.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
 import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
+import _poolGulfSquid from "../pool/gulf-squid.js";
 import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolGroveRumbler,
     _poolGrubNotoriousAuntie,
     _poolGuidedStrike,
+    _poolGulfSquid,
     _poolGulpingScraptrap,
     _poolGurmagDrowner,
     _poolHaazdaVigilante,

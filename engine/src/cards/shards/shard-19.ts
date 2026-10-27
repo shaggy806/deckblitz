@@ -96,6 +96,7 @@ import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js"
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
+import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
@@ -752,6 +753,7 @@ import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
 import _poolVengefulDevil from "../pool/vengeful-devil.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolVerdantCrescendo from "../pool/verdant-crescendo.js";
+import _poolVerdantField from "../pool/verdant-field.js";
 import _poolVerdantHaven from "../pool/verdant-haven.js";
 import _poolViashinoLashclaw from "../pool/viashino-lashclaw.js";
 import _poolViciousBetrayal from "../pool/vicious-betrayal.js";
@@ -917,6 +919,7 @@ const shard: CardShard = {
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
+    _poolCalmingVerse,
     _poolCanalDredger,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
@@ -1573,6 +1576,7 @@ const shard: CardShard = {
     _poolVengefulDevil,
     _poolVengefulVampire,
     _poolVerdantCrescendo,
+    _poolVerdantField,
     _poolVerdantHaven,
     _poolViashinoLashclaw,
     _poolViciousBetrayal,

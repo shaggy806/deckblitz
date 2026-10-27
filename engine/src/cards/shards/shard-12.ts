@@ -76,6 +76,7 @@ import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBloodbraidMarauder from "../pool/bloodbraid-marauder.js";
 import _poolBloodfrayGiant from "../pool/bloodfray-giant.js";
 import _poolBlurOfBlades from "../pool/blur-of-blades.js";
+import _poolBogGlider from "../pool/bog-glider.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBookDevourer from "../pool/book-devourer.js";
@@ -218,6 +219,7 @@ import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
+import _poolExcise from "../pool/excise.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolExterminatus from "../pool/exterminatus.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
@@ -342,6 +344,7 @@ import _poolJilt from "../pool/jilt.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
+import _poolJolraelsFavor from "../pool/jolraels-favor.js";
 import _poolJunkyoBell from "../pool/junkyo-bell.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
@@ -620,6 +623,7 @@ import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSpitefulReturned from "../pool/spiteful-returned.js";
 import _poolSpring from "../pool/spring.js";
+import _poolSquirrelWrangler from "../pool/squirrel-wrangler.js";
 import _poolStampedingWildebeests from "../pool/stampeding-wildebeests.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
@@ -844,6 +848,7 @@ const shard: CardShard = {
     _poolBloodbraidMarauder,
     _poolBloodfrayGiant,
     _poolBlurOfBlades,
+    _poolBogGlider,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
     _poolBookDevourer,
@@ -986,6 +991,7 @@ const shard: CardShard = {
     _poolEverflameEidolon,
     _poolEviscerate,
     _poolEvolvedSleeper,
+    _poolExcise,
     _poolExperimentalArmor,
     _poolExterminatus,
     _poolFadeFromMemory,
@@ -1110,6 +1116,7 @@ const shard: CardShard = {
     _poolJodahArchmageEternal,
     _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
+    _poolJolraelsFavor,
     _poolJunkyoBell,
     _poolJuriMasterOfTheRevue,
     _poolKaleidoscorch,
@@ -1388,6 +1395,7 @@ const shard: CardShard = {
     _poolSpireMangler,
     _poolSpitefulReturned,
     _poolSpring,
+    _poolSquirrelWrangler,
     _poolStampedingWildebeests,
     _poolSteelbaneHydra,
     _poolSternDismissal,

@@ -359,6 +359,7 @@ import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
+import _poolLatullasOrders from "../pool/latullas-orders.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLeeringEmblem from "../pool/leering-emblem.js";
 import _poolLegacysAllure from "../pool/legacys-allure.js";
@@ -542,6 +543,7 @@ import _poolRoadRuin from "../pool/road-ruin.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
+import _poolRootCage from "../pool/root-cage.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
@@ -1165,6 +1167,7 @@ const shard: CardShard = {
     _poolLashweedLurker,
     _poolLastWord,
     _poolLatNamAdept,
+    _poolLatullasOrders,
     _poolLaviniaFoilToConspiracy,
     _poolLeeringEmblem,
     _poolLegacysAllure,
@@ -1348,6 +1351,7 @@ const shard: CardShard = {
     _poolRoarOfChallenge,
     _poolRoguesGloves,
     _poolRonasVortex,
+    _poolRootCage,
     _poolRootbornDefenses,
     _poolRosemaneCentaur,
     _poolRoyalTrooper,

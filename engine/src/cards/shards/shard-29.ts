@@ -179,6 +179,7 @@ import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
 import _poolElementalAppeal from "../pool/elemental-appeal.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
+import _poolElephantResurgence from "../pool/elephant-resurgence.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
@@ -560,6 +561,7 @@ import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolScoutTheBorders from "../pool/scout-the-borders.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
+import _poolSearchForSurvivors from "../pool/search-for-survivors.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
 import _poolSeasonedTactician from "../pool/seasoned-tactician.js";
 import _poolSecretPlans from "../pool/secret-plans.js";
@@ -965,6 +967,7 @@ const shard: CardShard = {
     _poolEdgewallInnkeeper,
     _poolElementalAppeal,
     _poolElementalMascot,
+    _poolElephantResurgence,
     _poolEleshNornMotherOfMachines,
     _poolElvenBow,
     _poolElvenFortress,
@@ -1346,6 +1349,7 @@ const shard: CardShard = {
     _poolScoutTheBorders,
     _poolSeaSpirit,
     _poolSeaSprite,
+    _poolSearchForSurvivors,
     _poolSeasonedPyromancer,
     _poolSeasonedTactician,
     _poolSecretPlans,

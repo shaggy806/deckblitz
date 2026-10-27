@@ -348,6 +348,7 @@ import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeeningStone from "../pool/keening-stone.js";
+import _poolKeldonArsonist from "../pool/keldon-arsonist.js";
 import _poolKeldonChampion from "../pool/keldon-champion.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKeldonStrikeTeam from "../pool/keldon-strike-team.js";
@@ -757,6 +758,7 @@ import _poolWingmateRoc from "../pool/wingmate-roc.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWitchsMark from "../pool/witchs-mark.js";
+import _poolWithdraw from "../pool/withdraw.js";
 import _poolWithstand from "../pool/withstand.js";
 import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWrangle from "../pool/wrangle.js";
@@ -772,6 +774,7 @@ import _tokensBlueHorror from "../tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
 import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-token-metallurgic-summonings.js";
 import _tokensElementalToken88Vigilance from "../tokens/elemental-token-8-8-vigilance.js";
+import _tokensElephantTokenGraveyardCreatures from "../tokens/elephant-token-graveyard-creatures.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
 import _tokensRedElementalToken31Haste from "../tokens/red-elemental-token-3-1-haste.js";
 import _tokensRedElementalToken33 from "../tokens/red-elemental-token-3-3.js";
@@ -1127,6 +1130,7 @@ const shard: CardShard = {
     _poolKaylasReconstruction,
     _poolKeeningApparition,
     _poolKeeningStone,
+    _poolKeldonArsonist,
     _poolKeldonChampion,
     _poolKeldonRaider,
     _poolKeldonStrikeTeam,
@@ -1536,6 +1540,7 @@ const shard: CardShard = {
     _poolWinterflame,
     _poolWirewoodHivemaster,
     _poolWitchsMark,
+    _poolWithdraw,
     _poolWithstand,
     _poolWoodbornBehemoth,
     _poolWrangle,
@@ -1553,6 +1558,7 @@ const shard: CardShard = {
     _tokensBlueRedElementalToken44,
     _tokensConstructTokenMetallurgicSummonings,
     _tokensElementalToken88Vigilance,
+    _tokensElephantTokenGraveyardCreatures,
     _tokensPlainKnightToken,
     _tokensRedElementalToken31Haste,
     _tokensRedElementalToken33,

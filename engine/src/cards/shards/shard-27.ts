@@ -109,6 +109,7 @@ import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolClawingTorment from "../pool/clawing-torment.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
+import _poolCoffinPuppets from "../pool/coffin-puppets.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConnive from "../pool/connive.js";
@@ -872,6 +873,7 @@ const shard: CardShard = {
     _poolClachanFestival,
     _poolClawingTorment,
     _poolCloudSprite,
+    _poolCoffinPuppets,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
     _poolConnive,
