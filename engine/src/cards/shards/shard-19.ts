@@ -8,6 +8,7 @@ import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
+import _poolAetherMutation from "../pool/aether-mutation.js";
 import _poolAffectionateIndrik from "../pool/affectionate-indrik.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
@@ -18,6 +19,7 @@ import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAlabornVeteran from "../pool/alaborn-veteran.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
+import _poolAnavolver from "../pool/anavolver.js";
 import _poolAncestralCommunion from "../pool/ancestral-communion.js";
 import _poolAnchorToTheAether from "../pool/anchor-to-the-aether.js";
 import _poolAncientSilverback from "../pool/ancient-silverback.js";
@@ -217,6 +219,7 @@ import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
+import _poolEnrage from "../pool/enrage.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEntering from "../pool/entering.js";
 import _poolEntropicEidolon from "../pool/entropic-eidolon.js";
@@ -237,6 +240,7 @@ import _poolExpunge from "../pool/expunge.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
+import _poolFacesOfThePast from "../pool/faces-of-the-past.js";
 import _poolFaeFlight from "../pool/fae-flight.js";
 import _poolFaeOffering from "../pool/fae-offering.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
@@ -553,6 +557,7 @@ import _poolRaiseDead from "../pool/raise-dead.js";
 import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
+import _poolReality from "../pool/reality.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
+    _poolAetherMutation,
     _poolAffectionateIndrik,
     _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,
@@ -826,6 +832,7 @@ const shard: CardShard = {
     _poolAlabornVeteran,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
+    _poolAnavolver,
     _poolAncestralCommunion,
     _poolAnchorToTheAether,
     _poolAncientSilverback,
@@ -1025,6 +1032,7 @@ const shard: CardShard = {
     _poolElvenRaftSteerer,
     _poolElvishHealer,
     _poolEmrakulsMessenger,
+    _poolEnrage,
     _poolEnslavedDwarf,
     _poolEntering,
     _poolEntropicEidolon,
@@ -1045,6 +1053,7 @@ const shard: CardShard = {
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
+    _poolFacesOfThePast,
     _poolFaeFlight,
     _poolFaeOffering,
     _poolFalkenrathNoble,
@@ -1361,6 +1370,7 @@ const shard: CardShard = {
     _poolRandomEncounter,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
+    _poolReality,
     _poolRecklessBrute,
     _poolRedElementalBlast,
     _poolRelicCrush,

@@ -481,9 +481,9 @@ report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
 // Side by side at 4 workers each — but on a small machine one after the
 // other at vitest's default, or the server's timed capture tests run past
-// their 5 s (they take 2 s alone; 2026-10-25). The same larger heap as the
-// engine's: the server suite's main process ran out of the default ~2 GB at
-// startup past ~24,600 definitions (2026-10-27).
+// their 5 s (they take 2 s alone; 2026-10-25).
+// The server's suite loads the card barrel too, and past ~24,600 definitions
+// its main process ran out of the default heap at startup as well (2026-10-27).
 const suite = (name, dir) => () =>
   run(
     name,

@@ -174,6 +174,10 @@ describe("slot polarity", () => {
     expect(abilityPolarities(haunt())).toEqual(["harm"]);
   });
 
+  it("reads a creature dealing damage to its own controller as harm", () => {
+    expect(cast("Traitor's Roar")).toEqual(["harm"]);
+  });
+
   it("classifies nearly every targeted slot in the pool", () => {
     // A ratchet, not a target: 98.6% when this was written (1,771 slots).
     // What's left is genuinely the board's call — a transform, an animated

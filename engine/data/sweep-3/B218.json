@@ -1,0 +1,777 @@
+{
+ "batch": "B218",
+ "status": "complete",
+ "ranks": "Apocalypse (APC, 2001-06-04): whole set, 100 (the sixth middle walk's first batch); built two kicker costs (keyword:two-kicker-costs, rule 702.33b, f — kicker.second, self-kicked's with, read by the scaffolder) and authored the six earlier cards it unblocked (Archangel of Wrath, Ana Battlemage, Wastescape Battlemage, Vodalian Mindsinger, Stronghold Arena, Temporal Firestorm)",
+ "authored": [
+  {
+   "name": "Bloodfire Dwarf",
+   "files": [
+    "engine/src/cards/pool/bloodfire-dwarf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Arch",
+   "files": [
+    "engine/src/cards/pool/dragon-arch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Messenger",
+   "files": [
+    "engine/src/cards/pool/sylvan-messenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shield of Duty and Reason",
+   "files": [
+    "engine/src/cards/pool/shield-of-duty-and-reason.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whirlpool Rider",
+   "files": [
+    "engine/src/cards/pool/whirlpool-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Index",
+   "files": [
+    "engine/src/cards/pool/index.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire // Ice",
+   "files": [
+    "engine/src/cards/pool/fire-ice.ts",
+    "engine/src/cards/pool/fire.ts",
+    "engine/src/cards/pool/ice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver Dagger",
+   "files": [
+    "engine/src/cards/pool/quicksilver-dagger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prophetic Bolt",
+   "files": [
+    "engine/src/cards/pool/prophetic-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penumbra Wurm",
+   "files": [
+    "engine/src/cards/pool/penumbra-wurm.ts",
+    "engine/src/cards/tokens/wurm-token-black-6-6-trample.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brass Herald",
+   "files": [
+    "engine/src/cards/pool/brass-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Gargantua",
+   "files": [
+    "engine/src/cards/pool/phyrexian-gargantua.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Research",
+   "files": [
+    "engine/src/cards/pool/wild-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whirlpool Drake",
+   "files": [
+    "engine/src/cards/pool/whirlpool-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squee's Embrace",
+   "files": [
+    "engine/src/cards/pool/squees-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orim's Thunder",
+   "files": [
+    "engine/src/cards/pool/orims-thunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Link",
+   "files": [
+    "engine/src/cards/pool/soul-link.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evasive Action",
+   "files": [
+    "engine/src/cards/pool/evasive-action.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodfire Colossus",
+   "files": [
+    "engine/src/cards/pool/bloodfire-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ana Sanctuary",
+   "files": [
+    "engine/src/cards/pool/ana-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Last Stand",
+   "files": [
+    "engine/src/cards/pool/last-stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order // Chaos",
+   "files": [
+    "engine/src/cards/pool/order-chaos.ts",
+    "engine/src/cards/pool/order.ts",
+    "engine/src/cards/pool/chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Powerstone Minefield",
+   "files": [
+    "engine/src/cards/pool/powerstone-minefield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Trenches",
+   "files": [
+    "engine/src/cards/pool/goblin-trenches.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aether Mutation",
+   "files": [
+    "engine/src/cards/pool/aether-mutation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Mutation",
+   "files": [
+    "engine/src/cards/pool/death-mutation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jaded Response",
+   "files": [
+    "engine/src/cards/pool/jaded-response.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg Uprising",
+   "files": [
+    "engine/src/cards/pool/urborg-uprising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceta Sanctuary",
+   "files": [
+    "engine/src/cards/pool/ceta-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penumbra Bobcat",
+   "files": [
+    "engine/src/cards/pool/penumbra-bobcat.ts",
+    "engine/src/cards/tokens/black-cat-token-2-1.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vodalian Mystic",
+   "files": [
+    "engine/src/cards/pool/vodalian-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Courier",
+   "files": [
+    "engine/src/cards/pool/tidal-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunted Angel",
+   "files": [
+    "engine/src/cards/pool/haunted-angel.ts",
+    "engine/src/cards/tokens/angel-token-black-3-3-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiritmonger",
+   "files": [
+    "engine/src/cards/pool/spiritmonger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desolation Angel",
+   "files": [
+    "engine/src/cards/pool/desolation-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Defiler",
+   "files": [
+    "engine/src/cards/pool/grave-defiler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suffocating Blast",
+   "files": [
+    "engine/src/cards/pool/suffocating-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enlistment Officer",
+   "files": [
+    "engine/src/cards/pool/enlistment-officer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gerrard's Verdict",
+   "files": [
+    "engine/src/cards/pool/gerrards-verdict.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Landslide",
+   "files": [
+    "engine/src/cards/pool/dwarven-landslide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya's Embrace",
+   "files": [
+    "engine/src/cards/pool/yavimayas-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Balance",
+   "files": [
+    "engine/src/cards/pool/gaeas-balance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consume Strength",
+   "files": [
+    "engine/src/cards/pool/consume-strength.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dega Sanctuary",
+   "files": [
+    "engine/src/cards/pool/dega-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tranquil Path",
+   "files": [
+    "engine/src/cards/pool/tranquil-path.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bloodfire Kavu",
+   "files": [
+    "engine/src/cards/pool/bloodfire-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illuminate",
+   "files": [
+    "engine/src/cards/pool/illuminate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illusion // Reality",
+   "files": [
+    "engine/src/cards/pool/illusion-reality.ts",
+    "engine/src/cards/pool/illusion.ts",
+    "engine/src/cards/pool/reality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Legionnaire",
+   "files": [
+    "engine/src/cards/pool/goblin-legionnaire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Mauler",
+   "files": [
+    "engine/src/cards/pool/kavu-mauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penumbra Kavu",
+   "files": [
+    "engine/src/cards/pool/penumbra-kavu.ts",
+    "engine/src/cards/tokens/kavu-token-black-3-3.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Howler",
+   "files": [
+    "engine/src/cards/pool/kavu-howler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jilt",
+   "files": [
+    "engine/src/cards/pool/jilt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Despair",
+   "files": [
+    "engine/src/cards/pool/planar-despair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Putrid Warrior",
+   "files": [
+    "engine/src/cards/pool/putrid-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Patrol",
+   "files": [
+    "engine/src/cards/pool/dwarven-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fungal Shambler",
+   "files": [
+    "engine/src/cards/pool/fungal-shambler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Night // Day",
+   "files": [
+    "engine/src/cards/pool/night-day.ts",
+    "engine/src/cards/pool/night.ts",
+    "engine/src/cards/pool/day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mask of Intolerance",
+   "files": [
+    "engine/src/cards/pool/mask-of-intolerance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raka Sanctuary",
+   "files": [
+    "engine/src/cards/pool/raka-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength of Night",
+   "files": [
+    "engine/src/cards/pool/strength-of-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foul Presence",
+   "files": [
+    "engine/src/cards/pool/foul-presence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necra Sanctuary",
+   "files": [
+    "engine/src/cards/pool/necra-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coastal Drake",
+   "files": [
+    "engine/src/cards/pool/coastal-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necravolver",
+   "files": [
+    "engine/src/cards/pool/necravolver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Anavolver",
+   "files": [
+    "engine/src/cards/pool/anavolver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cetavolver",
+   "files": [
+    "engine/src/cards/pool/cetavolver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Degavolver",
+   "files": [
+    "engine/src/cards/pool/degavolver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mournful Zombie",
+   "files": [
+    "engine/src/cards/pool/mournful-zombie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakavolver",
+   "files": [
+    "engine/src/cards/pool/rakavolver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glade Gnarr",
+   "files": [
+    "engine/src/cards/pool/glade-gnarr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manacles of Decay",
+   "files": [
+    "engine/src/cards/pool/manacles-of-decay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minotaur Illusionist",
+   "files": [
+    "engine/src/cards/pool/minotaur-illusionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bog Gnarr",
+   "files": [
+    "engine/src/cards/pool/bog-gnarr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minotaur Tactician",
+   "files": [
+    "engine/src/cards/pool/minotaur-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archangel of Wrath",
+   "files": [
+    "engine/src/cards/pool/archangel-of-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ana Battlemage",
+   "files": [
+    "engine/src/cards/pool/ana-battlemage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wastescape Battlemage",
+   "files": [
+    "engine/src/cards/pool/wastescape-battlemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vodalian Mindsinger",
+   "files": [
+    "engine/src/cards/pool/vodalian-mindsinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stronghold Arena",
+   "files": [
+    "engine/src/cards/pool/stronghold-arena.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Firestorm",
+   "files": [
+    "engine/src/cards/pool/temporal-firestorm.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Squee's Revenge",
+   "needs": [
+    "decision:choose-number-on-resolution",
+    "mechanic:coin-flip"
+   ],
+   "why": "Choose a number as it resolves, then flip that many coins or until one is lost, rewarding each flip only if all were won."
+  },
+  {
+   "name": "Unnatural Selection",
+   "needs": [
+    "effect:set-creature-type",
+    "decision:choose-creature-type-excluding"
+   ],
+   "why": "Nothing makes a creature become a chosen creature type (replacing its types), and the type choice can't exclude Wall."
+  },
+  {
+   "name": "Cromat",
+   "needs": [
+    "filter:blocking-or-blocked-by-source"
+   ],
+   "why": "No target filter for 'creature blocking or blocked by this creature'; its other abilities are expressible."
+  },
+  {
+   "name": "Desolation Giant",
+   "needs": [
+    "effect:destroy-all-except-source"
+   ],
+   "why": "'Destroy all other creatures' — destroy-all can't spare its source."
+  },
+  {
+   "name": "Standard Bearer",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "why": "Nothing makes opponents choose a Flagbearer when they choose targets (rule 702-style targeting requirement)."
+  },
+  {
+   "name": "Coalition Flag",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "why": "Enchanted creature is a Flagbearer — the Flagbearer targeting requirement isn't built."
+  },
+  {
+   "name": "Coalition Honor Guard",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "why": "The Flagbearer targeting requirement isn't built."
+  },
+  {
+   "name": "Bloodfire Infusion",
+   "needs": [
+    "cost:sacrifice-enchanted-creature"
+   ],
+   "why": "A sacrifice cost can't name the creature this Aura enchants."
+  },
+  {
+   "name": "Dead Ringers",
+   "needs": [
+    "condition:targets-same-colors"
+   ],
+   "why": "No resolution check that two targets have exactly the same colours."
+  },
+  {
+   "name": "Gerrard Capashen",
+   "needs": [
+    "effect:cards-in-target-player-hand"
+   ],
+   "why": "'1 life for each card in target opponent's hand' — cardsInHand can't read a target slot."
+  },
+  {
+   "name": "Reef Shaman",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "No effect makes a target land a chosen basic land type, replacing its types and abilities (rule 305.7)."
+  },
+  {
+   "name": "Tundra Kavu",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "Target land becomes a Plains or an Island — the same missing land-type-setting effect."
+  },
+  {
+   "name": "Captain's Maneuver",
+   "needs": [
+    "target:creature-planeswalker-or-player"
+   ],
+   "why": "No target slot for 'creature, planeswalker or player' without battles."
+  },
+  {
+   "name": "Suppress",
+   "needs": [
+    "effect:exile-hands-face-down-return-later"
+   ],
+   "why": "Exiling a hand face down and returning it at the end step of that player's next turn has no shape."
+  },
+  {
+   "name": "Shimmering Mirage",
+   "needs": [
+    "effect:become-basic-land-type",
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "Setting a land's basic type until end of turn, stripping its other abilities (rule 305.7), isn't built."
+  },
+  {
+   "name": "Divine Light",
+   "needs": [
+    "replacement:prevent-damage-to-filter-this-turn"
+   ],
+   "why": "A one-shot 'prevent all damage this turn to creatures you control' that covers creatures arriving later."
+  },
+  {
+   "name": "Ice Cave",
+   "needs": [
+    "effect:other-player-may-pay-spell-mana-cost"
+   ],
+   "why": "Any other player may pay the spell's printed mana cost to counter it — no such unless-option."
+  },
+  {
+   "name": "Mind Extraction",
+   "needs": [
+    "effect:discard-all-matching",
+    "filter:shares-color-with-sacrificed"
+   ],
+   "why": "Discard every card sharing a colour with the sacrificed creature: no discard-all-matching effect or filter."
+  },
+  {
+   "name": "Dodecapod",
+   "needs": [
+    "replacement:discarded-by-opponent-to-battlefield"
+   ],
+   "why": "'If an opponent's spell or ability causes you to discard this, put it onto the battlefield instead' isn't built."
+  },
+  {
+   "name": "Zombie Boa",
+   "needs": [
+    "decision:choose-color-on-resolution",
+    "filter:chosen-color"
+   ],
+   "why": "Its 'becomes blocked by a creature of the chosen colour' trigger can't key on a colour chosen as the ability resolves."
+  },
+  {
+   "name": "Guided Passage",
+   "needs": [
+    "effect:choices-by-other-players"
+   ],
+   "why": "An opponent chooses a creature, a land and a noncreature nonland card from your library — not built."
+  },
+  {
+   "name": "Symbiotic Deployment",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "No static for 'skip your draw step'."
+  },
+  {
+   "name": "Emblazoned Golem",
+   "needs": [
+    "keyword:kicker-x",
+    "amount:colored-mana-spent-on-x"
+   ],
+   "why": "Kicker {X} payable only with coloured mana, at most one of each colour."
+  },
+  {
+   "name": "False Dawn",
+   "needs": [
+    "replacement:mana-production-replacement",
+    "cost:spend-mana-as-any-color"
+   ],
+   "why": "Turning produced mana white until end of turn and spending white as any colour as a one-shot effect."
+  },
+  {
+   "name": "Tahngarth's Glare",
+   "needs": [
+    "effect:look-at-target-player-library-reorder"
+   ],
+   "why": "Look at and reorder another player's library — look-and-choose makes that player the one who looks."
+  },
+  {
+   "name": "Urborg Lhurgoyf",
+   "needs": [
+    "replacement:as-enters-mill"
+   ],
+   "why": "Its two kickers are built (B218); 'as this creature enters, mill three cards for each time it was kicked' isn't."
+  }
+ ]
+}

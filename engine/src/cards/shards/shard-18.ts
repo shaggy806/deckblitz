@@ -151,6 +151,7 @@ import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDorotheasRetribution from "../pool/dorotheas-retribution.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
+import _poolDragonShadow from "../pool/dragon-shadow.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonscaleBoon from "../pool/dragonscale-boon.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
@@ -164,6 +165,8 @@ import _poolDuneBroodNephilim from "../pool/dune-brood-nephilim.js";
 import _poolDuskCharger from "../pool/dusk-charger.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
+import _poolDwarvenLandslide from "../pool/dwarven-landslide.js";
+import _poolDwarvenPatrol from "../pool/dwarven-patrol.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
 import _poolEastfarthingFarmer from "../pool/eastfarthing-farmer.js";
 import _poolEchoMage from "../pool/echo-mage.js";
@@ -223,6 +226,7 @@ import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
 import _poolFreneticSliver from "../pool/frenetic-sliver.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
+import _poolFungalShambler from "../pool/fungal-shambler.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
 import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
@@ -419,6 +423,7 @@ import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
 import _poolNantukoDisciple from "../pool/nantuko-disciple.js";
+import _poolNecravolver from "../pool/necravolver.js";
 import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
@@ -476,6 +481,7 @@ import _poolRaggedPlaymate from "../pool/ragged-playmate.js";
 import _poolRagnar from "../pool/ragnar.js";
 import _poolRainveilRejuvenator from "../pool/rainveil-rejuvenator.js";
 import _poolRaisedByWolves from "../pool/raised-by-wolves.js";
+import _poolRakaSanctuary from "../pool/raka-sanctuary.js";
 import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
 import _poolRattleblazeScarecrow from "../pool/rattleblaze-scarecrow.js";
@@ -560,6 +566,7 @@ import _poolSolariumSentry from "../pool/solarium-sentry.js";
 import _poolSoltariChampion from "../pool/soltari-champion.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
+import _poolSoulLink from "../pool/soul-link.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSouthernPaladin from "../pool/southern-paladin.js";
@@ -910,6 +917,7 @@ const shard: CardShard = {
     _poolDoomedNecromancer,
     _poolDorotheasRetribution,
     _poolDragonBlood,
+    _poolDragonShadow,
     _poolDragonlordsServant,
     _poolDragonscaleBoon,
     _poolDragonwingGlider,
@@ -923,6 +931,8 @@ const shard: CardShard = {
     _poolDuskCharger,
     _poolDuskmantleOperative,
     _poolDutyBoundDead,
+    _poolDwarvenLandslide,
+    _poolDwarvenPatrol,
     _poolEagerCadet,
     _poolEastfarthingFarmer,
     _poolEchoMage,
@@ -982,6 +992,7 @@ const shard: CardShard = {
     _poolFreneticSliver,
     _poolFromFatherToSon,
     _poolFungalPlots,
+    _poolFungalShambler,
     _poolFurnaceSkullbomb,
     _poolFuss,
     _poolGastalRaider,
@@ -1178,6 +1189,7 @@ const shard: CardShard = {
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
     _poolNantukoDisciple,
+    _poolNecravolver,
     _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
@@ -1235,6 +1247,7 @@ const shard: CardShard = {
     _poolRagnar,
     _poolRainveilRejuvenator,
     _poolRaisedByWolves,
+    _poolRakaSanctuary,
     _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
     _poolRattleblazeScarecrow,
@@ -1319,6 +1332,7 @@ const shard: CardShard = {
     _poolSoltariChampion,
     _poolSongsOfTheDamned,
     _poolSorinImperiousBloodlord,
+    _poolSoulLink,
     _poolSoulSeizer,
     _poolSoulTether,
     _poolSouthernPaladin,

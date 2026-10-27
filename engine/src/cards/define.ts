@@ -1173,7 +1173,13 @@ export type StaticCondition =
    * already on the battlefield, so it's an ETB trigger with an intervening-if
    * (rule 603.4) reading the `kicked` flag the cast left on the object.
    */
-  | { readonly kind: "self-kicked" }
+  | {
+      readonly kind: "self-kicked";
+      /** A card with two kicker costs (`kicker.second`, rule 702.33f): "if it
+       * was kicked with its [A] kicker" is `"first"`, "… its [B] kicker"
+       * `"second"`, and "if it was kicked twice" `"both"`. Absent, either. */
+      readonly with?: "first" | "second" | "both";
+    }
   /** Was the ability's own source cast for its spectacle cost (rule
    * 702.137)? — Rafter Demon's "When this creature enters, **if its
    * spectacle cost was paid**, …"; read like `self-kicked`. */
@@ -2668,6 +2674,19 @@ export interface CardDefinition {
      * `counters.amount: "times-kicked"` (Everflowing Chalice).
      */
     readonly multi?: boolean;
+    /**
+     * A second kicker cost (rule 702.33b: "Kicker [cost 1] and/or [cost 2]"
+     * means "Kicker [cost 1], kicker [cost 2]" — the volvers, Archangel of
+     * Wrath): `cost` is the first, this the second, each payable once. The
+     * spell is offered with the first, the second and both
+     * (`LegalAction.kickCount` 1, 2 and 3 — which kickers, not how many
+     * times); it's kicked with either (702.33d), twice with both, and
+     * `GameObject.kickedWith` remembers which, for `self-kicked`'s `with`
+     * ("if it was kicked with its [A] kicker", 702.33f). Not with `multi`,
+     * `keyword`, `targets` or `effect`: what each kicker does is a
+     * `conditional` on `self-kicked` (Illuminate) or a trigger's condition.
+     */
+    readonly second?: string;
   } | null;
   /**
    * Overload (rule 702.126 — Cyclonic Rift): an alternative cost that
@@ -3609,6 +3628,7 @@ interface CardDraft {
     readonly also?: KickerAlsoCost;
     readonly teamwork?: number;
     readonly multi?: boolean;
+    readonly second?: string;
   };
   overload?: {
     readonly cost: string;

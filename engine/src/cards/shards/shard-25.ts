@@ -74,6 +74,7 @@ import _poolBiogenicUpgrade from "../pool/biogenic-upgrade.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
 import _poolBitterbladeWarrior from "../pool/bitterblade-warrior.js";
+import _poolBladewingsThrall from "../pool/bladewings-thrall.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
@@ -173,6 +174,7 @@ import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
+import _poolDragonScales from "../pool/dragon-scales.js";
 import _poolDragonbroodsRelic from "../pool/dragonbroods-relic.js";
 import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
@@ -226,6 +228,7 @@ import _poolFieryFinish from "../pool/fiery-finish.js";
 import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
+import _poolFire from "../pool/fire.js";
 import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFirewingPhoenix from "../pool/firewing-phoenix.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
@@ -333,6 +336,7 @@ import _poolKaleidostone from "../pool/kaleidostone.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
+import _poolKavuHowler from "../pool/kavu-howler.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
@@ -396,6 +400,7 @@ import _poolMessengerJays from "../pool/messenger-jays.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
+import _poolMinotaurIllusionist from "../pool/minotaur-illusionist.js";
 import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -823,6 +828,7 @@ const shard: CardShard = {
     _poolBirthingPod,
     _poolBitterChill,
     _poolBitterbladeWarrior,
+    _poolBladewingsThrall,
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
@@ -922,6 +928,7 @@ const shard: CardShard = {
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,
+    _poolDragonScales,
     _poolDragonbroodsRelic,
     _poolDragonologist,
     _poolDrakeSkullCameo,
@@ -975,6 +982,7 @@ const shard: CardShard = {
     _poolFinaleOfDevastation,
     _poolFirbolgFlutist,
     _poolFireDiamond,
+    _poolFire,
     _poolFirebrandArcher,
     _poolFirewingPhoenix,
     _poolFlameSlash,
@@ -1082,6 +1090,7 @@ const shard: CardShard = {
     _poolKarametrasFavor,
     _poolKarplusanWolverine,
     _poolKataraTheFearless,
+    _poolKavuHowler,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,
     _poolKeeperOfTresserhorn,
@@ -1145,6 +1154,7 @@ const shard: CardShard = {
     _poolMineRaider,
     _poolMinisterOfPain,
     _poolMinotaurAbomination,
+    _poolMinotaurIllusionist,
     _poolMirranMettle,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,

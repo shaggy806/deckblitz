@@ -138,6 +138,7 @@ import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
 import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloakOfMists from "../pool/cloak-of-mists.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
+import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
@@ -174,6 +175,7 @@ import _poolDaringLeap from "../pool/daring-leap.js";
 import _poolDaringMechanic from "../pool/daring-mechanic.js";
 import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
 import _poolDarkPrivilege from "../pool/dark-privilege.js";
+import _poolDaruWarchief from "../pool/daru-warchief.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
@@ -368,6 +370,7 @@ import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
+import _poolKurgadon from "../pool/kurgadon.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
@@ -458,6 +461,8 @@ import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPegasusCourser from "../pool/pegasus-courser.js";
+import _poolPenumbraBobcat from "../pool/penumbra-bobcat.js";
+import _poolPenumbraKavu from "../pool/penumbra-kavu.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
 import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
@@ -714,6 +719,7 @@ import _poolWeiEliteCompanions from "../pool/wei-elite-companions.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
+import _poolWildResearch from "../pool/wild-research.js";
 import _poolWildWurm from "../pool/wild-wurm.js";
 import _poolWilfredMott from "../pool/wilfred-mott.js";
 import _poolWillScionOfPeace from "../pool/will-scion-of-peace.js";
@@ -751,6 +757,7 @@ import _tokensHorseTokenTheGirlInTheFireplace from "../tokens/horse-token-the-gi
 import _tokensHydraToken from "../tokens/hydra-token.js";
 import _tokensInsectTokenCanoptekScarabSwarm from "../tokens/insect-token-canoptek-scarab-swarm.js";
 import _tokensJunkToken from "../tokens/junk-token.js";
+import _tokensKavuTokenBlack33 from "../tokens/kavu-token-black-3-3.js";
 import _tokensLanderToken from "../tokens/lander-token.js";
 import _tokensMeteoriteToken from "../tokens/meteorite-token.js";
 import _tokensNinjaToken from "../tokens/ninja-token.js";
@@ -900,6 +907,7 @@ const shard: CardShard = {
     _poolCliffgate,
     _poolCloakOfMists,
     _poolCloudchaserEagle,
+    _poolClutchOfUndeath,
     _poolComfortingCounsel,
     _poolConductElectricity,
     _poolConsecrateConsume,
@@ -936,6 +944,7 @@ const shard: CardShard = {
     _poolDaringMechanic,
     _poolDarkHeartOfTheWood,
     _poolDarkPrivilege,
+    _poolDaruWarchief,
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,
@@ -1130,6 +1139,7 @@ const shard: CardShard = {
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
+    _poolKurgadon,
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLathlissDragonQueen,
@@ -1220,6 +1230,8 @@ const shard: CardShard = {
     _poolPartingThoughts,
     _poolPeerIntoTheAbyss,
     _poolPegasusCourser,
+    _poolPenumbraBobcat,
+    _poolPenumbraKavu,
     _poolPersistentSpecimen,
     _poolPhalanxFormation,
     _poolPharikasMender,
@@ -1476,6 +1488,7 @@ const shard: CardShard = {
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,
+    _poolWildResearch,
     _poolWildWurm,
     _poolWilfredMott,
     _poolWillScionOfPeace,
@@ -1515,6 +1528,7 @@ const shard: CardShard = {
     _tokensHydraToken,
     _tokensInsectTokenCanoptekScarabSwarm,
     _tokensJunkToken,
+    _tokensKavuTokenBlack33,
     _tokensLanderToken,
     _tokensMeteoriteToken,
     _tokensNinjaToken,
