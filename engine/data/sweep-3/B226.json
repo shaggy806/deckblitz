@@ -1,0 +1,716 @@
+{
+ "batch": "B226",
+ "status": "complete",
+ "ranks": "Invasion (INV, 2000-10-02): its 100 most-played left by EDHREC rank, of 201 (the sixth middle walk's third batch; the rest is round twenty's)",
+ "authored": [
+  {
+   "name": "Addle",
+   "files": [
+    "engine/src/cards/pool/addle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Rift",
+   "files": [
+    "engine/src/cards/pool/aether-rift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agonizing Demise",
+   "files": [
+    "engine/src/cards/pool/agonizing-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Shield",
+   "files": [
+    "engine/src/cards/pool/angelic-shield.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Backlash",
+   "files": [
+    "engine/src/cards/pool/backlash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bind",
+   "files": [
+    "engine/src/cards/pool/bind.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blazing Specter",
+   "files": [
+    "engine/src/cards/pool/blazing-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blind Seer",
+   "files": [
+    "engine/src/cards/pool/blind-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breath of Darigaaz",
+   "files": [
+    "engine/src/cards/pool/breath-of-darigaaz.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canopy Surge",
+   "files": [
+    "engine/src/cards/pool/canopy-surge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cauldron Dance",
+   "files": [
+    "engine/src/cards/pool/cauldron-dance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaotic Strike",
+   "files": [
+    "engine/src/cards/pool/chaotic-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coalition Victory",
+   "files": [
+    "engine/src/cards/pool/coalition-victory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crusading Knight",
+   "files": [
+    "engine/src/cards/pool/crusading-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devouring Strossus",
+   "files": [
+    "engine/src/cards/pool/devouring-strossus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dismantling Blow",
+   "files": [
+    "engine/src/cards/pool/dismantling-blow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Distorting Wake",
+   "files": [
+    "engine/src/cards/pool/distorting-wake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dredge",
+   "files": [
+    "engine/src/cards/pool/dredge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dromar, the Banisher",
+   "files": [
+    "engine/src/cards/pool/dromar-the-banisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Empress Galina",
+   "files": [
+    "engine/src/cards/pool/empress-galina.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frenzied Tilling",
+   "files": [
+    "engine/src/cards/pool/frenzied-tilling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Spy",
+   "files": [
+    "engine/src/cards/pool/goblin-spy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heroes' Reunion",
+   "files": [
+    "engine/src/cards/pool/heroes-reunion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kavu Lair",
+   "files": [
+    "engine/src/cards/pool/kavu-lair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavu Titan",
+   "files": [
+    "engine/src/cards/pool/kavu-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liberate",
+   "files": [
+    "engine/src/cards/pool/liberate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Llanowar Elite",
+   "files": [
+    "engine/src/cards/pool/llanowar-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molimo, Maro-Sorcerer",
+   "files": [
+    "engine/src/cards/pool/molimo-maro-sorcerer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Obliterate",
+   "files": [
+    "engine/src/cards/pool/obliterate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Overload",
+   "files": [
+    "engine/src/cards/pool/overload.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Probe",
+   "files": [
+    "engine/src/cards/pool/probe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prohibit",
+   "files": [
+    "engine/src/cards/pool/prohibit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quirion Trailblazer",
+   "files": [
+    "engine/src/cards/pool/quirion-trailblazer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Restock",
+   "files": [
+    "engine/src/cards/pool/restock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rewards of Diversity",
+   "files": [
+    "engine/src/cards/pool/rewards-of-diversity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rith, the Awakener",
+   "files": [
+    "engine/src/cards/pool/rith-the-awakener.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saproling Infestation",
+   "files": [
+    "engine/src/cards/pool/saproling-infestation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savage Offensive",
+   "files": [
+    "engine/src/cards/pool/savage-offensive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scouting Trek",
+   "files": [
+    "engine/src/cards/pool/scouting-trek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skizzik",
+   "files": [
+    "engine/src/cards/pool/skizzik.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sleeper's Robe",
+   "files": [
+    "engine/src/cards/pool/sleepers-robe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spinal Embrace",
+   "files": [
+    "engine/src/cards/pool/spinal-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit of Resistance",
+   "files": [
+    "engine/src/cards/pool/spirit-of-resistance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spite // Malice",
+   "files": [
+    "engine/src/cards/pool/malice.ts",
+    "engine/src/cards/pool/spite-malice.ts",
+    "engine/src/cards/pool/spite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sway of Illusion",
+   "files": [
+    "engine/src/cards/pool/sway-of-illusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thicket Elemental",
+   "files": [
+    "engine/src/cards/pool/thicket-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Visionary",
+   "files": [
+    "engine/src/cards/pool/tidal-visionary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treva, the Renewer",
+   "files": [
+    "engine/src/cards/pool/treva-the-renewer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribal Flames",
+   "files": [
+    "engine/src/cards/pool/tribal-flames.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tsabo Tavoc",
+   "files": [
+    "engine/src/cards/pool/tsabo-tavoc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg Skeleton",
+   "files": [
+    "engine/src/cards/pool/urborg-skeleton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza's Filter",
+   "files": [
+    "engine/src/cards/pool/urzas-filter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verduran Emissary",
+   "files": [
+    "engine/src/cards/pool/verduran-emissary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vile Consumption",
+   "files": [
+    "engine/src/cards/pool/vile-consumption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wax // Wane",
+   "files": [
+    "engine/src/cards/pool/wane.ts",
+    "engine/src/cards/pool/wax-wane.ts",
+    "engine/src/cards/pool/wax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worldly Counsel",
+   "files": [
+    "engine/src/cards/pool/worldly-counsel.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Alabaster Leech",
+   "needs": [
+    "static:cost-increase-colored"
+   ],
+   "why": "White spells you cast cost {W} more; costModification has only generic increases."
+  },
+  {
+   "name": "Atalya, Samite Master",
+   "needs": [
+    "effect:modal-activated-ability",
+    "cost:mana-spend-only-x-costs"
+   ],
+   "why": "A modal {X} activated ability with spend only white mana on X."
+  },
+  {
+   "name": "Bend or Break",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Each player separates their lands into two piles; an opponent chooses one to be destroyed."
+  },
+  {
+   "name": "Breaking Wave",
+   "needs": [
+    "effect:swap-tapped-state",
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "Simultaneously untap all tapped creatures and tap all untapped ones."
+  },
+  {
+   "name": "Collapsing Borders",
+   "needs": [
+    "amount:domain-of-target-player"
+   ],
+   "why": "The upkeep's active player gains life for each basic land type among lands they control."
+  },
+  {
+   "name": "Crosis, the Purger",
+   "needs": [
+    "effect:discard-all-matching",
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "Choose a color; the player reveals their hand and discards every card of that color."
+  },
+  {
+   "name": "Crystal Spray",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "Changes a color word or basic land type in a spell's or permanent's text."
+  },
+  {
+   "name": "Darigaaz, the Igniter",
+   "needs": [
+    "amount:cards-in-hand-matching-filter"
+   ],
+   "why": "Deals damage equal to the number of cards of the chosen color in that player's hand."
+  },
+  {
+   "name": "Death or Glory",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Separate creature cards in your graveyard into two piles; an opponent chooses one to exile."
+  },
+  {
+   "name": "Divine Presence",
+   "needs": [
+    "replacement:damage-capped"
+   ],
+   "why": "4 or more damage to a permanent or player becomes 3."
+  },
+  {
+   "name": "Do or Die",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Separate a player's creatures into two piles; destroy one pile of their choice."
+  },
+  {
+   "name": "Dream Thrush",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "Target land becomes the basic land type of your choice until end of turn."
+  },
+  {
+   "name": "Dueling Grounds",
+   "needs": [
+    "static:max-attackers-blockers"
+   ],
+   "why": "No more than one creature can attack or block each combat."
+  },
+  {
+   "name": "Elfhame Sanctuary",
+   "needs": [
+    "effect:skip-next-draw-step"
+   ],
+   "why": "If you search for a basic land, you skip your draw step this turn."
+  },
+  {
+   "name": "Fight or Flight",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Separate an opponent's creatures into two piles; only the chosen pile can attack this turn."
+  },
+  {
+   "name": "Ghitu Fire",
+   "needs": [
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "May be cast as though it had flash for {2} more; no such cost."
+  },
+  {
+   "name": "Global Ruin",
+   "needs": [
+    "decision:choose-land-of-each-basic-type"
+   ],
+   "why": "Each player chooses a land of each basic type they control and sacrifices the rest."
+  },
+  {
+   "name": "Juntu Stakes",
+   "needs": [
+    "static:pt-filtered-static"
+   ],
+   "why": "Creatures with power 1 or less don't untap; a static can't filter by power."
+  },
+  {
+   "name": "Kangee, Aerie Keeper",
+   "needs": [
+    "keyword:kicker-x"
+   ],
+   "why": "Kicker {X}{2}; a kicker cost can't hold X."
+  },
+  {
+   "name": "Mages' Contest",
+   "needs": [
+    "effect:life-bidding"
+   ],
+   "why": "Players bid life; no life-bidding effect."
+  },
+  {
+   "name": "Mana Maze",
+   "needs": [
+    "static:prohibit-color-of-last-spell-cast"
+   ],
+   "why": "Players can't cast spells sharing a color with the last spell cast this turn."
+  },
+  {
+   "name": "Manipulate Fate",
+   "needs": [
+    "effect:search-library-to-exile"
+   ],
+   "why": "Search for three cards and exile them; search-library has no exile destination."
+  },
+  {
+   "name": "Overabundance",
+   "needs": [
+    "effect:tapped-for-mana-land-deals-damage"
+   ],
+   "why": "Whenever a player taps a land for mana, they add one more and the enchantment deals 1 damage to them; a mana trigger can only add mana."
+  },
+  {
+   "name": "Phyrexian Infiltrator",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "Exchange control of it and target creature."
+  },
+  {
+   "name": "Pledge of Loyalty",
+   "needs": [
+    "static:protection-doesnt-remove-source"
+   ],
+   "why": "Protection from each color among your permanents, including the white Aura itself, which must stay attached."
+  },
+  {
+   "name": "Protective Sphere",
+   "needs": [
+    "effect:prevent-chosen-source-sharing-spent-mana-color"
+   ],
+   "why": "Prevents damage from a source of a color of the mana spent on the activation."
+  },
+  {
+   "name": "Psychic Battle",
+   "needs": [
+    "trigger:player-chooses-targets"
+   ],
+   "why": "Triggers whenever a player chooses targets, revealing and comparing top cards to change them."
+  },
+  {
+   "name": "Recoil",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "The bounced permanent's owner discards a card; discard can't name that owner."
+  },
+  {
+   "name": "Scorching Lava",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "Kicked, the creature can't be regenerated this turn and is exiled if it would die."
+  },
+  {
+   "name": "Seer's Vision",
+   "needs": [
+    "static:players-play-with-hands-revealed"
+   ],
+   "why": "Your opponents play with their hands revealed."
+  },
+  {
+   "name": "Spreading Plague",
+   "needs": [
+    "filter:shares-color-with-trigger-object"
+   ],
+   "why": "Destroy all other creatures that share a color with the entering creature."
+  },
+  {
+   "name": "Stand or Fall",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "Separate each opponent's creatures into two piles; that player chooses one to be unable to block."
+  },
+  {
+   "name": "Tainted Well",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "Enchanted land is a Swamp (rule 305.7); no land-type-setting static."
+  },
+  {
+   "name": "Tectonic Instability",
+   "needs": [
+    "effect:tap-all-controlled-by-target"
+   ],
+   "why": "Taps all lands the entering land's controller controls; tap-all can't name the trigger's player."
+  },
+  {
+   "name": "Teferi's Moat",
+   "needs": [
+    "static:cant-attack-you-player-only"
+   ],
+   "why": "Creatures of the chosen color without flying can't attack you, but can still attack your planeswalkers."
+  },
+  {
+   "name": "Teferi's Response",
+   "needs": [
+    "effect:counter-ability"
+   ],
+   "why": "Counter a spell or ability that targets a land you control; destroy its source if it's a permanent."
+  },
+  {
+   "name": "Traveler's Cloak",
+   "needs": [
+    "keyword:chosen-land-type-landwalk"
+   ],
+   "why": "Choose any land type as it enters; enchanted creature has landwalk of that type."
+  },
+  {
+   "name": "Tsabo's Assassin",
+   "needs": [
+    "condition:most-common-color-among-all-permanents"
+   ],
+   "why": "Destroys a creature if it shares a color with the most common color among all permanents."
+  },
+  {
+   "name": "Tsabo's Decree",
+   "needs": [
+    "effect:discard-all-matching"
+   ],
+   "why": "Target player reveals their hand and discards every card of the chosen creature type."
+  },
+  {
+   "name": "Tsabo's Web",
+   "needs": [
+    "condition:filter-has-nonmana-activated-ability"
+   ],
+   "why": "Lands with a nonmana activated ability don't untap; no such filter."
+  },
+  {
+   "name": "Twilight's Call",
+   "needs": [
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "May be cast as though it had flash for {2} more; no such cost."
+  },
+  {
+   "name": "Urza's Rage",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "Kicked, the damage can't be prevented; damage has no such field."
+  },
+  {
+   "name": "Void",
+   "needs": [
+    "decision:choose-number-on-resolution"
+   ],
+   "why": "Choose a number as it resolves; destroy artifacts and creatures with that mana value and discard nonland cards with it."
+  },
+  {
+   "name": "Well-Laid Plans",
+   "needs": [
+    "replacement:prevent-damage-between-creatures-sharing-color"
+   ],
+   "why": "Prevents damage a creature would deal to another creature sharing a color with it."
+  }
+ ]
+}

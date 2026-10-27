@@ -12015,6 +12015,32 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "effect:swap-tapped-state": {
+   "example": "Breaking Wave: \"Simultaneously untap all tapped creatures and tap all untapped creatures\" — a tap-all then an untap-all undoes itself, and nothing records which were tapped."
+  },
+  "static:prohibit-color-of-last-spell-cast": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Mana Maze: players can't cast spells that share a color with the spell most recently cast this turn."
+  },
+  "effect:prevent-chosen-source-sharing-spent-mana-color": {
+   "family": "replacement:damage-modification",
+   "example": "Protective Sphere: prevent the damage a chosen source of a color of the mana spent on the activation would deal to you."
+  },
+  "trigger:player-chooses-targets": {
+   "example": "Psychic Battle: whenever a player chooses targets, each player reveals their top card and the highest mana value may change the targets."
+  },
+  "filter:shares-color-with-trigger-object": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Spreading Plague: destroy all other creatures that share a color with the creature that entered."
+  },
+  "keyword:chosen-land-type-landwalk": {
+   "family": "keyword:landwalk",
+   "example": "Traveler's Cloak: choose any land type (nonbasic too) as it enters; enchanted creature has landwalk of that type."
+  },
+  "replacement:prevent-damage-between-creatures-sharing-color": {
+   "family": "replacement:damage-modification",
+   "example": "Well-Laid Plans: prevent all damage a creature would deal to another creature that shares a color with it."
   }
  }
 }
