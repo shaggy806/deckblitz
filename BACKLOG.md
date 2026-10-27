@@ -62,7 +62,7 @@ section keeps only what to do next.
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
   lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
   to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
-  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R3 (B237: 23 authored, 77 still blocked on narrow keys).
+  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R3 (B237: 23 authored, 77 still blocked on narrow keys), R5 (B239: 15 authored, 85 still blocked on narrow keys; built `skip-untap-step`).
   Assigned (round one, 2026-10-27): R1 → B235, R2 → B236, R3 → B237, R4 → B238, R5 → B239 (a
   batch number taken by then: the highest `B<N>` on `origin/main` plus one, checked again before
   landing). Then build in greedy order, a family per session, with

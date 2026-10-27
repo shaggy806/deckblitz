@@ -479,7 +479,8 @@
   "cost:morph-sacrifice",
   "cost:morph-discard-card",
   "cost:morph-return-permanent",
-  "amount:count-in-graveyards-same-name-as-trigger-spell"
+  "amount:count-in-graveyards-same-name-as-trigger-spell",
+  "effect:skip-next-untap-step"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
@@ -1097,7 +1098,7 @@
   "effect:sacrificed-object-lki": {
    "size": "medium",
    "ui": false,
-   "description": "Snapshot the permanent sacrificed to pay a cost, or by a preceding step, and expose its last-known power, mana value, types, subtypes and isCommander. These feed amounts (the Fling family), conditions ('if it was a commander' or 'a Hamster') and dynamic filters ('shares a card type with it'). Built for a sacrifice paid as a cost (activated ability or spell) and a sacrifice-source step: the AmountRef \"sacrificed\" (powerOf/toughnessOf/manaValueOf), the \"sacrificed\" StaticCondition and CardFilter.sharesCardTypeWith. A sacrifice *chosen* by an earlier step, optional (\"you may sacrifice …; when you do\") or not (Minsc & Boo's \"Sacrifice a creature. When you do\"), is effect:may-sacrifice-then's."
+   "description": "Snapshot the permanent sacrificed to pay a cost, or by a preceding step, and expose its last-known power, mana value, types, subtypes and isCommander. These feed amounts (the Fling family), conditions ('if it was a commander' or 'a Hamster') and dynamic filters ('shares a card type with it'). Built for a sacrifice paid as a cost (activated ability or spell) and a sacrifice-source step: the AmountRef \"sacrificed\" (powerOf/toughnessOf/manaValueOf), the \"sacrificed\" StaticCondition and CardFilter.sharesCardTypeWith. A sacrifice *chosen* by an earlier step, optional (\"you may sacrifice …; when you do\") or not (Minsc & Boo's \"Sacrifice a creature. When you do\"), is effect:may-sacrifice-then's. Not a filter sharing a creature type with the sacrificed creature (filter:shares-creature-type-with-sacrificed, open), a token copy of it (effect:token-copy-of-sacrificed), or sacrificing one of a trigger's batch (effect:sacrifice-one-of-trigger-batch)."
   },
   "effect:shuffle-library": {
    "size": "small",
@@ -1109,7 +1110,7 @@
   "effect:target-other-than-source": {
    "size": "medium",
    "ui": false,
-   "description": "An 'another / other target' exclusion for triggered as well as activated abilities: drop the source (or an earlier slot's pick, or the triggering player) from a slot's options. Split it from the 'sacrifice another' cost flag, which otherOnly controls too today."
+   "description": "An 'another / other target' exclusion for triggered as well as activated abilities: drop the source (or an earlier slot's pick, or the triggering player) from a slot's options. Split it from the 'sacrifice another' cost flag, which otherOnly controls too today. Not 'other' only in one type, the source still targetable as a creature (target:other-than-source-unless-creature)."
   },
   "effect:target-spec-additions": {
    "size": "small",

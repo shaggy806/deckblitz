@@ -1,0 +1,713 @@
+{
+ "batch": "B239",
+ "status": "complete",
+ "ranks": "The need-keys recheck list R5 (Phase 1 step 2)",
+ "authored": [
+  {
+   "name": "Kiora Bests the Sea God",
+   "files": [
+    "engine/src/cards/pool/kiora-bests-the-sea-god.ts",
+    "engine/src/cards/tokens/kraken-token-kiora-bests-the-sea-god.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Collapse",
+   "files": [
+    "engine/src/cards/pool/thought-collapse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illuminor Szeras",
+   "files": [
+    "engine/src/cards/pool/illuminor-szeras.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scuttling Sentinel",
+   "files": [
+    "engine/src/cards/pool/scuttling-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Persistent Constrictor",
+   "files": [
+    "engine/src/cards/pool/persistent-constrictor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyfisher Spider",
+   "files": [
+    "engine/src/cards/pool/skyfisher-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dinosaur Egg",
+   "files": [
+    "engine/src/cards/pool/dinosaur-egg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Press the Enemy",
+   "files": [
+    "engine/src/cards/pool/press-the-enemy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astral Dragon",
+   "files": [
+    "engine/src/cards/pool/astral-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of Annihilation",
+   "files": [
+    "engine/src/cards/pool/sphere-of-annihilation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avizoa",
+   "files": [
+    "engine/src/cards/pool/avizoa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brine Elemental",
+   "files": [
+    "engine/src/cards/pool/brine-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dovin, Architect of Law",
+   "files": [
+    "engine/src/cards/pool/dovin-architect-of-law.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shisato, Whispering Hunter",
+   "files": [
+    "engine/src/cards/pool/shisato-whispering-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savor the Moment",
+   "files": [
+    "engine/src/cards/pool/savor-the-moment.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Fevered Visions",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "'If the player is your opponent and has four or more cards in hand': hand-size reads only you or each player, not the active player at their end step."
+  },
+  {
+   "name": "Gandalf, Wandering Wizard",
+   "needs": [
+    "effect:owner-of-source-player-ref"
+   ],
+   "why": "'Gandalf's owner … draws three cards': draw can't name the source's owner (who isn't always its controller)."
+  },
+  {
+   "name": "Heartwood Storyteller",
+   "needs": [
+    "effect:opponents-of-trigger-controller-scope"
+   ],
+   "why": "'Each of that player's opponents may draw': no scope for the caster's opponents."
+  },
+  {
+   "name": "Nature's Will",
+   "needs": [
+    "effect:tap-all-trigger-player-scope"
+   ],
+   "why": "'Tap all lands that player controls' for the damaged player: tap-all narrows only to a target slot's player."
+  },
+  {
+   "name": "Oblation",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "'The owner of target nonland permanent … draws two cards': draw has no owner-of-target player."
+  },
+  {
+   "name": "Papalymo Totolymo",
+   "needs": [
+    "effect:scope-opponents-who-lost-life-this-turn"
+   ],
+   "why": "'Each opponent who lost life this turn sacrifices …': no such scope (turn-stat conditions read you or any opponent only)."
+  },
+  {
+   "name": "Silumgar, the Drifting Death",
+   "needs": [
+    "effect:modify-pt-all-defending-player"
+   ],
+   "why": "'Creatures defending player controls get -1/-1': modify-pt-all can't scope to the defending player."
+  },
+  {
+   "name": "Unidentified Hovership",
+   "needs": [
+    "effect:manifest-dread-owner-of-linked-exile"
+   ],
+   "why": "'The exiled card's owner manifests dread': manifest-dread's who is you or a target's controller."
+  },
+  {
+   "name": "Wheel and Deal",
+   "needs": [
+    "effect:discard-hand-target-players"
+   ],
+   "why": "'Any number of target opponents each discard their hands, then draw seven': discard-hand takes only a scope."
+  },
+  {
+   "name": "Zenith Chronicler",
+   "needs": [
+    "effect:opponents-of-trigger-controller-scope"
+   ],
+   "why": "'Each other player' than the caster draws: no scope relative to the caster."
+  },
+  {
+   "name": "Chainer, Dementia Master",
+   "needs": [
+    "effect:return-with-added-color"
+   ],
+   "why": "The reanimated creature 'is black and is a Nightmare': put-onto-battlefield adds subtypes but no colour."
+  },
+  {
+   "name": "Ghost Vacuum",
+   "needs": [
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "Each creature card exiled with it returns with a flying counter as a 1/1 Spirit in addition: the riders aren't expressible."
+  },
+  {
+   "name": "Ghoulish Impetus",
+   "needs": [
+    "effect:delayed-return-source-from-graveyard"
+   ],
+   "why": "The delayed 'return this card to the battlefield' must return only the card still in the graveyard it went to; no delayed shape is gated that way in the pool."
+  },
+  {
+   "name": "Grave Betrayal",
+   "needs": [
+    "effect:return-with-added-color"
+   ],
+   "why": "Returns as 'a black Zombie in addition to its other colors': no added colour."
+  },
+  {
+   "name": "Nissa of Shadowed Boughs",
+   "needs": [
+    "effect:put-from-hand-or-graveyard"
+   ],
+   "why": "−5 puts a creature card from your hand or graveyard: no choice across both zones."
+  },
+  {
+   "name": "Valkyrie's Call",
+   "needs": [
+    "effect:put-onto-battlefield-grant-keywords"
+   ],
+   "why": "Returns with 'flying and is an Angel': put-onto-battlefield grants no keywords as it enters."
+  },
+  {
+   "name": "Getaway Barrel",
+   "needs": [
+    "effect:random-card-from-revealed"
+   ],
+   "why": "'A random creature card from among' the thirteen revealed."
+  },
+  {
+   "name": "Kefka, Dancing Mad",
+   "needs": [
+    "effect:cast-this-way-owner-loses-life"
+   ],
+   "why": "Each owner of a spell cast this way loses life equal to its mana value."
+  },
+  {
+   "name": "Last One Standing",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "'Choose a creature at random, then destroy the rest': no untargeted random permanent."
+  },
+  {
+   "name": "Omenpath Journey",
+   "needs": [
+    "effect:random-card-from-linked-exile"
+   ],
+   "why": "'Choose a card at random exiled with this enchantment': choose-random-card doesn't read linked exile."
+  },
+  {
+   "name": "Orcish Librarian",
+   "needs": [
+    "effect:random-subset-of-looked-cards"
+   ],
+   "why": "Exile four of the top eight at random."
+  },
+  {
+   "name": "Rag Man",
+   "needs": [
+    "effect:discard-random-filtered"
+   ],
+   "why": "'Discards a creature card at random': discard's random takes no filter."
+  },
+  {
+   "name": "Rona, Herald of Invasion",
+   "needs": [
+    "effect:random-card-from-hand"
+   ],
+   "why": "The back face's 'exiles a card from their hand at random', then plays it: choose-random-card reads no hand."
+  },
+  {
+   "name": "Scrambleverse",
+   "needs": [
+    "effect:random-player-per-permanent"
+   ],
+   "why": "A random player chosen for each nonland permanent, each gaining control of theirs."
+  },
+  {
+   "name": "Summon: Magus Sisters",
+   "needs": [
+    "effect:random-mode-announced"
+   ],
+   "why": "Each chapter chooses a mode at random as it goes on the stack, among modes with legal targets."
+  },
+  {
+   "name": "Urza's Bauble",
+   "needs": [
+    "effect:random-card-from-hand"
+   ],
+   "why": "'Look at a card at random in target player's hand'."
+  },
+  {
+   "name": "Foray of Orcs",
+   "needs": [
+    "effect:amassed-army-power"
+   ],
+   "why": "X is the amassed Army's power, for a reflexive damage target."
+  },
+  {
+   "name": "Swashbuckler Extraordinaire",
+   "needs": [
+    "effect:reflexive-up-to-that-many-targets"
+   ],
+   "why": "Sacrifice one or more Treasures, then up to that many targets gain double strike."
+  },
+  {
+   "name": "Yes Man, Personal Securitron",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "'When they do' after the control change: no record that it happened."
+  },
+  {
+   "name": "Bill Ferny, Bree Swindler",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "Mode 2's 'if they do' after giving the Horse away (remove-from-combat is built)."
+  },
+  {
+   "name": "Descendants' Fury",
+   "needs": [
+    "effect:sacrifice-one-of-trigger-batch",
+    "filter:shares-creature-type-with-this-way"
+   ],
+   "why": "Sacrifice one of the creatures that dealt the damage, then reveal until a creature card sharing a creature type with it."
+  },
+  {
+   "name": "Goblin Charbelcher",
+   "needs": [
+    "amount:cards-revealed-this-way"
+   ],
+   "why": "Damage equal to the nonland cards revealed this way, doubled if the land found is a Mountain; the rest to the bottom in any order."
+  },
+  {
+   "name": "Mind Grind",
+   "needs": [
+    "effect:reveal-until-each-opponent",
+    "effect:reveal-until-count"
+   ],
+   "why": "Each opponent reveals until X land cards and mills them all."
+  },
+  {
+   "name": "Old Stickfingers",
+   "needs": [
+    "effect:reveal-until-count"
+   ],
+   "why": "Reveal until X creature cards and put them into the graveyard: reveal-until-count puts the found cards only onto the battlefield."
+  },
+  {
+   "name": "Part in Friendship",
+   "needs": [
+    "effect:reveal-until-found-destination-by-condition"
+   ],
+   "why": "The found creature card onto the battlefield or, by its mana value, into your hand."
+  },
+  {
+   "name": "Read the Runes",
+   "needs": [
+    "effect:discard-unless-sacrifice-per-card"
+   ],
+   "why": "For each card drawn, discard a card unless you sacrifice a permanent."
+  },
+  {
+   "name": "Sword of the Ages",
+   "needs": [
+    "cost:sacrifice-self-and-any-number",
+    "amount:total-power-sacrificed-as-cost"
+   ],
+   "why": "Sacrifice this and any number of creatures; X is their total power."
+  },
+  {
+   "name": "Pyre of Heroes",
+   "needs": [
+    "filter:shares-creature-type-with-sacrificed"
+   ],
+   "why": "A creature card sharing a creature type with the sacrificed creature: sharesCreatureTypeWith reads only the trigger object or source."
+  },
+  {
+   "name": "Puca's Eye",
+   "needs": [
+    "effect:choose-color-become-color"
+   ],
+   "why": "'Choose a color. This artifact becomes the chosen color' as it resolves."
+  },
+  {
+   "name": "Elvish Soultiller",
+   "needs": [
+    "effect:shuffle-graveyard-cards-filtered"
+   ],
+   "why": "Shuffle only the creature cards of the chosen type from your graveyard into your library."
+  },
+  {
+   "name": "Yosei, the Morning Star",
+   "needs": [
+    "target:controlled-by-target-player"
+   ],
+   "why": "The skip is built (skip-untap-step); 'tap up to five target permanents that player controls' needs targets tied to the target player slot."
+  },
+  {
+   "name": "Pretender's Claim",
+   "needs": [
+    "effect:tap-all-trigger-player-scope"
+   ],
+   "why": "Tap all lands the defending player controls."
+  },
+  {
+   "name": "Tectonic Instability",
+   "needs": [
+    "effect:tap-all-trigger-player-scope"
+   ],
+   "why": "Tap all lands the entering land's controller controls."
+  },
+  {
+   "name": "Sorin, Lord of Innistrad",
+   "needs": [
+    "target:other-than-source-unless-creature"
+   ],
+   "why": "−6's 'creatures and/or other planeswalkers': Sorin targetable while he's a creature (the ruling)."
+  },
+  {
+   "name": "Abstruse Archaic",
+   "needs": [
+    "target:ability-source-filter"
+   ],
+   "why": "An ability target 'from a colorless source'."
+  },
+  {
+   "name": "Blatant Thievery",
+   "needs": [
+    "effect:target-per-opponent-mandatory"
+   ],
+   "why": "One target per opponent, among the permanents that opponent controls."
+  },
+  {
+   "name": "Ertai Resurrected",
+   "needs": [
+    "effect:draw-controller-of-target"
+   ],
+   "why": "'Its controller draws a card' for the countered spell or ability, or the destroyed creature: draw takes only a player slot."
+  },
+  {
+   "name": "Joshua, Phoenix's Dominant",
+   "needs": [
+    "target:any-number-max-total-mana-value"
+   ],
+   "why": "Chapter III: any number of target creature cards with total mana value 6 or less."
+  },
+  {
+   "name": "Loaming Shaman",
+   "needs": [
+    "effect:targets-from-target-players-graveyard"
+   ],
+   "why": "Any number of target cards from the target player's graveyard, shuffled in."
+  },
+  {
+   "name": "Louisoix's Sacrifice",
+   "needs": [
+    "target:stack-spell-filter"
+   ],
+   "why": "'Activated ability, triggered ability, or noncreature spell' in one slot."
+  },
+  {
+   "name": "Rampaging Yao Guai",
+   "needs": [
+    "target:any-number-max-total-mana-value"
+   ],
+   "why": "Any number of artifacts and/or enchantments with total mana value X or less."
+  },
+  {
+   "name": "Tale's End",
+   "needs": [
+    "target:stack-spell-filter"
+   ],
+   "why": "'Activated ability, triggered ability, or legendary spell' in one slot."
+  },
+  {
+   "name": "The Peregrine Dynamo",
+   "needs": [
+    "target:ability-source-filter"
+   ],
+   "why": "'From another legendary source that's not a commander'."
+  },
+  {
+   "name": "Unsubstantiate",
+   "needs": [
+    "effect:target-spell-or-creature"
+   ],
+   "why": "'Target spell or creature': spell-or-permanent's filter applies to both."
+  },
+  {
+   "name": "Verdant Command",
+   "needs": [
+    "target:loyalty-ability"
+   ],
+   "why": "'Counter target loyalty ability of a planeswalker'."
+  },
+  {
+   "name": "Wrathful Raptors",
+   "needs": [
+    "effect:any-target-filter"
+   ],
+   "why": "'Any target that isn't a Dinosaur'."
+  },
+  {
+   "name": "Atarka's Command",
+   "needs": [
+    "effect:opponents-cant-gain-life-this-turn"
+   ],
+   "why": "'Your opponents can't gain life this turn' (the other three modes are expressible)."
+  },
+  {
+   "name": "Domri, Anarch of Bolas",
+   "needs": [
+    "effect:creature-spells-uncounterable-this-turn"
+   ],
+   "why": "'Creature spells you cast this turn can't be countered'."
+  },
+  {
+   "name": "Roiling Vortex",
+   "needs": [
+    "effect:opponents-cant-gain-life-this-turn"
+   ],
+   "why": "'{R}: Your opponents can't gain life this turn'."
+  },
+  {
+   "name": "Screaming Nemesis",
+   "needs": [
+    "effect:player-cant-gain-life-for-game"
+   ],
+   "why": "A player dealt damage this way can't gain life for the rest of the game."
+  },
+  {
+   "name": "Bringer of the Last Gift",
+   "needs": [
+    "effect:return-all-graveyards-under-owners-control"
+   ],
+   "why": "Each player returns their own graveyard's creature cards not put there this way."
+  },
+  {
+   "name": "Cache Grab",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "'Returned a Squirrel card to your hand this way' after the mill-and-choose."
+  },
+  {
+   "name": "Coalition Relic",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "Mana for each charge counter removed this way."
+  },
+  {
+   "name": "Discerning Taste",
+   "needs": [
+    "amount:greatest-power-this-way"
+   ],
+   "why": "Life equal to the greatest power among creature cards put into the graveyard this way."
+  },
+  {
+   "name": "Flood of Tears",
+   "needs": [
+    "condition:this-way-counts-commander-redirect"
+   ],
+   "why": "Four or more nontoken permanents you controlled returned this way, a commander sent to the command zone counted (ruling)."
+  },
+  {
+   "name": "Ingenious Prodigy",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "'You may remove a +1/+1 counter. If you do, draw': nothing records the counter actually removed."
+  },
+  {
+   "name": "Kroxa, Titan of Death's Hunger",
+   "needs": [
+    "condition:per-player-this-way"
+   ],
+   "why": "Each opponent who didn't discard a nonland card this way loses 3 life."
+  },
+  {
+   "name": "Marauding Raptor",
+   "needs": [
+    "condition:damage-dealt-this-way-to-trigger-object"
+   ],
+   "why": "'If a Dinosaur is dealt damage this way' about the entering creature (not a target slot)."
+  },
+  {
+   "name": "Mob Rule",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "Untap and give haste to exactly the creatures taken (the ruling: not re-filtered by power)."
+  },
+  {
+   "name": "Rise and Shine",
+   "needs": [
+    "effect:animated-this-way"
+   ],
+   "why": "Overloaded, counters go on each artifact that became a creature this way."
+  },
+  {
+   "name": "Spectacular Showdown",
+   "needs": [
+    "effect:counters-put-this-way"
+   ],
+   "why": "Goad each creature that had a double strike counter put on it this way."
+  },
+  {
+   "name": "Szat's Will",
+   "needs": [
+    "amount:greatest-power-this-way"
+   ],
+   "why": "X is the greatest power among creature cards exiled this way."
+  },
+  {
+   "name": "Cleaver Skaab",
+   "needs": [
+    "effect:token-copy-of-sacrificed"
+   ],
+   "why": "Two token copies of the creature sacrificed as the cost."
+  },
+  {
+   "name": "Clone Legion",
+   "needs": [
+    "effect:token-copy-each-of-target-players"
+   ],
+   "why": "A copy of each creature target player controls."
+  },
+  {
+   "name": "Doppelgang",
+   "needs": [
+    "effect:token-copy-count-amount"
+   ],
+   "why": "X copies of each of X targets: create-token-copy's count is fixed."
+  },
+  {
+   "name": "Endless Evil",
+   "needs": [
+    "effect:token-copy-of-enchanted"
+   ],
+   "why": "A 1/1 token copy of the enchanted creature."
+  },
+  {
+   "name": "Fractured Identity",
+   "needs": [
+    "effect:opponent-token-copy"
+   ],
+   "why": "Each player other than its controller creates a copy: create-token-copy's who is you or the copied permanent's controller."
+  },
+  {
+   "name": "Life of the Party",
+   "needs": [
+    "effect:opponent-token-copy"
+   ],
+   "why": "Each opponent creates a copy, goaded for the rest of the game."
+  },
+  {
+   "name": "Mirrorhall Mimic",
+   "needs": [
+    "effect:token-copy-of-enchanted"
+   ],
+   "why": "Ghastly Mimicry's token copy of the enchanted creature."
+  },
+  {
+   "name": "Summon: Good King Mog XII",
+   "needs": [
+    "effect:this-turn-cast-trigger-copy-chosen-token"
+   ],
+   "why": "Chapters II–III: a turn-long cast trigger copying a chosen non-Saga token."
+  },
+  {
+   "name": "Twilight Diviner",
+   "needs": [
+    "effect:token-copy-one-of-batch"
+   ],
+   "why": "A copy of one of the creatures that entered together."
+  },
+  {
+   "name": "Ultron, Artificial Malevolence",
+   "needs": [
+    "effect:token-copy-if-noncreature-animate"
+   ],
+   "why": "A noncreature token copy becomes a 2/2 Robot Villain creature."
+  },
+  {
+   "name": "Vesuvan Duplimancy",
+   "needs": [
+    "effect:token-copy-of-spell-target"
+   ],
+   "why": "A copy of the artifact or creature the cast spell targets."
+  },
+  {
+   "name": "Cleansing",
+   "needs": [
+    "effect:for-each-permanent-unless-any-player-pays"
+   ],
+   "why": "For each land, destroy it unless any player pays 1 life."
+  },
+  {
+   "name": "Scarwood Bandits",
+   "needs": [
+    "effect:unless-any-opponent-pays"
+   ],
+   "why": "'Unless an opponent pays {2}': any-player asks you too."
+  }
+ ]
+}

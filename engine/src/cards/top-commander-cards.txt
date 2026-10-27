@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3839 already implemented / 1161 missing (marks refreshed 2026-10-27)
+3830 already implemented / 1170 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2509,14 +2509,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2516  Ancient Ziggurat                         {0}              Land
 [x]  2517  Haughty Djinn                            {1}{U}{U}        Creature — Djinn
 [x]  2518  Skyclave Relic                           {3}              Artifact
-[x]  2519  Court of Ambition                        {2}{B}{B}        Enchantment
+[ ]  2519  Court of Ambition                        {2}{B}{B}        Enchantment
 [x]  2520  Scour for Scrap                          {3}{U}           Instant
 [x]  2521  Sundering Growth                         {G/W}{G/W}       Instant
 [x]  2522  Ancient Stone Idol                       {10}             Artifact Creature — Golem
 [x]  2523  Esika, God of the Tree // The Prismatic Bridge {3}              Legendary Creature — God // Legendary Enchantment
 [x]  2524  Karn, Legacy Reforged                    {5}              Legendary Artifact Creature — Golem
 [x]  2525  Life's Legacy                            {1}{G}           Sorcery
-[ ]  2526  Astral Dragon                            {6}{U}{U}        Creature — Dragon
+[x]  2526  Astral Dragon                            {6}{U}{U}        Creature — Dragon
 [x]  2527  Emrakul's Messenger                      {1}{U}           Creature — Eldrazi Faerie Rogue
 [x]  2528  Diresight                                {2}{B}           Sorcery
 [x]  2529  Giant Adephage                           {5}{G}{G}        Creature — Insect
@@ -2524,7 +2524,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2531  Prosperous Thief                         {2}{U}           Creature — Human Ninja
 [ ]  2532  Kogla and Yidaro                         {2}{R}{R}{G}{G}  Legendary Creature — Ape Dinosaur Turtle
 [ ]  2533  Doc Aurlock, Grizzled Genius             {G}{U}           Legendary Creature — Bear Druid
-[x]  2534  Armored Skyhunter                        {3}{W}           Creature — Cat Knight
+[ ]  2534  Armored Skyhunter                        {3}{W}           Creature — Cat Knight
 [x]  2535  Assault Formation                        {1}{G}           Enchantment
 [ ]  2536  Protean Hulk                             {5}{G}{G}        Creature — Beast
 [ ]  2537  Fangs of Kalonia                         {1}{G}           Sorcery
@@ -2532,7 +2532,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2539  Bloodline Keeper // Lord of Lineage      {4}              Creature — Vampire // Creature — Vampire
 [x]  2540  Niv-Mizzet, the Firemind                 {2}{U}{U}{R}{R}  Legendary Creature — Dragon Wizard
 [x]  2541  Artifact Mutation                        {R}{G}           Instant
-[x]  2542  Kellogg, Dangerous Mind                  {1}{B}{R}        Legendary Creature — Human Mercenary
+[ ]  2542  Kellogg, Dangerous Mind                  {1}{B}{R}        Legendary Creature — Human Mercenary
 [x]  2543  Temple of the Dragon Queen               {0}              Land
 [x]  2544  Debt to the Deathless                    {X}{W}{W}{B}{B}  Sorcery
 [x]  2545  Bloodline Bidding                        {6}{B}{B}        Sorcery
@@ -2638,7 +2638,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2645  The Ur-Dragon                            {4}{W}{U}{B}{R}{G} Legendary Creature — Dragon Avatar
 [ ]  2646  Eldrazi Confluence                       {2}{C}{C}        Instant
 [x]  2647  Voyager Quickwelder                      {2}{W}           Artifact Creature — Robot Artificer
-[x]  2648  Cursed Totem                             {2}              Artifact
+[ ]  2648  Cursed Totem                             {2}              Artifact
 [ ]  2649  Scholar of New Horizons                  {1}{W}           Creature — Human Scout
 [ ]  2650  Firebender Ascension                     {1}{R}           Enchantment
 [x]  2651  Quick Study                              {2}{U}           Instant
@@ -2709,7 +2709,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2716  Sword of War and Peace                   {3}              Artifact — Equipment
 [ ]  2717  Nalfeshnee                               {5}{R}           Creature — Beast Demon
 [x]  2718  Step Through                             {3}{U}{U}        Sorcery
-[ ]  2719  Persistent Constrictor                   {4}{B}           Creature — Zombie Snake
+[x]  2719  Persistent Constrictor                   {4}{B}           Creature — Zombie Snake
 [x]  2720  Reckless Handling                        {1}{R}           Sorcery
 [x]  2721  Fynn, the Fangbearer                     {1}{G}           Legendary Creature — Human Warrior
 [x]  2722  Ygra, Eater of All                       {3}{B}{G}        Legendary Creature — Elemental Cat
@@ -3443,7 +3443,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
 [x]  3451  Prowler's Helm                           {2}              Artifact — Equipment
 [ ]  3452  Gods Willing                             {W}              Instant
-[x]  3453  Dalkovan Encampment                      {0}              Land
+[ ]  3453  Dalkovan Encampment                      {0}              Land
 [x]  3454  Rabble Rousing                           {4}{W}           Enchantment
 [x]  3455  Lyse Hext                                {1}{W}{U}        Legendary Creature — Human Rebel Monk
 [x]  3456  Echoing Assault                          {4}{R}           Enchantment
@@ -3717,7 +3717,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3724  Champions from Beyond                    {X}{W}{W}        Enchantment
 [x]  3725  Bladewing the Risen                      {3}{B}{B}{R}{R}  Legendary Creature — Zombie Dragon
 [x]  3726  Secrets of the Dead                      {2}{U}           Enchantment
-[x]  3727  Summon: Leviathan                        {4}{U}{U}        Enchantment Creature — Saga Leviathan
+[ ]  3727  Summon: Leviathan                        {4}{U}{U}        Enchantment Creature — Saga Leviathan
 [x]  3728  Korlessa, Scale Singer                   {G}{U}           Legendary Creature — Dragon Bard
 [ ]  3729  Omnath, Locus of Mana                    {2}{G}           Legendary Creature — Elemental
 [x]  3730  Deadly Tempest                           {4}{B}{B}        Sorcery
@@ -4137,7 +4137,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4144  Kor Cartographer                         {3}{W}           Creature — Kor Scout
 [ ]  4145  Mirelurk Queen                           {4}{U}           Creature — Crab Mutant
 [x]  4146  Extinguisher Battleship                  {8}              Artifact — Spacecraft
-[x]  4147  Assault Suit                             {4}              Artifact — Equipment
+[ ]  4147  Assault Suit                             {4}              Artifact — Equipment
 [x]  4148  Dawn of a New Age                        {1}{W}           Enchantment
 [x]  4149  Dion, Bahamut's Dominant // Bahamut, Warden of Light {4}              Legendary Creature — Human Noble Knight // Legendary Enchantment Creature — Saga Dragon
 [x]  4150  Tymna the Weaver                         {1}{W}{B}        Legendary Creature — Human Cleric
@@ -4414,7 +4414,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4421  Elturel Survivors                        {3}{R}           Creature — Tiefling Peasant
 [x]  4422  Seer's Sundial                           {4}              Artifact
 [x]  4423  Zuko's Exile                             {5}              Instant — Lesson
-[x]  4424  Depthshaker Titan                        {5}{R}{R}        Artifact Creature — Robot
+[ ]  4424  Depthshaker Titan                        {5}{R}{R}        Artifact Creature — Robot
 [x]  4425  Primordial Sage                          {4}{G}{G}        Creature — Spirit
 [x]  4426  Zuko, Exiled Prince                      {3}{R}           Legendary Creature — Human Noble
 [x]  4427  Titan's Strength                         {R}              Instant
@@ -4574,7 +4574,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4581  Glowing One                              {2}{G}           Creature — Zombie Mutant
 [x]  4582  Master of the Feast                      {1}{B}{B}        Enchantment Creature — Demon
 [x]  4583  Boon of the Spirit Realm                 {3}{W}{W}        Enchantment
-[x]  4584  Mind Flayer                              {3}{U}{U}        Creature — Horror
+[ ]  4584  Mind Flayer                              {3}{U}{U}        Creature — Horror
 [ ]  4585  Mindslaver                               {6}              Legendary Artifact
 [ ]  4586  Jeska, Thrice Reborn                     {2}{R}           Legendary Planeswalker — Jeska
 [x]  4587  Elderfang Disciple                       {1}{B}           Creature — Elf Cleric
@@ -4615,7 +4615,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4622  Pyre of Heroes                           {2}              Artifact
 [x]  4623  Stormchaser's Talent                     {U}              Enchantment — Class
 [x]  4624  Remand                                   {1}{U}           Instant
-[x]  4625  Rite of Harmony                          {G}{W}           Instant
+[ ]  4625  Rite of Harmony                          {G}{W}           Instant
 [x]  4626  Growing Ranks                            {2}{G/W}{G/W}    Enchantment
 [ ]  4627  Cleaver Skaab                            {3}{U}           Creature — Zombie Horror
 [ ]  4628  Mirrormind Crown                         {4}              Artifact — Equipment
@@ -4638,7 +4638,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4645  Gilraen, Dúnedain Protector              {2}{W}           Legendary Creature — Human Noble
 [ ]  4646  Phyrexian Scriptures                     {2}{B}{B}        Enchantment — Saga
 [x]  4647  Wizard's Retort                          {1}{U}{U}        Instant
-[ ]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
+[x]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
 [ ]  4649  Assemble the Players                     {1}{W}           Enchantment
 [x]  4650  Slaughter Specialist                     {1}{B}           Creature — Vampire Warrior
 [x]  4651  Darksteel Juggernaut                     {5}              Artifact Creature — Juggernaut
@@ -4760,7 +4760,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4767  Traveler's Amulet                        {1}              Artifact
 [x]  4768  Smoke Bomb                               {3}              Artifact
 [x]  4769  Deadly Brew                              {B}{G}           Sorcery
-[x]  4770  Bonus Round                              {1}{R}{R}        Sorcery
+[ ]  4770  Bonus Round                              {1}{R}{R}        Sorcery
 [x]  4771  Two-Headed Hellkite                      {1}{W}{U}{B}{R}{G} Creature — Dragon
 [x]  4772  Camaraderie                              {4}{G}{W}        Sorcery
 [ ]  4773  Grave Betrayal                           {5}{B}{B}        Enchantment
@@ -4949,7 +4949,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4956  Naga Fleshcrafter                        {3}{U}           Creature — Snake Shapeshifter
 [x]  4957  Ankh of Mishra                           {2}              Artifact
 [ ]  4958  Brought Back                             {W}{W}           Instant
-[x]  4959  Tempt with Mayhem                        {1}{R}{R}        Instant
+[ ]  4959  Tempt with Mayhem                        {1}{R}{R}        Instant
 [x]  4960  Mistcutter Hydra                         {X}{G}           Creature — Hydra
 [ ]  4961  Ensnaring Bridge                         {3}              Artifact
 [x]  4962  Magma Opus                               {6}{U}{R}        Instant
