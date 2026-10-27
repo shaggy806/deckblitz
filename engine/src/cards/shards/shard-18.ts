@@ -224,6 +224,7 @@ import _poolFreneticEfreet from "../pool/frenetic-efreet.js";
 import _poolFreneticSliver from "../pool/frenetic-sliver.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
+import _poolFungalShambler from "../pool/fungal-shambler.js";
 import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
 import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
@@ -987,6 +988,7 @@ const shard: CardShard = {
     _poolFreneticSliver,
     _poolFromFatherToSon,
     _poolFungalPlots,
+    _poolFungalShambler,
     _poolFurnaceSkullbomb,
     _poolFuss,
     _poolGastalRaider,

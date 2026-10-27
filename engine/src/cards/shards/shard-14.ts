@@ -690,6 +690,7 @@ import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTournamentGrounds from "../pool/tournament-grounds.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
+import _poolTranquilPath from "../pool/tranquil-path.js";
 import _poolTreasureKeeper from "../pool/treasure-keeper.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
@@ -1472,6 +1473,7 @@ const shard: CardShard = {
     _poolTournamentGrounds,
     _poolTrainedJackal,
     _poolTranceKujaFateDefied,
+    _poolTranquilPath,
     _poolTreasureKeeper,
     _poolTreasureTrove,
     _poolTreefolkUmbra,

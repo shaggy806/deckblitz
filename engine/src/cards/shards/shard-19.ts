@@ -8,6 +8,7 @@ import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
+import _poolAetherMutation from "../pool/aether-mutation.js";
 import _poolAffectionateIndrik from "../pool/affectionate-indrik.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
@@ -818,6 +819,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
+    _poolAetherMutation,
     _poolAffectionateIndrik,
     _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,

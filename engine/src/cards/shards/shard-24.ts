@@ -369,6 +369,7 @@ import _poolLumberknot from "../pool/lumberknot.js";
 import _poolLumithreadField from "../pool/lumithread-field.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
+import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
@@ -1137,6 +1138,7 @@ const shard: CardShard = {
     _poolLumithreadField,
     _poolMaestrosCharm,
     _poolMalachiteTalisman,
+    _poolManaclesOfDecay,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
     _poolMasterSymmetrist,

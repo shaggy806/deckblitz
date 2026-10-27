@@ -451,6 +451,7 @@ import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOrbweaverKumo from "../pool/orbweaver-kumo.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
+import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPaleBears from "../pool/pale-bears.js";
@@ -1205,6 +1206,7 @@ const shard: CardShard = {
     _poolOpenTheGates,
     _poolOrbweaverKumo,
     _poolOriginOfTheAvengers,
+    _poolOrimsThunder,
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
     _poolPaleBears,

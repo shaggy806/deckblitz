@@ -494,6 +494,7 @@ import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
+import _poolQuicksilverDagger from "../pool/quicksilver-dagger.js";
 import _poolRabidWolverines from "../pool/rabid-wolverines.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
@@ -1264,6 +1265,7 @@ const shard: CardShard = {
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
     _poolQuickStudy,
+    _poolQuicksilverDagger,
     _poolRabidWolverines,
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,

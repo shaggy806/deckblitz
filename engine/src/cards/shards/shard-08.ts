@@ -163,6 +163,7 @@ import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathmark from "../pool/deathmark.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
+import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
@@ -366,6 +367,7 @@ import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
+import _poolKavuMauler from "../pool/kavu-mauler.js";
 import _poolKavuPrimarch from "../pool/kavu-primarch.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
@@ -962,6 +964,7 @@ const shard: CardShard = {
     _poolDeathmark,
     _poolDeathsprout,
     _poolDeception,
+    _poolDegaSanctuary,
     _poolDenziloreFatehold,
     _poolDeputyOfAcquittals,
     _poolDesertCerodon,
@@ -1165,6 +1168,7 @@ const shard: CardShard = {
     _poolKarnSilverGolem,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
+    _poolKavuMauler,
     _poolKavuPrimarch,
     _poolKaylasCommand,
     _poolKellanJoinsUp,
