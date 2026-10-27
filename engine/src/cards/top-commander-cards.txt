@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3819 already implemented / 1181 missing (marks refreshed 2026-10-27)
+3820 already implemented / 1180 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4118,7 +4118,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4125  Tinybones Joins Up                       {B}              Legendary Enchantment
 [x]  4126  Afterlife from the Loam                  {5}{B}{B}{B}     Sorcery
 [x]  4127  The Cruelty of Gix                       {3}{B}{B}        Enchantment — Saga
-[ ]  4128  Pentad Prism                             {2}              Artifact
+[x]  4128  Pentad Prism                             {2}              Artifact
 [x]  4129  Teferi, Hero of Dominaria                {3}{W}{U}        Legendary Planeswalker — Teferi
 [ ]  4130  Mirror March                             {5}{R}           Enchantment
 [ ]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
