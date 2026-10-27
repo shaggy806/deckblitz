@@ -139,6 +139,7 @@ import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
 import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloakOfMists from "../pool/cloak-of-mists.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
+import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
@@ -175,6 +176,7 @@ import _poolDaringLeap from "../pool/daring-leap.js";
 import _poolDaringMechanic from "../pool/daring-mechanic.js";
 import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
 import _poolDarkPrivilege from "../pool/dark-privilege.js";
+import _poolDaruWarchief from "../pool/daru-warchief.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
@@ -368,6 +370,7 @@ import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
+import _poolKurgadon from "../pool/kurgadon.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
@@ -902,6 +905,7 @@ const shard: CardShard = {
     _poolCliffgate,
     _poolCloakOfMists,
     _poolCloudchaserEagle,
+    _poolClutchOfUndeath,
     _poolComfortingCounsel,
     _poolConductElectricity,
     _poolConsecrateConsume,
@@ -938,6 +942,7 @@ const shard: CardShard = {
     _poolDaringMechanic,
     _poolDarkHeartOfTheWood,
     _poolDarkPrivilege,
+    _poolDaruWarchief,
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
+    _poolKurgadon,
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLathlissDragonQueen,

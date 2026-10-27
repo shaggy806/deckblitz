@@ -20,6 +20,7 @@ import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
 import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
+import _poolAmbushCommander from "../pool/ambush-commander.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
 import _poolAncestralMemories from "../pool/ancestral-memories.js";
 import _poolAncientAmphitheater from "../pool/ancient-amphitheater.js";
@@ -748,6 +749,7 @@ import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
 import _poolWoebearer from "../pool/woebearer.js";
 import _poolWolfwillowHaven from "../pool/wolfwillow-haven.js";
+import _poolWoodcloaker from "../pool/woodcloaker.js";
 import _poolWoodfallPrimus from "../pool/woodfall-primus.js";
 import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
@@ -763,6 +765,7 @@ import _poolYotianSoldier from "../pool/yotian-soldier.js";
 import _poolYsgardsCall from "../pool/ysgards-call.js";
 import _poolYuanShaoTheIndecisive from "../pool/yuan-shao-the-indecisive.js";
 import _poolZacamaPrimalCalamity from "../pool/zacama-primal-calamity.js";
+import _poolZealousInquisitor from "../pool/zealous-inquisitor.js";
 import _poolZephyrScribe from "../pool/zephyr-scribe.js";
 import _poolZhurTaaAncient from "../pool/zhur-taa-ancient.js";
 import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
@@ -818,6 +821,7 @@ const shard: CardShard = {
     _poolAlpharaelDreamingAcolyte,
     _poolAlterFate,
     _poolAlteredEgo,
+    _poolAmbushCommander,
     _poolAmbushGigapede,
     _poolAncestralMemories,
     _poolAncientAmphitheater,
@@ -1546,6 +1550,7 @@ const shard: CardShard = {
     _poolWillowDryad,
     _poolWoebearer,
     _poolWolfwillowHaven,
+    _poolWoodcloaker,
     _poolWoodfallPrimus,
     _poolWoodlandStream,
     _poolWoodlotCrawler,
@@ -1561,6 +1566,7 @@ const shard: CardShard = {
     _poolYsgardsCall,
     _poolYuanShaoTheIndecisive,
     _poolZacamaPrimalCalamity,
+    _poolZealousInquisitor,
     _poolZephyrScribe,
     _poolZhurTaaAncient,
     _poolZoZuThePunisher,

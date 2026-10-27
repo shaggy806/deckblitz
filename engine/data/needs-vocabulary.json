@@ -11660,6 +11660,55 @@
   "condition:countered-this-way": {
    "example": "Fold into Aether: 'Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield' — nothing when the spell can't be countered."
   },
+  "trigger:spell-or-ability-put-on-stack": {
+   "example": "Grip of Chaos: Triggers on every spell or ability put on the stack and reselects its single target at random."
+  },
+  "condition:played-land-this-turn": {
+   "example": "Rock Jockey: Can't stop land plays this turn, and can't-cast-if-you-played-a-land has no history kind."
+  },
+  "effect:return-exiled-under-your-control": {
+   "example": "Day of the Dragons: The exiled cards come back under your control, not their owners'."
+  },
+  "cost:morph-return-permanent": {
+   "family": "cost:morph-reveal-card",
+   "example": "Raven Guild Initiate: Morph—Return a Bird you control to its owner's hand: morph takes a mana cost only."
+  },
+  "static:morph-cost-increase": {
+   "family": "mechanic:face-down",
+   "example": "Exiled Doomsayer: Morph costs cost {2} more."
+  },
+  "effect:lose-keywords-all-except-source": {
+   "example": "Thundercloud Elemental: \"All other creatures lose flying\": lose-keywords over a filter has no exceptSource."
+  },
+  "amount:cda-aggregate-sum-excluding-self": {
+   "family": "bug:cda-all-zones",
+   "example": "Ancient Ooze: P/T equal to the total mana value of other creatures you control."
+  },
+  "effect:player-shroud-until-end-of-turn": {
+   "example": "Gilded Light: You gain shroud until end of turn (only player hexproof exists)."
+  },
+  "replacement:redirect-own-next-combat-damage-to-controller": {
+   "family": "replacement:damage-redirection",
+   "example": "Goblin Psychopath: After a lost flip, its next combat damage is dealt to its controller instead."
+  },
+  "static:reveal-first-draw-every-turn": {
+   "example": "Primitive Etchings: Reveal the first card you draw each turn, on every turn: revealsFirstDrawEachTurn covers only your own turns."
+  },
+  "cost:morph-sacrifice": {
+   "family": "cost:morph-reveal-card",
+   "example": "Skirk Volcanist: Morph—Sacrifice two Mountains: morph takes a mana cost only."
+  },
+  "static:players-cant-cycle": {
+   "example": "Stabilizer: Players can't cycle cards."
+  },
+  "trigger:linked-exile-each-upkeep-return-one": {
+   "family": "effect:exile-all-linked",
+   "example": "Dimensional Breach: Each upkeep, while any remain exiled, each player returns one of their own exiled cards."
+  },
+  "cost:morph-pay-life": {
+   "family": "cost:morph-reveal-card",
+   "example": "Zombie Cutthroat: Morph—Pay 5 life: morph takes a mana cost only."
+  },
   "condition:same-name-as-target-off-battlefield": {
    "family": "condition:filter-card-property-clauses",
    "example": "Echoing Return: the target's namesakes are cards in a graveyard, hand or library — sameNameAsTarget is bound only in a battlefield -all effect."

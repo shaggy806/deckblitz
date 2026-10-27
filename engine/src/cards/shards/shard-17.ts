@@ -148,6 +148,7 @@ import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
+import _poolDecreeOfSilence from "../pool/decree-of-silence.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
@@ -733,6 +734,7 @@ import _poolWoodlandDruid from "../pool/woodland-druid.js";
 import _poolWoodlandWeavemaster from "../pool/woodland-weavemaster.js";
 import _poolWretchedBanquet from "../pool/wretched-banquet.js";
 import _poolWrongTurn from "../pool/wrong-turn.js";
+import _poolXantidSwarm from "../pool/xantid-swarm.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
@@ -918,6 +920,7 @@ const shard: CardShard = {
     _poolDeceptiveLandscape,
     _poolDeclareDominance,
     _poolDecoyPloy,
+    _poolDecreeOfSilence,
     _poolDeepfathomSkulker,
     _poolDetonate,
     _poolDevotedPaladin,
@@ -1503,6 +1506,7 @@ const shard: CardShard = {
     _poolWoodlandWeavemaster,
     _poolWretchedBanquet,
     _poolWrongTurn,
+    _poolXantidSwarm,
     _poolYahenniUndyingPartisan,
     _poolYawningFissure,
     _poolYevasForcemage,

@@ -160,6 +160,7 @@ import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-plann
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDownDirty from "../pool/down-dirty.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
+import _poolDragonFangs from "../pool/dragon-fangs.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
 import _poolDramaticRescue from "../pool/dramatic-rescue.js";
 import _poolDriftgloomCoyote from "../pool/driftgloom-coyote.js";
@@ -937,6 +938,7 @@ const shard: CardShard = {
     _poolDouserOfLights,
     _poolDownDirty,
     _poolDrafnaFounderOfLatNam,
+    _poolDragonFangs,
     _poolDragonsRageChanneler,
     _poolDramaticRescue,
     _poolDriftgloomCoyote,

@@ -80,6 +80,7 @@ import _poolBoggartLoggers from "../pool/boggart-loggers.js";
 import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
+import _poolBonethornValesk from "../pool/bonethorn-valesk.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBorrowedMalevolence from "../pool/borrowed-malevolence.js";
 import _poolBottleOfSuleiman from "../pool/bottle-of-suleiman.js";
@@ -96,6 +97,7 @@ import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
+import _poolCallToTheGrave from "../pool/call-to-the-grave.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCarrierThrall from "../pool/carrier-thrall.js";
@@ -551,6 +553,7 @@ import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolRuinousWaterbending from "../pool/ruinous-waterbending.js";
+import _poolRushOfKnowledge from "../pool/rush-of-knowledge.js";
 import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolSabertoothOutrider from "../pool/sabertooth-outrider.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
@@ -903,6 +906,7 @@ const shard: CardShard = {
     _poolBolracClanBasher,
     _poolBoltHound,
     _poolBoneShards,
+    _poolBonethornValesk,
     _poolBorosRecruit,
     _poolBorrowedMalevolence,
     _poolBottleOfSuleiman,
@@ -919,6 +923,7 @@ const shard: CardShard = {
     _poolBurdenOfProof,
     _poolCadaverLab,
     _poolCallTheBloodline,
+    _poolCallToTheGrave,
     _poolCanoptekTombSentinel,
     _poolCarnivorousMossBeast,
     _poolCarrierThrall,
@@ -1374,6 +1379,7 @@ const shard: CardShard = {
     _poolRubblebeltBraggart,
     _poolRuinRat,
     _poolRuinousWaterbending,
+    _poolRushOfKnowledge,
     _poolRushedRebirth,
     _poolSabertoothOutrider,
     _poolSacredFoundry,

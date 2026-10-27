@@ -151,6 +151,7 @@ import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDorotheasRetribution from "../pool/dorotheas-retribution.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
+import _poolDragonShadow from "../pool/dragon-shadow.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonscaleBoon from "../pool/dragonscale-boon.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
@@ -911,6 +912,7 @@ const shard: CardShard = {
     _poolDoomedNecromancer,
     _poolDorotheasRetribution,
     _poolDragonBlood,
+    _poolDragonShadow,
     _poolDragonlordsServant,
     _poolDragonscaleBoon,
     _poolDragonwingGlider,
