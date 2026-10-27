@@ -61,6 +61,7 @@ import _poolBayouGroff from "../pool/bayou-groff.js";
 import _poolBearDown from "../pool/bear-down.js";
 import _poolBebopWarthogWarrior from "../pool/bebop-warthog-warrior.js";
 import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
+import _poolBenBenAkkiHermit from "../pool/ben-ben-akki-hermit.js";
 import _poolBenalishSleeper from "../pool/benalish-sleeper.js";
 import _poolBendersWaterskin from "../pool/benders-waterskin.js";
 import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
@@ -403,6 +404,7 @@ import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMonoskelion from "../pool/monoskelion.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
+import _poolMothriderSamurai from "../pool/mothrider-samurai.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
 import _poolMurkySewer from "../pool/murky-sewer.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
@@ -444,8 +446,10 @@ import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
 import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParaselene from "../pool/paraselene.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
+import _poolPartTheVeil from "../pool/part-the-veil.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
+import _poolPetalsOfInsight from "../pool/petals-of-insight.js";
 import _poolPetrahydrox from "../pool/petrahydrox.js";
 import _poolPhantomBeast from "../pool/phantom-beast.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
@@ -801,6 +805,7 @@ const shard: CardShard = {
     _poolBearDown,
     _poolBebopWarthogWarrior,
     _poolBejeweledWarg,
+    _poolBenBenAkkiHermit,
     _poolBenalishSleeper,
     _poolBendersWaterskin,
     _poolBeornReluctantHost,
@@ -1143,6 +1148,7 @@ const shard: CardShard = {
     _poolMonoskelion,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
+    _poolMothriderSamurai,
     _poolMuYanlingWindRider,
     _poolMurkySewer,
     _poolMutagenicGrowth,
@@ -1184,8 +1190,10 @@ const shard: CardShard = {
     _poolParanoidParishBlade,
     _poolParaselene,
     _poolParkHeightsPegasus,
+    _poolPartTheVeil,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
+    _poolPetalsOfInsight,
     _poolPetrahydrox,
     _poolPhantomBeast,
     _poolPhylathWorldSculptor,

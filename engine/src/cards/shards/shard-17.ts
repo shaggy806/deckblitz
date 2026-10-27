@@ -14,6 +14,7 @@ import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
+import _poolAkkiCoalflinger from "../pool/akki-coalflinger.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
 import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
@@ -70,6 +71,7 @@ import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodCursedKnight from "../pool/blood-cursed-knight.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
+import _poolBloodthirstyOgre from "../pool/bloodthirsty-ogre.js";
 import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
 import _poolBlueScarab from "../pool/blue-scarab.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
@@ -290,6 +292,7 @@ import _poolHazeOfRage from "../pool/haze-of-rage.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeartfireHero from "../pool/heartfire-hero.js";
+import _poolHearthKami from "../pool/hearth-kami.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
@@ -346,6 +349,7 @@ import _poolKhabalGhoul from "../pool/khabal-ghoul.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
+import _poolKitsuneDiviner from "../pool/kitsune-diviner.js";
 import _poolKorOutfitter from "../pool/kor-outfitter.js";
 import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
 import _poolKratosStoicFather from "../pool/kratos-stoic-father.js";
@@ -638,6 +642,7 @@ import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
 import _poolThirstForMeaning from "../pool/thirst-for-meaning.js";
+import _poolThoughtbind from "../pool/thoughtbind.js";
 import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
@@ -675,6 +680,7 @@ import _poolUndercityTroll from "../pool/undercity-troll.js";
 import _poolUndercityUprising from "../pool/undercity-uprising.js";
 import _poolUndertow from "../pool/undertow.js";
 import _poolUnderworldDreams from "../pool/underworld-dreams.js";
+import _poolUnearthlyBlizzard from "../pool/unearthly-blizzard.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
@@ -774,6 +780,7 @@ const shard: CardShard = {
     _poolAirborneAid,
     _poolAjaniAdversaryOfTyrants,
     _poolAjaniCallerOfThePride,
+    _poolAkkiCoalflinger,
     _poolAkrasanSquire,
     _poolAkroanLineBreaker,
     _poolAlabasterDragon,
@@ -830,6 +837,7 @@ const shard: CardShard = {
     _poolBloodCursedKnight,
     _poolBloodServitor,
     _poolBloodforgedBattleAxe,
+    _poolBloodthirstyOgre,
     _poolBloodwaterEntity,
     _poolBlueScarab,
     _poolBogardanFirefiend,
@@ -1050,6 +1058,7 @@ const shard: CardShard = {
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
     _poolHeartfireHero,
+    _poolHearthKami,
     _poolHeatedArgument,
     _poolHedgeMaze,
     _poolHeiBaiSpiritOfBalance,
@@ -1106,6 +1115,7 @@ const shard: CardShard = {
     _poolKickoffCelebrations,
     _poolKilnFiend,
     _poolKishlaSkimmer,
+    _poolKitsuneDiviner,
     _poolKorOutfitter,
     _poolKrarkClanGrunt,
     _poolKratosStoicFather,
@@ -1398,6 +1408,7 @@ const shard: CardShard = {
     _poolThermalGlider,
     _poolThingSwing,
     _poolThirstForMeaning,
+    _poolThoughtbind,
     _poolThreeTreeScribe,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,
@@ -1435,6 +1446,7 @@ const shard: CardShard = {
     _poolUndercityUprising,
     _poolUndertow,
     _poolUnderworldDreams,
+    _poolUnearthlyBlizzard,
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,

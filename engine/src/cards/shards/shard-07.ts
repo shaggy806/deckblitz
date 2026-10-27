@@ -77,6 +77,7 @@ import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
+import _poolBrothersYamazaki from "../pool/brothers-yamazaki.js";
 import _poolBrowse from "../pool/browse.js";
 import _poolBullAurochs from "../pool/bull-aurochs.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
@@ -302,6 +303,7 @@ import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
+import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
 import _poolIndestructibleAura from "../pool/indestructible-aura.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
@@ -339,6 +341,7 @@ import _poolKiriOnna from "../pool/kiri-onna.js";
 import _poolKnightOfTheTusk from "../pool/knight-of-the-tusk.js";
 import _poolKnightWatch from "../pool/knight-watch.js";
 import _poolKnightsPledge from "../pool/knights-pledge.js";
+import _poolKondasHatamoto from "../pool/kondas-hatamoto.js";
 import _poolKorBlademaster from "../pool/kor-blademaster.js";
 import _poolKragmaWarcaller from "../pool/kragma-warcaller.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
@@ -449,7 +452,9 @@ import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduRising from "../pool/ondu-rising.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
+import _poolOniPossession from "../pool/oni-possession.js";
 import _poolOpenFire from "../pool/open-fire.js";
+import _poolOreGorger from "../pool/ore-gorger.js";
 import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
 import _poolOrneryKudu from "../pool/ornery-kudu.js";
 import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
@@ -867,6 +872,7 @@ const shard: CardShard = {
     _poolBrilliantSpectrum,
     _poolBrinkOfDisaster,
     _poolBronzebeakMoa,
+    _poolBrothersYamazaki,
     _poolBrowse,
     _poolBullAurochs,
     _poolBullsStrength,
@@ -1092,6 +1098,7 @@ const shard: CardShard = {
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
+    _poolInameLifeAspect,
     _poolIncisorGlider,
     _poolIndestructibleAura,
     _poolInfantryVeteran,
@@ -1129,6 +1136,7 @@ const shard: CardShard = {
     _poolKnightOfTheTusk,
     _poolKnightWatch,
     _poolKnightsPledge,
+    _poolKondasHatamoto,
     _poolKorBlademaster,
     _poolKragmaWarcaller,
     _poolKrarkClanShaman,
@@ -1239,7 +1247,9 @@ const shard: CardShard = {
     _poolOnakkeOgre,
     _poolOnduRising,
     _poolOnduWarCleric,
+    _poolOniPossession,
     _poolOpenFire,
+    _poolOreGorger,
     _poolOreplatePangolin,
     _poolOrneryKudu,
     _poolOrnithopterOfParadise,

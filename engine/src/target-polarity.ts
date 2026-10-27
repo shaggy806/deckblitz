@@ -792,8 +792,13 @@ export function auraPolarity(def: CardDefinition): Polarity {
       if (enchantedControllersTurn(ability.whileCondition) && hurtsActivePlayer(ability.effect)) harm = true;
       if (!("who" in ability.trigger) || ability.trigger.who !== "attached") continue;
       // "Whenever enchanted creature deals damage to a creature, destroy
-      // that creature" (Venomous Fangs): a weapon for it.
-      if (ability.effect?.kind === "destroy" && ability.effect.target === "trigger-recipient") help = true;
+      // that creature" (Venomous Fangs), or tap or exile it: a weapon for it.
+      if (
+        (ability.effect?.kind === "destroy" || ability.effect?.kind === "tap" || ability.effect?.kind === "exile") &&
+        ability.effect.target === "trigger-recipient"
+      ) {
+        help = true;
+      }
       // The enchanted permanent's controller pays — Corrupted Roots' "whenever
       // enchanted land becomes tapped, its controller loses 2 life".
       if (ability.effect?.kind === "lose-life" && ability.effect.who === "trigger-controller") harm = true;

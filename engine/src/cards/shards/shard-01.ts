@@ -114,12 +114,14 @@ import _poolCraterHellion from "../pool/crater-hellion.js";
 import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
+import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolCytospawnShambler from "../pool/cytospawn-shambler.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDailyRegimen from "../pool/daily-regimen.js";
+import _poolDampenThought from "../pool/dampen-thought.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
@@ -283,6 +285,7 @@ import _poolInTheEyeOfChaos from "../pool/in-the-eye-of-chaos.js";
 import _poolIncendiaryFlow from "../pool/incendiary-flow.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
+import _poolInnocenceKami from "../pool/innocence-kami.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
@@ -461,6 +464,7 @@ import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
 import _poolPyroblast from "../pool/pyroblast.js";
+import _poolQueenOfIce from "../pool/queen-of-ice.js";
 import _poolQueensBaySoldier from "../pool/queens-bay-soldier.js";
 import _poolRabidRats from "../pool/rabid-rats.js";
 import _poolRadstorm from "../pool/radstorm.js";
@@ -698,6 +702,7 @@ import _poolWarTrainedSlasher from "../pool/war-trained-slasher.js";
 import _poolWardenOfTheBeyond from "../pool/warden-of-the-beyond.js";
 import _poolWarrantWarden from "../pool/warrant-warden.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
+import _poolWaterveilCavern from "../pool/waterveil-cavern.js";
 import _poolWavesifter from "../pool/wavesifter.js";
 import _poolWaxmaneBaku from "../pool/waxmane-baku.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
@@ -720,6 +725,7 @@ import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
 import _poolXandersLounge from "../pool/xanders-lounge.js";
+import _poolYamabushisStorm from "../pool/yamabushis-storm.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
@@ -853,12 +859,14 @@ const shard: CardShard = {
     _poolCripplingChill,
     _poolCrisisOfConscience,
     _poolCroakingCurse,
+    _poolCruelDeceiver,
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCursedWindbreaker,
     _poolCytospawnShambler,
     _poolDailyBugleBuilding,
     _poolDailyRegimen,
+    _poolDampenThought,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDawnglowInfusion,
@@ -1022,6 +1030,7 @@ const shard: CardShard = {
     _poolIncendiaryFlow,
     _poolIndulgentAristocrat,
     _poolInfiltrate,
+    _poolInnocenceKami,
     _poolInsatiableHarpy,
     _poolInspiringVeteran,
     _poolInsufferableBalladeer,
@@ -1200,6 +1209,7 @@ const shard: CardShard = {
     _poolPsychicMembrane,
     _poolPummelerForHire,
     _poolPyroblast,
+    _poolQueenOfIce,
     _poolQueensBaySoldier,
     _poolRabidRats,
     _poolRadstorm,
@@ -1437,6 +1447,7 @@ const shard: CardShard = {
     _poolWardenOfTheBeyond,
     _poolWarrantWarden,
     _poolWastewoodVerge,
+    _poolWaterveilCavern,
     _poolWavesifter,
     _poolWaxmaneBaku,
     _poolWayOfTheCryomancer,
@@ -1459,6 +1470,7 @@ const shard: CardShard = {
     _poolWorldQueller,
     _poolWrennsResolve,
     _poolXandersLounge,
+    _poolYamabushisStorm,
     _poolYavimayaHollow,
     _poolYavimayaSojourner,
     _poolYgraEaterOfAll,

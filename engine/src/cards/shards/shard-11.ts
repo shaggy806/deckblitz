@@ -122,6 +122,7 @@ import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClamavus from "../pool/clamavus.js";
 import _poolClashOfRealities from "../pool/clash-of-realities.js";
 import _poolClayRevenant from "../pool/clay-revenant.js";
+import _poolCleanfall from "../pool/cleanfall.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolCloakedCadet from "../pool/cloaked-cadet.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
@@ -344,6 +345,7 @@ import _poolIrreverentRevelers from "../pool/irreverent-revelers.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
+import _poolJadeIdol from "../pool/jade-idol.js";
 import _poolJadeMage from "../pool/jade-mage.js";
 import _poolJailbreakScheme from "../pool/jailbreak-scheme.js";
 import _poolJayasGreeting from "../pool/jayas-greeting.js";
@@ -354,6 +356,7 @@ import _poolJokulmorder from "../pool/jokulmorder.js";
 import _poolJustFate from "../pool/just-fate.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
+import _poolKashiTribeElite from "../pool/kashi-tribe-elite.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
@@ -362,6 +365,8 @@ import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillerBees from "../pool/killer-bees.js";
 import _poolKirdApe from "../pool/kird-ape.js";
 import _poolKithkinBillyrider from "../pool/kithkin-billyrider.js";
+import _poolKitsuneHealer from "../pool/kitsune-healer.js";
+import _poolKitsuneRiftwalker from "../pool/kitsune-riftwalker.js";
 import _poolKnuckleboneWitch from "../pool/knucklebone-witch.js";
 import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKolaghanSkirmisher from "../pool/kolaghan-skirmisher.js";
@@ -738,6 +743,7 @@ import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolWortTheRaidmother from "../pool/wort-the-raidmother.js";
 import _poolWrensRunPackmaster from "../pool/wrens-run-packmaster.js";
+import _poolYamabushisFlame from "../pool/yamabushis-flame.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYisanTheWandererBard from "../pool/yisan-the-wanderer-bard.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
@@ -887,6 +893,7 @@ const shard: CardShard = {
     _poolClamavus,
     _poolClashOfRealities,
     _poolClayRevenant,
+    _poolCleanfall,
     _poolClifftopRetreat,
     _poolCloakedCadet,
     _poolClockworkDrawbridge,
@@ -1109,6 +1116,7 @@ const shard: CardShard = {
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
+    _poolJadeIdol,
     _poolJadeMage,
     _poolJailbreakScheme,
     _poolJayasGreeting,
@@ -1119,6 +1127,7 @@ const shard: CardShard = {
     _poolJustFate,
     _poolJusticiarsPortal,
     _poolKangeesLieutenant,
+    _poolKashiTribeElite,
     _poolKaslemsStonetree,
     _poolKedissEmberclawFamiliar,
     _poolKeeperOfTheLight,
@@ -1127,6 +1136,8 @@ const shard: CardShard = {
     _poolKillerBees,
     _poolKirdApe,
     _poolKithkinBillyrider,
+    _poolKitsuneHealer,
+    _poolKitsuneRiftwalker,
     _poolKnuckleboneWitch,
     _poolKoboldsOfKherKeep,
     _poolKolaghanSkirmisher,
@@ -1503,6 +1514,7 @@ const shard: CardShard = {
     _poolWormholeSerpent,
     _poolWortTheRaidmother,
     _poolWrensRunPackmaster,
+    _poolYamabushisFlame,
     _poolYevaNaturesHerald,
     _poolYisanTheWandererBard,
     _poolYouFindTheVillainsLair,

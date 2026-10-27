@@ -1,0 +1,15 @@
+import { defineCard } from "../define.js";
+
+// EDHREC rank 17997.
+
+export default defineCard({
+  name: "Wear Away",
+  manaCost: "{G}{G}",
+  colors: ["G"],
+  types: ["instant"],
+  subtypes: ["Arcane"],
+  splice: { onto: "arcane", cost: "{3}{G}" },
+  text: "Destroy target artifact or enchantment.\nSplice onto Arcane {3}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)",
+  targets: ["artifact-or-enchantment"],
+  effect: { kind: "destroy", target: 0 },
+});

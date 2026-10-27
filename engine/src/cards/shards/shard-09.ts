@@ -345,6 +345,7 @@ import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJorKadeenThePrevailer from "../pool/jor-kadeen-the-prevailer.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
+import _poolKaldraCompleat from "../pool/kaldra-compleat.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
@@ -468,6 +469,7 @@ import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
 import _poolPillardropRescuer from "../pool/pillardrop-rescuer.js";
+import _poolPinecrestRidge from "../pool/pinecrest-ridge.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
@@ -656,6 +658,7 @@ import _poolTaxiDriver from "../pool/taxi-driver.js";
 import _poolTempleOfAclazotz from "../pool/temple-of-aclazotz.js";
 import _poolTemptWithReflections from "../pool/tempt-with-reflections.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
+import _poolTerashisCry from "../pool/terashis-cry.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTerritorialKavu from "../pool/territorial-kavu.js";
 import _poolTestamentBearer from "../pool/testament-bearer.js";
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolJolraelVoiceOfZhalfir,
     _poolJorKadeenThePrevailer,
     _poolJunglebornPioneer,
+    _poolKaldraCompleat,
     _poolKamisFlare,
     _poolKayasWrath,
     _poolKeeneyeAven,
@@ -1246,6 +1250,7 @@ const shard: CardShard = {
     _poolPhytoburst,
     _poolPickUpThePace,
     _poolPillardropRescuer,
+    _poolPinecrestRidge,
     _poolPlagueStinger,
     _poolPlantBeans,
     _poolPlateau,
@@ -1434,6 +1439,7 @@ const shard: CardShard = {
     _poolTempleOfAclazotz,
     _poolTemptWithReflections,
     _poolTemurBattleRage,
+    _poolTerashisCry,
     _poolTergridGodOfFright,
     _poolTerritorialKavu,
     _poolTestamentBearer,

@@ -160,6 +160,7 @@ import _poolDiscipleOfTheSun from "../pool/disciple-of-the-sun.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
+import _poolDistress from "../pool/distress.js";
 import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
@@ -431,6 +432,7 @@ import _poolNeurokHoversail from "../pool/neurok-hoversail.js";
 import _poolNeutralize from "../pool/neutralize.js";
 import _poolNightsnare from "../pool/nightsnare.js";
 import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
+import _poolNineRingedBo from "../pool/nine-ringed-bo.js";
 import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
 import _poolNobleBenefactor from "../pool/noble-benefactor.js";
@@ -921,6 +923,7 @@ const shard: CardShard = {
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
+    _poolDistress,
     _poolDownwindAmbusher,
     _poolDrEggman,
     _poolDragonFodder,
@@ -1192,6 +1195,7 @@ const shard: CardShard = {
     _poolNeutralize,
     _poolNightsnare,
     _poolNimraiserPaladin,
+    _poolNineRingedBo,
     _poolNirkanaRevenant,
     _poolNoAdmittance,
     _poolNobleBenefactor,

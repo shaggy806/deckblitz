@@ -371,6 +371,7 @@ import _poolMagaTraitorToMortals from "../pool/maga-traitor-to-mortals.js";
 import _poolMagmasaur from "../pool/magmasaur.js";
 import _poolMakeshiftMannequin from "../pool/makeshift-mannequin.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
+import _poolManaSeism from "../pool/mana-seism.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
 import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
@@ -412,6 +413,7 @@ import _poolMurmuringPhantasm from "../pool/murmuring-phantasm.js";
 import _poolMuscleSliver from "../pool/muscle-sliver.js";
 import _poolMyrEnforcer from "../pool/myr-enforcer.js";
 import _poolMyrRetriever from "../pool/myr-retriever.js";
+import _poolMysticRestraints from "../pool/mystic-restraints.js";
 import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNarcolepsy from "../pool/narcolepsy.js";
@@ -469,6 +471,7 @@ import _poolPhyrexianWalker from "../pool/phyrexian-walker.js";
 import _poolPicturesOfSpiderMan from "../pool/pictures-of-spider-man.js";
 import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
+import _poolPitSpawn from "../pool/pit-spawn.js";
 import _poolPitTrap from "../pool/pit-trap.js";
 import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
@@ -539,6 +542,7 @@ import _poolSelvalasEnforcer from "../pool/selvalas-enforcer.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
 import _poolSereneSteward from "../pool/serene-steward.js";
 import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
+import _poolSerpentSkin from "../pool/serpent-skin.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
@@ -1114,6 +1118,7 @@ const shard: CardShard = {
     _poolMagmasaur,
     _poolMakeshiftMannequin,
     _poolMalevolentWhispers,
+    _poolManaSeism,
     _poolMangaraTheDiplomat,
     _poolMaraxusOfKeld,
     _poolMarduShadowspear,
@@ -1155,6 +1160,7 @@ const shard: CardShard = {
     _poolMuscleSliver,
     _poolMyrEnforcer,
     _poolMyrRetriever,
+    _poolMysticRestraints,
     _poolNabanDeanOfIteration,
     _poolNagaEternal,
     _poolNarcolepsy,
@@ -1212,6 +1218,7 @@ const shard: CardShard = {
     _poolPicturesOfSpiderMan,
     _poolPiperOfTheSwarm,
     _poolPiperWrightPublickReporter,
+    _poolPitSpawn,
     _poolPitTrap,
     _poolPlarggDeanOfChaos,
     _poolPotionOfHealing,
@@ -1282,6 +1289,7 @@ const shard: CardShard = {
     _poolSeparatistVoidmage,
     _poolSereneSteward,
     _poolSerpentBladeAssailant,
+    _poolSerpentSkin,
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,
     _poolShamblingVent,

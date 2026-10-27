@@ -101,6 +101,7 @@ import _poolBrineShaman from "../pool/brine-shaman.js";
 import _poolBrokenConcentration from "../pool/broken-concentration.js";
 import _poolBuriedTreasure from "../pool/buried-treasure.js";
 import _poolBurlyBreaker from "../pool/burly-breaker.js";
+import _poolBurrGrafter from "../pool/burr-grafter.js";
 import _poolBushwhack from "../pool/bushwhack.js";
 import _poolButcherGhoul from "../pool/butcher-ghoul.js";
 import _poolCabarettiAscendancy from "../pool/cabaretti-ascendancy.js";
@@ -261,6 +262,7 @@ import _poolFrostling from "../pool/frostling.js";
 import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
+import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
 import _poolGarruksHorde from "../pool/garruks-horde.js";
@@ -477,6 +479,7 @@ import _poolOrnitharch from "../pool/ornitharch.js";
 import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
+import _poolPainKami from "../pool/pain-kami.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
 import _poolPapercraftDecoy from "../pool/papercraft-decoy.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
@@ -582,6 +585,7 @@ import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
 import _poolShrineOfLoyalLegions from "../pool/shrine-of-loyal-legions.js";
+import _poolSiftThroughSands from "../pool/sift-through-sands.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
 import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
@@ -857,6 +861,7 @@ const shard: CardShard = {
     _poolBrokenConcentration,
     _poolBuriedTreasure,
     _poolBurlyBreaker,
+    _poolBurrGrafter,
     _poolBushwhack,
     _poolButcherGhoul,
     _poolCabarettiAscendancy,
@@ -1017,6 +1022,7 @@ const shard: CardShard = {
     _poolFruitOfTheFirstTree,
     _poolFungalBloom,
     _poolGadgetTechnician,
+    _poolGaleForce,
     _poolGaleSwooper,
     _poolGalvanoth,
     _poolGarruksHorde,
@@ -1233,6 +1239,7 @@ const shard: CardShard = {
     _poolOverwhelmingRemorse,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
+    _poolPainKami,
     _poolPaladinsArms,
     _poolPapercraftDecoy,
     _poolPathmakerInitiate,
@@ -1338,6 +1345,7 @@ const shard: CardShard = {
     _poolShorelineRanger,
     _poolShriekdiver,
     _poolShrineOfLoyalLegions,
+    _poolSiftThroughSands,
     _poolSifterOfSkulls,
     _poolSilvergillMentor,
     _poolSipOfHemlock,

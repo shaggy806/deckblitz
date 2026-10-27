@@ -150,6 +150,7 @@ import _poolCuriousInquiry from "../pool/curious-inquiry.js";
 import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
 import _poolDalekDrone from "../pool/dalek-drone.js";
+import _poolDanceOfShadows from "../pool/dance-of-shadows.js";
 import _poolDarkBanishing from "../pool/dark-banishing.js";
 import _poolDarkWithering from "../pool/dark-withering.js";
 import _poolDarksteelCitadel from "../pool/darksteel-citadel.js";
@@ -249,6 +250,7 @@ import _poolGenesisStorm from "../pool/genesis-storm.js";
 import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
+import _poolGibberingKami from "../pool/gibbering-kami.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
 import _poolGigantiform from "../pool/gigantiform.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
@@ -492,6 +494,7 @@ import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRadiantFlames from "../pool/radiant-flames.js";
+import _poolRaggedVeins from "../pool/ragged-veins.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRainOfSalt from "../pool/rain-of-salt.js";
 import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
@@ -936,6 +939,7 @@ const shard: CardShard = {
     _poolCutthroatCenturion,
     _poolDakmorBat,
     _poolDalekDrone,
+    _poolDanceOfShadows,
     _poolDarkBanishing,
     _poolDarkWithering,
     _poolDarksteelCitadel,
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolGenjuOfTheFens,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
+    _poolGibberingKami,
     _poolGideonChampionOfJustice,
     _poolGigantiform,
     _poolGildedPinions,
@@ -1278,6 +1283,7 @@ const shard: CardShard = {
     _poolQuarrelsEnd,
     _poolQumulox,
     _poolRadiantFlames,
+    _poolRaggedVeins,
     _poolRagingMinotaur,
     _poolRainOfSalt,
     _poolRainbowEfreet,

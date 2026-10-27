@@ -166,6 +166,7 @@ import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
 import _poolEastfarthingFarmer from "../pool/eastfarthing-farmer.js";
 import _poolEchoMage from "../pool/echo-mage.js";
+import _poolEerieProcession from "../pool/eerie-procession.js";
 import _poolEerieSoultender from "../pool/eerie-soultender.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
 import _poolElderOfLaurels from "../pool/elder-of-laurels.js";
@@ -312,12 +313,14 @@ import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
+import _poolKamiOfFiresRoar from "../pool/kami-of-fires-roar.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKeldonMarauders from "../pool/keldon-marauders.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
+import _poolKitsuneBlademaster from "../pool/kitsune-blademaster.js";
 import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
 import _poolKomainuBattleArmor from "../pool/komainu-battle-armor.js";
 import _poolKorCastigator from "../pool/kor-castigator.js";
@@ -333,6 +336,7 @@ import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLamplighterOfSelhoff from "../pool/lamplighter-of-selhoff.js";
+import _poolLanternLitGraveyard from "../pool/lantern-lit-graveyard.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
 import _poolLeechFanatic from "../pool/leech-fanatic.js";
@@ -530,6 +534,7 @@ import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
 import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
+import _poolSilentChantZubera from "../pool/silent-chant-zubera.js";
 import _poolSilverbluffBridge from "../pool/silverbluff-bridge.js";
 import _poolSilvercladFerocidons from "../pool/silverclad-ferocidons.js";
 import _poolSilverquillCharm from "../pool/silverquill-charm.js";
@@ -918,6 +923,7 @@ const shard: CardShard = {
     _poolEagerCadet,
     _poolEastfarthingFarmer,
     _poolEchoMage,
+    _poolEerieProcession,
     _poolEerieSoultender,
     _poolElderGargaroth,
     _poolElderOfLaurels,
@@ -1064,12 +1070,14 @@ const shard: CardShard = {
     _poolJustTheWind,
     _poolJyotiMoagAncient,
     _poolKalonianHydra,
+    _poolKamiOfFiresRoar,
     _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKeldonMarauders,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
+    _poolKitsuneBlademaster,
     _poolKolaghanWarmonger,
     _poolKomainuBattleArmor,
     _poolKorCastigator,
@@ -1085,6 +1093,7 @@ const shard: CardShard = {
     _poolLacerateFlesh,
     _poolLakeTownMariners,
     _poolLamplighterOfSelhoff,
+    _poolLanternLitGraveyard,
     _poolLavafumeInvoker,
     _poolLawRuneEnforcer,
     _poolLeechFanatic,
@@ -1282,6 +1291,7 @@ const shard: CardShard = {
     _poolShellSkulkin,
     _poolShimmerOfPossibility,
     _poolSigardasAid,
+    _poolSilentChantZubera,
     _poolSilverbluffBridge,
     _poolSilvercladFerocidons,
     _poolSilverquillCharm,

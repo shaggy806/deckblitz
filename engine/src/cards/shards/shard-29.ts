@@ -274,6 +274,7 @@ import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
+import _poolGutwrencherOni from "../pool/gutwrencher-oni.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
@@ -294,6 +295,7 @@ import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
 import _poolHinterlandHermit from "../pool/hinterland-hermit.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
+import _poolHorizonSeed from "../pool/horizon-seed.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
 import _poolHowlersHeavy from "../pool/howlers-heavy.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
@@ -376,6 +378,7 @@ import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMartyrsBond from "../pool/martyrs-bond.js";
+import _poolMatsuTribeBirdstalker from "../pool/matsu-tribe-birdstalker.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
     _poolGurmagNightwatch,
+    _poolGutwrencherOni,
     _poolGyreEngineer,
     _poolHERBIELovableRobot,
     _poolHamletbackGoliath,
@@ -1062,6 +1066,7 @@ const shard: CardShard = {
     _poolHinterlandHermit,
     _poolHithlainKnots,
     _poolHobbitHole,
+    _poolHorizonSeed,
     _poolHowToStartARiot,
     _poolHowlersHeavy,
     _poolHulkingBugbear,
@@ -1144,6 +1149,7 @@ const shard: CardShard = {
     _poolManorGate,
     _poolMantisEngine,
     _poolMartyrsBond,
+    _poolMatsuTribeBirdstalker,
     _poolMechanAssembler,
     _poolMeldwebCurator,
     _poolMemorialToGenius,

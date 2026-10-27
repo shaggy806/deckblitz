@@ -35,6 +35,7 @@ import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArisenGorgon from "../pool/arisen-gorgon.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolArrestersZeal from "../pool/arresters-zeal.js";
+import _poolAshenSkinZubera from "../pool/ashen-skin-zubera.js";
 import _poolAspectOfMongoose from "../pool/aspect-of-mongoose.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
@@ -350,6 +351,7 @@ import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKithkeeper from "../pool/kithkeeper.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
+import _poolKodamasMight from "../pool/kodamas-might.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
@@ -563,6 +565,7 @@ import _poolShatteredCrypt from "../pool/shattered-crypt.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
+import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolShyft from "../pool/shyft.js";
@@ -588,6 +591,7 @@ import _poolSmash from "../pool/smash.js";
 import _poolSnort from "../pool/snort.js";
 import _poolSnowmeltStag from "../pool/snowmelt-stag.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
+import _poolSoilshaper from "../pool/soilshaper.js";
 import _poolSolemnSimulacrum from "../pool/solemn-simulacrum.js";
 import _poolSolveTheEquation from "../pool/solve-the-equation.js";
 import _poolSomethingWorthSaving from "../pool/something-worth-saving.js";
@@ -794,6 +798,7 @@ const shard: CardShard = {
     _poolArisenGorgon,
     _poolArmoredSkaab,
     _poolArrestersZeal,
+    _poolAshenSkinZubera,
     _poolAspectOfMongoose,
     _poolAtlasSizableStooge,
     _poolAttercop,
@@ -1109,6 +1114,7 @@ const shard: CardShard = {
     _poolKirolHistoryBuff,
     _poolKithkeeper,
     _poolKnightOfObligation,
+    _poolKodamasMight,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
@@ -1322,6 +1328,7 @@ const shard: CardShard = {
     _poolShatterstorm,
     _poolShelteringLandscape,
     _poolShilgengarSireOfFamine,
+    _poolShimatsuTheBloodcloaked,
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolShyft,
@@ -1347,6 +1354,7 @@ const shard: CardShard = {
     _poolSnort,
     _poolSnowmeltStag,
     _poolSoddenVerdure,
+    _poolSoilshaper,
     _poolSolemnSimulacrum,
     _poolSolveTheEquation,
     _poolSomethingWorthSaving,

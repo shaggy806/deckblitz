@@ -432,6 +432,7 @@ import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNivixCyclops from "../pool/nivix-cyclops.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
+import _poolNumaiOutcast from "../pool/numai-outcast.js";
 import _poolNumbingDose from "../pool/numbing-dose.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
@@ -593,6 +594,7 @@ import _poolSoratamiRainshaper from "../pool/soratami-rainshaper.js";
 import _poolSorceressQueen from "../pool/sorceress-queen.js";
 import _poolSorinsGuide from "../pool/sorins-guide.js";
 import _poolSoulBleed from "../pool/soul-bleed.js";
+import _poolSoulOfMagma from "../pool/soul-of-magma.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
@@ -1198,6 +1200,7 @@ const shard: CardShard = {
     _poolNivixCyclops,
     _poolNorthPoleGates,
     _poolNullpriestOfOblivion,
+    _poolNumaiOutcast,
     _poolNumbingDose,
     _poolOashraCultivator,
     _poolOdricsOutrider,
@@ -1359,6 +1362,7 @@ const shard: CardShard = {
     _poolSorceressQueen,
     _poolSorinsGuide,
     _poolSoulBleed,
+    _poolSoulOfMagma,
     _poolSoulSnuffers,
     _poolSoultetherGolem,
     _poolSozinsComet,

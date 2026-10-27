@@ -390,6 +390,7 @@ import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
+import _poolMatsuTribeSniper from "../pool/matsu-tribe-sniper.js";
 import _poolMaximizeAltitude from "../pool/maximize-altitude.js";
 import _poolMazeGlider from "../pool/maze-glider.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
@@ -498,6 +499,7 @@ import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
 import _poolRelentlessSkaabs from "../pool/relentless-skaabs.js";
+import _poolRendSpirit from "../pool/rend-spirit.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
@@ -1114,6 +1116,7 @@ const shard: CardShard = {
     _poolMarvelousMelee,
     _poolMascotExhibition,
     _poolMasterPiandao,
+    _poolMatsuTribeSniper,
     _poolMaximizeAltitude,
     _poolMazeGlider,
     _poolMeagerMeal,
@@ -1222,6 +1225,7 @@ const shard: CardShard = {
     _poolRegenerate,
     _poolRegicide,
     _poolRelentlessSkaabs,
+    _poolRendSpirit,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,

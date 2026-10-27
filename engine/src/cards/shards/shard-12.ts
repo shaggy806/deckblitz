@@ -311,6 +311,7 @@ import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
+import _poolHundredTalonKami from "../pool/hundred-talon-kami.js";
 import _poolHuntedGhoul from "../pool/hunted-ghoul.js";
 import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIllusionaryForces from "../pool/illusionary-forces.js";
@@ -333,6 +334,7 @@ import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
+import _poolJunkyoBell from "../pool/junkyo-bell.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
@@ -665,6 +667,7 @@ import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
+import _poolTranquilGarden from "../pool/tranquil-garden.js";
 import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTrickShot from "../pool/trick-shot.js";
@@ -1063,6 +1066,7 @@ const shard: CardShard = {
     _poolHornetSting,
     _poolHowlpackAvenger,
     _poolHulkBruceBanner,
+    _poolHundredTalonKami,
     _poolHuntedGhoul,
     _poolIcehideGolem,
     _poolIllusionaryForces,
@@ -1085,6 +1089,7 @@ const shard: CardShard = {
     _poolJodahArchmageEternal,
     _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
+    _poolJunkyoBell,
     _poolJuriMasterOfTheRevue,
     _poolKaleidoscorch,
     _poolKappaTechWrecker,
@@ -1417,6 +1422,7 @@ const shard: CardShard = {
     _poolTormentingVoice,
     _poolTrainingCompound,
     _poolTrainingRegimen,
+    _poolTranquilGarden,
     _poolTravelTheOverworld,
     _poolTrevasAttendant,
     _poolTrickShot,

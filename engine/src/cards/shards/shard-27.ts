@@ -281,6 +281,8 @@ import _poolHighAlert from "../pool/high-alert.js";
 import _poolHighFaeNegotiator from "../pool/high-fae-negotiator.js";
 import _poolHighScore from "../pool/high-score.js";
 import _poolHighSentinelsOfArashin from "../pool/high-sentinels-of-arashin.js";
+import _poolHisokasDefiance from "../pool/hisokas-defiance.js";
+import _poolHisokasGuard from "../pool/hisokas-guard.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
@@ -506,6 +508,7 @@ import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRoad from "../pool/road.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
@@ -620,6 +623,7 @@ import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
+import _poolTellerOfTales from "../pool/teller-of-tales.js";
 import _poolTellingTime from "../pool/telling-time.js";
 import _poolTempleOfEnlightenment from "../pool/temple-of-enlightenment.js";
 import _poolTempleOfPlenty from "../pool/temple-of-plenty.js";
@@ -690,6 +694,7 @@ import _poolVectisSilencers from "../pool/vectis-silencers.js";
 import _poolVeilbornGhoul from "../pool/veilborn-ghoul.js";
 import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
+import _poolVenerableKumo from "../pool/venerable-kumo.js";
 import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
 import _poolVengefulRebirth from "../pool/vengeful-rebirth.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
@@ -1029,6 +1034,8 @@ const shard: CardShard = {
     _poolHighFaeNegotiator,
     _poolHighScore,
     _poolHighSentinelsOfArashin,
+    _poolHisokasDefiance,
+    _poolHisokasGuard,
     _poolHobblefiend,
     _poolHomesickness,
     _poolHonedKhopesh,
@@ -1254,6 +1261,7 @@ const shard: CardShard = {
     _poolRoad,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRootrunner,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
     _poolRuhanOfTheFomori,
@@ -1368,6 +1376,7 @@ const shard: CardShard = {
     _poolTalismanOfIndulgence,
     _poolTarriansSoulcleaver,
     _poolTawnossWand,
+    _poolTellerOfTales,
     _poolTellingTime,
     _poolTempleOfEnlightenment,
     _poolTempleOfPlenty,
@@ -1438,6 +1447,7 @@ const shard: CardShard = {
     _poolVeilbornGhoul,
     _poolVeiledAscension,
     _poolVelaTheNightClad,
+    _poolVenerableKumo,
     _poolVenerableWarsinger,
     _poolVengefulRebirth,
     _poolVesselOfVolatility,

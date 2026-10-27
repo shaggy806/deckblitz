@@ -14,6 +14,7 @@ import _poolAgentOfMasks from "../pool/agent-of-masks.js";
 import _poolAhnCropInvader from "../pool/ahn-crop-invader.js";
 import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
 import _poolAirServant from "../pool/air-servant.js";
+import _poolAkkiUnderminer from "../pool/akki-underminer.js";
 import _poolAlexisCloak from "../pool/alexis-cloak.js";
 import _poolAmmitEternal from "../pool/ammit-eternal.js";
 import _poolAngelicCaptain from "../pool/angelic-captain.js";
@@ -288,6 +289,7 @@ import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
+import _poolHarshDeceiver from "../pool/harsh-deceiver.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHateflayer from "../pool/hateflayer.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
@@ -445,6 +447,7 @@ import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
 import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
+import _poolOrbweaverKumo from "../pool/orbweaver-kumo.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
@@ -484,6 +487,7 @@ import _poolQuestForTheHolyRelic from "../pool/quest-for-the-holy-relic.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolQuillmaneBaku from "../pool/quillmane-baku.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
+import _poolRageOfWinter from "../pool/rage-of-winter.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRamsesOverdark from "../pool/ramses-overdark.js";
@@ -644,6 +648,7 @@ import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
+import _poolThiefOfHope from "../pool/thief-of-hope.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
 import _poolThopterSquadron from "../pool/thopter-squadron.js";
 import _poolThornwatchScarecrow from "../pool/thornwatch-scarecrow.js";
@@ -758,6 +763,7 @@ const shard: CardShard = {
     _poolAhnCropInvader,
     _poolAinokStrikeLeader,
     _poolAirServant,
+    _poolAkkiUnderminer,
     _poolAlexisCloak,
     _poolAmmitEternal,
     _poolAngelicCaptain,
@@ -1032,6 +1038,7 @@ const shard: CardShard = {
     _poolHalvarGodOfBattle,
     _poolHangarScrounger,
     _poolHanweirMilitiaCaptain,
+    _poolHarshDeceiver,
     _poolHarvesttideInfiltrator,
     _poolHateflayer,
     _poolHazoretsFavor,
@@ -1189,6 +1196,7 @@ const shard: CardShard = {
     _poolOloroAgelessAscetic,
     _poolOnslaught,
     _poolOpenTheGates,
+    _poolOrbweaverKumo,
     _poolOriginOfTheAvengers,
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
@@ -1228,6 +1236,7 @@ const shard: CardShard = {
     _poolQuillBladeLaureate,
     _poolQuillmaneBaku,
     _poolRacersScoreboard,
+    _poolRageOfWinter,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
     _poolRamsesOverdark,
@@ -1388,6 +1397,7 @@ const shard: CardShard = {
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
+    _poolThiefOfHope,
     _poolThopterArrest,
     _poolThopterSquadron,
     _poolThornwatchScarecrow,

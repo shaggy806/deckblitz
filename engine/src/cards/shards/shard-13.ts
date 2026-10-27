@@ -95,6 +95,7 @@ import _poolCabalArchon from "../pool/cabal-archon.js";
 import _poolCactusfolkSureshot from "../pool/cactusfolk-sureshot.js";
 import _poolCalciderm from "../pool/calciderm.js";
 import _poolCallOfTheRing from "../pool/call-of-the-ring.js";
+import _poolCallousDeceiver from "../pool/callous-deceiver.js";
 import _poolCanopyGorger from "../pool/canopy-gorger.js";
 import _poolCanopyTactician from "../pool/canopy-tactician.js";
 import _poolCaptainMarVellSpaceBorn from "../pool/captain-mar-vell-space-born.js";
@@ -337,6 +338,7 @@ import _poolJump from "../pool/jump.js";
 import _poolJuniperOrderRanger from "../pool/juniper-order-ranger.js";
 import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
+import _poolKashiTribeReaver from "../pool/kashi-tribe-reaver.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
 import _poolKeeperOfTheMind from "../pool/keeper-of-the-mind.js";
@@ -699,6 +701,7 @@ import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVileManifestation from "../pool/vile-manifestation.js";
 import _poolVillagersOfEstwald from "../pool/villagers-of-estwald.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
+import _poolVineKami from "../pool/vine-kami.js";
 import _poolViolentEchoes from "../pool/violent-echoes.js";
 import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
@@ -860,6 +863,7 @@ const shard: CardShard = {
     _poolCactusfolkSureshot,
     _poolCalciderm,
     _poolCallOfTheRing,
+    _poolCallousDeceiver,
     _poolCanopyGorger,
     _poolCanopyTactician,
     _poolCaptainMarVellSpaceBorn,
@@ -1102,6 +1106,7 @@ const shard: CardShard = {
     _poolJuniperOrderRanger,
     _poolKaervekTheSpiteful,
     _poolKamahlsDruidicVow,
+    _poolKashiTribeReaver,
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,
     _poolKeeperOfTheMind,
@@ -1464,6 +1469,7 @@ const shard: CardShard = {
     _poolVileManifestation,
     _poolVillagersOfEstwald,
     _poolVillainousWrath,
+    _poolVineKami,
     _poolViolentEchoes,
     _poolVisageOfDread,
     _poolVivVisionTeenSynthezoid,

@@ -150,6 +150,7 @@ import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
+import _poolEarthshaker from "../pool/earthshaker.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEliteSkirmisher from "../pool/elite-skirmisher.js";
@@ -267,6 +268,7 @@ import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHeraldOfSerra from "../pool/herald-of-serra.js";
 import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHiddenGibbons from "../pool/hidden-gibbons.js";
+import _poolHoldTheLine from "../pool/hold-the-line.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
@@ -296,6 +298,7 @@ import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
 import _poolKarazikarTheEyeTyrant from "../pool/karazikar-the-eye-tyrant.js";
 import _poolKarnGildedGuardian from "../pool/karn-gilded-guardian.js";
+import _poolKashiTribeWarriors from "../pool/kashi-tribe-warriors.js";
 import _poolKataraWaterbendingMaster from "../pool/katara-waterbending-master.js";
 import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
 import _poolKayaGhostAssassin from "../pool/kaya-ghost-assassin.js";
@@ -309,6 +312,7 @@ import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
 import _poolKnockoutBlow from "../pool/knockout-blow.js";
 import _poolKoalaSheep from "../pool/koala-sheep.js";
+import _poolKodamaOfTheSouthTree from "../pool/kodama-of-the-south-tree.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
@@ -626,6 +630,7 @@ import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
+import _poolVassalsDuty from "../pool/vassals-duty.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
 import _poolVerdantEidolon from "../pool/verdant-eidolon.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
@@ -838,6 +843,7 @@ const shard: CardShard = {
     _poolDwarvenPriest,
     _poolDwarvenWeaponsmith,
     _poolEarthbrawn,
+    _poolEarthshaker,
     _poolEdenSeatOfTheSanctum,
     _poolElementalSummoning,
     _poolEliteSkirmisher,
@@ -955,6 +961,7 @@ const shard: CardShard = {
     _poolHeraldOfSerra,
     _poolHeraldOfTheDreadhorde,
     _poolHiddenGibbons,
+    _poolHoldTheLine,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,
     _poolHowlingFury,
@@ -984,6 +991,7 @@ const shard: CardShard = {
     _poolKamiOfTwistedReflection,
     _poolKarazikarTheEyeTyrant,
     _poolKarnGildedGuardian,
+    _poolKashiTribeWarriors,
     _poolKataraWaterbendingMaster,
     _poolKavaronTurbodrone,
     _poolKayaGhostAssassin,
@@ -997,6 +1005,7 @@ const shard: CardShard = {
     _poolKnightPaladin,
     _poolKnockoutBlow,
     _poolKoalaSheep,
+    _poolKodamaOfTheSouthTree,
     _poolKolaghansCommand,
     _poolKonstrariCharm,
     _poolKorCartographer,
@@ -1314,6 +1323,7 @@ const shard: CardShard = {
     _poolUtopiaTree,
     _poolValakutStoneforge,
     _poolVariableChaser,
+    _poolVassalsDuty,
     _poolVeneratedRotpriest,
     _poolVerdantEidolon,
     _poolVialSmasherGleefulGrenadier,

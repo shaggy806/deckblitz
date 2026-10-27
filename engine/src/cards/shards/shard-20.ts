@@ -158,6 +158,7 @@ import _poolCrowdsFavor from "../pool/crowds-favor.js";
 import _poolCrownedCeratok from "../pool/crowned-ceratok.js";
 import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolCrush from "../pool/crush.js";
+import _poolCrushingPain from "../pool/crushing-pain.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessAvenger from "../pool/dauntless-avenger.js";
@@ -300,6 +301,7 @@ import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuanYus1000LiMarch from "../pool/guan-yus-1-000-li-march.js";
 import _poolGuardGomazoa from "../pool/guard-gomazoa.js";
+import _poolGuardianOfSolitude from "../pool/guardian-of-solitude.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
@@ -349,12 +351,14 @@ import _poolJaliraMasterPolymorphist from "../pool/jalira-master-polymorphist.js
 import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
+import _poolJoyousRespite from "../pool/joyous-respite.js";
 import _poolJudgmentBolt from "../pool/judgment-bolt.js";
 import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
 import _poolJunkyardGenius from "../pool/junkyard-genius.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
 import _poolKamiOfTheHonoredDead from "../pool/kami-of-the-honored-dead.js";
+import _poolKamiOfTheWaningMoon from "../pool/kami-of-the-waning-moon.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
 import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
@@ -696,6 +700,7 @@ import _poolThornThrashViashino from "../pool/thorn-thrash-viashino.js";
 import _poolThoughtGorger from "../pool/thought-gorger.js";
 import _poolThoughtHarvester from "../pool/thought-harvester.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
+import _poolThousandLeggedKami from "../pool/thousand-legged-kami.js";
 import _poolThrabenFoulbloods from "../pool/thraben-foulbloods.js";
 import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
@@ -967,6 +972,7 @@ const shard: CardShard = {
     _poolCrownedCeratok,
     _poolCrumblingAshes,
     _poolCrush,
+    _poolCrushingPain,
     _poolCrystalDragon,
     _poolDanithaNewBenaliasLight,
     _poolDauntlessAvenger,
@@ -1109,6 +1115,7 @@ const shard: CardShard = {
     _poolGrizzledOutrider,
     _poolGuanYus1000LiMarch,
     _poolGuardGomazoa,
+    _poolGuardianOfSolitude,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
     _poolHairStrungKoto,
@@ -1158,12 +1165,14 @@ const shard: CardShard = {
     _poolJawboneSkulkin,
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
+    _poolJoyousRespite,
     _poolJudgmentBolt,
     _poolJuniperOrderRootweaver,
     _poolJunkyardGenius,
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
     _poolKamiOfTheHonoredDead,
+    _poolKamiOfTheWaningMoon,
     _poolKarametrasAcolyte,
     _poolKastralTheWindcrested,
     _poolKataraBendingProdigy,
@@ -1505,6 +1514,7 @@ const shard: CardShard = {
     _poolThoughtGorger,
     _poolThoughtHarvester,
     _poolThoughtVessel,
+    _poolThousandLeggedKami,
     _poolThrabenFoulbloods,
     _poolThrabenMilitia,
     _poolThranduilSindarinLiege,

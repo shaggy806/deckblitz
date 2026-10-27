@@ -212,6 +212,7 @@ import _poolElspethUndauntedHero from "../pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "../pool/elspeths-devotee.js";
 import _poolElvishBranchbender from "../pool/elvish-branchbender.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
+import _poolEmberFistZubera from "../pool/ember-fist-zubera.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
 import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
@@ -239,6 +240,7 @@ import _poolFathomFleetSwordjack from "../pool/fathom-fleet-swordjack.js";
 import _poolFeatherbrainedFilcher from "../pool/featherbrained-filcher.js";
 import _poolFelotharDawnOfTheAbzan from "../pool/felothar-dawn-of-the-abzan.js";
 import _poolFemerefScouts from "../pool/femeref-scouts.js";
+import _poolFeralDeceiver from "../pool/feral-deceiver.js";
 import _poolFerociousZheng from "../pool/ferocious-zheng.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
@@ -334,6 +336,7 @@ import _poolHeroOfTheGames from "../pool/hero-of-the-games.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHieromancersCage from "../pool/hieromancers-cage.js";
+import _poolHikariTwilightGuardian from "../pool/hikari-twilight-guardian.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolElspethsDevotee,
     _poolElvishBranchbender,
     _poolElvishScrapper,
+    _poolEmberFistZubera,
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
     _poolEncumberedReejerey,
@@ -1007,6 +1011,7 @@ const shard: CardShard = {
     _poolFeatherbrainedFilcher,
     _poolFelotharDawnOfTheAbzan,
     _poolFemerefScouts,
+    _poolFeralDeceiver,
     _poolFerociousZheng,
     _poolFireOmenCrane,
     _poolFireShrineKeeper,
@@ -1102,6 +1107,7 @@ const shard: CardShard = {
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
     _poolHieromancersCage,
+    _poolHikariTwilightGuardian,
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHollowScavenger,

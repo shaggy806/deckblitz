@@ -449,6 +449,7 @@ import _poolMechHangar from "../pool/mech-hangar.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
+import _poolMidnightCovenant from "../pool/midnight-covenant.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMinorMisstep from "../pool/minor-misstep.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
@@ -658,6 +659,7 @@ import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
+import _poolStrengthOfCedars from "../pool/strength-of-cedars.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
@@ -1264,6 +1266,7 @@ const shard: CardShard = {
     _poolMechanizedWarfare,
     _poolMendTheWilds,
     _poolMerchantOfTruth,
+    _poolMidnightCovenant,
     _poolMindstatic,
     _poolMinorMisstep,
     _poolMirkwoodElk,
@@ -1473,6 +1476,7 @@ const shard: CardShard = {
     _poolStoneskin,
     _poolStormTheFestival,
     _poolStranglerootGeist,
+    _poolStrengthOfCedars,
     _poolStrokeOfGenius,
     _poolSuddenSpinnerets,
     _poolSummerBloom,

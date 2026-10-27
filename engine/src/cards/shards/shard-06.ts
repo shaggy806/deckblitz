@@ -201,6 +201,7 @@ import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
+import _poolDrippingTongueZubera from "../pool/dripping-tongue-zubera.js";
 import _poolDrowsingTyrannodon from "../pool/drowsing-tyrannodon.js";
 import _poolDruidOfHorns from "../pool/druid-of-horns.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
@@ -350,7 +351,9 @@ import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
 import _poolKagemaroFirstToSuffer from "../pool/kagemaro-first-to-suffer.js";
+import _poolKamiOfLunacy from "../pool/kami-of-lunacy.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
+import _poolKamiOfThePalaceFields from "../pool/kami-of-the-palace-fields.js";
 import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKeldonMegaliths from "../pool/keldon-megaliths.js";
@@ -459,6 +462,7 @@ import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
 import _poolPhyrexianDenouncer from "../pool/phyrexian-denouncer.js";
+import _poolPiousKitsune from "../pool/pious-kitsune.js";
 import _poolPlagueBeetle from "../pool/plague-beetle.js";
 import _poolPlaxcasterFrogling from "../pool/plaxcaster-frogling.js";
 import _poolPollutedBonds from "../pool/polluted-bonds.js";
@@ -957,6 +961,7 @@ const shard: CardShard = {
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
+    _poolDrippingTongueZubera,
     _poolDrowsingTyrannodon,
     _poolDruidOfHorns,
     _poolDualSunTechnique,
@@ -1106,7 +1111,9 @@ const shard: CardShard = {
     _poolJungleLion,
     _poolJusticeVanceAstrovik,
     _poolKagemaroFirstToSuffer,
+    _poolKamiOfLunacy,
     _poolKamiOfTerribleSecrets,
+    _poolKamiOfThePalaceFields,
     _poolKapshoKitefins,
     _poolKeiTakahashi,
     _poolKeldonMegaliths,
@@ -1215,6 +1222,7 @@ const shard: CardShard = {
     _poolPhenomenonInvestigators,
     _poolPhyrexianArena,
     _poolPhyrexianDenouncer,
+    _poolPiousKitsune,
     _poolPlagueBeetle,
     _poolPlaxcasterFrogling,
     _poolPollutedBonds,

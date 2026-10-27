@@ -140,6 +140,7 @@ import _poolDesertNomads from "../pool/desert-nomads.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDespise from "../pool/despise.js";
 import _poolDetectiveOfTheMonth from "../pool/detective-of-the-month.js";
+import _poolDevotedRetainer from "../pool/devoted-retainer.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDiplomacyOfTheWastes from "../pool/diplomacy-of-the-wastes.js";
@@ -225,6 +226,7 @@ import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
 import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
+import _poolFrostwalkBastion from "../pool/frostwalk-bastion.js";
 import _poolFuriousReprisal from "../pool/furious-reprisal.js";
 import _poolFuryStorm from "../pool/fury-storm.js";
 import _poolGaeasBounty from "../pool/gaeas-bounty.js";
@@ -546,6 +548,7 @@ import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
 import _poolShapersSanctuary from "../pool/shapers-sanctuary.js";
+import _poolShellOfTheLastKappa from "../pool/shell-of-the-last-kappa.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShidakoBroodmistress from "../pool/shidako-broodmistress.js";
 import _poolShieldWall from "../pool/shield-wall.js";
@@ -695,6 +698,7 @@ import _poolViciousClown from "../pool/vicious-clown.js";
 import _poolViciousRivalry from "../pool/vicious-rivalry.js";
 import _poolVileAggregate from "../pool/vile-aggregate.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
+import _poolVillainousOgre from "../pool/villainous-ogre.js";
 import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
 import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
@@ -894,6 +898,7 @@ const shard: CardShard = {
     _poolDesperateParry,
     _poolDespise,
     _poolDetectiveOfTheMonth,
+    _poolDevotedRetainer,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
     _poolDiplomacyOfTheWastes,
@@ -979,6 +984,7 @@ const shard: CardShard = {
     _poolFractalize,
     _poolFreeTheFae,
     _poolFromBeyond,
+    _poolFrostwalkBastion,
     _poolFuriousReprisal,
     _poolFuryStorm,
     _poolGaeasBounty,
@@ -1300,6 +1306,7 @@ const shard: CardShard = {
     _poolShadowyBackstreet,
     _poolShamelessCharlatan,
     _poolShapersSanctuary,
+    _poolShellOfTheLastKappa,
     _poolShelobsAmbush,
     _poolShidakoBroodmistress,
     _poolShieldWall,
@@ -1449,6 +1456,7 @@ const shard: CardShard = {
     _poolViciousRivalry,
     _poolVileAggregate,
     _poolVillageCannibals,
+    _poolVillainousOgre,
     _poolVineshaperProdigy,
     _poolVitalizingWind,
     _poolVivienOfTheArkbow,

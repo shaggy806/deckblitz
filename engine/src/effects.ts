@@ -1700,7 +1700,10 @@ export type EffectSpec =
        * permanent with no target at all (Territorial Hellkite's "tap this
        * creature"), only while it's still that object (rule 400.7). */
       readonly kind: "tap";
-      readonly target: EffectTargetRef;
+      /** A target slot or a reference — `"trigger-recipient"` as `destroy`
+       * reads it: "whenever this creature deals combat damage to a creature,
+       * tap **that creature**" (Kashi-Tribe Warriors, Matsu-Tribe Sniper). */
+      readonly target: EffectTargetRef | "trigger-recipient";
       /** "**It doesn't untap during its controller's next untap step**"
        * (Junk Winder) — whoever controls it then; tapped by this or already
        * (`GameObject.skipsNextUntap`). */
@@ -2043,7 +2046,10 @@ export type EffectSpec =
        * in the graveyard it went to (rule 400.7 — "you may exile it", Myrkul,
        * Lord of Bones). A `this-way` `"exiled"` condition is "if you do". */
       readonly kind: "exile";
-      readonly target: EffectTargetRef;
+      /** A target slot or a reference — `"trigger-recipient"` as `destroy`
+       * reads it: "whenever this creature deals damage to a creature, exile
+       * **that creature**" (Pit Spawn). */
+      readonly target: EffectTargetRef | "trigger-recipient";
       /** "Exile it **with a croak counter on it**": counters the card gets
        * as it's exiled, there. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
@@ -9297,7 +9303,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "tap": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target =
+        spec.target === "trigger-recipient" ? ctx.triggerRecipient() : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.tapPermanent(target, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
       return;
     }
@@ -9509,7 +9516,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "exile": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target =
+        spec.target === "trigger-recipient" ? ctx.triggerRecipient() : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
         ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
           spec.airbend === true);

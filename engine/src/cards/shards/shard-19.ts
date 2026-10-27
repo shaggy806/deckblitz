@@ -68,6 +68,7 @@ import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
+import _poolBlindWithAnger from "../pool/blind-with-anger.js";
 import _poolBloodshotTrainee from "../pool/bloodshot-trainee.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
@@ -156,6 +157,7 @@ import _poolCultbrandCinder from "../pool/cultbrand-cinder.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolCunning from "../pool/cunning.js";
+import _poolCursedRonin from "../pool/cursed-ronin.js";
 import _poolCytoplastRootKin from "../pool/cytoplast-root-kin.js";
 import _poolDangerous from "../pool/dangerous.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
@@ -181,6 +183,7 @@ import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
 import _poolDevastationTide from "../pool/devastation-tide.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
+import _poolDevouringRage from "../pool/devouring-rage.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
@@ -477,6 +480,7 @@ import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
 import _poolNephaliaSeakite from "../pool/nephalia-seakite.js";
 import _poolNetworkTerminal from "../pool/network-terminal.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
+import _poolNezumiRonin from "../pool/nezumi-ronin.js";
 import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
@@ -537,6 +541,7 @@ import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
+import _poolPsychicPuppetry from "../pool/psychic-puppetry.js";
 import _poolPyrewildShaman from "../pool/pyrewild-shaman.js";
 import _poolQiqirnMerchant from "../pool/qiqirn-merchant.js";
 import _poolQuestingDruid from "../pool/questing-druid.js";
@@ -567,6 +572,7 @@ import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
 import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
+import _poolRoninHoundmaster from "../pool/ronin-houndmaster.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRoughTumble from "../pool/rough-tumble.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
@@ -865,6 +871,7 @@ const shard: CardShard = {
     _poolBlazingRootwalla,
     _poolBlightsowerThallid,
     _poolBlightsteelColossus,
+    _poolBlindWithAnger,
     _poolBloodshotTrainee,
     _poolBloomvineRegent,
     _poolBlurSliver,
@@ -953,6 +960,7 @@ const shard: CardShard = {
     _poolCunningStrike,
     _poolCunningSurvivor,
     _poolCunning,
+    _poolCursedRonin,
     _poolCytoplastRootKin,
     _poolDangerous,
     _poolDaringApprentice,
@@ -978,6 +986,7 @@ const shard: CardShard = {
     _poolDevastationTide,
     _poolDevilthornFox,
     _poolDeviousCoverUp,
+    _poolDevouringRage,
     _poolDimensionX,
     _poolDisharmony,
     _poolDismiss,
@@ -1274,6 +1283,7 @@ const shard: CardShard = {
     _poolNephaliaSeakite,
     _poolNetworkTerminal,
     _poolNewBenalia,
+    _poolNezumiRonin,
     _poolNighthawkDarkDefender,
     _poolNightwingShade,
     _poolNihilSpellbomb,
@@ -1334,6 +1344,7 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
+    _poolPsychicPuppetry,
     _poolPyrewildShaman,
     _poolQiqirnMerchant,
     _poolQuestingDruid,
@@ -1364,6 +1375,7 @@ const shard: CardShard = {
     _poolRoaringPrimadox,
     _poolRoguesPassage,
     _poolRoninCliffrider,
+    _poolRoninHoundmaster,
     _poolRootwaterAlligator,
     _poolRoughTumble,
     _poolRovingActuator,

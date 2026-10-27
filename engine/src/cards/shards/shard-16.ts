@@ -116,6 +116,7 @@ import _poolChronozoa from "../pool/chronozoa.js";
 import _poolCinderCrawler from "../pool/cinder-crawler.js";
 import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolClotSliver from "../pool/clot-sliver.js";
+import _poolCloudcrestLake from "../pool/cloudcrest-lake.js";
 import _poolCloudpost from "../pool/cloudpost.js";
 import _poolCobbledWings from "../pool/cobbled-wings.js";
 import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
@@ -441,6 +442,7 @@ import _poolNessianWanderer from "../pool/nessian-wanderer.js";
 import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNightClubber from "../pool/night-clubber.js";
+import _poolNightDealings from "../pool/night-dealings.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
@@ -529,6 +531,7 @@ import _poolReleaseTheGremlins from "../pool/release-the-gremlins.js";
 import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
+import _poolRendFlesh from "../pool/rend-flesh.js";
 import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
@@ -601,6 +604,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSoar from "../pool/soar.js";
+import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
@@ -927,6 +931,7 @@ const shard: CardShard = {
     _poolCinderCrawler,
     _poolCityPigeon,
     _poolClotSliver,
+    _poolCloudcrestLake,
     _poolCloudpost,
     _poolCobbledWings,
     _poolColdCaseCracker,
@@ -1252,6 +1257,7 @@ const shard: CardShard = {
     _poolNestingDragon,
     _poolNiblisOfDusk,
     _poolNightClubber,
+    _poolNightDealings,
     _poolNighthawkScavenger,
     _poolNix,
     _poolNocturnalFeeder,
@@ -1340,6 +1346,7 @@ const shard: CardShard = {
     _poolRelicGolem,
     _poolRelicSloth,
     _poolRemand,
+    _poolRendFlesh,
     _poolRetributiveWand,
     _poolReturnToDust,
     _poolRhysticStudy,
@@ -1412,6 +1419,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSoar,
+    _poolSoullessRevival,
     _poolSoulsGrace,
     _poolSphinxOfLostTruths,
     _poolSphinxOfTheGuildpact,

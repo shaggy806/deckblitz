@@ -945,6 +945,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Profane Insight": "https://cards.scryfall.io/art_crop/back/4/6/4676c019-886c-4b0d-9849-c044c0e03da3.jpg",
   "Psionic Pulse": "https://cards.scryfall.io/art_crop/back/c/0/c0deb9ea-a0d4-4c3f-888e-abd1995cf2b3.jpg",
   "Puny Snack": "https://cards.scryfall.io/art_crop/back/e/7/e77a8fd4-af5f-42b3-a87e-788baf2562dd.jpg",
+  "Rage of Winter": "https://cards.scryfall.io/art_crop/back/d/e/de2f964a-e4e1-4321-92ad-34b781868e11.jpg",
   "Raise Dead": "4950c3c2-80c1-4447-ac38-cf40f76b9545",
   "Rampaging Werewolf": "https://cards.scryfall.io/art_crop/back/6/1/6151cae7-92a4-4891-a952-21def412d3e4.jpg",
   "Rampant Growth": "b7c47024-5e08-4b17-b41a-7647f8b814b9",
