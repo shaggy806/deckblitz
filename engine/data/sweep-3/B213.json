@@ -1,0 +1,684 @@
+{
+  "batch": "B213",
+  "status": "complete",
+  "ranks": "Fifth Dawn (5DN, 2004-06-04): the rest of the set, 95 (the third middle walk's range, taken by a newest-first session in round sixteen while the third middle walk sat out); built sunburst (keyword:sunburst, rule 702.44 — the sunburst() helper, read by the scaffolder with Modular—Sunburst) and authored Pentad Prism (B26), which it unblocked",
+  "authored": [
+    {
+      "name": "Abuna's Chant",
+      "files": [
+        "engine/src/cards/pool/abunas-chant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "All Suns' Dawn",
+      "files": [
+        "engine/src/cards/pool/all-suns-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arcbound Wanderer",
+      "files": [
+        "engine/src/cards/pool/arcbound-wanderer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Armed Response",
+      "files": [
+        "engine/src/cards/pool/armed-response.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Artificer's Intuition",
+      "files": [
+        "engine/src/cards/pool/artificers-intuition.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Auriok Salvagers",
+      "files": [
+        "engine/src/cards/pool/auriok-salvagers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Auriok Windwalker",
+      "files": [
+        "engine/src/cards/pool/auriok-windwalker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Baton of Courage",
+      "files": [
+        "engine/src/cards/pool/baton-of-courage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Battered Golem",
+      "files": [
+        "engine/src/cards/pool/battered-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beacon of Creation",
+      "files": [
+        "engine/src/cards/pool/beacon-of-creation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beacon of Destruction",
+      "files": [
+        "engine/src/cards/pool/beacon-of-destruction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blinkmoth Infusion",
+      "files": [
+        "engine/src/cards/pool/blinkmoth-infusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bringer of the Black Dawn",
+      "files": [
+        "engine/src/cards/pool/bringer-of-the-black-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bringer of the Blue Dawn",
+      "files": [
+        "engine/src/cards/pool/bringer-of-the-blue-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bringer of the Green Dawn",
+      "files": [
+        "engine/src/cards/pool/bringer-of-the-green-dawn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bringer of the Red Dawn",
+      "files": [
+        "engine/src/cards/pool/bringer-of-the-red-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bringer of the White Dawn",
+      "files": [
+        "engine/src/cards/pool/bringer-of-the-white-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chimeric Coils",
+      "files": [
+        "engine/src/cards/pool/chimeric-coils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clearwater Goblet",
+      "files": [
+        "engine/src/cards/pool/clearwater-goblet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cosmic Larva",
+      "files": [
+        "engine/src/cards/pool/cosmic-larva.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Desecration Elemental",
+      "files": [
+        "engine/src/cards/pool/desecration-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devour in Shadow",
+      "files": [
+        "engine/src/cards/pool/devour-in-shadow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Early Frost",
+      "files": [
+        "engine/src/cards/pool/early-frost.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Endless Whispers",
+      "files": [
+        "engine/src/cards/pool/endless-whispers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Energy Chamber",
+      "files": [
+        "engine/src/cards/pool/energy-chamber.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Engineered Explosives",
+      "files": [
+        "engine/src/cards/pool/engineered-explosives.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ensouled Scimitar",
+      "files": [
+        "engine/src/cards/pool/ensouled-scimitar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Etched Oracle",
+      "files": [
+        "engine/src/cards/pool/etched-oracle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eyes of the Watcher",
+      "files": [
+        "engine/src/cards/pool/eyes-of-the-watcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fangren Pathcutter",
+      "files": [
+        "engine/src/cards/pool/fangren-pathcutter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feedback Bolt",
+      "files": [
+        "engine/src/cards/pool/feedback-bolt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fleshgrafter",
+      "files": [
+        "engine/src/cards/pool/fleshgrafter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gemstone Array",
+      "files": [
+        "engine/src/cards/pool/gemstone-array.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Granulate",
+      "files": [
+        "engine/src/cards/pool/granulate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guardian Idol",
+      "files": [
+        "engine/src/cards/pool/guardian-idol.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Healer's Headdress",
+      "files": [
+        "engine/src/cards/pool/healers-headdress.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heliophial",
+      "files": [
+        "engine/src/cards/pool/heliophial.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Helm of Kaldra",
+      "files": [
+        "engine/src/cards/pool/helm-of-kaldra.ts",
+        "engine/src/cards/tokens/kaldra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Horned Helm",
+      "files": [
+        "engine/src/cards/pool/horned-helm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hoverguard Sweepers",
+      "files": [
+        "engine/src/cards/pool/hoverguard-sweepers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Infused Arrows",
+      "files": [
+        "engine/src/cards/pool/infused-arrows.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Joiner Adept",
+      "files": [
+        "engine/src/cards/pool/joiner-adept.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Krark-Clan Engineers",
+      "files": [
+        "engine/src/cards/pool/krark-clan-engineers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Leonin Squire",
+      "files": [
+        "engine/src/cards/pool/leonin-squire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lunar Avenger",
+      "files": [
+        "engine/src/cards/pool/lunar-avenger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mephidross Vampire",
+      "files": [
+        "engine/src/cards/pool/mephidross-vampire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moriok Rigger",
+      "files": [
+        "engine/src/cards/pool/moriok-rigger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nim Grotesque",
+      "files": [
+        "engine/src/cards/pool/nim-grotesque.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Opaline Bracers",
+      "files": [
+        "engine/src/cards/pool/opaline-bracers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pentad Prism",
+      "files": [
+        "engine/src/cards/pool/pentad-prism.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rain of Rust",
+      "files": [
+        "engine/src/cards/pool/rain-of-rust.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Raksha Golden Cub",
+      "files": [
+        "engine/src/cards/pool/raksha-golden-cub.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Razormane Masticore",
+      "files": [
+        "engine/src/cards/pool/razormane-masticore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rude Awakening",
+      "files": [
+        "engine/src/cards/pool/rude-awakening.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Salvaging Station",
+      "files": [
+        "engine/src/cards/pool/salvaging-station.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sawtooth Thresher",
+      "files": [
+        "engine/src/cards/pool/sawtooth-thresher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shattered Dreams",
+      "files": [
+        "engine/src/cards/pool/shattered-dreams.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyreach Manta",
+      "files": [
+        "engine/src/cards/pool/skyreach-manta.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Solarion",
+      "files": [
+        "engine/src/cards/pool/solarion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sparring Collar",
+      "files": [
+        "engine/src/cards/pool/sparring-collar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Summoning Station",
+      "files": [
+        "engine/src/cards/pool/summoning-station.ts",
+        "engine/src/cards/tokens/pincher-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Suncrusher",
+      "files": [
+        "engine/src/cards/pool/suncrusher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Suntouched Myr",
+      "files": [
+        "engine/src/cards/pool/suntouched-myr.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sylvok Explorer",
+      "files": [
+        "engine/src/cards/pool/sylvok-explorer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Synod Centurion",
+      "files": [
+        "engine/src/cards/pool/synod-centurion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tangle Asp",
+      "files": [
+        "engine/src/cards/pool/tangle-asp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vedalken Mastermind",
+      "files": [
+        "engine/src/cards/pool/vedalken-mastermind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vedalken Shackles",
+      "files": [
+        "engine/src/cards/pool/vedalken-shackles.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vicious Betrayal",
+      "files": [
+        "engine/src/cards/pool/vicious-betrayal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Viridian Lorebearers",
+      "files": [
+        "engine/src/cards/pool/viridian-lorebearers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Viridian Scout",
+      "files": [
+        "engine/src/cards/pool/viridian-scout.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Plunge into Darkness",
+      "needs": [
+        "effect:pay-any-amount-of-life"
+      ],
+      "why": "Mode two pays a chosen amount of life as it resolves, then looks at that many cards; no effect takes a player-chosen life payment."
+    },
+    {
+      "name": "Summoner's Egg",
+      "needs": [
+        "effect:exile-from-hand-face-down-linked",
+        "effect:linked-face-down-exile-to-battlefield"
+      ],
+      "why": "Imprint exiles a card from hand face down (hidden even from its controller), turned face up and put onto the battlefield if a creature when the Egg dies."
+    },
+    {
+      "name": "Tornado Elemental",
+      "needs": [
+        "static:assign-damage-as-though-unblocked"
+      ],
+      "why": "\"You may have this creature assign its combat damage as though it weren't blocked\" has no vocabulary."
+    },
+    {
+      "name": "Ion Storm",
+      "needs": [
+        "cost:remove-counters-from-chosen"
+      ],
+      "why": "Its cost removes a +1/+1 or charge counter from any permanent you control; removeCounter takes one kind from the source."
+    },
+    {
+      "name": "Myr Quadropod",
+      "needs": [
+        "effect:switch-pt"
+      ],
+      "why": "Switching power and toughness (layer 7d) isn't modeled."
+    },
+    {
+      "name": "Roar of Reclamation",
+      "needs": [
+        "effect:mass-graveyard-to-battlefield"
+      ],
+      "why": "Each player returns every artifact card from their graveyard at once under their own control; return-from-graveyard reads one graveyard, or puts all under yours."
+    },
+    {
+      "name": "Ouphe Vandals",
+      "needs": [
+        "effect:counter-ability"
+      ],
+      "why": "Countering the ability works (Rust), but \"destroy that artifact\" — the countered ability's source — can't be named."
+    },
+    {
+      "name": "Relentless Rats",
+      "needs": [
+        "mechanic:deck-any-number-copies"
+      ],
+      "why": "\"A deck can have any number of cards named Relentless Rats\": deck validation exempts only basic lands from the singleton rule."
+    },
+    {
+      "name": "Spectral Shift",
+      "needs": [
+        "effect:text-change-color-or-land-words"
+      ],
+      "why": "Changing colour words or basic land types in a permanent's text (rule 612.2) isn't modeled."
+    },
+    {
+      "name": "Myr Servitor",
+      "needs": [
+        "effect:mass-graveyard-to-battlefield"
+      ],
+      "why": "Each player returns all cards named Myr Servitor from their graveyard at once, under their own control."
+    },
+    {
+      "name": "Razorgrass Screen",
+      "needs": [
+        "static:must-block-each-combat"
+      ],
+      "why": "\"Blocks each combat if able\" has no combat restriction (only must-attack)."
+    },
+    {
+      "name": "Disruption Aura",
+      "needs": [
+        "cost:pay-mana-cost-of-attached"
+      ],
+      "why": "Its upkeep cost is the enchanted artifact's own mana cost; an unless-pay takes only a fixed mana string or generic amount."
+    },
+    {
+      "name": "Dawn's Reflection",
+      "needs": [
+        "effect:mana-any-combination-choice"
+      ],
+      "why": "\"Two additional mana in any combination of colors\" on a tapped-for-mana trigger fills every unit with one colour."
+    },
+    {
+      "name": "Avarice Totem",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "No exchange-of-control effect."
+    },
+    {
+      "name": "Possessed Portal",
+      "needs": [
+        "replacement:skip-every-draw"
+      ],
+      "why": "\"If a player would draw a card, that player skips that draw instead\" — would-draw has no skip form for every player."
+    },
+    {
+      "name": "Skullcage",
+      "needs": [
+        "condition:that-player-hand-size"
+      ],
+      "why": "The hand-size condition reads only you or each player, not the active player of an opponent's upkeep."
+    },
+    {
+      "name": "Eon Hub",
+      "needs": [
+        "static:skip-step"
+      ],
+      "why": "No static makes players skip their upkeep step."
+    },
+    {
+      "name": "Retaliate",
+      "needs": [
+        "stat:filter-dealt-damage-to-you-this-turn"
+      ],
+      "why": "No filter for creatures that dealt damage to you this turn."
+    },
+    {
+      "name": "Stasis Cocoon",
+      "needs": [
+        "static:enchanted-abilities-cant-be-activated"
+      ],
+      "why": "prohibits.abilitiesOf can't name the enchanted permanent alone."
+    },
+    {
+      "name": "Acquire",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "Search target opponent's library for an artifact and put it onto the battlefield under your control."
+    },
+    {
+      "name": "Ferropede",
+      "needs": [
+        "effect:remove-counters-any-kind"
+      ],
+      "why": "\"Remove a counter from target permanent\": remove-counter needs a fixed kind; the player picks among the kinds there."
+    },
+    {
+      "name": "Spinal Parasite",
+      "needs": [
+        "effect:remove-counters-any-kind"
+      ],
+      "why": "\"Remove a counter from target permanent\": remove-counter needs a fixed kind; the player picks among the kinds there."
+    },
+    {
+      "name": "Reversal of Fortune",
+      "needs": [
+        "effect:cast-copy-of-card"
+      ],
+      "why": "Copy an instant or sorcery card in target opponent's hand and cast the copy for free."
+    },
+    {
+      "name": "Goblin Brawler",
+      "needs": [
+        "static:cant-be-equipped"
+      ],
+      "why": "No \"can't be equipped\" static."
+    },
+    {
+      "name": "Fold into Aether",
+      "needs": [
+        "condition:countered-this-way"
+      ],
+      "why": "The second half happens only if the spell is countered this way (not for an uncounterable spell)."
+    }
+  ]
+}

@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Sunburst, and Fifth Dawn — Fifth Dawn is whole** (batch 213, the third middle walk's range
+  taken by a newest-first session, 2026-10-26, `keyword:sunburst`): **built** sunburst (rule
+  702.44 — the `sunburst()` helper, +1/+1 counters by its copiable creature type or charge
+  counters, one per colour spent to cast it) and Modular—Sunburst, both read by the scaffolder,
+  with Pentad Prism (B26). 70 of Fifth Dawn's 95 authored — Engineered Explosives, Vedalken
+  Shackles, Etched Oracle, Helm of Kaldra, the Bringers, Raksha Golden Cub — by four
+  `card-author` agents and the lead, and 25 blocked (`B213.json`).
 - **A damage trigger's "that creature" for tap and exile, and the rest of Champions of Kamigawa —
   Champions is whole** (batch 212, the third middle walk's range taken by the newest-first
   walk's session, 2026-10-26, part of `trigger:trigger-recipient-ref`): **built** `tap` and

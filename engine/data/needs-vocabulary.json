@@ -11644,6 +11644,21 @@
   "effect:per-permanent-bounce-unless-owner-pays": {
    "family": "effect:per-creature-sacrifice-unless-pay",
    "example": "Cut the Tethers: for each Spirit, return it to its owner's hand unless that player pays {3} — an unless once per permanent, its owner paying."
+  },
+  "effect:pay-any-amount-of-life": {
+   "family": "effect:pay-any-amount-of-mana",
+   "example": "Plunge into Darkness: 'pay any amount of life, then look at that many cards from the top of your library' — a life amount chosen as it resolves, read back as X."
+  },
+  "replacement:skip-every-draw": {
+   "family": "static:skip-draw-step",
+   "example": "Possessed Portal: 'If a player would draw a card, that player skips that draw instead' — every draw, every player, not just the draw step."
+  },
+  "static:cant-be-equipped": {
+   "family": "static:cant-be-enchanted",
+   "example": "Goblin Brawler: 'This creature can't be equipped' — an equip ability can't target it, and an Equipment attached to it becomes unattached (rule 301.5c)."
+  },
+  "condition:countered-this-way": {
+   "example": "Fold into Aether: 'Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield' — nothing when the spell can't be countered."
   }
  }
 }
