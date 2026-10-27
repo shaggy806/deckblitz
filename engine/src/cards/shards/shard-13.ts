@@ -151,6 +151,7 @@ import _poolCunningBreezedancer from "../pool/cunning-breezedancer.js";
 import _poolDampeningPulse from "../pool/dampening-pulse.js";
 import _poolDarknessDescends from "../pool/darkness-descends.js";
 import _poolDarkstarAugur from "../pool/darkstar-augur.js";
+import _poolDarkwaterEgg from "../pool/darkwater-egg.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
@@ -719,6 +720,7 @@ import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
+import _poolVolcanicSpray from "../pool/volcanic-spray.js";
 import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
@@ -931,6 +933,7 @@ const shard: CardShard = {
     _poolDampeningPulse,
     _poolDarknessDescends,
     _poolDarkstarAugur,
+    _poolDarkwaterEgg,
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
     _poolDeathSpeakers,
@@ -1499,6 +1502,7 @@ const shard: CardShard = {
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,
+    _poolVolcanicSpray,
     _poolVoldarenPariah,
     _poolVoltaicWhip,
     _poolVowToErebor,

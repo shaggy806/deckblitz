@@ -453,6 +453,7 @@ import _poolOngoingInvestigation from "../pool/ongoing-investigation.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
+import _poolOvereagerApprentice from "../pool/overeager-apprentice.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
 import _poolOverpoweringAttack from "../pool/overpowering-attack.js";
 import _poolOxiddaFinisher from "../pool/oxidda-finisher.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
     _poolOtterPenguin,
+    _poolOvereagerApprentice,
     _poolOvergrownTomb,
     _poolOverpoweringAttack,
     _poolOxiddaFinisher,

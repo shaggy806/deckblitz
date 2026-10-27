@@ -656,6 +656,7 @@ import _poolStrengthOfArms from "../pool/strength-of-arms.js";
 import _poolStripMine from "../pool/strip-mine.js";
 import _poolSultaiCharm from "../pool/sultai-charm.js";
 import _poolSunderingEruption from "../pool/sundering-eruption.js";
+import _poolSungrassEgg from "../pool/sungrass-egg.js";
 import _poolSunshotMilitia from "../pool/sunshot-militia.js";
 import _poolSupplyCaravan from "../pool/supply-caravan.js";
 import _poolSurgeConductor from "../pool/surge-conductor.js";
@@ -1499,6 +1500,7 @@ const shard: CardShard = {
     _poolStripMine,
     _poolSultaiCharm,
     _poolSunderingEruption,
+    _poolSungrassEgg,
     _poolSunshotMilitia,
     _poolSupplyCaravan,
     _poolSurgeConductor,

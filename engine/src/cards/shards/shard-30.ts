@@ -457,6 +457,7 @@ import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
 import _poolMortisDogs from "../pool/mortis-dogs.js";
+import _poolMossfireEgg from "../pool/mossfire-egg.js";
 import _poolMouthOfRonom from "../pool/mouth-of-ronom.js";
 import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
@@ -676,6 +677,7 @@ import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js"
 import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
+import _poolThoughtNibbler from "../pool/thought-nibbler.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
@@ -1243,6 +1245,7 @@ const shard: CardShard = {
     _poolMoorishCavalry,
     _poolMoriokScavenger,
     _poolMortisDogs,
+    _poolMossfireEgg,
     _poolMouthOfRonom,
     _poolMurasaBrute,
     _poolMuseSeeker,
@@ -1462,6 +1465,7 @@ const shard: CardShard = {
     _poolTheRevelationsOfEzio,
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
+    _poolThoughtNibbler,
     _poolThousandYearStorm,
     _poolThranGolem,
     _poolThrowALine,

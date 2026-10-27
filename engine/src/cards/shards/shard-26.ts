@@ -579,6 +579,7 @@ import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolSeraphicGreatsword from "../pool/seraphic-greatsword.js";
 import _poolSerenity from "../pool/serenity.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
+import _poolSetonsDesire from "../pool/setons-desire.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
@@ -674,6 +675,7 @@ import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
+import _poolThoughtDevourer from "../pool/thought-devourer.js";
 import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
@@ -1364,6 +1366,7 @@ const shard: CardShard = {
     _poolSeraphicGreatsword,
     _poolSerenity,
     _poolSerpentineAmbush,
+    _poolSetonsDesire,
     _poolShackleSlinger,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,
@@ -1459,6 +1462,7 @@ const shard: CardShard = {
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
+    _poolThoughtDevourer,
     _poolThranLens,
     _poolThranTemporalGateway,
     _poolThrissNantukoPrimus,

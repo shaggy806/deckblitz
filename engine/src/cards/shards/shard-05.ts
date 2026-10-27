@@ -177,6 +177,7 @@ import _poolDeathRattle from "../pool/death-rattle.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
 import _poolDeathmarkPrelate from "../pool/deathmark-prelate.js";
 import _poolDeathrender from "../pool/deathrender.js";
+import _poolDeepReconnaissance from "../pool/deep-reconnaissance.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
 import _poolDefyDeath from "../pool/defy-death.js";
@@ -214,6 +215,7 @@ import _poolDutifulAttendant from "../pool/dutiful-attendant.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
+import _poolDwarvenRecruiter from "../pool/dwarven-recruiter.js";
 import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEarlyHarvest from "../pool/early-harvest.js";
@@ -234,6 +236,7 @@ import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
+import _poolEscapeArtist from "../pool/escape-artist.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExoticDisease from "../pool/exotic-disease.js";
@@ -502,6 +505,7 @@ import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
+import _poolPipersMelody from "../pool/pipers-melody.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPlanarDespair from "../pool/planar-despair.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolDeathgrip,
     _poolDeathmarkPrelate,
     _poolDeathrender,
+    _poolDeepReconnaissance,
     _poolDeeprootWarrior,
     _poolDefiantElf,
     _poolDefyDeath,
@@ -992,6 +997,7 @@ const shard: CardShard = {
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
     _poolDwarvenLieutenant,
+    _poolDwarvenRecruiter,
     _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
     _poolEarlyHarvest,
@@ -1012,6 +1018,7 @@ const shard: CardShard = {
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,
+    _poolEscapeArtist,
     _poolEssenceFlare,
     _poolEternalWitness,
     _poolExoticDisease,
@@ -1280,6 +1287,7 @@ const shard: CardShard = {
     _poolPhyrexianIronfoot,
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
+    _poolPipersMelody,
     _poolPlaguemawBeast,
     _poolPlanarDespair,
     _poolPracticalResearch,

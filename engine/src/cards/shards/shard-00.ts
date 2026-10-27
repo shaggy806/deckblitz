@@ -54,6 +54,7 @@ import _poolBarkshellBlessing from "../pool/barkshell-blessing.js";
 import _poolBasaltMonolith from "../pool/basalt-monolith.js";
 import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBattleMadRonin from "../pool/battle-mad-ronin.js";
+import _poolBattleStrain from "../pool/battle-strain.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
 import _poolBellowingFiend from "../pool/bellowing-fiend.js";
@@ -323,6 +324,7 @@ import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
+import _poolInfectedVermin from "../pool/infected-vermin.js";
 import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
 import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolBasaltMonolith,
     _poolBatheInGold,
     _poolBattleMadRonin,
+    _poolBattleStrain,
     _poolBeamsawProspector,
     _poolBeastAttack,
     _poolBellowingFiend,
@@ -1126,6 +1129,7 @@ const shard: CardShard = {
     _poolImpostorOfTheSixthPride,
     _poolInGarruksWake,
     _poolIncreasingVengeance,
+    _poolInfectedVermin,
     _poolInfestedFleshcutter,
     _poolInkDissolver,
     _poolInstrumentsOfWar,

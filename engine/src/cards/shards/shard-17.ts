@@ -28,6 +28,7 @@ import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
+import _poolAnimalBoneyard from "../pool/animal-boneyard.js";
 import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
@@ -166,6 +167,7 @@ import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
+import _poolDivert from "../pool/divert.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
@@ -771,6 +773,7 @@ import _poolZhangFeiFierceWarrior from "../pool/zhang-fei-fierce-warrior.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
 import _poolZodiacPig from "../pool/zodiac-pig.js";
 import _poolZombify from "../pool/zombify.js";
+import _poolZoologist from "../pool/zoologist.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
@@ -825,6 +828,7 @@ const shard: CardShard = {
     _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
+    _poolAnimalBoneyard,
     _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolDisposalMummy,
     _poolDistractingGeist,
     _poolDiversionaryTactics,
+    _poolDivert,
     _poolDoctorSpectrum,
     _poolDone,
     _poolDoomwakeGiant,
@@ -1568,6 +1573,7 @@ const shard: CardShard = {
     _poolZinniaValleysVoice,
     _poolZodiacPig,
     _poolZombify,
+    _poolZoologist,
   ],
   tokens: [
     _tokensAngelToken33White,
