@@ -481,9 +481,16 @@ report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
 // Side by side at 4 workers each — but on a small machine one after the
 // other at vitest's default, or the server's timed capture tests run past
-// their 5 s (they take 2 s alone; 2026-10-25).
+// their 5 s (they take 2 s alone; 2026-10-25). The same larger heap as the
+// engine's: the server suite's main process ran out of the default ~2 GB at
+// startup past ~24,600 definitions (2026-10-27).
 const suite = (name, dir) => () =>
-  run(name, "npx", ["vitest", "run", ...(SMALL ? [] : ["--maxWorkers=4"])], path.join(ROOT, dir));
+  run(
+    name,
+    "node",
+    ["--max-old-space-size=4096", path.join(ROOT, "node_modules/vitest/vitest.mjs"), "run", ...(SMALL ? [] : ["--maxWorkers=4"])],
+    path.join(ROOT, dir),
+  );
 const suites = [
   ...(skip.has("server") ? [] : [suite("server tests", "server")]),
   ...(skip.has("client") ? [] : [suite("client tests", "client")]),
