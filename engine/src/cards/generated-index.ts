@@ -407,6 +407,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Ox Token",
   "Ox Token (Ox Drover)",
   "Pegasus Token",
+  "Pentavite Token",
   "Pest Token",
   "Pest Token (Attacks)",
   "Phobos",

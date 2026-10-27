@@ -780,6 +780,7 @@ import _tokensHornetArtifactToken from "../tokens/hornet-artifact-token.js";
 import _tokensLifelinkSoldierToken from "../tokens/lifelink-soldier-token.js";
 import _tokensMapToken from "../tokens/map-token.js";
 import _tokensMerfolkToken from "../tokens/merfolk-token.js";
+import _tokensPentaviteToken from "../tokens/pentavite-token.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink from "../tokens/phyrexian-wurm-token-wurmcoil-larva-lifelink.js";
 import _tokensSpiritTokenColorless from "../tokens/spirit-token-colorless.js";
 import _tokensZombieTokenAshnodFleshMechanist from "../tokens/zombie-token-ashnod-flesh-mechanist.js";
@@ -1565,6 +1566,7 @@ const shard: CardShard = {
     _tokensLifelinkSoldierToken,
     _tokensMapToken,
     _tokensMerfolkToken,
+    _tokensPentaviteToken,
     _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink,
     _tokensSpiritTokenColorless,
     _tokensZombieTokenAshnodFleshMechanist,

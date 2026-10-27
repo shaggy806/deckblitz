@@ -5569,6 +5569,7 @@ import _poolDreamcatcher from "./pool/dreamcatcher.js";
 import _poolDreamdewEntrancer from "./pool/dreamdew-entrancer.js";
 import _poolDreamdrinkerVampire from "./pool/dreamdrinker-vampire.js";
 import _poolDreamrootCascade from "./pool/dreamroot-cascade.js";
+import _poolDreamsGrip from "./pool/dreams-grip.js";
 import _poolDreamsOfLaguna from "./pool/dreams-of-laguna.js";
 import _poolDreamscapeArtist from "./pool/dreamscape-artist.js";
 import _poolDreamshaperShaman from "./pool/dreamshaper-shaman.js";
@@ -24312,6 +24313,7 @@ import _tokensOxTokenOxDrover from "./tokens/ox-token-ox-drover.js";
 import _tokensOxToken from "./tokens/ox-token.js";
 import _tokensPegasusToken22 from "./tokens/pegasus-token-2-2.js";
 import _tokensPegasusToken from "./tokens/pegasus-token.js";
+import _tokensPentaviteToken from "./tokens/pentavite-token.js";
 import _tokensPestTokenAttacks from "./tokens/pest-token-attacks.js";
 import _tokensPestToken from "./tokens/pest-token.js";
 import _tokensPhobos from "./tokens/phobos.js";
@@ -30134,6 +30136,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDreamdewEntrancer,
   _poolDreamdrinkerVampire,
   _poolDreamrootCascade,
+  _poolDreamsGrip,
   _poolDreamsOfLaguna,
   _poolDreamscapeArtist,
   _poolDreamshaperShaman,
@@ -48883,6 +48886,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensOxToken,
   _tokensPegasusToken22,
   _tokensPegasusToken,
+  _tokensPentaviteToken,
   _tokensPestTokenAttacks,
   _tokensPestToken,
   _tokensPhobos,
@@ -54712,6 +54716,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dreamdew-entrancer": _poolDreamdewEntrancer,
   "pool/dreamdrinker-vampire": _poolDreamdrinkerVampire,
   "pool/dreamroot-cascade": _poolDreamrootCascade,
+  "pool/dreams-grip": _poolDreamsGrip,
   "pool/dreams-of-laguna": _poolDreamsOfLaguna,
   "pool/dreamscape-artist": _poolDreamscapeArtist,
   "pool/dreamshaper-shaman": _poolDreamshaperShaman,
@@ -73455,6 +73460,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/ox-token": _tokensOxToken,
   "tokens/pegasus-token-2-2": _tokensPegasusToken22,
   "tokens/pegasus-token": _tokensPegasusToken,
+  "tokens/pentavite-token": _tokensPentaviteToken,
   "tokens/pest-token-attacks": _tokensPestTokenAttacks,
   "tokens/pest-token": _tokensPestToken,
   "tokens/phobos": _tokensPhobos,
