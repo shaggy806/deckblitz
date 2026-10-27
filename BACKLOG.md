@@ -59,7 +59,7 @@ section keeps only what to do next.
 
 - **Next, once the set walk ends: work down the need keys** (`docs/plans/need-keys-after-the-walk.md`,
   planned 2026-10-27): `needs-vocabulary.mjs` gains `--audit`, `--greedy` (pairs included) and
-  `--brief`; then check every record is really blocked (the ~673 whose keys are all built, then
+  `--brief`; a trial of Sonnet against Haiku on a sample with known answers picks the model for the judging steps; then check every record is really blocked (the ~673 whose keys are all built, then
   cheap agents merging keys by family and confirming the ~320 keys of five or more cards are
   missing); then build in greedy order, a family per session (100 keys free ~1,350 cards).
 

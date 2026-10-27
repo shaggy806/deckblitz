@@ -1,6 +1,6 @@
 # Working down the need keys, after the set walk
 
-**Status:** planned (2026-10-27). Starts when the set walk's round twenty is on `main`
+**Status:** planned (2026-10-27; a Sonnet-against-Haiku trial added as Phase 0.5). Starts when the set walk's round twenty is on `main`
 (`set-walk-last-rounds.md`). No phase started yet.
 
 Once the walk ends, every Commander-legal first printing has been either authored or triaged with
@@ -41,7 +41,7 @@ For each card not in the pool, its latest record:
 - **Work by family, not by card or key.** One context load of a family's code serves every key
   in it. That holds for the audit, for building and for authoring.
 - **Cheap models for classification.** Merging keys and the "does the engine already do this?"
-  check are short reading tasks for a Sonnet or Haiku agent with a brief. Building a feature and
+  check are short reading tasks for a Sonnet or Haiku agent with a brief (Phase 0.5 picks which, per step). Building a feature and
   authoring cards use the usual `card-author` agents and sessions.
 - **One phase step per session, coordinated from a fresh session.** The same rule as
   `author-walks-parallel`. Parallel sessions own families the way the walks owned sets: they
@@ -74,6 +74,39 @@ Add to `scripts/needs-vocabulary.mjs`, tested on the current records:
 These stay in one script beside `--rank`, `--stale` and `--feature`. No new data files: the
 vocabulary JSON stays the single store.
 
+## Phase 0.5: a trial of Sonnet against Haiku (one session, before Phase 1)
+
+Steps 1.3 and 1.4 below are where the cheap agents do the judging. Before they run at scale, a
+small trial picks the model for each step. It runs on Phase 0's `--brief` output, so it costs
+nothing more to set up.
+
+- **One fixed sample, with answers known up front.**
+  - *Existence check (step 1.4):* 40 keys. Twenty are open keys of five or more cards. Ten are
+    keys already in `built`, as controls that should come back **exists**. Ten are keys whose
+    cards were authored right after their feature landed (from `COMPLETED.md`), given in their
+    pre-build wording, also controls. The open twenty are answered once by an Opus agent and
+    checked by hand where it hedges. Those answers are the key.
+  - *Merging (step 1.3):* three families of different shapes. One is large with obvious
+    duplicates (combat-restriction extensions), one is mid-sized and subtle (damage
+    modification), and one is small (about 15 keys). The answer is the Opus agent's merges and
+    groups, reviewed by the coordinator.
+- **The same brief and prompt for each model.** Two Sonnet runs and two Haiku runs of each
+  task, to see how far a model's answers vary between runs.
+- **Measured per run:** accuracy against the key, split into false *exists* and false
+  *missing* for step 1.4, and wrong merges and missed merges for step 1.3. Also tokens in and
+  out, wall time, and whether the output parsed as the requested JSON without a retry.
+- **What decides it:**
+  - **False *exists* is the costly error.** It sends a blocked card into an authoring batch,
+    which costs far more tokens than the check saves. A **wrong merge** is costly the same way:
+    it hides a real need behind a built key.
+  - Haiku takes a step if its costly errors are no more than Sonnet's plus one on the sample,
+    and its output parses.
+  - Otherwise Sonnet takes it, or Haiku goes first with Sonnet re-checking only its *exists*
+    answers and merges, if that is cheaper than Sonnet doing it all.
+- **Writing it down.** The results table (model × task: accuracy, costly errors, tokens, time)
+  and the choice go into this file under a *Trial results* heading. The prompts the trial
+  settled on go beside `--brief`, so Phase 1 runs them unchanged.
+
 ## Phase 1: check that every record is really blocked
 
 Run in order, cheapest first.
@@ -87,14 +120,14 @@ Run in order, cheapest first.
    (`card-author` agents, the digest, one verify), up to six batches in one parallel round.
    A card that is still blocked gets a new, correctly narrow key, and its key's `description` is
    tightened, so the next record doesn't repeat the mistake.
-3. **Merge keys (cheap agents, by family).** Each of the 43 families with ten or more keys gets
-   one Sonnet or Haiku agent with `--brief <family>` and `--audit`'s merge candidates for it.
+3. **Merge keys (the trial's model for this step, by family).** Each of the 43 families with ten or more keys gets
+   one agent with `--brief <family>` and `--audit`'s merge candidates for it.
    The smaller families go in pages of about 40 keys. The agent returns only alias additions for
    `needs-vocabulary.json` (`"old-key": "kept-key"`), plus **generalisation groups**: keys one
    general implementation would cover (three "can't block unless" variants are one static with
    a condition). The coordinator applies the JSON. Nobody re-edits the records: the aliases
    resolve their keys.
-4. **"Does the engine already do this?" for keys with five or more cards (~320).** Agents get 20
+4. **"Does the engine already do this?" for keys with five or more cards (~320).** Agents (the trial's model for this step) get 20
    keys each from `--brief` plus the vocabulary digest (`card-digest.mjs`), about 16 agent runs.
    Each key comes back **exists**, **partial** (what's missing, in one line) or **missing**. An
    *exists* key's cards go into the step-2 recheck batches. A *partial* key's description is
@@ -129,7 +162,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 
 ## Rough size
 
-Phase 0 is one session. Phase 1 is one cheap-agent session (steps 1.3 and 1.4), plus up to six
+Phase 0 is one session, and the trial a short one. Phase 1 is one cheap-agent session (steps 1.3 and 1.4), plus up to six
 recheck batches in one parallel round. Phase 2 Tier A is ~100 groups at three or four a
 session, so ~25–30 sessions, or five or six parallel rounds, freeing ~1,350 cards plus whatever
 Phase 1 turns up. Tier B and the top of Tier C follow if the user wants to go further.
