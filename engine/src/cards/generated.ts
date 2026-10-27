@@ -11930,6 +11930,7 @@ import _poolKnife from "./pool/knife.js";
 import _poolKnightCaptainOfEos from "./pool/knight-captain-of-eos.js";
 import _poolKnightErrantOfEos from "./pool/knight-errant-of-eos.js";
 import _poolKnightErrant from "./pool/knight-errant.js";
+import _poolKnightExemplar from "./pool/knight-exemplar.js";
 import _poolKnightLuminary from "./pool/knight-luminary.js";
 import _poolKnightOfAutumn from "./pool/knight-of-autumn.js";
 import _poolKnightOfCliffhaven from "./pool/knight-of-cliffhaven.js";
@@ -38141,6 +38142,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKnightCaptainOfEos,
   _poolKnightErrantOfEos,
   _poolKnightErrant,
+  _poolKnightExemplar,
   _poolKnightLuminary,
   _poolKnightOfAutumn,
   _poolKnightOfCliffhaven,
@@ -64365,6 +64367,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/knight-captain-of-eos": _poolKnightCaptainOfEos,
   "pool/knight-errant-of-eos": _poolKnightErrantOfEos,
   "pool/knight-errant": _poolKnightErrant,
+  "pool/knight-exemplar": _poolKnightExemplar,
   "pool/knight-luminary": _poolKnightLuminary,
   "pool/knight-of-autumn": _poolKnightOfAutumn,
   "pool/knight-of-cliffhaven": _poolKnightOfCliffhaven,

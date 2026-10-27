@@ -30247,12 +30247,19 @@ export class Game {
    * whole matched permanent uniformly — a compacted stack goes wholesale.
    * `split: true` (the default — a single *targeted* destroy effect) singles
    * one member off a stack first. */
-  private destroyByEffect(target: TargetRef, split = true, cantBeRegenerated = false): void {
+  private destroyByEffect(
+    target: TargetRef,
+    split = true,
+    cantBeRegenerated = false,
+    /** Whether it's indestructible, when a mass destroy fixed that before
+     * any of its permanents left (`drainPendingDestruction`). */
+    indestructible?: boolean,
+  ): void {
     if (target.kind !== "object") return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
-    if (this.objHasKeyword(id, "indestructible")) {
+    if (indestructible ?? this.objHasKeyword(id, "indestructible")) {
       this.emit({
         type: "permanent-destroy-prevented",
         object: id,
@@ -30675,11 +30682,19 @@ export class Game {
       this.snapshotLeaving(this.state.pendingDestruction);
       const noRegen = new Set(this.state.pendingDestructionNoRegen ?? []);
       delete this.state.pendingDestructionNoRegen;
+      // Which of them are indestructible is fixed before any leaves: they're
+      // destroyed at once (rule 701.8 with 608.2), so a Knight that Knight
+      // Exemplar makes indestructible survives the Wrath that kills Exemplar.
+      const indestructible = new Set(
+        this.state.pendingDestruction.filter(
+          (id) => this.state.objects[id]?.zone === "battlefield" && this.objHasKeyword(id, "indestructible"),
+        ),
+      );
       while (this.state.pendingDestruction.length > 0) {
         const id = this.state.pendingDestruction.shift() as ObjectId;
         const object = this.state.objects[id];
         if (object === undefined || object.zone !== "battlefield") continue;
-        this.destroyByEffect({ kind: "object", object: id }, false, noRegen.has(id));
+        this.destroyByEffect({ kind: "object", object: id }, false, noRegen.has(id), indestructible.has(id));
       }
     });
   }

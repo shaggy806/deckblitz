@@ -250,3 +250,36 @@ describe("Thraben Watcher", () => {
     expect(pt(game, watcher)).toEqual({ power: 2, toughness: 2 });
   });
 });
+
+describe("Knight Exemplar", () => {
+  it("a Wrath destroys only Exemplar: the other Knight's indestructible is fixed before anything leaves", () => {
+    const { game } = table();
+    const exemplar = spawn(game, "Knight Exemplar", A);
+    const knight = spawn(game, "Accorder Paladin", A);
+    expect(keywords(game, knight).has("indestructible")).toBe(true);
+    game.debugApplyEffect(A, { kind: "destroy-all", filter: { type: "creature" } });
+    settle(game);
+    expect(zone(game, exemplar)).toBe("graveyard");
+    expect(zone(game, knight)).toBe("battlefield");
+  });
+
+  it("two Exemplars each keep the other alive", () => {
+    const { game } = table();
+    const one = spawn(game, "Knight Exemplar", A);
+    const two = spawn(game, "Knight Exemplar", A);
+    game.debugApplyEffect(A, { kind: "destroy-all", filter: { type: "creature" } });
+    settle(game);
+    expect(zone(game, one)).toBe("battlefield");
+    expect(zone(game, two)).toBe("battlefield");
+  });
+
+  it("the same for any lord: Sephara's flyer survives the Wrath that kills Sephara", () => {
+    const { game } = table();
+    const sephara = spawn(game, "Sephara, Sky's Blade", A);
+    const angel = spawn(game, "Serra Angel", A);
+    game.debugApplyEffect(A, { kind: "destroy-all", filter: { type: "creature" } });
+    settle(game);
+    expect(zone(game, sephara)).toBe("graveyard");
+    expect(zone(game, angel)).toBe("battlefield");
+  });
+});

@@ -1,7 +1,7 @@
 {
   "batch": "B235",
   "status": "complete",
-  "ranks": "The need-keys recheck list R1 (Phase 1 step 2)",
+  "ranks": "The need-keys recheck list R1 (Phase 1 step 2); a mass destroy now fixes which permanents are indestructible before any leaves (Knight Exemplar)",
   "authored": [
     {
       "name": "Accumulate Wisdom",
@@ -161,13 +161,6 @@
       "tested": true
     },
     {
-      "name": "Éomer, Marshal of Rohan",
-      "files": [
-        "engine/src/cards/pool/eomer-marshal-of-rohan.ts"
-      ],
-      "tested": true
-    },
-    {
       "name": "Far Wanderings",
       "files": [
         "engine/src/cards/pool/far-wanderings.ts"
@@ -238,6 +231,13 @@
         "engine/src/cards/pool/hour-of-promise.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Knight Exemplar",
+      "files": [
+        "engine/src/cards/pool/knight-exemplar.ts"
+      ],
+      "tested": true
     },
     {
       "name": "Kulrath Knight",
@@ -511,6 +511,13 @@
         "engine/src/cards/pool/yorvo-lord-of-garenbrig.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Éomer, Marshal of Rohan",
+      "files": [
+        "engine/src/cards/pool/eomer-marshal-of-rohan.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -605,13 +612,6 @@
         "condition:defender-no-opponent-more-life"
       ],
       "why": "Same comparison as Sword Coast Sailor: no opponent has more life than the defending player."
-    },
-    {
-      "name": "Knight Exemplar",
-      "needs": [
-        "bug:destroy-all-indestructible-snapshot"
-      ],
-      "why": "destroy-all must fix which permanents are indestructible before any leave (ruling); a Wrath destroyed a Knight the Exemplar made indestructible along with it."
     },
     {
       "name": "Nexus of Becoming",

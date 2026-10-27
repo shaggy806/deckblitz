@@ -2596,11 +2596,6 @@
    "example": "Avatar Destiny: returns itself and the chosen milled creature card together.",
    "description": "A simultaneous move that needs a choice first: a `simultaneous` sequence can't hold a step that asks, so 'return this card and up to one creature card milled this way' becomes two leave events."
   },
-  "bug:destroy-all-indestructible-snapshot": {
-   "family": "bug:simultaneous-zone-moves",
-   "example": "Knight Exemplar: under a Wrath the other Knights stay indestructible as Exemplar dies with them (ruling); a test showed them destroyed.",
-   "description": "destroy-all must fix which permanents are indestructible before any of them leaves (rule 701.8 with 608.2): today a Wrath destroys a creature whose indestructible came from a lord destroyed in the same sweep."
-  },
   "bug:simultaneous-discards": {
    "family": "bug:simultaneous-zone-moves",
    "example": "Burning Inquiry: each player discards three at random, all at the same time (ruling). Noggle Ransacker, in the pool, has the same gap without a ruling saying so.",

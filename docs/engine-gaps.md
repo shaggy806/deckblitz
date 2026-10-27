@@ -21,12 +21,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   comes out). Found by batch 235's group E, whose Elspeth, Knight-Errant ("Artifacts, creatures,
   enchantments, and lands you control have indestructible") was tested and destroyed. Blocks
   Elspeth (`effect:emblem-static-abilities`); Nissa is the only pool card with such an emblem.
-- **`destroy-all` doesn't fix indestructibility before anything leaves.** Rule 701.8 with 608.2:
-  a "destroy all" decides which permanents are destroyed, and which are indestructible, once,
-  then moves them together. Batch 235's group D tested Knight Exemplar ("Other Knight creatures
-  you control get +1/+1 and have indestructible") under a Wrath: the other Knight was destroyed
-  along with Exemplar, where its ruling keeps it. Not yet reproduced outside that draft; blocks
-  Knight Exemplar (`bug:destroy-all-indestructible-snapshot`).
 - **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
   `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
   context without the enclosing loop's player binding (game.ts, where the choice's `then` is
