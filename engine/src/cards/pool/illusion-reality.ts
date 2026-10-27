@@ -7,7 +7,7 @@ const FACES = ["Illusion // Reality", "Illusion", "Reality"];
 // halves.
 export default defineCard({
   name: "Illusion // Reality",
-  manaCost: "{2}{U}{G}",
+  manaCost: "{U}{2}{G}",
   colors: ["U", "G"],
   types: ["instant"],
   text: "Target spell or permanent becomes the color of your choice until end of turn.\n//\nDestroy target artifact.",

@@ -14,7 +14,7 @@ const FACES = ["Night // Day", "Night", "Day"];
 // the halves.
 export default defineCard({
   name: "Night // Day",
-  manaCost: "{2}{W}{B}",
+  manaCost: "{B}{2}{W}",
   colors: ["W", "B"],
   types: ["instant"],
   text: "Target creature gets -1/-1 until end of turn.\n//\nCreatures target player controls get +1/+1 until end of turn.",
