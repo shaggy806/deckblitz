@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3827 already implemented / 1173 missing (marks refreshed 2026-10-27)
+3835 already implemented / 1165 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1733,7 +1733,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1740  Leyline of the Guildpact                 {G/W}{G/U}{B/G}{R/G} Enchantment
 [x]  1741  Alesha, Who Laughs at Fate               {1}{B}{R}        Legendary Creature — Human Warrior
 [x]  1742  Blue Sun's Zenith                        {X}{U}{U}{U}     Instant
-[ ]  1743  Fable of the Mirror-Breaker // Reflection of Kiki-Jiki {3}              Enchantment — Saga // Enchantment Creature — Goblin Shaman
+[x]  1743  Fable of the Mirror-Breaker // Reflection of Kiki-Jiki {3}              Enchantment — Saga // Enchantment Creature — Goblin Shaman
 [x]  1744  The Scarab God                           {3}{U}{B}        Legendary Creature — God
 [x]  1745  Archmage's Charm                         {U}{U}{U}        Instant
 [x]  1746  Jaxis, the Troublemaker                  {3}{R}           Legendary Creature — Human Warrior
@@ -1892,7 +1892,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1899  Festering Thicket                        {0}              Land — Swamp Forest
 [x]  1900  Vile Entomber                            {2}{B}{B}        Creature — Zombie Warlock
 [ ]  1901  Mutavault                                {0}              Land
-[ ]  1902  Hostage Taker                            {2}{U}{B}        Creature — Human Pirate
+[x]  1902  Hostage Taker                            {2}{U}{B}        Creature — Human Pirate
 [x]  1903  Loran's Escape                           {W}              Instant
 [x]  1904  Nighthawk Scavenger                      {1}{B}{B}        Creature — Vampire Rogue
 [x]  1905  Sylvan Caryatid                          {1}{G}           Creature — Plant
@@ -2007,7 +2007,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2014  Conduit Pylons                           {0}              Land — Desert
 [ ]  2015  Mutational Advantage                     {1}{G}{U}        Instant
 [x]  2016  Falkenrath Noble                         {3}{B}           Creature — Vampire Noble
-[ ]  2017  Daretti, Scrap Savant                    {3}{R}           Legendary Planeswalker — Daretti
+[x]  2017  Daretti, Scrap Savant                    {3}{R}           Legendary Planeswalker — Daretti
 [ ]  2018  Righteous Valkyrie                       {2}{W}           Creature — Angel Cleric
 [ ]  2019  Thirst for Knowledge                     {2}{U}           Instant
 [x]  2020  Wooded Bastion                           {0}              Land
@@ -3337,7 +3337,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3344  Planar Engineering                       {3}{G}           Sorcery
 [x]  3345  Evolutionary Leap                        {1}{G}           Enchantment
 [x]  3346  Goblin Chirurgeon                        {R}              Creature — Goblin Shaman
-[ ]  3347  Goblin Recruiter                         {1}{R}           Creature — Goblin
+[x]  3347  Goblin Recruiter                         {1}{R}           Creature — Goblin
 [x]  3348  Sigarda, Font of Blessings               {2}{G}{W}        Legendary Creature — Angel
 [x]  3349  Mycosynth Golem                          {11}             Artifact Creature — Golem
 [ ]  3350  Chandra, Awakened Inferno                {4}{R}{R}        Legendary Planeswalker — Chandra
@@ -3621,7 +3621,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3628  Prosperity                               {X}{U}           Sorcery
 [x]  3629  Sporemound                               {3}{G}{G}        Creature — Fungus
 [ ]  3630  Clone Legion                             {7}{U}{U}        Sorcery
-[ ]  3631  Alisaie Leveilleur                       {2}{W}           Legendary Creature — Elf Wizard
+[x]  3631  Alisaie Leveilleur                       {2}{W}           Legendary Creature — Elf Wizard
 [ ]  3632  Storm of Saruman                         {4}{U}{U}        Enchantment
 [x]  3633  Bristling Backwoods                      {0}              Land — Desert
 [ ]  3634  Dragonborn Champion                      {2}{R}{G}        Creature — Dragon Warrior
@@ -3974,7 +3974,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3981  Shared Summons                           {3}{G}{G}        Instant
 [x]  3982  Well Rested                              {1}{G}           Enchantment — Aura
 [ ]  3983  Minsc & Boo, Timeless Heroes             {2}{R}{G}        Legendary Planeswalker — Minsc
-[ ]  3984  Lilypad Village                          {0}              Land
+[x]  3984  Lilypad Village                          {0}              Land
 [ ]  3985  Encroaching Mycosynth                    {3}{U}           Artifact
 [x]  3986  Selfless Safewright                      {3}{G}{G}        Creature — Elf Warrior
 [ ]  3987  Unsettled Mariner                        {W}{U}           Creature — Shapeshifter
@@ -4124,7 +4124,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
 [ ]  4132  Crucible of the Spirit Dragon            {0}              Land
 [x]  4133  Tectonic Edge                            {0}              Land
-[ ]  4134  Cathartic Pyre                           {1}{R}           Instant
+[x]  4134  Cathartic Pyre                           {1}{R}           Instant
 [x]  4135  Szarel, Genesis Shepherd                 {2}{B}{R}{G}     Legendary Creature — Insect Druid
 [x]  4136  Nested Shambler                          {B}              Creature — Zombie
 [ ]  4137  Beza, the Bounding Spring                {2}{W}{W}        Legendary Creature — Elemental Elk
@@ -4406,7 +4406,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4413  Moogles' Valor                           {3}{W}{W}        Instant
 [ ]  4414  Urabrask, Heretic Praetor                {3}{R}{R}        Legendary Creature — Phyrexian Praetor
 [x]  4415  High-Society Hunter                      {3}{B}{B}        Creature — Vampire Noble
-[ ]  4416  Mage-Ring Network                        {0}              Land
+[x]  4416  Mage-Ring Network                        {0}              Land
 [x]  4417  The Emperor of Palamecia // The Lord Master of Hell {2}              Legendary Creature — Human Noble Wizard // Legendary Creature — Demon Noble Wizard
 [x]  4418  Thieving Varmint                         {1}{B}           Creature — Varmint
 [ ]  4419  Gyruda, Doom of Depths                   {4}{U/B}{U/B}    Legendary Creature — Demon Kraken

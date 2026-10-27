@@ -16317,6 +16317,15 @@ export class Game {
     arrange?: ManaSourceArrangement,
   ): ManaPayment | null {
     const plan = planPayment(this.manaPlanningView(player, purpose, arrange), cost, purpose, avoid, exclude);
+    if (plan === null && avoid !== undefined) {
+      // `avoid` is only an order too, and the greedy planner can fail with
+      // it: Dread Statuary's {4} with its own {C} left for last, beside a
+      // Swamp, a Mountain and Crypt of the Eternals, found no payment the
+      // legality check (which avoids nothing) had found (a fuzzer crash,
+      // 2026-10-27).
+      const retried = this.payMana(player, cost, undefined, exclude, purpose, arrange);
+      if (retried !== null) return retried;
+    }
     if (plan !== null || arrange === undefined || (arrange.first === undefined && arrange.last === undefined)) {
       return plan;
     }
