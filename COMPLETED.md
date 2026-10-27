@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"With the same name as that spell", and Odyssey — Odyssey is whole** (batch 231, the fifth
+  middle walk's last, 2026-10-27, `amount:count-in-graveyards-same-name-as-trigger-spell`):
+  **built** `CardFilter.sameNameAsTriggerObject` — bound as the effect applies to the trigger
+  object and its name (rule 201.2a), as `sameNameAsTarget` is to a target slot — so a
+  `countInGraveyard` of it is the Shrines' "the number of cards in all graveyards with the same
+  name as that spell" (`same-name-as-trigger-object.test.ts`): Cabal, Cephalid and Dwarven Shrine
+  here, Aven and Nantuko Shrine from batch 225. 76 of the 106 left authored — Wayward Angel,
+  Cabal Patriarch, the five Spheres, Life Burst, Mind Burst, Muscle Burst, Testament of Faith,
+  Still Life, the Mystics, the Desires — by five `card-author` agents and the lead, and 30
+  blocked (`B231.json`). With the fifth middle walk's range (Judgment, Torment, Odyssey) done.
 - **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
   walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
   `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",

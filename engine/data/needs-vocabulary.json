@@ -12175,6 +12175,42 @@
   "trigger:gains-control-of-this": {
    "family": "trigger:lose-control-trigger",
    "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
+  },
+  "effect:discard-chosen-exact-count": {
+   "family": "effect:discard-chosen-count",
+   "example": "Last Rites: 'Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way' — discard-chosen's upTo lets the caster choose fewer."
+  },
+  "static:protection-except-this-aura": {
+   "family": "keyword:protection-from-everything",
+   "example": "Tattoo Ward: 'Enchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove Tattoo Ward.'"
+  },
+  "amount:damage-dealt-to-target-creature-this-turn": {
+   "family": "effect:amount-new-variants",
+   "example": "Whipkeeper: 'Target creature deals damage to itself equal to the damage already dealt to it this turn' — damage regenerated away still counts."
+  },
+  "replacement:prevent-next-damage-from-chosen-source-any-recipient": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "example": "Pilgrim of Virtue: 'the next time a black source of your choice would deal damage this turn, prevent that damage' — to anything, not only you or a target."
+  },
+  "effect:unless-discard-filtered-card": {
+   "family": "effect:unless-target-controller",
+   "example": "Cursed Monstrosity: 'sacrifice it unless you discard a land card' — the unless discard option takes no filter."
+  },
+  "effect:discard-duplicate-names": {
+   "family": "decision:discard-any-number",
+   "example": "Hint of Insanity: 'discards all nonland cards with the same name as another card in their hand'."
+  },
+  "effect:attach-aura-to-land-chosen-by-player": {
+   "family": "effect:attach-extensions",
+   "example": "Steam Vines: 'that land's controller attaches Steam Vines to a land of their choice' — chosen, not targeted, by another player."
+  },
+  "effect:reveal-top-opponent-library-you-choose-to-graveyard": {
+   "family": "effect:look-and-choose-target-opponent-library",
+   "example": "Balshan Beguiler: 'that player reveals the top two cards of their library. Choose one of them and put it into their graveyard.'"
+  },
+  "cost:choose-number-additional": {
+   "family": "decision:choose-number-on-resolution",
+   "example": "Liquid Fire: 'As an additional cost to cast this spell, choose a number between 0 and 5' — a castModal of six modes makes it a modal spell."
   }
  }
 }
