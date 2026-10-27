@@ -393,6 +393,7 @@ import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
 import _poolKarokWrangler from "../pool/karok-wrangler.js";
 import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
+import _poolKeldonMantle from "../pool/keldon-mantle.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
 import _poolKessigDireSwine from "../pool/kessig-dire-swine.js";
@@ -1217,6 +1218,7 @@ const shard: CardShard = {
     _poolKarnArgentDefender,
     _poolKarokWrangler,
     _poolKataraSeekingRevenge,
+    _poolKeldonMantle,
     _poolKelpieGuide,
     _poolKelsienThePlague,
     _poolKessigDireSwine,

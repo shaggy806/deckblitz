@@ -128,6 +128,7 @@ import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
+import _poolCrosissCatacombs from "../pool/crosiss-catacombs.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
@@ -363,6 +364,7 @@ import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLurkingCrocodile from "../pool/lurking-crocodile.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
+import _poolMagnigothTreefolk from "../pool/magnigoth-treefolk.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
 import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
 import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
@@ -892,6 +894,7 @@ const shard: CardShard = {
     _poolCowabunga,
     _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
+    _poolCrosissCatacombs,
     _poolCrosissCharm,
     _poolCruelAlliance,
     _poolCryptRipper,
@@ -1127,6 +1130,7 @@ const shard: CardShard = {
     _poolLurkingCrocodile,
     _poolLuxCannon,
     _poolMagmaw,
+    _poolMagnigothTreefolk,
     _poolMagusLuceaKane,
     _poolMakeYourOwnLuck,
     _poolMakeshiftBattalion,

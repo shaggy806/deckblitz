@@ -154,6 +154,7 @@ import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
+import _poolDarigaazsCaldera from "../pool/darigaazs-caldera.js";
 import _poolDarkDabbling from "../pool/dark-dabbling.js";
 import _poolDarkMaze from "../pool/dark-maze.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
@@ -964,6 +965,7 @@ const shard: CardShard = {
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
     _poolDanithaSpearOfAgony,
+    _poolDarigaazsCaldera,
     _poolDarkDabbling,
     _poolDarkMaze,
     _poolDarksteelAxe,

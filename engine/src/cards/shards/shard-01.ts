@@ -273,6 +273,7 @@ import _poolHeroesRemembered from "../pool/heroes-remembered.js";
 import _poolHeroicReinforcements from "../pool/heroic-reinforcements.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
+import _poolHonorableScout from "../pool/honorable-scout.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
 import _poolHorizonChimera from "../pool/horizon-chimera.js";
 import _poolHowlOfTheHorde from "../pool/howl-of-the-horde.js";
@@ -1037,6 +1038,7 @@ const shard: CardShard = {
     _poolHeroicReinforcements,
     _poolHighlandGiant,
     _poolHomaridShaman,
+    _poolHonorableScout,
     _poolHordelingOutburst,
     _poolHorizonChimera,
     _poolHowlOfTheHorde,

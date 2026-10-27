@@ -385,6 +385,7 @@ import _poolMakeMischief from "../pool/make-mischief.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
+import _poolMarchOfSouls from "../pool/march-of-souls.js";
 import _poolMarchOfTheReturned from "../pool/march-of-the-returned.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
@@ -1161,6 +1162,7 @@ const shard: CardShard = {
     _poolMalametBrawler,
     _poolMalametVeteran,
     _poolMaraudingBrinefang,
+    _poolMarchOfSouls,
     _poolMarchOfTheReturned,
     _poolMarduAscendancy,
     _poolMarshGas,

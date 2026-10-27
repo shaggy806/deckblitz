@@ -634,6 +634,7 @@ import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolStalactiteStalker from "../pool/stalactite-stalker.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolStarseerMentor from "../pool/starseer-mentor.js";
+import _poolSteelLeafPaladin from "../pool/steel-leaf-paladin.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolSterlingSupplier from "../pool/sterling-supplier.js";
 import _poolStoicSphinx from "../pool/stoic-sphinx.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolStalactiteStalker,
     _poolStarryEyedSkyrider,
     _poolStarseerMentor,
+    _poolSteelLeafPaladin,
     _poolSteelshapersGift,
     _poolSterlingSupplier,
     _poolStoicSphinx,

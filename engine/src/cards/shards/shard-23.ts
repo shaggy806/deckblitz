@@ -299,6 +299,7 @@ import _poolHiddenStrings from "../pool/hidden-strings.js";
 import _poolHideousEnd from "../pool/hideous-end.js";
 import _poolHighbornGhoul from "../pool/highborn-ghoul.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
+import _poolHobble from "../pool/hobble.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
 import _poolHoldTheGates from "../pool/hold-the-gates.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolHideousEnd,
     _poolHighbornGhoul,
     _poolHiredBlade,
+    _poolHobble,
     _poolHobgoblinDragoon,
     _poolHoldTheGates,
     _poolHomewardPath,

@@ -595,6 +595,7 @@ import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
+import _poolSinisterStrength from "../pool/sinister-strength.js";
 import _poolSkaabGoliath from "../pool/skaab-goliath.js";
 import _poolSkyScourer from "../pool/sky-scourer.js";
 import _poolSkyclaveBasilica from "../pool/skyclave-basilica.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolSilkbindFaerie,
     _poolSilkguard,
     _poolSimicAscendancy,
+    _poolSinisterStrength,
     _poolSkaabGoliath,
     _poolSkyScourer,
     _poolSkyclaveBasilica,

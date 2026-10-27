@@ -350,6 +350,7 @@ import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumbleNaturalist from "../pool/humble-naturalist.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
+import _poolHuntingDrake from "../pool/hunting-drake.js";
 import _poolHush from "../pool/hush.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
 import _poolIcingdeathFrostTyrant from "../pool/icingdeath-frost-tyrant.js";
@@ -645,6 +646,7 @@ import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
+import _poolSurpriseDeployment from "../pool/surprise-deployment.js";
 import _poolSurvive from "../pool/survive.js";
 import _poolSwanSong from "../pool/swan-song.js";
 import _poolSwarmbornGiant from "../pool/swarmborn-giant.js";
@@ -1120,6 +1122,7 @@ const shard: CardShard = {
     _poolHumbleNaturalist,
     _poolHumblingElder,
     _poolHuntersBow,
+    _poolHuntingDrake,
     _poolHush,
     _poolIceCreamKitty,
     _poolIcingdeathFrostTyrant,
@@ -1415,6 +1418,7 @@ const shard: CardShard = {
     _poolSupplyRunners,
     _poolSupremeVerdict,
     _poolSurgeEngine,
+    _poolSurpriseDeployment,
     _poolSurvive,
     _poolSwanSong,
     _poolSwarmbornGiant,
