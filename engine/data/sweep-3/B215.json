@@ -1,0 +1,787 @@
+{
+  "batch": "B215",
+  "status": "complete",
+  "ranks": "Mirrodin (MRD, 2003-10-02): its ~110 most-played left of 131 (the third middle walk, round seventeen); no engine change",
+  "authored": [
+    {
+      "name": "Altar of Shadows",
+      "files": [
+        "engine/src/cards/pool/altar-of-shadows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Assert Authority",
+      "files": [
+        "engine/src/cards/pool/assert-authority.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Auriok Bladewarden",
+      "files": [
+        "engine/src/cards/pool/auriok-bladewarden.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Banshee's Blade",
+      "files": [
+        "engine/src/cards/pool/banshees-blade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodscent",
+      "files": [
+        "engine/src/cards/pool/bloodscent.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bosh, Iron Golem",
+      "files": [
+        "engine/src/cards/pool/bosh-iron-golem.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Broodstar",
+      "files": [
+        "engine/src/cards/pool/broodstar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chalice of the Void",
+      "files": [
+        "engine/src/cards/pool/chalice-of-the-void.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clockwork Beetle",
+      "files": [
+        "engine/src/cards/pool/clockwork-beetle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clockwork Condor",
+      "files": [
+        "engine/src/cards/pool/clockwork-condor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clockwork Dragon",
+      "files": [
+        "engine/src/cards/pool/clockwork-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Clockwork Vorrac",
+      "files": [
+        "engine/src/cards/pool/clockwork-vorrac.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Contaminated Bond",
+      "files": [
+        "engine/src/cards/pool/contaminated-bond.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Copperhoof Vorrac",
+      "files": [
+        "engine/src/cards/pool/copperhoof-vorrac.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Domineer",
+      "files": [
+        "engine/src/cards/pool/domineer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dream's Grip",
+      "files": [
+        "engine/src/cards/pool/dreams-grip.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dross Scorpion",
+      "files": [
+        "engine/src/cards/pool/dross-scorpion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Electrostatic Bolt",
+      "files": [
+        "engine/src/cards/pool/electrostatic-bolt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Farsight Mask",
+      "files": [
+        "engine/src/cards/pool/farsight-mask.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flayed Nim",
+      "files": [
+        "engine/src/cards/pool/flayed-nim.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forge Armor",
+      "files": [
+        "engine/src/cards/pool/forge-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fractured Loyalty",
+      "files": [
+        "engine/src/cards/pool/fractured-loyalty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gate to the Aether",
+      "files": [
+        "engine/src/cards/pool/gate-to-the-aether.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grab the Reins",
+      "files": [
+        "engine/src/cards/pool/grab-the-reins.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Granite Shard",
+      "files": [
+        "engine/src/cards/pool/granite-shard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Heartwood Shard",
+      "files": [
+        "engine/src/cards/pool/heartwood-shard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Irradiate",
+      "files": [
+        "engine/src/cards/pool/irradiate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jinxed Choker",
+      "files": [
+        "engine/src/cards/pool/jinxed-choker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Journey of Discovery",
+      "files": [
+        "engine/src/cards/pool/journey-of-discovery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leonin Abunas",
+      "files": [
+        "engine/src/cards/pool/leonin-abunas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leonin Bladetrap",
+      "files": [
+        "engine/src/cards/pool/leonin-bladetrap.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Leonin Den-Guard",
+      "files": [
+        "engine/src/cards/pool/leonin-den-guard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lifespark Spellbomb",
+      "files": [
+        "engine/src/cards/pool/lifespark-spellbomb.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lightning Coils",
+      "files": [
+        "engine/src/cards/pool/lightning-coils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Living Hive",
+      "files": [
+        "engine/src/cards/pool/living-hive.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lumengrid Augur",
+      "files": [
+        "engine/src/cards/pool/lumengrid-augur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Molder Slug",
+      "files": [
+        "engine/src/cards/pool/molder-slug.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Molten Rain",
+      "files": [
+        "engine/src/cards/pool/molten-rain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Myr Mindservant",
+      "files": [
+        "engine/src/cards/pool/myr-mindservant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Needlebug",
+      "files": [
+        "engine/src/cards/pool/needlebug.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nightmare Lash",
+      "files": [
+        "engine/src/cards/pool/nightmare-lash.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nim Devourer",
+      "files": [
+        "engine/src/cards/pool/nim-devourer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nim Shrieker",
+      "files": [
+        "engine/src/cards/pool/nim-shrieker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nuisance Engine",
+      "files": [
+        "engine/src/cards/pool/nuisance-engine.ts",
+        "engine/src/cards/tokens/pest-token-colorless-artifact-0-1.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "One Dozen Eyes",
+      "files": [
+        "engine/src/cards/pool/one-dozen-eyes.ts",
+        "engine/src/cards/tokens/beast-token-5-5.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Override",
+      "files": [
+        "engine/src/cards/pool/override.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pentavus",
+      "files": [
+        "engine/src/cards/pool/pentavus.ts",
+        "engine/src/cards/tokens/pentavite-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Promise of Power",
+      "files": [
+        "engine/src/cards/pool/promise-of-power.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyrite Spellbomb",
+      "files": [
+        "engine/src/cards/pool/pyrite-spellbomb.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reiver Demon",
+      "files": [
+        "engine/src/cards/pool/reiver-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Relic Bane",
+      "files": [
+        "engine/src/cards/pool/relic-bane.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Roar of the Kha",
+      "files": [
+        "engine/src/cards/pool/roar-of-the-kha.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Serum Tank",
+      "files": [
+        "engine/src/cards/pool/serum-tank.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shrapnel Blast",
+      "files": [
+        "engine/src/cards/pool/shrapnel-blast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skeleton Shard",
+      "files": [
+        "engine/src/cards/pool/skeleton-shard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyhunter Cub",
+      "files": [
+        "engine/src/cards/pool/skyhunter-cub.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Solar Tide",
+      "files": [
+        "engine/src/cards/pool/solar-tide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spikeshot Goblin",
+      "files": [
+        "engine/src/cards/pool/spikeshot-goblin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sun Droplet",
+      "files": [
+        "engine/src/cards/pool/sun-droplet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sword of Kaldra",
+      "files": [
+        "engine/src/cards/pool/sword-of-kaldra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Taj-Nar Swordsmith",
+      "files": [
+        "engine/src/cards/pool/taj-nar-swordsmith.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tangleroot",
+      "files": [
+        "engine/src/cards/pool/tangleroot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tel-Jilad Archers",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-archers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tel-Jilad Stylus",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-stylus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tempest of Light",
+      "files": [
+        "engine/src/cards/pool/tempest-of-light.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Turn to Dust",
+      "files": [
+        "engine/src/cards/pool/turn-to-dust.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vulshok Battlemaster",
+      "files": [
+        "engine/src/cards/pool/vulshok-battlemaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vulshok Gauntlets",
+      "files": [
+        "engine/src/cards/pool/vulshok-gauntlets.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wail of the Nim",
+      "files": [
+        "engine/src/cards/pool/wail-of-the-nim.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "War Elemental",
+      "files": [
+        "engine/src/cards/pool/war-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wrench Mind",
+      "files": [
+        "engine/src/cards/pool/wrench-mind.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Goblin Charbelcher",
+      "needs": [
+        "effect:reveal-until"
+      ],
+      "why": "Reveal-until's rest has no 'bottom in any order', and no amount counts the nonland cards revealed, doubled if the land found is a Mountain."
+    },
+    {
+      "name": "Quicksilver Fountain",
+      "needs": [
+        "effect:become-basic-land-type",
+        "decision:trigger-player-chooses-target"
+      ],
+      "why": "The upkeep's active player chooses the target, not the Fountain's controller; the land must become an Island (types replaced) while it has a flood counter."
+    },
+    {
+      "name": "Scythe of the Wretched",
+      "needs": [
+        "trigger:creature-damaged-by-source-dies"
+      ],
+      "why": "No trigger on a creature dealt damage this turn by the equipped creature dying, returning it and attaching the Equipment."
+    },
+    {
+      "name": "Damping Matrix",
+      "needs": [
+        "effect:prohibit-non-mana-abilities"
+      ],
+      "why": "prohibits.abilitiesOf blocks mana abilities too; no mana-ability exception."
+    },
+    {
+      "name": "Myr Adapter",
+      "needs": [
+        "effect:count-equipment-attached-to-source"
+      ],
+      "why": "grantPtPerCount can't count the Equipment attached to this permanent."
+    },
+    {
+      "name": "Razor Barrier",
+      "needs": [
+        "effect:grant-protection-choice"
+      ],
+      "why": "No effect grants protection until end of turn from a choice of artifacts or a chosen color."
+    },
+    {
+      "name": "Disarm",
+      "needs": [
+        "effect:unattach-effect"
+      ],
+      "why": "unattach targets the attachment itself; nothing unattaches every Equipment attached to target creature."
+    },
+    {
+      "name": "March of the Machines",
+      "needs": [
+        "static:animate-pt-equal-mana-value"
+      ],
+      "why": "setBasePt takes numbers, not each artifact's own mana value."
+    },
+    {
+      "name": "Awe Strike",
+      "needs": [
+        "replacement:prevent-damage-by-target-this-turn"
+      ],
+      "why": "No prevention of the next damage target creature would deal, with life gained equal to it."
+    },
+    {
+      "name": "Temporal Cascade",
+      "needs": [
+        "effect:shuffle-hand-and-graveyard-into-library"
+      ],
+      "why": "No effect shuffles each player's hand and graveyard into their library (the entwined mode)."
+    },
+    {
+      "name": "Psychogenic Probe",
+      "needs": [
+        "trigger:player-shuffles-library"
+      ],
+      "why": "No trigger on a spell or ability causing a player to shuffle their library."
+    },
+    {
+      "name": "Spoils of the Vault",
+      "needs": [
+        "decision:name-a-card"
+      ],
+      "why": "No 'choose a card name' decision."
+    },
+    {
+      "name": "Thought Prison",
+      "needs": [
+        "trigger:cast-shares-color-or-mana-value-with-imprinted"
+      ],
+      "why": "A cast trigger can't compare a spell's color or mana value with the imprinted card; the imprint from a revealed hand has no shape either."
+    },
+    {
+      "name": "Culling Scales",
+      "needs": [
+        "filter:least-mana-value-among-nonland-permanents"
+      ],
+      "why": "No filter for the lowest mana value among nonland permanents, re-checked on resolution."
+    },
+    {
+      "name": "Neurok Spy",
+      "needs": [
+        "static:unblockable-defending-player-condition"
+      ],
+      "why": "A static condition can't read what the defending player controls (artifact-walk)."
+    },
+    {
+      "name": "Worldslayer",
+      "needs": [
+        "effect:destroy-all-except-source"
+      ],
+      "why": "destroy-all has no exceptSource: 'all permanents other than Worldslayer'."
+    },
+    {
+      "name": "Spellweaver Helix",
+      "needs": [
+        "keyword:imprint-same-name"
+      ],
+      "why": "Two imprinted sorceries, a trigger on casting a card with one's name, then a copy of the other."
+    },
+    {
+      "name": "Consume Spirit",
+      "needs": [
+        "cost:x-spend-color-restriction"
+      ],
+      "why": "Nothing says 'Spend only black mana on X' on a spell."
+    },
+    {
+      "name": "Liar's Pendulum",
+      "needs": [
+        "decision:name-a-card"
+      ],
+      "why": "Naming a card, an opponent's guess and an optional hand reveal."
+    },
+    {
+      "name": "Myr Incubator",
+      "needs": [
+        "effect:search-library-to-exile-linked"
+      ],
+      "why": "search-library can't put the cards into exile (then count them for Myr tokens)."
+    },
+    {
+      "name": "Synod Sanctum",
+      "needs": [
+        "effect:return-linked-exiled-under-your-control"
+      ],
+      "why": "return-exiled-by-source returns linked cards under their owners' control, not yours."
+    },
+    {
+      "name": "Betrayal of Flesh",
+      "needs": [
+        "cost:kicker-nonmana-cost"
+      ],
+      "why": "The entwine cost 'Sacrifice three lands' isn't mana."
+    },
+    {
+      "name": "Blinding Beam",
+      "needs": [
+        "effect:skip-next-untap-all-controllers"
+      ],
+      "why": "skip-next-untap stops only that player's own permanents; the ruling covers every creature that would untap in their untap step (Seedborn Muse)."
+    },
+    {
+      "name": "Mirror Golem",
+      "needs": [
+        "static:protection-from-exiled-card-types"
+      ],
+      "why": "No static grants protection from the card types of the card exiled with the source."
+    },
+    {
+      "name": "Second Sunrise",
+      "needs": [
+        "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "No filter for cards put into a graveyard from the battlefield this turn."
+    },
+    {
+      "name": "Auriok Steelshaper",
+      "needs": [
+        "cost:equip-ability-cost-reduction"
+      ],
+      "why": "abilityCostModification has no equip-only option."
+    },
+    {
+      "name": "Loxodon Punisher",
+      "needs": [
+        "effect:count-equipment-attached-to-source"
+      ],
+      "why": "grantPtPerCount can't count the Equipment attached to this permanent."
+    },
+    {
+      "name": "Hum of the Radix",
+      "needs": [
+        "static:cost-increase-per-count"
+      ],
+      "why": "costModification.increaseGeneric is a fixed number; nothing counts the artifacts the caster controls."
+    },
+    {
+      "name": "Mourner's Shield",
+      "needs": [
+        "replacement:prevent-all-damage-from-chosen-source-this-turn",
+        "filter:shares-color-with-linked-exile"
+      ],
+      "why": "Prevention from a chosen source protects only you or one target, and nothing requires the source to share a color with the imprinted card."
+    },
+    {
+      "name": "Empyrial Plate",
+      "needs": [
+        "static:grant-pt-per-cards-in-hand"
+      ],
+      "why": "grantPtPerCount can't count cards in hand."
+    },
+    {
+      "name": "Soul Foundry",
+      "needs": [
+        "effect:token-copy-of-exiled-card",
+        "cost:x-equals-linked-exiled-mana-value"
+      ],
+      "why": "create-token-copy can't copy the imprinted card, and X can't be fixed to its mana value."
+    },
+    {
+      "name": "Timesifter",
+      "needs": [
+        "amount:greatest-mana-value-this-way",
+        "effect:extra-turn-to-greatest-exiled-repeat-ties"
+      ],
+      "why": "Each player exiles, mana values compared, ties re-run, the winner takes an extra turn."
+    },
+    {
+      "name": "Shared Fate",
+      "needs": [
+        "replacement:draw-replacement-exile-face-down",
+        "effect:exile-player-hand-play-exiled"
+      ],
+      "why": "A draw replacement exiling from an opponent's library face down, with play permission tracked per Shared Fate."
+    },
+    {
+      "name": "Glissa Sunseeker",
+      "needs": [
+        "amount:unspent-mana"
+      ],
+      "why": "Nothing reads the amount of unspent mana in a player's pool."
+    },
+    {
+      "name": "Dead-Iron Sledge",
+      "needs": [
+        "effect:effect-target-equipped-creature"
+      ],
+      "why": "'Destroy both' needs the equipped creature as of the trigger (ruling); the attached ref is read on resolution."
+    },
+    {
+      "name": "Loxodon Peacekeeper",
+      "needs": [
+        "effect:gain-control-to-player-with-lowest-life"
+      ],
+      "why": "No 'player with the lowest life, ties chosen by you' scope."
+    },
+    {
+      "name": "Mindstorm Crown",
+      "needs": [
+        "condition:hand-size-at-turn-start"
+      ],
+      "why": "No record of hand size at the start of the turn."
+    },
+    {
+      "name": "Myr Prototype",
+      "needs": [
+        "cost:attack-block-cost-self"
+      ],
+      "why": "No 'can't attack or block unless you pay {1} per counter' cost."
+    },
+    {
+      "name": "Incite War",
+      "needs": [
+        "effect:restrict-controlled-by-target"
+      ],
+      "why": "restrict has no controlledByTarget for 'creatures target player controls attack this turn if able'."
+    }
+  ]
+}
