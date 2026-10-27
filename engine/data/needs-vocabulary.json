@@ -2449,7 +2449,8 @@
   },
   "effect:distribute-counters": {
    "family": "effect:divide-among-targets",
-   "example": "Abzan Charm: distributing two +1/+1 counters among one or two targets isn't built (AUTHORING §15)"
+   "example": "Abzan Charm: distributing two +1/+1 counters among one or two targets isn't built (AUTHORING §15)",
+   "description": "Not: untargeted chosen recipients or a variable total (effect:distribute-counters-among-chosen, effect:distribute-counters-variable-total), a Saga chapter (effect:saga-chapter-divided)."
   },
   "effect:divided-damage-trigger": {
    "family": "effect:divide-among-targets",
@@ -2751,7 +2752,8 @@
   },
   "effect:instant-speed-loyalty": {
    "family": "effect:cast-and-activate-restrictions",
-   "example": "Teferi, Master of Time: Loyalty abilities at instant speed, and phasing."
+   "example": "Teferi, Master of Time: Loyalty abilities at instant speed, and phasing.",
+   "description": "A permanent's own static only; granted until end of turn is effect:grant-instant-speed-loyalty-until-eot."
   },
   "effect:keep-one-of-each-permanent-type": {
    "example": "Liliana, Dreadhorde General: −9: each opponent keeps one permanent of each permanent type (a multi-typed one counting for any) and sacrifices the rest."
@@ -2811,7 +2813,8 @@
   },
   "effect:look-and-choose-total-mana-value": {
    "family": "effect:look-and-choose-second-pick",
-   "example": "Ao, the Dawn Sky: put any number of nonland permanent cards with total mana value 4 or less — no total-mana-value cap on a look-and-choose"
+   "example": "Ao, the Dawn Sky: put any number of nonland permanent cards with total mana value 4 or less — no total-mana-value cap on a look-and-choose",
+   "description": "Built on `return-from-graveyard` only; a cap on library `look-and-choose` is effect:look-and-choose-library-total-mana-value."
   },
   "effect:look-then-optional-sacrifice": {
    "example": "Birthing Ritual: look at top seven first, then decide to sacrifice, then pick by sacrificed MV+1 — no shape keeps that order"
@@ -2827,7 +2830,8 @@
    "example": "Shredder, Shadow Master: Token copies attacking each other opponent and 'lose half their life, rounded up' aren't expressible."
   },
   "effect:lose-keyword-until-eot": {
-   "example": "Emerald Charm: No effect makes a creature lose flying until end of turn."
+   "example": "Emerald Charm: No effect makes a creature lose flying until end of turn.",
+   "description": "Keyword strings only; protection and ward are effect:lose-protection-and-ward."
   },
   "effect:lose-life-unless-pay": {
    "example": "Elesh Norn: 'Loses 2 life unless they pay {1}' by the damaging source's controller, and the back face's Incubator tokens"
@@ -5399,7 +5403,8 @@
   "effect:forced-block-this-combat": {
    "example": "Fighter Class: 'up to one target creature blocks it this combat if able' — a per-combat block requirement on one creature.",
    "checked": "2026-10-27: exists",
-   "existsEvidence": "src/effects.ts kind block-if-able (target, attacker, thisCombat); resolver case block-if-able in src/effects.ts; Rampant Elephant uses attacker source; Fighter Class's attacker is trigger-object"
+   "existsEvidence": "src/effects.ts kind block-if-able (target, attacker, thisCombat); resolver case block-if-able in src/effects.ts; Rampant Elephant uses attacker source; Fighter Class's attacker is trigger-object",
+   "description": "Not: 'if this attacked this combat' (condition:source-attacked-this-combat)."
   },
   "cost:mana-restriction-class-level": {
    "family": "cost:mana-spending-rules",
@@ -7494,7 +7499,8 @@
   },
   "effect:must-block-this-turn": {
    "family": "static:combat-restriction-extensions",
-   "example": "A 'blocks this turn if able' requirement on a target creature (rule 509.1c) — Hustle's 'attacks or blocks this turn if able'; the `restrict` effect has must-attack but no must-block."
+   "example": "A 'blocks this turn if able' requirement on a target creature (rule 509.1c) — Hustle's 'attacks or blocks this turn if able'; the `restrict` effect has must-attack but no must-block.",
+   "description": "Not: a filter form for each creature (effect:block-if-able-each-creature), keeping it when the attacker slot is illegal (effect:block-if-able-illegal-attacker-slot)."
   },
   "effect:look-at-face-down-permanents": {
    "family": "mechanic:face-down",
@@ -12830,6 +12836,106 @@
   "static:cant-attack-unless-matching-also-attacks": {
    "family": "static:attack-limit",
    "example": "Scarred Puma: \"can't attack unless a black or green creature also attacks\""
+  },
+  "amount:cards-in-target-player-hand": {
+   "family": "effect:exile-with-counters",
+   "description": "The number of cards in a target player's hand as an amount (add-mana and others); `{cardsInHand}` takes only a scope.",
+   "example": "Rousing Refrain"
+  },
+  "condition:source-attacked-this-combat": {
+   "family": "effect:forced-block-this-combat",
+   "description": "'If [this] attacked this combat': true for a creature declared as an attacker this combat even after it's removed from combat, false across a later extra combat.",
+   "example": "Tolsimir, Midnight's Light"
+  },
+  "cost:ability-cost-reduction-first-each-turn": {
+   "family": "cost:ability-cost-modification",
+   "description": "A static reducing only the first activated ability of a matching permanent you activate each turn (mana abilities included); `abilityCostModification` has no first-each-turn form.",
+   "example": "Tezzeret, Betrayer of Flesh"
+  },
+  "effect:block-if-able-each-creature": {
+   "family": "static:combat-restriction-extensions",
+   "description": "'Each creature [filter] blocks this turn if able' as a rule for the turn, binding creatures that enter later; `block-if-able` takes only a target.",
+   "example": "Predatory Rampage"
+  },
+  "effect:block-if-able-illegal-attacker-slot": {
+   "family": "static:combat-restriction-extensions",
+   "description": "A block requirement that stays when the creature to be blocked is a target found illegal on resolution but still on the battlefield (Feral Contest's ruling); `block-if-able` drops it, the illegal slot being blanked.",
+   "example": "Feral Contest"
+  },
+  "effect:change-targets-same-new-target": {
+   "family": "static:combat-restriction-extensions",
+   "description": "Change the target of a spell that targets only this creature, every slot to the same new target (the ruling); `change-targets` retargets each slot separately.",
+   "example": "Torchling"
+  },
+  "effect:delayed-trigger-extra-turn-end-step": {
+   "family": "effect:lose-game",
+   "description": "A delayed trigger at the beginning of the extra turn's own end step (none if that turn is skipped).",
+   "example": "Final Fortune"
+  },
+  "effect:exile-from-library-face-down": {
+   "family": "effect:exile-library-all-but-bottom",
+   "description": "`exile-from-library` (allBut included) exiling face down.",
+   "example": "Doomsday Excruciator"
+  },
+  "effect:flicker-optional-immediate-or-delayed": {
+   "family": "effect:flicker-generalized",
+   "description": "Exile a creature; you may return it now, and if you don't, it returns at the next end step with counters.",
+   "example": "Gilraen, Dúnedain Protector"
+  },
+  "effect:flicker-untargeted-group-delayed-return": {
+   "family": "effect:flicker-generalized",
+   "description": "Exile an untargeted group (each creature you control, all creatures, any number chosen) and return them together with one linked delayed return.",
+   "example": "Ghostway"
+  },
+  "effect:look-and-choose-library-total-mana-value": {
+   "family": "effect:look-and-choose-second-pick",
+   "description": "A total-mana-value cap (a number or an amount) on `look-and-choose` from the library; only `return-from-graveyard` has `totalManaValueAtMost`.",
+   "example": "Ao, the Dawn Sky"
+  },
+  "effect:mana-ability-effect-before-mana": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "A mana ability whose rider happens before the mana is added and sets its amount (put a charge counter, then add X for its charge counters); `add-mana`'s `also` runs after.",
+   "example": "Empowered Autogenerator"
+  },
+  "effect:mana-spell-gains-permanent-keyword": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "A creature spell cast with this mana gains a keyword for good, not until end of turn (`spellGains` lasts the turn).",
+   "example": "Hall of the Bandit Lord"
+  },
+  "effect:move-counters-x-amount": {
+   "family": "effect:move-counter",
+   "description": "`move-counters` moving X counters, X paid for earlier in the resolution; its amount has no X.",
+   "example": "Tester of the Tangential"
+  },
+  "effect:prevent-chosen-source-to-attached": {
+   "family": "effect:effect-on-enchanted-permanent",
+   "description": "Prevent damage from a chosen source to the Aura's enchanted creature, read after the Aura is sacrificed for the cost; the effect's `to` takes only 'you' or a target slot.",
+   "example": "Kithkin Armor"
+  },
+  "effect:remove-counter-from-exiled-card": {
+   "family": "effect:exile-with-counters",
+   "description": "'You may remove a [kind] counter from a card that player owns in exile; if you do, …'.",
+   "example": "Mari, the Killing Quill"
+  },
+  "effect:trigger-spell-gains-keyword": {
+   "family": "effect:emblem-triggered-abilities",
+   "description": "A cast trigger giving the spell just cast a keyword that carries to the permanent it becomes ('it gains haste until end of turn').",
+   "example": "Tyvar Kell"
+  },
+  "filter:impulse-permission-spell-face": {
+   "family": "effect:emblem-triggered-abilities",
+   "description": "An impulse-exile permission whose filter is judged on the spell as cast (the face chosen), not the exiled card's front face.",
+   "example": "Chandra, Dressed to Kill"
+  },
+  "trigger:mana-ability-resolves-amount-produced": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "'Whenever a mana ability of this creature resolves' (granted), carrying the amount of mana produced.",
+   "example": "Tyvar the Bellicose"
+  },
+  "zone:impulse-free-lesser-mana-value-than-own": {
+   "family": "effect:impulse-exile-other-libraries",
+   "description": "Each player exiles their top card; you may cast yours free, and each other one only if its mana value is less than yours.",
+   "example": "Triple Triad"
   }
  },
  "groups": [
