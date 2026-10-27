@@ -1356,7 +1356,11 @@ export function matchesFilter(
   }
   if (filter.hasKicker !== undefined) {
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).kicker !== null;
+    // A `kicker` with a `keyword` is another optional additional cost (buyback,
+    // entwine, bargain…) the engine models the same way — not a kicker ability
+    // (rule 702.33; multikicker has no `keyword` and counts).
+    const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
+    const has = kicker !== null && kicker.keyword === undefined;
     if (has !== filter.hasKicker) return false;
   }
   if (filter.hasCycling !== undefined) {

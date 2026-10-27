@@ -289,6 +289,7 @@ import _poolGlasspoolShore from "../pool/glasspool-shore.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
 import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
+import _poolGoblinSpy from "../pool/goblin-spy.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
 import _poolGolgariRotwurm from "../pool/golgari-rotwurm.js";
 import _poolGolgariThug from "../pool/golgari-thug.js";
@@ -517,6 +518,7 @@ import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
+import _poolPsionicGift from "../pool/psionic-gift.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPuresightMerrow from "../pool/puresight-merrow.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
@@ -751,6 +753,7 @@ import _poolVertigoSpawn from "../pool/vertigo-spawn.js";
 import _poolVeteranGuardmouse from "../pool/veteran-guardmouse.js";
 import _poolVeteransArmaments from "../pool/veterans-armaments.js";
 import _poolVibratingSphere from "../pool/vibrating-sphere.js";
+import _poolVileConsumption from "../pool/vile-consumption.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
@@ -764,6 +767,7 @@ import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWaterkinShaman from "../pool/waterkin-shaman.js";
+import _poolWaxWane from "../pool/wax-wane.js";
 import _poolWaylayingPirates from "../pool/waylaying-pirates.js";
 import _poolWeatherseedTreefolk from "../pool/weatherseed-treefolk.js";
 import _poolWelkinHawk from "../pool/welkin-hawk.js";
@@ -1104,6 +1108,7 @@ const shard: CardShard = {
     _poolGoblinBoomKeg,
     _poolGoblinOriflamme,
     _poolGoblinPicker,
+    _poolGoblinSpy,
     _poolGoldenTailDisciple,
     _poolGolgariRotwurm,
     _poolGolgariThug,
@@ -1332,6 +1337,7 @@ const shard: CardShard = {
     _poolProfessionalWrestler,
     _poolProfessorsWarning,
     _poolProfoundJourney,
+    _poolPsionicGift,
     _poolPuppeteerClique,
     _poolPuresightMerrow,
     _poolPygmyAllosaurus,
@@ -1566,6 +1572,7 @@ const shard: CardShard = {
     _poolVeteranGuardmouse,
     _poolVeteransArmaments,
     _poolVibratingSphere,
+    _poolVileConsumption,
     _poolVisionSkeins,
     _poolVithianRenegades,
     _poolVitosInquisitor,
@@ -1579,6 +1586,7 @@ const shard: CardShard = {
     _poolVulshokSplitter,
     _poolWatchwolf,
     _poolWaterkinShaman,
+    _poolWaxWane,
     _poolWaylayingPirates,
     _poolWeatherseedTreefolk,
     _poolWelkinHawk,

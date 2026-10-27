@@ -103,6 +103,7 @@ import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
+import _poolCephalidBroker from "../pool/cephalid-broker.js";
 import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
@@ -178,6 +179,7 @@ import _poolDisdainfulStroke from "../pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "../pool/disease-carriers.js";
 import _poolDisentomb from "../pool/disentomb.js";
 import _poolDivineFavor from "../pool/divine-favor.js";
+import _poolDivineSacrament from "../pool/divine-sacrament.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDokaiWeaverOfLife from "../pool/dokai-weaver-of-life.js";
@@ -360,6 +362,7 @@ import _poolKherKeep from "../pool/kher-keep.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
 import _poolKinsbaileBalloonist from "../pool/kinsbaile-balloonist.js";
+import _poolKirtarsWrath from "../pool/kirtars-wrath.js";
 import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
@@ -454,6 +457,7 @@ import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
 import _poolNyxHerald from "../pool/nyx-herald.js";
 import _poolOathswornVampire from "../pool/oathsworn-vampire.js";
 import _poolObeliskOfJund from "../pool/obelisk-of-jund.js";
+import _poolObliterate from "../pool/obliterate.js";
 import _poolObsessiveSkinner from "../pool/obsessive-skinner.js";
 import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
@@ -565,6 +569,7 @@ import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShadesForm from "../pool/shades-form.js";
+import _poolShadowbloodEgg from "../pool/shadowblood-egg.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
@@ -670,6 +675,7 @@ import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
+import _poolThicketElemental from "../pool/thicket-elemental.js";
 import _poolThiefOfHope from "../pool/thief-of-hope.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
 import _poolThopterSquadron from "../pool/thopter-squadron.js";
@@ -878,6 +884,7 @@ const shard: CardShard = {
     _poolCautiousSurvivor,
     _poolCavernousMaw,
     _poolCelebornTheWise,
+    _poolCephalidBroker,
     _poolChampionOfRhonas,
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
@@ -953,6 +960,7 @@ const shard: CardShard = {
     _poolDiseaseCarriers,
     _poolDisentomb,
     _poolDivineFavor,
+    _poolDivineSacrament,
     _poolDivineVisitation,
     _poolDivinersPortent,
     _poolDokaiWeaverOfLife,
@@ -1135,6 +1143,7 @@ const shard: CardShard = {
     _poolKillianDecisiveMentor,
     _poolKingOfThePride,
     _poolKinsbaileBalloonist,
+    _poolKirtarsWrath,
     _poolKitesailApprentice,
     _poolKnightOfStromgald,
     _poolKnighthood,
@@ -1229,6 +1238,7 @@ const shard: CardShard = {
     _poolNyxHerald,
     _poolOathswornVampire,
     _poolObeliskOfJund,
+    _poolObliterate,
     _poolObsessiveSkinner,
     _poolOketrasMonument,
     _poolOloroAgelessAscetic,
@@ -1340,6 +1350,7 @@ const shard: CardShard = {
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
     _poolShadesForm,
+    _poolShadowbloodEgg,
     _poolShadowsVerdict,
     _poolShadowstorm,
     _poolShakedownHeavy,
@@ -1445,6 +1456,7 @@ const shard: CardShard = {
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
+    _poolThicketElemental,
     _poolThiefOfHope,
     _poolThopterArrest,
     _poolThopterSquadron,

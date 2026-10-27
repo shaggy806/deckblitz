@@ -159,6 +159,7 @@ import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
+import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDomriRade from "../pool/domri-rade.js";
@@ -406,6 +407,7 @@ import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
+import _poolMalice from "../pool/malice.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolManrikiGusari from "../pool/manriki-gusari.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
@@ -658,6 +660,7 @@ import _poolStrengthOfArms from "../pool/strength-of-arms.js";
 import _poolStripMine from "../pool/strip-mine.js";
 import _poolSultaiCharm from "../pool/sultai-charm.js";
 import _poolSunderingEruption from "../pool/sundering-eruption.js";
+import _poolSungrassEgg from "../pool/sungrass-egg.js";
 import _poolSunshotMilitia from "../pool/sunshot-militia.js";
 import _poolSupplyCaravan from "../pool/supply-caravan.js";
 import _poolSurgeConductor from "../pool/surge-conductor.js";
@@ -1005,6 +1008,7 @@ const shard: CardShard = {
     _poolDemonicDread,
     _poolDerangedHermit,
     _poolDesolateLighthouse,
+    _poolDevouringStrossus,
     _poolDiscipleOfMalice,
     _poolDivineGambit,
     _poolDomriRade,
@@ -1252,6 +1256,7 @@ const shard: CardShard = {
     _poolMagmaVein,
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
+    _poolMalice,
     _poolManaformHellkite,
     _poolManrikiGusari,
     _poolMarchesasEmissary,
@@ -1504,6 +1509,7 @@ const shard: CardShard = {
     _poolStripMine,
     _poolSultaiCharm,
     _poolSunderingEruption,
+    _poolSungrassEgg,
     _poolSunshotMilitia,
     _poolSupplyCaravan,
     _poolSurgeConductor,

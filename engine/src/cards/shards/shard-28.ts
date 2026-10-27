@@ -114,6 +114,7 @@ import _poolCarnivalOfSouls from "../pool/carnival-of-souls.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
+import _poolCausticTar from "../pool/caustic-tar.js";
 import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolCemeteryPuca from "../pool/cemetery-puca.js";
@@ -335,6 +336,7 @@ import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
 import _poolIrradiate from "../pool/irradiate.js";
 import _poolIsperiasSkywatch from "../pool/isperias-skywatch.js";
+import _poolIvyElemental from "../pool/ivy-elemental.js";
 import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
@@ -436,6 +438,7 @@ import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
 import _poolMyojinOfLifesWeb from "../pool/myojin-of-lifes-web.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
+import _poolNantukoMentor from "../pool/nantuko-mentor.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
 import _poolNecrobite from "../pool/necrobite.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
@@ -509,6 +512,7 @@ import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
+import _poolQuirionTrailblazer from "../pool/quirion-trailblazer.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRadiantFlames from "../pool/radiant-flames.js";
 import _poolRaggedVeins from "../pool/ragged-veins.js";
@@ -935,6 +939,7 @@ const shard: CardShard = {
     _poolCarrierPigeons,
     _poolCarrionCrow,
     _poolCatharsCall,
+    _poolCausticTar,
     _poolCelesRuneKnight,
     _poolCelestineTheLivingSaint,
     _poolCemeteryPuca,
@@ -1156,6 +1161,7 @@ const shard: CardShard = {
     _poolIronBarbHellion,
     _poolIrradiate,
     _poolIsperiasSkywatch,
+    _poolIvyElemental,
     _poolJabarisBanner,
     _poolJadelightSpelunker,
     _poolJewelThief,
@@ -1257,6 +1263,7 @@ const shard: CardShard = {
     _poolMyojinOfLifesWeb,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
+    _poolNantukoMentor,
     _poolNazarTheVelvetFang,
     _poolNecrobite,
     _poolNestingBot,
@@ -1330,6 +1337,7 @@ const shard: CardShard = {
     _poolQarsiHighPriest,
     _poolQuagFeast,
     _poolQuarrelsEnd,
+    _poolQuirionTrailblazer,
     _poolQumulox,
     _poolRadiantFlames,
     _poolRaggedVeins,

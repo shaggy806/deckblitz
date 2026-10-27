@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
+import _poolAboshansDesire from "../pool/aboshans-desire.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAbyssalNocturnus from "../pool/abyssal-nocturnus.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
@@ -714,6 +715,7 @@ import _poolVedalkenInfuser from "../pool/vedalken-infuser.js";
 import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
+import _poolVerduranEmissary from "../pool/verduran-emissary.js";
 import _poolVernalSovereign from "../pool/vernal-sovereign.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
@@ -780,6 +782,7 @@ import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-n
 const shard: CardShard = {
   pool: [
     _poolAangAtTheCrossroads,
+    _poolAboshansDesire,
     _poolAbueloAncestralEcho,
     _poolAbyssalNocturnus,
     _poolAcquisitionOctopus,
@@ -1490,6 +1493,7 @@ const shard: CardShard = {
     _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
     _poolVensersJournal,
+    _poolVerduranEmissary,
     _poolVernalSovereign,
     _poolVesperGhoul,
     _poolVesselOfEphemera,

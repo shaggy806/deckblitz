@@ -477,6 +477,7 @@ import _poolPegasusCourser from "../pool/pegasus-courser.js";
 import _poolPenumbraBobcat from "../pool/penumbra-bobcat.js";
 import _poolPenumbraKavu from "../pool/penumbra-kavu.js";
 import _poolPersistentSpecimen from "../pool/persistent-specimen.js";
+import _poolPersuasion from "../pool/persuasion.js";
 import _poolPhalanxFormation from "../pool/phalanx-formation.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
@@ -495,6 +496,7 @@ import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
+import _poolProhibit from "../pool/prohibit.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPsychicDrain from "../pool/psychic-drain.js";
@@ -1266,6 +1268,7 @@ const shard: CardShard = {
     _poolPenumbraBobcat,
     _poolPenumbraKavu,
     _poolPersistentSpecimen,
+    _poolPersuasion,
     _poolPhalanxFormation,
     _poolPharikasMender,
     _poolPhenomenonInvestigators,
@@ -1284,6 +1287,7 @@ const shard: CardShard = {
     _poolPrimalFrenzy,
     _poolPrimarisEliminator,
     _poolPrismaticVista,
+    _poolProhibit,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
     _poolPsychicDrain,

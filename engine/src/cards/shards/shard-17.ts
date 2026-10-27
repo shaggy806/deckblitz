@@ -28,6 +28,7 @@ import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
+import _poolAnimalBoneyard from "../pool/animal-boneyard.js";
 import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
@@ -167,6 +168,7 @@ import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
+import _poolDivert from "../pool/divert.js";
 import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDogpile from "../pool/dogpile.js";
 import _poolDone from "../pool/done.js";
@@ -384,6 +386,7 @@ import _poolLastKiss from "../pool/last-kiss.js";
 import _poolLayClaim from "../pool/lay-claim.js";
 import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
+import _poolLiberate from "../pool/liberate.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
@@ -503,6 +506,7 @@ import _poolPredatoryNightstalker from "../pool/predatory-nightstalker.js";
 import _poolPricklyPair from "../pool/prickly-pair.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
 import _poolPrismariCommand from "../pool/prismari-command.js";
+import _poolProbe from "../pool/probe.js";
 import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
 import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js";
 import _poolProsperousThief from "../pool/prosperous-thief.js";
@@ -698,6 +702,7 @@ import _poolTrialOfAmbition from "../pool/trial-of-ambition.js";
 import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
 import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
+import _poolTsaboTavoc from "../pool/tsabo-tavoc.js";
 import _poolTurbulentMoor from "../pool/turbulent-moor.js";
 import _poolTurnAgainst from "../pool/turn-against.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
@@ -776,6 +781,7 @@ import _poolZhangFeiFierceWarrior from "../pool/zhang-fei-fierce-warrior.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
 import _poolZodiacPig from "../pool/zodiac-pig.js";
 import _poolZombify from "../pool/zombify.js";
+import _poolZoologist from "../pool/zoologist.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
@@ -830,6 +836,7 @@ const shard: CardShard = {
     _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
+    _poolAnimalBoneyard,
     _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
@@ -969,6 +976,7 @@ const shard: CardShard = {
     _poolDisposalMummy,
     _poolDistractingGeist,
     _poolDiversionaryTactics,
+    _poolDivert,
     _poolDoctorSpectrum,
     _poolDogpile,
     _poolDone,
@@ -1186,6 +1194,7 @@ const shard: CardShard = {
     _poolLayClaim,
     _poolLeoninSnarecaster,
     _poolLetterOfAcceptance,
+    _poolLiberate,
     _poolLifeFromTheLoam,
     _poolLifeblood,
     _poolLightkeeperOfEmeria,
@@ -1305,6 +1314,7 @@ const shard: CardShard = {
     _poolPricklyPair,
     _poolPrimevalShambler,
     _poolPrismariCommand,
+    _poolProbe,
     _poolProctorOfPotential,
     _poolProftConsultingDetective,
     _poolProsperousThief,
@@ -1500,6 +1510,7 @@ const shard: CardShard = {
     _poolTriarchPraetorian,
     _poolTroubledHealer,
     _poolTrueIdentity,
+    _poolTsaboTavoc,
     _poolTurbulentMoor,
     _poolTurnAgainst,
     _poolTurntimberAscetic,
@@ -1578,6 +1589,7 @@ const shard: CardShard = {
     _poolZinniaValleysVoice,
     _poolZodiacPig,
     _poolZombify,
+    _poolZoologist,
   ],
   tokens: [
     _tokensAngelToken33White,

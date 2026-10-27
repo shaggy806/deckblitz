@@ -236,6 +236,7 @@ import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFoulRenewal from "../pool/foul-renewal.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
+import _poolFrenziedTilling from "../pool/frenzied-tilling.js";
 import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
@@ -423,6 +424,7 @@ import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
 import _poolMindculling from "../pool/mindculling.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
+import _poolMirari from "../pool/mirari.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
@@ -504,6 +506,7 @@ import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
+import _poolPsychatog from "../pool/psychatog.js";
 import _poolPureSimple from "../pool/pure-simple.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
@@ -520,6 +523,7 @@ import _poolRazorGolem from "../pool/razor-golem.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
+import _poolRecoup from "../pool/recoup.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
@@ -641,6 +645,7 @@ import _poolTenementCrasher from "../pool/tenement-crasher.js";
 import _poolTenthDistrictGuard from "../pool/tenth-district-guard.js";
 import _poolTerrainElemental from "../pool/terrain-elemental.js";
 import _poolTerrasymbiosis from "../pool/terrasymbiosis.js";
+import _poolTerravore from "../pool/terravore.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
@@ -667,6 +672,7 @@ import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTribalFlames from "../pool/tribal-flames.js";
 import _poolTrigonOfMending from "../pool/trigon-of-mending.js";
 import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
@@ -995,6 +1001,7 @@ const shard: CardShard = {
     _poolFortressCrab,
     _poolFoulRenewal,
     _poolFreeFromFlesh,
+    _poolFrenziedTilling,
     _poolFrostpeakYeti,
     _poolFuneralRoom,
     _poolFunnelWebRecluse,
@@ -1182,6 +1189,7 @@ const shard: CardShard = {
     _poolMindbreakTrap,
     _poolMindculling,
     _poolMineBearer,
+    _poolMirari,
     _poolMirrormade,
     _poolMischievousChimera,
     _poolMisshapenFiend,
@@ -1263,6 +1271,7 @@ const shard: CardShard = {
     _poolPrizefight,
     _poolPropheticFlamespeaker,
     _poolPsionicSnoop,
+    _poolPsychatog,
     _poolPureSimple,
     _poolPyreticRebirth,
     _poolPyrotechnicPerformer,
@@ -1279,6 +1288,7 @@ const shard: CardShard = {
     _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
+    _poolRecoup,
     _poolReduceToMemory,
     _poolRegenerate,
     _poolRegicide,
@@ -1400,6 +1410,7 @@ const shard: CardShard = {
     _poolTenthDistrictGuard,
     _poolTerrainElemental,
     _poolTerrasymbiosis,
+    _poolTerravore,
     _poolTerritorialHammerskull,
     _poolTezzeretsAmbition,
     _poolTheHungerTideRises,
@@ -1426,6 +1437,7 @@ const shard: CardShard = {
     _poolTransguildPromenade,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTribalFlames,
     _poolTrigonOfMending,
     _poolTrostanisSummoner,
     _poolTruckToss,

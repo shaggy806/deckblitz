@@ -129,6 +129,7 @@ import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolCloudCover from "../pool/cloud-cover.js";
+import _poolCoalitionVictory from "../pool/coalition-victory.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
@@ -164,6 +165,7 @@ import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
+import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
@@ -477,6 +479,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhantatog from "../pool/phantatog.js";
 import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
@@ -511,6 +514,7 @@ import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
+import _poolPuppeteer from "../pool/puppeteer.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
@@ -564,6 +568,7 @@ import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
 import _poolSandsteppeOutcast from "../pool/sandsteppe-outcast.js";
 import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
+import _poolSarcatog from "../pool/sarcatog.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -935,6 +940,7 @@ const shard: CardShard = {
     _poolClericClass,
     _poolClingingDarkness,
     _poolCloudCover,
+    _poolCoalitionVictory,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
     _poolConsumingAberration,
@@ -970,6 +976,7 @@ const shard: CardShard = {
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDiscordantSpirit,
+    _poolDismantlingBlow,
     _poolDisownedAncestor,
     _poolDivideByZero,
     _poolDoomWhisperer,
@@ -1283,6 +1290,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
+    _poolPhantatog,
     _poolPhantomTiger,
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
@@ -1317,6 +1325,7 @@ const shard: CardShard = {
     _poolPsychicSymbiont,
     _poolPterodonKnight,
     _poolPunySnack,
+    _poolPuppeteer,
     _poolQuestForTheGemblades,
     _poolQuicksilverBehemoth,
     _poolQuilledCharger,
@@ -1370,6 +1379,7 @@ const shard: CardShard = {
     _poolSandstalkerMoloch,
     _poolSandsteppeOutcast,
     _poolSanguineIndulgence,
+    _poolSarcatog,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
     _poolSavaiCrystal,

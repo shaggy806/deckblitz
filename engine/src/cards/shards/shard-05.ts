@@ -177,6 +177,7 @@ import _poolDeathRattle from "../pool/death-rattle.js";
 import _poolDeathgrip from "../pool/deathgrip.js";
 import _poolDeathmarkPrelate from "../pool/deathmark-prelate.js";
 import _poolDeathrender from "../pool/deathrender.js";
+import _poolDeepReconnaissance from "../pool/deep-reconnaissance.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
 import _poolDefyDeath from "../pool/defy-death.js";
@@ -202,6 +203,7 @@ import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDriftingDjinn from "../pool/drifting-djinn.js";
 import _poolDrillBit from "../pool/drill-bit.js";
+import _poolDromarTheBanisher from "../pool/dromar-the-banisher.js";
 import _poolDryadMilitant from "../pool/dryad-militant.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
@@ -214,6 +216,7 @@ import _poolDutifulAttendant from "../pool/dutiful-attendant.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwarvenLieutenant from "../pool/dwarven-lieutenant.js";
+import _poolDwarvenRecruiter from "../pool/dwarven-recruiter.js";
 import _poolDwarvenSong from "../pool/dwarven-song.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEarlyHarvest from "../pool/early-harvest.js";
@@ -234,6 +237,7 @@ import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
+import _poolEscapeArtist from "../pool/escape-artist.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExoticDisease from "../pool/exotic-disease.js";
@@ -504,6 +508,7 @@ import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
+import _poolPipersMelody from "../pool/pipers-melody.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPlanarDespair from "../pool/planar-despair.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
@@ -614,6 +619,7 @@ import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
 import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
+import _poolSleepersRobe from "../pool/sleepers-robe.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
@@ -627,6 +633,7 @@ import _poolSpellshock from "../pool/spellshock.js";
 import _poolSpellskite from "../pool/spellskite.js";
 import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
+import _poolSpiteMalice from "../pool/spite-malice.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolSporolothAncient from "../pool/sporoloth-ancient.js";
 import _poolSqueesEmbrace from "../pool/squees-embrace.js";
@@ -708,6 +715,7 @@ import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolUninvitedGeist from "../pool/uninvited-geist.js";
 import _poolUnnaturalAggression from "../pool/unnatural-aggression.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
+import _poolUrborgSkeleton from "../pool/urborg-skeleton.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
 import _poolVampiresZeal from "../pool/vampires-zeal.js";
 import _poolVatEmergence from "../pool/vat-emergence.js";
@@ -957,6 +965,7 @@ const shard: CardShard = {
     _poolDeathgrip,
     _poolDeathmarkPrelate,
     _poolDeathrender,
+    _poolDeepReconnaissance,
     _poolDeeprootWarrior,
     _poolDefiantElf,
     _poolDefyDeath,
@@ -982,6 +991,7 @@ const shard: CardShard = {
     _poolDreyKeeper,
     _poolDriftingDjinn,
     _poolDrillBit,
+    _poolDromarTheBanisher,
     _poolDryadMilitant,
     _poolDryadsFavor,
     _poolDuergarHedgeMage,
@@ -994,6 +1004,7 @@ const shard: CardShard = {
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
     _poolDwarvenLieutenant,
+    _poolDwarvenRecruiter,
     _poolDwarvenSong,
     _poolDwynenGiltLeafDaen,
     _poolEarlyHarvest,
@@ -1014,6 +1025,7 @@ const shard: CardShard = {
     _poolEndbringer,
     _poolEnormousBaloth,
     _poolEpicDownfall,
+    _poolEscapeArtist,
     _poolEssenceFlare,
     _poolEternalWitness,
     _poolExoticDisease,
@@ -1284,6 +1296,7 @@ const shard: CardShard = {
     _poolPhyrexianIronfoot,
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
+    _poolPipersMelody,
     _poolPlaguemawBeast,
     _poolPlanarDespair,
     _poolPracticalResearch,
@@ -1394,6 +1407,7 @@ const shard: CardShard = {
     _poolSkyfirePhoenix,
     _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
+    _poolSleepersRobe,
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,
@@ -1407,6 +1421,7 @@ const shard: CardShard = {
     _poolSpellskite,
     _poolSpinewoodsArmadillo,
     _poolSpiritSummoning,
+    _poolSpiteMalice,
     _poolSpitefulBully,
     _poolSporolothAncient,
     _poolSqueesEmbrace,
@@ -1488,6 +1503,7 @@ const shard: CardShard = {
     _poolUninvitedGeist,
     _poolUnnaturalAggression,
     _poolUnnaturalMoonrise,
+    _poolUrborgSkeleton,
     _poolVampireNoble,
     _poolVampiresZeal,
     _poolVatEmergence,

@@ -45,6 +45,7 @@ import _poolBantCharm from "../pool/bant-charm.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBattleOfFrostAndFire from "../pool/battle-of-frost-and-fire.js";
+import _poolBattleOfWits from "../pool/battle-of-wits.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
 import _poolBedlamReveler from "../pool/bedlam-reveler.js";
 import _poolBehemothsHerald from "../pool/behemoths-herald.js";
@@ -138,6 +139,7 @@ import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDeftDismissal from "../pool/deft-dismissal.js";
 import _poolDejaVu from "../pool/deja-vu.js";
+import _poolDeluge from "../pool/deluge.js";
 import _poolDelverOfSecrets from "../pool/delver-of-secrets.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
@@ -513,6 +515,8 @@ import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRitesOfReaping from "../pool/rites-of-reaping.js";
+import _poolRitesOfRefusal from "../pool/rites-of-refusal.js";
+import _poolRithTheAwakener from "../pool/rith-the-awakener.js";
 import _poolRithsGrove from "../pool/riths-grove.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRiveteersCharm from "../pool/riveteers-charm.js";
@@ -821,6 +825,7 @@ const shard: CardShard = {
     _poolBarrageOfExpendables,
     _poolBattleHymn,
     _poolBattleOfFrostAndFire,
+    _poolBattleOfWits,
     _poolBeastWhisperer,
     _poolBedlamReveler,
     _poolBehemothsHerald,
@@ -914,6 +919,7 @@ const shard: CardShard = {
     _poolDefiantSalvager,
     _poolDeftDismissal,
     _poolDejaVu,
+    _poolDeluge,
     _poolDelverOfSecrets,
     _poolDerangedAssistant,
     _poolDesperateFarmer,
@@ -1289,6 +1295,8 @@ const shard: CardShard = {
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRitesOfReaping,
+    _poolRitesOfRefusal,
+    _poolRithTheAwakener,
     _poolRithsGrove,
     _poolRiverHeraldGuide,
     _poolRiveteersCharm,

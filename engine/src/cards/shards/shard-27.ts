@@ -15,6 +15,7 @@ import _poolAdventurersAirship from "../pool/adventurers-airship.js";
 import _poolAeolipile from "../pool/aeolipile.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAetherPoisoner from "../pool/aether-poisoner.js";
+import _poolAetherRift from "../pool/aether-rift.js";
 import _poolAethermagesTouch from "../pool/aethermages-touch.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
@@ -426,6 +427,7 @@ import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
 import _poolNissasRenewal from "../pool/nissas-renewal.js";
+import _poolNomadStadium from "../pool/nomad-stadium.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
@@ -536,6 +538,7 @@ import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
+import _poolSavageOffensive from "../pool/savage-offensive.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
 import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
@@ -792,6 +795,7 @@ const shard: CardShard = {
     _poolAeolipile,
     _poolAerieMystics,
     _poolAetherPoisoner,
+    _poolAetherRift,
     _poolAethermagesTouch,
     _poolAhnCropCrasher,
     _poolAhriman,
@@ -1203,6 +1207,7 @@ const shard: CardShard = {
     _poolNicolBolas,
     _poolNightScythe,
     _poolNissasRenewal,
+    _poolNomadStadium,
     _poolNoosegrafMob,
     _poolNullCaller,
     _poolNurglesRot,
@@ -1313,6 +1318,7 @@ const shard: CardShard = {
     _poolSaguMauler,
     _poolSanctumGuardian,
     _poolSangriteBacklash,
+    _poolSavageOffensive,
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
     _poolSawbladeSkinripper,

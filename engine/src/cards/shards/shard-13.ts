@@ -151,6 +151,7 @@ import _poolCunningBreezedancer from "../pool/cunning-breezedancer.js";
 import _poolDampeningPulse from "../pool/dampening-pulse.js";
 import _poolDarknessDescends from "../pool/darkness-descends.js";
 import _poolDarkstarAugur from "../pool/darkstar-augur.js";
+import _poolDarkwaterEgg from "../pool/darkwater-egg.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
@@ -603,6 +604,7 @@ import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSpinalEmbrace from "../pool/spinal-embrace.js";
 import _poolSpiritualVisit from "../pool/spiritual-visit.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
@@ -644,6 +646,7 @@ import _poolSuntouchedMyr from "../pool/suntouched-myr.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
 import _poolSurvivorOfTheUnseen from "../pool/survivor-of-the-unseen.js";
 import _poolSvyelunOfSeaAndSky from "../pool/svyelun-of-sea-and-sky.js";
+import _poolSwayOfIllusion from "../pool/sway-of-illusion.js";
 import _poolSwiftEnd from "../pool/swift-end.js";
 import _poolSwiftReconfiguration from "../pool/swift-reconfiguration.js";
 import _poolSwiftSpinner from "../pool/swift-spinner.js";
@@ -700,6 +703,7 @@ import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
+import _poolUrzasFilter from "../pool/urzas-filter.js";
 import _poolUsherToSafety from "../pool/usher-to-safety.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
@@ -721,6 +725,7 @@ import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
+import _poolVolcanicSpray from "../pool/volcanic-spray.js";
 import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
@@ -933,6 +938,7 @@ const shard: CardShard = {
     _poolDampeningPulse,
     _poolDarknessDescends,
     _poolDarkstarAugur,
+    _poolDarkwaterEgg,
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
     _poolDeathSpeakers,
@@ -1385,6 +1391,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSpinalEmbrace,
     _poolSpiritualVisit,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
@@ -1426,6 +1433,7 @@ const shard: CardShard = {
     _poolSurlyFarrier,
     _poolSurvivorOfTheUnseen,
     _poolSvyelunOfSeaAndSky,
+    _poolSwayOfIllusion,
     _poolSwiftEnd,
     _poolSwiftReconfiguration,
     _poolSwiftSpinner,
@@ -1482,6 +1490,7 @@ const shard: CardShard = {
     _poolUnhallowedCathar,
     _poolUnhinge,
     _poolUnswervingSloth,
+    _poolUrzasFilter,
     _poolUsherToSafety,
     _poolUtromScientists,
     _poolValiantGuard,
@@ -1503,6 +1512,7 @@ const shard: CardShard = {
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,
+    _poolVolcanicSpray,
     _poolVoldarenPariah,
     _poolVoltaicWhip,
     _poolVowToErebor,
