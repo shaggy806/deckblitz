@@ -144,6 +144,7 @@ import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolContestedCliffs from "../pool/contested-cliffs.js";
+import _poolConvalescentCare from "../pool/convalescent-care.js";
 import _poolCoralNet from "../pool/coral-net.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -238,6 +239,7 @@ import _poolFerociousPup from "../pool/ferocious-pup.js";
 import _poolFerventStrike from "../pool/fervent-strike.js";
 import _poolFeveredStrength from "../pool/fevered-strength.js";
 import _poolFieryFinish from "../pool/fiery-finish.js";
+import _poolFilthyCur from "../pool/filthy-cur.js";
 import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
@@ -378,6 +380,7 @@ import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
 import _poolLiegeOfTheAxe from "../pool/liege-of-the-axe.js";
+import _poolLifeBurst from "../pool/life-burst.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
@@ -449,6 +452,7 @@ import _poolNeonatesRush from "../pool/neonates-rush.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
 import _poolNezumiFreewheeler from "../pool/nezumi-freewheeler.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
+import _poolNimbleMongoose from "../pool/nimble-mongoose.js";
 import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
@@ -477,6 +481,7 @@ import _poolParanoidParishBlade from "../pool/paranoid-parish-blade.js";
 import _poolParaselene from "../pool/paraselene.js";
 import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPartTheVeil from "../pool/part-the-veil.js";
+import _poolPatriarchsDesire from "../pool/patriarchs-desire.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
 import _poolPetalsOfInsight from "../pool/petals-of-insight.js";
@@ -611,6 +616,7 @@ import _poolSilverSeraph from "../pool/silver-seraph.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
+import _poolSkirkCommando from "../pool/skirk-commando.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullRend from "../pool/skull-rend.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
@@ -639,6 +645,7 @@ import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
+import _poolStalkingBloodsucker from "../pool/stalking-bloodsucker.js";
 import _poolStarCrownedStag from "../pool/star-crowned-stag.js";
 import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
@@ -931,6 +938,7 @@ const shard: CardShard = {
     _poolContagion,
     _poolContaminatedLandscape,
     _poolContestedCliffs,
+    _poolConvalescentCare,
     _poolCoralNet,
     _poolCorpsehatch,
     _poolCovetedPeacock,
@@ -1025,6 +1033,7 @@ const shard: CardShard = {
     _poolFerventStrike,
     _poolFeveredStrength,
     _poolFieryFinish,
+    _poolFilthyCur,
     _poolFinaleOfDevastation,
     _poolFirbolgFlutist,
     _poolFireDiamond,
@@ -1165,6 +1174,7 @@ const shard: CardShard = {
     _poolLeechCollector,
     _poolLiberatingCombustion,
     _poolLiegeOfTheAxe,
+    _poolLifeBurst,
     _poolLifecraftCavalry,
     _poolLightOfPromise,
     _poolLightfootTechnique,
@@ -1236,6 +1246,7 @@ const shard: CardShard = {
     _poolNeurokCommando,
     _poolNezumiFreewheeler,
     _poolNiblisOfTheMist,
+    _poolNimbleMongoose,
     _poolNimrodelWatcher,
     _poolNoggleRobber,
     _poolNoriTellerOfTales,
@@ -1264,6 +1275,7 @@ const shard: CardShard = {
     _poolParaselene,
     _poolParkHeightsPegasus,
     _poolPartTheVeil,
+    _poolPatriarchsDesire,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
     _poolPetalsOfInsight,
@@ -1398,6 +1410,7 @@ const shard: CardShard = {
     _poolSimicRagworm,
     _poolSinuousStriker,
     _poolSirensRuse,
+    _poolSkirkCommando,
     _poolSkophosWarleader,
     _poolSkullRend,
     _poolSkullclamp,
@@ -1426,6 +1439,7 @@ const shard: CardShard = {
     _poolSpireOfIndustry,
     _poolSqueeGoblinNabob,
     _poolStalkedResearcher,
+    _poolStalkingBloodsucker,
     _poolStarCrownedStag,
     _poolStarforgedSword,
     _poolStarnheimUnleashed,

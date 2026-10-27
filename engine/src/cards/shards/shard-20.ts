@@ -34,6 +34,7 @@ import _poolAncientSpring from "../pool/ancient-spring.js";
 import _poolAndurilNarsilReforged from "../pool/anduril-narsil-reforged.js";
 import _poolAngelOfTheDireHour from "../pool/angel-of-the-dire-hour.js";
 import _poolAngelicDestiny from "../pool/angelic-destiny.js";
+import _poolAnimalMagnetism from "../pool/animal-magnetism.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAnthroplasm from "../pool/anthroplasm.js";
@@ -320,6 +321,7 @@ import _poolGuardianIdol from "../pool/guardian-idol.js";
 import _poolGuardianOfSolitude from "../pool/guardian-of-solitude.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
+import _poolGustcloakRunner from "../pool/gustcloak-runner.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHaloChargedSkaab from "../pool/halo-charged-skaab.js";
@@ -527,6 +529,7 @@ import _poolQuandrixCharm from "../pool/quandrix-charm.js";
 import _poolQueensCommission from "../pool/queens-commission.js";
 import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRabbitBattery from "../pool/rabbit-battery.js";
+import _poolRabidElephant from "../pool/rabid-elephant.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
 import _poolRadiatingLightning from "../pool/radiating-lightning.js";
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolAndurilNarsilReforged,
     _poolAngelOfTheDireHour,
     _poolAngelicDestiny,
+    _poolAnimalMagnetism,
     _poolAnnihilate,
     _poolAntQueen,
     _poolAnthroplasm,
@@ -1180,6 +1184,7 @@ const shard: CardShard = {
     _poolGuardianOfSolitude,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
+    _poolGustcloakRunner,
     _poolHairStrungKoto,
     _poolHaldanAvidArcanist,
     _poolHaloChargedSkaab,
@@ -1387,6 +1392,7 @@ const shard: CardShard = {
     _poolQueensCommission,
     _poolQuintoriusHistoryChaser,
     _poolRabbitBattery,
+    _poolRabidElephant,
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
     _poolRadiatingLightning,

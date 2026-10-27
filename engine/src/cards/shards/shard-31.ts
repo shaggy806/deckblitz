@@ -293,6 +293,7 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
 import _poolGhorClanSavage from "../pool/ghor-clan-savage.js";
+import _poolGhosthelmCourier from "../pool/ghosthelm-courier.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsAvenger from "../pool/gideons-avenger.js";
@@ -385,6 +386,7 @@ import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInheritedFiend from "../pool/inherited-fiend.js";
 import _poolInsatiableHemophage from "../pool/insatiable-hemophage.js";
+import _poolInspirit from "../pool/inspirit.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIntruderAlarm from "../pool/intruder-alarm.js";
@@ -476,6 +478,7 @@ import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
+import _poolMindBurst from "../pool/mind-burst.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMinorMisstep from "../pool/minor-misstep.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
@@ -681,6 +684,7 @@ import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpellBurst from "../pool/spell-burst.js";
 import _poolSpelunking from "../pool/spelunking.js";
+import _poolSphereOfReason from "../pool/sphere-of-reason.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
@@ -1156,6 +1160,7 @@ const shard: CardShard = {
     _poolGhastlyDiscovery,
     _poolGhastlyHaunting,
     _poolGhorClanSavage,
+    _poolGhosthelmCourier,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
     _poolGideonsAvenger,
@@ -1248,6 +1253,7 @@ const shard: CardShard = {
     _poolInheritedEnvelope,
     _poolInheritedFiend,
     _poolInsatiableHemophage,
+    _poolInspirit,
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIntruderAlarm,
@@ -1339,6 +1345,7 @@ const shard: CardShard = {
     _poolMerchantOfTruth,
     _poolMetamorphose,
     _poolMidnightCovenant,
+    _poolMindBurst,
     _poolMindstatic,
     _poolMinorMisstep,
     _poolMirkwoodElk,
@@ -1544,6 +1551,7 @@ const shard: CardShard = {
     _poolSparringDummy,
     _poolSpellBurst,
     _poolSpelunking,
+    _poolSphereOfReason,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
     _poolSpitfireBastion,

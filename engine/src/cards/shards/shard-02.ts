@@ -218,6 +218,7 @@ import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
+import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
@@ -343,6 +344,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
+import _poolInvigoratingBoon from "../pool/invigorating-boon.js";
 import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
@@ -442,6 +444,7 @@ import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolMysticGenesis from "../pool/mystic-genesis.js";
+import _poolMysticVisionary from "../pool/mystic-visionary.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNaturalAffinity from "../pool/natural-affinity.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
@@ -1012,6 +1015,7 @@ const shard: CardShard = {
     _poolEliteVanguard,
     _poolElusiveSpellfist,
     _poolElusiveTormentor,
+    _poolElvishPathcutter,
     _poolEnatuGolem,
     _poolEnshroudingMist,
     _poolEphemeralShields,
@@ -1137,6 +1141,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
+    _poolInvigoratingBoon,
     _poolInvigoratingFalls,
     _poolInvisibleWoman,
     _poolIonasJudgment,
@@ -1236,6 +1241,7 @@ const shard: CardShard = {
     _poolMycosynthWellspring,
     _poolMyojinOfToweringMight,
     _poolMysticGenesis,
+    _poolMysticVisionary,
     _poolNarsetsReversal,
     _poolNaturalAffinity,
     _poolNavigatorsRuin,

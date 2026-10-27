@@ -132,6 +132,7 @@ import _poolCharRumbler from "../pool/char-rumbler.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
 import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
 import _poolChiefOfTheFoundry from "../pool/chief-of-the-foundry.js";
+import _poolChildhoodHorror from "../pool/childhood-horror.js";
 import _poolChill from "../pool/chill.js";
 import _poolChitteringWitch from "../pool/chittering-witch.js";
 import _poolChorusOfWoe from "../pool/chorus-of-woe.js";
@@ -521,6 +522,7 @@ import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
+import _poolPulsatingIllusion from "../pool/pulsating-illusion.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
 import _poolPutrefaction from "../pool/putrefaction.js";
 import _poolPutridPals from "../pool/putrid-pals.js";
@@ -929,6 +931,7 @@ const shard: CardShard = {
     _poolChargingGriffin,
     _poolCharismaticVanguard,
     _poolChiefOfTheFoundry,
+    _poolChildhoodHorror,
     _poolChill,
     _poolChitteringWitch,
     _poolChorusOfWoe,
@@ -1318,6 +1321,7 @@ const shard: CardShard = {
     _poolPrimordialPlasm,
     _poolProphetOfDistortion,
     _poolProtomatterPowder,
+    _poolPulsatingIllusion,
     _poolPuresteelPaladin,
     _poolPutrefaction,
     _poolPutridPals,

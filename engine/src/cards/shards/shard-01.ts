@@ -83,6 +83,7 @@ import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
 import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
+import _poolCabalInquisitor from "../pool/cabal-inquisitor.js";
 import _poolCacklingImp from "../pool/cackling-imp.js";
 import _poolCanopyStalker from "../pool/canopy-stalker.js";
 import _poolCarnivalHellsteed from "../pool/carnival-hellsteed.js";
@@ -90,6 +91,7 @@ import _poolCaseyJonesBackAlleyBrute from "../pool/casey-jones-back-alley-brute.
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
+import _poolCephalidRetainer from "../pool/cephalid-retainer.js";
 import _poolCeremonialGuard from "../pool/ceremonial-guard.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolChainwhipCyclops from "../pool/chainwhip-cyclops.js";
@@ -272,6 +274,7 @@ import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
+import _poolHeadhunter from "../pool/headhunter.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
@@ -453,6 +456,7 @@ import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
+import _poolOtarianJuggernaut from "../pool/otarian-juggernaut.js";
 import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -489,6 +493,7 @@ import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
+import _poolPsychicTrance from "../pool/psychic-trance.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
 import _poolPyroblast from "../pool/pyroblast.js";
 import _poolQueenOfIce from "../pool/queen-of-ice.js";
@@ -609,6 +614,7 @@ import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpellgorgerBarbarian from "../pool/spellgorger-barbarian.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
+import _poolSphereOfGrace from "../pool/sphere-of-grace.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
 import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
@@ -693,6 +699,7 @@ import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
+import _poolTribalGolem from "../pool/tribal-golem.js";
 import _poolTroublesomeSpirit from "../pool/troublesome-spirit.js";
 import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
@@ -873,6 +880,7 @@ const shard: CardShard = {
     _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,
+    _poolCabalInquisitor,
     _poolCacklingImp,
     _poolCanopyStalker,
     _poolCarnivalHellsteed,
@@ -880,6 +888,7 @@ const shard: CardShard = {
     _poolCastIntoTheFire,
     _poolCatapultMaster,
     _poolCauldronsGift,
+    _poolCephalidRetainer,
     _poolCeremonialGuard,
     _poolCetaDisciple,
     _poolChainwhipCyclops,
@@ -1062,6 +1071,7 @@ const shard: CardShard = {
     _poolHaywireMite,
     _poolHazoretGodseeker,
     _poolHazoretTheFervent,
+    _poolHeadhunter,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,
@@ -1243,6 +1253,7 @@ const shard: CardShard = {
     _poolOrdruunVeteran,
     _poolOrnateKanzashi,
     _poolOssuaryRats,
+    _poolOtarianJuggernaut,
     _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
@@ -1279,6 +1290,7 @@ const shard: CardShard = {
     _poolProtectServe,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
+    _poolPsychicTrance,
     _poolPummelerForHire,
     _poolPyroblast,
     _poolQueenOfIce,
@@ -1399,6 +1411,7 @@ const shard: CardShard = {
     _poolSpellSwindle,
     _poolSpellgorgerBarbarian,
     _poolSpewFlame,
+    _poolSphereOfGrace,
     _poolSphinxOfTheFinalWord,
     _poolSphinxsHerald,
     _poolSphinxsInsight,
@@ -1483,6 +1496,7 @@ const shard: CardShard = {
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
+    _poolTribalGolem,
     _poolTroublesomeSpirit,
     _poolTrustedForcemage,
     _poolTunnelRats,

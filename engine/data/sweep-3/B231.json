@@ -1,0 +1,769 @@
+{
+ "batch": "B231",
+ "status": "complete",
+ "ranks": "Odyssey (ODY, 2001-10-01): the rest of the set, 106 left after batch 225 (the fifth middle walk's last, round twenty); built \"with the same name as that spell\" (CardFilter.sameNameAsTriggerObject — amount:count-in-graveyards-same-name-as-trigger-spell): the five Shrines, Aven and Nantuko Shrine from B225 with them",
+ "authored": [
+  {
+   "name": "Acceptable Losses",
+   "files": [
+    "engine/src/cards/pool/acceptable-losses.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Amugaba",
+   "files": [
+    "engine/src/cards/pool/amugaba.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aven Shrine",
+   "files": [
+    "engine/src/cards/pool/aven-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Windreader",
+   "files": [
+    "engine/src/cards/pool/aven-windreader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balshan Griffin",
+   "files": [
+    "engine/src/cards/pool/balshan-griffin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barbarian Lunatic",
+   "files": [
+    "engine/src/cards/pool/barbarian-lunatic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bloodcurdler",
+   "files": [
+    "engine/src/cards/pool/bloodcurdler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Inquisitor",
+   "files": [
+    "engine/src/cards/pool/cabal-inquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Patriarch",
+   "files": [
+    "engine/src/cards/pool/cabal-patriarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Shrine",
+   "files": [
+    "engine/src/cards/pool/cabal-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cantivore",
+   "files": [
+    "engine/src/cards/pool/cantivore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Retainer",
+   "files": [
+    "engine/src/cards/pool/cephalid-retainer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cephalid Shrine",
+   "files": [
+    "engine/src/cards/pool/cephalid-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainflinger",
+   "files": [
+    "engine/src/cards/pool/chainflinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Childhood Horror",
+   "files": [
+    "engine/src/cards/pool/childhood-horror.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chlorophant",
+   "files": [
+    "engine/src/cards/pool/chlorophant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cognivore",
+   "files": [
+    "engine/src/cards/pool/cognivore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crashing Centaur",
+   "files": [
+    "engine/src/cards/pool/crashing-centaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Shrine",
+   "files": [
+    "engine/src/cards/pool/dwarven-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Strike Force",
+   "files": [
+    "engine/src/cards/pool/dwarven-strike-force.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Face of Fear",
+   "files": [
+    "engine/src/cards/pool/face-of-fear.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Filthy Cur",
+   "files": [
+    "engine/src/cards/pool/filthy-cur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame Burst",
+   "files": [
+    "engine/src/cards/pool/flame-burst.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fledgling Imp",
+   "files": [
+    "engine/src/cards/pool/fledgling-imp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frenetic Ogre",
+   "files": [
+    "engine/src/cards/pool/frenetic-ogre.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frightcrawler",
+   "files": [
+    "engine/src/cards/pool/frightcrawler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hallowed Healer",
+   "files": [
+    "engine/src/cards/pool/hallowed-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howling Gale",
+   "files": [
+    "engine/src/cards/pool/howling-gale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immobilizing Ink",
+   "files": [
+    "engine/src/cards/pool/immobilizing-ink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iridescent Angel",
+   "files": [
+    "engine/src/cards/pool/iridescent-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Junk Golem",
+   "files": [
+    "engine/src/cards/pool/junk-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kamahl's Desire",
+   "files": [
+    "engine/src/cards/pool/kamahls-desire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirtar's Desire",
+   "files": [
+    "engine/src/cards/pool/kirtars-desire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krosan Archer",
+   "files": [
+    "engine/src/cards/pool/krosan-archer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krosan Avenger",
+   "files": [
+    "engine/src/cards/pool/krosan-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life Burst",
+   "files": [
+    "engine/src/cards/pool/life-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metamorphic Wurm",
+   "files": [
+    "engine/src/cards/pool/metamorphic-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mind Burst",
+   "files": [
+    "engine/src/cards/pool/mind-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minotaur Explorer",
+   "files": [
+    "engine/src/cards/pool/minotaur-explorer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mudhole",
+   "files": [
+    "engine/src/cards/pool/mudhole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muscle Burst",
+   "files": [
+    "engine/src/cards/pool/muscle-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Crusader",
+   "files": [
+    "engine/src/cards/pool/mystic-crusader.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mystic Enforcer",
+   "files": [
+    "engine/src/cards/pool/mystic-enforcer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mystic Penitent",
+   "files": [
+    "engine/src/cards/pool/mystic-penitent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mystic Visionary",
+   "files": [
+    "engine/src/cards/pool/mystic-visionary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mystic Zealot",
+   "files": [
+    "engine/src/cards/pool/mystic-zealot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nantuko Shrine",
+   "files": [
+    "engine/src/cards/pool/nantuko-shrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimble Mongoose",
+   "files": [
+    "engine/src/cards/pool/nimble-mongoose.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nomad Decoy",
+   "files": [
+    "engine/src/cards/pool/nomad-decoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Otarian Juggernaut",
+   "files": [
+    "engine/src/cards/pool/otarian-juggernaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Painbringer",
+   "files": [
+    "engine/src/cards/pool/painbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pardic Swordsmith",
+   "files": [
+    "engine/src/cards/pool/pardic-swordsmith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Patriarch's Desire",
+   "files": [
+    "engine/src/cards/pool/patriarchs-desire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patrol Hound",
+   "files": [
+    "engine/src/cards/pool/patrol-hound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Whelp",
+   "files": [
+    "engine/src/cards/pool/phantom-whelp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pulsating Illusion",
+   "files": [
+    "engine/src/cards/pool/pulsating-illusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabid Elephant",
+   "files": [
+    "engine/src/cards/pool/rabid-elephant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rotting Giant",
+   "files": [
+    "engine/src/cards/pool/rotting-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sacred Rites",
+   "files": [
+    "engine/src/cards/pool/sacred-rites.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screams of the Damned",
+   "files": [
+    "engine/src/cards/pool/screams-of-the-damned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shower of Coals",
+   "files": [
+    "engine/src/cards/pool/shower-of-coals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of Duty",
+   "files": [
+    "engine/src/cards/pool/sphere-of-duty.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sphere of Grace",
+   "files": [
+    "engine/src/cards/pool/sphere-of-grace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of Law",
+   "files": [
+    "engine/src/cards/pool/sphere-of-law.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphere of Reason",
+   "files": [
+    "engine/src/cards/pool/sphere-of-reason.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sphere of Truth",
+   "files": [
+    "engine/src/cards/pool/sphere-of-truth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Springing Tiger",
+   "files": [
+    "engine/src/cards/pool/springing-tiger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stalking Bloodsucker",
+   "files": [
+    "engine/src/cards/pool/stalking-bloodsucker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Still Life",
+   "files": [
+    "engine/src/cards/pool/still-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Testament of Faith",
+   "files": [
+    "engine/src/cards/pool/testament-of-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thermal Blast",
+   "files": [
+    "engine/src/cards/pool/thermal-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twigwalker",
+   "files": [
+    "engine/src/cards/pool/twigwalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unifying Theory",
+   "files": [
+    "engine/src/cards/pool/unifying-theory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivify",
+   "files": [
+    "engine/src/cards/pool/vivify.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volley of Boulders",
+   "files": [
+    "engine/src/cards/pool/volley-of-boulders.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wayward Angel",
+   "files": [
+    "engine/src/cards/pool/wayward-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Assassin",
+   "files": [
+    "engine/src/cards/pool/zombie-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Cannibal",
+   "files": [
+    "engine/src/cards/pool/zombie-cannibal.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Stone-Tongue Basilisk",
+   "needs": [
+    "trigger:trigger-recipient-ref"
+   ],
+   "why": "\"Destroy that creature at end of combat\" off its combat-damage trigger: the delayed trigger doesn't carry the creature it damaged."
+  },
+  {
+   "name": "Last Rites",
+   "needs": [
+    "effect:discard-chosen-exact-count"
+   ],
+   "why": "A nonland card for each card discarded this way is an exact count; discard-chosen's upTo would let the caster take fewer."
+  },
+  {
+   "name": "Tattoo Ward",
+   "needs": [
+    "static:protection-except-this-aura"
+   ],
+   "why": "Protection from enchantments that doesn't remove this Aura (rule 702.16d); nothing exempts the granting Aura."
+  },
+  {
+   "name": "Decompose",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "Up to three target cards from a single graveyard: any-number graveyard targets can't be held to one graveyard."
+  },
+  {
+   "name": "Luminous Guardian",
+   "needs": [
+    "static:block-additional-creature"
+   ],
+   "why": "\"Can block an additional creature each combat\" until end of turn has no shape."
+  },
+  {
+   "name": "Traveling Plague",
+   "needs": [
+    "effect:return-aura-after-host-died"
+   ],
+   "why": "When enchanted creature leaves, its controller returns this Aura from its owner's graveyard attached to a creature of their choice, under their control."
+  },
+  {
+   "name": "Whipkeeper",
+   "needs": [
+    "amount:damage-dealt-to-target-creature-this-turn"
+   ],
+   "why": "The damage already dealt to the target this turn, regenerated damage included; turnStat counts only damage to players."
+  },
+  {
+   "name": "Graceful Antelope",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "Target land becomes a Plains for as long as this remains on the battlefield."
+  },
+  {
+   "name": "Ember Beast",
+   "needs": [
+    "static:cant-attack-or-block-alone"
+   ],
+   "why": "Can't attack or block alone has no restriction."
+  },
+  {
+   "name": "Pilgrim of Virtue",
+   "needs": [
+    "replacement:prevent-next-damage-from-chosen-source-any-recipient"
+   ],
+   "why": "The next time a black source of your choice would deal damage this turn, to anything, prevent it."
+  },
+  {
+   "name": "Pilgrim of Justice",
+   "needs": [
+    "replacement:prevent-next-damage-from-chosen-source-any-recipient"
+   ],
+   "why": "As Pilgrim of Virtue, for a red source."
+  },
+  {
+   "name": "Pardic Firecat",
+   "needs": [
+    "filter:counts-as-named-card"
+   ],
+   "why": "\"If a card named Flame Burst is in a graveyard, it counts as Pardic Firecat\": nothing makes a card count as another name."
+  },
+  {
+   "name": "Cursed Monstrosity",
+   "needs": [
+    "effect:unless-discard-filtered-card"
+   ],
+   "why": "Sacrifice it unless you discard a land card: the unless discard option has no filter."
+  },
+  {
+   "name": "Savage Firecat",
+   "needs": [
+    "trigger:tapped-for-mana-nonmana-trigger"
+   ],
+   "why": "\"Whenever you tap a land for mana\" removing a counter uses the stack; tapped-for-mana is only a triggered mana ability."
+  },
+  {
+   "name": "Liquid Fire",
+   "needs": [
+    "cost:choose-number-additional"
+   ],
+   "why": "Choosing a number between 0 and 5 as an additional cost; a castModal of six modes would make it a modal spell."
+  },
+  {
+   "name": "Spellbane Centaur",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "Can't be the target of blue spells or abilities from blue sources, its controller's too; hexproofFrom is only opponents'."
+  },
+  {
+   "name": "Engulfing Flames",
+   "needs": [
+    "effect:cant-be-regenerated-this-turn"
+   ],
+   "why": "\"It can't be regenerated this turn\" after damage: only destroy effects carry cantBeRegenerated."
+  },
+  {
+   "name": "Aether Burst",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "Up to one plus the number of Aether Bursts in all graveyards targets: any-number's max is only a number or X."
+  },
+  {
+   "name": "Sandstone Deadfall",
+   "needs": [
+    "cost:sacrifice-self-and-another"
+   ],
+   "why": "Sacrifice two lands and this artifact as one cost."
+  },
+  {
+   "name": "Hint of Insanity",
+   "needs": [
+    "effect:discard-duplicate-names"
+   ],
+   "why": "Discard all nonland cards with the same name as another card in that hand."
+  },
+  {
+   "name": "Steam Vines",
+   "needs": [
+    "effect:attach-aura-to-land-chosen-by-player"
+   ],
+   "why": "After destroying the land, that land's controller attaches Steam Vines to a land of their choice."
+  },
+  {
+   "name": "Shifty Doppelganger",
+   "needs": [
+    "effect:return-if-sacrificed-this-way"
+   ],
+   "why": "Sacrifice that creature at the next end step; if you do, return this card from exile."
+  },
+  {
+   "name": "Repentant Vampire",
+   "needs": [
+    "trigger:creature-damaged-by-source-dies",
+    "filter:damaged-this-turn-by-source"
+   ],
+   "why": "Whenever a creature dealt damage by this creature this turn dies."
+  },
+  {
+   "name": "Dreamwinder",
+   "needs": [
+    "condition:defending-player-controls",
+    "effect:set-land-type"
+   ],
+   "why": "Can't attack unless defending player controls an Island; target land becomes an Island until end of turn."
+  },
+  {
+   "name": "Balshan Beguiler",
+   "needs": [
+    "effect:reveal-top-opponent-library-you-choose-to-graveyard"
+   ],
+   "why": "That player reveals the top two cards; you choose one to put into their graveyard."
+  },
+  {
+   "name": "Resilient Wanderer",
+   "needs": [
+    "effect:grant-protection-temporary",
+    "effect:grant-protection-choice"
+   ],
+   "why": "Protection from the color of your choice until end of turn."
+  },
+  {
+   "name": "Mad Dog",
+   "needs": [
+    "condition:came-under-control-this-turn"
+   ],
+   "why": "\"If it didn't attack or come under your control this turn\" has no came-under-control condition."
+  },
+  {
+   "name": "Famished Ghoul",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "Up to two target cards from a single graveyard."
+  },
+  {
+   "name": "Haunting Echoes",
+   "needs": [
+    "effect:search-opponent-library",
+    "effect:extract-same-name"
+   ],
+   "why": "Search its owner's library for all cards with the same name as each card exiled this way."
+  },
+  {
+   "name": "Tombfire",
+   "needs": [
+    "condition:filter-has-flashback"
+   ],
+   "why": "Exile all cards with flashback from target player's graveyard: no filter for flashback."
+  }
+ ]
+}

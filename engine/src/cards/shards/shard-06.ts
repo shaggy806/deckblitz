@@ -185,6 +185,7 @@ import _poolDaruWarchief from "../pool/daru-warchief.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
+import _poolDawningPurist from "../pool/dawning-purist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
@@ -248,6 +249,7 @@ import _poolFesteringNewt from "../pool/festering-newt.js";
 import _poolFiligreeFracture from "../pool/filigree-fracture.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
+import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
 import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
@@ -983,6 +985,7 @@ const shard: CardShard = {
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,
+    _poolDawningPurist,
     _poolDawnwingMarshal,
     _poolDeadfall,
     _poolDeadlyRiposte,
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolFiligreeFracture,
     _poolFireNationCadets,
     _poolFireNationSoldier,
+    _poolFlameBurst,
     _poolFlameSpill,
     _poolFlashback,
     _poolFlowOfIdeas,

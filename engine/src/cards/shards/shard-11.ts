@@ -53,6 +53,7 @@ import _poolAvatarOfFury from "../pool/avatar-of-fury.js";
 import _poolAvenTrailblazer from "../pool/aven-trailblazer.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBantSureblade from "../pool/bant-sureblade.js";
+import _poolBarbarianLunatic from "../pool/barbarian-lunatic.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
@@ -102,6 +103,7 @@ import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
+import _poolCabalShrine from "../pool/cabal-shrine.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
 import _poolCallToGlory from "../pool/call-to-glory.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
@@ -142,6 +144,7 @@ import _poolClutchOfTheUndercity from "../pool/clutch-of-the-undercity.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
+import _poolCognivore from "../pool/cognivore.js";
 import _poolComboAttack from "../pool/combo-attack.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
@@ -243,6 +246,7 @@ import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
 import _poolFlailingSoldier from "../pool/flailing-soldier.js";
 import _poolFlameBlitz from "../pool/flame-blitz.js";
+import _poolFleetingAven from "../pool/fleeting-aven.js";
 import _poolFlittingGuerrilla from "../pool/flitting-guerrilla.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
 import _poolFontOfFertility from "../pool/font-of-fertility.js";
@@ -402,6 +406,7 @@ import _poolKrosanDrover from "../pool/krosan-drover.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLancersEnKor from "../pool/lancers-en-kor.js";
+import _poolLeeryFogbeast from "../pool/leery-fogbeast.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
@@ -465,10 +470,12 @@ import _poolMurderersAxe from "../pool/murderers-axe.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
 import _poolMyPrecious from "../pool/my-precious.js";
 import _poolMysidianElder from "../pool/mysidian-elder.js";
+import _poolMysticCrusader from "../pool/mystic-crusader.js";
 import _poolMysticDenial from "../pool/mystic-denial.js";
 import _poolMysticForge from "../pool/mystic-forge.js";
 import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolMysticRepeal from "../pool/mystic-repeal.js";
+import _poolMysticZealot from "../pool/mystic-zealot.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNestedGhoul from "../pool/nested-ghoul.js";
@@ -866,6 +873,7 @@ const shard: CardShard = {
     _poolAvenTrailblazer,
     _poolBadgermoleCub,
     _poolBantSureblade,
+    _poolBarbarianLunatic,
     _poolBarbaryApes,
     _poolBarbedBatterfist,
     _poolBarbedServitor,
@@ -915,6 +923,7 @@ const shard: CardShard = {
     _poolBurningTreeVandal,
     _poolCabalPaladin,
     _poolCabalRitual,
+    _poolCabalShrine,
     _poolCabarettiCourtyard,
     _poolCallToGlory,
     _poolCallerOfGales,
@@ -955,6 +964,7 @@ const shard: CardShard = {
     _poolCoatWithVenom,
     _poolCodecrackerHound,
     _poolCoffinPurge,
+    _poolCognivore,
     _poolComboAttack,
     _poolCommanderMustard,
     _poolConclaveMentor,
@@ -1056,6 +1066,7 @@ const shard: CardShard = {
     _poolFissureVent,
     _poolFlailingSoldier,
     _poolFlameBlitz,
+    _poolFleetingAven,
     _poolFlittingGuerrilla,
     _poolFloodPlain,
     _poolFontOfFertility,
@@ -1215,6 +1226,7 @@ const shard: CardShard = {
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLancersEnKor,
+    _poolLeeryFogbeast,
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
     _poolLeonardoBigBrother,
@@ -1278,10 +1290,12 @@ const shard: CardShard = {
     _poolMusterTheDeparted,
     _poolMyPrecious,
     _poolMysidianElder,
+    _poolMysticCrusader,
     _poolMysticDenial,
     _poolMysticForge,
     _poolMysticGate,
     _poolMysticRepeal,
+    _poolMysticZealot,
     _poolNearheathStalker,
     _poolNessianCourser,
     _poolNestedGhoul,

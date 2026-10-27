@@ -564,6 +564,7 @@ import _poolRevive from "../pool/revive.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
+import _poolRiptideBiologist from "../pool/riptide-biologist.js";
 import _poolRiptide from "../pool/riptide.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
@@ -637,6 +638,7 @@ import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
 import _poolSoar from "../pool/soar.js";
+import _poolSolarBlast from "../pool/solar-blast.js";
 import _poolSonicSeizure from "../pool/sonic-seizure.js";
 import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
@@ -1424,6 +1426,7 @@ const shard: CardShard = {
     _poolRhysticStudy,
     _poolRidesEnd,
     _poolRipTheSeams,
+    _poolRiptideBiologist,
     _poolRiptide,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
@@ -1497,6 +1500,7 @@ const shard: CardShard = {
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,
     _poolSoar,
+    _poolSolarBlast,
     _poolSonicSeizure,
     _poolSoullessRevival,
     _poolSoulsGrace,

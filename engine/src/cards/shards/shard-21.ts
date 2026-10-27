@@ -20,6 +20,7 @@ import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnimateLand from "../pool/animate-land.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
+import _poolAphettoVulture from "../pool/aphetto-vulture.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
 import _poolArchdemonOfPaliano from "../pool/archdemon-of-paliano.js";
@@ -119,6 +120,7 @@ import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChillToTheBone from "../pool/chill-to-the-bone.js";
 import _poolChimericStaff from "../pool/chimeric-staff.js";
+import _poolChlorophant from "../pool/chlorophant.js";
 import _poolChokingTethers from "../pool/choking-tethers.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
@@ -635,6 +637,7 @@ import _poolSubmergedBoneyard from "../pool/submerged-boneyard.js";
 import _poolSuddenSetback from "../pool/sudden-setback.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
+import _poolSunfireBalm from "../pool/sunfire-balm.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
@@ -712,6 +715,7 @@ import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadGladiator from "../pool/undead-gladiator.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
 import _poolUnholyStrength from "../pool/unholy-strength.js";
+import _poolUnifyingTheory from "../pool/unifying-theory.js";
 import _poolUnitedFront from "../pool/united-front.js";
 import _poolUnstoppablePlan from "../pool/unstoppable-plan.js";
 import _poolUnworthyDead from "../pool/unworthy-dead.js";
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolAngelsTrumpet,
     _poolAnimateLand,
     _poolAnointedDeacon,
+    _poolAphettoVulture,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
     _poolArchdemonOfPaliano,
@@ -909,6 +914,7 @@ const shard: CardShard = {
     _poolChaseInspiration,
     _poolChillToTheBone,
     _poolChimericStaff,
+    _poolChlorophant,
     _poolChokingTethers,
     _poolChromaticLantern,
     _poolCircleOfFlame,
@@ -1425,6 +1431,7 @@ const shard: CardShard = {
     _poolSuddenSetback,
     _poolSukiCourageousRescuer,
     _poolSunastianFalconer,
+    _poolSunfireBalm,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwarmOfBloodflies,
@@ -1502,6 +1509,7 @@ const shard: CardShard = {
     _poolUndeadGladiator,
     _poolUndeadMinotaur,
     _poolUnholyStrength,
+    _poolUnifyingTheory,
     _poolUnitedFront,
     _poolUnstoppablePlan,
     _poolUnworthyDead,

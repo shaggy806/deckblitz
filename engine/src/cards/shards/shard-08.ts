@@ -275,6 +275,7 @@ import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
 import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
+import _poolGangrenousGoliath from "../pool/gangrenous-goliath.js";
 import _poolGarbageFire from "../pool/garbage-fire.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
@@ -463,6 +464,7 @@ import _poolMossbornHydra from "../pool/mossborn-hydra.js";
 import _poolMosswortBridge from "../pool/mosswort-bridge.js";
 import _poolMountainBandit from "../pool/mountain-bandit.js";
 import _poolMuzzioVisionaryArchitect from "../pool/muzzio-visionary-architect.js";
+import _poolMysticEnforcer from "../pool/mystic-enforcer.js";
 import _poolMysticRetrieval from "../pool/mystic-retrieval.js";
 import _poolMythicProportions from "../pool/mythic-proportions.js";
 import _poolNahirisMachinations from "../pool/nahiris-machinations.js";
@@ -503,6 +505,7 @@ import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
+import _poolPardicSwordsmith from "../pool/pardic-swordsmith.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
 import _poolPeaceAndQuiet from "../pool/peace-and-quiet.js";
@@ -614,6 +617,7 @@ import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShiftingSky from "../pool/shifting-sky.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
+import _poolShowerOfCoals from "../pool/shower-of-coals.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
@@ -1107,6 +1111,7 @@ const shard: CardShard = {
     _poolFuturistOperative,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
+    _poolGangrenousGoliath,
     _poolGarbageFire,
     _poolGargoyleFlock,
     _poolGarruksWarsteed,
@@ -1295,6 +1300,7 @@ const shard: CardShard = {
     _poolMosswortBridge,
     _poolMountainBandit,
     _poolMuzzioVisionaryArchitect,
+    _poolMysticEnforcer,
     _poolMysticRetrieval,
     _poolMythicProportions,
     _poolNahirisMachinations,
@@ -1335,6 +1341,7 @@ const shard: CardShard = {
     _poolOxiddaDaredevil,
     _poolParadigmShift,
     _poolParapet,
+    _poolPardicSwordsmith,
     _poolPathToExile,
     _poolPathToTheWorldTree,
     _poolPeaceAndQuiet,
@@ -1446,6 +1453,7 @@ const shard: CardShard = {
     _poolShiftingSky,
     _poolShoalKraken,
     _poolShoreKeeper,
+    _poolShowerOfCoals,
     _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,

@@ -92,6 +92,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Chameleon Spirit, Nether Spirit, the Legates, the Cateran and Ramosian searchers, the
   spellshapers, the Flailing three — and 24 blocked (`B233.json`). Every set from Alpha to
   Mercadian Masques is walked.
+- **"With the same name as that spell", and Odyssey — Odyssey is whole** (batch 231, the fifth
+  middle walk's last, 2026-10-27, `amount:count-in-graveyards-same-name-as-trigger-spell`):
+  **built** `CardFilter.sameNameAsTriggerObject` — bound as the effect applies to the trigger
+  object and its name (rule 201.2a), as `sameNameAsTarget` is to a target slot — so a
+  `countInGraveyard` of it is the Shrines' "the number of cards in all graveyards with the same
+  name as that spell" (`same-name-as-trigger-object.test.ts`): Cabal, Cephalid and Dwarven Shrine
+  here, Aven and Nantuko Shrine from batch 225. 76 of the 106 left authored — Wayward Angel,
+  Cabal Patriarch, the five Spheres, Life Burst, Mind Burst, Muscle Burst, Testament of Faith,
+  Still Life, the Mystics, the Desires — by five `card-author` agents and the lead, and 30
+  blocked (`B231.json`). With the fifth middle walk's range (Judgment, Torment, Odyssey) done.
+- **The rest of Onslaught — Onslaught is whole** (batch 230, the fourth middle walk's last batch,
+  2026-10-27): no engine change. 62 of the set's last 94 authored — Animal Magnetism, Tribal Golem,
+  Withering Hex, Nameless One, Thunder of Hooves, Goblin Pyromancer, the Couriers and Gustcloaks —
+  by five `card-author` agents and the scaffolder's Centaur Glade, and 32 blocked (`B230.json`).
+  The fourth middle walk's range (Scourge back to Onslaught) is done.
 - **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
   walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
   `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",
