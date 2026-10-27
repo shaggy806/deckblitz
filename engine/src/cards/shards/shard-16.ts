@@ -172,6 +172,7 @@ import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDromokaCaptain from "../pool/dromoka-captain.js";
 import _poolDub from "../pool/dub.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
+import _poolDurkwoodTracker from "../pool/durkwood-tracker.js";
 import _poolDuskFeaster from "../pool/dusk-feaster.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolDromokaCaptain,
     _poolDub,
     _poolDuelForDominance,
+    _poolDurkwoodTracker,
     _poolDuskFeaster,
     _poolDuskwielder,
     _poolDwarvenArmorer,

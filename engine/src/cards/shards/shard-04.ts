@@ -769,6 +769,7 @@ import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
+import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolZulaportEnforcer,
   ],
   tokens: [
+    _tokens11ThrullToken,
     _tokens55ElephantToken,
     _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,

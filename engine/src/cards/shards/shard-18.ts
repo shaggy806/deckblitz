@@ -217,6 +217,7 @@ import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFinish from "../pool/finish.js";
 import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
+import _poolFlamecoreElemental from "../pool/flamecore-elemental.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFlowstoneFlood from "../pool/flowstone-flood.js";
@@ -667,6 +668,7 @@ import _poolThunderousWrath from "../pool/thunderous-wrath.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
+import _poolTivadarOfThorn from "../pool/tivadar-of-thorn.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTombTrawler from "../pool/tomb-trawler.js";
 import _poolTomeAnima from "../pool/tome-anima.js";
@@ -1001,6 +1003,7 @@ const shard: CardShard = {
     _poolFinish,
     _poolFireRimForm,
     _poolFirebolt,
+    _poolFlamecoreElemental,
     _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
     _poolFlowstoneFlood,
@@ -1451,6 +1454,7 @@ const shard: CardShard = {
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,
+    _poolTivadarOfThorn,
     _poolTolarianWinds,
     _poolTombTrawler,
     _poolTomeAnima,

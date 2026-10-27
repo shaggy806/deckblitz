@@ -228,6 +228,7 @@ import _poolEsperCormorants from "../pool/esper-cormorants.js";
 import _poolEssenceBacklash from "../pool/essence-backlash.js";
 import _poolEssenceHarvest from "../pool/essence-harvest.js";
 import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
+import _poolEternitySnare from "../pool/eternity-snare.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
@@ -732,6 +733,7 @@ import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
+import _poolThunderTotem from "../pool/thunder-totem.js";
 import _poolTibaltTheFiendBlooded from "../pool/tibalt-the-fiend-blooded.js";
 import _poolTimberProtector from "../pool/timber-protector.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
@@ -1071,6 +1073,7 @@ const shard: CardShard = {
     _poolEssenceBacklash,
     _poolEssenceHarvest,
     _poolEtaliPrimalStorm,
+    _poolEternitySnare,
     _poolEtherealArmor,
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
@@ -1575,6 +1578,7 @@ const shard: CardShard = {
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,
     _poolThrivingHeath,
+    _poolThunderTotem,
     _poolTibaltTheFiendBlooded,
     _poolTimberProtector,
     _poolTimberwatchElf,

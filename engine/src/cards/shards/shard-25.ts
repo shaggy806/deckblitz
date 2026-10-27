@@ -475,6 +475,7 @@ import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
+import _poolPlatedPegasus from "../pool/plated-pegasus.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
@@ -680,6 +681,7 @@ import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
+import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -1245,6 +1247,7 @@ const shard: CardShard = {
     _poolPhyrexianBoon,
     _poolPitilessPlunderer,
     _poolPlanarIncision,
+    _poolPlatedPegasus,
     _poolPloverKnights,
     _poolPlunder,
     _poolPointTheWay,
@@ -1450,6 +1453,7 @@ const shard: CardShard = {
     _poolTrailOfEvidence,
     _poolTranquilDomain,
     _poolTreadUpon,
+    _poolTrespasserIlVec,
     _poolTrigonOfInfestation,
     _poolTrygonPrime,
     _poolTuskguardCaptain,

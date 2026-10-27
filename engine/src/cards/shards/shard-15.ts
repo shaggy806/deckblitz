@@ -19,6 +19,7 @@ import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
 import _poolAltarGolem from "../pool/altar-golem.js";
+import _poolAmrouSeekers from "../pool/amrou-seekers.js";
 import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
@@ -667,6 +668,7 @@ import _poolTransguildPromenade from "../pool/transguild-promenade.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTrigonOfMending from "../pool/trigon-of-mending.js";
+import _poolTrompTheDomains from "../pool/tromp-the-domains.js";
 import _poolTrostanisSummoner from "../pool/trostanis-summoner.js";
 import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTuktukScrapper from "../pool/tuktuk-scrapper.js";
@@ -777,6 +779,7 @@ const shard: CardShard = {
     _poolAlexWilderRunaway,
     _poolAlignedHedronNetwork,
     _poolAltarGolem,
+    _poolAmrouSeekers,
     _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
@@ -1425,6 +1428,7 @@ const shard: CardShard = {
     _poolTreasonousOgre,
     _poolTreasureCruise,
     _poolTrigonOfMending,
+    _poolTrompTheDomains,
     _poolTrostanisSummoner,
     _poolTruckToss,
     _poolTuktukScrapper,

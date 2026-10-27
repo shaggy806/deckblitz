@@ -237,6 +237,7 @@ import _poolFinalStingFaerie from "../pool/final-sting-faerie.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiredrinkerSatyr from "../pool/firedrinker-satyr.js";
+import _poolFiremawKavu from "../pool/firemaw-kavu.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
@@ -1012,6 +1013,7 @@ const shard: CardShard = {
     _poolFireLitThicket,
     _poolFirebendingStudent,
     _poolFiredrinkerSatyr,
+    _poolFiremawKavu,
     _poolFiveHundredYearDiary,
     _poolFlameOfAnor,
     _poolFlameshape,

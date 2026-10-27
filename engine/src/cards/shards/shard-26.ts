@@ -94,6 +94,7 @@ import _poolBorborygmosEnraged from "../pool/borborygmos-enraged.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBorosMastiff from "../pool/boros-mastiff.js";
 import _poolBranchingBolt from "../pool/branching-bolt.js";
+import _poolBrassGnat from "../pool/brass-gnat.js";
 import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
@@ -109,6 +110,7 @@ import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCallousSellSword from "../pool/callous-sell-sword.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
+import _poolCandlesOfLeng from "../pool/candles-of-leng.js";
 import _poolCankerousThirst from "../pool/cankerous-thirst.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCapsize from "../pool/capsize.js";
@@ -263,6 +265,7 @@ import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGeyadroneDihada from "../pool/geyadrone-dihada.js";
+import _poolGhostflameSliver from "../pool/ghostflame-sliver.js";
 import _poolGhoultree from "../pool/ghoultree.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
@@ -604,6 +607,7 @@ import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
+import _poolSkulkingKnight from "../pool/skulking-knight.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
 import _poolSlowMotion from "../pool/slow-motion.js";
@@ -879,6 +883,7 @@ const shard: CardShard = {
     _poolBorealShelf,
     _poolBorosMastiff,
     _poolBranchingBolt,
+    _poolBrassGnat,
     _poolBrassTalonChimera,
     _poolBreakneckBerserker,
     _poolBriarbridgeTracker,
@@ -894,6 +899,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCallousSellSword,
     _poolCampusComposer,
+    _poolCandlesOfLeng,
     _poolCankerousThirst,
     _poolCanyonJerboa,
     _poolCapsize,
@@ -1048,6 +1054,7 @@ const shard: CardShard = {
     _poolGerrardsBattleCry,
     _poolGetThePoint,
     _poolGeyadroneDihada,
+    _poolGhostflameSliver,
     _poolGhoultree,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
@@ -1389,6 +1396,7 @@ const shard: CardShard = {
     _poolSimicLocket,
     _poolSkeletalChangeling,
     _poolSkred,
+    _poolSkulkingKnight,
     _poolSkyclaveRelic,
     _poolSlickImitator,
     _poolSlowMotion,

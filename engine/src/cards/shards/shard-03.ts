@@ -265,6 +265,7 @@ import _poolGruesomeSlaughter from "../pool/gruesome-slaughter.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGuildscornWard from "../pool/guildscorn-ward.js";
+import _poolGustcloakCavalier from "../pool/gustcloak-cavalier.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
@@ -676,6 +677,7 @@ import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWeatherlightCompleated from "../pool/weatherlight-compleated.js";
+import _poolWeatherseedTotem from "../pool/weatherseed-totem.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhisperSquad from "../pool/whisper-squad.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
@@ -985,6 +987,7 @@ const shard: CardShard = {
     _poolGuardianKirin,
     _poolGuardianSunmare,
     _poolGuildscornWard,
+    _poolGustcloakCavalier,
     _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHammerDropper,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolWaspShrinkingSavior,
     _poolWeatherMaker,
     _poolWeatherlightCompleated,
+    _poolWeatherseedTotem,
     _poolWebShot,
     _poolWhisperSquad,
     _poolWhiteKnight,

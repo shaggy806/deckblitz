@@ -135,6 +135,7 @@ import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCooperate from "../pool/cooperate.js";
 import _poolCopperGnomes from "../pool/copper-gnomes.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
+import _poolCoralTrickster from "../pool/coral-trickster.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
 import _poolCoruscationMage from "../pool/coruscation-mage.js";
 import _poolCragcrownPathway from "../pool/cragcrown-pathway.js";
@@ -915,6 +916,7 @@ const shard: CardShard = {
     _poolCooperate,
     _poolCopperGnomes,
     _poolCopyEnchantment,
+    _poolCoralTrickster,
     _poolCoreProwler,
     _poolCoruscationMage,
     _poolCragcrownPathway,

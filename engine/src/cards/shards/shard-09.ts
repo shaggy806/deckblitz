@@ -21,6 +21,7 @@ import _poolAkkiRonin from "../pool/akki-ronin.js";
 import _poolAlbinoTroll from "../pool/albino-troll.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
+import _poolAmrouScout from "../pool/amrou-scout.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
@@ -712,6 +713,7 @@ import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTrainedPronghorn from "../pool/trained-pronghorn.js";
+import _poolTraitorsClutch from "../pool/traitors-clutch.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
@@ -826,6 +828,7 @@ const shard: CardShard = {
     _poolAlbinoTroll,
     _poolAlleyEvasion,
     _poolAmethystDragon,
+    _poolAmrouScout,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
@@ -1517,6 +1520,7 @@ const shard: CardShard = {
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
     _poolTrainedPronghorn,
+    _poolTraitorsClutch,
     _poolTraxosScourgeEternal,
     _poolTreacherousPitDweller,
     _poolTrenchpost,

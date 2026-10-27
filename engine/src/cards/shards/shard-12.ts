@@ -54,6 +54,7 @@ import _poolBalustradeSpy from "../pool/balustrade-spy.js";
 import _poolBanishingKnack from "../pool/banishing-knack.js";
 import _poolBarbedSextant from "../pool/barbed-sextant.js";
 import _poolBarterInBlood from "../pool/barter-in-blood.js";
+import _poolBasaltGargoyle from "../pool/basalt-gargoyle.js";
 import _poolBasiliskGate from "../pool/basilisk-gate.js";
 import _poolBattleBrawler from "../pool/battle-brawler.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
@@ -647,6 +648,7 @@ import _poolStratusDancer from "../pool/stratus-dancer.js";
 import _poolStreetSpasm from "../pool/street-spasm.js";
 import _poolStringOfDisappearances from "../pool/string-of-disappearances.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
+import _poolStrongholdOverseer from "../pool/stronghold-overseer.js";
 import _poolSturdyHatchling from "../pool/sturdy-hatchling.js";
 import _poolSturmgeist from "../pool/sturmgeist.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
@@ -710,6 +712,7 @@ import _poolUncleIroh from "../pool/uncle-iroh.js";
 import _poolUndyingRage from "../pool/undying-rage.js";
 import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
+import _poolUrborgSyphonMage from "../pool/urborg-syphon-mage.js";
 import _poolValeronWardens from "../pool/valeron-wardens.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolBanishingKnack,
     _poolBarbedSextant,
     _poolBarterInBlood,
+    _poolBasaltGargoyle,
     _poolBasiliskGate,
     _poolBattleBrawler,
     _poolBattlegroundGeist,
@@ -1432,6 +1436,7 @@ const shard: CardShard = {
     _poolStreetSpasm,
     _poolStringOfDisappearances,
     _poolStrixLookout,
+    _poolStrongholdOverseer,
     _poolSturdyHatchling,
     _poolSturmgeist,
     _poolSubterraneanSpirit,
@@ -1495,6 +1500,7 @@ const shard: CardShard = {
     _poolUndyingRage,
     _poolUneasyPartings,
     _poolUntamedHunger,
+    _poolUrborgSyphonMage,
     _poolValeronWardens,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,

@@ -188,6 +188,7 @@ import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
 import _poolDrainingWhelk from "../pool/draining-whelk.js";
+import _poolDrifterIlDal from "../pool/drifter-il-dal.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
 import _poolDromokasGift from "../pool/dromokas-gift.js";
@@ -504,10 +505,12 @@ import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
 import _poolPharikasCure from "../pool/pharikas-cure.js";
+import _poolPhyrexianTotem from "../pool/phyrexian-totem.js";
 import _poolPhyrexianWarBeast from "../pool/phyrexian-war-beast.js";
 import _poolPicnicRuiner from "../pool/picnic-ruiner.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
+import _poolPitKeeper from "../pool/pit-keeper.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
@@ -571,6 +574,7 @@ import _poolSalvageDrone from "../pool/salvage-drone.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
+import _poolSangrophage from "../pool/sangrophage.js";
 import _poolSavageBeating from "../pool/savage-beating.js";
 import _poolScrapbasket from "../pool/scrapbasket.js";
 import _poolScrollshift from "../pool/scrollshift.js";
@@ -656,6 +660,7 @@ import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
 import _poolStockingThePantry from "../pool/stocking-the-pantry.js";
 import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStolenIdentity from "../pool/stolen-identity.js";
+import _poolStonebrowKrosanHero from "../pool/stonebrow-krosan-hero.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolStriderRangerOfTheNorth from "../pool/strider-ranger-of-the-north.js";
@@ -1001,6 +1006,7 @@ const shard: CardShard = {
     _poolDowsingDevice,
     _poolDragonflySuit,
     _poolDrainingWhelk,
+    _poolDrifterIlDal,
     _poolDrixFatemaker,
     _poolDrogskolCaptain,
     _poolDromokasGift,
@@ -1317,10 +1323,12 @@ const shard: CardShard = {
     _poolPerniciousDeed,
     _poolPhantomMonster,
     _poolPharikasCure,
+    _poolPhyrexianTotem,
     _poolPhyrexianWarBeast,
     _poolPicnicRuiner,
     _poolPierceStrider,
     _poolPilgrimOfTheFires,
+    _poolPitKeeper,
     _poolPlagonLordOfTheBeach,
     _poolPolukranosUnchained,
     _poolPreemptiveStrike,
@@ -1384,6 +1392,7 @@ const shard: CardShard = {
     _poolSalvagerOfSecrets,
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,
+    _poolSangrophage,
     _poolSavageBeating,
     _poolScrapbasket,
     _poolScrollshift,
@@ -1469,6 +1478,7 @@ const shard: CardShard = {
     _poolStockingThePantry,
     _poolStokeTheFlames,
     _poolStolenIdentity,
+    _poolStonebrowKrosanHero,
     _poolStormStrike,
     _poolStratosoarer,
     _poolStriderRangerOfTheNorth,

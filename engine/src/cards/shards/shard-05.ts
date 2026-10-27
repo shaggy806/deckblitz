@@ -120,6 +120,7 @@ import _poolCarom from "../pool/carom.js";
 import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
+import _poolCavalryMaster from "../pool/cavalry-master.js";
 import _poolCelestusSanctifier from "../pool/celestus-sanctifier.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
 import _poolCeremonialGroundbreaker from "../pool/ceremonial-groundbreaker.js";
@@ -898,6 +899,7 @@ const shard: CardShard = {
     _poolCaseOfTheGorgonsKiss,
     _poolCastleArdenvale,
     _poolCatharticParting,
+    _poolCavalryMaster,
     _poolCelestusSanctifier,
     _poolCentaurVinecrasher,
     _poolCeremonialGroundbreaker,

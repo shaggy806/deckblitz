@@ -450,6 +450,7 @@ import _poolMirrex from "../pool/mirrex.js";
 import _poolMoaningWall from "../pool/moaning-wall.js";
 import _poolMockingSprite from "../pool/mocking-sprite.js";
 import _poolMoggRaider from "../pool/mogg-raider.js";
+import _poolMolder from "../pool/molder.js";
 import _poolMonasteryFlock from "../pool/monastery-flock.js";
 import _poolMonksFist from "../pool/monks-fist.js";
 import _poolMoonragersSlash from "../pool/moonragers-slash.js";
@@ -533,6 +534,7 @@ import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
+import _poolQuilledSliver from "../pool/quilled-sliver.js";
 import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
@@ -664,6 +666,7 @@ import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
+import _poolTectonicFiend from "../pool/tectonic-fiend.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
@@ -1236,6 +1239,7 @@ const shard: CardShard = {
     _poolMoaningWall,
     _poolMockingSprite,
     _poolMoggRaider,
+    _poolMolder,
     _poolMonasteryFlock,
     _poolMonksFist,
     _poolMoonragersSlash,
@@ -1319,6 +1323,7 @@ const shard: CardShard = {
     _poolPurpleCrystalCrab,
     _poolQuicksand,
     _poolQuietDisrepair,
+    _poolQuilledSliver,
     _poolQuirionDruid,
     _poolRadiantEssence,
     _poolRakdosKeyrune,
@@ -1450,6 +1455,7 @@ const shard: CardShard = {
     _poolTajuruStalwart,
     _poolTalonSliver,
     _poolTangleMantis,
+    _poolTectonicFiend,
     _poolTeleport,
     _poolTempleOfMalice,
     _poolTemporalFirestorm,

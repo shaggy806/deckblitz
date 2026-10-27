@@ -223,6 +223,7 @@ import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
+import _poolFacelessDevourer from "../pool/faceless-devourer.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
@@ -318,6 +319,7 @@ import _poolHowlpackOfEstwald from "../pool/howlpack-of-estwald.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
 import _poolHungerOfTheHowlpack from "../pool/hunger-of-the-howlpack.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
+import _poolIcatianCrier from "../pool/icatian-crier.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
@@ -699,6 +701,7 @@ import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolTimeBeetle from "../pool/time-beetle.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
+import _poolTolarianSentinel from "../pool/tolarian-sentinel.js";
 import _poolTorchTheTower from "../pool/torch-the-tower.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolToxicStench from "../pool/toxic-stench.js";
@@ -1018,6 +1021,7 @@ const shard: CardShard = {
     _poolExpeditionHealer,
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
+    _poolFacelessDevourer,
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
@@ -1113,6 +1117,7 @@ const shard: CardShard = {
     _poolHulkingRaptor,
     _poolHungerOfTheHowlpack,
     _poolHungrySpriggan,
+    _poolIcatianCrier,
     _poolIcatianPriest,
     _poolIdyllicTutor,
     _poolIgneousCur,
@@ -1494,6 +1499,7 @@ const shard: CardShard = {
     _poolTigraFelineFury,
     _poolTimeBeetle,
     _poolTimelineInquiry,
+    _poolTolarianSentinel,
     _poolTorchTheTower,
     _poolToriDavenantFuryRider,
     _poolToxicStench,

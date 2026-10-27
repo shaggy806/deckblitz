@@ -699,6 +699,7 @@ import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUntamedPup from "../pool/untamed-pup.js";
 import _poolUntamedWilds from "../pool/untamed-wilds.js";
+import _poolUnyaroBees from "../pool/unyaro-bees.js";
 import _poolUnyaroGriffin from "../pool/unyaro-griffin.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
@@ -1488,6 +1489,7 @@ const shard: CardShard = {
     _poolUnrootedAncestor,
     _poolUntamedPup,
     _poolUntamedWilds,
+    _poolUnyaroBees,
     _poolUnyaroGriffin,
     _poolUproot,
     _poolUrGolemsEye,

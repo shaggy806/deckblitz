@@ -62,6 +62,7 @@ import _poolBitterbloomBearer from "../pool/bitterbloom-bearer.js";
 import _poolBlackPantherMostDangerous from "../pool/black-panther-most-dangerous.js";
 import _poolBladedPinions from "../pool/bladed-pinions.js";
 import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js";
+import _poolBlazingBladeAskari from "../pool/blazing-blade-askari.js";
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
 import _poolBlindZealot from "../pool/blind-zealot.js";
@@ -274,6 +275,7 @@ import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHarvestHand from "../pool/harvest-hand.js";
+import _poolHauntingHymn from "../pool/haunting-hymn.js";
 import _poolHavengulRunebinder from "../pool/havengul-runebinder.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
 import _poolHaystack from "../pool/haystack.js";
@@ -837,6 +839,7 @@ const shard: CardShard = {
     _poolBlackPantherMostDangerous,
     _poolBladedPinions,
     _poolBladewingDeathlessTyrant,
+    _poolBlazingBladeAskari,
     _poolBlightMamba,
     _poolBlightwidow,
     _poolBlindZealot,
@@ -1049,6 +1052,7 @@ const shard: CardShard = {
     _poolHaloHunter,
     _poolHarvestGwyllion,
     _poolHarvestHand,
+    _poolHauntingHymn,
     _poolHavengulRunebinder,
     _poolHavenwoodBattleground,
     _poolHaystack,

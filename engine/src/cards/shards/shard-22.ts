@@ -36,6 +36,7 @@ import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
 import _poolArtifactMutation from "../pool/artifact-mutation.js";
 import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
+import _poolAssemblyWorker from "../pool/assembly-worker.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
@@ -590,6 +591,7 @@ import _poolSinkingFeeling from "../pool/sinking-feeling.js";
 import _poolSkarrgGuildmage from "../pool/skarrg-guildmage.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
+import _poolSkitteringMonstrosity from "../pool/skittering-monstrosity.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSkyreaping from "../pool/skyreaping.js";
@@ -633,6 +635,7 @@ import _poolStoneQuarry from "../pool/stone-quarry.js";
 import _poolStoneforgeMystic from "../pool/stoneforge-mystic.js";
 import _poolStormReading from "../pool/storm-reading.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
+import _poolStormcloudDjinn from "../pool/stormcloud-djinn.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
 import _poolStratusWalk from "../pool/stratus-walk.js";
@@ -841,6 +844,7 @@ const shard: CardShard = {
     _poolArkOfBlight,
     _poolArtifactMutation,
     _poolAshenmoorGouger,
+    _poolAssemblyWorker,
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
     _poolAugerSpree,
@@ -1395,6 +1399,7 @@ const shard: CardShard = {
     _poolSkarrgGuildmage,
     _poolSkimmingStrike,
     _poolSkirkProspector,
+    _poolSkitteringMonstrosity,
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
     _poolSkyreaping,
@@ -1438,6 +1443,7 @@ const shard: CardShard = {
     _poolStoneforgeMystic,
     _poolStormReading,
     _poolStormcatchMentor,
+    _poolStormcloudDjinn,
     _poolStranglingSpores,
     _poolStrategicIntervention,
     _poolStratusWalk,

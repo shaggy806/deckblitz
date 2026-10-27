@@ -260,6 +260,7 @@ import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
 import _poolFleetingSpirit from "../pool/fleeting-spirit.js";
 import _poolFleshToDust from "../pool/flesh-to-dust.js";
 import _poolFleshgrafter from "../pool/fleshgrafter.js";
+import _poolFlickeringSpirit from "../pool/flickering-spirit.js";
 import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
 import _poolFlowstoneWall from "../pool/flowstone-wall.js";
@@ -513,6 +514,7 @@ import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
 import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
+import _poolPlagueSliver from "../pool/plague-sliver.js";
 import _poolPlagueSpitter from "../pool/plague-spitter.js";
 import _poolPlaguebearer from "../pool/plaguebearer.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
@@ -577,6 +579,7 @@ import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
+import _poolSarpadianEmpiresVolVii from "../pool/sarpadian-empires-vol-vii.js";
 import _poolSatyrsCunning from "../pool/satyrs-cunning.js";
 import _poolSavageSilhouette from "../pool/savage-silhouette.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
@@ -709,6 +712,7 @@ import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
 import _poolTresserhornSkyknight from "../pool/tresserhorn-skyknight.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
+import _poolTriskelavus from "../pool/triskelavus.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
 import _poolTrumpetingGnarr from "../pool/trumpeting-gnarr.js";
 import _poolTrustyRetriever from "../pool/trusty-retriever.js";
@@ -1056,6 +1060,7 @@ const shard: CardShard = {
     _poolFleetingSpirit,
     _poolFleshToDust,
     _poolFleshgrafter,
+    _poolFlickeringSpirit,
     _poolFloraColossus,
     _poolFlowstoneCrusher,
     _poolFlowstoneWall,
@@ -1309,6 +1314,7 @@ const shard: CardShard = {
     _poolPiaNalaar,
     _poolPiercingLight,
     _poolPlagueDogs,
+    _poolPlagueSliver,
     _poolPlagueSpitter,
     _poolPlaguebearer,
     _poolPlasmaBolt,
@@ -1373,6 +1379,7 @@ const shard: CardShard = {
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
+    _poolSarpadianEmpiresVolVii,
     _poolSatyrsCunning,
     _poolSavageSilhouette,
     _poolSazacapsBrew,
@@ -1505,6 +1512,7 @@ const shard: CardShard = {
     _poolTresserhornSkyknight,
     _poolTributaryVaulter,
     _poolTributeMage,
+    _poolTriskelavus,
     _poolTroveWarden,
     _poolTrumpetingGnarr,
     _poolTrustyRetriever,

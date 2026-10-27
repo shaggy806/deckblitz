@@ -113,6 +113,7 @@ import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarnivalOfSouls from "../pool/carnival-of-souls.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
+import _poolCastleRaptors from "../pool/castle-raptors.js";
 import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
@@ -175,6 +176,7 @@ import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
+import _poolDivineCongregation from "../pool/divine-congregation.js";
 import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
@@ -272,6 +274,7 @@ import _poolGnarlwoodDryad from "../pool/gnarlwood-dryad.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinFirebug from "../pool/goblin-firebug.js";
 import _poolGoblinMarshal from "../pool/goblin-marshal.js";
+import _poolGoblinSkycutter from "../pool/goblin-skycutter.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGoblinWarWagon from "../pool/goblin-war-wagon.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
@@ -753,6 +756,7 @@ import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
 import _poolVoidBeckoner from "../pool/void-beckoner.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
+import _poolVoidmageHusher from "../pool/voidmage-husher.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
@@ -934,6 +938,7 @@ const shard: CardShard = {
     _poolCarnivalOfSouls,
     _poolCarrierPigeons,
     _poolCarrionCrow,
+    _poolCastleRaptors,
     _poolCatharsCall,
     _poolCelesRuneKnight,
     _poolCelestineTheLivingSaint,
@@ -996,6 +1001,7 @@ const shard: CardShard = {
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
+    _poolDivineCongregation,
     _poolDjerusRenunciation,
     _poolDoggedDetective,
     _poolDomrisAmbush,
@@ -1093,6 +1099,7 @@ const shard: CardShard = {
     _poolGoblinArtillery,
     _poolGoblinFirebug,
     _poolGoblinMarshal,
+    _poolGoblinSkycutter,
     _poolGoblinWarPaint,
     _poolGoblinWarWagon,
     _poolGodEternalRhonas,
@@ -1574,6 +1581,7 @@ const shard: CardShard = {
     _poolVoidBeckoner,
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
+    _poolVoidmageHusher,
     _poolVolcanicUpheaval,
     _poolVraskasScorn,
     _poolWakerOfWaves,
