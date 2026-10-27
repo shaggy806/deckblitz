@@ -184,6 +184,7 @@ import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
 import _poolDustStalker from "../pool/dust-stalker.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
+import _poolEchoingTruth from "../pool/echoing-truth.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
 import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolDustStalker,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
+    _poolEchoingTruth,
     _poolEclipsedFlamekin,
     _poolEfflorescence,
     _poolEgonGodOfDeath,

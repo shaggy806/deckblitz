@@ -466,7 +466,8 @@
   "keyword:haunt",
   "trigger:functions-while-suspended",
   "cost:reveal-any-number-from-hand",
-  "keyword:sunburst"
+  "keyword:sunburst",
+  "condition:same-name-as-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

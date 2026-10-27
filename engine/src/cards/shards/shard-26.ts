@@ -179,6 +179,7 @@ import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
 import _poolEarthElemental from "../pool/earth-elemental.js";
 import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
 import _poolEbonPraetor from "../pool/ebon-praetor.js";
+import _poolEchoingDecay from "../pool/echoing-decay.js";
 import _poolEchoingEquation from "../pool/echoing-equation.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEdgeOfTheDivinity from "../pool/edge-of-the-divinity.js";
@@ -943,6 +944,7 @@ const shard: CardShard = {
     _poolEarthElemental,
     _poolEarthshakerDreadmaw,
     _poolEbonPraetor,
+    _poolEchoingDecay,
     _poolEchoingEquation,
     _poolEdgarCharmedGroom,
     _poolEdgeOfTheDivinity,

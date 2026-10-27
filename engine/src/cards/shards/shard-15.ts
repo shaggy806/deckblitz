@@ -44,6 +44,7 @@ import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
 import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
+import _poolBileBlight from "../pool/bile-blight.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
@@ -174,6 +175,7 @@ import _poolEagerGlyphmage from "../pool/eager-glyphmage.js";
 import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
+import _poolEchoingCalm from "../pool/echoing-calm.js";
 import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
 import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
@@ -297,6 +299,7 @@ import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHomicidalBrute from "../pool/homicidal-brute.js";
+import _poolHomingLightning from "../pool/homing-lightning.js";
 import _poolHomurasEssence from "../pool/homuras-essence.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
@@ -772,6 +775,7 @@ const shard: CardShard = {
     _poolBetrayersBargain,
     _poolBetrothTheBeast,
     _poolBiblioplexKraken,
+    _poolBileBlight,
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
     _poolBlessedHippogriff,
@@ -902,6 +906,7 @@ const shard: CardShard = {
     _poolEardrumRattler,
     _poolEarthbendingStudent,
     _poolEasterlingVanguard,
+    _poolEchoingCalm,
     _poolEiganjoUprising,
     _poolElderDruid,
     _poolElgaudShieldmate,
@@ -1025,6 +1030,7 @@ const shard: CardShard = {
     _poolHillGiant,
     _poolHillGigas,
     _poolHomicidalBrute,
+    _poolHomingLightning,
     _poolHomurasEssence,
     _poolHonor,
     _poolHorrifyingRevelation,

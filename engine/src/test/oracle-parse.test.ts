@@ -116,6 +116,36 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads \"target X and all other Xs with the same name as that X\" as one -all effect", () => {
+    const truth = parseFace({
+      name: "Echoing Truth",
+      type_line: "Instant",
+      oracle_text:
+        "Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.",
+    });
+    expect(truth.complete).toBe(true);
+    expect(truth.targets).toEqual(["nonland-permanent"]);
+    expect(truth.effect).toEqual({ kind: "return-to-hand-all", filter: { sameNameAsTarget: 0 } });
+    const decay = parseFace({
+      name: "Echoing Decay",
+      type_line: "Instant",
+      oracle_text: "Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.",
+    });
+    expect(decay.effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sameNameAsTarget: 0 },
+      power: -2,
+      toughness: -2,
+      duration: "end-of-turn",
+    });
+    const ruin = parseFace({
+      name: "Echoing Ruin",
+      type_line: "Sorcery",
+      oracle_text: "Destroy target artifact and all other artifacts with the same name as that artifact.",
+    });
+    expect(ruin.effect).toEqual({ kind: "destroy-all", filter: { type: "artifact", sameNameAsTarget: 0 } });
+  });
+
   it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
     const jasmine = parseFace({
       name: "Scent of Jasmine",

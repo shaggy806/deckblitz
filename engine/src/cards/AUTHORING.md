@@ -2040,7 +2040,7 @@ enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, ofChosenType, targets, greatestAmongItsController }`,
+nameUnlike, sameNameAsTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
 the greatest power among creatures **that player** controls" — a maximum per
 controller, read live of each permanent against its own controller's others
@@ -2072,6 +2072,16 @@ Project's "if it doesn't have the same name as another creature you control
 or a creature card in your graveyard": no *other* battlefield permanent
 matching `others`, and no graveyard card matching `graveyard`, shares its
 name — asked as it last existed, whatever now has its id is another object.
+`sameNameAsTarget: n` is "target X **and all other** X **with the same name as
+that** X" (rule 201.2a): the object in target slot `n` itself, or one sharing
+its name — an effect's filter only (bound as the effect applies; anywhere else
+it matches nothing). Write the whole line as one `-all` effect so the target
+and its namesakes go in one event: Maelstrom Pulse is `destroy-all` of `{
+sameNameAsTarget: 0 }`, Echoing Decay `modify-pt-all` of `{ type: "creature",
+sameNameAsTarget: 0 }`, Homing Lightning `damage-all`, Deputy of Detention an
+`exile-all` with `controlledBy: "you"` and `controlledByTarget: 0` ("that player
+controls"). The namesakes aren't targeted (hexproof doesn't save them); a
+face-down target has no name and goes alone.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this

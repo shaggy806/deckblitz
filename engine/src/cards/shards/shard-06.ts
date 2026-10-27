@@ -55,6 +55,7 @@ import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
+import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBarbedFoliage from "../pool/barbed-foliage.js";
@@ -210,6 +211,7 @@ import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
+import _poolEchoingRuin from "../pool/echoing-ruin.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -815,6 +817,7 @@ const shard: CardShard = {
     _poolBalambTRexaur,
     _poolBallLightning,
     _poolBalothPrime,
+    _poolBanishment,
     _poolBantBattlemage,
     _poolBaralsExpertise,
     _poolBarbedFoliage,
@@ -970,6 +973,7 @@ const shard: CardShard = {
     _poolDynamiteDiver,
     _poolEarthenAlly,
     _poolEbonDragon,
+    _poolEchoingRuin,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
