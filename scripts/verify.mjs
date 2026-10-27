@@ -471,12 +471,28 @@ await stopOnFailure(
 // A larger heap for vitest's main process: it holds the whole bundled card
 // barrel, and past ~21,400 definitions it ran out of the default ~2 GB at
 // startup on a cloud session (2026-10-26).
-const engineTests = await run(
-  "engine tests",
-  "node",
-  ["--max-old-space-size=4096", path.join(ROOT, "node_modules/vitest/vitest.mjs"), "run", `--maxWorkers=${Math.min(8, CORES)}`],
-  ENGINE,
-);
+const vitestArgs = ["--max-old-space-size=4096", path.join(ROOT, "node_modules/vitest/vitest.mjs"), "run"];
+let engineTests = await run("engine tests", "node", [...vitestArgs, `--maxWorkers=${Math.min(8, CORES)}`], ENGINE);
+// Every failure a timeout: those files again, alone, once — not the whole
+// suite. A random-games test that takes 17 s alone passed its 30 s under the
+// full suite's load on a 4-core session, and B219 (2026-10-27) re-ran the
+// whole `--only` check, ~15 minutes, for it. A timeout that recurs alone is
+// a real failure.
+const timedOutFiles = (out) => {
+  const failed = Number(/^\s*Tests\s+(\d+) failed/m.exec(out)?.[1] ?? 0);
+  const timeouts = (out.match(/Test timed out in \d+ms/g) ?? []).length;
+  const files = [...new Set([...out.matchAll(/FAIL\s+(\S+\.test\.tsx?)/g)].map((m) => m[1]))];
+  return failed > 0 && timeouts >= failed && files.length > 0 ? files : null;
+};
+const retryFiles = engineTests.ok ? null : timedOutFiles(engineTests.out);
+if (retryFiles) {
+  console.log(`  engine tests: only timeouts (${retryFiles.join(", ")}): re-running ${retryFiles.length === 1 ? "that file" : "those files"} alone`);
+  const again = await run("engine tests (timeouts, alone)", "node", [...vitestArgs, "--maxWorkers=1", ...retryFiles], ENGINE);
+  if (again.ok) {
+    console.log(`  passed alone: a timeout under load, not a failure`);
+    engineTests = { ...engineTests, ok: true };
+  } else engineTests = again;
+}
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
 // Side by side at 4 workers each — but on a small machine one after the

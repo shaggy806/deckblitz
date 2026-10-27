@@ -41,7 +41,7 @@ From the worktree root:
 ## Checks (all must pass before you commit)
 
 From the worktree root:
-1. `npm run gen:cards -w engine`, then `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/` until it passes — it needs no turn in the queue below, so fix what it finds first.
+1. `npm run gen:cards -w engine`, then `node --max-old-space-size=4096 ../node_modules/vitest/vitest.mjs run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/` until it passes (not `npx vitest`: its default ~2 GB heap can't hold the card barrel, and B221's and B222's agents were killed for memory on it) — it needs no turn in the queue below, so fix what it finds first.
 2. Then `node scripts/typecheck-turn.mjs npm run typecheck -w engine` — **once**, when the tests pass (it covers your test file too), with a Bash timeout of 600000; again only to check a fix to what it found. Batch 173's agents typechecked up to three times each and queued 7 minutes between them. **Always typecheck through `typecheck-turn.mjs`, never `npm run typecheck` or `tsc` bare**: it queues you behind the other agents' typechecks (one at a time on a cloud session, since one takes ~6 GB), so "waiting for a turn" for a few minutes is normal. Don't kill it, retry around it or start another typecheck meanwhile; use the wait to review your card files. Exit 137 with no type error printed is still the out-of-memory killer: run it again once, the same way.
 3. A typecheck fix: re-run the vitest command too.
 

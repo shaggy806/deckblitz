@@ -179,6 +179,10 @@ notification.
    2026-10-23 session. Fix or drop what's wrong. Check each agent's BLOCKED list too: a card
    blocked for a reason the digest answers is authorable, and its need key
    must exist in `needs-vocabulary.json` (add proposed ones with a `family`).
+   Once the record's keys are in, `node ../node_modules/vitest/vitest.mjs run
+   needs-vocabulary` from `engine/` (2 s): a new key filed under an alias or a
+   family that isn't a feature failed B221's and B223's first full verify,
+   a whole verify run each.
 3. **Check `tokens/`** for two files making the same token (merge them into
    one and repoint the cards).
 4. **Verify once, and start its slow step early** (the 2026-10-26 audit of

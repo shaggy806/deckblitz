@@ -50,6 +50,11 @@ first check-in.
   verify picks full or quick from its own branch's `scripts/verify-state.json` and batch
   number, so with consecutive numbers the later children run full, in parallel; the merges
   keep the higher `lastFullBatch`. No child needs a mode assigned.
+- **The coordinator lands under the lock too, once the children run.** Anything it pushes to
+  `main` after step 3 (a doc, a plan) goes through `node scripts/landing-lock.mjs acquire
+  coordinator --wait`, merge, push, `release`; better, it waits until the round is in. In round
+  eighteen the coordinator pushed two docs commits bare, and B222's and B223's pushes to `main`
+  were rejected under the lock, each paying a second acquire and merge.
 - **One engine feature, built once.** A child about to build a feature first checks
   `git log origin/main` for another walk having built it.
 - **One batch per child.** It ships, updates its walk's hand-off line and stops.
