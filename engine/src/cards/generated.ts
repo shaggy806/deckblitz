@@ -4292,6 +4292,7 @@ import _poolCrashOfRhinos from "./pool/crash-of-rhinos.js";
 import _poolCrashTheParty from "./pool/crash-the-party.js";
 import _poolCrashTheRamparts from "./pool/crash-the-ramparts.js";
 import _poolCrashThrough from "./pool/crash-through.js";
+import _poolCrash from "./pool/crash.js";
 import _poolCrashingDrawbridge from "./pool/crashing-drawbridge.js";
 import _poolCrashingFootfalls from "./pool/crashing-footfalls.js";
 import _poolCraterHellion from "./pool/crater-hellion.js";
@@ -21789,6 +21790,7 @@ import _poolThunderboltsConspiracy from "./pool/thunderbolts-conspiracy.js";
 import _poolThunderbreakRegent from "./pool/thunderbreak-regent.js";
 import _poolThunderclapDrake from "./pool/thunderclap-drake.js";
 import _poolThunderclapWyvern from "./pool/thunderclap-wyvern.js";
+import _poolThunderclap from "./pool/thunderclap.js";
 import _poolThundercloudShaman from "./pool/thundercloud-shaman.js";
 import _poolThunderdrumSoloist from "./pool/thunderdrum-soloist.js";
 import _poolThunderfootBaloth from "./pool/thunderfoot-baloth.js";
@@ -21826,6 +21828,7 @@ import _poolThundertrapTrainer from "./pool/thundertrap-trainer.js";
 import _poolThunderwolfCavalry from "./pool/thunderwolf-cavalry.js";
 import _poolThuridMareOfDestiny from "./pool/thurid-mare-of-destiny.js";
 import _poolThwartTheGrave from "./pool/thwart-the-grave.js";
+import _poolThwart from "./pool/thwart.js";
 import _poolThwip from "./pool/thwip.js";
 import _poolTiamat from "./pool/tiamat.js";
 import _poolTiamatsFanatics from "./pool/tiamats-fanatics.js";
@@ -21839,6 +21842,7 @@ import _poolTicketBoothTunnelOfHate from "./pool/ticket-booth-tunnel-of-hate.js"
 import _poolTicketBooth from "./pool/ticket-booth.js";
 import _poolTicketTortoise from "./pool/ticket-tortoise.js";
 import _poolTickingGnomes from "./pool/ticking-gnomes.js";
+import _poolTidalBore from "./pool/tidal-bore.js";
 import _poolTidalCourier from "./pool/tidal-courier.js";
 import _poolTidalForce from "./pool/tidal-force.js";
 import _poolTidalInfluence from "./pool/tidal-influence.js";
@@ -29638,6 +29642,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrashTheParty,
   _poolCrashTheRamparts,
   _poolCrashThrough,
+  _poolCrash,
   _poolCrashingDrawbridge,
   _poolCrashingFootfalls,
   _poolCraterHellion,
@@ -47135,6 +47140,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThunderbreakRegent,
   _poolThunderclapDrake,
   _poolThunderclapWyvern,
+  _poolThunderclap,
   _poolThundercloudShaman,
   _poolThunderdrumSoloist,
   _poolThunderfootBaloth,
@@ -47172,6 +47178,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThunderwolfCavalry,
   _poolThuridMareOfDestiny,
   _poolThwartTheGrave,
+  _poolThwart,
   _poolThwip,
   _poolTiamat,
   _poolTiamatsFanatics,
@@ -47185,6 +47192,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTicketBooth,
   _poolTicketTortoise,
   _poolTickingGnomes,
+  _poolTidalBore,
   _poolTidalCourier,
   _poolTidalForce,
   _poolTidalInfluence,
@@ -54997,6 +55005,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crash-the-party": _poolCrashTheParty,
   "pool/crash-the-ramparts": _poolCrashTheRamparts,
   "pool/crash-through": _poolCrashThrough,
+  "pool/crash": _poolCrash,
   "pool/crashing-drawbridge": _poolCrashingDrawbridge,
   "pool/crashing-footfalls": _poolCrashingFootfalls,
   "pool/crater-hellion": _poolCraterHellion,
@@ -72494,6 +72503,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thunderbreak-regent": _poolThunderbreakRegent,
   "pool/thunderclap-drake": _poolThunderclapDrake,
   "pool/thunderclap-wyvern": _poolThunderclapWyvern,
+  "pool/thunderclap": _poolThunderclap,
   "pool/thundercloud-shaman": _poolThundercloudShaman,
   "pool/thunderdrum-soloist": _poolThunderdrumSoloist,
   "pool/thunderfoot-baloth": _poolThunderfootBaloth,
@@ -72531,6 +72541,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thunderwolf-cavalry": _poolThunderwolfCavalry,
   "pool/thurid-mare-of-destiny": _poolThuridMareOfDestiny,
   "pool/thwart-the-grave": _poolThwartTheGrave,
+  "pool/thwart": _poolThwart,
   "pool/thwip": _poolThwip,
   "pool/tiamat": _poolTiamat,
   "pool/tiamats-fanatics": _poolTiamatsFanatics,
@@ -72544,6 +72555,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ticket-booth": _poolTicketBooth,
   "pool/ticket-tortoise": _poolTicketTortoise,
   "pool/ticking-gnomes": _poolTickingGnomes,
+  "pool/tidal-bore": _poolTidalBore,
   "pool/tidal-courier": _poolTidalCourier,
   "pool/tidal-force": _poolTidalForce,
   "pool/tidal-influence": _poolTidalInfluence,

@@ -2333,6 +2333,26 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
+    // Mercadian Masques' free spells (rule 118.9): "you may sacrifice a
+    // Mountain rather than pay this spell's mana cost" (Crash, Fireblast's
+    // two), "you may return three Islands you control to their owner's hand
+    // rather than pay" (Thwart, Gush), the Borderposts' "pay {1} and return a
+    // basic land you control to its owner's hand". Lands of a basic type, or
+    // basic lands, only.
+    if ((m = /^You may (?:pay ((?:\{[^}]+\})+) and )?(sacrifice|return) (an?|two|three|four) (Plains|Island|Swamp|Mountain|Forest|basic land)s? (?:you control )?(?:to (?:its|their) owner's hand )?rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      const returning = m[2] === "return";
+      const from = line.indexOf(`${m[2]} ${m[3]} `) + m[2].length + 1;
+      const said = line.slice(from, returning ? line.indexOf(" to ", from) : line.indexOf(" rather"));
+      if (returning === / to (?:its|their) owner's hand /.test(line)) {
+        const count = { a: 1, an: 1, two: 2, three: 3, four: 4 }[m[3]];
+        const filter = m[4] === "basic land" ? { type: "land", supertype: "basic" } : { type: "land", subtype: m[4] };
+        out.alternativeCost = {
+          mana: m[1] ?? "{0}",
+          [returning ? "returnToHand" : "sacrifice"]: { filter, ...(count > 1 ? { count } : {}), text: said },
+        };
+        continue;
+      }
+    }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Bestow [cost] (rule 702.103a): the card's `bestow`.

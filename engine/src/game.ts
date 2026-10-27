@@ -3587,7 +3587,17 @@ export class Game {
             }
           : altCost === true && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
-            : {}),
+            : altCost === true && (def.alternativeCost?.sacrifice !== undefined || def.alternativeCost?.returnToHand !== undefined)
+              ? {
+                  altCostText: [
+                    ...(def.alternativeCost.mana !== "{0}" ? [`pay ${def.alternativeCost.mana}`] : []),
+                    ...(def.alternativeCost.sacrifice !== undefined ? [`sacrifice ${def.alternativeCost.sacrifice.text}`] : []),
+                    ...(def.alternativeCost.returnToHand !== undefined
+                      ? [`return ${def.alternativeCost.returnToHand.text} to hand`]
+                      : []),
+                  ].join(", "),
+                }
+              : {}),
         // Jump-start rides the flashback cast: label it as printed.
         ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
           ? { altCostText: "jump-start, discarding a card" }
@@ -11940,7 +11950,7 @@ export class Game {
     // A creature tapped to convoke is no longer untapped to tap for mana. A
     // sacrifice of several needs what it takes still there once the mana is
     // paid — what could pay it is tried last (`costSacrificeRemaining`).
-    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked);
+    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked, altCost);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
     // So is an artifact or creature tapped to waterbend (rule 701.67a), and
@@ -12976,7 +12986,7 @@ export class Game {
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
     // A bargain's artifact, enchantment or token too (rule 702.166a).
-    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked);
+    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked, altCost);
 
     if (def.castModal !== null && modes === undefined) {
       throw new Error(`${def.name} is a modal spell — choose modes to cast it`);
@@ -13525,6 +13535,17 @@ export class Game {
     // "Exile two creature cards from your graveyard" (Skaab Ruinator):
     // which, chosen now as the cost is paid (601.2h).
     const graveyardExile = def.additionalCost?.exileFromGraveyard;
+    // "Return three Islands you control to their owner's hand rather than
+    // pay" (Thwart): which, chosen now too, as an activated ability's
+    // `returnToHand` cost is.
+    const altReturn = altCost ? def.alternativeCost?.returnToHand : undefined;
+    if (altReturn !== undefined) {
+      this.payReturnToHandCost(player, cardId, { count: altReturn.count ?? 1, filter: altReturn.filter }, cardId);
+      const awaiting = this.state.awaiting;
+      if (awaiting?.kind === "choose-permanents" && awaiting.player === player) {
+        this.state.awaiting = { ...awaiting, priorityTo };
+      }
+    }
     if (graveyardExile !== undefined) {
       this.withDecisionSource(cardId, () => this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo));
     }
@@ -14141,8 +14162,13 @@ export class Game {
     grant: GraveyardGrant | undefined,
     x: number,
     kicked: boolean | number = false,
+    altCost = false,
   ): SacrificeCostPart[] | null {
     const parts: SacrificeCostPart[] = [];
+    // "You may sacrifice a Mountain rather than pay this spell's mana cost"
+    // (Crash): chosen as it's paid, like the rest.
+    const altSacrifice = altCost ? def.alternativeCost?.sacrifice : undefined;
+    if (altSacrifice !== undefined) parts.push({ filter: altSacrifice.filter, count: altSacrifice.count ?? 1 });
     const extra = def.additionalCost;
     if (extra?.sacrifice !== undefined && extra.sacrificeCount !== undefined) {
       parts.push({
@@ -32742,14 +32768,18 @@ export class Game {
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
     readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;
+    readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
   } | null {
     // Cast for airbend's {2}, an alternative cost already (118.9a).
     if (via === "airbend") return null;
     if (def.alternativeCost !== null) {
       // The card's own: only while its condition holds ("If it's not your
-      // turn") and only when its life and its exiles can be paid (601.2h).
+      // turn") and only when its life, its exiles, its sacrifices and its
+      // returns can be paid (601.2h).
       const own = def.alternativeCost;
-      if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined) {
+      if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined ||
+        own.sacrifice !== undefined || own.returnToHand !== undefined) {
         if (caster === undefined) return null;
         const card = this.state.objects[cardId];
         if (own.condition !== undefined &&
@@ -32758,6 +32788,16 @@ export class Game {
         }
         if (own.payLife !== undefined && !this.canPayLife(caster, own.payLife)) return null;
         if (own.exileFromHand !== undefined && !this.canBehold(caster, Game.pitchSpec(own.exileFromHand), cardId)) {
+          return null;
+        }
+        if (own.sacrifice !== undefined &&
+          permanentCount(this.state, this.costSacrificeEligible(caster, own.sacrifice.filter, undefined)) <
+            (own.sacrifice.count ?? 1)) {
+          return null;
+        }
+        if (own.returnToHand !== undefined &&
+          permanentCount(this.state, this.battlefieldMatching(caster, { ...own.returnToHand.filter, controlledBy: "you" })) <
+            (own.returnToHand.count ?? 1)) {
           return null;
         }
       }

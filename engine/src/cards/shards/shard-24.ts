@@ -144,6 +144,7 @@ import _poolConvolute from "../pool/convolute.js";
 import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
+import _poolCrash from "../pool/crash.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrypticAnnelid from "../pool/cryptic-annelid.js";
 import _poolCrystacean from "../pool/crystacean.js";
@@ -934,6 +935,7 @@ const shard: CardShard = {
     _poolConvulsingLicid,
     _poolCoralEel,
     _poolCracklingCyclops,
+    _poolCrash,
     _poolCruelTruths,
     _poolCrypticAnnelid,
     _poolCrystacean,

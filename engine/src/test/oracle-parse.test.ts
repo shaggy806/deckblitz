@@ -1417,6 +1417,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("sacrifice or return lands rather than pay (rule 118.9): Crash, Thwart, the Borderposts", () => {
+    expect(face("You may sacrifice a Mountain rather than pay this spell's mana cost.\nDestroy target artifact.", "Instant").alternativeCost).toEqual({
+      mana: "{0}",
+      sacrifice: { filter: { type: "land", subtype: "Mountain" }, text: "a Mountain" },
+    });
+    expect(face("You may sacrifice two Mountains rather than pay this spell's mana cost.", "Instant").alternativeCost?.sacrifice).toEqual({
+      filter: { type: "land", subtype: "Mountain" },
+      count: 2,
+      text: "two Mountains",
+    });
+    expect(
+      face("You may return three Islands you control to their owner's hand rather than pay this spell's mana cost.", "Instant").alternativeCost,
+    ).toEqual({
+      mana: "{0}",
+      returnToHand: { filter: { type: "land", subtype: "Island" }, count: 3, text: "three Islands you control" },
+    });
+    expect(
+      face("You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.", "Artifact").alternativeCost,
+    ).toEqual({
+      mana: "{1}",
+      returnToHand: { filter: { type: "land", supertype: "basic" }, text: "a basic land you control" },
+    });
+  });
+
   it("afterlife, spectacle and adapt (rules 702.135, 702.137, 701.46)", () => {
     const priest = face("Afterlife 2 (When this creature dies, create two 1/1 white and black Spirit creature tokens with flying.)", "Creature — Human Cleric");
     expect(priest.triggered[0].effect).toEqual({ kind: "create-token", token: "Spirit Token (White-Black)", count: 2 });
