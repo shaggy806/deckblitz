@@ -694,6 +694,7 @@ import _poolThoughtNibbler from "../pool/thought-nibbler.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
+import _poolThunderOfHooves from "../pool/thunder-of-hooves.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
@@ -734,6 +735,7 @@ import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
+import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
 import _poolVentSentinel from "../pool/vent-sentinel.js";
 import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
@@ -1495,6 +1497,7 @@ const shard: CardShard = {
     _poolThousandYearStorm,
     _poolThranGolem,
     _poolThrowALine,
+    _poolThunderOfHooves,
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
     _poolTigerSeal,
@@ -1535,6 +1538,7 @@ const shard: CardShard = {
     _poolVault75MiddleSchool,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
+    _poolVenomspoutBrackus,
     _poolVentSentinel,
     _poolVermiculos,
     _poolVialOfPoison,

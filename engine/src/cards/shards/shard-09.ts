@@ -492,6 +492,7 @@ import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
+import _poolPietyCharm from "../pool/piety-charm.js";
 import _poolPillardropRescuer from "../pool/pillardrop-rescuer.js";
 import _poolPinecrestRidge from "../pool/pinecrest-ridge.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
@@ -557,6 +558,7 @@ import _poolRhysTheExiled from "../pool/rhys-the-exiled.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRikuOfTwoReflections from "../pool/riku-of-two-reflections.js";
 import _poolRiptideChimera from "../pool/riptide-chimera.js";
+import _poolRiptideChronologist from "../pool/riptide-chronologist.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
 import _poolRocCharger from "../pool/roc-charger.js";
@@ -1315,6 +1317,7 @@ const shard: CardShard = {
     _poolPhyrexianDebaser,
     _poolPhytoburst,
     _poolPickUpThePace,
+    _poolPietyCharm,
     _poolPillardropRescuer,
     _poolPinecrestRidge,
     _poolPlagueStinger,
@@ -1380,6 +1383,7 @@ const shard: CardShard = {
     _poolRidgetopRaptor,
     _poolRikuOfTwoReflections,
     _poolRiptideChimera,
+    _poolRiptideChronologist,
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
     _poolRocCharger,

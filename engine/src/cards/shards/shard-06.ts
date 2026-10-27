@@ -183,6 +183,7 @@ import _poolDaruWarchief from "../pool/daru-warchief.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
+import _poolDawningPurist from "../pool/dawning-purist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,
+    _poolDawningPurist,
     _poolDawnwingMarshal,
     _poolDeadfall,
     _poolDeadlyRiposte,

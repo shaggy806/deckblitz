@@ -242,6 +242,7 @@ import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
 import _poolFlameBlitz from "../pool/flame-blitz.js";
+import _poolFleetingAven from "../pool/fleeting-aven.js";
 import _poolFlittingGuerrilla from "../pool/flitting-guerrilla.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
 import _poolFontOfFertility from "../pool/font-of-fertility.js";
@@ -401,6 +402,7 @@ import _poolKrosanDrover from "../pool/krosan-drover.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLancersEnKor from "../pool/lancers-en-kor.js";
+import _poolLeeryFogbeast from "../pool/leery-fogbeast.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
@@ -1054,6 +1056,7 @@ const shard: CardShard = {
     _poolFieryIslet,
     _poolFissureVent,
     _poolFlameBlitz,
+    _poolFleetingAven,
     _poolFlittingGuerrilla,
     _poolFloodPlain,
     _poolFontOfFertility,
@@ -1213,6 +1216,7 @@ const shard: CardShard = {
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLancersEnKor,
+    _poolLeeryFogbeast,
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
     _poolLeonardoBigBrother,

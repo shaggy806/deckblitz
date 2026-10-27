@@ -164,6 +164,7 @@ import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
+import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
@@ -174,6 +175,7 @@ import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
 import _poolDistress from "../pool/distress.js";
+import _poolDiveBomber from "../pool/dive-bomber.js";
 import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
@@ -249,6 +251,7 @@ import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
+import _poolFoothillGuide from "../pool/foothill-guide.js";
 import _poolForTheEmperor from "../pool/for-the-emperor.js";
 import _poolForceOfVigor from "../pool/force-of-vigor.js";
 import _poolForkedLightning from "../pool/forked-lightning.js";
@@ -577,6 +580,7 @@ import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
 import _poolScourgeOfNumai from "../pool/scourge-of-numai.js";
 import _poolScrapCompactor from "../pool/scrap-compactor.js";
+import _poolScreamingSeahawk from "../pool/screaming-seahawk.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSealOfDoom from "../pool/seal-of-doom.js";
 import _poolSeance from "../pool/seance.js";
@@ -693,6 +697,7 @@ import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThoughtDevourer from "../pool/thought-devourer.js";
 import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
+import _poolThrashingMudspawn from "../pool/thrashing-mudspawn.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThrivingRats from "../pool/thriving-rats.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
@@ -967,6 +972,7 @@ const shard: CardShard = {
     _poolDauthiJackal,
     _poolDaxosOfMeletis,
     _poolDecreeOfPain,
+    _poolDefensiveManeuvers,
     _poolDelifsCone,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
@@ -977,6 +983,7 @@ const shard: CardShard = {
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
     _poolDistress,
+    _poolDiveBomber,
     _poolDownwindAmbusher,
     _poolDrEggman,
     _poolDragonFodder,
@@ -1052,6 +1059,7 @@ const shard: CardShard = {
     _poolFlyingMen,
     _poolFollowHim,
     _poolFootMystic,
+    _poolFoothillGuide,
     _poolForTheEmperor,
     _poolForceOfVigor,
     _poolForkedLightning,
@@ -1380,6 +1388,7 @@ const shard: CardShard = {
     _poolScornfulEgotist,
     _poolScourgeOfNumai,
     _poolScrapCompactor,
+    _poolScreamingSeahawk,
     _poolSeahunter,
     _poolSealOfDoom,
     _poolSeance,
@@ -1496,6 +1505,7 @@ const shard: CardShard = {
     _poolThoughtDevourer,
     _poolThranLens,
     _poolThranTemporalGateway,
+    _poolThrashingMudspawn,
     _poolThrissNantukoPrimus,
     _poolThrivingRats,
     _poolThroneOfBone,

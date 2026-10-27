@@ -19,6 +19,7 @@ import _poolAetherRift from "../pool/aether-rift.js";
 import _poolAethermagesTouch from "../pool/aethermages-touch.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
+import _poolAirdropCondor from "../pool/airdrop-condor.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
@@ -267,6 +268,7 @@ import _poolGladecoverScout from "../pool/gladecover-scout.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
 import _poolGraspingDunes from "../pool/grasping-dunes.js";
+import _poolGrasslandCrusader from "../pool/grassland-crusader.js";
 import _poolGravelgillAxeshark from "../pool/gravelgill-axeshark.js";
 import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
 import _poolGrimJavelineer from "../pool/grim-javelineer.js";
@@ -456,6 +458,7 @@ import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
+import _poolPearlspearCourier from "../pool/pearlspear-courier.js";
 import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
@@ -469,6 +472,7 @@ import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
 import _poolPriestOfTitania from "../pool/priest-of-titania.js";
+import _poolPrimalBoost from "../pool/primal-boost.js";
 import _poolPrimevalsGloriousRebirth from "../pool/primevals-glorious-rebirth.js";
 import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
@@ -807,6 +811,7 @@ const shard: CardShard = {
     _poolAethermagesTouch,
     _poolAhnCropCrasher,
     _poolAhriman,
+    _poolAirdropCondor,
     _poolAjanisAnguish,
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
@@ -1055,6 +1060,7 @@ const shard: CardShard = {
     _poolGoblinMountaineer,
     _poolGoblinTombRaider,
     _poolGraspingDunes,
+    _poolGrasslandCrusader,
     _poolGravelgillAxeshark,
     _poolGreatDivideGuide,
     _poolGrimJavelineer,
@@ -1244,6 +1250,7 @@ const shard: CardShard = {
     _poolPartingGust,
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,
+    _poolPearlspearCourier,
     _poolPerilousResearch,
     _poolPerimeterSergeant,
     _poolPestilence,
@@ -1257,6 +1264,7 @@ const shard: CardShard = {
     _poolPreordain,
     _poolPreyUpon,
     _poolPriestOfTitania,
+    _poolPrimalBoost,
     _poolPrimevalsGloriousRebirth,
     _poolPrimordialWurm,
     _poolPrinceImrahilTheFair,

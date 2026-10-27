@@ -508,6 +508,7 @@ import _poolPrismArray from "../pool/prism-array.js";
 import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
+import _poolProwlingPangolin from "../pool/prowling-pangolin.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPsychatog from "../pool/psychatog.js";
 import _poolPureSimple from "../pool/pure-simple.js";
@@ -552,6 +553,7 @@ import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
 import _poolRustScarab from "../pool/rust-scarab.js";
 import _poolRuthlessCullblade from "../pool/ruthless-cullblade.js";
+import _poolSageAven from "../pool/sage-aven.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
 import _poolSanctuaryWall from "../pool/sanctuary-wall.js";
@@ -1282,6 +1284,7 @@ const shard: CardShard = {
     _poolPrizedAmalgam,
     _poolPrizefight,
     _poolPropheticFlamespeaker,
+    _poolProwlingPangolin,
     _poolPsionicSnoop,
     _poolPsychatog,
     _poolPureSimple,
@@ -1326,6 +1329,7 @@ const shard: CardShard = {
     _poolRushOfAdrenaline,
     _poolRustScarab,
     _poolRuthlessCullblade,
+    _poolSageAven,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,
     _poolSanctuaryWall,

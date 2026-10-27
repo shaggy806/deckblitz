@@ -337,6 +337,7 @@ import _poolGrozoth from "../pool/grozoth.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
+import _poolGustcloakSentinel from "../pool/gustcloak-sentinel.js";
 import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
@@ -580,6 +581,7 @@ import _poolRottingRats from "../pool/rotting-rats.js";
 import _poolRough from "../pool/rough.js";
 import _poolRoyalHerbalist from "../pool/royal-herbalist.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
+import _poolRunWild from "../pool/run-wild.js";
 import _poolRunawayCarriage from "../pool/runaway-carriage.js";
 import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
 import _poolRuneTailsEssence from "../pool/rune-tails-essence.js";
@@ -1147,6 +1149,7 @@ const shard: CardShard = {
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolGuanYuSaintedWarrior,
+    _poolGustcloakSentinel,
     _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
     _poolHarshSustenance,
@@ -1390,6 +1393,7 @@ const shard: CardShard = {
     _poolRough,
     _poolRoyalHerbalist,
     _poolRuinousGremlin,
+    _poolRunWild,
     _poolRunawayCarriage,
     _poolRunawayTrashBot,
     _poolRuneTailsEssence,

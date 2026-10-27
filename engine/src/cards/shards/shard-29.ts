@@ -85,6 +85,7 @@ import _poolBudokaPupil from "../pool/budoka-pupil.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
 import _poolBuriedAlive from "../pool/buried-alive.js";
 import _poolBurningFields from "../pool/burning-fields.js";
+import _poolCabalExecutioner from "../pool/cabal-executioner.js";
 import _poolCacklingSlasher from "../pool/cackling-slasher.js";
 import _poolCadaverImp from "../pool/cadaver-imp.js";
 import _poolCaldaiaStrongarm from "../pool/caldaia-strongarm.js";
@@ -189,6 +190,7 @@ import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvenRite from "../pool/elven-rite.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
+import _poolEmbermageGoblin from "../pool/embermage-goblin.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolEnigmaDrake from "../pool/enigma-drake.js";
@@ -196,6 +198,7 @@ import _poolEntanglingTrap from "../pool/entangling-trap.js";
 import _poolEquestrianSkill from "../pool/equestrian-skill.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEsperStormblade from "../pool/esper-stormblade.js";
+import _poolEssenceFracture from "../pool/essence-fracture.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtherealElk from "../pool/ethereal-elk.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
@@ -891,6 +894,7 @@ const shard: CardShard = {
     _poolBurgeoning,
     _poolBuriedAlive,
     _poolBurningFields,
+    _poolCabalExecutioner,
     _poolCacklingSlasher,
     _poolCadaverImp,
     _poolCaldaiaStrongarm,
@@ -995,6 +999,7 @@ const shard: CardShard = {
     _poolElvenFortress,
     _poolElvenRite,
     _poolElvishPromenade,
+    _poolEmbermageGoblin,
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,
     _poolEnigmaDrake,
@@ -1002,6 +1007,7 @@ const shard: CardShard = {
     _poolEquestrianSkill,
     _poolErietteOfTheCharmedApple,
     _poolEsperStormblade,
+    _poolEssenceFracture,
     _poolEternalStudent,
     _poolEtherealElk,
     _poolEtheriumAstrolabe,

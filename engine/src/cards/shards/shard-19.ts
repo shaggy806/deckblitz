@@ -273,6 +273,7 @@ import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlameKinWarScout from "../pool/flame-kin-war-scout.js";
 import _poolFlamebladeAngel from "../pool/flameblade-angel.js";
+import _poolFlamestickCourier from "../pool/flamestick-courier.js";
 import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
 import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
@@ -335,6 +336,7 @@ import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGuiseOfFire from "../pool/guise-of-fire.js";
+import _poolGustcloakHarrier from "../pool/gustcloak-harrier.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
 import _poolHagHedgeMage from "../pool/hag-hedge-mage.js";
@@ -1117,6 +1119,7 @@ const shard: CardShard = {
     _poolFissureWizard,
     _poolFlameKinWarScout,
     _poolFlamebladeAngel,
+    _poolFlamestickCourier,
     _poolFlamingFist,
     _poolFlamingTyrannosaurus,
     _poolFlipTheSwitch,
@@ -1179,6 +1182,7 @@ const shard: CardShard = {
     _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
     _poolGuiseOfFire,
+    _poolGustcloakHarrier,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
     _poolHagHedgeMage,

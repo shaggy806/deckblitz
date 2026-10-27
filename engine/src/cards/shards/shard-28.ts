@@ -119,6 +119,7 @@ import _poolCausticTar from "../pool/caustic-tar.js";
 import _poolCelesRuneKnight from "../pool/celes-rune-knight.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolCemeteryPuca from "../pool/cemetery-puca.js";
+import _poolCentaurGlade from "../pool/centaur-glade.js";
 import _poolCeruleanWisps from "../pool/cerulean-wisps.js";
 import _poolChampionOfWits from "../pool/champion-of-wits.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
@@ -360,6 +361,7 @@ import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolKozileksSentinel from "../pool/kozileks-sentinel.js";
+import _poolKrosanGroundshaker from "../pool/krosan-groundshaker.js";
 import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
 import _poolLaccolithRig from "../pool/laccolith-rig.js";
 import _poolLaccolithWarrior from "../pool/laccolith-warrior.js";
@@ -952,6 +954,7 @@ const shard: CardShard = {
     _poolCelesRuneKnight,
     _poolCelestineTheLivingSaint,
     _poolCemeteryPuca,
+    _poolCentaurGlade,
     _poolCeruleanWisps,
     _poolChampionOfWits,
     _poolChancellorOfTales,
@@ -1193,6 +1196,7 @@ const shard: CardShard = {
     _poolKithkinSpellduster,
     _poolKnotvineMystic,
     _poolKozileksSentinel,
+    _poolKrosanGroundshaker,
     _poolKumanoFacesKakkazan,
     _poolLaccolithRig,
     _poolLaccolithWarrior,

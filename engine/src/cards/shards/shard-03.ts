@@ -556,6 +556,7 @@ import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
+import _poolSnarlingUndorak from "../pool/snarling-undorak.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
@@ -572,6 +573,7 @@ import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
+import _poolSpitfireHandler from "../pool/spitfire-handler.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStaffOfTheAges from "../pool/staff-of-the-ages.js";
 import _poolStalkingTiger from "../pool/stalking-tiger.js";
@@ -675,6 +677,7 @@ import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
+import _poolWalkingDesecration from "../pool/walking-desecration.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWalltopSentries from "../pool/walltop-sentries.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
@@ -696,6 +699,7 @@ import _poolWingShards from "../pool/wing-shards.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
+import _poolWitheringHex from "../pool/withering-hex.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWizardMentor from "../pool/wizard-mentor.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
@@ -1286,6 +1290,7 @@ const shard: CardShard = {
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
     _poolSnakeOfTheGoldenGrove,
+    _poolSnarlingUndorak,
     _poolSolemnOffering,
     _poolSomberwaldAlpha,
     _poolSoulOfTheRapids,
@@ -1302,6 +1307,7 @@ const shard: CardShard = {
     _poolSpiritMascot,
     _poolSpiritOfTheHunt,
     _poolSpitefulSquad,
+    _poolSpitfireHandler,
     _poolSplendidReclamation,
     _poolStaffOfTheAges,
     _poolStalkingTiger,
@@ -1405,6 +1411,7 @@ const shard: CardShard = {
     _poolVolleyVeteran,
     _poolVonaButcherOfMagan,
     _poolVraskasContempt,
+    _poolWalkingDesecration,
     _poolWallOfRoots,
     _poolWalltopSentries,
     _poolWanderingArchaic,
@@ -1426,6 +1433,7 @@ const shard: CardShard = {
     _poolWingbladeDisciple,
     _poolWingcrafter,
     _poolWingspanMentor,
+    _poolWitheringHex,
     _poolWittyRoastmaster,
     _poolWizardMentor,
     _poolWoeStrider,

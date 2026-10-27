@@ -41,6 +41,7 @@ import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolAvacynsCollar from "../pool/avacyns-collar.js";
 import _poolAvenEternal from "../pool/aven-eternal.js";
+import _poolAvenFateshaper from "../pool/aven-fateshaper.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
@@ -846,6 +847,7 @@ const shard: CardShard = {
     _poolAssembleTheEntmoot,
     _poolAvacynsCollar,
     _poolAvenEternal,
+    _poolAvenFateshaper,
     _poolAvenSquire,
     _poolAwakenTheSkyTyrant,
     _poolAxgardBraggart,

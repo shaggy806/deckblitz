@@ -143,6 +143,7 @@ import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolContestedCliffs from "../pool/contested-cliffs.js";
+import _poolConvalescentCare from "../pool/convalescent-care.js";
 import _poolCoralNet from "../pool/coral-net.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
@@ -607,6 +608,7 @@ import _poolSilverSeraph from "../pool/silver-seraph.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
+import _poolSkirkCommando from "../pool/skirk-commando.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullRend from "../pool/skull-rend.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
@@ -926,6 +928,7 @@ const shard: CardShard = {
     _poolContagion,
     _poolContaminatedLandscape,
     _poolContestedCliffs,
+    _poolConvalescentCare,
     _poolCoralNet,
     _poolCorpsehatch,
     _poolCovetedPeacock,
@@ -1390,6 +1393,7 @@ const shard: CardShard = {
     _poolSimicRagworm,
     _poolSinuousStriker,
     _poolSirensRuse,
+    _poolSkirkCommando,
     _poolSkophosWarleader,
     _poolSkullRend,
     _poolSkullclamp,

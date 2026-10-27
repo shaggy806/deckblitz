@@ -34,6 +34,7 @@ import _poolAuntiesSnitch from "../pool/aunties-snitch.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAutomatedArtificer from "../pool/automated-artificer.js";
 import _poolAuxiliaryBoosters from "../pool/auxiliary-boosters.js";
+import _poolAvarax from "../pool/avarax.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
 import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
@@ -134,6 +135,7 @@ import _poolDarkRevenant from "../pool/dark-revenant.js";
 import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
 import _poolDarksteelBrute from "../pool/darksteel-brute.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
+import _poolDaruCavalier from "../pool/daru-cavalier.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
@@ -831,6 +833,7 @@ const shard: CardShard = {
     _poolAuroralProcession,
     _poolAutomatedArtificer,
     _poolAuxiliaryBoosters,
+    _poolAvarax,
     _poolAvenSkirmisher,
     _poolAviationPioneer,
     _poolAysenBureaucrats,
@@ -931,6 +934,7 @@ const shard: CardShard = {
     _poolDarklightPhoenix,
     _poolDarksteelBrute,
     _poolDarksteelMyr,
+    _poolDaruCavalier,
     _poolDauntlessSurvivor,
     _poolDeadbridgeShaman,
     _poolDeafeningClarion,

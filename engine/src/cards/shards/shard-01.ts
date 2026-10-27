@@ -270,6 +270,7 @@ import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
+import _poolHeadhunter from "../pool/headhunter.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
@@ -485,6 +486,7 @@ import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectServe from "../pool/protect-serve.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
+import _poolPsychicTrance from "../pool/psychic-trance.js";
 import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
 import _poolPyroblast from "../pool/pyroblast.js";
 import _poolQueenOfIce from "../pool/queen-of-ice.js";
@@ -687,6 +689,7 @@ import _poolTraumatize from "../pool/traumatize.js";
 import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
+import _poolTribalGolem from "../pool/tribal-golem.js";
 import _poolTroublesomeSpirit from "../pool/troublesome-spirit.js";
 import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
@@ -1054,6 +1057,7 @@ const shard: CardShard = {
     _poolHaywireMite,
     _poolHazoretGodseeker,
     _poolHazoretTheFervent,
+    _poolHeadhunter,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,
@@ -1269,6 +1273,7 @@ const shard: CardShard = {
     _poolProtectServe,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
+    _poolPsychicTrance,
     _poolPummelerForHire,
     _poolPyroblast,
     _poolQueenOfIce,
@@ -1471,6 +1476,7 @@ const shard: CardShard = {
     _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
+    _poolTribalGolem,
     _poolTroublesomeSpirit,
     _poolTrustedForcemage,
     _poolTunnelRats,

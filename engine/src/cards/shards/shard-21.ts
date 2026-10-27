@@ -20,6 +20,7 @@ import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnimateLand from "../pool/animate-land.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
+import _poolAphettoVulture from "../pool/aphetto-vulture.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
 import _poolArchdemonOfPaliano from "../pool/archdemon-of-paliano.js";
@@ -633,6 +634,7 @@ import _poolSubmergedBoneyard from "../pool/submerged-boneyard.js";
 import _poolSuddenSetback from "../pool/sudden-setback.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
+import _poolSunfireBalm from "../pool/sunfire-balm.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
@@ -808,6 +810,7 @@ const shard: CardShard = {
     _poolAngelsTrumpet,
     _poolAnimateLand,
     _poolAnointedDeacon,
+    _poolAphettoVulture,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
     _poolArchdemonOfPaliano,
@@ -1421,6 +1424,7 @@ const shard: CardShard = {
     _poolSuddenSetback,
     _poolSukiCourageousRescuer,
     _poolSunastianFalconer,
+    _poolSunfireBalm,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwarmOfBloodflies,
