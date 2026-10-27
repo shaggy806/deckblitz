@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
+import _poolAboshansDesire from "../pool/aboshans-desire.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAbyssalNocturnus from "../pool/abyssal-nocturnus.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
@@ -786,6 +787,7 @@ import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-n
 const shard: CardShard = {
   pool: [
     _poolAangAtTheCrossroads,
+    _poolAboshansDesire,
     _poolAbueloAncestralEcho,
     _poolAbyssalNocturnus,
     _poolAcquisitionOctopus,

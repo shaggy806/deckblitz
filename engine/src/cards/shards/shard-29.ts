@@ -780,6 +780,7 @@ import _poolZarOjanenScionOfEfrava from "../pool/zar-ojanen-scion-of-efrava.js";
 import _poolZhalfirinShapecraft from "../pool/zhalfirin-shapecraft.js";
 import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZombieCutthroat from "../pool/zombie-cutthroat.js";
+import _poolZombieInfestation from "../pool/zombie-infestation.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
@@ -1584,6 +1585,7 @@ const shard: CardShard = {
     _poolZhalfirinShapecraft,
     _poolZoanthrope,
     _poolZombieCutthroat,
+    _poolZombieInfestation,
     _poolZookeeperMechan,
   ],
   tokens: [

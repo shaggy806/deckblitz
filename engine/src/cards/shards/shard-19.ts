@@ -312,6 +312,7 @@ import _poolGoblinRimerunner from "../pool/goblin-rimerunner.js";
 import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
+import _poolGorillaTitan from "../pool/gorilla-titan.js";
 import _poolGraniteGrip from "../pool/granite-grip.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -729,6 +730,7 @@ import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
+import _poolThoughtEater from "../pool/thought-eater.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTimeOfHeroes from "../pool/time-of-heroes.js";
 import _poolTokTokVolcanoBorn from "../pool/tok-tok-volcano-born.js";
@@ -1149,6 +1151,7 @@ const shard: CardShard = {
     _poolGoldenhideOx,
     _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
+    _poolGorillaTitan,
     _poolGraniteGrip,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
@@ -1566,6 +1569,7 @@ const shard: CardShard = {
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
+    _poolThoughtEater,
     _poolThrabenHeretic,
     _poolTimeOfHeroes,
     _poolTokTokVolcanoBorn,

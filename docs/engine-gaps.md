@@ -6,6 +6,13 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A threshold-gated granted dies trigger doesn't look back.** A `grantsTriggered` static
+  with a `condition` (threshold) is checked after the event when the granting permanent stays on
+  the battlefield and another creature dies, so the creature whose death makes the seventh card
+  in the graveyard still triggers it. Rule 603.10a says a leaves-the-battlefield trigger looks
+  back to just before the event, and Decaying Soil's ruling says threshold must already be met.
+  Reborn Hero is right, its own death being the event. Found by batch 225's group C; blocks
+  Decaying Soil (`trigger:conditional-grant-look-back`).
 - **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
   `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
   context without the enclosing loop's player binding (game.ts, where the choice's `then` is
