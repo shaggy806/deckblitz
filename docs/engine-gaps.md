@@ -6,6 +6,13 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A mana ability with a `discard` cost never pays it.** In `game.ts` the mana-ability branch of
+  ability activation resolves the ability and returns (around line 15359) before the discard cost
+  is paid (around line 15521), and legality doesn't refuse it the way it refuses an
+  `exileFromGraveyard` cost on a mana ability ("mana ability can't exile cards from a graveyard
+  yet", around line 14971). So "Discard a card: Add {B}" would add mana for free. Rule 602.2b
+  has the whole cost paid; refuse it until it's paid. Found by batch 236; blocks Skirge Familiar
+  (`cost:mana-ability-discard-cost`).
 - **A threshold-gated granted dies trigger doesn't look back.** A `grantsTriggered` static
   with a `condition` (threshold) is checked after the event when the granting permanent stays on
   the battlefield and another creature dies, so the creature whose death makes the seventh card
