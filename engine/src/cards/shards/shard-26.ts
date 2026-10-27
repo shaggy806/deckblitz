@@ -645,6 +645,7 @@ import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
+import _poolSubterraneanHangar from "../pool/subterranean-hangar.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSunsBounty from "../pool/suns-bounty.js";
 import _poolSunspireGatekeepers from "../pool/sunspire-gatekeepers.js";
@@ -1430,6 +1431,7 @@ const shard: CardShard = {
     _poolStormboundGeist,
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
+    _poolSubterraneanHangar,
     _poolSummitSentinel,
     _poolSunsBounty,
     _poolSunspireGatekeepers,

@@ -554,6 +554,7 @@ import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
 import _poolRotFarmSkeleton from "../pool/rot-farm-skeleton.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
+import _poolRushwoodGrove from "../pool/rushwood-grove.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
@@ -1359,6 +1360,7 @@ const shard: CardShard = {
     _poolRootwiseSurvivor,
     _poolRotFarmSkeleton,
     _poolRubbleSlinger,
+    _poolRushwoodGrove,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,
     _poolSacredPeaks,

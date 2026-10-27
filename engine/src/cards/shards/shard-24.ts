@@ -640,6 +640,7 @@ import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTeferisVeil from "../pool/teferis-veil.js";
+import _poolTelepathicSpies from "../pool/telepathic-spies.js";
 import _poolTempestDjinn from "../pool/tempest-djinn.js";
 import _poolTempleElder from "../pool/temple-elder.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
@@ -1429,6 +1430,7 @@ const shard: CardShard = {
     _poolTavernBrawler,
     _poolTeferisProtege,
     _poolTeferisVeil,
+    _poolTelepathicSpies,
     _poolTempestDjinn,
     _poolTempleElder,
     _poolTemporalFissure,

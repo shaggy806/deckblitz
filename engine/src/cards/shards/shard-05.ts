@@ -381,6 +381,7 @@ import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJaggedPoppet from "../pool/jagged-poppet.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
+import _poolJasmineSeer from "../pool/jasmine-seer.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJeskaiRunemark from "../pool/jeskai-runemark.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
@@ -1159,6 +1160,7 @@ const shard: CardShard = {
     _poolJacesSanctum,
     _poolJaggedPoppet,
     _poolJasmineBoreal,
+    _poolJasmineSeer,
     _poolJeskaiRevelation,
     _poolJeskaiRunemark,
     _poolJuganDefendsTheTemple,

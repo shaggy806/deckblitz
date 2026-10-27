@@ -3256,6 +3256,7 @@ import _poolCavalierOfFlame from "./pool/cavalier-of-flame.js";
 import _poolCavalierOfNight from "./pool/cavalier-of-night.js";
 import _poolCavalryDrillmaster from "./pool/cavalry-drillmaster.js";
 import _poolCavalryPegasus from "./pool/cavalry-pegasus.js";
+import _poolCaveIn from "./pool/cave-in.js";
 import _poolCaveOfTemptation from "./pool/cave-of-temptation.js";
 import _poolCaveOfTheFrostDragon from "./pool/cave-of-the-frost-dragon.js";
 import _poolCavePeople from "./pool/cave-people.js";
@@ -7771,6 +7772,7 @@ import _poolFoundryInspector from "./pool/foundry-inspector.js";
 import _poolFoundryOfTheConsuls from "./pool/foundry-of-the-consuls.js";
 import _poolFoundryScreecher from "./pool/foundry-screecher.js";
 import _poolFoundryStreetDenizen from "./pool/foundry-street-denizen.js";
+import _poolFountainOfCho from "./pool/fountain-of-cho.js";
 import _poolFountainOfIchor from "./pool/fountain-of-ichor.js";
 import _poolFountainOfRenewal from "./pool/fountain-of-renewal.js";
 import _poolFountainOfYouth from "./pool/fountain-of-youth.js";
@@ -10936,6 +10938,7 @@ import _poolJarlOfTheForsaken from "./pool/jarl-of-the-forsaken.js";
 import _poolJarvisEarthsMightiestButler from "./pool/jarvis-earths-mightiest-butler.js";
 import _poolJasmineBoreal from "./pool/jasmine-boreal.js";
 import _poolJasmineDragonTeaShop from "./pool/jasmine-dragon-tea-shop.js";
+import _poolJasmineSeer from "./pool/jasmine-seer.js";
 import _poolJasonBrightGlowingProphet from "./pool/jason-bright-glowing-prophet.js";
 import _poolJasperaSentinel from "./pool/jaspera-sentinel.js";
 import _poolJavelinOfLightning from "./pool/javelin-of-lightning.js";
@@ -11350,6 +11353,7 @@ import _poolKeldonNecropolis from "./pool/keldon-necropolis.js";
 import _poolKeldonOverseer from "./pool/keldon-overseer.js";
 import _poolKeldonRaider from "./pool/keldon-raider.js";
 import _poolKeldonStrikeTeam from "./pool/keldon-strike-team.js";
+import _poolKeldonVandals from "./pool/keldon-vandals.js";
 import _poolKeldonWarcaller from "./pool/keldon-warcaller.js";
 import _poolKeldonWarlord from "./pool/keldon-warlord.js";
 import _poolKelethSunmaneFamiliar from "./pool/keleth-sunmane-familiar.js";
@@ -13102,6 +13106,7 @@ import _poolMephiticDraught from "./pool/mephitic-draught.js";
 import _poolMephiticOoze from "./pool/mephitic-ooze.js";
 import _poolMephiticVapors from "./pool/mephitic-vapors.js";
 import _poolMerEkNightblade from "./pool/mer-ek-nightblade.js";
+import _poolMercadianBazaar from "./pool/mercadian-bazaar.js";
 import _poolMerchantOfManyHats from "./pool/merchant-of-many-hats.js";
 import _poolMerchantOfSecrets from "./pool/merchant-of-secrets.js";
 import _poolMerchantOfTheVale from "./pool/merchant-of-the-vale.js";
@@ -17476,6 +17481,7 @@ import _poolRushedRebirth from "./pool/rushed-rebirth.js";
 import _poolRushingRiver from "./pool/rushing-river.js";
 import _poolRushwoodDryad from "./pool/rushwood-dryad.js";
 import _poolRushwoodElemental from "./pool/rushwood-elemental.js";
+import _poolRushwoodGrove from "./pool/rushwood-grove.js";
 import _poolRussetWolves from "./pool/russet-wolves.js";
 import _poolRustElemental from "./pool/rust-elemental.js";
 import _poolRustGoliath from "./pool/rust-goliath.js";
@@ -17736,6 +17742,7 @@ import _poolSapphireCharm from "./pool/sapphire-charm.js";
 import _poolSapphireDragon from "./pool/sapphire-dragon.js";
 import _poolSapphireDrake from "./pool/sapphire-drake.js";
 import _poolSapphireMedallion from "./pool/sapphire-medallion.js";
+import _poolSaprazzanCove from "./pool/saprazzan-cove.js";
 import _poolSaprazzanHeir from "./pool/saprazzan-heir.js";
 import _poolSaprolingMigration from "./pool/saproling-migration.js";
 import _poolSapseepForest from "./pool/sapseep-forest.js";
@@ -20481,6 +20488,7 @@ import _poolSubmerge from "./pool/submerge.js";
 import _poolSubmergedBoneyard from "./pool/submerged-boneyard.js";
 import _poolSubterfuge from "./pool/subterfuge.js";
 import _poolSubterraneanCavern from "./pool/subterranean-cavern.js";
+import _poolSubterraneanHangar from "./pool/subterranean-hangar.js";
 import _poolSubterraneanScout from "./pool/subterranean-scout.js";
 import _poolSubterraneanSpirit from "./pool/subterranean-spirit.js";
 import _poolSubterraneanTremors from "./pool/subterranean-tremors.js";
@@ -21131,6 +21139,7 @@ import _poolTelJiladWolf from "./pool/tel-jilad-wolf.js";
 import _poolTelekineticBonds from "./pool/telekinetic-bonds.js";
 import _poolTelekineticSliver from "./pool/telekinetic-sliver.js";
 import _poolTeleminPerformance from "./pool/telemin-performance.js";
+import _poolTelepathicSpies from "./pool/telepathic-spies.js";
 import _poolTeleport from "./pool/teleport.js";
 import _poolTeleportal from "./pool/teleportal.js";
 import _poolTeleportationCircle from "./pool/teleportation-circle.js";
@@ -28593,6 +28602,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCavalierOfNight,
   _poolCavalryDrillmaster,
   _poolCavalryPegasus,
+  _poolCaveIn,
   _poolCaveOfTemptation,
   _poolCaveOfTheFrostDragon,
   _poolCavePeople,
@@ -33108,6 +33118,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFoundryOfTheConsuls,
   _poolFoundryScreecher,
   _poolFoundryStreetDenizen,
+  _poolFountainOfCho,
   _poolFountainOfIchor,
   _poolFountainOfRenewal,
   _poolFountainOfYouth,
@@ -36273,6 +36284,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJarvisEarthsMightiestButler,
   _poolJasmineBoreal,
   _poolJasmineDragonTeaShop,
+  _poolJasmineSeer,
   _poolJasonBrightGlowingProphet,
   _poolJasperaSentinel,
   _poolJavelinOfLightning,
@@ -36687,6 +36699,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKeldonOverseer,
   _poolKeldonRaider,
   _poolKeldonStrikeTeam,
+  _poolKeldonVandals,
   _poolKeldonWarcaller,
   _poolKeldonWarlord,
   _poolKelethSunmaneFamiliar,
@@ -38439,6 +38452,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMephiticOoze,
   _poolMephiticVapors,
   _poolMerEkNightblade,
+  _poolMercadianBazaar,
   _poolMerchantOfManyHats,
   _poolMerchantOfSecrets,
   _poolMerchantOfTheVale,
@@ -42813,6 +42827,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRushingRiver,
   _poolRushwoodDryad,
   _poolRushwoodElemental,
+  _poolRushwoodGrove,
   _poolRussetWolves,
   _poolRustElemental,
   _poolRustGoliath,
@@ -43073,6 +43088,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSapphireDragon,
   _poolSapphireDrake,
   _poolSapphireMedallion,
+  _poolSaprazzanCove,
   _poolSaprazzanHeir,
   _poolSaprolingMigration,
   _poolSapseepForest,
@@ -45818,6 +45834,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSubmergedBoneyard,
   _poolSubterfuge,
   _poolSubterraneanCavern,
+  _poolSubterraneanHangar,
   _poolSubterraneanScout,
   _poolSubterraneanSpirit,
   _poolSubterraneanTremors,
@@ -46468,6 +46485,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTelekineticBonds,
   _poolTelekineticSliver,
   _poolTeleminPerformance,
+  _poolTelepathicSpies,
   _poolTeleport,
   _poolTeleportal,
   _poolTeleportationCircle,
@@ -53943,6 +53961,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cavalier-of-night": _poolCavalierOfNight,
   "pool/cavalry-drillmaster": _poolCavalryDrillmaster,
   "pool/cavalry-pegasus": _poolCavalryPegasus,
+  "pool/cave-in": _poolCaveIn,
   "pool/cave-of-temptation": _poolCaveOfTemptation,
   "pool/cave-of-the-frost-dragon": _poolCaveOfTheFrostDragon,
   "pool/cave-people": _poolCavePeople,
@@ -58458,6 +58477,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/foundry-of-the-consuls": _poolFoundryOfTheConsuls,
   "pool/foundry-screecher": _poolFoundryScreecher,
   "pool/foundry-street-denizen": _poolFoundryStreetDenizen,
+  "pool/fountain-of-cho": _poolFountainOfCho,
   "pool/fountain-of-ichor": _poolFountainOfIchor,
   "pool/fountain-of-renewal": _poolFountainOfRenewal,
   "pool/fountain-of-youth": _poolFountainOfYouth,
@@ -61623,6 +61643,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jarvis-earths-mightiest-butler": _poolJarvisEarthsMightiestButler,
   "pool/jasmine-boreal": _poolJasmineBoreal,
   "pool/jasmine-dragon-tea-shop": _poolJasmineDragonTeaShop,
+  "pool/jasmine-seer": _poolJasmineSeer,
   "pool/jason-bright-glowing-prophet": _poolJasonBrightGlowingProphet,
   "pool/jaspera-sentinel": _poolJasperaSentinel,
   "pool/javelin-of-lightning": _poolJavelinOfLightning,
@@ -62037,6 +62058,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/keldon-overseer": _poolKeldonOverseer,
   "pool/keldon-raider": _poolKeldonRaider,
   "pool/keldon-strike-team": _poolKeldonStrikeTeam,
+  "pool/keldon-vandals": _poolKeldonVandals,
   "pool/keldon-warcaller": _poolKeldonWarcaller,
   "pool/keldon-warlord": _poolKeldonWarlord,
   "pool/keleth-sunmane-familiar": _poolKelethSunmaneFamiliar,
@@ -63789,6 +63811,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mephitic-ooze": _poolMephiticOoze,
   "pool/mephitic-vapors": _poolMephiticVapors,
   "pool/mer-ek-nightblade": _poolMerEkNightblade,
+  "pool/mercadian-bazaar": _poolMercadianBazaar,
   "pool/merchant-of-many-hats": _poolMerchantOfManyHats,
   "pool/merchant-of-secrets": _poolMerchantOfSecrets,
   "pool/merchant-of-the-vale": _poolMerchantOfTheVale,
@@ -68163,6 +68186,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rushing-river": _poolRushingRiver,
   "pool/rushwood-dryad": _poolRushwoodDryad,
   "pool/rushwood-elemental": _poolRushwoodElemental,
+  "pool/rushwood-grove": _poolRushwoodGrove,
   "pool/russet-wolves": _poolRussetWolves,
   "pool/rust-elemental": _poolRustElemental,
   "pool/rust-goliath": _poolRustGoliath,
@@ -68423,6 +68447,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sapphire-dragon": _poolSapphireDragon,
   "pool/sapphire-drake": _poolSapphireDrake,
   "pool/sapphire-medallion": _poolSapphireMedallion,
+  "pool/saprazzan-cove": _poolSaprazzanCove,
   "pool/saprazzan-heir": _poolSaprazzanHeir,
   "pool/saproling-migration": _poolSaprolingMigration,
   "pool/sapseep-forest": _poolSapseepForest,
@@ -71168,6 +71193,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/submerged-boneyard": _poolSubmergedBoneyard,
   "pool/subterfuge": _poolSubterfuge,
   "pool/subterranean-cavern": _poolSubterraneanCavern,
+  "pool/subterranean-hangar": _poolSubterraneanHangar,
   "pool/subterranean-scout": _poolSubterraneanScout,
   "pool/subterranean-spirit": _poolSubterraneanSpirit,
   "pool/subterranean-tremors": _poolSubterraneanTremors,
@@ -71818,6 +71844,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/telekinetic-bonds": _poolTelekineticBonds,
   "pool/telekinetic-sliver": _poolTelekineticSliver,
   "pool/telemin-performance": _poolTeleminPerformance,
+  "pool/telepathic-spies": _poolTelepathicSpies,
   "pool/teleport": _poolTeleport,
   "pool/teleportal": _poolTeleportal,
   "pool/teleportation-circle": _poolTeleportationCircle,

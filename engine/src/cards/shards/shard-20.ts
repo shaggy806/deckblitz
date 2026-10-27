@@ -117,6 +117,7 @@ import _poolCanopyDragon from "../pool/canopy-dragon.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
 import _poolCarnifexDemon from "../pool/carnifex-demon.js";
 import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
+import _poolCaveIn from "../pool/cave-in.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
 import _poolCentaurChieftain from "../pool/centaur-chieftain.js";
 import _poolChainAssassination from "../pool/chain-assassination.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolCanopyVista,
     _poolCarnifexDemon,
     _poolCaseOfTheRansackedLab,
+    _poolCaveIn,
     _poolCemeteryGate,
     _poolCentaurChieftain,
     _poolChainAssassination,

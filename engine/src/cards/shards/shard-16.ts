@@ -571,6 +571,7 @@ import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSalvageSlasher from "../pool/salvage-slasher.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
 import _poolSanctuaryLockdown from "../pool/sanctuary-lockdown.js";
+import _poolSaprazzanCove from "../pool/saprazzan-cove.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolSawtoothLoon from "../pool/sawtooth-loon.js";
 import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
@@ -1414,6 +1415,7 @@ const shard: CardShard = {
     _poolSalvageSlasher,
     _poolSamutTheDrivingForce,
     _poolSanctuaryLockdown,
+    _poolSaprazzanCove,
     _poolSavagePackmate,
     _poolSawtoothLoon,
     _poolScaldingCauldron,

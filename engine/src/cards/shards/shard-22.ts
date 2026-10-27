@@ -391,6 +391,7 @@ import _poolMathasFiendSeeker from "../pool/mathas-fiend-seeker.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
 import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMentalDiscipline from "../pool/mental-discipline.js";
+import _poolMercadianBazaar from "../pool/mercadian-bazaar.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
@@ -1196,6 +1197,7 @@ const shard: CardShard = {
     _poolMazirekKraulDeathPriest,
     _poolMeldwebStrider,
     _poolMentalDiscipline,
+    _poolMercadianBazaar,
     _poolMidnightMayhem,
     _poolMindscourDragon,
     _poolMinersBane,

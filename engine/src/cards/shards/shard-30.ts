@@ -253,6 +253,7 @@ import _poolForcedWorship from "../pool/forced-worship.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFormOfTheDinosaur from "../pool/form-of-the-dinosaur.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
+import _poolFountainOfCho from "../pool/fountain-of-cho.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
@@ -1039,6 +1040,7 @@ const shard: CardShard = {
     _poolForensicResearcher,
     _poolFormOfTheDinosaur,
     _poolFortuitousFind,
+    _poolFountainOfCho,
     _poolFourKnocks,
     _poolFranticInventory,
     _poolFreestriderCommando,
