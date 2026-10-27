@@ -12015,6 +12015,29 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "effect:add-subtypes-if-creature-on-entry": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Lim-Dûl the Necromancer: 'return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types' — put-onto-battlefield's addSubtypes is unconditional."
+  },
+  "effect:animate-grants-protection": {
+   "example": "Opal Guardian: 'becomes a 3/4 Gargoyle creature with flying and protection from red' — animate carries keywords only, no protection quality."
+  },
+  "effect:return-exiled-card-named": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Sengir Nosferatu's Bat token: 'Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.'"
+  },
+  "filter:entered-since-your-last-turn-ended": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Premature Burial: 'Destroy target nonblack creature that entered since your last turn ended.'"
+  },
+  "replacement:damage-to-self-sacrifice-instead": {
+   "family": "replacement:damage-modification",
+   "example": "Dralnu, Lich Lord: 'If damage would be dealt to Dralnu, sacrifice that many permanents instead' — prevent-then-sacrifice lets the damage's triggers fire; the ruling says the sacrifice replaces it."
+  },
+  "static:echo-cost-zero-alternative": {
+   "family": "keyword:echo",
+   "example": "Thick-Skinned Goblin: 'You may pay {0} rather than pay the echo cost for permanents you control' — echo is an upkeep unless-trigger with nothing marking its cost as an echo cost."
   }
  }
 }

@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The rest of Time Spiral — Time Spiral is whole** (batch 228, the middle walk's last batch,
+  2026-10-27): no engine change. 58 of the set's last 89 authored — Triskelavus (with its
+  Triskelavite token), Sarpadian Empires, Vol. VII, Phyrexian and Weatherseed Totem, Candles of
+  Leng, Cavalry Master, Plague and Quilled Sliver — by five `card-author` agents and the
+  scaffolder's four echo cards, and 31 blocked (`B228.json`). The middle walk's second range
+  (Eventide back to Time Spiral) is done.
 - **Amplify and provoke, and Legions — Legions and Mirrodin are whole** (batch 219, the fourth
   middle walk, 2026-10-27, `effect:must-block-this-turn`): **built** amplify (rule 702.38 —
   `CardDefinition.amplify`, the hand's cards sharing a creature type revealed as it enters),
