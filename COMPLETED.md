@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Invasion — Invasion is whole** (batch 232, the sixth middle walk, 2026-10-27): 66 of its
+  last 101 new cards authored — the scaffolder finished the four kicker Emissaries; five
+  `card-author` agents and the lead the rest: Yawgmoth's Agenda, Pure Reflection (an X/X white
+  Reflection, never printed), Winnow, Metathran Aerostat, the split cards Stand // Deliver,
+  Pain // Suffering and Assault // Battery, the domain cards (Kavu Scout, Strength of Unity,
+  Exotic Curse, Wayfaring Giant, Ordered Migration, Wandering Stream) — and 35 blocked
+  (`B232.json`), no feature built. The sixth middle walk's range (Apocalypse back to Invasion)
+  is done.
 - **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
   walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
   `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",

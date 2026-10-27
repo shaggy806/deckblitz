@@ -12175,6 +12175,14 @@
   "trigger:gains-control-of-this": {
    "family": "trigger:lose-control-trigger",
    "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
+  },
+  "replacement:prevent-damage-at-most-n": {
+   "family": "replacement:damage-prevented-to-filter",
+   "example": "Callous Giant: 'If a source would deal 3 or less damage to this creature, prevent that damage' — no amount threshold on the damage replacement."
+  },
+  "static:cant-attack-unless-matching-also-attacks": {
+   "family": "static:attack-limit",
+   "example": "Scarred Puma: \"can't attack unless a black or green creature also attacks\""
   }
  }
 }
