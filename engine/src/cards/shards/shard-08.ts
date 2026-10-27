@@ -647,6 +647,7 @@ import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
 import _poolSkinbrandGoblin from "../pool/skinbrand-goblin.js";
 import _poolSkyHussar from "../pool/sky-hussar.js";
 import _poolSkyclaveInvader from "../pool/skyclave-invader.js";
+import _poolSkyfisherSpider from "../pool/skyfisher-spider.js";
 import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
 import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
@@ -1495,6 +1496,7 @@ const shard: CardShard = {
     _poolSkinbrandGoblin,
     _poolSkyHussar,
     _poolSkyclaveInvader,
+    _poolSkyfisherSpider,
     _poolSkyshroudForest,
     _poolSkyshroudRanger,
     _poolSkyswirlHarrier,

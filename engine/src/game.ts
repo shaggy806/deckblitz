@@ -6104,7 +6104,23 @@ export class Game {
     let extraFor: PlayerId | null = null;
     while (extraFor === null && this.state.extraTurns.length > 0) {
       const next = this.state.extraTurns.pop() as PlayerId;
-      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost) extraFor = next;
+      // "Skip the untap step of that turn" (Savor the Moment): queued at the
+      // index this turn was popped from.
+      const skipping = this.state.extraTurnsSkippingUntap;
+      const at = this.state.extraTurns.length;
+      const skipsUntap = skipping?.includes(at) === true;
+      if (skipping !== undefined && skipsUntap) {
+        const left = skipping.filter((i) => i !== at);
+        if (left.length === 0) delete this.state.extraTurnsSkippingUntap;
+        else this.state.extraTurnsSkippingUntap = left;
+      }
+      if (this.state.turnOrder.includes(next) && !this.state.players[next].hasLost) {
+        extraFor = next;
+        if (skipsUntap) {
+          const player = this.state.players[next];
+          player.untapStepsToSkip = (player.untapStepsToSkip ?? 0) + 1;
+        }
+      }
     }
     if (extraFor !== null) {
       turn.rotationIndex = rotation;
@@ -6232,7 +6248,8 @@ export class Game {
     }
     // Day → night if the previous turn's player cast no spells (726.3);
     // night → day if they cast two or more (726.4). Only once it's day or night.
-    if (prevActive !== null) {
+    // It's the untap step's (502.2), so a skipped untap step has none.
+    if (prevActive !== null && (this.state.players[this.activePlayer]?.untapStepsToSkip ?? 0) === 0) {
       if (this.state.dayNight === "day" && prevActiveSpells === 0) {
         this.setDayNight("night");
       } else if (this.state.dayNight === "night" && prevActiveSpells >= 2) {
@@ -6632,8 +6649,21 @@ export class Game {
     // "Lands you control don't untap during your next untap step" (Kefnet's
     // Last Word): whatever matches now, whenever it arrived.
     const skips = this.state.players[active]?.untapSkips ?? [];
+    // "Skips their next untap step" (rule 614.10): proceed past it as though
+    // it didn't exist (500.11) — no phasing, nothing untapping, and whatever
+    // waits for "their next untap step" waits for the next one that happens
+    // (614.10a). The turn's own resets below still happen: they're the turn
+    // beginning, not the step.
+    const activeState = this.state.players[active];
+    const skipping = (activeState?.untapStepsToSkip ?? 0) > 0;
+    if (skipping && activeState !== undefined) {
+      const left = (activeState.untapStepsToSkip ?? 0) - 1;
+      if (left === 0) delete activeState.untapStepsToSkip;
+      else activeState.untapStepsToSkip = left;
+      this.emit({ type: "untap-step-skipped", player: active });
+    }
     // First, phasing (rule 502.1), before anything untaps.
-    this.phasingStep(active);
+    if (!skipping) this.phasingStep(active);
     // The turn's resets reach a phased-out permanent too: what it did on an
     // earlier turn isn't "this turn" when it phases in (702.26d — its history
     // goes on through the phasing).
@@ -6659,6 +6689,7 @@ export class Game {
       // this one, if that's who's active. Nor one an effect said doesn't
       // untap during this player's next untap step.
       if (
+        !skipping &&
         object.tapped &&
         object.exertedBy !== active &&
         object.skipsNextUntap !== true &&
@@ -6681,6 +6712,7 @@ export class Game {
         if (object.abilitiesUsedThisTurn !== undefined) object.abilitiesUsedThisTurn = undefined;
       }
     }
+    if (skipping) return;
     // "You may choose not to untap ~ during your untap step" (rule 502.3):
     // its controller chooses which to leave tapped, without priority
     // (502.4); the step finishes once they have (`applyChoosePermanents`).
@@ -23463,6 +23495,10 @@ export class Game {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
         if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
       },
+      skipUntapStep: (player) => {
+        const state = this.state.players[player];
+        if (state !== undefined && !state.hasLost) state.untapStepsToSkip = (state.untapStepsToSkip ?? 0) + 1;
+      },
       exileFromLibrary: (target, count, withCounters) =>
         this.exileFromLibraryByEffect(target, count, controller, withCounters),
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
@@ -24013,8 +24049,11 @@ export class Game {
           }
         }
       },
-      takeExtraTurn: (player) => {
+      takeExtraTurn: (player, skipUntapStep) => {
         if (this.state.players[player]?.hasLost !== false) return;
+        if (skipUntapStep === true) {
+          this.state.extraTurnsSkippingUntap = [...(this.state.extraTurnsSkippingUntap ?? []), this.state.extraTurns.length];
+        }
         this.state.extraTurns.push(player);
         this.emit({ type: "extra-turn-queued", player });
       },

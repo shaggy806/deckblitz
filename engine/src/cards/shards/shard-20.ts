@@ -628,6 +628,7 @@ import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
 import _poolShieldOfTheRighteous from "../pool/shield-of-the-righteous.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
 import _poolShimmer from "../pool/shimmer.js";
+import _poolShisatoWhisperingHunter from "../pool/shisato-whispering-hunter.js";
 import _poolShreddedSails from "../pool/shredded-sails.js";
 import _poolShuDefender from "../pool/shu-defender.js";
 import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
@@ -1497,6 +1498,7 @@ const shard: CardShard = {
     _poolShieldOfTheRighteous,
     _poolShimmerMyr,
     _poolShimmer,
+    _poolShisatoWhisperingHunter,
     _poolShreddedSails,
     _poolShuDefender,
     _poolShuriTheBlackPanther,

@@ -454,6 +454,7 @@ import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
 import _poolPredationSteward from "../pool/predation-steward.js";
+import _poolPressTheEnemy from "../pool/press-the-enemy.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
@@ -1201,6 +1202,7 @@ const shard: CardShard = {
     _poolPopularEgotist,
     _poolPoxwalkers,
     _poolPredationSteward,
+    _poolPressTheEnemy,
     _poolPrismariTheInspiration,
     _poolProfaneMemento,
     _poolProsshSkyraiderOfKher,

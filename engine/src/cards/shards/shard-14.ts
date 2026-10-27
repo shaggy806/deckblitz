@@ -410,6 +410,7 @@ import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
+import _poolKioraBestsTheSeaGod from "../pool/kiora-bests-the-sea-god.js";
 import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
 import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
@@ -1233,6 +1234,7 @@ const shard: CardShard = {
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
     _poolKindlyStranger,
+    _poolKioraBestsTheSeaGod,
     _poolKitsuneDawnblade,
     _poolKjeldoranJavelineer,
     _poolKonaRescueBeastie,

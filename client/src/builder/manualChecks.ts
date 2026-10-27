@@ -8381,4 +8381,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Sickening Dreams: choose X, then discard that many',
     board({ you: { bf: ['Swamp*2'], hand: ['Sickening Dreams', 'Wastes', 'Island', 'Mountain'] }, opp: { bf: ['Grizzly Bears'] } }),
   ),
+  // --- Skipping an untap step (2026-10-27, recheck list R5) -----------------
+  preset(
+    'Avizoa: you skip your next untap step',
+    board({ you: { bf: ['Avizoa', { name: 'Island', tapped: true }, { name: 'Island', tapped: true }] } }),
+  ),
 ]

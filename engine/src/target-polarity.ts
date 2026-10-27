@@ -298,6 +298,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A refill for a self-mill deck, an answer to a graveyard deck: either way.
   "shuffle-graveyard-into-library": (n, v) => v.touch(n.target, "either", MINOR),
   "skip-next-untap": (n, v) => v.touch(n.who, "harm", MINOR),
+  "skip-untap-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "exile-from-library": (n, v) => v.touch(n.whose, "harm", MINOR),
   "return-from-graveyard": none,
   // A delayed ability acts on the targets its creator chose (rule 603.7c): it

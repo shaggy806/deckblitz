@@ -369,6 +369,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Kor Soldier Token",
   "Kor Warrior Token",
   "Kraken Token",
+  "Kraken Token (Kiora Bests the Sea God)",
   "Kraken Token (Spawning Kraken)",
   "Lander Token",
   "Leviathan Token",

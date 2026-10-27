@@ -340,6 +340,7 @@ import _poolIcebreakerKraken from "../pool/icebreaker-kraken.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
+import _poolIlluminorSzeras from "../pool/illuminor-szeras.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIncreasingConfusion from "../pool/increasing-confusion.js";
 import _poolIncrementalGrowth from "../pool/incremental-growth.js";
@@ -1163,6 +1164,7 @@ const shard: CardShard = {
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,
+    _poolIlluminorSzeras,
     _poolImperialCosmographer,
     _poolIncreasingConfusion,
     _poolIncrementalGrowth,
