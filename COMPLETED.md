@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Morph costs that aren't mana, and Onslaught's most-played** (batch 224, the fourth middle
+  walk, 2026-10-27, `cost:morph-pay-life`, `cost:morph-sacrifice`, `cost:morph-discard-card`,
+  `cost:morph-return-permanent`): **built** `MorphCost.also` (rule 702.37e) — "Morph—Pay 5 life",
+  "Sacrifice two Mountains", "Discard a Zombie card", "Return a Bird you control to its owner's
+  hand" — paid as it's turned face up, chosen while it's still face down, read by the
+  scaffolder, with the six cards it unblocked (Zombie Cutthroat, Putrid Raptor, Raven Guild
+  Initiate, Skirk Volcanist, Fathom Seer, Gathan Raiders). 65 of Onslaught's 105 most-played left
+  authored — Exalted Angel, Rotlung Reanimator, Astral Slide, Krosan Tusker, Voice of the Woods,
+  Lightning Rift, the Chains — by five `card-author` agents, and 40 blocked (`B224.json`); the
+  rest of Onslaught (94) is round twenty's.
 - **Amplify and provoke, and Legions — Legions and Mirrodin are whole** (batch 219, the fourth
   middle walk, 2026-10-27, `effect:must-block-this-turn`): **built** amplify (rule 702.38 —
   `CardDefinition.amplify`, the hand's cards sharing a creature type revealed as it enters),

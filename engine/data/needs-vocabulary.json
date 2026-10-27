@@ -12015,6 +12015,22 @@
   "effect:mana-ability-unless-any-player-pays": {
    "family": "effect:unless-any-player-pays",
    "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
+  },
+  "replacement:next-draw-this-turn": {
+   "family": "replacement:next-draw-from-exiled-pile",
+   "example": "The Words cycle (Words of Wind, Waste, War, Worship, Wilding): \"{1}: The next time you would draw a card this turn, instead …\" — a one-shot replacement an activated ability sets up; would-draw replacements are statics only, and the player chooses which of several applies (the Words ruling)."
+  },
+  "condition:controls-more-than-each-other-player": {
+   "family": "condition:that-player-controls-more",
+   "example": "Peer Pressure: \"If you control more creatures of the chosen type than each other player\" — strictly more than each, which a negated opponent-controls-more doesn't say."
+  },
+  "effect:redirect-spell-from-source": {
+   "family": "effect:change-target",
+   "example": "Quicksilver Dragon: \"If target spell has only one target and that target is this creature, change that spell's target to another creature.\""
+  },
+  "trigger:gains-control-of-this": {
+   "family": "trigger:lose-control-trigger",
+   "example": "Risky Move: \"When you gain control of this enchantment from another player, …\""
   }
  }
 }

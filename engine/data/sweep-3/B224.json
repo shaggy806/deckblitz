@@ -1,0 +1,800 @@
+{
+ "batch": "B224",
+ "status": "complete",
+ "ranks": "Onslaught (ONS, 2002-10-07): its 105 most-played cards left, by EDHREC rank (Cryptic Gateway to Goblin Taskmaster) — the fourth middle walk's third batch, round nineteen; the rest of the set (94) is round twenty's. Built morph costs that aren't mana (MorphCost.also: pay life, sacrifice, discard, return to hand — rule 702.37e) and authored the six cards it unblocked in other sets (Zombie Cutthroat, Putrid Raptor, Raven Guild Initiate and Skirk Volcanist from Scourge; Fathom Seer and Gathan Raiders)",
+ "authored": [
+  {
+   "name": "Kamahl, Fist of Krosa",
+   "files": [
+    "engine/src/cards/pool/kamahl-fist-of-krosa.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Pioneer",
+   "files": [
+    "engine/src/cards/pool/elvish-pioneer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Burrows",
+   "files": [
+    "engine/src/cards/pool/goblin-burrows.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ebonblade Reaper",
+   "files": [
+    "engine/src/cards/pool/ebonblade-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contested Cliffs",
+   "files": [
+    "engine/src/cards/pool/contested-cliffs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krosan Tusker",
+   "files": [
+    "engine/src/cards/pool/krosan-tusker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astral Slide",
+   "files": [
+    "engine/src/cards/pool/astral-slide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starlit Sanctum",
+   "files": [
+    "engine/src/cards/pool/starlit-sanctum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Righteous Cause",
+   "files": [
+    "engine/src/cards/pool/righteous-cause.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Custody Battle",
+   "files": [
+    "engine/src/cards/pool/custody-battle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wirewood Herald",
+   "files": [
+    "engine/src/cards/pool/wirewood-herald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mobilization",
+   "files": [
+    "engine/src/cards/pool/mobilization.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless One",
+   "files": [
+    "engine/src/cards/pool/reckless-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Complicate",
+   "files": [
+    "engine/src/cards/pool/complicate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dream Chisel",
+   "files": [
+    "engine/src/cards/pool/dream-chisel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wirewood Pride",
+   "files": [
+    "engine/src/cards/pool/wirewood-pride.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slice and Dice",
+   "files": [
+    "engine/src/cards/pool/slice-and-dice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exalted Angel",
+   "files": [
+    "engine/src/cards/pool/exalted-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voice of the Woods",
+   "files": [
+    "engine/src/cards/pool/voice-of-the-woods.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gustcloak Savior",
+   "files": [
+    "engine/src/cards/pool/gustcloak-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rotlung Reanimator",
+   "files": [
+    "engine/src/cards/pool/rotlung-reanimator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weird Harvest",
+   "files": [
+    "engine/src/cards/pool/weird-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renewed Faith",
+   "files": [
+    "engine/src/cards/pool/renewed-faith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heedless One",
+   "files": [
+    "engine/src/cards/pool/heedless-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dirge of Dread",
+   "files": [
+    "engine/src/cards/pool/dirge-of-dread.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shared Triumph",
+   "files": [
+    "engine/src/cards/pool/shared-triumph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choking Tethers",
+   "files": [
+    "engine/src/cards/pool/choking-tethers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Undead Gladiator",
+   "files": [
+    "engine/src/cards/pool/undead-gladiator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tribal Unity",
+   "files": [
+    "engine/src/cards/pool/tribal-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Charge",
+   "files": [
+    "engine/src/cards/pool/aether-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigil of the New Dawn",
+   "files": [
+    "engine/src/cards/pool/sigil-of-the-new-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Rift",
+   "files": [
+    "engine/src/cards/pool/lightning-rift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Brigadier",
+   "files": [
+    "engine/src/cards/pool/aven-brigadier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riptide Entrancer",
+   "files": [
+    "engine/src/cards/pool/riptide-entrancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reminisce",
+   "files": [
+    "engine/src/cards/pool/reminisce.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Information Dealer",
+   "files": [
+    "engine/src/cards/pool/information-dealer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Annex",
+   "files": [
+    "engine/src/cards/pool/annex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daru Encampment",
+   "files": [
+    "engine/src/cards/pool/daru-encampment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sparksmith",
+   "files": [
+    "engine/src/cards/pool/sparksmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodline Shaman",
+   "files": [
+    "engine/src/cards/pool/bloodline-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chain of Plasma",
+   "files": [
+    "engine/src/cards/pool/chain-of-plasma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boneknitter",
+   "files": [
+    "engine/src/cards/pool/boneknitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stag Beetle",
+   "files": [
+    "engine/src/cards/pool/stag-beetle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chain of Acid",
+   "files": [
+    "engine/src/cards/pool/chain-of-acid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doubtless One",
+   "files": [
+    "engine/src/cards/pool/doubtless-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gigapede",
+   "files": [
+    "engine/src/cards/pool/gigapede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riptide Shapeshifter",
+   "files": [
+    "engine/src/cards/pool/riptide-shapeshifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vitality Charm",
+   "files": [
+    "engine/src/cards/pool/vitality-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Entrails Feaster",
+   "files": [
+    "engine/src/cards/pool/entrails-feaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Discombobulate",
+   "files": [
+    "engine/src/cards/pool/discombobulate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shaleskin Bruiser",
+   "files": [
+    "engine/src/cards/pool/shaleskin-bruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ixidor's Will",
+   "files": [
+    "engine/src/cards/pool/ixidors-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nova Cleric",
+   "files": [
+    "engine/src/cards/pool/nova-cleric.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unified Strike",
+   "files": [
+    "engine/src/cards/pool/unified-strike.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Accursed Centaur",
+   "files": [
+    "engine/src/cards/pool/accursed-centaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silent Specter",
+   "files": [
+    "engine/src/cards/pool/silent-specter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lavamancer's Skill",
+   "files": [
+    "engine/src/cards/pool/lavamancers-skill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wave of Indifference",
+   "files": [
+    "engine/src/cards/pool/wave-of-indifference.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fever Charm",
+   "files": [
+    "engine/src/cards/pool/fever-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battlefield Medic",
+   "files": [
+    "engine/src/cards/pool/battlefield-medic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Misery Charm",
+   "files": [
+    "engine/src/cards/pool/misery-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Profane Prayers",
+   "files": [
+    "engine/src/cards/pool/profane-prayers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feeding Frenzy",
+   "files": [
+    "engine/src/cards/pool/feeding-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strongarm Tactics",
+   "files": [
+    "engine/src/cards/pool/strongarm-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Taskmaster",
+   "files": [
+    "engine/src/cards/pool/goblin-taskmaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fathom Seer",
+   "files": [
+    "engine/src/cards/pool/fathom-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gathan Raiders",
+   "files": [
+    "engine/src/cards/pool/gathan-raiders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Putrid Raptor",
+   "files": [
+    "engine/src/cards/pool/putrid-raptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven Guild Initiate",
+   "files": [
+    "engine/src/cards/pool/raven-guild-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skirk Volcanist",
+   "files": [
+    "engine/src/cards/pool/skirk-volcanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Cutthroat",
+   "files": [
+    "engine/src/cards/pool/zombie-cutthroat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "7/7 Green Elemental Token with Trample",
+   "files": [
+    "engine/src/cards/tokens/green-elemental-token-7-7-trample.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Cryptic Gateway",
+   "needs": [
+    "filter:shares-creature-type-with-this-way",
+    "cost:tap-creatures-sharing-creature-type"
+   ],
+   "why": "\"Tap two untapped creatures you control: You may put a creature card from your hand onto the battlefield that shares a creature type with each creature tapped this way\": the put filter can't read the creatures the tapOthers cost tapped."
+  },
+  {
+   "name": "Jareth, Leonine Titan",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "\"{W}: Jareth gains protection from the color of your choice until end of turn\": no effect grants protection; it's a static only."
+  },
+  {
+   "name": "Peer Pressure",
+   "needs": [
+    "condition:controls-more-than-each-other-player"
+   ],
+   "why": "\"If you control more creatures of the chosen type than each other player\": strictly more than each other player; opponent-controls-more negated says \"at least as many\"."
+  },
+  {
+   "name": "Words of Wind",
+   "needs": [
+    "replacement:next-draw-this-turn"
+   ],
+   "why": "\"{1}: The next time you would draw a card this turn, instead each player returns a permanent they control\": no one-shot next-draw replacement set up by an ability."
+  },
+  {
+   "name": "Backslide",
+   "needs": [
+    "effect:turn-face-down"
+   ],
+   "why": "\"Turn target creature with a morph ability face down\": not built."
+  },
+  {
+   "name": "Harsh Mercy",
+   "needs": [
+    "effect:each-player-chooses-creature-type"
+   ],
+   "why": "Each player chooses a creature type; choose-creature-type asks only the controller."
+  },
+  {
+   "name": "Soulless One",
+   "needs": [
+    "bug:cda-sum-of-counts"
+   ],
+   "why": "P/T equal to Zombies on the battlefield plus Zombie cards in graveyards: a CDA reads one count."
+  },
+  {
+   "name": "Imagecrafter",
+   "needs": [
+    "decision:choose-creature-type-excluding",
+    "effect:set-creature-type"
+   ],
+   "why": "\"Choose a creature type other than Wall. Target creature becomes that type\": the choice can't exclude Wall, and types can only be added."
+  },
+  {
+   "name": "Mistform Mutant",
+   "needs": [
+    "decision:choose-creature-type-excluding",
+    "effect:set-creature-type"
+   ],
+   "why": "As Imagecrafter."
+  },
+  {
+   "name": "Kamahl's Summons",
+   "needs": [
+    "amount:cards-revealed-this-way"
+   ],
+   "why": "Each player reveals any number of creature cards from their hand, then makes a 2/2 Bear per card revealed: no such reveal."
+  },
+  {
+   "name": "False Cure",
+   "needs": [
+    "effect:delayed-life-gain-trigger"
+   ],
+   "why": "\"Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life gained\": no turn-long trigger from a spell."
+  },
+  {
+   "name": "Kaboom!",
+   "needs": [
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "Reveal-until puts the rest on the bottom at random, not in any order; the ruling's target order is unmodeled too."
+  },
+  {
+   "name": "Riptide Replicator",
+   "needs": [
+    "effect:token-of-chosen-color-and-type"
+   ],
+   "why": "A token of the color and creature type chosen as it entered."
+  },
+  {
+   "name": "Crown of Awe",
+   "needs": [
+    "effect:grant-protection-temporary",
+    "filter:shares-creature-type-with-attached"
+   ],
+   "why": "\"Sacrifice Crown of Awe: Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn\"."
+  },
+  {
+   "name": "Biorhythm",
+   "needs": [
+    "effect:life-total-becomes"
+   ],
+   "why": "\"Each player's life total becomes the number of creatures they control\": no per-player count."
+  },
+  {
+   "name": "Trickery Charm",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "Mode 2, \"target creature becomes the creature type of your choice\", replaces its types."
+  },
+  {
+   "name": "Read the Runes",
+   "needs": [
+    "effect:sacrifice-any-number"
+   ],
+   "why": "\"For each card drawn this way, discard a card unless you sacrifice a permanent\": a simultaneous sacrifice of any number."
+  },
+  {
+   "name": "Artificial Evolution",
+   "needs": [
+    "effect:text-change-creature-type-words"
+   ],
+   "why": "Text change of creature-type words (AUTHORING §15)."
+  },
+  {
+   "name": "Tempting Wurm",
+   "needs": [
+    "bug:each-player-reanimate-simultaneous"
+   ],
+   "why": "Each opponent's cards are put onto the battlefield at once; a for-each-player look-and-choose moves them one player at a time."
+  },
+  {
+   "name": "Aurification",
+   "needs": [
+    "effect:remove-counters-all"
+   ],
+   "why": "\"When Aurification leaves the battlefield, remove all gold counters from all creatures\"."
+  },
+  {
+   "name": "Words of Worship",
+   "needs": [
+    "replacement:next-draw-this-turn"
+   ],
+   "why": "As Words of Wind."
+  },
+  {
+   "name": "Sea's Claim",
+   "needs": [
+    "static:land-type-setting"
+   ],
+   "why": "\"Enchanted land is an Island\": sets the land type and removes its abilities (rule 305.7)."
+  },
+  {
+   "name": "Supreme Inquisitor",
+   "needs": [
+    "effect:search-opponent-library"
+   ],
+   "why": "Search target player's library for up to five cards and exile them."
+  },
+  {
+   "name": "Quicksilver Dragon",
+   "needs": [
+    "effect:redirect-spell-from-source"
+   ],
+   "why": "\"If target spell has only one target and that target is this creature, change that spell's target to another creature\"."
+  },
+  {
+   "name": "Ixidor, Reality Sculptor",
+   "needs": [
+    "effect:turn-face-up"
+   ],
+   "why": "\"{2}{U}: Turn target face-down creature face up\": no turn-face-up effect."
+  },
+  {
+   "name": "Words of Waste",
+   "needs": [
+    "replacement:next-draw-this-turn"
+   ],
+   "why": "As Words of Wind."
+  },
+  {
+   "name": "Words of War",
+   "needs": [
+    "replacement:next-draw-this-turn"
+   ],
+   "why": "As Words of Wind."
+  },
+  {
+   "name": "Akroma's Blessing",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "\"Choose a color. Creatures you control gain protection from the chosen color until end of turn\"."
+  },
+  {
+   "name": "Head Games",
+   "needs": [
+    "effect:search-opponent-library",
+    "effect:target-player-puts-cards-from-hand-on-library"
+   ],
+   "why": "Target opponent puts their hand on top; you search their library for that many cards."
+  },
+  {
+   "name": "Grand Melee",
+   "needs": [
+    "static:must-block-each-combat"
+   ],
+   "why": "\"All creatures attack each combat if able. All creatures block each combat if able\": the block half isn't a static."
+  },
+  {
+   "name": "Callous Oppressor",
+   "needs": [
+    "effect:choices-by-other-players"
+   ],
+   "why": "\"As this creature enters, an opponent chooses a creature type\": the controller always chooses."
+  },
+  {
+   "name": "Risky Move",
+   "needs": [
+    "trigger:gains-control-of-this"
+   ],
+   "why": "\"When you gain control of Risky Move from another player, …\": no such trigger."
+  },
+  {
+   "name": "Spy Network",
+   "needs": [
+    "effect:look-at-top-of-target-players-library",
+    "effect:look-at-face-down-permanents"
+   ],
+   "why": "Look at target player's hand, the top card of their library and their face-down creatures."
+  },
+  {
+   "name": "Words of Wilding",
+   "needs": [
+    "replacement:next-draw-this-turn"
+   ],
+   "why": "As Words of Wind."
+  },
+  {
+   "name": "Standardize",
+   "needs": [
+    "decision:choose-creature-type-excluding",
+    "effect:set-creature-type"
+   ],
+   "why": "\"Choose a creature type other than Wall. Each creature becomes that type until end of turn\"."
+  },
+  {
+   "name": "Aphetto Dredging",
+   "needs": [
+    "cost:choose-creature-type-as-cast"
+   ],
+   "why": "The creature type is chosen as it's cast, before targets (its ruling); choose-creature-type runs only as it resolves."
+  },
+  {
+   "name": "Blackmail",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard"
+   ],
+   "why": "Target player reveals three cards from their hand (their choice) and you choose one to discard."
+  },
+  {
+   "name": "True Believer",
+   "needs": [
+    "static:player-shroud-static"
+   ],
+   "why": "\"You have shroud\": only player hexproof exists."
+  },
+  {
+   "name": "Mistform Mask",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"{1}: Enchanted creature becomes the creature type of your choice until end of turn\"."
+  },
+  {
+   "name": "Death Match",
+   "needs": [
+    "decision:trigger-object-controller-chooses-target"
+   ],
+   "why": "\"Whenever a creature enters, that creature's controller may have target creature of their choice get -3/-3\": the entering creature's controller chooses the target."
+  }
+ ]
+}
