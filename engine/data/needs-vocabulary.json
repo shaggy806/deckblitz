@@ -1236,7 +1236,8 @@
   "new:zone-entry-prohibition": "static:zone-entry-prohibition",
   "zone:impulse-exile-other-libraries": "effect:impulse-exile-other-libraries",
   "trigger:valiant": "keyword:valiant",
-  "static:absorb": "replacement:prevent-n-damage-from-each-source"
+  "static:absorb": "replacement:prevent-n-damage-from-each-source",
+  "static:block-any-number": "static:can-block-any-number"
  },
  "features": {
   "bug:additional-cost-option-affordability": {
@@ -11867,6 +11868,38 @@
   "condition:hand-size-at-turn-start": {
    "family": "condition:that-player-hand-size",
    "example": "Mindstorm Crown: 'If you had no cards in hand at the beginning of this turn, draw a card. Otherwise, this deals 1 damage to you.'"
+  },
+  "static:untargetable-by-color-any-player": {
+   "family": "keyword:hexproof-from-colors",
+   "example": "Mercenary Informer: 'can't be the target of black spells or abilities from black sources' — hexproof from a colour stops only opponents; this stops every player, its controller too."
+  },
+  "condition:opponent-controls-at-least-n-more": {
+   "family": "condition:defending-player-controls",
+   "example": "Avatar of Might: 'costs {6} less if an opponent controls at least four more creatures than you' — opponent-controls-more has no margin."
+  },
+  "effect:animate-all-controlled-by-target": {
+   "example": "Jolrael, Empress of Beasts: 'all lands target player controls become 3/3 creatures until end of turn' — animate-all has no controlled-by-target filter."
+  },
+  "effect:highest-life-wins-or-draw": {
+   "example": "Celestial Convergence: 'the player with the highest life total wins the game. If two or more players are tied, the game is a draw.'"
+  },
+  "replacement:as-enters-discard-hand": {
+   "example": "Heightened Awareness: 'As this enchantment enters, discard your hand' — a replacement as it enters, not an enters trigger."
+  },
+  "static:cant-attack-if-defender-controls": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Branded Brawlers: 'can't attack if defending player controls an untapped land' — the inverse of cant-attack-unless-defender-controls."
+  },
+  "effect:lose-specific-ability": {
+   "example": "Glittering Lion: 'Until end of turn, this creature loses \"Prevent all damage that would be dealt to this creature.\"' — lose-keywords takes keywords only; nothing removes one non-keyword static."
+  },
+  "effect:if-any-player-pays": {
+   "family": "effect:unless-any-player-pays",
+   "example": "Rhystic Scrying: 'Then if any player pays {2}, discard three cards' — the rhystic unless has an effect for nobody paying, none for someone paying."
+  },
+  "effect:mana-ability-unless-any-player-pays": {
+   "family": "effect:unless-any-player-pays",
+   "example": "Rhystic Cave: 'Add one mana of that color unless any player pays {1}' — a mana ability (605.1a) can't stop to ask the other players."
   }
  }
 }

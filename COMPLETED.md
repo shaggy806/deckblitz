@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"Any player may activate this ability" and "unless any player pays", and Prophecy — Prophecy
+  is whole** (batch 222, the seventh middle walk, 2026-10-27, `effect:any-player-may-activate`,
+  `cost:any-player-may-activate`, `effect:unless-any-player-pays`): **built**
+  `ActivatedAbility.anyPlayer` (rule 602.2 — offered to every player, the activator controlling
+  the ability, paying its costs and being "you" in its condition) and the rhystic `unless`
+  (`chooser: "any-player"`, each player in turn from the active player, the next only once the one
+  before declines; Browbeat's `takeDamage` option), both read by the scaffolder, with the eleven
+  earlier cards they unblocked (Icy Prison, Browbeat, Breaking Point, Book Burning, Barbarian
+  Bully, Feral Hydra, Oona's Prowler, Well of Knowledge, Deadly Designs, Aether Storm, Infinite
+  Hourglass). 78 of Prophecy's 113 authored — Rhystic Tutor, Infernal Genesis, Excavation, the
+  Spellshapers Alexi, Greel and Latulla, Avatar of Fury, Rhystic Lightning, Elephant Resurgence —
+  by five `card-author` agents and the lead, and 35 blocked (`B222.json`).
 - **Judgment — Judgment is whole** (batch 217, the fifth middle walk, 2026-10-27): 55 of its 102
   remaining new cards authored by five `card-author` agents — the Phantoms (Nishoba, Flock, Tiger,
   Nomad, Nantuko), the Wormfang Drake, Newt and Turtle, Valor, Seedtime, Grizzly Fate, Epic
