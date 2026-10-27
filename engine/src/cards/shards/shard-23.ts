@@ -476,6 +476,7 @@ import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
+import _poolNightshadeAssassin from "../pool/nightshade-assassin.js";
 import _poolNostalgicDreams from "../pool/nostalgic-dreams.js";
 import _poolNullstoneGargoyle from "../pool/nullstone-gargoyle.js";
 import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolNezumiLinkbreaker,
     _poolNightMarket,
     _poolNighthowlPursuer,
+    _poolNightshadeAssassin,
     _poolNostalgicDreams,
     _poolNullstoneGargoyle,
     _poolNyleasDisciple,

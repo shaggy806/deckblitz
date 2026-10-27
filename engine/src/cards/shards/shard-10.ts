@@ -444,6 +444,7 @@ import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMorgueBurst from "../pool/morgue-burst.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
+import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
@@ -576,6 +577,7 @@ import _poolSandcrafterMage from "../pool/sandcrafter-mage.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
 import _poolSapphireDrake from "../pool/sapphire-drake.js";
+import _poolSaprolingCluster from "../pool/saproling-cluster.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageSurge from "../pool/savage-surge.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
@@ -1265,6 +1267,7 @@ const shard: CardShard = {
     _poolMorgueBurst,
     _poolMouserMarkIii,
     _poolMulch,
+    _poolMutagenManLivingOoze,
     _poolNagaVitalist,
     _poolNantukoShade,
     _poolNascentMetamorph,
@@ -1397,6 +1400,7 @@ const shard: CardShard = {
     _poolSandstoneOracle,
     _poolSanguineBond,
     _poolSapphireDrake,
+    _poolSaprolingCluster,
     _poolSarkhansDragonfire,
     _poolSavageSurge,
     _poolSavageVentmaw,

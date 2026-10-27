@@ -136,6 +136,7 @@ import _poolConflux from "../pool/conflux.js";
 import _poolConsignToDream from "../pool/consign-to-dream.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
+import _poolCoralAtoll from "../pool/coral-atoll.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
 import _poolCratersClaws from "../pool/craters-claws.js";
@@ -945,6 +946,7 @@ const shard: CardShard = {
     _poolConsignToDream,
     _poolConsumingAetherborn,
     _poolCopperTablet,
+    _poolCoralAtoll,
     _poolCorruptedGrafstone,
     _poolCrackdownConstruct,
     _poolCratersClaws,

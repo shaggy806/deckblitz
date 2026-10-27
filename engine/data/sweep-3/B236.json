@@ -1,0 +1,713 @@
+{
+ "batch": "B236",
+ "status": "complete",
+ "ranks": "The need-keys recheck list R2 (Phase 1 step 2)",
+ "authored": [
+  {
+   "name": "Pili-Pala",
+   "files": [
+    "engine/src/cards/pool/pili-pala.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mage-Ring Network",
+   "files": [
+    "engine/src/cards/pool/mage-ring-network.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cathartic Pyre",
+   "files": [
+    "engine/src/cards/pool/cathartic-pyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daretti, Scrap Savant",
+   "files": [
+    "engine/src/cards/pool/daretti-scrap-savant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "files": [
+    "engine/src/cards/pool/fable-of-the-mirror-breaker.ts",
+    "engine/src/cards/pool/reflection-of-kiki-jiki.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokka, Bold Boomeranger",
+   "files": [
+    "engine/src/cards/pool/sokka-bold-boomeranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Recruiter",
+   "files": [
+    "engine/src/cards/pool/goblin-recruiter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blinkmoth Urn",
+   "files": [
+    "engine/src/cards/pool/blinkmoth-urn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Electrosiphon",
+   "files": [
+    "engine/src/cards/pool/electrosiphon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lilypad Village",
+   "files": [
+    "engine/src/cards/pool/lilypad-village.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wolf Strike",
+   "files": [
+    "engine/src/cards/pool/wolf-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Into the Story",
+   "files": [
+    "engine/src/cards/pool/into-the-story.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sword of the Paruns",
+   "files": [
+    "engine/src/cards/pool/sword-of-the-paruns.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutagen Man, Living Ooze",
+   "files": [
+    "engine/src/cards/pool/mutagen-man-living-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saproling Cluster",
+   "files": [
+    "engine/src/cards/pool/saproling-cluster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volrath's Dungeon",
+   "files": [
+    "engine/src/cards/pool/volraths-dungeon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alisaie Leveilleur",
+   "files": [
+    "engine/src/cards/pool/alisaie-leveilleur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hostage Taker",
+   "files": [
+    "engine/src/cards/pool/hostage-taker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coral Atoll",
+   "files": [
+    "engine/src/cards/pool/coral-atoll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightshade Assassin",
+   "files": [
+    "engine/src/cards/pool/nightshade-assassin.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Multiclass Baldric",
+   "needs": [
+    "replacement:prevent-damage-to-attached"
+   ],
+   "why": "The keyword grants are writable, but 'as long as you have a full party, prevent all damage that would be dealt to equipped creature' has no replacement aimed at the Equipment's host."
+  },
+  {
+   "name": "Aerial Surveyor",
+   "needs": [
+    "condition:defending-player-controls"
+   ],
+   "why": "'If defending player controls more lands than you': opponent-controls-more asks any one opponent, exact only in two-player games."
+  },
+  {
+   "name": "Beza, the Bounding Spring",
+   "needs": [
+    "condition:opponent-more-life",
+    "condition:opponent-more-cards-in-hand"
+   ],
+   "why": "The lands and creatures comparisons are writable; 'an opponent has more life / more cards in hand than you' has no condition."
+  },
+  {
+   "name": "Cosmos Elixir",
+   "needs": [
+    "condition:life-above-starting"
+   ],
+   "why": "'If your life total is greater than your starting life total': life-total takes fixed numbers or half-starting only."
+  },
+  {
+   "name": "Speaker of the Heavens",
+   "needs": [
+    "condition:life-above-starting"
+   ],
+   "why": "'At least 7 life more than your starting life total': life-total takes fixed numbers only."
+  },
+  {
+   "name": "Ghirapur Orrery",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "The upkeep trigger's 'if that player has no cards in hand' — hand-size reads only you or each player."
+  },
+  {
+   "name": "Wakka, Devoted Guardian",
+   "needs": [
+    "condition:counter-put-on-source-this-turn"
+   ],
+   "why": "Blitzball Captain's 'if a counter was put on Wakka this turn' — no per-object counters-put history."
+  },
+  {
+   "name": "Vampire Nocturnus",
+   "needs": [
+    "condition:top-card-of-library-matches"
+   ],
+   "why": "Revealing the top card is built; 'as long as the top card of your library is black' has no condition."
+  },
+  {
+   "name": "River of Tears",
+   "needs": [
+    "condition:played-land-this-turn"
+   ],
+   "why": "'If you played a land this turn' — landsPlayedThisTurn is tracked but no condition reads it."
+  },
+  {
+   "name": "Agatha of the Vile Cauldron",
+   "needs": [
+    "cost:ability-cost-reduction-source-power"
+   ],
+   "why": "Training Grounds' reduction with X = Agatha's power: reduceGeneric is a fixed number."
+  },
+  {
+   "name": "Biomancer's Familiar",
+   "needs": [
+    "effect:adapt-ignores-counters"
+   ],
+   "why": "The cost reduction is Training Grounds'; 'the next time target creature adapts this turn, it adapts as though it had no +1/+1 counters' has no adapt event to modify."
+  },
+  {
+   "name": "Bruenor Battlehammer",
+   "needs": [
+    "cost:first-equip-each-turn-free"
+   ],
+   "why": "'You may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.'"
+  },
+  {
+   "name": "Brutal Suppression",
+   "needs": [
+    "cost:ability-additional-sacrifice-cost"
+   ],
+   "why": "Activated abilities of nontoken Rebels cost an additional 'Sacrifice a land'."
+  },
+  {
+   "name": "Bureau Headmaster",
+   "needs": [
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "'Equip abilities you activate cost {1} less': abilityCostModification can't single out equip abilities."
+  },
+  {
+   "name": "Crown of Gondor",
+   "needs": [
+    "cost:ability-cost-reduction-conditional",
+    "condition:no-monarch"
+   ],
+   "why": "Equip's '{3} less if you're the monarch' — an ability's costReduction has no condition; and 'if there is no monarch'."
+  },
+  {
+   "name": "Hylda's Crown of Winter",
+   "needs": [
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "'This ability costs {1} less to activate during your turn' — an ability's costReduction has no condition."
+  },
+  {
+   "name": "Hulk, Gamma Goliath",
+   "needs": [
+    "cost:power-up-cost-reduction"
+   ],
+   "why": "'Power-up abilities of other creatures you control cost {3} less.'"
+  },
+  {
+   "name": "Professor Hojo",
+   "needs": [
+    "cost:first-targeting-ability-cost-reduction"
+   ],
+   "why": "The first targeting activated ability each turn costs {2} less; the once-a-turn becomes-target trigger would also need an activated-only filter."
+  },
+  {
+   "name": "Tithe Taker",
+   "needs": [
+    "cost:ability-cost-modification-all-zones"
+   ],
+   "why": "The tax reaches abilities opponents activate from any zone; abilityCostModification reaches permanents only."
+  },
+  {
+   "name": "Bladegraft Aspirant",
+   "needs": [
+    "cost:ability-cost-reduction-targeting-source"
+   ],
+   "why": "'Activated abilities of Equipment you control that target this creature cost {1} less.'"
+  },
+  {
+   "name": "Mana Cache",
+   "needs": [
+    "cost:any-player-mana-ability"
+   ],
+   "why": "Any player may remove a counter to add {C} — another player's mana ability isn't offered to pay their costs."
+  },
+  {
+   "name": "Tidal Control",
+   "needs": [
+    "cost:ability-cost-choice"
+   ],
+   "why": "'Pay 2 life or {2}:' — an activated ability with a choice of costs."
+  },
+  {
+   "name": "Chainer, Nightmare Adept",
+   "needs": [
+    "zone:graveyard-cast-permission-one-use"
+   ],
+   "why": "'You may cast a creature spell from your graveyard this turn' is one cast per activation (its ruling); the graveyard permission is never used up."
+  },
+  {
+   "name": "Kozilek, the Great Distortion",
+   "needs": [
+    "cost:discard-mana-value-x"
+   ],
+   "why": "'Discard a card with mana value X: Counter target spell with mana value X' — a discard cost whose filter reads X."
+  },
+  {
+   "name": "Titan's Presence",
+   "needs": [
+    "cost:reveal-card-as-additional-cost"
+   ],
+   "why": "Reveal a colorless creature card as an additional cost, and read its power on resolution."
+  },
+  {
+   "name": "Belt of Giant Strength",
+   "needs": [
+    "cost:ability-cost-reduction-by-target-stats"
+   ],
+   "why": "Equip costs {X} less, X the targeted creature's power."
+  },
+  {
+   "name": "Warrior's Blades",
+   "needs": [
+    "cost:ability-cost-reduction-by-target-stats"
+   ],
+   "why": "Equip costs {1} less for each +1/+1 counter on the creature it targets."
+  },
+  {
+   "name": "Cemetery Prowler",
+   "needs": [
+    "cost:reduction-per-type-shared-with-exiled"
+   ],
+   "why": "Spells cost {1} less for each card type they share with cards exiled with it."
+  },
+  {
+   "name": "Charix, the Raging Isle",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "'Spells your opponents cast that target Charix cost {2} more' — targetedBySpellsCost is life only."
+  },
+  {
+   "name": "Esior, Wardwing Familiar",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "Opponents' spells that target your commanders cost {3} more — no mana tax on spells by target."
+  },
+  {
+   "name": "Jubilant Skybonder",
+   "needs": [
+    "cost:targeted-by-spells-mana-tax"
+   ],
+   "why": "Grants fliers a {2} tax on opponents' spells that target them — life only, own permanent only."
+  },
+  {
+   "name": "Elspeth Conquers Death",
+   "needs": [
+    "effect:temporary-opponent-spell-tax",
+    "decision:choose-counter-kind"
+   ],
+   "why": "Chapter II's tax until your next turn is no player-effect; chapter III's '+1/+1 counter or a loyalty counter' choice is unexpressed."
+  },
+  {
+   "name": "Killian, Ink Duelist",
+   "needs": [
+    "cost:spell-cost-reduction-by-chosen-targets"
+   ],
+   "why": "'Spells you cast that target a creature cost {2} less' — costModification is matched before targets exist."
+  },
+  {
+   "name": "Spellwild Ouphe",
+   "needs": [
+    "cost:spell-cost-reduction-by-chosen-targets"
+   ],
+   "why": "'Spells that target this creature cost {2} less' — any caster, read off the chosen targets."
+  },
+  {
+   "name": "Sage of the Beyond",
+   "needs": [
+    "cost:cost-reduction-cast-not-from-hand"
+   ],
+   "why": "'Spells you cast from anywhere other than your hand cost {2} less' — castFrom names one zone."
+  },
+  {
+   "name": "Savvy Trader",
+   "needs": [
+    "cost:cost-reduction-cast-not-from-hand"
+   ],
+   "why": "The not-from-hand reduction; and the exiled permanent card may be *played* (a land too), where exile's mayCast casts only."
+  },
+  {
+   "name": "Thryx, the Sudden Storm",
+   "needs": [
+    "cost:cost-modification-mana-value-with-x"
+   ],
+   "why": "Mana value 5 or greater counts X on the stack (ruling); costModification reads it without X."
+  },
+  {
+   "name": "Trinisphere",
+   "needs": [
+    "cost:minimum-total-cost"
+   ],
+   "why": "A three-mana floor on every spell's total cost while untapped."
+  },
+  {
+   "name": "Soaring Stoneglider",
+   "needs": [
+    "cost:additional-cost-option-exile-graveyard"
+   ],
+   "why": "'Exile two cards from your graveyard or pay {1}{W}' — no exile-from-graveyard option branch."
+  },
+  {
+   "name": "Brainstealer Dragon",
+   "needs": [
+    "effect:trigger-object-owner-scope"
+   ],
+   "why": "The impulse exile with any-colour spending is writable; 'they lose life' names the entering permanent's owner, which no player scope reads."
+  },
+  {
+   "name": "Crypt Rats",
+   "needs": [
+    "cost:x-spend-only-color"
+   ],
+   "why": "'Spend only black mana on X' in an activated ability."
+  },
+  {
+   "name": "Elementalist's Palette",
+   "needs": [
+    "cost:mana-spend-only-x-costs"
+   ],
+   "why": "'Spend this mana only on costs that contain {X}.'"
+  },
+  {
+   "name": "Freya Crescent",
+   "needs": [
+    "cost:spend-only-equip-abilities"
+   ],
+   "why": "'Spend this mana only to cast an Equipment spell or activate an equip ability.'"
+  },
+  {
+   "name": "Gonti, Lord of Luxury",
+   "needs": [
+    "zone:allow-cast-from-exile-spend-any-type"
+   ],
+   "why": "Look at four, exile one face down, cast it while exiled with mana of any type — the exiled card's cast permission takes no spendAs."
+  },
+  {
+   "name": "Mm'menon, the Right Hand",
+   "needs": [
+    "cost:mana-restriction-not-from-hand"
+   ],
+   "why": "Granted mana 'spend only to cast a spell from anywhere other than your hand'."
+  },
+  {
+   "name": "Sunglasses of Urza",
+   "needs": [
+    "mana:spend-color-as-another-color"
+   ],
+   "why": "'You may spend white mana as though it were red mana.'"
+  },
+  {
+   "name": "Throne of Eldraine",
+   "needs": [
+    "mana:spend-only-chosen-color"
+   ],
+   "why": "Mana only for monocolored spells of the chosen color, and 'spend only mana of the chosen color to activate this ability'."
+  },
+  {
+   "name": "Tinybones, the Pickpocket",
+   "needs": [
+    "effect:cast-now-spend-any-mana"
+   ],
+   "why": "'You may cast target nonland permanent card from that player's graveyard, and mana of any type can be spent' — cast-now has no spendAs."
+  },
+  {
+   "name": "Mercurial Spelldancer",
+   "needs": [
+    "cost:may-remove-counters-cost"
+   ],
+   "why": "'You may remove two oil counters from it. If you do, …' — may takes no counter-removal cost."
+  },
+  {
+   "name": "Geometric Nexus",
+   "needs": [
+    "cost:remove-all-counters"
+   ],
+   "why": "'Remove all charge counters' as a cost, with X the number removed."
+  },
+  {
+   "name": "Echoes of Eternity",
+   "needs": [
+    "static:double-triggers-of-spells"
+   ],
+   "why": "Doubling reaches colorless spells' own triggers ('a colorless spell you control or another colorless permanent')."
+  },
+  {
+   "name": "Twinning Staff",
+   "needs": [
+    "replacement:copy-spell-additional-time"
+   ],
+   "why": "'If you would copy a spell one or more times, instead copy it that many times plus an additional time.'"
+  },
+  {
+   "name": "Borborygmos and Fblthp",
+   "needs": [
+    "effect:discard-any-number-filtered"
+   ],
+   "why": "'You may discard any number of land cards' — anyNumber takes no filter."
+  },
+  {
+   "name": "Indominus Rex, Alpha",
+   "needs": [
+    "replacement:as-enters-discard-any-number"
+   ],
+   "why": "As it enters, discard any number of creature cards; it enters with a counter of each listed keyword among them."
+  },
+  {
+   "name": "Mishra's Command",
+   "needs": [
+    "decision:discard-up-to-x"
+   ],
+   "why": "Mode one's 'they may discard up to X cards' — X variable, the target player's choice."
+  },
+  {
+   "name": "Reinforcements",
+   "needs": [
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "Up to three target cards put on top of the library in the order their owner chooses."
+  },
+  {
+   "name": "Scroll Rack",
+   "needs": [
+    "effect:exile-from-hand-any-number-swap"
+   ],
+   "why": "Exile any number from hand face down, take that many from the top, put the exiled cards back on top in any order."
+  },
+  {
+   "name": "Aetherspouts",
+   "needs": [
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "For each attacking creature, its owner chooses top or bottom (APNAP), and orders their own cards going to the same end."
+  },
+  {
+   "name": "Clash of Elements",
+   "needs": [
+    "effect:if-they-do-library-move"
+   ],
+   "why": "'If they do, 2 damage' only if the card actually went to the top of the library."
+  },
+  {
+   "name": "Living Conundrum",
+   "needs": [
+    "decision:replacement-order-draw"
+   ],
+   "why": "The skip-draw replacement's order against Laboratory Maniac / Jace is the drawing player's (its ruling)."
+  },
+  {
+   "name": "Phantom Centaur",
+   "needs": [
+    "decision:replacement-order-damage"
+   ],
+   "why": "Protection from black may prevent damage before its own prevention, losing no counter (its ruling); the engine always applies its replacement first."
+  },
+  {
+   "name": "Szadek, Lord of Secrets",
+   "needs": [
+    "decision:replacement-order-damage"
+   ],
+   "why": "The defending player may apply prevention before Szadek's replacement (its ruling)."
+  },
+  {
+   "name": "Boseiju, Who Shelters All",
+   "needs": [
+    "mana:spent-makes-spell-uncounterable"
+   ],
+   "why": "Unrestricted {C} that makes an instant or sorcery it pays for uncounterable."
+  },
+  {
+   "name": "Firemind Vessel",
+   "needs": [
+    "effect:add-mana-two-different-colors"
+   ],
+   "why": "'Add two mana of different colors.'"
+  },
+  {
+   "name": "Interplanar Beacon",
+   "needs": [
+    "effect:add-mana-two-different-colors"
+   ],
+   "why": "'Add two mana of different colors. Spend this mana only to cast planeswalker spells.'"
+  },
+  {
+   "name": "Selvala, Heart of the Wilds",
+   "needs": [
+    "effect:mana-any-combination-choice"
+   ],
+   "why": "'X mana in any combination of colors' activated by hand offers only all-of-one-colour past X = 4."
+  },
+  {
+   "name": "Squandered Resources",
+   "needs": [
+    "mana:any-type-sacrificed-land-could-produce"
+   ],
+   "why": "'Add one mana of any type the sacrificed land could produce.'"
+  },
+  {
+   "name": "Master Biomancer",
+   "needs": [
+    "replacement:others-enter-as-subtype"
+   ],
+   "why": "Arwen's enters-with-counters replacement is there; 'and as a Mutant in addition to its other types' isn't."
+  },
+  {
+   "name": "Response // Resurgence",
+   "needs": [
+    "effect:additional-combat-only-in-main-phase"
+   ],
+   "why": "Resurgence's extra combat must add nothing when it resolves outside a main phase (ruling)."
+  },
+  {
+   "name": "Hancock, Ghoulish Mayor",
+   "needs": [
+    "static:anthem-per-all-counters-on-source"
+   ],
+   "why": "+X/+X where X is the number of counters of every kind on Hancock."
+  },
+  {
+   "name": "The Mouth of Sauron",
+   "needs": [
+    "effect:count-in-target-player-graveyard"
+   ],
+   "why": "Amass X, X the instant and sorcery cards in the target player's graveyard."
+  },
+  {
+   "name": "Command the Dreadhorde",
+   "needs": [
+    "amount:total-mana-value-of-targets"
+   ],
+   "why": "Damage to you equal to the total mana value of an any-number target group."
+  },
+  {
+   "name": "Eris, Roar of the Storm",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "{2} less for each different mana value among instant and sorcery cards in your graveyard."
+  },
+  {
+   "name": "Phyresis Outbreak",
+   "needs": [
+    "amount:per-object-controller-player-counters"
+   ],
+   "why": "-1/-1 for each poison counter each creature's own controller has."
+  },
+  {
+   "name": "Shadow of Mortality",
+   "needs": [
+    "amount:starting-life-total"
+   ],
+   "why": "{X} less, X the difference between your starting life total and your life total."
+  },
+  {
+   "name": "Epic Experiment",
+   "needs": [
+    "effect:cast-now-rest-to-graveyard"
+   ],
+   "why": "Villainous Wealth's free casts from among the exiled cards are there; putting the uncast ones into the graveyard isn't."
+  },
+  {
+   "name": "Tersa Lightshatter",
+   "needs": [
+    "effect:allow-play-from-exile"
+   ],
+   "why": "The ETB loot is Kinetic Augur's; the randomly exiled card may be *played* (a land too), where exile's mayCast and allow-cast-from-exile only cast."
+  },
+  {
+   "name": "Jin-Gitaxias // The Great Synthesis",
+   "needs": [
+    "effect:no-max-hand-size-while-you-control-source"
+   ],
+   "why": "Everything else on both faces is expressible; chapter I's 'no maximum hand size for as long as you control this Saga' is a one-shot effect, not the Saga's static."
+  },
+  {
+   "name": "Skirge Familiar",
+   "needs": [
+    "cost:mana-ability-discard-cost"
+   ],
+   "why": "'Discard a card: Add {B}' — the mana-ability activation resolves before a discard cost would be paid."
+  },
+  {
+   "name": "Molt Tender",
+   "needs": [
+    "cost:mana-ability-exile-graveyard-cost"
+   ],
+   "why": "The mill line is writable; '{T}, Exile a card from your graveyard: Add one mana of any color' is refused on a mana ability."
+  }
+ ]
+}

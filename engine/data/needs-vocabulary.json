@@ -13006,6 +13006,26 @@
    "family": "effect:amount-new-variants",
    "example": "Phyresis Outbreak",
    "description": "A per-permanent amount read off its own controller ('-1/-1 for each poison counter its controller has')."
+  },
+  "effect:cast-now-rest-to-graveyard": {
+   "family": "decision:free-cast-choices",
+   "example": "Epic Experiment",
+   "description": "After a 'cast any number from among them' cast-now, put the exiled-this-way cards that weren't cast into the graveyard — cast-now's rest goes only to the library bottom."
+  },
+  "effect:no-max-hand-size-while-you-control-source": {
+   "family": "static:max-hand-size",
+   "example": "Jin-Gitaxias // The Great Synthesis",
+   "description": "A one-shot player effect from a resolving ability, 'you have no maximum hand size for as long as you control this Saga' — a static on the Saga would apply before chapter I resolves and follow a change of control."
+  },
+  "cost:mana-ability-discard-cost": {
+   "family": "cost:mana-ability-complex-costs",
+   "example": "Skirge Familiar",
+   "description": "A mana ability whose cost discards a card ('Discard a card: Add {B}'): the mana-ability path resolves before the discard is paid, so it isn't paid at all."
+  },
+  "cost:mana-ability-exile-graveyard-cost": {
+   "family": "cost:mana-ability-complex-costs",
+   "example": "Molt Tender",
+   "description": "A mana ability whose cost exiles a card from your graveyard: refused outright ('mana ability can't exile cards from a graveyard yet')."
   }
  },
  "groups": [

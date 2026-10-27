@@ -345,6 +345,7 @@ import _poolInnerChamberGuard from "../pool/inner-chamber-guard.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInstillInfection from "../pool/instill-infection.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
+import _poolIntoTheStory from "../pool/into-the-story.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
 import _poolIroncladSlayer from "../pool/ironclad-slayer.js";
@@ -1163,6 +1164,7 @@ const shard: CardShard = {
     _poolInspiredFire,
     _poolInstillInfection,
     _poolInterdisciplinaryMascot,
+    _poolIntoTheStory,
     _poolInundatedArchive,
     _poolInvasionOfXerex,
     _poolIroncladSlayer,

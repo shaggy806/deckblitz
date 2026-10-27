@@ -288,6 +288,7 @@ import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHonorableScout from "../pool/honorable-scout.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
 import _poolHorizonChimera from "../pool/horizon-chimera.js";
+import _poolHostageTaker from "../pool/hostage-taker.js";
 import _poolHowlOfTheHorde from "../pool/howl-of-the-horde.js";
 import _poolHuntTheWeak from "../pool/hunt-the-weak.js";
 import _poolHuntersAxe from "../pool/hunters-axe.js";
@@ -773,6 +774,7 @@ import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWispmare from "../pool/wispmare.js";
 import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
+import _poolWolfStrike from "../pool/wolf-strike.js";
 import _poolWoodwraithCorrupter from "../pool/woodwraith-corrupter.js";
 import _poolWorkshopElders from "../pool/workshop-elders.js";
 import _poolWorldQueller from "../pool/world-queller.js";
@@ -1087,6 +1089,7 @@ const shard: CardShard = {
     _poolHonorableScout,
     _poolHordelingOutburst,
     _poolHorizonChimera,
+    _poolHostageTaker,
     _poolHowlOfTheHorde,
     _poolHuntTheWeak,
     _poolHuntersAxe,
@@ -1572,6 +1575,7 @@ const shard: CardShard = {
     _poolWillOfTheAbzan,
     _poolWispmare,
     _poolWolfSkullShaman,
+    _poolWolfStrike,
     _poolWoodwraithCorrupter,
     _poolWorkshopElders,
     _poolWorldQueller,

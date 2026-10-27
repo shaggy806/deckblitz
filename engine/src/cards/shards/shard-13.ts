@@ -661,6 +661,7 @@ import _poolSwayOfIllusion from "../pool/sway-of-illusion.js";
 import _poolSwiftEnd from "../pool/swift-end.js";
 import _poolSwiftReconfiguration from "../pool/swift-reconfiguration.js";
 import _poolSwiftSpinner from "../pool/swift-spinner.js";
+import _poolSwordOfTheParuns from "../pool/sword-of-the-paruns.js";
 import _poolSylvanBrushstrider from "../pool/sylvan-brushstrider.js";
 import _poolSylvanRanger from "../pool/sylvan-ranger.js";
 import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolSwiftEnd,
     _poolSwiftReconfiguration,
     _poolSwiftSpinner,
+    _poolSwordOfTheParuns,
     _poolSylvanBrushstrider,
     _poolSylvanRanger,
     _poolSylvanReclamation,

@@ -808,6 +808,7 @@ import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
 import _poolVolatileRig from "../pool/volatile-rig.js";
+import _poolVolrathsDungeon from "../pool/volraths-dungeon.js";
 import _poolVowOfWildness from "../pool/vow-of-wildness.js";
 import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
@@ -1677,6 +1678,7 @@ const shard: CardShard = {
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
     _poolVolatileRig,
+    _poolVolrathsDungeon,
     _poolVowOfWildness,
     _poolVraskasConquistador,
     _poolWalkingAtlas,
