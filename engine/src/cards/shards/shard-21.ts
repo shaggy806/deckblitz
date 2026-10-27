@@ -573,6 +573,7 @@ import _poolSkybind from "../pool/skybind.js";
 import _poolSkyshroudVampire from "../pool/skyshroud-vampire.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
+import _poolSlitheryStalker from "../pool/slithery-stalker.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
 import _poolSmashToSmithereens from "../pool/smash-to-smithereens.js";
 import _poolSnappingSailback from "../pool/snapping-sailback.js";
@@ -604,6 +605,7 @@ import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
+import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
@@ -1332,6 +1334,7 @@ const shard: CardShard = {
     _poolSkyshroudVampire,
     _poolSlashingTiger,
     _poolSlinkingSerpent,
+    _poolSlitheryStalker,
     _poolSlumberingKeepguard,
     _poolSmashToSmithereens,
     _poolSnappingSailback,
@@ -1363,6 +1366,7 @@ const shard: CardShard = {
     _poolStormbind,
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
+    _poolStrengthOfLunacy,
     _poolStudentOfOjutai,
     _poolStumpStomp,
     _poolStymiedHopes,

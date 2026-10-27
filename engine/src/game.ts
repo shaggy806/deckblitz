@@ -3505,7 +3505,13 @@ export class Game {
             );
       // "Up to X target …" / "X target …" (Pest Infestation, Curse of the
       // Swine): the number of targets and X bound each other.
-      const payableX = xPlan?.maxX ?? sacrificeX;
+      // "Discard X cards" (Sickening Dreams): as many as the other cards in
+      // hand — the spell can't discard itself (rule 601.2h).
+      const discardX =
+        xPlan === null && sacrificeX === undefined && def.additionalCost?.discard === "x"
+          ? this.state.zones.perPlayer[player].hand.filter((id) => id !== card).length
+          : undefined;
+      const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       const xGroup =
         payableX !== undefined && targetCount === undefined && groupReadsX(specs)
           ? this.xGroupOffer(specs, options, payableX, xFloor)
@@ -3785,7 +3791,18 @@ export class Game {
                           }
                         : { maxX: sacrificeX },
                 }
-              : {}),
+              : discardX !== undefined
+                ? {
+                    xCost:
+                      xGroup !== null
+                        ? {
+                            maxX: Math.max(...xGroup.maxXByTargetCount),
+                            maxXByTargetCount: xGroup.maxXByTargetCount,
+                            minXByTargetCount: xGroup.minXByTargetCount,
+                          }
+                        : { maxX: discardX },
+                  }
+                : {}),
         ...(prototype === true && def.prototype !== null
           ? { prototype: true, prototypeCost: def.prototype.cost }
           : {}),
@@ -11254,7 +11271,7 @@ export class Game {
     if (
       offered?.byDiscarding === true &&
       this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length <
-        1 + (def.additionalCost?.discard ?? 0)
+        1 + (def.additionalCost?.discard === "x" ? Math.max(0, Math.floor(xValue)) : (def.additionalCost?.discard ?? 0))
     ) {
       return `${player} has no card to discard to cast ${def.name}`;
     }
@@ -11750,7 +11767,7 @@ export class Game {
         // The spell itself is still in hand while this is checked, and it
         // can't discard itself to pay its own cost (rule 601.2h).
         const others = this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId);
-        if (others.length < discard) {
+        if (others.length < (discard === "x" ? Math.max(0, Math.floor(xValue)) : discard)) {
           return `${player} has too few cards in hand to cast ${def.name}`;
         }
       }
@@ -12886,7 +12903,8 @@ export class Game {
     const hasX =
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
-      def.additionalCost?.sacrificeCount === "x";
+      def.additionalCost?.sacrificeCount === "x" ||
+      def.additionalCost?.discard === "x";
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
@@ -13382,8 +13400,9 @@ export class Game {
       });
       this.costDiscardPriorityTo(player);
     }
-    const costDiscard = def.additionalCost?.discard;
-    if (costDiscard !== undefined) {
+    // "Discard X cards": the X announced as it was cast.
+    const costDiscard = def.additionalCost?.discard === "x" ? chosenX : def.additionalCost?.discard;
+    if (costDiscard !== undefined && costDiscard > 0) {
       // Attributed to the spell being cast. A `discard` decision carries no
       // `source` of its own, so it reads `state.decisionSource` — which only
       // `withDecisionSource` sets, and only around a *resolution*. Without

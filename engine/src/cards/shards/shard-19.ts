@@ -93,6 +93,7 @@ import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
 import _poolBuoyancy from "../pool/buoyancy.js";
 import _poolBurningTreeShaman from "../pool/burning-tree-shaman.js";
 import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
+import _poolCabalSurgeon from "../pool/cabal-surgeon.js";
 import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
@@ -518,6 +519,7 @@ import _poolPackRat from "../pool/pack-rat.js";
 import _poolPactOfTheTitan from "../pool/pact-of-the-titan.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
 import _poolParagonOfNewDawns from "../pool/paragon-of-new-dawns.js";
+import _poolPardicArsonist from "../pool/pardic-arsonist.js";
 import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
 import _poolPeerReview from "../pool/peer-review.js";
 import _poolPendrellMists from "../pool/pendrell-mists.js";
@@ -913,6 +915,7 @@ const shard: CardShard = {
     _poolBuoyancy,
     _poolBurningTreeShaman,
     _poolButchDeloriaTunnelSnake,
+    _poolCabalSurgeon,
     _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
@@ -1338,6 +1341,7 @@ const shard: CardShard = {
     _poolPactOfTheTitan,
     _poolPaleRiderOfTrostad,
     _poolParagonOfNewDawns,
+    _poolPardicArsonist,
     _poolPatientRebuilding,
     _poolPeerReview,
     _poolPendrellMists,

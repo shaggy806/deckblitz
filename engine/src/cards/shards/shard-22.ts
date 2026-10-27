@@ -101,6 +101,7 @@ import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
+import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChillerpillar from "../pool/chillerpillar.js";
@@ -515,6 +516,7 @@ import _poolReleaseToMemory from "../pool/release-to-memory.js";
 import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResoundingScream from "../pool/resounding-scream.js";
+import _poolRestlessDreams from "../pool/restless-dreams.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolRetract from "../pool/retract.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
@@ -899,6 +901,7 @@ const shard: CardShard = {
     _poolCareeningMineCart,
     _poolCartographersHawk,
     _poolCatharticReunion,
+    _poolCentaurVeteran,
     _poolChameleonColossus,
     _poolChargingCinderhorn,
     _poolChillerpillar,
@@ -1313,6 +1316,7 @@ const shard: CardShard = {
     _poolReptilDinomorpher,
     _poolRepurposedEnforcer,
     _poolResoundingScream,
+    _poolRestlessDreams,
     _poolResurrection,
     _poolRetract,
     _poolReturnToAction,

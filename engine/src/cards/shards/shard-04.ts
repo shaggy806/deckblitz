@@ -366,6 +366,7 @@ import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
 import _poolLandCap from "../pool/land-cap.js";
 import _poolLandscaperColos from "../pool/landscaper-colos.js";
+import _poolLastLaugh from "../pool/last-laugh.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
@@ -468,6 +469,7 @@ import _poolPlanarGate from "../pool/planar-gate.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
+import _poolPossessedBarbarian from "../pool/possessed-barbarian.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPreeminentCaptain from "../pool/preeminent-captain.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
@@ -1141,6 +1143,7 @@ const shard: CardShard = {
     _poolLance,
     _poolLandCap,
     _poolLandscaperColos,
+    _poolLastLaugh,
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
     _poolLavaDart,
@@ -1243,6 +1246,7 @@ const shard: CardShard = {
     _poolPlatedGeopede,
     _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
+    _poolPossessedBarbarian,
     _poolPowerstoneEngineer,
     _poolPreeminentCaptain,
     _poolPrideGuardian,

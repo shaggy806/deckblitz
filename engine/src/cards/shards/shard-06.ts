@@ -141,6 +141,7 @@ import _poolCloakOfMists from "../pool/cloak-of-mists.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
+import _poolCompulsion from "../pool/compulsion.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
 import _poolConsider from "../pool/consider.js";
@@ -229,6 +230,7 @@ import _poolEvilReawakened from "../pool/evil-reawakened.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFacelessButcher from "../pool/faceless-butcher.js";
 import _poolFallenIdeal from "../pool/fallen-ideal.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
@@ -397,6 +399,7 @@ import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLunarchInquisitors from "../pool/lunarch-inquisitors.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolMageRingResponder from "../pool/mage-ring-responder.js";
+import _poolMajorTeroh from "../pool/major-teroh.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManifoldMouse from "../pool/manifold-mouse.js";
@@ -424,6 +427,7 @@ import _poolMoggSentry from "../pool/mogg-sentry.js";
 import _poolMoldDemon from "../pool/mold-demon.js";
 import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
 import _poolMoonbladeShinobi from "../pool/moonblade-shinobi.js";
+import _poolMortalCombat from "../pool/mortal-combat.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMurderousCompulsion from "../pool/murderous-compulsion.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
@@ -917,6 +921,7 @@ const shard: CardShard = {
     _poolCloudchaserEagle,
     _poolClutchOfUndeath,
     _poolComfortingCounsel,
+    _poolCompulsion,
     _poolConductElectricity,
     _poolConsecrateConsume,
     _poolConsider,
@@ -1005,6 +1010,7 @@ const shard: CardShard = {
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFacelessButcher,
     _poolFallenIdeal,
     _poolFatedIntervention,
     _poolFateshaperAspirant,
@@ -1173,6 +1179,7 @@ const shard: CardShard = {
     _poolLunarchInquisitors,
     _poolLydiaFrye,
     _poolMageRingResponder,
+    _poolMajorTeroh,
     _poolMammothHarness,
     _poolManaCrypt,
     _poolManifoldMouse,
@@ -1200,6 +1207,7 @@ const shard: CardShard = {
     _poolMoldDemon,
     _poolMoltenLavamancer,
     _poolMoonbladeShinobi,
+    _poolMortalCombat,
     _poolMrFoxglove,
     _poolMurderousCompulsion,
     _poolMuxusGoblinGrandee,

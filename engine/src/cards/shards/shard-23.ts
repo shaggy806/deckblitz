@@ -127,6 +127,7 @@ import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
 import _poolChoke from "../pool/choke.js";
 import _poolChopDown from "../pool/chop-down.js";
+import _poolChurningEddy from "../pool/churning-eddy.js";
 import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
@@ -240,6 +241,7 @@ import _poolForgebornOreads from "../pool/forgeborn-oreads.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
+import _poolFranticPurification from "../pool/frantic-purification.js";
 import _poolFreewindEquenaut from "../pool/freewind-equenaut.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
@@ -433,6 +435,7 @@ import _poolMouthOfTheStorm from "../pool/mouth-of-the-storm.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
 import _poolMudbuttonClanger from "../pool/mudbutton-clanger.js";
 import _poolMurmuringVolume from "../pool/murmuring-volume.js";
+import _poolMysticFamiliar from "../pool/mystic-familiar.js";
 import _poolMysticMight from "../pool/mystic-might.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolMysticSkyfish from "../pool/mystic-skyfish.js";
@@ -445,6 +448,7 @@ import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
+import _poolNostalgicDreams from "../pool/nostalgic-dreams.js";
 import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
@@ -905,6 +909,7 @@ const shard: CardShard = {
     _poolChildOfTheVolcano,
     _poolChoke,
     _poolChopDown,
+    _poolChurningEddy,
     _poolCliffrunnerBehemoth,
     _poolClipWings,
     _poolCloudboundMoogle,
@@ -1018,6 +1023,7 @@ const shard: CardShard = {
     _poolForsakenThresher,
     _poolFortifyingDraught,
     _poolFoulPlay,
+    _poolFranticPurification,
     _poolFreewindEquenaut,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
@@ -1211,6 +1217,7 @@ const shard: CardShard = {
     _poolMoxOpal,
     _poolMudbuttonClanger,
     _poolMurmuringVolume,
+    _poolMysticFamiliar,
     _poolMysticMight,
     _poolMysticPeak,
     _poolMysticSkyfish,
@@ -1223,6 +1230,7 @@ const shard: CardShard = {
     _poolNezumiLinkbreaker,
     _poolNightMarket,
     _poolNighthowlPursuer,
+    _poolNostalgicDreams,
     _poolNyleasDisciple,
     _poolNyxLotus,
     _poolOakheartDryads,

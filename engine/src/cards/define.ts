@@ -2415,6 +2415,11 @@ export interface CardDefinition {
    * even if the spell is countered, and a hand too small to pay makes the
    * spell uncastable. Which cards go is the caster's choice, raised as the
    * ordinary `discard` decision once the spell is on the stack.
+   * `"x"` is "discard **X** cards" (Sickening Dreams, Firestorm): it makes the
+   * spell an `{X}` spell the way `payLifeX` does, X announced as it's cast
+   * (rule 601.2b) and capped by the other cards in hand, then that many
+   * discarded as the cost is paid (601.2h) — at random with `discardAtRandom`
+   * (Devastating Dreams). An "X target …" group binds to it as to a mana X.
    *
    * `payLife`: "…, pay 3 life" (Bitter Triumph's second half). A player may
    * always pay life they have, down to 0 — paying below it is what's illegal
@@ -2450,7 +2455,7 @@ export interface CardDefinition {
     readonly sacrifice?: CardFilter;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
-    readonly discard?: number;
+    readonly discard?: number | "x";
     /** `discard`'s cards are discarded at random rather than chosen (Sonic
      * Burst: "As an additional cost to cast this spell, discard a card at
      * random") — nothing to ask, so it happens as the cost is paid. */
@@ -3605,7 +3610,7 @@ interface CardDraft {
     readonly sacrifice?: CardFilter;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
-    readonly discard?: number;
+    readonly discard?: number | "x";
     readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;

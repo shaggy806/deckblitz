@@ -412,6 +412,7 @@ import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
 import _poolLocthwainPaladin from "../pool/locthwain-paladin.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
 import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
+import _poolLonghornFirebeast from "../pool/longhorn-firebeast.js";
 import _poolLordMagnus from "../pool/lord-magnus.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
@@ -451,6 +452,7 @@ import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
+import _poolMortiphobia from "../pool/mortiphobia.js";
 import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMudbrawlerCohort from "../pool/mudbrawler-cohort.js";
@@ -1180,6 +1182,7 @@ const shard: CardShard = {
     _poolLocthwainPaladin,
     _poolLocthwainScorn,
     _poolLokiLordOfMisrule,
+    _poolLonghornFirebeast,
     _poolLordMagnus,
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
@@ -1219,6 +1222,7 @@ const shard: CardShard = {
     _poolMoltenPrimordial,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
+    _poolMortiphobia,
     _poolMossMonster,
     _poolMostWanted,
     _poolMudbrawlerCohort,

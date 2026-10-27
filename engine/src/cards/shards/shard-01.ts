@@ -71,6 +71,7 @@ import _poolBoundInSilence from "../pool/bound-in-silence.js";
 import _poolBrainbite from "../pool/brainbite.js";
 import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
 import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
+import _poolBreakthrough from "../pool/breakthrough.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
 import _poolBringerOfTheBlackDawn from "../pool/bringer-of-the-black-dawn.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
@@ -397,6 +398,7 @@ import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindKnives from "../pool/mind-knives.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
+import _poolMindSludge from "../pool/mind-sludge.js";
 import _poolMindlessNull from "../pool/mindless-null.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
@@ -413,6 +415,7 @@ import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolMysticalTeachings from "../pool/mystical-teachings.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
+import _poolNantukoCalmer from "../pool/nantuko-calmer.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNarrowEscape from "../pool/narrow-escape.js";
 import _poolNathsBuffoon from "../pool/naths-buffoon.js";
@@ -485,6 +488,7 @@ import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolRealmCloakedGiant from "../pool/realm-cloaked-giant.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolReaperOfSheoldred from "../pool/reaper-of-sheoldred.js";
+import _poolRebornHero from "../pool/reborn-hero.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
 import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
@@ -623,6 +627,7 @@ import _poolTeleportationCircle from "../pool/teleportation-circle.js";
 import _poolTelethopter from "../pool/telethopter.js";
 import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
 import _poolTemporalMachinations from "../pool/temporal-machinations.js";
+import _poolTemporaryInsanity from "../pool/temporary-insanity.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
 import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
@@ -830,6 +835,7 @@ const shard: CardShard = {
     _poolBrainbite,
     _poolBrallinSkysharkRider,
     _poolBreakDownTheDoor,
+    _poolBreakthrough,
     _poolBreathWeapon,
     _poolBringerOfTheBlackDawn,
     _poolBrokenBond,
@@ -1156,6 +1162,7 @@ const shard: CardShard = {
     _poolMightformHarmonizer,
     _poolMindKnives,
     _poolMindRavel,
+    _poolMindSludge,
     _poolMindlessNull,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
@@ -1172,6 +1179,7 @@ const shard: CardShard = {
     _poolMysticOfTheHiddenWay,
     _poolMysticalTeachings,
     _poolNamazuTrader,
+    _poolNantukoCalmer,
     _poolNarnamRenegade,
     _poolNarrowEscape,
     _poolNathsBuffoon,
@@ -1244,6 +1252,7 @@ const shard: CardShard = {
     _poolRealmCloakedGiant,
     _poolReaperKing,
     _poolReaperOfSheoldred,
+    _poolRebornHero,
     _poolRecklessStormseeker,
     _poolReconstructHistory,
     _poolRecruitmentDrive,
@@ -1382,6 +1391,7 @@ const shard: CardShard = {
     _poolTelethopter,
     _poolTempleOfEpiphany,
     _poolTemporalMachinations,
+    _poolTemporaryInsanity,
     _poolTemptWithVengeance,
     _poolTetheredSkirge,
     _poolTeyoLightshieldExpert,

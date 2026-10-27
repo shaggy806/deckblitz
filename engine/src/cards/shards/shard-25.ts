@@ -114,6 +114,7 @@ import _poolCastle from "../pool/castle.js";
 import _poolCaterwaulingBoggart from "../pool/caterwauling-boggart.js";
 import _poolCavalryPegasus from "../pool/cavalry-pegasus.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
+import _poolCephalidAristocrat from "../pool/cephalid-aristocrat.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
@@ -136,6 +137,7 @@ import _poolConsumingBonfire from "../pool/consuming-bonfire.js";
 import _poolConsumingVapors from "../pool/consuming-vapors.js";
 import _poolContagion from "../pool/contagion.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
+import _poolCoralNet from "../pool/coral-net.js";
 import _poolCorpsehatch from "../pool/corpsehatch.js";
 import _poolCovetedPeacock from "../pool/coveted-peacock.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
@@ -265,6 +267,7 @@ import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
 import _poolGlisteningDeluge from "../pool/glistening-deluge.js";
+import _poolGloomdrifter from "../pool/gloomdrifter.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
 import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
 import _poolGloryscaleViashino from "../pool/gloryscale-viashino.js";
@@ -472,6 +475,7 @@ import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
+import _poolPossessedNomad from "../pool/possessed-nomad.js";
 import _poolPouncingWurm from "../pool/pouncing-wurm.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrideSovereign from "../pool/pride-sovereign.js";
@@ -623,6 +627,7 @@ import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
+import _poolStrengthOfIsolation from "../pool/strength-of-isolation.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
@@ -870,6 +875,7 @@ const shard: CardShard = {
     _poolCaterwaulingBoggart,
     _poolCavalryPegasus,
     _poolCeaselessConflict,
+    _poolCephalidAristocrat,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
     _poolChaoticGoo,
@@ -892,6 +898,7 @@ const shard: CardShard = {
     _poolConsumingVapors,
     _poolContagion,
     _poolContaminatedLandscape,
+    _poolCoralNet,
     _poolCorpsehatch,
     _poolCovetedPeacock,
     _poolCrackInTime,
@@ -1021,6 +1028,7 @@ const shard: CardShard = {
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
     _poolGlisteningDeluge,
+    _poolGloomdrifter,
     _poolGloriousDecay,
     _poolGloryheathLynx,
     _poolGloryscaleViashino,
@@ -1228,6 +1236,7 @@ const shard: CardShard = {
     _poolPointTheWay,
     _poolPolJamaarIllusionist,
     _poolPorcelainLegionnaire,
+    _poolPossessedNomad,
     _poolPouncingWurm,
     _poolPriceOfLoyalty,
     _poolPrideSovereign,
@@ -1379,6 +1388,7 @@ const shard: CardShard = {
     _poolStormCrow,
     _poolStormTheCitadel,
     _poolStorySeeker,
+    _poolStrengthOfIsolation,
     _poolStrionicResonator,
     _poolStunningShot,
     _poolSultaiDevotee,

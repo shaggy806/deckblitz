@@ -1,0 +1,832 @@
+{
+ "batch": "B220",
+ "status": "complete",
+ "ranks": "Torment (TOR, 2002-02-04): whole set, 115 (the fifth middle walk's range, round eighteen); built \"discard X cards\" as a spell's additional cost (cost:discard-x-cost — additionalCost.discard: \"x\", rule 601.2b/601.2h, with a sacrifice effect's count and a search's min as amounts), read by the scaffolder, and authored Firestorm (B175) and Channeled Force (B117), which it unblocked",
+ "authored": [
+  {
+   "name": "Breakthrough",
+   "files": [
+    "engine/src/cards/pool/breakthrough.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krosan Restorer",
+   "files": [
+    "engine/src/cards/pool/krosan-restorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insidious Dreams",
+   "files": [
+    "engine/src/cards/pool/insidious-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parallel Evolution",
+   "files": [
+    "engine/src/cards/pool/parallel-evolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acorn Harvest",
+   "files": [
+    "engine/src/cards/pool/acorn-harvest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mortal Combat",
+   "files": [
+    "engine/src/cards/pool/mortal-combat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compulsion",
+   "files": [
+    "engine/src/cards/pool/compulsion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleansing Meditation",
+   "files": [
+    "engine/src/cards/pool/cleansing-meditation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Last Laugh",
+   "files": [
+    "engine/src/cards/pool/last-laugh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sickening Dreams",
+   "files": [
+    "engine/src/cards/pool/sickening-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Violent Eruption",
+   "files": [
+    "engine/src/cards/pool/violent-eruption.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Turbulent Dreams",
+   "files": [
+    "engine/src/cards/pool/turbulent-dreams.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Llawan, Cephalid Empress",
+   "files": [
+    "engine/src/cards/pool/llawan-cephalid-empress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Lavamancer",
+   "files": [
+    "engine/src/cards/pool/grim-lavamancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shade's Form",
+   "files": [
+    "engine/src/cards/pool/shades-form.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nostalgic Dreams",
+   "files": [
+    "engine/src/cards/pool/nostalgic-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawn of the Dead",
+   "files": [
+    "engine/src/cards/pool/dawn-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength of Lunacy",
+   "files": [
+    "engine/src/cards/pool/strength-of-lunacy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Faceless Butcher",
+   "files": [
+    "engine/src/cards/pool/faceless-butcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basking Rootwalla",
+   "files": [
+    "engine/src/cards/pool/basking-rootwalla.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psychotic Haze",
+   "files": [
+    "engine/src/cards/pool/psychotic-haze.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Restless Dreams",
+   "files": [
+    "engine/src/cards/pool/restless-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Sludge",
+   "files": [
+    "engine/src/cards/pool/mind-sludge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghostly Wings",
+   "files": [
+    "engine/src/cards/pool/ghostly-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Vandal",
+   "files": [
+    "engine/src/cards/pool/cephalid-vandal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frantic Purification",
+   "files": [
+    "engine/src/cards/pool/frantic-purification.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Carrion Rats",
+   "files": [
+    "engine/src/cards/pool/carrion-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devastating Dreams",
+   "files": [
+    "engine/src/cards/pool/devastating-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anurid Scavenger",
+   "files": [
+    "engine/src/cards/pool/anurid-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Dreams",
+   "files": [
+    "engine/src/cards/pool/vengeful-dreams.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rancid Earth",
+   "files": [
+    "engine/src/cards/pool/rancid-earth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Major Teroh",
+   "files": [
+    "engine/src/cards/pool/major-teroh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balthor the Stout",
+   "files": [
+    "engine/src/cards/pool/balthor-the-stout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invigorating Falls",
+   "files": [
+    "engine/src/cards/pool/invigorating-falls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arrogant Wurm",
+   "files": [
+    "engine/src/cards/pool/arrogant-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nantuko Blightcutter",
+   "files": [
+    "engine/src/cards/pool/nantuko-blightcutter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Sage",
+   "files": [
+    "engine/src/cards/pool/cephalid-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crackling Club",
+   "files": [
+    "engine/src/cards/pool/crackling-club.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hydromorph Guardian",
+   "files": [
+    "engine/src/cards/pool/hydromorph-guardian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Strength of Isolation",
+   "files": [
+    "engine/src/cards/pool/strength-of-isolation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "False Memories",
+   "files": [
+    "engine/src/cards/pool/false-memories.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pitchstone Wall",
+   "files": [
+    "engine/src/cards/pool/pitchstone-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporary Insanity",
+   "files": [
+    "engine/src/cards/pool/temporary-insanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Longhorn Firebeast",
+   "files": [
+    "engine/src/cards/pool/longhorn-firebeast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gloomdrifter",
+   "files": [
+    "engine/src/cards/pool/gloomdrifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Aristocrat",
+   "files": [
+    "engine/src/cards/pool/cephalid-aristocrat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Torturer",
+   "files": [
+    "engine/src/cards/pool/cabal-torturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slithery Stalker",
+   "files": [
+    "engine/src/cards/pool/slithery-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Familiar",
+   "files": [
+    "engine/src/cards/pool/mystic-familiar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Petravark",
+   "files": [
+    "engine/src/cards/pool/petravark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Centaur Chieftain",
+   "files": [
+    "engine/src/cards/pool/centaur-chieftain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nantuko Calmer",
+   "files": [
+    "engine/src/cards/pool/nantuko-calmer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Churning Eddy",
+   "files": [
+    "engine/src/cards/pool/churning-eddy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morningtide",
+   "files": [
+    "engine/src/cards/pool/morningtide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hydromorph Gull",
+   "files": [
+    "engine/src/cards/pool/hydromorph-gull.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boneshard Slasher",
+   "files": [
+    "engine/src/cards/pool/boneshard-slasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crippling Fatigue",
+   "files": [
+    "engine/src/cards/pool/crippling-fatigue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skullscorch",
+   "files": [
+    "engine/src/cards/pool/skullscorch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skywing Aven",
+   "files": [
+    "engine/src/cards/pool/skywing-aven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Liquify",
+   "files": [
+    "engine/src/cards/pool/liquify.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sonic Seizure",
+   "files": [
+    "engine/src/cards/pool/sonic-seizure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Coral Net",
+   "files": [
+    "engine/src/cards/pool/coral-net.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flash of Defiance",
+   "files": [
+    "engine/src/cards/pool/flash-of-defiance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seton's Scout",
+   "files": [
+    "engine/src/cards/pool/setons-scout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hypochondria",
+   "files": [
+    "engine/src/cards/pool/hypochondria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Surgeon",
+   "files": [
+    "engine/src/cards/pool/cabal-surgeon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mortiphobia",
+   "files": [
+    "engine/src/cards/pool/mortiphobia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pardic Arsonist",
+   "files": [
+    "engine/src/cards/pool/pardic-arsonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Narcissism",
+   "files": [
+    "engine/src/cards/pool/narcissism.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Petradon",
+   "files": [
+    "engine/src/cards/pool/petradon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Organ Grinder",
+   "files": [
+    "engine/src/cards/pool/organ-grinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit Flare",
+   "files": [
+    "engine/src/cards/pool/spirit-flare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carrion Wurm",
+   "files": [
+    "engine/src/cards/pool/carrion-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyromania",
+   "files": [
+    "engine/src/cards/pool/pyromania.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possessed Aven",
+   "files": [
+    "engine/src/cards/pool/possessed-aven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Trooper",
+   "files": [
+    "engine/src/cards/pool/aven-trooper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pardic Lancer",
+   "files": [
+    "engine/src/cards/pool/pardic-lancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reborn Hero",
+   "files": [
+    "engine/src/cards/pool/reborn-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbarian Outcast",
+   "files": [
+    "engine/src/cards/pool/barbarian-outcast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waste Away",
+   "files": [
+    "engine/src/cards/pool/waste-away.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Possessed Barbarian",
+   "files": [
+    "engine/src/cards/pool/possessed-barbarian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kamahl's Sledge",
+   "files": [
+    "engine/src/cards/pool/kamahls-sledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possessed Centaur",
+   "files": [
+    "engine/src/cards/pool/possessed-centaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Centaur Veteran",
+   "files": [
+    "engine/src/cards/pool/centaur-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possessed Nomad",
+   "files": [
+    "engine/src/cards/pool/possessed-nomad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firestorm",
+   "files": [
+    "engine/src/cards/pool/firestorm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Channeled Force",
+   "files": [
+    "engine/src/cards/pool/channeled-force.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Radiate",
+   "needs": [
+    "effect:copy-spell-for-each-permanent-or-player-it-could-target"
+   ],
+   "why": "copy-spell's forEachItCouldTarget works only on a trigger's spell, takes a permanent filter and covers no players."
+  },
+  {
+   "name": "Nantuko Cultivator",
+   "needs": [
+    "effect:discard-any-number-filtered"
+   ],
+   "why": "Discard any number of land cards: discard's anyNumber takes no card filter."
+  },
+  {
+   "name": "Cephalid Illusionist",
+   "needs": [
+    "effect:prevent-combat-damage-to-and-by-target"
+   ],
+   "why": "Nothing prevents all combat damage dealt to and by a targeted creature this turn."
+  },
+  {
+   "name": "Stupefying Touch",
+   "needs": [
+    "static:enchanted-abilities-cant-be-activated"
+   ],
+   "why": "prohibits.abilitiesOf can't name the enchanted creature."
+  },
+  {
+   "name": "Hell-Bent Raider",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "No effect grants protection from white until end of turn."
+  },
+  {
+   "name": "Flaming Gambit",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "The damaged player's choice to have the damage dealt to a creature they control instead can't be said."
+  },
+  {
+   "name": "Cephalid Snitch",
+   "needs": [
+    "effect:lose-protection-and-ward"
+   ],
+   "why": "lose-keywords can't take protection away."
+  },
+  {
+   "name": "Teroh's Vanguard",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "Its threshold enters trigger gives your creatures protection from black until end of turn; no such effect."
+  },
+  {
+   "name": "Aquamoeba",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "Nothing switches a creature's power and toughness."
+  },
+  {
+   "name": "Pay No Heed",
+   "needs": [
+    "effect:prevent-all-damage-from-chosen-source"
+   ],
+   "why": "prevent-damage-from-chosen-source covers only damage to you or a target, not all the source's damage this turn."
+  },
+  {
+   "name": "Hypnox",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves"
+   ],
+   "why": "Nothing exiles a whole hand linked to the source, to return when it leaves."
+  },
+  {
+   "name": "Floating Shield",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "No one-shot protection from the chosen colour until end of turn (and the chosen colour isn't readable once the Aura is sacrificed)."
+  },
+  {
+   "name": "Retraced Image",
+   "needs": [
+    "filter:same-name-as-a-permanent"
+   ],
+   "why": "Reveal a card with the same name as a permanent, then put it onto the battlefield: no such filter."
+  },
+  {
+   "name": "Mesmeric Fiend",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves"
+   ],
+   "why": "Nothing exiles a chosen card from an opponent's hand linked to the source."
+  },
+  {
+   "name": "Stern Judge",
+   "needs": [
+    "amount:count-that-player-controls"
+   ],
+   "why": "countOf has no per-player form inside for-each-player."
+  },
+  {
+   "name": "Laquatus's Champion",
+   "needs": [
+    "effect:leaves-trigger-reads-enter-target"
+   ],
+   "why": "The leaves trigger must give life to the player its enters trigger targeted; nothing links the two."
+  },
+  {
+   "name": "Soul Scourge",
+   "needs": [
+    "effect:leaves-trigger-reads-enter-target"
+   ],
+   "why": "As Laquatus's Champion: the leaves trigger reads the enters trigger's target."
+  },
+  {
+   "name": "Gurzigost",
+   "needs": [
+    "cost:put-graveyard-cards-on-library-bottom",
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "An upkeep unless-cost of putting two graveyard cards on the bottom of your library, and assigning combat damage as though unblocked."
+  },
+  {
+   "name": "Zombie Trailblazer",
+   "needs": [
+    "effect:set-land-type"
+   ],
+   "why": "Nothing makes a land become a Swamp until end of turn (rule 305.7)."
+  },
+  {
+   "name": "Insist",
+   "needs": [
+    "static:next-spell-uncounterable"
+   ],
+   "why": "Nothing makes the next creature spell you cast this turn uncounterable."
+  },
+  {
+   "name": "Plagiarize",
+   "needs": [
+    "effect:temporary-player-effect",
+    "replacement:temporary-draw-replacement-target-player"
+   ],
+   "why": "The 'you draw instead' replacement exists only as a static; no effect sets it up on a target player until end of turn."
+  },
+  {
+   "name": "Ichorid",
+   "needs": [
+    "filter:graveyard-choice-other-than-source"
+   ],
+   "why": "A graveyard choice can't leave out the card itself; another Ichorid may be chosen (the ruling)."
+  },
+  {
+   "name": "Transcendence",
+   "needs": [
+    "static:dont-lose-for-zero-life",
+    "trigger:state-trigger"
+   ],
+   "why": "No 'don't lose for 0 life' static (only cantLoseGame), and no state trigger for 'when you have 20 or more life'."
+  },
+  {
+   "name": "Alter Reality",
+   "needs": [
+    "effect:text-change-color-or-land-words"
+   ],
+   "why": "No text-changing effect."
+  },
+  {
+   "name": "Crazed Firecat",
+   "needs": [
+    "amount:coin-flips-won-this-way"
+   ],
+   "why": "Flip until you lose, then one placement of a counter per flip won; flip-coin's untilLose applies its won effect once per win."
+  },
+  {
+   "name": "Dwell on the Past",
+   "needs": [
+    "effect:targets-from-target-players-graveyard"
+   ],
+   "why": "card-in-graveyard.whose can't refer to the player chosen in another target slot."
+  },
+  {
+   "name": "Equal Treatment",
+   "needs": [
+    "replacement:damage-becomes-fixed-amount-this-turn"
+   ],
+   "why": "would-deal-damage can't set damage to 2, and no spell creates one for the turn."
+  },
+  {
+   "name": "Shambling Swarm",
+   "needs": [
+    "effect:delayed-remove-counters-placed-this-way"
+   ],
+   "why": "Nothing removes the -1/-1 counters placed this way at the next end step."
+  },
+  {
+   "name": "Grotesque Hybrid",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "No effect grants protection from green and from white until end of turn."
+  },
+  {
+   "name": "Gravegouger",
+   "needs": [
+    "effect:targets-from-single-graveyard",
+    "effect:exiled-with-source-to-graveyard"
+   ],
+   "why": "Targets can't be limited to one graveyard, and return-exiled-by-source can't return to the graveyard."
+  }
+ ]
+}
