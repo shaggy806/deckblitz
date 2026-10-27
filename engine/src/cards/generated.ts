@@ -24957,6 +24957,7 @@ import _tokensHomunculusToken22 from "./tokens/homunculus-token-2-2.js";
 import _tokensHomunculusToken from "./tokens/homunculus-token.js";
 import _tokensHornetArtifactToken from "./tokens/hornet-artifact-token.js";
 import _tokensHornetToken from "./tokens/hornet-token.js";
+import _tokensHorrorToken44 from "./tokens/horror-token-4-4.js";
 import _tokensHorrorTokenBlack00 from "./tokens/horror-token-black-0-0.js";
 import _tokensHorrorTokenBlueBlackFlying from "./tokens/horror-token-blue-black-flying.js";
 import _tokensHorrorTokenTheFinalDays from "./tokens/horror-token-the-final-days.js";
@@ -25015,6 +25016,7 @@ import _tokensKithkinToken from "./tokens/kithkin-token.js";
 import _tokensKnightAllyToken from "./tokens/knight-ally-token.js";
 import _tokensKnightToken22BlackFlanking from "./tokens/knight-token-2-2-black-flanking.js";
 import _tokensKnightTokenChivalricAlliance from "./tokens/knight-token-chivalric-alliance.js";
+import _tokensKnightTokenFirstStrike from "./tokens/knight-token-first-strike.js";
 import _tokensKnightTokenGuardedHeir from "./tokens/knight-token-guarded-heir.js";
 import _tokensKnightTokenRasputinTheOneiromancer from "./tokens/knight-token-rasputin-the-oneiromancer.js";
 import _tokensKnightToken from "./tokens/knight-token.js";
@@ -25269,6 +25271,7 @@ import _tokensVibraniumToken from "./tokens/vibranium-token.js";
 import _tokensVillainToken from "./tokens/villain-token.js";
 import _tokensVirtuousRoleToken from "./tokens/virtuous-role-token.js";
 import _tokensVojaFriendToElves from "./tokens/voja-friend-to-elves.js";
+import _tokensVoja from "./tokens/voja.js";
 import _tokensWallToken13 from "./tokens/wall-token-1-3.js";
 import _tokensWallToken55BlueDefender from "./tokens/wall-token-5-5-blue-defender.js";
 import _tokensWallTokenArtifactDefender from "./tokens/wall-token-artifact-defender.js";
@@ -50300,6 +50303,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensHomunculusToken,
   _tokensHornetArtifactToken,
   _tokensHornetToken,
+  _tokensHorrorToken44,
   _tokensHorrorTokenBlack00,
   _tokensHorrorTokenBlueBlackFlying,
   _tokensHorrorTokenTheFinalDays,
@@ -50358,6 +50362,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensKnightAllyToken,
   _tokensKnightToken22BlackFlanking,
   _tokensKnightTokenChivalricAlliance,
+  _tokensKnightTokenFirstStrike,
   _tokensKnightTokenGuardedHeir,
   _tokensKnightTokenRasputinTheOneiromancer,
   _tokensKnightToken,
@@ -50612,6 +50617,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensVillainToken,
   _tokensVirtuousRoleToken,
   _tokensVojaFriendToElves,
+  _tokensVoja,
   _tokensWallToken13,
   _tokensWallToken55BlueDefender,
   _tokensWallTokenArtifactDefender,
@@ -75644,6 +75650,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/homunculus-token": _tokensHomunculusToken,
   "tokens/hornet-artifact-token": _tokensHornetArtifactToken,
   "tokens/hornet-token": _tokensHornetToken,
+  "tokens/horror-token-4-4": _tokensHorrorToken44,
   "tokens/horror-token-black-0-0": _tokensHorrorTokenBlack00,
   "tokens/horror-token-blue-black-flying": _tokensHorrorTokenBlueBlackFlying,
   "tokens/horror-token-the-final-days": _tokensHorrorTokenTheFinalDays,
@@ -75702,6 +75709,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/knight-ally-token": _tokensKnightAllyToken,
   "tokens/knight-token-2-2-black-flanking": _tokensKnightToken22BlackFlanking,
   "tokens/knight-token-chivalric-alliance": _tokensKnightTokenChivalricAlliance,
+  "tokens/knight-token-first-strike": _tokensKnightTokenFirstStrike,
   "tokens/knight-token-guarded-heir": _tokensKnightTokenGuardedHeir,
   "tokens/knight-token-rasputin-the-oneiromancer": _tokensKnightTokenRasputinTheOneiromancer,
   "tokens/knight-token": _tokensKnightToken,
@@ -75956,6 +75964,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/villain-token": _tokensVillainToken,
   "tokens/virtuous-role-token": _tokensVirtuousRoleToken,
   "tokens/voja-friend-to-elves": _tokensVojaFriendToElves,
+  "tokens/voja": _tokensVoja,
   "tokens/wall-token-1-3": _tokensWallToken13,
   "tokens/wall-token-5-5-blue-defender": _tokensWallToken55BlueDefender,
   "tokens/wall-token-artifact-defender": _tokensWallTokenArtifactDefender,

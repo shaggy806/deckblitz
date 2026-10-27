@@ -774,6 +774,7 @@ import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dra
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensFesteringGoblinToken from "../tokens/festering-goblin-token.js";
 import _tokensHippoToken from "../tokens/hippo-token.js";
+import _tokensHorrorToken44 from "../tokens/horror-token-4-4.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensOozeToken33 from "../tokens/ooze-token-3-3.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
@@ -1561,6 +1562,7 @@ const shard: CardShard = {
     _tokensElementalTokenVernalSovereign,
     _tokensFesteringGoblinToken,
     _tokensHippoToken,
+    _tokensHorrorToken44,
     _tokensNymphToken,
     _tokensOozeToken33,
     _tokensPegasusToken,
