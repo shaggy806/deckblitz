@@ -108,6 +108,7 @@ import _poolAcademyWall from "./pool/academy-wall.js";
 import _poolAccelerate from "./pool/accelerate.js";
 import _poolAcceleratedEvolution from "./pool/accelerated-evolution.js";
 import _poolAcceleratedMutation from "./pool/accelerated-mutation.js";
+import _poolAcceptableLosses from "./pool/acceptable-losses.js";
 import _poolAccessDenied from "./pool/access-denied.js";
 import _poolAccessTunnel from "./pool/access-tunnel.js";
 import _poolAcclaimedContender from "./pool/acclaimed-contender.js";
@@ -6095,6 +6096,7 @@ import _poolDwarvenRuins from "./pool/dwarven-ruins.js";
 import _poolDwarvenScorcher from "./pool/dwarven-scorcher.js";
 import _poolDwarvenShortsword from "./pool/dwarven-shortsword.js";
 import _poolDwarvenSong from "./pool/dwarven-song.js";
+import _poolDwarvenStrikeForce from "./pool/dwarven-strike-force.js";
 import _poolDwarvenTrader from "./pool/dwarven-trader.js";
 import _poolDwarvenVigilantes from "./pool/dwarven-vigilantes.js";
 import _poolDwarvenWarriors from "./pool/dwarven-warriors.js";
@@ -7955,6 +7957,7 @@ import _poolFreewindEquenaut from "./pool/freewind-equenaut.js";
 import _poolFreewindFalcon from "./pool/freewind-falcon.js";
 import _poolFreezeInPlace from "./pool/freeze-in-place.js";
 import _poolFreneticEfreet from "./pool/frenetic-efreet.js";
+import _poolFreneticOgre from "./pool/frenetic-ogre.js";
 import _poolFreneticRaptor from "./pool/frenetic-raptor.js";
 import _poolFreneticSliver from "./pool/frenetic-sliver.js";
 import _poolFrenziedArynx from "./pool/frenzied-arynx.js";
@@ -15338,6 +15341,7 @@ import _poolParch from "./pool/parch.js";
 import _poolPardicArsonist from "./pool/pardic-arsonist.js";
 import _poolPardicCollaborator from "./pool/pardic-collaborator.js";
 import _poolPardicLancer from "./pool/pardic-lancer.js";
+import _poolPardicSwordsmith from "./pool/pardic-swordsmith.js";
 import _poolPardicWanderer from "./pool/pardic-wanderer.js";
 import _poolParhelionIi from "./pool/parhelion-ii.js";
 import _poolParhelionPatrol from "./pool/parhelion-patrol.js";
@@ -25873,6 +25877,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAccelerate,
   _poolAcceleratedEvolution,
   _poolAcceleratedMutation,
+  _poolAcceptableLosses,
   _poolAccessDenied,
   _poolAccessTunnel,
   _poolAcclaimedContender,
@@ -31860,6 +31865,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDwarvenScorcher,
   _poolDwarvenShortsword,
   _poolDwarvenSong,
+  _poolDwarvenStrikeForce,
   _poolDwarvenTrader,
   _poolDwarvenVigilantes,
   _poolDwarvenWarriors,
@@ -33720,6 +33726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFreewindFalcon,
   _poolFreezeInPlace,
   _poolFreneticEfreet,
+  _poolFreneticOgre,
   _poolFreneticRaptor,
   _poolFreneticSliver,
   _poolFrenziedArynx,
@@ -41103,6 +41110,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPardicArsonist,
   _poolPardicCollaborator,
   _poolPardicLancer,
+  _poolPardicSwordsmith,
   _poolPardicWanderer,
   _poolParhelionIi,
   _poolParhelionPatrol,
@@ -51651,6 +51659,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/accelerate": _poolAccelerate,
   "pool/accelerated-evolution": _poolAcceleratedEvolution,
   "pool/accelerated-mutation": _poolAcceleratedMutation,
+  "pool/acceptable-losses": _poolAcceptableLosses,
   "pool/access-denied": _poolAccessDenied,
   "pool/access-tunnel": _poolAccessTunnel,
   "pool/acclaimed-contender": _poolAcclaimedContender,
@@ -57638,6 +57647,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dwarven-scorcher": _poolDwarvenScorcher,
   "pool/dwarven-shortsword": _poolDwarvenShortsword,
   "pool/dwarven-song": _poolDwarvenSong,
+  "pool/dwarven-strike-force": _poolDwarvenStrikeForce,
   "pool/dwarven-trader": _poolDwarvenTrader,
   "pool/dwarven-vigilantes": _poolDwarvenVigilantes,
   "pool/dwarven-warriors": _poolDwarvenWarriors,
@@ -59498,6 +59508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/freewind-falcon": _poolFreewindFalcon,
   "pool/freeze-in-place": _poolFreezeInPlace,
   "pool/frenetic-efreet": _poolFreneticEfreet,
+  "pool/frenetic-ogre": _poolFreneticOgre,
   "pool/frenetic-raptor": _poolFreneticRaptor,
   "pool/frenetic-sliver": _poolFreneticSliver,
   "pool/frenzied-arynx": _poolFrenziedArynx,
@@ -66881,6 +66892,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pardic-arsonist": _poolPardicArsonist,
   "pool/pardic-collaborator": _poolPardicCollaborator,
   "pool/pardic-lancer": _poolPardicLancer,
+  "pool/pardic-swordsmith": _poolPardicSwordsmith,
   "pool/pardic-wanderer": _poolPardicWanderer,
   "pool/parhelion-ii": _poolParhelionIi,
   "pool/parhelion-patrol": _poolParhelionPatrol,

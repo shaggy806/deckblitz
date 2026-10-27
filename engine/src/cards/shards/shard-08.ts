@@ -499,6 +499,7 @@ import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolParadigmShift from "../pool/paradigm-shift.js";
 import _poolParapet from "../pool/parapet.js";
+import _poolPardicSwordsmith from "../pool/pardic-swordsmith.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
 import _poolPeaceAndQuiet from "../pool/peace-and-quiet.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolOxiddaDaredevil,
     _poolParadigmShift,
     _poolParapet,
+    _poolPardicSwordsmith,
     _poolPathToExile,
     _poolPathToTheWorldTree,
     _poolPeaceAndQuiet,

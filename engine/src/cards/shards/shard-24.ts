@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbsorb from "../pool/absorb.js";
+import _poolAcceptableLosses from "../pool/acceptable-losses.js";
 import _poolAcclaimedContender from "../pool/acclaimed-contender.js";
 import _poolAcidicSlime from "../pool/acidic-slime.js";
 import _poolAdantoTheFirstFort from "../pool/adanto-the-first-fort.js";
@@ -809,6 +810,7 @@ import _tokensWallTokenArtifactDefender from "../tokens/wall-token-artifact-defe
 const shard: CardShard = {
   pool: [
     _poolAbsorb,
+    _poolAcceptableLosses,
     _poolAcclaimedContender,
     _poolAcidicSlime,
     _poolAdantoTheFirstFort,

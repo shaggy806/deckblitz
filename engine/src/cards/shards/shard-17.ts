@@ -187,6 +187,7 @@ import _poolDrownedSecrets from "../pool/drowned-secrets.js";
 import _poolDrudgeBeetle from "../pool/drudge-beetle.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
 import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
+import _poolDwarvenStrikeForce from "../pool/dwarven-strike-force.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
 import _poolDyadrineSynthesisAmalgam from "../pool/dyadrine-synthesis-amalgam.js";
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
@@ -1000,6 +1001,7 @@ const shard: CardShard = {
     _poolDrudgeBeetle,
     _poolDryadArbor,
     _poolDwarvenMattock,
+    _poolDwarvenStrikeForce,
     _poolDwynensElite,
     _poolDyadrineSynthesisAmalgam,
     _poolEagerFirstYear,

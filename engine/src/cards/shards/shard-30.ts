@@ -261,6 +261,7 @@ import _poolFountainOfCho from "../pool/fountain-of-cho.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
+import _poolFreneticOgre from "../pool/frenetic-ogre.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
@@ -1062,6 +1063,7 @@ const shard: CardShard = {
     _poolFourKnocks,
     _poolFranticInventory,
     _poolFreestriderCommando,
+    _poolFreneticOgre,
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
