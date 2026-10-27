@@ -42,6 +42,11 @@
 //                      more together than the best one key would per key —
 //                      with milestones, and the pairs (cards needing exactly
 //                      two keys); --family builds only F's keys
+//   --recheck [--size N] [--batch K]
+//                      the cards worth attempting again: no open need, or
+//                      every open need judged to exist already (`checked`),
+//                      sorted by need so a batch shares features; --batch K
+//                      prints the K-th batch's names
 //   --brief <family> [--open-only] [--page N]
 //                      the compact text a model judges a family from: each
 //                      open key with its cards waiting, description and up to
@@ -352,6 +357,7 @@ function main() {
   }
 
   if (args.includes("--audit")) return audit(vocab, records, pool, waiting);
+  if (args.includes("--recheck")) return recheck(vocab, waiting, Number(opt("--size", 100)), opt("--batch", undefined));
   if (args.includes("--greedy")) return greedy(vocab, waiting, Number(opt("--top", 50)), opt("--family", undefined));
   if (args.includes("--brief")) {
     return brief(vocab, waiting, opt("--brief", ""), args.includes("--open-only"), Number(opt("--page", 1)));
@@ -702,6 +708,37 @@ function brief(vocab, waiting, familyArg, openOnly, page) {
   console.log(b.head);
   console.log(`${b.openKeys} open keys (${b.cardNeeds} card-needs), ${b.built} built. Page ${n} of ${pages.length}${n < pages.length ? ` (next: --page ${n + 1})` : ""}.\n`);
   console.log(pages[n - 1].join("\n"));
+}
+
+/**
+ * `--recheck [--size N] [--batch K]`: the cards worth attempting again (the
+ * need-keys plan's Phase 1 step 2) — every card whose latest record names
+ * no open need, and every card whose open needs were all judged to exist
+ * already (a feature's `checked: "…: exists"`). Sorted by what they name, so
+ * a batch shares its features; `--batch K` prints the K-th batch of N as bare
+ * names, for an authoring session to take.
+ */
+function recheck(vocab, waiting, size, batchArg) {
+  const exists = (k) => /: exists$/.test(vocab.features.get(k)?.checked ?? "");
+  const rows = [];
+  for (const r of latestByCard(waiting).values()) {
+    const keys = keysOf(r, vocab);
+    const open = keys.filter((k) => !vocab.isBuilt(k));
+    if (open.every(exists)) rows.push({ name: r.name, keys, why: open.length ? "open needs judged to exist" : keys.length ? "every need built" : "only meta needs" });
+  }
+  rows.sort((a, b) => (a.keys[0] ?? "~").localeCompare(b.keys[0] ?? "~") || a.name.localeCompare(b.name));
+  const batches = Math.ceil(rows.length / size);
+  if (batchArg !== undefined) {
+    const k = Number(batchArg);
+    for (const r of rows.slice((k - 1) * size, k * size)) console.log(r.name);
+    return;
+  }
+  const count = (w) => rows.filter((r) => r.why === w).length;
+  console.log(`${rows.length} cards to recheck (every need built ${count("every need built")}, open needs judged to exist ${count("open needs judged to exist")}, only meta needs ${count("only meta needs")}), ${batches} batches of ${size}:`);
+  for (let k = 1; k <= batches; k += 1) {
+    const b = rows.slice((k - 1) * size, k * size);
+    console.log(`  batch ${k}: ${b.length} cards, ${b[0].keys[0] ?? "meta"} … ${b.at(-1).keys[0] ?? "meta"}`);
+  }
 }
 
 /** How many records give `needs` as a bare string — for `--check`. */

@@ -725,7 +725,9 @@
   "cost:sacrifice-multiple": {
    "size": "medium",
    "ui": true,
-   "description": "Sacrifice N permanents, or any number of them, as a cost with a filter and a chosen set. Covers 'sacrifice six Blood tokens' and 'you may sacrifice any number of creatures; each reduces the cost by {2}'. Built so far (2026-10-03): N, X ('Sacrifice X Treasures') and one-of-each ('a Swamp and a Forest') as an activation cost, a spell's additional cost (sacrificeCount) and a flashback cost, chosen as the cost is paid with the ordinary sacrifice decision (Sai, Magda, Mondrak, Jarad, Eliminate the Competition, Dread Return). 2026-10-16: 'any number' sacrificed as an optional additional cost, announced as the spell is cast, each lowering its cost (`additionalCost.sacrificeReduces` — Dargo, Awaken the Blood Avatar). What remains: one whose count copies the spell (Plumb the Forbidden)."
+   "description": "Still missing (2026-10-27 check): Bolas's Citadel's 'pay life equal to mana value' to cast from the top of the library is not expressible (payLife is fixed or commander-identity-colors); the sacrifice of ten permanents is covered. Already there: engine/src/abilities.ts SacrificeCost { filter, count } (Breya's two artifacts) and additionalCost.sacrificeCount / sacrificeReduces in engine/src/cards/define.ts.",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Sacrifice N permanents, or any number of them, as a cost with a filter and a chosen set. Covers 'sacrifice six Blood tokens' and 'you may sacrifice any number of creatures; each reduces the cost by {2}'. Built so far (2026-10-03): N, X ('Sacrifice X Treasures') and one-of-each ('a Swamp and a Forest') as an activation cost, a spell's additional cost (sacrificeCount) and a flashback cost, chosen as the cost is paid with the ordinary sacrifice decision (Sai, Magda, Mondrak, Jarad, Eliminate the Competition, Dread Return). 2026-10-16: 'any number' sacrificed as an optional additional cost, announced as the spell is cast, each lowering its cost (`additionalCost.sacrificeReduces` — Dargo, Awaken the Blood Avatar). What remains: one whose count copies the spell (Plumb the Forbidden)."
   },
   "cost:unattach-equipment": {
    "size": "small",
@@ -735,22 +737,30 @@
   "decision:choose-from-zone-extensions": {
    "size": "medium",
    "ui": true,
-   "description": "Extensions to choose-from-zone: pick across several zones at once (hand or graveyard, all graveyards), apply constraints to the whole selection (different names, four or more card types among them), and let a chooser other than the zone's owner pick ('an opponent chooses a card from your hand')."
+   "description": "Still missing (2026-10-27 check): look-and-choose takes one zone (library, graveyard, hand, graveyards, command, targets), so no pick across hand and graveyard together; no per-card-type constrained pick or 'four or more card types' rule Already there: src/effects.ts look-and-choose spec (zone union, ~line 5688 onward)",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Extensions to choose-from-zone: pick across several zones at once (hand or graveyard, all graveyards), apply constraints to the whole selection (different names, four or more card types among them), and let a chooser other than the zone's owner pick ('an opponent chooses a card from your hand')."
   },
   "decision:choose-number": {
    "size": "small",
    "ui": true,
-   "description": "A resolution-time choice of a number in a range ('put up to three lore counters on it')."
+   "description": "Still missing (2026-10-27 check): a number chosen on upkeep and kept for P/T (Shapeshifter) and a chosen number driving a lore-counter count on a token Saga copy (Terra) have no path; chosenNumber is only stored from chooseOnEnter at enter Already there: src/cards/pool/expel-the-interlopers.ts (modal with one mode per number); src/effects.ts chosenNumber EffectAmount",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "A resolution-time choice of a number in a range ('put up to three lore counters on it')."
   },
   "decision:choose-permanent": {
    "size": "medium",
    "ui": true,
-   "description": "An untargeted resolution-time choice of one or more permanents matching a filter, made by a named player: populate's token, amass's Army, 'put counters on a creature you control', 'exile any number of other nonland permanents you control', and one of a spell's targets to copy."
+   "description": "Still missing (2026-10-27 check): AbilityCost.removeCounter takes only the source, so 'remove a counter from another permanent you control' as a cost (Xavier Sal) is not expressible Already there: src/effects.ts choose-permanents effect (digest: filter, upTo, min, then, prompt); choose-opponent random? option; populate effect",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "An untargeted resolution-time choice of one or more permanents matching a filter, made by a named player: populate's token, amass's Army, 'put counters on a creature you control', 'exile any number of other nonland permanents you control', and one of a spell's targets to copy."
   },
   "decision:choose-player": {
    "size": "medium",
    "ui": true,
-   "description": "An untargeted 'choose a player' or 'choose an opponent', at resolution or as the permanent enters (several choices must differ), plus a 'chosen player' PlayerScope that draw, counters and create-token can route to."
+   "description": "Still missing (2026-10-27 check): no chosen-player PlayerScope and no as-enters player choice (chooseOnEnter is a fixed string list), so Saskia and Gluntch's three distinct players can't be written Already there: src/effects.ts kind choose-opponent (one opponent at resolution, random?/anyPlayer?); src/cards/define.ts chooseOnEnter string list (~line 3750)",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "An untargeted 'choose a player' or 'choose an opponent', at resolution or as the permanent enters (several choices must differ), plus a 'chosen player' PlayerScope that draw, counters and create-token can route to."
   },
   "decision:choose-tap-costs": {
    "size": "medium",
@@ -795,7 +805,9 @@
   "decision:variable-target-count": {
    "size": "medium",
    "ui": true,
-   "description": "A target slot with a variable number of targets ('any number of target …', or 'up to X' with X from kicks or an amount), with optional constraints across the whole set ('total power 10 or less'). This touches TargetSpec, legalActions' per-slot options, the choose-targets validator and the client picker."
+   "description": "Still missing (2026-10-27 check): any-number max/min take 'x' only on a spell or activated ability whose group is its only slot, so triggered 'up to X targets' with X from a count (Midnight Arsonist, Wise Mothman) can't be written Already there: src/target.ts any-number max/min ('x', ~lines 309-321); maxTotalPower (~line 330)",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "A target slot with a variable number of targets ('any number of target …', or 'up to X' with X from kicks or an amount), with optional constraints across the whole set ('total power 10 or less'). This touches TargetSpec, legalActions' per-slot options, the choose-targets validator and the client picker."
   },
   "decision:ward-payment": {
    "size": "medium",
@@ -825,7 +837,9 @@
   "effect:amount-aggregate": {
    "size": "small",
    "ui": false,
-   "description": "Aggregates in CDAs (a layer-7b base P/T set from a sum or max, e.g. Karn, Legacy Reforged) and in static P/T bonuses, a greatest value over an attack batch or any non-battlefield set, and a static ability's aggregate condition that counts its own source. Built so far: sum and max of power, toughness, mana value or the counters of one kind (Tom Bombadil's lore counters among Sagas) over filtered battlefield permanents (a token stack counts N times in a sum; 0 over nothing) as an EffectAmount, as the StaticConditions aggregate and source-greatest ('greater than each other creature's power', strict or not), and as a cost reduction (Ghalta's shape); a CDA from the greatest mana value among permanents (CountSpec greatestManaValueOf — Karn's P/T, which still needs cost:mana-spending-rules for its upkeep mana); a static P/T bonus from the greatest mana value among your commanders wherever they are (grantPtPerCount.commanderManaValue — Tangleweave Armor). A resolution-time 'among other attacking creatures' needs no batch (Ghalta and Mavren's ruling: X is read as it resolves). Left: a CDA or static bonus from other permanents' power or toughness (layer dependency), an aggregate over the attack batch itself ('the greatest power among them' — Aloy), and over graveyard or exile cards (Coram, Ulamog the Defiler)."
+   "description": "Still missing (2026-10-27 check): a greatest power or toughness over graveyards or the attack batch (Coram, Aloy); aggregates read the battlefield only Already there: src/filter.ts AggregateSpec and aggregateValueOf (battlefield); src/cards/define.ts CountSpec greatestManaValueOf for CDAs; src/cards/pool/ghalta-and-mavren.ts basePt aggregate over an attack filter",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Aggregates in CDAs (a layer-7b base P/T set from a sum or max, e.g. Karn, Legacy Reforged) and in static P/T bonuses, a greatest value over an attack batch or any non-battlefield set, and a static ability's aggregate condition that counts its own source. Built so far: sum and max of power, toughness, mana value or the counters of one kind (Tom Bombadil's lore counters among Sagas) over filtered battlefield permanents (a token stack counts N times in a sum; 0 over nothing) as an EffectAmount, as the StaticConditions aggregate and source-greatest ('greater than each other creature's power', strict or not), and as a cost reduction (Ghalta's shape); a CDA from the greatest mana value among permanents (CountSpec greatestManaValueOf — Karn's P/T, which still needs cost:mana-spending-rules for its upkeep mana); a static P/T bonus from the greatest mana value among your commanders wherever they are (grantPtPerCount.commanderManaValue — Tangleweave Armor). A resolution-time 'among other attacking creatures' needs no batch (Ghalta and Mavren's ruling: X is read as it resolves). Left: a CDA or static bonus from other permanents' power or toughness (layer dependency), an aggregate over the attack batch itself ('the greatest power among them' — Aloy), and over graveyard or exile cards (Coram, Ulamog the Defiler)."
   },
   "effect:amount-counters-on-object": {
    "size": "small",
@@ -850,7 +864,9 @@
   "effect:attach-extensions": {
    "size": "medium",
    "ui": true,
-   "description": "Aura and Equipment attachment beyond attaching the source and an entering Aura choosing what it enchants (built as effect:aura-enters-choice): an Aura put onto the battlefield attached to a named object (Light-Paws, Animate Dead), Aura tokens and token copies of a creature's attachments, and attaching chosen or target Equipment or Auras (any number) to a creature (Cloud, Ardenn). Built so far: attaching one Equipment or Aura the effect names — the one whose entering fired the trigger included — to a target (`attach`'s `attachment`: Hammer of Nazahn, Sigarda's Aid); 2026-10-16: any number chosen as it resolves (`attach`'s `choose`) onto a target permanent or player (Ardenn), and a card put onto the battlefield attached to something (`attachedTo` on put-onto-battlefield and return-from-graveyard, a search's `attachedToSource` — Light-Paws, Danitha). Left: Aura tokens and token copies of attachments, Animate Dead's enchant change, attaching to a creature chosen without targeting (Stonehewer Giant, Inventory Management) or to a player as it enters (Lynde)."
+   "description": "Still missing (2026-10-27 check): unattach as a cost and damage divided among one to three targets (Captain America, First Avenger); token copies of each attached permanent attached to a creature (Arna Kennerud) Already there: src/effects.ts attach (attachment, attachments, choose, onto) and unattach; put-onto-battlefield attachedTo",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Aura and Equipment attachment beyond attaching the source and an entering Aura choosing what it enchants (built as effect:aura-enters-choice): an Aura put onto the battlefield attached to a named object (Light-Paws, Animate Dead), Aura tokens and token copies of a creature's attachments, and attaching chosen or target Equipment or Auras (any number) to a creature (Cloud, Ardenn). Built so far: attaching one Equipment or Aura the effect names — the one whose entering fired the trigger included — to a target (`attach`'s `attachment`: Hammer of Nazahn, Sigarda's Aid); 2026-10-16: any number chosen as it resolves (`attach`'s `choose`) onto a target permanent or player (Ardenn), and a card put onto the battlefield attached to something (`attachedTo` on put-onto-battlefield and return-from-graveyard, a search's `attachedToSource` — Light-Paws, Danitha). Left: Aura tokens and token copies of attachments, Animate Dead's enchant change, attaching to a creature chosen without targeting (Stonehewer Giant, Inventory Management) or to a player as it enters (Lynde)."
   },
   "effect:aura-enters-choice": {
    "size": "medium Also built (2026-10-10, B46): attaching to the trigger's object or the ability's source rather than a target (`attach`'s `target: \"trigger-object\" | \"source\"`: Hero's Blade, Shielded by Faith, Sword of the Squeak, Cloud, Ex-SOLDIER) and every match at once (`attachments`: Balan, Wandering Knight).",
@@ -870,7 +886,9 @@
   "effect:cast-during-resolution": {
    "size": "medium",
    "ui": true,
-   "description": "Casting during resolution for an alternative cost such as discarding a card (The Infamous Cruelclaw), copying a card and casting the copy for free (Mizzix's Mastery, Isochron Scepter, Narset), another player casting (Transforming Flourish, Tibalt's Trickery), casting several (Etali), a revealed top X read as an amount (Sunbird's Invocation) and the card discarded this way (Malcolm). Built so far (2026-09-30, the cast-now effect): the effect's controller casting a target card, or one picked from their hand, graveyard or the looked-at top N of their library, paid or without paying its mana cost, with a filter on the spell and 'if you do' / 'if you don't'. 2026-10-09: copies of cards cast as it resolves (rule 707.12, uncast copies ceasing to exist by 704.5e), any number of spells from among cards exiled this way, and a top X that's an amount, revealed or not. 2026-10-16: cast by discarding a card rather than paying its mana cost (`byDiscarding` — Cruelclaw), and each player's exile until a nonland card (Etali). Left: another player casting (Tibalt's Trickery), search to exile then cast (Bring to Light), the command zone (Geode Golem), total mana value (Invoke Calamity), spending any mana type (Esper Valigarmanda), the card discarded this way (Malcolm) — each its own key in needs-vocabulary.json."
+   "description": "Still missing (2026-10-27 check): Clash (Marvo, Deep Operative) and exiling any number of colorless cards then casting them free this turn (Ugin, Eye of the Storms, -11) Already there: engine/src/effects.ts kind cast-now (~line 2589) with byDiscarding, free, copies, from",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Casting during resolution for an alternative cost such as discarding a card (The Infamous Cruelclaw), copying a card and casting the copy for free (Mizzix's Mastery, Isochron Scepter, Narset), another player casting (Transforming Flourish, Tibalt's Trickery), casting several (Etali), a revealed top X read as an amount (Sunbird's Invocation) and the card discarded this way (Malcolm). Built so far (2026-09-30, the cast-now effect): the effect's controller casting a target card, or one picked from their hand, graveyard or the looked-at top N of their library, paid or without paying its mana cost, with a filter on the spell and 'if you do' / 'if you don't'. 2026-10-09: copies of cards cast as it resolves (rule 707.12, uncast copies ceasing to exist by 704.5e), any number of spells from among cards exiled this way, and a top X that's an amount, revealed or not. 2026-10-16: cast by discarding a card rather than paying its mana cost (`byDiscarding` — Cruelclaw), and each player's exile until a nonland card (Etali). Left: another player casting (Tibalt's Trickery), search to exile then cast (Bring to Light), the command zone (Geode Golem), total mana value (Invoke Calamity), spending any mana type (Esper Valigarmanda), the card discarded this way (Malcolm) — each its own key in needs-vocabulary.json."
   },
   "effect:choices-by-other-players": {
    "size": "medium",
@@ -940,7 +958,8 @@
   "effect:end-the-turn": {
    "size": "medium",
    "ui": false,
-   "description": "End the turn (rule 723.1): exile everything on the stack, remove creatures from combat and go to cleanup. Cleanup gets priority when something triggers there, followed by another cleanup (rule 514.3a)."
+   "description": "End the turn (rule 723.1): exile everything on the stack, remove creatures from combat and go to cleanup. Cleanup gets priority when something triggers there, followed by another cleanup (rule 514.3a).",
+   "checked": "2026-10-27: missing"
   },
   "effect:enter-attacking": {
    "size": "medium",
@@ -1015,7 +1034,8 @@
   "effect:modal-activated-targeted-modes": {
    "size": "medium",
    "ui": true,
-   "description": "Modal activated abilities whose modes carry their own targets: modes chosen as it is activated (rule 700.2b), each bringing its targets, as a castModal spell does (Breya, Etherium Shaper; Koma, Cosmos Serpent; Umezawa's Jitte)."
+   "description": "Modal activated abilities whose modes carry their own targets: modes chosen as it is activated (rule 700.2b), each bringing its targets, as a castModal spell does (Breya, Etherium Shaper; Koma, Cosmos Serpent; Umezawa's Jitte).",
+   "checked": "2026-10-27: missing"
   },
   "effect:modifier-grants-activated": {
    "size": "small",
@@ -1060,7 +1080,9 @@
   "effect:repeat-process": {
    "size": "small",
    "ui": false,
-   "description": "Loop an effect block while a condition on the card just moved holds ('if it's a land, repeat this process'), stopping when the library or graveyard runs out."
+   "description": "Still missing (2026-10-27 check): no generic loop of an effect block on a condition over the card just moved; reveal-until (filter + keepFound, Countryside Crusher) and clash repeat cover only those forms, so Claim Jumper's conditional repeat-once and Grist's mill-then-repeat on an Insect have nothing Already there: src/effects.ts kind 'reveal-until' (filter, keepFound, rest) and kind 'clash' repeat field; Countryside Crusher in src/cards/pool/countryside-crusher.ts",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Loop an effect block while a condition on the card just moved holds ('if it's a land, repeat this process'), stopping when the library or graveyard runs out."
   },
   "effect:return-to-hand-extensions": {
    "size": "small",
@@ -1080,7 +1102,9 @@
   "effect:shuffle-library": {
    "size": "small",
    "ui": false,
-   "description": "A standalone 'shuffle your library' effect step ('Shuffle your library, then exile the top card')."
+   "description": "Still missing (2026-10-27 check): shuffle-library is the controller's own shuffle only; Natural Selection's 'then that player may shuffle' has no target-player form (Urza's standalone shuffle exists) Already there: src/effects.ts kind 'shuffle-library' (no player field), used by Ponder",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "A standalone 'shuffle your library' effect step ('Shuffle your library, then exile the top card')."
   },
   "effect:target-other-than-source": {
    "size": "medium",
@@ -1325,7 +1349,9 @@
   "mechanic:face-down": {
    "size": "large",
    "ui": true,
-   "description": "Face-down permanents (rule 708): a characteristic-less 2/2, identity hidden per viewer, turning face up (special action, cost, triggers, 'you may turn a permanent face up'), 'enters face down' triggers, leaving play, and a noted card name on a face-down permanent (Magar). Shared by manifest, morph, disguise and cloak. Built 2026-10-09: the face-down 2/2 (manifest and cloak, `GameObject.faceDown`), hidden per viewer, turning a manifested or cloaked creature card face up for its mana cost, and revealing it as it leaves; since 2026-10-10 (B47) also morph, megamorph and disguise (cast face down for {3}, turned face up for their cost), turn-face-up triggers, the faceDown filter and manifest dread; not yet turning a permanent face up by an effect, returning a card face down, manifesting from a hand, or Magar's noted name."
+   "description": "Still missing (2026-10-27 check): face-down permanents are always a 2/2 from manifest or cloak, so Tezzeret's 5/5 artifact creatures face down are not expressible, and no effect turns a permanent face down or face up (Ixidron, Illithid Harvester, Skirk Alarmist) Already there: engine/src/effects.ts kind manifest (cloak, 2/2); view.ts faceDown; game.ts turnFaceUp; abilities.ts on=turned-face-up",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Face-down permanents (rule 708): a characteristic-less 2/2, identity hidden per viewer, turning face up (special action, cost, triggers, 'you may turn a permanent face up'), 'enters face down' triggers, leaving play, and a noted card name on a face-down permanent (Magar). Shared by manifest, morph, disguise and cloak. Built 2026-10-09: the face-down 2/2 (manifest and cloak, `GameObject.faceDown`), hidden per viewer, turning a manifested or cloaked creature card face up for its mana cost, and revealing it as it leaves; since 2026-10-10 (B47) also morph, megamorph and disguise (cast face down for {3}, turned face up for their cost), turn-face-up triggers, the faceDown filter and manifest dread; not yet turning a permanent face up by an effect, returning a card face down, manifesting from a hand, or Magar's noted name."
   },
   "mechanic:goad-extensions": {
    "size": "medium",
@@ -1410,7 +1436,9 @@
   "replacement:copy-on-enter-options": {
    "size": "small",
    "ui": false,
-   "description": "Widen copyOnEnter: a filter narrower than any creature ('another creature you control'), and entering as a copy of a card in exile or a graveyard. Built so far: CopyOnEnter's CardFilter over battlefield permanents from the entering player's side (any type, 'you control', 'an opponent controls', power, an amount operand — Mockingbird's mana spent), its CopyExceptions (now with triggered abilities, notLegendary, addSupertypes and the legend-rule static — Sakashima), entering tapped (Vesuva), extra counters judged by what it became (Spark Double, Altered Ego) and a copy until end of turn (Cursed Mirror). Left: a copy of a card in a graveyard or exile (The Mimeoplasm, which also needs a two-card choice from any graveyards; Echoing Deeps), and its client choice over cards off the battlefield."
+   "description": "Still missing (2026-10-27 check): CopyOnEnter.filter only reads permanents on the battlefield, so a copy of a card in exile or a graveyard (Mimeoplasm) and a raid-gated copy (Protean Raider) have no field Already there: engine/src/cards/define.ts interface CopyOnEnter (line 55-68, filter with controlledBy 'you' as Sakashima's another-creature form)",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Widen copyOnEnter: a filter narrower than any creature ('another creature you control'), and entering as a copy of a card in exile or a graveyard. Built so far: CopyOnEnter's CardFilter over battlefield permanents from the entering player's side (any type, 'you control', 'an opponent controls', power, an amount operand — Mockingbird's mana spent), its CopyExceptions (now with triggered abilities, notLegendary, addSupertypes and the legend-rule static — Sakashima), entering tapped (Vesuva), extra counters judged by what it became (Spark Double, Altered Ego) and a copy until end of turn (Cursed Mirror). Left: a copy of a card in a graveyard or exile (The Mimeoplasm, which also needs a two-card choice from any graveyards; Echoing Deeps), and its client choice over cards off the battlefield."
   },
   "replacement:damage-modification": {
    "size": "medium",
@@ -1430,7 +1458,9 @@
   "replacement:mana-pool-emptying": {
    "size": "medium",
    "ui": false,
-   "description": "Hooks at the single pool-emptying site: unspent mana becomes another colour (or colourless) and stays, mana of a colour persists, and mana burn."
+   "description": "Still missing (2026-10-27 check): unspent mana cannot turn into another colour (Omnath) and losing mana cannot cause life loss (Yurlok); no mana burn Already there: engine/src/game.ts keptManaTypes and losesManaAsColorless (step-end pool handling, around lines 6270-6295, Leyline Tyrant keepsUnspentMana, Kruphix unspentManaBecomesColorless in engine/src/cards/define.ts); engine/src/mana.ts ManaUnit.persists",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Hooks at the single pool-emptying site: unspent mana becomes another colour (or colourless) and stays, mana of a colour persists, and mana burn."
   },
   "replacement:new-event-replacements": {
    "size": "medium",
@@ -1515,7 +1545,9 @@
   "static:gain-abilities-from-graveyard": {
    "size": "medium",
    "ui": false,
-   "description": "The Necrotic Ooze shape: the source has the activated abilities (mana abilities included) of every matching card in graveyards."
+   "description": "Still missing (2026-10-27 check): The static's activated-ability grant reads only its own abilities or cards exiled with it; no filter over graveyard cards' abilities (Necrotic Ooze shape, Thranduil, Trazyn). Already there: engine/src/cards/define.ts grantsActivated and grantsActivatedOfLinkedExile; engine/src/game.ts grantsActivatedOfLinkedExile read",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "The Necrotic Ooze shape: the source has the activated abilities (mana abilities included) of every matching card in graveyards."
   },
   "static:grant-abilities-to-spells": {
    "size": "medium",
@@ -1635,7 +1667,9 @@
   "trigger:discards-extensions": {
    "size": "small",
    "ui": false,
-   "description": "The discards trigger records the cause (an opponent's spell or ability) for cards that trigger from the graveyard — Orvar, the All-Form's 'when a spell or ability an opponent controls causes you to discard this card'. Built so far: a card filter, once per card with the card as trigger object (perCard — Tergrid, God of Fright, Sangromancer), and the count of matching cards as the trigger value."
+   "description": "Still missing (2026-10-27 check): Neither on:'discards' nor the cards-discarded event records a cause, so 'a spell or ability an opponent controls causes you to discard' (Orvar, Ajani's Last Stand) can't be checked. Already there: src/abilities.ts on:'discards' (~L1563: who, filter, perCard); src/events.ts cards-discarded (~L428: player, objects).",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "The discards trigger records the cause (an opponent's spell or ability) for cards that trigger from the graveyard — Orvar, the All-Form's 'when a spell or ability an opponent controls causes you to discard this card'. Built so far: a card filter, once per card with the card as trigger object (perCard — Tergrid, God of Fright, Sangromancer), and the count of matching cards as the trigger value."
   },
   "trigger:enters-batch": {
    "size": "medium",
@@ -1715,7 +1749,9 @@
   "zone:graveyard-cast-permissions": {
    "size": "medium",
    "ui": false,
-   "description": "Permissions that reach any player's graveyard (Coram), and a one-shot permission to *play* a target card (lands included) rather than only cast it. Built so far: the one-shot 'you may cast target card from your graveyard this turn' on the card (Silas Renn, Emry; lost if the card leaves the graveyard, lapses at end of turn), Muldrotha's per-permanent-type allowances (a land played with the land drop, a multi-typed card spending one chosen type), a permission with an extra life cost (payLife), and a choice of grantor when several apply (LegalAction/cast-spell graveyardGrant)."
+   "description": "Still missing (2026-10-27 check): No permission found that reaches any player's graveyard (Coram); grant-graveyard-cast casts only, so a land can't be played; castFromGraveyard has no finality-counter option (Noctis). Already there: src/effects.ts grant-graveyard-cast (~L3778, 'Casts only'); src/cards/define.ts castFromGraveyard (~L1670: filter, payLife, exileAfterwards, sacrifice, exileOthers).",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Permissions that reach any player's graveyard (Coram), and a one-shot permission to *play* a target card (lands included) rather than only cast it. Built so far: the one-shot 'you may cast target card from your graveyard this turn' on the card (Silas Renn, Emry; lost if the card leaves the graveyard, lapses at end of turn), Muldrotha's per-permanent-type allowances (a land played with the land drop, a multi-typed card spending one chosen type), a permission with an extra life cost (payLife), and a choice of grantor when several apply (LegalAction/cast-spell graveyardGrant)."
   },
   "zone:impulse-permission-options": {
    "size": "medium",
@@ -1730,7 +1766,9 @@
   "zone:visibility-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Who can see what, in viewFor and revealedThisTurn: 'plays with their hand revealed' (Sen Triplets), 'look at the top card of your library any time' (owner only — Glarb, Sigarda), and effects that reveal cards to every player (look-and-choose's 'reveal', 'you may reveal that card'). A card exiled face down is split out as zone:exile-face-down (built). Built so far: 'look at the top card of your library any time' (the card's looksAtOwnLibraryTop — its controller's own view only, rule 401.5), with zone:cast-from-library-top."
+   "description": "Still missing (2026-10-27 check): No hand-revealed static (Sen Triplets), and no skip-draw-step vocabulary or pay-life exile-face-down-then-return for Necropotence. Already there: src/cards/define.ts revealsOwnLibraryTop (~L2918) and looksAtOwnLibraryTop (~L2925) cover the top-card half (Glarb); skip-next-untap covers untap steps only.",
+   "checked": "2026-10-27: partial",
+   "wasDescription": "Who can see what, in viewFor and revealedThisTurn: 'plays with their hand revealed' (Sen Triplets), 'look at the top card of your library any time' (owner only — Glarb, Sigarda), and effects that reveal cards to every player (look-and-choose's 'reveal', 'you may reveal that card'). A card exiled face down is split out as zone:exile-face-down (built). Built so far: 'look at the top card of your library any time' (the card's looksAtOwnLibraryTop — its controller's own view only, rule 401.5), with zone:cast-from-library-top."
   },
   "zone:exile-face-down": {
    "size": "small",

@@ -1568,6 +1568,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **The need-keys plan's Phase 1, steps 3 and 4** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`
+  → *Phase 1 progress*). The merge ran as 84 Haiku jobs. It applied 23 aliases after review,
+  which took the open keys from 2,602 to 2,579, and recorded 617 generalisation groups in the
+  vocabulary's `groups`. The existence check ran twice over the 333 keys of five or more cards:
+  4 exist, 213 are partial (their descriptions now name what's missing) and 114 are missing.
+  Each judged key is stamped `checked`. `cards:needs -- --recheck` lists step 2's 863 cards in
+  batches.
 - **The need-keys plan's model trial, Phase 0.5** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`
   → *Trial results*): Sonnet and Haiku, two runs each, against an Opus answer key that was checked
   by hand. The existence check covered 40 keys and the merge three families. **Haiku takes both

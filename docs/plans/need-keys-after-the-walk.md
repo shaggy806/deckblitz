@@ -1,7 +1,10 @@
 # Working down the need keys, after the set walk
 
 **Status:** in progress. Phase 0 (the tooling) and Phase 0.5 (the Sonnet-against-Haiku trial)
-are done (2026-10-27): Haiku takes both judging steps (*Trial results*, below). Phase 1 is next.
+are done (2026-10-27): Haiku takes both judging steps (*Trial results*, below). Phase 1's steps 1, 3
+and 4 are done (2026-10-27, *Phase 1 progress*). Its step 2, the recheck batches, is next: nine
+batches that `cards:needs -- --recheck` lists, worked as a parallel authoring round from a fresh
+session.
 The set walk ended 2026-10-27 (batch 234).
 
 Once the walk ends, every Commander-legal first printing has been either authored or triaged with
@@ -249,6 +252,52 @@ Run in order, cheapest first.
 
 After Phase 1 every open key is merged, and every key of five or more cards is confirmed
 missing. Re-run `--greedy` for Phase 2's order.
+
+### Phase 1 progress (2026-10-27)
+
+- **Step 1 (mechanical)** needed nothing new. The face-name fix drops no record, and the tools
+  read every card from its latest record.
+- **Step 3 (merge).** 84 Haiku jobs ran, one per family of ten or more open keys (43) and one per
+  page of about 40 keys from the 1,049 smaller families (41). The agents wrote their JSON to
+  files. They proposed 24 aliases, and the review rejected one: Ormos's draw replacement and its
+  discard cost are separate features. 23 were applied, two of them onto built keys:
+  - `effect:cast-free-while-exiled` → `zone:impulse-permission-options`;
+  - `bug:token-copy-as-enters-choices` → `bug:as-enters-choices-any-entry`.
+
+  A merged feature stays in `needs-vocabulary.json`, marked `mergedInto`, and resolves through
+  its alias. **617 generalisation groups over 1,623 keys** went into the vocabulary's new `groups`
+  list for Phase 2: 380 pairs, 144 threes and 93 of four or more. Open keys went from 2,602 to
+  2,579.
+
+  Haiku was conservative. It refused many aliases because the built key in question has no
+  description. Writing descriptions for the bare built keys would let a later pass merge more.
+- **Step 4 (does it exist?).** 333 keys of five or more cards ran in 17 pages, twice each (34 Haiku
+  runs). Two runs dropped the key's prefix, and the apply step mapped those back by suffix. The
+  runs disagreed on 99 keys, and the agreement rule settled them:
+  - **4 exist**, covering 21 cards: `effect:forced-block-this-combat`,
+    `effect:mill-controller-of-target`, `effect:skip-next-untap-step` and
+    `stat:treasure-mana-spent-count`. Each was checked against the code.
+  - **213 are partial.** The description now names only what is missing, the old text is kept in
+    `wasDescription`, and the evidence of what's there follows.
+  - **114 are missing.**
+  - **2 went unjudged**, left out by one run.
+
+  Every judged key carries `checked: "2026-10-27: <verdict>"`. So few *exists* is the strict rule
+  working as intended. The partial rewrites are the main result: Phase 2 builds from a
+  description of what is actually missing.
+- **Step 2 (recheck)** is prepared but not run. `npm run cards:needs -w engine -- --recheck` lists
+  863 cards in nine batches of 100, sorted by need so a batch shares features. Use `--batch K` for
+  a batch's names. The 863 are:
+  - 781 with every need built (71 built since triage, 710 before);
+  - 21 whose open needs were judged to exist;
+  - 61 that name only a meta key.
+
+  `card:scaffold -- --dry-run` over the no-open-need cards auto-finishes only 6, so the rest is
+  authoring work. That means a parallel round run from a fresh session under
+  `author-walks-parallel`'s rules, with a recheck batch per child in place of a range of sets. A
+  card still blocked gets a narrow new key, and the coarse key's description is tightened.
+- **Greedy after the merge:** 10 keys free 331 cards, 50 free 1,002, 100 free 1,466 and 400 free
+  3,043. `--greedy` doesn't score the groups yet; that is Phase 2's first tooling item.
 
 ## Phase 2: build in greedy order, a family per session
 

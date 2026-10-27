@@ -111,7 +111,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - All three read the **pool index** (`engine/.cache/pool-index.jsonl` and `pool-vocab.json`,
   gitignored, `scripts/pool-index.mjs`): written by `gen:cards` from the sources, rebuilt by the
   tools when a card file (or a `src/cards/*.ts`/`src/*.ts` helper) is newer. No build needed.
-- `cards:needs -- --next 60 | --rank | --stale | --feature <key> | --audit | --greedy | --brief <family>`: the next untriaged cards by
+- `cards:needs -- --next 60 | --rank | --stale | --feature <key> | --audit | --greedy | --brief <family> | --recheck`: the next untriaged cards by
   EDHREC rank, and the triage records through one need
   vocabulary (`data/needs-vocabulary.json`): what blocks the most cards, what's been built since.
 - `decks:stand-ins`: the sample decks' stand-ins left, deck by deck, with each one's blockers;

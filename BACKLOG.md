@@ -58,11 +58,11 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
-  in progress; the tooling and the model trial landed 2026-10-27, and Haiku judges both steps):
-  next, Phase 1, checking every record is really blocked: the 836 with no open need, then Haiku
-  agents merging keys by family and confirming the 336 keys of five or more cards are missing,
-  with the prompts in `engine/scripts/needs-prompts/`. Then build in greedy order, a family per
-  session (100 keys free ~1,440 cards).
+  in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
+  2026-10-27): next, Phase 1 step 2, the recheck round. `cards:needs -- --recheck` lists 863
+  cards in nine batches of 100 (no open need, or every open need judged to exist), to author as
+  a parallel round from a fresh session. Then build in greedy order, a family per session, with
+  the 617 merge groups (100 keys free ~1,470 cards).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

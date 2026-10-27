@@ -22,7 +22,7 @@ is still unscoped.
 
 `tutorials` (**in progress** — the overlay, site tour, tutorial room and a proof lesson built) plans the two tutorials — Learn Commander (one or two seeded games against a scripted opponent, the lessons as chapters checked from the event log) and a site tour (coach marks over the real pages) — on a shared coach-mark overlay that blocks other clicks and a production-safe tutorial room, with the user's decisions of 2026-10-13.
 
-`need-keys-after-the-walk` (**in progress**: the tooling and the Sonnet-vs-Haiku trial done, Haiku judging) works down the blocked records once the set walk ends: tooling (`--audit`, `--greedy`, `--brief`), a check that every record is really blocked with keys merged by family, then building in greedy order a family per session, with cheap agents for the judging and scripts for the counting.
+`need-keys-after-the-walk` (**in progress**: tooling, model trial, and Phase 1's merge and existence check done; the recheck round next) works down the blocked records once the set walk ends: tooling (`--audit`, `--greedy`, `--brief`), a check that every record is really blocked with keys merged by family, then building in greedy order a family per session, with cheap agents for the judging and scripts for the counting.
 
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
