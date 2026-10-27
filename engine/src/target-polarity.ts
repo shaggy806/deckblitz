@@ -347,7 +347,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "double-pt-all": none,
   "double-counters-all": none,
   "double-counters": (n, v) => v.touch(n.target, "help", MAJOR),
-  "grant-keyword-all": none,
+  // Radiance's "target creature and each other creature that shares a color
+  // with it gain haste" (Surge of Zeal) leans as `grant-keyword` does.
+  "grant-keyword-all": (n, v) => {
+    const lean = n.keyword === "defender" ? "harm" : "help";
+    v.touch(n.filter.sameNameAsTarget, lean, MAJOR);
+    v.touch(n.filter.sharesColorWithTarget, lean, MAJOR);
+  },
   "add-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MAJOR),
   // "On each creature target player controls" (Meadowboon): that player's.
@@ -850,6 +856,10 @@ export function auraPolarity(def: CardDefinition): Polarity {
       const lean = attachedTriggerLean(ability.effect);
       if (lean === "help") help = true;
       else if (lean === "harm") harm = true;
+      // Otherwise a reward for the enchanted creature connecting — Necromantic
+      // Thirst's "whenever enchanted creature deals combat damage to a player,
+      // you may return target creature card": an attacker's Aura.
+      else if (ability.trigger.on === "deals-combat-damage-to-player") help = true;
     }
   }
   // Still nothing: what its triggers give the enchanted permanent whatever
@@ -920,6 +930,9 @@ function enchantedLean(effect: EffectSpec | null): "help" | "harm" | null {
     case "tap":
       return "harm";
     case "untap":
+      return "help";
+    // Strands of Undeath's "{B}: regenerate enchanted creature".
+    case "regenerate":
       return "help";
     default:
       return null;

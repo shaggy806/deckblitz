@@ -189,6 +189,15 @@ describe("slot polarity", () => {
     expect(cast("Fractured Loyalty")).toEqual(["harm"]);
   });
 
+  it("reads radiance's keyword grant as help", () => {
+    expect(cast("Surge of Zeal")).toEqual(["help"]);
+  });
+
+  it("reads an Aura that regenerates or rewards its creature's hits as help", () => {
+    expect(cast("Strands of Undeath")).toEqual(["help"]);
+    expect(cast("Necromantic Thirst")).toEqual(["help"]);
+  });
+
   it("classifies nearly every targeted slot in the pool", () => {
     // A ratchet, not a target: 98.6% when this was written (1,771 slots).
     // What's left is genuinely the board's call — a transform, an animated
