@@ -420,6 +420,7 @@ import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
+import _poolKrosanRestorer from "../pool/krosan-restorer.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
@@ -500,6 +501,7 @@ import _poolNimbusSwimmer from "../pool/nimbus-swimmer.js";
 import _poolNinthBridgePatrol from "../pool/ninth-bridge-patrol.js";
 import _poolNissaWorldwaker from "../pool/nissa-worldwaker.js";
 import _poolNissasZendikon from "../pool/nissas-zendikon.js";
+import _poolNobleStand from "../pool/noble-stand.js";
 import _poolNooseConstrictor from "../pool/noose-constrictor.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNucklavee from "../pool/nucklavee.js";
@@ -531,6 +533,7 @@ import _poolPaladinsShield from "../pool/paladins-shield.js";
 import _poolPaleoloth from "../pool/paleoloth.js";
 import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
+import _poolParallaxWave from "../pool/parallax-wave.js";
 import _poolParasiticStrix from "../pool/parasitic-strix.js";
 import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
@@ -613,6 +616,7 @@ import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
+import _poolSealOfFire from "../pool/seal-of-fire.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeismicAssault from "../pool/seismic-assault.js";
@@ -642,6 +646,7 @@ import _poolSireOfTheStorm from "../pool/sire-of-the-storm.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
 import _poolSkyfireKirin from "../pool/skyfire-kirin.js";
+import _poolSkyshroudBehemoth from "../pool/skyshroud-behemoth.js";
 import _poolSkyswimmerKoi from "../pool/skyswimmer-koi.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
 import _poolSleepWithTheFishes from "../pool/sleep-with-the-fishes.js";
@@ -679,6 +684,7 @@ import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
 import _poolStrengthOfCedars from "../pool/strength-of-cedars.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
+import _poolStrongholdBiologist from "../pool/stronghold-biologist.js";
 import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
 import _poolSummonUndead from "../pool/summon-undead.js";
@@ -1256,6 +1262,7 @@ const shard: CardShard = {
     _poolKotoriPilotProdigy,
     _poolKrarkClanIronworks,
     _poolKrosanGrip,
+    _poolKrosanRestorer,
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
     _poolLanternOfTheLost,
@@ -1336,6 +1343,7 @@ const shard: CardShard = {
     _poolNinthBridgePatrol,
     _poolNissaWorldwaker,
     _poolNissasZendikon,
+    _poolNobleStand,
     _poolNooseConstrictor,
     _poolNoxiousGearhulk,
     _poolNucklavee,
@@ -1367,6 +1375,7 @@ const shard: CardShard = {
     _poolPaleoloth,
     _poolPantherPounce,
     _poolParadoxicalOutcome,
+    _poolParallaxWave,
     _poolParasiticStrix,
     _poolParcelbeast,
     _poolPatriarsSeal,
@@ -1449,6 +1458,7 @@ const shard: CardShard = {
     _poolScornfulAetherLich,
     _poolScrapMastery,
     _poolSeaGateLoremaster,
+    _poolSealOfFire,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
     _poolSeismicAssault,
@@ -1478,6 +1488,7 @@ const shard: CardShard = {
     _poolSkirsdagCultist,
     _poolSkyclavePlunder,
     _poolSkyfireKirin,
+    _poolSkyshroudBehemoth,
     _poolSkyswimmerKoi,
     _poolSlaughterSpecialist,
     _poolSleepWithTheFishes,
@@ -1515,6 +1526,7 @@ const shard: CardShard = {
     _poolStranglerootGeist,
     _poolStrengthOfCedars,
     _poolStrokeOfGenius,
+    _poolStrongholdBiologist,
     _poolSuddenSpinnerets,
     _poolSummerBloom,
     _poolSummonUndead,

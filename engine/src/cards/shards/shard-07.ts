@@ -87,9 +87,11 @@ import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
 import _poolBurrentonBombardier from "../pool/burrenton-bombardier.js";
+import _poolCabalTorturer from "../pool/cabal-torturer.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
+import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
 import _poolCatharsis from "../pool/catharsis.js";
@@ -109,6 +111,7 @@ import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
 import _poolChroniclerOfHeroes from "../pool/chronicler-of-heroes.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
+import _poolCleansingMeditation from "../pool/cleansing-meditation.js";
 import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCoastalWizard from "../pool/coastal-wizard.js";
@@ -305,6 +308,7 @@ import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
+import _poolHydromorphGull from "../pool/hydromorph-gull.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
@@ -603,6 +607,7 @@ import _poolSkyscribing from "../pool/skyscribing.js";
 import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
 import _poolSkyshroudPoacher from "../pool/skyshroud-poacher.js";
 import _poolSkywhalersShot from "../pool/skywhalers-shot.js";
+import _poolSkywingAven from "../pool/skywing-aven.js";
 import _poolSlimeMolding from "../pool/slime-molding.js";
 import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
 import _poolSmeltedChargebug from "../pool/smelted-chargebug.js";
@@ -714,6 +719,7 @@ import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
 import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
 import _poolVampiresKiss from "../pool/vampires-kiss.js";
+import _poolVengefulDreams from "../pool/vengeful-dreams.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
 import _poolVenomsHunger from "../pool/venoms-hunger.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
@@ -898,9 +904,11 @@ const shard: CardShard = {
     _poolBurnTheAccursed,
     _poolBurningAnger,
     _poolBurrentonBombardier,
+    _poolCabalTorturer,
     _poolCaligoSkinWitch,
     _poolCallTheScions,
     _poolCallousInspector,
+    _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
     _poolCatharsis,
@@ -920,6 +928,7 @@ const shard: CardShard = {
     _poolChroniclerOfHeroes,
     _poolCircuitMender,
     _poolCirithUngolPatrol,
+    _poolCleansingMeditation,
     _poolClericOfLifesBond,
     _poolClockworkPercussionist,
     _poolCoastalWizard,
@@ -1116,6 +1125,7 @@ const shard: CardShard = {
     _poolHookhandMariner,
     _poolHydraBroodmaster,
     _poolHydroform,
+    _poolHydromorphGull,
     _poolHystericalBlindness,
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
@@ -1414,6 +1424,7 @@ const shard: CardShard = {
     _poolSkyshroudClaim,
     _poolSkyshroudPoacher,
     _poolSkywhalersShot,
+    _poolSkywingAven,
     _poolSlimeMolding,
     _poolSlimefootAndSquee,
     _poolSmeltedChargebug,
@@ -1525,6 +1536,7 @@ const shard: CardShard = {
     _poolValkyriorSkyrider,
     _poolValleyQuestcaller,
     _poolVampiresKiss,
+    _poolVengefulDreams,
     _poolVenomousHierophant,
     _poolVenomsHunger,
     _poolVenomsacLagac,

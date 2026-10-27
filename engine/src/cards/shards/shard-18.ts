@@ -137,6 +137,7 @@ import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
+import _poolDefenderEnVec from "../pool/defender-en-vec.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
@@ -437,6 +438,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOffBalance from "../pool/off-balance.js";
 import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
@@ -463,6 +465,7 @@ import _poolPhantomWings from "../pool/phantom-wings.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
+import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
@@ -490,6 +493,7 @@ import _poolRaisedByWolves from "../pool/raised-by-wolves.js";
 import _poolRakaSanctuary from "../pool/raka-sanctuary.js";
 import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
+import _poolRancidEarth from "../pool/rancid-earth.js";
 import _poolRattleblazeScarecrow from "../pool/rattleblaze-scarecrow.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazingSnidd from "../pool/razing-snidd.js";
@@ -913,6 +917,7 @@ const shard: CardShard = {
     _poolDeepGoblinSkulltaker,
     _poolDeepSlumberTitan,
     _poolDeeprootChampion,
+    _poolDefenderEnVec,
     _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDestructiveRevelry,
@@ -1213,6 +1218,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOffBalance,
     _poolOgreJailbreaker,
     _poolOjutaiSoulOfWinter,
     _poolOmenportVigilante,
@@ -1239,6 +1245,7 @@ const shard: CardShard = {
     _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,
     _poolPileOn,
+    _poolPitchstoneWall,
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
     _poolPlatedRootwalla,
@@ -1266,6 +1273,7 @@ const shard: CardShard = {
     _poolRakaSanctuary,
     _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
+    _poolRancidEarth,
     _poolRattleblazeScarecrow,
     _poolRavenousBaboons,
     _poolRazingSnidd,

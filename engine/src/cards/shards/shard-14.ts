@@ -49,6 +49,7 @@ import _poolBalothCageTrap from "../pool/baloth-cage-trap.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
 import _poolBanishmentDecree from "../pool/banishment-decree.js";
 import _poolBantSojourners from "../pool/bant-sojourners.js";
+import _poolBarbarianOutcast from "../pool/barbarian-outcast.js";
 import _poolBardClass from "../pool/bard-class.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
@@ -641,6 +642,7 @@ import _poolSplendidAgony from "../pool/splendid-agony.js";
 import _poolSpreadingAlgae from "../pool/spreading-algae.js";
 import _poolSpreadingFlames from "../pool/spreading-flames.js";
 import _poolStabWound from "../pool/stab-wound.js";
+import _poolStampedeDriver from "../pool/stampede-driver.js";
 import _poolSternMentor from "../pool/stern-mentor.js";
 import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStingingShot from "../pool/stinging-shot.js";
@@ -840,6 +842,7 @@ const shard: CardShard = {
     _poolBanishFromEdoras,
     _poolBanishmentDecree,
     _poolBantSojourners,
+    _poolBarbarianOutcast,
     _poolBardClass,
     _poolBarkOfDoran,
     _poolBarrageOfBoulders,
@@ -1432,6 +1435,7 @@ const shard: CardShard = {
     _poolSpreadingAlgae,
     _poolSpreadingFlames,
     _poolStabWound,
+    _poolStampedeDriver,
     _poolSternMentor,
     _poolStingingHivemaster,
     _poolStingingShot,

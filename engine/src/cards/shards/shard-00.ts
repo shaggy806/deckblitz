@@ -466,6 +466,7 @@ import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPitFight from "../pool/pit-fight.js";
+import _poolPlagueWitch from "../pool/plague-witch.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -1263,6 +1264,7 @@ const shard: CardShard = {
     _poolPipBoy3000,
     _poolPippinsBravery,
     _poolPitFight,
+    _poolPlagueWitch,
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,

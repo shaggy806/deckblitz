@@ -116,6 +116,7 @@ import _poolCanopyVista from "../pool/canopy-vista.js";
 import _poolCarnifexDemon from "../pool/carnifex-demon.js";
 import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
+import _poolCentaurChieftain from "../pool/centaur-chieftain.js";
 import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
@@ -378,6 +379,8 @@ import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
 import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
+import _poolLaccolithTitan from "../pool/laccolith-titan.js";
+import _poolLaccolithWhelp from "../pool/laccolith-whelp.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLavakinBrawler from "../pool/lavakin-brawler.js";
@@ -744,6 +747,7 @@ import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
 import _poolTrustedAdvisor from "../pool/trusted-advisor.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
+import _poolTurbulentDreams from "../pool/turbulent-dreams.js";
 import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
@@ -945,6 +949,7 @@ const shard: CardShard = {
     _poolCarnifexDemon,
     _poolCaseOfTheRansackedLab,
     _poolCemeteryGate,
+    _poolCentaurChieftain,
     _poolChainAssassination,
     _poolChainDevil,
     _poolChainwebAracnir,
@@ -1207,6 +1212,8 @@ const shard: CardShard = {
     _poolKruinStriker,
     _poolKyrenFlamewright,
     _poolLabyrinthOfSkophos,
+    _poolLaccolithTitan,
+    _poolLaccolithWhelp,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLavakinBrawler,
@@ -1573,6 +1580,7 @@ const shard: CardShard = {
     _poolTrostaniDiscordant,
     _poolTrustedAdvisor,
     _poolTrystanPenitentCuller,
+    _poolTurbulentDreams,
     _poolTwiddle,
     _poolTwinbladePaladin,
     _poolTwistedFealty,

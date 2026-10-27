@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAcceleratedMutation from "../pool/accelerated-mutation.js";
+import _poolAcornHarvest from "../pool/acorn-harvest.js";
 import _poolAerieOuphes from "../pool/aerie-ouphes.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
@@ -77,6 +78,7 @@ import _poolBloodmarkMentor from "../pool/bloodmark-mentor.js";
 import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
 import _poolBonehoard from "../pool/bonehoard.js";
+import _poolBoneshardSlasher from "../pool/boneshard-slasher.js";
 import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
@@ -218,6 +220,7 @@ import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFaithUnbroken from "../pool/faith-unbroken.js";
 import _poolFalconerAdept from "../pool/falconer-adept.js";
 import _poolFalkenrathAristocrat from "../pool/falkenrath-aristocrat.js";
+import _poolFalseMemories from "../pool/false-memories.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFanaticalFirebrand from "../pool/fanatical-firebrand.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
@@ -479,6 +482,7 @@ import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
 import _poolOrcishCaptain from "../pool/orcish-captain.js";
+import _poolOrganGrinder from "../pool/organ-grinder.js";
 import _poolOrimsPrayer from "../pool/orims-prayer.js";
 import _poolOrmendahlProfanePrince from "../pool/ormendahl-profane-prince.js";
 import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
@@ -486,6 +490,7 @@ import _poolOuroboroid from "../pool/ouroboroid.js";
 import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
+import _poolParallaxDementia from "../pool/parallax-dementia.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
 import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
@@ -796,6 +801,7 @@ const shard: CardShard = {
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
     _poolAcceleratedMutation,
+    _poolAcornHarvest,
     _poolAerieOuphes,
     _poolAetherGust,
     _poolAetherHub,
@@ -867,6 +873,7 @@ const shard: CardShard = {
     _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
     _poolBonehoard,
+    _poolBoneshardSlasher,
     _poolBoomerang,
     _poolBorderPatrol,
     _poolBorosGuildmage,
@@ -1008,6 +1015,7 @@ const shard: CardShard = {
     _poolFaithUnbroken,
     _poolFalconerAdept,
     _poolFalkenrathAristocrat,
+    _poolFalseMemories,
     _poolFanaticOfRhonas,
     _poolFanaticalFirebrand,
     _poolFaramirStewardOfGondor,
@@ -1269,6 +1277,7 @@ const shard: CardShard = {
     _poolOneWithTheMachine,
     _poolOpalineUnicorn,
     _poolOrcishCaptain,
+    _poolOrganGrinder,
     _poolOrimsPrayer,
     _poolOrmendahlProfanePrince,
     _poolOrzhovBasilica,
@@ -1276,6 +1285,7 @@ const shard: CardShard = {
     _poolPacesetterParagon,
     _poolParadiseMantle,
     _poolParadoxShaper,
+    _poolParallaxDementia,
     _poolParameciaColoniex,
     _poolParanoidDelusions,
     _poolPathOfTheAnimist,

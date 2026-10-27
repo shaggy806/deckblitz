@@ -96,6 +96,7 @@ import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolClockworkHydra from "../pool/clockwork-hydra.js";
 import _poolCocoon from "../pool/cocoon.js";
+import _poolCoilingWoodworm from "../pool/coiling-woodworm.js";
 import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
@@ -331,6 +332,7 @@ import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolIshiIshiAkkiCrackshot from "../pool/ishi-ishi-akki-crackshot.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
+import _poolJoltingMerfolk from "../pool/jolting-merfolk.js";
 import _poolJovialEvil from "../pool/jovial-evil.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
@@ -366,6 +368,7 @@ import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
 import _poolLandCap from "../pool/land-cap.js";
 import _poolLandscaperColos from "../pool/landscaper-colos.js";
+import _poolLastLaugh from "../pool/last-laugh.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
@@ -468,6 +471,7 @@ import _poolPlanarGate from "../pool/planar-gate.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
+import _poolPossessedBarbarian from "../pool/possessed-barbarian.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPreeminentCaptain from "../pool/preeminent-captain.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
@@ -871,6 +875,7 @@ const shard: CardShard = {
     _poolCleverConjurer,
     _poolClockworkHydra,
     _poolCocoon,
+    _poolCoilingWoodworm,
     _poolColossalHeroics,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
@@ -1106,6 +1111,7 @@ const shard: CardShard = {
     _poolIshiIshiAkkiCrackshot,
     _poolJenovaAncientCalamity,
     _poolJeongJeongTheDeserter,
+    _poolJoltingMerfolk,
     _poolJovialEvil,
     _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
@@ -1141,6 +1147,7 @@ const shard: CardShard = {
     _poolLance,
     _poolLandCap,
     _poolLandscaperColos,
+    _poolLastLaugh,
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
     _poolLavaDart,
@@ -1243,6 +1250,7 @@ const shard: CardShard = {
     _poolPlatedGeopede,
     _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
+    _poolPossessedBarbarian,
     _poolPowerstoneEngineer,
     _poolPreeminentCaptain,
     _poolPrideGuardian,

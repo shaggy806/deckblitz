@@ -415,6 +415,7 @@ import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
 import _poolLocthwainPaladin from "../pool/locthwain-paladin.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
 import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
+import _poolLonghornFirebeast from "../pool/longhorn-firebeast.js";
 import _poolLordMagnus from "../pool/lord-magnus.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
@@ -454,6 +455,7 @@ import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
+import _poolMortiphobia from "../pool/mortiphobia.js";
 import _poolMossMonster from "../pool/moss-monster.js";
 import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMudbrawlerCohort from "../pool/mudbrawler-cohort.js";
@@ -524,6 +526,7 @@ import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolReinterpret from "../pool/reinterpret.js";
+import _poolRejuvenationChamber from "../pool/rejuvenation-chamber.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
@@ -606,6 +609,7 @@ import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkyclawThrash from "../pool/skyclaw-thrash.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
+import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
@@ -1187,6 +1191,7 @@ const shard: CardShard = {
     _poolLocthwainPaladin,
     _poolLocthwainScorn,
     _poolLokiLordOfMisrule,
+    _poolLonghornFirebeast,
     _poolLordMagnus,
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
@@ -1226,6 +1231,7 @@ const shard: CardShard = {
     _poolMoltenPrimordial,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
+    _poolMortiphobia,
     _poolMossMonster,
     _poolMostWanted,
     _poolMudbrawlerCohort,
@@ -1296,6 +1302,7 @@ const shard: CardShard = {
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,
     _poolReinterpret,
+    _poolRejuvenationChamber,
     _poolRememberTheFallen,
     _poolRenegadeReaper,
     _poolRepelCalamity,
@@ -1378,6 +1385,7 @@ const shard: CardShard = {
     _poolSkyclawThrash,
     _poolSkycoachConductor,
     _poolSkyfirePhoenix,
+    _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
     _poolSnapcasterMage,
     _poolSolRing,
