@@ -156,9 +156,11 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
+import _poolDaruSpiritualist from "../pool/daru-spiritualist.js";
 import _poolDashHopes from "../pool/dash-hopes.js";
 import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
+import _poolDawnElemental from "../pool/dawn-elemental.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
@@ -393,6 +395,7 @@ import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMaximizeVelocity from "../pool/maximize-velocity.js";
+import _poolMercurialKite from "../pool/mercurial-kite.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
 import _poolMesmerizingDose from "../pool/mesmerizing-dose.js";
@@ -485,6 +488,7 @@ import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRabbleRouser from "../pool/rabble-rouser.js";
 import _poolRacersRing from "../pool/racers-ring.js";
 import _poolRafterDemon from "../pool/rafter-demon.js";
+import _poolRakavolver from "../pool/rakavolver.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
 import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
@@ -505,6 +509,7 @@ import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
+import _poolRiptideSurvivor from "../pool/riptide-survivor.js";
 import _poolRiverSerpent from "../pool/river-serpent.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
@@ -926,9 +931,11 @@ const shard: CardShard = {
     _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
+    _poolDaruSpiritualist,
     _poolDashHopes,
     _poolDauntlessRiverMarshal,
     _poolDavrielsShadowfugue,
+    _poolDawnElemental,
     _poolDaybreakCharger,
     _poolDeadbridgeChant,
     _poolDeadeyePlunderers,
@@ -1163,6 +1170,7 @@ const shard: CardShard = {
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMaximizeVelocity,
+    _poolMercurialKite,
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
     _poolMesmerizingDose,
@@ -1255,6 +1263,7 @@ const shard: CardShard = {
     _poolRabbleRouser,
     _poolRacersRing,
     _poolRafterDemon,
+    _poolRakavolver,
     _poolRampagingGrowth,
     _poolRanAndShaw,
     _poolRavenousRats,
@@ -1275,6 +1284,7 @@ const shard: CardShard = {
     _poolRilingDawnbreaker,
     _poolRiotSpikes,
     _poolRipjawRaptor,
+    _poolRiptideSurvivor,
     _poolRiverSerpent,
     _poolRiverchurnMonument,
     _poolRiverwalkTechnique,

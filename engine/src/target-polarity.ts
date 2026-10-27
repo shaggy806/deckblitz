@@ -177,7 +177,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "harm", MAJOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);
     // "Target creature you control deals damage" — the dealer is yours.
-    v.touch(n.from, "help", MINOR);
+    // Not when it deals that damage to its own controller (Traitor's Roar,
+    // Ana Battlemage): then the dealer is the opponent's.
+    const toOwnController = typeof n.from === "object" && n.from.target === n.toControllerOfTarget;
+    if (!toOwnController) v.touch(n.from, "help", MINOR);
   },
   "damage-divided-evenly": (n, v) => v.touch(n.from, "harm", MAJOR),
   "add-mana": none,

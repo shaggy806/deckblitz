@@ -26,6 +26,7 @@ import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
+import _poolAnaBattlemage from "../pool/ana-battlemage.js";
 import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
 import _poolAngelicOverseer from "../pool/angelic-overseer.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
@@ -159,6 +160,7 @@ import _poolDetentionChariot from "../pool/detention-chariot.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
 import _poolDirty from "../pool/dirty.js";
+import _poolDispersalShield from "../pool/dispersal-shield.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
@@ -397,6 +399,7 @@ import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMorinfen from "../pool/morinfen.js";
 import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
+import _poolMournfulZombie from "../pool/mournful-zombie.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolMunitionsExpert from "../pool/munitions-expert.js";
@@ -713,6 +716,7 @@ import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
+import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
@@ -735,6 +739,7 @@ import _poolZhugeJinWuStrategist from "../pool/zhuge-jin-wu-strategist.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
+import _tokensAngelTokenBlack33Flying from "../tokens/angel-token-black-3-3-flying.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
@@ -779,6 +784,7 @@ const shard: CardShard = {
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
     _poolAmuletOfVigor,
+    _poolAnaBattlemage,
     _poolAngelOfRenewal,
     _poolAngelicOverseer,
     _poolAngelicSleuth,
@@ -912,6 +918,7 @@ const shard: CardShard = {
     _poolDevoutMonk,
     _poolDigThroughTime,
     _poolDirty,
+    _poolDispersalShield,
     _poolDisruptiveStudent,
     _poolDocksideChef,
     _poolDonatellosTechnique,
@@ -1150,6 +1157,7 @@ const shard: CardShard = {
     _poolMorinfen,
     _poolMorkrutNecropod,
     _poolMosscoatGoriak,
+    _poolMournfulZombie,
     _poolMouserFoundry,
     _poolMultiversalIncursion,
     _poolMunitionsExpert,
@@ -1466,6 +1474,7 @@ const shard: CardShard = {
     _poolWalkTheAeons,
     _poolWallOfStone,
     _poolWarriorsHonor,
+    _poolWastescapeBattlemage,
     _poolWaxenShapethief,
     _poolWayOfTheWarlord,
     _poolWaywardServant,
@@ -1490,6 +1499,7 @@ const shard: CardShard = {
     _poolZodiacRabbit,
   ],
   tokens: [
+    _tokensAngelTokenBlack33Flying,
     _tokensClownRobotToken,
     _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,

@@ -139,6 +139,7 @@ import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
 import _poolDauthiGhoul from "../pool/dauthi-ghoul.js";
 import _poolDauthiWarlord from "../pool/dauthi-warlord.js";
 import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
+import _poolDay from "../pool/day.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
@@ -160,6 +161,7 @@ import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-plann
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDownDirty from "../pool/down-dirty.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
+import _poolDragonFangs from "../pool/dragon-fangs.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
 import _poolDramaticRescue from "../pool/dramatic-rescue.js";
 import _poolDriftgloomCoyote from "../pool/driftgloom-coyote.js";
@@ -916,6 +918,7 @@ const shard: CardShard = {
     _poolDauthiGhoul,
     _poolDauthiWarlord,
     _poolDawnstrikeVanguard,
+    _poolDay,
     _poolDazzlingDenial,
     _poolDebrisBeetle,
     _poolDecoctionModule,
@@ -937,6 +940,7 @@ const shard: CardShard = {
     _poolDouserOfLights,
     _poolDownDirty,
     _poolDrafnaFounderOfLatNam,
+    _poolDragonFangs,
     _poolDragonsRageChanneler,
     _poolDramaticRescue,
     _poolDriftgloomCoyote,

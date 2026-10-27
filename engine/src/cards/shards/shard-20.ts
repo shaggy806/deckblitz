@@ -171,6 +171,7 @@ import _poolDeadlyInsect from "../pool/deadly-insect.js";
 import _poolDeadlyPrecision from "../pool/deadly-precision.js";
 import _poolDeadlyRollick from "../pool/deadly-rollick.js";
 import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
+import _poolDeathMutation from "../pool/death-mutation.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
@@ -544,6 +545,7 @@ import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
 import _poolRevelationOfPower from "../pool/revelation-of-power.js";
 import _poolReverentHowl from "../pool/reverent-howl.js";
 import _poolReverentHunter from "../pool/reverent-hunter.js";
+import _poolRewardTheFaithful from "../pool/reward-the-faithful.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
@@ -989,6 +991,7 @@ const shard: CardShard = {
     _poolDeadlyPrecision,
     _poolDeadlyRollick,
     _poolDeadshotMinotaur,
+    _poolDeathMutation,
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDecimatorOfTheProvinces,
@@ -1362,6 +1365,7 @@ const shard: CardShard = {
     _poolRevelationOfPower,
     _poolReverentHowl,
     _poolReverentHunter,
+    _poolRewardTheFaithful,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
     _poolRiseToGlory,

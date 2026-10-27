@@ -103,6 +103,7 @@ import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
 import _poolBust from "../pool/bust.js";
 import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
+import _poolCabalConditioning from "../pool/cabal-conditioning.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCalmingLicid from "../pool/calming-licid.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
@@ -280,6 +281,7 @@ import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
+import _poolHauntedAngel from "../pool/haunted-angel.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
@@ -453,6 +455,7 @@ import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js";
+import _poolOrder from "../pool/order.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
@@ -492,6 +495,7 @@ import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
 import _poolPython from "../pool/python.js";
 import _poolQuicksilverGargantuan from "../pool/quicksilver-gargantuan.js";
 import _poolQuicksmithRebel from "../pool/quicksmith-rebel.js";
+import _poolRainOfBlades from "../pool/rain-of-blades.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
@@ -872,6 +876,7 @@ const shard: CardShard = {
     _poolBushyBodyguard,
     _poolBust,
     _poolButterburBreeInnkeeper,
+    _poolCabalConditioning,
     _poolCabalInitiate,
     _poolCalmingLicid,
     _poolCapashenStandard,
@@ -1049,6 +1054,7 @@ const shard: CardShard = {
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
     _poolHarvestWurm,
+    _poolHauntedAngel,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
@@ -1222,6 +1228,7 @@ const shard: CardShard = {
     _poolOmenOfTheForge,
     _poolOminousSphinx,
     _poolOrderOfTheGoldenCricket,
+    _poolOrder,
     _poolOrdruunMentor,
     _poolOrneryGoblin,
     _poolOutCold,
@@ -1261,6 +1268,7 @@ const shard: CardShard = {
     _poolPython,
     _poolQuicksilverGargantuan,
     _poolQuicksmithRebel,
+    _poolRainOfBlades,
     _poolRainOfFilth,
     _poolRaiseThePalisade,
     _poolRakingClaws,

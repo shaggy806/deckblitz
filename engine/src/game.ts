@@ -763,6 +763,14 @@ const UNLEASH_OPTIONS: readonly string[] = [RIOT_COUNTER, "No counter"];
 /** A bestow cast's mana purpose (rule 702.103b): the spell is an Aura, not a
  * creature, so a restriction reads it bestowed — "spend this mana only to
  * cast a creature spell" can't pay for it. */
+/** The mana a kicked cast adds for its kicker (rule 702.33): a multikicker
+ * cost `n` times over (702.33c), or for a card with two kicker costs
+ * (`kicker.second`, 702.33b) the first (`n` 1), the second (2) or both (3). */
+function kickerCostPaid(kicker: NonNullable<CardDefinition["kicker"]>, n: number): string {
+  if (kicker.second === undefined) return kicker.cost.repeat(n);
+  return ((n & 1) !== 0 ? kicker.cost : "") + ((n & 2) !== 0 ? kicker.second : "");
+}
+
 function bestowPurpose(def: CardDefinition, overload: boolean | undefined): { readonly bestow?: true } {
   return overload === true && def.overload?.keyword === "bestow" ? { bestow: true } : {};
 }
@@ -2987,6 +2995,11 @@ export class Game {
     // all; the loop below drops each count it can't afford, and skips the
     // counts above one that failed.
     const kickedVariants = (free: boolean) => {
+      // Two kicker costs (rule 702.33b): the first, the second, or both —
+      // `kickCount` names which (1, 2, 3), not how many times.
+      if (def.kicker?.second !== undefined) {
+        return [1, 2, 3].map((kickCount) => ({ kicked: true, overload: false, free, kickCount }));
+      }
       if (def.kicker?.multi !== true) return [{ kicked: true, overload: false, free }];
       const per = Math.max(1, manaValue(parseManaCost(def.kicker.cost)));
       const manaCap =
@@ -3123,7 +3136,7 @@ export class Game {
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
       const kickKey = `${free}|${altCost}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}`;
-      if (kickCount !== undefined && kickCount > 1 && kickFailed.has(kickKey)) continue;
+      if (kickCount !== undefined && kickCount > 1 && def.kicker?.second === undefined && kickFailed.has(kickKey)) continue;
       const offeredBefore = out.length;
       // A prototyped variant is worked out as the prototyped spell it is: its
       // prototype cost, colors and size (rule 718 — the rulings).
@@ -3435,11 +3448,11 @@ export class Game {
       const costBeforeWaterbend = alternative !== null
         ? alternative.mana
         : free
-        ? kicked && def.kicker !== null ? "{0}" + def.kicker.cost.repeat(kickCount ?? 1) : "{0}"
+        ? kicked && def.kicker !== null ? "{0}" + kickerCostPaid(def.kicker, kickCount ?? 1) : "{0}"
         : overload && def.overload !== null
           ? def.overload.cost
           : kicked && def.kicker !== null && paidBase !== null
-            ? paidBase + def.kicker.cost.repeat(kickCount ?? 1) + (offspring === true ? (offspringCost ?? "") : "")
+            ? paidBase + kickerCostPaid(def.kicker, kickCount ?? 1) + (offspring === true ? (offspringCost ?? "") : "")
             : paidBase !== null && offspring === true
               ? paidBase + (offspringCost ?? "")
               : paidBase;
@@ -3527,7 +3540,7 @@ export class Game {
                     ? def.kicker.behold.text
                     : def.kicker.also !== undefined
                       ? def.kicker.also.text
-                      : def.kicker.cost.repeat(kickCount ?? 1),
+                      : kickerCostPaid(def.kicker, kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
@@ -10990,7 +11003,7 @@ export class Game {
     const kickedCost =
       !kicked || def.kicker === null || withOption === null
         ? withOption
-        : withOption + def.kicker.cost.repeat(kicked === true ? 1 : kicked);
+        : withOption + kickerCostPaid(def.kicker, kicked === true ? 1 : kicked);
     const withKicker = kickedCost === null ? null : kickedCost + escalate;
     // Granted offspring (Zinnia) is an additional cost of its own beside any
     // kicker or printed offspring (rule 702.175b), so it concatenates too.
@@ -11675,7 +11688,8 @@ export class Game {
       return `${player} has nothing to behold ${flashbackBehold.text} for ${def.name}'s flashback`;
     }
     if (typeof kicked === "number" && kicked > 1 && def.kicker?.multi !== true) {
-      return `${def.name}'s kicker can be paid only once`;
+      // Two kicker costs: 2 is the second alone, 3 both (rule 702.33b).
+      if (def.kicker?.second === undefined || kicked > 3) return `${def.name}'s kicker can be paid only once`;
     }
     if (offspring && (free || overload || altCost || this.grantedOffspringCost(cardId, player) === null)) {
       return `${def.name} has no offspring to pay for this way`;
@@ -13156,6 +13170,12 @@ export class Game {
       // Multikicker: how many times (rule 702.33c), for "for each time it was
       // kicked".
       if (def.kicker?.multi === true) object.timesKicked = kicked === true ? 1 : kicked;
+      // Two kicker costs: which were paid, and so how many times (702.33d).
+      if (def.kicker?.second !== undefined) {
+        const which = kicked === true ? 1 : kicked;
+        object.kickedWith = which;
+        object.timesKicked = which === 3 ? 2 : 1;
+      }
     }
     if (offspring) object.offspringGrantPaid = true;
     // Splice (rule 702.47a): the spliced cards are revealed and stay in hand;
@@ -27214,6 +27234,7 @@ export class Game {
       ...(object.division !== undefined ? { division: [...object.division] } : {}),
       ...(object.kicked === true ? { kicked: true } : {}),
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
+      ...(object.kickedWith !== undefined ? { kickedWith: object.kickedWith } : {}),
       ...(object.spliced !== undefined ? { spliced: [...object.spliced] } : {}),
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.bestowed === true ? { bestowed: true } : {}),
@@ -27285,6 +27306,7 @@ export class Game {
       ...(spell.division !== undefined ? { division: [...spell.division] } : {}),
       ...(spell.kicked === true ? { kicked: true } : {}),
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
+      ...(spell.kickedWith !== undefined ? { kickedWith: spell.kickedWith } : {}),
       // A copy has what was spliced onto the original (the splice rulings).
       ...(spell.spliced !== undefined ? { spliced: [...spell.spliced] } : {}),
       ...(spell.overloaded === true ? { overloaded: true } : {}),
@@ -36720,6 +36742,7 @@ export class Game {
       ...(object.enteredProwl === true ? { enteredProwl: true } : {}),
       ...(object.tributeUnpaid === true ? { tributeUnpaid: true as const } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
+      ...(object.enteredKickedWith !== undefined ? { enteredKickedWith: object.enteredKickedWith } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
@@ -37299,6 +37322,7 @@ export class Game {
     const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
     const enteringProwl = object.zone === "stack" && to === "battlefield" && object.prowlPaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
+    const enteringKickedWith = enteringKicked ? object.kickedWith : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
     const enteringConvokedBy = object.zone === "stack" && to === "battlefield" ? object.convokedBy : undefined;
@@ -37585,6 +37609,7 @@ export class Game {
     object.division = undefined;
     object.kicked = undefined;
     object.timesKicked = undefined;
+    object.kickedWith = undefined;
     object.spliced = undefined;
     object.offspringGrantPaid = undefined;
     object.giftTo = undefined;
@@ -37605,6 +37630,7 @@ export class Game {
     else delete object.enteredProwl;
     delete object.tributeUnpaid;
     object.enteredTimesKicked = enteringTimesKicked;
+    object.enteredKickedWith = enteringKickedWith;
     object.enteredConvokedBy = enteringConvokedBy;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
     delete object.phyrexianPaidWithLife;

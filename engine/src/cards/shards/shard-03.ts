@@ -118,6 +118,7 @@ import _poolDeathbonnetHulk from "../pool/deathbonnet-hulk.js";
 import _poolDeathsDuet from "../pool/deaths-duet.js";
 import _poolDeceiverExarch from "../pool/deceiver-exarch.js";
 import _poolDecimate from "../pool/decimate.js";
+import _poolDecreeOfJustice from "../pool/decree-of-justice.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
 import _poolDefendTheCampus from "../pool/defend-the-campus.js";
 import _poolDefenderOfLaw from "../pool/defender-of-law.js";
@@ -406,6 +407,7 @@ import _poolOozeGarden from "../pool/ooze-garden.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
+import _poolOrderChaos from "../pool/order-chaos.js";
 import _poolOrosTheAvenger from "../pool/oros-the-avenger.js";
 import _poolOvercome from "../pool/overcome.js";
 import _poolPalianoVanguard from "../pool/paliano-vanguard.js";
@@ -661,6 +663,7 @@ import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
 import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWidowsBite from "../pool/widows-bite.js";
 import _poolWingIt from "../pool/wing-it.js";
+import _poolWingShards from "../pool/wing-shards.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWingcrafter from "../pool/wingcrafter.js";
 import _poolWingspanMentor from "../pool/wingspan-mentor.js";
@@ -815,6 +818,7 @@ const shard: CardShard = {
     _poolDeathsDuet,
     _poolDeceiverExarch,
     _poolDecimate,
+    _poolDecreeOfJustice,
     _poolDeeptreadMerrow,
     _poolDefendTheCampus,
     _poolDefenderOfLaw,
@@ -1103,6 +1107,7 @@ const shard: CardShard = {
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,
+    _poolOrderChaos,
     _poolOrosTheAvenger,
     _poolOvercome,
     _poolPalianoVanguard,
@@ -1358,6 +1363,7 @@ const shard: CardShard = {
     _poolWiccanRisingMagician,
     _poolWidowsBite,
     _poolWingIt,
+    _poolWingShards,
     _poolWingbladeDisciple,
     _poolWingcrafter,
     _poolWingspanMentor,

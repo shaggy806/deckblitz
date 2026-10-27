@@ -141,6 +141,10 @@ export interface GameObject {
    * the way `enteredKicked` is, for "enters with a charge counter on it for
    * each time it was kicked" (Everflowing Chalice). */
   enteredTimesKicked?: number;
+  /** Which of its two kicker costs its spell was kicked with (`kickedWith`),
+   * carried across the stack-to-battlefield move the way `enteredTimesKicked`
+   * is — "if it was kicked with its {1}{U} kicker" (Anavolver). */
+  enteredKickedWith?: number;
   /** The creatures that convoked its spell (`convokedBy`), carried across
    * the stack-to-battlefield move the way `enteredKicked` is — "for each
    * creature that convoked it" (Ancient Imperiosaur), "each creature that
@@ -835,6 +839,10 @@ export interface GameObject {
    * (rule 702.33c–d) — set with `kicked` on a multikicker spell, cleared
    * with it. */
   timesKicked?: number;
+  /** Which of a two-kicker card's kicker costs were paid as this spell was
+   * cast (rule 702.33b, f — `kicker.second`): 1 the first, 2 the second, 3
+   * both. Set with `kicked`, cleared with it; `timesKicked` counts them. */
+  kickedWith?: number;
   /** A granted offspring cost was paid as this spell was cast (Zinnia): the
    * permanent it becomes gets offspring's trigger as it enters. Cleared on
    * any zone change after that. */
@@ -1301,6 +1309,7 @@ export interface SpellSnapshot {
   readonly division?: readonly number[];
   readonly kicked?: boolean;
   readonly timesKicked?: number;
+  readonly kickedWith?: number;
   readonly spliced?: readonly string[];
   readonly overloaded?: boolean;
   readonly bestowed?: boolean;
@@ -1630,6 +1639,9 @@ export interface LastKnownInfo {
    * `enteredTimesKicked`, so squad's copies are still made once it has left
    * (rule 702.157a). */
   readonly enteredTimesKicked?: number;
+  /** `enteredKickedWith`, so "if it was kicked with its [A] kicker" still
+   * answers once it has left. */
+  readonly enteredKickedWith?: number;
   /** Who its spell's gift was promised to — `enteredGiftTo` — so the gift
    * is still given once it has left. */
   readonly enteredGiftTo?: PlayerId;

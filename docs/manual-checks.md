@@ -5541,3 +5541,9 @@ engine terms. A second thing to check is a second test.
 ### Matsu-Tribe Sniper: the flier it damages stays tapped
 - **Do:** Tap Matsu-Tribe Sniper to deal 1 damage to the opponent's Serra Angel, then pass the turn.
 - **Expect:** The Angel is tapped as soon as the trigger resolves, and it stays tapped through the opponent's untap step (it still has 1 damage marked until the turn ends).
+
+## Two kicker costs (2026-10-27, Apocalypse)
+
+### Anavolver: kick it with either kicker, or both
+- **Do:** Click Anavolver in your hand.
+- **Expect:** Four ways to cast it: unkicked, and kicked for {1}{U}, for {B} and for {1}{U}{B}. Cast it with {1}{U}{B}: it enters as a 6/6 with flying and "Pay 3 life: Regenerate this creature."

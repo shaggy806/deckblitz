@@ -917,6 +917,14 @@ function evalStaticCondition(
       );
     }
     case "self-kicked":
+      // Which of two kicker costs (rule 702.33f): the stack's `kickedWith`
+      // (cleared as it leaves the stack), or `enteredKickedWith` once it has
+      // entered (or as it last existed).
+      if (condition.with !== undefined) {
+        const mask = source.kickedWith ?? source.enteredKickedWith ?? opts.sourceLastKnown?.enteredKickedWith ?? 0;
+        const want = condition.with === "first" ? 1 : condition.with === "second" ? 2 : 3;
+        return (mask & want) === want;
+      }
       // On the battlefield it's `enteredKicked` (the stack flag is cleared by
       // the move that put the permanent here); `kicked` still answers for a
       // source that is itself on the stack.

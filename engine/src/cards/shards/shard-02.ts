@@ -158,6 +158,7 @@ import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
+import _poolDecreeOfSavagery from "../pool/decree-of-savagery.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
@@ -178,6 +179,7 @@ import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDokaiWeaverOfLife from "../pool/dokai-weaver-of-life.js";
 import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
+import _poolDragonArch from "../pool/dragon-arch.js";
 import _poolDragonMask from "../pool/dragon-mask.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
@@ -237,6 +239,7 @@ import _poolFlux from "../pool/flux.js";
 import _poolFly from "../pool/fly.js";
 import _poolFogElemental from "../pool/fog-elemental.js";
 import _poolForbiddenLore from "../pool/forbidden-lore.js";
+import _poolForceBubble from "../pool/force-bubble.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolForgeDevil from "../pool/forge-devil.js";
@@ -451,6 +454,7 @@ import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOrbweaverKumo from "../pool/orbweaver-kumo.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
+import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPaleBears from "../pool/pale-bears.js";
@@ -458,6 +462,7 @@ import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
+import _poolPenumbraWurm from "../pool/penumbra-wurm.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhalanxLeader from "../pool/phalanx-leader.js";
@@ -912,6 +917,7 @@ const shard: CardShard = {
     _poolDeathforgeShaman,
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
+    _poolDecreeOfSavagery,
     _poolDeerDog,
     _poolDefiantStrike,
     _poolDefiantSurvivor,
@@ -932,6 +938,7 @@ const shard: CardShard = {
     _poolDivinersPortent,
     _poolDokaiWeaverOfLife,
     _poolDoranTheSiegeTower,
+    _poolDragonArch,
     _poolDragonMask,
     _poolDragonbornLooter,
     _poolDragonsHoard,
@@ -991,6 +998,7 @@ const shard: CardShard = {
     _poolFly,
     _poolFogElemental,
     _poolForbiddenLore,
+    _poolForceBubble,
     _poolForceSpike,
     _poolForcefulDenial,
     _poolForgeDevil,
@@ -1205,6 +1213,7 @@ const shard: CardShard = {
     _poolOpenTheGates,
     _poolOrbweaverKumo,
     _poolOriginOfTheAvengers,
+    _poolOrimsThunder,
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
     _poolPaleBears,
@@ -1212,6 +1221,7 @@ const shard: CardShard = {
     _poolPavelMaliki,
     _poolPearlDragon,
     _poolPeculiarLighthouse,
+    _poolPenumbraWurm,
     _poolPerilousVault,
     _poolPewterGolem,
     _poolPhalanxLeader,

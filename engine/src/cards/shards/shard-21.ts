@@ -490,6 +490,7 @@ import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
+import _poolPyrostaticPillar from "../pool/pyrostatic-pillar.js";
 import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
 import _poolQuicksmithSpy from "../pool/quicksmith-spy.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
@@ -716,6 +717,7 @@ import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeiStrikeForce from "../pool/wei-strike-force.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
+import _poolWhirlpoolRider from "../pool/whirlpool-rider.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
@@ -1243,6 +1245,7 @@ const shard: CardShard = {
     _poolPullFromTheDeep,
     _poolPyreHound,
     _poolPyroclasticHellion,
+    _poolPyrostaticPillar,
     _poolQuickDrawDagger,
     _poolQuicksmithSpy,
     _poolRainOfRevelation,
@@ -1469,6 +1472,7 @@ const shard: CardShard = {
     _poolWeiStrikeForce,
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
+    _poolWhirlpoolRider,
     _poolWhiskerquillScribe,
     _poolWhiteDragon,
     _poolWillOfTheSultai,

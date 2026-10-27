@@ -264,6 +264,7 @@ import _poolFrostling from "../pool/frostling.js";
 import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
+import _poolGaeasBalance from "../pool/gaeas-balance.js";
 import _poolGaleForce from "../pool/gale-force.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGalvanoth from "../pool/galvanoth.js";
@@ -397,6 +398,7 @@ import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLairDelve from "../pool/lair-delve.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
+import _poolLastStand from "../pool/last-stand.js";
 import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
@@ -495,6 +497,7 @@ import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
+import _poolPlanarDespair from "../pool/planar-despair.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
 import _poolPracticedTactics from "../pool/practiced-tactics.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
@@ -616,6 +619,7 @@ import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolSporolothAncient from "../pool/sporoloth-ancient.js";
+import _poolSqueesEmbrace from "../pool/squees-embrace.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
@@ -1028,6 +1032,7 @@ const shard: CardShard = {
     _poolFruitOfTheFirstTree,
     _poolFungalBloom,
     _poolGadgetTechnician,
+    _poolGaeasBalance,
     _poolGaleForce,
     _poolGaleSwooper,
     _poolGalvanoth,
@@ -1161,6 +1166,7 @@ const shard: CardShard = {
     _poolKravenProudPredator,
     _poolLairDelve,
     _poolLancerSliver,
+    _poolLastStand,
     _poolLaunchTheFleet,
     _poolLeapingMaster,
     _poolLeyDruid,
@@ -1259,6 +1265,7 @@ const shard: CardShard = {
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
+    _poolPlanarDespair,
     _poolPracticalResearch,
     _poolPracticedTactics,
     _poolPrimoTheUnbounded,
@@ -1380,6 +1387,7 @@ const shard: CardShard = {
     _poolSpiritSummoning,
     _poolSpitefulBully,
     _poolSporolothAncient,
+    _poolSqueesEmbrace,
     _poolStarOfExtinction,
     _poolStatusStatue,
     _poolStealerOfSecrets,

@@ -148,6 +148,7 @@ import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
+import _poolDecreeOfSilence from "../pool/decree-of-silence.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
@@ -245,6 +246,7 @@ import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
+import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
@@ -493,6 +495,7 @@ import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
+import _poolQuicksilverDagger from "../pool/quicksilver-dagger.js";
 import _poolRabidWolverines from "../pool/rabid-wolverines.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
@@ -733,6 +736,7 @@ import _poolWoodlandDruid from "../pool/woodland-druid.js";
 import _poolWoodlandWeavemaster from "../pool/woodland-weavemaster.js";
 import _poolWretchedBanquet from "../pool/wretched-banquet.js";
 import _poolWrongTurn from "../pool/wrong-turn.js";
+import _poolXantidSwarm from "../pool/xantid-swarm.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
@@ -918,6 +922,7 @@ const shard: CardShard = {
     _poolDeceptiveLandscape,
     _poolDeclareDominance,
     _poolDecoyPloy,
+    _poolDecreeOfSilence,
     _poolDeepfathomSkulker,
     _poolDetonate,
     _poolDevotedPaladin,
@@ -1015,6 +1020,7 @@ const shard: CardShard = {
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
     _poolGenesisHydra,
+    _poolGerrardsVerdict,
     _poolGhostLitWarder,
     _poolGiantGrowth,
     _poolGideonsBattleCry,
@@ -1263,6 +1269,7 @@ const shard: CardShard = {
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
     _poolQuickStudy,
+    _poolQuicksilverDagger,
     _poolRabidWolverines,
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,
@@ -1503,6 +1510,7 @@ const shard: CardShard = {
     _poolWoodlandWeavemaster,
     _poolWretchedBanquet,
     _poolWrongTurn,
+    _poolXantidSwarm,
     _poolYahenniUndyingPartisan,
     _poolYawningFissure,
     _poolYevasForcemage,

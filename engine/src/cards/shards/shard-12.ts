@@ -101,6 +101,7 @@ import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCatch from "../pool/catch.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
+import _poolCetaSanctuary from "../pool/ceta-sanctuary.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChandraFireArtisan from "../pool/chandra-fire-artisan.js";
@@ -114,6 +115,7 @@ import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolClanGuildmage from "../pool/clan-guildmage.js";
+import _poolClawsOfWirewood from "../pool/claws-of-wirewood.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
@@ -177,6 +179,7 @@ import _poolDomineer from "../pool/domineer.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDownsize from "../pool/downsize.js";
+import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
@@ -332,6 +335,7 @@ import _poolJensonCarthalionDruidExile from "../pool/jenson-carthalion-druid-exi
 import _poolJeskaiSage from "../pool/jeskai-sage.js";
 import _poolJeskaiWindscout from "../pool/jeskai-windscout.js";
 import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
+import _poolJilt from "../pool/jilt.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
@@ -718,6 +722,7 @@ import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWeaponRack from "../pool/weapon-rack.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
+import _poolWhirlpoolDrake from "../pool/whirlpool-drake.js";
 import _poolWhiteManaBattery from "../pool/white-mana-battery.js";
 import _poolWhiteScarab from "../pool/white-scarab.js";
 import _poolWildIdea from "../pool/wild-idea.js";
@@ -858,6 +863,7 @@ const shard: CardShard = {
     _poolCastleLocthwain,
     _poolCatch,
     _poolCelebrateTheMountainKing,
+    _poolCetaSanctuary,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChandraFireArtisan,
@@ -871,6 +877,7 @@ const shard: CardShard = {
     _poolCircuitousRoute,
     _poolCitadelOfPain,
     _poolClanGuildmage,
+    _poolClawsOfWirewood,
     _poolCleanupCrew,
     _poolClericOfTheForwardOrder,
     _poolClickslither,
@@ -934,6 +941,7 @@ const shard: CardShard = {
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
     _poolDownsize,
+    _poolDragonBreath,
     _poolDragonHatchling,
     _poolDragonMage,
     _poolDranasEmissary,
@@ -1089,6 +1097,7 @@ const shard: CardShard = {
     _poolJeskaiSage,
     _poolJeskaiWindscout,
     _poolJessicaJonesPrivateEye,
+    _poolJilt,
     _poolJodahArchmageEternal,
     _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
@@ -1475,6 +1484,7 @@ const shard: CardShard = {
     _poolWeaponRack,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
+    _poolWhirlpoolDrake,
     _poolWhiteManaBattery,
     _poolWhiteScarab,
     _poolWildIdea,
