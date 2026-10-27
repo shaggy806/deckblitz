@@ -1,0 +1,671 @@
+{
+ "batch": "B230",
+ "status": "complete",
+ "ranks": "Onslaught (ONS, 2002-10-07): the rest of the set (94), by EDHREC rank (Centaur Glade to Daru Cavalier), which finishes Onslaught and the fourth middle walk's range — round twenty. No engine change.",
+ "authored": [
+  {
+   "name": "Centaur Glade",
+   "files": [
+    "engine/src/cards/pool/centaur-glade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Solar Blast",
+   "files": [
+    "engine/src/cards/pool/solar-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Animal Magnetism",
+   "files": [
+    "engine/src/cards/pool/animal-magnetism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skirk Commando",
+   "files": [
+    "engine/src/cards/pool/skirk-commando.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Fateshaper",
+   "files": [
+    "engine/src/cards/pool/aven-fateshaper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin Pyromancer",
+   "files": [
+    "engine/src/cards/pool/goblin-pyromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Trance",
+   "files": [
+    "engine/src/cards/pool/psychic-trance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cabal Slaver",
+   "files": [
+    "engine/src/cards/pool/cabal-slaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primal Boost",
+   "files": [
+    "engine/src/cards/pool/primal-boost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nameless One",
+   "files": [
+    "engine/src/cards/pool/nameless-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabal Executioner",
+   "files": [
+    "engine/src/cards/pool/cabal-executioner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Headhunter",
+   "files": [
+    "engine/src/cards/pool/headhunter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invigorating Boon",
+   "files": [
+    "engine/src/cards/pool/invigorating-boon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Run Wild",
+   "files": [
+    "engine/src/cards/pool/run-wild.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leery Fogbeast",
+   "files": [
+    "engine/src/cards/pool/leery-fogbeast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Desecration",
+   "files": [
+    "engine/src/cards/pool/walking-desecration.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gustcloak Harrier",
+   "files": [
+    "engine/src/cards/pool/gustcloak-harrier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Commando Raid",
+   "files": [
+    "engine/src/cards/pool/commando-raid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piety Charm",
+   "files": [
+    "engine/src/cards/pool/piety-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawning Purist",
+   "files": [
+    "engine/src/cards/pool/dawning-purist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Pathcutter",
+   "files": [
+    "engine/src/cards/pool/elvish-pathcutter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haunted Cadaver",
+   "files": [
+    "engine/src/cards/pool/haunted-cadaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Pulse",
+   "files": [
+    "engine/src/cards/pool/death-pulse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage Aven",
+   "files": [
+    "engine/src/cards/pool/sage-aven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Riptide Chronologist",
+   "files": [
+    "engine/src/cards/pool/riptide-chronologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspirit",
+   "files": [
+    "engine/src/cards/pool/inspirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embermage Goblin",
+   "files": [
+    "engine/src/cards/pool/embermage-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aphetto Vulture",
+   "files": [
+    "engine/src/cards/pool/aphetto-vulture.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Venomspout Brackus",
+   "files": [
+    "engine/src/cards/pool/venomspout-brackus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gustcloak Skirmisher",
+   "files": [
+    "engine/src/cards/pool/gustcloak-skirmisher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krosan Groundshaker",
+   "files": [
+    "engine/src/cards/pool/krosan-groundshaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghosthelm Courier",
+   "files": [
+    "engine/src/cards/pool/ghosthelm-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrashing Mudspawn",
+   "files": [
+    "engine/src/cards/pool/thrashing-mudspawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defensive Maneuvers",
+   "files": [
+    "engine/src/cards/pool/defensive-maneuvers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Convalescent Care",
+   "files": [
+    "engine/src/cards/pool/convalescent-care.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flamestick Courier",
+   "files": [
+    "engine/src/cards/pool/flamestick-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airdrop Condor",
+   "files": [
+    "engine/src/cards/pool/airdrop-condor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gustcloak Sentinel",
+   "files": [
+    "engine/src/cards/pool/gustcloak-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gustcloak Runner",
+   "files": [
+    "engine/src/cards/pool/gustcloak-runner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thunder of Hooves",
+   "files": [
+    "engine/src/cards/pool/thunder-of-hooves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everglove Courier",
+   "files": [
+    "engine/src/cards/pool/everglove-courier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Essence Fracture",
+   "files": [
+    "engine/src/cards/pool/essence-fracture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frightshroud Courier",
+   "files": [
+    "engine/src/cards/pool/frightshroud-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prowling Pangolin",
+   "files": [
+    "engine/src/cards/pool/prowling-pangolin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foothill Guide",
+   "files": [
+    "engine/src/cards/pool/foothill-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Withering Hex",
+   "files": [
+    "engine/src/cards/pool/withering-hex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spitfire Handler",
+   "files": [
+    "engine/src/cards/pool/spitfire-handler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snarling Undorak",
+   "files": [
+    "engine/src/cards/pool/snarling-undorak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snapping Thragg",
+   "files": [
+    "engine/src/cards/pool/snapping-thragg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dive Bomber",
+   "files": [
+    "engine/src/cards/pool/dive-bomber.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunfire Balm",
+   "files": [
+    "engine/src/cards/pool/sunfire-balm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nosy Goblin",
+   "files": [
+    "engine/src/cards/pool/nosy-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pearlspear Courier",
+   "files": [
+    "engine/src/cards/pool/pearlspear-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gangrenous Goliath",
+   "files": [
+    "engine/src/cards/pool/gangrenous-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avarax",
+   "files": [
+    "engine/src/cards/pool/avarax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riptide Biologist",
+   "files": [
+    "engine/src/cards/pool/riptide-biologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grassland Crusader",
+   "files": [
+    "engine/src/cards/pool/grassland-crusader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fallen Cleric",
+   "files": [
+    "engine/src/cards/pool/fallen-cleric.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Screaming Seahawk",
+   "files": [
+    "engine/src/cards/pool/screaming-seahawk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fleeting Aven",
+   "files": [
+    "engine/src/cards/pool/fleeting-aven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribal Golem",
+   "files": [
+    "engine/src/cards/pool/tribal-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daru Cavalier",
+   "files": [
+    "engine/src/cards/pool/daru-cavalier.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Erratic Explosion",
+   "needs": [
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "As Goblin Machinist."
+  },
+  {
+   "name": "Crown of Fury",
+   "needs": [
+    "filter:shares-creature-type-with-attached"
+   ],
+   "why": "\"Sacrifice Crown of Fury: Enchanted creature and other creatures that share a creature type with it get +1/+0 and gain first strike\": no filter reads the creature the sacrificed Aura enchanted."
+  },
+  {
+   "name": "Crown of Ascension",
+   "needs": [
+    "filter:shares-creature-type-with-attached"
+   ],
+   "why": "As Crown of Fury."
+  },
+  {
+   "name": "Glarecaster",
+   "needs": [
+    "replacement:redirect-next-damage-event"
+   ],
+   "why": "\"The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead\": the whole next event, to either recipient; prevent-damage's redirect covers a fixed amount to one."
+  },
+  {
+   "name": "Slipstream Eel",
+   "needs": [
+    "static:cant-attack-unless-defender-controls"
+   ],
+   "why": "\"can't attack unless defending player controls an Island\": no restriction reads the defending player."
+  },
+  {
+   "name": "Crown of Vigor",
+   "needs": [
+    "filter:shares-creature-type-with-attached"
+   ],
+   "why": "As Crown of Fury."
+  },
+  {
+   "name": "Doom Cannon",
+   "needs": [
+    "cost:chosen-type-sacrifice-cost"
+   ],
+   "why": "\"Sacrifice a creature of the chosen type\": the sacrifice cost's candidates are matched without the source, so ofChosenType matches nothing."
+  },
+  {
+   "name": "Shieldmage Elder",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn",
+    "replacement:prevent-damage-by-target-spell"
+   ],
+   "why": "\"Prevent all damage target creature/spell would deal this turn\": no prevention of damage dealt by a target."
+  },
+  {
+   "name": "Menacing Ogre",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "Each player secretly chooses a number."
+  },
+  {
+   "name": "Serpentine Basilisk",
+   "needs": [
+    "effect:delayed-trigger-about-trigger-recipient"
+   ],
+   "why": "\"Whenever it deals combat damage to a creature, destroy that creature at end of combat\": a delayed trigger made by a deals-damage trigger keeps only its trigger object, not the damaged creature."
+  },
+  {
+   "name": "Circle of Solace",
+   "needs": [
+    "effect:prevent-next-damage-to-you-from-filter"
+   ],
+   "why": "\"The next time a creature of the chosen type would deal damage to you this turn, prevent that damage\": next-time prevention covers one chosen source."
+  },
+  {
+   "name": "Ironfist Crusher",
+   "needs": [
+    "static:can-block-any-number"
+   ],
+   "why": "\"can block any number of creatures\"."
+  },
+  {
+   "name": "Skittish Valesk",
+   "needs": [
+    "effect:turn-face-down"
+   ],
+   "why": "\"{5}{R}: Flip a coin. If you lose the flip, turn Skittish Valesk face down\"."
+  },
+  {
+   "name": "Sandskin",
+   "needs": [
+    "replacement:prevent-damage-to-attached",
+    "replacement:prevent-damage-by-attached"
+   ],
+   "why": "Prevent all combat damage dealt to and by enchanted creature."
+  },
+  {
+   "name": "Tephraderm",
+   "needs": [
+    "filter:damage-source-is-spell"
+   ],
+   "why": "\"Whenever a spell deals damage to Tephraderm\": no trigger tells a spell on the stack from a card's ability."
+  },
+  {
+   "name": "Endemic Plague",
+   "needs": [
+    "filter:shares-creature-type-with-sacrificed"
+   ],
+   "why": "\"Destroy all creatures that share a creature type with the sacrificed creature\": only card types are compared with a sacrificed creature."
+  },
+  {
+   "name": "Crown of Suspicion",
+   "needs": [
+    "filter:shares-creature-type-with-attached"
+   ],
+   "why": "As Crown of Fury."
+  },
+  {
+   "name": "Butcher Orgg",
+   "needs": [
+    "static:assign-combat-damage-divided-among-defending-player-and-creatures"
+   ],
+   "why": "Divides its combat damage among the defending player and their creatures, blocked or not."
+  },
+  {
+   "name": "Chain of Silence",
+   "needs": [
+    "replacement:prevent-damage-by-target-this-turn"
+   ],
+   "why": "\"Prevent all damage target creature would deal this turn\": prevent-damage covers damage dealt to a target only."
+  },
+  {
+   "name": "Daunting Defender",
+   "needs": [
+    "replacement:prevent-n-of-damage"
+   ],
+   "why": "\"If a source would deal damage to a Cleric creature you control, prevent 1 of that damage\": a reduction applies after doublers; prevention is ordered by the affected player (616.1)."
+  },
+  {
+   "name": "Mistform Wall",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"becomes the creature type of your choice\" replaces its types."
+  },
+  {
+   "name": "Goblin Machinist",
+   "needs": [
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "The revealed cards go on the bottom in any order."
+  },
+  {
+   "name": "Shade's Breath",
+   "needs": [
+    "effect:set-color-all",
+    "effect:set-creature-type"
+   ],
+   "why": "\"Each creature you control becomes a black Shade\": no mass color and creature-type setting."
+  },
+  {
+   "name": "Mistform Dreamer",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "As Mistform Wall."
+  },
+  {
+   "name": "Mistform Stalker",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "As Mistform Wall."
+  },
+  {
+   "name": "Break Open",
+   "needs": [
+    "effect:turn-face-up"
+   ],
+   "why": "\"Turn target face-down creature an opponent controls face up\"."
+  },
+  {
+   "name": "Mistform Skyreaver",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"becomes the creature type of your choice\" replaces its types."
+  },
+  {
+   "name": "Thoughtbound Primoc",
+   "needs": [
+    "condition:player-controls-most",
+    "effect:gain-control-to-player-with-most-wizards"
+   ],
+   "why": "\"If a player controls more Wizards than each other player, that player gains control of it\"."
+  },
+  {
+   "name": "Mistform Shrieker",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "As Mistform Wall."
+  },
+  {
+   "name": "Aven Soulgazer",
+   "needs": [
+    "effect:look-at-face-down-permanents"
+   ],
+   "why": "\"Look at target face-down creature\": no effect looks at a face-down permanent."
+  },
+  {
+   "name": "Pinpoint Avalanche",
+   "needs": [
+    "effect:damage-cant-be-prevented"
+   ],
+   "why": "\"The damage can't be prevented\"."
+  },
+  {
+   "name": "Graxiplon",
+   "needs": [
+    "static:cant-be-blocked-unless-defender-controls-shared-type"
+   ],
+   "why": "\"can't be blocked unless defending player controls three or more creatures that share a creature type\"."
+  }
+ ]
+}
