@@ -74,6 +74,7 @@ import _poolBiogenicUpgrade from "../pool/biogenic-upgrade.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBitterChill from "../pool/bitter-chill.js";
 import _poolBitterbladeWarrior from "../pool/bitterblade-warrior.js";
+import _poolBladewingsThrall from "../pool/bladewings-thrall.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBlizzardStrix from "../pool/blizzard-strix.js";
@@ -172,6 +173,7 @@ import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
+import _poolDragonScales from "../pool/dragon-scales.js";
 import _poolDragonbroodsRelic from "../pool/dragonbroods-relic.js";
 import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
@@ -822,6 +824,7 @@ const shard: CardShard = {
     _poolBirthingPod,
     _poolBitterChill,
     _poolBitterbladeWarrior,
+    _poolBladewingsThrall,
     _poolBlazingVolley,
     _poolBlisteringDieflyn,
     _poolBlizzardStrix,
@@ -920,6 +923,7 @@ const shard: CardShard = {
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,
+    _poolDragonScales,
     _poolDragonbroodsRelic,
     _poolDragonologist,
     _poolDrakeSkullCameo,

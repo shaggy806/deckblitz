@@ -487,6 +487,7 @@ import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
+import _poolPyrostaticPillar from "../pool/pyrostatic-pillar.js";
 import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
 import _poolQuicksmithSpy from "../pool/quicksmith-spy.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
@@ -1238,6 +1239,7 @@ const shard: CardShard = {
     _poolPullFromTheDeep,
     _poolPyreHound,
     _poolPyroclasticHellion,
+    _poolPyrostaticPillar,
     _poolQuickDrawDagger,
     _poolQuicksmithSpy,
     _poolRainOfRevelation,

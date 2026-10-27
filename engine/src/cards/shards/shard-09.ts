@@ -191,6 +191,7 @@ import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
+import _poolEternalDragon from "../pool/eternal-dragon.js";
 import _poolEternalFlame from "../pool/eternal-flame.js";
 import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
@@ -427,6 +428,7 @@ import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
+import _poolNefashu from "../pool/nefashu.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
 import _poolNethroiApexOfDeath from "../pool/nethroi-apex-of-death.js";
@@ -618,6 +620,7 @@ import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpontaneousMutation from "../pool/spontaneous-mutation.js";
 import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
+import _poolSproutingVines from "../pool/sprouting-vines.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
 import _poolStaffOfZegon from "../pool/staff-of-zegon.js";
@@ -976,6 +979,7 @@ const shard: CardShard = {
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,
     _poolEshkiDragonclaw,
+    _poolEternalDragon,
     _poolEternalFlame,
     _poolEternalTaskmaster,
     _poolEtheriumSpinner,
@@ -1212,6 +1216,7 @@ const shard: CardShard = {
     _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
+    _poolNefashu,
     _poolNemesisMask,
     _poolNetherHorror,
     _poolNethroiApexOfDeath,
@@ -1403,6 +1408,7 @@ const shard: CardShard = {
     _poolSplinterRadicalRat,
     _poolSpontaneousMutation,
     _poolSpringLeafAvenger,
+    _poolSproutingVines,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,
     _poolStaffOfZegon,

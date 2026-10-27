@@ -95,6 +95,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   Fire // Ice, Spiritmonger, Prophetic Bolt, the Sanctuaries, the Penumbras, Gaea's Balance — by
   five `card-author` agents and the lead, and 25 blocked (`B218.json`). Forked Bolt, which had no
   `divided`, deals its damage again.
+- **Scourge — Scourge is whole** (batch 216, the fourth middle walk's first batch, 2026-10-27):
+  no engine change. 59 of Scourge's 90 authored — Decree of Justice, Karona False God, Ambush
+  Commander, Pyrostatic Pillar, Xantid Swarm, Eternal Dragon, the Dragon Auras — by five
+  `card-author` agents and the scaffolder, and 31 blocked (`B216.json`), non-mana morph costs
+  leading with four.
 - **Sunburst, and Fifth Dawn — Fifth Dawn is whole** (batch 213, the third middle walk's range
   taken by a newest-first session, 2026-10-26, `keyword:sunburst`): **built** sunburst (rule
   702.44 — the `sunburst()` helper, +1/+1 counters by its copiable creature type or charge

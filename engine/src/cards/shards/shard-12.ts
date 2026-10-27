@@ -115,6 +115,7 @@ import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolClanGuildmage from "../pool/clan-guildmage.js";
+import _poolClawsOfWirewood from "../pool/claws-of-wirewood.js";
 import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClericOfTheForwardOrder from "../pool/cleric-of-the-forward-order.js";
 import _poolClickslither from "../pool/clickslither.js";
@@ -177,6 +178,7 @@ import _poolDogUmbra from "../pool/dog-umbra.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDownsize from "../pool/downsize.js";
+import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
@@ -874,6 +876,7 @@ const shard: CardShard = {
     _poolCircuitousRoute,
     _poolCitadelOfPain,
     _poolClanGuildmage,
+    _poolClawsOfWirewood,
     _poolCleanupCrew,
     _poolClericOfTheForwardOrder,
     _poolClickslither,
@@ -936,6 +939,7 @@ const shard: CardShard = {
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
     _poolDownsize,
+    _poolDragonBreath,
     _poolDragonHatchling,
     _poolDragonMage,
     _poolDranasEmissary,

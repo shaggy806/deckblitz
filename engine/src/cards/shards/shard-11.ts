@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
+import _poolAcceleratedMutation from "../pool/accelerated-mutation.js";
 import _poolAerieOuphes from "../pool/aerie-ouphes.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
@@ -377,6 +378,7 @@ import _poolKolaghanSkirmisher from "../pool/kolaghan-skirmisher.js";
 import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
 import _poolKorBladewhirl from "../pool/kor-bladewhirl.js";
 import _poolKozileksPredator from "../pool/kozileks-predator.js";
+import _poolKrosanDrover from "../pool/krosan-drover.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLancersEnKor from "../pool/lancers-en-kor.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
   pool: [
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
+    _poolAcceleratedMutation,
     _poolAerieOuphes,
     _poolAetherGust,
     _poolAetherHub,
@@ -1155,6 +1158,7 @@ const shard: CardShard = {
     _poolKollTheForgemaster,
     _poolKorBladewhirl,
     _poolKozileksPredator,
+    _poolKrosanDrover,
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLancersEnKor,

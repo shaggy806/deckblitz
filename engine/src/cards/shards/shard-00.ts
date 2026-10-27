@@ -232,6 +232,7 @@ import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFoulPresence from "../pool/foul-presence.js";
 import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
+import _poolFrontlineStrategist from "../pool/frontline-strategist.js";
 import _poolFrozenAether from "../pool/frozen-aether.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolFoulPresence,
     _poolFreyalisesRadiance,
     _poolFrontlineRush,
+    _poolFrontlineStrategist,
     _poolFrozenAether,
     _poolFuneralLongboat,
     _poolFurnaceReins,

@@ -210,6 +210,7 @@ import _poolFieldSurgeon from "../pool/field-surgeon.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
+import _poolFinalPunishment from "../pool/final-punishment.js";
 import _poolFireDragon from "../pool/fire-dragon.js";
 import _poolFiremindsResearch from "../pool/fireminds-research.js";
 import _poolFlameLash from "../pool/flame-lash.js";
@@ -354,6 +355,7 @@ import _poolKokushoTheEveningStar from "../pool/kokusho-the-evening-star.js";
 import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
 import _poolKorvoldFaeCursedKing from "../pool/korvold-fae-cursed-king.js";
 import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
+import _poolKrosanWarchief from "../pool/krosan-warchief.js";
 import _poolKruphixsInsight from "../pool/kruphixs-insight.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
 import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
@@ -373,6 +375,7 @@ import _poolLesserMasticore from "../pool/lesser-masticore.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
+import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
@@ -487,6 +490,7 @@ import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
 import _poolRampagingGeoderm from "../pool/rampaging-geoderm.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
+import _poolRavenGuildMaster from "../pool/raven-guild-master.js";
 import _poolRavenousVampire from "../pool/ravenous-vampire.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
@@ -512,6 +516,7 @@ import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRockBasilisk from "../pool/rock-basilisk.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
+import _poolRootElemental from "../pool/root-elemental.js";
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRootgrapple from "../pool/rootgrapple.js";
 import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
@@ -973,6 +978,7 @@ const shard: CardShard = {
     _poolFierceEmpath,
     _poolFigureOfDestiny,
     _poolFiligreeCrawler,
+    _poolFinalPunishment,
     _poolFireDragon,
     _poolFiremindsResearch,
     _poolFlameLash,
@@ -1117,6 +1123,7 @@ const shard: CardShard = {
     _poolKorLineSlinger,
     _poolKorvoldFaeCursedKing,
     _poolKozileksChanneler,
+    _poolKrosanWarchief,
     _poolKruphixsInsight,
     _poolKudoKingAmongBears,
     _poolKuldothaCackler,
@@ -1136,6 +1143,7 @@ const shard: CardShard = {
     _poolLichsRelic,
     _poolLifeMatrix,
     _poolLightningElemental,
+    _poolLingeringDeath,
     _poolLivingPhone,
     _poolLoathsomeTroll,
     _poolLongFinnedSkywhale,
@@ -1250,6 +1258,7 @@ const shard: CardShard = {
     _poolRampagingGeoderm,
     _poolRangersLongbow,
     _poolRaucousEntertainer,
+    _poolRavenGuildMaster,
     _poolRavenousVampire,
     _poolRazeTheEffigy,
     _poolRecklessAmplimancer,
@@ -1275,6 +1284,7 @@ const shard: CardShard = {
     _poolRockBasilisk,
     _poolRohgahhKherKeepOverlord,
     _poolRoilmagesTrick,
+    _poolRootElemental,
     _poolRootSliver,
     _poolRootgrapple,
     _poolRowanFearlessSparkmage,
