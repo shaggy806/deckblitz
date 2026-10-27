@@ -279,6 +279,7 @@ import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
 import _poolFontOfIre from "../pool/font-of-ire.js";
+import _poolForcedMarch from "../pool/forced-march.js";
 import _poolForerunnerOfSlaughter from "../pool/forerunner-of-slaughter.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
@@ -576,6 +577,7 @@ import _poolQuestingDruid from "../pool/questing-druid.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
+import _poolRamosianRally from "../pool/ramosian-rally.js";
 import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
@@ -593,6 +595,7 @@ import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRidgedKusite from "../pool/ridged-kusite.js";
 import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
+import _poolRighteousIndignation from "../pool/righteous-indignation.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
@@ -1123,6 +1126,7 @@ const shard: CardShard = {
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
     _poolFontOfIre,
+    _poolForcedMarch,
     _poolForerunnerOfSlaughter,
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
@@ -1420,6 +1424,7 @@ const shard: CardShard = {
     _poolRabarooTroop,
     _poolRagamuffinRaptor,
     _poolRaiseDead,
+    _poolRamosianRally,
     _poolRandomEncounter,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
@@ -1437,6 +1442,7 @@ const shard: CardShard = {
     _poolRidgedKusite,
     _poolRiftmarkedKnight,
     _poolRighteousCharge,
+    _poolRighteousIndignation,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
     _poolRiteOfFlame,

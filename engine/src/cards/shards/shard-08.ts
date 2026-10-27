@@ -114,6 +114,7 @@ import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
+import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
@@ -167,6 +168,7 @@ import _poolDeathmark from "../pool/deathmark.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
 import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
+import _poolDehydration from "../pool/dehydration.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
@@ -429,6 +431,7 @@ import _poolLurkingDeadeye from "../pool/lurking-deadeye.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
+import _poolMagistratesVeto from "../pool/magistrates-veto.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolManaChains from "../pool/mana-chains.js";
 import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
@@ -469,6 +472,7 @@ import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
 import _poolNemesisOfMortals from "../pool/nemesis-of-mortals.js";
+import _poolNetherSpirit from "../pool/nether-spirit.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightmaresThirst from "../pool/nightmares-thirst.js";
 import _poolNightmarishEnd from "../pool/nightmarish-end.js";
@@ -559,6 +563,7 @@ import _poolRetractionHelix from "../pool/retraction-helix.js";
 import _poolReturnTheFavor from "../pool/return-the-favor.js";
 import _poolReturnedCentaur from "../pool/returned-centaur.js";
 import _poolRevelRuiner from "../pool/revel-ruiner.js";
+import _poolReveredElder from "../pool/revered-elder.js";
 import _poolRhonassLastStand from "../pool/rhonass-last-stand.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
@@ -941,6 +946,7 @@ const shard: CardShard = {
     _poolCaptiveWeird,
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
+    _poolCateranOverlord,
     _poolCatharCommando,
     _poolCessation,
     _poolChaosCharm,
@@ -994,6 +1000,7 @@ const shard: CardShard = {
     _poolDeathsprout,
     _poolDeception,
     _poolDegaSanctuary,
+    _poolDehydration,
     _poolDenziloreFatehold,
     _poolDeputyOfAcquittals,
     _poolDesertCerodon,
@@ -1256,6 +1263,7 @@ const shard: CardShard = {
     _poolMaelstromArchangel,
     _poolMagesAttendant,
     _poolMagetasBoon,
+    _poolMagistratesVeto,
     _poolMalakirCullblade,
     _poolManaChains,
     _poolMantleOfTheWolf,
@@ -1296,6 +1304,7 @@ const shard: CardShard = {
     _poolNecrogenesis,
     _poolNeighborhoodGuardian,
     _poolNemesisOfMortals,
+    _poolNetherSpirit,
     _poolNevinyrralsDisk,
     _poolNightmaresThirst,
     _poolNightmarishEnd,
@@ -1386,6 +1395,7 @@ const shard: CardShard = {
     _poolReturnTheFavor,
     _poolReturnedCentaur,
     _poolRevelRuiner,
+    _poolReveredElder,
     _poolRhonassLastStand,
     _poolRicketyGazebo,
     _poolRighteousAvengers,

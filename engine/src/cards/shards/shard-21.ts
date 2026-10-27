@@ -171,6 +171,7 @@ import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
+import _poolDelraich from "../pool/delraich.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
@@ -344,6 +345,7 @@ import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
+import _poolJeweledTorque from "../pool/jeweled-torque.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJumpScare from "../pool/jump-scare.js";
 import _poolJundCharm from "../pool/jund-charm.js";
@@ -959,6 +961,7 @@ const shard: CardShard = {
     _poolDeeprootWaters,
     _poolDefiantFalcon,
     _poolDegaDisciple,
+    _poolDelraich,
     _poolDemogorgonsClutches,
     _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
@@ -1132,6 +1135,7 @@ const shard: CardShard = {
     _poolJasperaSentinel,
     _poolJeskaiShrinekeeper,
     _poolJetmirNexusOfRevels,
+    _poolJeweledTorque,
     _poolJumboCactuar,
     _poolJumpScare,
     _poolJundCharm,

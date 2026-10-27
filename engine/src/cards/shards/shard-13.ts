@@ -117,6 +117,7 @@ import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChampionLancer from "../pool/champion-lancer.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
+import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
@@ -726,6 +727,7 @@ import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVileManifestation from "../pool/vile-manifestation.js";
 import _poolVillagersOfEstwald from "../pool/villagers-of-estwald.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
+import _poolVineDryad from "../pool/vine-dryad.js";
 import _poolVineKami from "../pool/vine-kami.js";
 import _poolViolentEchoes from "../pool/violent-echoes.js";
 import _poolVisageOfDread from "../pool/visage-of-dread.js";
@@ -913,6 +915,7 @@ const shard: CardShard = {
     _poolChampionLancer,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
+    _poolChoArrimLegate,
     _poolCinderGiant,
     _poolClamorShaman,
     _poolCleavingSliver,
@@ -1522,6 +1525,7 @@ const shard: CardShard = {
     _poolVileManifestation,
     _poolVillagersOfEstwald,
     _poolVillainousWrath,
+    _poolVineDryad,
     _poolVineKami,
     _poolViolentEchoes,
     _poolVisageOfDread,

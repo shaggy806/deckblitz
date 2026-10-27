@@ -90,6 +90,7 @@ import _poolCaseyJonesBackAlleyBrute from "../pool/casey-jones-back-alley-brute.
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
+import _poolCeremonialGuard from "../pool/ceremonial-guard.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolChainwhipCyclops from "../pool/chainwhip-cyclops.js";
 import _poolChampionsDrake from "../pool/champions-drake.js";
@@ -206,6 +207,7 @@ import _poolFinalPayment from "../pool/final-payment.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
+import _poolFlailingManticore from "../pool/flailing-manticore.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFlashFlood from "../pool/flash-flood.js";
@@ -303,6 +305,7 @@ import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInnocenceKami from "../pool/innocence-kami.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
+import _poolInsubordination from "../pool/insubordination.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
@@ -465,6 +468,7 @@ import _poolPharikasLibation from "../pool/pharikas-libation.js";
 import _poolPhelddagrif from "../pool/phelddagrif.js";
 import _poolPhyrexianVatmother from "../pool/phyrexian-vatmother.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
+import _poolPiousWarrior from "../pool/pious-warrior.js";
 import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
@@ -538,6 +542,7 @@ import _poolSaltRoadPackbeast from "../pool/salt-road-packbeast.js";
 import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
 import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
+import _poolSaprazzanOutrigger from "../pool/saprazzan-outrigger.js";
 import _poolSarcomancy from "../pool/sarcomancy.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
@@ -547,6 +552,7 @@ import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScaldingTongs from "../pool/scalding-tongs.js";
+import _poolScandalmonger from "../pool/scandalmonger.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
@@ -874,6 +880,7 @@ const shard: CardShard = {
     _poolCastIntoTheFire,
     _poolCatapultMaster,
     _poolCauldronsGift,
+    _poolCeremonialGuard,
     _poolCetaDisciple,
     _poolChainwhipCyclops,
     _poolChampionsDrake,
@@ -990,6 +997,7 @@ const shard: CardShard = {
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
     _poolFiresOfVictory,
+    _poolFlailingManticore,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
     _poolFlashFlood,
@@ -1087,6 +1095,7 @@ const shard: CardShard = {
     _poolInnocenceKami,
     _poolInsatiableHarpy,
     _poolInspiringVeteran,
+    _poolInsubordination,
     _poolInsufferableBalladeer,
     _poolInundate,
     _poolInvasionOfZendikar,
@@ -1249,6 +1258,7 @@ const shard: CardShard = {
     _poolPhelddagrif,
     _poolPhyrexianVatmother,
     _poolPillardropWarden,
+    _poolPiousWarrior,
     _poolPlanarOutburst,
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
@@ -1322,6 +1332,7 @@ const shard: CardShard = {
     _poolSaltRoadPatrol,
     _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
+    _poolSaprazzanOutrigger,
     _poolSarcomancy,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
@@ -1331,6 +1342,7 @@ const shard: CardShard = {
     _poolSavannah,
     _poolScaldingTarn,
     _poolScaldingTongs,
+    _poolScandalmonger,
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,

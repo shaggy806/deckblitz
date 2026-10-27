@@ -791,6 +791,7 @@ import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVectisAgents from "../pool/vectis-agents.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
+import _poolVenomousDragonfly from "../pool/venomous-dragonfly.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
@@ -1653,6 +1654,7 @@ const shard: CardShard = {
     _poolVaultOfCatlacan,
     _poolVectisAgents,
     _poolVengefulCreeper,
+    _poolVenomousDragonfly,
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,

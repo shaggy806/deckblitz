@@ -136,6 +136,7 @@ import _poolCostlyPlunder from "../pool/costly-plunder.js";
 import _poolCourtOfGrace from "../pool/court-of-grace.js";
 import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
+import _poolCragSaurian from "../pool/crag-saurian.js";
 import _poolCrashThrough from "../pool/crash-through.js";
 import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
@@ -530,6 +531,7 @@ import _poolRadiantKavu from "../pool/radiant-kavu.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
+import _poolRamosianCommander from "../pool/ramosian-commander.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
 import _poolRaucousCarnival from "../pool/raucous-carnival.js";
 import _poolRavenWings from "../pool/raven-wings.js";
@@ -949,6 +951,7 @@ const shard: CardShard = {
     _poolCourtOfGrace,
     _poolCrackedSkull,
     _poolCraftWithPride,
+    _poolCragSaurian,
     _poolCrashThrough,
     _poolCrimsonMuckwader,
     _poolCrosissAttendant,
@@ -1343,6 +1346,7 @@ const shard: CardShard = {
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,
     _poolRainOfTears,
+    _poolRamosianCommander,
     _poolRattleclawMystic,
     _poolRaucousCarnival,
     _poolRavenWings,

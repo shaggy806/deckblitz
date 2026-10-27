@@ -88,6 +88,7 @@ import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
+import _poolChoArrimAlchemist from "../pool/cho-arrim-alchemist.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
 import _poolChromanticore from "../pool/chromanticore.js";
 import _poolChronostutter from "../pool/chronostutter.js";
@@ -188,6 +189,7 @@ import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExcavation from "../pool/excavation.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
+import _poolExtortion from "../pool/extortion.js";
 import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
@@ -818,6 +820,7 @@ const shard: CardShard = {
     _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
+    _poolChoArrimAlchemist,
     _poolChocoboCamp,
     _poolChromanticore,
     _poolChronostutter,
@@ -918,6 +921,7 @@ const shard: CardShard = {
     _poolExcavation,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
+    _poolExtortion,
     _poolEyeGouge,
     _poolEyelessWatcher,
     _poolFaerieDuelist,

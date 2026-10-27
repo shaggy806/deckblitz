@@ -413,6 +413,7 @@ import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMerfolkSeer from "../pool/merfolk-seer.js";
+import _poolMidnightRitual from "../pool/midnight-ritual.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMobJustice from "../pool/mob-justice.js";
@@ -441,6 +442,7 @@ import _poolNirkanaAssassin from "../pool/nirkana-assassin.js";
 import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
 import _poolNobilisOfWar from "../pool/nobilis-of-war.js";
 import _poolNotionThief from "../pool/notion-thief.js";
+import _poolNotoriousAssassin from "../pool/notorious-assassin.js";
 import _poolNovijenHeartOfProgress from "../pool/novijen-heart-of-progress.js";
 import _poolNumotTheDevastator from "../pool/numot-the-devastator.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
@@ -533,6 +535,7 @@ import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRiptideEntrancer from "../pool/riptide-entrancer.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
+import _poolRobberFly from "../pool/robber-fly.js";
 import _poolRockBasilisk from "../pool/rock-basilisk.js";
 import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
@@ -558,6 +561,7 @@ import _poolSandworm from "../pool/sandworm.js";
 import _poolSanguimancy from "../pool/sanguimancy.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
 import _poolSanityGnawers from "../pool/sanity-gnawers.js";
+import _poolSaprazzanRaider from "../pool/saprazzan-raider.js";
 import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
@@ -1210,6 +1214,7 @@ const shard: CardShard = {
     _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMerfolkSeer,
+    _poolMidnightRitual,
     _poolMindfulBiomancer,
     _poolMistfireWeaver,
     _poolMobJustice,
@@ -1238,6 +1243,7 @@ const shard: CardShard = {
     _poolNivMizzetVisionary,
     _poolNobilisOfWar,
     _poolNotionThief,
+    _poolNotoriousAssassin,
     _poolNovijenHeartOfProgress,
     _poolNumotTheDevastator,
     _poolNyxWeaver,
@@ -1330,6 +1336,7 @@ const shard: CardShard = {
     _poolRidgeRannet,
     _poolRiptideEntrancer,
     _poolRitualOfSteel,
+    _poolRobberFly,
     _poolRockBasilisk,
     _poolRohgahhKherKeepOverlord,
     _poolRoilmagesTrick,
@@ -1355,6 +1362,7 @@ const shard: CardShard = {
     _poolSanguimancy,
     _poolSanguineMorass,
     _poolSanityGnawers,
+    _poolSaprazzanRaider,
     _poolSarkhansRage,
     _poolSarkhansTriumph,
     _poolScarbladeScout,

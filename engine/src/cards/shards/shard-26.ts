@@ -120,6 +120,8 @@ import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCarrionWurm from "../pool/carrion-wurm.js";
 import _poolCarryAway from "../pool/carry-away.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
+import _poolCateranPersuader from "../pool/cateran-persuader.js";
+import _poolCateranSlaver from "../pool/cateran-slaver.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
@@ -375,6 +377,8 @@ import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
 import _poolKrosanCloudscraper from "../pool/krosan-cloudscraper.js";
 import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
+import _poolKyrenLegate from "../pool/kyren-legate.js";
+import _poolKyrenToy from "../pool/kyren-toy.js";
 import _poolLeafCrownedElder from "../pool/leaf-crowned-elder.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
@@ -923,6 +927,8 @@ const shard: CardShard = {
     _poolCarrionWurm,
     _poolCarryAway,
     _poolCaseyJonesJuryRigJusticiar,
+    _poolCateranPersuader,
+    _poolCateranSlaver,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
     _poolCaughtInTheBrights,
@@ -1178,6 +1184,8 @@ const shard: CardShard = {
     _poolKnightsOfDolAmroth,
     _poolKrosanCloudscraper,
     _poolKyodaiSoulOfKamigawa,
+    _poolKyrenLegate,
+    _poolKyrenToy,
     _poolLeafCrownedElder,
     _poolLegacyWeapon,
     _poolLeoninLightscribe,

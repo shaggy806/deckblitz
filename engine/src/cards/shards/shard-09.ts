@@ -90,6 +90,7 @@ import _poolBoulderSalvo from "../pool/boulder-salvo.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
+import _poolBriarPatch from "../pool/briar-patch.js";
 import _poolBringerOfTheGreenDawn from "../pool/bringer-of-the-green-dawn.js";
 import _poolBrokenFall from "../pool/broken-fall.js";
 import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
@@ -419,6 +420,7 @@ import _poolMarduRunemark from "../pool/mardu-runemark.js";
 import _poolMartialLaw from "../pool/martial-law.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
+import _poolMegatherium from "../pool/megatherium.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMercilessPredator from "../pool/merciless-predator.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
@@ -564,6 +566,7 @@ import _poolRockfaceVillage from "../pool/rockface-village.js";
 import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
 import _poolRotFarmSkeleton from "../pool/rot-farm-skeleton.js";
+import _poolRouse from "../pool/rouse.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolRushwoodGrove from "../pool/rushwood-grove.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
@@ -913,6 +916,7 @@ const shard: CardShard = {
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
+    _poolBriarPatch,
     _poolBringerOfTheGreenDawn,
     _poolBrokenFall,
     _poolBroodhatchNantuko,
@@ -1242,6 +1246,7 @@ const shard: CardShard = {
     _poolMartialLaw,
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
+    _poolMegatherium,
     _poolMemoryWorm,
     _poolMercilessPredator,
     _poolMerfolkPupil,
@@ -1387,6 +1392,7 @@ const shard: CardShard = {
     _poolRoilEruption,
     _poolRootwiseSurvivor,
     _poolRotFarmSkeleton,
+    _poolRouse,
     _poolRubbleSlinger,
     _poolRushwoodGrove,
     _poolSaberToothMooseLion,

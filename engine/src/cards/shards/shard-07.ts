@@ -77,6 +77,7 @@ import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
+import _poolBrawl from "../pool/brawl.js";
 import _poolBreakOfDay from "../pool/break-of-day.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBringerOfTheWhiteDawn from "../pool/bringer-of-the-white-dawn.js";
@@ -98,6 +99,7 @@ import _poolCanopySurge from "../pool/canopy-surge.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
+import _poolCateranBrute from "../pool/cateran-brute.js";
 import _poolCateranSummons from "../pool/cateran-summons.js";
 import _poolCatharsis from "../pool/catharsis.js";
 import _poolCavernLampad from "../pool/cavern-lampad.js";
@@ -308,10 +310,12 @@ import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
 import _poolHeroicTeamwork from "../pool/heroic-teamwork.js";
 import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
+import _poolHighSeas from "../pool/high-seas.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHolyLight from "../pool/holy-light.js";
 import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
+import _poolHowlingWolf from "../pool/howling-wolf.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
 import _poolHydromorphGull from "../pool/hydromorph-gull.js";
@@ -435,6 +439,7 @@ import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMolimoMaroSorcerer from "../pool/molimo-maro-sorcerer.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
+import _poolMoltingHarpy from "../pool/molting-harpy.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
 import _poolMonsterMashup from "../pool/monster-mashup.js";
@@ -642,6 +647,7 @@ import _poolSpikeTiller from "../pool/spike-tiller.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
 import _poolSquadCommander from "../pool/squad-commander.js";
+import _poolSqueeze from "../pool/squeeze.js";
 import _poolStaffOfCompleation from "../pool/staff-of-compleation.js";
 import _poolStarscapeCleric from "../pool/starscape-cleric.js";
 import _poolStarvedRusalka from "../pool/starved-rusalka.js";
@@ -913,6 +919,7 @@ const shard: CardShard = {
     _poolBoonOfBoseiju,
     _poolBoulderfall,
     _poolBountyAgent,
+    _poolBrawl,
     _poolBreakOfDay,
     _poolBrilliantSpectrum,
     _poolBringerOfTheWhiteDawn,
@@ -934,6 +941,7 @@ const shard: CardShard = {
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,
+    _poolCateranBrute,
     _poolCateranSummons,
     _poolCatharsis,
     _poolCavernLampad,
@@ -1144,10 +1152,12 @@ const shard: CardShard = {
     _poolHeroicTeamwork,
     _poolHiddenLair,
     _poolHiddenNecropolis,
+    _poolHighSeas,
     _poolHighlandLake,
     _poolHolyLight,
     _poolHomuraHumanAscendant,
     _poolHookhandMariner,
+    _poolHowlingWolf,
     _poolHydraBroodmaster,
     _poolHydroform,
     _poolHydromorphGull,
@@ -1271,6 +1281,7 @@ const shard: CardShard = {
     _poolMoldgrafScavenger,
     _poolMolimoMaroSorcerer,
     _poolMoltenFrame,
+    _poolMoltingHarpy,
     _poolMomentOfGlory,
     _poolMomentumBreaker,
     _poolMonsterMashup,
@@ -1478,6 +1489,7 @@ const shard: CardShard = {
     _poolSpitfireLagac,
     _poolSpreadingRot,
     _poolSquadCommander,
+    _poolSqueeze,
     _poolStaffOfCompleation,
     _poolStarscapeCleric,
     _poolStarvedRusalka,

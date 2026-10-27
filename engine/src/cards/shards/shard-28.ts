@@ -572,6 +572,7 @@ import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRushOfBlood from "../pool/rush-of-blood.js";
+import _poolRushwoodHerbalist from "../pool/rushwood-herbalist.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSaberAnts from "../pool/saber-ants.js";
 import _poolSabertoothMauler from "../pool/sabertooth-mauler.js";
@@ -1405,6 +1406,7 @@ const shard: CardShard = {
     _poolRuneclawBear,
     _poolRunehornHellkite,
     _poolRushOfBlood,
+    _poolRushwoodHerbalist,
     _poolRustedSlasher,
     _poolSaberAnts,
     _poolSabertoothMauler,

@@ -104,11 +104,14 @@ import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolCelebornTheWise from "../pool/celeborn-the-wise.js";
 import _poolCephalidBroker from "../pool/cephalid-broker.js";
+import _poolChameleonSpirit from "../pool/chameleon-spirit.js";
 import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
+import _poolCharmPeddler from "../pool/charm-peddler.js";
+import _poolCharmedGriffin from "../pool/charmed-griffin.js";
 import _poolCinderPyromancer from "../pool/cinder-pyromancer.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
@@ -163,6 +166,8 @@ import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDecreeOfSavagery from "../pool/decree-of-savagery.js";
+import _poolDeepwoodDrummer from "../pool/deepwood-drummer.js";
+import _poolDeepwoodLegate from "../pool/deepwood-legate.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
 import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
@@ -893,11 +898,14 @@ const shard: CardShard = {
     _poolCavernousMaw,
     _poolCelebornTheWise,
     _poolCephalidBroker,
+    _poolChameleonSpirit,
     _poolChampionOfRhonas,
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
     _poolCharitableLevy,
+    _poolCharmPeddler,
+    _poolCharmedGriffin,
     _poolCinderPyromancer,
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,
@@ -952,6 +960,8 @@ const shard: CardShard = {
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
     _poolDecreeOfSavagery,
+    _poolDeepwoodDrummer,
+    _poolDeepwoodLegate,
     _poolDeerDog,
     _poolDefiantStrike,
     _poolDefiantSurvivor,

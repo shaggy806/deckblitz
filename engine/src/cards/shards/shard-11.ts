@@ -241,6 +241,7 @@ import _poolFiendArtisan from "../pool/fiend-artisan.js";
 import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
+import _poolFlailingSoldier from "../pool/flailing-soldier.js";
 import _poolFlameBlitz from "../pool/flame-blitz.js";
 import _poolFlittingGuerrilla from "../pool/flitting-guerrilla.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
@@ -1053,6 +1054,7 @@ const shard: CardShard = {
     _poolFiendishPanda,
     _poolFieryIslet,
     _poolFissureVent,
+    _poolFlailingSoldier,
     _poolFlameBlitz,
     _poolFlittingGuerrilla,
     _poolFloodPlain,

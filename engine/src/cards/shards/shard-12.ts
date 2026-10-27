@@ -400,6 +400,7 @@ import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
 import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolLunarMystic from "../pool/lunar-mystic.js";
+import _poolLunge from "../pool/lunge.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
@@ -601,6 +602,7 @@ import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShinestriker from "../pool/shinestriker.js";
 import _poolShiningArmor from "../pool/shining-armor.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
+import _poolShovingMatch from "../pool/shoving-match.js";
 import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
@@ -1195,6 +1197,7 @@ const shard: CardShard = {
     _poolLorescaleCoatl,
     _poolLosDiablosMissileBase,
     _poolLunarMystic,
+    _poolLunge,
     _poolLysAlanaInformant,
     _poolManaTithe,
     _poolManifestDread,
@@ -1396,6 +1399,7 @@ const shard: CardShard = {
     _poolShinestriker,
     _poolShiningArmor,
     _poolShockingGrasp,
+    _poolShovingMatch,
     _poolSiblingRivalry,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,

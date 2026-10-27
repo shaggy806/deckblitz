@@ -231,6 +231,7 @@ import _poolFellGravship from "../pool/fell-gravship.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
 import _poolFeralProwler from "../pool/feral-prowler.js";
 import _poolFeralRidgewolf from "../pool/feral-ridgewolf.js";
+import _poolFerocity from "../pool/ferocity.js";
 import _poolFerrousLake from "../pool/ferrous-lake.js";
 import _poolFierceGuardianship from "../pool/fierce-guardianship.js";
 import _poolFilth from "../pool/filth.js";
@@ -687,6 +688,7 @@ import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
+import _poolTonicPeddler from "../pool/tonic-peddler.js";
 import _poolTonyStark from "../pool/tony-stark.js";
 import _poolTormentorExarch from "../pool/tormentor-exarch.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
@@ -1036,6 +1038,7 @@ const shard: CardShard = {
     _poolFellTheProfane,
     _poolFeralProwler,
     _poolFeralRidgewolf,
+    _poolFerocity,
     _poolFerrousLake,
     _poolFierceGuardianship,
     _poolFilth,
@@ -1492,6 +1495,7 @@ const shard: CardShard = {
     _poolTibaltsRager,
     _poolTidalForce,
     _poolTolariaWest,
+    _poolTonicPeddler,
     _poolTonyStark,
     _poolTormentorExarch,
     _poolToskiBearerOfSecrets,

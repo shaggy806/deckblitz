@@ -10,6 +10,7 @@ import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-tita
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
 import _poolAchillesDavenport from "../pool/achilles-davenport.js";
+import _poolAerialCaravan from "../pool/aerial-caravan.js";
 import _poolAethergeodeMiner from "../pool/aethergeode-miner.js";
 import _poolAetherstormRoc from "../pool/aetherstorm-roc.js";
 import _poolAirBladder from "../pool/air-bladder.js";
@@ -369,6 +370,7 @@ import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKrothussLordOfTheDeep from "../pool/krothuss-lord-of-the-deep.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
+import _poolKyrenSniper from "../pool/kyren-sniper.js";
 import _poolLakeshoreApothecary from "../pool/lakeshore-apothecary.js";
 import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
@@ -545,6 +547,7 @@ import _poolRictusRobber from "../pool/rictus-robber.js";
 import _poolRiddlekeeper from "../pool/riddlekeeper.js";
 import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
+import _poolRishadanPawnshop from "../pool/rishadan-pawnshop.js";
 import _poolRiskFactor from "../pool/risk-factor.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRitualOfTheMachine from "../pool/ritual-of-the-machine.js";
@@ -590,6 +593,7 @@ import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolSerpentGenerator from "../pool/serpent-generator.js";
 import _poolSerumTank from "../pool/serum-tank.js";
+import _poolSeverSoul from "../pool/sever-soul.js";
 import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
@@ -793,6 +797,7 @@ const shard: CardShard = {
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
     _poolAchillesDavenport,
+    _poolAerialCaravan,
     _poolAethergeodeMiner,
     _poolAetherstormRoc,
     _poolAirBladder,
@@ -1152,6 +1157,7 @@ const shard: CardShard = {
     _poolKrileBaldesion,
     _poolKrothussLordOfTheDeep,
     _poolKydeleChosenOfKruphix,
+    _poolKyrenSniper,
     _poolLakeshoreApothecary,
     _poolLasydProwler,
     _poolLeafkinDruid,
@@ -1328,6 +1334,7 @@ const shard: CardShard = {
     _poolRiddlekeeper,
     _poolRiptideLaboratory,
     _poolRiseOfTheEldrazi,
+    _poolRishadanPawnshop,
     _poolRiskFactor,
     _poolRiskyShortcut,
     _poolRitualOfTheMachine,
@@ -1373,6 +1380,7 @@ const shard: CardShard = {
     _poolSeraphOfTheSuns,
     _poolSerpentGenerator,
     _poolSerumTank,
+    _poolSeverSoul,
     _poolShadowstormVizier,
     _poolShaperGuildmage,
     _poolSharktocrab,

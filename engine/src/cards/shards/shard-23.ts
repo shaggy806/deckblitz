@@ -131,6 +131,7 @@ import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolCharnelhoardWurm from "../pool/charnelhoard-wurm.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
+import _poolChoArrimBruiser from "../pool/cho-arrim-bruiser.js";
 import _poolChoke from "../pool/choke.js";
 import _poolChopDown from "../pool/chop-down.js";
 import _poolChurningEddy from "../pool/churning-eddy.js";
@@ -147,6 +148,7 @@ import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
+import _poolCorruptOfficial from "../pool/corrupt-official.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCradleGuard from "../pool/cradle-guard.js";
@@ -229,6 +231,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
+import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFacelessDevourer from "../pool/faceless-devourer.js";
@@ -390,6 +393,7 @@ import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
+import _poolLavaRunner from "../pool/lava-runner.js";
 import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLeechingLicid from "../pool/leeching-licid.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
@@ -688,6 +692,7 @@ import _poolTakeIntoCustody from "../pool/take-into-custody.js";
 import _poolTandemTactics from "../pool/tandem-tactics.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTarPitWarrior from "../pool/tar-pit-warrior.js";
+import _poolTaskForce from "../pool/task-force.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
 import _poolTectonicRift from "../pool/tectonic-rift.js";
@@ -947,6 +952,7 @@ const shard: CardShard = {
     _poolCharnelhoardWurm,
     _poolChatterOfTheSquirrel,
     _poolChildOfTheVolcano,
+    _poolChoArrimBruiser,
     _poolChoke,
     _poolChopDown,
     _poolChurningEddy,
@@ -963,6 +969,7 @@ const shard: CardShard = {
     _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
+    _poolCorruptOfficial,
     _poolCostumeCloset,
     _poolCracklingSpellslinger,
     _poolCradleGuard,
@@ -1045,6 +1052,7 @@ const shard: CardShard = {
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
+    _poolExtravagantSpirit,
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
     _poolFacelessDevourer,
@@ -1206,6 +1214,7 @@ const shard: CardShard = {
     _poolKyoshiBattleFan,
     _poolLarvalScoutlander,
     _poolLavaAxe,
+    _poolLavaRunner,
     _poolLeafkinAvenger,
     _poolLeechingLicid,
     _poolLegionsJudgment,
@@ -1504,6 +1513,7 @@ const shard: CardShard = {
     _poolTandemTactics,
     _poolTanglespanLookout,
     _poolTarPitWarrior,
+    _poolTaskForce,
     _poolTasseledDromedary,
     _poolTeamTransmitter,
     _poolTectonicRift,

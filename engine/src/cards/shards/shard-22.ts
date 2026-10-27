@@ -505,6 +505,7 @@ import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
 import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
 import _poolRallyToBattle from "../pool/rally-to-battle.js";
+import _poolRampartCrawler from "../pool/rampart-crawler.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
@@ -551,6 +552,7 @@ import _poolRunAwayTogether from "../pool/run-away-together.js";
 import _poolRuneOfProtectionArtifacts from "../pool/rune-of-protection-artifacts.js";
 import _poolRuneOfProtectionBlack from "../pool/rune-of-protection-black.js";
 import _poolRuneSnag from "../pool/rune-snag.js";
+import _poolRushwoodLegate from "../pool/rushwood-legate.js";
 import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
@@ -635,6 +637,7 @@ import _poolSpreadTheSickness from "../pool/spread-the-sickness.js";
 import _poolSquall from "../pool/squall.js";
 import _poolSquelch from "../pool/squelch.js";
 import _poolStaggershock from "../pool/staggershock.js";
+import _poolStamina from "../pool/stamina.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
 import _poolSteadfastSentinel from "../pool/steadfast-sentinel.js";
 import _poolSterlingGrove from "../pool/sterling-grove.js";
@@ -764,6 +767,7 @@ import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
+import _poolWarpath from "../pool/warpath.js";
 import _poolWatcherSliver from "../pool/watcher-sliver.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
@@ -1324,6 +1328,7 @@ const shard: CardShard = {
     _poolRadhaHeartOfKeld,
     _poolRallyAtTheHornburg,
     _poolRallyToBattle,
+    _poolRampartCrawler,
     _poolRancor,
     _poolRangersGuile,
     _poolRaphaelsTechnique,
@@ -1370,6 +1375,7 @@ const shard: CardShard = {
     _poolRuneOfProtectionArtifacts,
     _poolRuneOfProtectionBlack,
     _poolRuneSnag,
+    _poolRushwoodLegate,
     _poolRustedSentinel,
     _poolRyuseiTheFallingStar,
     _poolSacrifice,
@@ -1454,6 +1460,7 @@ const shard: CardShard = {
     _poolSquall,
     _poolSquelch,
     _poolStaggershock,
+    _poolStamina,
     _poolStarkIndustriesExecutive,
     _poolSteadfastSentinel,
     _poolSterlingGrove,
@@ -1583,6 +1590,7 @@ const shard: CardShard = {
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWarehouseTabby,
+    _poolWarpath,
     _poolWatcherSliver,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
