@@ -454,6 +454,7 @@ import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPolukranosWorldEater from "../pool/polukranos-world-eater.js";
 import _poolPortentOfBetrayal from "../pool/portent-of-betrayal.js";
+import _poolPossessedCentaur from "../pool/possessed-centaur.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPredatoryAdvantage from "../pool/predatory-advantage.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
@@ -555,6 +556,7 @@ import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShowdownOfTheSkalds from "../pool/showdown-of-the-skalds.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
+import _poolSickeningDreams from "../pool/sickening-dreams.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
 import _poolSigiledContender from "../pool/sigiled-contender.js";
@@ -1233,6 +1235,7 @@ const shard: CardShard = {
     _poolPolliwallop,
     _poolPolukranosWorldEater,
     _poolPortentOfBetrayal,
+    _poolPossessedCentaur,
     _poolPramikonSkyRampart,
     _poolPredatoryAdvantage,
     _poolPrepareFight,
@@ -1334,6 +1337,7 @@ const shard: CardShard = {
     _poolShowdownOfTheSkalds,
     _poolShrikeForce,
     _poolSicken,
+    _poolSickeningDreams,
     _poolSidequestRaiseAChocobo,
     _poolSidisiBroodTyrant,
     _poolSigiledContender,

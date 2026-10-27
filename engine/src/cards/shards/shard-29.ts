@@ -54,6 +54,7 @@ import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
+import _poolBaskingRootwalla from "../pool/basking-rootwalla.js";
 import _poolBattlewiseAven from "../pool/battlewise-aven.js";
 import _poolBazaarKrovod from "../pool/bazaar-krovod.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
@@ -343,6 +344,7 @@ import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
+import _poolKamahlsSledge from "../pool/kamahls-sledge.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
@@ -463,6 +465,7 @@ import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
 import _poolPersonOfInterest from "../pool/person-of-interest.js";
 import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
+import _poolPetravark from "../pool/petravark.js";
 import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
@@ -843,6 +846,7 @@ const shard: CardShard = {
     _poolBargain,
     _poolBargeIn,
     _poolBarkKnuckleBoxer,
+    _poolBaskingRootwalla,
     _poolBattlewiseAven,
     _poolBazaarKrovod,
     _poolBeatrixLoyalGeneral,
@@ -1132,6 +1136,7 @@ const shard: CardShard = {
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
+    _poolKamahlsSledge,
     _poolKamizObscuraOculus,
     _poolKazanduNectarpot,
     _poolKazarovSengirPureblood,
@@ -1252,6 +1257,7 @@ const shard: CardShard = {
     _poolPersonOfInterest,
     _poolPestbroodSloth,
     _poolPetAvengers,
+    _poolPetravark,
     _poolPhageTheUntouchable,
     _poolPhalanxVanguard,
     _poolPhantasmalSphere,

@@ -463,6 +463,7 @@ import _poolPhantomWings from "../pool/phantom-wings.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
+import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
@@ -489,6 +490,7 @@ import _poolRaisedByWolves from "../pool/raised-by-wolves.js";
 import _poolRakaSanctuary from "../pool/raka-sanctuary.js";
 import _poolRalCallerOfStorms from "../pool/ral-caller-of-storms.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
+import _poolRancidEarth from "../pool/rancid-earth.js";
 import _poolRattleblazeScarecrow from "../pool/rattleblaze-scarecrow.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
@@ -1237,6 +1239,7 @@ const shard: CardShard = {
     _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,
     _poolPileOn,
+    _poolPitchstoneWall,
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
     _poolPlatedRootwalla,
@@ -1263,6 +1266,7 @@ const shard: CardShard = {
     _poolRakaSanctuary,
     _poolRalCallerOfStorms,
     _poolRammasEchorAncientShield,
+    _poolRancidEarth,
     _poolRattleblazeScarecrow,
     _poolRavenousBaboons,
     _poolRazorclawBear,

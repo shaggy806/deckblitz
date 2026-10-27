@@ -8376,4 +8376,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: [{ name: 'Grizzly Bears', tapped: true }, 'Hill Giant'] },
     }),
   ),
+  // --- Discard X cards as a spell's cost (2026-10-27, Torment) ---------------
+  preset(
+    'Sickening Dreams: choose X, then discard that many',
+    board({ you: { bf: ['Swamp*2'], hand: ['Sickening Dreams', 'Wastes', 'Island', 'Mountain'] }, opp: { bf: ['Grizzly Bears'] } }),
+  ),
 ]

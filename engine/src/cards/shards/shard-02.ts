@@ -132,6 +132,7 @@ import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
+import _poolCripplingFatigue from "../pool/crippling-fatigue.js";
 import _poolCruelReality from "../pool/cruel-reality.js";
 import _poolCryptwailing from "../pool/cryptwailing.js";
 import _poolCrystalChimes from "../pool/crystal-chimes.js";
@@ -331,6 +332,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
+import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
@@ -555,6 +557,7 @@ import _poolSearingBarrage from "../pool/searing-barrage.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
+import _poolShadesForm from "../pool/shades-form.js";
 import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShadowstorm from "../pool/shadowstorm.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
+    _poolCripplingFatigue,
     _poolCruelReality,
     _poolCryptwailing,
     _poolCrystalChimes,
@@ -1092,6 +1096,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolInvasionOfKaladesh,
     _poolInventorsAxe,
+    _poolInvigoratingFalls,
     _poolInvisibleWoman,
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
@@ -1316,6 +1321,7 @@ const shard: CardShard = {
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
+    _poolShadesForm,
     _poolShadowsVerdict,
     _poolShadowstorm,
     _poolShakedownHeavy,

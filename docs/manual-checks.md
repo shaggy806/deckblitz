@@ -5557,3 +5557,9 @@ engine terms. A second thing to check is a second test.
 ### Goblin Grappler: the provoked creature has to block it
 - **Do:** Attack with Goblin Grappler, target the tapped Grizzly Bears with its trigger and say yes. As Bob, try to confirm blockers with none, then with Hill Giant blocking.
 - **Expect:** The Bears untap. Confirm stays disabled with "Grizzly Bears must block if able" until the Bears block the Grappler.
+
+## Discard X cards as a spell's cost (2026-10-27, Torment)
+
+### Sickening Dreams: choose X, then discard that many
+- **Do:** Cast Sickening Dreams and choose X = 2.
+- **Expect:** X goes no higher than 3 (the other cards in your hand). You're asked to discard two cards as it's cast; it then deals 2 damage to each creature and each player, and the Grizzly Bears die.

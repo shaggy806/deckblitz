@@ -72,16 +72,10 @@ oldest-first walk goes forward (`author-by-set-oldest`).
 
 ## Before round nineteen: the PC sessions' sets
 
-Round nineteen is the first round to touch Time Spiral, Ravnica, Urza's Destiny or Mercadian
-Masques. Before starting it, check `origin/main` for `engine/data/sweep-3/B209.json`, `B210.json`
-and `B211.json`:
-
-- **Landed:** those sets are smaller. Take what `cards:sets` says is left. Fold a walk whose set
-  is now whole into nothing, or move a remainder under ~40 cards into the round-twenty batch of
-  the same walk.
-- **Not landed, and the user says they're abandoned:** run the plan as written.
-- **Not landed and not known:** ask the user before starting those walks. The other walks in the
-  round can start meanwhile.
+Round sixteen's local B209–B211 were **abandoned** (the user, 2026-10-27): the local sessions
+never started, since they can't be started remotely. Nothing of them was pushed. Run rounds
+nineteen and twenty as written: their sets are already in them. The numbers B209–B211 stay
+unused; round nineteen numbers from the highest `B<N>` on `origin/main` plus one.
 
 ## Why these splits
 

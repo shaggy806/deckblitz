@@ -113,6 +113,7 @@ import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCarrion from "../pool/carrion.js";
 import _poolCatastrophe from "../pool/catastrophe.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
+import _poolCephalidVandal from "../pool/cephalid-vandal.js";
 import _poolCeruleanDrake from "../pool/cerulean-drake.js";
 import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
@@ -157,6 +158,7 @@ import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
+import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
@@ -908,6 +910,7 @@ const shard: CardShard = {
     _poolCarrion,
     _poolCatastrophe,
     _poolCatlikeCuriosity,
+    _poolCephalidVandal,
     _poolCeruleanDrake,
     _poolChaplainOfAlms,
     _poolChargeTheSanctum,
@@ -952,6 +955,7 @@ const shard: CardShard = {
     _poolDefiantKhenra,
     _poolDescentOfTheDragons,
     _poolDesiccatedNaga,
+    _poolDevastatingDreams,
     _poolDiamondPickAxe,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,

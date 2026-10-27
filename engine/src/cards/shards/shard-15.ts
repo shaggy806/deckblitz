@@ -37,6 +37,7 @@ import _poolArmoryMice from "../pool/armory-mice.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
+import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
 import _poolBansheesBlade from "../pool/banshees-blade.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
@@ -85,6 +86,7 @@ import _poolCarrionWall from "../pool/carrion-wall.js";
 import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js";
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolCentaursHerald from "../pool/centaurs-herald.js";
+import _poolCephalidSage from "../pool/cephalid-sage.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolChandrasRevolution from "../pool/chandras-revolution.js";
@@ -382,6 +384,7 @@ import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
 import _poolLingeringPhantom from "../pool/lingering-phantom.js";
 import _poolLivelyDirge from "../pool/lively-dirge.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
+import _poolLlawanCephalidEmpress from "../pool/llawan-cephalid-empress.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
 import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
@@ -441,6 +444,7 @@ import _poolMurasaRanger from "../pool/murasa-ranger.js";
 import _poolMurderOfCrows from "../pool/murder-of-crows.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
+import _poolNarcissism from "../pool/narcissism.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
 import _poolNearheathChaplain from "../pool/nearheath-chaplain.js";
 import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
@@ -784,6 +788,7 @@ const shard: CardShard = {
     _poolArtisanOfKozilek,
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,
+    _poolBalthorTheStout,
     _poolBansheesBlade,
     _poolBayou,
     _poolBeetleHeadedMerchants,
@@ -832,6 +837,7 @@ const shard: CardShard = {
     _poolCaseOfTheTrampledGarden,
     _poolCaughtInTheCrossfire,
     _poolCentaursHerald,
+    _poolCephalidSage,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
     _poolChandrasRevolution,
@@ -1129,6 +1135,7 @@ const shard: CardShard = {
     _poolLingeringPhantom,
     _poolLivelyDirge,
     _poolLlanowarLoamspeaker,
+    _poolLlawanCephalidEmpress,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,
     _poolLoreholdPledgemage,
@@ -1188,6 +1195,7 @@ const shard: CardShard = {
     _poolMurderOfCrows,
     _poolMysteriosPhantasm,
     _poolNamelessConqueror,
+    _poolNarcissism,
     _poolNaturalEnd,
     _poolNearheathChaplain,
     _poolNebelgastBeguiler,

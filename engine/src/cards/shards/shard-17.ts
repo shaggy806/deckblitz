@@ -323,6 +323,7 @@ import _poolHungryMist from "../pool/hungry-mist.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
+import _poolHypochondria from "../pool/hypochondria.js";
 import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
@@ -501,6 +502,7 @@ import _poolPyreCharger from "../pool/pyre-charger.js";
 import _poolPyreticHunter from "../pool/pyretic-hunter.js";
 import _poolPyrokinesis from "../pool/pyrokinesis.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
+import _poolPyromania from "../pool/pyromania.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
 import _poolQuickStudy from "../pool/quick-study.js";
 import _poolQuicksilverDagger from "../pool/quicksilver-dagger.js";
@@ -718,6 +720,7 @@ import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
 import _poolWarMachineJamesRhodes from "../pool/war-machine-james-rhodes.js";
 import _poolWasitoraNekoruQueen from "../pool/wasitora-nekoru-queen.js";
+import _poolWasteAway from "../pool/waste-away.js";
 import _poolWaterWurm from "../pool/water-wurm.js";
 import _poolWatertrapWeaver from "../pool/watertrap-weaver.js";
 import _poolWayOfTheNecromancer from "../pool/way-of-the-necromancer.js";
@@ -1106,6 +1109,7 @@ const shard: CardShard = {
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
+    _poolHypochondria,
     _poolIllTemperedLoner,
     _poolImodaneThePyrohammer,
     _poolImodanesRecruiter,
@@ -1284,6 +1288,7 @@ const shard: CardShard = {
     _poolPyreticHunter,
     _poolPyrokinesis,
     _poolPyromancersGoggles,
+    _poolPyromania,
     _poolQueenMarchesa,
     _poolQuickStudy,
     _poolQuicksilverDagger,
@@ -1501,6 +1506,7 @@ const shard: CardShard = {
     _poolWarChariot,
     _poolWarMachineJamesRhodes,
     _poolWasitoraNekoruQueen,
+    _poolWasteAway,
     _poolWaterWurm,
     _poolWatertrapWeaver,
     _poolWayOfTheNecromancer,

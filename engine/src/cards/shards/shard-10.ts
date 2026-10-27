@@ -235,6 +235,7 @@ import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
 import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
+import _poolFirestorm from "../pool/firestorm.js";
 import _poolFirstVolley from "../pool/first-volley.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFlamerushRider from "../pool/flamerush-rider.js";
@@ -375,6 +376,7 @@ import _poolLightningTalons from "../pool/lightning-talons.js";
 import _poolLikenessLooter from "../pool/likeness-looter.js";
 import _poolLilahUndefeatedSlickshot from "../pool/lilah-undefeated-slickshot.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
+import _poolLiquify from "../pool/liquify.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
@@ -474,6 +476,7 @@ import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
+import _poolPossessedAven from "../pool/possessed-aven.js";
 import _poolPouncingShoreshark from "../pool/pouncing-shoreshark.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
@@ -566,6 +569,7 @@ import _poolSeismicStrike from "../pool/seismic-strike.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
 import _poolSetessanBattlePriest from "../pool/setessan-battle-priest.js";
+import _poolSetonsScout from "../pool/setons-scout.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
 import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
@@ -1016,6 +1020,7 @@ const shard: CardShard = {
     _poolFieldTrip,
     _poolFinCladeFugitives,
     _poolFinalReward,
+    _poolFirestorm,
     _poolFirstVolley,
     _poolFixerTechnoTerror,
     _poolFlamerushRider,
@@ -1156,6 +1161,7 @@ const shard: CardShard = {
     _poolLikenessLooter,
     _poolLilahUndefeatedSlickshot,
     _poolLionheartGlimmer,
+    _poolLiquify,
     _poolLiveOrDie,
     _poolLivingArtifact,
     _poolLivingDeath,
@@ -1255,6 +1261,7 @@ const shard: CardShard = {
     _poolPlatedSpider,
     _poolPoetsQuill,
     _poolPoisonTheWaters,
+    _poolPossessedAven,
     _poolPouncingShoreshark,
     _poolPowerbalance,
     _poolPravaOfTheSteelLegion,
@@ -1347,6 +1354,7 @@ const shard: CardShard = {
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
     _poolSetessanBattlePriest,
+    _poolSetonsScout,
     _poolShadowfaxLordOfHorses,
     _poolShadowspear,
     _poolShamblingCieth,

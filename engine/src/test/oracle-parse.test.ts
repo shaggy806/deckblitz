@@ -1105,6 +1105,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As an additional cost to cast this spell, exile six cards from your graveyard.\nFlying").additionalCost).toEqual({
       exileFromGraveyard: { count: 6 },
     });
+    // "Discard a card / N cards / X cards [at random]" (Sickening Dreams'
+    // X is the discard's, the mana cost having none).
+    const thrill = face("As an additional cost to cast this spell, discard a card.\nDraw two cards.", "Instant", {});
+    expect(thrill.additionalCost).toEqual({ discard: 1 });
+    expect(thrill.complete).toBe(true);
+    expect(face("As an additional cost to cast this spell, discard X cards.\nDraw two cards.", "Sorcery", {}).additionalCost).toEqual({
+      discard: "x",
+    });
+    expect(
+      face("As an additional cost to cast this spell, discard X cards at random.\nDraw two cards.", "Sorcery", {}).additionalCost,
+    ).toEqual({ discard: "x", discardAtRandom: true });
     // Any spell's, a creature's too; "{X}" makes it an X spell.
     expect(face("As an additional cost to cast this spell, waterbend {X}.\nFlying").additionalCost).toEqual({
       waterbend: "x",
