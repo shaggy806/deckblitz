@@ -364,6 +364,7 @@ import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolLowlandOaf from "../pool/lowland-oaf.js";
+import _poolLumengridAugur from "../pool/lumengrid-augur.js";
 import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
 import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
@@ -475,6 +476,7 @@ import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
+import _poolPromiseOfPower from "../pool/promise-of-power.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
@@ -642,6 +644,7 @@ import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTangleAsp from "../pool/tangle-asp.js";
+import _poolTangleroot from "../pool/tangleroot.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTemmetVizierOfNaktamun from "../pool/temmet-vizier-of-naktamun.js";
@@ -726,6 +729,7 @@ import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVowOfFlight from "../pool/vow-of-flight.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
+import _poolWailOfTheNim from "../pool/wail-of-the-nim.js";
 import _poolWakeThrasher from "../pool/wake-thrasher.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
@@ -1149,6 +1153,7 @@ const shard: CardShard = {
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
     _poolLowlandOaf,
+    _poolLumengridAugur,
     _poolLureboundScarecrow,
     _poolMaestrosGift,
     _poolMaggotCarrier,
@@ -1260,6 +1265,7 @@ const shard: CardShard = {
     _poolPredatorsStrike,
     _poolPrimordialHydra,
     _poolPrismwakeMerrow,
+    _poolPromiseOfPower,
     _poolProudMentor,
     _poolPteramander,
     _poolPurphorossIntervention,
@@ -1427,6 +1433,7 @@ const shard: CardShard = {
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTangleAsp,
+    _poolTangleroot,
     _poolTattermungeManiac,
     _poolTelJiladExile,
     _poolTemmetVizierOfNaktamun,
@@ -1511,6 +1518,7 @@ const shard: CardShard = {
     _poolVowOfFlight,
     _poolVulshokBattlegear,
     _poolVulshokRefugee,
+    _poolWailOfTheNim,
     _poolWakeThrasher,
     _poolWalkingDead,
     _poolWallOfOpposition,

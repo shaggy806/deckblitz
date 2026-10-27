@@ -47,6 +47,7 @@ import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
 import _poolAshioksAdept from "../pool/ashioks-adept.js";
 import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
+import _poolAssertAuthority from "../pool/assert-authority.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
 import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
@@ -292,6 +293,7 @@ import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHealTheScars from "../pool/heal-the-scars.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
+import _poolHeartwoodShard from "../pool/heartwood-shard.js";
 import _poolHeliumSquirter from "../pool/helium-squirter.js";
 import _poolHellfire from "../pool/hellfire.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
@@ -811,6 +813,7 @@ const shard: CardShard = {
     _poolAshenmoorCohort,
     _poolAshioksAdept,
     _poolAsmiraHolyAvenger,
+    _poolAssertAuthority,
     _poolAtarkaEfreet,
     _poolAtarkaPummeler,
     _poolAtomize,
@@ -1056,6 +1059,7 @@ const shard: CardShard = {
     _poolHealTheScars,
     _poolHeapGate,
     _poolHeartSliver,
+    _poolHeartwoodShard,
     _poolHeliumSquirter,
     _poolHellfire,
     _poolHellsThunder,

@@ -89,6 +89,7 @@ import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCavalcadeOfCalamity from "../pool/cavalcade-of-calamity.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolCelestialRegulator from "../pool/celestial-regulator.js";
+import _poolChaliceOfTheVoid from "../pool/chalice-of-the-void.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
@@ -346,6 +347,7 @@ import _poolLegionLeadership from "../pool/legion-leadership.js";
 import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
 import _poolLifeAndLimb from "../pool/life-and-limb.js";
+import _poolLifesparkSpellbomb from "../pool/lifespark-spellbomb.js";
 import _poolLightbringer from "../pool/lightbringer.js";
 import _poolLightlessEvangel from "../pool/lightless-evangel.js";
 import _poolLightningGreaves from "../pool/lightning-greaves.js";
@@ -412,6 +414,7 @@ import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMournwillow from "../pool/mournwillow.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
+import _poolMyrMindservant from "../pool/myr-mindservant.js";
 import _poolMyrReservoir from "../pool/myr-reservoir.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
@@ -534,6 +537,7 @@ import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
 import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
+import _poolShrapnelBlast from "../pool/shrapnel-blast.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
 import _poolSilentChantZubera from "../pool/silent-chant-zubera.js";
 import _poolSilverbluffBridge from "../pool/silverbluff-bridge.js";
@@ -847,6 +851,7 @@ const shard: CardShard = {
     _poolCavalcadeOfCalamity,
     _poolCelestialArmor,
     _poolCelestialRegulator,
+    _poolChaliceOfTheVoid,
     _poolChampionsOfThePerfect,
     _poolChandrasPyreling,
     _poolChangeOfPlans,
@@ -1104,6 +1109,7 @@ const shard: CardShard = {
     _poolLevelUp,
     _poolLevitation,
     _poolLifeAndLimb,
+    _poolLifesparkSpellbomb,
     _poolLightbringer,
     _poolLightlessEvangel,
     _poolLightningGreaves,
@@ -1170,6 +1176,7 @@ const shard: CardShard = {
     _poolMournwillow,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
+    _poolMyrMindservant,
     _poolMyrReservoir,
     _poolMysteriousEgg,
     _poolNacatlOutlander,
@@ -1292,6 +1299,7 @@ const shard: CardShard = {
     _poolShatteredAngel,
     _poolShellSkulkin,
     _poolShimmerOfPossibility,
+    _poolShrapnelBlast,
     _poolSigardasAid,
     _poolSilentChantZubera,
     _poolSilverbluffBridge,

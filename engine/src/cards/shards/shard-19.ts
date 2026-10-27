@@ -127,6 +127,7 @@ import _poolClearTheStage from "../pool/clear-the-stage.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
+import _poolClockworkDragon from "../pool/clockwork-dragon.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
 import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
@@ -488,6 +489,7 @@ import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
+import _poolNuisanceEngine from "../pool/nuisance-engine.js";
 import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolObservantAlseid from "../pool/observant-alseid.js";
@@ -514,6 +516,7 @@ import _poolPatientRebuilding from "../pool/patient-rebuilding.js";
 import _poolPeerReview from "../pool/peer-review.js";
 import _poolPendrellMists from "../pool/pendrell-mists.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
+import _poolPentavus from "../pool/pentavus.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
@@ -679,6 +682,7 @@ import _poolStromkirkNoble from "../pool/stromkirk-noble.js";
 import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
 import _poolSunCrestedPterodon from "../pool/sun-crested-pterodon.js";
+import _poolSunDroplet from "../pool/sun-droplet.js";
 import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
 import _poolSunriseSeeker from "../pool/sunrise-seeker.js";
@@ -935,6 +939,7 @@ const shard: CardShard = {
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
     _poolCloakedSiren,
+    _poolClockworkDragon,
     _poolCloudDjinn,
     _poolCloudSpirit,
     _poolCloutOfTheDominus,
@@ -1296,6 +1301,7 @@ const shard: CardShard = {
     _poolNimbleTrapfinder,
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
+    _poolNuisanceEngine,
     _poolNyxbornHydra,
     _poolOathOfChandra,
     _poolObservantAlseid,
@@ -1322,6 +1328,7 @@ const shard: CardShard = {
     _poolPeerReview,
     _poolPendrellMists,
     _poolPendulumOfPatterns,
+    _poolPentavus,
     _poolPerilousLandscape,
     _poolPerilousSnare,
     _poolPestilentWolf,
@@ -1487,6 +1494,7 @@ const shard: CardShard = {
     _poolSummonGfIfrit,
     _poolSummonKnightsOfRound,
     _poolSunCrestedPterodon,
+    _poolSunDroplet,
     _poolSunbillowVerge,
     _poolSunbladeSamurai,
     _poolSunriseSeeker,

@@ -378,6 +378,7 @@ import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
+import _poolLivingHive from "../pool/living-hive.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
 import _poolLoanShark from "../pool/loan-shark.js";
 import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
@@ -479,6 +480,7 @@ import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
+import _poolPyriteSpellbomb from "../pool/pyrite-spellbomb.js";
 import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
@@ -578,6 +580,7 @@ import _poolSkillfulLunge from "../pool/skillful-lunge.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
 import _poolSkitteringInvasion from "../pool/skittering-invasion.js";
 import _poolSkizzikSurger from "../pool/skizzik-surger.js";
+import _poolSkyhunterCub from "../pool/skyhunter-cub.js";
 import _poolSkyknightSquire from "../pool/skyknight-squire.js";
 import _poolSkylineScout from "../pool/skyline-scout.js";
 import _poolSlaughterCry from "../pool/slaughter-cry.js";
@@ -634,6 +637,7 @@ import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtor from "../pool/telimtor.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
+import _poolTempestOfLight from "../pool/tempest-of-light.js";
 import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
@@ -1138,6 +1142,7 @@ const shard: CardShard = {
     _poolLilianasDefeat,
     _poolLingeringTormentor,
     _poolLivingAirship,
+    _poolLivingHive,
     _poolLoamDryad,
     _poolLoanShark,
     _poolLongstalkBrawl,
@@ -1239,6 +1244,7 @@ const shard: CardShard = {
     _poolProwlerClawedThief,
     _poolPursueGlory,
     _poolPutrefax,
+    _poolPyriteSpellbomb,
     _poolPyroclastConsul,
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
@@ -1338,6 +1344,7 @@ const shard: CardShard = {
     _poolSkirsdagFlayer,
     _poolSkitteringInvasion,
     _poolSkizzikSurger,
+    _poolSkyhunterCub,
     _poolSkyknightSquire,
     _poolSkylineScout,
     _poolSlaughterCry,
@@ -1394,6 +1401,7 @@ const shard: CardShard = {
     _poolTelimtor,
     _poolTelimtorsDarts,
     _poolTempestHart,
+    _poolTempestOfLight,
     _poolTenuredOilcaster,
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,

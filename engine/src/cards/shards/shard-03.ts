@@ -201,6 +201,7 @@ import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolFlourishingHunter from "../pool/flourishing-hunter.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
+import _poolFracturedLoyalty from "../pool/fractured-loyalty.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFrostRaptor from "../pool/frost-raptor.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
@@ -897,6 +898,7 @@ const shard: CardShard = {
     _poolFlockImpostor,
     _poolFlourishingHunter,
     _poolForsakenMonument,
+    _poolFracturedLoyalty,
     _poolFrogmyrEnforcer,
     _poolFrostRaptor,
     _poolFurybladeVampire,

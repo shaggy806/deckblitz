@@ -23,6 +23,7 @@ import _poolAkroanSkyguard from "../pool/akroan-skyguard.js";
 import _poolAlBhedSalvagers from "../pool/al-bhed-salvagers.js";
 import _poolAllThatGlitters from "../pool/all-that-glitters.js";
 import _poolAlpineGrizzly from "../pool/alpine-grizzly.js";
+import _poolAltarOfShadows from "../pool/altar-of-shadows.js";
 import _poolAmbassadorOak from "../pool/ambassador-oak.js";
 import _poolAmbushParty from "../pool/ambush-party.js";
 import _poolAnHavvaTownship from "../pool/an-havva-township.js";
@@ -153,6 +154,7 @@ import _poolConquerorsFlail from "../pool/conquerors-flail.js";
 import _poolConsulateCrackdown from "../pool/consulate-crackdown.js";
 import _poolConsulateSkygate from "../pool/consulate-skygate.js";
 import _poolContagiousNim from "../pool/contagious-nim.js";
+import _poolContaminatedBond from "../pool/contaminated-bond.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
@@ -785,6 +787,7 @@ const shard: CardShard = {
     _poolAlBhedSalvagers,
     _poolAllThatGlitters,
     _poolAlpineGrizzly,
+    _poolAltarOfShadows,
     _poolAmbassadorOak,
     _poolAmbushParty,
     _poolAnHavvaTownship,
@@ -915,6 +918,7 @@ const shard: CardShard = {
     _poolConsulateCrackdown,
     _poolConsulateSkygate,
     _poolContagiousNim,
+    _poolContaminatedBond,
     _poolContentiousPlan,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,

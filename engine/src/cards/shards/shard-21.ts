@@ -122,6 +122,7 @@ import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
 import _poolCleavingReaper from "../pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
+import _poolClockworkCondor from "../pool/clockwork-condor.js";
 import _poolClockworkServant from "../pool/clockwork-servant.js";
 import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
@@ -277,6 +278,7 @@ import _poolGoldenDemise from "../pool/golden-demise.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
+import _poolGraniteShard from "../pool/granite-shard.js";
 import _poolGravebornMuse from "../pool/graveborn-muse.js";
 import _poolGraveyardGlutton from "../pool/graveyard-glutton.js";
 import _poolGreatbowDoyen from "../pool/greatbow-doyen.js";
@@ -405,6 +407,7 @@ import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
 import _poolMob from "../pool/mob.js";
 import _poolMoldAdder from "../pool/mold-adder.js";
 import _poolMolderBeast from "../pool/molder-beast.js";
+import _poolMolderSlug from "../pool/molder-slug.js";
 import _poolMonaLisaScienceGeek from "../pool/mona-lisa-science-geek.js";
 import _poolMondronenShaman from "../pool/mondronen-shaman.js";
 import _poolMonoistSentry from "../pool/monoist-sentry.js";
@@ -872,6 +875,7 @@ const shard: CardShard = {
     _poolClavilenoFirstOfTheBlessed,
     _poolCleavingReaper,
     _poolCleavingSkyrider,
+    _poolClockworkCondor,
     _poolClockworkServant,
     _poolCockatrice,
     _poolCoercion,
@@ -1027,6 +1031,7 @@ const shard: CardShard = {
     _poolGoldmeadowDodger,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
+    _poolGraniteShard,
     _poolGravebornMuse,
     _poolGraveyardGlutton,
     _poolGreatbowDoyen,
@@ -1155,6 +1160,7 @@ const shard: CardShard = {
     _poolMob,
     _poolMoldAdder,
     _poolMolderBeast,
+    _poolMolderSlug,
     _poolMonaLisaScienceGeek,
     _poolMondronenShaman,
     _poolMonoistSentry,

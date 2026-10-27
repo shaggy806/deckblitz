@@ -605,6 +605,7 @@ import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
+import _poolSolarTide from "../pool/solar-tide.js";
 import _poolSoltariLancer from "../pool/soltari-lancer.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
@@ -1372,6 +1373,7 @@ const shard: CardShard = {
     _poolSmolderingEfreet,
     _poolSmugglersSurprise,
     _poolSneeringShadewriter,
+    _poolSolarTide,
     _poolSoltariLancer,
     _poolSoltariPriest,
     _poolSoulbladeRenewer,

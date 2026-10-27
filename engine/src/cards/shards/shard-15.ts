@@ -36,6 +36,7 @@ import _poolArmoryMice from "../pool/armory-mice.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
+import _poolBansheesBlade from "../pool/banshees-blade.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBelbeCorruptedObserver from "../pool/belbe-corrupted-observer.js";
@@ -61,6 +62,7 @@ import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
+import _poolBoshIronGolem from "../pool/bosh-iron-golem.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBreakTies from "../pool/break-ties.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
@@ -109,6 +111,7 @@ import _poolConjurersCloset from "../pool/conjurers-closet.js";
 import _poolConsumingSepulcher from "../pool/consuming-sepulcher.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
+import _poolCopperhoofVorrac from "../pool/copperhoof-vorrac.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
 import _poolCorpseChurn from "../pool/corpse-churn.js";
 import _poolCourierBat from "../pool/courier-bat.js";
@@ -265,6 +268,7 @@ import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
 import _poolGolgariRotFarm from "../pool/golgari-rot-farm.js";
 import _poolGorillaWarCry from "../pool/gorilla-war-cry.js";
+import _poolGrabTheReins from "../pool/grab-the-reins.js";
 import _poolGraduationDay from "../pool/graduation-day.js";
 import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
@@ -500,6 +504,7 @@ import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
+import _poolReiverDemon from "../pool/reiver-demon.js";
 import _poolRelentlessSkaabs from "../pool/relentless-skaabs.js";
 import _poolRendSpirit from "../pool/rend-spirit.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
@@ -764,6 +769,7 @@ const shard: CardShard = {
     _poolArtisanOfKozilek,
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,
+    _poolBansheesBlade,
     _poolBayou,
     _poolBeetleHeadedMerchants,
     _poolBelbeCorruptedObserver,
@@ -789,6 +795,7 @@ const shard: CardShard = {
     _poolBondBeetle,
     _poolBoneMiser,
     _poolBorosReckoner,
+    _poolBoshIronGolem,
     _poolBrainWeevil,
     _poolBreakTies,
     _poolBrenardGingerSculptor,
@@ -837,6 +844,7 @@ const shard: CardShard = {
     _poolConsumingSepulcher,
     _poolContingencyPlan,
     _poolCopperLonglegs,
+    _poolCopperhoofVorrac,
     _poolCormelaGlamourThief,
     _poolCorpseChurn,
     _poolCourierBat,
@@ -993,6 +1001,7 @@ const shard: CardShard = {
     _poolGolgariLonglegs,
     _poolGolgariRotFarm,
     _poolGorillaWarCry,
+    _poolGrabTheReins,
     _poolGraduationDay,
     _poolGraftedButcher,
     _poolGraniteGargoyle,
@@ -1228,6 +1237,7 @@ const shard: CardShard = {
     _poolReduceToMemory,
     _poolRegenerate,
     _poolRegicide,
+    _poolReiverDemon,
     _poolRelentlessSkaabs,
     _poolRendSpirit,
     _poolRerouteSystems,

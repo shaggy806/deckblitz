@@ -426,6 +426,7 @@ import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
 import _poolNightMarketLookout from "../pool/night-market-lookout.js";
+import _poolNightmareLash from "../pool/nightmare-lash.js";
 import _poolNikkoOnna from "../pool/nikko-onna.js";
 import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
@@ -715,6 +716,7 @@ import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
 import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
 import _poolVraskaSoulOfStone from "../pool/vraska-soul-of-stone.js";
 import _poolVrynWingmare from "../pool/vryn-wingmare.js";
+import _poolVulshokGauntlets from "../pool/vulshok-gauntlets.js";
 import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
@@ -1194,6 +1196,7 @@ const shard: CardShard = {
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
     _poolNightMarketLookout,
+    _poolNightmareLash,
     _poolNikkoOnna,
     _poolNimbleBirdsticker,
     _poolNimbusMaze,
@@ -1483,6 +1486,7 @@ const shard: CardShard = {
     _poolVraanExecutionerThane,
     _poolVraskaSoulOfStone,
     _poolVrynWingmare,
+    _poolVulshokGauntlets,
     _poolWallOfBrambles,
     _poolWallOfFire,
     _poolWallOfForgottenPharaohs,

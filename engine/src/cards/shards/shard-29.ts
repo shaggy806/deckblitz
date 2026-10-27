@@ -215,6 +215,7 @@ import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFallOfTheTitans from "../pool/fall-of-the-titans.js";
 import _poolFalseMourning from "../pool/false-mourning.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
+import _poolFarsightMask from "../pool/farsight-mask.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
@@ -358,6 +359,7 @@ import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
 import _poolLifeline from "../pool/lifeline.js";
 import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
+import _poolLightningCoils from "../pool/lightning-coils.js";
 import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
@@ -418,6 +420,7 @@ import _poolNeurokReplica from "../pool/neurok-replica.js";
 import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNikaraLairScavenger from "../pool/nikara-lair-scavenger.js";
+import _poolNimDevourer from "../pool/nim-devourer.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
 import _poolNomadsEnKor from "../pool/nomads-en-kor.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
@@ -440,6 +443,7 @@ import _poolOriginSpellbomb from "../pool/origin-spellbomb.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
+import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParalyze from "../pool/paralyze.js";
@@ -988,6 +992,7 @@ const shard: CardShard = {
     _poolFallOfTheTitans,
     _poolFalseMourning,
     _poolFangrenMarauder,
+    _poolFarsightMask,
     _poolFatedReturn,
     _poolFeralLightning,
     _poolFertileGround,
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolLeylineSurge,
     _poolLifeline,
     _poolLightfootRogue,
+    _poolLightningCoils,
     _poolLightwalker,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
@@ -1191,6 +1197,7 @@ const shard: CardShard = {
     _poolNeutralizeTheGuards,
     _poolNezumiInformant,
     _poolNikaraLairScavenger,
+    _poolNimDevourer,
     _poolNipGwyllion,
     _poolNomadsEnKor,
     _poolNoxiousDragon,
@@ -1213,6 +1220,7 @@ const shard: CardShard = {
     _poolOsaiVultures,
     _poolOtharriSunsGlory,
     _poolOutcasterTrailblazer,
+    _poolOverride,
     _poolOwlinHistorian,
     _poolPain101,
     _poolParalyze,

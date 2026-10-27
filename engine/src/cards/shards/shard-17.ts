@@ -633,6 +633,7 @@ import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
+import _poolTelJiladArchers from "../pool/tel-jilad-archers.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
+    _poolTelJiladArchers,
     _poolTemporaryTruce,
     _poolTezzeretsTouch,
     _poolThaumaturgesFamiliar,

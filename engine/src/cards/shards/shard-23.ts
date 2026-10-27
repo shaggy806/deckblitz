@@ -234,6 +234,7 @@ import _poolFleetSwallower from "../pool/fleet-swallower.js";
 import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
 import _poolFoolishFate from "../pool/foolish-fate.js";
+import _poolForgeArmor from "../pool/forge-armor.js";
 import _poolForgebornOreads from "../pool/forgeborn-oreads.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFortifyingDraught from "../pool/fortifying-draught.js";
@@ -527,6 +528,7 @@ import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
+import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
@@ -1001,6 +1003,7 @@ const shard: CardShard = {
     _poolFlensermite,
     _poolFomoriVault,
     _poolFoolishFate,
+    _poolForgeArmor,
     _poolForgebornOreads,
     _poolForsakenThresher,
     _poolFortifyingDraught,
@@ -1294,6 +1297,7 @@ const shard: CardShard = {
     _poolRimefurReindeer,
     _poolRiteOfConsumption,
     _poolRitualOfHope,
+    _poolRoarOfTheKha,
     _poolRoilingCanopy,
     _poolRooftopAssassin,
     _poolRoryWilliams,

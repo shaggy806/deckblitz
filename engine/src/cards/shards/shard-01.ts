@@ -75,6 +75,7 @@ import _poolBreathWeapon from "../pool/breath-weapon.js";
 import _poolBringerOfTheBlackDawn from "../pool/bringer-of-the-black-dawn.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
+import _poolBroodstar from "../pool/broodstar.js";
 import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
 import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
@@ -337,6 +338,7 @@ import _poolLavaSpike from "../pool/lava-spike.js";
 import _poolLeadPipe from "../pool/lead-pipe.js";
 import _poolLeafdrakeRoost from "../pool/leafdrake-roost.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
+import _poolLeoninBladetrap from "../pool/leonin-bladetrap.js";
 import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
 import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
@@ -659,6 +661,7 @@ import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
+import _poolTurnToDust from "../pool/turn-to-dust.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
 import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
@@ -823,6 +826,7 @@ const shard: CardShard = {
     _poolBringerOfTheBlackDawn,
     _poolBrokenBond,
     _poolBrokersHideout,
+    _poolBroodstar,
     _poolBrutalNightstalker,
     _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
@@ -1085,6 +1089,7 @@ const shard: CardShard = {
     _poolLeadPipe,
     _poolLeafdrakeRoost,
     _poolLeonardosTechnique,
+    _poolLeoninBladetrap,
     _poolLetsPlayAGame,
     _poolLeylineTyrant,
     _poolLieutenantKirtar,
@@ -1407,6 +1412,7 @@ const shard: CardShard = {
     _poolTrustedForcemage,
     _poolTunnelRats,
     _poolTurbulentShore,
+    _poolTurnToDust,
     _poolTwiceTheRage,
     _poolTwilightPanther,
     _poolUlnaAlleyShopkeep,

@@ -194,6 +194,7 @@ import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
 import _poolEfreetWeaponmaster from "../pool/efreet-weaponmaster.js";
 import _poolEiganjoExemplar from "../pool/eiganjo-exemplar.js";
+import _poolElectrostaticBolt from "../pool/electrostatic-bolt.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
@@ -405,6 +406,7 @@ import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
+import _poolNeedlebug from "../pool/needlebug.js";
 import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
@@ -579,6 +581,7 @@ import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpikeHatcher from "../pool/spike-hatcher.js";
+import _poolSpikeshotGoblin from "../pool/spikeshot-goblin.js";
 import _poolSpiralingEmbers from "../pool/spiraling-embers.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
@@ -961,6 +964,7 @@ const shard: CardShard = {
     _poolEclipsedBoggart,
     _poolEfreetWeaponmaster,
     _poolEiganjoExemplar,
+    _poolElectrostaticBolt,
     _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
@@ -1172,6 +1176,7 @@ const shard: CardShard = {
     _poolMysticDecree,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
+    _poolNeedlebug,
     _poolNezumiShadowWatcher,
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _poolSpideryGrasp,
     _poolSpikeFeeder,
     _poolSpikeHatcher,
+    _poolSpikeshotGoblin,
     _poolSpiralingEmbers,
     _poolSpiresOfOrazca,
     _poolSplitTailMiko,

@@ -248,6 +248,7 @@ import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
+import _poolGateToTheAether from "../pool/gate-to-the-aether.js";
 import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
 import _poolGenesis from "../pool/genesis.js";
 import _poolGeothermalBog from "../pool/geothermal-bog.js";
@@ -558,6 +559,7 @@ import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolSerpentGenerator from "../pool/serpent-generator.js";
+import _poolSerumTank from "../pool/serum-tank.js";
 import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
@@ -993,6 +995,7 @@ const shard: CardShard = {
     _poolGaleriderSliver,
     _poolGalvanicGiant,
     _poolGamble,
+    _poolGateToTheAether,
     _poolGenasiEnforcers,
     _poolGenesis,
     _poolGeothermalBog,
@@ -1303,6 +1306,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolSerpentGenerator,
+    _poolSerumTank,
     _poolShadowstormVizier,
     _poolShaperGuildmage,
     _poolSharktocrab,

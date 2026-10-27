@@ -498,6 +498,7 @@ import _poolRecklessReveler from "../pool/reckless-reveler.js";
 import _poolRedcapMelee from "../pool/redcap-melee.js";
 import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
 import _poolRelicAxe from "../pool/relic-axe.js";
+import _poolRelicBane from "../pool/relic-bane.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _poolRedcapMelee,
     _poolReleaseTheDogs,
     _poolRelicAxe,
+    _poolRelicBane,
     _poolReliquaryMonk,
     _poolReliquaryTower,
     _poolRenownedWeaponsmith,

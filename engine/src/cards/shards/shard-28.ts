@@ -230,6 +230,7 @@ import _poolFinestHour from "../pool/finest-hour.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFireServant from "../pool/fire-servant.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
+import _poolFlayedNim from "../pool/flayed-nim.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlinthoofBoar from "../pool/flinthoof-boar.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
@@ -324,6 +325,7 @@ import _poolInvulnerability from "../pool/invulnerability.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
+import _poolIrradiate from "../pool/irradiate.js";
 import _poolIsperiasSkywatch from "../pool/isperias-skywatch.js";
 import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
@@ -408,6 +410,7 @@ import _poolMizziumTank from "../pool/mizzium-tank.js";
 import _poolMobileFort from "../pool/mobile-fort.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
+import _poolMoltenRain from "../pool/molten-rain.js";
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
@@ -762,6 +765,7 @@ import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWirecat from "../pool/wirecat.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
+import _poolWrenchMind from "../pool/wrench-mind.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
@@ -1021,6 +1025,7 @@ const shard: CardShard = {
     _poolFireNationWarship,
     _poolFireServant,
     _poolFlameChainMauler,
+    _poolFlayedNim,
     _poolFleshpulperGiant,
     _poolFlinthoofBoar,
     _poolFlubsTheFool,
@@ -1115,6 +1120,7 @@ const shard: CardShard = {
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,
+    _poolIrradiate,
     _poolIsperiasSkywatch,
     _poolJabarisBanner,
     _poolJadelightSpelunker,
@@ -1199,6 +1205,7 @@ const shard: CardShard = {
     _poolMobileFort,
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
+    _poolMoltenRain,
     _poolMonasteryMessenger,
     _poolMoriaMarauder,
     _poolMortalsArdor,
@@ -1553,6 +1560,7 @@ const shard: CardShard = {
     _poolWirecat,
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,
+    _poolWrenchMind,
     _poolWritOfReturn,
     _poolYawgmothsEdict,
     _poolYouFindACursedIdol,

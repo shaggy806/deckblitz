@@ -381,6 +381,7 @@ import _poolLearnFromThePast from "../pool/learn-from-the-past.js";
 import _poolLeechingBite from "../pool/leeching-bite.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
+import _poolLeoninAbunas from "../pool/leonin-abunas.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
 import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
@@ -441,6 +442,7 @@ import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNightfireGiant from "../pool/nightfire-giant.js";
+import _poolNimShrieker from "../pool/nim-shrieker.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNissasTriumph from "../pool/nissas-triumph.js";
 import _poolNivixBarrier from "../pool/nivix-barrier.js";
@@ -1197,6 +1199,7 @@ const shard: CardShard = {
     _poolLeechingBite,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
+    _poolLeoninAbunas,
     _poolLeoninArmorguard,
     _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
@@ -1257,6 +1260,7 @@ const shard: CardShard = {
     _poolNehebDreadhordeChampion,
     _poolNemesisOfReason,
     _poolNightfireGiant,
+    _poolNimShrieker,
     _poolNinjaOfTheDeepHours,
     _poolNissasTriumph,
     _poolNivixBarrier,

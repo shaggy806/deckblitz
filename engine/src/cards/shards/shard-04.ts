@@ -623,10 +623,12 @@ import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
 import _poolSweatworksBrawler from "../pool/sweatworks-brawler.js";
 import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
+import _poolSwordOfKaldra from "../pool/sword-of-kaldra.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTahCropElite from "../pool/tah-crop-elite.js";
+import _poolTajNarSwordsmith from "../pool/taj-nar-swordsmith.js";
 import _poolTakePossession from "../pool/take-possession.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
@@ -711,6 +713,7 @@ import _poolWallOfJunk from "../pool/wall-of-junk.js";
 import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
 import _poolWandasVision from "../pool/wandas-vision.js";
+import _poolWarElemental from "../pool/war-elemental.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
 import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
@@ -1381,10 +1384,12 @@ const shard: CardShard = {
     _poolSweatworksBrawler,
     _poolSwoopingLookout,
     _poolSwordOfBodyAndMind,
+    _poolSwordOfKaldra,
     _poolSyphonMind,
     _poolSyrArmontTheRedeemer,
     _poolSzarekhTheSilentKing,
     _poolTahCropElite,
+    _poolTajNarSwordsmith,
     _poolTakePossession,
     _poolTamsResistance,
     _poolTangledFlorahedron,
@@ -1469,6 +1474,7 @@ const shard: CardShard = {
     _poolWallOfPineNeedles,
     _poolWallOfTorches,
     _poolWandasVision,
+    _poolWarElemental,
     _poolWardenOfTheWoods,
     _poolWarden,
     _poolWarehouseThief,

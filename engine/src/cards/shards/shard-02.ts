@@ -69,6 +69,7 @@ import _poolBloodSpeaker from "../pool/blood-speaker.js";
 import _poolBloodboilSorcerer from "../pool/bloodboil-sorcerer.js";
 import _poolBloodfireEnforcers from "../pool/bloodfire-enforcers.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
+import _poolBloodscent from "../pool/bloodscent.js";
 import _poolBloodyBetrayal from "../pool/bloody-betrayal.js";
 import _poolBoartuskLiege from "../pool/boartusk-liege.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
@@ -744,6 +745,7 @@ import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
 import _poolZombieOgre from "../pool/zombie-ogre.js";
 import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
+import _tokensBeastToken55 from "../tokens/beast-token-5-5.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
@@ -821,6 +823,7 @@ const shard: CardShard = {
     _poolBloodboilSorcerer,
     _poolBloodfireEnforcers,
     _poolBloodhunterBat,
+    _poolBloodscent,
     _poolBloodyBetrayal,
     _poolBoartuskLiege,
     _poolBogWraith,
@@ -1498,6 +1501,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens22RedDwarfToken,
+    _tokensBeastToken55,
     _tokensElementalToken33BlueRedFlying,
     _tokensGnomeToken,
     _tokensGolemToken,

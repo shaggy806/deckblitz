@@ -45,6 +45,7 @@ import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAugurIlVec from "../pool/augur-il-vec.js";
 import _poolAuntieBlyteBadInfluence from "../pool/auntie-blyte-bad-influence.js";
+import _poolAuriokBladewarden from "../pool/auriok-bladewarden.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzamukiTreacheryIncarnate from "../pool/azamuki-treachery-incarnate.js";
@@ -200,6 +201,7 @@ import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
 import _poolDreambornMuse from "../pool/dreamborn-muse.js";
+import _poolDrossScorpion from "../pool/dross-scorpion.js";
 import _poolDrownInFilth from "../pool/drown-in-filth.js";
 import _poolDruidsRepository from "../pool/druids-repository.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
@@ -414,6 +416,7 @@ import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLathielTheBounteousDawn from "../pool/lathiel-the-bounteous-dawn.js";
 import _poolLeadBellyChimera from "../pool/lead-belly-chimera.js";
 import _poolLeadenFists from "../pool/leaden-fists.js";
+import _poolLeoninDenGuard from "../pool/leonin-den-guard.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolAtraxaPraetorsVoice,
     _poolAugurIlVec,
     _poolAuntieBlyteBadInfluence,
+    _poolAuriokBladewarden,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
     _poolAzamukiTreacheryIncarnate,
@@ -1018,6 +1022,7 @@ const shard: CardShard = {
     _poolDreadReturn,
     _poolDreamSpoilers,
     _poolDreambornMuse,
+    _poolDrossScorpion,
     _poolDrownInFilth,
     _poolDruidsRepository,
     _poolDungeonDescent,
@@ -1232,6 +1237,7 @@ const shard: CardShard = {
     _poolLathielTheBounteousDawn,
     _poolLeadBellyChimera,
     _poolLeadenFists,
+    _poolLeoninDenGuard,
     _poolLeoninLightbringer,
     _poolLeylineOfTheVoid,
     _poolLilianasSpoils,

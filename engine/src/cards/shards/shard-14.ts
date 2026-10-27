@@ -381,6 +381,7 @@ import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
 import _poolJolt from "../pool/jolt.js";
 import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
+import _poolJourneyOfDiscovery from "../pool/journey-of-discovery.js";
 import _poolJourneyToNowhere from "../pool/journey-to-nowhere.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
@@ -602,6 +603,7 @@ import _poolSiegehornCeratops from "../pool/siegehorn-ceratops.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilumgarAssassin from "../pool/silumgar-assassin.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
+import _poolSkeletonShard from "../pool/skeleton-shard.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSkySwallower from "../pool/sky-swallower.js";
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
@@ -1158,6 +1160,7 @@ const shard: CardShard = {
     _poolJolraelsCentaur,
     _poolJolt,
     _poolJoragaWarcaller,
+    _poolJourneyOfDiscovery,
     _poolJourneyToNowhere,
     _poolJoustingDummy,
     _poolKaitoShizuki,
@@ -1379,6 +1382,7 @@ const shard: CardShard = {
     _poolSigardaChampionOfLight,
     _poolSilumgarAssassin,
     _poolSilverRaven,
+    _poolSkeletonShard,
     _poolSkithiryxTheBlightDragon,
     _poolSkySwallower,
     _poolSkylineCascade,
