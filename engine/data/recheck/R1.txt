@@ -1,0 +1,102 @@
+# Recheck list R1 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Accumulate Wisdom	(meta only)
+Auron, Venerated Guardian	(meta only)
+Awaken the Honored Dead	(meta only)
+Brood Sliver	(meta only)
+Cavalier of Thorns	(meta only)
+Conjurer's Bauble	(meta only)
+Copycrook	(meta only)
+Court of Embereth	(meta only)
+Cruel Ultimatum	(meta only)
+Cryptolith Fragment	(meta only)
+Dark Petition	(meta only)
+Dire Tactics	(meta only)
+Docent of Perfection	(meta only)
+Elena, Turk Recruit	(meta only)
+Elspeth, Knight-Errant	(meta only)
+Ensnared by the Mara	(meta only)
+Éomer, Marshal of Rohan	(meta only)
+Far Wanderings	(meta only)
+Fiend Hunter	(meta only)
+Find	(meta only)
+Flow State	(meta only)
+Fumulus, the Infestation	(meta only)
+Fungal Rebirth	(meta only)
+Gift of Estates	(meta only)
+Helm of the Ghastlord	(meta only)
+Hour of Promise	(meta only)
+Kindred Charge	(meta only)
+Kulrath Knight	(meta only)
+Mana Echoes	(meta only)
+March of Progress	(meta only)
+Mavren Fein, Dusk Apostle	(meta only)
+Might of the Meek	(meta only)
+Moseo, Vein's New Dean	(meta only)
+Nazgûl Battle-Mace	(meta only)
+Necrogen Mists	(meta only)
+Oblivion Ring	(meta only)
+Of Herbs and Stewed Rabbit	(meta only)
+Palani's Hatcher	(meta only)
+Phyrexian Scriptures	(meta only)
+Planar Engineering	(meta only)
+Preston, the Vanisher	(meta only)
+Prishe's Wanderings	(meta only)
+Rite of the Raging Storm	(meta only)
+Rundvelt Hordemaster	(meta only)
+Ruthless Lawbringer	(meta only)
+Satsuki, the Living Lore	(meta only)
+Sephiroth, Fallen Hero	(meta only)
+Servo Schematic	(meta only)
+Shadow, Mysterious Assassin	(meta only)
+Smothering Abomination	(meta only)
+Star Compass	(meta only)
+Summon: Shiva	(meta only)
+Sunken Citadel	(meta only)
+Tail Swipe	(meta only)
+The First Iroan Games	(meta only)
+The Ooze	(meta only)
+Thraben Watcher	(meta only)
+Tomb Fortress	(meta only)
+Traverse the Ulvenwald	(meta only)
+Volcanic Vision	(meta only)
+Woodland Bellower	(meta only)
+Ardyn, the Usurper	bug:as-enters-choices-any-entry
+Ember Island Production	bug:as-enters-choices-any-entry
+Nexus of Becoming	bug:as-enters-choices-any-entry
+Rebuild the City	bug:as-enters-choices-any-entry
+Yenna, Redtooth Regent	bug:as-enters-choices-any-entry
+Carnivorous Canopy	bug:lki-object-reads
+Deekah, Fractal Theorist	bug:lki-object-reads
+Reject Imperfection	bug:lki-object-reads
+Clash of the Eikons	bug:lore-counters-fire-chapters
+Eldrazi Confluence	bug:modal-modes-on-cast
+Avatar Destiny	bug:simultaneous-zone-moves
+Burning Inquiry	bug:simultaneous-zone-moves
+Knight Exemplar	bug:simultaneous-zone-moves
+Liliana's Triumph	bug:simultaneous-zone-moves
+Show and Tell	bug:simultaneous-zone-moves
+Azusa's Many Journeys	bug:transform-fixes
+Black Sun's Twilight	bug:x-value-propagation
+Venarian Glimmer	bug:x-value-propagation
+Celestial Gatekeeper	bug:zone-change-object-identity
+Monastery Siege	condition:cast-spell-targets
+Savage Stomp	condition:cast-spell-targets
+Agent of the Shadow Thieves	condition:defending-player-life-rank
+Guild Artisan	condition:defending-player-life-rank
+Hardy Outlander	condition:defending-player-life-rank
+Sword Coast Sailor	condition:defending-player-life-rank
+Veteran Soldier	condition:defending-player-life-rank
+Daybreak Coronet	condition:filter-attachments
+Kellan, the Fae-Blooded	condition:filter-attachments
+Thanos, the Mad Titan	condition:filter-card-property-clauses
+Aether Vial	condition:filter-dynamic-compare
+Counterbalance	condition:filter-dynamic-compare
+Droning Bureaucrats	condition:filter-dynamic-compare
+Shelinda, Yevon Acolyte	condition:filter-dynamic-compare
+Yorvo, Lord of Garenbrig	condition:filter-dynamic-compare
+Abyssal Harvester	condition:filter-this-turn-history
+Berserk	condition:filter-this-turn-history
+Brought Back	condition:filter-this-turn-history
+Continue?	condition:filter-this-turn-history
+Gyome, Master Chef	condition:filter-this-turn-history

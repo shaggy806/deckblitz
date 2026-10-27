@@ -1,0 +1,102 @@
+# Recheck list R8 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+The Sound of Drums	replacement:damage-modification
+Tor Wauki the Younger	replacement:damage-modification
+Undead Alchemist	replacement:damage-modification
+With Great Power . . .	replacement:damage-modification static:pt-per-amount
+Containment Priest	replacement:exile-instead
+Cosmic Intervention	replacement:exile-instead
+Nemata, Primeval Warden	replacement:exile-instead effect:reflexive-trigger
+Spikefield Hazard	replacement:exile-instead
+Suplex	replacement:exile-instead
+Alms Collector	replacement:new-event-replacements
+Out of the Tombs	replacement:new-event-replacements
+Plague Drone	replacement:new-event-replacements
+Urabrask, Heretic Praetor	replacement:new-event-replacements
+Consulate Surveillance	replacement:prevent-damage-from-chosen-source
+Deflecting Palm	replacement:prevent-damage-from-chosen-source
+Shadowbane	replacement:prevent-damage-from-chosen-source
+Undergrowth Champion	replacement:prevent-once-per-damage-event
+River Song's Diary	replacement:spell-exiled-as-it-resolves effect:random-choice
+Academy Manufactor	replacement:token-creation-additive
+Moonlit Meditation	replacement:token-creation-additive
+Queen Allenal of Ruadach	replacement:token-creation-additive
+Quina, Qu Gourmet	replacement:token-creation-additive
+Worldwalker Helm	replacement:token-creation-additive
+Xorn	replacement:token-creation-additive
+Coin of Mastery	stat:mana-spent-to-cast
+Mana Sculpt	stat:mana-spent-to-cast
+Admiral Beckett Brass	stat:object-damage-history
+Gollum, Obsessed Stalker	stat:object-damage-history
+Hope of Ghirapur	stat:object-damage-history effect:temporary-player-effect
+Rith, Liberated Primeval	stat:object-damage-history
+Tangled Colony	stat:object-damage-history
+Sentinel Tower	stat:spells-cast-this-turn-record
+Bat Colony	stat:treasure-mana-spent-count
+Cataclysmic Prospecting	stat:treasure-mana-spent-count
+Kalain, Reclusive Painter	stat:treasure-mana-spent-count
+Marut	stat:treasure-mana-spent-count
+Spoils of the Hunt	stat:treasure-mana-spent-count
+Archive Trap	stat:turn-event-tallies
+Blitzball	stat:turn-event-tallies
+Chandra's Incinerator	stat:turn-event-tallies
+Magus of the Moon	static:basic-land-type-mana
+Alpha Authority	static:combat-restriction-extensions
+Baird, Steward of Argive	static:combat-restriction-extensions
+Bloodthirster	static:combat-restriction-extensions
+Hungering Hydra	static:combat-restriction-extensions
+Legion Loyalist	static:combat-restriction-extensions
+Master of Cruelties	static:combat-restriction-extensions
+Mirri, Weatherlight Duelist	static:combat-restriction-extensions
+Stormtide Leviathan	static:combat-restriction-extensions
+Thieves' Tools	static:combat-restriction-extensions
+Toby, Beastie Befriender	static:combat-restriction-extensions
+Troll of Khazad-dûm	static:combat-restriction-extensions
+Varchild, Betrayer of Kjeldor	static:combat-restriction-extensions effect:control-change-extensions
+Cloudspire Coordinator	static:crews-as-though-power
+Valor's Flagship	static:crews-as-though-power
+Bind the Monster	static:doesnt-untap-attached
+Meekstone	static:doesnt-untap-filter
+Master Chef	static:enters-replacement-for-others
+Eirdu, Carrier of Dawn	static:grant-abilities-to-spells
+Rivaz of the Claw	static:grant-abilities-to-spells
+Wand of the Worldsoul	static:grant-abilities-to-spells
+Liliana's Talent	static:grant-loyalty-abilities
+Biotransference	static:grant-to-cards-outside-battlefield
+Conspiracy	static:grant-to-cards-outside-battlefield
+Dune Chanter	static:grant-to-cards-outside-battlefield
+Arcane Adaptation	static:grant-types-to-others
+Gemcutter Buccaneer	static:grant-types-to-others
+Rukarumel, Biologist	static:grant-types-to-others
+Mirror Box	static:legend-rule-exemptions
+Platinum Emperion	static:life-total-cant-change
+Anvil of Bogardan	static:max-hand-size
+Enter the Infinite	static:max-hand-size
+Folio of Fancies	static:max-hand-size
+Nerd Rage	static:max-hand-size
+Praetor's Counsel	static:max-hand-size
+The Second Doctor	static:max-hand-size effect:choices-by-other-players
+Elturel Survivors	static:pt-per-amount
+Kyler, Sigardian Emissary	static:pt-per-amount
+Sliver Legion	static:pt-per-amount
+Aettir and Priwen	static:set-base-pt-others
+Gandalf the White	static:trigger-count-modifiers
+Hushbringer	static:trigger-count-modifiers
+Sanctum of All	static:trigger-count-modifiers
+The Masamune	static:trigger-count-modifiers
+Twinflame Travelers	static:trigger-count-modifiers
+Wizard's Staff	static:trigger-count-modifiers
+Wulfgar of Icewind Dale	static:trigger-count-modifiers
+Elrond, Moon-Reader	trigger:activates-ability
+Haunting Wind	trigger:activates-ability
+Neerdiv, Devious Diver	trigger:activates-ability
+Way of the Mind Sculptor	trigger:activates-ability
+Kira, Great Glass-Spinner	trigger:becomes-target-fixes
+Unsettled Mariner	trigger:becomes-target-fixes
+Shadow of the Goblin	trigger:cast-or-play-origin-zone
+The Lost and the Damned	trigger:cast-or-play-origin-zone
+Aurora Phoenix	trigger:cast-spell-clauses
+Virtual Assistant	trigger:cast-spell-clauses
+Breeches, Brazen Plunderer	trigger:combat-damage-batch
+Bitter Work	trigger:combat-trigger-extensions
+Glimmer Lens	trigger:combat-trigger-extensions

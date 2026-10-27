@@ -1,0 +1,102 @@
+# Recheck list R7 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Fighter Class	mechanic:class
+Innkeeper's Talent	mechanic:class
+Rogue Class	mechanic:class
+Scavenger's Talent	mechanic:class
+Sorcerer Class	mechanic:class
+Krark's Thumb	mechanic:coin-flip
+Mirror March	mechanic:coin-flip
+Rakdos, the Showstopper	mechanic:coin-flip
+Ral Zarek	mechanic:coin-flip
+Fraying Sanity	mechanic:curses
+Grievous Wound	mechanic:curses trigger:damage-trigger-extensions
+Maddening Hex	mechanic:curses mechanic:dice-rolling
+Paradox Haze	mechanic:curses effect:additional-upkeep-steps
+Tenuous Truce	mechanic:curses
+Ancient Bronze Dragon	mechanic:dice-rolling
+Bucknard's Everfull Purse	mechanic:dice-rolling
+Chaos Dragon	mechanic:dice-rolling
+Comet, Stellar Pup	mechanic:dice-rolling
+Component Pouch	mechanic:dice-rolling
+Lae'zel's Acrobatics	mechanic:dice-rolling
+Luck Bobblehead	mechanic:dice-rolling
+Myrkul's Edict	mechanic:dice-rolling
+Neverwinter Hydra	mechanic:dice-rolling
+Reckless Endeavor	mechanic:dice-rolling
+Strength-Testing Hammer	mechanic:dice-rolling
+Sword of Hours	mechanic:dice-rolling
+The Deck of Many Things	mechanic:dice-rolling
+Treasure Chest	mechanic:dice-rolling
+Vexing Puzzlebox	mechanic:dice-rolling
+Wand of Wonder	mechanic:dice-rolling
+Wyll, Blade of Frontiers	mechanic:dice-rolling
+Wyll's Reversal	mechanic:dice-rolling decision:copy-new-targets
+Sasaya, Orochi Ascendant // Sasaya's Essence	mechanic:flip-cards
+Brimaz, Blight of Oreskos	mechanic:incubate
+Chrome Host Seedshark	mechanic:incubate
+Sunfall	mechanic:incubate
+Singer of Swift Rivers	mechanic:keyword-counters
+Kozilek's Command	mechanic:kindred-card-type
+Lignify	mechanic:kindred-card-type
+Not of This World	mechanic:kindred-card-type
+King T'Challa	mechanic:mdfc-transform
+The Legend of Kuruk	mechanic:mdfc-transform bug:transform-fixes
+Out of Time	mechanic:phasing
+Final Act	mechanic:player-counters
+Heartwood Crafter // Soul Tether	mechanic:prepare
+Stensian Sanguinist	mechanic:prepare
+Bloatfly Swarm	mechanic:rad-counters
+Infesting Radroach	mechanic:rad-counters
+Mariposa Military Base	mechanic:rad-counters
+Mirelurk Queen	mechanic:rad-counters
+Screeching Scorchbeast	mechanic:rad-counters
+Strong, the Brutish Thespian	mechanic:rad-counters
+Struggle for Project Purity	mechanic:rad-counters
+Tato Farmer	mechanic:rad-counters
+The Master, Transcendent	mechanic:rad-counters stat:milled-this-turn
+Not Dead After All	mechanic:role-tokens
+Charred Foyer	mechanic:rooms
+Dazzling Theater // Prop Room	mechanic:rooms
+Dollmaker's Shop	mechanic:rooms
+Fear of Sleep Paralysis	mechanic:rooms
+Polluted Cistern	mechanic:rooms
+Secret Arcade	mechanic:rooms
+Walk-In Closet // Forgotten Cellar	mechanic:rooms
+Hot Pursuit	mechanic:suspect mechanic:goad-extensions
+Dust of Moments	mechanic:suspend-and-time-counters
+Inspiring Refrain	mechanic:suspend-and-time-counters
+Jhoira of the Ghitu	mechanic:suspend-and-time-counters
+Elrond, Lord of Rivendell	mechanic:the-ring
+Gandalf, Friend of the Shire	mechanic:the-ring
+Glorious Gale	mechanic:the-ring
+In the Darkness Bind Them	mechanic:the-ring
+Nazgûl	mechanic:the-ring
+One Ring to Rule Them All	mechanic:the-ring
+Ringsight	mechanic:the-ring
+Samwise the Stouthearted	mechanic:the-ring
+Sauron, Lord of the Rings	mechanic:the-ring
+Sauron, the Necromancer	mechanic:the-ring
+Sauron's Ransom	mechanic:the-ring
+Scroll of Isildur	mechanic:the-ring
+The Ring Goes South	mechanic:the-ring
+There and Back Again	mechanic:the-ring
+Witch-king of Angmar	mechanic:the-ring
+Expropriate	mechanic:voting
+Concordant Crossroads	mechanic:world-rule
+Doc Samson, Super Psychiatrist	replacement:counter-addend-replacement
+Pir, Imaginative Rascal	replacement:counter-addend-replacement
+Winding Constrictor	replacement:counter-addend-replacement
+Angel of Suffering	replacement:damage-modification
+Blessed Sanctuary	replacement:damage-modification
+Bonecrusher Giant	replacement:damage-modification
+Fated Firepower	replacement:damage-modification
+Inquisitor's Flail	replacement:damage-modification
+Kor Haven	replacement:damage-modification
+Pariah	replacement:damage-modification
+Pariah's Shield	replacement:damage-modification
+Questing Beast	replacement:damage-modification
+Sokrates, Athenian Teacher	replacement:damage-modification
+Take the Bait	replacement:damage-modification mechanic:goad-extensions
+Temple Altisaur	replacement:damage-modification
+The Rollercrusher Ride	replacement:damage-modification

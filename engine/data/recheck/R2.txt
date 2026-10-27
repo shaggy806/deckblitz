@@ -1,0 +1,102 @@
+# Recheck list R2 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Lilypad Village	condition:filter-this-turn-history
+Multiclass Baldric	condition:full-party
+Wolf Strike	condition:is-night
+Aerial Surveyor	condition:player-state-thresholds
+Beza, the Bounding Spring	condition:player-state-thresholds
+Cosmos Elixir	condition:player-state-thresholds
+Ghirapur Orrery	condition:player-state-thresholds
+Into the Story	condition:player-state-thresholds
+Speaker of the Heavens	condition:player-state-thresholds
+Sword of the Paruns	condition:source-state
+Wakka, Devoted Guardian	condition:source-state
+Vampire Nocturnus	condition:top-card-of-library
+River of Tears	condition:turn-structure
+Agatha of the Vile Cauldron	cost:ability-cost-modification
+Biomancer's Familiar	cost:ability-cost-modification
+Bruenor Battlehammer	cost:ability-cost-modification
+Brutal Suppression	cost:ability-cost-modification
+Bureau Headmaster	cost:ability-cost-modification
+Crown of Gondor	cost:ability-cost-modification
+Hulk, Gamma Goliath	cost:ability-cost-modification
+Hylda's Crown of Winter	cost:ability-cost-modification
+Mutagen Man, Living Ooze	cost:ability-cost-modification
+Professor Hojo	cost:ability-cost-modification trigger:becomes-target-fixes
+Tithe Taker	cost:ability-cost-modification
+Bladegraft Aspirant	cost:ability-cost-reduction-if-targets
+Mana Cache	cost:any-player-may-activate
+Saproling Cluster	cost:any-player-may-activate
+Tidal Control	cost:any-player-may-activate
+Volrath's Dungeon	cost:any-player-may-activate
+Chainer, Nightmare Adept	cost:choose-cards-as-cost
+Kozilek, the Great Distortion	cost:choose-cards-as-cost
+Titan's Presence	cost:choose-cards-as-cost
+Alisaie Leveilleur	cost:cost-modification-extensions
+Belt of Giant Strength	cost:cost-modification-extensions
+Cemetery Prowler	cost:cost-modification-extensions
+Charix, the Raging Isle	cost:cost-modification-extensions
+Elspeth Conquers Death	cost:cost-modification-extensions
+Esior, Wardwing Familiar	cost:cost-modification-extensions
+Jubilant Skybonder	cost:cost-modification-extensions
+Killian, Ink Duelist	cost:cost-modification-extensions
+Sage of the Beyond	cost:cost-modification-extensions
+Savvy Trader	cost:cost-modification-extensions
+Thryx, the Sudden Storm	cost:cost-modification-extensions
+Trinisphere	cost:cost-modification-extensions
+Warrior's Blades	cost:cost-modification-extensions
+Spellwild Ouphe	cost:cost-reduction-if-targets
+Soaring Stoneglider	cost:exile-from-graveyard-additional
+Mage-Ring Network	cost:mana-ability-complex-costs
+Molt Tender	cost:mana-ability-complex-costs
+Skirge Familiar	cost:mana-ability-complex-costs
+Brainstealer Dragon	cost:mana-spending-rules
+Crypt Rats	cost:mana-spending-rules
+Elementalist's Palette	cost:mana-spending-rules
+Freya Crescent	cost:mana-spending-rules
+Gonti, Lord of Luxury	cost:mana-spending-rules
+Hostage Taker	cost:mana-spending-rules
+Mm'menon, the Right Hand	cost:mana-spending-rules
+Sunglasses of Urza	cost:mana-spending-rules
+Throne of Eldraine	cost:mana-spending-rules
+Tinybones, the Pickpocket	cost:mana-spending-rules
+Coral Atoll	cost:may-cost-non-mana
+Mercurial Spelldancer	cost:may-cost-non-mana
+Geometric Nexus	cost:remove-x-counters-cost
+Nightshade Assassin	cost:reveal-any-number-from-hand
+Pili-Pala	cost:untap-symbol-cost
+Echoes of Eternity	decision:copy-new-targets
+Twinning Staff	decision:copy-new-targets
+Borborygmos and Fblthp	decision:discard-any-number
+Cathartic Pyre	decision:discard-any-number
+Daretti, Scrap Savant	decision:discard-any-number
+Fable of the Mirror-Breaker // Reflection of Kiki-Jiki	decision:discard-any-number
+Indominus Rex, Alpha	decision:discard-any-number bug:as-enters-choices-any-entry mechanic:keyword-counters
+Mishra's Command	decision:discard-any-number
+Sokka, Bold Boomeranger	decision:discard-any-number
+Tersa Lightshatter	decision:discard-any-number
+Epic Experiment	decision:free-cast-choices
+Jin-Gitaxias	decision:free-cast-choices static:max-hand-size
+Goblin Recruiter	decision:library-ordering
+Reinforcements	decision:library-ordering
+Scroll Rack	decision:library-ordering
+Aetherspouts	decision:owner-chooses-top-or-bottom
+Clash of Elements	decision:owner-chooses-top-or-bottom
+Living Conundrum	decision:replacement-order-choice
+Phantom Centaur	decision:replacement-order-choice
+Szadek, Lord of Secrets	decision:replacement-order-choice
+Blinkmoth Urn	effect:add-mana-extensions
+Boseiju, Who Shelters All	effect:add-mana-extensions
+Firemind Vessel	effect:add-mana-extensions
+Interplanar Beacon	effect:add-mana-extensions
+Selvala, Heart of the Wilds	effect:add-mana-extensions
+Squandered Resources	effect:add-mana-extensions
+Master Biomancer	effect:add-subtype
+Response	effect:additional-combat-after-this-phase
+Hancock, Ghoulish Mayor	effect:amount-counters-on-object
+Electrosiphon	effect:amount-fields-dynamic
+The Mouth of Sauron	effect:amount-fields-dynamic
+Command the Dreadhorde	effect:amount-new-variants
+Eris, Roar of the Storm	effect:amount-new-variants
+Phyresis Outbreak	effect:amount-new-variants
+Shadow of Mortality	effect:amount-new-variants

@@ -1,0 +1,65 @@
+# Recheck list R9 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Lulu, Stern Guardian	trigger:combat-trigger-extensions effect:target-spec-additions
+Meriadoc Brandybuck	trigger:combat-trigger-extensions
+The Earth King	trigger:combat-trigger-extensions
+Decaying Soil	trigger:conditional-grant-look-back
+Generous Patron	trigger:counters-put
+Wildwood Scourge	trigger:counters-put
+Arcbond	trigger:damage-trigger-extensions
+Blazing Sunsteel	trigger:damage-trigger-extensions
+Darien, King of Kjeldor	trigger:damage-trigger-extensions
+Dragonborn Champion	trigger:damage-trigger-extensions
+El-Hajjâj	trigger:damage-trigger-extensions
+Guilty Conscience	trigger:damage-trigger-extensions
+Hooded Blightfang	trigger:damage-trigger-extensions
+Michiko Konda, Truth Seeker	trigger:damage-trigger-extensions
+Obelisk Spider	trigger:damage-trigger-extensions
+Spinneret and Spiderling	trigger:damage-trigger-extensions
+Vengeful Pharaoh	trigger:damage-trigger-extensions
+Arashin War Beast	trigger:deals-combat-damage-once-per-event
+Dropkick Bomber	trigger:deals-combat-damage-once-per-event
+Quintessential Katana	trigger:deals-combat-damage-once-per-event
+Angel of Deliverance	trigger:deals-damage-once-per-event
+Briarbridge Patrol	trigger:deals-damage-once-per-event
+Cecil, Dark Knight // Cecil, Redeemed Paladin	trigger:deals-damage-once-per-event
+Justice	trigger:deals-damage-once-per-event
+Olivia's Attendants	trigger:deals-damage-once-per-event
+The Red Terror	trigger:deals-damage-once-per-event
+Visions of Brutality	trigger:deals-damage-once-per-event
+The Council of Four	trigger:nth-each-turn
+Gaea's Blessing	trigger:put-into-graveyard
+Heaped Harvest	trigger:sacrifice-filter
+Biolume Egg	trigger:self-sacrifice-trigger
+Carrot Cake	trigger:self-sacrifice-trigger
+Daemogoth Woe-Eater	trigger:self-sacrifice-trigger
+Disturbing Mirth	trigger:self-sacrifice-trigger
+Ordeal of Nylea	trigger:self-sacrifice-trigger
+Bomb Squad	trigger:state-trigger
+Olivia, Crimson Bride	trigger:state-trigger
+Matoya, Archon Elder	trigger:surveils
+Planetarium of Wan Shi Tong	trigger:surveils
+Coveted Jewel	trigger:unblocked-attackers-trigger
+Urban Retreat	zone:activated-ability-zones
+Arvinox, the Mind Flail	zone:cast-cards-you-dont-own
+Dire Fleet Daredevil	zone:cast-cards-you-dont-own replacement:exile-instead
+Thada Adel, Acquisitor	zone:cast-cards-you-dont-own
+Assemble the Players	zone:cast-from-library-top
+Fblthp, Lost on the Range	zone:cast-from-library-top
+Gwenom, Remorseless	zone:cast-from-library-top
+Into the Pit	zone:cast-from-library-top
+Rashmi, Eternities Crafter	zone:cast-from-library-top
+Inverter of Truth	zone:exile-face-down
+Thief of Sanity	zone:exile-face-down
+Vivien, Champion of the Wilds	zone:exile-face-down
+Aerial Extortionist	zone:impulse-permission-options
+Cruelclaw's Heist	zone:impulse-permission-options
+Hurl Through Hell	zone:impulse-permission-options
+Kheru Spellsnatcher	zone:impulse-permission-options
+Nivix, Aerie of the Firemind	zone:impulse-permission-options
+Norin, Swift Survivalist	zone:impulse-permission-options
+Share the Spoils	zone:impulse-permission-options
+Spelljack	zone:impulse-permission-options
+Tablet of Discovery	zone:impulse-permission-options
+Thranduil's Decree	zone:impulse-permission-options
+Intrepid Paleontologist	zone:play-from-exile-with-counter

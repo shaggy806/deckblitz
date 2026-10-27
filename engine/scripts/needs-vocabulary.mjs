@@ -46,7 +46,8 @@
 //                      the cards worth attempting again: no open need, or
 //                      every open need judged to exist already (`checked`),
 //                      sorted by need so a batch shares features; --batch K
-//                      prints the K-th batch's names
+//                      prints the K-th batch's names; --freeze writes every
+//                      batch to data/recheck/R<K>.txt for a parallel round
 //   --brief <family> [--open-only] [--page N]
 //                      the compact text a model judges a family from: each
 //                      open key with its cards waiting, description and up to
@@ -58,7 +59,7 @@
 // index, `pool-index.mjs`, which stores its answer).
 
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -71,6 +72,7 @@ const GAPS_PATH = path.join(ENGINE, "src/cards/top-commanders-gaps.json");
 const VOCAB_PATH = path.join(ENGINE, "data/needs-vocabulary.json");
 const SWEEP_DIRS = ["data/sweep-2", "data/sweep-3"];
 const POOL_DIR = path.join(ENGINE, "src/cards/pool");
+const RECHECK_DIR = path.join(ENGINE, "data/recheck");
 
 /** A card's front face: records name double-faced cards either way. */
 export const frontName = (name) => name.split(" // ")[0].trim();
@@ -357,7 +359,9 @@ function main() {
   }
 
   if (args.includes("--audit")) return audit(vocab, records, pool, waiting);
-  if (args.includes("--recheck")) return recheck(vocab, waiting, Number(opt("--size", 100)), opt("--batch", undefined));
+  if (args.includes("--recheck")) {
+    return recheck(vocab, waiting, Number(opt("--size", 100)), opt("--batch", undefined), args.includes("--freeze"));
+  }
   if (args.includes("--greedy")) return greedy(vocab, waiting, Number(opt("--top", 50)), opt("--family", undefined));
   if (args.includes("--brief")) {
     return brief(vocab, waiting, opt("--brief", ""), args.includes("--open-only"), Number(opt("--page", 1)));
@@ -718,7 +722,7 @@ function brief(vocab, waiting, familyArg, openOnly, page) {
  * a batch shares its features; `--batch K` prints the K-th batch of N as bare
  * names, for an authoring session to take.
  */
-function recheck(vocab, waiting, size, batchArg) {
+function recheck(vocab, waiting, size, batchArg, freeze) {
   const exists = (k) => /: exists$/.test(vocab.features.get(k)?.checked ?? "");
   const rows = [];
   for (const r of latestByCard(waiting).values()) {
@@ -728,6 +732,23 @@ function recheck(vocab, waiting, size, batchArg) {
   }
   rows.sort((a, b) => (a.keys[0] ?? "~").localeCompare(b.keys[0] ?? "~") || a.name.localeCompare(b.name));
   const batches = Math.ceil(rows.length / size);
+  if (freeze) {
+    // The lists a parallel recheck round assigns, frozen: `--batch K` is
+    // recomputed from the records, so it shifts as soon as one batch lands.
+    mkdirSync(RECHECK_DIR, { recursive: true });
+    for (const f of readdirSync(RECHECK_DIR).filter((n) => /^R\d+\.txt$/.test(n))) unlinkSync(path.join(RECHECK_DIR, f));
+    const today = new Date().toISOString().slice(0, 10);
+    for (let k = 1; k <= batches; k += 1) {
+      const b = rows.slice((k - 1) * size, k * size);
+      const head = [
+        `# Recheck list R${k} of ${batches}, frozen ${today} by \`cards:needs -- --recheck --freeze\` (the need-keys plan, Phase 1 step 2).`,
+        "# One card per line, then its latest record's need keys. Skip a card already in the pool.",
+      ];
+      writeFileSync(path.join(RECHECK_DIR, `R${k}.txt`), [...head, ...b.map((r) => `${r.name}\t${r.keys.join(" ") || "(meta only)"}`)].join("\n") + "\n");
+    }
+    console.log(`Froze ${rows.length} cards into ${batches} lists in data/recheck/ (R1–R${batches}).`);
+    return;
+  }
   if (batchArg !== undefined) {
     const k = Number(batchArg);
     for (const r of rows.slice((k - 1) * size, k * size)) console.log(r.name);

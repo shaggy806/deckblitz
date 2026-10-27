@@ -1,0 +1,102 @@
+# Recheck list R5 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Fevered Visions	effect:player-scope-extensions
+Gandalf, Wandering Wizard	effect:player-scope-extensions
+Heartwood Storyteller	effect:player-scope-extensions
+Kiora Bests the Sea God	effect:player-scope-extensions
+Nature's Will	effect:player-scope-extensions
+Oblation	effect:player-scope-extensions
+Papalymo Totolymo	effect:player-scope-extensions
+Silumgar, the Drifting Death	effect:player-scope-extensions
+Thought Collapse	effect:player-scope-extensions
+Unidentified Hovership	effect:player-scope-extensions
+Wheel and Deal	effect:player-scope-extensions
+Zenith Chronicler	effect:player-scope-extensions
+Chainer, Dementia Master	effect:put-onto-battlefield-options
+Ghost Vacuum	effect:put-onto-battlefield-options
+Ghoulish Impetus	effect:put-onto-battlefield-options
+Grave Betrayal	effect:put-onto-battlefield-options
+Nissa of Shadowed Boughs	effect:put-onto-battlefield-options
+Valkyrie's Call	effect:put-onto-battlefield-options
+Getaway Barrel	effect:random-choice
+Kefka, Dancing Mad	effect:random-choice decision:free-cast-choices
+Last One Standing	effect:random-choice
+Omenpath Journey	effect:random-choice
+Orcish Librarian	effect:random-choice
+Rag Man	effect:random-choice
+Rona, Herald of Invasion	effect:random-choice
+Scrambleverse	effect:random-choice
+Summon: Magus Sisters	effect:random-choice
+Urza's Bauble	effect:random-choice
+Foray of Orcs	effect:reflexive-trigger
+Skyfisher Spider	effect:reflexive-trigger
+Swashbuckler Extraordinaire	effect:reflexive-trigger
+Yes Man, Personal Securitron	effect:reflexive-trigger
+Bill Ferny, Bree Swindler	effect:remove-from-combat
+Descendants' Fury	effect:reveal-until effect:may-sacrifice-then
+Dinosaur Egg	effect:reveal-until
+Goblin Charbelcher	effect:reveal-until
+Mind Grind	effect:reveal-until
+Old Stickfingers	effect:reveal-until
+Part in Friendship	effect:reveal-until
+Read the Runes	effect:sacrifice-any-number
+Sword of the Ages	effect:sacrifice-any-number
+Illuminor Szeras	effect:sacrificed-object-lki
+Pyre of Heroes	effect:sacrificed-object-lki
+Puca's Eye	effect:set-color-effect
+Scuttling Sentinel	effect:set-color-effect
+Elvish Soultiller	effect:shuffle-graveyard-into-library
+Avizoa	effect:skip-next-untap-step
+Brine Elemental	effect:skip-next-untap-step
+Dovin, Architect of Law	effect:skip-next-untap-step
+Savor the Moment	effect:skip-next-untap-step
+Shisato, Whispering Hunter	effect:skip-next-untap-step
+Yosei, the Morning Star	effect:skip-next-untap-step
+Pretender's Claim	effect:tap-all-controlled-by-target
+Tectonic Instability	effect:tap-all-controlled-by-target
+Sorin, Lord of Innistrad	effect:target-other-than-source
+Abstruse Archaic	effect:target-spec-additions
+Blatant Thievery	effect:target-spec-additions
+Ertai Resurrected	effect:target-spec-additions
+Joshua, Phoenix's Dominant	effect:target-spec-additions
+Loaming Shaman	effect:target-spec-additions
+Louisoix's Sacrifice	effect:target-spec-additions
+Persistent Constrictor	effect:target-spec-additions
+Press the Enemy	effect:target-spec-additions
+Rampaging Yao Guai	effect:target-spec-additions
+Tale's End	effect:target-spec-additions
+The Peregrine Dynamo	effect:target-spec-additions
+Unsubstantiate	effect:target-spec-additions
+Verdant Command	effect:target-spec-additions
+Wrathful Raptors	effect:target-spec-additions
+Atarka's Command	effect:temporary-player-effect
+Domri, Anarch of Bolas	effect:temporary-player-effect
+Roiling Vortex	effect:temporary-player-effect
+Screaming Nemesis	effect:temporary-player-effect
+Bringer of the Last Gift	effect:this-way-results
+Cache Grab	effect:this-way-results
+Coalition Relic	effect:this-way-results
+Discerning Taste	effect:this-way-results
+Flood of Tears	effect:this-way-results
+Ingenious Prodigy	effect:this-way-results
+Kroxa, Titan of Death's Hunger	effect:this-way-results
+Marauding Raptor	effect:this-way-results
+Mob Rule	effect:this-way-results
+Rise and Shine	effect:this-way-results
+Spectacular Showdown	effect:this-way-results
+Szat's Will	effect:this-way-results
+Astral Dragon	effect:token-copy-options
+Cleaver Skaab	effect:token-copy-options
+Clone Legion	effect:token-copy-options
+Doppelgang	effect:token-copy-options
+Endless Evil	effect:token-copy-options
+Fractured Identity	effect:token-copy-options
+Life of the Party	effect:token-copy-options mechanic:goad-extensions
+Mirrorhall Mimic	effect:token-copy-options
+Summon: Good King Mog XII	effect:token-copy-options
+Twilight Diviner	effect:token-copy-options
+Ultron, Artificial Malevolence	effect:token-copy-options
+Vesuvan Duplimancy	effect:token-copy-options
+Cleansing	effect:unless-any-player-pays
+Scarwood Bandits	effect:unless-any-player-pays
+Sphere of Annihilation	filter:mass-effect-amount-operand

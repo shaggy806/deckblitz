@@ -293,7 +293,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   - 61 that name only a meta key.
 
   `card:scaffold -- --dry-run` over the no-open-need cards auto-finishes only 6, so the rest is
-  authoring work. That means a parallel round run from a fresh session under
+  authoring work. The lists are frozen in `engine/data/recheck/R1.txt` to `R9.txt`
+  (`--recheck --freeze`): R1 holds the 61 meta-only cards, and the rest go in need order. Each
+  list goes to an `author-recheck` session, run as a parallel round by
+  `author-walks-parallel` ("A recheck round"). That means a parallel round run from a fresh session under
   `author-walks-parallel`'s rules, with a recheck batch per child in place of a range of sets. A
   card still blocked gets a narrow new key, and the coarse key's description is tightened.
 - **Greedy after the merge:** 10 keys free 331 cards, 50 free 1,002, 100 free 1,466 and 400 free

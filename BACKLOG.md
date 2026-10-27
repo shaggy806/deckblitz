@@ -59,9 +59,11 @@ section keeps only what to do next.
 
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
-  2026-10-27): next, Phase 1 step 2, the recheck round. `cards:needs -- --recheck` lists 863
-  cards in nine batches of 100 (no open need, or every open need judged to exist), to author as
-  a parallel round from a fresh session. Then build in greedy order, a family per session, with
+  2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
+  lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
+  to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
+  "A recheck round", one list per child under the `author-recheck` skill. Lists done: none.
+  Assigned: none. Then build in greedy order, a family per session, with
   the 617 merge groups (100 keys free ~1,470 cards).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13

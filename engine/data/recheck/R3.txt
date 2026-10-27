@@ -1,0 +1,102 @@
+# Recheck list R3 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Whiplash, Vengeful Engineer	effect:amount-new-variants
+Wojek Investigator	effect:amount-new-variants
+Rose, Cutthroat Raider	effect:amount-turn-stat
+Land's Edge	effect:any-player-may-activate
+Mercenaries	effect:any-player-may-activate
+Artificer's Hex	effect:attached-effect-ref
+Fatal Attraction	effect:attached-effect-ref
+Tilonalli's Crown	effect:attached-effect-ref
+Armored Skyhunter	effect:aura-enters-choice
+Benevolent Blessing	effect:aura-enters-choice
+Songbirds' Blessing	effect:aura-enters-choice
+Scion of the Ur-Dragon	effect:become-copy
+The Everflowing Well	effect:become-copy
+Valki, God of Lies	effect:become-copy
+Angelic Arbiter	effect:cast-and-activate-restrictions
+Cursed Totem	effect:cast-and-activate-restrictions
+Dosan the Falling Leaf	effect:cast-and-activate-restrictions
+Phyrexian Censor	effect:cast-and-activate-restrictions
+Planar Disruption	effect:cast-and-activate-restrictions
+Reflector Mage	effect:cast-and-activate-restrictions
+Teferi, Mage of Zhalfir	effect:cast-and-activate-restrictions
+The Immortal Sun	effect:cast-and-activate-restrictions
+Yasharn, Implacable Earth	effect:cast-and-activate-restrictions
+Spelltwine	effect:cast-copies-of-exiled
+Reversal of Fortune	effect:cast-copy-of-card
+Meddle	effect:change-target
+Rebound	effect:change-target
+Silver Wyvern	effect:change-target
+Burning-Rune Demon	effect:choices-by-other-players
+Callous Oppressor	effect:choices-by-other-players
+Chain Lightning	effect:choices-by-other-players
+Court of Ambition	effect:choices-by-other-players
+Demonic Hordes	effect:choices-by-other-players
+Disorienting Choice	effect:choices-by-other-players
+Elemental Teachings	effect:choices-by-other-players
+Fraying Line	effect:choices-by-other-players
+Guided Passage	effect:choices-by-other-players
+Happy Hogan, Bodyguard	effect:choices-by-other-players
+Karn, Scion of Urza	effect:choices-by-other-players effect:exile-with-counters
+Manifold Insights	effect:choices-by-other-players
+Master of Ceremonies	effect:choices-by-other-players
+Murmurs from Beyond	effect:choices-by-other-players
+Nicol Bolas, God-Pharaoh	effect:choices-by-other-players
+Orzhov Advokist	effect:choices-by-other-players
+Prisoner's Dilemma	effect:choices-by-other-players
+Realms Uncharted	effect:choices-by-other-players
+Relic of Progenitus	effect:choices-by-other-players
+Sadistic Shell Game	effect:choices-by-other-players
+Selective Obliteration	effect:choices-by-other-players
+Teferi, Temporal Pilgrim	effect:choices-by-other-players
+Tempting Contract	effect:choices-by-other-players
+The Kami War	effect:choices-by-other-players
+Assault Suit	effect:control-change-extensions
+Chef's Kiss	effect:control-change-extensions
+Gilded Drake	effect:control-change-extensions
+Kellogg, Dangerous Mind	effect:control-change-extensions
+Mind Flayer	effect:control-change-extensions
+Perplexing Chimera	effect:control-change-extensions
+Willbreaker	effect:control-change-extensions
+Nihiloor	effect:control-while-you-control-source
+Pyreswipe Hawk	effect:control-while-you-control-source
+Everything Comes to Dust	effect:convoked-creatures
+Firebender Ascension	effect:copy-ability
+Gogo, Master of Mimicry	effect:copy-ability
+Sunken Palace	effect:copy-ability
+Adagia, Windswept Bastion	effect:copy-exceptions
+Dino DNA	effect:copy-exceptions
+Firion, Wild Rose Warrior	effect:copy-exceptions
+Flesh Duplicate	effect:copy-exceptions keyword:vanishing
+Mocking Doppelganger	effect:copy-exceptions mechanic:goad-extensions
+Moritte of the Frost	effect:copy-exceptions
+The Eleventh Hour	effect:copy-exceptions
+Vesuvan Doppelganger	effect:copy-exceptions
+Display of Power	effect:copy-spell-extensions
+Double Major	effect:copy-spell-extensions
+Finale of Promise	effect:copy-spell-extensions
+Frontline Heroism	effect:copy-spell-extensions
+Nalfeshnee	effect:copy-spell-extensions
+Storm of Saruman	effect:copy-spell-extensions
+Tempt with Mayhem	effect:copy-spell-extensions
+The Rani	effect:create-token-attached-to
+Aggravate	effect:damage-dealt-this-way
+Assembled Alphas	effect:damage-to-trigger-object
+All-Out Assault	effect:delayed-trigger-extensions
+Aphelia, Viper Whisperer	effect:delayed-trigger-extensions
+Bonus Round	effect:delayed-trigger-extensions
+Dalkovan Encampment	effect:delayed-trigger-extensions
+Depthshaker Titan	effect:delayed-trigger-extensions
+Duskmantle Guildmage	effect:delayed-trigger-extensions
+Faramir, Prince of Ithilien	effect:delayed-trigger-extensions
+Forth Eorlingas!	effect:delayed-trigger-extensions
+Last Chance	effect:delayed-trigger-extensions
+Rite of Harmony	effect:delayed-trigger-extensions
+Storm King's Thunder	effect:delayed-trigger-extensions
+Summon: Leviathan	effect:delayed-trigger-extensions
+Tamiyo Meets the Story Circle	effect:delayed-trigger-extensions
+Waltz of Rage	effect:delayed-trigger-extensions
+Horn of Plenty	effect:delayed-trigger-for-chosen-player
+Bounty of the Hunt	effect:delayed-trigger-next-cleanup
+Elusive Otter // Grove's Bounty	effect:distribute-counters

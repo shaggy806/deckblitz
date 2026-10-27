@@ -1,0 +1,102 @@
+# Recheck list R4 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Revival of the Ancestors	effect:distribute-counters
+Vastwood Hydra	effect:distribute-counters
+Rhino, Terrible Trampler	effect:divide-among-targets
+Shatterskull Smashing // Shatterskull, the Hammer Pass	effect:divide-among-targets
+Ureni, the Song Unending	effect:divide-among-targets
+Vorinclex	effect:divide-among-targets
+Origin of Iron Man	effect:doesnt-untap-while-you-control-source
+Olivia Voldaren	effect:duration-extensions
+Extraction Specialist	effect:duration-while-you-control-source
+Tale of Tinúviel	effect:duration-while-you-control-source
+Vault 87: Forced Evolution	effect:duration-while-you-control-source
+Kithkin Armor	effect:effect-on-enchanted-permanent
+Chandra, Awakened Inferno	effect:emblem-triggered-abilities
+Chandra, Dressed to Kill	effect:emblem-triggered-abilities
+Chandra, Spark Hunter	effect:emblem-triggered-abilities
+Jace, Vryn's Prodigy // Jace, Telepath Unbound	effect:emblem-triggered-abilities
+Kaya the Inexorable	effect:emblem-triggered-abilities
+Liliana, Waker of the Dead	effect:emblem-triggered-abilities
+Lolth, Spider Queen	effect:emblem-triggered-abilities
+Tezzeret, Betrayer of Flesh	effect:emblem-triggered-abilities
+Tyvar Kell	effect:emblem-triggered-abilities
+Venser, the Sojourner	effect:emblem-triggered-abilities
+Combat Calligrapher	effect:enter-attacking static:combat-restriction-extensions
+Persistent Marshstalker	effect:enter-attacking static:pt-per-amount
+Phoenix Chick	effect:enter-attacking
+Doomsday Excruciator	effect:exile-library-all-but-bottom
+Mari, the Killing Quill	effect:exile-with-counters
+Rousing Refrain	effect:exile-with-counters mechanic:suspend-and-time-counters
+Suspended Sentence	effect:exile-with-counters
+Ghostway	effect:flicker-generalized
+Gilraen, Dúnedain Protector	effect:flicker-generalized
+Nahiri's Resolve	effect:flicker-generalized
+Planar Guide	effect:flicker-generalized
+Culvert Ambusher	effect:forced-block-this-combat
+Impetuous Devils	effect:forced-block-this-combat
+Maraleaf Rider	effect:forced-block-this-combat effect:must-block-this-turn
+Tolsimir, Midnight's Light	effect:forced-block-this-combat
+Tower Above	effect:forced-block-this-combat
+Blightwing Bandit	effect:impulse-exile-other-libraries zone:exile-face-down
+Dream Harvest	effect:impulse-exile-other-libraries
+Triple Triad	effect:impulse-exile-other-libraries
+Jace's Machinations	effect:instant-speed-loyalty
+Clear the Land	effect:look-and-choose-leftover
+Ao, the Dawn Sky	effect:look-and-choose-total-mana-value
+Michelangelo's Technique	effect:look-and-choose-total-mana-value
+Smelting Vat	effect:look-and-choose-total-mana-value
+Final Fortune	effect:lose-game
+Shay Cormac	effect:lose-keyword-until-eot trigger:becomes-target-fixes
+Soldevi Adnate	effect:mana-ability-dynamic-amount
+Empowered Autogenerator	effect:mana-ability-side-effects
+Gemstone Mine	effect:mana-ability-side-effects
+Glittering Stockpile	effect:mana-ability-side-effects
+Grove of the Burnwillows	effect:mana-ability-side-effects
+Hall of the Bandit Lord	effect:mana-ability-side-effects
+Sandstone Needle	effect:mana-ability-side-effects
+Tyvar the Bellicose	effect:mana-ability-side-effects
+Zhur-Taa Druid	effect:mana-ability-side-effects
+Clackbridge Troll	effect:may-sacrifice-then
+Disciple of Freyalise // Garden of Freyalise	effect:may-sacrifice-then
+Sidisi, Undead Vizier	effect:may-sacrifice-then
+Countermand	effect:mill-controller-of-target
+Glacial Grasp	effect:mill-controller-of-target
+Grisly Spectacle	effect:mill-controller-of-target
+Psychic Strike	effect:mill-controller-of-target
+Zulaport Duelist	effect:mill-controller-of-target
+Koma, Cosmos Serpent	effect:modal-ability-targeted-modes
+Rikku, Resourceful Guardian	effect:move-counter
+Tester of the Tangential	effect:move-counter
+Zack Fair	effect:move-counter
+Academic Dispute	effect:must-block-this-turn
+Avalanche Tusker	effect:must-block-this-turn
+Boros Battleshaper	effect:must-block-this-turn
+Courtly Provocateur	effect:must-block-this-turn
+Crashing Boars	effect:must-block-this-turn
+Culling Mark	effect:must-block-this-turn
+Domineering Will	effect:must-block-this-turn
+Feral Contest	effect:must-block-this-turn
+Giant Ambush Beetle	effect:must-block-this-turn
+Grappling Hook	effect:must-block-this-turn
+Hunt Down	effect:must-block-this-turn
+Lurking Arynx	effect:must-block-this-turn
+Mark for Death	effect:must-block-this-turn
+Matsu-Tribe Decoy	effect:must-block-this-turn
+Monstrous Step	effect:must-block-this-turn
+Nacatl Hunt-Pride	effect:must-block-this-turn
+Peema Aether-Seer	effect:must-block-this-turn
+Predatory Rampage	effect:must-block-this-turn
+Provoke	effect:must-block-this-turn
+Rimehorn Aurochs	effect:must-block-this-turn
+Shessra, Death's Whisper	effect:must-block-this-turn
+Tangle Angler	effect:must-block-this-turn
+Timely Interference	effect:must-block-this-turn
+Torchling	effect:must-block-this-turn
+Trumpeting Armodon	effect:must-block-this-turn
+Turntimber Basilisk	effect:must-block-this-turn
+You've Been Caught Stealing	effect:must-block-this-turn
+Absolute Virtue	effect:player-protection
+Didn't Say Please	effect:player-scope-extensions
+Dream Fracture	effect:player-scope-extensions
+Fade from History	effect:player-scope-extensions

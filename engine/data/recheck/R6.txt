@@ -1,0 +1,102 @@
+# Recheck list R6 of 9, frozen 2026-10-27 by `cards:needs -- --recheck --freeze` (the need-keys plan, Phase 1 step 2).
+# One card per line, then its latest record's need keys. Skip a card already in the pool.
+Lost Monarch of Ifnir	keyword:afflict
+Aang, Airbending Master	keyword:airbend
+Aang, Swift Savior	keyword:airbend keyword:waterbend
+Sinister Gnarlbark	keyword:blight
+Flamekin Village	keyword:changeling
+Maskwood Nexus	keyword:changeling
+Omni-Changeling	keyword:changeling
+Memory Vampire	keyword:collect-evidence
+Raiding Schemes	keyword:conspire
+Rally the Galadhrim	keyword:conspire
+Rassilon, the War President	keyword:conspire
+Market Gnome	keyword:craft
+The Enigma Jewel // Locus of Enlightenment	keyword:craft trigger:activates-ability
+Demonic Junker	keyword:crew
+Hoard Hauler	keyword:crew
+Mobilizer Mech	keyword:crew
+Nautiloid Ship	keyword:crew
+The Indomitable	keyword:crew
+Aboroth	keyword:cumulative-upkeep
+Braid of Fire	keyword:cumulative-upkeep
+Breath of Dreams	keyword:cumulative-upkeep
+Dreams of the Dead	keyword:cumulative-upkeep
+Glacial Chasm	keyword:cumulative-upkeep
+Heart of Bogardan	keyword:cumulative-upkeep
+Herald of Leshrac	keyword:cumulative-upkeep
+Jötun Grunt	keyword:cumulative-upkeep
+Mystic Remora	keyword:cumulative-upkeep
+Phyrexian Soulgorger	keyword:cumulative-upkeep
+Psychic Vortex	keyword:cumulative-upkeep
+Sheltering Ancient	keyword:cumulative-upkeep
+Thought Lash	keyword:cumulative-upkeep
+Varchild's War-Riders	keyword:cumulative-upkeep
+Vexing Sphinx	keyword:cumulative-upkeep
+Wall of Shards	keyword:cumulative-upkeep
+Lavinia of the Tenth	keyword:detain
+Quintorius Kand	keyword:discover
+Zoyowa's Justice	keyword:discover
+Vizier of the Anointed	keyword:embalm
+Amalia Benavides Aguirre	keyword:explore
+Topography Tracker	keyword:explore
+Fire Nation Turret	keyword:firebending
+Camellia, the Seedmiser	keyword:forage trigger:sacrifice-filter
+Feed the Cycle	keyword:forage
+Thornvault Forager	keyword:forage effect:add-mana-extensions
+Brotherhood Headquarters	keyword:freerunning
+Viewpoint Synchronization	keyword:freerunning
+Hauntwoods Shrieker	keyword:manifest-dread
+Danny Pink	keyword:mentor
+Aminatou, Veil Piercer	keyword:miracle decision:library-ordering
+Lorehold, the Historian	keyword:miracle
+Molecule Man	keyword:miracle
+Terminus	keyword:miracle
+Triumph of Saint Katherine	keyword:miracle
+Arcbound Overseer	keyword:modular
+Taste of Paradise	keyword:multikicker amount:times-kicked
+The Master, Multiplied	keyword:myriad static:legend-rule-exemptions
+Dokuchi Silencer	keyword:ninjutsu
+Nashi, Moon Sage's Scion	keyword:ninjutsu
+Thousand-Faced Shadow	keyword:ninjutsu
+Yuffie, Materia Hunter	keyword:ninjutsu effect:control-change-extensions
+Aven Interrupter	keyword:plot
+Doc Aurlock, Grizzled Genius	keyword:plot cost:cost-modification-extensions
+Ojer Pakpatiq, Deepest Epoch	keyword:rebound
+World at War	keyword:rebound
+Changing Loyalty	keyword:replicate
+Consign to Memory	keyword:replicate
+Exterminate!	keyword:replicate
+Hatchery Sliver	keyword:replicate
+Ian Chesterton	keyword:replicate
+Mists of Lórien	keyword:replicate
+Psionic Ritual	keyword:replicate
+Reiterating Bolt	keyword:replicate
+Stream of Thought	keyword:replicate
+Threefold Signal	keyword:replicate
+Wrenn and Six	keyword:retrace effect:emblem-triggered-abilities
+Thrumming Stone	keyword:ripple
+Cloud's Limit Break	keyword:tiered
+Tifa's Limit Break	keyword:tiered
+Skrelv's Hive	keyword:toxic keyword:corrupted
+Perplex	keyword:transmute
+Timeline Culler	keyword:warp
+Spirit Water Revival	keyword:waterbend
+The Unagi of Kyoshi Island	keyword:waterbend
+Waterbending Lesson	keyword:waterbend
+Invasion of Fiora // Marchesa, Resolute Monarch	mechanic:battles
+Invasion of Ikoria // Zilortha, Apex of Ikoria	mechanic:battles
+Chancellor of the Annex	mechanic:begin-game-on-battlefield
+Chancellor of the Dross	mechanic:begin-game-on-battlefield
+Chancellor of the Forge	mechanic:begin-game-on-battlefield
+Chancellor of the Spires	mechanic:begin-game-on-battlefield
+Chancellor of the Tangle	mechanic:begin-game-on-battlefield
+Gemstone Caverns	mechanic:begin-game-on-battlefield
+Sphinx of Foresight	mechanic:begin-game-on-battlefield
+Case File Auditor	mechanic:case
+Case of the Stashed Skeleton	mechanic:case
+Case of the Uneaten Feast	mechanic:case
+Fire Juggler	mechanic:clash
+Redeem the Lost	mechanic:clash
+Bandit's Talent	mechanic:class
+Barbarian Class	mechanic:class mechanic:dice-rolling

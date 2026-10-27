@@ -1,6 +1,6 @@
 ---
 name: author-walks-parallel
-description: Start several cloud sessions at once, each authoring one card batch on its own range of sets (the newest-first walk, the oldest-first walk, a middle walk), so more of the card backlog is covered at the same time than one session's five agents allow — assign the ranges and batch numbers, record them on main, start the sessions with a prompt each, then check on them until each has landed on main. Use when the user asks to run the set walks in parallel, start several authoring sessions or cloud agents, fan out the card authoring, or cover more ground with bigger batches.
+description: Start several cloud sessions at once, each authoring one card batch on its own range of sets (the newest-first walk, the oldest-first walk, a middle walk), so more of the card backlog is covered at the same time than one session's five agents allow — assign the ranges and batch numbers, record them on main, start the sessions with a prompt each, then check on them until each has landed on main. Also runs the need-keys plan's recheck lists (engine/data/recheck/R<K>.txt) the same way, a list per child. Use when the user asks to run the set walks or the recheck lists in parallel, start several authoring sessions or cloud agents, fan out the card authoring, or cover more ground with bigger batches.
 ---
 
 # Run the set walks in parallel cloud sessions
@@ -60,6 +60,31 @@ first check-in.
 - **One engine feature, built once.** A child about to build a feature first checks
   `git log origin/main` for another walk having built it.
 - **One batch per child.** It ships, updates its walk's hand-off line and stops.
+
+## A recheck round
+
+The set walk ended 2026-10-27. Its successor is the need-keys plan's **recheck
+lists** (`docs/plans/need-keys-after-the-walk.md`, Phase 1 step 2): frozen lists
+of about 100 already-triaged cards each, `engine/data/recheck/R1.txt` … `R9.txt`,
+written by `npm run cards:needs -w engine -- --recheck --freeze`. A recheck round
+runs this skill with these changes; everything else (the rules above, batch
+numbers, the landing lock, watching, reporting, archiving) is the same.
+
+- **Step 0**: list sessions with the tag `recheck` too. A list still being worked
+  is owned until it lands.
+- **Step 1, instead of ranges**: the lists. `BACKLOG.md`'s "Next: work down the
+  need keys" line says which are done or assigned. Take up to five lists not yet
+  done, lowest first. **Re-freeze only between rounds** (no list assigned and
+  unlanded): re-freezing rewrites every list, renumbering what's left. Do it when
+  the lists are stale, meaning most cards on them have landed or a round of
+  feature work has built keys they need (`--recheck` then shows more cards than
+  the lists hold). R1 holds the 61 meta-only cards, which need a full triage, so
+  it's the slowest list.
+- **Step 2**: record the assignment on that BACKLOG line: each list and its
+  child's batch number. Land it on `main` the same way.
+- **Step 3**: fill **`child-prompt-recheck.md`** instead (placeholders: `LIST`,
+  for example `R3`; `CARDCOUNT`, the list's card lines; `BATCHNUM`). Title
+  `Recheck <LIST> (<BATCHNUM>)`, tags `["recheck"]`.
 
 ## 0. Orient
 
