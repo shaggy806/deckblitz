@@ -45,6 +45,11 @@ const NO_TOKEN_PRINTING = new Set([
   // no token printing in the Oracle snapshot.
   "Kaldra",
   "Pincher Token",
+  // Wirefly Hive (DST)'s Wirefly and Wand of the Elements (DST)'s Elementals:
+  // no token printing on Scryfall or in the Oracle snapshot.
+  "Wirefly Token",
+  "2/2 Blue Elemental Token (Flying)",
+  "3/3 Red Elemental Token",
   // Mongrel Pack (TMP)'s 1/1 green Dogs were never printed as a token.
   "1/1 Green Dog Token",
   "Banana Token",
