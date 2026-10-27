@@ -5415,7 +5415,9 @@ export class Game {
       ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
       ...(costLife > 0 ? { costLife } : {}),
       ...(costEnergy > 0 ? { costEnergy } : {}),
-      ...(ability.modesController !== undefined && ability.modesController !== controller
+      // Kept when it's the chooser too: the choice's `"that-player"` is the
+      // chooser either way (Dwarven Driller targeting its controller's land).
+      ...(ability.modesController !== undefined
         ? { modesController: ability.modesController }
         : {}),
       ...(ability.sourceLost === true ? { sourceLost: true } : {}),

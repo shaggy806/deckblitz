@@ -601,6 +601,7 @@ import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
+import _poolSparkMage from "../pool/spark-mage.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
@@ -1400,6 +1401,7 @@ const shard: CardShard = {
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
     _poolSoulTithe,
+    _poolSparkMage,
     _poolSphinxOfMagosi,
     _poolSpideryGrasp,
     _poolSpikeFeeder,

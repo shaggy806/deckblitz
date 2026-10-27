@@ -229,6 +229,7 @@ import _poolEndling from "../pool/endling.js";
 import _poolEngulfingSlagwurm from "../pool/engulfing-slagwurm.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
+import _poolEpicenter from "../pool/epicenter.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
 import _poolEvasiveAction from "../pool/evasive-action.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
@@ -562,6 +563,7 @@ import _poolRingOfImmortals from "../pool/ring-of-immortals.js";
 import _poolRingOfXathrid from "../pool/ring-of-xathrid.js";
 import _poolRiotRingleader from "../pool/riot-ringleader.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
+import _poolRitesOfSpring from "../pool/rites-of-spring.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRoilElemental from "../pool/roil-elemental.js";
@@ -1027,6 +1029,7 @@ const shard: CardShard = {
     _poolEngulfingSlagwurm,
     _poolEntityTracker,
     _poolEomerOfTheRiddermark,
+    _poolEpicenter,
     _poolErrantEphemeron,
     _poolEvasiveAction,
     _poolEvendoBrushrazer,
@@ -1360,6 +1363,7 @@ const shard: CardShard = {
     _poolRingOfXathrid,
     _poolRiotRingleader,
     _poolRiteOfOblivion,
+    _poolRitesOfSpring,
     _poolRoccoStreetChef,
     _poolRocketVolley,
     _poolRoilElemental,

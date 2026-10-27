@@ -345,6 +345,7 @@ import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
 import _poolKrenkoBaronOfTinStreet from "../pool/krenko-baron-of-tin-street.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
+import _poolKrosanBeast from "../pool/krosan-beast.js";
 import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
@@ -1131,6 +1132,7 @@ const shard: CardShard = {
     _poolKraumViolentCacophony,
     _poolKrenkoBaronOfTinStreet,
     _poolKrenkoMobBoss,
+    _poolKrosanBeast,
     _poolKroxaAndKunoros,
     _poolKynaiosAndTiroOfMeletis,
     _poolLacerateFlesh,

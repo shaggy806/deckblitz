@@ -481,6 +481,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhantatog from "../pool/phantatog.js";
 import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
@@ -515,6 +516,7 @@ import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
 import _poolPunySnack from "../pool/puny-snack.js";
+import _poolPuppeteer from "../pool/puppeteer.js";
 import _poolQuestForTheGemblades from "../pool/quest-for-the-gemblades.js";
 import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
@@ -569,6 +571,7 @@ import _poolSanctumSpirit from "../pool/sanctum-spirit.js";
 import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
 import _poolSandsteppeOutcast from "../pool/sandsteppe-outcast.js";
 import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
+import _poolSarcatog from "../pool/sarcatog.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -1294,6 +1297,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
+    _poolPhantatog,
     _poolPhantomTiger,
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
@@ -1328,6 +1332,7 @@ const shard: CardShard = {
     _poolPsychicSymbiont,
     _poolPterodonKnight,
     _poolPunySnack,
+    _poolPuppeteer,
     _poolQuestForTheGemblades,
     _poolQuicksilverBehemoth,
     _poolQuilledCharger,
@@ -1382,6 +1387,7 @@ const shard: CardShard = {
     _poolSandstalkerMoloch,
     _poolSandsteppeOutcast,
     _poolSanguineIndulgence,
+    _poolSarcatog,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
     _poolSavaiCrystal,

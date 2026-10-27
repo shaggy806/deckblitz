@@ -66,6 +66,7 @@ import _poolBriarknitKami from "../pool/briarknit-kami.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurdenOfGreed from "../pool/burden-of-greed.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
+import _poolBurningSands from "../pool/burning-sands.js";
 import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
@@ -139,6 +140,7 @@ import _poolDestinedLead from "../pool/destined-lead.js";
 import _poolDidgeridoo from "../pool/didgeridoo.js";
 import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
+import _poolDirtyWererat from "../pool/dirty-wererat.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDisplacementWave from "../pool/displacement-wave.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
@@ -152,6 +154,7 @@ import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadWanderer from "../pool/dread-wanderer.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
+import _poolDruidsCall from "../pool/druids-call.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
@@ -788,6 +791,7 @@ const shard: CardShard = {
     _poolBrotherhoodPatriarch,
     _poolBurdenOfGreed,
     _poolBurnDownTheHouse,
+    _poolBurningSands,
     _poolBurstOfStrength,
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
@@ -861,6 +865,7 @@ const shard: CardShard = {
     _poolDidgeridoo,
     _poolDigDeep,
     _poolDinosaurStampede,
+    _poolDirtyWererat,
     _poolDiscipleOfTheOldWays,
     _poolDisplacementWave,
     _poolDistrictGuide,
@@ -874,6 +879,7 @@ const shard: CardShard = {
     _poolDreadWanderer,
     _poolDreadhound,
     _poolDreamTwist,
+    _poolDruidsCall,
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
     _poolDwarvenPriest,
