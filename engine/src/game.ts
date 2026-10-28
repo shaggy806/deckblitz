@@ -34656,7 +34656,9 @@ export class Game {
       r.toFilter !== undefined &&
       (target.kind !== "object" ||
         this.state.objects[target.object]?.zone !== "battlefield" ||
-        !matchesFilter(this.state, this.registry, target.object, r.toFilter, { you }))
+        // Read from this permanent: "creatures banded with this creature"
+        // (Camel — `bandedWithSource`).
+        !matchesFilter(this.state, this.registry, target.object, r.toFilter, { you, source: by.id }))
     ) {
       return false;
     }

@@ -198,9 +198,9 @@ export function damageAssigner(
  * answer (rules 702.22j-k), when the player dividing it doesn't control the
  * creature dealing it: as few of the recipients destroyed as possible. Each
  * takes up to one less than its lethal (an indestructible one any amount);
- * whatever doesn't fit goes on the one that can take most, so at most one
- * dies. Every point stays on a recipient, which is always legal: nothing
- * has to trample over.
+ * when that doesn't hold it all, the smallest — the one needing least to
+ * die — takes everything the others can't, so only it dies. Every point
+ * stays on a recipient, which is always legal: nothing has to trample over.
  */
 export function opposedAssignment(offer: DamageAssignmentOffer): number[] {
   const { power, lethal } = offer;
@@ -211,16 +211,19 @@ export function opposedAssignment(offer: DamageAssignmentOffer): number[] {
     amounts[sturdy] = power;
     return amounts;
   }
-  let remaining = power;
-  for (let i = 0; i < lethal.length && remaining > 0; i += 1) {
-    const take = Math.min(remaining, Math.max(0, lethal[i] - 1));
-    amounts[i] = take;
-    remaining -= take;
+  const spare = (i: number): number => Math.max(0, lethal[i] - 1);
+  const room = lethal.reduce((sum, _, i) => sum + spare(i), 0);
+  if (room >= power) {
+    let remaining = power;
+    for (let i = 0; i < lethal.length && remaining > 0; i += 1) {
+      amounts[i] = Math.min(remaining, spare(i));
+      remaining -= amounts[i];
+    }
+    return amounts;
   }
-  if (remaining > 0) {
-    let most = 0;
-    for (let i = 1; i < lethal.length; i += 1) if (lethal[i] > lethal[most]) most = i;
-    amounts[most] += remaining;
-  }
+  let smallest = 0;
+  for (let i = 1; i < lethal.length; i += 1) if (lethal[i] < lethal[smallest]) smallest = i;
+  for (let i = 0; i < lethal.length; i += 1) if (i !== smallest) amounts[i] = spare(i);
+  amounts[smallest] = power - (room - spare(smallest));
   return amounts;
 }

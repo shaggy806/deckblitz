@@ -36,7 +36,7 @@ export { CardRegistry } from "./cards/card-registry.js";
 export { COMMANDER_BANNED, PINNED_ART, TOKEN_NAMES } from "./cards/generated-index.js";
 export { attackingViolations } from "./combat/attacking.js";
 export { blockingViolations } from "./combat/blocking.js";
-export { damageAssignmentViolations, standardAssignment } from "./combat/damage.js";
+export { damageAssignmentViolations, defaultAssignment, standardAssignment } from "./combat/damage.js";
 export { fitsTogether } from "./zone-choice-together.js";
 export { stackCopyKey } from "./stack-copies.js";
 export type { StackCopyFields } from "./stack-copies.js";

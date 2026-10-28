@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { opposedAssignment } from "../combat/banding.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -175,5 +176,13 @@ describe("the defending player divides an attacker's damage (702.22j)", () => {
     expect(zone(game, hero)).toBe("graveyard");
     expect(life(game, B)).toBe(20);
     expect(damage(game, dreadmaw)).toBe(1);
+  });
+});
+
+describe("the other side's default division (opposedAssignment)", () => {
+  it("kills nothing when the damage fits, else only the smallest", () => {
+    expect(opposedAssignment({ power: 4, lethal: [3, 3], trample: false })).toEqual([2, 2]);
+    expect(opposedAssignment({ power: 3, lethal: [2, 1], trample: false })).toEqual([1, 2]);
+    expect(opposedAssignment({ power: 5, lethal: [4, 1], trample: false, indestructible: [false, true] })).toEqual([0, 5]);
   });
 });
