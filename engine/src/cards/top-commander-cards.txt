@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3913 already implemented / 1087 missing (marks refreshed 2026-10-28)
+3920 already implemented / 1080 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -96,7 +96,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]    97  Hinterland Harbor                        {0}              Land
 [x]    98  Faithless Looting                        {R}              Sorcery
 [x]    99  Frantic Search                           {2}{U}           Instant
-[ ]   100  Mystic Remora                            {U}              Enchantment
+[x]   100  Mystic Remora                            {U}              Enchantment
 [x]   101  Vandalblast                              {R}              Sorcery
 [x]   102  Elvish Mystic                            {G}              Creature — Elf Druid
 [x]   103  Phyrexian Arena                          {1}{B}{B}        Enchantment
@@ -2222,7 +2222,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2229  Invert Polarity                          {U}{U}{R}        Instant
 [x]  2230  Tandem Lookout                           {2}{U}           Creature — Human Scout
 [x]  2231  Jetmir, Nexus of Revels                  {1}{R}{G}{W}     Legendary Creature — Cat Demon
-[ ]  2232  Glacial Chasm                            {0}              Land
+[x]  2232  Glacial Chasm                            {0}              Land
 [ ]  2233  Bubbling Muck                            {B}              Sorcery
 [ ]  2234  Tyvar, Jubilant Brawler                  {1}{B}{G}        Legendary Planeswalker — Tyvar
 [x]  2235  Starfall Invocation                      {3}{W}{W}        Sorcery
@@ -2273,7 +2273,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2280  Goldmire Bridge                          {0}              Artifact Land
 [ ]  2281  Fighter Class                            {R}{W}           Enchantment — Class
 [x]  2282  Glittering Stockpile                     {2}{R}           Artifact — Treasure
-[ ]  2283  Thrumming Stone                          {5}              Legendary Artifact
+[x]  2283  Thrumming Stone                          {5}              Legendary Artifact
 [ ]  2284  Dance of the Dead                        {1}{B}           Enchantment — Aura
 [x]  2285  Blacksmith's Skill                       {W}              Instant
 [x]  2286  Agent of the Iron Throne                 {2}{B}           Legendary Enchantment — Background
@@ -2365,7 +2365,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2372  Your Temple Is Under Attack              {2}{W}           Instant
 [x]  2373  Lord Skitter, Sewer King                 {2}{B}           Legendary Creature — Rat Noble
 [ ]  2374  Frenzied Baloth                          {G}{G}           Creature — Beast
-[ ]  2375  The Indomitable                          {2}{U}{U}        Legendary Artifact — Vehicle
+[x]  2375  The Indomitable                          {2}{U}{U}        Legendary Artifact — Vehicle
 [x]  2376  Banishing Light                          {2}{W}           Enchantment
 [ ]  2377  Aetheric Amplifier                       {3}              Artifact
 [x]  2378  Halvar, God of Battle // Sword of the Realms {4}              Legendary Creature — God // Legendary Artifact — Equipment
@@ -2642,7 +2642,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2649  Scholar of New Horizons                  {1}{W}           Creature — Human Scout
 [ ]  2650  Firebender Ascension                     {1}{R}           Enchantment
 [x]  2651  Quick Study                              {2}{U}           Instant
-[ ]  2652  Thousand-Faced Shadow                    {U}              Creature — Human Ninja
+[x]  2652  Thousand-Faced Shadow                    {U}              Creature — Human Ninja
 [x]  2653  Prologue to Phyresis                     {1}{U}           Instant
 [x]  2654  Crystal Grotto                           {0}              Land
 [ ]  2655  Chandra's Incinerator                    {5}{R}           Creature — Elemental
@@ -3610,7 +3610,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3617  Yavimaya Elder                           {1}{G}{G}        Creature — Human Druid
 [ ]  3618  Bureau Headmaster                        {R}{W}           Creature — Human Assassin
 [x]  3619  Spellstutter Sprite                      {1}{U}           Creature — Faerie Wizard
-[ ]  3620  Flamekin Village                         {0}              Land
+[x]  3620  Flamekin Village                         {0}              Land
 [x]  3621  Moon-Circuit Hacker                      {1}{U}           Enchantment Creature — Human Ninja
 [x]  3622  Edgar, Charmed Groom // Edgar Markov's Coffin {4}              Legendary Creature — Vampire Noble // Legendary Artifact
 [x]  3623  Squall, SeeD Mercenary                   {2}{W}{B}        Legendary Creature — Human Knight Mercenary
@@ -4249,7 +4249,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4256  Consuming Tide                           {2}{U}{U}        Sorcery
 [x]  4257  Perennial Behemoth                       {5}              Artifact Creature — Beast
 [x]  4258  Dazzling Denial                          {1}{U}           Instant
-[ ]  4259  Demonic Junker                           {6}{B}           Artifact — Vehicle
+[x]  4259  Demonic Junker                           {6}{B}           Artifact — Vehicle
 [x]  4260  Vizier of the Menagerie                  {3}{G}           Creature — Snake Cleric
 [ ]  4261  Teferi, Temporal Archmage                {4}{U}{U}        Legendary Planeswalker — Teferi
 [x]  4262  Archmage of Echoes                       {4}{U}           Creature — Faerie Wizard
