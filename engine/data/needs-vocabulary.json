@@ -10031,6 +10031,13 @@
   "effect:reveal-x-random-discard-named": {
    "example": "Nebuchadnezzar"
   },
+  "effect:grant-keyword-until-end-of-combat": {
+   "family": "effect:duration-extensions",
+   "example": "Battering Ram: at the beginning of combat on your turn, it gains banding until end of combat — grant-keyword has no until-end-of-combat duration"
+  },
+  "condition:trigger-object-blockers-filter": {
+   "example": "Wall of Caltrops: whenever it blocks a creature, if at least one other Wall is blocking that creature and no non-Walls are, it gains banding — no condition reads the creatures blocking the trigger object"
+  },
   "effect:pt-until-end-of-combat": {
    "example": "Glyph of Destruction"
   },

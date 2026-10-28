@@ -1,0 +1,333 @@
+{
+  "batch": "B247",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the banding family (keyword:banding)",
+  "authored": [
+    {
+      "name": "Helm of Chatzuk",
+      "files": [
+        "engine/src/cards/pool/helm-of-chatzuk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Benalish Hero",
+      "files": [
+        "engine/src/cards/pool/benalish-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mesa Pegasus",
+      "files": [
+        "engine/src/cards/pool/mesa-pegasus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Timber Wolves",
+      "files": [
+        "engine/src/cards/pool/timber-wolves.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Camel",
+      "files": [
+        "engine/src/cards/pool/camel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mishra's War Machine",
+      "files": [
+        "engine/src/cards/pool/mishras-war-machine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urza's Avenger",
+      "files": [
+        "engine/src/cards/pool/urzas-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "War Elephant",
+      "files": [
+        "engine/src/cards/pool/war-elephant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cathedral of Serra",
+      "files": [
+        "engine/src/cards/pool/cathedral-of-serra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seafarer's Quay",
+      "files": [
+        "engine/src/cards/pool/seafarers-quay.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tolaria",
+      "files": [
+        "engine/src/cards/pool/tolaria.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fortified Area",
+      "files": [
+        "engine/src/cards/pool/fortified-area.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mountain Stronghold",
+      "files": [
+        "engine/src/cards/pool/mountain-stronghold.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Adventurers' Guildhouse",
+      "files": [
+        "engine/src/cards/pool/adventurers-guildhouse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Unholy Citadel",
+      "files": [
+        "engine/src/cards/pool/unholy-citadel.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ayesha Tanaka",
+      "files": [
+        "engine/src/cards/pool/ayesha-tanaka.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Master of the Hunt",
+      "files": [
+        "engine/src/cards/pool/master-of-the-hunt.ts",
+        "engine/src/cards/tokens/wolves-of-the-hunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shelkin Brownie",
+      "files": [
+        "engine/src/cards/pool/shelkin-brownie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knights of Thorn",
+      "files": [
+        "engine/src/cards/pool/knights-of-thorn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pikemen",
+      "files": [
+        "engine/src/cards/pool/pikemen.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Icatian Infantry",
+      "files": [
+        "engine/src/cards/pool/icatian-infantry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Icatian Phalanx",
+      "files": [
+        "engine/src/cards/pool/icatian-phalanx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Icatian Skirmishers",
+      "files": [
+        "engine/src/cards/pool/icatian-skirmishers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Baton of Morale",
+      "files": [
+        "engine/src/cards/pool/baton-of-morale.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cooperation",
+      "files": [
+        "engine/src/cards/pool/cooperation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dire Wolves",
+      "files": [
+        "engine/src/cards/pool/dire-wolves.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Formation",
+      "files": [
+        "engine/src/cards/pool/formation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kjeldoran Knight",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-knight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kjeldoran Phalanx",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-phalanx.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kjeldoran Skycaptain",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-skycaptain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kjeldoran Skyknight",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-skyknight.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kjeldoran Warrior",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shield Bearer",
+      "files": [
+        "engine/src/cards/pool/shield-bearer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wall of Shields",
+      "files": [
+        "engine/src/cards/pool/wall-of-shields.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Beast Walkers",
+      "files": [
+        "engine/src/cards/pool/beast-walkers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soraya the Falconer",
+      "files": [
+        "engine/src/cards/pool/soraya-the-falconer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Errand of Duty",
+      "files": [
+        "engine/src/cards/pool/errand-of-duty.ts",
+        "engine/src/cards/tokens/knight-token-banding.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kjeldoran Escort",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-escort.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nature's Blessing",
+      "files": [
+        "engine/src/cards/pool/natures-blessing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urza's Engine",
+      "files": [
+        "engine/src/cards/pool/urzas-engine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teremko Griffin",
+      "files": [
+        "engine/src/cards/pool/teremko-griffin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Noble Elephant",
+      "files": [
+        "engine/src/cards/pool/noble-elephant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Benalish Infantry",
+      "files": [
+        "engine/src/cards/pool/benalish-infantry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Volunteer Reserves",
+      "files": [
+        "engine/src/cards/pool/volunteer-reserves.ts"
+      ],
+      "tested": false
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Battering Ram",
+      "needs": [
+        "effect:grant-keyword-until-end-of-combat"
+      ],
+      "why": "Banding is built, but 'gains banding until end of combat' has no duration that ends with combat; until end of turn would show banding after combat."
+    },
+    {
+      "name": "Wall of Caltrops",
+      "needs": [
+        "condition:trigger-object-blockers-filter"
+      ],
+      "why": "Banding is built, but the trigger's intervening-if asks about every creature blocking the creature it blocks (another Wall, and no non-Walls), which no condition reads."
+    }
+  ]
+}

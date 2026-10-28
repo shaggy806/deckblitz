@@ -438,6 +438,7 @@ import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
 import _poolNacatlSavage from "../pool/nacatl-savage.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
+import _poolNaturesBlessing from "../pool/natures-blessing.js";
 import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
 import _poolNehebTheWorthy from "../pool/neheb-the-worthy.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolMysticMonstrosity,
     _poolNacatlSavage,
     _poolNarsetEnlightenedMaster,
+    _poolNaturesBlessing,
     _poolNaturesEmbrace,
     _poolNeedletoothPack,
     _poolNehebTheWorthy,

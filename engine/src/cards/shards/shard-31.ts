@@ -69,6 +69,7 @@ import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
+import _poolBeastWalkers from "../pool/beast-walkers.js";
 import _poolBelieve from "../pool/believe.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBigBertha from "../pool/big-bertha.js";
@@ -950,6 +951,7 @@ const shard: CardShard = {
     _poolBatteringCraghorn,
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
+    _poolBeastWalkers,
     _poolBelieve,
     _poolBestowGreatness,
     _poolBigBertha,

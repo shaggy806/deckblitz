@@ -348,6 +348,7 @@ import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
 import _poolKillShot from "../pool/kill-shot.js";
 import _poolKindledHeroism from "../pool/kindled-heroism.js";
+import _poolKjeldoranPhalanx from "../pool/kjeldoran-phalanx.js";
 import _poolKjeldoranWarCry from "../pool/kjeldoran-war-cry.js";
 import _poolKnightCaptainOfEos from "../pool/knight-captain-of-eos.js";
 import _poolKnightOfSursi from "../pool/knight-of-sursi.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolKillMaimBurn,
     _poolKillShot,
     _poolKindledHeroism,
+    _poolKjeldoranPhalanx,
     _poolKjeldoranWarCry,
     _poolKnightCaptainOfEos,
     _poolKnightOfSursi,

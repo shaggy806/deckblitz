@@ -62,6 +62,7 @@ import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBallotBroker from "../pool/ballot-broker.js";
 import _poolBarrelDownSokenzan from "../pool/barrel-down-sokenzan.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
+import _poolBatonOfMorale from "../pool/baton-of-morale.js";
 import _poolBattleAtTheBridge from "../pool/battle-at-the-bridge.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
 import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
@@ -919,6 +920,7 @@ const shard: CardShard = {
     _poolBallotBroker,
     _poolBarrelDownSokenzan,
     _poolBartolomeDelPresidio,
+    _poolBatonOfMorale,
     _poolBattleAtTheBridge,
     _poolBazaarOfBaghdad,
     _poolBearerOfMemory,

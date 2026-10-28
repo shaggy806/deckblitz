@@ -56,6 +56,7 @@ import _poolAuthority from "../pool/authority.js";
 import _poolAvatarKuruk from "../pool/avatar-kuruk.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolAwakenTheHonoredDead from "../pool/awaken-the-honored-dead.js";
+import _poolAyeshaTanaka from "../pool/ayesha-tanaka.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
@@ -72,6 +73,7 @@ import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBelligerentRegisaur from "../pool/belligerent-regisaur.js";
 import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
+import _poolBenalishInfantry from "../pool/benalish-infantry.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
 import _poolBessSoulNourisher from "../pool/bess-soul-nourisher.js";
@@ -397,6 +399,7 @@ import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
+import _poolKjeldoranKnight from "../pool/kjeldoran-knight.js";
 import _poolKlauthsWill from "../pool/klauths-will.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
@@ -876,6 +879,7 @@ const shard: CardShard = {
     _poolAvatarKuruk,
     _poolAvatarsWrath,
     _poolAwakenTheHonoredDead,
+    _poolAyeshaTanaka,
     _poolBackToNature,
     _poolBalambTRexaur,
     _poolBallLightning,
@@ -892,6 +896,7 @@ const shard: CardShard = {
     _poolBecomeTheAvalanche,
     _poolBelligerentRegisaur,
     _poolBellowingBruiser,
+    _poolBenalishInfantry,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
     _poolBessSoulNourisher,
@@ -1217,6 +1222,7 @@ const shard: CardShard = {
     _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
     _poolKitsuneLoreweaver,
+    _poolKjeldoranKnight,
     _poolKlauthsWill,
     _poolKraulHarpooner,
     _poolKreeSentinel,

@@ -112,6 +112,7 @@ import _poolCabarettiAscendancy from "../pool/cabaretti-ascendancy.js";
 import _poolCadaverousKnight from "../pool/cadaverous-knight.js";
 import _poolCadiraCallerOfTheSmall from "../pool/cadira-caller-of-the-small.js";
 import _poolCallerOfThePack from "../pool/caller-of-the-pack.js";
+import _poolCamel from "../pool/camel.js";
 import _poolCampusRenovation from "../pool/campus-renovation.js";
 import _poolCandyGrapple from "../pool/candy-grapple.js";
 import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
@@ -803,6 +804,7 @@ import _tokensHorrorTokenBlueBlackFlying from "../tokens/horror-token-blue-black
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
 import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.js";
 import _tokensJaceToken from "../tokens/jace-token.js";
+import _tokensKnightTokenBanding from "../tokens/knight-token-banding.js";
 import _tokensPirateTokenDaringPiracy from "../tokens/pirate-token-daring-piracy.js";
 import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
@@ -924,6 +926,7 @@ const shard: CardShard = {
     _poolCadaverousKnight,
     _poolCadiraCallerOfTheSmall,
     _poolCallerOfThePack,
+    _poolCamel,
     _poolCampusRenovation,
     _poolCandyGrapple,
     _poolCanyonWildcat,
@@ -1617,6 +1620,7 @@ const shard: CardShard = {
     _tokensHumanSoldierToken,
     _tokensInsectTokenFlyingHaste,
     _tokensJaceToken,
+    _tokensKnightTokenBanding,
     _tokensPirateTokenDaringPiracy,
     _tokensRatTokenVren,
     _tokensRobotVillainToken,

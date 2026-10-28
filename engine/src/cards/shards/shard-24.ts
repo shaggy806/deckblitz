@@ -449,6 +449,7 @@ import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNightsoilKami from "../pool/nightsoil-kami.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNissasRevelation from "../pool/nissas-revelation.js";
+import _poolNobleElephant from "../pool/noble-elephant.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
 import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
@@ -773,6 +774,7 @@ import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
 import _poolWakerOfTheWilds from "../pool/waker-of-the-wilds.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfHope from "../pool/wall-of-hope.js";
+import _poolWallOfShields from "../pool/wall-of-shields.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWanderlust from "../pool/wanderlust.js";
 import _poolWarRoom from "../pool/war-room.js";
@@ -1284,6 +1286,7 @@ const shard: CardShard = {
     _poolNightsoilKami,
     _poolNinjaOfTheHand,
     _poolNissasRevelation,
+    _poolNobleElephant,
     _poolNovaFlame,
     _poolNurturingPresence,
     _poolOakhameAdversary,
@@ -1608,6 +1611,7 @@ const shard: CardShard = {
     _poolWakerOfTheWilds,
     _poolWalkingBulwark,
     _poolWallOfHope,
+    _poolWallOfShields,
     _poolWallOfSpears,
     _poolWanderlust,
     _poolWarRoom,

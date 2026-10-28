@@ -369,6 +369,7 @@ import _poolKeldonOverseer from "../pool/keldon-overseer.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
 import _poolKhalniGem from "../pool/khalni-gem.js";
 import _poolKjeldoranDead from "../pool/kjeldoran-dead.js";
+import _poolKjeldoranSkyknight from "../pool/kjeldoran-skyknight.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
 import _poolKookus from "../pool/kookus.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolKessigWolf,
     _poolKhalniGem,
     _poolKjeldoranDead,
+    _poolKjeldoranSkyknight,
     _poolKnightLuminary,
     _poolKnightlyValor,
     _poolKookus,

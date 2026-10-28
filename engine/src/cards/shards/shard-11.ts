@@ -651,6 +651,7 @@ import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
 import _poolSoratamiMirrorMage from "../pool/soratami-mirror-mage.js";
+import _poolSorayaTheFalconer from "../pool/soraya-the-falconer.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
@@ -763,6 +764,7 @@ import _poolUnwelcomeSprite from "../pool/unwelcome-sprite.js";
 import _poolUrabrasksForge from "../pool/urabrasks-forge.js";
 import _poolUrborgElf from "../pool/urborg-elf.js";
 import _poolUrnOfGodfire from "../pool/urn-of-godfire.js";
+import _poolUrzasAvenger from "../pool/urzas-avenger.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
@@ -1487,6 +1489,7 @@ const shard: CardShard = {
     _poolSomnomancer,
     _poolSongOfFreyalise,
     _poolSoratamiMirrorMage,
+    _poolSorayaTheFalconer,
     _poolSorinRavenousNeonate,
     _poolSoulOfInnistrad,
     _poolSowingMycospawn,
@@ -1599,6 +1602,7 @@ const shard: CardShard = {
     _poolUrabrasksForge,
     _poolUrborgElf,
     _poolUrnOfGodfire,
+    _poolUrzasAvenger,
     _poolUthrosTitanicGodcore,
     _poolUyoSilentProphet,
     _poolVaultOfWhispers,

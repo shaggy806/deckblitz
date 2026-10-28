@@ -173,6 +173,7 @@ import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
 import _poolDireFleetWarmonger from "../pool/dire-fleet-warmonger.js";
+import _poolDireWolves from "../pool/dire-wolves.js";
 import _poolDirectCurrent from "../pool/direct-current.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolDetonate,
     _poolDevotedPaladin,
     _poolDireFleetWarmonger,
+    _poolDireWolves,
     _poolDirectCurrent,
     _poolDiregrafCaptain,
     _poolDisposalMummy,

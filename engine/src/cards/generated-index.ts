@@ -363,6 +363,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Knight Token (Chivalric Alliance)",
   "Knight Token (Guarded Heir)",
   "Knight Token (Rasputin, the Oneiromancer)",
+  "Knight Token (banding)",
   "Knight Token (first strike)",
   "Koma's Coil",
   "Kor Ally Token",

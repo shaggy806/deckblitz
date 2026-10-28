@@ -149,6 +149,7 @@ import _poolConduitOfStorms from "../pool/conduit-of-storms.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolConsumeTheMeek from "../pool/consume-the-meek.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
+import _poolCooperation from "../pool/cooperation.js";
 import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
 import _poolCopperMyr from "../pool/copper-myr.js";
 import _poolCoralMerfolk from "../pool/coral-merfolk.js";
@@ -267,6 +268,7 @@ import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
+import _poolFortifiedArea from "../pool/fortified-area.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
@@ -396,6 +398,7 @@ import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKissOfTheAmesha from "../pool/kiss-of-the-amesha.js";
+import _poolKjeldoranSkycaptain from "../pool/kjeldoran-skycaptain.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKorozdaGuildmage from "../pool/korozda-guildmage.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolConsulateDreadnought,
     _poolConsumeTheMeek,
     _poolContagionClasp,
+    _poolCooperation,
     _poolCoordinatedManeuver,
     _poolCopperMyr,
     _poolCoralMerfolk,
@@ -1149,6 +1153,7 @@ const shard: CardShard = {
     _poolFlowstoneStrike,
     _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
+    _poolFortifiedArea,
     _poolFrodoDeterminedHero,
     _poolFrostwalla,
     _poolFugitiveDroid,
@@ -1278,6 +1283,7 @@ const shard: CardShard = {
     _poolKindlyCustomer,
     _poolKingHaraldsRevenge,
     _poolKissOfTheAmesha,
+    _poolKjeldoranSkycaptain,
     _poolKolodinTriumphCaster,
     _poolKorozdaGuildmage,
     _poolKrangUtromWarlord,

@@ -292,6 +292,7 @@ import _poolHauntedCloak from "../pool/haunted-cloak.js";
 import _poolHearthCharm from "../pool/hearth-charm.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
+import _poolHelmOfChatzuk from "../pool/helm-of-chatzuk.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
@@ -749,6 +750,7 @@ import _poolViolentImpact from "../pool/violent-impact.js";
 import _poolViolentOutburst from "../pool/violent-outburst.js";
 import _poolViscidLemures from "../pool/viscid-lemures.js";
 import _poolVoidRend from "../pool/void-rend.js";
+import _poolVolunteerReserves from "../pool/volunteer-reserves.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
@@ -1111,6 +1113,7 @@ const shard: CardShard = {
     _poolHearthCharm,
     _poolHearthbornBattler,
     _poolHellkiteOverlord,
+    _poolHelmOfChatzuk,
     _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
@@ -1568,6 +1571,7 @@ const shard: CardShard = {
     _poolViolentOutburst,
     _poolViscidLemures,
     _poolVoidRend,
+    _poolVolunteerReserves,
     _poolVraskaGolgariQueen,
     _poolVraskaTheUnseen,
     _poolVulshokSorcerer,

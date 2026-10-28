@@ -719,6 +719,7 @@ import _poolTelJiladWolf from "../pool/tel-jilad-wolf.js";
 import _poolTelekineticSliver from "../pool/telekinetic-sliver.js";
 import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
+import _poolTeremkoGriffin from "../pool/teremko-griffin.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
@@ -1564,6 +1565,7 @@ const shard: CardShard = {
     _poolTelekineticSliver,
     _poolTempleOfTheDragonQueen,
     _poolTemporaryLockdown,
+    _poolTeremkoGriffin,
     _poolTerraStomper,
     _poolTerrainGenerator,
     _poolTheChaseIsOn,

@@ -427,9 +427,11 @@ import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
 import _poolKiyomaroFirstToStand from "../pool/kiyomaro-first-to-stand.js";
 import _poolKjeldoranEliteGuard from "../pool/kjeldoran-elite-guard.js";
+import _poolKjeldoranEscort from "../pool/kjeldoran-escort.js";
 import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
+import _poolKnightsOfThorn from "../pool/knights-of-thorn.js";
 import _poolKothophedSoulHoarder from "../pool/kothophed-soul-hoarder.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
@@ -1295,9 +1297,11 @@ const shard: CardShard = {
     _poolKinsbaileAspirant,
     _poolKiyomaroFirstToStand,
     _poolKjeldoranEliteGuard,
+    _poolKjeldoranEscort,
     _poolKnightOfDawnsLight,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
+    _poolKnightsOfThorn,
     _poolKothophedSoulHoarder,
     _poolKrovikanFetish,
     _poolKykarWindsFury,

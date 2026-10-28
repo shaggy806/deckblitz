@@ -10,7 +10,25 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import { A, B, activate, keywords, lands, named, nextTurn, ref, spawn, table, toStep, tokensNamed } from "./harness.js";
+import {
+  A,
+  B,
+  activate,
+  cast,
+  keywords,
+  lands,
+  life,
+  named,
+  nextTurn,
+  pickModes,
+  pt,
+  ref,
+  spawn,
+  table,
+  toHand,
+  toStep,
+  tokensNamed,
+} from "./harness.js";
 
 const toAttackers = (game: Game) => game.advanceUntil((s) => s.awaiting?.kind === "attackers");
 const asBand = (game: Game, ids: readonly ObjectId[]) =>
@@ -122,5 +140,85 @@ describe("creatures banded with it", () => {
     activate(game, engine, 1);
     expect(keywords(game, bears).has("trample")).toBe(true);
     expect(keywords(game, giant).has("trample")).toBe(false);
+  });
+});
+
+describe("the rest of the family", () => {
+  it("Camel, attacking, prevents a Desert's damage to itself and its band", () => {
+    const { game, a } = table();
+    const camel = spawn(game, "Camel");
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = spawn(game, "Hill Giant");
+    const desert = spawn(game, "Abraded Bluffs", B);
+    a.declareAttackersFn = () => [
+      { attacker: camel, defender: B, band: 1 },
+      { attacker: bears, defender: B, band: 1 },
+      { attacker: giant, defender: B },
+    ];
+    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    for (const id of [camel, bears, giant]) {
+      game.debugApplyEffect(B, { kind: "damage", amount: 1, target: 0 }, [ref(id)], { source: desert });
+    }
+    expect(game.state.objects[camel].damageMarked).toBe(0);
+    expect(game.state.objects[bears].damageMarked).toBe(0);
+    expect(game.state.objects[giant].damageMarked).toBe(1);
+  });
+
+  it("Dire Wolves have banding while you control a Plains", () => {
+    const { game } = table();
+    const wolves = spawn(game, "Dire Wolves");
+    expect(keywords(game, wolves).has("banding")).toBe(false);
+    spawn(game, "Plains");
+    expect(keywords(game, wolves).has("banding")).toBe(true);
+  });
+
+  it("Fortified Area gives your Walls +1/+0 and banding", () => {
+    const { game } = table();
+    const wall = spawn(game, "Wall of Junk");
+    const opposing = spawn(game, "Wall of Junk", B);
+    spawn(game, "Fortified Area");
+    expect(keywords(game, wall).has("banding")).toBe(true);
+    expect(pt(game, wall).power).toBe(1);
+    expect(keywords(game, opposing).has("banding")).toBe(false);
+  });
+
+  it("Errand of Duty makes a 1/1 Knight with banding", () => {
+    const { game } = table();
+    lands(game, "Plains", 2);
+    cast(game, toHand(game, "Errand of Duty"));
+    const [knight] = named(game, "Knight Token (banding)");
+    expect(keywords(game, knight).has("banding")).toBe(true);
+  });
+
+  it("Urza's Avenger gets -1/-1 and the keyword chosen", () => {
+    const { game, a } = table();
+    const avenger = spawn(game, "Urza's Avenger");
+    pickModes(a, 0);
+    activate(game, avenger, 0);
+    expect(pt(game, avenger)).toEqual({ power: 3, toughness: 3 });
+    expect(keywords(game, avenger).has("banding")).toBe(true);
+  });
+
+  it("Nature's Blessing's keyword lasts past the turn", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    spawn(game, "Nature's Blessing");
+    lands(game, "Savannah", 2);
+    toHand(game, "Wastes");
+    pickModes(a, 1);
+    activate(game, named(game, "Nature's Blessing")[0], 0, { targets: [ref(bears)] });
+    nextTurn(game);
+    expect(keywords(game, bears).has("banding")).toBe(true);
+  });
+
+  it("Mishra's War Machine deals 3 to you and taps when you don't discard", () => {
+    const { game } = table();
+    const machine = spawn(game, "Mishra's War Machine");
+    // Each upkeep alice has a card to discard; she declines.
+    nextTurn(game);
+    nextTurn(game, "upkeep");
+    game.advanceUntil((s) => s.turn.step === "draw");
+    expect(life(game, A)).toBe(17);
+    expect(game.state.objects[machine].tapped).toBe(true);
   });
 });

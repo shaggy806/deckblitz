@@ -231,6 +231,7 @@ import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEpiphanyStorm from "../pool/epiphany-storm.js";
+import _poolErrandOfDuty from "../pool/errand-of-duty.js";
 import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvilEyeOfOrmsByGore from "../pool/evil-eye-of-orms-by-gore.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
@@ -336,6 +337,7 @@ import _poolHuntedTroll from "../pool/hunted-troll.js";
 import _poolHuntersEdge from "../pool/hunters-edge.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
+import _poolIcatianPhalanx from "../pool/icatian-phalanx.js";
 import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
 import _poolIllusionaryInformant from "../pool/illusionary-informant.js";
@@ -1045,6 +1047,7 @@ const shard: CardShard = {
     _poolEnshroudingMist,
     _poolEphemeralShields,
     _poolEpiphanyStorm,
+    _poolErrandOfDuty,
     _poolEstridsInvocation,
     _poolEvilEyeOfOrmsByGore,
     _poolEvisceratorsInsight,
@@ -1150,6 +1153,7 @@ const shard: CardShard = {
     _poolHuntersEdge,
     _poolHurloonShaman,
     _poolHyraxTowerScout,
+    _poolIcatianPhalanx,
     _poolIceberg,
     _poolIlluminatorVirtuoso,
     _poolIllusionaryInformant,
