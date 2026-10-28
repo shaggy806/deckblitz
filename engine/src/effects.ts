@@ -11384,6 +11384,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // chosen mode's, in listed order — so a mode whose target has gone
         // illegal still does whatever else it says, as a modal spell's does.
         const counts = ctx.announcedModes.map((i) => spec.modes[i]?.targets?.length ?? 0);
+        // A mode's "any number of target …" group (Orcus, Prince of Undeath)
+        // holds as many targets as were chosen for it, not one: it's the
+        // last slot of the list, after the earlier modes' slots, and such an
+        // ability has none of its own (`any-number-targets.test.ts`), so it
+        // takes every target from its mode's start on.
+        const grouped = ctx.announcedModes.findIndex((i) =>
+          (spec.modes[i]?.targets ?? []).some((t) => typeof t === "object" && t.kind === "any-number"),
+        );
+        if (grouped >= 0) {
+          const before = counts.slice(0, grouped).reduce((a, b) => a + b, 0);
+          counts[grouped] = Math.max(0, ctx.targets.length - before - counts.slice(grouped + 1).reduce((a, b) => a + b, 0));
+        }
         let offset = ctx.targets.length - counts.reduce((a, b) => a + b, 0);
         ctx.announcedModes.forEach((i, k) => {
           const mode = spec.modes[i];

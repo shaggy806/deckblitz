@@ -425,6 +425,9 @@ describe("rule 603.3d: an optional slot with nothing to point at", () => {
   });
 });
 
+/** Could more than one mode be chosen? A number over 1, or any amount. */
+const amountMaxOver1 = (n: unknown): boolean => typeof n !== "number" || n > 1;
+
 describe("an any-number group", () => {
   it("is always the last slot of its list, and in a modal spell's mode only where no later mode targets", () => {
     const misplaced: string[] = [];
@@ -438,7 +441,21 @@ describe("an any-number group", () => {
       lists(def.name, def.targets);
       lists(`${def.name} (kicked)`, def.kicker?.targets);
       for (const ability of def.activated) lists(`${def.name} (activated)`, ability.targets);
-      for (const ability of def.triggered) lists(`${def.name} (triggered)`, ability.targets);
+      for (const ability of def.triggered) {
+        lists(`${def.name} (triggered)`, ability.targets);
+        // A group in an announced mode is last: the ability has no targets of
+        // its own, and no later mode chosen with it has any (effects.ts's
+        // announced modal reads the group's members from its mode's start).
+        const effect = ability.effect;
+        if (effect?.kind !== "modal") continue;
+        effect.modes.forEach((mode, i) => {
+          if (!(mode.targets ?? []).some((s) => typeof s === "object" && s.kind === "any-number")) return;
+          const later = effect.modes.slice(i + 1).some((m) => (m.targets ?? []).length > 0);
+          if (ability.targets.length > 0 || (later && amountMaxOver1(effect.maxModes))) {
+            misplaced.push(`${def.name} (triggered mode)`);
+          }
+        });
+      }
       // A modal spell's targets are its chosen modes', in order (rule 700.2),
       // so a mode's group is last unless a later mode chosen with it targets.
       const modes = def.castModal?.modes ?? [];
