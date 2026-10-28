@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3895 already implemented / 1105 missing (marks refreshed 2026-10-28)
+3902 already implemented / 1098 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2645,7 +2645,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2652  Thousand-Faced Shadow                    {U}              Creature — Human Ninja
 [x]  2653  Prologue to Phyresis                     {1}{U}           Instant
 [x]  2654  Crystal Grotto                           {0}              Land
-[ ]  2655  Chandra's Incinerator                    {5}{R}           Creature — Elemental
+[x]  2655  Chandra's Incinerator                    {5}{R}           Creature — Elemental
 [x]  2656  Pemmin's Aura                            {1}{U}{U}        Enchantment — Aura
 [ ]  2657  Questing Beast                           {2}{G}{G}        Legendary Creature — Beast
 [x]  2658  Baylen, the Haymaker                     {R}{G}{W}        Legendary Creature — Rabbit Warrior
@@ -2910,7 +2910,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2917  Otharri, Suns' Glory                     {3}{R}{W}        Legendary Creature — Phoenix
 [x]  2918  Geode Rager                              {4}{R}{R}        Creature — Elemental
 [x]  2919  Nirkana Revenant                         {4}{B}{B}        Creature — Vampire Shade
-[ ]  2920  Spikefield Hazard // Spikefield Cave     {1}              Instant // Land
+[x]  2920  Spikefield Hazard // Spikefield Cave     {1}              Instant // Land
 [x]  2921  Longshot, Rebel Bowman                   {3}{R}           Legendary Creature — Human Rebel Ally
 [x]  2922  Bitter Reunion                           {1}{R}           Enchantment
 [x]  2923  Glasswing Grace // Age-Graced Chapel     {5}              Enchantment — Aura // Land
@@ -3112,7 +3112,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3119  Burnt Offering                           {B}              Instant
 [x]  3120  Kenrith, the Returned King               {4}{W}           Legendary Creature — Human Noble
 [x]  3121  Otepec Huntmaster                        {1}{R}           Creature — Human Shaman
-[ ]  3122  Alpha Authority                          {1}{G}           Enchantment — Aura
+[x]  3122  Alpha Authority                          {1}{G}           Enchantment — Aura
 [x]  3123  Inferno Titan                            {4}{R}{R}        Creature — Giant
 [x]  3124  Hollowmurk Siege                         {B}{G}           Enchantment
 [ ]  3125  Toph, the Blind Bandit                   {2}{G}           Legendary Creature — Human Warrior Ally
@@ -3604,7 +3604,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3611  Rootcast Apprenticeship                  {3}{G}           Sorcery
 [x]  3612  Risky Shortcut                           {2}{B}           Sorcery
 [x]  3613  Mind's Desire                            {4}{U}{U}        Sorcery
-[ ]  3614  Hungering Hydra                          {X}{G}           Creature — Hydra
+[x]  3614  Hungering Hydra                          {X}{G}           Creature — Hydra
 [ ]  3615  Detection Tower                          {0}              Land
 [x]  3616  Hunter's Talent                          {1}{G}           Enchantment — Class
 [x]  3617  Yavimaya Elder                           {1}{G}{G}        Creature — Human Druid
@@ -4300,7 +4300,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4307  Lozhan, Dragons' Legacy                  {3}{U}{R}        Legendary Creature — Dragon Shaman
 [x]  4308  Squirrel Sovereign                       {1}{G}           Creature — Squirrel Noble
 [x]  4309  Chaos Wand                               {3}              Artifact
-[ ]  4310  Suplex                                   {1}{R}           Sorcery
+[x]  4310  Suplex                                   {1}{R}           Sorcery
 [ ]  4311  Master Chef                              {2}{G}           Legendary Enchantment — Background
 [x]  4312  Unburial Rites                           {4}{B}           Sorcery
 [x]  4313  Mirage Mesa                              {0}              Land — Desert
@@ -4516,7 +4516,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4523  Nyx-Fleece Ram                           {1}{W}           Enchantment Creature — Sheep
 [x]  4524  Dragonlord Atarka                        {5}{R}{G}        Legendary Creature — Elder Dragon
 [x]  4525  Shaman of the Pack                       {1}{B}{G}        Creature — Elf Shaman
-[ ]  4526  Kalain, Reclusive Painter                {B}{R}           Legendary Creature — Human Elf Bard
+[x]  4526  Kalain, Reclusive Painter                {B}{R}           Legendary Creature — Human Elf Bard
 [x]  4527  Overlord of the Boilerbilges             {4}{R}{R}        Enchantment Creature — Avatar Horror
 [x]  4528  Thornglint Bridge                        {0}              Artifact Land
 [x]  4529  Treno, Dark City                         {0}              Land — Town
@@ -4830,7 +4830,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4837  Sporocyst                                {X}{X}{G}        Creature — Tyranid
 [x]  4838  Braids, Cabal Minion                     {2}{B}{B}        Legendary Creature — Human Minion
 [x]  4839  On the Trail                             {1}{G}           Enchantment
-[ ]  4840  Coin of Mastery                          {4}              Artifact
+[x]  4840  Coin of Mastery                          {4}              Artifact
 [x]  4841  Barbarian Ring                           {0}              Land
 [x]  4842  Wandertale Mentor                        {R}{G}           Creature — Raccoon Bard
 [ ]  4843  Obelisk Spider                           {1}{B}{G}        Creature — Spider
