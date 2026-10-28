@@ -107,6 +107,7 @@ import {
   objHasKeyword,
   effectiveSubtypes,
   effectiveTypes,
+  entersWithoutAbilities,
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
@@ -9336,6 +9337,18 @@ export class Game {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
     const def = this.registry.get(printedCardName(object));
+    // Entering under a static loss of all abilities (rule 614.12 — Humility,
+    // Dress Down), it has none of its own "as this enters" abilities: only
+    // what the rules ask of it (an Aura's object, a battle's protector).
+    if (entersWithoutAbilities(this.state, this.registry, object)) {
+      if (def.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
+        return { kind: "enchant", as: def };
+      }
+      if (answered?.protector === undefined && def.types.includes("battle")) {
+        return { kind: "protector", siege: def.subtypes.includes("Siege") };
+      }
+      return null;
+    }
     if (def.copyOnEnter !== null && answered?.copyOf === undefined) return { kind: "copy" };
     const becoming =
       answered?.copyOf !== undefined && answered.copyOf !== null ? this.registry.get(answered.copyOf) : def;
@@ -37020,7 +37033,11 @@ export class Game {
       if (c.ifType !== undefined && !effectiveTypes(this.state, this.registry, object).includes(c.ifType)) continue;
       addCounters(c.kind, c.amount);
     }
-    for (const ability of def.static) {
+    // Under a static loss of all abilities that would reach it there (rule
+    // 614.12 — Humility, Toxicrene), none of its own entering abilities
+    // apply: no "enters tapped", no counters of its own, no riot.
+    const ownLost = entersWithoutAbilities(this.state, this.registry, object);
+    for (const ability of ownLost ? [] : def.static) {
       const r = ability.replacement;
       if (r === undefined || r.event !== "enters-battlefield") continue;
       if (!this.staticActive(object, ability)) continue;
@@ -37095,19 +37112,19 @@ export class Game {
     // that never asked (a token copy), nobody had it enter with the counter,
     // so it gains haste.
     let riotHaste = false;
-    if (def.keywords.includes("riot")) {
+    if (!ownLost && def.keywords.includes("riot")) {
       if (riot === "counter") addCounters("+1/+1", 1);
       else riotHaste = true;
     }
     // Unleash (rule 702.98a): the +1/+1 counter its controller chose as it
     // was about to enter. Entering some way that never asked (a token copy),
     // nobody had it enter with the counter.
-    if (def.keywords.includes("unleash") && unleash === true) addCounters("+1/+1", 1);
+    if (!ownLost && def.keywords.includes("unleash") && unleash === true) addCounters("+1/+1", 1);
     // Tribute (rule 702.104a): the counters the chosen opponent put on it as
     // it was about to enter (`askEnterChoice`). Entering some way that never
     // asked (a token copy), nobody paid it.
     let tributeUnpaid = false;
-    if (def.tribute !== null) {
+    if (!ownLost && def.tribute !== null) {
       if (tributePaid === true) addCounters("+1/+1", def.tribute);
       else tributeUnpaid = true;
     }
@@ -37117,10 +37134,10 @@ export class Game {
     }
     // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
     // as it was about to enter (`askEnterChoice`).
-    if (def.devour !== null && devoured !== undefined) addCounters("+1/+1", devoured * def.devour.multiplier);
+    if (!ownLost && def.devour !== null && devoured !== undefined) addCounters("+1/+1", devoured * def.devour.multiplier);
     // Amplify (rule 702.38a): N for each card revealed as it was about to
     // enter (`askEnterChoice`).
-    if (def.amplify !== null && amplified !== undefined) addCounters("+1/+1", amplified * def.amplify);
+    if (!ownLost && def.amplify !== null && amplified !== undefined) addCounters("+1/+1", amplified * def.amplify);
     // Other permanents' replacements (rule 614.12). Never its own — a
     // permanent's ability over a general set of permanents doesn't modify how
     // that permanent itself enters — and never one entering alongside it,

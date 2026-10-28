@@ -11,7 +11,7 @@
 import { describe, expect, it } from "vitest";
 
 import { effectiveColors } from "../characteristics.js";
-import { A, B, cast, destroy, enter, hand, keywords, lands, life, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, types } from "./harness.js";
+import { A, B, cast, destroy, enter, hand, keywords, lands, life, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, types, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -176,6 +176,37 @@ describe("a static over many permanents", () => {
     const angel = spawn(game, "Serra Angel", B);
     expect(pt(game, angel)).toEqual({ power: 1, toughness: 1 });
     expect([...keywords(game, angel)]).toEqual([]);
+  });
+});
+
+describe("entering under it (rule 614.12)", () => {
+  it("a tapland played under Toxicrene enters untapped", () => {
+    const { game } = table();
+    spawn(game, "Toxicrene", A);
+    const gate = toHand(game, "Azorius Guildgate");
+    game.dispatch({ type: "play-land", player: A, card: gate });
+    settle(game);
+    expect(game.state.objects[gate].tapped).toBe(false);
+  });
+
+  it("a creature cast under Humility enters without its own counters", () => {
+    const { game } = table();
+    spawn(game, "Humility", B);
+    lands(game, "Forest", 3);
+    const spike = toHand(game, "Spike Feeder");
+    cast(game, spike);
+    expect(zone(game, spike)).toBe("battlefield");
+    expect(game.state.objects[spike].counters["+1/+1"] ?? 0).toBe(0);
+  });
+
+  it("Alloy Golem cast under Humility is asked no colour", () => {
+    const { game } = table();
+    spawn(game, "Humility", B);
+    lands(game, "Wastes", 6);
+    const golem = toHand(game, "Alloy Golem");
+    cast(game, golem);
+    expect(zone(game, golem)).toBe("battlefield");
+    expect(game.state.objects[golem].chosenOnEnter ?? null).toBeNull();
   });
 });
 

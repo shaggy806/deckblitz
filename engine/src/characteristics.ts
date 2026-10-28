@@ -1759,6 +1759,29 @@ function scanForLoseAllSource(state: GameState, registry: CardRegistry): boolean
   return false;
 }
 
+/**
+ * Whether `object`, about to enter the battlefield, would have lost all its
+ * abilities there to a `loseAllAbilities` static that already applies (rule
+ * 614.12: a permanent's own "enters tapped", "enters with counters" and "as
+ * this enters" abilities are judged as it would exist on the battlefield,
+ * with the continuous effects that would apply to it — a creature entering
+ * under Humility makes no choice and gets no counters of its own, a land
+ * under Toxicrene doesn't enter tapped). Matched as it is now, where it is:
+ * its printed types (an Aura's or a pairing's scope can't reach it yet).
+ */
+export function entersWithoutAbilities(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  const applied = staticAbilityLosses(state, registry).applied;
+  for (const [sourceId, abilities] of applied) {
+    const source = state.objects[sourceId];
+    if (source === undefined || source.id === object.id) continue;
+    for (const ability of abilities) {
+      if (ability.affects.scope === "attached" || ability.affects.scope === "paired") continue;
+      if (staticAffects(state, registry, ability.affects, source, object, { entering: true })) return true;
+    }
+  }
+  return false;
+}
+
 /** The board scan behind {@link staticAbilityLosses}. */
 function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
   interface Pending {
@@ -2614,6 +2637,10 @@ export interface TargetView {
    * a `filter` scope's clauses must not ask for them again (see
    * `FilterContext.layered`). */
   readonly inFold?: boolean;
+  /** The target is about to enter the battlefield (rule 614.12 — see
+   * `entersWithoutAbilities`): a `filter` scope is matched against it where
+   * it is, as it would exist there. */
+  readonly entering?: boolean;
   /** Answers a `filter` scope's `{ amount }` operand (`FilterContext.amount`)
    * — only a caller outside the fold has anything to answer it with (a
    * static goad: "power less than Baeloth Barrityl's power"). Without one,
@@ -2654,7 +2681,7 @@ export function staticAffects(
     return partner !== undefined && (target.id === source.id || target.id === partner.id);
   }
   if (affects.scope === "filter") {
-    if (target.zone !== "battlefield") return false;
+    if (target.zone !== "battlefield" && view.entering !== true) return false;
     if (affects.excludeSelf === true && source.id === target.id) return false;
     return matchesFilter(state, registry, target.id, affects.filter, {
       you: source.controller,
