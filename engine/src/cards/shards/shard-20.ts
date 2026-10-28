@@ -419,6 +419,7 @@ import _poolLeoninAbunas from "../pool/leonin-abunas.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
 import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
+import _poolLifesFinale from "../pool/lifes-finale.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningBerserker from "../pool/lightning-berserker.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
@@ -478,10 +479,12 @@ import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
 import _poolNaturesCloak from "../pool/natures-cloak.js";
 import _poolNaturesRhythm from "../pool/natures-rhythm.js";
+import _poolNecromentia from "../pool/necromentia.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNightfireGiant from "../pool/nightfire-giant.js";
+import _poolNightmareIncursion from "../pool/nightmare-incursion.js";
 import _poolNimShrieker from "../pool/nim-shrieker.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNissasTriumph from "../pool/nissas-triumph.js";
@@ -685,6 +688,7 @@ import _poolSpireBarrage from "../pool/spire-barrage.js";
 import _poolSpireGolem from "../pool/spire-golem.js";
 import _poolSpirePhantasm from "../pool/spire-phantasm.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
+import _poolSplinter from "../pool/splinter.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSpontaneousGeneration from "../pool/spontaneous-generation.js";
 import _poolSpringjackKnight from "../pool/springjack-knight.js";
@@ -1304,6 +1308,7 @@ const shard: CardShard = {
     _poolLeoninArmorguard,
     _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
+    _poolLifesFinale,
     _poolLifesLegacy,
     _poolLightningBerserker,
     _poolLightningSpear,
@@ -1363,10 +1368,12 @@ const shard: CardShard = {
     _poolNarwhal,
     _poolNaturesCloak,
     _poolNaturesRhythm,
+    _poolNecromentia,
     _poolNecroskitter,
     _poolNehebDreadhordeChampion,
     _poolNemesisOfReason,
     _poolNightfireGiant,
+    _poolNightmareIncursion,
     _poolNimShrieker,
     _poolNinjaOfTheDeepHours,
     _poolNissasTriumph,
@@ -1570,6 +1577,7 @@ const shard: CardShard = {
     _poolSpireGolem,
     _poolSpirePhantasm,
     _poolSpitefulBanditry,
+    _poolSplinter,
     _poolSplintersTechnique,
     _poolSpontaneousGeneration,
     _poolSpringjackKnight,

@@ -182,6 +182,7 @@ import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
+import _poolDeicide from "../pool/deicide.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
@@ -213,6 +214,7 @@ import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolDwindle from "../pool/dwindle.js";
+import _poolEarwigSquad from "../pool/earwig-squad.js";
 import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
@@ -1023,6 +1025,7 @@ const shard: CardShard = {
     _poolDecodeTransmissions,
     _poolDefendTheCelestus,
     _poolDefensiveStance,
+    _poolDeicide,
     _poolDelete,
     _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
@@ -1054,6 +1057,7 @@ const shard: CardShard = {
     _poolDuelcraftTrainer,
     _poolDutyBeyondDeath,
     _poolDwindle,
+    _poolEarwigSquad,
     _poolEccentricFarmer,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,

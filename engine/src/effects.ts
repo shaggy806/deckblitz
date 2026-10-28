@@ -49,7 +49,16 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * was attached to nothing. Not a target. */
 export type EffectTargetRef = number | "source" | "trigger-object" | "attached";
 /** What a `search-library` searches — see its `zones`. */
-export type SearchZones = "library" | "graveyard" | "library-and-graveyard";
+export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
+/** A `search-library`'s other player's zones and what follows the finds, as
+ * `ResolutionContext.searchLibrary` takes them — see the effect's `whose`,
+ * `all`, `playable` and `then`. */
+export interface SearchMore {
+  readonly owner?: PlayerId;
+  readonly all?: boolean;
+  readonly playable?: "while-exiled";
+  readonly then?: EffectSpec;
+}
 /**
  * What a `search-library`'s finds must be *together* — see its `together`.
  *
@@ -1010,6 +1019,11 @@ export type ThisWayKind =
   /** Destroyed and put into a graveyard: "if that creature dies this way". */
   | "died"
   | "exiled"
+  /** Cards it exiled from a hand — Lost Legacy's "that player shuffles, then
+   * draws a card **for each card exiled from their hand this way**" after a
+   * search of their graveyard, hand and library. Counted by the card's
+   * owner. */
+  | "exiled-from-hand"
   | "returned-to-hand"
   | "put-into-graveyard"
   | "put-onto-battlefield"
@@ -1100,8 +1114,15 @@ export type EffectPlayerRef =
   /** The controller of the permanent in this target slot, as it last existed
    * on the battlefield if it has left — "**its controller** exiles cards …,
    * then **they** may cast that card" (Transforming Flourish, after
-   * destroying it). Not a target. */
-  | { readonly controllerOfTarget: number };
+   * destroying it). Not a target. A spell that has left the stack (countered)
+   * is read as it last was there: its controller then, not its owner
+   * (Counterbore's ruling). */
+  | { readonly controllerOfTarget: number }
+  /** The owner of the object in this target slot — never changes (rules
+   * 108.3, 111.2), so it's known once the object has moved: "choose target
+   * card in a graveyard … search **its owner's** graveyard, hand, and
+   * library" (Surgical Extraction). Not a target. */
+  | { readonly ownerOfTarget: number };
 
 /**
  * What a creature put onto the battlefield attacking attacks (rule 508.4).
@@ -5741,8 +5762,15 @@ export type EffectSpec =
       /** `"library-top"` is the tutor-to-top family (Vampiric Tutor, Mystical
        * Tutor): the find never leaves the library, it is just moved to the top
        * *after* the shuffle the search itself causes (rule 701.24b — the
-       * shuffle comes first, or the card wouldn't stay on top). */
-      readonly destination: "hand" | "battlefield" | "library-top" | "graveyard";
+       * shuffle comes first, or the card wouldn't stay on top).
+       *
+       * `"exile"` / `"exile-face-down"`: "search target opponent's library for
+       * a card and exile it [face down]" (Extract, Praetor's Grasp) — face
+       * down (rule 406.3), only the searcher may look at it. `"stay"`: the
+       * find doesn't move; `then` does something with it where it is —
+       * Knowledge Exploitation's "you may cast that card without paying its
+       * mana cost", cast from the library (its ruling). */
+      readonly destination: "hand" | "battlefield" | "library-top" | "graveyard" | "exile" | "exile-face-down" | "stay";
       /** An amount: "search your library for **X** cards" (Insidious Dreams)
        * must find X while there are X (rule 701.23d — no quality named). */
       readonly min: EffectAmount;
@@ -5779,6 +5807,47 @@ export type EffectSpec =
        * allowed only in a hidden zone (rule 701.23b).
        */
       readonly zones?: SearchZones;
+      /**
+       * Whose zones are searched, when they aren't the searcher's own —
+       * "search **target opponent's** library" (`{ target: 0 }`), "**its
+       * controller's** graveyard, hand, and library" (`{ controllerOfTarget }`
+       * — the extract family: Splinter, Counterbore), "**its owner's**"
+       * (`{ ownerOfTarget }` — Surgical Extraction), "**that player's**"
+       * (`"trigger-player"` — Rootwater Thief). The searcher is still `who`'s
+       * (the controller by default); the cards stay theirs, so a find put
+       * into a graveyard or a hand goes to its owner's, and one put onto the
+       * battlefield enters under the **searcher's** control ("put that card
+       * onto the battlefield under your control" — Bribery). That player
+       * shuffles their library (rule 701.24a — "then that player shuffles").
+       * Naming nobody (an illegal slot, a player who has left), nothing is
+       * searched. With `zones: "graveyard-hand-library"` their hand is
+       * searched too: a hidden zone, so the searcher sees it while searching.
+       */
+      readonly whose?: EffectPlayerRef;
+      /**
+       * "Search … for **all** cards with that name" (Cranial Extraction,
+       * Extirpate): every match in a graveyard is found — a public zone, where
+       * a card with a stated quality can't be missed — and goes with whatever
+       * the searcher picks among the matches in the hidden zones (hand,
+       * library), which they may leave (rule 701.23b; Counterbore's ruling).
+       * `max` is ignored. "**Any number of** cards with that name" (Memoricide)
+       * is no `all`, with `min: 0` and a large `max`: the graveyard's may be
+       * left too (Surgical Extraction's ruling).
+       */
+      readonly all?: true;
+      /** "You may play that card for as long as it remains exiled" (Praetor's
+       * Grasp): with an exile destination, the searcher may play the finds
+       * (rule 305.1 for a land) while they stay in exile. */
+      readonly playable?: "while-exiled";
+      /** Applied once the finds have moved and the library is shuffled, with
+       * **the finds as its targets** — `target: 0` is the first, as
+       * `look-and-choose`'s `then` sees its chosen cards; `"that-player"` is
+       * the player whose zones were searched (`whose`). Seek's "you gain life
+       * equal to its mana value"; the extract family's "that player shuffles,
+       * then draws a card for each card exiled from their hand this way"
+       * (the `"exiled-from-hand"` this-way kind). Not applied when nothing
+       * was found. */
+      readonly then?: EffectSpec;
       /** A rule over the finds as a set, which `filter` (one card at a
        * time) can't express — Myriad Landscape's "that share a land type",
        * Krosan Verge's "a Forest card and a Plains card". The search offers
@@ -7441,7 +7510,7 @@ export interface EffectApi {
   searchLibrary(
     player: PlayerId | null,
     filter: CardFilter,
-    destination: "hand" | "battlefield" | "library-top" | "graveyard",
+    destination: Extract<EffectSpec, { kind: "search-library" }>["destination"],
     min: number,
     max: number,
     enterTapped: boolean,
@@ -7452,6 +7521,8 @@ export interface EffectApi {
     /** A `search-library`'s `attachedToSource`: the source, or `null` once
      * it has left (nothing can be attached to it). */
     attachTo?: ObjectId | null,
+    /** Its `whose` resolved (`owner`), `all`, `playable` and `then`. */
+    more?: SearchMore,
   ): void;
   /** See the `"reveal-top"` {@link EffectSpec}. `player` is whose library
    * (the effect's controller's when omitted). */
@@ -8777,6 +8848,11 @@ function resolveEnterAttacking(
 
 function effectPlayer(ref: EffectPlayerRef, ctx: ResolutionContext): PlayerId | undefined {
   if (ref === "you") return ctx.controller;
+  if (typeof ref === "object" && "ownerOfTarget" in ref) {
+    const target = ctx.targets[ref.ownerOfTarget];
+    const player = target === undefined ? undefined : ctx.ownerOf(target);
+    return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
+  }
   if (typeof ref === "object" && "controllerOfTarget" in ref) {
     const target = ctx.targets[ref.controllerOfTarget];
     const player = target === undefined ? undefined : ctx.controllerOf(target);
@@ -8841,6 +8917,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "bandedWithSource" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
+      "sameNameAsThisWay" in value ||
       "sharesColorWithTarget" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
@@ -8955,6 +9032,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const object = ctx.triggerObject;
       walked =
         object !== undefined ? { ...rest, sameNameAs: { object, name: ctx.nameForMatching(object) } } : walked;
+    }
+    // "For each card exiled this way, … with the same name as that card"
+    // (Haunting Echoes): the names of what this resolution has done that to.
+    if (typeof walked["sameNameAsThisWay"] === "string") {
+      const { sameNameAsThisWay: what, ...rest } = walked;
+      const names = ctx
+        .thisWay(what as ThisWayKind)
+        .map((entry) => ctx.nameForMatching(entry.object))
+        .filter((name): name is string => name !== null);
+      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
     }
     // Radiance's "and each other … that shares a color with it": the target
     // and its colors now (rule 105.2), as for the name above.
@@ -11718,6 +11805,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who === undefined) return;
         searcher = who;
       }
+      // "Search target opponent's library": nobody there, nothing searched.
+      const owner = spec.whose === undefined ? undefined : effectPlayer(spec.whose, ctx);
+      if (spec.whose !== undefined && owner === undefined) return;
       ctx.searchLibrary(
         searcher,
         spec.filter,
@@ -11730,6 +11820,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.zones,
         spec.together,
         spec.attachedToSource === true ? attachHost("source", ctx) : undefined,
+        {
+          ...(owner !== undefined ? { owner } : {}),
+          ...(spec.all === true ? { all: true } : {}),
+          ...(spec.playable !== undefined ? { playable: spec.playable } : {}),
+          ...(spec.then !== undefined ? { then: spec.then } : {}),
+        },
       );
       return;
     }

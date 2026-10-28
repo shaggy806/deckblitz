@@ -72,6 +72,8 @@ import {
 const NUMBERS = {
   a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
 };
+/** `effects.ts`'s `CHOSEN_CARD_NAME`: "a card with the chosen name". */
+export const CHOSEN_CARD_NAME = "$chosenName";
 const N = "(a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\\d+)";
 const numberOf = (word) => {
   const w = word.toLowerCase();
@@ -2048,6 +2050,17 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // A search of another player's zones (`search-library`'s `whose`):
+    // "[Choose a nonland card name.] Search target player's graveyard, hand,
+    // and library for all cards with that name and exile them. Then that
+    // player shuffles." — two or three sentences, one effect.
+    const searched = searchOthersAt(sentences, i, ctx);
+    if (searched !== null) {
+      parsed.push(searched.effect);
+      hints.push({ sentence, effect: searched.effect });
+      skip = searched.used - 1;
+      continue;
+    }
     // The Urza's Destiny Scents: "Reveal any number of green cards in your
     // hand." — a `look-and-choose` over the hand that moves nothing — and
     // the next sentence's "… for each card revealed this way" scaled by
@@ -2215,6 +2228,96 @@ export function parseEffect(text, outer) {
   }
   if (todo.length > 0) return { effect: null, todo, hints };
   return { effect: parsed.length === 1 ? parsed[0] : { kind: "sequence", effects: parsed }, todo: [], hints: [] };
+}
+
+/**
+ * A search of another player's zones at `sentences[i]` (`search-library`'s
+ * `whose` — rule 701.23): optionally after "Choose a [nonland] card name."
+ * (then a `choose-card-name` around it), and always followed by "Then that
+ * player shuffles." or "That player shuffles, then draws a card for each card
+ * exiled from their hand this way." — `{ effect, used }` (the sentences it
+ * took), or null.
+ */
+function searchOthersAt(sentences, i, ctx) {
+  let at = i;
+  let named = null;
+  const nameM = /^choose (?:a|an) ((?:[\w-]+, )*[\w-]+ )?card name\.$/i.exec(sentences[at] ?? "");
+  if (nameM !== null) {
+    named = cardNameFilterOf(nameM[1] ?? "");
+    if (named === null) return null;
+    at += 1;
+  }
+  const m = /^search (target player's|target opponent's|its controller's|its owner's|that player's) (graveyard, hand, and library|library) for (.+?) and (exile (?:it|them)(?: face down)?|put (?:it|that card) onto the battlefield under your control|put them into (?:their|that player's) graveyard)\.$/i.exec(sentences[at] ?? "");
+  if (m === null) return null;
+  const shuffleM = /^(?:then (?:that|the) player shuffles|that player shuffles, then draws a card for each card exiled from their hand this way)\.$/i.exec(sentences[at + 1] ?? "");
+  if (shuffleM === null) return null;
+  const zones = m[2].toLowerCase() === "library" ? undefined : "graveyard-hand-library";
+
+  // How many, of what: "a card" (a quantity, rule 701.23d), "an artifact
+  // card", "three cards", "up to seven cards", "all cards with that name",
+  // "any number of cards with the same name as that spell".
+  const what = m[3].toLowerCase();
+  let count;
+  let rest;
+  let cm;
+  if ((cm = /^all cards (.+)$/.exec(what))) [count, rest] = [{ all: true, min: 0, max: 99 }, cm[1]];
+  else if ((cm = /^any number of cards (.+)$/.exec(what))) [count, rest] = [{ min: 0, max: 99 }, cm[1]];
+  else if ((cm = /^up to (\w+) (.*?)cards?(?: (.+))?$/.exec(what))) {
+    const n = numberOf(cm[1]);
+    if (typeof n !== "number") return null;
+    count = { min: 0, max: n, quality: cm[2].trim() };
+    rest = cm[3] ?? "";
+  } else if ((cm = /^a card(?: (.+))?$/.exec(what))) [count, rest] = [{ min: cm[1] ? 0 : 1, max: 1 }, cm[1] ?? ""];
+  else if ((cm = /^an? (.+?) card$/.exec(what))) [count, rest] = [{ min: 0, max: 1, quality: cm[1] }, ""];
+  else if ((cm = /^(\w+) cards$/.exec(what))) {
+    const n = numberOf(cm[1]);
+    if (typeof n !== "number") return null;
+    [count, rest] = [{ min: n, max: n }, ""];
+  } else return null;
+  let filter = {};
+  if (count.quality) {
+    filter = parseTypePhrase(count.quality, { cards: true });
+    if (filter === null) return null;
+  }
+  // "With that name" needs the name chosen; "with the same name as that
+  // spell" the one target before.
+  if (rest === "with that name" || rest === "with the chosen name") {
+    if (named === null) return null;
+    filter = { ...filter, hasName: CHOSEN_CARD_NAME };
+  } else if (/^with the same name as that (spell|card|creature|artifact|enchantment|land|permanent)$/.test(rest)) {
+    if (named !== null || ctx.targets.length !== 1) return null;
+    filter = { ...filter, sameNameAsTarget: 0 };
+  } else if (rest !== "" || named !== null) return null;
+
+  // Whose: a new player target, or the one target before's controller,
+  // owner or player.
+  const owner = m[1].toLowerCase();
+  let whose;
+  if (owner === "target player's") whose = { target: ctx.target("player") };
+  else if (owner === "target opponent's") whose = { target: ctx.target("opponent") };
+  else if (ctx.targets.length !== 1) return null;
+  else if (owner === "its controller's") whose = { controllerOfTarget: 0 };
+  else if (owner === "its owner's") whose = { ownerOfTarget: 0 };
+  else if (ctx.targets[0] === "player" || ctx.targets[0] === "opponent") whose = { target: 0 };
+  else return null;
+
+  const how = m[4].toLowerCase();
+  const destination = how.startsWith("exile") ? (how.endsWith("face down") ? "exile-face-down" : "exile") : how.includes("battlefield") ? "battlefield" : "graveyard";
+  const search = {
+    kind: "search-library",
+    whose,
+    ...(zones !== undefined ? { zones } : {}),
+    filter,
+    destination,
+    ...(count.all ? { all: true } : {}),
+    min: count.min,
+    max: count.max,
+    ...(/draws a card/i.test(shuffleM[0])
+      ? { then: { kind: "draw", who: "that-player", amount: { thisWay: "exiled-from-hand" } } }
+      : {}),
+  };
+  const effect = named === null ? search : { kind: "choose-card-name", ...(Object.keys(named).length > 0 ? { filter: named } : {}), then: search };
+  return { effect, used: at - i + 2 };
 }
 
 /** A one-unit effect done "for each" of `amount` instead — parley's create a
@@ -3681,6 +3784,9 @@ const IDENT = /^[A-Za-z_$][\w$]*$/;
 export function toSource(value, indent = "") {
   const inner = `${indent}  `;
   if (value === null) return "null";
+  // The chosen name's placeholder, as a hand-authored card writes it (the
+  // scaffold imports it).
+  if (value === CHOSEN_CARD_NAME) return "CHOSEN_CARD_NAME";
   if (typeof value === "string") return JSON.stringify(value);
   if (typeof value !== "object") return String(value);
   if (Array.isArray(value)) {

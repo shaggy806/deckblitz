@@ -298,6 +298,7 @@ import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHeraldOfHoofbeats from "../pool/herald-of-hoofbeats.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
+import _poolHide from "../pool/hide.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
 import _poolHoodedBrawler from "../pool/hooded-brawler.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolHeraldOfEternalDawn,
     _poolHeraldOfHoofbeats,
     _poolHerosBlade,
+    _poolHide,
     _poolHinataDawnCrowned,
     _poolHivespineWolverine,
     _poolHoodedBrawler,

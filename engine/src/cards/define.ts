@@ -1031,8 +1031,13 @@ export type StaticCondition =
    * static ability. A target that was a permanent and has left the
    * battlefield since is matched as it last existed there (rule 608.2h); any
    * other target — a card targeted in a graveyard — as it is now.
+   *
+   * `now`: the target as it is now wherever it went, a permanent included —
+   * Deicide's "exile target enchantment. If **the exiled card** is a God
+   * card": a Theros God that wasn't a creature on the battlefield had no
+   * creature type there (rule 205.1b), but is a God card in exile.
    */
-  | { readonly kind: "target"; readonly index: number; readonly filter: CardFilter }
+  | { readonly kind: "target"; readonly index: number; readonly filter: CardFilter; readonly now?: true }
   /**
    * A target was chosen for slot `index` of the resolving spell or ability —
    * still true once that target has become illegal (rule 608.2b), false only

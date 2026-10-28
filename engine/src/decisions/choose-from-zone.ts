@@ -53,6 +53,7 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
       ...(awaiting.order === true ? { order: true } : {}),
       ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
+      ...(awaiting.alsoTaken !== undefined ? { alsoTaken: [...awaiting.alsoTaken] } : {}),
       // A behold (rule 701.4a): hand cards and permanents at once. A pitch
       // cost's exile from the hand is asked as a plain exile.
       ...(awaiting.behold !== undefined && awaiting.behold.fromHand !== true ? { behold: true as const } : {}),
@@ -127,10 +128,22 @@ export const chooseFromZone = defineDecision({
     // What a cost exiles is given up, so the least valuable go first, as a
     // sacrifice's and a discard's do — a Champion's beheld card or
     // permanent too. A plain behold gives nothing up: any order serves.
+    // Exiling our own cards gives up the least; another player's (a search
+    // of their library — Extract) takes the best.
+    const own = legal.forPlayer === undefined || legal.forPlayer === player;
     const ranked =
-      legal.destination === "exile" ? [...helpers.order(legal.eligible)].reverse() : helpers.order(legal.eligible);
+      legal.destination === "exile" && own ? [...helpers.order(legal.eligible)].reverse() : helpers.order(legal.eligible);
     // A set rule drops the subsets that break it before the cap, so all the
     // cap keeps are legal.
+    // Taking from another player's zones, as much as allowed comes first:
+    // what's left there a rollout can't tell apart from what was taken.
+    if (!own && together === undefined && legal.destination !== "hand" && legal.destination !== "discard") {
+      const most = ranked.slice(0, legal.max);
+      const rest = subsetsBetween(ranked, legal.min, legal.max, limit).filter(
+        (chosen) => chosen.length !== most.length || chosen.some((id, i) => id !== most[i]),
+      );
+      return [most, ...rest].slice(0, limit).map((chosen) => ({ type: "choose-from-zone", player, chosen }));
+    }
     const subsets =
       together === undefined
         ? subsetsBetween(ranked, legal.min, legal.max, limit)

@@ -370,6 +370,7 @@ import _poolJacesPhantasm from "../pool/jaces-phantasm.js";
 import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
+import _poolJestersCap from "../pool/jesters-cap.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
@@ -445,6 +446,7 @@ import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMilitiasPride from "../pool/militias-pride.js";
+import _poolMimeofacture from "../pool/mimeofacture.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMirrorMockery from "../pool/mirror-mockery.js";
@@ -1205,6 +1207,7 @@ const shard: CardShard = {
     _poolJaredCarthalion,
     _poolJeditOjanen,
     _poolJeeringHomunculus,
+    _poolJestersCap,
     _poolJosuVessLichKnight,
     _poolJunglePatrol,
     _poolKangeeSkyWarden,
@@ -1280,6 +1283,7 @@ const shard: CardShard = {
     _poolMightOfTheMasses,
     _poolMilitantInquisitor,
     _poolMilitiasPride,
+    _poolMimeofacture,
     _poolMindMeanderer,
     _poolMirageMockery,
     _poolMirrorMockery,

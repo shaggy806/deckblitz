@@ -3826,6 +3826,12 @@ export class HeuristicBotController extends AutomaticController {
     if (forPlayer !== undefined && forPlayer !== this.playerId && awaiting?.kind === "choose-from-zone" && awaiting.destination === "discard") {
       return this.mostUsefulTo(view.state, forPlayer, eligible, Math.max(min, Math.min(max, 1)));
     }
+    // Searching an opponent's zones (Extract, Memoricide, Bribery): what we
+    // take from them, exiled, milled or ours, is the most they'd miss, and as
+    // much of it as allowed.
+    if (forPlayer !== undefined && forPlayer !== this.playerId && awaiting?.kind === "choose-from-zone" && awaiting.destination !== "hand") {
+      return this.mostUsefulTo(view.state, forPlayer, eligible, max);
+    }
     if (forPlayer !== undefined && forPlayer !== this.playerId) {
       return this.leastUsefulTo(view.state, forPlayer, eligible, min);
     }

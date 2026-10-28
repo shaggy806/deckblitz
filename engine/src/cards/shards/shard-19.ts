@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
+import _poolAcquire from "../pool/acquire.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAetherMutation from "../pool/aether-mutation.js";
@@ -579,6 +580,7 @@ import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolarKraken from "../pool/polar-kraken.js";
 import _poolPolymorph from "../pool/polymorph.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
+import _poolPraetorsGrasp from "../pool/praetors-grasp.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrinceOfThralls from "../pool/prince-of-thralls.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
@@ -876,6 +878,7 @@ const shard: CardShard = {
     _poolAbyssalGorestalker,
     _poolAcademyWall,
     _poolAccessTunnel,
+    _poolAcquire,
     _poolAerialPredation,
     _poolAetherGale,
     _poolAetherMutation,
@@ -1449,6 +1452,7 @@ const shard: CardShard = {
     _poolPolarKraken,
     _poolPolymorph,
     _poolPolyraptor,
+    _poolPraetorsGrasp,
     _poolPrideOfConquerors,
     _poolPrinceOfThralls,
     _poolPrizedStatue,

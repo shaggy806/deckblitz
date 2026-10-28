@@ -72,6 +72,7 @@ import _poolBonebreakerGiant from "../pool/bonebreaker-giant.js";
 import _poolBoulderbornDragon from "../pool/boulderborn-dragon.js";
 import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
+import _poolBribery from "../pool/bribery.js";
 import _poolBrineSeer from "../pool/brine-seer.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
@@ -332,6 +333,7 @@ import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImpromptuRaid from "../pool/impromptu-raid.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
+import _poolInevitableBetrayal from "../pool/inevitable-betrayal.js";
 import _poolInfectiousHorror from "../pool/infectious-horror.js";
 import _poolInferno from "../pool/inferno.js";
 import _poolInfiltratorsMagemark from "../pool/infiltrators-magemark.js";
@@ -891,6 +893,7 @@ const shard: CardShard = {
     _poolBoulderbornDragon,
     _poolBraingeyser,
     _poolBrainstorm,
+    _poolBribery,
     _poolBrineSeer,
     _poolBristlingBackwoods,
     _poolBruteStrength,
@@ -1151,6 +1154,7 @@ const shard: CardShard = {
     _poolImpromptuRaid,
     _poolImskirIronEater,
     _poolIndrikStomphowler,
+    _poolInevitableBetrayal,
     _poolInfectiousHorror,
     _poolInferno,
     _poolInfiltratorsMagemark,

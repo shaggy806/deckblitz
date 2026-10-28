@@ -283,6 +283,7 @@ function faceSource(face, ctx) {
         : []),
     ];
     return (
+      (body.includes("CHOSEN_CARD_NAME") ? `import { CHOSEN_CARD_NAME } from "../../effects.js";\n` : "") +
       `import { defineCard } from "../define.js";\n\n${header.join("\n")}\n\n` +
       `export default defineCard(${body}${todos.length ? `\n${todos.join("\n")}` : ""}\n});\n`
     );

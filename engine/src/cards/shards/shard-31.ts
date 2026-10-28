@@ -796,6 +796,7 @@ import _poolUmbralJuke from "../pool/umbral-juke.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
 import _poolUnfathomableTruths from "../pool/unfathomable-truths.js";
+import _poolUnmooredEgo from "../pool/unmoored-ego.js";
 import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolUrborgMindsucker from "../pool/urborg-mindsucker.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
@@ -1678,6 +1679,7 @@ const shard: CardShard = {
     _poolUndercityShade,
     _poolUnexplainedAbsence,
     _poolUnfathomableTruths,
+    _poolUnmooredEgo,
     _poolUnnaturalPredation,
     _poolUrborgMindsucker,
     _poolValeriaRichardsPrecocious,

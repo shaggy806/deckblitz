@@ -8444,4 +8444,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Benalish Hero: the defender divides a trampler's damage",
     board({ you: { bf: ['Colossal Dreadmaw'] }, opp: { human: true, bf: ['Benalish Hero'] } }),
   ),
+  // --- Searching an opponent's zones (2026-10-28, search-opponent-library family) -
+  preset(
+    "Bribery: take a creature from the opponent's library",
+    board({ you: { bf: ['Island*5'], hand: ['Bribery'] }, opp: { lib: ['Hill Giant', 'Lightning Bolt', 'Colossal Dreadmaw'] } }),
+  ),
+  preset(
+    "Cranial Extraction: the graveyard's copies go whatever you pick",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Cranial Extraction'] },
+      opp: { gy: ['Lightning Bolt'], hand: ['Lightning Bolt'], lib: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    "Praetor's Grasp: the exiled card is yours to play, face down to Bob",
+    board({ you: { bf: ['Swamp*3', 'Mountain'], hand: ["Praetor's Grasp"] }, opp: { lib: ['Lightning Bolt', 'Hill Giant'] } }),
+  ),
 ]

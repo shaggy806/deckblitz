@@ -363,15 +363,22 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
   // Chancellors to reveal from it (rule 103.6b).
   if (action.openingHand === true && action.destination === 'reveal') return 'Opening hand: choose any of these to reveal'
   if (action.openingHand === true) return 'Opening hand: choose any of these to begin the game with on the battlefield'
-  // Choosing for someone else (Tasigur: an opponent picks for its controller).
+  // Choosing for someone else (Tasigur: an opponent picks for its controller),
+  // or from their zones (a search of target opponent's library — Extract).
   const whose = action.forPlayer === undefined ? 'your' : `${nameOf(action.forPlayer)}'s`
+  // "All cards with that name": the graveyard's are found whatever is picked
+  // (rule 701.23b).
+  const also = action.alsoTaken && action.alsoTaken.length > 0
+    ? ` — the ${action.alsoTaken.length} in the graveyard go too`
+    : ''
+  const from = action.forPlayer === undefined ? '' : ` from ${whose} cards`
   switch (action.destination) {
     case 'hand':
       return `Choose ${cards} to put into ${whose} hand`
     case 'battlefield':
-      return `Choose ${cards} to put onto the battlefield`
+      return `Choose ${cards}${from} to put onto the battlefield${action.forPlayer === undefined ? '' : ' under your control'}`
     case 'graveyard':
-      return `Choose ${cards} to put into your graveyard`
+      return `Choose ${cards} to put into ${whose} graveyard`
     case 'library-top':
       return 'Put them back on top in the order you pick: the first you pick goes on top'
     case 'library-bottom':
@@ -384,11 +391,14 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       // "Behold an Elf and exile it" (the Champions, rule 701.4a).
       return action.behold === true
         ? `Behold and exile ${cards} — from your hand or a permanent you control`
-        : `Choose ${cards} to exile`
+        : `Choose ${cards}${from} to exile${also}`
     case 'exile-playable':
       return `Choose ${cards} you may play`
     case 'exile-face-down':
-      return `Choose ${cards} to exile face down`
+      return `Choose ${cards}${from} to exile face down`
+    case 'stay':
+      // Knowledge Exploitation: the find is offered to cast where it is.
+      return `Choose ${cards}${from}`
     case 'behold':
       // Behold (rule 701.4a): nothing moves — a hand card is revealed, a
       // permanent is just pointed at.

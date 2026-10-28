@@ -338,6 +338,11 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return onPlayers(you, 1.5 * sizeOf(effect.count), ctx);
     case "search-library":
       if (effect.who !== undefined) return 0;
+      // Another player's library: a card of theirs made ours (Bribery), or
+      // one they lose (Extract).
+      if (effect.whose !== undefined) {
+        return onPlayers(you, effect.destination === "battlefield" || effect.destination === "stay" ? CARD : 0.5, ctx);
+      }
       return onPlayers(you, effect.destination === "graveyard" ? 0.5 : CARD, ctx);
     case "look-and-choose":
       return onPlayers(you, effect.destination === "library-top" ? 0.5 : 1.5, ctx);

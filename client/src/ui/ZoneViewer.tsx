@@ -9,7 +9,9 @@ import { StableLabel } from './StableLabel.tsx'
 
 /** Where a card in a zone-spanning choice is, under its tile. */
 const ZONE_CAPTION: Partial<Record<VisibleObject['zone'], string>> = {
-  hand: 'In your hand',
+  // A search of an opponent's hand (Memoricide) as well as your own (a
+  // behold): the title says whose.
+  hand: 'In a hand',
   battlefield: 'On the battlefield',
   graveyard: 'In a graveyard',
   exile: 'In exile',

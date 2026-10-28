@@ -204,6 +204,7 @@ import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExpeditionLookout from "../pool/expedition-lookout.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
+import _poolExtirpate from "../pool/extirpate.js";
 import _poolEyesOfTheWisent from "../pool/eyes-of-the-wisent.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
@@ -465,6 +466,7 @@ import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
 import _poolNecromasterDragon from "../pool/necromaster-dragon.js";
 import _poolNecropolisFiend from "../pool/necropolis-fiend.js";
 import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
+import _poolNeverendingTorment from "../pool/neverending-torment.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
 import _poolNightRevelers from "../pool/night-revelers.js";
@@ -993,6 +995,7 @@ const shard: CardShard = {
     _poolExpandTheSphere,
     _poolExpeditionLookout,
     _poolExtendedAbsence,
+    _poolExtirpate,
     _poolEyesOfTheWisent,
     _poolEzuriClawOfProgress,
     _poolEzzarootChanneler,
@@ -1254,6 +1257,7 @@ const shard: CardShard = {
     _poolNecromasterDragon,
     _poolNecropolisFiend,
     _poolNeurokInvisimancer,
+    _poolNeverendingTorment,
     _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,
     _poolNightRevelers,

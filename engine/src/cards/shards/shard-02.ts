@@ -320,6 +320,7 @@ import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
 import _poolHarshDeceiver from "../pool/harsh-deceiver.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHateflayer from "../pool/hateflayer.js";
+import _poolHauntingEchoes from "../pool/haunting-echoes.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
@@ -1136,6 +1137,7 @@ const shard: CardShard = {
     _poolHarshDeceiver,
     _poolHarvesttideInfiltrator,
     _poolHateflayer,
+    _poolHauntingEchoes,
     _poolHazoretsFavor,
     _poolHeartstringPuller,
     _poolHelionaut,

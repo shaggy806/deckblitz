@@ -1129,6 +1129,12 @@ export interface GameObject {
    * countered in response (Aetherflux Conduit). Kept like
    * `lastStackManaValue`. */
   lastStackManaSpent?: number;
+  /** Who controlled it as it last left the stack — "**its controller's**"
+   * graveyard, hand and library of a spell just countered (Counterbore's
+   * ruling: a spell cast by someone else's effect is countered into its
+   * owner's graveyard, and its controller's zones are searched). Kept like
+   * `lastStackManaValue`. */
+  lastStackController?: PlayerId;
   /** The colours of mana spent to cast it as it last left the stack
    * (`manaSpentColors`) — the `{ colorsSpentOf: "trigger-object" }` of a cast
    * trigger whose spell was countered in response (Magmablood Archaic's
@@ -2542,7 +2548,18 @@ export type AwaitingDecision =
         | "reveal"
         /** The hand's owner (`forPlayer`) discards the chosen cards — the
          * `discard-chosen` effect (Duress). */
-        | "discard";
+        | "discard"
+        /** The chosen cards don't move; `then` acts on them where they are —
+         * a `search-library`'s `"stay"` (Knowledge Exploitation). */
+        | "stay";
+      /** Cards that go with the chosen ones whatever is picked — a
+       * `search-library`'s `all`: the matches in a graveyard, a public zone,
+       * which must be found (rule 701.23b), while the hidden zones' are
+       * `eligible`. Not in `ids`. */
+      readonly alsoTaken?: readonly ObjectId[];
+      /** "That player" of `then` (`LastKnownRefs.player`): whose zones a
+       * `search-library` with `whose` searched. */
+      readonly thenPlayer?: PlayerId;
       /**
        * A behold (rule 701.4a — `Game.beginBehold`): `ids` are cards in
        * `player`'s hand and permanents they control, both at once, and the

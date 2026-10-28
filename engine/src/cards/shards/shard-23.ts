@@ -174,6 +174,7 @@ import _poolDarwinAdaptiveMutant from "../pool/darwin-adaptive-mutant.js";
 import _poolDauntlessUnity from "../pool/dauntless-unity.js";
 import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
+import _poolDeadlyCoverUp from "../pool/deadly-cover-up.js";
 import _poolDeadlyDesigns from "../pool/deadly-designs.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
@@ -675,6 +676,7 @@ import _poolSplittingSlime from "../pool/splitting-slime.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolSprintingWarbrute from "../pool/sprinting-warbrute.js";
+import _poolStainTheMind from "../pool/stain-the-mind.js";
 import _poolStampedingSerow from "../pool/stampeding-serow.js";
 import _poolStarkeOfRath from "../pool/starke-of-rath.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
@@ -1020,6 +1022,7 @@ const shard: CardShard = {
     _poolDauntlessUnity,
     _poolDawnhartRejuvenator,
     _poolDazzlingLights,
+    _poolDeadlyCoverUp,
     _poolDeadlyDesigns,
     _poolDeadlyPlot,
     _poolDeathStroke,
@@ -1521,6 +1524,7 @@ const shard: CardShard = {
     _poolSporecapSpider,
     _poolSpringbloomDruid,
     _poolSprintingWarbrute,
+    _poolStainTheMind,
     _poolStampedingSerow,
     _poolStarkeOfRath,
     _poolSteelDromedary,

@@ -630,7 +630,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   surveil: (n, v) => v.child(n.then),
   // "Its controller may search their library for a basic land" (Path to
   // Exile) — a consolation, like the life of Swords to Plowshares.
-  "search-library": (n, v) => v.touch(n.who?.controllerOfTarget, "help", MINOR),
+  // Searching a targeted player's library, or the zones of a target's owner
+  // or controller (Extract, Surgical Extraction), takes from them.
+  "search-library": (n, v) => {
+    v.touch(n.who?.controllerOfTarget, "help", MINOR);
+    const whose = n.whose;
+    if (typeof whose !== "object") return;
+    v.touch("target" in whose ? whose.target : "controllerOfTarget" in whose ? whose.controllerOfTarget : whose.ownerOfTarget, "harm", MINOR);
+  },
   // Choosing among its own targets (Sepulchral Primordial's cards from
   // opponents' graveyards, put onto the battlefield under your control).
   "look-and-choose": (n, v) => {

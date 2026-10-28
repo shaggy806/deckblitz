@@ -147,6 +147,75 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads a search of another player's zones, with its shuffle, as one search-library", () => {
+    const memoricide = parseFace({
+      name: "Lost Legacy",
+      type_line: "Sorcery",
+      oracle_text:
+        "Choose a nonartifact, nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.",
+    });
+    expect(memoricide.complete).toBe(true);
+    expect(memoricide.targets).toEqual(["player"]);
+    expect(memoricide.effect).toEqual({
+      kind: "choose-card-name",
+      filter: { notTypes: ["artifact", "land"] },
+      then: {
+        kind: "search-library",
+        whose: { target: 0 },
+        zones: "graveyard-hand-library",
+        filter: { hasName: "$chosenName" },
+        destination: "exile",
+        min: 0,
+        max: 99,
+        then: { kind: "draw", who: "that-player", amount: { thisWay: "exiled-from-hand" } },
+      },
+    });
+    const splinter = parseFace({
+      name: "Splinter",
+      type_line: "Sorcery",
+      oracle_text:
+        "Exile target artifact. Search its controller's graveyard, hand, and library for all cards with the same name as that artifact and exile them. Then that player shuffles.",
+    });
+    expect(splinter.complete).toBe(true);
+    expect(splinter.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        {
+          kind: "search-library",
+          whose: { controllerOfTarget: 0 },
+          zones: "graveyard-hand-library",
+          filter: { sameNameAsTarget: 0 },
+          destination: "exile",
+          all: true,
+          min: 0,
+          max: 99,
+        },
+      ],
+    });
+    const bribery = parseFace({
+      name: "Bribery",
+      type_line: "Sorcery",
+      oracle_text:
+        "Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.",
+    });
+    expect(bribery.effect).toEqual({
+      kind: "search-library",
+      whose: { target: 0 },
+      filter: { type: "creature" },
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+    });
+    // A search with no shuffle sentence after it isn't this template.
+    const lone = parseFace({
+      name: "Lone",
+      type_line: "Sorcery",
+      oracle_text: "Search target player's library for a card and exile it.",
+    });
+    expect(lone.complete).toBe(false);
+  });
+
   it("reads \"target X and all other Xs with the same name as that X\" as one -all effect", () => {
     const truth = parseFace({
       name: "Echoing Truth",

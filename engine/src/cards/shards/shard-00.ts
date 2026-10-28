@@ -153,6 +153,7 @@ import _poolCounterintelligence from "../pool/counterintelligence.js";
 import _poolCowardice from "../pool/cowardice.js";
 import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
+import _poolCranialExtraction from "../pool/cranial-extraction.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
 import _poolCreepingChill from "../pool/creeping-chill.js";
 import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
@@ -647,6 +648,7 @@ import _poolSoulStrings from "../pool/soul-strings.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSoulshriek from "../pool/soulshriek.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
+import _poolSowingSalt from "../pool/sowing-salt.js";
 import _poolSparkmagesGambit from "../pool/sparkmages-gambit.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
@@ -1001,6 +1003,7 @@ const shard: CardShard = {
     _poolCowardice,
     _poolCradleClearcutter,
     _poolCraftworkCrusher,
+    _poolCranialExtraction,
     _poolCraterhoofBehemoth,
     _poolCreepingChill,
     _poolCrescentIslandTemple,
@@ -1495,6 +1498,7 @@ const shard: CardShard = {
     _poolSoulherder,
     _poolSoulshriek,
     _poolSowerOfChaos,
+    _poolSowingSalt,
     _poolSparkmagesGambit,
     _poolSpectacleSummit,
     _poolSpectralShepherd,

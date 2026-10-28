@@ -171,6 +171,11 @@ export function thisWayEntries(
           }
         }
         break;
+      case "exiled-from-hand":
+        if (event.type === "cards-put-into-exile") {
+          for (const { object, from } of event.arrivals) if (from === "hand") add(object, ownerOf(object), false);
+        }
+        break;
       case "returned-to-hand":
         if (event.type === "permanent-returned-to-hand") {
           const fromBattlefield = event.from === undefined;

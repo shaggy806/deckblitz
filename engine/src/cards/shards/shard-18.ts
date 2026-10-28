@@ -390,6 +390,7 @@ import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
 import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
 import _poolLoathsomeChimera from "../pool/loathsome-chimera.js";
 import _poolLocustSpray from "../pool/locust-spray.js";
+import _poolLostLegacy from "../pool/lost-legacy.js";
 import _poolLostSoul from "../pool/lost-soul.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
 import _poolLucidDreams from "../pool/lucid-dreams.js";
@@ -1211,6 +1212,7 @@ const shard: CardShard = {
     _poolLlanowarWastes,
     _poolLoathsomeChimera,
     _poolLocustSpray,
+    _poolLostLegacy,
     _poolLostSoul,
     _poolLoxodonWarhammer,
     _poolLucidDreams,

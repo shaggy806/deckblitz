@@ -585,6 +585,7 @@ import _poolRuinousMinotaur from "../pool/ruinous-minotaur.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
 import _poolRumblingRockslide from "../pool/rumbling-rockslide.js";
 import _poolRustedRelic from "../pool/rusted-relic.js";
+import _poolSadisticSacrament from "../pool/sadistic-sacrament.js";
 import _poolSafeholdDuo from "../pool/safehold-duo.js";
 import _poolSalvationColossus from "../pool/salvation-colossus.js";
 import _poolSamiteHealer from "../pool/samite-healer.js";
@@ -679,6 +680,7 @@ import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSunkenField from "../pool/sunken-field.js";
+import _poolSupremeInquisitor from "../pool/supreme-inquisitor.js";
 import _poolSurgingMight from "../pool/surging-might.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
@@ -1397,6 +1399,7 @@ const shard: CardShard = {
     _poolRumblingBaloth,
     _poolRumblingRockslide,
     _poolRustedRelic,
+    _poolSadisticSacrament,
     _poolSafeholdDuo,
     _poolSalvationColossus,
     _poolSamiteHealer,
@@ -1491,6 +1494,7 @@ const shard: CardShard = {
     _poolSummonersSending,
     _poolSunderingVitae,
     _poolSunkenField,
+    _poolSupremeInquisitor,
     _poolSurgingMight,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,

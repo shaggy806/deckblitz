@@ -334,6 +334,23 @@ Still open beside them: `decision:twice-x-target-count` (a spell's group at
 twice X) and `decision:mixed-zone-targets` (one slot over battlefield and
 graveyard).
 
+### Searching another player's zones — built 2026-10-28
+
+The need-keys Phase 2 family `effect:search-opponent-library` (B248):
+`search-library`'s `whose` (a player target, a target's controller or owner,
+the trigger player) — the searcher decides, the library's owner shuffles,
+battlefield finds enter under the searcher's control; `zones:
+"graveyard-hand-library"` for the extract family, the hand shown to the
+searcher; `all` (graveyard matches taken, hidden zones' optional — rule
+701.23b); exile destinations, face down with `playable` (Praetor's Grasp),
+and `"stay"` for a cast from the library (Knowledge Exploitation); `then`
+over the finds with the searched player as "that player". Also: the
+`exiled-from-hand` this-way kind, the `sameNameAsThisWay` filter (Haunting
+Echoes), `EffectPlayerRef`'s `ownerOfTarget`, a countered spell's controller
+kept as it leaves the stack (`lastStackController`, Counterbore's ruling),
+and the `target` condition's `now` (Deicide's "the exiled card"). Keys:
+`effect:search-opponent-library`, `effect:extract-same-name`.
+
 ### Banding — built 2026-10-28
 
 The need-keys Phase 2 family `keyword:banding` (B247): rule 702.22 whole —

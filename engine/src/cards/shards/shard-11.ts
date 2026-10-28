@@ -338,6 +338,7 @@ import _poolHeraldicBanner from "../pool/heraldic-banner.js";
 import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
+import _poolHideSeek from "../pool/hide-seek.js";
 import _poolHissingIguanar from "../pool/hissing-iguanar.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
@@ -1176,6 +1177,7 @@ const shard: CardShard = {
     _poolHeroOfThePride,
     _poolHeroicCharge,
     _poolHexhavenDuelingArena,
+    _poolHideSeek,
     _poolHissingIguanar,
     _poolHitchclawRecluse,
     _poolHoardRobber,

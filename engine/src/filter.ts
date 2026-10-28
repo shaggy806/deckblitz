@@ -345,6 +345,18 @@ export interface CardFilter {
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
   readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
   /**
+   * Has the same name as one of the cards the resolving spell or ability
+   * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
+   * target player's graveyard other than basic land cards. **For each card
+   * exiled this way**, search that player's library for all cards **with the
+   * same name as that card**": one search for every such name (rule 701.23h
+   * — several searches of a library before one shuffle are one search). An
+   * effect's filter only: bound to `sameNameAsAny` as the effect applies.
+   */
+  readonly sameNameAsThisWay?: ThisWayKind;
+  /** `sameNameAsThisWay` bound — the names, never authored. */
+  readonly sameNameAsAny?: readonly string[];
+  /**
    * It is the object in this target slot of the resolving spell or ability,
    * or shares a color with it (rule 105.2) — radiance's "target creature
    * **and each other creature that shares a color with it**" (Ravnica:
@@ -1071,6 +1083,13 @@ export function matchesFilter(
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
   if (filter.name !== undefined && named !== filter.name) return false;
   if (filter.sameNameAsTarget !== undefined || filter.sameNameAsTriggerObject !== undefined) return false;
+  if (filter.sameNameAsThisWay !== undefined) return false;
+  if (filter.sameNameAsAny !== undefined) {
+    // A nameless object (face down, rule 708.2a) shares a name with nothing.
+    const nameless =
+      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
+    if (nameless || !filter.sameNameAsAny.includes(named)) return false;
+  }
   if (filter.sameNameAs !== undefined && id !== filter.sameNameAs.object) {
     // Rule 201.2a: an object with no name shares it with nothing — a
     // face-down permanent, or a Room with both doors locked (709.5).

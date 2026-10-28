@@ -249,6 +249,7 @@ import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
 import _poolEscapeArtist from "../pool/escape-artist.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
+import _poolEternalDominion from "../pool/eternal-dominion.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
 import _poolExoticDisease from "../pool/exotic-disease.js";
 import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
@@ -376,6 +377,7 @@ import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
+import _poolInfiniteObliteration from "../pool/infinite-obliteration.js";
 import _poolInfusedArrows from "../pool/infused-arrows.js";
 import _poolInnerFlameIgniter from "../pool/inner-flame-igniter.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
@@ -387,6 +389,7 @@ import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
 import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
+import _poolInvasiveSurgery from "../pool/invasive-surgery.js";
 import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
@@ -1063,6 +1066,7 @@ const shard: CardShard = {
     _poolEpicDownfall,
     _poolEscapeArtist,
     _poolEssenceFlare,
+    _poolEternalDominion,
     _poolEternalWitness,
     _poolExoticDisease,
     _poolExpeditionSkulker,
@@ -1190,6 +1194,7 @@ const shard: CardShard = {
     _poolIncarnationTechnique,
     _poolIncubationDruid,
     _poolInfernalTribute,
+    _poolInfiniteObliteration,
     _poolInfusedArrows,
     _poolInnerFlameIgniter,
     _poolInquisitivePuppet,
@@ -1201,6 +1206,7 @@ const shard: CardShard = {
     _poolIntrepidTrufflesnout,
     _poolInvasionOfMoag,
     _poolInvasionOfShandalar,
+    _poolInvasiveSurgery,
     _poolInventorsApprentice,
     _poolInvokeTheDivine,
     _poolIonize,

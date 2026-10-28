@@ -177,6 +177,7 @@ import _poolDireWolves from "../pool/dire-wolves.js";
 import _poolDirectCurrent from "../pool/direct-current.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
+import _poolDispossess from "../pool/dispossess.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
 import _poolDivert from "../pool/divert.js";
@@ -607,6 +608,7 @@ import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
 import _poolSecondWind from "../pool/second-wind.js";
 import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
+import _poolSeek from "../pool/seek.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSeismicWave from "../pool/seismic-wave.js";
 import _poolSentinelOfThePearlTrident from "../pool/sentinel-of-the-pearl-trident.js";
@@ -702,6 +704,7 @@ import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolTeferisCare from "../pool/teferis-care.js";
 import _poolTelJiladArchers from "../pool/tel-jilad-archers.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
+import _poolTestOfTalents from "../pool/test-of-talents.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
@@ -1021,6 +1024,7 @@ const shard: CardShard = {
     _poolDirectCurrent,
     _poolDiregrafCaptain,
     _poolDisposalMummy,
+    _poolDispossess,
     _poolDistractingGeist,
     _poolDiversionaryTactics,
     _poolDivert,
@@ -1451,6 +1455,7 @@ const shard: CardShard = {
     _poolSecondThoughts,
     _poolSecondWind,
     _poolSeedshipAgrarian,
+    _poolSeek,
     _poolSeethingLandscape,
     _poolSeismicWave,
     _poolSentinelOfThePearlTrident,
@@ -1546,6 +1551,7 @@ const shard: CardShard = {
     _poolTeferisCare,
     _poolTelJiladArchers,
     _poolTemporaryTruce,
+    _poolTestOfTalents,
     _poolTezzeretsTouch,
     _poolThaumaturgesFamiliar,
     _poolTheAstonishingAntMan,

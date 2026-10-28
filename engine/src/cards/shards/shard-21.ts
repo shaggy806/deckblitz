@@ -149,6 +149,7 @@ import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolConviction from "../pool/conviction.js";
 import _poolCorneredCrook from "../pool/cornered-crook.js";
 import _poolCosmicLarva from "../pool/cosmic-larva.js";
+import _poolCounterbore from "../pool/counterbore.js";
 import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
@@ -179,6 +180,7 @@ import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDelraich from "../pool/delraich.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDemonicJunker from "../pool/demonic-junker.js";
+import _poolDenyingWind from "../pool/denying-wind.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
@@ -221,6 +223,7 @@ import _poolEmptyThePits from "../pool/empty-the-pits.js";
 import _poolEnlarge from "../pool/enlarge.js";
 import _poolEnragingLicid from "../pool/enraging-licid.js";
 import _poolEraOfInnovation from "../pool/era-of-innovation.js";
+import _poolEradicate from "../pool/eradicate.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
@@ -959,6 +962,7 @@ const shard: CardShard = {
     _poolConviction,
     _poolCorneredCrook,
     _poolCosmicLarva,
+    _poolCounterbore,
     _poolCouriersCapsule,
     _poolCourtOfArdenvale,
     _poolCravenGiant,
@@ -989,6 +993,7 @@ const shard: CardShard = {
     _poolDelraich,
     _poolDemogorgonsClutches,
     _poolDemonicJunker,
+    _poolDenyingWind,
     _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
@@ -1031,6 +1036,7 @@ const shard: CardShard = {
     _poolEnlarge,
     _poolEnragingLicid,
     _poolEraOfInnovation,
+    _poolEradicate,
     _poolErase,
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,

@@ -1,0 +1,347 @@
+{
+  "batch": "B248",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the search-opponent-library family (effect:search-opponent-library + effect:extract-same-name)",
+  "authored": [
+    {
+      "name": "Extract",
+      "files": [
+        "engine/src/cards/pool/extract.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bribery",
+      "files": [
+        "engine/src/cards/pool/bribery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Memoricide",
+      "files": [
+        "engine/src/cards/pool/memoricide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cranial Extraction",
+      "files": [
+        "engine/src/cards/pool/cranial-extraction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surgical Extraction",
+      "files": [
+        "engine/src/cards/pool/surgical-extraction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Counterbore",
+      "files": [
+        "engine/src/cards/pool/counterbore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lost Legacy",
+      "files": [
+        "engine/src/cards/pool/lost-legacy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Praetor's Grasp",
+      "files": [
+        "engine/src/cards/pool/praetors-grasp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haunting Echoes",
+      "files": [
+        "engine/src/cards/pool/haunting-echoes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knowledge Exploitation",
+      "files": [
+        "engine/src/cards/pool/knowledge-exploitation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Acquire",
+      "files": [
+        "engine/src/cards/pool/acquire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Inevitable Betrayal",
+      "files": [
+        "engine/src/cards/pool/inevitable-betrayal.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Denying Wind",
+      "files": [
+        "engine/src/cards/pool/denying-wind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jester's Cap",
+      "files": [
+        "engine/src/cards/pool/jesters-cap.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Supreme Inquisitor",
+      "files": [
+        "engine/src/cards/pool/supreme-inquisitor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Earwig Squad",
+      "files": [
+        "engine/src/cards/pool/earwig-squad.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Slaughter Games",
+      "files": [
+        "engine/src/cards/pool/slaughter-games.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Unmoored Ego",
+      "files": [
+        "engine/src/cards/pool/unmoored-ego.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Infinite Obliteration",
+      "files": [
+        "engine/src/cards/pool/infinite-obliteration.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stain the Mind",
+      "files": [
+        "engine/src/cards/pool/stain-the-mind.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dispossess",
+      "files": [
+        "engine/src/cards/pool/dispossess.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Test of Talents",
+      "files": [
+        "engine/src/cards/pool/test-of-talents.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eradicate",
+      "files": [
+        "engine/src/cards/pool/eradicate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Splinter",
+      "files": [
+        "engine/src/cards/pool/splinter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sowing Salt",
+      "files": [
+        "engine/src/cards/pool/sowing-salt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eternal Dominion",
+      "files": [
+        "engine/src/cards/pool/eternal-dominion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mimeofacture",
+      "files": [
+        "engine/src/cards/pool/mimeofacture.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sadistic Sacrament",
+      "files": [
+        "engine/src/cards/pool/sadistic-sacrament.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nightmare Incursion",
+      "files": [
+        "engine/src/cards/pool/nightmare-incursion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Neverending Torment",
+      "files": [
+        "engine/src/cards/pool/neverending-torment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rootwater Thief",
+      "files": [
+        "engine/src/cards/pool/rootwater-thief.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Life's Finale",
+      "files": [
+        "engine/src/cards/pool/lifes-finale.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Necromentia",
+      "files": [
+        "engine/src/cards/pool/necromentia.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Invasive Surgery",
+      "files": [
+        "engine/src/cards/pool/invasive-surgery.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The End",
+      "files": [
+        "engine/src/cards/pool/the-end.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deicide",
+      "files": [
+        "engine/src/cards/pool/deicide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Extirpate",
+      "files": [
+        "engine/src/cards/pool/extirpate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hide // Seek",
+      "files": [
+        "engine/src/cards/pool/hide-seek.ts",
+        "engine/src/cards/pool/hide.ts",
+        "engine/src/cards/pool/seek.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadly Cover-Up",
+      "files": [
+        "engine/src/cards/pool/deadly-cover-up.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Grinning Totem",
+      "needs": [
+        "effect:play-until-next-upkeep-then-graveyard"
+      ],
+      "why": "The search is built, but 'until the beginning of your next upkeep, you may play that card' has no permission expiry at an upkeep, and 'if you haven't played it, put it into its owner's graveyard' needs a delayed trigger on the card."
+    },
+    {
+      "name": "Jester's Mask",
+      "needs": [
+        "effect:target-player-puts-cards-from-hand-on-library"
+      ],
+      "why": "The search is built, but 'target opponent puts the cards from their hand on top of their library' and 'that many' (the cards put there) aren't."
+    },
+    {
+      "name": "Head Games",
+      "needs": [
+        "effect:target-player-puts-cards-from-hand-on-library"
+      ],
+      "why": "As Jester's Mask: the hand put on top of the library, and 'that many', aren't built."
+    },
+    {
+      "name": "Lobotomy",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "The search is built, but 'target player reveals their hand, then you choose a card from it' (the searcher choosing from another player's hand) isn't."
+    },
+    {
+      "name": "Shimian Specter",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "As Lobotomy: you choosing a card from that player's revealed hand isn't built."
+    },
+    {
+      "name": "Pick the Brain",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "The delirium search is built (sameNameAsTarget over the exiled card), but exiling a card you choose from target opponent's revealed hand isn't."
+    },
+    {
+      "name": "Reap Intellect",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand"
+      ],
+      "why": "The search for each exiled card's name is built (sameNameAsThisWay), but choosing up to X nonland cards from target opponent's revealed hand isn't."
+    },
+    {
+      "name": "Quiet Speculation",
+      "needs": [
+        "condition:filter-has-flashback"
+      ],
+      "why": "The search of target player's library is built, but no CardFilter reads 'a card with flashback' (flashback isn't a Keyword)."
+    },
+    {
+      "name": "The Rise of Sozin // Fire Lord Sozin",
+      "needs": [
+        "effect:may-pay-x-reflexive-trigger"
+      ],
+      "why": "Chapter II is built; the back face's 'you may pay {X}. When you do, put any number of target creature cards with total mana value X or less …' needs an optional {X} payment feeding a reflexive trigger's X."
+    }
+  ]
+}

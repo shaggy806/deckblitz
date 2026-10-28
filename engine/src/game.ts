@@ -218,6 +218,7 @@ import type {
   ResolvedEnterAttacking,
   ReturnToHandZone,
   SearchTogether,
+  SearchMore,
   SearchZones,
   ThisWayKind,
   ZoneChoiceFilter,
@@ -7157,7 +7158,9 @@ export class Game {
       this.revealCards(player, chosen, "hand");
     }
 
-    this.finishZoneChoice({ kind: "zone-choice", awaiting, player, chosen });
+    // "All cards with that name": the graveyard's go with the picks.
+    const taken = awaiting.alsoTaken === undefined ? chosen : [...awaiting.alsoTaken, ...chosen];
+    this.finishZoneChoice({ kind: "zone-choice", awaiting, player, chosen: taken });
     // A cost's choice hands priority back to whoever activated (rule
     // 117.3c); a resolution's goes on as the resolution does.
     this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
@@ -7396,6 +7399,9 @@ export class Game {
           const object = this.state.objects[id];
           object.exiledFaceDown = { lookers: [player] };
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
+          // "You may play that card for as long as it remains exiled"
+          // (Praetor's Grasp): a permission dies with any move, so after it.
+          if (awaiting.impulseGrant !== undefined) object.impulse = { ...awaiting.impulseGrant };
           this.forgetStints([id], since);
         }
         return;
@@ -7404,11 +7410,15 @@ export class Game {
         // Face up. Imprint's "exile a card from your hand" links it to the
         // permanent whose ability exiled it (rule 607.2a); a cost's "exile
         // two cards from your graveyard" links it to nothing.
-        if (this.moveObject(id, "exile") && awaiting.exileLink !== undefined) {
-          this.state.objects[id].exiledWith = awaiting.exileLink;
+        if (this.moveObject(id, "exile")) {
+          const object = this.state.objects[id];
+          if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
+          if (awaiting.impulseGrant !== undefined) object.impulse = { ...awaiting.impulseGrant };
         }
         return;
       }
+      // Knowledge Exploitation's find stays in the library for `then`.
+      if (to === "stay") return;
       if (to === "manifest") {
         // Manifest dread (rule 701.62a): the chosen card is manifested —
         // put onto the battlefield face down as a 2/2 (701.40a) by the
@@ -7490,8 +7500,10 @@ export class Game {
       // choice is done (`beginLibraryOrder`).
       toOrder = leftover;
     } else if (leftoverTo === "shuffle") {
-      // A library search — shuffle the whole library afterwards (rule 701.24b).
-      this.shuffleLibraryOf(player);
+      // A library search — shuffle the whole library afterwards (rule 701.24b):
+      // its owner's, when another player's was searched ("then that player
+      // shuffles").
+      this.shuffleLibraryOf(awaiting.forPlayer ?? player);
     } else if (leftoverTo === "hand") {
       // Genesis Ultimatum: "… and the rest into your hand." needed-cards P19.
       for (const id of leftover) this.moveObject(id, "hand");
@@ -7546,7 +7558,11 @@ export class Game {
         1,
         0,
         [],
-        awaiting.thenSourceStint !== undefined ? { source: awaiting.thenSourceStint } : {},
+        {
+          ...(awaiting.thenSourceStint !== undefined ? { source: awaiting.thenSourceStint } : {}),
+          // "That player shuffles, then draws …": whose zones were searched.
+          ...(awaiting.thenPlayer !== undefined ? { player: awaiting.thenPlayer } : {}),
+        },
       );
       // The rest still to be ordered onto the bottom: `then` comes after
       // that, as any step after a decision waits for it.
@@ -22488,6 +22504,12 @@ export class Game {
       if (condition.kind === "target") {
         const ref = targets[condition.index];
         if (ref === undefined || ref.kind !== "object") return false;
+        // "If the exiled card is a God card" (Deicide): the card where it
+        // went, not the permanent it was.
+        if (condition.now === true) {
+          return this.state.objects[ref.object] !== undefined &&
+            matchesFilter(this.state, this.registry, ref.object, condition.filter, { you: controller, source });
+        }
         return matchesKnown(ref.object, condition.filter);
       }
       // A slot found illegal is blank in `targets` but was still chosen.
@@ -24931,10 +24953,16 @@ export class Game {
       },
       // "That creature's controller" — who controlled it as it left, if it
       // has (rule 608.2h); `moveObject` has handed it back to its owner.
-      controllerOf: (ref) =>
-        ref.kind === "player"
-          ? ref.player
-          : (lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller),
+      controllerOf: (ref) => {
+        if (ref.kind === "player") return ref.player;
+        // A spell targeted on the stack that has left it since (countered):
+        // its controller there, not its owner (Counterbore's ruling).
+        const object = this.state.objects[ref.object];
+        if (expectedZoneOf(ref) === "stack" && object !== undefined && object.zone !== "stack") {
+          return object.lastStackController ?? object.controller;
+        }
+        return lastKnownOf(ref)?.controller ?? object?.controller;
+      },
       devotionTo: (colors) => devotionOf(this.state, this.registry, controller, colors),
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
       basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
@@ -25294,6 +25322,7 @@ export class Game {
         zones,
         together,
         attachTo,
+        more,
       ) =>
         this.beginLibrarySearch(
           player ?? controller,
@@ -25308,6 +25337,9 @@ export class Game {
           zones,
           together,
           attachTo,
+          more === undefined
+            ? undefined
+            : { ...more, source, ...(refs.source !== undefined ? { sourceStint: refs.source } : {}) },
         ),
       scry: (amount, surveil, then) =>
         this.beginScry(source, controller, x, amount, surveil ? "surveil" : "scry", then ?? null),
@@ -25544,7 +25576,7 @@ export class Game {
   private beginLibrarySearch(
     player: PlayerId,
     filter: CardFilter,
-    destination: "hand" | "battlefield" | "library-top" | "graveyard",
+    destination: "hand" | "battlefield" | "library-top" | "graveyard" | "exile" | "exile-face-down" | "stay",
     min: number,
     max: number,
     enterTapped: boolean,
@@ -25554,16 +25586,28 @@ export class Game {
     zones: SearchZones = "library",
     together?: SearchTogether,
     enterAttachedTo?: ObjectId | null,
+    more?: SearchMore & { readonly source: ObjectId; readonly sourceStint?: number },
   ): void {
+    // Whose zones: the searcher's own, or another player's ("search target
+    // opponent's library") — the searcher still decides, and the filter is
+    // read from their side.
+    const owner = more?.owner ?? player;
+    if (this.state.players[owner]?.hasLost !== false) return;
     // `x` is the searching spell's X, for "mana value X or less" (Chord of
     // Calling).
-    const matching = (zone: "library" | "graveyard"): ObjectId[] =>
-      this.state.zones.perPlayer[player][zone].filter((id) =>
+    const matching = (zone: "library" | "graveyard" | "hand"): ObjectId[] =>
+      this.state.zones.perPlayer[owner][zone].filter((id) =>
         matchesFilter(this.state, this.registry, id, filter, { you: player, x }),
       );
     const library = zones !== "graveyard";
     const inGraveyard = zones === "library" ? [] : matching("graveyard");
-    const eligible = [...(library ? matching("library") : []), ...inGraveyard];
+    const inHand = zones === "graveyard-hand-library" ? matching("hand") : [];
+    // "All cards with that name": the graveyard's must be found (a public
+    // zone — rule 701.23b), so they go whatever is picked from the hidden
+    // zones, where any may be left (Counterbore's ruling).
+    const all = more?.all === true;
+    const alsoTaken = all ? inGraveyard : [];
+    const eligible = [...(all ? [] : inGraveyard), ...inHand, ...(library ? matching("library") : [])];
     // Only a hidden zone lets a search fail to find (rule 701.23b): a match
     // in the graveyard, which everyone can see, must be found when the
     // graveyard alone is searched. A search that takes in the library too
@@ -25571,22 +25615,46 @@ export class Game {
     const least = zones === "graveyard" && inGraveyard.length > 0 ? Math.max(min, 1) : min;
     const set = together === undefined ? undefined : this.searchTogether(together, eligible, player, x);
     // "A Forest card and a Plains card" finds one card per slot at most.
-    const most = together !== undefined && "oneEach" in together ? Math.min(max, together.oneEach.length) : max;
+    const most = all
+      ? eligible.length
+      : together !== undefined && "oneEach" in together
+        ? Math.min(max, together.oneEach.length)
+        : max;
+    const exiled = destination === "exile" || destination === "exile-face-down";
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
+      ...(owner !== player ? { forPlayer: owner } : {}),
       ids: eligible,
       eligible,
       min: Math.min(least, most, eligible.length),
       max: Math.min(most, eligible.length),
       ...(set !== undefined ? { together: set } : {}),
       destination,
-      // "If you search your library this way, shuffle."
+      // "If you search your library this way, shuffle" — "then that player
+      // shuffles": the library's owner (rule 701.24a).
       leftover: library ? "shuffle" : "stay",
+      ...(alsoTaken.length > 0 ? { alsoTaken } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
+      // "Put that card onto the battlefield under your control" (Bribery).
+      ...(owner !== player && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(restDestination !== undefined ? { restDestination } : {}),
       ...(reveal ? { reveal: true } : {}),
       ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
+      // "You may play that card for as long as it remains exiled" (Praetor's
+      // Grasp).
+      ...(exiled && more?.playable === "while-exiled"
+        ? { impulseGrant: { player, expiry: { kind: "while-exiled" as const } } }
+        : {}),
+      ...(more?.then !== undefined
+        ? {
+            then: more.then,
+            thenSource: more.source,
+            thenX: x,
+            ...(more.sourceStint !== undefined ? { thenSourceStint: more.sourceStint } : {}),
+            thenPlayer: owner,
+          }
+        : {}),
     };
   }
 
@@ -38054,6 +38122,7 @@ export class Game {
     if (object.zone === "stack" && object.kind === "card") {
       object.lastStackManaValue = this.manaValueOnStack(object);
       object.lastStackManaSpent = object.manaSpent ?? 0;
+      object.lastStackController = object.controller;
       object.lastStackManaSpentColors = [...(object.manaSpentColors ?? [])];
       // Already taken if its targets were cleared on the way out (see
       // `forgetSpellTargets`).

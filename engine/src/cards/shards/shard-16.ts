@@ -690,6 +690,7 @@ import _poolSungrassEgg from "../pool/sungrass-egg.js";
 import _poolSunshotMilitia from "../pool/sunshot-militia.js";
 import _poolSupplyCaravan from "../pool/supply-caravan.js";
 import _poolSurgeConductor from "../pool/surge-conductor.js";
+import _poolSurgicalExtraction from "../pool/surgical-extraction.js";
 import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
 import _poolSurviveTheNight from "../pool/survive-the-night.js";
 import _poolSutureSpirit from "../pool/suture-spirit.js";
@@ -1571,6 +1572,7 @@ const shard: CardShard = {
     _poolSunshotMilitia,
     _poolSupplyCaravan,
     _poolSurgeConductor,
+    _poolSurgicalExtraction,
     _poolSurrakAndGoreclaw,
     _poolSurviveTheNight,
     _poolSutureSpirit,

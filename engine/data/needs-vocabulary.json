@@ -10038,6 +10038,12 @@
   "condition:trigger-object-blockers-filter": {
    "example": "Wall of Caltrops: whenever it blocks a creature, if at least one other Wall is blocking that creature and no non-Walls are, it gains banding — no condition reads the creatures blocking the trigger object"
   },
+  "effect:play-until-next-upkeep-then-graveyard": {
+   "example": "Grinning Totem: until the beginning of your next upkeep you may play the card it exiled; at that upkeep, if you haven't, it goes to its owner's graveyard — no impulse expiry at an upkeep, no delayed trigger on the card"
+  },
+  "effect:may-pay-x-reflexive-trigger": {
+   "example": "Fire Lord Sozin: you may pay {X}. When you do, put any number of target creature cards with total mana value X or less … — an optional {X} payment whose X a reflexive trigger reads"
+  },
   "effect:pt-until-end-of-combat": {
    "example": "Glyph of Destruction"
   },

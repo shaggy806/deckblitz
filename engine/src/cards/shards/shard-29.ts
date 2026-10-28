@@ -372,6 +372,7 @@ import _poolKjeldoranDead from "../pool/kjeldoran-dead.js";
 import _poolKjeldoranSkyknight from "../pool/kjeldoran-skyknight.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
+import _poolKnowledgeExploitation from "../pool/knowledge-exploitation.js";
 import _poolKookus from "../pool/kookus.js";
 import _poolKraulRaider from "../pool/kraul-raider.js";
 import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
@@ -413,6 +414,7 @@ import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
+import _poolMemoricide from "../pool/memoricide.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
@@ -1202,6 +1204,7 @@ const shard: CardShard = {
     _poolKjeldoranSkyknight,
     _poolKnightLuminary,
     _poolKnightlyValor,
+    _poolKnowledgeExploitation,
     _poolKookus,
     _poolKraulRaider,
     _poolKrovikanScoundrel,
@@ -1243,6 +1246,7 @@ const shard: CardShard = {
     _poolMeldwebCurator,
     _poolMemorialToGenius,
     _poolMemorialToUnity,
+    _poolMemoricide,
     _poolMessengersSpeed,
     _poolMightstone,
     _poolMightstonesAnimation,

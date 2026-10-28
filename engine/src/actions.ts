@@ -1468,7 +1468,14 @@ export type LegalAction =
          * "reveal any number of green cards in your hand"). */
         | "reveal"
         /** `forPlayer` discards the chosen cards from their hand (Duress). */
-        | "discard";
+        | "discard"
+        /** The chosen cards stay where they are, for what follows — a
+         * search's find cast from the library (Knowledge Exploitation). */
+        | "stay";
+      /** Cards that go with the chosen ones whatever is picked: the
+       * graveyard's matches of a search for "all cards with that name"
+       * (rule 701.23b — Cranial Extraction). */
+      readonly alsoTaken?: readonly ObjectId[];
       /** A behold (rule 701.4a): `ids` are cards in the chooser's hand and
        * permanents they control at once — "reveal a card from your hand or
        * choose a permanent you control". `destination` is `"behold"`, or

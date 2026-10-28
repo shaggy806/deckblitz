@@ -612,6 +612,7 @@ import _poolSkyclaveShadowcat from "../pool/skyclave-shadowcat.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSlabHammer from "../pool/slab-hammer.js";
+import _poolSlaughterGames from "../pool/slaughter-games.js";
 import _poolSleepersGuile from "../pool/sleepers-guile.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSliversmith from "../pool/sliversmith.js";
@@ -1430,6 +1431,7 @@ const shard: CardShard = {
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
     _poolSlabHammer,
+    _poolSlaughterGames,
     _poolSleepersGuile,
     _poolSliceFromTheShadows,
     _poolSliversmith,
