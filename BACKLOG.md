@@ -73,9 +73,14 @@ section keeps only what to do next.
   mode; 38 of its 56 cards authored, 18 still blocked on narrow keys), choose-card-name (B246,
   2026-10-28: rule 201.4's choice as a new decision with a client picker, read back by `chosenName`
   filters or substituted as `hasName`; 26 of its 53 cards authored, 27 still blocked — ten on
-  `effect:search-opponent-library`). Next: `keyword:banding` (46, a session of its own), then
-  `effect:search-opponent-library` (44 with `effect:extract-same-name`, freeing the Memoricide
-  searches this family left blocked).
+  `effect:search-opponent-library`), banding (B247, 2026-10-28: rule 702.22 whole — bands declared
+  with the attack, blocked as one, the other side dividing combat damage, "bands with other" and
+  "creatures banded with it"; the client's band builder in the attack bar; 44 of its 46 cards
+  authored, 2 still blocked on new narrow keys). Next: `effect:search-opponent-library` (44 with
+  `effect:extract-same-name`, freeing the Memoricide searches B246 left blocked), then
+  `static:static-lose-all-abilities` (38). `static:combat-restriction-extensions` (36, blocking
+  additional creatures) can reuse banding's blocker that divides its damage among several
+  attackers (510.1d, `combat/banding.ts`'s `blockedAttackersOf`).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -282,6 +287,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md`, the user's decisions (2026-10-13) at its end; what's built is in `COMPLETED.md`. Next: the seeded decks and game 1's chapters (plan phase 4).
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
+- **Split cards look like double-faced cards in the library** (the user, 2026-10-28): the library page (`client/src/library/LibraryPage.tsx`) presents a split card as an MDFC.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

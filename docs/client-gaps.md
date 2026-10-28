@@ -131,3 +131,7 @@ Soulbond (rule 702.95, batch 185) pairs two creatures; the engine's view gives e
 grants (Silverblade Paladin's double strike on both), not which two are paired, which matters
 when two soulbond creatures are out or a partner is about to leave. A small link marker on both
 cards (hovering one highlights the other, as an Aura's host is) would do.
+
+**Split cards look like double-faced cards in the library**
+
+The user, 2026-10-28: "the display for split cards in the library is odd. Presents them as mdfcs." A split card (rule 709) is one card with two halves side by side, not two faces; the library page (`client/src/library/LibraryPage.tsx`) shows it the way it shows a modal double-faced card.

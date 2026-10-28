@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the banding family** (2026-10-28, B247, `keyword:banding`): rule 702.22
+  whole, in `combat/banding.ts` — bands declared with the attack (`AttackerDeclaration.band`,
+  banding and up to one without, or creatures of a quality one "bands with other" of, one
+  defender), blocked as one (a blocker of a member blocks the band: `GameObject.blockingAlso`,
+  "whenever ~ blocks" still once), a blocker dividing its damage among the band (510.1d), and the
+  other side dividing combat damage when banding is among the creatures blocking or blocked
+  (702.22j-k: `assign-combat-damage`'s `forOpponent`, defaulting to killing as little as it can);
+  the `banding` and `bands-with-other` keywords, the `bandsWithOther` static, the
+  `bandedWithSource` filter; the client's band builder ("Band…") and "Banding: you divide" prompt;
+  scaffolder templates. 44 cards: Benalish Hero, Master of the Hunt, the five Legends lands,
+  Icatian Skirmishers, Urza's Engine, Camel, Kjeldoran Skyknight and the rest; 2 still blocked
+  (`B247.json`).
 - **Need-keys Phase 2, the choose-card-name family** (2026-10-28, B246, `decision:choose-card-name`):
   rule 201.4's choice as a new decision kind (the 27th), asked as a permanent enters
   (`chooseCardNameOnEnter`, with a look at an opponent's hand or each opponent's revealed hand

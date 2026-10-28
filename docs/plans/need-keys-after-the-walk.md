@@ -355,6 +355,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   whole instead of the half cast, and cycling's cost skipping ability taxes. 26 authored (14 by the
   lead, 12 by two agents), 27 still blocked — ten of them the Memoricide searches, which
   `effect:search-opponent-library` (next in the order) frees; three new narrow keys.
+- **2026-10-28: the banding family (B247).** `keyword:banding` alone (46 cards), as the skill says:
+  rule 702.22 rewrites combat. Bands on the attack declaration, a blocker of one member blocking
+  the band, a blocker dividing its damage among several attackers (510.1d — new: no blocker blocked
+  more than one before), and the other side dividing damage (702.22j-k), with a band builder in
+  the client's attack bar and the damage prompt for the other side. The 32 cards after the lead's
+  14 scaffolded to 21 finished and 11 drafts, so the lead authored all 44 (sizing: 15 or fewer
+  left, no agent); 2 still blocked on new narrow keys. Next: `effect:search-opponent-library` (44).
 
 ## Rough size
 
