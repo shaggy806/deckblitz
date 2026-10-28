@@ -144,11 +144,11 @@ As `author-by-set` step 3, with these differences:
   cards are committed. Then merge `origin/main` and run one `npm run
   verify`. After a fix, `--only <step>`. An engine change triggers the bot
   gate and the server and client suites, so expect a full run's length.
-- **Land on `main`**: `node scripts/landing-lock.mjs acquire B<N> --wait`,
-  then merge `origin/main`. If the merge brought anything, run `npm run
-  verify -- --landing`. Then `git push origin HEAD:main` and `release`. The
-  families run in series, so the lock is normally free at once; it still
-  guards against a session started by hand.
+- **Land on `main`**: merge `origin/main`. If the merge brought anything,
+  run `npm run verify -- --landing`. Then `git push origin HEAD:main`. The
+  families run in series, one session at a time, so the landing lock is
+  off (`ENABLED` in `scripts/landing-lock.mjs`, since 2026-10-28) and this
+  step takes none.
 
 ## 5. Report and offer the next
 

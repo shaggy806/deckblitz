@@ -19,6 +19,10 @@
 //        node scripts/landing-lock.mjs status
 // acquire exits 0 holding the lock, 1 when it's held and --wait wasn't given;
 // --wait polls every minute until it's free (run it in the background).
+//
+// ENABLED off (2026-10-28): one session at a time works the need keys, so
+// every command is a no-op that exits 0 and touches nothing on origin. Turn
+// it back on before running parallel walks again.
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,6 +31,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const REF = "refs/heads/landing-lock";
 const SEEN = "refs/landing-lock/seen";
 const MINE = "refs/landing-lock/mine";
+const ENABLED = false;
 const STALE_MINUTES = 45;
 const POLL_MS = 60_000;
 
@@ -59,7 +64,9 @@ const describe = (l) => (l?.held ? `held by ${l.label}, ${Math.round(l.minutes)}
 const [cmd, label] = process.argv.slice(2);
 const wait = process.argv.includes("--wait");
 
-if (cmd === "status") {
+if (!ENABLED && ["status", "release", "acquire"].includes(cmd)) {
+  console.log("landing-lock: disabled (ENABLED in scripts/landing-lock.mjs) — nothing taken or released");
+} else if (cmd === "status") {
   console.log(describe(readLock()));
 } else if (cmd === "release") {
   const l = readLock();

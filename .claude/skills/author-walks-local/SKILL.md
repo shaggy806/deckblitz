@@ -8,7 +8,8 @@ description: Run several set-walk card batches at once on this PC instead of in 
 The local twin of **`author-walks-parallel`** (read its "The rules that make it safe" and steps
 1–2 — they hold here unchanged: ranges never overlap and live in `BACKLOG.md`, batch numbers are
 assigned before starting, the assignment lands on `main` first, one engine feature built once,
-one batch per child, each child lands its own batch under the landing lock). What differs is
+one batch per child, each child lands its own batch under the landing lock — off since
+2026-10-28, so turn it back on first). What differs is
 where the children run: each is a **local session** (`mcp__ccd_session__start_session`) in a
 git worktree of its own on this PC, not a cloud container. This session is the
 **coordinator**: it assigns, starts and reports, and authors nothing itself. Coordinate from a

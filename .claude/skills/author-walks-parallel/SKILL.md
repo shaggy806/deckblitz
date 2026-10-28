@@ -35,7 +35,9 @@ first check-in.
 - **The assignment lands on `main` first.** A child starts from `main` and reads its range off
   `BACKLOG.md`; a range that exists only in this session's head is invisible to it.
 - **Each child lands its own batch, under the landing lock** (`scripts/landing-lock.mjs`,
-  from 2026-10-26), **and verifies before taking it** (from round fifteen): it merges
+  from 2026-10-26; **switched off 2026-10-28** for single-session need-keys work — set its
+  `ENABLED` back to `true` on `main` before starting any children, or every acquire is a no-op
+  and the children land unguarded), **and verifies before taking it** (from round fifteen): it merges
   `origin/main` and runs its one plain `npm run verify` on its own branch, beside the other
   children's; then it takes the lock, merges `origin/main` again, runs the short
   `npm run verify -- --landing` if the merge brought anything (the new-cards fuzzer
