@@ -8408,4 +8408,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Avizoa: you skip your next untap step',
     board({ you: { bf: ['Avizoa', { name: 'Island', tapped: true }, { name: 'Island', tapped: true }] } }),
   ),
+  // --- Naming a card (2026-10-28, the choose-card-name family) -------------
+  preset(
+    'Pithing Needle: name a card from the search as it enters',
+    board({ you: { bf: ['Wastes'], hand: ['Pithing Needle'] }, opp: { bf: ['Prodigal Sorcerer', 'Mind Stone'] } }),
+  ),
+  preset(
+    "Sorcerous Spyglass: see the opponent's hand before naming",
+    board({
+      you: { bf: ['Wastes*2'], hand: ['Sorcerous Spyglass'] },
+      opp: [{ hand: ['Lightning Bolt', 'Counterspell'] }, { hand: ['Shock'] }],
+    }),
+  ),
+  preset(
+    'Alhammarret, High Arbiter: only a revealed nonland card can be named',
+    board({
+      you: { bf: ['Island*7'], hand: ['Alhammarret, High Arbiter'] },
+      opp: { bf: ['Mountain'], hand: ['Lightning Bolt', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Brain Pry: the name is chosen as it resolves, nonland only',
+    board({ you: { bf: ['Swamp*2'], hand: ['Brain Pry'] }, opp: { hand: ['Lightning Bolt'] } }),
+  ),
 ]

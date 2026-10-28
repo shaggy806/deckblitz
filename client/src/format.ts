@@ -295,6 +295,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         : `${name(event.object)} copies nothing`
     case 'creature-type-chosen':
       return `${name(event.object)} chooses ${event.creatureType}`
+    case 'card-name-chosen':
+      return `${who(event.player)} names ${event.name} for ${name(event.object)}`
     case 'ability-activated':
       return `${who(event.player)} activates ${name(event.source)}${
         event.onStack ? '' : ' (mana)'

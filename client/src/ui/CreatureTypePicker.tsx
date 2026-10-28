@@ -15,6 +15,18 @@ export interface CreatureTypePickerProps {
    * search survives. The owner renders the way back. */
   readonly collapsed: boolean
   readonly onCollapse: () => void
+  /** What's being named, for a choice that isn't a creature type — a card
+   * name (rule 201.4): "a nonland card name", with its plural for the
+   * search's placeholder. */
+  readonly noun?: { readonly one: string; readonly many: string }
+  /** The heading over `suggested`. */
+  readonly suggestedLabel?: string
+  /** Cards the chooser was shown for this choice (Sorcerous Spyglass's look
+   * at a hand), as their own row of chips above the suggestions. */
+  readonly seen?: { readonly label: string; readonly names: readonly string[] }
+  /** At most this many results drawn at once: thousands of card names are
+   * too many buttons for a low-end laptop, and a search narrows them. */
+  readonly maxShown?: number
 }
 
 /**
@@ -51,6 +63,10 @@ export function CreatureTypePicker({
   onPick,
   collapsed,
   onCollapse,
+  noun = { one: 'a creature type', many: 'creature types' },
+  suggestedLabel = 'In your deck and on the board',
+  seen,
+  maxShown,
 }: CreatureTypePickerProps) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -58,6 +74,11 @@ export function CreatureTypePicker({
   const listRef = useRef<HTMLDivElement>(null)
 
   const results = useMemo(() => rank(options, query), [options, query])
+  const shown = maxShown !== undefined && results.length > maxShown ? results.slice(0, maxShown) : results
+  // What `seen` already shows isn't suggested twice.
+  const suggestions = seen === undefined ? suggested : suggested.filter((t) => !seen.names.includes(t))
+  // Card names are longer than creature types: wider columns.
+  const wide = noun.one !== 'a creature type'
 
   useEffect(() => {
     if (!collapsed) inputRef.current?.focus()
@@ -74,32 +95,47 @@ export function CreatureTypePicker({
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      setActive((i) => Math.min(i + 1, results.length - 1))
+      setActive((i) => Math.min(i + 1, shown.length - 1))
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActive((i) => Math.max(i - 1, 0))
     } else if (e.key === 'Enter') {
       e.preventDefault()
-      const pick = results[active]
+      const pick = shown[active]
       if (pick !== undefined) onPick(pick)
     }
   }
 
   return (
     <div className="zone-viewer-overlay ctype-overlay">
-      <div className="zone-viewer-box ctype-box" role="dialog" aria-label="Choose a creature type">
+      <div className="zone-viewer-box ctype-box" role="dialog" aria-label={`Choose ${noun.one}`}>
         <div className="zone-viewer-head">
-          <h2>{sourceName} — choose a creature type</h2>
+          <h2>
+            {sourceName} — choose {noun.one}
+          </h2>
           <button type="button" onClick={onCollapse}>
             View board
           </button>
         </div>
 
-        {suggested.length > 0 ? (
+        {seen !== undefined && seen.names.length > 0 ? (
           <div className="ctype-section">
-            <span className="ctype-label">In your deck and on the board</span>
+            <span className="ctype-label">{seen.label}</span>
             <div className="ctype-chips">
-              {suggested.map((t) => (
+              {seen.names.map((t, i) => (
+                <button key={`${t}-${i}`} type="button" className="ctype-chip" onClick={() => onPick(t)}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {suggestions.length > 0 ? (
+          <div className="ctype-section">
+            <span className="ctype-label">{suggestedLabel}</span>
+            <div className="ctype-chips">
+              {suggestions.map((t) => (
                 <button
                   key={t}
                   type="button"
@@ -118,7 +154,7 @@ export function CreatureTypePicker({
             ref={inputRef}
             className="ctype-search"
             type="search"
-            placeholder={`Search all ${options.length} creature types`}
+            placeholder={`Search all ${options.length} ${noun.many}`}
             value={query}
             onChange={(e) => {
               setQuery(e.target.value)
@@ -126,20 +162,29 @@ export function CreatureTypePicker({
               setActive(0)
             }}
             onKeyDown={onKeyDown}
-            aria-label="Search creature types"
+            aria-label={`Search ${noun.many}`}
             aria-controls="ctype-results"
           />
           <span className="ctype-label">
             {query.trim() === ''
-              ? `${options.length} types`
+              ? shown.length < results.length
+                ? `${options.length} ${noun.many} — type to search`
+                : `${options.length} ${noun.many}`
               : results.length === 0
-                ? 'No creature type matches'
-                : `${results.length} match${results.length === 1 ? '' : 'es'} — Enter picks the highlighted one`}
+                ? 'Nothing matches'
+                : `${results.length} match${results.length === 1 ? '' : 'es'}${
+                    shown.length < results.length ? `, the first ${shown.length} shown` : ''
+                  } — Enter picks the highlighted one`}
           </span>
         </div>
 
-        <div id="ctype-results" className="ctype-results" ref={listRef} role="listbox">
-          {results.map((t, i) => (
+        <div
+          id="ctype-results"
+          className={`ctype-results${wide ? ' ctype-results--wide' : ''}`}
+          ref={listRef}
+          role="listbox"
+        >
+          {shown.map((t, i) => (
             <button
               key={t}
               type="button"

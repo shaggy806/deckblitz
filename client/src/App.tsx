@@ -333,6 +333,7 @@ type EnchantChoiceAction = Extract<LegalAction, { kind: 'choose-enchant' }>
 type LegendRuleAction = Extract<LegalAction, { kind: 'legend-rule' }>
 type TriggerOrderAction = Extract<LegalAction, { kind: 'order-triggers' }>
 type CreatureTypeChoiceAction = Extract<LegalAction, { kind: 'choose-creature-type' }>
+type CardNameChoiceAction = Extract<LegalAction, { kind: 'choose-card-name' }>
 type ModesChoiceAction = Extract<LegalAction, { kind: 'choose-modes' }>
 type SacrificeAction = Extract<LegalAction, { kind: 'sacrifice' }>
 type ProliferateAction = Extract<LegalAction, { kind: 'proliferate' }>
@@ -628,6 +629,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'legend-rule': 'choose which legend to keep',
   'order-triggers': 'order their triggers',
   'choose-creature-type': 'choose a creature type',
+  'choose-card-name': 'choose a card name',
   'choose-modes': 'choose a mode',
   'choose-targets': 'choose targets',
   'cast-now': 'decide whether to cast a spell',
@@ -1935,6 +1937,9 @@ function Table({
   )
   const legendAction = actions.find((a): a is LegendRuleAction => a.kind === 'legend-rule')
   const triggerOrderAction = actions.find((a): a is TriggerOrderAction => a.kind === 'order-triggers')
+  const cardNameChoiceAction = actions.find(
+    (a): a is CardNameChoiceAction => a.kind === 'choose-card-name',
+  )
   const creatureTypeChoiceAction = actions.find(
     (a): a is CreatureTypeChoiceAction => a.kind === 'choose-creature-type',
   )
@@ -2047,6 +2052,7 @@ function Table({
     | 'legend-rule'
     | 'order-triggers'
     | 'choose-creature-type'
+    | 'choose-card-name'
     | 'choose-modes'
     | 'sacrifice'
     | 'proliferate'
@@ -2088,6 +2094,8 @@ function Table({
           ? 'order-triggers'
         : creatureTypeChoiceAction
           ? 'choose-creature-type'
+        : cardNameChoiceAction
+          ? 'choose-card-name'
         : modesChoiceAction
           ? 'choose-modes'
         : sacrificeAction
@@ -4084,6 +4092,21 @@ function Table({
     controls = (
       <div className="controls">
         <span>{game.nameOf(creatureTypeChoiceAction.source)} — choosing a creature type</span>
+        {decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
+      </div>
+    )
+  } else if (mode === 'choose-card-name' && cardNameChoiceAction) {
+    // Thousands of names: answered in the `CreatureTypePicker` popup below,
+    // as a whole catalogue of creature types is.
+    controls = (
+      <div className="controls">
+        <span>
+          {game.nameOf(cardNameChoiceAction.source)} — choosing {cardNameChoiceAction.label}
+        </span>
         {decisionCollapsed ? (
           <button type="button" onClick={() => setDecisionCollapsed(false)}>
             Show choices
@@ -6659,6 +6682,30 @@ function Table({
           onPick={(creatureType) =>
             game.dispatch({ type: 'choose-creature-type', player: seat, creatureType })
           }
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
+        />
+      ) : null}
+
+      {mode === 'choose-card-name' && cardNameChoiceAction ? (
+        <CreatureTypePicker
+          // Remount per decision, so a previous search doesn't carry over.
+          key={cardNameChoiceAction.source}
+          sourceName={game.nameOf(cardNameChoiceAction.source)}
+          options={cardNameChoiceAction.options}
+          suggested={cardNameChoiceAction.suggested}
+          noun={{ one: cardNameChoiceAction.label, many: 'card names' }}
+          suggestedLabel="Suggested"
+          seen={
+            cardNameChoiceAction.looked !== undefined
+              ? {
+                  label: 'In the hand you looked at',
+                  names: cardNameChoiceAction.looked.map((id) => game.nameOf(id)),
+                }
+              : undefined
+          }
+          maxShown={300}
+          onPick={(name) => game.dispatch({ type: 'choose-card-name', player: seat, name })}
           collapsed={decisionCollapsed}
           onCollapse={() => setDecisionCollapsed(true)}
         />

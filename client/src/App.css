@@ -5049,6 +5049,10 @@
   scrollbar-gutter: stable;
   padding-right: 4px;
 }
+/* Card names (rule 201.4) are longer than creature types. */
+.ctype-results--wide {
+  grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 15vw, 230px), 1fr));
+}
 .ctype-result {
   text-align: left;
   overflow: hidden;

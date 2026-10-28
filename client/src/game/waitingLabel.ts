@@ -17,6 +17,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'legend-rule': 'choosing a legend to keep',
   'order-triggers': 'ordering triggers',
   'choose-creature-type': 'naming a creature type',
+  'choose-card-name': 'naming a card',
   'choose-modes': 'choosing a mode',
   'choose-targets': 'targeting',
   'cast-now': 'deciding whether to cast',

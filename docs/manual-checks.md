@@ -5591,3 +5591,22 @@ engine terms. A second thing to check is a second test.
 ### Flickering Ward: naming its own colour doesn't knock it off
 - **Do:** Cast Flickering Ward on your Grizzly Bears and choose White as it enters.
 - **Expect:** The prompt reads "Flickering Ward — choose a color" with White, Blue, Black, Red and Green. The Ward stays attached and the Bears have protection from white. Casting Pacifism on the Bears isn't offered: they can't be targeted by it.
+
+## Naming a card (2026-10-28, need-keys Phase 2: the choose-card-name family)
+
+### Pithing Needle: name a card from the search as it enters
+- **Do:** Cast Pithing Needle. In the popup, type "mind" in the search box and pick Mind Stone.
+- **Expect:** The popup reads "Pithing Needle — choose a card name", with Bob's Prodigal Sorcerer first under "Suggested". The search narrows thousands of names as you type. After Mind Stone the log says "Alice names Mind Stone for Pithing Needle".
+
+### Sorcerous Spyglass: see the opponent's hand before naming
+- **Do:** Cast Sorcerous Spyglass. Choose Bob when asked whose hand to look at.
+- **Expect:** The naming popup shows "In the hand you looked at" with Bob's Lightning Bolt and Counterspell as chips. Picking one names it.
+
+### Alhammarret, High Arbiter: only a revealed nonland card can be named
+- **Do:** Cast Alhammarret, High Arbiter.
+- **Expect:** Bob's hand is revealed (Lightning Bolt and a Forest). The popup offers Lightning Bolt alone, not the Forest. After naming it, Bob can't cast Lightning Bolt.
+
+### Brain Pry: the name is chosen as it resolves, nonland only
+- **Do:** Cast Brain Pry targeting Bob, and type "forest" in the search when the popup opens.
+- **Expect:** No name is asked while casting. As it resolves the popup reads "Brain Pry — choose a nonland card name" and "forest" finds no Forest card itself. Naming Lightning Bolt makes Bob discard his Lightning Bolt.
+
