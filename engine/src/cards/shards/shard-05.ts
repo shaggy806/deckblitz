@@ -716,6 +716,7 @@ import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
+import _poolTolaria from "../pool/tolaria.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolToolcraftExemplar from "../pool/toolcraft-exemplar.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
@@ -1527,6 +1528,7 @@ const shard: CardShard = {
     _poolTitanOfLittjara,
     _poolTithebearerGiant,
     _poolTokkaRahzarTerribleTwos,
+    _poolTolaria,
     _poolTomeRaider,
     _poolToolcraftExemplar,
     _poolTopiaryLecturer,

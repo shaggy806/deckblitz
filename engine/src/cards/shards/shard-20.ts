@@ -359,6 +359,7 @@ import _poolHuntingGrounds from "../pool/hunting-grounds.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHymnOfRebirth from "../pool/hymn-of-rebirth.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
+import _poolIcatianSkirmishers from "../pool/icatian-skirmishers.js";
 import _poolIcatianTown from "../pool/icatian-town.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
 import _poolIllusoryGains from "../pool/illusory-gains.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolHydroelectricSpecimen,
     _poolHymnOfRebirth,
     _poolHypnoticSprite,
+    _poolIcatianSkirmishers,
     _poolIcatianTown,
     _poolIllusionistsBracers,
     _poolIllusoryGains,

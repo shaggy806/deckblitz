@@ -764,6 +764,7 @@ import _poolUmaraSkyfalls from "../pool/umara-skyfalls.js";
 import _poolUndergroundRiver from "../pool/underground-river.js";
 import _poolUnderworldBreach from "../pool/underworld-breach.js";
 import _poolUndyingBeast from "../pool/undying-beast.js";
+import _poolUnholyCitadel from "../pool/unholy-citadel.js";
 import _poolUniversalAutomaton from "../pool/universal-automaton.js";
 import _poolUnquenchableThirst from "../pool/unquenchable-thirst.js";
 import _poolUrsapine from "../pool/ursapine.js";
@@ -1620,6 +1621,7 @@ const shard: CardShard = {
     _poolUndergroundRiver,
     _poolUnderworldBreach,
     _poolUndyingBeast,
+    _poolUnholyCitadel,
     _poolUniversalAutomaton,
     _poolUnquenchableThirst,
     _poolUrsapine,

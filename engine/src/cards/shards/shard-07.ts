@@ -52,6 +52,7 @@ import _poolBardTheBowman from "../pool/bard-the-bowman.js";
 import _poolBattlefieldMedic from "../pool/battlefield-medic.js";
 import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
 import _poolBelakorTheDarkMaster from "../pool/belakor-the-dark-master.js";
+import _poolBenalishHero from "../pool/benalish-hero.js";
 import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolBattlefieldMedic,
     _poolBattlesongBerserker,
     _poolBelakorTheDarkMaster,
+    _poolBenalishHero,
     _poolBishopOfRebirth,
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,

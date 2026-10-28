@@ -749,6 +749,7 @@ import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
+import _poolUrzasEngine from "../pool/urzas-engine.js";
 import _poolVacuumelt from "../pool/vacuumelt.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
@@ -1577,6 +1578,7 @@ const shard: CardShard = {
     _poolUnsparingBoltcaster,
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,
+    _poolUrzasEngine,
     _poolVacuumelt,
     _poolVampiricTouch,
     _poolVault12TheNecropolis,

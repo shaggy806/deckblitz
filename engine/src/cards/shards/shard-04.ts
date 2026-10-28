@@ -414,6 +414,7 @@ import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMartyrsCry from "../pool/martyrs-cry.js";
 import _poolMaskedGorgon from "../pool/masked-gorgon.js";
 import _poolMasterHealer from "../pool/master-healer.js";
+import _poolMasterOfTheHunt from "../pool/master-of-the-hunt.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
@@ -431,6 +432,7 @@ import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMorselhoarder from "../pool/morselhoarder.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
+import _poolMountainStronghold from "../pool/mountain-stronghold.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
@@ -1231,6 +1233,7 @@ const shard: CardShard = {
     _poolMartyrsCry,
     _poolMaskedGorgon,
     _poolMasterHealer,
+    _poolMasterOfTheHunt,
     _poolMawcor,
     _poolMeetingOfTheFive,
     _poolMemnarchTheWarden,
@@ -1248,6 +1251,7 @@ const shard: CardShard = {
     _poolMoonshadow,
     _poolMorselhoarder,
     _poolMortalsResolve,
+    _poolMountainStronghold,
     _poolMoxJet,
     _poolMukotaiAmbusher,
     _poolMultanisAcolyte,

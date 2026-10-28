@@ -571,6 +571,7 @@ import _poolScreamingSwarm from "../pool/screaming-swarm.js";
 import _poolScrivener from "../pool/scrivener.js";
 import _poolScytheLeopard from "../pool/scythe-leopard.js";
 import _poolSeachromeCoast from "../pool/seachrome-coast.js";
+import _poolSeafarersQuay from "../pool/seafarers-quay.js";
 import _poolSeafaringWerewolf from "../pool/seafaring-werewolf.js";
 import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSeamRip from "../pool/seam-rip.js";
@@ -1405,6 +1406,7 @@ const shard: CardShard = {
     _poolScrivener,
     _poolScytheLeopard,
     _poolSeachromeCoast,
+    _poolSeafarersQuay,
     _poolSeafaringWerewolf,
     _poolSeagrafSkaab,
     _poolSeamRip,

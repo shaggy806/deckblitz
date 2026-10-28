@@ -757,6 +757,7 @@ import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
 import _poolWanderingMage from "../pool/wandering-mage.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
+import _poolWarElephant from "../pool/war-elephant.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
 import _poolWarpedPhysique from "../pool/warped-physique.js";
@@ -815,6 +816,7 @@ import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-ara
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
 import _tokensWhiteDogToken11 from "../tokens/white-dog-token-1-1.js";
+import _tokensWolvesOfTheHunt from "../tokens/wolves-of-the-hunt.js";
 import _tokensZeppelin from "../tokens/zeppelin.js";
 import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
 
@@ -1574,6 +1576,7 @@ const shard: CardShard = {
     _poolWallOfAir,
     _poolWanderingMage,
     _poolWarBalloon,
+    _poolWarElephant,
     _poolWargate,
     _poolWargling,
     _poolWarpedPhysique,
@@ -1634,6 +1637,7 @@ const shard: CardShard = {
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensSturdyShieldToken,
     _tokensWhiteDogToken11,
+    _tokensWolvesOfTheHunt,
     _tokensZeppelin,
     _tokensZombieDruidToken,
   ],

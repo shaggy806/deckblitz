@@ -713,6 +713,7 @@ import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
+import _poolTimberWolves from "../pool/timber-wolves.js";
 import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
 import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
@@ -1526,6 +1527,7 @@ const shard: CardShard = {
     _poolThroatSlitter,
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
+    _poolTimberWolves,
     _poolTimeLordRegeneration,
     _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,

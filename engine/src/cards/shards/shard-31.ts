@@ -483,6 +483,7 @@ import _poolMechHangar from "../pool/mech-hangar.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
+import _poolMesaPegasus from "../pool/mesa-pegasus.js";
 import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
 import _poolMindBurst from "../pool/mind-burst.js";
@@ -1363,6 +1364,7 @@ const shard: CardShard = {
     _poolMechanizedWarfare,
     _poolMendTheWilds,
     _poolMerchantOfTruth,
+    _poolMesaPegasus,
     _poolMetamorphose,
     _poolMidnightCovenant,
     _poolMindBurst,

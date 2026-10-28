@@ -110,6 +110,7 @@ import _poolCarrionImp from "../pool/carrion-imp.js";
 import _poolCartographer from "../pool/cartographer.js";
 import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
+import _poolCathedralOfSerra from "../pool/cathedral-of-serra.js";
 import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCaveOfTheFrostDragon from "../pool/cave-of-the-frost-dragon.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
@@ -977,6 +978,7 @@ const shard: CardShard = {
     _poolCartographer,
     _poolCatGator,
     _poolCatharsCrusade,
+    _poolCathedralOfSerra,
     _poolCausticRain,
     _poolCaveOfTheFrostDragon,
     _poolCecilyHauntedMage,

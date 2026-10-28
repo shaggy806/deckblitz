@@ -615,6 +615,7 @@ import _poolSeverSoul from "../pool/sever-soul.js";
 import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolSharktocrab from "../pool/sharktocrab.js";
+import _poolShelkinBrownie from "../pool/shelkin-brownie.js";
 import _poolShepherdOfTheFlock from "../pool/shepherd-of-the-flock.js";
 import _poolShieldedPassage from "../pool/shielded-passage.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
@@ -1426,6 +1427,7 @@ const shard: CardShard = {
     _poolShadowstormVizier,
     _poolShaperGuildmage,
     _poolSharktocrab,
+    _poolShelkinBrownie,
     _poolShepherdOfTheFlock,
     _poolShieldedPassage,
     _poolShipwreckDowser,
