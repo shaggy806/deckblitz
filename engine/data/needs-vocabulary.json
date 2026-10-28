@@ -13762,6 +13762,16 @@
    "family": "zone:play-from-exile-with-counter",
    "description": "A standing permission to cast Dinosaur creature spells from among cards you own exiled with this, entering with a finality counter.",
    "example": "Intrepid Paleontologist: cast Dinosaurs from among cards you own exiled with it; each enters with a finality counter."
+  },
+  "trigger:granted-trigger-condition-look-back": {
+   "family": "bug:lki-leaves-battlefield-triggers",
+   "description": "A condition gating a granted leaves-the-battlefield trigger (threshold's 'as long as seven or more cards …, this has \"whenever a creature is put into your graveyard …\"') asked as things were just before the event (rule 603.10a): today it's asked after, so the creature that makes the seventh card triggers it.",
+   "example": "Decaying Soil: the threshold-granted dies trigger fires for the creature that makes the seventh card (tested), against the ruling."
+  },
+  "effect:cast-now-once-each-turn-if-cast": {
+   "family": "effect:cast-during-resolution",
+   "description": "A cast-now offer limited to once each turn, the turn's use spent only when the card is actually cast ('look at the top card … you may cast it … Do this only once each turn').",
+   "example": "Planetarium of Wan Shi Tong: whenever you scry or surveil, look at the top card and you may cast it free, only once each turn — spent only by a cast."
   }
  },
  "groups": [

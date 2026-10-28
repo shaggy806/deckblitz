@@ -344,6 +344,7 @@ import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
+import _poolHoodedBlightfang from "../pool/hooded-blightfang.js";
 import _poolHornetCannon from "../pool/hornet-cannon.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
@@ -437,6 +438,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMeltTerrain from "../pool/melt-terrain.js";
+import _poolMichikoKondaTruthSeeker from "../pool/michiko-konda-truth-seeker.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
@@ -1155,6 +1157,7 @@ const shard: CardShard = {
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
+    _poolHoodedBlightfang,
     _poolHornetCannon,
     _poolHostileTakeover,
     _poolHourOfReckoning,
@@ -1248,6 +1251,7 @@ const shard: CardShard = {
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
     _poolMeltTerrain,
+    _poolMichikoKondaTruthSeeker,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMinionOfLeshrac,

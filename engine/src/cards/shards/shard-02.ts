@@ -94,6 +94,7 @@ import _poolCabalCoffers from "../pool/cabal-coffers.js";
 import _poolCallForBlood from "../pool/call-for-blood.js";
 import _poolCampaignOfVengeance from "../pool/campaign-of-vengeance.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
+import _poolCarrotCake from "../pool/carrot-cake.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCastDown from "../pool/cast-down.js";
 import _poolCastawaysDespair from "../pool/castaways-despair.js";
@@ -151,6 +152,7 @@ import _poolCycloneSummoner from "../pool/cyclone-summoner.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
 import _poolCyclopeanSnare from "../pool/cyclopean-snare.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
+import _poolDaemogothWoeEater from "../pool/daemogoth-woe-eater.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
 import _poolDamningVerdict from "../pool/damning-verdict.js";
 import _poolDarkKnightsGreatsword from "../pool/dark-knights-greatsword.js";
@@ -903,6 +905,7 @@ const shard: CardShard = {
     _poolCallForBlood,
     _poolCampaignOfVengeance,
     _poolCaptivatingCave,
+    _poolCarrotCake,
     _poolCastAwayDoubt,
     _poolCastDown,
     _poolCastawaysDespair,
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolCyclonicRift,
     _poolCyclopeanSnare,
     _poolCyclopsOfOneEyedPass,
+    _poolDaemogothWoeEater,
     _poolDaggermawMegalodon,
     _poolDamningVerdict,
     _poolDarkKnightsGreatsword,

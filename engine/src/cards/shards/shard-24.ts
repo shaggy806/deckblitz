@@ -114,6 +114,7 @@ import _poolCauldronDance from "../pool/cauldron-dance.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
 import _poolCavernHarpy from "../pool/cavern-harpy.js";
+import _poolCecilDarkKnight from "../pool/cecil-dark-knight.js";
 import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
@@ -940,6 +941,7 @@ const shard: CardShard = {
     _poolCausticExhale,
     _poolCavernCrawler,
     _poolCavernHarpy,
+    _poolCecilDarkKnight,
     _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,

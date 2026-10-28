@@ -763,6 +763,7 @@ import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
+import _poolVisionsOfBrutality from "../pool/visions-of-brutality.js";
 import _poolVitalSplicer from "../pool/vital-splicer.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVodalianMindsinger from "../pool/vodalian-mindsinger.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,
+    _poolVisionsOfBrutality,
     _poolVitalSplicer,
     _poolVodalianHypnotist,
     _poolVodalianMindsinger,

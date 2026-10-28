@@ -714,6 +714,7 @@ import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
+import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
@@ -1571,6 +1572,7 @@ const shard: CardShard = {
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,
     _poolTheLegendOfKyoshi,
+    _poolTheRedTerror,
     _poolTheShire,
     _poolThornMammoth,
     _poolThornglintBridge,

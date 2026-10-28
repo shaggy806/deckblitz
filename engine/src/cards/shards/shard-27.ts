@@ -281,6 +281,7 @@ import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolGuiltfeeder from "../pool/guiltfeeder.js";
+import _poolGuiltyConscience from "../pool/guilty-conscience.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
@@ -1087,6 +1088,7 @@ const shard: CardShard = {
     _poolGuardianNaga,
     _poolGuidelightSynergist,
     _poolGuiltfeeder,
+    _poolGuiltyConscience,
     _poolGyrusWakerOfCorpses,
     _poolHaloHunter,
     _poolHarvestGwyllion,

@@ -353,6 +353,7 @@ import _poolHavengulSkaab from "../pool/havengul-skaab.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHealingLeaves from "../pool/healing-leaves.js";
+import _poolHeapedHarvest from "../pool/heaped-harvest.js";
 import _poolHeartstabberMosquito from "../pool/heartstabber-mosquito.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
@@ -1211,6 +1212,7 @@ const shard: CardShard = {
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
     _poolHealingLeaves,
+    _poolHeapedHarvest,
     _poolHeartstabberMosquito,
     _poolHelmutZemoMastermind,
     _poolHeraldOfDromoka,

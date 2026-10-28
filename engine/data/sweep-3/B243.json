@@ -1,0 +1,453 @@
+{
+  "batch": "B243",
+  "status": "complete",
+  "ranks": "The need-keys recheck list R9 (Phase 1 step 2)",
+  "authored": [
+    {
+      "name": "Angel of Deliverance",
+      "files": [
+        "engine/src/cards/pool/angel-of-deliverance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Biolume Egg // Biolume Serpent",
+      "files": [
+        "engine/src/cards/pool/biolume-egg.ts",
+        "engine/src/cards/pool/biolume-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carrot Cake",
+      "files": [
+        "engine/src/cards/pool/carrot-cake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cecil, Dark Knight // Cecil, Redeemed Paladin",
+      "files": [
+        "engine/src/cards/pool/cecil-dark-knight.ts",
+        "engine/src/cards/pool/cecil-redeemed-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daemogoth Woe-Eater",
+      "files": [
+        "engine/src/cards/pool/daemogoth-woe-eater.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Darien, King of Kjeldor",
+      "files": [
+        "engine/src/cards/pool/darien-king-of-kjeldor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Disturbing Mirth",
+      "files": [
+        "engine/src/cards/pool/disturbing-mirth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dropkick Bomber",
+      "files": [
+        "engine/src/cards/pool/dropkick-bomber.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "El-Hajjâj",
+      "files": [
+        "engine/src/cards/pool/el-hajjaj.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Guilty Conscience",
+      "files": [
+        "engine/src/cards/pool/guilty-conscience.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Heaped Harvest",
+      "files": [
+        "engine/src/cards/pool/heaped-harvest.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hooded Blightfang",
+      "files": [
+        "engine/src/cards/pool/hooded-blightfang.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Matoya, Archon Elder",
+      "files": [
+        "engine/src/cards/pool/matoya-archon-elder.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Michiko Konda, Truth Seeker",
+      "files": [
+        "engine/src/cards/pool/michiko-konda-truth-seeker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Olivia's Attendants",
+      "files": [
+        "engine/src/cards/pool/olivias-attendants.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ordeal of Nylea",
+      "files": [
+        "engine/src/cards/pool/ordeal-of-nylea.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Quintessential Katana",
+      "files": [
+        "engine/src/cards/pool/quintessential-katana.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rashmi, Eternities Crafter",
+      "files": [
+        "engine/src/cards/pool/rashmi-eternities-crafter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Red Terror",
+      "files": [
+        "engine/src/cards/pool/the-red-terror.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urban Retreat",
+      "files": [
+        "engine/src/cards/pool/urban-retreat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Visions of Brutality",
+      "files": [
+        "engine/src/cards/pool/visions-of-brutality.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Lulu, Stern Guardian",
+      "needs": [
+        "target:creature-attacking-you-player-only"
+      ],
+      "why": "The attacks-player trigger is player-only now, but the `creature-attacking-you` target still admits creatures attacking your planeswalkers; Lulu's ruling says only you."
+    },
+    {
+      "name": "Meriadoc Brandybuck",
+      "needs": [
+        "trigger:attacks-player-filter"
+      ],
+      "why": "'One or more Halflings you control attack a player': attacks-player fires once per player attacked but has no attacker filter."
+    },
+    {
+      "name": "The Earth King",
+      "needs": [
+        "trigger:attack-with-count-amount"
+      ],
+      "why": "attack-with gives no count of the matching attackers for 'up to that many' basic lands."
+    },
+    {
+      "name": "Generous Patron",
+      "needs": [
+        "trigger:counters-put-any-kind-once"
+      ],
+      "why": "counters-put fires once per counter kind, so proliferating a creature with two kinds would draw two cards."
+    },
+    {
+      "name": "Wildwood Scourge",
+      "needs": [
+        "trigger:counters-put-other"
+      ],
+      "why": "'Another non-Hydra creature': counters-put has no otherOnly, and the Hydra filter alone counts Scourge once it stops being a Hydra."
+    },
+    {
+      "name": "Arcbond",
+      "needs": [
+        "effect:delayed-whenever-about-target"
+      ],
+      "why": "An until-end-of-turn 'whenever that creature is dealt damage' about the target creature, with it as the damage source: the delayed whenever watch can only name the creating object."
+    },
+    {
+      "name": "Blazing Sunsteel",
+      "needs": [
+        "static:pt-per-opponent"
+      ],
+      "why": "'+1/+0 for each opponent you have': grantPtPerCount counts no players. The damage trigger itself is dealt-damage `who: \"attached\"` with `from: \"trigger-object\"`."
+    },
+    {
+      "name": "Dragonborn Champion",
+      "needs": [
+        "trigger:deals-damage-amount-threshold"
+      ],
+      "why": "'Deals 5 or more damage to a player': deals-damage has `exactly` but no N-or-more, and a trigger-value condition is only asked as an effect resolves."
+    },
+    {
+      "name": "Spinneret and Spiderling",
+      "needs": [
+        "trigger:deals-damage-amount-threshold"
+      ],
+      "why": "'Deals 4 or more damage', summed once per event (now built), but no N-or-more gate on the trigger."
+    },
+    {
+      "name": "Obelisk Spider",
+      "needs": [
+        "trigger:trigger-recipient-ref"
+      ],
+      "why": "'Put a -1/-1 counter on that creature' (the creature dealt combat damage): add-counter takes no trigger-recipient target."
+    },
+    {
+      "name": "Vengeful Pharaoh",
+      "needs": [
+        "trigger:combat-damage-to-you-or-your-planeswalkers-batch"
+      ],
+      "why": "'Whenever combat damage is dealt to you or a planeswalker you control', once per event from the graveyard: deals-damage-batch reaches players only."
+    },
+    {
+      "name": "Arashin War Beast",
+      "needs": [
+        "trigger:deals-damage-to-recipients-once-per-event"
+      ],
+      "why": "'Deals combat damage to one or more blocking creatures' once per step: a deals-damage trigger naming a recipient fires once per recipient."
+    },
+    {
+      "name": "Briarbridge Patrol",
+      "needs": [
+        "trigger:deals-damage-to-recipients-once-per-event"
+      ],
+      "why": "'Deals damage to one or more creatures' once per event (the ruling): with a recipient named, deals-damage fires once per creature."
+    },
+    {
+      "name": "Justice",
+      "needs": [
+        "filter:creature-or-spell-source"
+      ],
+      "why": "'Whenever a red creature or spell deals damage': no source filter reads 'a creature or a spell', and red alone also matches a red noncreature permanent."
+    },
+    {
+      "name": "The Council of Four",
+      "needs": [
+        "trigger:nth-each-turn-during-own-turn"
+      ],
+      "why": "A player's second draw / second spell *during their turn*: nthEachTurn counts any turn and there's no 'the actor is the active player' clause."
+    },
+    {
+      "name": "Gaea's Blessing",
+      "needs": [
+        "trigger:self-put-into-graveyard-from-library"
+      ],
+      "why": "'When this card is put into your graveyard from your library' — no self trigger of the milled card."
+    },
+    {
+      "name": "Bomb Squad",
+      "needs": [
+        "trigger:state-trigger-per-permanent"
+      ],
+      "why": "'Whenever a creature has four or more fuse counters on it … destroy it': on: \"state\" takes only a condition, with no matching creature as the trigger object."
+    },
+    {
+      "name": "Olivia, Crimson Bride",
+      "needs": [
+        "effect:grant-state-trigger-to-returned-card"
+      ],
+      "why": "The returned creature gains 'When you don't control a legendary Vampire, exile this creature': put-onto-battlefield grants nothing, and a granted state trigger is unproven."
+    },
+    {
+      "name": "Coveted Jewel",
+      "needs": [
+        "trigger:attacks-you-unblocked-batch"
+      ],
+      "why": "'One or more creatures an opponent controls attack you and aren't blocked' once per batch: attacks-unblocked fires per attacker."
+    },
+    {
+      "name": "Arvinox, the Mind Flail",
+      "needs": [
+        "zone:exile-library-bottom-face-down-cast-permanents"
+      ],
+      "why": "The bottom card of each opponent's library exiled face down, lookable, castable as permanent spells with any-color mana for as long as it stays exiled: impulse-exile takes the top."
+    },
+    {
+      "name": "Dire Fleet Daredevil",
+      "needs": [
+        "zone:exile-maycast-exile-instead"
+      ],
+      "why": "exile's mayCast (end-of-turn, any-type) is there, but not 'if that spell would be put into a graveyard, exile it instead'."
+    },
+    {
+      "name": "Thada Adel, Acquisitor",
+      "needs": [
+        "effect:search-opponent-library-exile-play"
+      ],
+      "why": "search-library can't search that player's library into exile with a play-this-turn permission."
+    },
+    {
+      "name": "Assemble the Players",
+      "needs": [
+        "zone:cast-from-library-top-once-each-turn"
+      ],
+      "why": "castFromLibraryTop has the filter but no once-each-turn limit."
+    },
+    {
+      "name": "Fblthp, Lost on the Range",
+      "needs": [
+        "zone:plot-from-library-top"
+      ],
+      "why": "Granting plot to the top card of the library and plotting from there."
+    },
+    {
+      "name": "Gwenom, Remorseless",
+      "needs": [
+        "effect:play-from-library-top-this-turn",
+        "cost:pay-life-equal-mv-instead-of-mana"
+      ],
+      "why": "A one-shot until-end-of-turn play-from-top permission, with spells cast that way costing life equal to their mana value."
+    },
+    {
+      "name": "Into the Pit",
+      "needs": [
+        "zone:cast-from-library-top-extra-cost"
+      ],
+      "why": "castFromLibraryTop has no additional 'sacrifice a nonland permanent' cost."
+    },
+    {
+      "name": "Inverter of Truth",
+      "needs": [
+        "effect:exile-library-face-down"
+      ],
+      "why": "exile-from-library has no face-down option (the ruling: no one may look)."
+    },
+    {
+      "name": "Thief of Sanity",
+      "needs": [
+        "effect:look-opponent-library-exile-one-face-down"
+      ],
+      "why": "Top three of that player's library: one exiled face down castable while exiled (any type), the rest into their graveyard — impulse-exile's choose leaves the rest exiled."
+    },
+    {
+      "name": "Vivien, Champion of the Wilds",
+      "needs": [
+        "effect:look-exile-face-down-cast-while-exiled"
+      ],
+      "why": "−2's exiled card is castable for as long as it remains exiled if it's a creature spell: look-and-choose's exile has no standing permission (cast-now is during resolution only)."
+    },
+    {
+      "name": "Aerial Extortionist",
+      "needs": [
+        "zone:exile-owner-may-cast-now"
+      ],
+      "why": "'Its owner may cast it for as long as it remains exiled' from now: laterTurns starts next turn and mayCast is the controller's."
+    },
+    {
+      "name": "Cruelclaw's Heist",
+      "needs": [
+        "effect:exile-chosen-from-revealed-hand-may-cast"
+      ],
+      "why": "Exiling a card you choose from a revealed hand, with a gift-conditional cast-while-exiled any-type permission."
+    },
+    {
+      "name": "Hurl Through Hell",
+      "needs": [
+        "effect:exile-may-cast-until-your-next-turn"
+      ],
+      "why": "exile's mayCast lasts this turn or while exiled, not until the end of your next turn."
+    },
+    {
+      "name": "Kheru Spellsnatcher",
+      "needs": [
+        "effect:cast-free-while-exiled"
+      ],
+      "why": "Counter-and-exile is there; casting the card free for as long as it remains exiled is not."
+    },
+    {
+      "name": "Spelljack",
+      "needs": [
+        "effect:cast-free-while-exiled"
+      ],
+      "why": "Playing the countered card free for as long as it remains exiled."
+    },
+    {
+      "name": "Thranduil's Decree",
+      "needs": [
+        "effect:cast-free-while-exiled"
+      ],
+      "why": "Casting the countered permanent card free for as long as it remains exiled."
+    },
+    {
+      "name": "Nivix, Aerie of the Firemind",
+      "needs": [
+        "zone:impulse-until-your-next-turn-begins"
+      ],
+      "why": "The permission ends as your next turn begins; `your-next-turn` lasts until it ends."
+    },
+    {
+      "name": "Norin, Swift Survivalist",
+      "needs": [
+        "zone:exile-trigger-object-play-this-turn"
+      ],
+      "why": "Exiling the blocked creature with a *play* permission this turn: exile's mayCast is cast-only."
+    },
+    {
+      "name": "Share the Spoils",
+      "needs": [
+        "zone:shared-impulse-pool-each-player"
+      ],
+      "why": "A pool of exiled cards each player may play from on their own turn, re-exiling on use, and a 'whenever an opponent loses the game' trigger."
+    },
+    {
+      "name": "Tablet of Discovery",
+      "needs": [
+        "zone:play-milled-card-this-turn"
+      ],
+      "why": "'You may play that card this turn' on the milled card, lands included."
+    },
+    {
+      "name": "Intrepid Paleontologist",
+      "needs": [
+        "zone:cast-from-exiled-with-source-enters-finality"
+      ],
+      "why": "Casting Dinosaurs from among cards you own exiled with it, each entering with a finality counter."
+    },
+    {
+      "name": "Decaying Soil",
+      "needs": [
+        "trigger:granted-trigger-condition-look-back"
+      ],
+      "why": "A threshold-granted dies trigger is checked after the event: tested, the creature that makes the seventh card still triggers it, and the ruling (rule 603.10a) says it mustn't."
+    },
+    {
+      "name": "Planetarium of Wan Shi Tong",
+      "needs": [
+        "effect:cast-now-once-each-turn-if-cast"
+      ],
+      "why": "'Do this only once each turn' is spent only by casting the card (the ruling): a trigger oncePerTurn stops it after a scry where nothing was cast, and a may with oncePerTurn asks before the card is seen."
+    }
+  ]
+}

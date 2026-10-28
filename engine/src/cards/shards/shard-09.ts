@@ -24,6 +24,7 @@ import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAmrouScout from "../pool/amrou-scout.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
+import _poolAngelOfDeliverance from "../pool/angel-of-deliverance.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolAngelicAscension from "../pool/angelic-ascension.js";
 import _poolAnimusOfPredation from "../pool/animus-of-predation.js";
@@ -476,6 +477,7 @@ import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
 import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
 import _poolOgreArsonist from "../pool/ogre-arsonist.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
+import _poolOliviasAttendants from "../pool/olivias-attendants.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOnduCleric from "../pool/ondu-cleric.js";
@@ -865,6 +867,7 @@ const shard: CardShard = {
     _poolAmrouScout,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
+    _poolAngelOfDeliverance,
     _poolAngelfireCrusader,
     _poolAngelicAscension,
     _poolAnimusOfPredation,
@@ -1317,6 +1320,7 @@ const shard: CardShard = {
     _poolOfficiousInterrogation,
     _poolOgreArsonist,
     _poolOliphaunt,
+    _poolOliviasAttendants,
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOnduCleric,
