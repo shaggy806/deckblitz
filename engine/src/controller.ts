@@ -20,7 +20,7 @@ import { abilityLifeCost } from "./abilities.js";
 import { convokeProofFor, defaultTapPicks, delvePicks, fitModeSet, tapPicksPower } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
-import { standardAssignment } from "./combat/damage.js";
+import { defaultAssignment } from "./combat/damage.js";
 import type { DamageAssignmentOffer } from "./combat/damage.js";
 import { polarityBias } from "./deck-bias.js";
 import { matchesFilter } from "./filter.js";
@@ -178,6 +178,11 @@ export interface PlayerController {
       readonly lethal: readonly number[];
       readonly trample: boolean;
       readonly indestructible: readonly boolean[];
+      /** The answering player doesn't control the creature (banding —
+       * rules 702.22j-k). */
+      readonly forOpponent?: boolean;
+      /** The creature is a blocker dividing among a band (510.1d). */
+      readonly blocking?: boolean;
     },
   ): readonly number[];
   /**
@@ -485,7 +490,8 @@ const firstOfEach = (
 /**
  * The standard combat-damage assignment: kill as many blockers as possible,
  * the ones needing least first, then trample the rest over or leave it on a
- * blocker (see `standardAssignment`).
+ * blocker (see `standardAssignment`) — or, when banding hands the division
+ * to the other side (rules 702.22j-k), theirs (`defaultAssignment`).
  *
  * Kept under this name because it is on the engine's public seam
  * (`export * from "./controller.js"`). The implementation moved to
@@ -493,7 +499,7 @@ const firstOfEach = (
  * had byte-identical loops, so a rules fix to either would have disagreed
  * with the other.
  */
-export const standardDamageAssignment = standardAssignment;
+export const standardDamageAssignment = defaultAssignment;
 
 /**
  * Answer whatever the engine is waiting on, or `null` if it isn't waiting.
@@ -965,6 +971,8 @@ type DamageAssigner = (
     readonly lethal: readonly number[];
     readonly trample: boolean;
     readonly indestructible: readonly boolean[];
+    readonly forOpponent?: boolean;
+    readonly blocking?: boolean;
   },
 ) => readonly number[];
 
@@ -1107,6 +1115,11 @@ export class ScriptedController implements PlayerController {
       readonly lethal: readonly number[];
       readonly trample: boolean;
       readonly indestructible: readonly boolean[];
+      /** The answering player doesn't control the creature (banding —
+       * rules 702.22j-k). */
+      readonly forOpponent?: boolean;
+      /** The creature is a blocker dividing among a band (510.1d). */
+      readonly blocking?: boolean;
     },
   ): readonly number[] {
     return this.assignCombatDamageFn(view, a);

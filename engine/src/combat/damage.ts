@@ -24,8 +24,9 @@
 
 import type { CardRegistry } from "../cards.js";
 import { assignedCombatDamage, computeCharacteristics, objHasKeyword } from "../characteristics.js";
-import type { ObjectId } from "../primitives.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { blockedAttackersOf, damageAssigner, opposedAssignment } from "./banding.js";
 
 /** The blockers of `attackerId` that are still on the battlefield and still
  * blocking — one may have been removed in response after blocks were
@@ -127,6 +128,14 @@ export function standardAssignment(offer: DamageAssignmentOffer): number[] {
   return amounts;
 }
 
+/** The answer nobody has to think about: {@link standardAssignment}, or —
+ * when banding hands the division to the other side (rules 702.22j-k) —
+ * theirs, killing as little as it can (`opposedAssignment`). Every
+ * controller's default and the decision's random answer start from it. */
+export function defaultAssignment(offer: DamageAssignmentOffer & { readonly forOpponent?: boolean }): number[] {
+  return offer.forOpponent === true ? opposedAssignment(offer) : standardAssignment(offer);
+}
+
 /** {@link standardAssignment} with the offer read off the board — what the
  * engine assigns when {@link needsDamageAssignmentChoice} says there is no
  * choice worth asking about. */
@@ -135,13 +144,66 @@ export function autoAssignForAttacker(
   registry: CardRegistry,
   attackerId: ObjectId,
 ): number[] {
-  const live = liveBlockersOf(state, attackerId);
-  return standardAssignment({
-    power: assignedCombatDamage(state, registry, attackerId),
-    lethal: live.map((blockerId) => lethalFor(state, registry, attackerId, blockerId)),
-    trample: objHasKeyword(state, registry, attackerId, "trample"),
-    indestructible: live.map((blockerId) => objHasKeyword(state, registry, blockerId, "indestructible")),
-  });
+  return autoAssignFor(state, registry, attackerId);
+}
+
+/**
+ * What a creature dealing combat damage divides it among: an attacker, the
+ * creatures blocking it (rule 510.1c); a blocker, the attackers it blocks —
+ * more than one only when it blocked a band (510.1d, 702.22h). In
+ * declaration order.
+ */
+export function damageRecipientsOf(state: GameState, dealerId: ObjectId): ObjectId[] {
+  return state.objects[dealerId]?.attacking !== null
+    ? liveBlockersOf(state, dealerId)
+    : blockedAttackersOf(state, dealerId);
+}
+
+/** The whole question of how `dealerId` divides its combat damage, read off
+ * the board: who decides it (banding may hand it to the other side — rules
+ * 702.22j-k), among what, and the numbers the answer is checked against. */
+export interface DamageQuestion extends DamageAssignmentOffer {
+  readonly player: PlayerId;
+  readonly recipients: readonly ObjectId[];
+  readonly indestructible: readonly boolean[];
+  /** The dealer is a blocker (510.1d). */
+  readonly blocking: boolean;
+  /** `player` doesn't control the dealer. */
+  readonly forOpponent: boolean;
+}
+
+export function damageQuestionFor(state: GameState, registry: CardRegistry, dealerId: ObjectId): DamageQuestion {
+  const recipients = damageRecipientsOf(state, dealerId);
+  const blocking = state.objects[dealerId].attacking === null;
+  const player = damageAssigner(state, registry, dealerId, recipients);
+  return {
+    player,
+    recipients,
+    power: assignedCombatDamage(state, registry, dealerId),
+    lethal: recipients.map((r) => lethalFor(state, registry, dealerId, r)),
+    // Trample is an attacker's only (rule 702.19a).
+    trample: !blocking && objHasKeyword(state, registry, dealerId, "trample"),
+    indestructible: recipients.map((r) => objHasKeyword(state, registry, r, "indestructible")),
+    blocking,
+    forOpponent: player !== state.objects[dealerId].controller,
+  };
+}
+
+/** The division made without asking: the standard one, or — when the other
+ * side divides it (banding) — theirs ({@link opposedAssignment}). */
+export function autoAssignFor(state: GameState, registry: CardRegistry, dealerId: ObjectId): number[] {
+  const question = damageQuestionFor(state, registry, dealerId);
+  return question.forOpponent ? opposedAssignment(question) : standardAssignment(question);
+}
+
+/** Whether a blocker blocking a band has a division to make: two or more
+ * attackers left to deal its damage to (rule 510.1d). */
+export function blockerNeedsDamageAssignmentChoice(
+  state: GameState,
+  registry: CardRegistry,
+  blockerId: ObjectId,
+): boolean {
+  return blockedAttackersOf(state, blockerId).length >= 2 && assignedCombatDamage(state, registry, blockerId) > 0;
 }
 
 /**

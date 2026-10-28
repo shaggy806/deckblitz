@@ -1072,8 +1072,18 @@ export interface GameObject {
   /** What this creature is attacking — a player, or an opponent's planeswalker
    * (rule 508.1) — or `null` if not attacking. */
   attacking: PlayerId | ObjectId | null;
-  /** The attacker this creature is blocking, or `null` if not blocking. */
+  /** The attacker this creature is blocking, or `null` if not blocking —
+   * the one it was declared blocking. */
   blocking: ObjectId | null;
+  /** The other attackers it blocks: the rest of a band it blocked (rule
+   * 702.22h). Absent for a creature blocking one attacker, which is every
+   * other block. `blockedAttackersOf` reads both. */
+  blockingAlso?: ObjectId[];
+  /** The band this attacker is in (rule 702.22c), as the id of its first
+   * declared member — a label only: the creatures banded with it are the
+   * other attackers with the same `band`. Lasts the rest of combat (702.22e)
+   * and goes as it leaves combat (702.22f). */
+  band?: ObjectId;
   /** Blockers assigned to this attacker, in damage-assignment order. */
   blockedBy: ObjectId[];
   /** True once this attacker has been blocked (even if the blockers later die). */
@@ -3300,6 +3310,13 @@ export type AwaitingDecision =
       /** How many attackers pending after this one are in the same situation
        * (`Game.damageSituation`), which an answer's `forAll` covers. */
       readonly alike?: number;
+      /** The creature dividing its damage is a **blocker** blocking several
+       * attackers — a band (rules 510.1d, 702.22h): `attacker` names the
+       * blocker and `blockers` the attackers it's blocking. Never tramples. */
+      readonly blocking?: true;
+      /** `player` doesn't control the creature: banding hands the division
+       * to the other side (rules 702.22j-k). */
+      readonly forOpponent?: true;
     };
 
 /**

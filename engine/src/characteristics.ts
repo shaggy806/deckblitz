@@ -1172,6 +1172,10 @@ export interface Characteristics {
     readonly types: ReadonlySet<CardType>;
     readonly filters: readonly CardFilter[];
   };
+  /** Each "bands with other [quality]" it has (rule 702.22b), the quality as
+   * a filter — none lost to a later loss of banding or of "bands with
+   * other" (Tolaria, Shelkin Brownie). Read by `combat/banding.ts`. */
+  readonly bandsWithOther: readonly CardFilter[];
 }
 
 /** A static's protection as it applies now: "the chosen color" read off the
@@ -2972,6 +2976,8 @@ interface AppliedEffect {
     types?: readonly CardType[];
     filter?: CardFilter;
   } | null;
+  /** "Bands with other [quality]" it grants (rule 702.22b). */
+  readonly bandsWithOther: CardFilter | null;
   /** Layer 7b — a `setBasePt`. */
   readonly setBase: { readonly power?: number; readonly toughness?: number } | null;
 }
@@ -3044,6 +3050,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.cantBeSacrificed === true ||
     ability.protection !== undefined ||
     ability.hexproofFrom !== undefined ||
+    ability.bandsWithOther !== undefined ||
     ability.setBasePt !== undefined
   );
 }
@@ -3251,6 +3258,7 @@ function collectStaticEffects(
       cantBeSacrificed: ability.cantBeSacrificed === true,
       protection: staticProtection(ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
+      bandsWithOther: ability.bandsWithOther ?? null,
       setBase: ability.setBasePt ?? null,
     };
   };
@@ -3301,6 +3309,7 @@ function collectStaticEffects(
       cantBeSacrificed: ability.cantBeSacrificed === true,
       protection: ability.protection ?? null,
       hexproofFrom: ability.hexproofFrom ?? null,
+      bandsWithOther: ability.bandsWithOther ?? null,
       setBase: null,
     });
   }
@@ -3406,6 +3415,7 @@ function assertSameCharacteristics(
       hexColors: [...c.hexproofFrom.colors].sort(),
       hexTypes: [...c.hexproofFrom.types].sort(),
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
+      bandsWithOther: c.bandsWithOther.map((f) => JSON.stringify(f)).sort(),
     });
   const a = show(cached);
   const b = show(fresh);
@@ -3478,6 +3488,7 @@ function computeCharacteristicsUncached(
   const hexColors = new Set<Color>();
   const hexTypes = new Set<CardType>();
   const hexFilters: CardFilter[] = [];
+  const bandsWithOther: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
   let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
@@ -3522,6 +3533,16 @@ function computeCharacteristicsUncached(
       for (const c of effect.hexproofFrom.colors ?? []) hexColors.add(c);
       for (const t of effect.hexproofFrom.types ?? []) hexTypes.add(t);
       if (effect.hexproofFrom.filter !== undefined) hexFilters.push(effect.hexproofFrom.filter);
+    }
+    // "Bands with other" goes with a later loss of it, or of banding (rule
+    // 702.22b).
+    if (
+      effect.bandsWithOther !== null &&
+      granted &&
+      !lostAfter(losses, "bands-with-other", effect.timestamp) &&
+      !lostAfter(losses, "banding", effect.timestamp)
+    ) {
+      bandsWithOther.push(effect.bandsWithOther);
     }
   }
   // A spell's keywords from what grants them to spells (`grantsToSpells`).
@@ -3659,6 +3680,8 @@ function computeCharacteristicsUncached(
   // Decayed's static half (rule 702.147a): "This creature can't block" — for
   // as long as it has the keyword, however it got it.
   if (keywords.has("decayed")) restrictions.add("cant-block");
+  // What "bands with other" shows as, and what a loss of it names (702.22b).
+  if (bandsWithOther.length > 0) keywords.add("bands-with-other");
   // Unleash's static half (rule 702.98a): "This permanent can't block as
   // long as it has a +1/+1 counter on it" — any +1/+1 counter, not only
   // the one unleash put there (the ruling).
@@ -3688,6 +3711,7 @@ function computeCharacteristicsUncached(
       ...(protSparing.length > 0 ? { sparing: { otherColors: protOtherColors, instances: protSparing } } : {}),
     },
     hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters },
+    bandsWithOther,
   };
 }
 

@@ -1323,6 +1323,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Horsemanship (This creature can't be blocked except by creatures with horsemanship.)").keywords).toEqual([
       "horsemanship",
     ]);
+    // Banding (rule 702.22), and "bands with other" granted, lost, and read.
+    expect(face("Flying; banding (Any creatures with banding, and up to one without, can attack in a band.)").keywords).toEqual([
+      "flying",
+      "banding",
+    ]);
+    expect(face('Red legendary creatures you control have "bands with other legendary creatures."').static).toEqual([
+      {
+        affects: { scope: "filter", filter: { type: "creature", supertype: "legendary", colors: ["R"], controlledBy: "you" } },
+        bandsWithOther: { type: "creature", supertype: "legendary" },
+        text: 'Red legendary creatures you control have "bands with other legendary creatures."',
+      },
+    ]);
+    expect(
+      face('{T}: Target creature loses banding and all "bands with other" abilities until end of turn.').activated[0].effect,
+    ).toEqual({ kind: "lose-keywords", target: 0, keywords: ["banding", "bands-with-other"], duration: "end-of-turn" });
+    expect(face("{3}: Attacking creatures banded with this creature gain trample until end of turn.").activated[0].effect).toEqual({
+      kind: "grant-keyword-all",
+      filter: { type: "creature", attacking: true, bandedWithSource: true },
+      keyword: "trample",
+      duration: "end-of-turn",
+    });
     // A bonus of its own: the static, given the condition.
     const raider = face(`${engines}\nMax speed — This creature gets +1/+1 and has menace.`);
     expect(raider.static).toEqual([

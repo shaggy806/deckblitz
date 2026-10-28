@@ -232,6 +232,10 @@ export interface VisibleObject {
    * arrow is drawn for it. */
   readonly attackingUndecided?: true;
   readonly blocking: ObjectId | null;
+  /** The rest of a band it blocks (rule 702.22h) beyond `blocking`. */
+  readonly blockingAlso?: readonly ObjectId[];
+  /** The band it attacks in (rule 702.22c): the label its band mates share. */
+  readonly band?: ObjectId;
   /** An attacker that has been blocked this combat — and stays blocked
    * after its blockers leave (rule 509.1h), which no blocker's `blocking`
    * can show. Lets a board tile standing for several attacking tokens say
@@ -665,6 +669,8 @@ function visible(
     attacking: object.attacking,
     ...(object.attacking !== null && attackChoicePending(state, id) ? { attackingUndecided: true as const } : {}),
     blocking: object.blocking,
+    ...(object.blockingAlso !== undefined && object.blockingAlso.length > 0 ? { blockingAlso: [...object.blockingAlso] } : {}),
+    ...(object.band !== undefined && object.attacking !== null ? { band: object.band } : {}),
     blocked: object.attacking !== null && object.blocked,
     kind: object.kind,
     sourceObjectId: fromEmblem ? null : object.sourceObjectId,

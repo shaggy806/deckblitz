@@ -7,6 +7,7 @@
  */
 
 import type { CardType } from "./cards/define.js";
+import type { CardFilter } from "./filter.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
@@ -166,6 +167,10 @@ export interface AttackerDeclaration {
    * same stack — each with a `count` — to send its tokens at different
    * defenders; the counts may total no more than the stack holds. */
   readonly count?: number;
+  /** Which band this attacker is in (rule 702.22c): entries with the same
+   * number are one band, every token of a stack's entry with it. A band of
+   * one creature is no band. Absent: in none. See `combat/banding.ts`. */
+  readonly band?: number;
 }
 
 export interface BlockerDeclaration {
@@ -1333,6 +1338,13 @@ export type LegalAction =
         readonly budget: number;
         readonly tokens?: Readonly<Record<ObjectId, number>>;
       };
+      /**
+       * The eligible attackers that can lead a band (rule 702.22c): each with
+       * banding, or with a "bands with other [quality]" (its qualities as
+       * filters). A band needs one of them; `combat/banding.ts` says which
+       * other attackers may join. Absent when none can.
+       */
+      readonly banding?: Readonly<Record<ObjectId, { readonly banding: boolean; readonly bandsWithOther: readonly CardFilter[] }>>;
     }
   | {
       readonly kind: "declare-blockers";
@@ -1404,6 +1416,13 @@ export type LegalAction =
        * in order with the same lethal and indestructible, trample alike — so
        * the action's `forAll` gives them this split too. */
       readonly alike?: number;
+      /** A blocker dividing its damage among the band it blocks (510.1d,
+       * 702.22h): `attacker` is the blocker, `blockers` the attackers. */
+      readonly blocking?: true;
+      /** The player answering doesn't control the creature (banding — rules
+       * 702.22j-k), so their interest is its damage killing as little as it
+       * can (`combat/banding.ts`'s `opposedAssignment`). */
+      readonly forOpponent?: true;
     }
   | {
       readonly kind: "discard";

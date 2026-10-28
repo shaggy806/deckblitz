@@ -481,6 +481,19 @@ blocks and is blocked only by creatures with shadow: Dauthi Voidwalker), and
 `horsemanship` (702.31 — blocked only by creatures with horsemanship, and blocks
 anything: Portal Three Kingdoms' Shu Cavalry).
 
+**Banding** (rule 702.22): `banding` — its controller may declare it attacking
+in a band (an `AttackerDeclaration.band` number shared by the band; creatures
+with banding and at most one without), which is blocked as one (a blocker of
+any member blocks them all — `GameObject.blockingAlso`), and the other side
+divides a creature's combat damage when banding is among the creatures it's
+blocking or blocked by (702.22j-k: the `assign-combat-damage` decision's
+`forOpponent`). "Bands with other [quality]" is a static's `bandsWithOther:
+CardFilter` (§ static fields), which adds the `bands-with-other` keyword while
+it applies; "loses all 'bands with other' abilities" is `lose-keywords` of
+`bands-with-other`, and losing `banding` takes them too (702.22b). "Creatures
+banded with it" is the `CardFilter` clause `bandedWithSource: true` (Icatian
+Skirmishers, Urza's Engine). All of it lives in `combat/banding.ts`.
+
 **Phasing** (rule 702.26a): `phasing` — as each of its controller's untap
 steps begins, before anything untaps, it phases out, or back in
 (`Game.phasingStep`); read off its current keywords, so one granted it phases
@@ -3918,6 +3931,12 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   opponents control or abilities from nongreen sources" `{ filter: {
   notColors: ["G"] } }`. Targeting only — not blocking, damage or enchanting.
   Granting it until end of turn (Skrelv's chosen color) isn't built.
+- `bandsWithOther: CardFilter` — "bands with other [quality]" (rule 702.22b),
+  the quality as a filter: the Legends lands grant "bands with other legendary
+  creatures" `{ type: "creature", supertype: "legendary" }` to a colour's
+  legends (`affects: { scope: "filter", … }` — Cathedral of Serra); a token
+  prints it on itself (Wolves of the Hunt, `{ type: "creature", name: "Wolves
+  of the Hunt" }`). Adds the `bands-with-other` keyword; see **Banding**.
 - Ward is **not** a static — it's a triggered ability; see `ward(...)` in §9.
 - `costModification: { applies: CardFilter, reduceGeneric?, increaseGeneric? }`
   — Foundry Inspector, Thalia. `affects` is ignored — `applies` says what it

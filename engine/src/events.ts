@@ -884,6 +884,12 @@ export type GameEvent =
       readonly type: "blocker-declared";
       readonly blocker: ObjectId;
       readonly attacker: ObjectId;
+      /** It blocks `attacker` because it blocked another creature in
+       * `attacker`'s band (rule 702.22h), not as declared: "whenever ~
+       * blocks" has already triggered for it (509.3a), while "blocks a
+       * creature" and "becomes blocked by a creature" trigger for each
+       * (509.3b, 509.3d). */
+      readonly alsoBlocked?: true;
     })
   | (Base & {
       /** An attacking creature became blocked (rule 509.1h) — once per

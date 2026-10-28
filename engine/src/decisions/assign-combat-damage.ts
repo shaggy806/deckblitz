@@ -19,7 +19,7 @@
  */
 
 import type { Action, LegalAction } from "../actions.js";
-import { damageAssignmentViolations, standardAssignment } from "../combat/damage.js";
+import { damageAssignmentViolations, defaultAssignment } from "../combat/damage.js";
 import { defineDecision } from "./define.js";
 
 export const assignCombatDamage = defineDecision({
@@ -38,6 +38,8 @@ export const assignCombatDamage = defineDecision({
       trample: awaiting.trample,
       indestructible: [...awaiting.indestructible],
       ...(awaiting.alike !== undefined && awaiting.alike > 0 ? { alike: awaiting.alike } : {}),
+      ...(awaiting.blocking === true ? { blocking: true as const } : {}),
+      ...(awaiting.forOpponent === true ? { forOpponent: true as const } : {}),
     },
   ],
 
@@ -71,6 +73,8 @@ export const assignCombatDamage = defineDecision({
       lethal: awaiting.lethal,
       trample: awaiting.trample,
       indestructible: awaiting.indestructible,
+      ...(awaiting.forOpponent === true ? { forOpponent: true } : {}),
+      ...(awaiting.blocking === true ? { blocking: true } : {}),
     }),
   }),
 
@@ -93,9 +97,10 @@ export const assignCombatDamage = defineDecision({
       }
       return { type: "assign-combat-damage", player, assignment };
     }
-    // Otherwise start from the standard split, then sometimes pile extra onto
-    // a blocker instead of trampling it over — still legal.
-    const assignment = standardAssignment(legal);
+    // Otherwise start from the default split (the other side's, under
+    // banding), then sometimes pile extra onto a blocker instead of trampling
+    // it over — still legal.
+    const assignment = defaultAssignment(legal);
     const spare = legal.power - assignment.reduce((sum, n) => sum + n, 0);
     if (spare > 0 && assignment.length > 0 && rng.random() < 0.5) {
       assignment[rng.pickIndex(assignment.length)] += spare;

@@ -46,12 +46,14 @@ import type {
   WaterbendOffer,
 } from "./actions.js";
 import {
-  autoAssignForAttacker,
+  autoAssignFor,
+  blockerNeedsDamageAssignmentChoice,
   damageAssignmentViolations,
-  lethalFor,
+  damageQuestionFor,
   liveBlockersOf,
   needsDamageAssignmentChoice,
 } from "./combat/damage.js";
+import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
 import {
   creatureDef,
   currentAttackers,
@@ -149,6 +151,7 @@ import type { ControllerView, PlayerController } from "./controller.js";
 import type { DecisionHost, DecisionReadCtx } from "./decisions/contract.js";
 import { decisionFor, decisionForAction, mayActOn } from "./decisions/registry.js";
 import { assignCombatDamage } from "./decisions/assign-combat-damage.js";
+import { MAX_MATERIALIZED } from "./combat/stack-counts.js";
 import { attackers } from "./decisions/attackers.js";
 import { chooseTargets } from "./decisions/choose-targets.js";
 import { blockers } from "./decisions/blockers.js";
@@ -4175,7 +4178,7 @@ export class Game {
    * blocking stack wakes this many. A self-replicating generator (Scute
    * Swarm) is the only thing that passes it, by orders of magnitude.
    */
-  private static readonly MAX_MATERIALIZED = 100;
+  private static readonly MAX_MATERIALIZED = MAX_MATERIALIZED;
 
   /**
    * The most tokens of one stack that wake up to block. Larger than
@@ -8069,12 +8072,16 @@ export class Game {
       readonly taps: boolean;
       readonly first: boolean;
     }[] = [];
-    for (const { attacker, defender, count } of declarations) {
+    // Each band's members as they attack (rule 702.22c) — a stack's entry
+    // woken into one creature per token, each a member.
+    const bands = new Map<number, ObjectId[]>();
+    for (const { attacker, defender, count, band } of declarations) {
       // A compacted stack attacks here — all of it, or the entry's `count`:
       // woken into separate attackers, or past the wake-up cap as one
       // counted attacker (`attackingStackPart`).
       for (const id of this.attackingStackPart(attacker, count)) {
         const object = this.state.objects[id];
+        if (band !== undefined) bands.set(band, [...(bands.get(band) ?? []), id]);
         object.attacking = defender;
         object.blockedBy = [];
         object.blocked = false;
@@ -8107,6 +8114,11 @@ export class Game {
         if (taps) object.tapped = true;
         declaredNow.push({ id, defender, taps, first });
       }
+    }
+    // A band is labelled by its first member; a band of one is none.
+    for (const members of bands.values()) {
+      if (members.length < 2) continue;
+      for (const id of members) this.state.objects[id].band = members[0];
     }
     if (tax > 0) {
       const payment = this.payMana(player, parseManaCost(`{${tax}}`));
@@ -8215,7 +8227,7 @@ export class Game {
 
     // Every block is made before any is announced, as with attackers: the
     // declaration is one action (rule 509.1) and its triggers see all of it.
-    const blockedNow: { readonly blocker: ObjectId; readonly attacker: ObjectId }[] = [];
+    const blockedNow: { readonly blocker: ObjectId; readonly attacker: ObjectId; readonly alsoBlocked?: true }[] = [];
     // The token of an attacking stack each `attackerMember` named, split off
     // the first time it's blocked.
     const members = new Map<string, ObjectId>();
@@ -8243,10 +8255,20 @@ export class Game {
         attacker.blockedBy.push(bId);
         attacker.blocked = true;
         blockedNow.push({ blocker: bId, attacker: attackerId });
+        // Rule 702.22h: blocking one creature in a band blocks the whole
+        // band — each other member becomes blocked by this blocker too.
+        for (const mateId of bandMatesOf(this.state, attackerId)) {
+          const mate = this.state.objects[mateId];
+          if (mate.blockedBy.includes(bId)) continue;
+          mate.blockedBy.push(bId);
+          mate.blocked = true;
+          blocker.blockingAlso = [...(blocker.blockingAlso ?? []), mateId];
+          blockedNow.push({ blocker: bId, attacker: mateId, alsoBlocked: true });
+        }
       }
     }
-    for (const { blocker, attacker } of blockedNow) {
-      this.emit({ type: "blocker-declared", blocker, attacker });
+    for (const { blocker, attacker, alsoBlocked } of blockedNow) {
+      this.emit({ type: "blocker-declared", blocker, attacker, ...(alsoBlocked === true ? { alsoBlocked } : {}) });
     }
     // Each attacker this declaration blocked becomes blocked once, however
     // many creatures block it (rules 509.1h, 509.3c).
@@ -8304,19 +8326,26 @@ export class Game {
     return pass === "first" ? "first" : pass === "regular" ? "regular" : "all";
   }
 
-  /** Begin one combat-damage sub-pass: collect any blocked attackers whose
-   * controller owes an assignment choice; if none, deal the damage. Leaves
-   * `awaiting` set (via `promptNextDamageAssignment`) when a choice is owed. */
+  /** Begin one combat-damage sub-pass: collect every creature dealing damage
+   * whose division is a choice — blocked attackers first, then blockers
+   * blocking a band (rule 510.1: the active player announces, then the
+   * defending player) — and if none, deal the damage. Leaves `awaiting` set
+   * (via `promptNextDamageAssignment`) when a choice is owed. */
   private runCombatDamageSubPass(): void {
     const cd = this.state.combatDamage;
     if (cd === null) return;
     const kind = this.subPassKind(cd.pass);
-    const pending = this.currentAttackers().filter(
+    const attackers = this.currentAttackers();
+    const pending = attackers.filter(
       (id) =>
         this.state.objects[id].blocked &&
         this.dealsInPass(id, kind) &&
         this.needsDamageAssignmentChoice(id),
     );
+    const blockers = new Set(attackers.flatMap((id) => this.liveBlockersOf(id)));
+    for (const id of blockers) {
+      if (this.dealsInPass(id, kind) && blockerNeedsDamageAssignmentChoice(this.state, this.registry, id)) pending.push(id);
+    }
     this.state.combatDamage = { ...cd, pendingAssignments: pending };
     this.promptNextDamageAssignment();
   }
@@ -8326,10 +8355,6 @@ export class Game {
     return liveBlockersOf(this.state, attackerId);
   }
 
-  private lethalFor(attackerId: ObjectId, blockerId: ObjectId): number {
-    return lethalFor(this.state, this.registry, attackerId, blockerId);
-  }
-
   /** Whether the attacking player has a real choice in how `attackerId` (a
    * blocked attacker) divides its combat damage — 2+ live blockers, or a lone
    * one with trample and room past its lethal. */
@@ -8337,31 +8362,33 @@ export class Game {
     return needsDamageAssignmentChoice(this.state, this.registry, attackerId);
   }
 
-  /** The standard auto-assignment for `attackerId`'s combat damage this
-   * sub-pass (`standardAssignment`: kill as many blockers as possible). One
-   * entry per live blocker. */
-  private autoAssignForAttacker(attackerId: ObjectId): number[] {
-    return autoAssignForAttacker(this.state, this.registry, attackerId);
+  /** The auto-assignment for `dealerId`'s combat damage this sub-pass: the
+   * standard one (kill as many as possible), or the other side's under
+   * banding (`autoAssignFor`). One entry per recipient. */
+  private autoAssignFor(dealerId: ObjectId): number[] {
+    return autoAssignFor(this.state, this.registry, dealerId);
   }
 
   private promptNextDamageAssignment(): void {
     const cd = this.state.combatDamage;
     if (cd === null) return;
     if (cd.pendingAssignments.length > 0) {
-      const attackerId = cd.pendingAssignments[0];
-      const blockers = this.liveBlockersOf(attackerId);
-      const situation = this.damageSituation(attackerId);
+      const dealerId = cd.pendingAssignments[0];
+      const q = damageQuestionFor(this.state, this.registry, dealerId);
+      const situation = this.damageSituation(dealerId);
       const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
       this.state.awaiting = {
         kind: "assign-combat-damage",
-        player: this.state.objects[attackerId].controller,
-        attacker: attackerId,
-        blockers,
-        power: assignedCombatDamage(this.state, this.registry, attackerId),
-        lethal: blockers.map((b) => this.lethalFor(attackerId, b)),
-        trample: this.objHasKeyword(attackerId, "trample"),
-        indestructible: blockers.map((b) => this.objHasKeyword(b, "indestructible")),
+        player: q.player,
+        attacker: dealerId,
+        blockers: [...q.recipients],
+        power: q.power,
+        lethal: [...q.lethal],
+        trample: q.trample,
+        indestructible: [...q.indestructible],
         ...(alike > 0 ? { alike } : {}),
+        ...(q.blocking ? { blocking: true as const } : {}),
+        ...(q.forOpponent ? { forOpponent: true as const } : {}),
       };
       return;
     }
@@ -8369,26 +8396,25 @@ export class Game {
   }
 
   /**
-   * What a blocked attacker's damage assignment is a choice about, as one
-   * string: its controller, its name, the damage it assigns and trample, and
-   * each blocker in order — its name, its lethal damage, indestructible. Two
-   * attackers with the same one are the same choice (a stack of attacking
-   * tokens each blocked by two Soldiers), so one answer can cover both
-   * (`assign-combat-damage`'s `forAll`).
+   * What a creature's damage assignment is a choice about, as one string:
+   * who decides it, its controller, its name, the damage it assigns and
+   * trample, whether it's blocking, and each recipient in order — its name,
+   * its lethal damage, indestructible. Two attackers with the same one are
+   * the same choice (a stack of attacking tokens each blocked by two
+   * Soldiers), so one answer can cover both (`assign-combat-damage`'s
+   * `forAll`).
    */
-  private damageSituation(attackerId: ObjectId): string {
-    const attacker = this.state.objects[attackerId];
-    const blockers = this.liveBlockersOf(attackerId);
+  private damageSituation(dealerId: ObjectId): string {
+    const dealer = this.state.objects[dealerId];
+    const q = damageQuestionFor(this.state, this.registry, dealerId);
     return JSON.stringify([
-      attacker?.controller,
-      attacker?.cardName,
-      assignedCombatDamage(this.state, this.registry, attackerId),
-      this.objHasKeyword(attackerId, "trample"),
-      blockers.map((b) => [
-        this.state.objects[b]?.cardName,
-        this.lethalFor(attackerId, b),
-        this.objHasKeyword(b, "indestructible"),
-      ]),
+      q.player,
+      dealer?.controller,
+      dealer?.cardName,
+      q.power,
+      q.trample,
+      q.blocking,
+      q.recipients.map((r, i) => [this.state.objects[r]?.cardName, q.lethal[i], q.indestructible[i]]),
     ]);
   }
 
@@ -8424,15 +8450,8 @@ export class Game {
       const situation = this.damageSituation(awaiting.attacker);
       const same = pending.filter((id) => this.damageSituation(id) === situation);
       for (const id of same) {
-        const blockers = this.liveBlockersOf(id);
-        const asked = {
-          blockers,
-          power: assignedCombatDamage(this.state, this.registry, id),
-          lethal: blockers.map((b) => this.lethalFor(id, b)),
-          trample: this.objHasKeyword(id, "trample"),
-          indestructible: blockers.map((b) => this.objHasKeyword(b, "indestructible")),
-        };
-        const wrong = damageAssignmentViolations(asked, assignment);
+        const q = damageQuestionFor(this.state, this.registry, id);
+        const wrong = damageAssignmentViolations({ ...q, blockers: q.recipients }, assignment);
         if (wrong !== null) throw new Error(wrong);
         assigned[id] = [...assignment];
       }
@@ -8551,6 +8570,7 @@ export class Game {
     // static (Doran, the Siege Tower) — for attackers and blockers alike.
     const powerOf = (id: ObjectId): number =>
       assignedCombatDamage(this.state, this.registry, id);
+    const blockersDivided = new Set<ObjectId>();
 
     for (const attackerId of this.currentAttackers()) {
       const attacker = this.state.objects[attackerId];
@@ -8582,7 +8602,7 @@ export class Game {
             const perBlocker =
               override !== undefined && override.length === liveBlockers.length
                 ? override
-                : this.autoAssignForAttacker(attackerId);
+                : this.autoAssignFor(attackerId);
             let assignedTotal = 0;
             liveBlockers.forEach((blockerId, index) => {
               const amount = perBlocker[index] ?? 0;
@@ -8610,13 +8630,27 @@ export class Game {
       for (const blockerId of liveBlockers) {
         if (!this.dealsInPass(blockerId, pass)) continue;
         const blockerPower = powerOf(blockerId);
-        if (blockerPower > 0) {
-          assignments.push({
-            source: blockerId,
-            target: { kind: "object", object: attackerId },
-            amount: blockerPower,
+        if (blockerPower <= 0) continue;
+        // A blocker blocking a band divides its damage among the attackers
+        // it blocks (rules 510.1d, 702.22h) — dealt once, as it's met first.
+        const blocked = blockedAttackersOf(this.state, blockerId);
+        if (blocked.length >= 2) {
+          if (blockersDivided.has(blockerId)) continue;
+          blockersDivided.add(blockerId);
+          const override = assigned[blockerId];
+          const perAttacker =
+            override !== undefined && override.length === blocked.length ? override : this.autoAssignFor(blockerId);
+          blocked.forEach((target, index) => {
+            const amount = perAttacker[index] ?? 0;
+            if (amount > 0) assignments.push({ source: blockerId, target: { kind: "object", object: target }, amount });
           });
+          continue;
         }
+        assignments.push({
+          source: blockerId,
+          target: { kind: "object", object: attackerId },
+          amount: blockerPower,
+        });
       }
     }
 
@@ -8689,6 +8723,8 @@ export class Game {
       object.blocking = null;
       object.blockedBy = [];
       object.blocked = false;
+      delete object.blockingAlso;
+      delete object.band;
     }
   }
 
@@ -20784,6 +20820,10 @@ export class Game {
       case "blocks":
         return (
           event.type === "blocker-declared" &&
+          // "Whenever ~ blocks" once for a blocker however many creatures of
+          // a band it blocks (rule 509.3a); "blocks a creature, … that
+          // creature" once for each (509.3b).
+          (event.alsoBlocked !== true || spec.object === "blocked") &&
           this.matchesWho(spec.who, event.blocker, self) &&
           !(spec.otherOnly === true && event.blocker === self.id) &&
           this.triggerFilterOk(spec.filter, event.blocker, self)
@@ -24907,7 +24947,11 @@ export class Game {
       blockersOfSource: () =>
         permanentCount(
           this.state,
-          this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.blocking === source),
+          this.state.zones.shared.battlefield.filter((id) => {
+            const o = this.state.objects[id];
+            // A blocker of the band it's in blocks it too (rule 702.22h).
+            return o?.blocking === source || o?.blockingAlso?.includes(source) === true;
+          }),
         ),
       opponentsControllingFewer: (filter) => {
         // What each player *controls* (read from their own side), whether or
@@ -30780,6 +30824,9 @@ export class Game {
     object.blocking = null;
     object.blocked = false;
     object.blockedBy = [];
+    // And from its band (rule 702.22f).
+    delete object.blockingAlso;
+    delete object.band;
     for (const other of this.state.zones.shared.battlefield) {
       const o = this.state.objects[other];
       if (o.blockedBy.includes(id)) o.blockedBy = o.blockedBy.filter((b) => b !== id);
@@ -38133,6 +38180,8 @@ export class Game {
     delete object.skipsNextUntap;
     delete object.skipsUntapOf;
     object.blocking = null;
+    delete object.blockingAlso;
+    delete object.band;
     object.blockedBy = [];
     object.blocked = false;
     object.markedByDeathtouch = false;

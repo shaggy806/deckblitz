@@ -139,7 +139,7 @@ export const KEYWORDS = {
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
   changeling: "changeling", daybound: "daybound", nightbound: "nightbound", shadow: "shadow",
-  horsemanship: "horsemanship",
+  horsemanship: "horsemanship", banding: "banding",
 };
 
 const COST = "((?:\\{[^}]+\\})+)";
@@ -1629,6 +1629,26 @@ export function parseSentence(sentence, ctx) {
     const kws = [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     const one = (keyword) => ({ kind: "grant-keyword", target, keyword, duration: "end-of-turn" });
     return kws.length === 1 ? one(kws[0]) : { kind: "sequence", effects: kws.map(one) };
+  }
+  // Losing "bands with other" (rule 702.22b) — Shelkin Brownie — and with
+  // banding, which takes them too (Tolaria).
+  if ((m = re(`(${TARGET}) loses (banding and )?all "bands with other" abilities until end of turn`).exec(s))) {
+    return {
+      kind: "lose-keywords",
+      target: slot(m[1]),
+      keywords: m[2] ? ["banding", "bands-with-other"] : ["bands-with-other"],
+      duration: "end-of-turn",
+    };
+  }
+  // "Creatures banded with it" (rule 702.22 — `bandedWithSource`): Icatian
+  // Skirmishers, Urza's Engine.
+  if ((m = re(`(all |attacking )?creatures banded with (?:it|~|this creature) gain ${KW} until end of turn`).exec(s))) {
+    return {
+      kind: "grant-keyword-all",
+      filter: { type: "creature", ...(m[1]?.toLowerCase().startsWith("attacking") ? { attacking: true } : {}), bandedWithSource: true },
+      keyword: KEYWORDS[m[2].toLowerCase()],
+      duration: "end-of-turn",
+    };
   }
   if ((m = re(`(other )?creatures you control gain ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
     if (m[1] && !otherMeansSource(ctx)) return null;
@@ -3570,6 +3590,16 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) },
       grantKeywords: [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  // "Bands with other legendary creatures" (rule 702.22b) for the
+  // creatures of one colour you control — the Legends lands.
+  if ((m = /^(White|Blue|Black|Red|Green) legendary creatures you control have "bands with other legendary creatures\."$/.exec(line))) {
+    const color = { White: "W", Blue: "U", Black: "B", Red: "R", Green: "G" }[m[1]];
+    return {
+      affects: { scope: "filter", filter: { type: "creature", supertype: "legendary", colors: [color], controlledBy: "you" } },
+      bandsWithOther: { type: "creature", supertype: "legendary" },
       text,
     };
   }

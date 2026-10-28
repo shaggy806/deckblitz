@@ -488,7 +488,8 @@
   "decision:x-targets",
   "decision:target-total-mana-value",
   "decision:any-number-targets-in-mode",
-  "decision:choose-card-name"
+  "decision:choose-card-name",
+  "keyword:banding"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

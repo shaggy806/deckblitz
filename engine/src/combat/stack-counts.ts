@@ -16,6 +16,12 @@
 
 import type { ObjectId } from "../primitives.js";
 
+/** The most members of one compacted stack that combat wakes into separate
+ * objects at once (`Game.materializeStack`) — past it an attacking stack
+ * fights as one counted object. Here so a validator can ask it too: a stack
+ * in a band has to wake (`combat/banding.ts`). */
+export const MAX_MATERIALIZED = 100;
+
 /** One declaration entry, as far as counting goes. */
 export interface CountedEntry {
   readonly id: ObjectId;

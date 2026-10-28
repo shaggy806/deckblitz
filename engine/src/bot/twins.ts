@@ -40,6 +40,8 @@ function twinKey(state: GameState, id: ObjectId, referenced: string, hosts: Read
     o.attachedTo,
     o.attacking,
     o.blocking,
+    o.blockingAlso ?? null,
+    o.band ?? null,
     o.blockedBy,
     o.blocked,
     o.damageMarked,

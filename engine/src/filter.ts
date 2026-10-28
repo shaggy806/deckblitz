@@ -308,6 +308,18 @@ export interface CardFilter {
    * `bindDynamicCompares`, never authored. */
   readonly saddledBy?: ObjectId;
   /**
+   * It's an attacking creature **banded with** the permanent applying the
+   * filter (rule 702.22 — `GameObject.band`): Icatian Skirmishers' "all
+   * creatures banded with it gain first strike", Camel's "creatures banded
+   * with this creature". Never the permanent itself. Read against
+   * `FilterContext.source`; in an effect, `bindDynamicCompares` binds it to
+   * `bandedWith` first.
+   */
+  readonly bandedWithSource?: boolean;
+  /** `bandedWithSource` bound to the permanent it means — written by
+   * `bindDynamicCompares`, never authored. */
+  readonly bandedWith?: ObjectId;
+  /**
    * It is the object in this target slot of the resolving spell or ability,
    * or has the same name as it (rule 201.2a) — Maelstrom Pulse's "destroy
    * target nonland permanent **and all other permanents with the same name
@@ -1149,6 +1161,20 @@ export function matchesFilter(
   if (filter.monstrous !== undefined) {
     const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
     if (monstrous !== filter.monstrous) return false;
+  }
+  if (filter.bandedWithSource !== undefined || filter.bandedWith !== undefined) {
+    const with_ = filter.bandedWith ?? ctx.source;
+    const other = with_ === undefined ? undefined : state.objects[with_];
+    const banded =
+      live !== undefined &&
+      other !== undefined &&
+      live.id !== other.id &&
+      live.band !== undefined &&
+      live.band === other.band &&
+      live.attacking !== null &&
+      other.attacking !== null;
+    if (filter.bandedWithSource !== undefined && banded !== filter.bandedWithSource) return false;
+    if (filter.bandedWith !== undefined && !banded) return false;
   }
   if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
     // Rule 702.171c: only a creature on the battlefield now can have saddled

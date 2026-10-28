@@ -8838,6 +8838,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCardTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
+      "bandedWithSource" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
       "sharesColorWithTarget" in value ||
@@ -8927,6 +8928,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
+    }
+    // "Creatures banded with it" (rule 702.22): the resolving ability's
+    // source's band.
+    if (walked["bandedWithSource"] === true) {
+      const { bandedWithSource: _banded, ...rest } = walked;
+      walked = { ...rest, bandedWith: ctx.source };
     }
     // "And all other permanents with the same name as that permanent": the
     // target itself and its name now (rule 201.2a). A target that's gone

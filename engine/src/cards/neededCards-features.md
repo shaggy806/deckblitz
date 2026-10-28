@@ -334,6 +334,21 @@ Still open beside them: `decision:twice-x-target-count` (a spell's group at
 twice X) and `decision:mixed-zone-targets` (one slot over battlefield and
 graveyard).
 
+### Banding — built 2026-10-28
+
+The need-keys Phase 2 family `keyword:banding` (B247): rule 702.22 whole —
+bands declared with the attack (`AttackerDeclaration.band`, validated by
+`combat/banding.ts`'s `whyBandsInvalid`: banding and up to one without, or a
+shared quality one member "bands with other" of, one defender), a blocker of
+one member blocking the band (`GameObject.blockingAlso`, `blocker-declared`'s
+`alsoBlocked` for 509.3a-b), a blocker dividing its damage among the band
+(510.1d — `assign-combat-damage`'s `blocking`), and the other side dividing
+damage when banding is involved (702.22j-k — `forOpponent`, answered by
+default with `opposedAssignment`). Also: the `banding` and `bands-with-other`
+keywords, the `bandsWithOther` static, the `bandedWithSource` filter. Key:
+`keyword:banding`. Still open beside it: 702.22i ("would become blocked due
+to an effect" — no effect makes an attacker blocked yet).
+
 ### Choosing a card name — built 2026-10-28
 
 The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's

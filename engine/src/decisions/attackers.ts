@@ -28,7 +28,9 @@ import {
   mustAttack,
   whyCannotAttack,
 } from "../combat/eligibility.js";
-import { declaredTokens, whyCountsInvalid } from "../combat/stack-counts.js";
+import { bandingAbilitiesOf, whyBandsInvalid } from "../combat/banding.js";
+import type { BandingAbilities } from "../combat/banding.js";
+import { declaredTokens, MAX_MATERIALIZED, whyCountsInvalid } from "../combat/stack-counts.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { defineDecision } from "./define.js";
 import type { DecisionReadCtx } from "./contract.js";
@@ -47,6 +49,12 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     if (tax > 0) perCreature[d as PlayerId] = tax;
   }
   const taxed = Object.keys(perCreature).length > 0;
+  // Who can lead a band (rule 702.22c): banding, or a "bands with other".
+  const banding: Record<ObjectId, BandingAbilities> = {};
+  for (const id of eligible) {
+    const abilities = bandingAbilitiesOf(ctx.state, ctx.registry, id);
+    if (abilities.banding || abilities.bandsWithOther.length > 0) banding[id] = abilities;
+  }
   const tokens: Record<ObjectId, number> = {};
   for (const id of eligible) {
     const n = ctx.state.objects[id]?.stackCount;
@@ -78,6 +86,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
           },
         }
       : {}),
+    ...(Object.keys(banding).length > 0 ? { banding } : {}),
   };
 }
 
@@ -138,6 +147,11 @@ export const attackers = defineDecision({
     if (missing.length > 0) {
       return `${missing.map((id) => nameOf(ctx, id)).join(", ")} must attack if able`;
     }
+    // Rule 702.22c-d: each band is one a band may be, at one defender.
+    const badBands = whyBandsInvalid(ctx.state, ctx.registry, action.attackers, tokensIn, MAX_MATERIALIZED, (id) =>
+      nameOf(ctx, id),
+    );
+    if (badBands !== null) return badBands;
     return ctx.whyCannotPayAttackTax(player, action.attackers);
   },
 

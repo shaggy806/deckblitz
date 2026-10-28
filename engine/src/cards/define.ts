@@ -203,6 +203,21 @@ export type Keyword =
    * "creature without flanking" asks about, and the `flanking()` card helper
    * is the trigger itself, so a card lists both (Sidar Kondo of Jamuraa). */
   | "flanking"
+  /** Banding (rule 702.22) — a static ability that modifies the rules for
+   * combat: attacking creatures with it (and up to one without) may be
+   * declared as a band (702.22c, `AttackerDeclaration.band`), blocked as one
+   * (702.22h), and a creature blocking or blocked by one has its combat
+   * damage divided by the banding creature's controller instead of its own
+   * (702.22j-k). The rules live in `combat/banding.ts`. */
+  | "banding"
+  /** "Bands with other [quality]" (rule 702.22b-c) — banding's special form.
+   * The quality is a `bandsWithOther` static (`StaticAbility.bandsWithOther`),
+   * read into `Characteristics.bandsWithOther`; this keyword is what the
+   * fold adds while any instance survives, so a creature shows it, and what
+   * a `loseKeywords` names for "loses all 'bands with other' abilities"
+   * (Shelkin Brownie). Losing banding loses these too (702.22b). Never
+   * granted on its own. */
+  | "bands-with-other"
   /** Riot (rule 702.136a) — "you may have this permanent enter with an
    * additional +1/+1 counter on it; if you don't, it gains haste". Asked as
    * it's about to enter (`Game.askEnterChoice`) when it's printed or copied;
@@ -2125,6 +2140,13 @@ export interface StaticAbility {
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
   };
+  /** "Bands with other [quality]" (rule 702.22b-c) for the affected
+   * creatures, the quality as a filter: the Legends lands' "bands with other
+   * legendary creatures" is `{ supertype: "legendary", type: "creature" }`,
+   * Wolves of the Hunt's "bands with other creatures named Wolves of the
+   * Hunt" `{ type: "creature", name: "Wolves of the Hunt" }`. Adds the
+   * `"bands-with-other"` keyword while it applies; see `combat/banding.ts`. */
+  readonly bandsWithOther?: CardFilter;
   /** Adjust the generic-mana cost of matching *spells* as they're cast
    * (Foundry Inspector: `{ applies: { type: "artifact", controlledBy: "you" },
    * reduceGeneric: 1 }`; Thalia: `{ applies: { notTypes: ["creature"] },
