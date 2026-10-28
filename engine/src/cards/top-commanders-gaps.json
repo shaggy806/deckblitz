@@ -1638,7 +1638,7 @@
   "trigger:combat-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Combat-trigger vocabulary: 'becomes blocked', 'whenever a player attacks one of your opponents', otherOnly on the attacks and combat-damage triggers, and the trigger object set for blocker-declared and combat damage-dealt events."
+   "description": "Combat-trigger vocabulary: 'becomes blocked', 'whenever a player attacks one of your opponents', otherOnly on the attacks and combat-damage triggers, and the trigger object set for blocker-declared and combat damage-dealt events. Not covered (recheck R9): an attacker filter on attacks-player — trigger:attacks-player-filter; the count of matching attackers as attack-with's value — trigger:attack-with-count-amount; a 'creature attacking you' target without your planeswalkers — target:creature-attacking-you-player-only."
   },
   "trigger:commit-crime": {
    "size": "medium",
@@ -1653,12 +1653,12 @@
   "trigger:counters-put": {
    "size": "small",
    "ui": false,
-   "description": "A 'whenever one or more counters are put on [filter]' trigger that supplies the amount."
+   "description": "A 'whenever one or more counters are put on [filter]' trigger that supplies the amount. Not covered (recheck R9): once per permanent across counter kinds — trigger:counters-put-any-kind-once; otherOnly — trigger:counters-put-other."
   },
   "trigger:damage-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Damage-trigger vocabulary: source-side triggers (deals damage to a creature, a source you control deals noncombat damage to an opponent, a spell deals damage to its own target), a filter on dealt-damage, and damage whose source is the trigger object ('it deals damage')."
+   "description": "Damage-trigger vocabulary: source-side triggers (deals damage to a creature, a source you control deals noncombat damage to an opponent, a spell deals damage to its own target), a filter on dealt-damage, and damage whose source is the trigger object ('it deals damage'). Not covered (recheck R9): once per event when a recipient is named ('to one or more creatures') — trigger:deals-damage-to-recipients-once-per-event; an N-or-more amount — trigger:deals-damage-amount-threshold; combat damage to you or your planeswalkers as one batch — trigger:combat-damage-to-you-or-your-planeswalkers-batch."
   },
   "trigger:destroyed": {
    "size": "small",
@@ -1745,7 +1745,7 @@
   "zone:cast-from-library-top": {
    "size": "medium",
    "ui": false,
-   "description": "A static permission to cast matching spells from the top of your library. It needs a new cast zone in castSpell, whyCannotCast and legalActions, plus the top card revealed."
+   "description": "A static permission to cast matching spells from the top of your library. It needs a new cast zone in castSpell, whyCannotCast and legalActions, plus the top card revealed. Not covered (recheck R9): once each turn — zone:cast-from-library-top-once-each-turn; an extra cost — zone:cast-from-library-top-extra-cost; plot from the top — zone:plot-from-library-top; a one-shot until-end-of-turn form — effect:play-from-library-top-this-turn."
   },
   "zone:graveyard-cast-permissions": {
    "size": "medium",
@@ -1757,7 +1757,7 @@
   "zone:impulse-permission-options": {
    "size": "medium",
    "ui": false,
-   "description": "Options on impulse (play-from-exile) permissions: cast without paying the mana cost, a CardFilter for which cards may be cast, and new durations (until your next end step, for as long as it remains exiled)."
+   "description": "Options on impulse (play-from-exile) permissions: cast without paying the mana cost, a CardFilter for which cards may be cast, and new durations (until your next end step, for as long as it remains exiled). Not covered (recheck R9): an owner's cast-now permission — zone:exile-owner-may-cast-now; a duration ending as your next turn begins — zone:impulse-until-your-next-turn-begins; play (lands) permissions on a trigger object or milled card — zone:exile-trigger-object-play-this-turn, zone:play-milled-card-this-turn; cast free while exiled after a counter — effect:cast-free-while-exiled."
   },
   "zone:play-from-exile-with-counter": {
    "size": "medium",
@@ -1774,7 +1774,7 @@
   "zone:exile-face-down": {
    "size": "small",
    "ui": false,
-   "description": "A card exiled face down that only the player who looked at it may see (rule 406.3) — Edward Kenway, Gonti, Ixhel. Built: impulse-exile's faceDown."
+   "description": "A card exiled face down that only the player who looked at it may see (rule 406.3) — Edward Kenway, Gonti, Ixhel. Built: impulse-exile's faceDown. Not covered (recheck R9): a whole library face down — effect:exile-library-face-down; a look-and-choose face-down exile with a standing cast permission — effect:look-exile-face-down-cast-while-exiled, effect:look-opponent-library-exile-one-face-down."
   },
   "zone:cast-from-opponents-hand": {
    "size": "medium",

@@ -5118,7 +5118,8 @@
    "example": "Ordeal of Nylea: 'When you sacrifice this Aura' — the sacrifice trigger has no self-only scope"
   },
   "trigger:state-trigger": {
-   "example": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists"
+   "example": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists",
+   "description": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists Not covered (recheck R9): a state trigger about each matching permanent — trigger:state-trigger-per-permanent; one granted to a returned card — effect:grant-state-trigger-to-returned-card."
   },
   "trigger:tapped-for-mana-nonmana-trigger": {
    "example": "Burning Earth: tapped-for-mana triggers are only triggered mana abilities; a damage trigger never goes on the stack",
@@ -5147,7 +5148,8 @@
    "description": "Still missing (2026-10-27 check): A delayed trigger made by a deals-damage trigger doesn't carry the recipient (Ohran Viper's end-of-combat destroy), and become-copy takes no trigger-recipient target (Permeating Mass). Already there: src/effects.ts destroy/tap/exile/damage with target 'trigger-recipient' (~L1736, ~L9389); src/game.ts triggerRecipient reads refs.recipient, but createDelayedTrigger (~L31857) stores only triggerObjectRefs, not recipient; src/effects.ts become-copy (~L4775) target is an EffectTargetRef only."
   },
   "trigger:unblocked-attackers-trigger": {
-   "example": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.'"
+   "example": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.'",
+   "description": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.' Built: attacks-unblocked, once per attacker. Not covered (recheck R9): the 'one or more … attack you and aren't blocked' batch per attacking player — trigger:attacks-you-unblocked-batch."
   },
   "trigger:untap-step-untap-count-trigger": {
    "example": "The Millennium Calendar: no trigger counting permanents untapped during your untap step"
@@ -13625,6 +13627,141 @@
    "family": "cost:mana-ability-complex-costs",
    "example": "Molt Tender",
    "description": "A mana ability whose cost exiles a card from your graveyard: refused outright ('mana ability can't exile cards from a graveyard yet')."
+  },
+  "target:creature-attacking-you-player-only": {
+   "family": "effect:target-spec-additions",
+   "description": "A target 'creature attacking you' that excludes creatures attacking your planeswalkers (the `creature-attacking-you` spec admits both).",
+   "example": "Lulu, Stern Guardian: 'choose target creature attacking you' — only creatures attacking the player (the ruling), and the spec also admits ones attacking your planeswalkers."
+  },
+  "trigger:counters-put-any-kind-once": {
+   "family": "trigger:counters-put",
+   "description": "'Whenever you put one or more counters on a creature' of any kind, once per permanent per event: counters-put fires once per kind, so proliferating a creature with two kinds triggers twice.",
+   "example": "Generous Patron: 'Whenever you put one or more counters on a creature you don't control' — counters-put fires once per counter kind, so mixed kinds on one creature would trigger twice."
+  },
+  "effect:delayed-whenever-about-target": {
+   "family": "effect:delayed-trigger-extensions",
+   "description": "An until-end-of-turn delayed 'whenever' trigger about a target of the creating spell ('whenever that creature is dealt damage this turn'), with that creature as the damage source; DelayedWheneverWatch can only name the creating object.",
+   "example": "Arcbond: 'Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player' — no delayed whenever watch about the target creature."
+  },
+  "static:pt-per-opponent": {
+   "family": "static:pt-per-amount",
+   "description": "A static P/T bonus per opponent you have (grantPtPerCount has no player count).",
+   "example": "Blazing Sunsteel: 'Equipped creature gets +1/+0 for each opponent you have' — grantPtPerCount counts no players."
+  },
+  "trigger:combat-damage-to-you-or-your-planeswalkers-batch": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "'Whenever combat damage is dealt to you or a planeswalker you control', once per combat damage event: deals-damage-batch's `to: \"you\"` covers only the player.",
+   "example": "Vengeful Pharaoh: 'Whenever combat damage is dealt to you or a planeswalker you control' (once per event) — deals-damage-batch reaches players only."
+  },
+  "trigger:deals-damage-to-recipients-once-per-event": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "'Whenever this deals damage to one or more creatures / blocking creatures', once per damage event: a deals-damage trigger that names a recipient fires once per recipient (the once-per-event form is only for no recipient named).",
+   "example": "Arashin War Beast: 'deals combat damage to one or more blocking creatures' triggers once per combat damage step; deals-damage with a recipient fires once per recipient."
+  },
+  "filter:creature-or-spell-source": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "A deals-damage source filter for 'a red creature or spell': a creature permanent or any spell on the stack, never a noncreature permanent (Justice).",
+   "example": "Justice: 'Whenever a red creature or spell deals damage' — no filter reads 'a creature or a spell'; a color filter alone also matches a red noncreature permanent."
+  },
+  "trigger:nth-each-turn-during-own-turn": {
+   "family": "trigger:nth-each-turn",
+   "description": "'Whenever a player draws their second card / casts their second spell during their turn' — nthEachTurn with the actor being the active player.",
+   "example": "The Council of Four: a player's second draw / second spell during their own turn; nthEachTurn counts any turn."
+  },
+  "trigger:self-put-into-graveyard-from-library": {
+   "family": "trigger:put-into-graveyard",
+   "description": "'When this card is put into your graveyard from your library' — a self trigger of the card in the graveyard (Gaea's Blessing, Kozilek's Return-style mill triggers).",
+   "example": "Gaea's Blessing: 'When this card is put into your graveyard from your library, shuffle your graveyard into your library.'"
+  },
+  "trigger:state-trigger-per-permanent": {
+   "family": "trigger:state-trigger",
+   "description": "A state trigger about each permanent matching a filter, with that permanent as the trigger object ('whenever a creature has four or more fuse counters on it, … destroy it'); on: \"state\" takes only a StaticCondition about the source.",
+   "example": "Bomb Squad: 'Whenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it.'"
+  },
+  "effect:grant-state-trigger-to-returned-card": {
+   "family": "trigger:state-trigger",
+   "description": "A creature put onto the battlefield that gains a state trigger ('It gains \"When you don't control a legendary Vampire, exile this creature\"'): put-onto-battlefield grants nothing, and a granted on: \"state\" trigger is unproven.",
+   "example": "Olivia, Crimson Bride: the returned creature gains 'When you don't control a legendary Vampire, exile this creature.'"
+  },
+  "trigger:attacks-you-unblocked-batch": {
+   "family": "trigger:unblocked-attackers-trigger",
+   "description": "'Whenever one or more creatures an opponent controls attack you and aren't blocked' — once per attacking player per blockers step; attacks-unblocked fires once per attacker.",
+   "example": "Coveted Jewel: 'that player draws three cards and gains control of this artifact' once per batch of unblocked attackers."
+  },
+  "zone:exile-library-bottom-face-down-cast-permanents": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "Exile the bottom card of each opponent's library face down with a lookable, cast-permanent-spells-while-exiled, any-color permission (Arvinox).",
+   "example": "Arvinox, the Mind Flail: bottom card of each opponent's library exiled face down, castable permanent spells with any-color mana; and 'isn't a creature unless you control three or more permanents you don't own'."
+  },
+  "zone:exile-maycast-exile-instead": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "An exile with a cast-this-turn permission whose spell is exiled instead of going to a graveyard (exile's mayCast has no exile-instead rider).",
+   "example": "Dire Fleet Daredevil: cast the exiled card this turn with any-type mana, and if that spell would be put into a graveyard, exile it instead."
+  },
+  "effect:search-opponent-library-exile-play": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "Search another player's library for a card, exile it, that player shuffles, and you may play it this turn.",
+   "example": "Thada Adel, Acquisitor: search that player's library for an artifact card, exile it, play it until end of turn."
+  },
+  "zone:plot-from-library-top": {
+   "family": "zone:cast-from-library-top",
+   "description": "Granting plot to the top card of your library (plot cost = its mana cost) and plotting from there.",
+   "example": "Fblthp, Lost on the Range: the top card of your library has plot; you may plot nonland cards from the top of your library."
+  },
+  "cost:pay-life-equal-mv-instead-of-mana": {
+   "family": "zone:cast-from-library-top",
+   "description": "An alternative cost 'pay life equal to its mana value rather than pay its mana cost' for spells cast through a permission.",
+   "example": "Gwenom, Remorseless: cards played from the top of the library this turn; spells cast this way cost life equal to their mana value."
+  },
+  "effect:exile-library-face-down": {
+   "family": "zone:exile-face-down",
+   "description": "Exile a whole library face down (exile-from-library has no faceDown).",
+   "example": "Inverter of Truth: exile all cards from your library face down, then shuffle your graveyard into your library."
+  },
+  "effect:look-opponent-library-exile-one-face-down": {
+   "family": "zone:exile-face-down",
+   "description": "Look at the top N of another player's library, exile one face down with a cast-while-exiled any-type permission, the rest into their graveyard.",
+   "example": "Thief of Sanity: top three of that player's library, one exiled face down castable while exiled, the rest into their graveyard."
+  },
+  "effect:look-exile-face-down-cast-while-exiled": {
+   "family": "zone:exile-face-down",
+   "description": "look-and-choose to exile-face-down with a standing 'you may cast it for as long as it remains exiled if it's a [type] spell' permission (cast-now is during resolution only).",
+   "example": "Vivien, Champion of the Wilds: −2 exiles one of the top three face down; you may cast it while it remains exiled if it's a creature spell."
+  },
+  "zone:exile-owner-may-cast-now": {
+   "family": "zone:impulse-permission-options",
+   "description": "'For as long as that card remains exiled, its owner may cast it' starting at once (allow-cast-from-exile's laterTurns starts next turn; exile's mayCast is the controller's).",
+   "example": "Aerial Extortionist: exile up to one target nonland permanent; its owner may cast it for as long as it remains exiled."
+  },
+  "effect:exile-chosen-from-revealed-hand-may-cast": {
+   "family": "zone:impulse-permission-options",
+   "description": "Exile a card you choose from an opponent's revealed hand, with a gift-conditional cast-while-exiled any-type permission.",
+   "example": "Cruelclaw's Heist: you choose a nonland card from target opponent's revealed hand and exile it; if the gift was promised, you may cast it while it remains exiled."
+  },
+  "zone:impulse-until-your-next-turn-begins": {
+   "family": "zone:impulse-permission-options",
+   "description": "An impulse duration 'until your next turn' that ends as your next turn begins (`your-next-turn` lasts until it ends).",
+   "example": "Nivix, Aerie of the Firemind: until your next turn, you may cast it if it's an instant or sorcery spell."
+  },
+  "zone:exile-trigger-object-play-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "description": "Exile the trigger object with a play (lands included) permission this turn: exile's mayCast is cast-only.",
+   "example": "Norin, Swift Survivalist: exile the blocked creature; you may play that card from exile this turn (a land creature card included)."
+  },
+  "zone:shared-impulse-pool-each-player": {
+   "family": "zone:impulse-permission-options",
+   "description": "Cards exiled with a permanent that each player may play from during their own turn (one land or spell each time, any-color mana), re-exiling on use; and a 'whenever an opponent loses the game' trigger.",
+   "example": "Share the Spoils: each player may play a land or cast a spell from among cards exiled with it during their turn, then exiles their top card."
+  },
+  "zone:play-milled-card-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "description": "'Mill a card. You may play that card this turn' — a play (lands included) permission on a card in the graveyard.",
+   "example": "Tablet of Discovery: mill a card; you may play that card this turn."
+  },
+  "zone:cast-from-exiled-with-source-enters-finality": {
+   "family": "zone:play-from-exile-with-counter",
+   "description": "A standing permission to cast Dinosaur creature spells from among cards you own exiled with this, entering with a finality counter.",
+   "example": "Intrepid Paleontologist: cast Dinosaurs from among cards you own exiled with it; each enters with a finality counter."
   }
  },
  "groups": [

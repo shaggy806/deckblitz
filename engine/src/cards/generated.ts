@@ -23705,6 +23705,7 @@ import _poolUrabrasksAnointer from "./pool/urabrasks-anointer.js";
 import _poolUrabrasksForge from "./pool/urabrasks-forge.js";
 import _poolUrbanDaggertooth from "./pool/urban-daggertooth.js";
 import _poolUrbanEvolution from "./pool/urban-evolution.js";
+import _poolUrbanRetreat from "./pool/urban-retreat.js";
 import _poolUrbanUtopia from "./pool/urban-utopia.js";
 import _poolUrbisProtector from "./pool/urbis-protector.js";
 import _poolUrborgDrake from "./pool/urborg-drake.js";
@@ -50032,6 +50033,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrabrasksForge,
   _poolUrbanDaggertooth,
   _poolUrbanEvolution,
+  _poolUrbanRetreat,
   _poolUrbanUtopia,
   _poolUrbisProtector,
   _poolUrborgDrake,
@@ -76372,6 +76374,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urabrasks-forge": _poolUrabrasksForge,
   "pool/urban-daggertooth": _poolUrbanDaggertooth,
   "pool/urban-evolution": _poolUrbanEvolution,
+  "pool/urban-retreat": _poolUrbanRetreat,
   "pool/urban-utopia": _poolUrbanUtopia,
   "pool/urbis-protector": _poolUrbisProtector,
   "pool/urborg-drake": _poolUrborgDrake,

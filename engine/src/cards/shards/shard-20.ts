@@ -794,6 +794,7 @@ import _poolUncageTheMenagerie from "../pool/uncage-the-menagerie.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUndertaker from "../pool/undertaker.js";
 import _poolUnstableMutation from "../pool/unstable-mutation.js";
+import _poolUrbanRetreat from "../pool/urban-retreat.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUrzasTome from "../pool/urzas-tome.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolUndeadAugur,
     _poolUndertaker,
     _poolUnstableMutation,
+    _poolUrbanRetreat,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
     _poolUrzasTome,
