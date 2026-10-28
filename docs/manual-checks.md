@@ -5610,3 +5610,16 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Brain Pry targeting Bob, and type "forest" in the search when the popup opens.
 - **Expect:** No name is asked while casting. As it resolves the popup reads "Brain Pry — choose a nonland card name" and "forest" finds no Forest card itself. Naming Lightning Bolt makes Bob discard his Lightning Bolt.
 
+## Banding (2026-10-28, need-keys Phase 2: the banding family)
+
+### Benalish Hero: attack in a band, and divide the blocker's damage
+- **Do:** Click Benalish Hero and Grizzly Bears to attack Bob. Click **Band…**, click both on the board, then **Make band** and **Attack with 2**. As Bob, block the Bears with Hill Giant.
+- **Expect:** The bar shows "Band 1: Benalish Hero + Grizzly Bears". The Giant blocks both: its badge reads "🛡 Grizzly Bears +1" with two arrows. Back as Alice you're asked "Banding: you divide Hill Giant's 3 damage"; put all 3 on the Hero and the Bears live.
+
+### Benalish Hero: a band takes only one creature without banding
+- **Do:** Click Benalish Hero, Grizzly Bears and Hill Giant to attack Bob. Click **Band…**, click all three, **Make band**, then **Attack with 3**.
+- **Expect:** The attack is refused with "… can't attack as a band" and nothing attacks; the band can be broken up with its ✕ and the attack made again.
+
+### Benalish Hero: the defender divides a trampler's damage
+- **Do:** Attack Bob with Colossal Dreadmaw. As Bob, block it with Benalish Hero.
+- **Expect:** Bob is asked "Banding: you divide Colossal Dreadmaw's 6 damage (trample)", starting with all 6 on the Hero and none to Bob. Confirming leaves Bob's life where it was.

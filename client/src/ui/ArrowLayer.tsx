@@ -127,6 +127,16 @@ function arrowsFor(
         to: objSel(obj.blocking),
         seat: seatClassOf(view.turnOrder, obj.controller),
       })
+      // The rest of a band it blocks (rule 702.22h).
+      for (const also of obj.blockingAlso ?? []) {
+        out.push({
+          key: `b:${id}->${also}`,
+          kind: 'block',
+          from: objSel(id),
+          to: objSel(also),
+          seat: seatClassOf(view.turnOrder, obj.controller),
+        })
+      }
     }
   }
   return out

@@ -53,6 +53,14 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Start your engines!',
     text: 'If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.',
   },
+  banding: {
+    name: 'Banding',
+    text: "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.",
+  },
+  'bands-with-other': {
+    name: 'Bands with other',
+    text: "Creatures of its quality can attack in a band as long as at least one has \"bands with other\" creatures of it. Bands are blocked as a group. If two creatures of that quality a player controls, one with this ability, are blocking or being blocked by the same creature, that player divides that creature's combat damage.",
+  },
   flanking: {
     name: 'Flanking',
     text: 'Whenever a creature without flanking blocks it, the blocking creature gets -1/-1 until end of turn.',

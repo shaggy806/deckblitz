@@ -1563,6 +1563,8 @@ export class Room {
       if (object === undefined) continue;
       if (object.attacking !== null) pairs.add(`a:${id}->${object.attacking}`);
       if (object.blocking !== null) pairs.add(`b:${id}->${object.blocking}`);
+      // The rest of a band it blocks (rule 702.22h).
+      for (const also of object.blockingAlso ?? []) pairs.add(`b:${id}->${also}`);
     }
     return pairs;
   }

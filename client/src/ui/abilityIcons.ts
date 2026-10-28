@@ -67,6 +67,9 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // No flanking icon anywhere in the font; it's a block trigger, so the
   // combat-condition one.
   flanking: '', // ms-ability-combat-condition
+  // No banding icon in the font; party's — creatures fighting as a group.
+  banding: '', // ms-ability-party
+  'bands-with-other': '', // ms-ability-party
   riot: '', // ms-ability-riot
   // No unleash icon anywhere in the font; it's riot's sibling (an optional
   // +1/+1 counter as it enters), so riot's.

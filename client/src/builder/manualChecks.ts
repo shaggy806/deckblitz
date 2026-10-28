@@ -8431,4 +8431,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Brain Pry: the name is chosen as it resolves, nonland only',
     board({ you: { bf: ['Swamp*2'], hand: ['Brain Pry'] }, opp: { hand: ['Lightning Bolt'] } }),
   ),
+  // --- Banding (2026-10-28, the banding family) -----------------------------
+  preset(
+    "Benalish Hero: attack in a band, and divide the blocker's damage",
+    board({ you: { bf: ['Benalish Hero', 'Grizzly Bears'] }, opp: { human: true, bf: ['Hill Giant'] } }),
+  ),
+  preset(
+    'Benalish Hero: a band takes only one creature without banding',
+    board({ you: { bf: ['Benalish Hero', 'Grizzly Bears', 'Hill Giant'] } }),
+  ),
+  preset(
+    "Benalish Hero: the defender divides a trampler's damage",
+    board({ you: { bf: ['Colossal Dreadmaw'] }, opp: { human: true, bf: ['Benalish Hero'] } }),
+  ),
 ]

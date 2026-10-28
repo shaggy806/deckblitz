@@ -34,7 +34,7 @@ import {
   rangeTargetCount,
   slotOptions,
   specsAtX,
-  standardAssignment,
+  defaultAssignment,
   tapPicksPower,
   targetCountAtX,
   waterbendAt,
@@ -70,6 +70,7 @@ import {
   expandAttackOffer,
   expandBlockOffer,
   expandIds,
+  realId,
 } from './game/stackMembers.ts'
 import type { Members } from './game/stackMembers.ts'
 import { CountStepper } from './ui/CountStepper.tsx'
@@ -1597,6 +1598,16 @@ function Table({
    * board at one click per attacker exactly as before.
    */
   const [attackPicks, setAttackPicks] = useState<readonly ObjectId[]>([])
+  /**
+   * Bands declared with the attack (rule 702.22c), each a list of attacking
+   * objects (a token stack's whole entry joins as one). `bandDraft` is the
+   * band being built — while it isn't null, a click on an attacking creature
+   * adds or drops it instead of taking it out of the attack. Which bands are
+   * legal is the engine's call (`combat/banding.ts`): a refusal comes back
+   * as the error banner, as any declaration's does.
+   */
+  const [attackBands, setAttackBands] = useState<readonly (readonly ObjectId[])[]>([])
+  const [bandDraft, setBandDraft] = useState<readonly ObjectId[] | null>(null)
   const [blockAssign, setBlockAssign] = useState<Record<string, ObjectId>>({})
   // How many blockers share each token of an attacking token stack, by
   // attacker (`stackMembers.ts`'s `PerToken`; 1 when absent), and which
@@ -1974,7 +1985,7 @@ function Table({
   // standard split until the player changes it.
   const damageAnswer = useMemo(
     () =>
-      assignDamageAction ? (damagePicks ?? standardAssignment(assignDamageAction)) : null,
+      assignDamageAction ? (damagePicks ?? defaultAssignment(assignDamageAction)) : null,
     [assignDamageAction, damagePicks],
   )
   const damageGroups = useMemo(
@@ -2828,6 +2839,18 @@ function Table({
         // stack's members (game/stackMembers.ts) — and a click takes one
         // that isn't attacking yet (game/attackGroups.ts).
         const members = expandIds(ids, stackMembers)
+        // Building a band: an attacking creature goes in or out of it.
+        if (bandDraft !== null) {
+          const attackingReal = [...new Set(members.filter((m) => attackAssignments[m] !== undefined).map(realId))]
+          if (attackingReal.length === 0) return
+          setBandDraft((cur) => {
+            const now = cur ?? []
+            return attackingReal.every((r) => now.includes(r))
+              ? now.filter((r) => !attackingReal.includes(r))
+              : [...now, ...attackingReal.filter((r) => !now.includes(r))]
+          })
+          return
+        }
         if (!members.some((i) => attackAction.eligible.includes(i))) {
           sendPicksAt(id)
           return
@@ -3088,6 +3111,7 @@ function Table({
       attackAction,
       attackAssignments,
       attackPicks,
+      bandDraft,
       damageAnswer,
       damageMembersOf,
       sendPicksAt,
@@ -3170,12 +3194,20 @@ function Table({
       })
       return
     }
+    // Each band's entries share its number (`AttackerDeclaration.band`).
+    const bandOf = new Map<ObjectId, number>()
+    attackBands.forEach((band, i) => {
+      for (const id of band) bandOf.set(id, i + 1)
+    })
     game.dispatch({
       type: 'declare-attackers',
       player: seat,
-      attackers: collapseAttacks(attackAssignments, stackMembers),
+      attackers: collapseAttacks(attackAssignments, stackMembers).map((d) => {
+        const band = bandOf.get(d.attacker)
+        return band === undefined ? d : { ...d, band }
+      }),
     })
-  }, [attackAssignments, enterAttackingAction, game, seat, stackMembers])
+  }, [attackAssignments, attackBands, enterAttackingAction, game, seat, stackMembers])
 
   const confirmBlockers = useCallback(() => {
     game.dispatch({
@@ -3327,10 +3359,15 @@ function Table({
     const aimedAt = assignedAt ?? (choosingTarget ? null : obj.attacking) ?? null
     const attackSeat = aimedAt === null ? null : attackSeatClass(aimedAt)
 
-    if (obj.attacking && !choosingTarget) badge = `⚔ ${attackTargetLabel(obj.attacking)}`
+    // An attacker in a band says so (rule 702.22c); a blocker of a band,
+    // how many more of it it blocks (702.22h).
+    if (obj.attacking && !choosingTarget) badge = `⚔ ${attackTargetLabel(obj.attacking)}${obj.band !== undefined ? ' · banded' : ''}`
     // Named off the board shown, as the tile is: the game may already have
     // moved on past this combat, the attacker gone (a raw id read in its place).
-    else if (obj.blocking) badge = `\u{1F6E1} ${view.objects[obj.blocking]?.name ?? game.nameOf(obj.blocking)}`
+    else if (obj.blocking)
+      badge = `\u{1F6E1} ${view.objects[obj.blocking]?.name ?? game.nameOf(obj.blocking)}${
+        obj.blockingAlso !== undefined ? ` +${obj.blockingAlso.length}` : ''
+      }`
     else if (obj.isCommander) badge = 'Commander'
 
     if (mode === 'targeting') {
@@ -3347,6 +3384,11 @@ function Table({
       const picked = members.filter((m) => attackPicks.includes(m))
       highlight = free !== null || isDefenderPw
       selected = attacking.length > 0 || picked.length > 0
+      // Building a band: what's attacking can join it; what's in it is picked.
+      if (bandDraft !== null) {
+        highlight = attacking.length > 0
+        selected = ids.some((i) => bandDraft.includes(i))
+      }
       // A tile of several: how many of them attack, its count row in the
       // bar says whom. One creature: whom it attacks.
       if (attacking.length > 0) {
@@ -3358,6 +3400,8 @@ function Table({
       // A selected-but-unpointed attacker is a distinct state from an
       // assigned one, and the board has to say which is which.
       else if (picked.length > 0) badge = members.length > 1 ? `⚔ ? ×${picked.length}` : '⚔ ?'
+      const band = attackBands.findIndex((b) => ids.some((i) => b.includes(i)))
+      if (band >= 0 && badge !== null) badge = `${badge} · band ${band + 1}`
     } else if (mode === 'blockers' && blockAction) {
       // Over every creature the tile stands for (folded tokens, or a
       // compacted stack's members).
@@ -5194,6 +5238,56 @@ function Table({
             ))}
           </span>
         ) : null}
+        {/* Bands (rule 702.22c), when something attacking can lead one: a
+            chip per band formed, and "Band…" to build another by clicking
+            attacking creatures on the board. */}
+        {attackAction.banding !== undefined && enterAttackingAction === undefined ? (
+          <span className="attack-bands">
+            {attackBands.map((band, i) => (
+              <button
+                key={band.join(',')}
+                type="button"
+                className="attack-band-chip"
+                title="Break up this band"
+                onClick={() => setAttackBands((cur) => cur.filter((_, k) => k !== i))}
+              >
+                Band {i + 1}: {band.map((id) => game.nameOf(id)).join(' + ')} ✕
+              </button>
+            ))}
+            {bandDraft === null ? (
+              <button
+                type="button"
+                disabled={!Object.keys(attackAssignments).some((m) => (attackAction.banding ?? {})[realId(m as ObjectId)] !== undefined)}
+                title="Click attacking creatures to put them in one band"
+                onClick={() => setBandDraft([])}
+              >
+                Band…
+              </button>
+            ) : (
+              <>
+                <span className="decision-hint">
+                  {bandDraft.length === 0
+                    ? 'click attackers to band together'
+                    : bandDraft.map((id) => game.nameOf(id)).join(' + ')}
+                </span>
+                <button
+                  type="button"
+                  disabled={bandDraft.length < 2}
+                  onClick={() => {
+                    const draft = bandDraft
+                    setAttackBands((cur) => [...cur.map((b) => b.filter((id) => !draft.includes(id))).filter((b) => b.length > 1), draft])
+                    setBandDraft(null)
+                  }}
+                >
+                  Make band
+                </button>
+                <button type="button" onClick={() => setBandDraft(null)}>
+                  Cancel
+                </button>
+              </>
+            )}
+          </span>
+        ) : null}
         {/* "All attack" and Clear stay, disabled while there's nothing for
             them to do: coming and going, they moved Confirm's neighbours on
             every click. */}
@@ -5450,9 +5544,16 @@ function Table({
     controls = (
       <div className="controls damage-assign">
         <span>
-          Assign {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage
+          {/* Banding hands the division to the other side (rules
+              702.22j-k): it's the opponent's creature's damage being split,
+              and a blocker's among the band it blocks. */}
+          {offer.forOpponent === true ? 'Banding: you divide ' : 'Assign '}
+          {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage
           {offer.trample ? ' (trample)' : ''}
-          <span className="muted"> · click a blocker to kill or spare it</span>
+          <span className="muted">
+            {' '}
+            · click {offer.blocking === true ? 'an attacker' : 'a blocker'} to kill or spare it
+          </span>
         </span>
         <div className="damage-rows">
           {damageGroups.map((g) => {
