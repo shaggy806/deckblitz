@@ -722,6 +722,7 @@ import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThicketCrasher from "../pool/thicket-crasher.js";
+import _poolThievesTools from "../pool/thieves-tools.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
@@ -1560,6 +1561,7 @@ const shard: CardShard = {
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
     _poolThicketCrasher,
+    _poolThievesTools,
     _poolThopterAssembly,
     _poolThopterShop,
     _poolThorin,

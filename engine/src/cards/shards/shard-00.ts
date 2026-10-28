@@ -272,6 +272,7 @@ import _poolGixsCommand from "../pool/gixs-command.js";
 import _poolGlacialRay from "../pool/glacial-ray.js";
 import _poolGlarewielder from "../pool/glarewielder.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
+import _poolGlimmerLens from "../pool/glimmer-lens.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
 import _poolGloomSurgeon from "../pool/gloom-surgeon.js";
 import _poolGloweringRogon from "../pool/glowering-rogon.js";
@@ -365,6 +366,7 @@ import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
 import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
+import _poolKalainReclusivePainter from "../pool/kalain-reclusive-painter.js";
 import _poolKamiOfTheHunt from "../pool/kami-of-the-hunt.js";
 import _poolKavuLair from "../pool/kavu-lair.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
@@ -644,6 +646,7 @@ import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
 import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
+import _poolSpoilsOfTheHunt from "../pool/spoils-of-the-hunt.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
 import _poolSquealingDevil from "../pool/squealing-devil.js";
 import _poolStaffOfTheWildMagus from "../pool/staff-of-the-wild-magus.js";
@@ -1110,6 +1113,7 @@ const shard: CardShard = {
     _poolGlacialRay,
     _poolGlarewielder,
     _poolGleamingSplendor,
+    _poolGlimmerLens,
     _poolGlintSleeveArtisan,
     _poolGloomSurgeon,
     _poolGloweringRogon,
@@ -1203,6 +1207,7 @@ const shard: CardShard = {
     _poolJuniperOrderDruid,
     _poolKabiraCrossroads,
     _poolKabiraVindicator,
+    _poolKalainReclusivePainter,
     _poolKamiOfTheHunt,
     _poolKavuLair,
     _poolKayasOnslaught,
@@ -1482,6 +1487,7 @@ const shard: CardShard = {
     _poolSpellShrivel,
     _poolSpellStutter,
     _poolSpinedMegalodon,
+    _poolSpoilsOfTheHunt,
     _poolSpringLoadedSawblades,
     _poolSquealingDevil,
     _poolStaffOfTheWildMagus,

@@ -710,6 +710,7 @@ import _poolSunder from "../pool/sunder.js";
 import _poolSunkenHollow from "../pool/sunken-hollow.js";
 import _poolSunstreakPhoenix from "../pool/sunstreak-phoenix.js";
 import _poolSuperSkrull from "../pool/super-skrull.js";
+import _poolSuplex from "../pool/suplex.js";
 import _poolSuqataAssassin from "../pool/suqata-assassin.js";
 import _poolSureshotSower from "../pool/sureshot-sower.js";
 import _poolSurvivorOfKorlis from "../pool/survivor-of-korlis.js";
@@ -1583,6 +1584,7 @@ const shard: CardShard = {
     _poolSunkenHollow,
     _poolSunstreakPhoenix,
     _poolSuperSkrull,
+    _poolSuplex,
     _poolSuqataAssassin,
     _poolSureshotSower,
     _poolSurvivorOfKorlis,

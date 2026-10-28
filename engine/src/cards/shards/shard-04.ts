@@ -101,6 +101,7 @@ import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolClockworkHydra from "../pool/clockwork-hydra.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolCoilingWoodworm from "../pool/coiling-woodworm.js";
+import _poolCoinOfMastery from "../pool/coin-of-mastery.js";
 import _poolColossalHeroics from "../pool/colossal-heroics.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolClockworkHydra,
     _poolCocoon,
     _poolCoilingWoodworm,
+    _poolCoinOfMastery,
     _poolColossalHeroics,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,

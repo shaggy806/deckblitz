@@ -516,6 +516,7 @@ import _poolPhthisis from "../pool/phthisis.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
+import _poolPlagueDrone from "../pool/plague-drone.js";
 import _poolPlagueRats from "../pool/plague-rats.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
@@ -1348,6 +1349,7 @@ const shard: CardShard = {
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
+    _poolPlagueDrone,
     _poolPlagueRats,
     _poolPleaForPower,
     _poolPouncingLynx,

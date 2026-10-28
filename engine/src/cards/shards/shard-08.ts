@@ -676,6 +676,7 @@ import _poolSpellContortion from "../pool/spell-contortion.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
+import _poolSpikefieldCave from "../pool/spikefield-cave.js";
 import _poolSpiritLink from "../pool/spirit-link.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSpiritualSanctuary from "../pool/spiritual-sanctuary.js";
@@ -1528,6 +1529,7 @@ const shard: CardShard = {
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,
     _poolSpiderManNewChampion,
+    _poolSpikefieldCave,
     _poolSpiritLink,
     _poolSpiritOfMalevolence,
     _poolSpiritualSanctuary,

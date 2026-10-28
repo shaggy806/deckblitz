@@ -107,6 +107,7 @@ import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
 import _poolCaptainsHook from "../pool/captains-hook.js";
 import _poolCatCollector from "../pool/cat-collector.js";
+import _poolCataclysmicProspecting from "../pool/cataclysmic-prospecting.js";
 import _poolCatalog from "../pool/catalog.js";
 import _poolCatharticPyre from "../pool/cathartic-pyre.js";
 import _poolCathodion from "../pool/cathodion.js";
@@ -933,6 +934,7 @@ const shard: CardShard = {
     _poolCaptainStormCosmiumRaider,
     _poolCaptainsHook,
     _poolCatCollector,
+    _poolCataclysmicProspecting,
     _poolCatalog,
     _poolCatharticPyre,
     _poolCathodion,

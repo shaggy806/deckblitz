@@ -744,6 +744,7 @@ import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
+import _poolVarchildBetrayerOfKjeldor from "../pool/varchild-betrayer-of-kjeldor.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVault87ForcedEvolution from "../pool/vault-87-forced-evolution.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
@@ -1562,6 +1563,7 @@ const shard: CardShard = {
     _poolVampireLacerator,
     _poolVampiricFury,
     _poolVaporSnag,
+    _poolVarchildBetrayerOfKjeldor,
     _poolVault75MiddleSchool,
     _poolVault87ForcedEvolution,
     _poolVedalkenEngineer,

@@ -17,6 +17,7 @@ import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAleatory from "../pool/aleatory.js";
 import _poolAlluringScent from "../pool/alluring-scent.js";
+import _poolAlphaAuthority from "../pool/alpha-authority.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
@@ -332,6 +333,7 @@ import _poolHopeEstheim from "../pool/hope-estheim.js";
 import _poolHostileRealm from "../pool/hostile-realm.js";
 import _poolHouseGuildmage from "../pool/house-guildmage.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
+import _poolHungeringHydra from "../pool/hungering-hydra.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolHunterSliver from "../pool/hunter-sliver.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
@@ -417,6 +419,7 @@ import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMarduScout from "../pool/mardu-scout.js";
+import _poolMarut from "../pool/marut.js";
 import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolAjaniOutlandChaperone,
     _poolAleatory,
     _poolAlluringScent,
+    _poolAlphaAuthority,
     _poolAlpharaelStonechosen,
     _poolAlpineGuide,
     _poolAmazingSpiderGirl,
@@ -1160,6 +1164,7 @@ const shard: CardShard = {
     _poolHostileRealm,
     _poolHouseGuildmage,
     _poolHullbreakerHorror,
+    _poolHungeringHydra,
     _poolHuntedWitness,
     _poolHunterSliver,
     _poolIanTheReckless,
@@ -1245,6 +1250,7 @@ const shard: CardShard = {
     _poolMarduDevotee,
     _poolMarduHateblade,
     _poolMarduScout,
+    _poolMarut,
     _poolMascotInterception,
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
