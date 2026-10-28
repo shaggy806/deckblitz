@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the variable-target-count family** (2026-10-28, B245,
+  `decision:variable-target-count` + `decision:x-targets` + `decision:target-total-mana-value` +
+  `decision:any-number-targets-in-mode`): an `any-number` group's `max`/`min` as any amount on a
+  triggered or activated ability, read as its targets are chosen (rules 603.3d, 601.2c, 602.2b —
+  `specsWithAmounts`); `maxTotalManaValue` and `differentManaValues`; a group in a `castModal`
+  mode, the bots fitting picks to X (`fitModalXGroup`) and the client asking X after a modal
+  spell's modes (it cast them at X = 0); a modal triggered ability's group resolving with every
+  member (it reached only the last — Oracle of Tragedy too); scaffolder templates for "(up to) X
+  target …" and "… with total mana value N or less". 38 cards: Orcus, Kairi, Heroic Feast, Serra's
+  Liturgy, Lost in the Maze, Patch Up, Agadeem's Awakening, Heliod's Intervention, Profane Command,
+  Ancient Brass Dragon, Death Kiss, Prismabasher and the rest; 18 still blocked on narrow keys
+  (`B245.json`).
 - **Need-keys Phase 2, the grant-protection family** (2026-10-28, B244,
   `effect:grant-protection-choice` + `effect:grant-protection-temporary`): the `grant-protection`
   effect — protection for a duration on a target and/or a filter's matches (rule 702.16, layer

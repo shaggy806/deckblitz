@@ -341,6 +341,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   lead, 54 by three agents), 10 still blocked, 3 of them on new narrow keys. The tier B keys of the
   family (sharing protection, protection from own colours, a protection filter) needed code of
   their own and didn't ride along. Next: `decision:variable-target-count` (48).
+- **2026-10-28: the variable-target-count family (B245).** Its top group (four keys, 49 cards by
+  `--greedy`) and the in-mode key: an amount as an ability's group bound, read as its targets are
+  chosen; a total mana value cap and different mana values; groups in a modal spell's mode (the
+  client now asks X after the modes). Building it found a modal trigger's group resolving with only
+  its last member. 38 authored (10 by the lead, 28 by two agents), 18 still blocked, four on new
+  narrow keys. `decision:mixed-zone-targets` (4) and `decision:twice-x-target-count` (1) stay open:
+  code of their own. Next: NEXT_FAMILY.
 
 ## Rough size
 
