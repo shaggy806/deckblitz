@@ -1711,14 +1711,49 @@ export function staticOutlivesLoss(
  */
 function staticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
   if (staticLossesInProgress || !anyLoseAllSource(state, registry)) return NO_LOSSES;
-  return computedCacheMemo("static-ability-losses", () => {
+  const fresh = (): StaticLosses => {
     staticLossesInProgress = true;
     try {
       return computeStaticAbilityLosses(state, registry);
     } finally {
       staticLossesInProgress = false;
     }
-  });
+  };
+  // Asked from inside a guard, the reads it makes are conservative: answer,
+  // never keep.
+  if (guardActive()) return fresh();
+  // Kept per mutation, as `anyLoseAllSource` is, region or not: every ability
+  // check asks it, most of them outside a region (`moveObject`, an SBA
+  // sweep's moves), and a board scan each time was 15% of a fuzzer game with
+  // Humility out (2026-10-28).
+  const memo = staticLossesMemo;
+  if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
+    if (cacheCheck && !sameLosses(memo.value, fresh())) {
+      throw new Error("computed-cache divergence (static ability losses): a mutation is missing an invalidateComputedCache() call");
+    }
+    return memo.value;
+  }
+  const value = fresh();
+  staticLossesMemo = { state, registry, epoch: mutationEpoch, value };
+  return value;
+}
+
+/** The last {@link staticAbilityLosses} answer, and what it was for. */
+let staticLossesMemo: {
+  readonly state: GameState;
+  readonly registry: CardRegistry;
+  readonly epoch: number;
+  readonly value: StaticLosses;
+} | null = null;
+
+function sameLosses(a: StaticLosses, b: StaticLosses): boolean {
+  if (a.lost.size !== b.lost.size || a.applied.size !== b.applied.size) return false;
+  for (const [id, at] of a.lost) if (b.lost.get(id) !== at) return false;
+  for (const [id, set] of a.applied) {
+    const other = b.applied.get(id);
+    if (other === undefined || other.size !== set.size || [...set].some((x) => !other.has(x))) return false;
+  }
+  return true;
 }
 
 /** The last {@link anyLoseAllSource} answer, and what it was for. */
