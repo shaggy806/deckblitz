@@ -1444,7 +1444,7 @@
   "replacement:damage-modification": {
    "size": "medium",
    "ui": false,
-   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead)."
+   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead). Not covered (recheck R8): a source named as this Aura's host (replacement:damage-multiplier-by-attached), or combat damage turned into the damaged player milling (replacement:combat-damage-becomes-mill)."
   },
   "replacement:enters-modifier-via-permission": {
    "size": "small",
@@ -1454,7 +1454,7 @@
   "replacement:exile-instead": {
    "size": "small",
    "ui": false,
-   "description": "Exile-instead replacements: finality counters, 'if it would leave the battlefield, exile it instead of putting it anywhere else', and a dies-only form that doesn't catch discard or mill."
+   "description": "Exile-instead replacements: finality counters, 'if it would leave the battlefield, exile it instead of putting it anywhere else', and a dies-only form that doesn't catch discard or mill. Not covered (recheck R8): another permanent entering without being cast exiled instead (replacement:enter-exile-if-not-cast), or a turn-long exile-instead that returns each card at the next end step (replacement:turn-exile-instead-return-at-end-step)."
   },
   "replacement:mana-pool-emptying": {
    "size": "medium",
@@ -1466,7 +1466,7 @@
   "replacement:new-event-replacements": {
    "size": "medium",
    "ui": false,
-   "description": "New ReplacementSpec event kinds: 'if you would draw a card, draw N instead' (conditional), a would-mill multiplier scoped to opponents, and life gain ('gain that much plus N', 'opponents can't gain life')."
+   "description": "New ReplacementSpec event kinds: 'if you would draw a card, draw N instead' (conditional), a would-mill multiplier scoped to opponents, and life gain ('gain that much plus N', 'opponents can't gain life'). Not covered (recheck R8): a draw instruction of two or more cards (replacement:draw-two-or-more-shared), an empty-library draw returning a creature card (replacement:empty-library-draw-returns-creature), an opponent's next draw this turn becoming an impulse exile (replacement:opponent-next-draw-becomes-impulse)."
   },
   "replacement:spell-exiled-as-it-resolves": {
    "size": "small",
@@ -1476,12 +1476,12 @@
   "replacement:token-creation-additive": {
    "size": "medium",
    "ui": false,
-   "description": "An additive token replacement (rule 614.1a): 'those tokens plus that many [token] are created instead'. The extra tokens inherit the creating effect's riders (tapped, attacking, haste, end-step sacrifice) but not the original tokens' abilities, and the replacement doesn't apply to its own tokens."
+   "description": "An additive token replacement (rule 614.1a): 'those tokens plus that many [token] are created instead'. The extra tokens inherit the creating effect's riders (tapped, attacking, haste, end-step sacrifice) but not the original tokens' abilities, and the replacement doesn't apply to its own tokens. Not covered (recheck R8): one extra token of a kind, or only for some kinds of token (replacement:token-creation-add-extra), or one of each of several tokens (replacement:token-creation-one-of-each)."
   },
   "stat:mana-spent-to-cast": {
    "size": "small",
    "ui": false,
-   "description": "Where the mana spent to cast a spell came from, and how much: every unit of mana carries its source's types, subtypes and supertypes as it made the mana (ManaUnit.from, a ManaOrigin — extra mana from a triggered mana ability is that ability's permanent's), a spell keeps them as it's paid for (GameObject.manaSpentFrom, like manaSpent), and the manaFrom filter clause asks for at least N units from a matching source ('if mana from an artifact was spent to cast it'); the manaSpentOf amount and manaSpent clause are the total."
+   "description": "Where the mana spent to cast a spell came from, and how much: every unit of mana carries its source's types, subtypes and supertypes as it made the mana (ManaUnit.from, a ManaOrigin — extra mana from a triggered mana ability is that ability's permanent's), a spell keeps them as it's paid for (GameObject.manaSpentFrom, like manaSpent), and the manaFrom filter clause asks for at least N units from a matching source ('if mana from an artifact was spent to cast it'); the manaSpentOf amount and manaSpent clause are the total. Not covered (recheck R8): the mana spent on a target spell after it was countered (stat:countered-spell-mana-spent)."
   },
   "stat:milled-this-turn": {
    "size": "small",
@@ -1491,7 +1491,7 @@
   "stat:object-damage-history": {
    "size": "medium",
    "ui": false,
-   "description": "A per-object, turn-scoped record of damage: which sources damaged it (with last-known subtypes and controllers), whether it dealt damage to another creature this turn, and whether it was dealt excess damage (rule 120.4a). It backs 'dies after being dealt damage this turn by a [filter]' and 'is dealt excess damage'."
+   "description": "A per-object, turn-scoped record of damage: which sources damaged it (with last-known subtypes and controllers), whether it dealt damage to another creature this turn, and whether it was dealt excess damage (rule 120.4a). It backs 'dies after being dealt damage this turn by a [filter]' and 'is dealt excess damage'. Not covered (recheck R8): per-player records of what dealt them combat damage (target:player-dealt-combat-damage-by-n-filter, target:player-dealt-combat-damage-by-source-this-turn, stat:players-dealt-combat-damage-by-name-this-game), the damage dealt to an object as an amount (amount:damage-dealt-to-object-this-turn), excess damage to permanents that have since left (stat:excess-damage-to-departed-this-turn)."
   },
   "stat:per-ability-turn-counters": {
    "size": "small",
@@ -1501,12 +1501,12 @@
   "stat:spells-cast-this-turn-record": {
    "size": "medium",
    "ui": false,
-   "description": "A per-player, per-turn record of each spell cast: its types, subtypes and mana value, with X included. It backs conditions such as 'you've cast an instant or sorcery this turn', 'a creature and a noncreature spell', 'three or more spells', and 'an {X} spell already this turn'."
+   "description": "A per-player, per-turn record of each spell cast: its types, subtypes and mana value, with X included. It backs conditions such as 'you've cast an instant or sorcery this turn', 'a creature and a noncreature spell', 'three or more spells', and 'an {X} spell already this turn'. Not covered (recheck R8): the count of spells cast before a triggering spell (stat:spells-cast-before-trigger-spell)."
   },
   "stat:turn-event-tallies": {
    "size": "medium",
    "ui": false,
-   "description": "Per-player, per-turn tallies: PlayerState.turnHistory — permanents entered under a player's control, creatures died under it (last-known), permanents sacrificed, permanents exiled from under it, permanent cards put into their graveyard (descend), damage and combat damage taken, raid, and the damage sources they controlled dealt with each source's colours as it dealt it — read by the turn-history and damage-dealt-this-turn conditions, the turnHistory and damageDealtThisTurn amounts and the damage-taken, combat-damage-taken and attacked turn stats (Tymna the Weaver, Éowyn, Shieldmaiden, Ojer Axonil's Temple of Power)."
+   "description": "Per-player, per-turn tallies: PlayerState.turnHistory — permanents entered under a player's control, creatures died under it (last-known), permanents sacrificed, permanents exiled from under it, permanent cards put into their graveyard (descend), damage and combat damage taken, raid, and the damage sources they controlled dealt with each source's colours as it dealt it — read by the turn-history and damage-dealt-this-turn conditions, the turnHistory and damageDealtThisTurn amounts and the damage-taken, combat-damage-taken and attacked turn stats (Tymna the Weaver, Éowyn, Shieldmaiden, Ojer Axonil's Temple of Power). Not covered (recheck R8): library searches (stat:searched-library-this-turn)."
   },
   "static:affect-scope-by-filter": {
    "size": "medium",
@@ -1541,7 +1541,7 @@
   "static:enters-replacement-for-others": {
    "size": "medium",
    "ui": false,
-   "description": "Enters-battlefield replacements applied to other permanents: opponents' matching permanents enter tapped, and other creatures you control enter with N extra +1/+1 counters, with N read when they enter."
+   "description": "Enters-battlefield replacements applied to other permanents: opponents' matching permanents enter tapped, and other creatures you control enter with N extra +1/+1 counters, with N read when they enter. Not covered (recheck R8): granting the replacements to commander creatures (static:grant-replacement-to-commanders)."
   },
   "static:gain-abilities-from-graveyard": {
    "size": "medium",
@@ -1553,7 +1553,7 @@
   "static:grant-abilities-to-spells": {
    "size": "medium",
    "ui": false,
-   "description": "Statics and turn-scoped effects that grant keywords or abilities to spells you cast, read on the stack and at cast time. Built: a grantsToSpells static (filter, castFrom, keywords, triggered — Abaddon's cascade as a granted this-cast trigger, 'spells you cast have lifelink'), grant-keyword on a spell on the stack (Judith's deathtouch and lifelink), and dealDamage honouring a spell's lifelink and deathtouch. Split second granted to spells is not modelled (it's a card field, not a keyword)."
+   "description": "Statics and turn-scoped effects that grant keywords or abilities to spells you cast, read on the stack and at cast time. Built: a grantsToSpells static (filter, castFrom, keywords, triggered — Abaddon's cascade as a granted this-cast trigger, 'spells you cast have lifelink'), grant-keyword on a spell on the stack (Judith's deathtouch and lifelink), and dealDamage honouring a spell's lifelink and deathtouch. Split second granted to spells is not modelled (it's a card field, not a keyword). Not covered (recheck R8): a one-shot 'the next spell you cast this turn has convoke' (effect:next-spell-has-convoke)."
   },
   "static:grant-to-cards-outside-battlefield": {
    "size": "medium",
@@ -1563,7 +1563,7 @@
   "static:grant-types-to-others": {
    "size": "medium",
    "ui": false,
-   "description": "Layer-4 statics that add types or subtypes to other permanents. effectiveTypes and effectiveSubtypes, matchesFilter and staticAffects then have to read external grants."
+   "description": "Layer-4 statics that add types or subtypes to other permanents. effectiveTypes and effectiveSubtypes, matchesFilter and staticAffects then have to read external grants. Not covered (recheck R8): making permanents Equipment with granted equip abilities (static:grant-equipment-type-and-equip); types for spells and cards outside the battlefield are static:static-types-outside-battlefield."
   },
   "static:legend-rule-exemptions": {
    "size": "small",
@@ -1578,12 +1578,12 @@
   "static:max-hand-size": {
    "size": "small",
    "ui": false,
-   "description": "Statics that set a maximum hand size, for the controller ('eleven') or for opponents, read in the cleanup discard."
+   "description": "Statics that set a maximum hand size, for the controller ('eleven') or for opponents, read in the cleanup discard. Not covered (recheck R8): a one-shot 'until your next turn' (effect:no-max-hand-size-until-your-next-turn), or one granted to a creature and read for its controller (static:granted-no-max-hand-size)."
   },
   "static:pt-per-amount": {
    "size": "small",
    "ui": false,
-   "description": "grantPtPerCount counts things other than battlefield permanents: counters on the affected object itself, and cards in exile. Not covered (recheck R1): a count of the Auras and Equipment attached to the static's own source — static:pt-per-attachments-on-source."
+   "description": "grantPtPerCount counts things other than battlefield permanents: counters on the affected object itself, and cards in exile. Not covered (recheck R1): a count of the Auras and Equipment attached to the static's own source — static:pt-per-attachments-on-source. Nor (recheck R8): a count keyed on each affected creature's own name (static:pt-per-same-name-as-affected), or over the defending player's permanents (static:pt-per-defending-player-count)."
   },
   "static:self-type-changes": {
    "size": "medium",
@@ -1593,17 +1593,17 @@
   "static:set-base-pt-others": {
    "size": "medium",
    "ui": false,
-   "description": "Layer-7b base P/T sets on other permanents: a static that sets base P/T or base toughness only, and one-shot mass effects over a filter that animate every match or set its base P/T until end of turn."
+   "description": "Layer-7b base P/T sets on other permanents: a static that sets base P/T or base toughness only, and one-shot mass effects over a filter that animate every match or set its base P/T until end of turn. Not covered (recheck R8): a base P/T set to a live amount such as your life total (static:set-base-pt-to-life-total)."
   },
   "static:trigger-count-modifiers": {
    "size": "medium",
    "ui": false,
-   "description": "More causes for the trigger doubler: a cast or a copy, damage dealt to your creatures, a source of power 2 or less, a creature type, a source and its Equipment. Built so far: doubleTriggers over entering, attacking and combat damage to a player, and suppressEntryTriggers (Elesh Norn, Torpor Orb)."
+   "description": "More causes for the trigger doubler: a cast or a copy, damage dealt to your creatures, a source of power 2 or less, a creature type, a source and its Equipment. Built so far: doubleTriggers over entering, attacking and combat damage to a player, and suppressEntryTriggers (Elesh Norn, Torpor Orb). Not covered (recheck R8): leaving the battlefield as a cause (static:double-triggers-on-leaves), creatures dying suppressing triggers (static:suppress-enter-and-dies-triggers), a doubler granted to one creature (static:granted-dies-trigger-doubling) or naming the Equipment's host (static:double-triggers-of-attached), the attack cause narrowed to your creatures (static:double-attack-triggers-your-attackers)."
   },
   "trigger:activates-ability": {
    "size": "small",
    "ui": false,
-   "description": "A 'whenever a player activates an ability' trigger beyond who: \"attached\" (built for Battlemage's Bracers): other players and objects, with filters such as '{X} in its activation cost'."
+   "description": "A 'whenever a player activates an ability' trigger beyond who: \"attached\" (built for Battlemage's Bracers): other players and objects, with filters such as '{X} in its activation cost'. Not covered (recheck R8): artifacts' abilities without {T} in the cost (trigger:artifact-tapped-or-untapped-cost-activation), abilities of cards in a graveyard (trigger:activates-ability-from-graveyard), the size of a loyalty cost (trigger:activates-loyalty-ability-cost-size)."
   },
   "trigger:becomes-target-fixes": {
    "size": "small",
@@ -1623,7 +1623,7 @@
   "trigger:cast-or-play-origin-zone": {
    "size": "small",
    "ui": false,
-   "description": "Record the zone a spell was cast from, or a land played from, on the spell-cast and land-played events. Cast triggers can then filter on 'from your hand', 'not from your hand' or 'from exile', and 'play a card from exile' includes lands."
+   "description": "Record the zone a spell was cast from, or a land played from, on the spell-cast and land-played events. Cast triggers can then filter on 'from your hand', 'not from your hand' or 'from exile', and 'play a card from exile' includes lands. Not covered (recheck R8): 'not from your hand' on a land played or a land entering, token lands included (filter:origin-other-than-hand)."
   },
   "trigger:cast-spell-clauses": {
    "size": "small",
@@ -1633,7 +1633,7 @@
   "trigger:combat-damage-batch": {
    "size": "medium",
    "ui": false,
-   "description": "Batched 'one or more creatures [you control / matching a filter] deal combat damage to a player / to your opponents'. It fires once per damaged player per combat-damage sub-pass, with the batch available."
+   "description": "Batched 'one or more creatures [you control / matching a filter] deal combat damage to a player / to your opponents'. It fires once per damaged player per combat-damage sub-pass, with the batch available. Not covered (recheck R8): one trigger acting on every opponent damaged (trigger:damage-batch-over-opponents)."
   },
   "trigger:combat-trigger-extensions": {
    "size": "medium",

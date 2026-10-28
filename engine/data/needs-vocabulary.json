@@ -13625,6 +13625,201 @@
    "family": "cost:mana-ability-complex-costs",
    "example": "Molt Tender",
    "description": "A mana ability whose cost exiles a card from your graveyard: refused outright ('mana ability can't exile cards from a graveyard yet')."
+  },
+  "replacement:damage-multiplier-by-attached": {
+   "family": "replacement:damage-modification",
+   "description": "A would-deal-damage multiplier whose source is this Aura's (or Equipment's) own host: `source` is a CardFilter and `enchantedBy` matches any Aura you control, so 'if enchanted creature would deal combat damage …, it deals double' can't be scoped.",
+   "example": "The Sound of Drums"
+  },
+  "replacement:combat-damage-becomes-mill": {
+   "family": "replacement:damage-modification",
+   "description": "A would-deal-damage replacement that replaces combat damage to a player with that player milling that many cards ('instead that player mills that many cards'); prevent's `then` can't name the damaged player.",
+   "example": "Undead Alchemist"
+  },
+  "replacement:enter-exile-if-not-cast": {
+   "family": "replacement:exile-instead",
+   "description": "An others-enter replacement that exiles a nontoken creature entering without having been cast ('if a nontoken creature would enter and it wasn't cast, exile it instead'): others-enter-battlefield can tap or add counters, not send the permanent elsewhere, and its filter can't ask whether it was cast.",
+   "example": "Containment Priest"
+  },
+  "replacement:turn-exile-instead-return-at-end-step": {
+   "family": "replacement:exile-instead",
+   "description": "A resolving spell installs, for the rest of the turn, 'if a permanent you control would be put into a graveyard from the battlefield, exile it instead' and returns each one so exiled at the beginning of the next end step (turn-exile-if-dies-filter without the return).",
+   "example": "Cosmic Intervention"
+  },
+  "replacement:draw-two-or-more-shared": {
+   "family": "replacement:new-event-replacements",
+   "description": "A would-draw replacement on an opponent's single draw instruction of two or more cards, replacing it with that player and you each drawing one ('If an opponent would draw two or more cards, instead you and that player each draw a card').",
+   "example": "Alms Collector"
+  },
+  "replacement:empty-library-draw-returns-creature": {
+   "family": "replacement:new-event-replacements",
+   "description": "'If you would draw a card while your library has no cards in it, instead return a creature card from your graveyard to the battlefield. If you can't, you lose the game': the empty-library draw replacement can only win the game or redirect the draw.",
+   "example": "Out of the Tombs"
+  },
+  "replacement:opponent-next-draw-becomes-impulse": {
+   "family": "replacement:new-event-replacements",
+   "description": "A delayed would-draw replacement installed on another player for their next draw this turn ('the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn').",
+   "example": "Urabrask, Heretic Praetor"
+  },
+  "replacement:chosen-source-shield-you-and-your-creatures": {
+   "family": "replacement:prevent-damage-from-chosen-source",
+   "description": "'The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage', one shield over a player and their creatures, with a follow-up gated on the source's colour (a black source: gain that much life).",
+   "example": "Shadowbane"
+  },
+  "replacement:all-hand-spells-exiled-linked": {
+   "family": "replacement:new-event-replacements",
+   "description": "A static that exiles every instant or sorcery spell any player cast from their hand as it resolves, linked to this permanent (rule 607.2a) — mandatory, every player's, unlike the optional exile-spell-as-it-resolves-linked.",
+   "example": "River Song's Diary"
+  },
+  "replacement:token-creation-one-of-each": {
+   "family": "replacement:token-creation-additive",
+   "description": "'If you would create a Clue, Food, or Treasure token, instead create one of each': a token replacement that swaps the token made for a set of named tokens, per token (the rulings: two Manufactors make nine).",
+   "example": "Academy Manufactor"
+  },
+  "stat:countered-spell-mana-spent": {
+   "family": "stat:mana-spent-to-cast",
+   "description": "'The amount of mana spent to cast that spell' for a spell target after it was countered: manaSpentOf reads the cleared manaSpent off a target that left the stack (only a cast trigger's own spell is read through lastStackManaSpent), and a delayed trigger must carry it.",
+   "example": "Mana Sculpt"
+  },
+  "target:player-dealt-combat-damage-by-n-filter": {
+   "family": "stat:object-damage-history",
+   "description": "A target restriction on a permanent's controller: 'controlled by a player who was dealt combat damage by three or more Pirates this turn' — no per-player record of which creatures dealt them combat damage this turn.",
+   "example": "Admiral Beckett Brass"
+  },
+  "stat:players-dealt-combat-damage-by-name-this-game": {
+   "family": "stat:object-damage-history",
+   "description": "A player scope 'each opponent dealt combat damage this game by a creature named [name]' — a game-long per-player record of the names of creatures that dealt them combat damage.",
+   "example": "Gollum, Obsessed Stalker"
+  },
+  "target:player-dealt-combat-damage-by-source-this-turn": {
+   "family": "stat:object-damage-history",
+   "description": "A player target restricted to one dealt combat damage by this permanent this turn ('target player who was dealt combat damage by Hope of Ghirapur this turn'), the source matched across its sacrifice.",
+   "example": "Hope of Ghirapur"
+  },
+  "stat:excess-damage-to-departed-this-turn": {
+   "family": "stat:object-damage-history",
+   "description": "'If a creature or planeswalker an opponent controlled was dealt excess damage this turn' counting those that have left the battlefield since (the ruling): excessDamageThisTurn is a filter on permanents still there.",
+   "example": "Rith, Liberated Primeval"
+  },
+  "amount:damage-dealt-to-object-this-turn": {
+   "family": "stat:object-damage-history",
+   "description": "An amount: the damage dealt to an object this turn, read as it last existed for a dies trigger ('where X is the amount of damage dealt to it this turn').",
+   "example": "Tangled Colony"
+  },
+  "stat:spells-cast-before-trigger-spell": {
+   "family": "stat:spells-cast-this-turn-record",
+   "description": "An amount fixed as a cast trigger triggers: the instant and sorcery spells any player cast this turn before the triggering spell ('1 plus the number of instant and sorcery spells cast before that spell this turn'), not those cast in response later.",
+   "example": "Sentinel Tower"
+  },
+  "stat:searched-library-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "description": "A per-player turn record that they searched their library ('if an opponent searched their library this turn' — Archive Trap's {0} alternative cost).",
+   "example": "Archive Trap"
+  },
+  "static:cant-attack-lacking-either-keyword": {
+   "family": "static:combat-restriction-extensions",
+   "description": "'Creatures without flying or islandwalk can't attack' — a cant-attack static over creatures lacking both of two keywords, read as attackers are declared (one notKeyword per filter, no negated anyOf).",
+   "example": "Stormtide Leviathan"
+  },
+  "static:grant-replacement-to-commanders": {
+   "family": "static:enters-replacement-for-others",
+   "description": "A static granting enters-with-counter replacements ('This creature enters with an additional +1/+1 counter' and 'Other creatures you control enter with …') to the commander creatures you own, wherever they enter from.",
+   "example": "Master Chef"
+  },
+  "effect:next-spell-has-convoke": {
+   "family": "static:grant-abilities-to-spells",
+   "description": "'The next spell you cast this turn has convoke' — a one-shot grant of convoke to a player's next spell this turn.",
+   "example": "Wand of the Worldsoul"
+  },
+  "trigger:damage-to-attached-permanent": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "A deals-damage trigger on damage dealt to this Aura's (or Equipment's) own host ('whenever a creature deals damage to enchanted planeswalker'): toFilter is a CardFilter, which can't name the attached permanent.",
+   "example": "Liliana's Talent"
+  },
+  "static:grant-equipment-type-and-equip": {
+   "family": "static:grant-types-to-others",
+   "description": "A static making other permanents Equipment in addition to their other types with granted equip abilities and an equipped-creature bonus ('Treasures you control are Equipment … and have \"Equipped creature gets +2/+0,\" equip Pirate {1}, and equip {3}').",
+   "example": "Gemcutter Buccaneer"
+  },
+  "static:pt-per-same-name-as-affected": {
+   "family": "static:pt-per-amount",
+   "description": "'Each nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature': a count keyed on each affected creature's own name.",
+   "example": "Mirror Box"
+  },
+  "effect:no-max-hand-size-until-your-next-turn": {
+   "family": "static:max-hand-size",
+   "description": "A one-shot player effect from a resolving spell: 'you have no maximum hand size until your next turn' — noMaxHandSize is only read off permanents.",
+   "example": "Enter the Infinite"
+  },
+  "static:granted-no-max-hand-size": {
+   "family": "static:max-hand-size",
+   "description": "'Enchanted creature has \"You have no maximum hand size\"': a granted static whose 'you' is the enchanted creature's controller, not the Aura's.",
+   "example": "Nerd Rage"
+  },
+  "static:pt-per-defending-player-count": {
+   "family": "static:pt-per-amount",
+   "description": "A static +X/+0 while attacking, X counted over the defending player's permanents ('where X is the number of lands defending player controls'): grantPtPerCount counts from its controller's side.",
+   "example": "Elturel Survivors"
+  },
+  "static:set-base-pt-to-life-total": {
+   "family": "static:set-base-pt-others",
+   "description": "A layer-7b base P/T set to a live amount ('equipped creature has base power and toughness X/X, where X is your life total'): setBasePt takes fixed numbers only.",
+   "example": "Aettir and Priwen"
+  },
+  "static:double-triggers-on-leaves": {
+   "family": "static:trigger-count-modifiers",
+   "description": "A doubleTriggers cause for a matching permanent leaving the battlefield ('a legendary permanent or an artifact entering or leaving the battlefield'): the causes cover entering and dying, not leaving.",
+   "example": "Gandalf the White"
+  },
+  "static:suppress-enter-and-dies-triggers": {
+   "family": "static:trigger-count-modifiers",
+   "description": "'Creatures entering or dying don't cause abilities to trigger' — suppressEntryTriggers covers permanents entering under opponents only, not creatures dying, nor all players' abilities.",
+   "example": "Hushbringer"
+  },
+  "static:granted-dies-trigger-doubling": {
+   "family": "static:trigger-count-modifiers",
+   "description": "A trigger doubler granted to the equipped creature: 'If a creature dying causes a triggered ability of this creature or an emblem you own to trigger, that ability triggers an additional time' — doubleTriggers reaches permanents you control, not one creature's own abilities and your emblems.",
+   "example": "The Masamune"
+  },
+  "static:double-triggers-of-attached": {
+   "family": "static:trigger-count-modifiers",
+   "description": "'If a triggered ability of equipped creature triggers, that ability triggers an additional time': doubleTriggersOf can't name the Equipment's host.",
+   "example": "Wizard's Staff"
+  },
+  "static:double-attack-triggers-your-attackers": {
+   "family": "static:trigger-count-modifiers",
+   "description": "The attack-cause trigger doubler narrowed to a creature you control attacking ('If a creature you control attacking causes …'): Isshin's form doubles for any attacker, and a filter drops the whole-declaration triggers.",
+   "example": "Wulfgar of Icewind Dale"
+  },
+  "trigger:artifact-tapped-or-untapped-cost-activation": {
+   "family": "trigger:activates-ability",
+   "description": "'Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost' — an activates-ability trigger over any player's artifacts narrowed to costs without {T}, beside a becomes-tapped trigger.",
+   "example": "Haunting Wind"
+  },
+  "trigger:activates-ability-from-graveyard": {
+   "family": "trigger:activates-ability",
+   "description": "'Whenever you … activate an ability of a card in your graveyard': activates-ability only watches permanents.",
+   "example": "Neerdiv, Devious Diver"
+  },
+  "trigger:activates-loyalty-ability-cost-size": {
+   "family": "trigger:activates-ability",
+   "description": "'Whenever you activate a loyalty ability, if you removed two or more loyalty counters to activate it': the ability-activated event carries no loyalty cost.",
+   "example": "Way of the Mind Sculptor"
+  },
+  "filter:origin-other-than-hand": {
+   "family": "trigger:cast-or-play-origin-zone",
+   "description": "'From anywhere other than your hand' on a land-played, land-entered or spell-cast trigger: plays-card has a from zone but no 'not from', and a token land 'entered from' nowhere still counts.",
+   "example": "Shadow of the Goblin"
+  },
+  "filter:cast-using-teamwork": {
+   "family": "keyword:teamwork",
+   "description": "A cast-spell filter for a spell cast using teamwork (rule 702.194b): teamwork is modelled as a kicker, and `kicked` matches any kicked spell.",
+   "example": "Virtual Assistant"
+  },
+  "trigger:damage-batch-over-opponents": {
+   "family": "trigger:combat-damage-batch",
+   "description": "One trigger for 'one or more Pirates you control deal damage to your opponents' acting on each of those opponents ('exile the top card of each of those opponents' libraries'): deals-damage-batch fires once per player.",
+   "example": "Breeches, Brazen Plunderer"
   }
  },
  "groups": [

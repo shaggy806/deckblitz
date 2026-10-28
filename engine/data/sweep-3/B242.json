@@ -1,0 +1,715 @@
+{
+  "batch": "B242",
+  "status": "complete",
+  "ranks": "The need-keys recheck list R8 (Phase 1 step 2)",
+  "authored": [
+    {
+      "name": "Alpha Authority",
+      "files": [
+        "engine/src/cards/pool/alpha-authority.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bat Colony",
+      "files": [
+        "engine/src/cards/pool/bat-colony.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cataclysmic Prospecting",
+      "files": [
+        "engine/src/cards/pool/cataclysmic-prospecting.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chandra's Incinerator",
+      "files": [
+        "engine/src/cards/pool/chandras-incinerator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coin of Mastery",
+      "files": [
+        "engine/src/cards/pool/coin-of-mastery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glimmer Lens",
+      "files": [
+        "engine/src/cards/pool/glimmer-lens.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hungering Hydra",
+      "files": [
+        "engine/src/cards/pool/hungering-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kalain, Reclusive Painter",
+      "files": [
+        "engine/src/cards/pool/kalain-reclusive-painter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Marut",
+      "files": [
+        "engine/src/cards/pool/marut.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plague Drone",
+      "files": [
+        "engine/src/cards/pool/plague-drone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spikefield Hazard",
+      "files": [
+        "engine/src/cards/pool/spikefield-hazard.ts",
+        "engine/src/cards/pool/spikefield-cave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spoils of the Hunt",
+      "files": [
+        "engine/src/cards/pool/spoils-of-the-hunt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Suplex",
+      "files": [
+        "engine/src/cards/pool/suplex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thieves' Tools",
+      "files": [
+        "engine/src/cards/pool/thieves-tools.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Undergrowth Champion",
+      "files": [
+        "engine/src/cards/pool/undergrowth-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Varchild, Betrayer of Kjeldor",
+      "files": [
+        "engine/src/cards/pool/varchild-betrayer-of-kjeldor.ts",
+        "engine/src/cards/tokens/survivor-token.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "The Sound of Drums",
+      "needs": [
+        "replacement:damage-multiplier-by-attached"
+      ],
+      "why": "'If enchanted creature would deal combat damage to a permanent or player, it deals double that damage instead': the damage replacement's source filter can't name this Aura's host."
+    },
+    {
+      "name": "Tor Wauki the Younger",
+      "needs": [
+        "replacement:damage-plus-from-other-sources"
+      ],
+      "why": "'If another source you control would deal noncombat damage …, it deals that much damage plus 1': the +N damage replacement can't leave out its own source."
+    },
+    {
+      "name": "Undead Alchemist",
+      "needs": [
+        "replacement:combat-damage-becomes-mill"
+      ],
+      "why": "'If a Zombie you control would deal combat damage to a player, instead that player mills that many cards': no replacement turns the damage into the damaged player milling."
+    },
+    {
+      "name": "With Great Power . . .",
+      "needs": [
+        "replacement:damage-redirection",
+        "static:count-attached-to-affected"
+      ],
+      "why": "'All damage that would be dealt to you is dealt to enchanted creature instead' is a standing redirection, and '+2/+2 for each Aura and Equipment attached to it' counts what's attached to the affected creature."
+    },
+    {
+      "name": "Containment Priest",
+      "needs": [
+        "replacement:enter-exile-if-not-cast"
+      ],
+      "why": "'If a nontoken creature would enter and it wasn't cast, exile it instead': no entry replacement redirects another permanent to exile, and none asks how it got there."
+    },
+    {
+      "name": "Cosmic Intervention",
+      "needs": [
+        "replacement:turn-exile-instead-return-at-end-step"
+      ],
+      "why": "A turn-long 'your permanents that would die are exiled instead' replacement with each exiled card returned at the next end step."
+    },
+    {
+      "name": "Nemata, Primeval Warden",
+      "needs": [
+        "replacement:exile-instead-when-you-do"
+      ],
+      "why": "'If a creature an opponent controls would die, exile it instead. When you do, create a 1/1 Saproling': the exile replacement has no reflexive trigger per replaced event (tokens included)."
+    },
+    {
+      "name": "Alms Collector",
+      "needs": [
+        "replacement:draw-two-or-more-shared"
+      ],
+      "why": "'If an opponent would draw two or more cards, instead you and that player each draw a card': would-draw sees single draws, not an instruction's count, and can't have both players draw."
+    },
+    {
+      "name": "Out of the Tombs",
+      "needs": [
+        "replacement:empty-library-draw-returns-creature"
+      ],
+      "why": "An empty-library draw replaced by returning a creature card from your graveyard to the battlefield, or losing the game if you can't."
+    },
+    {
+      "name": "Urabrask, Heretic Praetor",
+      "needs": [
+        "replacement:opponent-next-draw-becomes-impulse"
+      ],
+      "why": "'The next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn' — a one-shot draw replacement on an opponent."
+    },
+    {
+      "name": "Consulate Surveillance",
+      "needs": [
+        "replacement:prevent-all-damage-from-chosen-source-this-turn"
+      ],
+      "why": "'Prevent all damage that would be dealt to you this turn by a source of your choice': prevent-damage-from-chosen-source takes only next-time or a fixed amount."
+    },
+    {
+      "name": "Deflecting Palm",
+      "needs": [
+        "replacement:prevent-and-reflect-damage"
+      ],
+      "why": "'If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller': the prevention's follow-up can't reach the chosen source's controller."
+    },
+    {
+      "name": "Shadowbane",
+      "needs": [
+        "replacement:chosen-source-shield-you-and-your-creatures"
+      ],
+      "why": "One chosen-source shield over you and/or creatures you control, and life gain only when the source was black."
+    },
+    {
+      "name": "River Song's Diary",
+      "needs": [
+        "replacement:all-hand-spells-exiled-linked",
+        "effect:random-card-from-linked-exile"
+      ],
+      "why": "Every player's instant and sorcery spells cast from hand exiled as they resolve and linked to the artifact, then a random one of those cards cast free."
+    },
+    {
+      "name": "Academy Manufactor",
+      "needs": [
+        "replacement:token-creation-one-of-each"
+      ],
+      "why": "'If you would create a Clue, Food, or Treasure token, instead create one of each': the token replacement only multiplies, adds that many, or substitutes one named token."
+    },
+    {
+      "name": "Moonlit Meditation",
+      "needs": [
+        "replacement:token-creation-replace-with-copies"
+      ],
+      "why": "'The first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of enchanted permanent.'"
+    },
+    {
+      "name": "Queen Allenal of Ruadach",
+      "needs": [
+        "replacement:token-creation-add-extra"
+      ],
+      "why": "'Those tokens plus a 1/1 white Soldier creature token': plusTokens adds that many, not one, and can't be limited to creature tokens."
+    },
+    {
+      "name": "Quina, Qu Gourmet",
+      "needs": [
+        "replacement:token-creation-add-extra"
+      ],
+      "why": "'Those tokens plus a 1/1 green Frog creature token': plusTokens adds that many, not one."
+    },
+    {
+      "name": "Worldwalker Helm",
+      "needs": [
+        "replacement:token-creation-add-extra"
+      ],
+      "why": "'If you would create one or more artifact tokens, instead create those tokens plus an additional Map token': one extra, only for artifact tokens."
+    },
+    {
+      "name": "Xorn",
+      "needs": [
+        "replacement:token-creation-add-extra"
+      ],
+      "why": "'If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token': one extra, only for Treasures."
+    },
+    {
+      "name": "Mana Sculpt",
+      "needs": [
+        "stat:countered-spell-mana-spent"
+      ],
+      "why": "The countered spell's mana spent, read at your next main phase: manaSpentOf of a target spell that left the stack reads nothing."
+    },
+    {
+      "name": "Admiral Beckett Brass",
+      "needs": [
+        "target:player-dealt-combat-damage-by-n-filter"
+      ],
+      "why": "A per-player count of the Pirates that dealt them combat damage this turn, as a target restriction."
+    },
+    {
+      "name": "Gollum, Obsessed Stalker",
+      "needs": [
+        "stat:players-dealt-combat-damage-by-name-this-game"
+      ],
+      "why": "'Each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker' has no player scope."
+    },
+    {
+      "name": "Hope of Ghirapur",
+      "needs": [
+        "target:player-dealt-combat-damage-by-source-this-turn"
+      ],
+      "why": "'Target player who was dealt combat damage by Hope of Ghirapur this turn': no player-target filter on damage this source dealt."
+    },
+    {
+      "name": "Rith, Liberated Primeval",
+      "needs": [
+        "stat:excess-damage-to-departed-this-turn"
+      ],
+      "why": "An end-step check for excess damage dealt this turn to an opponent's creature or planeswalker, including ones that have since died."
+    },
+    {
+      "name": "Tangled Colony",
+      "needs": [
+        "amount:damage-dealt-to-object-this-turn"
+      ],
+      "why": "'X is the amount of damage dealt to it this turn': no amount reads the damage dealt to a creature this turn."
+    },
+    {
+      "name": "Sentinel Tower",
+      "needs": [
+        "stat:spells-cast-before-trigger-spell"
+      ],
+      "why": "'The number of instant and sorcery spells cast before that spell this turn': the count must be the one as of the triggering spell, any player's."
+    },
+    {
+      "name": "Archive Trap",
+      "needs": [
+        "stat:searched-library-this-turn"
+      ],
+      "why": "No turn record of an opponent having searched their library, for the {0} alternative cost."
+    },
+    {
+      "name": "Blitzball",
+      "needs": [
+        "condition:combat-damage-by-filter-this-turn"
+      ],
+      "why": "'Activate only if an opponent was dealt combat damage by a legendary creature this turn.'"
+    },
+    {
+      "name": "Magus of the Moon",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "'Nonbasic lands are Mountains' sets their land type and removes their other abilities (rule 305.7)."
+    },
+    {
+      "name": "Baird, Steward of Argive",
+      "needs": [
+        "cost:attack-tax-planeswalkers"
+      ],
+      "why": "'Creatures can't attack you or planeswalkers you control unless their controller pays {1} for each': attackTax covers only the player."
+    },
+    {
+      "name": "Bloodthirster",
+      "needs": [
+        "static:cant-attack-same-player"
+      ],
+      "why": "'This creature can't attack a player it has already attacked this turn.'"
+    },
+    {
+      "name": "Legion Loyalist",
+      "needs": [
+        "effect:cant-be-blocked-by-filter-until-eot"
+      ],
+      "why": "Battalion's 'creatures you control … can't be blocked by creature tokens this turn': no until-end-of-turn can't-be-blocked-by grant."
+    },
+    {
+      "name": "Master of Cruelties",
+      "needs": [
+        "static:can-only-attack-alone"
+      ],
+      "why": "'This creature can only attack alone' has no restriction (its other abilities are expressible)."
+    },
+    {
+      "name": "Mirri, Weatherlight Duelist",
+      "needs": [
+        "static:attack-limit",
+        "static:max-attackers-blockers"
+      ],
+      "why": "'No more than one creature can attack you each combat' while tapped, and 'each opponent can't block with more than one creature this combat'."
+    },
+    {
+      "name": "Stormtide Leviathan",
+      "needs": [
+        "static:cant-attack-lacking-either-keyword"
+      ],
+      "why": "'Creatures without flying or islandwalk can't attack' — a restriction over creatures lacking either of two keywords."
+    },
+    {
+      "name": "Toby, Beastie Befriender",
+      "needs": [
+        "static:cant-attack-or-block-alone"
+      ],
+      "why": "The Beast token's 'This token can't attack or block alone' has no restriction."
+    },
+    {
+      "name": "Troll of Khazad-dûm",
+      "needs": [
+        "static:cant-be-blocked-except-by-n"
+      ],
+      "why": "'This creature can't be blocked except by three or more creatures.'"
+    },
+    {
+      "name": "Cloudspire Coordinator",
+      "needs": [
+        "stat:entered-this-turn-as-entered"
+      ],
+      "why": "'The number of Mounts and/or Vehicles that entered the battlefield under your control this turn', counted as they entered."
+    },
+    {
+      "name": "Valor's Flagship",
+      "needs": [
+        "cost:cycling-x"
+      ],
+      "why": "Cycling {X}{2}{W}, and 'when you cycle this card, create X Pilot tokens'."
+    },
+    {
+      "name": "Bind the Monster",
+      "needs": [
+        "effect:damage-from-attached"
+      ],
+      "why": "'It deals damage to you equal to its power': the enchanted creature as the damage source."
+    },
+    {
+      "name": "Meekstone",
+      "needs": [
+        "filter:static-affects-by-power"
+      ],
+      "why": "'Creatures with power 3 or greater don't untap': a static's affects filter can't read power inside the characteristics fold."
+    },
+    {
+      "name": "Master Chef",
+      "needs": [
+        "static:grant-replacement-to-commanders"
+      ],
+      "why": "'Commander creatures you own have' two enters-with-counter replacements: a static can't grant a replacement ability."
+    },
+    {
+      "name": "Eirdu, Carrier of Dawn",
+      "needs": [
+        "static:grant-convoke"
+      ],
+      "why": "'Creature spells you cast have convoke' (and the back face's 'each other nontoken creature you control has persist')."
+    },
+    {
+      "name": "Rivaz of the Claw",
+      "needs": [
+        "effect:grant-ability-to-permanent-spell"
+      ],
+      "why": "'It gains \"When this creature dies, exile it\"': an ability granted to a creature spell as it's cast from the graveyard, kept by the permanent it becomes."
+    },
+    {
+      "name": "Wand of the Worldsoul",
+      "needs": [
+        "effect:next-spell-has-convoke"
+      ],
+      "why": "'{T}: The next spell you cast this turn has convoke.'"
+    },
+    {
+      "name": "Liliana's Talent",
+      "needs": [
+        "trigger:damage-to-attached-permanent"
+      ],
+      "why": "'Whenever a creature deals damage to enchanted planeswalker, destroy that creature': the trigger can't name the enchanted planeswalker as the recipient (the granted [−8] is built)."
+    },
+    {
+      "name": "Biotransference",
+      "needs": [
+        "static:static-types-outside-battlefield"
+      ],
+      "why": "Creatures you control are artifacts, and so are creature spells you control and creature cards you own outside the battlefield."
+    },
+    {
+      "name": "Conspiracy",
+      "needs": [
+        "static:static-types-outside-battlefield"
+      ],
+      "why": "The chosen creature type for creature spells and creature cards you own outside the battlefield (set, not added)."
+    },
+    {
+      "name": "Dune Chanter",
+      "needs": [
+        "static:static-types-outside-battlefield"
+      ],
+      "why": "Land cards you own outside the battlefield are Deserts in addition to their other types."
+    },
+    {
+      "name": "Arcane Adaptation",
+      "needs": [
+        "static:static-types-outside-battlefield"
+      ],
+      "why": "The chosen creature type added to creature spells you control and creature cards you own outside the battlefield."
+    },
+    {
+      "name": "Rukarumel, Biologist",
+      "needs": [
+        "static:static-types-outside-battlefield"
+      ],
+      "why": "The chosen type added to Slivers and nontoken creatures, and to creature spells and creature cards you own outside the battlefield."
+    },
+    {
+      "name": "Gemcutter Buccaneer",
+      "needs": [
+        "static:grant-equipment-type-and-equip"
+      ],
+      "why": "Treasures becoming Equipment with granted equip abilities (equip Pirate {1}, equip {3}) and a granted 'Equipped creature gets +2/+0'."
+    },
+    {
+      "name": "Mirror Box",
+      "needs": [
+        "static:pt-per-same-name-as-affected"
+      ],
+      "why": "'+1/+1 for each other creature you control with the same name as that creature' (the legend-rule exemption is built)."
+    },
+    {
+      "name": "Platinum Emperion",
+      "needs": [
+        "static:your-life-total-cant-change"
+      ],
+      "why": "'Your life total can't change' as a static on a permanent."
+    },
+    {
+      "name": "Anvil of Bogardan",
+      "needs": [
+        "static:players-no-max-hand-size"
+      ],
+      "why": "'Players have no maximum hand size': noMaxHandSize applies only to its controller."
+    },
+    {
+      "name": "Enter the Infinite",
+      "needs": [
+        "effect:no-max-hand-size-until-your-next-turn"
+      ],
+      "why": "'You have no maximum hand size until your next turn' as a one-shot effect."
+    },
+    {
+      "name": "Folio of Fancies",
+      "needs": [
+        "static:players-no-max-hand-size"
+      ],
+      "why": "'Players have no maximum hand size': noMaxHandSize applies only to its controller."
+    },
+    {
+      "name": "Nerd Rage",
+      "needs": [
+        "static:granted-no-max-hand-size"
+      ],
+      "why": "A granted 'You have no maximum hand size' read for the enchanted creature's controller."
+    },
+    {
+      "name": "Praetor's Counsel",
+      "needs": [
+        "effect:player-no-max-hand-size-for-game"
+      ],
+      "why": "'You have no maximum hand size for the rest of the game.'"
+    },
+    {
+      "name": "The Second Doctor",
+      "needs": [
+        "static:players-no-max-hand-size",
+        "effect:player-cant-attack-you-next-turn"
+      ],
+      "why": "'Players have no maximum hand size', and 'each opponent who does can't attack you or permanents you control during their next turn'."
+    },
+    {
+      "name": "Elturel Survivors",
+      "needs": [
+        "static:pt-per-defending-player-count"
+      ],
+      "why": "'+X/+0, where X is the number of lands defending player controls' while attacking."
+    },
+    {
+      "name": "Kyler, Sigardian Emissary",
+      "needs": [
+        "static:grant-pt-per-any-counter-on-source"
+      ],
+      "why": "'+1/+1 for each counter on Kyler' counts every kind; countersOnSource takes one."
+    },
+    {
+      "name": "Sliver Legion",
+      "needs": [
+        "static:pt-per-count-excluding-affected"
+      ],
+      "why": "'+1/+1 for each other Sliver on the battlefield', other than each affected Sliver."
+    },
+    {
+      "name": "Aettir and Priwen",
+      "needs": [
+        "static:set-base-pt-to-life-total"
+      ],
+      "why": "'Equipped creature has base power and toughness X/X, where X is your life total.'"
+    },
+    {
+      "name": "Gandalf the White",
+      "needs": [
+        "static:double-triggers-on-leaves"
+      ],
+      "why": "The trigger doubler for a legendary permanent or artifact leaving the battlefield (entering and the flash grant are expressible)."
+    },
+    {
+      "name": "Hushbringer",
+      "needs": [
+        "static:suppress-enter-and-dies-triggers"
+      ],
+      "why": "'Creatures entering or dying don't cause abilities to trigger.'"
+    },
+    {
+      "name": "Sanctum of All",
+      "needs": [
+        "static:trigger-doubler-exclude-self"
+      ],
+      "why": "'If a triggered ability of another Shrine you control triggers': doubleTriggersOf has no exclusion of this permanent (the library-and/or-graveyard search and the six-Shrines condition are expressible)."
+    },
+    {
+      "name": "The Masamune",
+      "needs": [
+        "static:granted-dies-trigger-doubling"
+      ],
+      "why": "The equipped creature's granted dies-trigger doubling (for its own abilities and your emblems)."
+    },
+    {
+      "name": "Twinflame Travelers",
+      "needs": [
+        "static:trigger-doubler-exclude-self"
+      ],
+      "why": "'A triggered ability of another Elemental you control': doubleTriggersOf has no exclusion of this permanent."
+    },
+    {
+      "name": "Wizard's Staff",
+      "needs": [
+        "static:double-triggers-of-attached"
+      ],
+      "why": "'If a triggered ability of equipped creature triggers, that ability triggers an additional time.'"
+    },
+    {
+      "name": "Wulfgar of Icewind Dale",
+      "needs": [
+        "static:double-attack-triggers-your-attackers"
+      ],
+      "why": "'A creature you control attacking' as the doubler's cause."
+    },
+    {
+      "name": "Elrond, Moon-Reader",
+      "needs": [
+        "trigger:activates-mana-ability"
+      ],
+      "why": "'Whenever you activate an ability of a creature' counts mana abilities too (its ruling), once each turn."
+    },
+    {
+      "name": "Haunting Wind",
+      "needs": [
+        "trigger:artifact-tapped-or-untapped-cost-activation"
+      ],
+      "why": "Any player's artifact ability activated without {T} in its cost, as a trigger."
+    },
+    {
+      "name": "Neerdiv, Devious Diver",
+      "needs": [
+        "trigger:activates-ability-from-graveyard"
+      ],
+      "why": "'Or activate an ability of a card in your graveyard' as a trigger."
+    },
+    {
+      "name": "Way of the Mind Sculptor",
+      "needs": [
+        "trigger:activates-loyalty-ability-cost-size"
+      ],
+      "why": "A loyalty-activation trigger gated on its cost removing two or more counters."
+    },
+    {
+      "name": "Kira, Great Glass-Spinner",
+      "needs": [
+        "trigger:becomes-target-first-time-by-anyone"
+      ],
+      "why": "'For the first time each turn' counted over all players' spells and abilities, per creature."
+    },
+    {
+      "name": "Unsettled Mariner",
+      "needs": [
+        "trigger:player-becomes-target"
+      ],
+      "why": "'Whenever you … becomes the target of a spell or ability an opponent controls': becomes-target fires only for permanents."
+    },
+    {
+      "name": "Shadow of the Goblin",
+      "needs": [
+        "filter:origin-other-than-hand"
+      ],
+      "why": "'Whenever you play a land … from anywhere other than your hand': plays-card has from but no not-from."
+    },
+    {
+      "name": "The Lost and the Damned",
+      "needs": [
+        "filter:origin-other-than-hand"
+      ],
+      "why": "'A land you control enters from anywhere other than your hand' (token lands included) or 'you cast a spell from anywhere other than your hand'."
+    },
+    {
+      "name": "Aurora Phoenix",
+      "needs": [
+        "trigger:cast-spell-with-cascade"
+      ],
+      "why": "'Whenever you cast a spell with cascade.'"
+    },
+    {
+      "name": "Virtual Assistant",
+      "needs": [
+        "filter:cast-using-teamwork"
+      ],
+      "why": "'Whenever you cast a spell using teamwork': `kicked` would match kicked spells too."
+    },
+    {
+      "name": "Breeches, Brazen Plunderer",
+      "needs": [
+        "trigger:damage-batch-over-opponents"
+      ],
+      "why": "One trigger over every opponent the Pirates damaged, exiling from each of their libraries."
+    },
+    {
+      "name": "Bitter Work",
+      "needs": [
+        "trigger:attacks-player-filter"
+      ],
+      "why": "'Whenever you attack a player with one or more creatures with power 4 or greater, draw a card' — once per player attacked (the ruling), with a filter on the attackers: attack-with fires once per declaration and attacks-player has no attacker filter."
+    }
+  ]
+}
