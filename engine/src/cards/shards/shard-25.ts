@@ -430,6 +430,7 @@ import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
+import _poolMistsOfLorien from "../pool/mists-of-lorien.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
@@ -523,6 +524,7 @@ import _poolRadiantArchangel from "../pool/radiant-archangel.js";
 import _poolRakdosIckspitter from "../pool/rakdos-ickspitter.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
+import _poolRallyTheGaladhrim from "../pool/rally-the-galadhrim.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
@@ -1234,6 +1236,7 @@ const shard: CardShard = {
     _poolMirrorOfTheForebears,
     _poolMiscalculation,
     _poolMistralSinger,
+    _poolMistsOfLorien,
     _poolMistveilPlains,
     _poolMoggInfestation,
     _poolMoggcatcher,
@@ -1327,6 +1330,7 @@ const shard: CardShard = {
     _poolRakdosIckspitter,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
+    _poolRallyTheGaladhrim,
     _poolRampartArchitect,
     _poolRankOfficer,
     _poolRaphaelToughTurtle,

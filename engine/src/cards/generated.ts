@@ -7634,6 +7634,7 @@ import _poolFireNationPalace from "./pool/fire-nation-palace.js";
 import _poolFireNationRaider from "./pool/fire-nation-raider.js";
 import _poolFireNationSentinels from "./pool/fire-nation-sentinels.js";
 import _poolFireNationSoldier from "./pool/fire-nation-soldier.js";
+import _poolFireNationTurret from "./pool/fire-nation-turret.js";
 import _poolFireNationWarship from "./pool/fire-nation-warship.js";
 import _poolFireNavyTrebuchet from "./pool/fire-navy-trebuchet.js";
 import _poolFireOfOrthanc from "./pool/fire-of-orthanc.js";
@@ -13998,6 +13999,7 @@ import _poolMistmeadowWitch from "./pool/mistmeadow-witch.js";
 import _poolMistralCharger from "./pool/mistral-charger.js";
 import _poolMistralSinger from "./pool/mistral-singer.js";
 import _poolMistsOfLittjara from "./pool/mists-of-littjara.js";
+import _poolMistsOfLorien from "./pool/mists-of-lorien.js";
 import _poolMistvaultBridge from "./pool/mistvault-bridge.js";
 import _poolMistveilPlains from "./pool/mistveil-plains.js";
 import _poolMistveinBorderpost from "./pool/mistvein-borderpost.js";
@@ -16950,6 +16952,7 @@ import _poolRallyManeuver from "./pool/rally-maneuver.js";
 import _poolRallyOfWings from "./pool/rally-of-wings.js";
 import _poolRallyTheAncestors from "./pool/rally-the-ancestors.js";
 import _poolRallyTheForces from "./pool/rally-the-forces.js";
+import _poolRallyTheGaladhrim from "./pool/rally-the-galadhrim.js";
 import _poolRallyTheMonastery from "./pool/rally-the-monastery.js";
 import _poolRallyThePeasants from "./pool/rally-the-peasants.js";
 import _poolRallyTheRanks from "./pool/rally-the-ranks.js";
@@ -17042,6 +17045,7 @@ import _poolRashidaScalebane from "./pool/rashida-scalebane.js";
 import _poolRashkaTheSlayer from "./pool/rashka-the-slayer.js";
 import _poolRashmiAndRagavan from "./pool/rashmi-and-ragavan.js";
 import _poolRasputinTheOneiromancer from "./pool/rasputin-the-oneiromancer.js";
+import _poolRassilonTheWarPresident from "./pool/rassilon-the-war-president.js";
 import _poolRatOut from "./pool/rat-out.js";
 import _poolRatadrabikOfUrborg from "./pool/ratadrabik-of-urborg.js";
 import _poolRatcatcherTrainee from "./pool/ratcatcher-trainee.js";
@@ -25526,6 +25530,7 @@ import _poolYuanShaoTheIndecisive from "./pool/yuan-shao-the-indecisive.js";
 import _poolYuanTiFangBlade from "./pool/yuan-ti-fang-blade.js";
 import _poolYuanTiMalison from "./pool/yuan-ti-malison.js";
 import _poolYueTheMoonSpirit from "./pool/yue-the-moon-spirit.js";
+import _poolYuffieMateriaHunter from "./pool/yuffie-materia-hunter.js";
 import _poolYukiOnna from "./pool/yuki-onna.js";
 import _poolYukoraThePrisoner from "./pool/yukora-the-prisoner.js";
 import _poolYumaProudProtector from "./pool/yuma-proud-protector.js";
@@ -33978,6 +33983,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFireNationRaider,
   _poolFireNationSentinels,
   _poolFireNationSoldier,
+  _poolFireNationTurret,
   _poolFireNationWarship,
   _poolFireNavyTrebuchet,
   _poolFireOfOrthanc,
@@ -40342,6 +40348,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMistralCharger,
   _poolMistralSinger,
   _poolMistsOfLittjara,
+  _poolMistsOfLorien,
   _poolMistvaultBridge,
   _poolMistveilPlains,
   _poolMistveinBorderpost,
@@ -43294,6 +43301,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRallyOfWings,
   _poolRallyTheAncestors,
   _poolRallyTheForces,
+  _poolRallyTheGaladhrim,
   _poolRallyTheMonastery,
   _poolRallyThePeasants,
   _poolRallyTheRanks,
@@ -43386,6 +43394,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRashkaTheSlayer,
   _poolRashmiAndRagavan,
   _poolRasputinTheOneiromancer,
+  _poolRassilonTheWarPresident,
   _poolRatOut,
   _poolRatadrabikOfUrborg,
   _poolRatcatcherTrainee,
@@ -51870,6 +51879,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYuanTiFangBlade,
   _poolYuanTiMalison,
   _poolYueTheMoonSpirit,
+  _poolYuffieMateriaHunter,
   _poolYukiOnna,
   _poolYukoraThePrisoner,
   _poolYumaProudProtector,
@@ -60335,6 +60345,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fire-nation-raider": _poolFireNationRaider,
   "pool/fire-nation-sentinels": _poolFireNationSentinels,
   "pool/fire-nation-soldier": _poolFireNationSoldier,
+  "pool/fire-nation-turret": _poolFireNationTurret,
   "pool/fire-nation-warship": _poolFireNationWarship,
   "pool/fire-navy-trebuchet": _poolFireNavyTrebuchet,
   "pool/fire-of-orthanc": _poolFireOfOrthanc,
@@ -66699,6 +66710,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mistral-charger": _poolMistralCharger,
   "pool/mistral-singer": _poolMistralSinger,
   "pool/mists-of-littjara": _poolMistsOfLittjara,
+  "pool/mists-of-lorien": _poolMistsOfLorien,
   "pool/mistvault-bridge": _poolMistvaultBridge,
   "pool/mistveil-plains": _poolMistveilPlains,
   "pool/mistvein-borderpost": _poolMistveinBorderpost,
@@ -69651,6 +69663,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rally-of-wings": _poolRallyOfWings,
   "pool/rally-the-ancestors": _poolRallyTheAncestors,
   "pool/rally-the-forces": _poolRallyTheForces,
+  "pool/rally-the-galadhrim": _poolRallyTheGaladhrim,
   "pool/rally-the-monastery": _poolRallyTheMonastery,
   "pool/rally-the-peasants": _poolRallyThePeasants,
   "pool/rally-the-ranks": _poolRallyTheRanks,
@@ -69743,6 +69756,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rashka-the-slayer": _poolRashkaTheSlayer,
   "pool/rashmi-and-ragavan": _poolRashmiAndRagavan,
   "pool/rasputin-the-oneiromancer": _poolRasputinTheOneiromancer,
+  "pool/rassilon-the-war-president": _poolRassilonTheWarPresident,
   "pool/rat-out": _poolRatOut,
   "pool/ratadrabik-of-urborg": _poolRatadrabikOfUrborg,
   "pool/ratcatcher-trainee": _poolRatcatcherTrainee,
@@ -78227,6 +78241,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yuan-ti-fang-blade": _poolYuanTiFangBlade,
   "pool/yuan-ti-malison": _poolYuanTiMalison,
   "pool/yue-the-moon-spirit": _poolYueTheMoonSpirit,
+  "pool/yuffie-materia-hunter": _poolYuffieMateriaHunter,
   "pool/yuki-onna": _poolYukiOnna,
   "pool/yukora-the-prisoner": _poolYukoraThePrisoner,
   "pool/yuma-proud-protector": _poolYumaProudProtector,

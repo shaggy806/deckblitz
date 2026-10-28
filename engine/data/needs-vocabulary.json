@@ -3722,7 +3722,8 @@
    "checked": "2026-10-27: missing"
   },
   "keyword:cumulative-upkeep": {
-   "example": "Mystic Remora: Cumulative upkeep {1} needs a cost that scales with the age counters; `may`'s cost is a fixed mana string."
+   "example": "Mystic Remora: Cumulative upkeep {1} needs a cost that scales with the age counters; `may`'s cost is a fixed mana string.",
+   "description": "Cumulative upkeep (rule 702.24), printed or granted one-off (cumulativeUpkeep helper): mana, life and sacrifice costs only; not other costs (cost:cumulative-upkeep-non-mana and the cost:cumulative-upkeep-* keys), a static grant (static:grant-cumulative-upkeep) or a not-paid trigger (trigger:cumulative-upkeep-not-paid)."
   },
   "keyword:dash": {
    "example": "Ragavan, Nimble Pilferer: Dash isn't modeled, and \"exile the top card of that player's library. Until end of turn, you may cast that card\" reaches another player's library."
@@ -3846,7 +3847,8 @@
    "example": "Danny Pink: Mentor keyword (attack trigger targeting an attacking creature with lesser power) isn't modeled."
   },
   "keyword:modular": {
-   "example": "Power Depot: Modular."
+   "example": "Power Depot: Modular.",
+   "description": "Modular (rule 702.43): its enters replacement and dies trigger; no marker a filter can read (filter:has-modular)."
   },
   "keyword:monstrosity": {
    "example": "Giggling Skitterspike: Rechecked: monstrosity (the monstrous designation) isn't modeled. The rest is expressible."
@@ -3914,7 +3916,8 @@
    "example": "Lizard Blades: Reconfigure."
   },
   "keyword:replicate": {
-   "example": "Hatchery Sliver: replicate and granting replicate to Sliver spells"
+   "example": "Hatchery Sliver: replicate and granting replicate to Sliver spells",
+   "description": "Replicate (rule 702.56): a multi kicker with keyword 'replicate' and a mana cost, printed only; not a non-mana cost (cost:replicate-tap-permanent, cost:replicate-energy) or a grant (static:grant-replicate)."
   },
   "keyword:retrace": {
    "example": "Formless Genesis: A Kindred Sorcery with changeling (the Kindred card type isn't modeled) and retrace (rule 702.81), which isn't built."
@@ -4011,10 +4014,12 @@
    "example": "Invasion of Ikoria // Zilortha, Apex of Ikoria: A siege battle."
   },
   "mechanic:begin-game-on-battlefield": {
-   "example": "Leyline of the Void: no opening-hand 'begin the game with it on the battlefield'"
+   "example": "Leyline of the Void: no opening-hand 'begin the game with it on the battlefield'",
+   "description": "Begin the game on the battlefield (rule 103.6a, beginsOnBattlefield) and reveal from the opening hand (rule 103.6b, mechanic:opening-hand-reveal); not Gemstone Caverns' conditional begin (mechanic:opening-hand-not-starting-player) or a delayed trigger past turn 1 (trigger:opponent-first-spell-of-game)."
   },
   "mechanic:case": {
-   "example": "Case of the Locked Hothouse: No Case (to solve / solved) mechanic, and 'look at the top card of your library any time' is private looking, not revealing."
+   "example": "Case of the Locked Hothouse: No Case (to solve / solved) mechanic, and 'look at the top card of your library any time' is private looking, not revealing.",
+   "description": "Cases (rule 719): to solve / solved; not a 'whenever you solve a Case' trigger (trigger:solves-case)."
   },
   "mechanic:class": {
    "example": "Alchemist's Talent: Class levels aren't modeled."
@@ -13705,6 +13710,36 @@
    "family": "keyword:miracle",
    "description": "A static giving cards in your hand miracle, at a fixed cost or their mana cost reduced (miracle is only a printed card field).",
    "example": "Aminatou, Veil Piercer"
+  },
+  "cost:cumulative-upkeep-add-mana": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by adding mana ('Cumulative upkeep—Add {R}'); no unless option adds mana.",
+   "example": "Braid of Fire"
+  },
+  "static:grant-cumulative-upkeep": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "A static granting cumulative upkeep to a set of permanents ('Green creatures have cumulative upkeep {1}'); cumulative upkeep is a printed or one-off granted trigger only.",
+   "example": "Breath of Dreams"
+  },
+  "cost:cumulative-upkeep-counter-on-opponents-creature": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by putting a +1/+1 counter on a creature an opponent controls, chosen per age counter without targeting.",
+   "example": "Sheltering Ancient"
+  },
+  "cost:cumulative-upkeep-exile-library-top": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by exiling the top card of your library per age counter.",
+   "example": "Thought Lash"
+  },
+  "trigger:cumulative-upkeep-not-paid": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "'When a player doesn't pay this permanent's cumulative upkeep' as its own trigger (Heart of Bogardan's is written as a reflexive trigger inside the unless's otherwise).",
+   "example": "Thought Lash"
+  },
+  "keyword:warp-from-graveyard-and-life-cost": {
+   "family": "keyword:warp",
+   "description": "Warp cast from the graveyard, with a cost that includes paying life (warp is { cost: string } from the hand only).",
+   "example": "Timeline Culler"
   }
  },
  "groups": [

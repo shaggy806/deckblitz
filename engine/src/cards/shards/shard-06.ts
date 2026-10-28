@@ -257,6 +257,7 @@ import _poolFesteringNewt from "../pool/festering-newt.js";
 import _poolFiligreeFracture from "../pool/filigree-fracture.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
+import _poolFireNationTurret from "../pool/fire-nation-turret.js";
 import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
@@ -1069,6 +1070,7 @@ const shard: CardShard = {
     _poolFiligreeFracture,
     _poolFireNationCadets,
     _poolFireNationSoldier,
+    _poolFireNationTurret,
     _poolFlameBurst,
     _poolFlameSpill,
     _poolFlashback,

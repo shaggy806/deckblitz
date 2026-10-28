@@ -807,6 +807,7 @@ import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
 import _poolYouHearSomethingOnWatch from "../pool/you-hear-something-on-watch.js";
+import _poolYuffieMateriaHunter from "../pool/yuffie-materia-hunter.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
@@ -1635,6 +1636,7 @@ const shard: CardShard = {
     _poolYokedPlowbeast,
     _poolYotianFrontliner,
     _poolYouHearSomethingOnWatch,
+    _poolYuffieMateriaHunter,
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,

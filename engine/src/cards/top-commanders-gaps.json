@@ -1176,7 +1176,7 @@
   "keyword:changeling": {
    "size": "small",
    "ui": false,
-   "description": "'Is every creature type' (changeling) and 'every land type': a marker that matches every type of that kind, in every zone, for filters, lords and effectiveSubtypes."
+   "description": "'Is every creature type' (changeling) and 'every land type': a marker that matches every type of that kind, in every zone, for filters, lords and effectiveSubtypes. Not changeling granted by a copy exception (effect:copy-exception-changeling)."
   },
   "keyword:connive": {
    "size": "medium",
@@ -1266,7 +1266,7 @@
   "keyword:miracle": {
    "size": "medium",
    "ui": true,
-   "description": "Miracle (rule 702.94): track the first card each player draws each turn, offer to reveal it, and let its controller cast it for the miracle cost. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback)."
+   "description": "Miracle (rule 702.94): track the first card each player draws each turn, offer to reveal it, and let its controller cast it for the miracle cost. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback). Not granting miracle to cards in hand (static:grant-miracle-in-hand)."
   },
   "keyword:mobilize": {
    "size": "small",
@@ -1276,7 +1276,7 @@
   "keyword:multikicker": {
    "size": "medium",
    "ui": true,
-   "description": "Multikicker: a repeatable kicker whose number of payments is chosen at cast and read as an amount."
+   "description": "Multikicker: a repeatable kicker whose number of payments is chosen at cast and read as an amount. Not an unnamed 'pay [cost] any number of times' additional cost (cost:multikicker-not-kicker)."
   },
   "keyword:ninjutsu": {
    "size": "medium",
@@ -1306,7 +1306,7 @@
   "keyword:warp": {
    "size": "medium",
    "ui": false,
-   "description": "Warp (rule 702.185): an alternative cost from hand. At the next end step the permanent is exiled, and its owner may cast it from exile later. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback)."
+   "description": "Warp (rule 702.185): an alternative cost from hand. At the next end step the permanent is exiled, and its owner may cast it from exile later. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback). Not warp from the graveyard or with a life cost (keyword:warp-from-graveyard-and-life-cost)."
   },
   "keyword:waterbend": {
    "size": "medium",
