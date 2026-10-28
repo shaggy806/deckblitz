@@ -13385,6 +13385,7 @@ import _poolMarbleChalice from "./pool/marble-chalice.js";
 import _poolMarbleDiamond from "./pool/marble-diamond.js";
 import _poolMarbleGargoyle from "./pool/marble-gargoyle.js";
 import _poolMarchFromTheBlackGate from "./pool/march-from-the-black-gate.js";
+import _poolMarchFromTheTomb from "./pool/march-from-the-tomb.js";
 import _poolMarchOfProgress from "./pool/march-of-progress.js";
 import _poolMarchOfSouls from "./pool/march-of-souls.js";
 import _poolMarchOfTheCanonized from "./pool/march-of-the-canonized.js";
@@ -39881,6 +39882,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarbleDiamond,
   _poolMarbleGargoyle,
   _poolMarchFromTheBlackGate,
+  _poolMarchFromTheTomb,
   _poolMarchOfProgress,
   _poolMarchOfSouls,
   _poolMarchOfTheCanonized,
@@ -66390,6 +66392,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marble-diamond": _poolMarbleDiamond,
   "pool/marble-gargoyle": _poolMarbleGargoyle,
   "pool/march-from-the-black-gate": _poolMarchFromTheBlackGate,
+  "pool/march-from-the-tomb": _poolMarchFromTheTomb,
   "pool/march-of-progress": _poolMarchOfProgress,
   "pool/march-of-souls": _poolMarchOfSouls,
   "pool/march-of-the-canonized": _poolMarchOfTheCanonized,
