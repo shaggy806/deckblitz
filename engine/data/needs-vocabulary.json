@@ -13740,6 +13740,41 @@
    "family": "keyword:warp",
    "description": "Warp cast from the graveyard, with a cost that includes paying life (warp is { cost: string } from the hand only).",
    "example": "Timeline Culler"
+  },
+  "bug:reflexive-target-trigger-player": {
+   "family": "effect:reflexive-trigger",
+   "description": "A reflexive trigger's card-in-graveyard target with whose: 'trigger-player' finds no legal targets, though the parent's lastKnownRefs hold the player (whose: 'any' works): 'when you do, cast target card from defending player's graveyard'.",
+   "example": "Memory Vampire"
+  },
+  "filter:has-activated-ability": {
+   "family": "static:grant-activated-abilities-of-exiled",
+   "description": "A card filter for 'with activated abilities' (craft materials 'nonlands with activated abilities').",
+   "example": "The Enigma Jewel"
+  },
+  "static:granted-linked-abilities-once-each-turn": {
+   "family": "static:grant-activated-abilities-of-exiled",
+   "description": "Granted abilities of linked exiled cards, each activatable only once each turn.",
+   "example": "Locus of Enlightenment"
+  },
+  "cost:cumulative-upkeep-discard": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by discarding a card per age counter (the unless discard option has no times).",
+   "example": "Vexing Sphinx"
+  },
+  "filter:has-embalm-or-eternalize": {
+   "family": "keyword:embalm",
+   "description": "A card filter for 'a creature card with eternalize or embalm'.",
+   "example": "Vizier of the Anointed"
+  },
+  "trigger:activates-embalm-or-eternalize": {
+   "family": "keyword:embalm",
+   "description": "'Whenever you activate an eternalize or embalm ability' (activates-ability can't narrow to them).",
+   "example": "Vizier of the Anointed"
+  },
+  "effect:shuffle-self-into-library-top": {
+   "family": "mechanic:face-down-pile",
+   "description": "Exile it and the top N cards of your library in a face-down pile, shuffle that pile and put it back on top.",
+   "example": "Triumph of Saint Katherine"
   }
  },
  "groups": [

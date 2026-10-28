@@ -682,6 +682,7 @@ import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
+import _poolStreamOfThought from "../pool/stream-of-thought.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
@@ -1521,6 +1522,7 @@ const shard: CardShard = {
     _poolStormbloodBerserker,
     _poolStormchaserChimera,
     _poolStrawSoldiers,
+    _poolStreamOfThought,
     _poolStripedRiverwinder,
     _poolStrongarmMonk,
     _poolSublimeExhalation,

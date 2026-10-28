@@ -8795,6 +8795,7 @@ import _poolGixianPuppeteer from "./pool/gixian-puppeteer.js";
 import _poolGixianSkullflayer from "./pool/gixian-skullflayer.js";
 import _poolGixsCaress from "./pool/gixs-caress.js";
 import _poolGixsCommand from "./pool/gixs-command.js";
+import _poolGlacialChasm from "./pool/glacial-chasm.js";
 import _poolGlacialCrasher from "./pool/glacial-crasher.js";
 import _poolGlacialCrevasses from "./pool/glacial-crevasses.js";
 import _poolGlacialDragonhunt from "./pool/glacial-dragonhunt.js";
@@ -15986,6 +15987,7 @@ import _poolPhyrexianScuta from "./pool/phyrexian-scuta.js";
 import _poolPhyrexianSkyflayer from "./pool/phyrexian-skyflayer.js";
 import _poolPhyrexianSlayer from "./pool/phyrexian-slayer.js";
 import _poolPhyrexianSnowcrusher from "./pool/phyrexian-snowcrusher.js";
+import _poolPhyrexianSoulgorger from "./pool/phyrexian-soulgorger.js";
 import _poolPhyrexianSwarmlord from "./pool/phyrexian-swarmlord.js";
 import _poolPhyrexianTotem from "./pool/phyrexian-totem.js";
 import _poolPhyrexianTower from "./pool/phyrexian-tower.js";
@@ -21226,6 +21228,7 @@ import _poolStreakingOilgorger from "./pool/streaking-oilgorger.js";
 import _poolStreamHopper from "./pool/stream-hopper.js";
 import _poolStreamOfAcid from "./pool/stream-of-acid.js";
 import _poolStreamOfLife from "./pool/stream-of-life.js";
+import _poolStreamOfThought from "./pool/stream-of-thought.js";
 import _poolStreamOfUnconsciousness from "./pool/stream-of-unconsciousness.js";
 import _poolStreetRiot from "./pool/street-riot.js";
 import _poolStreetSpasm from "./pool/street-spasm.js";
@@ -22309,6 +22312,7 @@ import _poolTheHunterMaze from "./pool/the-hunter-maze.js";
 import _poolTheHuntsmansRedemption from "./pool/the-huntsmans-redemption.js";
 import _poolTheImmortalWeapons from "./pool/the-immortal-weapons.js";
 import _poolTheIncredibleHulk from "./pool/the-incredible-hulk.js";
+import _poolTheIndomitable from "./pool/the-indomitable.js";
 import _poolTheInfamousCruelclaw from "./pool/the-infamous-cruelclaw.js";
 import _poolTheInvincibleIronMan from "./pool/the-invincible-iron-man.js";
 import _poolTheJollyBalloonMan from "./pool/the-jolly-balloon-man.js";
@@ -35144,6 +35148,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGixianSkullflayer,
   _poolGixsCaress,
   _poolGixsCommand,
+  _poolGlacialChasm,
   _poolGlacialCrasher,
   _poolGlacialCrevasses,
   _poolGlacialDragonhunt,
@@ -42335,6 +42340,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianSkyflayer,
   _poolPhyrexianSlayer,
   _poolPhyrexianSnowcrusher,
+  _poolPhyrexianSoulgorger,
   _poolPhyrexianSwarmlord,
   _poolPhyrexianTotem,
   _poolPhyrexianTower,
@@ -47575,6 +47581,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStreamHopper,
   _poolStreamOfAcid,
   _poolStreamOfLife,
+  _poolStreamOfThought,
   _poolStreamOfUnconsciousness,
   _poolStreetRiot,
   _poolStreetSpasm,
@@ -48658,6 +48665,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheHuntsmansRedemption,
   _poolTheImmortalWeapons,
   _poolTheIncredibleHulk,
+  _poolTheIndomitable,
   _poolTheInfamousCruelclaw,
   _poolTheInvincibleIronMan,
   _poolTheJollyBalloonMan,
@@ -61506,6 +61514,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gixian-skullflayer": _poolGixianSkullflayer,
   "pool/gixs-caress": _poolGixsCaress,
   "pool/gixs-command": _poolGixsCommand,
+  "pool/glacial-chasm": _poolGlacialChasm,
   "pool/glacial-crasher": _poolGlacialCrasher,
   "pool/glacial-crevasses": _poolGlacialCrevasses,
   "pool/glacial-dragonhunt": _poolGlacialDragonhunt,
@@ -68697,6 +68706,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-skyflayer": _poolPhyrexianSkyflayer,
   "pool/phyrexian-slayer": _poolPhyrexianSlayer,
   "pool/phyrexian-snowcrusher": _poolPhyrexianSnowcrusher,
+  "pool/phyrexian-soulgorger": _poolPhyrexianSoulgorger,
   "pool/phyrexian-swarmlord": _poolPhyrexianSwarmlord,
   "pool/phyrexian-totem": _poolPhyrexianTotem,
   "pool/phyrexian-tower": _poolPhyrexianTower,
@@ -73937,6 +73947,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stream-hopper": _poolStreamHopper,
   "pool/stream-of-acid": _poolStreamOfAcid,
   "pool/stream-of-life": _poolStreamOfLife,
+  "pool/stream-of-thought": _poolStreamOfThought,
   "pool/stream-of-unconsciousness": _poolStreamOfUnconsciousness,
   "pool/street-riot": _poolStreetRiot,
   "pool/street-spasm": _poolStreetSpasm,
@@ -75020,6 +75031,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-huntsmans-redemption": _poolTheHuntsmansRedemption,
   "pool/the-immortal-weapons": _poolTheImmortalWeapons,
   "pool/the-incredible-hulk": _poolTheIncredibleHulk,
+  "pool/the-indomitable": _poolTheIndomitable,
   "pool/the-infamous-cruelclaw": _poolTheInfamousCruelclaw,
   "pool/the-invincible-iron-man": _poolTheInvincibleIronMan,
   "pool/the-jolly-balloon-man": _poolTheJollyBalloonMan,

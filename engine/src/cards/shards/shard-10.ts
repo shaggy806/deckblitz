@@ -282,6 +282,7 @@ import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiantsAmulet from "../pool/giants-amulet.js";
 import _poolGideonAllyOfZendikar from "../pool/gideon-ally-of-zendikar.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
+import _poolGlacialChasm from "../pool/glacial-chasm.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
@@ -490,6 +491,7 @@ import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
+import _poolPhyrexianSoulgorger from "../pool/phyrexian-soulgorger.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
 import _poolPiasRevolution from "../pool/pias-revolution.js";
 import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
@@ -1111,6 +1113,7 @@ const shard: CardShard = {
     _poolGiantsAmulet,
     _poolGideonAllyOfZendikar,
     _poolGiftOfGranite,
+    _poolGlacialChasm,
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
     _poolGlassCasket,
@@ -1319,6 +1322,7 @@ const shard: CardShard = {
     _poolPerimeterPatrol,
     _poolPersonify,
     _poolPhotonLivingLight,
+    _poolPhyrexianSoulgorger,
     _poolPiaAndKiranNalaar,
     _poolPiasRevolution,
     _poolPilgrimsEye,

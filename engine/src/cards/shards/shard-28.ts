@@ -710,6 +710,7 @@ import _poolThalakosScout from "../pool/thalakos-scout.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
 import _poolTheAncientOne from "../pool/the-ancient-one.js";
 import _poolTheBrute from "../pool/the-brute.js";
+import _poolTheIndomitable from "../pool/the-indomitable.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
 import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolThanosDeathsConsort,
     _poolTheAncientOne,
     _poolTheBrute,
+    _poolTheIndomitable,
     _poolTheSwarmweaver,
     _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
