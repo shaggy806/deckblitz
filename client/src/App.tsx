@@ -631,6 +631,15 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   scry: 'scry',
   venture: 'venture into the dungeon',
 }
+/** A colour named as a permanent enters ("As this Aura enters, choose a
+ * color" — Flickering Ward, Utopia Sprawl) arrives as its letter. */
+const COLOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
+  W: 'White',
+  U: 'Blue',
+  B: 'Black',
+  R: 'Red',
+  G: 'Green',
+}
 /** A hand ability's button: its text up to its reminder or its effect —
  * "Ninjutsu {1}{U}", "Channel — {1}{G}, Discard this card". */
 function handAbilityLabel(text: string): string {
@@ -4069,7 +4078,9 @@ function Table({
           {creatureTypeChoiceAction.prompt ??
             (creatureTypeChoiceAction.options.every((t) => view.turnOrder.includes(t as PlayerId))
               ? 'choose its protector'
-              : 'choose one')}
+              : creatureTypeChoiceAction.options.every((t) => t in COLOR_CHOICE_NAMES)
+                ? 'choose a color'
+                : 'choose one')}
         </span>
         {creatureTypeChoiceAction.options.map((t) => (
           <button
@@ -4080,7 +4091,9 @@ function Table({
             }
           >
             {/* A battle's protector is chosen among players (rule 310.9a). */}
-            {view.turnOrder.includes(t as PlayerId) ? playerLabel(t as PlayerId, game.seats) : t}
+            {view.turnOrder.includes(t as PlayerId)
+              ? playerLabel(t as PlayerId, game.seats)
+              : (COLOR_CHOICE_NAMES[t] ?? t)}
           </button>
         ))}
       </div>

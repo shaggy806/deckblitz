@@ -5577,5 +5577,5 @@ engine terms. A second thing to check is a second test.
 - **Expect:** No colour is asked while casting. As it resolves the prompt offers five choices, "Protection from white" to "Protection from green". After red, the Bears' card text ends "Protection from red until end of turn" and the log says "Grizzly Bears gains protection from red until EOT"; then you scry 1.
 
 ### Flickering Ward: naming its own colour doesn't knock it off
-- **Do:** Cast Flickering Ward on your Grizzly Bears and choose white as it enters.
-- **Expect:** The Ward stays attached and the Bears have protection from white. Casting Pacifism on the Bears isn't offered: they can't be targeted by it.
+- **Do:** Cast Flickering Ward on your Grizzly Bears and choose White as it enters.
+- **Expect:** The prompt reads "Flickering Ward — choose a color" with White, Blue, Black, Red and Green. The Ward stays attached and the Bears have protection from white. Casting Pacifism on the Bears isn't offered: they can't be targeted by it.
