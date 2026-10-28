@@ -210,6 +210,18 @@ describe("choose a card name (rule 201.4)", () => {
     expect(game.canDispatch(ping)).toBeNull();
   });
 
+  it("Skyseer's Chariot's tax reaches a named card's cycling in a hand", () => {
+    const { game, a } = table();
+    castNaming(game, a, "Skyseer's Chariot", "Eternal Dragon");
+    const dragon = toHand(game, "Eternal Dragon", B);
+    lands(game, "Wastes", 3, B);
+    game.state.priority.holder = B;
+    // Plainscycling {2}, plus {2}.
+    expect(game.canDispatch({ type: "cycle", player: B, card: dragon })).not.toBeNull();
+    lands(game, "Wastes", 1, B);
+    expect(game.canDispatch({ type: "cycle", player: B, card: dragon })).toBeNull();
+  });
+
   it("Curse of Silence taxes only the enchanted player, and may be cashed in when they cast it", () => {
     const { game, a } = table({ players: 3 });
     lands(game, "Plains", 1);

@@ -9831,10 +9831,19 @@ export class Game {
     if (this.abilitiesProhibited(player, this.state.objects[cardId], false)) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
-    if (this.payMana(player, parseManaCost(def.cycling.cost)) === null) {
+    if (this.payMana(player, this.cyclingCost(player, cardId)) === null) {
       return `${player} cannot pay the cycling cost of ${def.name}`;
     }
     return null;
+  }
+
+  /** What cycling `cardId` costs `player`: an activated ability's cost
+   * (rule 702.29a), so a tax on abilities of sources in every zone reaches it
+   * (602.2b — Skyseer's Chariot naming the card); one on permanents' doesn't. */
+  private cyclingCost(player: PlayerId, cardId: ObjectId): ManaCost {
+    const ability = this.cyclingAbilityOf(this.state.objects[cardId].cardName);
+    if (ability === undefined) return parseManaCost(null);
+    return this.activatedAbilityManaCost(player, cardId, ability).cost;
   }
 
   /** A card's cycling ability as it resolves (rule 702.29a): "Draw a card",
@@ -9869,7 +9878,7 @@ export class Game {
     const cycling = def.cycling;
     if (cycling === null) throw new Error(`${def.name} does not have cycling`);
 
-    const payment = this.payMana(player, parseManaCost(cycling.cost));
+    const payment = this.payMana(player, this.cyclingCost(player, cardId));
     if (payment === null) throw new Error(`${player} cannot pay the cycling cost of ${def.name}`);
     this.executePayment(player, payment);
     // Cycling's cost discards the card (rule 702.29a: "[Cost], Discard this
