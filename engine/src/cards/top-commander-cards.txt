@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3895 already implemented / 1105 missing (marks refreshed 2026-10-28)
+3901 already implemented / 1099 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2808,7 +2808,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2815  Tragic Arrogance                         {3}{W}{W}        Sorcery
 [x]  2816  Mistveil Plains                          {0}              Land — Plains
 [x]  2817  Genesis Chamber                          {2}              Artifact
-[ ]  2818  Heaped Harvest                           {2}{G}           Artifact — Food
+[x]  2818  Heaped Harvest                           {2}{G}           Artifact — Food
 [x]  2819  Thrashing Brontodon                      {1}{G}{G}        Creature — Dinosaur
 [x]  2820  Graveshifter                             {3}{B}           Creature — Shapeshifter
 [ ]  2821  Meekstone                                {1}              Artifact
@@ -3573,7 +3573,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3580  Communal Brewing                         {2}{G}           Enchantment
 [x]  3581  Champion of Dusk                         {3}{B}{B}        Creature — Vampire Knight
 [ ]  3582  Retether                                 {3}{W}           Sorcery
-[ ]  3583  Rashmi, Eternities Crafter               {2}{G}{U}        Legendary Creature — Elf Druid
+[x]  3583  Rashmi, Eternities Crafter               {2}{G}{U}        Legendary Creature — Elf Druid
 [x]  3584  Ninja of the Deep Hours                  {3}{U}           Creature — Human Ninja
 [x]  3585  War of the Last Alliance                 {3}{W}           Enchantment — Saga
 [x]  3586  Nesting Dragon                           {3}{R}{R}        Creature — Dragon
@@ -4212,7 +4212,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4219  Snapback                                 {1}{U}           Instant
 [ ]  4220  Shadow of the Goblin                     {1}{R}           Enchantment
 [x]  4221  Patron of the Arts                       {2}{R}           Creature — Dragon Noble
-[ ]  4222  Ordeal of Nylea                          {1}{G}           Enchantment — Aura
+[x]  4222  Ordeal of Nylea                          {1}{G}           Enchantment — Aura
 [x]  4223  Drag to the Roots                        {2}{B}{G}        Instant
 [x]  4224  Angel of Invention                       {3}{W}{W}        Creature — Angel
 [ ]  4225  Dancer's Chakrams                        {3}{W}           Artifact — Equipment
@@ -4434,7 +4434,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4441  Walking Bulwark                          {1}              Artifact Creature — Golem
 [x]  4442  Pawpatch Formation                       {1}{G}           Instant
 [x]  4443  Brute Force                              {R}              Instant
-[ ]  4444  Matoya, Archon Elder                     {2}{U}           Legendary Creature — Human Warlock
+[x]  4444  Matoya, Archon Elder                     {2}{U}           Legendary Creature — Human Warlock
 [x]  4445  Gollum, Patient Plotter                  {1}{B}           Legendary Creature — Halfling Horror
 [x]  4446  Dusk Legion Zealot                       {1}{B}           Creature — Vampire Soldier
 [x]  4447  Akroan Horse                             {4}              Artifact Creature — Horse
@@ -4493,7 +4493,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4500  Teferi, Who Slows the Sunset             {2}{W}{U}        Legendary Planeswalker — Teferi
 [ ]  4501  Ajani, Nacatl Pariah // Ajani, Nacatl Avenger {2}              Legendary Creature — Cat Warrior // Legendary Planeswalker — Ajani
 [ ]  4502  Yorion, Sky Nomad                        {3}{W/U}{W/U}    Legendary Creature — Bird Serpent
-[ ]  4503  Darien, King of Kjeldor                  {4}{W}{W}        Legendary Creature — Human Soldier
+[x]  4503  Darien, King of Kjeldor                  {4}{W}{W}        Legendary Creature — Human Soldier
 [x]  4504  Gimli's Reckless Might                   {3}{R}           Enchantment
 [x]  4505  Securitron Squadron                      {1}{W}           Artifact Creature — Robot
 [x]  4506  Beacon of Unrest                         {3}{B}{B}        Sorcery
@@ -4772,7 +4772,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4779  Towering Titan                           {4}{G}{G}        Creature — Giant
 [ ]  4780  Wojek Investigator                       {2}{W}           Creature — Angel Detective
 [ ]  4781  With Great Power . . .                   {3}{W}           Enchantment — Aura
-[ ]  4782  Urban Retreat                            {0}              Land
+[x]  4782  Urban Retreat                            {0}              Land
 [ ]  4783  Fade from History                        {2}{G}{G}        Sorcery
 [x]  4784  Volcanic Vision                          {5}{R}{R}        Sorcery
 [x]  4785  Prishe's Wanderings                      {2}{G}           Instant
