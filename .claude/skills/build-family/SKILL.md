@@ -29,10 +29,8 @@ landing). Only what's below differs.
 ## 0. Orient
 
 - **Unmerged work first**: the SessionStart hook prints
-  `scripts/unmerged-branches.mjs`. Two branches it lists are known
-  leftovers, already on `main`: `claude/recheck-r1-b235` and
-  `claude/ody-b225`. Ignore those two. Merge any other branch it lists, or
-  ask whether it's abandoned. `git fetch origin main && git status -sb`: be
+  `scripts/unmerged-branches.mjs`. Merge any branch it lists, or ask
+  whether it's abandoned. `git fetch origin main && git status -sb`: be
   level with `origin/main`.
 - `BACKLOG.md`'s "Next: work down the need keys" line: the families built
   so far, and the one handed off as next (a suggestion; step 1's fresh
