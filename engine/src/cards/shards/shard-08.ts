@@ -208,6 +208,7 @@ import _poolDusk from "../pool/dusk.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolEgoDrain from "../pool/ego-drain.js";
+import _poolElHajjaj from "../pool/el-hajjaj.js";
 import _poolElandUmbra from "../pool/eland-umbra.js";
 import _poolElderDeepFiend from "../pool/elder-deep-fiend.js";
 import _poolElderSpawn from "../pool/elder-spawn.js";
@@ -1061,6 +1062,7 @@ const shard: CardShard = {
     _poolDwarvenProvisioner,
     _poolEclipsedKithkin,
     _poolEgoDrain,
+    _poolElHajjaj,
     _poolElandUmbra,
     _poolElderDeepFiend,
     _poolElderSpawn,

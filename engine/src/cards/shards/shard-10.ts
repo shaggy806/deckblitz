@@ -376,6 +376,7 @@ import _poolKeldonBattlewagon from "../pool/keldon-battlewagon.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
 import _poolKikuNightsFlower from "../pool/kiku-nights-flower.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
+import _poolKingTchalla from "../pool/king-tchalla.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
 import _poolKnightsCharge from "../pool/knights-charge.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolKessigForgemaster,
     _poolKikuNightsFlower,
     _poolKimahriValiantGuardian,
+    _poolKingTchalla,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
     _poolKnightsCharge,

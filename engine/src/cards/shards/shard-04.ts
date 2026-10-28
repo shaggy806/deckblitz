@@ -661,6 +661,7 @@ import _poolSultaiSoothsayer from "../pool/sultai-soothsayer.js";
 import _poolSummitIntimidator from "../pool/summit-intimidator.js";
 import _poolSummonBahamut from "../pool/summon-bahamut.js";
 import _poolSunDappledCelebrant from "../pool/sun-dappled-celebrant.js";
+import _poolSunfall from "../pool/sunfall.js";
 import _poolSuntailHawk from "../pool/suntail-hawk.js";
 import _poolSurvivalOfTheFittest from "../pool/survival-of-the-fittest.js";
 import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
@@ -1472,6 +1473,7 @@ const shard: CardShard = {
     _poolSummitIntimidator,
     _poolSummonBahamut,
     _poolSunDappledCelebrant,
+    _poolSunfall,
     _poolSuntailHawk,
     _poolSurvivalOfTheFittest,
     _poolSwarmyardMassacre,

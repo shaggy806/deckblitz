@@ -174,6 +174,7 @@ import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
 import _poolDalkovanEncampment from "../pool/dalkovan-encampment.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
+import _poolDarienKingOfKjeldor from "../pool/darien-king-of-kjeldor.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
 import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
@@ -211,6 +212,7 @@ import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDriftingDjinn from "../pool/drifting-djinn.js";
 import _poolDrillBit from "../pool/drill-bit.js";
 import _poolDromarTheBanisher from "../pool/dromar-the-banisher.js";
+import _poolDropkickBomber from "../pool/dropkick-bomber.js";
 import _poolDryadMilitant from "../pool/dryad-militant.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuergarHedgeMage from "../pool/duergar-hedge-mage.js";
@@ -455,6 +457,7 @@ import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
+import _poolMatoyaArchonElder from "../pool/matoya-archon-elder.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
 import _poolMaverickThopterist from "../pool/maverick-thopterist.js";
 import _poolMendingHands from "../pool/mending-hands.js";
@@ -981,6 +984,7 @@ const shard: CardShard = {
     _poolCustodianOfTheTrove,
     _poolDalkovanEncampment,
     _poolDangerousWager,
+    _poolDarienKingOfKjeldor,
     _poolDarkConfidant,
     _poolDarksteelColossus,
     _poolDauntlessDismantler,
@@ -1018,6 +1022,7 @@ const shard: CardShard = {
     _poolDriftingDjinn,
     _poolDrillBit,
     _poolDromarTheBanisher,
+    _poolDropkickBomber,
     _poolDryadMilitant,
     _poolDryadsFavor,
     _poolDuergarHedgeMage,
@@ -1262,6 +1267,7 @@ const shard: CardShard = {
     _poolMarshalOfTheLost,
     _poolMartyrForTheCause,
     _poolMaskOfMemory,
+    _poolMatoyaArchonElder,
     _poolMaulOfTheSkyclaves,
     _poolMaverickThopterist,
     _poolMendingHands,

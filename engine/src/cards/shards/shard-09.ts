@@ -24,6 +24,7 @@ import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAmrouScout from "../pool/amrou-scout.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
+import _poolAngelOfDeliverance from "../pool/angel-of-deliverance.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolAngelicAscension from "../pool/angelic-ascension.js";
 import _poolAnimusOfPredation from "../pool/animus-of-predation.js";
@@ -264,6 +265,7 @@ import _poolFuriousBellow from "../pool/furious-bellow.js";
 import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
 import _poolGaelicat from "../pool/gaelicat.js";
 import _poolGammaGrotesque from "../pool/gamma-grotesque.js";
+import _poolGandalfFriendOfTheShire from "../pool/gandalf-friend-of-the-shire.js";
 import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
 import _poolGarenbrigSquire from "../pool/garenbrig-squire.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
@@ -476,6 +478,7 @@ import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
 import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
 import _poolOgreArsonist from "../pool/ogre-arsonist.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
+import _poolOliviasAttendants from "../pool/olivias-attendants.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOnduCleric from "../pool/ondu-cleric.js";
@@ -591,6 +594,7 @@ import _poolSandsteppeOutcast from "../pool/sandsteppe-outcast.js";
 import _poolSanguineIndulgence from "../pool/sanguine-indulgence.js";
 import _poolSarcatog from "../pool/sarcatog.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
+import _poolSauronTheNecromancer from "../pool/sauron-the-necromancer.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavageStomp from "../pool/savage-stomp.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolAmrouScout,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
+    _poolAngelOfDeliverance,
     _poolAngelfireCrusader,
     _poolAngelicAscension,
     _poolAnimusOfPredation,
@@ -1105,6 +1110,7 @@ const shard: CardShard = {
     _poolFurnaceHellkite,
     _poolGaelicat,
     _poolGammaGrotesque,
+    _poolGandalfFriendOfTheShire,
     _poolGarenbrigCarver,
     _poolGarenbrigSquire,
     _poolGarruksCompanion,
@@ -1317,6 +1323,7 @@ const shard: CardShard = {
     _poolOfficiousInterrogation,
     _poolOgreArsonist,
     _poolOliphaunt,
+    _poolOliviasAttendants,
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOnduCleric,
@@ -1432,6 +1439,7 @@ const shard: CardShard = {
     _poolSanguineIndulgence,
     _poolSarcatog,
     _poolSatyrRambler,
+    _poolSauronTheNecromancer,
     _poolSavageKnuckleblade,
     _poolSavageStomp,
     _poolSavaiCrystal,

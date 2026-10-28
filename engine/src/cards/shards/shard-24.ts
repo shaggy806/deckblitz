@@ -114,6 +114,7 @@ import _poolCauldronDance from "../pool/cauldron-dance.js";
 import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
 import _poolCavernHarpy from "../pool/cavern-harpy.js";
+import _poolCecilDarkKnight from "../pool/cecil-dark-knight.js";
 import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
@@ -527,6 +528,7 @@ import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
+import _poolRingsight from "../pool/ringsight.js";
 import _poolRiptideDirector from "../pool/riptide-director.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
 import _poolRishadanBrigand from "../pool/rishadan-brigand.js";
@@ -941,6 +943,7 @@ const shard: CardShard = {
     _poolCausticExhale,
     _poolCavernCrawler,
     _poolCavernHarpy,
+    _poolCecilDarkKnight,
     _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,
@@ -1354,6 +1357,7 @@ const shard: CardShard = {
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,
     _poolRikuOfManyPaths,
+    _poolRingsight,
     _poolRiptideDirector,
     _poolRisenSanctuary,
     _poolRishadanBrigand,

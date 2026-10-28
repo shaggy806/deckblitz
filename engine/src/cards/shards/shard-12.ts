@@ -183,6 +183,7 @@ import _poolDisaTheRestless from "../pool/disa-the-restless.js";
 import _poolDiscipleOfKangee from "../pool/disciple-of-kangee.js";
 import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
+import _poolDisturbingMirth from "../pool/disturbing-mirth.js";
 import _poolDivination from "../pool/divination.js";
 import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
 import _poolDogUmbra from "../pool/dog-umbra.js";
@@ -549,6 +550,7 @@ import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRallyTheForces from "../pool/rally-the-forces.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
 import _poolRangerOfEos from "../pool/ranger-of-eos.js";
+import _poolRashmiEternitiesCrafter from "../pool/rashmi-eternities-crafter.js";
 import _poolRatOut from "../pool/rat-out.js";
 import _poolRavingVisionary from "../pool/raving-visionary.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
@@ -999,6 +1001,7 @@ const shard: CardShard = {
     _poolDiscipleOfKangee,
     _poolDisenchant,
     _poolDisorderInTheCourt,
+    _poolDisturbingMirth,
     _poolDivination,
     _poolDjinnOfFoolsFall,
     _poolDogUmbra,
@@ -1365,6 +1368,7 @@ const shard: CardShard = {
     _poolRallyTheForces,
     _poolRamosDragonEngine,
     _poolRangerOfEos,
+    _poolRashmiEternitiesCrafter,
     _poolRatOut,
     _poolRavingVisionary,
     _poolRazorfootGriffin,

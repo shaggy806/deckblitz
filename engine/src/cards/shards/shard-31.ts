@@ -73,6 +73,7 @@ import _poolBelieve from "../pool/believe.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
+import _poolBiolumeSerpent from "../pool/biolume-serpent.js";
 import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBladedBracers from "../pool/bladed-bracers.js";
@@ -949,6 +950,7 @@ const shard: CardShard = {
     _poolBestowGreatness,
     _poolBigBertha,
     _poolBindingTheOldGods,
+    _poolBiolumeSerpent,
     _poolBionicBlow,
     _poolBlackWidowDeadlyHunter,
     _poolBladedBracers,

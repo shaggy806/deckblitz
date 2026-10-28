@@ -53,6 +53,7 @@ import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
+import _poolAvatarKuruk from "../pool/avatar-kuruk.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolAwakenTheHonoredDead from "../pool/awaken-the-honored-dead.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
@@ -227,6 +228,7 @@ import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
+import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -346,6 +348,7 @@ import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
+import _poolHoodedBlightfang from "../pool/hooded-blightfang.js";
 import _poolHornetCannon from "../pool/hornet-cannon.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
@@ -439,6 +442,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMeltTerrain from "../pool/melt-terrain.js";
+import _poolMichikoKondaTruthSeeker from "../pool/michiko-konda-truth-seeker.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
@@ -866,6 +870,7 @@ const shard: CardShard = {
     _poolAugmentingAutomaton,
     _poolAuriokSunchaser,
     _poolAuthority,
+    _poolAvatarKuruk,
     _poolAvatarsWrath,
     _poolAwakenTheHonoredDead,
     _poolBackToNature,
@@ -1040,6 +1045,7 @@ const shard: CardShard = {
     _poolEarthenAlly,
     _poolEbonDragon,
     _poolEchoingRuin,
+    _poolElrondLordOfRivendell,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
@@ -1159,6 +1165,7 @@ const shard: CardShard = {
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
+    _poolHoodedBlightfang,
     _poolHornetCannon,
     _poolHostileTakeover,
     _poolHourOfReckoning,
@@ -1252,6 +1259,7 @@ const shard: CardShard = {
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
     _poolMeltTerrain,
+    _poolMichikoKondaTruthSeeker,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMinionOfLeshrac,

@@ -255,6 +255,7 @@ import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
+import _poolGloriousGale from "../pool/glorious-gale.js";
 import _poolGoblinFestival from "../pool/goblin-festival.js";
 import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
@@ -1087,6 +1088,7 @@ const shard: CardShard = {
     _poolGlazeFiend,
     _poolGlintwingInvoker,
     _poolGlorifierOfDusk,
+    _poolGloriousGale,
     _poolGoblinFestival,
     _poolGoblinKites,
     _poolGoblinRabblemaster,

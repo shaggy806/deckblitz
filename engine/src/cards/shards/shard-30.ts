@@ -71,6 +71,7 @@ import _poolBlessedAlliance from "../pool/blessed-alliance.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
 import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
+import _poolBloatflySwarm from "../pool/bloatfly-swarm.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
@@ -505,6 +506,7 @@ import _poolOmen from "../pool/omen.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
+import _poolOrdealOfNylea from "../pool/ordeal-of-nylea.js";
 import _poolOriginOfIronMan from "../pool/origin-of-iron-man.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
@@ -549,6 +551,7 @@ import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
 import _poolQuilledSliver from "../pool/quilled-sliver.js";
+import _poolQuintessentialKatana from "../pool/quintessential-katana.js";
 import _poolQuirionDruid from "../pool/quirion-druid.js";
 import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
@@ -889,6 +892,7 @@ const shard: CardShard = {
     _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
     _poolBlightreaperThallid,
+    _poolBloatflySwarm,
     _poolBloodArtist,
     _poolBloodPet,
     _poolBloodbraidElf,
@@ -1323,6 +1327,7 @@ const shard: CardShard = {
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOrdealOfHeliod,
+    _poolOrdealOfNylea,
     _poolOriginOfIronMan,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
@@ -1367,6 +1372,7 @@ const shard: CardShard = {
     _poolQuicksand,
     _poolQuietDisrepair,
     _poolQuilledSliver,
+    _poolQuintessentialKatana,
     _poolQuirionDruid,
     _poolRadiantEssence,
     _poolRakdosKeyrune,

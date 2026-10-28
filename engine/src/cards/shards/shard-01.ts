@@ -54,6 +54,7 @@ import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBestialFury from "../pool/bestial-fury.js";
+import _poolBiolumeEgg from "../pool/biolume-egg.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
@@ -91,6 +92,7 @@ import _poolCaseyJonesBackAlleyBrute from "../pool/casey-jones-back-alley-brute.
 import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
+import _poolCecilRedeemedPaladin from "../pool/cecil-redeemed-paladin.js";
 import _poolCephalidRetainer from "../pool/cephalid-retainer.js";
 import _poolCeremonialGuard from "../pool/ceremonial-guard.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
@@ -449,6 +451,7 @@ import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolNorwoodPriestess from "../pool/norwood-priestess.js";
+import _poolNotDeadAfterAll from "../pool/not-dead-after-all.js";
 import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -571,6 +574,7 @@ import _poolScornedVillager from "../pool/scorned-villager.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
+import _poolScrollOfIsildur from "../pool/scroll-of-isildur.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
@@ -859,6 +863,7 @@ const shard: CardShard = {
     _poolBellowsLizard,
     _poolBespokeBo,
     _poolBestialFury,
+    _poolBiolumeEgg,
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBlacklanceParagon,
@@ -896,6 +901,7 @@ const shard: CardShard = {
     _poolCastIntoTheFire,
     _poolCatapultMaster,
     _poolCauldronsGift,
+    _poolCecilRedeemedPaladin,
     _poolCephalidRetainer,
     _poolCeremonialGuard,
     _poolCetaDisciple,
@@ -1254,6 +1260,7 @@ const shard: CardShard = {
     _poolNoWayOut,
     _poolNornsWellspring,
     _poolNorwoodPriestess,
+    _poolNotDeadAfterAll,
     _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -1376,6 +1383,7 @@ const shard: CardShard = {
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
+    _poolScrollOfIsildur,
     _poolScurryOfGremlins,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
