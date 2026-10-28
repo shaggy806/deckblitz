@@ -200,6 +200,7 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
+- **Bots never band, and price a band's blocker as blocking one creature** (2026-10-28, B247): a bot's attack never sets `AttackerDeclaration.band`, and `bot/combat-math.ts` judges a block as one blocker on one attacker, though a blocker of a band blocks all of it and takes all their damage (rule 702.22h). Dividing damage under banding is right already (`opposedAssignment`).
 - **Play with the bots' simulation budget** (the user, 2026-10-13): v2 stops on whichever comes first,
   a count (`maxSimulations`, default 200 a decision; 12 rollouts for a non-priority decision) or the
   room's wall clock (300 ms). The clock makes strength depend on the CPU — the live box ran a searched
