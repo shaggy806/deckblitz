@@ -543,6 +543,7 @@ import _poolAlpineGrizzly from "./pool/alpine-grizzly.js";
 import _poolAlpineGuide from "./pool/alpine-guide.js";
 import _poolAlpineHoundmaster from "./pool/alpine-houndmaster.js";
 import _poolAlpineMeadow from "./pool/alpine-meadow.js";
+import _poolAlpineMoon from "./pool/alpine-moon.js";
 import _poolAlpineWatchdog from "./pool/alpine-watchdog.js";
 import _poolAlquistProftMasterSleuth from "./pool/alquist-proft-master-sleuth.js";
 import _poolAlrundsEpiphany from "./pool/alrunds-epiphany.js";
@@ -27284,6 +27285,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAlpineGuide,
   _poolAlpineHoundmaster,
   _poolAlpineMeadow,
+  _poolAlpineMoon,
   _poolAlpineWatchdog,
   _poolAlquistProftMasterSleuth,
   _poolAlrundsEpiphany,
@@ -54038,6 +54040,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/alpine-guide": _poolAlpineGuide,
   "pool/alpine-houndmaster": _poolAlpineHoundmaster,
   "pool/alpine-meadow": _poolAlpineMeadow,
+  "pool/alpine-moon": _poolAlpineMoon,
   "pool/alpine-watchdog": _poolAlpineWatchdog,
   "pool/alquist-proft-master-sleuth": _poolAlquistProftMasterSleuth,
   "pool/alrunds-epiphany": _poolAlrundsEpiphany,

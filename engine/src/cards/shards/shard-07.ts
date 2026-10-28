@@ -18,6 +18,7 @@ import _poolAjanisMantra from "../pool/ajanis-mantra.js";
 import _poolAkkiUnderling from "../pool/akki-underling.js";
 import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
 import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
+import _poolAlpineMoon from "../pool/alpine-moon.js";
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushCommander from "../pool/ambush-commander.js";
@@ -883,6 +884,7 @@ const shard: CardShard = {
     _poolAkkiUnderling,
     _poolAkronLegionnaire,
     _poolAlpharaelDreamingAcolyte,
+    _poolAlpineMoon,
     _poolAlterFate,
     _poolAlteredEgo,
     _poolAmbushCommander,

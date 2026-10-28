@@ -11,7 +11,7 @@
 import { describe, expect, it } from "vitest";
 
 import { effectiveColors } from "../characteristics.js";
-import { A, B, cast, destroy, enter, hand, keywords, lands, life, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, types, zone } from "./harness.js";
+import { A, B, cast, destroy, enter, hand, keywords, lands, life, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, types, zone, nextTurn } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -207,6 +207,28 @@ describe("entering under it (rule 614.12)", () => {
     cast(game, golem);
     expect(zone(game, golem)).toBe("battlefield");
     expect(game.state.objects[golem].chosenOnEnter ?? null).toBeNull();
+  });
+});
+
+describe("Alpine Moon", () => {
+  it("the named land of an opponent loses its types and abilities, and enters untapped", () => {
+    const { game } = table();
+    const tundra = spawn(game, "Tundra", B);
+    lands(game, "Mountain", 1);
+    const moon = toHand(game, "Alpine Moon");
+    cast(game, moon, { settle: false });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-card-name");
+    game.dispatch({ type: "choose-card-name", player: A, name: "Tundra" });
+    settle(game);
+    expect(subtypes(game, tundra)).toEqual([]);
+    expect(types(game, tundra)).toEqual(["land"]);
+    // One entering later is judged as it would exist there (614.12).
+    nextTurn(game);
+    const second = toHand(game, "Tundra", B);
+    game.dispatch({ type: "play-land", player: B, card: second });
+    settle(game);
+    expect(subtypes(game, second)).toEqual([]);
+    expect(game.state.objects[second].tapped).toBe(false);
   });
 });
 
