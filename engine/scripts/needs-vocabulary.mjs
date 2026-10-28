@@ -42,6 +42,12 @@
 //                      more together than the best one key would per key —
 //                      with milestones, and the pairs (cards needing exactly
 //                      two keys); --family builds only F's keys
+//   --greedy --groups [--top N] [--family F]
+//                      the same order with the vocabulary's generalisation
+//                      groups as build units (a group is one build: its open
+//                      keys together), beside every open key alone; each step
+//                      names its family and the group's shape — Phase 2's
+//                      build order (the `build-family` skill)
 //   --recheck [--size N] [--batch K]
 //                      the cards worth attempting again: no open need, or
 //                      every open need judged to exist already (`checked`),
@@ -366,6 +372,9 @@ function main() {
   if (args.includes("--recheck")) {
     return recheck(vocab, waiting, Number(opt("--size", 100)), opt("--batch", undefined), args.includes("--freeze"));
   }
+  if (args.includes("--greedy") && args.includes("--groups")) {
+    return greedyGroups(vocab, waiting, Number(opt("--top", 30)), opt("--family", undefined));
+  }
   if (args.includes("--greedy")) return greedy(vocab, waiting, Number(opt("--top", 50)), opt("--family", undefined));
   if (args.includes("--brief")) {
     return brief(vocab, waiting, opt("--brief", ""), args.includes("--open-only"), Number(opt("--page", 1)));
@@ -628,6 +637,69 @@ function greedy(vocab, waiting, top, familyArg) {
     const sa = single.get(a) ?? 0;
     const sb = single.get(b) ?? 0;
     console.log(`  ${String(sa).padStart(3)} ${String(sb).padStart(3)} → ${String(sa + sb + n).padStart(3)}  ${a} + ${b}`);
+  }
+}
+
+/**
+ * `--greedy --groups`: the build order with the generalisation groups
+ * (`vocab.groups`, the need-keys plan's step 1.3) as units. A unit is a
+ * group's open keys, built together as one general implementation, or one
+ * open key alone; each step takes the unit that frees the most cards whose
+ * every open need it covers (ties: fewer keys, then name). `--family F`
+ * keeps only units wholly in F. This is Phase 2's order: a session builds a
+ * family's top units.
+ */
+function greedyGroups(vocab, waiting, top, familyArg) {
+  const family = familyArg === undefined ? undefined : (vocab.canonical(familyArg) ?? familyArg);
+  const cards = [...latestByCard(waiting).values()]
+    .map((r) => ({ name: r.name, open: new Set(keysOf(r, vocab).filter((k) => !vocab.isBuilt(k))) }))
+    .filter((c) => c.open.size > 0);
+  const openKeys = new Set(cards.flatMap((c) => [...c.open]));
+  const units = [];
+  const seen = new Set();
+  const addUnit = (keys, shape) => {
+    const ks = [...new Set(keys.map((k) => vocab.canonical(k) ?? k))].filter((k) => openKeys.has(k)).sort();
+    if (ks.length === 0) return;
+    if (family !== undefined && !ks.every((k) => k === family || vocab.familyOf(k) === family)) return;
+    const id = ks.join("|");
+    if (seen.has(id)) return;
+    seen.add(id);
+    units.push({ id, keys: ks, shape, family: vocab.familyOf(ks[0]) });
+  };
+  for (const g of vocab.groups) addUnit(g.keys, g.shape);
+  for (const k of openKeys) addUnit([k], undefined);
+
+  const byKey = new Map();
+  for (const c of cards) for (const k of c.open) byKey.set(k, [...(byKey.get(k) ?? []), c]);
+  const done = new Set();
+  const gainOf = (u) => {
+    const ks = new Set(u.keys);
+    const hit = new Set();
+    for (const k of u.keys) for (const c of byKey.get(k) ?? []) if (!done.has(c) && [...c.open].every((x) => ks.has(x))) hit.add(c);
+    return hit;
+  };
+  const steps = [];
+  let total = 0;
+  while (steps.length < top) {
+    let best = null;
+    for (const u of units) {
+      const hit = gainOf(u);
+      if (hit.size === 0) continue;
+      if (best === null || hit.size > best.hit.size || (hit.size === best.hit.size && (u.keys.length < best.u.keys.length || (u.keys.length === best.u.keys.length && u.id < best.u.id)))) best = { u, hit };
+    }
+    if (best === null) break;
+    for (const c of best.hit) done.add(c);
+    for (const c of cards) for (const k of best.u.keys) c.open.delete(k);
+    for (const c of cards) if (c.open.size === 0) done.add(c);
+    total += best.hit.size;
+    steps.push({ ...best.u, gain: best.hit.size, total });
+  }
+  console.log(
+    `${cards.length} cards with an open need; ${units.length} build units (${vocab.groups.length} groups and every open key alone)${family ? `, family ${family} only` : ""}. Greedy order (cards freed, running total, family, keys; a group's shape below it):`,
+  );
+  for (const [i, s] of steps.entries()) {
+    console.log(`${String(i + 1).padStart(4)}  +${String(s.gain).padStart(3)}  ${String(s.total).padStart(5)}  ${s.family}  ${s.keys.join(" + ")}`);
+    if (s.shape) console.log(`                   ${clip(s.shape, 110)}`);
   }
 }
 

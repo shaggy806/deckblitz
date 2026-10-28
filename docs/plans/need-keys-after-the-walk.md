@@ -300,7 +300,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `author-walks-parallel`'s rules, with a recheck batch per child in place of a range of sets. A
   card still blocked gets a narrow new key, and the coarse key's description is tightened.
 - **Greedy after the merge:** 10 keys free 331 cards, 50 free 1,002, 100 free 1,466 and 400 free
-  3,043. `--greedy` doesn't score the groups yet; that is Phase 2's first tooling item.
+  3,043. `--greedy` doesn't score the groups yet; that is Phase 2's first tooling item (done 2026-10-28:
+  `--greedy --groups`, below).
 
 ## Phase 2: build in greedy order, a family per session
 
@@ -324,6 +325,16 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **After every round:** `--stale` and `--greedy` are re-run (free) and `BACKLOG.md`'s next
   families are re-picked. Building one family often frees cards in another (a card with two
   needs), which only a fresh `--greedy` shows.
+
+### Phase 2 progress
+
+- **2026-10-28: the order and the skill.** Phase 1 step 2 finished (all nine recheck lists, B235–B243:
+  270 of the 863 authored, the other 593 on narrow keys). `cards:needs -- --greedy --groups [--family F]`
+  scores each generalisation group as one build unit beside every open key alone: 3,504 units, the
+  first 25 freeing 813 cards (grant-protection's two keys 66, variable target counts 48, card naming
+  46, banding 46). The families run **in series**, one per session, under the **`build-family`**
+  skill (the user's call): a session re-runs the order, builds its family's top two to four units,
+  authors what they free and hands off the next.
 
 ## Rough size
 

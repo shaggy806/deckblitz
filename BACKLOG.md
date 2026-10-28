@@ -64,8 +64,11 @@ section keeps only what to do next.
   to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
   "A recheck round", one list per child under the `author-recheck` skill. Lists done: R1 (B235, 73 authored, 27 still blocked; the token-copy as-enters gap,
   `bug:token-copy-skips-as-enters-choices`, now blocks seven; the remote branch `claude/recheck-r1-b235` is its pre-squash copy, already on `main`: delete it, don't merge it), R2 (B236: 20 authored, 80 still blocked on narrow keys), R3 (B237: 23 authored, 77 still blocked on narrow keys), R5 (B239: 15 authored, 85 still blocked on narrow keys; built `skip-untap-step`), R4 (B238: 51 authored, 49 blocked on 20 new narrow keys and open ones), R7 (B241: 26 authored, 74 still blocked, 17 new narrow keys; fixed `latestByCard`'s tie on date, which had listed half of R7 on coarse first records though later ones named narrow keys), R9 (B243: 21 authored, 42 still blocked on 29 new narrow keys and open ones), R6 (B240: 25 authored, 75 still blocked, 29 new narrow keys; built the opening-hand reveal, rule 103.6b), R8 (B242: 16 authored, 84 still blocked on narrow keys — 39 new; `static:static-types-outside-battlefield` now blocks five of them, `replacement:token-creation-add-extra` four).
-  All nine lists done 2026-10-28 (rounds one and two, B235–B243). Then build in greedy order, a family per session, with
-  the 617 merge groups (100 keys free ~1,470 cards).
+  All nine lists done 2026-10-28 (rounds one and two, B235–B243). **Now Phase 2: build in greedy
+  order, a family per session, in series** (the `build-family` skill, from a fresh session each;
+  `cards:needs -- --greedy --groups` scores the 617 generalisation groups as build units). Families
+  built: none yet. Next: `effect:grant-protection-choice` (its two protection keys, 66 cards), then
+  `decision:variable-target-count` (four keys, 48).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
