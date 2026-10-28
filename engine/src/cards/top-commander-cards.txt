@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3946 already implemented / 1054 missing (marks refreshed 2026-10-28)
+3957 already implemented / 1043 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -582,7 +582,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   583  Curiosity                                {U}              Enchantment — Aura
 [x]   584  Emerald Medallion                        {2}              Artifact
 [x]   585  Culling Ritual                           {2}{B}{G}        Sorcery
-[ ]   586  Darksteel Mutation                       {1}{W}           Enchantment — Aura
+[x]   586  Darksteel Mutation                       {1}{W}           Enchantment — Aura
 [x]   587  Return the Favor                         {R}{R}           Instant
 [ ]   588  Six                                      {2}{G}           Legendary Creature — Treefolk
 [ ]   589  Teferi's Ageless Insight                 {2}{U}{U}        Legendary Enchantment
@@ -739,7 +739,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   740  Flare of Fortitude                       {2}{W}{W}        Instant
 [x]   741  Palladium Myr                            {3}              Artifact Creature — Myr
 [x]   742  Spelunking                               {2}{G}           Enchantment
-[ ]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
+[x]   743  Kenrith's Transformation                 {1}{G}           Enchantment — Aura
 [ ]   744  Champion's Helm                          {3}              Artifact — Equipment
 [x]   745  Leyline of Anticipation                  {2}{U}{U}        Enchantment
 [ ]   746  Elvish Spirit Guide                      {2}{G}           Creature — Elf Spirit
@@ -760,7 +760,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   761  Void Rend                                {W}{U}{B}        Instant
 [x]   762  Mossborn Hydra                           {2}{G}           Creature — Elemental Hydra
 [x]   763  Avacyn, Angel of Hope                    {5}{W}{W}{W}     Legendary Creature — Angel
-[ ]   764  Imprisoned in the Moon                   {2}{U}           Enchantment — Aura
+[x]   764  Imprisoned in the Moon                   {2}{U}           Enchantment — Aura
 [x]   765  Kaya's Ghostform                         {B}              Enchantment — Aura
 [x]   766  Dryad Arbor                              {0}              Land Creature — Forest Dryad
 [x]   767  Priest of Titania                        {1}{G}           Creature — Elf Druid
@@ -1222,7 +1222,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1227  Kogla, the Titan Ape                     {3}{G}{G}{G}     Legendary Creature — Ape
 [x]  1228  Shrine of the Forsaken Gods              {0}              Land
 [x]  1229  Magda, Brazen Outlaw                     {1}{R}           Legendary Creature — Dwarf Berserker
-[ ]  1230  Amphibian Downpour                       {2}{U}           Enchantment — Aura
+[x]  1230  Amphibian Downpour                       {2}{U}           Enchantment — Aura
 [x]  1231  Skyclave Apparition                      {1}{W}{W}        Creature — Kor Spirit
 [x]  1232  Light Up the Stage                       {2}{R}           Sorcery
 [x]  1233  Agate Instigator                         {1}{R}           Creature — Lizard Rogue
@@ -1795,7 +1795,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1802  Kami of the Crescent Moon                {U}{U}           Legendary Creature — Spirit
 [x]  1803  Zacama, Primal Calamity                  {6}{R}{G}{W}     Legendary Creature — Elder Dinosaur
 [ ]  1804  Call Forth the Tempest                   {5}{R}{R}{R}     Sorcery
-[ ]  1805  Brave the Sands                          {1}{W}           Enchantment
+[x]  1805  Brave the Sands                          {1}{W}           Enchantment
 [x]  1806  Collector's Vault                        {2}              Artifact
 [x]  1807  Orim's Chant                             {W}              Instant
 [x]  1808  Lyra Dawnbringer                         {3}{W}{W}        Legendary Creature — Angel
@@ -2299,7 +2299,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2306  Summon: Primal Odin                      {4}{B}{B}        Enchantment Creature — Saga Knight
 [x]  2307  Trophy Mage                              {2}{U}           Creature — Human Wizard
 [x]  2308  Contaminated Landscape                   {0}              Land
-[ ]  2309  Lignify                                  {1}{G}           Kindred Enchantment — Treefolk Aura
+[x]  2309  Lignify                                  {1}{G}           Kindred Enchantment — Treefolk Aura
 [x]  2310  Urza's Workshop                          {0}              Land — Urza's
 [x]  2311  Super State                              {7}              Legendary Enchantment — Aura
 [ ]  2312  Turntimber Symbiosis // Turntimber, Serpentine Wood {7}              Sorcery // Land
@@ -3579,7 +3579,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3586  Nesting Dragon                           {3}{R}{R}        Creature — Dragon
 [x]  3587  Invigorating Surge                       {2}{G}           Instant
 [x]  3588  The Spear of Leonidas                    {2}{R}           Legendary Artifact — Equipment
-[ ]  3589  Eye of Nidhogg                           {2}{B}           Legendary Enchantment — Aura
+[x]  3589  Eye of Nidhogg                           {2}{B}           Legendary Enchantment — Aura
 [x]  3590  Hexplate Wallbreaker                     {3}{R}{R}        Artifact — Equipment
 [x]  3591  Bloodgift Demon                          {3}{B}{B}        Creature — Demon
 [ ]  3592  Guild Artisan                            {1}{R}           Legendary Enchantment — Background
@@ -3871,7 +3871,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3878  Genesis Ultimatum                        {G}{G}{U}{U}{U}{R}{R} Sorcery
 [x]  3879  Sephiroth, Fallen Hero                   {3}{R}{W}        Legendary Creature — Human Avatar Soldier
 [x]  3880  Hideous Taskmaster                       {6}{R}           Creature — Eldrazi
-[ ]  3881  Dress Down                               {1}{U}           Enchantment
+[x]  3881  Dress Down                               {1}{U}           Enchantment
 [x]  3882  Primal Might                             {X}{G}           Sorcery
 [ ]  3883  Flourishing Defenses                     {4}{G}           Enchantment
 [ ]  3884  Orochi Soul-Reaver                       {5}{B}           Creature — Snake Ninja Rogue
@@ -3879,7 +3879,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3886  Nibelheim Aflame                         {2}{R}{R}        Sorcery
 [ ]  3887  Determined Iteration                     {1}{R}           Enchantment
 [x]  3888  Eviscerator's Insight                    {1}{B}           Instant
-[ ]  3889  Eaten by Piranhas                        {1}{U}           Enchantment — Aura
+[x]  3889  Eaten by Piranhas                        {1}{U}           Enchantment — Aura
 [x]  3890  Cadira, Caller of the Small              {1}{G}{W}        Legendary Creature — Orc Ranger
 [ ]  3891  Vona's Hunger                            {2}{B}           Instant
 [x]  3892  Infestation Sage                         {B}              Creature — Elf Warlock
@@ -4009,7 +4009,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4016  Volcanic Torrent                         {4}{R}           Sorcery
 [ ]  4017  Journey to Eternity // Atzal, Cave of Eternity {3}              Legendary Enchantment — Aura // Legendary Land
 [x]  4018  Marketback Walker                        {X}{X}           Artifact Creature — Construct
-[ ]  4019  Sludge Monster                           {3}{U}{U}        Creature — Horror
+[x]  4019  Sludge Monster                           {3}{U}{U}        Creature — Horror
 [x]  4020  Alloy Myr                                {3}              Artifact Creature — Myr
 [ ]  4021  Solitary Confinement                     {2}{W}           Enchantment
 [x]  4022  Mana Echoes                              {2}{R}{R}        Enchantment
@@ -4661,7 +4661,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4668  Kelpie Guide                             {2}{U}           Creature — Beast
 [x]  4669  Spit Flame                               {2}{R}           Instant
 [x]  4670  Angel of Suffering                       {3}{B}{B}        Creature — Nightmare Angel
-[ ]  4671  Frogify                                  {1}{U}           Enchantment — Aura
+[x]  4671  Frogify                                  {1}{U}           Enchantment — Aura
 [ ]  4672  Shadow of Mortality                      {13}{B}{B}       Creature — Avatar
 [x]  4673  Orcish Medicine                          {1}{B}           Instant
 [ ]  4674  Jolene, the Plunder Queen                {2}{R}{G}        Legendary Creature — Human Warrior

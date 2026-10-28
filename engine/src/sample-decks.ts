@@ -1113,7 +1113,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Ezuri's Predation", "Hornet Queen", "Seven-mana green answer to a wide board."),
-      sub("Kenrith's Transformation", "Bridgeworks Battle", "Green removal: a creature fights."),
       sub("Monstrous Onslaught", "Primal Might", "Green removal that uses a creature's power."),
     ],
   }),
