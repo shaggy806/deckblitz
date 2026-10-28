@@ -383,6 +383,7 @@ import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
+import _poolKnightOfSorrows from "../pool/knight-of-sorrows.js";
 import _poolKnightOfTheMists from "../pool/knight-of-the-mists.js";
 import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
 import _poolKorAeronaut from "../pool/kor-aeronaut.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolKeensightMentor,
     _poolKeldonNecropolis,
     _poolKillersMask,
+    _poolKnightOfSorrows,
     _poolKnightOfTheMists,
     _poolKnightOfThePilgrimsRoad,
     _poolKorAeronaut,

@@ -2502,6 +2502,53 @@ describe("templates for features built since the parser began (2026-10-11)", () 
   });
 });
 
+describe("block limits, lost abilities and chosen types (B249)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'can block an additional creature' and 'any number of creatures'", () => {
+    expect(face("Creature — Giant", "This creature can block an additional creature each combat.").static[0]).toMatchObject({
+      affects: { scope: "self" },
+      blockAdditional: 1,
+    });
+    expect(face("Creature — Spider", "This creature can block an additional seven creatures each combat.").static[0]).toMatchObject({
+      blockAdditional: 7,
+    });
+    expect(face("Enchantment — Aura", "Enchant creature\nEnchanted creature can block any number of creatures.").static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      blockAdditional: "any",
+    });
+    expect(face("Creature — Chimera", "{1}{W}: This creature can block an additional creature this turn.").activated[0].effect).toEqual({
+      kind: "block-additional",
+      target: "source",
+      amount: 1,
+      duration: "end-of-turn",
+    });
+  });
+
+  it("reads a static loss of all abilities, with a P/T beside it", () => {
+    expect(face("Enchantment", "Creatures lose all abilities.").static[0]).toMatchObject({
+      affects: { scope: "all-creatures" },
+      loseAllAbilities: true,
+    });
+    expect(face("Enchantment — Aura", "Enchant creature\nEnchanted creature gets -2/-0 and loses all abilities.").static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [-2, 0],
+      loseAllAbilities: true,
+    });
+    expect(
+      face("Enchantment — Aura", "Enchant creature\nEnchanted creature loses all abilities and has base power and toughness 1/1.").static[0],
+    ).toMatchObject({ loseAllAbilities: true, setBasePt: { power: 1, toughness: 1 } });
+  });
+
+  it("reads 'becomes the creature type of your choice'", () => {
+    expect(face("Creature — Illusion", "{1}: This creature becomes the creature type of your choice until end of turn.").activated[0].effect).toEqual({
+      kind: "choose-creature-type",
+      then: { kind: "add-types", target: "source", setSubtypes: ["$chosen"], duration: "end-of-turn" },
+    });
+  });
+});
+
 describe("agreement with the hand-authored pool", () => {
   it("every ability the parser claims complete matches the authored one", () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);

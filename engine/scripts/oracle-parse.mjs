@@ -1626,6 +1626,29 @@ export function parseSentence(sentence, ctx) {
       ...(m[1] ? { exceptSource: true } : {}),
     };
   }
+  // "Can block an additional creature this turn" (Coastline Chimera, Valor
+  // Made Real's "any number") — the `block-additional` effect.
+  if ((m = re(`(~|${TARGET}) can block (an additional creature|any number of creatures) this turn`).exec(s))) {
+    return {
+      kind: "block-additional",
+      target: m[1] === "~" ? "source" : slot(m[1]),
+      amount: m[2] === "an additional creature" ? 1 : "any",
+      duration: "end-of-turn",
+    };
+  }
+  // The Mistforms: the type chosen as it resolves replaces its creature
+  // types (rule 205.1a).
+  if ((m = re(`(~|${TARGET}) becomes the creature type of your choice until end of turn`).exec(s))) {
+    return {
+      kind: "choose-creature-type",
+      then: {
+        kind: "add-types",
+        target: m[1] === "~" ? "source" : slot(m[1]),
+        setSubtypes: ["$chosen"],
+        duration: "end-of-turn",
+      },
+    };
+  }
   if ((m = re(`(~|${TARGET}) gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
     const target = m[1] === "~" ? "source" : slot(m[1]);
     const kws = [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
@@ -3596,6 +3619,36 @@ function parseStatic(line, text) {
   // Reilly): its mana value as it last existed, 0 unless web-slinging paid.
   if (/^If ~ was cast using web-slinging, (?:it|he|she|they) enters? with X \+1\/\+1 counters on (?:it|him|her|them), where X is the mana value of the returned creature\.$/.test(line)) {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: "web-slinging-mana-value" } }, text };
+  }
+  // Rule 509.1a's one block, and more (`blockAdditional`): "~ can block an
+  // additional creature each combat", "an additional seven creatures",
+  // "any number of creatures" — its own, an Aura's or Equipment's, or each
+  // of yours (Brave the Sands).
+  {
+    const w = /^(~|Enchanted creature|Equipped creature|Each creature you control) can block (an additional creature each combat|an additional (two|three|four|five|six|seven|eight|nine|ten|ninety-nine) creatures each combat|any number of creatures)\.$/.exec(line);
+    if (w !== null) {
+      const words = { two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, "ninety-nine": 99 };
+      const affects =
+        w[1] === "~" ? { scope: "self" } : w[1] === "Each creature you control" ? { scope: "creatures-you-control" } : { scope: "attached" };
+      const blockAdditional = w[2].startsWith("any") ? "any" : w[3] !== undefined ? words[w[3]] : 1;
+      return { affects, blockAdditional, text };
+    }
+  }
+  // Layer 6 (`loseAllAbilities`): Humility's cousins, and the Auras that
+  // take a creature's abilities with a P/T change beside (Mystic Subdual's
+  // "-2/-0", Kasmina's Transmutation's "base power and toughness 1/1").
+  {
+    const w = /^(All creatures|Creatures|Enchanted creature|Enchanted permanent)(?: gets ([+-]\d+)\/([+-]\d+) and)? loses? all abilities(?: and (?:has|have) base power and toughness (\d+)\/(\d+))?\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: w[1].startsWith("Enchanted") ? { scope: "attached" } : { scope: "all-creatures" },
+        // `+ 0`: "-0" is 0.
+        ...(w[2] !== undefined ? { grantPt: [Number(w[2]) + 0, Number(w[3]) + 0] } : {}),
+        loseAllAbilities: true,
+        ...(w[4] !== undefined ? { setBasePt: { power: Number(w[4]), toughness: Number(w[5]) } } : {}),
+        text,
+      };
+    }
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };

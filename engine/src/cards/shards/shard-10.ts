@@ -136,6 +136,7 @@ import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
 import _poolCircleOfProtectionRed from "../pool/circle-of-protection-red.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
+import _poolCoastlineChimera from "../pool/coastline-chimera.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolCoordinatedAssault from "../pool/coordinated-assault.js";
@@ -180,6 +181,7 @@ import _poolDeathPitOffering from "../pool/death-pit-offering.js";
 import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
 import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
+import _poolDeepFreeze from "../pool/deep-freeze.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDeicide from "../pool/deicide.js";
@@ -414,6 +416,7 @@ import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLull from "../pool/lull.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLuminescentRain from "../pool/luminescent-rain.js";
+import _poolLuminousGuardian from "../pool/luminous-guardian.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMaddeningWind from "../pool/maddening-wind.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
@@ -443,6 +446,8 @@ import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
+import _poolMistformDreamer from "../pool/mistform-dreamer.js";
+import _poolMistformSkyreaver from "../pool/mistform-skyreaver.js";
 import _poolMnemonicNexus from "../pool/mnemonic-nexus.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
@@ -762,6 +767,7 @@ import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
 import _poolUnerringSling from "../pool/unerring-sling.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
+import _poolValorMadeReal from "../pool/valor-made-real.js";
 import _poolVampireOfTheDireMoon from "../pool/vampire-of-the-dire-moon.js";
 import _poolVampiricTutor from "../pool/vampiric-tutor.js";
 import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
@@ -979,6 +985,7 @@ const shard: CardShard = {
     _poolCircleOfProtectionRed,
     _poolCitanulHierophants,
     _poolCivicWayfinder,
+    _poolCoastlineChimera,
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolCoordinatedAssault,
@@ -1023,6 +1030,7 @@ const shard: CardShard = {
     _poolDeathlessBehemoth,
     _poolDeathsCaress,
     _poolDecodeTransmissions,
+    _poolDeepFreeze,
     _poolDefendTheCelestus,
     _poolDefensiveStance,
     _poolDeicide,
@@ -1257,6 +1265,7 @@ const shard: CardShard = {
     _poolLull,
     _poolLuminarchAspirant,
     _poolLuminescentRain,
+    _poolLuminousGuardian,
     _poolLyraDawnbringer,
     _poolMaddeningWind,
     _poolMagistratesScepter,
@@ -1286,6 +1295,8 @@ const shard: CardShard = {
     _poolMindlessAutomaton,
     _poolMindwrackDemon,
     _poolMishrasFoundry,
+    _poolMistformDreamer,
+    _poolMistformSkyreaver,
     _poolMnemonicNexus,
     _poolMobilize,
     _poolMockingbird,
@@ -1605,6 +1616,7 @@ const shard: CardShard = {
     _poolUndeadButler,
     _poolUnerringSling,
     _poolUnyaroBeeSting,
+    _poolValorMadeReal,
     _poolVampireOfTheDireMoon,
     _poolVampiricTutor,
     _poolVedalkenOrrery,

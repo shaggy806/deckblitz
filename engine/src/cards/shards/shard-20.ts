@@ -27,6 +27,7 @@ import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
 import _poolAlexiZephyrMage from "../pool/alexi-zephyr-mage.js";
 import _poolAlistairTheBrigadier from "../pool/alistair-the-brigadier.js";
 import _poolAlleyGrifters from "../pool/alley-grifters.js";
+import _poolAlloyGolem from "../pool/alloy-golem.js";
 import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
@@ -789,6 +790,7 @@ import _poolToppleTheStatue from "../pool/topple-the-statue.js";
 import _poolTormentOfScarabs from "../pool/torment-of-scarabs.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
 import _poolTourachsCanticle from "../pool/tourachs-canticle.js";
+import _poolToxicrene from "../pool/toxicrene.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
 import _poolTrainingCenter from "../pool/training-center.js";
 import _poolTraumaticVisions from "../pool/traumatic-visions.js";
@@ -916,6 +918,7 @@ const shard: CardShard = {
     _poolAlexiZephyrMage,
     _poolAlistairTheBrigadier,
     _poolAlleyGrifters,
+    _poolAlloyGolem,
     _poolAmarantCoral,
     _poolAnaconda,
     _poolAncestorsProphet,
@@ -1678,6 +1681,7 @@ const shard: CardShard = {
     _poolTormentOfScarabs,
     _poolTormodsCrypt,
     _poolTourachsCanticle,
+    _poolToxicrene,
     _poolTrailOfCrumbs,
     _poolTrainingCenter,
     _poolTraumaticVisions,

@@ -217,6 +217,7 @@ import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnergyField from "../pool/energy-field.js";
 import _poolEngineeredPlague from "../pool/engineered-plague.js";
 import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
+import _poolEntangler from "../pool/entangler.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
 import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
@@ -372,6 +373,7 @@ import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
 import _poolIronTuskElephant from "../pool/iron-tusk-elephant.js";
 import _poolIronWill from "../pool/iron-will.js";
+import _poolIronfistCrusher from "../pool/ironfist-crusher.js";
 import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
@@ -414,6 +416,7 @@ import _poolLiberate from "../pool/liberate.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
+import _poolLithoformBlight from "../pool/lithoform-blight.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLiuBeiLordOfShu from "../pool/liu-bei-lord-of-shu.js";
 import _poolLoneRider from "../pool/lone-rider.js";
@@ -1064,6 +1067,7 @@ const shard: CardShard = {
     _poolEnergyField,
     _poolEngineeredPlague,
     _poolEnsoulArtifact,
+    _poolEntangler,
     _poolEnterTheGodEternals,
     _poolEntreatTheAngels,
     _poolEntreatTheDead,
@@ -1219,6 +1223,7 @@ const shard: CardShard = {
     _poolIronManFuturistParagon,
     _poolIronTuskElephant,
     _poolIronWill,
+    _poolIronfistCrusher,
     _poolIrontreadCrusher,
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
@@ -1261,6 +1266,7 @@ const shard: CardShard = {
     _poolLifeFromTheLoam,
     _poolLifeblood,
     _poolLightkeeperOfEmeria,
+    _poolLithoformBlight,
     _poolLithoformEngine,
     _poolLiuBeiLordOfShu,
     _poolLoneRider,

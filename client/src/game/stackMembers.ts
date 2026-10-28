@@ -178,6 +178,19 @@ export function blockEntries(assign: Readonly<Record<string, ObjectId>>, perToke
   })
 }
 
+/** The further blocks of creatures that can block more than one attacker
+ * (the offer's `maxBlocks`): `extra`'s attackers for each blocker still in
+ * `assign`, one entry each (rule 509.1a with "can block an additional
+ * creature"). */
+export function extraBlocks(
+  extra: Readonly<Record<string, readonly ObjectId[]>>,
+  assign: Readonly<Record<string, ObjectId>>,
+): BlockerDeclaration[] {
+  return (Object.entries(extra) as [ObjectId, readonly ObjectId[]][]).flatMap(([blocker, attackers]) =>
+    assign[blocker] === undefined ? [] : attackers.map((attacker) => ({ blocker, attacker })),
+  )
+}
+
 export function collapseBlocks(
   assign: Readonly<Record<string, ObjectId>>,
   members: Members,

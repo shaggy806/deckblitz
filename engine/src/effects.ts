@@ -2166,6 +2166,9 @@ export type EffectSpec =
        */
       readonly kind: "choose-creature-type";
       readonly then: EffectSpec;
+      /** Types that can't be chosen — "choose a creature type other than
+       * Wall" (Imagecrafter, Standardize). */
+      readonly exclude?: readonly string[];
     }
   | {
       /**
@@ -2507,6 +2510,16 @@ export type EffectSpec =
        * it stops (rule 701.21a). */
       readonly kind: "cant-be-sacrificed";
       readonly target: EffectTargetRef;
+      readonly duration: PtDuration;
+    }
+  | {
+      /** `target` "can block an additional creature this turn" (Act of
+       * Heroism) — `amount` more attackers than the one rule 509.1a allows,
+       * or `"any"` number (Give No Ground). A modifier like a keyword grant;
+       * the static form is `StaticAbility.blockAdditional`. */
+      readonly kind: "block-additional";
+      readonly target: EffectTargetRef;
+      readonly amount: number | "any";
       readonly duration: PtDuration;
     }
   | {
@@ -4461,6 +4474,20 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly addTypes?: readonly CardType[];
       readonly addSubtypes?: readonly string[];
+      /**
+       * "Becomes a [type]" with no "in addition": these **replace** its card
+       * types (rule 205.1a — Opal Acrolith's "it becomes an enchantment", no
+       * longer a creature; its subtypes that went only with a lost type go
+       * too, its supertypes stay), applied before `addTypes`.
+       */
+      readonly setTypes?: readonly CardType[];
+      /**
+       * "Becomes a Coward" / "becomes the creature type of your choice"
+       * (Boldwyr Intimidator, the Mistforms — `CHOSEN_CREATURE_TYPE` under a
+       * `choose-creature-type`): these replace its subtypes of the same kind
+       * (205.1a — every creature type goes), applied before `addSubtypes`.
+       */
+      readonly setSubtypes?: readonly string[];
       readonly duration: PtDuration;
     }
   | {
@@ -6664,7 +6691,7 @@ export interface EffectApi {
    * zone and owned by the controller, for casting; the new objects' ids. */
   copyCards(cards: readonly ObjectId[], times: number): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
-  chooseCreatureType(then: EffectSpec): void;
+  chooseCreatureType(then: EffectSpec, exclude?: readonly string[]): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
@@ -6807,6 +6834,8 @@ export interface EffectApi {
   /** `target` gains "This creature can't be sacrificed" — see the
    * `"cant-be-sacrificed"` {@link EffectSpec}. */
   grantCantBeSacrificed(target: TargetRef, duration: PtDuration): void;
+  /** See the `"block-additional"` {@link EffectSpec}. */
+  grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PtDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}. */
@@ -7277,6 +7306,7 @@ export interface EffectApi {
     types: readonly CardType[],
     subtypes: readonly string[],
     duration: PtDuration,
+    set?: { readonly setTypes?: readonly CardType[]; readonly setSubtypes?: readonly string[] },
   ): void;
   /** Every permanent matching `filter` becomes a creature (or just has its
    * base P/T set) — see the `"animate-all"` {@link EffectSpec}. */
@@ -9863,6 +9893,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.grantCantBeSacrificed(target, spec.duration);
       return;
     }
+    case "block-additional": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.grantBlockAdditional(target, spec.amount, spec.duration);
+      return;
+    }
     case "return-to-hand": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.returnToHand(target, spec.from);
@@ -9937,7 +9972,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "choose-creature-type":
-      ctx.chooseCreatureType(spec.then);
+      ctx.chooseCreatureType(spec.then, spec.exclude);
       return;
     case "choose-card-name":
       ctx.chooseCardName(spec);
@@ -11154,7 +11189,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "add-types": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
-        ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration);
+        ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
+          ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
+          ...(spec.setSubtypes !== undefined ? { setSubtypes: spec.setSubtypes } : {}),
+        });
       }
       return;
     }

@@ -275,6 +275,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "gain-control-all": none,
   "rotate-control": none,
   "cant-be-sacrificed": (n, v) => v.touch(n.target, "help", MINOR),
+  "block-additional": (n, v) => v.touch(n.target, "help", MINOR),
   "attack-despite-defender": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);
   },
@@ -783,6 +784,10 @@ export function auraPolarity(def: CardDefinition): Polarity {
     // Goad is the point of an Aura that goads: its pump is the consolation
     // that sends the creature at someone else (Psychic Impetus).
     if (ability.goads === true) return "harm";
+    // "Enchanted creature loses all abilities and is a 1/1 Frog" (Frogify,
+    // Lignify): whatever it gets beside, the loss is the point — even a 3/3
+    // Elk (Kenrith's Transformation) is a lock on a commander.
+    if (ability.loseAllAbilities === true) return "harm";
     // A Zendikon's "enchanted land is a 3/3 black Ooze creature": a land
     // made a creature fights for its controller, whatever it can't do —
     // Guardian Zendikon's defender is a wall's, not a penalty.

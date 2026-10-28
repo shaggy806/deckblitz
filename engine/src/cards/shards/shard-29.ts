@@ -257,6 +257,7 @@ import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolForcedAdaptation from "../pool/forced-adaptation.js";
+import _poolForiysianBrigade from "../pool/foriysian-brigade.js";
 import _poolForsakenCity from "../pool/forsaken-city.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolForcedAdaptation,
+    _poolForiysianBrigade,
     _poolForsakenCity,
     _poolFoulRebirth,
     _poolFracturedSanity,

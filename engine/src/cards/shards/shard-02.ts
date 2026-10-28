@@ -375,6 +375,7 @@ import _poolKalitasBloodchiefOfGhet from "../pool/kalitas-bloodchief-of-ghet.js"
 import _poolKamiOfTheTendedGarden from "../pool/kami-of-the-tended-garden.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKarfellKennelMaster from "../pool/karfell-kennel-master.js";
+import _poolKasminasTransmutation from "../pool/kasminas-transmutation.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
 import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
@@ -749,6 +750,7 @@ import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrborg from "../pool/urborg.js";
+import _poolUrsineChampion from "../pool/ursine-champion.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
@@ -1192,6 +1194,7 @@ const shard: CardShard = {
     _poolKamiOfTheTendedGarden,
     _poolKaraiFutureOfTheFoot,
     _poolKarfellKennelMaster,
+    _poolKasminasTransmutation,
     _poolKateStewart,
     _poolKavaronHarrier,
     _poolKeepersOfTheFaith,
@@ -1566,6 +1569,7 @@ const shard: CardShard = {
     _poolUrbanEvolution,
     _poolUrbisProtector,
     _poolUrborg,
+    _poolUrsineChampion,
     _poolUrzasWorkshop,
     _poolUtilityKnife,
     _poolValorousStance,

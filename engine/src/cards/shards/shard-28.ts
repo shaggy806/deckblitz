@@ -195,6 +195,7 @@ import _poolDreamThief from "../pool/dream-thief.js";
 import _poolDreamstealer from "../pool/dreamstealer.js";
 import _poolDreamtailHeron from "../pool/dreamtail-heron.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
+import _poolDressDown from "../pool/dress-down.js";
 import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
@@ -203,6 +204,7 @@ import _poolDruidsFamiliar from "../pool/druids-familiar.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolDuskMangler from "../pool/dusk-mangler.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
+import _poolEchoCirclet from "../pool/echo-circlet.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
@@ -1053,6 +1055,7 @@ const shard: CardShard = {
     _poolDreamstealer,
     _poolDreamtailHeron,
     _poolDregRecycler,
+    _poolDressDown,
     _poolDriftOfPhantasms,
     _poolDrossRipper,
     _poolDrownInDreams,
@@ -1061,6 +1064,7 @@ const shard: CardShard = {
     _poolDunedainBlade,
     _poolDuskMangler,
     _poolEarthrumbler,
+    _poolEchoCirclet,
     _poolEiganjoDynastorian,
     _poolEldritchPact,
     _poolElectricEel,

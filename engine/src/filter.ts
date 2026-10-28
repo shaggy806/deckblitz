@@ -1625,7 +1625,7 @@ export function matchesFilter(
       }
       const keywords =
         layered.keywords?.() ??
-        new Set(hasLostAbilities(live!) ? [] : registry.get(name).keywords);
+        new Set(hasLostAbilities(state, registry, live!) ? [] : registry.get(name).keywords);
       if (filter.keyword !== undefined && !keywords.has(filter.keyword)) return false;
       if (filter.notKeyword !== undefined && keywords.has(filter.notKeyword)) return false;
       return true;
@@ -1674,7 +1674,7 @@ export function matchesFilter(
       live === undefined
         ? false
         : layered !== undefined
-          ? !hasLostAbilities(live) && registry.get(rulesTextName(live)).toxic > 0
+          ? !hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).toxic > 0
           : computeCharacteristics(state, registry, id).toxic > 0;
     if (has !== filter.hasToxic) return false;
   }

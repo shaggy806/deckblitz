@@ -308,6 +308,7 @@ import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
 import _poolHythoniaTheCruel from "../pool/hythonia-the-cruel.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
 import _poolIgnitionTeam from "../pool/ignition-team.js";
+import _poolImagecrafter from "../pool/imagecrafter.js";
 import _poolImminentDoom from "../pool/imminent-doom.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
@@ -675,6 +676,7 @@ import _poolTrumpetingHerd from "../pool/trumpeting-herd.js";
 import _poolTurnTheTide from "../pool/turn-the-tide.js";
 import _poolTurnToFrog from "../pool/turn-to-frog.js";
 import _poolTwinferno from "../pool/twinferno.js";
+import _poolTwoHeadedGiantOfForiys from "../pool/two-headed-giant-of-foriys.js";
 import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
 import _poolUnderworldCoinsmith from "../pool/underworld-coinsmith.js";
 import _poolUntaidakeTheCloudKeeper from "../pool/untaidake-the-cloud-keeper.js";
@@ -1063,6 +1065,7 @@ const shard: CardShard = {
     _poolHythoniaTheCruel,
     _poolIchorWellspring,
     _poolIgnitionTeam,
+    _poolImagecrafter,
     _poolImminentDoom,
     _poolImperialLancer,
     _poolImperiousPerfect,
@@ -1430,6 +1433,7 @@ const shard: CardShard = {
     _poolTurnTheTide,
     _poolTurnToFrog,
     _poolTwinferno,
+    _poolTwoHeadedGiantOfForiys,
     _poolUndercityDireRat,
     _poolUnderworldCoinsmith,
     _poolUntaidakeTheCloudKeeper,

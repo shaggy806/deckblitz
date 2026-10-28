@@ -157,7 +157,8 @@ function guardActive(): boolean {
     layer4InProgress.size > 0 ||
     ownStackInProgress.size > 0 ||
     grantedAbilitiesInProgress.size > 0 ||
-    countInProgress.size > 0
+    countInProgress.size > 0 ||
+    staticLossesInProgress
   );
 }
 
@@ -218,6 +219,10 @@ interface ComputedCache {
 }
 
 let activeCache: ComputedCache | null = null;
+/** Bumped by every {@link invalidateComputedCache}, a region open or not:
+ * what keys the few memos that must also hold outside a region
+ * (`anyLoseAllSource`). */
+let mutationEpoch = 0;
 /** The one reusable cache box — regions open and close far too often (every
  * `legalActions` / SBA sweep / event) to allocate fresh Maps each time. */
 const pooledCache: ComputedCache = {
@@ -257,6 +262,7 @@ export function withComputedCache<T>(fn: () => T): T {
 /** Drop everything the active cache holds. Called by every state mutation that
  * can run inside a cache region; a no-op when none is active. */
 export function invalidateComputedCache(): void {
+  mutationEpoch += 1;
   if (activeCache === null) return;
   activeCache.chars.clear();
   activeCache.layer4.clear();
@@ -1131,6 +1137,10 @@ export interface Characteristics {
   /** It assigns no combat damage this turn (an `assigns-no-combat-damage`
    * effect — Farrel's Zealot). Read it through {@link combatDamageOf}. */
   readonly assignsNoCombatDamage?: boolean;
+  /** How many more creatures than one it can block (`blockAdditional` — an
+   * ability, layer 6): their sum, or `"any"`. Absent for none. Read
+   * through {@link blockLimitOf}. */
+  readonly extraBlocks?: number | "any";
   /** It "can attack as though it didn't have defender" (a
    * `canAttackAsThoughNoDefender` static — Arcades, the Strategist). */
   readonly canAttackAsThoughNoDefender: boolean;
@@ -1386,7 +1396,7 @@ export function spellGrantReaches(
 ): boolean {
   const grant = ability.grantsToSpells;
   if (grant === undefined || spell.zone !== "stack" || spell.kind !== "card") return false;
-  if (source.zone !== "battlefield" || hasLostAbilities(source)) return false;
+  if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
   if (grant.allSpells !== true && spell.controller !== source.controller) return false;
   if (grant.castFrom !== undefined && (spell.castFrom === undefined || !grant.castFrom.includes(spell.castFrom))) {
@@ -1439,7 +1449,7 @@ export function castGrantReaches(
   const grant = ability.grantsToSpells;
   const card = state.objects[cardId];
   if (grant === undefined || card === undefined || card.kind !== "card") return false;
-  if (source.zone !== "battlefield" || hasLostAbilities(source)) return false;
+  if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return false;
   if (state.players[source.controller]?.hasLost === true) return false;
   if (grant.allSpells !== true && player !== source.controller) return false;
   if (grant.castFrom !== undefined && !grant.castFrom.includes(card.zone)) return false;
@@ -1494,7 +1504,7 @@ export function playerHasHexproof(state: GameState, registry: CardRegistry, play
   if (state.hexproofPlayers?.includes(player) === true) return true;
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (source === undefined || source.controller !== player || hasLostAbilities(source)) continue;
+    if (source === undefined || source.controller !== player || hasLostAbilities(state, registry, source)) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
       if (
         ability.playerHexproof === true &&
@@ -1517,7 +1527,7 @@ function playerStaticHolds(
 ): boolean {
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (source === undefined || hasLostAbilities(source)) continue;
+    if (source === undefined || hasLostAbilities(state, registry, source)) continue;
     if (state.players[source.controller]?.hasLost !== false) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
       if (
@@ -1613,15 +1623,28 @@ export function pairedPartner(state: GameState, object: GameObject): GameObject 
   return partner;
 }
 
-/** True if this permanent has lost its own abilities (layer 6 — Turn to Frog). */
-export function hasLostAbilities(object: GameObject): boolean {
-  return object.modifiers.some((m) => m.loseAbilities === true);
+/** True if this permanent has lost its own abilities (layer 6): to an effect
+ * (Turn to Frog) or to a static ("Enchanted creature loses all abilities",
+ * Humility — see {@link staticAbilityLosses}). */
+export function hasLostAbilities(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  return abilitiesLostAt(state, registry, object) !== null;
 }
 
-/** When `object` last lost all its abilities: the latest timestamp of a
- * modifier that took them away (layer 6 — Turn to Frog), or `null` if none
- * has. A loss with no timestamp counts as the latest. */
-export function abilitiesLostAt(object: GameObject): number | null {
+/** When `object` last lost all its abilities (layer 6), or `null` if nothing
+ * has taken them: the latest of a modifier's timestamp (Turn to Frog — one
+ * with no timestamp counts as the latest) and a static's (see
+ * {@link staticAbilityLosses}). */
+export function abilitiesLostAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
+  const own = modifierLossAt(object);
+  if (object.zone !== "battlefield") return own;
+  const fromStatic = staticAbilityLosses(state, registry).lost.get(object.id);
+  if (fromStatic === undefined) return own;
+  return own === null || fromStatic > own ? fromStatic : own;
+}
+
+/** The latest timestamp of a modifier on `object` that took its abilities
+ * away (an effect's — Turn to Frog), or `null`. */
+function modifierLossAt(object: GameObject): number | null {
   let at: number | null = null;
   for (const m of object.modifiers) {
     if (m.loseAbilities !== true) continue;
@@ -1629,6 +1652,165 @@ export function abilitiesLostAt(object: GameObject): number | null {
     if (at === null || t > at) at = t;
   }
   return at;
+}
+
+/** Set while {@link staticAbilityLosses} computes the board: a read that
+ * re-enters it (a keyword-reading scope, a condition) sees no static losses
+ * — conservative, never cached. */
+let staticLossesInProgress = false;
+
+/** What {@link staticAbilityLosses} works out. */
+interface StaticLosses {
+  /** Each permanent a loss reaches → the latest such loss's timestamp. */
+  readonly lost: ReadonlyMap<ObjectId, number>;
+  /** The `loseAllAbilities` statics that apply, by their permanent. */
+  readonly applied: ReadonlyMap<ObjectId, ReadonlySet<StaticAbility>>;
+}
+
+const NO_LOSSES: StaticLosses = { lost: new Map(), applied: new Map() };
+
+/**
+ * Whether `source`'s static `ability` keeps applying though `source` has lost
+ * its abilities: one with a layer-4 part applied before the loss (layer 4,
+ * rule 613.1d), and a `loseAllAbilities` static that applied — Humility made
+ * a creature takes its own abilities in layer 6 and still sets every
+ * creature's base P/T in 7b — keeps the rest of its effect in the later
+ * layers (rule 613.6; Humility and Opalescence's ruling).
+ */
+export function staticOutlivesLoss(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  ability: StaticAbility,
+): boolean {
+  if (hasLayerFourPart(ability)) return true;
+  if (ability.loseAllAbilities !== true) return false;
+  return staticAbilityLosses(state, registry).applied.get(source.id)?.has(ability) === true;
+}
+
+/**
+ * Layer 6 — every battlefield permanent a `loseAllAbilities` static takes all
+ * abilities from ("Enchanted creature loses all abilities", Humility's "All
+ * creatures lose all abilities"), with the timestamp the loss applies at:
+ * object id → the latest such loss. Memoized in the active cache region.
+ *
+ * A static whose own permanent has lost its abilities doesn't exist to apply
+ * (rule 613.8a(b): an effect that removes it is one it depends on, so that
+ * one applies first). So the statics apply in dependency order: an effect's
+ * loss (a modifier) first, whatever its timestamp; then, round by round,
+ * every static no other remaining one would reach, which may take another's
+ * abilities away; and when every remaining one reaches another — a loop,
+ * Humility's creature cousins facing each other — the earliest by timestamp
+ * (rule 613.8b). A static with a layer-4 part outlives its source's loss
+ * (rule 613.6, as in `typeGrantSources`).
+ *
+ * The loss is recorded half a step before the static's timestamp, so what
+ * the same permanent grants at its own timestamp ("loses all abilities and
+ * has '{T}: Add {C}'", Imprisoned in the Moon; "is a 0/1 with defender")
+ * comes after it, as the text reads (`grantOutlastsLoss`).
+ */
+function staticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
+  if (staticLossesInProgress || !anyLoseAllSource(state, registry)) return NO_LOSSES;
+  return computedCacheMemo("static-ability-losses", () => {
+    staticLossesInProgress = true;
+    try {
+      return computeStaticAbilityLosses(state, registry);
+    } finally {
+      staticLossesInProgress = false;
+    }
+  });
+}
+
+/** The last {@link anyLoseAllSource} answer, and what it was for. */
+let loseAllSourceMemo: {
+  readonly state: GameState;
+  readonly registry: CardRegistry;
+  readonly epoch: number;
+  readonly any: boolean;
+} | null = null;
+
+/**
+ * Whether any battlefield permanent has a `loseAllAbilities` static — the
+ * question every ability check asks first, and almost always "no". Answered
+ * once per mutation: the board scan it saves ran inside loops over the
+ * battlefield (a replacement scan for each token made) that run outside any
+ * cache region (`moveObject` suspends it), which made a 500-token board 150
+ * times slower. Every mutation that can change the answer — an entry, a leave,
+ * a face or text change — calls {@link invalidateComputedCache}, which moves
+ * the epoch; `setComputedCacheCheck` re-derives it on every hit.
+ */
+function anyLoseAllSource(state: GameState, registry: CardRegistry): boolean {
+  const memo = loseAllSourceMemo;
+  if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
+    if (cacheCheck && scanForLoseAllSource(state, registry) !== memo.any) {
+      throw new Error("computed-cache divergence (lose-all sources): a mutation is missing an invalidateComputedCache() call");
+    }
+    return memo.any;
+  }
+  const any = scanForLoseAllSource(state, registry);
+  loseAllSourceMemo = { state, registry, epoch: mutationEpoch, any };
+  return any;
+}
+
+function scanForLoseAllSource(state: GameState, registry: CardRegistry): boolean {
+  for (const id of state.zones.shared.battlefield) {
+    if (staticsOf(registry, rulesTextName(state.objects[id])).loseAll.length > 0) return true;
+  }
+  return false;
+}
+
+/** The board scan behind {@link staticAbilityLosses}. */
+function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
+  interface Pending {
+    readonly source: GameObject;
+    readonly ability: StaticAbility;
+    /** The permanents it reaches. */
+    readonly reaches: ReadonlySet<ObjectId>;
+  }
+  let pending: Pending[] = [];
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    const statics = staticsOf(registry, rulesTextName(source)).loseAll;
+    if (statics.length === 0) continue;
+    if (state.players[source.controller]?.hasLost === true) continue;
+    for (const ability of statics) {
+      // An effect's loss applies first (see above): the static is gone.
+      if (!hasLayerFourPart(ability) && modifierLossAt(source) !== null) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) {
+        continue;
+      }
+      const reaches = new Set<ObjectId>();
+      for (const targetId of state.zones.shared.battlefield) {
+        const target = state.objects[targetId];
+        if (staticReaches(state, registry, source, ability, target)) reaches.add(targetId);
+      }
+      pending.push({ source, ability, reaches });
+    }
+  }
+  const out = new Map<ObjectId, number>();
+  const applied = new Map<ObjectId, Set<StaticAbility>>();
+  const apply = (p: Pending): void => {
+    let mine = applied.get(p.source.id);
+    if (mine === undefined) applied.set(p.source.id, (mine = new Set()));
+    mine.add(p.ability);
+    const at = p.source.timestamp - 0.5;
+    for (const id of p.reaches) {
+      const was = out.get(id);
+      if (was === undefined || at > was) out.set(id, at);
+    }
+  };
+  // Whether `q` takes away the ability behind `p`: an effect doesn't depend
+  // on itself, nor on its own permanent's other statics (Humility made a
+  // creature still applies — its ruling).
+  const takes = (q: Pending, p: Pending): boolean =>
+    q.source.id !== p.source.id && !hasLayerFourPart(p.ability) && q.reaches.has(p.source.id);
+  while (pending.length > 0) {
+    const free = pending.filter((p) => !pending.some((q) => takes(q, p)));
+    const round = free.length > 0 ? free : [pending.reduce((a, b) => (b.source.timestamp < a.source.timestamp ? b : a))];
+    for (const p of round) apply(p);
+    pending = pending.filter((p) => !round.includes(p) && !round.some((q) => takes(q, p)));
+  }
+  return { lost: out, applied };
 }
 
 /**
@@ -1679,9 +1861,9 @@ export function modifierGrantApplies(modifier: PtModifier, lostAt: number | null
  * battlefield, exile it instead of putting it anywhere else" (see
  * `PtModifier.grantsExileIfLeaves`) — not lost to a later loss of all
  * abilities (rule 613.1f). */
-export function hasExileIfLeavesAbility(object: GameObject): boolean {
+export function hasExileIfLeavesAbility(state: GameState, registry: CardRegistry, object: GameObject): boolean {
   if (!object.modifiers.some((m) => m.grantsExileIfLeaves === true)) return false;
-  const lostAt = abilitiesLostAt(object);
+  const lostAt = abilitiesLostAt(state, registry, object);
   return object.modifiers.some((m) => m.grantsExileIfLeaves === true && modifierGrantApplies(m, lostAt));
 }
 
@@ -1700,10 +1882,11 @@ export function keywordCounterTimestamp(object: GameObject, keyword: Keyword): n
  * Borca ruling) — while one from before it was suspected doesn't (rule
  * 613.7). A removal with no timestamp is taken as the later.
  */
-export function suspectedGrantsApply(object: GameObject): boolean {
+export function suspectedGrantsApply(state: GameState, registry: CardRegistry, object: GameObject): boolean {
   const since = object.suspectedAt;
   if (since === undefined) return false;
-  return !object.modifiers.some((m) => m.loseAbilities === true && (m.timestamp ?? Infinity) >= since);
+  const lostAt = abilitiesLostAt(state, registry, object);
+  return lostAt === null || lostAt < since;
 }
 
 /** Printed subtypes, then its changeling (see {@link withChangeling}) — the
@@ -2009,6 +2192,8 @@ function foldLayerFourOnce(
       const kinds = new Set(set.map(subtypeKind));
       subtypes = [...subtypes.filter((s) => !kinds.has(subtypeKind(s))), ...set];
     }
+    // Lithoform Blight's "loses all land types" (305.7).
+    if (ability.loseLandTypes === true) subtypes = subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
     if (ability.addsChosenCreatureType === true) {
       // Titan of Littjara's "is the chosen type in addition": its source's
@@ -2048,6 +2233,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.setSubtypes !== undefined ||
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
+    ability.loseLandTypes === true ||
     ability.addsChosenCreatureType === true
   );
 }
@@ -2152,7 +2338,13 @@ export function effectiveColors(
       const { source, ability } = step.grant;
       if (!staticAffects(state!, registry, ability.affects, source, object)) continue;
       if (ability.condition !== undefined && !staticConditionMet(state!, registry, source, ability.condition)) continue;
-      colors = new Set(ability.setColors);
+      if (ability.setColors !== undefined) colors = new Set(ability.setColors);
+      if (ability.setsChosenColor === true) {
+        // Alloy Golem: its own choice as it entered, once there is one.
+        const chosen = source.chosenOnEnter;
+        if (typeof chosen === "string" && (COLORS as readonly string[]).includes(chosen)) colors = new Set([chosen as Color]);
+      }
+      if (ability.addColors !== undefined) for (const c of ability.addColors) colors.add(c);
     }
   } finally {
     layer5InProgress.delete(object.id);
@@ -2445,7 +2637,7 @@ export function staticAffects(
   const hasKeyword = (keyword: Keyword): boolean =>
     targetKeywords !== undefined
       ? targetKeywords().has(keyword)
-      : !(target.zone === "battlefield" && hasLostAbilities(target)) &&
+      : !(target.zone === "battlefield" && hasLostAbilities(state, registry, target)) &&
         registry.get(rulesTextName(target)).keywords.includes(keyword);
   // Current types, not printed (rule 613.1d puts type changes before every
   // layer a static works in): an animated land or an artifact that became a
@@ -2570,9 +2762,9 @@ function abilityGrantSources(
     // A static with a layer-4 part outlives its source's loss of abilities
     // (rule 613.6 — see `typeGrantSources`); its grants then go against that
     // loss in timestamp order, like any (`grantOutlastsLoss`).
-    const lost = hasLostAbilities(source);
+    const lost = hasLostAbilities(state, registry, source);
     for (const ability of grants) {
-      if (lost && !hasLayerFourPart(ability)) continue;
+      if (lost && !staticOutlivesLoss(state, registry, source, ability)) continue;
       (out ??= []).push({ source, ability });
     }
   }
@@ -2638,7 +2830,7 @@ export function intrinsicManaColors(
 ): readonly Color[] {
   const { types, subtypes } = layerFour(state, registry, object);
   if (!types.includes("land")) return [];
-  if (object.zone === "battlefield" && abilitiesLostAt(object) !== null) return [];
+  if (object.zone === "battlefield" && abilitiesLostAt(state, registry, object) !== null) return [];
   return BASIC_LAND_TYPE_COLORS.filter(([type]) => hasSubtype(subtypes, type)).map(([, color]) => color);
 }
 
@@ -2693,6 +2885,7 @@ export function intrinsicStandIns(def: CardDefinition): readonly (readonly Color
 function printedLandTypesHold(state: GameState, registry: CardRegistry, object: GameObject): boolean {
   if (object.textFrom !== undefined) return false;
   if (object.zone === "battlefield" && typeGrantSources(state, registry).length > 0) return false;
+  if (object.zone === "battlefield" && staticAbilityLosses(state, registry).lost.has(object.id)) return false;
   return !object.modifiers.some(
     (m) =>
       m.setTypes !== undefined ||
@@ -2808,7 +3001,7 @@ export function hasManaAbility(
   view: TargetView = {},
 ): boolean {
   const onBattlefield = object.zone === "battlefield";
-  const lostAt = onBattlefield ? abilitiesLostAt(object) : null;
+  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
   const def = registry.get(rulesTextName(object));
   if (
     lostAt === null &&
@@ -2870,7 +3063,7 @@ export function hasAnyAbility(
   object: GameObject,
 ): boolean {
   const onBattlefield = object.zone === "battlefield";
-  const lostAt = onBattlefield ? abilitiesLostAt(object) : null;
+  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
   const def = registry.get(rulesTextName(object));
   if (lostAt === null && printedHasAbility(def)) return true;
   if (intrinsicManaColors(state, registry, object).length > 0) return true;
@@ -2934,7 +3127,7 @@ function graveyardGrantReaches(
   if (state.players[owner]?.hasLost !== false) return false;
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (source === undefined || source.controller !== owner || hasLostAbilities(source)) continue;
+    if (source === undefined || source.controller !== owner || hasLostAbilities(state, registry, source)) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
       const grant = ability.grantsToGraveyard;
       if (grant === undefined) continue;
@@ -2963,6 +3156,8 @@ interface AppliedEffect {
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
   readonly cantBeSacrificed: boolean;
+  /** "Can block an additional creature" (`blockAdditional`), 0 for none. */
+  readonly blockAdditional: number | "any";
   readonly protection: {
     colors?: readonly Color[];
     types?: readonly CardType[];
@@ -3002,6 +3197,8 @@ interface StaticsInfo {
   readonly layer5: readonly StaticAbility[];
   /** What {@link abilityGrantSources} takes. */
   readonly grants: readonly StaticAbility[];
+  /** What {@link staticAbilityLosses} takes (`loseAllAbilities`). */
+  readonly loseAll: readonly StaticAbility[];
 }
 
 const staticsInfoByRegistry = new WeakMap<CardRegistry, Map<string, StaticsInfo>>();
@@ -3022,8 +3219,9 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
-    layer5: statics.filter((a) => a.setColors !== undefined),
+    layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
+    loseAll: statics.filter((a) => a.loseAllAbilities === true),
   };
   byName.set(name, info);
   return info;
@@ -3048,6 +3246,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.combatDamageByToughness !== undefined ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.cantBeSacrificed === true ||
+    ability.blockAdditional !== undefined ||
     ability.protection !== undefined ||
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
@@ -3100,9 +3299,9 @@ function contributingStaticSources(
     // the rest of it keeps applying in the later layers (rule 613.6 — see
     // `typeGrantSources`), its layer-6 grants in timestamp order with the
     // loss (`grantOutlastsLoss`).
-    const lost = hasLostAbilities(source);
+    const lost = hasLostAbilities(state, registry, source);
     for (const ability of contributing) {
-      if (lost && !hasLayerFourPart(ability)) continue;
+      if (lost && !staticOutlivesLoss(state, registry, source, ability)) continue;
       out.push({ source, ability });
     }
   }
@@ -3256,6 +3455,7 @@ function collectStaticEffects(
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       cantBeSacrificed: ability.cantBeSacrificed === true,
+      blockAdditional: ability.blockAdditional ?? 0,
       protection: staticProtection(ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
@@ -3307,6 +3507,7 @@ function collectStaticEffects(
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       cantBeSacrificed: ability.cantBeSacrificed === true,
+      blockAdditional: ability.blockAdditional ?? 0,
       protection: ability.protection ?? null,
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
@@ -3318,9 +3519,9 @@ function collectStaticEffects(
     const targetKeywords = (): ReadonlySet<Keyword> => {
       if (keywords === null) {
         keywords = new Set(
-          hasLostAbilities(target) ? [] : registry.get(rulesTextName(target)).keywords,
+          hasLostAbilities(state, registry, target) ? [] : registry.get(rulesTextName(target)).keywords,
         );
-        const lostAt = target.zone === "battlefield" ? abilitiesLostAt(target) : null;
+        const lostAt = target.zone === "battlefield" ? abilitiesLostAt(state, registry, target) : null;
         // The same timestamp order as the main fold's (rule 613.7).
         const losses = keywordLosses(out, target);
         for (const loss of losses) keywords.delete(loss.keyword);
@@ -3336,7 +3537,7 @@ function collectStaticEffects(
           const at = keywordCounterTimestamp(target, k);
           if (grantOutlastsLoss(lostAt, at) && !lostAfter(losses, k, at)) keywords.add(k);
         }
-        if (suspectedGrantsApply(target) && !lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
+        if (suspectedGrantsApply(state, registry, target) && !lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
       }
       return keywords;
     };
@@ -3403,6 +3604,7 @@ function assertSameCharacteristics(
       restrictions: [...c.restrictions].sort(),
       damageByToughness: c.damageByToughness,
       assignsNoCombatDamage: c.assignsNoCombatDamage === true,
+      extraBlocks: c.extraBlocks ?? 0,
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
       canAttackAttackersDespiteDefender: c.canAttackAttackersDespiteDefender,
       cantBeSacrificed: c.cantBeSacrificed,
@@ -3438,7 +3640,7 @@ function computeCharacteristicsUncached(
   const text = registry.get(rulesTextName(object));
 
   const onBattlefield = object.zone === "battlefield";
-  const lostAbilities = onBattlefield && hasLostAbilities(object);
+  const lostAbilities = onBattlefield && hasLostAbilities(state, registry, object);
 
   // A station card's printed power and toughness are a station symbol's
   // (rule 721.2b): it has them only through that symbol's static ability, so
@@ -3494,11 +3696,15 @@ function computeCharacteristicsUncached(
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
   let cantBeSacrificed = false;
+  let extraBlocks: number | "any" = 0;
+  const addBlocks = (more: number | "any"): void => {
+    extraBlocks = extraBlocks === "any" || more === "any" ? "any" : extraBlocks + more;
+  };
   // What another permanent's static or an effect grants it in layer 6 goes
   // with a loss of all its abilities that came after (rule 613.7); what they
   // merely stop it doing (Pacifism's "can't attack", "can't be sacrificed")
   // isn't an ability it has, and stays.
-  const lostAt = onBattlefield ? abilitiesLostAt(object) : null;
+  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
   // A keyword loss ("loses flying") takes away what had the keyword before
   // it — printed, or granted earlier — and a later grant gives it back (rule
   // 613.7).
@@ -3519,6 +3725,7 @@ function computeCharacteristicsUncached(
     if (effect.canAttackAsThoughNoDefender) canAttackAsThoughNoDefender = true;
     if (effect.canAttackAttackersDespiteDefender) canAttackAttackersDespiteDefender = true;
     if (effect.cantBeSacrificed) cantBeSacrificed = true;
+    if (granted && effect.blockAdditional !== 0) addBlocks(effect.blockAdditional);
     if (effect.protection && granted) {
       if (effect.protection.sparesAura !== undefined) {
         protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [] });
@@ -3560,6 +3767,7 @@ function computeCharacteristicsUncached(
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
+    if (granted && modifier.blockAdditional !== undefined) addBlocks(modifier.blockAdditional);
     // Granted protection (the `grant-protection` effect) is an ability too.
     if (granted && modifier.protection !== undefined) {
       for (const c of modifier.protection.colors ?? []) {
@@ -3583,7 +3791,7 @@ function computeCharacteristicsUncached(
   }
   // Rule 701.60c — a suspected permanent has menace and "This creature can't
   // block" for as long as it's suspected.
-  if (onBattlefield && suspectedGrantsApply(object)) {
+  if (onBattlefield && suspectedGrantsApply(state, registry, object)) {
     if (!lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
     restrictions.add("cant-block");
   }
@@ -3701,6 +3909,7 @@ function computeCharacteristicsUncached(
     restrictions,
     damageByToughness,
     ...(assignsNoCombatDamage ? { assignsNoCombatDamage: true } : {}),
+    ...(extraBlocks !== 0 ? { extraBlocks } : {}),
     canAttackAsThoughNoDefender,
     canAttackAttackersDespiteDefender,
     cantBeSacrificed,
@@ -3713,6 +3922,16 @@ function computeCharacteristicsUncached(
     hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters },
     bandsWithOther,
   };
+}
+
+/**
+ * How many attackers creature `id` may block at once (rule 509.1a: one) —
+ * one more for each "can block an additional creature" it has, or
+ * `Infinity` for "can block any number of creatures" (`blockAdditional`).
+ */
+export function blockLimitOf(state: GameState, registry: CardRegistry, id: ObjectId): number {
+  const extra = computeCharacteristics(state, registry, id).extraBlocks ?? 0;
+  return extra === "any" ? Infinity : 1 + extra;
 }
 
 /**
@@ -3757,7 +3976,7 @@ export function exemptFromLegendRule(state: GameState, registry: CardRegistry, i
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
     if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
-    const lostAt = abilitiesLostAt(source);
+    const lostAt = abilitiesLostAt(state, registry, source);
     if (lostAt === null) {
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (ability.legendRuleOff !== true) continue;

@@ -724,6 +724,7 @@ import _poolTritonCavalry from "../pool/triton-cavalry.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTruePolymorph from "../pool/true-polymorph.js";
 import _poolTruefireCaptain from "../pool/truefire-captain.js";
+import _poolTrueheartDuelist from "../pool/trueheart-duelist.js";
 import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
@@ -763,6 +764,7 @@ import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
+import _poolWallOfGlare from "../pool/wall-of-glare.js";
 import _poolWardOfPiety from "../pool/ward-of-piety.js";
 import _poolWarrenSoultrader from "../pool/warren-soultrader.js";
 import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
@@ -1537,6 +1539,7 @@ const shard: CardShard = {
     _poolTrueLovesKiss,
     _poolTruePolymorph,
     _poolTruefireCaptain,
+    _poolTrueheartDuelist,
     _poolTundra,
     _poolTurbulentFen,
     _poolTurbulentSteppe,
@@ -1576,6 +1579,7 @@ const shard: CardShard = {
     _poolVirtueOfKnowledge,
     _poolVoicesFromTheVoid,
     _poolVoraciousNull,
+    _poolWallOfGlare,
     _poolWardOfPiety,
     _poolWarrenSoultrader,
     _poolWarriorEnKor,

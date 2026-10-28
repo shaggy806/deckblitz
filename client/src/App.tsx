@@ -67,6 +67,7 @@ import {
   collapseAttacks,
   blockEntries,
   collapseBlocks,
+  extraBlocks,
   expandAttackOffer,
   expandBlockOffer,
   expandIds,
@@ -1619,6 +1620,9 @@ function Table({
   const [attackBands, setAttackBands] = useState<readonly (readonly ObjectId[])[]>([])
   const [bandDraft, setBandDraft] = useState<readonly ObjectId[] | null>(null)
   const [blockAssign, setBlockAssign] = useState<Record<string, ObjectId>>({})
+  // The further attackers a creature that can block additional creatures
+  // blocks beside its `blockAssign` one (the offer's `maxBlocks`), by blocker.
+  const [blockExtra, setBlockExtra] = useState<Record<string, ObjectId[]>>({})
   // How many blockers share each token of an attacking token stack, by
   // attacker (`stackMembers.ts`'s `PerToken`; 1 when absent), and which
   // stack's popup is open to set it (`renderBlockSplitMenu`).
@@ -3051,6 +3055,29 @@ function Table({
         // and a click takes one that fits (game/blockGroups.ts). A compacted
         // stack is its members here (game/stackMembers.ts).
         const members = expandIds(ids, stackMembers)
+        // A creature that can block more than one attacker, already blocking
+        // and with room left: a click picks it up for one more (Two-Headed
+        // Giant of Foriys); full, it comes out of every block.
+        const multi = members.length === 1 ? blockAction.eligible.find((e) => e.blocker === members[0]) : undefined
+        if (multi?.maxBlocks !== undefined && blockAssign[multi.blocker] !== undefined) {
+          const held = 1 + (blockExtra[multi.blocker]?.length ?? 0)
+          if (held < multi.maxBlocks && blockFocus !== multi.blocker) {
+            setBlockFocus(multi.blocker)
+            return
+          }
+          setBlockAssign((cur) => {
+            const next = { ...cur }
+            delete next[multi.blocker]
+            return next
+          })
+          setBlockExtra((cur) => {
+            const next = { ...cur }
+            delete next[multi.blocker]
+            return next
+          })
+          setBlockFocus(null)
+          return
+        }
         if (members.some((i) => blockAction.eligible.some((e) => e.blocker === i))) {
           const fresh = freeBlocker(members, blockAction, blockAssign, blockFocus)
           if (fresh === null) {
@@ -3072,6 +3099,30 @@ function Table({
           } else {
             setBlockFocus(fresh)
           }
+          return
+        }
+        if (blockFocus && blockAssign[blockFocus] !== undefined) {
+          // One more attacker for a creature already blocking (`maxBlocks`),
+          // or, clicking one it blocks, that one taken back.
+          const focus = blockFocus
+          const canBlock = blockAction.eligible.find((e) => e.blocker === focus)?.canBlock ?? []
+          const at = ids.find((i) => canBlock.includes(i))
+          if (at === undefined) return
+          const extra = blockExtra[focus] ?? []
+          if (blockAssign[focus] === at) {
+            setBlockAssign((cur) => {
+              const next = { ...cur }
+              if (extra.length > 0) next[focus] = extra[0]
+              else delete next[focus]
+              return next
+            })
+            setBlockExtra((cur) => ({ ...cur, [focus]: extra.slice(1) }))
+          } else if (extra.includes(at)) {
+            setBlockExtra((cur) => ({ ...cur, [focus]: extra.filter((a) => a !== at) }))
+          } else {
+            setBlockExtra((cur) => ({ ...cur, [focus]: [...extra, at] }))
+          }
+          setBlockFocus(null)
           return
         }
         if (blockFocus) {
@@ -3127,6 +3178,7 @@ function Table({
       sendPicksAt,
       blockAction,
       blockAssign,
+      blockExtra,
       blockFocus,
       stackMembers,
       tileOf,
@@ -3223,9 +3275,9 @@ function Table({
     game.dispatch({
       type: 'declare-blockers',
       player: seat,
-      blocks: collapseBlocks(blockAssign, stackMembers, blockPerToken),
+      blocks: [...collapseBlocks(blockAssign, stackMembers, blockPerToken), ...extraBlocks(blockExtra, blockAssign)],
     })
-  }, [blockAssign, blockPerToken, game, seat, stackMembers])
+  }, [blockAssign, blockExtra, blockPerToken, game, seat, stackMembers])
 
   const confirmDiscard = useCallback(() => {
     game.dispatch({ type: 'discard', player: seat, cards: [...discardPicks] })
@@ -3428,7 +3480,9 @@ function Table({
         badge =
           members.length > 1
             ? `\u{1F6E1} ${blocking.length}/${members.length}`
-            : `\u{1F6E1} ${game.nameOf(blockAssign[blocking[0]])}`
+            : `\u{1F6E1} ${game.nameOf(blockAssign[blocking[0]])}${
+                (blockExtra[blocking[0]]?.length ?? 0) > 0 ? ` +${blockExtra[blocking[0]].length}` : ''
+              }`
       }
     } else if (mode === 'assign-combat-damage' && assignDamageAction && damageAnswer) {
       const members = damageMembersOf(ids)
@@ -3528,7 +3582,10 @@ function Table({
     // declared (`blocked`, which every seat sees, and which stays true once
     // the blockers are gone) or, while this seat is still choosing, picked
     // in its own block bar.
-    const pendingBlocked = mode === 'blockers' ? new Set(Object.values(blockAssign)) : null
+    const pendingBlocked =
+      mode === 'blockers'
+        ? new Set([...Object.values(blockAssign), ...extraBlocks(blockExtra, blockAssign).map((b) => b.attacker)])
+        : null
     const blockedCount =
       obj.attacking !== null && ids.length > 1
         ? ids.filter((i) => view.objects[i]?.blocked || pendingBlocked?.has(i)).length
@@ -5342,7 +5399,10 @@ function Table({
     const n = Object.keys(blockAssign).length
     // The set-level rules (menace, Lure) are the engine's own check against
     // this same offer, so Confirm can't disagree with the validator.
-    const violations = blockingViolations(blockEntries(blockAssign, blockPerToken), blockAction)
+    const violations = blockingViolations(
+      [...blockEntries(blockAssign, blockPerToken), ...extraBlocks(blockExtra, blockAssign)],
+      blockAction,
+    )
     const loneMenace = violations.flatMap((v) => (v.kind === 'menace' ? [v.attacker] : []))
     const unforcedBlockers = violations.flatMap((v) =>
       v.kind === 'must-be-blocked' ? [v.blocker] : [],
@@ -5444,6 +5504,7 @@ function Table({
           type="button"
           onClick={() => {
             setBlockAssign({})
+            setBlockExtra({})
             setBlockFocus(null)
           }}
         >

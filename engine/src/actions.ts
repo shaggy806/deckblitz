@@ -1356,6 +1356,11 @@ export type LegalAction =
          * unless a declaration's `count` sends fewer. Absent for an ordinary
          * one-creature permanent. */
         readonly copies?: number;
+        /** How many attackers it may block at once, when more than one ("can
+         * block an additional creature", `blockAdditional`; rule 509.1a):
+         * name it once per attacker, each a different one. "Any number" is
+         * every attacker it can block. Absent: one. */
+        readonly maxBlocks?: number;
       }[];
       /** Attackers with menace: block them with 0 or 2+ creatures, never 1. */
       readonly menaceAttackers: readonly ObjectId[];

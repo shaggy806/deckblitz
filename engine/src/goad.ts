@@ -54,7 +54,7 @@ function goadingStatics(state: GameState, registry: CardRegistry): readonly Goad
     const out: GoadingStatic[] = [];
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (source === undefined || hasLostAbilities(source)) continue;
+      if (source === undefined || hasLostAbilities(state, registry, source)) continue;
       if (state.players[source.controller]?.hasLost === true) continue;
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (ability.goads === true) out.push({ source, ability });

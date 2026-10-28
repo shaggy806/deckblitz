@@ -521,8 +521,7 @@ function visible(
   // A permanent that lost its abilities (layer 6 — Turn to Frog) shows no
   // rules text; its keywords are already gone from `computed`.
   const onBattlefield = zone === "battlefield";
-  const lostAbilities =
-    onBattlefield && object.modifiers.some((m) => m.loseAbilities === true);
+  const lostAbilities = onBattlefield && hasLostAbilities(state, registry, object);
   // Its text box, which an exchange (rule 612.5 — Deadpool) may have made
   // another card's.
   let text = lostAbilities ? "" : onBattlefield ? registry.get(rulesTextName(object)).text : def.text;
@@ -570,7 +569,7 @@ function visible(
       const reminder = `({T}: Add ${list}.)`;
       text = text.length > 0 ? `${text}\n${reminder}` : reminder;
     }
-    const lostAt = abilitiesLostAt(object);
+    const lostAt = abilitiesLostAt(state, registry, object);
     for (const m of object.modifiers) {
       if (!modifierGrantApplies(m, lostAt)) continue;
       for (const ability of [...(m.grantsActivated ?? []), ...(m.grantsTriggered ?? [])]) {
@@ -942,7 +941,7 @@ function viewForUncached(
         const object = state.objects[id];
         return (
           object.controller === player &&
-          !hasLostAbilities(object) &&
+          !hasLostAbilities(state, registry, object) &&
           registry.get(rulesTextName(object)).looksAtOwnLibraryTop
         );
       });

@@ -326,6 +326,7 @@ import _poolHibernation from "../pool/hibernation.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
 import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
 import _poolHighFlyingAce from "../pool/high-flying-ace.js";
+import _poolHighGround from "../pool/high-ground.js";
 import _poolHightideHermit from "../pool/hightide-hermit.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
@@ -334,6 +335,7 @@ import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHoodwink from "../pool/hoodwink.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
+import _poolHumility from "../pool/humility.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolIllusionReality from "../pool/illusion-reality.js";
@@ -636,6 +638,7 @@ import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
 import _poolSpikeHatcher from "../pool/spike-hatcher.js";
+import _poolSpikeTailedCeratops from "../pool/spike-tailed-ceratops.js";
 import _poolSpikeshotGoblin from "../pool/spikeshot-goblin.js";
 import _poolSpiralingEmbers from "../pool/spiraling-embers.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
@@ -1164,6 +1167,7 @@ const shard: CardShard = {
     _poolHiddenGrotto,
     _poolHiddenHerbalists,
     _poolHighFlyingAce,
+    _poolHighGround,
     _poolHightideHermit,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
@@ -1172,6 +1176,7 @@ const shard: CardShard = {
     _poolHoodwink,
     _poolHotDogCart,
     _poolHotfootGnome,
+    _poolHumility,
     _poolHuntersProwess,
     _poolIceFangCoatl,
     _poolIllusionReality,
@@ -1474,6 +1479,7 @@ const shard: CardShard = {
     _poolSpideryGrasp,
     _poolSpikeFeeder,
     _poolSpikeHatcher,
+    _poolSpikeTailedCeratops,
     _poolSpikeshotGoblin,
     _poolSpiralingEmbers,
     _poolSpiresOfOrazca,

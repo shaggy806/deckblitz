@@ -24,7 +24,7 @@ import {
   defendingPlayerOf,
   whyCannotBlock,
 } from "../combat/eligibility.js";
-import { objHasKeyword, restrictionsOf } from "../characteristics.js";
+import { blockLimitOf, objHasKeyword, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { whyMembersInvalid } from "../combat/blocking.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -43,12 +43,15 @@ function blockersOffer(
     .filter((id) => ctx.state.objects[id].controller === player)
     .map((blocker) => {
       const copies = ctx.state.objects[blocker].stackCount ?? 1;
+      const canBlock = attacking.filter(
+        (attacker) => whyCannotBlock(ctx.state, ctx.registry, player, blocker, attacker) === null,
+      );
+      const maxBlocks = Math.min(blockLimitOf(ctx.state, ctx.registry, blocker), canBlock.length);
       return {
         blocker,
-        canBlock: attacking.filter(
-          (attacker) => whyCannotBlock(ctx.state, ctx.registry, player, blocker, attacker) === null,
-        ),
+        canBlock,
         ...(copies > 1 ? { copies } : {}),
+        ...(maxBlocks > 1 ? { maxBlocks } : {}),
       };
     })
     .filter((entry) => entry.canBlock.length > 0);
@@ -121,11 +124,32 @@ export const blockers = defineDecision({
     const name = (id: ObjectId): string =>
       creatureDef(ctx.state, ctx.registry, id)?.name ?? id;
 
+    // A creature that can block additional creatures is named once for each
+    // attacker it blocks, each a different one, up to its limit (rule 509.1a
+    // with `blockAdditional`).
+    const blocking = new Map<ObjectId, ObjectId[]>();
+    const once: BlockerDeclaration[] = [];
+    for (const b of action.blocks) {
+      const prior = blocking.get(b.blocker);
+      if (prior === undefined) {
+        blocking.set(b.blocker, [b.attacker]);
+        once.push(b);
+        continue;
+      }
+      const limit = blockLimitOf(ctx.state, ctx.registry, b.blocker);
+      if (b.count !== undefined || (ctx.state.objects[b.blocker]?.stackCount ?? 1) > 1 || limit <= 1) {
+        once.push(b);
+        continue;
+      }
+      if (prior.includes(b.attacker)) return `${name(b.blocker)} is already blocking ${name(b.attacker)}`;
+      if (prior.length >= limit) return `${name(b.blocker)} can't block more than ${limit} creatures`;
+      prior.push(b.attacker);
+    }
     // A token stack may be named more than once, each entry with how many of
     // it block which attacker (`combat/stack-counts.ts`); anything else only
     // once — one creature blocks one attacker.
     const badCounts = whyCountsInvalid(
-      action.blocks.map((b) => ({ id: b.blocker, count: b.count })),
+      once.map((b) => ({ id: b.blocker, count: b.count })),
       (id) => ctx.state.objects[id]?.stackCount ?? 1,
       name,
       (id) => `${name(id)} is already blocking`,

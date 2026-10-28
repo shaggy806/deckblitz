@@ -277,6 +277,7 @@ import _poolGempalmPolluter from "../pool/gempalm-polluter.js";
 import _poolGenjuOfTheFields from "../pool/genju-of-the-fields.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
+import _poolGhastbarkTwins from "../pool/ghastbark-twins.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
 import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
 import _poolGhoulcallersChant from "../pool/ghoulcallers-chant.js";
@@ -454,6 +455,7 @@ import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
 import _poolMisfortuneTeller from "../pool/misfortune-teller.js";
+import _poolMistformShrieker from "../pool/mistform-shrieker.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
 import _poolMockeryOfNature from "../pool/mockery-of-nature.js";
 import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
@@ -1125,6 +1127,7 @@ const shard: CardShard = {
     _poolGenjuOfTheFields,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
+    _poolGhastbarkTwins,
     _poolGhirapurGearcrafter,
     _poolGhostLitRedeemer,
     _poolGhoulcallersChant,
@@ -1302,6 +1305,7 @@ const shard: CardShard = {
     _poolMinotaurRoxxonCeo,
     _poolMireShade,
     _poolMisfortuneTeller,
+    _poolMistformShrieker,
     _poolMnemonicWall,
     _poolMockeryOfNature,
     _poolMoiraAndTeshar,

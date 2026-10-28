@@ -1515,6 +1515,10 @@ export interface PtModifier {
    * `"cant-be-sacrificed"` effect). The static equivalent is
    * `StaticAbility.cantBeSacrificed`. */
   cantBeSacrificed?: boolean;
+  /** Layer 6 — it "can block an additional creature" (or `"any"` number of
+   * creatures) for the duration (the `block-additional` effect —
+   * `StaticAbility.blockAdditional` is the static form). */
+  blockAdditional?: number | "any";
   /** Part of the object's **copiable values** (rule 707.9b): an exception a
    * copy effect made ("except it's a 3/3 black Zombie creature in addition
    * to its other types"). Anything that copies this object copies these

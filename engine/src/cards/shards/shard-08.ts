@@ -352,6 +352,7 @@ import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
+import _poolImprisonedInTheMoon from "../pool/imprisoned-in-the-moon.js";
 import _poolIndebtedSamurai from "../pool/indebted-samurai.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfernalContract from "../pool/infernal-contract.js";
@@ -468,6 +469,7 @@ import _poolMirkwoodPathmaker from "../pool/mirkwood-pathmaker.js";
 import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMirrorStyleMaster from "../pool/mirror-style-master.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
+import _poolMistformSeaswift from "../pool/mistform-seaswift.js";
 import _poolMobVerdict from "../pool/mob-verdict.js";
 import _poolMoonsilverSpear from "../pool/moonsilver-spear.js";
 import _poolMordorMuster from "../pool/mordor-muster.js";
@@ -1210,6 +1212,7 @@ const shard: CardShard = {
     _poolIlhargTheRazeBoar,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
+    _poolImprisonedInTheMoon,
     _poolIndebtedSamurai,
     _poolIndomitableAncients,
     _poolInfernalContract,
@@ -1326,6 +1329,7 @@ const shard: CardShard = {
     _poolMirrisGuile,
     _poolMirrorStyleMaster,
     _poolMistSyndicateNaga,
+    _poolMistformSeaswift,
     _poolMobVerdict,
     _poolMoonsilverSpear,
     _poolMordorMuster,

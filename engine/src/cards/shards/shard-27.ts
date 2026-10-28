@@ -35,6 +35,7 @@ import _poolAngelicOverseer from "../pool/angelic-overseer.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
+import _poolAnuridSwarmsnapper from "../pool/anurid-swarmsnapper.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolAphoticWisps from "../pool/aphotic-wisps.js";
 import _poolArashiTheSkyAsunder from "../pool/arashi-the-sky-asunder.js";
@@ -763,6 +764,7 @@ import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
+import _poolWatcherInTheWeb from "../pool/watcher-in-the-web.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
@@ -846,6 +848,7 @@ const shard: CardShard = {
     _poolAngelicSleuth,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
+    _poolAnuridSwarmsnapper,
     _poolAnvilwroughtRaptor,
     _poolAphoticWisps,
     _poolArashiTheSkyAsunder,
@@ -1574,6 +1577,7 @@ const shard: CardShard = {
     _poolWallOfStone,
     _poolWarriorsHonor,
     _poolWastescapeBattlemage,
+    _poolWatcherInTheWeb,
     _poolWaxenShapethief,
     _poolWayOfTheWarlord,
     _poolWaywardServant,

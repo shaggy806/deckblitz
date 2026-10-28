@@ -96,6 +96,7 @@ import _poolBondOfFlourishing from "../pool/bond-of-flourishing.js";
 import _poolBondOfInsight from "../pool/bond-of-insight.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
 import _poolBrassSquire from "../pool/brass-squire.js";
+import _poolBraveTheSands from "../pool/brave-the-sands.js";
 import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBretagardStronghold from "../pool/bretagard-stronghold.js";
@@ -913,6 +914,7 @@ const shard: CardShard = {
     _poolBondOfInsight,
     _poolBraidsCabalMinion,
     _poolBrassSquire,
+    _poolBraveTheSands,
     _poolBreakUnderPressure,
     _poolBreakerOfArmies,
     _poolBretagardStronghold,

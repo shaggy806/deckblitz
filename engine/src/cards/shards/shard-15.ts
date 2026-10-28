@@ -450,6 +450,7 @@ import _poolMoongloveChangeling from "../pool/moonglove-changeling.js";
 import _poolMortarpod from "../pool/mortarpod.js";
 import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
+import _poolMountedArchers from "../pool/mounted-archers.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
 import _poolMultanisHarmony from "../pool/multanis-harmony.js";
@@ -1241,6 +1242,7 @@ const shard: CardShard = {
     _poolMortarpod,
     _poolMortuaryMire,
     _poolMothriderPatrol,
+    _poolMountedArchers,
     _poolMoxEmerald,
     _poolMuldrothaTheGravetide,
     _poolMultanisHarmony,

@@ -1381,6 +1381,27 @@ export interface StaticAbility {
    */
   readonly setColors?: readonly Color[];
   /**
+   * Layer 5 — colours the affected permanents have **in addition to** their
+   * others (Deep Freeze's "is a blue Wall in addition to its other colors
+   * and types"), in timestamp order with the rest of layer 5.
+   */
+  readonly addColors?: readonly Color[];
+  /**
+   * Layer 5 — the affected permanents are exactly the colour this static's
+   * own permanent chose as it entered (`chooseOnEnter` over the five
+   * colours, its `chosenOnEnter`): Alloy Golem's "this creature is the
+   * chosen color", Shimmerwilds Growth's "enchanted land is the chosen
+   * color". Nothing changes while no colour is chosen.
+   */
+  readonly setsChosenColor?: true;
+  /**
+   * Layer 4 — the affected permanents lose all land types (rule 305.7 takes
+   * their intrinsic mana abilities with them): Lithoform Blight's "enchanted
+   * land loses all land types and abilities", Alpine Moon's. Other subtypes
+   * and every card type stay.
+   */
+  readonly loseLandTypes?: true;
+  /**
    * Layer 7b — sets the affected permanents' base power and/or toughness
    * (Kudo: "have base power and toughness 2/2"; a lone `toughness` is "have
    * base toughness 1"). After characteristic-defining abilities, in
@@ -1608,6 +1629,17 @@ export interface StaticAbility {
    */
   readonly cantBeSacrificed?: boolean;
   /**
+   * "Can block an additional creature each combat" (rule 509.1a lets a
+   * creature block one attacker; this is how many more): `1` for Brave the
+   * Sands' and Two-Headed Giant of Foriys', `99` for Hundred-Handed One's
+   * "an additional ninety-nine", `"any"` for "can block any number of
+   * creatures" (Avatar of Hope). Several add up, and any number beats them
+   * all. An ability (layer 6), lost with the rest; the effect form is the
+   * `block-additional` effect. A creature blocking several attackers divides
+   * its combat damage among them (510.1d).
+   */
+  readonly blockAdditional?: number | "any";
+  /**
    * "The 'legend rule' doesn't apply to [the affected permanents]" (rule
    * 704.5j): Sakashima of a Thousand Faces' "to permanents you control" is
    * `affects: { scope: "filter", filter: { controlledBy: "you" } }`, The
@@ -1641,6 +1673,20 @@ export interface StaticAbility {
    * (rule 613.7): it removes the keyword from what had it before — printed,
    * or granted earlier — and a grant after it gives the keyword back. */
   readonly loseKeywords?: readonly Keyword[];
+  /**
+   * Layer 6 — the affected permanents **lose all abilities** (rule 613.1f):
+   * Humility's "All creatures lose all abilities", an Aura's "Enchanted
+   * creature loses all abilities" (Lignify, Darksteel Mutation, Kenrith's
+   * Transformation beside a `setTypes`/`setSubtypes`/`setColors`/`setBasePt`).
+   * Their printed abilities go, and so does every ability granted before the
+   * static's timestamp; what is granted after it — by this same permanent
+   * ("…and has '{T}: Add {C}'", `grantsActivated` / `grantKeywords`), or by a
+   * later effect — stays (rule 613.7). A loss reaching another such static's
+   * permanent takes that static away first (dependency, rule 613.8a); see
+   * `staticAbilityLosses`. The static counterpart of the `lose-abilities`
+   * effect.
+   */
+  readonly loseAllAbilities?: true;
   /**
    * Toxic N granted in layer 6 (rule 702.164) — Karumonix, the Rat King's
    * "Other Rats you control have toxic 1". One more instance of toxic on each

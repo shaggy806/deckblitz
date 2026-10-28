@@ -440,6 +440,7 @@ import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
 import _poolMuscleBurst from "../pool/muscle-burst.js";
 import _poolMwonvuliAcidMoss from "../pool/mwonvuli-acid-moss.js";
+import _poolMysticSubdual from "../pool/mystic-subdual.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolMultanisAcolyte,
     _poolMuscleBurst,
     _poolMwonvuliAcidMoss,
+    _poolMysticSubdual,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,

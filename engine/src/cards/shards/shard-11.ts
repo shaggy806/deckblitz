@@ -7,6 +7,7 @@ import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAcceleratedMutation from "../pool/accelerated-mutation.js";
 import _poolAcornHarvest from "../pool/acorn-harvest.js";
+import _poolActOfHeroism from "../pool/act-of-heroism.js";
 import _poolAerieOuphes from "../pool/aerie-ouphes.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
@@ -767,6 +768,7 @@ import _poolUrborgElf from "../pool/urborg-elf.js";
 import _poolUrnOfGodfire from "../pool/urn-of-godfire.js";
 import _poolUrzasAvenger from "../pool/urzas-avenger.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
+import _poolUtterInsignificance from "../pool/utter-insignificance.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
@@ -846,6 +848,7 @@ const shard: CardShard = {
     _poolAbigalePoetLaureate,
     _poolAcceleratedMutation,
     _poolAcornHarvest,
+    _poolActOfHeroism,
     _poolAerieOuphes,
     _poolAetherGust,
     _poolAetherHub,
@@ -1606,6 +1609,7 @@ const shard: CardShard = {
     _poolUrnOfGodfire,
     _poolUrzasAvenger,
     _poolUthrosTitanicGodcore,
+    _poolUtterInsignificance,
     _poolUyoSilentProphet,
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,

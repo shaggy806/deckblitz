@@ -56,7 +56,7 @@ function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set
     const out = new Set<Keyword>();
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (source === undefined || hasLostAbilities(source)) continue;
+      if (source === undefined || hasLostAbilities(state, registry, source)) continue;
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (ability.blockableDespiteLandwalk === undefined) continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
@@ -255,7 +255,7 @@ function whyCannotAttackUncached(
   // Apple's creatures enchanted by an Aura you control).
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (source.controller !== defendingPlayer || hasLostAbilities(source)) continue;
+    if (source.controller !== defendingPlayer || hasLostAbilities(state, registry, source)) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
       if (ability.cantAttackController !== true) continue;
       if (!staticReaches(state, registry, source, ability, object)) continue;
@@ -431,7 +431,7 @@ export function nearestOpponentRule(
   const directions = new Set<"left" | "right">();
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (hasLostAbilities(source) || state.players[source.controller]?.hasLost === true) continue;
+    if (hasLostAbilities(state, registry, source) || state.players[source.controller]?.hasLost === true) continue;
     // No direction chosen (it entered some way that didn't ask): no effect.
     if (source.chosenOnEnter !== "left" && source.chosenOnEnter !== "right") continue;
     const governs = registry
@@ -469,7 +469,7 @@ function blockFilterSources(
     const out: { source: GameObject; ability: StaticAbility }[] = [];
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (hasLostAbilities(source) || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source) || state.players[source.controller]?.hasLost === true) continue;
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (
           ability.cantBeBlockedBy !== undefined ||

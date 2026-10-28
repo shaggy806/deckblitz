@@ -489,6 +489,7 @@ import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPainSeer from "../pool/pain-seer.js";
 import _poolPainsmith from "../pool/painsmith.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
+import _poolPalaceGuard from "../pool/palace-guard.js";
 import _poolPaleWayfarer from "../pool/pale-wayfarer.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
@@ -1339,6 +1340,7 @@ const shard: CardShard = {
     _poolPainSeer,
     _poolPainsmith,
     _poolPakoArcaneRetriever,
+    _poolPalaceGuard,
     _poolPaleWayfarer,
     _poolParadiseDruid,
     _poolParadoxGardens,

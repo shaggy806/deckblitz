@@ -245,6 +245,7 @@ import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
 import _poolFortitude from "../pool/fortitude.js";
+import _poolFreshStart from "../pool/fresh-start.js";
 import _poolFrightshroudCourier from "../pool/frightshroud-courier.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
@@ -394,6 +395,7 @@ import _poolLeyWeaver from "../pool/ley-weaver.js";
 import _poolLightOfTheLegion from "../pool/light-of-the-legion.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
+import _poolLignify from "../pool/lignify.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
@@ -1106,6 +1108,7 @@ const shard: CardShard = {
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
     _poolFortitude,
+    _poolFreshStart,
     _poolFrightshroudCourier,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
@@ -1255,6 +1258,7 @@ const shard: CardShard = {
     _poolLightOfTheLegion,
     _poolLightningVisionary,
     _poolLightningWolf,
+    _poolLignify,
     _poolLilianaTheRepentant,
     _poolLionheartMaverick,
     _poolLiquimetalCoating,

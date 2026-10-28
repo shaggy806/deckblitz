@@ -487,6 +487,7 @@ import _poolNeckBreaker from "../pool/neck-breaker.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNestingWurm from "../pool/nesting-wurm.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
+import _poolNightMarketGuard from "../pool/night-market-guard.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNimbusChampion from "../pool/nimbus-champion.js";
@@ -711,6 +712,7 @@ import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThoughtNibbler from "../pool/thought-nibbler.js";
+import _poolThoughtweftTrio from "../pool/thoughtweft-trio.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolThranGolem from "../pool/thran-golem.js";
 import _poolThrowALine from "../pool/throw-a-line.js";
@@ -1314,6 +1316,7 @@ const shard: CardShard = {
     _poolNessianBoar,
     _poolNestingWurm,
     _poolNickValentinePrivateEye,
+    _poolNightMarketGuard,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
     _poolNimbusChampion,
@@ -1538,6 +1541,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThoughtNibbler,
+    _poolThoughtweftTrio,
     _poolThousandYearStorm,
     _poolThranGolem,
     _poolThrowALine,

@@ -246,6 +246,7 @@ import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
 import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
+import _poolForiysianInterceptor from "../pool/foriysian-interceptor.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFrostfistStrider from "../pool/frostfist-strider.js";
@@ -415,6 +416,7 @@ import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMirrorWall from "../pool/mirror-wall.js";
+import _poolMistformStalker from "../pool/mistform-stalker.js";
 import _poolMistmeadowWitch from "../pool/mistmeadow-witch.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
@@ -743,6 +745,7 @@ import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
 import _poolTrumpetingArmodon from "../pool/trumpeting-armodon.js";
 import _poolTurbulentSprings from "../pool/turbulent-springs.js";
 import _poolTwoHeadedCerberus from "../pool/two-headed-cerberus.js";
+import _poolTwoHeadedDragon from "../pool/two-headed-dragon.js";
 import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
@@ -1085,6 +1088,7 @@ const shard: CardShard = {
     _poolFootNinjas,
     _poolFootstepsOfTheGoryo,
     _poolForgottenMonument,
+    _poolForiysianInterceptor,
     _poolFountainport,
     _poolFrontlineSage,
     _poolFrostfistStrider,
@@ -1254,6 +1258,7 @@ const shard: CardShard = {
     _poolMintstrosity,
     _poolMirenTheMoaningWell,
     _poolMirrorWall,
+    _poolMistformStalker,
     _poolMistmeadowWitch,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
@@ -1582,6 +1587,7 @@ const shard: CardShard = {
     _poolTrumpetingArmodon,
     _poolTurbulentSprings,
     _poolTwoHeadedCerberus,
+    _poolTwoHeadedDragon,
     _poolTyrantsMachine,
     _poolUltimaOriginOfOblivion,
     _poolUnburden,
