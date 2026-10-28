@@ -2876,6 +2876,9 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^As ~ enters, choose (?:a|an|any) (.*?)card name\.$/.exec(line)) && cardNameFilterOf(m[1]) !== null) {
       const filter = cardNameFilterOf(m[1]);
       out.chooseCardNameOnEnter = Object.keys(filter).length > 0 ? { filter } : {};
+      // A land's name is chosen to shut an opponent's land off (Alpine
+      // Moon): their lands come first among the names offered.
+      if (filter.types?.includes("land")) out.chooseCardNameOnEnter.aim = "opponent-permanents";
       continue;
     }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name can't be activated( unless they're mana abilities)?\.$/.exec(line))) {
