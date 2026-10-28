@@ -2130,7 +2130,8 @@
    "example": "Bloodthirsty Blade: 'Is goaded' as a static; attaching to an opponent's creature."
   },
   "effect:attached-effect-ref": {
-   "example": "Hydra's Growth: Doubling counters on the enchanted creature — no effect target names the host."
+   "example": "Hydra's Growth: Doubling counters on the enchanted creature — no effect target names the host.",
+   "description": "Naming the enchanted or equipped permanent from the attachment's effects. Not covered (B237): untargeted damage to it (effect:damage-to-attached) or the host of an enchanted Equipment (effect:host-of-attached-permanent)."
   },
   "effect:attack-batch-aggregates": {
    "family": "effect:amount-aggregate",
@@ -2233,7 +2234,8 @@
    "example": "Chain of Smog: the targeted player copying the spell under their control isn't expressible"
   },
   "effect:change-target": {
-   "example": "Bolt Bend: 'Change the target of target spell or ability with a single target' — no retargeting effect."
+   "example": "Bolt Bend: 'Change the target of target spell or ability with a single target' — no retargeting effect.",
+   "description": "Changing a spell's or ability's target. Built: change-targets to any legal new target (or to: source). Not covered (B237): a new target restricted by a filter (effect:change-target-new-target-restricted)."
   },
   "effect:choose-commander-for-x": {
    "family": "effect:amount-new-variants",
@@ -2449,7 +2451,8 @@
   },
   "effect:distribute-counters": {
    "family": "effect:divide-among-targets",
-   "example": "Abzan Charm: distributing two +1/+1 counters among one or two targets isn't built (AUTHORING §15)"
+   "example": "Abzan Charm: distributing two +1/+1 counters among one or two targets isn't built (AUTHORING §15)",
+   "description": "Not: untargeted chosen recipients or a variable total (effect:distribute-counters-among-chosen, effect:distribute-counters-variable-total), a Saga chapter (effect:saga-chapter-divided)."
   },
   "effect:divided-damage-trigger": {
    "family": "effect:divide-among-targets",
@@ -2580,6 +2583,51 @@
    "family": "effect:emblem-triggered-abilities",
    "example": "Tamiyo, the Moon Sage: an emblem's static other than a creatures-you-control anthem ('You have no maximum hand size') — read by its rule only off battlefield permanents (AUTHORING §15). The triggered half is built (2026-10-09).",
    "checked": "2026-10-27: missing"
+  },
+  "bug:token-copy-skips-as-enters-choices": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Nexus of Becoming: the token copy of the exiled card must be asked its as-enters choices (ruling); Ardyn, Yenna, Rebuild the City, Kindred Charge, Ember Island Production and Abyssal Harvester wait on the same.",
+   "description": "create-token-copy never runs the copied card's \"as this enters\" choices (chooseOnEnter, copyOnEnter, a chosen creature type, riot): a token copy enters with nothing chosen, though the rulings say those abilities work (AUTHORING §15). Needs the copy made off the battlefield, asked, and the rest of the resolution resumed."
+  },
+  "condition:defender-no-opponent-more-life": {
+   "family": "condition:defending-player-life-rank",
+   "example": "Sword Coast Sailor: 'attacks a player, if no opponent has more life than that player' (also Hardy Outlander, Agent of the Shadow Thieves, Guild Artisan, Veteran Soldier).",
+   "description": "An attack condition: no opponent of the attacking player has more life than the defending player (ties allowed, the attacker's own life left out). DefenderLife's \"most\" counts every player, the attacker included."
+  },
+  "bug:simultaneous-move-with-choice": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Avatar Destiny: returns itself and the chosen milled creature card together.",
+   "description": "A simultaneous move that needs a choice first: a `simultaneous` sequence can't hold a step that asks, so 'return this card and up to one creature card milled this way' becomes two leave events."
+  },
+  "bug:simultaneous-discards": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Burning Inquiry: each player discards three at random, all at the same time (ruling). Noggle Ransacker, in the pool, has the same gap without a ruling saying so.",
+   "description": "Every player's discard from one instruction is one event: ctx.simultaneously batches battlefield and graveyard leaves and entries and damage, not hand-to-graveyard moves."
+  },
+  "bug:mana-value-of-countered-copy": {
+   "family": "bug:lki-object-reads",
+   "example": "Deekah, Fractal Theorist: a copied spell's mana value when the copy is countered in response.",
+   "description": "A spell copy is deleted as it leaves the stack, so manaValueOf a copy countered in response reads 0; lastStackManaValue covers real cards only. Same root as bug:controller-of-target-countered-copy."
+  },
+  "filter:enchanted-by-another-aura": {
+   "family": "condition:filter-attachments",
+   "example": "Daybreak Coronet: 'Enchant creature with another Aura attached to it'.",
+   "description": "An enchant or target filter for a creature with another Aura attached (not counting the Aura itself): CardFilter.enchanted is a yes/no that counts the Aura once attached."
+  },
+  "bug:moved-target-card-still-acted-on": {
+   "family": "bug:zone-change-object-identity",
+   "example": "Celestial Gatekeeper: targeting itself, it is exiled by the first step and must stay exiled (ruling), but is returned.",
+   "description": "A targeted card moved by an earlier step of the same resolution is a new object (rules 400.7, 608.2b): put-onto-battlefield on a graveyard-card target still acts on it from its new zone."
+  },
+  "bug:reflexive-target-compare-bound-at-creation": {
+   "family": "effect:reflexive-trigger",
+   "example": "Auron, Venerated Guardian: shrinking Auron in response must make a target with power not less than its power illegal.",
+   "description": "A reflexive trigger's target filter comparing with a live amount (power less than the source's) is bound to a number when the trigger is created (bindDynamicCompares), so the resolution recheck reads a stale value."
+  },
+  "static:pt-per-attachments-on-source": {
+   "family": "static:pt-per-amount",
+   "example": "Kellan, the Fae-Blooded: 'other creatures you control get +1/+0 for each Aura and Equipment attached to Kellan'.",
+   "description": "A static P/T bonus per Aura and Equipment attached to the static's own source: grantPtPerCount's attachedTo matches a host only by filter and can't name the source."
   },
   "effect:emblem-no-max-hand-size": {
    "family": "effect:emblem-triggered-abilities",
@@ -2751,7 +2799,8 @@
   },
   "effect:instant-speed-loyalty": {
    "family": "effect:cast-and-activate-restrictions",
-   "example": "Teferi, Master of Time: Loyalty abilities at instant speed, and phasing."
+   "example": "Teferi, Master of Time: Loyalty abilities at instant speed, and phasing.",
+   "description": "A permanent's own static only; granted until end of turn is effect:grant-instant-speed-loyalty-until-eot."
   },
   "effect:keep-one-of-each-permanent-type": {
    "example": "Liliana, Dreadhorde General: −9: each opponent keeps one permanent of each permanent type (a multi-typed one counting for any) and sacrifices the rest."
@@ -2811,7 +2860,8 @@
   },
   "effect:look-and-choose-total-mana-value": {
    "family": "effect:look-and-choose-second-pick",
-   "example": "Ao, the Dawn Sky: put any number of nonland permanent cards with total mana value 4 or less — no total-mana-value cap on a look-and-choose"
+   "example": "Ao, the Dawn Sky: put any number of nonland permanent cards with total mana value 4 or less — no total-mana-value cap on a look-and-choose",
+   "description": "Built on `return-from-graveyard` only; a cap on library `look-and-choose` is effect:look-and-choose-library-total-mana-value."
   },
   "effect:look-then-optional-sacrifice": {
    "example": "Birthing Ritual: look at top seven first, then decide to sacrifice, then pick by sacrificed MV+1 — no shape keeps that order"
@@ -2827,7 +2877,8 @@
    "example": "Shredder, Shadow Master: Token copies attacking each other opponent and 'lose half their life, rounded up' aren't expressible."
   },
   "effect:lose-keyword-until-eot": {
-   "example": "Emerald Charm: No effect makes a creature lose flying until end of turn."
+   "example": "Emerald Charm: No effect makes a creature lose flying until end of turn.",
+   "description": "Keyword strings only; protection and ward are effect:lose-protection-and-ward."
   },
   "effect:lose-life-unless-pay": {
    "example": "Elesh Norn: 'Loses 2 life unless they pay {1}' by the damaging source's controller, and the back face's Incubator tokens"
@@ -3265,7 +3316,8 @@
    "description": "Still missing (2026-10-27 check): no one-shot effect sets base power alone: animate requires both power and toughness; the lone-field form exists only on a static (PuPu UFO, Symmetry Sage, Island of Wak-Wak need the one-shot) Already there: src/cards/define.ts field setBasePt { power?, toughness? } (static, layer 7b); src/effects.ts kind 'animate' with required power and toughness"
   },
   "effect:set-color-effect": {
-   "example": "Crimson Wisps: no targeted 'becomes red until end of turn' colour-setting effect (animate sets P/T too)"
+   "example": "Crimson Wisps: no targeted 'becomes red until end of turn' colour-setting effect (animate sets P/T too)",
+   "description": "become-color: a target's colours become fixed ones for a duration. Not a colour chosen as it resolves — see effect:choose-color-become-color."
   },
   "effect:set-creature-type": {
    "example": "Gornog, the Red Reaper: 'becomes a Coward' overwrites creature types; 'Cowards can't block Warriors' restriction",
@@ -3274,7 +3326,8 @@
   },
   "effect:shuffle-graveyard-into-library": {
    "family": "effect:shuffle-library",
-   "example": "The Mending of Dominaria: III's 'shuffle your graveyard into your library' has no effect kind"
+   "example": "The Mending of Dominaria: III's 'shuffle your graveyard into your library' has no effect kind",
+   "description": "Shuffle a whole graveyard into its library. Not only the cards matching a filter — see effect:shuffle-graveyard-cards-filtered."
   },
   "effect:shuffle-graveyard-targets-into-library": {
    "family": "effect:shuffle-library",
@@ -3317,7 +3370,8 @@
    "example": "Citadel Siege: a step-begins trigger has no \"that player\" (the active opponent) for \"tap target creature that player controls\""
   },
   "effect:tap-all-controlled-by-target": {
-   "example": "Assassin Gauntlet: tap-all has no controlledByTarget for 'tap all creatures target opponent controls'."
+   "example": "Assassin Gauntlet: tap-all has no controlledByTarget for 'tap all creatures target opponent controls'.",
+   "description": "tap-all over a target slot's player (controlledByTarget). Not the player a trigger names — see effect:tap-all-trigger-player-scope."
   },
   "effect:tap-x-then": {
    "example": "Myr Battlesphere: \"You may tap X untapped Myr you control. If you do, … +X/+0 and deals X damage\": no count of what an effect tapped."
@@ -5237,7 +5291,8 @@
   },
   "effect:delayed-trigger-for-chosen-player": {
    "family": "effect:delayed-trigger-extensions",
-   "example": "Great Train Heist: 'Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.'"
+   "example": "Great Train Heist: 'Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.'",
+   "description": "Built: a delayed trigger filtered to damage to a chosen player (Great Train Heist's toPlayer). Not covered (B237): a delayed trigger acting for a remembered player (effect:delayed-trigger-remembers-that-player)."
   },
   "cost:escalate-nonmana": {
    "family": "cost:may-cost-non-mana",
@@ -5399,7 +5454,8 @@
   "effect:forced-block-this-combat": {
    "example": "Fighter Class: 'up to one target creature blocks it this combat if able' — a per-combat block requirement on one creature.",
    "checked": "2026-10-27: exists",
-   "existsEvidence": "src/effects.ts kind block-if-able (target, attacker, thisCombat); resolver case block-if-able in src/effects.ts; Rampant Elephant uses attacker source; Fighter Class's attacker is trigger-object"
+   "existsEvidence": "src/effects.ts kind block-if-able (target, attacker, thisCombat); resolver case block-if-able in src/effects.ts; Rampant Elephant uses attacker source; Fighter Class's attacker is trigger-object",
+   "description": "Not: 'if this attacked this combat' (condition:source-attacked-this-combat)."
   },
   "cost:mana-restriction-class-level": {
    "family": "cost:mana-spending-rules",
@@ -7494,7 +7550,8 @@
   },
   "effect:must-block-this-turn": {
    "family": "static:combat-restriction-extensions",
-   "example": "A 'blocks this turn if able' requirement on a target creature (rule 509.1c) — Hustle's 'attacks or blocks this turn if able'; the `restrict` effect has must-attack but no must-block."
+   "example": "A 'blocks this turn if able' requirement on a target creature (rule 509.1c) — Hustle's 'attacks or blocks this turn if able'; the `restrict` effect has must-attack but no must-block.",
+   "description": "Not: a filter form for each creature (effect:block-if-able-each-creature), keeping it when the attacker slot is illegal (effect:block-if-able-illegal-attacker-slot)."
   },
   "effect:look-at-face-down-permanents": {
    "family": "mechanic:face-down",
@@ -9603,7 +9660,8 @@
   "effect:skip-next-untap-step": {
    "example": "Dovin, Architect of Law",
    "checked": "2026-10-27: exists",
-   "existsEvidence": "src/effects.ts kind 'skip-next-untap' (filter, who) case around line 9781; src/game.ts skipNextUntap sets player.untapSkips (~line 23462) and the untap loop skips objects matching them (~line 6665); empty filter skips all their permanents (Dovin's -9 with who: target slot, Avizoa with who: you)"
+   "existsEvidence": "src/effects.ts kind 'skip-next-untap' (filter, who) case around line 9781; src/game.ts skipNextUntap sets player.untapSkips (~line 23462) and the untap loop skips objects matching them (~line 6665); empty filter skips all their permanents (Dovin's -9 with who: target slot, Avizoa with who: you)",
+   "description": "Skipping a player's whole untap step (rule 614.10): the skip-untap-step effect, built 2026-10-27 (B239). skip-next-untap only keeps permanents tapped."
   },
   "effect:damage-all-except-target": {
    "example": "Flames of the Raze-Boar"
@@ -10040,7 +10098,8 @@
    "example": "Brine Hag"
   },
   "effect:unless-any-player-pays": {
-   "example": "Cleansing"
+   "example": "Cleansing",
+   "description": "'Unless any player pays' (the rhystic cards): one unless, every player asked. Not one per permanent (effect:for-each-permanent-unless-any-player-pays), nor opponents only (effect:unless-any-opponent-pays)."
   },
   "cost:attack-cost-sacrifice": {
    "example": "Leviathan"
@@ -10369,7 +10428,7 @@
   "cost:any-player-may-activate": {
    "family": "effect:opponents-may-activate",
    "example": "Deadly Designs: \"Any player may activate this ability.\"",
-   "description": " Built for standalone activations; does not cover another player's mana ability used to pay a cost (cost:any-player-mana-ability)."
+   "description": "Built for standalone activations; does not cover another player's mana ability used to pay a cost (cost:any-player-mana-ability)."
   },
   "trigger:attacks-with-another-at-different-player": {
    "family": "trigger:attacks-player-filter",
@@ -12831,6 +12890,546 @@
   "static:cant-attack-unless-matching-also-attacks": {
    "family": "static:attack-limit",
    "example": "Scarred Puma: \"can't attack unless a black or green creature also attacks\""
+  },
+  "effect:owner-of-source-player-ref": {
+   "family": "effect:player-scope-extensions",
+   "description": "The source's owner as the player an effect acts for ('Gandalf's owner shuffles him into their library and draws three cards'): draw's who names only scopes, never the source's owner.",
+   "example": "Gandalf, Wandering Wizard"
+  },
+  "effect:tap-all-trigger-player-scope": {
+   "family": "effect:tap-all-controlled-by-target",
+   "description": "tap-all over the permanents of the player a trigger names — the damaged player, the defending player, the entering land's controller ('tap all lands that player controls'): tap-all narrows only to a target slot's player.",
+   "example": "Nature's Will"
+  },
+  "effect:scope-opponents-who-lost-life-this-turn": {
+   "family": "effect:player-scope-extensions",
+   "description": "A PlayerScope for 'each opponent who lost life this turn' (each one choosing in turn order, the sacrifices simultaneous).",
+   "example": "Papalymo Totolymo"
+  },
+  "effect:modify-pt-all-defending-player": {
+   "family": "effect:player-scope-extensions",
+   "description": "modify-pt-all over the creatures the defending player of an attack trigger controls ('creatures defending player controls get -1/-1'): its filter's controlledBy has no defending player.",
+   "example": "Silumgar, the Drifting Death"
+  },
+  "effect:manifest-dread-owner-of-linked-exile": {
+   "family": "effect:player-scope-extensions",
+   "description": "'The exiled card's owner manifests dread': manifest-dread's who takes only you or a target's controller, and nothing names the owner of the card exiled with the source.",
+   "example": "Unidentified Hovership"
+  },
+  "effect:discard-hand-target-players": {
+   "family": "effect:player-scope-extensions",
+   "description": "discard-hand for the players in an any-number target slot ('any number of target opponents each discard their hands, then draw seven cards'): discard-hand takes only a scope.",
+   "example": "Wheel and Deal"
+  },
+  "effect:delayed-return-source-from-graveyard": {
+   "family": "effect:put-onto-battlefield-options",
+   "description": "A delayed 'return this card to the battlefield at the beginning of the next end step' that returns the card only from the graveyard it went to, as the same object (rule 400.7): no pool card shows a delayed put-onto-battlefield 'source' gated that way.",
+   "example": "Ghoulish Impetus"
+  },
+  "effect:put-from-hand-or-graveyard": {
+   "family": "effect:put-onto-battlefield-options",
+   "description": "'Put a creature card … onto the battlefield from your hand or graveyard': one choice across both zones.",
+   "example": "Nissa of Shadowed Boughs"
+  },
+  "effect:put-onto-battlefield-grant-keywords": {
+   "family": "effect:put-onto-battlefield-options",
+   "description": "A card put onto the battlefield 'has flying and is an Angel in addition to its other types' from the moment it enters (rule 611.2e?): put-onto-battlefield adds subtypes but grants no keywords.",
+   "example": "Valkyrie's Call"
+  },
+  "effect:random-card-from-revealed": {
+   "family": "effect:random-choice",
+   "description": "'Put a random creature card from among them onto the battlefield' — a random pick among cards an effect revealed from a library.",
+   "example": "Getaway Barrel"
+  },
+  "effect:random-subset-of-looked-cards": {
+   "family": "effect:random-choice",
+   "description": "'Look at the top eight cards of your library. Exile four of them at random, then put the rest on top in any order.'",
+   "example": "Orcish Librarian"
+  },
+  "effect:discard-random-filtered": {
+   "family": "effect:random-choice",
+   "description": "'Reveals their hand and discards a creature card at random': a random discard among the cards matching a filter (discard's random takes no filter).",
+   "example": "Rag Man"
+  },
+  "effect:random-player-per-permanent": {
+   "family": "effect:random-choice",
+   "description": "'For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen.'",
+   "example": "Scrambleverse"
+  },
+  "effect:reflexive-up-to-that-many-targets": {
+   "family": "effect:reflexive-trigger",
+   "description": "'You may sacrifice one or more Treasures. When you do, up to that many target creatures …': a variable sacrifice whose count sets the reflexive trigger's number of targets.",
+   "example": "Swashbuckler Extraordinaire"
+  },
+  "effect:sacrifice-one-of-trigger-batch": {
+   "family": "effect:sacrificed-object-lki",
+   "description": "'You may sacrifice one of them' — one of the creatures a batched trigger (one or more creatures dealing combat damage) fired on, then reading the sacrificed creature.",
+   "example": "Descendants' Fury"
+  },
+  "effect:reveal-until-found-destination-by-condition": {
+   "family": "effect:reveal-until",
+   "description": "Reveal until a creature card, then onto the battlefield if its mana value is at most the number of lands you control, otherwise into your hand: reveal-until's put is one fixed destination.",
+   "example": "Part in Friendship"
+  },
+  "effect:discard-unless-sacrifice-per-card": {
+   "family": "effect:sacrifice-any-number",
+   "description": "'For each card drawn this way, discard a card unless you sacrifice a permanent': one simultaneous choice of permanents to sacrifice, the rest of the count discarded.",
+   "example": "Read the Runes"
+  },
+  "effect:choose-color-become-color": {
+   "family": "effect:set-color-effect",
+   "description": "'Choose a color. This artifact becomes the chosen color' as an ability resolves: become-color takes fixed colours, chooseOnEnter is as-enters.",
+   "example": "Puca's Eye"
+  },
+  "effect:shuffle-graveyard-cards-filtered": {
+   "family": "effect:shuffle-graveyard-into-library",
+   "description": "'Shuffle all creature cards of [the chosen type] from your graveyard into your library': shuffle-graveyard-into-library moves the whole graveyard, with no filter.",
+   "example": "Elvish Soultiller"
+  },
+  "target:other-than-source-unless-creature": {
+   "family": "effect:target-other-than-source",
+   "description": "'Target creatures and/or other planeswalkers' — the source excluded only as a planeswalker, still targetable while it's a creature (the ruling): kind 'other' drops the source whole.",
+   "example": "Sorin, Lord of Innistrad"
+  },
+  "target:ability-source-filter": {
+   "family": "effect:target-spec-additions",
+   "description": "An ability target narrowed by its source beyond card types: 'from a colorless source' (Abstruse Archaic), 'from another legendary source that's not a commander' (The Peregrine Dynamo).",
+   "example": "Abstruse Archaic"
+  },
+  "target:any-number-max-total-mana-value": {
+   "family": "effect:target-spec-additions",
+   "description": "'Any number of target … with total mana value X or less': any-number has maxTotalPower only.",
+   "example": "Rampaging Yao Guai"
+  },
+  "target:stack-spell-filter": {
+   "family": "effect:target-spec-additions",
+   "description": "The stack target ('spell, activated ability, or triggered ability') with its spells narrowed by a filter — 'legendary spell' (Tale's End), 'noncreature spell' (Louisoix's Sacrifice): stack's spells is any, instant-or-sorcery or none.",
+   "example": "Tale's End"
+  },
+  "target:loyalty-ability": {
+   "family": "effect:target-spec-additions",
+   "description": "'Counter target loyalty ability of a planeswalker': the ability target has abilityKind activated or triggered, no loyalty.",
+   "example": "Verdant Command"
+  },
+  "effect:opponents-cant-gain-life-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "description": "'Your opponents can't gain life this turn' as a resolving effect: player-effect covers only its controller.",
+   "example": "Atarka's Command"
+  },
+  "effect:creature-spells-uncounterable-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "description": "'Creature spells you cast this turn can't be countered' as a loyalty ability's effect.",
+   "example": "Domri, Anarch of Bolas"
+  },
+  "amount:greatest-power-this-way": {
+   "family": "effect:this-way-results",
+   "description": "The greatest power among creature cards an effect put into a graveyard or exiled this way (Discerning Taste, Szat's Will): thisWay amounts count or sum, never take the greatest.",
+   "example": "Discerning Taste"
+  },
+  "condition:this-way-counts-commander-redirect": {
+   "family": "effect:this-way-results",
+   "description": "Counting the nontoken permanents you controlled returned to hand this way, a commander its owner put in the command zone instead included (Flood of Tears' ruling).",
+   "example": "Flood of Tears"
+  },
+  "condition:per-player-this-way": {
+   "family": "effect:this-way-results",
+   "description": "A condition per player on what that player did this way: 'each opponent who didn't discard a nonland card this way loses 3 life'.",
+   "example": "Kroxa, Titan of Death's Hunger"
+  },
+  "condition:damage-dealt-this-way-to-trigger-object": {
+   "family": "effect:this-way-results",
+   "description": "damage-dealt-this-way about the trigger object rather than a target slot, with a filter on it ('if a Dinosaur is dealt damage this way'): its to is a slot index only.",
+   "example": "Marauding Raptor"
+  },
+  "effect:animated-this-way": {
+   "family": "effect:this-way-results",
+   "description": "A this-way record of the permanents an animate or animate-all made creatures ('put four +1/+1 counters on each artifact that became a creature this way', overloaded).",
+   "example": "Rise and Shine"
+  },
+  "effect:token-copy-of-sacrificed": {
+   "family": "effect:token-copy-options",
+   "description": "create-token-copy of the creature sacrificed as the cost: its of has no 'sacrificed'.",
+   "example": "Cleaver Skaab"
+  },
+  "effect:this-turn-cast-trigger-copy-chosen-token": {
+   "family": "effect:token-copy-options",
+   "description": "A chapter's 'whenever you cast a noncreature spell this turn, create a token that's a copy of a non-Saga token you control' — a turn-long delayed trigger copying an untargeted choice.",
+   "example": "Summon: Good King Mog XII"
+  },
+  "effect:token-copy-one-of-batch": {
+   "family": "effect:token-copy-options",
+   "description": "'Create a token that's a copy of one of them' — one chosen creature of a batched entry, not each of them or the first.",
+   "example": "Twilight Diviner"
+  },
+  "effect:token-copy-if-noncreature-animate": {
+   "family": "effect:token-copy-options",
+   "description": "A token copy that, if it isn't a creature, becomes a 2/2 Robot Villain creature in addition to its other types — an exception conditional on the copy's types.",
+   "example": "Ultron, Artificial Malevolence"
+  },
+  "effect:token-copy-of-spell-target": {
+   "family": "effect:token-copy-options",
+   "description": "create-token-copy of the permanent the cast spell (the trigger object) targets.",
+   "example": "Vesuvan Duplimancy"
+  },
+  "effect:for-each-permanent-unless-any-player-pays": {
+   "family": "effect:unless-any-player-pays",
+   "description": "'For each land, destroy that land unless any player pays 1 life' — an unless per permanent, asked of every player.",
+   "example": "Cleansing"
+  },
+  "effect:unless-any-opponent-pays": {
+   "family": "effect:unless-any-player-pays",
+   "description": "'Unless an opponent pays {2}': the unless chooser any-player asks you too; nothing asks the opponents alone.",
+   "example": "Scarwood Bandits"
+  },
+  "amount:chosen-targets-remaining": {
+   "family": "effect:this-way-results",
+   "example": "Disorienting Choice: How many of the spell's chosen targets are still on the battlefield (or weren't exiled) as it finishes resolving.",
+   "description": "How many of the spell's chosen targets are still on the battlefield (or weren't exiled) as it finishes resolving."
+  },
+  "amount:opponents-attacked-this-turn": {
+   "family": "effect:amount-turn-stat",
+   "example": "Rose, Cutthroat Raider: The number of opponents you attacked at any point this turn; opponentsAttacked reads only this combat's attackers.",
+   "description": "The number of opponents you attacked at any point this turn; opponentsAttacked reads only this combat's attackers."
+  },
+  "amount:opponents-with-more-cards-in-hand": {
+   "family": "condition:opponent-more-cards-in-hand",
+   "example": "Wojek Investigator: The number of opponents with more cards in hand than you (investigate once for each).",
+   "description": "The number of opponents with more cards in hand than you (investigate once for each)."
+  },
+  "effect:cast-copy-from-opponents-hand": {
+   "family": "effect:cast-copy-of-card",
+   "example": "Reversal of Fortune: Copy a card in an opponent's revealed hand and cast the copy; cast-now has no opponent's-hand source.",
+   "description": "Copy a card in an opponent's revealed hand and cast the copy; cast-now has no opponent's-hand source."
+  },
+  "effect:change-target-new-target-restricted": {
+   "family": "effect:change-target",
+   "example": "Meddle: Change the target of a spell or ability to a new one that must also match a filter (a creature, a player, this creature), narrower than what the spell could target.",
+   "description": "Change the target of a spell or ability to a new one that must also match a filter (a creature, a player, this creature), narrower than what the spell could target."
+  },
+  "target:stack-object-targets-filter": {
+   "family": "effect:target-spec-additions",
+   "example": "Silver Wyvern: A target spec for 'target spell or ability that targets only [this creature]': SpellTargetsFilter matches spells only, and single means every target is the same object.",
+   "description": "A target spec for 'target spell or ability that targets only [this creature]': SpellTargetsFilter matches spells only, and single means every target is the same object."
+  },
+  "replacement:opponent-chooses-creature-type-as-enters": {
+   "family": "effect:choices-by-other-players",
+   "example": "Callous Oppressor: 'As this enters, an opponent chooses a creature type': chooseCreatureTypeOnEnter is the controller's choice.",
+   "description": "'As this enters, an opponent chooses a creature type': chooseCreatureTypeOnEnter is the controller's choice."
+  },
+  "effect:sacrifice-permanent-of-opponents-choice": {
+   "family": "effect:choices-by-other-players",
+   "example": "Demonic Hordes: You sacrifice a permanent an opponent picks; sacrifice and its unless forms are the sacrificer's own choice.",
+   "description": "You sacrifice a permanent an opponent picks; sacrifice and its unless forms are the sacrificer's own choice."
+  },
+  "effect:each-opponent-picks-from-shared-reveal": {
+   "family": "effect:choices-by-other-players",
+   "example": "Manifold Insights: Each opponent in turn picks a different card from one shared reveal; look-and-choose gives one chooser one pick.",
+   "description": "Each opponent in turn picks a different card from one shared reveal; look-and-choose gives one chooser one pick."
+  },
+  "effect:look-and-choose-leftover-exile-with-counters": {
+   "family": "effect:exile-with-counters",
+   "example": "Karn, Scion of Urza: look-and-choose's leftover exiled with a counter (Karn's silver counter).",
+   "description": "look-and-choose's leftover exiled with a counter (Karn's silver counter)."
+  },
+  "effect:return-from-exile-with-counter": {
+   "family": "effect:exile-with-counters",
+   "example": "Karn, Scion of Urza: Put a card you own with a given counter from exile into your hand.",
+   "description": "Put a card you own with a given counter from exile into your hand."
+  },
+  "filter:chosen-permanents-not-controlled-by-caster": {
+   "family": "effect:choices-by-other-players",
+   "example": "Sadistic Shell Game: Each player chooses a creature the caster doesn't control, then all chosen are destroyed together.",
+   "description": "Each player chooses a creature the caster doesn't control, then all chosen are destroyed together."
+  },
+  "effect:each-player-chooses-color-for-own-permanents": {
+   "family": "effect:choices-by-other-players",
+   "example": "Selective Obliteration: Each player chooses a color in turn order, then each permanent is exiled unless colorless or only its controller's chosen color.",
+   "description": "Each player chooses a color in turn order, then each permanent is exiled unless colorless or only its controller's chosen color."
+  },
+  "effect:each-player-may-chosen-creature-counters-simultaneous": {
+   "family": "effect:choices-by-other-players",
+   "example": "Orzhov Advokist: Each player may choose a creature in turn order, then all the counters go on at once.",
+   "description": "Each player may choose a creature in turn order, then all the counters go on at once."
+  },
+  "effect:secret-choices-with-aggregate-outcome": {
+   "family": "effect:choices-by-other-players",
+   "example": "Prisoner's Dilemma: Opponents choose secretly between named options and the result depends on everyone's choices together (not a vote).",
+   "description": "Opponents choose secretly between named options and the result depends on everyone's choices together (not a vote)."
+  },
+  "effect:target-player-exiles-from-own-graveyard": {
+   "family": "effect:choices-by-other-players",
+   "example": "Relic of Progenitus: Target player exiles a card of their choice from their own graveyard (effect:target-player-exiles-from-hand covers hands only).",
+   "description": "Target player exiles a card of their choice from their own graveyard (effect:target-player-exiles-from-hand covers hands only)."
+  },
+  "effect:shuffle-into-library-all": {
+   "family": "effect:shuffle-into-library",
+   "example": "Teferi, Temporal Pilgrim: Shuffle every matching permanent a player controls into its owner's library; shuffle-into-library takes one target.",
+   "description": "Shuffle every matching permanent a player controls into its owner's library; shuffle-into-library takes one target."
+  },
+  "effect:copy-spell-random-retarget": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Chef's Kiss: Re-pick the targets of a spell and its copy at random, excluding you and your permanents.",
+   "description": "Re-pick the targets of a spell and its copy at random, excluding you and your permanents."
+  },
+  "effect:exchange-control-permanent-and-spell": {
+   "family": "effect:control-change-extensions",
+   "example": "Perplexing Chimera: Exchange control of this permanent and a spell on the stack; the spell's new controller may choose new targets.",
+   "description": "Exchange control of this permanent and a spell on the stack; the spell's new controller may choose new targets."
+  },
+  "effect:per-opponent-tap-then-reflexive-steal": {
+   "family": "effect:control-change-extensions",
+   "example": "Nihiloor: For each opponent, tap up to one of their creatures, then a reflexive steal targeting that player's creature with power up to the tapped one's.",
+   "description": "For each opponent, tap up to one of their creatures, then a reflexive steal targeting that player's creature with power up to the tapped one's."
+  },
+  "trigger:attack-with-creature-opponent-owns-owner-ref": {
+   "family": "effect:control-change-extensions",
+   "example": "Nihiloor: 'Whenever you attack with a creature an opponent owns', with 'that player' as the attacker's owner.",
+   "description": "'Whenever you attack with a creature an opponent owns', with 'that player' as the attacker's owner."
+  },
+  "trigger:attacking-causes-own-triggered-ability": {
+   "family": "effect:copy-ability",
+   "example": "Firebender Ascension: A trigger on a creature's attack causing one of its own triggered abilities to trigger, with that ability open to copy-ability.",
+   "description": "A trigger on a creature's attack causing one of its own triggered abilities to trigger, with that ability open to copy-ability."
+  },
+  "effect:copy-ability-count": {
+   "family": "effect:copy-ability",
+   "example": "Gogo, Master of Mimicry: copy-ability X times (X can't be 0).",
+   "description": "copy-ability X times (X can't be 0)."
+  },
+  "effect:when-spent-on-ability": {
+   "family": "effect:copy-ability",
+   "example": "Sunken Palace: add-mana's whenSpent firing when the mana pays for an activated ability (and copying it); whenSpent takes a spell filter only.",
+   "description": "add-mana's whenSpent firing when the mana pays for an activated ability (and copying it); whenSpent takes a spell filter only."
+  },
+  "bug:token-copy-aura-attach-choice": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "Adagia, Windswept Bastion: A token copy of an Aura isn't asked what it enchants (rule 303.4f) and dies to state-based actions; createTokenCopy asks no attach choice.",
+   "description": "A token copy of an Aura isn't asked what it enchants (rule 303.4f) and dies to state-based actions; createTokenCopy asks no attach choice."
+  },
+  "target:card-exiled-with-source": {
+   "family": "effect:target-spec-additions",
+   "example": "Dino DNA: A target spec for 'target card exiled with this permanent': no exile-zone target kind.",
+   "description": "A target spec for 'target card exiled with this permanent': no exile-zone target kind."
+  },
+  "effect:token-copy-sacrifice-at-next-upkeep": {
+   "family": "effect:token-copy-options",
+   "example": "Firion, Wild Rose Warrior: Sacrifice the token copy at the beginning of the next upkeep; create-token-copy has only an end-step sacrifice.",
+   "description": "Sacrifice the token copy at the beginning of the next upkeep; create-token-copy has only an end-step sacrifice."
+  },
+  "effect:copy-exception-if-copied-lacks-ability": {
+   "family": "effect:copy-exceptions",
+   "example": "Flesh Duplicate: A copy exception applied only if the copied object lacks an ability (vanishing 3).",
+   "description": "A copy exception applied only if the copied object lacks an ability (vanishing 3)."
+  },
+  "effect:copy-exception-if-creature": {
+   "family": "effect:copy-exceptions",
+   "example": "Moritte of the Frost: A copy exception applied only if the copy is a creature as it enters; except.keywords is unconditional.",
+   "description": "A copy exception applied only if the copy is a creature as it enters; except.keywords is unconditional."
+  },
+  "effect:copy-exception-set-all-subtypes": {
+   "family": "effect:copy-exceptions",
+   "example": "The Eleventh Hour: 'Except it's a legendary Alien' replacing every subtype; setSubtypes keeps other kinds (a Vehicle copy stays a Vehicle).",
+   "description": "'Except it's a legendary Alien' replacing every subtype; setSubtypes keeps other kinds (a Vehicle copy stays a Vehicle)."
+  },
+  "effect:copy-exception-grants-unprinted-self-ability": {
+   "family": "effect:copy-exceptions",
+   "example": "Vesuvan Doppelganger: A copy exception granting a triggered ability not printed on the card, which itself re-copies 'with this ability'.",
+   "description": "A copy exception granting a triggered ability not printed on the card, which itself re-copies 'with this ability'."
+  },
+  "effect:copy-spell-each-target": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Display of Power: Copy every spell in an any-number target group; copy-spell copies one slot.",
+   "description": "Copy every spell in an any-number target group; copy-spell copies one slot."
+  },
+  "effect:copy-spells-cast-this-way": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Finale of Promise: Copy the spells a cast-now just cast.",
+   "description": "Copy the spells a cast-now just cast."
+  },
+  "effect:copy-spell-retarget-created-token": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Frontline Heroism: A copy's retargetTo the token the same effect just created; retargetTo takes the source or a target slot.",
+   "description": "A copy's retargetTo the token the same effect just created; retargetTo takes the source or a target slot."
+  },
+  "effect:prevent-next-damage-from-source-to-you": {
+   "family": "replacement:damage-modification",
+   "example": "Mercenaries: Prevent the next damage this fixed source would deal to the activating player; prevention offers only a source of your choice.",
+   "description": "Prevent the next damage this fixed source would deal to the activating player; prevention offers only a source of your choice."
+  },
+  "effect:host-of-attached-permanent": {
+   "family": "effect:attached-effect-ref",
+   "example": "Artificer's Hex: Name the permanent the enchanted Equipment (or Aura) is attached to.",
+   "description": "Name the permanent the enchanted Equipment (or Aura) is attached to."
+  },
+  "effect:damage-to-attached": {
+   "family": "effect:attached-effect-ref",
+   "example": "Fatal Attraction: Untargeted damage to the enchanted creature; damage's target takes a slot or the trigger object, not 'attached'.",
+   "description": "Untargeted damage to the enchanted creature; damage's target takes a slot or the trigger object, not 'attached'."
+  },
+  "static:protection-spares-own-attachments": {
+   "family": "effect:aura-enters-choice",
+   "example": "Benevolent Blessing: Protection that doesn't remove the Auras and Equipment you control already attached.",
+   "description": "Protection that doesn't remove the Auras and Equipment you control already attached."
+  },
+  "effect:reveal-until-may-battlefield-else-hand": {
+   "family": "effect:aura-enters-choice",
+   "example": "Songbirds' Blessing: The card found by reveal-until may go onto the battlefield, else into your hand; reveal-until's put is one fixed zone.",
+   "description": "The card found by reveal-until may go onto the battlefield, else into your hand; reveal-until's put is one fixed zone."
+  },
+  "static:prohibit-by-player-turn-history": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Angelic Arbiter: A prohibition on each opponent by what that opponent did this turn (cast, attacked); prohibits can't be conditioned per player.",
+   "description": "A prohibition on each opponent by what that opponent did this turn (cast, attacked); prohibits can't be conditioned per player."
+  },
+  "effect:prohibit-cast-same-name-until-your-next-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Reflector Mage: The owner can't cast spells with a card's name until your next turn; prohibit lasts this turn and has no name filter.",
+   "description": "The owner can't cast spells with a card's name until your next turn; prohibit lasts this turn and has no name filter."
+  },
+  "static:cant-pay-life-or-sacrifice-nonland-for-costs": {
+   "family": "static:cant-pay-life-or-sacrifice-creatures-for-costs",
+   "example": "Yasharn, Implacable Earth: Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.",
+   "description": "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities."
+  },
+  "target:opponent-or-creature-or-planeswalker-an-opponent-controls": {
+   "family": "effect:target-spec-additions",
+   "example": "Nicol Bolas, God-Pharaoh: One target slot for an opponent, a creature an opponent controls or a planeswalker an opponent controls.",
+   "description": "One target slot for an opponent, a creature an opponent controls or a planeswalker an opponent controls."
+  },
+  "effect:delayed-whenever-batched-damage": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Aphelia, Viper Whisperer: A delayed 'whenever' on deals-damage-batch fires once per source, not once per damaged player (Jace, Cunning Castaway's +1 likely over-triggers too).",
+   "description": "A delayed 'whenever' on deals-damage-batch fires once per source, not once per damaged player (Jace, Cunning Castaway's +1 likely over-triggers too)."
+  },
+  "effect:delayed-whenever-per-card-graveyard": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Duskmantle Guildmage: A delayed 'whenever a card is put into a graveyard' firing per card, with that card's owner as 'that player'.",
+   "description": "A delayed 'whenever a card is put into a graveyard' firing per card, with that card's owner as 'that player'."
+  },
+  "effect:delayed-trigger-next-attack": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "All-Out Assault: 'When you next attack this turn': a one-shot delayed trigger on your next attack.",
+   "description": "'When you next attack this turn': a one-shot delayed trigger on your next attack."
+  },
+  "effect:delayed-trigger-chosen-players-next-end-step": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Faramir, Prince of Ithilien: A delayed trigger at a chosen opponent's next end step, with a condition on that turn ('they didn't attack you').",
+   "description": "A delayed trigger at a chosen opponent's next end step, with a condition on that turn ('they didn't attack you')."
+  },
+  "effect:delayed-trigger-extra-turn-end-step": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Last Chance: A delayed trigger at the beginning of the extra turn's end step the same effect gave.",
+   "description": "A delayed trigger at the beginning of the extra turn's end step the same effect gave."
+  },
+  "effect:delayed-trigger-reads-creator-x": {
+   "family": "bug:x-value-propagation",
+   "example": "Storm King's Thunder: A delayed trigger reading the X its creating spell was cast with.",
+   "description": "A delayed trigger reading the X its creating spell was cast with."
+  },
+  "effect:delayed-trigger-remembers-that-player": {
+   "family": "effect:delayed-trigger-for-chosen-player",
+   "example": "Horn of Plenty: A delayed trigger acting for a remembered player (the caster who paid), not its controller.",
+   "description": "A delayed trigger acting for a remembered player (the caster who paid), not its controller."
+  },
+  "effect:restrict-dealt-damage-this-way": {
+   "family": "effect:damage-dealt-this-way",
+   "example": "Aggravate: Restrict ('attacks this turn if able') each creature dealt damage this way.",
+   "description": "Restrict ('attacks this turn if able') each creature dealt damage this way."
+  },
+  "amount:cards-in-target-player-hand": {
+   "family": "effect:exile-with-counters",
+   "description": "The number of cards in a target player's hand as an amount (add-mana and others); `{cardsInHand}` takes only a scope.",
+   "example": "Rousing Refrain"
+  },
+  "condition:source-attacked-this-combat": {
+   "family": "effect:forced-block-this-combat",
+   "description": "'If [this] attacked this combat': true for a creature declared as an attacker this combat even after it's removed from combat, false across a later extra combat.",
+   "example": "Tolsimir, Midnight's Light"
+  },
+  "cost:ability-cost-reduction-first-each-turn": {
+   "family": "cost:ability-cost-modification",
+   "description": "A static reducing only the first activated ability of a matching permanent you activate each turn (mana abilities included); `abilityCostModification` has no first-each-turn form.",
+   "example": "Tezzeret, Betrayer of Flesh"
+  },
+  "effect:block-if-able-each-creature": {
+   "family": "static:combat-restriction-extensions",
+   "description": "'Each creature [filter] blocks this turn if able' as a rule for the turn, binding creatures that enter later; `block-if-able` takes only a target.",
+   "example": "Predatory Rampage"
+  },
+  "effect:block-if-able-illegal-attacker-slot": {
+   "family": "static:combat-restriction-extensions",
+   "description": "A block requirement that stays when the creature to be blocked is a target found illegal on resolution but still on the battlefield (Feral Contest's ruling); `block-if-able` drops it, the illegal slot being blanked.",
+   "example": "Feral Contest"
+  },
+  "effect:change-targets-same-new-target": {
+   "family": "static:combat-restriction-extensions",
+   "description": "Change the target of a spell that targets only this creature, every slot to the same new target (the ruling); `change-targets` retargets each slot separately.",
+   "example": "Torchling"
+  },
+  "effect:exile-from-library-face-down": {
+   "family": "effect:exile-library-all-but-bottom",
+   "description": "`exile-from-library` (allBut included) exiling face down.",
+   "example": "Doomsday Excruciator"
+  },
+  "effect:flicker-optional-immediate-or-delayed": {
+   "family": "effect:flicker-generalized",
+   "description": "Exile a creature; you may return it now, and if you don't, it returns at the next end step with counters.",
+   "example": "Gilraen, Dúnedain Protector"
+  },
+  "effect:flicker-untargeted-group-delayed-return": {
+   "family": "effect:flicker-generalized",
+   "description": "Exile an untargeted group (each creature you control, all creatures, any number chosen) and return them together with one linked delayed return.",
+   "example": "Ghostway"
+  },
+  "effect:look-and-choose-library-total-mana-value": {
+   "family": "effect:look-and-choose-second-pick",
+   "description": "A total-mana-value cap (a number or an amount) on `look-and-choose` from the library; only `return-from-graveyard` has `totalManaValueAtMost`.",
+   "example": "Ao, the Dawn Sky"
+  },
+  "effect:mana-ability-effect-before-mana": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "A mana ability whose rider happens before the mana is added and sets its amount (put a charge counter, then add X for its charge counters); `add-mana`'s `also` runs after.",
+   "example": "Empowered Autogenerator"
+  },
+  "effect:mana-spell-gains-permanent-keyword": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "A creature spell cast with this mana gains a keyword for good, not until end of turn (`spellGains` lasts the turn).",
+   "example": "Hall of the Bandit Lord"
+  },
+  "effect:move-counters-x-amount": {
+   "family": "effect:move-counter",
+   "description": "`move-counters` moving X counters, X paid for earlier in the resolution; its amount has no X.",
+   "example": "Tester of the Tangential"
+  },
+  "effect:prevent-chosen-source-to-attached": {
+   "family": "effect:effect-on-enchanted-permanent",
+   "description": "Prevent damage from a chosen source to the Aura's enchanted creature, read after the Aura is sacrificed for the cost; the effect's `to` takes only 'you' or a target slot.",
+   "example": "Kithkin Armor"
+  },
+  "effect:remove-counter-from-exiled-card": {
+   "family": "effect:exile-with-counters",
+   "description": "'You may remove a [kind] counter from a card that player owns in exile; if you do, …'.",
+   "example": "Mari, the Killing Quill"
+  },
+  "effect:trigger-spell-gains-keyword": {
+   "family": "effect:emblem-triggered-abilities",
+   "description": "A cast trigger giving the spell just cast a keyword that carries to the permanent it becomes ('it gains haste until end of turn').",
+   "example": "Tyvar Kell"
+  },
+  "filter:impulse-permission-spell-face": {
+   "family": "effect:emblem-triggered-abilities",
+   "description": "An impulse-exile permission whose filter is judged on the spell as cast (the face chosen), not the exiled card's front face.",
+   "example": "Chandra, Dressed to Kill"
+  },
+  "trigger:mana-ability-resolves-amount-produced": {
+   "family": "effect:mana-ability-side-effects",
+   "description": "'Whenever a mana ability of this creature resolves' (granted), carrying the amount of mana produced.",
+   "example": "Tyvar the Bellicose"
+  },
+  "zone:impulse-free-lesser-mana-value-than-own": {
+   "family": "effect:impulse-exile-other-libraries",
+   "description": "Each player exiles their top card; you may cast yours free, and each other one only if its mana value is less than yours.",
+   "example": "Triple Triad"
   },
   "condition:counter-put-on-source-this-turn": {
    "family": "condition:source-state",

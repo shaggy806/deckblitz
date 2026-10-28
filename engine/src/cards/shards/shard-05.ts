@@ -48,6 +48,7 @@ import _poolAshmouthDragon from "../pool/ashmouth-dragon.js";
 import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
+import _poolAstralDragon from "../pool/astral-dragon.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
 import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
@@ -55,6 +56,7 @@ import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
+import _poolAvizoa from "../pool/avizoa.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
@@ -170,6 +172,7 @@ import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
+import _poolDalkovanEncampment from "../pool/dalkovan-encampment.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
@@ -419,6 +422,7 @@ import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLeylineOfLifeforce from "../pool/leyline-of-lifeforce.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
+import _poolLilianaWakerOfTheDead from "../pool/liliana-waker-of-the-dead.js";
 import _poolLiltingRefrain from "../pool/lilting-refrain.js";
 import _poolLithatog from "../pool/lithatog.js";
 import _poolLlanowarCavalry from "../pool/llanowar-cavalry.js";
@@ -683,6 +687,7 @@ import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
 import _poolSylvanEchoes from "../pool/sylvan-echoes.js";
 import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
+import _poolTailSwipe from "../pool/tail-swipe.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
@@ -850,6 +855,7 @@ const shard: CardShard = {
     _poolAssaultOnOsgiliath,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
+    _poolAstralDragon,
     _poolAudaciousThief,
     _poolAuraGnarlid,
     _poolAvacynAngelOfHorror,
@@ -857,6 +863,7 @@ const shard: CardShard = {
     _poolAvatarOfDiscord,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
+    _poolAvizoa,
     _poolBairdArgivianRecruiter,
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
@@ -972,6 +979,7 @@ const shard: CardShard = {
     _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
+    _poolDalkovanEncampment,
     _poolDangerousWager,
     _poolDarkConfidant,
     _poolDarksteelColossus,
@@ -1221,6 +1229,7 @@ const shard: CardShard = {
     _poolLeyDruid,
     _poolLeylineOfLifeforce,
     _poolLightningStrike,
+    _poolLilianaWakerOfTheDead,
     _poolLiltingRefrain,
     _poolLithatog,
     _poolLlanowarCavalry,
@@ -1485,6 +1494,7 @@ const shard: CardShard = {
     _poolSylvanEchoes,
     _poolSylvanParadise,
     _poolTaboraxHopesDemise,
+    _poolTailSwipe,
     _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,

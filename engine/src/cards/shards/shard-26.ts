@@ -44,6 +44,7 @@ import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
+import _poolArmoredSkyhunter from "../pool/armored-skyhunter.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
@@ -170,6 +171,7 @@ import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
+import _poolDidntSayPlease from "../pool/didnt-say-please.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
 import _poolDisappear from "../pool/disappear.js";
@@ -239,6 +241,7 @@ import _poolFertileThicket from "../pool/fertile-thicket.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
+import _poolFind from "../pool/find.js";
 import _poolFinishingBlow from "../pool/finishing-blow.js";
 import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
@@ -292,6 +295,7 @@ import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
+import _poolGrapplingHook from "../pool/grappling-hook.js";
 import _poolGraveVenerations from "../pool/grave-venerations.js";
 import _poolGravelgillDuo from "../pool/gravelgill-duo.js";
 import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
@@ -482,6 +486,7 @@ import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
+import _poolOliviaVoldaren from "../pool/olivia-voldaren.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
@@ -555,6 +560,7 @@ import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
 import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
+import _poolRiteOfTheRagingStorm from "../pool/rite-of-the-raging-storm.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
 import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
@@ -688,6 +694,7 @@ import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
@@ -803,6 +810,7 @@ import _poolZagothTriome from "../pool/zagoth-triome.js";
 import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js";
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
+import _tokensDinosaurEggToken from "../tokens/dinosaur-egg-token.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
 import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dragon.js";
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
@@ -864,6 +872,7 @@ const shard: CardShard = {
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
+    _poolArmoredSkyhunter,
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAshenmoorCohort,
@@ -990,6 +999,7 @@ const shard: CardShard = {
     _poolDecreeOfPain,
     _poolDefensiveManeuvers,
     _poolDelifsCone,
+    _poolDidntSayPlease,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
     _poolDisappear,
@@ -1059,6 +1069,7 @@ const shard: CardShard = {
     _poolFertilid,
     _poolFetidPools,
     _poolFieryEmancipation,
+    _poolFind,
     _poolFinishingBlow,
     _poolFireAtWill,
     _poolFirecannonBlast,
@@ -1112,6 +1123,7 @@ const shard: CardShard = {
     _poolGolgariFindbroker,
     _poolGoliathBeetle,
     _poolGrandBallGuest,
+    _poolGrapplingHook,
     _poolGraveVenerations,
     _poolGravelgillDuo,
     _poolGreatOakGuardian,
@@ -1302,6 +1314,7 @@ const shard: CardShard = {
     _poolObyrasAttendants,
     _poolOffalsnout,
     _poolOgreErrant,
+    _poolOliviaVoldaren,
     _poolOmnathLocusOfTheRoil,
     _poolOnward,
     _poolOpportunity,
@@ -1375,6 +1388,7 @@ const shard: CardShard = {
     _poolRhoxOracle,
     _poolRiderInNeed,
     _poolRiteOfRuin,
+    _poolRiteOfTheRagingStorm,
     _poolRiverpyreVerge,
     _poolRoadsideReliquary,
     _poolRoast,
@@ -1508,6 +1522,7 @@ const shard: CardShard = {
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
+    _poolTamiyoMeetsTheStoryCircle,
     _poolTawnossTinkering,
     _poolTeapotSlinger,
     _poolTemporalTrespass,
@@ -1625,6 +1640,7 @@ const shard: CardShard = {
     _poolZombieApocalypse,
   ],
   tokens: [
+    _tokensDinosaurEggToken,
     _tokensDragonElementalToken,
     _tokensDragonTokenWakeTheDragon,
     _tokensElementalTokenVernalSovereign,

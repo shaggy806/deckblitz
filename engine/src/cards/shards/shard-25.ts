@@ -178,6 +178,7 @@ import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
 import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
+import _poolDiscipleOfFreyalise from "../pool/disciple-of-freyalise.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
@@ -318,6 +319,7 @@ import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
+import _poolHourOfPromise from "../pool/hour-of-promise.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
@@ -673,6 +675,7 @@ import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTalasExplorer from "../pool/talas-explorer.js";
+import _poolTaleOfTinuviel from "../pool/tale-of-tinuviel.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
@@ -687,6 +690,7 @@ import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
+import _poolThoughtCollapse from "../pool/thought-collapse.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThroneOfEmpires from "../pool/throne-of-empires.js";
@@ -784,6 +788,7 @@ import _tokensGoblinSoldierToken from "../tokens/goblin-soldier-token.js";
 import _tokensGreenEnchantmentCentaurToken33 from "../tokens/green-enchantment-centaur-token-3-3.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
+import _tokensLightningRagerToken from "../tokens/lightning-rager-token.js";
 import _tokensMinotaurToken from "../tokens/minotaur-token.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
@@ -975,6 +980,7 @@ const shard: CardShard = {
     _poolDictateOfKruphix,
     _poolDimirCutpurse,
     _poolDimirKeyrune,
+    _poolDiscipleOfFreyalise,
     _poolDissectionTools,
     _poolDoggedPursuit,
     _poolDomesticatedHydra,
@@ -1115,6 +1121,7 @@ const shard: CardShard = {
     _poolHenchfiendOfUkor,
     _poolHermitOfTheNatterknolls,
     _poolHordeOfBoggarts,
+    _poolHourOfPromise,
     _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
@@ -1470,6 +1477,7 @@ const shard: CardShard = {
     _poolSynthInfiltrator,
     _poolTaintedPeak,
     _poolTalasExplorer,
+    _poolTaleOfTinuviel,
     _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,
@@ -1484,6 +1492,7 @@ const shard: CardShard = {
     _poolTheLegendOfRoku,
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
+    _poolThoughtCollapse,
     _poolThoughtlace,
     _poolThreeStepsAhead,
     _poolThroneOfEmpires,
@@ -1583,6 +1592,7 @@ const shard: CardShard = {
     _tokensGreenEnchantmentCentaurToken33,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensKavuTokenJaredCarthalion,
+    _tokensLightningRagerToken,
     _tokensMinotaurToken,
     _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,

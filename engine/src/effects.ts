@@ -3860,6 +3860,9 @@ export type EffectSpec =
        * (Time Warp: "target player takes an extra turn after this one"). */
       readonly kind: "take-extra-turn";
       readonly target?: number;
+      /** "Skip the untap step of that turn" (Savor the Moment — rule
+       * 614.10): that extra turn's untap step, and no other, is skipped. */
+      readonly skipUntapStep?: true;
     }
   | {
       /**
@@ -4251,6 +4254,23 @@ export type EffectSpec =
        */
       readonly kind: "skip-next-untap";
       readonly filter: CardFilter;
+      readonly who?: number | PlayerScope;
+    }
+  | {
+      /**
+       * "[That player] **skips their next untap step**" (Brine Elemental,
+       * Shisato, Dovin, Architect of Law's −9, Avizoa — rule 614.10): the
+       * whole step, as though it didn't exist (500.11) — no phasing (502.1),
+       * no day/night check (502.2), nothing untapping, Seedborn Muse's
+       * included. Two such effects skip the next two (614.10a), and what was
+       * waiting for "their next untap step" (`skip-next-untap`, a "doesn't
+       * untap during its controller's next untap step", an exert) waits for
+       * the first one that isn't skipped. One already under way can't be
+       * skipped (614.10) — none is, since nobody gets priority in it. `who`
+       * is a player slot or a scope, `"you"` by default — unlike
+       * `skip-next-untap`, which only keeps permanents tapped.
+       */
+      readonly kind: "skip-untap-step";
       readonly who?: number | PlayerScope;
     }
   | {
@@ -6606,6 +6626,9 @@ export interface EffectApi {
   shuffleGraveyardIntoLibrary(target: TargetRef): void;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
   skipNextUntap(target: TargetRef, filter: CardFilter): void;
+  /** See the `"skip-untap-step"` {@link EffectSpec}: one more of `player`'s
+   * untap steps to skip. */
+  skipUntapStep(player: PlayerId): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -6918,7 +6941,7 @@ export interface EffectApi {
   /** See the `"grant-activated-all"` {@link EffectSpec}. */
   grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PtDuration): void;
   /** `player` takes an extra turn after this one (Time Warp). */
-  takeExtraTurn(player: PlayerId): void;
+  takeExtraTurn(player: PlayerId, skipUntapStep?: boolean): void;
   /** See the `"gift"` {@link EffectSpec}. */
   giveGift(gift: GiftKind): void;
   /** `player` wins the game, unless they can't — see the `"win-game"`
@@ -9782,6 +9805,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) ctx.skipNextUntap(target, spec.filter);
       return;
     }
+    case "skip-untap-step": {
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
+        if (target.kind === "player") ctx.skipUntapStep(target.player);
+      }
+      return;
+    }
     case "shuffle-graveyard-into-library": {
       const players = scopedOrTargetedPlayers(spec.target, ctx);
       ctx.simultaneously(() => {
@@ -10566,7 +10595,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "take-extra-turn": {
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
       if (spec.target !== undefined && target?.kind !== "player") return;
-      ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller);
+      ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller, spec.skipUntapStep === true);
       return;
     }
     case "storm": {

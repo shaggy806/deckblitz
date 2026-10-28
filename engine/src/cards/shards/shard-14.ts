@@ -410,6 +410,7 @@ import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
+import _poolKioraBestsTheSeaGod from "../pool/kiora-bests-the-sea-god.js";
 import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
 import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
@@ -490,6 +491,7 @@ import _poolMyojinOfCrypticDreams from "../pool/myojin-of-cryptic-dreams.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNaturesRuin from "../pool/natures-ruin.js";
+import _poolNecrogenMists from "../pool/necrogen-mists.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
@@ -1232,6 +1234,7 @@ const shard: CardShard = {
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
     _poolKindlyStranger,
+    _poolKioraBestsTheSeaGod,
     _poolKitsuneDawnblade,
     _poolKjeldoranJavelineer,
     _poolKonaRescueBeastie,
@@ -1312,6 +1315,7 @@ const shard: CardShard = {
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
     _poolNaturesRuin,
+    _poolNecrogenMists,
     _poolNecrogenScudder,
     _poolNettleGuard,
     _poolNiblisOfTheBreath,

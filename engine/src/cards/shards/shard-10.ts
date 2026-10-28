@@ -8,6 +8,7 @@ import _poolAbsolverThrull from "../pool/absolver-thrull.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
+import _poolAccumulateWisdom from "../pool/accumulate-wisdom.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAetherTheorist from "../pool/aether-theorist.js";
@@ -156,6 +157,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolCursedTotem from "../pool/cursed-totem.js";
 import _poolCustodyBattle from "../pool/custody-battle.js";
 import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
@@ -339,6 +341,7 @@ import _poolIcebreakerKraken from "../pool/icebreaker-kraken.js";
 import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolIllGottenInheritance from "../pool/ill-gotten-inheritance.js";
+import _poolIlluminorSzeras from "../pool/illuminor-szeras.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIncreasingConfusion from "../pool/increasing-confusion.js";
 import _poolIncrementalGrowth from "../pool/incremental-growth.js";
@@ -634,6 +637,7 @@ import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
 import _poolSnapback from "../pool/snapback.js";
 import _poolSnareTactician from "../pool/snare-tactician.js";
 import _poolSnarlSong from "../pool/snarl-song.js";
+import _poolSoldeviAdnate from "../pool/soldevi-adnate.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
@@ -816,6 +820,7 @@ import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
 import _tokensKithkinSoldierToken from "../tokens/kithkin-soldier-token.js";
+import _tokensKnightToken31 from "../tokens/knight-token-3-1.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -831,6 +836,7 @@ const shard: CardShard = {
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
     _poolAbzanBeastmaster,
+    _poolAccumulateWisdom,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAetherTheorist,
@@ -979,6 +985,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolCursedTotem,
     _poolCustodyBattle,
     _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,
@@ -1162,6 +1169,7 @@ const shard: CardShard = {
     _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolIllGottenInheritance,
+    _poolIlluminorSzeras,
     _poolImperialCosmographer,
     _poolIncreasingConfusion,
     _poolIncrementalGrowth,
@@ -1457,6 +1465,7 @@ const shard: CardShard = {
     _poolSnapback,
     _poolSnareTactician,
     _poolSnarlSong,
+    _poolSoldeviAdnate,
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
@@ -1641,6 +1650,7 @@ const shard: CardShard = {
     _tokensEverywhereToken,
     _tokensHydraTokenBlackGreen,
     _tokensKithkinSoldierToken,
+    _tokensKnightToken31,
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,

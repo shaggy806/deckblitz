@@ -45,6 +45,7 @@ import _poolArmguardFamiliar from "../pool/armguard-familiar.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsariCaptain from "../pool/asari-captain.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
+import _poolAssaultSuit from "../pool/assault-suit.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
@@ -68,6 +69,7 @@ import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
 import _poolBequeathal from "../pool/bequeathal.js";
+import _poolBerserk from "../pool/berserk.js";
 import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
@@ -119,6 +121,7 @@ import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
+import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
@@ -177,6 +180,7 @@ import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
+import _poolDovinArchitectOfLaw from "../pool/dovin-architect-of-law.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDreamshaperShaman from "../pool/dreamshaper-shaman.js";
 import _poolDreamtideWhale from "../pool/dreamtide-whale.js";
@@ -423,6 +427,7 @@ import _poolModeration from "../pool/moderation.js";
 import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
+import _poolMonstrousStep from "../pool/monstrous-step.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolMourningThrull from "../pool/mourning-thrull.js";
@@ -509,6 +514,7 @@ import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolReturnedReveler from "../pool/returned-reveler.js";
+import _poolRhinoTerribleTrampler from "../pool/rhino-terrible-trampler.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRibbonsOfNight from "../pool/ribbons-of-night.js";
@@ -550,6 +556,7 @@ import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js"
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
+import _poolSavorTheMoment from "../pool/savor-the-moment.js";
 import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolArrowsOfJustice,
     _poolAsariCaptain,
     _poolAsphyxiate,
+    _poolAssaultSuit,
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,
@@ -872,6 +880,7 @@ const shard: CardShard = {
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
     _poolBequeathal,
+    _poolBerserk,
     _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
     _poolBiteDown,
@@ -923,6 +932,7 @@ const shard: CardShard = {
     _poolCheerfulOsteomancer,
     _poolChoArrimLegate,
     _poolCinderGiant,
+    _poolClackbridgeTroll,
     _poolClamorShaman,
     _poolCleavingSliver,
     _poolCloakwoodHermit,
@@ -981,6 +991,7 @@ const shard: CardShard = {
     _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
+    _poolDovinArchitectOfLaw,
     _poolDragonlordAtarka,
     _poolDreamshaperShaman,
     _poolDreamtideWhale,
@@ -1227,6 +1238,7 @@ const shard: CardShard = {
     _poolMoggSquad,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
+    _poolMonstrousStep,
     _poolMoonrageBrute,
     _poolMorphling,
     _poolMourningThrull,
@@ -1313,6 +1325,7 @@ const shard: CardShard = {
     _poolResurgentBelief,
     _poolResurrectedCultist,
     _poolReturnedReveler,
+    _poolRhinoTerribleTrampler,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRibbonsOfNight,
@@ -1354,6 +1367,7 @@ const shard: CardShard = {
     _poolSarevoksTome,
     _poolSarumansTrickery,
     _poolSatyrNyxSmith,
+    _poolSavorTheMoment,
     _poolSawtoothThresher,
     _poolSawtuskDemolisher,
     _poolScarwoodGoblins,

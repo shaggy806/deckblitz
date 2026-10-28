@@ -311,6 +311,7 @@ import _poolHealingHands from "../pool/healing-hands.js";
 import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
+import _poolHelmOfTheGhastlord from "../pool/helm-of-the-ghastlord.js";
 import _poolHelpingHand from "../pool/helping-hand.js";
 import _poolHematiteTalisman from "../pool/hematite-talisman.js";
 import _poolHeraldOfTheFair from "../pool/herald-of-the-fair.js";
@@ -343,6 +344,7 @@ import _poolIlluminateHistory from "../pool/illuminate-history.js";
 import _poolIllusoryDemon from "../pool/illusory-demon.js";
 import _poolImaginaryPet from "../pool/imaginary-pet.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
+import _poolImpetuousDevils from "../pool/impetuous-devils.js";
 import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
@@ -391,6 +393,7 @@ import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js"
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuldothaRebirth from "../pool/kuldotha-rebirth.js";
+import _poolKulrathKnight from "../pool/kulrath-knight.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -483,6 +486,7 @@ import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
+import _poolOblivionRing from "../pool/oblivion-ring.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
@@ -584,6 +588,7 @@ import _poolSadisticAugermage from "../pool/sadistic-augermage.js";
 import _poolSageOfTheFalls from "../pool/sage-of-the-falls.js";
 import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSandStrangler from "../pool/sand-strangler.js";
+import _poolSandstoneNeedle from "../pool/sandstone-needle.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -799,6 +804,7 @@ import _poolWeirdingWood from "../pool/weirding-wood.js";
 import _poolWhack from "../pool/whack.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
+import _poolWillbreaker from "../pool/willbreaker.js";
 import _poolWindZendikon from "../pool/wind-zendikon.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
@@ -1143,6 +1149,7 @@ const shard: CardShard = {
     _poolHeartsOnFire,
     _poolHecteyes,
     _poolHeirsOfStromkirk,
+    _poolHelmOfTheGhastlord,
     _poolHelpingHand,
     _poolHematiteTalisman,
     _poolHeraldOfTheFair,
@@ -1175,6 +1182,7 @@ const shard: CardShard = {
     _poolIllusoryDemon,
     _poolImaginaryPet,
     _poolImmolatingGlare,
+    _poolImpetuousDevils,
     _poolIncandescentAria,
     _poolIncitedRabble,
     _poolIncurableOgre,
@@ -1223,6 +1231,7 @@ const shard: CardShard = {
     _poolKrovikanMist,
     _poolKukemssaPirates,
     _poolKuldothaRebirth,
+    _poolKulrathKnight,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
@@ -1315,6 +1324,7 @@ const shard: CardShard = {
     _poolNyxLotus,
     _poolOakheartDryads,
     _poolObNixilisReignited,
+    _poolOblivionRing,
     _poolObscuraCharm,
     _poolOchranAssassin,
     _poolOhranFrostfang,
@@ -1416,6 +1426,7 @@ const shard: CardShard = {
     _poolSageOfTheFalls,
     _poolSanctuaryRaptor,
     _poolSandStrangler,
+    _poolSandstoneNeedle,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
@@ -1631,6 +1642,7 @@ const shard: CardShard = {
     _poolWhack,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
+    _poolWillbreaker,
     _poolWindZendikon,
     _poolWindriderEel,
     _poolWindurstFederationCenter,

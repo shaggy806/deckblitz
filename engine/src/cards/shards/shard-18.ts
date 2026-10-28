@@ -57,6 +57,7 @@ import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlazingSpecter from "../pool/blazing-specter.js";
+import _poolBlightwingBandit from "../pool/blightwing-bandit.js";
 import _poolBlindSpotGiant from "../pool/blind-spot-giant.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
@@ -402,6 +403,7 @@ import _poolMalametScythe from "../pool/malamet-scythe.js";
 import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
 import _poolManticoreEternal from "../pool/manticore-eternal.js";
+import _poolMaraleafRider from "../pool/maraleaf-rider.js";
 import _poolMassHysteria from "../pool/mass-hysteria.js";
 import _poolMasterSkald from "../pool/master-skald.js";
 import _poolMechanozoa from "../pool/mechanozoa.js";
@@ -441,6 +443,7 @@ import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
 import _poolMyrMindservant from "../pool/myr-mindservant.js";
 import _poolMyrReservoir from "../pool/myr-reservoir.js";
 import _poolMysteriousEgg from "../pool/mysterious-egg.js";
+import _poolNacatlHuntPride from "../pool/nacatl-hunt-pride.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
@@ -485,6 +488,7 @@ import _poolPileOn from "../pool/pile-on.js";
 import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
+import _poolPlanarEngineering from "../pool/planar-engineering.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
@@ -696,6 +700,7 @@ import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
 import _poolToxinSliver from "../pool/toxin-sliver.js";
+import _poolTraverseTheUlvenwald from "../pool/traverse-the-ulvenwald.js";
 import _poolTreasureMage from "../pool/treasure-mage.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
@@ -863,6 +868,7 @@ const shard: CardShard = {
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
     _poolBlazingSpecter,
+    _poolBlightwingBandit,
     _poolBlindSpotGiant,
     _poolBlindingMage,
     _poolBlitzAutomaton,
@@ -1208,6 +1214,7 @@ const shard: CardShard = {
     _poolManaVault,
     _poolManholeCover,
     _poolManticoreEternal,
+    _poolMaraleafRider,
     _poolMassHysteria,
     _poolMasterSkald,
     _poolMechanozoa,
@@ -1247,6 +1254,7 @@ const shard: CardShard = {
     _poolMyrMindservant,
     _poolMyrReservoir,
     _poolMysteriousEgg,
+    _poolNacatlHuntPride,
     _poolNacatlOutlander,
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
@@ -1291,6 +1299,7 @@ const shard: CardShard = {
     _poolPitchstoneWall,
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
+    _poolPlanarEngineering,
     _poolPlatedRootwalla,
     _poolPlowThrough,
     _poolPossibilityTechnician,
@@ -1502,6 +1511,7 @@ const shard: CardShard = {
     _poolToughCookie,
     _poolTowerDefense,
     _poolToxinSliver,
+    _poolTraverseTheUlvenwald,
     _poolTreasureMage,
     _poolTreasureMap,
     _poolTremble,

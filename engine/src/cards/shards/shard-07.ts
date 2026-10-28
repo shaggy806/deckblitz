@@ -405,6 +405,7 @@ import _poolLordSkittersBlessing from "../pool/lord-skitters-blessing.js";
 import _poolLotusBloom from "../pool/lotus-bloom.js";
 import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
+import _poolLurkingArynx from "../pool/lurking-arynx.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
 import _poolLuxknightBreacher from "../pool/luxknight-breacher.js";
 import _poolMadProphet from "../pool/mad-prophet.js";
@@ -414,6 +415,7 @@ import _poolMagnificentEnd from "../pool/magnificent-end.js";
 import _poolMagusOfTheDisk from "../pool/magus-of-the-disk.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
+import _poolManaEchoes from "../pool/mana-echoes.js";
 import _poolManaReflection from "../pool/mana-reflection.js";
 import _poolManaweftSliver from "../pool/manaweft-sliver.js";
 import _poolManedServal from "../pool/maned-serval.js";
@@ -480,6 +482,7 @@ import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOcelotPride from "../pool/ocelot-pride.js";
 import _poolOctopusUmbra from "../pool/octopus-umbra.js";
+import _poolOfHerbsAndStewedRabbit from "../pool/of-herbs-and-stewed-rabbit.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
@@ -652,6 +655,7 @@ import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSparkHarvest from "../pool/spark-harvest.js";
+import _poolSphereOfAnnihilation from "../pool/sphere-of-annihilation.js";
 import _poolSpikeTiller from "../pool/spike-tiller.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
@@ -724,10 +728,12 @@ import _poolTimberShredder from "../pool/timber-shredder.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
 import _poolTimbermawLarva from "../pool/timbermaw-larva.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
+import _poolTombFortress from "../pool/tomb-fortress.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTorGiant from "../pool/tor-giant.js";
 import _poolTormentorsHelm from "../pool/tormentors-helm.js";
+import _poolTowerAbove from "../pool/tower-above.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
 import _poolToweringGibbon from "../pool/towering-gibbon.js";
 import _poolTrainingGrounds from "../pool/training-grounds.js";
@@ -1256,6 +1262,7 @@ const shard: CardShard = {
     _poolLotusBloom,
     _poolLounge,
     _poolLure,
+    _poolLurkingArynx,
     _poolLurkingNightstalker,
     _poolLuxknightBreacher,
     _poolMadProphet,
@@ -1265,6 +1272,7 @@ const shard: CardShard = {
     _poolMagusOfTheDisk,
     _poolMakindiGriffin,
     _poolManOWar,
+    _poolManaEchoes,
     _poolManaReflection,
     _poolManaweftSliver,
     _poolManedServal,
@@ -1331,6 +1339,7 @@ const shard: CardShard = {
     _poolNyleaKeenEyed,
     _poolOcelotPride,
     _poolOctopusUmbra,
+    _poolOfHerbsAndStewedRabbit,
     _poolOldGrowthEducator,
     _poolOldOneEye,
     _poolOnTheTrail,
@@ -1503,6 +1512,7 @@ const shard: CardShard = {
     _poolSouredSprings,
     _poolSpaceshift,
     _poolSparkHarvest,
+    _poolSphereOfAnnihilation,
     _poolSpikeTiller,
     _poolSpitfireLagac,
     _poolSpreadingRot,
@@ -1575,10 +1585,12 @@ const shard: CardShard = {
     _poolTimberlandGuide,
     _poolTimbermawLarva,
     _poolTimeWipe,
+    _poolTombFortress,
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
     _poolTorGiant,
     _poolTormentorsHelm,
+    _poolTowerAbove,
     _poolTowerOfFortunes,
     _poolToweringGibbon,
     _poolTrainingGrounds,

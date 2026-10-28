@@ -42,6 +42,8 @@ describe("effect templates", () => {
     ["Target creature gains flying until end of turn.", { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" }],
     ["Add {G}.", { kind: "add-mana", mana: "G", amount: 1 }],
     ["Add {R} or {G}.", { kind: "add-mana", mana: { oneOf: ["R", "G"] }, amount: 1 }],
+    ["Each opponent skips their next untap step.", { kind: "skip-untap-step", who: "each-opponent" }],
+    ["Target player skips their next untap step.", { kind: "skip-untap-step", who: 0 }],
   ])("%s", (sentence, expected) => {
     expect(parseSentence(sentence, ctx())).toEqual(expected);
   });

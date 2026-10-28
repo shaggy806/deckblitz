@@ -1197,6 +1197,12 @@ export function parseSentence(sentence, ctx) {
     return { kind: "draw", amount: amount(m[2]), target: slot(m[1]) };
   }
   if ((m = re(`each player draws ${N} cards?`).exec(s))) return { kind: "draw", amount: amount(m[1]), who: "each-player" };
+  // "Skips their next untap step" (rule 614.10): the whole step.
+  if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
+  if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };
+  if ((m = re(`(target player|target opponent) skips their next untap step`).exec(s))) {
+    return { kind: "skip-untap-step", who: slot(m[1]) };
+  }
   if ((m = re(`draw ${N} cards?, then discard ${N} cards?`).exec(s))) {
     return {
       kind: "sequence",

@@ -13,6 +13,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   yet", around line 14971). So "Discard a card: Add {B}" would add mana for free. Rule 602.2b
   has the whole cost paid; refuse it until it's paid. Found by batch 236; blocks Skirge Familiar
   (`cost:mana-ability-discard-cost`).
+- **A delayed "whenever" on a batched damage event fires once per source.** A `DelayedWhenever`
+  on `deals-damage-batch` goes through `fireWheneverWatchers`, which has none of the
+  `damageBatch` grouping a permanent's own triggers get (rule 603.2c: one trigger per player dealt
+  damage in the batch), nor their per-card handling of `put-into-graveyard`. Found by batch 237's
+  group E: Aphelia, Viper Whisperer's delayed trigger halved a player's life twice when two Snakes
+  connected (18 to 4, where 9 is right). Jace, Cunning Castaway (in the pool, same `whenever`)
+  likely draws and discards once per connecting creature, not once per player; not yet checked by
+  a test. Blocks Aphelia and Forth Eorlingas! (`effect:delayed-whenever-batched-damage`) and
+  Duskmantle Guildmage (`effect:delayed-whenever-per-card-graveyard`).
 - **A threshold-gated granted dies trigger doesn't look back.** A `grantsTriggered` static
   with a `condition` (threshold) is checked after the event when the granting permanent stays on
   the battlefield and another creature dies, so the creature whose death makes the seventh card
@@ -20,6 +29,14 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   back to just before the event, and Decaying Soil's ruling says threshold must already be met.
   Reborn Hero is right, its own death being the event. Found by batch 225's group C; blocks
   Decaying Soil (`trigger:conditional-grant-look-back`).
+- **An emblem's static applies only as a creatures-you-control anthem.** `characteristics.ts`
+  (the emblem loop after the battlefield statics, "Only the `creatures-you-control` scope is
+  supported") skips an emblem whose `affects.scope` is anything else. Nissa, Who Shakes the
+  World is in the pool with a −8 emblem written `scope: "filter"` (lands you control, grant
+  indestructible), so that emblem does nothing: a wrong card until the scope is read (or the card
+  comes out). Found by batch 235's group E, whose Elspeth, Knight-Errant ("Artifacts, creatures,
+  enchantments, and lands you control have indestructible") was tested and destroyed. Blocks
+  Elspeth (`effect:emblem-static-abilities`); Nissa is the only pool card with such an emblem.
 - **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
   `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
   context without the enclosing loop's player binding (game.ts, where the choice's `then` is
@@ -32,7 +49,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   return up to two target Bird and/or Cleric permanent cards from your graveyard to the
   battlefield" — targeting itself, it was exiled and then returned from exile, where its ruling
   says it stays exiled. Not yet checked against other `put-onto-battlefield` /
-  `return-to-hand` sequences. Blocks Celestial Gatekeeper (`bug:zone-change-object-identity`).
+  `return-to-hand` sequences. Blocks Celestial Gatekeeper (`bug:moved-target-card-still-acted-on`; batch 235 found it again).
   Found 2026-10-26 authoring Duskmantle Seer (B176), written with `who: "you"` instead — right
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.

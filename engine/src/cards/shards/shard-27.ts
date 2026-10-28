@@ -483,6 +483,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
+import _poolProvoke from "../pool/provoke.js";
 import _poolPsychoticHaze from "../pool/psychotic-haze.js";
 import _poolPuppetMaster from "../pool/puppet-master.js";
 import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
@@ -545,6 +546,7 @@ import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
+import _poolRundveltHordemaster from "../pool/rundvelt-hordemaster.js";
 import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
@@ -568,6 +570,7 @@ import _poolSeekTheWilds from "../pool/seek-the-wilds.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelOfTheEternalWatch from "../pool/sentinel-of-the-eternal-watch.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
+import _poolSephirothFallenHero from "../pool/sephiroth-fallen-hero.js";
 import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
@@ -765,6 +768,7 @@ import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWinnow from "../pool/winnow.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
+import _poolWoodlandBellower from "../pool/woodland-bellower.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
@@ -791,6 +795,7 @@ import _tokensElementalToken71TrampleHaste from "../tokens/elemental-token-7-1-t
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHomunculusToken22 from "../tokens/homunculus-token-2-2.js";
 import _tokensHumanToken from "../tokens/human-token.js";
+import _tokensMarkOfTheRaniToken from "../tokens/mark-of-the-rani-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
@@ -1284,6 +1289,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
+    _poolProvoke,
     _poolPsychoticHaze,
     _poolPuppetMaster,
     _poolPurpleDragonPunks,
@@ -1346,6 +1352,7 @@ const shard: CardShard = {
     _poolRotTideGargantua,
     _poolRotisserieElemental,
     _poolRuhanOfTheFomori,
+    _poolRundveltHordemaster,
     _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
@@ -1369,6 +1376,7 @@ const shard: CardShard = {
     _poolSeekerOfTheWay,
     _poolSentinelOfTheEternalWatch,
     _poolSentinelsEyes,
+    _poolSephirothFallenHero,
     _poolSergeantJohnBenton,
     _poolSerraAscendant,
     _poolShadowAlleyDenizen,
@@ -1566,6 +1574,7 @@ const shard: CardShard = {
     _poolWillowduskEssenceSeer,
     _poolWinnow,
     _poolWitheringTorment,
+    _poolWoodlandBellower,
     _poolWoodlandCemetery,
     _poolWordOfSeizing,
     _poolWorldBreaker,
@@ -1594,6 +1603,7 @@ const shard: CardShard = {
     _tokensFractalToken,
     _tokensHomunculusToken22,
     _tokensHumanToken,
+    _tokensMarkOfTheRaniToken,
     _tokensOozeToken,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,

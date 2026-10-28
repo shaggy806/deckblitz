@@ -62,7 +62,8 @@ section keeps only what to do next.
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
   lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
   to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
-  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R2 (B236: 20 authored, 80 still blocked on narrow keys).
+  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R1 (B235, 73 authored, 27 still blocked; the token-copy as-enters gap,
+  `bug:token-copy-skips-as-enters-choices`, now blocks seven), R2 (B236: 20 authored, 80 still blocked on narrow keys), R3 (B237: 23 authored, 77 still blocked on narrow keys), R5 (B239: 15 authored, 85 still blocked on narrow keys; built `skip-untap-step`), R4 (B238: 51 authored, 49 blocked on 20 new narrow keys and open ones).
   Assigned (round one, 2026-10-27): R1 → B235, R2 → B236, R3 → B237, R4 → B238, R5 → B239 (a
   batch number taken by then: the highest `B<N>` on `origin/main` plus one, checked again before
   landing). Then build in greedy order, a family per session, with
@@ -136,9 +137,11 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **A mana ability with a `discard` cost never pays it**: the mana-ability activation resolves before the discard is paid, and nothing refuses one, so "Discard a card: Add {B}" would make free mana (Skirge Familiar, `cost:mana-ability-discard-cost`, batch 236).
+- **A delayed "whenever" on a batched damage event fires once per source** (603.2c): Aphelia's halving twice; Jace, Cunning Castaway likely over-triggers (`effect:delayed-whenever-batched-damage`, batch 237).
 - **A threshold-gated granted dies trigger doesn't look back** (603.10a): Decaying Soil's granted trigger fires for the creature whose death makes the seventh card (`trigger:conditional-grant-look-back`, batch 225).
+- **An emblem's static applies only as a creatures-you-control anthem** (114.4): Nissa, Who Shakes the World, in the pool, has a −8 emblem ("Lands you control have indestructible") that does nothing (`effect:emblem-static-abilities`, batch 235).
 - **A look-and-choose's `then` loses `"that-player"`** inside a `for-each-player`: it silently does nothing (Duskmantle Seer works around it).
-- **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:zone-change-object-identity`, batch 219).
+- **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:moved-target-card-still-acted-on`, batches 219 and 235).
 - **A spell filter's `targets` never matches a copy of a spell**: "counter target spell that targets you" can't aim at a copied spell (Dawn Charm, Shell of the Last Kappa).
 - **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only.
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.

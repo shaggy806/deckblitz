@@ -64,6 +64,7 @@ import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackCat from "../pool/black-cat.js";
+import _poolBlackSunsTwilight from "../pool/black-suns-twilight.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladeInstructor from "../pool/blade-instructor.js";
 import _poolBladeSliver from "../pool/blade-sliver.js";
@@ -179,6 +180,7 @@ import _poolDeeprootWayfinder from "../pool/deeproot-wayfinder.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
 import _poolDegavolver from "../pool/degavolver.js";
 import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
+import _poolDepthshakerTitan from "../pool/depthshaker-titan.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDesolationAngel from "../pool/desolation-angel.js";
@@ -241,6 +243,7 @@ import _poolFirewakeSliver from "../pool/firewake-sliver.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFlayerDrone from "../pool/flayer-drone.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
+import _poolFlowState from "../pool/flow-state.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
@@ -899,6 +902,7 @@ const shard: CardShard = {
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
     _poolBlackCat,
+    _poolBlackSunsTwilight,
     _poolBlackWidowAgileAvenger,
     _poolBladeInstructor,
     _poolBladeSliver,
@@ -1014,6 +1018,7 @@ const shard: CardShard = {
     _poolDefenestratedPhantom,
     _poolDegavolver,
     _poolDeluxeDragster,
+    _poolDepthshakerTitan,
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDesolationAngel,
@@ -1076,6 +1081,7 @@ const shard: CardShard = {
     _poolFishingGear,
     _poolFlayerDrone,
     _poolFloodpitsDrowner,
+    _poolFlowState,
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
     _poolForest,

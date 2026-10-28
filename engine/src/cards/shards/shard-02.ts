@@ -134,6 +134,7 @@ import _poolConsumingFervor from "../pool/consuming-fervor.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
+import _poolCourtOfAmbition from "../pool/court-of-ambition.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
@@ -181,6 +182,7 @@ import _poolDiamondCity from "../pool/diamond-city.js";
 import _poolDiamondValley from "../pool/diamond-valley.js";
 import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
 import _poolDireFleetHoarder from "../pool/dire-fleet-hoarder.js";
+import _poolDireTactics from "../pool/dire-tactics.js";
 import _poolDiscordantPiper from "../pool/discordant-piper.js";
 import _poolDisdainfulStroke from "../pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "../pool/disease-carriers.js";
@@ -304,6 +306,7 @@ import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
 import _poolGrixisGrimblade from "../pool/grixis-grimblade.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGrollub from "../pool/grollub.js";
+import _poolGroveOfTheBurnwillows from "../pool/grove-of-the-burnwillows.js";
 import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
@@ -604,6 +607,7 @@ import _poolShriekingGrotesque from "../pool/shrieking-grotesque.js";
 import _poolShrineOfPiercingVision from "../pool/shrine-of-piercing-vision.js";
 import _poolShroudedSerpent from "../pool/shrouded-serpent.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
+import _poolSidisiUndeadVizier from "../pool/sidisi-undead-vizier.js";
 import _poolSilhanaLedgewalker from "../pool/silhana-ledgewalker.js";
 import _poolSilhanaWayfinder from "../pool/silhana-wayfinder.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
@@ -939,6 +943,7 @@ const shard: CardShard = {
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
     _poolCopperLeafAngel,
+    _poolCourtOfAmbition,
     _poolCramSession,
     _poolCremate,
     _poolCribSwap,
@@ -986,6 +991,7 @@ const shard: CardShard = {
     _poolDiamondValley,
     _poolDiluvianPrimordial,
     _poolDireFleetHoarder,
+    _poolDireTactics,
     _poolDiscordantPiper,
     _poolDisdainfulStroke,
     _poolDiseaseCarriers,
@@ -1109,6 +1115,7 @@ const shard: CardShard = {
     _poolGrixisGrimblade,
     _poolGrizzledLeotau,
     _poolGrollub,
+    _poolGroveOfTheBurnwillows,
     _poolGruulRagebeast,
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
@@ -1409,6 +1416,7 @@ const shard: CardShard = {
     _poolShrineOfPiercingVision,
     _poolShroudedSerpent,
     _poolSickleRipper,
+    _poolSidisiUndeadVizier,
     _poolSilhanaLedgewalker,
     _poolSilhanaWayfinder,
     _poolSilkWebWeaver,

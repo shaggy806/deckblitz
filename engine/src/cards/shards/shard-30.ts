@@ -129,6 +129,7 @@ import _poolCollectiveBlessing from "../pool/collective-blessing.js";
 import _poolColossalGraveReaver from "../pool/colossal-grave-reaver.js";
 import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
+import _poolConjurersBauble from "../pool/conjurers-bauble.js";
 import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
@@ -315,6 +316,7 @@ import _poolGruulWarPlow from "../pool/gruul-war-plow.js";
 import _poolGuardChange from "../pool/guard-change.js";
 import _poolGuidingVoice from "../pool/guiding-voice.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
+import _poolGyomeMasterChef from "../pool/gyome-master-chef.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
 import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
@@ -503,6 +505,7 @@ import _poolOmen from "../pool/omen.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
+import _poolOriginOfIronMan from "../pool/origin-of-iron-man.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOrzhovGuildmage from "../pool/orzhov-guildmage.js";
@@ -629,6 +632,7 @@ import _poolSlateStreetRuffian from "../pool/slate-street-ruffian.js";
 import _poolSleepParalysis from "../pool/sleep-paralysis.js";
 import _poolSmaugTheMagnificent from "../pool/smaug-the-magnificent.js";
 import _poolSmolderingEfreet from "../pool/smoldering-efreet.js";
+import _poolSmotheringAbomination from "../pool/smothering-abomination.js";
 import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSnakePit from "../pool/snake-pit.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
@@ -671,6 +675,7 @@ import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -688,6 +693,7 @@ import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
+import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
@@ -739,6 +745,7 @@ import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
+import _poolVault87ForcedEvolution from "../pool/vault-87-forced-evolution.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
@@ -806,6 +813,7 @@ import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flyi
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
+import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
 import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
 import _tokensTwinToken from "../tokens/twin-token.js";
@@ -939,6 +947,7 @@ const shard: CardShard = {
     _poolColossalGraveReaver,
     _poolConclaveNaturalists,
     _poolConduitPylons,
+    _poolConjurersBauble,
     _poolContaminatedDrink,
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
@@ -1125,6 +1134,7 @@ const shard: CardShard = {
     _poolGuardChange,
     _poolGuidingVoice,
     _poolGwennaEyesOfGaea,
+    _poolGyomeMasterChef,
     _poolHagraSharpshooter,
     _poolHammerhand,
     _poolHardenedScaleArmor,
@@ -1313,6 +1323,7 @@ const shard: CardShard = {
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOrdealOfHeliod,
+    _poolOriginOfIronMan,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
     _poolOrzhovGuildmage,
@@ -1439,6 +1450,7 @@ const shard: CardShard = {
     _poolSleepParalysis,
     _poolSmaugTheMagnificent,
     _poolSmolderingEfreet,
+    _poolSmotheringAbomination,
     _poolSmugglersSurprise,
     _poolSnakePit,
     _poolSneeringShadewriter,
@@ -1481,6 +1493,7 @@ const shard: CardShard = {
     _poolStormfrontRiders,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
+    _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,
     _poolSwarmCuller,
@@ -1498,6 +1511,7 @@ const shard: CardShard = {
     _poolTempleOfMalice,
     _poolTemporalFirestorm,
     _poolTheBalrogOfMoria,
+    _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,
@@ -1549,6 +1563,7 @@ const shard: CardShard = {
     _poolVampiricFury,
     _poolVaporSnag,
     _poolVault75MiddleSchool,
+    _poolVault87ForcedEvolution,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
     _poolVenomspoutBrackus,
@@ -1618,6 +1633,7 @@ const shard: CardShard = {
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
+    _tokensKrakenTokenKioraBestsTheSeaGod,
     _tokensMinionToken,
     _tokensMyrToken,
     _tokensTwinToken,

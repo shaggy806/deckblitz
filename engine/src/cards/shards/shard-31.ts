@@ -121,6 +121,7 @@ import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
 import _poolCephalidInkshrouder from "../pool/cephalid-inkshrouder.js";
 import _poolCertainDeath from "../pool/certain-death.js";
+import _poolChandraSparkHunter from "../pool/chandra-spark-hunter.js";
 import _poolChandrasDefeat from "../pool/chandras-defeat.js";
 import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChaos from "../pool/chaos.js";
@@ -192,6 +193,7 @@ import _poolDiabolicRevelation from "../pool/diabolic-revelation.js";
 import _poolDiamondLion from "../pool/diamond-lion.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
+import _poolDinosaurEgg from "../pool/dinosaur-egg.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
@@ -277,6 +279,7 @@ import _poolFrazzle from "../pool/frazzle.js";
 import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
+import _poolFumulusTheInfestation from "../pool/fumulus-the-infestation.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
@@ -523,6 +526,7 @@ import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolNyxbornEidolon from "../pool/nyxborn-eidolon.js";
 import _poolNyxbornTriton from "../pool/nyxborn-triton.js";
 import _poolNyxbornUnicorn from "../pool/nyxborn-unicorn.js";
+import _poolOKagachiMadeManifest from "../pool/o-kagachi-made-manifest.js";
 import _poolOathOfJace from "../pool/oath-of-jace.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOccultEpiphany from "../pool/occult-epiphany.js";
@@ -544,6 +548,7 @@ import _poolOverkill from "../pool/overkill.js";
 import _poolOvinize from "../pool/ovinize.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
+import _poolPalanisHatcher from "../pool/palanis-hatcher.js";
 import _poolPaleoloth from "../pool/paleoloth.js";
 import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
@@ -814,6 +819,7 @@ import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
+import _poolWaltzOfRage from "../pool/waltz-of-rage.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
 import _poolWarmongersChariot from "../pool/warmongers-chariot.js";
 import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
@@ -991,6 +997,7 @@ const shard: CardShard = {
     _poolCelestialEnforcer,
     _poolCephalidInkshrouder,
     _poolCertainDeath,
+    _poolChandraSparkHunter,
     _poolChandrasDefeat,
     _poolChaosTerminatorLord,
     _poolChaos,
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolDiamondLion,
     _poolDiffusionSliver,
     _poolDimirHouseGuard,
+    _poolDinosaurEgg,
     _poolDinotomaton,
     _poolDiplomaticImmunity,
     _poolDireUndercurrents,
@@ -1147,6 +1155,7 @@ const shard: CardShard = {
     _poolFreshFacedRecruit,
     _poolFrontierSeeker,
     _poolFrostveilAmbush,
+    _poolFumulusTheInfestation,
     _poolFungalInfection,
     _poolGaeasAvenger,
     _poolGallifreyCouncilChamber,
@@ -1393,6 +1402,7 @@ const shard: CardShard = {
     _poolNyxbornEidolon,
     _poolNyxbornTriton,
     _poolNyxbornUnicorn,
+    _poolOKagachiMadeManifest,
     _poolOathOfJace,
     _poolObscuraInterceptor,
     _poolOccultEpiphany,
@@ -1414,6 +1424,7 @@ const shard: CardShard = {
     _poolOvinize,
     _poolPacifism,
     _poolPaladinsShield,
+    _poolPalanisHatcher,
     _poolPaleoloth,
     _poolPantherPounce,
     _poolParadoxicalOutcome,
@@ -1684,6 +1695,7 @@ const shard: CardShard = {
     _poolWalkingAtlas,
     _poolWallOfMist,
     _poolWallOfWood,
+    _poolWaltzOfRage,
     _poolWarmakerGunship,
     _poolWarmongersChariot,
     _poolWaspOfTheBitterEnd,

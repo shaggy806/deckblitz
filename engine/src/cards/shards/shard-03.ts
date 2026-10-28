@@ -40,6 +40,7 @@ import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvalancheRiders from "../pool/avalanche-riders.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolAxiomEngraver from "../pool/axiom-engraver.js";
+import _poolAzusasManyJourneys from "../pool/azusas-many-journeys.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
 import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
@@ -94,6 +95,7 @@ import _poolChromanticore from "../pool/chromanticore.js";
 import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
+import _poolClashOfTheEikons from "../pool/clash-of-the-eikons.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCloudthresher from "../pool/cloudthresher.js";
 import _poolCommandTower from "../pool/command-tower.js";
@@ -452,6 +454,7 @@ import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
 import _poolPredationSteward from "../pool/predation-steward.js";
+import _poolPressTheEnemy from "../pool/press-the-enemy.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
@@ -530,6 +533,7 @@ import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSerumSovereign from "../pool/serum-sovereign.js";
+import _poolServoSchematic from "../pool/servo-schematic.js";
 import _poolSetessanStarbreaker from "../pool/setessan-starbreaker.js";
 import _poolSettleTheScore from "../pool/settle-the-score.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
@@ -619,6 +623,7 @@ import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
 import _poolSuspend from "../pool/suspend.js";
+import _poolSuspendedSentence from "../pool/suspended-sentence.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
@@ -719,6 +724,7 @@ import _poolWorldspineWurm from "../pool/worldspine-wurm.js";
 import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
 import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
+import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
@@ -783,6 +789,7 @@ const shard: CardShard = {
     _poolAvalancheRiders,
     _poolAvatarKyoshiEarthbender,
     _poolAxiomEngraver,
+    _poolAzusasManyJourneys,
     _poolBakeIntoAPie,
     _poolBaronStruckerHydraOverlord,
     _poolBattlefrontKrushok,
@@ -837,6 +844,7 @@ const shard: CardShard = {
     _poolChronostutter,
     _poolChubToad,
     _poolCinderBarrens,
+    _poolClashOfTheEikons,
     _poolCleverConcealment,
     _poolCloudthresher,
     _poolCommandTower,
@@ -1195,6 +1203,7 @@ const shard: CardShard = {
     _poolPopularEgotist,
     _poolPoxwalkers,
     _poolPredationSteward,
+    _poolPressTheEnemy,
     _poolPrismariTheInspiration,
     _poolProfaneMemento,
     _poolProsshSkyraiderOfKher,
@@ -1273,6 +1282,7 @@ const shard: CardShard = {
     _poolSeraphicSteed,
     _poolSerrasEmbrace,
     _poolSerumSovereign,
+    _poolServoSchematic,
     _poolSetessanStarbreaker,
     _poolSettleTheScore,
     _poolSewerdreg,
@@ -1362,6 +1372,7 @@ const shard: CardShard = {
     _poolSurgingDementia,
     _poolSurveillanceRoom,
     _poolSuspend,
+    _poolSuspendedSentence,
     _poolSwellOfCourage,
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,
@@ -1462,6 +1473,7 @@ const shard: CardShard = {
     _poolWornPowerstone,
     _poolWraithViciousVigilante,
     _poolWreckageWickerfolk,
+    _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,
     _poolYoungWeiRecruits,
     _poolZhalfirinLancer,

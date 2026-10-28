@@ -125,6 +125,7 @@ import _poolColfenorTheLastYew from "../pool/colfenor-the-last-yew.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
 import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
+import _poolCombatCalligrapher from "../pool/combat-calligrapher.js";
 import _poolCommanderEesha from "../pool/commander-eesha.js";
 import _poolCommandoRaid from "../pool/commando-raid.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
@@ -144,6 +145,7 @@ import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCrumblingColossus from "../pool/crumbling-colossus.js";
 import _poolCrushTheWeak from "../pool/crush-the-weak.js";
+import _poolCryptolithFragment from "../pool/cryptolith-fragment.js";
 import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
@@ -222,6 +224,7 @@ import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
+import _poolExtractionSpecialist from "../pool/extraction-specialist.js";
 import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
@@ -270,6 +273,7 @@ import _poolGempalmSorcerer from "../pool/gempalm-sorcerer.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
 import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
+import _poolGiantAmbushBeetle from "../pool/giant-ambush-beetle.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
 import _poolGideonsResolve from "../pool/gideons-resolve.js";
@@ -297,6 +301,7 @@ import _poolGretchenTitchwillow from "../pool/gretchen-titchwillow.js";
 import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
+import _poolGrislySpectacle from "../pool/grisly-spectacle.js";
 import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
 import _poolGroffskithur from "../pool/groffskithur.js";
 import _poolGrotagSiegeRunner from "../pool/grotag-siege-runner.js";
@@ -952,6 +957,7 @@ const shard: CardShard = {
     _poolCollateralDamage,
     _poolColonelAutumn,
     _poolColossalCollision,
+    _poolCombatCalligrapher,
     _poolCommanderEesha,
     _poolCommandoRaid,
     _poolComposerOfSpring,
@@ -971,6 +977,7 @@ const shard: CardShard = {
     _poolCrosissAttendant,
     _poolCrumblingColossus,
     _poolCrushTheWeak,
+    _poolCryptolithFragment,
     _poolCrystalGolem,
     _poolCurioVendor,
     _poolCursedFlesh,
@@ -1049,6 +1056,7 @@ const shard: CardShard = {
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
     _poolExplosiveApparatus,
+    _poolExtractionSpecialist,
     _poolFableOfWolfAndOwl,
     _poolFaebloomTrick,
     _poolFaerieVandal,
@@ -1097,6 +1105,7 @@ const shard: CardShard = {
     _poolGenesisHydra,
     _poolGerrardsVerdict,
     _poolGhostLitWarder,
+    _poolGiantAmbushBeetle,
     _poolGiantGrowth,
     _poolGideonsBattleCry,
     _poolGideonsResolve,
@@ -1124,6 +1133,7 @@ const shard: CardShard = {
     _poolGreyKnightParagon,
     _poolGrimBounty,
     _poolGrimReapersSprint,
+    _poolGrislySpectacle,
     _poolGrizzlyGhoul,
     _poolGroffskithur,
     _poolGrotagSiegeRunner,
