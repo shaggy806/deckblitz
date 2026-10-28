@@ -347,7 +347,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   client now asks X after the modes). Building it found a modal trigger's group resolving with only
   its last member. 38 authored (10 by the lead, 28 by two agents), 18 still blocked, four on new
   narrow keys. `decision:mixed-zone-targets` (4) and `decision:twice-x-target-count` (1) stay open:
-  code of their own. Next: NEXT_FAMILY.
+  code of their own. Next: `decision:choose-card-name` (47), then banding (46).
 
 ## Rough size
 

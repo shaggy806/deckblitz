@@ -68,9 +68,11 @@ section keeps only what to do next.
   order, a family per session, in series** (the `build-family` skill, from a fresh session each;
   `cards:needs -- --greedy --groups` scores the 617 generalisation groups as build units). Families
   built: grant-protection (B244, 2026-10-28: the `grant-protection` effect and chosen-colour Aura
-  protection; 62 of its 72 cards authored, 10 still blocked on narrow keys). Next:
-  `decision:variable-target-count` (four keys, 48 cards; Prismatic Boon waits on it too), then
-  `decision:choose-card-name` (46).
+  protection; 62 of its 72 cards authored, 10 still blocked on narrow keys), variable-target-count
+  (B245, 2026-10-28: an amount as an ability's group bound, total mana value caps, groups in a modal
+  mode; 38 of its 56 cards authored, 18 still blocked on narrow keys). Next:
+  `decision:choose-card-name` (47 cards; a new player decision, so a client change), then
+  `keyword:banding` (46, a session of its own).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
