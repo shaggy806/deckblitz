@@ -34,6 +34,7 @@ describe("becomes the creature type of your choice", () => {
     const crafter = spawn(game, "Imagecrafter", A);
     game.state.objects[crafter].summoningSick = false;
     const bears = spawn(game, "Grizzly Bears", B);
+    for (let i = 0; i < 3; i += 1) spawn(game, "Wall of Glare", A);
     activate(game, crafter, 0, { targets: [ref(bears)], settle: false });
     game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type");
     const awaiting = game.state.awaiting;
@@ -41,6 +42,10 @@ describe("becomes the creature type of your choice", () => {
     expect(awaiting?.kind === "choose-creature-type" && awaiting.options.includes("Wall")).toBe(false);
     expect(awaiting?.kind === "choose-creature-type" && awaiting.options.length).toBe(CREATURE_TYPES.length - 1);
     expect(game.canDispatch({ type: "choose-creature-type", player: A, creatureType: "Wall" })).toMatch(/not one of/);
+    // A board of Walls would suggest Wall first: never one it leaves out (a
+    // bot answers with a suggestion — the fuzzer's seed 27).
+    const offer = game.legalActions(A).find((a) => a.kind === "choose-creature-type");
+    expect(offer?.kind === "choose-creature-type" && offer.suggested.includes("Wall")).toBe(false);
     answerType(game, "Elf");
     expect(subtypes(game, bears)).toEqual(["Elf"]);
   });

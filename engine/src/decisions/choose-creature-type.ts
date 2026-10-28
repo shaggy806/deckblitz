@@ -82,9 +82,10 @@ export const chooseCreatureType = defineDecision({
       catalog: awaiting.catalog,
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
-      // already its own menu.
+      // already its own menu. Never one it leaves out ("other than Wall" —
+      // Imagecrafter): a bot answers with a suggestion.
       suggested: awaiting.catalog
-        ? suggestedCreatureTypes(ctx.state, ctx.registry, player)
+        ? suggestedCreatureTypes(ctx.state, ctx.registry, player).filter((t) => awaiting.options.includes(t))
         : [],
     },
   ],
