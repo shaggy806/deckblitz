@@ -241,6 +241,7 @@ function faceSource(face, ctx) {
     alsoSubtypes: parsed.alsoSubtypes,
     additionalCost: parsed.additionalCost,
     chooseCreatureTypeOnEnter: parsed.chooseCreatureTypeOnEnter,
+    chooseCardNameOnEnter: parsed.chooseCardNameOnEnter,
     text: face.oracle_text ?? "",
     targets: parsed.targets?.length ? parsed.targets : undefined,
     effect: parsed.effect ?? undefined,

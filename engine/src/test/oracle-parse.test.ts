@@ -2161,6 +2161,41 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(saga.readAhead).toBe(true);
   });
 
+  it("Pithing Needle's and Meddling Mage's chosen card name (decision:choose-card-name)", () => {
+    const needle = face(
+      "As this artifact enters, choose a card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.",
+      "Artifact",
+    );
+    expect(needle.chooseCardNameOnEnter).toEqual({ aim: "opponent-permanents" });
+    expect(needle.static).toEqual([
+      {
+        affects: { scope: "self" },
+        prohibits: { who: "each-player", abilitiesOf: { chosenName: true }, anyZone: true, exceptManaAbilities: true },
+        text: "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.",
+      },
+    ]);
+    const mage = face(
+      "As this creature enters, choose a nonland card name.\nSpells with the chosen name can't be cast.",
+      "Creature — Human Wizard",
+    );
+    expect(mage.chooseCardNameOnEnter).toEqual({ filter: { notTypes: ["land"] } });
+    expect(mage.static).toEqual([
+      { affects: { scope: "self" }, prohibits: { who: "each-player", spells: { chosenName: true } }, text: "Spells with the chosen name can't be cast." },
+    ]);
+    const council = face(
+      "As this creature enters, choose a noncreature, nonland card name.\nYour opponents can't cast spells with the chosen name.\nSpells with the chosen name you cast cost {2} less to cast.",
+      "Creature — Human Advisor",
+    );
+    expect(council.chooseCardNameOnEnter).toEqual({ filter: { notTypes: ["creature", "land"] } });
+    expect(council.static[0]).toEqual({
+      affects: { scope: "self" },
+      prohibits: { who: "opponents", spells: { chosenName: true } },
+      text: "Your opponents can't cast spells with the chosen name.",
+    });
+    // Only with the choice on the card.
+    expect(face("Spells with the chosen name can't be cast.").complete).toBe(false);
+  });
+
   it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
     const titan = face(
       "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",

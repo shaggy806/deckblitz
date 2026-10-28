@@ -2725,6 +2725,58 @@ export function parseFace(face, ctx = {}) {
       out.chooseCreatureTypeOnEnter = true;
       continue;
     }
+    // "As ~ enters, choose a nonland card name." (rule 201.4, asked as it
+    // enters — 614.12), and the statics that read the name.
+    if ((m = /^As ~ enters, choose (?:a|an|any) (.*?)card name\.$/.exec(line)) && cardNameFilterOf(m[1]) !== null) {
+      const filter = cardNameFilterOf(m[1]);
+      out.chooseCardNameOnEnter = Object.keys(filter).length > 0 ? { filter } : {};
+      continue;
+    }
+    if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name can't be activated( unless they're mana abilities)?\.$/.exec(line))) {
+      out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
+      out.static.push({
+        affects: { scope: "self" },
+        prohibits: {
+          who: "each-player",
+          abilitiesOf: { chosenName: true },
+          anyZone: true,
+          ...(m[1] !== undefined ? { exceptManaAbilities: true } : {}),
+        },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (
+      out.chooseCardNameOnEnter !== undefined &&
+      (line === "Spells with the chosen name can't be cast." || line === "Your opponents can't cast spells with the chosen name.")
+    ) {
+      const who = line.startsWith("Your opponents") ? "opponents" : "each-player";
+      out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: { chosenName: true } }, text: printed(raw) });
+      continue;
+    }
+    if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
+      out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
+      out.static.push({
+        affects: { scope: "self" },
+        abilityCostModification: {
+          applies: { chosenName: true },
+          increaseGeneric: Number(m[1]),
+          anyZone: true,
+          ...(m[2] !== undefined ? { exceptManaAbilities: true } : {}),
+        },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (out.chooseCardNameOnEnter !== undefined && (m = /^Spells with the chosen name cost \{(\d+)\} (more|less) to cast\.$/.exec(line))) {
+      const n = Number(m[1]);
+      out.static.push({
+        affects: { scope: "self" },
+        costModification: { applies: { chosenName: true }, ...(m[2] === "more" ? { increaseGeneric: n } : { reduceGeneric: n }) },
+        text: printed(raw),
+      });
+      continue;
+    }
     if (out.chooseCreatureTypeOnEnter === true && line === "~ is the chosen type in addition to its other types.") {
       out.static.push({ affects: { scope: "self" }, addsChosenCreatureType: true, text: printed(raw) });
       continue;
@@ -3356,6 +3408,23 @@ function protectionFrom(words) {
 /** "your devotion to [white]( and [black])" — one colour or two (rule 700.5). */
 const DEVOTION = "(white|blue|black|red|green)(?: and (white|blue|black|red|green))?";
 const devotionColors = (a, b) => [a, b].filter(Boolean).map((w) => COLOR_WORDS[w]);
+
+/** "a nonland card name" → its `CardNameFilter` (rule 201.4a), or null for
+ * words it doesn't read: the adjectives before "card name", comma-joined. */
+function cardNameFilterOf(words) {
+  const w = words.trim().replace(/,$/, "");
+  if (w === "") return {};
+  if (w === "nonbasic land") return { types: ["land"], nonbasic: true };
+  const types = [];
+  const notTypes = [];
+  for (const part of w.split(/,\s*/)) {
+    const t = part.trim();
+    if (/^non(artifact|creature|land|enchantment|instant|sorcery|planeswalker)$/.test(t)) notTypes.push(t.slice(3));
+    else if (/^(artifact|creature|land|enchantment|instant|sorcery|planeswalker)$/.test(t)) types.push(t);
+    else return null;
+  }
+  return { ...(types.length > 0 ? { types } : {}), ...(notTypes.length > 0 ? { notTypes } : {}) };
+}
 
 function parseStatic(line, text) {
   let m;
