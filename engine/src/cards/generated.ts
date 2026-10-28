@@ -14832,6 +14832,7 @@ import _poolNevaStalkedByNightmares from "./pool/neva-stalked-by-nightmares.js";
 import _poolNeverReturn from "./pool/never-return.js";
 import _poolNever from "./pool/never.js";
 import _poolNevermaker from "./pool/nevermaker.js";
+import _poolNevermore from "./pool/nevermore.js";
 import _poolNeverwinterDryad from "./pool/neverwinter-dryad.js";
 import _poolNevinyrralUrborgTyrant from "./pool/nevinyrral-urborg-tyrant.js";
 import _poolNevinyrralsDisk from "./pool/nevinyrrals-disk.js";
@@ -24534,6 +24535,7 @@ import _poolVoidforgedTitan from "./pool/voidforged-titan.js";
 import _poolVoidmageApprentice from "./pool/voidmage-apprentice.js";
 import _poolVoidmageHusher from "./pool/voidmage-husher.js";
 import _poolVoidmageProdigy from "./pool/voidmage-prodigy.js";
+import _poolVoidstoneGargoyle from "./pool/voidstone-gargoyle.js";
 import _poolVoidwalk from "./pool/voidwalk.js";
 import _poolVoidwielder from "./pool/voidwielder.js";
 import _poolVojaJawsOfTheConclave from "./pool/voja-jaws-of-the-conclave.js";
@@ -41371,6 +41373,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNeverReturn,
   _poolNever,
   _poolNevermaker,
+  _poolNevermore,
   _poolNeverwinterDryad,
   _poolNevinyrralUrborgTyrant,
   _poolNevinyrralsDisk,
@@ -51073,6 +51076,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVoidmageApprentice,
   _poolVoidmageHusher,
   _poolVoidmageProdigy,
+  _poolVoidstoneGargoyle,
   _poolVoidwalk,
   _poolVoidwielder,
   _poolVojaJawsOfTheConclave,
@@ -67923,6 +67927,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/never-return": _poolNeverReturn,
   "pool/never": _poolNever,
   "pool/nevermaker": _poolNevermaker,
+  "pool/nevermore": _poolNevermore,
   "pool/neverwinter-dryad": _poolNeverwinterDryad,
   "pool/nevinyrral-urborg-tyrant": _poolNevinyrralUrborgTyrant,
   "pool/nevinyrrals-disk": _poolNevinyrralsDisk,
@@ -77625,6 +77630,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/voidmage-apprentice": _poolVoidmageApprentice,
   "pool/voidmage-husher": _poolVoidmageHusher,
   "pool/voidmage-prodigy": _poolVoidmageProdigy,
+  "pool/voidstone-gargoyle": _poolVoidstoneGargoyle,
   "pool/voidwalk": _poolVoidwalk,
   "pool/voidwielder": _poolVoidwielder,
   "pool/voja-jaws-of-the-conclave": _poolVojaJawsOfTheConclave,

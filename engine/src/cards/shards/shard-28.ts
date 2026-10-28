@@ -459,6 +459,7 @@ import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
 import _poolNecrobite from "../pool/necrobite.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNetherbornAltar from "../pool/netherborn-altar.js";
+import _poolNevermore from "../pool/nevermore.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNightmareUnmaking from "../pool/nightmare-unmaking.js";
@@ -784,6 +785,7 @@ import _poolVoidBeckoner from "../pool/void-beckoner.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVoidmageHusher from "../pool/voidmage-husher.js";
+import _poolVoidstoneGargoyle from "../pool/voidstone-gargoyle.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
@@ -1313,6 +1315,7 @@ const shard: CardShard = {
     _poolNecrobite,
     _poolNestingBot,
     _poolNetherbornAltar,
+    _poolNevermore,
     _poolNezumiProwler,
     _poolNightguardPatrol,
     _poolNightmareUnmaking,
@@ -1638,6 +1641,7 @@ const shard: CardShard = {
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,
     _poolVoidmageHusher,
+    _poolVoidstoneGargoyle,
     _poolVolcanicUpheaval,
     _poolVraskasScorn,
     _poolWakerOfWaves,
