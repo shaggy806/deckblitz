@@ -495,6 +495,7 @@ import _poolPatronOfTheValiant from "../pool/patron-of-the-valiant.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
+import _poolPetrifiedHamlet from "../pool/petrified-hamlet.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
 import _poolPhyrexianSoulgorger from "../pool/phyrexian-soulgorger.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
@@ -1333,6 +1334,7 @@ const shard: CardShard = {
     _poolPerchProtection,
     _poolPerimeterPatrol,
     _poolPersonify,
+    _poolPetrifiedHamlet,
     _poolPhotonLivingLight,
     _poolPhyrexianSoulgorger,
     _poolPiaAndKiranNalaar,

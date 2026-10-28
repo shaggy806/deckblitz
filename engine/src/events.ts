@@ -990,6 +990,14 @@ export type GameEvent =
       readonly creatureType: string;
     })
   | (Base & {
+      /** A card name was chosen (rule 201.4) for `object` — as it entered
+       * (Pithing Needle) or as its spell or ability resolved (Memoricide). */
+      readonly type: "card-name-chosen";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly name: string;
+    })
+  | (Base & {
       readonly type: "permanent-entered-battlefield";
       readonly object: ObjectId;
       /** How many real permanents this one event stands for — set > 1 only

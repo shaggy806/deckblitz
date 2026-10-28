@@ -26,6 +26,7 @@ import type {
   ZoneSecondPick,
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
+import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameEvent, Vote, WhileSource } from "./events.js";
@@ -689,6 +690,16 @@ export interface GameObject {
    * interprets.
    */
   chosenOnEnter?: string | null;
+  /**
+   * The card names chosen for this permanent (rule 201.4), oldest first: one
+   * chosen as it entered (Pithing Needle, Meddling Mage —
+   * `CardDefinition.chooseCardNameOnEnter`), or each one an ability of it
+   * chose and kept (`choose-card-name { remember }` — Petrified Hamlet's
+   * enters trigger, Day of the Moon's "a name chosen for this enchantment").
+   * What a `chosenName` filter reads off its source. Cleared on any zone
+   * change: a fresh entry chooses again (rule 400.7).
+   */
+  chosenNames?: string[];
   /** A battle's protector (rule 310.9): the player who defends it — chosen
    * as it entered (310.9a; for a Siege, one of its controller's opponents,
    * 310.12a). It's the defending player of any creature attacking it, and
@@ -724,6 +735,14 @@ export interface GameObject {
       readonly untilEndOfTurn?: true;
     };
     readonly chosen?: string;
+    /** The card name chosen as it was about to enter
+     * (`CardDefinition.chooseCardNameOnEnter`), or `null` when none could be
+     * (Alhammarret, High Arbiter with no nonland card revealed). */
+    readonly chosenName?: string | null;
+    /** The opponent whose hand its controller looks at before naming a card
+     * (Sorcerous Spyglass's "look at an opponent's hand") — chosen first,
+     * among two or more. */
+    readonly lookAt?: PlayerId;
     readonly enchant?: ObjectId | null;
     /** The player an "Enchant player" Aura enters attached to — its spell's
      * target, or its controller's choice (303.4f). Answers what `enchant`
@@ -1727,6 +1746,9 @@ export interface LastKnownInfo {
    * had, for a leaves-the-battlefield trigger that looks back at it leaving
    * along with the creatures (rule 603.10a: Outpost Siege's "Dragons"). */
   readonly chosenOnEnter?: string;
+  /** `GameObject.chosenNames` as it left — "the chosen name" for an ability
+   * of it that resolves after it has gone (rule 608.2h). */
+  readonly chosenNames?: readonly string[];
   /** The triggered abilities it had been *granted* — by another permanent's
    * static or a one-shot modifier — in the order `effectiveTriggered` lists
    * them after its printed ones; with `lostAbilities`, only those granted
@@ -2794,11 +2816,57 @@ export type AwaitingDecision =
        * that opponent answers whether to put the counters on it (the first
        * option pays). */
       readonly tribute?: "opponent" | "pay";
+      /** The opponent whose hand `source`'s controller looks at before
+       * naming a card as it enters (`CardNameOnEnter.look`) — `options` are
+       * the opponents. */
+      readonly lookAt?: true;
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
       readonly then?: EffectSpec;
       readonly targets?: ResolvedTargets;
       readonly x?: number;
+    }
+  | {
+      /**
+       * Choose a card name (rule 201.4): any name the registry has that
+       * `filter` allows (`nameableCardNames`), or, with `options`, one of
+       * those alone (Alhammarret, High Arbiter's "the name of a nonland card
+       * revealed this way"). The catalogue is worked out for the chooser in
+       * `legalActions`, never stored here, where every seat would receive it.
+       *
+       * Either as `source` is about to enter (`onEnter` — Pithing Needle: the
+       * answer waits on it as `enterChoice.chosenName`), or as a spell or
+       * ability resolves (`then`, with `CHOSEN_CARD_NAME` substituted in,
+       * against `targets` and `x`; `remember` also keeps the name on
+       * `source` — Petrified Hamlet's enters trigger).
+       */
+      readonly kind: "choose-card-name";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly filter?: CardNameFilter;
+      readonly options?: readonly string[];
+      readonly aim: CardNameAim;
+      /** The cards the chooser looked at for this choice (Sorcerous
+       * Spyglass's "look at an opponent's hand"): visible to them alone,
+       * like a `choose-from-zone`'s, and suggested first. */
+      readonly looked?: readonly ObjectId[];
+      readonly onEnter?: true;
+      readonly then?: EffectSpec;
+      /** Keep the name on `source` too, while it's still the permanent of
+       * this stint (`GameObject.chosenNames`). */
+      readonly remember?: { readonly stint: number };
+      /** The resolution `then` carries on: its controller (who may not be
+       * the chooser — Vexing Arcanix's target player names the card), targets,
+       * X and the rest of what it read. */
+      readonly resume?: {
+        readonly controller: PlayerId;
+        readonly targets: ResolvedTargets;
+        readonly x: number;
+        readonly triggerValue: number;
+        readonly triggerObject?: ObjectId;
+        readonly targetZones: readonly (ZoneType | null)[];
+        readonly refs: LastKnownRefs;
+      };
     }
   | {
       /** A scry / surveil (rule 701.18 / 701.43): `player` has looked at the
@@ -3777,7 +3845,21 @@ export interface PlayerEffect {
   readonly expires: { readonly kind: "end-of-turn" } | { readonly kind: "your-next-turn" };
   /** Matching spells `owner` casts cost this much generic mana less — the
    * amount read as the effect was created (rule 611.2b). */
-  readonly reduceSpells?: { readonly applies: CardFilter; readonly reduceGeneric: number };
+  readonly reduceSpells?: {
+    readonly applies: CardFilter;
+    readonly reduceGeneric: number;
+    /** Every player's matching spells, not only `owner`'s. */
+    readonly allCasters?: true;
+  };
+  /** `players` can't cast spells matching `filter` (from `owner`'s side),
+   * and with `lands` can't play lands matching it either (Academic
+   * Probation, Conjurer's Ban). See `whyProhibitedFromCasting`. */
+  readonly cantCast?: {
+    readonly players: readonly PlayerId[];
+    readonly filter: CardFilter;
+    readonly label: string;
+    readonly lands?: true;
+  };
   /** `owner` may cast matching spells from their hand without paying their
    * mana costs. */
   readonly castFromHandFree?: { readonly filter?: CardFilter };
@@ -4867,6 +4949,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.controlEndsAtCleanup,
     o.chosenOnEnter ?? null,
     o.chosenCreatureType ?? null,
+    o.chosenNames ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

@@ -227,6 +227,8 @@ export const makeFormatter = (game) => {
           : `${name(e.object)} copies nothing`;
       case "creature-type-chosen":
         return `${name(e.object)} chooses ${e.creatureType}`;
+      case "card-name-chosen":
+        return `${e.player} names ${e.name} for ${name(e.object)}`;
       case "permanent-entered-battlefield":
         return `${name(e.object)} enters the battlefield`;
       case "permanent-left-battlefield":

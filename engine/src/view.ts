@@ -328,7 +328,8 @@ export interface VisibleObject {
   readonly holding?: readonly ObjectId[];
   /** On a permanent: what was chosen as it entered (rule 614.12) — a word
    * (Frostcliff Siege's "Jeskai" or "Temur"), a colour letter (Heraldic
-   * Banner's `"U"`), a number, or a creature type (Urza's Incubator). Public:
+   * Banner's `"U"`), a number, a creature type (Urza's Incubator), or the
+   * card names chosen for it (Pithing Needle — comma-separated). Public:
    * the choice is announced. Absent when it had nothing to choose. */
   readonly chosen?: string;
 }
@@ -456,7 +457,7 @@ function attackChoicePending(state: GameState, id: ObjectId): boolean {
 
 function chosenOf(object: GameObject): string | null {
   if (object.zone !== "battlefield" && object.zone !== "phased-out") return null;
-  return object.chosenOnEnter ?? object.chosenCreatureType ?? null;
+  return object.chosenOnEnter ?? object.chosenCreatureType ?? (object.chosenNames?.join(", ") || null);
 }
 
 function visible(
@@ -867,6 +868,10 @@ function viewForUncached(
   if (state.awaiting?.kind === "cast-now" && state.awaiting.player === viewer) {
     visibleIds.push(...(state.awaiting.looked ?? []));
   }
+  // And a hand looked at before naming a card (Sorcerous Spyglass).
+  if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
+    visibleIds.push(...(state.awaiting.looked ?? []));
+  }
   // A real reveal (rule 701.16) is to *everyone*, which is the whole point —
   // this is the only path that puts a card another player owns, and that is
   // sitting in a hidden zone, into your view. Turn-scoped, so it stops being
@@ -993,7 +998,9 @@ function viewForUncached(
     // Which hand cards may pay a "discard a creature card" cost says what
     // kind of card each is: only the player asked sees it.
     awaiting:
-      state.awaiting?.kind === "discard" && state.awaiting.eligible !== undefined && state.awaiting.player !== viewer
+      state.awaiting?.kind === "choose-card-name" && state.awaiting.looked !== undefined && state.awaiting.player !== viewer
+        ? (({ looked: _looked, ...rest }) => rest)(state.awaiting)
+        : state.awaiting?.kind === "discard" && state.awaiting.eligible !== undefined && state.awaiting.player !== viewer
         ? (({ eligible: _hidden, ...rest }) => rest)(state.awaiting)
         : // What a `cast-now` offers can be cards in its player's hand or
           // library: to anyone else, only that they're deciding.

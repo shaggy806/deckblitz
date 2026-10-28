@@ -35,6 +35,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { hasSubtype } from "./subtypes.js";
+import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
 import { thisWayEntries } from "./this-way.js";
 
@@ -443,6 +444,22 @@ export interface CardFilter {
    * nothing chosen for it yet, nothing matches.
    */
   readonly ofChosenType?: true;
+  /**
+   * Has this name (rule 201.2) — one of its names, so either half of a split
+   * card (709.4a). What a chosen name becomes in a resolving effect: `{
+   * hasName: CHOSEN_CARD_NAME }` in a `choose-card-name`'s `then` is "a card
+   * with the chosen name" (Memoricide). A face-down object has no name and
+   * never matches.
+   */
+  readonly hasName?: string;
+  /**
+   * Has a name chosen for the permanent applying the filter (its
+   * `chosenNames`, via `FilterContext.source`) — Pithing Needle's "sources
+   * with the chosen name", Day of the Moon's "a name chosen for this
+   * enchantment". A source that has left reads the names it had (rule
+   * 608.2h). With no source, or nothing chosen yet, nothing matches.
+   */
+  readonly chosenName?: true;
   /** Controlled by the filtering player (`"you"`), anyone else
    * (`"opponent"`), or whoever's turn it is (`"active-player"` — "creatures
    * **the active player** controls", "each creature attacking player
@@ -1050,6 +1067,18 @@ export function matchesFilter(
     if (filter.sameNameAs.name === null || nameless || named !== filter.sameNameAs.name) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
+  if (filter.hasName !== undefined || filter.chosenName === true) {
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    if (filter.hasName !== undefined && !names.includes(filter.hasName)) return false;
+    if (filter.chosenName === true) {
+      const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+      const chosen =
+        from?.zone === "battlefield" || from?.zone === "phased-out"
+          ? (from.chosenNames ?? [])
+          : (from?.chosenNames ?? from?.lastKnown?.chosenNames ?? []);
+      if (!names.some((n) => chosen.includes(n))) return false;
+    }
+  }
   if (filter.sharesColorWithTarget !== undefined) return false;
   if (filter.sharesColorWith !== undefined && id !== filter.sharesColorWith.object) {
     const colors: ReadonlySet<Color> =

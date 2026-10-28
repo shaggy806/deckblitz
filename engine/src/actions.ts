@@ -632,6 +632,13 @@ export type Action =
       readonly creatureType: string;
     }
   | {
+      /** Answers a pending `choose-card-name` decision (rule 201.4): `name`
+       * must be one the offer allows. */
+      readonly type: "choose-card-name";
+      readonly player: PlayerId;
+      readonly name: string;
+    }
+  | {
       /** Answers a pending `choose-modes` decision (a modal spell/ability, or
        * a "you may" clause): the indices into the mode list to apply, distinct,
        * between the decision's `minModes` and `maxModes`. An empty array
@@ -1557,6 +1564,23 @@ export type LegalAction =
        * tell opponents what's in their deck.
        */
       readonly suggested: readonly string[];
+    }
+  | {
+      /** Choose a card name (rule 201.4) — see `AwaitingDecision`. */
+      readonly kind: "choose-card-name";
+      readonly source: ObjectId;
+      /** Every name that may be chosen, alphabetical: the whole catalogue
+       * `filter` allows (a search picker), or a few revealed cards' names. */
+      readonly options: readonly string[];
+      /** "A nonland card name" — what may be named, in words. */
+      readonly label: string;
+      /** The names to offer first, best first (`suggestedCardNames`): what
+       * the choice is aimed at, the cards just looked at leading. Computed
+       * only here, for the chooser — it reads their hand and library. */
+      readonly suggested: readonly string[];
+      /** The cards looked at for this choice (Sorcerous Spyglass), which the
+       * chooser can see in their view. */
+      readonly looked?: readonly ObjectId[];
     }
   | {
       readonly kind: "choose-modes";

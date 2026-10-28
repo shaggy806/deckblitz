@@ -144,6 +144,7 @@ import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConclavePhalanx from "../pool/conclave-phalanx.js";
 import _poolConductiveMachete from "../pool/conductive-machete.js";
+import _poolConjurersBan from "../pool/conjurers-ban.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
@@ -991,6 +992,7 @@ const shard: CardShard = {
     _poolCommonCrook,
     _poolConclavePhalanx,
     _poolConductiveMachete,
+    _poolConjurersBan,
     _poolConsecratedSphinx,
     _poolConversionApparatus,
     _poolCosmicCube,

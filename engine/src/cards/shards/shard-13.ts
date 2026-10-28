@@ -479,6 +479,7 @@ import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
 import _poolPhyrexianDriver from "../pool/phyrexian-driver.js";
 import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
+import _poolPhyrexianRevoker from "../pool/phyrexian-revoker.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
@@ -1293,6 +1294,7 @@ const shard: CardShard = {
     _poolPhyrexianDriver,
     _poolPhyrexianHydra,
     _poolPhyrexianIronworks,
+    _poolPhyrexianRevoker,
     _poolPhyrexianVivisector,
     _poolPickYourPoison,
     _poolPillage,

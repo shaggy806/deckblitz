@@ -440,6 +440,7 @@ import _poolMaskOfLawAndGrace from "../pool/mask-of-law-and-grace.js";
 import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMayaelTheAnima from "../pool/mayael-the-anima.js";
+import _poolMeddlingMage from "../pool/meddling-mage.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMeltdown from "../pool/meltdown.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
@@ -639,6 +640,7 @@ import _poolSkyEelSchool from "../pool/sky-eel-school.js";
 import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
 import _poolSkyclaveSquid from "../pool/skyclave-squid.js";
 import _poolSkyhunterSkirmisher from "../pool/skyhunter-skirmisher.js";
+import _poolSkyseersChariot from "../pool/skyseers-chariot.js";
 import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
@@ -1274,6 +1276,7 @@ const shard: CardShard = {
     _poolMasterOfWinds,
     _poolMasterPakku,
     _poolMayaelTheAnima,
+    _poolMeddlingMage,
     _poolMeditationPuzzle,
     _poolMeltdown,
     _poolMemorialVault,
@@ -1473,6 +1476,7 @@ const shard: CardShard = {
     _poolSkyclaveCleric,
     _poolSkyclaveSquid,
     _poolSkyhunterSkirmisher,
+    _poolSkyseersChariot,
     _poolSlingGangLieutenant,
     _poolSlipOnTheRing,
     _poolSlipOutTheBack,

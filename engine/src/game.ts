@@ -77,6 +77,7 @@ import { SPEED_CARD } from "./cards/speed.js";
 import type {
   AdditionalCostOption,
   CardDefinition,
+  CardNameOnEnter,
   CardType,
   CastModalSpec,
   CombatRestriction,
@@ -167,6 +168,8 @@ import { sacrifice } from "./decisions/sacrifice.js";
 import { chooseFromZone } from "./decisions/choose-from-zone.js";
 import { chooseModes } from "./decisions/choose-modes.js";
 import { chooseCreatureType } from "./decisions/choose-creature-type.js";
+import { chooseCardName } from "./decisions/choose-card-name.js";
+import { isNameableAs, namesOf } from "./card-names.js";
 import { proliferate } from "./decisions/proliferate.js";
 import { splitMana } from "./decisions/split-mana.js";
 import { timeTravel } from "./decisions/time-travel.js";
@@ -181,6 +184,7 @@ import {
   opponentsVoting,
   protectionLabel,
   substituteChosenCreatureType,
+  substituteChosenCardName,
   wardCostText,
 } from "./effects.js";
 import type {
@@ -1393,6 +1397,7 @@ export class Game {
       applyTimeTravel: (player, add, remove) => this.applyTimeTravel(player, add, remove),
       applyVenture: (player, choice) => this.applyVenture(player, choice),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
+      applyCardNameChoice: (player, name) => this.applyCardNameChoice(player, name),
       applyModesChoice: (player, modes, x, forAll) =>
         this.applyModesChoice(player, modes, x, forAll),
       applyChooseFromZone: (player, chosen) => this.applyChooseFromZone(player, chosen),
@@ -5270,6 +5275,8 @@ export class Game {
         if (battle?.zone === "battlefield") battle.protector = creatureType as PlayerId;
       } else if (awaiting.tribute === "opponent") {
         source.enterChoice = { ...source.enterChoice, tributeFrom: creatureType as PlayerId };
+      } else if (awaiting.lookAt === true) {
+        source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
       } else if (awaiting.tribute === "pay") {
         // The first option pays (`tributeOptions`).
         source.enterChoice = { ...source.enterChoice, tributePaid: creatureType === awaiting.options[0] };
@@ -5282,6 +5289,66 @@ export class Game {
               : awaiting.unleash === true
                 ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
                 : { ...source.enterChoice, chosen: creatureType };
+      }
+    }
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /**
+   * Raise a `choose-card-name` decision (rule 201.4) — as a permanent is
+   * about to enter (`onEnter`) or as a spell or ability resolves (`then`).
+   * See the `"choose-card-name"` effect and
+   * `CardDefinition.chooseCardNameOnEnter`.
+   */
+  private beginCardNameChoice(choice: Omit<Extract<AwaitingDecision, { kind: "choose-card-name" }>, "kind">): void {
+    this.state.awaiting = { kind: "choose-card-name", ...choice };
+  }
+
+  /** Answers a pending `choose-card-name` decision. */
+  private applyCardNameChoice(player: PlayerId, name: string): void {
+    const why = chooseCardName.whyCannot(this.decisionCtx, { type: "choose-card-name", player, name }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "choose-card-name") {
+      throw new Error("unreachable: whyCannot should have caught this");
+    }
+    this.emit({ type: "card-name-chosen", object: awaiting.source, player, name });
+    this.state.awaiting = null;
+    if (awaiting.onEnter === true) {
+      // A permanent about to enter, asked before it moved (`askEnterChoice`):
+      // the name waits on it, and `moveObject` records it as it enters.
+      const source = this.state.objects[awaiting.source];
+      if (source !== undefined) source.enterChoice = { ...source.enterChoice, chosenName: name };
+    } else {
+      // "Choose a card name, then …" for a resolving spell or ability: keep it
+      // on the source if asked (its stint still the one that asked — rule
+      // 400.7), then finish the resolution with the name substituted in.
+      const source = this.state.objects[awaiting.source];
+      if (
+        awaiting.remember !== undefined &&
+        source?.zone === "battlefield" &&
+        (source.zoneChangeCount ?? 0) === awaiting.remember.stint
+      ) {
+        source.chosenNames = [...(source.chosenNames ?? []), name];
+        invalidateComputedCache();
+      }
+      const resume = awaiting.resume;
+      if (awaiting.then !== undefined && resume !== undefined) {
+        applyEffectSpec(
+          substituteChosenCardName(awaiting.then, name),
+          this.makeResolutionContext(
+            awaiting.source,
+            resume.controller,
+            resume.targets,
+            resume.x,
+            resume.triggerValue,
+            resume.triggerObject,
+            1,
+            0,
+            resume.targetZones,
+            resume.refs,
+          ),
+        );
       }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -9102,7 +9169,33 @@ export class Game {
       return `${player} cannot play that card as a land`;
     }
     const def = this.faceDef(cardId, face);
-    return def.types.includes("land") ? null : `${def.name} is not a land`;
+    if (!def.types.includes("land")) return `${def.name} is not a land`;
+    return this.whyLandPlayProhibited(player, cardId, face, def);
+  }
+
+  /** "Lands with the chosen name can't be played" (rule 305.2 — Null
+   * Chamber's static), judged as the face `cardId` would be played as;
+   * `null` when nothing bars it. */
+  private whyLandPlayProhibited(player: PlayerId, cardId: ObjectId, face: number, def: CardDefinition): string | null {
+    // "…and lands with the chosen name can't be played" until a turn
+    // (Conjurer's Ban).
+    for (const effect of this.state.playerEffects ?? []) {
+      const cant = effect.cantCast;
+      if (cant?.lands !== true || !cant.players.includes(player)) continue;
+      const barred = this.withFace(cardId, face, () =>
+        matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner }),
+      );
+      if (barred) return `${player} can't play ${def.name}`;
+    }
+    for (const { source, prohibits } of this.prohibitionsOn(player)) {
+      const lands = prohibits.lands;
+      if (lands === undefined) continue;
+      const barred = this.withFace(cardId, face, () =>
+        matchesFilter(this.state, this.registry, cardId, lands, { you: source.controller, source: source.id }),
+      );
+      if (barred) return `${player} can't play ${def.name} (${printedCardName(source)})`;
+    }
+    return null;
   }
 
   private playLand(
@@ -9179,6 +9272,7 @@ export class Game {
     | { readonly kind: "devour"; readonly filter: CardFilter }
     | { readonly kind: "amplify"; readonly as: CardDefinition }
     | { readonly kind: "protector"; readonly siege: boolean }
+    | { readonly kind: "name"; readonly spec: CardNameOnEnter }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -9189,6 +9283,10 @@ export class Game {
     if (answered?.chosen === undefined) {
       if (becoming.chooseCreatureTypeOnEnter) return { kind: "choose" };
       if (becoming.chooseOnEnter !== null) return { kind: "choose", options: becoming.chooseOnEnter };
+    }
+    // "As this enters, choose a card name" (rule 201.4) — printed, or a copy's.
+    if (answered?.chosenName === undefined && becoming.chooseCardNameOnEnter !== null) {
+      return { kind: "name", spec: becoming.chooseCardNameOnEnter };
     }
     // Deadpool's "you may exchange his text box and another creature's" —
     // printed, or a copy's.
@@ -9241,6 +9339,73 @@ export class Game {
   }
 
   /**
+   * "As this enters, choose a card name" for the card `id`, about to enter
+   * under `chooser` (`CardDefinition.chooseCardNameOnEnter`): first what it
+   * looks at or has revealed, then the name. Returns whether a decision is
+   * now up; `false` once there's nothing to ask (no name could be chosen —
+   * recorded as `null`).
+   */
+  private askCardNameOnEnter(id: ObjectId, chooser: PlayerId, spec: CardNameOnEnter): boolean {
+    const object = this.state.objects[id];
+    const aim = spec.aim ?? "opponent-spells";
+    const opponents = this.state.turnOrder.filter((p) => p !== chooser && this.state.players[p]?.hasLost === false);
+    if (spec.reveal === "each-opponent-hand") {
+      // Alhammarret, High Arbiter: each opponent reveals their hand (rule
+      // 701.20a), and only a name revealed this way may be chosen.
+      const names = new Set<string>();
+      for (const p of opponents) {
+        const hand = this.state.zones.perPlayer[p].hand;
+        this.revealCards(p, hand, "hand");
+        for (const card of hand) {
+          for (const n of namesOf(this.registry, this.state.objects[card])) {
+            if (isNameableAs(this.registry, n, spec.filter)) names.add(n);
+          }
+        }
+      }
+      if (names.size === 0) {
+        object.enterChoice = { ...object.enterChoice, chosenName: null };
+        return false;
+      }
+      this.beginCardNameChoice({
+        player: chooser,
+        source: id,
+        ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+        options: [...names].sort((a, b) => a.localeCompare(b)),
+        aim,
+        onEnter: true,
+      });
+      return true;
+    }
+    let looked: readonly ObjectId[] | undefined;
+    if (spec.look === "opponent-hand") {
+      // "Look at an opponent's hand": which opponent first, among two or more.
+      if (object.enterChoice?.lookAt === undefined && opponents.length > 1) {
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: chooser,
+          source: id,
+          options: opponents,
+          catalog: false,
+          lookAt: true,
+          prompt: "Choose an opponent whose hand to look at",
+        };
+        return true;
+      }
+      const at = object.enterChoice?.lookAt ?? opponents[0];
+      if (at !== undefined) looked = [...this.state.zones.perPlayer[at].hand];
+    }
+    this.beginCardNameChoice({
+      player: chooser,
+      source: id,
+      ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+      aim,
+      ...(looked !== undefined ? { looked } : {}),
+      onEnter: true,
+    });
+    return true;
+  }
+
+  /**
    * Ask the next "as this enters" choice (rule 614.12) of the card `id`, about
    * to be put onto the battlefield under `chooser`'s control — before it moves,
    * so the replacements that apply as it enters (Giada's counters for a Clone
@@ -9260,6 +9425,10 @@ export class Game {
       if (next.kind === "choose") {
         this.beginCreatureTypeChoice(id, chooser, next.options);
         return true;
+      }
+      if (next.kind === "name") {
+        if (this.askCardNameOnEnter(id, chooser, next.spec)) return true;
+        continue;
       }
       if (next.kind === "exchange-text") {
         // What it may exchange with: another permanent already on the
@@ -9659,7 +9828,7 @@ export class Game {
         return `${printedCardName(spell)} has split second`;
       }
     }
-    if (this.abilitiesProhibited(player, this.state.objects[cardId])) {
+    if (this.abilitiesProhibited(player, this.state.objects[cardId], false)) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
     if (this.payMana(player, parseManaCost(def.cycling.cost)) === null) {
@@ -10547,13 +10716,14 @@ export class Game {
         // controller's artifact spells, not anyone's) — fixed alongside
         // needed-cards P16's Temur Battlecrier, which needs the same
         // scoping for its live count.
-        if (!matchesFilter(this.state, this.registry, cardId, applies, { you: source.controller })) {
+        if (!matchesFilter(this.state, this.registry, cardId, applies, { you: source.controller, source: source.id })) {
           continue;
         }
         // "Spells you cast" / "spells your opponents cast" (Hinata): the
         // caster, whoever the card belongs to.
         if (mod.caster === "you" && player !== source.controller) continue;
         if (mod.caster === "opponent" && player === source.controller) continue;
+        if (mod.caster === "enchanted-player" && player !== source.attachedToPlayer) continue;
         // "Spells you cast from your graveyard" (Green Goblin): where the card
         // is cast from — where it is now, or, already on the stack, where it
         // came from.
@@ -10570,7 +10740,7 @@ export class Game {
         if (
           mod.firstEachTurn === true &&
           (this.state.players[player].spellsCastThisTurnAs ?? []).some(({ id, spell }) =>
-            matchesFilter(this.state, this.registry, id, applies, { you: source.controller, snapshot: spell }),
+            matchesFilter(this.state, this.registry, id, applies, { you: source.controller, source: source.id, snapshot: spell }),
           )
         ) {
           continue;
@@ -10593,8 +10763,8 @@ export class Game {
     // A temporary player effect's reduction (Rowan): the caster's own.
     for (const effect of this.state.playerEffects ?? []) {
       const mod = effect.reduceSpells;
-      if (mod === undefined || effect.owner !== player) continue;
-      if (matchesFilter(this.state, this.registry, cardId, mod.applies, { you: player })) {
+      if (mod === undefined || (effect.owner !== player && mod.allCasters !== true)) continue;
+      if (matchesFilter(this.state, this.registry, cardId, mod.applies, { you: effect.owner })) {
         reduceGeneric += mod.reduceGeneric;
       }
     }
@@ -11381,7 +11551,9 @@ export class Game {
         : this.whyCannotAct(player);
     if (blocked !== null) return blocked;
     const def = this.faceDef(cardId, face);
-    const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
+    // Judged as the face being cast: only a split card's half exists as a
+    // spell (rule 709.3), so "spells with the chosen name" reads its name.
+    const prohibited = this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def));
     if (prohibited !== null) return prohibited;
     // A flip card is cast as its normal half only (rule 710.2): its
     // alternative half exists only on a flipped permanent.
@@ -12816,7 +12988,8 @@ export class Game {
       return "that card is no longer where it was offered";
     }
     const def = this.faceDef(cardId, face);
-    return def.types.includes("land") ? null : `${def.name} is not a land`;
+    if (!def.types.includes("land")) return `${def.name} is not a land`;
+    return this.whyLandPlayProhibited(player, cardId, face, def);
   }
 
   /** Answer a pending `cast-now` decision: cast the card as `cast` says,
@@ -14747,15 +14920,17 @@ export class Game {
     let reduceGenericLeavingOne = 0;
     const manaAbility = isManaAbility(ability);
     const onBattlefield = this.state.objects[sourceId]?.zone === "battlefield";
-    for (const { controller, mod } of this.abilityCostModifiers()) {
+    for (const { controller, source, mod } of this.abilityCostModifiers()) {
       // A Room's unlock costs aren't abilities' (`unlockCost` reads these).
       if (mod.unlock === true) continue;
       // "Ninjutsu abilities you activate" (Silver-Fur Master), wherever the
       // card is; every other kind, only a permanent's.
-      if (mod.ninjutsu === true ? ability.ninjutsu !== true || player !== controller : !onBattlefield) continue;
+      if (mod.ninjutsu === true ? ability.ninjutsu !== true || player !== controller : !onBattlefield && mod.anyZone !== true) {
+        continue;
+      }
       // "…unless they're mana abilities" (Suppression Field, Zirda).
       if (manaAbility && mod.exceptManaAbilities === true) continue;
-      if (!matchesFilter(this.state, this.registry, sourceId, mod.applies, { you: controller })) continue;
+      if (!matchesFilter(this.state, this.registry, sourceId, mod.applies, { you: controller, source })) continue;
       increaseGeneric += mod.increaseGeneric ?? 0;
       if (mod.leavesOneMana === true) reduceGenericLeavingOne += mod.reduceGeneric ?? 0;
       else reduceGeneric += mod.reduceGeneric ?? 0;
@@ -14768,16 +14943,23 @@ export class Game {
    * included), so found once per cache region, and nearly always none. */
   private abilityCostModifiers(): readonly {
     readonly controller: PlayerId;
+    readonly source: ObjectId;
     readonly mod: NonNullable<StaticAbility["abilityCostModification"]>;
   }[] {
     return computedCacheMemo("abilityCostModifiers", () => {
-      const out: { controller: PlayerId; mod: NonNullable<StaticAbility["abilityCostModification"]> }[] = [];
+      const out: {
+        controller: PlayerId;
+        source: ObjectId;
+        mod: NonNullable<StaticAbility["abilityCostModification"]>;
+      }[] = [];
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source === undefined || hasLostAbilities(source)) continue;
         for (const ability of this.registry.get(rulesTextName(source)).static) {
           const mod = ability.abilityCostModification;
-          if (mod !== undefined && this.staticActive(source, ability)) out.push({ controller: source.controller, mod });
+          if (mod !== undefined && this.staticActive(source, ability)) {
+            out.push({ controller: source.controller, source: id, mod });
+          }
         }
       }
       return out;
@@ -14846,7 +15028,7 @@ export class Game {
         }
       }
     }
-    if (this.abilitiesProhibited(player, source)) {
+    if (this.abilitiesProhibited(player, source, isManaAbility(ability))) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
     if (
@@ -15940,7 +16122,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object.controller !== player) continue;
       // "Can't activate abilities of …" covers mana abilities (Myrel).
-      if (this.abilitiesProhibited(player, object)) continue;
+      if (this.abilitiesProhibited(player, object, true)) continue;
       // A `{T}` ability needs the permanent untapped and not summoning sick;
       // an untapped one (Vivi Ornitier's "{0}: Add …") needs neither.
       const canTap = !object.tapped && !this.tapAbilityBlockedBySickness(object);
@@ -20803,7 +20985,10 @@ export class Game {
           // "whenever an opponent casts a spell". `TriggerWho` has always
           // offered `"opponent"` here, but the match never handled it, so a
           // card written that way type-checked and silently never fired.
-          (spec.who === "opponent" && event.player !== self.controller);
+          (spec.who === "opponent" && event.player !== self.controller) ||
+          // A Curse's "whenever enchanted player casts a spell" (Curse of
+          // Silence): the player it enchants.
+          (spec.who === "attached" && self.attachedToPlayer !== undefined && event.player === self.attachedToPlayer);
         if (!casterMatches) return false;
         if (spec.otherOnly === true && event.object === self.id) return false;
         if (spec.from !== undefined && event.from !== spec.from) return false;
@@ -23230,6 +23415,33 @@ export class Game {
       },
       chooseCreatureType: (then) =>
         this.beginCreatureTypeChoice(source, controller, undefined, { then, targets, x }),
+      chooseCardName: (spec) => {
+        // "Target player chooses a card name" (Vexing Arcanix): the player in
+        // that slot names it, if they're still in the game; the resolution
+        // stays its controller's.
+        const named = spec.chooser === undefined ? undefined : targets[spec.chooser];
+        const chooser = spec.chooser === undefined ? controller : named?.kind === "player" ? named.player : undefined;
+        if (chooser === undefined || this.state.players[chooser]?.hasLost !== false) return;
+        const src = this.state.objects[source];
+        const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+        this.beginCardNameChoice({
+          player: chooser,
+          source,
+          ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+          aim: spec.aim ?? "opponent-spells",
+          ...(spec.then !== undefined ? { then: spec.then } : {}),
+          ...(spec.remember === true && stint !== undefined ? { remember: { stint } } : {}),
+          resume: {
+            controller,
+            targets,
+            x,
+            triggerValue,
+            ...(triggerObject !== undefined ? { triggerObject } : {}),
+            targetZones,
+            refs,
+          },
+        });
+      },
       reflexiveTrigger: (specs, effect, text, value) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
         // on the stack the next time a player would receive priority.
@@ -23818,7 +24030,11 @@ export class Game {
         if (target.kind === "object") this.goad(target.object, controller, forGame);
       },
       goadMatching: (filter, forGame) => {
-        for (const id of this.battlefieldMatching(controller, filter)) this.goad(id, controller, forGame);
+        // "With a name chosen for this enchantment" (Day of the Moon) reads
+        // the source's names (`chosenName`).
+        for (const id of this.battlefieldMatching(controller, filter, undefined, source)) {
+          this.goad(id, controller, forGame);
+        }
       },
       suspect: (target) => {
         if (target.kind === "object") this.suspect(target.object);
@@ -28519,6 +28735,15 @@ export class Game {
         return `${player} can't cast ${def.name} this turn`;
       }
     }
+    // "Until your next turn, your opponents can't cast spells with the chosen
+    // name" (Academic Probation).
+    for (const effect of this.state.playerEffects ?? []) {
+      const cant = effect.cantCast;
+      if (cant === undefined || !cant.players.includes(player)) continue;
+      if (matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner })) {
+        return `${player} can't cast ${cant.label}`;
+      }
+    }
     // "Until your next turn, your opponents can't cast spells from anywhere
     // other than their hands" (Avatar's Wrath): the command zone, a
     // graveyard, exile and a library top all barred.
@@ -28531,7 +28756,10 @@ export class Game {
     for (const { source, prohibits } of this.prohibitionsOn(player)) {
       const spells = prohibits.spells;
       if (spells === undefined) continue;
-      if (spells === true || matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller })) {
+      if (
+        spells === true ||
+        matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller, source: source.id })
+      ) {
         return `${player} can't cast ${def.name} (${printedCardName(source)})`;
       }
     }
@@ -28547,8 +28775,10 @@ export class Game {
   }
 
   /** Whether `player` is barred from activating `source`'s activated
-   * abilities — mana abilities included — this turn or by a static. */
-  private abilitiesProhibited(player: PlayerId, source: GameObject): boolean {
+   * abilities this turn or by a static — `mana`: the ability is a mana
+   * ability, which most prohibitions bar too (Myrel) but some spare (Pithing
+   * Needle's "unless they're mana abilities"). */
+  private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean): boolean {
     // Detained (rule 701.35a) — the modifier is gone once its duration ends.
     if (source.modifiers.some((m) => m.abilitiesCantBeActivated === true)) return true;
     const turn = this.state.turnProhibitions;
@@ -28562,11 +28792,18 @@ export class Game {
         return true;
       }
     }
-    if (source.zone !== "battlefield") return false;
+    // "Of artifacts" reaches permanents alone (rule 109.2); "of sources"
+    // reaches a card in any zone (`anyZone`).
+    const onBattlefield = source.zone === "battlefield";
     return this.prohibitionsOn(player).some(
       ({ source: by, prohibits }) =>
         prohibits.abilitiesOf !== undefined &&
-        matchesFilter(this.state, this.registry, source.id, prohibits.abilitiesOf, { you: by.controller }),
+        (onBattlefield || prohibits.anyZone === true) &&
+        !(mana && prohibits.exceptManaAbilities === true) &&
+        matchesFilter(this.state, this.registry, source.id, prohibits.abilitiesOf, {
+          you: by.controller,
+          source: by.id,
+        }),
     );
   }
 
@@ -28826,9 +29063,9 @@ export class Game {
 
   /** Which battlefield permanents a mass P/T / keyword effect (Overrun) hits —
    * `matchesFilter` from the effect's controller's perspective. */
-  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number): ObjectId[] {
+  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number, source?: ObjectId): ObjectId[] {
     return this.state.zones.shared.battlefield.filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you, x }),
+      matchesFilter(this.state, this.registry, id, filter, { you, x, ...(source !== undefined ? { source } : {}) }),
     );
   }
 
@@ -37158,6 +37395,7 @@ export class Game {
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
+      ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
       ...(object.monstrous === true ? { monstrous: true as const } : {}),
       ...(object.renowned === true ? { renowned: true as const } : {}),
@@ -37929,6 +38167,7 @@ export class Game {
     // names a colour afresh).
     object.chosenCreatureType = null;
     delete object.chosenOnEnter;
+    delete object.chosenNames;
     // A battle's protector was this stint's (rule 400.7).
     delete object.protector;
     // The "as this enters" choices made before this move (rule 614.12 —
@@ -37955,6 +38194,7 @@ export class Game {
         object.chosenCreatureType = enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;
       }
+      if (enterChoice.chosenName != null) object.chosenNames = [enterChoice.chosenName];
       // A battle enters protected by the player chosen for it (rule 310.9a).
       if (enterChoice.protector !== undefined) object.protector = enterChoice.protector;
       // Deadpool's exchange (rule 612.5): it enters with the other's rules

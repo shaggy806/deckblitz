@@ -302,6 +302,18 @@ export interface PlayerController {
     suggested: readonly string[],
   ): string;
   /**
+   * Choose a card name (rule 201.4) — Pithing Needle as it enters, Memoricide
+   * as it resolves. Return one of `options`.
+   */
+  chooseCardName(
+    view: ControllerView,
+    source: ObjectId,
+    options: readonly string[],
+    /** The names the choice is aimed at, best first — see `LegalAction`'s
+     * `suggested`. */
+    suggested: readonly string[],
+  ): string;
+  /**
    * A modal spell/ability is resolving (rule 700.2), or a "you may" clause
    * (rule 601.3e). Return the indices of the modes to apply — distinct, and
    * between `minModes` and `maxModes` in count. An empty array declines an
@@ -678,6 +690,18 @@ export class AutomaticController implements PlayerController {
     return suggested[0] ?? options[0];
   }
 
+  chooseCardName(
+    _view: ControllerView,
+    _source: ObjectId,
+    options: readonly string[],
+    suggested: readonly string[],
+  ): string {
+    // What the choice is aimed at, best first (`suggestedCardNames`): an
+    // opponent's commander for a Meddling Mage, the name filling our library
+    // for a Wood Sage. `options[0]` alone would be the alphabetical first.
+    return suggested[0] ?? options[0];
+  }
+
   chooseModes(
     _view: ControllerView,
     minModes: number,
@@ -988,6 +1012,12 @@ export class ScriptedController implements PlayerController {
   orderTriggersFn: (view: ControllerView, triggers: readonly TriggerOrderEntry[]) => number[] = (_view, triggers) =>
     triggers.map((_, i) => i);
   chooseCreatureTypeFn: CreatureTypeChooser = (_view, _source, options) => options[0];
+  chooseCardNameFn: (view: ControllerView, source: ObjectId, options: readonly string[], suggested: readonly string[]) => string = (
+    _view,
+    _source,
+    options,
+    suggested,
+  ) => suggested[0] ?? options[0];
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
   chooseSacrificesFn: SacrificeChooser = (view, eligible, count) =>
@@ -1170,6 +1200,15 @@ export class ScriptedController implements PlayerController {
     options: readonly string[],
   ): string {
     return this.chooseCreatureTypeFn(view, source, options);
+  }
+
+  chooseCardName(
+    view: ControllerView,
+    source: ObjectId,
+    options: readonly string[],
+    suggested: readonly string[],
+  ): string {
+    return this.chooseCardNameFn(view, source, options, suggested);
   }
 
   chooseModes(

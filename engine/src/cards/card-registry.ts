@@ -41,6 +41,11 @@ export class CardRegistry {
     return def;
   }
 
+  /** Every definition registered, in registration order. */
+  definitions(): IterableIterator<CardDefinition> {
+    return this.byName.values();
+  }
+
   get size(): number {
     return this.byName.size;
   }

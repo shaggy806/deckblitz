@@ -32,6 +32,7 @@ import { splitMana } from "./split-mana.js";
 import { timeTravel } from "./time-travel.js";
 import { venture } from "./venture.js";
 import { chooseCreatureType } from "./choose-creature-type.js";
+import { chooseCardName } from "./choose-card-name.js";
 import { chooseModes } from "./choose-modes.js";
 import { chooseFromZone } from "./choose-from-zone.js";
 import { sacrifice } from "./sacrifice.js";
@@ -63,6 +64,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   "time-travel": timeTravel,
   venture,
   "choose-creature-type": chooseCreatureType,
+  "choose-card-name": chooseCardName,
   "choose-modes": chooseModes,
   "choose-from-zone": chooseFromZone,
   sacrifice,

@@ -97,6 +97,7 @@ export const DECISION_ACTIONS = {
   "legend-rule": ["legend-rule"],
   "order-triggers": ["order-triggers"],
   "choose-creature-type": ["choose-creature-type"],
+  "choose-card-name": ["choose-card-name"],
   "choose-modes": ["choose-modes"],
   "choose-targets": ["choose-targets"],
   "cast-now": ["cast-now"],
@@ -136,6 +137,7 @@ export const DECISION_OFFERS = {
   "legend-rule": ["legend-rule"],
   "order-triggers": ["order-triggers"],
   "choose-creature-type": ["choose-creature-type"],
+  "choose-card-name": ["choose-card-name"],
   "choose-modes": ["choose-modes"],
   "choose-targets": ["choose-targets"],
   "cast-now": ["cast-now"],
@@ -255,6 +257,7 @@ export interface DecisionHost {
     assignments: readonly { readonly object: ObjectId; readonly target: PlayerId | ObjectId }[],
   ) => void;
   readonly applyCreatureTypeChoice: (player: PlayerId, creatureType: string) => void;
+  readonly applyCardNameChoice: (player: PlayerId, name: string) => void;
   readonly applyModesChoice: (
     player: PlayerId,
     modes: readonly number[],

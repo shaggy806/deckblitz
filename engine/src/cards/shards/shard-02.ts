@@ -635,6 +635,7 @@ import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
 import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSootImp from "../pool/soot-imp.js";
+import _poolSorcerousSpyglass from "../pool/sorcerous-spyglass.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulCharmer from "../pool/soul-charmer.js";
 import _poolSoulRead from "../pool/soul-read.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolSomberwaldStag,
     _poolSongOfTotentanz,
     _poolSootImp,
+    _poolSorcerousSpyglass,
     _poolSorinTheMirthless,
     _poolSoulCharmer,
     _poolSoulRead,

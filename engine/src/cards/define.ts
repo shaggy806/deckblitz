@@ -23,6 +23,7 @@ import type {
   ThisWayKind,
 } from "../effects.js";
 import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
+import type { CardNameChoice } from "../card-names.js";
 import type { Color, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
@@ -52,6 +53,13 @@ export type Supertype = "basic" | "legendary" | "snow" | "world";
  * `Game.askEnterChoice`). Declining, or having nothing to copy, it enters as
  * itself.
  */
+/** "As this enters, choose a card name" — see
+ * `CardDefinition.chooseCardNameOnEnter`. */
+export interface CardNameOnEnter extends CardNameChoice {
+  readonly look?: "opponent-hand";
+  readonly reveal?: "each-opponent-hand";
+}
+
 export interface CopyOnEnter {
   /**
    * What it may copy: a permanent already on the battlefield matching this,
@@ -1479,6 +1487,18 @@ export interface StaticAbility {
     readonly who: "opponents" | "you" | "each-player";
     readonly spells?: true | CardFilter;
     readonly abilitiesOf?: CardFilter;
+    /** "…can't be activated **unless they're mana abilities**" (Pithing
+     * Needle): `abilitiesOf` leaves mana abilities alone. */
+    readonly exceptManaAbilities?: true;
+    /** `abilitiesOf` reaches **sources** in every zone, not only permanents —
+     * "activated abilities of sources with the chosen name" (Pithing Needle)
+     * stops a card's cycling or channel in a hand and a graveyard ability
+     * too. */
+    readonly anyZone?: true;
+    /** "…and **lands** with the chosen names **can't be played**" (Null
+     * Chamber, rule 305.2): lands matching this filter, from this
+     * permanent's controller's side. */
+    readonly lands?: CardFilter;
   };
   /** "You may cast spells as though they had flash" (Heliod, the Warped
    * Eclipse) — every spell (`true`) or ones matching a filter ("creature
@@ -2132,8 +2152,10 @@ export interface StaticAbility {
      * controller: `"you"` ("spells you cast") or `"opponent"` ("spells your
      * opponents cast" — Hinata, Dawn-Crowned). Judged against the actual
      * caster, not the card's controller, so a card cast from someone else's
-     * graveyard or exile counts as the caster's spell. Omitted = anyone. */
-    readonly caster?: "you" | "opponent";
+     * graveyard or exile counts as the caster's spell. Omitted = anyone.
+     * `"enchanted-player"`: the player this Aura enchants (Curse of
+     * Silence's "spells with the chosen name enchanted player casts"). */
+    readonly caster?: "you" | "opponent" | "enchanted-player";
     /** Only spells cast from this zone — Green Goblin's "spells you cast
      * from your graveyard cost {2} less": the zone the card is cast from (its
      * zone as the cost is worked out, rule 601.2f's card on its way). A
@@ -2210,6 +2232,9 @@ export interface StaticAbility {
      * static's controller pays — Inquisitive Glimmer's "Unlock costs you pay
      * cost {1} less". `applies` filters the Room. */
     readonly unlock?: true;
+    /** "Activated abilities of **sources** with the chosen name" (Skyseer's
+     * Chariot): abilities of cards in every zone, not only permanents'. */
+    readonly anyZone?: true;
   };
   /** Layer 7b: set base power and toughness to a dynamic count (+ the given
    * offsets). Only meaningful with `affects.scope === "self"` (a CDA). */
@@ -2999,6 +3024,25 @@ export interface CardDefinition {
    * answers; a `costModification.matchesChosenCreatureType` reads it back. */
   readonly chooseCreatureTypeOnEnter: boolean;
   /**
+   * "As this enters, choose a card name" (rule 201.4, asked as it's about to
+   * enter — 614.12): Pithing Needle, Meddling Mage, Runed Halo. The answer is
+   * the permanent's `chosenNames[0]`, which a `chosenName` filter reads in
+   * its statics and triggers ("sources with the chosen name", "spells with
+   * the chosen name"). `filter` limits the names ("a nonland card name");
+   * `aim` is what it's for (`CardNameAim`). Before naming:
+   *
+   * - `look: "opponent-hand"` — "look at an opponent's hand, then choose"
+   *   (Sorcerous Spyglass, Anointed Peacekeeper): the opponent is chosen
+   *   first among two or more, and their hand is seen by the chooser alone.
+   * - `reveal: "each-opponent-hand"` — "each opponent reveals their hand.
+   *   You choose the name of a nonland card revealed this way" (Alhammarret,
+   *   High Arbiter): only those names may be chosen, and with none, nothing
+   *   is.
+   *
+   * `null` for none.
+   */
+  readonly chooseCardNameOnEnter: CardNameOnEnter | null;
+  /**
    * "As this permanent enters, choose …" (rule 614.1c) — Heraldic Banner
    * ("choose a color"), Frontier Siege ("choose Khans or Dragons"). The
    * answer lands on `GameObject.chosenOnEnter`, which the card's own statics,
@@ -3554,6 +3598,7 @@ const PRINTED_ABILITY: {
   amplify: (def) => def.amplify !== null,
   tribute: (def) => def.tribute !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
+  chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   loyalty: false,
   defense: false,
@@ -3776,6 +3821,7 @@ interface CardDraft {
   amplify?: number;
   tribute?: number;
   chooseCreatureTypeOnEnter?: boolean;
+  chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
   /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
@@ -4008,6 +4054,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     amplify: draft.amplify ?? null,
     tribute: draft.tribute ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
+    chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     loyalty,
     defense,

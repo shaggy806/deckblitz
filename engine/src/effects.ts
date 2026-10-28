@@ -20,6 +20,7 @@ import type {
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
@@ -924,6 +925,28 @@ export const CHOSEN_CREATURE_TYPE = "$chosen";
 export function substituteChosenCreatureType(spec: EffectSpec, creatureType: string): EffectSpec {
   const walk = (value: unknown): unknown => {
     if (value === CHOSEN_CREATURE_TYPE) return creatureType;
+    if (Array.isArray(value)) return value.map(walk);
+    if (value !== null && typeof value === "object") {
+      return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, walk(v)]));
+    }
+    return value;
+  };
+  return walk(spec) as EffectSpec;
+}
+
+/**
+ * The placeholder a `choose-card-name` effect's `then` uses for the name
+ * that ends up chosen — `{ hasName: CHOSEN_CARD_NAME }` is "a card with the
+ * chosen name" (Memoricide's search, Brain Pry's discard). Substituted into
+ * `then` by value (`substituteChosenCardName`) before it applies.
+ */
+export const CHOSEN_CARD_NAME = "$chosenName";
+
+/** A copy of `spec` with every string exactly equal to `CHOSEN_CARD_NAME`
+ * replaced by `name` — the same structural walk as the creature type's. */
+export function substituteChosenCardName(spec: EffectSpec, name: string): EffectSpec {
+  const walk = (value: unknown): unknown => {
+    if (value === CHOSEN_CARD_NAME) return name;
     if (Array.isArray(value)) return value.map(walk);
     if (value !== null && typeof value === "object") {
       return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, walk(v)]));
@@ -2122,6 +2145,33 @@ export type EffectSpec =
        */
       readonly kind: "choose-creature-type";
       readonly then: EffectSpec;
+    }
+  | {
+      /**
+       * "Choose a card name" (rule 201.4) as a spell or ability *resolves*
+       * (Memoricide, Wood Sage, Cursed Scroll), then do `then` with it —
+       * as opposed to `CardDefinition.chooseCardNameOnEnter`, which asks as a
+       * permanent enters. Raises a `choose-card-name` decision over every name
+       * `filter` allows ("a nonland card name"); resolution resumes from the
+       * answer with `CHOSEN_CARD_NAME` substituted into `then` — `{ hasName:
+       * CHOSEN_CARD_NAME }` is "a card with the chosen name". The enclosing
+       * ability's targets and X carry across.
+       *
+       * `chooser` is a target slot holding the player who names it, when that
+       * isn't the controller (Vexing Arcanix's "target player chooses a card
+       * name"). `remember` keeps the name on this effect's source permanent,
+       * for its other abilities' "the chosen name" (`CardFilter.chosenName`):
+       * Petrified Hamlet's "when this land enters, choose a land card name",
+       * Medomai's Prophecy's chapter II, Day of the Moon's "a name chosen for
+       * this enchantment" — kept only while the source is still the permanent
+       * it was (rule 400.7).
+       */
+      readonly kind: "choose-card-name";
+      readonly filter?: CardNameFilter;
+      readonly aim?: CardNameAim;
+      readonly chooser?: number;
+      readonly remember?: true;
+      readonly then?: EffectSpec;
     }
   | {
       /** Return everything this effect's source exiled with
@@ -3476,7 +3526,25 @@ export type EffectSpec =
        */
       readonly kind: "player-effect";
       readonly duration: "end-of-turn" | "until-your-next-turn";
-      readonly reduceSpells?: { readonly applies: CardFilter; readonly reduceGeneric: EffectAmount };
+      /** `allCasters`: every player's matching spells, not only the
+       * controller's — Cheering Fanatic's "spells with the chosen name cost
+       * {1} less to cast this turn". */
+      readonly reduceSpells?: {
+        readonly applies: CardFilter;
+        readonly reduceGeneric: EffectAmount;
+        readonly allCasters?: true;
+      };
+      /** "Until your next turn, **your opponents can't cast spells** with the
+       * chosen name" (Academic Probation, Comply): the players `who` names as
+       * this resolves can't cast spells matching `filter` (from the
+       * controller's side); `lands` — "and lands with the chosen name can't be
+       * played" (Conjurer's Ban, rule 305.2). `label` names them in the log. */
+      readonly cantCast?: {
+        readonly who: PlayerScope;
+        readonly filter: CardFilter;
+        readonly label: string;
+        readonly lands?: true;
+      };
       readonly castFromHandFree?: { readonly filter?: CardFilter };
       /** "You may cast Zombie spells from your graveyard this turn"
        * (Liliana, Untouched by Death's −3): a permission over the
@@ -6528,6 +6596,8 @@ export interface EffectApi {
   copyCards(cards: readonly ObjectId[], times: number): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
   chooseCreatureType(then: EffectSpec): void;
+  /** See the `"choose-card-name"` {@link EffectSpec}. */
+  chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
    * {@link EffectSpec}. */
   /** `value`: the reflexive ability's trigger value, when the spec sets one
@@ -9775,6 +9845,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "choose-creature-type":
       ctx.chooseCreatureType(spec.then);
       return;
+    case "choose-card-name":
+      ctx.chooseCardName(spec);
+      return;
     case "put-onto-battlefield": {
       const target = resolveEffectTarget(spec.target, ctx);
       const parked = ctx.parkedCount();
@@ -10543,6 +10616,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               reduceSpells: {
                 applies: spec.reduceSpells.applies,
                 reduceGeneric: amountValue(spec.reduceSpells.reduceGeneric, ctx),
+                ...(spec.reduceSpells.allCasters === true ? { allCasters: true as const } : {}),
               },
             }
           : {}),
@@ -10564,6 +10638,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantLoseLife !== undefined ? { cantLoseLife: ctx.playersInScope(spec.cantLoseLife) } : {}),
         ...(spec.castOnlyFromHand !== undefined
           ? { castOnlyFromHand: ctx.playersInScope(spec.castOnlyFromHand) }
+          : {}),
+        ...(spec.cantCast !== undefined
+          ? {
+              cantCast: {
+                players: ctx.playersInScope(spec.cantCast.who),
+                filter: spec.cantCast.filter,
+                label: spec.cantCast.label,
+                ...(spec.cantCast.lands === true ? { lands: true as const } : {}),
+              },
+            }
           : {}),
         ...(spec.damageLifeFloor !== undefined
           ? {

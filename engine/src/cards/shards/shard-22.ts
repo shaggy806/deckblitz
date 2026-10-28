@@ -83,6 +83,7 @@ import _poolBoneDragon from "../pool/bone-dragon.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
+import _poolBrainPry from "../pool/brain-pry.js";
 import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
 import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
 import _poolBrand from "../pool/brand.js";
@@ -921,6 +922,7 @@ const shard: CardShard = {
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,
     _poolBrainFreeze,
+    _poolBrainPry,
     _poolBrambleguardVeteran,
     _poolBranchOfVituGhazi,
     _poolBrand,

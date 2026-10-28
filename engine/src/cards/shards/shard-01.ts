@@ -129,6 +129,7 @@ import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
+import _poolCurseOfSilence from "../pool/curse-of-silence.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolCytospawnShambler from "../pool/cytospawn-shambler.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
@@ -153,6 +154,7 @@ import _poolDevourerOfMemory from "../pool/devourer-of-memory.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
+import _poolDisruptorFlute from "../pool/disruptor-flute.js";
 import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDominatingVampire from "../pool/dominating-vampire.js";
 import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
@@ -480,6 +482,7 @@ import _poolPhelddagrif from "../pool/phelddagrif.js";
 import _poolPhyrexianVatmother from "../pool/phyrexian-vatmother.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPiousWarrior from "../pool/pious-warrior.js";
+import _poolPithingNeedle from "../pool/pithing-needle.js";
 import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
@@ -943,6 +946,7 @@ const shard: CardShard = {
     _poolCruelDeceiver,
     _poolCryotheoryAdept,
     _poolCryptothrall,
+    _poolCurseOfSilence,
     _poolCursedWindbreaker,
     _poolCytospawnShambler,
     _poolDailyBugleBuilding,
@@ -967,6 +971,7 @@ const shard: CardShard = {
     _poolDiamondWeapon,
     _poolDismalBackwater,
     _poolDisruptiveStormbrood,
+    _poolDisruptorFlute,
     _poolDogWalker,
     _poolDominatingVampire,
     _poolDoomskarOracle,
@@ -1294,6 +1299,7 @@ const shard: CardShard = {
     _poolPhyrexianVatmother,
     _poolPillardropWarden,
     _poolPiousWarrior,
+    _poolPithingNeedle,
     _poolPlanarOutburst,
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,

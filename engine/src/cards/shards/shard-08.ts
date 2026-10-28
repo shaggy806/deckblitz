@@ -32,6 +32,7 @@ import _poolAkoumHellkite from "../pool/akoum-hellkite.js";
 import _poolAlabasterMage from "../pool/alabaster-mage.js";
 import _poolAlacrianArmory from "../pool/alacrian-armory.js";
 import _poolAlertShuInfantry from "../pool/alert-shu-infantry.js";
+import _poolAlhammarretHighArbiter from "../pool/alhammarret-high-arbiter.js";
 import _poolAllIsDust from "../pool/all-is-dust.js";
 import _poolAlliedReinforcements from "../pool/allied-reinforcements.js";
 import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolAlabasterMage,
     _poolAlacrianArmory,
     _poolAlertShuInfantry,
+    _poolAlhammarretHighArbiter,
     _poolAllIsDust,
     _poolAlliedReinforcements,
     _poolAloeAlchemist,

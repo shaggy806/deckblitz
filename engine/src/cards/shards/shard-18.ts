@@ -101,6 +101,7 @@ import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChaosHarlequin from "../pool/chaos-harlequin.js";
+import _poolCheeringFanatic from "../pool/cheering-fanatic.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
@@ -917,6 +918,7 @@ const shard: CardShard = {
     _poolChandrasPyreling,
     _poolChangeOfPlans,
     _poolChaosHarlequin,
+    _poolCheeringFanatic,
     _poolChillingScreech,
     _poolCircleOfProtectionBlack,
     _poolClamorousIronclad,

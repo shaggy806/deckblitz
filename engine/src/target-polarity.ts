@@ -252,6 +252,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.haunting !== undefined) v.touch(n.haunting, "harm", MINOR);
   },
   "choose-creature-type": (n, v) => v.child(n.then),
+  "choose-card-name": (n, v) => {
+    if (n.then !== undefined) v.child(n.then);
+  },
   "return-exiled-by-source": none,
   "put-onto-battlefield": (n, v) => {
     if (n.underYourControl === true) v.touch(n.target, "take", MAJOR);
