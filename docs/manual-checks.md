@@ -5572,7 +5572,7 @@ engine terms. A second thing to check is a second test.
 
 ### Patch Up: only cards that fit under total mana value 3
 - **Do:** Cast Patch Up and pick Grizzly Bears from your graveyard first.
-- **Expect:** After the Bears, only Savannah Lions can still be added (Hill Giant would take the total past 3). Confirm returns the Bears and the Lions to the battlefield.
+- **Expect:** The graveyard popup offers all three ("choose 0-3"). After the Bears, Centaur Courser can't be added (it would take the total past 3) but Savannah Lions can. Confirm returns the Bears and the Lions to the battlefield.
 
 ### Heroic Feast: up to as many targets as the life you gained
 - **Do:** Activate the Food token (pay {2}, tap and sacrifice it) and let it resolve.

@@ -8397,7 +8397,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   preset(
     'Patch Up: only cards that fit under total mana value 3',
-    board({ you: { bf: ['Plains*3'], hand: ['Patch Up'], gy: ['Grizzly Bears', 'Savannah Lions', 'Hill Giant'] } }),
+    board({ you: { bf: ['Plains*3'], hand: ['Patch Up'], gy: ['Grizzly Bears', 'Savannah Lions', 'Centaur Courser'] } }),
   ),
   preset(
     'Heroic Feast: up to as many targets as the life you gained',
