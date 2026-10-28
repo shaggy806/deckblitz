@@ -2196,6 +2196,10 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (/^\d+\+ \| /.test(raw)) inStriation = true;
+    // A Class's level bar ("{1}{U}{B}: Level 2", rule 716.2a): every line
+    // after it is a class ability gated by that level (`atLevel`, with the
+    // bar itself `classLevel`), which no template reads — a person's.
+    if (/^(?:\{[^}]+\})+: Level \d+$/.test(raw)) inStriation = true;
     if (inStriation) { out.todo.push(printed(raw)); continue; }
     const whole = normalize(raw, face.name);
     // Kinship (Morningtide's ability word): the upkeep look and reveal is
@@ -2907,6 +2911,14 @@ export function parseFace(face, ctx = {}) {
   if (/echo cost is paid/i.test(face.oracle_text ?? "")) {
     for (const t of out.triggered) {
       if (/^Echo\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its echo has to say when the cost is paid"];
+    }
+  }
+  // "When a player doesn't pay this enchantment's cumulative upkeep" (Heart of
+  // Bogardan) is the upkeep's own "if you don't", which `cumulativeUpkeep()`'s
+  // `unless` never says: the author writes the upkeep with it.
+  if (/doesn't pay [^.]*cumulative upkeep/i.test(face.oracle_text ?? "")) {
+    for (const t of out.triggered) {
+      if (/^Cumulative upkeep\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its cumulative upkeep has to say what happens when it isn't paid"];
     }
   }
   out.complete =

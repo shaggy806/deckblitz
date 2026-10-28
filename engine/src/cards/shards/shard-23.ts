@@ -682,6 +682,7 @@ import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
+import _poolStreamOfThought from "../pool/stream-of-thought.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
@@ -726,6 +727,7 @@ import _poolThievesTools from "../pool/thieves-tools.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
+import _poolThrummingStone from "../pool/thrumming-stone.js";
 import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderOfUnity from "../pool/thunder-of-unity.js";
 import _poolThunderclap from "../pool/thunderclap.js";
@@ -1521,6 +1523,7 @@ const shard: CardShard = {
     _poolStormbloodBerserker,
     _poolStormchaserChimera,
     _poolStrawSoldiers,
+    _poolStreamOfThought,
     _poolStripedRiverwinder,
     _poolStrongarmMonk,
     _poolSublimeExhalation,
@@ -1565,6 +1568,7 @@ const shard: CardShard = {
     _poolThopterAssembly,
     _poolThopterShop,
     _poolThorin,
+    _poolThrummingStone,
     _poolThunderLasso,
     _poolThunderOfUnity,
     _poolThunderclap,

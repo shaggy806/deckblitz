@@ -1,0 +1,716 @@
+{
+ "batch": "B240",
+ "status": "complete",
+ "ranks": "The need-keys recheck list R6 (Phase 1 step 2)",
+ "authored": [
+  {
+   "name": "Chancellor of the Dross",
+   "files": [
+    "engine/src/cards/pool/chancellor-of-the-dross.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chancellor of the Forge",
+   "files": [
+    "engine/src/cards/pool/chancellor-of-the-forge.ts",
+    "engine/src/cards/tokens/phyrexian-goblin-token-haste.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chancellor of the Spires",
+   "files": [
+    "engine/src/cards/pool/chancellor-of-the-spires.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chancellor of the Tangle",
+   "files": [
+    "engine/src/cards/pool/chancellor-of-the-tangle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of Foresight",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-foresight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally the Galadhrim",
+   "files": [
+    "engine/src/cards/pool/rally-the-galadhrim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rassilon, the War President",
+   "files": [
+    "engine/src/cards/pool/rassilon-the-war-president.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation Turret",
+   "files": [
+    "engine/src/cards/pool/fire-nation-turret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yuffie, Materia Hunter",
+   "files": [
+    "engine/src/cards/pool/yuffie-materia-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mists of Lórien",
+   "files": [
+    "engine/src/cards/pool/mists-of-lorien.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raiding Schemes",
+   "files": [
+    "engine/src/cards/pool/raiding-schemes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Vortex",
+   "files": [
+    "engine/src/cards/pool/psychic-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreams of the Dead",
+   "files": [
+    "engine/src/cards/pool/dreams-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thousand-Faced Shadow",
+   "files": [
+    "engine/src/cards/pool/thousand-faced-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Indomitable",
+   "files": [
+    "engine/src/cards/pool/the-indomitable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glacial Chasm",
+   "files": [
+    "engine/src/cards/pool/glacial-chasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Soulgorger",
+   "files": [
+    "engine/src/cards/pool/phyrexian-soulgorger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stream of Thought",
+   "files": [
+    "engine/src/cards/pool/stream-of-thought.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinister Gnarlbark",
+   "files": [
+    "engine/src/cards/pool/sinister-gnarlbark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Remora",
+   "files": [
+    "engine/src/cards/pool/mystic-remora.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heart of Bogardan",
+   "files": [
+    "engine/src/cards/pool/heart-of-bogardan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Junker",
+   "files": [
+    "engine/src/cards/pool/demonic-junker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flamekin Village",
+   "files": [
+    "engine/src/cards/pool/flamekin-village.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Changing Loyalty",
+   "files": [
+    "engine/src/cards/pool/changing-loyalty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrumming Stone",
+   "files": [
+    "engine/src/cards/pool/thrumming-stone.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Chancellor of the Annex",
+   "needs": [
+    "trigger:opponent-first-spell-of-game"
+   ],
+   "why": "The reveal's delayed trigger waits for each opponent's first spell of the game, past turn 1; a whenever-delayed trigger lapses with the turn."
+  },
+  {
+   "name": "Gemstone Caverns",
+   "needs": [
+    "mechanic:opening-hand-not-starting-player"
+   ],
+   "why": "Begins on the battlefield only if you're not the starting player, with a luck counter, exiling a card from your hand."
+  },
+  {
+   "name": "Lost Monarch of Ifnir",
+   "needs": [
+    "condition:combat-damage-by-filter-this-turn"
+   ],
+   "why": "'If a player was dealt combat damage by a Zombie this turn': no damage-by-filter turn condition."
+  },
+  {
+   "name": "Braid of Fire",
+   "needs": [
+    "cost:cumulative-upkeep-add-mana"
+   ],
+   "why": "Cumulative upkeep—Add {R}: no unless option adds mana."
+  },
+  {
+   "name": "Breath of Dreams",
+   "needs": [
+    "static:grant-cumulative-upkeep"
+   ],
+   "why": "'Green creatures have cumulative upkeep {1}': no static grant of cumulative upkeep."
+  },
+  {
+   "name": "Sheltering Ancient",
+   "needs": [
+    "cost:cumulative-upkeep-counter-on-opponents-creature"
+   ],
+   "why": "The upkeep cost puts a +1/+1 counter on an opponent's creature per age counter."
+  },
+  {
+   "name": "Thought Lash",
+   "needs": [
+    "cost:cumulative-upkeep-exile-library-top",
+    "trigger:cumulative-upkeep-not-paid"
+   ],
+   "why": "Upkeep cost exiles the top card per age counter, and 'when a player doesn't pay' exiles their library."
+  },
+  {
+   "name": "Topography Tracker",
+   "needs": [
+    "replacement:explore-replacement"
+   ],
+   "why": "'If a creature you control would explore, instead it explores, then explores again': no explore replacement."
+  },
+  {
+   "name": "Lorehold, the Historian",
+   "needs": [
+    "static:grant-miracle-in-hand"
+   ],
+   "why": "Grants miracle {2} to instants and sorceries in hand; miracle is printed only."
+  },
+  {
+   "name": "Molecule Man",
+   "needs": [
+    "static:grant-miracle-in-hand"
+   ],
+   "why": "Grants miracle {0} to nonland cards in hand."
+  },
+  {
+   "name": "Aven Interrupter",
+   "needs": [
+    "cost:cost-mod-by-cast-zone"
+   ],
+   "why": "'Spells your opponents cast from graveyards or from exile cost {2} more': castFrom takes one zone, and a graveyard means its controller's."
+  },
+  {
+   "name": "Psionic Ritual",
+   "needs": [
+    "cost:replicate-tap-permanent"
+   ],
+   "why": "Replicate—Tap an untapped Horror you control: replicate costs are mana only."
+  },
+  {
+   "name": "Perplex",
+   "needs": [
+    "effect:unless-discard-hand"
+   ],
+   "why": "'Counter target spell unless its controller discards their hand': no discard-hand unless option."
+  },
+  {
+   "name": "Timeline Culler",
+   "needs": [
+    "keyword:warp-from-graveyard-and-life-cost"
+   ],
+   "why": "Warp from the graveyard, for {B} and 2 life: warp is a mana cost from hand."
+  },
+  {
+   "name": "Fire Juggler",
+   "needs": [
+    "effect:damage-each-creature-blocking-source"
+   ],
+   "why": "'Deals 4 damage to each creature blocking it': no filter for creatures blocking the source."
+  },
+  {
+   "name": "Redeem the Lost",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Protection from the color of your choice until end of turn."
+  },
+  {
+   "name": "Aang, Airbending Master",
+   "needs": [
+    "trigger:leaves-batch-trigger"
+   ],
+   "why": "'Whenever one or more creatures you control leave the battlefield without dying': no batched leave trigger."
+  },
+  {
+   "name": "Market Gnome",
+   "needs": [
+    "trigger:exiled-while-crafting"
+   ],
+   "why": "'When exiled from the battlefield while you're activating a craft ability'."
+  },
+  {
+   "name": "Aboroth",
+   "needs": [
+    "cost:cumulative-upkeep-non-mana"
+   ],
+   "why": "Cumulative upkeep—put a -1/-1 counter on it, a cost unpayable when the counter can't be put."
+  },
+  {
+   "name": "Varchild's War-Riders",
+   "needs": [
+    "effect:create-tokens-distributed-among-opponents"
+   ],
+   "why": "Each Survivor token per age counter may go to a different opponent."
+  },
+  {
+   "name": "Amalia Benavides Aguirre",
+   "needs": [
+    "effect:destroy-all-except-source"
+   ],
+   "why": "'Destroy all other creatures': destroy-all has no exceptSource."
+  },
+  {
+   "name": "Camellia, the Seedmiser",
+   "needs": [
+    "cost:forage",
+    "trigger:sacrifice-batch-trigger"
+   ],
+   "why": "{2}, Forage as an activation cost, and 'whenever you sacrifice one or more Foods'."
+  },
+  {
+   "name": "Aminatou, Veil Piercer",
+   "needs": [
+    "static:grant-miracle-in-hand"
+   ],
+   "why": "Enchantment cards in hand have miracle at their mana cost reduced by {4}."
+  },
+  {
+   "name": "Terminus",
+   "needs": [
+    "effect:put-on-bottom-of-library-all"
+   ],
+   "why": "Put all creatures on the bottom of their owners' libraries, each owner ordering theirs."
+  },
+  {
+   "name": "Doc Aurlock, Grizzled Genius",
+   "needs": [
+    "cost:plot-cost-reduction"
+   ],
+   "why": "'Plotting cards from your hand costs {2} less'."
+  },
+  {
+   "name": "Ian Chesterton",
+   "needs": [
+    "static:grant-replicate"
+   ],
+   "why": "Each Saga spell you cast has replicate equal to its mana cost."
+  },
+  {
+   "name": "Reiterating Bolt",
+   "needs": [
+    "cost:replicate-energy"
+   ],
+   "why": "Replicate—Pay {E}{E}{E}: replicate costs are mana only."
+  },
+  {
+   "name": "Skrelv's Hive",
+   "needs": [
+    "static:static-scoped-by-has-toxic"
+   ],
+   "why": "Creatures with toxic get lifelink: hasToxic reads printed toxic only inside the layer fold."
+  },
+  {
+   "name": "Spirit Water Revival",
+   "needs": [
+    "effect:player-no-max-hand-size-for-game"
+   ],
+   "why": "No maximum hand size for the rest of the game."
+  },
+  {
+   "name": "Case of the Uneaten Feast",
+   "needs": [
+    "effect:grant-graveyard-cast-all"
+   ],
+   "why": "Creature cards in your graveyard gain 'you may cast this from your graveyard': grant-graveyard-cast takes one target."
+  },
+  {
+   "name": "Bandit's Talent",
+   "needs": [
+    "condition:that-player-hand-size",
+    "effect:opponents-with-few-cards-count"
+   ],
+   "why": "Level 2's 'if that player has one or fewer cards in hand' and level 3's count of such opponents."
+  },
+  {
+   "name": "Aang, Swift Savior",
+   "needs": [
+    "target:spell-or-creature"
+   ],
+   "why": "'Airbend up to one other target creature or spell': no one slot for a spell or a creature permanent."
+  },
+  {
+   "name": "Memory Vampire",
+   "needs": [
+    "bug:reflexive-target-trigger-player"
+   ],
+   "why": "The reflexive cast-from-defending-player's-graveyard target finds no legal targets with whose: trigger-player."
+  },
+  {
+   "name": "The Enigma Jewel // Locus of Enlightenment",
+   "needs": [
+    "filter:has-activated-ability",
+    "static:granted-linked-abilities-once-each-turn"
+   ],
+   "why": "Craft with nonlands with activated abilities, and the granted abilities once each turn."
+  },
+  {
+   "name": "Vexing Sphinx",
+   "needs": [
+    "cost:cumulative-upkeep-discard"
+   ],
+   "why": "Cumulative upkeep—discard a card per age counter."
+  },
+  {
+   "name": "Vizier of the Anointed",
+   "needs": [
+    "filter:has-embalm-or-eternalize",
+    "trigger:activates-embalm-or-eternalize"
+   ],
+   "why": "Search for a creature card with eternalize or embalm; trigger on activating one."
+  },
+  {
+   "name": "Feed the Cycle",
+   "needs": [
+    "cost:forage"
+   ],
+   "why": "'As an additional cost, forage or pay {B}': no forage additional cost."
+  },
+  {
+   "name": "Danny Pink",
+   "needs": [
+    "trigger:counters-put-first-time-each-turn"
+   ],
+   "why": "'Whenever one or more counters are put on this creature for the first time each turn'."
+  },
+  {
+   "name": "Triumph of Saint Katherine",
+   "needs": [
+    "effect:shuffle-self-into-library-top"
+   ],
+   "why": "Exile it and the top six in a face-down pile, shuffle, and put it back on top."
+  },
+  {
+   "name": "Nashi, Moon Sage's Scion",
+   "needs": [
+    "cost:alt-cost-pay-life-equal-mana-value"
+   ],
+   "why": "Cast an impulse-exiled card by paying life equal to its mana value."
+  },
+  {
+   "name": "Ojer Pakpatiq, Deepest Epoch",
+   "needs": [
+    "effect:grant-rebound-to-spell"
+   ],
+   "why": "'Whenever you cast an instant spell from your hand, it gains rebound'."
+  },
+  {
+   "name": "Hatchery Sliver",
+   "needs": [
+    "static:grant-replicate"
+   ],
+   "why": "Each Sliver spell you cast has replicate equal to its mana cost."
+  },
+  {
+   "name": "Tifa's Limit Break",
+   "needs": [
+    "effect:multiply-pt"
+   ],
+   "why": "Triple target creature's power and toughness (a product clamps negative power at 0)."
+  },
+  {
+   "name": "The Unagi of Kyoshi Island",
+   "needs": [
+    "decision:ward-waterbend"
+   ],
+   "why": "Ward—Waterbend {4}."
+  },
+  {
+   "name": "Case of the Stashed Skeleton",
+   "needs": [
+    "effect:created-token-reference"
+   ],
+   "why": "'Create a 2/1 Skeleton and suspect it': suspect can't name the token just made."
+  },
+  {
+   "name": "Barbarian Class",
+   "needs": [
+    "replacement:roll-extra-ignore-lowest"
+   ],
+   "why": "Roll that many dice plus one and ignore the lowest."
+  },
+  {
+   "name": "Omni-Changeling",
+   "needs": [
+    "effect:copy-exception-changeling"
+   ],
+   "why": "Enters as a copy except it has changeling: a copy exception's changeling isn't read by subtype checks."
+  },
+  {
+   "name": "Nautiloid Ship",
+   "needs": [
+    "effect:exile-graveyard-linked",
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "Exile a graveyard linked to it, then put a creature card exiled with it onto the battlefield under your control."
+  },
+  {
+   "name": "Wall of Shards",
+   "needs": [
+    "cost:cumulative-upkeep-opponent-gains-life"
+   ],
+   "why": "Cumulative upkeep—an opponent gains 1 life."
+  },
+  {
+   "name": "Zoyowa's Justice",
+   "needs": [
+    "effect:discover-by-other-player"
+   ],
+   "why": "The target's owner discovers X: discover has no who."
+  },
+  {
+   "name": "Thornvault Forager",
+   "needs": [
+    "cost:forage"
+   ],
+   "why": "{T}, Forage: Add two mana: no forage activation cost."
+  },
+  {
+   "name": "Hauntwoods Shrieker",
+   "needs": [
+    "effect:turn-face-up"
+   ],
+   "why": "Reveal target face-down permanent; if it's a creature card, you may turn it face up."
+  },
+  {
+   "name": "Arcbound Overseer",
+   "needs": [
+    "filter:has-modular"
+   ],
+   "why": "'Each creature you control with modular': no marker for modular."
+  },
+  {
+   "name": "Dokuchi Silencer",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "'You may discard a creature card. When you do, …'."
+  },
+  {
+   "name": "World at War",
+   "needs": [
+    "effect:additional-combat-after-main"
+   ],
+   "why": "An additional combat after the second main phase, untapping creatures that attacked."
+  },
+  {
+   "name": "Exterminate!",
+   "needs": [
+    "cost:replicate-tap-permanent"
+   ],
+   "why": "Replicate—Tap an untapped Dalek you control."
+  },
+  {
+   "name": "Threefold Signal",
+   "needs": [
+    "static:grant-replicate"
+   ],
+   "why": "Each spell you cast that's exactly three colors has replicate {3}."
+  },
+  {
+   "name": "Cloud's Limit Break",
+   "needs": [
+    "effect:target-different-controllers"
+   ],
+   "why": "Any number of target tapped creatures with different controllers."
+  },
+  {
+   "name": "Waterbending Lesson",
+   "needs": [
+    "effect:unless-waterbend"
+   ],
+   "why": "'Discard a card unless you waterbend {2}'."
+  },
+  {
+   "name": "Case File Auditor",
+   "needs": [
+    "trigger:solves-case"
+   ],
+   "why": "'Whenever you solve a Case'."
+  },
+  {
+   "name": "Maskwood Nexus",
+   "needs": [
+    "static:static-types-outside-battlefield"
+   ],
+   "why": "Every creature type for creature spells and cards outside the battlefield too."
+  },
+  {
+   "name": "Hoard Hauler",
+   "needs": [
+    "amount:count-for-trigger-player"
+   ],
+   "why": "'A Treasure for each artifact they control': countOf can't read the damaged player's side."
+  },
+  {
+   "name": "Mobilizer Mech",
+   "needs": [
+    "trigger:becomes-crewed-trigger"
+   ],
+   "why": "'Whenever this Vehicle becomes crewed'."
+  },
+  {
+   "name": "Herald of Leshrac",
+   "needs": [
+    "cost:cumulative-upkeep-gain-control-land"
+   ],
+   "why": "Cumulative upkeep—gain control of a land you don't control."
+  },
+  {
+   "name": "Jötun Grunt",
+   "needs": [
+    "cost:cumulative-upkeep-graveyard-to-library"
+   ],
+   "why": "Cumulative upkeep—put two cards from a single graveyard on the bottom of their owner's library."
+  },
+  {
+   "name": "Lavinia of the Tenth",
+   "needs": [
+    "effect:detain-all"
+   ],
+   "why": "Detain each nonland permanent your opponents control with mana value 4 or less."
+  },
+  {
+   "name": "Quintorius Kand",
+   "needs": [
+    "zone:exile-from-graveyard-play-this-turn"
+   ],
+   "why": "Exile cards from your graveyard and play them this turn (lands included)."
+  },
+  {
+   "name": "Brotherhood Headquarters",
+   "needs": [
+    "filter:has-freerunning"
+   ],
+   "why": "Mana spendable on a spell that has freerunning."
+  },
+  {
+   "name": "Viewpoint Synchronization",
+   "needs": [
+    "effect:search-split-count"
+   ],
+   "why": "Two of three found lands onto the battlefield, the other into your hand."
+  },
+  {
+   "name": "Taste of Paradise",
+   "needs": [
+    "cost:multikicker-not-kicker"
+   ],
+   "why": "'You may pay {1}{G} any number of times' with no keyword: a multi kicker would count as kicked."
+  },
+  {
+   "name": "The Master, Multiplied",
+   "needs": [
+    "static:token-protection-from-own-triggers"
+   ],
+   "why": "'Triggered abilities you control can't cause you to sacrifice or exile creature tokens you control'."
+  },
+  {
+   "name": "Consign to Memory",
+   "needs": [
+    "target:stack-spell-filter"
+   ],
+   "why": "Counter target triggered ability or colorless spell."
+  },
+  {
+   "name": "Wrenn and Six",
+   "needs": [
+    "static:retrace-grant"
+   ],
+   "why": "An emblem granting retrace to instants and sorceries in your graveyard."
+  },
+  {
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "needs": [
+    "condition:not-dealt-combat-damage-since-last-turn"
+   ],
+   "why": "Marchesa's 'if you haven't been dealt combat damage since your last turn'."
+  },
+  {
+   "name": "Invasion of Ikoria // Zilortha, Apex of Ikoria",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "Each non-Human creature you control may assign combat damage as though it weren't blocked."
+  }
+ ]
+}

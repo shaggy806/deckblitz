@@ -283,6 +283,7 @@ import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiantsAmulet from "../pool/giants-amulet.js";
 import _poolGideonAllyOfZendikar from "../pool/gideon-ally-of-zendikar.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
+import _poolGlacialChasm from "../pool/glacial-chasm.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
@@ -377,6 +378,7 @@ import _poolKeldonBattlewagon from "../pool/keldon-battlewagon.js";
 import _poolKessigForgemaster from "../pool/kessig-forgemaster.js";
 import _poolKikuNightsFlower from "../pool/kiku-nights-flower.js";
 import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
+import _poolKingTchalla from "../pool/king-tchalla.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
 import _poolKnightsCharge from "../pool/knights-charge.js";
@@ -493,6 +495,7 @@ import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
+import _poolPhyrexianSoulgorger from "../pool/phyrexian-soulgorger.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
 import _poolPiasRevolution from "../pool/pias-revolution.js";
 import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
@@ -810,6 +813,7 @@ import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
 import _poolYouHearSomethingOnWatch from "../pool/you-hear-something-on-watch.js";
+import _poolYuffieMateriaHunter from "../pool/yuffie-materia-hunter.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
@@ -1114,6 +1118,7 @@ const shard: CardShard = {
     _poolGiantsAmulet,
     _poolGideonAllyOfZendikar,
     _poolGiftOfGranite,
+    _poolGlacialChasm,
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
     _poolGlassCasket,
@@ -1208,6 +1213,7 @@ const shard: CardShard = {
     _poolKessigForgemaster,
     _poolKikuNightsFlower,
     _poolKimahriValiantGuardian,
+    _poolKingTchalla,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
     _poolKnightsCharge,
@@ -1324,6 +1330,7 @@ const shard: CardShard = {
     _poolPerimeterPatrol,
     _poolPersonify,
     _poolPhotonLivingLight,
+    _poolPhyrexianSoulgorger,
     _poolPiaAndKiranNalaar,
     _poolPiasRevolution,
     _poolPilgrimsEye,
@@ -1641,6 +1648,7 @@ const shard: CardShard = {
     _poolYokedPlowbeast,
     _poolYotianFrontliner,
     _poolYouHearSomethingOnWatch,
+    _poolYuffieMateriaHunter,
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,

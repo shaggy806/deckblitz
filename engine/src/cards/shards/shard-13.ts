@@ -117,9 +117,11 @@ import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCennsHeir from "../pool/cenns-heir.js";
 import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
 import _poolChampionLancer from "../pool/champion-lancer.js";
+import _poolChancellorOfTheForge from "../pool/chancellor-of-the-forge.js";
 import _poolChandraFlamesFury from "../pool/chandra-flames-fury.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolChoArrimLegate from "../pool/cho-arrim-legate.js";
+import _poolChromeHostSeedshark from "../pool/chrome-host-seedshark.js";
 import _poolCinderGiant from "../pool/cinder-giant.js";
 import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
@@ -928,9 +930,11 @@ const shard: CardShard = {
     _poolCennsHeir,
     _poolChainedToTheRocks,
     _poolChampionLancer,
+    _poolChancellorOfTheForge,
     _poolChandraFlamesFury,
     _poolCheerfulOsteomancer,
     _poolChoArrimLegate,
+    _poolChromeHostSeedshark,
     _poolCinderGiant,
     _poolClackbridgeTroll,
     _poolClamorShaman,

@@ -53,6 +53,7 @@ import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
+import _poolAvatarKuruk from "../pool/avatar-kuruk.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolAwakenTheHonoredDead from "../pool/awaken-the-honored-dead.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
@@ -127,6 +128,7 @@ import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChampionsVictory from "../pool/champions-victory.js";
+import _poolChancellorOfTheSpires from "../pool/chancellor-of-the-spires.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
@@ -226,6 +228,7 @@ import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
+import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -256,6 +259,7 @@ import _poolFesteringNewt from "../pool/festering-newt.js";
 import _poolFiligreeFracture from "../pool/filigree-fracture.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
+import _poolFireNationTurret from "../pool/fire-nation-turret.js";
 import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
 import _poolFlashback from "../pool/flashback.js";
@@ -344,6 +348,7 @@ import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
+import _poolHoodedBlightfang from "../pool/hooded-blightfang.js";
 import _poolHornetCannon from "../pool/hornet-cannon.js";
 import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
@@ -437,6 +442,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMeltTerrain from "../pool/melt-terrain.js";
+import _poolMichikoKondaTruthSeeker from "../pool/michiko-konda-truth-seeker.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMinionOfLeshrac from "../pool/minion-of-leshrac.js";
@@ -864,6 +870,7 @@ const shard: CardShard = {
     _poolAugmentingAutomaton,
     _poolAuriokSunchaser,
     _poolAuthority,
+    _poolAvatarKuruk,
     _poolAvatarsWrath,
     _poolAwakenTheHonoredDead,
     _poolBackToNature,
@@ -938,6 +945,7 @@ const shard: CardShard = {
     _poolCennsEnlistment,
     _poolCentaurHealer,
     _poolChampionsVictory,
+    _poolChancellorOfTheSpires,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
     _poolCharcoalDiamond,
@@ -1037,6 +1045,7 @@ const shard: CardShard = {
     _poolEarthenAlly,
     _poolEbonDragon,
     _poolEchoingRuin,
+    _poolElrondLordOfRivendell,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
@@ -1067,6 +1076,7 @@ const shard: CardShard = {
     _poolFiligreeFracture,
     _poolFireNationCadets,
     _poolFireNationSoldier,
+    _poolFireNationTurret,
     _poolFlameBurst,
     _poolFlameSpill,
     _poolFlashback,
@@ -1155,6 +1165,7 @@ const shard: CardShard = {
     _poolHoardingOgre,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
+    _poolHoodedBlightfang,
     _poolHornetCannon,
     _poolHostileTakeover,
     _poolHourOfReckoning,
@@ -1248,6 +1259,7 @@ const shard: CardShard = {
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
     _poolMeltTerrain,
+    _poolMichikoKondaTruthSeeker,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMinionOfLeshrac,

@@ -28,6 +28,7 @@ import _poolAnathemancer from "../pool/anathemancer.js";
 import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
+import _poolAngelOfSuffering from "../pool/angel-of-suffering.js";
 import _poolAngelheartVial from "../pool/angelheart-vial.js";
 import _poolAngelicFavor from "../pool/angelic-favor.js";
 import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
@@ -247,6 +248,7 @@ import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
+import _poolFlamekinVillage from "../pool/flamekin-village.js";
 import _poolFledglingDragon from "../pool/fledgling-dragon.js";
 import _poolFleetfeatherCockatrice from "../pool/fleetfeather-cockatrice.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolAncestralKatana,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
+    _poolAngelOfSuffering,
     _poolAngelheartVial,
     _poolAngelicFavor,
     _poolAnointerOfValor,
@@ -1076,6 +1079,7 @@ const shard: CardShard = {
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
+    _poolFlamekinVillage,
     _poolFledglingDragon,
     _poolFleetfeatherCockatrice,
     _poolFleetfootDancer,

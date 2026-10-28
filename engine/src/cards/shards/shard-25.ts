@@ -122,6 +122,7 @@ import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolCephalidAristocrat from "../pool/cephalid-aristocrat.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
+import _poolChancellorOfTheTangle from "../pool/chancellor-of-the-tangle.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
@@ -194,6 +195,7 @@ import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
 import _poolDreadbore from "../pool/dreadbore.js";
 import _poolDreadmobile from "../pool/dreadmobile.js";
+import _poolDreamsOfTheDead from "../pool/dreams-of-the-dead.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
@@ -344,6 +346,7 @@ import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
+import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
@@ -428,6 +431,7 @@ import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
+import _poolMistsOfLorien from "../pool/mists-of-lorien.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
@@ -521,6 +525,7 @@ import _poolRadiantArchangel from "../pool/radiant-archangel.js";
 import _poolRakdosIckspitter from "../pool/rakdos-ickspitter.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
+import _poolRallyTheGaladhrim from "../pool/rally-the-galadhrim.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRankOfficer from "../pool/rank-officer.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
@@ -567,6 +572,7 @@ import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
 import _poolRockyRebuke from "../pool/rocky-rebuke.js";
 import _poolRograkhSonOfRohgahh from "../pool/rograkh-son-of-rohgahh.js";
+import _poolRogueClass from "../pool/rogue-class.js";
 import _poolRoilingDragonstorm from "../pool/roiling-dragonstorm.js";
 import _poolRollingHamsphere from "../pool/rolling-hamsphere.js";
 import _poolRomanticRendezvous from "../pool/romantic-rendezvous.js";
@@ -587,6 +593,7 @@ import _poolSanguineSacrament from "../pool/sanguine-sacrament.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScabClanMauler from "../pool/scab-clan-mauler.js";
+import _poolScavengersTalent from "../pool/scavengers-talent.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScourglass from "../pool/scourglass.js";
@@ -924,6 +931,7 @@ const shard: CardShard = {
     _poolCephalidAristocrat,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
+    _poolChancellorOfTheTangle,
     _poolChaoticGoo,
     _poolChargingTroll,
     _poolChiefOfTheEdge,
@@ -996,6 +1004,7 @@ const shard: CardShard = {
     _poolDrakeSkullCameo,
     _poolDreadbore,
     _poolDreadmobile,
+    _poolDreamsOfTheDead,
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
@@ -1146,6 +1155,7 @@ const shard: CardShard = {
     _poolInnerDemonsGangsters,
     _poolInnerFire,
     _poolInspiringPaladin,
+    _poolInspiringRefrain,
     _poolJacesTriumph,
     _poolJaggedLightning,
     _poolJetMedallion,
@@ -1230,6 +1240,7 @@ const shard: CardShard = {
     _poolMirrorOfTheForebears,
     _poolMiscalculation,
     _poolMistralSinger,
+    _poolMistsOfLorien,
     _poolMistveilPlains,
     _poolMoggInfestation,
     _poolMoggcatcher,
@@ -1323,6 +1334,7 @@ const shard: CardShard = {
     _poolRakdosIckspitter,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
+    _poolRallyTheGaladhrim,
     _poolRampartArchitect,
     _poolRankOfficer,
     _poolRaphaelToughTurtle,
@@ -1369,6 +1381,7 @@ const shard: CardShard = {
     _poolRockfallVale,
     _poolRockyRebuke,
     _poolRograkhSonOfRohgahh,
+    _poolRogueClass,
     _poolRoilingDragonstorm,
     _poolRollingHamsphere,
     _poolRomanticRendezvous,
@@ -1389,6 +1402,7 @@ const shard: CardShard = {
     _poolSarkhansUnsealing,
     _poolSauronDinoDevotee,
     _poolScabClanMauler,
+    _poolScavengersTalent,
     _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScourglass,

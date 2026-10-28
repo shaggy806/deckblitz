@@ -480,7 +480,8 @@
   "cost:morph-discard-card",
   "cost:morph-return-permanent",
   "amount:count-in-graveyards-same-name-as-trigger-spell",
-  "effect:skip-next-untap-step"
+  "effect:skip-next-untap-step",
+  "mechanic:opening-hand-reveal"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
@@ -833,7 +834,7 @@
   "effect:additional-upkeep-steps": {
    "size": "medium",
    "ui": false,
-   "description": "'You get that many additional upkeep steps after this phase': extra beginning phases (untap and draw skipped) inserted after the current combat, with upkeep triggers firing in each (rules 500.8 and 500.10)."
+   "description": "'You get that many additional upkeep steps after this phase': extra beginning phases (untap and draw skipped) inserted after the current combat, with upkeep triggers firing in each (rules 500.8 and 500.10). Only its controller's own turn, from a combat phase: not another player's extra upkeep (effect:additional-upkeep-step-enchanted-player)."
   },
   "effect:amount-aggregate": {
    "size": "small",
@@ -1175,7 +1176,7 @@
   "keyword:changeling": {
    "size": "small",
    "ui": false,
-   "description": "'Is every creature type' (changeling) and 'every land type': a marker that matches every type of that kind, in every zone, for filters, lords and effectiveSubtypes."
+   "description": "'Is every creature type' (changeling) and 'every land type': a marker that matches every type of that kind, in every zone, for filters, lords and effectiveSubtypes. Not changeling granted by a copy exception (effect:copy-exception-changeling)."
   },
   "keyword:connive": {
    "size": "medium",
@@ -1265,7 +1266,7 @@
   "keyword:miracle": {
    "size": "medium",
    "ui": true,
-   "description": "Miracle (rule 702.94): track the first card each player draws each turn, offer to reveal it, and let its controller cast it for the miracle cost. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback)."
+   "description": "Miracle (rule 702.94): track the first card each player draws each turn, offer to reveal it, and let its controller cast it for the miracle cost. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback). Not granting miracle to cards in hand (static:grant-miracle-in-hand)."
   },
   "keyword:mobilize": {
    "size": "small",
@@ -1275,7 +1276,7 @@
   "keyword:multikicker": {
    "size": "medium",
    "ui": true,
-   "description": "Multikicker: a repeatable kicker whose number of payments is chosen at cast and read as an amount."
+   "description": "Multikicker: a repeatable kicker whose number of payments is chosen at cast and read as an amount. Not an unnamed 'pay [cost] any number of times' additional cost (cost:multikicker-not-kicker)."
   },
   "keyword:ninjutsu": {
    "size": "medium",
@@ -1305,7 +1306,7 @@
   "keyword:warp": {
    "size": "medium",
    "ui": false,
-   "description": "Warp (rule 702.185): an alternative cost from hand. At the next end step the permanent is exiled, and its owner may cast it from exile later. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback)."
+   "description": "Warp (rule 702.185): an alternative cost from hand. At the next end step the permanent is exiled, and its owner may cast it from exile later. Includes a static granting it to matching cards (the way grantsToGraveyard grants flashback). Not warp from the graveyard or with a life cost (keyword:warp-from-graveyard-and-life-cost)."
   },
   "keyword:waterbend": {
    "size": "medium",
@@ -1325,7 +1326,7 @@
   "mechanic:coin-flip": {
    "size": "medium",
    "ui": false,
-   "description": "Seeded coin flips: win and lose branches, 'flip until you lose', a log event, and a 'whenever a player wins a coin flip' trigger."
+   "description": "Seeded coin flips: win and lose branches, 'flip until you lose', a log event, and a 'whenever a player wins a coin flip' trigger. Not: flip replacements (mechanic:coin-flip-result-replacement), uncalled flips with no winner (mechanic:coin-flip-heads-tails), a flip per permanent (effect:for-each-permanent-coin-flip) or counting wins first (amount:coin-flips-won-this-way)."
   },
   "mechanic:commander-pairing": {
    "size": "small",
@@ -1340,7 +1341,7 @@
   "mechanic:dice-rolling": {
    "size": "medium",
    "ui": false,
-   "description": "Dice rolling (rule 706) on the seeded Rng: a roll effect, a die-rolled event, and a 'whenever you roll N or higher' trigger that fires once per die."
+   "description": "Dice rolling (rule 706) on the seeded Rng: a roll effect, a die-rolled event, and a 'whenever you roll N or higher' trigger that fires once per die. Not: choosing among results (decision:choose-roll-result), each player rolling (effect:each-player-rolls), roll replacements (replacement:roll-extra-ignore-lowest), rolling as a permanent enters (replacement:roll-as-enters), comparing results (condition:roll-result-compare) or a modified-result trigger value (trigger:rolls-dice-modified-result)."
   },
   "mechanic:dungeon": {
    "size": "large",
@@ -1382,7 +1383,7 @@
   "mechanic:player-counters": {
    "size": "medium",
    "ui": false,
-   "description": "Player counter kinds beyond energy: experience counters (a get effect, an EffectAmount, a P/T bonus that reads them) and poison counters (the 10-poison SBA loss, 'corrupted' conditions). Both need events, view and client display, and proliferate over players who have them."
+   "description": "Player counter kinds beyond energy: experience counters (a get effect, an EffectAmount, a P/T bonus that reads them) and poison counters (the 10-poison SBA loss, 'corrupted' conditions). Both need events, view and client display, and proliferate over players who have them. Not: a player losing all counters at once (effect:lose-all-player-counters) or replacements on counters a player gets (replacement:player-counter-addend)."
   },
   "mechanic:rad-counters": {
    "size": "medium",
@@ -1417,12 +1418,12 @@
   "mechanic:suspend-and-time-counters": {
    "size": "medium",
    "ui": true,
-   "description": "Suspend and time-counter follow-ups: time travel (rule 701.56, choose add, remove or neither for each suspended card and time-counter permanent), granting suspend with N time counters, and a suspend cast that fires whenever the last time counter comes off."
+   "description": "Suspend and time-counter follow-ups: time travel (rule 701.56, choose add, remove or neither for each suspended card and time-counter permanent), granting suspend with N time counters, and a suspend cast that fires whenever the last time counter comes off. Not: adding or removing time counters on every permanent and suspended card at once (effect:time-counters-on-all-suspended)."
   },
   "mechanic:the-ring": {
    "size": "large",
    "ui": true,
-   "description": "The Ring tempts you (rule 701.54): the Ring emblem's four cumulative levels, choosing a Ring-bearer, the temptation count, a 'whenever the Ring tempts you' trigger, and protection from Ring-bearers."
+   "description": "The Ring tempts you (rule 701.54): the Ring emblem's four cumulative levels, choosing a Ring-bearer, the temptation count, a 'whenever the Ring tempts you' trigger, and protection from Ring-bearers. Not the cards' other clauses: 'other than ~' as Ring-bearer is chosen: \"other\"; a Ring-bearer's power is an aggregate sum over { ringBearer: true }."
   },
   "mechanic:voting": {
    "size": "medium",
@@ -1444,7 +1445,7 @@
   "replacement:damage-modification": {
    "size": "medium",
    "ui": false,
-   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead). Not covered (recheck R8): a source named as this Aura's host (replacement:damage-multiplier-by-attached), or combat damage turned into the damaged player milling (replacement:combat-damage-becomes-mill)."
+   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead). Not: redirection (replacement:damage-redirection), 'can't be prevented' (effect:damage-cant-be-prevented, static:damage-cant-be-prevented), prevent all but N (replacement:prevent-all-but-n-damage), the equipped creature as source or recipient (replacement:equipped-creature-damage-doubling), a plus read from counters (replacement:damage-plus-counters-on-source), or the affected player ordering modifiers (replacement:affected-player-orders-damage-modifiers). Not covered (recheck R8): a source named as this Aura's host (replacement:damage-multiplier-by-attached), or combat damage turned into the damaged player milling (replacement:combat-damage-becomes-mill)."
   },
   "replacement:enters-modifier-via-permission": {
    "size": "small",
@@ -1638,7 +1639,7 @@
   "trigger:combat-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Combat-trigger vocabulary: 'becomes blocked', 'whenever a player attacks one of your opponents', otherOnly on the attacks and combat-damage triggers, and the trigger object set for blocker-declared and combat damage-dealt events."
+   "description": "Combat-trigger vocabulary: 'becomes blocked', 'whenever a player attacks one of your opponents', otherOnly on the attacks and combat-damage triggers, and the trigger object set for blocker-declared and combat damage-dealt events. Not covered (recheck R9): an attacker filter on attacks-player — trigger:attacks-player-filter; the count of matching attackers as attack-with's value — trigger:attack-with-count-amount; a 'creature attacking you' target without your planeswalkers — target:creature-attacking-you-player-only."
   },
   "trigger:commit-crime": {
    "size": "medium",
@@ -1653,12 +1654,12 @@
   "trigger:counters-put": {
    "size": "small",
    "ui": false,
-   "description": "A 'whenever one or more counters are put on [filter]' trigger that supplies the amount."
+   "description": "A 'whenever one or more counters are put on [filter]' trigger that supplies the amount. Not covered (recheck R9): once per permanent across counter kinds — trigger:counters-put-any-kind-once; otherOnly — trigger:counters-put-other."
   },
   "trigger:damage-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Damage-trigger vocabulary: source-side triggers (deals damage to a creature, a source you control deals noncombat damage to an opponent, a spell deals damage to its own target), a filter on dealt-damage, and damage whose source is the trigger object ('it deals damage')."
+   "description": "Damage-trigger vocabulary: source-side triggers (deals damage to a creature, a source you control deals noncombat damage to an opponent, a spell deals damage to its own target), a filter on dealt-damage, and damage whose source is the trigger object ('it deals damage'). Not covered (recheck R9): once per event when a recipient is named ('to one or more creatures') — trigger:deals-damage-to-recipients-once-per-event; an N-or-more amount — trigger:deals-damage-amount-threshold; combat damage to you or your planeswalkers as one batch — trigger:combat-damage-to-you-or-your-planeswalkers-batch."
   },
   "trigger:destroyed": {
    "size": "small",
@@ -1745,7 +1746,7 @@
   "zone:cast-from-library-top": {
    "size": "medium",
    "ui": false,
-   "description": "A static permission to cast matching spells from the top of your library. It needs a new cast zone in castSpell, whyCannotCast and legalActions, plus the top card revealed."
+   "description": "A static permission to cast matching spells from the top of your library. It needs a new cast zone in castSpell, whyCannotCast and legalActions, plus the top card revealed. Not covered (recheck R9): once each turn — zone:cast-from-library-top-once-each-turn; an extra cost — zone:cast-from-library-top-extra-cost; plot from the top — zone:plot-from-library-top; a one-shot until-end-of-turn form — effect:play-from-library-top-this-turn."
   },
   "zone:graveyard-cast-permissions": {
    "size": "medium",
@@ -1757,7 +1758,7 @@
   "zone:impulse-permission-options": {
    "size": "medium",
    "ui": false,
-   "description": "Options on impulse (play-from-exile) permissions: cast without paying the mana cost, a CardFilter for which cards may be cast, and new durations (until your next end step, for as long as it remains exiled)."
+   "description": "Options on impulse (play-from-exile) permissions: cast without paying the mana cost, a CardFilter for which cards may be cast, and new durations (until your next end step, for as long as it remains exiled). Not covered (recheck R9): an owner's cast-now permission — zone:exile-owner-may-cast-now; a duration ending as your next turn begins — zone:impulse-until-your-next-turn-begins; play (lands) permissions on a trigger object or milled card — zone:exile-trigger-object-play-this-turn, zone:play-milled-card-this-turn; cast free while exiled after a counter — effect:cast-free-while-exiled."
   },
   "zone:play-from-exile-with-counter": {
    "size": "medium",
@@ -1774,7 +1775,7 @@
   "zone:exile-face-down": {
    "size": "small",
    "ui": false,
-   "description": "A card exiled face down that only the player who looked at it may see (rule 406.3) — Edward Kenway, Gonti, Ixhel. Built: impulse-exile's faceDown."
+   "description": "A card exiled face down that only the player who looked at it may see (rule 406.3) — Edward Kenway, Gonti, Ixhel. Built: impulse-exile's faceDown. Not covered (recheck R9): a whole library face down — effect:exile-library-face-down; a look-and-choose face-down exile with a standing cast permission — effect:look-exile-face-down-cast-while-exiled, effect:look-opponent-library-exile-one-face-down."
   },
   "zone:cast-from-opponents-hand": {
    "size": "medium",

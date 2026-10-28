@@ -326,6 +326,7 @@ import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
+import _poolInTheDarknessBindThem from "../pool/in-the-darkness-bind-them.js";
 import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
 import _poolIndestructibleAura from "../pool/indestructible-aura.js";
@@ -714,6 +715,7 @@ import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
+import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
@@ -1183,6 +1185,7 @@ const shard: CardShard = {
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
+    _poolInTheDarknessBindThem,
     _poolInameLifeAspect,
     _poolIncisorGlider,
     _poolIndestructibleAura,
@@ -1571,6 +1574,7 @@ const shard: CardShard = {
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,
     _poolTheLegendOfKyoshi,
+    _poolTheRedTerror,
     _poolTheShire,
     _poolThornMammoth,
     _poolThornglintBridge,

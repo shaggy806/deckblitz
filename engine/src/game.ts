@@ -4689,17 +4689,23 @@ export class Game {
    * cards allow — 103.6a, beginning the game with a card on the battlefield
    * (the Leylines, `CardDefinition.beginsOnBattlefield`). Asked as a
    * `choose-from-zone` over those cards, any number of them, flagged
-   * `openingHand`; a player holding none isn't asked. `from` counts players
-   * from the starting player. Turn 1 begins once nobody is left to ask.
+   * `openingHand`; a player holding none isn't asked. Then, as a second
+   * question to the same player, which cards to reveal for their delayed
+   * abilities (rule 103.6b — the Chancellors, `CardDefinition.openingHandReveal`).
+   * `from` counts those questions from the starting player's first, two a
+   * player. Turn 1 begins once nobody is left to ask.
    */
   private beginOpeningHandActions(from: number): void {
     const order = this.state.turnOrder;
     const start = Math.max(0, order.indexOf(this.state.startingPlayer));
-    for (let i = from; i < order.length; i += 1) {
-      const player = order[(start + i) % order.length];
+    for (let pos = from; pos < order.length * 2; pos += 1) {
+      const player = order[(start + Math.floor(pos / 2)) % order.length];
+      const reveal = pos % 2 === 1;
       const eligible = this.state.zones.perPlayer[player].hand.filter((id) => {
         const name = this.state.objects[id]?.cardName;
-        return name !== undefined && this.registry.has(name) && this.registry.get(name).beginsOnBattlefield;
+        if (name === undefined || !this.registry.has(name)) return false;
+        const def = this.registry.get(name);
+        return reveal ? def.openingHandReveal !== null : def.beginsOnBattlefield;
       });
       if (eligible.length === 0) continue;
       this.state.awaiting = {
@@ -4709,9 +4715,9 @@ export class Game {
         eligible,
         min: 0,
         max: eligible.length,
-        destination: "battlefield",
+        destination: reveal ? "reveal" : "battlefield",
         leftover: "stay",
-        openingHand: { next: i + 1 },
+        openingHand: { next: pos + 1 },
       };
       this.prepareForPriority(player);
       return;
@@ -4721,14 +4727,25 @@ export class Game {
   }
 
   /** The answer to {@link beginOpeningHandActions}' question: the chosen
-   * cards go onto the battlefield together (rule 103.6a), then the next
-   * player is asked. */
+   * cards go onto the battlefield together (rule 103.6a) — or, revealed,
+   * stay in the hand, each setting up its delayed ability — then the next
+   * question is asked. */
   private applyOpeningHand(
     player: PlayerId,
     chosen: readonly ObjectId[],
     next: number,
+    reveal: boolean,
   ): void {
     this.state.awaiting = null;
+    if (reveal) {
+      if (chosen.length > 0) this.revealCards(player, chosen, "hand");
+      for (const id of chosen) {
+        const spec = this.registry.get(this.state.objects[id].cardName).openingHandReveal;
+        if (spec !== null) this.createDelayedTrigger(id, player, spec.at, spec.effect, spec.text, []);
+      }
+      this.beginOpeningHandActions(next);
+      return;
+    }
     this.withEnterBatch(() => {
       for (const id of chosen) this.moveObject(id, "battlefield");
     });
@@ -7050,7 +7067,7 @@ export class Game {
     }
     // Before the game (rule 103.6a): no resolution to go on with.
     if (awaiting.openingHand !== undefined) {
-      this.applyOpeningHand(player, chosen, awaiting.openingHand.next);
+      this.applyOpeningHand(player, chosen, awaiting.openingHand.next, awaiting.destination === "reveal");
       return;
     }
 

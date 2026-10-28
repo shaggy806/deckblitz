@@ -256,6 +256,7 @@ import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
 import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
+import _poolGloriousGale from "../pool/glorious-gale.js";
 import _poolGoblinFestival from "../pool/goblin-festival.js";
 import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
@@ -281,6 +282,7 @@ import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
 import _poolHeWhoHungers from "../pool/he-who-hungers.js";
+import _poolHeartOfBogardan from "../pool/heart-of-bogardan.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeedTheMists from "../pool/heed-the-mists.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
@@ -1088,6 +1090,7 @@ const shard: CardShard = {
     _poolGlazeFiend,
     _poolGlintwingInvoker,
     _poolGlorifierOfDusk,
+    _poolGloriousGale,
     _poolGoblinFestival,
     _poolGoblinKites,
     _poolGoblinRabblemaster,
@@ -1113,6 +1116,7 @@ const shard: CardShard = {
     _poolHauntedScreen,
     _poolHavocFestival,
     _poolHeWhoHungers,
+    _poolHeartOfBogardan,
     _poolHeavyBallista,
     _poolHeedTheMists,
     _poolHeirloomAuntie,

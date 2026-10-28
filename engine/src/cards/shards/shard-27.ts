@@ -281,6 +281,7 @@ import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolGuiltfeeder from "../pool/guiltfeeder.js";
+import _poolGuiltyConscience from "../pool/guilty-conscience.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
@@ -797,6 +798,7 @@ import _tokensHomunculusToken22 from "../tokens/homunculus-token-2-2.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensMarkOfTheRaniToken from "../tokens/mark-of-the-rani-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
+import _tokensPhyrexianGoblinTokenHaste from "../tokens/phyrexian-goblin-token-haste.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
@@ -1087,6 +1089,7 @@ const shard: CardShard = {
     _poolGuardianNaga,
     _poolGuidelightSynergist,
     _poolGuiltfeeder,
+    _poolGuiltyConscience,
     _poolGyrusWakerOfCorpses,
     _poolHaloHunter,
     _poolHarvestGwyllion,
@@ -1605,6 +1608,7 @@ const shard: CardShard = {
     _tokensHumanToken,
     _tokensMarkOfTheRaniToken,
     _tokensOozeToken,
+    _tokensPhyrexianGoblinTokenHaste,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,

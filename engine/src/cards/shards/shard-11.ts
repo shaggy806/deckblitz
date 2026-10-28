@@ -550,6 +550,7 @@ import _poolRadiantPurge from "../pool/radiant-purge.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
 import _poolRaffCapashenShipsMage from "../pool/raff-capashen-ships-mage.js";
 import _poolRaffinesSilencer from "../pool/raffines-silencer.js";
+import _poolRaidingSchemes from "../pool/raiding-schemes.js";
 import _poolRailwayBrawler from "../pool/railway-brawler.js";
 import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
@@ -763,6 +764,7 @@ import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
+import _poolVisionsOfBrutality from "../pool/visions-of-brutality.js";
 import _poolVitalSplicer from "../pool/vital-splicer.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVodalianMindsinger from "../pool/vodalian-mindsinger.js";
@@ -1378,6 +1380,7 @@ const shard: CardShard = {
     _poolRadiantSummit,
     _poolRaffCapashenShipsMage,
     _poolRaffinesSilencer,
+    _poolRaidingSchemes,
     _poolRailwayBrawler,
     _poolRakdosSignet,
     _poolRallyTheRanks,
@@ -1591,6 +1594,7 @@ const shard: CardShard = {
     _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,
+    _poolVisionsOfBrutality,
     _poolVitalSplicer,
     _poolVodalianHypnotist,
     _poolVodalianMindsinger,

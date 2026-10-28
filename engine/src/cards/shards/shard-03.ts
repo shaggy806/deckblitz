@@ -64,6 +64,7 @@ import _poolBoskBanneret from "../pool/bosk-banneret.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBriarknitKami from "../pool/briarknit-kami.js";
+import _poolBrimazBlightOfOreskos from "../pool/brimaz-blight-of-oreskos.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurdenOfGreed from "../pool/burden-of-greed.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
@@ -85,6 +86,7 @@ import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
 import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
+import _poolChancellorOfTheDross from "../pool/chancellor-of-the-dross.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
@@ -100,6 +102,7 @@ import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCloudthresher from "../pool/cloudthresher.js";
 import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
+import _poolConcordantCrossroads from "../pool/concordant-crossroads.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolConfrontThePast from "../pool/confront-the-past.js";
@@ -579,6 +582,7 @@ import _poolSpecterOfMortality from "../pool/specter-of-mortality.js";
 import _poolSpectralDeluge from "../pool/spectral-deluge.js";
 import _poolSpectralSailor from "../pool/spectral-sailor.js";
 import _poolSpellSnip from "../pool/spell-snip.js";
+import _poolSphinxOfForesight from "../pool/sphinx-of-foresight.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
@@ -813,6 +817,7 @@ const shard: CardShard = {
     _poolBovineIntervention,
     _poolBranchblightStalker,
     _poolBriarknitKami,
+    _poolBrimazBlightOfOreskos,
     _poolBrotherhoodPatriarch,
     _poolBurdenOfGreed,
     _poolBurnDownTheHouse,
@@ -834,6 +839,7 @@ const shard: CardShard = {
     _poolCentaurBattlemaster,
     _poolCentaurOmenreader,
     _poolCentaurRootcaster,
+    _poolChancellorOfTheDross,
     _poolChangelingTitan,
     _poolCharmedClothier,
     _poolChitterspitter,
@@ -849,6 +855,7 @@ const shard: CardShard = {
     _poolCloudthresher,
     _poolCommandTower,
     _poolCompelBrutality,
+    _poolConcordantCrossroads,
     _poolCondemn,
     _poolCondescend,
     _poolConfrontThePast,
@@ -1328,6 +1335,7 @@ const shard: CardShard = {
     _poolSpectralDeluge,
     _poolSpectralSailor,
     _poolSpellSnip,
+    _poolSphinxOfForesight,
     _poolSpiderManNoir,
     _poolSpikedCorridor,
     _poolSpiritMascot,

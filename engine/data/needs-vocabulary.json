@@ -3722,7 +3722,8 @@
    "checked": "2026-10-27: missing"
   },
   "keyword:cumulative-upkeep": {
-   "example": "Mystic Remora: Cumulative upkeep {1} needs a cost that scales with the age counters; `may`'s cost is a fixed mana string."
+   "example": "Mystic Remora: Cumulative upkeep {1} needs a cost that scales with the age counters; `may`'s cost is a fixed mana string.",
+   "description": "Cumulative upkeep (rule 702.24), printed or granted one-off (cumulativeUpkeep helper): mana, life and sacrifice costs only; not other costs (cost:cumulative-upkeep-non-mana and the cost:cumulative-upkeep-* keys), a static grant (static:grant-cumulative-upkeep) or a not-paid trigger (trigger:cumulative-upkeep-not-paid)."
   },
   "keyword:dash": {
    "example": "Ragavan, Nimble Pilferer: Dash isn't modeled, and \"exile the top card of that player's library. Until end of turn, you may cast that card\" reaches another player's library."
@@ -3846,7 +3847,8 @@
    "example": "Danny Pink: Mentor keyword (attack trigger targeting an attacking creature with lesser power) isn't modeled."
   },
   "keyword:modular": {
-   "example": "Power Depot: Modular."
+   "example": "Power Depot: Modular.",
+   "description": "Modular (rule 702.43): its enters replacement and dies trigger; no marker a filter can read (filter:has-modular)."
   },
   "keyword:monstrosity": {
    "example": "Giggling Skitterspike: Rechecked: monstrosity (the monstrous designation) isn't modeled. The rest is expressible."
@@ -3914,7 +3916,8 @@
    "example": "Lizard Blades: Reconfigure."
   },
   "keyword:replicate": {
-   "example": "Hatchery Sliver: replicate and granting replicate to Sliver spells"
+   "example": "Hatchery Sliver: replicate and granting replicate to Sliver spells",
+   "description": "Replicate (rule 702.56): a multi kicker with keyword 'replicate' and a mana cost, printed only; not a non-mana cost (cost:replicate-tap-permanent, cost:replicate-energy) or a grant (static:grant-replicate)."
   },
   "keyword:retrace": {
    "example": "Formless Genesis: A Kindred Sorcery with changeling (the Kindred card type isn't modeled) and retrace (rule 702.81), which isn't built."
@@ -4011,10 +4014,12 @@
    "example": "Invasion of Ikoria // Zilortha, Apex of Ikoria: A siege battle."
   },
   "mechanic:begin-game-on-battlefield": {
-   "example": "Leyline of the Void: no opening-hand 'begin the game with it on the battlefield'"
+   "example": "Leyline of the Void: no opening-hand 'begin the game with it on the battlefield'",
+   "description": "Begin the game on the battlefield (rule 103.6a, beginsOnBattlefield) and reveal from the opening hand (rule 103.6b, mechanic:opening-hand-reveal); not Gemstone Caverns' conditional begin (mechanic:opening-hand-not-starting-player) or a delayed trigger past turn 1 (trigger:opponent-first-spell-of-game)."
   },
   "mechanic:case": {
-   "example": "Case of the Locked Hothouse: No Case (to solve / solved) mechanic, and 'look at the top card of your library any time' is private looking, not revealing."
+   "example": "Case of the Locked Hothouse: No Case (to solve / solved) mechanic, and 'look at the top card of your library any time' is private looking, not revealing.",
+   "description": "Cases (rule 719): to solve / solved; not a 'whenever you solve a Case' trigger (trigger:solves-case)."
   },
   "mechanic:class": {
    "example": "Alchemist's Talent: Class levels aren't modeled."
@@ -4932,7 +4937,9 @@
   },
   "trigger:attack-with-count-amount": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Grand Warlord Radha: No amount for how many creatures were declared as attackers in an attack-with trigger."
+   "example": "Grand Warlord Radha: No amount for how many creatures were declared as attackers in an attack-with trigger.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "the attacks-player trigger's value is the number of attackers (Struggle for Project Purity, B241)"
   },
   "trigger:attack-with-intervening-if": {
    "family": "trigger:combat-trigger-extensions",
@@ -5118,7 +5125,8 @@
    "example": "Ordeal of Nylea: 'When you sacrifice this Aura' — the sacrifice trigger has no self-only scope"
   },
   "trigger:state-trigger": {
-   "example": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists"
+   "example": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists",
+   "description": "Endrek Sahr, Master Breeder: 'When you control seven or more Thrulls' is a state trigger (rule 603.8); none exists Not covered (recheck R9): a state trigger about each matching permanent — trigger:state-trigger-per-permanent; one granted to a returned card — effect:grant-state-trigger-to-returned-card."
   },
   "trigger:tapped-for-mana-nonmana-trigger": {
    "example": "Burning Earth: tapped-for-mana triggers are only triggered mana abilities; a damage trigger never goes on the stack",
@@ -5147,7 +5155,8 @@
    "description": "Still missing (2026-10-27 check): A delayed trigger made by a deals-damage trigger doesn't carry the recipient (Ohran Viper's end-of-combat destroy), and become-copy takes no trigger-recipient target (Permeating Mass). Already there: src/effects.ts destroy/tap/exile/damage with target 'trigger-recipient' (~L1736, ~L9389); src/game.ts triggerRecipient reads refs.recipient, but createDelayedTrigger (~L31857) stores only triggerObjectRefs, not recipient; src/effects.ts become-copy (~L4775) target is an EffectTargetRef only."
   },
   "trigger:unblocked-attackers-trigger": {
-   "example": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.'"
+   "example": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.'",
+   "description": "Coveted Jewel: 'Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact.' Built: attacks-unblocked, once per attacker. Not covered (recheck R9): the 'one or more … attack you and aren't blocked' batch per attacking player — trigger:attacks-you-unblocked-batch."
   },
   "trigger:untap-step-untap-count-trigger": {
    "example": "The Millennium Calendar: no trigger counting permanents untapped during your untap step"
@@ -5344,11 +5353,15 @@
   },
   "filter:not-this-object": {
    "family": "condition:filter-card-property-clauses",
-   "example": "Gandalf, Friend of the Shire: 'if you chose a creature other than Gandalf as your Ring-bearer' — no filter clause for 'not this object'."
+   "example": "Gandalf, Friend of the Shire: 'if you chose a creature other than Gandalf as your Ring-bearer' — no filter clause for 'not this object'.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "the ring-tempts trigger's chosen: \"other\" (Galadriel of Lothlórien, Gandalf, Friend of the Shire, B241)"
   },
   "amount:ring-bearer-power": {
    "family": "effect:amount-new-variants",
-   "example": "One Ring to Rule Them All: 'each player mills cards equal to your Ring-bearer's power'."
+   "example": "One Ring to Rule Them All: 'each player mills cards equal to your Ring-bearer's power'.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "an aggregate sum of power over { ringBearer: true } (One Ring to Rule Them All's chapter I, B241)"
   },
   "effect:reveal-until-count-tapped": {
    "family": "effect:put-onto-battlefield-options",
@@ -5356,7 +5369,9 @@
   },
   "condition:countered-spell-legendary": {
    "family": "effect:choices-by-other-players",
-   "example": "Glorious Gale: 'Counter target creature spell. If it was a legendary spell, the Ring tempts you.'"
+   "example": "Glorious Gale: 'Counter target creature spell. If it was a legendary spell, the Ring tempts you.'",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "a target condition read before the counter (Glorious Gale, B241)"
   },
   "replacement:roll-extra-ignore-lowest": {
    "family": "mechanic:dice-rolling",
@@ -5380,7 +5395,9 @@
   },
   "effect:reflexive-with-roll-amount": {
    "family": "mechanic:dice-rolling",
-   "example": "Ancient Bronze Dragon, Ancient Brass Dragon: 'roll a d20. When you do, …' with X the result, targets chosen after the roll."
+   "example": "Ancient Bronze Dragon, Ancient Brass Dragon: 'roll a d20. When you do, …' with X the result, targets chosen after the roll.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "roll-dice then reflexive-trigger with value { roll: \"total\" }, read as { triggerValue: true } (Ancient Bronze Dragon, B241)"
   },
   "effect:each-player-rolls": {
    "family": "mechanic:dice-rolling",
@@ -6017,7 +6034,9 @@
   },
   "trigger:opponent-attacks-you-player-only": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Everett K. Ross, Hapless Attaché: 'Whenever an opponent attacks you with two or more creatures' — attack-with counting only attackers aimed at you, not your planeswalkers (rule 508.3e)."
+   "example": "Everett K. Ross, Hapless Attaché: 'Whenever an opponent attacks you with two or more creatures' — attack-with counting only attackers aimed at you, not your planeswalkers (rule 508.3e).",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "attacks-player with defender \"you\" (Struggle for Project Purity, B241)"
   },
   "replacement:prevent-damage-to-equipped-add-counters": {
    "family": "replacement:damage-modification",
@@ -7439,7 +7458,9 @@
   },
   "effect:exile-self-with-time-counters": {
    "family": "mechanic:suspend-and-time-counters",
-   "example": "A resolving spell exiles itself with N time counters, becoming suspended again if it has suspend (Charnel Serenade)."
+   "example": "A resolving spell exiles itself with N time counters, becoming suspended again if it has suspend (Charnel Serenade).",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "give-suspend with target \"source\" (Cyclical Evolution, Inspiring Refrain, B241)"
   },
   "zone:play-from-graveyard-surveilled-this-turn": {
    "family": "zone:graveyard-cast-permissions",
@@ -7910,7 +7931,9 @@
   },
   "effect:return-then-attach-to-returned": {
    "family": "effect:attach-extensions",
-   "example": "Not Dead After All: The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name."
+   "example": "Not Dead After All: The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "create-token attachedTo \"trigger-object\" after putting the trigger object onto the battlefield (Not Dead After All, B241)"
   },
   "filter:has-adventure": {
    "family": "condition:filter-card-property-clauses",
@@ -13820,6 +13843,380 @@
    "family": "trigger:combat-damage-batch",
    "description": "One trigger for 'one or more Pirates you control deal damage to your opponents' acting on each of those opponents ('exile the top card of each of those opponents' libraries'): deals-damage-batch fires once per player.",
    "example": "Breeches, Brazen Plunderer"
+  },
+  "mechanic:opening-hand-reveal": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "Reveal a card from the opening hand for a delayed ability at the first upkeep or main phase (rule 103.6b): CardDefinition.openingHandReveal, built 2026-10-28 (B240). Not a cast-keyed delayed trigger (Chancellor of the Annex) nor Gemstone Caverns' begin-with-a-counter.",
+   "example": "Chancellor of the Dross"
+  },
+  "trigger:opponent-first-spell-of-game": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "An opening-hand reveal's delayed trigger on each opponent's first spell of the game, lasting past turn 1 (DelayedWhenever lapses with the turn).",
+   "example": "Chancellor of the Annex"
+  },
+  "mechanic:opening-hand-not-starting-player": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "Begin the game on the battlefield only if you're not the starting player, with a luck counter, exiling a card from your hand (beginsOnBattlefield is unconditional and does nothing else).",
+   "example": "Gemstone Caverns"
+  },
+  "cost:cumulative-upkeep-non-mana": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "A cumulative upkeep cost that isn't mana, life or a sacrifice (put counters on it), paid as a cost and so unpayable when impossible; unless options have no add-counter payment.",
+   "example": "Aboroth"
+  },
+  "cost:cumulative-upkeep-gain-control-land": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by gaining control of a different land you don't control per age counter; no unless option gains control.",
+   "example": "Herald of Leshrac"
+  },
+  "cost:cumulative-upkeep-graveyard-to-library": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by putting two cards from a single graveyard on the bottom of their owner's library per age counter.",
+   "example": "Jötun Grunt"
+  },
+  "cost:cumulative-upkeep-opponent-gains-life": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by an opponent (chosen per age counter) gaining life; no unless option for it.",
+   "example": "Wall of Shards"
+  },
+  "effect:create-tokens-distributed-among-opponents": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "N tokens created for opponents, each token's controller chosen separately (create-token gives all N to one player or to each opponent).",
+   "example": "Varchild's War-Riders"
+  },
+  "cost:multikicker-not-kicker": {
+   "family": "keyword:multikicker",
+   "description": "'As an additional cost, you may pay [cost] any number of times' with no keyword name: a bare multi kicker would count as kicked.",
+   "example": "Taste of Paradise"
+  },
+  "effect:copy-exception-changeling": {
+   "family": "keyword:changeling",
+   "description": "A copy exception granting changeling that subtype reads honour (withChangeling reads only the definition's keywords).",
+   "example": "Omni-Changeling"
+  },
+  "effect:exile-graveyard-linked": {
+   "family": "effect:linked-exiled-card",
+   "description": "exile-graveyard whose exiled cards are linked to the source for a later 'exiled with' ability.",
+   "example": "Nautiloid Ship"
+  },
+  "filter:has-modular": {
+   "family": "keyword:modular",
+   "description": "A filter for creatures with modular (modular is authored as a replacement plus a dies trigger, with no keyword marker).",
+   "example": "Arcbound Overseer"
+  },
+  "cost:replicate-tap-permanent": {
+   "family": "keyword:replicate",
+   "description": "A replicate cost of tapping an untapped permanent you control (kicker costs are mana strings).",
+   "example": "Exterminate!"
+  },
+  "cost:replicate-energy": {
+   "family": "keyword:replicate",
+   "description": "A replicate cost paid in energy (kicker costs are mana strings).",
+   "example": "Reiterating Bolt"
+  },
+  "trigger:solves-case": {
+   "family": "mechanic:case",
+   "description": "'Whenever you solve a Case' (solve is only an effect, with no trigger).",
+   "example": "Case File Auditor"
+  },
+  "static:grant-miracle-in-hand": {
+   "family": "keyword:miracle",
+   "description": "A static giving cards in your hand miracle, at a fixed cost or their mana cost reduced (miracle is only a printed card field).",
+   "example": "Aminatou, Veil Piercer"
+  },
+  "cost:cumulative-upkeep-add-mana": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by adding mana ('Cumulative upkeep—Add {R}'); no unless option adds mana.",
+   "example": "Braid of Fire"
+  },
+  "static:grant-cumulative-upkeep": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "A static granting cumulative upkeep to a set of permanents ('Green creatures have cumulative upkeep {1}'); cumulative upkeep is a printed or one-off granted trigger only.",
+   "example": "Breath of Dreams"
+  },
+  "cost:cumulative-upkeep-counter-on-opponents-creature": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by putting a +1/+1 counter on a creature an opponent controls, chosen per age counter without targeting.",
+   "example": "Sheltering Ancient"
+  },
+  "cost:cumulative-upkeep-exile-library-top": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by exiling the top card of your library per age counter.",
+   "example": "Thought Lash"
+  },
+  "trigger:cumulative-upkeep-not-paid": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "'When a player doesn't pay this permanent's cumulative upkeep' as its own trigger (Heart of Bogardan's is written as a reflexive trigger inside the unless's otherwise).",
+   "example": "Thought Lash"
+  },
+  "keyword:warp-from-graveyard-and-life-cost": {
+   "family": "keyword:warp",
+   "description": "Warp cast from the graveyard, with a cost that includes paying life (warp is { cost: string } from the hand only).",
+   "example": "Timeline Culler"
+  },
+  "bug:reflexive-target-trigger-player": {
+   "family": "effect:reflexive-trigger",
+   "description": "A reflexive trigger's card-in-graveyard target with whose: 'trigger-player' finds no legal targets, though the parent's lastKnownRefs hold the player (whose: 'any' works): 'when you do, cast target card from defending player's graveyard'.",
+   "example": "Memory Vampire"
+  },
+  "filter:has-activated-ability": {
+   "family": "static:grant-activated-abilities-of-exiled",
+   "description": "A card filter for 'with activated abilities' (craft materials 'nonlands with activated abilities').",
+   "example": "The Enigma Jewel"
+  },
+  "static:granted-linked-abilities-once-each-turn": {
+   "family": "static:grant-activated-abilities-of-exiled",
+   "description": "Granted abilities of linked exiled cards, each activatable only once each turn.",
+   "example": "Locus of Enlightenment"
+  },
+  "cost:cumulative-upkeep-discard": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by discarding a card per age counter (the unless discard option has no times).",
+   "example": "Vexing Sphinx"
+  },
+  "filter:has-embalm-or-eternalize": {
+   "family": "keyword:embalm",
+   "description": "A card filter for 'a creature card with eternalize or embalm'.",
+   "example": "Vizier of the Anointed"
+  },
+  "trigger:activates-embalm-or-eternalize": {
+   "family": "keyword:embalm",
+   "description": "'Whenever you activate an eternalize or embalm ability' (activates-ability can't narrow to them).",
+   "example": "Vizier of the Anointed"
+  },
+  "effect:shuffle-self-into-library-top": {
+   "family": "mechanic:face-down-pile",
+   "description": "Exile it and the top N cards of your library in a face-down pile, shuffle that pile and put it back on top.",
+   "example": "Triumph of Saint Katherine"
+  },
+  "effect:reattach-curse-random-opponent": {
+   "family": "effect:attach-extensions",
+   "example": "Maddening Hex",
+   "description": "Moving an Aura onto another opponent chosen at random ('then attach this Aura to another one of your opponents chosen at random')."
+  },
+  "effect:extra-loyalty-activations-this-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Comet, Stellar Pup",
+   "description": "A one-shot 'you may activate [this]'s loyalty ability N more times this turn'."
+  },
+  "decision:choose-creature-or-player-on-resolution": {
+   "example": "Comet, Stellar Pup",
+   "description": "Damage to 'a creature or player' chosen as the ability resolves, not targeted."
+  },
+  "condition:roll-result-compare": {
+   "family": "mechanic:dice-rolling",
+   "example": "Luck Bobblehead, Sword of Hours",
+   "description": "A condition on a roll's results against an amount: how many dice showed a number ('if you rolled 6 exactly seven times'), or the result against the trigger's damage ('if the result is greater than the damage dealt')."
+  },
+  "replacement:roll-as-enters": {
+   "family": "mechanic:dice-rolling",
+   "example": "Neverwinter Hydra",
+   "description": "'As this creature enters, roll X d6; it enters with that many +1/+1 counters': an enters-with-counters replacement that rolls."
+  },
+  "condition:trigger-object-greatest-power": {
+   "family": "condition:greatest-power-condition",
+   "example": "Strength-Testing Hammer",
+   "description": "'If it has the greatest power or is tied for greatest power among creatures on the battlefield' about the trigger's creature (the equipped one), across every controller."
+  },
+  "trigger:rolls-dice-modified-result": {
+   "family": "mechanic:dice-rolling",
+   "example": "Vexing Puzzlebox",
+   "description": "A rolls-dice trigger whose value is the result after modifiers (rule 706.2), not the natural total."
+  },
+  "target:stack-with-targets": {
+   "family": "effect:target-spec-additions",
+   "example": "Wyll's Reversal",
+   "description": "'Target spell or ability with one or more targets': the stack target can require that the object has a target."
+  },
+  "trigger:enchanted-player-dealt-damage": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Grievous Wound",
+   "description": "'Whenever enchanted player is dealt damage' — any damage, not only combat (trigger:combat-damage-to-enchanted-player is combat-only)."
+  },
+  "filter:dealt-combat-damage-to-you-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Witch-king of Angmar",
+   "description": "A filter for 'a creature that dealt combat damage to you this turn' (damagedThisTurnBy covers the receiving end only)."
+  },
+  "replacement:damage-plus-counters-on-source": {
+   "family": "replacement:damage-modification",
+   "example": "Fated Firepower",
+   "description": "A damage replacement's plus read from counters on the replacement's source ('plus the number of fire counters on this enchantment'); plus is a fixed number."
+  },
+  "effect:grant-replacement-until-eot": {
+   "family": "replacement:damage-modification",
+   "example": "Sokrates, Athenian Teacher",
+   "description": "Granting a creature a replacement ability until end of turn ('target creature gains \"If this creature would deal combat damage to a player, prevent that damage …\"')."
+  },
+  "effect:additional-upkeep-step-enchanted-player": {
+   "family": "effect:additional-upkeep-steps",
+   "example": "Paradox Haze",
+   "description": "An additional upkeep step for another player, added during their upkeep ('at the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step')."
+  },
+  "effect:lose-all-player-counters": {
+   "family": "mechanic:player-counters",
+   "example": "Final Act",
+   "description": "'Each opponent loses all counters': every kind at once, energy included (remove-player-counters takes one kind and excludes energy)."
+  },
+  "effect:goad-while-source-remains": {
+   "family": "mechanic:goad-extensions",
+   "example": "Hot Pursuit",
+   "description": "A creature goaded 'as long as this enchantment remains on the battlefield'."
+  },
+  "effect:time-counters-on-all-suspended": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Dust of Moments",
+   "description": "Adding or removing N time counters on each permanent (with a time counter) and each suspended card at once."
+  },
+  "condition:hand-land-card-count": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Sasaya, Orochi Ascendant",
+   "description": "'If you have seven or more land cards in your hand': hand-size with a card filter."
+  },
+  "target:creature-attacking-you-player-only": {
+   "family": "effect:target-spec-additions",
+   "description": "A target 'creature attacking you' that excludes creatures attacking your planeswalkers (the `creature-attacking-you` spec admits both).",
+   "example": "Lulu, Stern Guardian: 'choose target creature attacking you' — only creatures attacking the player (the ruling), and the spec also admits ones attacking your planeswalkers."
+  },
+  "trigger:counters-put-any-kind-once": {
+   "family": "trigger:counters-put",
+   "description": "'Whenever you put one or more counters on a creature' of any kind, once per permanent per event: counters-put fires once per kind, so proliferating a creature with two kinds triggers twice.",
+   "example": "Generous Patron: 'Whenever you put one or more counters on a creature you don't control' — counters-put fires once per counter kind, so mixed kinds on one creature would trigger twice."
+  },
+  "effect:delayed-whenever-about-target": {
+   "family": "effect:delayed-trigger-extensions",
+   "description": "An until-end-of-turn delayed 'whenever' trigger about a target of the creating spell ('whenever that creature is dealt damage this turn'), with that creature as the damage source; DelayedWheneverWatch can only name the creating object.",
+   "example": "Arcbond: 'Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player' — no delayed whenever watch about the target creature."
+  },
+  "static:pt-per-opponent": {
+   "family": "static:pt-per-amount",
+   "description": "A static P/T bonus per opponent you have (grantPtPerCount has no player count).",
+   "example": "Blazing Sunsteel: 'Equipped creature gets +1/+0 for each opponent you have' — grantPtPerCount counts no players."
+  },
+  "trigger:combat-damage-to-you-or-your-planeswalkers-batch": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "'Whenever combat damage is dealt to you or a planeswalker you control', once per combat damage event: deals-damage-batch's `to: \"you\"` covers only the player.",
+   "example": "Vengeful Pharaoh: 'Whenever combat damage is dealt to you or a planeswalker you control' (once per event) — deals-damage-batch reaches players only."
+  },
+  "trigger:deals-damage-to-recipients-once-per-event": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "'Whenever this deals damage to one or more creatures / blocking creatures', once per damage event: a deals-damage trigger that names a recipient fires once per recipient (the once-per-event form is only for no recipient named).",
+   "example": "Arashin War Beast: 'deals combat damage to one or more blocking creatures' triggers once per combat damage step; deals-damage with a recipient fires once per recipient."
+  },
+  "filter:creature-or-spell-source": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "A deals-damage source filter for 'a red creature or spell': a creature permanent or any spell on the stack, never a noncreature permanent (Justice).",
+   "example": "Justice: 'Whenever a red creature or spell deals damage' — no filter reads 'a creature or a spell'; a color filter alone also matches a red noncreature permanent."
+  },
+  "trigger:nth-each-turn-during-own-turn": {
+   "family": "trigger:nth-each-turn",
+   "description": "'Whenever a player draws their second card / casts their second spell during their turn' — nthEachTurn with the actor being the active player.",
+   "example": "The Council of Four: a player's second draw / second spell during their own turn; nthEachTurn counts any turn."
+  },
+  "trigger:self-put-into-graveyard-from-library": {
+   "family": "trigger:put-into-graveyard",
+   "description": "'When this card is put into your graveyard from your library' — a self trigger of the card in the graveyard (Gaea's Blessing, Kozilek's Return-style mill triggers).",
+   "example": "Gaea's Blessing: 'When this card is put into your graveyard from your library, shuffle your graveyard into your library.'"
+  },
+  "trigger:state-trigger-per-permanent": {
+   "family": "trigger:state-trigger",
+   "description": "A state trigger about each permanent matching a filter, with that permanent as the trigger object ('whenever a creature has four or more fuse counters on it, … destroy it'); on: \"state\" takes only a StaticCondition about the source.",
+   "example": "Bomb Squad: 'Whenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it.'"
+  },
+  "effect:grant-state-trigger-to-returned-card": {
+   "family": "trigger:state-trigger",
+   "description": "A creature put onto the battlefield that gains a state trigger ('It gains \"When you don't control a legendary Vampire, exile this creature\"'): put-onto-battlefield grants nothing, and a granted on: \"state\" trigger is unproven.",
+   "example": "Olivia, Crimson Bride: the returned creature gains 'When you don't control a legendary Vampire, exile this creature.'"
+  },
+  "trigger:attacks-you-unblocked-batch": {
+   "family": "trigger:unblocked-attackers-trigger",
+   "description": "'Whenever one or more creatures an opponent controls attack you and aren't blocked' — once per attacking player per blockers step; attacks-unblocked fires once per attacker.",
+   "example": "Coveted Jewel: 'that player draws three cards and gains control of this artifact' once per batch of unblocked attackers."
+  },
+  "zone:exile-library-bottom-face-down-cast-permanents": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "Exile the bottom card of each opponent's library face down with a lookable, cast-permanent-spells-while-exiled, any-color permission (Arvinox).",
+   "example": "Arvinox, the Mind Flail: bottom card of each opponent's library exiled face down, castable permanent spells with any-color mana; and 'isn't a creature unless you control three or more permanents you don't own'."
+  },
+  "zone:exile-maycast-exile-instead": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "An exile with a cast-this-turn permission whose spell is exiled instead of going to a graveyard (exile's mayCast has no exile-instead rider).",
+   "example": "Dire Fleet Daredevil: cast the exiled card this turn with any-type mana, and if that spell would be put into a graveyard, exile it instead."
+  },
+  "effect:search-opponent-library-exile-play": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "Search another player's library for a card, exile it, that player shuffles, and you may play it this turn.",
+   "example": "Thada Adel, Acquisitor: search that player's library for an artifact card, exile it, play it until end of turn."
+  },
+  "zone:plot-from-library-top": {
+   "family": "zone:cast-from-library-top",
+   "description": "Granting plot to the top card of your library (plot cost = its mana cost) and plotting from there.",
+   "example": "Fblthp, Lost on the Range: the top card of your library has plot; you may plot nonland cards from the top of your library."
+  },
+  "cost:pay-life-equal-mv-instead-of-mana": {
+   "family": "zone:cast-from-library-top",
+   "description": "An alternative cost 'pay life equal to its mana value rather than pay its mana cost' for spells cast through a permission.",
+   "example": "Gwenom, Remorseless: cards played from the top of the library this turn; spells cast this way cost life equal to their mana value."
+  },
+  "effect:exile-library-face-down": {
+   "family": "zone:exile-face-down",
+   "description": "Exile a whole library face down (exile-from-library has no faceDown).",
+   "example": "Inverter of Truth: exile all cards from your library face down, then shuffle your graveyard into your library."
+  },
+  "effect:look-opponent-library-exile-one-face-down": {
+   "family": "zone:exile-face-down",
+   "description": "Look at the top N of another player's library, exile one face down with a cast-while-exiled any-type permission, the rest into their graveyard.",
+   "example": "Thief of Sanity: top three of that player's library, one exiled face down castable while exiled, the rest into their graveyard."
+  },
+  "effect:look-exile-face-down-cast-while-exiled": {
+   "family": "zone:exile-face-down",
+   "description": "look-and-choose to exile-face-down with a standing 'you may cast it for as long as it remains exiled if it's a [type] spell' permission (cast-now is during resolution only).",
+   "example": "Vivien, Champion of the Wilds: −2 exiles one of the top three face down; you may cast it while it remains exiled if it's a creature spell."
+  },
+  "zone:exile-owner-may-cast-now": {
+   "family": "zone:impulse-permission-options",
+   "description": "'For as long as that card remains exiled, its owner may cast it' starting at once (allow-cast-from-exile's laterTurns starts next turn; exile's mayCast is the controller's).",
+   "example": "Aerial Extortionist: exile up to one target nonland permanent; its owner may cast it for as long as it remains exiled."
+  },
+  "effect:exile-chosen-from-revealed-hand-may-cast": {
+   "family": "zone:impulse-permission-options",
+   "description": "Exile a card you choose from an opponent's revealed hand, with a gift-conditional cast-while-exiled any-type permission.",
+   "example": "Cruelclaw's Heist: you choose a nonland card from target opponent's revealed hand and exile it; if the gift was promised, you may cast it while it remains exiled."
+  },
+  "zone:impulse-until-your-next-turn-begins": {
+   "family": "zone:impulse-permission-options",
+   "description": "An impulse duration 'until your next turn' that ends as your next turn begins (`your-next-turn` lasts until it ends).",
+   "example": "Nivix, Aerie of the Firemind: until your next turn, you may cast it if it's an instant or sorcery spell."
+  },
+  "zone:exile-trigger-object-play-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "description": "Exile the trigger object with a play (lands included) permission this turn: exile's mayCast is cast-only.",
+   "example": "Norin, Swift Survivalist: exile the blocked creature; you may play that card from exile this turn (a land creature card included)."
+  },
+  "zone:shared-impulse-pool-each-player": {
+   "family": "zone:impulse-permission-options",
+   "description": "Cards exiled with a permanent that each player may play from during their own turn (one land or spell each time, any-color mana), re-exiling on use; and a 'whenever an opponent loses the game' trigger.",
+   "example": "Share the Spoils: each player may play a land or cast a spell from among cards exiled with it during their turn, then exiles their top card."
+  },
+  "zone:play-milled-card-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "description": "'Mill a card. You may play that card this turn' — a play (lands included) permission on a card in the graveyard.",
+   "example": "Tablet of Discovery: mill a card; you may play that card this turn."
+  },
+  "zone:cast-from-exiled-with-source-enters-finality": {
+   "family": "zone:play-from-exile-with-counter",
+   "description": "A standing permission to cast Dinosaur creature spells from among cards you own exiled with this, entering with a finality counter.",
+   "example": "Intrepid Paleontologist: cast Dinosaurs from among cards you own exiled with it; each enters with a finality counter."
+  },
+  "trigger:granted-trigger-condition-look-back": {
+   "family": "bug:lki-leaves-battlefield-triggers",
+   "description": "A condition gating a granted leaves-the-battlefield trigger (threshold's 'as long as seven or more cards …, this has \"whenever a creature is put into your graveyard …\"') asked as things were just before the event (rule 603.10a): today it's asked after, so the creature that makes the seventh card triggers it.",
+   "example": "Decaying Soil: the threshold-granted dies trigger fires for the creature that makes the seventh card (tested), against the ruling."
+  },
+  "effect:cast-now-once-each-turn-if-cast": {
+   "family": "effect:cast-during-resolution",
+   "description": "A cast-now offer limited to once each turn, the turn's use spent only when the card is actually cast ('look at the top card … you may cast it … Do this only once each turn').",
+   "example": "Planetarium of Wan Shi Tong: whenever you scry or surveil, look at the top card and you may cast it free, only once each turn — spent only by a cast."
   }
  },
  "groups": [

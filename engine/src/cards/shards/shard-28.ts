@@ -73,6 +73,7 @@ import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBitingTether from "../pool/biting-tether.js";
 import _poolBlackMarket from "../pool/black-market.js";
+import _poolBlackPantherHopeEnduring from "../pool/black-panther-hope-enduring.js";
 import _poolBlightbeetle from "../pool/blightbeetle.js";
 import _poolBloatedProcessor from "../pool/bloated-processor.js";
 import _poolBlockadeRunner from "../pool/blockade-runner.js";
@@ -710,6 +711,7 @@ import _poolThalakosScout from "../pool/thalakos-scout.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
 import _poolTheAncientOne from "../pool/the-ancient-one.js";
 import _poolTheBrute from "../pool/the-brute.js";
+import _poolTheIndomitable from "../pool/the-indomitable.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
 import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
@@ -844,6 +846,7 @@ import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedGreenSatyrTokenHaste from "../tokens/red-green-satyr-token-haste.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
+import _tokensSmaug from "../tokens/smaug.js";
 import _tokensSoldierTokenRed11 from "../tokens/soldier-token-red-1-1.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
@@ -921,6 +924,7 @@ const shard: CardShard = {
     _poolBiomassMutation,
     _poolBitingTether,
     _poolBlackMarket,
+    _poolBlackPantherHopeEnduring,
     _poolBlightbeetle,
     _poolBloatedProcessor,
     _poolBlockadeRunner,
@@ -1558,6 +1562,7 @@ const shard: CardShard = {
     _poolThanosDeathsConsort,
     _poolTheAncientOne,
     _poolTheBrute,
+    _poolTheIndomitable,
     _poolTheSwarmweaver,
     _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
@@ -1694,6 +1699,7 @@ const shard: CardShard = {
     _tokensPhyrexianToken,
     _tokensRedGreenSatyrTokenHaste,
     _tokensRedHumanToken,
+    _tokensSmaug,
     _tokensSoldierTokenRed11,
     _tokensSpiderToken21Reach,
     _tokensStoneforgedBladeToken,
