@@ -465,6 +465,7 @@ import _poolOldFatSpider from "../pool/old-fat-spider.js";
 import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
+import _poolOrcusPrinceOfUndeath from "../pool/orcus-prince-of-undeath.js";
 import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
 import _poolOrochiRanger from "../pool/orochi-ranger.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
@@ -1302,6 +1303,7 @@ const shard: CardShard = {
     _poolOliviaOpulentOutlaw,
     _poolOltecCloudGuard,
     _poolOrcishBloodpainter,
+    _poolOrcusPrinceOfUndeath,
     _poolOrderOfTheMirror,
     _poolOrochiRanger,
     _poolOtepecHuntmaster,

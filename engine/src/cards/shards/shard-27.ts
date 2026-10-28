@@ -134,6 +134,7 @@ import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
+import _poolCrackleWithPower from "../pool/crackle-with-power.js";
 import _poolCrawlingFilth from "../pool/crawling-filth.js";
 import _poolCrimsonHonorGuard from "../pool/crimson-honor-guard.js";
 import _poolCrosissCatacombs from "../pool/crosiss-catacombs.js";
@@ -482,6 +483,7 @@ import _poolPrimalBoost from "../pool/primal-boost.js";
 import _poolPrimevalsGloriousRebirth from "../pool/primevals-glorious-rebirth.js";
 import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
+import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolProvoke from "../pool/provoke.js";
@@ -942,6 +944,7 @@ const shard: CardShard = {
     _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
+    _poolCrackleWithPower,
     _poolCrawlingFilth,
     _poolCrimsonHonorGuard,
     _poolCrosissCatacombs,
@@ -1290,6 +1293,7 @@ const shard: CardShard = {
     _poolPrimevalsGloriousRebirth,
     _poolPrimordialWurm,
     _poolPrinceImrahilTheFair,
+    _poolPrismaticBoon,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
     _poolProvoke,

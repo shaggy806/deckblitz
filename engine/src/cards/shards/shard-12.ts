@@ -223,6 +223,7 @@ import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
+import _poolEnduranceBobblehead from "../pool/endurance-bobblehead.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -277,6 +278,7 @@ import _poolFreedFromTheReal from "../pool/freed-from-the-real.js";
 import _poolFreejamRegent from "../pool/freejam-regent.js";
 import _poolFreyalisesCharm from "../pool/freyalises-charm.js";
 import _poolFrilledDeathspitter from "../pool/frilled-deathspitter.js";
+import _poolFroghemoth from "../pool/froghemoth.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGalvanicAlchemist from "../pool/galvanic-alchemist.js";
@@ -1043,6 +1045,7 @@ const shard: CardShard = {
     _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
+    _poolEnduranceBobblehead,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
@@ -1097,6 +1100,7 @@ const shard: CardShard = {
     _poolFreejamRegent,
     _poolFreyalisesCharm,
     _poolFrilledDeathspitter,
+    _poolFroghemoth,
     _poolFrolickingFamiliar,
     _poolGalionElvenkingsButler,
     _poolGalvanicAlchemist,

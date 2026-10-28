@@ -484,6 +484,7 @@ import _poolNightshadeAssassin from "../pool/nightshade-assassin.js";
 import _poolNostalgicDreams from "../pool/nostalgic-dreams.js";
 import _poolNullstoneGargoyle from "../pool/nullstone-gargoyle.js";
 import _poolNyleasDisciple from "../pool/nyleas-disciple.js";
+import _poolNyssaOfTraken from "../pool/nyssa-of-traken.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolOakheartDryads from "../pool/oakheart-dryads.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
@@ -580,6 +581,7 @@ import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
+import _poolRotCurseRakshasa from "../pool/rot-curse-rakshasa.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRowansStalwarts from "../pool/rowans-stalwarts.js";
@@ -1326,6 +1328,7 @@ const shard: CardShard = {
     _poolNostalgicDreams,
     _poolNullstoneGargoyle,
     _poolNyleasDisciple,
+    _poolNyssaOfTraken,
     _poolNyxLotus,
     _poolOakheartDryads,
     _poolObNixilisReignited,
@@ -1422,6 +1425,7 @@ const shard: CardShard = {
     _poolRoilingCanopy,
     _poolRooftopAssassin,
     _poolRoryWilliams,
+    _poolRotCurseRakshasa,
     _poolRotFarmMortipede,
     _poolRottedHulk,
     _poolRowansStalwarts,

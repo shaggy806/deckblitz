@@ -201,3 +201,41 @@ describe("a group in a modal spell's mode", () => {
     expect(fitModalXGroup(exact, [], { maxX: 4, minX: 1 })).toBeNull();
   });
 });
+
+describe("a group in a modal triggered ability's mode", () => {
+  it("returns every member chosen, at the X its source was cast with — Orcus, Prince of Undeath", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 6; i += 1) spawn(game, "Swamp");
+    spawn(game, "Mountain");
+    const orcus = toHand(game, "Orcus, Prince of Undeath");
+    const lions = toGraveyard(game, "Savannah Lions");
+    const bears = toGraveyard(game, "Grizzly Bears");
+    const giant = toGraveyard(game, "Hill Giant");
+    a.chooseModesFn = () => [1];
+    let bounds: unknown;
+    a.chooseTargetsFn = (_view, _name, specs) => {
+      const spec = specs[0];
+      bounds = typeof spec === "object" && spec.kind === "any-number" ? [spec.max, spec.maxTotalManaValue] : undefined;
+      return [ref(lions), ref(bears)];
+    };
+    cast(game, orcus, { x: 3 });
+    expect(bounds).toEqual([3, 3]);
+    expect([zone(game, lions), zone(game, bears), zone(game, giant)]).toEqual(["battlefield", "battlefield", "graveyard"]);
+    expect(game.state.objects[bears].tapped).toBe(false);
+  });
+});
+
+describe("a group in a modal dies trigger", () => {
+  it("bounces every member chosen under the total — Kairi, the Swirling Sky", () => {
+    const { game, a } = table();
+    const kairi = spawn(game, "Kairi, the Swirling Sky");
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    const ring = spawn(game, "Sol Ring", B);
+    a.chooseModesFn = () => [0];
+    pickTargets(a, bears, giant);
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [ref(kairi)]);
+    settle(game);
+    expect([zone(game, bears), zone(game, giant), zone(game, ring)]).toEqual(["hand", "hand", "battlefield"]);
+  });
+});

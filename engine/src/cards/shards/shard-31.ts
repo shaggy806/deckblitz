@@ -625,6 +625,7 @@ import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
 import _poolRuin from "../pool/ruin.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
+import _poolRumblingCrescendo from "../pool/rumbling-crescendo.js";
 import _poolRumblingRuin from "../pool/rumbling-ruin.js";
 import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
 import _poolRunesOfTheDeus from "../pool/runes-of-the-deus.js";
@@ -1503,6 +1504,7 @@ const shard: CardShard = {
     _poolRuggedPrairie,
     _poolRuin,
     _poolRuinousRampage,
+    _poolRumblingCrescendo,
     _poolRumblingRuin,
     _poolRunadiBehemothCaller,
     _poolRunesOfTheDeus,

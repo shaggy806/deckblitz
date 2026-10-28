@@ -1,0 +1,402 @@
+{
+  "batch": "B245",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the variable-target-count family (decision:variable-target-count + decision:x-targets + decision:target-total-mana-value + decision:any-number-targets-in-mode)",
+  "authored": [
+    {
+      "name": "Heroic Feast",
+      "files": [
+        "engine/src/cards/pool/heroic-feast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Serra's Liturgy",
+      "files": [
+        "engine/src/cards/pool/serras-liturgy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lost in the Maze",
+      "files": [
+        "engine/src/cards/pool/lost-in-the-maze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Patch Up",
+      "files": [
+        "engine/src/cards/pool/patch-up.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Agadeem's Awakening",
+      "files": [
+        "engine/src/cards/pool/agadeems-awakening.ts",
+        "engine/src/cards/pool/agadeem-the-undercrypt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heliod's Intervention",
+      "files": [
+        "engine/src/cards/pool/heliods-intervention.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reality Spasm",
+      "files": [
+        "engine/src/cards/pool/reality-spasm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "March from the Tomb",
+      "files": [
+        "engine/src/cards/pool/march-from-the-tomb.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Orcus, Prince of Undeath",
+      "files": [
+        "engine/src/cards/pool/orcus-prince-of-undeath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kairi, the Swirling Sky",
+      "files": [
+        "engine/src/cards/pool/kairi-the-swirling-sky.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crackle with Power",
+      "files": [
+        "engine/src/cards/pool/crackle-with-power.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Marshal's Anthem",
+      "files": [
+        "engine/src/cards/pool/marshals-anthem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rot Hulk",
+      "files": [
+        "engine/src/cards/pool/rot-hulk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Froghemoth",
+      "files": [
+        "engine/src/cards/pool/froghemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Klauth's Will",
+      "files": [
+        "engine/src/cards/pool/klauths-will.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elrond, Master of Healing",
+      "files": [
+        "engine/src/cards/pool/elrond-master-of-healing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Batroc the Leaper",
+      "files": [
+        "engine/src/cards/pool/batroc-the-leaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prismabasher",
+      "files": [
+        "engine/src/cards/pool/prismabasher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Campsite Cuisine",
+      "files": [
+        "engine/src/cards/pool/campsite-cuisine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nyssa of Traken",
+      "files": [
+        "engine/src/cards/pool/nyssa-of-traken.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Call of the Death-Dweller",
+      "files": [
+        "engine/src/cards/pool/call-of-the-death-dweller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quarantine Field",
+      "files": [
+        "engine/src/cards/pool/quarantine-field.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Recantation",
+      "files": [
+        "engine/src/cards/pool/recantation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Profane Command",
+      "files": [
+        "engine/src/cards/pool/profane-command.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Death Kiss",
+      "files": [
+        "engine/src/cards/pool/death-kiss.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Endurance Bobblehead",
+      "files": [
+        "engine/src/cards/pool/endurance-bobblehead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rot-Curse Rakshasa",
+      "files": [
+        "engine/src/cards/pool/rot-curse-rakshasa.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elvish Mariner",
+      "files": [
+        "engine/src/cards/pool/elvish-mariner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seasoned Cryomancer",
+      "files": [
+        "engine/src/cards/pool/seasoned-cryomancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Super Hero Civil War",
+      "files": [
+        "engine/src/cards/pool/the-super-hero-civil-war.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scout for Survivors",
+      "files": [
+        "engine/src/cards/pool/scout-for-survivors.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Miasma Demon",
+      "files": [
+        "engine/src/cards/pool/miasma-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tocasia, Dig Site Mentor",
+      "files": [
+        "engine/src/cards/pool/tocasia-dig-site-mentor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Archipelagore",
+      "files": [
+        "engine/src/cards/pool/archipelagore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vitality Hunter",
+      "files": [
+        "engine/src/cards/pool/vitality-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rumbling Crescendo",
+      "files": [
+        "engine/src/cards/pool/rumbling-crescendo.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prismatic Boon",
+      "files": [
+        "engine/src/cards/pool/prismatic-boon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ancient Brass Dragon",
+      "files": [
+        "engine/src/cards/pool/ancient-brass-dragon.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Agility Bobblehead",
+      "needs": [
+        "effect:grant-cant-be-blocked-except"
+      ],
+      "why": "Its group's count is built, but no one-shot effect gives a target \"can't be blocked this turn except by creatures with haste\" (cantBeBlockedBy is a static only)."
+    },
+    {
+      "name": "Rampaging War Mammoth",
+      "needs": [
+        "cost:cycling-x"
+      ],
+      "why": "Cycling {X}{2}{R}: the cycling cost has no X, and the \"when you cycle this card\" trigger can't read one."
+    },
+    {
+      "name": "Glissa's Retriever",
+      "needs": [
+        "effect:opponents-with-poison-count"
+      ],
+      "why": "\"Up to X target cards, where X is the number of opponents who have three or more poison counters\": nothing counts players by a poison-counter test."
+    },
+    {
+      "name": "The War in Heaven",
+      "needs": [
+        "effect:enter-as-additional-card-type"
+      ],
+      "why": "Chapter III's \"They're artifacts in addition to their other types\" must hold as they enter; put-onto-battlefield adds no card type."
+    },
+    {
+      "name": "Comet Storm",
+      "needs": [
+        "decision:spell-target-count-amount"
+      ],
+      "why": "A spell's target count of one plus the times it was kicked: only an ability's group reads an amount."
+    },
+    {
+      "name": "Midnight Arsonist",
+      "needs": [
+        "filter:without-mana-abilities"
+      ],
+      "why": "Its \"up to X, the number of Vampires you control\" is built; no filter reads \"without mana abilities\"."
+    },
+    {
+      "name": "Filigree Vector",
+      "needs": [
+        "decision:two-any-number-groups"
+      ],
+      "why": "Two any-number groups in one list (creatures, then artifacts): a list holds one, last."
+    },
+    {
+      "name": "Erebos's Intervention",
+      "needs": [
+        "decision:twice-x-target-count"
+      ],
+      "why": "\"Up to twice X target cards\" on a spell: a spell's group bound is a number or X."
+    },
+    {
+      "name": "Angel of Serenity",
+      "needs": [
+        "decision:mixed-zone-targets"
+      ],
+      "why": "One group over battlefield creatures and graveyard creature cards together."
+    },
+    {
+      "name": "Taskmaster, Mercenary Mimic",
+      "needs": [
+        "decision:mixed-zone-targets"
+      ],
+      "why": "\"Up to one target creature on the battlefield or creature card in a graveyard\": one slot over two zones."
+    },
+    {
+      "name": "Endless Detour",
+      "needs": [
+        "decision:mixed-zone-targets"
+      ],
+      "why": "A spell, nonland permanent or graveyard card in one slot."
+    },
+    {
+      "name": "Savior of Ollenbock",
+      "needs": [
+        "decision:mixed-zone-targets"
+      ],
+      "why": "A creature on the battlefield or a creature card in a graveyard in one slot."
+    },
+    {
+      "name": "The Wise Mothman",
+      "needs": [
+        "trigger:trigger-mills-nonland-card"
+      ],
+      "why": "\"Whenever one or more nonland cards are milled\" has no trigger; its \"up to X\" (the number milled) would be the trigger value."
+    },
+    {
+      "name": "The Rise of Sozin // Fire Lord Sozin",
+      "needs": [
+        "decision:choose-card-name"
+      ],
+      "why": "Chapter II names a card; Fire Lord Sozin's total mana value X targets are built."
+    },
+    {
+      "name": "Fatal Lore",
+      "needs": [
+        "decision:opponent-chooses-mode"
+      ],
+      "why": "An opponent chooses the mode."
+    },
+    {
+      "name": "Zethi, Arcane Blademaster",
+      "needs": [
+        "effect:cast-now-exiled-with-counter"
+      ],
+      "why": "Its \"up to X, the times kicked\" group is built; copying the kick-countered cards and casting the copies isn't."
+    },
+    {
+      "name": "Blitzball Stadium",
+      "needs": [
+        "effect:amount-counter-kinds"
+      ],
+      "why": "Support X is built; the granted \"draw a card for each kind of counter on it\" isn't."
+    },
+    {
+      "name": "Serene Sunset",
+      "needs": [
+        "effect:prevent-combat-damage-by-target"
+      ],
+      "why": "X target creatures is built; preventing the combat damage a target would deal this turn isn't."
+    }
+  ]
+}

@@ -225,6 +225,7 @@ import _poolElephantRat from "../pool/elephant-rat.js";
 import _poolElspethUndauntedHero from "../pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "../pool/elspeths-devotee.js";
 import _poolElvishBranchbender from "../pool/elvish-branchbender.js";
+import _poolElvishMariner from "../pool/elvish-mariner.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
 import _poolEmberFistZubera from "../pool/ember-fist-zubera.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
@@ -464,6 +465,7 @@ import _poolMerfolkTrickster from "../pool/merfolk-trickster.js";
 import _poolMerfolkWayfinder from "../pool/merfolk-wayfinder.js";
 import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMerryBards from "../pool/merry-bards.js";
+import _poolMiasmaDemon from "../pool/miasma-demon.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMimic from "../pool/mimic.js";
 import _poolMindGames from "../pool/mind-games.js";
@@ -1054,6 +1056,7 @@ const shard: CardShard = {
     _poolElspethUndauntedHero,
     _poolElspethsDevotee,
     _poolElvishBranchbender,
+    _poolElvishMariner,
     _poolElvishScrapper,
     _poolEmberFistZubera,
     _poolEmergencyPhytomedic,
@@ -1293,6 +1296,7 @@ const shard: CardShard = {
     _poolMerfolkWayfinder,
     _poolMerrowWitsniper,
     _poolMerryBards,
+    _poolMiasmaDemon,
     _poolMidnightAssassin,
     _poolMimic,
     _poolMindGames,

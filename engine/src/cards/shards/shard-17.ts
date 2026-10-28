@@ -530,6 +530,7 @@ import _poolPrimevalShambler from "../pool/primeval-shambler.js";
 import _poolPrismariCommand from "../pool/prismari-command.js";
 import _poolProbe from "../pool/probe.js";
 import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
+import _poolProfaneCommand from "../pool/profane-command.js";
 import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js";
 import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPsychicVenom from "../pool/psychic-venom.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolPrismariCommand,
     _poolProbe,
     _poolProctorOfPotential,
+    _poolProfaneCommand,
     _poolProftConsultingDetective,
     _poolProsperousThief,
     _poolPsychicVenom,

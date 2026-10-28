@@ -600,6 +600,7 @@ import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
 import _poolScuttlingDeath from "../pool/scuttling-death.js";
 import _poolSeaGateColossus from "../pool/sea-gate-colossus.js";
 import _poolSearingWind from "../pool/searing-wind.js";
+import _poolSeasonedCryomancer from "../pool/seasoned-cryomancer.js";
 import _poolSecondBreakfast from "../pool/second-breakfast.js";
 import _poolSeersSundial from "../pool/seers-sundial.js";
 import _poolSeizeTheSpoils from "../pool/seize-the-spoils.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolScuttlingDeath,
     _poolSeaGateColossus,
     _poolSearingWind,
+    _poolSeasonedCryomancer,
     _poolSecondBreakfast,
     _poolSeersSundial,
     _poolSeizeTheSpoils,

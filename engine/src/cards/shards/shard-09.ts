@@ -23,6 +23,7 @@ import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAmrouScout from "../pool/amrou-scout.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
+import _poolAncientBrassDragon from "../pool/ancient-brass-dragon.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelOfDeliverance from "../pool/angel-of-deliverance.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
@@ -110,6 +111,7 @@ import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
 import _poolCallTheSkybreaker from "../pool/call-the-skybreaker.js";
 import _poolCall from "../pool/call.js";
+import _poolCampsiteCuisine from "../pool/campsite-cuisine.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
@@ -747,6 +749,7 @@ import _poolTilonallisSummoner from "../pool/tilonallis-summoner.js";
 import _poolTimeStretch from "../pool/time-stretch.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
 import _poolTitansRevenge from "../pool/titans-revenge.js";
+import _poolTocasiaDigSiteMentor from "../pool/tocasia-dig-site-mentor.js";
 import _poolTocasiasWelcome from "../pool/tocasias-welcome.js";
 import _poolTombOfHorrorsAdventurer from "../pool/tomb-of-horrors-adventurer.js";
 import _poolTombTyrant from "../pool/tomb-tyrant.js";
@@ -873,6 +876,7 @@ const shard: CardShard = {
     _poolAmethystDragon,
     _poolAmrouScout,
     _poolAnUnexpectedParty,
+    _poolAncientBrassDragon,
     _poolAncientImperiosaur,
     _poolAngelOfDeliverance,
     _poolAngelfireCrusader,
@@ -960,6 +964,7 @@ const shard: CardShard = {
     _poolCaldaiaGuardian,
     _poolCallTheSkybreaker,
     _poolCall,
+    _poolCampsiteCuisine,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
@@ -1597,6 +1602,7 @@ const shard: CardShard = {
     _poolTimeStretch,
     _poolTitaniasBoon,
     _poolTitansRevenge,
+    _poolTocasiaDigSiteMentor,
     _poolTocasiasWelcome,
     _poolTombOfHorrorsAdventurer,
     _poolTombTyrant,

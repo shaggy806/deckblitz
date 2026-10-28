@@ -39,6 +39,7 @@ import _poolArcaneSpyglass from "../pool/arcane-spyglass.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
+import _poolArchipelagore from "../pool/archipelagore.js";
 import _poolArenaRector from "../pool/arena-rector.js";
 import _poolArmamentDragon from "../pool/armament-dragon.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
@@ -872,6 +873,7 @@ const shard: CardShard = {
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
+    _poolArchipelagore,
     _poolArenaRector,
     _poolArmamentDragon,
     _poolArmsDealer,

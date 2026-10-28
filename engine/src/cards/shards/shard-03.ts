@@ -692,6 +692,7 @@ import _poolVineweft from "../pool/vineweft.js";
 import _poolVintaraSnapper from "../pool/vintara-snapper.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolViridianScout from "../pool/viridian-scout.js";
+import _poolVitalityHunter from "../pool/vitality-hunter.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolVintaraSnapper,
     _poolViridianLongbow,
     _poolViridianScout,
+    _poolVitalityHunter,
     _poolVoiceOfTruth,
     _poolVolleyVeteran,
     _poolVonaButcherOfMagan,

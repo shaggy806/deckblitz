@@ -581,6 +581,7 @@ import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
 import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
+import _poolRotHulk from "../pool/rot-hulk.js";
 import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolRootbreakerWurm,
     _poolRootwalla,
     _poolRoseTyler,
+    _poolRotHulk,
     _poolRoyalDecree,
     _poolRubblebeltRioters,
     _poolRuneclawBear,

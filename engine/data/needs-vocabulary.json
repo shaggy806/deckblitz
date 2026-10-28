@@ -1972,6 +1972,21 @@
    "family": "decision:variable-target-count",
    "example": "Angel of Serenity: up to three targets drawn from battlefield creatures and graveyard creature cards together, returned on leave"
   },
+  "decision:two-any-number-groups": {
+   "family": "decision:variable-target-count",
+   "example": "Filigree Vector: 'a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts' \u2014 two any-number groups in one list (one per list, always last)"
+  },
+  "decision:spell-target-count-amount": {
+   "family": "decision:variable-target-count",
+   "example": "Comet Storm: 'choose any target, then choose another target for each time this spell was kicked' \u2014 a spell's group sized by an amount other than X (only abilities read amounts)"
+  },
+  "filter:without-mana-abilities": {
+   "example": "Midnight Arsonist: 'destroy up to X target artifacts without mana abilities' \u2014 no filter reads whether a permanent has an activated or triggered mana ability"
+  },
+  "effect:opponents-with-poison-count": {
+   "family": "effect:amount-new-variants",
+   "example": "Glissa's Retriever: 'X is the number of opponents who have three or more poison counters' \u2014 a count of players meeting a poison-counter test"
+  },
   "decision:name-a-card": {
    "example": "Demonic Consultation: \"Choose a card name.\"",
    "checked": "2026-10-27: missing"

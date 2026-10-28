@@ -426,6 +426,7 @@ import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarkOfAsylum from "../pool/mark-of-asylum.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarshViper from "../pool/marsh-viper.js";
+import _poolMarshalsAnthem from "../pool/marshals-anthem.js";
 import _poolMartyredRusalka from "../pool/martyred-rusalka.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
@@ -533,6 +534,7 @@ import _poolPolisCrusher from "../pool/polis-crusher.js";
 import _poolPowderGanger from "../pool/powder-ganger.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
+import _poolPrismabasher from "../pool/prismabasher.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
 import _poolPureReflection from "../pool/pure-reflection.js";
@@ -1304,6 +1306,7 @@ const shard: CardShard = {
     _poolMarkOfAsylum,
     _poolMarketbackWalker,
     _poolMarshViper,
+    _poolMarshalsAnthem,
     _poolMartyredRusalka,
     _poolMarwynTheClearcutter,
     _poolMasterTrinketeer,
@@ -1411,6 +1414,7 @@ const shard: CardShard = {
     _poolPowderGanger,
     _poolPredatorySliver,
     _poolPridefulParent,
+    _poolPrismabasher,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,
     _poolPureReflection,

@@ -151,6 +151,7 @@ import _poolDauthiWarlord from "../pool/dauthi-warlord.js";
 import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDay from "../pool/day.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
+import _poolDeathKiss from "../pool/death-kiss.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
 import _poolDecoratedChampion from "../pool/decorated-champion.js";
@@ -519,6 +520,7 @@ import _poolPyromancersGauntlet from "../pool/pyromancers-gauntlet.js";
 import _poolQarsiSadist from "../pool/qarsi-sadist.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
+import _poolQuarantineField from "../pool/quarantine-field.js";
 import _poolQuestForUlasTemple from "../pool/quest-for-ulas-temple.js";
 import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
@@ -977,6 +979,7 @@ const shard: CardShard = {
     _poolDawnstrikeVanguard,
     _poolDay,
     _poolDazzlingDenial,
+    _poolDeathKiss,
     _poolDebrisBeetle,
     _poolDecoctionModule,
     _poolDecoratedChampion,
@@ -1345,6 +1348,7 @@ const shard: CardShard = {
     _poolQarsiSadist,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,
+    _poolQuarantineField,
     _poolQuestForUlasTemple,
     _poolQuickDrawKatana,
     _poolQuietusSpike,

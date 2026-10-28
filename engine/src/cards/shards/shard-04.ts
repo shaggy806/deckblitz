@@ -49,6 +49,7 @@ import _poolBarrentonCragtreads from "../pool/barrenton-cragtreads.js";
 import _poolBarricadeBreaker from "../pool/barricade-breaker.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
 import _poolBashToBits from "../pool/bash-to-bits.js";
+import _poolBatrocTheLeaper from "../pool/batroc-the-leaper.js";
 import _poolBattlewandOak from "../pool/battlewand-oak.js";
 import _poolBedrockTortoise from "../pool/bedrock-tortoise.js";
 import _poolBiliousSkulldweller from "../pool/bilious-skulldweller.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolBarricadeBreaker,
     _poolBarrinMasterWizard,
     _poolBashToBits,
+    _poolBatrocTheLeaper,
     _poolBattlewandOak,
     _poolBedrockTortoise,
     _poolBiliousSkulldweller,

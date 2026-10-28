@@ -749,6 +749,7 @@ import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheGreatMound from "../pool/the-great-mound.js";
 import _poolTheRuinousWreckingCrew from "../pool/the-ruinous-wrecking-crew.js";
 import _poolTheShatteredStatesEra from "../pool/the-shattered-states-era.js";
+import _poolTheSuperHeroCivilWar from "../pool/the-super-hero-civil-war.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
@@ -1629,6 +1630,7 @@ const shard: CardShard = {
     _poolTheGreatMound,
     _poolTheRuinousWreckingCrew,
     _poolTheShatteredStatesEra,
+    _poolTheSuperHeroCivilWar,
     _poolTheTenRings,
     _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,

@@ -229,6 +229,7 @@ import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
 import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
+import _poolElrondMasterOfHealing from "../pool/elrond-master-of-healing.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -395,6 +396,7 @@ import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
+import _poolKlauthsWill from "../pool/klauths-will.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
@@ -1046,6 +1048,7 @@ const shard: CardShard = {
     _poolEbonDragon,
     _poolEchoingRuin,
     _poolElrondLordOfRivendell,
+    _poolElrondMasterOfHealing,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,
@@ -1212,6 +1215,7 @@ const shard: CardShard = {
     _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
     _poolKitsuneLoreweaver,
+    _poolKlauthsWill,
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
