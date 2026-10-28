@@ -1,0 +1,722 @@
+{
+ "batch": "B241",
+ "status": "complete",
+ "ranks": "The need-keys recheck list R7 (Phase 1 step 2)",
+ "authored": [
+  {
+   "name": "Angel of Suffering",
+   "files": [
+    "engine/src/cards/pool/angel-of-suffering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blessed Sanctuary",
+   "files": [
+    "engine/src/cards/pool/blessed-sanctuary.ts",
+    "engine/src/cards/tokens/unicorn-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloatfly Swarm",
+   "files": [
+    "engine/src/cards/pool/bloatfly-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brimaz, Blight of Oreskos",
+   "files": [
+    "engine/src/cards/pool/brimaz-blight-of-oreskos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chrome Host Seedshark",
+   "files": [
+    "engine/src/cards/pool/chrome-host-seedshark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunfall",
+   "files": [
+    "engine/src/cards/pool/sunfall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Singer of Swift Rivers",
+   "files": [
+    "engine/src/cards/pool/singer-of-swift-rivers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "King T'Challa // Black Panther, Hope Enduring",
+   "files": [
+    "engine/src/cards/pool/king-tchalla.ts",
+    "engine/src/cards/pool/black-panther-hope-enduring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Legend of Kuruk // Avatar Kuruk",
+   "files": [
+    "engine/src/cards/pool/the-legend-of-kuruk.ts",
+    "engine/src/cards/pool/avatar-kuruk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gandalf, Friend of the Shire",
+   "files": [
+    "engine/src/cards/pool/gandalf-friend-of-the-shire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glorious Gale",
+   "files": [
+    "engine/src/cards/pool/glorious-gale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Bronze Dragon",
+   "files": [
+    "engine/src/cards/pool/ancient-bronze-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myrkul's Edict",
+   "files": [
+    "engine/src/cards/pool/myrkuls-edict.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Concordant Crossroads",
+   "files": [
+    "engine/src/cards/pool/concordant-crossroads.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elrond, Lord of Rivendell",
+   "files": [
+    "engine/src/cards/pool/elrond-lord-of-rivendell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "In the Darkness Bind Them",
+   "files": [
+    "engine/src/cards/pool/in-the-darkness-bind-them.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ringsight",
+   "files": [
+    "engine/src/cards/pool/ringsight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rogue Class",
+   "files": [
+    "engine/src/cards/pool/rogue-class.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scavenger's Talent",
+   "files": [
+    "engine/src/cards/pool/scavengers-talent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sauron, Lord of the Rings",
+   "files": [
+    "engine/src/cards/pool/sauron-lord-of-the-rings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sauron, the Necromancer",
+   "files": [
+    "engine/src/cards/pool/sauron-the-necromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scroll of Isildur",
+   "files": [
+    "engine/src/cards/pool/scroll-of-isildur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "There and Back Again",
+   "files": [
+    "engine/src/cards/pool/there-and-back-again.ts",
+    "engine/src/cards/tokens/smaug.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inspiring Refrain",
+   "files": [
+    "engine/src/cards/pool/inspiring-refrain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Not Dead After All",
+   "files": [
+    "engine/src/cards/pool/not-dead-after-all.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Struggle for Project Purity",
+   "files": [
+    "engine/src/cards/pool/struggle-for-project-purity.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Maddening Hex",
+   "needs": [
+    "effect:reattach-curse-random-opponent"
+   ],
+   "why": "The d6 roll and damage are expressible; 'then attach this Aura to another one of your opponents chosen at random' isn't: attach can't move an Aura to a random other opponent."
+  },
+  {
+   "name": "Bucknard's Everfull Purse",
+   "needs": [
+    "effect:control-to-adjacent-seat"
+   ],
+   "why": "The d4 and Treasures are expressible; 'the player to your right gains control of this artifact' names a seat no effect can."
+  },
+  {
+   "name": "Comet, Stellar Pup",
+   "needs": [
+    "effect:extra-loyalty-activations-this-turn",
+    "decision:choose-creature-or-player-on-resolution"
+   ],
+   "why": "The 6 row's 'you may activate Comet's loyalty ability two more times this turn', and the 4-5 row's damage to a creature or player chosen as it resolves, not targeted."
+  },
+  {
+   "name": "Component Pouch",
+   "needs": [
+    "effect:add-mana-two-different-colors"
+   ],
+   "why": "'Add two mana of different colors': add-mana's oneOf with amount 2 allows the same colour twice."
+  },
+  {
+   "name": "Lae'zel's Acrobatics",
+   "needs": [
+    "effect:flicker-untargeted-group-delayed-return"
+   ],
+   "why": "Exiling all your nontoken creatures untargeted and returning 'those cards' at the next end step (and the 10-20 row's return-then-exile-again) isn't expressible."
+  },
+  {
+   "name": "Luck Bobblehead",
+   "needs": [
+    "condition:roll-result-compare"
+   ],
+   "why": "'If you rolled 6 exactly seven times, you win the game': no condition counts the dice that showed a given result."
+  },
+  {
+   "name": "Neverwinter Hydra",
+   "needs": [
+    "replacement:roll-as-enters"
+   ],
+   "why": "'As this creature enters, roll X d6. It enters with that many +1/+1 counters': an enters-with-counters replacement can't roll."
+  },
+  {
+   "name": "Strength-Testing Hammer",
+   "needs": [
+    "condition:trigger-object-greatest-power"
+   ],
+   "why": "'If it has the greatest power or is tied among creatures on the battlefield': source-greatest reads the Equipment, not the equipped creature, and greatestAmongItsController is per controller."
+  },
+  {
+   "name": "Sword of Hours",
+   "needs": [
+    "condition:roll-result-compare"
+   ],
+   "why": "'If the result is greater than the damage dealt or the result is 12' compares the roll with the trigger's damage; no condition can."
+  },
+  {
+   "name": "The Deck of Many Things",
+   "needs": [
+    "decision:choose-from-any-graveyard"
+   ],
+   "why": "The 20 row's untargeted 'creature card from any graveyard', and 'when that creature dies, its owner loses the game'."
+  },
+  {
+   "name": "Treasure Chest",
+   "needs": [
+    "effect:search-destination-by-type"
+   ],
+   "why": "The 20 row's search: 'if it's an artifact card, you may put it onto the battlefield; otherwise into your hand' — search-library has one destination."
+  },
+  {
+   "name": "Vexing Puzzlebox",
+   "needs": [
+    "trigger:rolls-dice-modified-result"
+   ],
+   "why": "'Whenever you roll one or more dice, put charge counters equal to the result': the rolls-dice trigger value is the natural total, but the ruling counts the result after modifiers."
+  },
+  {
+   "name": "Wand of Wonder",
+   "needs": [
+    "decision:cast-up-to-n-free"
+   ],
+   "why": "'Cast up to X instant and/or sorcery spells from among cards exiled this way': cast-now's repeat has no up-to-X cap across every opponent's exile."
+  },
+  {
+   "name": "Wyll's Reversal",
+   "needs": [
+    "target:stack-with-targets"
+   ],
+   "why": "'Target spell or ability with one or more targets': the stack target has singleTarget but no 'with one or more targets'."
+  },
+  {
+   "name": "Fighter Class",
+   "needs": [
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "Level 2's 'equip abilities you activate cost {2} less': abilityCostModification can't single out equip abilities. Level 3's forced block exists (block-if-able)."
+  },
+  {
+   "name": "Grievous Wound",
+   "needs": [
+    "static:static-over-enchanted-player",
+    "trigger:enchanted-player-dealt-damage"
+   ],
+   "why": "'Enchanted player can't gain life' (no static reaches the enchanted player) and 'whenever enchanted player is dealt damage' (any damage, not only combat)."
+  },
+  {
+   "name": "Samwise the Stouthearted",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "'Permanent card in your graveyard that was put there from the battlefield this turn': only the from-library marker exists."
+  },
+  {
+   "name": "Sauron's Ransom",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "An opponent separates the top four into a face-down and a face-up pile; you choose one: no such decision."
+  },
+  {
+   "name": "Witch-king of Angmar",
+   "needs": [
+    "filter:dealt-combat-damage-to-you-this-turn"
+   ],
+   "why": "'Each opponent sacrifices a creature that dealt combat damage to you this turn': no filter for creatures that dealt you combat damage this turn."
+  },
+  {
+   "name": "Bonecrusher Giant",
+   "needs": [
+    "effect:damage-cant-be-prevented"
+   ],
+   "why": "Stomp's 'Damage can't be prevented this turn' has no effect."
+  },
+  {
+   "name": "Fated Firepower",
+   "needs": [
+    "replacement:damage-plus-counters-on-source",
+    "replacement:affected-player-orders-damage-modifiers"
+   ],
+   "why": "The damage replacement's plus is a fixed number, not the fire counters on this enchantment; and its ruling lets the damaged player order it against prevention."
+  },
+  {
+   "name": "Inquisitor's Flail",
+   "needs": [
+    "replacement:equipped-creature-damage-doubling"
+   ],
+   "why": "A damage replacement can't name the equipped creature as source or recipient."
+  },
+  {
+   "name": "Kor Haven",
+   "needs": [
+    "effect:prevent-combat-damage-by-source"
+   ],
+   "why": "'Prevent all combat damage that would be dealt by target attacking creature this turn': prevent-all-combat-damage's by is a filter, not a target."
+  },
+  {
+   "name": "Pariah",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "'All damage that would be dealt to you is dealt to enchanted creature instead': no redirection of damage to a player onto an object."
+  },
+  {
+   "name": "Pariah's Shield",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "The same redirection onto the equipped creature."
+  },
+  {
+   "name": "Questing Beast",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "'Combat damage that would be dealt by creatures you control can't be prevented' has no static; the rest of the card is expressible."
+  },
+  {
+   "name": "Sokrates, Athenian Teacher",
+   "needs": [
+    "effect:grant-replacement-until-eot",
+    "effect:damage-source-controller-draws"
+   ],
+   "why": "The granted until-end-of-turn prevention whose follow-up has the creature's controller and the damaged player each draw half: no replacement can be granted, and the follow-up can't name the damaged player."
+  },
+  {
+   "name": "Take the Bait",
+   "needs": [
+    "replacement:prevent-combat-damage-to-filter"
+   ],
+   "why": "'Prevent all combat damage that would be dealt to you and planeswalkers you control this turn': the one-shot prevention can't be limited to you and your planeswalkers."
+  },
+  {
+   "name": "Temple Altisaur",
+   "needs": [
+    "replacement:prevent-all-but-n-damage"
+   ],
+   "why": "'Prevent all but 1 of that damage' has no prevention shape."
+  },
+  {
+   "name": "The Rollercrusher Ride",
+   "needs": [
+    "replacement:affected-player-orders-damage-modifiers"
+   ],
+   "why": "Its ruling lets the damaged player order the doubling against prevention (rule 616.1); the engine always applies multipliers first."
+  },
+  {
+   "name": "Krark's Thumb",
+   "needs": [
+    "mechanic:coin-flip-result-replacement"
+   ],
+   "why": "'If you would flip a coin, instead flip two coins and ignore one': no coin-flip replacement."
+  },
+  {
+   "name": "Mirror March",
+   "needs": [
+    "amount:coin-flips-won-this-way"
+   ],
+   "why": "untilLose applies won once per win; the card counts the wins and then creates all the copies at once (the ruling)."
+  },
+  {
+   "name": "Rakdos, the Showstopper",
+   "needs": [
+    "effect:for-each-permanent-coin-flip"
+   ],
+   "why": "A flip for each non-Demon/Devil/Imp creature, the losers destroyed simultaneously."
+  },
+  {
+   "name": "Ral Zarek",
+   "needs": [
+    "mechanic:coin-flip-heads-tails"
+   ],
+   "why": "The -7's five uncalled flips have no winner; flip-coin always has one and fires wins-coin-flip triggers, which the ruling forbids."
+  },
+  {
+   "name": "Paradox Haze",
+   "needs": [
+    "effect:additional-upkeep-step-enchanted-player"
+   ],
+   "why": "additional-upkeep-steps works on its controller's own turn; the card adds an upkeep for the enchanted player during their first upkeep each turn."
+  },
+  {
+   "name": "Final Act",
+   "needs": [
+    "effect:lose-all-player-counters"
+   ],
+   "why": "'Each opponent loses all counters': remove-player-counters takes one kind and can't remove energy."
+  },
+  {
+   "name": "Hot Pursuit",
+   "needs": [
+    "effect:goad-while-source-remains",
+    "effect:players-lost-count"
+   ],
+   "why": "'As long as this enchantment remains on the battlefield, that creature is also goaded', and 'if two or more players have lost the game'."
+  },
+  {
+   "name": "Dust of Moments",
+   "needs": [
+    "effect:time-counters-on-all-suspended"
+   ],
+   "why": "Removing or adding two time counters on each permanent and each suspended card: no effect reaches every permanent and suspended card at once."
+  },
+  {
+   "name": "Expropriate",
+   "needs": [
+    "filter:owned-by-voter"
+   ],
+   "why": "for-each-vote exists, but 'choose a permanent owned by the voter' has no filter (ownedBy is only you or opponent)."
+  },
+  {
+   "name": "Innkeeper's Talent",
+   "needs": [
+    "replacement:counter-replacement-players"
+   ],
+   "why": "Level 3: 'if you would put counters on a permanent or player' — would-add-counter reaches only permanents you control, not counters you put on others' permanents or on players."
+  },
+  {
+   "name": "Sorcerer Class",
+   "needs": [
+    "cost:mana-restriction-class-level",
+    "effect:spell-as-damage-source"
+   ],
+   "why": "Mana spendable only on instants, sorceries or a Class level (abilityOf a Class would allow its non-level abilities), and the cast spell as the damage's source."
+  },
+  {
+   "name": "Fraying Sanity",
+   "needs": [
+    "stat:cards-put-into-graveyard-this-turn"
+   ],
+   "why": "No turn stat counts cards put into a graveyard from anywhere."
+  },
+  {
+   "name": "Tenuous Truce",
+   "needs": [
+    "trigger:attack-on-player-or-their-planeswalker-trigger"
+   ],
+   "why": "attacks-player counts attacked players only, never their planeswalkers, and the trigger runs both ways."
+  },
+  {
+   "name": "Chaos Dragon",
+   "needs": [
+    "effect:each-player-rolls"
+   ],
+   "why": "Each player rolling and comparing results, and the per-opponent attack restriction."
+  },
+  {
+   "name": "Reckless Endeavor",
+   "needs": [
+    "decision:choose-roll-result"
+   ],
+   "why": "roll-dice can't choose one of two results."
+  },
+  {
+   "name": "Wyll, Blade of Frontiers",
+   "needs": [
+    "replacement:roll-extra-ignore-lowest"
+   ],
+   "why": "No 'roll that many dice plus one and ignore the lowest' replacement."
+  },
+  {
+   "name": "Sasaya, Orochi Ascendant // Sasaya's Essence",
+   "needs": [
+    "effect:mana-produced-per-same-name-land",
+    "condition:hand-land-card-count"
+   ],
+   "why": "The Essence's extra mana per other same-name land, and the front's 'seven or more land cards in your hand' (hand-size has no filter)."
+  },
+  {
+   "name": "Kozilek's Command",
+   "needs": [
+    "effect:target-player-scries"
+   ],
+   "why": "'Target player scries X': scry has no target."
+  },
+  {
+   "name": "Lignify",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "Losing all abilities exists only as one-shot effects, not a static."
+  },
+  {
+   "name": "Not of This World",
+   "needs": [
+    "effect:target-spell-or-ability"
+   ],
+   "why": "The stack target can't require a spell or ability that targets a permanent you control, and nothing keys a cost reduction to it."
+  },
+  {
+   "name": "Out of Time",
+   "needs": [
+    "effect:phased-out-this-way-count"
+   ],
+   "why": "No this-way count of creatures phased out."
+  },
+  {
+   "name": "Heartwood Crafter // Soul Tether",
+   "needs": [
+    "cost:mana-restriction-not-from-hand"
+   ],
+   "why": "ManaRestriction has no 'not to cast spells from your hand' clause."
+  },
+  {
+   "name": "Stensian Sanguinist // Exsanguinate",
+   "needs": [
+    "effect:delayed-combat-damage-this-combat"
+   ],
+   "why": "The delayed combat-damage watch lasts the turn, so a second combat would prepare it again."
+  },
+  {
+   "name": "Nazgûl",
+   "needs": [
+    "deck:copy-limit-exception"
+   ],
+   "why": "'A deck can have up to nine cards named Nazgûl' isn't a deck-validation exception."
+  },
+  {
+   "name": "One Ring to Rule Them All",
+   "needs": [
+    "effect:per-player-count-in-graveyard"
+   ],
+   "why": "Chapter I's Ring-bearer power is an aggregate sum now, but chapter III's 'each opponent loses 1 life for each creature card in that player's graveyard' counts the controller's graveyard even inside for-each-player."
+  },
+  {
+   "name": "The Ring Goes South",
+   "needs": [
+    "effect:reveal-until-count-tapped"
+   ],
+   "why": "reveal-until-count has no tapped option."
+  },
+  {
+   "name": "Infesting Radroach",
+   "needs": [
+    "trigger:trigger-mills-nonland-card"
+   ],
+   "why": "The cards-milled event has no trigger listening to it."
+  },
+  {
+   "name": "Mariposa Military Base",
+   "needs": [
+    "replacement:enter-tapped-optional-rider"
+   ],
+   "why": "No 'you may have it enter tapped; if you do …' choice."
+  },
+  {
+   "name": "Mirelurk Queen",
+   "needs": [
+    "trigger:mills-trigger"
+   ],
+   "why": "No trigger for 'one or more nonland cards are milled'."
+  },
+  {
+   "name": "Screeching Scorchbeast",
+   "needs": [
+    "trigger:mills-trigger"
+   ],
+   "why": "No trigger for 'one or more nonland cards are milled'."
+  },
+  {
+   "name": "Strong, the Brutish Thespian",
+   "needs": [
+    "replacement:life-loss-from-radiation"
+   ],
+   "why": "The rad ability's life loss is a plain lose-life, so loss from radiation can't be told apart or replaced."
+  },
+  {
+   "name": "Tato Farmer",
+   "needs": [
+    "stat:milled-this-turn-mill-only"
+   ],
+   "why": "putIntoGraveyardFromLibraryThisTurn also matches surveilled cards, which the ruling excludes."
+  },
+  {
+   "name": "The Master, Transcendent",
+   "needs": [
+    "stat:milled-this-turn-mill-only",
+    "effect:reanimate-as-animated-creature"
+   ],
+   "why": "The same milled-only filter, and returning it as a green 3/3 Mutant."
+  },
+  {
+   "name": "Charred Foyer // Warped Space",
+   "needs": [
+    "cost:alternative-cost-for-spells-limits"
+   ],
+   "why": "alternativeCostForSpells has no once-per-turn or cast-from-exile limit."
+  },
+  {
+   "name": "Dazzling Theater // Prop Room",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "Convoke is read only from a card's printed flag."
+  },
+  {
+   "name": "Dollmaker's Shop // Porcelain Gallery",
+   "needs": [
+    "trigger:attacks-player-filter"
+   ],
+   "why": "The attacks-player trigger has no attacker filter for 'non-Toy'."
+  },
+  {
+   "name": "Fear of Sleep Paralysis",
+   "needs": [
+    "static:stun-counters-cant-be-removed"
+   ],
+   "why": "Nothing stops stun counters from being removed."
+  },
+  {
+   "name": "Polluted Cistern // Dim Oubliette",
+   "needs": [
+    "effect:card-types-among-trigger-batch"
+   ],
+   "why": "Counting card types exists for a resolution's own cards, not a trigger's batch."
+  },
+  {
+   "name": "Secret Arcade // Dusty Parlor",
+   "needs": [
+    "static:spells-gain-types"
+   ],
+   "why": "A type-adding static doesn't reach spells on the stack."
+  },
+  {
+   "name": "Walk-In Closet // Forgotten Cellar",
+   "needs": [
+    "replacement:graveyard-to-exile-this-turn"
+   ],
+   "why": "No 'if a card would be put into your graveyard this turn, exile it instead' player effect."
+  },
+  {
+   "name": "Jhoira of the Ghitu",
+   "needs": [
+    "cost:exiled-card-ref"
+   ],
+   "why": "The effect can't refer to the card the cost exiled from hand."
+  },
+  {
+   "name": "Doc Samson, Super Psychiatrist",
+   "needs": [
+    "replacement:counter-multiplier-on-costs",
+    "replacement:counter-replacement-you-put"
+   ],
+   "why": "A planeswalker's +N loyalty cost still skips the counter replacements (other cost counters now pass through them), and the 'you put' limit isn't modelled."
+  },
+  {
+   "name": "Pir, Imaginative Rascal",
+   "needs": [
+    "replacement:counter-multiplier-on-costs"
+   ],
+   "why": "Only the +N loyalty cost still skips the counter replacements."
+  },
+  {
+   "name": "Winding Constrictor",
+   "needs": [
+    "replacement:player-counter-addend"
+   ],
+   "why": "changePlayerCounters applies no replacement to counters a player gets."
+  }
+ ]
+}

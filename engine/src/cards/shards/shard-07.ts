@@ -326,6 +326,7 @@ import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
+import _poolInTheDarknessBindThem from "../pool/in-the-darkness-bind-them.js";
 import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
 import _poolIndestructibleAura from "../pool/indestructible-aura.js";
@@ -1184,6 +1185,7 @@ const shard: CardShard = {
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
+    _poolInTheDarknessBindThem,
     _poolInameLifeAspect,
     _poolIncisorGlider,
     _poolIndestructibleAura,

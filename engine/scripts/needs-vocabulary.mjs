@@ -185,7 +185,11 @@ export function loadRecords() {
   };
   for (const dir of SWEEP_DIRS) {
     const abs = path.join(ENGINE, dir);
-    for (const name of readdirSync(abs).filter((n) => n.endsWith(".json")).sort()) {
+    // In batch order (B9 before B10), so a later batch's record wins a tie on
+    // date: in a shallow clone every record older than the clone's first
+    // commit carries that commit's date (2026-10-27's recheck lists took B18's
+    // coarse record over B45's narrow one for Fighter Class).
+    for (const name of readdirSync(abs).filter((n) => n.endsWith(".json")).sort((a, b) => a.localeCompare(b, "en", { numeric: true }))) {
       const data = JSON.parse(readFileSync(path.join(abs, name), "utf8"));
       walk(data, data.batch ?? name.replace(/\.json$/, ""), `${dir}/${name}`);
     }
@@ -336,7 +340,7 @@ function main() {
     const newest = new Map();
     for (const r of waiting) {
       const prev = newest.get(frontName(r.name));
-      if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) newest.set(frontName(r.name), r);
+      if (prev === undefined || (r.date ?? "") >= (prev.date ?? "")) newest.set(frontName(r.name), r);
     }
     const byCard = new Map();
     for (const r of newest.values()) {
@@ -397,7 +401,7 @@ export function latestByCard(records) {
   const latest = new Map();
   for (const r of records) {
     const prev = latest.get(frontName(r.name));
-    if (prev === undefined || (r.date ?? "") > (prev.date ?? "")) latest.set(frontName(r.name), r);
+    if (prev === undefined || (r.date ?? "") >= (prev.date ?? "")) latest.set(frontName(r.name), r);
   }
   return latest;
 }

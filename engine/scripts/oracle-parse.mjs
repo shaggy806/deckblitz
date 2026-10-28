@@ -2196,6 +2196,10 @@ export function parseFace(face, ctx = {}) {
       continue;
     }
     if (/^\d+\+ \| /.test(raw)) inStriation = true;
+    // A Class's level bar ("{1}{U}{B}: Level 2", rule 716.2a): every line
+    // after it is a class ability gated by that level (`atLevel`, with the
+    // bar itself `classLevel`), which no template reads — a person's.
+    if (/^(?:\{[^}]+\})+: Level \d+$/.test(raw)) inStriation = true;
     if (inStriation) { out.todo.push(printed(raw)); continue; }
     const whole = normalize(raw, face.name);
     // Kinship (Morningtide's ability word): the upkeep look and reveal is

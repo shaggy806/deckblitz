@@ -811,6 +811,7 @@ import _tokensKorAllyToken from "../tokens/kor-ally-token.js";
 import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles.js";
 import _tokensRedHumanTokenHaste from "../tokens/red-human-token-haste.js";
 import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js";
+import _tokensUnicornToken from "../tokens/unicorn-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -1624,6 +1625,7 @@ const shard: CardShard = {
     _tokensPilotTokenCrewsVehicles,
     _tokensRedHumanTokenHaste,
     _tokensSalamanderWarriorToken,
+    _tokensUnicornToken,
   ],
 };
 

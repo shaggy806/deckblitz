@@ -1762,6 +1762,11 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const ruled = face("Level up {1}\nLEVEL 1-3\n2/2\nWhenever this creature attacks, draw a card.\nLEVEL 4+\n3/3", "Creature — Human");
     expect(ruled.todo).toEqual(["LEVEL 1-3", "2/2", "Whenever this creature attacks, draw a card."]);
     expect(ruled.static).toHaveLength(1);
+    // A Class's level bar (rule 716.2a): it and every line after it are a
+    // person's, each class ability gated by its level.
+    const rogue = face("{1}{U}{B}: Level 2\nCreatures you control have menace.", "Enchantment — Class");
+    expect(rogue.static).toEqual([]);
+    expect(rogue.todo).toEqual(["{1}{U}{B}: Level 2", "Creatures you control have menace."]);
     // A keyword line's reminder text is dropped before it's read.
     const wave = face("Level up {2}\nLEVEL 5+\n6/6\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)", "Creature — Merfolk");
     expect(wave.static[0]).toMatchObject({ grantKeywords: ["islandwalk"], setBasePt: { power: 6, toughness: 6 } });
