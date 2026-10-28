@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3927 already implemented / 1073 missing (marks refreshed 2026-10-28)
+3936 already implemented / 1064 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -951,7 +951,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   955  Taurean Mauler                           {2}{R}           Creature — Shapeshifter
 [x]   956  Desperate Ritual                         {1}{R}           Instant — Arcane
 [x]   957  Unearth                                  {B}              Sorcery
-[ ]   958  Sejiri Shelter // Sejiri Glacier         {2}              Instant // Land
+[x]   958  Sejiri Shelter // Sejiri Glacier         {2}              Instant // Land
 [ ]   959  Agadeem's Awakening // Agadeem, the Undercrypt {3}              Sorcery // Land
 [x]   960  Cruel Celebrant                          {W}{B}           Creature — Vampire
 [x]   961  Sunken Ruins                             {0}              Land
@@ -1375,7 +1375,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1382  Regrowth                                 {1}{G}           Sorcery
 [x]  1383  Ulamog, the Infinite Gyre                {11}             Legendary Creature — Eldrazi
 [x]  1384  Vampiric Rites                           {B}              Enchantment
-[ ]  1385  Giver of Runes                           {W}              Creature — Kor Cleric
+[x]  1385  Giver of Runes                           {W}              Creature — Kor Cleric
 [x]  1386  Bonehoard Dracosaur                      {3}{R}{R}        Creature — Dinosaur Dragon
 [x]  1387  Sigil of the Empty Throne                {3}{W}{W}        Enchantment
 [x]  1388  Shiny Impetus                            {2}{R}           Enchantment — Aura
@@ -2760,7 +2760,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2767  Champion of the Perished                 {B}              Creature — Zombie
 [ ]  2768  Raging Ravine                            {0}              Land
 [x]  2769  Inspired Tinkering                       {4}{R}           Sorcery
-[ ]  2770  Alseid of Life's Bounty                  {W}              Enchantment Creature — Nymph
+[x]  2770  Alseid of Life's Bounty                  {W}              Enchantment Creature — Nymph
 [x]  2771  Greensleeves, Maro-Sorcerer              {3}{G}{G}        Legendary Creature — Elemental Sorcerer
 [x]  2772  Emiel the Blessed                        {2}{W}{W}        Legendary Creature — Unicorn
 [x]  2773  Dwarven Mine                             {0}              Land — Mountain
@@ -3210,7 +3210,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3217  Keeper of Fables                         {3}{G}{G}        Creature — Cat
 [ ]  3218  Thief of Sanity                          {1}{U}{B}        Creature — Specter
 [ ]  3219  Memory Lapse                             {1}{U}           Instant
-[ ]  3220  Pippin, Guard of the Citadel             {W}{U}           Legendary Creature — Halfling Soldier
+[x]  3220  Pippin, Guard of the Citadel             {W}{U}           Legendary Creature — Halfling Soldier
 [x]  3221  Shambling Ghast                          {B}              Creature — Zombie
 [x]  3222  Octopus Form                             {U}              Instant — Lesson
 [ ]  3223  Éowyn, Fearless Knight                   {2}{R}{W}        Legendary Creature — Human Knight
@@ -3287,7 +3287,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3294  Canoptek Spyder                          {5}              Artifact Creature — Spider
 [x]  3295  Scurry of Squirrels                      {2}{G}           Creature — Squirrel Scout
 [x]  3296  Gisa, the Hellraiser                     {3}{B}{B}        Legendary Creature — Human Warlock
-[ ]  3297  Shelter                                  {1}{W}           Instant
+[x]  3297  Shelter                                  {1}{W}           Instant
 [x]  3298  Chocobo Racetrack                        {3}{G}{G}        Artifact
 [ ]  3299  Hope of Ghirapur                         {1}              Legendary Artifact Creature — Thopter
 [x]  3300  Court of Ire                             {3}{R}{R}        Enchantment
@@ -3442,7 +3442,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3449  Rule of Law                              {2}{W}           Enchantment
 [ ]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
 [x]  3451  Prowler's Helm                           {2}              Artifact — Equipment
-[ ]  3452  Gods Willing                             {W}              Instant
+[x]  3452  Gods Willing                             {W}              Instant
 [x]  3453  Dalkovan Encampment                      {0}              Land
 [x]  3454  Rabble Rousing                           {4}{W}           Enchantment
 [x]  3455  Lyse Hext                                {1}{W}{U}        Legendary Creature — Human Rebel Monk
@@ -3758,7 +3758,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3765  Argothian Enchantress                    {1}{G}           Creature — Human Druid
 [x]  3766  Court of Ardenvale                       {2}{W}{W}        Enchantment
 [ ]  3767  Mardu Siegebreaker                       {1}{R}{W}{B}     Creature — Human Warrior
-[ ]  3768  Brave the Elements                       {W}              Instant
+[x]  3768  Brave the Elements                       {W}              Instant
 [x]  3769  Mnemonic Deluge                          {6}{U}{U}{U}     Sorcery
 [x]  3770  Sanctum of Eternity                      {0}              Land
 [x]  3771  Faithful Mending                         {W}{U}           Instant
@@ -4440,7 +4440,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4447  Akroan Horse                             {4}              Artifact Creature — Horse
 [ ]  4448  New Blood                                {2}{B}{B}        Sorcery
 [x]  4449  Vindictive Vampire                       {3}{B}           Creature — Vampire
-[ ]  4450  Flickering Ward                          {W}              Enchantment — Aura
+[x]  4450  Flickering Ward                          {W}              Enchantment — Aura
 [x]  4451  Gigantosaurus                            {G}{G}{G}{G}{G}  Creature — Dinosaur
 [x]  4452  Cloud, Ex-SOLDIER                        {2}{R}{G}{W}     Legendary Creature — Human Soldier Mercenary
 [x]  4453  You Find Some Prisoners                  {1}{R}           Instant
@@ -4579,7 +4579,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4586  Jeska, Thrice Reborn                     {2}{R}           Legendary Planeswalker — Jeska
 [x]  4587  Elderfang Disciple                       {1}{B}           Creature — Elf Cleric
 [x]  4588  Impassioned Orator                       {1}{W}           Creature — Human Cleric
-[ ]  4589  Seasoned Dungeoneer                      {3}{W}           Creature — Human Warrior
+[x]  4589  Seasoned Dungeoneer                      {3}{W}           Creature — Human Warrior
 [x]  4590  Strixhaven Stadium                       {3}              Artifact
 [x]  4591  RMS Titanic                              {3}{R}           Legendary Artifact — Vehicle
 [x]  4592  Electrickery                             {R}              Instant
