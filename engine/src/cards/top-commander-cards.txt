@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3936 already implemented / 1064 missing (marks refreshed 2026-10-28)
+3943 already implemented / 1057 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -952,7 +952,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   956  Desperate Ritual                         {1}{R}           Instant — Arcane
 [x]   957  Unearth                                  {B}              Sorcery
 [x]   958  Sejiri Shelter // Sejiri Glacier         {2}              Instant // Land
-[ ]   959  Agadeem's Awakening // Agadeem, the Undercrypt {3}              Sorcery // Land
+[x]   959  Agadeem's Awakening // Agadeem, the Undercrypt {3}              Sorcery // Land
 [x]   960  Cruel Celebrant                          {W}{B}           Creature — Vampire
 [x]   961  Sunken Ruins                             {0}              Land
 [x]   962  Ichor Wellspring                         {2}              Artifact
@@ -1161,7 +1161,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1166  Branchloft Pathway // Boulderloft Pathway {0}              Land // Land
 [x]  1167  Kediss, Emberclaw Familiar               {1}{R}           Legendary Creature — Elemental Lizard
 [x]  1168  Suture Priest                            {1}{W}           Creature — Phyrexian Cleric
-[ ]  1169  Crackle with Power                       {X}{X}{X}{R}{R}  Sorcery
+[x]  1169  Crackle with Power                       {X}{X}{X}{R}{R}  Sorcery
 [x]  1170  Silverbluff Bridge                       {0}              Artifact Land
 [x]  1171  Darkbore Pathway // Slitherbore Pathway  {0}              Land // Land
 [x]  1172  Kambal, Profiteering Mayor               {1}{W}{B}        Legendary Creature — Human Advisor
@@ -1493,7 +1493,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1500  Arid Archway                             {0}              Land — Desert
 [x]  1501  Acidic Slime                             {3}{G}{G}        Creature — Ooze
 [x]  1502  Sneak Attack                             {3}{R}           Enchantment
-[ ]  1503  Heliod's Intervention                    {X}{W}{W}        Instant
+[x]  1503  Heliod's Intervention                    {X}{W}{W}        Instant
 [x]  1504  Guide of Souls                           {W}              Creature — Human Cleric
 [x]  1505  Snake Umbra                              {2}{G}           Enchantment — Aura
 [x]  1506  Meren of Clan Nel Toth                   {2}{B}{G}        Legendary Creature — Human Shaman
@@ -1727,7 +1727,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1734  Jin-Gitaxias, Progress Tyrant            {5}{U}{U}        Legendary Creature — Phyrexian Praetor
 [x]  1735  Molten Duplication                       {1}{R}           Sorcery
 [x]  1736  Flame of Anor                            {1}{U}{R}        Instant
-[ ]  1737  Ancient Brass Dragon                     {5}{B}{B}        Creature — Elder Dragon
+[x]  1737  Ancient Brass Dragon                     {5}{B}{B}        Creature — Elder Dragon
 [ ]  1738  Tezzeret the Seeker                      {3}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  1739  Voltaic Key                              {1}              Artifact
 [ ]  1740  Leyline of the Guildpact                 {G/W}{G/U}{B/G}{R/G} Enchantment
@@ -4629,7 +4629,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4636  Satsuki, the Living Lore                 {G}{W}           Legendary Creature — Human Druid
 [x]  4637  Excalibur II                             {1}              Legendary Artifact — Equipment
 [x]  4638  Armored Scrapgorger                      {1}{G}           Creature — Phyrexian Beast
-[ ]  4639  Death Kiss                               {5}{R}           Creature — Beholder
+[x]  4639  Death Kiss                               {5}{R}           Creature — Beholder
 [ ]  4640  Echocasting Symposium                    {4}{U}{U}        Sorcery — Lesson
 [x]  4641  Theater of Horrors                       {1}{B}{R}        Enchantment
 [x]  4642  Vivid Grove                              {0}              Land
@@ -4697,7 +4697,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4704  Haunted One                              {2}{B}           Legendary Enchantment — Background
 [ ]  4705  Trenzalore Clocktower                    {0}              Legendary Land
 [x]  4706  Surgehacker Mech                         {4}              Artifact — Vehicle
-[ ]  4707  Marshal's Anthem                         {2}{W}{W}        Enchantment
+[x]  4707  Marshal's Anthem                         {2}{W}{W}        Enchantment
 [x]  4708  Guardian Scalelord                       {4}{W}           Creature — Dragon
 [x]  4709  Felisa, Fang of Silverquill              {2}{W}{B}        Legendary Creature — Vampire Wizard
 [x]  4710  Raffine, Scheming Seer                   {W}{U}{B}        Legendary Creature — Sphinx Demon
@@ -4971,7 +4971,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4978  Storm of Souls                           {4}{W}{W}        Sorcery
 [ ]  4979  Sauron's Ransom                          {1}{U}{B}        Instant
 [x]  4980  Cruel Somnophage // Can't Wake Up        {1}{B} // {1}{U} Creature — Nightmare // Sorcery — Adventure
-[ ]  4981  Profane Command                          {X}{B}{B}        Sorcery
+[x]  4981  Profane Command                          {X}{B}{B}        Sorcery
 [x]  4982  Lingering Souls                          {2}{W}           Sorcery
 [x]  4983  Glacier Godmaw                           {5}{G}{G}        Creature — Leviathan
 [x]  4984  Batterskull                              {5}              Artifact — Equipment

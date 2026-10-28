@@ -77,7 +77,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 24 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 23 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
   banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
