@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-446 already implemented / 54 missing
+447 already implemented / 53 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -329,7 +329,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  323  Winter, Misanthropic Guide                      8693 decks  {1}{B}{R}{G}     Legendary Creature — Human Warlock
 [x]  324  Ikra Shidiqi, the Usurper                       8690 decks  {3}{B}{G}        Legendary Creature — Snake Wizard
 [x]  325  Elas il-Kor, Sadistic Pilgrim                   8681 decks  {W}{B}           Legendary Creature — Phyrexian Kor Cleric
-[ ]  326  Brimaz, Blight of Oreskos                       8673 decks  {2}{W}{B}        Legendary Creature — Phyrexian Cat
+[x]  326  Brimaz, Blight of Oreskos                       8673 decks  {2}{W}{B}        Legendary Creature — Phyrexian Cat
 [x]  327  Kess, Dissident Mage                            8649 decks  {1}{U}{B}{R}     Legendary Creature — Human Wizard
 [x]  328  Xenagos, God of Revels                          8608 decks  {3}{R}{G}        Legendary Enchantment Creature — God
 [x]  329  Cloud, Midgar Mercenary                         8526 decks  {W}{W}           Legendary Creature — Human Soldier Mercenary
