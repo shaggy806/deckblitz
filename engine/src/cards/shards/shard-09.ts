@@ -310,6 +310,7 @@ import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
 import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
+import _poolHappyHoganBodyguard from "../pool/happy-hogan-bodyguard.js";
 import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardEvidence from "../pool/hard-evidence.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
@@ -492,6 +493,7 @@ import _poolPeachGardenOath from "../pool/peach-garden-oath.js";
 import _poolPeltCollector from "../pool/pelt-collector.js";
 import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
+import _poolPersistentMarshstalker from "../pool/persistent-marshstalker.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhantatog from "../pool/phantatog.js";
@@ -1149,6 +1151,7 @@ const shard: CardShard = {
     _poolGuardiansOfKoilos,
     _poolHammerheimDeadeye,
     _poolHamperingSnare,
+    _poolHappyHoganBodyguard,
     _poolHarbinVanguardAviator,
     _poolHardEvidence,
     _poolHardenedScales,
@@ -1331,6 +1334,7 @@ const shard: CardShard = {
     _poolPeltCollector,
     _poolPerforatingArtist,
     _poolPerplexingTest,
+    _poolPersistentMarshstalker,
     _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
     _poolPhantatog,

@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbandonReason from "../pool/abandon-reason.js";
 import _poolAbjure from "../pool/abjure.js";
 import _poolAbzanSkycaptain from "../pool/abzan-skycaptain.js";
+import _poolAcademicDispute from "../pool/academic-dispute.js";
 import _poolAcidRain from "../pool/acid-rain.js";
 import _poolAcornCatapult from "../pool/acorn-catapult.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
@@ -782,6 +783,7 @@ import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
 import _poolZhurTaaGoblin from "../pool/zhur-taa-goblin.js";
 import _poolZodiacMonkey from "../pool/zodiac-monkey.js";
+import _poolZulaportDuelist from "../pool/zulaport-duelist.js";
 import _tokens22SplittingOozeToken from "../tokens/2-2-splitting-ooze-token.js";
 import _tokensBeastToken33 from "../tokens/beast-token-3-3.js";
 import _tokensBlueBirdToken from "../tokens/blue-bird-token.js";
@@ -814,6 +816,7 @@ const shard: CardShard = {
     _poolAbandonReason,
     _poolAbjure,
     _poolAbzanSkycaptain,
+    _poolAcademicDispute,
     _poolAcidRain,
     _poolAcornCatapult,
     _poolAdelineResplendentCathar,
@@ -1590,6 +1593,7 @@ const shard: CardShard = {
     _poolZhalfirinVoid,
     _poolZhurTaaGoblin,
     _poolZodiacMonkey,
+    _poolZulaportDuelist,
   ],
   tokens: [
     _tokens22SplittingOozeToken,

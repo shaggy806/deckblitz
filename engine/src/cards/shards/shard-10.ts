@@ -157,6 +157,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolCursedTotem from "../pool/cursed-totem.js";
 import _poolCustodyBattle from "../pool/custody-battle.js";
 import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
@@ -634,6 +635,7 @@ import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
 import _poolSnapback from "../pool/snapback.js";
 import _poolSnareTactician from "../pool/snare-tactician.js";
 import _poolSnarlSong from "../pool/snarl-song.js";
+import _poolSoldeviAdnate from "../pool/soldevi-adnate.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
@@ -981,6 +983,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolCursedTotem,
     _poolCustodyBattle,
     _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,
@@ -1458,6 +1461,7 @@ const shard: CardShard = {
     _poolSnapback,
     _poolSnareTactician,
     _poolSnarlSong,
+    _poolSoldeviAdnate,
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,

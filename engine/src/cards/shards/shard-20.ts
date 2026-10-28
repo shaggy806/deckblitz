@@ -171,6 +171,7 @@ import _poolCrusadingKnight from "../pool/crusading-knight.js";
 import _poolCrush from "../pool/crush.js";
 import _poolCrushingPain from "../pool/crushing-pain.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
+import _poolCullingMark from "../pool/culling-mark.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessAvenger from "../pool/dauntless-avenger.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
@@ -509,6 +510,7 @@ import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
 import _poolPanic from "../pool/panic.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
+import _poolPeemaAetherSeer from "../pool/peema-aether-seer.js";
 import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
 import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPerilousForays from "../pool/perilous-forays.js";
@@ -526,6 +528,7 @@ import _poolPteronGhost from "../pool/pteron-ghost.js";
 import _poolPufferExtract from "../pool/puffer-extract.js";
 import _poolPunishment from "../pool/punishment.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
+import _poolPyreswipeHawk from "../pool/pyreswipe-hawk.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
 import _poolQuagSickness from "../pool/quag-sickness.js";
 import _poolQuagmireDruid from "../pool/quagmire-druid.js";
@@ -1041,6 +1044,7 @@ const shard: CardShard = {
     _poolCrush,
     _poolCrushingPain,
     _poolCrystalDragon,
+    _poolCullingMark,
     _poolDanithaNewBenaliasLight,
     _poolDauntlessAvenger,
     _poolDauntlessScrapbot,
@@ -1379,6 +1383,7 @@ const shard: CardShard = {
     _poolPanic,
     _poolPatronWizard,
     _poolPeacewalkerColossus,
+    _poolPeemaAetherSeer,
     _poolPeerPastTheVeil,
     _poolPensiveProfessor,
     _poolPerilousForays,
@@ -1396,6 +1401,7 @@ const shard: CardShard = {
     _poolPufferExtract,
     _poolPunishment,
     _poolPutridGoblin,
+    _poolPyreswipeHawk,
     _poolQasaliPridemage,
     _poolQuagSickness,
     _poolQuagmireDruid,

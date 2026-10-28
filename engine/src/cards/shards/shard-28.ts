@@ -703,6 +703,7 @@ import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTemperedSliver from "../pool/tempered-sliver.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
 import _poolTempleThief from "../pool/temple-thief.js";
+import _poolTemptWithMayhem from "../pool/tempt-with-mayhem.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
 import _poolThalakosScout from "../pool/thalakos-scout.js";
@@ -1550,6 +1551,7 @@ const shard: CardShard = {
     _poolTemperedSliver,
     _poolTempleOfMystery,
     _poolTempleThief,
+    _poolTemptWithMayhem,
     _poolTerritorialRoc,
     _poolTeysaKarlov,
     _poolThalakosScout,

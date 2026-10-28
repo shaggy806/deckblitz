@@ -587,6 +587,7 @@ import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
 import _poolShapersSanctuary from "../pool/shapers-sanctuary.js";
 import _poolShellOfTheLastKappa from "../pool/shell-of-the-last-kappa.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
+import _poolShessraDeathsWhisper from "../pool/shessra-deaths-whisper.js";
 import _poolShidakoBroodmistress from "../pool/shidako-broodmistress.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
@@ -680,6 +681,7 @@ import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
+import _poolTheRani from "../pool/the-rani.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolTheSensationalSheHulk from "../pool/the-sensational-she-hulk.js";
 import _poolTheVision from "../pool/the-vision.js";
@@ -1395,6 +1397,7 @@ const shard: CardShard = {
     _poolShapersSanctuary,
     _poolShellOfTheLastKappa,
     _poolShelobsAmbush,
+    _poolShessraDeathsWhisper,
     _poolShidakoBroodmistress,
     _poolShieldWall,
     _poolShimmeringWings,
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolTerisianMindbreaker,
     _poolTerminate,
     _poolTheLordOfTheEagles,
+    _poolTheRani,
     _poolTheReaperKingNoMore,
     _poolTheSensationalSheHulk,
     _poolTheVision,

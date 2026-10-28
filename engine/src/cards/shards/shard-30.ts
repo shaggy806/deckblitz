@@ -504,6 +504,7 @@ import _poolOmen from "../pool/omen.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
+import _poolOriginOfIronMan from "../pool/origin-of-iron-man.js";
 import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOrzhovGuildmage from "../pool/orzhov-guildmage.js";
@@ -673,6 +674,7 @@ import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -742,6 +744,7 @@ import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
+import _poolVault87ForcedEvolution from "../pool/vault-87-forced-evolution.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
@@ -1318,6 +1321,7 @@ const shard: CardShard = {
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOrdealOfHeliod,
+    _poolOriginOfIronMan,
     _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
     _poolOrzhovGuildmage,
@@ -1487,6 +1491,7 @@ const shard: CardShard = {
     _poolStormfrontRiders,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
+    _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,
     _poolSwarmCuller,
@@ -1556,6 +1561,7 @@ const shard: CardShard = {
     _poolVampiricFury,
     _poolVaporSnag,
     _poolVault75MiddleSchool,
+    _poolVault87ForcedEvolution,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
     _poolVenomspoutBrackus,

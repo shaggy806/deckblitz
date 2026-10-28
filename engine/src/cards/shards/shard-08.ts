@@ -295,6 +295,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGlitteringStockpile from "../pool/glittering-stockpile.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
 import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
@@ -445,6 +446,7 @@ import _poolMantleOfTheWolf from "../pool/mantle-of-the-wolf.js";
 import _poolMarkovCrusader from "../pool/markov-crusader.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
 import _poolMaskOfIntolerance from "../pool/mask-of-intolerance.js";
+import _poolMatsuTribeDecoy from "../pool/matsu-tribe-decoy.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
@@ -1144,6 +1146,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGlitteringStockpile,
     _poolGoblinBoomKeg,
     _poolGoblinOriflamme,
     _poolGoblinPicker,
@@ -1294,6 +1297,7 @@ const shard: CardShard = {
     _poolMarkovCrusader,
     _poolMartialCoup,
     _poolMaskOfIntolerance,
+    _poolMatsuTribeDecoy,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
     _poolMercurialGeists,

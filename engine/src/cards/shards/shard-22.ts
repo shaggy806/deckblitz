@@ -499,6 +499,7 @@ import _poolPrishesWanderings from "../pool/prishes-wanderings.js";
 import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
 import _poolPromiseOfPower from "../pool/promise-of-power.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
+import _poolPsychicStrike from "../pool/psychic-strike.js";
 import _poolPteramander from "../pool/pteramander.js";
 import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
@@ -541,6 +542,7 @@ import _poolRhysticShield from "../pool/rhystic-shield.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
+import _poolRiteOfHarmony from "../pool/rite-of-harmony.js";
 import _poolRocEgg from "../pool/roc-egg.js";
 import _poolRockslideSorcerer from "../pool/rockslide-sorcerer.js";
 import _poolRoilSpout from "../pool/roil-spout.js";
@@ -729,6 +731,7 @@ import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrigonOfThought from "../pool/trigon-of-thought.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
 import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
+import _poolTrumpetingArmodon from "../pool/trumpeting-armodon.js";
 import _poolTurbulentSprings from "../pool/turbulent-springs.js";
 import _poolTwoHeadedCerberus from "../pool/two-headed-cerberus.js";
 import _poolTyrantsMachine from "../pool/tyrants-machine.js";
@@ -1326,6 +1329,7 @@ const shard: CardShard = {
     _poolPrismwakeMerrow,
     _poolPromiseOfPower,
     _poolProudMentor,
+    _poolPsychicStrike,
     _poolPteramander,
     _poolPurphorossIntervention,
     _poolPyramidOfThePantheon,
@@ -1368,6 +1372,7 @@ const shard: CardShard = {
     _poolRiotDevils,
     _poolRiseOfExtus,
     _poolRishkarsExpertise,
+    _poolRiteOfHarmony,
     _poolRocEgg,
     _poolRockslideSorcerer,
     _poolRoilSpout,
@@ -1556,6 +1561,7 @@ const shard: CardShard = {
     _poolTrigonOfThought,
     _poolTrinketMage,
     _poolTrugaCliffcharger,
+    _poolTrumpetingArmodon,
     _poolTurbulentSprings,
     _poolTwoHeadedCerberus,
     _poolTyrantsMachine,

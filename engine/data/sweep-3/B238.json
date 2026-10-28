@@ -1,0 +1,712 @@
+{
+  "batch": "B238",
+  "status": "complete",
+  "ranks": "The need-keys recheck list R4 (Phase 1 step 2)",
+  "authored": [
+    {
+      "name": "Academic Dispute",
+      "files": [
+        "engine/src/cards/pool/academic-dispute.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Avalanche Tusker",
+      "files": [
+        "engine/src/cards/pool/avalanche-tusker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blightwing Bandit",
+      "files": [
+        "engine/src/cards/pool/blightwing-bandit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chandra, Spark Hunter",
+      "files": [
+        "engine/src/cards/pool/chandra-spark-hunter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clackbridge Troll",
+      "files": [
+        "engine/src/cards/pool/clackbridge-troll.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Combat Calligrapher",
+      "files": [
+        "engine/src/cards/pool/combat-calligrapher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Countermand",
+      "files": [
+        "engine/src/cards/pool/countermand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Courtly Provocateur",
+      "files": [
+        "engine/src/cards/pool/courtly-provocateur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Culling Mark",
+      "files": [
+        "engine/src/cards/pool/culling-mark.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Culvert Ambusher",
+      "files": [
+        "engine/src/cards/pool/culvert-ambusher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Didn't Say Please",
+      "files": [
+        "engine/src/cards/pool/didnt-say-please.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Disciple of Freyalise // Garden of Freyalise",
+      "files": [
+        "engine/src/cards/pool/disciple-of-freyalise.ts",
+        "engine/src/cards/pool/garden-of-freyalise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Domineering Will",
+      "files": [
+        "engine/src/cards/pool/domineering-will.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Extraction Specialist",
+      "files": [
+        "engine/src/cards/pool/extraction-specialist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gemstone Mine",
+      "files": [
+        "engine/src/cards/pool/gemstone-mine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Giant Ambush Beetle",
+      "files": [
+        "engine/src/cards/pool/giant-ambush-beetle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Glacial Grasp",
+      "files": [
+        "engine/src/cards/pool/glacial-grasp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glittering Stockpile",
+      "files": [
+        "engine/src/cards/pool/glittering-stockpile.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grappling Hook",
+      "files": [
+        "engine/src/cards/pool/grappling-hook.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grisly Spectacle",
+      "files": [
+        "engine/src/cards/pool/grisly-spectacle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grove of the Burnwillows",
+      "files": [
+        "engine/src/cards/pool/grove-of-the-burnwillows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Impetuous Devils",
+      "files": [
+        "engine/src/cards/pool/impetuous-devils.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana, Waker of the Dead",
+      "files": [
+        "engine/src/cards/pool/liliana-waker-of-the-dead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lurking Arynx",
+      "files": [
+        "engine/src/cards/pool/lurking-arynx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maraleaf Rider",
+      "files": [
+        "engine/src/cards/pool/maraleaf-rider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Matsu-Tribe Decoy",
+      "files": [
+        "engine/src/cards/pool/matsu-tribe-decoy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Monstrous Step",
+      "files": [
+        "engine/src/cards/pool/monstrous-step.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nacatl Hunt-Pride",
+      "files": [
+        "engine/src/cards/pool/nacatl-hunt-pride.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Olivia Voldaren",
+      "files": [
+        "engine/src/cards/pool/olivia-voldaren.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Origin of Iron Man",
+      "files": [
+        "engine/src/cards/pool/origin-of-iron-man.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Peema Aether-Seer",
+      "files": [
+        "engine/src/cards/pool/peema-aether-seer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Persistent Marshstalker",
+      "files": [
+        "engine/src/cards/pool/persistent-marshstalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phoenix Chick",
+      "files": [
+        "engine/src/cards/pool/phoenix-chick.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Provoke",
+      "files": [
+        "engine/src/cards/pool/provoke.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Psychic Strike",
+      "files": [
+        "engine/src/cards/pool/psychic-strike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rhino, Terrible Trampler",
+      "files": [
+        "engine/src/cards/pool/rhino-terrible-trampler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rimehorn Aurochs",
+      "files": [
+        "engine/src/cards/pool/rimehorn-aurochs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sandstone Needle",
+      "files": [
+        "engine/src/cards/pool/sandstone-needle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shessra, Death's Whisper",
+      "files": [
+        "engine/src/cards/pool/shessra-deaths-whisper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sidisi, Undead Vizier",
+      "files": [
+        "engine/src/cards/pool/sidisi-undead-vizier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soldevi Adnate",
+      "files": [
+        "engine/src/cards/pool/soldevi-adnate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Suspended Sentence",
+      "files": [
+        "engine/src/cards/pool/suspended-sentence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tale of Tinúviel",
+      "files": [
+        "engine/src/cards/pool/tale-of-tinuviel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tangle Angler",
+      "files": [
+        "engine/src/cards/pool/tangle-angler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Timely Interference",
+      "files": [
+        "engine/src/cards/pool/timely-interference.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tower Above",
+      "files": [
+        "engine/src/cards/pool/tower-above.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trumpeting Armodon",
+      "files": [
+        "engine/src/cards/pool/trumpeting-armodon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Turntimber Basilisk",
+      "files": [
+        "engine/src/cards/pool/turntimber-basilisk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vault 87: Forced Evolution",
+      "files": [
+        "engine/src/cards/pool/vault-87-forced-evolution.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Venser, the Sojourner",
+      "files": [
+        "engine/src/cards/pool/venser-the-sojourner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zulaport Duelist",
+      "files": [
+        "engine/src/cards/pool/zulaport-duelist.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Revival of the Ancestors",
+      "needs": [
+        "effect:saga-chapter-divided"
+      ],
+      "why": "Chapter II distributes counters among targets, and a Saga chapter has no `divided` field, so the split can't be announced."
+    },
+    {
+      "name": "Vorinclex // The Grand Evolution",
+      "needs": [
+        "effect:saga-chapter-divided"
+      ],
+      "why": "The Grand Evolution's chapter II distributes seven +1/+1 counters among targets: a Saga chapter has no `divided` field."
+    },
+    {
+      "name": "Vastwood Hydra",
+      "needs": [
+        "effect:distribute-counters-among-chosen",
+        "effect:distribute-counters-variable-total"
+      ],
+      "why": "The dies trigger distributes its +1/+1 counters (as it last existed) among creatures chosen as it resolves, not targeted; `counters-divided` takes only targets and a fixed total."
+    },
+    {
+      "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+      "needs": [
+        "effect:divided-dynamic-total"
+      ],
+      "why": "The card-level `divided` totals X but not 'twice X instead if X is 6 or more'."
+    },
+    {
+      "name": "Ureni, the Song Unending",
+      "needs": [
+        "effect:divided-dynamic-total"
+      ],
+      "why": "A trigger's `divided.total` is a number, the trigger value or a turn stat, not 'the number of lands you control'."
+    },
+    {
+      "name": "Chandra, Awakened Inferno",
+      "needs": [
+        "cost:loyalty-x"
+      ],
+      "why": "The emblem is expressible, but the −X ability isn't: `loyaltyCost` is a number only."
+    },
+    {
+      "name": "Chandra, Dressed to Kill",
+      "needs": [
+        "filter:impulse-permission-spell-face"
+      ],
+      "why": "The −7's 'you may cast red spells from among them' is judged on the spell as cast (its ruling); the impulse permission's filter is checked against the exiled card's front face."
+    },
+    {
+      "name": "Jace, Vryn's Prodigy // Jace, Telepath Unbound",
+      "needs": [
+        "zone:graveyard-cast-exile-replacement"
+      ],
+      "why": "The −3 grants a graveyard cast for the rest of the turn with normal timing and 'exile it instead'; `cast-now` casts on resolution and `grant-graveyard-cast` has no exile clause."
+    },
+    {
+      "name": "Kaya the Inexorable",
+      "needs": [
+        "effect:cast-now-from-hand-or-graveyard"
+      ],
+      "why": "The emblem casts a legendary spell from hand, graveyard or among cards you own in exile; `cast-now`'s `from` takes one zone and none is 'exile you own'."
+    },
+    {
+      "name": "Lolth, Spider Queen",
+      "needs": [
+        "condition:that-player-turn-stat"
+      ],
+      "why": "The emblem's intervening-if is 'if that player lost less than 8 life this turn'; the `turn-stat` condition's `who` is only you, an opponent or any player."
+    },
+    {
+      "name": "Tezzeret, Betrayer of Flesh",
+      "needs": [
+        "cost:ability-cost-reduction-first-each-turn"
+      ],
+      "why": "'The first activated ability of an artifact you activate each turn costs {2} less' (mana abilities included): `abilityCostModification` has no first-each-turn form, unlike spells' `costModification`."
+    },
+    {
+      "name": "Kithkin Armor",
+      "needs": [
+        "effect:prevent-chosen-source-to-attached"
+      ],
+      "why": "Sacrifice the Aura: prevent the damage a chosen source would deal to the creature it enchanted (read after the sacrifice); `prevent-damage-from-chosen-source`'s `to` takes only 'you' or a target slot."
+    },
+    {
+      "name": "Tyvar Kell",
+      "needs": [
+        "effect:trigger-spell-gains-keyword"
+      ],
+      "why": "The emblem's 'whenever you cast an Elf spell, it gains haste until end of turn' gives haste to the spell just cast, carried to the permanent; no effect acts on the trigger spell that way."
+    },
+    {
+      "name": "Doomsday Excruciator",
+      "needs": [
+        "effect:exile-from-library-face-down"
+      ],
+      "why": "`exile-from-library` with `allBut` exiles face up; the card exiles face down."
+    },
+    {
+      "name": "Mari, the Killing Quill",
+      "needs": [
+        "effect:remove-counter-from-exiled-card"
+      ],
+      "why": "The hit-counter exile works, but the granted trigger's 'you may remove a hit counter from a card that player owns in exile; if you do…' has no effect."
+    },
+    {
+      "name": "Rousing Refrain",
+      "needs": [
+        "amount:cards-in-target-player-hand"
+      ],
+      "why": "The self-suspend works (`give-suspend`), but `add-mana` can't count the cards in target opponent's hand."
+    },
+    {
+      "name": "Ghostway",
+      "needs": [
+        "effect:flicker-untargeted-group-delayed-return"
+      ],
+      "why": "Exile each creature you control and return them together at the beginning of the next end step: `flicker` takes target slots only, and `exile-all` has no linked delayed return."
+    },
+    {
+      "name": "Planar Guide",
+      "needs": [
+        "effect:flicker-untargeted-group-delayed-return"
+      ],
+      "why": "Exile all creatures and return them together at the next end step: no untargeted group flicker with a linked delayed return."
+    },
+    {
+      "name": "Nahiri's Resolve",
+      "needs": [
+        "effect:flicker-untargeted-group-delayed-return"
+      ],
+      "why": "Any number of chosen (not targeted) nontoken artifacts and creatures, returned together at your next upkeep; `choose-permanents` runs its `then` once per permanent."
+    },
+    {
+      "name": "Gilraen, Dúnedain Protector",
+      "needs": [
+        "effect:flicker-optional-immediate-or-delayed"
+      ],
+      "why": "'You may return it now; if you don't, return it at the next end step with a vigilance and a lifelink counter' has no flicker shape."
+    },
+    {
+      "name": "Tolsimir, Midnight's Light",
+      "needs": [
+        "condition:source-attacked-this-combat"
+      ],
+      "why": "The block requirement is expressible, but 'if Tolsimir attacked this combat' is neither `attacking` (wrong once removed from combat) nor `attackedThisTurn` (wrong across extra combats)."
+    },
+    {
+      "name": "Dream Harvest",
+      "needs": [
+        "effect:reveal-until-total-mana-value"
+      ],
+      "why": "Exile cards from each opponent's library until total mana value 5 or greater: no running-total stop."
+    },
+    {
+      "name": "Triple Triad",
+      "needs": [
+        "zone:impulse-free-lesser-mana-value-than-own"
+      ],
+      "why": "Each player exiles their top card; you may cast yours free, and each other one only if its mana value is less than yours: `impulse-exile` has no such comparison."
+    },
+    {
+      "name": "Jace's Machinations",
+      "needs": [
+        "effect:grant-instant-speed-loyalty-until-eot"
+      ],
+      "why": "Instant-speed loyalty exists only as a permanent's own static, never granted to your Jace planeswalkers until end of turn."
+    },
+    {
+      "name": "Clear the Land",
+      "needs": [
+        "effect:exile-top-put-matching"
+      ],
+      "why": "Each player reveals the top five, puts the lands onto the battlefield tapped and exiles the rest; `look-and-choose`'s leftover has no plain exile."
+    },
+    {
+      "name": "Ao, the Dawn Sky",
+      "needs": [
+        "effect:look-and-choose-library-total-mana-value"
+      ],
+      "why": "The built key added `totalManaValueAtMost` to `return-from-graveyard` only (Lively Dirge); `look-and-choose` has no total-mana-value cap."
+    },
+    {
+      "name": "Michelangelo's Technique",
+      "needs": [
+        "effect:look-and-choose-library-total-mana-value"
+      ],
+      "why": "Up to two creature cards with total mana value 6 or less from the looked-at cards: no total-mana-value cap on `look-and-choose`."
+    },
+    {
+      "name": "Smelting Vat",
+      "needs": [
+        "effect:look-and-choose-library-total-mana-value"
+      ],
+      "why": "A total-mana-value cap on `look-and-choose`, set by an amount (the sacrificed artifact's mana value)."
+    },
+    {
+      "name": "Final Fortune",
+      "needs": [
+        "effect:delayed-trigger-extra-turn-end-step"
+      ],
+      "why": "'At the beginning of that turn's end step, you lose the game': no delayed trigger at the extra turn's own end step (and none if the turn is skipped, its ruling)."
+    },
+    {
+      "name": "Shay Cormac",
+      "needs": [
+        "effect:lose-protection-and-ward"
+      ],
+      "why": "`lose-keywords` takes Keyword strings; protection and ward aren't among them."
+    },
+    {
+      "name": "Empowered Autogenerator",
+      "needs": [
+        "effect:mana-ability-effect-before-mana"
+      ],
+      "why": "Put a charge counter on it, then add X mana where X is its charge counters: `add-mana`'s `also` runs after the mana; a sequence stops being a mana ability."
+    },
+    {
+      "name": "Hall of the Bandit Lord",
+      "needs": [
+        "effect:mana-spell-gains-permanent-keyword"
+      ],
+      "why": "A creature spell cast with this mana gains haste for good (its ruling); `spellGains` grants only until end of turn."
+    },
+    {
+      "name": "Tyvar the Bellicose",
+      "needs": [
+        "trigger:mana-ability-resolves-amount-produced",
+        "effect:attack-batch-those-creatures"
+      ],
+      "why": "No granted 'whenever a mana ability of this creature resolves' trigger carrying the amount produced; 'they gain deathtouch' needs the attack batch."
+    },
+    {
+      "name": "Zhur-Taa Druid",
+      "needs": [
+        "trigger:tapped-for-mana-nonmana-trigger"
+      ],
+      "why": "'Whenever you tap this for mana, it deals 1 damage to each opponent': `tapped-for-mana` triggers are only triggered mana abilities (add-mana effects)."
+    },
+    {
+      "name": "Koma, Cosmos Serpent",
+      "needs": [
+        "effect:modal-activated-targeted-modes"
+      ],
+      "why": "'Sacrifice another Serpent: Choose one —' is a modal activated ability; modes with their own targets work only on triggered abilities."
+    },
+    {
+      "name": "Rikku, Resourceful Guardian",
+      "needs": [
+        "effect:cant-be-blocked-by-filter-until-eot"
+      ],
+      "why": "The counter move works, but 'can't be blocked by creatures your opponents control this turn' has no one-shot filtered form."
+    },
+    {
+      "name": "Tester of the Tangential",
+      "needs": [
+        "effect:move-counters-x-amount"
+      ],
+      "why": "Move X +1/+1 counters, X paid for in a may before a reflexive trigger: `move-counters.amount` has no X."
+    },
+    {
+      "name": "Zack Fair",
+      "needs": [
+        "effect:attach-equipment-that-was-attached"
+      ],
+      "why": "The counters part works, but nothing records which Equipment was attached to the sacrificed Zack."
+    },
+    {
+      "name": "Boros Battleshaper",
+      "needs": [
+        "effect:restrict-this-combat"
+      ],
+      "why": "'Can't attack or block this combat' and 'attacks this combat if able' have no combat-length duration on `restrict`; only the block half has `thisCombat`."
+    },
+    {
+      "name": "Crashing Boars",
+      "needs": [
+        "decision:that-player-chooses-permanent"
+      ],
+      "why": "The defending player chooses an untapped creature they control (not targeted); `choose-permanents` has no other-player chooser."
+    },
+    {
+      "name": "Feral Contest",
+      "needs": [
+        "effect:block-if-able-illegal-attacker-slot"
+      ],
+      "why": "Its ruling: if only the first target is illegal, the second still must block it; `block-if-able` drops the requirement when the attacker slot is illegal (blanked by 608.2b handling) though it's still on the battlefield."
+    },
+    {
+      "name": "Hunt Down",
+      "needs": [
+        "effect:block-if-able-illegal-attacker-slot"
+      ],
+      "why": "Target creature blocks target creature: if the second target becomes illegal but stays, the requirement should stay (as Feral Contest's ruling); `block-if-able` drops it."
+    },
+    {
+      "name": "Predatory Rampage",
+      "needs": [
+        "effect:block-if-able-each-creature"
+      ],
+      "why": "'Each creature your opponents control blocks this turn if able', a rule for the turn binding creatures that enter later; `block-if-able` takes only a target."
+    },
+    {
+      "name": "You've Been Caught Stealing",
+      "needs": [
+        "effect:block-if-able-each-creature"
+      ],
+      "why": "The 'each creature blocks this turn if able' mode: `block-if-able` has no filter form."
+    },
+    {
+      "name": "Mark for Death",
+      "needs": [
+        "effect:restrict-controlled-by-target"
+      ],
+      "why": "'Other creatures that player controls can't block this turn': `restrict`'s filter form has no 'controlled by the target's controller, except the target'."
+    },
+    {
+      "name": "Torchling",
+      "needs": [
+        "effect:change-targets-same-new-target"
+      ],
+      "why": "'Change the target of target spell that targets only this creature': the ruling says several targets at it all change to one new target; `change-targets` retargets each slot separately."
+    },
+    {
+      "name": "Absolute Virtue",
+      "needs": [
+        "static:player-protection-from-opponents"
+      ],
+      "why": "'You have protection from each of your opponents': no static player protection from players."
+    },
+    {
+      "name": "Dream Fracture",
+      "needs": [
+        "effect:draw-controller-of-target"
+      ],
+      "why": "'Its controller draws a card' for the countered spell: `draw` has only `who` or a player target."
+    },
+    {
+      "name": "Fade from History",
+      "needs": [
+        "condition:that-player-controls"
+      ],
+      "why": "'Each player who controls an artifact or enchantment creates a 2/2 Bear': the `controls` condition always counts the source's controller."
+    }
+  ]
+}

@@ -39,6 +39,7 @@ import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAshasFavor from "../pool/ashas-favor.js";
 import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
+import _poolAssembledAlphas from "../pool/assembled-alphas.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
 import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
@@ -114,6 +115,7 @@ import _poolCelestialSword from "../pool/celestial-sword.js";
 import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
+import _poolChainLightning from "../pool/chain-lightning.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
@@ -513,6 +515,7 @@ import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhobianPhantasm from "../pool/phobian-phantasm.js";
+import _poolPhoenixChick from "../pool/phoenix-chick.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPhyrexianSnowcrusher from "../pool/phyrexian-snowcrusher.js";
@@ -912,6 +915,7 @@ const shard: CardShard = {
     _poolAshasFavor,
     _poolAshnodFleshMechanist,
     _poolAssembleTheLegion,
+    _poolAssembledAlphas,
     _poolAtlaPalaniNestTender,
     _poolAugustaDeanOfOrder,
     _poolAuraOfSilence,
@@ -987,6 +991,7 @@ const shard: CardShard = {
     _poolCentaurArcher,
     _poolCentaurCourser,
     _poolCentaurNurturer,
+    _poolChainLightning,
     _poolChargeThrough,
     _poolChargingWarBoar,
     _poolChildOfNight,
@@ -1386,6 +1391,7 @@ const shard: CardShard = {
     _poolPhantomWarrior,
     _poolPharikasSpawn,
     _poolPhobianPhantasm,
+    _poolPhoenixChick,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPhyrexianSnowcrusher,

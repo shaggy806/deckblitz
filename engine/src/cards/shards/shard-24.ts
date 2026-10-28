@@ -193,6 +193,7 @@ import _poolDistortingLens from "../pool/distorting-lens.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
 import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
 import _poolDominate from "../pool/dominate.js";
+import _poolDomineeringWill from "../pool/domineering-will.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -262,6 +263,7 @@ import _poolGanglyStompling from "../pool/gangly-stompling.js";
 import _poolGastalThrillroller from "../pool/gastal-thrillroller.js";
 import _poolGatesAblaze from "../pool/gates-ablaze.js";
 import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
+import _poolGemstoneMine from "../pool/gemstone-mine.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
 import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
@@ -354,6 +356,7 @@ import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKaronaFalseGod from "../pool/karona-false-god.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
+import _poolKelloggDangerousMind from "../pool/kellogg-dangerous-mind.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
@@ -409,6 +412,7 @@ import _poolMeteorSword from "../pool/meteor-sword.js";
 import _poolMidnightRecovery from "../pool/midnight-recovery.js";
 import _poolMijaeDjinn from "../pool/mijae-djinn.js";
 import _poolMillennialGargoyle from "../pool/millennial-gargoyle.js";
+import _poolMindFlayer from "../pool/mind-flayer.js";
 import _poolMindRot from "../pool/mind-rot.js";
 import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMindlashSliver from "../pool/mindlash-sliver.js";
@@ -678,6 +682,7 @@ import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheBrokenSky from "../pool/the-broken-sky.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
+import _poolTheKamiWar from "../pool/the-kami-war.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
@@ -1012,6 +1017,7 @@ const shard: CardShard = {
     _poolDivinersWand,
     _poolDjinnOfTheFountain,
     _poolDominate,
+    _poolDomineeringWill,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
@@ -1081,6 +1087,7 @@ const shard: CardShard = {
     _poolGastalThrillroller,
     _poolGatesAblaze,
     _poolGeistOfSaintThalia,
+    _poolGemstoneMine,
     _poolGeothermalCrevice,
     _poolGibberingFiend,
     _poolGiftedAetherborn,
@@ -1173,6 +1180,7 @@ const shard: CardShard = {
     _poolKaronaFalseGod,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
+    _poolKelloggDangerousMind,
     _poolKhenraScrapper,
     _poolKillingGlare,
     _poolKingSuleiman,
@@ -1228,6 +1236,7 @@ const shard: CardShard = {
     _poolMidnightRecovery,
     _poolMijaeDjinn,
     _poolMillennialGargoyle,
+    _poolMindFlayer,
     _poolMindRot,
     _poolMindcrank,
     _poolMindlashSliver,
@@ -1497,6 +1506,7 @@ const shard: CardShard = {
     _poolTheBrokenSky,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
+    _poolTheKamiWar,
     _poolTheNecrobloom,
     _poolTheNotaryHobbits,
     _poolTheSpotsPortal,

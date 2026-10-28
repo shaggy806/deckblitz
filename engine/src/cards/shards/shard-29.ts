@@ -292,6 +292,7 @@ import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
 import _poolGrayOgre from "../pool/gray-ogre.js";
 import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
+import _poolGrovesBounty from "../pool/groves-bounty.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
@@ -434,6 +435,7 @@ import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
+import _poolMurmursFromBeyond from "../pool/murmurs-from-beyond.js";
 import _poolMyrLandshaper from "../pool/myr-landshaper.js";
 import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
@@ -678,6 +680,7 @@ import _poolTahngarthsRage from "../pool/tahngarths-rage.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTalionsMessenger from "../pool/talions-messenger.js";
+import _poolTangleAngler from "../pool/tangle-angler.js";
 import _poolTangledSkyline from "../pool/tangled-skyline.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolGraveshifter,
     _poolGrayOgre,
     _poolGrazingGladehart,
+    _poolGrovesBounty,
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
     _poolGurmagNightwatch,
@@ -1254,6 +1258,7 @@ const shard: CardShard = {
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,
+    _poolMurmursFromBeyond,
     _poolMyrLandshaper,
     _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,
@@ -1498,6 +1503,7 @@ const shard: CardShard = {
     _poolTaiga,
     _poolTakeUpTheShield,
     _poolTalionsMessenger,
+    _poolTangleAngler,
     _poolTangledSkyline,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,

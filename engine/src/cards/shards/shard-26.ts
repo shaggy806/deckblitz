@@ -44,6 +44,7 @@ import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
+import _poolArmoredSkyhunter from "../pool/armored-skyhunter.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
@@ -170,6 +171,7 @@ import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
+import _poolDidntSayPlease from "../pool/didnt-say-please.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
 import _poolDisappear from "../pool/disappear.js";
@@ -293,6 +295,7 @@ import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
+import _poolGrapplingHook from "../pool/grappling-hook.js";
 import _poolGraveVenerations from "../pool/grave-venerations.js";
 import _poolGravelgillDuo from "../pool/gravelgill-duo.js";
 import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
@@ -483,6 +486,7 @@ import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
+import _poolOliviaVoldaren from "../pool/olivia-voldaren.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
@@ -690,6 +694,7 @@ import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
@@ -867,6 +872,7 @@ const shard: CardShard = {
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
+    _poolArmoredSkyhunter,
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAshenmoorCohort,
@@ -993,6 +999,7 @@ const shard: CardShard = {
     _poolDecreeOfPain,
     _poolDefensiveManeuvers,
     _poolDelifsCone,
+    _poolDidntSayPlease,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
     _poolDisappear,
@@ -1116,6 +1123,7 @@ const shard: CardShard = {
     _poolGolgariFindbroker,
     _poolGoliathBeetle,
     _poolGrandBallGuest,
+    _poolGrapplingHook,
     _poolGraveVenerations,
     _poolGravelgillDuo,
     _poolGreatOakGuardian,
@@ -1306,6 +1314,7 @@ const shard: CardShard = {
     _poolObyrasAttendants,
     _poolOffalsnout,
     _poolOgreErrant,
+    _poolOliviaVoldaren,
     _poolOmnathLocusOfTheRoil,
     _poolOnward,
     _poolOpportunity,
@@ -1513,6 +1522,7 @@ const shard: CardShard = {
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
+    _poolTamiyoMeetsTheStoryCircle,
     _poolTawnossTinkering,
     _poolTeapotSlinger,
     _poolTemporalTrespass,

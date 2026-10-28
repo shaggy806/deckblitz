@@ -172,6 +172,7 @@ import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCurseOfObsession from "../pool/curse-of-obsession.js";
 import _poolCurtainsCall from "../pool/curtains-call.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
+import _poolDalkovanEncampment from "../pool/dalkovan-encampment.js";
 import _poolDangerousWager from "../pool/dangerous-wager.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
 import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
@@ -421,6 +422,7 @@ import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLeylineOfLifeforce from "../pool/leyline-of-lifeforce.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
+import _poolLilianaWakerOfTheDead from "../pool/liliana-waker-of-the-dead.js";
 import _poolLiltingRefrain from "../pool/lilting-refrain.js";
 import _poolLithatog from "../pool/lithatog.js";
 import _poolLlanowarCavalry from "../pool/llanowar-cavalry.js";
@@ -977,6 +979,7 @@ const shard: CardShard = {
     _poolCurseOfObsession,
     _poolCurtainsCall,
     _poolCustodianOfTheTrove,
+    _poolDalkovanEncampment,
     _poolDangerousWager,
     _poolDarkConfidant,
     _poolDarksteelColossus,
@@ -1226,6 +1229,7 @@ const shard: CardShard = {
     _poolLeyDruid,
     _poolLeylineOfLifeforce,
     _poolLightningStrike,
+    _poolLilianaWakerOfTheDead,
     _poolLiltingRefrain,
     _poolLithatog,
     _poolLlanowarCavalry,

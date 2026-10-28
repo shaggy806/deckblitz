@@ -486,7 +486,7 @@
   "bug:as-enters-choices-any-entry": {
    "size": "medium",
    "ui": false,
-   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent. Not covered (2026-10-27, recheck R1): a token copy is never asked the copied card's as-enters choices — bug:token-copy-skips-as-enters-choices."
+   "description": "Make chooseOnEnter and copyOnEnter real as-enters replacements, applied on every entry (reanimate, flicker, token copy) and before the enters-the-battlefield event, so ETB triggers see the copied or chosen permanent. Not covered (B237): a token copy of an Aura isn't asked what it enchants (bug:token-copy-aura-attach-choice). Not covered (recheck R1): a token copy is never asked the copied card's as-enters choices — bug:token-copy-skips-as-enters-choices."
   },
   "bug:cda-all-zones": {
    "size": "small",
@@ -860,7 +860,7 @@
   "effect:amount-turn-stat": {
    "size": "small",
    "ui": false,
-   "description": "EffectAmounts that read turn stats: your life lost, gained or cards drawn this turn, the total across opponents, and the number of players or opponents who lost life this turn."
+   "description": "EffectAmounts that read turn stats: your life lost, gained or cards drawn this turn, the total across opponents, and the number of players or opponents who lost life this turn. Not covered (B237): opponentsAttacked reads this combat's attackers, not the turn's (amount:opponents-attacked-this-turn)."
   },
   "effect:attach-extensions": {
    "size": "medium",
@@ -872,7 +872,7 @@
   "effect:aura-enters-choice": {
    "size": "medium Also built (2026-10-10, B46): attaching to the trigger's object or the ability's source rather than a target (`attach`'s `target: \"trigger-object\" | \"source\"`: Hero's Blade, Shielded by Faith, Sword of the Squeak, Cloud, Ex-SOLDIER) and every match at once (`attachments`: Balan, Wandering Knight).",
    "ui": true,
-   "description": "An Aura put onto the battlefield without being cast chooses what it enchants as it enters (rule 303.4f), and stays where it was with nothing to enchant (303.4g); an Aura attached to nothing or to something it can no longer enchant goes to the graveyard (704.5m), and attaching checks the enchant restriction and Equipment's creatures-only rule (701.3b)."
+   "description": "An Aura put onto the battlefield without being cast chooses what it enchants as it enters (rule 303.4f), and stays where it was with nothing to enchant (303.4g); an Aura attached to nothing or to something it can no longer enchant goes to the graveyard (704.5m), and attaching checks the enchant restriction and Equipment's creatures-only rule (701.3b). Not covered (B237): protection sparing your own attachments, or reveal-until onto the battlefield else into hand (narrow keys under this family)."
   },
   "effect:become-copy": {
    "size": "medium",
@@ -894,7 +894,7 @@
   "effect:choices-by-other-players": {
    "size": "medium",
    "ui": false,
-   "description": "Choices that belong to players other than the controller, in APNAP order: a 'may' answered by the active player or the entering creature's controller, 'each player may', tempting offer, villainous choice, and 'unless' punishers. The punishers can be asked of each opponent in turn, can have the controller as chooser, and can offer 'or discard a card'."
+   "description": "Choices that belong to players other than the controller, in APNAP order: a 'may' answered by the active player or the entering creature's controller, 'each player may', tempting offer, villainous choice, and 'unless' punishers. The punishers can be asked of each opponent in turn, can have the controller as chooser, and can offer 'or discard a card'. Not covered (B237): the hold-until-all-have-chosen machinery covers discards and sacrifices chosen through options and the deferred draw/discard-hand/life cases, not `choices` (each outcome applies as it's chosen: effect:each-player-chooses-then-all-act) or an exile; and no chooser is an opponent for a search, sacrifice or creature-type choice (narrow keys under this family)."
   },
   "effect:control-change-extensions": {
    "size": "medium",
@@ -909,7 +909,7 @@
   "effect:copy-exceptions": {
    "size": "large",
    "ui": false,
-   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions."
+   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions. Not covered (B237): conditional exceptions (effect:copy-exception-if-creature, -if-copied-lacks-ability), a granted static or unprinted triggered ability, or replacing every subtype (setSubtypes keeps other kinds)."
   },
   "effect:copy-permanent-spell": {
    "size": "medium",
@@ -934,12 +934,12 @@
   "effect:delayed-trigger-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { dealsCombatDamage } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker)."
+   "description": "Delayed triggers keyed to an event rather than a step, and delayed triggers that capture an object. Built: one keyed to a permanent dealing combat damage to a player this turn, firing each time (at: { dealsCombatDamage } — Captain Howler); one whose targets are what the creating resolution did something to this way, in place of its own (about — the token Satya just created: 'sacrifice that token'); one keyed to a permanent leaving the battlefield for given zones, optionally this turn, whose trigger object is that permanent (Kelsien, the Plague; earthbend's return); one keyed to the controller's next spell this turn matching a filter, whose trigger object is that spell (at: { nextSpell } — Yuna, Codie), with enters-with-counters for that spell and allow-cast-from-exile for a card it finds; and the creating ability's trigger object carried into the delayed ability while it's still that object, with a source-on-battlefield condition (Shirei, Shizo's Caretaker). Not covered (B237): DelayedWhenever handles single-object events only — not a batched-damage event per player (effect:delayed-whenever-batched-damage), a per-card graveyard arrival, a one-shot 'next attack', another player's or an extra turn's end step, or carrying X or 'that player' from the creating ability."
   },
   "effect:divide-among-targets": {
    "size": "medium",
    "ui": true,
-   "description": "Divide or distribute an amount (damage or counters) among the chosen targets, at least one each. The split is announced as the spell or ability goes on the stack (rule 601.2d)."
+   "description": "Divide or distribute an amount (damage or counters) among the chosen targets, at least one each. The split is announced as the spell or ability goes on the stack (rule 601.2d). Not: a Saga chapter's split (effect:saga-chapter-divided) or a computed total (effect:divided-dynamic-total)."
   },
   "effect:double-counters-each-kind": {
    "size": "small",
@@ -954,7 +954,7 @@
   "effect:emblem-triggered-abilities": {
    "size": "medium",
    "ui": false,
-   "description": "Emblems that carry triggered abilities: create-emblem takes a TriggeredAbility, detectTriggers scans emblems, and a sourceless emblem trigger can choose targets."
+   "description": "Emblems that carry triggered abilities: create-emblem takes a TriggeredAbility, detectTriggers scans emblems, and a sourceless emblem trigger can choose targets. Covers the emblem; the effects inside it are their own keys (e.g. effect:trigger-spell-gains-keyword, condition:that-player-turn-stat)."
   },
   "effect:end-the-turn": {
    "size": "medium",
@@ -975,27 +975,27 @@
   "effect:exile-library-all-but-bottom": {
    "size": "small",
    "ui": false,
-   "description": "Exile all but the bottom card of target player's library."
+   "description": "Exile all but the bottom card of target player's library. Face up only; face down is effect:exile-from-library-face-down."
   },
   "effect:exile-with-counters": {
    "size": "small",
    "ui": false,
-   "description": "The exile effect accepts the trigger object (a card in a graveyard, only if it's still there, with 'if you do' gated on it), and named counters (croak, kick, fetch, stash) go on cards in exile, including cards an effect just exiled."
+   "description": "The exile effect accepts the trigger object (a card in a graveyard, only if it's still there, with 'if you do' gated on it), and named counters (croak, kick, fetch, stash) go on cards in exile, including cards an effect just exiled. Not: removing a counter from an exiled card as an effect (effect:remove-counter-from-exiled-card)."
   },
   "effect:flicker-generalized": {
    "size": "small",
    "ui": false,
-   "description": "Flicker the ability's own source, flicker several targets at once and return them together, and link a delayed return to the exile."
+   "description": "Flicker the ability's own source, flicker several targets at once and return them together, and link a delayed return to the exile. Not: an untargeted group with one delayed return (effect:flicker-untargeted-group-delayed-return), or 'return now or at end step' (effect:flicker-optional-immediate-or-delayed)."
   },
   "effect:impulse-exile-other-libraries": {
    "size": "medium",
    "ui": false,
-   "description": "Exile the top card of other players' libraries (a target player, the damaged player, each opponent, each player), face down where required. The play permission goes to the controller, or each player plays their own card."
+   "description": "Exile the top card of other players' libraries (a target player, the damaged player, each opponent, each player), face down where required. The play permission goes to the controller, or each player plays their own card. Not: a running-total stop (effect:reveal-until-total-mana-value) or a mana-value comparison between the exiled cards (zone:impulse-free-lesser-mana-value-than-own)."
   },
   "effect:look-and-choose-leftover": {
    "size": "small",
    "ui": false,
-   "description": "More look-and-choose leftover destinations: 'graveyard' — the rest into your graveyard, in the same move as the chosen cards — and leftoverIf, a destination decided by a condition asked once the chosen cards have moved (Nine-Fingers Keene: the Gate just put onto the battlefield counts toward 'nine or more Gates')."
+   "description": "More look-and-choose leftover destinations: 'graveyard' — the rest into your graveyard, in the same move as the chosen cards — and leftoverIf, a destination decided by a condition asked once the chosen cards have moved (Nine-Fingers Keene: the Gate just put onto the battlefield counts toward 'nine or more Gates'). Not: a plain-exile leftover (effect:exile-top-put-matching)."
   },
   "effect:look-and-choose-second-pick": {
    "size": "small",
@@ -1015,7 +1015,7 @@
   "effect:mana-ability-side-effects": {
    "size": "medium",
    "ui": false,
-   "description": "Mana abilities with non-mana side effects that still never use the stack: a rider effect (a delayed trigger or counter) on the ability itself, and triggered mana abilities ('whenever you tap [a permanent] for mana', rule 605.1b). The auto-payer accounts for both."
+   "description": "Mana abilities with non-mana side effects that still never use the stack: a rider effect (a delayed trigger or counter) on the ability itself, and triggered mana abilities ('whenever you tap [a permanent] for mana', rule 605.1b). The auto-payer accounts for both. Not: a rider before the mana (effect:mana-ability-effect-before-mana), a non-mana 'whenever you tap this for mana' trigger (trigger:tapped-for-mana-nonmana-trigger), a permanent keyword for the spell (effect:mana-spell-gains-permanent-keyword)."
   },
   "effect:may-sacrifice-then": {
    "size": "medium",
@@ -1046,12 +1046,12 @@
   "effect:move-counter": {
    "size": "small",
    "ui": true,
-   "description": "Move a counter from one object to another (a removal, then a put-onto). When the source has several counter kinds, the player chooses which one."
+   "description": "Move a counter from one object to another (a removal, then a put-onto). When the source has several counter kinds, the player chooses which one. A fixed amount only; X counters is effect:move-counters-x-amount."
   },
   "effect:player-scope-extensions": {
    "size": "medium",
    "ui": false,
-   "description": "More player scopes: players named by the triggering event (defending player, damaged player, active player, the trigger object's controller, each opponent other than that player), each player or each opponent for mill, discard and create-token, CardFilter controlledBy active player, and per-player amounts (each opponent loses half their life)."
+   "description": "More player scopes: players named by the triggering event (defending player, damaged player, active player, the trigger object's controller, each opponent other than that player), each player or each opponent for mill, discard and create-token, CardFilter controlledBy active player, and per-player amounts (each opponent loses half their life). Not: 'its controller draws' (effect:draw-controller-of-target), a per-player controls condition (condition:that-player-controls)."
   },
   "effect:put-commanders-onto-battlefield": {
    "size": "small",
