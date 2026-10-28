@@ -331,6 +331,7 @@ import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
+import _poolJeweledSpirit from "../pool/jeweled-spirit.js";
 import _poolJhoiraAgelessInnovator from "../pool/jhoira-ageless-innovator.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJiwariTheEarthAflame from "../pool/jiwari-the-earth-aflame.js";
@@ -575,6 +576,7 @@ import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
+import _poolShelter from "../pool/shelter.js";
 import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
 import _poolShrapnelBlast from "../pool/shrapnel-blast.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
@@ -1143,6 +1145,7 @@ const shard: CardShard = {
     _poolJamieMccrimmon,
     _poolJeditOjanenMercenary,
     _poolJeditOjanenOfEfrava,
+    _poolJeweledSpirit,
     _poolJhoiraAgelessInnovator,
     _poolJiangYangguNeverAlone,
     _poolJiwariTheEarthAflame,
@@ -1387,6 +1390,7 @@ const shard: CardShard = {
     _poolShalaisAcolyte,
     _poolShatteredAngel,
     _poolShellSkulkin,
+    _poolShelter,
     _poolShimmerOfPossibility,
     _poolShrapnelBlast,
     _poolSigardasAid,

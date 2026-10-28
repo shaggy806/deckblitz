@@ -486,6 +486,7 @@ import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPainSeer from "../pool/pain-seer.js";
 import _poolPainsmith from "../pool/painsmith.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
+import _poolPaleWayfarer from "../pool/pale-wayfarer.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
 import _poolPasswallAdept from "../pool/passwall-adept.js";
@@ -509,6 +510,7 @@ import _poolPredatoryUrge from "../pool/predatory-urge.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolPrimordialGnawer from "../pool/primordial-gnawer.js";
+import _poolPristineSkywise from "../pool/pristine-skywise.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
 import _poolProperBurial from "../pool/proper-burial.js";
@@ -600,6 +602,7 @@ import _poolSearingWind from "../pool/searing-wind.js";
 import _poolSecondBreakfast from "../pool/second-breakfast.js";
 import _poolSeersSundial from "../pool/seers-sundial.js";
 import _poolSeizeTheSpoils from "../pool/seize-the-spoils.js";
+import _poolSejiriGlacier from "../pool/sejiri-glacier.js";
 import _poolSenateGriffin from "../pool/senate-griffin.js";
 import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSerpentineSpike from "../pool/serpentine-spike.js";
@@ -1328,6 +1331,7 @@ const shard: CardShard = {
     _poolPainSeer,
     _poolPainsmith,
     _poolPakoArcaneRetriever,
+    _poolPaleWayfarer,
     _poolParadiseDruid,
     _poolParadoxGardens,
     _poolPasswallAdept,
@@ -1351,6 +1355,7 @@ const shard: CardShard = {
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
     _poolPrimordialGnawer,
+    _poolPristineSkywise,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
     _poolProperBurial,
@@ -1442,6 +1447,7 @@ const shard: CardShard = {
     _poolSecondBreakfast,
     _poolSeersSundial,
     _poolSeizeTheSpoils,
+    _poolSejiriGlacier,
     _poolSenateGriffin,
     _poolSerahFarron,
     _poolSerpentineSpike,

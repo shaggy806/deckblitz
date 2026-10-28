@@ -305,6 +305,7 @@ import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
+import _poolGlory from "../pool/glory.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
 import _poolGoblinBomb from "../pool/goblin-bomb.js";
@@ -565,6 +566,7 @@ import _poolRelicRunner from "../pool/relic-runner.js";
 import _poolRelicWard from "../pool/relic-ward.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
+import _poolResilientWanderer from "../pool/resilient-wanderer.js";
 import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
 import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
@@ -652,6 +654,7 @@ import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSoratamiSavant from "../pool/soratami-savant.js";
 import _poolSoulsOfTheFaultless from "../pool/souls-of-the-faultless.js";
 import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
+import _poolSpareFromEvil from "../pool/spare-from-evil.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSpawningPool from "../pool/spawning-pool.js";
 import _poolSpellSyphon from "../pool/spell-syphon.js";
@@ -700,6 +703,7 @@ import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTangleGolem from "../pool/tangle-golem.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTatteredRatter from "../pool/tattered-ratter.js";
+import _poolTelJiladDefiance from "../pool/tel-jilad-defiance.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfSilence from "../pool/temple-of-silence.js";
 import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
@@ -1129,6 +1133,7 @@ const shard: CardShard = {
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
     _poolGlitchInterpreter,
+    _poolGlory,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
     _poolGoblinBomb,
@@ -1389,6 +1394,7 @@ const shard: CardShard = {
     _poolRelicWard,
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
+    _poolResilientWanderer,
     _poolResoluteBlademaster,
     _poolResourcefulReturn,
     _poolRestlessPrairie,
@@ -1476,6 +1482,7 @@ const shard: CardShard = {
     _poolSoratamiSavant,
     _poolSoulsOfTheFaultless,
     _poolSoulswornSpirit,
+    _poolSpareFromEvil,
     _poolSparringConstruct,
     _poolSpawningPool,
     _poolSpellSyphon,
@@ -1524,6 +1531,7 @@ const shard: CardShard = {
     _poolTangleGolem,
     _poolTasigurTheGoldenFang,
     _poolTatteredRatter,
+    _poolTelJiladDefiance,
     _poolTemperedSteel,
     _poolTempleOfSilence,
     _poolTempleOfTriumph,

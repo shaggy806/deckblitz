@@ -743,6 +743,7 @@ import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWidespreadThieving from "../pool/widespread-thieving.js";
+import _poolWillowPriestess from "../pool/willow-priestess.js";
 import _poolWingedPortent from "../pool/winged-portent.js";
 import _poolWirewoodPride from "../pool/wirewood-pride.js";
 import _poolWistfulThinking from "../pool/wistful-thinking.js";
@@ -1529,6 +1530,7 @@ const shard: CardShard = {
     _poolWeatherseedElf,
     _poolWebOfLifeAndDestiny,
     _poolWidespreadThieving,
+    _poolWillowPriestess,
     _poolWingedPortent,
     _poolWirewoodPride,
     _poolWistfulThinking,

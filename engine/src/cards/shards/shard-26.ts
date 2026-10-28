@@ -536,6 +536,7 @@ import _poolPygmyTroll from "../pool/pygmy-troll.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
+import _poolRadiantSerraArchangel from "../pool/radiant-serra-archangel.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
@@ -715,6 +716,7 @@ import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
+import _poolThornscapeMaster from "../pool/thornscape-master.js";
 import _poolThoughtDevourer from "../pool/thought-devourer.js";
 import _poolThranLens from "../pool/thran-lens.js";
 import _poolThranTemporalGateway from "../pool/thran-temporal-gateway.js";
@@ -1368,6 +1370,7 @@ const shard: CardShard = {
     _poolQarsiRevenant,
     _poolQueensAgent,
     _poolRadiantDestiny,
+    _poolRadiantSerraArchangel,
     _poolRaftSecurityOfficer,
     _poolRaidersSpoils,
     _poolRallyTheAncestors,
@@ -1547,6 +1550,7 @@ const shard: CardShard = {
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
+    _poolThornscapeMaster,
     _poolThoughtDevourer,
     _poolThranLens,
     _poolThranTemporalGateway,

@@ -382,6 +382,7 @@ import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKaisoMemoryOfLoyalty from "../pool/kaiso-memory-of-loyalty.js";
 import _poolKalemneDiscipleOfIroas from "../pool/kalemne-disciple-of-iroas.js";
+import _poolKamiOfThePaintedRoad from "../pool/kami-of-the-painted-road.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarganDragonrider from "../pool/kargan-dragonrider.js";
 import _poolKarnSilverGolem from "../pool/karn-silver-golem.js";
@@ -1237,6 +1238,7 @@ const shard: CardShard = {
     _poolKabiraTakedown,
     _poolKaisoMemoryOfLoyalty,
     _poolKalemneDiscipleOfIroas,
+    _poolKamiOfThePaintedRoad,
     _poolKapow,
     _poolKarganDragonrider,
     _poolKarnSilverGolem,

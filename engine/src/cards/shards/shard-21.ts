@@ -14,6 +14,7 @@ import _poolAethertideWhale from "../pool/aethertide-whale.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
+import _poolAlseidOfLifesBounty from "../pool/alseid-of-lifes-bounty.js";
 import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
@@ -65,6 +66,7 @@ import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
+import _poolBlessedBreath from "../pool/blessed-breath.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBloodFeud from "../pool/blood-feud.js";
@@ -292,6 +294,7 @@ import _poolGoblinMedics from "../pool/goblin-medics.js";
 import _poolGoblinShrine from "../pool/goblin-shrine.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
+import _poolGoblinWizard from "../pool/goblin-wizard.js";
 import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
 import _poolGokaTheUnjust from "../pool/goka-the-unjust.js";
 import _poolGoldenDemise from "../pool/golden-demise.js";
@@ -820,6 +823,7 @@ const shard: CardShard = {
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
+    _poolAlseidOfLifesBounty,
     _poolAmyRose,
     _poolAncientHellkite,
     _poolAngelOfSanctions,
@@ -871,6 +875,7 @@ const shard: CardShard = {
     _poolBestialIncursion,
     _poolBetrayal,
     _poolBlackMarketConnections,
+    _poolBlessedBreath,
     _poolBlightGrenade,
     _poolBloatedContaminator,
     _poolBloodFeud,
@@ -1098,6 +1103,7 @@ const shard: CardShard = {
     _poolGoblinShrine,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
+    _poolGoblinWizard,
     _poolGodsHallGuardian,
     _poolGokaTheUnjust,
     _poolGoldenDemise,

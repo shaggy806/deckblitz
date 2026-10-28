@@ -29,6 +29,7 @@ import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAncientExcavation from "../pool/ancient-excavation.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
+import _poolAngelicIntervention from "../pool/angelic-intervention.js";
 import _poolAnticognition from "../pool/anticognition.js";
 import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolApexHawks from "../pool/apex-hawks.js";
@@ -691,6 +692,7 @@ import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
 import _poolSwornCompanions from "../pool/sworn-companions.js";
+import _poolSyggRiverGuide from "../pool/sygg-river-guide.js";
 import _poolSynchronizedStrike from "../pool/synchronized-strike.js";
 import _poolSyndicOfTithes from "../pool/syndic-of-tithes.js";
 import _poolSyndicateEnforcer from "../pool/syndicate-enforcer.js";
@@ -860,6 +862,7 @@ const shard: CardShard = {
     _poolAncientCrab,
     _poolAncientExcavation,
     _poolAngelOfDespair,
+    _poolAngelicIntervention,
     _poolAnticognition,
     _poolAnuridMurkdiver,
     _poolApexHawks,
@@ -1522,6 +1525,7 @@ const shard: CardShard = {
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,
     _poolSwornCompanions,
+    _poolSyggRiverGuide,
     _poolSynchronizedStrike,
     _poolSyndicOfTithes,
     _poolSyndicateEnforcer,

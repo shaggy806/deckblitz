@@ -369,9 +369,11 @@ import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
 import _poolJanglingAutomaton from "../pool/jangling-automaton.js";
+import _poolJarethLeonineTitan from "../pool/jareth-leonine-titan.js";
 import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
 import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js";
+import _poolKabiraEvangel from "../pool/kabira-evangel.js";
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKaerveksPurge from "../pool/kaerveks-purge.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
@@ -484,6 +486,7 @@ import _poolNurturerInitiate from "../pool/nurturer-initiate.js";
 import _poolNyleasColossus from "../pool/nyleas-colossus.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolOboroEnvoy from "../pool/oboro-envoy.js";
+import _poolObsidianAcolyte from "../pool/obsidian-acolyte.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
@@ -764,6 +767,7 @@ import _poolWailingGhoul from "../pool/wailing-ghoul.js";
 import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
 import _poolWarMachineJamesRhodes from "../pool/war-machine-james-rhodes.js";
+import _poolWardOfLights from "../pool/ward-of-lights.js";
 import _poolWasitoraNekoruQueen from "../pool/wasitora-nekoru-queen.js";
 import _poolWasteAway from "../pool/waste-away.js";
 import _poolWaterWurm from "../pool/water-wurm.js";
@@ -1202,9 +1206,11 @@ const shard: CardShard = {
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
     _poolJanglingAutomaton,
+    _poolJarethLeonineTitan,
     _poolJeskaiMonument,
     _poolJhovallRider,
     _poolJolenePlunderingPugilist,
+    _poolKabiraEvangel,
     _poolKadenaSlinkingSorcerer,
     _poolKaerveksPurge,
     _poolKamahlPitFighter,
@@ -1317,6 +1323,7 @@ const shard: CardShard = {
     _poolNyleasColossus,
     _poolNyleasIntervention,
     _poolOboroEnvoy,
+    _poolObsidianAcolyte,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
@@ -1597,6 +1604,7 @@ const shard: CardShard = {
     _poolWallOfWater,
     _poolWarChariot,
     _poolWarMachineJamesRhodes,
+    _poolWardOfLights,
     _poolWasitoraNekoruQueen,
     _poolWasteAway,
     _poolWaterWurm,

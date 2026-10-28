@@ -105,6 +105,7 @@ import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCanyonDrake from "../pool/canyon-drake.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
+import _poolCartelAristocrat from "../pool/cartel-aristocrat.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCatch from "../pool/catch.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
@@ -604,6 +605,7 @@ import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSeedTheLand from "../pool/seed-the-land.js";
+import _poolSejiriShelter from "../pool/sejiri-shelter.js";
 import _poolSekkuarDeathkeeper from "../pool/sekkuar-deathkeeper.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolSengirAutocrat from "../pool/sengir-autocrat.js";
@@ -923,6 +925,7 @@ const shard: CardShard = {
     _poolCanyonDrake,
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
+    _poolCartelAristocrat,
     _poolCastleLocthwain,
     _poolCatch,
     _poolCelebrateTheMountainKing,
@@ -1422,6 +1425,7 @@ const shard: CardShard = {
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSeedTheLand,
+    _poolSejiriShelter,
     _poolSekkuarDeathkeeper,
     _poolSelvalasStampede,
     _poolSengirAutocrat,

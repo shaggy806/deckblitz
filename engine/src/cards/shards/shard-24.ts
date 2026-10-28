@@ -361,6 +361,7 @@ import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKaronaFalseGod from "../pool/karona-false-god.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
+import _poolKeeperOfKookus from "../pool/keeper-of-kookus.js";
 import _poolKelloggDangerousMind from "../pool/kellogg-dangerous-mind.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKillingGlare from "../pool/killing-glare.js";
@@ -517,6 +518,7 @@ import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRampagingWerewolf from "../pool/rampaging-werewolf.js";
 import _poolRankRat from "../pool/rank-rat.js";
 import _poolRapaciousOne from "../pool/rapacious-one.js";
+import _poolRazorBarrier from "../pool/razor-barrier.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
 import _poolRedcapRaiders from "../pool/redcap-raiders.js";
 import _poolRedemptionArc from "../pool/redemption-arc.js";
@@ -1191,6 +1193,7 @@ const shard: CardShard = {
     _poolKaronaFalseGod,
     _poolKasimirTheLoneWolf,
     _poolKatildaAndLier,
+    _poolKeeperOfKookus,
     _poolKelloggDangerousMind,
     _poolKhenraScrapper,
     _poolKillingGlare,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolRampagingWerewolf,
     _poolRankRat,
     _poolRapaciousOne,
+    _poolRazorBarrier,
     _poolRecklessDetective,
     _poolRedcapRaiders,
     _poolRedemptionArc,

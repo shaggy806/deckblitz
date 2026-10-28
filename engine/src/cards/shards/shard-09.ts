@@ -53,6 +53,7 @@ import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
 import _poolAugurOfBolas from "../pool/augur-of-bolas.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
 import _poolAvatarKyoshi from "../pool/avatar-kyoshi.js";
+import _poolAvenLiberator from "../pool/aven-liberator.js";
 import _poolAvenTactician from "../pool/aven-tactician.js";
 import _poolAwakeningHall from "../pool/awakening-hall.js";
 import _poolAyaraFirstOfLocthwain from "../pool/ayara-first-of-locthwain.js";
@@ -174,6 +175,7 @@ import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
 import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
+import _poolDominariasJudgment from "../pool/dominarias-judgment.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragDown from "../pool/drag-down.js";
@@ -196,6 +198,7 @@ import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberHauler from "../pool/ember-hauler.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
+import _poolEmergeUnscathed from "../pool/emerge-unscathed.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEpharasRadiance from "../pool/epharas-radiance.js";
@@ -433,6 +436,7 @@ import _poolMegatherium from "../pool/megatherium.js";
 import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMercilessPredator from "../pool/merciless-predator.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
+import _poolMidvastProtector from "../pool/midvast-protector.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMind from "../pool/mind.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
@@ -700,6 +704,7 @@ import _poolSwerve from "../pool/swerve.js";
 import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSwiftWarkite from "../pool/swift-warkite.js";
 import _poolSwoopingTalon from "../pool/swooping-talon.js";
+import _poolSyggWanderbrineShield from "../pool/sygg-wanderbrine-shield.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSylvokLifestaff from "../pool/sylvok-lifestaff.js";
@@ -898,6 +903,7 @@ const shard: CardShard = {
     _poolAugurOfBolas,
     _poolAuraMutation,
     _poolAvatarKyoshi,
+    _poolAvenLiberator,
     _poolAvenTactician,
     _poolAwakeningHall,
     _poolAyaraFirstOfLocthwain,
@@ -1019,6 +1025,7 @@ const shard: CardShard = {
     _poolDismantlingBlow,
     _poolDisownedAncestor,
     _poolDivideByZero,
+    _poolDominariasJudgment,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragDown,
@@ -1041,6 +1048,7 @@ const shard: CardShard = {
     _poolEliminateTheImpossible,
     _poolEmberHauler,
     _poolEmberheartChallenger,
+    _poolEmergeUnscathed,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
     _poolEpharasRadiance,
@@ -1278,6 +1286,7 @@ const shard: CardShard = {
     _poolMemoryWorm,
     _poolMercilessPredator,
     _poolMerfolkPupil,
+    _poolMidvastProtector,
     _poolMinaAndDennWildborn,
     _poolMind,
     _poolMindseekerOculus,
@@ -1545,6 +1554,7 @@ const shard: CardShard = {
     _poolSwiftSpiral,
     _poolSwiftWarkite,
     _poolSwoopingTalon,
+    _poolSyggWanderbrineShield,
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSylvokLifestaff,

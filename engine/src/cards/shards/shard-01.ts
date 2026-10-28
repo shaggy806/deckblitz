@@ -282,6 +282,7 @@ import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
+import _poolHellBentRaider from "../pool/hell-bent-raider.js";
 import _poolHeraldOfAnguish from "../pool/herald-of-anguish.js";
 import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
@@ -345,6 +346,7 @@ import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
 import _poolKithkinZephyrnaut from "../pool/kithkin-zephyrnaut.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
+import _poolKnightOfDawn from "../pool/knight-of-dawn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
 import _poolKolaghanMonument from "../pool/kolaghan-monument.js";
 import _poolKolaghanStormsinger from "../pool/kolaghan-stormsinger.js";
@@ -578,6 +580,7 @@ import _poolScrollOfIsildur from "../pool/scroll-of-isildur.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
+import _poolSeasonedDungeoneer from "../pool/seasoned-dungeoneer.js";
 import _poolSefrisOfTheHiddenWays from "../pool/sefris-of-the-hidden-ways.js";
 import _poolSeismicRupture from "../pool/seismic-rupture.js";
 import _poolSeizures from "../pool/seizures.js";
@@ -668,6 +671,7 @@ import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
 import _poolTemporalMachinations from "../pool/temporal-machinations.js";
 import _poolTemporaryInsanity from "../pool/temporary-insanity.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
+import _poolTerohsVanguard from "../pool/terohs-vanguard.js";
 import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
@@ -1091,6 +1095,7 @@ const shard: CardShard = {
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,
     _poolHeirOfTheAncientFang,
+    _poolHellBentRaider,
     _poolHeraldOfAnguish,
     _poolHeroesOfTheRevel,
     _poolHeroesRemembered,
@@ -1154,6 +1159,7 @@ const shard: CardShard = {
     _poolKithkinZephyrnaut,
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
+    _poolKnightOfDawn,
     _poolKodamaOfTheWestTree,
     _poolKolaghanMonument,
     _poolKolaghanStormsinger,
@@ -1387,6 +1393,7 @@ const shard: CardShard = {
     _poolScurryOfGremlins,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
+    _poolSeasonedDungeoneer,
     _poolSefrisOfTheHiddenWays,
     _poolSeismicRupture,
     _poolSeizures,
@@ -1477,6 +1484,7 @@ const shard: CardShard = {
     _poolTemporalMachinations,
     _poolTemporaryInsanity,
     _poolTemptWithVengeance,
+    _poolTerohsVanguard,
     _poolTetheredSkirge,
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,

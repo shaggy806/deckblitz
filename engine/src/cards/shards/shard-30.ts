@@ -676,6 +676,7 @@ import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
 import _poolStonefury from "../pool/stonefury.js";
 import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
+import _poolStormscapeMaster from "../pool/stormscape-master.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSummonLeviathan from "../pool/summon-leviathan.js";
@@ -684,6 +685,7 @@ import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
+import _poolSyggWanderwineWisdom from "../pool/sygg-wanderwine-wisdom.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolSyphonLife from "../pool/syphon-life.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
@@ -1498,6 +1500,7 @@ const shard: CardShard = {
     _poolStonefury,
     _poolStormWorld,
     _poolStormfrontRiders,
+    _poolStormscapeMaster,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
     _poolSummonLeviathan,
@@ -1506,6 +1509,7 @@ const shard: CardShard = {
     _poolSwarmCuller,
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
+    _poolSyggWanderwineWisdom,
     _poolSyndicateTrafficker,
     _poolSyphonLife,
     _poolTaintedSigil,

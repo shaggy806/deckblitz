@@ -45,6 +45,7 @@ import _poolArcboundMouser from "../pool/arcbound-mouser.js";
 import _poolArchfiendOfTheDross from "../pool/archfiend-of-the-dross.js";
 import _poolArgothianSwine from "../pool/argothian-swine.js";
 import _poolArmed from "../pool/armed.js";
+import _poolArmoredGuardian from "../pool/armored-guardian.js";
 import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolArrogantWurm from "../pool/arrogant-wurm.js";
 import _poolAssassinate from "../pool/assassinate.js";
@@ -541,6 +542,7 @@ import _poolRakshaGoldenCub from "../pool/raksha-golden-cub.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
+import _poolRappellingScouts from "../pool/rappelling-scouts.js";
 import _poolRavagingRiftwurm from "../pool/ravaging-riftwurm.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
@@ -896,6 +898,7 @@ const shard: CardShard = {
     _poolArchfiendOfTheDross,
     _poolArgothianSwine,
     _poolArmed,
+    _poolArmoredGuardian,
     _poolArnoDorian,
     _poolArrogantWurm,
     _poolAssassinate,
@@ -1392,6 +1395,7 @@ const shard: CardShard = {
     _poolRamunapExcavator,
     _poolRapaciousGuest,
     _poolRapierWit,
+    _poolRappellingScouts,
     _poolRavagingRiftwurm,
     _poolRazortideBridge,
     _poolRazortrapGorge,

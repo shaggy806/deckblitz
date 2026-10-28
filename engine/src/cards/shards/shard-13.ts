@@ -493,6 +493,7 @@ import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
+import _poolQuestingPhelddagrif from "../pool/questing-phelddagrif.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRadiantEpicure from "../pool/radiant-epicure.js";
 import _poolRagamuffyn from "../pool/ragamuffyn.js";
@@ -1306,6 +1307,7 @@ const shard: CardShard = {
     _poolPridemalkin,
     _poolPrisonRealm,
     _poolProtectionMagic,
+    _poolQuestingPhelddagrif,
     _poolRabidAttack,
     _poolRadiantEpicure,
     _poolRagamuffyn,

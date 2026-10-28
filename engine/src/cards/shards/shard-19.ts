@@ -15,6 +15,7 @@ import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
 import _poolAkkiEmberKeeper from "../pool/akki-ember-keeper.js";
 import _poolAkroanConscriptor from "../pool/akroan-conscriptor.js";
+import _poolAkromasBlessing from "../pool/akromas-blessing.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAlabornVeteran from "../pool/alaborn-veteran.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
@@ -264,6 +265,7 @@ import _poolFamilysFavor from "../pool/familys-favor.js";
 import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFatedInfatuation from "../pool/fated-infatuation.js";
+import _poolFeatOfResistance from "../pool/feat-of-resistance.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
 import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
@@ -403,6 +405,7 @@ import _poolIxallisDiviner from "../pool/ixallis-diviner.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
+import _poolJodahsAvenger from "../pool/jodahs-avenger.js";
 import _poolJoinShields from "../pool/join-shields.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJundHackblade from "../pool/jund-hackblade.js";
@@ -602,6 +605,7 @@ import _poolRenegadeWarlord from "../pool/renegade-warlord.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
 import _poolRevengeOfTheHunted from "../pool/revenge-of-the-hunted.js";
+import _poolReverentMantra from "../pool/reverent-mantra.js";
 import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRidgedKusite from "../pool/ridged-kusite.js";
 import _poolRiftmarkedKnight from "../pool/riftmarked-knight.js";
@@ -877,6 +881,7 @@ const shard: CardShard = {
     _poolAggressiveSabotage,
     _poolAkkiEmberKeeper,
     _poolAkroanConscriptor,
+    _poolAkromasBlessing,
     _poolAkulTheUnrepentant,
     _poolAlabornVeteran,
     _poolAltacBloodseeker,
@@ -1126,6 +1131,7 @@ const shard: CardShard = {
     _poolFamine,
     _poolFantasticElasticity,
     _poolFatedInfatuation,
+    _poolFeatOfResistance,
     _poolFellTheMighty,
     _poolFeralIncarnation,
     _poolFerocityOfTheHunt,
@@ -1265,6 +1271,7 @@ const shard: CardShard = {
     _poolIzzetChronarch,
     _poolJadedAnalyst,
     _poolJeskaiBarricade,
+    _poolJodahsAvenger,
     _poolJoinShields,
     _poolJoustThrough,
     _poolJundHackblade,
@@ -1464,6 +1471,7 @@ const shard: CardShard = {
     _poolRepulsiveMutation,
     _poolResupply,
     _poolRevengeOfTheHunted,
+    _poolReverentMantra,
     _poolRibtrussRoaster,
     _poolRidgedKusite,
     _poolRiftmarkedKnight,

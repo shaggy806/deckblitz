@@ -607,6 +607,7 @@ import _poolSecludedGlen from "../pool/secluded-glen.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSeeker from "../pool/seeker.js";
 import _poolSeismicStrike from "../pool/seismic-strike.js";
+import _poolSejiriSteppe from "../pool/sejiri-steppe.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
 import _poolSetessanBattlePriest from "../pool/setessan-battle-priest.js";
@@ -807,6 +808,7 @@ import _poolWindDancer from "../pool/wind-dancer.js";
 import _poolWinterCursedRider from "../pool/winter-cursed-rider.js";
 import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
 import _poolWishingWell from "../pool/wishing-well.js";
+import _poolWishmonger from "../pool/wishmonger.js";
 import _poolWonder from "../pool/wonder.js";
 import _poolWosePathfinder from "../pool/wose-pathfinder.js";
 import _poolXathridDemon from "../pool/xathrid-demon.js";
@@ -1443,6 +1445,7 @@ const shard: CardShard = {
     _poolSeeTheTruth,
     _poolSeeker,
     _poolSeismicStrike,
+    _poolSejiriSteppe,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
     _poolSetessanBattlePriest,
@@ -1643,6 +1646,7 @@ const shard: CardShard = {
     _poolWinterCursedRider,
     _poolWinterTeamPlayer,
     _poolWishingWell,
+    _poolWishmonger,
     _poolWonder,
     _poolWosePathfinder,
     _poolXathridDemon,

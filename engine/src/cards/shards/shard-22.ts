@@ -60,6 +60,7 @@ import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBelovedChaplain from "../pool/beloved-chaplain.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
+import _poolBenevolentBodyguard from "../pool/benevolent-bodyguard.js";
 import _poolBenthicore from "../pool/benthicore.js";
 import _poolBespokeBattlegarb from "../pool/bespoke-battlegarb.js";
 import _poolBindingGeist from "../pool/binding-geist.js";
@@ -272,6 +273,7 @@ import _poolGrandArchitect from "../pool/grand-architect.js";
 import _poolGranulate from "../pool/granulate.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
+import _poolGrotesqueHybrid from "../pool/grotesque-hybrid.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHackrobat from "../pool/hackrobat.js";
@@ -895,6 +897,7 @@ const shard: CardShard = {
     _poolBeeSting,
     _poolBelovedChaplain,
     _poolBenalishHeralds,
+    _poolBenevolentBodyguard,
     _poolBenthicore,
     _poolBespokeBattlegarb,
     _poolBindingGeist,
@@ -1107,6 +1110,7 @@ const shard: CardShard = {
     _poolGranulate,
     _poolGravestoneStrider,
     _poolGriffinAerie,
+    _poolGrotesqueHybrid,
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
     _poolHackrobat,

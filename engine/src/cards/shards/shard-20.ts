@@ -262,6 +262,7 @@ import _poolFlailingOgre from "../pool/flailing-ogre.js";
 import _poolFlamekinHerald from "../pool/flamekin-herald.js";
 import _poolFlareOfFaith from "../pool/flare-of-faith.js";
 import _poolFleshtaker from "../pool/fleshtaker.js";
+import _poolFloatingShield from "../pool/floating-shield.js";
 import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolFlamekinHerald,
     _poolFlareOfFaith,
     _poolFleshtaker,
+    _poolFloatingShield,
     _poolFlourishingGrapple,
     _poolFlowstoneStrike,
     _poolFoggySwampHunters,

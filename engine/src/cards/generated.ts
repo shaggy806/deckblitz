@@ -429,6 +429,7 @@ import _poolAkroanSergeant from "./pool/akroan-sergeant.js";
 import _poolAkroanSkyguard from "./pool/akroan-skyguard.js";
 import _poolAkromaAngelOfFury from "./pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "./pool/akroma-angel-of-wrath.js";
+import _poolAkromasBlessing from "./pool/akromas-blessing.js";
 import _poolAkromasDevoted from "./pool/akromas-devoted.js";
 import _poolAkromasMemorial from "./pool/akromas-memorial.js";
 import _poolAkromasVengeance from "./pool/akromas-vengeance.js";
@@ -536,6 +537,7 @@ import _poolAlpineMeadow from "./pool/alpine-meadow.js";
 import _poolAlpineWatchdog from "./pool/alpine-watchdog.js";
 import _poolAlquistProftMasterSleuth from "./pool/alquist-proft-master-sleuth.js";
 import _poolAlrundsEpiphany from "./pool/alrunds-epiphany.js";
+import _poolAlseidOfLifesBounty from "./pool/alseid-of-lifes-bounty.js";
 import _poolAltacBloodseeker from "./pool/altac-bloodseeker.js";
 import _poolAltanakTheThriceCalled from "./pool/altanak-the-thrice-called.js";
 import _poolAltarGolem from "./pool/altar-golem.js";
@@ -715,6 +717,7 @@ import _poolAngelicExaltation from "./pool/angelic-exaltation.js";
 import _poolAngelicFavor from "./pool/angelic-favor.js";
 import _poolAngelicFieldMarshal from "./pool/angelic-field-marshal.js";
 import _poolAngelicGift from "./pool/angelic-gift.js";
+import _poolAngelicIntervention from "./pool/angelic-intervention.js";
 import _poolAngelicObserver from "./pool/angelic-observer.js";
 import _poolAngelicOverseer from "./pool/angelic-overseer.js";
 import _poolAngelicPage from "./pool/angelic-page.js";
@@ -831,6 +834,7 @@ import _poolApocalypseRunner from "./pool/apocalypse-runner.js";
 import _poolApocalypse from "./pool/apocalypse.js";
 import _poolApostleOfInvasion from "./pool/apostle-of-invasion.js";
 import _poolApostleOfPurifyingLight from "./pool/apostle-of-purifying-light.js";
+import _poolApostlesBlessing from "./pool/apostles-blessing.js";
 import _poolApothecaryGeist from "./pool/apothecary-geist.js";
 import _poolApothecaryInitiate from "./pool/apothecary-initiate.js";
 import _poolApothecaryStomper from "./pool/apothecary-stomper.js";
@@ -1075,6 +1079,7 @@ import _poolArmoredArmadillo from "./pool/armored-armadillo.js";
 import _poolArmoredAscension from "./pool/armored-ascension.js";
 import _poolArmoredCancrix from "./pool/armored-cancrix.js";
 import _poolArmoredGriffin from "./pool/armored-griffin.js";
+import _poolArmoredGuardian from "./pool/armored-guardian.js";
 import _poolArmoredPegasus from "./pool/armored-pegasus.js";
 import _poolArmoredScrapgorger from "./pool/armored-scrapgorger.js";
 import _poolArmoredSkaab from "./pool/armored-skaab.js";
@@ -1391,6 +1396,7 @@ import _poolAvenFlock from "./pool/aven-flock.js";
 import _poolAvenFogbringer from "./pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "./pool/aven-gagglemaster.js";
 import _poolAvenInitiate from "./pool/aven-initiate.js";
+import _poolAvenLiberator from "./pool/aven-liberator.js";
 import _poolAvenMimeomancer from "./pool/aven-mimeomancer.js";
 import _poolAvenOfEnduringHope from "./pool/aven-of-enduring-hope.js";
 import _poolAvenRedeemer from "./pool/aven-redeemer.js";
@@ -1406,6 +1412,7 @@ import _poolAvenSurveyor from "./pool/aven-surveyor.js";
 import _poolAvenTactician from "./pool/aven-tactician.js";
 import _poolAvenTrailblazer from "./pool/aven-trailblazer.js";
 import _poolAvenTrooper from "./pool/aven-trooper.js";
+import _poolAvenWarcraft from "./pool/aven-warcraft.js";
 import _poolAvenWarhawk from "./pool/aven-warhawk.js";
 import _poolAvenWindGuide from "./pool/aven-wind-guide.js";
 import _poolAvenWindMage from "./pool/aven-wind-mage.js";
@@ -1923,6 +1930,7 @@ import _poolBenedictionOfMoons from "./pool/benediction-of-moons.js";
 import _poolBenefactionOfRhonas from "./pool/benefaction-of-rhonas.js";
 import _poolBenefactorsDraught from "./pool/benefactors-draught.js";
 import _poolBenevolentAncestor from "./pool/benevolent-ancestor.js";
+import _poolBenevolentBodyguard from "./pool/benevolent-bodyguard.js";
 import _poolBenevolentHydra from "./pool/benevolent-hydra.js";
 import _poolBenevolentRiverSpirit from "./pool/benevolent-river-spirit.js";
 import _poolBenevolentUnicorn from "./pool/benevolent-unicorn.js";
@@ -2149,6 +2157,7 @@ import _poolBleedingEdge from "./pool/bleeding-edge.js";
 import _poolBleedingEffect from "./pool/bleeding-effect.js";
 import _poolBleedingWoods from "./pool/bleeding-woods.js";
 import _poolBlessedAlliance from "./pool/blessed-alliance.js";
+import _poolBlessedBreath from "./pool/blessed-breath.js";
 import _poolBlessedDefiance from "./pool/blessed-defiance.js";
 import _poolBlessedGhoul from "./pool/blessed-ghoul.js";
 import _poolBlessedHippogriff from "./pool/blessed-hippogriff.js";
@@ -3279,6 +3288,7 @@ import _poolCarrion from "./pool/carrion.js";
 import _poolCarrionette from "./pool/carrionette.js";
 import _poolCarrotCake from "./pool/carrot-cake.js";
 import _poolCarryAway from "./pool/carry-away.js";
+import _poolCartelAristocrat from "./pool/cartel-aristocrat.js";
 import _poolCartographer from "./pool/cartographer.js";
 import _poolCartographersCompanion from "./pool/cartographers-companion.js";
 import _poolCartographersHawk from "./pool/cartographers-hawk.js";
@@ -3453,6 +3463,7 @@ import _poolCentaurSafeguard from "./pool/centaur-safeguard.js";
 import _poolCentaurVeteran from "./pool/centaur-veteran.js";
 import _poolCentaurVinecrasher from "./pool/centaur-vinecrasher.js";
 import _poolCentaursHerald from "./pool/centaurs-herald.js";
+import _poolCenterSoul from "./pool/center-soul.js";
 import _poolCephalidAristocrat from "./pool/cephalid-aristocrat.js";
 import _poolCephalidBroker from "./pool/cephalid-broker.js";
 import _poolCephalidColiseum from "./pool/cephalid-coliseum.js";
@@ -5773,6 +5784,7 @@ import _poolDokaiWeaverOfLife from "./pool/dokai-weaver-of-life.js";
 import _poolDokuchiShadowWalker from "./pool/dokuchi-shadow-walker.js";
 import _poolDomesticatedHydra from "./pool/domesticated-hydra.js";
 import _poolDomestication from "./pool/domestication.js";
+import _poolDominariasJudgment from "./pool/dominarias-judgment.js";
 import _poolDominate from "./pool/dominate.js";
 import _poolDominatingLicid from "./pool/dominating-licid.js";
 import _poolDominatingVampire from "./pool/dominating-vampire.js";
@@ -6647,6 +6659,7 @@ import _poolEmeraldDragonfly from "./pool/emerald-dragonfly.js";
 import _poolEmeraldMedallion from "./pool/emerald-medallion.js";
 import _poolEmeraldOryx from "./pool/emerald-oryx.js";
 import _poolEmergeFromTheCocoon from "./pool/emerge-from-the-cocoon.js";
+import _poolEmergeUnscathed from "./pool/emerge-unscathed.js";
 import _poolEmergencyEject from "./pool/emergency-eject.js";
 import _poolEmergencyPhytomedic from "./pool/emergency-phytomedic.js";
 import _poolEmergencyWeld from "./pool/emergency-weld.js";
@@ -7419,6 +7432,7 @@ import _poolFeastOrFamine from "./pool/feast-or-famine.js";
 import _poolFeasterOfFools from "./pool/feaster-of-fools.js";
 import _poolFeastingHobbit from "./pool/feasting-hobbit.js";
 import _poolFeastingTrollKing from "./pool/feasting-troll-king.js";
+import _poolFeatOfResistance from "./pool/feat-of-resistance.js";
 import _poolFeatherOfFlight from "./pool/feather-of-flight.js";
 import _poolFeatherTheRedeemed from "./pool/feather-the-redeemed.js";
 import _poolFeatherbrainedFilcher from "./pool/featherbrained-filcher.js";
@@ -7896,6 +7910,7 @@ import _poolFlipTheSwitch from "./pool/flip-the-switch.js";
 import _poolFlitterstepEidolon from "./pool/flitterstep-eidolon.js";
 import _poolFlittingGuerrilla from "./pool/flitting-guerrilla.js";
 import _poolFloatingDreamZubera from "./pool/floating-dream-zubera.js";
+import _poolFloatingShield from "./pool/floating-shield.js";
 import _poolFlockImpostor from "./pool/flock-impostor.js";
 import _poolFloodOfRecollection from "./pool/flood-of-recollection.js";
 import _poolFloodPlain from "./pool/flood-plain.js";
@@ -8960,6 +8975,7 @@ import _poolGloryBearers from "./pool/glory-bearers.js";
 import _poolGloryBoundInitiate from "./pool/glory-bound-initiate.js";
 import _poolGloryOfWarfare from "./pool/glory-of-warfare.js";
 import _poolGlorySeeker from "./pool/glory-seeker.js";
+import _poolGlory from "./pool/glory.js";
 import _poolGlorybringer from "./pool/glorybringer.js";
 import _poolGloryheathLynx from "./pool/gloryheath-lynx.js";
 import _poolGloryscaleViashino from "./pool/gloryscale-viashino.js";
@@ -9154,6 +9170,7 @@ import _poolGoblinWarWagon from "./pool/goblin-war-wagon.js";
 import _poolGoblinWarchief from "./pool/goblin-warchief.js";
 import _poolGoblinWardriver from "./pool/goblin-wardriver.js";
 import _poolGoblinWarrens from "./pool/goblin-warrens.js";
+import _poolGoblinWizard from "./pool/goblin-wizard.js";
 import _poolGoblinWizardry from "./pool/goblin-wizardry.js";
 import _poolGoblinsOfTheFlarg from "./pool/goblins-of-the-flarg.js";
 import _poolGoblinslide from "./pool/goblinslide.js";
@@ -9569,6 +9586,7 @@ import _poolGrotagNightRunner from "./pool/grotag-night-runner.js";
 import _poolGrotagSiegeRunner from "./pool/grotag-siege-runner.js";
 import _poolGrotagThrasher from "./pool/grotag-thrasher.js";
 import _poolGrotesqueDemise from "./pool/grotesque-demise.js";
+import _poolGrotesqueHybrid from "./pool/grotesque-hybrid.js";
 import _poolGrotesqueMutation from "./pool/grotesque-mutation.js";
 import _poolGroundAssault from "./pool/ground-assault.js";
 import _poolGroundRift from "./pool/ground-rift.js";
@@ -10095,6 +10113,7 @@ import _poolHelionaut from "./pool/helionaut.js";
 import _poolHeliophial from "./pool/heliophial.js";
 import _poolHeliumSquirter from "./pool/helium-squirter.js";
 import _poolHelixPinnacle from "./pool/helix-pinnacle.js";
+import _poolHellBentRaider from "./pool/hell-bent-raider.js";
 import _poolHellMongrel from "./pool/hell-mongrel.js";
 import _poolHellSwarm from "./pool/hell-swarm.js";
 import _poolHellToPay from "./pool/hell-to-pay.js";
@@ -11409,6 +11428,7 @@ import _poolJanjeetSentry from "./pool/janjeet-sentry.js";
 import _poolJaradGolgariLichLord from "./pool/jarad-golgari-lich-lord.js";
 import _poolJarakuTheInterloper from "./pool/jaraku-the-interloper.js";
 import _poolJaredCarthalion from "./pool/jared-carthalion.js";
+import _poolJarethLeonineTitan from "./pool/jareth-leonine-titan.js";
 import _poolJarlOfTheForsaken from "./pool/jarl-of-the-forsaken.js";
 import _poolJarvisEarthsMightiestButler from "./pool/jarvis-earths-mightiest-butler.js";
 import _poolJasmineBoreal from "./pool/jasmine-boreal.js";
@@ -11471,6 +11491,7 @@ import _poolJetsBrainwashing from "./pool/jets-brainwashing.js";
 import _poolJewelEyedCobra from "./pool/jewel-eyed-cobra.js";
 import _poolJewelThief from "./pool/jewel-thief.js";
 import _poolJeweledLotus from "./pool/jeweled-lotus.js";
+import _poolJeweledSpirit from "./pool/jeweled-spirit.js";
 import _poolJeweledTorque from "./pool/jeweled-torque.js";
 import _poolJhessianBalmgiver from "./pool/jhessian-balmgiver.js";
 import _poolJhessianInfiltrator from "./pool/jhessian-infiltrator.js";
@@ -11498,6 +11519,7 @@ import _poolJirinaKudro from "./pool/jirina-kudro.js";
 import _poolJiwariTheEarthAflame from "./pool/jiwari-the-earth-aflame.js";
 import _poolJodahArchmageEternal from "./pool/jodah-archmage-eternal.js";
 import _poolJodahTheUnifier from "./pool/jodah-the-unifier.js";
+import _poolJodahsAvenger from "./pool/jodahs-avenger.js";
 import _poolJodahsCodex from "./pool/jodahs-codex.js";
 import _poolJohannsStopgap from "./pool/johanns-stopgap.js";
 import _poolJohtullWurm from "./pool/johtull-wurm.js";
@@ -11616,6 +11638,7 @@ import _poolK9MarkI from "./pool/k-9-mark-i.js";
 import _poolKaZarOfTheSavageLand from "./pool/ka-zar-of-the-savage-land.js";
 import _poolKaaliaOfTheVast from "./pool/kaalia-of-the-vast.js";
 import _poolKabiraCrossroads from "./pool/kabira-crossroads.js";
+import _poolKabiraEvangel from "./pool/kabira-evangel.js";
 import _poolKabiraOutrider from "./pool/kabira-outrider.js";
 import _poolKabiraPlateau from "./pool/kabira-plateau.js";
 import _poolKabiraTakedown from "./pool/kabira-takedown.js";
@@ -11673,6 +11696,7 @@ import _poolKamiOfTerribleSecrets from "./pool/kami-of-terrible-secrets.js";
 import _poolKamiOfTheCrescentMoon from "./pool/kami-of-the-crescent-moon.js";
 import _poolKamiOfTheHonoredDead from "./pool/kami-of-the-honored-dead.js";
 import _poolKamiOfTheHunt from "./pool/kami-of-the-hunt.js";
+import _poolKamiOfThePaintedRoad from "./pool/kami-of-the-painted-road.js";
 import _poolKamiOfThePalaceFields from "./pool/kami-of-the-palace-fields.js";
 import _poolKamiOfTheTendedGarden from "./pool/kami-of-the-tended-garden.js";
 import _poolKamiOfTheWaningMoon from "./pool/kami-of-the-waning-moon.js";
@@ -11808,6 +11832,7 @@ import _poolKeepSafe from "./pool/keep-safe.js";
 import _poolKeepWatch from "./pool/keep-watch.js";
 import _poolKeeperOfFables from "./pool/keeper-of-fables.js";
 import _poolKeeperOfKeys from "./pool/keeper-of-keys.js";
+import _poolKeeperOfKookus from "./pool/keeper-of-kookus.js";
 import _poolKeeperOfProgenitus from "./pool/keeper-of-progenitus.js";
 import _poolKeeperOfSecrets from "./pool/keeper-of-secrets.js";
 import _poolKeeperOfTheAccord from "./pool/keeper-of-the-accord.js";
@@ -12042,6 +12067,7 @@ import _poolKnightExemplar from "./pool/knight-exemplar.js";
 import _poolKnightLuminary from "./pool/knight-luminary.js";
 import _poolKnightOfAutumn from "./pool/knight-of-autumn.js";
 import _poolKnightOfCliffhaven from "./pool/knight-of-cliffhaven.js";
+import _poolKnightOfDawn from "./pool/knight-of-dawn.js";
 import _poolKnightOfDawnsLight from "./pool/knight-of-dawns-light.js";
 import _poolKnightOfDoves from "./pool/knight-of-doves.js";
 import _poolKnightOfDusksShadow from "./pool/knight-of-dusks-shadow.js";
@@ -13788,6 +13814,7 @@ import _poolMidnightScavengers from "./pool/midnight-scavengers.js";
 import _poolMidnightSnack from "./pool/midnight-snack.js";
 import _poolMidnightTilling from "./pool/midnight-tilling.js";
 import _poolMidsummerRevel from "./pool/midsummer-revel.js";
+import _poolMidvastProtector from "./pool/midvast-protector.js";
 import _poolMightBeyondReason from "./pool/might-beyond-reason.js";
 import _poolMightOfAlara from "./pool/might-of-alara.js";
 import _poolMightOfMurasa from "./pool/might-of-murasa.js";
@@ -14227,6 +14254,7 @@ import _poolMoongloveExtractor from "./pool/moonglove-extractor.js";
 import _poolMoongloveWinnower from "./pool/moonglove-winnower.js";
 import _poolMoonlace from "./pool/moonlace.js";
 import _poolMoonlitScavengers from "./pool/moonlit-scavengers.js";
+import _poolMoonlitStrider from "./pool/moonlit-strider.js";
 import _poolMoonlitWake from "./pool/moonlit-wake.js";
 import _poolMoonrageBrute from "./pool/moonrage-brute.js";
 import _poolMoonragersSlash from "./pool/moonragers-slash.js";
@@ -15161,6 +15189,7 @@ import _poolObsessiveSearch from "./pool/obsessive-search.js";
 import _poolObsessiveSkinner from "./pool/obsessive-skinner.js";
 import _poolObsessiveStitcher from "./pool/obsessive-stitcher.js";
 import _poolObsianusGolem from "./pool/obsianus-golem.js";
+import _poolObsidianAcolyte from "./pool/obsidian-acolyte.js";
 import _poolObsidianBattleAxe from "./pool/obsidian-battle-axe.js";
 import _poolObsidianFireheart from "./pool/obsidian-fireheart.js";
 import _poolObsidianGiant from "./pool/obsidian-giant.js";
@@ -15670,6 +15699,7 @@ import _poolPalanisHatcher from "./pool/palanis-hatcher.js";
 import _poolPalazzoArchers from "./pool/palazzo-archers.js";
 import _poolPaleBears from "./pool/pale-bears.js";
 import _poolPaleRiderOfTrostad from "./pool/pale-rider-of-trostad.js";
+import _poolPaleWayfarer from "./pool/pale-wayfarer.js";
 import _poolPaleoloth from "./pool/paleoloth.js";
 import _poolPalianoTheHighCity from "./pool/paliano-the-high-city.js";
 import _poolPalianoVanguard from "./pool/paliano-vanguard.js";
@@ -16490,6 +16520,7 @@ import _poolPrisonBarricade from "./pool/prison-barricade.js";
 import _poolPrisonBreak from "./pool/prison-break.js";
 import _poolPrisonRealm from "./pool/prison-realm.js";
 import _poolPristineAngel from "./pool/pristine-angel.js";
+import _poolPristineSkywise from "./pool/pristine-skywise.js";
 import _poolPristineTalisman from "./pool/pristine-talisman.js";
 import _poolPrivateEye from "./pool/private-eye.js";
 import _poolPrivateResearch from "./pool/private-research.js";
@@ -16797,6 +16828,7 @@ import _poolQuestForTheHolyRelic from "./pool/quest-for-the-holy-relic.js";
 import _poolQuestForTheNecropolis from "./pool/quest-for-the-necropolis.js";
 import _poolQuestForUlasTemple from "./pool/quest-for-ulas-temple.js";
 import _poolQuestingDruid from "./pool/questing-druid.js";
+import _poolQuestingPhelddagrif from "./pool/questing-phelddagrif.js";
 import _poolQuezaAugurOfAgonies from "./pool/queza-augur-of-agonies.js";
 import _poolQuickDrawDagger from "./pool/quick-draw-dagger.js";
 import _poolQuickDrawKatana from "./pool/quick-draw-katana.js";
@@ -16876,6 +16908,7 @@ import _poolRadiantFountain from "./pool/radiant-fountain.js";
 import _poolRadiantGrove from "./pool/radiant-grove.js";
 import _poolRadiantKavu from "./pool/radiant-kavu.js";
 import _poolRadiantPurge from "./pool/radiant-purge.js";
+import _poolRadiantSerraArchangel from "./pool/radiant-serra-archangel.js";
 import _poolRadiantSolar from "./pool/radiant-solar.js";
 import _poolRadiantStrike from "./pool/radiant-strike.js";
 import _poolRadiantSummit from "./pool/radiant-summit.js";
@@ -17094,6 +17127,7 @@ import _poolRapidAugmenter from "./pool/rapid-augmenter.js";
 import _poolRapidHybridization from "./pool/rapid-hybridization.js";
 import _poolRapidRescue from "./pool/rapid-rescue.js";
 import _poolRapierWit from "./pool/rapier-wit.js";
+import _poolRappellingScouts from "./pool/rappelling-scouts.js";
 import _poolRaptorCompanion from "./pool/raptor-companion.js";
 import _poolRaptorHatchling from "./pool/raptor-hatchling.js";
 import _poolRapturousMoment from "./pool/rapturous-moment.js";
@@ -17187,6 +17221,7 @@ import _poolRaze from "./pool/raze.js";
 import _poolRaziaBorosArchangel from "./pool/razia-boros-archangel.js";
 import _poolRaziasPurification from "./pool/razias-purification.js";
 import _poolRazingSnidd from "./pool/razing-snidd.js";
+import _poolRazorBarrier from "./pool/razor-barrier.js";
 import _poolRazorGolem from "./pool/razor-golem.js";
 import _poolRazorHippogriff from "./pool/razor-hippogriff.js";
 import _poolRazorRings from "./pool/razor-rings.js";
@@ -17336,6 +17371,7 @@ import _poolRedcapHeelslasher from "./pool/redcap-heelslasher.js";
 import _poolRedcapMelee from "./pool/redcap-melee.js";
 import _poolRedcapRaiders from "./pool/redcap-raiders.js";
 import _poolRedcapThief from "./pool/redcap-thief.js";
+import _poolRedeemTheLost from "./pool/redeem-the-lost.js";
 import _poolRedeem from "./pool/redeem.js";
 import _poolRedemptionArc from "./pool/redemption-arc.js";
 import _poolRedemptionChoir from "./pool/redemption-choir.js";
@@ -17552,6 +17588,7 @@ import _poolReset from "./pool/reset.js";
 import _poolReshapeTheEarth from "./pool/reshape-the-earth.js";
 import _poolReshape from "./pool/reshape.js";
 import _poolResilientKhenra from "./pool/resilient-khenra.js";
+import _poolResilientWanderer from "./pool/resilient-wanderer.js";
 import _poolResistanceReunited from "./pool/resistance-reunited.js";
 import _poolResistanceSkywarden from "./pool/resistance-skywarden.js";
 import _poolResistanceSquad from "./pool/resistance-squad.js";
@@ -17670,6 +17707,7 @@ import _poolReveredUnicorn from "./pool/revered-unicorn.js";
 import _poolReverentHoplite from "./pool/reverent-hoplite.js";
 import _poolReverentHowl from "./pool/reverent-howl.js";
 import _poolReverentHunter from "./pool/reverent-hunter.js";
+import _poolReverentMantra from "./pool/reverent-mantra.js";
 import _poolReverseDamage from "./pool/reverse-damage.js";
 import _poolReverseEngineer from "./pool/reverse-engineer.js";
 import _poolRevitalize from "./pool/revitalize.js";
@@ -18945,6 +18983,7 @@ import _poolSeasonOfRenewal from "./pool/season-of-renewal.js";
 import _poolSeasonalRitual from "./pool/seasonal-ritual.js";
 import _poolSeasonedCathar from "./pool/seasoned-cathar.js";
 import _poolSeasonedConsultant from "./pool/seasoned-consultant.js";
+import _poolSeasonedDungeoneer from "./pool/seasoned-dungeoneer.js";
 import _poolSeasonedHallowblade from "./pool/seasoned-hallowblade.js";
 import _poolSeasonedMarshal from "./pool/seasoned-marshal.js";
 import _poolSeasonedPyromancer from "./pool/seasoned-pyromancer.js";
@@ -19045,8 +19084,11 @@ import _poolSeizeTheSoul from "./pool/seize-the-soul.js";
 import _poolSeizeTheSpoils from "./pool/seize-the-spoils.js";
 import _poolSeizedFromSlumber from "./pool/seized-from-slumber.js";
 import _poolSeizures from "./pool/seizures.js";
+import _poolSejiriGlacier from "./pool/sejiri-glacier.js";
 import _poolSejiriMerfolk from "./pool/sejiri-merfolk.js";
 import _poolSejiriRefuge from "./pool/sejiri-refuge.js";
+import _poolSejiriShelter from "./pool/sejiri-shelter.js";
+import _poolSejiriSteppe from "./pool/sejiri-steppe.js";
 import _poolSekkiSeasonsGuide from "./pool/sekki-seasons-guide.js";
 import _poolSekkuarDeathkeeper from "./pool/sekkuar-deathkeeper.js";
 import _poolSelectForInspection from "./pool/select-for-inspection.js";
@@ -19360,6 +19402,7 @@ import _poolShellSkulkin from "./pool/shell-skulkin.js";
 import _poolShelldockIsle from "./pool/shelldock-isle.js";
 import _poolShelobChildOfUngoliant from "./pool/shelob-child-of-ungoliant.js";
 import _poolShelobsAmbush from "./pool/shelobs-ambush.js";
+import _poolShelter from "./pool/shelter.js";
 import _poolShelteredAerie from "./pool/sheltered-aerie.js";
 import _poolShelteredByGhosts from "./pool/sheltered-by-ghosts.js";
 import _poolShelteredThicket from "./pool/sheltered-thicket.js";
@@ -20455,6 +20498,7 @@ import _poolSpaceMarineScout from "./pool/space-marine-scout.js";
 import _poolSpaceTimeAnomaly from "./pool/space-time-anomaly.js";
 import _poolSpaceshift from "./pool/spaceshift.js";
 import _poolSparasHeadquarters from "./pool/sparas-headquarters.js";
+import _poolSpareFromEvil from "./pool/spare-from-evil.js";
 import _poolSpareSupplies from "./pool/spare-supplies.js";
 import _poolSparkDouble from "./pool/spark-double.js";
 import _poolSparkElemental from "./pool/spark-elemental.js";
@@ -21000,6 +21044,7 @@ import _poolStaunchDefenders from "./pool/staunch-defenders.js";
 import _poolStaunchHeartedWarrior from "./pool/staunch-hearted-warrior.js";
 import _poolStaunchShieldmate from "./pool/staunch-shieldmate.js";
 import _poolStaunchThroneguard from "./pool/staunch-throneguard.js";
+import _poolStaveOff from "./pool/stave-off.js";
 import _poolStayHiddenStaySilent from "./pool/stay-hidden-stay-silent.js";
 import _poolSteadfastCathar from "./pool/steadfast-cathar.js";
 import _poolSteadfastGuard from "./pool/steadfast-guard.js";
@@ -21261,6 +21306,7 @@ import _poolStormscaleScion from "./pool/stormscale-scion.js";
 import _poolStormscapeApprentice from "./pool/stormscape-apprentice.js";
 import _poolStormscapeBattlemage from "./pool/stormscape-battlemage.js";
 import _poolStormscapeFamiliar from "./pool/stormscape-familiar.js";
+import _poolStormscapeMaster from "./pool/stormscape-master.js";
 import _poolStormshriekFeral from "./pool/stormshriek-feral.js";
 import _poolStormsplitter from "./pool/stormsplitter.js";
 import _poolStormsurgeKraken from "./pool/stormsurge-kraken.js";
@@ -21749,6 +21795,9 @@ import _poolSwornGuardian from "./pool/sworn-guardian.js";
 import _poolSycoraxCommander from "./pool/sycorax-commander.js";
 import _poolSydriGalvanicGenius from "./pool/sydri-galvanic-genius.js";
 import _poolSyggRiverCutthroat from "./pool/sygg-river-cutthroat.js";
+import _poolSyggRiverGuide from "./pool/sygg-river-guide.js";
+import _poolSyggWanderbrineShield from "./pool/sygg-wanderbrine-shield.js";
+import _poolSyggWanderwineWisdom from "./pool/sygg-wanderwine-wisdom.js";
 import _poolSylvanAdvocate from "./pool/sylvan-advocate.js";
 import _poolSylvanAnthem from "./pool/sylvan-anthem.js";
 import _poolSylvanAwakening from "./pool/sylvan-awakening.js";
@@ -22055,6 +22104,7 @@ import _poolTegwyllDukeOfSplendor from "./pool/tegwyll-duke-of-splendor.js";
 import _poolTek from "./pool/tek.js";
 import _poolTelJiladArchers from "./pool/tel-jilad-archers.js";
 import _poolTelJiladChosen from "./pool/tel-jilad-chosen.js";
+import _poolTelJiladDefiance from "./pool/tel-jilad-defiance.js";
 import _poolTelJiladExile from "./pool/tel-jilad-exile.js";
 import _poolTelJiladFallen from "./pool/tel-jilad-fallen.js";
 import _poolTelJiladJustice from "./pool/tel-jilad-justice.js";
@@ -22185,6 +22235,7 @@ import _poolTerminalVelocity from "./pool/terminal-velocity.js";
 import _poolTerminate from "./pool/terminate.js";
 import _poolTerminationFacilitator from "./pool/termination-facilitator.js";
 import _poolTerohsFaithful from "./pool/terohs-faithful.js";
+import _poolTerohsVanguard from "./pool/terohs-vanguard.js";
 import _poolTerraEternal from "./pool/terra-eternal.js";
 import _poolTerraHeraldOfHope from "./pool/terra-herald-of-hope.js";
 import _poolTerraStomper from "./pool/terra-stomper.js";
@@ -22582,6 +22633,7 @@ import _poolThornplateIntimidator from "./pool/thornplate-intimidator.js";
 import _poolThornscapeApprentice from "./pool/thornscape-apprentice.js";
 import _poolThornscapeBattlemage from "./pool/thornscape-battlemage.js";
 import _poolThornscapeFamiliar from "./pool/thornscape-familiar.js";
+import _poolThornscapeMaster from "./pool/thornscape-master.js";
 import _poolThornspireVerge from "./pool/thornspire-verge.js";
 import _poolThorntoothWitch from "./pool/thorntooth-witch.js";
 import _poolThornwatchScarecrow from "./pool/thornwatch-scarecrow.js";
@@ -23077,6 +23129,7 @@ import _poolTowerOfChampions from "./pool/tower-of-champions.js";
 import _poolTowerOfEons from "./pool/tower-of-eons.js";
 import _poolTowerOfFortunes from "./pool/tower-of-fortunes.js";
 import _poolTowerOfMurmurs from "./pool/tower-of-murmurs.js";
+import _poolTowerOfTheMagistrate from "./pool/tower-of-the-magistrate.js";
 import _poolTowerWinder from "./pool/tower-winder.js";
 import _poolTowerWorker from "./pool/tower-worker.js";
 import _poolToweringBaloth from "./pool/towering-baloth.js";
@@ -24718,6 +24771,7 @@ import _poolWarchanterSkald from "./pool/warchanter-skald.js";
 import _poolWarchiefGiant from "./pool/warchief-giant.js";
 import _poolWarclampMastiff from "./pool/warclamp-mastiff.js";
 import _poolWarcryPhoenix from "./pool/warcry-phoenix.js";
+import _poolWardOfLights from "./pool/ward-of-lights.js";
 import _poolWardOfPiety from "./pool/ward-of-piety.js";
 import _poolWardSliver from "./pool/ward-sliver.js";
 import _poolWardedBattlements from "./pool/warded-battlements.js";
@@ -25162,6 +25216,7 @@ import _poolWillowDryad from "./pool/willow-dryad.js";
 import _poolWillowElf from "./pool/willow-elf.js";
 import _poolWillowFaerie from "./pool/willow-faerie.js";
 import _poolWillowGeist from "./pool/willow-geist.js";
+import _poolWillowPriestess from "./pool/willow-priestess.js";
 import _poolWillowSatyr from "./pool/willow-satyr.js";
 import _poolWillowWind from "./pool/willow-wind.js";
 import _poolWillowduskEssenceSeer from "./pool/willowdusk-essence-seer.js";
@@ -25279,6 +25334,7 @@ import _poolWirewoodSymbiote from "./pool/wirewood-symbiote.js";
 import _poolWisecrack from "./pool/wisecrack.js";
 import _poolWishcoinCrab from "./pool/wishcoin-crab.js";
 import _poolWishingWell from "./pool/wishing-well.js";
+import _poolWishmonger from "./pool/wishmonger.js";
 import _poolWispdrinkerVampire from "./pool/wispdrinker-vampire.js";
 import _poolWispmare from "./pool/wispmare.js";
 import _poolWispweaverAngel from "./pool/wispweaver-angel.js";
@@ -26861,6 +26917,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAkroanSkyguard,
   _poolAkromaAngelOfFury,
   _poolAkromaAngelOfWrath,
+  _poolAkromasBlessing,
   _poolAkromasDevoted,
   _poolAkromasMemorial,
   _poolAkromasVengeance,
@@ -26968,6 +27025,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAlpineWatchdog,
   _poolAlquistProftMasterSleuth,
   _poolAlrundsEpiphany,
+  _poolAlseidOfLifesBounty,
   _poolAltacBloodseeker,
   _poolAltanakTheThriceCalled,
   _poolAltarGolem,
@@ -27147,6 +27205,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAngelicFavor,
   _poolAngelicFieldMarshal,
   _poolAngelicGift,
+  _poolAngelicIntervention,
   _poolAngelicObserver,
   _poolAngelicOverseer,
   _poolAngelicPage,
@@ -27263,6 +27322,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolApocalypse,
   _poolApostleOfInvasion,
   _poolApostleOfPurifyingLight,
+  _poolApostlesBlessing,
   _poolApothecaryGeist,
   _poolApothecaryInitiate,
   _poolApothecaryStomper,
@@ -27507,6 +27567,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArmoredAscension,
   _poolArmoredCancrix,
   _poolArmoredGriffin,
+  _poolArmoredGuardian,
   _poolArmoredPegasus,
   _poolArmoredScrapgorger,
   _poolArmoredSkaab,
@@ -27823,6 +27884,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvenFogbringer,
   _poolAvenGagglemaster,
   _poolAvenInitiate,
+  _poolAvenLiberator,
   _poolAvenMimeomancer,
   _poolAvenOfEnduringHope,
   _poolAvenRedeemer,
@@ -27838,6 +27900,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvenTactician,
   _poolAvenTrailblazer,
   _poolAvenTrooper,
+  _poolAvenWarcraft,
   _poolAvenWarhawk,
   _poolAvenWindGuide,
   _poolAvenWindMage,
@@ -28355,6 +28418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBenefactionOfRhonas,
   _poolBenefactorsDraught,
   _poolBenevolentAncestor,
+  _poolBenevolentBodyguard,
   _poolBenevolentHydra,
   _poolBenevolentRiverSpirit,
   _poolBenevolentUnicorn,
@@ -28581,6 +28645,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBleedingEffect,
   _poolBleedingWoods,
   _poolBlessedAlliance,
+  _poolBlessedBreath,
   _poolBlessedDefiance,
   _poolBlessedGhoul,
   _poolBlessedHippogriff,
@@ -29711,6 +29776,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCarrionette,
   _poolCarrotCake,
   _poolCarryAway,
+  _poolCartelAristocrat,
   _poolCartographer,
   _poolCartographersCompanion,
   _poolCartographersHawk,
@@ -29885,6 +29951,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCentaurVeteran,
   _poolCentaurVinecrasher,
   _poolCentaursHerald,
+  _poolCenterSoul,
   _poolCephalidAristocrat,
   _poolCephalidBroker,
   _poolCephalidColiseum,
@@ -32205,6 +32272,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDokuchiShadowWalker,
   _poolDomesticatedHydra,
   _poolDomestication,
+  _poolDominariasJudgment,
   _poolDominate,
   _poolDominatingLicid,
   _poolDominatingVampire,
@@ -33079,6 +33147,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmeraldMedallion,
   _poolEmeraldOryx,
   _poolEmergeFromTheCocoon,
+  _poolEmergeUnscathed,
   _poolEmergencyEject,
   _poolEmergencyPhytomedic,
   _poolEmergencyWeld,
@@ -33851,6 +33920,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFeasterOfFools,
   _poolFeastingHobbit,
   _poolFeastingTrollKing,
+  _poolFeatOfResistance,
   _poolFeatherOfFlight,
   _poolFeatherTheRedeemed,
   _poolFeatherbrainedFilcher,
@@ -34328,6 +34398,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlitterstepEidolon,
   _poolFlittingGuerrilla,
   _poolFloatingDreamZubera,
+  _poolFloatingShield,
   _poolFlockImpostor,
   _poolFloodOfRecollection,
   _poolFloodPlain,
@@ -35392,6 +35463,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGloryBoundInitiate,
   _poolGloryOfWarfare,
   _poolGlorySeeker,
+  _poolGlory,
   _poolGlorybringer,
   _poolGloryheathLynx,
   _poolGloryscaleViashino,
@@ -35586,6 +35658,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinWarchief,
   _poolGoblinWardriver,
   _poolGoblinWarrens,
+  _poolGoblinWizard,
   _poolGoblinWizardry,
   _poolGoblinsOfTheFlarg,
   _poolGoblinslide,
@@ -36001,6 +36074,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrotagSiegeRunner,
   _poolGrotagThrasher,
   _poolGrotesqueDemise,
+  _poolGrotesqueHybrid,
   _poolGrotesqueMutation,
   _poolGroundAssault,
   _poolGroundRift,
@@ -36527,6 +36601,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeliophial,
   _poolHeliumSquirter,
   _poolHelixPinnacle,
+  _poolHellBentRaider,
   _poolHellMongrel,
   _poolHellSwarm,
   _poolHellToPay,
@@ -37841,6 +37916,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJaradGolgariLichLord,
   _poolJarakuTheInterloper,
   _poolJaredCarthalion,
+  _poolJarethLeonineTitan,
   _poolJarlOfTheForsaken,
   _poolJarvisEarthsMightiestButler,
   _poolJasmineBoreal,
@@ -37903,6 +37979,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJewelEyedCobra,
   _poolJewelThief,
   _poolJeweledLotus,
+  _poolJeweledSpirit,
   _poolJeweledTorque,
   _poolJhessianBalmgiver,
   _poolJhessianInfiltrator,
@@ -37930,6 +38007,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJiwariTheEarthAflame,
   _poolJodahArchmageEternal,
   _poolJodahTheUnifier,
+  _poolJodahsAvenger,
   _poolJodahsCodex,
   _poolJohannsStopgap,
   _poolJohtullWurm,
@@ -38048,6 +38126,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKaZarOfTheSavageLand,
   _poolKaaliaOfTheVast,
   _poolKabiraCrossroads,
+  _poolKabiraEvangel,
   _poolKabiraOutrider,
   _poolKabiraPlateau,
   _poolKabiraTakedown,
@@ -38105,6 +38184,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKamiOfTheCrescentMoon,
   _poolKamiOfTheHonoredDead,
   _poolKamiOfTheHunt,
+  _poolKamiOfThePaintedRoad,
   _poolKamiOfThePalaceFields,
   _poolKamiOfTheTendedGarden,
   _poolKamiOfTheWaningMoon,
@@ -38240,6 +38320,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKeepWatch,
   _poolKeeperOfFables,
   _poolKeeperOfKeys,
+  _poolKeeperOfKookus,
   _poolKeeperOfProgenitus,
   _poolKeeperOfSecrets,
   _poolKeeperOfTheAccord,
@@ -38474,6 +38555,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKnightLuminary,
   _poolKnightOfAutumn,
   _poolKnightOfCliffhaven,
+  _poolKnightOfDawn,
   _poolKnightOfDawnsLight,
   _poolKnightOfDoves,
   _poolKnightOfDusksShadow,
@@ -40220,6 +40302,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMidnightSnack,
   _poolMidnightTilling,
   _poolMidsummerRevel,
+  _poolMidvastProtector,
   _poolMightBeyondReason,
   _poolMightOfAlara,
   _poolMightOfMurasa,
@@ -40659,6 +40742,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoongloveWinnower,
   _poolMoonlace,
   _poolMoonlitScavengers,
+  _poolMoonlitStrider,
   _poolMoonlitWake,
   _poolMoonrageBrute,
   _poolMoonragersSlash,
@@ -41593,6 +41677,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolObsessiveSkinner,
   _poolObsessiveStitcher,
   _poolObsianusGolem,
+  _poolObsidianAcolyte,
   _poolObsidianBattleAxe,
   _poolObsidianFireheart,
   _poolObsidianGiant,
@@ -42102,6 +42187,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPalazzoArchers,
   _poolPaleBears,
   _poolPaleRiderOfTrostad,
+  _poolPaleWayfarer,
   _poolPaleoloth,
   _poolPalianoTheHighCity,
   _poolPalianoVanguard,
@@ -42922,6 +43008,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrisonBreak,
   _poolPrisonRealm,
   _poolPristineAngel,
+  _poolPristineSkywise,
   _poolPristineTalisman,
   _poolPrivateEye,
   _poolPrivateResearch,
@@ -43229,6 +43316,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolQuestForTheNecropolis,
   _poolQuestForUlasTemple,
   _poolQuestingDruid,
+  _poolQuestingPhelddagrif,
   _poolQuezaAugurOfAgonies,
   _poolQuickDrawDagger,
   _poolQuickDrawKatana,
@@ -43308,6 +43396,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRadiantGrove,
   _poolRadiantKavu,
   _poolRadiantPurge,
+  _poolRadiantSerraArchangel,
   _poolRadiantSolar,
   _poolRadiantStrike,
   _poolRadiantSummit,
@@ -43526,6 +43615,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRapidHybridization,
   _poolRapidRescue,
   _poolRapierWit,
+  _poolRappellingScouts,
   _poolRaptorCompanion,
   _poolRaptorHatchling,
   _poolRapturousMoment,
@@ -43619,6 +43709,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaziaBorosArchangel,
   _poolRaziasPurification,
   _poolRazingSnidd,
+  _poolRazorBarrier,
   _poolRazorGolem,
   _poolRazorHippogriff,
   _poolRazorRings,
@@ -43768,6 +43859,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRedcapMelee,
   _poolRedcapRaiders,
   _poolRedcapThief,
+  _poolRedeemTheLost,
   _poolRedeem,
   _poolRedemptionArc,
   _poolRedemptionChoir,
@@ -43984,6 +44076,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReshapeTheEarth,
   _poolReshape,
   _poolResilientKhenra,
+  _poolResilientWanderer,
   _poolResistanceReunited,
   _poolResistanceSkywarden,
   _poolResistanceSquad,
@@ -44102,6 +44195,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReverentHoplite,
   _poolReverentHowl,
   _poolReverentHunter,
+  _poolReverentMantra,
   _poolReverseDamage,
   _poolReverseEngineer,
   _poolRevitalize,
@@ -45377,6 +45471,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeasonalRitual,
   _poolSeasonedCathar,
   _poolSeasonedConsultant,
+  _poolSeasonedDungeoneer,
   _poolSeasonedHallowblade,
   _poolSeasonedMarshal,
   _poolSeasonedPyromancer,
@@ -45477,8 +45572,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeizeTheSpoils,
   _poolSeizedFromSlumber,
   _poolSeizures,
+  _poolSejiriGlacier,
   _poolSejiriMerfolk,
   _poolSejiriRefuge,
+  _poolSejiriShelter,
+  _poolSejiriSteppe,
   _poolSekkiSeasonsGuide,
   _poolSekkuarDeathkeeper,
   _poolSelectForInspection,
@@ -45792,6 +45890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShelldockIsle,
   _poolShelobChildOfUngoliant,
   _poolShelobsAmbush,
+  _poolShelter,
   _poolShelteredAerie,
   _poolShelteredByGhosts,
   _poolShelteredThicket,
@@ -46887,6 +46986,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpaceTimeAnomaly,
   _poolSpaceshift,
   _poolSparasHeadquarters,
+  _poolSpareFromEvil,
   _poolSpareSupplies,
   _poolSparkDouble,
   _poolSparkElemental,
@@ -47432,6 +47532,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStaunchHeartedWarrior,
   _poolStaunchShieldmate,
   _poolStaunchThroneguard,
+  _poolStaveOff,
   _poolStayHiddenStaySilent,
   _poolSteadfastCathar,
   _poolSteadfastGuard,
@@ -47693,6 +47794,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStormscapeApprentice,
   _poolStormscapeBattlemage,
   _poolStormscapeFamiliar,
+  _poolStormscapeMaster,
   _poolStormshriekFeral,
   _poolStormsplitter,
   _poolStormsurgeKraken,
@@ -48181,6 +48283,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSycoraxCommander,
   _poolSydriGalvanicGenius,
   _poolSyggRiverCutthroat,
+  _poolSyggRiverGuide,
+  _poolSyggWanderbrineShield,
+  _poolSyggWanderwineWisdom,
   _poolSylvanAdvocate,
   _poolSylvanAnthem,
   _poolSylvanAwakening,
@@ -48487,6 +48592,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTek,
   _poolTelJiladArchers,
   _poolTelJiladChosen,
+  _poolTelJiladDefiance,
   _poolTelJiladExile,
   _poolTelJiladFallen,
   _poolTelJiladJustice,
@@ -48617,6 +48723,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerminate,
   _poolTerminationFacilitator,
   _poolTerohsFaithful,
+  _poolTerohsVanguard,
   _poolTerraEternal,
   _poolTerraHeraldOfHope,
   _poolTerraStomper,
@@ -49014,6 +49121,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThornscapeApprentice,
   _poolThornscapeBattlemage,
   _poolThornscapeFamiliar,
+  _poolThornscapeMaster,
   _poolThornspireVerge,
   _poolThorntoothWitch,
   _poolThornwatchScarecrow,
@@ -49509,6 +49617,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTowerOfEons,
   _poolTowerOfFortunes,
   _poolTowerOfMurmurs,
+  _poolTowerOfTheMagistrate,
   _poolTowerWinder,
   _poolTowerWorker,
   _poolToweringBaloth,
@@ -51150,6 +51259,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarchiefGiant,
   _poolWarclampMastiff,
   _poolWarcryPhoenix,
+  _poolWardOfLights,
   _poolWardOfPiety,
   _poolWardSliver,
   _poolWardedBattlements,
@@ -51594,6 +51704,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWillowElf,
   _poolWillowFaerie,
   _poolWillowGeist,
+  _poolWillowPriestess,
   _poolWillowSatyr,
   _poolWillowWind,
   _poolWillowduskEssenceSeer,
@@ -51711,6 +51822,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWisecrack,
   _poolWishcoinCrab,
   _poolWishingWell,
+  _poolWishmonger,
   _poolWispdrinkerVampire,
   _poolWispmare,
   _poolWispweaverAngel,
@@ -53306,6 +53418,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/akroan-skyguard": _poolAkroanSkyguard,
   "pool/akroma-angel-of-fury": _poolAkromaAngelOfFury,
   "pool/akroma-angel-of-wrath": _poolAkromaAngelOfWrath,
+  "pool/akromas-blessing": _poolAkromasBlessing,
   "pool/akromas-devoted": _poolAkromasDevoted,
   "pool/akromas-memorial": _poolAkromasMemorial,
   "pool/akromas-vengeance": _poolAkromasVengeance,
@@ -53413,6 +53526,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/alpine-watchdog": _poolAlpineWatchdog,
   "pool/alquist-proft-master-sleuth": _poolAlquistProftMasterSleuth,
   "pool/alrunds-epiphany": _poolAlrundsEpiphany,
+  "pool/alseid-of-lifes-bounty": _poolAlseidOfLifesBounty,
   "pool/altac-bloodseeker": _poolAltacBloodseeker,
   "pool/altanak-the-thrice-called": _poolAltanakTheThriceCalled,
   "pool/altar-golem": _poolAltarGolem,
@@ -53592,6 +53706,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angelic-favor": _poolAngelicFavor,
   "pool/angelic-field-marshal": _poolAngelicFieldMarshal,
   "pool/angelic-gift": _poolAngelicGift,
+  "pool/angelic-intervention": _poolAngelicIntervention,
   "pool/angelic-observer": _poolAngelicObserver,
   "pool/angelic-overseer": _poolAngelicOverseer,
   "pool/angelic-page": _poolAngelicPage,
@@ -53708,6 +53823,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/apocalypse": _poolApocalypse,
   "pool/apostle-of-invasion": _poolApostleOfInvasion,
   "pool/apostle-of-purifying-light": _poolApostleOfPurifyingLight,
+  "pool/apostles-blessing": _poolApostlesBlessing,
   "pool/apothecary-geist": _poolApothecaryGeist,
   "pool/apothecary-initiate": _poolApothecaryInitiate,
   "pool/apothecary-stomper": _poolApothecaryStomper,
@@ -53952,6 +54068,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/armored-ascension": _poolArmoredAscension,
   "pool/armored-cancrix": _poolArmoredCancrix,
   "pool/armored-griffin": _poolArmoredGriffin,
+  "pool/armored-guardian": _poolArmoredGuardian,
   "pool/armored-pegasus": _poolArmoredPegasus,
   "pool/armored-scrapgorger": _poolArmoredScrapgorger,
   "pool/armored-skaab": _poolArmoredSkaab,
@@ -54268,6 +54385,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aven-fogbringer": _poolAvenFogbringer,
   "pool/aven-gagglemaster": _poolAvenGagglemaster,
   "pool/aven-initiate": _poolAvenInitiate,
+  "pool/aven-liberator": _poolAvenLiberator,
   "pool/aven-mimeomancer": _poolAvenMimeomancer,
   "pool/aven-of-enduring-hope": _poolAvenOfEnduringHope,
   "pool/aven-redeemer": _poolAvenRedeemer,
@@ -54283,6 +54401,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aven-tactician": _poolAvenTactician,
   "pool/aven-trailblazer": _poolAvenTrailblazer,
   "pool/aven-trooper": _poolAvenTrooper,
+  "pool/aven-warcraft": _poolAvenWarcraft,
   "pool/aven-warhawk": _poolAvenWarhawk,
   "pool/aven-wind-guide": _poolAvenWindGuide,
   "pool/aven-wind-mage": _poolAvenWindMage,
@@ -54800,6 +54919,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/benefaction-of-rhonas": _poolBenefactionOfRhonas,
   "pool/benefactors-draught": _poolBenefactorsDraught,
   "pool/benevolent-ancestor": _poolBenevolentAncestor,
+  "pool/benevolent-bodyguard": _poolBenevolentBodyguard,
   "pool/benevolent-hydra": _poolBenevolentHydra,
   "pool/benevolent-river-spirit": _poolBenevolentRiverSpirit,
   "pool/benevolent-unicorn": _poolBenevolentUnicorn,
@@ -55026,6 +55146,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bleeding-effect": _poolBleedingEffect,
   "pool/bleeding-woods": _poolBleedingWoods,
   "pool/blessed-alliance": _poolBlessedAlliance,
+  "pool/blessed-breath": _poolBlessedBreath,
   "pool/blessed-defiance": _poolBlessedDefiance,
   "pool/blessed-ghoul": _poolBlessedGhoul,
   "pool/blessed-hippogriff": _poolBlessedHippogriff,
@@ -56156,6 +56277,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/carrionette": _poolCarrionette,
   "pool/carrot-cake": _poolCarrotCake,
   "pool/carry-away": _poolCarryAway,
+  "pool/cartel-aristocrat": _poolCartelAristocrat,
   "pool/cartographer": _poolCartographer,
   "pool/cartographers-companion": _poolCartographersCompanion,
   "pool/cartographers-hawk": _poolCartographersHawk,
@@ -56330,6 +56452,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/centaur-veteran": _poolCentaurVeteran,
   "pool/centaur-vinecrasher": _poolCentaurVinecrasher,
   "pool/centaurs-herald": _poolCentaursHerald,
+  "pool/center-soul": _poolCenterSoul,
   "pool/cephalid-aristocrat": _poolCephalidAristocrat,
   "pool/cephalid-broker": _poolCephalidBroker,
   "pool/cephalid-coliseum": _poolCephalidColiseum,
@@ -58650,6 +58773,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dokuchi-shadow-walker": _poolDokuchiShadowWalker,
   "pool/domesticated-hydra": _poolDomesticatedHydra,
   "pool/domestication": _poolDomestication,
+  "pool/dominarias-judgment": _poolDominariasJudgment,
   "pool/dominate": _poolDominate,
   "pool/dominating-licid": _poolDominatingLicid,
   "pool/dominating-vampire": _poolDominatingVampire,
@@ -59524,6 +59648,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emerald-medallion": _poolEmeraldMedallion,
   "pool/emerald-oryx": _poolEmeraldOryx,
   "pool/emerge-from-the-cocoon": _poolEmergeFromTheCocoon,
+  "pool/emerge-unscathed": _poolEmergeUnscathed,
   "pool/emergency-eject": _poolEmergencyEject,
   "pool/emergency-phytomedic": _poolEmergencyPhytomedic,
   "pool/emergency-weld": _poolEmergencyWeld,
@@ -60296,6 +60421,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/feaster-of-fools": _poolFeasterOfFools,
   "pool/feasting-hobbit": _poolFeastingHobbit,
   "pool/feasting-troll-king": _poolFeastingTrollKing,
+  "pool/feat-of-resistance": _poolFeatOfResistance,
   "pool/feather-of-flight": _poolFeatherOfFlight,
   "pool/feather-the-redeemed": _poolFeatherTheRedeemed,
   "pool/featherbrained-filcher": _poolFeatherbrainedFilcher,
@@ -60773,6 +60899,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flitterstep-eidolon": _poolFlitterstepEidolon,
   "pool/flitting-guerrilla": _poolFlittingGuerrilla,
   "pool/floating-dream-zubera": _poolFloatingDreamZubera,
+  "pool/floating-shield": _poolFloatingShield,
   "pool/flock-impostor": _poolFlockImpostor,
   "pool/flood-of-recollection": _poolFloodOfRecollection,
   "pool/flood-plain": _poolFloodPlain,
@@ -61837,6 +61964,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glory-bound-initiate": _poolGloryBoundInitiate,
   "pool/glory-of-warfare": _poolGloryOfWarfare,
   "pool/glory-seeker": _poolGlorySeeker,
+  "pool/glory": _poolGlory,
   "pool/glorybringer": _poolGlorybringer,
   "pool/gloryheath-lynx": _poolGloryheathLynx,
   "pool/gloryscale-viashino": _poolGloryscaleViashino,
@@ -62031,6 +62159,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-warchief": _poolGoblinWarchief,
   "pool/goblin-wardriver": _poolGoblinWardriver,
   "pool/goblin-warrens": _poolGoblinWarrens,
+  "pool/goblin-wizard": _poolGoblinWizard,
   "pool/goblin-wizardry": _poolGoblinWizardry,
   "pool/goblins-of-the-flarg": _poolGoblinsOfTheFlarg,
   "pool/goblinslide": _poolGoblinslide,
@@ -62446,6 +62575,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grotag-siege-runner": _poolGrotagSiegeRunner,
   "pool/grotag-thrasher": _poolGrotagThrasher,
   "pool/grotesque-demise": _poolGrotesqueDemise,
+  "pool/grotesque-hybrid": _poolGrotesqueHybrid,
   "pool/grotesque-mutation": _poolGrotesqueMutation,
   "pool/ground-assault": _poolGroundAssault,
   "pool/ground-rift": _poolGroundRift,
@@ -62972,6 +63102,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heliophial": _poolHeliophial,
   "pool/helium-squirter": _poolHeliumSquirter,
   "pool/helix-pinnacle": _poolHelixPinnacle,
+  "pool/hell-bent-raider": _poolHellBentRaider,
   "pool/hell-mongrel": _poolHellMongrel,
   "pool/hell-swarm": _poolHellSwarm,
   "pool/hell-to-pay": _poolHellToPay,
@@ -64286,6 +64417,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jarad-golgari-lich-lord": _poolJaradGolgariLichLord,
   "pool/jaraku-the-interloper": _poolJarakuTheInterloper,
   "pool/jared-carthalion": _poolJaredCarthalion,
+  "pool/jareth-leonine-titan": _poolJarethLeonineTitan,
   "pool/jarl-of-the-forsaken": _poolJarlOfTheForsaken,
   "pool/jarvis-earths-mightiest-butler": _poolJarvisEarthsMightiestButler,
   "pool/jasmine-boreal": _poolJasmineBoreal,
@@ -64348,6 +64480,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jewel-eyed-cobra": _poolJewelEyedCobra,
   "pool/jewel-thief": _poolJewelThief,
   "pool/jeweled-lotus": _poolJeweledLotus,
+  "pool/jeweled-spirit": _poolJeweledSpirit,
   "pool/jeweled-torque": _poolJeweledTorque,
   "pool/jhessian-balmgiver": _poolJhessianBalmgiver,
   "pool/jhessian-infiltrator": _poolJhessianInfiltrator,
@@ -64375,6 +64508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jiwari-the-earth-aflame": _poolJiwariTheEarthAflame,
   "pool/jodah-archmage-eternal": _poolJodahArchmageEternal,
   "pool/jodah-the-unifier": _poolJodahTheUnifier,
+  "pool/jodahs-avenger": _poolJodahsAvenger,
   "pool/jodahs-codex": _poolJodahsCodex,
   "pool/johanns-stopgap": _poolJohannsStopgap,
   "pool/johtull-wurm": _poolJohtullWurm,
@@ -64493,6 +64627,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ka-zar-of-the-savage-land": _poolKaZarOfTheSavageLand,
   "pool/kaalia-of-the-vast": _poolKaaliaOfTheVast,
   "pool/kabira-crossroads": _poolKabiraCrossroads,
+  "pool/kabira-evangel": _poolKabiraEvangel,
   "pool/kabira-outrider": _poolKabiraOutrider,
   "pool/kabira-plateau": _poolKabiraPlateau,
   "pool/kabira-takedown": _poolKabiraTakedown,
@@ -64550,6 +64685,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kami-of-the-crescent-moon": _poolKamiOfTheCrescentMoon,
   "pool/kami-of-the-honored-dead": _poolKamiOfTheHonoredDead,
   "pool/kami-of-the-hunt": _poolKamiOfTheHunt,
+  "pool/kami-of-the-painted-road": _poolKamiOfThePaintedRoad,
   "pool/kami-of-the-palace-fields": _poolKamiOfThePalaceFields,
   "pool/kami-of-the-tended-garden": _poolKamiOfTheTendedGarden,
   "pool/kami-of-the-waning-moon": _poolKamiOfTheWaningMoon,
@@ -64685,6 +64821,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/keep-watch": _poolKeepWatch,
   "pool/keeper-of-fables": _poolKeeperOfFables,
   "pool/keeper-of-keys": _poolKeeperOfKeys,
+  "pool/keeper-of-kookus": _poolKeeperOfKookus,
   "pool/keeper-of-progenitus": _poolKeeperOfProgenitus,
   "pool/keeper-of-secrets": _poolKeeperOfSecrets,
   "pool/keeper-of-the-accord": _poolKeeperOfTheAccord,
@@ -64919,6 +65056,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/knight-luminary": _poolKnightLuminary,
   "pool/knight-of-autumn": _poolKnightOfAutumn,
   "pool/knight-of-cliffhaven": _poolKnightOfCliffhaven,
+  "pool/knight-of-dawn": _poolKnightOfDawn,
   "pool/knight-of-dawns-light": _poolKnightOfDawnsLight,
   "pool/knight-of-doves": _poolKnightOfDoves,
   "pool/knight-of-dusks-shadow": _poolKnightOfDusksShadow,
@@ -66665,6 +66803,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/midnight-snack": _poolMidnightSnack,
   "pool/midnight-tilling": _poolMidnightTilling,
   "pool/midsummer-revel": _poolMidsummerRevel,
+  "pool/midvast-protector": _poolMidvastProtector,
   "pool/might-beyond-reason": _poolMightBeyondReason,
   "pool/might-of-alara": _poolMightOfAlara,
   "pool/might-of-murasa": _poolMightOfMurasa,
@@ -67104,6 +67243,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moonglove-winnower": _poolMoongloveWinnower,
   "pool/moonlace": _poolMoonlace,
   "pool/moonlit-scavengers": _poolMoonlitScavengers,
+  "pool/moonlit-strider": _poolMoonlitStrider,
   "pool/moonlit-wake": _poolMoonlitWake,
   "pool/moonrage-brute": _poolMoonrageBrute,
   "pool/moonragers-slash": _poolMoonragersSlash,
@@ -68038,6 +68178,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/obsessive-skinner": _poolObsessiveSkinner,
   "pool/obsessive-stitcher": _poolObsessiveStitcher,
   "pool/obsianus-golem": _poolObsianusGolem,
+  "pool/obsidian-acolyte": _poolObsidianAcolyte,
   "pool/obsidian-battle-axe": _poolObsidianBattleAxe,
   "pool/obsidian-fireheart": _poolObsidianFireheart,
   "pool/obsidian-giant": _poolObsidianGiant,
@@ -68547,6 +68688,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/palazzo-archers": _poolPalazzoArchers,
   "pool/pale-bears": _poolPaleBears,
   "pool/pale-rider-of-trostad": _poolPaleRiderOfTrostad,
+  "pool/pale-wayfarer": _poolPaleWayfarer,
   "pool/paleoloth": _poolPaleoloth,
   "pool/paliano-the-high-city": _poolPalianoTheHighCity,
   "pool/paliano-vanguard": _poolPalianoVanguard,
@@ -69367,6 +69509,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prison-break": _poolPrisonBreak,
   "pool/prison-realm": _poolPrisonRealm,
   "pool/pristine-angel": _poolPristineAngel,
+  "pool/pristine-skywise": _poolPristineSkywise,
   "pool/pristine-talisman": _poolPristineTalisman,
   "pool/private-eye": _poolPrivateEye,
   "pool/private-research": _poolPrivateResearch,
@@ -69674,6 +69817,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/quest-for-the-necropolis": _poolQuestForTheNecropolis,
   "pool/quest-for-ulas-temple": _poolQuestForUlasTemple,
   "pool/questing-druid": _poolQuestingDruid,
+  "pool/questing-phelddagrif": _poolQuestingPhelddagrif,
   "pool/queza-augur-of-agonies": _poolQuezaAugurOfAgonies,
   "pool/quick-draw-dagger": _poolQuickDrawDagger,
   "pool/quick-draw-katana": _poolQuickDrawKatana,
@@ -69753,6 +69897,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/radiant-grove": _poolRadiantGrove,
   "pool/radiant-kavu": _poolRadiantKavu,
   "pool/radiant-purge": _poolRadiantPurge,
+  "pool/radiant-serra-archangel": _poolRadiantSerraArchangel,
   "pool/radiant-solar": _poolRadiantSolar,
   "pool/radiant-strike": _poolRadiantStrike,
   "pool/radiant-summit": _poolRadiantSummit,
@@ -69971,6 +70116,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rapid-hybridization": _poolRapidHybridization,
   "pool/rapid-rescue": _poolRapidRescue,
   "pool/rapier-wit": _poolRapierWit,
+  "pool/rappelling-scouts": _poolRappellingScouts,
   "pool/raptor-companion": _poolRaptorCompanion,
   "pool/raptor-hatchling": _poolRaptorHatchling,
   "pool/rapturous-moment": _poolRapturousMoment,
@@ -70064,6 +70210,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/razia-boros-archangel": _poolRaziaBorosArchangel,
   "pool/razias-purification": _poolRaziasPurification,
   "pool/razing-snidd": _poolRazingSnidd,
+  "pool/razor-barrier": _poolRazorBarrier,
   "pool/razor-golem": _poolRazorGolem,
   "pool/razor-hippogriff": _poolRazorHippogriff,
   "pool/razor-rings": _poolRazorRings,
@@ -70213,6 +70360,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/redcap-melee": _poolRedcapMelee,
   "pool/redcap-raiders": _poolRedcapRaiders,
   "pool/redcap-thief": _poolRedcapThief,
+  "pool/redeem-the-lost": _poolRedeemTheLost,
   "pool/redeem": _poolRedeem,
   "pool/redemption-arc": _poolRedemptionArc,
   "pool/redemption-choir": _poolRedemptionChoir,
@@ -70429,6 +70577,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reshape-the-earth": _poolReshapeTheEarth,
   "pool/reshape": _poolReshape,
   "pool/resilient-khenra": _poolResilientKhenra,
+  "pool/resilient-wanderer": _poolResilientWanderer,
   "pool/resistance-reunited": _poolResistanceReunited,
   "pool/resistance-skywarden": _poolResistanceSkywarden,
   "pool/resistance-squad": _poolResistanceSquad,
@@ -70547,6 +70696,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reverent-hoplite": _poolReverentHoplite,
   "pool/reverent-howl": _poolReverentHowl,
   "pool/reverent-hunter": _poolReverentHunter,
+  "pool/reverent-mantra": _poolReverentMantra,
   "pool/reverse-damage": _poolReverseDamage,
   "pool/reverse-engineer": _poolReverseEngineer,
   "pool/revitalize": _poolRevitalize,
@@ -71822,6 +71972,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seasonal-ritual": _poolSeasonalRitual,
   "pool/seasoned-cathar": _poolSeasonedCathar,
   "pool/seasoned-consultant": _poolSeasonedConsultant,
+  "pool/seasoned-dungeoneer": _poolSeasonedDungeoneer,
   "pool/seasoned-hallowblade": _poolSeasonedHallowblade,
   "pool/seasoned-marshal": _poolSeasonedMarshal,
   "pool/seasoned-pyromancer": _poolSeasonedPyromancer,
@@ -71922,8 +72073,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seize-the-spoils": _poolSeizeTheSpoils,
   "pool/seized-from-slumber": _poolSeizedFromSlumber,
   "pool/seizures": _poolSeizures,
+  "pool/sejiri-glacier": _poolSejiriGlacier,
   "pool/sejiri-merfolk": _poolSejiriMerfolk,
   "pool/sejiri-refuge": _poolSejiriRefuge,
+  "pool/sejiri-shelter": _poolSejiriShelter,
+  "pool/sejiri-steppe": _poolSejiriSteppe,
   "pool/sekki-seasons-guide": _poolSekkiSeasonsGuide,
   "pool/sekkuar-deathkeeper": _poolSekkuarDeathkeeper,
   "pool/select-for-inspection": _poolSelectForInspection,
@@ -72237,6 +72391,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shelldock-isle": _poolShelldockIsle,
   "pool/shelob-child-of-ungoliant": _poolShelobChildOfUngoliant,
   "pool/shelobs-ambush": _poolShelobsAmbush,
+  "pool/shelter": _poolShelter,
   "pool/sheltered-aerie": _poolShelteredAerie,
   "pool/sheltered-by-ghosts": _poolShelteredByGhosts,
   "pool/sheltered-thicket": _poolShelteredThicket,
@@ -73332,6 +73487,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/space-time-anomaly": _poolSpaceTimeAnomaly,
   "pool/spaceshift": _poolSpaceshift,
   "pool/sparas-headquarters": _poolSparasHeadquarters,
+  "pool/spare-from-evil": _poolSpareFromEvil,
   "pool/spare-supplies": _poolSpareSupplies,
   "pool/spark-double": _poolSparkDouble,
   "pool/spark-elemental": _poolSparkElemental,
@@ -73877,6 +74033,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/staunch-hearted-warrior": _poolStaunchHeartedWarrior,
   "pool/staunch-shieldmate": _poolStaunchShieldmate,
   "pool/staunch-throneguard": _poolStaunchThroneguard,
+  "pool/stave-off": _poolStaveOff,
   "pool/stay-hidden-stay-silent": _poolStayHiddenStaySilent,
   "pool/steadfast-cathar": _poolSteadfastCathar,
   "pool/steadfast-guard": _poolSteadfastGuard,
@@ -74138,6 +74295,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stormscape-apprentice": _poolStormscapeApprentice,
   "pool/stormscape-battlemage": _poolStormscapeBattlemage,
   "pool/stormscape-familiar": _poolStormscapeFamiliar,
+  "pool/stormscape-master": _poolStormscapeMaster,
   "pool/stormshriek-feral": _poolStormshriekFeral,
   "pool/stormsplitter": _poolStormsplitter,
   "pool/stormsurge-kraken": _poolStormsurgeKraken,
@@ -74626,6 +74784,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sycorax-commander": _poolSycoraxCommander,
   "pool/sydri-galvanic-genius": _poolSydriGalvanicGenius,
   "pool/sygg-river-cutthroat": _poolSyggRiverCutthroat,
+  "pool/sygg-river-guide": _poolSyggRiverGuide,
+  "pool/sygg-wanderbrine-shield": _poolSyggWanderbrineShield,
+  "pool/sygg-wanderwine-wisdom": _poolSyggWanderwineWisdom,
   "pool/sylvan-advocate": _poolSylvanAdvocate,
   "pool/sylvan-anthem": _poolSylvanAnthem,
   "pool/sylvan-awakening": _poolSylvanAwakening,
@@ -74932,6 +75093,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tek": _poolTek,
   "pool/tel-jilad-archers": _poolTelJiladArchers,
   "pool/tel-jilad-chosen": _poolTelJiladChosen,
+  "pool/tel-jilad-defiance": _poolTelJiladDefiance,
   "pool/tel-jilad-exile": _poolTelJiladExile,
   "pool/tel-jilad-fallen": _poolTelJiladFallen,
   "pool/tel-jilad-justice": _poolTelJiladJustice,
@@ -75062,6 +75224,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/terminate": _poolTerminate,
   "pool/termination-facilitator": _poolTerminationFacilitator,
   "pool/terohs-faithful": _poolTerohsFaithful,
+  "pool/terohs-vanguard": _poolTerohsVanguard,
   "pool/terra-eternal": _poolTerraEternal,
   "pool/terra-herald-of-hope": _poolTerraHeraldOfHope,
   "pool/terra-stomper": _poolTerraStomper,
@@ -75459,6 +75622,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thornscape-apprentice": _poolThornscapeApprentice,
   "pool/thornscape-battlemage": _poolThornscapeBattlemage,
   "pool/thornscape-familiar": _poolThornscapeFamiliar,
+  "pool/thornscape-master": _poolThornscapeMaster,
   "pool/thornspire-verge": _poolThornspireVerge,
   "pool/thorntooth-witch": _poolThorntoothWitch,
   "pool/thornwatch-scarecrow": _poolThornwatchScarecrow,
@@ -75954,6 +76118,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tower-of-eons": _poolTowerOfEons,
   "pool/tower-of-fortunes": _poolTowerOfFortunes,
   "pool/tower-of-murmurs": _poolTowerOfMurmurs,
+  "pool/tower-of-the-magistrate": _poolTowerOfTheMagistrate,
   "pool/tower-winder": _poolTowerWinder,
   "pool/tower-worker": _poolTowerWorker,
   "pool/towering-baloth": _poolToweringBaloth,
@@ -77595,6 +77760,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/warchief-giant": _poolWarchiefGiant,
   "pool/warclamp-mastiff": _poolWarclampMastiff,
   "pool/warcry-phoenix": _poolWarcryPhoenix,
+  "pool/ward-of-lights": _poolWardOfLights,
   "pool/ward-of-piety": _poolWardOfPiety,
   "pool/ward-sliver": _poolWardSliver,
   "pool/warded-battlements": _poolWardedBattlements,
@@ -78039,6 +78205,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/willow-elf": _poolWillowElf,
   "pool/willow-faerie": _poolWillowFaerie,
   "pool/willow-geist": _poolWillowGeist,
+  "pool/willow-priestess": _poolWillowPriestess,
   "pool/willow-satyr": _poolWillowSatyr,
   "pool/willow-wind": _poolWillowWind,
   "pool/willowdusk-essence-seer": _poolWillowduskEssenceSeer,
@@ -78156,6 +78323,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wisecrack": _poolWisecrack,
   "pool/wishcoin-crab": _poolWishcoinCrab,
   "pool/wishing-well": _poolWishingWell,
+  "pool/wishmonger": _poolWishmonger,
   "pool/wispdrinker-vampire": _poolWispdrinkerVampire,
   "pool/wispmare": _poolWispmare,
   "pool/wispweaver-angel": _poolWispweaverAngel,

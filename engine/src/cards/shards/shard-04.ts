@@ -22,6 +22,7 @@ import _poolAnimateWall from "../pool/animate-wall.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolAnoint from "../pool/anoint.js";
 import _poolAphettoExterminator from "../pool/aphetto-exterminator.js";
+import _poolApostlesBlessing from "../pool/apostles-blessing.js";
 import _poolArmWithAether from "../pool/arm-with-aether.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
@@ -424,6 +425,7 @@ import _poolMobJustice from "../pool/mob-justice.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
 import _poolMogissWarhound from "../pool/mogiss-warhound.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
+import _poolMoonlitStrider from "../pool/moonlit-strider.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMorselhoarder from "../pool/morselhoarder.js";
@@ -521,6 +523,7 @@ import _poolRavenousVampire from "../pool/ravenous-vampire.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
+import _poolRedeemTheLost from "../pool/redeem-the-lost.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
 import _poolReplicate from "../pool/replicate.js";
@@ -835,6 +838,7 @@ const shard: CardShard = {
     _poolAnkleBiter,
     _poolAnoint,
     _poolAphettoExterminator,
+    _poolApostlesBlessing,
     _poolArmWithAether,
     _poolArmoryVeteran,
     _poolAshlingTheLimitless,
@@ -1237,6 +1241,7 @@ const shard: CardShard = {
     _poolMockingbirdAceAgent,
     _poolMogissWarhound,
     _poolMomentOfValor,
+    _poolMoonlitStrider,
     _poolMoonriseIntruder,
     _poolMoonshadow,
     _poolMorselhoarder,
@@ -1334,6 +1339,7 @@ const shard: CardShard = {
     _poolRazeTheEffigy,
     _poolRecklessAmplimancer,
     _poolReckonersBargain,
+    _poolRedeemTheLost,
     _poolRedtoothVanguard,
     _poolReflectiveGolem,
     _poolReplicate,
