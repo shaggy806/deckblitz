@@ -2624,8 +2624,10 @@ export type AwaitingDecision =
       readonly together?: ZoneChoiceTogether;
       /** Before turn 1 (rule 103.6a — `Game.beginOpeningHandActions`): which
        * of `player`'s opening-hand cards that may begin the game on the
-       * battlefield do. `next` is the next player to ask, counted from the
-       * starting player. */
+       * battlefield do — or, with `destination` `"reveal"`, which to reveal
+       * for their delayed abilities (`CardDefinition.openingHandReveal`).
+       * `next` is the next question, counted two a player from the starting
+       * player. */
       readonly openingHand?: { readonly next: number };
       /** An entering permanent's amplify (rule 702.38a —
        * `CardDefinition.amplify`): `ids` are the cards in `player`'s hand

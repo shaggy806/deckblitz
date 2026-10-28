@@ -433,6 +433,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Phobos",
   "Phyrexian Germ Token",
   "Phyrexian Goblin Token",
+  "Phyrexian Goblin Token (Haste)",
   "Phyrexian Golem Token",
   "Phyrexian Horror Token",
   "Phyrexian Horror Token (Nissa, Ascended Animist)",

@@ -352,7 +352,9 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       ? together.text
       : `${action.max === 1 ? 'a card' : `${n} cards`}${together ? ` ${together.text}` : ''}`
   if (action.split === true) return `Choose ${cards}`
-  // Rule 103.6a, before turn 1: the Leylines in an opening hand.
+  // Rule 103.6a, before turn 1: the Leylines in an opening hand, or the
+  // Chancellors to reveal from it (rule 103.6b).
+  if (action.openingHand === true && action.destination === 'reveal') return 'Opening hand: choose any of these to reveal'
   if (action.openingHand === true) return 'Opening hand: choose any of these to begin the game with on the battlefield'
   // Choosing for someone else (Tasigur: an opponent picks for its controller).
   const whose = action.forPlayer === undefined ? 'your' : `${nameOf(action.forPlayer)}'s`
@@ -6466,7 +6468,7 @@ function Table({
             // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
             ...(zoneChoiceAction.destination === 'reveal' ? { noneLabel: 'Reveal none' } : {}),
-            ...(zoneChoiceAction.openingHand === true ? { noneLabel: 'Keep them in hand' } : {}),
+            ...(zoneChoiceAction.openingHand === true && zoneChoiceAction.destination !== 'reveal' ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),
             ...(zoneChoiceAction.together

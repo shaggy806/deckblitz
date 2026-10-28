@@ -127,6 +127,7 @@ import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChampionsVictory from "../pool/champions-victory.js";
+import _poolChancellorOfTheSpires from "../pool/chancellor-of-the-spires.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolCennsEnlistment,
     _poolCentaurHealer,
     _poolChampionsVictory,
+    _poolChancellorOfTheSpires,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
     _poolCharcoalDiamond,

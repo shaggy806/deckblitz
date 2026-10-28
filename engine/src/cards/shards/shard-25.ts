@@ -122,6 +122,7 @@ import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolCephalidAristocrat from "../pool/cephalid-aristocrat.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
+import _poolChancellorOfTheTangle from "../pool/chancellor-of-the-tangle.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
@@ -924,6 +925,7 @@ const shard: CardShard = {
     _poolCephalidAristocrat,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
+    _poolChancellorOfTheTangle,
     _poolChaoticGoo,
     _poolChargingTroll,
     _poolChiefOfTheEdge,

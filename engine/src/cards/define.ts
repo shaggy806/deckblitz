@@ -25,7 +25,7 @@ import type {
 import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
 import type { Color, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
-import type { PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
+import type { DelayedTriggerTiming, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
 import type { TargetSpec } from "../target.js";
 import type { Step } from "../turn.js";
 
@@ -3451,6 +3451,24 @@ export interface CardDefinition {
    * kept, its owner is asked, starting player first, which such cards to put
    * onto the battlefield (`Game.beginOpeningHandActions`). */
   readonly beginsOnBattlefield: boolean;
+  /** "You may reveal this card from your opening hand. If you do, at the
+   * beginning of the first upkeep, …" (rule 103.6b — the Chancellors, Sphinx
+   * of Foresight): once every hand is kept, its owner is asked, starting
+   * player first, which such cards to reveal; each one revealed sets up a
+   * delayed triggered ability (rule 603.7) its owner controls, firing `at`
+   * the first such step of the game — `"next-upkeep"` for "the first
+   * upkeep", `"your-next-upkeep"` for "your first upkeep",
+   * `"your-next-main-phase"` for "your first main phase of the game". The
+   * card stays in the hand (`Game.beginOpeningHandActions`). */
+  readonly openingHandReveal: OpeningHandReveal | null;
+}
+
+/** See {@link CardDefinition.openingHandReveal}. */
+export interface OpeningHandReveal {
+  readonly at: Extract<DelayedTriggerTiming, "next-upkeep" | "your-next-upkeep" | "your-next-main-phase">;
+  readonly effect: EffectSpec;
+  /** The delayed ability's text, for the log and the stack. */
+  readonly text: string;
 }
 
 /**
@@ -3580,6 +3598,7 @@ const PRINTED_ABILITY: {
   pairing: (def) => def.pairing !== null,
   canBeCommander: (def) => def.canBeCommander,
   beginsOnBattlefield: (def) => def.beginsOnBattlefield,
+  openingHandReveal: (def) => def.openingHandReveal !== null,
 };
 
 const PRINTED_ABILITY_TESTS: readonly ((def: CardDefinition) => boolean)[] = Object.values(
@@ -3810,6 +3829,7 @@ interface CardDraft {
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
   beginsOnBattlefield?: boolean;
+  openingHandReveal?: OpeningHandReveal;
 }
 
 /** Build a {@link CardDefinition} from a partial draft, filling in defaults. */
@@ -4030,5 +4050,6 @@ export function defineCard(draft: CardDraft): CardDefinition {
     pairing: draft.pairing ?? null,
     canBeCommander: draft.canBeCommander ?? false,
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
+    openingHandReveal: draft.openingHandReveal ?? null,
   };
 }

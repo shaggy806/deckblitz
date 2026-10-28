@@ -3516,6 +3516,10 @@ import _poolChanceEncounter from "./pool/chance-encounter.js";
 import _poolChanceMetElves from "./pool/chance-met-elves.js";
 import _poolChance from "./pool/chance.js";
 import _poolChancellorOfTales from "./pool/chancellor-of-tales.js";
+import _poolChancellorOfTheDross from "./pool/chancellor-of-the-dross.js";
+import _poolChancellorOfTheForge from "./pool/chancellor-of-the-forge.js";
+import _poolChancellorOfTheSpires from "./pool/chancellor-of-the-spires.js";
+import _poolChancellorOfTheTangle from "./pool/chancellor-of-the-tangle.js";
 import _poolChandler from "./pool/chandler.js";
 import _poolChandraAblaze from "./pool/chandra-ablaze.js";
 import _poolChandraAcolyteOfFlame from "./pool/chandra-acolyte-of-flame.js";
@@ -20502,6 +20506,7 @@ import _poolSphinxBoneWand from "./pool/sphinx-bone-wand.js";
 import _poolSphinxMindbreaker from "./pool/sphinx-mindbreaker.js";
 import _poolSphinxOfEnlightenment from "./pool/sphinx-of-enlightenment.js";
 import _poolSphinxOfFalseConclusions from "./pool/sphinx-of-false-conclusions.js";
+import _poolSphinxOfForesight from "./pool/sphinx-of-foresight.js";
 import _poolSphinxOfForgottenLore from "./pool/sphinx-of-forgotten-lore.js";
 import _poolSphinxOfJwarIsle from "./pool/sphinx-of-jwar-isle.js";
 import _poolSphinxOfLostTruths from "./pool/sphinx-of-lost-truths.js";
@@ -26071,6 +26076,7 @@ import _tokensPestTokenColorlessArtifact01 from "./tokens/pest-token-colorless-a
 import _tokensPestToken from "./tokens/pest-token.js";
 import _tokensPhobos from "./tokens/phobos.js";
 import _tokensPhyrexianGermToken from "./tokens/phyrexian-germ-token.js";
+import _tokensPhyrexianGoblinTokenHaste from "./tokens/phyrexian-goblin-token-haste.js";
 import _tokensPhyrexianGoblinToken from "./tokens/phyrexian-goblin-token.js";
 import _tokensPhyrexianGolemToken from "./tokens/phyrexian-golem-token.js";
 import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "./tokens/phyrexian-horror-token-nissa-ascended-animist.js";
@@ -29843,6 +29849,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChanceMetElves,
   _poolChance,
   _poolChancellorOfTales,
+  _poolChancellorOfTheDross,
+  _poolChancellorOfTheForge,
+  _poolChancellorOfTheSpires,
+  _poolChancellorOfTheTangle,
   _poolChandler,
   _poolChandraAblaze,
   _poolChandraAcolyteOfFlame,
@@ -46829,6 +46839,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSphinxMindbreaker,
   _poolSphinxOfEnlightenment,
   _poolSphinxOfFalseConclusions,
+  _poolSphinxOfForesight,
   _poolSphinxOfForgottenLore,
   _poolSphinxOfJwarIsle,
   _poolSphinxOfLostTruths,
@@ -52404,6 +52415,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensPestToken,
   _tokensPhobos,
   _tokensPhyrexianGermToken,
+  _tokensPhyrexianGoblinTokenHaste,
   _tokensPhyrexianGoblinToken,
   _tokensPhyrexianGolemToken,
   _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
@@ -56183,6 +56195,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chance-met-elves": _poolChanceMetElves,
   "pool/chance": _poolChance,
   "pool/chancellor-of-tales": _poolChancellorOfTales,
+  "pool/chancellor-of-the-dross": _poolChancellorOfTheDross,
+  "pool/chancellor-of-the-forge": _poolChancellorOfTheForge,
+  "pool/chancellor-of-the-spires": _poolChancellorOfTheSpires,
+  "pool/chancellor-of-the-tangle": _poolChancellorOfTheTangle,
   "pool/chandler": _poolChandler,
   "pool/chandra-ablaze": _poolChandraAblaze,
   "pool/chandra-acolyte-of-flame": _poolChandraAcolyteOfFlame,
@@ -73169,6 +73185,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sphinx-mindbreaker": _poolSphinxMindbreaker,
   "pool/sphinx-of-enlightenment": _poolSphinxOfEnlightenment,
   "pool/sphinx-of-false-conclusions": _poolSphinxOfFalseConclusions,
+  "pool/sphinx-of-foresight": _poolSphinxOfForesight,
   "pool/sphinx-of-forgotten-lore": _poolSphinxOfForgottenLore,
   "pool/sphinx-of-jwar-isle": _poolSphinxOfJwarIsle,
   "pool/sphinx-of-lost-truths": _poolSphinxOfLostTruths,
@@ -78738,6 +78755,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/pest-token": _tokensPestToken,
   "tokens/phobos": _tokensPhobos,
   "tokens/phyrexian-germ-token": _tokensPhyrexianGermToken,
+  "tokens/phyrexian-goblin-token-haste": _tokensPhyrexianGoblinTokenHaste,
   "tokens/phyrexian-goblin-token": _tokensPhyrexianGoblinToken,
   "tokens/phyrexian-golem-token": _tokensPhyrexianGolemToken,
   "tokens/phyrexian-horror-token-nissa-ascended-animist": _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
