@@ -550,6 +550,7 @@ import _poolRadiantPurge from "../pool/radiant-purge.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
 import _poolRaffCapashenShipsMage from "../pool/raff-capashen-ships-mage.js";
 import _poolRaffinesSilencer from "../pool/raffines-silencer.js";
+import _poolRaidingSchemes from "../pool/raiding-schemes.js";
 import _poolRailwayBrawler from "../pool/railway-brawler.js";
 import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
@@ -1378,6 +1379,7 @@ const shard: CardShard = {
     _poolRadiantSummit,
     _poolRaffCapashenShipsMage,
     _poolRaffinesSilencer,
+    _poolRaidingSchemes,
     _poolRailwayBrawler,
     _poolRakdosSignet,
     _poolRallyTheRanks,

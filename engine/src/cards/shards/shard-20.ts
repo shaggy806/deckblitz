@@ -464,6 +464,7 @@ import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
+import _poolMysticRemora from "../pool/mystic-remora.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
 import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
@@ -1337,6 +1338,7 @@ const shard: CardShard = {
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
     _poolMysticMeditation,
+    _poolMysticRemora,
     _poolMysticSnake,
     _poolNantukoTracer,
     _poolNarfiBetrayerKing,

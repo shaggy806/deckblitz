@@ -175,6 +175,7 @@ import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDelraich from "../pool/delraich.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
+import _poolDemonicJunker from "../pool/demonic-junker.js";
 import _poolDescendUponTheSinful from "../pool/descend-upon-the-sinful.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
@@ -978,6 +979,7 @@ const shard: CardShard = {
     _poolDegaDisciple,
     _poolDelraich,
     _poolDemogorgonsClutches,
+    _poolDemonicJunker,
     _poolDescendUponTheSinful,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,

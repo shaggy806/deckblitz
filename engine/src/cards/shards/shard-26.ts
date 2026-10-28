@@ -247,6 +247,7 @@ import _poolFireAtWill from "../pool/fire-at-will.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
+import _poolFlamekinVillage from "../pool/flamekin-village.js";
 import _poolFledglingDragon from "../pool/fledgling-dragon.js";
 import _poolFleetfeatherCockatrice from "../pool/fleetfeather-cockatrice.js";
 import _poolFleetfootDancer from "../pool/fleetfoot-dancer.js";
@@ -1075,6 +1076,7 @@ const shard: CardShard = {
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,
+    _poolFlamekinVillage,
     _poolFledglingDragon,
     _poolFleetfeatherCockatrice,
     _poolFleetfootDancer,

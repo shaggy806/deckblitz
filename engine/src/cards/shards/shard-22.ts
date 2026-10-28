@@ -280,6 +280,7 @@ import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
 import _poolHeWhoHungers from "../pool/he-who-hungers.js";
+import _poolHeartOfBogardan from "../pool/heart-of-bogardan.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeedTheMists from "../pool/heed-the-mists.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
@@ -1111,6 +1112,7 @@ const shard: CardShard = {
     _poolHauntedScreen,
     _poolHavocFestival,
     _poolHeWhoHungers,
+    _poolHeartOfBogardan,
     _poolHeavyBallista,
     _poolHeedTheMists,
     _poolHeirloomAuntie,

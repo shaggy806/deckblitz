@@ -124,6 +124,7 @@ import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
 import _poolChandrasFury from "../pool/chandras-fury.js";
 import _poolChandrasPyrohelix from "../pool/chandras-pyrohelix.js";
+import _poolChangingLoyalty from "../pool/changing-loyalty.js";
 import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolCivilizedScholar from "../pool/civilized-scholar.js";
@@ -950,6 +951,7 @@ const shard: CardShard = {
     _poolChandraFlameshaper,
     _poolChandrasFury,
     _poolChandrasPyrohelix,
+    _poolChangingLoyalty,
     _poolChitteringSkitterling,
     _poolChromeCourier,
     _poolCivilizedScholar,

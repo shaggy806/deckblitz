@@ -480,7 +480,8 @@
   "cost:morph-discard-card",
   "cost:morph-return-permanent",
   "amount:count-in-graveyards-same-name-as-trigger-spell",
-  "effect:skip-next-untap-step"
+  "effect:skip-next-untap-step",
+  "mechanic:opening-hand-reveal"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

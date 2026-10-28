@@ -669,6 +669,7 @@ import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
+import _poolThousandFacedShadow from "../pool/thousand-faced-shadow.js";
 import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
 import _poolThunderingMightmare from "../pool/thundering-mightmare.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolThermokarst,
     _poolThinkTwice,
     _poolThornLieutenant,
+    _poolThousandFacedShadow,
     _poolThroesOfChaos,
     _poolThunderingMightmare,
     _poolThunderwolfCavalry,

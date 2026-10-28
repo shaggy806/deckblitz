@@ -13625,6 +13625,86 @@
    "family": "cost:mana-ability-complex-costs",
    "example": "Molt Tender",
    "description": "A mana ability whose cost exiles a card from your graveyard: refused outright ('mana ability can't exile cards from a graveyard yet')."
+  },
+  "mechanic:opening-hand-reveal": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "Reveal a card from the opening hand for a delayed ability at the first upkeep or main phase (rule 103.6b): CardDefinition.openingHandReveal, built 2026-10-28 (B240). Not a cast-keyed delayed trigger (Chancellor of the Annex) nor Gemstone Caverns' begin-with-a-counter.",
+   "example": "Chancellor of the Dross"
+  },
+  "trigger:opponent-first-spell-of-game": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "An opening-hand reveal's delayed trigger on each opponent's first spell of the game, lasting past turn 1 (DelayedWhenever lapses with the turn).",
+   "example": "Chancellor of the Annex"
+  },
+  "mechanic:opening-hand-not-starting-player": {
+   "family": "mechanic:begin-game-on-battlefield",
+   "description": "Begin the game on the battlefield only if you're not the starting player, with a luck counter, exiling a card from your hand (beginsOnBattlefield is unconditional and does nothing else).",
+   "example": "Gemstone Caverns"
+  },
+  "cost:cumulative-upkeep-non-mana": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "A cumulative upkeep cost that isn't mana, life or a sacrifice (put counters on it), paid as a cost and so unpayable when impossible; unless options have no add-counter payment.",
+   "example": "Aboroth"
+  },
+  "cost:cumulative-upkeep-gain-control-land": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by gaining control of a different land you don't control per age counter; no unless option gains control.",
+   "example": "Herald of Leshrac"
+  },
+  "cost:cumulative-upkeep-graveyard-to-library": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by putting two cards from a single graveyard on the bottom of their owner's library per age counter.",
+   "example": "Jötun Grunt"
+  },
+  "cost:cumulative-upkeep-opponent-gains-life": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by an opponent (chosen per age counter) gaining life; no unless option for it.",
+   "example": "Wall of Shards"
+  },
+  "effect:create-tokens-distributed-among-opponents": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "N tokens created for opponents, each token's controller chosen separately (create-token gives all N to one player or to each opponent).",
+   "example": "Varchild's War-Riders"
+  },
+  "cost:multikicker-not-kicker": {
+   "family": "keyword:multikicker",
+   "description": "'As an additional cost, you may pay [cost] any number of times' with no keyword name: a bare multi kicker would count as kicked.",
+   "example": "Taste of Paradise"
+  },
+  "effect:copy-exception-changeling": {
+   "family": "keyword:changeling",
+   "description": "A copy exception granting changeling that subtype reads honour (withChangeling reads only the definition's keywords).",
+   "example": "Omni-Changeling"
+  },
+  "effect:exile-graveyard-linked": {
+   "family": "effect:linked-exiled-card",
+   "description": "exile-graveyard whose exiled cards are linked to the source for a later 'exiled with' ability.",
+   "example": "Nautiloid Ship"
+  },
+  "filter:has-modular": {
+   "family": "keyword:modular",
+   "description": "A filter for creatures with modular (modular is authored as a replacement plus a dies trigger, with no keyword marker).",
+   "example": "Arcbound Overseer"
+  },
+  "cost:replicate-tap-permanent": {
+   "family": "keyword:replicate",
+   "description": "A replicate cost of tapping an untapped permanent you control (kicker costs are mana strings).",
+   "example": "Exterminate!"
+  },
+  "cost:replicate-energy": {
+   "family": "keyword:replicate",
+   "description": "A replicate cost paid in energy (kicker costs are mana strings).",
+   "example": "Reiterating Bolt"
+  },
+  "trigger:solves-case": {
+   "family": "mechanic:case",
+   "description": "'Whenever you solve a Case' (solve is only an effect, with no trigger).",
+   "example": "Case File Auditor"
+  },
+  "static:grant-miracle-in-hand": {
+   "family": "keyword:miracle",
+   "description": "A static giving cards in your hand miracle, at a fixed cost or their mana cost reduced (miracle is only a printed card field).",
+   "example": "Aminatou, Veil Piercer"
   }
  },
  "groups": [

@@ -629,6 +629,7 @@ import _poolSimaYiWeiFieldMarshal from "../pool/sima-yi-wei-field-marshal.js";
 import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
+import _poolSinisterGnarlbark from "../pool/sinister-gnarlbark.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
@@ -1444,6 +1445,7 @@ const shard: CardShard = {
     _poolSimoon,
     _poolSimulacrumShaper,
     _poolSinewSliver,
+    _poolSinisterGnarlbark,
     _poolSinisterHideout,
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,

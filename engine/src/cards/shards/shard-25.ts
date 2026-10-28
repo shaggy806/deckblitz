@@ -195,6 +195,7 @@ import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
 import _poolDreadbore from "../pool/dreadbore.js";
 import _poolDreadmobile from "../pool/dreadmobile.js";
+import _poolDreamsOfTheDead from "../pool/dreams-of-the-dead.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
@@ -998,6 +999,7 @@ const shard: CardShard = {
     _poolDrakeSkullCameo,
     _poolDreadbore,
     _poolDreadmobile,
+    _poolDreamsOfTheDead,
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
