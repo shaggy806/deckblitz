@@ -52,5 +52,7 @@ describe("engine/client", () => {
     expect([...reachedFrom(path.join(SRC, "index.ts"))].map(relative)).toContain(
       "cards/generated.ts",
     );
-  });
+    // Reading every card file the barrel reaches: ~10 s alone, past the
+    // default 30 s beside verify's fuzzers (2026-10-28).
+  }, 120_000);
 });

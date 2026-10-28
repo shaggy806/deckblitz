@@ -122,6 +122,10 @@ const NO_TOKEN_PRINTING = new Set([
   "2/2 Beast Token",
   // Monkey Cage's 2/2 green Monkey: Scryfall's only Monkey tokens are the Ragavans (checked 2026-10-27).
   "Monkey Token",
+  // Errand of Duty's 1/1 white Knight with banding and Master of the Hunt's Wolves of the Hunt: neither
+  // card lists a token in the Oracle snapshot's `all_parts` (checked 2026-10-28).
+  "Knight Token (banding)",
+  "Wolves of the Hunt",
 ]);
 
 describe("token art", () => {
