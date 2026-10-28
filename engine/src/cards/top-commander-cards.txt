@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3943 already implemented / 1057 missing (marks refreshed 2026-10-28)
+3946 already implemented / 1054 missing (marks refreshed 2026-10-28)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1681,7 +1681,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1688  Shore Up                                 {U}              Instant
 [x]  1689  Ardenn, Intrepid Archaeologist           {2}{W}           Legendary Creature — Kor Scout
 [x]  1690  Gift of the Viper                        {G}              Instant
-[ ]  1691  Praetor's Grasp                          {1}{B}{B}        Sorcery
+[x]  1691  Praetor's Grasp                          {1}{B}{B}        Sorcery
 [x]  1692  Felidar Guardian                         {3}{W}           Creature — Cat Beast
 [x]  1693  Sword of Truth and Justice               {3}              Artifact — Equipment
 [x]  1694  Reforge the Soul                         {3}{R}{R}        Sorcery
@@ -2992,7 +2992,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2999  Beseech the Queen                        {2/B}{2/B}{2/B}  Sorcery
 [x]  3000  Holdout Settlement                       {0}              Land
 [ ]  3001  Comeuppance                              {3}{W}           Instant
-[ ]  3002  Bribery                                  {3}{U}{U}        Sorcery
+[x]  3002  Bribery                                  {3}{U}{U}        Sorcery
 [x]  3003  Malevolent Rumble                        {1}{G}           Sorcery
 [x]  3004  Arcanis the Omnipotent                   {3}{U}{U}{U}     Legendary Creature — Wizard
 [x]  3005  Black Waltz No. 3                        {2}{B}{R}        Legendary Creature — Wizard
@@ -3095,7 +3095,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3102  Elvish Champion                          {1}{G}{G}        Creature — Elf
 [x]  3103  Gimli of the Glittering Caves            {2}{R}           Legendary Creature — Dwarf Warrior
 [x]  3104  Howlsquad Heavy                          {2}{R}           Creature — Goblin Mercenary
-[ ]  3105  Inevitable Betrayal                      {0}              Sorcery
+[x]  3105  Inevitable Betrayal                      {0}              Sorcery
 [x]  3106  Overgrowth                               {2}{G}           Enchantment — Aura
 [x]  3107  Zombie Apocalypse                        {3}{B}{B}{B}     Sorcery
 [x]  3108  Nesting Dovehawk                         {3}{W}           Creature — Bird
