@@ -421,6 +421,7 @@ import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
 import _poolKeldonMantle from "../pool/keldon-mantle.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
+import _poolKenrithsTransformation from "../pool/kenriths-transformation.js";
 import _poolKessigDireSwine from "../pool/kessig-dire-swine.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
@@ -843,6 +844,7 @@ import _poolWingspanStride from "../pool/wingspan-stride.js";
 import _poolWinnowingForces from "../pool/winnowing-forces.js";
 import _poolWinternightStories from "../pool/winternight-stories.js";
 import _poolWintersIntervention from "../pool/winters-intervention.js";
+import _poolWishfulMerfolk from "../pool/wishful-merfolk.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWordOfBinding from "../pool/word-of-binding.js";
@@ -1293,6 +1295,7 @@ const shard: CardShard = {
     _poolKeldonMantle,
     _poolKelpieGuide,
     _poolKelsienThePlague,
+    _poolKenrithsTransformation,
     _poolKessigDireSwine,
     _poolKhenraSpellspear,
     _poolKillerWhale,
@@ -1715,6 +1718,7 @@ const shard: CardShard = {
     _poolWinnowingForces,
     _poolWinternightStories,
     _poolWintersIntervention,
+    _poolWishfulMerfolk,
     _poolWitchsCottage,
     _poolWoodlandChangeling,
     _poolWordOfBinding,

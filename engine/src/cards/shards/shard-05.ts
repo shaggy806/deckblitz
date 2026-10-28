@@ -54,6 +54,7 @@ import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
+import _poolAvatarOfHope from "../pool/avatar-of-hope.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
 import _poolAvizoa from "../pool/avizoa.js";
@@ -643,6 +644,7 @@ import _poolSkyfirePhoenix from "../pool/skyfire-phoenix.js";
 import _poolSkyshroudSentinel from "../pool/skyshroud-sentinel.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSleepersRobe from "../pool/sleepers-robe.js";
+import _poolSludgeMonster from "../pool/sludge-monster.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
@@ -872,6 +874,7 @@ const shard: CardShard = {
     _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
     _poolAvatarOfDiscord,
+    _poolAvatarOfHope,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
     _poolAvizoa,
@@ -1461,6 +1464,7 @@ const shard: CardShard = {
     _poolSkyshroudSentinel,
     _poolSlagdrillScrapper,
     _poolSleepersRobe,
+    _poolSludgeMonster,
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,

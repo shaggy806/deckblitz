@@ -695,6 +695,7 @@ import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
 import _poolSuddenShock from "../pool/sudden-shock.js";
+import _poolSugarCoat from "../pool/sugar-coat.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
@@ -757,6 +758,7 @@ import _poolTremor from "../pool/tremor.js";
 import _poolTriangleOfWar from "../pool/triangle-of-war.js";
 import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
 import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
+import _poolTrickstersElk from "../pool/tricksters-elk.js";
 import _poolTrollhide from "../pool/trollhide.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
@@ -1555,6 +1557,7 @@ const shard: CardShard = {
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
     _poolSuddenShock,
+    _poolSugarCoat,
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
@@ -1617,6 +1620,7 @@ const shard: CardShard = {
     _poolTriangleOfWar,
     _poolTributeToHorobi,
     _poolTributeToUrborg,
+    _poolTrickstersElk,
     _poolTrollhide,
     _poolTrynnChampionOfFreedom,
     _poolTuskedColossodon,

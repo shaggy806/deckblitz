@@ -121,6 +121,7 @@ import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDacksDuplicate from "../pool/dacks-duplicate.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDarkBargain from "../pool/dark-bargain.js";
+import _poolDarksteelMutation from "../pool/darksteel-mutation.js";
 import _poolDaruEncampment from "../pool/daru-encampment.js";
 import _poolDawnOfTheDead from "../pool/dawn-of-the-dead.js";
 import _poolDeadlockTrap from "../pool/deadlock-trap.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _poolDacksDuplicate,
     _poolDalekSquadron,
     _poolDarkBargain,
+    _poolDarksteelMutation,
     _poolDaruEncampment,
     _poolDawnOfTheDead,
     _poolDeadlockTrap,

@@ -410,6 +410,7 @@ import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMentalDiscipline from "../pool/mental-discipline.js";
 import _poolMercadianBazaar from "../pool/mercadian-bazaar.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
+import _poolMildManneredLibrarian from "../pool/mild-mannered-librarian.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
@@ -690,6 +691,7 @@ import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTangleAsp from "../pool/tangle-asp.js";
+import _poolTangleclawWerewolf from "../pool/tangleclaw-werewolf.js";
 import _poolTangleroot from "../pool/tangleroot.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
@@ -1252,6 +1254,7 @@ const shard: CardShard = {
     _poolMentalDiscipline,
     _poolMercadianBazaar,
     _poolMidnightMayhem,
+    _poolMildManneredLibrarian,
     _poolMindscourDragon,
     _poolMinersBane,
     _poolMinotaurWarrior,
@@ -1532,6 +1535,7 @@ const shard: CardShard = {
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTangleAsp,
+    _poolTangleclawWerewolf,
     _poolTangleroot,
     _poolTattermungeManiac,
     _poolTelJiladExile,

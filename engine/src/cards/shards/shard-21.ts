@@ -203,6 +203,7 @@ import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
 import _poolDustStalker from "../pool/dust-stalker.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
+import _poolEatenByPiranhas from "../pool/eaten-by-piranhas.js";
 import _poolEchoingTruth from "../pool/echoing-truth.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
@@ -547,6 +548,7 @@ import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRepulsorBlast from "../pool/repulsor-blast.js";
+import _poolRetroMutation from "../pool/retro-mutation.js";
 import _poolReveilleSquad from "../pool/reveille-squad.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
@@ -1018,6 +1020,7 @@ const shard: CardShard = {
     _poolDustStalker,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
+    _poolEatenByPiranhas,
     _poolEchoingTruth,
     _poolEclipsedFlamekin,
     _poolEfflorescence,
@@ -1362,6 +1365,7 @@ const shard: CardShard = {
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
     _poolRepulsorBlast,
+    _poolRetroMutation,
     _poolReveilleSquad,
     _poolRevengeOfRavens,
     _poolRewriteRegrets,

@@ -215,6 +215,7 @@ import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
+import _poolEyeOfNidhogg from "../pool/eye-of-nidhogg.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFailureComply from "../pool/failure-comply.js";
 import _poolFallenFerromancer from "../pool/fallen-ferromancer.js";
@@ -247,6 +248,7 @@ import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
 import _poolFortitude from "../pool/fortitude.js";
 import _poolFreshStart from "../pool/fresh-start.js";
 import _poolFrightshroudCourier from "../pool/frightshroud-courier.js";
+import _poolFrogify from "../pool/frogify.js";
 import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuneralMarch from "../pool/funeral-march.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
@@ -1078,6 +1080,7 @@ const shard: CardShard = {
     _poolExaltedFlamerOfTzeentch,
     _poolExpelFromOrazca,
     _poolExultantSkymarcher,
+    _poolEyeOfNidhogg,
     _poolFaerieHarbinger,
     _poolFailureComply,
     _poolFallenFerromancer,
@@ -1110,6 +1113,7 @@ const shard: CardShard = {
     _poolFortitude,
     _poolFreshStart,
     _poolFrightshroudCourier,
+    _poolFrogify,
     _poolFumikoTheLowblood,
     _poolFuneralMarch,
     _poolFuriousStrength,

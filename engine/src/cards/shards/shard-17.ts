@@ -501,6 +501,7 @@ import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
+import _poolOpalAcrolith from "../pool/opal-acrolith.js";
 import _poolOraclesInsight from "../pool/oracles-insight.js";
 import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrchardElemental from "../pool/orchard-elemental.js";
@@ -1351,6 +1352,7 @@ const shard: CardShard = {
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
+    _poolOpalAcrolith,
     _poolOraclesInsight,
     _poolOrahSkyclaveHierophant,
     _poolOrchardElemental,

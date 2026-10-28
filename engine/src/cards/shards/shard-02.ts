@@ -229,6 +229,7 @@ import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
+import _poolEntourageOfTrest from "../pool/entourage-of-trest.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEpiphanyStorm from "../pool/epiphany-storm.js";
 import _poolErrandOfDuty from "../pool/errand-of-duty.js";
@@ -520,6 +521,7 @@ import _poolPrimordialSage from "../pool/primordial-sage.js";
 import _poolPrismaticLace from "../pool/prismatic-lace.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolProfessorOfSymbology from "../pool/professor-of-symbology.js";
+import _poolProteusMachine from "../pool/proteus-machine.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPsychicWhorl from "../pool/psychic-whorl.js";
@@ -1048,6 +1050,7 @@ const shard: CardShard = {
     _poolElvishPathcutter,
     _poolEnatuGolem,
     _poolEnshroudingMist,
+    _poolEntourageOfTrest,
     _poolEphemeralShields,
     _poolEpiphanyStorm,
     _poolErrandOfDuty,
@@ -1339,6 +1342,7 @@ const shard: CardShard = {
     _poolPrismaticLace,
     _poolPrizedGriffin,
     _poolProfessorOfSymbology,
+    _poolProteusMachine,
     _poolPsychicCorrosion,
     _poolPsychicFrog,
     _poolPsychicWhorl,

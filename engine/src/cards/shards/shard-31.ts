@@ -121,6 +121,7 @@ import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCatapultFodder from "../pool/catapult-fodder.js";
 import _poolCelestialEnforcer from "../pool/celestial-enforcer.js";
+import _poolCennsTactician from "../pool/cenns-tactician.js";
 import _poolCenterSoul from "../pool/center-soul.js";
 import _poolCephalidInkshrouder from "../pool/cephalid-inkshrouder.js";
 import _poolCertainDeath from "../pool/certain-death.js";
@@ -259,6 +260,7 @@ import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFesteringMummy from "../pool/festering-mummy.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
 import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
+import _poolFibrousEntangler from "../pool/fibrous-entangler.js";
 import _poolFiendBinder from "../pool/fiend-binder.js";
 import _poolFierceInvocation from "../pool/fierce-invocation.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
@@ -397,6 +399,7 @@ import _poolInspirit from "../pool/inspirit.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIntruderAlarm from "../pool/intruder-alarm.js";
+import _poolIonasBlessing from "../pool/ionas-blessing.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
 import _poolIronHills from "../pool/iron-hills.js";
@@ -435,6 +438,7 @@ import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKondaLordOfEiganjo from "../pool/konda-lord-of-eiganjo.js";
 import _poolKongmingsContraptions from "../pool/kongmings-contraptions.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
+import _poolKormusBell from "../pool/kormus-bell.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
@@ -738,6 +742,7 @@ import _poolSyrFarenTheHengehammer from "../pool/syr-faren-the-hengehammer.js";
 import _poolT45PowerArmor from "../pool/t-45-power-armor.js";
 import _poolTaintedAether from "../pool/tainted-aether.js";
 import _poolTalasLookout from "../pool/talas-lookout.js";
+import _poolTamiyosCompleation from "../pool/tamiyos-compleation.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
 import _poolTeferiTimebender from "../pool/teferi-timebender.js";
@@ -1004,6 +1009,7 @@ const shard: CardShard = {
     _poolCatalystElemental,
     _poolCatapultFodder,
     _poolCelestialEnforcer,
+    _poolCennsTactician,
     _poolCenterSoul,
     _poolCephalidInkshrouder,
     _poolCertainDeath,
@@ -1142,6 +1148,7 @@ const shard: CardShard = {
     _poolFesteringMummy,
     _poolFetidHeath,
     _poolFeveredSuspicion,
+    _poolFibrousEntangler,
     _poolFiendBinder,
     _poolFierceInvocation,
     _poolFightAsOne,
@@ -1280,6 +1287,7 @@ const shard: CardShard = {
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIntruderAlarm,
+    _poolIonasBlessing,
     _poolIronBully,
     _poolIronCrawCrusher,
     _poolIronHills,
@@ -1318,6 +1326,7 @@ const shard: CardShard = {
     _poolKondaLordOfEiganjo,
     _poolKongmingsContraptions,
     _poolKorlessaScaleSinger,
+    _poolKormusBell,
     _poolKorozdaMonitor,
     _poolKotoriPilotProdigy,
     _poolKrarkClanIronworks,
@@ -1621,6 +1630,7 @@ const shard: CardShard = {
     _poolT45PowerArmor,
     _poolTaintedAether,
     _poolTalasLookout,
+    _poolTamiyosCompleation,
     _poolTatteredMummy,
     _poolTazriBeaconOfUnity,
     _poolTeferiTimebender,

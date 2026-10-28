@@ -445,6 +445,7 @@ import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
 import _poolMindwrackHarpy from "../pool/mindwrack-harpy.js";
 import _poolMinersGuidewing from "../pool/miners-guidewing.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
+import _poolMistformMutant from "../pool/mistform-mutant.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
 import _poolMoggConscripts from "../pool/mogg-conscripts.js";
@@ -690,6 +691,7 @@ import _poolStinkweedImp from "../pool/stinkweed-imp.js";
 import _poolStirringHonormancer from "../pool/stirring-honormancer.js";
 import _poolStoicGroveGuide from "../pool/stoic-grove-guide.js";
 import _poolStonewoodInvoker from "../pool/stonewood-invoker.js";
+import _poolStopCold from "../pool/stop-cold.js";
 import _poolStormSkreelix from "../pool/storm-skreelix.js";
 import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
@@ -764,6 +766,7 @@ import _poolTraitorsClutch from "../pool/traitors-clutch.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTreacherousPitDweller from "../pool/treacherous-pit-dweller.js";
 import _poolTrenchpost from "../pool/trenchpost.js";
+import _poolTrickeryCharm from "../pool/trickery-charm.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
@@ -1301,6 +1304,7 @@ const shard: CardShard = {
     _poolMindwrackHarpy,
     _poolMinersGuidewing,
     _poolMirageMirror,
+    _poolMistformMutant,
     _poolMistralCharger,
     _poolMizzixsMastery,
     _poolMoggConscripts,
@@ -1546,6 +1550,7 @@ const shard: CardShard = {
     _poolStirringHonormancer,
     _poolStoicGroveGuide,
     _poolStonewoodInvoker,
+    _poolStopCold,
     _poolStormSkreelix,
     _poolStormcarvedCoast,
     _poolStormsplitter,
@@ -1620,6 +1625,7 @@ const shard: CardShard = {
     _poolTraxosScourgeEternal,
     _poolTreacherousPitDweller,
     _poolTrenchpost,
+    _poolTrickeryCharm,
     _poolTurnBurn,
     _poolTwinstrike,
     _poolTyvarsStand,

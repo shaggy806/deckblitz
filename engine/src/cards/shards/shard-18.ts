@@ -228,6 +228,7 @@ import _poolFireRimForm from "../pool/fire-rim-form.js";
 import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlamecoreElemental from "../pool/flamecore-elemental.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
+import _poolFloodTheEngine from "../pool/flood-the-engine.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFlowstoneFlood from "../pool/flowstone-flood.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
@@ -310,6 +311,7 @@ import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHowlpackAlpha from "../pool/howlpack-alpha.js";
+import _poolHundredHandedOne from "../pool/hundred-handed-one.js";
 import _poolHuntersMark from "../pool/hunters-mark.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolHushwingGryff from "../pool/hushwing-gryff.js";
@@ -633,6 +635,7 @@ import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
 import _poolStarstorm from "../pool/starstorm.js";
+import _poolStasisField from "../pool/stasis-field.js";
 import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
@@ -1050,6 +1053,7 @@ const shard: CardShard = {
     _poolFirebolt,
     _poolFlamecoreElemental,
     _poolFlashThompsonSpiderFan,
+    _poolFloodTheEngine,
     _poolFlowOfKnowledge,
     _poolFlowstoneFlood,
     _poolFodderCannon,
@@ -1132,6 +1136,7 @@ const shard: CardShard = {
     _poolHornOfGondor,
     _poolHotshotInvestigators,
     _poolHowlpackAlpha,
+    _poolHundredHandedOne,
     _poolHuntersMark,
     _poolHurskaSweetTooth,
     _poolHushwingGryff,
@@ -1455,6 +1460,7 @@ const shard: CardShard = {
     _poolStarAthlete,
     _poolStarfallInvocation,
     _poolStarstorm,
+    _poolStasisField,
     _poolStaticPrison,
     _poolStealArtifact,
     _poolStealthMission,

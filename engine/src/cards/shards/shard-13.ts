@@ -490,6 +490,7 @@ import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
+import _poolPoppetStitcher from "../pool/poppet-stitcher.js";
 import _poolPoulticeSliver from "../pool/poultice-sliver.js";
 import _poolPrideOfTheClouds from "../pool/pride-of-the-clouds.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
@@ -727,6 +728,7 @@ import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
+import _poolUnnaturalSelection from "../pool/unnatural-selection.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUrzasFilter from "../pool/urzas-filter.js";
 import _poolUsherToSafety from "../pool/usher-to-safety.js";
@@ -1307,6 +1309,7 @@ const shard: CardShard = {
     _poolPiranhaFly,
     _poolPlanarAlly,
     _poolPlanarVoid,
+    _poolPoppetStitcher,
     _poolPoulticeSliver,
     _poolPrideOfTheClouds,
     _poolPrideOfTheRoad,
@@ -1544,6 +1547,7 @@ const shard: CardShard = {
     _poolUnexpectedFangs,
     _poolUnhallowedCathar,
     _poolUnhinge,
+    _poolUnnaturalSelection,
     _poolUnswervingSloth,
     _poolUrzasFilter,
     _poolUsherToSafety,

@@ -184,6 +184,7 @@ import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
+import _poolDonaldBlakeGuiseOfThor from "../pool/donald-blake-guise-of-thor.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
@@ -654,6 +655,7 @@ import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
 import _poolSpectacleMage from "../pool/spectacle-mage.js";
 import _poolSpectacularPileup from "../pool/spectacular-pileup.js";
 import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
+import _poolSpiderManNoMore from "../pool/spider-man-no-more.js";
 import _poolSpiderUmbra from "../pool/spider-umbra.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
@@ -998,6 +1000,7 @@ const shard: CardShard = {
     _poolDoggedPursuit,
     _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
+    _poolDonaldBlakeGuiseOfThor,
     _poolDonatelloTurtleTechie,
     _poolDovescape,
     _poolDovinsVeto,
@@ -1468,6 +1471,7 @@ const shard: CardShard = {
     _poolSpectacleMage,
     _poolSpectacularPileup,
     _poolSpiderManBrooklynVisionary,
+    _poolSpiderManNoMore,
     _poolSpiderUmbra,
     _poolSpineOfIshSah,
     _poolSpinedBasher,

@@ -184,6 +184,7 @@ import _poolDisperse from "../pool/disperse.js";
 import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
 import _poolDraconicLore from "../pool/draconic-lore.js";
+import _poolDragonsoulKnight from "../pool/dragonsoul-knight.js";
 import _poolDreadOfNight from "../pool/dread-of-night.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
@@ -360,6 +361,7 @@ import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
 import _poolIllTemperedCyclops from "../pool/ill-tempered-cyclops.js";
 import _poolImplementOfCombustion from "../pool/implement-of-combustion.js";
 import _poolInTheWebOfWar from "../pool/in-the-web-of-war.js";
+import _poolInTooDeep from "../pool/in-too-deep.js";
 import _poolIncriminatingImpetus from "../pool/incriminating-impetus.js";
 import _poolInfestedRoothold from "../pool/infested-roothold.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
@@ -1013,6 +1015,7 @@ const shard: CardShard = {
     _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
     _poolDraconicLore,
+    _poolDragonsoulKnight,
     _poolDreadOfNight,
     _poolDreadhordeInvasion,
     _poolDreamBeavers,
@@ -1189,6 +1192,7 @@ const shard: CardShard = {
     _poolIllTemperedCyclops,
     _poolImplementOfCombustion,
     _poolInTheWebOfWar,
+    _poolInTooDeep,
     _poolIncriminatingImpetus,
     _poolInfestedRoothold,
     _poolIngeniousSkaab,

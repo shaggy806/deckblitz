@@ -304,6 +304,7 @@ import _poolHypervoltGrasp from "../pool/hypervolt-grasp.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
 import _poolIcatianInfantry from "../pool/icatian-infantry.js";
 import _poolIcebindPillar from "../pool/icebind-pillar.js";
+import _poolIchthyomorphosis from "../pool/ichthyomorphosis.js";
 import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgniteDisorder from "../pool/ignite-disorder.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
@@ -1123,6 +1124,7 @@ const shard: CardShard = {
     _poolHypnoticSpecter,
     _poolIcatianInfantry,
     _poolIcebindPillar,
+    _poolIchthyomorphosis,
     _poolIconicShield,
     _poolIgniteDisorder,
     _poolIgnobleHierarch,

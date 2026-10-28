@@ -178,6 +178,7 @@ import _poolDryadGreenseeker from "../pool/dryad-greenseeker.js";
 import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
 import _poolDuneDrifter from "../pool/dune-drifter.js";
+import _poolDuskmournsDomination from "../pool/duskmourns-domination.js";
 import _poolDuskriderPeregrine from "../pool/duskrider-peregrine.js";
 import _poolDustCorona from "../pool/dust-corona.js";
 import _poolDwarvenMiner from "../pool/dwarven-miner.js";
@@ -508,6 +509,7 @@ import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPlanarCleansing from "../pool/planar-cleansing.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
+import _poolPoppetFactory from "../pool/poppet-factory.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
 import _poolPossessionEngine from "../pool/possession-engine.js";
 import _poolPounce from "../pool/pounce.js";
@@ -970,6 +972,7 @@ const shard: CardShard = {
     _poolDryadOfTheIlysianGrove,
     _poolDundoolinWeaver,
     _poolDuneDrifter,
+    _poolDuskmournsDomination,
     _poolDuskriderPeregrine,
     _poolDustCorona,
     _poolDwarvenMiner,
@@ -1300,6 +1303,7 @@ const shard: CardShard = {
     _poolPlanarCleansing,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
+    _poolPoppetFactory,
     _poolPopularEntertainer,
     _poolPossessionEngine,
     _poolPounce,

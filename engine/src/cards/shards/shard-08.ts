@@ -330,6 +330,7 @@ import _poolHeatShimmer from "../pool/heat-shimmer.js";
 import _poolHeavyweightDemolisher from "../pool/heavyweight-demolisher.js";
 import _poolHeliophial from "../pool/heliophial.js";
 import _poolHexhavenBattalion from "../pool/hexhaven-battalion.js";
+import _poolHiddenStag from "../pool/hidden-stag.js";
 import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolHeavyweightDemolisher,
     _poolHeliophial,
     _poolHexhavenBattalion,
+    _poolHiddenStag,
     _poolHierophantsChalice,
     _poolHighspireMantis,
     _poolHinterlandHarbor,

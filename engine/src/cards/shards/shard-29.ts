@@ -261,6 +261,7 @@ import _poolForiysianBrigade from "../pool/foriysian-brigade.js";
 import _poolForsakenCity from "../pool/forsaken-city.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
+import _poolFrodoSauronsBane from "../pool/frodo-saurons-bane.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
@@ -420,6 +421,7 @@ import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMinamoScrollkeeper from "../pool/minamo-scrollkeeper.js";
+import _poolMinimusContainment from "../pool/minimus-containment.js";
 import _poolMiseryCharm from "../pool/misery-charm.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
@@ -1094,6 +1096,7 @@ const shard: CardShard = {
     _poolForsakenCity,
     _poolFoulRebirth,
     _poolFracturedSanity,
+    _poolFrodoSauronsBane,
     _poolFrogTongue,
     _poolFuneralRoomAwakeningHall,
     _poolFurtiveHomunculus,
@@ -1253,6 +1256,7 @@ const shard: CardShard = {
     _poolMightstone,
     _poolMightstonesAnimation,
     _poolMinamoScrollkeeper,
+    _poolMinimusContainment,
     _poolMiseryCharm,
     _poolMishrasJuggernaut,
     _poolMishrasResearchDesk,

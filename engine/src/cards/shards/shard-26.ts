@@ -286,6 +286,7 @@ import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
 import _poolGibberingHyenas from "../pool/gibbering-hyenas.js";
 import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
+import _poolGiveNoGround from "../pool/give-no-ground.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
 import _poolGloomwidowsFeast from "../pool/gloomwidows-feast.js";
@@ -550,6 +551,7 @@ import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
+import _poolRayOfFrost from "../pool/ray-of-frost.js";
 import _poolRayOfRuin from "../pool/ray-of-ruin.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolGiantMantis,
     _poolGibberingHyenas,
     _poolGitaxianRaptor,
+    _poolGiveNoGround,
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
     _poolGloomwidowsFeast,
@@ -1387,6 +1390,7 @@ const shard: CardShard = {
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,
+    _poolRayOfFrost,
     _poolRayOfRuin,
     _poolReassemblingSkeleton,
     _poolReckonerShakedown,

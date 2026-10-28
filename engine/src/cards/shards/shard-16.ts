@@ -10,6 +10,7 @@ import _poolAccelerate from "../pool/accelerate.js";
 import _poolAdventOfTheWurm from "../pool/advent-of-the-wurm.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAetherVial from "../pool/aether-vial.js";
+import _poolAgelessSentinels from "../pool/ageless-sentinels.js";
 import _poolAkroanCrusader from "../pool/akroan-crusader.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
 import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
@@ -259,6 +260,7 @@ import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFodderLaunch from "../pool/fodder-launch.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
+import _poolForiysianTotem from "../pool/foriysian-totem.js";
 import _poolForlornPseudamma from "../pool/forlorn-pseudamma.js";
 import _poolFormlessGenesis from "../pool/formless-genesis.js";
 import _poolFoulOrchard from "../pool/foul-orchard.js";
@@ -371,6 +373,7 @@ import _poolKaysa from "../pool/kaysa.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKazuulWarlord from "../pool/kazuul-warlord.js";
 import _poolKeepsakeGorgon from "../pool/keepsake-gorgon.js";
+import _poolKellanPlanarTrailblazer from "../pool/kellan-planar-trailblazer.js";
 import _poolKessigCagebreakers from "../pool/kessig-cagebreakers.js";
 import _poolKeymasterRogue from "../pool/keymaster-rogue.js";
 import _poolKineticAugur from "../pool/kinetic-augur.js";
@@ -479,6 +482,7 @@ import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNimGrotesque from "../pool/nim-grotesque.js";
 import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
+import _poolNoggleTheMind from "../pool/noggle-the-mind.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
 import _poolOakStreetInnkeeper from "../pool/oak-street-innkeeper.js";
 import _poolOathOfEorl from "../pool/oath-of-eorl.js";
@@ -571,6 +575,7 @@ import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
 import _poolRendFlesh from "../pool/rend-flesh.js";
+import _poolReprobation from "../pool/reprobation.js";
 import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRevive from "../pool/revive.js";
@@ -892,6 +897,7 @@ const shard: CardShard = {
     _poolAdventOfTheWurm,
     _poolAesiTyrantOfGyreStrait,
     _poolAetherVial,
+    _poolAgelessSentinels,
     _poolAkroanCrusader,
     _poolAkroanJailer,
     _poolAkroanSergeant,
@@ -1141,6 +1147,7 @@ const shard: CardShard = {
     _poolFodderLaunch,
     _poolFolkOfThePines,
     _poolFomoriNomad,
+    _poolForiysianTotem,
     _poolForlornPseudamma,
     _poolFormlessGenesis,
     _poolFoulOrchard,
@@ -1253,6 +1260,7 @@ const shard: CardShard = {
     _poolKazanduValley,
     _poolKazuulWarlord,
     _poolKeepsakeGorgon,
+    _poolKellanPlanarTrailblazer,
     _poolKessigCagebreakers,
     _poolKeymasterRogue,
     _poolKineticAugur,
@@ -1361,6 +1369,7 @@ const shard: CardShard = {
     _poolNimGrotesque,
     _poolNix,
     _poolNocturnalFeeder,
+    _poolNoggleTheMind,
     _poolNoxiousNewt,
     _poolOakStreetInnkeeper,
     _poolOathOfEorl,
@@ -1453,6 +1462,7 @@ const shard: CardShard = {
     _poolRelicSloth,
     _poolRemand,
     _poolRendFlesh,
+    _poolReprobation,
     _poolRetributiveWand,
     _poolReturnToDust,
     _poolRevive,

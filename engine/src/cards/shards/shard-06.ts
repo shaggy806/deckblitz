@@ -25,6 +25,7 @@ import _poolAlleyStrangler from "../pool/alley-strangler.js";
 import _poolAllosaurusRider from "../pool/allosaurus-rider.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
+import _poolAmphibianDownpour from "../pool/amphibian-downpour.js";
 import _poolAmplifire from "../pool/amplifire.js";
 import _poolAngelOfIndemnity from "../pool/angel-of-indemnity.js";
 import _poolAngelOfRetribution from "../pool/angel-of-retribution.js";
@@ -501,6 +502,7 @@ import _poolOvikaEnigmaGoliath from "../pool/ovika-enigma-goliath.js";
 import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
 import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
+import _poolParagonOfTheAmesha from "../pool/paragon-of-the-amesha.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPartingThoughts from "../pool/parting-thoughts.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
@@ -848,6 +850,7 @@ const shard: CardShard = {
     _poolAllosaurusRider,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,
+    _poolAmphibianDownpour,
     _poolAmplifire,
     _poolAngelOfIndemnity,
     _poolAngelOfRetribution,
@@ -1324,6 +1327,7 @@ const shard: CardShard = {
     _poolOwlbearShepherd,
     _poolPacksFavor,
     _poolPaladinOfTheBloodstained,
+    _poolParagonOfTheAmesha,
     _poolPardicWanderer,
     _poolPartingThoughts,
     _poolPeerIntoTheAbyss,

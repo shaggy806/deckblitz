@@ -375,6 +375,7 @@ import _poolHowlpackWolf from "../pool/howlpack-wolf.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolHumble from "../pool/humble.js";
+import _poolHydroManFluidFelon from "../pool/hydro-man-fluid-felon.js";
 import _poolIdeasUnbound from "../pool/ideas-unbound.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
@@ -477,6 +478,8 @@ import _poolMindwhipSliver from "../pool/mindwhip-sliver.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
+import _poolMistformMask from "../pool/mistform-mask.js";
+import _poolMistformWall from "../pool/mistform-wall.js";
 import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
@@ -769,6 +772,7 @@ import _poolValorousCharge from "../pool/valorous-charge.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
 import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
+import _poolVanguardsShield from "../pool/vanguards-shield.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
@@ -1208,6 +1212,7 @@ const shard: CardShard = {
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolHumble,
+    _poolHydroManFluidFelon,
     _poolIdeasUnbound,
     _poolIdolOfTheDeepKing,
     _poolIllunaApexOfWishes,
@@ -1310,6 +1315,8 @@ const shard: CardShard = {
     _poolMirranSpy,
     _poolMirrorOfGaladriel,
     _poolMischievousSneakling,
+    _poolMistformMask,
+    _poolMistformWall,
     _poolMistwalker,
     _poolMnemonicSphere,
     _poolMoldgrafMillipede,
@@ -1602,6 +1609,7 @@ const shard: CardShard = {
     _poolVampireNighthawk,
     _poolVampireScrivener,
     _poolVanguardOfTheRose,
+    _poolVanguardsShield,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,
