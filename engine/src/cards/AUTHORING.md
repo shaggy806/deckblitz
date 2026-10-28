@@ -2486,7 +2486,11 @@ max: 3`). `maxTotalPower: N` is "with total power N or less" (Reunion of the
 House): the members' powers where they're targeted add up to at most N, as
 they're chosen (the offer's choosers narrow by it through `TargetFacts`) and
 again as it resolves, when a total gone over makes every member illegal (its
-ruling).
+ruling). `maxTotalManaValue` is the same over mana values ("with total mana
+value 3 or less" — Patch Up, March from the Tomb; `"x"` or an amount on an
+ability, read with its bounds below — Orcus, Prince of Undeath), and
+`differentManaValues: true` is "that each have a different mana value"
+(Agadeem's Awakening).
 
 **"…controlled by different players"** is `differentController: true` on an
 `other` slot with a slot relation: Run Away Together is `["creature", { kind:
@@ -2504,8 +2508,27 @@ spell whose group is its only slot — or an activated ability's: Shigeki,
 Jukai Visionary's channel "{X}{X}{G}{G}, Discard this card: Return X target
 nonlegendary cards from your graveyard to your hand" is offered once per X,
 the group that big at each, and checked at the X activated with.
-It is always the **last** slot of its list (one per list, never in a
-`castModal` mode; `any-number-targets.test.ts` walks the pool for this),
+**On a triggered or activated ability `max` and `min` take any amount**
+(`variable-target-count.test.ts`): "up to X target artifacts, where X is the
+number of Vampires you control" is `max: { countOf: … }`, "choose up to that
+many target creatures" (Heroic Feast, a reflexive ability's count) `max: {
+triggerValue: true }`, "up to X target …, where X is the number of verse
+counters on this enchantment" (Serra's Liturgy) `max: { countersOn: "source",
+counter: "verse" }`, and `"x"` on a permanent's enters ability is the X it
+was cast with (Lost in the Maze's "tap X target creatures": `min: "x", max:
+"x"`). The amount is read once, as the targets are chosen — a trigger as
+it's put on the stack (rule 603.3d), an activation before its costs are paid
+(601.2c, 602.2b: Serra's Liturgy counts its counters before it's
+sacrificed) — and the offer and the `choose-targets` prompt carry the
+number. Too few legal targets for its `min` removes a trigger (603.3d).
+In a **`castModal` mode** a group works too (Heliod's Intervention's "destroy
+X target artifacts and/or enchantments", Reality Spasm), where no later mode
+that can be chosen with it has targets: a modal spell's targets are its
+chosen modes', in order (rule 700.2), so the group is still last. X is asked
+after the modes (601.2b), and the bots fit their picks to it with
+`fitModalXGroup`.
+It is always the **last** slot of its list (one per list;
+`any-number-targets.test.ts` walks the pool for this),
 and the player fills it with none, one or as many distinct targets as there
 are (rule 601.2c): the chosen targets are one flat list, the slots before the
 group keeping their indexes and every member taking the next one on. The

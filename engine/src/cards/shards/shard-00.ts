@@ -407,6 +407,7 @@ import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLoseFocus from "../pool/lose-focus.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
+import _poolLostInTheMaze from "../pool/lost-in-the-maze.js";
 import _poolLysAlanaBowmaster from "../pool/lys-alana-bowmaster.js";
 import _poolMaelstromDjinn from "../pool/maelstrom-djinn.js";
 import _poolMagmaticChasm from "../pool/magmatic-chasm.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolLluwenExchangeStudent,
     _poolLoseFocus,
     _poolLostInSpace,
+    _poolLostInTheMaze,
     _poolLysAlanaBowmaster,
     _poolMaelstromDjinn,
     _poolMagmaticChasm,

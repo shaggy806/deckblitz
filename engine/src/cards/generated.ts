@@ -292,6 +292,8 @@ import _poolAftermathAnalyst from "./pool/aftermath-analyst.js";
 import _poolAftershock from "./pool/aftershock.js";
 import _poolAfterthoughtSentry from "./pool/afterthought-sentry.js";
 import _poolAgadeemOccultist from "./pool/agadeem-occultist.js";
+import _poolAgadeemTheUndercrypt from "./pool/agadeem-the-undercrypt.js";
+import _poolAgadeemsAwakening from "./pool/agadeems-awakening.js";
 import _poolAgainstAllOdds from "./pool/against-all-odds.js";
 import _poolAgateAssault from "./pool/agate-assault.js";
 import _poolAgateBladeAssassin from "./pool/agate-blade-assassin.js";
@@ -10108,6 +10110,7 @@ import _poolHeliodSunCrowned from "./pool/heliod-sun-crowned.js";
 import _poolHeliodTheRadiantDawn from "./pool/heliod-the-radiant-dawn.js";
 import _poolHeliodTheWarpedEclipse from "./pool/heliod-the-warped-eclipse.js";
 import _poolHeliodsEmissary from "./pool/heliods-emissary.js";
+import _poolHeliodsIntervention from "./pool/heliods-intervention.js";
 import _poolHeliodsPilgrim from "./pool/heliods-pilgrim.js";
 import _poolHelionaut from "./pool/helionaut.js";
 import _poolHeliophial from "./pool/heliophial.js";
@@ -10220,6 +10223,7 @@ import _poolHeroesOfTheRevel from "./pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "./pool/heroes-remembered.js";
 import _poolHeroesReunion from "./pool/heroes-reunion.js";
 import _poolHeroicCharge from "./pool/heroic-charge.js";
+import _poolHeroicFeast from "./pool/heroic-feast.js";
 import _poolHeroicIntervention from "./pool/heroic-intervention.js";
 import _poolHeroicReinforcements from "./pool/heroic-reinforcements.js";
 import _poolHeroicStanza from "./pool/heroic-stanza.js";
@@ -12947,6 +12951,7 @@ import _poolLostAuramancers from "./pool/lost-auramancers.js";
 import _poolLostDays from "./pool/lost-days.js";
 import _poolLostInALabyrinth from "./pool/lost-in-a-labyrinth.js";
 import _poolLostInSpace from "./pool/lost-in-space.js";
+import _poolLostInTheMaze from "./pool/lost-in-the-maze.js";
 import _poolLostInTheMist from "./pool/lost-in-the-mist.js";
 import _poolLostInTheWoods from "./pool/lost-in-the-woods.js";
 import _poolLostIsleCalling from "./pool/lost-isle-calling.js";
@@ -15785,6 +15790,7 @@ import _poolPastInFlames from "./pool/past-in-flames.js";
 import _poolPatagiaGolem from "./pool/patagia-golem.js";
 import _poolPatagiaTiger from "./pool/patagia-tiger.js";
 import _poolPatagiaViper from "./pool/patagia-viper.js";
+import _poolPatchUp from "./pool/patch-up.js";
 import _poolPatchedPlaything from "./pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "./pool/patchwork-automaton.js";
 import _poolPatchworkBeastie from "./pool/patchwork-beastie.js";
@@ -17261,6 +17267,7 @@ import _poolRealityHemorrhage from "./pool/reality-hemorrhage.js";
 import _poolRealityRipple from "./pool/reality-ripple.js";
 import _poolRealityShift from "./pool/reality-shift.js";
 import _poolRealitySmasher from "./pool/reality-smasher.js";
+import _poolRealitySpasm from "./pool/reality-spasm.js";
 import _poolRealityStrobe from "./pool/reality-strobe.js";
 import _poolReality from "./pool/reality.js";
 import _poolRealmCloakedGiant from "./pool/realm-cloaked-giant.js";
@@ -19206,6 +19213,7 @@ import _poolSerrasBlessing from "./pool/serras-blessing.js";
 import _poolSerrasBoon from "./pool/serras-boon.js";
 import _poolSerrasEmbrace from "./pool/serras-embrace.js";
 import _poolSerrasGuardian from "./pool/serras-guardian.js";
+import _poolSerrasLiturgy from "./pool/serras-liturgy.js";
 import _poolSerrasSanctum from "./pool/serras-sanctum.js";
 import _poolSerratedArrows from "./pool/serrated-arrows.js";
 import _poolSerratedBiskelion from "./pool/serrated-biskelion.js";
@@ -26780,6 +26788,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAftershock,
   _poolAfterthoughtSentry,
   _poolAgadeemOccultist,
+  _poolAgadeemTheUndercrypt,
+  _poolAgadeemsAwakening,
   _poolAgainstAllOdds,
   _poolAgateAssault,
   _poolAgateBladeAssassin,
@@ -36596,6 +36606,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeliodTheRadiantDawn,
   _poolHeliodTheWarpedEclipse,
   _poolHeliodsEmissary,
+  _poolHeliodsIntervention,
   _poolHeliodsPilgrim,
   _poolHelionaut,
   _poolHeliophial,
@@ -36708,6 +36719,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeroesRemembered,
   _poolHeroesReunion,
   _poolHeroicCharge,
+  _poolHeroicFeast,
   _poolHeroicIntervention,
   _poolHeroicReinforcements,
   _poolHeroicStanza,
@@ -39435,6 +39447,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLostDays,
   _poolLostInALabyrinth,
   _poolLostInSpace,
+  _poolLostInTheMaze,
   _poolLostInTheMist,
   _poolLostInTheWoods,
   _poolLostIsleCalling,
@@ -42273,6 +42286,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPatagiaGolem,
   _poolPatagiaTiger,
   _poolPatagiaViper,
+  _poolPatchUp,
   _poolPatchedPlaything,
   _poolPatchworkAutomaton,
   _poolPatchworkBeastie,
@@ -43749,6 +43763,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRealityRipple,
   _poolRealityShift,
   _poolRealitySmasher,
+  _poolRealitySpasm,
   _poolRealityStrobe,
   _poolReality,
   _poolRealmCloakedGiant,
@@ -45694,6 +45709,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSerrasBoon,
   _poolSerrasEmbrace,
   _poolSerrasGuardian,
+  _poolSerrasLiturgy,
   _poolSerrasSanctum,
   _poolSerratedArrows,
   _poolSerratedBiskelion,
@@ -53281,6 +53297,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aftershock": _poolAftershock,
   "pool/afterthought-sentry": _poolAfterthoughtSentry,
   "pool/agadeem-occultist": _poolAgadeemOccultist,
+  "pool/agadeem-the-undercrypt": _poolAgadeemTheUndercrypt,
+  "pool/agadeems-awakening": _poolAgadeemsAwakening,
   "pool/against-all-odds": _poolAgainstAllOdds,
   "pool/agate-assault": _poolAgateAssault,
   "pool/agate-blade-assassin": _poolAgateBladeAssassin,
@@ -63097,6 +63115,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heliod-the-radiant-dawn": _poolHeliodTheRadiantDawn,
   "pool/heliod-the-warped-eclipse": _poolHeliodTheWarpedEclipse,
   "pool/heliods-emissary": _poolHeliodsEmissary,
+  "pool/heliods-intervention": _poolHeliodsIntervention,
   "pool/heliods-pilgrim": _poolHeliodsPilgrim,
   "pool/helionaut": _poolHelionaut,
   "pool/heliophial": _poolHeliophial,
@@ -63209,6 +63228,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heroes-remembered": _poolHeroesRemembered,
   "pool/heroes-reunion": _poolHeroesReunion,
   "pool/heroic-charge": _poolHeroicCharge,
+  "pool/heroic-feast": _poolHeroicFeast,
   "pool/heroic-intervention": _poolHeroicIntervention,
   "pool/heroic-reinforcements": _poolHeroicReinforcements,
   "pool/heroic-stanza": _poolHeroicStanza,
@@ -65936,6 +65956,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lost-days": _poolLostDays,
   "pool/lost-in-a-labyrinth": _poolLostInALabyrinth,
   "pool/lost-in-space": _poolLostInSpace,
+  "pool/lost-in-the-maze": _poolLostInTheMaze,
   "pool/lost-in-the-mist": _poolLostInTheMist,
   "pool/lost-in-the-woods": _poolLostInTheWoods,
   "pool/lost-isle-calling": _poolLostIsleCalling,
@@ -68774,6 +68795,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/patagia-golem": _poolPatagiaGolem,
   "pool/patagia-tiger": _poolPatagiaTiger,
   "pool/patagia-viper": _poolPatagiaViper,
+  "pool/patch-up": _poolPatchUp,
   "pool/patched-plaything": _poolPatchedPlaything,
   "pool/patchwork-automaton": _poolPatchworkAutomaton,
   "pool/patchwork-beastie": _poolPatchworkBeastie,
@@ -70250,6 +70272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reality-ripple": _poolRealityRipple,
   "pool/reality-shift": _poolRealityShift,
   "pool/reality-smasher": _poolRealitySmasher,
+  "pool/reality-spasm": _poolRealitySpasm,
   "pool/reality-strobe": _poolRealityStrobe,
   "pool/reality": _poolReality,
   "pool/realm-cloaked-giant": _poolRealmCloakedGiant,
@@ -72195,6 +72218,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/serras-boon": _poolSerrasBoon,
   "pool/serras-embrace": _poolSerrasEmbrace,
   "pool/serras-guardian": _poolSerrasGuardian,
+  "pool/serras-liturgy": _poolSerrasLiturgy,
   "pool/serras-sanctum": _poolSerrasSanctum,
   "pool/serrated-arrows": _poolSerratedArrows,
   "pool/serrated-biskelion": _poolSerratedBiskelion,

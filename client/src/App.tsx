@@ -28,6 +28,8 @@ import {
   groupBounds,
   groupPowerExceeded,
   isOptionalSpec,
+  manaValue,
+  parseManaCost,
   publicNameAt,
   rangeTargetCount,
   slotOptions,
@@ -282,6 +284,9 @@ interface CastPicks {
   readonly escapeExile?: readonly ObjectId[]
   /** The graveyard cards delve exiles (rule 702.66a), each paying {1}. */
   readonly delve?: readonly ObjectId[]
+  /** A modal spell's chosen modes (rule 601.2b: announced before X), so its
+   * targets are theirs at the X chosen. */
+  readonly modes?: readonly number[]
 }
 
 /** Every permanent a tap-cost offer stands for, a stack's id once per token
@@ -550,11 +555,16 @@ function currentSlotOptions(t: Targeting): readonly TargetRef[] {
   })
 }
 
-/** Who controls an object and its power, as the view shows them — a
- * creature card's in a graveyard too — for a relation among targets. */
+/** Who controls an object, its power and its mana value, as the view shows
+ * them — a creature card's in a graveyard too — for a relation among
+ * targets. */
 const viewTargetFacts = (view: PlayerView): TargetFacts => ({
   controllerOf: (ref) => (ref.kind === 'object' ? view.objects[ref.object]?.controller : undefined),
   powerOf: (ref) => (ref.kind === 'object' ? (view.objects[ref.object]?.power ?? 0) : 0),
+  manaValueOf: (ref) => {
+    const cost = ref.kind === 'object' ? view.objects[ref.object]?.manaCost : null
+    return cost === null || cost === undefined ? 0 : manaValue(parseManaCost(cost))
+  },
 })
 
 /** Whether the next pick is another member of an "any number of target …"
@@ -2413,14 +2423,17 @@ function Table({
       // for each target beyond the first"), the X chosen leaves only some
       // counts payable.
       const atX = action.targetCount === undefined ? null : targetCountAtX(action.targetCount, action.xCost, value)
+      // A modal spell's targets are its chosen modes', in order (rule 700.2).
+      const chosen = picks.modes?.map((i) => action.castModal?.modes[i]).filter((m) => m !== undefined)
       beginTargeting({
         kind: 'cast',
         source: action.card,
         abilityIndex: 0,
         label: `Cast ${action.cardName}`,
-        // A target count tied to X (Curse of the Swine) is fixed by it.
-        specs: specsAtX(action.targetSpecs, value),
-        options: action.targetOptions,
+        // A target count tied to X (Curse of the Swine, Heliod's
+        // Intervention's "X target artifacts") is fixed by it.
+        specs: specsAtX(chosen ? chosen.flatMap((m) => m.targetSpecs) : action.targetSpecs, value),
+        options: chosen ? chosen.flatMap((m) => m.targetOptions) : action.targetOptions,
         xValue: value,
         ...castExtras(action),
         ...(atX !== null ? { targetCount: atX } : {}),
@@ -2478,15 +2491,25 @@ function Table({
     const { cast, picked, ...picks } = pendingModes
     const modes = [...picked].sort((a, b) => a - b)
     setPendingModes(null)
+    // A modal spell with {X} (Clan Defiance) announces X after its modes
+    // (rule 601.2b), then its targets at that X.
+    const fixedX =
+      cast.xCost?.minX !== undefined && cast.xCost.minX === cast.xCost.maxX ? cast.xCost.maxX : undefined
+    if (cast.xCost && fixedX === undefined) {
+      setPendingX({ action: cast, value: cast.xCost.maxX, ...picks, modes })
+      return
+    }
     const chosen = modes.map((i) => cast.castModal!.modes[i])
     beginTargeting({
       kind: 'cast',
       source: cast.card,
       abilityIndex: 0,
       label: `Cast ${cast.cardName}`,
-      specs: chosen.flatMap((m) => m.targetSpecs),
+      // No {X} to pay is X of 0 (rule 107.3b), or the one X its targets fix.
+      specs: specsAtX(chosen.flatMap((m) => m.targetSpecs), fixedX ?? 0),
       options: chosen.flatMap((m) => m.targetOptions),
       modes,
+      ...(fixedX !== undefined ? { xValue: fixedX } : {}),
       ...castExtras(cast),
       ...picks,
     })
@@ -5055,7 +5078,7 @@ function Table({
           value={pendingX.value}
           onChange={(e) => {
             const n = Math.max(pxMin, Math.min(pxMax, Math.floor(Number(e.target.value) || 0)))
-            setPendingX({ action: pendingX.action, value: n })
+            setPendingX({ ...pendingX, value: n })
           }}
           style={{ width: '4rem' }}
         />
@@ -6507,15 +6530,21 @@ function Table({
           selection={
             inTargetGroup(activeTargeting)
               ? {
-                  // An "any number of" group: every member at once.
+                  // An "any number of" group: every member at once, up to
+                  // its most ("up to three target creature cards").
                   min: 0,
-                  max: zoneTargetIds.length,
+                  max: Math.min(
+                    zoneTargetIds.length,
+                    groupBounds(activeTargeting.specs[anyNumberSlot(activeTargeting.specs)] ?? 'card').max -
+                      (activeTargeting.picked.length - anyNumberSlot(activeTargeting.specs)),
+                  ),
                   eligible: zoneTargetIds,
                   noneLabel: 'Choose none',
                   onConfirm: (chosen) =>
                     pickTargetGroup(chosen.map((object) => ({ kind: 'object', object }))),
-                  // "With total power 10 or less" (Reunion of the House):
-                  // Confirm waits until the picks obey it.
+                  // "With total power 10 or less" (Reunion of the House),
+                  // "total mana value 3 or less" (Patch Up): Confirm waits
+                  // until the picks obey it.
                   fits: (chosen: readonly ObjectId[]) =>
                     !groupPowerExceeded(
                       activeTargeting.specs,

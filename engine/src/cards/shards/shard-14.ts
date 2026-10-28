@@ -11,6 +11,7 @@ import _poolAbunasChant from "../pool/abunas-chant.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
 import _poolAetherHerder from "../pool/aether-herder.js";
 import _poolAetherwindBasker from "../pool/aetherwind-basker.js";
+import _poolAgadeemTheUndercrypt from "../pool/agadeem-the-undercrypt.js";
 import _poolAgeGracedChapel from "../pool/age-graced-chapel.js";
 import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
@@ -839,6 +840,7 @@ const shard: CardShard = {
     _poolAeronautsWings,
     _poolAetherHerder,
     _poolAetherwindBasker,
+    _poolAgadeemTheUndercrypt,
     _poolAgeGracedChapel,
     _poolAgnaQela,
     _poolAgonizingSyphon,

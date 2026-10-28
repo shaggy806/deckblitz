@@ -714,6 +714,24 @@ const singularTarget = (phrase) => phrase.replace(/s( you control| an opponent c
 function quantifiedSlots(phrase, ctx) {
   let m;
   const other = (of) => (ctx.spell ? undefined : { kind: "other", of });
+  // "… with total mana value N or less" (Patch Up): a group capped by its
+  // members' total, "up to N" of them or any number.
+  if ((m = /^(any number of|up to (?:two|three|four|five)) (target .+?) with total mana value (\d+) or less( from .+)?$/i.exec(phrase))) {
+    const n = m[1].toLowerCase() === "any number of" ? undefined : numberOf(m[1].slice(6));
+    const phrase1 = `${m[2]}${m[4] ?? ""}`.replace(/ cards( from )/, " card$1");
+    const of = graveyardTargetOf(phrase1) ?? targetOf(singularTarget(phrase1));
+    if (of === undefined || (n !== undefined && typeof n !== "number")) return undefined;
+    const group = { kind: "any-number", of, ...(n !== undefined ? { max: n } : {}), maxTotalManaValue: Number(m[3]) };
+    return { slots: [ctx.target(group)], group: true };
+  }
+  // "Up to X target …" / "X target …" (rule 601.2c): a group as big as the
+  // spell's X — or, on a permanent's enters ability, the X it was cast with.
+  if ((m = /^(up to )?X target (.+)$/.exec(phrase))) {
+    const of = targetOf(`target ${singularTarget(m[2])}`);
+    if (of === undefined) return undefined;
+    const group = { kind: "any-number", of, ...(m[1] ? {} : { min: "x" }), max: "x" };
+    return { slots: [ctx.target(group)], group: true };
+  }
   if ((m = /^any number of (other )?target (.+)$/i.exec(phrase))) {
     const of = targetOf(`target ${singularTarget(m[2])}`);
     const spec = of === undefined ? undefined : m[1] ? other(of) : of;
@@ -1436,6 +1454,32 @@ export function parseSentence(sentence, ctx) {
     return filter === undefined
       ? null
       : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+  }
+  // "Destroy up to X target artifacts", "tap X target creatures" (rule
+  // 601.2c): a group as big as X, each member acted on — destroyed or exiled
+  // together (Word of Binding's, By Force's shapes).
+  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+)\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[2], ctx);
+    if (got === undefined || !got.group) return null;
+    const kind = m[1].toLowerCase();
+    return {
+      kind: "for-each-target",
+      from: got.slots[0],
+      ...(kind === "destroy" || kind === "exile" ? { simultaneous: true } : {}),
+      effect: { kind, target: got.slots[0] },
+    };
+  }
+  // "Return up to three target creature cards with total mana value 3 or
+  // less from your graveyard to the battlefield" (Patch Up): together.
+  if ((m = /^return ((?:any number of|up to \w+) target .+ with total mana value \d+ or less from your graveyard) to the battlefield\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got === undefined || !got.group) return null;
+    return {
+      kind: "for-each-target",
+      from: got.slots[0],
+      simultaneous: true,
+      effect: { kind: "put-onto-battlefield", target: got.slots[0] },
+    };
   }
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };

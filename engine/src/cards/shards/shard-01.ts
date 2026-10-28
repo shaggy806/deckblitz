@@ -513,6 +513,7 @@ import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
 import _poolRavenEagle from "../pool/raven-eagle.js";
 import _poolRavenousRotbelly from "../pool/ravenous-rotbelly.js";
 import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
+import _poolRealitySpasm from "../pool/reality-spasm.js";
 import _poolRealmCloakedGiant from "../pool/realm-cloaked-giant.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolReaperOfSheoldred from "../pool/reaper-of-sheoldred.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolRavenEagle,
     _poolRavenousRotbelly,
     _poolRazorgrassInvoker,
+    _poolRealitySpasm,
     _poolRealmCloakedGiant,
     _poolReaperKing,
     _poolReaperOfSheoldred,

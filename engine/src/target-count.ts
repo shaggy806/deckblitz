@@ -2,7 +2,7 @@
 // modifications count (Hinata, Dawn-Crowned). Pure: no state, no registry, so
 // the engine, the controllers and the bot can all ask the same questions.
 
-import { anyNumberSlot, isOptionalSpec } from "./target.js";
+import { anyNumberSlot, groupReadsX, isOptionalSpec } from "./target.js";
 import type { ObjectId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 
@@ -271,4 +271,36 @@ export function targetCountAtX(
   );
   if (counts.length === 0) return null;
   return { ...range, min: counts[0], max: counts[counts.length - 1] };
+}
+
+/**
+ * A modal spell's targets and X fitted together where its chosen modes hold
+ * a group tied to X (Heliod's Intervention's "destroy X target artifacts",
+ * Profane Command's "up to X target creatures"): the offer can't range the
+ * count against X per mode, so a driver picks targets from the modes' specs
+ * and fits them here. "Up to X" keeps at most `xCost.maxX` members and
+ * needs X at least as many; "X target …" needs X exactly as many. `x` is
+ * the X the driver would like (its most, by default), moved into what the
+ * targets allow. `null` when no X fits (fewer members than `xCost.minX`
+ * for an exact count). Specs without such a group come back as they are.
+ */
+export function fitModalXGroup(
+  specs: readonly TargetSpec[],
+  targets: readonly (TargetRef | null)[],
+  xCost: XCostOffer | undefined,
+  x?: number,
+): { readonly targets: (TargetRef | null)[]; readonly xValue?: number } | null {
+  if (!groupReadsX(specs)) return { targets: [...targets], ...(x !== undefined ? { xValue: x } : {}) };
+  const group = anyNumberSlot(specs);
+  const spec = specs[group];
+  if (typeof spec !== "object" || spec.kind !== "any-number") return { targets: [...targets] };
+  const most = xCost?.maxX ?? 0;
+  const least = xCost?.minX ?? 0;
+  const head = targets.slice(0, group);
+  const members = targets.slice(group).filter((t): t is TargetRef => t !== null).slice(0, most);
+  const k = members.length;
+  const lo = Math.max(least, spec.max === "x" ? k : 0);
+  const hi = spec.min === "x" ? Math.min(most, k) : most;
+  if (lo > hi) return null;
+  return { targets: [...head, ...members], xValue: Math.max(lo, Math.min(hi, x ?? most)) };
 }

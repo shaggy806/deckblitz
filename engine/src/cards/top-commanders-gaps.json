@@ -483,7 +483,11 @@
   "effect:skip-next-untap-step",
   "mechanic:opening-hand-reveal",
   "effect:grant-protection-choice",
-  "effect:grant-protection-temporary"
+  "effect:grant-protection-temporary",
+  "decision:variable-target-count",
+  "decision:x-targets",
+  "decision:target-total-mana-value",
+  "decision:any-number-targets-in-mode"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

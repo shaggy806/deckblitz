@@ -58,12 +58,12 @@ import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName } from "./state.js";
-import { anyNumberSlot, groupBounds, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
+import { anyNumberSlot, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
 import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
 import { legalTargets, stateTargetFacts } from "./targeting.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import type { DungeonDefinition, DungeonRoom } from "./cards/dungeons.js";
-import { fitTargetCount, maxXForTargets, minXForTargets } from "./target-count.js";
+import { fitModalXGroup, fitTargetCount, maxXForTargets, minXForTargets } from "./target-count.js";
 import {
   auraPolarity,
   damageLands,
@@ -1592,19 +1592,33 @@ export class RandomController extends AutomaticController {
           // Each mode's own relations ("another target opponent" — Will of
           // the Abzan) narrow its slots as they're picked.
           const picked = modes.flatMap((i) => this.pickTargets(cm.modes[i].targetOptions, cm.modes[i].targetSpecs));
-          const targets = fitCastTargets(
+          const fitted = fitCastTargets(
             legal,
             picked,
             modes.flatMap((i) => cm.modes[i].targetOptions),
             modes.flatMap((i) => cm.modes[i].targetSpecs),
           );
-          if (targets === null) return passFor(player);
+          if (fitted === null) return passFor(player);
+          // A group tied to X in a chosen mode (Heliod's Intervention): its
+          // members and X fitted together, X drawn from what they allow.
+          const modeSpecs = modes.flatMap((i) => cm.modes[i].targetSpecs);
+          const withX = groupReadsX(modeSpecs) ? fitModalXGroup(modeSpecs, fitted, legal.xCost, 0) : null;
+          if (groupReadsX(modeSpecs) && withX === null) return passFor(player);
+          const targets = withX?.targets ?? fitted;
+          const modalX =
+            withX?.xValue === undefined
+              ? undefined
+              : withX.xValue +
+                this.pickIndex(
+                  Math.max(0, (fitModalXGroup(modeSpecs, targets, legal.xCost)?.xValue ?? withX.xValue) - withX.xValue) + 1,
+                );
           return {
             type: "cast-spell",
             player,
             card: legal.card,
             targets,
             modes,
+            ...(modalX !== undefined ? { xValue: modalX } : {}),
             ...(legal.via !== undefined ? { via: legal.via } : {}),
             ...(legal.graveyardGrant !== undefined ? { graveyardGrant: legal.graveyardGrant } : {}),
             ...(legal.face !== undefined ? { face: legal.face } : {}),
@@ -2534,7 +2548,7 @@ export class HeuristicBotController extends AutomaticController {
       const byMode = modalPolarities(this.registry, legal, polarityBias(state, this.playerId));
       const modes = this.usableModes(state, legal);
       if (modes === null) return passFor(player);
-      const targets = fitCastTargets(
+      const fitted = fitCastTargets(
         legal,
         modes.flatMap((i) =>
           this.aimedTargets(state, cm.modes[i].targetOptions, cm.modes[i].targetSpecs, byMode?.[i] ?? null),
@@ -2542,11 +2556,16 @@ export class HeuristicBotController extends AutomaticController {
         modes.flatMap((i) => cm.modes[i].targetOptions),
         modes.flatMap((i) => cm.modes[i].targetSpecs),
       );
-      if (targets === null) return passFor(player);
+      if (fitted === null) return passFor(player);
       // A modal spell with X (Clan Defiance) is cast at its largest X like
       // any other. Left out, the engine reads X as 0 — which is how this bot
-      // used to cast it, for no damage at all.
-      const modalX = legal.xCost === undefined ? undefined : maxXForTargets(legal.xCost, legal.targetCount, targets);
+      // used to cast it, for no damage at all. A group tied to X in a chosen
+      // mode (Heliod's Intervention) fits its members to that X.
+      const largestX = legal.xCost === undefined ? undefined : maxXForTargets(legal.xCost, legal.targetCount, fitted);
+      const withX = fitModalXGroup(modes.flatMap((i) => cm.modes[i].targetSpecs), fitted, legal.xCost, largestX);
+      if (withX === null) return passFor(player);
+      const targets = withX.targets;
+      const modalX = legal.xCost === undefined ? undefined : withX.xValue;
       return {
         type: "cast-spell",
         player,

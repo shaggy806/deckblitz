@@ -9,7 +9,7 @@ import {
   playerHasProtectionFromEverything,
   withComputedCache,
 } from "./characteristics.js";
-import { filterReadsX, matchesFilter } from "./filter.js";
+import { filterReadsX, manaValueOfObject, matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -19,6 +19,7 @@ import {
   anyNumberSlot,
   concreteTargetSpecs,
   groupBounds,
+  groupManaValueBroken,
   groupPowerExceeded,
   isOptionalSpec,
   otherSlotConflict,
@@ -922,6 +923,9 @@ export function invalidTargetReason(
   }
   // The group's "total power N or less" — judged on the spec list as
   // declared, whose group carries it.
+  if (groupManaValueBroken(declared, chosen, facts)) {
+    return `${name}'s targets break their mana value limit`;
+  }
   if (groupPowerExceeded(declared, chosen, facts)) return `${name}'s targets have too much total power`;
   return null;
 }
@@ -938,6 +942,10 @@ export function stateTargetFacts(state: GameState, registry: CardRegistry): Targ
     powerOf: (ref) =>
       ref.kind === "object" && state.objects[ref.object] !== undefined
         ? computeCharacteristics(state, registry, ref.object).power
+        : 0,
+    manaValueOf: (ref) =>
+      ref.kind === "object" && state.objects[ref.object] !== undefined
+        ? manaValueOfObject(registry, state.objects[ref.object])
         : 0,
   };
 }

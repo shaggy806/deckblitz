@@ -5566,6 +5566,18 @@ engine terms. A second thing to check is a second test.
 
 ## Skipping an untap step (2026-10-27, recheck list R5)
 
+### Heliod's Intervention: choose the mode, then X, then exactly X targets
+- **Do:** Cast Heliod's Intervention, choose "Destroy X target artifacts and/or enchantments", then X = 2.
+- **Expect:** X is asked after the mode. The targeting prompt asks for exactly two artifacts or enchantments; after picking two of Bob's Sol Rings both are destroyed and the third stays.
+
+### Patch Up: only cards that fit under total mana value 3
+- **Do:** Cast Patch Up and pick Grizzly Bears from your graveyard first.
+- **Expect:** After the Bears, only Savannah Lions can still be added (Hill Giant would take the total past 3). Confirm returns the Bears and the Lions to the battlefield.
+
+### Heroic Feast: up to as many targets as the life you gained
+- **Do:** Activate the Food token (pay {2}, tap and sacrifice it) and let it resolve.
+- **Expect:** You gain 3 life, then Heroic Feast asks for up to three creatures you control. Each one chosen gets a +1/+1 counter.
+
 ### Avizoa: you skip your next untap step
 - **Do:** Activate Avizoa's {0} ability, then pass until your next turn.
 - **Expect:** Avizoa is 4/4 until end of turn. On your next turn the log says "Alice skips their untap step" and your tapped Islands stay tapped; on the turn after that they untap as usual.

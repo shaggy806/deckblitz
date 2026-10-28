@@ -328,6 +328,7 @@ import _poolHearthKami from "../pool/hearth-kami.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
+import _poolHeliodsIntervention from "../pool/heliods-intervention.js";
 import _poolHellkiteIgniter from "../pool/hellkite-igniter.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolHeatedArgument,
     _poolHedgeMaze,
     _poolHeiBaiSpiritOfBalance,
+    _poolHeliodsIntervention,
     _poolHellkiteIgniter,
     _poolHenchbots,
     _poolHeraldOfKozilek,

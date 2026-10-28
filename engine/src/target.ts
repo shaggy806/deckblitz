@@ -1,6 +1,7 @@
 /** Reference types for spell / ability targets. Pure data, no logic. */
 
 import type { CardType } from "./cards.js";
+import type { EffectAmount } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -317,17 +318,40 @@ export type TargetSpec =
        * (Pest Infestation). X is announced before targets are chosen (rule
        * 601.2b–c), so a choice is judged at the X it was cast with — see
        * {@link specsAtX}. Only on a spell or activated ability whose group
-       * is its only slot (Shigeki, Jukai Visionary's channel). */
-      readonly max?: number | "x";
+       * is its only slot (Shigeki, Jukai Visionary's channel).
+       *
+       * On a triggered or activated ability any {@link EffectAmount} will do
+       * — "up to X target artifacts, where X is the number of Vampires you
+       * control" (Midnight Arsonist), "up to that many" (a reflexive
+       * ability's `{ triggerValue: true }`), and `"x"` the ability's own X
+       * (a permanent's enters ability reads the X it was cast with). It is
+       * read once, as the targets are chosen: as the ability is put on the
+       * stack (rule 603.3d), or as it is activated, before its costs are
+       * paid (601.2c, 602.2b — Serra's Liturgy counts its verse counters
+       * before it's sacrificed). The count is fixed from then on, like any
+       * group's ({@link concreteTargetSpecs}); see {@link specsWithAmounts}. */
+      readonly max?: EffectAmount;
       /** At least this many: `"x"` with `max: "x"` is exactly X — Curse of
-       * the Swine's "exile **X** target creatures". */
-      readonly min?: number | "x";
+       * the Swine's "exile **X** target creatures"; on an ability, any
+       * amount, as `max` (Lost in the Maze's "tap X target creatures"). */
+      readonly min?: EffectAmount;
       /** "…with total power N or less" (Reunion of the House): the members'
        * powers, as they are where they're targeted, add up to at most this.
        * Checked as they're chosen and again as the spell resolves, when a
        * total over it makes every member illegal (the ruling). Needs
        * {@link TargetFacts}. */
       readonly maxTotalPower?: number;
+      /** "…with total mana value N or less" (Patch Up, March from the
+       * Tomb): as `maxTotalPower`, over the members' mana values. An
+       * amount on an ability, read with its bounds (Orcus, Prince of
+       * Undeath's "total mana value X or less"; Ancient Brass Dragon's
+       * die roll, a reflexive ability's `{ triggerValue: true }`); `"x"`
+       * on a spell is its X. Needs {@link TargetFacts}' `manaValueOf`. */
+      readonly maxTotalManaValue?: EffectAmount;
+      /** "…that each have a **different** mana value" (Agadeem's
+       * Awakening): no two members share one. Checked as they're chosen
+       * and again as it resolves, as the totals are. */
+      readonly differentManaValues?: true;
     };
 
 /**
@@ -340,6 +364,9 @@ export type TargetSpec =
 export interface TargetFacts {
   readonly controllerOf: (ref: TargetRef) => PlayerId | undefined;
   readonly powerOf: (ref: TargetRef) => number;
+  /** Its mana value where it is — for a group's `maxTotalManaValue` and
+   * `differentManaValues`. Without it those narrow nothing. */
+  readonly manaValueOf?: (ref: TargetRef) => number;
 }
 
 /** Is slot `spec` "…controlled by different players" from the slots its
@@ -356,6 +383,14 @@ export function groupMaxTotalPower(spec: TargetSpec | undefined): number | undef
   return typeof spec === "object" && spec.kind === "any-number" ? spec.maxTotalPower : undefined;
 }
 
+/** A group's "total mana value N or less", once fixed at a number — an
+ * unread amount caps nothing yet ({@link specsWithAmounts}). */
+export function groupMaxTotalManaValue(spec: TargetSpec | undefined): number | undefined {
+  return typeof spec === "object" && spec.kind === "any-number" && typeof spec.maxTotalManaValue === "number"
+    ? spec.maxTotalManaValue
+    : undefined;
+}
+
 /** Does this list have an "any number of target …" group whose size is tied
  * to the spell's X (`min` or `max` of `"x"`)? */
 export function groupReadsX(specs: readonly TargetSpec[]): boolean {
@@ -363,19 +398,65 @@ export function groupReadsX(specs: readonly TargetSpec[]): boolean {
   return typeof spec === "object" && spec.kind === "any-number" && (spec.max === "x" || spec.min === "x");
 }
 
-/** `specs` with an "any number of target …" group's `"x"` bounds fixed at
- * `x` — what a choice made at that X is judged against (rule 601.2c). */
+/** `specs` with an "any number of target …" group's `"x"` bounds (and a
+ * `"x"` total mana value) fixed at `x` — what a choice made at that X is
+ * judged against (rule 601.2c). */
 export function specsAtX(specs: readonly TargetSpec[], x: number): readonly TargetSpec[] {
-  if (!groupReadsX(specs)) return specs;
+  const spec = specs[anyNumberSlot(specs)];
+  if (!groupReadsX(specs) && !(typeof spec === "object" && spec.kind === "any-number" && spec.maxTotalManaValue === "x")) {
+    return specs;
+  }
   return specs.map((spec) =>
     typeof spec === "object" && spec.kind === "any-number"
       ? {
           ...spec,
           ...(spec.max === "x" ? { max: x } : {}),
           ...(spec.min === "x" ? { min: x } : {}),
+          ...(spec.maxTotalManaValue === "x" ? { maxTotalManaValue: x } : {}),
         }
       : spec,
   );
+}
+
+/** Does this list's "any number of target …" group have a bound or a total
+ * that isn't a number yet — an amount (or `"x"`) an ability reads as its
+ * targets are chosen? */
+export function groupReadsAmount(specs: readonly TargetSpec[]): boolean {
+  const spec = specs[anyNumberSlot(specs)];
+  return (
+    typeof spec === "object" &&
+    spec.kind === "any-number" &&
+    [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number")
+  );
+}
+
+/**
+ * `specs` with every amount in its "any number of target …" group — `max`,
+ * `min`, `maxTotalManaValue` — read by `value` into a number: a triggered
+ * ability's as it's put on the stack, an activated one's as it's activated
+ * (see the group's `max`). Everything from there judges a choice against the
+ * numbers, and the ability on the stack keeps the count it was given. An
+ * amount `value` answers `undefined` for stays as it is.
+ */
+export function specsWithAmounts(
+  specs: readonly TargetSpec[],
+  value: (amount: EffectAmount) => number | undefined,
+): readonly TargetSpec[] {
+  if (!groupReadsAmount(specs)) return specs;
+  // `undefined` from `value` leaves that amount unread.
+  const read = (a: EffectAmount | undefined) => (a === undefined || typeof a === "number" ? a : (value(a) ?? a));
+  return specs.map((spec) => {
+    if (typeof spec !== "object" || spec.kind !== "any-number") return spec;
+    const max = read(spec.max);
+    const min = read(spec.min);
+    const total = read(spec.maxTotalManaValue);
+    return {
+      ...spec,
+      ...(max !== undefined ? { max } : {}),
+      ...(min !== undefined ? { min } : {}),
+      ...(total !== undefined ? { maxTotalManaValue: total } : {}),
+    };
+  });
 }
 
 /** A group's numeric bounds; an unfixed `"x"` bounds nothing. */
@@ -626,12 +707,27 @@ export function slotOptions(
     if (taken.length >= groupBounds(spec).max) {
       return [];
     }
-    const left = (options[group] ?? []).filter((ref) => !taken.some((t) => sameTarget(ref, t)));
+    let left = (options[group] ?? []).filter((ref) => !taken.some((t) => sameTarget(ref, t)));
+    if (facts === undefined) return left;
     // "With total power 10 or less": only what still fits.
     const most = groupMaxTotalPower(spec);
-    if (most === undefined || facts === undefined) return left;
-    const budget = most - taken.reduce((n, t) => n + facts.powerOf(t), 0);
-    return left.filter((ref) => facts.powerOf(ref) <= budget);
+    if (most !== undefined) {
+      const budget = most - taken.reduce((n, t) => n + facts.powerOf(t), 0);
+      left = left.filter((ref) => facts.powerOf(ref) <= budget);
+    }
+    // So for "total mana value 3 or less", and "each a different mana value".
+    const manaValueOf = facts.manaValueOf;
+    if (manaValueOf === undefined) return left;
+    const mostMv = groupMaxTotalManaValue(spec);
+    if (mostMv !== undefined) {
+      const budget = mostMv - taken.reduce((n, t) => n + manaValueOf(t), 0);
+      left = left.filter((ref) => manaValueOf(ref) <= budget);
+    }
+    if (typeof spec === "object" && spec.kind === "any-number" && spec.differentManaValues === true) {
+      const used = new Set(taken.map(manaValueOf));
+      left = left.filter((ref) => !used.has(manaValueOf(ref)));
+    }
+    return left;
   }
   const all = options[i] ?? [];
   const than = specs[i] === undefined ? undefined : otherThan(specs[i]);
@@ -721,12 +817,33 @@ export function groupPowerExceeded(
   facts?: TargetFacts,
 ): boolean {
   const group = anyNumberSlot(specs);
-  const most = group < 0 ? undefined : groupMaxTotalPower(specs[group]);
-  if (most === undefined || facts === undefined) return false;
-  const total = chosen
+  if (group < 0 || facts === undefined) return false;
+  const members = chosen.slice(group).filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
+  const most = groupMaxTotalPower(specs[group]);
+  if (most !== undefined && members.reduce((n, ref) => n + facts.powerOf(ref), 0) > most) return true;
+  return groupManaValueBroken(specs, chosen, facts);
+}
+
+/** Whether `chosen`'s group breaks its "total mana value N or less" (Patch
+ * Up) or its "each a different mana value" (Agadeem's Awakening) — `false`
+ * without either, or without the facts to tell. */
+export function groupManaValueBroken(
+  specs: readonly TargetSpec[],
+  chosen: readonly (TargetRef | null | undefined)[],
+  facts?: TargetFacts,
+): boolean {
+  const group = anyNumberSlot(specs);
+  const manaValueOf = facts?.manaValueOf;
+  if (group < 0 || manaValueOf === undefined) return false;
+  const spec = specs[group];
+  const values = chosen
     .slice(group)
-    .reduce((n, ref) => (ref === null || ref === undefined ? n : n + facts.powerOf(ref)), 0);
-  return total > most;
+    .filter((ref): ref is TargetRef => ref !== null && ref !== undefined)
+    .map(manaValueOf);
+  const most = groupMaxTotalManaValue(spec);
+  if (most !== undefined && values.reduce((n, v) => n + v, 0) > most) return true;
+  const distinct = typeof spec === "object" && spec.kind === "any-number" && spec.differentManaValues === true;
+  return distinct && new Set(values).size < values.length;
 }
 
 /**
@@ -741,7 +858,17 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
   if (spec.kind === "any-number") {
     // Fireball's "any number of targets", not "any number of any target".
     const many =
-      spec.max === "x" ? (spec.min === "x" ? "X" : "up to X") : "any number of";
+      spec.max === "x"
+        ? spec.min === "x"
+          ? "X"
+          : "up to X"
+        : typeof spec.max === "number"
+          ? spec.min === spec.max
+            ? `${spec.max}`
+            : `up to ${spec.max}`
+          : spec.max !== undefined
+            ? "up to X"
+            : "any number of";
     return spec.of === "any-target" ? `${many} targets` : `${many} ${describeTargetSpec(spec.of)}`;
   }
   if (spec.kind === "other") {

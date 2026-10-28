@@ -520,6 +520,7 @@ import _poolOvinomancer from "../pool/ovinomancer.js";
 import _poolPalazzoArchers from "../pool/palazzo-archers.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
+import _poolPatchUp from "../pool/patch-up.js";
 import _poolPeregrination from "../pool/peregrination.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolPalazzoArchers,
     _poolPanharmonicon,
     _poolPantherWarriors,
+    _poolPatchUp,
     _poolPeregrination,
     _poolPestilentSpirit,
     _poolPhantasmalShieldback,

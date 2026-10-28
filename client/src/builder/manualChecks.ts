@@ -8390,6 +8390,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Flickering Ward: naming its own colour doesn't knock it off",
     board({ you: { bf: ['Plains*3', 'Grizzly Bears'], hand: ['Flickering Ward', 'Pacifism'] } }),
   ),
+  // --- Variable target counts (2026-10-28, variable-target-count family) ----
+  preset(
+    "Heliod's Intervention: choose the mode, then X, then exactly X targets",
+    board({ you: { bf: ['Plains*4'], hand: ["Heliod's Intervention"] }, opp: { bf: ['Sol Ring*3'] } }),
+  ),
+  preset(
+    'Patch Up: only cards that fit under total mana value 3',
+    board({ you: { bf: ['Plains*3'], hand: ['Patch Up'], gy: ['Grizzly Bears', 'Savannah Lions', 'Hill Giant'] } }),
+  ),
+  preset(
+    'Heroic Feast: up to as many targets as the life you gained',
+    board({ you: { bf: ['Heroic Feast', 'Food Token', 'Wastes*2', 'Grizzly Bears*4'] } }),
+  ),
   // --- Skipping an untap step (2026-10-27, recheck list R5) -----------------
   preset(
     'Avizoa: you skip your next untap step',

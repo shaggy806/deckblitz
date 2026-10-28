@@ -1081,6 +1081,45 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toBe(false);
   });
 
+  it("X target groups and a total mana value cap (rule 601.2c)", () => {
+    const face = (type_line: string, oracle_text: string) =>
+      parseFace({ name: "Test Group", type_line, oracle_text }, { tokenFor: () => null });
+    // "Tap X target creatures": exactly X (Word of Binding's shape).
+    const tap = face("Sorcery", "Tap X target creatures.");
+    expect(tap.targets).toEqual([{ kind: "any-number", of: "creature", min: "x", max: "x" }]);
+    expect(tap.effect).toEqual({ kind: "for-each-target", from: 0, effect: { kind: "tap", target: 0 } });
+    // "Destroy up to X target artifacts": at most X, destroyed together.
+    const destroy = face("Sorcery", "Destroy up to X target artifacts.");
+    expect(destroy.targets).toEqual([{ kind: "any-number", of: "artifact", max: "x" }]);
+    expect(destroy.effect).toEqual({
+      kind: "for-each-target",
+      from: 0,
+      simultaneous: true,
+      effect: { kind: "destroy", target: 0 },
+    });
+    // Patch Up: up to three, their total mana value capped.
+    const patch = face(
+      "Sorcery",
+      "Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield.",
+    );
+    expect(patch.targets).toEqual([
+      {
+        kind: "any-number",
+        of: { kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } },
+        max: 3,
+        maxTotalManaValue: 3,
+      },
+    ]);
+    expect(patch.effect).toEqual({
+      kind: "for-each-target",
+      from: 0,
+      simultaneous: true,
+      effect: { kind: "put-onto-battlefield", target: 0 },
+    });
+    // An X a rule defines ("where X is …") is a person's to read.
+    expect(face("Sorcery", "Destroy up to X target artifacts, where X is the number of Vampires you control.").complete).toBe(false);
+  });
+
   it("airbend (rule 701.65a): each quantity of target, all other creatures, 'that creature', and the hand-only lock", () => {
     const airbend = (target: unknown) => ({ kind: "exile", target, airbend: true });
     const yours = { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } };

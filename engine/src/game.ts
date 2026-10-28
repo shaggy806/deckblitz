@@ -356,9 +356,11 @@ import {
   divisionOf as spellDivision,
   groupBounds,
   groupPowerExceeded,
+  groupReadsAmount,
   groupReadsX,
   otherThanSlots,
   specsAtX,
+  specsWithAmounts,
   describeTargetSpec,
   isOptionalSpec,
   normalizeTargets,
@@ -1940,7 +1942,7 @@ export class Game {
         if (ability !== undefined) {
           const xValue = action.xValue ?? 0;
           return this.whyTargetsInvalid(
-            groupReadsX(ability.targets) ? specsAtX(ability.targets, xValue) : ability.targets,
+            this.activatedSpecsAt(ability.targets, action.source, action.player, xValue),
             normalizeTargets(action.targets),
             action.player,
             `${this.registry.get(printedCardName(this.state.objects[action.source])).name}'s ability`,
@@ -2643,7 +2645,7 @@ export class Game {
         // targets, each with that X fixed and that X's options. So is "X
         // target cards" (Shigeki's channel): the group is X big at each.
         for (let x = minX; x <= maxX; x += 1) {
-          const specs = specsAtX(ability.targets, x);
+          const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const options = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
           if (targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) {
             push(options, { minX: x, maxX: x }, specs);
@@ -2662,6 +2664,8 @@ export class Game {
           () => this.whyCannotActivateAbility(player, source, index) === null,
         ),
         maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined,
+        // "Up to X target …, where X is …": the count it has as activated.
+        this.activatedSpecsAt(ability.targets, source, player, undefined),
       );
     };
 
@@ -14928,7 +14932,7 @@ export class Game {
     // creature: … target creature" may target its own source (Dina).
     if (x !== undefined || !ability.targets.some(targetSpecReadsX)) {
       // "X target cards": the group is X big once X is known.
-      const specs = x === undefined ? ability.targets : specsAtX(ability.targets, x);
+      const specs = this.activatedSpecsAt(ability.targets, sourceId, player, x);
       const abilityOptions = specs.map((spec) =>
         legalTargets(this.state, this.registry, spec, player, this.permanentSource(sourceId, x)),
       );
@@ -15156,7 +15160,7 @@ export class Game {
 
       const badTarget = this.whyTargetsInvalid(
         // "X target cards" (Shigeki's channel): exactly the X it's activated with.
-        groupReadsX(ability.targets) ? specsAtX(ability.targets, xValue ?? 0) : ability.targets,
+        this.activatedSpecsAt(ability.targets, sourceId, player, xValue ?? 0),
         targets,
         player,
         `${def.name}'s ability`,
@@ -18778,7 +18782,19 @@ export class Game {
 
     // Target filters re-read their dynamic operands now (rule 608.2b): the
     // triggering object may have changed or left since.
-    const specs = triggerTargetSpecs(ability, object.chosenModes);
+    // A group's "total mana value X or less" reads its X (or trigger value)
+    // again, which the ability carries unchanged.
+    const specs = this.triggerSpecsWithAmounts(
+      {
+        sourceObjectId: source,
+        controller: object.controller,
+        ...(object.triggerValue !== undefined ? { triggerValue: object.triggerValue } : {}),
+        ...(object.triggerObject !== undefined ? { triggerObject: object.triggerObject } : {}),
+        ...(object.xValue !== undefined && object.xValue !== null ? { x: object.xValue } : {}),
+        ...(object.lastKnownRefs !== undefined ? { lastKnownRefs: object.lastKnownRefs } : {}),
+      },
+      triggerTargetSpecs(ability, object.chosenModes),
+    );
     const targetSource =
       specs.length === 0
         ? undefined
@@ -21668,7 +21684,9 @@ export class Game {
       | { spec: TargetSpec; options: readonly TargetRef[] }
       | { skip: true }
     )[] = [];
-    const specs = triggerTargetSpecs(ability as TriggeredAbility, trigger.modes);
+    // "Up to X target …, where X is …": the group's amounts are read now, as
+    // its targets are chosen (rule 603.3d), and fixed from here on.
+    const specs = this.triggerSpecsWithAmounts(trigger, triggerTargetSpecs(ability as TriggeredAbility, trigger.modes));
     for (let i = 0; i < specs.length; i += 1) {
       const spec = specs[i];
       if (auto[i] !== undefined) {
@@ -21830,6 +21848,57 @@ export class Game {
    * of any ability's targets on resolution, so all three read the operand the
    * same way.
    */
+  /**
+   * `specs` with its "any number of target …" group's amounts read for the
+   * triggered ability `trigger` (`specsWithAmounts`): its X, its trigger
+   * value ("up to that many"), the triggering object and its source as
+   * they are now — the moment its targets are chosen (rule 603.3d). Its
+   * resolution reads them again the same way for the totals it rechecks.
+   */
+  private triggerSpecsWithAmounts(
+    trigger: {
+      readonly sourceObjectId: ObjectId;
+      readonly controller: PlayerId;
+      readonly triggerValue?: number;
+      readonly triggerObject?: ObjectId;
+      readonly x?: number;
+      readonly lastKnownRefs?: LastKnownRefs;
+    },
+    specs: readonly TargetSpec[],
+  ): readonly TargetSpec[] {
+    if (!groupReadsAmount(specs)) return specs;
+    const ctx = this.makeResolutionContext(
+      trigger.sourceObjectId,
+      trigger.controller,
+      [],
+      trigger.x ?? 0,
+      trigger.triggerValue ?? 0,
+      trigger.triggerObject,
+      1,
+      0,
+      [],
+      trigger.lastKnownRefs,
+    );
+    return specsWithAmounts(specs, (amount) => amountValue(amount, ctx));
+  }
+
+  /** An activated ability's target specs as it's activated with X `x`: a
+   * group's `"x"` at that X, and its other amounts read now, before any
+   * cost is paid (rules 601.2c, 602.2b) — Serra's Liturgy counts its verse
+   * counters before it's sacrificed. */
+  private activatedSpecsAt(
+    targets: readonly TargetSpec[],
+    sourceId: ObjectId,
+    controller: PlayerId,
+    x: number | undefined,
+  ): readonly TargetSpec[] {
+    const atX = x !== undefined && groupReadsX(targets) ? specsAtX(targets, x) : targets;
+    if (!groupReadsAmount(atX)) return atX;
+    const ctx = this.makeResolutionContext(sourceId, controller, [], x ?? 0);
+    // With no X announced yet, a group tied to it stays unbounded by it.
+    return specsWithAmounts(atX, (amount) => (amount === "x" && x === undefined ? undefined : amountValue(amount, ctx)));
+  }
+
   private abilityTargetSource(trigger: {
     readonly sourceObjectId: ObjectId;
     readonly controller: PlayerId;

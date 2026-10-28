@@ -426,7 +426,7 @@ describe("rule 603.3d: an optional slot with nothing to point at", () => {
 });
 
 describe("an any-number group", () => {
-  it("is always the last slot of its list, never in a modal spell's mode", () => {
+  it("is always the last slot of its list, and in a modal spell's mode only where no later mode targets", () => {
     const misplaced: string[] = [];
     const lists = (name: string, specs: readonly TargetSpec[] | undefined) => {
       if (specs === undefined) return;
@@ -439,11 +439,15 @@ describe("an any-number group", () => {
       lists(`${def.name} (kicked)`, def.kicker?.targets);
       for (const ability of def.activated) lists(`${def.name} (activated)`, ability.targets);
       for (const ability of def.triggered) lists(`${def.name} (triggered)`, ability.targets);
-      for (const mode of def.castModal?.modes ?? []) {
-        if ((mode.targets ?? []).some((s) => typeof s === "object" && s.kind === "any-number")) {
-          misplaced.push(`${def.name} (mode)`);
-        }
-      }
+      // A modal spell's targets are its chosen modes', in order (rule 700.2),
+      // so a mode's group is last unless a later mode chosen with it targets.
+      const modes = def.castModal?.modes ?? [];
+      modes.forEach((mode, i) => {
+        lists(`${def.name} (mode ${i + 1})`, mode.targets);
+        const grouped = (mode.targets ?? []).some((s) => typeof s === "object" && s.kind === "any-number");
+        const laterTargets = modes.slice(i + 1).some((later) => (later.targets ?? []).length > 0);
+        if (grouped && laterTargets && Math.max(def.castModal?.maxModes ?? 1, def.castModal?.maxModesIf?.maxModes ?? 1) > 1) misplaced.push(`${def.name} (mode)`);
+      });
     }
     expect(misplaced).toEqual([]);
   });

@@ -17,7 +17,8 @@ import { convokeProofFor, delvePicks, fitModeSet } from "../actions.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { subsetsBetween } from "../decisions/shared/subsets.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
-import { fitTargetCount, maxXForTargets } from "../target-count.js";
+import { fitModalXGroup, fitTargetCount, maxXForTargets } from "../target-count.js";
+import { anyNumberSlot } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
 // Re-exported from its new home: a decision module needs it too, and nothing
@@ -166,17 +167,38 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     }
     const out: Action[] = [];
     for (const modes of choices) {
-      const picked = modes.flatMap(
-        (index) =>
-          targetCombos(modal.modes[index].targetOptions, 1, modal.modes[index].targetSpecs)[0] ?? [],
-      );
-      const targets = fitTargets(
+      // A mode with an "any number of" group takes as many of its best as
+      // the cap lists (the fit below trims them to what X allows).
+      const picked = modes.flatMap((index) => {
+        const { targetOptions, targetSpecs } = modal.modes[index];
+        if (anyNumberSlot(targetSpecs) < 0) return targetCombos(targetOptions, 1, targetSpecs)[0] ?? [];
+        const combos = targetCombos(targetOptions, MAX_TARGET_COMBOS, targetSpecs);
+        return combos.reduce<(TargetRef | null)[]>((best, c) => (c.length > best.length ? c : best), combos[0] ?? []);
+      });
+      const fitted = fitTargets(
         legal,
         picked,
         modes.flatMap((index) => modal.modes[index].targetOptions),
         modes.flatMap((index) => modal.modes[index].targetSpecs),
       );
-      if (targets !== null) out.push({ ...common, ...xValueOf(legal, targets), targets, modes });
+      if (fitted === null) continue;
+      // A group tied to X in a chosen mode (Heliod's Intervention): its
+      // members and X fitted together, at the largest X they allow.
+      const x = xValueOf(legal, fitted);
+      const withX = fitModalXGroup(
+        modes.flatMap((index) => modal.modes[index].targetSpecs),
+        fitted,
+        legal.xCost,
+        x.xValue,
+      );
+      if (withX === null) continue;
+      out.push({
+        ...common,
+        ...x,
+        ...(legal.xCost !== undefined && withX.xValue !== undefined ? { xValue: withX.xValue } : {}),
+        targets: withX.targets,
+        modes,
+      });
     }
     return out;
   }

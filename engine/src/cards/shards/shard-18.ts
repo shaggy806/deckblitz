@@ -8,6 +8,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAgadeemsAwakening from "../pool/agadeems-awakening.js";
 import _poolAgonizingDemise from "../pool/agonizing-demise.js";
 import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
 import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
@@ -293,6 +294,7 @@ import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
+import _poolHeroicFeast from "../pool/heroic-feast.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
 import _poolHiddenHerd from "../pool/hidden-herd.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
@@ -822,6 +824,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAgadeemsAwakening,
     _poolAgonizingDemise,
     _poolAjaniMentorOfHeroes,
     _poolAkalPakalFirstAmongEquals,
@@ -1107,6 +1110,7 @@ const shard: CardShard = {
     _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
+    _poolHeroicFeast,
     _poolHeronBlessedGeist,
     _poolHiddenHerd,
     _poolHideOnTheCeiling,

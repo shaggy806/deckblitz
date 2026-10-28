@@ -321,6 +321,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Variable target counts — built 2026-10-28
+
+The need-keys Phase 2 family `decision:variable-target-count` (B245): an
+`any-number` group's `max`/`min` as any amount on a triggered or activated
+ability, read as its targets are chosen (`specsWithAmounts`); a total mana
+value cap (`maxTotalManaValue`) and `differentManaValues`; a group in a
+`castModal` mode, with the client asking X after a modal spell's modes. Keys:
+`decision:variable-target-count`, `decision:x-targets`,
+`decision:target-total-mana-value`, `decision:any-number-targets-in-mode`.
+Still open beside them: `decision:twice-x-target-count` (a spell's group at
+twice X) and `decision:mixed-zone-targets` (one slot over battlefield and
+graveyard).
+
 ### Unbounded targeting — built 2026-09-26
 
 **Built** as the `any-number` target spec, a group that is the last slot of
