@@ -2909,6 +2909,14 @@ export function parseFace(face, ctx = {}) {
       if (/^Echo\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its echo has to say when the cost is paid"];
     }
   }
+  // "When a player doesn't pay this enchantment's cumulative upkeep" (Heart of
+  // Bogardan) is the upkeep's own "if you don't", which `cumulativeUpkeep()`'s
+  // `unless` never says: the author writes the upkeep with it.
+  if (/doesn't pay [^.]*cumulative upkeep/i.test(face.oracle_text ?? "")) {
+    for (const t of out.triggered) {
+      if (/^Cumulative upkeep\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its cumulative upkeep has to say what happens when it isn't paid"];
+    }
+  }
   out.complete =
     out.todo.length === 0 &&
     [...out.activated, ...out.triggered].every((a) => a.effect !== null && a.__todo === undefined);
