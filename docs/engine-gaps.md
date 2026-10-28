@@ -6,6 +6,13 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **"Add one mana of the chosen color" with no colour chosen adds any colour.** `add-mana`'s
+  `"chosen"` (`effects.ts`, around line 9232) falls back to `"any-color"` when its source has
+  no `chosenOnEnter` colour; Shimmerwilds Growth's ruling says it adds no mana then. Only an
+  object that never entered the way that asks can reach it (a copy of the Aura made some other
+  way, an object becoming one), so it's rare. Heraldic Banner and Big Apple, 3 a.m. rely on the
+  same fallback. Fix: add nothing for an unchosen colour, after checking no card means the
+  fallback. Found by batch 249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield.** Rule
   400.7a: effects from spells and abilities that change the characteristics or controller of a
   permanent spell on the stack continue to apply to the permanent it becomes. `moveObject`

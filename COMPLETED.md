@@ -86,6 +86,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, three families in one batch: a static loss of all abilities, block limits,
+  type-setting effects** (2026-10-28, B249, `28c4865b9`, `91204a4d1`;
+  `static:static-lose-all-abilities`, `static:static-loses-all-abilities`,
+  `static:static-set-characteristics`, `static:set-characteristics-aura`,
+  `effect:block-any-number-this-turn`, `static:block-additional-creature`,
+  `static:can-block-any-number`, `effect:set-creature-type`, `effect:set-types-temporary`):
+  `StaticAbility.loseAllAbilities` (layer 6) read by every "has it lost its abilities" check,
+  in dependency order (613.8) with what the same static grants kept (613.7) and an applied loss
+  keeping its other parts (613.6), and a permanent entering under one without its own entering
+  abilities (614.12); static `addColors`, `setsChosenColor`, `loseLandTypes`; `blockAdditional`
+  (static and effect, 509.1a) with the blockers offer's `maxBlocks`, the damage divided (510.1d)
+  and the client's block builder taking a blocker up again; `add-types`' `setTypes` /
+  `setSubtypes` (205.1a) and `choose-creature-type`'s `exclude`; scaffolder templates. 98 cards:
+  Humility, Imprisoned in the Moon, Kenrith's Transformation, Frogify, Darksteel Mutation,
+  Two-Headed Giant of Foriys, Hundred-Handed One, the Mistforms and the rest; 22 still blocked
+  (`B249.json`).
 - **Need-keys Phase 2, the search-opponent-library family** (2026-10-28, B248,
   `effect:search-opponent-library` + `effect:extract-same-name`): `search-library`'s `whose` — a
   player target, a target's controller or owner, the trigger player — with the searcher deciding,

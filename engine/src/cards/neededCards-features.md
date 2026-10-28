@@ -334,6 +334,29 @@ Still open beside them: `decision:twice-x-target-count` (a spell's group at
 twice X) and `decision:mixed-zone-targets` (one slot over battlefield and
 graveyard).
 
+### Losing all abilities, block limits and type-setting effects — built 2026-10-28
+
+Three need-keys Phase 2 families in one build (B249). **A static loss of all
+abilities** (`StaticAbility.loseAllAbilities`, layer 6): `hasLostAbilities` /
+`abilitiesLostAt` take the state and see static losses beside effects', from
+`staticAbilityLosses` in `characteristics.ts` — dependency order (613.8a: a
+static whose permanent loses its abilities is gone first; a loop by
+timestamp, 613.8b), what the same static grants after the loss, an applied
+loss keeping its other parts in the later layers (613.6, Humility made a
+creature — `staticOutlivesLoss`), memoized per mutation (`anyLoseAllSource`,
+on `invalidateComputedCache`'s epoch). Beside it, static `addColors`,
+`setsChosenColor` and `loseLandTypes`. **Block limits** (`blockAdditional`
+on a static and the `block-additional` effect, rule 509.1a): the blockers
+offer's `maxBlocks`, a blocker named once per attacker, `blockingAlso`, its
+damage divided (510.1d), "whenever ~ blocks" once (509.3a); the client's
+block builder takes a blocker up again for each more. **"Becomes a [type]"**:
+`add-types`' `setTypes` / `setSubtypes` (205.1a), and `choose-creature-type`'s
+`exclude`. Keys: `static:static-lose-all-abilities`,
+`static:static-loses-all-abilities`, `static:static-set-characteristics`,
+`static:set-characteristics-aura`, `effect:block-any-number-this-turn`,
+`static:block-additional-creature`, `static:can-block-any-number`,
+`effect:set-creature-type`, `effect:set-types-temporary`.
+
 ### Searching another player's zones — built 2026-10-28
 
 The need-keys Phase 2 family `effect:search-opponent-library` (B248):

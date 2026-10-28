@@ -5637,3 +5637,19 @@ engine terms. A second thing to check is a second test.
 ### Praetor's Grasp: the exiled card is yours to play, face down to Bob
 - **Do:** Cast Praetor's Grasp targeting Bob and pick his Lightning Bolt. Then cast it from exile at Bob.
 - **Expect:** The popup reads "Choose a card from Bob's cards to exile face down". The Bolt sits in exile face down for Bob, face up for you, and can be cast from there; Bob goes to 17.
+
+## Lost abilities, block limits and chosen types (2026-10-28, need-keys Phase 2: three families)
+
+### Two-Headed Giant of Foriys: block two attackers with one creature
+- **Do:** Attack Bob with both Grizzly Bears. As Bob, click the Giant and one Bears, then the Giant again and the other Bears; confirm the blocks.
+- **Expect:** After the second pair the Giant's badge reads "🛡 Grizzly Bears +1" and both Bears show as blocked. In damage Bob divides the Giant's 4 damage between them; both Bears die and so does the Giant.
+- **Not a bug:** Clicking the Giant a third time takes it out of both blocks.
+
+### Lignify: the enchanted creature loses its abilities
+- **Do:** Cast Lignify on Bob's Serra Angel.
+- **Expect:** The Angel shows 0/4, is a Treefolk only, and its rules text and its flying and vigilance are gone.
+
+### Mistform Stalker: it becomes the creature type you choose
+- **Do:** Activate Mistform Stalker's {1} ability and pick Goblin in the creature type search.
+- **Expect:** The search offers every creature type. The Stalker's type line reads Goblin, not Illusion, until end of turn.
+

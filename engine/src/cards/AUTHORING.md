@@ -1084,6 +1084,7 @@ sentences. None of these is a target, so hexproof doesn't stop them.
 | `gain-control` | `target` (an `EffectTargetRef`), `untilEndOfTurn`, `who?`, `whileSource?` | Act of Treason; `untilEndOfTurn: false` is "lasts indefinitely" (Sliver Overlord). `whileSource: true` (with `untilEndOfTurn: false`) is "for as long as [this] remains on the battlefield" — Opportunistic Dragon: it ends as the source leaves, whoever controls the source then, and doesn't begin at all if the source has already left as it would (rule 611.2b). A timestamped layer-2 effect: the latest control effect on a permanent wins, Aura or not (rule 613.7), and when one ends the next-latest takes over — including when the player it gave control to leaves the game (rule 800.4a), so it goes back to the player still in the game who most recently had it. `who` (an `EffectPlayerRef`) is who gains control, the effect's controller by default: a player slot — Zedruu the Greathearted's "target opponent gains control of target permanent you control" is `targets: ["opponent", { kind: "permanent", whose: "you", filter: {} }]` with `target: 1, who: { target: 0 }` — or a player the event names, like Alexios, Deimos of Kosmos's "that player gains control of Alexios" (`target: "source", who: "active-player"`). If either the permanent or the player has become an illegal target by resolution, it does nothing (rule 608.2b — `ResolutionContext.illegalTargets`). A player who has left the game gains control of nothing (800.4b). |
 | `gain-control-all` | `filter`, `untilEndOfTurn`, `who?`, `exceptSource?` | Every permanent matching `filter` changes control at once, as one effect with one timestamp (rule 613.7b): "gain control of all nonland permanents until end of turn" (Dihada, Binder of Wills), "gain control of all commanders" (Tevesh Szat). `who` as `gain-control`'s, or `"owner"`: "each player gains control of all creatures they own" (Homeward Path). A token stack changes hands whole. `controlledBy: "trigger-player"` keeps only what the player the trigger names controls — Hellkite Tyrant's "gain control of all artifacts that player controls" — and does nothing once they've left. |
 | `rotate-control` | `direction: "left" \| "right"`, `filter`, `exceptSource?` | "Each player gains control of all [filter] controlled by the next player in the chosen direction" (Aminatou, the Fateshifter's −6): left is the next player in turn order (rule 101.4), right the one before, skipping anyone who has left the game. Every share is worked out first and changes hands at once, as one lasting effect. "Choose left or right" as it resolves is a `modal` with one `rotate-control` per mode. |
+| `block-additional` | `target`, `amount: number \| "any"`, `duration` | "It can block an additional creature this turn" (Act of Heroism, Coastline Chimera's activation) — `amount` more attackers than rule 509.1a's one, or `"any"` number (Valor Made Real, Give No Ground). A modifier, lost with a later loss of all abilities; the static form is §10's `blockAdditional`. `block-additional.test.ts`. |
 | `cant-be-sacrificed` | `target`, `duration` | "It gains 'This creature can't be sacrificed'" (Jon Irenicus, Shattered One) — `"end-of-turn"` or `"permanent"` (while it stays on the battlefield). The static form, and what it stops, is §10's `cantBeSacrificed`. |
 
 #### Delayed triggered abilities (`delayed-trigger`)
@@ -1279,7 +1280,7 @@ own object, so it reaches every one.
 | `give-suspend` | `timeCounters` (an amount, or `"mana-value"`), `filter?`, `target?`, `onlyWithSuspend?` | "Put N time counters on it. If it doesn't have suspend, it gains suspend" (rule 702.62b). Without `target`: every card this resolution exiled that's still in exile and matches `filter` — after an `exile`, `exile-from-library`, `impulse-exile`, a `reveal-until` with `exile: true`, or a hand `look-and-choose` to exile (The Parting of the Ways, Suspend, Kang Prime, The Eleventh Doctor). With `target`: that card exiled first, from a library (Sibylline Soothsayer's card found, `reveal-until`'s `then` target 0) or the stack (Rory Williams' `"source"`, Taigam's `"trigger-object"` — via `exileSpell`); a spell countered in response is a new object and stays put. `"mana-value"` is each card's own; a card left with no time counter isn't suspended (stays exiled). `onlyWithSuspend`: only cards with suspend printed get them, none gains it (Ecstatic Beauty). |
 | `animate` | `target`, `power`, `toughness`, `addTypes`, `setTypes?` ("becomes a [type]" with no "still a": the types replace its others and a subtype tied to a lost one goes, rule 205.1a — Sarkhan, the Dragonspeaker's +1 stops him being a planeswalker; supertypes stay), `addSubtypes`, `setSubtypes?`, `setColors?`, `loseAbilities?`, `keywords?`, `duration` | man-lands, Turn to Frog. `power`/`toughness` take a live amount, read once as the effect applies and fixed (rule 608.2h): Zur, Eternal Schemer's "base power and base toughness each equal to its mana value" is `{ manaValueOf: 0 }` each. |
 | `animate-all` | `filter`, `power`, `toughness`, `addTypes?`, `addSubtypes?`, `keywords?`, `duration` | the mass form: every match becomes an N/N at once (Vihaan: "have Treasures you control become 3/3 Construct Assassin artifact creatures … until end of turn"). With no `addTypes` it only sets base P/T. Matches are fixed as it begins, and a token stack is animated whole. `power` / `toughness` may be live amounts, read once as it resolves — Mirror Entity's "{X}: … creatures you control have base power and toughness X/X and gain all creature types" is `"x"`, with `addSubtypes: [EVERY_CREATURE_TYPE]`. |
-| `add-types` | `target: EffectTargetRef`, `addTypes?`, `addSubtypes?`, `duration` | "It becomes a Demon **in addition to its other types**" (Clavileño, First of the Blessed; Jenova, Ancient Calamity's "that creature becomes a Mutant"): layer 4 only — P/T, colours and abilities are untouched, unlike `animate` — until end of turn or for as long as it stays on the battlefield. A lord of the new type reaches it. After a `put-onto-battlefield` in the same `sequence`, the same slot reaches the returned permanent ("…return it to the battlefield. It's a Zombie in addition to its other types"). |
+| `add-types` | `target: EffectTargetRef`, `addTypes?`, `addSubtypes?`, `setTypes?`, `setSubtypes?`, `duration` | **`setTypes` / `setSubtypes`** are "becomes a [type]" with no "in addition" (rule 205.1a): `setSubtypes: ["Coward"]` replaces its creature types (Boldwyr Intimidator, Ursine Champion's "becomes a Bear Berserker"), `setTypes: ["enchantment"]` its card types (Opal Acrolith's "becomes an enchantment" — no longer a creature, its creature types gone with it), each applied before the adds and with a timestamp of its own; P/T, colours and abilities stay. "Becomes the creature type of your choice" is a `choose-creature-type` (with `exclude: ["Wall"]` for "other than Wall") whose `then` is this with `setSubtypes: [CHOSEN_CREATURE_TYPE]` (the Mistforms, Imagecrafter). `set-types-effect.test.ts`. Otherwise "it becomes a Demon **in addition to its other types**" (Clavileño, First of the Blessed; Jenova, Ancient Calamity's "that creature becomes a Mutant"): layer 4 only — P/T, colours and abilities are untouched, unlike `animate` — until end of turn or for as long as it stays on the battlefield. A lord of the new type reaches it. After a `put-onto-battlefield` in the same `sequence`, the same slot reaches the returned permanent ("…return it to the battlefield. It's a Zombie in addition to its other types"). |
 
 ### Tokens / attach / transform
 
@@ -3738,6 +3739,39 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   Ooze creature" (Corrupted Zendikon) beside its `addTypes`, `addSubtypes` and
   `setBasePt`. In timestamp order with the permanents' own colour changes
   (`become-color`, `animate`'s `setColors`); filters and protection read it.
+- `addColors: [...]` — layer 5: colours **in addition to** their others (Deep
+  Freeze's "is a blue Wall in addition to its other colors and types").
+  `setsChosenColor: true` — layer 5: exactly the colour this static's own
+  permanent chose as it entered (`chooseOnEnter` over the five colours — Alloy
+  Golem's "this creature is the chosen color", Shimmerwilds Growth's
+  "enchanted land is the chosen color").
+- `loseLandTypes: true` — layer 4: the affected permanents lose all land types
+  (and with them their intrinsic mana abilities, 305.7) — Lithoform Blight,
+  Alpine Moon.
+- `loseAllAbilities: true` — layer 6 (rule 613.1f): the affected permanents
+  lose all abilities — Humility, Dress Down ("Creatures lose all
+  abilities"), the Auras (Lignify, Frogify, Kenrith's Transformation, beside
+  `setTypes` / `setSubtypes` / `setColors` / `setBasePt` on the same static),
+  Toxicrene's lands. What the **same static** grants stays ("loses all other
+  abilities and has defender", Imprisoned in the Moon's "{T}: Add {C}" — put
+  the grant on that static); what was granted earlier goes, what is granted
+  later stays (613.7). A loss that reaches another such static's permanent
+  takes that static away first (613.8a — Lignify on a Toxicrene gives the
+  lands their abilities back), and a static whose loss reaches its own
+  permanent still applies (Humility made a creature). Every "has it lost its
+  abilities" read sees it (`hasLostAbilities(state, registry, object)`).
+  The scaffolder reads "Enchanted creature [gets -N/-0 and] loses all
+  abilities [and has base power and toughness N/N]" and "[All] creatures lose
+  all abilities". `static-lose-all-abilities.test.ts`.
+- `blockAdditional: 1 | N | "any"` — the affected creatures "can block an
+  additional creature each combat" (Two-Headed Giant of Foriys, Brave the
+  Sands' "each creature you control", Echo Circlet's "equipped creature"),
+  "an additional seven creatures" (Watcher in the Web), "any number of
+  creatures" (Palace Guard): rule 509.1a's one block and this many more. Several
+  add up; an ability, lost with the rest. The blockers offer says each
+  creature's `maxBlocks`; it's declared once per attacker; it divides its
+  combat damage among them (510.1d); "whenever ~ blocks" triggers once
+  (509.3a). The scaffolder reads the line. `block-additional.test.ts`.
 - `setBasePt: { power?, toughness? }` — layer 7b: the affected permanents
   *have base* power and/or toughness N ("have base power and toughness 10/10";
   a lone `toughness` is "have base toughness 1"). In timestamp order with

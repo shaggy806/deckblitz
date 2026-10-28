@@ -1,6 +1,6 @@
 ---
 name: build-family
-description: Build the next family of missing engine features in the need-keys plan's greedy order (Phase 2 of docs/plans/need-keys-after-the-walk.md) — pick the family that `cards:needs -- --greedy --groups` puts first, build its top two to four generalisation groups as general implementations in one context load, then author every card they unblock through card-author agents, record what's still blocked with narrow keys, test, ship, and hand off the next family. One family per session, in series. Use when the user says to build the next family, build features in greedy order, work down the need keys, do Phase 2, or runs this skill with no other instructions.
+description: Build the next family of missing engine features in the need-keys plan's greedy order (Phase 2 of docs/plans/need-keys-after-the-walk.md) — pick the family that `cards:needs -- --greedy --groups` puts first, build its top two to four generalisation groups as general implementations in one context load, then author every card they unblock through card-author agents, record what's still blocked with narrow keys, test, ship, and hand off the next. Several families per session (the top two to four in the greedy order), one verify, sessions in series. Use when the user says to build the next family, build features in greedy order, work down the need keys, do Phase 2, or runs this skill with no other instructions.
 ---
 
 # Build the next feature family
@@ -10,12 +10,15 @@ section once). The set walk and the recheck lists are done. Every card left is
 blocked on need keys, and the keys are merged into **generalisation groups**:
 keys one general implementation covers (`groups` in
 `engine/data/needs-vocabulary.json`, each `{ keys, shape }`). The build unit
-is a group, not a key. A session takes **one family**, builds its top groups
-together while that code is in context, and authors what they free.
+is a group, not a key. A session takes **two to four families** — the top
+of the greedy order — builds their groups while that code is in context,
+authors what they free as **one batch**, and verifies once (the user's call,
+2026-10-28: one family a session spent a whole verify, an engine change's
+bot gate and suites, on ~40 cards; B249 took three families).
 
-**Families run in series** (the user's call, 2026-10-28): one session, one
-family, landed on `main` before the next session starts. The next session
-re-runs the greedy order, because building one family frees cards in others.
+**Sessions run in series** (the user's call, 2026-10-28): one session at a
+time, landed on `main` before the next starts. The next session re-runs the
+greedy order, because building one family frees cards in others.
 
 **Rule zero governs everything here** (`engine/src/cards/AUTHORING.md` §0):
 never author a card the engine can't run *exactly*. A record's needs were
@@ -45,15 +48,16 @@ landing). Only what's below differs.
    or one key alone. It shows the cards freed, the running total, the
    family, the keys, and the group's shape. Reads `dist/`, so build
    `engine` first if it's stale.
-2. **The family is the first step's family**, unless it needs something
-   out of reach for one session. Banding (`keyword:banding`, 46 cards) is a
-   whole session of its own: rule 702.22 rewrites combat damage
-   assignment. Take it when it comes up first, but alone, with no second
-   group.
+2. **The families are the first steps' families**: the first, then the
+   next ones in the order until the batch is ~100-150 cards (two to four
+   families; prefer ones whose code overlaps — B249's static loss of all
+   abilities and its type-setting effects shared layer 4). A family that
+   needs something out of reach beside others goes alone: banding
+   (`keyword:banding`, 46 cards) was a session of its own, rule 702.22
+   rewriting combat damage assignment.
 3. `npm run -s cards:needs -w engine -- --greedy --groups --family <F>`
-   shows that family's own order. Take **its top two to four units**,
-   aiming at roughly 60–120 cards freed. Fewer is fine when the first unit
-   is big or hard.
+   shows each family's own order. Take **its top units** (one is often all
+   there is). Steps 4-6 below are per family.
 4. `npm run -s cards:needs -w engine -- --brief <F> --open-only` gives each
    key's description. A key with `checked: …partial` names only what's
    missing. Read the family's **built** keys too: the new code usually
@@ -161,5 +165,5 @@ A few lines:
 - the commit on `main`;
 - the greedy order's next family, from the fresh run.
 
-One family per session. Offer the next, to run in a fresh session (`/clear`,
-then this skill), and don't start it here.
+One batch of families per session. Offer the next, to run in a fresh session
+(`/clear`, then this skill), and don't start it here.

@@ -8460,4 +8460,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Praetor's Grasp: the exiled card is yours to play, face down to Bob",
     board({ you: { bf: ['Swamp*3', 'Mountain'], hand: ["Praetor's Grasp"] }, opp: { lib: ['Lightning Bolt', 'Hill Giant'] } }),
   ),
+  // --- Lost abilities, block limits, chosen types (2026-10-28, B249) ---------
+  preset(
+    'Two-Headed Giant of Foriys: block two attackers with one creature',
+    board({ you: { bf: ['Grizzly Bears*2'] }, opp: { human: true, bf: ['Two-Headed Giant of Foriys'] } }),
+  ),
+  preset(
+    "Lignify: the enchanted creature loses its abilities",
+    board({ you: { bf: ['Forest*2'], hand: ['Lignify'] }, opp: { bf: ['Serra Angel'] } }),
+  ),
+  preset(
+    'Mistform Stalker: it becomes the creature type you choose',
+    board({ you: { bf: ['Island', 'Mistform Stalker'] } }),
+  ),
 ]

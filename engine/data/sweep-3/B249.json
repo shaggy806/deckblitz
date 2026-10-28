@@ -1,0 +1,853 @@
+{
+  "batch": "B249",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the static-lose-all-abilities, combat-restriction-extensions and set-types families (static:static-lose-all-abilities + static:static-loses-all-abilities + static:static-set-characteristics + static:set-characteristics-aura; effect:block-any-number-this-turn + static:block-additional-creature + static:can-block-any-number; effect:set-creature-type + effect:set-types-temporary)",
+  "authored": [
+    {
+      "name": "Act of Heroism",
+      "files": [
+        "engine/src/cards/pool/act-of-heroism.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ageless Sentinels",
+      "files": [
+        "engine/src/cards/pool/ageless-sentinels.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alloy Golem",
+      "files": [
+        "engine/src/cards/pool/alloy-golem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alpine Moon",
+      "files": [
+        "engine/src/cards/pool/alpine-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Amphibian Downpour",
+      "files": [
+        "engine/src/cards/pool/amphibian-downpour.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anurid Swarmsnapper",
+      "files": [
+        "engine/src/cards/pool/anurid-swarmsnapper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Avatar of Hope",
+      "files": [
+        "engine/src/cards/pool/avatar-of-hope.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brave the Sands",
+      "files": [
+        "engine/src/cards/pool/brave-the-sands.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cenn's Tactician",
+      "files": [
+        "engine/src/cards/pool/cenns-tactician.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Coastline Chimera",
+      "files": [
+        "engine/src/cards/pool/coastline-chimera.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Darksteel Mutation",
+      "files": [
+        "engine/src/cards/pool/darksteel-mutation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deep Freeze",
+      "files": [
+        "engine/src/cards/pool/deep-freeze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Donald Blake, Guise of Thor",
+      "files": [
+        "engine/src/cards/pool/donald-blake-guise-of-thor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dragonsoul Knight",
+      "files": [
+        "engine/src/cards/pool/dragonsoul-knight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dress Down",
+      "files": [
+        "engine/src/cards/pool/dress-down.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Duskmourn's Domination",
+      "files": [
+        "engine/src/cards/pool/duskmourns-domination.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eaten by Piranhas",
+      "files": [
+        "engine/src/cards/pool/eaten-by-piranhas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Echo Circlet",
+      "files": [
+        "engine/src/cards/pool/echo-circlet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Entangler",
+      "files": [
+        "engine/src/cards/pool/entangler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Entourage of Trest",
+      "files": [
+        "engine/src/cards/pool/entourage-of-trest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eye of Nidhogg",
+      "files": [
+        "engine/src/cards/pool/eye-of-nidhogg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flood the Engine",
+      "files": [
+        "engine/src/cards/pool/flood-the-engine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Foriysian Brigade",
+      "files": [
+        "engine/src/cards/pool/foriysian-brigade.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Foriysian Interceptor",
+      "files": [
+        "engine/src/cards/pool/foriysian-interceptor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Foriysian Totem",
+      "files": [
+        "engine/src/cards/pool/foriysian-totem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fresh Start",
+      "files": [
+        "engine/src/cards/pool/fresh-start.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Frodo, Sauron's Bane",
+      "files": [
+        "engine/src/cards/pool/frodo-saurons-bane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Frogify",
+      "files": [
+        "engine/src/cards/pool/frogify.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghastbark Twins",
+      "files": [
+        "engine/src/cards/pool/ghastbark-twins.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Give No Ground",
+      "files": [
+        "engine/src/cards/pool/give-no-ground.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hidden Stag",
+      "files": [
+        "engine/src/cards/pool/hidden-stag.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "High Ground",
+      "files": [
+        "engine/src/cards/pool/high-ground.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Humility",
+      "files": [
+        "engine/src/cards/pool/humility.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hundred-Handed One",
+      "files": [
+        "engine/src/cards/pool/hundred-handed-one.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hydro-Man, Fluid Felon",
+      "files": [
+        "engine/src/cards/pool/hydro-man-fluid-felon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ichthyomorphosis",
+      "files": [
+        "engine/src/cards/pool/ichthyomorphosis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Imagecrafter",
+      "files": [
+        "engine/src/cards/pool/imagecrafter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Imprisoned in the Moon",
+      "files": [
+        "engine/src/cards/pool/imprisoned-in-the-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "In Too Deep",
+      "files": [
+        "engine/src/cards/pool/in-too-deep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iona's Blessing",
+      "files": [
+        "engine/src/cards/pool/ionas-blessing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ironfist Crusher",
+      "files": [
+        "engine/src/cards/pool/ironfist-crusher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kasmina's Transmutation",
+      "files": [
+        "engine/src/cards/pool/kasminas-transmutation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kellan, Planar Trailblazer",
+      "files": [
+        "engine/src/cards/pool/kellan-planar-trailblazer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kenrith's Transformation",
+      "files": [
+        "engine/src/cards/pool/kenriths-transformation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knight of Sorrows",
+      "files": [
+        "engine/src/cards/pool/knight-of-sorrows.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kormus Bell",
+      "files": [
+        "engine/src/cards/pool/kormus-bell.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lignify",
+      "files": [
+        "engine/src/cards/pool/lignify.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lithoform Blight",
+      "files": [
+        "engine/src/cards/pool/lithoform-blight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Luminous Guardian",
+      "files": [
+        "engine/src/cards/pool/luminous-guardian.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mild-Mannered Librarian",
+      "files": [
+        "engine/src/cards/pool/mild-mannered-librarian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Minimus Containment",
+      "files": [
+        "engine/src/cards/pool/minimus-containment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mistform Dreamer",
+      "files": [
+        "engine/src/cards/pool/mistform-dreamer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistform Mask",
+      "files": [
+        "engine/src/cards/pool/mistform-mask.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mistform Mutant",
+      "files": [
+        "engine/src/cards/pool/mistform-mutant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistform Seaswift",
+      "files": [
+        "engine/src/cards/pool/mistform-seaswift.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistform Shrieker",
+      "files": [
+        "engine/src/cards/pool/mistform-shrieker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistform Skyreaver",
+      "files": [
+        "engine/src/cards/pool/mistform-skyreaver.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mistform Stalker",
+      "files": [
+        "engine/src/cards/pool/mistform-stalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mistform Wall",
+      "files": [
+        "engine/src/cards/pool/mistform-wall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mounted Archers",
+      "files": [
+        "engine/src/cards/pool/mounted-archers.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mystic Subdual",
+      "files": [
+        "engine/src/cards/pool/mystic-subdual.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Night Market Guard",
+      "files": [
+        "engine/src/cards/pool/night-market-guard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Noggle the Mind",
+      "files": [
+        "engine/src/cards/pool/noggle-the-mind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Opal Acrolith",
+      "files": [
+        "engine/src/cards/pool/opal-acrolith.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Palace Guard",
+      "files": [
+        "engine/src/cards/pool/palace-guard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paragon of the Amesha",
+      "files": [
+        "engine/src/cards/pool/paragon-of-the-amesha.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Poppet Stitcher",
+      "files": [
+        "engine/src/cards/pool/poppet-stitcher.ts",
+        "engine/src/cards/pool/poppet-factory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Proteus Machine",
+      "files": [
+        "engine/src/cards/pool/proteus-machine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quantum Reduction",
+      "files": [
+        "engine/src/cards/pool/quantum-reduction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ray of Frost",
+      "files": [
+        "engine/src/cards/pool/ray-of-frost.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reprobation",
+      "files": [
+        "engine/src/cards/pool/reprobation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Retro-Mutation",
+      "files": [
+        "engine/src/cards/pool/retro-mutation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Selesnya Sagittars",
+      "files": [
+        "engine/src/cards/pool/selesnya-sagittars.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shimmerwilds Growth",
+      "files": [
+        "engine/src/cards/pool/shimmerwilds-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sludge Monster",
+      "files": [
+        "engine/src/cards/pool/sludge-monster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spider-Man No More",
+      "files": [
+        "engine/src/cards/pool/spider-man-no-more.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spike-Tailed Ceratops",
+      "files": [
+        "engine/src/cards/pool/spike-tailed-ceratops.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stasis Field",
+      "files": [
+        "engine/src/cards/pool/stasis-field.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stop Cold",
+      "files": [
+        "engine/src/cards/pool/stop-cold.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sugar Coat",
+      "files": [
+        "engine/src/cards/pool/sugar-coat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tamiyo's Compleation",
+      "files": [
+        "engine/src/cards/pool/tamiyos-compleation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tangleclaw Werewolf",
+      "files": [
+        "engine/src/cards/pool/tangleclaw-werewolf.ts",
+        "engine/src/cards/pool/fibrous-entangler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thoughtweft Trio",
+      "files": [
+        "engine/src/cards/pool/thoughtweft-trio.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Toxicrene",
+      "files": [
+        "engine/src/cards/pool/toxicrene.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trickery Charm",
+      "files": [
+        "engine/src/cards/pool/trickery-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trickster's Elk",
+      "files": [
+        "engine/src/cards/pool/tricksters-elk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trueheart Duelist",
+      "files": [
+        "engine/src/cards/pool/trueheart-duelist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Two-Headed Dragon",
+      "files": [
+        "engine/src/cards/pool/two-headed-dragon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Two-Headed Giant of Foriys",
+      "files": [
+        "engine/src/cards/pool/two-headed-giant-of-foriys.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unnatural Selection",
+      "files": [
+        "engine/src/cards/pool/unnatural-selection.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ursine Champion",
+      "files": [
+        "engine/src/cards/pool/ursine-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Utter Insignificance",
+      "files": [
+        "engine/src/cards/pool/utter-insignificance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Valor Made Real",
+      "files": [
+        "engine/src/cards/pool/valor-made-real.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vanguard's Shield",
+      "files": [
+        "engine/src/cards/pool/vanguards-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Glare",
+      "files": [
+        "engine/src/cards/pool/wall-of-glare.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Warden of the First Tree",
+      "files": [
+        "engine/src/cards/pool/warden-of-the-first-tree.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Watcher in the Web",
+      "files": [
+        "engine/src/cards/pool/watcher-in-the-web.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wishful Merfolk",
+      "files": [
+        "engine/src/cards/pool/wishful-merfolk.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Nim Deathmantle",
+      "needs": [
+        "effect:attach-extensions"
+      ],
+      "why": "'Return that card to the battlefield and attach this Equipment to it' — attaching the returned card isn't built; 'is a black Zombie' is."
+    },
+    {
+      "name": "Frozen in Ice",
+      "needs": [
+        "static:cant-become-untapped"
+      ],
+      "why": "The loss of abilities is built; 'can't become untapped' (no untap by any means) isn't — doesnt-untap covers only the untap step."
+    },
+    {
+      "name": "Enchanted River's Grasp",
+      "needs": [
+        "effect:remove-all-counters"
+      ],
+      "why": "The loss is built; 'remove all counters from it' as it enters isn't."
+    },
+    {
+      "name": "Heliod's Punishment",
+      "needs": [
+        "static:aura-grants-ability-referencing-aura"
+      ],
+      "why": "The loss is built; the granted '{T}: Remove a task counter from Heliod's Punishment' names the Aura, not the creature."
+    },
+    {
+      "name": "Titania's Song",
+      "needs": [
+        "static:animate-pt-equal-mana-value",
+        "static:effect-lingers-until-eot-after-leaving"
+      ],
+      "why": "The loss is built; P/T each equal to its mana value on a static, and the effect lasting until end of turn after it leaves, aren't."
+    },
+    {
+      "name": "Unable to Scream",
+      "needs": [
+        "mechanic:face-down"
+      ],
+      "why": "The loss and Toy artifact creature are built; 'as long as enchanted creature is face down, it can't be turned face up' isn't."
+    },
+    {
+      "name": "Witness Protection",
+      "needs": [
+        "static:set-name"
+      ],
+      "why": "The loss, colours, types and P/T are built; 'named Legitimate Businessperson' (a static setting the name) isn't."
+    },
+    {
+      "name": "Blaze of Glory",
+      "needs": [
+        "effect:blocks-each-attacker-if-able"
+      ],
+      "why": "'Can block any number of creatures this turn' is built; 'it blocks each attacking creature this turn if able' (a requirement per attacker) isn't."
+    },
+    {
+      "name": "Kemba's Legion",
+      "needs": [
+        "static:block-additional-per-count"
+      ],
+      "why": "blockAdditional takes a number; 'an additional creature for each Equipment attached to it' needs a live count."
+    },
+    {
+      "name": "Guardian of the Gateless",
+      "needs": [
+        "amount:creatures-blocking-it"
+      ],
+      "why": "'Can block any number' is built; '+1/+1 for each creature it's blocking' isn't."
+    },
+    {
+      "name": "Gornog, the Red Reaper",
+      "needs": [
+        "static:cant-block-by-subtype"
+      ],
+      "why": "'Becomes a Coward' is built; 'Cowards can't block Warriors' isn't."
+    },
+    {
+      "name": "Boldwyr Intimidator",
+      "needs": [
+        "static:cant-block-by-subtype"
+      ],
+      "why": "'Becomes a Coward/Warrior until end of turn' is built; 'Cowards can't block Warriors' isn't."
+    },
+    {
+      "name": "Soul Sculptor",
+      "needs": [
+        "duration:until-a-player-casts-creature-spell"
+      ],
+      "why": "'Becomes an enchantment and loses all abilities' is expressible; the duration 'until a player casts a creature spell' isn't."
+    },
+    {
+      "name": "Shade's Breath",
+      "needs": [
+        "effect:set-color-all",
+        "effect:set-creature-type-all"
+      ],
+      "why": "Each creature you control becoming a black Shade with an ability: no mass type/colour set."
+    },
+    {
+      "name": "Standardize",
+      "needs": [
+        "effect:set-creature-type-all"
+      ],
+      "why": "The choice excluding Wall is built; 'each creature becomes that type' has no mass form."
+    },
+    {
+      "name": "Mistform Wakecaster",
+      "needs": [
+        "effect:set-creature-type-all"
+      ],
+      "why": "'Each creature you control becomes that type until end of turn' has no mass form (add-types takes one target)."
+    },
+    {
+      "name": "Yare",
+      "needs": [
+        "target:creature-defending-player-controls-spell"
+      ],
+      "why": "'Target creature defending player controls' on an instant: the defending player is found only from an attacking source."
+    },
+    {
+      "name": "Song of the Dryads",
+      "needs": [
+        "static:land-type-setting"
+      ],
+      "why": "'Is a colorless Forest land' needs rule 305.7's loss of its rules-text abilities only (abilities other effects gave it stay) — loseAllAbilities would take those too."
+    },
+    {
+      "name": "Dragon Hunter",
+      "needs": [
+        "static:block-as-though-reach-filter"
+      ],
+      "why": "'Can block Dragons as though it had reach' isn't built."
+    },
+    {
+      "name": "Lairwatch Giant",
+      "needs": [
+        "trigger:blocks-two-or-more"
+      ],
+      "why": "Can block an additional creature is built; 'whenever this blocks two or more creatures' isn't."
+    },
+    {
+      "name": "Mistform Warchief",
+      "needs": [
+        "condition:filter-shares-creature-type-with-source"
+      ],
+      "why": "The type choice is built; 'creature spells that share a creature type with this cost {1} less' isn't."
+    },
+    {
+      "name": "Vraska, Betrayal's Sting",
+      "needs": [
+        "amount:target-player-counters"
+      ],
+      "why": "Her -9 reads the target player's poison count ('the difference'); playerCounters reads only you, an opponent or that-player."
+    }
+  ]
+}

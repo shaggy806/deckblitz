@@ -80,10 +80,14 @@ section keeps only what to do next.
   `search-library` over another player's library or graveyard, hand and library — the searcher
   choosing, that player shuffling, "all" vs "any number" (rule 701.23b), exile face down and
   playable, a cast from the library, `then` over the finds; 39 of its 48 cards authored, 9 still
-  blocked — four on `effect:exile-chosen-from-revealed-hand`). Next: `static:static-lose-all-abilities`
-  (38, with `static:static-set-characteristics`), then `static:combat-restriction-extensions` (36). `static:combat-restriction-extensions` (36, blocking
-  additional creatures) can reuse banding's blocker that divides its damage among several
-  attackers (510.1d, `combat/banding.ts`'s `blockedAttackersOf`).
+  blocked — four on `effect:exile-chosen-from-revealed-hand`), and — **several families a session
+  from here, one verify** (the user's call, 2026-10-28) — static-lose-all-abilities,
+  combat-restriction-extensions and set-types (B249, 2026-10-28: a static loss of all abilities in
+  dependency order and as a permanent enters, block limits with the client's block builder,
+  "becomes a [type]"; 98 cards authored, 22 still blocked — three on
+  `effect:set-creature-type-all`, two on `static:cant-block-by-subtype`). Next:
+  `replacement:damage-modification` (34, damage redirection), `effect:target-spec-additions` (34,
+  graveyard-scoped multi-card targets) and `effect:repeat-process` (32).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -152,6 +156,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **"Add one mana of the chosen color" with no colour chosen adds any colour**: the rulings say none (Shimmerwilds Growth; Heraldic Banner and Big Apple, 3 a.m. share the fallback). Only an object that never entered can be asked; found by B249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).
 - **A mana ability with a `discard` cost never pays it**: the mana-ability activation resolves before the discard is paid, and nothing refuses one, so "Discard a card: Add {B}" would make free mana (Skirge Familiar, `cost:mana-ability-discard-cost`, batch 236).
 - **A delayed "whenever" on a batched damage event fires once per source** (603.2c): Aphelia's halving twice; Jace, Cunning Castaway likely over-triggers (`effect:delayed-whenever-batched-damage`, batch 237).

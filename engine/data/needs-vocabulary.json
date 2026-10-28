@@ -4870,6 +4870,26 @@
    "example": "On Serra's Wings: \"Enchanted creature is legendary\": no static adds a supertype",
    "checked": "2026-10-27: missing"
   },
+  "effect:blocks-each-attacker-if-able": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Blaze of Glory: 'it blocks each attacking creature this turn if able' — a block requirement for every attacker, beside 'can block any number of creatures' (blockAdditional)."
+  },
+  "static:block-additional-per-count": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Kemba's Legion: 'can block an additional creature each combat for each Equipment attached to it' — blockAdditional takes a fixed number, not a live count."
+  },
+  "effect:set-creature-type-all": {
+   "family": "effect:set-creature-type",
+   "example": "Standardize, Mistform Wakecaster: 'each creature [you control] becomes that type until end of turn' — add-types' setSubtypes reaches one target; no mass form."
+  },
+  "target:creature-defending-player-controls-spell": {
+   "family": "effect:defending-player-of-attached-attacker",
+   "example": "Yare: 'target creature defending player controls' on an instant — the defending player is found only from an attacking source (rule 508.5a)."
+  },
+  "amount:target-player-counters": {
+   "family": "effect:amount-new-variants",
+   "example": "Vraska, Betrayal's Sting: 'if target player has fewer than nine poison counters, they get … the difference' — playerCounters reads you, an opponent or that-player, never a target."
+  },
   "static:static-lose-all-abilities": {
    "example": "Dress Down: Losing all abilities exists only as an effect modifier, not as a static ability.",
    "checked": "2026-10-27: missing"

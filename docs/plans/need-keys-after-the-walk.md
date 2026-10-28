@@ -371,6 +371,16 @@ missing. Re-run `--greedy` for Phase 2's order.
   permanent it was. The new scaffolder template auto-finished 15 of the 29 left after the lead's
   10, so the lead authored all 39; 9 still blocked — four on `effect:exile-chosen-from-revealed-hand`
   (another family), two new narrow keys. Next: `static:static-lose-all-abilities` (38).
+- **2026-10-28: three families in one batch (B249)** — the user's call mid-session: several
+  families a session, one verify. `static:static-lose-all-abilities` (with
+  `static:static-set-characteristics`, 38 by `--greedy`), `static:combat-restriction-extensions`
+  (36) and `effect:set-types-temporary` with `effect:set-creature-type` (28): a static loss of
+  all abilities read by every ability check, in dependency order and as a permanent enters
+  (614.12 — found by an agent's Alpine Moon); block limits with the client's block builder;
+  "becomes a [type]" one-shots. 98 authored (16 by the lead, 27 auto-finished by the new
+  templates and checked, 53 by three agents, Alpine Moon after the 614.12 fix), 22 still blocked,
+  five on new narrow keys. Next: `replacement:damage-modification` (34),
+  `effect:target-spec-additions` (34), `effect:repeat-process` (32).
 
 ## Rough size
 
