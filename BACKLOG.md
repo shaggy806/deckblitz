@@ -76,9 +76,12 @@ section keeps only what to do next.
   `effect:search-opponent-library`), banding (B247, 2026-10-28: rule 702.22 whole — bands declared
   with the attack, blocked as one, the other side dividing combat damage, "bands with other" and
   "creatures banded with it"; the client's band builder in the attack bar; 44 of its 46 cards
-  authored, 2 still blocked on new narrow keys). Next: `effect:search-opponent-library` (44 with
-  `effect:extract-same-name`, freeing the Memoricide searches B246 left blocked), then
-  `static:static-lose-all-abilities` (38). `static:combat-restriction-extensions` (36, blocking
+  authored, 2 still blocked on new narrow keys), search-opponent-library (B248, 2026-10-28:
+  `search-library` over another player's library or graveyard, hand and library — the searcher
+  choosing, that player shuffling, "all" vs "any number" (rule 701.23b), exile face down and
+  playable, a cast from the library, `then` over the finds; 39 of its 48 cards authored, 9 still
+  blocked — four on `effect:exile-chosen-from-revealed-hand`). Next: `static:static-lose-all-abilities`
+  (38, with `static:static-set-characteristics`), then `static:combat-restriction-extensions` (36). `static:combat-restriction-extensions` (36, blocking
   additional creatures) can reuse banding's blocker that divides its damage among several
   attackers (510.1d, `combat/banding.ts`'s `blockedAttackersOf`).
 

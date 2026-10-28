@@ -5623,3 +5623,17 @@ engine terms. A second thing to check is a second test.
 ### Benalish Hero: the defender divides a trampler's damage
 - **Do:** Attack Bob with Colossal Dreadmaw. As Bob, block it with Benalish Hero.
 - **Expect:** Bob is asked "Banding: you divide Colossal Dreadmaw's 6 damage (trample)", starting with all 6 on the Hero and none to Bob. Confirming leaves Bob's life where it was.
+
+## Searching an opponent's zones (2026-10-28, need-keys Phase 2: the search-opponent-library family)
+
+### Bribery: take a creature from the opponent's library
+- **Do:** Cast Bribery targeting Bob.
+- **Expect:** A popup reads "Choose a card from Bob's cards to put onto the battlefield under your control", listing only Bob's creature cards (Hill Giant, Colossal Dreadmaw). The one you pick enters on your side; the log shows Bob shuffling.
+
+### Cranial Extraction: the graveyard's copies go whatever you pick
+- **Do:** Cast Cranial Extraction targeting Bob and name Lightning Bolt. Pick nothing and confirm.
+- **Expect:** The popup lists Bob's Lightning Bolts in his hand and library only, and its title ends "— the 1 in the graveyard go too". Bob's graveyard Bolt is exiled; the others stay.
+
+### Praetor's Grasp: the exiled card is yours to play, face down to Bob
+- **Do:** Cast Praetor's Grasp targeting Bob and pick his Lightning Bolt. Then cast it from exile at Bob.
+- **Expect:** The popup reads "Choose a card from Bob's cards to exile face down". The Bolt sits in exile face down for Bob, face up for you, and can be cast from there; Bob goes to 17.

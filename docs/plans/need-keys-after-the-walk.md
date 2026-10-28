@@ -362,6 +362,15 @@ missing. Re-run `--greedy` for Phase 2's order.
   the client's attack bar and the damage prompt for the other side. The 32 cards after the lead's
   14 scaffolded to 21 finished and 11 drafts, so the lead authored all 44 (sizing: 15 or fewer
   left, no agent); 2 still blocked on new narrow keys. Next: `effect:search-opponent-library` (44).
+- **2026-10-28: the search-opponent-library family (B248).** Its one group
+  (`effect:search-opponent-library` + `effect:extract-same-name`, 48 cards by `--feature`):
+  `search-library`'s `whose`, the graveyard-hand-library zones, `all` against "any number" (rule
+  701.23b), exile face down and playable, a cast from the library, and `then` over the finds.
+  Building it found a countered spell's "its controller" read as its owner once it left the stack
+  (Counterbore's ruling), and Deicide's "the exiled card" needing the card in exile rather than the
+  permanent it was. The new scaffolder template auto-finished 15 of the 29 left after the lead's
+  10, so the lead authored all 39; 9 still blocked — four on `effect:exile-chosen-from-revealed-hand`
+  (another family), two new narrow keys. Next: `static:static-lose-all-abilities` (38).
 
 ## Rough size
 

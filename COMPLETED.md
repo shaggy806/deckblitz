@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the search-opponent-library family** (2026-10-28, B248,
+  `effect:search-opponent-library` + `effect:extract-same-name`): `search-library`'s `whose` — a
+  player target, a target's controller or owner, the trigger player — with the searcher deciding,
+  the library's owner shuffling and battlefield finds entering under the searcher's control;
+  `zones: "graveyard-hand-library"` (the hand shown to the searcher); `all` (rule 701.23b: the
+  graveyard's matches taken, the hidden zones' optional); exile destinations, face down with
+  `playable` (Praetor's Grasp), and `"stay"` for a cast from the library (Knowledge
+  Exploitation); `then` over the finds with the searched player as "that player". Also the
+  `exiled-from-hand` this-way kind, the `sameNameAsThisWay` filter, `EffectPlayerRef`'s
+  `ownerOfTarget`, a countered spell's controller kept as it leaves the stack (Counterbore's
+  ruling), the `target` condition's `now`, the bots' denial picks from another player's zones,
+  the client's prompt titles; scaffolder templates. 39 cards: Praetor's Grasp, Bribery, Surgical
+  Extraction, Memoricide, Slaughter Games, Extirpate, Hide // Seek and the rest; 9 still blocked
+  (`B248.json`).
 - **Need-keys Phase 2, the banding family** (2026-10-28, B247, `keyword:banding`): rule 702.22
   whole, in `combat/banding.ts` — bands declared with the attack (`AttackerDeclaration.band`,
   banding and up to one without, or creatures of a quality one "bands with other" of, one
