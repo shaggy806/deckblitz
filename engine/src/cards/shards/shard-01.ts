@@ -449,6 +449,7 @@ import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolNorwoodPriestess from "../pool/norwood-priestess.js";
+import _poolNotDeadAfterAll from "../pool/not-dead-after-all.js";
 import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -571,6 +572,7 @@ import _poolScornedVillager from "../pool/scorned-villager.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
+import _poolScrollOfIsildur from "../pool/scroll-of-isildur.js";
 import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
@@ -1254,6 +1256,7 @@ const shard: CardShard = {
     _poolNoWayOut,
     _poolNornsWellspring,
     _poolNorwoodPriestess,
+    _poolNotDeadAfterAll,
     _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -1376,6 +1379,7 @@ const shard: CardShard = {
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
+    _poolScrollOfIsildur,
     _poolScurryOfGremlins,
     _poolSearchForTomorrow,
     _poolSeashellCameo,

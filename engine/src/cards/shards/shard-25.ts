@@ -344,6 +344,7 @@ import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
+import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
@@ -567,6 +568,7 @@ import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
 import _poolRockyRebuke from "../pool/rocky-rebuke.js";
 import _poolRograkhSonOfRohgahh from "../pool/rograkh-son-of-rohgahh.js";
+import _poolRogueClass from "../pool/rogue-class.js";
 import _poolRoilingDragonstorm from "../pool/roiling-dragonstorm.js";
 import _poolRollingHamsphere from "../pool/rolling-hamsphere.js";
 import _poolRomanticRendezvous from "../pool/romantic-rendezvous.js";
@@ -587,6 +589,7 @@ import _poolSanguineSacrament from "../pool/sanguine-sacrament.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScabClanMauler from "../pool/scab-clan-mauler.js";
+import _poolScavengersTalent from "../pool/scavengers-talent.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScourglass from "../pool/scourglass.js";
@@ -1146,6 +1149,7 @@ const shard: CardShard = {
     _poolInnerDemonsGangsters,
     _poolInnerFire,
     _poolInspiringPaladin,
+    _poolInspiringRefrain,
     _poolJacesTriumph,
     _poolJaggedLightning,
     _poolJetMedallion,
@@ -1369,6 +1373,7 @@ const shard: CardShard = {
     _poolRockfallVale,
     _poolRockyRebuke,
     _poolRograkhSonOfRohgahh,
+    _poolRogueClass,
     _poolRoilingDragonstorm,
     _poolRollingHamsphere,
     _poolRomanticRendezvous,
@@ -1389,6 +1394,7 @@ const shard: CardShard = {
     _poolSarkhansUnsealing,
     _poolSauronDinoDevotee,
     _poolScabClanMauler,
+    _poolScavengersTalent,
     _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScourglass,

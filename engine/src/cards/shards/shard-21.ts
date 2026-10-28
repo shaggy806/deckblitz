@@ -562,6 +562,7 @@ import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
 import _poolSatsukiTheLivingLore from "../pool/satsuki-the-living-lore.js";
 import _poolSauroformHybrid from "../pool/sauroform-hybrid.js";
+import _poolSauronLordOfTheRings from "../pool/sauron-lord-of-the-rings.js";
 import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
@@ -638,6 +639,7 @@ import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
 import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
 import _poolStrongarmTactics from "../pool/strongarm-tactics.js";
+import _poolStruggleForProjectPurity from "../pool/struggle-for-project-purity.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
@@ -1365,6 +1367,7 @@ const shard: CardShard = {
     _poolSatoruUmezawa,
     _poolSatsukiTheLivingLore,
     _poolSauroformHybrid,
+    _poolSauronLordOfTheRings,
     _poolScaledHerbalist,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
@@ -1441,6 +1444,7 @@ const shard: CardShard = {
     _poolStormplainDetainment,
     _poolStrengthOfLunacy,
     _poolStrongarmTactics,
+    _poolStruggleForProjectPurity,
     _poolStudentOfOjutai,
     _poolStumpStomp,
     _poolStymiedHopes,

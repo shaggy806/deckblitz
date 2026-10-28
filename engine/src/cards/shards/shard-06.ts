@@ -53,6 +53,7 @@ import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
 import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
+import _poolAvatarKuruk from "../pool/avatar-kuruk.js";
 import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolAwakenTheHonoredDead from "../pool/awaken-the-honored-dead.js";
 import _poolBackToNature from "../pool/back-to-nature.js";
@@ -226,6 +227,7 @@ import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
+import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
@@ -864,6 +866,7 @@ const shard: CardShard = {
     _poolAugmentingAutomaton,
     _poolAuriokSunchaser,
     _poolAuthority,
+    _poolAvatarKuruk,
     _poolAvatarsWrath,
     _poolAwakenTheHonoredDead,
     _poolBackToNature,
@@ -1037,6 +1040,7 @@ const shard: CardShard = {
     _poolEarthenAlly,
     _poolEbonDragon,
     _poolEchoingRuin,
+    _poolElrondLordOfRivendell,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
     _poolEmeriaTheSkyRuin,

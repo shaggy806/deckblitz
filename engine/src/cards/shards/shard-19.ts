@@ -70,6 +70,7 @@ import _poolBlanketOfNight from "../pool/blanket-of-night.js";
 import _poolBlastOfGenius from "../pool/blast-of-genius.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlazingRootwalla from "../pool/blazing-rootwalla.js";
+import _poolBlessedSanctuary from "../pool/blessed-sanctuary.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
 import _poolBlindWithAnger from "../pool/blind-with-anger.js";
@@ -748,6 +749,7 @@ import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
+import _poolThereAndBackAgain from "../pool/there-and-back-again.js";
 import _poolThoughtEater from "../pool/thought-eater.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTimeOfHeroes from "../pool/time-of-heroes.js";
@@ -928,6 +930,7 @@ const shard: CardShard = {
     _poolBlastOfGenius,
     _poolBlastingStation,
     _poolBlazingRootwalla,
+    _poolBlessedSanctuary,
     _poolBlightsowerThallid,
     _poolBlightsteelColossus,
     _poolBlindWithAnger,
@@ -1606,6 +1609,7 @@ const shard: CardShard = {
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
+    _poolThereAndBackAgain,
     _poolThoughtEater,
     _poolThrabenHeretic,
     _poolTimeOfHeroes,

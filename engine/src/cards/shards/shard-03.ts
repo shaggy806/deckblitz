@@ -64,6 +64,7 @@ import _poolBoskBanneret from "../pool/bosk-banneret.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBriarknitKami from "../pool/briarknit-kami.js";
+import _poolBrimazBlightOfOreskos from "../pool/brimaz-blight-of-oreskos.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBurdenOfGreed from "../pool/burden-of-greed.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
@@ -100,6 +101,7 @@ import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCloudthresher from "../pool/cloudthresher.js";
 import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
+import _poolConcordantCrossroads from "../pool/concordant-crossroads.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolConfrontThePast from "../pool/confront-the-past.js";
@@ -813,6 +815,7 @@ const shard: CardShard = {
     _poolBovineIntervention,
     _poolBranchblightStalker,
     _poolBriarknitKami,
+    _poolBrimazBlightOfOreskos,
     _poolBrotherhoodPatriarch,
     _poolBurdenOfGreed,
     _poolBurnDownTheHouse,
@@ -849,6 +852,7 @@ const shard: CardShard = {
     _poolCloudthresher,
     _poolCommandTower,
     _poolCompelBrutality,
+    _poolConcordantCrossroads,
     _poolCondemn,
     _poolCondescend,
     _poolConfrontThePast,

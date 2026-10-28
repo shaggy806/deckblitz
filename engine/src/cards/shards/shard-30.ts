@@ -71,6 +71,7 @@ import _poolBlessedAlliance from "../pool/blessed-alliance.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
 import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
+import _poolBloatflySwarm from "../pool/bloatfly-swarm.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
@@ -889,6 +890,7 @@ const shard: CardShard = {
     _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
     _poolBlightreaperThallid,
+    _poolBloatflySwarm,
     _poolBloodArtist,
     _poolBloodPet,
     _poolBloodbraidElf,

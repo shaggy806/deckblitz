@@ -30,6 +30,7 @@ import _poolAlleyGrifters from "../pool/alley-grifters.js";
 import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
+import _poolAncientBronzeDragon from "../pool/ancient-bronze-dragon.js";
 import _poolAncientSpring from "../pool/ancient-spring.js";
 import _poolAndurilNarsilReforged from "../pool/anduril-narsil-reforged.js";
 import _poolAngelOfTheDireHour from "../pool/angel-of-the-dire-hour.js";
@@ -463,6 +464,7 @@ import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
+import _poolMyrkulsEdict from "../pool/myrkuls-edict.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
@@ -903,6 +905,7 @@ const shard: CardShard = {
     _poolAmarantCoral,
     _poolAnaconda,
     _poolAncestorsProphet,
+    _poolAncientBronzeDragon,
     _poolAncientSpring,
     _poolAndurilNarsilReforged,
     _poolAngelOfTheDireHour,
@@ -1336,6 +1339,7 @@ const shard: CardShard = {
     _poolMoxJasper,
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
+    _poolMyrkulsEdict,
     _poolMysticMeditation,
     _poolMysticSnake,
     _poolNantukoTracer,
