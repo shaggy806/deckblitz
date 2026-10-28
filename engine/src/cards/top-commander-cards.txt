@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3842 already implemented / 1158 missing (marks refreshed 2026-10-27)
+3850 already implemented / 1150 missing (marks refreshed 2026-10-27)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -458,7 +458,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   459  Sheoldred, the Apocalypse                {2}{B}{B}        Legendary Creature — Phyrexian Praetor
 [x]   460  Ghalta, Primal Hunger                    {10}{G}{G}       Legendary Creature — Elder Dinosaur
 [x]   461  Academy Ruins                            {0}              Legendary Land
-[ ]   462  Disciple of Freyalise // Garden of Freyalise {6}              Creature — Elf Druid // Land
+[x]   462  Disciple of Freyalise // Garden of Freyalise {6}              Creature — Elf Druid // Land
 [x]   463  Goblin Bombardment                       {1}{R}           Enchantment
 [x]   464  Treasure Vault                           {0}              Artifact Land
 [x]   465  Mental Misstep                           {U/P}            Instant
@@ -2272,7 +2272,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2279  Manglehorn                               {2}{G}           Creature — Beast
 [x]  2280  Goldmire Bridge                          {0}              Artifact Land
 [ ]  2281  Fighter Class                            {R}{W}           Enchantment — Class
-[ ]  2282  Glittering Stockpile                     {2}{R}           Artifact — Treasure
+[x]  2282  Glittering Stockpile                     {2}{R}           Artifact — Treasure
 [ ]  2283  Thrumming Stone                          {5}              Legendary Artifact
 [ ]  2284  Dance of the Dead                        {1}{B}           Enchantment — Aura
 [x]  2285  Blacksmith's Skill                       {W}              Instant
@@ -2815,7 +2815,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2822  Lazotep Plating                          {1}{U}           Instant
 [x]  2823  Sylvan Anthem                            {G}{G}           Enchantment
 [x]  2824  Valkyrie Harbinger                       {4}{W}{W}        Creature — Angel Cleric
-[ ]  2825  Sidisi, Undead Vizier                    {3}{B}{B}        Legendary Creature — Zombie Snake
+[x]  2825  Sidisi, Undead Vizier                    {3}{B}{B}        Legendary Creature — Zombie Snake
 [x]  2826  Prime Speaker Zegana                     {2}{G}{G}{U}{U}  Legendary Creature — Merfolk Wizard
 [x]  2827  Pyromancer's Goggles                     {5}              Legendary Artifact
 [x]  2828  Chromatic Star                           {1}              Artifact
@@ -3319,7 +3319,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3326  Tree of Redemption                       {3}{G}           Creature — Plant
 [x]  3327  Heliod, the Radiant Dawn // Heliod, the Warped Eclipse {4}              Legendary Enchantment Creature — God // Legendary Enchantment Creature — Phyrexian God
 [x]  3328  Privileged Position                      {2}{G/W}{G/W}{G/W} Enchantment
-[ ]  3329  Gemstone Mine                            {0}              Land
+[x]  3329  Gemstone Mine                            {0}              Land
 [x]  3330  Frontier Siege                           {3}{G}           Enchantment
 [x]  3331  Ichor Rats                               {1}{B}{B}        Creature — Phyrexian Rat
 [x]  3332  Mendicant Core, Guidelight               {W}{U}           Legendary Artifact Creature — Robot
@@ -3346,7 +3346,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3353  Cut Your Losses                          {4}{U}{U}        Sorcery
 [ ]  3354  Generous Patron                          {2}{G}           Creature — Elf Advisor
 [x]  3355  Chittering Witch                         {3}{B}           Creature — Human Warlock
-[ ]  3356  Grove of the Burnwillows                 {0}              Land
+[x]  3356  Grove of the Burnwillows                 {0}              Land
 [x]  3357  Goblin King                              {1}{R}{R}        Creature — Goblin
 [x]  3358  Mortality Spear                          {2}{B}{G}        Instant
 [x]  3359  Quasiduplicate                           {1}{U}{U}        Sorcery
@@ -3464,7 +3464,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3471  Caustic Caterpillar                      {G}              Creature — Insect
 [x]  3472  Alela, Cunning Conqueror                 {2}{U}{B}        Legendary Creature — Faerie Warlock
 [x]  3473  Leyline of the Void                      {2}{B}{B}        Enchantment
-[ ]  3474  Didn't Say Please                        {1}{U}{U}        Instant
+[x]  3474  Didn't Say Please                        {1}{U}{U}        Instant
 [x]  3475  Blasting Station                         {3}              Artifact
 [ ]  3476  Burning Inquiry                          {R}              Sorcery
 [ ]  3477  Master of Cruelties                      {3}{B}{R}        Creature — Demon
@@ -4883,7 +4883,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4890  Kishla Village                           {0}              Land
 [x]  4891  Marchesa, the Black Rose                 {1}{U}{B}{R}     Legendary Creature — Human Wizard
 [ ]  4892  Defiler of Instinct                      {2}{R}{R}        Creature — Phyrexian Kavu
-[ ]  4893  Combat Calligrapher                      {3}{W}           Creature — Bird Cleric
+[x]  4893  Combat Calligrapher                      {3}{W}           Creature — Bird Cleric
 [x]  4894  Elfsworn Giant                           {3}{G}{G}        Creature — Giant
 [x]  4895  Sisay's Ring                             {4}              Artifact
 [x]  4896  Deduce                                   {1}{U}           Instant
@@ -4918,7 +4918,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4925  Goblin War Drums                         {2}{R}           Enchantment
 [x]  4926  Old Rutstein                             {1}{B}{G}        Legendary Creature — Human Peasant
 [x]  4927  Tunneling Geopede                        {2}{R}           Creature — Insect
-[ ]  4928  Suspended Sentence                       {3}{B}           Instant
+[x]  4928  Suspended Sentence                       {3}{B}           Instant
 [x]  4929  Drifting Meadow                          {0}              Land
 [ ]  4930  The Bath Song                            {3}{U}           Enchantment — Saga
 [ ]  4931  Black Sun's Twilight                     {X}{B}           Instant
