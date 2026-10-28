@@ -1370,6 +1370,14 @@ export interface PtModifier {
    * more instance, added to the total, gone with a later loss of all
    * abilities like a granted keyword. */
   toxic?: number;
+  /** Layer 6 — protection it grants (rule 702.16 — the `grant-protection`
+   * effect): the same three clauses as `StaticAbility.protection`, gone with
+   * a later loss of all abilities like a granted keyword (613.7). */
+  protection?: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+  };
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */

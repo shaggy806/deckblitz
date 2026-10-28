@@ -152,6 +152,7 @@ import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
+import _poolCrypsis from "../pool/crypsis.js";
 import _poolCryptCobra from "../pool/crypt-cobra.js";
 import _poolCryptOfAgadeem from "../pool/crypt-of-agadeem.js";
 import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
@@ -987,6 +988,7 @@ const shard: CardShard = {
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
     _poolCrushContraband,
+    _poolCrypsis,
     _poolCryptCobra,
     _poolCryptOfAgadeem,
     _poolCrystallineSliver,

@@ -395,6 +395,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       ? v.touch(n.target, "harm", MINOR)
       : v.touch(n.target, "help", MAJOR),
   "grant-toxic": (n, v) => v.touch(n.target, "help", MINOR),
+  "grant-protection": (n, v) => v.touch(n.target, "help", MAJOR),
   incubate: none,
   // Out of combat: an opponent's attacker or blocker, or one's own attacker
   // saved from a block — the board's call, or the card's own `whose`.
@@ -959,6 +960,8 @@ function attachedTriggerLean(effect: EffectSpec | null): "help" | "harm" | null 
     }
     case "grant-keyword":
       return effect.keyword === "defender" ? "harm" : "help";
+    case "grant-protection":
+      return "help";
     // The Ordeals' "whenever enchanted creature attacks, put a +1/+1 counter
     // on it".
     case "add-counter":

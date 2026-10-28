@@ -124,16 +124,28 @@ export function abilitySourceTypes(
   return departed !== undefined ? departed.types : registry.get(printedCardName(source)).types;
 }
 
-/** Does `target`'s protection (rule 702.16) stop `source` from affecting it? */
+/** Does `target`'s protection (rule 702.16) stop `source` from affecting it?
+ * `enchanting` is the Aura whose attachment is the question (702.16c): an
+ * instance that "doesn't remove" that Aura is left out for it (702.16n). */
 export function protectionBlocks(
   state: GameState,
   registry: CardRegistry,
   target: ObjectId,
   source: TargetSource,
+  enchanting?: ObjectId,
 ): boolean {
   const object = state.objects[target];
   if (object === undefined || object.zone !== "battlefield") return false;
-  return qualityMatches(state, registry, object.controller, computeCharacteristics(state, registry, target).protectionFrom, source);
+  const protection = computeCharacteristics(state, registry, target).protectionFrom;
+  const sparing = protection.sparing;
+  if (enchanting !== undefined && sparing !== undefined) {
+    const colors = new Set(sparing.otherColors);
+    for (const instance of sparing.instances) {
+      if (instance.aura !== enchanting) for (const c of instance.colors) colors.add(c);
+    }
+    return qualityMatches(state, registry, object.controller, { ...protection, colors }, source);
+  }
+  return qualityMatches(state, registry, object.controller, protection, source);
 }
 
 /** Hexproof from a quality (rule 702.11d-e): `target` has hexproof from
@@ -153,6 +165,25 @@ export function hexproofFromBlocks(
 
 /** Whether `source` has one of the qualities `prot` names — a colour, a card
  * type, or a filter (see `protectionBlocks`). */
+/** Whether protection from `from` (fixed qualities, as a `grant-protection`
+ * names them) would match `source`, read from `controller`'s side as
+ * `protectionBlocks` reads it — the bots' "which colour stops that?". */
+export function protectionQualitiesMatch(
+  state: GameState,
+  registry: CardRegistry,
+  controller: PlayerId,
+  from: { readonly colors?: readonly Color[]; readonly types?: readonly CardType[]; readonly filter?: CardFilter },
+  source: TargetSource,
+): boolean {
+  return qualityMatches(
+    state,
+    registry,
+    controller,
+    { colors: new Set(from.colors ?? []), types: new Set(from.types ?? []), filters: from.filter === undefined ? [] : [from.filter] },
+    source,
+  );
+}
+
 function qualityMatches(
   state: GameState,
   registry: CardRegistry,

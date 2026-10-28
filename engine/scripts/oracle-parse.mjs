@@ -1599,6 +1599,34 @@ export function parseSentence(sentence, ctx) {
     return kws.length === 1 ? one(kws[0]) : { kind: "sequence", effects: kws.map(one) };
   }
 
+  // Protection for a while (rule 702.16 — the `grant-protection` effect):
+  // fixed qualities, or the color (card type) of your choice, chosen as it
+  // resolves.
+  if ((m = re(`(~|${TARGET}) gains protection from ${PROTECTION_FROM} until (end of turn|your next turn)`).exec(s))) {
+    const from = protectionFrom(m[2]);
+    if (from === null) return null;
+    return {
+      kind: "grant-protection",
+      target: m[1] === "~" ? "source" : slot(m[1]),
+      from,
+      duration: m[3] === "end of turn" ? "end-of-turn" : "until-your-next-turn",
+    };
+  }
+  if ((m = re(`(choose a color\\. )?(other )?creatures you control gain protection from (the chosen color|${PROTECTION_FROM}) until end of turn`).exec(s))) {
+    if (m[2] && !otherMeansSource(ctx)) return null;
+    // "The chosen color" is the one this sentence's "choose a color" asks for.
+    if ((m[3].toLowerCase() === "the chosen color") !== Boolean(m[1])) return null;
+    const from = m[1] ? { choose: "color" } : protectionFrom(m[3]);
+    if (from === null) return null;
+    return {
+      kind: "grant-protection",
+      filter: { type: "creature", controlledBy: "you" },
+      ...(m[2] ? { exceptSource: true } : {}),
+      from,
+      duration: "end-of-turn",
+    };
+  }
+
   // Mana.
   if ((m = /^add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {
     const units = m[1].match(/[WUBRGC]/g);
@@ -3261,6 +3289,26 @@ function parseModalSpell(spellLines, ctx) {
 
 /** Static lines the engine models in one shape. */
 const COLOR_WORDS = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+
+/** A protection grant's qualities, as `grant-protection` reads them. */
+const PROTECTION_FROM =
+  "(the color of your choice|the card type of your choice|colorless or from the color of your choice|artifacts or from the color of your choice|each color|artifacts|creatures|(?:white|blue|black|red|green)(?: and from (?:white|blue|black|red|green))?)";
+function protectionFrom(words) {
+  const w = words.toLowerCase();
+  if (w === "the color of your choice") return { choose: "color" };
+  if (w === "the card type of your choice") return { choose: "card-type" };
+  if (w === "colorless or from the color of your choice") {
+    return { choose: "color", or: [{ text: "colorless", from: { filter: { colorless: true } } }] };
+  }
+  if (w === "artifacts or from the color of your choice") {
+    return { choose: "color", or: [{ text: "artifacts", from: { types: ["artifact"] } }] };
+  }
+  if (w === "each color") return { colors: ["W", "U", "B", "R", "G"] };
+  if (w === "artifacts") return { types: ["artifact"] };
+  if (w === "creatures") return { types: ["creature"] };
+  const colors = w.split(" and from ").map((c) => COLOR_WORDS[c]);
+  return colors.every(Boolean) ? { colors } : null;
+}
 /** "your devotion to [white]( and [black])" — one colour or two (rule 700.5). */
 const DEVOTION = "(white|blue|black|red|green)(?: and (white|blue|black|red|green))?";
 const devotionColors = (a, b) => [a, b].filter(Boolean).map((w) => COLOR_WORDS[w]);

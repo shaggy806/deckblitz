@@ -40,6 +40,31 @@ describe("effect templates", () => {
     ["Scry 2.", { kind: "scry", amount: 2 }],
     ["~ gets +1/+0 until end of turn.", { kind: "modify-pt", target: "source", power: 1, toughness: 0, duration: "end-of-turn" }],
     ["Target creature gains flying until end of turn.", { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" }],
+    [
+      "Target creature you control gains protection from the color of your choice until end of turn.",
+      { kind: "grant-protection", target: 0, from: { choose: "color" }, duration: "end-of-turn" },
+    ],
+    [
+      "Target creature gains protection from artifacts or from the color of your choice until end of turn.",
+      {
+        kind: "grant-protection",
+        target: 0,
+        from: { choose: "color", or: [{ text: "artifacts", from: { types: ["artifact"] } }] },
+        duration: "end-of-turn",
+      },
+    ],
+    [
+      "~ gains protection from black and from red until end of turn.",
+      { kind: "grant-protection", target: "source", from: { colors: ["B", "R"] }, duration: "end-of-turn" },
+    ],
+    [
+      "Target creature gains protection from each color until your next turn.",
+      { kind: "grant-protection", target: 0, from: { colors: ["W", "U", "B", "R", "G"] }, duration: "until-your-next-turn" },
+    ],
+    [
+      "Creatures you control gain protection from artifacts until end of turn.",
+      { kind: "grant-protection", filter: { type: "creature", controlledBy: "you" }, from: { types: ["artifact"] }, duration: "end-of-turn" },
+    ],
     ["Add {G}.", { kind: "add-mana", mana: "G", amount: 1 }],
     ["Add {R} or {G}.", { kind: "add-mana", mana: { oneOf: ["R", "G"] }, amount: 1 }],
     ["Each opponent skips their next untap step.", { kind: "skip-untap-step", who: "each-opponent" }],
@@ -69,6 +94,10 @@ describe("effect templates", () => {
     'Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if you control four or more Wizards, transform ~.',
     // A sentence no template covers.
     "Return a permanent you control to its owner's hand.",
+    // "The chosen color" with no "choose a color" before it is a colour
+    // chosen earlier (Floating Shield's, as it entered) — not this one's.
+    "Target creature gains protection from the chosen color until end of turn.",
+    "Creatures you control gain protection from the chosen color until end of turn.",
   ])("leaves alone: %s", (sentence) => {
     expect(parseSentence(sentence, ctx({ tokenFor: () => "Some Token" }))).toBeNull();
   });

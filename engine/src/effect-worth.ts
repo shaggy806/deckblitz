@@ -30,15 +30,18 @@
  * may both use it.
  */
 
+import type { CardRegistry } from "./cards/card-registry.js";
 import type { CardDefinition } from "./cards/define.js";
+import { computeCharacteristics } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
-import type { EffectAmount, EffectSpec, EffectTargetRef, PlayerScope } from "./effects.js";
+import type { EffectAmount, EffectSpec, EffectTargetRef, PlayerScope, ProtectionQualities } from "./effects.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
 import { activePlayerOf } from "./state.js";
 import type { ResolvedTargets } from "./target.js";
 import { sideOf, slotStrengths } from "./target-polarity.js";
+import { permanentSource, protectionQualitiesMatch } from "./targeting.js";
 
 /** What one card is worth, the unit everything else is scaled to. */
 const CARD = 2;
@@ -69,6 +72,10 @@ export interface WorthContext {
   readonly triggerObject?: ObjectId;
   /** "That player" of the trigger, if it names one. */
   readonly triggerPlayer?: PlayerId;
+  /** The card registry, where a worth reads characteristics — a protection
+   * grant's colour against what threatens the creature. Without it those
+   * read as nothing. */
+  readonly cards?: CardRegistry;
 }
 
 /** A plain number of an amount, or `fallback` for a live one. */
@@ -199,6 +206,46 @@ function targetsWorth(effect: EffectSpec, ctx: WorthContext): number {
   return total;
 }
 
+/**
+ * What a protection grant's quality is worth beyond the grant itself (its
+ * target slot is read as help already): an opponent's spell or ability on the
+ * stack aimed at the protected permanent that this quality would stop (rule
+ * 702.16b — it's countered on resolution, 608.2b), and a little for each
+ * opposing creature it walls off (blocks, damage). What v1 weighs "the color
+ * of your choice" by: every colour is the same help to the slot.
+ */
+function protectionWorth(
+  target: EffectTargetRef | undefined,
+  from: ProtectionQualities,
+  ctx: WorthContext,
+): number {
+  const cards = ctx.cards;
+  if (cards === undefined) return 0;
+  const state = ctx.state;
+  const ref = target === undefined ? undefined : target === "source" ? ctx.source : target === "trigger-object" ? ctx.triggerObject : undefined;
+  const slot = typeof target === "number" ? ctx.targets[target] : undefined;
+  const protectedId = ref ?? (slot?.kind === "object" ? slot.object : undefined);
+  if (protectedId === undefined) return 0;
+  const owner = state.objects[protectedId]?.controller ?? ctx.controller;
+  const opponents = new Set(opponentsOf(state, owner));
+  const stops = (id: ObjectId): boolean => protectionQualitiesMatch(state, cards, owner, from, permanentSource(state, cards, id));
+  let worth = 0;
+  for (const id of state.zones.shared.stack) {
+    const item = state.objects[id];
+    if (item === undefined || !opponents.has(item.controller)) continue;
+    if (!(item.targets ?? []).some((t) => t?.kind === "object" && t.object === protectedId)) continue;
+    const from = item.kind === "ability" ? item.sourceObjectId : id;
+    if (from !== null && stops(from)) worth += SLOT_WORTH[2];
+  }
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || !opponents.has(object.controller)) continue;
+    if (!computeCharacteristics(state, cards, id).types.includes("creature")) continue;
+    if (stops(id)) worth += 0.1;
+  }
+  return sideOf(state, { kind: "object", object: protectedId }, ctx.me) === "own" ? worth : -worth;
+}
+
 /** The untargeted parts: see the module comment for which kinds are read. */
 function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
   const you = [ctx.controller];
@@ -216,6 +263,8 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
         untargetedWorth(effect.effect, ctx) +
         (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
+    case "grant-protection":
+      return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx);
     case "draw": {
       if (typeof effect.target === "number") return 0;
       const n = sizeOf(effect.amount);
@@ -400,6 +449,7 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "modify-pt-all":
     case "grant-keyword":
     case "grant-keyword-all":
+    case "grant-protection":
     case "animate":
       return effect.duration === "end-of-turn";
     default:

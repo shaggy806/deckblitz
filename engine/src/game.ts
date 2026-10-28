@@ -179,6 +179,7 @@ import {
   applyEffectSpec,
   isCountScalableEffect,
   opponentsVoting,
+  protectionLabel,
   substituteChosenCreatureType,
   wardCostText,
 } from "./effects.js";
@@ -9508,7 +9509,7 @@ export class Game {
       return false;
     }
     const source = onBattlefield ? this.permanentSource(aura) : this.cardSource(def, aura);
-    return !protectionBlocks(this.state, this.registry, host, source);
+    return !protectionBlocks(this.state, this.registry, host, source, aura);
   }
 
   /**
@@ -23561,6 +23562,28 @@ export class Game {
           for (const id of this.battlefieldMatching(controller, on as CardFilter)) {
             if (exceptSource === true && id === source) continue;
             grant(id, timestamp);
+          }
+        }
+        invalidateComputedCache();
+      },
+      grantProtection: (on, from, duration) => {
+        const lasting = lastingHere(duration);
+        // One effect, one timestamp (rule 613.7b): the target, then what
+        // matches now (rule 611.2c).
+        const timestamp = this.freshTimestamp();
+        const label = protectionLabel(from);
+        const grant = (id: ObjectId): void => {
+          const object = this.state.objects[id];
+          if (object?.zone !== "battlefield" || !durationBegins(object, lasting)) return;
+          object.modifiers.push({ timestamp, power: 0, toughness: 0, keywords: [], protection: from, ...durationFields(lasting) });
+          this.emit({ type: "keyword-granted", object: id, keyword: label, duration: lasting });
+        };
+        const first = on.target?.kind === "object" ? this.splitOneFromStack(on.target.object) : undefined;
+        if (first !== undefined) grant(first);
+        if (on.filter !== undefined) {
+          for (const id of this.battlefieldMatching(controller, on.filter)) {
+            if (id === first || (on.exceptSource === true && id === source)) continue;
+            grant(id);
           }
         }
         invalidateComputedCache();

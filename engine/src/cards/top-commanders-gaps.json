@@ -481,7 +481,9 @@
   "cost:morph-return-permanent",
   "amount:count-in-graveyards-same-name-as-trigger-spell",
   "effect:skip-next-untap-step",
-  "mechanic:opening-hand-reveal"
+  "mechanic:opening-hand-reveal",
+  "effect:grant-protection-choice",
+  "effect:grant-protection-temporary"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

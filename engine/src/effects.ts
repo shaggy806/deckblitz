@@ -3064,6 +3064,32 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Gains protection from [quality]" for a duration (rule 702.16): the
+       * target's (Gods Willing: "target creature you control gains protection
+       * from the color of your choice until end of turn"), and every other
+       * permanent matching `filter` as it resolves (rule 611.2c), all with one
+       * timestamp — Brave the Elements' "white creatures you control", Bathe
+       * in Light's "target creature and each other creature that shares a
+       * color with it". A layer-6 grant (613.1f): a loss of all abilities
+       * after it takes it away, like a granted keyword (613.7).
+       *
+       * `from` is the quality, fixed (`{ colors: ["R"] }`, `{ types:
+       * ["artifact"] }`, a `filter` for anything else — "from creatures your
+       * opponents control", read from the effect's controller's side and fixed
+       * as it resolves), or a {@link ProtectionChoice} made as it resolves,
+       * before anything is granted — "the color of your choice", "the card
+       * type of your choice" — asked as a `choose-modes` decision, one mode
+       * per quality.
+       */
+      readonly kind: "grant-protection";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly exceptSource?: boolean;
+      readonly from: ProtectionQualities | ProtectionChoice;
+      readonly duration: PtDuration;
+    }
+  | {
+      /**
        * Connive (rule 701.50): the permanent's controller draws `amount`
        * cards (1 by default — "connives X" is an amount), then discards that
        * many, then puts a +1/+1 counter on it for each nonland card
@@ -5969,6 +5995,28 @@ export interface ZoneSecondPick {
 
 /** One selectable mode of a `modal` effect (rule 700.2) or a `castModal` card
  * (ROADMAP Phase 11 EG-2). */
+/** The qualities a protection grant names, ORed (rule 702.16g): colours,
+ * card types, and a filter for anything else (multicoloured, a subtype,
+ * `{ colorless: true }`, `{}` for everything). As `StaticAbility.protection`. */
+export interface ProtectionQualities {
+  readonly colors?: readonly Color[];
+  readonly types?: readonly CardType[];
+  readonly filter?: CardFilter;
+}
+
+/** A protection quality chosen as the effect resolves (a `grant-protection`'s
+ * `from`): `"color"` offers the five colours, `"card-type"` every card type
+ * (Pippin, Guard of the Citadel); `or` adds named alternatives — Giver of
+ * Runes' "from colorless or from the color of your choice" is `or: [{ text:
+ * "colorless", from: { filter: { colorless: true } } }]`. `optional` is "you
+ * **may** choose a color. If you do, …" (Kabira Evangel): no choice, nothing
+ * granted. */
+export interface ProtectionChoice {
+  readonly choose: "color" | "card-type";
+  readonly or?: readonly { readonly text: string; readonly from: ProtectionQualities }[];
+  readonly optional?: true;
+}
+
 export interface ModeOption {
   /** Rules text of this mode, shown in the chooser. */
   readonly text: string;
@@ -6684,6 +6732,14 @@ export interface EffectApi {
     target: TargetRef,
     power: number,
     toughness: number,
+    duration: PtDuration,
+  ): void;
+  /** See the `grant-protection` {@link EffectSpec}: the target, and every
+   * other battlefield permanent matching `filter` as it resolves (from the
+   * controller's side), all with one timestamp. `from` is fixed already. */
+  grantProtection(
+    on: { readonly target?: TargetRef; readonly filter?: CardFilter; readonly exceptSource?: true },
+    from: ProtectionQualities,
     duration: PtDuration,
   ): void;
   /** See the `grant-toxic` {@link EffectSpec}: `on` is the target, or a
@@ -8544,6 +8600,68 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   return resolveEffectTarget(ref, ctx);
 }
 
+const PROTECTION_COLOR_WORDS: Readonly<Record<Color, string>> = {
+  W: "white",
+  U: "blue",
+  B: "black",
+  R: "red",
+  G: "green",
+};
+
+/** Every card type (rule 300.1), for "the card type of your choice". */
+const PROTECTION_CARD_TYPES: readonly CardType[] = [
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "instant",
+  "kindred",
+  "land",
+  "planeswalker",
+  "sorcery",
+];
+
+/** The qualities a {@link ProtectionChoice} offers, each with its word:
+ * its `or` alternatives first, as printed ("from colorless or from the color
+ * of your choice"), then the colours or card types. */
+export function protectionChoiceOptions(
+  choice: ProtectionChoice,
+): readonly { readonly text: string; readonly from: ProtectionQualities }[] {
+  const listed =
+    choice.choose === "color"
+      ? (Object.keys(PROTECTION_COLOR_WORDS) as Color[]).map((c) => ({
+          text: PROTECTION_COLOR_WORDS[c],
+          from: { colors: [c] },
+        }))
+      : PROTECTION_CARD_TYPES.map((t) => ({ text: `${t}s`, from: { types: [t] } }));
+  return [...(choice.or ?? []), ...listed];
+}
+
+/** "protection from red and from artifacts" — the log's words for a grant. */
+export function protectionLabel(from: ProtectionQualities): string {
+  const words = [
+    ...(from.colors ?? []).map((c) => PROTECTION_COLOR_WORDS[c]),
+    ...(from.types ?? []).map((t) => `${t}s`),
+    ...(from.filter === undefined
+      ? []
+      : [from.filter.colorless === true ? "colorless" : Object.keys(from.filter).length === 0 ? "everything" : "a quality"]),
+  ];
+  return `protection from ${words.length === 0 ? "nothing" : words.join(" and from ")}`;
+}
+
+/** A protection filter's "you" and "your opponents" are the effect's
+ * controller's, fixed as it resolves ("protection from creatures your
+ * opponents control" — Crypsis): the filter is otherwise read from the
+ * protected permanent's controller's side, which a later change of control
+ * would move. Rewritten to the players themselves (`controllerIn`). */
+function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): ProtectionQualities {
+  const filter = from.filter;
+  if (filter?.controlledBy !== "you" && filter?.controlledBy !== "opponent") return from;
+  const { controlledBy, ...rest } = filter;
+  const players = controlledBy === "you" ? [ctx.controller] : ctx.playersInScope("each-opponent");
+  return { ...from, filter: { ...rest, controllerIn: players } };
+}
+
 function resolveEffectTarget(
   ref: EffectTargetRef,
   ctx: ResolutionContext,
@@ -10159,6 +10277,32 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.grantToxic(target, spec.amount, spec.duration);
+      return;
+    }
+    case "grant-protection": {
+      if ("choose" in spec.from) {
+        // The quality is chosen as it resolves, before anything gains it:
+        // one mode per quality, each the grant with that quality fixed.
+        const choice = spec.from;
+        const modes: ModeOption[] = protectionChoiceOptions(choice).map((option) => ({
+          text: `Protection from ${option.text}`,
+          effect: { ...spec, from: option.from },
+        }));
+        ctx.chooseModes(choice.optional === true ? 0 : 1, 1, modes);
+        return;
+      }
+      const from = fixProtectionSide(spec.from, ctx);
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (spec.target !== undefined && target === undefined && spec.filter === undefined) return;
+      ctx.grantProtection(
+        {
+          ...(target !== undefined ? { target } : {}),
+          ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+          ...(spec.exceptSource === true ? { exceptSource: true } : {}),
+        },
+        from,
+        spec.duration,
+      );
       return;
     }
     case "incubate":

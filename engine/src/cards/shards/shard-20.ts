@@ -521,6 +521,7 @@ import _poolPestSummoning from "../pool/pest-summoning.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
+import _poolPippinGuardOfTheCitadel from "../pool/pippin-guard-of-the-citadel.js";
 import _poolPixieDust from "../pool/pixie-dust.js";
 import _poolPollenLullaby from "../pool/pollen-lullaby.js";
 import _poolPontiffOfBlight from "../pool/pontiff-of-blight.js";
@@ -1399,6 +1400,7 @@ const shard: CardShard = {
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
+    _poolPippinGuardOfTheCitadel,
     _poolPixieDust,
     _poolPollenLullaby,
     _poolPontiffOfBlight,

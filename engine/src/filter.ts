@@ -449,6 +449,10 @@ export interface CardFilter {
    * controls" outside combat). The active player is read off the state, so
    * it is the same answer whoever is asking. */
   readonly controlledBy?: "you" | "opponent" | "active-player";
+  /** Controlled by one of these players — set by the engine, never authored:
+   * a protection grant's "creatures **your opponents** control" fixed to the
+   * players they were as it resolved (`grant-protection`). */
+  readonly controllerIn?: readonly PlayerId[];
   /** A battle protected by the filtering player / anyone else (rule 310.8) —
    * Portent Tracker's "if **an opponent protects** it". Nothing that has no
    * protector matches either. */
@@ -1221,6 +1225,7 @@ export function matchesFilter(
   if (filter.controlledBy === "you" && controller !== ctx.you) return false;
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
+  if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;
   if (filter.protectedBy !== undefined) {

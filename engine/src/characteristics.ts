@@ -46,7 +46,7 @@ import {
 } from "./filter.js";
 import type { EffectAmount } from "./effects.js";
 import type { CardFilter } from "./filter.js";
-import { manaValue, parseManaCost } from "./mana.js";
+import { COLORS, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import {
@@ -1154,6 +1154,14 @@ export interface Characteristics {
      * or (an empty filter) everything. Evaluated only against a source the
      * engine can identify as an object; see `protectionBlocks`. */
     readonly filters: readonly CardFilter[];
+    /** Set only where some instance "doesn't remove" its Aura (rule
+     * 702.16n): the colours every other instance names, and each sparing
+     * instance's own — which `protectionBlocks` reads for an Aura's
+     * attachment alone. `colors` above holds them all. */
+    readonly sparing?: {
+      readonly otherColors: ReadonlySet<Color>;
+      readonly instances: readonly { readonly aura: ObjectId; readonly colors: readonly Color[] }[];
+    };
   };
   /** Hexproof from a quality (rule 702.11d-e): the union of every "hexproof
    * from …" clause — a matching spell, or an ability from a matching source,
@@ -1163,6 +1171,29 @@ export interface Characteristics {
     readonly colors: ReadonlySet<Color>;
     readonly types: ReadonlySet<CardType>;
     readonly filters: readonly CardFilter[];
+  };
+}
+
+/** A static's protection as it applies now: "the chosen color" read off the
+ * source (its `chosenOnEnter`, if a colour), and the Aura a "doesn't remove
+ * this Aura" instance spares (rule 702.16n). */
+function staticProtection(
+  ability: StaticAbility,
+  source: GameObject,
+): AppliedEffect["protection"] {
+  const p = ability.protection;
+  if (p === undefined) return null;
+  if (p.chosenColor !== true && p.doesntRemoveSource !== true) return p;
+  const chosen = source.chosenOnEnter;
+  const colors = [
+    ...(p.colors ?? []),
+    ...(p.chosenColor === true && chosen != null && (COLORS as readonly string[]).includes(chosen) ? [chosen as Color] : []),
+  ];
+  return {
+    colors,
+    ...(p.types !== undefined ? { types: p.types } : {}),
+    ...(p.filter !== undefined ? { filter: p.filter } : {}),
+    ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
   };
 }
 
@@ -2932,6 +2963,8 @@ interface AppliedEffect {
     colors?: readonly Color[];
     types?: readonly CardType[];
     filter?: CardFilter;
+    /** The Aura this instance doesn't remove (702.16n). */
+    sparesAura?: ObjectId;
   } | null;
   /** "Hexproof from …" it grants — the same shape as `protection`. */
   readonly hexproofFrom: {
@@ -3216,7 +3249,7 @@ function collectStaticEffects(
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       cantBeSacrificed: ability.cantBeSacrificed === true,
-      protection: ability.protection ?? null,
+      protection: staticProtection(ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       setBase: ability.setBasePt ?? null,
     };
@@ -3369,6 +3402,7 @@ function assertSameCharacteristics(
       // Serialised whole: a filter is a plain object, and two of them
       // differing is exactly the divergence this check exists to catch.
       protFilters: c.protectionFrom.filters.map((f) => JSON.stringify(f)).sort(),
+      protSparing: c.protectionFrom.sparing === undefined ? null : c.protectionFrom.sparing.instances.map((i) => `${i.aura}:${[...i.colors].sort().join("")}`).sort(),
       hexColors: [...c.hexproofFrom.colors].sort(),
       hexTypes: [...c.hexproofFrom.types].sort(),
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
@@ -3438,6 +3472,9 @@ function computeCharacteristicsUncached(
   const protColors = new Set<Color>();
   const protTypes = new Set<CardType>();
   const protFilters: CardFilter[] = [];
+  // 702.16n's instances, and every other instance's colours (`sparing`).
+  const protSparing: { aura: ObjectId; colors: readonly Color[] }[] = [];
+  const protOtherColors = new Set<Color>();
   const hexColors = new Set<Color>();
   const hexTypes = new Set<CardType>();
   const hexFilters: CardFilter[] = [];
@@ -3472,6 +3509,11 @@ function computeCharacteristicsUncached(
     if (effect.canAttackAttackersDespiteDefender) canAttackAttackersDespiteDefender = true;
     if (effect.cantBeSacrificed) cantBeSacrificed = true;
     if (effect.protection && granted) {
+      if (effect.protection.sparesAura !== undefined) {
+        protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [] });
+      } else {
+        for (const c of effect.protection.colors ?? []) protOtherColors.add(c);
+      }
       for (const c of effect.protection.colors ?? []) protColors.add(c);
       for (const t of effect.protection.types ?? []) protTypes.add(t);
       if (effect.protection.filter !== undefined) protFilters.push(effect.protection.filter);
@@ -3497,6 +3539,15 @@ function computeCharacteristicsUncached(
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
+    // Granted protection (the `grant-protection` effect) is an ability too.
+    if (granted && modifier.protection !== undefined) {
+      for (const c of modifier.protection.colors ?? []) {
+        protColors.add(c);
+        protOtherColors.add(c);
+      }
+      for (const t of modifier.protection.types ?? []) protTypes.add(t);
+      if (modifier.protection.filter !== undefined) protFilters.push(modifier.protection.filter);
+    }
     // Granted toxic adds an instance (rule 702.164b), lost the same way.
     if (granted && modifier.toxic !== undefined) toxic += modifier.toxic;
     // Rules about it rather than abilities it has: no loss of abilities
@@ -3630,7 +3681,12 @@ function computeCharacteristicsUncached(
     canAttackAsThoughNoDefender,
     canAttackAttackersDespiteDefender,
     cantBeSacrificed,
-    protectionFrom: { colors: protColors, types: protTypes, filters: protFilters },
+    protectionFrom: {
+      colors: protColors,
+      types: protTypes,
+      filters: protFilters,
+      ...(protSparing.length > 0 ? { sparing: { otherColors: protOtherColors, instances: protSparing } } : {}),
+    },
     hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters },
   };
 }

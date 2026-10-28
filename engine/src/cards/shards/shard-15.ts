@@ -127,6 +127,7 @@ import _poolCourierBat from "../pool/courier-bat.js";
 import _poolCovertCutpurse from "../pool/covert-cutpurse.js";
 import _poolCradleOfSafety from "../pool/cradle-of-safety.js";
 import _poolCradleOfVitality from "../pool/cradle-of-vitality.js";
+import _poolCrimsonAcolyte from "../pool/crimson-acolyte.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrovaxTheCursed from "../pool/crovax-the-cursed.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolCovertCutpurse,
     _poolCradleOfSafety,
     _poolCradleOfVitality,
+    _poolCrimsonAcolyte,
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrovaxTheCursed,

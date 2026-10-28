@@ -24,6 +24,7 @@ import {
   restrictionsOf,
   withComputedCache,
 } from "./characteristics.js";
+import { protectionLabel } from "./effects.js";
 import type { GameEvent } from "./events.js";
 import type { Color, ManaPool } from "./mana.js";
 import { poolCounts } from "./mana.js";
@@ -569,6 +570,13 @@ function visible(
       if (!modifierGrantApplies(m, lostAt)) continue;
       for (const ability of [...(m.grantsActivated ?? []), ...(m.grantsTriggered ?? [])]) {
         text = text.length > 0 ? `${text}\n${ability.text}` : ability.text;
+      }
+      // Protection granted for a while (`grant-protection`), in words.
+      if (m.protection !== undefined) {
+        const label = protectionLabel(m.protection);
+        const until = m.untilTurnOf !== undefined ? " until your next turn" : m.untilEndOfTurn ? " until end of turn" : "";
+        const line = `${label.charAt(0).toUpperCase()}${label.slice(1)}${until}`;
+        text = text.length > 0 ? `${text}\n${line}` : line;
       }
     }
   }

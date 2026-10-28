@@ -2080,6 +2080,16 @@ export interface StaticAbility {
     readonly colors?: readonly Color[];
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
+    /** "Protection from **the chosen color**" — the colour chosen for the
+     * static's source as it entered (`chooseOnEnter` over the colours —
+     * Flickering Ward's "As this Aura enters, choose a color"). Nothing
+     * while none was chosen. */
+    readonly chosenColor?: true;
+    /** "This effect doesn't remove this Aura" (rule 702.16n): this
+     * instance doesn't make the static's own Aura fall off as a
+     * state-based action; it still stops everything else, and any other
+     * instance of the same quality removes the Aura as normal. */
+    readonly doesntRemoveSource?: true;
   };
   /** Hexproof from a quality (rule 702.11d-e) — the affected permanent can't
    * be the target of a matching spell, or an ability from a matching source,

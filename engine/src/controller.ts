@@ -3799,6 +3799,7 @@ export class HeuristicBotController extends AutomaticController {
     const context = {
       state,
       me: this.playerId,
+      cards: this.registry,
       targets: awaiting.targets,
       source: awaiting.source,
       ...(awaiting.triggerObject !== undefined ? { triggerObject: awaiting.triggerObject } : {}),
