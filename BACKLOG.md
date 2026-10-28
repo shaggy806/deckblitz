@@ -70,9 +70,12 @@ section keeps only what to do next.
   built: grant-protection (B244, 2026-10-28: the `grant-protection` effect and chosen-colour Aura
   protection; 62 of its 72 cards authored, 10 still blocked on narrow keys), variable-target-count
   (B245, 2026-10-28: an amount as an ability's group bound, total mana value caps, groups in a modal
-  mode; 38 of its 56 cards authored, 18 still blocked on narrow keys). Next:
-  `decision:choose-card-name` (47 cards; a new player decision, so a client change), then
-  `keyword:banding` (46, a session of its own).
+  mode; 38 of its 56 cards authored, 18 still blocked on narrow keys), choose-card-name (B246,
+  2026-10-28: rule 201.4's choice as a new decision with a client picker, read back by `chosenName`
+  filters or substituted as `hasName`; 26 of its 53 cards authored, 27 still blocked — ten on
+  `effect:search-opponent-library`). Next: `keyword:banding` (46, a session of its own), then
+  `effect:search-opponent-library` (44 with `effect:extract-same-name`, freeing the Memoricide
+  searches this family left blocked).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

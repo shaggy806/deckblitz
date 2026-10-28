@@ -348,6 +348,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   its last member. 38 authored (10 by the lead, 28 by two agents), 18 still blocked, four on new
   narrow keys. `decision:mixed-zone-targets` (4) and `decision:twice-x-target-count` (1) stay open:
   code of their own. Next: `decision:choose-card-name` (47), then banding (46).
+- **2026-10-28: the choose-card-name family (B246).** Its one key, `decision:choose-card-name`
+  (53 cards counted by `--feature`): a new decision kind with a client picker over every card name,
+  asked as a permanent enters or as an effect resolves, and the name read back by `chosenName`
+  filters or substituted as `hasName`. Building it found a cast prohibition reading a split card's
+  whole instead of the half cast, and cycling's cost skipping ability taxes. 26 authored (14 by the
+  lead, 12 by two agents), 27 still blocked — ten of them the Memoricide searches, which
+  `effect:search-opponent-library` (next in the order) frees; three new narrow keys.
 
 ## Rough size
 

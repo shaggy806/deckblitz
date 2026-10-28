@@ -86,6 +86,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the choose-card-name family** (2026-10-28, B246, `decision:choose-card-name`):
+  rule 201.4's choice as a new decision kind (the 27th), asked as a permanent enters
+  (`chooseCardNameOnEnter`, with a look at an opponent's hand or each opponent's revealed hand
+  first) or as a spell or ability resolves (the `choose-card-name` effect, `CHOSEN_CARD_NAME` in
+  its `then`, `remember` to keep it, `chooser` for "target player chooses"); `chosenNames` on a
+  permanent; the filter clauses `hasName` (both halves of a split card) and `chosenName`;
+  `prohibits` with `exceptManaAbilities`, `anyZone` and `lands`; a `player-effect`'s `cantCast`
+  and `reduceSpells.allCasters`; cost statics for an enchanted player and for sources in every
+  zone, cycling's cost included; a cast prohibition judged on the half being cast (rule 709.3);
+  the client's searchable card-name picker; scaffolder templates. 26 cards: Pithing Needle,
+  Phyrexian Revoker, Meddling Mage, Sorcerous Spyglass, Voidstone Gargoyle, Disruptor Flute,
+  Council of the Absolute, Gideon's Intervention, Declaration of Naught and the rest; 27 still
+  blocked on narrow keys (`B246.json`).
 - **Need-keys Phase 2, the variable-target-count family** (2026-10-28, B245,
   `decision:variable-target-count` + `decision:x-targets` + `decision:target-total-mana-value` +
   `decision:any-number-targets-in-mode`): an `any-number` group's `max`/`min` as any amount on a
