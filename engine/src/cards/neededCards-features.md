@@ -334,6 +334,22 @@ Still open beside them: `decision:twice-x-target-count` (a spell's group at
 twice X) and `decision:mixed-zone-targets` (one slot over battlefield and
 graveyard).
 
+### Choosing a card name — built 2026-10-28
+
+The need-keys Phase 2 family `decision:choose-card-name` (B246): rule 201.4's
+choice as a permanent enters (`chooseCardNameOnEnter`, with a look at an
+opponent's hand or each opponent's revealed hand first) or as a spell or
+ability resolves (the `choose-card-name` effect, `CHOSEN_CARD_NAME` in its
+`then`, `remember` to keep it on the source); `GameObject.chosenNames`; the
+`CardFilter` clauses `hasName` and `chosenName`; `prohibits` with
+`exceptManaAbilities`, `anyZone` and `lands`; a `player-effect`'s `cantCast`
+and `reduceSpells.allCasters`; cost statics for an enchanted player and for
+abilities of sources in every zone. Key: `decision:choose-card-name`. Still
+open beside it: searching another player's zones for the name (the
+Memoricide family, `effect:search-opponent-library`), a card type rather than
+a name (`decision:choose-card-type`), and player protection from a name
+(Runed Halo, `effect:player-protection`).
+
 ### Unbounded targeting — built 2026-09-26
 
 **Built** as the `any-number` target spec, a group that is the last slot of

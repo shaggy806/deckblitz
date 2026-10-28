@@ -2044,6 +2044,46 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   popup with the chooser's most common creature types as suggestions. A
   *permanent* that remembers its type is `chooseCreatureTypeOnEnter` instead
   (Urza's Incubator), not this.
+- **Choosing a card name** (rule 201.4 — `card-names.ts`; the
+  `choose-card-name` decision, a search popup over every card name the
+  registry holds, tokens and split cards' wholes aside, the suggestions picked
+  by an `aim`). Three shapes:
+  - **As it enters**: the card field `chooseCardNameOnEnter: { filter?, aim?,
+    look?, reveal? }` (Pithing Needle, Meddling Mage). `filter` is a
+    `CardNameFilter` — `{ notTypes: ["land"] }` "a nonland card name", `{
+    types: ["creature"] }`, `{ notBasicLand: true }`, `{ types: ["land"],
+    nonbasic: true }`. `look: "opponent-hand"` is "look at an opponent's hand,
+    then choose" (Sorcerous Spyglass: the opponent asked first among two or
+    more, the hand seen by the chooser alone); `reveal: "each-opponent-hand"`
+    is Alhammarret's "each opponent reveals their hand. You choose the name of
+    a nonland card revealed this way" (only those; none, and no name). `aim`:
+    `"opponent-spells"` (default), `"opponent-permanents"` (ability locks and
+    taxes), `"own-hand"`, `"own-library"`, `"opponent-library"`.
+  - **Its statics and triggers** read the name through the `CardFilter` clause
+    **`chosenName: true`** (any name chosen for the permanent applying it):
+    `prohibits { spells: { chosenName: true } }`; `prohibits { abilitiesOf: {
+    chosenName: true }, anyZone: true, exceptManaAbilities?: true }` — "of
+    sources" reaches cards in every zone (cycling, a graveyard ability);
+    `prohibits.lands` for "lands with the chosen name can't be played";
+    `costModification { applies: { chosenName: true } }` with `caster: "you" |
+    "opponent" | "enchanted-player"`; `abilityCostModification { …, anyZone:
+    true }`; a `cast-spell` trigger's `filter` (`who: "attached"` is a Curse's
+    enchanted player); a damage replacement's `source`; a target's filter;
+    `goad`'s `filter`.
+  - **As it resolves**: **`choose-card-name { filter?, aim?, chooser?,
+    remember?, then }`** (Brain Pry, Conjurer's Ban). Every string exactly
+    `CHOSEN_CARD_NAME` (from `effects.ts`) inside `then` becomes the name —
+    **`{ hasName: CHOSEN_CARD_NAME }`** is "a card with the chosen name" (either
+    half of a split card, rule 709.4a). Put everything after the choice in
+    `then`. `chooser: <slot>` is "target player chooses a card name";
+    `remember: true` keeps the name on the source permanent for its
+    `chosenName` statics (Petrified Hamlet's enters trigger, Day of the
+    Moon's chapters). "Until your next turn, your opponents can't cast spells
+    with the chosen name" is a `player-effect` with `cantCast: { who, filter,
+    label, lands? }`; "spells with the chosen name cost {1} less this turn"
+    (anyone's) is `reduceSpells { …, allCasters: true }`.
+  The scaffolder reads "As ~ enters, choose a … card name." and the lock, tax
+  and can't-cast lines after it.
 - **`conditional { condition: StaticCondition, then, else? }`** — apply `then`
   if `condition` holds at resolution (evaluated from the source's controller's
   view — same `{ controls, your-turn, threshold, metalcraft }` union as a

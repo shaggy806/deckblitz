@@ -487,7 +487,8 @@
   "decision:variable-target-count",
   "decision:x-targets",
   "decision:target-total-mana-value",
-  "decision:any-number-targets-in-mode"
+  "decision:any-number-targets-in-mode",
+  "decision:choose-card-name"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
