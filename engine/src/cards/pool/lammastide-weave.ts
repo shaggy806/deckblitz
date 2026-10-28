@@ -29,10 +29,10 @@ export default defineCard({
                 amount: { thisWay: "milled", filter: { hasName: CHOSEN_CARD_NAME }, sumOf: "mana-value" },
               },
             },
+            { kind: "draw", amount: 1 },
           ],
         },
       },
-      { kind: "draw", amount: 1 },
     ],
   },
 });
