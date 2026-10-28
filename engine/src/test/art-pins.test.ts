@@ -41,6 +41,9 @@ describe("art pins", () => {
 const NO_TOKEN_PRINTING = new Set([
   // Dune-Brood Nephilim (GPT)'s 1/1 colorless Sand was never printed as a token.
   "Sand Token",
+  // Blessed Sanctuary (P02)'s vanilla white 2/2 Unicorn: no token printing in
+  // the Oracle snapshot.
+  "Unicorn Token",
   // Court of Embereth (WOC)'s vanilla red 3/1 Knight: no token printing in the
   // Oracle snapshot.
   "3/1 Knight Token",
