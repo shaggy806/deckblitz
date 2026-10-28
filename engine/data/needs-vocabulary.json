@@ -4932,7 +4932,9 @@
   },
   "trigger:attack-with-count-amount": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Grand Warlord Radha: No amount for how many creatures were declared as attackers in an attack-with trigger."
+   "example": "Grand Warlord Radha: No amount for how many creatures were declared as attackers in an attack-with trigger.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "the attacks-player trigger's value is the number of attackers (Struggle for Project Purity, B241)"
   },
   "trigger:attack-with-intervening-if": {
    "family": "trigger:combat-trigger-extensions",
@@ -5344,11 +5346,15 @@
   },
   "filter:not-this-object": {
    "family": "condition:filter-card-property-clauses",
-   "example": "Gandalf, Friend of the Shire: 'if you chose a creature other than Gandalf as your Ring-bearer' — no filter clause for 'not this object'."
+   "example": "Gandalf, Friend of the Shire: 'if you chose a creature other than Gandalf as your Ring-bearer' — no filter clause for 'not this object'.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "the ring-tempts trigger's chosen: \"other\" (Galadriel of Lothlórien, Gandalf, Friend of the Shire, B241)"
   },
   "amount:ring-bearer-power": {
    "family": "effect:amount-new-variants",
-   "example": "One Ring to Rule Them All: 'each player mills cards equal to your Ring-bearer's power'."
+   "example": "One Ring to Rule Them All: 'each player mills cards equal to your Ring-bearer's power'.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "an aggregate sum of power over { ringBearer: true } (One Ring to Rule Them All's chapter I, B241)"
   },
   "effect:reveal-until-count-tapped": {
    "family": "effect:put-onto-battlefield-options",
@@ -5356,7 +5362,9 @@
   },
   "condition:countered-spell-legendary": {
    "family": "effect:choices-by-other-players",
-   "example": "Glorious Gale: 'Counter target creature spell. If it was a legendary spell, the Ring tempts you.'"
+   "example": "Glorious Gale: 'Counter target creature spell. If it was a legendary spell, the Ring tempts you.'",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "a target condition read before the counter (Glorious Gale, B241)"
   },
   "replacement:roll-extra-ignore-lowest": {
    "family": "mechanic:dice-rolling",
@@ -5380,7 +5388,9 @@
   },
   "effect:reflexive-with-roll-amount": {
    "family": "mechanic:dice-rolling",
-   "example": "Ancient Bronze Dragon, Ancient Brass Dragon: 'roll a d20. When you do, …' with X the result, targets chosen after the roll."
+   "example": "Ancient Bronze Dragon, Ancient Brass Dragon: 'roll a d20. When you do, …' with X the result, targets chosen after the roll.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "roll-dice then reflexive-trigger with value { roll: \"total\" }, read as { triggerValue: true } (Ancient Bronze Dragon, B241)"
   },
   "effect:each-player-rolls": {
    "family": "mechanic:dice-rolling",
@@ -6017,7 +6027,9 @@
   },
   "trigger:opponent-attacks-you-player-only": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Everett K. Ross, Hapless Attaché: 'Whenever an opponent attacks you with two or more creatures' — attack-with counting only attackers aimed at you, not your planeswalkers (rule 508.3e)."
+   "example": "Everett K. Ross, Hapless Attaché: 'Whenever an opponent attacks you with two or more creatures' — attack-with counting only attackers aimed at you, not your planeswalkers (rule 508.3e).",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "attacks-player with defender \"you\" (Struggle for Project Purity, B241)"
   },
   "replacement:prevent-damage-to-equipped-add-counters": {
    "family": "replacement:damage-modification",
@@ -7439,7 +7451,9 @@
   },
   "effect:exile-self-with-time-counters": {
    "family": "mechanic:suspend-and-time-counters",
-   "example": "A resolving spell exiles itself with N time counters, becoming suspended again if it has suspend (Charnel Serenade)."
+   "example": "A resolving spell exiles itself with N time counters, becoming suspended again if it has suspend (Charnel Serenade).",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "give-suspend with target \"source\" (Cyclical Evolution, Inspiring Refrain, B241)"
   },
   "zone:play-from-graveyard-surveilled-this-turn": {
    "family": "zone:graveyard-cast-permissions",
@@ -7910,7 +7924,9 @@
   },
   "effect:return-then-attach-to-returned": {
    "family": "effect:attach-extensions",
-   "example": "Not Dead After All: The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name."
+   "example": "Not Dead After All: The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name.",
+   "checked": "2026-10-28: exists",
+   "existsEvidence": "create-token attachedTo \"trigger-object\" after putting the trigger object onto the battlefield (Not Dead After All, B241)"
   },
   "filter:has-adventure": {
    "family": "condition:filter-card-property-clauses",
@@ -13625,6 +13641,90 @@
    "family": "cost:mana-ability-complex-costs",
    "example": "Molt Tender",
    "description": "A mana ability whose cost exiles a card from your graveyard: refused outright ('mana ability can't exile cards from a graveyard yet')."
+  },
+  "effect:reattach-curse-random-opponent": {
+   "family": "effect:attach-extensions",
+   "example": "Maddening Hex",
+   "description": "Moving an Aura onto another opponent chosen at random ('then attach this Aura to another one of your opponents chosen at random')."
+  },
+  "effect:extra-loyalty-activations-this-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Comet, Stellar Pup",
+   "description": "A one-shot 'you may activate [this]'s loyalty ability N more times this turn'."
+  },
+  "decision:choose-creature-or-player-on-resolution": {
+   "example": "Comet, Stellar Pup",
+   "description": "Damage to 'a creature or player' chosen as the ability resolves, not targeted."
+  },
+  "condition:roll-result-compare": {
+   "family": "mechanic:dice-rolling",
+   "example": "Luck Bobblehead, Sword of Hours",
+   "description": "A condition on a roll's results against an amount: how many dice showed a number ('if you rolled 6 exactly seven times'), or the result against the trigger's damage ('if the result is greater than the damage dealt')."
+  },
+  "replacement:roll-as-enters": {
+   "family": "mechanic:dice-rolling",
+   "example": "Neverwinter Hydra",
+   "description": "'As this creature enters, roll X d6; it enters with that many +1/+1 counters': an enters-with-counters replacement that rolls."
+  },
+  "condition:trigger-object-greatest-power": {
+   "family": "condition:greatest-power-condition",
+   "example": "Strength-Testing Hammer",
+   "description": "'If it has the greatest power or is tied for greatest power among creatures on the battlefield' about the trigger's creature (the equipped one), across every controller."
+  },
+  "trigger:rolls-dice-modified-result": {
+   "family": "mechanic:dice-rolling",
+   "example": "Vexing Puzzlebox",
+   "description": "A rolls-dice trigger whose value is the result after modifiers (rule 706.2), not the natural total."
+  },
+  "target:stack-with-targets": {
+   "family": "effect:target-spec-additions",
+   "example": "Wyll's Reversal",
+   "description": "'Target spell or ability with one or more targets': the stack target can require that the object has a target."
+  },
+  "trigger:enchanted-player-dealt-damage": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Grievous Wound",
+   "description": "'Whenever enchanted player is dealt damage' — any damage, not only combat (trigger:combat-damage-to-enchanted-player is combat-only)."
+  },
+  "filter:dealt-combat-damage-to-you-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Witch-king of Angmar",
+   "description": "A filter for 'a creature that dealt combat damage to you this turn' (damagedThisTurnBy covers the receiving end only)."
+  },
+  "replacement:damage-plus-counters-on-source": {
+   "family": "replacement:damage-modification",
+   "example": "Fated Firepower",
+   "description": "A damage replacement's plus read from counters on the replacement's source ('plus the number of fire counters on this enchantment'); plus is a fixed number."
+  },
+  "effect:grant-replacement-until-eot": {
+   "family": "replacement:damage-modification",
+   "example": "Sokrates, Athenian Teacher",
+   "description": "Granting a creature a replacement ability until end of turn ('target creature gains \"If this creature would deal combat damage to a player, prevent that damage …\"')."
+  },
+  "effect:additional-upkeep-step-enchanted-player": {
+   "family": "effect:additional-upkeep-steps",
+   "example": "Paradox Haze",
+   "description": "An additional upkeep step for another player, added during their upkeep ('at the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step')."
+  },
+  "effect:lose-all-player-counters": {
+   "family": "mechanic:player-counters",
+   "example": "Final Act",
+   "description": "'Each opponent loses all counters': every kind at once, energy included (remove-player-counters takes one kind and excludes energy)."
+  },
+  "effect:goad-while-source-remains": {
+   "family": "mechanic:goad-extensions",
+   "example": "Hot Pursuit",
+   "description": "A creature goaded 'as long as this enchantment remains on the battlefield'."
+  },
+  "effect:time-counters-on-all-suspended": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Dust of Moments",
+   "description": "Adding or removing N time counters on each permanent (with a time counter) and each suspended card at once."
+  },
+  "condition:hand-land-card-count": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Sasaya, Orochi Ascendant",
+   "description": "'If you have seven or more land cards in your hand': hand-size with a card filter."
   }
  },
  "groups": [

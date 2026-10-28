@@ -833,7 +833,7 @@
   "effect:additional-upkeep-steps": {
    "size": "medium",
    "ui": false,
-   "description": "'You get that many additional upkeep steps after this phase': extra beginning phases (untap and draw skipped) inserted after the current combat, with upkeep triggers firing in each (rules 500.8 and 500.10)."
+   "description": "'You get that many additional upkeep steps after this phase': extra beginning phases (untap and draw skipped) inserted after the current combat, with upkeep triggers firing in each (rules 500.8 and 500.10). Only its controller's own turn, from a combat phase: not another player's extra upkeep (effect:additional-upkeep-step-enchanted-player)."
   },
   "effect:amount-aggregate": {
    "size": "small",
@@ -1325,7 +1325,7 @@
   "mechanic:coin-flip": {
    "size": "medium",
    "ui": false,
-   "description": "Seeded coin flips: win and lose branches, 'flip until you lose', a log event, and a 'whenever a player wins a coin flip' trigger."
+   "description": "Seeded coin flips: win and lose branches, 'flip until you lose', a log event, and a 'whenever a player wins a coin flip' trigger. Not: flip replacements (mechanic:coin-flip-result-replacement), uncalled flips with no winner (mechanic:coin-flip-heads-tails), a flip per permanent (effect:for-each-permanent-coin-flip) or counting wins first (amount:coin-flips-won-this-way)."
   },
   "mechanic:commander-pairing": {
    "size": "small",
@@ -1340,7 +1340,7 @@
   "mechanic:dice-rolling": {
    "size": "medium",
    "ui": false,
-   "description": "Dice rolling (rule 706) on the seeded Rng: a roll effect, a die-rolled event, and a 'whenever you roll N or higher' trigger that fires once per die."
+   "description": "Dice rolling (rule 706) on the seeded Rng: a roll effect, a die-rolled event, and a 'whenever you roll N or higher' trigger that fires once per die. Not: choosing among results (decision:choose-roll-result), each player rolling (effect:each-player-rolls), roll replacements (replacement:roll-extra-ignore-lowest), rolling as a permanent enters (replacement:roll-as-enters), comparing results (condition:roll-result-compare) or a modified-result trigger value (trigger:rolls-dice-modified-result)."
   },
   "mechanic:dungeon": {
    "size": "large",
@@ -1382,7 +1382,7 @@
   "mechanic:player-counters": {
    "size": "medium",
    "ui": false,
-   "description": "Player counter kinds beyond energy: experience counters (a get effect, an EffectAmount, a P/T bonus that reads them) and poison counters (the 10-poison SBA loss, 'corrupted' conditions). Both need events, view and client display, and proliferate over players who have them."
+   "description": "Player counter kinds beyond energy: experience counters (a get effect, an EffectAmount, a P/T bonus that reads them) and poison counters (the 10-poison SBA loss, 'corrupted' conditions). Both need events, view and client display, and proliferate over players who have them. Not: a player losing all counters at once (effect:lose-all-player-counters) or replacements on counters a player gets (replacement:player-counter-addend)."
   },
   "mechanic:rad-counters": {
    "size": "medium",
@@ -1417,12 +1417,12 @@
   "mechanic:suspend-and-time-counters": {
    "size": "medium",
    "ui": true,
-   "description": "Suspend and time-counter follow-ups: time travel (rule 701.56, choose add, remove or neither for each suspended card and time-counter permanent), granting suspend with N time counters, and a suspend cast that fires whenever the last time counter comes off."
+   "description": "Suspend and time-counter follow-ups: time travel (rule 701.56, choose add, remove or neither for each suspended card and time-counter permanent), granting suspend with N time counters, and a suspend cast that fires whenever the last time counter comes off. Not: adding or removing time counters on every permanent and suspended card at once (effect:time-counters-on-all-suspended)."
   },
   "mechanic:the-ring": {
    "size": "large",
    "ui": true,
-   "description": "The Ring tempts you (rule 701.54): the Ring emblem's four cumulative levels, choosing a Ring-bearer, the temptation count, a 'whenever the Ring tempts you' trigger, and protection from Ring-bearers."
+   "description": "The Ring tempts you (rule 701.54): the Ring emblem's four cumulative levels, choosing a Ring-bearer, the temptation count, a 'whenever the Ring tempts you' trigger, and protection from Ring-bearers. Not the cards' other clauses: 'other than ~' as Ring-bearer is chosen: \"other\"; a Ring-bearer's power is an aggregate sum over { ringBearer: true }."
   },
   "mechanic:voting": {
    "size": "medium",
@@ -1444,7 +1444,7 @@
   "replacement:damage-modification": {
    "size": "medium",
    "ui": false,
-   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead)."
+   "description": "Damage replacements beyond the global doubler: multipliers scoped by source or recipient, +N damage, and static prevention with a follow-up (prevent damage to opponents and mill that many, prevent damage to this permanent and add counters instead). Not: redirection (replacement:damage-redirection), 'can't be prevented' (effect:damage-cant-be-prevented, static:damage-cant-be-prevented), prevent all but N (replacement:prevent-all-but-n-damage), the equipped creature as source or recipient (replacement:equipped-creature-damage-doubling), a plus read from counters (replacement:damage-plus-counters-on-source), or the affected player ordering modifiers (replacement:affected-player-orders-damage-modifiers)."
   },
   "replacement:enters-modifier-via-permission": {
    "size": "small",
