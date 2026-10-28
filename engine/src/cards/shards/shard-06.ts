@@ -191,6 +191,7 @@ import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
 import _poolDawningPurist from "../pool/dawning-purist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
+import _poolDayOfTheMoon from "../pool/day-of-the-moon.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeathgazer from "../pool/deathgazer.js";
@@ -1010,6 +1011,7 @@ const shard: CardShard = {
     _poolDawnhartGeist,
     _poolDawningPurist,
     _poolDawnwingMarshal,
+    _poolDayOfTheMoon,
     _poolDeadfall,
     _poolDeadlyRiposte,
     _poolDeathgazer,

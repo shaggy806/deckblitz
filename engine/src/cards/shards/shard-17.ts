@@ -30,6 +30,7 @@ import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
 import _poolAnimalBoneyard from "../pool/animal-boneyard.js";
+import _poolAnointedPeacekeeper from "../pool/anointed-peacekeeper.js";
 import _poolArashinSovereign from "../pool/arashin-sovereign.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
@@ -128,6 +129,7 @@ import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolCombatCalligrapher from "../pool/combat-calligrapher.js";
 import _poolCommanderEesha from "../pool/commander-eesha.js";
 import _poolCommandoRaid from "../pool/commando-raid.js";
+import _poolComply from "../pool/comply.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
 import _poolConsulsShieldguard from "../pool/consuls-shieldguard.js";
@@ -163,6 +165,7 @@ import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeathCharmer from "../pool/death-charmer.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
+import _poolDeclarationOfNaught from "../pool/declaration-of-naught.js";
 import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDecreeOfSilence from "../pool/decree-of-silence.js";
@@ -228,6 +231,7 @@ import _poolExtractionSpecialist from "../pool/extraction-specialist.js";
 import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFailure from "../pool/failure.js";
 import _poolFallenCleric from "../pool/fallen-cleric.js";
 import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
@@ -869,6 +873,7 @@ const shard: CardShard = {
     _poolAncientCraving,
     _poolAngelicPage,
     _poolAnimalBoneyard,
+    _poolAnointedPeacekeeper,
     _poolArashinSovereign,
     _poolArbalestEngineers,
     _poolArcadeCabinet,
@@ -967,6 +972,7 @@ const shard: CardShard = {
     _poolCombatCalligrapher,
     _poolCommanderEesha,
     _poolCommandoRaid,
+    _poolComply,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
     _poolConsulsShieldguard,
@@ -1002,6 +1008,7 @@ const shard: CardShard = {
     _poolDeathBaron,
     _poolDeathCharmer,
     _poolDeceptiveLandscape,
+    _poolDeclarationOfNaught,
     _poolDeclareDominance,
     _poolDecoyPloy,
     _poolDecreeOfSilence,
@@ -1067,6 +1074,7 @@ const shard: CardShard = {
     _poolFableOfWolfAndOwl,
     _poolFaebloomTrick,
     _poolFaerieVandal,
+    _poolFailure,
     _poolFallenCleric,
     _poolFalseDemise,
     _poolFanaticOfXenagos,

@@ -298,6 +298,7 @@ import _poolGavonyIronwright from "../pool/gavony-ironwright.js";
 import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGideonsCompany from "../pool/gideons-company.js";
+import _poolGideonsIntervention from "../pool/gideons-intervention.js";
 import _poolGiftOfTusks from "../pool/gift-of-tusks.js";
 import _poolGigantomancer from "../pool/gigantomancer.js";
 import _poolGilderBairn from "../pool/gilder-bairn.js";
@@ -423,6 +424,7 @@ import _poolKrisMage from "../pool/kris-mage.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
 import _poolKuldothaPhoenix from "../pool/kuldotha-phoenix.js";
 import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
+import _poolLammastideWeave from "../pool/lammastide-weave.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
@@ -1129,6 +1131,7 @@ const shard: CardShard = {
     _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGideonsCompany,
+    _poolGideonsIntervention,
     _poolGiftOfTusks,
     _poolGigantomancer,
     _poolGilderBairn,
@@ -1254,6 +1257,7 @@ const shard: CardShard = {
     _poolKrosanColossus,
     _poolKuldothaPhoenix,
     _poolKurbisHarvestCelebrant,
+    _poolLammastideWeave,
     _poolLassoedByTheLaw,
     _poolLavamancersSkill,
     _poolLawbringer,

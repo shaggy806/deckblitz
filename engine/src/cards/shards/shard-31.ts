@@ -155,6 +155,7 @@ import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
 import _poolCoralhelmChronicler from "../pool/coralhelm-chronicler.js";
+import _poolCouncilOfTheAbsolute from "../pool/council-of-the-absolute.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCovetousGeist from "../pool/covetous-geist.js";
 import _poolCrackOpen from "../pool/crack-open.js";
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
     _poolCoralhelmChronicler,
+    _poolCouncilOfTheAbsolute,
     _poolCounterspell,
     _poolCovetousGeist,
     _poolCrackOpen,

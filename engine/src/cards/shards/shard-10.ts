@@ -197,6 +197,7 @@ import _poolDisorient from "../pool/disorient.js";
 import _poolDisrupt from "../pool/disrupt.js";
 import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
+import _poolDivinersLockbox from "../pool/diviners-lockbox.js";
 import _poolDonate from "../pool/donate.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
@@ -1036,6 +1037,7 @@ const shard: CardShard = {
     _poolDisrupt,
     _poolDissolve,
     _poolDivinerOfMist,
+    _poolDivinersLockbox,
     _poolDonate,
     _poolDovinsDismissal,
     _poolDownInTheValley,

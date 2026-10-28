@@ -11533,6 +11533,18 @@
    "family": "effect:reveal-until",
    "example": "Sacred Guide: reveal until a white card, put it in your hand and exile the rest — `reveal-until`'s `rest` has no exile."
   },
+  "effect:reveal-until-else-shuffle": {
+   "family": "effect:reveal-until",
+   "example": "Tunnel Vision: reveal until a card with the chosen name; if found, the rest go to the graveyard and the card goes back on top, otherwise the player shuffles — `reveal-until` can't put the found card back on top, nor treat the rest differently when nothing is found."
+  },
+  "effect:look-and-choose-leftover-exile": {
+   "family": "effect:look-and-choose-leftover",
+   "example": "Desperate Research: reveal the top seven, put all with the chosen name into your hand and exile the rest — `look-and-choose` has no exile leftover."
+  },
+  "decision:opponent-chooses-card-name": {
+   "family": "decision:choose-card-name",
+   "example": "Null Chamber: \"as this enchantment enters, you and an opponent each choose a card name\" — only its controller is asked."
+  },
   "keyword:licid": {
    "example": "The Licids (Tempest, Stronghold): \"{cost}, {T}: This creature loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {cost} to end this effect.\" — built in batch 181 (`become-licid-aura`)."
   },

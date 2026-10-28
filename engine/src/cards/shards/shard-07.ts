@@ -215,6 +215,7 @@ import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js"
 import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
+import _poolFailureComply from "../pool/failure-comply.js";
 import _poolFallenFerromancer from "../pool/fallen-ferromancer.js";
 import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js";
 import _poolFamishedPaladin from "../pool/famished-paladin.js";
@@ -1074,6 +1075,7 @@ const shard: CardShard = {
     _poolExpelFromOrazca,
     _poolExultantSkymarcher,
     _poolFaerieHarbinger,
+    _poolFailureComply,
     _poolFallenFerromancer,
     _poolFalthisShadowcatFamiliar,
     _poolFamishedPaladin,

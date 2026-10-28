@@ -8,6 +8,7 @@ import _poolAangDestinedSavior from "../pool/aang-destined-savior.js";
 import _poolAangsDefense from "../pool/aangs-defense.js";
 import _poolAbsolvingLammasu from "../pool/absolving-lammasu.js";
 import _poolAbyssalHorror from "../pool/abyssal-horror.js";
+import _poolAcademicProbation from "../pool/academic-probation.js";
 import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdderStaffBoggart from "../pool/adder-staff-boggart.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
@@ -833,6 +834,7 @@ const shard: CardShard = {
     _poolAangsDefense,
     _poolAbsolvingLammasu,
     _poolAbyssalHorror,
+    _poolAcademicProbation,
     _poolAdarkarWastes,
     _poolAdderStaffBoggart,
     _poolAdventurersInn,

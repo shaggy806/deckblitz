@@ -602,6 +602,7 @@ import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
 import _poolSigiledContender from "../pool/sigiled-contender.js";
 import _poolSilhanaStarfletcher from "../pool/silhana-starfletcher.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
+import _poolSilverquillSilencer from "../pool/silverquill-silencer.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSkeletonize from "../pool/skeletonize.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolSigiledContender,
     _poolSilhanaStarfletcher,
     _poolSilverSableMercenaryLeader,
+    _poolSilverquillSilencer,
     _poolSimicGuildgate,
     _poolSinkhole,
     _poolSkeletonize,

@@ -846,6 +846,7 @@ import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWizenedMentor from "../pool/wizened-mentor.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
+import _poolWoodSage from "../pool/wood-sage.js";
 import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolWoodweaversPuzzleknot from "../pool/woodweavers-puzzleknot.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
@@ -1726,6 +1727,7 @@ const shard: CardShard = {
     _poolWizardsSchool,
     _poolWizenedMentor,
     _poolWolverineBestThereIs,
+    _poolWoodSage,
     _poolWoodlandAcolyte,
     _poolWoodweaversPuzzleknot,
     _poolX23DeadlyWeapon,

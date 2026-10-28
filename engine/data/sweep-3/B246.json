@@ -1,0 +1,385 @@
+{
+  "batch": "B246",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the choose-card-name family (decision:choose-card-name)",
+  "authored": [
+    {
+      "name": "Pithing Needle",
+      "files": [
+        "engine/src/cards/pool/pithing-needle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Revoker",
+      "files": [
+        "engine/src/cards/pool/phyrexian-revoker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Meddling Mage",
+      "files": [
+        "engine/src/cards/pool/meddling-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sorcerous Spyglass",
+      "files": [
+        "engine/src/cards/pool/sorcerous-spyglass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alhammarret, High Arbiter",
+      "files": [
+        "engine/src/cards/pool/alhammarret-high-arbiter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Disruptor Flute",
+      "files": [
+        "engine/src/cards/pool/disruptor-flute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skyseer's Chariot",
+      "files": [
+        "engine/src/cards/pool/skyseers-chariot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Curse of Silence",
+      "files": [
+        "engine/src/cards/pool/curse-of-silence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Petrified Hamlet",
+      "files": [
+        "engine/src/cards/pool/petrified-hamlet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conjurer's Ban",
+      "files": [
+        "engine/src/cards/pool/conjurers-ban.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cheering Fanatic",
+      "files": [
+        "engine/src/cards/pool/cheering-fanatic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brain Pry",
+      "files": [
+        "engine/src/cards/pool/brain-pry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nevermore",
+      "files": [
+        "engine/src/cards/pool/nevermore.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Voidstone Gargoyle",
+      "files": [
+        "engine/src/cards/pool/voidstone-gargoyle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Academic Probation",
+      "files": [
+        "engine/src/cards/pool/academic-probation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anointed Peacekeeper",
+      "files": [
+        "engine/src/cards/pool/anointed-peacekeeper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Failure // Comply",
+      "files": [
+        "engine/src/cards/pool/failure-comply.ts",
+        "engine/src/cards/pool/failure.ts",
+        "engine/src/cards/pool/comply.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Council of the Absolute",
+      "files": [
+        "engine/src/cards/pool/council-of-the-absolute.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Day of the Moon",
+      "files": [
+        "engine/src/cards/pool/day-of-the-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Declaration of Naught",
+      "files": [
+        "engine/src/cards/pool/declaration-of-naught.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gideon's Intervention",
+      "files": [
+        "engine/src/cards/pool/gideons-intervention.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silverquill Silencer",
+      "files": [
+        "engine/src/cards/pool/silverquill-silencer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Diviner's Lockbox",
+      "files": [
+        "engine/src/cards/pool/diviners-lockbox.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Foreshadow",
+      "files": [
+        "engine/src/cards/pool/foreshadow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lammastide Weave",
+      "files": [
+        "engine/src/cards/pool/lammastide-weave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wood Sage",
+      "files": [
+        "engine/src/cards/pool/wood-sage.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Cranial Extraction",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "Names the card, then searches target player's graveyard, hand and library for every card with it: the name is built, but no effect searches another player's library (or their hand and graveyard together) and exiles what it finds."
+    },
+    {
+      "name": "Memoricide",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction: the search of another player's graveyard, hand and library for any number of cards with the name."
+    },
+    {
+      "name": "Slaughter Games",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction."
+    },
+    {
+      "name": "Stain the Mind",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction (convoke is built)."
+    },
+    {
+      "name": "Lost Legacy",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction, then that player draws a card for each card exiled from their hand."
+    },
+    {
+      "name": "Necromentia",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction, then a Zombie for each card exiled from their hand."
+    },
+    {
+      "name": "Unmoored Ego",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction, up to four, then a draw for each card exiled from their hand."
+    },
+    {
+      "name": "Dispossess",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction, an artifact card name."
+    },
+    {
+      "name": "Infinite Obliteration",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "As Cranial Extraction, a creature card name."
+    },
+    {
+      "name": "The Rise of Sozin // Fire Lord Sozin",
+      "needs": [
+        "effect:search-opponent-library"
+      ],
+      "why": "Chapter II names a card and searches target opponent's graveyard, hand and library for up to four with it."
+    },
+    {
+      "name": "Tamiyo, Collector of Tales",
+      "needs": [
+        "static:opponent-cant-cause-sacrifice",
+        "static:opponent-cant-cause-discard"
+      ],
+      "why": "Her +1 (name, reveal four, the named ones to hand) is built; her static that opponents' spells and abilities can't make you discard or sacrifice isn't."
+    },
+    {
+      "name": "Runed Halo",
+      "needs": [
+        "effect:player-protection"
+      ],
+      "why": "\"You have protection from the chosen card name\": the name is built, but a player can't have protection from a quality (targeting, enchanting and damage; rule 702.16)."
+    },
+    {
+      "name": "Alpine Moon",
+      "needs": [
+        "static:static-lose-all-abilities"
+      ],
+      "why": "The name is built; opponents' lands with it losing all land types and abilities (and gaining an any-colour mana ability) is not."
+    },
+    {
+      "name": "Null Chamber",
+      "needs": [
+        "decision:opponent-chooses-card-name"
+      ],
+      "why": "\"You and an opponent each choose a card name\": an opponent naming the second card as it enters isn't asked."
+    },
+    {
+      "name": "Mindblaze",
+      "needs": [
+        "decision:choose-number-on-resolution"
+      ],
+      "why": "Chooses a nonland card name and a number greater than 0: the number choice isn't built."
+    },
+    {
+      "name": "Blood Oath",
+      "needs": [
+        "decision:choose-card-type",
+        "amount:revealed-hand-cards-of-chosen-type"
+      ],
+      "why": "Chooses a card type, not a name; nothing counts revealed hand cards of a chosen type."
+    },
+    {
+      "name": "Fertile Imagination",
+      "needs": [
+        "decision:choose-card-type",
+        "amount:revealed-hand-cards-of-chosen-type"
+      ],
+      "why": "As Blood Oath."
+    },
+    {
+      "name": "Cabal Therapist",
+      "needs": [
+        "effect:discard-all-matching"
+      ],
+      "why": "The reflexive name is built, but nothing makes a player discard every card with it: discard-chosen picks one, and its upTo is the controller's optional choice."
+    },
+    {
+      "name": "Medomai's Prophecy",
+      "needs": [
+        "effect:look-at-top-of-target-players-library"
+      ],
+      "why": "Chapters I-III are expressible; IV's \"look at the top card of each player's library\" (a private look at other libraries) isn't."
+    },
+    {
+      "name": "Cursed Scroll",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "\"Reveal a card at random from your hand\": choose-random-card reaches a graveyard only."
+    },
+    {
+      "name": "Magus of the Scroll",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "As Cursed Scroll."
+    },
+    {
+      "name": "Dementia Sliver",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "Target opponent reveals a card at random from their hand: no random pick from a hand."
+    },
+    {
+      "name": "Desperate Research",
+      "needs": [
+        "effect:look-and-choose-leftover-exile"
+      ],
+      "why": "Reveal seven, the named ones to hand and exile the rest: look-and-choose has no exile leftover."
+    },
+    {
+      "name": "Divining Witch",
+      "needs": [
+        "effect:reveal-until-rest-exile"
+      ],
+      "why": "Reveal until the named card, then exile every other card revealed: reveal-until's rest has no exile (exile: true would exile the found card too)."
+    },
+    {
+      "name": "Tunnel Vision",
+      "needs": [
+        "effect:reveal-until-else-shuffle"
+      ],
+      "why": "The found card back on top and the rest to the graveyard, or a shuffle when it isn't found: reveal-until does neither."
+    },
+    {
+      "name": "Vexing Arcanix",
+      "needs": [
+        "effect:look-and-choose-target-player"
+      ],
+      "why": "The chooser (\"target player chooses a card name\") is built; revealing that player's top card into their hand or graveyard, then damaging them, isn't expressible."
+    },
+    {
+      "name": "Isperia the Inscrutable",
+      "needs": [
+        "amount:cards-in-hand-matching-filter"
+      ],
+      "why": "\"That player reveals their hand. If a card with the chosen name is revealed this way\": no condition counts the cards with a name in a hand."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { CHOSEN_CARD_NAME } from "../../effects.js";
 import { defineCard } from "../define.js";
 
 const CHAPTERS =
@@ -16,11 +17,16 @@ export default defineCard({
       targets: [],
       // Each chapter's name is kept on the Saga (`remember`), so the goad
       // reaches every name chosen for it so far — all creatures, yours too.
+      // The name just chosen counts even when the Saga has left and so
+      // couldn't keep it (`hasName`).
       effect: {
         kind: "choose-card-name",
         filter: { types: ["creature"] },
         remember: true,
-        then: { kind: "goad", filter: { type: "creature", chosenName: true } },
+        then: {
+          kind: "goad",
+          filter: { type: "creature", anyOf: [{ chosenName: true }, { hasName: CHOSEN_CARD_NAME }] },
+        },
       },
       resolve: null,
       text: CHAPTERS,
