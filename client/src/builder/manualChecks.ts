@@ -8381,6 +8381,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Sickening Dreams: choose X, then discard that many',
     board({ you: { bf: ['Swamp*2'], hand: ['Sickening Dreams', 'Wastes', 'Island', 'Mountain'] }, opp: { bf: ['Grizzly Bears'] } }),
   ),
+  // --- Protection from the color of your choice (2026-10-28, grant-protection family) -
+  preset(
+    'Gods Willing: choose the colour as it resolves',
+    board({ you: { bf: ['Plains', 'Grizzly Bears'], hand: ['Gods Willing'] } }),
+  ),
+  preset(
+    "Flickering Ward: naming its own colour doesn't knock it off",
+    board({ you: { bf: ['Plains*3', 'Grizzly Bears'], hand: ['Flickering Ward', 'Pacifism'] } }),
+  ),
   // --- Skipping an untap step (2026-10-27, recheck list R5) -----------------
   preset(
     'Avizoa: you skip your next untap step',

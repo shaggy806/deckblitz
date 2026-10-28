@@ -380,7 +380,7 @@ nothing in the repo distinguished them.
 | limitation | blocked | best rank | ≤100 | ≤500 |
 | --- | ---: | ---: | ---: | ---: |
 | **mana provenance** (all three shapes) | 21 | **14** | 1 | 7 |
-| ~~protection from [filter]~~ *(the filter half built 2026-09-21; granted, chosen-colour and player protection still open)* | 19 | 92 | 1 | 4 |
+| ~~protection from [filter]~~ *(the filter half built 2026-09-21; granted and chosen-colour 2026-10-28; player protection still open)* | 19 | 92 | 1 | 4 |
 | ~~unbounded targeting~~ *(built 2026-09-26 — see above)* | 9 | 544 | 0 | 0 |
 | ~~regeneration~~ *(built 2026-09-28 — Mortivore)* | 7 | 705 | 0 | 0 |
 | ~~Station~~ *(built — Hearthhull, the Worldseed)* | 7 | 951 | 0 | 0 |
@@ -789,6 +789,17 @@ in `git log`.
   reduced price is affordable (`target-cost-reduction.test.ts`). Price of Fame,
   Magnificent End, Thing Swing, Fantastic Bounce; Brush Off waits on a coloured
   reduction, Uneasy Partings on its owner's top-or-bottom choice.
+- **Protection granted for a while, and the colour of your choice**
+  (`effect:grant-protection-choice`, `effect:grant-protection-temporary`,
+  2026-10-28, B244 — need-keys Phase 2's first family) — the `grant-protection`
+  effect (rule 702.16): a target and/or every permanent a filter reaches as it
+  resolves, one timestamp, layer 6 (`PtModifier.protection`); a fixed quality
+  or one chosen as it resolves (`{ choose: "color" | "card-type", or?,
+  optional? }`, a `choose-modes` decision); a filter's side fixed to the
+  controller's opponents as it resolves (`CardFilter.controllerIn`). The
+  static `protection.chosenColor` / `doesntRemoveSource` (rule 702.16n) for
+  the chosen-colour Auras (`grant-protection.test.ts`). Gods Willing, Giver of
+  Runes, Brave the Elements, Flickering Ward, Pippin; and the family's other cards (batch B244).
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

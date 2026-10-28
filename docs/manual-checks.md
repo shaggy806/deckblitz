@@ -5569,3 +5569,13 @@ engine terms. A second thing to check is a second test.
 ### Avizoa: you skip your next untap step
 - **Do:** Activate Avizoa's {0} ability, then pass until your next turn.
 - **Expect:** Avizoa is 4/4 until end of turn. On your next turn the log says "Alice skips their untap step" and your tapped Islands stay tapped; on the turn after that they untap as usual.
+
+## Protection from the color of your choice (2026-10-28, need-keys Phase 2: the grant-protection family)
+
+### Gods Willing: choose the colour as it resolves
+- **Do:** Cast Gods Willing on your Grizzly Bears. When it resolves, choose red.
+- **Expect:** No colour is asked while casting. As it resolves the prompt offers five choices, "Protection from white" to "Protection from green". After red, the Bears' card text ends "Protection from red until end of turn" and the log says "Grizzly Bears gains protection from red until EOT"; then you scry 1.
+
+### Flickering Ward: naming its own colour doesn't knock it off
+- **Do:** Cast Flickering Ward on your Grizzly Bears and choose white as it enters.
+- **Expect:** The Ward stays attached and the Bears have protection from white. Casting Pacifism on the Bears isn't offered: they can't be targeted by it.
