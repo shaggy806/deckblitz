@@ -1,0 +1,515 @@
+{
+  "batch": "B244",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the grant-protection family (effect:grant-protection-choice + effect:grant-protection-temporary)",
+  "authored": [
+    {
+      "name": "Akroma's Blessing",
+      "files": [
+        "engine/src/cards/pool/akromas-blessing.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Alseid of Life's Bounty",
+      "files": [
+        "engine/src/cards/pool/alseid-of-lifes-bounty.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Angelic Intervention",
+      "files": [
+        "engine/src/cards/pool/angelic-intervention.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Apostle's Blessing",
+      "files": [
+        "engine/src/cards/pool/apostles-blessing.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Armored Guardian",
+      "files": [
+        "engine/src/cards/pool/armored-guardian.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Liberator",
+      "files": [
+        "engine/src/cards/pool/aven-liberator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aven Warcraft",
+      "files": [
+        "engine/src/cards/pool/aven-warcraft.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bathe in Light",
+      "files": [
+        "engine/src/cards/pool/bathe-in-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Benevolent Bodyguard",
+      "files": [
+        "engine/src/cards/pool/benevolent-bodyguard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blessed Breath",
+      "files": [
+        "engine/src/cards/pool/blessed-breath.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Brave the Elements",
+      "files": [
+        "engine/src/cards/pool/brave-the-elements.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cartel Aristocrat",
+      "files": [
+        "engine/src/cards/pool/cartel-aristocrat.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Center Soul",
+      "files": [
+        "engine/src/cards/pool/center-soul.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crimson Acolyte",
+      "files": [
+        "engine/src/cards/pool/crimson-acolyte.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crypsis",
+      "files": [
+        "engine/src/cards/pool/crypsis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dominaria's Judgment",
+      "files": [
+        "engine/src/cards/pool/dominarias-judgment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emerge Unscathed",
+      "files": [
+        "engine/src/cards/pool/emerge-unscathed.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feat of Resistance",
+      "files": [
+        "engine/src/cards/pool/feat-of-resistance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flickering Ward",
+      "files": [
+        "engine/src/cards/pool/flickering-ward.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Floating Shield",
+      "files": [
+        "engine/src/cards/pool/floating-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Giver of Runes",
+      "files": [
+        "engine/src/cards/pool/giver-of-runes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glory",
+      "files": [
+        "engine/src/cards/pool/glory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Wizard",
+      "files": [
+        "engine/src/cards/pool/goblin-wizard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gods Willing",
+      "files": [
+        "engine/src/cards/pool/gods-willing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grotesque Hybrid",
+      "files": [
+        "engine/src/cards/pool/grotesque-hybrid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hell-Bent Raider",
+      "files": [
+        "engine/src/cards/pool/hell-bent-raider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jareth, Leonine Titan",
+      "files": [
+        "engine/src/cards/pool/jareth-leonine-titan.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jeweled Spirit",
+      "files": [
+        "engine/src/cards/pool/jeweled-spirit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jodah's Avenger",
+      "files": [
+        "engine/src/cards/pool/jodahs-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kabira Evangel",
+      "files": [
+        "engine/src/cards/pool/kabira-evangel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kami of the Painted Road",
+      "files": [
+        "engine/src/cards/pool/kami-of-the-painted-road.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Keeper of Kookus",
+      "files": [
+        "engine/src/cards/pool/keeper-of-kookus.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Knight of Dawn",
+      "files": [
+        "engine/src/cards/pool/knight-of-dawn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Midvast Protector",
+      "files": [
+        "engine/src/cards/pool/midvast-protector.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Moonlit Strider",
+      "files": [
+        "engine/src/cards/pool/moonlit-strider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Obsidian Acolyte",
+      "files": [
+        "engine/src/cards/pool/obsidian-acolyte.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pale Wayfarer",
+      "files": [
+        "engine/src/cards/pool/pale-wayfarer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pippin, Guard of the Citadel",
+      "files": [
+        "engine/src/cards/pool/pippin-guard-of-the-citadel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pristine Skywise",
+      "files": [
+        "engine/src/cards/pool/pristine-skywise.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Questing Phelddagrif",
+      "files": [
+        "engine/src/cards/pool/questing-phelddagrif.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Radiant, Serra Archangel",
+      "files": [
+        "engine/src/cards/pool/radiant-serra-archangel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rappelling Scouts",
+      "files": [
+        "engine/src/cards/pool/rappelling-scouts.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Razor Barrier",
+      "files": [
+        "engine/src/cards/pool/razor-barrier.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Redeem the Lost",
+      "files": [
+        "engine/src/cards/pool/redeem-the-lost.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Resilient Wanderer",
+      "files": [
+        "engine/src/cards/pool/resilient-wanderer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reverent Mantra",
+      "files": [
+        "engine/src/cards/pool/reverent-mantra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seasoned Dungeoneer",
+      "files": [
+        "engine/src/cards/pool/seasoned-dungeoneer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sejiri Shelter // Sejiri Glacier",
+      "files": [
+        "engine/src/cards/pool/sejiri-shelter.ts",
+        "engine/src/cards/pool/sejiri-glacier.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sejiri Steppe",
+      "files": [
+        "engine/src/cards/pool/sejiri-steppe.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shelter",
+      "files": [
+        "engine/src/cards/pool/shelter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spare from Evil",
+      "files": [
+        "engine/src/cards/pool/spare-from-evil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stave Off",
+      "files": [
+        "engine/src/cards/pool/stave-off.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stormscape Master",
+      "files": [
+        "engine/src/cards/pool/stormscape-master.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sygg, River Guide",
+      "files": [
+        "engine/src/cards/pool/sygg-river-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield",
+      "files": [
+        "engine/src/cards/pool/sygg-wanderwine-wisdom.ts",
+        "engine/src/cards/pool/sygg-wanderbrine-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tel-Jilad Defiance",
+      "files": [
+        "engine/src/cards/pool/tel-jilad-defiance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Teroh's Vanguard",
+      "files": [
+        "engine/src/cards/pool/terohs-vanguard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thornscape Master",
+      "files": [
+        "engine/src/cards/pool/thornscape-master.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tower of the Magistrate",
+      "files": [
+        "engine/src/cards/pool/tower-of-the-magistrate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ward of Lights",
+      "files": [
+        "engine/src/cards/pool/ward-of-lights.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Willow Priestess",
+      "files": [
+        "engine/src/cards/pool/willow-priestess.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wishmonger",
+      "files": [
+        "engine/src/cards/pool/wishmonger.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Prismatic Boon",
+      "needs": [
+        "decision:x-targets"
+      ],
+      "why": "\"X target creatures gain protection from the chosen color\": a target count of X isn't built."
+    },
+    {
+      "name": "Courageous Resolve",
+      "needs": [
+        "keyword:protection-from-opponents"
+      ],
+      "why": "Protection from each of your opponents is protection from players (rule 702.16k: what they control, and what they own that nobody else controls), not a filter."
+    },
+    {
+      "name": "Crown of Awe",
+      "needs": [
+        "filter:shares-creature-type-with-attached"
+      ],
+      "why": "Its sacrifice ability reaches \"other creatures that share a creature type with it\": no filter for sharing a creature type with the enchanted creature."
+    },
+    {
+      "name": "Concerted Effort",
+      "needs": [
+        "effect:share-protection-and-landwalk"
+      ],
+      "why": "Shares each creature's protection qualities and landwalk with the others: nothing copies one creature's protection to another."
+    },
+    {
+      "name": "Earnest Fellowship",
+      "needs": [
+        "static:protection-from-own-colors"
+      ],
+      "why": "Each creature's protection follows its own colours: a static's protection is fixed, not read per affected object."
+    },
+    {
+      "name": "Escaped Shapeshifter",
+      "needs": [
+        "filter:has-protection-from-color"
+      ],
+      "why": "Protection from any color an opponent's creature has protection from: no filter or count reads a creature's protection."
+    },
+    {
+      "name": "Sanctuary Blade",
+      "needs": [
+        "decision:choose-color-on-attach"
+      ],
+      "why": "\"As this Equipment becomes attached to a creature, choose a color … protection from the last chosen color\": a choice made on each attachment, not as it enters."
+    },
+    {
+      "name": "Eight-and-a-Half-Tails",
+      "needs": [
+        "effect:spell-color-change-carries-to-permanent"
+      ],
+      "why": "\"Target spell or permanent becomes white until end of turn\": a permanent spell made white stays white as the permanent it becomes (its ruling), but a spell's colour modifier is cleared as it moves to the battlefield."
+    },
+    {
+      "name": "Devoted Caretaker",
+      "needs": [
+        "filter:protection-from-spells-only"
+      ],
+      "why": "\"Protection from instant spells and from sorcery spells\": no filter tells a spell on the stack from an instant or sorcery card elsewhere."
+    },
+    {
+      "name": "Council Guardian",
+      "needs": [
+        "condition:vote-option-most-or-tied"
+      ],
+      "why": "\"Each color with the most votes or tied for most votes\": named-option votes have no most-or-tied follow-up (`for-each-voted \"most\"` covers players and permanents; `vote-won` is strictly most)."
+    }
+  ]
+}

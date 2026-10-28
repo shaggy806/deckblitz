@@ -335,6 +335,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   46, banding 46). The families run **in series**, one per session, under the **`build-family`**
   skill (the user's call): a session re-runs the order, builds its family's top two to four units,
   authors what they free and hands off the next.
+- **2026-10-28: the grant-protection family (B244).** Its top group (`effect:grant-protection-choice`
+  + `effect:grant-protection-temporary`, 72 cards counted by `--feature`, 66 by `--greedy`): the
+  `grant-protection` effect and the chosen-colour Aura static (rule 702.16n). 62 authored (8 by the
+  lead, 54 by three agents), 10 still blocked, 3 of them on new narrow keys. The tier B keys of the
+  family (sharing protection, protection from own colours, a protection filter) needed code of
+  their own and didn't ride along. Next: `decision:variable-target-count` (48).
 
 ## Rough size
 

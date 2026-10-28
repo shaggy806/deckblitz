@@ -6,6 +6,16 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A permanent spell's changed characteristics don't follow it onto the battlefield.** Rule
+  400.7a: effects from spells and abilities that change the characteristics or controller of a
+  permanent spell on the stack continue to apply to the permanent it becomes. `moveObject`
+  (`game.ts`, `keptPrototype`, around line 37680) keeps only a stack object's `prototype` and
+  `castRider` modifiers as it moves to the battlefield, so a `become-color` on a creature spell
+  ("Target spell or permanent becomes white until end of turn") is gone on arrival. Blind Seer
+  (in the pool) has the ruling and is wrong for a permanent spell; Crimson Wisps-style
+  "spell or permanent" colour cards likely too. Keep a modifier set on the stack by a resolved
+  effect (not a static's) across that one move. Found by batch 244's group A; blocks
+  Eight-and-a-Half-Tails (`effect:spell-color-change-carries-to-permanent`).
 - **A mana ability with a `discard` cost never pays it.** In `game.ts` the mana-ability branch of
   ability activation resolves the ability and returns (around line 15359) before the discard cost
   is paid (around line 15521), and legality doesn't refuse it the way it refuses an

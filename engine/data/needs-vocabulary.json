@@ -12780,6 +12780,18 @@
    "family": "replacement:prevent-combat-damage-by-filter",
    "example": "Chant of Vitu-Ghazi: prevent all damage creatures would deal this turn, gaining life equal to the damage prevented"
   },
+  "decision:choose-color-on-attach": {
+   "family": "effect:grant-protection-choice",
+   "example": "Sanctuary Blade: choose a color as this Equipment becomes attached; protection from the last chosen color"
+  },
+  "filter:protection-from-spells-only": {
+   "family": "effect:grant-protection-choice",
+   "example": "Devoted Caretaker: protection from instant spells and from sorcery spells, not from instant and sorcery cards"
+  },
+  "condition:vote-option-most-or-tied": {
+   "family": "mechanic:voting",
+   "example": "Council Guardian: each named option with the most votes or tied for most votes"
+  },
   "effect:share-protection-and-landwalk": {
    "family": "effect:grant-protection-choice",
    "example": "Concerted Effort: creatures you control gain flying, fear, first strike, double strike, landwalk and protection if any creature you control has it"

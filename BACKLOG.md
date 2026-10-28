@@ -67,8 +67,10 @@ section keeps only what to do next.
   All nine lists done 2026-10-28 (rounds one and two, B235–B243). **Now Phase 2: build in greedy
   order, a family per session, in series** (the `build-family` skill, from a fresh session each;
   `cards:needs -- --greedy --groups` scores the 617 generalisation groups as build units). Families
-  built: none yet. Next: `effect:grant-protection-choice` (its two protection keys, 66 cards), then
-  `decision:variable-target-count` (four keys, 48).
+  built: grant-protection (B244, 2026-10-28: the `grant-protection` effect and chosen-colour Aura
+  protection; 62 of its 72 cards authored, 10 still blocked on narrow keys). Next:
+  `decision:variable-target-count` (four keys, 48 cards; Prismatic Boon waits on it too), then
+  `decision:choose-card-name` (46).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -137,6 +139,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).
 - **A mana ability with a `discard` cost never pays it**: the mana-ability activation resolves before the discard is paid, and nothing refuses one, so "Discard a card: Add {B}" would make free mana (Skirge Familiar, `cost:mana-ability-discard-cost`, batch 236).
 - **A delayed "whenever" on a batched damage event fires once per source** (603.2c): Aphelia's halving twice; Jace, Cunning Castaway likely over-triggers (`effect:delayed-whenever-batched-damage`, batch 237).
 - **A threshold-gated granted dies trigger doesn't look back** (603.10a): Decaying Soil's granted trigger fires for the creature whose death makes the seventh card (`trigger:conditional-grant-look-back`, batch 225).

@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the grant-protection family** (2026-10-28, B244,
+  `effect:grant-protection-choice` + `effect:grant-protection-temporary`): the `grant-protection`
+  effect — protection for a duration on a target and/or a filter's matches (rule 702.16, layer
+  6), from a fixed quality or one chosen as it resolves (colour, card type, "colorless or …",
+  optional), a filter's "your opponents" fixed as it resolves — and the static
+  `protection.chosenColor` / `doesntRemoveSource` (rule 702.16n) for the chosen-colour Auras; v1
+  picks the colour that stops the opposing spell aimed at its creature, the view shows a granted
+  protection, and the scaffolder reads the sentences. 62 cards: Sejiri Shelter, Giver of Runes,
+  Pippin, Guard of the Citadel, Gods Willing, Brave the Elements, Flickering Ward and 56 more;
+  10 still blocked on narrow keys.
+
 - **The set walk is done** (2026-10-27, batches 89-234): every Commander-legal first printing of
   every set is authored or triaged with a blocked record — newest first from Reality Fracture,
   oldest first from Alpha, and the middle walks between, from round thirteen in parallel cloud

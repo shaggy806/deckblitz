@@ -799,7 +799,7 @@ in `git log`.
   controller's opponents as it resolves (`CardFilter.controllerIn`). The
   static `protection.chosenColor` / `doesntRemoveSource` (rule 702.16n) for
   the chosen-colour Auras (`grant-protection.test.ts`). Gods Willing, Giver of
-  Runes, Brave the Elements, Flickering Ward, Pippin; and the family's other cards (batch B244).
+  Runes, Brave the Elements, Flickering Ward, Pippin and 57 more: 62 of the family's 72.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 
