@@ -224,7 +224,11 @@ describe("slot polarity", () => {
     // Telekinetic Bonds' "tap or untap". 0.968 until round twenty's batches
     // (230-233) took it to 96.795%, again honest either-ways — Defiling
     // Tears' "+1/-1 and regenerate", Metathran Transport's "becomes blue".
-    expect(decided / slots).toBeGreaterThan(0.967);
+    // 0.967 until B253 (2026-10-29) took it to 96.43%: three dozen "target
+    // land becomes [a basic land type]" cards (Tideshaper Mystic, Spreading
+    // Seas, Convincing Mirage) — your own colour fixing or an opponent's
+    // lock, the board's call.
+    expect(decided / slots).toBeGreaterThan(0.964);
   });
 });
 

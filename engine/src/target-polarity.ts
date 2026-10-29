@@ -274,13 +274,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // (Zedruu): the player slot is the one getting something.
     if (n.who !== undefined && typeof n.who === "object") v.touch(n.who, "help", MINOR);
   },
-  "gain-control-all": none,
+  // "Gain control of all creatures target player controls" (Call for Aid).
+  "gain-control-all": (n, v) => v.touch(n.controlledByTarget, "harm", DECISIVE),
   "rotate-control": none,
-  // Which side gains depends on whose each one is: a bad permanent of yours
-  // for a good one of theirs.
+  // Each one leaves its controller, as `gain-control`'s target does: the
+  // permanent of yours you give up and the one of theirs you take.
   "exchange-control": (n, v) => {
-    v.touch(n.objects[0], "either", DECISIVE);
-    v.touch(n.objects[1], "either", DECISIVE);
+    v.touch(n.objects[0], "harm", DECISIVE);
+    v.touch(n.objects[1], "harm", DECISIVE);
     v.child(n.then);
     v.child(n.otherwise);
   },
@@ -369,6 +370,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const lean = n.keyword === "defender" ? "harm" : "help";
     v.touch(n.filter.sameNameAsTarget, lean, MAJOR);
     v.touch(n.filter.sharesColorWithTarget, lean, MAJOR);
+    v.touch(n.controlledByTarget, lean, MINOR);
   },
   "add-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MAJOR),

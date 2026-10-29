@@ -229,7 +229,7 @@ describe("layer 4: types granted to other permanents", () => {
     spawn(game, "Kudo, King Among Bears", A);
     spawn(game, "Bello, Bard of the Brambles", A);
     const archive = spawn(game, "Hedron Archive", A);
-    expect(subtypes(game, archive)).toEqual(["Bear", "Elemental"]);
+    expect([...subtypes(game, archive)].sort()).toEqual(["Bear", "Elemental"]);
     expect(pt(game, archive)).toEqual([4, 4]);
 
     // A Sol Ring animated after Kudo arrived is a Bear too, and the
