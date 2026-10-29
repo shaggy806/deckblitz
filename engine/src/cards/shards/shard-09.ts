@@ -116,6 +116,7 @@ import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
+import _poolCarrionBeetles from "../pool/carrion-beetles.js";
 import _poolCarrion from "../pool/carrion.js";
 import _poolCatastrophe from "../pool/catastrophe.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
@@ -230,6 +231,7 @@ import _poolFaerieSwarm from "../pool/faerie-swarm.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
 import _poolFalconsWingHarness from "../pool/falcons-wing-harness.js";
 import _poolFamilyReunion from "../pool/family-reunion.js";
+import _poolFamishedGhoul from "../pool/famished-ghoul.js";
 import _poolFateForgotten from "../pool/fate-forgotten.js";
 import _poolFathomFleetFirebrand from "../pool/fathom-fleet-firebrand.js";
 import _poolFeedTheSerpent from "../pool/feed-the-serpent.js";
@@ -978,6 +980,7 @@ const shard: CardShard = {
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
+    _poolCarrionBeetles,
     _poolCarrion,
     _poolCatastrophe,
     _poolCatlikeCuriosity,
@@ -1092,6 +1095,7 @@ const shard: CardShard = {
     _poolFalconAndRedwing,
     _poolFalconsWingHarness,
     _poolFamilyReunion,
+    _poolFamishedGhoul,
     _poolFateForgotten,
     _poolFathomFleetFirebrand,
     _poolFeedTheSerpent,

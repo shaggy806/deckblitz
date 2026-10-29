@@ -204,6 +204,7 @@ import _poolDustStalker from "../pool/dust-stalker.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEatenByPiranhas from "../pool/eaten-by-piranhas.js";
+import _poolEbonyCharm from "../pool/ebony-charm.js";
 import _poolEchoingTruth from "../pool/echoing-truth.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
     _poolEatenByPiranhas,
+    _poolEbonyCharm,
     _poolEchoingTruth,
     _poolEclipsedFlamekin,
     _poolEfflorescence,

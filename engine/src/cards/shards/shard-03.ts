@@ -275,6 +275,7 @@ import _poolGravkill from "../pool/gravkill.js";
 import _poolGreenhiltTrainee from "../pool/greenhilt-trainee.js";
 import _poolGreenseeker from "../pool/greenseeker.js";
 import _poolGridMonitor from "../pool/grid-monitor.js";
+import _poolGriffnautTracker from "../pool/griffnaut-tracker.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGrislySurvivor from "../pool/grisly-survivor.js";
 import _poolGrizzledAngler from "../pool/grizzled-angler.js";
@@ -1035,6 +1036,7 @@ const shard: CardShard = {
     _poolGreenhiltTrainee,
     _poolGreenseeker,
     _poolGridMonitor,
+    _poolGriffnautTracker,
     _poolGrimServant,
     _poolGrislySurvivor,
     _poolGrizzledAngler,

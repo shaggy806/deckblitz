@@ -615,6 +615,7 @@ import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
 import _poolSangrophage from "../pool/sangrophage.js";
 import _poolSavageBeating from "../pool/savage-beating.js";
+import _poolScarabFeast from "../pool/scarab-feast.js";
 import _poolScrapbasket from "../pool/scrapbasket.js";
 import _poolScrollshift from "../pool/scrollshift.js";
 import _poolSculptedPerfection from "../pool/sculpted-perfection.js";
@@ -1480,6 +1481,7 @@ const shard: CardShard = {
     _poolSandsOfDelirium,
     _poolSangrophage,
     _poolSavageBeating,
+    _poolScarabFeast,
     _poolScrapbasket,
     _poolScrollshift,
     _poolSculptedPerfection,

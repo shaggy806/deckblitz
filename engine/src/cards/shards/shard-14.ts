@@ -568,6 +568,7 @@ import _poolQuandrixApprentice from "../pool/quandrix-apprentice.js";
 import _poolQuandrixCultivator from "../pool/quandrix-cultivator.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRadioactiveMan from "../pool/radioactive-man.js";
+import _poolRagDealer from "../pool/rag-dealer.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
@@ -1412,6 +1413,7 @@ const shard: CardShard = {
     _poolQuandrixCultivator,
     _poolRabbleRousing,
     _poolRadioactiveMan,
+    _poolRagDealer,
     _poolRakdosCharm,
     _poolRancidRats,
     _poolRayOfEnfeeblement,

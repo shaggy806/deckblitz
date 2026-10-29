@@ -143,6 +143,7 @@ import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDaruCavalier from "../pool/daru-cavalier.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
+import _poolDeadeyeTracker from "../pool/deadeye-tracker.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
 import _poolDeathsporeThallid from "../pool/deathspore-thallid.js";
 import _poolDefile from "../pool/defile.js";
@@ -972,6 +973,7 @@ const shard: CardShard = {
     _poolDaruCavalier,
     _poolDauntlessSurvivor,
     _poolDeadbridgeShaman,
+    _poolDeadeyeTracker,
     _poolDeafeningClarion,
     _poolDeathsporeThallid,
     _poolDefile,

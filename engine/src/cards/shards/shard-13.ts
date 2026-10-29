@@ -509,6 +509,7 @@ import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
 import _poolRamunapHydra from "../pool/ramunap-hydra.js";
 import _poolRangersPath from "../pool/rangers-path.js";
+import _poolRatsFeast from "../pool/rats-feast.js";
 import _poolRavagedHighlands from "../pool/ravaged-highlands.js";
 import _poolRavenousSquirrel from "../pool/ravenous-squirrel.js";
 import _poolRazorgrassAmbush from "../pool/razorgrass-ambush.js";
@@ -1334,6 +1335,7 @@ const shard: CardShard = {
     _poolRampantGrowth,
     _poolRamunapHydra,
     _poolRangersPath,
+    _poolRatsFeast,
     _poolRavagedHighlands,
     _poolRavenousSquirrel,
     _poolRazorgrassAmbush,
