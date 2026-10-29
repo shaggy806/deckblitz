@@ -432,7 +432,45 @@ export interface DamageMultiplierReplacement {
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */
   readonly fromSelf?: boolean;
-  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self";
+  /** Only damage the permanent this Aura or Equipment is attached to would
+   * deal — Muzzle's "prevent all damage that would be dealt by enchanted
+   * creature", Inquisitor's Flail's doubling. */
+  readonly fromAttached?: true;
+  /** `"your-side"`: you, or a permanent you control (`toFilter` narrowing
+   * just the permanents — Hyperion, Supreme Hero's "you or a Hero you
+   * control"); `"attached"`: the permanent this Aura or Equipment is
+   * attached to (Inviolability, Shield of the Realm). */
+  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self" | "your-side" | "attached";
+  /** Not this permanent itself — "**other** permanents you control"
+   * (Palisade Giant), "another creature you control" (Vigor). */
+  readonly toOther?: true;
+  /** A redirection (rule 614.9) instead of a change in amount: all of the
+   * damage is dealt by the same source to this permanent (`"self"` —
+   * Palisade Giant's "all damage that would be dealt to you and other
+   * permanents you control is dealt to this creature instead"), to the
+   * permanent it's attached to (`"attached"` — Pariah), or to the
+   * recipient's controller (`"recipient-controller"` — Treacherous Link).
+   * Does nothing while that isn't a creature, planeswalker or battle on the
+   * battlefield, or a player in the game, or is the recipient already; and
+   * applies to a damage event once (614.5), so two Palisade Giants don't
+   * send it back and forth. */
+  readonly redirect?: "self" | "attached" | "recipient-controller";
+  /** "Prevent N of that damage" (rule 615.10 — Guardian Seraph's 1, Shield
+   * of the Realm's 2): that much of each damage event it applies to. */
+  readonly preventAmount?: number;
+  /** "Prevent all but N of that damage" (Hyperion, Supreme Hero; Temple
+   * Altisaur). */
+  readonly preventAllBut?: number;
+  /** "Prevent half that damage, rounded up" (Gisela, Blade of Goldnight). */
+  readonly preventHalf?: "up" | "down";
+  /** "It deals half that damage, rounded down, … instead" (Ghosts of the
+   * Innocent): a replacement, not prevention — damage that can't be
+   * prevented is still halved. */
+  readonly halve?: "down" | "up";
+  /** Only when the damage is this much or less — Callous Giant's "if a
+   * source would deal 3 or less damage to this creature, prevent that
+   * damage". */
+  readonly ifAtMost?: number;
   /** Only damage to a permanent matching this filter, from this permanent's
    * controller's side, as it is when the damage would be dealt — Iroas, God
    * of Victory's "prevent all damage that would be dealt to attacking

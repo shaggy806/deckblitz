@@ -250,6 +250,7 @@ import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
 import _poolFlamesOfTheFirebrand from "../pool/flames-of-the-firebrand.js";
 import _poolFlareOfCultivation from "../pool/flare-of-cultivation.js";
 import _poolFlaringFlameKin from "../pool/flaring-flame-kin.js";
+import _poolFlaringPain from "../pool/flaring-pain.js";
 import _poolFlashConscription from "../pool/flash-conscription.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
@@ -1137,6 +1138,7 @@ const shard: CardShard = {
     _poolFlamesOfTheFirebrand,
     _poolFlareOfCultivation,
     _poolFlaringFlameKin,
+    _poolFlaringPain,
     _poolFlashConscription,
     _poolFledglingGriffin,
     _poolFleetingImage,

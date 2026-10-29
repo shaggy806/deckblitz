@@ -1836,6 +1836,20 @@ export interface StaticAbility {
    * blitz is, from the hand. */
   readonly grantsBlitzInHand?: { readonly filter: CardFilter };
   /**
+   * "Damage can't be prevented" (rule 615.12 — Leyline of Punishment, `{}`):
+   * prevention effects prevent none of the damage it covers (their other
+   * effects still happen, and a shield isn't used up). `by` narrows it to
+   * damage from sources matching a filter from this permanent's
+   * controller's side (Questing Beast's "creatures you control"), `fromSelf`
+   * to this permanent's own damage (Excruciator), `combat` to combat damage
+   * (Frenzied Baloth).
+   */
+  readonly damageCantBePrevented?: {
+    readonly by?: CardFilter;
+    readonly fromSelf?: true;
+    readonly combat?: true;
+  };
+  /**
    * "Counters can't be put on …" and "players can't get counters" (rule
    * 122 — Solemnity; Melira, Sylvok Outcast's "you can't get poison
    * counters" and "creatures you control can't have -1/-1 counters put on

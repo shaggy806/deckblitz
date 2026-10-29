@@ -1010,6 +1010,84 @@ export type GiftKind = "food" | "card" | "tapped-fish" | "extra-turn" | "treasur
  */
 export type DamageFrom = "trigger-object" | { readonly target: number };
 
+/**
+ * A one-shot prevention or redirection effect over a set of damage events
+ * for a duration (rules 614.9, 615) — "prevent all combat damage that would
+ * be dealt by target creature this turn" (Kor Haven: `{ by: { target: 0 },
+ * combat: true }`), "prevent all damage that would be dealt to you and
+ * creatures you control this turn by creatures" (Eerie Interference: `{ to:
+ * { players: "you", permanents: { type: "creature", controlledBy: "you" } },
+ * by: { filter: { type: "creature" } } }`), "until your next turn, prevent
+ * all damage that would be dealt to and dealt by target permanent" (two
+ * rules, Dovin's −1), "all combat damage that would be dealt to you this
+ * turn is dealt to target attacking creature instead" (Turn the Tables:
+ * `redirectTo: 0`). Which damage it covers is asked as the damage would be
+ * dealt (615.1), so a creature that arrives later is covered.
+ */
+export interface DamageRuleSpec {
+  readonly kind: "damage-rule";
+  /** The recipients: one target (a slot, `"source"`, `"trigger-object"`,
+   * `"attached"`), or `players` ("you", "each", "opponents") and/or
+   * permanents matching `permanents` from the controller's side — either
+   * counts — but not `exceptTarget`. Omitted: any recipient. */
+  readonly to?: {
+    readonly target?: EffectTargetRef;
+    readonly players?: "you" | "each" | "opponents";
+    readonly permanents?: CardFilter;
+    readonly exceptTarget?: EffectTargetRef;
+  };
+  /** The sources: one object (a creature, or a spell on the stack —
+   * Reverberation), or those matching `filter` from the controller's side,
+   * but not `exceptTarget` (Terrifying Presence). Omitted: any source. */
+  readonly by?: {
+    readonly target?: EffectTargetRef;
+    readonly filter?: CardFilter;
+    readonly exceptTarget?: EffectTargetRef;
+  };
+  /** Only combat (`true`) or noncombat (`false`) damage. */
+  readonly combat?: boolean;
+  /** `"all"` (the default) for every such damage event while it lasts;
+   * `"next-time"`, the whole of the next one (615.8); an amount, the next
+   * that much damage in all (615.7 — Festival of the Guildpact's X). */
+  readonly amount?: "all" | "next-time" | EffectAmount;
+  /** `"end-of-turn"` (the default); `"until-your-next-turn"`; `"while-source"`
+   * — for as long as the source stays on the battlefield (Old Fat Spider
+   * Can't See Me). */
+  readonly duration?: "end-of-turn" | "until-your-next-turn" | "while-source";
+  /** A redirection instead (614.9): dealt by the same source to this target
+   * slot, `"source"` or `"you"`; `"source-controller"` (Mirror Strike) or
+   * `"source-itself"` (Shield Dancer) are worked out as the damage would be
+   * dealt. */
+  readonly redirectTo?: EffectTargetRef | "you" | "source-controller" | "source-itself";
+  /** Prevention's additional effect (615.5), right after: `"x"` is the
+   * damage it prevented, the spell's targets are its own, and the damage's
+   * source is `"trigger-object"` (its controller `who: "trigger-controller"`)
+   * — Temper's "for each 1 damage prevented this way, put a +1/+1 counter on
+   * that creature", Comeuppance's damage back. Once per damage event. */
+  readonly then?: EffectSpec;
+  /** "You gain life equal to the damage prevented this way". */
+  readonly gainLifePrevented?: true;
+}
+
+/** A `damage-rule` with its references resolved, as `EffectApi.addDamageRule`
+ * takes it. */
+export interface ResolvedDamageRule {
+  readonly target?: TargetRef;
+  readonly players?: "you" | "each" | "opponents";
+  readonly permanents?: CardFilter;
+  readonly exceptRecipient?: ObjectId;
+  readonly from?: ObjectId;
+  readonly byFilter?: CardFilter;
+  readonly exceptSource?: ObjectId;
+  readonly combat?: boolean;
+  readonly amount: "all" | "next-time" | number;
+  readonly duration: "end-of-turn" | "until-your-next-turn" | "while-source";
+  readonly redirect?: TargetRef;
+  readonly redirectToSource?: "itself" | "controller";
+  readonly then?: EffectSpec;
+  readonly gainLifePrevented?: true;
+}
+
 export type ThisWayKind =
   | "discarded"
   | "drawn"
@@ -1533,6 +1611,9 @@ export type EffectSpec =
   | {
       readonly kind: "damage";
       readonly amount: EffectAmount;
+      /** "The damage can't be prevented" (rule 615.12 — Combust, Pinpoint
+       * Avalanche): prevention effects prevent none of it. */
+      readonly cantBePrevented?: true;
       /** A target slot index — omit when `who` is set instead. Or
        * `"trigger-object"`, untargeted: "whenever this creature blocks or
        * becomes blocked by a creature, this creature deals 1 damage to **that
@@ -5159,6 +5240,14 @@ export type EffectSpec =
       readonly by: CardFilter;
     }
   | {
+      /** "Damage can't be prevented this turn" (rule 615.12 — Skullcrack,
+       * Flaring Pain): for the rest of the turn, prevention effects prevent
+       * no damage (their other effects still happen, shields aren't used
+       * up). */
+      readonly kind: "damage-cant-be-prevented";
+    }
+  | DamageRuleSpec
+  | {
       /** "Prevent the next `amount` damage that would be dealt to `target`
        * this turn" (Healing Salve — rule 614.9 / ROADMAP Phase 11 EG-6). A
        * one-shot prevention *shield* on `GameState.preventionShields`, consumed
@@ -5203,9 +5292,20 @@ export type EffectSpec =
        * happens with no source to choose. */
       readonly kind: "prevent-damage-from-chosen-source";
       readonly filter?: CardFilter;
-      readonly to: "you" | number;
-      readonly amount: "next-time" | number;
+      /** Also `"your-side"` — "you and/or permanents you control" (Harm's
+       * Way, one shield over them all) — and `"any"`, any recipient
+       * (Reflect Damage's "would deal damage this turn"). */
+      readonly to: "you" | number | "your-side" | "any";
+      /** `"all"`: all the damage that source would deal it this turn, never
+       * used up (Kor Chant). */
+      readonly amount: "next-time" | number | "all";
       readonly gainLifePrevented?: true;
+      /** Prevention's additional effect (rule 615.5), with `"x"` what the
+       * shield prevented — see `damage-rule`'s `then`. */
+      readonly then?: EffectSpec;
+      /** A redirection to that source's controller (`"controller"` —
+       * Reflect Damage) or itself (`"itself"`), instead of `redirectTo`. */
+      readonly redirectToSource?: "itself" | "controller";
       /** A redirection instead (rule 614.9): "The next time a source of your
        * choice would deal damage to target creature this turn, that damage
        * is dealt to this creature instead" (Shaman en-Kor) is `{ to: 0,
@@ -5215,7 +5315,7 @@ export type EffectSpec =
       readonly redirectTo?: EffectTargetRef | "you";
       /** Set by the engine on the copy the choice's answer applies: what the
        * shield protects, with target 0 the source chosen. */
-      readonly protect?: TargetRef;
+      readonly protect?: TargetRef | "your-side" | "any";
       /** Set by the engine beside `protect`: where `redirectTo` sends it. */
       readonly redirect?: TargetRef;
     }
@@ -6213,6 +6313,13 @@ export interface EffectApi {
   /** `from`: the triggering object, or a target, deals it, not the effect's
    * source — see {@link DamageFrom}. */
   dealDamage(target: TargetRef, amount: number, from?: DamageFrom): void;
+  /** Run `fn` with every damage it deals unpreventable (rule 615.12 — a
+   * `damage` effect's `cantBePrevented`). */
+  unpreventably(fn: () => void): void;
+  /** "Damage can't be prevented this turn" (Skullcrack). */
+  damageUnpreventableThisTurn(): void;
+  /** Set up a `damage-rule`, its references resolved (see that effect). */
+  addDamageRule(rule: ResolvedDamageRule): void;
   /** Deal damage to a whole scope of players, untargeted (Sabotender /
    * Tannuk: "deals 1 damage to each opponent" — needed-cards P16), all at
    * once. `amountFor` is asked per player, for a per-player amount. */
@@ -7480,11 +7587,12 @@ export interface EffectApi {
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
   preventDamageFrom(
     source: TargetRef,
-    protect: TargetRef,
-    amount: number | "next-time",
+    protect: TargetRef | "your-side" | "any",
+    amount: number | "next-time" | "all",
     filter: CardFilter | undefined,
     gainLifePrevented: boolean,
     redirectTo?: TargetRef,
+    more?: { readonly then?: EffectSpec; readonly redirectToSource?: "itself" | "controller" },
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
   becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration): void;
@@ -9563,6 +9671,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "damage": {
+      if (spec.cantBePrevented === true) {
+        const { cantBePrevented: _, ...rest } = spec;
+        ctx.unpreventably(() => applyEffectSpec(rest, ctx));
+        return;
+      }
       if (spec.toControllerOfTarget !== undefined) {
         const of = ctx.targets[spec.toControllerOfTarget];
         const controller = of === undefined ? undefined : ctx.controllerOf(of);
@@ -11548,6 +11661,57 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "prevent-damage-to-you":
       ctx.preventAllCombatDamage(spec.by, true);
       return;
+    case "damage-cant-be-prevented":
+      ctx.damageUnpreventableThisTurn();
+      return;
+    case "damage-rule": {
+      const objectOf = (ref: EffectTargetRef | undefined): ObjectId | null | undefined => {
+        if (ref === undefined) return undefined;
+        const t = resolveEffectTarget(ref, ctx);
+        return t?.kind === "object" ? t.object : null;
+      };
+      let target: TargetRef | undefined;
+      if (spec.to?.target !== undefined) {
+        target = resolveEffectTarget(spec.to.target, ctx);
+        // An illegal target: nothing to protect.
+        if (target === undefined) return;
+      }
+      const from = objectOf(spec.by?.target);
+      if (from === null) return;
+      const exceptRecipient = objectOf(spec.to?.exceptTarget);
+      const exceptSource = objectOf(spec.by?.exceptTarget);
+      let amount: "all" | "next-time" | number = "all";
+      if (spec.amount !== undefined && spec.amount !== "all") {
+        amount = spec.amount === "next-time" ? "next-time" : amountValue(spec.amount, ctx);
+        if (amount !== "next-time" && amount <= 0) return;
+      }
+      let redirect: TargetRef | undefined;
+      let redirectToSource: "itself" | "controller" | undefined;
+      if (spec.redirectTo === "source-controller") redirectToSource = "controller";
+      else if (spec.redirectTo === "source-itself") redirectToSource = "itself";
+      else if (spec.redirectTo !== undefined) {
+        redirect = redirectRef(spec.redirectTo, ctx);
+        // Rule 614.9: nowhere legal to send it.
+        if (redirect === undefined) return;
+      }
+      ctx.addDamageRule({
+        ...(target !== undefined ? { target } : {}),
+        ...(spec.to?.players !== undefined ? { players: spec.to.players } : {}),
+        ...(spec.to?.permanents !== undefined ? { permanents: spec.to.permanents } : {}),
+        ...(exceptRecipient != null ? { exceptRecipient } : {}),
+        ...(from != null ? { from } : {}),
+        ...(spec.by?.filter !== undefined ? { byFilter: spec.by.filter } : {}),
+        ...(exceptSource != null ? { exceptSource } : {}),
+        ...(spec.combat !== undefined ? { combat: spec.combat } : {}),
+        amount,
+        duration: spec.duration ?? "end-of-turn",
+        ...(redirect !== undefined ? { redirect } : {}),
+        ...(redirectToSource !== undefined ? { redirectToSource } : {}),
+        ...(spec.then !== undefined ? { then: spec.then } : {}),
+        ...(spec.gainLifePrevented === true ? { gainLifePrevented: true as const } : {}),
+      });
+      return;
+    }
     case "prevent-damage": {
       const ref = resolveEffectTarget(spec.target, ctx);
       if (ref === undefined) return;
@@ -11574,12 +11738,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             spec.filter,
             spec.gainLifePrevented === true,
             spec.redirect,
+            {
+              ...(spec.then !== undefined ? { then: spec.then } : {}),
+              ...(spec.redirectToSource !== undefined ? { redirectToSource: spec.redirectToSource } : {}),
+            },
           );
         }
         return;
       }
-      const protect: TargetRef | undefined =
-        spec.to === "you" ? { kind: "player", player: ctx.controller } : resolveEffectTarget(spec.to, ctx);
+      const protect: TargetRef | "your-side" | "any" | undefined =
+        spec.to === "you"
+          ? { kind: "player", player: ctx.controller }
+          : spec.to === "your-side" || spec.to === "any"
+            ? spec.to
+            : resolveEffectTarget(spec.to, ctx);
       if (protect === undefined) return;
       const redirect = spec.redirectTo === undefined ? undefined : redirectRef(spec.redirectTo, ctx);
       if (spec.redirectTo !== undefined && redirect === undefined) return;

@@ -1855,6 +1855,25 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(daughter.activated[0].effect).toEqual({ kind: "prevent-damage", target: 0, amount: 1, redirectTo: "source" });
   });
 
+  it("a damage rule (rule 615) and damage that can't be prevented (615.12)", () => {
+    const haven = face("{1}{W}, {T}: Prevent all combat damage that would be dealt by target attacking creature this turn.", "Legendary Land");
+    expect(haven.activated[0].effect).toEqual({ kind: "damage-rule", by: { target: 0 }, combat: true });
+    expect(haven.complete).toBe(true);
+    const geist = face("{3}{W}: Prevent all combat damage that would be dealt to and dealt by this creature this turn.", "Creature — Spirit");
+    expect(geist.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage-rule", to: { target: "source" }, combat: true },
+        { kind: "damage-rule", by: { target: "source" }, combat: true },
+      ],
+    });
+    const fighter = face("Sacrifice this creature: Prevent all combat damage target creature would deal this turn.", "Creature — Human Soldier");
+    expect(fighter.activated[0].effect).toEqual({ kind: "damage-rule", by: { target: 0 }, combat: true });
+    const pain = face("Damage can't be prevented this turn.", "Instant");
+    expect(pain.effect).toEqual({ kind: "damage-cant-be-prevented" });
+    expect(pain.complete).toBe(true);
+  });
+
   it("a source of your choice (rule 609.7) and a colour set (layer 5) — Alpha's Circles and Laces", () => {
     const circle = face("{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.", "Enchantment");
     expect(circle.activated[0].effect).toEqual({

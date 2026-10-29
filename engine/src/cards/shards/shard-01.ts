@@ -240,6 +240,7 @@ import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
 import _poolGerrardsCommand from "../pool/gerrards-command.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
+import _poolGhostsOfTheInnocent from "../pool/ghosts-of-the-innocent.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
@@ -1060,6 +1061,7 @@ const shard: CardShard = {
     _poolGeothermalKami,
     _poolGerrardsCommand,
     _poolGhastlyDeathTyrant,
+    _poolGhostsOfTheInnocent,
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
     _poolGiftOfStrands,

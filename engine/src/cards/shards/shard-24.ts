@@ -224,6 +224,7 @@ import _poolEnsnaredByTheMara from "../pool/ensnared-by-the-mara.js";
 import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
+import _poolExcruciator from "../pool/excruciator.js";
 import _poolExecute from "../pool/execute.js";
 import _poolExile from "../pool/exile.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
@@ -1065,6 +1066,7 @@ const shard: CardShard = {
     _poolEntrancingMelody,
     _poolEntsFury,
     _poolErode,
+    _poolExcruciator,
     _poolExecute,
     _poolExile,
     _poolExpeditionMap,

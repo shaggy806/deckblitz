@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage prevention and redirection — built 2026-10-28
+
+The need-keys Phase 2 family `replacement:damage-modification` (B250), as
+three general pieces in `Game.dealDamage`'s step fold. **Static
+`would-deal-damage` replacements** gained a host (`to: "attached"`,
+`fromAttached`), "you and your permanents" (`to: "your-side"`, `toOther`),
+redirection (`redirect: "self" | "attached" | "recipient-controller"`, rule
+614.9, once per event — 614.5), and computed prevention (`preventAmount`,
+`preventAllBut`, `preventHalf`, `ifAtMost`) beside `halve`. **Damage that
+can't be prevented** (615.12): `damage`'s `cantBePrevented`, the
+`damage-cant-be-prevented` effect, the `damageCantBePrevented` static.
+**`damage-rule`**: one-shot prevention or redirection over a recipient
+scope (a target, players, a permanent filter, an exception) and a source
+scope (a target object or spell, a filter, an exception), combat or not, all
+/ next time / next N, this turn / until your next turn / while the source
+stays, with prevention's follow-up `then` (615.5); chosen-source shields take
+`all`, `your-side`/`any` and `then`. Keys:
+`replacement:damage-redirection`, `replacement:redirect-next-damage-event`,
+the prevent-all-damage and prevent-combat-damage filter keys, the
+prevention-follow-up keys, the computed-amount keys, the attached keys,
+`effect:prevent-combat-damage-by-target` and the other by-source keys, and
+`effect:damage-cant-be-prevented` / `static:damage-cant-be-prevented`.
+
 ### Variable target counts — built 2026-10-28
 
 The need-keys Phase 2 family `decision:variable-target-count` (B245): an

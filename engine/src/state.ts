@@ -3800,8 +3800,9 @@ export interface StandingModeAnswer {
 
 /** A one-shot damage-prevention shield (Healing Salve — ROADMAP Phase 11 EG-6). */
 export interface PreventionShield {
-  /** The player or object it protects. */
-  readonly target: TargetRef;
+  /** The player or object it protects — absent for a set of them
+   * (`recipients`) or anything at all. */
+  readonly target?: TargetRef;
   /** Damage still to absorb (shrinks as hits are prevented; removed at 0). */
   amount: number;
   /** Only prevents combat damage. */
@@ -3840,6 +3841,54 @@ export interface PreventionShield {
    * longer a creature, planeswalker or battle, or a player `to` has left the
    * game, the shield does nothing (614.9) and isn't used up. */
   readonly redirect?: { readonly to: TargetRef; readonly zoneChangeCount?: number };
+  /** A redirection to the damage's own source (Shield Dancer's "that
+   * creature deals that damage to itself", `"itself"`) or to that source's
+   * controller (Reflect Damage, Mirror Strike, `"controller"`), worked out as
+   * the damage would be dealt; `redirect` is unused. */
+  readonly redirectToSource?: "itself" | "controller";
+  /** Instead of `target`, every recipient in a set — a `damage-rule`'s
+   * "you and permanents you control", "creatures", "players": `players`
+   * (from `you`'s side) or a permanent on the battlefield matching
+   * `permanents` from `you`'s side, as the damage would be dealt (rule
+   * 615.1), but `except` that object. With neither `target` nor this, any
+   * recipient (Reflect Damage). */
+  readonly recipients?: {
+    readonly players?: "you" | "each" | "opponents";
+    readonly permanents?: CardFilter;
+    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+    readonly you: PlayerId;
+  };
+  /** Only damage from sources matching `filter` from `you`'s side, asked as
+   * the damage would be dealt (rule 615.1 — Ethereal Haze's "by creatures"),
+   * but not `except` (Terrifying Presence's "creatures other than target
+   * creature"). Beside `from`, which names one source. */
+  readonly byFilter?: {
+    readonly filter: CardFilter;
+    readonly you: PlayerId;
+    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  };
+  /** Only noncombat damage (beside `combatOnly`). */
+  readonly noncombatOnly?: true;
+  /** "Until your next turn" (Dovin, Hand of Control's −1): kept at cleanup,
+   * gone as this player's next turn begins. */
+  readonly untilTurnOf?: PlayerId;
+  /** "For as long as this Saga remains on the battlefield" (Old Fat Spider
+   * Can't See Me): kept at cleanup, and does nothing once this object has
+   * left (its stint). */
+  readonly whileOn?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  /** Prevention's additional effect (rule 615.5 — Deflecting Palm's "if
+   * damage is prevented this way, … deals that much damage to that source's
+   * controller", Temper's counters): applied right after, as `controller`'s
+   * effect from `by`, with `"x"` the damage this shield prevented, the
+   * spell's own `targets`, and the damage's source as the trigger object
+   * (`"trigger-object"`, `who: "trigger-controller"`). Not with a
+   * redirection. */
+  readonly then?: {
+    readonly spec: EffectSpec;
+    readonly by: ObjectId;
+    readonly controller: PlayerId;
+    readonly targets: readonly (TargetRef | null)[];
+  };
 }
 
 /**
@@ -4602,8 +4651,12 @@ export interface GameState {
   /** One-shot damage-prevention shields (Healing Salve — rule 614.9 / ROADMAP
    * Phase 11 EG-6). Each absorbs up to `amount` damage aimed at `target`;
    * consumed (and shrunk / removed) in `dealDamage` before the hit lands.
-   * Cleared at the start of the next turn (all such effects are "this turn"). */
+   * Cleared at the start of the next turn, but for one lasting until a
+   * player's next turn (`untilTurnOf`) or while an object stays (`whileOn`). */
   preventionShields: PreventionShield[];
+  /** "Damage can't be prevented this turn" (Skullcrack — rule 615.12): set by
+   * the `damage-cant-be-prevented` effect, cleared as the next turn begins. */
+  damageUnpreventableThisTurn?: true;
   /** Extra turns still owed, in the order they'll be taken (rule 500.7 —
    * ROADMAP Phase 7). `beginTurn` shifts the front instead of advancing the
    * active-player rotation. Time Warp pushes the caster. */

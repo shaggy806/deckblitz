@@ -98,6 +98,7 @@ import _poolCabalSlaver from "../pool/cabal-slaver.js";
 import _poolCabalTorturer from "../pool/cabal-torturer.js";
 import _poolCaligoSkinWitch from "../pool/caligo-skin-witch.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
+import _poolCallousGiant from "../pool/callous-giant.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCanopySurge from "../pool/canopy-surge.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
@@ -964,6 +965,7 @@ const shard: CardShard = {
     _poolCabalTorturer,
     _poolCaligoSkinWitch,
     _poolCallTheScions,
+    _poolCallousGiant,
     _poolCallousInspector,
     _poolCanopySurge,
     _poolCarrionRats,

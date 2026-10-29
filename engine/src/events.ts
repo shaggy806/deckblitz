@@ -1156,7 +1156,8 @@ export type GameEvent =
       /** A one-shot damage-prevention shield was created (Healing Salve —
        * ROADMAP Phase 11 EG-6). */
       readonly type: "prevention-shield-created";
-      readonly target: TargetRef;
+      /** Absent for a rule over a set of recipients (a `damage-rule`). */
+      readonly target?: TargetRef;
       readonly amount: number;
       /** Only against damage from this source (a source of your choice —
        * Circle of Protection); with `nextTime`, all of its next damage to

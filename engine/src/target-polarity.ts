@@ -572,6 +572,19 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "prevent-damage-from-chosen-source": (n, v) => {
     if (typeof n.to === "number") v.touch(n.to, "help", MINOR);
   },
+  "damage-cant-be-prevented": none,
+  // Damage kept off a target helps it; damage a target would deal, stopped,
+  // hurts it (Kor Haven's attacker); where a redirection sends it takes the
+  // hit.
+  "damage-rule": (n, v) => {
+    if (n.redirectTo !== undefined) {
+      if (n.redirectTo !== "source-controller" && n.redirectTo !== "source-itself") v.touch(n.redirectTo, "harm", MINOR);
+    } else if (n.to?.target !== undefined) {
+      v.touch(n.to.target, "help", MINOR);
+    }
+    if (n.by?.target !== undefined) v.touch(n.by.target, "harm", MINOR);
+    v.child(n.then);
+  },
   // A colour isn't good or bad by itself: what it's for (dodging a Circle of
   // Protection, or walking into one) decides.
   "become-color": none,

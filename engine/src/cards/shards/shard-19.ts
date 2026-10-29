@@ -342,6 +342,7 @@ import _poolGrixisSojourners from "../pool/grixis-sojourners.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
+import _poolGuardianSeraph from "../pool/guardian-seraph.js";
 import _poolGuardianShieldBearer from "../pool/guardian-shield-bearer.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGuiseOfFire from "../pool/guise-of-fire.js";
@@ -1216,6 +1217,7 @@ const shard: CardShard = {
     _poolGrolnokTheOmnivore,
     _poolGuardianOfFaith,
     _poolGuardianProject,
+    _poolGuardianSeraph,
     _poolGuardianShieldBearer,
     _poolGuardiansOfMeletis,
     _poolGuiseOfFire,

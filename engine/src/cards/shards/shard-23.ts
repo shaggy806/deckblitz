@@ -213,6 +213,7 @@ import _poolEarth from "../pool/earth.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEbonyFly from "../pool/ebony-fly.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
+import _poolEerieInterference from "../pool/eerie-interference.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
@@ -392,6 +393,7 @@ import _poolKodamasMight from "../pool/kodamas-might.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKorCelebrant from "../pool/kor-celebrant.js";
+import _poolKorChant from "../pool/kor-chant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
 import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
@@ -506,6 +508,7 @@ import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
+import _poolPalisadeGiant from "../pool/palisade-giant.js";
 import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPatronOfTheWild from "../pool/patron-of-the-wild.js";
@@ -1063,6 +1066,7 @@ const shard: CardShard = {
     _poolEatenAlive,
     _poolEbonyFly,
     _poolEclipsedSteppe,
+    _poolEerieInterference,
     _poolEiganjoSeatOfTheEmpire,
     _poolElderAuntie,
     _poolEldraziConscription,
@@ -1242,6 +1246,7 @@ const shard: CardShard = {
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKorCelebrant,
+    _poolKorChant,
     _poolKorSkyfisher,
     _poolKorlashHeirToBlackblade,
     _poolKrovikanMist,
@@ -1356,6 +1361,7 @@ const shard: CardShard = {
     _poolOvergrownFarmland,
     _poolOxidize,
     _poolPainfulQuandary,
+    _poolPalisadeGiant,
     _poolParkHeightsMaverick,
     _poolPassengerFerry,
     _poolPatronOfTheWild,

@@ -453,6 +453,7 @@ import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
 import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
 import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
 import _poolMutilate from "../pool/mutilate.js";
+import _poolMuzzle from "../pool/muzzle.js";
 import _poolMyrConvert from "../pool/myr-convert.js";
 import _poolMyrKinsmith from "../pool/myr-kinsmith.js";
 import _poolMyrPropagator from "../pool/myr-propagator.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolMurmuringBosk,
     _poolMurmuringMystic,
     _poolMutilate,
+    _poolMuzzle,
     _poolMyrConvert,
     _poolMyrKinsmith,
     _poolMyrPropagator,

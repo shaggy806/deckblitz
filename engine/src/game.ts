@@ -470,6 +470,15 @@ const LOOP_TRAIL = 512;
 const LOOP_PERIOD_MAX = 32;
 const LOOP_REPEATS = 8;
 
+/** The replacement effects already applied to a damage event (rule 614.5):
+ * static ones by key, shields by identity. Lives only for one `dealDamage`
+ * call and the redirected events it deals. */
+interface DamageApplied {
+  readonly statics: readonly string[];
+  readonly shields: readonly PreventionShield[];
+}
+const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
+
 /** One effect that would change a damage event — see `Game.damageSteps`. */
 type DamageStep =
   | { readonly kind: "times"; readonly by: number }
@@ -481,12 +490,26 @@ type DamageStep =
       readonly controller: PlayerId;
       readonly then?: EffectSpec;
       readonly perEvent?: true;
+      /** Only when the damage is this much or less (Callous Giant). */
+      readonly ifAtMost?: number;
     }
   | { readonly kind: "shield"; readonly shield: PreventionShield }
   /** A shield counter's "prevent that damage and remove a shield counter"
    * (rule 122.1c): all of it, one counter however much — none more when
    * one already went this same simultaneous event (`spent`). */
-  | { readonly kind: "shield-counter"; readonly object: ObjectId; readonly spent: boolean };
+  | { readonly kind: "shield-counter"; readonly object: ObjectId; readonly spent: boolean }
+  /** "Prevent N of that damage" (615.10), from each source. */
+  | { readonly kind: "prevent-n"; readonly by: number }
+  /** "Prevent all but N of that damage", from each source. */
+  | { readonly kind: "prevent-all-but"; readonly leave: number }
+  /** "Prevent half that damage, rounded up/down" — prevention. */
+  | { readonly kind: "prevent-half"; readonly round: "up" | "down" }
+  /** "It deals half that damage instead" — a replacement, not prevention. */
+  | { readonly kind: "halve"; readonly round: "up" | "down" }
+  /** A static redirection (rule 614.9 — Palisade Giant): all of it is dealt
+   * to `to` instead. `key` names the replacement, so it applies to the
+   * redirected damage no more (614.5). */
+  | { readonly kind: "redirect"; readonly to: TargetRef; readonly key: string };
 
 /**
  * `amount` damage from each of `sources` identical sources, through `order`
@@ -502,16 +525,31 @@ function runDamageSteps(
   sources: number,
   order: readonly DamageStep[],
   left: (shield: PreventionShield) => number,
+  /** Damage that can't be prevented (rule 615.12): each prevention effect
+   * still applies — its other effects happen — but prevents none of it, and
+   * a shield isn't used up. */
+  unpreventable = false,
 ): {
   readonly dealt: number;
   readonly shieldUsed: number;
   readonly shields: readonly { readonly shield: PreventionShield; readonly prevented: number }[];
   readonly preventedAll?: { readonly step: Extract<DamageStep, { kind: "prevent-all" }>; readonly amount: number };
   readonly shieldCounter?: { readonly step: Extract<DamageStep, { kind: "shield-counter" }>; readonly amount: number };
+  readonly redirected?: { readonly step: Extract<DamageStep, { kind: "redirect" }>; readonly amount: number };
 } {
   let total = amount * sources;
   let shieldUsed = 0;
   const shields: { shield: PreventionShield; prevented: number }[] = [];
+  let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number } | undefined;
+  let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
+  const rest = () => ({
+    shieldUsed,
+    shields,
+    ...(preventedAll !== undefined ? { preventedAll } : {}),
+    ...(shieldCounter !== undefined ? { shieldCounter } : {}),
+  });
+  // Each source's share, for a per-source step (615.10).
+  const each = (): number => total / sources;
   for (const step of order) {
     if (total <= 0) break;
     switch (step.kind) {
@@ -524,11 +562,45 @@ function runDamageSteps(
       case "at-least":
         total = Math.max(total, step.power * sources);
         break;
+      case "halve":
+        total = (step.round === "up" ? Math.ceil(each() / 2) : Math.floor(each() / 2)) * sources;
+        break;
+      case "redirect":
+        return { dealt: 0, ...rest(), redirected: { step, amount: total } };
       case "prevent-all":
-        return { dealt: 0, shieldUsed, shields, preventedAll: { step, amount: total } };
+        if (step.ifAtMost !== undefined && each() > step.ifAtMost) break;
+        if (unpreventable) {
+          preventedAll ??= { step, amount: 0 };
+          break;
+        }
+        preventedAll = { step, amount: total };
+        return { dealt: 0, ...rest() };
       case "shield-counter":
-        return { dealt: 0, shieldUsed, shields, shieldCounter: { step, amount: total } };
+        if (unpreventable) {
+          shieldCounter ??= { step, amount: 0 };
+          break;
+        }
+        shieldCounter = { step, amount: total };
+        return { dealt: 0, ...rest() };
+      case "prevent-n":
+        if (!unpreventable) total = Math.max(0, each() - step.by) * sources;
+        break;
+      case "prevent-all-but":
+        if (!unpreventable) total = Math.min(each(), step.leave) * sources;
+        break;
+      case "prevent-half":
+        if (!unpreventable) {
+          const prevented = step.round === "up" ? Math.ceil(each() / 2) : Math.floor(each() / 2);
+          total = (each() - prevented) * sources;
+        }
+        break;
       case "shield": {
+        // A redirection isn't prevention (614.9): it still applies.
+        if (unpreventable && step.shield.redirect === undefined && step.shield.redirectToSource === undefined) {
+          // Its additional effect still happens, for none prevented.
+          if (step.shield.then !== undefined) shields.push({ shield: step.shield, prevented: 0 });
+          break;
+        }
         // An "all damage this turn" shield takes the whole hit and stays.
         const prevented = step.shield.all === true ? total : Math.min(total, left(step.shield));
         if (prevented <= 0) break;
@@ -539,7 +611,7 @@ function runDamageSteps(
       }
     }
   }
-  return { dealt: Math.max(0, total), shieldUsed, shields };
+  return { dealt: Math.max(0, total), ...rest() };
 }
 
 /** How much damage a prevention shield can still take: a "next time" shield
@@ -1293,6 +1365,10 @@ export class Game {
    * creatures blocking Oathsworn Knight remove one counter (its ruling).
    * Not game state: it only ever spans one synchronous call. */
   private preventedThisEvent: OwedPreventFollowUp[] | null = null;
+  /** While above 0, a `damage` effect with `cantBePrevented` is dealing its
+   * damage (rule 615.12 — `EffectApi.unpreventably`). Not game state: it
+   * only ever spans one synchronous call. */
+  private unpreventableDepth = 0;
   /** The +1/+1 counters an Incubator token being made by `incubate` enters
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
@@ -4104,7 +4180,9 @@ export class Game {
       if (trigger.triggerObject !== undefined) pinned.add(trigger.triggerObject);
     }
     for (const shield of this.state.preventionShields) {
-      if (shield.target.kind === "object") pinned.add(shield.target.object);
+      if (shield.target?.kind === "object") pinned.add(shield.target.object);
+      if (shield.recipients?.except !== undefined) pinned.add(shield.recipients.except.object);
+      if (shield.byFilter?.except !== undefined) pinned.add(shield.byFilter.except.object);
       if (shield.from !== undefined) pinned.add(shield.from.object);
       if (shield.redirect?.to.kind === "object") pinned.add(shield.redirect.to.object);
     }
@@ -6150,7 +6228,15 @@ export class Game {
     delete this.state.ceasedTokens;
     this.state.abilityResolutionsThisTurn = {};
     delete this.state.modesChosenThisTurn;
-    this.state.preventionShields = [];
+    // Those lasting "until your next turn" or while an object stays go on
+    // (below); "this turn" ones lapse.
+    this.state.preventionShields = this.state.preventionShields.filter(
+      (s) =>
+        s.untilTurnOf !== undefined ||
+        (s.whileOn !== undefined && this.state.objects[s.whileOn.object]?.zone === "battlefield" &&
+          (this.state.objects[s.whileOn.object]?.zoneChangeCount ?? 0) === s.whileOn.zoneChangeCount),
+    );
+    delete this.state.damageUnpreventableThisTurn;
     // "When that creature dies this turn" watches no longer, nor does "when
     // you next cast a spell this turn", nor "until end of turn, whenever …".
     // "Until your next turn, whenever …" waits for whose turn this is (below).
@@ -6276,6 +6362,10 @@ export class Game {
     // "Until your next turn" effects end as that turn begins (the active
     // player is the new one by now).
     beginningFor.push(this.activePlayer);
+    // "Until your next turn" damage rules end as that turn begins.
+    this.state.preventionShields = this.state.preventionShields.filter(
+      (s) => s.untilTurnOf === undefined || !beginningFor.includes(s.untilTurnOf),
+    );
     // "Their last turn" is this one now (see `PlayerState.lastTurnTaken`).
     this.state.players[this.activePlayer].lastTurnTaken = this.state.turn.number;
     if (this.state.playerEffects !== undefined) {
@@ -25205,6 +25295,77 @@ export class Game {
         this.state.preventAllCombatDamage = true;
         this.emit({ type: "combat-damage-prevention-set" });
       },
+      unpreventably: (fn) => {
+        this.unpreventableDepth += 1;
+        try {
+          fn();
+        } finally {
+          this.unpreventableDepth -= 1;
+        }
+      },
+      damageUnpreventableThisTurn: () => {
+        this.state.damageUnpreventableThisTurn = true;
+      },
+      addDamageRule: (rule) => {
+        const stint = (object: ObjectId) => ({ object, zoneChangeCount: this.state.objects[object]?.zoneChangeCount ?? 0 });
+        const target = rule.target === undefined ? undefined : this.splitTargetRef(rule.target);
+        const from = rule.from === undefined ? undefined : this.state.objects[rule.from];
+        if (rule.from !== undefined && from === undefined) return;
+        const shield: PreventionShield = {
+          ...(target !== undefined ? { target } : {}),
+          ...(target?.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
+          ...(target === undefined && (rule.players !== undefined || rule.permanents !== undefined)
+            ? {
+                recipients: {
+                  ...(rule.players !== undefined ? { players: rule.players } : {}),
+                  ...(rule.permanents !== undefined ? { permanents: rule.permanents } : {}),
+                  ...(rule.exceptRecipient !== undefined ? { except: stint(rule.exceptRecipient) } : {}),
+                  you: controller,
+                },
+              }
+            : {}),
+          amount: typeof rule.amount === "number" ? rule.amount : 0,
+          combatOnly: rule.combat === true,
+          ...(rule.combat === false ? { noncombatOnly: true as const } : {}),
+          ...(rule.amount === "all" ? { all: true as const } : {}),
+          ...(rule.amount === "next-time" ? { nextTime: true as const } : {}),
+          ...(from !== undefined
+            ? {
+                from: {
+                  object: from.id,
+                  zoneChangeCount: from.zoneChangeCount ?? 0,
+                  // A spell's damage is the spell's while it's on the stack.
+                  you: controller,
+                },
+              }
+            : {}),
+          ...(rule.byFilter !== undefined
+            ? {
+                byFilter: {
+                  filter: rule.byFilter,
+                  you: controller,
+                  ...(rule.exceptSource !== undefined ? { except: stint(rule.exceptSource) } : {}),
+                },
+              }
+            : {}),
+          ...(rule.duration === "until-your-next-turn" ? { untilTurnOf: controller } : {}),
+          ...(rule.duration === "while-source" ? { whileOn: stint(source) } : {}),
+          ...(rule.gainLifePrevented === true ? { gainLife: controller } : {}),
+          ...(rule.redirect !== undefined ? { redirect: this.redirectOf(rule.redirect) } : {}),
+          ...(rule.redirectToSource !== undefined ? { redirectToSource: rule.redirectToSource } : {}),
+          ...(rule.then !== undefined
+            ? { then: { spec: rule.then, by: source, controller, targets: targets.map((t) => t ?? null) } }
+            : {}),
+        };
+        this.state.preventionShields.push(shield);
+        this.emit({
+          type: "prevention-shield-created",
+          ...(target !== undefined ? { target } : {}),
+          amount: shield.amount,
+          ...(shield.all === true ? { all: true as const } : {}),
+          ...(shield.nextTime === true ? { nextTime: true as const } : {}),
+        });
+      },
       preventDamage: (target, amount, combatOnly, redirectTo) => {
         if (amount !== "all" && amount <= 0) return;
         // A shield on an object is for that object (rule 400.7): this stint.
@@ -25257,15 +25418,25 @@ export class Game {
           damageSource: true,
         };
       },
-      preventDamageFrom: (from, protect, amount, filter, gainLifePrevented, redirectTo) => {
+      preventDamageFrom: (from, protect, amount, filter, gainLifePrevented, redirectTo, more) => {
         if (from.kind !== "object") return;
         const chosen = this.state.objects[from.object];
         if (chosen === undefined) return;
         const stint =
-          protect.kind === "object" ? { zoneChangeCount: this.state.objects[protect.object]?.zoneChangeCount ?? 0 } : {};
+          typeof protect === "object" && protect.kind === "object"
+            ? { zoneChangeCount: this.state.objects[protect.object]?.zoneChangeCount ?? 0 }
+            : {};
         this.state.preventionShields.push({
-          target: protect,
-          amount: amount === "next-time" ? 0 : amount,
+          // "You and/or permanents you control" (Harm's Way): one shield
+          // over them all; "any": whatever it would be dealt to.
+          ...(typeof protect === "object" ? { target: protect } : {}),
+          ...(protect === "your-side" ? { recipients: { players: "you" as const, permanents: { controlledBy: "you" as const }, you: controller } } : {}),
+          amount: typeof amount === "number" ? amount : 0,
+          ...(amount === "all" ? { all: true as const } : {}),
+          ...(more?.redirectToSource !== undefined ? { redirectToSource: more.redirectToSource } : {}),
+          ...(more?.then !== undefined
+            ? { then: { spec: more.then, by: source, controller, targets: targets.map((t) => t ?? null) } }
+            : {}),
           combatOnly: false,
           ...stint,
           from: {
@@ -25281,8 +25452,8 @@ export class Game {
         });
         this.emit({
           type: "prevention-shield-created",
-          target: protect,
-          amount: amount === "next-time" ? 0 : amount,
+          ...(typeof protect === "object" ? { target: protect } : {}),
+          amount: typeof amount === "number" ? amount : 0,
           from: from.object,
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
           ...(redirectTo !== undefined ? { redirectTo } : {}),
@@ -34566,16 +34737,52 @@ export class Game {
    * 614.9): a player still in the game, or the same object still on the
    * battlefield and still a creature, planeswalker or battle. */
   private redirectStands(redirect: NonNullable<PreventionShield["redirect"]>): boolean {
-    const to = redirect.to;
+    return this.redirectDestinationStands(redirect.to, redirect.zoneChangeCount);
+  }
+
+  /** Whether damage can be redirected to `to` (rule 614.9): a player still in
+   * the game, or an object still on the battlefield — in stint
+   * `zoneChangeCount`, when given — and still a creature, planeswalker or
+   * battle. */
+  private redirectDestinationStands(to: TargetRef, zoneChangeCount?: number): boolean {
     if (to.kind === "player") {
       const player = this.state.players[to.player];
       return player !== undefined && player.hasLost !== true;
     }
     const object = this.state.objects[to.object];
     if (object === undefined || object.zone !== "battlefield") return false;
-    if ((object.zoneChangeCount ?? 0) !== (redirect.zoneChangeCount ?? 0)) return false;
+    if (zoneChangeCount !== undefined && (object.zoneChangeCount ?? 0) !== zoneChangeCount) return false;
     const types = computeCharacteristics(this.state, this.registry, to.object).types;
     return types.includes("creature") || types.includes("planeswalker") || types.includes("battle");
+  }
+
+  /** Where a redirection to the damage's own source sends it (a shield's
+   * `redirectToSource`): the source itself, or its controller — as it last
+   * existed, if it has left. */
+  private sourceRedirect(
+    kind: "itself" | "controller",
+    source: ObjectId,
+    sourceLastKnown: LastKnownInfo | undefined,
+  ): TargetRef | undefined {
+    if (kind === "itself") return { kind: "object", object: source };
+    const controller = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
+    return controller === undefined ? undefined : { kind: "player", player: controller };
+  }
+
+  /** Where shield `shield` redirects damage from `source`, if it's a
+   * redirection. */
+  private shieldRedirect(
+    shield: PreventionShield,
+    source: ObjectId,
+    sourceLastKnown: LastKnownInfo | undefined,
+  ): TargetRef | undefined {
+    if (shield.redirectToSource !== undefined) return this.sourceRedirect(shield.redirectToSource, source, sourceLastKnown);
+    return shield.redirect?.to;
+  }
+
+  /** Whether `object` is still the object of `stint` (rule 400.7). */
+  private sameStint(object: ObjectId, stint: { readonly object: ObjectId; readonly zoneChangeCount: number }): boolean {
+    return object === stint.object && (this.state.objects[object]?.zoneChangeCount ?? 0) === stint.zoneChangeCount;
   }
 
   /** Whether prevention shield `shield` covers a hit on `target` (combat or not). */
@@ -34584,8 +34791,15 @@ export class Game {
     target: TargetRef,
     combat: boolean,
     source: ObjectId,
+    sourceLastKnown?: LastKnownInfo,
   ): boolean {
     if (shield.combatOnly && !combat) return false;
+    if (shield.noncombatOnly === true && combat) return false;
+    // "For as long as this Saga remains on the battlefield".
+    if (shield.whileOn !== undefined) {
+      const on = this.state.objects[shield.whileOn.object];
+      if (on?.zone !== "battlefield" || !this.sameStint(on.id, shield.whileOn)) return false;
+    }
     // "A [red] source of your choice" (rule 609.7): only that object — or the
     // permanent the spell chosen became — and only while it still matches
     // (609.7b).
@@ -34599,9 +34813,50 @@ export class Game {
         return false;
       }
     }
-    if (shield.target.kind !== target.kind) return false;
-    // A redirection with nowhere legal to send it does nothing (rule 614.9).
+    // "By creatures" (615.1): the source as it is as the damage would be
+    // dealt, or as it last existed.
+    if (shield.byFilter !== undefined) {
+      const by = shield.byFilter;
+      if (by.except !== undefined && this.sameStint(source, by.except)) return false;
+      if (sourceLastKnown === undefined && this.state.objects[source] === undefined) return false;
+      if (
+        !matchesFilter(this.state, this.registry, source, by.filter, {
+          you: by.you,
+          ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
+        })
+      ) {
+        return false;
+      }
+    }
+    // A redirection with nowhere legal to send it does nothing (rule 614.9),
+    // nor one to where the damage is already going.
     if (shield.redirect !== undefined && !this.redirectStands(shield.redirect)) return false;
+    if (shield.redirectToSource !== undefined) {
+      const to = this.sourceRedirect(shield.redirectToSource, source, sourceLastKnown);
+      if (to === undefined || !this.redirectDestinationStands(to)) return false;
+    }
+    const redirectTo = this.shieldRedirect(shield, source, sourceLastKnown);
+    if (redirectTo !== undefined && sameTargetRef(redirectTo, target)) return false;
+    if (shield.target === undefined) {
+      const scope = shield.recipients;
+      if (scope === undefined) return true;
+      if (target.kind === "player") {
+        const p = target.player;
+        return (
+          scope.players === "each" ||
+          (scope.players === "you" && p === scope.you) ||
+          (scope.players === "opponents" && p !== scope.you)
+        );
+      }
+      if (scope.permanents === undefined) return false;
+      if (scope.except !== undefined && this.sameStint(target.object, scope.except)) return false;
+      const object = this.state.objects[target.object];
+      return (
+        object?.zone === "battlefield" &&
+        matchesFilter(this.state, this.registry, target.object, scope.permanents, { you: scope.you })
+      );
+    }
+    if (shield.target.kind !== target.kind) return false;
     if (shield.target.kind === "player") return shield.target.player === (target as { player: PlayerId }).player;
     const object = (target as { object: ObjectId }).object;
     if (shield.target.object !== object) return false;
@@ -34630,18 +34885,23 @@ export class Game {
     target: TargetRef,
     combat: boolean,
     sourceLastKnown: LastKnownInfo | undefined,
+    /** The replacements and shields already applied to this damage event
+     * (rule 614.5) — a redirected event's. */
+    applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): DamageStep[] {
-    const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement }[] = [];
+    const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement; readonly key: string }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      this.registry.get(rulesTextName(object)).static.forEach((ability, index) => {
         const r = ability.replacement;
-        if (r === undefined || r.event !== "would-deal-damage") continue;
-        if (!this.staticActive(object, ability)) continue;
-        if (!this.damageReplacementReaches(r, object, source, target, combat, sourceLastKnown)) continue;
-        applying.push({ by: object, r });
-      }
+        if (r === undefined || r.event !== "would-deal-damage") return;
+        const key = `${id}:${object.zoneChangeCount ?? 0}:${index}`;
+        if (applied.statics.includes(key)) return;
+        if (!this.staticActive(object, ability)) return;
+        if (!this.damageReplacementReaches(r, object, source, target, combat, sourceLastKnown)) return;
+        applying.push({ by: object, r, key });
+      });
     }
     // "Until your next turn, … deals double that damage instead" — a player
     // effect's, on damage to its players (or their permanents).
@@ -34667,6 +34927,12 @@ export class Game {
         steps.push({ kind: "at-least", power: computeCharacteristics(this.state, this.registry, by.id).power });
       }
     }
+    for (const { r } of applying) {
+      if (r.halve !== undefined) steps.push({ kind: "halve", round: r.halve });
+      if (r.preventAmount !== undefined) steps.push({ kind: "prevent-n", by: r.preventAmount });
+      if (r.preventAllBut !== undefined) steps.push({ kind: "prevent-all-but", leave: r.preventAllBut });
+      if (r.preventHalf !== undefined) steps.push({ kind: "prevent-half", round: r.preventHalf });
+    }
     for (const { by, r } of applying) {
       if (r.prevent !== true) continue;
       steps.push({
@@ -34675,11 +34941,21 @@ export class Game {
         controller: by.controller,
         ...(r.then !== undefined ? { then: r.then } : {}),
         ...(r.perEvent === true ? { perEvent: true as const } : {}),
+        ...(r.ifAtMost !== undefined ? { ifAtMost: r.ifAtMost } : {}),
       });
+    }
+    // Static redirections (rule 614.9 — Palisade Giant, Pariah): to
+    // somewhere legal that isn't where it's going already.
+    for (const { by, r, key } of applying) {
+      if (r.redirect === undefined) continue;
+      const to = this.staticRedirectDestination(r.redirect, by, target);
+      if (to === undefined || sameTargetRef(to, target) || !this.redirectDestinationStands(to)) continue;
+      steps.push({ kind: "redirect", to, key });
     }
     // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
     for (const shield of this.state.preventionShields) {
-      if (this.shieldCovers(shield, target, combat, source)) steps.push({ kind: "shield", shield });
+      if (applied.shields.includes(shield)) continue;
+      if (this.shieldCovers(shield, target, combat, source, sourceLastKnown)) steps.push({ kind: "shield", shield });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
     // abilities keeps the protection (the rulings).
@@ -34708,18 +34984,27 @@ export class Game {
    * Once one applies, those that no longer would — anything after the damage
    * is all prevented — don't (616.1f).
    */
-  private bestDamageOrder(amount: number, sources: number, steps: readonly DamageStep[]): readonly DamageStep[] {
+  private bestDamageOrder(
+    amount: number,
+    sources: number,
+    steps: readonly DamageStep[],
+    unpreventable = false,
+  ): readonly DamageStep[] {
     if (steps.length <= 1) return steps;
     // A few effects at most in practice; past six, the order they came in.
     if (steps.length > 6) return steps;
     // A shield counter spent is a lasting loss, so it ranks right after the
     // damage itself: a one-turn shield (Healing Salve) goes first.
     const score = (order: readonly DamageStep[]): readonly number[] => {
-      const outcome = runDamageSteps(amount, sources, order, shieldLeft);
+      const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
       const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
       // Damage redirected still lands somewhere (rule 614.9): a shield that
       // prevents it outright goes first.
-      const redirected = outcome.shields.reduce((n, s) => n + (s.shield.redirect !== undefined ? s.prevented : 0), 0);
+      const redirected =
+        outcome.shields.reduce(
+          (n, s) => n + (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined ? s.prevented : 0),
+          0,
+        ) + (outcome.redirected?.amount ?? 0);
       return [outcome.dealt, redirected, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
     };
     const better = (a: readonly number[], b: readonly number[]): boolean => {
@@ -34738,6 +35023,25 @@ export class Game {
     return best;
   }
 
+  /** Where a static redirection on `by` sends damage to `target`. */
+  private staticRedirectDestination(
+    redirect: NonNullable<DamageMultiplierReplacement["redirect"]>,
+    by: GameObject,
+    target: TargetRef,
+  ): TargetRef | undefined {
+    switch (redirect) {
+      case "self":
+        return { kind: "object", object: by.id };
+      case "attached":
+        return by.attachedTo === null ? undefined : { kind: "object", object: by.attachedTo };
+      case "recipient-controller": {
+        if (target.kind !== "object") return undefined;
+        const controller = this.state.objects[target.object]?.controller;
+        return controller === undefined ? undefined : { kind: "player", player: controller };
+      }
+    }
+  }
+
   /** Whether a `would-deal-damage` replacement on `by` reaches damage from
    * `source` to `target` — its `combat` scope, `source` filter and `to`
    * scope, read from `by`'s controller's side. */
@@ -34754,6 +35058,8 @@ export class Game {
       target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
     if (r.combat !== undefined && r.combat !== combat) return false;
     if (r.fromSelf === true && source !== by.id) return false;
+    if (r.fromAttached === true && (by.attachedTo === null || source !== by.attachedTo)) return false;
+    if (r.toOther === true && target.kind === "object" && target.object === by.id) return false;
     switch (r.to) {
       case undefined:
         break;
@@ -34772,8 +35078,21 @@ export class Game {
       case "self":
         if (target.kind !== "object" || target.object !== by.id) return false;
         break;
+      case "attached":
+        if (target.kind !== "object" || by.attachedTo === null || target.object !== by.attachedTo) return false;
+        break;
+      case "your-side":
+        // You, or a permanent you control (narrowed by `toFilter`, below).
+        if (target.kind === "player") {
+          if (target.player !== you) return false;
+        } else if (recipientController !== you || this.state.objects[target.object]?.zone !== "battlefield") {
+          return false;
+        }
+        break;
     }
-    if (
+    if (r.to === "your-side" && target.kind === "player") {
+      // `toFilter` is the permanents' part only.
+    } else if (
       r.toFilter !== undefined &&
       (target.kind !== "object" ||
         this.state.objects[target.object]?.zone !== "battlefield" ||
@@ -34920,6 +35239,52 @@ export class Game {
     tally.thisTurn.cardsDrawn += 1;
   }
 
+  /** Whether damage from `source` can't be prevented (rule 615.12): a
+   * `damage` effect's `cantBePrevented` under way, "damage can't be
+   * prevented this turn", or a static `damageCantBePrevented` that covers
+   * it. */
+  private damageUnpreventable(source: ObjectId, combat: boolean, sourceLastKnown: LastKnownInfo | undefined): boolean {
+    if (this.unpreventableDepth > 0 || this.state.damageUnpreventableThisTurn === true) return true;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        const rule = ability.damageCantBePrevented;
+        if (rule === undefined || !this.staticActive(object, ability)) continue;
+        if (rule.combat === true && !combat) continue;
+        if (rule.fromSelf === true && source !== id) continue;
+        if (
+          rule.by !== undefined &&
+          ((sourceLastKnown === undefined && this.state.objects[source] === undefined) ||
+            !matchesFilter(this.state, this.registry, source, rule.by, {
+              you: object.controller,
+              source: id,
+              ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
+            }))
+        ) {
+          continue;
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /** A prevention shield's additional effect (rule 615.5 — `then`): applied
+   * as `controller`'s effect from `by` with `"x"` what it prevented, the
+   * spell's own targets, and the damage's source as the trigger object. */
+  private applyPreventionFollowUp(
+    spec: EffectSpec,
+    by: ObjectId,
+    controller: PlayerId,
+    targets: readonly (TargetRef | null)[],
+    prevented: number,
+    damageSource: ObjectId,
+  ): void {
+    const resolved = targets.map((t) => t ?? undefined) as ResolvedTargets;
+    applyEffectSpec(spec, this.makeResolutionContext(by, controller, resolved, prevented, 0, damageSource));
+  }
+
   /** Deal `amount` damage from `source` to `target`. Returns the amount
    * actually dealt to `target` after replacement effects (0 when a Fog-style
    * shield prevented it; damage redirected elsewhere isn't counted). */
@@ -34939,24 +35304,31 @@ export class Game {
      * poison and the lifelink are the total, and the event says how many
      * sources (`damage-dealt`'s `sources`). */
     sources = 1,
+    /** The replacements already applied to this event — redirected damage's
+     * (rule 614.5). */
+    applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): number {
     if (amount <= 0) return 0;
     // Who dealt it, for the log (a client's end-of-game damage tally).
     const dealtBy = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
     const by = dealtBy === undefined ? {} : { by: dealtBy };
+    // Damage that can't be prevented (rule 615.12) goes through every
+    // prevention effect below, protection's included (702.16e).
+    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
 
     // Fog (rule 614): a turn-scoped shield prevents all combat damage — or
     // what sources matching a filter would deal, matched now (rule 615.1);
     // Deep Wood's (`toYou`), all damage those sources would deal to its
     // controller.
     if (
-      (combat && this.state.preventAllCombatDamage) ||
+      !unpreventable &&
+      ((combat && this.state.preventAllCombatDamage) ||
       (this.state.combatDamagePreventedBy?.some(
         ({ filter, you, toYou }) =>
           (toYou === true ? target.kind === "player" && target.player === you : combat) &&
           matchesFilter(this.state, this.registry, source, filter, { you }),
       ) ??
-        false)
+        false))
     ) {
       this.emit({ type: "damage-prevented", source, target, amount: amount * sources });
       return 0;
@@ -34968,39 +35340,56 @@ export class Game {
     // the damage (616.1 — `bestDamageOrder`): a shield before a doubler
     // halves what gets through. Each identical source's damage is changed
     // alike; from here on it's their total.
-    const steps = this.damageSteps(source, target, combat, sourceLastKnown);
+    const steps = this.damageSteps(source, target, combat, sourceLastKnown, applied);
     if (steps.length === 0) {
       amount *= sources;
     } else {
-      const order = this.bestDamageOrder(amount, sources, steps);
-      const outcome = runDamageSteps(amount, sources, order, shieldLeft);
+      const order = this.bestDamageOrder(amount, sources, steps, unpreventable);
+      const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
       const spent: PreventionShield[] = [];
-      const redirected: { readonly to: TargetRef; readonly amount: number }[] = [];
+      const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];
       for (const { shield, prevented } of outcome.shields) {
+        if (prevented <= 0) continue;
         if (shield.nextTime === true) spent.push(shield);
         else if (shield.all !== true) shield.amount -= prevented;
-        if (shield.redirect !== undefined) {
-          this.emit({ type: "damage-redirected", source, from: target, to: shield.redirect.to, amount: prevented });
-          redirected.push({ to: shield.redirect.to, amount: prevented });
+        const to = this.shieldRedirect(shield, source, sourceLastKnown);
+        if (to !== undefined) {
+          this.emit({ type: "damage-redirected", source, from: target, to, amount: prevented });
+          // A shield that lasts (all damage this turn) applies to the
+          // redirected damage no more (614.5).
+          redirected.push({ to, amount: prevented, applied: { ...applied, shields: [...applied.shields, shield] } });
         } else {
           this.emit({ type: "damage-prevented", source, target, amount: prevented });
         }
+      }
+      if (outcome.redirected !== undefined) {
+        const { step, amount: moved } = outcome.redirected;
+        this.emit({ type: "damage-redirected", source, from: target, to: step.to, amount: moved });
+        redirected.push({ to: step.to, amount: moved, applied: { ...applied, statics: [...applied.statics, step.key] } });
       }
       this.state.preventionShields = this.state.preventionShields.filter(
         (s) => !spent.includes(s) && (s.all === true || s.nextTime === true || s.amount > 0),
       );
       // Redirected damage (rule 614.9) is dealt to its new recipient by the
       // same source, as part of the same event — a new hit there, which that
-      // recipient's own replacements and shields see. Each shield is used up
-      // as it applies, so two redirecting at each other can't loop.
-      for (const r of redirected) this.dealDamage(source, r.to, r.amount, combat, sourceLastKnown);
-      // Reverse Damage: life equal to what its shield prevented.
-      for (const { shield, prevented } of outcome.shields) {
-        if (shield.gainLife !== undefined && prevented > 0) this.changeLife(shield.gainLife, prevented);
+      // recipient's own replacements and shields see, but not those already
+      // applied to it (614.5), so two redirecting at each other can't loop.
+      for (const r of redirected) {
+        this.dealDamage(source, r.to, r.amount, combat, sourceLastKnown, 1, r.applied);
       }
+      for (const { shield, prevented } of outcome.shields) {
+        // Reverse Damage: life equal to what its shield prevented.
+        if (shield.gainLife !== undefined && prevented > 0) this.changeLife(shield.gainLife, prevented);
+        // "If damage is prevented this way, …" (615.5): right after.
+        if (shield.then !== undefined && shield.redirect === undefined && shield.redirectToSource === undefined) {
+          const t = shield.then;
+          this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
+        }
+      }
+      if (outcome.redirected !== undefined) return 0;
       if (outcome.preventedAll !== undefined) {
         const { step, amount: prevented } = outcome.preventedAll;
-        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
         const owed = this.preventedThisEvent;
         if (step.then !== undefined && step.perEvent === true && owed !== null) {
           // Part of a simultaneous event: once for all of it, after it.
@@ -35009,18 +35398,20 @@ export class Game {
           if (same !== undefined) same.amount += prevented;
           else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: prevented });
         } else if (step.then !== undefined) {
-          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented));
+          // The damage's source is "that source" (Swans of Bryn Argoll).
+          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented, 0, source));
         }
-        return 0;
+        if (outcome.dealt <= 0) return 0;
       }
       if (outcome.shieldCounter !== undefined) {
         const { step, amount: prevented } = outcome.shieldCounter;
-        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        // Removed even when the damage can't be prevented (615.12).
         if (!step.spent) {
           this.shieldCountersSpent?.add(step.object);
           this.removeShieldCounter(step.object);
         }
-        return 0;
+        if (outcome.dealt <= 0) return 0;
       }
       amount = outcome.dealt;
     }
@@ -35032,7 +35423,7 @@ export class Game {
       if (this.state.players[target.player] === undefined) return 0;
       // A player with protection from everything: all damage that would be
       // dealt to them is prevented (rule 702.16j).
-      if (playerHasProtectionFromEverything(this.state, target.player)) {
+      if (!unpreventable && playerHasProtectionFromEverything(this.state, target.player)) {
         this.emit({ type: "damage-prevented", source, target, amount });
         return 0;
       }
@@ -35067,6 +35458,7 @@ export class Game {
     if (object === undefined || object.zone !== "battlefield") return 0;
     // Protection (rule 702.16) — prevent damage from a matching source.
     if (
+      !unpreventable &&
       (sourceLastKnown !== undefined || this.state.objects[source] !== undefined) &&
       protectionBlocks(
         this.state,

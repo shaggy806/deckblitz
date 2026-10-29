@@ -507,6 +507,7 @@ import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
 import _poolParallaxTide from "../pool/parallax-tide.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
+import _poolPariah from "../pool/pariah.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPeerThroughDepths from "../pool/peer-through-depths.js";
@@ -742,6 +743,7 @@ import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
 import _poolTraitorousGreed from "../pool/traitorous-greed.js";
 import _poolTransformativeCommons from "../pool/transformative-commons.js";
+import _poolTreacherousLink from "../pool/treacherous-link.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
@@ -1346,6 +1348,7 @@ const shard: CardShard = {
     _poolPanicSpellbomb,
     _poolParallaxTide,
     _poolParasiticImplant,
+    _poolPariah,
     _poolPeaceOfMind,
     _poolPearlMedallion,
     _poolPeerThroughDepths,
@@ -1581,6 +1584,7 @@ const shard: CardShard = {
     _poolTrainedCheetah,
     _poolTraitorousGreed,
     _poolTransformativeCommons,
+    _poolTreacherousLink,
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,
     _poolTrevasCharm,

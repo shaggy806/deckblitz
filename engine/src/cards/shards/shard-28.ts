@@ -143,6 +143,7 @@ import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolColossus from "../pool/colossus.js";
+import _poolCombust from "../pool/combust.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolConcordWithTheKami from "../pool/concord-with-the-kami.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
@@ -187,6 +188,7 @@ import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
 import _poolDormantVolcano from "../pool/dormant-volcano.js";
+import _poolDovinHandOfControl from "../pool/dovin-hand-of-control.js";
 import _poolDowndraft from "../pool/downdraft.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
@@ -323,6 +325,7 @@ import _poolHuangZhongShuGeneral from "../pool/huang-zhong-shu-general.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHydromorphGuardian from "../pool/hydromorph-guardian.js";
+import _poolHyperionSupremeHero from "../pool/hyperion-supreme-hero.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
 import _poolIcebergCancrix from "../pool/iceberg-cancrix.js";
 import _poolIcyManipulator from "../pool/icy-manipulator.js";
@@ -437,6 +440,7 @@ import _poolMindRoots from "../pool/mind-roots.js";
 import _poolMineWorker from "../pool/mine-worker.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMinotaurTactician from "../pool/minotaur-tactician.js";
+import _poolMirrorStrike from "../pool/mirror-strike.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMizziumTank from "../pool/mizzium-tank.js";
@@ -709,6 +713,7 @@ import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
+import _poolTemper from "../pool/temper.js";
 import _poolTemperedSliver from "../pool/tempered-sliver.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
 import _poolTempleThief from "../pool/temple-thief.js";
@@ -1005,6 +1010,7 @@ const shard: CardShard = {
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolColossus,
+    _poolCombust,
     _poolConcealedCourtyard,
     _poolConcordWithTheKami,
     _poolContestOfClaws,
@@ -1049,6 +1055,7 @@ const shard: CardShard = {
     _poolDoggedDetective,
     _poolDomrisAmbush,
     _poolDormantVolcano,
+    _poolDovinHandOfControl,
     _poolDowndraft,
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
@@ -1185,6 +1192,7 @@ const shard: CardShard = {
     _poolHulkBrutalBrawler,
     _poolHungryGraffalon,
     _poolHydromorphGuardian,
+    _poolHyperionSupremeHero,
     _poolHyperionsAtomicVision,
     _poolIcebergCancrix,
     _poolIcyManipulator,
@@ -1299,6 +1307,7 @@ const shard: CardShard = {
     _poolMineWorker,
     _poolMinecartDaredevil,
     _poolMinotaurTactician,
+    _poolMirrorStrike,
     _poolMirrorworks,
     _poolMistfireAdept,
     _poolMizziumTank,
@@ -1571,6 +1580,7 @@ const shard: CardShard = {
     _poolSyrVondamTheLucent,
     _poolTajuruPathwarden,
     _poolTelJiladLifebreather,
+    _poolTemper,
     _poolTemperedSliver,
     _poolTempleOfMystery,
     _poolTempleThief,

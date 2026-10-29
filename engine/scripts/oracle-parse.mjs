@@ -1806,6 +1806,29 @@ export function parseSentence(sentence, ctx) {
       amount: "next-time",
     };
   }
+  // A damage rule (rule 615): "prevent all combat damage that would be dealt
+  // by target attacking creature this turn" (Kor Haven), "… that would be
+  // dealt to and dealt by ~ this turn" (Moonlight Geist).
+  if ((m = re(`prevent all (combat )?damage that would be dealt to and dealt by (~|${TARGET}) this turn`).exec(s))) {
+    const target = m[2] === "~" ? "source" : slot(m[2]);
+    if (target === undefined) return null;
+    const combat = m[1] ? { combat: true } : {};
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "damage-rule", to: { target }, ...combat },
+        { kind: "damage-rule", by: { target }, ...combat },
+      ],
+    };
+  }
+  if ((m = re(`(?:prevent all (combat )?damage that would be dealt (?:this turn )?by (~|${TARGET})(?: this turn)?|prevent all (combat )?damage (~|${TARGET}) would deal this turn)`).exec(s))) {
+    const phrase = m[2] ?? m[4];
+    const target = phrase === "~" ? "source" : slot(phrase);
+    if (target === undefined) return null;
+    return { kind: "damage-rule", by: { target }, ...(m[1] || m[3] ? { combat: true } : {}) };
+  }
+  // Rule 615.12 (Skullcrack, Flaring Pain).
+  if (re("damage can't be prevented this turn").test(s)) return { kind: "damage-cant-be-prevented" };
   // Layer 5 (the Laces): "target spell or permanent becomes black", for good.
   // "Target spell or permanent" is read only here: a bounce of one (Venser)
   // needs a step per zone.

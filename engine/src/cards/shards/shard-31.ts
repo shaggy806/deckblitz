@@ -437,6 +437,7 @@ import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKondaLordOfEiganjo from "../pool/konda-lord-of-eiganjo.js";
 import _poolKongmingsContraptions from "../pool/kongmings-contraptions.js";
+import _poolKorHaven from "../pool/kor-haven.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKormusBell from "../pool/kormus-bell.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
@@ -1325,6 +1326,7 @@ const shard: CardShard = {
     _poolKodamaOfTheEastTree,
     _poolKondaLordOfEiganjo,
     _poolKongmingsContraptions,
+    _poolKorHaven,
     _poolKorlessaScaleSinger,
     _poolKormusBell,
     _poolKorozdaMonitor,

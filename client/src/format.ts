@@ -416,6 +416,12 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
     case 'damage-redirected':
       return `${name(event.source)}'s ${event.amount} damage to ${tgt(event.from)} is dealt to ${tgt(event.to)} instead`
     case 'prevention-shield-created':
+      // A rule over a set of recipients (a damage-rule): the card says which.
+      if (event.target === undefined) {
+        return event.from !== undefined
+          ? `damage from ${name(event.from)} will be prevented or redirected`
+          : 'a damage prevention effect is set up'
+      }
       if (event.redirectTo !== undefined) {
         return event.nextTime && event.from !== undefined
           ? `the next damage ${name(event.from)} would deal to ${tgt(event.target)} this turn will be dealt to ${tgt(event.redirectTo)} instead`
