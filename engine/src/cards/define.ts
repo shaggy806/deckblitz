@@ -1283,6 +1283,26 @@ export type StaticCondition =
   | { readonly kind: "class-level"; readonly atLeast?: number; readonly exactly?: number };
 
 /**
+ * A test of one other player a combat restriction names — the defending
+ * player of an attack, the attacking player of a block (the
+ * `cantAttackUnlessDefender` family). Every clause given must hold.
+ */
+export interface PlayerTest {
+  /** They control a permanent matching this, read from their side (its
+   * `controlledBy` is implied) — "controls an Island", "controls an untapped
+   * creature with power 3 or greater". */
+  readonly controls?: CardFilter;
+  /** They're the monarch (rule 724). */
+  readonly monarch?: true;
+  /** They're poisoned: one or more poison counters (rule 122.1f). */
+  readonly poisoned?: true;
+  /** "You control more [filter] than [that player]": this permanent's
+   * controller has more permanents matching it than they do — Mogg Toady's
+   * creatures, Monstrous Hound's lands. */
+  readonly youControlMore?: CardFilter;
+}
+
+/**
  * A static ability: continuously modifies characteristics (rule 613 layers 6 /
  * 7b / 7d), and/or carries a `replacement` clause (rule 614 — applied by
  * `game.ts`, not by the layer fold).
@@ -1504,6 +1524,22 @@ export interface StaticAbility {
    * as a `CombatRestriction`: those are bare strings, and this one has to
    * know whose "you" it means. */
   readonly cantAttackController?: boolean;
+  /** "This creature can't attack **unless defending player** controls an
+   * Island" (Sea Serpent), "… is the monarch" (Crown-Hunter Hireling), "…
+   * unless you control more creatures than defending player" (Mogg Toady):
+   * a restriction on each attack declared (rule 508.1c), asked of the player
+   * that attack would defend against (rule 506.2 — a planeswalker's or a
+   * battle's player), so in multiplayer it may attack one opponent and not
+   * another. This permanent's own, about itself alone. */
+  readonly cantAttackUnlessDefender?: PlayerTest;
+  /** "This creature can't attack **if defending player** controls an
+   * untapped creature with power 3 or greater" (Orgg): the same, the other
+   * way round. */
+  readonly cantAttackIfDefender?: PlayerTest;
+  /** "This creature can't block unless you control more lands than
+   * **attacking player**" (Monstrous Hound): asked of the controller of the
+   * attacker it would block (rule 509.1b). */
+  readonly cantBlockUnlessAttacker?: PlayerTest;
   /**
    * The affected creatures **are goaded** (rule 701.15b) for as long as this
    * static applies — Baeloth Barrityl, Entertainer's "creatures your

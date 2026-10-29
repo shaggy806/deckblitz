@@ -29,11 +29,11 @@ import {
   staticConditionMet,
   staticReaches,
 } from "../characteristics.js";
-import type { StaticAbility } from "../cards.js";
+import type { PlayerTest, StaticAbility } from "../cards.js";
 import type { EffectAmount } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { matchesFilter } from "../filter.js";
+import { matchesFilter, weightedMatches } from "../filter.js";
 import { goadersOf, sourceAmount } from "../goad.js";
 import { hasRingBearerDesignation } from "../ring.js";
 import { printedCardName, rulesTextName } from "../state.js";
@@ -254,6 +254,18 @@ function whyCannotAttackUncached(
   // controller of the permanent saying so, not of the creature: the Aura on
   // it (Vow of Duty), or a static reaching it (Eriette of the Charmed
   // Apple's creatures enchanted by an Aura you control).
+  // "Can't attack unless defending player controls an Island" (rule 508.1c),
+  // asked of the player this attack would defend against.
+  for (const ability of ownStatics(state, registry, object)) {
+    if (
+      (ability.cantAttackUnlessDefender !== undefined &&
+        !playerTestHolds(state, registry, ability.cantAttackUnlessDefender, defendingPlayer, object)) ||
+      (ability.cantAttackIfDefender !== undefined &&
+        playerTestHolds(state, registry, ability.cantAttackIfDefender, defendingPlayer, object))
+    ) {
+      return `${def.name} can't attack ${defendingPlayer}`;
+    }
+  }
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source.controller !== defendingPlayer || hasLostAbilities(state, registry, source)) continue;
@@ -270,6 +282,50 @@ function whyCannotAttackUncached(
     }
   }
   return null;
+}
+
+/** A permanent's own static abilities about itself (`affects: { scope:
+ * "self" }`) that apply now: none once it has lost its abilities, and none
+ * whose condition fails. */
+function ownStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
+  if (hasLostAbilities(state, registry, object)) return [];
+  return registry
+    .get(rulesTextName(object))
+    .static.filter(
+      (ability) =>
+        ability.affects.scope === "self" &&
+        (ability.condition === undefined || staticConditionMet(state, registry, object, ability.condition)),
+    );
+}
+
+/** Whether `player` passes a combat restriction's {@link PlayerTest}, as
+ * `source` (the restricted creature) asks it: its "you" is the source's
+ * controller. */
+export function playerTestHolds(
+  state: GameState,
+  registry: CardRegistry,
+  test: PlayerTest,
+  player: PlayerId,
+  source: GameObject,
+): boolean {
+  const controlled = (who: PlayerId, filter: CardFilter): number =>
+    weightedMatches(
+      state,
+      state.zones.shared.battlefield,
+      (id) =>
+        state.objects[id].controller === who &&
+        matchesFilter(state, registry, id, filter, { you: who, source: source.id }),
+    ).reduce((sum, match) => sum + match.weight, 0);
+  if (test.controls !== undefined && controlled(player, test.controls) === 0) return false;
+  if (test.monarch === true && state.monarch !== player) return false;
+  if (test.poisoned === true && (state.players[player].counters.poison ?? 0) === 0) return false;
+  if (
+    test.youControlMore !== undefined &&
+    controlled(source.controller, test.youControlMore) <= controlled(player, test.youControlMore)
+  ) {
+    return false;
+  }
+  return true;
 }
 
 /** {@link whyCannotBlockUncached} inside a computed-value cache region (a pure read
@@ -323,6 +379,17 @@ function whyCannotBlockUncached(
   if (defendingPlayerOf(state, attacker.attacking) !== player) {
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} — it isn't attacking ${player}`;
+  }
+  // "Can't block unless you control more lands than attacking player"
+  // (rule 509.1b), asked of the attacker's controller.
+  for (const ability of ownStatics(state, registry, blocker)) {
+    if (
+      ability.cantBlockUnlessAttacker !== undefined &&
+      !playerTestHolds(state, registry, ability.cantBlockUnlessAttacker, attacker.controller, blocker)
+    ) {
+      const attackerDef = registry.get(printedCardName(attacker));
+      return `${blockerDef.name} can't block ${attackerDef.name}`;
+    }
   }
   // "Can't be blocked by [filter]" on the attacker (Delney, Streetwise
   // Lookout), "can block only [filter]" on the blocker.

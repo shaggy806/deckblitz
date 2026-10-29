@@ -507,6 +507,7 @@ import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
 import _poolOrderOfTheStars from "../pool/order-of-the-stars.js";
+import _poolOrgg from "../pool/orgg.js";
 import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolOverseerOfVault76 from "../pool/overseer-of-vault-76.js";
@@ -1364,6 +1365,7 @@ const shard: CardShard = {
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
     _poolOrderOfTheStars,
+    _poolOrgg,
     _poolOriginOfTheHiddenOnes,
     _poolOvergrownArch,
     _poolOverseerOfVault76,

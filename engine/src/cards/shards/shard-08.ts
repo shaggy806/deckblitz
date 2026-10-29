@@ -777,6 +777,7 @@ import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTumbleMagnet from "../pool/tumble-magnet.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
+import _poolTwistedImage from "../pool/twisted-image.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUndercityInformer from "../pool/undercity-informer.js";
 import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
@@ -1655,6 +1656,7 @@ const shard: CardShard = {
     _poolTumbleMagnet,
     _poolTurbulentWilderness,
     _poolTwistReality,
+    _poolTwistedImage,
     _poolUltimateGreenGoblin,
     _poolUndercityInformer,
     _poolUnderdarkExplorer,

@@ -13,8 +13,9 @@
  * `PtModifier.setColors`/`addColors`), **layer 6** (keyword grants, plus
  * `PtModifier.loseAbilities` removing a permanent's own abilities), **layer
  * 7b** (a `"self"` CDA sets base P/T, then a `PtModifier.setPt` from a
- * "becomes a N/N" and a static's `setBasePt`), **layer 7c** (counters),
- * **layer 7d** (P/T bonuses + modifiers), timestamp-ordered within a layer.
+ * "becomes a N/N" and a static's `setBasePt`), **layer 7c** (counters, then
+ * P/T bonuses + modifiers — rule 613.4c), **layer 7d** (`PtModifier.switchPt`
+ * — 613.4d), timestamp-ordered within a layer.
  * NOT yet: full text-change beyond a creature-type word, and dependency
  * ordering (rule 613.8) outside layer 4's additive type grants. Layer 2
  * (control-change) is modeled in `game.ts` by reassigning
@@ -4155,14 +4156,14 @@ function computeCharacteristicsUncached(
   const basePower = power;
   const baseToughness = toughness;
 
-  // Layer 7c — P/T counters.
+  // Layer 7c (rule 613.4c) — P/T counters, then the modifications.
   for (const [counter, count] of Object.entries(object.counters)) {
     const bonus = counterPtBonus(counter);
     power += bonus.power * count;
     toughness += bonus.toughness * count;
   }
 
-  // Layer 7d — P/T modifications (additive; order does not affect the result).
+  // P/T modifications (additive; order does not affect the result).
   for (const effect of staticEffects) {
     power += effect.power;
     toughness += effect.toughness;
@@ -4170,6 +4171,11 @@ function computeCharacteristicsUncached(
   for (const modifier of object.modifiers) {
     power += modifier.power;
     toughness += modifier.toughness;
+  }
+  // Rule 613.4d — switches, after every other P/T effect and counter (the
+  // 7c above). Each takes the power as it stands to the toughness and back.
+  for (const modifier of object.modifiers) {
+    if (modifier.switchPt === true) [power, toughness] = [toughness, power];
   }
 
   // "Assigns combat damage equal to its toughness" — resolved here, after

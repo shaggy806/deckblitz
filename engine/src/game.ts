@@ -24357,6 +24357,12 @@ export class Game {
         this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo),
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
+      switchPt: (what, duration) =>
+        "kind" in what
+          ? this.switchPt(what, lastingHere(duration))
+          : this.battlefieldMatching(controller, what).forEach((id) =>
+              this.switchPt({ kind: "object", object: id }, lastingHere(duration), false),
+            ),
       modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo) =>
         this.modifyPtAll(
           scopeTo ?? controller,
@@ -29352,6 +29358,23 @@ export class Game {
       power,
       toughness,
       duration,
+    });
+  }
+
+  /** See the `"switch-pt"` {@link EffectSpec}: a layer-7d modifier (rule
+   * 613.4d). `split` as `modifyPt`'s. */
+  private switchPt(target: TargetRef, duration: EffectDuration, split = true): void {
+    if (target.kind !== "object") return;
+    const id = split ? this.splitOneFromStack(target.object) : target.object;
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
+    object.modifiers.push({
+      timestamp: this.freshTimestamp(),
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      switchPt: true,
+      ...durationFields(duration),
     });
   }
 
@@ -35870,11 +35893,21 @@ export class Game {
     const live = this.state.objects[source];
     const from =
       sourceLastKnown !== undefined
-        ? { controller: sourceLastKnown.controller, types: sourceLastKnown.types, subtypes: sourceLastKnown.subtypes }
+        ? {
+            controller: sourceLastKnown.controller,
+            types: sourceLastKnown.types,
+            subtypes: sourceLastKnown.subtypes,
+            sourceZoneChangeCount: sourceLastKnown.zoneChangeCount,
+          }
         : live !== undefined
           ? (() => {
               const s = computeCharacteristics(this.state, this.registry, source);
-              return { controller: live.controller, types: s.types, subtypes: s.subtypes };
+              return {
+                controller: live.controller,
+                types: s.types,
+                subtypes: s.subtypes,
+                ...(live.zone === "battlefield" ? { sourceZoneChangeCount: live.zoneChangeCount ?? 0 } : {}),
+              };
             })()
           : undefined;
     const prior = object.damageThisTurn?.turn === turn ? object.damageThisTurn : undefined;
@@ -38532,7 +38565,7 @@ export class Game {
         }
         if (
           r.filter !== undefined &&
-          !matchesFilter(this.state, this.registry, cardId, r.filter, { you: object.controller })
+          !matchesFilter(this.state, this.registry, cardId, r.filter, { you: object.controller, source: object.id })
         ) {
           continue;
         }
@@ -38558,7 +38591,7 @@ export class Game {
           if (ability.condition !== undefined) continue;
           if (
             r.filter !== undefined &&
-            !matchesFilter(this.state, this.registry, cardId, r.filter, { you: last.controller })
+            !matchesFilter(this.state, this.registry, cardId, r.filter, { you: last.controller, source: id })
           ) {
             continue;
           }

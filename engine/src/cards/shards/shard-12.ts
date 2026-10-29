@@ -449,6 +449,7 @@ import _poolMiriamHerdWhisperer from "../pool/miriam-herd-whisperer.js";
 import _poolMirrorweave from "../pool/mirrorweave.js";
 import _poolMishrasWarMachine from "../pool/mishras-war-machine.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
+import _poolMoggToady from "../pool/mogg-toady.js";
 import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
 import _poolMomoFriendlyFlier from "../pool/momo-friendly-flier.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolMirrorweave,
     _poolMishrasWarMachine,
     _poolMishrasWorkshop,
+    _poolMoggToady,
     _poolMogisGodOfSlaughter,
     _poolMoltenBlast,
     _poolMomoFriendlyFlier,

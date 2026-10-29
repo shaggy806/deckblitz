@@ -316,6 +316,7 @@ import _poolIchorWellspring from "../pool/ichor-wellspring.js";
 import _poolIgnitionTeam from "../pool/ignition-team.js";
 import _poolImagecrafter from "../pool/imagecrafter.js";
 import _poolImminentDoom from "../pool/imminent-doom.js";
+import _poolImperialEdict from "../pool/imperial-edict.js";
 import _poolImperialLancer from "../pool/imperial-lancer.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
 import _poolIndenturedOaf from "../pool/indentured-oaf.js";
@@ -364,6 +365,7 @@ import _poolKozilekButcherOfTruth from "../pool/kozilek-butcher-of-truth.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
+import _poolKumanosPupils from "../pool/kumanos-pupils.js";
 import _poolKurkeshOnakkeAncient from "../pool/kurkesh-onakke-ancient.js";
 import _poolKytheonsIrregulars from "../pool/kytheons-irregulars.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
@@ -1085,6 +1087,7 @@ const shard: CardShard = {
     _poolIgnitionTeam,
     _poolImagecrafter,
     _poolImminentDoom,
+    _poolImperialEdict,
     _poolImperialLancer,
     _poolImperiousPerfect,
     _poolIndenturedOaf,
@@ -1133,6 +1136,7 @@ const shard: CardShard = {
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
+    _poolKumanosPupils,
     _poolKurkeshOnakkeAncient,
     _poolKytheonsIrregulars,
     _poolLaboratoryDrudge,

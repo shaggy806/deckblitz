@@ -631,6 +631,14 @@ export interface CardFilter {
     readonly subtype?: string;
     readonly type?: CardType;
     readonly controlledBy?: "you" | "opponent";
+    /** One source: `"this"`, the permanent applying the filter — "a creature
+     * dealt damage by this creature this turn" (Sengir Vampire); `"host"`,
+     * the permanent it's attached to — "… by enchanted creature" (Vampiric
+     * Embrace), "… by equipped creature" (Unscythe). Either in its stint on
+     * the battlefield now, or the one it just left in the same event (rule
+     * 603.10a: a creature dying beside Sengir Vampire still triggers it).
+     * Needs `FilterContext.source`. */
+    readonly source?: "this" | "host";
   };
   /** Was dealt excess damage this turn (rule 120.4a) — Maarika, Brutal
    * Gladiator's "if that creature was dealt excess damage this turn". */
@@ -970,6 +978,29 @@ export function manaValueOfObject(registry: CardRegistry, object: GameObject, ca
   const cost = parseManaCost(printedManaCost(registry, object));
   const x = object.zone === "stack" ? (object.xValue ?? 0) : (castX ?? 0);
   return manaValue(cost) + cost.x * Math.max(0, x);
+}
+
+/** The one source `damagedThisTurnBy.source` names, with the battlefield
+ * stint it means (rule 400.7): `asker` itself, or what it's attached to —
+ * on the battlefield now, or as it last was there if it left in the event
+ * being asked about (603.10a). */
+function damagingStint(
+  state: GameState,
+  which: "this" | "host",
+  asker: ObjectId | undefined,
+): { readonly id: ObjectId; readonly zoneChangeCount: number } | undefined {
+  const stint = (id: ObjectId | undefined): { readonly id: ObjectId; readonly zoneChangeCount: number } | undefined => {
+    const object = id === undefined ? undefined : state.objects[id];
+    if (object === undefined) return undefined;
+    if (object.zone === "battlefield") return { id: object.id, zoneChangeCount: object.zoneChangeCount ?? 0 };
+    const last = object.lastKnown?.zoneChangeCount;
+    return last === undefined ? undefined : { id: object.id, zoneChangeCount: last };
+  };
+  if (which === "this") return stint(asker);
+  const source = asker === undefined ? undefined : state.objects[asker];
+  if (source === undefined) return undefined;
+  const host = source.zone === "battlefield" ? source.attachedTo : source.lastKnown?.attachedTo;
+  return stint(host ?? undefined);
 }
 
 /** Does object `id` satisfy every clause of `filter`?
@@ -1402,15 +1433,19 @@ export function matchesFilter(
       return false;
     }
     const by = filter.damagedThisTurnBy;
+    const one = by?.source === undefined ? undefined : damagingStint(state, by.source, ctx.source);
     if (
       by !== undefined &&
+      ((by.source !== undefined && one === undefined) ||
       !(history?.by ?? []).some(
         (source) =>
+          (one === undefined ||
+            (source.source === one.id && source.sourceZoneChangeCount === one.zoneChangeCount)) &&
           (by.subtype === undefined || hasSubtype(source.subtypes, by.subtype)) &&
           (by.type === undefined || source.types.includes(by.type)) &&
           (by.controlledBy === undefined ||
             (by.controlledBy === "you" ? source.controller === ctx.you : source.controller !== ctx.you)),
-      )
+      ))
     ) {
       return false;
     }

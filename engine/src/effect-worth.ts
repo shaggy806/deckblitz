@@ -452,6 +452,7 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
       return effect.effects.length > 0 && effect.effects.every(onlyUntilEndOfTurn);
     case "modify-pt":
     case "modify-pt-all":
+    case "switch-pt":
     case "grant-keyword":
     case "grant-keyword-all":
     case "grant-protection":

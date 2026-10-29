@@ -569,7 +569,16 @@
   "effect:sacrifice-amount",
   "effect:put-on-library-dynamic-position",
   "effect:manifest-count-amount",
-  "effect:may-pay-x-capped"
+  "effect:may-pay-x-capped",
+  "trigger:dies-after-dealt-damage-by-source",
+  "filter:damaged-this-turn-by-source",
+  "effect:switch-pt",
+  "static:attack-restriction-defending-player-condition",
+  "effect:target-player-exiles-from-hand",
+  "effect:player-exiles-chosen-from-hand",
+  "effect:target-opponent-chooses",
+  "effect:each-opponent-exiles-choice",
+  "effect:target-player-hand-card-to-library-top"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

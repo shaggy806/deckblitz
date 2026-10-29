@@ -1066,6 +1066,19 @@ export function parseTrigger(clause) {
       { on, who: "you-control", filter, otherOnly: true },
     ];
   }
+  // "Whenever a creature dealt damage by ~ this turn dies" (Sengir Vampire) —
+  // by this source, or by the one it's attached to (Vampiric Embrace).
+  if ((m = /^Whenever a (.+?) dealt damage by (~|enchanted creature|equipped creature) this turn dies$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [
+      {
+        on: "dies",
+        who: "any",
+        filter: { type: "creature", ...filter, damagedThisTurnBy: { source: m[2] === "~" ? "this" : "host" } },
+      },
+    ];
+  }
   if (
     (m =
       /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks|leaves the battlefield|is put into a graveyard from the battlefield)$/.exec(
@@ -1910,6 +1923,24 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
+  // Rule 613.4d: a switch, applied in layer 7d.
+  if ((m = re(`switch (~|${TARGET})'s power and toughness until end of turn`).exec(s))) {
+    return { kind: "switch-pt", target: m[1] === "~" ? "source" : slot(m[1]), duration: "end-of-turn" };
+  }
+  if (re(`switch each creature's power and toughness until end of turn`).test(s)) {
+    return { kind: "switch-pt", all: { type: "creature" }, duration: "end-of-turn" };
+  }
+  // "Target opponent exiles a card from their hand" — their choice, from
+  // their own hand (`for-each-player` about the target).
+  if ((m = re(`(target player|target opponent) exiles (a|two|three) cards? from their hand`).exec(s))) {
+    const n = amount(m[2]);
+    return {
+      kind: "for-each-player",
+      who: { target: slot(m[1]) },
+      effect: { kind: "look-and-choose", player: "that-player", zone: "hand", min: n, max: n, destination: "exile", unlinked: true, leftover: "stay" },
+    };
+  }
+
   // Everyone's creatures until end of turn.
   if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
@@ -2054,6 +2085,9 @@ export function parseSentence(sentence, ctx) {
     }
     if ((m = re(`it gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
       return { kind: "modify-pt", target: it, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
+    }
+    if (re(`switch its power and toughness until end of turn`).test(s)) {
+      return { kind: "switch-pt", target: it, duration: "end-of-turn" };
     }
     if ((m = re(`it gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
       const kws = [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
@@ -3733,6 +3767,35 @@ function parseStatic(line, text) {
     }
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
+  // "If a creature dealt damage by ~ this turn would die, exile it instead"
+  // (Kumano's Pupils): the dies-only graveyard replacement, about one source.
+  if (line === "If a creature dealt damage by ~ this turn would die, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-put-into-graveyard",
+        instead: "exile",
+        from: "battlefield",
+        filter: { type: "creature", damagedThisTurnBy: { source: "this" } },
+      },
+      text,
+    };
+  }
+  // Restrictions asked of the defending (or attacking) player — rules 508.1c
+  // and 509.1b: "~ can't attack unless defending player controls an Island".
+  if ((m = /^~ can't (attack unless|attack if|block unless) (defending|attacking) player (controls an? (.+)|is the monarch|is poisoned)\.$/.exec(line))) {
+    const field = { "attack unless": "cantAttackUnlessDefender", "attack if": "cantAttackIfDefender", "block unless": "cantBlockUnlessAttacker" }[m[1]];
+    if ((field === "cantBlockUnlessAttacker") !== (m[2] === "attacking")) return null;
+    const filter = m[4] === undefined ? undefined : parseTypePhrase(m[4]);
+    if (filter === null) return null;
+    const test = filter !== undefined ? { controls: filter } : m[3] === "is the monarch" ? { monarch: true } : { poisoned: true };
+    return { affects: { scope: "self" }, [field]: test, text };
+  }
+  if ((m = /^~ can't (attack|block) unless you control more (creatures|lands) than (defending|attacking) player\.$/.exec(line))) {
+    if ((m[1] === "block") !== (m[3] === "attacking")) return null;
+    const test = { youControlMore: { type: m[2] === "creatures" ? "creature" : "land" } };
+    return { affects: { scope: "self" }, [m[1] === "attack" ? "cantAttackUnlessDefender" : "cantBlockUnlessAttacker"]: test, text };
+  }
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };
   // Hazoret, Godseeker: "unless you have max speed" (rule 702.179e).
   if (line === "~ can't attack or block unless you have max speed.") {

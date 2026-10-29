@@ -362,6 +362,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.filter.sharesColorWithTarget, shrinks ? "harm" : "help", MAJOR);
   },
   "double-pt-all": none,
+  // A switch kills a 0-power wall or lets a 1/4 hit for 4: which side it
+  // belongs on is the creature's.
+  "switch-pt": (n, v) => v.touch(n.target, "either", MAJOR),
   "double-counters-all": none,
   "double-counters": (n, v) => v.touch(n.target, "help", MAJOR),
   // Radiance's "target creature and each other creature that shares a color

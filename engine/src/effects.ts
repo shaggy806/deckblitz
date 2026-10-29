@@ -1254,6 +1254,12 @@ export type EffectPlayerRef =
    * library" (Surgical Extraction). Not a target. */
   | { readonly ownerOfTarget: number };
 
+/** One player a target slot names, as a `for-each-player` or a `vote`'s
+ * chooser: the player in it ("target opponent exiles …"), or the controller
+ * or owner of the object in it ("its controller chooses …"). Nobody when the
+ * slot is illegal (rule 608.2b) or the player has left the game. */
+export type ChosenPlayerRef = Extract<EffectPlayerRef, object>;
+
 /**
  * What a creature put onto the battlefield attacking attacks (rule 508.4).
  * `"choose"`: its controller chooses a defending player or a planeswalker one
@@ -3251,6 +3257,17 @@ export type EffectSpec =
       readonly duration: PtDuration;
     }
   | {
+      /** "Switch target creature's power and toughness until end of turn"
+       * (Twisted Image; rule 613.4d — `PtModifier.switchPt`, layer 7d). With
+       * `all` instead of a target, each battlefield permanent matching it —
+       * Mannichi, the Fevered Dream's "switch each creature's power and
+       * toughness". */
+      readonly kind: "switch-pt";
+      readonly target?: EffectTargetRef;
+      readonly all?: CardFilter;
+      readonly duration: PtDuration;
+    }
+  | {
       /** Every battlefield permanent matching `filter` gets +power/+toughness
        * (Garruk Wildspeaker's ult / Overrun: `{ type: "creature",
        * controlledBy: "you" }`, `+3/+3`, `end-of-turn`; Craterhoof Behemoth:
@@ -4956,8 +4973,11 @@ export type EffectSpec =
       readonly kind: "for-each-player";
       /** `"owners-of-exiled-with-source"`: each owner of a card in exile
        * linked to this source (rule 607.2a), in turn order — Skyclave
-       * Apparition's "the exiled card's owner creates …". Nobody, with none. */
-      readonly who: PlayerScope | "owners-of-exiled-with-source";
+       * Apparition's "the exiled card's owner creates …". Nobody, with none.
+       * A {@link ChosenPlayerRef} is one player — "**target opponent** exiles
+       * a card from their hand" (Skullcap Snail): a `look-and-choose` with
+       * `player: "that-player"` inside is theirs to choose. */
+      readonly who: PlayerScope | "owners-of-exiled-with-source" | ChosenPlayerRef;
       readonly effect: EffectSpec;
       /** One instruction, one event, as a `sequence`'s `simultaneous` is:
        * Adeline's Humans, one per opponent, enter together, so "whenever one
@@ -5026,8 +5046,10 @@ export type EffectSpec =
        * friends, or secrets".
        */
       readonly choose?: true;
-      /** Who chooses — only with `choose`; every player when absent. */
-      readonly who?: PlayerScope;
+      /** Who chooses — only with `choose`; every player when absent. A
+       * {@link ChosenPlayerRef} is one player: "**target opponent** chooses a
+       * creature they control" (Imperial Edict). */
+      readonly who?: PlayerScope | ChosenPlayerRef;
       /** Who chooses first, the rest following in turn order: the effect's
        * controller (a vote's "starting with you", 701.38a — a vote always
        * starts there), the active player (rule 101.4 — a choice's default),
@@ -7342,6 +7364,9 @@ export interface EffectApi {
   ): void;
   /** See the `"double-pt-all"` {@link EffectSpec}. */
   doublePtAll(filter: CardFilter, duration: PtDuration, powerOnly: boolean, exceptSource: boolean): void;
+  /** See the `"switch-pt"` {@link EffectSpec}: one permanent, or each
+   * matching a filter. */
+  switchPt(what: TargetRef | CardFilter, duration: PtDuration): void;
   /** See the `"grant-player-hexproof"` {@link EffectSpec}. */
   grantPlayerHexproof(who: PlayerScope): void;
   /** See the `"grant-spells-this-turn"` {@link EffectSpec}. */
@@ -8526,7 +8551,10 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
   if (toAsk === undefined && spec.choose === true) {
     // "Each player chooses …": no additional votes — it isn't a vote.
     ctx.beginVoting(spec.secret === true, true);
-    const fromYou = eachPlayerMayAsks(spec.who ?? "each-player", ctx, true);
+    const fromYou =
+      typeof spec.who === "object"
+        ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
+        : eachPlayerMayAsks(spec.who ?? "each-player", ctx, true);
     const order =
       spec.startingWith === "you"
         ? fromYou
@@ -11039,6 +11067,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "switch-pt": {
+      if (spec.all !== undefined) {
+        ctx.switchPt(spec.all, spec.duration);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.switchPt(target, spec.duration);
+      return;
+    }
     case "modify-pt-all":
       ctx.modifyPtAll(
         spec.filter,
@@ -12008,7 +12045,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? ((owners) => ctx.playersInScope("each-player").filter((p) => owners.has(p)))(
               new Set(ctx.cardsExiledWithSource().map((id) => ctx.ownerOf({ kind: "object", object: id }))),
             )
-          : ctx.playersInScope(spec.who));
+          : typeof spec.who === "object"
+            ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
+            : ctx.playersInScope(spec.who));
       if (spec.simultaneous === true) {
         ctx.simultaneously(() => {
           for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));

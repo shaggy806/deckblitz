@@ -490,6 +490,7 @@ import _poolMagusOfTheTabernacle from "../pool/magus-of-the-tabernacle.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
 import _poolManabond from "../pool/manabond.js";
+import _poolMannichiTheFeveredDream from "../pool/mannichi-the-fevered-dream.js";
 import _poolMarduSkullhunter from "../pool/mardu-skullhunter.js";
 import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
 import _poolMarkerBeetles from "../pool/marker-beetles.js";
@@ -668,6 +669,7 @@ import _poolScorchTheFields from "../pool/scorch-the-fields.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
+import _poolSeaSerpent from "../pool/sea-serpent.js";
 import _poolSealOfFire from "../pool/seal-of-fire.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
@@ -1397,6 +1399,7 @@ const shard: CardShard = {
     _poolMalcolmTheEyes,
     _poolMalevolentRumble,
     _poolManabond,
+    _poolMannichiTheFeveredDream,
     _poolMarduSkullhunter,
     _poolMarisiBreakerOfTheCoil,
     _poolMarkerBeetles,
@@ -1575,6 +1578,7 @@ const shard: CardShard = {
     _poolScornfulAetherLich,
     _poolScrapMastery,
     _poolSeaGateLoremaster,
+    _poolSeaSerpent,
     _poolSealOfFire,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,

@@ -2674,3 +2674,67 @@ describe("chosen counter costs, modal activated abilities, the host's prohibitio
     expect(fetters.static[0].prohibits).toEqual({ who: "each-player", abilitiesOf: { hostOfSource: true }, exceptManaAbilities: true });
   });
 });
+
+describe("damage by this source, switches, defending-player restrictions, a targeted chooser (B255)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test B255", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'a creature dealt damage by ~ this turn' as a dies trigger and a replacement", () => {
+    const sengir = face(
+      "Creature — Vampire",
+      "Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.",
+    );
+    expect(sengir.triggered[0].trigger).toEqual({
+      on: "dies",
+      who: "any",
+      filter: { type: "creature", damagedThisTurnBy: { source: "this" } },
+    });
+    const embrace = face(
+      "Enchantment — Aura",
+      "Whenever a creature dealt damage by enchanted creature this turn dies, put a +1/+1 counter on that creature.",
+    );
+    expect(embrace.triggered[0].trigger.filter.damagedThisTurnBy).toEqual({ source: "host" });
+    const pupils = face("Creature — Human Shaman", "If a creature dealt damage by this creature this turn would die, exile it instead.");
+    expect(pupils.static[0].replacement.filter).toEqual({ type: "creature", damagedThisTurnBy: { source: "this" } });
+  });
+
+  it("reads a power and toughness switch (rule 613.4d)", () => {
+    expect(parseSentence("Switch target creature's power and toughness until end of turn.", ctx())).toEqual({
+      kind: "switch-pt",
+      target: 0,
+      duration: "end-of-turn",
+    });
+    expect(parseSentence("Switch ~'s power and toughness until end of turn.", ctx())).toEqual({
+      kind: "switch-pt",
+      target: "source",
+      duration: "end-of-turn",
+    });
+    expect(parseSentence("Switch each creature's power and toughness until end of turn.", ctx())).toEqual({
+      kind: "switch-pt",
+      all: { type: "creature" },
+      duration: "end-of-turn",
+    });
+  });
+
+  it("reads restrictions asked of the defending or attacking player", () => {
+    const serpent = face("Creature — Serpent", "This creature can't attack unless defending player controls an Island.");
+    expect(serpent.static[0].cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });
+    const hireling = face("Creature — Ogre", "This creature can't attack unless defending player is the monarch.");
+    expect(hireling.static[0].cantAttackUnlessDefender).toEqual({ monarch: true });
+    const toady = face(
+      "Creature — Goblin",
+      "This creature can't attack unless you control more creatures than defending player.\nThis creature can't block unless you control more creatures than attacking player.",
+    );
+    expect(toady.static[0].cantAttackUnlessDefender).toEqual({ youControlMore: { type: "creature" } });
+    expect(toady.static[1].cantBlockUnlessAttacker).toEqual({ youControlMore: { type: "creature" } });
+    // "Unless attacking player" on an attack is no sentence the rules write.
+    expect(face("Creature — Goblin", "This creature can't attack unless attacking player is poisoned.").static ?? []).toEqual([]);
+  });
+
+  it("reads 'target opponent exiles a card from their hand' as their choice", () => {
+    expect(parseSentence("Target opponent exiles two cards from their hand.", ctx())).toEqual({
+      kind: "for-each-player",
+      who: { target: 0 },
+      effect: { kind: "look-and-choose", player: "that-player", zone: "hand", min: 2, max: 2, destination: "exile", unlinked: true, leftover: "stay" },
+    });
+  });
+});

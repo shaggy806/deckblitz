@@ -654,6 +654,7 @@ import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
 import _poolSkulduggery from "../pool/skulduggery.js";
+import _poolSkullcapSnail from "../pool/skullcap-snail.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
 import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
 import _poolSkyclaveSquid from "../pool/skyclave-squid.js";
@@ -789,6 +790,7 @@ import _poolUrzasAvenger from "../pool/urzas-avenger.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolUtterInsignificance from "../pool/utter-insignificance.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
+import _poolVampiricEmbrace from "../pool/vampiric-embrace.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
@@ -1514,6 +1516,7 @@ const shard: CardShard = {
     _poolSirenReaver,
     _poolSistersOfTheFlame,
     _poolSkulduggery,
+    _poolSkullcapSnail,
     _poolSkyEelSchool,
     _poolSkyclaveCleric,
     _poolSkyclaveSquid,
@@ -1649,6 +1652,7 @@ const shard: CardShard = {
     _poolUthrosTitanicGodcore,
     _poolUtterInsignificance,
     _poolUyoSilentProphet,
+    _poolVampiricEmbrace,
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,
     _poolVengeantEarth,

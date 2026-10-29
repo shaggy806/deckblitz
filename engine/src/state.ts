@@ -1477,6 +1477,12 @@ export interface PtModifier {
    * Tree of Redemption's "exchange your life total with this creature's
    * toughness"), which leaves its power as it was. */
   setToughness?: number;
+  /** Layer 7d — "switch its power and toughness" (rule 613.4d, the
+   * `switch-pt` effect): applied after every other P/T effect and counter,
+   * its power becomes its toughness and its toughness its power. Two
+   * switches undo each other. Not an ability, so a loss of abilities leaves
+   * it. */
+  switchPt?: true;
   /** Layer 6 — triggered abilities this modifier grants, for a one-shot
    * "gains '[trigger]' until end of turn" (Hunter's Prowess, Hunter's
    * Insight). The ongoing, static equivalent is
@@ -3696,6 +3702,10 @@ export interface DecisionSource {
  * Spider you controlled" (Shelob, Child of Ungoliant) reads the past. */
 export interface DamageSourceRecord {
   readonly source: ObjectId;
+  /** Which stint of the source it was (rule 400.7): "dealt damage by this
+   * creature this turn" is this object, not one it was before it last left
+   * the battlefield. Absent for a source with no battlefield stint — a spell. */
+  readonly sourceZoneChangeCount?: number;
   readonly controller: PlayerId;
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
