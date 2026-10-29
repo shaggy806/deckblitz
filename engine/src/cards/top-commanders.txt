@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-448 already implemented / 52 missing
+452 already implemented / 48 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -56,7 +56,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   50  Flubs, the Fool                                22839 decks  {G}{U}{R}        Legendary Creature — Frog Scout
 [x]   51  Caesar, Legion's Emperor                       22746 decks  {1}{R}{W}{B}     Legendary Creature — Human Soldier
 [x]   52  Arabella, Abandoned Doll                       22645 decks  {R}{W}           Legendary Artifact Creature — Toy
-[ ]   53  Breya, Etherium Shaper                         22511 decks  {W}{U}{B}{R}     Legendary Artifact Creature — Human
+[x]   53  Breya, Etherium Shaper                         22511 decks  {W}{U}{B}{R}     Legendary Artifact Creature — Human
 [x]   54  Wilhelt, the Rotcleaver                        22477 decks  {2}{U}{B}        Legendary Creature — Zombie Warrior
 [x]   55  Maralen, Fae Ascendant                         22471 decks  {2}{B}{G}{U}     Legendary Creature — Elf Faerie Noble
 [x]   56  Oloro, Ageless Ascetic                         22360 decks  {3}{W}{U}{B}     Legendary Creature — Giant Soldier
@@ -293,7 +293,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  287  The Mycotyrant                                  9270 decks  {1}{B}{G}        Legendary Creature — Elder Fungus
 [x]  288  Wernog, Rider's Chaplain                        9258 decks  {W}{B}           Legendary Creature — Human
 [x]  289  Hazezon, Shaper of Sand                         9241 decks  {R}{G}{W}        Legendary Creature — Human Warrior
-[ ]  290  Tayam, Luminous Enigma                          9240 decks  {1}{W}{B}{G}     Legendary Creature — Nightmare Beast
+[x]  290  Tayam, Luminous Enigma                          9240 decks  {1}{W}{B}{G}     Legendary Creature — Nightmare Beast
 [x]  291  Brenard, Ginger Sculptor                        9226 decks  {1}{G}{W}{U}     Legendary Creature — Human Artificer
 [x]  292  Reaper King                                     9223 decks  {2/W}{2/U}{2/B}{2/R}{2/G} Legendary Artifact Creature — Scarecrow
 [x]  293  Phenax, God of Deception                        9215 decks  {3}{U}{B}        Legendary Enchantment Creature — God
@@ -341,7 +341,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  335  Strefan, Maurer Progenitor                      8289 decks  {2}{B}{R}        Legendary Creature — Vampire Noble
 [x]  336  Neriv, Heart of the Storm                       8274 decks  {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  337  Marwyn, the Nurturer                            8228 decks  {2}{G}           Legendary Creature — Elf Druid
-[ ]  338  Ghave, Guru of Spores                           8185 decks  {2}{W}{B}{G}     Legendary Creature — Fungus Shaman
+[x]  338  Ghave, Guru of Spores                           8185 decks  {2}{W}{B}{G}     Legendary Creature — Fungus Shaman
 [x]  339  Vnwxt, Verbose Host                             8171 decks  {1}{U}           Legendary Creature — Homunculus
 [ ]  340  Saskia the Unyielding                           8145 decks  {B}{R}{G}{W}     Legendary Creature — Human Soldier
 [x]  341  Imotekh the Stormlord                           8137 decks  {2}{B}{B}        Legendary Artifact Creature — Necron
@@ -361,7 +361,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  355  Shirei, Shizo's Caretaker                       7897 decks  {4}{B}           Legendary Creature — Spirit
 [x]  356  Myrkul, Lord of Bones                           7891 decks  {4}{W}{B}{G}     Legendary Creature — God
 [x]  357  Ellivere of the Wild Court                      7866 decks  {2}{G}{W}        Legendary Creature — Human Knight
-[ ]  358  Koma, Cosmos Serpent                            7852 decks  {3}{G}{G}{U}{U}  Legendary Creature — Serpent
+[x]  358  Koma, Cosmos Serpent                            7852 decks  {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  359  Kodama of the East Tree                         7851 decks  {4}{G}{G}        Legendary Creature — Spirit
 [ ]  360  Ozai, the Phoenix King                          7838 decks  {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  361  Zoraline, Cosmos Caller                         7834 decks  {1}{W}{B}        Legendary Creature — Bat Cleric

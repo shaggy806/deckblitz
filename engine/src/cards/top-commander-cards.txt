@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4008 already implemented / 992 missing (marks refreshed 2026-10-29)
+4025 already implemented / 975 missing (marks refreshed 2026-10-29)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -807,7 +807,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   811  Mizzix's Mastery                         {3}{R}           Sorcery
 [x]   812  Brightclimb Pathway // Grimclimb Pathway {0}              Land // Land
 [x]   813  Enduring Curiosity                       {2}{U}{U}        Enchantment Creature — Cat Glimmer
-[ ]   814  Cankerbloom                              {1}{G}           Creature — Phyrexian Fungus
+[x]   814  Cankerbloom                              {1}{G}           Creature — Phyrexian Fungus
 [x]   815  Irrigated Farmland                       {0}              Land — Plains Island
 [x]   816  Sunscorched Divide                       {0}              Land
 [x]   817  The World Tree                           {0}              Land
@@ -1430,7 +1430,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1437  Corpse Knight                            {W}{B}           Creature — Zombie Knight
 [x]  1438  Weathered Wayfarer                       {W}              Creature — Human Nomad Cleric
 [x]  1439  Goldvein Hydra                           {X}{G}           Creature — Hydra
-[ ]  1440  Koma, Cosmos Serpent                     {3}{G}{G}{U}{U}  Legendary Creature — Serpent
+[x]  1440  Koma, Cosmos Serpent                     {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  1441  Snapcaster Mage                          {1}{U}           Creature — Human Wizard
 [ ]  1442  Ancient Silver Dragon                    {6}{U}{U}        Creature — Elder Dragon
 [x]  1443  Elixir of Immortality                    {1}              Artifact
@@ -1865,7 +1865,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1872  Urabrask // The Great Work               {4}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [x]  1873  Cordial Vampire                          {B}{B}           Creature — Vampire
 [x]  1874  Bloodline Pretender                      {3}              Artifact Creature — Shapeshifter
-[ ]  1875  Phyrexian Obliterator                    {B}{B}{B}{B}     Creature — Phyrexian Horror
+[x]  1875  Phyrexian Obliterator                    {B}{B}{B}{B}     Creature — Phyrexian Horror
 [ ]  1876  Lazotep Quarry                           {0}              Land — Desert
 [ ]  1877  Wedding Ring                             {2}{W}{W}        Artifact
 [x]  1878  Kazuul, Tyrant of the Cliffs             {3}{R}{R}        Legendary Creature — Ogre Warrior
@@ -1887,7 +1887,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1894  Halo Fountain                            {2}{W}           Artifact
 [x]  1895  Divine Visitation                        {3}{W}{W}        Enchantment
 [ ]  1896  Traveling Chocobo                        {2}{G}           Creature — Bird
-[ ]  1897  Insidious Fungus                         {G}              Creature — Fungus
+[x]  1897  Insidious Fungus                         {G}              Creature — Fungus
 [ ]  1898  Jace's Archivist                         {1}{U}{U}        Creature — Vedalken Wizard
 [x]  1899  Festering Thicket                        {0}              Land — Swamp Forest
 [x]  1900  Vile Entomber                            {2}{B}{B}        Creature — Zombie Warlock
@@ -2356,7 +2356,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2363  Conclave Mentor                          {G}{W}           Creature — Centaur Cleric
 [x]  2364  Toxrill, the Corrosive                   {5}{B}{B}        Legendary Creature — Slug Horror
 [x]  2365  Circle of Power                          {3}{B}           Sorcery
-[ ]  2366  Bow of Nylea                             {1}{G}{G}        Legendary Enchantment Artifact
+[x]  2366  Bow of Nylea                             {1}{G}{G}        Legendary Enchantment Artifact
 [x]  2367  Worldspine Wurm                          {8}{G}{G}{G}     Creature — Wurm
 [ ]  2368  Bruenor Battlehammer                     {2}{R}{W}        Legendary Creature — Dwarf Warrior
 [x]  2369  Dictate of the Twin Gods                 {3}{R}{R}        Enchantment
@@ -2935,7 +2935,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2942  The Goose Mother                         {X}{G}{U}        Legendary Creature — Bird Hydra
 [x]  2943  Jolrael, Mwonvuli Recluse                {1}{G}           Legendary Creature — Human Druid
 [ ]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
-[ ]  2945  Umezawa's Jitte                          {2}              Legendary Artifact — Equipment
+[x]  2945  Umezawa's Jitte                          {2}              Legendary Artifact — Equipment
 [ ]  2946  Maze's End                               {0}              Land
 [x]  2947  Benevolent Hydra                         {X}{G}{G}        Creature — Hydra
 [x]  2948  Cultivator's Caravan                     {3}              Artifact — Vehicle
@@ -3035,7 +3035,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3042  Studious First-Year // Rampant Growth    {G} // {1}{G}    Creature — Bear Wizard // Sorcery
 [x]  3043  Creeping Tar Pit                         {0}              Land
 [x]  3044  Cliffgate                                {0}              Land — Gate
-[ ]  3045  Meathook Massacre II                     {X}{X}{B}{B}{B}{B} Legendary Enchantment
+[x]  3045  Meathook Massacre II                     {X}{X}{B}{B}{B}{B} Legendary Enchantment
 [x]  3046  Surge of Salvation                       {W}              Instant
 [x]  3047  Rumble Arena                             {0}              Land
 [x]  3048  Spawnbed Protector                       {7}              Creature — Eldrazi
@@ -3102,7 +3102,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3109  Necrogoyf                                {3}{B}{B}        Creature — Lhurgoyf
 [x]  3110  Light-Paws, Emperor's Voice              {1}{W}           Legendary Creature — Fox Advisor
 [x]  3111  Ziatora, the Incinerator                 {3}{B}{R}{G}     Legendary Creature — Demon Dragon
-[ ]  3112  Iron Spider, Stark Upgrade               {3}              Legendary Artifact Creature — Spider Hero
+[x]  3112  Iron Spider, Stark Upgrade               {3}              Legendary Artifact Creature — Spider Hero
 [x]  3113  Reshape                                  {X}{U}{U}        Sorcery
 [x]  3114  Bothersome Quasit                        {2}{R}           Creature — Demon
 [x]  3115  Master of Ceremonies                     {3}{W}           Creature — Rhino Druid
@@ -3116,7 +3116,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3123  Inferno Titan                            {4}{R}{R}        Creature — Giant
 [x]  3124  Hollowmurk Siege                         {B}{G}           Enchantment
 [ ]  3125  Toph, the Blind Bandit                   {2}{G}           Legendary Creature — Human Warrior Ally
-[ ]  3126  Power Conduit                            {2}              Artifact
+[x]  3126  Power Conduit                            {2}              Artifact
 [x]  3127  Stinkweed Imp                            {2}{B}           Creature — Imp
 [x]  3128  Diamond City                             {0}              Land
 [ ]  3129  Render Silent                            {W}{U}{U}        Instant
@@ -3325,7 +3325,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3332  Mendicant Core, Guidelight               {W}{U}           Legendary Artifact Creature — Robot
 [x]  3333  Make a Stand                             {2}{W}           Instant
 [x]  3334  Mech Hangar                              {0}              Land
-[ ]  3335  Fain, the Broker                         {2}{B}           Legendary Creature — Human Warlock
+[x]  3335  Fain, the Broker                         {2}{B}           Legendary Creature — Human Warlock
 [ ]  3336  Germination Practicum                    {3}{G}{G}        Sorcery — Lesson
 [x]  3337  Rapacious Guest                          {2}{B}           Creature — Halfling Citizen
 [x]  3338  Counterbalance                           {U}{U}           Enchantment
@@ -3384,7 +3384,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3391  Vizier of Tumbling Sands                 {2}{U}           Creature — Human Cleric
 [x]  3392  Lathiel, the Bounteous Dawn              {2}{G}{W}        Legendary Creature — Unicorn
 [ ]  3393  Winter Orb                               {2}              Artifact
-[ ]  3394  O'aka, Traveling Merchant                {1}{U}           Legendary Creature — Human Citizen
+[x]  3394  O'aka, Traveling Merchant                {1}{U}           Legendary Creature — Human Citizen
 [x]  3395  Hooded Hydra                             {X}{G}{G}        Creature — Snake Hydra
 [x]  3396  Sigil of Sleep                           {U}              Enchantment — Aura
 [ ]  3397  Killian, Ink Duelist                     {W}{B}           Legendary Creature — Human Warlock
@@ -4122,7 +4122,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4129  Teferi, Hero of Dominaria                {3}{W}{U}        Legendary Planeswalker — Teferi
 [ ]  4130  Mirror March                             {5}{R}           Enchantment
 [ ]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
-[ ]  4132  Crucible of the Spirit Dragon            {0}              Land
+[x]  4132  Crucible of the Spirit Dragon            {0}              Land
 [x]  4133  Tectonic Edge                            {0}              Land
 [x]  4134  Cathartic Pyre                           {1}{R}           Instant
 [x]  4135  Szarel, Genesis Shepherd                 {2}{B}{R}{G}     Legendary Creature — Insect Druid
@@ -4360,7 +4360,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4367  Bayek of Siwa                            {3}{R}{W}        Legendary Creature — Human Assassin
 [x]  4368  Venom Sliver                             {1}{G}           Creature — Sliver
 [x]  4369  Nighthowler                              {1}{B}{B}        Enchantment Creature — Horror
-[ ]  4370  Cayth, Famed Mechanist                   {1}{U}{R}{W}     Legendary Creature — Dwarf Artificer
+[x]  4370  Cayth, Famed Mechanist                   {1}{U}{R}{W}     Legendary Creature — Dwarf Artificer
 [x]  4371  The Legend of Yangchen // Avatar Yangchen {5}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  4372  Rammas Echor, Ancient Shield             {3}{W}           Legendary Artifact
 [ ]  4373  Conspiracy Theorist                      {1}{R}           Creature — Human Shaman
@@ -4472,7 +4472,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4479  Angelic Field Marshal                    {2}{W}{W}        Creature — Angel
 [ ]  4480  Luck Bobblehead                          {3}              Artifact — Bobblehead
 [x]  4481  Cryptcaller Chariot                      {3}{B}           Artifact — Vehicle
-[ ]  4482  Lost Jitte                               {1}              Legendary Artifact — Equipment
+[x]  4482  Lost Jitte                               {1}              Legendary Artifact — Equipment
 [ ]  4483  Deeproot Pilgrimage                      {1}{U}           Enchantment
 [ ]  4484  Katilda, Dawnhart Prime                  {G}{W}           Legendary Creature — Human Warlock
 [x]  4485  Bone-Cairn Butcher                       {1}{R}{W}{B}     Creature — Demon
@@ -4500,7 +4500,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4507  Senu, Keen-Eyed Protector                {1}{W}           Legendary Creature — Bird Scout
 [ ]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
 [ ]  4509  Archetype of Courage                     {1}{W}{W}        Enchantment Creature — Human Soldier
-[ ]  4510  Zodiark, Umbral God                      {B}{B}{B}{B}{B}  Legendary Creature — God
+[x]  4510  Zodiark, Umbral God                      {B}{B}{B}{B}{B}  Legendary Creature — God
 [x]  4511  Cerulean Wisps                           {U}              Instant
 [x]  4512  Maelstrom Colossus                       {8}              Artifact Creature — Golem
 [x]  4513  Captain Sisay                            {2}{G}{W}        Legendary Creature — Human Soldier
@@ -4535,7 +4535,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4542  Sunken Palace                            {0}              Land — Cave
 [x]  4543  Goblin Rabblemaster                      {2}{R}           Creature — Goblin Warrior
 [ ]  4544  Desert                                   {0}              Land — Desert
-[ ]  4545  Banquet Guests                           {X}{G}{W}        Creature — Halfling Citizen
+[x]  4545  Banquet Guests                           {X}{G}{W}        Creature — Halfling Citizen
 [ ]  4546  Burning-Rune Demon                       {4}{B}{B}        Creature — Demon Berserker
 [x]  4547  Restart Sequence                         {3}{B}           Sorcery
 [ ]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
@@ -4702,7 +4702,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4709  Felisa, Fang of Silverquill              {2}{W}{B}        Legendary Creature — Vampire Wizard
 [x]  4710  Raffine, Scheming Seer                   {W}{U}{B}        Legendary Creature — Sphinx Demon
 [ ]  4711  Dina's Guidance                          {1}{B}{G}        Instant
-[ ]  4712  Garnet, Princess of Alexandria           {G}{W}           Legendary Creature — Human Noble Cleric
+[x]  4712  Garnet, Princess of Alexandria           {G}{W}           Legendary Creature — Human Noble Cleric
 [x]  4713  Metropolis Reformer                      {2}{W}           Creature — Angel Cleric
 [x]  4714  Terisian Mindbreaker                     {7}              Artifact Creature — Juggernaut
 [ ]  4715  Ancient Adamantoise                      {5}{G}{G}{G}     Creature — Turtle
