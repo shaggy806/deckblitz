@@ -1039,6 +1039,15 @@ export type StaticCondition =
    */
   | { readonly kind: "target"; readonly index: number; readonly filter: CardFilter; readonly now?: true }
   /**
+   * Slot `index`'s target is still legal as the spell or ability resolves
+   * (rule 608.2b) — a player or an object alike. Witness the Future's
+   * "target player shuffles up to four target cards from their graveyard
+   * into their library": with the player gone illegal, they do nothing, and
+   * the cards stay where they are (its ruling). Only a resolution can
+   * answer it.
+   */
+  | { readonly kind: "target-legal"; readonly index: number }
+  /**
    * A target was chosen for slot `index` of the resolving spell or ability —
    * still true once that target has become illegal (rule 608.2b), false only
    * for an optional slot left empty. The Earth Crystal's "distribute two

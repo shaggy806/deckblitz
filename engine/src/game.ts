@@ -7265,9 +7265,10 @@ export class Game {
       this.revealCards(player, chosen, "hand");
     }
 
-    // Rule 101.4: a card a player chose to put from their hand onto the
-    // battlefield while the players' choices are held (Show and Tell's "each
-    // player may put …") waits in their hand until every one has chosen, and
+    // Rule 101.4: a card a player chose to put from their hand (or graveyard
+    // — Tempt with Immortality) onto the battlefield while the players'
+    // choices are held (Show and Tell's "each player may put …") waits there
+    // until every one has chosen, and
     // then they all enter at once (`releaseHeldChoices`).
     const held = this.state.heldChoices;
     if (
@@ -7275,7 +7276,8 @@ export class Game {
       awaiting.priorityTo === undefined &&
       awaiting.destination === "battlefield" &&
       chosen.length > 0 &&
-      chosen.every((id) => this.state.objects[id]?.zone === "hand") &&
+      chosen.every((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard") &&
+      awaiting.enterUnder === undefined &&
       awaiting.then === undefined &&
       awaiting.secondPick === undefined &&
       awaiting.alsoTaken === undefined &&
@@ -22779,6 +22781,9 @@ export class Game {
         const ref = targets[condition.to];
         return ref?.kind === "object" && excessDamageSince(this.state, since, ref.object) > 0;
       }
+      // Still a legal target as it resolves (rule 608.2b): an illegal one is
+      // blanked out of `targets`.
+      if (condition.kind === "target-legal") return targets[condition.index] !== undefined;
       if (condition.kind === "damage-dealt-this-way") {
         const ref = condition.to === undefined ? undefined : targets[condition.to];
         if (condition.to !== undefined && ref === undefined) return false;
@@ -24958,7 +24963,7 @@ export class Game {
         }
         return spell.lastOnStack?.zoneChangeCount === refs.triggerSpell ? spell.lastOnStack : null;
       },
-      shuffleLibrary: () => this.shuffleLibraryOf(controller),
+      shuffleLibrary: (player) => this.shuffleLibraryOf(player ?? controller),
       division: opts.division ?? [],
       copyTriggerSpell: (spell, copyOpts) => {
         const original = copyOpts.original ?? triggerObject;
@@ -34341,6 +34346,8 @@ export class Game {
     withCounters?: { readonly kind: string; readonly amount: number },
     opts: {
       readonly allGraveyards?: boolean;
+      /** Each card under its owner's control ("each player returns …"). */
+      readonly underOwners?: boolean;
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
       readonly attachTo?: ObjectId | null;
@@ -34393,7 +34400,9 @@ export class Game {
     if (count === "all" || (!asked && eligible.length <= count)) {
       // Their "as this enters" choices first (rule 614.12), one at a time:
       // nothing moves until they are all made, and this runs again with each.
-      if (destination === "battlefield" && eligible.some((id) => this.askEnterChoice(id, player))) {
+      const ownerOrPlayer = (id: ObjectId): PlayerId =>
+        opts.underOwners === true ? (this.state.objects[id]?.owner ?? player) : player;
+      if (destination === "battlefield" && eligible.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
         return true;
       }
       // "Return all land cards from your graveyard" moves them at once: one
@@ -34407,7 +34416,10 @@ export class Game {
             // A card someone else owns enters under this player's control
             // ("under your control"), kept there by a control effect as a
             // reanimation's is (`putOntoBattlefieldByEffect`).
-            const under = destination === "battlefield" && this.state.objects[id]?.owner !== player ? player : undefined;
+            const under =
+              destination === "battlefield" && opts.underOwners !== true && this.state.objects[id]?.owner !== player
+                ? player
+                : undefined;
             const moved = this.moveObject(id, destination, {
               tapped: enterTapped,
               ...(under !== undefined ? { under } : {}),
@@ -34628,11 +34640,11 @@ export class Game {
    * each one's "as this enters" choices first, in the order chosen — the
    * active player's, then the others' in turn order — parking the entry
    * (`PendingEntry`) while one is asked, then all of them at once, each
-   * under its owner's control. A card that has left its owner's hand since
-   * stays where it is.
+   * under its owner's control. A card that has left its owner's hand (or
+   * graveyard — Tempt with Immortality's returns) since stays where it is.
    */
   private enterHeldEntries(ids: readonly ObjectId[]): void {
-    const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand");
+    const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand" || this.state.objects[id]?.zone === "graveyard");
     for (const id of entering) {
       if (this.askEnterChoice(id, this.state.objects[id].owner)) {
         this.state.suspendedResolutions.push({ effect: null, enter: { kind: "held-entries", objects: entering } });

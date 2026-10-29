@@ -137,7 +137,9 @@ function builtDates(built) {
     let date = "";
     for (const line of out.split("\n")) {
       if (line.startsWith("DATE ")) date = line.slice(5).trim();
-      const m = /^\+\s*"([a-z]+:[a-z0-9-]+)",?\s*$/.exec(line.replace(/\r$/, ""));
+      // Two spaces in: an entry of `built` itself, not a commander's needs
+      // list further down (four in), which names keys long before they're built.
+      const m = /^\+ {2}"([a-z]+:[a-z0-9-]+)",?\s*$/.exec(line.replace(/\r$/, ""));
       if (m !== null && built.has(m[1]) && !dates.has(m[1])) dates.set(m[1], date);
     }
   } catch {

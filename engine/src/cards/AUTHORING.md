@@ -2059,7 +2059,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   chose an option. **`with-choices { effect }`** substitutes what was chosen
   into `effect`: `CHOSEN_THIS_WAY` in a list is every option chosen, once
   each (Harsh Mercy's `notSubtypes: [CHOSEN_THIS_WAY]`, Patriarch's
-  Bidding's `subtypes: [CHOSEN_THIS_WAY]`); inside `for-each-vote` it is that
+  Bidding's `subtypes: [CHOSEN_THIS_WAY]` — its "each player returns all
+  creature cards … from their graveyard to the battlefield" is
+  `return-from-graveyard`'s `from: "each-graveyard"`, `count: "all"`: every
+  graveyard at once, each card under its owner's control); inside `for-each-vote` it is that
   voter's own choice (Grave Sifter's "cards of that type"). Not yet: a
   choice kept on a permanent for its statics (Archangel of Strife's "players
   who chose war"), or chosen among another player's permanents (Grenzo's
@@ -2609,7 +2612,12 @@ choosers narrow by it; as it resolves, a slot whose player is no longer the
 other's is illegal (rule 608.2b). A group must be the list's last slot, so
 two cards from one graveyard *before* another target (the Advocates' "…
 Destroy target artifact or enchantment") are two fixed slots, the second
-`other` with `sameController`.
+`other` with `sameController`. "Target player shuffles … into their library"
+is `put-on-library` for each card then `shuffle-library` with `target: 0`
+(the player's library, not yours), under a `conditional` on `{ kind:
+"target-legal", index: 0 }` — the player gone illegal does nothing and the
+cards stay (Witness the Future's ruling); `target-legal` is "slot `index`'s
+target is still legal as it resolves", a player or an object.
 On a spell with `{X}`, `max: "x"` is "up to X target …" (Pest Infestation) and
 `min: "x", max: "x"` is "X target …" (Curse of the Swine): X is announced
 before the targets (rule 601.2b–c), so a choice is judged at the X cast

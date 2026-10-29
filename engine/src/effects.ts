@@ -2699,8 +2699,12 @@ export type EffectSpec =
        * With `count: "all"` and `destination: "battlefield"` only.
        * `"hand-or-graveyard"`: the controller's hand and graveyard together,
        * one choice over both — Kastral, the Windcrested's "a Bird creature
-       * card from your hand or graveyard". */
-      readonly from?: "all-graveyards" | "hand-or-graveyard";
+       * card from your hand or graveyard". `"each-graveyard"`: every
+       * graveyard, each card under its owner's control — "each player
+       * returns all creature cards … from their graveyard to the
+       * battlefield" (Patriarch's Bidding), all at once. With `count:
+       * "all"` only. */
+      readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard";
       /** …with these types and colours in addition to their own, in place
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black
        * Zombies in addition to their other colors and types". */
@@ -4474,6 +4478,10 @@ export type EffectSpec =
       /** "Shuffle your library" on its own (Ponder's "You may shuffle", inside
        * a `may`): the effect's controller shuffles (rule 701.24). */
       readonly kind: "shuffle-library";
+      /** Whose: a target slot holding a player — "target player shuffles up
+       * to four target cards from their graveyard into their library"
+       * (Witness the Future) — the effect's controller's when absent. */
+      readonly target?: number;
     }
   | {
       /** "You may play an additional land this turn" (Explore) — `amount`
@@ -7112,6 +7120,8 @@ export interface EffectApi {
      * `enterAs`. */
     opts?: {
       readonly allGraveyards?: boolean;
+      /** Each card under its owner's control, not the controller's. */
+      readonly underOwners?: boolean;
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
       /** See the spec's `attachedTo`; `null` for nothing there. */
@@ -7497,9 +7507,9 @@ export interface EffectApi {
   sourceTimesKicked(): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean): void;
-  /** Shuffle the controller's library — see the `shuffle-library`
-   * {@link EffectSpec}. */
-  shuffleLibrary(): void;
+  /** Shuffle the controller's library — or `player`'s — see the
+   * `shuffle-library` {@link EffectSpec}. */
+  shuffleLibrary(player?: PlayerId): void;
   /** The resolving spell's division of a divided amount — see
    * `GameObject.division`. Empty outside one. */
   readonly division: readonly number[];
@@ -10709,7 +10719,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.enterTapped ?? false,
         spec.withCounters,
         {
-          ...(spec.from === "all-graveyards" ? { allGraveyards: true } : {}),
+          ...(spec.from === "all-graveyards" || spec.from === "each-graveyard" ? { allGraveyards: true } : {}),
+          ...(spec.from === "each-graveyard" ? { underOwners: true } : {}),
           ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
           ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
@@ -11492,9 +11503,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "additional-land-drop":
       ctx.additionalLandDrops(spec.amount);
       return;
-    case "shuffle-library":
-      ctx.shuffleLibrary();
+    case "shuffle-library": {
+      if (spec.target === undefined) {
+        ctx.shuffleLibrary();
+        return;
+      }
+      const whose = ctx.targets[spec.target];
+      if (whose?.kind === "player") ctx.shuffleLibrary(whose.player);
       return;
+    }
     case "damage-divided":
       ctx.division.forEach((amount, i) => {
         const target = ctx.targets[spec.from + i];
