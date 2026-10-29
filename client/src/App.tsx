@@ -21,6 +21,7 @@ import {
   anyNumberSlot,
   attackingViolations,
   blockingViolations,
+  concatModeSpecs,
   damageAssignmentViolations,
   describeTargetSpec,
   distinctTargetCount,
@@ -2465,7 +2466,8 @@ function Table({
         label: `Cast ${action.cardName}`,
         // A target count tied to X (Curse of the Swine, Heliod's
         // Intervention's "X target artifacts") is fixed by it.
-        specs: specsAtX(chosen ? chosen.flatMap((m) => m.targetSpecs) : action.targetSpecs, value),
+        // Each mode's slot relations are its own: moved to where its slots sit.
+        specs: specsAtX(chosen ? concatModeSpecs(chosen.map((m) => m.targetSpecs)) : action.targetSpecs, value),
         options: chosen ? chosen.flatMap((m) => m.targetOptions) : action.targetOptions,
         xValue: value,
         ...castExtras(action),
@@ -2539,7 +2541,7 @@ function Table({
       abilityIndex: 0,
       label: `Cast ${cast.cardName}`,
       // No {X} to pay is X of 0 (rule 107.3b), or the one X its targets fix.
-      specs: specsAtX(chosen.flatMap((m) => m.targetSpecs), fixedX ?? 0),
+      specs: specsAtX(concatModeSpecs(chosen.map((m) => m.targetSpecs)), fixedX ?? 0),
       options: chosen.flatMap((m) => m.targetOptions),
       modes,
       ...(fixedX !== undefined ? { xValue: fixedX } : {}),

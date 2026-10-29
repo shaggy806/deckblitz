@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { invalidTargetReason, stateTargetFacts } from "../targeting.js";
-import { concreteTargetSpecs, slotOptions } from "../target.js";
+import { concatModeSpecs, concreteTargetSpecs, slotOptions } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
 import { A, B, C, ref, spawn, table, toGraveyard } from "./harness.js";
@@ -78,5 +78,39 @@ describe("that player controls", () => {
       invalidTargetReason(game.state, game.registry, THAT_PLAYER, chosen, A, "Mutiny");
     expect(why([ref(bobsGiant), ref(bobsBears)])).toBeNull();
     expect(why([ref(bobsGiant), ref(carolsGiant)])).toMatch(/another/);
+  });
+});
+
+describe("a mode's slot relations are its own", () => {
+  it("a second mode's 'other than slot 0' means its own first slot (Amazing Acrobatics, both modes)", () => {
+    const counter: TargetSpec[] = ["spell"];
+    const tap: TargetSpec[] = ["creature", { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 0 } } }];
+    expect(concatModeSpecs([counter, tap])).toEqual([
+      "spell",
+      "creature",
+      { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 1 } } },
+    ]);
+    // A group tied to its mode's player slot moves with it (Quandrix Command's fourth mode).
+    expect(
+      concatModeSpecs([["creature"], ["player", { kind: "any-number", of: { kind: "card-in-graveyard" }, max: 3, sameController: { slot: 0 } }]]),
+    ).toEqual(["creature", "player", { kind: "any-number", of: { kind: "card-in-graveyard" }, max: 3, sameController: { slot: 1 } }]);
+  });
+
+  it("the second mode's two slots must differ, and may share the first mode's target", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    // Two creature-targeting modes back to back: the second's relation is to its own first slot.
+    const why = (targets: TargetRef[]) =>
+      invalidTargetReason(
+        game.state,
+        game.registry,
+        concatModeSpecs([["creature"], ["creature", { kind: "optional", of: { kind: "other", of: "creature", than: { slot: 0 } } }]]),
+        targets,
+        A,
+        "Amazing Acrobatics",
+      );
+    expect(why([ref(giant), ref(bears), ref(bears)])).toMatch(/another/);
+    expect(why([ref(bears), ref(giant), ref(bears)])).toBeNull();
   });
 });

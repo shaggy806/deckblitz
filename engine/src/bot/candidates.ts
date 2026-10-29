@@ -18,7 +18,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { subsetsBetween } from "../decisions/shared/subsets.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
 import { fitModalXGroup, fitTargetCount, maxXForTargets } from "../target-count.js";
-import { anyNumberSlot } from "../target.js";
+import { anyNumberSlot, concatModeSpecs } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
 // Re-exported from its new home: a decision module needs it too, and nothing
@@ -179,14 +179,14 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
         legal,
         picked,
         modes.flatMap((index) => modal.modes[index].targetOptions),
-        modes.flatMap((index) => modal.modes[index].targetSpecs),
+        concatModeSpecs(modes.map((index) => modal.modes[index].targetSpecs)),
       );
       if (fitted === null) continue;
       // A group tied to X in a chosen mode (Heliod's Intervention): its
       // members and X fitted together, at the largest X they allow.
       const x = xValueOf(legal, fitted);
       const withX = fitModalXGroup(
-        modes.flatMap((index) => modal.modes[index].targetSpecs),
+        concatModeSpecs(modes.map((index) => modal.modes[index].targetSpecs)),
         fitted,
         legal.xCost,
         x.xValue,

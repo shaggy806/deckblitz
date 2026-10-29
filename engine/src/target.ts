@@ -640,6 +640,44 @@ export function renumberOtherSlots(spec: TargetSpec, kept: ReadonlyMap<number, n
 }
 
 /**
+ * `spec` with every slot it relates to moved `by` places on — the `than`
+ * slots of an `other` relation and a group's `sameController: { slot }`,
+ * through `optional`, `other` and `any-number` wrappers. A mode's slot
+ * numbers are its own (Amazing Acrobatics' second mode "other than slot 0"
+ * is its own first slot), so each mode's specs are moved by where its
+ * slots begin in the chosen modes' list (`concatModeSpecs`).
+ */
+export function offsetSlotRelations(spec: TargetSpec, by: number): TargetSpec {
+  if (by === 0 || typeof spec !== "object") return spec;
+  if (spec.kind === "optional") return { ...spec, of: offsetSlotRelations(spec.of, by) };
+  if (spec.kind === "any-number") {
+    const same = spec.sameController;
+    return {
+      ...spec,
+      of: offsetSlotRelations(spec.of, by),
+      ...(typeof same === "object" ? { sameController: { slot: same.slot + by } } : {}),
+    };
+  }
+  if (spec.kind !== "other") return spec;
+  const of = offsetSlotRelations(spec.of, by);
+  const than = spec.than;
+  if (than === undefined || typeof than !== "object") return { ...spec, of };
+  return { ...spec, of, than: "slot" in than ? { slot: than.slot + by } : { slots: than.slots.map((s) => s + by) } };
+}
+
+/** The slots of several modes (or a base list then modes) as one list, each
+ * part's slot relations moved to where its slots now sit
+ * ({@link offsetSlotRelations}). */
+export function concatModeSpecs(parts: readonly (readonly TargetSpec[])[]): readonly TargetSpec[] {
+  const out: TargetSpec[] = [];
+  for (const part of parts) {
+    const at = out.length;
+    for (const spec of part) out.push(offsetSlotRelations(spec, at));
+  }
+  return out;
+}
+
+/**
  * Targets as the engine carries them internally, once a dispatched action has
  * been normalized: a **hole** (`undefined`) where an optional slot was
  * skipped. `undefined` rather than `null` on purpose — every effect already

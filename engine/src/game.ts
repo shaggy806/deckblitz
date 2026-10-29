@@ -360,6 +360,7 @@ import type {
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
   anyNumberSlot,
+  concatModeSpecs,
   concreteTargetSpecs,
   differentControllerOf,
   sameControllerOf,
@@ -1054,8 +1055,9 @@ function triggerTargetSpecs(
     }
     return out;
   }
-  const modeSpecs = modes.flatMap((i) => effect.modes[i]?.targets ?? []);
-  return modeSpecs.length === 0 ? ability.targets : [...ability.targets, ...modeSpecs];
+  // Each mode's slot relations are its own: moved to where its slots sit.
+  const modeSpecs = modes.map((i) => effect.modes[i]?.targets ?? []);
+  return modeSpecs.every((m) => m.length === 0) ? ability.targets : concatModeSpecs([ability.targets, ...modeSpecs]);
 }
 
 /** The indices of a trigger's slots the triggering event filled (see
@@ -11575,9 +11577,9 @@ export class Game {
     // right half's.
     if (def.fuse) return this.fusedHalves(def).flatMap((half) => half.targets);
     if (def.castModal === null || modes === undefined) return def.targets;
-    return [...modes]
-      .sort((a, b) => a - b)
-      .flatMap((i) => def.castModal?.modes[i]?.targets ?? []);
+    return concatModeSpecs(
+      [...modes].sort((a, b) => a - b).map((i) => def.castModal?.modes[i]?.targets ?? []),
+    );
   }
 
   /**
@@ -18317,7 +18319,7 @@ export class Game {
       }
     }
     return chosenModes !== undefined
-      ? chosenModes.flatMap((mi) => def.castModal?.modes[mi]?.targets ?? [])
+      ? concatModeSpecs(chosenModes.map((mi) => def.castModal?.modes[mi]?.targets ?? []))
       : specsAtX(
           this.effectiveTargetSpecs(def, undefined, cast.kicked === true, cast.overloaded === true),
           cast.xValue ?? 0,
