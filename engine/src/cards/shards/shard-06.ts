@@ -306,6 +306,7 @@ import _poolGenjuOfTheSpires from "../pool/genju-of-the-spires.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGethsVerdict from "../pool/geths-verdict.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
+import _poolGhastlordOfFugue from "../pool/ghastlord-of-fugue.js";
 import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
 import _poolGhituLavarunner from "../pool/ghitu-lavarunner.js";
 import _poolGhostfireBlade from "../pool/ghostfire-blade.js";
@@ -1142,6 +1143,7 @@ const shard: CardShard = {
     _poolGeometersArthropod,
     _poolGethsVerdict,
     _poolGhaltaTheUnstoppable,
+    _poolGhastlordOfFugue,
     _poolGhiredMirrorOfTheWilds,
     _poolGhituLavarunner,
     _poolGhostfireBlade,

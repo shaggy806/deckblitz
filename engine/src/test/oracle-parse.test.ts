@@ -2730,6 +2730,19 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(face("Creature — Goblin", "This creature can't attack unless attacking player is poisoned.").static ?? []).toEqual([]);
   });
 
+  it("reads a choice from a revealed hand, discarded or exiled", () => {
+    const seer = face(
+      "Creature — Eldrazi",
+      "When this creature enters, target opponent reveals their hand. You choose a nonland card from it and exile that card.",
+    );
+    expect(seer.triggered[0].effect).toEqual({ kind: "discard-chosen", target: 0, filter: { notTypes: ["land"] }, destination: "exile" });
+    const terrors = face("Sorcery", "Target player reveals their hand. You choose a nonland card from it. Exile that card.");
+    expect(terrors.effect).toEqual({ kind: "discard-chosen", target: 0, filter: { notTypes: ["land"] }, destination: "exile" });
+    // "A nonland permanent card" isn't read: the type phrase would drop "permanent".
+    const sentence = face("Sorcery", "Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.");
+    expect(sentence.effect).toBeNull();
+  });
+
   it("reads 'target opponent exiles a card from their hand' as their choice", () => {
     expect(parseSentence("Target opponent exiles two cards from their hand.", ctx())).toEqual({
       kind: "for-each-player",

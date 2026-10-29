@@ -3204,13 +3204,29 @@ export type EffectSpec =
        * hand": nothing is revealed, and only the chooser sees it.
        */
       readonly kind: "discard-chosen";
-      readonly target: number;
+      /** A player target slot, or a player the event names — "**that
+       * player** reveals their hand" (Ghastlord of Fugue's
+       * `"trigger-player"`). */
+      readonly target: number | EffectPlayerRef;
       readonly filter?: CardFilter;
       readonly lookOnly?: true;
       readonly optional?: true;
       /** "Choose **up to X** cards from it" (Discordant Dirge): any number
        * from none to this many, read as it resolves, instead of one. */
       readonly upTo?: EffectAmount;
+      /**
+       * Where the chosen card goes instead of being discarded: `"exile"` —
+       * "you choose a nonland card from it and **exile that card**"
+       * (Thought-Knot Seer), linked to this permanent's stint (rule 607.2a)
+       * unless `unlinked`, for "return the exiled card" (Tidehollow
+       * Sculler); `"library-top"` — "put that card on top of that player's
+       * library" (Painful Memories); `"battlefield"` — "you may put a
+       * creature card from it onto the battlefield **under your control**"
+       * (Treacherous Urge). Not a discard, so nothing that looks for one
+       * sees it.
+       */
+      readonly destination?: "exile" | "library-top" | "battlefield";
+      readonly unlinked?: true;
     }
   | {
       /**
@@ -7326,6 +7342,8 @@ export interface EffectApi {
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
+    /** See the effect's `destination` and `unlinked`. */
+    to?: { readonly destination?: "exile" | "library-top" | "battlefield"; readonly unlinked?: true },
   ): void;
   modifyPt(
     target: TargetRef,
@@ -10999,10 +11017,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "discard-chosen": {
-      const target = ctx.targets[spec.target];
+      const target =
+        typeof spec.target === "number"
+          ? ctx.targets[spec.target]
+          : ((player) => (player === undefined ? undefined : { kind: "player" as const, player }))(
+              effectPlayer(spec.target, ctx),
+            );
       if (target !== undefined) {
         const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
-        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo);
+        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
+          ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
+          ...(spec.unlinked === true ? { unlinked: true } : {}),
+        });
       }
       return;
     }

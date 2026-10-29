@@ -8857,6 +8857,7 @@ import _poolGhaltaStampedeTyrant from "./pool/ghalta-stampede-tyrant.js";
 import _poolGhaltaTheImmovable from "./pool/ghalta-the-immovable.js";
 import _poolGhaltaTheUnstoppable from "./pool/ghalta-the-unstoppable.js";
 import _poolGhastbarkTwins from "./pool/ghastbark-twins.js";
+import _poolGhastlordOfFugue from "./pool/ghastlord-of-fugue.js";
 import _poolGhastlyDeathTyrant from "./pool/ghastly-death-tyrant.js";
 import _poolGhastlyDemise from "./pool/ghastly-demise.js";
 import _poolGhastlyDiscovery from "./pool/ghastly-discovery.js";
@@ -16105,6 +16106,7 @@ import _poolPainSuffering from "./pool/pain-suffering.js";
 import _poolPain from "./pool/pain.js";
 import _poolPainbringer from "./pool/painbringer.js";
 import _poolPainfulLesson from "./pool/painful-lesson.js";
+import _poolPainfulMemories from "./pool/painful-memories.js";
 import _poolPainfulQuandary from "./pool/painful-quandary.js";
 import _poolPainfulTruths from "./pool/painful-truths.js";
 import _poolPainsmith from "./pool/painsmith.js";
@@ -23284,6 +23286,7 @@ import _poolThoughtEater from "./pool/thought-eater.js";
 import _poolThoughtErasure from "./pool/thought-erasure.js";
 import _poolThoughtGorger from "./pool/thought-gorger.js";
 import _poolThoughtHarvester from "./pool/thought-harvester.js";
+import _poolThoughtKnotSeer from "./pool/thought-knot-seer.js";
 import _poolThoughtMonitor from "./pool/thought-monitor.js";
 import _poolThoughtNibbler from "./pool/thought-nibbler.js";
 import _poolThoughtReflection from "./pool/thought-reflection.js";
@@ -23504,6 +23507,7 @@ import _poolTidebinderMage from "./pool/tidebinder-mage.js";
 import _poolTidecallerMentor from "./pool/tidecaller-mentor.js";
 import _poolTidechannelPathway from "./pool/tidechannel-pathway.js";
 import _poolTideforceElemental from "./pool/tideforce-elemental.js";
+import _poolTidehollowSculler from "./pool/tidehollow-sculler.js";
 import _poolTidehollowStrix from "./pool/tidehollow-strix.js";
 import _poolTidepoolTurtle from "./pool/tidepool-turtle.js";
 import _poolTideshaperMystic from "./pool/tideshaper-mystic.js";
@@ -36062,6 +36066,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhaltaTheImmovable,
   _poolGhaltaTheUnstoppable,
   _poolGhastbarkTwins,
+  _poolGhastlordOfFugue,
   _poolGhastlyDeathTyrant,
   _poolGhastlyDemise,
   _poolGhastlyDiscovery,
@@ -43310,6 +43315,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPain,
   _poolPainbringer,
   _poolPainfulLesson,
+  _poolPainfulMemories,
   _poolPainfulQuandary,
   _poolPainfulTruths,
   _poolPainsmith,
@@ -50489,6 +50495,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThoughtErasure,
   _poolThoughtGorger,
   _poolThoughtHarvester,
+  _poolThoughtKnotSeer,
   _poolThoughtMonitor,
   _poolThoughtNibbler,
   _poolThoughtReflection,
@@ -50709,6 +50716,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTidecallerMentor,
   _poolTidechannelPathway,
   _poolTideforceElemental,
+  _poolTidehollowSculler,
   _poolTidehollowStrix,
   _poolTidepoolTurtle,
   _poolTideshaperMystic,
@@ -63280,6 +63288,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghalta-the-immovable": _poolGhaltaTheImmovable,
   "pool/ghalta-the-unstoppable": _poolGhaltaTheUnstoppable,
   "pool/ghastbark-twins": _poolGhastbarkTwins,
+  "pool/ghastlord-of-fugue": _poolGhastlordOfFugue,
   "pool/ghastly-death-tyrant": _poolGhastlyDeathTyrant,
   "pool/ghastly-demise": _poolGhastlyDemise,
   "pool/ghastly-discovery": _poolGhastlyDiscovery,
@@ -70528,6 +70537,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pain": _poolPain,
   "pool/painbringer": _poolPainbringer,
   "pool/painful-lesson": _poolPainfulLesson,
+  "pool/painful-memories": _poolPainfulMemories,
   "pool/painful-quandary": _poolPainfulQuandary,
   "pool/painful-truths": _poolPainfulTruths,
   "pool/painsmith": _poolPainsmith,
@@ -77707,6 +77717,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thought-erasure": _poolThoughtErasure,
   "pool/thought-gorger": _poolThoughtGorger,
   "pool/thought-harvester": _poolThoughtHarvester,
+  "pool/thought-knot-seer": _poolThoughtKnotSeer,
   "pool/thought-monitor": _poolThoughtMonitor,
   "pool/thought-nibbler": _poolThoughtNibbler,
   "pool/thought-reflection": _poolThoughtReflection,
@@ -77927,6 +77938,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tidecaller-mentor": _poolTidecallerMentor,
   "pool/tidechannel-pathway": _poolTidechannelPathway,
   "pool/tideforce-elemental": _poolTideforceElemental,
+  "pool/tidehollow-sculler": _poolTidehollowSculler,
   "pool/tidehollow-strix": _poolTidehollowStrix,
   "pool/tidepool-turtle": _poolTidepoolTurtle,
   "pool/tideshaper-mystic": _poolTideshaperMystic,

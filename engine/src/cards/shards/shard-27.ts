@@ -468,6 +468,7 @@ import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
+import _poolPainfulMemories from "../pool/painful-memories.js";
 import _poolParallelEvolution from "../pool/parallel-evolution.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartWater from "../pool/part-water.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolOriginOfTheHulk,
     _poolOstiaryThrull,
     _poolOverlordOfTheBoilerbilges,
+    _poolPainfulMemories,
     _poolParallelEvolution,
     _poolParch,
     _poolPartWater,

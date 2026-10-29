@@ -745,6 +745,7 @@ import _poolThrivingTurtle from "../pool/thriving-turtle.js";
 import _poolThunderousDebut from "../pool/thunderous-debut.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
 import _poolTidalWave from "../pool/tidal-wave.js";
+import _poolTidehollowSculler from "../pool/tidehollow-sculler.js";
 import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTilonallisKnight from "../pool/tilonallis-knight.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
@@ -1608,6 +1609,7 @@ const shard: CardShard = {
     _poolThunderousDebut,
     _poolTiamatsFanatics,
     _poolTidalWave,
+    _poolTidehollowSculler,
     _poolTidusBlitzballStar,
     _poolTilonallisKnight,
     _poolTimberlandRuins,

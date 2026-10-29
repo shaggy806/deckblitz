@@ -24353,8 +24353,18 @@ export class Game {
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber) =>
         this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
-      discardChosen: (target, filter, lookOnly, optional, upTo) =>
-        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo),
+      discardChosen: (target, filter, lookOnly, optional, upTo, to) => {
+        // "Exile that card": linked to the permanent, in the stint this
+        // ability refers to (rule 607.2a), as `lookAndChoose`'s exile is.
+        const sourceObject = this.state.objects[source];
+        const stint =
+          refs.source ?? (sourceObject?.zone === "battlefield" ? (sourceObject.zoneChangeCount ?? 0) : undefined);
+        const exileLink =
+          to?.destination === "exile" && stint !== undefined && to.unlinked !== true
+            ? { source, zoneChangeCount: stint }
+            : undefined;
+        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional, upTo, to?.destination, exileLink);
+      },
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
       switchPt: (what, duration) =>
@@ -26183,6 +26193,8 @@ export class Game {
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
+    destination?: "exile" | "library-top" | "battlefield",
+    exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number },
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -26208,7 +26220,10 @@ export class Game {
       eligible,
       min: optional || upTo !== undefined || eligible.length === 0 ? 0 : 1,
       max: Math.min(max, eligible.length),
-      destination: "discard",
+      destination: destination ?? "discard",
+      // "Onto the battlefield under your control" (Treacherous Urge).
+      ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
+      ...(exileLink !== undefined ? { exileLink } : {}),
       leftover: "stay",
     };
   }

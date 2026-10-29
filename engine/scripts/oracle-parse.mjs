@@ -2196,6 +2196,13 @@ export function parseEffect(text, outer) {
       skip = searched.used - 1;
       continue;
     }
+    const fromHand = revealedHandChoiceAt(sentences, i, ctx);
+    if (fromHand !== null) {
+      parsed.push(fromHand.effect);
+      hints.push({ sentence, effect: fromHand.effect });
+      skip = fromHand.used - 1;
+      continue;
+    }
     // The Urza's Destiny Scents: "Reveal any number of green cards in your
     // hand." — a `look-and-choose` over the hand that moves nothing — and
     // the next sentence's "… for each card revealed this way" scaled by
@@ -2457,6 +2464,37 @@ function searchOthersAt(sentences, i, ctx) {
 
 /** A one-unit effect done "for each" of `amount` instead — parley's create a
  * token, put a counter, +1/+1 to all, add a mana, gain a life — or null. */
+/** "Target opponent reveals their hand. You choose a nonland card from it
+ * [and exile that card]. [That player discards that card. | Exile that
+ * card.]" — Duress, Thought-Knot Seer: a `discard-chosen`, its card filter
+ * read from the type phrase, and a `destination` when the card is exiled.
+ * Two or three sentences, one effect; `null` when they aren't that. */
+function revealedHandChoiceAt(sentences, i, ctx) {
+  const who = /^(target opponent|target player) reveals their hand\.$/i.exec(sentences[i]);
+  const choose = /^you choose an? (?:(.+?) )?card from it( and exile that card)?\.$/i.exec(sentences[i + 1] ?? "");
+  // "A nonland permanent card" names every permanent type, which the type
+  // phrase reader would drop.
+  if (who === null || choose === null || /\bpermanent\b/i.test(choose[1] ?? "")) return null;
+  const filter = choose[1] === undefined ? {} : parseTypePhrase(choose[1]);
+  if (filter === null) return null;
+  let exile = choose[2] !== undefined;
+  let used = 2;
+  if (!exile) {
+    const then = /^(that player discards that card|exile that card|that player exiles that card)\.$/i.exec(sentences[i + 2] ?? "");
+    if (then === null) return null;
+    exile = !/discards/i.test(then[1]);
+    used = 3;
+  }
+  const target = ctx.target(who[1].toLowerCase() === "target opponent" ? "opponent" : "player");
+  const effect = {
+    kind: "discard-chosen",
+    target,
+    ...(Object.keys(filter).length > 0 ? { filter } : {}),
+    ...(exile ? { destination: "exile" } : {}),
+  };
+  return { effect, used };
+}
+
 function scaledBy(effect, amount) {
   if (effect.kind === "create-token" && effect.count === 1) return { ...effect, count: amount };
   if ((effect.kind === "add-counter" || effect.kind === "add-mana" || effect.kind === "gain-life") && effect.amount === 1) {
