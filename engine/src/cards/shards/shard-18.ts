@@ -200,6 +200,7 @@ import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
+import _poolEmptyTheLaboratory from "../pool/empty-the-laboratory.js";
 import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
 import _poolEnigmaSphinx from "../pool/enigma-sphinx.js";
 import _poolEnragedRevolutionary from "../pool/enraged-revolutionary.js";
@@ -525,6 +526,7 @@ import _poolProtocolKnight from "../pool/protocol-knight.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
+import _poolQuarryColossus from "../pool/quarry-colossus.js";
 import _poolQuirionDryad from "../pool/quirion-dryad.js";
 import _poolQuirionSentinel from "../pool/quirion-sentinel.js";
 import _poolRabidBloodsucker from "../pool/rabid-bloodsucker.js";
@@ -1044,6 +1046,7 @@ const shard: CardShard = {
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
     _poolEmberwildeCaliph,
+    _poolEmptyTheLaboratory,
     _poolEndlessCockroaches,
     _poolEnigmaSphinx,
     _poolEnragedRevolutionary,
@@ -1369,6 +1372,7 @@ const shard: CardShard = {
     _poolPsychosisCrawler,
     _poolPutrefy,
     _poolQuandrixPledgemage,
+    _poolQuarryColossus,
     _poolQuirionDryad,
     _poolQuirionSentinel,
     _poolRabidBloodsucker,

@@ -198,6 +198,7 @@ import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDevourInShadow from "../pool/devour-in-shadow.js";
 import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
+import _poolDinOfTheFireherd from "../pool/din-of-the-fireherd.js";
 import _poolDiningRoom from "../pool/dining-room.js";
 import _poolDireFleetInterloper from "../pool/dire-fleet-interloper.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
@@ -303,6 +304,7 @@ import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGloom from "../pool/gloom.js";
+import _poolGnostroVoiceOfTheCrags from "../pool/gnostro-voice-of-the-crags.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
 import _poolGoblinArchaeologist from "../pool/goblin-archaeologist.js";
 import _poolGoblinChieftain from "../pool/goblin-chieftain.js";
@@ -352,6 +354,7 @@ import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
 import _poolHoardSmelterDragon from "../pool/hoard-smelter-dragon.js";
 import _poolHobgoblinMantledMarauder from "../pool/hobgoblin-mantled-marauder.js";
+import _poolHoldForQuestioning from "../pool/hold-for-questioning.js";
 import _poolHonoredHeirloom from "../pool/honored-heirloom.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
 import _poolHootingMandrills from "../pool/hooting-mandrills.js";
@@ -1055,6 +1058,7 @@ const shard: CardShard = {
     _poolDevourInShadow,
     _poolDevouringTendrils,
     _poolDimirGuildmage,
+    _poolDinOfTheFireherd,
     _poolDiningRoom,
     _poolDireFleetInterloper,
     _poolDiscipleOfGrace,
@@ -1160,6 +1164,7 @@ const shard: CardShard = {
     _poolGlacialGrasp,
     _poolGlacialPlating,
     _poolGloom,
+    _poolGnostroVoiceOfTheCrags,
     _poolGoShintaiOfLifesOrigin,
     _poolGoblinArchaeologist,
     _poolGoblinChieftain,
@@ -1209,6 +1214,7 @@ const shard: CardShard = {
     _poolHoardRobber,
     _poolHoardSmelterDragon,
     _poolHobgoblinMantledMarauder,
+    _poolHoldForQuestioning,
     _poolHonoredHeirloom,
     _poolHookHauntDrifter,
     _poolHootingMandrills,

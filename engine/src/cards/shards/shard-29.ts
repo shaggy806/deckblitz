@@ -197,6 +197,7 @@ import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvenRite from "../pool/elven-rite.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEmbermageGoblin from "../pool/embermage-goblin.js";
+import _poolEncrust from "../pool/encrust.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolEnigmaDrake from "../pool/enigma-drake.js";
@@ -351,6 +352,7 @@ import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInnerChamberGuard from "../pool/inner-chamber-guard.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInstillInfection from "../pool/instill-infection.js";
+import _poolInterdict from "../pool/interdict.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolIntoTheStory from "../pool/into-the-story.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
@@ -545,6 +547,7 @@ import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakdosFirewheeler from "../pool/rakdos-firewheeler.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
 import _poolRakshasasSecret from "../pool/rakshasas-secret.js";
+import _poolRansomNote from "../pool/ransom-note.js";
 import _poolRattlechains from "../pool/rattlechains.js";
 import _poolRavenousBloodseeker from "../pool/ravenous-bloodseeker.js";
 import _poolReconnaissance from "../pool/reconnaissance.js";
@@ -562,6 +565,7 @@ import _poolResilientKhenra from "../pool/resilient-khenra.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolResuscitate from "../pool/resuscitate.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
+import _poolRetributionOfTheAncients from "../pool/retribution-of-the-ancients.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRhysticTutor from "../pool/rhystic-tutor.js";
@@ -1045,6 +1049,7 @@ const shard: CardShard = {
     _poolElvenRite,
     _poolElvishPromenade,
     _poolEmbermageGoblin,
+    _poolEncrust,
     _poolEndriderSpikespitter,
     _poolEnduringInnocence,
     _poolEnigmaDrake,
@@ -1199,6 +1204,7 @@ const shard: CardShard = {
     _poolInnerChamberGuard,
     _poolInspiredFire,
     _poolInstillInfection,
+    _poolInterdict,
     _poolInterdisciplinaryMascot,
     _poolIntoTheStory,
     _poolInundatedArchive,
@@ -1393,6 +1399,7 @@ const shard: CardShard = {
     _poolRakdosFirewheeler,
     _poolRakishHeir,
     _poolRakshasasSecret,
+    _poolRansomNote,
     _poolRattlechains,
     _poolRavenousBloodseeker,
     _poolReconnaissance,
@@ -1410,6 +1417,7 @@ const shard: CardShard = {
     _poolRestlessVinestalk,
     _poolResuscitate,
     _poolRetchedWretch,
+    _poolRetributionOfTheAncients,
     _poolRevealingEye,
     _poolRevivingMelody,
     _poolRhysticTutor,

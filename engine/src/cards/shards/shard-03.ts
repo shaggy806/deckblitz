@@ -263,6 +263,7 @@ import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
 import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
+import _poolGoblinCratermaker from "../pool/goblin-cratermaker.js";
 import _poolGoblinFlectomancer from "../pool/goblin-flectomancer.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
@@ -634,6 +635,7 @@ import _poolSupplyDemand from "../pool/supply-demand.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
+import _poolSurvivorsMedKit from "../pool/survivors-med-kit.js";
 import _poolSuspend from "../pool/suspend.js";
 import _poolSuspendedSentence from "../pool/suspended-sentence.js";
 import _poolSwellOfCourage from "../pool/swell-of-courage.js";
@@ -690,6 +692,7 @@ import _poolUnderworldCoinsmith from "../pool/underworld-coinsmith.js";
 import _poolUntaidakeTheCloudKeeper from "../pool/untaidake-the-cloud-keeper.js";
 import _poolUpdraft from "../pool/updraft.js";
 import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
+import _poolUrborgJustice from "../pool/urborg-justice.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
@@ -1029,6 +1032,7 @@ const shard: CardShard = {
     _poolGoShintaiOfBoundlessVigor,
     _poolGoblinBushwhacker,
     _poolGoblinCannon,
+    _poolGoblinCratermaker,
     _poolGoblinFlectomancer,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
@@ -1400,6 +1404,7 @@ const shard: CardShard = {
     _poolSupplyLineCranes,
     _poolSurgingDementia,
     _poolSurveillanceRoom,
+    _poolSurvivorsMedKit,
     _poolSuspend,
     _poolSuspendedSentence,
     _poolSwellOfCourage,
@@ -1456,6 +1461,7 @@ const shard: CardShard = {
     _poolUntaidakeTheCloudKeeper,
     _poolUpdraft,
     _poolUrbanDaggertooth,
+    _poolUrborgJustice,
     _poolUtopiaTree,
     _poolValakutStoneforge,
     _poolVariableChaser,

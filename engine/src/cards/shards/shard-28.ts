@@ -251,6 +251,7 @@ import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFlayedNim from "../pool/flayed-nim.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlinthoofBoar from "../pool/flinthoof-boar.js";
+import _poolFlitterwingNuisance from "../pool/flitterwing-nuisance.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFlurryOfHorns from "../pool/flurry-of-horns.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
@@ -506,6 +507,7 @@ import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
+import _poolPhyrexianObliterator from "../pool/phyrexian-obliterator.js";
 import _poolPhyrexianReaper from "../pool/phyrexian-reaper.js";
 import _poolPhyrexianTyranny from "../pool/phyrexian-tyranny.js";
 import _poolPhyrexianWarhorse from "../pool/phyrexian-warhorse.js";
@@ -1121,6 +1123,7 @@ const shard: CardShard = {
     _poolFlayedNim,
     _poolFleshpulperGiant,
     _poolFlinthoofBoar,
+    _poolFlitterwingNuisance,
     _poolFlubsTheFool,
     _poolFlurryOfHorns,
     _poolFollowTheLumarets,
@@ -1376,6 +1379,7 @@ const shard: CardShard = {
     _poolPeterParker,
     _poolPhantomTrain,
     _poolPhyrexianMetamorph,
+    _poolPhyrexianObliterator,
     _poolPhyrexianReaper,
     _poolPhyrexianTyranny,
     _poolPhyrexianWarhorse,

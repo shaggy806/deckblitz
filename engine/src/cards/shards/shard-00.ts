@@ -117,6 +117,7 @@ import _poolCallTheMountainChocobo from "../pool/call-the-mountain-chocobo.js";
 import _poolCallousBloodmage from "../pool/callous-bloodmage.js";
 import _poolCantivore from "../pool/cantivore.js";
 import _poolCaparoctiSunborn from "../pool/caparocti-sunborn.js";
+import _poolCapitalPunishment from "../pool/capital-punishment.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
@@ -756,6 +757,7 @@ import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranspose from "../pool/transpose.js";
+import _poolTrappedInTheTower from "../pool/trapped-in-the-tower.js";
 import _poolTraprootKami from "../pool/traproot-kami.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTrialOfSolidarity from "../pool/trial-of-solidarity.js";
@@ -978,6 +980,7 @@ const shard: CardShard = {
     _poolCallousBloodmage,
     _poolCantivore,
     _poolCaparoctiSunborn,
+    _poolCapitalPunishment,
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
     _poolCartoucheOfSolidarity,
@@ -1617,6 +1620,7 @@ const shard: CardShard = {
     _poolTrackDown,
     _poolTraitorsRoar,
     _poolTranspose,
+    _poolTrappedInTheTower,
     _poolTraprootKami,
     _poolTrenoDarkCity,
     _poolTrialOfSolidarity,

@@ -374,6 +374,7 @@ import _poolInflame from "../pool/inflame.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
 import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
+import _poolIronSpiderStarkUpgrade from "../pool/iron-spider-stark-upgrade.js";
 import _poolIronTuskElephant from "../pool/iron-tusk-elephant.js";
 import _poolIronWill from "../pool/iron-will.js";
 import _poolIronfistCrusher from "../pool/ironfist-crusher.js";
@@ -574,6 +575,7 @@ import _poolRavenWings from "../pool/raven-wings.js";
 import _poolRavenousGigamole from "../pool/ravenous-gigamole.js";
 import _poolRavos from "../pool/ravos.js";
 import _poolReadTheBones from "../pool/read-the-bones.js";
+import _poolRealmbreakersGrasp from "../pool/realmbreakers-grasp.js";
 import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
 import _poolReasonBelieve from "../pool/reason-believe.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
@@ -659,6 +661,7 @@ import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
 import _poolSophicCentaur from "../pool/sophic-centaur.js";
 import _poolSoulBarrier from "../pool/soul-barrier.js";
+import _poolSoulDiviner from "../pool/soul-diviner.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
 import _poolSoulTransfer from "../pool/soul-transfer.js";
 import _poolSoulbladeDjinn from "../pool/soulblade-djinn.js";
@@ -1234,6 +1237,7 @@ const shard: CardShard = {
     _poolInjectorCrocodile,
     _poolInvertedIceberg,
     _poolIronManFuturistParagon,
+    _poolIronSpiderStarkUpgrade,
     _poolIronTuskElephant,
     _poolIronWill,
     _poolIronfistCrusher,
@@ -1434,6 +1438,7 @@ const shard: CardShard = {
     _poolRavenousGigamole,
     _poolRavos,
     _poolReadTheBones,
+    _poolRealmbreakersGrasp,
     _poolReaperFromTheAbyss,
     _poolReasonBelieve,
     _poolRecruiterOfTheGuard,
@@ -1519,6 +1524,7 @@ const shard: CardShard = {
     _poolSonicTheHedgehog,
     _poolSophicCentaur,
     _poolSoulBarrier,
+    _poolSoulDiviner,
     _poolSoulOfTheHarvest,
     _poolSoulTransfer,
     _poolSoulbladeDjinn,

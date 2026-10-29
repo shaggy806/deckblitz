@@ -82,6 +82,7 @@ import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBrawl from "../pool/brawl.js";
 import _poolBreakOfDay from "../pool/break-of-day.js";
+import _poolBreyasApprentice from "../pool/breyas-apprentice.js";
 import _poolBrilliantSpectrum from "../pool/brilliant-spectrum.js";
 import _poolBringerOfTheWhiteDawn from "../pool/bringer-of-the-white-dawn.js";
 import _poolBrinkOfDisaster from "../pool/brink-of-disaster.js";
@@ -584,6 +585,7 @@ import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRidersOfRohan from "../pool/riders-of-rohan.js";
+import _poolRiftElemental from "../pool/rift-elemental.js";
 import _poolRighteousFury from "../pool/righteous-fury.js";
 import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRingskipper from "../pool/ringskipper.js";
@@ -686,6 +688,7 @@ import _poolStratozeppelid from "../pool/stratozeppelid.js";
 import _poolStrengthFromTheFallen from "../pool/strength-from-the-fallen.js";
 import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolStromgaldCabal from "../pool/stromgald-cabal.js";
+import _poolStuckInSummonersSanctum from "../pool/stuck-in-summoners-sanctum.js";
 import _poolSubiraTulzidiCaravanner from "../pool/subira-tulzidi-caravanner.js";
 import _poolSubtlety from "../pool/subtlety.js";
 import _poolSubversion from "../pool/subversion.js";
@@ -955,6 +958,7 @@ const shard: CardShard = {
     _poolBountyAgent,
     _poolBrawl,
     _poolBreakOfDay,
+    _poolBreyasApprentice,
     _poolBrilliantSpectrum,
     _poolBringerOfTheWhiteDawn,
     _poolBrinkOfDisaster,
@@ -1457,6 +1461,7 @@ const shard: CardShard = {
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
     _poolRidersOfRohan,
+    _poolRiftElemental,
     _poolRighteousFury,
     _poolRingsOfBrighthearth,
     _poolRingskipper,
@@ -1559,6 +1564,7 @@ const shard: CardShard = {
     _poolStrengthFromTheFallen,
     _poolStrikingPalette,
     _poolStromgaldCabal,
+    _poolStuckInSummonersSanctum,
     _poolSubiraTulzidiCaravanner,
     _poolSubtlety,
     _poolSubversion,

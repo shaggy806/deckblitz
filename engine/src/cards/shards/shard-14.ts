@@ -22,6 +22,7 @@ import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
+import _poolArachnusWeb from "../pool/arachnus-web.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborColossus from "../pool/arbor-colossus.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
@@ -187,6 +188,7 @@ import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
 import _poolDireFleetNeckbreaker from "../pool/dire-fleet-neckbreaker.js";
 import _poolDiscipleOfGriselbrand from "../pool/disciple-of-griselbrand.js";
+import _poolDiscipleOfTheRing from "../pool/disciple-of-the-ring.js";
 import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
@@ -538,6 +540,7 @@ import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPenumbraSpider from "../pool/penumbra-spider.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
+import _poolPetrify from "../pool/petrify.js";
 import _poolPhantomGeneral from "../pool/phantom-general.js";
 import _poolPhantomNantuko from "../pool/phantom-nantuko.js";
 import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
@@ -707,6 +710,7 @@ import _poolSummoningStation from "../pool/summoning-station.js";
 import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSunstone from "../pool/sunstone.js";
 import _poolSupply from "../pool/supply.js";
+import _poolSuppressionBonds from "../pool/suppression-bonds.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSurrealMemoir from "../pool/surreal-memoir.js";
@@ -869,6 +873,7 @@ const shard: CardShard = {
     _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
+    _poolArachnusWeb,
     _poolArbiterOfWoe,
     _poolArborColossus,
     _poolArborealGrazer,
@@ -1034,6 +1039,7 @@ const shard: CardShard = {
     _poolDiplomaticRelations,
     _poolDireFleetNeckbreaker,
     _poolDiscipleOfGriselbrand,
+    _poolDiscipleOfTheRing,
     _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
@@ -1385,6 +1391,7 @@ const shard: CardShard = {
     _poolPegasusGuardian,
     _poolPenumbraSpider,
     _poolPerilousShadow,
+    _poolPetrify,
     _poolPhantomGeneral,
     _poolPhantomNantuko,
     _poolPhyrexianSwarmlord,
@@ -1554,6 +1561,7 @@ const shard: CardShard = {
     _poolSunsetSaboteur,
     _poolSunstone,
     _poolSupply,
+    _poolSuppressionBonds,
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
     _poolSurrealMemoir,

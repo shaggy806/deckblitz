@@ -73,6 +73,7 @@ import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
 import _poolAzraBladeseeker from "../pool/azra-bladeseeker.js";
 import _poolBagelAndSchmear from "../pool/bagel-and-schmear.js";
 import _poolBalduvianAtrocity from "../pool/balduvian-atrocity.js";
+import _poolBanquetGuests from "../pool/banquet-guests.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
@@ -464,6 +465,7 @@ import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMoriokReplica from "../pool/moriok-replica.js";
 import _poolMoriokRigger from "../pool/moriok-rigger.js";
+import _poolMortarionDaemonPrimarch from "../pool/mortarion-daemon-primarch.js";
 import _poolMortipede from "../pool/mortipede.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
 import _poolMurder from "../pool/murder.js";
@@ -507,6 +509,7 @@ import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
 import _poolOrderOfTheStars from "../pool/order-of-the-stars.js";
 import _poolOriginOfTheHiddenOnes from "../pool/origin-of-the-hidden-ones.js";
 import _poolOvergrownArch from "../pool/overgrown-arch.js";
+import _poolOverseerOfVault76 from "../pool/overseer-of-vault-76.js";
 import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
@@ -526,6 +529,7 @@ import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPilloryOfTheSleepless from "../pool/pillory-of-the-sleepless.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPlanarAtlas from "../pool/planar-atlas.js";
+import _poolPlanarDisruption from "../pool/planar-disruption.js";
 import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
 import _poolPorcuparrot from "../pool/porcuparrot.js";
 import _poolPortTown from "../pool/port-town.js";
@@ -767,6 +771,7 @@ import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiEfreet from "../pool/uktabi-efreet.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
+import _poolUlashtTheHateSeed from "../pool/ulasht-the-hate-seed.js";
 import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
 import _poolUndercityEliminator from "../pool/undercity-eliminator.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
@@ -925,6 +930,7 @@ const shard: CardShard = {
     _poolAzraBladeseeker,
     _poolBagelAndSchmear,
     _poolBalduvianAtrocity,
+    _poolBanquetGuests,
     _poolBaralAndKariZev,
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
@@ -1316,6 +1322,7 @@ const shard: CardShard = {
     _poolMorbiusTheLivingVampire,
     _poolMoriokReplica,
     _poolMoriokRigger,
+    _poolMortarionDaemonPrimarch,
     _poolMortipede,
     _poolMossfireValley,
     _poolMurder,
@@ -1359,6 +1366,7 @@ const shard: CardShard = {
     _poolOrderOfTheStars,
     _poolOriginOfTheHiddenOnes,
     _poolOvergrownArch,
+    _poolOverseerOfVault76,
     _poolOverwhelmingVictory,
     _poolPacksBetrayal,
     _poolPanicSpellbomb,
@@ -1378,6 +1386,7 @@ const shard: CardShard = {
     _poolPilloryOfTheSleepless,
     _poolPixieQueen,
     _poolPlanarAtlas,
+    _poolPlanarDisruption,
     _poolPonybackBrigade,
     _poolPorcuparrot,
     _poolPortTown,
@@ -1619,6 +1628,7 @@ const shard: CardShard = {
     _poolTwistedFates,
     _poolUktabiEfreet,
     _poolUktabiOrangutan,
+    _poolUlashtTheHateSeed,
     _poolUltimeciaTemporalThreat,
     _poolUndercityEliminator,
     _poolUnderworldConnections,

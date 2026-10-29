@@ -423,6 +423,7 @@ import _poolLushGrowth from "../pool/lush-growth.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
+import _poolMarathWillOfTheWild from "../pool/marath-will-of-the-wild.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMaro from "../pool/maro.js";
 import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
@@ -613,6 +614,7 @@ import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
+import _poolSecureDetention from "../pool/secure-detention.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSeedTheLand from "../pool/seed-the-land.js";
 import _poolSejiriShelter from "../pool/sejiri-shelter.js";
@@ -1259,6 +1261,7 @@ const shard: CardShard = {
     _poolLysAlanaInformant,
     _poolManaTithe,
     _poolManifestDread,
+    _poolMarathWillOfTheWild,
     _poolMarbleDiamond,
     _poolMaro,
     _poolMarshdrinkerGiant,
@@ -1449,6 +1452,7 @@ const shard: CardShard = {
     _poolSeaGateWreckage,
     _poolSeascapeAerialist,
     _poolSeasonOfGrowth,
+    _poolSecureDetention,
     _poolSedgeScorpion,
     _poolSeedTheLand,
     _poolSejiriShelter,

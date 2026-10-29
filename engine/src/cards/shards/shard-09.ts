@@ -91,6 +91,7 @@ import _poolBorderlandExplorer from "../pool/borderland-explorer.js";
 import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBorrowedGrace from "../pool/borrowed-grace.js";
 import _poolBoulderSalvo from "../pool/boulder-salvo.js";
+import _poolBowOfNylea from "../pool/bow-of-nylea.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
@@ -606,6 +607,7 @@ import _poolRushwoodGrove from "../pool/rushwood-grove.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
+import _poolSageOfFables from "../pool/sage-of-fables.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
 import _poolSakuraTribeSpringcaller from "../pool/sakura-tribe-springcaller.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
@@ -719,6 +721,7 @@ import _poolSummonersBane from "../pool/summoners-bane.js";
 import _poolSunCrownedHunters from "../pool/sun-crowned-hunters.js";
 import _poolSunlitHoplite from "../pool/sunlit-hoplite.js";
 import _poolSunspearShikari from "../pool/sunspear-shikari.js";
+import _poolSunstarChaplain from "../pool/sunstar-chaplain.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
 import _poolSwerve from "../pool/swerve.js";
@@ -968,6 +971,7 @@ const shard: CardShard = {
     _poolBorosSwiftblade,
     _poolBorrowedGrace,
     _poolBoulderSalvo,
+    _poolBowOfNylea,
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
@@ -1483,6 +1487,7 @@ const shard: CardShard = {
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,
     _poolSacredPeaks,
+    _poolSageOfFables,
     _poolSakashimaTheImpostor,
     _poolSakuraTribeSpringcaller,
     _poolSamutHazoretsChampion,
@@ -1596,6 +1601,7 @@ const shard: CardShard = {
     _poolSunCrownedHunters,
     _poolSunlitHoplite,
     _poolSunspearShikari,
+    _poolSunstarChaplain,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
     _poolSwerve,

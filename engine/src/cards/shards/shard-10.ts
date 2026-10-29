@@ -281,6 +281,7 @@ import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGeistSnatch from "../pool/geist-snatch.js";
+import _poolGelidShackles from "../pool/gelid-shackles.js";
 import _poolGempalmAvenger from "../pool/gempalm-avenger.js";
 import _poolGemrazer from "../pool/gemrazer.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
     _poolGeistSnatch,
+    _poolGelidShackles,
     _poolGempalmAvenger,
     _poolGemrazer,
     _poolGenerousStray,

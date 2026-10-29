@@ -515,6 +515,7 @@ import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOcularHalo from "../pool/ocular-halo.js";
 import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOliviasMidnightAmbush from "../pool/olivias-midnight-ambush.js";
+import _poolOneThousandLashes from "../pool/one-thousand-lashes.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOrcishOriflamme from "../pool/orcish-oriflamme.js";
@@ -1349,6 +1350,7 @@ const shard: CardShard = {
     _poolOcularHalo,
     _poolOkoShadowmoorScion,
     _poolOliviasMidnightAmbush,
+    _poolOneThousandLashes,
     _poolOperaLoveSong,
     _poolOraclesGift,
     _poolOrcishOriflamme,

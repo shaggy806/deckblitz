@@ -125,6 +125,7 @@ import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChillbringer from "../pool/chillbringer.js";
+import _poolChiseiHeartOfOceans from "../pool/chisei-heart-of-oceans.js";
 import _poolChromeSteed from "../pool/chrome-steed.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
@@ -176,6 +177,7 @@ import _poolDeception from "../pool/deception.js";
 import _poolDeflectingPalm from "../pool/deflecting-palm.js";
 import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
 import _poolDehydration from "../pool/dehydration.js";
+import _poolDemotion from "../pool/demotion.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
@@ -353,6 +355,7 @@ import _poolHuntedDragon from "../pool/hunted-dragon.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
 import _poolHurlyBurly from "../pool/hurly-burly.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
+import _poolIceCage from "../pool/ice-cage.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
@@ -365,12 +368,14 @@ import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInnerSanctum from "../pool/inner-sanctum.js";
+import _poolInsidiousFungus from "../pool/insidious-fungus.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolInstigatorGang from "../pool/instigator-gang.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
 import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
 import _poolInvasionOfTheros from "../pool/invasion-of-theros.js";
+import _poolIonStorm from "../pool/ion-storm.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolIriniSengir from "../pool/irini-sengir.js";
 import _poolIronsoulEnforcer from "../pool/ironsoul-enforcer.js";
@@ -552,6 +557,7 @@ import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPressForAnswers from "../pool/press-for-answers.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
+import _poolPrisonTerm from "../pool/prison-term.js";
 import _poolProfanePrayers from "../pool/profane-prayers.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
@@ -997,6 +1003,7 @@ const shard: CardShard = {
     _poolCharmedStray,
     _poolChelonianTackle,
     _poolChillbringer,
+    _poolChiseiHeartOfOceans,
     _poolChromeSteed,
     _poolChronomancer,
     _poolCloakOfTheBat,
@@ -1048,6 +1055,7 @@ const shard: CardShard = {
     _poolDeflectingPalm,
     _poolDegaSanctuary,
     _poolDehydration,
+    _poolDemotion,
     _poolDenziloreFatehold,
     _poolDeputyOfAcquittals,
     _poolDesertCerodon,
@@ -1225,6 +1233,7 @@ const shard: CardShard = {
     _poolHuntingTriad,
     _poolHurlyBurly,
     _poolHyalopterousLemure,
+    _poolIceCage,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
     _poolImmaculateMagistrate,
@@ -1237,12 +1246,14 @@ const shard: CardShard = {
     _poolInformedInkwright,
     _poolInnerDemon,
     _poolInnerSanctum,
+    _poolInsidiousFungus,
     _poolInspirationFromBeyond,
     _poolInstigatorGang,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,
     _poolInvasionOfLorwyn,
     _poolInvasionOfTheros,
+    _poolIonStorm,
     _poolIorethOfTheHealingHouse,
     _poolIriniSengir,
     _poolIronsoulEnforcer,
@@ -1424,6 +1435,7 @@ const shard: CardShard = {
     _poolPreemptiveStrike,
     _poolPressForAnswers,
     _poolPrimalDruid,
+    _poolPrisonTerm,
     _poolProfanePrayers,
     _poolProfessionalWrestler,
     _poolProfessorsWarning,

@@ -292,6 +292,7 @@ import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGargoyleCastle from "../pool/gargoyle-castle.js";
+import _poolGarnetPrincessOfAlexandria from "../pool/garnet-princess-of-alexandria.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
@@ -424,6 +425,7 @@ import _poolJungleBarrier from "../pool/jungle-barrier.js";
 import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
 import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
+import _poolKarganIntimidator from "../pool/kargan-intimidator.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKavuAggressor from "../pool/kavu-aggressor.js";
@@ -478,6 +480,7 @@ import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
 import _poolLostInTheWoods from "../pool/lost-in-the-woods.js";
+import _poolLostJitte from "../pool/lost-jitte.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
@@ -518,6 +521,7 @@ import _poolMorale from "../pool/morale.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMosquitoGuard from "../pool/mosquito-guard.js";
+import _poolMoxiteRefinery from "../pool/moxite-refinery.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
@@ -583,6 +587,7 @@ import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
+import _poolPhyrexianNegator from "../pool/phyrexian-negator.js";
 import _poolPiercingRays from "../pool/piercing-rays.js";
 import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
@@ -598,6 +603,7 @@ import _poolPutridWarrior from "../pool/putrid-warrior.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRakdosHeadliner from "../pool/rakdos-headliner.js";
+import _poolRakdosTheDefiler from "../pool/rakdos-the-defiler.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
@@ -668,6 +674,7 @@ import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeismicAssault from "../pool/seismic-assault.js";
 import _poolServantOfTymaret from "../pool/servant-of-tymaret.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
+import _poolShannaPurifyingBlade from "../pool/shanna-purifying-blade.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
 import _poolShieldMare from "../pool/shield-mare.js";
@@ -1192,6 +1199,7 @@ const shard: CardShard = {
     _poolGaeasAvenger,
     _poolGallifreyCouncilChamber,
     _poolGargoyleCastle,
+    _poolGarnetPrincessOfAlexandria,
     _poolGastalThrillseeker,
     _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
@@ -1324,6 +1332,7 @@ const shard: CardShard = {
     _poolJunkbladeBruiser,
     _poolKaitoCunningInfiltrator,
     _poolKalonianTwingrove,
+    _poolKarganIntimidator,
     _poolKarplusanForest,
     _poolKathariScreecher,
     _poolKavuAggressor,
@@ -1378,6 +1387,7 @@ const shard: CardShard = {
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
     _poolLostInTheWoods,
+    _poolLostJitte,
     _poolLuckyOffering,
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
@@ -1418,6 +1428,7 @@ const shard: CardShard = {
     _poolMordorOnTheMarch,
     _poolMortalitySpear,
     _poolMosquitoGuard,
+    _poolMoxiteRefinery,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
@@ -1483,6 +1494,7 @@ const shard: CardShard = {
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
+    _poolPhyrexianNegator,
     _poolPiercingRays,
     _poolPinnacleOfRage,
     _poolPonderingMage,
@@ -1498,6 +1510,7 @@ const shard: CardShard = {
     _poolRabidBite,
     _poolRaidingNightstalker,
     _poolRakdosHeadliner,
+    _poolRakdosTheDefiler,
     _poolRallyForTheThrone,
     _poolRamirezDepietroPillager,
     _poolRamosianGreatsword,
@@ -1568,6 +1581,7 @@ const shard: CardShard = {
     _poolSeismicAssault,
     _poolServantOfTymaret,
     _poolSeveredLegion,
+    _poolShannaPurifyingBlade,
     _poolShardlessAgent,
     _poolSheHulkJenniferWalters,
     _poolShieldMare,

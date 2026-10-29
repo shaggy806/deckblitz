@@ -390,6 +390,7 @@ import _poolKirtarsWrath from "../pool/kirtars-wrath.js";
 import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
+import _poolKomaCosmosSerpent from "../pool/koma-cosmos-serpent.js";
 import _poolKomasFaithful from "../pool/komas-faithful.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
@@ -816,6 +817,7 @@ import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZiatorasEnvoy from "../pool/ziatoras-envoy.js";
+import _poolZodiarkUmbralGod from "../pool/zodiark-umbral-god.js";
 import _poolZombieOgre from "../pool/zombie-ogre.js";
 import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
@@ -1220,6 +1222,7 @@ const shard: CardShard = {
     _poolKitesailApprentice,
     _poolKnightOfStromgald,
     _poolKnighthood,
+    _poolKomaCosmosSerpent,
     _poolKomasFaithful,
     _poolKozileksTranslator,
     _poolKraulSwarm,
@@ -1646,6 +1649,7 @@ const shard: CardShard = {
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZiatorasEnvoy,
+    _poolZodiarkUmbralGod,
     _poolZombieOgre,
     _poolZuberiGoldenFeather,
   ],

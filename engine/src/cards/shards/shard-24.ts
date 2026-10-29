@@ -378,6 +378,7 @@ import _poolKirtarsDesire from "../pool/kirtars-desire.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
+import _poolKrasisIncubation from "../pool/krasis-incubation.js";
 import _poolKronchWrangler from "../pool/kronch-wrangler.js";
 import _poolKrosanArcher from "../pool/krosan-archer.js";
 import _poolKrosanVerge from "../pool/krosan-verge.js";
@@ -1227,6 +1228,7 @@ const shard: CardShard = {
     _poolKitesailCorsair,
     _poolKnightOfGlory,
     _poolKoglaTheTitanApe,
+    _poolKrasisIncubation,
     _poolKronchWrangler,
     _poolKrosanArcher,
     _poolKrosanVerge,

@@ -391,6 +391,7 @@ import _poolLazotepReaver from "../pool/lazotep-reaver.js";
 import _poolLeadGolem from "../pool/lead-golem.js";
 import _poolLead from "../pool/lead.js";
 import _poolLeapOfFlame from "../pool/leap-of-flame.js";
+import _poolLegateLaniusCaesarsAce from "../pool/legate-lanius-caesars-ace.js";
 import _poolLegionStronghold from "../pool/legion-stronghold.js";
 import _poolLeoninWarleader from "../pool/leonin-warleader.js";
 import _poolLierDiscipleOfTheDrowned from "../pool/lier-disciple-of-the-drowned.js";
@@ -1200,6 +1201,7 @@ const shard: CardShard = {
     _poolLeadGolem,
     _poolLead,
     _poolLeapOfFlame,
+    _poolLegateLaniusCaesarsAce,
     _poolLegionStronghold,
     _poolLeoninWarleader,
     _poolLierDiscipleOfTheDrowned,

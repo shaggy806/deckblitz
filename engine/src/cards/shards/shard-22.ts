@@ -642,6 +642,7 @@ import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSlumberingDragon from "../pool/slumbering-dragon.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
+import _poolSmokestack from "../pool/smokestack.js";
 import _poolSmolderingEgg from "../pool/smoldering-egg.js";
 import _poolSnakeUmbra from "../pool/snake-umbra.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
@@ -682,6 +683,7 @@ import _poolStratusWalk from "../pool/stratus-walk.js";
 import _poolStressDream from "../pool/stress-dream.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
 import _poolStruggleSurvive from "../pool/struggle-survive.js";
+import _poolStupefyingTouch from "../pool/stupefying-touch.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
@@ -1498,6 +1500,7 @@ const shard: CardShard = {
     _poolSlumberingDragon,
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
+    _poolSmokestack,
     _poolSmolderingEgg,
     _poolSnakeUmbra,
     _poolSnowCoveredForest,
@@ -1538,6 +1541,7 @@ const shard: CardShard = {
     _poolStressDream,
     _poolStrongholdZeppelin,
     _poolStruggleSurvive,
+    _poolStupefyingTouch,
     _poolSuChi,
     _poolSumalaRumblers,
     _poolSummonFatChocobo,

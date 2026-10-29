@@ -146,6 +146,7 @@ import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeadeyeTracker from "../pool/deadeye-tracker.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
+import _poolDeathCloud from "../pool/death-cloud.js";
 import _poolDeathsporeThallid from "../pool/deathspore-thallid.js";
 import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
@@ -577,6 +578,7 @@ import _poolRuination from "../pool/ruination.js";
 import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
 import _poolRuneTailKitsuneAscendant from "../pool/rune-tail-kitsune-ascendant.js";
+import _poolRushOfDread from "../pool/rush-of-dread.js";
 import _poolRustTick from "../pool/rust-tick.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSagesRowDenizen from "../pool/sages-row-denizen.js";
@@ -707,6 +709,7 @@ import _poolTawnossWeaponry from "../pool/tawnoss-weaponry.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
+import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheRani from "../pool/the-rani.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
@@ -985,6 +988,7 @@ const shard: CardShard = {
     _poolDeadbridgeShaman,
     _poolDeadeyeTracker,
     _poolDeafeningClarion,
+    _poolDeathCloud,
     _poolDeathsporeThallid,
     _poolDefile,
     _poolDefiledCrypt,
@@ -1416,6 +1420,7 @@ const shard: CardShard = {
     _poolRunOver,
     _poolRuneSealedWall,
     _poolRuneTailKitsuneAscendant,
+    _poolRushOfDread,
     _poolRustTick,
     _poolSHIELDSpyKit,
     _poolSagesRowDenizen,
@@ -1546,6 +1551,7 @@ const shard: CardShard = {
     _poolTelJiladJustice,
     _poolTerisianMindbreaker,
     _poolTerminate,
+    _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
     _poolTheRani,
     _poolTheReaperKingNoMore,

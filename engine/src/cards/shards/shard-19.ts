@@ -380,6 +380,7 @@ import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorobiDeathsWail from "../pool/horobi-deaths-wail.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
+import _poolHovelHurler from "../pool/hovel-hurler.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
 import _poolHurkylsRecall from "../pool/hurkyls-recall.js";
 import _poolIceMagic from "../pool/ice-magic.js";
@@ -611,6 +612,7 @@ import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRassilonTheWarPresident from "../pool/rassilon-the-war-president.js";
 import _poolReality from "../pool/reality.js";
+import _poolReapingWillow from "../pool/reaping-willow.js";
 import _poolRecantation from "../pool/recantation.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
@@ -1265,6 +1267,7 @@ const shard: CardShard = {
     _poolHondenOfInfiniteRage,
     _poolHorobiDeathsWail,
     _poolHorrorOfTheDim,
+    _poolHovelHurler,
     _poolHulklingYoungAvenger,
     _poolHurkylsRecall,
     _poolIceMagic,
@@ -1496,6 +1499,7 @@ const shard: CardShard = {
     _poolRaptorHatchling,
     _poolRassilonTheWarPresident,
     _poolReality,
+    _poolReapingWillow,
     _poolRecantation,
     _poolRecklessBrute,
     _poolRedElementalBlast,

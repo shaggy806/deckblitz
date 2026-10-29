@@ -93,6 +93,7 @@ import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBowerPassage from "../pool/bower-passage.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreaking from "../pool/breaking.js";
+import _poolBreyaEtheriumShaper from "../pool/breya-etherium-shaper.js";
 import _poolBriarShield from "../pool/briar-shield.js";
 import _poolBrineElemental from "../pool/brine-elemental.js";
 import _poolBringerOfTheBlueDawn from "../pool/bringer-of-the-blue-dawn.js";
@@ -228,6 +229,7 @@ import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
 import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
 import _poolFangSkulkin from "../pool/fang-skulkin.js";
+import _poolFaridEnterprisingSalvager from "../pool/farid-enterprising-salvager.js";
 import _poolFateholdAnnex from "../pool/fatehold-annex.js";
 import _poolFavorableWinds from "../pool/favorable-winds.js";
 import _poolFearOfFailedTests from "../pool/fear-of-failed-tests.js";
@@ -417,6 +419,7 @@ import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLoneRevenant from "../pool/lone-revenant.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
+import _poolLordXanderTheCollector from "../pool/lord-xander-the-collector.js";
 import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLosheelClockworkScholar from "../pool/losheel-clockwork-scholar.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
@@ -431,6 +434,7 @@ import _poolMagmaBurst from "../pool/magma-burst.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
+import _poolMalfegor from "../pool/malfegor.js";
 import _poolMalice from "../pool/malice.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolManrikiGusari from "../pool/manriki-gusari.js";
@@ -447,6 +451,7 @@ import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
 import _poolMazeBehemoth from "../pool/maze-behemoth.js";
+import _poolMeathookMassacreIi from "../pool/meathook-massacre-ii.js";
 import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
@@ -535,6 +540,7 @@ import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPharikasSpawn from "../pool/pharikas-spawn.js";
 import _poolPhobianPhantasm from "../pool/phobian-phantasm.js";
 import _poolPhoenixChick from "../pool/phoenix-chick.js";
+import _poolPhoenixDown from "../pool/phoenix-down.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPhyrexianSnowcrusher from "../pool/phyrexian-snowcrusher.js";
@@ -1002,6 +1008,7 @@ const shard: CardShard = {
     _poolBowerPassage,
     _poolBrassclawOrcs,
     _poolBreaking,
+    _poolBreyaEtheriumShaper,
     _poolBriarShield,
     _poolBrineElemental,
     _poolBringerOfTheBlueDawn,
@@ -1137,6 +1144,7 @@ const shard: CardShard = {
     _poolFaerieSeer,
     _poolFalconJoaquinTorres,
     _poolFangSkulkin,
+    _poolFaridEnterprisingSalvager,
     _poolFateholdAnnex,
     _poolFavorableWinds,
     _poolFearOfFailedTests,
@@ -1326,6 +1334,7 @@ const shard: CardShard = {
     _poolLokisScepter,
     _poolLoneRevenant,
     _poolLongtuskCub,
+    _poolLordXanderTheCollector,
     _poolLoreSeeker,
     _poolLosheelClockworkScholar,
     _poolLoxodonLineBreaker,
@@ -1340,6 +1349,7 @@ const shard: CardShard = {
     _poolMagmaVein,
     _poolMakeshiftBinding,
     _poolMalakirRebirth,
+    _poolMalfegor,
     _poolMalice,
     _poolManaformHellkite,
     _poolManrikiGusari,
@@ -1356,6 +1366,7 @@ const shard: CardShard = {
     _poolMasteryOfTheUnseen,
     _poolMawOfKozilek,
     _poolMazeBehemoth,
+    _poolMeathookMassacreIi,
     _poolMegatonsFate,
     _poolMeltstriderEulogist,
     _poolMemoryPlunder,
@@ -1444,6 +1455,7 @@ const shard: CardShard = {
     _poolPharikasSpawn,
     _poolPhobianPhantasm,
     _poolPhoenixChick,
+    _poolPhoenixDown,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPhyrexianSnowcrusher,

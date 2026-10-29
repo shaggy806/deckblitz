@@ -103,6 +103,7 @@ import _poolCantWakeUp from "../pool/cant-wake-up.js";
 import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
+import _poolCaythFamedMechanist from "../pool/cayth-famed-mechanist.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
 import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
 import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
@@ -604,6 +605,7 @@ import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
 import _poolSkarrganSkybreaker from "../pool/skarrgan-skybreaker.js";
+import _poolSkinshifter from "../pool/skinshifter.js";
 import _poolSkirkOutrider from "../pool/skirk-outrider.js";
 import _poolSkitterEel from "../pool/skitter-eel.js";
 import _poolSkolaGrovedancer from "../pool/skola-grovedancer.js";
@@ -649,6 +651,7 @@ import _poolStalkerHag from "../pool/stalker-hag.js";
 import _poolStallForTime from "../pool/stall-for-time.js";
 import _poolStampedeSurfer from "../pool/stampede-surfer.js";
 import _poolStarlight from "../pool/starlight.js";
+import _poolStasisCocoon from "../pool/stasis-cocoon.js";
 import _poolStasisSnare from "../pool/stasis-snare.js";
 import _poolStaunchShieldmate from "../pool/staunch-shieldmate.js";
 import _poolSteadfastGuard from "../pool/steadfast-guard.js";
@@ -927,6 +930,7 @@ const shard: CardShard = {
     _poolCaptainAmericaTeamLeader,
     _poolCarrionCall,
     _poolCavalierOfNight,
+    _poolCaythFamedMechanist,
     _poolCelebrityFencer,
     _poolCentaurSafeguard,
     _poolCephalopodSentry,
@@ -1428,6 +1432,7 @@ const shard: CardShard = {
     _poolSilverbackElder,
     _poolSilverchaseFox,
     _poolSkarrganSkybreaker,
+    _poolSkinshifter,
     _poolSkirkOutrider,
     _poolSkitterEel,
     _poolSkolaGrovedancer,
@@ -1473,6 +1478,7 @@ const shard: CardShard = {
     _poolStallForTime,
     _poolStampedeSurfer,
     _poolStarlight,
+    _poolStasisCocoon,
     _poolStasisSnare,
     _poolStaunchShieldmate,
     _poolSteadfastGuard,

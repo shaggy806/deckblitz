@@ -143,6 +143,7 @@ import _poolCountrysideCrusher from "../pool/countryside-crusher.js";
 import _poolCrawlFromTheCellar from "../pool/crawl-from-the-cellar.js";
 import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
+import _poolCrucibleOfTheSpiritDragon from "../pool/crucible-of-the-spirit-dragon.js";
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCrushDissent from "../pool/crush-dissent.js";
@@ -270,6 +271,7 @@ import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFountainOfCho from "../pool/fountain-of-cho.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
+import _poolFrayingOmnipotence from "../pool/fraying-omnipotence.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFreneticOgre from "../pool/frenetic-ogre.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
@@ -550,6 +552,7 @@ import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPortcullisVine from "../pool/portcullis-vine.js";
 import _poolPouncingJaguar from "../pool/pouncing-jaguar.js";
 import _poolPowerstoneMinefield from "../pool/powerstone-minefield.js";
+import _poolPoxPlague from "../pool/pox-plague.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
@@ -726,6 +729,7 @@ import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThoughtNibbler from "../pool/thought-nibbler.js";
+import _poolThoughtsOfRuin from "../pool/thoughts-of-ruin.js";
 import _poolThoughtweftTrio from "../pool/thoughtweft-trio.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolThranGolem from "../pool/thran-golem.js";
@@ -747,6 +751,7 @@ import _poolTowerOfEons from "../pool/tower-of-eons.js";
 import _poolTrapjawKelpie from "../pool/trapjaw-kelpie.js";
 import _poolTravelingMinister from "../pool/traveling-minister.js";
 import _poolTreatsToShare from "../pool/treats-to-share.js";
+import _poolTriassicEgg from "../pool/triassic-egg.js";
 import _poolTributeToTheWorldTree from "../pool/tribute-to-the-world-tree.js";
 import _poolTricksterMage from "../pool/trickster-mage.js";
 import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
@@ -759,6 +764,7 @@ import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
 import _poolUndergrowthScavenger from "../pool/undergrowth-scavenger.js";
 import _poolUnderhandedDesigns from "../pool/underhanded-designs.js";
 import _poolUnearth from "../pool/unearth.js";
+import _poolUnexpectedlyAbsent from "../pool/unexpectedly-absent.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
 import _poolUnholyHeat from "../pool/unholy-heat.js";
@@ -988,6 +994,7 @@ const shard: CardShard = {
     _poolCrawlFromTheCellar,
     _poolCrossbowInfantry,
     _poolCrossroadsVillage,
+    _poolCrucibleOfTheSpiritDragon,
     _poolCruelCelebrant,
     _poolCruelFinality,
     _poolCrushDissent,
@@ -1115,6 +1122,7 @@ const shard: CardShard = {
     _poolFountainOfCho,
     _poolFourKnocks,
     _poolFranticInventory,
+    _poolFrayingOmnipotence,
     _poolFreestriderCommando,
     _poolFreneticOgre,
     _poolFrenziedRaptor,
@@ -1395,6 +1403,7 @@ const shard: CardShard = {
     _poolPortcullisVine,
     _poolPouncingJaguar,
     _poolPowerstoneMinefield,
+    _poolPoxPlague,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPresumedDead,
@@ -1571,6 +1580,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThoughtNibbler,
+    _poolThoughtsOfRuin,
     _poolThoughtweftTrio,
     _poolThousandYearStorm,
     _poolThranGolem,
@@ -1592,6 +1602,7 @@ const shard: CardShard = {
     _poolTrapjawKelpie,
     _poolTravelingMinister,
     _poolTreatsToShare,
+    _poolTriassicEgg,
     _poolTributeToTheWorldTree,
     _poolTricksterMage,
     _poolTrickstersStratagem,
@@ -1604,6 +1615,7 @@ const shard: CardShard = {
     _poolUndergrowthScavenger,
     _poolUnderhandedDesigns,
     _poolUnearth,
+    _poolUnexpectedlyAbsent,
     _poolUnexplainedDisappearance,
     _poolUnfulfilledDesires,
     _poolUnholyHeat,
