@@ -115,10 +115,15 @@ section keeps only what to do next.
   player / an opponent" and `choose-opponent { remember }` as `GameObject.chosenPlayer`, read by
   a `"chosen-player"` scope, trigger subject, hand size and filter; `mostLife`; 10 freed, 7
   proving cards — Black Vise, The Rack, Cursed Rack, Saskia the Unyielding, Triarch Stalker,
-  Beckoning Will-o'-Wisp, The Master, Gallifrey's End).
-  **155 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `amount:count-for-chosen-player` (24, builds on `chosenPlayer`), `decision:choose-permanent`
-  (24), `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22).
+  Beckoning Will-o'-Wisp, The Master, Gallifrey's End), count-for-chosen-player and
+  player-scope-extensions (2026-10-29: `countOf`'s `forPlayer`, `forChosenPlayer` on a CDA or
+  count-scaled bonus, a per-player graveyard count, `{ controllerOfTarget }` as the player who
+  draws, discards or gets poison; 33 freed, 10 proving cards — Lost Order of Jarkeld, Entropic
+  Specter, Nyxathid, Weight of Spires, Emissary of Hope, Typhoon, Nature's Resurgence,
+  Assassin's Strike, Call to Heel, Pistus Strike).
+  **188 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `decision:choose-permanent` (24), `effect:discard-all-matching` (22),
+  `effect:look-and-choose-target-opponent-library` (22), `mechanic:outside-the-game` (21).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

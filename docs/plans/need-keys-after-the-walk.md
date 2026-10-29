@@ -448,6 +448,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   cards. One family only: the session neared ~300K tokens with the account's weekly limit at
   98%. 155 freed cards queued. Next: `amount:count-for-chosen-player` (24, builds on
   `chosenPlayer`), `decision:choose-permanent` (24), `effect:discard-all-matching` (22).
+- **2026-10-29: count-for-chosen-player and player-scope-extensions, two engine-only
+  families** — a `countOf` counted from one named player's side (`forPlayer`), the chosen
+  player's side for a CDA or count-scaled bonus (`forChosenPlayer`), a per-player graveyard
+  count, and "its controller draws / discards / gets a poison counter"; 10 proving cards.
+  Stopped at two with the account's weekly limit at 99%. 188 freed cards queued. Next:
+  `decision:choose-permanent` (24), `effect:discard-all-matching` (22),
+  `effect:look-and-choose-target-opponent-library` (22).
 
 ## Rough size
 

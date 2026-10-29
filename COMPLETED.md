@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: counts for one player, and its controller as the player, features
+  only** (2026-10-29; `amount:count-for-chosen-player`, `amount:count-for-controller-of-target`,
+  `amount:count-per-player`, `amount:count-that-player-controls`,
+  `effect:discard-controller-of-target`, `effect:draw-controller-of-target`,
+  `effect:player-counters-controller-of-target`). A `countOf`'s `forPlayer` (the chosen player,
+  a target's controller, the trigger's player), `countInGraveyard`'s `forEachPlayer`,
+  `forChosenPlayer` on `setBasePtFromCount` and `grantPtPerCount` (and the latter's
+  `cardsInHand`), and `{ controllerOfTarget }` as `draw`'s, `discard`'s and
+  `add-player-counters`' player; the scaffolder's templates. Lost Order of Jarkeld, Entropic
+  Specter, Nyxathid, Weight of Spires, Emissary of Hope, Typhoon, Nature's Resurgence,
+  Assassin's Strike, Call to Heel and Pistus Strike authored to prove it. 188 freed cards wait
+  for `author-freed`.
 - **Need-keys Phase 2: the chosen player, features only** (2026-10-29;
   `decision:choose-player`, `effect:choose-opponent-most-life`,
   `static:attacking-chosen-player-anthem`, `trigger:chosen-player-upkeep`). "As this enters,
