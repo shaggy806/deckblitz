@@ -68,6 +68,11 @@ export const BASIC_LAND_TYPE_COLORS: readonly (readonly [string, Color])[] = [
   ["Forest", "G"],
 ];
 
+/** The five basic land types, WUBRG: the options of "choose a basic land
+ * type" — a card's `chooseOnEnter` (Convincing Mirage) or a
+ * `choose-creature-type`'s `options` (Tideshaper Mystic). */
+export const BASIC_LAND_TYPE_CHOICES: readonly string[] = BASIC_LAND_TYPE_COLORS.map(([type]) => type);
+
 const CREATURE_TYPE_SET: ReadonlySet<string> = new Set(CREATURE_TYPES);
 const LAND_TYPE_SET: ReadonlySet<string> = new Set(LAND_TYPES);
 
@@ -79,6 +84,12 @@ export function isCreatureType(subtype: string): boolean {
 /** Whether `subtype` is a land type (rule 205.3i). */
 export function isLandType(subtype: string): boolean {
   return LAND_TYPE_SET.has(subtype);
+}
+
+/** Whether `subtype` is a basic land type (rule 205.3i): Plains, Island,
+ * Swamp, Mountain or Forest. */
+export function isBasicLandType(subtype: string): boolean {
+  return BASIC_LAND_TYPE_COLORS.some(([type]) => type === subtype);
 }
 
 /** Whether `subtype` is one of the two markers rather than a real subtype. */

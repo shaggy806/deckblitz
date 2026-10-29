@@ -710,6 +710,7 @@ import _poolSurgicalExtraction from "../pool/surgical-extraction.js";
 import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
 import _poolSurviveTheNight from "../pool/survive-the-night.js";
 import _poolSutureSpirit from "../pool/suture-spirit.js";
+import _poolSwitcheroo from "../pool/switcheroo.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
@@ -1610,6 +1611,7 @@ const shard: CardShard = {
     _poolSurrakAndGoreclaw,
     _poolSurviveTheNight,
     _poolSutureSpirit,
+    _poolSwitcheroo,
     _poolSwordsmansSteel,
     _poolSylviaBrightspear,
     _poolSymmetryMatrix,

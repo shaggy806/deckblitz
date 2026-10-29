@@ -99,7 +99,8 @@ export function filterReadsX(filter: CardFilter): boolean {
     readsX(filter.coloredManaSymbols) ||
     readsX(filter.cardTypeCount) ||
     (filter.nameDiffersFromEach !== undefined && filterReadsX(filter.nameDiffersFromEach)) ||
-    (filter.anyOf ?? []).some(filterReadsX)
+    (filter.anyOf ?? []).some(filterReadsX) ||
+    (filter.not !== undefined && filterReadsX(filter.not))
   );
 }
 
@@ -703,6 +704,13 @@ export interface CardFilter {
    * legendary, or Saga"), "enchanted or equipped", "black and/or red".
    */
   readonly anyOf?: readonly CardFilter[];
+  /**
+   * Must NOT match this filter — the negation a flat clause list can't say
+   * when it spans several clauses: "can't be blocked except by creatures
+   * with flying or reach" (Tatsunari, Toad Rider) is a `cantBeBlockedBy`
+   * of `{ not: { anyOf: [{ keyword: "flying" }, { keyword: "reach" }] } }`.
+   */
+  readonly not?: CardFilter;
 }
 
 /**
@@ -1521,6 +1529,12 @@ export function matchesFilter(
     !filter.anyOf.some((each) =>
       matchesFilter(state, registry, id, each, lki === undefined ? ctx : { ...ctx, snapshot: lki }),
     )
+  ) {
+    return false;
+  }
+  if (
+    filter.not !== undefined &&
+    matchesFilter(state, registry, id, filter.not, lki === undefined ? ctx : { ...ctx, snapshot: lki })
   ) {
     return false;
   }

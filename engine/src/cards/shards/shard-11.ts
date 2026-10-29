@@ -288,6 +288,7 @@ import _poolGavonySilversmith from "../pool/gavony-silversmith.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
 import _poolGetLost from "../pool/get-lost.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
+import _poolGhirapurGuide from "../pool/ghirapur-guide.js";
 import _poolGhirapurOsprey from "../pool/ghirapur-osprey.js";
 import _poolGhostHounds from "../pool/ghost-hounds.js";
 import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolGearbaneOrangutan,
     _poolGetLost,
     _poolGethsGrimoire,
+    _poolGhirapurGuide,
     _poolGhirapurOsprey,
     _poolGhostHounds,
     _poolGhostlyDancers,

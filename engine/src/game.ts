@@ -111,6 +111,7 @@ import {
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
+  grantedStatics,
   pairedPartner,
   hasExileIfLeavesAbility,
   hasLayerFourPart,
@@ -5311,7 +5312,7 @@ export class Game {
     sourceId: ObjectId,
     controller: PlayerId,
     options?: readonly string[],
-    resume?: { then: EffectSpec; targets: ResolvedTargets; x: number },
+    resume?: { then: EffectSpec; targets: ResolvedTargets; x: number; prompt?: string },
     /** All but a few of the catalogue ("other than Wall"): still a search. */
     catalog?: boolean,
   ): void {
@@ -7037,6 +7038,11 @@ export class Game {
 
   /** Does `object` carry an active static of its own matching `test`? */
   private hasOwnStatic(object: GameObject, test: (ability: StaticAbility) => boolean): boolean {
+    // One a `grant-static` gave it (Mindbender Spores' "This creature
+    // doesn't untap during your untap step if it has a fungus counter on it").
+    if (grantedStatics(this.state, this.registry, object).some((a) => test(a) && this.staticActive(object, a))) {
+      return true;
+    }
     if (hasLostAbilities(this.state, this.registry,object)) return false;
     return this.registry
       .get(rulesTextName(object))
@@ -23680,14 +23686,22 @@ export class Game {
           }
         }
       },
-      chooseCreatureType: (then, exclude) =>
-        this.beginCreatureTypeChoice(
-          source,
-          controller,
-          exclude === undefined ? undefined : CREATURE_TYPES.filter((t) => !exclude.includes(t)),
-          { then, targets, x },
-          true,
-        ),
+      chooseCreatureType: (then, exclude, fixed) =>
+        fixed !== undefined
+          ? this.beginCreatureTypeChoice(
+              source,
+              controller,
+              fixed.options.filter((t) => !(exclude ?? []).includes(t)),
+              { then, targets, x, ...(fixed.prompt !== undefined ? { prompt: fixed.prompt } : {}) },
+              false,
+            )
+          : this.beginCreatureTypeChoice(
+              source,
+              controller,
+              exclude === undefined ? undefined : CREATURE_TYPES.filter((t) => !exclude.includes(t)),
+              { then, targets, x },
+              true,
+            ),
       chooseCardName: (spec) => {
         // "Target player chooses a card name" (Vexing Arcanix): the player in
         // that slot names it, if they're still in the game; the resolution
@@ -24068,6 +24082,9 @@ export class Game {
         ),
       rotateControl: (filter, direction, exceptSource) =>
         this.rotateControlByEffect(controller, filter, direction, exceptSource ? source : undefined),
+      exchangeControl: (first, second) => this.exchangeControl(first, second),
+      exchangeControlAll: (filter, other, untilEndOfTurn) =>
+        this.exchangeControlAll(controller, filter, other, untilEndOfTurn),
       grantCantBeSacrificed: (target, duration) =>
         this.grantCantBeSacrificed(target, lastingHere(duration)),
       grantBlockAdditional: (target, amount, duration) =>
@@ -24516,8 +24533,31 @@ export class Game {
           this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp);
         }
       },
-      restrict: (target, filter, restrictions, duration) =>
-        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn")),
+      restrict: (target, filter, restrictions, duration, cantBeBlockedBy) =>
+        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy),
+      grantStatic: (target, filter, ability, duration) => {
+        const kept = lastingHere(duration);
+        // One effect, one timestamp (rule 613.7b), however many it reaches.
+        const timestamp = this.freshTimestamp();
+        const ids =
+          filter !== undefined
+            ? this.battlefieldMatching(controller, filter)
+            : target?.kind === "object"
+            ? [this.splitOneFromStack(target.object)]
+            : [];
+        for (const id of ids) {
+          const object = this.state.objects[id];
+          if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) continue;
+          object.modifiers.push({
+            timestamp,
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            grantsStatic: [ability],
+            ...durationFields(kept),
+          });
+        }
+      },
       detain: (target) => this.detain(controller, target),
       blockIfAble: (target, attacker, thisCombat) => this.blockIfAble(target, attacker, thisCombat),
       attackDespiteDefender: (target, filter) => {
@@ -29358,10 +29398,16 @@ export class Game {
     filter: CardFilter | undefined,
     restrictions: readonly CombatRestriction[],
     duration: EffectDuration = "end-of-turn",
+    cantBeBlockedBy?: CardFilter,
   ): void {
-    if (restrictions.length === 0) return;
+    if (restrictions.length === 0 && cantBeBlockedBy === undefined) return;
     if (filter !== undefined) {
-      (this.state.turnRestrictions ??= []).push({ filter, you: controller, restrictions: [...restrictions] });
+      (this.state.turnRestrictions ??= []).push({
+        filter,
+        you: controller,
+        restrictions: [...restrictions],
+        ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy } : {}),
+      });
       this.emit({ type: "restrictions-imposed", player: controller, restrictions: [...restrictions] });
       return;
     }
@@ -29373,7 +29419,8 @@ export class Game {
       power: 0,
       toughness: 0,
       keywords: [],
-      restrictions: [...restrictions],
+      ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
+      ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
       ...durationFields(duration),
     });
     this.emit({
@@ -33986,6 +34033,49 @@ export class Game {
     const timestamp = this.state.timestampSeq;
     for (const { player, object } of moves) {
       this.gainControlByEffect(player, { kind: "object", object }, false, false, { split: false, timestamp });
+    }
+  }
+
+  /**
+   * See the `"exchange-control"` {@link EffectSpec}: `first`'s controller
+   * gains control of `second` and `second`'s of `first`, at once, as one
+   * lasting effect with one timestamp (rule 701.12b) — or, when it can't all
+   * happen (either gone, one player controlling both, a controller out of
+   * the game), nothing at all (701.12a). Whether they were exchanged.
+   */
+  private exchangeControl(first: TargetRef, second: TargetRef): boolean {
+    if (first.kind !== "object" || second.kind !== "object") return false;
+    const a = this.state.objects[first.object];
+    const b = this.state.objects[second.object];
+    if (a === undefined || b === undefined || a.zone !== "battlefield" || b.zone !== "battlefield") return false;
+    if (a.id === b.id || a.controller === b.controller) return false;
+    const [toB, toA] = [a.controller, b.controller];
+    if (this.state.players[toB]?.hasLost !== false || this.state.players[toA]?.hasLost !== false) return false;
+    this.state.timestampSeq += 1;
+    const timestamp = this.state.timestampSeq;
+    this.gainControlByEffect(toA, first, false, false, { timestamp });
+    this.gainControlByEffect(toB, second, false, false, { timestamp });
+    return true;
+  }
+
+  /**
+   * See the `"exchange-control-all"` {@link EffectSpec}: what `filter`
+   * matches (from `you`'s side) that `you` control goes to `other`, and what
+   * `other` controls comes to `you` — both sets fixed first, then moved at
+   * once with one timestamp (rule 613.7b). A token stack changes hands whole.
+   */
+  private exchangeControlAll(you: PlayerId, filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean): void {
+    if (other === you || this.state.players[other]?.hasLost !== false) return;
+    const matched = this.battlefieldMatching(you, filter);
+    const moves = [
+      ...matched.filter((id) => this.state.objects[id]?.controller === you).map((id) => ({ id, to: other })),
+      ...matched.filter((id) => this.state.objects[id]?.controller === other).map((id) => ({ id, to: you })),
+    ];
+    if (moves.length === 0) return;
+    this.state.timestampSeq += 1;
+    const timestamp = this.state.timestampSeq;
+    for (const { id, to } of moves) {
+      this.gainControlByEffect(to, { kind: "object", object: id }, untilEndOfTurn, false, { split: false, timestamp });
     }
   }
 

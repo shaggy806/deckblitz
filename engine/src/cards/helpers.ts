@@ -15,6 +15,9 @@ import { defineCard, type CardDefinition, type Keyword, type StaticAbility, type
  * `choose-creature-type` effect's `then` — re-exported here because card files
  * import only from `define` and `helpers`. */
 export { CHOSEN_CREATURE_TYPE } from "../effects.js";
+/** "Choose a basic land type": the five, for a `chooseOnEnter` or a
+ * `choose-creature-type`'s `options`. */
+export { BASIC_LAND_TYPE_CHOICES } from "../subtypes.js";
 
 /**
  * "Two target lands", "up to two target creatures": one instance of the word

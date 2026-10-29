@@ -545,7 +545,17 @@
   "replacement:prevent-damage-from-colored-sources",
   "replacement:prevent-damage-by-target-spell",
   "effect:prevent-next-damage-by-source",
-  "effect:prevent-next-damage-to-you-from-filter"
+  "effect:prevent-next-damage-to-you-from-filter",
+  "effect:cant-be-blocked-by-filter-until-eot",
+  "effect:grant-static-to-permanent",
+  "static:land-type-setting",
+  "static:choose-basic-land-type",
+  "decision:choose-land-type-on-resolution",
+  "effect:set-land-type",
+  "effect:become-basic-land-type",
+  "effect:exchange-control",
+  "effect:exchange-control-all-with-target-opponent",
+  "effect:gain-control-all-target-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

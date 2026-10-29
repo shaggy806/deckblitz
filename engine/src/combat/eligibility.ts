@@ -20,6 +20,7 @@ import {
   computedCacheMemo,
   computeCharacteristics,
   effectiveTypes,
+  grantedStatics,
   withComputedCache,
   hasLostAbilities,
   objHasKeyword,
@@ -469,8 +470,12 @@ function blockFilterSources(
     const out: { source: GameObject; ability: StaticAbility }[] = [];
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (hasLostAbilities(state, registry, source) || state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of registry.get(rulesTextName(source)).static) {
+      if (state.players[source.controller]?.hasLost === true) continue;
+      // Its own statics, and any a `grant-static` gave it (Full Steam
+      // Ahead's "This creature can't be blocked by more than one creature").
+      const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+      const granted = grantedStatics(state, registry, source);
+      for (const ability of granted.length === 0 ? own : [...own, ...granted]) {
         if (
           ability.cantBeBlockedBy !== undefined ||
           ability.canBlockOnly !== undefined ||
@@ -509,6 +514,21 @@ function blockFilters(
     // Lambholt): the static's own source answers `{ powerOf: "source" }`,
     // read as blockers are declared (its ruling, rule 509.1b).
     out.push({ filter, you: source.controller, amount: sourceAmount(state, registry, source) });
+  }
+  if (field === "cantBeBlockedBy") {
+    // "Can't be blocked by [filter] this turn" — a `restrict` effect's, on
+    // this creature (Ghirapur Guide) or as a turn-wide rule it matches now
+    // (Dread Charge, rule 611.2c).
+    for (const m of object.modifiers) {
+      for (const { filter, you } of m.cantBeBlockedBy ?? []) {
+        out.push({ filter, you, amount: sourceAmount(state, registry, object) });
+      }
+    }
+    for (const rule of state.turnRestrictions ?? []) {
+      if (rule.cantBeBlockedBy === undefined) continue;
+      if (!matchesFilter(state, registry, object.id, rule.filter, { you: rule.you })) continue;
+      out.push({ filter: rule.cantBeBlockedBy, you: rule.you, amount: sourceAmount(state, registry, object) });
+    }
   }
   return out;
 }

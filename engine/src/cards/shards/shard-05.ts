@@ -282,6 +282,7 @@ import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolFrostWalker from "../pool/frost-walker.js";
 import _poolFrostling from "../pool/frostling.js";
 import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
+import _poolFullSteamAhead from "../pool/full-steam-ahead.js";
 import _poolFungalBloom from "../pool/fungal-bloom.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaeasBalance from "../pool/gaeas-balance.js";
@@ -1108,6 +1109,7 @@ const shard: CardShard = {
     _poolFrostWalker,
     _poolFrostling,
     _poolFruitOfTheFirstTree,
+    _poolFullSteamAhead,
     _poolFungalBloom,
     _poolGadgetTechnician,
     _poolGaeasBalance,

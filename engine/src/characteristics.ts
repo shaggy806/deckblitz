@@ -65,6 +65,7 @@ import {
   EVERY_CREATURE_TYPE,
   EVERY_LAND_TYPE,
   hasSubtype,
+  isBasicLandType,
   isCreatureType,
   isLandType,
   subtypeFitsTypes,
@@ -1528,9 +1529,10 @@ function playerStaticHolds(
 ): boolean {
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
-    if (source === undefined || hasLostAbilities(state, registry, source)) continue;
+    if (source === undefined) continue;
     if (state.players[source.controller]?.hasLost !== false) continue;
-    for (const ability of registry.get(rulesTextName(source)).static) {
+    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+    for (const ability of [...own, ...grantedStatics(state, registry, source)]) {
       if (
         test(ability, source.controller) &&
         (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
@@ -1636,11 +1638,77 @@ export function hasLostAbilities(state: GameState, registry: CardRegistry, objec
  * with no timestamp counts as the latest) and a static's (see
  * {@link staticAbilityLosses}). */
 export function abilitiesLostAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
+  const layerSix = layerSixLossAt(state, registry, object);
+  if (layerSix !== null) return layerSix;
+  // Rule 305.7: a land whose land types an effect set to basic ones has lost
+  // every ability its rules text gave it, but none another effect granted —
+  // a loss before every grant, whenever that came.
+  return landTextLost(state, registry, object) ? Number.NEGATIVE_INFINITY : null;
+}
+
+/** {@link abilitiesLostAt} in layer 6 alone: a loss of all abilities, which
+ * takes the intrinsic mana abilities too (unlike rule 305.7's). */
+function layerSixLossAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
   const own = modifierLossAt(object);
   if (object.zone !== "battlefield") return own;
   const fromStatic = staticAbilityLosses(state, registry).lost.get(object.id);
   if (fromStatic === undefined) return own;
   return own === null || fromStatic > own ? fromStatic : own;
+}
+
+/** Whether a static sets the land types of what it reaches to basic ones
+ * (rule 305.7 — Blood Moon's "nonbasic lands are Mountains", Convincing
+ * Mirage's chosen type), as opposed to adding one "in addition". */
+export function setsBasicLandType(ability: StaticAbility): boolean {
+  return ability.setsChosenLandType === true || (ability.setSubtypes ?? []).some(isBasicLandType);
+}
+
+function modifierSetsBasicLandType(modifier: PtModifier): boolean {
+  return (modifier.setSubtypes ?? []).some(isBasicLandType);
+}
+
+/** The last {@link anyLandTypeSetter} answer, and what it was for. */
+let landTypeSetterMemo: {
+  readonly state: GameState;
+  readonly registry: CardRegistry;
+  readonly epoch: number;
+  readonly any: boolean;
+} | null = null;
+
+/** Whether any battlefield static sets land types to basic ones — asked by
+ * every ability check, and almost always "no"; answered once per mutation
+ * like {@link anyLoseAllSource}. */
+function anyLandTypeSetter(state: GameState, registry: CardRegistry): boolean {
+  const memo = landTypeSetterMemo;
+  if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
+    return memo.any;
+  }
+  let any = false;
+  for (const id of state.zones.shared.battlefield) {
+    if (staticsOf(registry, rulesTextName(state.objects[id])).layer4.some(setsBasicLandType)) {
+      any = true;
+      break;
+    }
+  }
+  landTypeSetterMemo = { state, registry, epoch: mutationEpoch, any };
+  return any;
+}
+
+/**
+ * Whether `object` has lost the abilities its rules text gave it to rule
+ * 305.7: it's a land on the battlefield whose land types an effect set to
+ * basic land types — its own modifier (Tideshaper Mystic's "becomes the
+ * basic land type of your choice") or a static that applies to it (Blood
+ * Moon, Spreading Seas). Abilities other effects granted it stay, and it
+ * gains each new type's intrinsic mana ability (305.6).
+ */
+export function landTextLost(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  if (object.zone !== "battlefield") return false;
+  const own = object.modifiers.some(modifierSetsBasicLandType);
+  if (!own && !anyLandTypeSetter(state, registry)) return false;
+  const four = layerFour(state, registry, object);
+  if (!four.types.includes("land")) return false;
+  return own || four.applied.some((grant) => setsBasicLandType(grant.ability));
 }
 
 /** The latest timestamp of a modifier on `object` that took its abilities
@@ -1684,7 +1752,9 @@ export function staticOutlivesLoss(
   source: GameObject,
   ability: StaticAbility,
 ): boolean {
-  if (hasLayerFourPart(ability)) return true;
+  // Not a loss in layer 4 itself (rule 305.7's), which the static depends on
+  // (613.8a): then it never applied (`typeGrantSources`).
+  if (hasLayerFourPart(ability)) return layerSixLossAt(state, registry, source) !== null || !landTextLost(state, registry, source);
   if (ability.loseAllAbilities !== true) return false;
   return staticAbilityLosses(state, registry).applied.get(source.id)?.has(ability) === true;
 }
@@ -1806,6 +1876,21 @@ function scanForLoseAllSource(state: GameState, registry: CardRegistry): boolean
  * its printed types (an Aura's or a pairing's scope can't reach it yet).
  */
 export function entersWithoutAbilities(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  // A land a land-type setter would reach loses its rules text there too
+  // (rule 305.7 — Blood Moon's ruling: a nonbasic land doesn't enter tapped).
+  if (anyLandTypeSetter(state, registry) && printedDefinition(registry, object).types.includes("land")) {
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || source.id === object.id || state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of staticsOf(registry, rulesTextName(source)).layer4) {
+        if (!setsBasicLandType(ability)) continue;
+        if (ability.setsChosenLandType === true && !isBasicLandType(String(source.chosenOnEnter))) continue;
+        if (ability.affects.scope === "attached" || ability.affects.scope === "paired") continue;
+        if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+        if (staticAffects(state, registry, ability.affects, source, object, { entering: true })) return true;
+      }
+    }
+  }
   const applied = staticAbilityLosses(state, registry).applied;
   for (const [sourceId, abilities] of applied) {
     const source = state.objects[sourceId];
@@ -1914,6 +1999,19 @@ function lostAfter(losses: readonly KeywordLoss[], keyword: Keyword, timestamp: 
 export function modifierGrantApplies(modifier: PtModifier, lostAt: number | null): boolean {
   if (grantOutlastsLoss(lostAt, modifier.timestamp)) return true;
   return modifier.loseAbilities === true && (modifier.timestamp ?? Infinity) === lostAt;
+}
+
+/** The static abilities modifiers grant `object` (`PtModifier.grantsStatic`
+ * — the `grant-static` effect) that it still has: not taken away by a later
+ * loss of all abilities (rule 613.7). Usually none, and then cheaply. */
+export function grantedStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
+  if (!object.modifiers.some((m) => m.grantsStatic !== undefined)) return [];
+  const lostAt = abilitiesLostAt(state, registry, object);
+  const out: StaticAbility[] = [];
+  for (const m of object.modifiers) {
+    if (m.grantsStatic !== undefined && modifierGrantApplies(m, lostAt)) out.push(...m.grantsStatic);
+  }
+  return out;
 }
 
 /** Whether `object` has the granted ability "If this creature would leave the
@@ -2253,6 +2351,13 @@ function foldLayerFourOnce(
     }
     // Lithoform Blight's "loses all land types" (305.7).
     if (ability.loseLandTypes === true) subtypes = subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
+    if (ability.setsChosenLandType === true) {
+      // Convincing Mirage's "enchanted land is the chosen type": its
+      // source's choice as it entered, replacing every land type (205.1a).
+      const chosen = source.chosenOnEnter;
+      if (typeof chosen !== "string" || !isBasicLandType(chosen)) continue;
+      subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
+    }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
     if (ability.addsChosenCreatureType === true) {
       // Titan of Littjara's "is the chosen type in addition": its source's
@@ -2293,7 +2398,8 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
     ability.loseLandTypes === true ||
-    ability.addsChosenCreatureType === true
+    ability.addsChosenCreatureType === true ||
+    ability.setsChosenLandType === true
   );
 }
 
@@ -2322,9 +2428,54 @@ function typeGrantSources(
     if (state.players[source.controller]?.hasLost === true) continue;
     for (const ability of layer4) (out ??= []).push({ source, ability });
   }
-  const result = out ?? NO_STATICS;
+  const result = out === null ? NO_STATICS : withoutTextLostSources(state, registry, out);
   if (activeCache !== null) activeCache.typeSources = result;
   return result;
+}
+
+/**
+ * `sources` less the statics of a land whose rules text a land-type setter
+ * takes away (rule 305.7): Urborg, Tomb of Yawgmoth under Blood Moon is a
+ * Mountain with no ability, so no land is a Swamp. Its static depends on the
+ * setter's effect, which changes whether it exists (rule 613.8a), so the
+ * setter applies first whatever their timestamps — and a setter itself
+ * always applies (two that reach each other settle in timestamp order, rule
+ * 613.8b, which their fold already does). A land's own modifier that set its
+ * land types does the same. Which lands a setter reaches is matched against
+ * their types before any static (their printed types and own modifiers).
+ */
+function withoutTextLostSources(
+  state: GameState,
+  registry: CardRegistry,
+  sources: readonly ContributingStatic[],
+): readonly ContributingStatic[] {
+  const setters = sources.filter(
+    (s) =>
+      setsBasicLandType(s.ability) &&
+      (s.ability.setsChosenLandType !== true || isBasicLandType(String(s.source.chosenOnEnter))),
+  );
+  if (setters.length === 0 && !sources.some((s) => s.source.modifiers.some(modifierSetsBasicLandType))) return sources;
+  const textLost = new Map<ObjectId, boolean>();
+  const lost = (source: GameObject): boolean => {
+    const known = textLost.get(source.id);
+    if (known !== undefined) return known;
+    const own = ownLayerFour(registry, source);
+    const view = { types: own.types, subtypes: own.subtypes, inFold: true };
+    const value =
+      (own.types.includes("land") && source.modifiers.some(modifierSetsBasicLandType)) ||
+      setters.some(
+        (setter) =>
+          setter.source.id !== source.id &&
+          (own.types.includes("land") || setter.ability.setTypes?.includes("land") === true) &&
+          staticAffects(state, registry, setter.ability.affects, setter.source, source, view) &&
+          (setter.ability.condition === undefined ||
+            staticConditionMet(state, registry, setter.source, setter.ability.condition)),
+      );
+    textLost.set(source.id, value);
+    return value;
+  };
+  const kept = sources.filter((s) => setsBasicLandType(s.ability) || !lost(s.source));
+  return kept.length === sources.length ? sources : kept;
 }
 
 /**
@@ -2637,7 +2788,8 @@ function filterReadsKeywords(filter: CardFilter): boolean {
     filter.keyword !== undefined ||
     filter.notKeyword !== undefined ||
     filter.hasManaAbility !== undefined ||
-    (filter.anyOf?.some(filterReadsKeywords) ?? false)
+    (filter.anyOf?.some(filterReadsKeywords) ?? false) ||
+    (filter.not !== undefined && filterReadsKeywords(filter.not))
   );
 }
 
@@ -2821,6 +2973,13 @@ function abilityGrantSources(
     if (source === undefined) continue;
     if (state.players[source.controller]?.hasLost === true) continue;
     const grants = staticsOf(registry, rulesTextName(source)).grants;
+    // Roar of the Fifth People's chapter II: "This Saga gains 'Creatures you
+    // control have …'" (a `grant-static`).
+    for (const ability of grantedStatics(state, registry, source)) {
+      if (ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined) {
+        (out ??= []).push({ source, ability });
+      }
+    }
     if (grants.length === 0) continue;
     // A static with a layer-4 part outlives its source's loss of abilities
     // (rule 613.6 — see `typeGrantSources`); its grants then go against that
@@ -2893,7 +3052,9 @@ export function intrinsicManaColors(
 ): readonly Color[] {
   const { types, subtypes } = layerFour(state, registry, object);
   if (!types.includes("land")) return [];
-  if (object.zone === "battlefield" && abilitiesLostAt(state, registry, object) !== null) return [];
+  // A loss of all abilities takes them; rule 305.7's loss of the rules text
+  // doesn't — that's how a land made a Mountain gets "{T}: Add {R}".
+  if (object.zone === "battlefield" && layerSixLossAt(state, registry, object) !== null) return [];
   return BASIC_LAND_TYPE_COLORS.filter(([type]) => hasSubtype(subtypes, type)).map(([, color]) => color);
 }
 
@@ -2991,9 +3152,9 @@ export function extraIntrinsicManaColors(
   if (printedLandTypesHold(state, registry, object)) return [];
   const has = intrinsicManaColors(state, registry, object);
   if (has.length === 0) return has;
-  // Its own stand-ins went with its text box (rule 612.5): every type's
-  // intrinsic ability is an extra.
-  if (object.textFrom !== undefined) return has;
+  // Its own stand-ins went with its text box (rule 612.5), or with its rules
+  // text (305.7): every type's intrinsic ability is an extra.
+  if (object.textFrom !== undefined || landTextLost(state, registry, object)) return has;
   const covered = new Set<Color>();
   for (const colors of intrinsicStandIns(registry.get(printedCardName(object)))) {
     if (colors !== null && colors.every((c) => has.includes(c))) for (const c of colors) covered.add(c);
@@ -3069,11 +3230,11 @@ export function hasManaAbility(
   if (
     lostAt === null &&
     (def.activated.some((a, i) => isManaAbilityByRule(a) && !inactiveStandIn(state, registry, object, i)) ||
-      def.triggered.some(isTriggeredManaAbility) ||
-      intrinsicManaColors(state, registry, object).length > 0)
+      def.triggered.some(isTriggeredManaAbility))
   ) {
     return true;
   }
+  if (intrinsicManaColors(state, registry, object).length > 0) return true;
   if (
     object.modifiers.some(
       (m) =>
@@ -3323,6 +3484,9 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
 interface ContributingStatic {
   readonly source: GameObject;
   readonly ability: StaticAbility;
+  /** A granted static's (`grantedStatics`): its effects take the later of
+   * its source's timestamp and the grant's (rule 613.7a). */
+  readonly timestamp?: number;
 }
 
 /**
@@ -3351,7 +3515,7 @@ function contributingStaticSources(
     // 614 — "enters tapped") or a CDA (`setBasePtFromCount`, handled in its
     // own pass) modifies nothing. See `StaticsInfo`.
     const contributing = staticsOf(registry, rulesTextName(source)).contributing;
-    if (contributing.length === 0) continue;
+    if (contributing.length === 0 && !source.modifiers.some((m) => m.grantsStatic !== undefined)) continue;
     // An eliminated player's permanents stay on the board to be looked at but
     // stop affecting the game — so their anthems and lords stop applying too.
     // See the note in `matchesFilter`: they leave play, not view — rule
@@ -3366,6 +3530,16 @@ function contributingStaticSources(
     for (const ability of contributing) {
       if (lost && !staticOutlivesLoss(state, registry, source, ability)) continue;
       out.push({ source, ability });
+    }
+    // What a `grant-static` gave it (Earthbind's "Enchanted creature loses
+    // flying"), timestamped by the later of it and the grant (613.7a).
+    for (const m of source.modifiers) {
+      if (m.grantsStatic === undefined) continue;
+      if (!modifierGrantApplies(m, abilitiesLostAt(state, registry, source))) continue;
+      const timestamp = Math.max(source.timestamp, m.timestamp ?? source.timestamp);
+      for (const ability of m.grantsStatic) {
+        if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability, timestamp });
+      }
     }
   }
   // A card's static that functions from its owner's graveyard (rule 113.6b
@@ -3411,7 +3585,7 @@ function collectStaticEffects(
 ): AppliedEffect[] {
   const out: AppliedEffect[] = [];
   const sources = contributingStaticSources(state, registry);
-  const applied = (source: GameObject, ability: StaticAbility): AppliedEffect | null => {
+  const applied = (source: GameObject, ability: StaticAbility, timestamp = source.timestamp): AppliedEffect | null => {
     // "As long as …" gate (rule 604.3 — ROADMAP Phase 11 EG-3). Checked
     // *after* `staticAffects` so a static that can't reach `target` never
     // evaluates its condition (which may itself read other permanents'
@@ -3507,7 +3681,7 @@ function collectStaticEffects(
       scaledToughness = n * per.pt[1];
     }
     return {
-      timestamp: source.timestamp,
+      timestamp,
       power: (ability.grantPt?.[0] ?? 0) + scaledPower,
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
       keywords: ability.grantKeywords ?? [],
@@ -3526,13 +3700,13 @@ function collectStaticEffects(
     };
   };
   let keywordScoped = false;
-  for (const { source, ability } of sources) {
+  for (const { source, ability, timestamp } of sources) {
     if (scopedByKeyword(ability.affects)) {
       keywordScoped = true;
       continue;
     }
     if (!staticReaches(state, registry, source, ability, target, { inFold: true })) continue;
-    const effect = applied(source, ability);
+    const effect = applied(source, ability, timestamp);
     if (effect !== null) out.push(effect);
   }
   // Emblems (rule 114 — ROADMAP Phase 10): a player-owned anthem with no
@@ -3605,7 +3779,7 @@ function collectStaticEffects(
       return keywords;
     };
     const second: AppliedEffect[] = [];
-    for (const { source, ability } of sources) {
+    for (const { source, ability, timestamp } of sources) {
       if (!scopedByKeyword(ability.affects)) continue;
       if (
         !staticReaches(state, registry, source, ability, target, {
@@ -3615,7 +3789,7 @@ function collectStaticEffects(
       ) {
         continue;
       }
-      const effect = applied(source, ability);
+      const effect = applied(source, ability, timestamp);
       if (effect !== null) second.push(effect);
     }
     out.push(...second);
@@ -3906,6 +4080,28 @@ function computeCharacteristicsUncached(
       // Toughness alone (an exchange with a life total — rule 701.12g).
       if (modifier.setToughness !== undefined) {
         sets.push({ key: modifierKey(modifier), toughness: modifier.setToughness });
+      }
+      // A granted "base power is equal to …" (Ms. Marvel, Kamala Khan): not a
+      // characteristic-defining ability (rule 604.3a(2)), so a 7b set at the
+      // grant's timestamp, read live like a CDA's count.
+      if (modifier.grantsStatic !== undefined && !cdaInProgress.has(object.id)) {
+        if (!modifierGrantApplies(modifier, abilitiesLostAt(state, registry, object))) continue;
+        for (const ability of modifier.grantsStatic) {
+          const from = ability.setBasePtFromCount;
+          if (from === undefined) continue;
+          let n: number;
+          cdaInProgress.add(object.id);
+          try {
+            n = countValue(from.countOf, state, registry, object.controller);
+          } finally {
+            cdaInProgress.delete(object.id);
+          }
+          sets.push({
+            key: modifierKey(modifier),
+            ...(from.only !== "toughness" ? { power: n + from.plusPower } : {}),
+            ...(from.only !== "power" ? { toughness: n + from.plusToughness } : {}),
+          });
+        }
       }
     }
     sets.sort((a, b) => a.key - b.key);

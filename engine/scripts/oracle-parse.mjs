@@ -1853,6 +1853,28 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
   }
+  // "Can't be blocked by [X] this turn" — a rule on it, not an ability
+  // (`restrict`'s `cantBeBlockedBy`); "except by [X]" is the negation.
+  {
+    const by =
+      (m = re(`(~|${TARGET}) can't be blocked by creatures with power (\\d+) or (less|greater) this turn`).exec(s))
+        ? { power: { op: m[3].toLowerCase() === "less" ? "lte" : "gte", n: Number(m[2]) } }
+        : (m = re(`(~|${TARGET}) can't be blocked by Walls this turn`).exec(s))
+          ? { subtype: "Wall" }
+          : (m = re(`(~|${TARGET}) can't be blocked this turn except by creatures with (flying|haste|defender|reach)`).exec(s))
+            ? { notKeyword: m[2].toLowerCase() }
+            : undefined;
+    if (by !== undefined) {
+      return { kind: "restrict", target: m[1] === "~" ? "source" : slot(m[1]), restrictions: [], cantBeBlockedBy: by };
+    }
+  }
+  // Rule 701.12b: two permanents change hands at once, all or nothing.
+  if ((m = re(`exchange control of ~ and (${TARGET})`).exec(s))) {
+    return { kind: "exchange-control", objects: ["source", slot(m[1])] };
+  }
+  if ((m = re(`exchange control of (${TARGET}) and (${TARGET})`).exec(s))) {
+    return { kind: "exchange-control", objects: [slot(m[1]), slot(m[2])] };
+  }
 
   // "Gets +N/+N and gains <keyword> until end of turn" — two instructions on one object.
   if ((m = re(`(~|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) and gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
@@ -3725,6 +3747,16 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Rule 305.7: lands whose land types are set to a basic one (Blood Moon,
+  // Spreading Seas, Convincing Mirage).
+  if ((m = /^Nonbasic lands are (Plains|Islands|Swamps|Mountains|Forests)\.$/.exec(line))) {
+    const type = m[1] === "Plains" ? "Plains" : m[1].slice(0, -1);
+    return { affects: { scope: "filter", filter: { type: "land", notSupertype: "basic" } }, setSubtypes: [type], text };
+  }
+  if ((m = /^Enchanted land is an? (Plains|Island|Swamp|Mountain|Forest)\.$/.exec(line))) {
+    return { affects: { scope: "attached" }, setSubtypes: [m[1]], text };
+  }
+  if (line === "Enchanted land is the chosen type.") return { affects: { scope: "attached" }, setsChosenLandType: true, text };
   if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }

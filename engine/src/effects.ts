@@ -2289,6 +2289,12 @@ export type EffectSpec =
       /** Types that can't be chosen — "choose a creature type other than
        * Wall" (Imagecrafter, Standardize). */
       readonly exclude?: readonly string[];
+      /** A fixed list to choose among instead of the creature types, as
+       * buttons — "the basic land type of your choice" (Tideshaper Mystic:
+       * `BASIC_LAND_TYPE_CHOICES`, with `prompt: "Choose a basic land
+       * type"`), substituted into `then` the same way. */
+      readonly options?: readonly string[];
+      readonly prompt?: string;
     }
   | {
       /**
@@ -2586,6 +2592,39 @@ export type EffectSpec =
       readonly whileYouControlSource?: boolean;
     }
   | {
+      /**
+       * Exchange control of two permanents (rule 701.12b): each one's
+       * controller gains control of the other at once, as one lasting effect
+       * with one timestamp — Switcheroo's "two target creatures", Avarice
+       * Totem's "this artifact and target nonland permanent" (`"source"`).
+       * All or nothing (701.12a): if either has left the battlefield or is
+       * an illegal target now (608.2b), or one player controls both, nothing
+       * changes hands. `then` is done if they were exchanged (Volatile
+       * Stormdrake's "If you do"), `otherwise` if not (Gilded Drake's "If you
+       * don't or can't make an exchange, sacrifice this creature").
+       */
+      readonly kind: "exchange-control";
+      readonly objects: readonly [EffectTargetRef, EffectTargetRef];
+      readonly then?: EffectSpec;
+      readonly otherwise?: EffectSpec;
+    }
+  | {
+      /**
+       * "You and target opponent each gain control of all creatures the other
+       * controls until end of turn" (Reins of Power, Twist Allegiance): every
+       * permanent matching `filter` that you control goes to `with`, and
+       * every one `with` controls comes to you, both sets fixed before
+       * anything moves (rule 611.2c) and changing hands at once with one
+       * timestamp (613.7b). Not worded as an exchange, so one side having
+       * none doesn't stop the other (701.12a doesn't apply). Nothing if
+       * `with` is no longer in the game or an illegal target (608.2b).
+       */
+      readonly kind: "exchange-control-all";
+      readonly filter: CardFilter;
+      readonly with: EffectPlayerRef;
+      readonly untilEndOfTurn: boolean;
+    }
+  | {
       /** Every battlefield permanent matching `filter` (read from the
        * effect's controller's side) changes control at once — one effect, so
        * one timestamp (rule 613.7b): "gain control of all nonland permanents
@@ -2605,6 +2644,11 @@ export type EffectSpec =
       readonly who?: EffectPlayerRef | "owner";
       readonly exceptSource?: boolean;
       readonly controlledBy?: "trigger-player";
+      /** Only what the player in this target slot controls (or the
+       * controller of the permanent there) — Call for Aid's "gain control of
+       * all creatures **target player** controls" (as `destroy-all`'s).
+       * Nothing once that target is illegal (rule 608.2b). */
+      readonly controlledByTarget?: number;
     }
   | {
       /** "Each player gains control of all [`filter`] controlled by the next
@@ -3927,6 +3971,14 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly filter?: CardFilter;
       readonly restrictions: readonly CombatRestriction[];
+      /** "Can't be blocked by [this] this turn" (rule 509.1b): no creature
+       * matching it, from this effect's controller's side, can block —
+       * Ghirapur Guide's `{ types: ["creature"], power: { lte: 2 } }`;
+       * "except by creatures with haste" is `{ not: … }` (Run for Your
+       * Life). Not an ability the creature gains, so it outlasts a loss of
+       * abilities; with `filter`, a turn-wide rule like the rest (Dread
+       * Charge). `restrictions` may then be empty. */
+      readonly cantBeBlockedBy?: CardFilter;
       /** How long a `target`'s restrictions last — this turn when omitted;
        * `"while-source"` is Opportunistic Dragon's "for as long as this
        * creature remains on the battlefield, … it can't attack or block". */
@@ -4130,6 +4182,32 @@ export type EffectSpec =
       readonly kind: "grant-activated";
       readonly target: EffectTargetRef;
       readonly ability: ActivatedAbility;
+      readonly duration: PtDuration;
+    }
+  | {
+      /**
+       * Give a permanent a static ability: "it gains 'This creature attacks
+       * each combat if able'" (Carnage, Crimson Chaos — `duration:
+       * "permanent"`), Earthbind's "this Aura gains 'Enchanted creature
+       * loses flying'" (`target: "source"`), Iron Man Armor's "and 'This
+       * creature gets +1/+1 for each artifact you control'". The ability
+       * works from that permanent as its own static would (`affects` read
+       * from there; "self" is it), with its effects timestamped by the later
+       * of the permanent and the grant (rule 613.7a); like any granted
+       * ability, a later loss of all abilities takes it away (613.7). With
+       * `filter` instead, every permanent matching it as it resolves (rule
+       * 611.2c: granting an ability changes characteristics, so the set is
+       * fixed then) — Full Steam Ahead's "each creature you control … gains
+       * 'This creature can't be blocked by more than one creature'". Read
+       * by the layer fold's contributing statics, the block filters, the
+       * ability grants, the untap step's and the game-loss statics, and a
+       * base-P/T set (not a CDA once granted — rule 604.3a(2): layer 7b at
+       * the grant's timestamp). A layer-4 part isn't applied.
+       */
+      readonly kind: "grant-static";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly ability: StaticAbility;
       readonly duration: PtDuration;
     }
   | {
@@ -6939,7 +7017,11 @@ export interface EffectApi {
    * zone and owned by the controller, for casting; the new objects' ids. */
   copyCards(cards: readonly ObjectId[], times: number): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
-  chooseCreatureType(then: EffectSpec, exclude?: readonly string[]): void;
+  chooseCreatureType(
+    then: EffectSpec,
+    exclude?: readonly string[],
+    options?: { readonly options: readonly string[]; readonly prompt?: string },
+  ): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
@@ -7079,6 +7161,11 @@ export interface EffectApi {
   ): void;
   /** See the `"rotate-control"` {@link EffectSpec}. */
   rotateControl(filter: CardFilter, direction: "left" | "right", exceptSource: boolean): void;
+  /** See the `"exchange-control"` {@link EffectSpec}: whether they were
+   * exchanged. */
+  exchangeControl(first: TargetRef, second: TargetRef): boolean;
+  /** See the `"exchange-control-all"` {@link EffectSpec}. */
+  exchangeControlAll(filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean): void;
   /** `target` gains "This creature can't be sacrificed" — see the
    * `"cant-be-sacrificed"` {@link EffectSpec}. */
   grantCantBeSacrificed(target: TargetRef, duration: PtDuration): void;
@@ -7286,6 +7373,15 @@ export interface EffectApi {
     restrictions: readonly CombatRestriction[],
     /** A `target`'s: this turn when omitted. */
     duration?: PtDuration,
+    cantBeBlockedBy?: CardFilter,
+  ): void;
+  /** See the `"grant-static"` {@link EffectSpec}: `target`, or with `filter`
+   * every permanent matching it now. */
+  grantStatic(
+    target: TargetRef | undefined,
+    filter: CardFilter | undefined,
+    ability: StaticAbility,
+    duration: PtDuration,
   ): void;
   /** See the `"detain"` {@link EffectSpec}. */
   detain(target: TargetRef): void;
@@ -10241,6 +10337,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "gain-control-all": {
       const who = spec.who === "owner" ? "owner" : effectPlayer(spec.who ?? "you", ctx);
       if (who === undefined) return;
+      if (spec.controlledByTarget !== undefined) {
+        if (illegalSlot(spec.controlledByTarget, ctx)) return;
+        const from = scopedController(spec.controlledByTarget, ctx);
+        if (from === undefined) return;
+        ctx.gainControlAll(spec.filter, spec.untilEndOfTurn, who, spec.exceptSource === true, from);
+        return;
+      }
       if (spec.controlledBy !== undefined) {
         const from = ctx.playersInScope(spec.controlledBy)[0];
         if (from === undefined) return;
@@ -10253,6 +10356,26 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "rotate-control":
       ctx.rotateControl(spec.filter, spec.direction, spec.exceptSource === true);
       return;
+    case "exchange-control": {
+      const [a, b] = spec.objects;
+      const first = resolveEffectTarget(a, ctx);
+      const second = resolveEffectTarget(b, ctx);
+      const exchanged =
+        first !== undefined &&
+        second !== undefined &&
+        !illegalSlot(a, ctx) &&
+        !illegalSlot(b, ctx) &&
+        ctx.exchangeControl(first, second);
+      const next = exchanged ? spec.then : spec.otherwise;
+      if (next !== undefined) applyEffectSpec(next, ctx);
+      return;
+    }
+    case "exchange-control-all": {
+      if (typeof spec.with === "object" && "target" in spec.with && illegalSlot(spec.with.target, ctx)) return;
+      const other = effectPlayer(spec.with, ctx);
+      if (other !== undefined) ctx.exchangeControlAll(spec.filter, other, spec.untilEndOfTurn);
+      return;
+    }
     case "cant-be-sacrificed": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.grantCantBeSacrificed(target, spec.duration);
@@ -10337,7 +10460,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "choose-creature-type":
-      ctx.chooseCreatureType(spec.then, spec.exclude);
+      ctx.chooseCreatureType(
+        spec.then,
+        spec.exclude,
+        spec.options === undefined
+          ? undefined
+          : { options: spec.options, ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}) },
+      );
       return;
     case "choose-card-name":
       ctx.chooseCardName(spec);
@@ -11255,11 +11384,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "restrict": {
       if (spec.filter !== undefined) {
-        ctx.restrict(undefined, spec.filter, spec.restrictions);
+        ctx.restrict(undefined, spec.filter, spec.restrictions, undefined, spec.cantBeBlockedBy);
         return;
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.restrict(target, undefined, spec.restrictions, spec.duration);
+      if (target !== undefined) ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy);
+      return;
+    }
+    case "grant-static": {
+      if (spec.filter !== undefined) {
+        ctx.grantStatic(undefined, spec.filter, spec.ability, spec.duration);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.grantStatic(target, undefined, spec.ability, spec.duration);
       return;
     }
     case "detain": {

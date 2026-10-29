@@ -723,6 +723,7 @@ import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
 import _poolThunderstaff from "../pool/thunderstaff.js";
 import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
+import _poolTideshaperMystic from "../pool/tideshaper-mystic.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimberpackWolf from "../pool/timberpack-wolf.js";
 import _poolTimeWalk from "../pool/time-walk.js";
@@ -1567,6 +1568,7 @@ const shard: CardShard = {
     _poolThrottle,
     _poolThunderstaff,
     _poolThwartTheGrave,
+    _poolTideshaperMystic,
     _poolTigerDillo,
     _poolTimberpackWolf,
     _poolTimeWalk,

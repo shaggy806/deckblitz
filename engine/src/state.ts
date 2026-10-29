@@ -1417,6 +1417,21 @@ export interface PtModifier {
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */
   restrictions?: CombatRestriction[];
+  /** "Can't be blocked by [filter] this turn" (the `restrict` effect's
+   * `cantBeBlockedBy` — Ghirapur Guide; "except by [X]" is `not` X): no
+   * creature matching `filter`, from `you`'s side, can block it (rule
+   * 509.1b). A rule about it, not an ability, so a loss of abilities doesn't
+   * end it. Read with the statics' block filters (`combat/eligibility.ts`). */
+  cantBeBlockedBy?: { readonly filter: CardFilter; readonly you: PlayerId }[];
+  /** Layer 6 — static abilities this modifier grants: "it gains 'This
+   * creature can't be blocked by more than one creature' until end of turn"
+   * (Full Steam Ahead), Earthbind's "this Aura gains 'Enchanted creature
+   * loses flying'" (the `grant-static` effect). Each works from this
+   * permanent as its own static would — its `affects` read from here — and,
+   * like any granted ability, a later loss of all abilities takes it away
+   * (rule 613.7). Read through `grantedStatics`. A layer-4 part isn't
+   * applied (no card grants one). */
+  grantsStatic?: StaticAbility[];
   /** Layer 4 — card types this modifier adds (a man-land's "becomes a …
    * creature. It's still a land." keeps the printed types and adds these). */
   addTypes?: CardType[];
@@ -4588,6 +4603,9 @@ export interface GameState {
     readonly filter: CardFilter;
     readonly you: PlayerId;
     readonly restrictions: readonly CombatRestriction[];
+    /** "… can't be blocked by [this] this turn" (Dread Charge's "except by
+     * black creatures"): read with the block filters, not `restrictionsOf`. */
+    readonly cantBeBlockedBy?: CardFilter;
   }[];
   /** Blocking requirements on one creature each (rule 509.1c) — "target
    * creature blocks this turn if able", or blocks `attacker` if able

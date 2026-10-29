@@ -1417,6 +1417,17 @@ export interface StaticAbility {
    */
   readonly loseLandTypes?: true;
   /**
+   * Layer 4 — the affected permanents' land types are the basic land type
+   * this static's own permanent chose as it entered (`chooseOnEnter` over
+   * the five — `BASIC_LAND_TYPE_CHOICES`, its `chosenOnEnter`), replacing
+   * their others: Convincing Mirage's "enchanted land is the chosen type",
+   * Multiversal Passage's "this land is the chosen type". Setting a land's
+   * type to a basic one takes the abilities its rules text gave it (rule
+   * 305.7 — `landTextLost`), as a fixed `setSubtypes` of one does (Blood
+   * Moon's `["Mountain"]`). Nothing changes while none is chosen.
+   */
+  readonly setsChosenLandType?: true;
+  /**
    * Layer 7b — sets the affected permanents' base power and/or toughness
    * (Kudo: "have base power and toughness 2/2"; a lone `toughness` is "have
    * base toughness 1"). After characteristic-defining abilities, in

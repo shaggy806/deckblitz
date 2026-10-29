@@ -2314,6 +2314,7 @@ import _poolBloodKnight from "./pool/blood-knight.js";
 import _poolBloodLust from "./pool/blood-lust.js";
 import _poolBloodMist from "./pool/blood-mist.js";
 import _poolBloodMoney from "./pool/blood-money.js";
+import _poolBloodMoon from "./pool/blood-moon.js";
 import _poolBloodOgre from "./pool/blood-ogre.js";
 import _poolBloodOnTheSnow from "./pool/blood-on-the-snow.js";
 import _poolBloodOperative from "./pool/blood-operative.js";
@@ -8447,6 +8448,7 @@ import _poolFugitiveWizard from "./pool/fugitive-wizard.js";
 import _poolFugue from "./pool/fugue.js";
 import _poolFullBore from "./pool/full-bore.js";
 import _poolFullMoonsRise from "./pool/full-moons-rise.js";
+import _poolFullSteamAhead from "./pool/full-steam-ahead.js";
 import _poolFullyGrown from "./pool/fully-grown.js";
 import _poolFulminatorMage from "./pool/fulminator-mage.js";
 import _poolFulminousForte from "./pool/fulminous-forte.js";
@@ -8814,6 +8816,7 @@ import _poolGhastlyRemains from "./pool/ghastly-remains.js";
 import _poolGhenArcanumWeaver from "./pool/ghen-arcanum-weaver.js";
 import _poolGhirapurAetherGrid from "./pool/ghirapur-aether-grid.js";
 import _poolGhirapurGearcrafter from "./pool/ghirapur-gearcrafter.js";
+import _poolGhirapurGuide from "./pool/ghirapur-guide.js";
 import _poolGhirapurOsprey from "./pool/ghirapur-osprey.js";
 import _poolGhiredConclaveExile from "./pool/ghired-conclave-exile.js";
 import _poolGhiredMirrorOfTheWilds from "./pool/ghired-mirror-of-the-wilds.js";
@@ -22193,6 +22196,7 @@ import _poolSwimmerInNightmares from "./pool/swimmer-in-nightmares.js";
 import _poolSwirlingSandstorm from "./pool/swirling-sandstorm.js";
 import _poolSwirlingSpriggan from "./pool/swirling-spriggan.js";
 import _poolSwirlingTorrent from "./pool/swirling-torrent.js";
+import _poolSwitcheroo from "./pool/switcheroo.js";
 import _poolSwoopingLookout from "./pool/swooping-lookout.js";
 import _poolSwoopingProtector from "./pool/swooping-protector.js";
 import _poolSwoopingTalon from "./pool/swooping-talon.js";
@@ -23314,6 +23318,7 @@ import _poolTidechannelPathway from "./pool/tidechannel-pathway.js";
 import _poolTideforceElemental from "./pool/tideforce-elemental.js";
 import _poolTidehollowStrix from "./pool/tidehollow-strix.js";
 import _poolTidepoolTurtle from "./pool/tidepool-turtle.js";
+import _poolTideshaperMystic from "./pool/tideshaper-mystic.js";
 import _poolTidespoutTyrant from "./pool/tidespout-tyrant.js";
 import _poolTidewaterMinion from "./pool/tidewater-minion.js";
 import _poolTidingsOfWar from "./pool/tidings-of-war.js";
@@ -29301,6 +29306,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodLust,
   _poolBloodMist,
   _poolBloodMoney,
+  _poolBloodMoon,
   _poolBloodOgre,
   _poolBloodOnTheSnow,
   _poolBloodOperative,
@@ -35434,6 +35440,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFugue,
   _poolFullBore,
   _poolFullMoonsRise,
+  _poolFullSteamAhead,
   _poolFullyGrown,
   _poolFulminatorMage,
   _poolFulminousForte,
@@ -35801,6 +35808,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhenArcanumWeaver,
   _poolGhirapurAetherGrid,
   _poolGhirapurGearcrafter,
+  _poolGhirapurGuide,
   _poolGhirapurOsprey,
   _poolGhiredConclaveExile,
   _poolGhiredMirrorOfTheWilds,
@@ -49180,6 +49188,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSwirlingSandstorm,
   _poolSwirlingSpriggan,
   _poolSwirlingTorrent,
+  _poolSwitcheroo,
   _poolSwoopingLookout,
   _poolSwoopingProtector,
   _poolSwoopingTalon,
@@ -50301,6 +50310,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTideforceElemental,
   _poolTidehollowStrix,
   _poolTidepoolTurtle,
+  _poolTideshaperMystic,
   _poolTidespoutTyrant,
   _poolTidewaterMinion,
   _poolTidingsOfWar,
@@ -56301,6 +56311,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blood-lust": _poolBloodLust,
   "pool/blood-mist": _poolBloodMist,
   "pool/blood-money": _poolBloodMoney,
+  "pool/blood-moon": _poolBloodMoon,
   "pool/blood-ogre": _poolBloodOgre,
   "pool/blood-on-the-snow": _poolBloodOnTheSnow,
   "pool/blood-operative": _poolBloodOperative,
@@ -62434,6 +62445,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fugue": _poolFugue,
   "pool/full-bore": _poolFullBore,
   "pool/full-moons-rise": _poolFullMoonsRise,
+  "pool/full-steam-ahead": _poolFullSteamAhead,
   "pool/fully-grown": _poolFullyGrown,
   "pool/fulminator-mage": _poolFulminatorMage,
   "pool/fulminous-forte": _poolFulminousForte,
@@ -62801,6 +62813,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghen-arcanum-weaver": _poolGhenArcanumWeaver,
   "pool/ghirapur-aether-grid": _poolGhirapurAetherGrid,
   "pool/ghirapur-gearcrafter": _poolGhirapurGearcrafter,
+  "pool/ghirapur-guide": _poolGhirapurGuide,
   "pool/ghirapur-osprey": _poolGhirapurOsprey,
   "pool/ghired-conclave-exile": _poolGhiredConclaveExile,
   "pool/ghired-mirror-of-the-wilds": _poolGhiredMirrorOfTheWilds,
@@ -76180,6 +76193,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/swirling-sandstorm": _poolSwirlingSandstorm,
   "pool/swirling-spriggan": _poolSwirlingSpriggan,
   "pool/swirling-torrent": _poolSwirlingTorrent,
+  "pool/switcheroo": _poolSwitcheroo,
   "pool/swooping-lookout": _poolSwoopingLookout,
   "pool/swooping-protector": _poolSwoopingProtector,
   "pool/swooping-talon": _poolSwoopingTalon,
@@ -77301,6 +77315,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tideforce-elemental": _poolTideforceElemental,
   "pool/tidehollow-strix": _poolTidehollowStrix,
   "pool/tidepool-turtle": _poolTidepoolTurtle,
+  "pool/tideshaper-mystic": _poolTideshaperMystic,
   "pool/tidespout-tyrant": _poolTidespoutTyrant,
   "pool/tidewater-minion": _poolTidewaterMinion,
   "pool/tidings-of-war": _poolTidingsOfWar,

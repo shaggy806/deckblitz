@@ -276,6 +276,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "gain-control-all": none,
   "rotate-control": none,
+  // Which side gains depends on whose each one is: a bad permanent of yours
+  // for a good one of theirs.
+  "exchange-control": (n, v) => {
+    v.touch(n.objects[0], "either", DECISIVE);
+    v.touch(n.objects[1], "either", DECISIVE);
+    v.child(n.then);
+    v.child(n.otherwise);
+  },
+  "exchange-control-all": (n, v) => v.touch(n.with, "harm", DECISIVE),
   "cant-be-sacrificed": (n, v) => v.touch(n.target, "help", MINOR),
   "block-additional": (n, v) => v.touch(n.target, "help", MINOR),
   "attack-despite-defender": (n, v) => {
@@ -439,7 +448,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "block-if-able": (n, v) => v.touch(n.target, "harm", MINOR),
   restrict: (n, v) => {
     const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
-    const helps = n.restrictions.some(lure);
+    const helps = n.restrictions.some(lure) || n.cantBeBlockedBy !== undefined;
     const hurts = n.restrictions.some((r) => !lure(r));
     v.touch(n.target, helps && hurts ? "either" : helps ? "help" : "harm", MINOR);
   },
@@ -451,6 +460,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "lose-abilities-all": none,
   gift: none,
   "grant-activated": (n, v) => v.touch(n.target, "help", MAJOR),
+  // A gained static is a gift ("can't be blocked by more than one creature")
+  // unless it ties the creature down ("doesn't untap", "loses flying").
+  "grant-static": (n, v) => {
+    const a = n.ability;
+    const lure = (r: string): boolean => r === "must-be-blocked" || r === "must-be-blocked-if-able";
+    const harms =
+      (a.restrictions ?? []).some((r) => !lure(r)) || (a.loseKeywords ?? []).length > 0 || a.doesntUntap === true;
+    v.touch(n.target, harms ? "harm" : "help", MAJOR);
+  },
   "grant-activated-all": none,
   "grant-triggered-all": none,
   "take-extra-turn": (n, v) => v.touch(n.target, "help", MAJOR),

@@ -65,6 +65,17 @@ describe("effect templates", () => {
       "Creatures you control gain protection from artifacts until end of turn.",
       { kind: "grant-protection", filter: { type: "creature", controlledBy: "you" }, from: { types: ["artifact"] }, duration: "end-of-turn" },
     ],
+    [
+      "Target creature can't be blocked by creatures with power 2 or less this turn.",
+      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { power: { op: "lte", n: 2 } } },
+    ],
+    [
+      "~ can't be blocked this turn except by creatures with haste.",
+      { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { notKeyword: "haste" } },
+    ],
+    ["Target creature can't be blocked by Walls this turn.", { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { subtype: "Wall" } }],
+    ["Exchange control of target creature you control and target creature an opponent controls.", { kind: "exchange-control", objects: [0, 1] }],
+    ["Exchange control of ~ and target nonland permanent.", { kind: "exchange-control", objects: ["source", 0] }],
     ["Add {G}.", { kind: "add-mana", mana: "G", amount: 1 }],
     ["Add {R} or {G}.", { kind: "add-mana", mana: { oneOf: ["R", "G"] }, amount: 1 }],
     ["Each opponent skips their next untap step.", { kind: "skip-untap-step", who: "each-opponent" }],
@@ -2586,5 +2597,24 @@ describe("agreement with the hand-authored pool", () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);
     expect(stats.claimed).toBeGreaterThan(400);
     expect(mismatches.map((m: { card: string; text: string }) => `${m.card}: ${m.text}`)).toEqual([]);
+  });
+});
+
+describe("land-type setting statics (rule 305.7)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Land Setter", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads Blood Moon's, Spreading Seas's and Convincing Mirage's", () => {
+    expect(face("Enchantment", "Nonbasic lands are Mountains.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "land", notSupertype: "basic" } },
+      setSubtypes: ["Mountain"],
+    });
+    expect(face("Enchantment — Aura", "Enchant land\nEnchanted land is an Island.").static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      setSubtypes: ["Island"],
+    });
+    expect(face("Enchantment — Aura", "Enchant land\nEnchanted land is the chosen type.").static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      setsChosenLandType: true,
+    });
   });
 });
