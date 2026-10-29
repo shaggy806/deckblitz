@@ -2763,4 +2763,55 @@ describe("damage by this source, switches, defending-player restrictions, a targ
       effect: { kind: "look-and-choose", player: "that-player", zone: "hand", min: 2, max: 2, destination: "exile", unlinked: true, leftover: "stay" },
     });
   });
+
+  it("reads separating into two piles (rule 700.3)", () => {
+    const fof = face(
+      "Instant",
+      "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.",
+    );
+    expect(fof.effect).toEqual({
+      kind: "choose-opponent",
+      then: {
+        kind: "separate-into-piles",
+        objects: { libraryTop: 5, reveal: true },
+        separator: "that-player",
+        chooser: "you",
+        chosen: "hand",
+        rest: "graveyard",
+      },
+    });
+    const augury = face(
+      "Instant",
+      "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.",
+    );
+    expect(augury.effect.then).toEqual({
+      kind: "separate-into-piles",
+      objects: { libraryTop: 5, reveal: true },
+      chooser: "that-player",
+      chosen: "hand",
+      rest: "graveyard",
+    });
+    const favor = face(
+      "Instant",
+      "Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.",
+    );
+    expect(favor.targets).toEqual(["opponent"]);
+    expect(favor.effect).toMatchObject({ objects: { libraryTop: 4 }, faceDown: true, separator: { target: 0 }, chooser: "you" });
+    const doOrDie = face(
+      "Sorcery",
+      "Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.",
+    );
+    expect(doOrDie.effect).toEqual({
+      kind: "separate-into-piles",
+      objects: { permanents: { type: "creature" }, whose: { target: 0 } },
+      chooser: { target: 0 },
+      chosen: { effect: { kind: "destroy", target: 0, cantBeRegenerated: true } },
+    });
+    // A look with two plain piles names no card's shape, and isn't read.
+    const look = face(
+      "Instant",
+      "Look at the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.",
+    );
+    expect(look.effect).toBeNull();
+  });
 });

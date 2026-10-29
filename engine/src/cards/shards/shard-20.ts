@@ -249,6 +249,7 @@ import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
 import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
+import _poolFactOrFiction from "../pool/fact-or-fiction.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
     _poolEyeblightCullers,
+    _poolFactOrFiction,
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,

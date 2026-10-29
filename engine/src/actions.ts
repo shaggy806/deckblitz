@@ -7,6 +7,7 @@
  */
 
 import type { CardType } from "./cards/define.js";
+import type { PileFateWord } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -648,6 +649,21 @@ export type Action =
       readonly type: "choose-card-name";
       readonly player: PlayerId;
       readonly name: string;
+    }
+  | {
+      /** Answers a pending `separate-piles` decision (rule 700.3): two
+       * piles, every offered object in exactly one of them (either may be
+       * empty). With a face-down pile, `piles[0]` is it. */
+      readonly type: "separate-piles";
+      readonly player: PlayerId;
+      readonly piles: readonly (readonly ObjectId[])[];
+    }
+  | {
+      /** Answers a pending `choose-pile` decision: the index of the pile
+       * chosen. */
+      readonly type: "choose-pile";
+      readonly player: PlayerId;
+      readonly pile: number;
     }
   | {
       /** Answers a pending `choose-modes` decision (a modal spell/ability, or
@@ -1632,6 +1648,41 @@ export type LegalAction =
       /** The cards looked at for this choice (Sorcerous Spyglass), which the
        * chooser can see in their view. */
       readonly looked?: readonly ObjectId[];
+    }
+  | {
+      /** Separate objects into two piles (rule 700.3) — see
+       * `AwaitingDecision`'s `separate-piles`. */
+      readonly kind: "separate-piles";
+      readonly source: ObjectId;
+      readonly objects: readonly ObjectId[];
+      /** Who will choose a pile. */
+      readonly chooser: PlayerId;
+      /** Pile 0 is face down, pile 1 face up. */
+      readonly faceDown?: true;
+      /** What happens to the chosen pile and to the other. */
+      readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
+      /** How much each object is worth to its controller or owner, by the
+       * engine's rough measure (mana value, a land 1.5): for a bot weighing
+       * splits. */
+      readonly worth: Readonly<Record<ObjectId, number>>;
+      /** Who controls (a permanent) or owns (a card) each object. */
+      readonly whose: Readonly<Record<ObjectId, PlayerId>>;
+    }
+  | {
+      /** Choose one of two piles — see `AwaitingDecision`'s `choose-pile`. */
+      readonly kind: "choose-pile";
+      readonly source: ObjectId;
+      readonly piles: readonly (readonly ObjectId[])[];
+      readonly separator: PlayerId;
+      /** Pile 0 is face down; `piles[0]` is then the chooser's to see only
+       * when they looked at the cards. */
+      readonly faceDown?: true;
+      readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
+      /** As `separate-piles`' — a face-down card the chooser can't see is
+       * left out. */
+      readonly worth: Readonly<Record<ObjectId, number>>;
+      /** Who controls (a permanent) or owns (a card) each object. */
+      readonly whose: Readonly<Record<ObjectId, PlayerId>>;
     }
   | {
       readonly kind: "choose-modes";

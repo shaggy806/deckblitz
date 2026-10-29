@@ -8557,4 +8557,34 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Erithizon: the defending player picks the creature',
     board({ you: { bf: ['Erithizon'] }, opp: { human: true, bf: ['Grizzly Bears'] } }),
   ),
+  // --- Separating into piles (2026-10-29, build-family) ---
+  preset(
+    'Fact or Fiction: choose the pile for your hand',
+    board({
+      you: {
+        bf: ['Island*4'],
+        hand: ['Fact or Fiction'],
+        lib: ['Grizzly Bears', 'Shock', 'Counterspell', 'Llanowar Elves', 'Craw Wurm'],
+      },
+    }),
+  ),
+  preset(
+    'Curator of Destinies: separate into a face-down and a face-up pile',
+    board({
+      you: {
+        bf: ['Island*6'],
+        hand: ['Curator of Destinies'],
+        lib: ['Grizzly Bears', 'Shock', 'Counterspell', 'Llanowar Elves', 'Craw Wurm'],
+      },
+      // A four-player table: you choose which opponent chooses.
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    "Liliana of the Veil: separate an opponent's permanents on the board",
+    board({
+      you: { bf: [{ name: 'Liliana of the Veil', counters: { loyalty: 6 } }] },
+      opp: { bf: ['Craw Wurm', 'Grizzly Bears', 'Llanowar Elves', 'Forest*2'] },
+    }),
+  ),
 ]

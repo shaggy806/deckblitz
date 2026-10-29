@@ -582,7 +582,8 @@
   "effect:exile-chosen-from-revealed-hand",
   "effect:put-from-opponent-hand-onto-battlefield",
   "target:chosen-by-other-player",
-  "decision:trigger-object-controller-chooses-target"
+  "decision:trigger-object-controller-chooses-target",
+  "decision:separate-into-piles"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

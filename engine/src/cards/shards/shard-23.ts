@@ -422,6 +422,7 @@ import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
+import _poolLilianaOfTheVeil from "../pool/liliana-of-the-veil.js";
 import _poolLivingTsunami from "../pool/living-tsunami.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
@@ -1286,6 +1287,7 @@ const shard: CardShard = {
     _poolLifeFindsAWay,
     _poolLightningBlast,
     _poolLightningBlow,
+    _poolLilianaOfTheVeil,
     _poolLivingTsunami,
     _poolLostLegion,
     _poolLotusGuardian,

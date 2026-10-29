@@ -5714,3 +5714,15 @@ engine terms. A second thing to check is a second test.
 ### Erithizon: the defending player picks the creature
 - **Do:** Attack Bob with Erithizon. Switch to Bob when asked.
 - **Expect:** As Bob, the banner reads "Choose the target of another player's Erithizon", and both Erithizon and Bob's Grizzly Bears can be picked. The +1/+1 counter goes on the creature Bob picked.
+
+### Fact or Fiction: choose the pile for your hand
+- **Do:** Cast Fact or Fiction. The bot separates the five cards; choose a pile.
+- **Expect:** A popup titled "Fact or Fiction — Bob separated these" shows Pile 1 and Pile 2, each with a "Choose pile" button. The pile you choose goes to your hand and the other to your graveyard.
+
+### Curator of Destinies: separate into a face-down and a face-up pile
+- **Do:** Cast Curator of Destinies. In the popup, click cards to move them into "Pile 1 (face down)", then Confirm piles.
+- **Expect:** The popup starts with all five cards in "Pile 2 (face up)" and a click moves a card across. After the bot chooses, its pile goes to your hand and the other to your graveyard.
+
+### Liliana of the Veil: separate an opponent's permanents on the board
+- **Do:** Activate Liliana's −6 on Bob. Click some of Bob's permanents, then Confirm piles in the banner.
+- **Expect:** Bob's permanents are badged "Pile 2" and a click turns one to "Pile 1"; the banner counts both piles. Bob then sacrifices one pile and keeps the other.

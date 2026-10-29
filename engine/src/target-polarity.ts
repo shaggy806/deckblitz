@@ -650,6 +650,17 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   ward: none,
   "sacrifice-all-but": none,
   "keep-total-power": none,
+  // Separating a targeted player's permanents (Liliana of the Veil) takes
+  // from them; a targeted separator or chooser (Fortune's Favor's opponent)
+  // is only asked.
+  "separate-into-piles": (n, v) => {
+    if (typeof n.objects === "object" && "whose" in n.objects && typeof n.objects.whose === "object" && "target" in n.objects.whose) {
+      v.touch(n.objects.whose.target, "harm", MAJOR);
+    }
+    if (n.objects === "targets") v.touch(EVERY_SLOT, "help", MINOR);
+    if (typeof n.chosen === "object") v.child(n.chosen.effect);
+    if (typeof n.rest === "object") v.child(n.rest.effect);
+  },
   "sacrifice-all": none,
   "choose-exiled-to-play": none,
   "put-exiled-this-way-onto-battlefield": none,

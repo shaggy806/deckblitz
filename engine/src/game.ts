@@ -161,6 +161,8 @@ import { blockers } from "./decisions/blockers.js";
 import { chooseCopy } from "./decisions/choose-copy.js";
 import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
+import { separatePiles } from "./decisions/separate-piles.js";
+import { choosePile } from "./decisions/choose-pile.js";
 import { enterAttacking } from "./decisions/enter-attacking.js";
 import { legendRule } from "./decisions/legend-rule.js";
 import { orderTriggers as orderTriggersDecision } from "./decisions/order-triggers.js";
@@ -216,6 +218,7 @@ import type {
   BoundUnlessOption,
   WardCost,
   ModeOption,
+  PileFate,
   PlayerScope,
   PtDuration,
   ResolutionContext,
@@ -1505,6 +1508,8 @@ export class Game {
       applyCopyChoice: (player, copy) => this.applyCopyChoice(player, copy),
       applyEnchantChoice: (player, enchant) => this.applyEnchantChoice(player, enchant),
       applyChoosePermanents: (player, chosen) => this.applyChoosePermanents(player, chosen),
+      applySeparatePiles: (player, piles) => this.applySeparatePiles(player, piles),
+      applyChoosePile: (player, pile) => this.applyChoosePile(player, pile),
       applyEnterAttacking: (player, assignments) => this.applyEnterAttacking(player, assignments),
       applyLegendRuleChoice: (player, keep) => this.applyLegendRuleChoice(player, keep),
       applyTriggerOrder: (player, order) => this.applyTriggerOrder(player, order),
@@ -5514,6 +5519,31 @@ export class Game {
         );
       }
     }
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** Answers a pending `separate-piles` decision: the piles wait for the
+   * resolving `separate-into-piles`, which resumes to ask for the choice. */
+  private applySeparatePiles(player: PlayerId, piles: readonly (readonly ObjectId[])[]): void {
+    const why = separatePiles.whyCannot(this.decisionCtx, { type: "separate-piles", player, piles }, player);
+    if (why !== null) throw new Error(why);
+    this.state.awaiting = null;
+    this.state.pilesAnswer = { piles: piles.map((pile) => [...pile]) };
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** Answers a pending `choose-pile` decision: the choice waits for the
+   * resolving `separate-into-piles`, which resumes to carry out the fates. */
+  private applyChoosePile(player: PlayerId, pile: number): void {
+    const why = choosePile.whyCannot(this.decisionCtx, { type: "choose-pile", player, pile }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "choose-pile") {
+      throw new Error("unreachable: whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    this.state.pilesAnswer = { chosen: pile };
+    this.emit({ type: "pile-chosen", player, source: awaiting.source, pile, objects: [...(awaiting.piles[pile] ?? [])] });
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
@@ -24529,6 +24559,132 @@ export class Game {
           maxTotalPower: max,
         };
         return true;
+      },
+      beginPiles: (what, separator) => {
+        const everyone = [...this.state.turnOrder];
+        if ("libraryTop" in what) {
+          const top = this.state.zones.perPlayer[controller].library.slice(0, Math.max(0, what.libraryTop));
+          // "Reveal the top five cards": everyone sees them. A look is the
+          // separator's alone (Fortune's Favor's "target opponent looks at").
+          if (!what.reveal) return { objects: top, lookers: [separator] };
+          this.revealCards(controller, top, "library");
+          return { objects: top, lookers: everyone };
+        }
+        if ("permanents" in what) {
+          const whose = what.whose;
+          if (whose === undefined) return { objects: [], lookers: everyone };
+          // Each token of a stack is an object of its own (rule 700.3b), so
+          // each is singled out — as many as combat would wake; past that the
+          // rest of a stack stays together, one unit in whichever pile.
+          const objects = this.battlefieldMatching(controller, what.permanents, x, source)
+            .filter((id) => this.state.objects[id]?.controller === whose)
+            .flatMap((id) => {
+              const parts = this.materializeStack(id);
+              return parts.includes(id) || this.state.objects[id]?.zone !== "battlefield" ? parts : [...parts, id];
+            });
+          return { objects, lookers: everyone };
+        }
+        if ("graveyard" in what) {
+          const objects = this.state.zones.perPlayer[controller].graveyard.filter((id) =>
+            matchesFilter(this.state, this.registry, id, what.graveyard, { you: controller, source }),
+          );
+          return { objects, lookers: everyone };
+        }
+        // The spell's own target cards, still in a graveyard (rule 608.2b).
+        return { objects: what.cards.filter((id) => this.state.objects[id]?.zone === "graveyard"), lookers: everyone };
+      },
+      askSeparatePiles: (separator, objects, chooser, faceDown, fates) => {
+        if (this.state.players[separator]?.hasLost !== false) return false;
+        this.state.awaiting = {
+          kind: "separate-piles",
+          player: separator,
+          source,
+          objects: [...objects],
+          chooser,
+          ...(faceDown ? { faceDown: true } : {}),
+          fates,
+        };
+        return true;
+      },
+      takePiles: () => {
+        const piles = this.state.pilesAnswer?.piles;
+        delete this.state.pilesAnswer;
+        return piles;
+      },
+      askChoosePile: (chooser, separator, piles, faceDown, lookers, fates) => {
+        // The face-up pile is turned face up as the piles are made (Curator
+        // of Destinies); without a face-down pile, every pile is shown — a
+        // library card no one but the separator has seen yet included.
+        const shown = (faceDown ? piles.slice(1) : piles)
+          .flat()
+          .filter((id) => this.state.objects[id]?.zone === "library" && !this.state.revealedThisTurn.includes(id));
+        if (shown.length > 0) this.revealCards(controller, shown, "library");
+        if (this.state.players[chooser]?.hasLost !== false) return false;
+        this.state.awaiting = {
+          kind: "choose-pile",
+          player: chooser,
+          source,
+          piles: piles.map((pile) => [...pile]),
+          separator,
+          ...(faceDown ? { faceDown: true } : {}),
+          lookers: [...lookers],
+          fates,
+        };
+        return true;
+      },
+      takeChosenPile: () => {
+        const chosen = this.state.pilesAnswer?.chosen;
+        delete this.state.pilesAnswer;
+        return chosen;
+      },
+      finishPiles: (chosenPile, otherPile, chosenFate, restFate) => {
+        // Only what's still where it was separated (rule 400.7) — the
+        // objects never left their zone meanwhile (700.3c).
+        const zones = new Map<ObjectId, ZoneType>();
+        for (const id of [...chosenPile, ...otherPile]) {
+          const zone = this.state.objects[id]?.zone;
+          if (zone !== undefined) zones.set(id, zone);
+        }
+        const carryOut = (pile: readonly ObjectId[], fate: PileFate | undefined): void => {
+          if (fate === undefined) return;
+          const still = pile.filter((id) => this.state.objects[id]?.zone === zones.get(id));
+          if (still.length === 0) return;
+          // Each pile's fate is one instruction: everything in it at once.
+          this.withLeaveBatch(() =>
+            this.withGraveyardLeaveBatch(() =>
+              this.withEnterBatch(() => {
+                for (const id of still) {
+                  if (typeof fate === "object") {
+                    applyEffectSpec(
+                      fate.effect,
+                      this.makeResolutionContext(source, controller, [{ kind: "object", object: id }], x, 0, undefined, 1, 0, [
+                        zones.get(id) ?? "battlefield",
+                      ]),
+                    );
+                    continue;
+                  }
+                  if (fate !== "battlefield") {
+                    this.moveObject(id, fate);
+                    continue;
+                  }
+                  // "Return the other to the battlefield" — under the effect's
+                  // controller's control, kept there by a control effect as a
+                  // reanimation "under your control" is.
+                  const moved = this.moveObject(id, "battlefield", { under: controller });
+                  const entered = this.state.objects[id];
+                  if (!moved || entered?.zone !== "battlefield") continue;
+                  if (entered.controller !== controller) {
+                    this.gainControlByEffect(controller, { kind: "object", object: id }, false, true);
+                    entered.summoningSick = true;
+                  }
+                  this.emit({ type: "permanent-entered-battlefield", object: id });
+                }
+              }),
+            ),
+          );
+        };
+        carryOut(chosenPile, chosenFate);
+        carryOut(otherPile, restFate);
       },
       askKeep: (player, filter, keep, upTo) => {
         // "Creatures they control": only the asked player's own.

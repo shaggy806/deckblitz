@@ -321,6 +321,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Separating into piles — built 2026-10-29
+
+The need-keys Phase 2 family `decision:separate-into-piles` (features only).
+Rule 700.3's piles as the **`separate-into-piles`** effect: the objects
+(`libraryTop` revealed or looked at, a player's `permanents`, your
+`graveyard`'s matching cards, the spell's `"targets"`), a `separator` and a
+`chooser` (`EffectPlayerRef`; "an opponent" is a `choose-opponent` around it),
+`faceDown` for "a face-down pile and a face-up pile", and each pile's
+`PileFate` (a zone, or an effect per object as target 0, one event). Two new
+decision kinds, **`separate-piles`** and **`choose-pile`** (29th and 30th),
+answered in the client by a pile popup (cards) or on the board (permanents).
+Proving cards: Fact or Fiction, Curator of Destinies, Liliana of the Veil,
+Death or Glory. Key: `decision:separate-into-piles`. Not covered: three
+piles chosen at random (Whims of the Fates), "on the bottom in any order"
+(Jace, Architect of Thought; Truth or Tale), play from a pile (Brilliant
+Ultimatum), search a pile (Phyrexian Portal), each player's own lands
+(Bend or Break), combat piles (Camouflage, Raging River) — `author-freed`
+narrows them.
+
 ### Damage by this source, switches, the defending player's restrictions, other players' choices — built 2026-10-29
 
 Five need-keys Phase 2 families, features only (`build-family` since

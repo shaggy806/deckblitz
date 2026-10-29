@@ -29,6 +29,7 @@ import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import { defaultVenture } from "./decisions/venture.js";
+import { bestPileFor, bestSplitFor } from "./decisions/shared/piles.js";
 import { defaultCounterRemovals } from "./decisions/remove-counters.js";
 import type { CounterRemoval, CounterRemovalOffer } from "./decisions/remove-counters.js";
 import type { VentureAnswer, VentureOffer } from "./decisions/venture.js";
@@ -58,6 +59,11 @@ import {
 } from "./effect-worth.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+
+/** A `separate-piles` offer — see `PlayerController.separatePiles`. */
+export type SeparatePilesOffer = Extract<LegalAction, { kind: "separate-piles" }>;
+/** A `choose-pile` offer — see `PlayerController.choosePile`. */
+export type ChoosePileOffer = Extract<LegalAction, { kind: "choose-pile" }>;
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
@@ -320,6 +326,14 @@ export interface PlayerController {
      * `suggested`. */
     suggested: readonly string[],
   ): string;
+  /**
+   * Separate the offered objects into two piles (rule 700.3) — Fact or
+   * Fiction's opponent, Liliana of the Veil's controller. Return both piles,
+   * every object in exactly one; with a face-down pile, it's the first.
+   */
+  separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[];
+  /** Choose one of the offered piles: its index. */
+  choosePile(view: ControllerView, offer: ChoosePileOffer): number;
   /**
    * A modal spell/ability is resolving (rule 700.2), or a "you may" clause
    * (rule 601.3e). Return the indices of the modes to apply — distinct, and
@@ -717,6 +731,16 @@ export class AutomaticController implements PlayerController {
     return suggested[0] ?? options[0];
   }
 
+  separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[] {
+    // The split that leaves us best off once the chooser takes the pile best
+    // for them.
+    return bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, view.player, offer.chooser);
+  }
+
+  choosePile(view: ControllerView, offer: ChoosePileOffer): number {
+    return bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
+  }
+
   chooseModes(
     _view: ControllerView,
     minModes: number,
@@ -1039,6 +1063,10 @@ export class ScriptedController implements PlayerController {
     options,
     suggested,
   ) => suggested[0] ?? options[0];
+  separatePilesFn: (view: ControllerView, offer: SeparatePilesOffer) => readonly (readonly ObjectId[])[] = (view, offer) =>
+    bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, view.player, offer.chooser);
+  choosePileFn: (view: ControllerView, offer: ChoosePileOffer) => number = (view, offer) =>
+    bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
   chooseSacrificesFn: SacrificeChooser = (view, eligible, count) =>
@@ -1237,6 +1265,14 @@ export class ScriptedController implements PlayerController {
     suggested: readonly string[],
   ): string {
     return this.chooseCardNameFn(view, source, options, suggested);
+  }
+
+  separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[] {
+    return this.separatePilesFn(view, offer);
+  }
+
+  choosePile(view: ControllerView, offer: ChoosePileOffer): number {
+    return this.choosePileFn(view, offer);
   }
 
   chooseModes(

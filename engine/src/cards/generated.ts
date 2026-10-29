@@ -4839,6 +4839,7 @@ import _poolCunningSurvivor from "./pool/cunning-survivor.js";
 import _poolCunning from "./pool/cunning.js";
 import _poolCurate from "./pool/curate.js";
 import _poolCuratorBeastie from "./pool/curator-beastie.js";
+import _poolCuratorOfDestinies from "./pool/curator-of-destinies.js";
 import _poolCuratorOfMysteries from "./pool/curator-of-mysteries.js";
 import _poolCuratorOfSunsCreation from "./pool/curator-of-suns-creation.js";
 import _poolCuratorsWard from "./pool/curators-ward.js";
@@ -5243,6 +5244,7 @@ import _poolDeathHoodCobra from "./pool/death-hood-cobra.js";
 import _poolDeathInTheFamily from "./pool/death-in-the-family.js";
 import _poolDeathKiss from "./pool/death-kiss.js";
 import _poolDeathMutation from "./pool/death-mutation.js";
+import _poolDeathOrGlory from "./pool/death-or-glory.js";
 import _poolDeathPitOffering from "./pool/death-pit-offering.js";
 import _poolDeathPitsOfRath from "./pool/death-pits-of-rath.js";
 import _poolDeathPriestOfMyrkul from "./pool/death-priest-of-myrkul.js";
@@ -7376,6 +7378,7 @@ import _poolFacelessHaven from "./pool/faceless-haven.js";
 import _poolFacesOfThePast from "./pool/faces-of-the-past.js";
 import _poolFacetReader from "./pool/facet-reader.js";
 import _poolFacevaulter from "./pool/facevaulter.js";
+import _poolFactOrFiction from "./pool/fact-or-fiction.js";
 import _poolFadeFromMemory from "./pool/fade-from-memory.js";
 import _poolFadeIntoAntiquity from "./pool/fade-into-antiquity.js";
 import _poolFadingHope from "./pool/fading-hope.js";
@@ -13052,6 +13055,7 @@ import _poolLikenessLooter from "./pool/likeness-looter.js";
 import _poolLikenessOfTheSeeker from "./pool/likeness-of-the-seeker.js";
 import _poolLilahUndefeatedSlickshot from "./pool/lilah-undefeated-slickshot.js";
 import _poolLilianaDeathWielder from "./pool/liliana-death-wielder.js";
+import _poolLilianaOfTheVeil from "./pool/liliana-of-the-veil.js";
 import _poolLilianaTheFaultless from "./pool/liliana-the-faultless.js";
 import _poolLilianaTheLastHope from "./pool/liliana-the-last-hope.js";
 import _poolLilianaTheNecromancer from "./pool/liliana-the-necromancer.js";
@@ -32050,6 +32054,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCunning,
   _poolCurate,
   _poolCuratorBeastie,
+  _poolCuratorOfDestinies,
   _poolCuratorOfMysteries,
   _poolCuratorOfSunsCreation,
   _poolCuratorsWard,
@@ -32454,6 +32459,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathInTheFamily,
   _poolDeathKiss,
   _poolDeathMutation,
+  _poolDeathOrGlory,
   _poolDeathPitOffering,
   _poolDeathPitsOfRath,
   _poolDeathPriestOfMyrkul,
@@ -34587,6 +34593,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFacesOfThePast,
   _poolFacetReader,
   _poolFacevaulter,
+  _poolFactOrFiction,
   _poolFadeFromMemory,
   _poolFadeIntoAntiquity,
   _poolFadingHope,
@@ -40263,6 +40270,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLikenessOfTheSeeker,
   _poolLilahUndefeatedSlickshot,
   _poolLilianaDeathWielder,
+  _poolLilianaOfTheVeil,
   _poolLilianaTheFaultless,
   _poolLilianaTheLastHope,
   _poolLilianaTheNecromancer,
@@ -59274,6 +59282,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cunning": _poolCunning,
   "pool/curate": _poolCurate,
   "pool/curator-beastie": _poolCuratorBeastie,
+  "pool/curator-of-destinies": _poolCuratorOfDestinies,
   "pool/curator-of-mysteries": _poolCuratorOfMysteries,
   "pool/curator-of-suns-creation": _poolCuratorOfSunsCreation,
   "pool/curators-ward": _poolCuratorsWard,
@@ -59678,6 +59687,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/death-in-the-family": _poolDeathInTheFamily,
   "pool/death-kiss": _poolDeathKiss,
   "pool/death-mutation": _poolDeathMutation,
+  "pool/death-or-glory": _poolDeathOrGlory,
   "pool/death-pit-offering": _poolDeathPitOffering,
   "pool/death-pits-of-rath": _poolDeathPitsOfRath,
   "pool/death-priest-of-myrkul": _poolDeathPriestOfMyrkul,
@@ -61811,6 +61821,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/faces-of-the-past": _poolFacesOfThePast,
   "pool/facet-reader": _poolFacetReader,
   "pool/facevaulter": _poolFacevaulter,
+  "pool/fact-or-fiction": _poolFactOrFiction,
   "pool/fade-from-memory": _poolFadeFromMemory,
   "pool/fade-into-antiquity": _poolFadeIntoAntiquity,
   "pool/fading-hope": _poolFadingHope,
@@ -67487,6 +67498,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/likeness-of-the-seeker": _poolLikenessOfTheSeeker,
   "pool/lilah-undefeated-slickshot": _poolLilahUndefeatedSlickshot,
   "pool/liliana-death-wielder": _poolLilianaDeathWielder,
+  "pool/liliana-of-the-veil": _poolLilianaOfTheVeil,
   "pool/liliana-the-faultless": _poolLilianaTheFaultless,
   "pool/liliana-the-last-hope": _poolLilianaTheLastHope,
   "pool/liliana-the-necromancer": _poolLilianaTheNecromancer,

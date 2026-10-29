@@ -2196,6 +2196,14 @@ export function parseEffect(text, outer) {
       skip = searched.used - 1;
       continue;
     }
+    // Rule 700.3's piles: two or three sentences, one `separate-into-piles`.
+    const piles = pilesAt(sentences, i, ctx);
+    if (piles !== null) {
+      parsed.push(piles.effect);
+      hints.push({ sentence, effect: piles.effect });
+      skip = piles.used - 1;
+      continue;
+    }
     const fromHand = revealedHandChoiceAt(sentences, i, ctx);
     if (fromHand !== null) {
       parsed.push(fromHand.effect);
@@ -2493,6 +2501,150 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     ...(exile ? { destination: "exile" } : {}),
   };
   return { effect, used };
+}
+
+/**
+ * Separating into two piles (rule 700.3) — `separate-into-piles`:
+ *
+ * - "Reveal the top five cards of your library. An opponent separates those
+ *   cards into two piles. Put one pile into your hand and the other into your
+ *   graveyard." (Fact or Fiction)
+ * - "Reveal the top five cards of your library and separate them into two
+ *   piles. An opponent chooses one of those piles. Put that pile into your
+ *   hand and the other into your graveyard." (Steam Augury) — or "Look at …
+ *   into a face-down pile and a face-up pile" (Curator of Destinies).
+ * - "Target opponent looks at the top four cards of your library and
+ *   separates them into a face-down pile and a face-up pile. Put one pile
+ *   into your hand and the other into your graveyard." (Fortune's Favor)
+ * - "Separate all permanents target player controls into two piles. That
+ *   player sacrifices all permanents in the pile of their choice." (Liliana
+ *   of the Veil), "… creatures … Destroy all creatures in the pile of that
+ *   player's choice. They can't be regenerated." (Do or Die)
+ * - "Separate all creature cards in your graveyard into two piles. Exile the
+ *   pile of an opponent's choice and return the other to the battlefield."
+ *   (Death or Glory)
+ */
+function pilesAt(sentences, i, ctx) {
+  const s = (k) => sentences[i + k] ?? "";
+  const handGraveyard = { chosen: "hand", rest: "graveyard" };
+  const opponentChooses = (inner) => ({ kind: "choose-opponent", then: inner });
+  // "Reveal the top N …. An opponent separates those cards into two piles.
+  // Put one pile into your hand and the other into your graveyard."
+  let m = new RegExp(`^reveal the top ${N} cards of your library\\.$`, "i").exec(s(0));
+  if (
+    m !== null &&
+    /^an opponent separates those cards into two piles\.$/i.test(s(1)) &&
+    /^put one pile into your hand and the other into your graveyard\.$/i.test(s(2))
+  ) {
+    const n = numberOf(m[1]);
+    if (typeof n !== "number") return null;
+    return {
+      effect: opponentChooses({
+        kind: "separate-into-piles",
+        objects: { libraryTop: n, reveal: true },
+        separator: "that-player",
+        chooser: "you",
+        ...handGraveyard,
+      }),
+      used: 3,
+    };
+  }
+  // "Reveal (Look at) the top N … and separate them into two piles (a
+  // face-down pile and a face-up pile). An opponent chooses one of those
+  // piles. Put that pile into your hand and the other into your graveyard."
+  m = new RegExp(
+    `^(reveal|look at) the top ${N} cards of your library and separate them into (two piles|a face-down pile and a face-up pile)\\.$`,
+    "i",
+  ).exec(s(0));
+  if (
+    m !== null &&
+    /^an opponent chooses one of those piles\.$/i.test(s(1)) &&
+    /^put that pile into your hand and the other into your graveyard\.$/i.test(s(2))
+  ) {
+    const n = numberOf(m[2]);
+    const reveal = m[1].toLowerCase() === "reveal";
+    const faceDown = m[3].toLowerCase() !== "two piles";
+    // A look with two plain piles, or a reveal with a face-down one: no
+    // card says that, and the shape isn't read.
+    if (typeof n !== "number" || reveal === faceDown) return null;
+    return {
+      effect: opponentChooses({
+        kind: "separate-into-piles",
+        objects: reveal ? { libraryTop: n, reveal: true } : { libraryTop: n },
+        ...(faceDown ? { faceDown: true } : {}),
+        chooser: "that-player",
+        ...handGraveyard,
+      }),
+      used: 3,
+    };
+  }
+  // "Target opponent looks at the top N … and separates them into a
+  // face-down pile and a face-up pile. Put one pile into your hand and the
+  // other into your graveyard."
+  m = new RegExp(
+    `^target opponent looks at the top ${N} cards of your library and separates them into a face-down pile and a face-up pile\\.$`,
+    "i",
+  ).exec(s(0));
+  if (m !== null && /^put one pile into your hand and the other into your graveyard\.$/i.test(s(1))) {
+    const n = numberOf(m[1]);
+    if (typeof n !== "number") return null;
+    const target = ctx.target("opponent");
+    return {
+      effect: {
+        kind: "separate-into-piles",
+        objects: { libraryTop: n },
+        faceDown: true,
+        separator: { target },
+        chooser: "you",
+        ...handGraveyard,
+      },
+      used: 2,
+    };
+  }
+  // "Separate all permanents (creatures) target player controls into two
+  // piles." and the chosen pile's fate.
+  m = /^separate all (permanents|creatures) target player controls into two piles\.$/i.exec(s(0));
+  if (m !== null) {
+    const creatures = m[1].toLowerCase() === "creatures";
+    const sacrifice = /^that player sacrifices all permanents in the pile of their choice\.$/i.test(s(1));
+    const destroy =
+      creatures &&
+      /^destroy all creatures in the pile of that player's choice\.$/i.test(s(1)) &&
+      /^they can't be regenerated\.$/i.test(s(2));
+    if ((!sacrifice || creatures) && !destroy) return null;
+    const target = ctx.target("player");
+    return {
+      effect: {
+        kind: "separate-into-piles",
+        objects: { permanents: creatures ? { type: "creature" } : {}, whose: { target } },
+        chooser: { target },
+        chosen: {
+          effect: destroy
+            ? { kind: "destroy", target: 0, cantBeRegenerated: true }
+            : { kind: "sacrifice-target", target: 0, byItsController: true },
+        },
+      },
+      used: destroy ? 3 : 2,
+    };
+  }
+  // "Separate all creature cards in your graveyard into two piles. Exile the
+  // pile of an opponent's choice and return the other to the battlefield."
+  if (
+    /^separate all creature cards in your graveyard into two piles\.$/i.test(s(0)) &&
+    /^exile the pile of an opponent's choice and return the other to the battlefield\.$/i.test(s(1))
+  ) {
+    return {
+      effect: opponentChooses({
+        kind: "separate-into-piles",
+        objects: { graveyard: { type: "creature" } },
+        chooser: "that-player",
+        chosen: "exile",
+        rest: "battlefield",
+      }),
+      used: 2,
+    };
+  }
+  return null;
 }
 
 function scaledBy(effect, amount) {

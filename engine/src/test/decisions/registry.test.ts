@@ -97,6 +97,23 @@ const FIXTURES: Partial<Record<DecisionKind, AwaitingDecision>> = {
     options: ["Goblin"],
     catalog: false,
   },
+  "separate-piles": {
+    kind: "separate-piles",
+    player: ALICE,
+    source: asObjectId("obj-1"),
+    objects: [asObjectId("obj-2"), asObjectId("obj-3")],
+    chooser: asPlayerId("bob"),
+    fates: { chosen: "hand", rest: "graveyard" },
+  },
+  "choose-pile": {
+    kind: "choose-pile",
+    player: ALICE,
+    source: asObjectId("obj-1"),
+    piles: [[asObjectId("obj-2")], [asObjectId("obj-3")]],
+    separator: asPlayerId("bob"),
+    lookers: [ALICE, asPlayerId("bob")],
+    fates: { chosen: "hand", rest: "graveyard" },
+  },
   "choose-card-name": {
     kind: "choose-card-name",
     player: ALICE,
@@ -253,10 +270,10 @@ describe("decision registry", () => {
     expect(decisionForOffer({ kind: "pass-priority" })).toBeUndefined();
   });
 
-  it("covers all twenty-eight kinds, with a fixture for each", () => {
+  it("covers all thirty kinds, with a fixture for each", () => {
     // The table is total now, so a missing module fails the build. This is
     // the check that the fixtures below don't fall behind it.
-    expect(Object.keys(DECISIONS)).toHaveLength(28);
+    expect(Object.keys(DECISIONS)).toHaveLength(30);
     for (const kind of Object.keys(DECISIONS) as DecisionKind[]) {
       expect(FIXTURES[kind], `no FIXTURES entry for "${kind}"`).toBeDefined();
     }

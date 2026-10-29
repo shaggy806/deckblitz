@@ -18,6 +18,8 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'order-triggers': 'ordering triggers',
   'choose-creature-type': 'naming a creature type',
   'choose-card-name': 'naming a card',
+  'separate-piles': 'separating piles',
+  'choose-pile': 'choosing a pile',
   'choose-modes': 'choosing a mode',
   'choose-targets': 'targeting',
   'cast-now': 'deciding whether to cast',

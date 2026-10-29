@@ -5952,6 +5952,50 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Separate [these objects] into two piles" (rule 700.3) — then one
+       * player chooses a pile, and each pile has its fate: Fact or Fiction's
+       * "An opponent separates those cards into two piles. Put one pile into
+       * your hand and the other into your graveyard", Liliana of the Veil's
+       * "Separate all permanents target player controls into two piles. That
+       * player sacrifices all permanents in the pile of their choice".
+       *
+       * `separator` puts each object into exactly one pile, either of which
+       * may be empty (700.3a, 700.3d); then `chooser` chooses one, knowing
+       * what's in it. The objects never leave their zone while they're
+       * separated (700.3c) — a revealed card is still in the library until
+       * its pile's fate moves it. "An opponent separates" / "an opponent
+       * chooses" is a `choose-opponent` around this, naming `"that-player"`.
+       */
+      readonly kind: "separate-into-piles";
+      readonly objects: PileObjects;
+      /** Who separates: the effect's controller when absent. */
+      readonly separator?: EffectPlayerRef;
+      /** Who chooses one of the piles. */
+      readonly chooser: EffectPlayerRef;
+      /**
+       * "Separate them into **a face-down pile and a face-up pile**" (Curator
+       * of Destinies, Fortune's Favor): the first pile stays hidden from all
+       * but the players who looked at the cards, and the second is revealed
+       * to everyone as the piles are made. The chooser picks a face-down
+       * pile without seeing it (unless they looked). Only for `libraryTop`.
+       */
+      readonly faceDown?: true;
+      /** What happens to the chosen pile's objects. */
+      readonly chosen: PileFate;
+      /** What happens to the other pile's — nothing when absent (Liliana's
+       * other pile stays). */
+      readonly rest?: PileFate;
+      /** Set only by the engine, between the separation and the choice. */
+      readonly progress?: {
+        readonly objects: readonly ObjectId[];
+        readonly separator: PlayerId;
+        readonly chooser: PlayerId;
+        readonly lookers: readonly PlayerId[];
+        readonly piles?: readonly (readonly ObjectId[])[];
+      };
+    }
+  | {
+      /**
        * Encore (rule 702.141) — "For each opponent, create a token copy of
        * this card that attacks that opponent this turn if able. They gain
        * haste. Sacrifice them at the beginning of the next end step."
@@ -6565,6 +6609,78 @@ export interface CopyExceptions {
    * (see `StaticAbility.legendRuleOff`). */
   readonly legendRuleOff?: AffectSpec;
 }
+
+/**
+ * What a `separate-into-piles` separates:
+ *
+ * - `{ libraryTop }`: the top cards of the effect's controller's library —
+ *   revealed to everyone with `reveal` (Fact or Fiction's "Reveal the top
+ *   five cards"); otherwise looked at only by the separator (Curator of
+ *   Destinies' "look at the top five cards", Fortune's Favor's "target
+ *   opponent looks at").
+ * - `{ permanents, whose }`: every permanent matching `permanents` (read from
+ *   the effect controller's side) that `whose` controls — Liliana of the
+ *   Veil's "all permanents target player controls". A token stack is
+ *   separated token by token.
+ * - `{ graveyard }`: every card in the effect's controller's graveyard
+ *   matching it — Death or Glory's "all creature cards in your graveyard".
+ * - `"targets"`: the resolving spell's own target cards still legal, in a
+ *   graveyard (Split the Spoils' "up to five target permanent cards from
+ *   your graveyard").
+ */
+export type PileObjects =
+  | { readonly libraryTop: EffectAmount; readonly reveal?: true }
+  | { readonly permanents: CardFilter; readonly whose: EffectPlayerRef }
+  | { readonly graveyard: CardFilter }
+  | "targets";
+
+/**
+ * What happens to one pile of a `separate-into-piles`. A zone moves its cards
+ * there, together: `"hand"`, `"graveyard"` and `"exile"` are their owners';
+ * `"battlefield"` puts them there under the effect's controller's control
+ * (Death or Glory's "return the other to the battlefield"). `{ effect }`
+ * applies `effect` to each object of the pile as target 0, all as one
+ * instruction (one event) — Liliana of the Veil's "sacrifices all permanents
+ * in the pile" is `{ effect: { kind: "sacrifice-target", target: 0,
+ * byItsController: true } }`.
+ */
+export type PileFate =
+  | "hand"
+  | "graveyard"
+  | "exile"
+  | "battlefield"
+  | { readonly effect: EffectSpec };
+
+/**
+ * A `PileFate` in one word, for whoever is asked to separate or choose: where
+ * the cards go, or `"lose"` for an effect that takes the objects away (a
+ * sacrifice, destruction, exile, a bounce) and `"other"` for anything else
+ * (Fight or Flight's "only creatures in the chosen pile can attack").
+ */
+export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other";
+
+/** See {@link PileFateWord}. */
+export function pileFateWord(fate: PileFate): PileFateWord {
+  if (typeof fate === "string") return fate;
+  switch (fate.effect.kind) {
+    case "sacrifice-target":
+    case "destroy":
+    case "exile":
+    case "return-to-hand":
+    case "put-into-graveyard":
+      return "lose";
+    default:
+      return "other";
+  }
+}
+
+/** A `separate-into-piles`'s objects as `ResolutionContext.beginPiles` takes
+ * them, every amount and player resolved. */
+export type ResolvedPileObjects =
+  | { readonly libraryTop: number; readonly reveal: boolean }
+  | { readonly permanents: CardFilter; readonly whose: PlayerId | undefined }
+  | { readonly graveyard: CardFilter }
+  | { readonly cards: readonly ObjectId[] };
 
 /** See the `look-and-choose` effect's `leftoverIf`. */
 export interface LookAndChooseLeftoverIf {
@@ -7404,6 +7520,41 @@ export interface EffectApi {
    * sacrifices every permanent matching `filter` they control but `kept` (a
    * token stack once per member kept), at once. */
   sacrificeAllExcept(players: readonly PlayerId[], filter: CardFilter, kept: readonly ObjectId[]): void;
+  /** See the `"separate-into-piles"` {@link EffectSpec}: the objects to
+   * separate, as they're gathered (a library's revealed, a token stack's
+   * tokens singled out), and who has seen them all — everyone for a reveal,
+   * the separator for a look. */
+  beginPiles(
+    objects: ResolvedPileObjects,
+    separator: PlayerId,
+  ): { readonly objects: readonly ObjectId[]; readonly lookers: readonly PlayerId[] };
+  /** Ask `separator` to separate `objects` into two piles. `false` when
+   * they've left the game, and nothing was asked. */
+  askSeparatePiles(
+    separator: PlayerId,
+    objects: readonly ObjectId[],
+    chooser: PlayerId,
+    faceDown: boolean,
+    fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
+  ): boolean;
+  /** The piles the last `askSeparatePiles` answer made, taken (and cleared). */
+  takePiles(): readonly (readonly ObjectId[])[] | undefined;
+  /** Show the piles (a face-up pile revealed) and ask `chooser` to choose
+   * one. `false` when they've left the game, and nothing was asked. */
+  askChoosePile(
+    chooser: PlayerId,
+    separator: PlayerId,
+    piles: readonly (readonly ObjectId[])[],
+    faceDown: boolean,
+    lookers: readonly PlayerId[],
+    fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
+  ): boolean;
+  /** The pile the last `askChoosePile` answer chose, taken (and cleared). */
+  takeChosenPile(): number | undefined;
+  /** Carry out the piles' fates: `chosen`'s on the chosen pile, then
+   * `rest`'s on the other — each as one instruction, still only on objects
+   * where they were separated (rule 400.7). */
+  finishPiles(chosenPile: readonly ObjectId[], otherPile: readonly ObjectId[], chosen: PileFate, rest: PileFate | undefined): void;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
@@ -12528,6 +12679,54 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
       }
       ctx.sacrificeAllExcept(ctx.playersInScope(spec.who), spec.filter, kept);
+      return;
+    }
+    case "separate-into-piles": {
+      // Separated first, then chosen (rule 700.3), each answered before the
+      // next is asked; the piles' fates wait for both.
+      const below = ctx.parkedCount();
+      const faceDown = spec.faceDown === true;
+      const progress = spec.progress;
+      if (progress === undefined) {
+        const separator = effectPlayer(spec.separator ?? "you", ctx);
+        const chooser = effectPlayer(spec.chooser, ctx);
+        if (separator === undefined || chooser === undefined) return;
+        const what = spec.objects;
+        const begun = ctx.beginPiles(
+          what === "targets"
+            ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
+            : "libraryTop" in what
+              ? { libraryTop: amountValue(what.libraryTop, ctx), reveal: what.reveal === true }
+              : "permanents" in what
+                ? { permanents: what.permanents, whose: effectPlayer(what.whose, ctx) }
+                : { graveyard: what.graveyard },
+          separator,
+        );
+        // Nothing to separate: two empty piles, and nothing to do to either.
+        if (begun.objects.length === 0) return;
+        const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+        if (ctx.askSeparatePiles(separator, begun.objects, chooser, faceDown, fates)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { objects: begun.objects, separator, chooser, lookers: begun.lookers } }, below);
+        }
+        return;
+      }
+      let piles = progress.piles;
+      if (piles === undefined) {
+        piles = ctx.takePiles() ?? [[], [...progress.objects]];
+        const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+        if (ctx.askChoosePile(progress.chooser, progress.separator, piles, faceDown, progress.lookers, fates)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, piles } }, below);
+        }
+        return;
+      }
+      const chosen = ctx.takeChosenPile();
+      if (chosen === undefined) return;
+      ctx.finishPiles(
+        piles[chosen] ?? [],
+        piles.flatMap((pile, i) => (i === chosen ? [] : pile)),
+        spec.chosen,
+        spec.rest,
+      );
       return;
     }
     case "encore":

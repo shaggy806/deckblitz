@@ -1008,6 +1008,15 @@ export type GameEvent =
       readonly name: string;
     })
   | (Base & {
+      /** `player` chose pile `pile` of a `separate-into-piles` (rule 700.3)
+       * — `objects` are what was in it. */
+      readonly type: "pile-chosen";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly pile: number;
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       readonly type: "permanent-entered-battlefield";
       readonly object: ObjectId;
       /** How many real permanents this one event stands for — set > 1 only

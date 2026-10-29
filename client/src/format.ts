@@ -297,6 +297,10 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} chooses ${event.creatureType}`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
+    case 'pile-chosen':
+      return `${who(event.player)} chooses pile ${event.pile + 1} (${
+        event.objects.length === 1 ? '1 object' : `${event.objects.length} objects`
+      }) for ${name(event.source)}`
     case 'ability-activated':
       return `${who(event.player)} activates ${name(event.source)}${
         event.onStack ? '' : ' (mana)'

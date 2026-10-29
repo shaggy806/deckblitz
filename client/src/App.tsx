@@ -113,6 +113,7 @@ import { Stack } from './ui/Stack.tsx'
 import { EventLog } from './ui/EventLog.tsx'
 import { CapturePanel } from './ui/CapturePanel.tsx'
 import { ZoneViewer } from './ui/ZoneViewer.tsx'
+import { PileViewer } from './ui/PileViewer.tsx'
 import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
@@ -374,6 +375,8 @@ function nextCounterPick(
 }
 type VentureAction = Extract<LegalAction, { kind: 'venture' }>
 type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }>
+type SeparatePilesAction = Extract<LegalAction, { kind: 'separate-piles' }>
+type ChoosePileAction = Extract<LegalAction, { kind: 'choose-pile' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
 type AssignDamageAction = Extract<LegalAction, { kind: 'assign-combat-damage' }>
@@ -673,6 +676,8 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'order-triggers': 'order their triggers',
   'choose-creature-type': 'choose a creature type',
   'choose-card-name': 'choose a card name',
+  'separate-piles': 'separate piles',
+  'choose-pile': 'choose a pile',
   'choose-modes': 'choose a mode',
   'choose-targets': 'choose targets',
   'cast-now': 'decide whether to cast a spell',
@@ -687,6 +692,23 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   scry: 'scry',
   venture: 'venture into the dungeon',
 }
+/** What happens to a pile (rule 700.3), in words — "into the hand". */
+const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
+  hand: 'goes into the hand',
+  graveyard: 'goes into the graveyard',
+  exile: 'is exiled',
+  battlefield: 'goes onto the battlefield',
+  lose: 'is lost',
+  other: 'is affected',
+}
+
+/** "The chosen pile goes into the hand, the other into the graveyard." */
+function pileFatesText(fates: SeparatePilesAction['fates']): string {
+  return `the chosen pile ${PILE_FATE_TEXT[fates.chosen]}${
+    fates.rest !== undefined ? `; the other ${PILE_FATE_TEXT[fates.rest]}` : ''
+  }`
+}
+
 /** A colour named as a permanent enters ("As this Aura enters, choose a
  * color" — Flickering Ward, Utopia Sprawl) arrives as its letter. */
 /** The five basic land types: a fixed menu of them is "choose a basic land
@@ -1674,6 +1696,8 @@ function Table({
   const [modePicks, setModePicks] = useState<readonly number[]>([])
   const [sacrificePicks, setSacrificePicks] = useState<readonly ObjectId[]>([])
   const [permanentPicks, setPermanentPicks] = useState<readonly ObjectId[]>([])
+  // The permanents put into the first pile so far, separating on the board.
+  const [pilePicks, setPilePicks] = useState<readonly ObjectId[]>([])
   /** A cast or activation whose targets are in, waiting on which permanents
    * its "tap N untapped … you control" cost taps (rule 601.2h — costs are
    * paid last). `picks` names a stack once per token. */
@@ -2015,6 +2039,18 @@ function Table({
   const choosePermanentsAction = actions.find(
     (a): a is ChoosePermanentsAction => a.kind === 'choose-permanents',
   )
+  const separatePilesAction = actions.find((a): a is SeparatePilesAction => a.kind === 'separate-piles')
+  const choosePileAction = actions.find((a): a is ChoosePileAction => a.kind === 'choose-pile')
+  // Piles of permanents (Liliana of the Veil) are made and shown on the
+  // board; piles of cards (Fact or Fiction) in a popup.
+  const pilesOnBoard = useMemo(() => {
+    const objects = separatePilesAction?.objects ?? choosePileAction?.piles.flat() ?? []
+    return objects.length > 0 && objects.every((id) => view.objects[id]?.zone === 'battlefield')
+  }, [separatePilesAction, choosePileAction, view.objects])
+  const pileLabels: readonly [string, string] =
+    (separatePilesAction ?? choosePileAction)?.faceDown === true
+      ? ['Pile 1 (face down)', 'Pile 2 (face up)']
+      : ['Pile 1', 'Pile 2']
   const proliferateAction = actions.find(
     (a): a is ProliferateAction => a.kind === 'proliferate',
   )
@@ -2117,6 +2153,8 @@ function Table({
     | 'order-triggers'
     | 'choose-creature-type'
     | 'choose-card-name'
+    | 'separate-piles'
+    | 'choose-pile'
     | 'choose-modes'
     | 'sacrifice'
     | 'proliferate'
@@ -2161,6 +2199,10 @@ function Table({
           ? 'choose-creature-type'
         : cardNameChoiceAction
           ? 'choose-card-name'
+        : separatePilesAction
+          ? 'separate-piles'
+        : choosePileAction
+          ? 'choose-pile'
         : modesChoiceAction
           ? 'choose-modes'
         : sacrificeAction
@@ -2861,14 +2903,16 @@ function Table({
               ? pendingWaterbend
             : mode === 'choose-permanents'
               ? { picks: permanentPicks }
-              : null
+              : mode === 'separate-piles'
+                ? { picks: pilePicks }
+                : null
       if (picking) {
         const fresh = ids.find((i) => !picking.picks.includes(i))
         if (fresh !== undefined) return fresh
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks],
   )
 
   const clickPermanent = useCallback(
@@ -3077,6 +3121,13 @@ function Table({
         setCounterPicks((cur) => nextCounterPick(removeCountersAction, cur, id))
         return
       }
+      // Separating permanents (rule 700.3): a click moves one between the
+      // piles — into the first, or back out of it.
+      if (mode === 'separate-piles' && separatePilesAction && pilesOnBoard) {
+        if (!separatePilesAction.objects.includes(id)) return
+        setPilePicks((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]))
+        return
+      }
       if (mode === 'time-travel' && timeTravelAction) {
         if (!timeTravelAction.eligible.includes(id)) return
         // The brush says which way a click goes; clicking the same way again
@@ -3239,6 +3290,8 @@ function Table({
       unpickTarget,
       sacrificeAction,
       choosePermanentsAction,
+      separatePilesAction,
+      pilesOnBoard,
       pendingSac,
       startCast,
       startAbility,
@@ -3592,6 +3645,27 @@ function Table({
       // A stack gives up some of itself, so the tile has to say how many —
       // "selected" alone can't tell three of nine from nine of nine.
       if (of > 1 && taken > 0) badge = `☠ ${taken}/${of}`
+    } else if (mode === 'separate-piles' && separatePilesAction && pilesOnBoard) {
+      const members = ids.filter((i) => separatePilesAction.objects.includes(i))
+      const first = members.filter((i) => pilePicks.includes(i)).length
+      highlight = members.length > first
+      selected = first > 0
+      if (members.length > 0) {
+        badge =
+          members.length === 1
+            ? first > 0
+              ? 'Pile 1'
+              : 'Pile 2'
+            : `Pile 1: ${first} · Pile 2: ${members.length - first}`
+      }
+    } else if (mode === 'choose-pile' && choosePileAction && pilesOnBoard) {
+      const inPile = (p: number) => ids.filter((i) => choosePileAction.piles[p]?.includes(i)).length
+      const one = inPile(0)
+      const two = inPile(1)
+      highlight = one + two > 0
+      if (one > 0 && two > 0) badge = `Pile 1: ${one} · Pile 2: ${two}`
+      else if (one > 0) badge = 'Pile 1'
+      else if (two > 0) badge = 'Pile 2'
     } else if (mode === 'choose-permanents' && choosePermanentsAction) {
       const taken = permanentPicks.filter((x) => x === id).length
       const of = choosePermanentsAction.copies?.[id] ?? 1
@@ -4910,6 +4984,85 @@ function Table({
         </button>
       </div>
     )
+  } else if (mode === 'separate-piles' && separatePilesAction) {
+    const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''
+    const chooser = separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
+    if (pilesOnBoard) {
+      const first = pilePicks.length
+      const second = separatePilesAction.objects.length - first
+      controls = (
+        <div className="controls">
+          <span>
+            {source}separate into two piles — {chooser} one; {pileFatesText(separatePilesAction.fates)}.
+            <span className="muted">
+              {' '}
+              Click a permanent to move it to pile 1 · pile 1: {first} · pile 2: {second}
+            </span>
+          </span>
+          <button type="button" disabled={first === 0} onClick={() => setPilePicks([])}>
+            Clear
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              game.dispatch({
+                type: 'separate-piles',
+                player: seat,
+                piles: [[...pilePicks], separatePilesAction.objects.filter((id) => !pilePicks.includes(id))],
+              })
+            }
+          >
+            Confirm piles
+          </button>
+        </div>
+      )
+    } else {
+      controls = (
+        <div className="controls">
+          <span className="muted">
+            {decisionCollapsed ? `${source}separating cards into two piles` : 'Look at the popup to separate the cards'}
+          </span>
+          {decisionCollapsed ? (
+            <button type="button" onClick={() => setDecisionCollapsed(false)}>
+              Show choices
+            </button>
+          ) : null}
+        </div>
+      )
+    }
+  } else if (mode === 'choose-pile' && choosePileAction) {
+    const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''
+    if (pilesOnBoard) {
+      controls = (
+        <div className="controls">
+          <span>
+            {source}choose a pile — {pileFatesText(choosePileAction.fates)}.
+          </span>
+          {choosePileAction.piles.map((pile, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => game.dispatch({ type: 'choose-pile', player: seat, pile: i })}
+            >
+              {pileLabels[i]} ({pile.length})
+            </button>
+          ))}
+        </div>
+      )
+    } else {
+      controls = (
+        <div className="controls">
+          <span className="muted">
+            {decisionCollapsed ? `${source}choosing a pile` : 'Look at the popup to choose a pile'}
+          </span>
+          {decisionCollapsed ? (
+            <button type="button" onClick={() => setDecisionCollapsed(false)}>
+              Show choices
+            </button>
+          ) : null}
+        </div>
+      )
+    }
   } else if (mode === 'choose-permanents' && choosePermanentsAction) {
     const { min, max, maxTotalPower, powers } = choosePermanentsAction
     // Kept under a total-power cap (Slaughter the Strong): the running total
@@ -6807,6 +6960,36 @@ function Table({
               if (ways.length === 1 && lands.length === 0) beginCast(ways[0])
               else setCastNowPick(card)
             },
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
+        />
+      ) : null}
+
+      {mode === 'separate-piles' && separatePilesAction && !pilesOnBoard ? (
+        <PileViewer
+          title={`${view.decisionSource?.cardName ?? 'Piles'} — separate into two piles: ${
+            separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
+          } one, and ${pileFatesText(separatePilesAction.fates)}`}
+          resolve={(id) => view.objects[id]}
+          labels={pileLabels}
+          separate={{
+            objects: separatePilesAction.objects,
+            onConfirm: (piles) => game.dispatch({ type: 'separate-piles', player: seat, piles: piles.map((p) => [...p]) }),
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
+        />
+      ) : null}
+
+      {mode === 'choose-pile' && choosePileAction && !pilesOnBoard ? (
+        <PileViewer
+          title={`${view.decisionSource?.cardName ?? 'Piles'} — ${playerLabel(choosePileAction.separator, game.seats)} separated these: choose a pile; ${pileFatesText(choosePileAction.fates)}`}
+          resolve={(id) => view.objects[id]}
+          labels={pileLabels}
+          choose={{
+            piles: choosePileAction.piles,
+            onChoose: (pile) => game.dispatch({ type: 'choose-pile', player: seat, pile }),
           }}
           collapsed={decisionCollapsed}
           onCollapse={() => setDecisionCollapsed(true)}

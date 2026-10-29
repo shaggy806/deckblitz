@@ -864,6 +864,15 @@ function viewForUncached(
   if (state.awaiting?.kind === "choose-from-zone" && state.awaiting.player === viewer) {
     visibleIds.push(...state.awaiting.ids);
   }
+  // Objects being separated into piles are seen by the separator (rule
+  // 700.3: they looked at them, or they were revealed); a face-down pile, by
+  // the players who looked at its cards.
+  if (state.awaiting?.kind === "separate-piles" && state.awaiting.player === viewer) {
+    visibleIds.push(...state.awaiting.objects);
+  }
+  if (state.awaiting?.kind === "choose-pile" && state.awaiting.lookers.includes(viewer)) {
+    visibleIds.push(...state.awaiting.piles.flat());
+  }
   // A scry / surveil reveals the looked-at top cards to that player only.
   if (state.awaiting?.kind === "scry" && state.awaiting.player === viewer) {
     visibleIds.push(...state.awaiting.cards);

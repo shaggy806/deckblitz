@@ -22,6 +22,7 @@ import type {
   EnterTypes,
   LookAndChooseLeftoverIf,
   ManaSplitRiders,
+  PileFateWord,
   ResolvedEnterAttacking,
   ZoneSecondPick,
 } from "./effects.js";
@@ -2534,6 +2535,39 @@ export type AwaitingDecision =
       readonly priorityTo?: PlayerId;
     }
   | {
+      /**
+       * Separate `objects` into two piles (rule 700.3) — a resolving
+       * `separate-into-piles`. Each object goes into exactly one pile, and
+       * either may be empty (700.3a, 700.3d). `chooser` then chooses a pile,
+       * and `fates` say what happens to it and to the other. With
+       * `faceDown` the first pile is face down and the second face up.
+       * The answer waits in `GameState.pilesAnswer` for the effect to resume.
+       */
+      readonly kind: "separate-piles";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly objects: readonly ObjectId[];
+      readonly chooser: PlayerId;
+      readonly faceDown?: true;
+      readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
+    }
+  | {
+      /**
+       * Choose one of `piles` (rule 700.3) — the second half of a
+       * `separate-into-piles`. With `faceDown`, pile 0 is face down: only
+       * `lookers` (who looked at the cards) see what's in it. The answer
+       * waits in `GameState.pilesAnswer`.
+       */
+      readonly kind: "choose-pile";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly piles: readonly (readonly ObjectId[])[];
+      readonly separator: PlayerId;
+      readonly faceDown?: true;
+      readonly lookers: readonly PlayerId[];
+      readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
+    }
+  | {
       readonly kind: "choose-from-zone";
       readonly player: PlayerId;
       /** Whose the cards are when `player` chooses for someone else — an
@@ -4403,6 +4437,9 @@ export interface GameState {
    * chosen to keep so far (a token stack once per member kept), read and
    * cleared as the effect resumes. */
   keptByChoice?: ObjectId[];
+  /** A resolving `separate-into-piles`'s answers, read and cleared as the
+   * effect resumes: the piles the separator made, then the pile chosen. */
+  pilesAnswer?: { piles?: ObjectId[][]; chosen?: number };
   /** Votes being cast in a resolving `vote` (rule 701.38), by the source
    * whose spell or ability holds it, until every one is in and the
    * `votes-finished` event shows them. Not in any player's view, so a secret

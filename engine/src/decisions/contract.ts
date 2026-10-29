@@ -110,6 +110,8 @@ export const DECISION_ACTIONS = {
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
   scry: ["scry"],
+  "separate-piles": ["separate-piles"],
+  "choose-pile": ["choose-pile"],
 } as const satisfies Record<DecisionKind, readonly Action["type"][]>;
 
 /**
@@ -151,6 +153,8 @@ export const DECISION_OFFERS = {
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
   scry: ["scry"],
+  "separate-piles": ["separate-piles"],
+  "choose-pile": ["choose-pile"],
 } as const satisfies Record<DecisionKind, readonly LegalAction["kind"][]>;
 
 /**
@@ -289,6 +293,8 @@ export interface DecisionHost {
     cast: Extract<Action, { type: "cast-spell" }> | Extract<Action, { type: "play-land" }> | null,
   ) => void;
   readonly applyScry: (player: PlayerId, away: readonly ObjectId[]) => void;
+  readonly applySeparatePiles: (player: PlayerId, piles: readonly (readonly ObjectId[])[]) => void;
+  readonly applyChoosePile: (player: PlayerId, pile: number) => void;
 }
 
 /**
