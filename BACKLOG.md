@@ -108,10 +108,13 @@ section keeps only what to do next.
   switch-pt, attack-restriction-defending-player-condition, the target-player chooser,
   chosen-from-revealed-hand destinations and a triggered ability's other-player targets (the
   `damagedThisTurnBy` source, layer 7d, a `PlayerTest` on the defending player,
-  `ChosenPlayerRef`, `discard-chosen`'s `destination`, `targetsChosenBy`; 16 proving cards).
-  **125 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `decision:separate-into-piles` (24), `decision:choose-player` (23),
-  `amount:count-for-chosen-player` (24), `decision:choose-permanent` (24).
+  `ChosenPlayerRef`, `discard-chosen`'s `destination`, `targetsChosenBy`; 16 proving cards),
+  separate-into-piles (2026-10-29: rule 700.3's piles as an effect and two decisions, the client's
+  pile popup and board piles; 20 freed, 4 proving cards — Fact or Fiction, Curator of Destinies,
+  Liliana of the Veil, Death or Glory).
+  **145 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `decision:choose-player` (23), `amount:count-for-chosen-player` (24),
+  `decision:choose-permanent` (24), `effect:discard-all-matching` (22).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

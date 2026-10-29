@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: separating into two piles, features only** (2026-10-29, `5050664c6`;
+  `decision:separate-into-piles`). Rule 700.3 as the `separate-into-piles` effect and the
+  `separate-piles` / `choose-pile` decisions (face-down piles, permanents token by token, each
+  pile's fate a zone or an effect), a pile popup and board piles in the client, the scaffolder's
+  templates; Fact or Fiction, Curator of Destinies, Liliana of the Veil and Death or Glory authored
+  to prove it. 20 freed cards wait for `author-freed`.
 - **Need-keys Phase 2, five families built features-only: damage by this source, power/toughness
   switches, restrictions on the defending player, other players' choices** (2026-10-29,
   `9f9770204`, `5d7521fdd`, `baa99e72e`; `trigger:dies-after-dealt-damage-by-source`,

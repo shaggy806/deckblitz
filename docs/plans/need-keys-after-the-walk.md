@@ -435,6 +435,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   The spell/activated form of other-player targets and opponent-chosen modes stay open: they need
   a pause mid-cast. 125 freed cards queued. Next: `decision:separate-into-piles` (24),
   `decision:choose-player` (23), `amount:count-for-chosen-player` (24).
+- **2026-10-29: separate-into-piles, one family** — rule 700.3 as the `separate-into-piles` effect
+  and two new decisions (`separate-piles`, `choose-pile`), the client's pile popup and board
+  piles; 4 proving cards. Left for `author-freed` to narrow: three random piles (Whims of the
+  Fates), piles to the bottom in any order, play or search from a pile, Bend or Break, the combat
+  piles. 145 freed cards queued. Next: `decision:choose-player` (23),
+  `amount:count-for-chosen-player` (24), `decision:choose-permanent` (24).
 
 ## Rough size
 
