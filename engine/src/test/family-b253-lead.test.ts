@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { intrinsicManaColors } from "../characteristics.js";
-import { A, B, C, activate, blockOffer, cast, controller, keywords, named, pt, ref, registryOf, settle, spawn, subtypes, table, toHand } from "./harness.js";
+import { A, B, C, activate, blockOffer, cast, controller, enter, keywords, named, pt, ref, registryOf, settle, spawn, subtypes, table, toHand } from "./harness.js";
 
 describe("B253 lead cards", () => {
   it("Ghirapur Guide: target creature can't be blocked by power 2 or less this turn", () => {
@@ -149,4 +149,16 @@ describe("B253 lead cards", () => {
     const offered = game.legalActions(A).filter((action) => action.kind === "activate-ability" && action.source === dino);
     expect(offered.length).toBe(3); // one per colour: {R}, {G} or {W}
   });
+
+  it("Kitsune: with every other creature under one player, no legal pair — the trigger is removed (603.3d)", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    enter(game, "Kitsune, Dragon's Daughter", A);
+    settle(game);
+    expect(game.state.awaiting).toBeNull();
+    expect(controller(game, bears)).toBe(B);
+    expect(controller(game, giant)).toBe(B);
+  });
 });
+

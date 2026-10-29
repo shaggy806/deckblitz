@@ -22151,6 +22151,16 @@ export class Game {
       }
       slots.push({ spec, options });
     }
+    // Each slot having an option on its own isn't a legal choice for them
+    // all: "two other target creatures controlled by different players"
+    // (Kitsune, Dragon's Daughter) with every other creature under one player
+    // has none, so the ability is removed (rule 603.3d), as a spell couldn't
+    // be cast (601.2c — `targetsFillable`).
+    const fillOptions = slots.map((s) => ("auto" in s ? (s.auto === undefined ? [] : [s.auto]) : "skip" in s ? [] : s.options));
+    if (!targetsFillable(specs, fillOptions, [], 0, stateTargetFacts(this.state, this.registry))) {
+      this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no legal targets" });
+      return "done";
+    }
 
     const chooserSlots = slots.filter(
       (s): s is { spec: TargetSpec; options: readonly TargetRef[] } => "spec" in s,
