@@ -697,7 +697,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Verix Bladewing", 1],
     ],
     substitutions: [
-      sub("Loaming Shaman", "Scavenging Ooze", "Cheap green creature that interacts with graveyards."),
     ],
   }),
   precon({

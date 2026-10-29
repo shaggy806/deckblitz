@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3981 already implemented / 1019 missing (marks refreshed 2026-10-29)
+3997 already implemented / 1003 missing (marks refreshed 2026-10-29)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -443,7 +443,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   444  Red Elemental Blast                      {R}              Instant
 [x]   445  Plateau                                  {0}              Land — Mountain Plains
 [x]   446  Ohran Frostfang                          {3}{G}{G}        Snow Creature — Snake
-[ ]   447  Geier Reach Sanitarium                   {0}              Legendary Land
+[x]   447  Geier Reach Sanitarium                   {0}              Legendary Land
 [x]   448  Tainted Field                            {0}              Land
 [x]   449  Urza's Cave                              {0}              Land — Urza's Cave
 [x]   450  Pearl Medallion                          {2}              Artifact
@@ -618,7 +618,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   619  Stitcher's Supplier                      {B}              Creature — Zombie
 [ ]   620  Archdruid's Charm                        {G}{G}{G}        Instant
 [ ]   621  Banner of Kinship                        {5}              Artifact
-[ ]   622  Torment of Hailfire                      {X}{B}{B}        Sorcery
+[x]   622  Torment of Hailfire                      {X}{B}{B}        Sorcery
 [x]   623  Icetill Explorer                         {2}{G}{G}        Creature — Insect Scout
 [x]   624  Dig Through Time                         {6}{U}{U}        Instant
 [x]   625  Noxious Revival                          {G/P}            Instant
@@ -1334,7 +1334,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1341  Ulamog, the Ceaseless Hunger             {10}             Legendary Creature — Eldrazi
 [ ]  1342  Palantír of Orthanc                      {3}              Legendary Artifact
 [x]  1343  Skirk Prospector                         {R}              Creature — Goblin
-[ ]  1344  Ad Nauseam                               {3}{B}{B}        Instant
+[x]  1344  Ad Nauseam                               {3}{B}{B}        Instant
 [x]  1345  Dolmen Gate                              {2}              Artifact
 [x]  1346  Brass's Bounty                           {6}{R}           Sorcery
 [x]  1347  Sodden Verdure                           {0}              Land — Forest Island
@@ -1497,7 +1497,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1504  Guide of Souls                           {W}              Creature — Human Cleric
 [x]  1505  Snake Umbra                              {2}{G}           Enchantment — Aura
 [x]  1506  Meren of Clan Nel Toth                   {2}{B}{G}        Legendary Creature — Human Shaman
-[ ]  1507  Patriarch's Bidding                      {3}{B}{B}        Sorcery
+[x]  1507  Patriarch's Bidding                      {3}{B}{B}        Sorcery
 [x]  1508  Copperline Gorge                         {0}              Land
 [ ]  1509  Case of the Locked Hothouse              {3}{G}           Enchantment — Case
 [x]  1510  Haliya, Guided by Light                  {2}{W}           Legendary Creature — Human Soldier
@@ -1580,12 +1580,12 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1587  Ouroboroid                               {2}{G}{G}        Creature — Plant Wurm
 [x]  1588  Shriekmaw                                {4}{B}           Creature — Elemental
 [x]  1589  Whirlwind of Thought                     {1}{U}{R}{W}     Enchantment
-[ ]  1590  Goblin Welder                            {R}              Creature — Goblin Artificer
+[x]  1590  Goblin Welder                            {R}              Creature — Goblin Artificer
 [x]  1591  Kiora's Follower                         {G}{U}           Creature — Merfolk
 [ ]  1592  March of Swirling Mist                   {X}{U}           Instant
 [x]  1593  Losheel, Clockwork Scholar               {2}{W}           Legendary Creature — Elephant Artificer
 [x]  1594  Surrak and Goreclaw                      {4}{G}{G}        Legendary Creature — Human Bear
-[ ]  1595  Cultivator Colossus                      {4}{G}{G}{G}     Creature — Plant Beast
+[x]  1595  Cultivator Colossus                      {4}{G}{G}{G}     Creature — Plant Beast
 [x]  1596  Siege-Gang Commander                     {3}{R}{R}        Creature — Goblin
 [x]  1597  Eldrazi Conscription                     {8}              Kindred Enchantment — Eldrazi Aura
 [x]  1598  Sword of Vengeance                       {3}              Artifact — Equipment
@@ -2393,7 +2393,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2400  Shivan Gorge                             {0}              Legendary Land
 [x]  2401  Zealous Conscripts                       {4}{R}           Creature — Human Warrior
 [x]  2402  Airbender Ascension                      {1}{W}           Enchantment
-[ ]  2403  Professor Onyx                           {4}{B}{B}        Legendary Planeswalker — Liliana
+[x]  2403  Professor Onyx                           {4}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2404  Endbringer                               {5}{C}           Creature — Eldrazi
 [ ]  2405  Mimic Vat                                {3}              Artifact
 [x]  2406  Outpost Siege                            {3}{R}           Enchantment
@@ -2454,7 +2454,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2461  Mirrodin Besieged                        {2}{U}           Enchantment
 [x]  2462  Erebor Flamesmith                        {1}{R}           Creature — Dwarf Artificer
 [x]  2463  Crimson Wisps                            {R}              Instant
-[ ]  2464  Agitator Ant                             {2}{R}           Creature — Insect
+[x]  2464  Agitator Ant                             {2}{R}           Creature — Insect
 [x]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
 [x]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
 [ ]  2467  Emrakul, the World Anew                  {12}             Legendary Creature — Eldrazi
@@ -3105,7 +3105,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3112  Iron Spider, Stark Upgrade               {3}              Legendary Artifact Creature — Spider Hero
 [x]  3113  Reshape                                  {X}{U}{U}        Sorcery
 [x]  3114  Bothersome Quasit                        {2}{R}           Creature — Demon
-[ ]  3115  Master of Ceremonies                     {3}{W}           Creature — Rhino Druid
+[x]  3115  Master of Ceremonies                     {3}{W}           Creature — Rhino Druid
 [ ]  3116  Autumn's Veil                            {G}              Instant
 [x]  3117  Temporal Manipulation                    {3}{U}{U}        Sorcery
 [x]  3118  Vedalken Archmage                        {2}{U}{U}        Creature — Vedalken Wizard
@@ -3630,7 +3630,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3637  Vexing Puzzlebox                         {3}              Artifact
 [x]  3638  Path of Discovery                        {3}{G}           Enchantment
 [x]  3639  Ghyrson Starn, Kelermorph                {1}{U}{R}        Legendary Creature — Tyranid Human
-[ ]  3640  Sphinx's Tutelage                        {2}{U}           Enchantment
+[x]  3640  Sphinx's Tutelage                        {2}{U}           Enchantment
 [x]  3641  Sozin's Comet                            {3}{R}{R}        Sorcery
 [x]  3642  Gonti's Aether Heart                     {6}              Legendary Artifact
 [ ]  3643  Transmute Artifact                       {U}{U}           Sorcery
@@ -3990,7 +3990,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3997  Phyrexian Delver                         {3}{B}{B}        Creature — Phyrexian Zombie
 [x]  3998  Woodfall Primus                          {5}{G}{G}{G}     Creature — Treefolk Shaman
 [x]  3999  Sorin, Imperious Bloodlord               {2}{B}           Legendary Planeswalker — Sorin
-[ ]  4000  Tromell, Seymour's Butler                {2}{G}           Legendary Creature — Elf Advisor
+[x]  4000  Tromell, Seymour's Butler                {2}{G}           Legendary Creature — Elf Advisor
 [x]  4001  Artful Dodge                             {U}              Sorcery
 [x]  4002  Oubliette                                {1}{B}{B}        Enchantment
 [x]  4003  Firespitter Whelp                        {2}{R}           Creature — Dragon
@@ -4348,7 +4348,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4355  Jinnie Fay, Jetmir's Second              {R/G}{G}{G/W}    Legendary Creature — Elf Druid
 [x]  4356  Helga, Skittish Seer                     {G}{W}{U}        Legendary Creature — Frog Druid
 [x]  4357  Cauldron of Souls                        {5}              Artifact
-[ ]  4358  Quandrix Command                         {1}{G}{U}        Instant
+[x]  4358  Quandrix Command                         {1}{G}{U}        Instant
 [ ]  4359  Siphon Insight                           {U}{B}           Instant
 [x]  4360  Blazing Volley                           {R}              Sorcery
 [x]  4361  Merry, Esquire of Rohan                  {R}{W}           Legendary Creature — Halfling Knight
@@ -4361,7 +4361,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4368  Venom Sliver                             {1}{G}           Creature — Sliver
 [x]  4369  Nighthowler                              {1}{B}{B}        Enchantment Creature — Horror
 [ ]  4370  Cayth, Famed Mechanist                   {1}{U}{R}{W}     Legendary Creature — Dwarf Artificer
-[ ]  4371  The Legend of Yangchen // Avatar Yangchen {5}              Enchantment — Saga // Legendary Creature — Avatar
+[x]  4371  The Legend of Yangchen // Avatar Yangchen {5}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  4372  Rammas Echor, Ancient Shield             {3}{W}           Legendary Artifact
 [ ]  4373  Conspiracy Theorist                      {1}{R}           Creature — Human Shaman
 [x]  4374  Pridemalkin                              {2}{G}           Creature — Cat
@@ -4395,7 +4395,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4402  Fiend Artisan                            {B/G}{B/G}       Creature — Nightmare
 [ ]  4403  Nicol Bolas, Dragon-God                  {U}{B}{B}{B}{R}  Legendary Planeswalker — Bolas
 [ ]  4404  Jackdaw Savior                           {2}{W}           Creature — Bird Cleric
-[ ]  4405  Vicious Rumors                           {B}              Sorcery
+[x]  4405  Vicious Rumors                           {B}              Sorcery
 [x]  4406  Compulsive Research                      {2}{U}           Sorcery
 [x]  4407  Fist of Suns                             {3}              Artifact
 [x]  4408  Joraga Warcaller                         {G}              Creature — Elf Warrior
@@ -4410,7 +4410,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4417  The Emperor of Palamecia // The Lord Master of Hell {2}              Legendary Creature — Human Noble Wizard // Legendary Creature — Demon Noble Wizard
 [x]  4418  Thieving Varmint                         {1}{B}           Creature — Varmint
 [ ]  4419  Gyruda, Doom of Depths                   {4}{U/B}{U/B}    Legendary Creature — Demon Kraken
-[ ]  4420  Liliana's Triumph                        {1}{B}           Instant
+[x]  4420  Liliana's Triumph                        {1}{B}           Instant
 [ ]  4421  Elturel Survivors                        {3}{R}           Creature — Tiefling Peasant
 [x]  4422  Seer's Sundial                           {4}              Artifact
 [x]  4423  Zuko's Exile                             {5}              Instant — Lesson
@@ -4988,7 +4988,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4995  Tromokratis                              {5}{U}{U}        Legendary Creature — Kraken
 [x]  4996  Sokka, Tenacious Tactician               {1}{U}{R}{W}     Legendary Creature — Human Warrior Ally
 [x]  4997  Reclaim                                  {G}              Instant
-[ ]  4998  Ruin Grinder                             {5}{R}           Artifact Creature — Construct
+[x]  4998  Ruin Grinder                             {5}{R}           Artifact Creature — Construct
 [ ]  4999  Sin, Unending Cataclysm                  {5}{G}{U}        Legendary Creature — Leviathan Avatar
 [x]  5000  Omen Hawker                              {U}              Creature — Octopus Advisor
 [x]  5001  Hammers of Moradin                       {2}{W}           Creature — Dwarf Cleric
