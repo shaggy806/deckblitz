@@ -86,6 +86,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, four families in one batch: granted statics, land-type setting, the basic
+  land type of your choice, exchanging control** (2026-10-29, B253, `20720979f`, `ed562eef4`;
+  `effect:grant-static-to-permanent`, `effect:cant-be-blocked-by-filter-until-eot`,
+  `static:land-type-setting`, `static:choose-basic-land-type`,
+  `decision:choose-land-type-on-resolution`, `effect:set-land-type`, `effect:become-basic-land-type`,
+  `effect:exchange-control`, `effect:exchange-control-all-with-target-opponent`,
+  `effect:gain-control-all-target-player`, `effect:grant-keyword-all-target-player`): the
+  `grant-static` effect; `restrict`'s `cantBeBlockedBy` and `CardFilter.not`; rule 305.7 (a land
+  set to a basic type loses its rules-text abilities, keeps granted ones, enters with none of its
+  own entering abilities) with the 613.8a dependency of a land's own type-setter and of a setter
+  scoped by subtype on a later one; `setsChosenLandType`; `choose-creature-type`'s fixed `options`;
+  `exchange-control` (701.12) and `exchange-control-all`. Blood Moon, Magus of the Moon, Spreading
+  Seas, Reins of Power, Switcheroo, Gilt-Leaf Archdruid and 84 more; 31 still blocked (`B253.json`).
 - **Jeska's Will and Akroma's Will** (2026-10-28, B252): their "if you control a commander as you
   cast this spell, you may choose both" was `castModal.maxModesIf` all along, but
   `effect:commander-conditional-mode-count` was never added to `built`, so both still read as blocked

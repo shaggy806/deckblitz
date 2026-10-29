@@ -401,6 +401,16 @@ missing. Re-run `--greedy` for Phase 2's order.
   authored (25 by the lead, 10 auto-finished, 56 by five agents), 27 still blocked on 17 new narrow
   keys. A shared hints page (the Need-Key Hints artifact) now lets the user note existing machinery per
   unit, read back with `ArtifactData`.
+- **2026-10-29: four families (B253)** — grant-static-to-permanent (29), basic-land-type-mana (29),
+  the land-type-on-resolution unit of choose-creature-type-on-resolution (19, its land-type code
+  shared with the second) and control-change-extensions' exchange group (28), with the target-player
+  scopes of `gain-control-all` and `grant-keyword-all` riding along. 106 cards freed: 90 authored
+  (12 by the lead, 78 by six agents), 31 blocked counting 15 already on other open keys. The agents
+  found three bugs in the morning's features, fixed before landing: a granted static's granted
+  abilities weren't seen by `Game`'s scans (Huatli), a type-setter scoped by subtype applied by
+  timestamp instead of after the setter it depends on (Glaciers, Conversion — 613.8a), and an Aura's
+  damage couldn't name the creature it enchants (Earthbind). `effect:targets-share-type` now blocks
+  six.
 
 ## Rough size
 

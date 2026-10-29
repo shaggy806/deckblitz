@@ -555,7 +555,8 @@
   "effect:become-basic-land-type",
   "effect:exchange-control",
   "effect:exchange-control-all-with-target-opponent",
-  "effect:gain-control-all-target-player"
+  "effect:gain-control-all-target-player",
+  "effect:grant-keyword-all-target-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

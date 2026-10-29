@@ -5670,3 +5670,21 @@ engine terms. A second thing to check is a second test.
 ### Witness the Future: only the target player's graveyard
 - **Do:** Cast Witness the Future targeting Bob.
 - **Expect:** Only Bob's graveyard cards can be picked next (up to four); your own aren't offered. They go into Bob's library, then you take one of your top four cards.
+
+## Granted statics, land types, exchanging control (2026-10-29, need-keys Phase 2: four families)
+
+### Tideshaper Mystic: choose a basic land type
+- **Do:** Tap Tideshaper Mystic targeting Bob's Yavimaya Coast, then pick Swamp.
+- **Expect:** "Tideshaper Mystic — choose a basic land type" offers Plains, Island, Swamp, Mountain and Forest as buttons. The Coast's type line reads Swamp until end of turn, and it taps only for {B}.
+
+### Blood Moon: nonbasic lands are Mountains
+- **Do:** Cast Blood Moon.
+- **Expect:** Your Yavimaya Coast reads Mountain and taps only for {R}; its own mana ability is gone. Your Forest is unchanged.
+
+### Ghirapur Guide: small creatures can't block it
+- **Do:** Activate Ghirapur Guide targeting itself, then attack Bob with it.
+- **Expect:** As Bob, Grizzly Bears can't be picked to block the Guide; Hill Giant can.
+
+### Switcheroo: two creatures change hands
+- **Do:** Cast Switcheroo targeting your Grizzly Bears and Bob's Hill Giant.
+- **Expect:** The Hill Giant moves to your side and the Bears to Bob's, both at once.

@@ -1,0 +1,860 @@
+{
+  "batch": "B253",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the grant-static-to-permanent family (effect:grant-static-to-permanent + effect:cant-be-blocked-by-filter-until-eot), the basic-land-type-mana family (static:land-type-setting + static:choose-basic-land-type), the choose-land-type-on-resolution unit (decision:choose-land-type-on-resolution + effect:set-land-type + effect:become-basic-land-type) and the control-change-extensions family (effect:exchange-control + effect:exchange-control-all-with-target-opponent; Tier B effect:gain-control-all-target-player, effect:grant-keyword-all-target-player)",
+  "authored": [
+    {
+      "name": "Ashiok, Sculptor of Fears",
+      "files": [
+        "engine/src/cards/pool/ashiok-sculptor-of-fears.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avarice Totem",
+      "files": [
+        "engine/src/cards/pool/avarice-totem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood Moon",
+      "files": [
+        "engine/src/cards/pool/blood-moon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bright-Palm, Soul Awakener",
+      "files": [
+        "engine/src/cards/pool/bright-palm-soul-awakener.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Carnage, Crimson Chaos",
+      "files": [
+        "engine/src/cards/pool/carnage-crimson-chaos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cavern Stomper",
+      "files": [
+        "engine/src/cards/pool/cavern-stomper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cheeky House-Mouse",
+      "files": [
+        "engine/src/cards/pool/cheeky-house-mouse.ts",
+        "engine/src/cards/pool/squeak-by.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chromeshell Crab",
+      "files": [
+        "engine/src/cards/pool/chromeshell-crab.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Conjured Currency",
+      "files": [
+        "engine/src/cards/pool/conjured-currency.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Contaminated Ground",
+      "files": [
+        "engine/src/cards/pool/contaminated-ground.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Conversion",
+      "files": [
+        "engine/src/cards/pool/conversion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Convincing Mirage",
+      "files": [
+        "engine/src/cards/pool/convincing-mirage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cyclopean Giant",
+      "files": [
+        "engine/src/cards/pool/cyclopean-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deepwood Elder",
+      "files": [
+        "engine/src/cards/pool/deepwood-elder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Djinn of Infinite Deceits",
+      "files": [
+        "engine/src/cards/pool/djinn-of-infinite-deceits.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Doorman",
+      "files": [
+        "engine/src/cards/pool/doorman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dread Charge",
+      "files": [
+        "engine/src/cards/pool/dread-charge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dream Thrush",
+      "files": [
+        "engine/src/cards/pool/dream-thrush.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Earthbind",
+      "files": [
+        "engine/src/cards/pool/earthbind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Evil Presence",
+      "files": [
+        "engine/src/cards/pool/evil-presence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eyes Everywhere",
+      "files": [
+        "engine/src/cards/pool/eyes-everywhere.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Firefright Mage",
+      "files": [
+        "engine/src/cards/pool/firefright-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Full Steam Ahead",
+      "files": [
+        "engine/src/cards/pool/full-steam-ahead.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghirapur Guide",
+      "files": [
+        "engine/src/cards/pool/ghirapur-guide.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gilt-Leaf Archdruid",
+      "files": [
+        "engine/src/cards/pool/gilt-leaf-archdruid.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glaciers",
+      "files": [
+        "engine/src/cards/pool/glaciers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Graceful Antelope",
+      "files": [
+        "engine/src/cards/pool/graceful-antelope.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grixis Illusionist",
+      "files": [
+        "engine/src/cards/pool/grixis-illusionist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harbinger of the Seas",
+      "files": [
+        "engine/src/cards/pool/harbinger-of-the-seas.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Harvesttide Sentry",
+      "files": [
+        "engine/src/cards/pool/harvesttide-sentry.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Huatli, Poet of Unity",
+      "files": [
+        "engine/src/cards/pool/huatli-poet-of-unity.ts",
+        "engine/src/cards/pool/roar-of-the-fifth-people.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Man Armor",
+      "files": [
+        "engine/src/cards/pool/iron-man-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jinx",
+      "files": [
+        "engine/src/cards/pool/jinx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Joven's Tools",
+      "files": [
+        "engine/src/cards/pool/jovens-tools.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kavu Recluse",
+      "files": [
+        "engine/src/cards/pool/kavu-recluse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kick in the Door",
+      "files": [
+        "engine/src/cards/pool/kick-in-the-door.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kitsune, Dragon's Daughter",
+      "files": [
+        "engine/src/cards/pool/kitsune-dragons-daughter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Legion Loyalist",
+      "files": [
+        "engine/src/cards/pool/legion-loyalist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lingering Mirage",
+      "files": [
+        "engine/src/cards/pool/lingering-mirage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lush Growth",
+      "files": [
+        "engine/src/cards/pool/lush-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magus of the Moon",
+      "files": [
+        "engine/src/cards/pool/magus-of-the-moon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "March from Velis Vel",
+      "files": [
+        "engine/src/cards/pool/march-from-velis-vel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindbender Spores",
+      "files": [
+        "engine/src/cards/pool/mindbender-spores.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Modify Memory",
+      "files": [
+        "engine/src/cards/pool/modify-memory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moonbow Illusionist",
+      "files": [
+        "engine/src/cards/pool/moonbow-illusionist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ms. Marvel, Kamala Khan",
+      "files": [
+        "engine/src/cards/pool/ms-marvel-kamala-khan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Multiversal Passage",
+      "files": [
+        "engine/src/cards/pool/multiversal-passage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mystic Compass",
+      "files": [
+        "engine/src/cards/pool/mystic-compass.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Navigator's Compass",
+      "files": [
+        "engine/src/cards/pool/navigators-compass.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phantasmal Terrain",
+      "files": [
+        "engine/src/cards/pool/phantasmal-terrain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Infiltrator",
+      "files": [
+        "engine/src/cards/pool/phyrexian-infiltrator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pixie Illusionist",
+      "files": [
+        "engine/src/cards/pool/pixie-illusionist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Political Trickery",
+      "files": [
+        "engine/src/cards/pool/political-trickery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reef Shaman",
+      "files": [
+        "engine/src/cards/pool/reef-shaman.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reins of Power",
+      "files": [
+        "engine/src/cards/pool/reins-of-power.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Resilient Roadrunner",
+      "files": [
+        "engine/src/cards/pool/resilient-roadrunner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rhonas's Stalwart",
+      "files": [
+        "engine/src/cards/pool/rhonass-stalwart.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rikku, Resourceful Guardian",
+      "files": [
+        "engine/src/cards/pool/rikku-resourceful-guardian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rime Transfusion",
+      "files": [
+        "engine/src/cards/pool/rime-transfusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Run for Your Life",
+      "files": [
+        "engine/src/cards/pool/run-for-your-life.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sabertooth Alley Cat",
+      "files": [
+        "engine/src/cards/pool/sabertooth-alley-cat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sea Snidd",
+      "files": [
+        "engine/src/cards/pool/sea-snidd.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sea's Claim",
+      "files": [
+        "engine/src/cards/pool/seas-claim.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shifting Borders",
+      "files": [
+        "engine/src/cards/pool/shifting-borders.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shifting Grift",
+      "files": [
+        "engine/src/cards/pool/shifting-grift.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shimmering Mirage",
+      "files": [
+        "engine/src/cards/pool/shimmering-mirage.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Shrewd Negotiation",
+      "files": [
+        "engine/src/cards/pool/shrewd-negotiation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slimy Kavu",
+      "files": [
+        "engine/src/cards/pool/slimy-kavu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Song of the Dryads",
+      "files": [
+        "engine/src/cards/pool/song-of-the-dryads.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spreading Seas",
+      "files": [
+        "engine/src/cards/pool/spreading-seas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Streambed Aquitects",
+      "files": [
+        "engine/src/cards/pool/streambed-aquitects.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Switcheroo",
+      "files": [
+        "engine/src/cards/pool/switcheroo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tainted Well",
+      "files": [
+        "engine/src/cards/pool/tainted-well.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tatsunari, Toad Rider",
+      "files": [
+        "engine/src/cards/pool/tatsunari-toad-rider.ts",
+        "engine/src/cards/tokens/keimi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tezzeret, Master of Metal",
+      "files": [
+        "engine/src/cards/pool/tezzeret-master-of-metal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Book of Exalted Deeds",
+      "files": [
+        "engine/src/cards/pool/the-book-of-exalted-deeds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thelonite Monk",
+      "files": [
+        "engine/src/cards/pool/thelonite-monk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidal Warrior",
+      "files": [
+        "engine/src/cards/pool/tidal-warrior.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tide Shaper",
+      "files": [
+        "engine/src/cards/pool/tide-shaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tideshaper Mystic",
+      "files": [
+        "engine/src/cards/pool/tideshaper-mystic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tin Street Dodger",
+      "files": [
+        "engine/src/cards/pool/tin-street-dodger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tower of Coireall",
+      "files": [
+        "engine/src/cards/pool/tower-of-coireall.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Trade the Helm",
+      "files": [
+        "engine/src/cards/pool/trade-the-helm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tundra Kavu",
+      "files": [
+        "engine/src/cards/pool/tundra-kavu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Twist Allegiance",
+      "files": [
+        "engine/src/cards/pool/twist-allegiance.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Unstable Frontier",
+      "files": [
+        "engine/src/cards/pool/unstable-frontier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vedalken Plotter",
+      "files": [
+        "engine/src/cards/pool/vedalken-plotter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Verdant Outrider",
+      "files": [
+        "engine/src/cards/pool/verdant-outrider.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Zhao, the Moon Slayer",
+      "files": [
+        "engine/src/cards/pool/zhao-the-moon-slayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zombie Trailblazer",
+      "files": [
+        "engine/src/cards/pool/zombie-trailblazer.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "The Trickster-God's Heist",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "Chapter II's \"two target nonbasic, noncreature permanents that share a card type\" ties two target slots together; no target spec says it."
+    },
+    {
+      "name": "Daring Thief",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "\"Target permanent an opponent controls that shares a card type with it\": the second target must share a card type with the first."
+    },
+    {
+      "name": "Confusion in the Ranks",
+      "needs": [
+        "decision:trigger-object-controller-chooses-target"
+      ],
+      "why": "The entering permanent's controller chooses the target; \"shares a card type with it\" exists (`sharesCardTypeWith: \"trigger-object\"`), the chooser doesn't."
+    },
+    {
+      "name": "Elsewhere Flask",
+      "needs": [
+        "effect:set-land-types-all"
+      ],
+      "why": "\"Each land you control becomes that type until end of turn\": no mass form of add-types' setSubtypes."
+    },
+    {
+      "name": "Puca's Mischief",
+      "needs": [
+        "filter:target-stat-relative-to-other-target"
+      ],
+      "why": "The second target's mana value must be at most the first target's; no target spec compares two slots."
+    },
+    {
+      "name": "Spawnbroker",
+      "needs": [
+        "filter:target-stat-relative-to-other-target"
+      ],
+      "why": "The second target's power must be at most the first target's."
+    },
+    {
+      "name": "Legerdemain",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "The second target must share artifact or creature with the first."
+    },
+    {
+      "name": "Illusionary Presence",
+      "needs": [
+        "keyword:chosen-land-type-landwalk"
+      ],
+      "why": "\"Choose a land type\": any of the land types' landwalk, but only the basics' and desertwalk exist."
+    },
+    {
+      "name": "Gilded Drake",
+      "needs": [
+        "mechanic:resolves-despite-illegal-target"
+      ],
+      "why": "\"This ability still resolves if its target becomes illegal\": no way to override 608.2b's fizzle."
+    },
+    {
+      "name": "Thran Portal",
+      "needs": [
+        "static:mana-abilities-cost-life"
+      ],
+      "why": "\"Mana abilities of this land cost an additional 1 life to activate.\""
+    },
+    {
+      "name": "Bilbo, Luckwearer // Burglar's Plot",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "\"Two target nonland permanents that share a card type.\""
+    },
+    {
+      "name": "Cultural Exchange",
+      "needs": [
+        "effect:exchange-control-chosen-equal-sets"
+      ],
+      "why": "Any number of one player's creatures and the same number of another's, swapped."
+    },
+    {
+      "name": "Juxtapose",
+      "needs": [
+        "effect:exchange-control-greatest-per-player"
+      ],
+      "why": "Each player's greatest-mana-value creature, then artifact, exchanged, ties chosen by their controller (also decision:choose-among-tied-greatest)."
+    },
+    {
+      "name": "Vision Charm",
+      "needs": [
+        "effect:set-land-types-all"
+      ],
+      "why": "Mode 2: choose a land type, then a basic one; every land of the first becomes the second (two resolution choices, a mass setter)."
+    },
+    {
+      "name": "Gauntlets of Chaos",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "The second target must share artifact, creature or land with the first, rechecked as it resolves."
+    },
+    {
+      "name": "Illusionary Terrain",
+      "needs": [
+        "decision:choose-two-basic-land-types-on-enter"
+      ],
+      "why": "Two ordered basic land type choices as it enters."
+    },
+    {
+      "name": "Call for Aid",
+      "needs": [
+        "effect:this-way-gained-control",
+        "effect:cant-attack-player-this-turn"
+      ],
+      "why": "Gaining control of a target player's creatures is built; \"those creatures\" afterwards and \"can't attack you\" aren't."
+    },
+    {
+      "name": "Cyclopean Tomb",
+      "needs": [
+        "effect:delayed-trigger-rest-of-game"
+      ],
+      "why": "The land-type setting is built; the rest-of-game delayed removal isn't."
+    },
+    {
+      "name": "Dreamwinder",
+      "needs": [
+        "condition:defending-player-controls"
+      ],
+      "why": "The land type change is built; the attack condition isn't."
+    },
+    {
+      "name": "Floodchaser",
+      "needs": [
+        "static:attack-restriction-defending-player-condition"
+      ],
+      "why": "The land type change is built; the attack restriction isn't."
+    },
+    {
+      "name": "Gaea's Liege",
+      "needs": [
+        "effect:count-defending-player-controls"
+      ],
+      "why": "The land type change is built; its attacking P/T isn't."
+    },
+    {
+      "name": "Oko, Thief of Crowns",
+      "needs": [
+        "static:set-characteristics"
+      ],
+      "why": "The exchange is built; its +1 wasn't rechecked here."
+    },
+    {
+      "name": "Orcish Farmer",
+      "needs": [
+        "effect:until-controllers-next-untap-step-duration"
+      ],
+      "why": "The land type change is built; the duration isn't."
+    },
+    {
+      "name": "Quicksilver Fountain",
+      "needs": [
+        "decision:trigger-player-chooses-target"
+      ],
+      "why": "The land type change is built; the chooser isn't."
+    },
+    {
+      "name": "Role Reversal",
+      "needs": [
+        "filter:shares-permanent-type-with-other-target"
+      ],
+      "why": "The exchange is built; the shared-type target constraint isn't."
+    },
+    {
+      "name": "Shifting Loyalties",
+      "needs": [
+        "effect:targets-share-type"
+      ],
+      "why": "The exchange is built; the shared-type target constraint isn't."
+    },
+    {
+      "name": "Speed, Young Avenger",
+      "needs": [
+        "static:blockable-only-by-filter"
+      ],
+      "why": "Its one-shot restriction is built; the open key on its record wasn't rechecked here."
+    },
+    {
+      "name": "Sudden Substitution",
+      "needs": [
+        "effect:gain-control-spell"
+      ],
+      "why": "The exchange is built; control of a spell isn't."
+    },
+    {
+      "name": "Terraformer",
+      "needs": [
+        "effect:set-land-types-all"
+      ],
+      "why": "Choosing the type is built; a mass setter isn't."
+    },
+    {
+      "name": "Visions of Duplicity",
+      "needs": [
+        "cost:flashback-cost-reduction"
+      ],
+      "why": "The exchange is built; the flashback cost reduction isn't."
+    },
+    {
+      "name": "Volatile Stormdrake",
+      "needs": [
+        "keyword:hexproof-from-abilities"
+      ],
+      "why": "The exchange is built; hexproof from abilities isn't."
+    }
+  ]
+}

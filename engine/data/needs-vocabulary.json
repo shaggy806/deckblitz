@@ -14464,6 +14464,34 @@
    "family": "effect:choices-by-other-players",
    "description": "Each player's choice made as the permanent enters, kept on it for statics over each controller's creatures ('creatures controlled by players who chose war get +3/+0')",
    "example": "Archangel of Strife"
+  },
+  "filter:target-stat-relative-to-other-target": {
+   "family": "effect:target-spec-additions",
+   "example": "Spawnbroker: \"target creature with power less than or equal to that creature's power an opponent controls\" — one target slot compared with another's power or mana value (Puca's Mischief), as both are chosen and again as it resolves."
+  },
+  "mechanic:resolves-despite-illegal-target": {
+   "family": "mechanic:resolves-despite-illegal-target",
+   "example": "Gilded Drake: \"This ability still resolves if its target becomes illegal\" — an override of rule 608.2b's fizzle, so its \"if you can't make an exchange, sacrifice\" happens."
+  },
+  "static:mana-abilities-cost-life": {
+   "family": "static:mana-abilities-cost-life",
+   "example": "Thran Portal: \"Mana abilities of this land cost an additional 1 life to activate\" — intrinsic ones included."
+  },
+  "effect:exchange-control-chosen-equal-sets": {
+   "family": "effect:control-change-extensions",
+   "example": "Cultural Exchange: any number of one target player's creatures and the same number of another's, exchanged."
+  },
+  "effect:exchange-control-greatest-per-player": {
+   "family": "effect:control-change-extensions",
+   "example": "Juxtapose: each player's greatest-mana-value creature, then artifact, exchanged, ties broken by their controller (with decision:choose-among-tied-greatest)."
+  },
+  "decision:choose-among-tied-greatest": {
+   "family": "decision:choose-permanent",
+   "example": "Juxtapose: \"If two or more permanents a player controls are tied for greatest, their controller chooses one of them.\""
+  },
+  "decision:choose-two-basic-land-types-on-enter": {
+   "family": "decision:choose-permanent",
+   "example": "Illusionary Terrain: \"choose two basic land types\" as it enters, in order — \"Basic lands of the first chosen type are the second chosen type.\""
   }
  },
  "groups": [

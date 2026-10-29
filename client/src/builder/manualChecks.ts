@@ -8499,4 +8499,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { gy: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  // --- Granted statics, land types, exchanging control (2026-10-29, B253) ---
+  preset(
+    'Tideshaper Mystic: choose a basic land type',
+    board({ you: { bf: ['Tideshaper Mystic'] }, opp: { bf: ['Yavimaya Coast'] } }),
+  ),
+  preset(
+    'Blood Moon: nonbasic lands are Mountains',
+    board({ you: { bf: ['Mountain*3', 'Yavimaya Coast', 'Forest'], hand: ['Blood Moon'] } }),
+  ),
+  preset(
+    "Ghirapur Guide: small creatures can't block it",
+    board({ you: { bf: ['Forest*3', 'Ghirapur Guide'] }, opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] } }),
+  ),
+  preset(
+    'Switcheroo: two creatures change hands',
+    board({ you: { bf: ['Island*5', 'Grizzly Bears'], hand: ['Switcheroo'] }, opp: { bf: ['Hill Giant'] } }),
+  ),
 ]

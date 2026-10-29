@@ -93,8 +93,14 @@ section keeps only what to do next.
   choices-by-other-players, target-spec-additions and repeat-process (B251, 2026-10-28: rule 101.4's
   held discards and entries, "each player chooses" as a `vote` with `choose`, the `sameController`
   target relation, `repeat`, and a modal spell's per-mode slot relations; 81 cards authored, 27 still
-  blocked — three on `effect:repeat-until-no-player-acts`). Next: `effect:grant-static-to-permanent`
-  (29), `static:basic-land-type-mana` (29) and `effect:control-change-extensions` (28).
+  blocked — three on `effect:repeat-until-no-player-acts`), grant-static-to-permanent,
+  basic-land-type-mana, choose-land-type-on-resolution and control-change-extensions (B253,
+  2026-10-29: `grant-static`, "can't be blocked by [X] this turn", rule 305.7's land-type setting
+  with its 613.8a dependency, "the basic land type of your choice", `exchange-control`; 90 cards
+  authored, 31 still blocked — six on `effect:targets-share-type`, three on
+  `effect:set-land-types-all`). Next: `cost:remove-counters-from-chosen`
+  (27), `effect:modal-activated-targeted-modes` (27), `effect:cast-and-activate-restrictions` (27)
+  and `effect:amount-fields-dynamic` (27).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

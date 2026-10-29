@@ -658,6 +658,10 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
 }
 /** A colour named as a permanent enters ("As this Aura enters, choose a
  * color" — Flickering Ward, Utopia Sprawl) arrives as its letter. */
+/** The five basic land types: a fixed menu of them is "choose a basic land
+ * type" (Convincing Mirage as it enters, Tideshaper Mystic as it resolves). */
+const BASIC_LAND_TYPES: ReadonlySet<string> = new Set(['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'])
+
 const COLOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
   W: 'White',
   U: 'Blue',
@@ -4239,7 +4243,9 @@ function Table({
               ? 'choose its protector'
               : creatureTypeChoiceAction.options.every((t) => t in COLOR_CHOICE_NAMES)
                 ? 'choose a color'
-                : 'choose one')}
+                : creatureTypeChoiceAction.options.every((t) => BASIC_LAND_TYPES.has(t))
+                  ? 'choose a basic land type'
+                  : 'choose one')}
         </span>
         {creatureTypeChoiceAction.options.map((t) => (
           <button
