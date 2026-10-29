@@ -294,7 +294,10 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         ? `${name(event.object)} enters as a copy of ${event.copyOf}`
         : `${name(event.object)} copies nothing`
     case 'creature-type-chosen':
-      return `${name(event.object)} chooses ${event.creatureType}`
+      // A player chosen (Black Vise's opponent, a battle's protector) goes by name.
+      return `${name(event.object)} chooses ${
+        seats.some((s) => s.player === event.creatureType) ? who(event.creatureType as PlayerId) : event.creatureType
+      }`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
     case 'pile-chosen':

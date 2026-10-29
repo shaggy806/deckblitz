@@ -34,7 +34,8 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
  * A Curse names the player it enchants (`enchanting`), in their seat colour:
  * it sits on its controller's board but is attached to someone else. A
  * battle names its protector (`protectedBy` — rule 310.9) the same way: a
- * Siege sits on its controller's board, defended by an opponent.
+ * Siege sits on its controller's board, defended by an opponent. So does a
+ * permanent's chosen player (`chosenPlayer` — Black Vise's opponent).
  */
 export function CardFlags({
   obj,
@@ -42,6 +43,7 @@ export function CardFlags({
   compact,
   enchanting = null,
   protectedBy = null,
+  chosenPlayer = null,
 }: {
   readonly obj: VisibleObject
   readonly goaders: readonly Goader[]
@@ -50,6 +52,8 @@ export function CardFlags({
   readonly enchanting?: Goader | null
   /** This battle's protector, or null. */
   readonly protectedBy?: Goader | null
+  /** The player chosen for this permanent, or null. */
+  readonly chosenPlayer?: Goader | null
 }) {
   const sick = obj.summoningSick && obj.power !== null && obj.toughness !== null
   const held = obj.holding?.length ?? 0
@@ -67,6 +71,7 @@ export function CardFlags({
     chosen === null &&
     enchanting === null &&
     protectedBy === null &&
+    chosenPlayer === null &&
     level === null
   ) {
     return null
@@ -90,6 +95,15 @@ export function CardFlags({
           title={`Protected by ${protectedBy.name}: they defend it when it's attacked`}
         >
           {compact ? `🛡 ${protectedBy.name}` : `protected by ${protectedBy.name}`}
+        </span>
+      ) : null}
+      {chosenPlayer !== null ? (
+        <span
+          className="card-flag enchanting"
+          style={{ '--goader': `var(--${chosenPlayer.seat})` } as CSSProperties}
+          title={`The chosen player: ${chosenPlayer.name}`}
+        >
+          {compact ? `◎ ${chosenPlayer.name}` : `chose ${chosenPlayer.name}`}
         </span>
       ) : null}
       {goaders.map((g) => (

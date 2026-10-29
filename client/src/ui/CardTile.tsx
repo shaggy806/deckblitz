@@ -58,6 +58,8 @@ export interface CardTileProps {
   readonly enchanting?: Goader | null
   /** This battle's protector (rule 310.9), or null. */
   readonly protectedBy?: Goader | null
+  /** The player chosen for this permanent, or null. */
+  readonly chosenPlayer?: Goader | null
   /** 'title' (default): a name+cost bar above the art, like a real card's
    * frame -- used everywhere except the hand. 'art-first': cost pips
    * overlaid on the art itself, with the name below it instead -- the
@@ -165,6 +167,7 @@ export function CardTile({
   goaders = [],
   enchanting = null,
   protectedBy = null,
+  chosenPlayer = null,
   layout = 'title',
   ownerSeat = null,
   onClick,
@@ -464,7 +467,7 @@ export function CardTile({
       {stackCount !== null && stackCount > 1 ? (
         <span className="card-stack">×{stackCount}</span>
       ) : null}
-      <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} compact={false} />
+      <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} chosenPlayer={chosenPlayer} compact={false} />
       {obj.tapped && TAP_ICON_URL ? (
         <img className="tap-icon" src={TAP_ICON_URL} alt="" />
       ) : null}

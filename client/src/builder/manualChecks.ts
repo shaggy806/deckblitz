@@ -8587,4 +8587,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Craw Wurm', 'Grizzly Bears', 'Llanowar Elves', 'Forest*2'] },
     }),
   ),
+  // --- The chosen player (2026-10-29, build-family) ---
+  preset(
+    'Black Vise: choose an opponent, named on the card',
+    // A four-player table: three opponents to choose among.
+    board({ you: { bf: ['Wastes'], hand: ['Black Vise'] }, opp: [{}, {}, {}] }),
+  ),
 ]

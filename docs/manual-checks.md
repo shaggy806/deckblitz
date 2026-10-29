@@ -5726,3 +5726,9 @@ engine terms. A second thing to check is a second test.
 ### Liliana of the Veil: separate an opponent's permanents on the board
 - **Do:** Activate Liliana's −6 on Bob. Click some of Bob's permanents, then Confirm piles in the banner.
 - **Expect:** Bob's permanents are badged "Pile 2" and a click turns one to "Pile 1"; the banner counts both piles. Bob then sacrifices one pile and keeps the other.
+
+## The chosen player (2026-10-29, need-keys Phase 2: build-family, features only)
+
+### Black Vise: choose an opponent, named on the card
+- **Do:** Cast Black Vise and choose one of the three opponents.
+- **Expect:** The banner reads "Black Vise — Choose an opponent" with a button per opponent and none for you. Once it's on the battlefield, its tile is flagged "chose" and that player's name, in their seat colour.

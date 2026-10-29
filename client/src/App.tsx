@@ -3749,6 +3749,11 @@ function Table({
       obj.protector !== undefined && view.turnOrder.includes(obj.protector)
         ? { seat: seatClassOf(view.turnOrder, obj.protector), name: playerLabel(obj.protector, game.seats) }
         : null
+    // The player chosen for it (Black Vise's opponent), named on its tile.
+    const chosenPlayer =
+      obj.chosenPlayer !== undefined && view.turnOrder.includes(obj.chosenPlayer)
+        ? { seat: seatClassOf(view.turnOrder, obj.chosenPlayer), name: playerLabel(obj.chosenPlayer, game.seats) }
+        : null
     // A face-down permanent wears its owner's card back.
     const backSeat = view.turnOrder.includes(obj.owner) ? seatClassOf(view.turnOrder, obj.owner) : null
     if (opts.mini) {
@@ -3767,6 +3772,7 @@ function Table({
           goaders={goaders}
           enchanting={enchanting}
           protectedBy={protectedBy}
+          chosenPlayer={chosenPlayer}
           held={(obj.holding ?? []).map((h) => ({ id: h, obj: view.objects[h] ?? null }))}
           ownerSeat={backSeat}
           onClick={onTileClick}
@@ -3787,6 +3793,7 @@ function Table({
         goaders={goaders}
         enchanting={enchanting}
         protectedBy={protectedBy}
+        chosenPlayer={chosenPlayer}
         ownerSeat={backSeat}
         onClick={onTileClick}
       />
