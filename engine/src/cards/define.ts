@@ -1132,6 +1132,12 @@ export type StaticCondition =
       readonly atLeast?: number;
       readonly atMost?: number;
       readonly other?: boolean;
+      /** "If **two cards that share a color** were milled this way"
+       * (Grindstone), "…that share a card type" (The Tale of Tamiyo), "if
+       * two or more of those cards have **the same name**" (Scalpelexis):
+       * `atLeast` and `atMost` count the largest group of them that share
+       * one — a colour, a card type, or a name — rather than all of them. */
+      readonly sharing?: "color" | "card-type" | "name";
     }
   /**
    * "If ~ is still on the battlefield" (Shirei, Shizo's Caretaker's delayed

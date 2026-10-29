@@ -362,6 +362,7 @@ import {
   anyNumberSlot,
   concreteTargetSpecs,
   differentControllerOf,
+  sameControllerOf,
   divisionOf as spellDivision,
   groupBounds,
   groupPowerExceeded,
@@ -5340,9 +5341,18 @@ export class Game {
 
     if (awaiting.then !== undefined) {
       // A resolving spell or ability ("choose a creature type, then …"):
-      // finish its resolution with the answer substituted in.
+      // finish its resolution with the answer substituted in — one player's
+      // choice of an "each player chooses a creature type", the option it
+      // casts.
+      const then =
+        awaiting.then.kind === "cast-vote" && awaiting.then.choice === "creature-type"
+          ? {
+              ...awaiting.then,
+              choice: { option: Math.max(0, CREATURE_TYPES.indexOf(creatureType)), text: creatureType },
+            }
+          : substituteChosenCreatureType(awaiting.then, creatureType);
       applyEffectSpec(
-        substituteChosenCreatureType(awaiting.then, creatureType),
+        then,
         this.makeResolutionContext(
           awaiting.source,
           player,
@@ -7253,6 +7263,32 @@ export class Game {
     // where they are (rule 701.20a), and moved nowhere.
     if (awaiting.destination === "reveal" && chosen.length > 0) {
       this.revealCards(player, chosen, "hand");
+    }
+
+    // Rule 101.4: a card a player chose to put from their hand onto the
+    // battlefield while the players' choices are held (Show and Tell's "each
+    // player may put …") waits in their hand until every one has chosen, and
+    // then they all enter at once (`releaseHeldChoices`).
+    const held = this.state.heldChoices;
+    if (
+      held !== undefined &&
+      awaiting.priorityTo === undefined &&
+      awaiting.destination === "battlefield" &&
+      chosen.length > 0 &&
+      chosen.every((id) => this.state.objects[id]?.zone === "hand") &&
+      awaiting.then === undefined &&
+      awaiting.secondPick === undefined &&
+      awaiting.alsoTaken === undefined &&
+      awaiting.enterTapped !== true &&
+      awaiting.enterWithCounters === undefined &&
+      awaiting.enterAttacking === undefined &&
+      awaiting.enterAs === undefined
+    ) {
+      this.state.heldChoices = { ...held, entries: [...(held.entries ?? []), { player, objects: [...chosen] }] };
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
     }
 
     // "All cards with that name": the graveyard's go with the picks.
@@ -18214,6 +18250,7 @@ export class Game {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
+    else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects);
     else this.finishZoneChoice(entry);
   }
 
@@ -20696,7 +20733,8 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self)
         );
       case "players-finish-voting":
-        return event.type === "votes-finished";
+        // An "each player chooses" isn't a vote (rule 701.38 vs 101.4).
+        return event.type === "votes-finished" && event.choice !== true;
       case "rolls-dice":
         return event.type === "dice-rolled" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "class-level-gained":
@@ -22412,6 +22450,26 @@ export class Game {
         }
       }
     });
+    // "…that player controls", "from a single graveyard" (rule 608.2b): a
+    // slot whose player is no longer that of the slots it names is illegal —
+    // a player target's own, a permanent's controller, a card's owner; one
+    // already illegal still lends its player, as it last existed.
+    const playerNow = (ref: TargetRef | undefined): PlayerId | undefined => {
+      if (ref?.kind === "player") return ref.player;
+      const object = ref === undefined ? undefined : this.state.objects[ref.object];
+      // A card in a graveyard, a hand or exile is in its owner's.
+      if (object !== undefined && object.zone !== "battlefield" && object.zone !== "stack") return object.owner;
+      return controllerNow(ref);
+    };
+    specs.forEach((spec, i) => {
+      if (!sameControllerOf(spec) || chosen[i] === undefined) return;
+      const than = otherThan(spec);
+      for (const slot of than === undefined ? [] : otherThanSlots(than)) {
+        if (chosen[slot] === undefined) continue;
+        const mine = playerNow(now[i] ?? chosen[i]);
+        if (mine === undefined || mine !== playerNow(now[slot] ?? chosen[slot])) drop(i);
+      }
+    });
     // A group's "total power N or less" broken now makes every one of its
     // targets illegal (Reunion of the House's ruling).
     const group = anyNumberSlot(declared);
@@ -22727,15 +22785,32 @@ export class Game {
         return damageDealtSince(this.state, since, ref, condition.player) > 0;
       }
       if (condition.kind === "this-way") {
-        const done = thisWayDone(
+        const entries = thisWayDone(
           condition.what,
           condition.who === undefined ? undefined : scoped(condition.who),
           condition.filter,
         )
           // "If **another** Desert was returned this way": not the source
           // itself, which keeps its id as it changes zones.
-          .filter((entry) => condition.other !== true || entry.object !== source)
-          .reduce((n, entry) => n + entry.count, 0);
+          .filter((entry) => condition.other !== true || entry.object !== source);
+        let done = entries.reduce((n, entry) => n + entry.count, 0);
+        // "Two cards that share a color": the largest group sharing one.
+        if (condition.sharing !== undefined) {
+          const groups = new Map<string, number>();
+          for (const entry of entries) {
+            const object = this.state.objects[entry.object];
+            if (object === undefined) continue;
+            const chars = computeCharacteristics(this.state, this.registry, entry.object);
+            const keys =
+              condition.sharing === "color"
+                ? [...chars.colors]
+                : condition.sharing === "card-type"
+                  ? [...chars.types]
+                  : [printedCardName(object)];
+            for (const key of keys) groups.set(key, (groups.get(key) ?? 0) + entry.count);
+          }
+          done = Math.max(0, ...groups.values());
+        }
         const atLeast = condition.atLeast ?? (condition.atMost === undefined ? 1 : 0);
         return done >= atLeast && (condition.atMost === undefined || done <= condition.atMost);
       }
@@ -24285,6 +24360,7 @@ export class Game {
       holdChoices: () => {
         this.state.heldChoices ??= { discards: [] };
       },
+      choicesHeld: () => this.state.heldChoices !== undefined,
       releaseHeldChoices: () => this.releaseHeldChoices(),
       tookEachPlayerMay: (player, since) => this.tookEachPlayerMay(source, player, since),
       sacrificedForEachPlayerMay: (player, since) => {
@@ -24299,6 +24375,23 @@ export class Game {
         return undefined;
       },
       nextEventSeq: () => this.state.eventSeq,
+      thisWaySince: () => since,
+      scopeThisWay: (at) => {
+        this.state.resolutionSince = at;
+        return this.makeResolutionContext(
+          source,
+          controller,
+          targets,
+          x,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          targetZones,
+          refs,
+          opts,
+        );
+      },
       // "Damage equal to its power" from a dies trigger reads the power it
       // died with (the Juri and Elenda rulings); a target that has left, the
       // power it left with.
@@ -24769,8 +24862,11 @@ export class Game {
         this.placeFound(hit, put, tapped, attacking, underYourControl === true ? controller : undefined),
       placeRevealed: (owner, revealed, rest, exiled) => this.placeRevealed(owner, revealed, rest, exiled),
       votes,
-      beginVoting: (secret) => {
-        this.state.voting = { ...(this.state.voting ?? {}), [source]: { secret, votes: [] } };
+      beginVoting: (secret, choice) => {
+        this.state.voting = {
+          ...(this.state.voting ?? {}),
+          [source]: { secret, votes: [], ...(choice === true ? { choice: true } : {}) },
+        };
       },
       askVote: (player, spec, extra) => this.askVote(source, controller, player, spec, extra, x),
       castVote: (voter, choice) => {
@@ -24787,7 +24883,7 @@ export class Game {
         }
         const vote: Vote = { voter, choice: cast };
         this.state.voting = { ...this.state.voting, [source]: { ...held, votes: [...held.votes, vote] } };
-        if (!held.secret) this.emit({ type: "vote-cast", source, vote });
+        if (!held.secret) this.emit({ type: "vote-cast", source, vote, ...(held.choice === true ? { choice: true } : {}) });
       },
       finishVoting: () => {
         const held = this.state.voting?.[source];
@@ -24795,7 +24891,14 @@ export class Game {
         const { [source]: _done, ...rest } = this.state.voting ?? {};
         if (Object.keys(rest).length > 0) this.state.voting = rest;
         else delete this.state.voting;
-        this.emit({ type: "votes-finished", source, controller, votes: held.votes, secret: held.secret });
+        this.emit({
+          type: "votes-finished",
+          source,
+          controller,
+          votes: held.votes,
+          secret: held.secret,
+          ...(held.choice === true ? { choice: true } : {}),
+        });
       },
       additionalVotes: (player) => this.additionalVotes(player),
       votedPermanentHere: (object, zoneChangeCount) => {
@@ -26384,8 +26487,20 @@ export class Game {
     if (this.state.players[player]?.hasLost !== false) return;
     const secret = spec.secret === true;
     const what = spec.for;
+    // "Each player chooses …" (rule 101.4) asks the same questions in its
+    // own words.
+    const verb = spec.choose === true ? "Choose" : "Vote for";
+    if ("creatureType" in what) {
+      // A creature type (rule 205.3m), cast as the option it names.
+      this.beginCreatureTypeChoice(source, player, undefined, {
+        then: { kind: "cast-vote", voter: player, choice: "creature-type" },
+        targets: [],
+        x,
+      });
+      return;
+    }
     if ("permanent" in what) {
-      const eligible = this.battlefieldMatching(controller, what.permanent);
+      const eligible = this.battlefieldMatching(what.own === true ? player : controller, what.permanent);
       if (eligible.length === 0) return;
       this.state.awaiting = {
         kind: "choose-permanents",
@@ -26393,7 +26508,7 @@ export class Game {
         eligible,
         min: extra || what.upToOne === true ? 0 : 1,
         max: 1,
-        prompt: extra ? "Vote an additional time (or choose none)" : "Vote for a permanent",
+        prompt: extra ? "Vote an additional time (or choose none)" : `${verb} a permanent`,
         then: { kind: "cast-vote", voter: player, choice: "target" },
         source,
         x,
@@ -26403,13 +26518,13 @@ export class Game {
     const modes: ModeOption[] =
       "options" in what
         ? what.options.map((text, option) => ({
-            text: `Vote for ${text}`,
+            text: `${verb} ${text}`,
             effect: { kind: "cast-vote", voter: player, choice: { option, text } },
           }))
         : this.state.turnOrder
             .filter((p) => this.state.players[p]?.hasLost === false && (what.player === "any" || p !== player))
             .map((p) => ({
-              text: `Vote for ${p.charAt(0).toUpperCase()}${p.slice(1)}`,
+              text: `${verb} ${p.charAt(0).toUpperCase()}${p.slice(1)}`,
               effect: { kind: "cast-vote", voter: player, choice: { player: p } },
             }));
     if (modes.length === 0) return;
@@ -34503,6 +34618,32 @@ export class Game {
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
       this.drainPendingSacrificeVictims();
     }
+    const entering = (held.entries ?? []).flatMap(({ objects }) => objects);
+    if (entering.length > 0) this.enterHeldEntries(entering);
+  }
+
+  /**
+   * The cards players chose to put from their hands onto the battlefield
+   * while their choices were held (rule 101.4 — Show and Tell's ruling):
+   * each one's "as this enters" choices first, in the order chosen — the
+   * active player's, then the others' in turn order — parking the entry
+   * (`PendingEntry`) while one is asked, then all of them at once, each
+   * under its owner's control. A card that has left its owner's hand since
+   * stays where it is.
+   */
+  private enterHeldEntries(ids: readonly ObjectId[]): void {
+    const entering = ids.filter((id) => this.state.objects[id]?.zone === "hand");
+    for (const id of entering) {
+      if (this.askEnterChoice(id, this.state.objects[id].owner)) {
+        this.state.suspendedResolutions.push({ effect: null, enter: { kind: "held-entries", objects: entering } });
+        return;
+      }
+    }
+    this.withEnterBatch(() => {
+      for (const id of entering) {
+        if (this.moveObject(id, "battlefield")) this.emit({ type: "permanent-entered-battlefield", object: id });
+      }
+    });
   }
 
   /** Whether discarding `amount` cards from `player`'s hand is a real

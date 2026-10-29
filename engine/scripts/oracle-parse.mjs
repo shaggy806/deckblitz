@@ -716,6 +716,18 @@ const singularTarget = (phrase) => phrase.replace(/s( you control| an opponent c
 function quantifiedSlots(phrase, ctx) {
   let m;
   const other = (of) => (ctx.spell ? undefined : { kind: "other", of });
+  // "Up to three target cards from a single graveyard" (Decompose), "two
+  // target cards from an opponent's graveyard" (Nullmage Advocate: one
+  // opponent's), "X target cards from a single graveyard" (Rats' Feast): a
+  // group whose members share a graveyard (`sameController`).
+  if ((m = /^(up to )?(two|three|four|five|X) target (?:(.+?) )?cards from (a single|an opponent's) graveyard$/i.exec(phrase))) {
+    const x = m[2] === "X";
+    const n = x ? "x" : numberOf(m[2]);
+    const of = graveyardTargetOf(`target ${m[3] !== undefined ? `${m[3]} ` : ""}card from ${m[4].toLowerCase() === "a single" ? "a" : "an opponent's"} graveyard`);
+    if (of === undefined || (!x && typeof n !== "number")) return undefined;
+    const group = { kind: "any-number", of, ...(m[1] ? {} : { min: n }), max: n, sameController: true };
+    return { slots: [ctx.target(group)], group: true };
+  }
   // "… with total mana value N or less" (Patch Up): a group capped by its
   // members' total, "up to N" of them or any number.
   if ((m = /^(any number of|up to (?:two|three|four|five)) (target .+?) with total mana value (\d+) or less( from .+)?$/i.exec(phrase))) {
@@ -1460,7 +1472,7 @@ export function parseSentence(sentence, ctx) {
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
   // together (Word of Binding's, By Force's shapes).
-  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+)\.$/i.exec(s))) {
+  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+|(?:up to )?(?:two|three|four|five) target .*cards from (?:a single|an opponent's) graveyard)\.$/i.exec(s))) {
     const got = quantifiedSlots(m[2], ctx);
     if (got === undefined || !got.group) return null;
     const kind = m[1].toLowerCase();

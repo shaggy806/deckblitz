@@ -1247,6 +1247,8 @@ export type GameEvent =
       readonly type: "vote-cast";
       readonly source: ObjectId;
       readonly vote: Vote;
+      /** A choice of an "each player chooses" (rule 101.4), not a vote. */
+      readonly choice?: true;
     })
   | (Base & {
       /** Every player has voted in the vote `source`'s spell or ability
@@ -1259,6 +1261,9 @@ export type GameEvent =
       readonly controller: PlayerId;
       readonly votes: readonly Vote[];
       readonly secret: boolean;
+      /** Every player of an "each player chooses" has chosen (rule 101.4):
+       * not a vote, so "whenever players finish voting" doesn't see it. */
+      readonly choice?: true;
     })
   | (Base & {
       /** Cards were put into graveyards **at the same time** — dying,

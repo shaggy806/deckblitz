@@ -1187,6 +1187,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     // An X a rule defines ("where X is …") is a person's to read.
     expect(face("Sorcery", "Destroy up to X target artifacts, where X is the number of Vampires you control.").complete).toBe(false);
+    // "From a single graveyard" (Decompose), "from an opponent's graveyard"
+    // (one opponent's): a group sharing a graveyard.
+    const decompose = face("Sorcery", "Exile up to three target cards from a single graveyard.");
+    expect(decompose.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "any" }, max: 3, sameController: true },
+    ]);
+    expect(decompose.effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "exile", target: 0 } });
+    expect(face("Sorcery", "Exile X target cards from a single graveyard.").targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "any" }, min: "x", max: "x", sameController: true },
+    ]);
+    expect(face("Instant", "Exile two target cards from an opponent's graveyard.").targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "opponent" }, min: 2, max: 2, sameController: true },
+    ]);
   });
 
   it("airbend (rule 701.65a): each quantity of target, all other creatures, 'that creature', and the hand-only lock", () => {

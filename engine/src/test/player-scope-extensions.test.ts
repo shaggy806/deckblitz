@@ -221,10 +221,13 @@ describe("scoped mill, discard and create-token", () => {
       (game as unknown as { moveObject(id: ObjectId, to: string): boolean }).moveObject(id, "library");
     }
     apply(game, { kind: "discard", target: "each-opponent", amount: 1 });
-    // Bob's lone card went straight away; Carol is asked.
-    expect(game.handOf(B)).toHaveLength(0);
+    // Bob isn't asked: Carol is. His lone card is chosen for him, and waits in
+    // his hand until Carol has chosen too (rule 101.4), then both go at once.
     expect(game.state.awaiting?.kind === "discard" && game.state.awaiting.player).toBe(C);
     expect(game.state.pendingDiscards).toHaveLength(0);
+    expect(game.handOf(B)).toHaveLength(1);
+    settle(game);
+    expect(game.handOf(B)).toHaveLength(0);
   });
 
   it("each opponent creates a token under their own control", () => {

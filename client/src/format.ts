@@ -346,11 +346,13 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
     case 'vote-cast':
-      return `${name(event.source)} — ${who(event.vote.voter)} votes for ${voteText(event.vote.choice)}`
+      return `${name(event.source)} — ${who(event.vote.voter)} ${event.choice === true ? 'chooses' : 'votes for'} ${voteText(event.vote.choice)}`
     case 'votes-finished':
       return event.votes.length === 0
-        ? `${name(event.source)} — nobody voted`
-        : `${name(event.source)} — ${event.secret ? 'votes revealed' : 'voting done'}: ${event.votes
+        ? `${name(event.source)} — ${event.choice === true ? 'nothing chosen' : 'nobody voted'}`
+        : `${name(event.source)} — ${
+            event.choice === true ? (event.secret ? 'choices revealed' : 'choices made') : event.secret ? 'votes revealed' : 'voting done'
+          }: ${event.votes
             .map((v) => `${who(v.voter)} → ${voteText(v.choice)}`)
             .join(', ')}`
     case 'chosen-at-random':

@@ -148,6 +148,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   vote: none,
   "cast-vote": none,
   "for-each-vote": (n, v) => v.child(n.effect),
+  "with-choices": (n, v) => v.child(n.effect),
+  repeat: (n, v) => v.child(n.effect),
   "for-each-voted": none,
   "for-target": (n, v) => v.child(n.effect),
   // Their slot 0 is a convoking creature, not the spell's target 0.

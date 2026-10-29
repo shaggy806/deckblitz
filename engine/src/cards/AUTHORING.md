@@ -1233,6 +1233,7 @@ own object, so it reaches every one.
 | `modify-pt-all` | `filter`, `power`, `toughness`, `duration`, `exceptSource?`, `controlledByTarget?` | Overrun. `exceptSource` spares the source ("**other** attacking creatures you control with flying" — Steel-Plume Marshal, itself one). `controlledByTarget` scopes to a *targeted seat* (Great Oak Guardian), which a `CardFilter`'s `controlledBy` can't name — it only knows "you" and "opponent". |
 | `grant-keyword` | `target`, `keyword`, `duration` | A permanent — or a spell on the stack: Judith, Carnage Connoisseur's "whenever you cast an instant or sorcery spell, … that spell gains deathtouch and lifelink" is two of these on `"trigger-object"`, lasting while it's on the stack. A spell's lifelink and deathtouch apply to the damage it deals. |
 | `player-effect` | `duration: "end-of-turn" \| "until-your-next-turn"`, `reduceSpells?`, `castFromHandFree?`, `castFromGraveyard?`, `damageTo?` | A continuous effect for the controller that expires — an emblem with a clock (`GameState.playerEffects`): `castFromGraveyard: { filter }` is "you may cast [filter] spells from your graveyard this turn" (Liliana, Untouched by Death's −3 — `{ subtype: "Zombie" }`): a graveyard-permission cast of each matching card, ones put there later included, never used up; `reduceSpells: { applies, reduceGeneric }` is Rowan, Scion of War's "spells you cast this turn that are black and/or red cost {X} less to cast, where X is the amount of life you lost this turn" (`applies: { anyOf: [{ colors: ["B"] }, { colors: ["R"] }] }`, `reduceGeneric: { turnStat: "life-lost", who: "you" }` — read as it resolves and fixed, rule 611.2b); `castFromHandFree: { filter? }` is Yusri's "you may cast spells from your hand this turn without paying their mana costs" (offered as a `free` cast); `damageTo: { who, multiplier, permanentsToo? }` is "until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead" (the players fixed as it resolves). The game-outcome locks, each a `PlayerScope` fixed as it resolves: `cantLoseGame` / `cantWinGame` (Angel's Grace's "you can't lose the game this turn and your opponents can't win the game this turn" — `"you"`, `"each-opponent"`; see *Winning and losing*), `cantLoseLife` (Everybody Lives!'s "players can't lose life this turn", rule 119.8: damage and "lose life" change nothing, and no cost that pays more than 0 life can be paid — not a Phyrexian pip, a `Pay N life` mana option, a shock land's offer, a ward, Toxic Deluge's X), `damageLifeFloor: { who, floor }` (Angel's Grace's "damage that would reduce your life total to less than 1 reduces it to 1 instead" — the damage is still dealt in full, a total already below the floor drops as normal, and life *lost* isn't stopped). `tokenMultiplier: 2` is Kaya, Geist Hunter's "until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead" — a Doubling Season for a while, compounding with one on the battlefield. `castOnlyFromHand: "each-opponent"` is Avatar's Wrath's "until your next turn, your opponents can't cast spells from anywhere other than their hands" — the players fixed as it resolves; no permission gets past it (a commander, flashback, an airbended or impulse card, a cascade). `lifeCantChange: "you"` is Teferi's Protection's "your life total can't change" (rules 119.7–8): no gain and no loss from anything, no life paid but 0, no exchange — and a replacement of a gain or loss has nothing to replace. `protectionFromEverything: "you"` is its "you gain protection from everything" (rule 702.16j): no spell or ability may target that player (their own included), no Aura may enchant them (a Curse on them goes, 704.5m), and all damage to them is prevented. |
+| `repeat` | `effect`, `times?`, `again?`, `mayAgain?` | "…, then repeat this process": `effect` is one pass, run again as these allow. `times` is how many passes in all ("proliferate X times" — Expansion Algorithm, `times: "x"`; "repeat the following process X times" — Torment of Hailfire; Professor Onyx's "repeat this process six more times" is `times: 7`), read once as the first pass begins; with `again` or `mayAgain` it's the most there may be (Claim Jumper's "repeat this process once" is `times: 2`). `again` is "if [this], repeat this process": a condition read after each pass over **that pass alone** — each pass is its own "this way" — so Grist's "if an Insect card was milled this way" is `{ kind: "this-way", what: "milled", filter: { subtype: "Insect" } }`, and the `this-way` condition's `sharing: "color" \| "card-type" \| "name"` counts the largest group sharing one: Grindstone's "if two cards that share a color were milled this way" is `{ kind: "this-way", what: "milled", sharing: "color", atLeast: 2 }`. `mayAgain: true` is "you may repeat this process any number of times" (Ad Nauseam), asked after each pass; `{ cost: "{G}" }` is "you may pay {G}. If you do, repeat this process". A pass that stops to ask is answered before the next begins. What follows the process reads every pass's "this way" (Demonlord Belzenlok's "1 damage for each card put into your hand this way"). At most 200 passes. |
 | `clash` | `won?`, `lost?`, `repeat?` | "Clash with an opponent. If you win, …" (rule 701.30 — Lorwyn block): the controller chooses an opponent (not a target; asked only among several), both reveal the top card of their library, each in APNAP order leaves it on top or puts it on the bottom, and a greater mana value wins (an empty library can't win, and loses to any card). Then `won` or `lost` applies, `"that-player"` naming the opponent clashed with (Captivating Glance's "Otherwise, that player gains control"). `repeat` is "if you win, repeat this process" (Hoarder's Greed): on a win, `repeat` and then the clash again. Each clashing player then **clashes** (a `clashed` event, won or not), which the `{ on: "clashes", who, won? }` trigger fires on: "whenever you clash" (Entangling Trap), "whenever you clash and win" (`won: true`, Sylvan Echoes) — for a clash anyone started. Its "if you won" is the condition `{ kind: "trigger-value", compare: { op: "gte", n: 1 } }` (the trigger's value is 1 for a win, 0 for a loss — Rebellion of the Flamekin). |
 | `flip-coin` | `won?`, `lost?`, `untilLose?` | "Flip a coin. If you win the flip, …; if you lose the flip, …" (rule 705): the controller flips on the game's seeded random stream (so a seed replays), then `won` or `lost` applies as their effect. `untilLose: true` is "flip a coin until you lose a flip" (Okaun, Eye of Chaos; Zndrsplt, Eye of Wisdom) — `won` once per win. Each flip is a `coin-flipped` event, which the `wins-coin-flip` trigger reads. |
 | `prohibit` | `who` (a target slot or a `PlayerScope`, default you) with `spells` / `abilities`, or `target` (a permanent) | Prohibitions until end of turn: Sen Triplets' "this turn, that player can't cast spells or activate abilities" (`who: 0, spells: true, abilities: true`); `spells` may instead be `{ filter, label }` for only some spells — Ranger-Captain of Eos's "your opponents can't cast noncreature spells this turn" is `{ who: "each-opponent", spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" } }`, the filter matched against the card as it would be cast and `label` naming them in the log; Koma, Cosmos Serpent's "its activated abilities can't be activated this turn" (`target: 0` — that permanent this stint; flickered, it's a new object). Mana abilities are activated abilities, so they're barred too. `GameState.turnProhibitions`. |
@@ -2042,6 +2043,36 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     each vote they received … each player who received no votes may …"
     (Círdan the Shipwright — `"that-player"`, `{ votesReceived:
     "that-player" }`).
+  **"Each player chooses …"** (rule 101.4 — not a vote) is the same effect
+  with `choose: true`: the same questions, one player at a time, each
+  knowing the choices before theirs, but no additional votes and nothing
+  that triggers on voting sees it. `who` narrows who chooses ("each opponent
+  chooses money, friends, or secrets" — Master of Ceremonies); `startingWith`
+  is `"active-player"` by default (101.4), `"you"`, or `"next-opponent"`
+  (Sadistic Shell Game's "starting with the next opponent in turn order").
+  `for` may also be `{ creatureType: true }` (Harsh Mercy), and a
+  permanent's filter `own: true` reads it from the chooser's side (Agitator
+  Ant's "a creature **they** control"). The steps after it read the choices
+  as they read votes: `for-each-voted { which: "voted" }` for each permanent
+  chosen (Eye of Doom's doom counters, Sadistic Shell Game's destroy —
+  `simultaneous: true`), `for-each-vote { option }` for each player who
+  chose an option. **`with-choices { effect }`** substitutes what was chosen
+  into `effect`: `CHOSEN_THIS_WAY` in a list is every option chosen, once
+  each (Harsh Mercy's `notSubtypes: [CHOSEN_THIS_WAY]`, Patriarch's
+  Bidding's `subtypes: [CHOSEN_THIS_WAY]`); inside `for-each-vote` it is that
+  voter's own choice (Grave Sifter's "cards of that type"). Not yet: a
+  choice kept on a permanent for its statics (Archangel of Strife's "players
+  who chose war"), or chosen among another player's permanents (Grenzo's
+  Rebuttal's "the player to their left").
+
+  "Each player discards a card" (`discard` with a scope of several players)
+  follows rule 101.4 too: each chooses in turn from the active player, the
+  chosen cards staying face down in hand (101.4a), then all are discarded at
+  once — Stronghold Rats, Smallpox. So does a card each player chooses to
+  put from their hand onto the battlefield in an `each-player-may`'s
+  `putFromHand` (Show and Tell): every one enters together once all have
+  chosen, after each has made its "as this enters" choices.
+
   "Whenever players finish voting" is the `players-finish-voting` trigger,
   whose ability reads that vote: the `"opponents-who-voted-with-you"` and
   `"you-and-opponents-who-voted-with-you"` scopes and `{
@@ -2557,6 +2588,28 @@ Protector of the Wastes the same over two `optional` slots. As it resolves,
 two such targets one player controls are both illegal; one gone illegal still
 lends its controller (as it last existed) to that check (the Run Away
 Together rulings).
+
+**"…that player controls" / "from a single graveyard"** is `sameController:
+true`: on an `other` slot with a slot relation, the slot's player is that of
+the slots it names — Mutiny is `["creature-an-opponent-controls", { kind:
+"other", of: "creature", than: { slot: 0 }, sameController: true }]`,
+Incriminate's "two target creatures controlled by the same player" the same
+over `"creature"`, Goblin Welder's "target artifact card in that player's
+graveyard" a `card-in-graveyard` slot tied to the artifact's. A slot's player
+is a player target itself, a permanent's controller, and a card's owner
+anywhere else (whose graveyard it's in). On an `any-number` group,
+`sameController: true` is "up to three target cards **from a single
+graveyard**" (Decompose) — and "two target cards from **an opponent's**
+graveyard" (Nullmage Advocate) is that over `whose: "opponent"`, one
+opponent's — while `sameController: { slot: n }` ties every member to slot
+`n`'s player: "target player shuffles up to four target cards **from their
+graveyard**" (Witness the Future: `["player", { kind: "any-number", of: {
+kind: "card-in-graveyard" }, max: 4, sameController: { slot: 0 } }]`). The
+choosers narrow by it; as it resolves, a slot whose player is no longer the
+other's is illegal (rule 608.2b). A group must be the list's last slot, so
+two cards from one graveyard *before* another target (the Advocates' "…
+Destroy target artifact or enchantment") are two fixed slots, the second
+`other` with `sameController`.
 On a spell with `{X}`, `max: "x"` is "up to X target …" (Pest Infestation) and
 `min: "x", max: "x"` is "X target …" (Curse of the Swine): X is announced
 before the targets (rule 601.2b–c), so a choice is judged at the X cast

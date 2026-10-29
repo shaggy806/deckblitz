@@ -3741,6 +3741,13 @@ export type PendingEntry =
        * on one of them's "as this enters" choice. */
       readonly kind: "exiled-return";
       readonly objects: readonly ObjectId[];
+    }
+  | {
+      /** Cards players chose to put from their hands onto the battlefield
+       * while their choices were held (rule 101.4 — Show and Tell), entering
+       * together once each has made its "as this enters" choices. */
+      readonly kind: "held-entries";
+      readonly objects: readonly ObjectId[];
     };
 
 /**
@@ -4340,8 +4347,9 @@ export interface GameState {
   /** Votes being cast in a resolving `vote` (rule 701.38), by the source
    * whose spell or ability holds it, until every one is in and the
    * `votes-finished` event shows them. Not in any player's view, so a secret
-   * vote stays secret until then. */
-  voting?: Record<ObjectId, { readonly secret: boolean; readonly votes: readonly Vote[] }>;
+   * vote stays secret until then. `choice`: an "each player chooses"
+   * (rule 101.4), not a vote. */
+  voting?: Record<ObjectId, { readonly secret: boolean; readonly votes: readonly Vote[]; readonly choice?: true }>;
   /** Draws waiting behind a dredge question (rule 702.52): the rest of an
    * instruction's draws, each made — and offered dredge again — one at a
    * time once the question before it is answered (the ruling). */
@@ -4387,14 +4395,20 @@ export interface GameState {
    */
   pendingSacrificeVictims: { readonly player: PlayerId; readonly object: ObjectId; readonly exploitedBy?: ObjectId }[];
   /**
-   * Rule 101.4: set while an `each-player-may` asks its players in turn —
-   * every player makes their choices, *then* the actions happen at once.
-   * What a player chose to discard waits here, still in their hand and so
-   * still hidden from the players after them (101.4a); sacrifice victims
-   * wait in `pendingSacrificeVictims`, not drained. `Game.releaseHeldChoices`
-   * then discards and sacrifices all of it at once. Absent otherwise.
+   * Rule 101.4: set while an `each-player-may` (or a scoped `discard`)
+   * asks its players in turn — every player makes their choices, *then* the
+   * actions happen at once. What a player chose to discard waits here, still
+   * in their hand and so still hidden from the players after them (101.4a);
+   * so does a card they chose to put from their hand onto the battlefield
+   * (`entries` — Show and Tell); sacrifice victims wait in
+   * `pendingSacrificeVictims`, not drained. `Game.releaseHeldChoices` then
+   * discards, sacrifices and puts onto the battlefield all of it at once.
+   * Absent otherwise.
    */
-  heldChoices?: { readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[] };
+  heldChoices?: {
+    readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[];
+    readonly entries?: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[] }[];
+  };
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b
    * — Sai, Master Thopterist's "Sacrifice two artifacts", Jarad, Golgari Lich

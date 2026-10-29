@@ -295,6 +295,18 @@ export type TargetSpec =
        * controller, as it last existed, to that check (the Run Away Together
        * rulings). Needs {@link TargetFacts}. */
       readonly differentController?: true;
+      /** "…**that player** controls" / "…controlled by **the same**
+       * player": the slot's player is that of every slot `than` names —
+       * Mutiny's "another target creature that player controls", Goblin
+       * Welder's "target artifact card in that player's graveyard",
+       * Incriminate's "two target creatures controlled by the same player".
+       * A slot's player is the player itself for a player target, the
+       * controller of a permanent, and the owner of a card anywhere else
+       * (whose graveyard it's in). Only with a slot relation. As the spell
+       * or ability resolves, a slot whose player is no longer the other's is
+       * illegal (rule 608.2b); one already illegal still lends its player, as
+       * it last existed. Needs {@link TargetFacts}. */
+      readonly sameController?: true;
     }
   /**
    * "Any number of target …" (rule 601.2c: none, one, or as many distinct
@@ -352,6 +364,14 @@ export type TargetSpec =
        * Awakening): no two members share one. Checked as they're chosen
        * and again as it resolves, as the totals are. */
       readonly differentManaValues?: true;
+      /** Every member's player is the same — "up to two target cards **from
+       * a single graveyard**" (Decompose), "two target cards from **an
+       * opponent's** graveyard" (Nullmage Advocate: one opponent's) — or,
+       * `{ slot }`, the player of that earlier slot: "target player shuffles
+       * up to four target cards **from their graveyard**" (Witness the
+       * Future). Each member is an `other` slot with `sameController` (see
+       * it) — {@link concreteTargetSpecs}. Needs {@link TargetFacts}. */
+      readonly sameController?: true | { readonly slot: number };
     };
 
 /**
@@ -376,6 +396,22 @@ export function differentControllerOf(spec: TargetSpec): boolean {
   if (spec.kind === "other") return spec.differentController === true;
   if (spec.kind === "optional") return differentControllerOf(spec.of);
   return false;
+}
+
+/** Must slot `spec` share its player with the slots its relation names
+ * (`sameController`)? Looked for through an `optional` wrapper. */
+export function sameControllerOf(spec: TargetSpec): boolean {
+  if (typeof spec !== "object") return false;
+  if (spec.kind === "other") return spec.sameController === true;
+  if (spec.kind === "optional") return sameControllerOf(spec.of);
+  return false;
+}
+
+/** The player a target is about, for a `sameController` relation: a player
+ * target's own, an object's controller (a card off the battlefield: its
+ * owner, which {@link TargetFacts} answers). */
+export function playerOfTarget(ref: TargetRef, facts: TargetFacts): PlayerId | undefined {
+  return ref.kind === "player" ? ref.player : facts.controllerOf(ref);
 }
 
 /** A group's "total power N or less", if it has one. */
@@ -493,14 +529,21 @@ export function concreteTargetSpecs(specs: readonly TargetSpec[], count: number)
   const spec = specs[group];
   if (typeof spec !== "object" || spec.kind !== "any-number") return specs;
   const out: TargetSpec[] = specs.slice(0, group);
+  // "From a single graveyard": each member shares its player with the ones
+  // before it — and, tied to a slot, with that slot's.
+  const same = spec.sameController;
+  const anchor = typeof same === "object" ? [same.slot] : [];
   for (let member = 0; member < Math.max(0, count - group); member += 1) {
+    const before = Array.from({ length: member }, (_unused, i) => group + i);
+    const than = [...anchor, ...before];
     out.push(
-      member === 0
+      than.length === 0
         ? spec.of
         : {
             kind: "other",
             of: spec.of,
-            than: { slots: Array.from({ length: member }, (_unused, i) => group + i) },
+            than: { slots: than },
+            ...(same !== undefined ? { sameController: true } : {}),
           },
     );
   }
@@ -709,6 +752,16 @@ export function slotOptions(
     }
     let left = (options[group] ?? []).filter((ref) => !taken.some((t) => sameTarget(ref, t)));
     if (facts === undefined) return left;
+    // "From a single graveyard": the player of the first member (or of the
+    // slot the group is tied to) is every member's.
+    const same = typeof spec === "object" && spec.kind === "any-number" ? spec.sameController : undefined;
+    if (same !== undefined) {
+      const anchorRef = typeof same === "object" ? picked[same.slot] : taken[0];
+      const player = anchorRef === null || anchorRef === undefined ? undefined : playerOfTarget(anchorRef, facts);
+      if (anchorRef !== null && anchorRef !== undefined) {
+        left = left.filter((ref) => player !== undefined && playerOfTarget(ref, facts) === player);
+      }
+    }
     // "With total power 10 or less": only what still fits.
     const most = groupMaxTotalPower(spec);
     if (most !== undefined) {
@@ -737,8 +790,17 @@ export function slotOptions(
     .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
   if (earlier.length === 0) return all;
   const distinct = all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
+  if (facts === undefined || specs[i] === undefined) return distinct;
+  // "…that player controls": only those whose player is every earlier one's.
+  if (sameControllerOf(specs[i])) {
+    const players = new Set(earlier.map((e) => playerOfTarget(e, facts)));
+    return distinct.filter((ref) => {
+      const player = playerOfTarget(ref, facts);
+      return player !== undefined && players.size === 1 && players.has(player);
+    });
+  }
   // "…controlled by different players": none whose controller is taken.
-  if (facts === undefined || specs[i] === undefined || !differentControllerOf(specs[i])) return distinct;
+  if (!differentControllerOf(specs[i])) return distinct;
   const controllers = new Set(earlier.map((e) => facts.controllerOf(e)));
   return distinct.filter((ref) => !controllers.has(facts.controllerOf(ref)));
 }
@@ -797,12 +859,18 @@ export function otherSlotConflict(
     const mine = chosen[i];
     if (mine === null || mine === undefined) continue;
     const byController = facts !== undefined && differentControllerOf(specs[i]);
+    const sharing = facts !== undefined && sameControllerOf(specs[i]);
     for (const slot of otherThanSlots(than)) {
       const theirs = chosen[slot];
       if (theirs === null || theirs === undefined) continue;
       if (sameTarget(mine, theirs)) return { slot: i, than: slot };
       // "…controlled by different players" (Protector of the Wastes).
       if (byController && facts.controllerOf(mine) === facts.controllerOf(theirs)) return { slot: i, than: slot };
+      // "…that player controls", "from a single graveyard" (Mutiny, Decompose).
+      if (sharing) {
+        const player = playerOfTarget(mine, facts);
+        if (player === undefined || player !== playerOfTarget(theirs, facts)) return { slot: i, than: slot };
+      }
     }
   }
   return null;

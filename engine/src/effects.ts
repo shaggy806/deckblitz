@@ -951,6 +951,42 @@ export function substituteChosenCreatureType(spec: EffectSpec, creatureType: str
  */
 export const CHOSEN_CARD_NAME = "$chosenName";
 
+/**
+ * The placeholder for what a `vote` or `choose` was for — see the
+ * `"with-choices"` {@link EffectSpec}. In a list it stands for every option
+ * chosen; on its own, for one.
+ */
+export const CHOSEN_THIS_WAY = "$chosenThisWay";
+
+/** A copy of `spec` with `CHOSEN_THIS_WAY` replaced by `chosen`: spread into
+ * a list it's in, the first of them anywhere else (an empty string when
+ * nothing was chosen, which matches nothing). */
+export function substituteChosenThisWay(spec: EffectSpec, chosen: readonly string[]): EffectSpec {
+  const walk = (value: unknown): unknown => {
+    if (value === CHOSEN_THIS_WAY) return chosen[0] ?? "";
+    if (Array.isArray(value)) return value.flatMap((v) => (v === CHOSEN_THIS_WAY ? [...chosen] : [walk(v)]));
+    if (value !== null && typeof value === "object") {
+      return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, walk(v)]));
+    }
+    return value;
+  };
+  return walk(spec) as EffectSpec;
+}
+
+/** What `CHOSEN_THIS_WAY` stands for, for one vote or choice: a named
+ * option's (or a creature type's) text, a player's id. A permanent has no
+ * text to substitute. */
+function voteChoiceText(choice: VoteChoice): string {
+  if ("option" in choice) return choice.text;
+  if ("player" in choice) return choice.player;
+  return "";
+}
+
+/** Does `spec` read `CHOSEN_THIS_WAY` anywhere? */
+function readsChosenThisWay(spec: EffectSpec): boolean {
+  return JSON.stringify(spec).includes(CHOSEN_THIS_WAY);
+}
+
 /** A copy of `spec` with every string exactly equal to `CHOSEN_CARD_NAME`
  * replaced by `name` — the same structural walk as the creature type's. */
 export function substituteChosenCardName(spec: EffectSpec, name: string): EffectSpec {
@@ -3127,6 +3163,9 @@ export type EffectSpec =
        * from none to their whole hand; `amount` is ignored. "That many" after
        * it is `{ thisWay: "discarded" }`. */
       readonly anyNumber?: true;
+      /** Engine-built, never authored: every player of a scoped discard has
+       * chosen, so what they chose is discarded now, at once (rule 101.4). */
+      readonly release?: true;
     }
   | {
       readonly kind: "modify-pt";
@@ -3739,6 +3778,50 @@ export type EffectSpec =
       readonly won?: EffectSpec;
       readonly lost?: EffectSpec;
       readonly untilLose?: boolean;
+    }
+  | {
+      /**
+       * "…, then repeat this process" (rule 608.2c — the instructions in
+       * order, again): `effect` once, then again as long as `times`,
+       * `again` and `mayAgain` allow, each pass its own "this way" — so
+       * "if an Insect card was milled this way" asks about this pass's mill
+       * only. A pass that stops to ask something is answered before the
+       * next begins. At most `MAX_REPEATS` passes, a guard: a library runs
+       * out long before.
+       */
+      readonly kind: "repeat";
+      /** The process — one pass of it. */
+      readonly effect: EffectSpec;
+      /** How many passes in all: "proliferate X times" (Expansion
+       * Algorithm), "repeat the following process X times" (Torment of
+       * Hailfire), "repeat this process six more times" (Professor Onyx's
+       * 7). Read once, as the first pass begins. With `again` or
+       * `mayAgain`, the most there may be — Claim Jumper's "repeat this
+       * process once" is 2. */
+      readonly times?: EffectAmount;
+      /** "If [this] … , repeat this process": after a pass, another only if
+       * this holds — read over that pass alone, whose "this way" it is
+       * (Grist's "if an Insect card was milled this way", Grindstone's "if
+       * two cards that share a color were milled this way", Primal Surge's
+       * "if you do"). */
+      readonly again?: StaticCondition;
+      /** "You may repeat this process any number of times" (Ad Nauseam,
+       * Forbidden Ritual): after a pass (and `again`, if it holds), its
+       * controller is asked whether to go again — `cost` is "you may pay
+       * {G}. If you do, repeat" (Forgotten Lore). */
+      readonly mayAgain?: true | { readonly cost: string };
+      /** Engine-built, never authored: passes done, the resolution's own
+       * "this way" start (restored once the last pass is done, so what
+       * follows reads every pass — Demonlord Belzenlok's "for each card put
+       * into your hand this way"), the pass count fixed from `times`, and
+       * whether the pass just done has been judged. */
+      readonly progress?: {
+        readonly round: number;
+        readonly outer: number;
+        readonly total?: number;
+        readonly stop?: true;
+        readonly judged?: true;
+      };
     }
   | {
       /**
@@ -4763,11 +4846,42 @@ export type EffectSpec =
          * don't control". `upToOne` is Vault 11's "votes for **up to one**
          * creature": a player may cast no vote. A player with nothing to
          * vote for casts none. */
-        | { readonly permanent: CardFilter; readonly upToOne?: boolean }
+        | {
+            readonly permanent: CardFilter;
+            readonly upToOne?: boolean;
+            /** Read from the chooser's side instead — Agitator Ant's "each
+             * player may put two +1/+1 counters on a creature **they**
+             * control" (`controlledBy: "you"` is the chooser). */
+            readonly own?: true;
+          }
         /** A player still in the game — `"another"`: other than the voter
          * (Mob Verdict's "votes for another player"). */
-        | { readonly player: "any" | "another" };
+        | { readonly player: "any" | "another" }
+        /** A creature type (rule 205.3m) — only with `choose`: Harsh
+         * Mercy's "each player chooses a creature type". The type is the
+         * vote's `text`; `CHOSEN_THIS_WAY` reads it back. */
+        | { readonly creatureType: true };
       readonly secret?: boolean;
+      /**
+       * "Each player chooses …" rather than "votes" — the same questions
+       * (rule 101.4: one player at a time, each knowing the choices before
+       * theirs, 101.4b), but not a vote (701.38): no additional votes, and
+       * nothing that triggers on voting sees it. What the next steps read is
+       * the same — `for-each-vote`, `for-each-voted`, `{ votesFor }` —
+       * and `with-choices` substitutes the choices into a step. Eye of
+       * Doom's "each player chooses a nonland permanent", Harsh Mercy's
+       * creature types, Master of Ceremonies' "each opponent chooses money,
+       * friends, or secrets".
+       */
+      readonly choose?: true;
+      /** Who chooses — only with `choose`; every player when absent. */
+      readonly who?: PlayerScope;
+      /** Who chooses first, the rest following in turn order: the effect's
+       * controller (a vote's "starting with you", 701.38a — a vote always
+       * starts there), the active player (rule 101.4 — a choice's default),
+       * or the next opponent in turn order after the controller (Sadistic
+       * Shell Game's "starting with the next opponent in turn order"). */
+      readonly startingWith?: "you" | "active-player" | "next-opponent";
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
        * additional, optional one. */
@@ -4779,7 +4893,23 @@ export type EffectSpec =
        * in target slot 0 (a `vote` for a permanent). */
       readonly kind: "cast-vote";
       readonly voter: PlayerId;
-      readonly choice: VoteChoice | "target";
+      /** `"creature-type"`: the creature type just chosen, substituted in
+       * as the vote's option (`castCreatureTypeVote`). */
+      readonly choice: VoteChoice | "target" | "creature-type";
+    }
+  | {
+      /**
+       * `effect` with what the `vote` (or `choose`) this resolution held was
+       * for substituted in: every `CHOSEN_THIS_WAY` in a list becomes every
+       * option chosen, once each — Harsh Mercy's "destroy all creatures that
+       * aren't of a type chosen this way" (`notSubtypes:
+       * [CHOSEN_THIS_WAY]`), Patriarch's Bidding's "returns all creature
+       * cards of a type chosen this way". A `CHOSEN_THIS_WAY` on its own is
+       * the first one chosen. Inside `for-each-vote`, it is that vote's own
+       * choice instead (Grave Sifter's "cards of that type").
+       */
+      readonly kind: "with-choices";
+      readonly effect: EffectSpec;
     }
   | {
       /**
@@ -6386,7 +6516,7 @@ export interface EffectApi {
   votes(): readonly Vote[];
   /** A `vote` begins: votes cast from now are kept (out of sight, for a
    * secret one) until `finishVoting`. */
-  beginVoting(secret: boolean): void;
+  beginVoting(secret: boolean, choice?: boolean): void;
   /** Ask `player` for one vote in `spec` — `extra` an additional, optional
    * one (rule 701.38d). Nothing, for a player out of the game or with
    * nothing to vote for. */
@@ -7183,6 +7313,9 @@ export interface EffectApi {
    * `"each-player-may"` choose until every one of them has chosen
    * (`GameState.heldChoices`) — a no-op when already held. */
   holdChoices(): void;
+  /** Whether choices are held right now — by an enclosing `"each-player-may"`
+   * or scoped discard, which releases them itself. */
+  choicesHeld(): boolean;
   /** Every player has chosen: do what they chose, at once. */
   releaseHeldChoices(): void;
   /** Whether `player` took what an `"each-player-may"` that began at event
@@ -7194,6 +7327,14 @@ export interface EffectApi {
   sacrificedForEachPlayerMay(player: PlayerId, since: number): ObjectId | undefined;
   /** The sequence number the next event will have. */
   nextEventSeq(): number;
+  /** Where this context's "this way" begins: the event sequence number
+   * every `thisWay` read counts from. */
+  thisWaySince(): number;
+  /** Begin "this way" at event `at` for the rest of the resolution — a
+   * `repeat`'s pass (`GameState.resolutionSince`, which every context made
+   * from here on, a resumed one too, reads) — and this context, reading
+   * from there. */
+  scopeThisWay(at: number): ResolutionContext;
   /** See the `"populate"` {@link EffectSpec}. */
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
@@ -8129,7 +8270,16 @@ function applyEachPlayerMay(
     }
   }
   if (spec.progress?.results === undefined) {
+    const parked = ctx.parkedCount();
+    const pendingBefore = ctx.decisionPending();
     ctx.releaseHeldChoices();
+    // A card entering from a hand that stops to ask its "as this enters"
+    // choice (Show and Tell's Clone): the follow-ups wait for it. Resumed,
+    // there's nothing held left to release.
+    if (!pendingBefore && ctx.decisionPending()) {
+      park({ since, asked, toAsk: [] }, parked);
+      return;
+    }
     if (deferred && spec.effect !== undefined) {
       const effect = spec.effect;
       const yes = asked.filter((player) => ctx.tookEachPlayerMay(player, since));
@@ -8177,6 +8327,20 @@ function applyEachPlayerMay(
  */
 function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionContext): void {
   let toAsk = spec.toAsk;
+  if (toAsk === undefined && spec.choose === true) {
+    // "Each player chooses …": no additional votes — it isn't a vote.
+    ctx.beginVoting(spec.secret === true, true);
+    const fromYou = eachPlayerMayAsks(spec.who ?? "each-player", ctx, true);
+    const order =
+      spec.startingWith === "you"
+        ? fromYou
+        : spec.startingWith === "next-opponent"
+          ? fromYou[0] === ctx.controller
+            ? [...fromYou.slice(1), fromYou[0]]
+            : fromYou
+          : ctx.apnap(fromYou);
+    toAsk = order.map((player) => ({ player, extra: false }));
+  }
   if (toAsk === undefined) {
     ctx.beginVoting(spec.secret === true);
     toAsk = eachPlayerMayAsks("each-player", ctx, true).flatMap((player) => [
@@ -8196,6 +8360,77 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
     }
   }
   ctx.finishVoting();
+}
+
+/** How many passes a `repeat` makes at most — a guard, like `MAX_CLASHES`. */
+const MAX_REPEATS = 200;
+
+/**
+ * A `repeat`: each pass is `effect` with "this way" begun at the pass
+ * (`ctx.scopeThisWay`), so a condition after it reads that pass alone. A
+ * pass that stops to ask parks the rest of the process as a copy carrying
+ * its `progress`, judged once the pass is over. Once no pass is left, "this
+ * way" goes back to the whole resolution's.
+ */
+function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
+  let progress = spec.progress;
+  const finish = (outer: number): void => {
+    ctx.scopeThisWay(outer);
+  };
+  if (progress?.stop === true) {
+    finish(progress.outer);
+    return;
+  }
+  if (progress === undefined) {
+    const total = spec.times === undefined ? undefined : Math.max(0, amountValue(spec.times, ctx));
+    progress = { round: 0, outer: ctx.thisWaySince(), ...(total !== undefined ? { total } : {}) };
+    if (total === 0) return;
+  }
+  // Resumed after a pass that stopped to ask, `ctx` reads that pass's "this
+  // way" already: the resolution's start is still the pass's.
+  let pass: ResolutionContext | undefined;
+  for (;;) {
+    if (progress.round > 0 && progress.judged !== true) {
+      // The pass just done is over: does the process go on?
+      const judge = pass ?? ctx;
+      const more =
+        progress.round < MAX_REPEATS &&
+        (progress.total === undefined || progress.round < progress.total) &&
+        (spec.again === undefined || judge.conditionMet(spec.again)) &&
+        (spec.again !== undefined || spec.mayAgain !== undefined || progress.total !== undefined);
+      if (!more) {
+        finish(progress.outer);
+        return;
+      }
+      if (spec.mayAgain !== undefined) {
+        // "You may repeat this process": asked, the next pass its yes.
+        const next: EffectSpec = { ...spec, progress: { ...progress, judged: true } };
+        const declined: EffectSpec = { ...spec, progress: { ...progress, stop: true } };
+        applyEffectSpec(
+          {
+            kind: "may",
+            prompt: "Repeat this process?",
+            effect: next,
+            else: declined,
+            ...(typeof spec.mayAgain === "object" ? { cost: spec.mayAgain.cost } : {}),
+          },
+          ctx,
+        );
+        return;
+      }
+    }
+    // A new pass, its own "this way".
+    pass = ctx.scopeThisWay(ctx.nextEventSeq());
+    const round: number = progress.round + 1;
+    const parked = pass.parkedCount();
+    const pendingBefore = pass.decisionPending();
+    applyEffectSpec(spec.effect, pass);
+    progress = { round, outer: progress.outer, ...(progress.total !== undefined ? { total: progress.total } : {}) };
+    if (!pendingBefore && pass.decisionPending()) {
+      pass.resumeAfterDecisions({ ...spec, progress }, parked);
+      return;
+    }
+  }
 }
 
 /** How many times "if you win, repeat this process" clashes at most — a
@@ -10499,7 +10734,39 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "discard": {
-      for (const target of scopedOrTargetedPlayers(spec.target, ctx)) {
+      if (spec.release === true) {
+        ctx.releaseHeldChoices();
+        return;
+      }
+      const players = scopedOrTargetedPlayers(spec.target, ctx);
+      // "Each player discards a card" (rule 101.4): each chooses in turn
+      // from the active player, the chosen cards staying face down in hand
+      // (101.4a) so no later player sees an earlier one's discard, and then
+      // they're all discarded at once. At random nobody chooses. Already
+      // held by an enclosing choice, that one releases them.
+      const hold = typeof spec.target !== "number" && players.length > 1 && spec.random !== true && !ctx.choicesHeld();
+      if (hold) {
+        ctx.holdChoices();
+        const parked = ctx.parkedCount();
+        const pendingBefore = ctx.decisionPending();
+        const ordered = ctx.apnap(players.flatMap((ref) => (ref.kind === "player" ? [ref.player] : [])));
+        for (const player of ordered) {
+          ctx.discardCards(
+            { kind: "player", player },
+            amountValue(spec.amount, ctx, player),
+            false,
+            spec.unlessOne,
+            spec.anyNumber === true,
+          );
+        }
+        if (!pendingBefore && ctx.decisionPending()) {
+          ctx.resumeAfterDecisions({ ...spec, release: true }, parked);
+        } else {
+          ctx.releaseHeldChoices();
+        }
+        return;
+      }
+      for (const target of players) {
         ctx.discardCards(
           target,
           amountValue(spec.amount, ctx, target.kind === "player" ? target.player : undefined),
@@ -10942,6 +11209,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "clash":
       applyClash(spec, ctx);
+      return;
+    case "repeat":
+      applyRepeat(spec, ctx);
       return;
     case "prohibit": {
       if (spec.target !== undefined) {
@@ -11389,6 +11659,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyVote(spec, ctx);
       return;
     case "cast-vote": {
+      // A creature type is substituted in as it's chosen; unsubstituted,
+      // nothing was.
+      if (spec.choice === "creature-type") return;
       if (spec.choice !== "target") {
         ctx.castVote(spec.voter, spec.choice);
         return;
@@ -11406,7 +11679,34 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         .votes()
         .filter((v) => spec.option === undefined || ("option" in v.choice && v.choice.option === spec.option));
       const voters = inGame.flatMap((player) => counted.filter((v) => v.voter === player).map(() => player));
+      if (readsChosenThisWay(spec.effect)) {
+        // "…cards of that type": each voter's step with their own choice.
+        const steps = inGame.flatMap((player) =>
+          counted
+            .filter((v) => v.voter === player)
+            .map(
+              (v): EffectSpec => ({
+                kind: "for-each-player",
+                who: "each-player",
+                effect: substituteChosenThisWay(spec.effect, [voteChoiceText(v.choice)]),
+                remaining: [player],
+              }),
+            ),
+        );
+        if (steps.length > 0) applyEffectSpec({ kind: "sequence", effects: steps }, ctx);
+        return;
+      }
       applyEffectSpec({ kind: "for-each-player", who: "each-player", effect: spec.effect, remaining: voters }, ctx);
+      return;
+    }
+    case "with-choices": {
+      // Every option chosen once, in the order first chosen.
+      const chosen: string[] = [];
+      for (const vote of ctx.votes()) {
+        const text = voteChoiceText(vote.choice);
+        if (!chosen.includes(text)) chosen.push(text);
+      }
+      applyEffectSpec(substituteChosenThisWay(spec.effect, chosen), ctx);
       return;
     }
     case "for-each-voted":

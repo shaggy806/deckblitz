@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Each player chooses, shared-graveyard targets, repeat this process — built 2026-10-28
+
+Three need-keys Phase 2 families in one build (B251). **Rule 101.4 beyond
+`each-player-may`**: a scoped `discard` holds every chosen card face down in
+hand until all players have chosen, then discards them at once (Stronghold
+Rats, Smallpox); a card chosen for an `each-player-may`'s `putFromHand` waits
+the same way and they all enter together (Show and Tell). **"Each player
+chooses"** is a `vote` with `choose: true` — no additional votes, no voting
+triggers, `who`, `startingWith`, a creature type (`for: { creatureType }`), a
+permanent read from the chooser's side (`own`) — and `with-choices`
+substitutes `CHOSEN_THIS_WAY` (Harsh Mercy, Eye of Doom, Master of
+Ceremonies). **`sameController`** on an `other` slot or an `any-number`
+group: "from a single graveyard", "from an opponent's graveyard", "from
+their graveyard" (`{ slot }`), "that player controls", rechecked as it
+resolves (608.2b). **`repeat`**: `times`, `again` (a condition over the pass
+just done — each pass its own "this way", `ctx.scopeThisWay`) and
+`mayAgain`; the `this-way` condition's `sharing`. Keys:
+`effect:hidden-simultaneous-choices`, `effect:each-player-chooses-then-all-act`,
+`effect:each-player-chooses-in-turn-order`, `effect:each-player-chooses-creature-type`,
+`effect:each-player-chooses-counters-then-goad`, `effect:targets-from-single-graveyard`,
+`effect:target-in-that-players-graveyard`, `effect:targets-from-target-players-graveyard`,
+`effect:targets-same-controller`, `effect:repeat-process`, `effect:repeat-effect-x-times`.
+
 ### Damage prevention and redirection — built 2026-10-28
 
 The need-keys Phase 2 family `replacement:damage-modification` (B250), as
