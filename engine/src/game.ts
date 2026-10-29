@@ -1282,6 +1282,10 @@ export class Game {
    * it. Not game state: it only ever spans one synchronous call. */
   private damageBatch: {
     readonly lifelink: Map<ObjectId, { controller: PlayerId; amount: number }>;
+    /** "Next time" shields used in this event (rule 615.8): they cover the
+     * whole of it — a creature's combat damage to two blockers, a sweeper's
+     * to every creature — and go once it's dealt. */
+    readonly nextTimeSpent: PreventionShield[];
     readonly dealtDamage: Map<
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -25314,7 +25318,8 @@ export class Game {
         const shield: PreventionShield = {
           ...(target !== undefined ? { target } : {}),
           ...(target?.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
-          ...(target === undefined && (rule.players !== undefined || rule.permanents !== undefined)
+          // Beside a target, "this creature and/or you" (Glarecaster).
+          ...(rule.players !== undefined || rule.permanents !== undefined
             ? {
                 recipients: {
                   ...(rule.players !== undefined ? { players: rule.players } : {}),
@@ -25344,6 +25349,7 @@ export class Game {
                 byFilter: {
                   filter: rule.byFilter,
                   you: controller,
+                  origin: source,
                   ...(rule.exceptSource !== undefined ? { except: stint(rule.exceptSource) } : {}),
                 },
               }
@@ -34822,6 +34828,7 @@ export class Game {
       if (
         !matchesFilter(this.state, this.registry, source, by.filter, {
           you: by.you,
+          ...(by.origin !== undefined ? { source: by.origin } : {}),
           ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
         })
       ) {
@@ -34837,6 +34844,14 @@ export class Game {
     }
     const redirectTo = this.shieldRedirect(shield, source, sourceLastKnown);
     if (redirectTo !== undefined && sameTargetRef(redirectTo, target)) return false;
+    // A target and a set both (Glarecaster's "this creature and/or you"):
+    // either one.
+    if (shield.target !== undefined && shield.recipients !== undefined) {
+      const { recipients: _, ...targetOnly } = shield;
+      const { target: __, zoneChangeCount: ___, ...setOnly } = shield;
+      return this.shieldCovers(targetOnly, target, combat, source, sourceLastKnown) ||
+        this.shieldCovers(setOnly, target, combat, source, sourceLastKnown);
+    }
     if (shield.target === undefined) {
       const scope = shield.recipients;
       if (scope === undefined) return true;
@@ -35350,7 +35365,8 @@ export class Game {
       const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];
       for (const { shield, prevented } of outcome.shields) {
         if (prevented <= 0) continue;
-        if (shield.nextTime === true) spent.push(shield);
+        // Within one simultaneous event it covers the rest of it (615.8).
+        if (shield.nextTime === true) (this.damageBatch?.nextTimeSpent ?? spent).push(shield);
         else if (shield.all !== true) shield.amount -= prevented;
         const to = this.shieldRedirect(shield, source, sourceLastKnown);
         if (to !== undefined) {
@@ -35656,6 +35672,7 @@ export class Game {
     }
     const batch = {
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
+      nextTimeSpent: [] as PreventionShield[],
       dealtDamage: new Map<
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -35675,6 +35692,9 @@ export class Game {
       fn();
     } finally {
       this.damageBatch = null;
+    }
+    if (batch.nextTimeSpent.length > 0) {
+      this.state.preventionShields = this.state.preventionShields.filter((s) => !batch.nextTimeSpent.includes(s));
     }
     for (const { ability, trigger, multiplier } of batch.dealtDamage.values()) {
       this.queueTrigger(ability, trigger, multiplier);

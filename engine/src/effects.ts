@@ -1027,9 +1027,10 @@ export type DamageFrom = "trigger-object" | { readonly target: number };
 export interface DamageRuleSpec {
   readonly kind: "damage-rule";
   /** The recipients: one target (a slot, `"source"`, `"trigger-object"`,
-   * `"attached"`), or `players` ("you", "each", "opponents") and/or
-   * permanents matching `permanents` from the controller's side — either
-   * counts — but not `exceptTarget`. Omitted: any recipient. */
+   * `"attached"`), and/or `players` ("you", "each", "opponents") and/or
+   * permanents matching `permanents` from the controller's side — any of
+   * them counts ("this creature and/or you" — Glarecaster) — but not
+   * `exceptTarget`. Omitted: any recipient. */
   readonly to?: {
     readonly target?: EffectTargetRef;
     readonly players?: "you" | "each" | "opponents";

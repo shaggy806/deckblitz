@@ -3865,6 +3865,9 @@ export interface PreventionShield {
   readonly byFilter?: {
     readonly filter: CardFilter;
     readonly you: PlayerId;
+    /** The permanent whose ability made it, for a filter that reads it
+     * ("of the chosen type" — Circle of Solace). */
+    readonly origin?: ObjectId;
     readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   };
   /** Only noncombat damage (beside `combatOnly`). */

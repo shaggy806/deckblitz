@@ -244,6 +244,56 @@ describe("damage rules (one-shot prevention and redirection)", () => {
     expect(life(game, A)).toBe(17);
   });
 
+  it("a next-time rule covers the whole of one simultaneous event, then goes (615.8)", () => {
+    const { game } = table();
+    const goblin = spawn(game, "Raging Goblin", B);
+    game.debugApplyEffect(A, { kind: "damage-rule", by: { target: 0 }, amount: "next-time" }, [ref(goblin)]);
+    // One event: 2 damage to each player at once — both prevented.
+    game.debugApplyEffect(B, { kind: "damage", amount: 2, who: "each-player" }, [], { source: goblin });
+    expect(life(game, A)).toBe(20);
+    expect(life(game, B)).toBe(20);
+    expect(game.state.preventionShields).toHaveLength(0);
+    game.debugApplyEffect(B, { kind: "damage", amount: 2, who: "each-player" }, [], { source: goblin });
+    expect(life(game, A)).toBe(18);
+  });
+
+  it("Glarecaster sends the next damage event to it and/or you, all of it, to the target", () => {
+    const { game } = table();
+    lands(game, "Plains", 6);
+    const glare = spawn(game, "Glarecaster");
+    const goblin = spawn(game, "Raging Goblin", B);
+    activate(game, glare, 0, { targets: [ref(B)] });
+    // One event: 2 to every player and creature — Glarecaster's and yours go to B.
+    game.debugApplyEffect(B, { kind: "damage", amount: 2, who: "each-player" }, [], { source: goblin });
+    expect(life(game, A)).toBe(20);
+    expect(life(game, B)).toBe(16);
+    hit(game, goblin, ref(glare), 1);
+    expect(damage(game, glare)).toBe(1);
+  });
+
+  it("Goblin Psychopath's lost flip waits for its combat damage: a noncombat hit isn't redirected", () => {
+    const { game } = table();
+    const psycho = spawn(game, "Goblin Psychopath");
+    game.debugApplyEffect(A, { kind: "damage-rule", by: { target: "source" }, combat: true, amount: "next-time", redirectTo: "you" }, [], { source: psycho });
+    hit(game, psycho, ref(B), 5);
+    expect(life(game, B)).toBe(15);
+    expect(game.state.preventionShields).toHaveLength(1);
+  });
+
+  it("Circle of Solace prevents the next damage a creature of the chosen type deals you", () => {
+    const { game } = table();
+    lands(game, "Plains", 2);
+    const circle = spawn(game, "Circle of Solace");
+    game.state.objects[circle].chosenCreatureType = "Goblin";
+    const goblin = spawn(game, "Raging Goblin", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    activate(game, circle, 0);
+    hit(game, bears, ref(A), 2);
+    hit(game, goblin, ref(A), 1);
+    hit(game, goblin, ref(A), 1);
+    expect(life(game, A)).toBe(17);
+  });
+
   it("Temper prevents the next X and puts that many counters on the creature", () => {
     const { game } = table();
     lands(game, "Plains", 4);
