@@ -177,6 +177,7 @@ import _poolDeepSeaKraken from "../pool/deep-sea-kraken.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDefiantFalcon from "../pool/defiant-falcon.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
+import _poolDeliriumSkeins from "../pool/delirium-skeins.js";
 import _poolDelraich from "../pool/delraich.js";
 import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDemonicJunker from "../pool/demonic-junker.js";
@@ -186,6 +187,7 @@ import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDesperateRitual from "../pool/desperate-ritual.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
+import _poolDiscovery from "../pool/discovery.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDjerusResolve from "../pool/djerus-resolve.js";
@@ -1000,6 +1002,7 @@ const shard: CardShard = {
     _poolDeeprootWaters,
     _poolDefiantFalcon,
     _poolDegaDisciple,
+    _poolDeliriumSkeins,
     _poolDelraich,
     _poolDemogorgonsClutches,
     _poolDemonicJunker,
@@ -1009,6 +1012,7 @@ const shard: CardShard = {
     _poolDesperateBloodseeker,
     _poolDesperateRitual,
     _poolDiscipleOfPerdition,
+    _poolDiscovery,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
     _poolDjerusResolve,

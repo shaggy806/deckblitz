@@ -590,6 +590,7 @@ import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
 import _poolSatyrPiper from "../pool/satyr-piper.js";
 import _poolSavaiThundermane from "../pool/savai-thundermane.js";
+import _poolScalpelexis from "../pool/scalpelexis.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
@@ -1416,6 +1417,7 @@ const shard: CardShard = {
     _poolSapphireMedallion,
     _poolSatyrPiper,
     _poolSavaiThundermane,
+    _poolScalpelexis,
     _poolScavengedWeaponry,
     _poolSchemaThief,
     _poolScionOfGlaciers,

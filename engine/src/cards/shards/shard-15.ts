@@ -135,6 +135,7 @@ import _poolCrovaxTheCursed from "../pool/crovax-the-cursed.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
 import _poolCryptFeaster from "../pool/crypt-feaster.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
+import _poolCultivatorColossus from "../pool/cultivator-colossus.js";
 import _poolCuratorOfMysteries from "../pool/curator-of-mysteries.js";
 import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
@@ -400,6 +401,7 @@ import _poolLingeringPhantom from "../pool/lingering-phantom.js";
 import _poolLivelyDirge from "../pool/lively-dirge.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLlawanCephalidEmpress from "../pool/llawan-cephalid-empress.js";
+import _poolLochmereSerpent from "../pool/lochmere-serpent.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
 import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
@@ -559,6 +561,7 @@ import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolRetreatToValakut from "../pool/retreat-to-valakut.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
 import _poolRhysticCircle from "../pool/rhystic-circle.js";
+import _poolRiches from "../pool/riches.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRiverBoa from "../pool/river-boa.js";
@@ -734,6 +737,7 @@ import _poolViashinoGrappler from "../pool/viashino-grappler.js";
 import _poolViashinoSkeleton from "../pool/viashino-skeleton.js";
 import _poolViashivanDragon from "../pool/viashivan-dragon.js";
 import _poolVileEntomber from "../pool/vile-entomber.js";
+import _poolVileRequiem from "../pool/vile-requiem.js";
 import _poolVinebredBrawler from "../pool/vinebred-brawler.js";
 import _poolVinelasherKudzu from "../pool/vinelasher-kudzu.js";
 import _poolVirulentWound from "../pool/virulent-wound.js";
@@ -935,6 +939,7 @@ const shard: CardShard = {
     _poolCrowdFavorites,
     _poolCryptFeaster,
     _poolCrystalQuarry,
+    _poolCultivatorColossus,
     _poolCuratorOfMysteries,
     _poolCutthroatContender,
     _poolCybermenSquadron,
@@ -1200,6 +1205,7 @@ const shard: CardShard = {
     _poolLivelyDirge,
     _poolLlanowarLoamspeaker,
     _poolLlawanCephalidEmpress,
+    _poolLochmereSerpent,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,
     _poolLoreholdPledgemage,
@@ -1359,6 +1365,7 @@ const shard: CardShard = {
     _poolRetreatToValakut,
     _poolReunionOfTheHouse,
     _poolRhysticCircle,
+    _poolRiches,
     _poolRiftburstHellion,
     _poolRighteousWar,
     _poolRiverBoa,
@@ -1534,6 +1541,7 @@ const shard: CardShard = {
     _poolViashinoSkeleton,
     _poolViashivanDragon,
     _poolVileEntomber,
+    _poolVileRequiem,
     _poolVinebredBrawler,
     _poolVinelasherKudzu,
     _poolVirulentWound,

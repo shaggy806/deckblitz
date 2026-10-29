@@ -200,6 +200,7 @@ import _poolDepressurize from "../pool/depressurize.js";
 import _poolDesperateCastaways from "../pool/desperate-castaways.js";
 import _poolDetentionSphere from "../pool/detention-sphere.js";
 import _poolDigUp from "../pool/dig-up.js";
+import _poolDigsiteConservator from "../pool/digsite-conservator.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
 import _poolDismissIntoDream from "../pool/dismiss-into-dream.js";
@@ -426,6 +427,7 @@ import _poolLifesFinale from "../pool/lifes-finale.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLightningBerserker from "../pool/lightning-berserker.js";
 import _poolLightningSpear from "../pool/lightning-spear.js";
+import _poolLilianasTriumph from "../pool/lilianas-triumph.js";
 import _poolLlanowarElite from "../pool/llanowar-elite.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
@@ -1093,6 +1095,7 @@ const shard: CardShard = {
     _poolDesperateCastaways,
     _poolDetentionSphere,
     _poolDigUp,
+    _poolDigsiteConservator,
     _poolDimirLocket,
     _poolDinosaurHunter,
     _poolDismissIntoDream,
@@ -1319,6 +1322,7 @@ const shard: CardShard = {
     _poolLifesLegacy,
     _poolLightningBerserker,
     _poolLightningSpear,
+    _poolLilianasTriumph,
     _poolLlanowarElite,
     _poolLochKorrigan,
     _poolLongGoodbye,

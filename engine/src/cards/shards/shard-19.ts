@@ -270,6 +270,7 @@ import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFatedInfatuation from "../pool/fated-infatuation.js";
 import _poolFeatOfResistance from "../pool/feat-of-resistance.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
+import _poolFeralDeathgorger from "../pool/feral-deathgorger.js";
 import _poolFeralIncarnation from "../pool/feral-incarnation.js";
 import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
 import _poolFerocityOfTheWilds from "../pool/ferocity-of-the-wilds.js";
@@ -591,6 +592,7 @@ import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrinceOfThralls from "../pool/prince-of-thralls.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
+import _poolProgenitorExarch from "../pool/progenitor-exarch.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
@@ -764,6 +766,7 @@ import _poolTeleportal from "../pool/teleportal.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
+import _poolTheLegendOfYangchen from "../pool/the-legend-of-yangchen.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
@@ -1149,6 +1152,7 @@ const shard: CardShard = {
     _poolFatedInfatuation,
     _poolFeatOfResistance,
     _poolFellTheMighty,
+    _poolFeralDeathgorger,
     _poolFeralIncarnation,
     _poolFerocityOfTheHunt,
     _poolFerocityOfTheWilds,
@@ -1470,6 +1474,7 @@ const shard: CardShard = {
     _poolPrinceOfThralls,
     _poolPrizedStatue,
     _poolProdigysPrototype,
+    _poolProgenitorExarch,
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
@@ -1643,6 +1648,7 @@ const shard: CardShard = {
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
+    _poolTheLegendOfYangchen,
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,

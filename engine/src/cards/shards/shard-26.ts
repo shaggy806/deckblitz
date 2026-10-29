@@ -755,6 +755,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTromellSeymoursButler from "../pool/tromell-seymours-butler.js";
 import _poolTurn from "../pool/turn.js";
 import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
@@ -1602,6 +1603,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTromellSeymoursButler,
     _poolTurn,
     _poolTurntimberRanger,
     _poolTurretOgre,

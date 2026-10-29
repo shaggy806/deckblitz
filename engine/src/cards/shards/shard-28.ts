@@ -718,6 +718,7 @@ import _poolTemper from "../pool/temper.js";
 import _poolTemperedSliver from "../pool/tempered-sliver.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
 import _poolTempleThief from "../pool/temple-thief.js";
+import _poolTemptWithImmortality from "../pool/tempt-with-immortality.js";
 import _poolTemptWithMayhem from "../pool/tempt-with-mayhem.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
@@ -1586,6 +1587,7 @@ const shard: CardShard = {
     _poolTemperedSliver,
     _poolTempleOfMystery,
     _poolTempleThief,
+    _poolTemptWithImmortality,
     _poolTemptWithMayhem,
     _poolTerritorialRoc,
     _poolTeysaKarlov,

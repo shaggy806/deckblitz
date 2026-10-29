@@ -547,6 +547,7 @@ import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js
 import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPsychicVenom from "../pool/psychic-venom.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
+import _poolPulsemageAdvocate from "../pool/pulsemage-advocate.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
 import _poolPurrajOfUrborg from "../pool/purraj-of-urborg.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
@@ -1400,6 +1401,7 @@ const shard: CardShard = {
     _poolProsperousThief,
     _poolPsychicVenom,
     _poolPullFromTomorrow,
+    _poolPulsemageAdvocate,
     _poolPurestrainGenestealer,
     _poolPurrajOfUrborg,
     _poolPyreCharger,

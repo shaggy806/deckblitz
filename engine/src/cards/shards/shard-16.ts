@@ -347,6 +347,7 @@ import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIncubationIncongruity from "../pool/incubation-incongruity.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
+import _poolInsatiableFrugivore from "../pool/insatiable-frugivore.js";
 import _poolInspiredInventor from "../pool/inspired-inventor.js";
 import _poolInspiredSprite from "../pool/inspired-sprite.js";
 import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
@@ -558,6 +559,7 @@ import _poolPyrrhicStrike from "../pool/pyrrhic-strike.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolQueensBayPaladin from "../pool/queens-bay-paladin.js";
 import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
+import _poolQutrubForayer from "../pool/qutrub-forayer.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
 import _poolRagingBull from "../pool/raging-bull.js";
@@ -566,6 +568,7 @@ import _poolRakdosCackler from "../pool/rakdos-cackler.js";
 import _poolRakdosRingleader from "../pool/rakdos-ringleader.js";
 import _poolRamosianSkyMarshal from "../pool/ramosian-sky-marshal.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
+import _poolRanklesPrank from "../pool/rankles-prank.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRaziaBorosArchangel from "../pool/razia-boros-archangel.js";
@@ -590,6 +593,7 @@ import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
 import _poolRiptideBiologist from "../pool/riptide-biologist.js";
 import _poolRiptide from "../pool/riptide.js";
+import _poolRiteOfRenewal from "../pool/rite-of-renewal.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
 import _poolRogueSkycaptain from "../pool/rogue-skycaptain.js";
@@ -674,6 +678,7 @@ import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
+import _poolSpurnmageAdvocate from "../pool/spurnmage-advocate.js";
 import _poolStaffOfTheDeathMagus from "../pool/staff-of-the-death-magus.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
 import _poolStampede from "../pool/stampede.js";
@@ -1242,6 +1247,7 @@ const shard: CardShard = {
     _poolIncubationIncongruity,
     _poolIndathaTriome,
     _poolInkmothNexus,
+    _poolInsatiableFrugivore,
     _poolInspiredInventor,
     _poolInspiredSprite,
     _poolInspiritedVanguard,
@@ -1453,6 +1459,7 @@ const shard: CardShard = {
     _poolQuandrixTheProof,
     _poolQueensBayPaladin,
     _poolQuicksandWhirlpool,
+    _poolQutrubForayer,
     _poolRabanastreRoyalCity,
     _poolRaffWeatherlightStalwart,
     _poolRagingBull,
@@ -1461,6 +1468,7 @@ const shard: CardShard = {
     _poolRakdosRingleader,
     _poolRamosianSkyMarshal,
     _poolRampartHunter,
+    _poolRanklesPrank,
     _poolRansackTheLab,
     _poolRazeToTheGround,
     _poolRaziaBorosArchangel,
@@ -1485,6 +1493,7 @@ const shard: CardShard = {
     _poolRipTheSeams,
     _poolRiptideBiologist,
     _poolRiptide,
+    _poolRiteOfRenewal,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
     _poolRogueSkycaptain,
@@ -1569,6 +1578,7 @@ const shard: CardShard = {
     _poolSpinningWheel,
     _poolSpitefulVisions,
     _poolSprout,
+    _poolSpurnmageAdvocate,
     _poolStaffOfTheDeathMagus,
     _poolStaffOfTheStoryteller,
     _poolStampede,

@@ -299,6 +299,7 @@ import _poolGoblinLegionnaire from "../pool/goblin-legionnaire.js";
 import _poolGoblinRuinblaster from "../pool/goblin-ruinblaster.js";
 import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
+import _poolGoblinWelder from "../pool/goblin-welder.js";
 import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
 import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
 import _poolGoldmeadowNomad from "../pool/goldmeadow-nomad.js";
@@ -453,6 +454,7 @@ import _poolMistformMutant from "../pool/mistform-mutant.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
 import _poolMoggConscripts from "../pool/mogg-conscripts.js";
+import _poolMogissMarauder from "../pool/mogiss-marauder.js";
 import _poolMonasteryRaid from "../pool/monastery-raid.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
@@ -509,6 +511,7 @@ import _poolPerforatingArtist from "../pool/perforating-artist.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPersistentMarshstalker from "../pool/persistent-marshstalker.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
+import _poolPestilentCauldron from "../pool/pestilent-cauldron.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhantatog from "../pool/phantatog.js";
 import _poolPhantomTiger from "../pool/phantom-tiger.js";
@@ -576,6 +579,7 @@ import _poolReplenish from "../pool/replenish.js";
 import _poolResoluteSurvivors from "../pool/resolute-survivors.js";
 import _poolRespite from "../pool/respite.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
+import _poolRestorativeBurst from "../pool/restorative-burst.js";
 import _poolRetrieve from "../pool/retrieve.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRhysTheExiled from "../pool/rhys-the-exiled.js";
@@ -1163,6 +1167,7 @@ const shard: CardShard = {
     _poolGoblinRuinblaster,
     _poolGoblinTown,
     _poolGoblinWarDrums,
+    _poolGoblinWelder,
     _poolGodEternalOketra,
     _poolGoldmawChampion,
     _poolGoldmeadowNomad,
@@ -1317,6 +1322,7 @@ const shard: CardShard = {
     _poolMistralCharger,
     _poolMizzixsMastery,
     _poolMoggConscripts,
+    _poolMogissMarauder,
     _poolMonasteryRaid,
     _poolMonasterySwiftspear,
     _poolMoonSprite,
@@ -1373,6 +1379,7 @@ const shard: CardShard = {
     _poolPerplexingTest,
     _poolPersistentMarshstalker,
     _poolPersuasiveInterrogators,
+    _poolPestilentCauldron,
     _poolPestilentSyphoner,
     _poolPhantatog,
     _poolPhantomTiger,
@@ -1440,6 +1447,7 @@ const shard: CardShard = {
     _poolResoluteSurvivors,
     _poolRespite,
     _poolRestorationGearsmith,
+    _poolRestorativeBurst,
     _poolRetrieve,
     _poolRetrofittedTransmogrant,
     _poolRhysTheExiled,

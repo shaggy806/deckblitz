@@ -10,6 +10,7 @@ import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
+import _poolAgitatorAnt from "../pool/agitator-ant.js";
 import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
@@ -169,6 +170,7 @@ import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
 import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
+import _poolDuskSight from "../pool/dusk-sight.js";
 import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
 import _poolDwarfholdChampion from "../pool/dwarfhold-champion.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
@@ -223,6 +225,7 @@ import _poolFloodedShoreline from "../pool/flooded-shoreline.js";
 import _poolFlyingCraneTechnique from "../pool/flying-crane-technique.js";
 import _poolFontOfReturn from "../pool/font-of-return.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
+import _poolForbiddenRitual from "../pool/forbidden-ritual.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
 import _poolForerunnerOfTheCoalition from "../pool/forerunner-of-the-coalition.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
@@ -833,6 +836,7 @@ const shard: CardShard = {
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
+    _poolAgitatorAnt,
     _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
     _poolAjanisPridemate,
@@ -992,6 +996,7 @@ const shard: CardShard = {
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
     _poolDuskRoseReliquary,
+    _poolDuskSight,
     _poolDutifulReplicator,
     _poolDwarfholdChampion,
     _poolEagleVision,
@@ -1046,6 +1051,7 @@ const shard: CardShard = {
     _poolFlyingCraneTechnique,
     _poolFontOfReturn,
     _poolFootlightFiend,
+    _poolForbiddenRitual,
     _poolForceOfDespair,
     _poolForerunnerOfTheCoalition,
     _poolForgingTheAnchor,

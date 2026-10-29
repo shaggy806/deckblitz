@@ -217,6 +217,7 @@ import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
+import _poolExponentialGrowth from "../pool/exponential-growth.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolEyeOfNidhogg from "../pool/eye-of-nidhogg.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
@@ -1088,6 +1089,7 @@ const shard: CardShard = {
     _poolEscarpmentFortress,
     _poolExaltedFlamerOfTzeentch,
     _poolExpelFromOrazca,
+    _poolExponentialGrowth,
     _poolExultantSkymarcher,
     _poolEyeOfNidhogg,
     _poolFaerieHarbinger,

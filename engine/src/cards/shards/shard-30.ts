@@ -105,6 +105,7 @@ import _poolCapsizingWave from "../pool/capsizing-wave.js";
 import _poolCarapaceForger from "../pool/carapace-forger.js";
 import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
+import _poolCeaseDesist from "../pool/cease-desist.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
 import _poolCeruleanSphinx from "../pool/cerulean-sphinx.js";
@@ -464,6 +465,7 @@ import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
 import _poolMindsEye from "../pool/minds-eye.js";
 import _poolMirkwoodMeditator from "../pool/mirkwood-meditator.js";
 import _poolMirrex from "../pool/mirrex.js";
+import _poolMisinformation from "../pool/misinformation.js";
 import _poolMistveinBorderpost from "../pool/mistvein-borderpost.js";
 import _poolMoaningWall from "../pool/moaning-wall.js";
 import _poolMockingSprite from "../pool/mocking-sprite.js";
@@ -549,10 +551,12 @@ import _poolPowerstoneMinefield from "../pool/powerstone-minefield.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
+import _poolPrimalSurge from "../pool/primal-surge.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolProtectorOfTheCrown from "../pool/protector-of-the-crown.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
+import _poolPull from "../pool/pull.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
@@ -593,6 +597,7 @@ import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
+import _poolRuinGrinder from "../pool/ruin-grinder.js";
 import _poolRushOfBattle from "../pool/rush-of-battle.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
 import _poolRydiasReturn from "../pool/rydias-return.js";
@@ -938,6 +943,7 @@ const shard: CardShard = {
     _poolCarapaceForger,
     _poolCastOut,
     _poolCaveSense,
+    _poolCeaseDesist,
     _poolCelestialForce,
     _poolCemeteryTampering,
     _poolCeruleanSphinx,
@@ -1297,6 +1303,7 @@ const shard: CardShard = {
     _poolMindsEye,
     _poolMirkwoodMeditator,
     _poolMirrex,
+    _poolMisinformation,
     _poolMistveinBorderpost,
     _poolMoaningWall,
     _poolMockingSprite,
@@ -1382,10 +1389,12 @@ const shard: CardShard = {
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPresumedDead,
+    _poolPrimalSurge,
     _poolPropellerPioneer,
     _poolProtectorOfTheCrown,
     _poolPterafractyl,
     _poolPugnaciousPugilist,
+    _poolPull,
     _poolPumpkinBombardment,
     _poolPurify,
     _poolPurpleCrystalCrab,
@@ -1426,6 +1435,7 @@ const shard: CardShard = {
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,
     _poolRubiniaSoulsinger,
+    _poolRuinGrinder,
     _poolRushOfBattle,
     _poolRustrazorButcher,
     _poolRydiasReturn,

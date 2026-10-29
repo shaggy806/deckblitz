@@ -98,6 +98,7 @@ import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
 import _poolBraveTheElements from "../pool/brave-the-elements.js";
 import _poolBraveTheWilds from "../pool/brave-the-wilds.js";
 import _poolBrazenWolves from "../pool/brazen-wolves.js";
+import _poolBreakingOfTheFellowship from "../pool/breaking-of-the-fellowship.js";
 import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBriarHydra from "../pool/briar-hydra.js";
@@ -505,6 +506,7 @@ import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
 import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
 import _poolNullChampion from "../pool/null-champion.js";
 import _poolNullElementalBlast from "../pool/null-elemental-blast.js";
+import _poolNullmageAdvocate from "../pool/nullmage-advocate.js";
 import _poolNutrientBlock from "../pool/nutrient-block.js";
 import _poolOakenform from "../pool/oakenform.js";
 import _poolOasisRitualist from "../pool/oasis-ritualist.js";
@@ -948,6 +950,7 @@ const shard: CardShard = {
     _poolBraveTheElements,
     _poolBraveTheWilds,
     _poolBrazenWolves,
+    _poolBreakingOfTheFellowship,
     _poolBreechesTheBlastmaker,
     _poolBreedingPool,
     _poolBriarHydra,
@@ -1355,6 +1358,7 @@ const shard: CardShard = {
     _poolNogiDracoZealot,
     _poolNullChampion,
     _poolNullElementalBlast,
+    _poolNullmageAdvocate,
     _poolNutrientBlock,
     _poolOakenform,
     _poolOasisRitualist,

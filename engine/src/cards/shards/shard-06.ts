@@ -531,6 +531,7 @@ import _poolPriestOfTheBloodRite from "../pool/priest-of-the-blood-rite.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
+import _poolProfessorOnyx from "../pool/professor-onyx.js";
 import _poolProhibit from "../pool/prohibit.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
@@ -539,6 +540,7 @@ import _poolPursueGlory from "../pool/pursue-glory.js";
 import _poolPutrefax from "../pool/putrefax.js";
 import _poolPyriteSpellbomb from "../pool/pyrite-spellbomb.js";
 import _poolPyroclastConsul from "../pool/pyroclast-consul.js";
+import _poolQuandrixCommand from "../pool/quandrix-command.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
@@ -552,6 +554,7 @@ import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
 import _poolRainOfThorns from "../pool/rain-of-thorns.js";
 import _poolRallyManeuver from "../pool/rally-maneuver.js";
+import _poolRallyTheHorde from "../pool/rally-the-horde.js";
 import _poolRamThrough from "../pool/ram-through.js";
 import _poolRampagingBrontodon from "../pool/rampaging-brontodon.js";
 import _poolRamunapRuins from "../pool/ramunap-ruins.js";
@@ -1362,6 +1365,7 @@ const shard: CardShard = {
     _poolPrimalFrenzy,
     _poolPrimarisEliminator,
     _poolPrismaticVista,
+    _poolProfessorOnyx,
     _poolProhibit,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,
@@ -1370,6 +1374,7 @@ const shard: CardShard = {
     _poolPutrefax,
     _poolPyriteSpellbomb,
     _poolPyroclastConsul,
+    _poolQuandrixCommand,
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
@@ -1383,6 +1388,7 @@ const shard: CardShard = {
     _poolRagingGoblin,
     _poolRainOfThorns,
     _poolRallyManeuver,
+    _poolRallyTheHorde,
     _poolRamThrough,
     _poolRampagingBrontodon,
     _poolRamunapRuins,

@@ -525,6 +525,7 @@ import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
 import _poolPurgeTheProfane from "../pool/purge-the-profane.js";
+import _poolPushPull from "../pool/push-pull.js";
 import _poolPutridCyclops from "../pool/putrid-cyclops.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuickeningLicid from "../pool/quickening-licid.js";
@@ -572,6 +573,7 @@ import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
 import _poolRishadanCutpurse from "../pool/rishadan-cutpurse.js";
 import _poolRiteOfTheSerpent from "../pool/rite-of-the-serpent.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
+import _poolRixMaadiDungeonPalace from "../pool/rix-maadi-dungeon-palace.js";
 import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
@@ -1380,6 +1382,7 @@ const shard: CardShard = {
     _poolPryingEyes,
     _poolPunishingPunch,
     _poolPurgeTheProfane,
+    _poolPushPull,
     _poolPutridCyclops,
     _poolQuakestriderCeratops,
     _poolQuickeningLicid,
@@ -1427,6 +1430,7 @@ const shard: CardShard = {
     _poolRishadanCutpurse,
     _poolRiteOfTheSerpent,
     _poolRitualChamber,
+    _poolRixMaadiDungeonPalace,
     _poolRoadsideBlowout,
     _poolRocOfKherRidges,
     _poolRoxanneStarfallSavant,

@@ -491,6 +491,7 @@ import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
 import _poolNumaiOutcast from "../pool/numai-outcast.js";
 import _poolNumbingDose from "../pool/numbing-dose.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
+import _poolOathOfLimDul from "../pool/oath-of-lim-dul.js";
 import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolNumaiOutcast,
     _poolNumbingDose,
     _poolOashraCultivator,
+    _poolOathOfLimDul,
     _poolOdricsOutrider,
     _poolOgreBattledriver,
     _poolOldRutstein,

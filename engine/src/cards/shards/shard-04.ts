@@ -163,6 +163,7 @@ import _poolDiplomacyOfTheWastes from "../pool/diplomacy-of-the-wastes.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDiscoveryDispersal from "../pool/discovery-dispersal.js";
 import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
@@ -644,6 +645,7 @@ import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellRupture from "../pool/spell-rupture.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSphereOfTruth from "../pool/sphere-of-truth.js";
+import _poolSphinxsTutelage from "../pool/sphinxs-tutelage.js";
 import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
@@ -784,6 +786,7 @@ import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
 import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWarmth from "../pool/warmth.js";
+import _poolWasteManagement from "../pool/waste-management.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
@@ -993,6 +996,7 @@ const shard: CardShard = {
     _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDiscoveryDispersal,
     _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,
     _poolDoomsServoGuards,
@@ -1474,6 +1478,7 @@ const shard: CardShard = {
     _poolSpellRupture,
     _poolSpellweaverEternal,
     _poolSphereOfTruth,
+    _poolSphinxsTutelage,
     _poolSpicyOatmealPizza,
     _poolSpiderBot,
     _poolSpiderManToTheRescue,
@@ -1614,6 +1619,7 @@ const shard: CardShard = {
     _poolWarden,
     _poolWarehouseThief,
     _poolWarmth,
+    _poolWasteManagement,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,

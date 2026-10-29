@@ -115,6 +115,7 @@ import _poolCranialRam from "../pool/cranial-ram.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
+import _poolCunningLethemancer from "../pool/cunning-lethemancer.js";
 import _poolCut from "../pool/cut.js";
 import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
@@ -673,6 +674,7 @@ import _poolTidings from "../pool/tidings.js";
 import _poolTitanicBulvox from "../pool/titanic-bulvox.js";
 import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
 import _poolTorchSlinger from "../pool/torch-slinger.js";
+import _poolTormentOfHailfire from "../pool/torment-of-hailfire.js";
 import _poolTowerOfTheMagistrate from "../pool/tower-of-the-magistrate.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
 import _poolTriumphantSurge from "../pool/triumphant-surge.js";
@@ -876,6 +878,7 @@ const shard: CardShard = {
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
     _poolCruelSomnophage,
+    _poolCunningLethemancer,
     _poolCut,
     _poolCycloneSire,
     _poolCystbearer,
@@ -1434,6 +1437,7 @@ const shard: CardShard = {
     _poolTitanicBulvox,
     _poolTitanicUltimatum,
     _poolTorchSlinger,
+    _poolTormentOfHailfire,
     _poolTowerOfTheMagistrate,
     _poolTreetopSentries,
     _poolTriumphantSurge,

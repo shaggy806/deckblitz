@@ -119,6 +119,7 @@ import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
+import _poolCease from "../pool/cease.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
@@ -403,6 +404,7 @@ import _poolKenkuArtificer from "../pool/kenku-artificer.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
+import _poolKindleTheCarnage from "../pool/kindle-the-carnage.js";
 import _poolKindle from "../pool/kindle.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
@@ -435,6 +437,7 @@ import _poolLightningCrafter from "../pool/lightning-crafter.js";
 import _poolLikenessOfTheSeeker from "../pool/likeness-of-the-seeker.js";
 import _poolLilianaVess from "../pool/liliana-vess.js";
 import _poolLlanowarEnvoy from "../pool/llanowar-envoy.js";
+import _poolLoamingShaman from "../pool/loaming-shaman.js";
 import _poolLockerRoom from "../pool/locker-room.js";
 import _poolLoftyDenial from "../pool/lofty-denial.js";
 import _poolLongBodiedGreyDog from "../pool/long-bodied-grey-dog.js";
@@ -645,6 +648,7 @@ import _poolShiftingSky from "../pool/shifting-sky.js";
 import _poolShoalKraken from "../pool/shoal-kraken.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShowerOfCoals from "../pool/shower-of-coals.js";
+import _poolShredMemory from "../pool/shred-memory.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
@@ -985,6 +989,7 @@ const shard: CardShard = {
     _poolCartoucheOfZeal,
     _poolCateranOverlord,
     _poolCatharCommando,
+    _poolCease,
     _poolCessation,
     _poolChaosCharm,
     _poolCharmedStray,
@@ -1269,6 +1274,7 @@ const shard: CardShard = {
     _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
     _poolKillZoneAcrobat,
+    _poolKindleTheCarnage,
     _poolKindle,
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
@@ -1301,6 +1307,7 @@ const shard: CardShard = {
     _poolLikenessOfTheSeeker,
     _poolLilianaVess,
     _poolLlanowarEnvoy,
+    _poolLoamingShaman,
     _poolLockerRoom,
     _poolLoftyDenial,
     _poolLongBodiedGreyDog,
@@ -1511,6 +1518,7 @@ const shard: CardShard = {
     _poolShoalKraken,
     _poolShoreKeeper,
     _poolShowerOfCoals,
+    _poolShredMemory,
     _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,

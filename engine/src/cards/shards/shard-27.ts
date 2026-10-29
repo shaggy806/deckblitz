@@ -63,6 +63,7 @@ import _poolBattlefieldImprovisation from "../pool/battlefield-improvisation.js"
 import _poolBeamingDefiance from "../pool/beaming-defiance.js";
 import _poolBeskirShieldmate from "../pool/beskir-shieldmate.js";
 import _poolBeyeenCoast from "../pool/beyeen-coast.js";
+import _poolBioshift from "../pool/bioshift.js";
 import _poolBitterbloomBearer from "../pool/bitterbloom-bearer.js";
 import _poolBlackPantherMostDangerous from "../pool/black-panther-most-dangerous.js";
 import _poolBladedPinions from "../pool/bladed-pinions.js";
@@ -334,6 +335,7 @@ import _poolInterpretTheSigns from "../pool/interpret-the-signs.js";
 import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
+import _poolIwamoriOfTheOpenFist from "../pool/iwamori-of-the-open-fist.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
 import _poolJarlOfTheForsaken from "../pool/jarl-of-the-forsaken.js";
@@ -883,6 +885,7 @@ const shard: CardShard = {
     _poolBeamingDefiance,
     _poolBeskirShieldmate,
     _poolBeyeenCoast,
+    _poolBioshift,
     _poolBitterbloomBearer,
     _poolBlackPantherMostDangerous,
     _poolBladedPinions,
@@ -1154,6 +1157,7 @@ const shard: CardShard = {
     _poolInvadingManticore,
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
+    _poolIwamoriOfTheOpenFist,
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
     _poolJarlOfTheForsaken,

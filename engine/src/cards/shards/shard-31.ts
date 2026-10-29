@@ -327,6 +327,7 @@ import _poolGolgariGermination from "../pool/golgari-germination.js";
 import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
 import _poolGrahaTia from "../pool/graha-tia.js";
+import _poolGraveSifter from "../pool/grave-sifter.js";
 import _poolGraveStrength from "../pool/grave-strength.js";
 import _poolGravenDominator from "../pool/graven-dominator.js";
 import _poolGravetillerWurm from "../pool/gravetiller-wurm.js";
@@ -679,6 +680,7 @@ import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSimicInitiate from "../pool/simic-initiate.js";
 import _poolSimple from "../pool/simple.js";
+import _poolSinSpirasPunishment from "../pool/sin-spiras-punishment.js";
 import _poolSinstrikersWill from "../pool/sinstrikers-will.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSireOfTheStorm from "../pool/sire-of-the-storm.js";
@@ -1218,6 +1220,7 @@ const shard: CardShard = {
     _poolGontisAetherHeart,
     _poolGrabbyGiant,
     _poolGrahaTia,
+    _poolGraveSifter,
     _poolGraveStrength,
     _poolGravenDominator,
     _poolGravetillerWurm,
@@ -1570,6 +1573,7 @@ const shard: CardShard = {
     _poolSilentHallcreeper,
     _poolSimicInitiate,
     _poolSimple,
+    _poolSinSpirasPunishment,
     _poolSinstrikersWill,
     _poolSireOfStagnation,
     _poolSireOfTheStorm,

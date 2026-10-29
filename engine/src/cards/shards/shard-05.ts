@@ -293,6 +293,7 @@ import _poolGarruksHorde from "../pool/garruks-horde.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGateToPhyrexia from "../pool/gate-to-phyrexia.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
+import _poolGeierReachSanitarium from "../pool/geier-reach-sanitarium.js";
 import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
@@ -712,6 +713,7 @@ import _poolTempleOfDeceit from "../pool/temple-of-deceit.js";
 import _poolTempleOfMalady from "../pool/temple-of-malady.js";
 import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
+import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
@@ -1117,6 +1119,7 @@ const shard: CardShard = {
     _poolGarruksPackleader,
     _poolGateToPhyrexia,
     _poolGatewaySneak,
+    _poolGeierReachSanitarium,
     _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
     _poolGenjiGlove,
@@ -1536,6 +1539,7 @@ const shard: CardShard = {
     _poolTempleOfMalady,
     _poolTendTheSprigs,
     _poolTheGoldSaucer,
+    _poolTheHorusHeresy,
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,
     _poolTheWaterCrystal,

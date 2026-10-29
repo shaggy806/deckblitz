@@ -160,6 +160,7 @@ import _poolDiminish from "../pool/diminish.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
+import _poolDispersal from "../pool/dispersal.js";
 import _poolDistrictMascot from "../pool/district-mascot.js";
 import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
@@ -326,6 +327,7 @@ import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
 import _poolInnerStruggle from "../pool/inner-struggle.js";
+import _poolInnocentTraveler from "../pool/innocent-traveler.js";
 import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
@@ -621,6 +623,7 @@ import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulLink from "../pool/soul-link.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
+import _poolSoulShackledZombie from "../pool/soul-shackled-zombie.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSoulscour from "../pool/soulscour.js";
 import _poolSouthernPaladin from "../pool/southern-paladin.js";
@@ -995,6 +998,7 @@ const shard: CardShard = {
     _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
+    _poolDispersal,
     _poolDistrictMascot,
     _poolDoesMachines,
     _poolDoomedNecromancer,
@@ -1161,6 +1165,7 @@ const shard: CardShard = {
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
     _poolInnerStruggle,
+    _poolInnocentTraveler,
     _poolInsatiableGorgers,
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
@@ -1456,6 +1461,7 @@ const shard: CardShard = {
     _poolSorinImperiousBloodlord,
     _poolSoulLink,
     _poolSoulSeizer,
+    _poolSoulShackledZombie,
     _poolSoulTether,
     _poolSoulscour,
     _poolSouthernPaladin,

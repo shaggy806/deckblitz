@@ -238,3 +238,39 @@ describe("repeat this process", () => {
     expect(graveyard(game, B).length).toBe(before + 4);
   });
 });
+
+describe("the lead's follow-ups", () => {
+  it("Quandrix Command: counters and the shuffle mode together — the group reads its own mode's player", () => {
+    const { game } = table();
+    lands(game, "Island", 2);
+    lands(game, "Forest", 1);
+    const bears = spawn(game, "Grizzly Bears", A);
+    const bobsCards = [toGraveyard(game, "Grizzly Bears", B), toGraveyard(game, "Hill Giant", B)];
+    const mine = toGraveyard(game, "Hill Giant", A);
+    const command = toHand(game, "Quandrix Command");
+    // Modes 3 and 4: the creature is slot 0, the player slot 1, the cards from slot 2.
+    expect(
+      game.canDispatch({ type: "cast-spell", player: A, card: command, modes: [2, 3], targets: [ref(bears), ref(B), ref(mine)] }),
+    ).toMatch(/another/);
+    cast(game, command, { modes: [2, 3], targets: [ref(bears), ref(B), ...bobsCards.map(ref)] });
+    expect(counters(game, bears)).toBe(2);
+    expect(bobsCards.map((id) => zone(game, id))).toEqual(["library", "library"]);
+  });
+
+  it("Ruin Grinder: everyone decides before anyone discards", () => {
+    const { game, a, b } = table();
+    const grinder = spawn(game, "Ruin Grinder");
+    a.chooseModesFn = () => [0];
+    const aliceHand = [...hand(game, A)];
+    let aliceHandWhenBobChose: readonly string[] = [];
+    b.chooseModesFn = () => {
+      aliceHandWhenBobChose = [...hand(game, A)];
+      return [0];
+    };
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [{ kind: "object", object: grinder }]);
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
+    expect(aliceHandWhenBobChose).toEqual(aliceHand);
+    expect(hand(game, A)).toHaveLength(7);
+    expect(hand(game, B)).toHaveLength(7);
+  });
+});

@@ -47,6 +47,7 @@ import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAtogatog from "../pool/atogatog.js";
+import _poolAvatarYangchen from "../pool/avatar-yangchen.js";
 import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
@@ -171,7 +172,9 @@ import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
+import _poolDemonlordBelzenlok from "../pool/demonlord-belzenlok.js";
 import _poolDemoralize from "../pool/demoralize.js";
+import _poolDesist from "../pool/desist.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
 import _poolDestructiveFlow from "../pool/destructive-flow.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
@@ -868,6 +871,7 @@ const shard: CardShard = {
     _poolAstralDrift,
     _poolAstralSteel,
     _poolAtogatog,
+    _poolAvatarYangchen,
     _poolAvenWindGuide,
     _poolAvengersUnderSiege,
     _poolAvianOddity,
@@ -992,7 +996,9 @@ const shard: CardShard = {
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
+    _poolDemonlordBelzenlok,
     _poolDemoralize,
+    _poolDesist,
     _poolDespoilerOfSouls,
     _poolDestructiveFlow,
     _poolDevilishValet,

@@ -182,6 +182,7 @@ import _poolDrownyardBehemoth from "../pool/drownyard-behemoth.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDualShot from "../pool/dual-shot.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
+import _poolDwellOnThePast from "../pool/dwell-on-the-past.js";
 import _poolDyingWish from "../pool/dying-wish.js";
 import _poolDynavoltTower from "../pool/dynavolt-tower.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
@@ -523,6 +524,7 @@ import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
+import _poolPush from "../pool/push.js";
 import _poolPyromancersGauntlet from "../pool/pyromancers-gauntlet.js";
 import _poolQarsiSadist from "../pool/qarsi-sadist.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
@@ -769,6 +771,7 @@ import _poolVedalkenMastermind from "../pool/vedalken-mastermind.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolVenserFerventForger from "../pool/venser-fervent-forger.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
+import _poolViciousRumors from "../pool/vicious-rumors.js";
 import _poolVictimize from "../pool/victimize.js";
 import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
 import _poolVillainousHideout from "../pool/villainous-hideout.js";
@@ -1022,6 +1025,7 @@ const shard: CardShard = {
     _poolDrownyardExplorers,
     _poolDualShot,
     _poolDwarvenBloodboiler,
+    _poolDwellOnThePast,
     _poolDyingWish,
     _poolDynavoltTower,
     _poolEarthKingdomProtectors,
@@ -1363,6 +1367,7 @@ const shard: CardShard = {
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,
+    _poolPush,
     _poolPyromancersGauntlet,
     _poolQarsiSadist,
     _poolQilinsBlessing,
@@ -1609,6 +1614,7 @@ const shard: CardShard = {
     _poolVenomSliver,
     _poolVenserFerventForger,
     _poolViciousConquistador,
+    _poolViciousRumors,
     _poolVictimize,
     _poolVigorbloomAnnex,
     _poolVillainousHideout,

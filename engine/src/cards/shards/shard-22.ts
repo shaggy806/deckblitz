@@ -110,6 +110,7 @@ import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolCentaurVeteran from "../pool/centaur-veteran.js";
+import _poolCephalidConstable from "../pool/cephalid-constable.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChillerpillar from "../pool/chillerpillar.js";
@@ -521,6 +522,8 @@ import _poolPyroconvergence from "../pool/pyroconvergence.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
+import _poolRagsRiches from "../pool/rags-riches.js";
+import _poolRags from "../pool/rags.js";
 import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
 import _poolRallyToBattle from "../pool/rally-to-battle.js";
 import _poolRampartCrawler from "../pool/rampart-crawler.js";
@@ -712,6 +715,7 @@ import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
 import _poolTheMirariConjecture from "../pool/the-mirari-conjecture.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
+import _poolTheTaleOfTamiyo from "../pool/the-tale-of-tamiyo.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
 import _poolTheWanderingRescuer from "../pool/the-wandering-rescuer.js";
 import _poolTheorixAnnex from "../pool/theorix-annex.js";
@@ -957,6 +961,7 @@ const shard: CardShard = {
     _poolCartographersHawk,
     _poolCatharticReunion,
     _poolCentaurVeteran,
+    _poolCephalidConstable,
     _poolChameleonColossus,
     _poolChargingCinderhorn,
     _poolChillerpillar,
@@ -1368,6 +1373,8 @@ const shard: CardShard = {
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,
+    _poolRagsRiches,
+    _poolRags,
     _poolRallyAtTheHornburg,
     _poolRallyToBattle,
     _poolRampartCrawler,
@@ -1559,6 +1566,7 @@ const shard: CardShard = {
     _poolTheFugitiveDoctor,
     _poolTheMirariConjecture,
     _poolTheSackvilleBagginses,
+    _poolTheTaleOfTamiyo,
     _poolTheWallsOfBaSingSe,
     _poolTheWanderingRescuer,
     _poolTheorixAnnex,
