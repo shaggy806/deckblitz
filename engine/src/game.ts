@@ -29834,7 +29834,14 @@ export class Game {
       ...durationFields(duration),
     });
     invalidateComputedCache();
-    this.emit({ type: "types-added", object: id, types: [...types], subtypes: [...subtypes], duration });
+    this.emit({
+      type: "types-added",
+      object: id,
+      types: [...(set.setTypes ?? []), ...types],
+      subtypes: [...(set.setSubtypes ?? []), ...subtypes],
+      duration,
+      ...(replaces ? { replaces: true as const } : {}),
+    });
   }
 
   /** The front face's `CardDefinition` for `id`'s card — resolves through

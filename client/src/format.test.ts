@@ -14,6 +14,13 @@ const event = (fields: Record<string, unknown>) => ({ seq: 1, ...fields }) as un
 const nameOf = (id: ObjectId) => `card:${id}`
 
 describe('describeEvent', () => {
+  it('says what a type change made it, "in addition" only when nothing was replaced', () => {
+    const changed = (fields: Record<string, unknown>) =>
+      describeEvent(event({ type: 'types-added', object: 'o1', types: [], duration: 'end-of-turn', ...fields }), nameOf, seats)
+    expect(changed({ subtypes: ['Swamp'], replaces: true })).toBe('card:o1 becomes Swamp until EOT')
+    expect(changed({ subtypes: ['Mutant'] })).toBe('card:o1 becomes Mutant in addition to its other types until EOT')
+  })
+
   it('names players by their display names, not their seat ids', () => {
     expect(describeEvent(event({ type: 'turn-began', turn: 3, activePlayer: p1 }), nameOf, seats)).toBe(
       'Turn 3 — Toby',

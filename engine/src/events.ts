@@ -807,6 +807,9 @@ export type GameEvent =
       readonly types: readonly CardType[];
       readonly subtypes: readonly string[];
       readonly duration: EffectDuration;
+      /** Some of them *replace* its others ("becomes the basic land type of
+       * your choice", "becomes a Coward"): the set ones are listed first. */
+      readonly replaces?: true;
     })
   | (Base & {
       /** `player`'s effect from `source` picked `chosen` at random — a

@@ -342,7 +342,9 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
     case 'types-added':
-      return `${name(event.object)} becomes ${[...event.subtypes, ...event.types].join(' ')} in addition to its other types${
+      return `${name(event.object)} becomes ${[...event.subtypes, ...event.types].join(' ')}${
+        event.replaces === true ? '' : ' in addition to its other types'
+      }${
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
     case 'vote-cast':
