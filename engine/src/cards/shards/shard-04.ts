@@ -69,6 +69,7 @@ import _poolBlustersquall from "../pool/blustersquall.js";
 import _poolBogWreckage from "../pool/bog-wreckage.js";
 import _poolBoneToAsh from "../pool/bone-to-ash.js";
 import _poolBonebreakerGiant from "../pool/bonebreaker-giant.js";
+import _poolBorosFuryShield from "../pool/boros-fury-shield.js";
 import _poolBoulderbornDragon from "../pool/boulderborn-dragon.js";
 import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
@@ -251,6 +252,7 @@ import _poolGaeasBounty from "../pool/gaeas-bounty.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
+import _poolGaseousForm from "../pool/gaseous-form.js";
 import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGenjuOfTheFalls from "../pool/genju-of-the-falls.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
@@ -352,6 +354,7 @@ import _poolJoltingMerfolk from "../pool/jolting-merfolk.js";
 import _poolJovialEvil from "../pool/jovial-evil.js";
 import _poolKamahlFistOfKrosa from "../pool/kamahl-fist-of-krosa.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
+import _poolKaronasZealot from "../pool/karonas-zealot.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
@@ -398,6 +401,7 @@ import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
+import _poolLoafingGiant from "../pool/loafing-giant.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLongForgottenGohei from "../pool/long-forgotten-gohei.js";
@@ -407,6 +411,7 @@ import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
+import _poolMagebaneArmor from "../pool/magebane-armor.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
 import _poolMaliciousAffliction from "../pool/malicious-affliction.js";
@@ -799,6 +804,7 @@ import _poolWurmcalling from "../pool/wurmcalling.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
+import _poolZealotIlVec from "../pool/zealot-il-vec.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
@@ -891,6 +897,7 @@ const shard: CardShard = {
     _poolBogWreckage,
     _poolBoneToAsh,
     _poolBonebreakerGiant,
+    _poolBorosFuryShield,
     _poolBoulderbornDragon,
     _poolBraingeyser,
     _poolBrainstorm,
@@ -1073,6 +1080,7 @@ const shard: CardShard = {
     _poolGaeasCradle,
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
+    _poolGaseousForm,
     _poolGatekeeperGargoyle,
     _poolGenjuOfTheFalls,
     _poolGeodeRager,
@@ -1174,6 +1182,7 @@ const shard: CardShard = {
     _poolJovialEvil,
     _poolKamahlFistOfKrosa,
     _poolKariZevsExpertise,
+    _poolKaronasZealot,
     _poolKarumonixTheRatKing,
     _poolKeenEyedRaven,
     _poolKeenSense,
@@ -1220,6 +1229,7 @@ const shard: CardShard = {
     _poolLightningElemental,
     _poolLingeringDeath,
     _poolLivingPhone,
+    _poolLoafingGiant,
     _poolLoathsomeTroll,
     _poolLongFinnedSkywhale,
     _poolLongForgottenGohei,
@@ -1229,6 +1239,7 @@ const shard: CardShard = {
     _poolLotuslightDancers,
     _poolLoyalSubordinate,
     _poolMacabreWaltz,
+    _poolMagebaneArmor,
     _poolMagnifyingGlass,
     _poolMalcolmKeenEyedNavigator,
     _poolMaliciousAffliction,
@@ -1621,6 +1632,7 @@ const shard: CardShard = {
     _poolYavimayaBarbarian,
     _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,
+    _poolZealotIlVec,
     _poolZephyrFalcon,
     _poolZofBloodbog,
     _poolZulaportEnforcer,

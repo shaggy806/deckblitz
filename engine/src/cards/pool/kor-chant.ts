@@ -17,6 +17,6 @@ export default defineCard({
   colors: ["W"],
   types: ["instant"],
   text: "All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.",
-  targets: ["creature-you-control", { kind: "other", of: "creature" }],
+  targets: ["creature-you-control", { kind: "other", of: "creature", than: { slot: 0 } }],
   effect: { kind: "prevent-damage-from-chosen-source", to: 0, amount: "all", redirectTo: 1 },
 });

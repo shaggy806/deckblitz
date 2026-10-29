@@ -221,6 +221,7 @@ import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolEmptyThePits from "../pool/empty-the-pits.js";
+import _poolEmpyrialArchangel from "../pool/empyrial-archangel.js";
 import _poolEnlarge from "../pool/enlarge.js";
 import _poolEnragingLicid from "../pool/enraging-licid.js";
 import _poolEraOfInnovation from "../pool/era-of-innovation.js";
@@ -344,8 +345,10 @@ import _poolHourglassOfTheLost from "../pool/hourglass-of-the-lost.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
+import _poolIgnobleSoldier from "../pool/ignoble-soldier.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
+import _poolImpracticalJoke from "../pool/impractical-joke.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInquisitorExarch from "../pool/inquisitor-exarch.js";
@@ -495,6 +498,7 @@ import _poolParadisePlume from "../pool/paradise-plume.js";
 import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
+import _poolPariahsShield from "../pool/pariahs-shield.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
 import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
@@ -590,6 +594,7 @@ import _poolSellSwordBrute from "../pool/sell-sword-brute.js";
 import _poolSelvalasEnforcer from "../pool/selvalas-enforcer.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
 import _poolSereneSteward from "../pool/serene-steward.js";
+import _poolSereneSunset from "../pool/serene-sunset.js";
 import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerpentSkin from "../pool/serpent-skin.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
@@ -1038,6 +1043,7 @@ const shard: CardShard = {
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolEmptyThePits,
+    _poolEmpyrialArchangel,
     _poolEnlarge,
     _poolEnragingLicid,
     _poolEraOfInnovation,
@@ -1161,8 +1167,10 @@ const shard: CardShard = {
     _poolHugsGrislyGuardian,
     _poolHydraTroopers,
     _poolIchneumonDruid,
+    _poolIgnobleSoldier,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
+    _poolImpracticalJoke,
     _poolInSearchOfGreatness,
     _poolIngeniousLeonin,
     _poolInquisitorExarch,
@@ -1312,6 +1320,7 @@ const shard: CardShard = {
     _poolParadoxSurveyor,
     _poolParallelLives,
     _poolParapetThrasher,
+    _poolPariahsShield,
     _poolPathOfAngersFlame,
     _poolPathwayArrows,
     _poolPatientNaturalist,
@@ -1407,6 +1416,7 @@ const shard: CardShard = {
     _poolSelvalasEnforcer,
     _poolSeparatistVoidmage,
     _poolSereneSteward,
+    _poolSereneSunset,
     _poolSerpentBladeAssailant,
     _poolSerpentSkin,
     _poolSerumVisionary,

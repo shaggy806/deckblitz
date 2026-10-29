@@ -39,6 +39,7 @@ import _poolAttemptedMurder from "../pool/attempted-murder.js";
 import _poolAuriokGlaivemaster from "../pool/auriok-glaivemaster.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
+import _poolAzoriusPloy from "../pool/azorius-ploy.js";
 import _poolBadRiver from "../pool/bad-river.js";
 import _poolBalaGedRecovery from "../pool/bala-ged-recovery.js";
 import _poolBalefulAmmit from "../pool/baleful-ammit.js";
@@ -583,6 +584,7 @@ import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
 import _poolSamiteSanctuary from "../pool/samite-sanctuary.js";
 import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
+import _poolSandskin from "../pool/sandskin.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
@@ -609,6 +611,7 @@ import _poolShatteredPerception from "../pool/shattered-perception.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolShiftingCeratops from "../pool/shifting-ceratops.js";
+import _poolShimianNightStalker from "../pool/shimian-night-stalker.js";
 import _poolShivanRaptor from "../pool/shivan-raptor.js";
 import _poolShoulderToShoulder from "../pool/shoulder-to-shoulder.js";
 import _poolShriekingGrotesque from "../pool/shrieking-grotesque.js";
@@ -753,6 +756,8 @@ import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrborg from "../pool/urborg.js";
 import _poolUrsineChampion from "../pool/ursine-champion.js";
+import _poolUrzasArmor from "../pool/urzas-armor.js";
+import _poolUrzasRage from "../pool/urzas-rage.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolAuriokGlaivemaster,
     _poolAvenEnvoy,
     _poolAxebaneStag,
+    _poolAzoriusPloy,
     _poolBadRiver,
     _poolBalaGedRecovery,
     _poolBalefulAmmit,
@@ -1404,6 +1410,7 @@ const shard: CardShard = {
     _poolSalvationEngine,
     _poolSamiteSanctuary,
     _poolSamutVizierOfNaktamun,
+    _poolSandskin,
     _poolSandstoneWarrior,
     _poolSangriteSurge,
     _poolSapphireMedallion,
@@ -1430,6 +1437,7 @@ const shard: CardShard = {
     _poolShatterskullGiant,
     _poolShepherdOfTheClouds,
     _poolShiftingCeratops,
+    _poolShimianNightStalker,
     _poolShivanRaptor,
     _poolShoulderToShoulder,
     _poolShriekingGrotesque,
@@ -1574,6 +1582,8 @@ const shard: CardShard = {
     _poolUrbisProtector,
     _poolUrborg,
     _poolUrsineChampion,
+    _poolUrzasArmor,
+    _poolUrzasRage,
     _poolUrzasWorkshop,
     _poolUtilityKnife,
     _poolValorousStance,

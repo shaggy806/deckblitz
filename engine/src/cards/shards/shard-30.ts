@@ -54,6 +54,7 @@ import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
+import _poolBarbedWire from "../pool/barbed-wire.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBattleSliver from "../pool/battle-sliver.js";
@@ -549,6 +550,7 @@ import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
+import _poolProtectorOfTheCrown from "../pool/protector-of-the-crown.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
@@ -885,6 +887,7 @@ const shard: CardShard = {
     _poolBalothNull,
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,
+    _poolBarbedWire,
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
     _poolBattleSliver,
@@ -1380,6 +1383,7 @@ const shard: CardShard = {
     _poolPrehistoricPet,
     _poolPresumedDead,
     _poolPropellerPioneer,
+    _poolProtectorOfTheCrown,
     _poolPterafractyl,
     _poolPugnaciousPugilist,
     _poolPumpkinBombardment,

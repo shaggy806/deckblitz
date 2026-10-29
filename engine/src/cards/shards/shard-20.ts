@@ -190,6 +190,7 @@ import _poolDeathMutation from "../pool/death-mutation.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
+import _poolDefang from "../pool/defang.js";
 import _poolDefenderOfTheOrder from "../pool/defender-of-the-order.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDenseCanopy from "../pool/dense-canopy.js";
@@ -401,6 +402,7 @@ import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKissOfTheAmesha from "../pool/kiss-of-the-amesha.js";
 import _poolKjeldoranSkycaptain from "../pool/kjeldoran-skycaptain.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
+import _poolKorDirge from "../pool/kor-dirge.js";
 import _poolKorozdaGuildmage from "../pool/korozda-guildmage.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
@@ -1081,6 +1083,7 @@ const shard: CardShard = {
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDecimatorOfTheProvinces,
+    _poolDefang,
     _poolDefenderOfTheOrder,
     _poolDelayedBlastFireball,
     _poolDenseCanopy,
@@ -1292,6 +1295,7 @@ const shard: CardShard = {
     _poolKissOfTheAmesha,
     _poolKjeldoranSkycaptain,
     _poolKolodinTriumphCaster,
+    _poolKorDirge,
     _poolKorozdaGuildmage,
     _poolKrangUtromWarlord,
     _poolKraulStinger,

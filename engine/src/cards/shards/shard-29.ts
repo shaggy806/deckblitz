@@ -484,6 +484,7 @@ import _poolOverride from "../pool/override.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
+import _poolPantherHabit from "../pool/panther-habit.js";
 import _poolParalyze from "../pool/paralyze.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPatchworkGnomes from "../pool/patchwork-gnomes.js";
@@ -608,6 +609,7 @@ import _poolSengirConnoisseur from "../pool/sengir-connoisseur.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
+import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
 import _poolShoalSerpent from "../pool/shoal-serpent.js";
@@ -685,6 +687,7 @@ import _poolSuccumbToTemptation from "../pool/succumb-to-temptation.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
 import _poolSunbringersTouch from "../pool/sunbringers-touch.js";
 import _poolSunscorchedDivide from "../pool/sunscorched-divide.js";
+import _poolSurgeOfSalvation from "../pool/surge-of-salvation.js";
 import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
 import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
 import _poolTahngarthsRage from "../pool/tahngarths-rage.js";
@@ -698,6 +701,7 @@ import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
+import _poolTerrifyingPresence from "../pool/terrifying-presence.js";
 import _poolTestamentOfFaith from "../pool/testament-of-faith.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
@@ -714,6 +718,7 @@ import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThrashingMossdog from "../pool/thrashing-mossdog.js";
 import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
+import _poolThunderstaff from "../pool/thunderstaff.js";
 import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimberpackWolf from "../pool/timberpack-wolf.js";
@@ -1319,6 +1324,7 @@ const shard: CardShard = {
     _poolOwlinHistorian,
     _poolPackHunt,
     _poolPain101,
+    _poolPantherHabit,
     _poolParalyze,
     _poolParhelionIi,
     _poolPatchworkGnomes,
@@ -1443,6 +1449,7 @@ const shard: CardShard = {
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
     _poolShadowcloakVampire,
+    _poolShieldOfTheRealm,
     _poolShimmercreep,
     _poolShivanPhoenix,
     _poolShoalSerpent,
@@ -1520,6 +1527,7 @@ const shard: CardShard = {
     _poolSummonersPact,
     _poolSunbringersTouch,
     _poolSunscorchedDivide,
+    _poolSurgeOfSalvation,
     _poolSurveyTheWreckage,
     _poolSylvanCaryatid,
     _poolTahngarthsRage,
@@ -1533,6 +1541,7 @@ const shard: CardShard = {
     _poolTemperedInSolitude,
     _poolTempleAcolyte,
     _poolTendrilOfTheMycotyrant,
+    _poolTerrifyingPresence,
     _poolTestamentOfFaith,
     _poolThalakosSeer,
     _poolThaliasLieutenant,
@@ -1549,6 +1558,7 @@ const shard: CardShard = {
     _poolThrashingMossdog,
     _poolThreadbindClique,
     _poolThrottle,
+    _poolThunderstaff,
     _poolThwartTheGrave,
     _poolTigerDillo,
     _poolTimberpackWolf,

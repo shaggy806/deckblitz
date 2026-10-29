@@ -252,6 +252,7 @@ import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
 import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
 import _poolGoblinMasons from "../pool/goblin-masons.js";
+import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
@@ -472,6 +473,7 @@ import _poolOtarianJuggernaut from "../pool/otarian-juggernaut.js";
 import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
+import _poolPackLeader from "../pool/pack-leader.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
 import _poolParagonOfFierceDefiance from "../pool/paragon-of-fierce-defiance.js";
 import _poolParagonOfGatheringMists from "../pool/paragon-of-gathering-mists.js";
@@ -1073,6 +1075,7 @@ const shard: CardShard = {
     _poolGluttonousGuest,
     _poolGoblinBattleJester,
     _poolGoblinMasons,
+    _poolGoblinPsychopath,
     _poolGoblinRaider,
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
@@ -1293,6 +1296,7 @@ const shard: CardShard = {
     _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
+    _poolPackLeader,
     _poolPanickedAltisaur,
     _poolParagonOfFierceDefiance,
     _poolParagonOfGatheringMists,

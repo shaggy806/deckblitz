@@ -316,6 +316,7 @@ import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGustriderExuberant from "../pool/gustrider-exuberant.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
+import _poolHallow from "../pool/hallow.js";
 import _poolHammerfistGiant from "../pool/hammerfist-giant.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHauntedDead from "../pool/haunted-dead.js";
@@ -412,6 +413,7 @@ import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLoneRevenant from "../pool/lone-revenant.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoreSeeker from "../pool/lore-seeker.js";
+import _poolLosheelClockworkScholar from "../pool/losheel-clockwork-scholar.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
@@ -433,6 +435,7 @@ import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarshViper from "../pool/marsh-viper.js";
 import _poolMarshalsAnthem from "../pool/marshals-anthem.js";
 import _poolMartyredRusalka from "../pool/martyred-rusalka.js";
+import _poolMartyrsOfKorlis from "../pool/martyrs-of-korlis.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
@@ -743,6 +746,7 @@ import _poolThroatseeker from "../pool/throatseeker.js";
 import _poolThunderDrake from "../pool/thunder-drake.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
+import _poolThwartTheEnemy from "../pool/thwart-the-enemy.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTinStreetHooligan from "../pool/tin-street-hooligan.js";
@@ -834,6 +838,7 @@ import _poolWatchfulNaga from "../pool/watchful-naga.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWaterspoutWeavers from "../pool/waterspout-weavers.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWeatheredBodyguards from "../pool/weathered-bodyguards.js";
 import _poolWellOfLife from "../pool/well-of-life.js";
 import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
@@ -1206,6 +1211,7 @@ const shard: CardShard = {
     _poolGustriderExuberant,
     _poolGuulDrazMucklord,
     _poolHaazdaMarshal,
+    _poolHallow,
     _poolHammerfistGiant,
     _poolHarmlessOffering,
     _poolHauntedDead,
@@ -1302,6 +1308,7 @@ const shard: CardShard = {
     _poolLoneRevenant,
     _poolLongtuskCub,
     _poolLoreSeeker,
+    _poolLosheelClockworkScholar,
     _poolLoxodonLineBreaker,
     _poolLunarRejection,
     _poolLynx,
@@ -1323,6 +1330,7 @@ const shard: CardShard = {
     _poolMarshViper,
     _poolMarshalsAnthem,
     _poolMartyredRusalka,
+    _poolMartyrsOfKorlis,
     _poolMarwynTheClearcutter,
     _poolMasterTrinketeer,
     _poolMasteryOfTheUnseen,
@@ -1633,6 +1641,7 @@ const shard: CardShard = {
     _poolThunderDrake,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,
+    _poolThwartTheEnemy,
     _poolTigerSharkAbyssalHunter,
     _poolTimidShieldbearer,
     _poolTinStreetHooligan,
@@ -1724,6 +1733,7 @@ const shard: CardShard = {
     _poolWaterTribeCaptain,
     _poolWaterspoutWeavers,
     _poolWeaponsManufacturing,
+    _poolWeatheredBodyguards,
     _poolWellOfLife,
     _poolWellspring,
     _poolWerewolfOfAncientHunger,

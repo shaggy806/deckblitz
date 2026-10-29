@@ -100,6 +100,7 @@ import _poolChimericCoils from "../pool/chimeric-coils.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCircleOfElders from "../pool/circle-of-elders.js";
+import _poolCircleOfSolace from "../pool/circle-of-solace.js";
 import _poolClaim from "../pool/claim.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
@@ -239,6 +240,7 @@ import _poolFlowstoneGiant from "../pool/flowstone-giant.js";
 import _poolFodderTosser from "../pool/fodder-tosser.js";
 import _poolForebodingRuins from "../pool/foreboding-ruins.js";
 import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js";
+import _poolForfend from "../pool/forfend.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFoulRenewal from "../pool/foul-renewal.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
@@ -436,6 +438,7 @@ import _poolMindculling from "../pool/mindculling.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirari from "../pool/mirari.js";
 import _poolMirrormade from "../pool/mirrormade.js";
+import _poolMirrorwoodTreefolk from "../pool/mirrorwood-treefolk.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMistDragon from "../pool/mist-dragon.js";
@@ -517,6 +520,7 @@ import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrimalBellow from "../pool/primal-bellow.js";
 import _poolPrismArray from "../pool/prism-array.js";
+import _poolPrismaticWard from "../pool/prismatic-ward.js";
 import _poolPrizedAmalgam from "../pool/prized-amalgam.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPropheticFlamespeaker from "../pool/prophetic-flamespeaker.js";
@@ -526,6 +530,7 @@ import _poolPsychatog from "../pool/psychatog.js";
 import _poolPulverize from "../pool/pulverize.js";
 import _poolPureSimple from "../pool/pure-simple.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
+import _poolPyrewoodGearhulk from "../pool/pyrewood-gearhulk.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuench from "../pool/quench.js";
@@ -895,6 +900,7 @@ const shard: CardShard = {
     _poolCidFreeflierPilot,
     _poolCinderbones,
     _poolCircleOfElders,
+    _poolCircleOfSolace,
     _poolClaim,
     _poolClearTheMind,
     _poolCliffsideLookout,
@@ -1034,6 +1040,7 @@ const shard: CardShard = {
     _poolFodderTosser,
     _poolForebodingRuins,
     _poolForecastingFortuneTeller,
+    _poolForfend,
     _poolFortressCrab,
     _poolFoulRenewal,
     _poolFreeFromFlesh,
@@ -1231,6 +1238,7 @@ const shard: CardShard = {
     _poolMineBearer,
     _poolMirari,
     _poolMirrormade,
+    _poolMirrorwoodTreefolk,
     _poolMischievousChimera,
     _poolMisshapenFiend,
     _poolMistDragon,
@@ -1312,6 +1320,7 @@ const shard: CardShard = {
     _poolPriestOfFellRites,
     _poolPrimalBellow,
     _poolPrismArray,
+    _poolPrismaticWard,
     _poolPrizedAmalgam,
     _poolPrizefight,
     _poolPropheticFlamespeaker,
@@ -1321,6 +1330,7 @@ const shard: CardShard = {
     _poolPulverize,
     _poolPureSimple,
     _poolPyreticRebirth,
+    _poolPyrewoodGearhulk,
     _poolPyrotechnicPerformer,
     _poolQuakefootCyclops,
     _poolQuench,

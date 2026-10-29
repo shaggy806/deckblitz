@@ -353,6 +353,7 @@ import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
 import _poolHeaven from "../pool/heaven.js";
+import _poolHedronFieldPurists from "../pool/hedron-field-purists.js";
 import _poolHeightenedReflexes from "../pool/heightened-reflexes.js";
 import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
 import _poolHellspurBrute from "../pool/hellspur-brute.js";
@@ -383,6 +384,7 @@ import _poolIllusion from "../pool/illusion.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolIncendiaryCommand from "../pool/incendiary-command.js";
+import _poolInkshield from "../pool/inkshield.js";
 import _poolInnerCalmOuterStrength from "../pool/inner-calm-outer-strength.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
@@ -390,6 +392,7 @@ import _poolInsidiousWill from "../pool/insidious-will.js";
 import _poolIntoTheNight from "../pool/into-the-night.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
+import _poolInviolability from "../pool/inviolability.js";
 import _poolInvisibility from "../pool/invisibility.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
@@ -442,9 +445,11 @@ import _poolLonghornSharpshooter from "../pool/longhorn-sharpshooter.js";
 import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
+import _poolLoyalUnicorn from "../pool/loyal-unicorn.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuSuWuAdvisor from "../pool/lu-su-wu-advisor.js";
 import _poolLudevicsAbomination from "../pool/ludevics-abomination.js";
+import _poolLuminesce from "../pool/luminesce.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolLurkingLizards from "../pool/lurking-lizards.js";
 import _poolLuxaRiverShrine from "../pool/luxa-river-shrine.js";
@@ -774,6 +779,7 @@ import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
 import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVanguardsShield from "../pool/vanguards-shield.js";
+import _poolVengefulArchon from "../pool/vengeful-archon.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
@@ -1191,6 +1197,7 @@ const shard: CardShard = {
     _poolHeartOfRamos,
     _poolHeartlessHidetsugu,
     _poolHeaven,
+    _poolHedronFieldPurists,
     _poolHeightenedReflexes,
     _poolHellsparkElemental,
     _poolHellspurBrute,
@@ -1221,6 +1228,7 @@ const shard: CardShard = {
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolIncendiaryCommand,
+    _poolInkshield,
     _poolInnerCalmOuterStrength,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
@@ -1228,6 +1236,7 @@ const shard: CardShard = {
     _poolIntoTheNight,
     _poolInvadeTheCity,
     _poolInvasionOfIxalan,
+    _poolInviolability,
     _poolInvisibility,
     _poolInvokeTheFiremind,
     _poolIronShieldElf,
@@ -1280,9 +1289,11 @@ const shard: CardShard = {
     _poolLordOfTresserhorn,
     _poolLotusRing,
     _poolLoxodonStalwart,
+    _poolLoyalUnicorn,
     _poolLoyalWarhound,
     _poolLuSuWuAdvisor,
     _poolLudevicsAbomination,
+    _poolLuminesce,
     _poolLuminousPhantom,
     _poolLurkingLizards,
     _poolLuxaRiverShrine,
@@ -1612,6 +1623,7 @@ const shard: CardShard = {
     _poolVampireScrivener,
     _poolVanguardOfTheRose,
     _poolVanguardsShield,
+    _poolVengefulArchon,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,

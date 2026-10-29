@@ -212,6 +212,7 @@ import _poolEternalDragon from "../pool/eternal-dragon.js";
 import _poolEternalFlame from "../pool/eternal-flame.js";
 import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
+import _poolEtherswornShieldmage from "../pool/ethersworn-shieldmage.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolEvolutionaryEscalation from "../pool/evolutionary-escalation.js";
@@ -406,6 +407,7 @@ import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
 import _poolLeylineOfAnticipation from "../pool/leyline-of-anticipation.js";
+import _poolLeylineOfPunishment from "../pool/leyline-of-punishment.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
@@ -770,6 +772,7 @@ import _poolTrickeryCharm from "../pool/trickery-charm.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
+import _poolUltimateMagicHoly from "../pool/ultimate-magic-holy.js";
 import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnblinkingBleb from "../pool/unblinking-bleb.js";
@@ -1071,6 +1074,7 @@ const shard: CardShard = {
     _poolEternalFlame,
     _poolEternalTaskmaster,
     _poolEtheriumSpinner,
+    _poolEtherswornShieldmage,
     _poolEverquillPhoenix,
     _poolEvolutionCharm,
     _poolEvolutionaryEscalation,
@@ -1265,6 +1269,7 @@ const shard: CardShard = {
     _poolLazotepPlating,
     _poolLedgerShredder,
     _poolLeylineOfAnticipation,
+    _poolLeylineOfPunishment,
     _poolLieInWait,
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
@@ -1629,6 +1634,7 @@ const shard: CardShard = {
     _poolTurnBurn,
     _poolTwinstrike,
     _poolTyvarsStand,
+    _poolUltimateMagicHoly,
     _poolUlvenwaldObserver,
     _poolUnauthorizedExit,
     _poolUnblinkingBleb,

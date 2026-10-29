@@ -192,6 +192,7 @@ import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDisturbingPlot from "../pool/disturbing-plot.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
+import _poolDolmenGate from "../pool/dolmen-gate.js";
 import _poolDoomgape from "../pool/doomgape.js";
 import _poolDoublecast from "../pool/doublecast.js";
 import _poolDownpour from "../pool/downpour.js";
@@ -230,6 +231,7 @@ import _poolEntrailsFeaster from "../pool/entrails-feaster.js";
 import _poolEquilibrium from "../pool/equilibrium.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
 import _poolEtherealGuidance from "../pool/ethereal-guidance.js";
+import _poolEtherealHaze from "../pool/ethereal-haze.js";
 import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvanescentIntellect from "../pool/evanescent-intellect.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
@@ -313,6 +315,7 @@ import _poolHauntedAngel from "../pool/haunted-angel.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
 import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
+import _poolHazeFrog from "../pool/haze-frog.js";
 import _poolHealingHands from "../pool/healing-hands.js";
 import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
@@ -603,6 +606,7 @@ import _poolSandstoneNeedle from "../pool/sandstone-needle.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
+import _poolSavingGrace from "../pool/saving-grace.js";
 import _poolScaledHulk from "../pool/scaled-hulk.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
@@ -645,6 +649,7 @@ import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
 import _poolSimulacrum from "../pool/simulacrum.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
+import _poolSivvisRuse from "../pool/sivvis-ruse.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
 import _poolSkyclaveAerialist from "../pool/skyclave-aerialist.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
@@ -1046,6 +1051,7 @@ const shard: CardShard = {
     _poolDisturbingPlot,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
+    _poolDolmenGate,
     _poolDoomgape,
     _poolDoublecast,
     _poolDownpour,
@@ -1084,6 +1090,7 @@ const shard: CardShard = {
     _poolEquilibrium,
     _poolErtaiTheCorrupted,
     _poolEtherealGuidance,
+    _poolEtherealHaze,
     _poolEumidianHatchery,
     _poolEvanescentIntellect,
     _poolEvendoWakingHaven,
@@ -1167,6 +1174,7 @@ const shard: CardShard = {
     _poolHavocJester,
     _poolHawkeyeClintBarton,
     _poolHazardrootHerbalist,
+    _poolHazeFrog,
     _poolHealingHands,
     _poolHeartsOnFire,
     _poolHecteyes,
@@ -1457,6 +1465,7 @@ const shard: CardShard = {
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
+    _poolSavingGrace,
     _poolScaledHulk,
     _poolScapeshift,
     _poolScholarOfTheLostTrove,
@@ -1499,6 +1508,7 @@ const shard: CardShard = {
     _poolSimulacrum,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
+    _poolSivvisRuse,
     _poolSkeletonCrew,
     _poolSkyclaveAerialist,
     _poolSkycloudExpanse,

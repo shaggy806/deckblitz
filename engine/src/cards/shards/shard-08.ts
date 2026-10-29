@@ -152,6 +152,7 @@ import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrypticSerpent from "../pool/cryptic-serpent.js";
+import _poolCrystalFragments from "../pool/crystal-fragments.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
@@ -326,6 +327,7 @@ import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvesttideAssailant from "../pool/harvesttide-assailant.js";
 import _poolHatchetBully from "../pool/hatchet-bully.js";
+import _poolHeartOfLight from "../pool/heart-of-light.js";
 import _poolHeartlashCinder from "../pool/heartlash-cinder.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
 import _poolHeavyweightDemolisher from "../pool/heavyweight-demolisher.js";
@@ -555,6 +557,7 @@ import _poolPsychicVortex from "../pool/psychic-vortex.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPuresightMerrow from "../pool/puresight-merrow.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
+import _poolQuestingBeast from "../pool/questing-beast.js";
 import _poolRageWeaver from "../pool/rage-weaver.js";
 import _poolRagemonger from "../pool/ragemonger.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
@@ -1014,6 +1017,7 @@ const shard: CardShard = {
     _poolCrookclawElder,
     _poolCrownOfSkemfar,
     _poolCrypticSerpent,
+    _poolCrystalFragments,
     _poolCrystalGrotto,
     _poolCrystalRod,
     _poolCurseOfOblivion,
@@ -1188,6 +1192,7 @@ const shard: CardShard = {
     _poolHarshMentor,
     _poolHarvesttideAssailant,
     _poolHatchetBully,
+    _poolHeartOfLight,
     _poolHeartlashCinder,
     _poolHeatShimmer,
     _poolHeavyweightDemolisher,
@@ -1417,6 +1422,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPuresightMerrow,
     _poolPygmyAllosaurus,
+    _poolQuestingBeast,
     _poolRageWeaver,
     _poolRagemonger,
     _poolRagingKavu,

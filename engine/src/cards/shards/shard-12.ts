@@ -75,6 +75,7 @@ import _poolBladewheelChariot from "../pool/bladewheel-chariot.js";
 import _poolBlazingCrescendo from "../pool/blazing-crescendo.js";
 import _poolBlightedShaman from "../pool/blighted-shaman.js";
 import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
+import _poolBlindingFog from "../pool/blinding-fog.js";
 import _poolBloodDivination from "../pool/blood-divination.js";
 import _poolBloodHustler from "../pool/blood-hustler.js";
 import _poolBloodMist from "../pool/blood-mist.js";
@@ -134,6 +135,7 @@ import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCloudskate from "../pool/cloudskate.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
+import _poolCommencementOfFestivities from "../pool/commencement-of-festivities.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
 import _poolConsignToDream from "../pool/consign-to-dream.js";
@@ -383,6 +385,7 @@ import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKillersMask from "../pool/killers-mask.js";
+import _poolKioraTheCrashingWave from "../pool/kiora-the-crashing-wave.js";
 import _poolKnightOfSorrows from "../pool/knight-of-sorrows.js";
 import _poolKnightOfTheMists from "../pool/knight-of-the-mists.js";
 import _poolKnightOfThePilgrimsRoad from "../pool/knight-of-the-pilgrims-road.js";
@@ -645,6 +648,7 @@ import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
 import _poolSisaysIngenuity from "../pool/sisays-ingenuity.js";
+import _poolSivvisValor from "../pool/sivvis-valor.js";
 import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
@@ -903,6 +907,7 @@ const shard: CardShard = {
     _poolBlazingCrescendo,
     _poolBlightedShaman,
     _poolBlightsoilDruid,
+    _poolBlindingFog,
     _poolBloodDivination,
     _poolBloodHustler,
     _poolBloodMist,
@@ -962,6 +967,7 @@ const shard: CardShard = {
     _poolCloudseeder,
     _poolCloudskate,
     _poolCogworkGrinder,
+    _poolCommencementOfFestivities,
     _poolConciliatorsDuelist,
     _poolConflux,
     _poolConsignToDream,
@@ -1211,6 +1217,7 @@ const shard: CardShard = {
     _poolKeensightMentor,
     _poolKeldonNecropolis,
     _poolKillersMask,
+    _poolKioraTheCrashingWave,
     _poolKnightOfSorrows,
     _poolKnightOfTheMists,
     _poolKnightOfThePilgrimsRoad,
@@ -1473,6 +1480,7 @@ const shard: CardShard = {
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
     _poolSisaysIngenuity,
+    _poolSivvisValor,
     _poolSkemfarAvenger,
     _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,

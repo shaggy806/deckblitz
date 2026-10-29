@@ -130,6 +130,7 @@ import _poolCoastalWizard from "../pool/coastal-wizard.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolComaVeil from "../pool/coma-veil.js";
+import _poolComeuppance from "../pool/comeuppance.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
 import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
 import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
@@ -404,6 +405,7 @@ import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
 import _poolLitaMechanicalEngineer from "../pool/lita-mechanical-engineer.js";
+import _poolLithomancersFocus from "../pool/lithomancers-focus.js";
 import _poolLiveFast from "../pool/live-fast.js";
 import _poolLivingLectern from "../pool/living-lectern.js";
 import _poolLlanowarBehemoth from "../pool/llanowar-behemoth.js";
@@ -521,6 +523,7 @@ import _poolPhantasmalDreadmaw from "../pool/phantasmal-dreadmaw.js";
 import _poolPhantomFlock from "../pool/phantom-flock.js";
 import _poolPhantomWurm from "../pool/phantom-wurm.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
+import _poolPinpointAvalanche from "../pool/pinpoint-avalanche.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
@@ -575,6 +578,7 @@ import _poolRepositorySkaab from "../pool/repository-skaab.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
 import _poolResurrectionOrb from "../pool/resurrection-orb.js";
 import _poolReturnToNature from "../pool/return-to-nature.js";
+import _poolReverberation from "../pool/reverberation.js";
 import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
@@ -997,6 +1001,7 @@ const shard: CardShard = {
     _poolCollectorOuphe,
     _poolColossapede,
     _poolComaVeil,
+    _poolComeuppance,
     _poolConclaveCavalier,
     _poolConduitOfEmrakul,
     _poolConfrontTheUnknown,
@@ -1271,6 +1276,7 @@ const shard: CardShard = {
     _poolLionheartMaverick,
     _poolLiquimetalCoating,
     _poolLitaMechanicalEngineer,
+    _poolLithomancersFocus,
     _poolLiveFast,
     _poolLivingLectern,
     _poolLlanowarBehemoth,
@@ -1388,6 +1394,7 @@ const shard: CardShard = {
     _poolPhantomFlock,
     _poolPhantomWurm,
     _poolPilferingImp,
+    _poolPinpointAvalanche,
     _poolPitilessCarnage,
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,
@@ -1442,6 +1449,7 @@ const shard: CardShard = {
     _poolRestoreWithEmpathy,
     _poolResurrectionOrb,
     _poolReturnToNature,
+    _poolReverberation,
     _poolRevokeExistence,
     _poolRhoxFaithmender,
     _poolRhoxVeteran,

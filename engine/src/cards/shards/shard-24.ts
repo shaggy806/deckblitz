@@ -174,6 +174,7 @@ import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
 import _poolDaughterOfAutumn from "../pool/daughter-of-autumn.js";
+import _poolDauntingDefender from "../pool/daunting-defender.js";
 import _poolDauthiHorror from "../pool/dauthi-horror.js";
 import _poolDawnsLightArcher from "../pool/dawns-light-archer.js";
 import _poolDeadReveler from "../pool/dead-reveler.js";
@@ -218,6 +219,7 @@ import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
+import _poolEndure from "../pool/endure.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEnigmaEidolon from "../pool/enigma-eidolon.js";
 import _poolEnsnaredByTheMara from "../pool/ensnared-by-the-mara.js";
@@ -411,6 +413,7 @@ import _poolMarshCrocodile from "../pool/marsh-crocodile.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
+import _poolMazeOfIth from "../pool/maze-of-ith.js";
 import _poolMeganticSliver from "../pool/megantic-sliver.js";
 import _poolMeletisAstronomer from "../pool/meletis-astronomer.js";
 import _poolMemnarch from "../pool/memnarch.js";
@@ -1016,6 +1019,7 @@ const shard: CardShard = {
     _poolDarksteelJuggernaut,
     _poolDarksteelPlate,
     _poolDaughterOfAutumn,
+    _poolDauntingDefender,
     _poolDauthiHorror,
     _poolDawnsLightArcher,
     _poolDeadReveler,
@@ -1060,6 +1064,7 @@ const shard: CardShard = {
     _poolElvishHunter,
     _poolElvishVisionary,
     _poolEndoskeleton,
+    _poolEndure,
     _poolEnergyFlux,
     _poolEnigmaEidolon,
     _poolEnsnaredByTheMara,
@@ -1253,6 +1258,7 @@ const shard: CardShard = {
     _poolMasterSymmetrist,
     _poolMausoleumGuard,
     _poolMausoleumSecrets,
+    _poolMazeOfIth,
     _poolMeganticSliver,
     _poolMeletisAstronomer,
     _poolMemnarch,

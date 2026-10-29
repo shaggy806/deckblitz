@@ -183,6 +183,7 @@ import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDeepFreeze from "../pool/deep-freeze.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
+import _poolDefendTheHearth from "../pool/defend-the-hearth.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDeicide from "../pool/deicide.js";
 import _poolDelete from "../pool/delete.js";
@@ -271,6 +272,7 @@ import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasMight from "../pool/gaeas-might.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
+import _poolGaladhrimAmbush from "../pool/galadhrim-ambush.js";
 import _poolGarrukRelentless from "../pool/garruk-relentless.js";
 import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
@@ -461,6 +463,7 @@ import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMorgueBurst from "../pool/morgue-burst.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
+import _poolMtendaLion from "../pool/mtenda-lion.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
@@ -552,6 +555,7 @@ import _poolRelentlessPursuit from "../pool/relentless-pursuit.js";
 import _poolRelentlessRohirrim from "../pool/relentless-rohirrim.js";
 import _poolRenegadeDoppelganger from "../pool/renegade-doppelganger.js";
 import _poolRenegadesGetaway from "../pool/renegades-getaway.js";
+import _poolRepelTheAbominable from "../pool/repel-the-abominable.js";
 import _poolReptilianRecruiter from "../pool/reptilian-recruiter.js";
 import _poolResoundingWave from "../pool/resounding-wave.js";
 import _poolResplendentAngel from "../pool/resplendent-angel.js";
@@ -1032,6 +1036,7 @@ const shard: CardShard = {
     _poolDecodeTransmissions,
     _poolDeepFreeze,
     _poolDefendTheCelestus,
+    _poolDefendTheHearth,
     _poolDefensiveStance,
     _poolDeicide,
     _poolDelete,
@@ -1120,6 +1125,7 @@ const shard: CardShard = {
     _poolFurious,
     _poolGaeasMight,
     _poolGaeasSkyfolk,
+    _poolGaladhrimAmbush,
     _poolGarrukRelentless,
     _poolGarrulousSycophant,
     _poolGatstafRavagers,
@@ -1310,6 +1316,7 @@ const shard: CardShard = {
     _poolMoorFiend,
     _poolMorgueBurst,
     _poolMouserMarkIii,
+    _poolMtendaLion,
     _poolMulch,
     _poolMutagenManLivingOoze,
     _poolNagaVitalist,
@@ -1401,6 +1408,7 @@ const shard: CardShard = {
     _poolRelentlessRohirrim,
     _poolRenegadeDoppelganger,
     _poolRenegadesGetaway,
+    _poolRepelTheAbominable,
     _poolReptilianRecruiter,
     _poolResoundingWave,
     _poolResplendentAngel,

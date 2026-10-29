@@ -82,6 +82,7 @@ import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
 import _poolBogHoodlums from "../pool/bog-hoodlums.js";
 import _poolBogbrewWitch from "../pool/bogbrew-witch.js";
+import _poolBonecrusherGiant from "../pool/bonecrusher-giant.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
@@ -576,6 +577,7 @@ import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
 import _poolRuthlessDisposal from "../pool/ruthless-disposal.js";
 import _poolSafeHaven from "../pool/safe-haven.js";
+import _poolSafePassage from "../pool/safe-passage.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
 import _poolSaguArcher from "../pool/sagu-archer.js";
 import _poolSahagin from "../pool/sahagin.js";
@@ -817,6 +819,7 @@ import _poolWhipcorder from "../pool/whipcorder.js";
 import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
 import _poolWibblyWobblyTimeyWimey from "../pool/wibbly-wobbly-timey-wimey.js";
 import _poolWildCeratok from "../pool/wild-ceratok.js";
+import _poolWildSlash from "../pool/wild-slash.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWildbornPreserver from "../pool/wildborn-preserver.js";
 import _poolWindKinRaiders from "../pool/wind-kin-raiders.js";
@@ -933,6 +936,7 @@ const shard: CardShard = {
     _poolBoarUmbra,
     _poolBogHoodlums,
     _poolBogbrewWitch,
+    _poolBonecrusherGiant,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
     _poolBrainInAJar,
@@ -1427,6 +1431,7 @@ const shard: CardShard = {
     _poolRumblingSlum,
     _poolRuthlessDisposal,
     _poolSafeHaven,
+    _poolSafePassage,
     _poolSageEyeHarrier,
     _poolSaguArcher,
     _poolSahagin,
@@ -1668,6 +1673,7 @@ const shard: CardShard = {
     _poolWhisperOfTheDross,
     _poolWibblyWobblyTimeyWimey,
     _poolWildCeratok,
+    _poolWildSlash,
     _poolWildUnraveling,
     _poolWildbornPreserver,
     _poolWindKinRaiders,

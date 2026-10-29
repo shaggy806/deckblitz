@@ -40,6 +40,7 @@ import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
 import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
+import _poolArmamentOfNyx from "../pool/armament-of-nyx.js";
 import _poolArmistice from "../pool/armistice.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
@@ -563,12 +564,14 @@ import _poolReject from "../pool/reject.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
 import _poolReplicationSpecialist from "../pool/replication-specialist.js";
 import _poolRequiemAngel from "../pool/requiem-angel.js";
+import _poolRescueRetriever from "../pool/rescue-retriever.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRetributionOfTheMeek from "../pool/retribution-of-the-meek.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
 import _poolRighteousness from "../pool/righteousness.js";
+import _poolRiotControl from "../pool/riot-control.js";
 import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiphookRaider from "../pool/riphook-raider.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
@@ -702,6 +705,7 @@ import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
 import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
+import _poolTheWanderer from "../pool/the-wanderer.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
 import _poolThornbiteStaff from "../pool/thornbite-staff.js";
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolArchangel,
     _poolArcusAcolyte,
     _poolAriaOfFlame,
+    _poolArmamentOfNyx,
     _poolArmistice,
     _poolArmoredGriffin,
     _poolArmoredScrapgorger,
@@ -1388,12 +1393,14 @@ const shard: CardShard = {
     _poolRelicRetriever,
     _poolReplicationSpecialist,
     _poolRequiemAngel,
+    _poolRescueRetriever,
     _poolRestlessAnchorage,
     _poolRetributionOfTheMeek,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
     _poolRighteousness,
+    _poolRiotControl,
     _poolRiotGear,
     _poolRiphookRaider,
     _poolRiptideCrab,
@@ -1527,6 +1534,7 @@ const shard: CardShard = {
     _poolTheDeathOfGwenStacy,
     _poolTheFallOfLordKonda,
     _poolTheGooseMother,
+    _poolTheWanderer,
     _poolThopterEngineer,
     _poolThopterFabricator,
     _poolThornbiteStaff,

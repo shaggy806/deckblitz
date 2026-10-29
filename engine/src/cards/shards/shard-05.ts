@@ -399,6 +399,7 @@ import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
+import _poolIthHighArcanist from "../pool/ith-high-arcanist.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJaggedPoppet from "../pool/jagged-poppet.js";
@@ -678,6 +679,7 @@ import _poolStonySilence from "../pool/stony-silence.js";
 import _poolStormFront from "../pool/storm-front.js";
 import _poolStorytellerPixie from "../pool/storyteller-pixie.js";
 import _poolStudyHall from "../pool/study-hall.js";
+import _poolSubdue from "../pool/subdue.js";
 import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSuddenEdict from "../pool/sudden-edict.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
@@ -1221,6 +1223,7 @@ const shard: CardShard = {
     _poolIrohTeaMaster,
     _poolIsaoEnlightenedBushi,
     _poolIsolationCell,
+    _poolIthHighArcanist,
     _poolIzzetChemister,
     _poolJacesSanctum,
     _poolJaggedPoppet,
@@ -1500,6 +1503,7 @@ const shard: CardShard = {
     _poolStormFront,
     _poolStorytellerPixie,
     _poolStudyHall,
+    _poolSubdue,
     _poolSuburbanSanctuary,
     _poolSuddenEdict,
     _poolSugarRush,

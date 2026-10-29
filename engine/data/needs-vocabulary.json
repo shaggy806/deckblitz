@@ -1974,18 +1974,18 @@
   },
   "decision:two-any-number-groups": {
    "family": "decision:variable-target-count",
-   "example": "Filigree Vector: 'a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts' \u2014 two any-number groups in one list (one per list, always last)"
+   "example": "Filigree Vector: 'a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts' — two any-number groups in one list (one per list, always last)"
   },
   "decision:spell-target-count-amount": {
    "family": "decision:variable-target-count",
-   "example": "Comet Storm: 'choose any target, then choose another target for each time this spell was kicked' \u2014 a spell's group sized by an amount other than X (only abilities read amounts)"
+   "example": "Comet Storm: 'choose any target, then choose another target for each time this spell was kicked' — a spell's group sized by an amount other than X (only abilities read amounts)"
   },
   "filter:without-mana-abilities": {
-   "example": "Midnight Arsonist: 'destroy up to X target artifacts without mana abilities' \u2014 no filter reads whether a permanent has an activated or triggered mana ability"
+   "example": "Midnight Arsonist: 'destroy up to X target artifacts without mana abilities' — no filter reads whether a permanent has an activated or triggered mana ability"
   },
   "effect:opponents-with-poison-count": {
    "family": "effect:amount-new-variants",
-   "example": "Glissa's Retriever: 'X is the number of opponents who have three or more poison counters' \u2014 a count of players meeting a poison-counter test"
+   "example": "Glissa's Retriever: 'X is the number of opponents who have three or more poison counters' — a count of players meeting a poison-counter test"
   },
   "decision:name-a-card": {
    "example": "Demonic Consultation: \"Choose a card name.\"",
@@ -14289,6 +14289,96 @@
    "family": "effect:cast-during-resolution",
    "description": "A cast-now offer limited to once each turn, the turn's use spent only when the card is actually cast ('look at the top card … you may cast it … Do this only once each turn').",
    "example": "Planetarium of Wan Shi Tong: whenever you scry or surveil, look at the top card and you may cast it free, only once each turn — spent only by a cast."
+  },
+  "replacement:prevention-reflexive-trigger": {
+   "family": "replacement:damage-modification",
+   "description": "'When damage is prevented this way, … deals that much damage to any target': a reflexive trigger with its own target, after a prevention (rule 603.12)",
+   "example": "Phyrexian Vindicator"
+  },
+  "replacement:prevent-dynamic-amount": {
+   "family": "replacement:damage-modification",
+   "description": "A static 'prevent X of that damage' where X is counted as the damage would be dealt (the creatures you control); preventAmount is a fixed number",
+   "example": "Shield of the Avatar"
+  },
+  "effect:damage-cant-be-redirected": {
+   "family": "replacement:damage-modification",
+   "description": "Damage that 'can't be prevented or dealt instead to another permanent or player': no redirection may apply",
+   "example": "Lava Burst"
+  },
+  "static:damage-not-removed-in-cleanup": {
+   "family": "replacement:damage-modification",
+   "description": "'Damage isn't removed from this creature during cleanup steps' (rule 514.2)",
+   "example": "Ancient Adamantoise"
+  },
+  "effect:players-cant-gain-life-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "description": "'Players can't gain life this turn' as a one-shot effect; only the static would-gain-life replacement exists",
+   "example": "Skullcrack"
+  },
+  "decision:optional-redirect": {
+   "family": "replacement:damage-modification",
+   "description": "'You may have that damage dealt to you instead': a redirection its controller chooses per damage event",
+   "example": "Blood of the Martyr"
+  },
+  "decision:may-in-prevention-followup": {
+   "family": "replacement:damage-modification",
+   "description": "A 'you may' inside a prevention's immediate follow-up, which runs inside dealDamage with no decision",
+   "example": "Channel Harm"
+  },
+  "effect:prevent-damage-each-matching-at-resolution": {
+   "family": "replacement:damage-modification",
+   "description": "Prevention over the permanents matching a filter as it resolves (a fixed set), not as damage would be dealt",
+   "example": "Mutational Advantage"
+  },
+  "amount:damage-that-would-be-dealt": {
+   "family": "replacement:damage-modification",
+   "description": "'Prevent that damage and put that many counters' counting the damage even when it can't be prevented (the ruling); a damage-rule's then counts only damage prevented",
+   "example": "Gatta and Luzzu"
+  },
+  "effect:duration-this-combat": {
+   "family": "effect:delayed-trigger-extensions",
+   "description": "A one-shot effect lasting 'this combat', ending at end of combat",
+   "example": "Ria Ivor, Bane of Bladehold"
+  },
+  "effect:chosen-source-shield-prevent-half": {
+   "family": "replacement:damage-modification",
+   "description": "A source-of-your-choice shield that prevents half the damage, rounded down",
+   "example": "Dark Sphere"
+  },
+  "effect:chosen-source-shield-prevent-all-but": {
+   "family": "replacement:damage-modification",
+   "description": "A source-of-your-choice shield that prevents all but 1, combat only",
+   "example": "Forcefield"
+  },
+  "decision:prevention-shield-allocation": {
+   "family": "replacement:damage-modification",
+   "description": "Rule 615.7: the protected player chooses which damage an amount shield prevents when it can't cover all of it (several sources or recipients at once)",
+   "example": "Divine Deflection"
+  },
+  "condition:prevented-source-filter": {
+   "family": "replacement:damage-modification",
+   "description": "A prevention follow-up conditioned on the prevented damage's source ('if damage from a red source is prevented this way')",
+   "example": "Honorable Passage"
+  },
+  "effect:return-sacrificed-card-with-counters": {
+   "family": "effect:this-way-results",
+   "description": "'Return that card to the battlefield under its owner's control with three +1/+1 counters' after a may-sacrifice",
+   "example": "Heart-Shaped Herb"
+  },
+  "replacement:prevention-follow-up-on-recipient": {
+   "family": "replacement:damage-modification",
+   "description": "A static prevention's follow-up naming the creature the damage was prevented to ('put a +1/+1 counter on that creature')",
+   "example": "Vigor"
+  },
+  "effect:must-be-blocked-by-opponents": {
+   "family": "static:combat-restriction-extensions",
+   "description": "'All creatures your opponents control able to block that creature do so': must-be-blocked limited to opponents' creatures",
+   "example": "You Look Upon the Tarrasque"
+  },
+  "decision:optional-prevention": {
+   "family": "replacement:damage-modification",
+   "description": "'You may prevent X of that damage', a prevention its controller chooses per event",
+   "example": "Battletide Alchemist"
   }
  },
  "groups": [

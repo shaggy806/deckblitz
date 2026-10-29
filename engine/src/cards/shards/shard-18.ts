@@ -97,6 +97,7 @@ import _poolCavalcadeOfCalamity from "../pool/cavalcade-of-calamity.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChaliceOfTheVoid from "../pool/chalice-of-the-void.js";
+import _poolChameleonBlur from "../pool/chameleon-blur.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
@@ -134,6 +135,7 @@ import _poolCrimsonRoc from "../pool/crimson-roc.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
 import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
+import _poolCrystalBarricade from "../pool/crystal-barricade.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolCurseOfUnbinding from "../pool/curse-of-unbinding.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
@@ -461,6 +463,7 @@ import _poolNecravolver from "../pool/necravolver.js";
 import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
+import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
@@ -469,10 +472,12 @@ import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOffBalance from "../pool/off-balance.js";
 import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
+import _poolOldFatSpiderCantSeeMe from "../pool/old-fat-spider-cant-see-me.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
+import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrderedMigration from "../pool/ordered-migration.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -508,6 +513,7 @@ import _poolPredatoryWurm from "../pool/predatory-wurm.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
 import _poolProjektorInspector from "../pool/projektor-inspector.js";
+import _poolProtectionOfTheHekma from "../pool/protection-of-the-hekma.js";
 import _poolProtocolKnight from "../pool/protocol-knight.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
@@ -577,6 +583,7 @@ import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
 import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
 import _poolSearingMeditation from "../pool/searing-meditation.js";
+import _poolSecurityBlockade from "../pool/security-blockade.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
@@ -650,6 +657,7 @@ import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
 import _poolStruggle from "../pool/struggle.js";
 import _poolStuffedBear from "../pool/stuffed-bear.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
+import _poolSummonAlexander from "../pool/summon-alexander.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
@@ -672,6 +680,7 @@ import _poolTemporalMastery from "../pool/temporal-mastery.js";
 import _poolTendrilsOfCorruption from "../pool/tendrils-of-corruption.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
+import _poolTestOfFaith from "../pool/test-of-faith.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolThatcherRevolt from "../pool/thatcher-revolt.js";
@@ -922,6 +931,7 @@ const shard: CardShard = {
     _poolCelestialArmor,
     _poolCelestialRegulator,
     _poolChaliceOfTheVoid,
+    _poolChameleonBlur,
     _poolChampionsOfThePerfect,
     _poolChandrasPyreling,
     _poolChangeOfPlans,
@@ -959,6 +969,7 @@ const shard: CardShard = {
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
     _poolCrushOfTentacles,
+    _poolCrystalBarricade,
     _poolCrystallineGiant,
     _poolCurseOfUnbinding,
     _poolCyclopsSuperconductor,
@@ -1286,6 +1297,7 @@ const shard: CardShard = {
     _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
+    _poolNineLives,
     _poolNineTailWhiteFox,
     _poolNovelNunchaku,
     _poolNykthosShrineToNyx,
@@ -1294,10 +1306,12 @@ const shard: CardShard = {
     _poolOffBalance,
     _poolOgreJailbreaker,
     _poolOjutaiSoulOfWinter,
+    _poolOldFatSpiderCantSeeMe,
     _poolOmenportVigilante,
     _poolOnwardVictory,
     _poolOpalineSliver,
     _poolOranRiefInvoker,
+    _poolOrbsOfWarding,
     _poolOrderedMigration,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
@@ -1333,6 +1347,7 @@ const shard: CardShard = {
     _poolPrimalAmulet,
     _poolProftsEideticMemory,
     _poolProjektorInspector,
+    _poolProtectionOfTheHekma,
     _poolProtocolKnight,
     _poolPsychosisCrawler,
     _poolPutrefy,
@@ -1402,6 +1417,7 @@ const shard: CardShard = {
     _poolScrap,
     _poolSeaGodsRevenge,
     _poolSearingMeditation,
+    _poolSecurityBlockade,
     _poolSelesnyaKeyrune,
     _poolSentinelSpider,
     _poolSeveredStrands,
@@ -1475,6 +1491,7 @@ const shard: CardShard = {
     _poolStruggle,
     _poolStuffedBear,
     _poolSuffocatingFumes,
+    _poolSummonAlexander,
     _poolSummonKujata,
     _poolSunhomeEnforcer,
     _poolSuqataLancer,
@@ -1497,6 +1514,7 @@ const shard: CardShard = {
     _poolTendrilsOfCorruption,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
+    _poolTestOfFaith,
     _poolThallidSoothsayer,
     _poolThassaDeepDwelling,
     _poolThatcherRevolt,

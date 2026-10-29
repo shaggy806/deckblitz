@@ -8,6 +8,7 @@ import _poolAbbeyGriffin from "../pool/abbey-griffin.js";
 import _poolAbzanKinGuard from "../pool/abzan-kin-guard.js";
 import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAccursedHorde from "../pool/accursed-horde.js";
+import _poolAegisOfHonor from "../pool/aegis-of-honor.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
@@ -426,6 +427,7 @@ import _poolMirrorRoom from "../pool/mirror-room.js";
 import _poolMischiefAndMayhem from "../pool/mischief-and-mayhem.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
+import _poolMjolnirHammerOfThor from "../pool/mjolnir-hammer-of-thor.js";
 import _poolModeration from "../pool/moderation.js";
 import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
@@ -463,6 +465,7 @@ import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
 import _poolOmitVariables from "../pool/omit-variables.js";
 import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOneDozenEyes from "../pool/one-dozen-eyes.js";
+import _poolOraclesAttendants from "../pool/oracles-attendants.js";
 import _poolOrchardSpirit from "../pool/orchard-spirit.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
@@ -741,6 +744,7 @@ import _poolVaultRobber from "../pool/vault-robber.js";
 import _poolVedalkenHumiliator from "../pool/vedalken-humiliator.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
+import _poolVeteranBodyguard from "../pool/veteran-bodyguard.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
@@ -828,6 +832,7 @@ const shard: CardShard = {
     _poolAbzanKinGuard,
     _poolAccordersShield,
     _poolAccursedHorde,
+    _poolAegisOfHonor,
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAetherInspector,
@@ -1246,6 +1251,7 @@ const shard: CardShard = {
     _poolMischiefAndMayhem,
     _poolMishrasFactory,
     _poolMithrilCoat,
+    _poolMjolnirHammerOfThor,
     _poolModeration,
     _poolMoggSquad,
     _poolMomentOfHeroism,
@@ -1283,6 +1289,7 @@ const shard: CardShard = {
     _poolOmitVariables,
     _poolOnduSkyruins,
     _poolOneDozenEyes,
+    _poolOraclesAttendants,
     _poolOrchardSpirit,
     _poolOrcishLumberjack,
     _poolOrphansOfTheWheat,
@@ -1561,6 +1568,7 @@ const shard: CardShard = {
     _poolVedalkenHumiliator,
     _poolVengeance,
     _poolVengefulRebel,
+    _poolVeteranBodyguard,
     _poolViashinoSandsprinter,
     _poolVibrantOutburst,
     _poolVictorTimelyWilyTycoon,

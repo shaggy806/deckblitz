@@ -433,6 +433,7 @@ import _poolKitesail from "../pool/kitesail.js";
 import _poolKithkinDaggerdare from "../pool/kithkin-daggerdare.js";
 import _poolKittKantoMayhemDiva from "../pool/kitt-kanto-mayhem-diva.js";
 import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
+import _poolKjeldoranRoyalGuard from "../pool/kjeldoran-royal-guard.js";
 import _poolKnowledgeAndPower from "../pool/knowledge-and-power.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKondaLordOfEiganjo from "../pool/konda-lord-of-eiganjo.js";
@@ -1323,6 +1324,7 @@ const shard: CardShard = {
     _poolKithkinDaggerdare,
     _poolKittKantoMayhemDiva,
     _poolKjeldoranOutrider,
+    _poolKjeldoranRoyalGuard,
     _poolKnowledgeAndPower,
     _poolKodamaOfTheEastTree,
     _poolKondaLordOfEiganjo,

@@ -1,0 +1,1503 @@
+{
+  "batch": "B250",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the damage-modification family (replacement:damage-redirection + replacement:redirect-next-damage-event; the prevent-all-damage and prevent-combat-damage filter groups; the prevention follow-up group; the computed-amount group; the attached group; the by-source group; effect:damage-cant-be-prevented + static:damage-cant-be-prevented; effect:prevent-combat-damage-by-target)",
+  "authored": [
+    {
+      "name": "Acolyte's Reward",
+      "files": [
+        "engine/src/cards/pool/acolytes-reward.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aegis of Honor",
+      "files": [
+        "engine/src/cards/pool/aegis-of-honor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Armament of Nyx",
+      "files": [
+        "engine/src/cards/pool/armament-of-nyx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arrow Storm",
+      "files": [
+        "engine/src/cards/pool/arrow-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacyn, Guardian Angel",
+      "files": [
+        "engine/src/cards/pool/avacyn-guardian-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Azorius Ploy",
+      "files": [
+        "engine/src/cards/pool/azorius-ploy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Barbed Wire",
+      "files": [
+        "engine/src/cards/pool/barbed-wire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blinding Fog",
+      "files": [
+        "engine/src/cards/pool/blinding-fog.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bonecrusher Giant // Stomp",
+      "files": [
+        "engine/src/cards/pool/bonecrusher-giant.ts",
+        "engine/src/cards/pool/stomp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boros Fury-Shield",
+      "files": [
+        "engine/src/cards/pool/boros-fury-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Callous Giant",
+      "files": [
+        "engine/src/cards/pool/callous-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Candletrap",
+      "files": [
+        "engine/src/cards/pool/candletrap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chameleon Blur",
+      "files": [
+        "engine/src/cards/pool/chameleon-blur.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Circle of Solace",
+      "files": [
+        "engine/src/cards/pool/circle-of-solace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Combust",
+      "files": [
+        "engine/src/cards/pool/combust.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Comeuppance",
+      "files": [
+        "engine/src/cards/pool/comeuppance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Commencement of Festivities",
+      "files": [
+        "engine/src/cards/pool/commencement-of-festivities.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Crystal Barricade",
+      "files": [
+        "engine/src/cards/pool/crystal-barricade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crystal Fragments // Summon: Alexander",
+      "files": [
+        "engine/src/cards/pool/crystal-fragments.ts",
+        "engine/src/cards/pool/summon-alexander.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daunting Defender",
+      "files": [
+        "engine/src/cards/pool/daunting-defender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Defang",
+      "files": [
+        "engine/src/cards/pool/defang.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Defend the Hearth",
+      "files": [
+        "engine/src/cards/pool/defend-the-hearth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deflecting Palm",
+      "files": [
+        "engine/src/cards/pool/deflecting-palm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deftblade Elite",
+      "files": [
+        "engine/src/cards/pool/deftblade-elite.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Divine Light",
+      "files": [
+        "engine/src/cards/pool/divine-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Djeru, With Eyes Open",
+      "files": [
+        "engine/src/cards/pool/djeru-with-eyes-open.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dolmen Gate",
+      "files": [
+        "engine/src/cards/pool/dolmen-gate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dovin, Hand of Control",
+      "files": [
+        "engine/src/cards/pool/dovin-hand-of-control.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Druid's Deliverance",
+      "files": [
+        "engine/src/cards/pool/druids-deliverance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eerie Interference",
+      "files": [
+        "engine/src/cards/pool/eerie-interference.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Empyrial Archangel",
+      "files": [
+        "engine/src/cards/pool/empyrial-archangel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Endure",
+      "files": [
+        "engine/src/cards/pool/endure.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ethereal Haze",
+      "files": [
+        "engine/src/cards/pool/ethereal-haze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ethersworn Shieldmage",
+      "files": [
+        "engine/src/cards/pool/ethersworn-shieldmage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Excruciator",
+      "files": [
+        "engine/src/cards/pool/excruciator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Falling Timber",
+      "files": [
+        "engine/src/cards/pool/falling-timber.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fend Off",
+      "files": [
+        "engine/src/cards/pool/fend-off.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Festival of the Guildpact",
+      "files": [
+        "engine/src/cards/pool/festival-of-the-guildpact.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flaring Pain",
+      "files": [
+        "engine/src/cards/pool/flaring-pain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forfend",
+      "files": [
+        "engine/src/cards/pool/forfend.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Frenzied Baloth",
+      "files": [
+        "engine/src/cards/pool/frenzied-baloth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Galadhrim Ambush",
+      "files": [
+        "engine/src/cards/pool/galadhrim-ambush.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gaseous Form",
+      "files": [
+        "engine/src/cards/pool/gaseous-form.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "General's Kabuto",
+      "files": [
+        "engine/src/cards/pool/generals-kabuto.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ghostly Possession",
+      "files": [
+        "engine/src/cards/pool/ghostly-possession.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghosts of the Innocent",
+      "files": [
+        "engine/src/cards/pool/ghosts-of-the-innocent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gisela, Blade of Goldnight",
+      "files": [
+        "engine/src/cards/pool/gisela-blade-of-goldnight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glarecaster",
+      "files": [
+        "engine/src/cards/pool/glarecaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Psychopath",
+      "files": [
+        "engine/src/cards/pool/goblin-psychopath.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gossamer Chains",
+      "files": [
+        "engine/src/cards/pool/gossamer-chains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guardian Seraph",
+      "files": [
+        "engine/src/cards/pool/guardian-seraph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hallow",
+      "files": [
+        "engine/src/cards/pool/hallow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Haze Frog",
+      "files": [
+        "engine/src/cards/pool/haze-frog.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heart of Light",
+      "files": [
+        "engine/src/cards/pool/heart-of-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hedron-Field Purists",
+      "files": [
+        "engine/src/cards/pool/hedron-field-purists.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hyperion, Supreme Hero",
+      "files": [
+        "engine/src/cards/pool/hyperion-supreme-hero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ignoble Soldier",
+      "files": [
+        "engine/src/cards/pool/ignoble-soldier.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Immortal Coil",
+      "files": [
+        "engine/src/cards/pool/immortal-coil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Impractical Joke",
+      "files": [
+        "engine/src/cards/pool/impractical-joke.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inkshield",
+      "files": [
+        "engine/src/cards/pool/inkshield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inquisitor's Flail",
+      "files": [
+        "engine/src/cards/pool/inquisitors-flail.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Inviolability",
+      "files": [
+        "engine/src/cards/pool/inviolability.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ith, High Arcanist",
+      "files": [
+        "engine/src/cards/pool/ith-high-arcanist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Karona's Zealot",
+      "files": [
+        "engine/src/cards/pool/karonas-zealot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kiora, the Crashing Wave",
+      "files": [
+        "engine/src/cards/pool/kiora-the-crashing-wave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kjeldoran Royal Guard",
+      "files": [
+        "engine/src/cards/pool/kjeldoran-royal-guard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Chant",
+      "files": [
+        "engine/src/cards/pool/kor-chant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Dirge",
+      "files": [
+        "engine/src/cards/pool/kor-dirge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kor Haven",
+      "files": [
+        "engine/src/cards/pool/kor-haven.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lady Evangela",
+      "files": [
+        "engine/src/cards/pool/lady-evangela.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Leyline of Punishment",
+      "files": [
+        "engine/src/cards/pool/leyline-of-punishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lightning Surge",
+      "files": [
+        "engine/src/cards/pool/lightning-surge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lithomancer's Focus",
+      "files": [
+        "engine/src/cards/pool/lithomancers-focus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loafing Giant",
+      "files": [
+        "engine/src/cards/pool/loafing-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Losheel, Clockwork Scholar",
+      "files": [
+        "engine/src/cards/pool/losheel-clockwork-scholar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loyal Unicorn",
+      "files": [
+        "engine/src/cards/pool/loyal-unicorn.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Luminesce",
+      "files": [
+        "engine/src/cards/pool/luminesce.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magebane Armor",
+      "files": [
+        "engine/src/cards/pool/magebane-armor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Martyrs of Korlis",
+      "files": [
+        "engine/src/cards/pool/martyrs-of-korlis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Maze of Ith",
+      "files": [
+        "engine/src/cards/pool/maze-of-ith.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mirror Strike",
+      "files": [
+        "engine/src/cards/pool/mirror-strike.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mirrorwood Treefolk",
+      "files": [
+        "engine/src/cards/pool/mirrorwood-treefolk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mjölnir, Hammer of Thor",
+      "files": [
+        "engine/src/cards/pool/mjolnir-hammer-of-thor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moonlight Geist",
+      "files": [
+        "engine/src/cards/pool/moonlight-geist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Morningtide's Light",
+      "files": [
+        "engine/src/cards/pool/morningtides-light.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mtenda Lion",
+      "files": [
+        "engine/src/cards/pool/mtenda-lion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Multiclass Baldric",
+      "files": [
+        "engine/src/cards/pool/multiclass-baldric.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Muzzle",
+      "files": [
+        "engine/src/cards/pool/muzzle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nine Lives",
+      "files": [
+        "engine/src/cards/pool/nine-lives.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Obscuring Haze",
+      "files": [
+        "engine/src/cards/pool/obscuring-haze.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Old Fat Spider Can't See Me",
+      "files": [
+        "engine/src/cards/pool/old-fat-spider-cant-see-me.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oracle's Attendants",
+      "files": [
+        "engine/src/cards/pool/oracles-attendants.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Orbs of Warding",
+      "files": [
+        "engine/src/cards/pool/orbs-of-warding.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pack Leader",
+      "files": [
+        "engine/src/cards/pool/pack-leader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Palisade Giant",
+      "files": [
+        "engine/src/cards/pool/palisade-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Panther Habit",
+      "files": [
+        "engine/src/cards/pool/panther-habit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pariah",
+      "files": [
+        "engine/src/cards/pool/pariah.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pariah's Shield",
+      "files": [
+        "engine/src/cards/pool/pariahs-shield.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pinpoint Avalanche",
+      "files": [
+        "engine/src/cards/pool/pinpoint-avalanche.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prismatic Ward",
+      "files": [
+        "engine/src/cards/pool/prismatic-ward.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Protection of the Hekma",
+      "files": [
+        "engine/src/cards/pool/protection-of-the-hekma.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Protector of the Crown",
+      "files": [
+        "engine/src/cards/pool/protector-of-the-crown.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pyrewood Gearhulk",
+      "files": [
+        "engine/src/cards/pool/pyrewood-gearhulk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Questing Beast",
+      "files": [
+        "engine/src/cards/pool/questing-beast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Reflect Damage",
+      "files": [
+        "engine/src/cards/pool/reflect-damage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Repel the Abominable",
+      "files": [
+        "engine/src/cards/pool/repel-the-abominable.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rescue Retriever",
+      "files": [
+        "engine/src/cards/pool/rescue-retriever.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Resistance Fighter",
+      "files": [
+        "engine/src/cards/pool/resistance-fighter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Restrain",
+      "files": [
+        "engine/src/cards/pool/restrain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reverberation",
+      "files": [
+        "engine/src/cards/pool/reverberation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Riot Control",
+      "files": [
+        "engine/src/cards/pool/riot-control.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Safe Passage",
+      "files": [
+        "engine/src/cards/pool/safe-passage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Safeguard",
+      "files": [
+        "engine/src/cards/pool/safeguard.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sandskin",
+      "files": [
+        "engine/src/cards/pool/sandskin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saving Grace",
+      "files": [
+        "engine/src/cards/pool/saving-grace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Security Blockade",
+      "files": [
+        "engine/src/cards/pool/security-blockade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Serene Sunset",
+      "files": [
+        "engine/src/cards/pool/serene-sunset.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shield of the Realm",
+      "files": [
+        "engine/src/cards/pool/shield-of-the-realm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shimian Night Stalker",
+      "files": [
+        "engine/src/cards/pool/shimian-night-stalker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sivvi's Ruse",
+      "files": [
+        "engine/src/cards/pool/sivvis-ruse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sivvi's Valor",
+      "files": [
+        "engine/src/cards/pool/sivvis-valor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soltari Guerrillas",
+      "files": [
+        "engine/src/cards/pool/soltari-guerrillas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Songstitcher",
+      "files": [
+        "engine/src/cards/pool/songstitcher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sphere of Purity",
+      "files": [
+        "engine/src/cards/pool/sphere-of-purity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Subdue",
+      "files": [
+        "engine/src/cards/pool/subdue.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Surge of Salvation",
+      "files": [
+        "engine/src/cards/pool/surge-of-salvation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Take the Bait",
+      "files": [
+        "engine/src/cards/pool/take-the-bait.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Temper",
+      "files": [
+        "engine/src/cards/pool/temper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Temple Altisaur",
+      "files": [
+        "engine/src/cards/pool/temple-altisaur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Temporal Isolation",
+      "files": [
+        "engine/src/cards/pool/temporal-isolation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Terrifying Presence",
+      "files": [
+        "engine/src/cards/pool/terrifying-presence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Test of Faith",
+      "files": [
+        "engine/src/cards/pool/test-of-faith.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Wanderer",
+      "files": [
+        "engine/src/cards/pool/the-wanderer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thunderstaff",
+      "files": [
+        "engine/src/cards/pool/thunderstaff.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thwart the Enemy",
+      "files": [
+        "engine/src/cards/pool/thwart-the-enemy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Treacherous Link",
+      "files": [
+        "engine/src/cards/pool/treacherous-link.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Turn the Tables",
+      "files": [
+        "engine/src/cards/pool/turn-the-tables.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ultimate Magic: Holy",
+      "files": [
+        "engine/src/cards/pool/ultimate-magic-holy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unstable Footing",
+      "files": [
+        "engine/src/cards/pool/unstable-footing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urborg Phantom",
+      "files": [
+        "engine/src/cards/pool/urborg-phantom.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Urza's Armor",
+      "files": [
+        "engine/src/cards/pool/urzas-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urza's Rage",
+      "files": [
+        "engine/src/cards/pool/urzas-rage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vengeful Archon",
+      "files": [
+        "engine/src/cards/pool/vengeful-archon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Veteran Bodyguard",
+      "files": [
+        "engine/src/cards/pool/veteran-bodyguard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Warning",
+      "files": [
+        "engine/src/cards/pool/warning.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Weathered Bodyguards",
+      "files": [
+        "engine/src/cards/pool/weathered-bodyguards.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wild Slash",
+      "files": [
+        "engine/src/cards/pool/wild-slash.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zealot il-Vec",
+      "files": [
+        "engine/src/cards/pool/zealot-il-vec.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Ajani Steadfast",
+      "needs": [
+        "effect:emblem-static-abilities"
+      ],
+      "why": "An emblem's damage replacement isn't read; only permanents' are."
+    },
+    {
+      "name": "Ajani's Aid",
+      "needs": [
+        "effect:prevent-combat-damage-by-chosen-creature"
+      ],
+      "why": "A creature chosen on resolution, not targeted; the chosen-source shield has no combat-only option."
+    },
+    {
+      "name": "Ancient Adamantoise",
+      "needs": [
+        "static:damage-not-removed-in-cleanup"
+      ],
+      "why": "\"Damage isn't removed from this creature during cleanup steps\"; its redirection is built."
+    },
+    {
+      "name": "Ascent of the Worthy",
+      "needs": [
+        "decision:choose-permanent"
+      ],
+      "why": "Chapters I and II \"choose a creature you control\" — a choice, not a target, for the redirect."
+    },
+    {
+      "name": "Battletide Alchemist",
+      "needs": [
+        "decision:optional-prevention"
+      ],
+      "why": "\"You may prevent X of that damage\", X the Clerics you control, per event."
+    },
+    {
+      "name": "Benalish Missionary",
+      "needs": [
+        "condition:blocked-creature-filter"
+      ],
+      "why": "Its damage-modification need is built; condition:blocked-creature-filter is still open."
+    },
+    {
+      "name": "Blood of the Martyr",
+      "needs": [
+        "decision:optional-redirect"
+      ],
+      "why": "\"You may have that damage dealt to you instead\", a choice per damage event."
+    },
+    {
+      "name": "Caduceus, Staff of Hermes",
+      "needs": [
+        "static:grant-static-ability"
+      ],
+      "why": "The equipped creature has the quoted prevention ability; it must go with the creature's abilities."
+    },
+    {
+      "name": "Call In a Professional",
+      "needs": [
+        "effect:players-cant-gain-life-this-turn"
+      ],
+      "why": "No one-shot \"players can't gain life this turn\"; the can't-be-prevented half is built."
+    },
+    {
+      "name": "Channel Harm",
+      "needs": [
+        "decision:may-in-prevention-followup"
+      ],
+      "why": "\"You may have Channel Harm deal that much damage\" — a may inside the prevention's immediate follow-up."
+    },
+    {
+      "name": "Chant of Vitu-Ghazi",
+      "needs": [
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "Its damage-modification need is built; amount:damage-prevented-this-way is still open."
+    },
+    {
+      "name": "Cover of Winter",
+      "needs": [
+        "replacement:prevent-n-damage-from-each-source"
+      ],
+      "why": "Prevents X (age counters) of each creature's combat damage, split across its recipients as you choose."
+    },
+    {
+      "name": "Dark Sphere",
+      "needs": [
+        "effect:chosen-source-shield-prevent-half"
+      ],
+      "why": "The chosen-source shield has no \"prevent half, rounded down\"."
+    },
+    {
+      "name": "Demonfire",
+      "needs": [
+        "static:self-uncounterable-if"
+      ],
+      "why": "Hellbent's \"this spell can't be countered\" is conditional; cantBeCountered is a plain boolean."
+    },
+    {
+      "name": "Demonic Torment",
+      "needs": [
+        "filter:enchanted-by-source"
+      ],
+      "why": "Its damage-modification need is built; filter:enchanted-by-source is still open."
+    },
+    {
+      "name": "Divine Deflection",
+      "needs": [
+        "decision:prevention-shield-allocation"
+      ],
+      "why": "Rule 615.7: you choose which damage across you and your permanents the X shield prevents."
+    },
+    {
+      "name": "Encircling Fissure",
+      "needs": [
+        "effect:prevent-combat-damage-by-target-players-creatures"
+      ],
+      "why": "A damage-rule's by filter can't name the creatures a targeted opponent controls."
+    },
+    {
+      "name": "Fear, Fire, Foes!",
+      "needs": [
+        "effect:damage-all-except-target"
+      ],
+      "why": "\"1 damage to each other creature with the same controller\" — damage-all has no exceptTarget."
+    },
+    {
+      "name": "Feint",
+      "needs": [
+        "filter:blocking-target-creature"
+      ],
+      "why": "Its damage-modification need is built; filter:blocking-target-creature is still open."
+    },
+    {
+      "name": "Flames of the Blood Hand",
+      "needs": [
+        "effect:target-player-gains-no-life-this-turn"
+      ],
+      "why": "Its damage-modification need is built; effect:target-player-gains-no-life-this-turn is still open."
+    },
+    {
+      "name": "Flaming Gambit",
+      "needs": [
+        "effect:choices-by-other-players"
+      ],
+      "why": "The damaged player or planeswalker's controller chooses to redirect the damage to a creature they control."
+    },
+    {
+      "name": "Forcefield",
+      "needs": [
+        "effect:chosen-source-shield-prevent-all-but"
+      ],
+      "why": "The chosen-source shield has no \"prevent all but 1\" or combat-only option."
+    },
+    {
+      "name": "Gatta and Luzzu",
+      "needs": [
+        "amount:damage-that-would-be-dealt"
+      ],
+      "why": "Its ruling gives counters for damage that can't be prevented; a damage-rule's then counts only damage prevented."
+    },
+    {
+      "name": "Gideon's Sacrifice",
+      "needs": [
+        "decision:choose-permanent"
+      ],
+      "why": "\"Choose a creature or planeswalker you control\" is a choice, not a target, for the redirect."
+    },
+    {
+      "name": "Guard Dogs",
+      "needs": [
+        "decision:choose-permanent"
+      ],
+      "why": "The permanent is chosen as it resolves, and the colour check reads it."
+    },
+    {
+      "name": "Harm's Way",
+      "needs": [
+        "decision:prevention-shield-allocation"
+      ],
+      "why": "Rule 615.7 and its ruling: you choose which 2 damage to redirect when one source hits several of your things at once."
+    },
+    {
+      "name": "Heart-Shaped Herb",
+      "needs": [
+        "effect:return-sacrificed-card-with-counters"
+      ],
+      "why": "\"Return that card to the battlefield under its owner's control with three +1/+1 counters\"."
+    },
+    {
+      "name": "Heroic Sacrifice",
+      "needs": [
+        "effect:delayed-trigger-own-targets"
+      ],
+      "why": "\"When that creature dies this turn, put its counters on up to one target creature you control\"."
+    },
+    {
+      "name": "Heroism",
+      "needs": [
+        "effect:unless-that-player"
+      ],
+      "why": "Its damage-modification need is built; effect:unless-that-player is still open."
+    },
+    {
+      "name": "Hidden Retreat",
+      "needs": [
+        "cost:put-card-from-hand-on-library-top"
+      ],
+      "why": "Its damage-modification need is built; cost:put-card-from-hand-on-library-top is still open."
+    },
+    {
+      "name": "Honorable Passage",
+      "needs": [
+        "condition:prevented-source-filter"
+      ],
+      "why": "\"If damage from a red source is prevented this way\"."
+    },
+    {
+      "name": "Insult // Injury",
+      "needs": [
+        "replacement:damage-multiplier-this-turn"
+      ],
+      "why": "Insult's \"a source you control … deals double this turn\" has the same gap; Injury alone is authorable but it's one card."
+    },
+    {
+      "name": "Isengard Unleashed",
+      "needs": [
+        "replacement:damage-multiplier-this-turn"
+      ],
+      "why": "No one-shot this-turn tripling limited to sources you control; player-effect damageTo reaches every source. The can't-be-prevented half is built."
+    },
+    {
+      "name": "Judgment of Alexander",
+      "needs": [
+        "replacement:damage-prevented-trigger"
+      ],
+      "why": "Its damage-modification need is built; replacement:damage-prevented-trigger is still open."
+    },
+    {
+      "name": "Kitsune Palliator",
+      "needs": [
+        "effect:prevent-next-damage-each-creature"
+      ],
+      "why": "A separate 1-damage shield on each creature and each player as it resolves."
+    },
+    {
+      "name": "Lava Burst",
+      "needs": [
+        "effect:damage-cant-be-redirected"
+      ],
+      "why": "Its damage to a creature can't be prevented or dealt instead to another permanent or player."
+    },
+    {
+      "name": "Lymph Sliver",
+      "needs": [
+        "static:grant-static-ability"
+      ],
+      "why": "Absorb is a granted keyword ability that must go with a Sliver's abilities."
+    },
+    {
+      "name": "Malignus",
+      "needs": [
+        "amount:highest-life-total"
+      ],
+      "why": "Its damage-modification need is built; amount:highest-life-total is still open."
+    },
+    {
+      "name": "Martyrdom",
+      "needs": [
+        "cost:activate-only-owner"
+      ],
+      "why": "The granted ability says \"Only you may activate this ability\"."
+    },
+    {
+      "name": "Mutational Advantage",
+      "needs": [
+        "effect:prevent-damage-each-matching-at-resolution"
+      ],
+      "why": "The ruling fixes the protected set as it resolves; a damage-rule's filter is asked as damage would be dealt."
+    },
+    {
+      "name": "New Way Forward",
+      "needs": [
+        "replacement:prevention-reflexive-trigger"
+      ],
+      "why": "\"When damage is prevented this way\" is a reflexive trigger using the stack, not the immediate \"if\" follow-up."
+    },
+    {
+      "name": "Nova Pentacle",
+      "needs": [
+        "effect:choices-by-other-players"
+      ],
+      "why": "An opponent chooses the creature the damage is dealt to."
+    },
+    {
+      "name": "Personal Incarnation",
+      "needs": [
+        "cost:activate-only-owner"
+      ],
+      "why": "Its damage-modification need is built; cost:activate-only-owner is still open."
+    },
+    {
+      "name": "Phyrexian Vindicator",
+      "needs": [
+        "replacement:prevention-reflexive-trigger"
+      ],
+      "why": "\"When damage is prevented this way, … any other target\" is a reflexive trigger with a target; a prevention's then can't choose one."
+    },
+    {
+      "name": "Prismatic Strands",
+      "needs": [
+        "cost:flashback-tap-creatures-cost"
+      ],
+      "why": "Its damage-modification need is built; cost:flashback-tap-creatures-cost is still open."
+    },
+    {
+      "name": "Refraction Trap",
+      "needs": [
+        "amount:damage-prevented-this-way"
+      ],
+      "why": "Its damage-modification need is built; amount:damage-prevented-this-way is still open."
+    },
+    {
+      "name": "Rem Karolus, Stalwart Slayer",
+      "needs": [
+        "filter:damage-source-is-spell"
+      ],
+      "why": "Its damage-modification need is built; filter:damage-source-is-spell is still open."
+    },
+    {
+      "name": "Ria Ivor, Bane of Bladehold",
+      "needs": [
+        "effect:duration-this-combat"
+      ],
+      "why": "The prevention lasts \"this combat\"."
+    },
+    {
+      "name": "Samite Censer-Bearer",
+      "needs": [
+        "effect:prevent-next-damage-each-creature"
+      ],
+      "why": "A separate 1-damage shield on each creature you control as it resolves."
+    },
+    {
+      "name": "Shield Dancer",
+      "needs": [
+        "replacement:damage-reflection"
+      ],
+      "why": "Its damage-modification need is built; replacement:damage-reflection is still open."
+    },
+    {
+      "name": "Shield of the Avatar",
+      "needs": [
+        "replacement:prevent-dynamic-amount"
+      ],
+      "why": "preventAmount is a fixed number, not \"the number of creatures you control\" counted as the damage would be dealt."
+    },
+    {
+      "name": "Shieldmage Elder",
+      "needs": [
+        "replacement:prevent-damage-by-target-this-turn"
+      ],
+      "why": "Its damage-modification need is built; replacement:prevent-damage-by-target-this-turn is still open."
+    },
+    {
+      "name": "Skullcrack",
+      "needs": [
+        "effect:players-cant-gain-life-this-turn"
+      ],
+      "why": "No one-shot \"players can't gain life this turn\"; the can't-be-prevented half is built."
+    },
+    {
+      "name": "Solitary Confinement",
+      "needs": [
+        "static:skip-draw-step",
+        "static:player-shroud-static"
+      ],
+      "why": "Its damage-modification need is built; static:skip-draw-step, static:player-shroud-static is still open."
+    },
+    {
+      "name": "Soul Echo",
+      "needs": [
+        "static:dont-lose-for-zero-life"
+      ],
+      "why": "Its damage-modification need is built; static:dont-lose-for-zero-life is still open."
+    },
+    {
+      "name": "Soul-Scar Mage",
+      "needs": [
+        "replacement:temporary-prevent-damage-to-counters"
+      ],
+      "why": "The ruling: it isn't prevention — the damage becomes -1/-1 counters on the recipient instead."
+    },
+    {
+      "name": "Sunspine Lynx",
+      "needs": [
+        "amount:count-per-player"
+      ],
+      "why": "\"Equal to the number of nonbasic lands that player controls\", per player."
+    },
+    {
+      "name": "Suppressor Skyguard",
+      "needs": [
+        "condition:attacking-player-left-an-opponent-unattacked"
+      ],
+      "why": "Its damage-modification need is built; condition:attacking-player-left-an-opponent-unattacked is still open."
+    },
+    {
+      "name": "Telekinesis",
+      "needs": [
+        "effect:doesnt-untap-next-two-untap-steps"
+      ],
+      "why": "Its damage-modification need is built; effect:doesnt-untap-next-two-untap-steps is still open."
+    },
+    {
+      "name": "Vigor",
+      "needs": [
+        "replacement:prevention-follow-up-on-recipient"
+      ],
+      "why": "A prevention's follow-up can't name the creature the damage was prevented to (\"put a +1/+1 counter on that creature\")."
+    },
+    {
+      "name": "Volcano Hellion",
+      "needs": [
+        "decision:choose-number"
+      ],
+      "why": "Its damage-modification need is built; decision:choose-number is still open."
+    },
+    {
+      "name": "Whippoorwill",
+      "needs": [
+        "effect:cant-be-regenerated-this-turn"
+      ],
+      "why": "Its damage-modification need is built; effect:cant-be-regenerated-this-turn is still open."
+    },
+    {
+      "name": "With Great Power . . .",
+      "needs": [
+        "static:count-attached-to-affected"
+      ],
+      "why": "Its damage-modification need is built; static:count-attached-to-affected is still open."
+    },
+    {
+      "name": "Wojek Apothecary",
+      "needs": [
+        "effect:prevent-next-damage-each-creature"
+      ],
+      "why": "A separate 1-damage shield on each creature of a set fixed at resolution; a damage-rule amount is one shared shield."
+    },
+    {
+      "name": "You Look Upon the Tarrasque",
+      "needs": [
+        "effect:must-be-blocked-by-opponents"
+      ],
+      "why": "\"All creatures your opponents control able to block that creature do so\"."
+    }
+  ]
+}

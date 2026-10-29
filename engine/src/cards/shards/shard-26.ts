@@ -240,6 +240,7 @@ import _poolFearlessLiberator from "../pool/fearless-liberator.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertileThicket from "../pool/fertile-thicket.js";
 import _poolFertilid from "../pool/fertilid.js";
+import _poolFestivalOfTheGuildpact from "../pool/festival-of-the-guildpact.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
 import _poolFind from "../pool/find.js";
@@ -267,6 +268,7 @@ import _poolForkedLightning from "../pool/forked-lightning.js";
 import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
 import _poolFoundryHelix from "../pool/foundry-helix.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
+import _poolFrenziedBaloth from "../pool/frenzied-baloth.js";
 import _poolFreshMeat from "../pool/fresh-meat.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
@@ -298,6 +300,7 @@ import _poolGodsWilling from "../pool/gods-willing.js";
 import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
+import _poolGossamerChains from "../pool/gossamer-chains.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
 import _poolGrapplingHook from "../pool/grappling-hook.js";
 import _poolGraveVenerations from "../pool/grave-venerations.js";
@@ -665,6 +668,7 @@ import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
 import _poolSpectralSteel from "../pool/spectral-steel.js";
+import _poolSphereOfPurity from "../pool/sphere-of-purity.js";
 import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
@@ -687,6 +691,7 @@ import _poolStifle from "../pool/stifle.js";
 import _poolStingerflingSpider from "../pool/stingerfling-spider.js";
 import _poolStockUp from "../pool/stock-up.js";
 import _poolStoicChampion from "../pool/stoic-champion.js";
+import _poolStomp from "../pool/stomp.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
@@ -1081,6 +1086,7 @@ const shard: CardShard = {
     _poolFeloniousRage,
     _poolFertileThicket,
     _poolFertilid,
+    _poolFestivalOfTheGuildpact,
     _poolFetidPools,
     _poolFieryEmancipation,
     _poolFind,
@@ -1108,6 +1114,7 @@ const shard: CardShard = {
     _poolFoundingTheThirdPath,
     _poolFoundryHelix,
     _poolFracturedRealm,
+    _poolFrenziedBaloth,
     _poolFreshMeat,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
@@ -1139,6 +1146,7 @@ const shard: CardShard = {
     _poolGolemFoundry,
     _poolGolgariFindbroker,
     _poolGoliathBeetle,
+    _poolGossamerChains,
     _poolGrandBallGuest,
     _poolGrapplingHook,
     _poolGraveVenerations,
@@ -1506,6 +1514,7 @@ const shard: CardShard = {
     _poolSpearSpewer,
     _poolSpectralReserves,
     _poolSpectralSteel,
+    _poolSphereOfPurity,
     _poolSphereOfResistance,
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
@@ -1528,6 +1537,7 @@ const shard: CardShard = {
     _poolStingerflingSpider,
     _poolStockUp,
     _poolStoicChampion,
+    _poolStomp,
     _poolStoneOfErech,
     _poolStormboundGeist,
     _poolStrokeOfMidnight,

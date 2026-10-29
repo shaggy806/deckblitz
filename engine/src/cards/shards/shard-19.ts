@@ -263,6 +263,7 @@ import _poolFaeFlight from "../pool/fae-flight.js";
 import _poolFaeOffering from "../pool/fae-offering.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
+import _poolFallingTimber from "../pool/falling-timber.js";
 import _poolFamilysFavor from "../pool/familys-favor.js";
 import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
@@ -304,6 +305,7 @@ import _poolGallowbraid from "../pool/gallowbraid.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
+import _poolGeneralsKabuto from "../pool/generals-kabuto.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGerrardsWisdom from "../pool/gerrards-wisdom.js";
@@ -383,6 +385,7 @@ import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolIllusionaryArmor from "../pool/illusionary-armor.js";
 import _poolIllustriousWanderglyph from "../pool/illustrious-wanderglyph.js";
+import _poolImmortalCoil from "../pool/immortal-coil.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
@@ -1138,6 +1141,7 @@ const shard: CardShard = {
     _poolFaeOffering,
     _poolFalkenrathNoble,
     _poolFallajiArchaeologist,
+    _poolFallingTimber,
     _poolFamilysFavor,
     _poolFamine,
     _poolFantasticElasticity,
@@ -1179,6 +1183,7 @@ const shard: CardShard = {
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,
+    _poolGeneralsKabuto,
     _poolGenerousGift,
     _poolGenesisUltimatum,
     _poolGerrardsWisdom,
@@ -1258,6 +1263,7 @@ const shard: CardShard = {
     _poolIgniteTheFuture,
     _poolIllusionaryArmor,
     _poolIllustriousWanderglyph,
+    _poolImmortalCoil,
     _poolImpale,
     _poolImplode,
     _poolImpostorSyndrome,

@@ -176,6 +176,7 @@ import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDisturbedBurial from "../pool/disturbed-burial.js";
+import _poolDivineLight from "../pool/divine-light.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
 import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
@@ -327,6 +328,7 @@ import _poolIncongruity from "../pool/incongruity.js";
 import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
+import _poolInquisitorsFlail from "../pool/inquisitors-flail.js";
 import _poolInspireAwe from "../pool/inspire-awe.js";
 import _poolIntoTheFray from "../pool/into-the-fray.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
@@ -1021,6 +1023,7 @@ const shard: CardShard = {
     _poolDisplace,
     _poolDistantMelody,
     _poolDisturbedBurial,
+    _poolDivineLight,
     _poolDjinniWindseer,
     _poolDongZhouTheTyrant,
     _poolDoomBlade,
@@ -1172,6 +1175,7 @@ const shard: CardShard = {
     _poolIncreasingSavagery,
     _poolInexorableTide,
     _poolInfestedWerewolf,
+    _poolInquisitorsFlail,
     _poolInspireAwe,
     _poolIntoTheFray,
     _poolIntoThinAir,

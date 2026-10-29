@@ -181,6 +181,7 @@ import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDiscipleOfFreyalise from "../pool/disciple-of-freyalise.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
+import _poolDjeruWithEyesOpen from "../pool/djeru-with-eyes-open.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
@@ -695,6 +696,7 @@ import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
 import _poolTeachByExample from "../pool/teach-by-example.js";
+import _poolTempleAltisaur from "../pool/temple-altisaur.js";
 import _poolTemurCharm from "../pool/temur-charm.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
@@ -741,6 +743,7 @@ import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnityOfPurpose from "../pool/unity-of-purpose.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
+import _poolUnstableFooting from "../pool/unstable-footing.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrbanUtopia from "../pool/urban-utopia.js";
 import _poolUrborgEmissary from "../pool/urborg-emissary.js";
@@ -998,6 +1001,7 @@ const shard: CardShard = {
     _poolDimirKeyrune,
     _poolDiscipleOfFreyalise,
     _poolDissectionTools,
+    _poolDjeruWithEyesOpen,
     _poolDoggedPursuit,
     _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
@@ -1512,6 +1516,7 @@ const shard: CardShard = {
     _poolTarSnare,
     _poolTatteredDrake,
     _poolTeachByExample,
+    _poolTempleAltisaur,
     _poolTemurCharm,
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
@@ -1558,6 +1563,7 @@ const shard: CardShard = {
     _poolUnityOfPurpose,
     _poolUnleashFury,
     _poolUnravelingMummy,
+    _poolUnstableFooting,
     _poolUnwillingIngredient,
     _poolUrbanUtopia,
     _poolUrborgEmissary,

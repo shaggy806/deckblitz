@@ -9,6 +9,7 @@ import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brut
 import _poolAbzanGuide from "../pool/abzan-guide.js";
 import _poolAcidicSliver from "../pool/acidic-sliver.js";
 import _poolAcolyteOfTheInferno from "../pool/acolyte-of-the-inferno.js";
+import _poolAcolytesReward from "../pool/acolytes-reward.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAdvancedStitchwing from "../pool/advanced-stitchwing.js";
 import _poolAdventurersAirship from "../pool/adventurers-airship.js";
@@ -261,6 +262,7 @@ import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhastlyGloomhunter from "../pool/ghastly-gloomhunter.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
+import _poolGhostlyPossession from "../pool/ghostly-possession.js";
 import _poolGhostlyWings from "../pool/ghostly-wings.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGhoulsFeast from "../pool/ghouls-feast.js";
@@ -427,6 +429,7 @@ import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMournfulZombie from "../pool/mournful-zombie.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
+import _poolMulticlassBaldric from "../pool/multiclass-baldric.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolMunitionsExpert from "../pool/munitions-expert.js";
 import _poolMyrCustodian from "../pool/myr-custodian.js";
@@ -447,6 +450,7 @@ import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
+import _poolObscuringHaze from "../pool/obscuring-haze.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolObsidianBattleAxe from "../pool/obsidian-battle-axe.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
@@ -823,6 +827,7 @@ const shard: CardShard = {
     _poolAbzanGuide,
     _poolAcidicSliver,
     _poolAcolyteOfTheInferno,
+    _poolAcolytesReward,
     _poolAdaptiveTrainingPost,
     _poolAdvancedStitchwing,
     _poolAdventurersAirship,
@@ -1075,6 +1080,7 @@ const shard: CardShard = {
     _poolGhaltaTheImmovable,
     _poolGhastlyGloomhunter,
     _poolGhostSpectralSaboteur,
+    _poolGhostlyPossession,
     _poolGhostlyWings,
     _poolGhoulcallerGisa,
     _poolGhoulsFeast,
@@ -1241,6 +1247,7 @@ const shard: CardShard = {
     _poolMosscoatGoriak,
     _poolMournfulZombie,
     _poolMouserFoundry,
+    _poolMulticlassBaldric,
     _poolMultiversalIncursion,
     _poolMunitionsExpert,
     _poolMyrCustodian,
@@ -1261,6 +1268,7 @@ const shard: CardShard = {
     _poolNullCaller,
     _poolNurglesRot,
     _poolOblivion,
+    _poolObscuringHaze,
     _poolObsianusGolem,
     _poolObsidianBattleAxe,
     _poolOctaviaLivingThesis,
