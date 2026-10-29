@@ -167,6 +167,7 @@ import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
+import _poolDeepwoodElder from "../pool/deepwood-elder.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDemonicAppetite from "../pool/demonic-appetite.js";
@@ -346,6 +347,7 @@ import _poolJoinerAdept from "../pool/joiner-adept.js";
 import _poolJoragaBard from "../pool/joraga-bard.js";
 import _poolJoragaTreespeaker from "../pool/joraga-treespeaker.js";
 import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
+import _poolJovensTools from "../pool/jovens-tools.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleCreeper from "../pool/jungle-creeper.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
@@ -740,6 +742,7 @@ import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerGeist from "../pool/tower-geist.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
+import _poolTradeTheHelm from "../pool/trade-the-helm.js";
 import _poolTrainTroops from "../pool/train-troops.js";
 import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
@@ -1019,6 +1022,7 @@ const shard: CardShard = {
     _poolDeathbloomGardener,
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
+    _poolDeepwoodElder,
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
     _poolDemonicAppetite,
@@ -1198,6 +1202,7 @@ const shard: CardShard = {
     _poolJoragaBard,
     _poolJoragaTreespeaker,
     _poolJourneyToOblivion,
+    _poolJovensTools,
     _poolJukaiNaturalist,
     _poolJungleCreeper,
     _poolJungleDelver,
@@ -1592,6 +1597,7 @@ const shard: CardShard = {
     _poolTowerGeist,
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,
+    _poolTradeTheHelm,
     _poolTrainTroops,
     _poolTranscendentMaster,
     _poolTraumaticRevelation,

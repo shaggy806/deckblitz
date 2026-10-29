@@ -146,6 +146,7 @@ import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConclavePhalanx from "../pool/conclave-phalanx.js";
 import _poolConductiveMachete from "../pool/conductive-machete.js";
+import _poolConjuredCurrency from "../pool/conjured-currency.js";
 import _poolConjurersBan from "../pool/conjurers-ban.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
@@ -304,6 +305,7 @@ import _poolGreatDesertProspector from "../pool/great-desert-prospector.js";
 import _poolGreaterGargadon from "../pool/greater-gargadon.js";
 import _poolGreenhouse from "../pool/greenhouse.js";
 import _poolGristleGlutton from "../pool/gristle-glutton.js";
+import _poolGrixisIllusionist from "../pool/grixis-illusionist.js";
 import _poolGrixisPanorama from "../pool/grixis-panorama.js";
 import _poolGrotagThrasher from "../pool/grotag-thrasher.js";
 import _poolGruulWarChant from "../pool/gruul-war-chant.js";
@@ -1004,6 +1006,7 @@ const shard: CardShard = {
     _poolCommonCrook,
     _poolConclavePhalanx,
     _poolConductiveMachete,
+    _poolConjuredCurrency,
     _poolConjurersBan,
     _poolConsecratedSphinx,
     _poolConversionApparatus,
@@ -1162,6 +1165,7 @@ const shard: CardShard = {
     _poolGreaterGargadon,
     _poolGreenhouse,
     _poolGristleGlutton,
+    _poolGrixisIllusionist,
     _poolGrixisPanorama,
     _poolGrotagThrasher,
     _poolGruulWarChant,

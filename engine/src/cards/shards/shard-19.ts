@@ -317,6 +317,7 @@ import _poolGiantOpportunity from "../pool/giant-opportunity.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
 import _poolGildedGhoda from "../pool/gilded-ghoda.js";
 import _poolGildedLotus from "../pool/gilded-lotus.js";
+import _poolGlaciers from "../pool/glaciers.js";
 import _poolGlassGolem from "../pool/glass-golem.js";
 import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
@@ -509,6 +510,7 @@ import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
 import _poolMoonveilDragon from "../pool/moonveil-dragon.js";
 import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
+import _poolMsMarvelKamalaKhan from "../pool/ms-marvel-kamala-khan.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
@@ -612,6 +614,7 @@ import _poolReality from "../pool/reality.js";
 import _poolRecantation from "../pool/recantation.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
+import _poolReefShaman from "../pool/reef-shaman.js";
 import _poolRelicCrush from "../pool/relic-crush.js";
 import _poolRendingVines from "../pool/rending-vines.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
@@ -1199,6 +1202,7 @@ const shard: CardShard = {
     _poolGiantSpider,
     _poolGildedGhoda,
     _poolGildedLotus,
+    _poolGlaciers,
     _poolGlassGolem,
     _poolGlimpseOfFreedom,
     _poolGlistenerElf,
@@ -1391,6 +1395,7 @@ const shard: CardShard = {
     _poolMoonveilDragon,
     _poolMorlunDevourerOfSpiders,
     _poolMorophonTheBoundless,
+    _poolMsMarvelKamalaKhan,
     _poolMuckRats,
     _poolMuddleTheMixture,
     _poolMuragandaRaceway,
@@ -1494,6 +1499,7 @@ const shard: CardShard = {
     _poolRecantation,
     _poolRecklessBrute,
     _poolRedElementalBlast,
+    _poolReefShaman,
     _poolRelicCrush,
     _poolRendingVines,
     _poolRenegadeBull,

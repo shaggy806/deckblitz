@@ -94,6 +94,7 @@ import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChoArrimAlchemist from "../pool/cho-arrim-alchemist.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
 import _poolChromanticore from "../pool/chromanticore.js";
+import _poolChromeshellCrab from "../pool/chromeshell-crab.js";
 import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
@@ -346,6 +347,7 @@ import _poolKeepWatch from "../pool/keep-watch.js";
 import _poolKeeperOfTheQuietHour from "../pool/keeper-of-the-quiet-hour.js";
 import _poolKefnetsMonument from "../pool/kefnets-monument.js";
 import _poolKeskitTheFleshSculptor from "../pool/keskit-the-flesh-sculptor.js";
+import _poolKickInTheDoor from "../pool/kick-in-the-door.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
 import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
@@ -857,6 +859,7 @@ const shard: CardShard = {
     _poolChoArrimAlchemist,
     _poolChocoboCamp,
     _poolChromanticore,
+    _poolChromeshellCrab,
     _poolChronostutter,
     _poolChubToad,
     _poolCinderBarrens,
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolKeeperOfTheQuietHour,
     _poolKefnetsMonument,
     _poolKeskitTheFleshSculptor,
+    _poolKickInTheDoor,
     _poolKilnWalker,
     _poolKnightOfTheStampede,
     _poolKnightPaladin,

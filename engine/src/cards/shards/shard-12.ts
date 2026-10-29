@@ -419,6 +419,7 @@ import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolLunarMystic from "../pool/lunar-mystic.js";
 import _poolLunge from "../pool/lunge.js";
+import _poolLushGrowth from "../pool/lush-growth.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
@@ -711,8 +712,10 @@ import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
 import _poolTerritoryCuller from "../pool/territory-culler.js";
+import _poolTezzeretMasterOfMetal from "../pool/tezzeret-master-of-metal.js";
 import _poolThassasIntervention from "../pool/thassas-intervention.js";
 import _poolTheArkenstone from "../pool/the-arkenstone.js";
+import _poolTheBookOfExaltedDeeds from "../pool/the-book-of-exalted-deeds.js";
 import _poolTheDestinedWarrior from "../pool/the-destined-warrior.js";
 import _poolTheFifthDoctor from "../pool/the-fifth-doctor.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
@@ -1251,6 +1254,7 @@ const shard: CardShard = {
     _poolLosDiablosMissileBase,
     _poolLunarMystic,
     _poolLunge,
+    _poolLushGrowth,
     _poolLysAlanaInformant,
     _poolManaTithe,
     _poolManifestDread,
@@ -1543,8 +1547,10 @@ const shard: CardShard = {
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,
     _poolTerritoryCuller,
+    _poolTezzeretMasterOfMetal,
     _poolThassasIntervention,
     _poolTheArkenstone,
+    _poolTheBookOfExaltedDeeds,
     _poolTheDestinedWarrior,
     _poolTheFifthDoctor,
     _poolTheGreyHavens,

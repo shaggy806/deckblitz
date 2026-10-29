@@ -179,6 +179,7 @@ import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDoorkeeper from "../pool/doorkeeper.js";
+import _poolDoorman from "../pool/doorman.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDreamProwler from "../pool/dream-prowler.js";
@@ -1001,6 +1002,7 @@ const shard: CardShard = {
     _poolDocksideChef,
     _poolDonatellosTechnique,
     _poolDoorkeeper,
+    _poolDoorman,
     _poolDragonCursedHalls,
     _poolDragonEgg,
     _poolDreamProwler,

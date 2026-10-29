@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Granted statics, land-type setting, exchange of control — built 2026-10-29
+
+Four need-keys Phase 2 families in one build (B253). **`grant-static`**: a
+static ability on a permanent's modifier, read by the layer fold's
+contributing statics (timestamped 613.7a), the block filters, the ability
+grants, the untap step's and game-loss statics, and a layer-7b set for a
+granted "base power is …" (not a CDA, 604.3a); **`restrict`'s
+`cantBeBlockedBy`** ("can't be blocked by [X] this turn", a rule rather than
+an ability) and **`CardFilter.not`**. **Rule 305.7**: a land set to a basic
+land type loses its rules-text abilities (`landTextLost`, a loss "before every
+grant"), keeps granted ones and gains the intrinsic mana ability; a land's own
+layer-4 static depends on the setter (613.8a — `withoutTextLostSources`), and
+it enters with none of its own entering abilities (614.12);
+`setsChosenLandType`, and `choose-creature-type`'s fixed `options` for "the
+basic land type of your choice". **`exchange-control`** (701.12a/b) and
+`exchange-control-all`; `gain-control-all`'s `controlledByTarget`. Keys:
+`effect:grant-static-to-permanent`, `effect:cant-be-blocked-by-filter-until-eot`,
+`static:land-type-setting`, `static:choose-basic-land-type`,
+`decision:choose-land-type-on-resolution`, `effect:set-land-type`,
+`effect:become-basic-land-type`, `effect:exchange-control`,
+`effect:exchange-control-all-with-target-opponent`,
+`effect:gain-control-all-target-player`.
+
 ### Each player chooses, shared-graveyard targets, repeat this process — built 2026-10-28
 
 Three need-keys Phase 2 families in one build (B251). **Rule 101.4 beyond

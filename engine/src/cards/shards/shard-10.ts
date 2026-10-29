@@ -212,6 +212,7 @@ import _poolDragonsHerald from "../pool/dragons-herald.js";
 import _poolDralnusCrusade from "../pool/dralnus-crusade.js";
 import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
+import _poolDreamThrush from "../pool/dream-thrush.js";
 import _poolDroolingGroodion from "../pool/drooling-groodion.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
@@ -376,6 +377,7 @@ import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
+import _poolJinx from "../pool/jinx.js";
 import _poolJointExploration from "../pool/joint-exploration.js";
 import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js";
 import _poolJundSojourners from "../pool/jund-sojourners.js";
@@ -405,6 +407,7 @@ import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
 import _poolLeadByExample from "../pool/lead-by-example.js";
 import _poolLeaveChance from "../pool/leave-chance.js";
+import _poolLegionLoyalist from "../pool/legion-loyalist.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLethalSting from "../pool/lethal-sting.js";
 import _poolLifeforce from "../pool/lifeforce.js";
@@ -1068,6 +1071,7 @@ const shard: CardShard = {
     _poolDralnusCrusade,
     _poolDramaticAccusation,
     _poolDreadShade,
+    _poolDreamThrush,
     _poolDroolingGroodion,
     _poolDryadsRevival,
     _poolDuelTactics,
@@ -1232,6 +1236,7 @@ const shard: CardShard = {
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,
+    _poolJinx,
     _poolJointExploration,
     _poolJudithCarnageConnoisseur,
     _poolJundSojourners,
@@ -1261,6 +1266,7 @@ const shard: CardShard = {
     _poolLazavDimirMastermind,
     _poolLeadByExample,
     _poolLeaveChance,
+    _poolLegionLoyalist,
     _poolLeoninScimitar,
     _poolLethalSting,
     _poolLifeforce,

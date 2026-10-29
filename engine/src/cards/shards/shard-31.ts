@@ -153,6 +153,7 @@ import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
 import _poolCommuneWithDinosaurs from "../pool/commune-with-dinosaurs.js";
 import _poolComponentCollector from "../pool/component-collector.js";
 import _poolConclaveGuildmage from "../pool/conclave-guildmage.js";
+import _poolContaminatedGround from "../pool/contaminated-ground.js";
 import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
@@ -352,6 +353,7 @@ import _poolHallarTheFirefletcher from "../pool/hallar-the-firefletcher.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
 import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
+import _poolHarbingerOfTheSeas from "../pool/harbinger-of-the-seas.js";
 import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
@@ -1046,6 +1048,7 @@ const shard: CardShard = {
     _poolCommuneWithDinosaurs,
     _poolComponentCollector,
     _poolConclaveGuildmage,
+    _poolContaminatedGround,
     _poolCookingCampsite,
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
@@ -1245,6 +1248,7 @@ const shard: CardShard = {
     _poolHammerheadTyrant,
     _poolHanaKami,
     _poolHandOfEnlightenment,
+    _poolHarbingerOfTheSeas,
     _poolHardCover,
     _poolHarmoniousArchon,
     _poolHeartflameSlash,

@@ -575,6 +575,7 @@ import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRhoxMeditant from "../pool/rhox-meditant.js";
+import _poolRimeTransfusion from "../pool/rime-transfusion.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingOfEvosIsle from "../pool/ring-of-evos-isle.js";
 import _poolRingOfRenewal from "../pool/ring-of-renewal.js";
@@ -1444,6 +1445,7 @@ const shard: CardShard = {
     _poolReviveTheShire,
     _poolRevokeDemise,
     _poolRhoxMeditant,
+    _poolRimeTransfusion,
     _poolRimeshieldFrostGiant,
     _poolRingOfEvosIsle,
     _poolRingOfRenewal,

@@ -375,6 +375,7 @@ import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKingsAssassin from "../pool/kings-assassin.js";
 import _poolKithkinRabble from "../pool/kithkin-rabble.js";
 import _poolKitsuneAce from "../pool/kitsune-ace.js";
+import _poolKitsuneDragonsDaughter from "../pool/kitsune-dragons-daughter.js";
 import _poolKnightOfCliffhaven from "../pool/knight-of-cliffhaven.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKoboldOverlord from "../pool/kobold-overlord.js";
@@ -445,6 +446,7 @@ import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMoltenInfluence from "../pool/molten-influence.js";
 import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMonoskelion from "../pool/monoskelion.js";
+import _poolMoonbowIllusionist from "../pool/moonbow-illusionist.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
 import _poolMothriderSamurai from "../pool/mothrider-samurai.js";
@@ -1199,6 +1201,7 @@ const shard: CardShard = {
     _poolKingsAssassin,
     _poolKithkinRabble,
     _poolKitsuneAce,
+    _poolKitsuneDragonsDaughter,
     _poolKnightOfCliffhaven,
     _poolKnightOfNewBenalia,
     _poolKoboldOverlord,
@@ -1269,6 +1272,7 @@ const shard: CardShard = {
     _poolMoltenInfluence,
     _poolMonkOfTheOpenHand,
     _poolMonoskelion,
+    _poolMoonbowIllusionist,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
     _poolMothriderSamurai,

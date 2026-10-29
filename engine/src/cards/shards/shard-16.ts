@@ -185,6 +185,7 @@ import _poolDuskFeaster from "../pool/dusk-feaster.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
+import _poolEarthbind from "../pool/earthbind.js";
 import _poolEarthshakerKhenra from "../pool/earthshaker-khenra.js";
 import _poolEchoesOfTheKinTree from "../pool/echoes-of-the-kin-tree.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
@@ -298,6 +299,7 @@ import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
 import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
+import _poolGracefulAntelope from "../pool/graceful-antelope.js";
 import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
@@ -357,6 +359,7 @@ import _poolInventorsFair from "../pool/inventors-fair.js";
 import _poolInvincibleHymn from "../pool/invincible-hymn.js";
 import _poolInvisibleStalker from "../pool/invisible-stalker.js";
 import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
+import _poolIronManArmor from "../pool/iron-man-armor.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
 import _poolIvoryCraneNetsuke from "../pool/ivory-crane-netsuke.js";
 import _poolJaceArcaneStrategist from "../pool/jace-arcane-strategist.js";
@@ -430,6 +433,7 @@ import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
 import _poolMalice from "../pool/malice.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolManrikiGusari from "../pool/manriki-gusari.js";
+import _poolMarchFromVelisVel from "../pool/march-from-velis-vel.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarkOfAsylum from "../pool/mark-of-asylum.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
@@ -621,6 +625,7 @@ import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
+import _poolSeaSnidd from "../pool/sea-snidd.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
 import _poolSecurityDetail from "../pool/security-detail.js";
 import _poolSedgeTroll from "../pool/sedge-troll.js";
@@ -1086,6 +1091,7 @@ const shard: CardShard = {
     _poolDuskwielder,
     _poolDwarvenArmorer,
     _poolDwarvenTrader,
+    _poolEarthbind,
     _poolEarthshakerKhenra,
     _poolEchoesOfTheKinTree,
     _poolEdgarMoonlitSovereign,
@@ -1199,6 +1205,7 @@ const shard: CardShard = {
     _poolGoblinChirurgeon,
     _poolGolgariDecoy,
     _poolGorionWiseMentor,
+    _poolGracefulAntelope,
     _poolGrafReaver,
     _poolGrapeshot,
     _poolGraspOfDarkness,
@@ -1258,6 +1265,7 @@ const shard: CardShard = {
     _poolInvincibleHymn,
     _poolInvisibleStalker,
     _poolIpnuRivulet,
+    _poolIronManArmor,
     _poolItThatHeraldsTheEnd,
     _poolIvoryCraneNetsuke,
     _poolJaceArcaneStrategist,
@@ -1331,6 +1339,7 @@ const shard: CardShard = {
     _poolMalice,
     _poolManaformHellkite,
     _poolManrikiGusari,
+    _poolMarchFromVelisVel,
     _poolMarchesasEmissary,
     _poolMarkOfAsylum,
     _poolMarketbackWalker,
@@ -1522,6 +1531,7 @@ const shard: CardShard = {
     _poolScroungeForEternity,
     _poolScroungingBandar,
     _poolScurryOak,
+    _poolSeaSnidd,
     _poolSealFromExistence,
     _poolSecurityDetail,
     _poolSedgeTroll,

@@ -19,7 +19,7 @@ export default defineCard({
       effect: {
         kind: "choose-creature-type",
         options: BASIC_LAND_TYPE_CHOICES,
-        prompt: "Choose a basic land type",
+        prompt: "choose a basic land type",
         then: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,

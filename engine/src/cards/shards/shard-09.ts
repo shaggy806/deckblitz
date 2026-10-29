@@ -53,6 +53,7 @@ import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
 import _poolAugurOfBolas from "../pool/augur-of-bolas.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
+import _poolAvariceTotem from "../pool/avarice-totem.js";
 import _poolAvatarKyoshi from "../pool/avatar-kyoshi.js";
 import _poolAvenLiberator from "../pool/aven-liberator.js";
 import _poolAvenTactician from "../pool/aven-tactician.js";
@@ -116,6 +117,7 @@ import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
+import _poolCarnageCrimsonChaos from "../pool/carnage-crimson-chaos.js";
 import _poolCarrionBeetles from "../pool/carrion-beetles.js";
 import _poolCarrion from "../pool/carrion.js";
 import _poolCatastrophe from "../pool/catastrophe.js";
@@ -513,6 +515,7 @@ import _poolPersistentMarshstalker from "../pool/persistent-marshstalker.js";
 import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentCauldron from "../pool/pestilent-cauldron.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
+import _poolPhantasmalTerrain from "../pool/phantasmal-terrain.js";
 import _poolPhantatog from "../pool/phantatog.js";
 import _poolPhantomTiger from "../pool/phantom-tiger.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
@@ -649,6 +652,7 @@ import _poolShikoAndNarsetUnified from "../pool/shiko-and-narset-unified.js";
 import _poolShivanEmissary from "../pool/shivan-emissary.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
+import _poolShrewdNegotiation from "../pool/shrewd-negotiation.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
@@ -795,6 +799,7 @@ import _poolVanquishersAxe from "../pool/vanquishers-axe.js";
 import _poolVastwoodFortification from "../pool/vastwood-fortification.js";
 import _poolVeinfireBorderpost from "../pool/veinfire-borderpost.js";
 import _poolVenerableLammasu from "../pool/venerable-lammasu.js";
+import _poolVerdantOutrider from "../pool/verdant-outrider.js";
 import _poolVeteranBeastrider from "../pool/veteran-beastrider.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
 import _poolVibraniumStrikeGauntlets from "../pool/vibranium-strike-gauntlets.js";
@@ -921,6 +926,7 @@ const shard: CardShard = {
     _poolAttackInTheBox,
     _poolAugurOfBolas,
     _poolAuraMutation,
+    _poolAvariceTotem,
     _poolAvatarKyoshi,
     _poolAvenLiberator,
     _poolAvenTactician,
@@ -984,6 +990,7 @@ const shard: CardShard = {
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
+    _poolCarnageCrimsonChaos,
     _poolCarrionBeetles,
     _poolCarrion,
     _poolCatastrophe,
@@ -1381,6 +1388,7 @@ const shard: CardShard = {
     _poolPersuasiveInterrogators,
     _poolPestilentCauldron,
     _poolPestilentSyphoner,
+    _poolPhantasmalTerrain,
     _poolPhantatog,
     _poolPhantomTiger,
     _poolPhoenixOfAsh,
@@ -1517,6 +1525,7 @@ const shard: CardShard = {
     _poolShivanEmissary,
     _poolShizoDeathsStorehouse,
     _poolShorelineSalvager,
+    _poolShrewdNegotiation,
     _poolSidisisPet,
     _poolSilkbindFaerie,
     _poolSilkguard,
@@ -1663,6 +1672,7 @@ const shard: CardShard = {
     _poolVastwoodFortification,
     _poolVeinfireBorderpost,
     _poolVenerableLammasu,
+    _poolVerdantOutrider,
     _poolVeteranBeastrider,
     _poolVeteransSidearm,
     _poolVibraniumStrikeGauntlets,

@@ -164,6 +164,7 @@ import _poolConsulateSkygate from "../pool/consulate-skygate.js";
 import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContaminatedBond from "../pool/contaminated-bond.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
+import _poolConversion from "../pool/conversion.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
 import _poolCourtHomunculus from "../pool/court-homunculus.js";
@@ -348,6 +349,7 @@ import _poolHaazdaSnareSquad from "../pool/haazda-snare-squad.js";
 import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
+import _poolHarvesttideSentry from "../pool/harvesttide-sentry.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
 import _poolHauntedPlateMail from "../pool/haunted-plate-mail.js";
 import _poolHealingGrace from "../pool/healing-grace.js";
@@ -533,6 +535,7 @@ import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPipersMelody from "../pool/pipers-melody.js";
+import _poolPixieIllusionist from "../pool/pixie-illusionist.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPlanarDespair from "../pool/planar-despair.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
@@ -743,6 +746,7 @@ import _poolTrystansCommand from "../pool/trystans-command.js";
 import _poolTuktukTheExplorer from "../pool/tuktuk-the-explorer.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
 import _poolTwinbladeSlasher from "../pool/twinblade-slasher.js";
+import _poolTwistAllegiance from "../pool/twist-allegiance.js";
 import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
 import _poolTyrranaxAtrocity from "../pool/tyrranax-atrocity.js";
 import _poolUndergrowthChampion from "../pool/undergrowth-champion.js";
@@ -798,6 +802,7 @@ import _poolYouthfulScholar from "../pool/youthful-scholar.js";
 import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
 import _poolZodiacRooster from "../pool/zodiac-rooster.js";
 import _poolZodiacSnake from "../pool/zodiac-snake.js";
+import _poolZombieTrailblazer from "../pool/zombie-trailblazer.js";
 import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
 import _tokens33WhiteBirdToken from "../tokens/3-3-white-bird-token.js";
 import _tokensAngelWarriorTokenFlyingVigilance from "../tokens/angel-warrior-token-flying-vigilance.js";
@@ -991,6 +996,7 @@ const shard: CardShard = {
     _poolContagiousNim,
     _poolContaminatedBond,
     _poolContentiousPlan,
+    _poolConversion,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
     _poolCourtHomunculus,
@@ -1175,6 +1181,7 @@ const shard: CardShard = {
     _poolHailstormValkyrie,
     _poolHallwayHeckler,
     _poolHangarbackWalker,
+    _poolHarvesttideSentry,
     _poolHauntedMire,
     _poolHauntedPlateMail,
     _poolHealingGrace,
@@ -1360,6 +1367,7 @@ const shard: CardShard = {
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
     _poolPipersMelody,
+    _poolPixieIllusionist,
     _poolPlaguemawBeast,
     _poolPlanarDespair,
     _poolPracticalResearch,
@@ -1570,6 +1578,7 @@ const shard: CardShard = {
     _poolTuktukTheExplorer,
     _poolTwentyToedToad,
     _poolTwinbladeSlasher,
+    _poolTwistAllegiance,
     _poolTwoHeadedHellkite,
     _poolTyrranaxAtrocity,
     _poolUndergrowthChampion,
@@ -1625,6 +1634,7 @@ const shard: CardShard = {
     _poolZagrasThiefOfHeartbeats,
     _poolZodiacRooster,
     _poolZodiacSnake,
+    _poolZombieTrailblazer,
     _poolZurgoStormrender,
   ],
   tokens: [

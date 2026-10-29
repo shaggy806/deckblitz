@@ -104,6 +104,7 @@ import _poolCatharsCompanion from "../pool/cathars-companion.js";
 import _poolCauldronOfEssence from "../pool/cauldron-of-essence.js";
 import _poolCavalierOfFlame from "../pool/cavalier-of-flame.js";
 import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
+import _poolCavernStomper from "../pool/cavern-stomper.js";
 import _poolCelestialPurge from "../pool/celestial-purge.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChalkOutline from "../pool/chalk-outline.js";
@@ -949,6 +950,7 @@ const shard: CardShard = {
     _poolCauldronOfEssence,
     _poolCavalierOfFlame,
     _poolCavalryDrillmaster,
+    _poolCavernStomper,
     _poolCelestialPurge,
     _poolCephalidPathmage,
     _poolChalkOutline,

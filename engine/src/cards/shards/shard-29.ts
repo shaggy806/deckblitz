@@ -444,6 +444,7 @@ import _poolMortalWound from "../pool/mortal-wound.js";
 import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
+import _poolMultiversalPassage from "../pool/multiversal-passage.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
 import _poolMurmursFromBeyond from "../pool/murmurs-from-beyond.js";
 import _poolMyrLandshaper from "../pool/myr-landshaper.js";
@@ -502,6 +503,7 @@ import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
 import _poolPhantomNomad from "../pool/phantom-nomad.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
+import _poolPhyrexianInfiltrator from "../pool/phyrexian-infiltrator.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPillarOfFlame from "../pool/pillar-of-flame.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
@@ -1289,6 +1291,7 @@ const shard: CardShard = {
     _poolMountVelusManticore,
     _poolMoxRuby,
     _poolMulldrifter,
+    _poolMultiversalPassage,
     _poolMurdocksCrusade,
     _poolMurmursFromBeyond,
     _poolMyrLandshaper,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolPhantasmalSphere,
     _poolPhantomNomad,
     _poolPharikaGodOfAffliction,
+    _poolPhyrexianInfiltrator,
     _poolPileatedProvisioner,
     _poolPillarOfFlame,
     _poolPirateHat,

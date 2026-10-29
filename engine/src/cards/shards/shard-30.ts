@@ -135,6 +135,7 @@ import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
 import _poolConjurersBauble from "../pool/conjurers-bauble.js";
 import _poolContaminatedDrink from "../pool/contaminated-drink.js";
+import _poolConvincingMirage from "../pool/convincing-mirage.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
 import _poolCosmiumBlast from "../pool/cosmium-blast.js";
@@ -598,6 +599,7 @@ import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
 import _poolRuinGrinder from "../pool/ruin-grinder.js";
+import _poolRunForYourLife from "../pool/run-for-your-life.js";
 import _poolRushOfBattle from "../pool/rush-of-battle.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
 import _poolRydiasReturn from "../pool/rydias-return.js";
@@ -613,6 +615,7 @@ import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSavageSwipe from "../pool/savage-swipe.js";
 import _poolSavageThallid from "../pool/savage-thallid.js";
 import _poolScarredVinebreeder from "../pool/scarred-vinebreeder.js";
+import _poolSeasClaim from "../pool/seas-claim.js";
 import _poolSeedsOfRenewal from "../pool/seeds-of-renewal.js";
 import _poolSeismicMage from "../pool/seismic-mage.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
@@ -702,6 +705,7 @@ import _poolSyggWanderwineWisdom from "../pool/sygg-wanderwine-wisdom.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
 import _poolSyphonLife from "../pool/syphon-life.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
+import _poolTaintedWell from "../pool/tainted-well.js";
 import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTalonSliver from "../pool/talon-sliver.js";
@@ -729,6 +733,7 @@ import _poolThunderOfHooves from "../pool/thunder-of-hooves.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
+import _poolTinStreetDodger from "../pool/tin-street-dodger.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
 import _poolTocasiasOnulet from "../pool/tocasias-onulet.js";
 import _poolToilTrouble from "../pool/toil-trouble.js";
@@ -833,6 +838,7 @@ import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flyi
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
+import _tokensKeimi from "../tokens/keimi.js";
 import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
 import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
@@ -973,6 +979,7 @@ const shard: CardShard = {
     _poolConduitPylons,
     _poolConjurersBauble,
     _poolContaminatedDrink,
+    _poolConvincingMirage,
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
     _poolCosmiumBlast,
@@ -1436,6 +1443,7 @@ const shard: CardShard = {
     _poolRoyalTalonFighterJet,
     _poolRubiniaSoulsinger,
     _poolRuinGrinder,
+    _poolRunForYourLife,
     _poolRushOfBattle,
     _poolRustrazorButcher,
     _poolRydiasReturn,
@@ -1451,6 +1459,7 @@ const shard: CardShard = {
     _poolSavageSwipe,
     _poolSavageThallid,
     _poolScarredVinebreeder,
+    _poolSeasClaim,
     _poolSeedsOfRenewal,
     _poolSeismicMage,
     _poolSelflessSafewright,
@@ -1540,6 +1549,7 @@ const shard: CardShard = {
     _poolSyndicateTrafficker,
     _poolSyphonLife,
     _poolTaintedSigil,
+    _poolTaintedWell,
     _poolTajicBladeOfTheLegion,
     _poolTajuruStalwart,
     _poolTalonSliver,
@@ -1567,6 +1577,7 @@ const shard: CardShard = {
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
     _poolTigerSeal,
+    _poolTinStreetDodger,
     _poolTitansGrave,
     _poolTocasiasOnulet,
     _poolToilTrouble,
@@ -1673,6 +1684,7 @@ const shard: CardShard = {
     _tokensDragonSpiritToken,
     _tokensGoldToken,
     _tokensGreenCatToken11,
+    _tokensKeimi,
     _tokensKrakenTokenKioraBestsTheSeaGod,
     _tokensMinionToken,
     _tokensMyrToken,

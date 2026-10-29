@@ -492,6 +492,7 @@ import _poolMythicProportions from "../pool/mythic-proportions.js";
 import _poolNahirisMachinations from "../pool/nahiris-machinations.js";
 import _poolNamorScourgeOfTheSeas from "../pool/namor-scourge-of-the-seas.js";
 import _poolNaturesClaim from "../pool/natures-claim.js";
+import _poolNavigatorsCompass from "../pool/navigators-compass.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
@@ -676,6 +677,7 @@ import _poolSlaughterhouseBouncer from "../pool/slaughterhouse-bouncer.js";
 import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
+import _poolSlimyKavu from "../pool/slimy-kavu.js";
 import _poolSluicewayScorpion from "../pool/sluiceway-scorpion.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
@@ -1362,6 +1364,7 @@ const shard: CardShard = {
     _poolNahirisMachinations,
     _poolNamorScourgeOfTheSeas,
     _poolNaturesClaim,
+    _poolNavigatorsCompass,
     _poolNecroduality,
     _poolNecrogenesis,
     _poolNeighborhoodGuardian,
@@ -1546,6 +1549,7 @@ const shard: CardShard = {
     _poolSleep,
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
+    _poolSlimyKavu,
     _poolSluicewayScorpion,
     _poolSmelt,
     _poolSoaringThoughtThief,

@@ -88,6 +88,7 @@ import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
 import _poolBotBashingTime from "../pool/bot-bashing-time.js";
 import _poolBreachingHippocamp from "../pool/breaching-hippocamp.js";
+import _poolBrightPalmSoulAwakener from "../pool/bright-palm-soul-awakener.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
 import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
@@ -189,6 +190,7 @@ import _poolDoubleJumpFlyingKick from "../pool/double-jump-flying-kick.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
 import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
+import _poolDreadCharge from "../pool/dread-charge.js";
 import _poolDreadDrone from "../pool/dread-drone.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
@@ -390,6 +392,7 @@ import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKamiOfEmptyGraves from "../pool/kami-of-empty-graves.js";
 import _poolKangPrime from "../pool/kang-prime.js";
+import _poolKavuRecluse from "../pool/kavu-recluse.js";
 import _poolKemuriOnna from "../pool/kemuri-onna.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
@@ -459,6 +462,7 @@ import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
 import _poolMidnightEntourage from "../pool/midnight-entourage.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
+import _poolMindbenderSpores from "../pool/mindbender-spores.js";
 import _poolMindsparker from "../pool/mindsparker.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
@@ -600,6 +604,7 @@ import _poolRotfeasterMaggot from "../pool/rotfeaster-maggot.js";
 import _poolRovingKeep from "../pool/roving-keep.js";
 import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
+import _poolSabertoothAlleyCat from "../pool/sabertooth-alley-cat.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
 import _poolSamuraiOfThePaleCurtain from "../pool/samurai-of-the-pale-curtain.js";
@@ -683,6 +688,7 @@ import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolStormCaller from "../pool/storm-caller.js";
 import _poolStratadon from "../pool/stratadon.js";
+import _poolStreambedAquitects from "../pool/streambed-aquitects.js";
 import _poolStrengthInNumbers from "../pool/strength-in-numbers.js";
 import _poolStromkirkOccultist from "../pool/stromkirk-occultist.js";
 import _poolStudyBreak from "../pool/study-break.js";
@@ -942,6 +948,7 @@ const shard: CardShard = {
     _poolBorosCharm,
     _poolBotBashingTime,
     _poolBreachingHippocamp,
+    _poolBrightPalmSoulAwakener,
     _poolBroodguardElite,
     _poolBuddingInsurgent,
     _poolBuriedInTheGarden,
@@ -1043,6 +1050,7 @@ const shard: CardShard = {
     _poolDovinsAutomaton,
     _poolDragonlordOjutai,
     _poolDraugrRecruiter,
+    _poolDreadCharge,
     _poolDreadDrone,
     _poolDrogskolReaver,
     _poolDromadPurebred,
@@ -1244,6 +1252,7 @@ const shard: CardShard = {
     _poolKambalProfiteeringMayor,
     _poolKamiOfEmptyGraves,
     _poolKangPrime,
+    _poolKavuRecluse,
     _poolKemuriOnna,
     _poolKeyToTheCity,
     _poolKeysToTheHouse,
@@ -1313,6 +1322,7 @@ const shard: CardShard = {
     _poolMidnightEntourage,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,
+    _poolMindbenderSpores,
     _poolMindsparker,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
@@ -1454,6 +1464,7 @@ const shard: CardShard = {
     _poolRovingKeep,
     _poolRustMonster,
     _poolRuthlessPredation,
+    _poolSabertoothAlleyCat,
     _poolSabertoothWyvern,
     _poolSabretoothTiger,
     _poolSamuraiOfThePaleCurtain,
@@ -1537,6 +1548,7 @@ const shard: CardShard = {
     _poolStonewingAntagonizer,
     _poolStormCaller,
     _poolStratadon,
+    _poolStreambedAquitects,
     _poolStrengthInNumbers,
     _poolStromkirkOccultist,
     _poolStudyBreak,

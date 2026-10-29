@@ -102,6 +102,7 @@ import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChandrasPyreling from "../pool/chandras-pyreling.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChaosHarlequin from "../pool/chaos-harlequin.js";
+import _poolCheekyHouseMouse from "../pool/cheeky-house-mouse.js";
 import _poolCheeringFanatic from "../pool/cheering-fanatic.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
@@ -138,6 +139,7 @@ import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
 import _poolCrystalBarricade from "../pool/crystal-barricade.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolCurseOfUnbinding from "../pool/curse-of-unbinding.js";
+import _poolCyclopeanGiant from "../pool/cyclopean-giant.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
@@ -441,6 +443,7 @@ import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistbindClique from "../pool/mistbind-clique.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
+import _poolModifyMemory from "../pool/modify-memory.js";
 import _poolMoggManiac from "../pool/mogg-maniac.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
@@ -594,6 +597,7 @@ import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
 import _poolShelter from "../pool/shelter.js";
+import _poolShiftingBorders from "../pool/shifting-borders.js";
 import _poolShimmerOfPossibility from "../pool/shimmer-of-possibility.js";
 import _poolShrapnelBlast from "../pool/shrapnel-blast.js";
 import _poolSigardasAid from "../pool/sigardas-aid.js";
@@ -730,6 +734,7 @@ import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
 import _poolTrespassingSouleater from "../pool/trespassing-souleater.js";
 import _poolTruefirePaladin from "../pool/truefire-paladin.js";
+import _poolTundraKavu from "../pool/tundra-kavu.js";
 import _poolTuneTheNarrative from "../pool/tune-the-narrative.js";
 import _poolTurbulentWetlands from "../pool/turbulent-wetlands.js";
 import _poolTurnInsideOut from "../pool/turn-inside-out.js";
@@ -940,6 +945,7 @@ const shard: CardShard = {
     _poolChandrasPyreling,
     _poolChangeOfPlans,
     _poolChaosHarlequin,
+    _poolCheekyHouseMouse,
     _poolCheeringFanatic,
     _poolChillingScreech,
     _poolCircleOfProtectionBlack,
@@ -976,6 +982,7 @@ const shard: CardShard = {
     _poolCrystalBarricade,
     _poolCrystallineGiant,
     _poolCurseOfUnbinding,
+    _poolCyclopeanGiant,
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
@@ -1279,6 +1286,7 @@ const shard: CardShard = {
     _poolMistbindClique,
     _poolMistmeadowCouncil,
     _poolModelOfUnity,
+    _poolModifyMemory,
     _poolMoggManiac,
     _poolMolecularModifier,
     _poolMoltenNote,
@@ -1432,6 +1440,7 @@ const shard: CardShard = {
     _poolShatteredAngel,
     _poolShellSkulkin,
     _poolShelter,
+    _poolShiftingBorders,
     _poolShimmerOfPossibility,
     _poolShrapnelBlast,
     _poolSigardasAid,
@@ -1568,6 +1577,7 @@ const shard: CardShard = {
     _poolTremble,
     _poolTrespassingSouleater,
     _poolTruefirePaladin,
+    _poolTundraKavu,
     _poolTuneTheNarrative,
     _poolTurbulentWetlands,
     _poolTurnInsideOut,

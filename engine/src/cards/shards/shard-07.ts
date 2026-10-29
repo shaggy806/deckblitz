@@ -637,6 +637,7 @@ import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShiftingWall from "../pool/shifting-wall.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
+import _poolShimmeringMirage from "../pool/shimmering-mirage.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolShorecrasherMimic from "../pool/shorecrasher-mimic.js";
 import _poolShorelineRaider from "../pool/shoreline-raider.js";
@@ -1509,6 +1510,7 @@ const shard: CardShard = {
     _poolShiarSoldier,
     _poolShiftingWall,
     _poolShimmerDragon,
+    _poolShimmeringMirage,
     _poolShinenOfFearsChill,
     _poolShorecrasherMimic,
     _poolShorelineRaider,

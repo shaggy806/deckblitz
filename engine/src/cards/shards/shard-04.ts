@@ -205,6 +205,7 @@ import _poolEntomberExarch from "../pool/entomber-exarch.js";
 import _poolEphemeron from "../pool/ephemeron.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
+import _poolEvilPresence from "../pool/evil-presence.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
 import _poolExtractTheTruth from "../pool/extract-the-truth.js";
 import _poolEyesOfGitaxias from "../pool/eyes-of-gitaxias.js";
@@ -552,6 +553,7 @@ import _poolRetrofitterFoundry from "../pool/retrofitter-foundry.js";
 import _poolRevitalizingRepast from "../pool/revitalizing-repast.js";
 import _poolRevivingDose from "../pool/reviving-dose.js";
 import _poolRhinosRampage from "../pool/rhinos-rampage.js";
+import _poolRhonassStalwart from "../pool/rhonass-stalwart.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRiptideEntrancer from "../pool/riptide-entrancer.js";
@@ -658,6 +660,7 @@ import _poolSplittingHeadache from "../pool/splitting-headache.js";
 import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
+import _poolSqueakBy from "../pool/squeak-by.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
@@ -1038,6 +1041,7 @@ const shard: CardShard = {
     _poolEphemeron,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
+    _poolEvilPresence,
     _poolExcaliburSwordOfEden,
     _poolExtractTheTruth,
     _poolEyesOfGitaxias,
@@ -1385,6 +1389,7 @@ const shard: CardShard = {
     _poolRevitalizingRepast,
     _poolRevivingDose,
     _poolRhinosRampage,
+    _poolRhonassStalwart,
     _poolRhovanionRampager,
     _poolRidgeRannet,
     _poolRiptideEntrancer,
@@ -1491,6 +1496,7 @@ const shard: CardShard = {
     _poolSpringheartNantuko,
     _poolSpringleafDrum,
     _poolSproutingThrinax,
+    _poolSqueakBy,
     _poolSqueesToy,
     _poolSquirrelMob,
     _poolSquirrelNest,

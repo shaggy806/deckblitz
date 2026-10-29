@@ -712,6 +712,7 @@ import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
 import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
+import _poolTheloniteMonk from "../pool/thelonite-monk.js";
 import _poolThicketElemental from "../pool/thicket-elemental.js";
 import _poolThiefOfHope from "../pool/thief-of-hope.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
@@ -729,6 +730,7 @@ import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
+import _poolTowerOfCoireall from "../pool/tower-of-coireall.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTransitMage from "../pool/transit-mage.js";
 import _poolTrevasRuins from "../pool/trevas-ruins.js";
@@ -1539,6 +1541,7 @@ const shard: CardShard = {
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
     _poolTheirNumberIsLegion,
+    _poolTheloniteMonk,
     _poolThicketElemental,
     _poolThiefOfHope,
     _poolThopterArrest,
@@ -1556,6 +1559,7 @@ const shard: CardShard = {
     _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
+    _poolTowerOfCoireall,
     _poolToweringBaloth,
     _poolTransitMage,
     _poolTrevasRuins,

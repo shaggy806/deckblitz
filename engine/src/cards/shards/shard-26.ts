@@ -184,6 +184,7 @@ import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
 import _poolDistress from "../pool/distress.js";
 import _poolDiveBomber from "../pool/dive-bomber.js";
+import _poolDjinnOfInfiniteDeceits from "../pool/djinn-of-infinite-deceits.js";
 import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
@@ -678,6 +679,7 @@ import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
+import _poolSpreadingSeas from "../pool/spreading-seas.js";
 import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
@@ -711,6 +713,7 @@ import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
+import _poolTatsunariToadRider from "../pool/tatsunari-toad-rider.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
@@ -738,6 +741,7 @@ import _poolThrivingRats from "../pool/thriving-rats.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
+import _poolTideShaper from "../pool/tide-shaper.js";
 import _poolTimeOfIce from "../pool/time-of-ice.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
@@ -1032,6 +1036,7 @@ const shard: CardShard = {
     _poolDisruptorWanderglyph,
     _poolDistress,
     _poolDiveBomber,
+    _poolDjinnOfInfiniteDeceits,
     _poolDownwindAmbusher,
     _poolDrEggman,
     _poolDragonFodder,
@@ -1526,6 +1531,7 @@ const shard: CardShard = {
     _poolSpitebellows,
     _poolSpittingSliver,
     _poolSporeSwarm,
+    _poolSpreadingSeas,
     _poolSpringMind,
     _poolSpringmaneCervin,
     _poolSquiresDevotion,
@@ -1559,6 +1565,7 @@ const shard: CardShard = {
     _poolTakeTheFall,
     _poolTalismanOfProgress,
     _poolTamiyoMeetsTheStoryCircle,
+    _poolTatsunariToadRider,
     _poolTawnossTinkering,
     _poolTeapotSlinger,
     _poolTemporalTrespass,
@@ -1586,6 +1593,7 @@ const shard: CardShard = {
     _poolThroneOfBone,
     _poolThunderSalvo,
     _poolThunderingDjinn,
+    _poolTideShaper,
     _poolTimeOfIce,
     _poolTimelessLotus,
     _poolTinker,

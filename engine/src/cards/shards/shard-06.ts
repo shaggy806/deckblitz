@@ -747,6 +747,7 @@ import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
+import _poolUnstableFrontier from "../pool/unstable-frontier.js";
 import _poolUnstoppableAsh from "../pool/unstoppable-ash.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
@@ -1581,6 +1582,7 @@ const shard: CardShard = {
     _poolUnfinishedBusiness,
     _poolUnnerve,
     _poolUnrulyMob,
+    _poolUnstableFrontier,
     _poolUnstoppableAsh,
     _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,

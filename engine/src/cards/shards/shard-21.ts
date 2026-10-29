@@ -714,6 +714,7 @@ import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
 import _poolThrive from "../pool/thrive.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolThunderBrute from "../pool/thunder-brute.js";
+import _poolTidalWarrior from "../pool/tidal-warrior.js";
 import _poolTideforceElemental from "../pool/tideforce-elemental.js";
 import _poolTitanicBrawl from "../pool/titanic-brawl.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
@@ -1539,6 +1540,7 @@ const shard: CardShard = {
     _poolThrive,
     _poolThrivingGrove,
     _poolThunderBrute,
+    _poolTidalWarrior,
     _poolTideforceElemental,
     _poolTitanicBrawl,
     _poolTobiasDoomedConqueror,

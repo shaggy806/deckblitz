@@ -49,6 +49,7 @@ import _poolArmoryOfIroas from "../pool/armory-of-iroas.js";
 import _poolArniRenownedChampion from "../pool/arni-renowned-champion.js";
 import _poolArtfulManeuver from "../pool/artful-maneuver.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
+import _poolAshiokSculptorOfFears from "../pool/ashiok-sculptor-of-fears.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
 import _poolAssassinsTrophy from "../pool/assassins-trophy.js";
 import _poolAtlantisAttacks from "../pool/atlantis-attacks.js";
@@ -358,6 +359,7 @@ import _poolHourOfNeed from "../pool/hour-of-need.js";
 import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
+import _poolHuatliPoetOfUnity from "../pool/huatli-poet-of-unity.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHungryFlames from "../pool/hungry-flames.js";
 import _poolHuntingGrounds from "../pool/hunting-grounds.js";
@@ -476,6 +478,7 @@ import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMyrkulsEdict from "../pool/myrkuls-edict.js";
+import _poolMysticCompass from "../pool/mystic-compass.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticRemora from "../pool/mystic-remora.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
@@ -594,6 +597,7 @@ import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRenounce from "../pool/renounce.js";
 import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolReptilianReflection from "../pool/reptilian-reflection.js";
+import _poolResilientRoadrunner from "../pool/resilient-roadrunner.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
@@ -944,6 +948,7 @@ const shard: CardShard = {
     _poolArniRenownedChampion,
     _poolArtfulManeuver,
     _poolAscendedLawmage,
+    _poolAshiokSculptorOfFears,
     _poolAshlingRimebound,
     _poolAssassinsTrophy,
     _poolAtlantisAttacks,
@@ -1253,6 +1258,7 @@ const shard: CardShard = {
     _poolHoverguardObserver,
     _poolHowlingGiant,
     _poolHowlingMine,
+    _poolHuatliPoetOfUnity,
     _poolHulkingOgre,
     _poolHungryFlames,
     _poolHuntingGrounds,
@@ -1371,6 +1377,7 @@ const shard: CardShard = {
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
     _poolMyrkulsEdict,
+    _poolMysticCompass,
     _poolMysticMeditation,
     _poolMysticRemora,
     _poolMysticSnake,
@@ -1489,6 +1496,7 @@ const shard: CardShard = {
     _poolRenounce,
     _poolRentIsDue,
     _poolReptilianReflection,
+    _poolResilientRoadrunner,
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,

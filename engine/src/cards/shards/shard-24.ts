@@ -277,6 +277,7 @@ import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
 import _poolGildedCerodon from "../pool/gilded-cerodon.js";
+import _poolGiltLeafArchdruid from "../pool/gilt-leaf-archdruid.js";
 import _poolGiltLeafPalace from "../pool/gilt-leaf-palace.js";
 import _poolGisasBidding from "../pool/gisas-bidding.js";
 import _poolGishathSunsAvatar from "../pool/gishath-suns-avatar.js";
@@ -530,6 +531,7 @@ import _poolRazorBarrier from "../pool/razor-barrier.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
 import _poolRedcapRaiders from "../pool/redcap-raiders.js";
 import _poolRedemptionArc from "../pool/redemption-arc.js";
+import _poolReinsOfPower from "../pool/reins-of-power.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRelicVial from "../pool/relic-vial.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolGiftedAetherborn,
     _poolGilacorn,
     _poolGildedCerodon,
+    _poolGiltLeafArchdruid,
     _poolGiltLeafPalace,
     _poolGisasBidding,
     _poolGishathSunsAvatar,
@@ -1376,6 +1379,7 @@ const shard: CardShard = {
     _poolRecklessDetective,
     _poolRedcapRaiders,
     _poolRedemptionArc,
+    _poolReinsOfPower,
     _poolReknit,
     _poolRelicVial,
     _poolRenegadeMap,

@@ -237,6 +237,7 @@ import _poolEther from "../pool/ether.js";
 import _poolEverglades from "../pool/everglades.js";
 import _poolExaltedAngel from "../pool/exalted-angel.js";
 import _poolExtractPower from "../pool/extract-power.js";
+import _poolEyesEverywhere from "../pool/eyes-everywhere.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFaithUnbroken from "../pool/faith-unbroken.js";
@@ -548,6 +549,7 @@ import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPincerSpider from "../pool/pincer-spider.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
+import _poolPoliticalTrickery from "../pool/political-trickery.js";
 import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
@@ -629,6 +631,7 @@ import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
 import _poolSheoldredsRestoration from "../pool/sheoldreds-restoration.js";
 import _poolShieldOfTheOversoul from "../pool/shield-of-the-oversoul.js";
+import _poolShiftingGrift from "../pool/shifting-grift.js";
 import _poolShiftingWoodland from "../pool/shifting-woodland.js";
 import _poolShinenOfLifesRoar from "../pool/shinen-of-lifes-roar.js";
 import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
@@ -662,6 +665,7 @@ import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
+import _poolSongOfTheDryads from "../pool/song-of-the-dryads.js";
 import _poolSoratamiMirrorMage from "../pool/soratami-mirror-mage.js";
 import _poolSorayaTheFalconer from "../pool/soraya-the-falconer.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
@@ -1090,6 +1094,7 @@ const shard: CardShard = {
     _poolEverglades,
     _poolExaltedAngel,
     _poolExtractPower,
+    _poolEyesEverywhere,
     _poolFacetReader,
     _poolFailedFording,
     _poolFaithUnbroken,
@@ -1401,6 +1406,7 @@ const shard: CardShard = {
     _poolPincerSpider,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
+    _poolPoliticalTrickery,
     _poolPolukranosReborn,
     _poolPridefulFeastling,
     _poolPriestOfIroas,
@@ -1482,6 +1488,7 @@ const shard: CardShard = {
     _poolShaoJun,
     _poolSheoldredsRestoration,
     _poolShieldOfTheOversoul,
+    _poolShiftingGrift,
     _poolShiftingWoodland,
     _poolShinenOfLifesRoar,
     _poolShiningAerosaur,
@@ -1515,6 +1522,7 @@ const shard: CardShard = {
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
     _poolSongOfFreyalise,
+    _poolSongOfTheDryads,
     _poolSoratamiMirrorMage,
     _poolSorayaTheFalconer,
     _poolSorinRavenousNeonate,

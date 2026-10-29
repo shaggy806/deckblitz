@@ -215,6 +215,7 @@ import _poolFinalJudgment from "../pool/final-judgment.js";
 import _poolFinalPayment from "../pool/final-payment.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
+import _poolFirefrightMage from "../pool/firefright-mage.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
 import _poolFlailingManticore from "../pool/flailing-manticore.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
@@ -385,6 +386,7 @@ import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
 import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
+import _poolLingeringMirage from "../pool/lingering-mirage.js";
 import _poolLittleBear from "../pool/little-bear.js";
 import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
@@ -1041,6 +1043,7 @@ const shard: CardShard = {
     _poolFinalPayment,
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
+    _poolFirefrightMage,
     _poolFiresOfVictory,
     _poolFlailingManticore,
     _poolFlameblastDragon,
@@ -1211,6 +1214,7 @@ const shard: CardShard = {
     _poolLilianasSpecter,
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
+    _poolLingeringMirage,
     _poolLittleBear,
     _poolLoamDweller,
     _poolLockAndLoad,

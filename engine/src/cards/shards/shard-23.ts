@@ -587,6 +587,7 @@ import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
+import _poolRoarOfTheFifthPeople from "../pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolRimefurReindeer,
     _poolRiteOfConsumption,
     _poolRitualOfHope,
+    _poolRoarOfTheFifthPeople,
     _poolRoarOfTheKha,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,

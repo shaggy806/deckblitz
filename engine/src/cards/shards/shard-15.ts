@@ -415,6 +415,7 @@ import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMageIlVec from "../pool/mage-il-vec.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
+import _poolMagusOfTheMoon from "../pool/magus-of-the-moon.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
@@ -564,6 +565,7 @@ import _poolRhysticCircle from "../pool/rhystic-circle.js";
 import _poolRiches from "../pool/riches.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRighteousWar from "../pool/righteous-war.js";
+import _poolRikkuResourcefulGuardian from "../pool/rikku-resourceful-guardian.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRockslideAmbush from "../pool/rockslide-ambush.js";
@@ -730,6 +732,7 @@ import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVectorGlider from "../pool/vector-glider.js";
 import _poolVedalkenAnatomist from "../pool/vedalken-anatomist.js";
 import _poolVedalkenHeretic from "../pool/vedalken-heretic.js";
+import _poolVedalkenPlotter from "../pool/vedalken-plotter.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolVeiledSentry from "../pool/veiled-sentry.js";
 import _poolVenarianGold from "../pool/venarian-gold.js";
@@ -775,6 +778,7 @@ import _poolYuanTiMalison from "../pool/yuan-ti-malison.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
 import _poolZaltoFireGiantDuke from "../pool/zalto-fire-giant-duke.js";
 import _poolZerapaMinotaur from "../pool/zerapa-minotaur.js";
+import _poolZhaoTheMoonSlayer from "../pool/zhao-the-moon-slayer.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
@@ -1219,6 +1223,7 @@ const shard: CardShard = {
     _poolMageIlVec,
     _poolMaggotTherapy,
     _poolMagitekScythe,
+    _poolMagusOfTheMoon,
     _poolMakeshiftMunitions,
     _poolManicScribe,
     _poolManticoreOfTheGauntlet,
@@ -1368,6 +1373,7 @@ const shard: CardShard = {
     _poolRiches,
     _poolRiftburstHellion,
     _poolRighteousWar,
+    _poolRikkuResourcefulGuardian,
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRockslideAmbush,
@@ -1534,6 +1540,7 @@ const shard: CardShard = {
     _poolVectorGlider,
     _poolVedalkenAnatomist,
     _poolVedalkenHeretic,
+    _poolVedalkenPlotter,
     _poolVegaTheWatcher,
     _poolVeiledSentry,
     _poolVenarianGold,
@@ -1579,6 +1586,7 @@ const shard: CardShard = {
     _poolYumaProudProtector,
     _poolZaltoFireGiantDuke,
     _poolZerapaMinotaur,
+    _poolZhaoTheMoonSlayer,
     _poolZimoneQuandrixProdigy,
     _poolZoyowaLavaTongue,
     _poolZuranSpellcaster,
