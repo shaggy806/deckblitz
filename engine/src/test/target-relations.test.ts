@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { invalidTargetReason, stateTargetFacts } from "../targeting.js";
-import { concatModeSpecs, concreteTargetSpecs, slotOptions } from "../target.js";
+import { concatModeSpecs, concreteTargetSpecs, slotOptions, targetsFillable } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
 import { A, B, C, ref, spawn, table, toGraveyard } from "./harness.js";
@@ -112,5 +112,22 @@ describe("a mode's slot relations are its own", () => {
       );
     expect(why([ref(giant), ref(bears), ref(bears)])).toMatch(/another/);
     expect(why([ref(bears), ref(giant), ref(bears)])).toBeNull();
+  });
+});
+
+describe("a single-graveyard group with a floor", () => {
+  it("is fillable only with that many in one graveyard, and a member from a graveyard too small isn't offered", () => {
+    const { game } = table({ players: 3 });
+    const bobs = [toGraveyard(game, "Grizzly Bears", B), toGraveyard(game, "Hill Giant", B)];
+    const carols = toGraveyard(game, "Hill Giant", C);
+    const facts = stateTargetFacts(game.state, game.registry);
+    const two: TargetSpec[] = [
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "opponent" }, min: 2, max: 2, sameController: true },
+    ];
+    expect(targetsFillable(two, [[ref(bobs[0]), ref(carols)]], [], 0, facts)).toBe(false);
+    expect(targetsFillable(two, [[...bobs.map(ref), ref(carols)]], [], 0, facts)).toBe(true);
+    // Carol's lone card can't start the pair; Bob's can.
+    expect(targetsFillable(two, [[...bobs.map(ref), ref(carols)]], [ref(carols)], 1, facts)).toBe(false);
+    expect(targetsFillable(two, [[...bobs.map(ref), ref(carols)]], [ref(bobs[0])], 1, facts)).toBe(true);
   });
 });

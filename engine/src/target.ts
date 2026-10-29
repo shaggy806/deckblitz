@@ -861,6 +861,16 @@ export function targetsFillable(
   from = picked.length,
   facts?: TargetFacts,
 ): boolean {
+  const group = anyNumberSlot(specs);
+  // Partway through an "any number of" group with a floor: the members so far
+  // and what's still offered must reach it — "two target cards from an
+  // opponent's graveyard" with one picked from a graveyard holding no other.
+  if (group >= 0 && from > group && facts !== undefined) {
+    const spec = specs[group];
+    const { min } = spec === undefined ? { min: 0 } : groupBounds(spec);
+    const taken = picked.slice(group).filter((ref) => ref !== null).length;
+    if (taken < min && taken + slotOptions(specs, options, from, picked, facts).length < min) return false;
+  }
   if (from >= options.length) return true;
   // The cheap answers first: a required slot with nothing at all, or no
   // relation between slots to get in the way.
@@ -869,10 +879,27 @@ export function targetsFillable(
   }
   // An "any number of" group with a floor — "X target cards" at a fixed X,
   // "one, two, or three targets" — needs that many distinct to pick from.
-  const group = anyNumberSlot(specs);
   if (group >= from && group < options.length) {
     const spec = specs[group];
-    if (spec !== undefined && options[group].length < groupBounds(spec).min) return false;
+    const min = spec === undefined ? 0 : groupBounds(spec).min;
+    if (spec !== undefined && options[group].length < min) return false;
+    // "From a single graveyard": that many in one player's — or, tied to a
+    // slot, in the graveyard of a player that slot could be.
+    const same = typeof spec === "object" && spec.kind === "any-number" ? spec.sameController : undefined;
+    if (same !== undefined && min > 1 && facts !== undefined) {
+      const counts = new Map<PlayerId | undefined, number>();
+      for (const ref of options[group]) {
+        const player = playerOfTarget(ref, facts);
+        counts.set(player, (counts.get(player) ?? 0) + 1);
+      }
+      const enough = (player: PlayerId | undefined): boolean => player !== undefined && (counts.get(player) ?? 0) >= min;
+      if (same === true && ![...counts.keys()].some(enough)) return false;
+      if (typeof same === "object") {
+        const anchor = same.slot < from ? picked[same.slot] : undefined;
+        const anchors = anchor !== undefined && anchor !== null ? [anchor] : (options[same.slot] ?? []);
+        if (!anchors.some((ref) => enough(playerOfTarget(ref, facts)))) return false;
+      }
+    }
   }
   if (!specs.some((s, i) => i >= from && typeof otherThan(s) === "object")) return true;
   const chosen = [...picked.slice(0, from)];
