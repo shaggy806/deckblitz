@@ -382,6 +382,15 @@ missing. Re-run `--greedy` for Phase 2's order.
   five on new narrow keys. Next: `replacement:damage-modification` (34),
   `effect:target-spec-additions` (34), `effect:repeat-process` (32).
 
+- **2026-10-28: the damage-modification family (B250).** Its top seven groups and both
+  can't-be-prevented keys, 33 keys as three general pieces: static damage replacements (a host,
+  "your side", redirection, N / all but N / half), damage that can't be prevented (615.12), and
+  the one-shot `damage-rule` over recipient and source scopes and durations with prevention's
+  follow-up. The agents found a next-time shield spent on the first recipient of a simultaneous
+  event (615.8), fixed. 148 authored (24 by the lead, 10 auto-finished, 114 by six agents), 65
+  still blocked — 18 new narrow keys, `decision:prevention-shield-allocation` (615.7) and
+  `effect:prevent-next-damage-each-creature` the largest.
+
 ## Rough size
 
 Phase 0 is one session, and the trial a short one. Phase 1 is one cheap-agent session (steps 1.3 and 1.4), plus up to six

@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, the damage-modification family: damage prevention and redirection**
+  (2026-10-28, B250, `5832089cb`, `6e32eb60c`; `replacement:damage-redirection`,
+  `replacement:redirect-next-damage-event`, the prevent-all-damage and prevent-combat-damage filter
+  keys, the prevention-follow-up keys, the computed-amount keys, the attached keys, the by-source
+  keys, `effect:damage-cant-be-prevented`, `static:damage-cant-be-prevented`,
+  `effect:prevent-combat-damage-by-target` — 33 in all): static `would-deal-damage` replacements
+  naming an Aura's or Equipment's host, "you and your permanents", redirecting all of it (614.9,
+  once per event — 614.5) and preventing N / all but N / half (615.10); damage that can't be
+  prevented (615.12) as a damage option, a turn effect and a static; `damage-rule`, one-shot
+  prevention or redirection over recipient and source scopes for a duration with prevention's
+  follow-up (615.5); a next-time shield covering the whole simultaneous event (615.8); scaffolder
+  templates. 148 cards: Questing Beast, Comeuppance, Leyline of Punishment, Maze of Ith, Palisade
+  Giant, Pariah, Inkshield, Dovin, Hand of Control, Kor Haven and the rest; 65 still blocked
+  (`B250.json`).
 - **Need-keys Phase 2, three families in one batch: a static loss of all abilities, block limits,
   type-setting effects** (2026-10-28, B249, `28c4865b9`, `91204a4d1`;
   `static:static-lose-all-abilities`, `static:static-loses-all-abilities`,

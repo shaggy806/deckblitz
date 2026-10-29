@@ -85,9 +85,13 @@ section keeps only what to do next.
   combat-restriction-extensions and set-types (B249, 2026-10-28: a static loss of all abilities in
   dependency order and as a permanent enters, block limits with the client's block builder,
   "becomes a [type]"; 98 cards authored, 22 still blocked — three on
-  `effect:set-creature-type-all`, two on `static:cant-block-by-subtype`). Next:
-  `replacement:damage-modification` (34, damage redirection), `effect:target-spec-additions` (34,
-  graveyard-scoped multi-card targets) and `effect:repeat-process` (32).
+  `effect:set-creature-type-all`, two on `static:cant-block-by-subtype`), damage-modification
+  (B250, 2026-10-28: static damage replacements over a host, "your side", redirection and computed
+  prevention, unpreventable damage, the one-shot `damage-rule`, next-time shields over a whole
+  event; 148 cards authored, 65 still blocked — five on `effect:prevent-next-damage-each-creature`
+  /`decision:prevention-shield-allocation`, three on `decision:choose-permanent`). Next:
+  `effect:target-spec-additions` (34, graveyard-scoped multi-card targets), `effect:repeat-process`
+  (32) and `effect:choices-by-other-players` (32, each player choosing in turn order).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
