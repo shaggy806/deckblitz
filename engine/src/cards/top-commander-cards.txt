@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3997 already implemented / 1003 missing (marks refreshed 2026-10-29)
+3999 already implemented / 1001 missing (marks refreshed 2026-10-29)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -100,7 +100,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   101  Vandalblast                              {R}              Sorcery
 [x]   102  Elvish Mystic                            {G}              Creature — Elf Druid
 [x]   103  Phyrexian Arena                          {1}{B}{B}        Enchantment
-[ ]   104  Jeska's Will                             {2}{R}           Sorcery
+[x]   104  Jeska's Will                             {2}{R}           Sorcery
 [x]   105  Prairie Stream                           {0}              Land — Plains Island
 [x]   106  Canopy Vista                             {0}              Land — Forest Plains
 [x]   107  Deadly Rollick                           {3}{B}           Instant
@@ -185,7 +185,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   186  Stormcarved Coast                        {0}              Land
 [x]   187  Spire Garden                             {0}              Land
 [x]   188  Orzhov Signet                            {2}              Artifact
-[ ]   189  Akroma's Will                            {3}{W}           Instant
+[x]   189  Akroma's Will                            {3}{W}           Instant
 [x]   190  Doubling Season                          {4}{G}           Enchantment
 [x]   191  Idol of Oblivion                         {2}              Artifact
 [x]   192  Prismatic Vista                          {0}              Land
