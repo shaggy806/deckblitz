@@ -1,0 +1,780 @@
+{
+  "batch": "B251",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the choices-by-other-players family (effect:hidden-simultaneous-choices, effect:each-player-chooses-then-all-act, effect:each-player-chooses-in-turn-order, effect:each-player-chooses-creature-type, effect:each-player-chooses-counters-then-goad), the target-spec-additions family (effect:targets-from-single-graveyard, effect:target-in-that-players-graveyard, effect:targets-from-target-players-graveyard, effect:targets-same-controller) and the repeat-process family (effect:repeat-process + effect:repeat-effect-x-times)",
+  "authored": [
+    {
+      "name": "Ad Nauseam",
+      "files": [
+        "engine/src/cards/pool/ad-nauseam.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Agitator Ant",
+      "files": [
+        "engine/src/cards/pool/agitator-ant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arashin Sunshield",
+      "files": [
+        "engine/src/cards/pool/arashin-sunshield.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bioshift",
+      "files": [
+        "engine/src/cards/pool/bioshift.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breaking of the Fellowship",
+      "files": [
+        "engine/src/cards/pool/breaking-of-the-fellowship.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Carrion Beetles",
+      "files": [
+        "engine/src/cards/pool/carrion-beetles.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cease // Desist",
+      "files": [
+        "engine/src/cards/pool/cease-desist.ts",
+        "engine/src/cards/pool/cease.ts",
+        "engine/src/cards/pool/desist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cephalid Constable",
+      "files": [
+        "engine/src/cards/pool/cephalid-constable.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cultivator Colossus",
+      "files": [
+        "engine/src/cards/pool/cultivator-colossus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cunning Lethemancer",
+      "files": [
+        "engine/src/cards/pool/cunning-lethemancer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Deadeye Tracker",
+      "files": [
+        "engine/src/cards/pool/deadeye-tracker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Decompose",
+      "files": [
+        "engine/src/cards/pool/decompose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Delirium Skeins",
+      "files": [
+        "engine/src/cards/pool/delirium-skeins.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Demonlord Belzenlok",
+      "files": [
+        "engine/src/cards/pool/demonlord-belzenlok.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Digsite Conservator",
+      "files": [
+        "engine/src/cards/pool/digsite-conservator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Discovery // Dispersal",
+      "files": [
+        "engine/src/cards/pool/discovery-dispersal.ts",
+        "engine/src/cards/pool/discovery.ts",
+        "engine/src/cards/pool/dispersal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwell on the Past",
+      "files": [
+        "engine/src/cards/pool/dwell-on-the-past.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ebony Charm",
+      "files": [
+        "engine/src/cards/pool/ebony-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Expansion Algorithm",
+      "files": [
+        "engine/src/cards/pool/expansion-algorithm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Exponential Growth",
+      "files": [
+        "engine/src/cards/pool/exponential-growth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Famished Ghoul",
+      "files": [
+        "engine/src/cards/pool/famished-ghoul.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Feral Deathgorger // Dusk Sight",
+      "files": [
+        "engine/src/cards/pool/dusk-sight.ts",
+        "engine/src/cards/pool/feral-deathgorger.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Forbidden Ritual",
+      "files": [
+        "engine/src/cards/pool/forbidden-ritual.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Geier Reach Sanitarium",
+      "files": [
+        "engine/src/cards/pool/geier-reach-sanitarium.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Welder",
+      "files": [
+        "engine/src/cards/pool/goblin-welder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grave Sifter",
+      "files": [
+        "engine/src/cards/pool/grave-sifter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Griffnaut Tracker",
+      "files": [
+        "engine/src/cards/pool/griffnaut-tracker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Grindstone",
+      "files": [
+        "engine/src/cards/pool/grindstone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harsh Mercy",
+      "files": [
+        "engine/src/cards/pool/harsh-mercy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Innocent Traveler // Malicious Invader",
+      "files": [
+        "engine/src/cards/pool/innocent-traveler.ts",
+        "engine/src/cards/pool/malicious-invader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Insatiable Frugivore",
+      "files": [
+        "engine/src/cards/pool/insatiable-frugivore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iwamori of the Open Fist",
+      "files": [
+        "engine/src/cards/pool/iwamori-of-the-open-fist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Kindle the Carnage",
+      "files": [
+        "engine/src/cards/pool/kindle-the-carnage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana's Triumph",
+      "files": [
+        "engine/src/cards/pool/lilianas-triumph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loaming Shaman",
+      "files": [
+        "engine/src/cards/pool/loaming-shaman.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Lochmere Serpent",
+      "files": [
+        "engine/src/cards/pool/lochmere-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Master of Ceremonies",
+      "files": [
+        "engine/src/cards/pool/master-of-ceremonies.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Misinformation",
+      "files": [
+        "engine/src/cards/pool/misinformation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mogis's Marauder",
+      "files": [
+        "engine/src/cards/pool/mogiss-marauder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mutiny",
+      "files": [
+        "engine/src/cards/pool/mutiny.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nullmage Advocate",
+      "files": [
+        "engine/src/cards/pool/nullmage-advocate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oath of Lim-Dûl",
+      "files": [
+        "engine/src/cards/pool/oath-of-lim-dul.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Patriarch's Bidding",
+      "files": [
+        "engine/src/cards/pool/patriarchs-bidding.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pestilent Cauldron // Restorative Burst",
+      "files": [
+        "engine/src/cards/pool/pestilent-cauldron.ts",
+        "engine/src/cards/pool/restorative-burst.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Primal Surge",
+      "files": [
+        "engine/src/cards/pool/primal-surge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Professor Onyx",
+      "files": [
+        "engine/src/cards/pool/professor-onyx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Progenitor Exarch",
+      "files": [
+        "engine/src/cards/pool/progenitor-exarch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pulsemage Advocate",
+      "files": [
+        "engine/src/cards/pool/pulsemage-advocate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Push // Pull",
+      "files": [
+        "engine/src/cards/pool/pull.ts",
+        "engine/src/cards/pool/push-pull.ts",
+        "engine/src/cards/pool/push.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quandrix Command",
+      "files": [
+        "engine/src/cards/pool/quandrix-command.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Qutrub Forayer",
+      "files": [
+        "engine/src/cards/pool/qutrub-forayer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rag Dealer",
+      "files": [
+        "engine/src/cards/pool/rag-dealer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rags // Riches",
+      "files": [
+        "engine/src/cards/pool/rags-riches.ts",
+        "engine/src/cards/pool/rags.ts",
+        "engine/src/cards/pool/riches.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rally the Horde",
+      "files": [
+        "engine/src/cards/pool/rally-the-horde.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rankle's Prank",
+      "files": [
+        "engine/src/cards/pool/rankles-prank.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rapid Decay",
+      "files": [
+        "engine/src/cards/pool/rapid-decay.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rats' Feast",
+      "files": [
+        "engine/src/cards/pool/rats-feast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rite of Renewal",
+      "files": [
+        "engine/src/cards/pool/rite-of-renewal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rix Maadi, Dungeon Palace",
+      "files": [
+        "engine/src/cards/pool/rix-maadi-dungeon-palace.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ruin Grinder",
+      "files": [
+        "engine/src/cards/pool/ruin-grinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sadistic Shell Game",
+      "files": [
+        "engine/src/cards/pool/sadistic-shell-game.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scalpelexis",
+      "files": [
+        "engine/src/cards/pool/scalpelexis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scarab Feast",
+      "files": [
+        "engine/src/cards/pool/scarab-feast.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Show and Tell",
+      "files": [
+        "engine/src/cards/pool/show-and-tell.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shred Memory",
+      "files": [
+        "engine/src/cards/pool/shred-memory.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sin, Spira's Punishment",
+      "files": [
+        "engine/src/cards/pool/sin-spiras-punishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smallpox",
+      "files": [
+        "engine/src/cards/pool/smallpox.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul-Shackled Zombie",
+      "files": [
+        "engine/src/cards/pool/soul-shackled-zombie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sphinx's Tutelage",
+      "files": [
+        "engine/src/cards/pool/sphinxs-tutelage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Spurnmage Advocate",
+      "files": [
+        "engine/src/cards/pool/spurnmage-advocate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stronghold Rats",
+      "files": [
+        "engine/src/cards/pool/stronghold-rats.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tempt with Immortality",
+      "files": [
+        "engine/src/cards/pool/tempt-with-immortality.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Horus Heresy",
+      "files": [
+        "engine/src/cards/pool/the-horus-heresy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Legend of Yangchen // Avatar Yangchen",
+      "files": [
+        "engine/src/cards/pool/avatar-yangchen.ts",
+        "engine/src/cards/pool/the-legend-of-yangchen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Tale of Tamiyo",
+      "files": [
+        "engine/src/cards/pool/the-tale-of-tamiyo.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Torment of Hailfire",
+      "files": [
+        "engine/src/cards/pool/torment-of-hailfire.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tromell, Seymour's Butler",
+      "files": [
+        "engine/src/cards/pool/tromell-seymours-butler.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vicious Rumors",
+      "files": [
+        "engine/src/cards/pool/vicious-rumors.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vile Requiem",
+      "files": [
+        "engine/src/cards/pool/vile-requiem.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Waste Management",
+      "files": [
+        "engine/src/cards/pool/waste-management.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Witness the Future",
+      "files": [
+        "engine/src/cards/pool/witness-the-future.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Aether Burst",
+      "needs": [
+        "decision:spell-target-count-amount"
+      ],
+      "why": "A spell's target group is capped only by a number or X; an amount is read only for abilities."
+    },
+    {
+      "name": "Another Round",
+      "needs": [
+        "effect:flicker-chosen-group"
+      ],
+      "why": "The creatures are chosen afresh each pass and exiled and returned together; choose-permanents' then applies one at a time."
+    },
+    {
+      "name": "Archangel of Strife",
+      "needs": [
+        "static:anthem-by-per-player-choice-on-enter"
+      ],
+      "why": "Each player's war or peace choice kept on the permanent, for statics over each controller's creatures."
+    },
+    {
+      "name": "Barrin's Spite",
+      "needs": [
+        "effect:opponent-chooses-among-targets"
+      ],
+      "why": "The targets' controller chooses which of the spell's own targets to sacrifice as it resolves."
+    },
+    {
+      "name": "Cannibalize",
+      "needs": [
+        "decision:choose-among-targets"
+      ],
+      "why": "You choose as it resolves which target is exiled and which gets the counters."
+    },
+    {
+      "name": "Claim Jumper",
+      "needs": [
+        "effect:repeated-search-one-shuffle"
+      ],
+      "why": "Each repeated search shuffles as it finishes; the card searches up to twice and shuffles once at the end."
+    },
+    {
+      "name": "Crooked Scales",
+      "needs": [
+        "effect:repeat-unless-paid"
+      ],
+      "why": "'Destroy your creature unless you pay {3} and repeat': nothing tells `again` you paid, and mayAgain's cost has no decline branch."
+    },
+    {
+      "name": "Dance with Calamity",
+      "needs": [
+        "condition:this-way-total-mana-value"
+      ],
+      "why": "No condition compares the total mana value of the cards exiled this way with 13."
+    },
+    {
+      "name": "Eureka",
+      "needs": [
+        "effect:repeat-until-no-player-acts"
+      ],
+      "why": "Repeat until no player puts a card onto the battlefield over a whole round."
+    },
+    {
+      "name": "Eye of Doom",
+      "needs": [
+        "effect:each-player-puts-counter-on-chosen"
+      ],
+      "why": "Each player puts the doom counter on the permanent they chose, all at once (the ruling); a chosen permanent's counter is put by the effect's controller."
+    },
+    {
+      "name": "Helm of Obedience",
+      "needs": [
+        "condition:this-way-across-repeat-passes"
+      ],
+      "why": "'Until a creature card or X cards have been put into their graveyard this way' counts across every pass, and only cards that reached the graveyard (Leyline of the Void's ruling)."
+    },
+    {
+      "name": "Hypergenesis",
+      "needs": [
+        "effect:repeat-until-no-player-acts"
+      ],
+      "why": "As Eureka; its ruling has the permanents enter one after another, unlike Show and Tell's held entries."
+    },
+    {
+      "name": "Incriminate",
+      "needs": [
+        "effect:opponent-chooses-among-targets"
+      ],
+      "why": "'That player sacrifices one of them of their choice': a choice among the spell's targets."
+    },
+    {
+      "name": "Lim-Dûl's Vault",
+      "needs": [
+        "effect:shuffle-library-keep-looked-on-top"
+      ],
+      "why": "Shuffle, then the last cards looked at on top in any order; its repeat's cost is life, which mayAgain doesn't take."
+    },
+    {
+      "name": "Loamcrafter Faun",
+      "needs": [
+        "effect:discard-any-number-filtered"
+      ],
+      "why": "'Discard one or more land cards': discard's anyNumber takes no filter."
+    },
+    {
+      "name": "Lodestone Bauble",
+      "needs": [
+        "decision:untargeted-player-chosen-with-targets"
+      ],
+      "why": "'Up to four target basic land cards from a player's graveyard … that player draws': the player is chosen, not targeted, even with no cards (the ruling)."
+    },
+    {
+      "name": "Mana Clash",
+      "needs": [
+        "mechanic:coin-flip-heads-tails"
+      ],
+      "why": "Two players each flip with no winner or loser; flip-coin is one won-or-lost flip by the controller."
+    },
+    {
+      "name": "Plague of Vermin",
+      "needs": [
+        "effect:pay-any-amount-of-life",
+        "effect:repeat-until-no-player-acts"
+      ],
+      "why": "Each player pays any amount of life, until a round in which no one pays."
+    },
+    {
+      "name": "Reap",
+      "needs": [
+        "decision:spell-target-count-amount",
+        "decision:target-count-from-other-target"
+      ],
+      "why": "A spell's group capped by an amount, read off the spell's own player target."
+    },
+    {
+      "name": "Serene Remembrance",
+      "needs": [
+        "effect:shuffle-graveyard-targets-into-library"
+      ],
+      "why": "Into their owners' libraries, each shuffled once, itself among them: no shuffle of a target card's owner's library."
+    },
+    {
+      "name": "Shrouded Lore",
+      "needs": [
+        "effect:repeat-choice-excluding-earlier-passes"
+      ],
+      "why": "Each pass's choice can't take a card already chosen in an earlier pass."
+    },
+    {
+      "name": "Tainted Pact",
+      "needs": [
+        "condition:this-way-across-repeat-passes"
+      ],
+      "why": "'The same name as another card exiled this way' and its stop read across every pass, but a pass reads only itself."
+    },
+    {
+      "name": "Tempt with Discovery",
+      "needs": [
+        "effect:each-player-may-held-search"
+      ],
+      "why": "The opponents' searches happen as each answers; the ruling has them all search together once everyone has decided."
+    },
+    {
+      "name": "Tempting Contract",
+      "needs": [
+        "effect:each-player-may-held-token-creation"
+      ],
+      "why": "Each opponent's Treasure is made as they answer; the ruling has theirs made at once, then yours at once."
+    },
+    {
+      "name": "Thieves' Auction",
+      "needs": [
+        "decision:each-player-chooses-exiled-card",
+        "effect:repeat-until-no-player-acts"
+      ],
+      "why": "Players take turns choosing among the cards exiled this way until none are left."
+    },
+    {
+      "name": "Tinybones Joins Up",
+      "needs": [
+        "effect:target-group-simultaneous-discard"
+      ],
+      "why": "'Any number of target players each discard a card': a target group's discards aren't held until all have chosen."
+    },
+    {
+      "name": "Trade Secrets",
+      "needs": [
+        "effect:repeat-chosen-by-other-player"
+      ],
+      "why": "'That opponent may repeat this process': mayAgain asks only the controller."
+    }
+  ]
+}

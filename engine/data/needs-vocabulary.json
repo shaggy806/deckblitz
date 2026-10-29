@@ -14379,6 +14379,91 @@
    "family": "replacement:damage-modification",
    "description": "'You may prevent X of that damage', a prevention its controller chooses per event",
    "example": "Battletide Alchemist"
+  },
+  "condition:this-way-across-repeat-passes": {
+   "family": "effect:repeat-process",
+   "description": "A condition over everything a `repeat` did so far, not the pass just done ('until a creature card or X cards have been put into their graveyard this way', 'the same name as another card exiled this way')",
+   "example": "Helm of Obedience"
+  },
+  "condition:this-way-total-mana-value": {
+   "family": "effect:repeat-process",
+   "description": "A condition comparing the total mana value of the cards done to this way with a number ('if the total mana value of the cards exiled this way is 13 or less')",
+   "example": "Dance with Calamity"
+  },
+  "decision:each-player-chooses-exiled-card": {
+   "family": "effect:choices-by-other-players",
+   "description": "Players take turns choosing among the cards exiled this way, each putting theirs onto the battlefield, until none are left",
+   "example": "Thieves' Auction"
+  },
+  "decision:target-count-from-other-target": {
+   "family": "decision:variable-target-count",
+   "description": "A target group's count read from another of the spell's targets ('up to X target cards from your graveyard, where X is the number of black permanents target opponent controls')",
+   "example": "Reap"
+  },
+  "decision:untargeted-player-chosen-with-targets": {
+   "family": "effect:target-spec-additions",
+   "description": "A player chosen (not targeted) as the ability is put on the stack, binding a target group to their graveyard ('up to four target basic land cards from a player's graveyard … that player draws')",
+   "example": "Lodestone Bauble"
+  },
+  "effect:each-player-may-held-search": {
+   "family": "effect:choices-by-other-players",
+   "description": "An each-player-may whose library search happens for everyone together once all have decided (rule 101.4 — the tempting offers)",
+   "example": "Tempt with Discovery"
+  },
+  "effect:each-player-may-held-token-creation": {
+   "family": "effect:choices-by-other-players",
+   "description": "An each-player-may's token creation done for everyone at once after all have decided, then the controller's follow-up tokens at once",
+   "example": "Tempting Contract"
+  },
+  "effect:each-player-puts-counter-on-chosen": {
+   "family": "effect:choices-by-other-players",
+   "description": "Each player puts a counter on the permanent they chose, all at once, the counters put by each chooser",
+   "example": "Eye of Doom"
+  },
+  "effect:flicker-chosen-group": {
+   "family": "effect:repeat-process",
+   "description": "Exile any number of chosen (not targeted) permanents and return them together, chosen afresh each pass",
+   "example": "Another Round"
+  },
+  "effect:repeat-choice-excluding-earlier-passes": {
+   "family": "effect:repeat-process",
+   "description": "A repeat whose choice each pass can't take a card chosen in an earlier pass",
+   "example": "Shrouded Lore"
+  },
+  "effect:repeat-chosen-by-other-player": {
+   "family": "effect:repeat-process",
+   "description": "'That opponent may repeat this process': a repeat another player decides",
+   "example": "Trade Secrets"
+  },
+  "effect:repeat-unless-paid": {
+   "family": "effect:repeat-process",
+   "description": "'Destroy your creature unless you pay {3} and repeat this process': a repeat whose going on is the payment avoiding the step",
+   "example": "Crooked Scales"
+  },
+  "effect:repeat-until-no-player-acts": {
+   "family": "effect:repeat-process",
+   "description": "Repeat a round of each player's choice until a round in which nobody acts ('repeat this process until no one puts a card onto the battlefield')",
+   "example": "Eureka"
+  },
+  "effect:repeated-search-one-shuffle": {
+   "family": "effect:repeat-process",
+   "description": "A repeated library search that shuffles once when the process ends, not after each search ('If you search your library this way, shuffle')",
+   "example": "Claim Jumper"
+  },
+  "effect:shuffle-library-keep-looked-on-top": {
+   "family": "effect:repeat-process",
+   "description": "Shuffle the library, then put the cards last looked at on top in any order",
+   "example": "Lim-Dûl's Vault"
+  },
+  "effect:target-group-simultaneous-discard": {
+   "family": "effect:choices-by-other-players",
+   "description": "'Any number of target players each discard a card': a target group's discards held until all have chosen, as a scoped discard's are",
+   "example": "Tinybones Joins Up"
+  },
+  "static:anthem-by-per-player-choice-on-enter": {
+   "family": "effect:choices-by-other-players",
+   "description": "Each player's choice made as the permanent enters, kept on it for statics over each controller's creatures ('creatures controlled by players who chose war get +3/+0')",
+   "example": "Archangel of Strife"
   }
  },
  "groups": [

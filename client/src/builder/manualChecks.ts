@@ -8473,4 +8473,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Mistform Stalker: it becomes the creature type you choose',
     board({ you: { bf: ['Island', 'Mistform Stalker'] } }),
   ),
+  // --- Each player chooses, shared graveyards, repeating (2026-10-28, need-keys Phase 2) ---
+  preset(
+    'Show and Tell: both cards enter together',
+    board({
+      you: { bf: ['Island*3'], hand: ['Show and Tell', 'Soul Warden'] },
+      opp: { hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Harsh Mercy: each player names a creature type',
+    board({
+      you: { bf: ['Plains*3', 'Grizzly Bears'], hand: ['Harsh Mercy'] },
+      opp: { bf: ['Hill Giant', 'Elvish Visionary'] },
+    }),
+  ),
+  preset(
+    'Ad Nauseam: you decide after each card',
+    board({ you: { bf: ['Swamp*5'], hand: ['Ad Nauseam'], lib: ['Hill Giant', 'Grizzly Bears'] } }),
+  ),
+  preset(
+    "Witness the Future: only the target player's graveyard",
+    board({
+      you: { bf: ['Island*3'], hand: ['Witness the Future'], gy: ['Lightning Bolt'] },
+      opp: { gy: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
 ]

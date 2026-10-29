@@ -5653,3 +5653,20 @@ engine terms. A second thing to check is a second test.
 - **Do:** Activate Mistform Stalker's {1} ability and pick Goblin in the creature type search.
 - **Expect:** The search offers every creature type. The Stalker's type line reads Goblin, not Illusion, until end of turn.
 
+## Each player chooses, shared graveyards, repeating (2026-10-28, need-keys Phase 2: three families)
+
+### Show and Tell: both cards enter together
+- **Do:** Cast Show and Tell. Put Soul Warden onto the battlefield when asked.
+- **Expect:** Bob is asked after you; your Soul Warden stays in your hand until he has chosen. Then both cards enter at once and you gain 1 life from Bob's creature entering.
+
+### Harsh Mercy: each player names a creature type
+- **Do:** Cast Harsh Mercy and pick Bear in the creature type search.
+- **Expect:** The log shows your choice ("chooses Bear"), then Bob's; neither is called a vote. Your Grizzly Bears survive; every creature of no chosen type is destroyed.
+
+### Ad Nauseam: you decide after each card
+- **Do:** Cast Ad Nauseam. Answer "Repeat this process?" with yes once, then no.
+- **Expect:** Each card is revealed and put into your hand, and you lose life equal to its mana value. After the second card it stops.
+
+### Witness the Future: only the target player's graveyard
+- **Do:** Cast Witness the Future targeting Bob.
+- **Expect:** Only Bob's graveyard cards can be picked next (up to four); your own aren't offered. They go into Bob's library, then you take one of your top four cards.
