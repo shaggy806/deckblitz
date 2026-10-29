@@ -24,8 +24,24 @@ import { A, B, settle, subtypes } from "./harness.js";
 
 const MOON = "Test Moon";
 const MIRAGE = "Test Mirage";
+const GLACIERS = "Test Glaciers";
 
 const registry = createDefaultRegistry()
+  .register(
+    defineCard({
+      name: GLACIERS,
+      manaCost: "{0}",
+      types: ["enchantment"],
+      text: "All Mountains are Plains.",
+      static: [
+        {
+          affects: { scope: "filter", filter: { type: "land", subtype: "Mountain" } },
+          setSubtypes: ["Plains"],
+          text: "All Mountains are Plains.",
+        },
+      ],
+    }),
+  )
   .register(
     defineCard({
       name: MOON,
@@ -122,6 +138,25 @@ describe("rule 305.7: a land set to a basic land type", () => {
     expect(colors(game, urborg)).toEqual(["R"]);
   });
 
+  it("'all Mountains are Plains' applies after a later effect that makes a land a Mountain (613.8a)", () => {
+    const { game } = setUp();
+    put(game, GLACIERS);
+    const forest = put(game, "Forest");
+    game.debugApplyEffect(A, { kind: "add-types", target: 0, setSubtypes: ["Mountain"], duration: "end-of-turn" }, [
+      { kind: "object", object: forest },
+    ]);
+    expect(subtypes(game, forest)).toEqual(["Plains"]);
+    expect(colors(game, forest)).toEqual(["W"]);
+  });
+
+  it("…and after a later Blood Moon: a nonbasic land is a Plains", () => {
+    const { game } = setUp();
+    put(game, GLACIERS);
+    const coast = put(game, "Yavimaya Coast");
+    put(game, MOON);
+    expect(subtypes(game, coast)).toEqual(["Plains"]);
+  });
+
   it("a land entering under it has none of its own entering abilities: it doesn't enter tapped (614.12)", () => {
     const { game } = setUp();
     put(game, MOON);
@@ -157,7 +192,7 @@ describe("the basic land type of your choice, on resolution", () => {
       {
         kind: "choose-creature-type",
         options: BASIC_LAND_TYPE_CHOICES,
-        prompt: "Choose a basic land type",
+        prompt: "choose a basic land type",
         then: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
       },
       [{ kind: "object", object: coast }],

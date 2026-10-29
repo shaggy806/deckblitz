@@ -1658,8 +1658,9 @@ export type EffectSpec =
        * becomes blocked by a creature, this creature deals 1 damage to **that
        * creature**" (Ornery Goblin — `blocks` with `object: "blocked"`, and
        * `blocked-by`, whose trigger object is the blocker). One that has left
-       * the battlefield since is dealt nothing. */
-      readonly target?: number | "trigger-object";
+       * the battlefield since is dealt nothing. Or `"attached"`: an Aura's
+       * "deals 2 damage to that creature" (Earthbind) — what it enchants. */
+      readonly target?: number | "trigger-object" | "attached";
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
@@ -3299,6 +3300,11 @@ export type EffectSpec =
       /** Spare the effect's own source — "**other** Spiders you control
        * gain flying" (Cosmic Spider-Man). Same clause as `modify-pt-all`. */
       readonly exceptSource?: boolean;
+      /** `filter` read from the side of the player in this target slot (or
+       * that permanent's controller) — its `controlledBy: "you"` is them, as
+       * `destroy-all`'s: Reins of Power's "those creatures gain haste" for
+       * the target opponent's side. Nothing once that target is illegal. */
+      readonly controlledByTarget?: number;
     }
   | {
       /**
@@ -7265,6 +7271,8 @@ export interface EffectApi {
     keyword: Keyword,
     duration: PtDuration,
     exceptSource?: boolean,
+    /** `filter` read from this player's side (`controlledByTarget`). */
+    scopeTo?: PlayerId,
   ): void;
   /** See the `"double-pt-all"` {@link EffectSpec}. */
   doublePtAll(filter: CardFilter, duration: PtDuration, powerOnly: boolean, exceptSource: boolean): void;
@@ -10996,9 +11004,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.doubleCounters(target, spec.counter);
       return;
     }
-    case "grant-keyword-all":
-      ctx.grantKeywordAll(spec.filter, spec.keyword, spec.duration, spec.exceptSource === true);
+    case "grant-keyword-all": {
+      if (spec.controlledByTarget !== undefined && illegalSlot(spec.controlledByTarget, ctx)) return;
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      ctx.grantKeywordAll(spec.filter, spec.keyword, spec.duration, spec.exceptSource === true, scopeTo);
       return;
+    }
     case "grant-toxic": {
       if (spec.filter !== undefined) {
         ctx.grantToxic(spec.filter, spec.amount, spec.duration, spec.exceptSource === true);

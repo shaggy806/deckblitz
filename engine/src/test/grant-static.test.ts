@@ -12,7 +12,7 @@ import { describe, expect, it } from "vitest";
 import type { EffectSpec } from "../effects.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, blockOffer, keywords, life, pt, settle, spawn, table } from "./harness.js";
+import { A, B, activate, blockOffer, keywords, life, pt, settle, spawn, table } from "./harness.js";
 
 const run = (game: Game, effect: EffectSpec, target?: ObjectId, player: PlayerId = A, source?: ObjectId): void => {
   game.debugApplyEffect(player, effect, target === undefined ? [] : [{ kind: "object", object: target }], { source });
@@ -174,6 +174,34 @@ describe("grant-static", () => {
     run(game, { kind: "add-counter", target: 0, counter: "fungus", amount: 1 }, bears);
     game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "precombat-main");
     expect(game.state.objects[bears].tapped).toBe(true);
+  });
+
+  it("a granted 'Creatures you control have …' gives them an activated ability they can use", () => {
+    const { game } = table();
+    const saga = spawn(game, "Wastes", A);
+    const bears = spawn(game, "Grizzly Bears", A);
+    run(
+      game,
+      {
+        kind: "grant-static",
+        target: 0,
+        ability: {
+          affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" } },
+          grantsActivated: [
+            { cost: { mana: null, tap: true }, targets: [], effect: { kind: "gain-life", amount: 1 }, resolve: null, text: "{T}: You gain 1 life." },
+          ],
+          text: 'Creatures you control have "{T}: You gain 1 life."',
+        },
+        duration: "permanent",
+      },
+      saga,
+    );
+    const offered = game
+      .legalActions(A)
+      .filter((action) => action.kind === "activate-ability" && action.source === bears);
+    expect(offered.length).toBe(1);
+    activate(game, bears, (offered[0] as { abilityIndex: number }).abilityIndex);
+    expect(life(game, A)).toBe(21);
   });
 
   it("a granted 'You can't lose the game' keeps its controller in at 0 life", () => {

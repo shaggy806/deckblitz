@@ -680,6 +680,9 @@ interface TriggeredGrantSource {
   readonly ability: StaticAbility;
   readonly staticIndex: number;
   readonly abilities: readonly TriggeredAbility[];
+  /** A static a `grant-static` gave the source: no printed index, so each
+   * granted ability is its own ref. */
+  readonly granted?: true;
 }
 
 /** Combat damage from the same commander at or above this total is a loss (rule 903.10a). */
@@ -14676,6 +14679,11 @@ export class Game {
           out.push({ source, ability, staticIndex, abilities: ability.grantsTriggered });
         }
       });
+      for (const ability of grantedStatics(this.state, this.registry, source)) {
+        if (ability.grantsTriggered !== undefined) {
+          out.push({ source, ability, staticIndex: -1, abilities: ability.grantsTriggered, granted: true });
+        }
+      }
     }
     return out;
   }
@@ -14778,7 +14786,7 @@ export class Game {
         ts: number;
         entries: { ability: TriggeredAbility; ref: GrantedAbilityRef }[];
       }[] = [];
-      for (const { source, ability, staticIndex, abilities } of sources) {
+      for (const { source, ability, staticIndex, abilities, granted: viaGrant } of sources) {
         if (!grantOutlastsLoss(lostAt, source.timestamp)) continue;
         const keywords = (): ReadonlySet<Keyword> => this.characteristics(target.id).keywords;
         if (!staticReaches(this.state, this.registry, source, ability, target, { keywords })) continue;
@@ -14788,7 +14796,9 @@ export class Game {
           ts: source.timestamp,
           entries: abilities.map((grantedAbility, index) => ({
             ability: grantedAbility,
-            ref: { kind: "static", cardName, staticIndex, list: "triggered", index },
+            ref: viaGrant
+              ? { kind: "modifier", ability: grantedAbility }
+              : { kind: "static", cardName, staticIndex, list: "triggered", index },
           })),
         });
       }
@@ -14882,6 +14892,14 @@ export class Game {
           if (abilities.length > 0) out.push({ source, ability, staticIndex, abilities, refs });
         }
       });
+      // A static a `grant-static` gave it (Roar of the Fifth People's chapter
+      // II: "This Saga gains 'Creatures you control have …'"): no printed
+      // index, so each ability is its own ref.
+      for (const ability of grantedStatics(this.state, this.registry, source)) {
+        if (ability.grantsActivated === undefined) continue;
+        const abilities = ability.grantsActivated;
+        out.push({ source, ability, staticIndex: -1, abilities, refs: abilities.map((a) => ({ kind: "modifier-activated", ability: a })) });
+      }
     }
     return out;
   }
@@ -24161,9 +24179,9 @@ export class Game {
         }
         invalidateComputedCache();
       },
-      grantKeywordAll: (filter, keyword, duration, exceptSource) =>
+      grantKeywordAll: (filter, keyword, duration, exceptSource, scopeTo) =>
         this.grantKeywordAll(
-          controller,
+          scopeTo ?? controller,
           filter,
           keyword,
           lastingHere(duration),

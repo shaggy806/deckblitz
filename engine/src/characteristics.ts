@@ -2288,13 +2288,17 @@ function foldLayerFour(
   steps.sort((a, b) => a.key - b.key);
   layer4InProgress.add(object.id);
   try {
-    let result = foldLayerFourOnce(state, registry, object, steps, null);
+    let { four: result, seen } = foldLayerFourOnce(state, registry, object, steps, null);
     for (let pass = 0; pass < sources.length; pass += 1) {
-      const next = foldLayerFourOnce(state, registry, object, steps, result);
+      // Every type any pass has had at any point, not just where it ended: a
+      // dependent setter's own change can hide what it depended on (Glaciers
+      // made a Mountain a Plains), which would undo it on the next pass.
+      const next = foldLayerFourOnce(state, registry, object, steps, seen);
+      seen = { types: union(seen.types, next.seen.types), subtypes: union(seen.subtypes, next.seen.subtypes) };
       const settled =
-        next.applied.length === result.applied.length &&
-        next.applied.every((a, i) => a === result.applied[i]);
-      result = next;
+        next.four.applied.length === result.applied.length &&
+        next.four.applied.every((a, i) => a === result.applied[i]);
+      result = next.four;
       if (settled) break;
     }
     return result;
@@ -2308,28 +2312,27 @@ function foldLayerFourOnce(
   registry: CardRegistry,
   object: GameObject,
   steps: readonly LayerFourStep[],
-  previous: LayerFour | null,
-): LayerFour {
+  /** Every type and subtype earlier passes had at any point. */
+  previous: { readonly types: readonly CardType[]; readonly subtypes: readonly string[] } | null,
+): { four: LayerFour; seen: { types: readonly CardType[]; subtypes: readonly string[] } } {
   let types: readonly CardType[] = printedDefinition(registry, object).types;
   let subtypes = printedSubtypes(registry, object);
+  let seenTypes = types;
+  let seenSubtypes = subtypes;
   const applied: ContributingStatic[] = [];
-  for (const step of steps) {
-    if ("modifier" in step) {
-      ({ types, subtypes } = applyModifierTypes(step.modifier, types, subtypes));
-      continue;
-    }
-    const { source, ability } = step.grant;
-    const view = {
-      types: previous === null ? types : union(types, previous.types),
-      subtypes: previous === null ? subtypes : union(subtypes, previous.subtypes),
-      inFold: true,
-    };
-    if (!staticAffects(state, registry, ability.affects, source, object, view)) continue;
+  // Statics that reach `object` only through what a later step gives it
+  // (Glaciers' "all Mountains are Plains" over a Forest a later effect made a
+  // Mountain): each depends on that step (rule 613.8a) and applies after it —
+  // after every step, in timestamp order among themselves, matched then
+  // against the types as they are by that point.
+  const deferred: ContributingStatic[] = [];
+  const apply = (grant: ContributingStatic): void => {
+    const { source, ability } = grant;
     if (
       ability.condition !== undefined &&
       !staticConditionMet(state, registry, source, ability.condition)
     ) {
-      continue;
+      return;
     }
     if (ability.setTypes !== undefined || ability.removeTypes !== undefined) {
       // Arixmethes' "it's a land (it's not a creature)", a God's "isn't a
@@ -2355,7 +2358,7 @@ function foldLayerFourOnce(
       // Convincing Mirage's "enchanted land is the chosen type": its
       // source's choice as it entered, replacing every land type (205.1a).
       const chosen = source.chosenOnEnter;
-      if (typeof chosen !== "string" || !isBasicLandType(chosen)) continue;
+      if (typeof chosen !== "string" || !isBasicLandType(chosen)) return;
       subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
     }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
@@ -2365,9 +2368,40 @@ function foldLayerFourOnce(
       const chosen = source.chosenCreatureType;
       if (typeof chosen === "string" && isCreatureType(chosen)) subtypes = union(subtypes, [chosen]);
     }
-    applied.push(step.grant);
+    applied.push(grant);
+  };
+  const see = (): void => {
+    seenTypes = union(seenTypes, types);
+    seenSubtypes = union(seenSubtypes, subtypes);
+  };
+  for (const step of steps) {
+    if ("modifier" in step) {
+      ({ types, subtypes } = applyModifierTypes(step.modifier, types, subtypes));
+      see();
+      continue;
+    }
+    const { source, ability } = step.grant;
+    const now = { types, subtypes, inFold: true };
+    if (staticAffects(state, registry, ability.affects, source, object, now)) {
+      apply(step.grant);
+      see();
+      continue;
+    }
+    if (previous === null) continue;
+    const later = {
+      types: union(types, previous.types),
+      subtypes: union(subtypes, previous.subtypes),
+      inFold: true,
+    };
+    if (staticAffects(state, registry, ability.affects, source, object, later)) deferred.push(step.grant);
   }
-  return { types, subtypes, applied };
+  for (const grant of deferred) {
+    if (staticAffects(state, registry, grant.ability.affects, grant.source, object, { types, subtypes, inFold: true })) {
+      apply(grant);
+      see();
+    }
+  }
+  return { four: { types, subtypes, applied }, seen: { types: seenTypes, subtypes: seenSubtypes } };
 }
 
 /** Throw if a cached {@link LayerFour} diverges from a fresh fold — the
