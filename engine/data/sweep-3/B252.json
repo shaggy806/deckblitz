@@ -1,0 +1,22 @@
+{
+  "batch": "B252",
+  "status": "complete",
+  "ranks": "Need-keys follow-up: effect:commander-conditional-mode-count, built long ago (castModal.maxModesIf) but never marked built, plus the cardsInHand target form",
+  "authored": [
+    {
+      "name": "Akroma's Will",
+      "files": [
+        "engine/src/cards/pool/akromas-will.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeska's Will",
+      "files": [
+        "engine/src/cards/pool/jeskas-will.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": []
+}

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Jeska's Will and Akroma's Will** (2026-10-28, B252): their "if you control a commander as you
+  cast this spell, you may choose both" was `castModal.maxModesIf` all along, but
+  `effect:commander-conditional-mode-count` was never added to `built`, so both still read as blocked
+  (the user spotted it). Built for Jeska's: `cardsInHand: { target: n }`, a target player's hand
+  size for an effect that doesn't act on them.
 - **Need-keys Phase 2, three families in one batch: each player chooses then all act, shared-graveyard
   targets, repeat this process** (2026-10-28, B251, `43de311f2`, `382cdf3b9`, `b53475d57`;
   `effect:hidden-simultaneous-choices`, `effect:each-player-chooses-then-all-act`,

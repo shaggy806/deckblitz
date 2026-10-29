@@ -604,8 +604,10 @@ export type EffectAmount =
    * player a per-player effect is acting on: Stormbreath Dragon's "deals
    * damage to each opponent equal to the number of cards in **that player's**
    * hand" is a `damage` to `who: "each-opponent"` of `{ cardsInHand: "each"
-   * }`. */
-  | { readonly cardsInHand: PlayerScope | "each" }
+   * }`. `{ target: n }` is the hand of the player in target slot `n`, for an
+   * effect that doesn't act on them — Jeska's Will's "add {R} for each card
+   * in target opponent's hand" (nothing, with that target illegal). */
+  | { readonly cardsInHand: PlayerScope | "each" | { readonly target: number } }
   /** How many cards are in a library or graveyard — yours, or with
    * `"each"` the player a per-player effect is acting on: "any number of
    * target players each mill half **their** library" (Singularity Rupture)
@@ -8894,6 +8896,10 @@ function signedAmountValue(
   }
   if ("cardsInHand" in amount) {
     if (amount.cardsInHand === "each") return ctx.handSizeOf(each ?? ctx.controller);
+    if (typeof amount.cardsInHand === "object") {
+      const ref = ctx.targets[amount.cardsInHand.target];
+      return ref?.kind === "player" ? ctx.handSizeOf(ref.player) : 0;
+    }
     return ctx.playersInScope(amount.cardsInHand).reduce((n, p) => n + ctx.handSizeOf(p), 0);
   }
   if ("colorsOf" in amount) {

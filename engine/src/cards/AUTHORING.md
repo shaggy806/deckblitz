@@ -831,12 +831,14 @@ of that kind the scope's players have, summed, default `"you"` — Ezuri, Claw
 of Progress's "where X is the number of experience counters you have"),
 `{ opponentsControllingFewer: CardFilter }` (Voice of Many — a comparison per
 player, which no single filter can express),
-`{ cardsInHand: PlayerScope | "each" }` (the hand sizes of the scope's players, summed —
+`{ cardsInHand: PlayerScope | "each" | { target: n } }` (the hand sizes of the scope's players, summed —
 "the number of cards in **defending player's** hand" is `"trigger-player"` in
 an attack trigger; `"each"` is the player a per-player effect is acting on —
 Stormbreath Dragon's "damage to each opponent equal to the number of cards in
 that player's hand" is a `damage` to `who: "each-opponent"` of `{ cardsInHand:
-"each" }`), `{ attackingPlayer: "each" }` (the creatures attacking the player
+"each" }`; `{ target: n }` is the player in target slot `n`, for an effect
+that doesn't act on them — Jeska's Will's "add {R} for each card in target
+opponent's hand"), `{ attackingPlayer: "each" }` (the creatures attacking the player
 a per-player effect is acting on — that player, not their planeswalkers;
 Within Range's "each opponent loses life equal to the number of creatures
 attacking them"), `{ colorsOf: ref }` (how many colours one object has —

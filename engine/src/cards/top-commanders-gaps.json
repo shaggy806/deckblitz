@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:commander-conditional-mode-count",
   "effect:targets-from-single-graveyard",
   "effect:target-in-that-players-graveyard",
   "effect:targets-from-target-players-graveyard",

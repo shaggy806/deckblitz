@@ -444,6 +444,7 @@ import _poolAkromasBlessing from "./pool/akromas-blessing.js";
 import _poolAkromasDevoted from "./pool/akromas-devoted.js";
 import _poolAkromasMemorial from "./pool/akromas-memorial.js";
 import _poolAkromasVengeance from "./pool/akromas-vengeance.js";
+import _poolAkromasWill from "./pool/akromas-will.js";
 import _poolAkronLegionnaire from "./pool/akron-legionnaire.js";
 import _poolAkuDjinn from "./pool/aku-djinn.js";
 import _poolAkulTheUnrepentant from "./pool/akul-the-unrepentant.js";
@@ -11693,6 +11694,7 @@ import _poolJeskaiSage from "./pool/jeskai-sage.js";
 import _poolJeskaiShrinekeeper from "./pool/jeskai-shrinekeeper.js";
 import _poolJeskaiStudent from "./pool/jeskai-student.js";
 import _poolJeskaiWindscout from "./pool/jeskai-windscout.js";
+import _poolJeskasWill from "./pool/jeskas-will.js";
 import _poolJessicaJonesPrivateEye from "./pool/jessica-jones-private-eye.js";
 import _poolJestersCap from "./pool/jesters-cap.js";
 import _poolJetFreedomFighter from "./pool/jet-freedom-fighter.js";
@@ -27429,6 +27431,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAkromasDevoted,
   _poolAkromasMemorial,
   _poolAkromasVengeance,
+  _poolAkromasWill,
   _poolAkronLegionnaire,
   _poolAkuDjinn,
   _poolAkulTheUnrepentant,
@@ -38678,6 +38681,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJeskaiShrinekeeper,
   _poolJeskaiStudent,
   _poolJeskaiWindscout,
+  _poolJeskasWill,
   _poolJessicaJonesPrivateEye,
   _poolJestersCap,
   _poolJetFreedomFighter,
@@ -54427,6 +54431,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/akromas-devoted": _poolAkromasDevoted,
   "pool/akromas-memorial": _poolAkromasMemorial,
   "pool/akromas-vengeance": _poolAkromasVengeance,
+  "pool/akromas-will": _poolAkromasWill,
   "pool/akron-legionnaire": _poolAkronLegionnaire,
   "pool/aku-djinn": _poolAkuDjinn,
   "pool/akul-the-unrepentant": _poolAkulTheUnrepentant,
@@ -65676,6 +65681,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jeskai-shrinekeeper": _poolJeskaiShrinekeeper,
   "pool/jeskai-student": _poolJeskaiStudent,
   "pool/jeskai-windscout": _poolJeskaiWindscout,
+  "pool/jeskas-will": _poolJeskasWill,
   "pool/jessica-jones-private-eye": _poolJessicaJonesPrivateEye,
   "pool/jesters-cap": _poolJestersCap,
   "pool/jet-freedom-fighter": _poolJetFreedomFighter,
