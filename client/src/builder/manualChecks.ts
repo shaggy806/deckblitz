@@ -8540,11 +8540,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
           'Plains*3',
         ],
       },
+      // A four-player table: the prompt is the same at any size.
+      opp: [{}, {}, {}],
     }),
   ),
   preset(
     'Cankerbloom: each mode is its own activation',
-    board({ you: { bf: ['Cankerbloom', 'Forest'] }, opp: { bf: ['Sol Ring', 'Pacifism'] } }),
+    board({ you: { bf: ['Cankerbloom', 'Forest'] }, opp: { bf: ['Sol Ring', 'Glorious Anthem'] } }),
   ),
   preset(
     "Arrest: the enchanted creature's abilities can't be activated",

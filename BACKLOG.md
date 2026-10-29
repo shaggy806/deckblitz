@@ -98,9 +98,14 @@ section keeps only what to do next.
   2026-10-29: `grant-static`, "can't be blocked by [X] this turn", rule 305.7's land-type setting
   with its 613.8a dependency, "the basic land type of your choice", `exchange-control`; 90 cards
   authored, 31 still blocked — six on `effect:targets-share-type`, three on
-  `effect:set-land-types-all`). Next: `cost:remove-counters-from-chosen`
-  (27), `effect:modal-activated-targeted-modes` (27), `effect:cast-and-activate-restrictions` (27)
-  and `effect:amount-fields-dynamic` (27).
+  `effect:set-land-types-all`), remove-counters-from-chosen, modal-activated-targeted-modes,
+  cast-and-activate-restrictions' host-lock unit and amount-fields-dynamic (B254, 2026-10-29: the
+  `remove-counters` decision for chosen counter costs and the `remove-counters` effect, modal
+  activated abilities offered once per mode, `hostOfSource` with `onlyTapAbilities` and
+  `counter`'s `lockSource`, a scoped sacrifice's count per player; 112 cards authored, 26 blocked —
+  17 of them on other open keys, four new narrow keys). Next: `trigger:dies-after-dealt-damage-by-source`
+  (26), `effect:choices-by-other-players`' chooser group (26), `decision:separate-into-piles` (24)
+  and `effect:switch-pt` (24).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

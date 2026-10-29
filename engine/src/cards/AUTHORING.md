@@ -5140,9 +5140,6 @@ Delete an entry in the same commit as the feature that retires it.
   for it — strictly better than the printed card. They're excluded there and
   stay activatable by hand, which floats the mana; the effect is that the card
   is inert during auto-payment rather than wrong.
-- **`EffectSpec.sacrifice.count` is a fixed `number`**, not an `EffectAmount` —
-  can't sacrifice "X" of something where X is the spell's own chosen value
-  (Nahiri's Lithoforming) (needed-cards P18).
 - No **"a player plays a land"** trigger distinct from "a land enters the
   battlefield" generally (Burgeoning) — the latter also fires for a land
   fetched by an effect, which the former shouldn't (needed-cards P18).
@@ -5227,12 +5224,6 @@ Delete an entry in the same commit as the feature that retires it.
   after them. (Against one opponent, however many Thieves they have, there's
   nothing to choose.) No damage **redirection** to a third object (Harm's
   Way).
-- **Modal abilities** — a modal *activated* ability would choose its modes
-  as it resolves, not as it's activated (rule 700.2b); the pool has none. A
-  modal *triggered* ability announces them as it goes on the stack
-  (`announced`), and its modes may bring targets of their own. A modal
-  activated ability's modes can't.
-  A modal *spell* has neither problem: it uses `castModal`.
 - **Snow mana of a spell's colours** — Boreal Outrider's "if {S} of any of
   that spell's colors was spent": a spell records where its mana came from
   (`manaSpentFrom`), not which unit was which colour. Snow mana itself

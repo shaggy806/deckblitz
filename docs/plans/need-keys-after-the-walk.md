@@ -412,6 +412,18 @@ missing. Re-run `--greedy` for Phase 2's order.
   damage couldn't name the creature it enchants (Earthbind). `effect:targets-share-type` now blocks
   six.
 
+- **2026-10-29: four families (B254)** — remove-counters-from-chosen (27, with
+  `cost:remove-counter-any-kind` riding along), modal-activated-targeted-modes (27),
+  cast-and-activate-restrictions' host-lock unit (27) and amount-fields-dynamic's fixed-field unit
+  (27): the `remove-counters` decision (the 28th kind) for chosen counter costs and a new
+  `remove-counters` effect, modal activated abilities offered once per mode set, `hostOfSource`
+  prohibitions, and a scoped sacrifice's count read per player. 112 authored (12 by the lead, 21
+  auto-finished by the new templates, 79 by five agents), 26 blocked — 17 on other open keys,
+  four new narrow keys. The agents found several of the batch's "still blocked" guesses wrong
+  (Banquet Guests' twice X, Chisei's unless, Death Cloud already worked). Next:
+  `trigger:dies-after-dealt-damage-by-source` (26), `effect:choices-by-other-players`' chooser
+  group (26), `decision:separate-into-piles` (24), `effect:switch-pt` (24).
+
 ## Rough size
 
 Phase 0 is one session, and the trial a short one. Phase 1 is one cheap-agent session (steps 1.3 and 1.4), plus up to six

@@ -86,6 +86,24 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, four families in one batch: counters removed by choice, modal activated
+  abilities, an Aura's lock on its host, counts in fixed fields** (2026-10-29, B254, `8fffb2969`,
+  `ed61cbdb5`, `702053837`; `cost:remove-counters-from-chosen`,
+  `cost:remove-counter-from-other-permanent-or-suspended-card`, `cost:remove-counter-any-kind`,
+  `effect:remove-counters-up-to`, `effect:modal-activated-targeted-modes`,
+  `effect:modal-activated-ability`, `static:attached-activated-abilities-prohibited`,
+  `static:prohibit-tap-abilities-of-attached`, `effect:prohibit-source-of-countered-ability`,
+  `effect:sacrifice-amount`, `effect:put-on-library-dynamic-position`,
+  `effect:manifest-count-amount`, `effect:may-pay-x-capped`): the `remove-counters` decision (the
+  28th kind) behind a chosen counter cost (rules 602.2b, 601.2h, 118.3) and the `remove-counters`
+  effect, with `thisWay: "counters-removed"` and a board-picked client prompt; modal activated
+  abilities chosen as they're activated (700.2b), one offer per mode set; `hostOfSource`,
+  `onlyTapAbilities`, `counter`'s `lockSource`; `countOf`'s `forEachPlayer` with a per-player
+  sacrifice count, `half`'s `fraction`, `beneathTop`, `manifest`'s count, `may`'s `maxX`. The
+  scaffolder reads the counter costs, modal activated abilities and the Aura line (21 cards
+  auto-finished). 112 authored — Umezawa's Jitte, Ghave, Koma, Breya, Smokestack, Death Cloud,
+  Zodiark and 105 more; 26 blocked, 17 of them on other open keys (`B254.json`).
+
 - **Need-keys Phase 2, four families in one batch: granted statics, land-type setting, the basic
   land type of your choice, exchanging control** (2026-10-29, B253, `20720979f`, `ed562eef4`;
   `effect:grant-static-to-permanent`, `effect:cant-be-blocked-by-filter-until-eot`,

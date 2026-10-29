@@ -321,6 +321,31 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Counters removed by choice, modal activated abilities, an Aura's lock, dynamic counts — built 2026-10-29
+
+Four need-keys Phase 2 families in one build (B254). **The `remove-counters`
+decision** (the 28th kind): counters chosen from objects between a min and a
+max — a cost paid once the ability is on the stack (`AbilityCost.removeCounter`'s
+`kind: "any"`, `orKinds`, `from`, `excludeSource`, `among`, `orSuspended`;
+602.2b, 601.2h, 118.3) or the `remove-counters` effect (`from` / `target`,
+`count` or `"any"`, `upTo`, `perObject`), read back as `thisWay:
+"counters-removed"`. **Modal activated abilities**: an announced `modal`
+chosen as it's activated (700.2b), offered once per mode set with its modes'
+targets (the `modes` of the offer and action). **`hostOfSource`** with
+`prohibits.onlyTapAbilities` (Arrest, Serra Bestiary) and `counter`'s
+`lockSource` (Trickbind). **Amounts in fixed fields**: `countOf`'s
+`forEachPlayer` with a scoped `sacrifice` read per player, `half`'s
+`fraction`, `put-on-library`'s `beneathTop`, `manifest`'s `count`, `may`'s
+`maxX`. Keys: `cost:remove-counters-from-chosen`,
+`cost:remove-counter-from-other-permanent-or-suspended-card`,
+`cost:remove-counter-any-kind`, `effect:remove-counters-up-to`,
+`effect:modal-activated-targeted-modes`, `effect:modal-activated-ability`,
+`static:attached-activated-abilities-prohibited`,
+`static:prohibit-tap-abilities-of-attached`,
+`effect:prohibit-source-of-countered-ability`, `effect:sacrifice-amount`,
+`effect:put-on-library-dynamic-position`, `effect:manifest-count-amount`,
+`effect:may-pay-x-capped`.
+
 ### Granted statics, land-type setting, exchange of control — built 2026-10-29
 
 Four need-keys Phase 2 families in one build (B253). **`grant-static`**: a

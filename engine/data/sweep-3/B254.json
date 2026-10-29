@@ -1,0 +1,979 @@
+{
+  "batch": "B254",
+  "status": "complete",
+  "ranks": "Need-keys Phase 2: the remove-counters-from-chosen family (cost:remove-counters-from-chosen + cost:remove-counter-from-other-permanent-or-suspended-card; Tier B cost:remove-counter-any-kind, effect:remove-counters-up-to), the modal-activated-targeted-modes family (effect:modal-activated-ability + effect:modal-activated-targeted-modes), the cast-and-activate-restrictions unit (static:attached-activated-abilities-prohibited + static:prohibit-tap-abilities-of-attached + effect:prohibit-source-of-countered-ability) and the amount-fields-dynamic unit (effect:sacrifice-amount, effect:put-on-library-dynamic-position, effect:manifest-count-amount, effect:may-pay-x-capped)",
+  "authored": [
+    {
+      "name": "Arachnus Web",
+      "files": [
+        "engine/src/cards/pool/arachnus-web.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arrest",
+      "files": [
+        "engine/src/cards/pool/arrest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Balm of Restoration",
+      "files": [
+        "engine/src/cards/pool/balm-of-restoration.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Banquet Guests",
+      "files": [
+        "engine/src/cards/pool/banquet-guests.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bolrac-Clan Crusher",
+      "files": [
+        "engine/src/cards/pool/bolrac-clan-crusher.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bow of Nylea",
+      "files": [
+        "engine/src/cards/pool/bow-of-nylea.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brambleback Brute",
+      "files": [
+        "engine/src/cards/pool/brambleback-brute.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Breya, Etherium Shaper",
+      "files": [
+        "engine/src/cards/pool/breya-etherium-shaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Breya's Apprentice",
+      "files": [
+        "engine/src/cards/pool/breyas-apprentice.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Burdened Stoneback",
+      "files": [
+        "engine/src/cards/pool/burdened-stoneback.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cankerbloom",
+      "files": [
+        "engine/src/cards/pool/cankerbloom.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Capital Punishment",
+      "files": [
+        "engine/src/cards/pool/capital-punishment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cayth, Famed Mechanist",
+      "files": [
+        "engine/src/cards/pool/cayth-famed-mechanist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chisei, Heart of Oceans",
+      "files": [
+        "engine/src/cards/pool/chisei-heart-of-oceans.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crucible of the Spirit Dragon",
+      "files": [
+        "engine/src/cards/pool/crucible-of-the-spirit-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Death Cloud",
+      "files": [
+        "engine/src/cards/pool/death-cloud.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Demotion",
+      "files": [
+        "engine/src/cards/pool/demotion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Din of the Fireherd",
+      "files": [
+        "engine/src/cards/pool/din-of-the-fireherd.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Disciple of the Ring",
+      "files": [
+        "engine/src/cards/pool/disciple-of-the-ring.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Duchess, Wayward Tavernkeep",
+      "files": [
+        "engine/src/cards/pool/duchess-wayward-tavernkeep.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Empty the Laboratory",
+      "files": [
+        "engine/src/cards/pool/empty-the-laboratory.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Encrust",
+      "files": [
+        "engine/src/cards/pool/encrust.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fain, the Broker",
+      "files": [
+        "engine/src/cards/pool/fain-the-broker.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Faith's Fetters",
+      "files": [
+        "engine/src/cards/pool/faiths-fetters.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Farid, Enterprising Salvager",
+      "files": [
+        "engine/src/cards/pool/farid-enterprising-salvager.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flitterwing Nuisance",
+      "files": [
+        "engine/src/cards/pool/flitterwing-nuisance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fraying Omnipotence",
+      "files": [
+        "engine/src/cards/pool/fraying-omnipotence.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Garnet, Princess of Alexandria",
+      "files": [
+        "engine/src/cards/pool/garnet-princess-of-alexandria.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gelid Shackles",
+      "files": [
+        "engine/src/cards/pool/gelid-shackles.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ghave, Guru of Spores",
+      "files": [
+        "engine/src/cards/pool/ghave-guru-of-spores.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gnarlbark Elm",
+      "files": [
+        "engine/src/cards/pool/gnarlbark-elm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gnostro, Voice of the Crags",
+      "files": [
+        "engine/src/cards/pool/gnostro-voice-of-the-crags.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin Cratermaker",
+      "files": [
+        "engine/src/cards/pool/goblin-cratermaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gremlin Mine",
+      "files": [
+        "engine/src/cards/pool/gremlin-mine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hexavus",
+      "files": [
+        "engine/src/cards/pool/hexavus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hold for Questioning",
+      "files": [
+        "engine/src/cards/pool/hold-for-questioning.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hopeful Initiate",
+      "files": [
+        "engine/src/cards/pool/hopeful-initiate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hovel Hurler",
+      "files": [
+        "engine/src/cards/pool/hovel-hurler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ice Cage",
+      "files": [
+        "engine/src/cards/pool/ice-cage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Insidious Fungus",
+      "files": [
+        "engine/src/cards/pool/insidious-fungus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Interdict",
+      "files": [
+        "engine/src/cards/pool/interdict.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ion Storm",
+      "files": [
+        "engine/src/cards/pool/ion-storm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Spider, Stark Upgrade",
+      "files": [
+        "engine/src/cards/pool/iron-spider-stark-upgrade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kargan Intimidator",
+      "files": [
+        "engine/src/cards/pool/kargan-intimidator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Koma, Cosmos Serpent",
+      "files": [
+        "engine/src/cards/pool/koma-cosmos-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Korozda Gorgon",
+      "files": [
+        "engine/src/cards/pool/korozda-gorgon.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Krasis Incubation",
+      "files": [
+        "engine/src/cards/pool/krasis-incubation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lawmage's Binding",
+      "files": [
+        "engine/src/cards/pool/lawmages-binding.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Legate Lanius, Caesar's Ace",
+      "files": [
+        "engine/src/cards/pool/legate-lanius-caesars-ace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loch Mare",
+      "files": [
+        "engine/src/cards/pool/loch-mare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lord Xander, the Collector",
+      "files": [
+        "engine/src/cards/pool/lord-xander-the-collector.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lost Jitte",
+      "files": [
+        "engine/src/cards/pool/lost-jitte.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Malfegor",
+      "files": [
+        "engine/src/cards/pool/malfegor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Marath, Will of the Wild",
+      "files": [
+        "engine/src/cards/pool/marath-will-of-the-wild.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Meathook Massacre II",
+      "files": [
+        "engine/src/cards/pool/meathook-massacre-ii.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mister Hyde, Monster Within",
+      "files": [
+        "engine/src/cards/pool/mister-hyde-monster-within.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moonlit Lamenter",
+      "files": [
+        "engine/src/cards/pool/moonlit-lamenter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mortarion, Daemon Primarch",
+      "files": [
+        "engine/src/cards/pool/mortarion-daemon-primarch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moxite Refinery",
+      "files": [
+        "engine/src/cards/pool/moxite-refinery.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nahiri's Binding",
+      "files": [
+        "engine/src/cards/pool/nahiris-binding.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Novijen Sages",
+      "files": [
+        "engine/src/cards/pool/novijen-sages.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "O'aka, Traveling Merchant",
+      "files": [
+        "engine/src/cards/pool/oaka-traveling-merchant.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "One Thousand Lashes",
+      "files": [
+        "engine/src/cards/pool/one-thousand-lashes.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ooze Flux",
+      "files": [
+        "engine/src/cards/pool/ooze-flux.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Overseer of Vault 76",
+      "files": [
+        "engine/src/cards/pool/overseer-of-vault-76.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Petrify",
+      "files": [
+        "engine/src/cards/pool/petrify.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phoenix Down",
+      "files": [
+        "engine/src/cards/pool/phoenix-down.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Negator",
+      "files": [
+        "engine/src/cards/pool/phyrexian-negator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Phyrexian Obliterator",
+      "files": [
+        "engine/src/cards/pool/phyrexian-obliterator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Planar Disruption",
+      "files": [
+        "engine/src/cards/pool/planar-disruption.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Power Conduit",
+      "files": [
+        "engine/src/cards/pool/power-conduit.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pox Plague",
+      "files": [
+        "engine/src/cards/pool/pox-plague.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prison Sentence",
+      "files": [
+        "engine/src/cards/pool/prison-sentence.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prison Term",
+      "files": [
+        "engine/src/cards/pool/prison-term.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Quarry Colossus",
+      "files": [
+        "engine/src/cards/pool/quarry-colossus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quillspike",
+      "files": [
+        "engine/src/cards/pool/quillspike.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Rakdos the Defiler",
+      "files": [
+        "engine/src/cards/pool/rakdos-the-defiler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ransom Note",
+      "files": [
+        "engine/src/cards/pool/ransom-note.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ray Fillet, Man Ray",
+      "files": [
+        "engine/src/cards/pool/ray-fillet-man-ray.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Realmbreaker's Grasp",
+      "files": [
+        "engine/src/cards/pool/realmbreakers-grasp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reaping Willow",
+      "files": [
+        "engine/src/cards/pool/reaping-willow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Retribution of the Ancients",
+      "files": [
+        "engine/src/cards/pool/retribution-of-the-ancients.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rift Elemental",
+      "files": [
+        "engine/src/cards/pool/rift-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rush of Dread",
+      "files": [
+        "engine/src/cards/pool/rush-of-dread.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sage of Fables",
+      "files": [
+        "engine/src/cards/pool/sage-of-fables.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Secure Detention",
+      "files": [
+        "engine/src/cards/pool/secure-detention.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Serra Bestiary",
+      "files": [
+        "engine/src/cards/pool/serra-bestiary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shanna, Purifying Blade",
+      "files": [
+        "engine/src/cards/pool/shanna-purifying-blade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shapers of Nature",
+      "files": [
+        "engine/src/cards/pool/shapers-of-nature.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Skinshifter",
+      "files": [
+        "engine/src/cards/pool/skinshifter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smokestack",
+      "files": [
+        "engine/src/cards/pool/smokestack.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul Diviner",
+      "files": [
+        "engine/src/cards/pool/soul-diviner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spike Rogue",
+      "files": [
+        "engine/src/cards/pool/spike-rogue.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stasis Cocoon",
+      "files": [
+        "engine/src/cards/pool/stasis-cocoon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stuck in Summoner's Sanctum",
+      "files": [
+        "engine/src/cards/pool/stuck-in-summoners-sanctum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stupefying Touch",
+      "files": [
+        "engine/src/cards/pool/stupefying-touch.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunstar Chaplain",
+      "files": [
+        "engine/src/cards/pool/sunstar-chaplain.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Suppression Bonds",
+      "files": [
+        "engine/src/cards/pool/suppression-bonds.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Survivor's Med Kit",
+      "files": [
+        "engine/src/cards/pool/survivors-med-kit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tayam, Luminous Enigma",
+      "files": [
+        "engine/src/cards/pool/tayam-luminous-enigma.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Filigree Sylex",
+      "files": [
+        "engine/src/cards/pool/the-filigree-sylex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thoughts of Ruin",
+      "files": [
+        "engine/src/cards/pool/thoughts-of-ruin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Three Bowls of Porridge",
+      "files": [
+        "engine/src/cards/pool/three-bowls-of-porridge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trapped in the Tower",
+      "files": [
+        "engine/src/cards/pool/trapped-in-the-tower.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Triassic Egg",
+      "files": [
+        "engine/src/cards/pool/triassic-egg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Trickbind",
+      "files": [
+        "engine/src/cards/pool/trickbind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ulasht, the Hate Seed",
+      "files": [
+        "engine/src/cards/pool/ulasht-the-hate-seed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Umezawa's Jitte",
+      "files": [
+        "engine/src/cards/pool/umezawas-jitte.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unexpectedly Absent",
+      "files": [
+        "engine/src/cards/pool/unexpectedly-absent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Urborg Justice",
+      "files": [
+        "engine/src/cards/pool/urborg-justice.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Viper's Kiss",
+      "files": [
+        "engine/src/cards/pool/vipers-kiss.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zodiark, Umbral God",
+      "files": [
+        "engine/src/cards/pool/zodiark-umbral-god.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Rakdos Riteknife",
+      "needs": [
+        "effect:granted-activated-refers-to-granter"
+      ],
+      "why": "The ability it grants the equipped creature puts a blood counter on the Riteknife that granted it; a granted ability can only refer to the creature it's on."
+    },
+    {
+      "name": "Aetheric Amplifier",
+      "needs": [
+        "effect:double-player-counters"
+      ],
+      "why": "\"Double the number of each kind of counter you have\": double-counters only works on a permanent."
+    },
+    {
+      "name": "Lobelia, Defender of Bag End",
+      "needs": [
+        "effect:exile-top-face-down-linked",
+        "zone:exiled-with-source-play"
+      ],
+      "why": "Exiling each opponent's top card face down, linked to Lobelia, then playing one of them free: neither the face-down linked exile nor the pick among cards exiled with it exists."
+    },
+    {
+      "name": "Hierophant Bio-Titan",
+      "needs": [
+        "cost:spell-additional-cost-remove-counters"
+      ],
+      "why": "Removing any number of +1/+1 counters from among your creatures as a spell's optional additional cost, {2} less each: only abilities' costs remove chosen counters."
+    },
+    {
+      "name": "Scholar of New Horizons",
+      "needs": [
+        "effect:search-destination-choice"
+      ],
+      "why": "The found Plains goes onto the battlefield tapped or into the hand, chosen after the search (its ruling)."
+    },
+    {
+      "name": "Feast of Worms",
+      "needs": [
+        "effect:sacrifice-controller-of-target"
+      ],
+      "why": "\"Its controller sacrifices another land\": sacrifice's who can't name the target's controller, nor leave out the target."
+    },
+    {
+      "name": "Nahiri's Lithoforming",
+      "needs": [
+        "amount:additional-land-drop-amount",
+        "effect:temporary-permanents-enter-tapped"
+      ],
+      "why": "\"You may play X additional lands this turn\" (a fixed amount only) and \"lands you control enter tapped this turn\"; the sacrifice-and-draw half works now."
+    },
+    {
+      "name": "Omarthis, Ghostfire Initiate",
+      "needs": [
+        "trigger:counters-put-other"
+      ],
+      "why": "\"Whenever you put one or more +1/+1 counters on another colorless creature\": counters-put has no otherOnly, and Omarthis is colorless itself. The manifest count works now."
+    },
+    {
+      "name": "Gluttonous Hellkite",
+      "needs": [
+        "replacement:enters-with-counters-per-cast-trigger-sacrifice"
+      ],
+      "why": "\"Enters with two +1/+1 counters for each creature sacrificed this way\" needs its cast trigger's sacrifice count carried to its enters replacement."
+    },
+    {
+      "name": "Xavier Sal, Infested Captain",
+      "needs": [
+        "decision:choose-permanent"
+      ],
+      "why": "Its counter cost works now; populate's choice of a token (or its other key) is still open."
+    },
+    {
+      "name": "Tekuthal, Inquiry Dominus",
+      "needs": [
+        "replacement:proliferate-replacement"
+      ],
+      "why": "Its counter cost works now; \"if you would proliferate, proliferate twice instead\" is still open."
+    },
+    {
+      "name": "Quilled Greatwurm",
+      "needs": [
+        "zone:cast-self-from-graveyard"
+      ],
+      "why": "Casting it from the graveyard by removing six counters is still open."
+    },
+    {
+      "name": "Dawnhand Dissident",
+      "needs": [
+        "zone:exiled-with-source-play"
+      ],
+      "why": "Casting creature spells exiled with it by removing counters is still open."
+    },
+    {
+      "name": "Falco Spara, Pactweaver",
+      "needs": [
+        "zone:cast-from-library-top-extra-cost"
+      ],
+      "why": "Casting from the library top by removing a counter is still open."
+    },
+    {
+      "name": "Pyramids",
+      "needs": [
+        "replacement:land-destruction-damage-removal-shield"
+      ],
+      "why": "Its modal ability works now; the land-protection shields are still open."
+    },
+    {
+      "name": "Atalya, Samite Master",
+      "needs": [
+        "cost:mana-spend-only-x-costs"
+      ],
+      "why": "Its modal ability works now; \"spend only white mana on X\" is still open."
+    },
+    {
+      "name": "Sharkey, Tyrant of the Shire",
+      "needs": [
+        "static:gain-activated-abilities-of-others"
+      ],
+      "why": "Its lock works now; gaining opponents' lands' abilities is still open."
+    },
+    {
+      "name": "Intercessor's Arrest",
+      "needs": [
+        "static:cant-crew"
+      ],
+      "why": "Its lock works now; \"can't crew Vehicles\" is still open."
+    },
+    {
+      "name": "Detention Vortex",
+      "needs": [
+        "effect:opponents-may-activate"
+      ],
+      "why": "Its lock works now; an ability only opponents may activate is still open."
+    },
+    {
+      "name": "Archfiend of Spite",
+      "needs": [
+        "trigger:dealt-damage-by-opponent-source"
+      ],
+      "why": "Its sacrifice count works; the trigger on an opponent's source is still open."
+    },
+    {
+      "name": "Vona's Hunger",
+      "needs": [
+        "effect:choose-half-of-permanents"
+      ],
+      "why": "Its per-player half count works now; the choice of half is still open."
+    },
+    {
+      "name": "Lich",
+      "needs": [
+        "static:dont-lose-for-zero-life",
+        "replacement:gain-life-becomes-draw"
+      ],
+      "why": "Still open."
+    },
+    {
+      "name": "Banner of Kinship",
+      "needs": [
+        "static:anthem-per-counter-on-source"
+      ],
+      "why": "Still open."
+    },
+    {
+      "name": "Canker Abomination",
+      "needs": [
+        "decision:choose-player"
+      ],
+      "why": "Still open."
+    },
+    {
+      "name": "Clockwork Avian",
+      "needs": [
+        "condition:attacked-or-blocked-this-combat"
+      ],
+      "why": "Its capped counters would need the may's X cap on an ability; the end-of-combat condition is still open."
+    },
+    {
+      "name": "Open the Way",
+      "needs": [
+        "effect:reveal-until-count",
+        "effect:x-max-player-count"
+      ],
+      "why": "X capped by the player count and revealing until X lands: still open."
+    }
+  ]
+}

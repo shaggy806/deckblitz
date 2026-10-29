@@ -1263,6 +1263,10 @@
   "static:grant-scavenge-to-graveyard": "keyword:scavenge"
  },
  "features": {
+  "effect:double-player-counters": {"family":"mechanic:player-counters","example":"Aetheric Amplifier: \"double the number of each kind of counter you have\" — double-counters works only on a permanent."},
+  "cost:spell-additional-cost-remove-counters": {"family":"cost:remove-counters-from-chosen","example":"Hierophant Bio-Titan: \"you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less for each\" — a spell additional cost choosing counters, with a cost reduction per counter."},
+  "amount:additional-land-drop-amount": {"family":"effect:amount-fields-dynamic","example":"Nahiri's Lithoforming: \"you may play X additional lands this turn\" — additional-land-drop takes a fixed number."},
+  "replacement:enters-with-counters-per-cast-trigger-sacrifice": {"family":"effect:amount-fields-dynamic","example":"Gluttonous Hellkite: \"enters with two +1/+1 counters for each creature sacrificed this way\" — its cast trigger's sacrifice count read by its enters replacement."},
   "amount:coin-flips-won-this-way": {
    "family": "effect:amount-new-variants",
    "example": "Crazed Firecat: flip until you lose, then one placement of a +1/+1 counter for each flip won — flip-coin's untilLose applies its won effect once per win."
