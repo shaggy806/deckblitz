@@ -284,6 +284,7 @@ import _poolGemstoneArray from "../pool/gemstone-array.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeomancersGambit from "../pool/geomancers-gambit.js";
 import _poolGeosurge from "../pool/geosurge.js";
+import _poolGhaveGuruOfSpores from "../pool/ghave-guru-of-spores.js";
 import _poolGhituSlinger from "../pool/ghitu-slinger.js";
 import _poolGhostTactician from "../pool/ghost-tactician.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
@@ -459,6 +460,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMisterHydeMonsterWithin from "../pool/mister-hyde-monster-within.js";
 import _poolMnemonicSliver from "../pool/mnemonic-sliver.js";
 import _poolMobileGarrison from "../pool/mobile-garrison.js";
 import _poolMoggCannon from "../pool/mogg-cannon.js";
@@ -1190,6 +1192,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeomancersGambit,
     _poolGeosurge,
+    _poolGhaveGuruOfSpores,
     _poolGhituSlinger,
     _poolGhostTactician,
     _poolGhostlyPilferer,
@@ -1365,6 +1368,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMisterHydeMonsterWithin,
     _poolMnemonicSliver,
     _poolMobileGarrison,
     _poolMoggCannon,

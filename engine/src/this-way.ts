@@ -213,6 +213,17 @@ export function thisWayEntries(
           }
         }
         break;
+      case "counters-removed":
+        // Each counter taken off a permanent or a suspended card, one entry a
+        // removal, counted by the counters it took.
+        if (event.type === "counter-removed" && event.amount > 0) {
+          const object = state.objects[event.object];
+          if (object !== undefined) out.push({ object: event.object, player: object.controller, departed: false, count: event.amount });
+        } else if (event.type === "time-counter-removed") {
+          const object = state.objects[event.object];
+          if (object !== undefined) out.push({ object: event.object, player: object.owner, departed: false, count: 1 });
+        }
+        break;
       case "counters-put":
         // A permanent's counters (a player's are `player-counters-changed`):
         // its controller now, whoever put them.

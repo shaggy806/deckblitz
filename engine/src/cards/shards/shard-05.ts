@@ -749,6 +749,7 @@ import _poolTwinbladeSlasher from "../pool/twinblade-slasher.js";
 import _poolTwistAllegiance from "../pool/twist-allegiance.js";
 import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
 import _poolTyrranaxAtrocity from "../pool/tyrranax-atrocity.js";
+import _poolUmezawasJitte from "../pool/umezawas-jitte.js";
 import _poolUndergrowthChampion from "../pool/undergrowth-champion.js";
 import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
@@ -1581,6 +1582,7 @@ const shard: CardShard = {
     _poolTwistAllegiance,
     _poolTwoHeadedHellkite,
     _poolTyrranaxAtrocity,
+    _poolUmezawasJitte,
     _poolUndergrowthChampion,
     _poolUndergrowthRecon,
     _poolUndergrowthStadium,

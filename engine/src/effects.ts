@@ -312,6 +312,13 @@ export type EffectAmount =
        * type: "creature", controlledBy: "you" }, forTarget: 0 }`. 0 when the
        * slot holds no player, or one gone illegal. */
       readonly forTarget?: number;
+      /** Read the filter from the side of **each player** a scoped effect
+       * acts on, once for each — "each player sacrifices half the creatures
+       * **they** control" (Zodiark, Umbral God: a `sacrifice` of `who:
+       * "each-player"` counting `{ countOf: { type: "creature",
+       * controlledBy: "you" }, forEachPlayer: true }` halved). Outside a
+       * scoped effect, the controller's side. */
+      readonly forEachPlayer?: true;
     }
   /** A sum or maximum over matching battlefield permanents — "X is the
    * **total power** of creatures you control", "the **greatest mana value**
@@ -417,8 +424,10 @@ export type EffectAmount =
    * scoped effect `"each"` reads the controller's. */
   | { readonly lifeTotal: "you" | "each" }
   /** Half of an amount, rounded up or down (rule 107.1a says which the card
-   * must say) — "half their life, rounded up". */
-  | { readonly half: EffectAmount; readonly round: "up" | "down" }
+   * must say) — "half their life, rounded up". `fraction` is another part
+   * than a half: Legate Lanius's decimate, "a tenth of the creatures they
+   * control, rounded up", is `fraction: 10`. */
+  | { readonly half: EffectAmount; readonly round: "up" | "down"; readonly fraction?: number }
   /** Two to the power of an amount — Mathemagics' "target player draws 2ˣ
    * cards" (`{ powerOfTwo: "x" }`; 2⁰ = 1). The exponent is at most 52, past
    * which a number isn't exact any more: every use draws or counts far more
@@ -1156,6 +1165,10 @@ export type ThisWayKind =
    * tapping them, then this. One already tapped isn't tapped again, and so
    * isn't counted. */
   | "tapped"
+  /** Counters it removed, counted one by one — Garnet, Princess of
+   * Alexandria's "for each lore counter removed this way", Mister Hyde's "If
+   * you do" (a `remove-counters` effect's, or a `remove-counter`'s). */
+  | "counters-removed"
   /** Permanents it put a counter on — Ripples of Potential's "permanents you
    * control that had a counter put on them this way", after a proliferate.
    * A player isn't one. */
@@ -2554,6 +2567,13 @@ export type EffectSpec =
        * nothing is cast from).
        */
       readonly into?: "hand" | "exile";
+      /** "If a permanent's ability is countered this way, activated
+       * abilities of that permanent can't be activated this turn"
+       * (Trickbind, Interdict): an ability countered by this effect locks its
+       * source for the rest of the turn — only while the source is still the
+       * permanent it was as the ability was put on the stack (rule 400.7),
+       * and not at all when nothing was countered. */
+      readonly lockSource?: true;
     }
   | {
       /** A player gains control of a permanent (rule 613.1b, layer 2): a
@@ -3154,10 +3174,15 @@ export type EffectSpec =
        * their choice of the top or bottom of their library" (Misleading
        * Motes — `["top", "bottom"]`; Lost Days' "second from the top or on
        * the bottom" — `[{ fromTop: 2 }, "bottom"]`): the owner of what's in
-       * target slot `target` (a number) picks one as this resolves. */
+       * target slot `target` (a number) picks one as this resolves.
+       * `{ beneathTop }` is "just beneath the top X cards of that library"
+       * (Unexpectedly Absent's X, Quarry Colossus's "the number of Plains you
+       * control"), read as it resolves: X+1th from the top, or the bottom of
+       * a library with X or fewer (as `fromTop`). */
       readonly position:
         | LibraryPosition
-        | { readonly ownerChooses: readonly LibraryPosition[] };
+        | { readonly ownerChooses: readonly LibraryPosition[] }
+        | { readonly beneathTop: EffectAmount };
     }
   | {
       /**
@@ -3429,6 +3454,36 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly counter: string;
       readonly amount: EffectAmount;
+    }
+  | {
+      /**
+       * Remove counters the effect's controller **chooses** (the
+       * `remove-counters` decision, rule 608.2c): "remove a counter from a
+       * creature you control. If you do, draw a card" (Mister Hyde, Monster
+       * Within — a `this-way` condition on `"counters-removed"` after it),
+       * "you may remove three quest counters from among permanents you
+       * control" (Overseer of Vault 76 — `among`, `upTo`), "remove a lore
+       * counter from each of any number of Sagas you control" (Garnet —
+       * `count: "any"`, `perObject: 1`), "remove up to four charge counters
+       * from target noncreature artifact" (Gremlin Mine — `target`, `upTo`).
+       *
+       * From the permanents the controller controls matching `from`, or the
+       * one in `target`; `counter` is a kind or `"any"`, `orKinds` more.
+       * `count` counters in all — all from one permanent unless `among` —
+       * or, `"any"`, as many as the player likes; `upTo` lets fewer (none
+       * included) be removed. Fewer than `count` there to remove: as many as
+       * there are, the rest of the instruction still done. What came off is
+       * the resolution's `thisWay: "counters-removed"`.
+       */
+      readonly kind: "remove-counters";
+      readonly from?: CardFilter;
+      readonly target?: EffectTargetRef;
+      readonly counter: string;
+      readonly orKinds?: readonly string[];
+      readonly count: EffectAmount | "any";
+      readonly among?: true;
+      readonly perObject?: number;
+      readonly upTo?: true;
     }
   | {
       /**
@@ -4787,7 +4842,10 @@ export type EffectSpec =
        * (701.40e). */
       readonly kind: "manifest";
       readonly who: PlayerScope | { readonly controllerOfTarget: number };
-      readonly count?: number;
+      /** How many — 1 by default, or an amount read as it resolves
+       * (Omarthis, Ghostfire Initiate's "equal to the number of counters on
+       * it"), each one a manifest of its own. */
+      readonly count?: EffectAmount;
       readonly cloak?: true;
     }
   | {
@@ -5569,8 +5627,11 @@ export type EffectSpec =
        * A modal **ability** — a triggered ability printed "Choose one —" with
        * bullets (rule 700.2): its modes are chosen as it's put on the stack
        * (rules 603.3c, 700.2b), before its targets, not as it resolves; with
-       * none chosen it's removed from the stack. Only as a triggered
-       * ability's whole effect. Left off, the choice is made as the effect
+       * none chosen it's removed from the stack. Or an activated one
+       * ("{1}, Sacrifice this creature: Choose one —" — Cankerbloom, Umezawa's
+       * Jitte): chosen as it's activated (rules 602.2b, 601.2b), each choice
+       * offered as an `activate-ability` of its own with those modes' targets
+       * (the action's `modes`). Only as the ability's whole effect. Left off, the choice is made as the effect
        * applies, which is right for a choice the text makes on resolution
        * ("create a Food token or a Treasure token", fabricate, "tap or
        * untap").
@@ -5655,6 +5716,10 @@ export type EffectSpec =
        * may pay **any amount of {R}**" (Leyline Tyrant) is `cost: "{X}"`
        * with `xColor: "R"`, each X one {R}. */
       readonly xColor?: Color;
+      /** With an `{X}` in `cost`: "X can't be greater than …" (Shanna,
+       * Purifying Blade's "the amount of life you gained this turn"), read
+       * as the `may` applies. */
+      readonly maxX?: EffectAmount;
       /**
        * Life to pay as part of that cost (with `cost`, or on its own) —
        * Zoraline, Cosmos Caller's "you may pay {W}{B} and 2 life", Tymna the
@@ -6832,7 +6897,8 @@ export interface EffectApi {
   sacrificePermanents(
     who: PlayerScope | { readonly player: PlayerId },
     filter: CardFilter,
-    count: number,
+    /** A number, or one for each player sacrificing (a per-player amount). */
+    count: number | ((player: PlayerId) => number),
     exceptId?: ObjectId,
     exploit?: boolean,
     andEach?: readonly CardFilter[],
@@ -7144,7 +7210,7 @@ export interface EffectApi {
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
   /** Counter a target spell on the stack — into its owner's hand instead
    * of their graveyard with `into: "hand"`. */
-  counterSpell(target: TargetRef, into?: "hand" | "exile"): void;
+  counterSpell(target: TargetRef, into?: "hand" | "exile", lockSource?: boolean): void;
   /** `player` gains control of `target` — see the `"gain-control"`
    * {@link EffectSpec}. */
   gainControl(
@@ -7870,7 +7936,7 @@ export interface EffectApi {
      * as long as its object has been on the battlefield (`notChosenBefore`). */
     notChosenThisTurn?: boolean | "ever",
     /** The rest of a `may`'s cost: life and energy, as numbers. */
-    otherCost?: { readonly life?: number; readonly energy?: number },
+    otherCost?: { readonly life?: number; readonly energy?: number; readonly maxX?: number },
     /** The player the question is about — see `may`'s `aboutThatPlayer`. */
     about?: PlayerId,
     /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
@@ -7931,6 +7997,20 @@ export interface EffectApi {
   ownerOf(target: TargetRef): PlayerId | undefined;
   /** See the `"remove-counter"` {@link EffectSpec}. */
   removeCounter(target: TargetRef, counter: string, amount: number): void;
+  /** See the `"remove-counters"` {@link EffectSpec}: ask the controller which
+   * counters to remove, from what — `count` `null` for any number. */
+  removeChosenCounters(
+    spec: {
+      readonly from?: CardFilter;
+      readonly target?: TargetRef;
+      readonly counter: string;
+      readonly orKinds?: readonly string[];
+      readonly among: boolean;
+      readonly perObject?: number;
+      readonly upTo: boolean;
+    },
+    count: number | null,
+  ): void;
   /** Move up to `amount` counters of kind `counter` from `from` onto `to`
    * (rule 122.5 — see the `"move-counters"` {@link EffectSpec}), put by the
    * effect's controller; how many moved, 0 when the move isn't possible. */
@@ -8972,7 +9052,7 @@ function signedAmountValue(
   if ("half" in amount) {
     // Signed, like the rest of this function: `amountValue` clamps the
     // result, and a value setting power keeps its sign (rule 107.1b).
-    const n = signedAmountValue(amount.half, ctx, each) / 2;
+    const n = signedAmountValue(amount.half, ctx, each) / (amount.fraction ?? 2);
     return amount.round === "up" ? Math.ceil(n) : Math.floor(n);
   }
   if ("countInGraveyard" in amount) return ctx.countInGraveyard(amount.countInGraveyard);
@@ -9177,6 +9257,9 @@ function signedAmountValue(
     const ref = ctx.targets[amount.forTarget];
     if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
     return ctx.countMatching(amount.countOf, except, ref.player) * (amount.times ?? 1);
+  }
+  if (amount.forEachPlayer === true && each !== undefined) {
+    return ctx.countMatching(amount.countOf, except, each) * (amount.times ?? 1);
   }
   return ctx.countMatching(amount.countOf, except) * (amount.times ?? 1);
 }
@@ -9566,6 +9649,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("graveyardSize" in amount) return amount.graveyardSize === "each";
   if ("cardsInHand" in amount) return amount.cardsInHand === "each";
   if ("attackingPlayer" in amount) return true;
+  if ("countOf" in amount) return amount.forEachPlayer === true;
   if ("thisWay" in amount) return amount.who === "each";
   if ("half" in amount) return readsEachPlayer(amount.half);
   if ("powerOfTwo" in amount) return readsEachPlayer(amount.powerOfTwo);
@@ -10287,7 +10371,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           );
         }
       } else {
-        ctx.sacrificePermanents(spec.who, spec.filter, amountValue(spec.count, ctx), exceptId, spec.exploit === true, spec.andEach);
+        // "Each player sacrifices half the creatures they control": read for
+        // each player sacrificing.
+        const count = readsEachPlayer(spec.count)
+          ? (player: PlayerId) => amountValue(spec.count, ctx, player)
+          : amountValue(spec.count, ctx);
+        ctx.sacrificePermanents(spec.who, spec.filter, count, exceptId, spec.exploit === true, spec.andEach);
       }
       return;
     }
@@ -10321,7 +10410,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "counter": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.counterSpell(target, spec.into);
+      if (target !== undefined) ctx.counterSpell(target, spec.into, spec.lockSource === true);
       return;
     }
     case "gain-control": {
@@ -10428,8 +10517,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const player = ref === undefined ? undefined : ctx.controllerOf(ref);
         players = player === undefined ? [] : [player];
       }
+      const count = spec.count === undefined ? 1 : Math.min(amountValue(spec.count, ctx), MAX_COPY_COUNT);
       for (const player of players) {
-        for (let i = 0; i < (spec.count ?? 1); i += 1) ctx.manifestTop(player, spec.cloak === true ? "cloak" : "manifest");
+        for (let i = 0; i < count; i += 1) ctx.manifestTop(player, spec.cloak === true ? "cloak" : "manifest");
       }
       return;
     }
@@ -10850,7 +10940,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.putOnLibrary(target, position);
+      if (target === undefined) return;
+      ctx.putOnLibrary(
+        target,
+        typeof position === "object" && "beneathTop" in position
+          ? { fromTop: amountValue(position.beneathTop, ctx) + 1 }
+          : position,
+      );
       return;
     }
     case "return-from-graveyard": {
@@ -11223,6 +11319,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "remove-counter": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.removeCounter(target, spec.counter, amountValue(spec.amount, ctx));
+      return;
+    }
+    case "remove-counters": {
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (spec.target !== undefined && (target === undefined || illegalSlot(spec.target, ctx))) return;
+      ctx.removeChosenCounters(
+        {
+          ...(spec.from !== undefined ? { from: spec.from } : {}),
+          ...(target !== undefined ? { target } : {}),
+          counter: spec.counter,
+          ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),
+          among: spec.among === true,
+          ...(spec.perObject !== undefined ? { perObject: spec.perObject } : {}),
+          upTo: spec.upTo === true,
+        },
+        spec.count === "any" ? null : amountValue(spec.count, ctx),
+      );
       return;
     }
     case "move-counters":
@@ -12304,11 +12417,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.else,
         spec.cost,
         spec.oncePerTurn === true,
-        spec.costLife === undefined && spec.costEnergy === undefined
+        spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined
           ? undefined
           : {
               ...(spec.costLife !== undefined ? { life: amountValue(spec.costLife, ctx) } : {}),
               ...(spec.costEnergy !== undefined ? { energy: amountValue(spec.costEnergy, ctx) } : {}),
+              ...(spec.maxX !== undefined ? { maxX: amountValue(spec.maxX, ctx) } : {}),
             },
         spec.aboutThatPlayer === true ? effectPlayer("that-player", ctx) : undefined,
         spec.xColor,

@@ -729,6 +729,7 @@ import _poolTamanoa from "../pool/tamanoa.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTaroxBladewing from "../pool/tarox-bladewing.js";
+import _poolTayamLuminousEnigma from "../pool/tayam-luminous-enigma.js";
 import _poolTelekineticBonds from "../pool/telekinetic-bonds.js";
 import _poolTemurWarShaman from "../pool/temur-war-shaman.js";
 import _poolTenaciousDead from "../pool/tenacious-dead.js";
@@ -1588,6 +1589,7 @@ const shard: CardShard = {
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
     _poolTaroxBladewing,
+    _poolTayamLuminousEnigma,
     _poolTelekineticBonds,
     _poolTemurWarShaman,
     _poolTenaciousDead,

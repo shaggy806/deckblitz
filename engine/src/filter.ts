@@ -321,6 +321,16 @@ export interface CardFilter {
    * `bindDynamicCompares`, never authored. */
   readonly bandedWith?: ObjectId;
   /**
+   * It's (or isn't) the permanent the one applying the filter is **attached
+   * to** — an Aura's "enchanted creature", an Equipment's "equipped
+   * creature": Arrest's "its activated abilities can't be activated" is a
+   * `prohibits.abilitiesOf` of `{ hostOfSource: true }`, which no other Aura
+   * the same player controls matches (as `enchantedBy` would). Read against
+   * `FilterContext.source` as it is now; without a source, or one attached to
+   * nothing, nothing matches.
+   */
+  readonly hostOfSource?: boolean;
+  /**
    * It is the object in this target slot of the resolving spell or ability,
    * or has the same name as it (rule 201.2a) — Maelstrom Pulse's "destroy
    * target nonland permanent **and all other permanents with the same name
@@ -1202,6 +1212,16 @@ export function matchesFilter(
       other.attacking !== null;
     if (filter.bandedWithSource !== undefined && banded !== filter.bandedWithSource) return false;
     if (filter.bandedWith !== undefined && !banded) return false;
+  }
+  if (filter.hostOfSource !== undefined) {
+    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const host =
+      live !== undefined &&
+      live.zone === "battlefield" &&
+      by !== undefined &&
+      by.zone === "battlefield" &&
+      by.attachedTo === live.id;
+    if (host !== filter.hostOfSource) return false;
   }
   if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
     // Rule 702.171c: only a creature on the battlefield now can have saddled

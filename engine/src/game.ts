@@ -10,6 +10,7 @@
 
 import {
   abilityLifeCost,
+  chosenCounterCost,
   costAnnouncesX,
   isManaAbility,
   sacrificeCostFilters,
@@ -178,6 +179,7 @@ import { isNameableAs, namesOf } from "./card-names.js";
 import { proliferate } from "./decisions/proliferate.js";
 import { splitMana } from "./decisions/split-mana.js";
 import { timeTravel } from "./decisions/time-travel.js";
+import { removalOffer, removeCounters } from "./decisions/remove-counters.js";
 import { payLifeForUntapped } from "./decisions/pay-life-for-untapped.js";
 import { revealForUntapped } from "./decisions/reveal-for-untapped.js";
 import { scry } from "./decisions/scry.js";
@@ -1032,6 +1034,28 @@ function concreteX(cost: ManaCost, x: number, xColor: Color | undefined): ManaCo
   return { ...cost, colored: { ...cost.colored, [xColor]: cost.colored[xColor] + cost.x * x }, x: 0 };
 }
 
+/** "Remove a +1/+1 counter", "Remove up to 4 charge counters", "Remove 3
+ * counters" — a `remove-counters` prompt's words. */
+function countersPhrase(count: number, kind: string, orKinds: readonly string[] | undefined, upTo = false): string {
+  const kinds = kind === "any" ? "" : `${[kind, ...(orKinds ?? [])].join(" or ")} `;
+  return count === 1 && !upTo
+    ? `Remove a ${kinds}counter`
+    : `Remove ${upTo ? "up to " : ""}${count} ${kinds}counter${count === 1 ? "" : "s"}`;
+}
+
+/** Every choice of `min` to `max` of `offered`, each in listed order — a
+ * modal activated ability's offers (rule 700.2b). */
+function modeChoices(offered: readonly number[], min: number, max: number): number[][] {
+  const out: number[][] = [];
+  const walk = (from: number, picked: number[]): void => {
+    if (picked.length >= min) out.push([...picked]);
+    if (picked.length === max) return;
+    for (let i = from; i < offered.length; i += 1) walk(i + 1, [...picked, offered[i]]);
+  };
+  walk(0, []);
+  return out;
+}
+
 /** A triggered ability's target specs as it goes on the stack: its own,
  * then each announced mode's, in listed order (rules 603.3c, 700.2 — a
  * modal ability's chosen modes bring their targets with them). */
@@ -1487,6 +1511,7 @@ export class Game {
       applyProliferate: (player, chosen) => this.applyProliferate(player, chosen),
       applyManaSplit: (player, counts) => this.applyManaSplit(player, counts),
       applyTimeTravel: (player, add, remove) => this.applyTimeTravel(player, add, remove),
+      applyCounterRemovals: (player, removals) => this.applyCounterRemovals(player, removals),
       applyVenture: (player, choice) => this.applyVenture(player, choice),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
       applyCardNameChoice: (player, name) => this.applyCardNameChoice(player, name),
@@ -1795,6 +1820,7 @@ export class Game {
         // one is split off first and activates (a stack is a representation
         // — it may not change a result).
         let source = action.source;
+        this.activationModes = action.modes === undefined ? undefined : [...action.modes];
         if ((this.state.objects[source]?.stackCount ?? 1) > 1) {
           const ability = this.effectiveActivated(source)[action.abilityIndex];
           if (ability?.cost.tap === true && this.whyCannotActivateAbility(action.player, source, action.abilityIndex, action.tap, action.xValue ?? 0, normalizeTargets(action.targets)) === null) {
@@ -1818,6 +1844,7 @@ export class Game {
           );
         } finally {
           this.phyrexianLifeChoice = undefined;
+          this.activationModes = undefined;
         }
         break;
       }
@@ -2007,14 +2034,17 @@ export class Game {
           ) ?? this.whyCastTargetsInvalid(action),
         );
       case "activate-ability": {
-        const why = this.withWaterbendChoice(action.source, action.waterbend, () =>
-          this.whyCannotActivateAbility(
-            action.player,
-            action.source,
-            action.abilityIndex,
-            action.tap,
-            action.xValue ?? 0,
-            normalizeTargets(action.targets),
+        const modes = action.modes === undefined ? undefined : [...action.modes];
+        const why = this.withActivationModes(modes, () =>
+          this.withWaterbendChoice(action.source, action.waterbend, () =>
+            this.whyCannotActivateAbility(
+              action.player,
+              action.source,
+              action.abilityIndex,
+              action.tap,
+              action.xValue ?? 0,
+              normalizeTargets(action.targets),
+            ),
           ),
         );
         if (why !== null) return why;
@@ -2038,8 +2068,11 @@ export class Game {
         // non-Pirate).
         if (ability !== undefined) {
           const xValue = action.xValue ?? 0;
+          if (modes === undefined && this.activationModeOffer(action.player, action.source, action.abilityIndex, ability) !== null) {
+            return "a modal ability needs its modes chosen as it's activated";
+          }
           return this.whyTargetsInvalid(
-            this.activatedSpecsAt(ability.targets, action.source, action.player, xValue),
+            this.activatedSpecsAt(this.withActivationModes(modes, () => this.activationSpecs(ability)), action.source, action.player, xValue),
             normalizeTargets(action.targets),
             action.player,
             `${this.registry.get(printedCardName(this.state.objects[action.source])).name}'s ability`,
@@ -2680,10 +2713,13 @@ export class Game {
         ability.cost.discard?.count === "x"
           ? this.discardCandidates(player, ability.cost.discard.filter, source).length
           : undefined;
-      // "Remove any number of storage counters": as many as it has.
+      // "Remove any number of storage counters": as many as it has — or, a
+      // chosen removal, as many as there are to choose from.
       const counterX =
         ability.cost.removeCounter?.count === "x"
-          ? (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
+          ? chosenCounterCost(ability.cost)
+            ? this.costCounterSources(player, source, ability)[ability.cost.removeCounter.among === true ? "total" : "most"]
+            : (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
           : undefined;
       const caps = [manaX, sacrificeX, exileX, discardX, counterX].filter((n): n is number => n !== undefined);
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
@@ -2695,9 +2731,15 @@ export class Game {
         targetOptions: readonly (readonly TargetRef[])[],
         xCost?: { readonly maxX: number; readonly minX?: number },
         targetSpecs: readonly TargetSpec[] = ability.targets,
+        modes?: readonly number[],
       ): void => {
+        const modal = ability.effect?.kind === "modal" ? ability.effect : undefined;
         const label =
-          manaColors === undefined || makes === undefined
+          modes !== undefined && modal !== undefined
+            ? // "{1}, Sacrifice ~: Destroy target artifact." — the cost, then
+              // the modes this offer chooses.
+              `${ability.text.split(": ")[0]}: ${modes.map((i) => modal.modes[i]?.text ?? "").join(" ")}`
+            : manaColors === undefined || makes === undefined
             ? ability.text
             : manaSplit !== undefined
               ? `${ability.text} (choose how much of each)`
@@ -2734,8 +2776,24 @@ export class Game {
           ...(plainMana !== undefined ? { plainMana } : {}),
           ...(xCost !== undefined ? { xCost } : {}),
           ...(ability.divided !== undefined ? { divide: ability.divided } : {}),
+          ...(modes !== undefined ? { modes } : {}),
         });
       };
+      // "Choose one —" (rule 700.2b): offered once per choice of modes, each
+      // with its modes' targets, as a mana ability is once per colour.
+      const modeOffer = this.activationModeOffer(player, source, index, ability);
+      if (modeOffer !== null) {
+        const xCost = maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined;
+        for (const modes of modeChoices(modeOffer.offered, Math.max(1, modeOffer.min), modeOffer.max)) {
+          const specs = this.withActivationModes(modes, () =>
+            this.activatedSpecsAt(this.activationSpecs(ability), source, player, undefined),
+          );
+          const options = this.targetOptionsFor(specs, player, this.permanentSource(source));
+          if (!targetsFillable(specs, options, [], 0, stateTargetFacts(this.state, this.registry))) continue;
+          push(options, xCost, specs, modes);
+        }
+        return;
+      }
       if (maxX !== undefined && (ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
@@ -5511,6 +5569,8 @@ export class Game {
       readonly sourceLost?: boolean;
       /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
       readonly xColor?: Color;
+      /** The most that X may be — see `may`'s `maxX`. */
+      readonly maxX?: number;
       /** A vote's question (rule 701.38): never answered along with
        * identical triggers', and with `secret`, see the `choose-modes`
        * decision's `secret`. */
@@ -5604,6 +5664,7 @@ export class Game {
         : {}),
       ...(cost !== undefined ? { cost } : {}),
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
+      ...(ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(key !== undefined ? { abilityKey: key } : {}),
       ...(onlyUnchosen ? { notChosenThisTurn: offered } : {}),
       ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
@@ -13019,6 +13080,10 @@ export class Game {
   /** The `phyrexianLife` of the `cast-spell` or `activate-ability` being
    * dispatched (rule 107.4f), read as its cost is paid; unset otherwise. */
   private phyrexianLifeChoice: number | undefined = undefined;
+  /** The `modes` of the `activate-ability` being dispatched — a modal
+   * activated ability's, chosen as it's activated (rules 602.2b, 700.2b);
+   * unset otherwise, and while `legalActions` asks whether it could be. */
+  private activationModes: readonly number[] | undefined = undefined;
   /** The `webSlingingReturn` of the `cast-spell` being dispatched (rule
    * 702.188a), read as its cost is paid; unset otherwise. */
   private webSlingingReturnChoice: ObjectId | undefined = undefined;
@@ -14979,6 +15044,87 @@ export class Game {
   /** Where `sourceId`'s activated ability at `abilityIndex` was granted from,
    * or `undefined` for a printed one. Read *before* paying costs, which may
    * move the source and end the grant. */
+  /** Run `fn` with `activationModes` set to `modes`, as dispatching an
+   * activation with them does. */
+  private withActivationModes<T>(modes: readonly number[] | undefined, fn: () => T): T {
+    const outer = this.activationModes;
+    this.activationModes = modes;
+    try {
+      return fn();
+    } finally {
+      this.activationModes = outer;
+    }
+  }
+
+  /** An activated ability's target specs as it's activated: its own, then
+   * each chosen mode's for a modal one (`activationModes` — rules 602.2b,
+   * 700.2b: the modes bring their targets, as an announced trigger's do). */
+  private activationSpecs(ability: ActivatedAbility): readonly TargetSpec[] {
+    return triggerTargetSpecs(ability, this.activationModes);
+  }
+
+  /**
+   * What a modal activated ability ("{2}, {T}: Choose one —") may choose as
+   * it's activated (rules 602.2b, 601.2b, 700.2b): the modes on offer — none
+   * whose targets can't all be chosen (700.2a, via 601.2c), nor for "choose
+   * one that hasn't been chosen [this turn]" one this ability of this object
+   * has had — with how many to choose. `null` for an ability that isn't an
+   * announced `modal`. `key` is the ability's turn key, which records a
+   * chosen mode for those.
+   */
+  private activationModeOffer(
+    player: PlayerId,
+    sourceId: ObjectId,
+    abilityIndex: number,
+    ability: ActivatedAbility,
+  ): { readonly offered: readonly number[]; readonly min: number; readonly max: number; readonly key?: string; readonly ever: boolean } | null {
+    const modal = ability.effect?.kind === "modal" && ability.effect.announced === true ? ability.effect : null;
+    if (modal === null) return null;
+    const source = this.state.objects[sourceId];
+    if (source === undefined) return null;
+    const ever = modal.notChosenBefore === true;
+    let key: string | undefined;
+    if (modal.notChosenThisTurn === true || ever) {
+      // `abilityTurnKey`'s form, for the ability object this would make.
+      const granted = this.activatedRefFor(sourceId, abilityIndex);
+      const which =
+        granted?.kind === "static"
+          ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
+          : `activated:${abilityIndex}`;
+      key = `${sourceId}@${source.timestamp ?? 0}#${which}`;
+    }
+    const before = key === undefined ? [] : ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[key] ?? []);
+    const asker = this.permanentSource(sourceId);
+    const offered = modal.modes.flatMap((mode, i) =>
+      !before.includes(i) &&
+      (mode.targets ?? []).every(
+        (spec) => isOptionalSpec(spec) || legalTargets(this.state, this.registry, spec, player, asker).length > 0,
+      )
+        ? [i]
+        : [],
+    );
+    // A live mode count isn't read as an ability is activated: none prints one.
+    const most = typeof modal.maxModes === "number" ? modal.maxModes : 1;
+    return { offered, min: modal.minModes, max: Math.min(most, offered.length), ...(key !== undefined ? { key } : {}), ever };
+  }
+
+  /** Why `modes` can't be the modes a modal activated ability is activated
+   * with, or `null` (see {@link activationModeOffer}). */
+  private whyModesInvalid(
+    offer: NonNullable<ReturnType<Game["activationModeOffer"]>>,
+    modes: readonly number[],
+    name: string,
+  ): string | null {
+    if (modes.length < Math.max(1, offer.min) || modes.length > offer.max) {
+      return `${name}'s ability must choose ${offer.min === offer.max ? offer.max : `${offer.min} to ${offer.max}`} mode(s)`;
+    }
+    for (const [i, mode] of modes.entries()) {
+      if (!offer.offered.includes(mode)) return `${name}'s ability can't choose mode ${mode}`;
+      if (i > 0 && mode <= modes[i - 1]) return `${name}'s modes must be distinct, in listed order`;
+    }
+    return null;
+  }
+
   private activatedRefFor(sourceId: ObjectId, abilityIndex: number): GrantedAbilityRef | undefined {
     const object = this.state.objects[sourceId];
     const printed = this.registry.get(rulesTextName(object)).activated.length;
@@ -15267,7 +15413,7 @@ export class Game {
         }
       }
     }
-    if (this.abilitiesProhibited(player, source, isManaAbility(ability))) {
+    if (this.abilitiesProhibited(player, source, isManaAbility(ability), ability.cost.tap)) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
     if (
@@ -15351,9 +15497,21 @@ export class Game {
     }
     // `otherOnly` is about the sacrifice cost alone: "Sacrifice another
     // creature: … target creature" may target its own source (Dina).
+    // "Choose one —" (rule 700.2b): a mode to choose, and the ones chosen
+    // among them; with none chosen yet (`legalActions` asking), any will do.
+    const modeOffer = this.activationModeOffer(player, sourceId, abilityIndex, ability);
+    if (modeOffer !== null) {
+      if (modeOffer.max < Math.max(1, modeOffer.min)) return `${def.name}'s ability has no mode that can be chosen`;
+      if (this.activationModes !== undefined) {
+        const bad = this.whyModesInvalid(modeOffer, this.activationModes, def.name);
+        if (bad !== null) return bad;
+      }
+    } else if (this.activationModes !== undefined && this.activationModes.length > 0) {
+      return `${def.name}'s ability has no modes`;
+    }
     if (x !== undefined || !ability.targets.some(targetSpecReadsX)) {
       // "X target cards": the group is X big once X is known.
-      const specs = this.activatedSpecsAt(ability.targets, sourceId, player, x);
+      const specs = this.activatedSpecsAt(this.activationSpecs(ability), sourceId, player, x);
       const abilityOptions = specs.map((spec) =>
         legalTargets(this.state, this.registry, spec, player, this.permanentSource(sourceId, x)),
       );
@@ -15453,7 +15611,30 @@ export class Game {
         return `${player} has too few cards in their graveyard to pay ${def.name}'s cost`;
       }
     }
-    if (ability.cost.removeCounter !== undefined) {
+    if (ability.cost.removeCounter !== undefined && chosenCounterCost(ability.cost)) {
+      // Chosen once the ability is on the stack (see `activateAbility`), as
+      // a blight is — so never on a mana ability, nor beside another cost
+      // that asks.
+      if (
+        isManaAbility(ability) ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        ability.cost.returnToHand !== undefined ||
+        ability.cost.blight !== undefined ||
+        ability.cost.collectEvidence !== undefined ||
+        ability.cost.craft !== undefined
+      ) {
+        return `${def.name}'s ability can't remove chosen counters beside that cost`;
+      }
+      const removal = ability.cost.removeCounter;
+      const count = removal.count === "x" ? Math.max(0, Math.floor(x ?? ability.minX ?? 0)) : removal.count;
+      // Rule 118.3: not enough counters to remove, no paying it.
+      const can = this.costCounterSources(player, sourceId, ability);
+      if ((removal.among === true ? can.total : can.most) < count) {
+        return `${player} has too few counters to remove for ${def.name}'s cost`;
+      }
+    } else if (ability.cost.removeCounter !== undefined) {
       const { kind } = ability.cost.removeCounter;
       const count =
         ability.cost.removeCounter.count === "x" ? Math.max(0, Math.floor(x ?? 0)) : ability.cost.removeCounter.count;
@@ -15579,9 +15760,14 @@ export class Game {
       const sourceStint =
         source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : undefined;
 
+      // A modal ability is activated with its modes chosen (rule 700.2b).
+      const modeOffer = this.activationModeOffer(player, sourceId, abilityIndex, ability);
+      if (modeOffer !== null && this.activationModes === undefined) {
+        throw new Error(`${def.name}'s ability needs its modes chosen as it's activated`);
+      }
       const badTarget = this.whyTargetsInvalid(
         // "X target cards" (Shigeki's channel): exactly the X it's activated with.
-        this.activatedSpecsAt(ability.targets, sourceId, player, xValue ?? 0),
+        this.activatedSpecsAt(this.activationSpecs(ability), sourceId, player, xValue ?? 0),
         targets,
         player,
         `${def.name}'s ability`,
@@ -15693,12 +15879,12 @@ export class Game {
       }
       return {
         source, def, ability, grantedAbility, sourceStint,
-        sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent,
+        sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
       };
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
-      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent,
+      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
     } = planned;
     let sacrificedRef: LastKnownRefs["sacrificed"];
 
@@ -15725,7 +15911,7 @@ export class Game {
     this.executePayment(player, payment);
     const lifeCost = abilityLifeCost(this.state, player, ability.cost) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
-    if (ability.cost.removeCounter !== undefined) {
+    if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
       const count = ability.cost.removeCounter.count === "x" ? chosenX : ability.cost.removeCounter.count;
       // Removing none (X = 0) removes nothing, and announces nothing.
@@ -15962,6 +16148,17 @@ export class Game {
     if (chosenX > 0) this.state.objects[abilityId].xValue = chosenX;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
+    // A modal ability's modes, chosen as it was activated (rule 700.2b): what
+    // it resolves, and for "that hasn't been chosen" what it has had.
+    const modes = this.activationModes;
+    if (modeOffer !== null && modes !== undefined) {
+      this.state.objects[abilityId].chosenModes = [...modes];
+      if (modeOffer.key !== undefined) {
+        const record = modeOffer.ever ? (this.state.modesChosenEver ??= {}) : (this.state.modesChosenThisTurn ??= {});
+        record[modeOffer.key] = [...(record[modeOffer.key] ?? []), ...modes];
+      }
+      this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes] });
+    }
     if (sourceStint !== undefined || sacrificedRef !== undefined || tappedRef !== undefined) {
       this.state.objects[abilityId].lastKnownRefs = {
         ...(sourceStint !== undefined ? { source: sourceStint } : {}),
@@ -16014,6 +16211,24 @@ export class Game {
     // too (rules 602.2b, 601.2h).
     const costReturn = ability.cost.returnToHand;
     if (costReturn !== undefined) this.payReturnToHandCost(player, sourceId, costReturn, abilityId);
+    // "Remove a +1/+1 counter from a creature you control": which, chosen
+    // now too (rules 602.2b, 601.2h).
+    const removal = ability.cost.removeCounter;
+    if (removal !== undefined && chosenCounterCost(ability.cost)) {
+      const count = removal.count === "x" ? chosenX : removal.count;
+      const can = this.costCounterSources(player, sourceId, ability);
+      this.withDecisionSource(sourceId, () =>
+        this.beginRemoveCounters(player, sourceId, {
+          eligible: can.eligible,
+          kinds: can.kinds,
+          min: count,
+          max: count,
+          single: removal.among !== true,
+          prompt: `${countersPhrase(count, removal.kind, removal.orKinds)}${removal.among === true ? " from among them" : ""} to pay the cost`,
+          priorityTo: player,
+        }),
+      );
+    }
     // "Blight 1" (rule 701.68a): which creature, chosen now too.
     if (ability.cost.blight !== undefined) {
       this.withDecisionSource(sourceId, () =>
@@ -16361,7 +16576,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object.controller !== player) continue;
       // "Can't activate abilities of …" covers mana abilities (Myrel).
-      if (this.abilitiesProhibited(player, object, true)) continue;
+      if (this.abilitiesProhibited(player, object, true, false)) continue;
       // A `{T}` ability needs the permanent untapped and not summoning sick;
       // an untapped one (Vivi Ornitier's "{0}: Add …") needs neither.
       const canTap = !object.tapped && !this.tapAbilityBlockedBySickness(object);
@@ -16388,7 +16603,10 @@ export class Game {
           inactiveStandIn(this.state, this.registry, object, abilityIndex) ||
           !isManaAbility(ability) ||
           ability.effect === null ||
-          ability.effect.kind !== "add-mana"
+          ability.effect.kind !== "add-mana" ||
+          // "Its activated abilities with {T} in their costs" (Serra
+          // Bestiary): only those.
+          (ability.cost.tap && this.abilitiesProhibited(player, object, true, true))
         ) {
           return;
         }
@@ -24079,7 +24297,7 @@ export class Game {
         };
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
-      counterSpell: (target, into) => this.counterSpellByEffect(target, into),
+      counterSpell: (target, into, lockSource) => this.counterSpellByEffect(target, into, lockSource === true),
       gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource) => {
         if (whileSource !== true && whileSourceTapped !== true && whileYouControlSource !== true) {
           this.gainControlByEffect(player, target, untilEndOfTurn);
@@ -24517,6 +24735,42 @@ export class Game {
       proliferate: (then) => this.beginProliferate(source, controller, x, then),
       splitMana: (ask) => this.beginManaSplit(source, controller, x, ask),
       timeTravel: () => this.beginTimeTravel(source, controller),
+      removeChosenCounters: (spec, count) => {
+        const target = spec.target?.kind === "object" ? spec.target.object : undefined;
+        if (spec.target !== undefined && target === undefined) return;
+        const single = !spec.among;
+        const can = this.counterRemovalSources(
+          controller,
+          source,
+          {
+            kind: spec.counter,
+            ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),
+            ...(spec.from !== undefined ? { from: spec.from } : {}),
+            ...(target !== undefined ? { target } : {}),
+          },
+          single,
+        );
+        // Fewer there than it says: as many as there are (rule 609.3).
+        const most = Math.min(
+          count ?? Infinity,
+          single ? can.most : spec.perObject === undefined ? can.total : Math.min(can.total, can.eligible.length * spec.perObject),
+        );
+        if (most <= 0) return;
+        this.withDecisionSource(source, () =>
+          this.beginRemoveCounters(controller, source, {
+            eligible: can.eligible,
+            kinds: can.kinds,
+            min: spec.upTo || count === null ? 0 : most,
+            max: most,
+            single,
+            ...(spec.perObject !== undefined ? { perObject: spec.perObject } : {}),
+            prompt:
+              count === null
+                ? `Remove any number of ${spec.counter === "any" ? "" : `${spec.counter} `}counters`
+                : `${countersPhrase(most, spec.counter, spec.orKinds, spec.upTo)}${single ? "" : " from among them"}`,
+          }),
+        );
+      },
       suspendedCardsYouOwn: () =>
         this.state.zones.shared.exile.filter((id) => {
           const object = this.state.objects[id];
@@ -25687,6 +25941,7 @@ export class Game {
             notChosenThisTurn: notChosenThisTurn === true || notChosenThisTurn === "ever",
             ...(otherCost?.life !== undefined ? { costLife: otherCost.life } : {}),
             ...(otherCost?.energy !== undefined ? { costEnergy: otherCost.energy } : {}),
+            ...(otherCost?.maxX !== undefined ? { maxX: otherCost.maxX } : {}),
             ...(about !== undefined ? { about } : {}),
             ...(xColor !== undefined ? { xColor } : {}),
           },
@@ -29294,7 +29549,7 @@ export class Game {
    * abilities this turn or by a static — `mana`: the ability is a mana
    * ability, which most prohibitions bar too (Myrel) but some spare (Pithing
    * Needle's "unless they're mana abilities"). */
-  private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean): boolean {
+  private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean, tap = false): boolean {
     // Detained (rule 701.35a) — the modifier is gone once its duration ends.
     if (source.modifiers.some((m) => m.abilitiesCantBeActivated === true)) return true;
     const turn = this.state.turnProhibitions;
@@ -29316,6 +29571,7 @@ export class Game {
         prohibits.abilitiesOf !== undefined &&
         (onBattlefield || prohibits.anyZone === true) &&
         !(mana && prohibits.exceptManaAbilities === true) &&
+        (prohibits.onlyTapAbilities !== true || tap) &&
         matchesFilter(this.state, this.registry, source.id, prohibits.abilitiesOf, {
           you: by.controller,
           source: by.id,
@@ -30329,6 +30585,163 @@ export class Game {
   /** Raise a `time-travel` decision for `player` (the `"time-travel"`
    * effect). With nothing eligible there's nothing to choose and nothing
    * happens. */
+  /**
+   * What a chosen counter removal may take counters from (see
+   * `AbilityCost.removeCounter` and the `remove-counters` effect): the
+   * permanents `player` controls matching `from` (or the source itself when
+   * there's no `from`, or the one `target`), and — `orSuspended` — the
+   * suspended cards they own; only those with a counter of an allowed kind
+   * (`kinds`, `null` for any). How many each can give: its counters of those
+   * kinds, a token stack's every token's unless they must all come from one
+   * permanent (`single`).
+   */
+  private counterRemovalSources(
+    player: PlayerId,
+    sourceId: ObjectId,
+    spec: {
+      readonly kind: string;
+      readonly orKinds?: readonly string[];
+      readonly from?: CardFilter;
+      readonly target?: ObjectId;
+      readonly excludeSource?: true;
+      readonly orSuspended?: true;
+    },
+    single: boolean,
+  ): { readonly eligible: ObjectId[]; readonly kinds: string[] | null; readonly total: number; readonly most: number } {
+    const kinds = spec.kind === "any" ? null : [spec.kind, ...(spec.orKinds ?? [])];
+    const ids =
+      spec.target !== undefined
+        ? [spec.target]
+        : spec.from === undefined
+          ? [sourceId]
+          : this.battlefieldMatching(player, { ...spec.from, controlledBy: "you" }, undefined, sourceId).filter(
+              (id) => spec.excludeSource !== true || id !== sourceId,
+            );
+    const candidates = ids.filter((id) => this.state.objects[id]?.zone === "battlefield");
+    if (spec.orSuspended === true) {
+      for (const id of this.state.zones.shared.exile) {
+        if (this.isSuspended(id) && this.state.objects[id]?.owner === player) candidates.push(id);
+      }
+    }
+    let total = 0;
+    let most = 0;
+    const eligible = candidates.filter((id) => {
+      const object = this.state.objects[id];
+      const suspended = object.zone === "exile";
+      const n = Object.entries(object.counters).reduce(
+        (sum, [kind, count]) =>
+          (suspended ? kind === "time" && (kinds === null || kinds.includes("time")) : kinds === null || kinds.includes(kind))
+            ? sum + count
+            : sum,
+        0,
+      );
+      if (n <= 0) return false;
+      const each = single ? n : n * (object.stackCount ?? 1);
+      total += each;
+      most = Math.max(most, n);
+      return true;
+    });
+    return { eligible, kinds, total, most };
+  }
+
+  /**
+   * Ask `player` which counters to remove (the `remove-counters` decision) —
+   * as a cost is paid (`priorityTo` set, rules 602.2b, 601.2h) or as an
+   * effect resolves. With one object holding one allowed kind and a fixed
+   * count, there is nothing to choose and they come off unasked.
+   */
+  private beginRemoveCounters(
+    player: PlayerId,
+    source: ObjectId,
+    offer: {
+      readonly eligible: readonly ObjectId[];
+      readonly kinds: readonly string[] | null;
+      readonly min: number;
+      readonly max: number;
+      readonly single?: boolean;
+      readonly perObject?: number;
+      readonly prompt: string;
+      readonly priorityTo?: PlayerId;
+    },
+  ): void {
+    if (this.state.players[player]?.hasLost !== false || offer.max <= 0 || offer.eligible.length === 0) return;
+    const awaiting = {
+      kind: "remove-counters" as const,
+      player,
+      source,
+      eligible: [...offer.eligible],
+      kinds: offer.kinds === null ? null : [...offer.kinds],
+      min: offer.min,
+      max: offer.max,
+      ...(offer.single === true ? { single: true as const } : {}),
+      ...(offer.perObject !== undefined ? { perObject: offer.perObject } : {}),
+      prompt: offer.prompt,
+      ...(offer.priorityTo !== undefined ? { priorityTo: offer.priorityTo } : {}),
+    };
+    const legal = removalOffer(this.state, awaiting);
+    const only = legal.eligible.length === 1 ? legal.eligible[0] : undefined;
+    const kinds = only === undefined ? [] : Object.keys(only.counters);
+    if (only !== undefined && kinds.length === 1 && offer.min === offer.max) {
+      this.removeChosenCounters([{ object: only.object, kind: kinds[0], count: offer.max }]);
+      return;
+    }
+    this.state.awaiting = awaiting;
+  }
+
+  /** Take the chosen counters off (rule 122): from a token stack, one token
+   * at a time (a stack is a representation — each token's are its own); a
+   * suspended card's time counters as suspend's are (`removeTimeCounter`),
+   * its last one triggering the cast. */
+  private removeChosenCounters(
+    removals: readonly { readonly object: ObjectId; readonly kind: string; readonly count: number }[],
+  ): void {
+    for (const { object, kind, count } of removals) {
+      let left = count;
+      while (left > 0) {
+        const now = this.state.objects[object];
+        if (now === undefined) break;
+        if (now.zone === "exile" && now.suspended === true && kind === "time") {
+          this.removeTimeCounter(object, left);
+          break;
+        }
+        if (now.zone !== "battlefield" || (now.counters[kind] ?? 0) <= 0) break;
+        const id = this.splitOneFromStack(object);
+        const one = this.state.objects[id];
+        const n = Math.min(left, one.counters[kind] ?? 0);
+        one.counters[kind] = (one.counters[kind] ?? 0) - n;
+        if (one.counters[kind] <= 0) delete one.counters[kind];
+        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: one.counters[kind] ?? 0 });
+        left -= n;
+      }
+    }
+  }
+
+  /** What a chosen remove-counter cost may take counters from — see
+   * {@link counterRemovalSources}. */
+  private costCounterSources(
+    player: PlayerId,
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+  ): ReturnType<Game["counterRemovalSources"]> {
+    const removal = ability.cost.removeCounter;
+    if (removal === undefined) return { eligible: [], kinds: [], total: 0, most: 0 };
+    return this.counterRemovalSources(player, sourceId, removal, removal.among !== true);
+  }
+
+  /** Answers a pending `remove-counters` decision. */
+  private applyCounterRemovals(
+    player: PlayerId,
+    removals: readonly { readonly object: ObjectId; readonly kind: string; readonly count: number }[],
+  ): void {
+    const why = removeCounters.whyCannot(this.decisionCtx, { type: "remove-counters", player, removals }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting?.kind !== "remove-counters") return;
+    this.state.awaiting = null;
+    this.removeChosenCounters(removals);
+    if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
+  }
+
   private beginTimeTravel(source: ObjectId, player: PlayerId): void {
     const eligible = this.timeTravelEligible(player);
     if (eligible.length === 0) return;
@@ -31691,12 +32104,12 @@ export class Game {
     controller: PlayerId,
     who: PlayerScope | { readonly player: PlayerId },
     filter: CardFilter,
-    count: number,
+    count: number | ((player: PlayerId) => number),
     exceptId?: ObjectId,
     exploitedBy?: ObjectId,
     andEach?: readonly CardFilter[],
   ): void {
-    if (count <= 0) return;
+    if (typeof count === "number" && count <= 0) return;
     // "A creature, an artifact, and a land": one part per filter, each asked
     // in turn and each a different permanent (`promptNextSacrifice`).
     const parts = [filter, ...(andEach ?? [])];
@@ -31724,13 +32137,17 @@ export class Game {
     // being asked can still be told why (see `GameState.decisionSource`).
     const source = this.state.decisionSource;
     for (const player of players) {
+      // A per-player count ("half the creatures they control") is read for
+      // each player now, before anyone sacrifices (rule 608.2h).
+      const theirs = typeof count === "number" ? count : count(player);
+      if (theirs <= 0) continue;
       parts.forEach((part, i) => {
         if (this.eligibleSacrifices(player, part, exceptId).length === 0) return;
         const rest = parts.slice(i + 1);
         this.state.pendingSacrifices.push({
           player,
           filter: part,
-          count,
+          count: theirs,
           ...(exceptId !== undefined ? { exceptId } : {}),
           ...(source !== null ? { source } : {}),
           ...(exploitedBy !== undefined ? { exploitedBy } : {}),
@@ -34308,9 +34725,18 @@ export class Game {
     return true;
   }
 
-  private counterSpellByEffect(target: TargetRef, into: "hand" | "exile" | undefined): void {
+  private counterSpellByEffect(target: TargetRef, into: "hand" | "exile" | undefined, lockSource = false): void {
     if (target.kind !== "object") return;
-    this.counterObject(target.object, into ?? "graveyard");
+    // Trickbind's "that permanent": the ability's source as it was put on
+    // the stack — a permanent then, and still that permanent (rule 400.7).
+    const ability = this.state.objects[target.object];
+    const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
+    const stint = ability?.lastKnownRefs?.source;
+    const countered = this.counterObject(target.object, into ?? "graveyard");
+    if (!lockSource || !countered || sourceId === null || sourceId === undefined || stint === undefined) return;
+    const source = this.state.objects[sourceId];
+    if (source === undefined || source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== stint) return;
+    this.prohibit([], { kind: "object", object: sourceId }, false, true);
   }
 
   /**

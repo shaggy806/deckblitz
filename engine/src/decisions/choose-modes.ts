@@ -40,7 +40,14 @@ export const chooseModes = defineDecision({
       ...(awaiting.ward !== undefined ? { ward: { spell: awaiting.ward.spell } } : {}),
       // "You may pay {X}{R}" — tell the driver how large X may be.
       ...(awaiting.cost !== undefined && parseManaCost(awaiting.cost).x > 0
-        ? { xCost: { maxX: ctx.maxAffordableAbilityX(awaiting.player, awaiting.cost, awaiting.xColor) } }
+        ? {
+            xCost: {
+              maxX: Math.min(
+                ctx.maxAffordableAbilityX(awaiting.player, awaiting.cost, awaiting.xColor),
+                awaiting.maxX ?? Infinity,
+              ),
+            },
+          }
         : {}),
       ...(awaiting.trigger !== undefined && awaiting.trigger.alikeCount > 0
         ? { sameForAll: awaiting.trigger.alikeCount }
@@ -74,6 +81,10 @@ export const chooseModes = defineDecision({
       if (i < 0 || i >= awaiting.modes.length || !Number.isInteger(i)) {
         return `${i} is not a valid mode index`;
       }
+    }
+    // "X can't be greater than —".
+    if (awaiting.maxX !== undefined && (action.xValue ?? 0) > awaiting.maxX) {
+      return `X can't be greater than ${awaiting.maxX}`;
     }
     return null;
   },

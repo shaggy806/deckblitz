@@ -1557,6 +1557,10 @@ export interface StaticAbility {
     /** "…can't be activated **unless they're mana abilities**" (Pithing
      * Needle): `abilitiesOf` leaves mana abilities alone. */
     readonly exceptManaAbilities?: true;
+    /** "…its activated abilities **with {T} in their costs** can't be
+     * activated" (Serra Bestiary): `abilitiesOf` bars only abilities whose
+     * cost taps the permanent, mana abilities among them. */
+    readonly onlyTapAbilities?: true;
     /** `abilitiesOf` reaches **sources** in every zone, not only permanents —
      * "activated abilities of sources with the chosen name" (Pithing Needle)
      * stops a card's cycling or channel in a hand and a graveyard ability

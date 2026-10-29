@@ -613,6 +613,7 @@ import _poolSeismicStomp from "../pool/seismic-stomp.js";
 import _poolSengirConnoisseur from "../pool/sengir-connoisseur.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
+import _poolSerraBestiary from "../pool/serra-bestiary.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
@@ -1460,6 +1461,7 @@ const shard: CardShard = {
     _poolSengirConnoisseur,
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
+    _poolSerraBestiary,
     _poolShadowcloakVampire,
     _poolShieldOfTheRealm,
     _poolShimmercreep,

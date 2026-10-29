@@ -29,6 +29,8 @@ import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import { defaultVenture } from "./decisions/venture.js";
+import { defaultCounterRemovals } from "./decisions/remove-counters.js";
+import type { CounterRemoval, CounterRemovalOffer } from "./decisions/remove-counters.js";
 import type { VentureAnswer, VentureOffer } from "./decisions/venture.js";
 import type { RandomSource } from "./decisions/contract.js";
 import {
@@ -378,6 +380,13 @@ export interface PlayerController {
     view: ControllerView,
     eligible: readonly ObjectId[],
   ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
+  /**
+   * Which counters to remove, from which permanents — a cost's "remove a
+   * +1/+1 counter from a creature you control", a `remove-counters`
+   * effect's. Return removals adding up to between `offer.min` and
+   * `offer.max` (see the `remove-counters` decision).
+   */
+  chooseCounterRemovals(view: ControllerView, offer: CounterRemovalOffer): readonly CounterRemoval[];
   /**
    * A venture's choice (rule 701.49): of `offer.dungeons`, the dungeon to
    * enter, or of `offer.rooms`, the room to move into at a fork —
@@ -760,6 +769,10 @@ export class AutomaticController implements PlayerController {
     return defaultTimeTravel(view, eligible);
   }
 
+  chooseCounterRemovals(_view: ControllerView, offer: CounterRemovalOffer): readonly CounterRemoval[] {
+    return defaultCounterRemovals(offer);
+  }
+
   chooseVenture(_view: ControllerView, offer: VentureOffer): VentureAnswer {
     return defaultVenture(offer);
   }
@@ -1042,6 +1055,8 @@ export class ScriptedController implements PlayerController {
     colors.length === 0 ? {} : { [colors[0]]: amount };
   /** As `AutomaticController`'s (`defaultTimeTravel`). */
   chooseTimeTravelFn: TimeTravelChooser = (view, eligible) => defaultTimeTravel(view, eligible);
+  chooseCounterRemovalsFn: (view: ControllerView, offer: CounterRemovalOffer) => readonly CounterRemoval[] = (_view, offer) =>
+    defaultCounterRemovals(offer);
   /** The first offered dungeon or room (`defaultVenture`). */
   chooseVentureFn: (view: ControllerView, offer: VentureOffer) => VentureAnswer = (_view, offer) => defaultVenture(offer);
   /** Your own first, up to `max` — see `ownPermanentsFirst`; under a power
@@ -1269,6 +1284,10 @@ export class ScriptedController implements PlayerController {
     eligible: readonly ObjectId[],
   ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] } {
     return this.chooseTimeTravelFn(view, eligible);
+  }
+
+  chooseCounterRemovals(view: ControllerView, offer: CounterRemovalOffer): readonly CounterRemoval[] {
+    return this.chooseCounterRemovalsFn(view, offer);
   }
 
   chooseVenture(view: ControllerView, offer: VentureOffer): VentureAnswer {
@@ -1719,6 +1738,7 @@ export class RandomController extends AutomaticController {
           source: legal.source,
           abilityIndex: legal.abilityIndex,
           targets: this.pickTargets(legal.targetOptions, legal.targetSpecs),
+          ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
           ...(sac !== undefined && sac.choices.length > 0
             ? { sacrifice: sac.choices[this.pickIndex(sac.choices.length)] }
             : {}),
@@ -2981,6 +3001,7 @@ export class HeuristicBotController extends AutomaticController {
         ? { sacrifice: this.cheapestPermanents(state, sac.choices, 1)[0] }
         : {}),
       ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
+      ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
     };
   }
 

@@ -719,6 +719,7 @@ import _poolTreasuredFind from "../pool/treasured-find.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
 import _poolTriadOfFates from "../pool/triad-of-fates.js";
+import _poolTrickbind from "../pool/trickbind.js";
 import _poolTripWire from "../pool/trip-wire.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTriumphOfCruelty from "../pool/triumph-of-cruelty.js";
@@ -1542,6 +1543,7 @@ const shard: CardShard = {
     _poolTreeOfTales,
     _poolTrenchStalker,
     _poolTriadOfFates,
+    _poolTrickbind,
     _poolTripWire,
     _poolTriskaidekaphile,
     _poolTriumphOfCruelty,

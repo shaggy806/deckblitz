@@ -875,6 +875,27 @@ export function parseCost(text) {
       const count = numberOf(m[1]);
       if (typeof count !== "number") return null;
       cost.removeCounter = { kind: m[2], count };
+    } else if ((m = new RegExp(`^Remove ${N} counters? from ~$`, "i").exec(part))) {
+      // "Remove a counter from this creature": of any kind it has, chosen as
+      // the cost is paid.
+      const count = numberOf(m[1]);
+      if (typeof count !== "number") return null;
+      cost.removeCounter = { kind: "any", count };
+    } else if (
+      (m = new RegExp(`^Remove ${N} (?:([+-]\\d+/[+-]\\d+|\\w+) counters?|counters?) from (a|an|another|among) (.+?) you control$`, "i").exec(part))
+    ) {
+      // "Remove a +1/+1 counter from a creature you control", "… from among
+      // creatures you control" (rules 602.2b, 601.2h — chosen as it's paid).
+      const count = numberOf(m[1]);
+      const filter = parseTypePhrase(m[4]);
+      if (count === undefined || filter === null) return null;
+      cost.removeCounter = {
+        kind: m[2] ?? "any",
+        count,
+        ...(Object.keys(filter).length > 0 ? { from: filter } : { from: {} }),
+        ...(m[3].toLowerCase() === "another" ? { excludeSource: true } : {}),
+        ...(m[3].toLowerCase() === "among" ? { among: true } : {}),
+      };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
       const count = numberOf(m[1]);
@@ -3526,7 +3547,7 @@ function manaAbilityExtras(ability) {
 }
 
 function fillEffect(ability, text, ctx, lines, i) {
-  const modalHead = /^Choose (one|two|one or both|one or more) —$/.exec(text.trim());
+  const modalHead = /^Choose (one|two|one or both|one or more)( that hasn't been chosen( this turn)?)? —$/.exec(text.trim());
   if (modalHead) {
     let j = i + 1;
     const bullets = [];
@@ -3534,18 +3555,19 @@ function fillEffect(ability, text, ctx, lines, i) {
     const modes = [];
     let ok = bullets.length > 0;
     for (const b of bullets) {
-      const r = parseEffect(b, { targets: [], tokenFor: ctx.tokenFor, onStack: ctx.onStack });
-      // A resolution-time mode can't choose targets of its own.
-      if (r.effect === null || containsTarget(r.effect)) ok = false;
-      else modes.push({ text: b, effect: r.effect });
+      // Each mode brings its own targets (rule 700.2b): slots of its own.
+      const targets = [];
+      const r = parseEffect(b, { targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack });
+      if (r.effect === null) ok = false;
+      else modes.push({ text: b, ...(targets.length > 0 ? { targets } : {}), effect: r.effect });
     }
     const [min, max] = modeCounts(modalHead[1], bullets.length);
-    // A modal triggered ability announces its modes as it goes on the stack
-    // (rules 603.3c, 700.2b). A modal activated ability would choose them as
-    // it resolves instead (AUTHORING §15), so it isn't read.
-    if (ok && ability.trigger === undefined) {
-      ability.__todo = [...(ability.__todo ?? []), `modes chosen as it resolves, not as it is activated: ${bullets.join(" / ")}`];
-    } else if (ok) ability.effect = { kind: "modal", announced: true, minModes: min, maxModes: max, modes };
+    // A modal ability announces its modes as it goes on the stack — a
+    // triggered one (rules 603.3c, 700.2b) or an activated one (602.2b).
+    // "That hasn't been chosen" is this object's whole stint; "this turn",
+    // this turn's.
+    const unchosen = modalHead[2] === undefined ? {} : modalHead[3] !== undefined ? { notChosenThisTurn: true } : { notChosenBefore: true };
+    if (ok) ability.effect = { kind: "modal", announced: true, ...unchosen, minModes: min, maxModes: max, modes };
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }
@@ -3846,6 +3868,27 @@ function parseStatic(line, text) {
   }
   if ((m = /^(?:Enchanted|Equipped) creature can't attack or block\.$/.exec(line))) {
     return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  // Arrest's "…, and its activated abilities can't be activated" — the
+  // host's abilities, for every player (`hostOfSource`); "unless they're
+  // mana abilities" (Faith's Fetters) and "with {T} in their costs" (Serra
+  // Bestiary) narrow it.
+  if (
+    (m = /^Enchanted (creature|permanent) can't attack or block, and its activated abilities (with \{T\} in their costs )?can't be activated( unless they're mana abilities)?\.$/.exec(
+      line,
+    ))
+  ) {
+    return {
+      affects: { scope: "attached" },
+      restrictions: ["cant-attack", "cant-block"],
+      prohibits: {
+        who: "each-player",
+        abilitiesOf: { hostOfSource: true },
+        ...(m[3] !== undefined ? { exceptManaAbilities: true } : {}),
+        ...(m[2] !== undefined ? { onlyTapAbilities: true } : {}),
+      },
+      text,
+    };
   }
   // "Enchanted creature doesn't untap during its controller's untap step"
   // (rule 502.3 — Tractor Beam, Watery Grasp).

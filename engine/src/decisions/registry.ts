@@ -30,6 +30,7 @@ import { orderTriggers } from "./order-triggers.js";
 import { proliferate } from "./proliferate.js";
 import { splitMana } from "./split-mana.js";
 import { timeTravel } from "./time-travel.js";
+import { removeCounters } from "./remove-counters.js";
 import { venture } from "./venture.js";
 import { chooseCreatureType } from "./choose-creature-type.js";
 import { chooseCardName } from "./choose-card-name.js";
@@ -62,6 +63,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   proliferate,
   "split-mana": splitMana,
   "time-travel": timeTravel,
+  "remove-counters": removeCounters,
   venture,
   "choose-creature-type": chooseCreatureType,
   "choose-card-name": chooseCardName,

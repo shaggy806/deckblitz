@@ -26,6 +26,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   proliferate: 'proliferating',
   'split-mana': 'choosing their mana',
   'time-travel': 'time traveling',
+  'remove-counters': 'removing counters',
   'choose-permanents': 'choosing permanents',
   'enter-attacking': 'choosing what to attack',
   scry: 'scrying',

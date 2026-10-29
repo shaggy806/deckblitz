@@ -2986,6 +2986,37 @@ export type AwaitingDecision =
     }
   | {
       /**
+       * Which counters to remove, and from what — "Remove a +1/+1 counter
+       * from a creature you control" (Ghave, Guru of Spores), "Remove three
+       * counters from among creatures you control" (Tayam), "remove up to
+       * four charge counters from target artifact" (Gremlin Mine). Asked as a
+       * cost is paid (`AbilityCost.removeCounter` with `from` or a kind of
+       * `"any"` — rules 602.2b, 601.2h: the ability is on the stack, nobody
+       * has priority, `priorityTo` gets it once it's answered) or as a
+       * `remove-counters` effect resolves (the rest of the resolution waits,
+       * as a suspended one does).
+       *
+       * The answer removes between `min` and `max` counters in all, each of
+       * a kind in `kinds` (`null`: any kind) from one of `eligible`, no more
+       * of a kind from an object than it has; `single` puts them all on one
+       * object ("from a creature"), `perObject` caps each object's share
+       * (Garnet's "a lore counter from each of any number of Sagas").
+       */
+      readonly kind: "remove-counters";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly eligible: readonly ObjectId[];
+      readonly kinds: readonly string[] | null;
+      readonly min: number;
+      readonly max: number;
+      readonly single?: true;
+      readonly perObject?: number;
+      readonly prompt: string;
+      /** Set when it pays a cost: who gets priority once it's answered. */
+      readonly priorityTo?: PlayerId;
+    }
+  | {
+      /**
        * A venture's choice (rule 701.49): which dungeon to enter (`dungeons`
        * — 701.49a, c), or, at a fork, which room to move into (`rooms`, by
        * index into `dungeon`'s rooms, from room `from` — 701.49b). Exactly
@@ -3193,6 +3224,9 @@ export type AwaitingDecision =
       /** The colour `cost`'s X is paid in — a `may`'s `xColor` ("pay any
        * amount of {R}"). */
       readonly xColor?: Color;
+      /** The most `cost`'s X may be — a `may`'s `maxX` ("X can't be greater
+       * than the amount of life you lost this turn"). */
+      readonly maxX?: number;
       /** Set when this is a ward payment (rule 702.21a): the one mode pays
        * the ward cost of `warded`, declining counters `spell` (also the
        * decision's target 0). Choosing to pay logs `ward-paid`. */

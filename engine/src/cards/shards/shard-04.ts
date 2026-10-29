@@ -84,6 +84,7 @@ import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
 import _poolButchersCleaver from "../pool/butchers-cleaver.js";
 import _poolBygoneBishop from "../pool/bygone-bishop.js";
 import _poolCachedDefenses from "../pool/cached-defenses.js";
+import _poolCankerbloom from "../pool/cankerbloom.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCarnage from "../pool/carnage.js";
@@ -284,6 +285,7 @@ import _poolGondGate from "../pool/gond-gate.js";
 import _poolGoreVassal from "../pool/gore-vassal.js";
 import _poolGratefulApparition from "../pool/grateful-apparition.js";
 import _poolGravelSlinger from "../pool/gravel-slinger.js";
+import _poolGremlinMine from "../pool/gremlin-mine.js";
 import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
@@ -920,6 +922,7 @@ const shard: CardShard = {
     _poolButchersCleaver,
     _poolBygoneBishop,
     _poolCachedDefenses,
+    _poolCankerbloom,
     _poolCaprichrome,
     _poolCarnageTyrant,
     _poolCarnage,
@@ -1120,6 +1123,7 @@ const shard: CardShard = {
     _poolGoreVassal,
     _poolGratefulApparition,
     _poolGravelSlinger,
+    _poolGremlinMine,
     _poolGriffinSentinel,
     _poolGrimHireling,
     _poolGrislyTransformation,

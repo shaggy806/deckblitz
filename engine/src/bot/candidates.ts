@@ -239,6 +239,7 @@ function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Actio
       ? { sacrifice: sacrifice.choices[sacrifice.choices.length - 1] }
       : {}),
     ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
+    ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
   };
   return targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs).map(
     (targets) => ({ ...common, targets }),

@@ -2618,3 +2618,59 @@ describe("land-type setting statics (rule 305.7)", () => {
     });
   });
 });
+
+describe("chosen counter costs, modal activated abilities, the host's prohibition (B254)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test B254", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads a counter removed from a permanent you control, or from among them", () => {
+    const ghave = face("Creature — Fungus", "{1}, Remove a +1/+1 counter from a creature you control: Draw a card.");
+    expect(ghave.activated[0].cost).toEqual({
+      mana: "{1}",
+      tap: false,
+      removeCounter: { kind: "+1/+1", count: 1, from: { type: "creature" } },
+    });
+    const among = face("Creature — Beast", "{3}, Remove three counters from among creatures you control: Draw a card.");
+    expect(among.activated[0].cost.removeCounter).toEqual({ kind: "any", count: 3, from: { type: "creature" }, among: true });
+    const another = face("Artifact Creature — Construct", "{1}, Remove a counter from another creature you control: Draw a card.");
+    expect(another.activated[0].cost.removeCounter).toEqual({ kind: "any", count: 1, from: { type: "creature" }, excludeSource: true });
+    const self = face("Creature — Giant", "{1}{R}, Remove a counter from this creature: Draw a card.");
+    expect(self.activated[0].cost.removeCounter).toEqual({ kind: "any", count: 1 });
+  });
+
+  it("reads a modal activated ability's modes, each with its targets, announced", () => {
+    const bloom = face(
+      "Creature — Fungus",
+      "{1}, Sacrifice this creature: Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Draw a card.",
+    );
+    expect(bloom.activated[0].effect).toMatchObject({
+      kind: "modal",
+      announced: true,
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        { text: "Destroy target artifact.", targets: ["artifact"], effect: { kind: "destroy", target: 0 } },
+        { text: "Destroy target enchantment.", targets: ["enchantment"], effect: { kind: "destroy", target: 0 } },
+        { text: "Draw a card.", effect: { kind: "draw", amount: 1 } },
+      ],
+    });
+    const bowls = face("Artifact — Food", "{2}, {T}: Choose one that hasn't been chosen —\n• Draw a card.\n• You gain 3 life.");
+    expect(bowls.activated[0].effect).toMatchObject({ kind: "modal", announced: true, notChosenBefore: true });
+  });
+
+  it("reads 'its activated abilities can't be activated' as the host's (Arrest)", () => {
+    const arrest = face(
+      "Enchantment — Aura",
+      "Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.",
+    );
+    expect(arrest.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      restrictions: ["cant-attack", "cant-block"],
+      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+    });
+    const fetters = face(
+      "Enchantment — Aura",
+      "Enchant permanent\nEnchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.",
+    );
+    expect(fetters.static[0].prohibits).toEqual({ who: "each-player", abilitiesOf: { hostOfSource: true }, exceptManaAbilities: true });
+  });
+});

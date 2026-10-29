@@ -76,6 +76,17 @@ export function sacrificeCostReadsX(cost: { readonly sacrifice?: SacrificeCost }
   return typeof sacrifice === "object" && "filter" in sacrifice && sacrifice.count === "x";
 }
 
+/** Whether a cost's `removeCounter` is chosen as it's paid — from a
+ * permanent other than the source, of any kind or several, or a suspended
+ * card's — rather than a fixed number of one kind off the source. */
+export function chosenCounterCost(cost: AbilityCost): boolean {
+  const c = cost.removeCounter;
+  return (
+    c !== undefined &&
+    (c.from !== undefined || c.kind === "any" || c.orKinds !== undefined || c.orSuspended === true || c.among === true)
+  );
+}
+
 /** Does any part of this cost besides its mana take X — so X is announced
  * though the mana cost needn't have `{X}` (Grim Hireling's "Sacrifice X
  * Treasures", Gix, Yawgmoth Praetor's "Discard X cards")? */
@@ -210,8 +221,30 @@ export interface AbilityCost {
    * Batteries): X is announced as it's activated (rule 601.2b, via 602.2b),
    * up to the counters it has, 0 allowed, and the effect reads it as `"x"`
    * — "add {B} for each storage counter removed this way". A mana ability
-   * with it is activated by hand only (the auto-payer pays no counters). */
-  readonly removeCounter?: { readonly kind: string; readonly count: number | "x" };
+   * with it is activated by hand only (the auto-payer pays no counters).
+   *
+   * Or counters chosen as the cost is paid (rules 602.2b, 601.2h — the
+   * `remove-counters` decision, once the ability is on the stack, as a
+   * blight is): `kind: "any"` is "remove a counter" of any kind (Loch Mare's
+   * "Remove a counter from this creature"), `orKinds` more kinds besides
+   * `kind` (Ion Storm's "a +1/+1 counter or a charge counter"); `from` takes
+   * them from a permanent you control matching it, rather than the source
+   * ("from a creature you control" — Ghave, Guru of Spores; "another" is
+   * `excludeSource`), and `among` spreads them over any of those ("from among
+   * creatures you control" — Tayam); `orSuspended` lets a suspended card you
+   * own give a time counter too (Rift Elemental). With `count: "x"`, X is
+   * announced as it's activated, up to what there is to remove (`minX` 1 for
+   * "one or more" — Ooze Flux). Never on a mana ability.
+   */
+  readonly removeCounter?: {
+    readonly kind: string;
+    readonly count: number | "x";
+    readonly orKinds?: readonly string[];
+    readonly from?: CardFilter;
+    readonly excludeSource?: true;
+    readonly among?: true;
+    readonly orSuspended?: true;
+  };
   /**
    * Counters to put on the source as part of the cost — Wall of Roots' "Put
    * a -0/-1 counter on this creature: Add {G}", Devoted Druid's "Put a -1/-1

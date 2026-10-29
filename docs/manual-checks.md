@@ -5688,3 +5688,23 @@ engine terms. A second thing to check is a second test.
 ### Switcheroo: two creatures change hands
 - **Do:** Cast Switcheroo targeting your Grizzly Bears and Bob's Hill Giant.
 - **Expect:** The Hill Giant moves to your side and the Bears to Bob's, both at once.
+
+## Counters chosen, modal activations, an Aura's lock (2026-10-29, need-keys Phase 2: four families)
+
+### Ghave, Guru of Spores: pick the creature that gives up a counter
+- **Do:** Activate Ghave's "{1}, Remove a +1/+1 counter from a creature you control" ability. Click Grizzly Bears on the board, then **Remove**.
+- **Expect:** The banner reads "Remove a +1/+1 counter to pay the cost". Bears lose their counter, Ghave keeps five, and you get a Saproling.
+
+### Tayam, Luminous Enigma: three counters from among your creatures
+- **Do:** Activate Tayam's ability. Click Tayam once and Grizzly Bears twice (or use the steppers), then **Remove**.
+- **Expect:** **Remove** stays greyed out until exactly three are picked. Tayam loses vigilance, the Bears go back to 2/2, and you mill three.
+- **Not a bug:** Hill Giant's -1/-1 counter can be one of the three too.
+
+### Cankerbloom: each mode is its own activation
+- **Do:** Click Cankerbloom.
+- **Expect:** The menu lists "{1}, Sacrifice this creature: Destroy target artifact.", "… Destroy target enchantment." and "… Proliferate." as three entries. Picking the first asks for an artifact target only.
+
+### Arrest: the enchanted creature's abilities can't be activated
+- **Do:** Cast Arrest on Bob's Prodigal Pyromancer.
+- **Expect:** Bob's Pyromancer never pings again, and can't attack or block. Your own Pyromancer still can.
+

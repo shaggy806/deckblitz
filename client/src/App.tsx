@@ -342,6 +342,36 @@ type SacrificeAction = Extract<LegalAction, { kind: 'sacrifice' }>
 type ProliferateAction = Extract<LegalAction, { kind: 'proliferate' }>
 type SplitManaAction = Extract<LegalAction, { kind: 'split-mana' }>
 type TimeTravelAction = Extract<LegalAction, { kind: 'time-travel' }>
+type RemoveCountersAction = Extract<LegalAction, { kind: 'remove-counters' }>
+
+/**
+ * A click on a permanent while choosing counters to remove: one more of its
+ * first kind with room left, within the offer's `max`, its `perObject` and,
+ * for `single`, only this permanent's (another's picks give way). With no
+ * room left on it, its picks are cleared — a second click undoes.
+ */
+function nextCounterPick(
+  offer: RemoveCountersAction,
+  picks: Readonly<Record<string, number>>,
+  id: string,
+): Readonly<Record<string, number>> {
+  const entry = offer.eligible.find((e) => e.object === id)
+  if (entry === undefined) return picks
+  const mine = (key: string): boolean => key.startsWith(`${id}|`)
+  const base =
+    offer.single === true ? Object.fromEntries(Object.entries(picks).filter(([key]) => mine(key))) : { ...picks }
+  const sum = Object.values(base).reduce((n, c) => n + c, 0)
+  const share = Object.entries(base)
+    .filter(([key]) => mine(key))
+    .reduce((n, [, c]) => n + c, 0)
+  const kind = Object.entries(entry.counters).find(
+    ([k, has]) => (base[`${id}|${k}`] ?? 0) < has,
+  )?.[0]
+  if (kind === undefined || sum >= offer.max || (offer.perObject !== undefined && share >= offer.perObject)) {
+    return Object.fromEntries(Object.entries(base).filter(([key]) => !mine(key)))
+  }
+  return { ...base, [`${id}|${kind}`]: (base[`${id}|${kind}`] ?? 0) + 1 }
+}
 type VentureAction = Extract<LegalAction, { kind: 'venture' }>
 type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
@@ -651,6 +681,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   proliferate: 'choose what to proliferate',
   'split-mana': 'choose their mana',
   'time-travel': 'time travel',
+  'remove-counters': 'remove counters',
   'choose-permanents': 'choose permanents',
   'enter-attacking': 'choose what their creatures attack',
   scry: 'scry',
@@ -1714,6 +1745,8 @@ function Table({
   // and which way a click on a permanent goes.
   const [timeTravelPicks, setTimeTravelPicks] = useState<Readonly<Record<string, 1 | -1>>>({})
   const [timeTravelBrush, setTimeTravelBrush] = useState<1 | -1>(1)
+  // How many of each kind come off each object, keyed `${object}|${kind}`.
+  const [counterPicks, setCounterPicks] = useState<Readonly<Record<string, number>>>({})
   // Whose dungeon map is open (their progress chip), or nobody's.
   const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
   const [zoneView, setZoneView] = useState<{
@@ -1989,6 +2022,7 @@ function Table({
   // The split to ask: the engine's, or a hand activation's (`pendingManaSplit`).
   const manaSplitAsk = splitManaAction ?? pendingManaSplit?.manaSplit
   const timeTravelAction = actions.find((a): a is TimeTravelAction => a.kind === 'time-travel')
+  const removeCountersAction = actions.find((a): a is RemoveCountersAction => a.kind === 'remove-counters')
   const ventureAction = actions.find((a): a is VentureAction => a.kind === 'venture')
   const scryAction = actions.find((a): a is ScryAction => a.kind === 'scry')
   const castNowAction = actions.find((a): a is CastNowAction => a.kind === 'cast-now')
@@ -2088,6 +2122,7 @@ function Table({
     | 'proliferate'
     | 'split-mana'
     | 'time-travel'
+    | 'remove-counters'
     | 'venture'
     | 'choose-permanents'
     | 'scry'
@@ -2136,6 +2171,8 @@ function Table({
           ? 'split-mana'
         : timeTravelAction
           ? 'time-travel'
+        : removeCountersAction
+          ? 'remove-counters'
         : ventureAction
           ? 'venture'
         : choosePermanentsAction
@@ -2288,6 +2325,7 @@ function Table({
                 source: t.source,
                 abilityIndex: t.abilityIndex,
                 targets: [...targets],
+                ...(t.modes !== undefined ? { modes: [...t.modes] } : {}),
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
@@ -2582,6 +2620,7 @@ function Table({
         specs: action.targetSpecs,
         options: action.targetOptions,
         xValue: value,
+        ...(action.modes !== undefined ? { modes: action.modes } : {}),
         ...(action.tapCost !== undefined ? { tapCost: action.tapCost } : {}),
         ...(action.waterbend !== undefined && action.waterbend.choices.length > 0
           ? { waterbendOffer: action.waterbend }
@@ -2631,6 +2670,8 @@ function Table({
         options: ab.targetOptions,
         ...(sacrifice !== undefined ? { sacrifice } : {}),
         ...(ab.manaColors !== undefined ? { manaColors: ab.manaColors } : {}),
+        // A modal ability is offered once per mode (rule 700.2b).
+        ...(ab.modes !== undefined ? { modes: ab.modes } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
@@ -3032,6 +3073,10 @@ function Table({
         )
         return
       }
+      if (mode === 'remove-counters' && removeCountersAction) {
+        setCounterPicks((cur) => nextCounterPick(removeCountersAction, cur, id))
+        return
+      }
       if (mode === 'time-travel' && timeTravelAction) {
         if (!timeTravelAction.eligible.includes(id)) return
         // The brush says which way a click goes; clicking the same way again
@@ -3203,6 +3248,7 @@ function Table({
       proliferateAction,
       timeTravelAction,
       timeTravelBrush,
+      removeCountersAction,
       activeTargeting,
       defendersFor,
       enchantAction,
@@ -3552,6 +3598,14 @@ function Table({
       highlight = choosePermanentsAction.eligible.includes(id) && taken === 0
       selected = taken > 0
       if (of > 1 && taken > 0) badge = `✓ ${taken}/${of}`
+    } else if (mode === 'remove-counters' && removeCountersAction) {
+      const entry = removeCountersAction.eligible.find((e) => e.object === id)
+      const taken = Object.entries(counterPicks)
+        .filter(([key]) => key.startsWith(`${id}|`))
+        .reduce((n, [, count]) => n + count, 0)
+      highlight = entry !== undefined && taken === 0
+      selected = taken > 0
+      if (taken > 0) badge = `−${taken}`
     } else if (mode === 'time-travel' && timeTravelAction) {
       const pick = timeTravelPicks[id]
       highlight = timeTravelAction.eligible.includes(id) && pick === undefined
@@ -4571,6 +4625,70 @@ function Table({
             Show choices
           </button>
         ) : null}
+      </div>
+    )
+  } else if (mode === 'remove-counters' && removeCountersAction) {
+    // "Remove a +1/+1 counter from a creature you control", "three counters
+    // from among creatures you control", "up to four charge counters": how
+    // many of each kind from each, between the offer's min and max in all.
+    const offer = removeCountersAction
+    const key = (object: string, kind: string): string => `${object}|${kind}`
+    const removals = offer.eligible.flatMap((e) =>
+      Object.keys(e.counters).flatMap((kind) => {
+        const count = counterPicks[key(e.object, kind)] ?? 0
+        return count > 0 ? [{ object: e.object, kind, count }] : []
+      }),
+    )
+    const sum = removals.reduce((n, r) => n + r.count, 0)
+    const fromObjects = new Set(removals.map((r) => r.object))
+    const shareOf = (object: string): number =>
+      removals.filter((r) => r.object === object).reduce((n, r) => n + r.count, 0)
+    const valid =
+      sum >= offer.min && sum <= offer.max && (offer.single !== true || fromObjects.size <= 1)
+    controls = (
+      <div className="controls">
+        <span>
+          {view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}
+          {offer.prompt} — {sum}
+          {offer.min === offer.max ? `/${offer.max}` : ` (${offer.min}–${offer.max})`}
+        </span>
+        <span className="stack-counts">
+          {offer.eligible.flatMap((e) =>
+            Object.entries(e.counters).map(([kind, has]) => {
+              const count = counterPicks[key(e.object, kind)] ?? 0
+              // All from one permanent: another's are closed once one is picked.
+              const closed = offer.single === true && fromObjects.size > 0 && !fromObjects.has(e.object)
+              const room = Math.min(
+                has,
+                count + (offer.max - sum),
+                offer.perObject === undefined ? has : count + (offer.perObject - shareOf(e.object)),
+              )
+              return (
+                <CountStepper
+                  key={key(e.object, kind)}
+                  label={`${game.nameOf(e.object)}: ${kind} (${has})`}
+                  count={count}
+                  max={closed ? count : room}
+                  showMax={false}
+                  onChange={(n) => setCounterPicks((cur) => ({ ...cur, [key(e.object, kind)]: n }))}
+                />
+              )
+            }),
+          )}
+        </span>
+        <button type="button" disabled={sum === 0} onClick={() => setCounterPicks({})}>
+          Clear
+        </button>
+        <button
+          type="button"
+          disabled={!valid}
+          onClick={() => {
+            setCounterPicks({})
+            game.dispatch({ type: 'remove-counters', player: seat, removals } as Action)
+          }}
+        >
+          Remove
+        </button>
       </div>
     )
   } else if (mode === 'time-travel' && timeTravelAction) {
@@ -6538,7 +6656,8 @@ function Table({
             // An "add one mana of any color" ability is listed once per
             // colour, all sharing an index -- the colours are what tell them
             // apart, so they belong in the key too.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}`,
+            // So is a modal ability, once per mode.
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}`,
             label: ab.text || `Ability ${ab.abilityIndex + 1}`,
             onSelect: () => {
               setSelectedSource(null)

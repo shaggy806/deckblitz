@@ -380,6 +380,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // The reverse of `add-counter`: losing a harmful counter helps.
   "remove-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR),
+  // Chosen counters off a target (Gremlin Mine): the same lean.
+  "remove-counters": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR);
+  },
   // A counter taken from one onto the other: the kind chosen as it resolves
   // when unnamed, read as a good one.
   "move-counters": (n, v) => {
@@ -1108,6 +1112,15 @@ export function offerPolarities(
     // A Licid's ability makes it the Aura on its target: that slot leans as
     // the Aura's "enchanted creature" abilities do.
     if (ability.licid === true) return [auraPolarity(licidDefinition(def))];
+    // A modal ability's slots are its chosen modes' targets, in listed order
+    // (rule 700.2b), as an announced trigger's are.
+    const modal = ability.effect?.kind === "modal" ? ability.effect : null;
+    if (modal !== null && modal.announced === true && offer.modes !== undefined) {
+      return offer.modes.flatMap((index) => {
+        const mode = modal.modes[index];
+        return mode === undefined ? [] : [...slotPolarities(mode.effect, mode.targets?.length ?? 0, bias)];
+      });
+    }
     return abilityPolarities(ability, bias);
   }
   if (offer.castModal !== undefined) return null;

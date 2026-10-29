@@ -491,6 +491,12 @@ export type Action =
       readonly source: ObjectId;
       readonly abilityIndex: number;
       readonly targets?: ChosenTargets;
+      /** A modal ability's modes ("{2}, {T}: Choose one —"), chosen as it's
+       * activated (rules 602.2b, 700.2b): indices into its `modal` effect's
+       * modes, distinct, in listed order — the offer's `modes`, echoed back.
+       * Its `targets` are then those modes' targets, in that order. Required
+       * for such an ability, meaningless for any other. */
+      readonly modes?: readonly number[];
       /** The permanent to sacrifice, when the ability's cost is a
        * `"creature-you-control"` sacrifice. Ignored for a `"self"` sacrifice
        * (the source is always what's sacrificed) or no sacrifice. */
@@ -740,6 +746,15 @@ export type Action =
       readonly player: PlayerId;
       readonly add: readonly ObjectId[];
       readonly remove: readonly ObjectId[];
+    }
+  | {
+      /** Answers a pending `remove-counters` decision: how many counters of
+       * which kind come off each object — every entry one of the offer's
+       * `eligible`, its kind one it has, and the counts adding up to between
+       * the offer's `min` and `max`. */
+      readonly type: "remove-counters";
+      readonly player: PlayerId;
+      readonly removals: readonly { readonly object: ObjectId; readonly kind: string; readonly count: number }[];
     }
   | {
       /** Answers a pending `venture` decision (rule 701.49): the dungeon to
@@ -1249,6 +1264,11 @@ export type LegalAction =
       /** Present for a planeswalker loyalty ability — the loyalty counters it
        * adds (negative = removes), so a UI can label it "+1" / "−3". */
       readonly loyalty?: number;
+      /** A modal ability's modes this offer chooses (rule 700.2b) — the
+       * ability is offered once per choice, each with those modes' targets
+       * as its `targetSpecs` and its `text` naming them. Echo it back as the
+       * action's `modes`. */
+      readonly modes?: readonly number[];
       /** Set when this is a mana ability (rule 605.1a), printed or granted —
        * Citanul Hierophants' "{T}: Add {G}" on every creature included, which
        * a lookup of the source's printed abilities can't see. */
@@ -1671,6 +1691,22 @@ export type LegalAction =
        * including none. No `count`: that is the point of the card. */
       readonly kind: "proliferate";
       readonly eligible: readonly TargetRef[];
+    }
+  | {
+      /** Which counters to remove, from which of `eligible` — a cost's
+       * "remove a +1/+1 counter from a creature you control", a
+       * `remove-counters` effect's (see the `remove-counters` awaiting). */
+      readonly kind: "remove-counters";
+      readonly prompt: string;
+      /** Each object that may give up counters, with the ones of an allowed
+       * kind it has. */
+      readonly eligible: readonly { readonly object: ObjectId; readonly counters: Readonly<Record<string, number>> }[];
+      readonly min: number;
+      readonly max: number;
+      /** All of them from one object. */
+      readonly single?: true;
+      /** At most this many from each object. */
+      readonly perObject?: number;
     }
   | {
       /** Time travel (rule 701.56a) — for each of `eligible` (a permanent

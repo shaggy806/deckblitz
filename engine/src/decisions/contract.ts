@@ -105,6 +105,7 @@ export const DECISION_ACTIONS = {
   proliferate: ["proliferate"],
   "split-mana": ["split-mana"],
   "time-travel": ["time-travel"],
+  "remove-counters": ["remove-counters"],
   venture: ["venture"],
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
@@ -145,6 +146,7 @@ export const DECISION_OFFERS = {
   proliferate: ["proliferate"],
   "split-mana": ["split-mana"],
   "time-travel": ["time-travel"],
+  "remove-counters": ["remove-counters"],
   venture: ["venture"],
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
@@ -250,6 +252,10 @@ export interface DecisionHost {
   readonly applyProliferate: (player: PlayerId, chosen: readonly TargetRef[]) => void;
   readonly applyManaSplit: (player: PlayerId, counts: Readonly<Partial<Record<ManaType, number>>>) => void;
   readonly applyTimeTravel: (player: PlayerId, add: readonly ObjectId[], remove: readonly ObjectId[]) => void;
+  readonly applyCounterRemovals: (
+    player: PlayerId,
+    removals: readonly { readonly object: ObjectId; readonly kind: string; readonly count: number }[],
+  ) => void;
   readonly applyVenture: (player: PlayerId, choice: { readonly dungeon?: string; readonly room?: number }) => void;
   readonly applyChoosePermanents: (player: PlayerId, chosen: readonly ObjectId[]) => void;
   readonly applyEnterAttacking: (

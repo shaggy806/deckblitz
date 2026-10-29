@@ -8516,4 +8516,38 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Switcheroo: two creatures change hands',
     board({ you: { bf: ['Island*5', 'Grizzly Bears'], hand: ['Switcheroo'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  // --- Counters chosen, modal activations, an Aura's lock (2026-10-29, B254) ---
+  preset(
+    'Ghave, Guru of Spores: pick the creature that gives up a counter',
+    board({
+      you: {
+        bf: [
+          { name: 'Ghave, Guru of Spores', counters: { '+1/+1': 5 } },
+          { name: 'Grizzly Bears', counters: { '+1/+1': 1 } },
+          'Plains',
+        ],
+      },
+    }),
+  ),
+  preset(
+    'Tayam, Luminous Enigma: three counters from among your creatures',
+    board({
+      you: {
+        bf: [
+          { name: 'Tayam, Luminous Enigma', counters: { vigilance: 1 } },
+          { name: 'Grizzly Bears', counters: { '+1/+1': 2 } },
+          { name: 'Hill Giant', counters: { '-1/-1': 1 } },
+          'Plains*3',
+        ],
+      },
+    }),
+  ),
+  preset(
+    'Cankerbloom: each mode is its own activation',
+    board({ you: { bf: ['Cankerbloom', 'Forest'] }, opp: { bf: ['Sol Ring', 'Pacifism'] } }),
+  ),
+  preset(
+    "Arrest: the enchanted creature's abilities can't be activated",
+    board({ you: { bf: ['Plains*3', 'Prodigal Pyromancer'], hand: ['Arrest'] }, opp: { bf: ['Prodigal Pyromancer'] } }),
+  ),
 ]

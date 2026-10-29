@@ -38,6 +38,7 @@ import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
 import _poolArensonsAura from "../pool/arensons-aura.js";
 import _poolAridArchway from "../pool/arid-archway.js";
+import _poolArrest from "../pool/arrest.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
@@ -886,6 +887,7 @@ const shard: CardShard = {
     _poolArchiveDragon,
     _poolArensonsAura,
     _poolAridArchway,
+    _poolArrest,
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,

@@ -497,6 +497,7 @@ import _poolOliviasAttendants from "../pool/olivias-attendants.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOnduCleric from "../pool/ondu-cleric.js";
+import _poolOozeFlux from "../pool/ooze-flux.js";
 import _poolOpalAvenger from "../pool/opal-avenger.js";
 import _poolOrzhovEnforcer from "../pool/orzhov-enforcer.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
@@ -758,6 +759,7 @@ import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThrabenWatcher from "../pool/thraben-watcher.js";
 import _poolThranWarMachine from "../pool/thran-war-machine.js";
 import _poolThrashThreat from "../pool/thrash-threat.js";
+import _poolThreeBowlsOfPorridge from "../pool/three-bowls-of-porridge.js";
 import _poolThreeDreams from "../pool/three-dreams.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
@@ -1370,6 +1372,7 @@ const shard: CardShard = {
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOnduCleric,
+    _poolOozeFlux,
     _poolOpalAvenger,
     _poolOrzhovEnforcer,
     _poolOtherworldlyGaze,
@@ -1631,6 +1634,7 @@ const shard: CardShard = {
     _poolThrabenWatcher,
     _poolThranWarMachine,
     _poolThrashThreat,
+    _poolThreeBowlsOfPorridge,
     _poolThreeDreams,
     _poolThrivingIsle,
     _poolThundermaneDragon,

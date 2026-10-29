@@ -176,9 +176,11 @@ export function activate(
     /** What taps to pay a waterbend cost (rule 701.67a) — the action's
      * `waterbend`. Left out, the engine taps the fewest that pay. */
     waterbend?: readonly ObjectId[];
+    /** A modal ability's modes, chosen as it's activated (rule 700.2b). */
+    modes?: readonly number[];
   } = {},
 ): void {
-  const { player = A, targets, x, settle: andSettle = true, waterbend } = opts;
+  const { player = A, targets, x, settle: andSettle = true, waterbend, modes } = opts;
   dispatchOrExplain(game, {
     type: "activate-ability",
     player,
@@ -187,6 +189,7 @@ export function activate(
     targets: targets ?? [],
     ...(x !== undefined ? { xValue: x } : {}),
     ...(waterbend !== undefined ? { waterbend } : {}),
+    ...(modes !== undefined ? { modes } : {}),
   } as Action);
   if (andSettle) settle(game);
 }
