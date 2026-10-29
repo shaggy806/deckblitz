@@ -65,19 +65,71 @@ add. The five chains after:
 
 ## Adding a decision kind
 
-1. Write `decisions/<kind>.ts` with `defineDecision({ … })`, including a
-   `randomAnswer` — optional on the contract, but the fuzzer stalls on a kind
-   that has none, so `registry.test.ts` requires one.
-2. Register it in `decisions/registry.ts`.
-3. Add its action to `DECISION_ACTIONS` and its offer to `DECISION_OFFERS` in
-   `decisions/contract.ts`.
-4. Add a fixture to `test/decisions/registry.test.ts`.
+The whole list, in the order that keeps the build failing helpfully. The
+compiler names most steps you skip; the ones marked **(silent)** it can't.
+`separate-piles` / `choose-pile` (the `separate-into-piles` effect, commit
+`5050664c6`) touched every one of them and is the example to read.
 
-The raise is still hand-placed — a decision kind has to be raised from
-wherever the rules produce it, and some raises are inlined
-(`pay-life-for-untapped` has no `begin*` at all; its raise lives in
-`moveObject` behind an `awaiting === null` drop-guard). The compiler names
-every step above that you skip; it cannot name the raise.
+**Engine**
+
+1. `state.ts`: the `AwaitingDecision` variant (`kind`, `player`, `source`
+   when a card asks, and what the answer needs). If the answer must wait for
+   an effect to resume, a `GameState` field to hold it (`keptByChoice`,
+   `pilesAnswer`). `state.ts` is CRLF: use the Edit tool.
+2. `actions.ts`: the answering `Action` (`type`) and the `LegalAction` offer
+   (`kind`). Give the offer everything a bot or the client needs to answer
+   without reading state (`separate-piles`' `worth` and `whose`).
+3. `decisions/<kind>.ts` with `defineDecision({ … })`: `legal`,
+   `whyCannot` (its own "is not being asked to …" guard), `apply`, `ask`,
+   `candidates` (or a comment saying why there are none), and `randomAnswer`
+   — optional on the contract, but the fuzzer stalls on a kind without one,
+   so `registry.test.ts` requires it. Shared pure helpers go in
+   `decisions/shared/`. Nothing here imports `game.js`.
+4. `decisions/contract.ts`: the kind in `DECISION_ACTIONS` and
+   `DECISION_OFFERS`, and its `apply*` in `DecisionHost` (CRLF).
+5. `decisions/registry.ts`: import and register it (CRLF).
+6. `controller.ts`: the `PlayerController` method, `AutomaticController`'s
+   default (v1 and v2 bots inherit it — make it a real heuristic, not the
+   first option), and `ScriptedController`'s `…Fn` hook and method (tests
+   answer through it).
+7. `game.ts`: the `decisionHost` binding next to its neighbours and the
+   `apply*` method (validate with the module's `whyCannot`, clear
+   `awaiting`, carry out or park the answer, then `prepareForPriority` if
+   nothing else is waiting). **(silent)** The raise: set `state.awaiting`
+   where the rules produce the decision — from an effect, a
+   `ResolutionContext` method that `effects.ts` calls, the effect re-running
+   through `resumeAfterDecisions` with a `progress` field (see
+   `keep-total-power`).
+8. **(silent)** `view.ts`: if the decision shows hidden cards, push their ids
+   into `visibleIds` for the players allowed to see them; if the awaiting
+   itself carries something secret, redact it for other viewers.
+9. `events.ts` (optional): an event for the log, and its line in the
+   client's `format.ts` (the build fails there until it has one).
+10. `target-polarity.ts`: an entry for any new effect kind (total table).
+11. Tests: a fixture in `test/decisions/registry.test.ts`, and **(silent)**
+    the kind counts in that file (`toHaveLength`) and in
+    `test/decisions/tables.test.ts` (`KIND_COUNT`), and the count in
+    `engine/CLAUDE.md` ("Each of the N kinds"). Plus the feature's own
+    `test/<feature>.test.ts`.
+
+**Client** (`App.tsx` is CRLF; edit it with the Edit tool)
+
+12. `App.tsx`: the offer's type alias next to the others, the
+    `AWAITING_LABEL` entry (total), the `actions.find(…)` for the offer, the
+    `mode` union and its place in the mode chain, the controls branch for the
+    decision banner, and — for a choice over cards — a popup (`ZoneViewer`,
+    or a component of its own like `ui/PileViewer.tsx`); for a choice over
+    permanents, the board click branch in `clickPermanent` (and its
+    `useCallback` deps), the tile highlight/badge branch, and the stack-pick
+    branch in `pickIdForClick`. Memoize any value derived from the offer that
+    a callback depends on, or oxlint's React Compiler rule warns.
+13. `game/waitingLabel.ts`: the `DOING` entry (total).
+14. **(silent)** `docs/manual-checks.md` tests and their boards in
+    `builder/manualChecks.ts` (the server's `manual-check-presets.test.ts`
+    matches them), one at four players.
+
+**Docs**: the kind's entry in `docs/architecture/engine.md` (the decisions
+line) and any new client file's in `client.md`.
 
 ## Things deliberately left alone
 

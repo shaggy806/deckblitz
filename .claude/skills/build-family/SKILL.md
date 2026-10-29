@@ -52,13 +52,24 @@ expected — `author-freed` gives each card that's still blocked a narrow key.
    or one key alone. It shows the cards freed, the running total, the
    family, the keys, and the group's shape. Reads `dist/`, so build
    `engine` first if it's stale.
-2. **Take the first family**, then the next, one at a time, for as long as
-   the session has room (two to four is typical; prefer ones whose code
-   overlaps — B249's static loss of all abilities and its type-setting
-   effects shared layer 4). Re-run the order after each family lands. A
-   family that needs something out of reach goes alone: banding
-   (`keyword:banding`, 46 cards) was a session of its own, rule 702.22
-   rewriting combat damage assignment.
+2. **Take the first family**, and decide how many this session takes by
+   what the first one needs (the user's call, 2026-10-29, for token use):
+   - **It adds a new player decision** (a new `decisions/` kind, so client
+     UI, manual checks and a live check): **that family alone**. Ship it,
+     hand off, and the next family starts from a fresh session. Every tool
+     call re-reads the whole context, and a decision family alone ends near
+     450K tokens (B256, separate-into-piles); a second family on top costs
+     more than a fresh session's ~30K of orientation.
+   - **Engine-only** (no new decision kind; an existing decision reused is
+     fine): take the next family too, two or three in all, preferring ones
+     whose code overlaps (B249's static loss of all abilities and its
+     type-setting effects shared layer 4). Stop adding families once the
+     session passes ~300K tokens (`get_usage`) or the next one adds a
+     decision.
+
+   Re-run the order after each family lands. A family that needs something
+   out of reach goes alone too: banding (`keyword:banding`, 46 cards) was a
+   session of its own, rule 702.22 rewriting combat damage assignment.
 3. `npm run -s cards:needs -w engine -- --greedy --groups --family <F>`
    shows the family's own order. Take **its top units**. A unit is worth
    building when its shape is one implementation; leave a long tail of
@@ -113,7 +124,10 @@ For each unit:
   engine` (zero disagreements) and pinned in `test/oracle-parse.test.ts`.
   The freed cards then come pre-drafted for `author-freed`.
 
-**A new player decision is a client change too.** That means the prompt UI
+**A new player decision is a client change too.** Work from the checklist
+in `docs/plans/decision-registry.md` ("Adding a decision kind" — every file
+to touch, the silent ones marked) rather than rediscovering it from an
+earlier commit. That means the prompt UI
 in `client/`, a bot answer (read `docs/plans/bot-effect-knowledge.md`
 before changing how a bot picks), and `docs/manual-checks.md` tests, each
 with its board in `client/src/builder/manualChecks.ts`. Check it live with

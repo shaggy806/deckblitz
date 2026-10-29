@@ -137,4 +137,21 @@ preloaded test boards) and Vite. Scripts and the fuzzer run `dist/`, so build be
 - **Lint** is oxlint, not ESLint. Config in `client/.oxlintrc.json` (`react`, `typescript`, `oxc` plugins; `react/rules-of-hooks` errors).
 - Assets in `client/public/` are referenced by absolute path (e.g. `/favicon.svg`); assets imported from `src/` go through Vite.
 - **`game.ts` reads as *binary* to git and grep.** It contains a literal NUL byte — the `"\0none"` sentinel at the `chosenCreatureType` fallback, written as a raw byte rather than the escape — so a plain `grep` over it reports "Binary file matches" and finds nothing. **Use `grep -a`** (the Grep tool hits this too). Don't remove the byte casually: with `core.autocrlf=true` and no `.gitattributes`, being binary is the only reason git stores that file verbatim, and making it text normalises CRLF→LF across all ~10,100 lines in one commit, taking `git blame` with it. See `docs/plans/decision-registry.md`. **Edit it with the Edit tool**, which keeps its CRLF and the NUL byte (checked 2026-10-09) — not a script's text-mode rewrite. To check endings, count bytes (`python -c` over `open(f,'rb')`) or read `git diff` through `cat -A`: Git Bash's `sed`, `grep` and `wc` hide the CRs.
+- **Edit files with the Edit tool, not shell scripts.** The Edit tool keeps each file's line
+  endings (many files here are CRLF: `game.ts`, `state.ts`, `App.tsx`, `contract.ts`). A Python or
+  `sed` heredoc run through the Bash tool goes wrong in two ways seen on 2026-10-29: `\\` arrives as
+  `\` (a regex's `\\.` became `\.`), and a replace whose text has LF newlines misses a CRLF file —
+  an `assert` stops it, or without one nothing is written and nothing says so (a block then got
+  inserted twice on retry). For many edits, send several Edit calls in one message. A script is
+  only for a mechanical rewrite of many files; read the bytes back (`python -c` over
+  `open(f,'rb')`) before trusting it.
+- **Keep tool output small.** Every tool call re-reads the whole conversation, so a large output
+  costs again on every later call. Cap shell output (`| head -40`, `| cut -c1-200`, `tail` a log
+  written to a file). Read source by `grep -n` for the spot, then `sed -n a,bp` of the lines you
+  need (≤80), not whole regions: engine doc comments run to hundreds of lines (`look-and-choose`'s
+  is ~300). `docs/architecture/*.md` keep each file's entry on one very long line, so never grep a
+  term across them without `-o` and a bounded pattern or `cut -c1-300`; read one file's entry by
+  its line number. In the browser, read by `find` and refs, not screenshots, and never `read_page`
+  the scenario builder whole (its manual-checks select holds hundreds of options) — pass `ref_id`
+  and `depth`.
 - **Windows CRLF/LF drift**: editing an existing pure-LF source file on Windows can leave it with *mixed* line endings (untouched lines stay LF, lines the tool rewrites come out CRLF) — distinct from a file that's already consistently CRLF (harmless). Before committing, if `git diff --stat` on an edited file looks disproportionate to the actual edits, check directly (`git cat-file -p HEAD:<path> | grep -c $'\r'` vs total line count) rather than trusting the diff size. Fix with `sed -i 's/\r$//' <path>`, rebuild/retest, then fold the fix into the same commit via `git commit --amend` if nothing's been pushed yet.
