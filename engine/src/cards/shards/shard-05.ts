@@ -190,6 +190,7 @@ import _poolDeathrender from "../pool/deathrender.js";
 import _poolDeepReconnaissance from "../pool/deep-reconnaissance.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
+import _poolDeftbladeElite from "../pool/deftblade-elite.js";
 import _poolDefyDeath from "../pool/defy-death.js";
 import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
@@ -562,6 +563,7 @@ import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
 import _poolResonatingLute from "../pool/resonating-lute.js";
+import _poolRestrain from "../pool/restrain.js";
 import _poolRetaliation from "../pool/retaliation.js";
 import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
@@ -1010,6 +1012,7 @@ const shard: CardShard = {
     _poolDeepReconnaissance,
     _poolDeeprootWarrior,
     _poolDefiantElf,
+    _poolDeftbladeElite,
     _poolDefyDeath,
     _poolDelugeOfTheDead,
     _poolDemonsDisciple,
@@ -1382,6 +1385,7 @@ const shard: CardShard = {
     _poolRepelCalamity,
     _poolReshape,
     _poolResonatingLute,
+    _poolRestrain,
     _poolRetaliation,
     _poolReturnTriumphant,
     _poolRhonassMonument,

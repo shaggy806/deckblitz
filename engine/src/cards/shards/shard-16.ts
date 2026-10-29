@@ -393,6 +393,7 @@ import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolKrosanVorine from "../pool/krosan-vorine.js";
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
+import _poolLadyEvangela from "../pool/lady-evangela.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLastDitchEffort from "../pool/last-ditch-effort.js";
 import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
@@ -455,6 +456,7 @@ import _poolMobileGarrison from "../pool/mobile-garrison.js";
 import _poolMoggCannon from "../pool/mogg-cannon.js";
 import _poolMogissFavor from "../pool/mogiss-favor.js";
 import _poolMolderhulk from "../pool/molderhulk.js";
+import _poolMoonlightGeist from "../pool/moonlight-geist.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
@@ -1281,6 +1283,7 @@ const shard: CardShard = {
     _poolKrosanVorine,
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
+    _poolLadyEvangela,
     _poolLashOfThorns,
     _poolLastDitchEffort,
     _poolLayBareTheHeart,
@@ -1343,6 +1346,7 @@ const shard: CardShard = {
     _poolMoggCannon,
     _poolMogissFavor,
     _poolMolderhulk,
+    _poolMoonlightGeist,
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,

@@ -245,6 +245,7 @@ import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFeastOfFlesh from "../pool/feast-of-flesh.js";
 import _poolFeedThePack from "../pool/feed-the-pack.js";
+import _poolFendOff from "../pool/fend-off.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolFearOfImmobility,
     _poolFeastOfFlesh,
     _poolFeedThePack,
+    _poolFendOff,
     _poolFiendishDuo,
     _poolFightToTheDeath,
     _poolFiligreeFamiliar,

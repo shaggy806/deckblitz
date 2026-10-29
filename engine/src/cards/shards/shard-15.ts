@@ -742,6 +742,7 @@ import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWalkThePlank from "../pool/walk-the-plank.js";
 import _poolWanderingGraybeard from "../pool/wandering-graybeard.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
+import _poolWarning from "../pool/warning.js";
 import _poolWarriorsResolve from "../pool/warriors-resolve.js";
 import _poolWarriorsStand from "../pool/warriors-stand.js";
 import _poolWarteyeWitch from "../pool/warteye-witch.js";
@@ -1536,6 +1537,7 @@ const shard: CardShard = {
     _poolWalkThePlank,
     _poolWanderingGraybeard,
     _poolWardenOfTheEye,
+    _poolWarning,
     _poolWarriorsResolve,
     _poolWarriorsStand,
     _poolWarteyeWitch,

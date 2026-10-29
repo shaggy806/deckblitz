@@ -548,6 +548,7 @@ import _poolRushbladeCommander from "../pool/rushblade-commander.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSacredExcavation from "../pool/sacred-excavation.js";
 import _poolSaddlebackLagac from "../pool/saddleback-lagac.js";
+import _poolSafeguard from "../pool/safeguard.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSagittarsVolley from "../pool/sagittars-volley.js";
 import _poolSaheelisDirective from "../pool/saheelis-directive.js";
@@ -1367,6 +1368,7 @@ const shard: CardShard = {
     _poolRussetWolves,
     _poolSacredExcavation,
     _poolSaddlebackLagac,
+    _poolSafeguard,
     _poolSageOfDays,
     _poolSagittarsVolley,
     _poolSaheelisDirective,

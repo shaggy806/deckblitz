@@ -549,6 +549,7 @@ import _poolRenewingTouch from "../pool/renewing-touch.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
+import _poolResistanceFighter from "../pool/resistance-fighter.js";
 import _poolRestForTheWeary from "../pool/rest-for-the-weary.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
@@ -1365,6 +1366,7 @@ const shard: CardShard = {
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolRescuerChwinga,
+    _poolResistanceFighter,
     _poolRestForTheWeary,
     _poolRestartSequence,
     _poolRetrieveTheEsper,
