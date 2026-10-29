@@ -367,6 +367,7 @@ import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHomarid from "../pool/homarid.js";
 import _poolHonoredCropCaptain from "../pool/honored-crop-captain.js";
+import _poolHopefulInitiate from "../pool/hopeful-initiate.js";
 import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingChorus from "../pool/howling-chorus.js";
@@ -1200,6 +1201,7 @@ const shard: CardShard = {
     _poolHireACrew,
     _poolHomarid,
     _poolHonoredCropCaptain,
+    _poolHopefulInitiate,
     _poolHornedLochWhale,
     _poolHorseshoeCrab,
     _poolHowlingChorus,

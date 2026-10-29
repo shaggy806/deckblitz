@@ -193,6 +193,7 @@ import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDreadLinnorm from "../pool/dread-linnorm.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
 import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
+import _poolDuchessWaywardTavernkeep from "../pool/duchess-wayward-tavernkeep.js";
 import _poolDuelingRapier from "../pool/dueling-rapier.js";
 import _poolDustToDust from "../pool/dust-to-dust.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
@@ -1048,6 +1049,7 @@ const shard: CardShard = {
     _poolDreadLinnorm,
     _poolDrogskolCavalry,
     _poolDruidOfTheSpade,
+    _poolDuchessWaywardTavernkeep,
     _poolDuelingRapier,
     _poolDustToDust,
     _poolDwarvenGrunt,

@@ -242,6 +242,7 @@ import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFacelessDevourer from "../pool/faceless-devourer.js";
+import _poolFainTheBroker from "../pool/fain-the-broker.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
@@ -468,6 +469,7 @@ import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
 import _poolMoltenSlagheap from "../pool/molten-slagheap.js";
 import _poolMomentOfTruth from "../pool/moment-of-truth.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
+import _poolMoonlitLamenter from "../pool/moonlit-lamenter.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMountainYeti from "../pool/mountain-yeti.js";
 import _poolMournwhelk from "../pool/mournwhelk.js";
@@ -561,6 +563,7 @@ import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRatsOfRath from "../pool/rats-of-rath.js";
 import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
 import _poolRavenousNecrotitan from "../pool/ravenous-necrotitan.js";
+import _poolRayFilletManRay from "../pool/ray-fillet-man-ray.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
 import _poolRazorfinAbolisher from "../pool/razorfin-abolisher.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
@@ -681,6 +684,7 @@ import _poolSpecimenFreighter from "../pool/specimen-freighter.js";
 import _poolSpelltitheEnforcer from "../pool/spelltithe-enforcer.js";
 import _poolSphereOfDuty from "../pool/sphere-of-duty.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
+import _poolSpikeRogue from "../pool/spike-rogue.js";
 import _poolSpikeSoldier from "../pool/spike-soldier.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
 import _poolSplitDecision from "../pool/split-decision.js";
@@ -1102,6 +1106,7 @@ const shard: CardShard = {
     _poolEyesOfTheWatcher,
     _poolEzioBladeOfVengeance,
     _poolFacelessDevourer,
+    _poolFainTheBroker,
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
@@ -1328,6 +1333,7 @@ const shard: CardShard = {
     _poolMoltenSlagheap,
     _poolMomentOfTruth,
     _poolMomentaryBlink,
+    _poolMoonlitLamenter,
     _poolMothdustChangeling,
     _poolMountainYeti,
     _poolMournwhelk,
@@ -1421,6 +1427,7 @@ const shard: CardShard = {
     _poolRatsOfRath,
     _poolRavenOfFellOmens,
     _poolRavenousNecrotitan,
+    _poolRayFilletManRay,
     _poolRazakethTheFoulblooded,
     _poolRazorfinAbolisher,
     _poolReachThroughMists,
@@ -1541,6 +1548,7 @@ const shard: CardShard = {
     _poolSpelltitheEnforcer,
     _poolSphereOfDuty,
     _poolSpiderwigBoggart,
+    _poolSpikeRogue,
     _poolSpikeSoldier,
     _poolSpiritShackle,
     _poolSplitDecision,

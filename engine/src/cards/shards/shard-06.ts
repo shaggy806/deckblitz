@@ -254,6 +254,7 @@ import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFacelessButcher from "../pool/faceless-butcher.js";
 import _poolFaerieSquadron from "../pool/faerie-squadron.js";
+import _poolFaithsFetters from "../pool/faiths-fetters.js";
 import _poolFallenIdeal from "../pool/fallen-ideal.js";
 import _poolFarWanderings from "../pool/far-wanderings.js";
 import _poolFatedIntervention from "../pool/fated-intervention.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolEyesOfTheBeholder,
     _poolFacelessButcher,
     _poolFaerieSquadron,
+    _poolFaithsFetters,
     _poolFallenIdeal,
     _poolFarWanderings,
     _poolFatedIntervention,

@@ -98,6 +98,7 @@ import _poolBoulderloftPathway from "../pool/boulderloft-pathway.js";
 import _poolBoundingWolf from "../pool/bounding-wolf.js";
 import _poolBrainsurge from "../pool/brainsurge.js";
 import _poolBrambleArmor from "../pool/bramble-armor.js";
+import _poolBramblebackBrute from "../pool/brambleback-brute.js";
 import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
@@ -314,6 +315,7 @@ import _poolGiftOfGrowth from "../pool/gift-of-growth.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
+import _poolGnarlbarkElm from "../pool/gnarlbark-elm.js";
 import _poolGnarlrootTrapper from "../pool/gnarlroot-trapper.js";
 import _poolGnathosaur from "../pool/gnathosaur.js";
 import _poolGoblinBerserker from "../pool/goblin-berserker.js";
@@ -444,6 +446,7 @@ import _poolKongmingsContraptions from "../pool/kongmings-contraptions.js";
 import _poolKorHaven from "../pool/kor-haven.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
 import _poolKormusBell from "../pool/kormus-bell.js";
+import _poolKorozdaGorgon from "../pool/korozda-gorgon.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
@@ -585,6 +588,7 @@ import _poolPinnacleOfRage from "../pool/pinnacle-of-rage.js";
 import _poolPonderingMage from "../pool/pondering-mage.js";
 import _poolPowerMatrix from "../pool/power-matrix.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
+import _poolPrisonSentence from "../pool/prison-sentence.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
@@ -872,6 +876,7 @@ import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
+import _tokensAstartesWarriorTokenMortarionDaemonPrimarch from "../tokens/astartes-warrior-token-mortarion-daemon-primarch.js";
 import _tokensCatSoldierTokenVigilance from "../tokens/cat-soldier-token-vigilance.js";
 import _tokensDalekToken from "../tokens/dalek-token.js";
 import _tokensFoxToken from "../tokens/fox-token.js";
@@ -993,6 +998,7 @@ const shard: CardShard = {
     _poolBoundingWolf,
     _poolBrainsurge,
     _poolBrambleArmor,
+    _poolBramblebackBrute,
     _poolBrandywineFarmer,
     _poolBrindleBoar,
     _poolBristlingHydra,
@@ -1209,6 +1215,7 @@ const shard: CardShard = {
     _poolGimlisFury,
     _poolGixianSkullflayer,
     _poolGlisteningDawn,
+    _poolGnarlbarkElm,
     _poolGnarlrootTrapper,
     _poolGnathosaur,
     _poolGoblinBerserker,
@@ -1339,6 +1346,7 @@ const shard: CardShard = {
     _poolKorHaven,
     _poolKorlessaScaleSinger,
     _poolKormusBell,
+    _poolKorozdaGorgon,
     _poolKorozdaMonitor,
     _poolKotoriPilotProdigy,
     _poolKrarkClanIronworks,
@@ -1480,6 +1488,7 @@ const shard: CardShard = {
     _poolPonderingMage,
     _poolPowerMatrix,
     _poolPriestsOfNorn,
+    _poolPrisonSentence,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
     _poolPsychomancer,
@@ -1769,6 +1778,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienWarriorToken,
     _tokensAngelo,
+    _tokensAstartesWarriorTokenMortarionDaemonPrimarch,
     _tokensCatSoldierTokenVigilance,
     _tokensDalekToken,
     _tokensFoxToken,

@@ -501,6 +501,7 @@ import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolNomadsAssembly from "../pool/nomads-assembly.js";
 import _poolNurturingLicid from "../pool/nurturing-licid.js";
+import _poolOakaTravelingMerchant from "../pool/oaka-traveling-merchant.js";
 import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
@@ -1345,6 +1346,7 @@ const shard: CardShard = {
     _poolNobody,
     _poolNomadsAssembly,
     _poolNurturingLicid,
+    _poolOakaTravelingMerchant,
     _poolOathOfTheAncientWood,
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,

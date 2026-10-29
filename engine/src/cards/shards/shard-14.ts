@@ -92,6 +92,7 @@ import _poolBrokenDam from "../pool/broken-dam.js";
 import _poolBroodingSaurian from "../pool/brooding-saurian.js";
 import _poolBrushland from "../pool/brushland.js";
 import _poolBubbleSnare from "../pool/bubble-snare.js";
+import _poolBurdenedStoneback from "../pool/burdened-stoneback.js";
 import _poolBurnishedHart from "../pool/burnished-hart.js";
 import _poolBuzzBots from "../pool/buzz-bots.js";
 import _poolCapashenUnicorn from "../pool/capashen-unicorn.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolBroodingSaurian,
     _poolBrushland,
     _poolBubbleSnare,
+    _poolBurdenedStoneback,
     _poolBurnishedHart,
     _poolBuzzBots,
     _poolCapashenUnicorn,

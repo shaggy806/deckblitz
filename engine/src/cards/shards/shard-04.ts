@@ -508,6 +508,7 @@ import _poolPlatedSliver from "../pool/plated-sliver.js";
 import _poolPlazaOfHarmony from "../pool/plaza-of-harmony.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPossessedBarbarian from "../pool/possessed-barbarian.js";
+import _poolPowerConduit from "../pool/power-conduit.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPreeminentCaptain from "../pool/preeminent-captain.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolPlazaOfHarmony,
     _poolPoisonTipArcher,
     _poolPossessedBarbarian,
+    _poolPowerConduit,
     _poolPowerstoneEngineer,
     _poolPreeminentCaptain,
     _poolPrideGuardian,

@@ -565,6 +565,7 @@ import _poolPyrrhicStrike from "../pool/pyrrhic-strike.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolQueensBayPaladin from "../pool/queens-bay-paladin.js";
 import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
+import _poolQuillspike from "../pool/quillspike.js";
 import _poolQutrubForayer from "../pool/qutrub-forayer.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
@@ -1473,6 +1474,7 @@ const shard: CardShard = {
     _poolQuandrixTheProof,
     _poolQueensBayPaladin,
     _poolQuicksandWhirlpool,
+    _poolQuillspike,
     _poolQutrubForayer,
     _poolRabanastreRoyalCity,
     _poolRaffWeatherlightStalwart,

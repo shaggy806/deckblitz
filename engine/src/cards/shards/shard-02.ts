@@ -403,6 +403,7 @@ import _poolLashwrithe from "../pool/lashwrithe.js";
 import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
+import _poolLawmagesBinding from "../pool/lawmages-binding.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolLatticeLibrary,
     _poolLavaStorm,
     _poolLavaleaper,
+    _poolLawmagesBinding,
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,

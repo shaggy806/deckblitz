@@ -64,6 +64,7 @@ import _poolBogStriderAsh from "../pool/bog-strider-ash.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
 import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
 import _poolBoilingRockRioter from "../pool/boiling-rock-rioter.js";
+import _poolBolracClanCrusher from "../pool/bolrac-clan-crusher.js";
 import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
@@ -872,6 +873,7 @@ const shard: CardShard = {
     _poolBoggartMischief,
     _poolBogslithersEmbrace,
     _poolBoilingRockRioter,
+    _poolBolracClanCrusher,
     _poolBoltwave,
     _poolBondBeetle,
     _poolBoneMiser,

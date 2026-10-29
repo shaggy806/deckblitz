@@ -469,6 +469,7 @@ import _poolMysticRedaction from "../pool/mystic-redaction.js";
 import _poolMysticalDispute from "../pool/mystical-dispute.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
+import _poolNahirisBinding from "../pool/nahiris-binding.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
 import _poolNefashu from "../pool/nefashu.js";
@@ -485,6 +486,7 @@ import _poolNissaStewardOfElements from "../pool/nissa-steward-of-elements.js";
 import _poolNobleSteeds from "../pool/noble-steeds.js";
 import _poolNorikaYamazakiThePoet from "../pool/norika-yamazaki-the-poet.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
+import _poolNovijenSages from "../pool/novijen-sages.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
 import _poolOathOfAjani from "../pool/oath-of-ajani.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolMysticalDispute,
     _poolMysticalTutor,
     _poolMystifyingMaze,
+    _poolNahirisBinding,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
     _poolNefashu,
@@ -1360,6 +1363,7 @@ const shard: CardShard = {
     _poolNobleSteeds,
     _poolNorikaYamazakiThePoet,
     _poolNornsChoirmaster,
+    _poolNovijenSages,
     _poolNullGroupBiologicalAssets,
     _poolNullmageShepherd,
     _poolOathOfAjani,
