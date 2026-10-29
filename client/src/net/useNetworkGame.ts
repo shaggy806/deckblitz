@@ -153,6 +153,10 @@ function clearRoomFromUrl(): void {
   window.history.replaceState(null, '', url)
 }
 
+/** A dev build's `?check=<title>`, or a piece of one: open the scenario
+ * builder and play that manual check (`builder/ManualChecksSection.tsx`). */
+export const CHECK_PARAM = 'check'
+
 /** A `?tutorial=` the page loaded with (`lessonUrl`), taken off the URL as
  * it's read so a reload doesn't open a second room. */
 function takeLessonFromUrl(): string | null {
@@ -527,7 +531,8 @@ export function useNetworkGame(): NetworkGame {
       reconnectAttemptRef.current = 0
       setEverConnected(true)
       setError(null)
-      const fromUrl = new URL(window.location.href).searchParams.get('room')
+      const url = new URL(window.location.href)
+      const fromUrl = url.searchParams.get('room')
       const lesson = fromUrl ? null : takeLessonFromUrl()
       if (fromUrl) {
         joinRoomId(fromUrl)
@@ -535,6 +540,14 @@ export function useNetworkGame(): NetworkGame {
         setStatus('no-room')
         // "Play again", or Learn Commander from a lobby: a room of its own.
         if (lesson !== null) startTutorialRef.current(lesson)
+        // A dev build's `?check=<title>`: a builder room, whose Manual checks
+        // list takes the parameter and plays that test (e2e/run-check.mjs).
+        else if (import.meta.env.DEV && url.searchParams.has(CHECK_PARAM)) {
+          const hostToken = newClientToken()
+          pendingHostTokenRef.current = hostToken
+          pendingBuilderRef.current = true
+          send({ type: 'builder-create', hostToken })
+        }
       }
     }
 

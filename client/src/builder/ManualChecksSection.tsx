@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { ScenarioSpec } from 'protocol'
+import { CHECK_PARAM } from '../net/useNetworkGame.ts'
 import { MANUAL_CHECK_PRESETS } from './manualChecks.ts'
 import { MANUAL_CHECK_ENTRIES } from './manualChecksDoc.ts'
 
@@ -34,6 +35,16 @@ function write(key: string, value: unknown): void {
   }
 }
 
+/** The entry `?check=` names: its exact title, else the first whose title
+ * contains it (case aside); `null` without the parameter or a match. */
+function checkFromUrl(entries: typeof MANUAL_CHECK_ENTRIES): number | null {
+  const wanted = new URL(window.location.href).searchParams.get(CHECK_PARAM)?.trim().toLowerCase()
+  if (!wanted) return null
+  const exact = entries.findIndex((e) => e.title.toLowerCase() === wanted)
+  const i = exact >= 0 ? exact : entries.findIndex((e) => e.title.toLowerCase().includes(wanted))
+  return i >= 0 ? i : null
+}
+
 /** A paragraph's label, shown bold: the quick tests' three, and the older
  * entries' four. */
 const LABEL = /^(Do|Expect|Not a bug|Setup|Check|Known limits):\s*/
@@ -50,7 +61,24 @@ export function ManualChecksSection({
   readonly onPlay: (spec: ScenarioSpec) => void
 }) {
   const entries = MANUAL_CHECK_ENTRIES
-  const [at, setAtState] = useState(() => Math.min(Math.max(0, read(AT_KEY, 0)), entries.length - 1))
+  const [at, setAtState] = useState(() => {
+    const wanted = checkFromUrl(entries)
+    return wanted ?? Math.min(Math.max(0, read(AT_KEY, 0)), entries.length - 1)
+  })
+  // `?check=` plays its test once, then comes off the URL so a reload
+  // doesn't play it again (the effect's second run under StrictMode finds
+  // it gone).
+  useEffect(() => {
+    const wanted = checkFromUrl(entries)
+    const url = new URL(window.location.href)
+    if (!url.searchParams.has(CHECK_PARAM)) return
+    url.searchParams.delete(CHECK_PARAM)
+    window.history.replaceState(null, '', url)
+    const spec = wanted === null ? undefined : MANUAL_CHECK_PRESETS.find((p) => p.title === entries[wanted].title)?.spec
+    if (spec !== undefined) onPlay(spec)
+    // Once, as the builder opens.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const [done, setDoneState] = useState<readonly string[]>(() => read<string[]>(DONE_KEY, []))
   const sections = useMemo(() => {
     const out: { name: string; items: { index: number; title: string }[] }[] = []

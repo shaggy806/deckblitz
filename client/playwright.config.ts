@@ -54,7 +54,12 @@ export default defineConfig({
     {
       command: `npm run dev -- --host 127.0.0.1 --port ${webPort} --strictPort`,
       url: `http://127.0.0.1:${webPort}`,
-      env: { ...process.env, VITE_SERVER_URL: `ws://127.0.0.1:${serverPort}` } as Record<string, string>,
+      // CONTROL_PORT: Vite's proxy to dev-rooms' test-room menu.
+      env: {
+        ...process.env,
+        VITE_SERVER_URL: `ws://127.0.0.1:${serverPort}`,
+        CONTROL_PORT: String(controlPort),
+      } as Record<string, string>,
       reuseExistingServer,
       timeout: 60_000,
     },

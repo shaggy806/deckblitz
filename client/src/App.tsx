@@ -92,7 +92,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
-import { playerLabel, seatClassOf, withNames } from './format.ts'
+import { describeEvent, isDetailOnlyEvent, playerLabel, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
@@ -735,6 +735,19 @@ export default function App() {
   // its two screens so moving from one to the other doesn't fade it; it
   // carries on into the game, whose own `useMusic` takes over.
   useMusic(game.status === 'choosing-seat' || game.status === 'waiting-for-players')
+  // A dev build hangs the newest board, its seat and the log's last lines
+  // (worked out only when read) on `window`, for e2e/run-check.mjs.
+  const { view, seat, nameOf, seats } = game
+  useEffect(() => {
+    if (!import.meta.env.DEV) return
+    ;(window as Window & { deckblitzView?: unknown }).deckblitzView = {
+      view,
+      seat,
+      get log() {
+        return (view?.events ?? []).filter((e) => !isDetailOnlyEvent(e)).slice(-5).map((e) => describeEvent(e, nameOf, seats))
+      },
+    }
+  }, [view, seat, nameOf, seats])
 
   return (
     <>

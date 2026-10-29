@@ -130,9 +130,16 @@ to touch, the silent ones marked) rather than rediscovering it from an
 earlier commit. That means the prompt UI
 in `client/`, a bot answer (read `docs/plans/bot-effect-knowledge.md`
 before changing how a bot picks), and `docs/manual-checks.md` tests, each
-with its board in `client/src/builder/manualChecks.ts`. Check it live with
-Playwright in a 2- and a 4-player room at ~768px tall (`dev-up` /
-`dev-down`), plus `npm run test:e2e -w client`. `decision:choose-card-name`
+with its board in `client/src/builder/manualChecks.ts` (give the decision a
+4-player board too). Check it live with `client/e2e/run-check.mjs`, one run
+per manual check, the 4-player one included — not by driving the browser
+pane by hand:
+`node client/e2e/run-check.mjs "<check title>" "cast:<card>" wait
+"click:<button>"` plays the check at 1366x768 on ports of its own and prints
+the banner, popups by pile, badges and every player's counts after each
+step (steps: `cast:`, `card:`, `click:`, `player:`, `pass`, `wait`; see the
+file's header). Open a step's screenshot only when the text can't settle it.
+Then `npm run test:e2e -w client`. `decision:choose-card-name`
 (46 cards) is one of these. A feature that reuses an existing decision
 (`for-each-player` handing a look-and-choose to a targeted player) needs
 none: check the client already reads that decision's answer from the engine
