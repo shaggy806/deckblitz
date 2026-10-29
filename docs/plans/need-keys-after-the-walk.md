@@ -390,6 +390,17 @@ missing. Re-run `--greedy` for Phase 2's order.
   event (615.8), fixed. 148 authored (24 by the lead, 10 auto-finished, 114 by six agents), 65
   still blocked — 18 new narrow keys, `decision:prevention-shield-allocation` (615.7) and
   `effect:prevent-next-damage-each-creature` the largest.
+- **2026-10-28: three families again (B251)** — `effect:choices-by-other-players`' top group (31),
+  `effect:target-spec-additions`' graveyard group and its same-controller key (40), and
+  `effect:repeat-process` (32, more once the needs tool dated `built` keys right). The user pointed
+  out mid-session that "each player chooses" was close to the vote and sacrifice machinery; it was:
+  rule 101.4's hold now covers a scoped discard and an `each-player-may`'s entries, "each player
+  chooses" is a `vote` with `choose`, and `with-choices` substitutes what was chosen. Also the
+  `sameController` relation and `repeat`, each pass its own "this way". An agent found a modal
+  spell's later mode reading its slot relations against the flat list (fixed, `concatModeSpecs`). 81
+  authored (25 by the lead, 10 auto-finished, 56 by five agents), 27 still blocked on 17 new narrow
+  keys. A shared hints page (the Need-Key Hints artifact) now lets the user note existing machinery per
+  unit, read back with `ArtifactData`.
 
 ## Rough size
 

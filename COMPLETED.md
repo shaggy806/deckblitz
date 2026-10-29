@@ -86,6 +86,24 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, three families in one batch: each player chooses then all act, shared-graveyard
+  targets, repeat this process** (2026-10-28, B251, `43de311f2`, `382cdf3b9`, `b53475d57`;
+  `effect:hidden-simultaneous-choices`, `effect:each-player-chooses-then-all-act`,
+  `effect:each-player-chooses-in-turn-order`, `effect:each-player-chooses-creature-type`,
+  `effect:each-player-chooses-counters-then-goad`, `effect:targets-from-single-graveyard`,
+  `effect:target-in-that-players-graveyard`, `effect:targets-from-target-players-graveyard`,
+  `effect:targets-same-controller`, `effect:repeat-process`, `effect:repeat-effect-x-times`): rule
+  101.4's choose-then-act beyond `each-player-may` — a scoped discard held face down until all have
+  chosen, a card put from a hand or graveyard by an `each-player-may` held and entering with the
+  others; "each player chooses" as a `vote` with `choose` (no extra votes, no voting triggers, a
+  creature type, a permanent from the chooser's side) and `with-choices`; the `sameController` target
+  relation ("from a single graveyard", "from their graveyard", "that player controls", 608.2b);
+  `repeat` (times, a condition over the pass just done, "you may repeat"); `return-from-graveyard`'s
+  `each-graveyard`, `shuffle-library`'s target, the `target-legal` condition; and a fix — a modal
+  spell's later mode read its slot relations against the first mode's slots. The needs tool's built
+  dates now come from the `built` array alone. 81 cards: Show and Tell, Ad Nauseam, Smallpox,
+  Patriarch's Bidding, Harsh Mercy, Quandrix Command, Goblin Welder, Torment of Hailfire, Primal Surge,
+  Decompose and the rest; 27 still blocked (`B251.json`).
 - **Need-keys Phase 2, the damage-modification family: damage prevention and redirection**
   (2026-10-28, B250, `5832089cb`, `6e32eb60c`; `replacement:damage-redirection`,
   `replacement:redirect-next-damage-event`, the prevent-all-damage and prevent-combat-damage filter

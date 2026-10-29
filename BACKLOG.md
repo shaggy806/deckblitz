@@ -89,9 +89,12 @@ section keeps only what to do next.
   (B250, 2026-10-28: static damage replacements over a host, "your side", redirection and computed
   prevention, unpreventable damage, the one-shot `damage-rule`, next-time shields over a whole
   event; 148 cards authored, 65 still blocked — five on `effect:prevent-next-damage-each-creature`
-  /`decision:prevention-shield-allocation`, three on `decision:choose-permanent`). Next:
-  `effect:target-spec-additions` (34, graveyard-scoped multi-card targets), `effect:repeat-process`
-  (32) and `effect:choices-by-other-players` (32, each player choosing in turn order).
+  /`decision:prevention-shield-allocation`, three on `decision:choose-permanent`),
+  choices-by-other-players, target-spec-additions and repeat-process (B251, 2026-10-28: rule 101.4's
+  held discards and entries, "each player chooses" as a `vote` with `choose`, the `sameController`
+  target relation, `repeat`, and a modal spell's per-mode slot relations; 81 cards authored, 27 still
+  blocked — three on `effect:repeat-until-no-player-acts`). Next: `effect:grant-static-to-permanent`
+  (29), `static:basic-land-type-mana` (29) and `effect:control-change-extensions` (28).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
