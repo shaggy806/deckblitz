@@ -580,7 +580,9 @@
   "effect:each-opponent-exiles-choice",
   "effect:target-player-hand-card-to-library-top",
   "effect:exile-chosen-from-revealed-hand",
-  "effect:put-from-opponent-hand-onto-battlefield"
+  "effect:put-from-opponent-hand-onto-battlefield",
+  "target:chosen-by-other-player",
+  "decision:trigger-object-controller-chooses-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

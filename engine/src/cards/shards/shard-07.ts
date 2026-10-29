@@ -215,6 +215,7 @@ import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
+import _poolErithizon from "../pool/erithizon.js";
 import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
@@ -1092,6 +1093,7 @@ const shard: CardShard = {
     _poolEndBlazeEpiphany,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,
+    _poolErithizon,
     _poolEscarpmentFortress,
     _poolExaltedFlamerOfTzeentch,
     _poolExpelFromOrazca,

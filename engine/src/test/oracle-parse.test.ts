@@ -2730,6 +2730,19 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(face("Creature — Goblin", "This creature can't attack unless attacking player is poisoned.").static ?? []).toEqual([]);
   });
 
+  it("reads 'target … of defending player's choice' as that player choosing the targets", () => {
+    const erithizon = face("Creature — Beast", "Whenever this creature attacks, put a +1/+1 counter on target creature of defending player's choice.");
+    expect(erithizon.triggered[0]).toMatchObject({
+      trigger: { on: "attacks", who: "self" },
+      targets: ["creature"],
+      targetsChosenBy: "trigger-player",
+      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+    });
+    // "That player" on an attack names nobody: not read.
+    const wrong = face("Creature — Beast", "Whenever this creature attacks, put a +1/+1 counter on target creature of that player's choice.");
+    expect(wrong.triggered?.[0]?.targetsChosenBy).toBeUndefined();
+  });
+
   it("reads a choice from a revealed hand, discarded or exiled", () => {
     const seer = face(
       "Creature — Eldrazi",

@@ -1948,6 +1948,17 @@ export type TriggerSpec =
 
 export interface TriggeredAbility {
   /**
+   * Who chooses its targets, when not its controller — "target creature **of
+   * their choice**" (Ley Line's `"active-player"` in "each player's
+   * upkeep"), "of **defending player's** choice" (Erithizon's
+   * `"trigger-player"`), "**its controller** chooses target permanent"
+   * (Confusion in the Ranks's `"trigger-object-controller"`). They choose as
+   * it's put on the stack, as its controller otherwise would (rules 603.3d,
+   * 700.2e); the targets stay its controller's, legal or not as that player
+   * would choose them. Nobody to ask (they've left the game): its controller.
+   */
+  readonly targetsChosenBy?: "trigger-player" | "active-player" | "trigger-object-controller";
+  /**
    * Eminence — this ability functions while its card is in the **command
    * zone**, not only on the battlefield, because its text says so (rule
    * 113.6b; Eminence is an ability word, rule 207.2c, with no rules meaning

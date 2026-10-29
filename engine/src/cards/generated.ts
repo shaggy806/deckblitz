@@ -2155,6 +2155,7 @@ import _poolBladedBattleFan from "./pool/bladed-battle-fan.js";
 import _poolBladedBracers from "./pool/bladed-bracers.js";
 import _poolBladedPinions from "./pool/bladed-pinions.js";
 import _poolBladedSentinel from "./pool/bladed-sentinel.js";
+import _poolBladegriffPrototype from "./pool/bladegriff-prototype.js";
 import _poolBlademaneBaku from "./pool/blademane-baku.js";
 import _poolBladesOfVelisVel from "./pool/blades-of-velis-vel.js";
 import _poolBladestitchedSkaab from "./pool/bladestitched-skaab.js";
@@ -7033,6 +7034,7 @@ import _poolEriettesLullaby from "./pool/eriettes-lullaby.js";
 import _poolEriettesTemptingApple from "./pool/eriettes-tempting-apple.js";
 import _poolEriettesWhisper from "./pool/eriettes-whisper.js";
 import _poolErinisGloomStalker from "./pool/erinis-gloom-stalker.js";
+import _poolErithizon from "./pool/erithizon.js";
 import _poolErkenbrandLordOfWestfold from "./pool/erkenbrand-lord-of-westfold.js";
 import _poolErode from "./pool/erode.js";
 import _poolErodedCanyon from "./pool/eroded-canyon.js";
@@ -29364,6 +29366,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBladedBracers,
   _poolBladedPinions,
   _poolBladedSentinel,
+  _poolBladegriffPrototype,
   _poolBlademaneBaku,
   _poolBladesOfVelisVel,
   _poolBladestitchedSkaab,
@@ -34242,6 +34245,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEriettesTemptingApple,
   _poolEriettesWhisper,
   _poolErinisGloomStalker,
+  _poolErithizon,
   _poolErkenbrandLordOfWestfold,
   _poolErode,
   _poolErodedCanyon,
@@ -56586,6 +56590,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bladed-bracers": _poolBladedBracers,
   "pool/bladed-pinions": _poolBladedPinions,
   "pool/bladed-sentinel": _poolBladedSentinel,
+  "pool/bladegriff-prototype": _poolBladegriffPrototype,
   "pool/blademane-baku": _poolBlademaneBaku,
   "pool/blades-of-velis-vel": _poolBladesOfVelisVel,
   "pool/bladestitched-skaab": _poolBladestitchedSkaab,
@@ -61464,6 +61469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eriettes-tempting-apple": _poolEriettesTemptingApple,
   "pool/eriettes-whisper": _poolEriettesWhisper,
   "pool/erinis-gloom-stalker": _poolErinisGloomStalker,
+  "pool/erithizon": _poolErithizon,
   "pool/erkenbrand-lord-of-westfold": _poolErkenbrandLordOfWestfold,
   "pool/erode": _poolErode,
   "pool/eroded-canyon": _poolErodedCanyon,

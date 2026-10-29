@@ -5708,3 +5708,9 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Arrest on Bob's Prodigal Pyromancer.
 - **Expect:** Bob's Pyromancer never pings again, and can't attack or block. Your own Pyromancer still can.
 
+
+## Targets another player chooses (2026-10-29, need-keys Phase 2: build-family, features only)
+
+### Erithizon: the defending player picks the creature
+- **Do:** Attack Bob with Erithizon. Switch to Bob when asked.
+- **Expect:** As Bob, the banner reads "Choose the target of another player's Erithizon", and both Erithizon and Bob's Grizzly Bears can be picked. The +1/+1 counter goes on the creature Bob picked.

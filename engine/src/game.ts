@@ -22454,9 +22454,15 @@ export class Game {
     const divided = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
     const group = anyNumberSlot(specs);
     const answerSlot = group < 0 ? -1 : slots.slice(0, group).filter((s) => "spec" in s).length;
+    // "Target creature of their choice" (rule 700.2e's way): another player
+    // answers, the targets still its controller's.
+    const chooser = this.triggerTargetChooser(ability as TriggeredAbility, trigger) ?? trigger.controller;
     this.state.awaiting = {
       kind: "choose-targets",
-      player: trigger.controller,
+      player: chooser,
+      ...(chooser !== trigger.controller
+        ? { targetsFor: trigger.controller, prompt: `Choose the target of another player's ${trigger.cardName}` }
+        : {}),
       source: trigger.sourceObjectId,
       cardName: trigger.cardName,
       // A divided total caps its group: at least 1 to each target (rule
@@ -22479,6 +22485,32 @@ export class Game {
         : {}),
     };
     return "paused";
+  }
+
+  /** Who answers a triggered ability's target choice when its
+   * `targetsChosenBy` names someone other than its controller — a player
+   * still in the game, else nobody (its controller then chooses). */
+  private triggerTargetChooser(
+    ability: TriggeredAbility,
+    trigger: {
+      readonly triggerObject?: ObjectId;
+      readonly lastKnownRefs?: LastKnownRefs;
+    },
+  ): PlayerId | undefined {
+    const by = ability.targetsChosenBy;
+    if (by === undefined) return undefined;
+    const object = trigger.triggerObject === undefined ? undefined : this.state.objects[trigger.triggerObject];
+    const player =
+      by === "active-player"
+        ? this.activePlayer
+        : by === "trigger-player"
+          ? trigger.lastKnownRefs?.player
+          : object === undefined
+            ? undefined
+            : object.zone === "battlefield" || object.zone === "stack"
+              ? object.controller
+              : (object.lastKnown?.controller ?? object.controller);
+    return player !== undefined && this.state.players[player]?.hasLost === false ? player : undefined;
   }
 
   /** A triggered ability's `divided`, its total read: the value it

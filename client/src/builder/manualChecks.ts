@@ -8552,4 +8552,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Arrest: the enchanted creature's abilities can't be activated",
     board({ you: { bf: ['Plains*3', 'Prodigal Pyromancer'], hand: ['Arrest'] }, opp: { bf: ['Prodigal Pyromancer'] } }),
   ),
+  // --- Targets another player chooses (2026-10-29, build-family) ---
+  preset(
+    'Erithizon: the defending player picks the creature',
+    board({ you: { bf: ['Erithizon'] }, opp: { human: true, bf: ['Grizzly Bears'] } }),
+  ),
 ]

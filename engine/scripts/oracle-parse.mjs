@@ -3217,6 +3217,15 @@ export function parseFace(face, ctx = {}) {
         rest = rest.slice(rest.indexOf(", ") + 2);
         rest = rest[0].toUpperCase() + rest.slice(1);
       } else rest = rest.length > 0 ? rest[0].toUpperCase() + rest.slice(1) : rest;
+      // "Target creature of defending player's choice" (Erithizon), "… of
+      // that player's choice" (Bladegriff Prototype): the player the event
+      // names chooses the targets (`targetsChosenBy`).
+      const namesPlayer = triggers.every((t) => t.on === "attacks" || t.on === "deals-combat-damage-to-player");
+      const choiceOf = / of (defending player|that player)'s choice\b/.exec(rest);
+      if (choiceOf !== null && namesPlayer && (choiceOf[1] === "that player") === (triggers[0].on !== "attacks")) {
+        rest = rest.replace(choiceOf[0], "");
+        base.targetsChosenBy = "trigger-player";
+      }
       const first = { trigger: triggers[0], ...base };
       const next = fillEffect(
         first,

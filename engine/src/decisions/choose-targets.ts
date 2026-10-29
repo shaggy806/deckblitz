@@ -139,7 +139,8 @@ export const chooseTargets = defineDecision({
       awaiting.specs,
       // Same normalisation the apply does — see the module header.
       normalizeTargets(action.targets),
-      player,
+      // Its controller's targets, whoever chooses them ("of their choice").
+      awaiting.targetsFor ?? player,
       awaiting.cardName,
       sourceForPending(ctx, awaiting.source),
     );
