@@ -732,7 +732,14 @@ forTarget: 0 }`; `forEachPlayer: true` reads it from the side of each player
 a scoped effect acts on, once for each — Zodiark, Umbral God's "each player
 sacrifices half the non-God creatures they control" is a `sacrifice` of
 `who: "each-player"` with `count: { half: { countOf: …, forEachPlayer: true
-}, round: "down" }`, each player's count read before anyone sacrifices),
+}, round: "down" }`, each player's count read before anyone sacrifices — and
+`damage`/`draw`/`lose-life` with a `who` scope read it for each player the
+same way (Typhoon's "each opponent … the number of Islands that player
+controls"; a `countInGraveyard` takes `forEachPlayer` too, Nature's
+Resurgence); `forPlayer: EffectPlayerRef` reads it from one named player's
+side — `{ controllerOfTarget: 0 }` (Weight of Spires' "that creature's
+controller"), `"trigger-player"` (Emissary of Hope's "that player"),
+`"chosen-player"` — 0 when it names nobody),
 `{ aggregate: "sum" | "max", of: "power" | "toughness" |
 "mana-value" | { counters }, filter, excludeSelf? }` (an `AggregateSpec`,
 `filter.ts` — "X is the **total power** of creatures you control", "the
@@ -1000,9 +1007,9 @@ clause (below) chooses among them.
 | `creatures-damage-controllers` | `filter`, `amount` | Rakdos Charm — "each creature deals 1 damage to its controller"; the reverse direction from `damage-all` (each matching permanent is its own source, hitting its own controller, not the caster). needed-cards P20 |
 | `gain-life` | `amount` (an `EffectAmount`), `who?` | Healing Salve; Shamanic Revelation's "4 life for each creature you control with power 4 or greater" is `{ countOf: …, times: 4 }` |
 | `lose-life` | `amount`, `who?` \| `target?` | Zulaport Cutthroat (`who`); Ob Nixilis, the Fallen — "target player loses 3 life" (`target`, a target-slot index — mutually exclusive with `who`, needed-cards P19). With `target`, a per-player amount is the target's own: Peer into the Abyss's "target player … loses half their life" is `{ half: { lifeTotal: "each" }, round: "up" }`. |
-| `draw` | `amount`, `who?`, `target?` | Divination (controller draws); Stormfist Crusader (`who: "each-player"`); Bloodgift Demon (`target`, a player slot). `target` wins if both are set. |
+| `draw` | `amount`, `who?`, `target?` | Divination (controller draws); Stormfist Crusader (`who: "each-player"`); Bloodgift Demon (`target`, a player slot). `target` wins if both are set. `who: { controllerOfTarget: i }` is "its controller draws" (Call to Heel), read as the permanent last existed. |
 | `discard-hand` | `who` | Dragon Mage — "each player discards their hand". A whole hand at once with nothing to choose, so unlike `discard` it never raises a decision, which is what lets "discards their hand, **then** draws seven" resolve in one pass. |
-| `discard` | `target` (slot \| a `PlayerScope`), `amount`, `random?`, `unlessOne?`, `anyNumber?` | Mind Rot / Faithless Looting (`"you"`) / "each opponent discards a card" (`"each-opponent"`). A scope asks each player with a real choice **in turn**, APNAP (`GameState.pendingDiscards`); a player whose hand is no bigger than the count discards it at once. `random: true` is "discards a card at random" (Hypnotic Specter): nobody is asked, and the game picks with its seeded shuffle. `unlessOne: CardFilter` is "discards two cards unless they discard a land card" (Compulsive Research): one card matching it is a whole answer by itself, and a hand of two or more holding one is a real choice even when it's no bigger than `amount`. `anyNumber: true` is "discard any number of cards" (Chance, Neheb, Dreadhorde Champion): the player picks how many, none to their whole hand (`amount` is ignored — write `0`); "then draw that many" is `{ thisWay: "discarded" }`. `discard-any-number.test.ts`. |
+| `discard` | `target` (slot \| a `PlayerScope` \| `{ controllerOfTarget: i }` — Assassin's Strike's "its controller discards a card"), `amount`, `random?`, `unlessOne?`, `anyNumber?` | Mind Rot / Faithless Looting (`"you"`) / "each opponent discards a card" (`"each-opponent"`). A scope asks each player with a real choice **in turn**, APNAP (`GameState.pendingDiscards`); a player whose hand is no bigger than the count discards it at once. `random: true` is "discards a card at random" (Hypnotic Specter): nobody is asked, and the game picks with its seeded shuffle. `unlessOne: CardFilter` is "discards two cards unless they discard a land card" (Compulsive Research): one card matching it is a whole answer by itself, and a hand of two or more holding one is a real choice even when it's no bigger than `amount`. `anyNumber: true` is "discard any number of cards" (Chance, Neheb, Dreadhorde Champion): the player picks how many, none to their whole hand (`amount` is ignored — write `0`); "then draw that many" is `{ thisWay: "discarded" }`. `discard-any-number.test.ts`. |
 | `discard-chosen` | `target` (a player slot), `filter?`, `optional?`, `lookOnly?`, `upTo?` | "Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card" (Duress: `filter: { notTypes: ["creature", "land"] }`; Thoughtseize, Inquisition of Kozilek's `manaValue`). The whole hand is revealed to everyone (rule 701.20), the effect's controller chooses (a `choose-from-zone` with destination `"discard"`), and the hand's owner discards it (701.9a — discard triggers see it, and it's `"discarded"` this way). "You choose" must take a card when one matches; with none, nothing is asked. `optional` is "you **may** choose"; `lookOnly` is "look at target player's hand" (only the chooser sees it). Oildeep Gearhulk's "if you do, that player discards that card, then draws a card" is a `sequence` with a `this-way` `"discarded"` conditional draw. `upTo` (an amount) is "choose **up to X** cards from it" (Discordant Dirge: `upTo: { countersOn: "source", counter: "verse" }`). `destination?: "exile" \| "library-top" \| "battlefield"` sends the chosen card elsewhere instead of discarding it — not a discard, so nothing that looks for one sees it: "you choose a nonland card from it and **exile that card**" (Thought-Knot Seer; linked to the permanent's stint, rule 607.2a, for Tidehollow Sculler's `return-exiled-by-source`, unless `unlinked: true`), "put that card **on top of that player's library**" (Painful Memories, with `lookOnly`), "put a creature card from it **onto the battlefield under your control**" (Treacherous Urge). `target` may also be a player the event names: Ghastlord of Fugue's "**that player** reveals their hand" is `"trigger-player"`. The scaffolder reads "Target opponent reveals their hand. You choose a … card from it [and exile that card]" whole. `chosen-from-hand-destination.test.ts`. |
 | `look-at-hand` | `target` (a player slot) | "Look at target player's hand" alone (Glasses of Urza, Sorcerous Sight, Talas Explorer): only the effect's controller sees it, asked as a `choose-from-zone` with nothing to pick, closed with Done. Not "look at its controller's hand" (Lay Bare: no target slot names that player). |
 | `mill` | `target` (slot \| a `PlayerScope`), `amount` | Tome Scour / Aftermath Analyst (`"you"`) / Hope Estheim (`"each-opponent"`) |
@@ -1570,7 +1577,8 @@ Not yet: "a player you're attacking has the initiative" as an intervening if (Un
 "equal to the amount of mana spent to cast that spell" is `{ manaSpentOf: "trigger-object" }`),
 `add-player-counters { counter: "poison" | "experience" | "rad", amount, who?, target? }`
 ("you get an experience counter"; Fynn, the Fangbearer's "that player gets two
-poison counters" is `who: "trigger-player"`; ten poison counters lose the game,
+poison counters" is `who: "trigger-player"`, Pistus Strike's "its controller gets a poison
+counter" `who: { controllerOfTarget: 0 }`; ten poison counters lose the game,
 rule 704.5c — energy keeps its own `get-energy`; **rad counters**, rule 728: "target player
 gets two rad counters" — Mirelurk Queen — and the engine's own inherent trigger mills them at
 that player's precombat main, never authored on a card, `cards/rad.ts`; life lost "from
@@ -2178,10 +2186,14 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     trigger subject `who: "chosen-player"` on a `step-begins` ("at the
     beginning of the chosen player's upkeep" — that player is then
     `"active-player"`), `maxHandSize { who: "chosen-player" }`, and the
-    `CardFilter` clause `attackingChosenPlayer: true`. A CDA's or static
-    P/T count of the chosen player's things (Nyxathid, Lost Order of
-    Jarkeld) isn't built (`amount:count-for-chosen-player`), nor two chosen
-    players (Bitter Feud, Sower of Discord).
+    `CardFilter` clause `attackingChosenPlayer: true`. A CDA or count-scaled
+    bonus counted for the chosen player takes `forChosenPlayer: true` on
+    `setBasePtFromCount` (Lost Order of Jarkeld's creatures, Entropic
+    Specter's `"cards-in-your-hand"`) or `grantPtPerCount` (Nyxathid's
+    `{ cardsInHand: true, forChosenPlayer: true, pt: [-1, -1] }`): every
+    "you" in the count is that player, and nobody chosen (off the
+    battlefield) or one who has left the game counts 0. Two chosen players
+    (Bitter Feud, Sower of Discord) aren't built.
   The scaffolder reads "As ~ enters, choose a player / an opponent.", "At the
   beginning of the chosen player's upkeep" and "The chosen player's maximum
   hand size is N."

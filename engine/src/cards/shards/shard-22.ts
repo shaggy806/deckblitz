@@ -762,6 +762,7 @@ import _poolTurbulentSprings from "../pool/turbulent-springs.js";
 import _poolTurnTheTables from "../pool/turn-the-tables.js";
 import _poolTwoHeadedCerberus from "../pool/two-headed-cerberus.js";
 import _poolTwoHeadedDragon from "../pool/two-headed-dragon.js";
+import _poolTyphoon from "../pool/typhoon.js";
 import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
@@ -1620,6 +1621,7 @@ const shard: CardShard = {
     _poolTurnTheTables,
     _poolTwoHeadedCerberus,
     _poolTwoHeadedDragon,
+    _poolTyphoon,
     _poolTyrantsMachine,
     _poolUltimaOriginOfOblivion,
     _poolUnburden,

@@ -312,6 +312,14 @@ export type EffectAmount =
        * type: "creature", controlledBy: "you" }, forTarget: 0 }`. 0 when the
        * slot holds no player, or one gone illegal. */
       readonly forTarget?: number;
+      /** Read the filter from the side of the one player this names —
+       * "equal to the number of nonbasic lands **that creature's
+       * controller** controls" (Weight of Spires: `{ controllerOfTarget: 0
+       * }`), "for each artifact **that player** controls" in a trigger
+       * (Emissary of Hope: `"trigger-player"`), "the creatures **the chosen
+       * player** controls" (`"chosen-player"`). 0 when it names nobody (an
+       * illegal slot, a player who has left the game). */
+      readonly forPlayer?: EffectPlayerRef;
       /** Read the filter from the side of **each player** a scoped effect
        * acts on, once for each — "each player sacrifices half the creatures
        * **they** control" (Zodiark, Umbral God: a `sacrifice` of `who:
@@ -437,7 +445,13 @@ export type EffectAmount =
    * each creature card in your graveyard" (Lotleth Giant). Distinct from
    * `countOf`, which only ever counts battlefield permanents. The filter's
    * `ownedBy: "you"` is what restricts it to your own graveyard. */
-  | { readonly countInGraveyard: CardFilter }
+  | {
+      readonly countInGraveyard: CardFilter;
+      /** Read the filter from the side of each player a scoped effect acts
+       * on — "each player draws a card for each creature card in **their**
+       * graveyard" (Nature's Resurgence). As `countOf`'s. */
+      readonly forEachPlayer?: true;
+    }
   /** How many suspended cards the effect's controller owns (rule 702.62b —
    * in exile, with suspend, with a time counter): Rose Tyler's "a time
    * counter on it for each suspended card you own". */
@@ -1248,6 +1262,9 @@ export type EffectPlayerRef =
   | "trigger-controller"
   | "trigger-player"
   | "that-player"
+  /** The player chosen for the effect's source — see the `"chosen-player"`
+   * {@link PlayerScope}. */
+  | "chosen-player"
   | { readonly target: number }
   /** The controller of the permanent in this target slot, as it last existed
    * on the battlefield if it has left — "**its controller** exiles cards …,
@@ -1862,8 +1879,11 @@ export type EffectSpec =
        * (Stormfist Crusader: "each player draws a card"); `target` is a
        * target-slot index holding a player (Deep Analysis: "target player
        * draws two cards"). Mutually exclusive — `target` wins if both are set.
+       * A {@link ChosenPlayerRef} is one player named through a target — "its
+       * controller draws a card" (`{ controllerOfTarget: 0 }`), read as the
+       * permanent last existed if it has left.
        */
-      readonly who?: PlayerScope;
+      readonly who?: PlayerScope | ChosenPlayerRef;
       readonly target?: number;
     }
   | {
@@ -3268,9 +3288,10 @@ export type EffectSpec =
        * (Faithless Looting's "then discard two cards"). */
       readonly kind: "discard";
       /** A target slot holding a player, or a scope ("each opponent discards
-       * a card"). Each player with a real choice is asked in turn — see
-       * `GameState.pendingDiscards`. */
-      readonly target: number | PlayerScope;
+       * a card"), or one player named through a target ("its controller
+       * discards a card": `{ controllerOfTarget: 0 }`). Each player with a
+       * real choice is asked in turn — see `GameState.pendingDiscards`. */
+      readonly target: number | PlayerScope | ChosenPlayerRef;
       readonly amount: EffectAmount;
       /** "Discards a card at random" (Hypnotic Specter): nobody chooses —
        * the game picks, with its seeded shuffle. */
@@ -5495,7 +5516,9 @@ export type EffectSpec =
       readonly kind: "add-player-counters";
       readonly counter: PlayerCounterKind;
       readonly amount: EffectAmount;
-      readonly who?: PlayerScope;
+      /** A scope, or one player named through a target — "its controller
+       * gets two poison counters" (`{ controllerOfTarget: 0 }`). */
+      readonly who?: PlayerScope | ChosenPlayerRef;
       readonly target?: number;
     }
   | {
@@ -6826,8 +6849,9 @@ export interface EffectApi {
    * they were cast — or the greatest mana value among them. See the
    * `castThisTurn` {@link EffectAmount}. */
   castThisTurnOf(player: PlayerId, filter: CardFilter, greatest?: "mana-value"): number;
-  /** See the `{ countInGraveyard }` {@link EffectAmount}. */
-  countInGraveyard(filter: CardFilter): number;
+  /** See the `{ countInGraveyard }` {@link EffectAmount}; `you` reads the
+   * filter from that player's side (the effect's controller's otherwise). */
+  countInGraveyard(filter: CardFilter, you?: PlayerId): number;
   /** See the `{ suspendedCardsYouOwn }` {@link EffectAmount}. */
   suspendedCardsYouOwn?(): number;
   /** How many cards are in `player`'s hand — see `{ cardsInHand }`. */
@@ -9278,7 +9302,9 @@ function signedAmountValue(
     const n = signedAmountValue(amount.half, ctx, each) / (amount.fraction ?? 2);
     return amount.round === "up" ? Math.ceil(n) : Math.floor(n);
   }
-  if ("countInGraveyard" in amount) return ctx.countInGraveyard(amount.countInGraveyard);
+  if ("countInGraveyard" in amount) {
+    return ctx.countInGraveyard(amount.countInGraveyard, amount.forEachPlayer === true ? each : undefined);
+  }
   if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
   if ("timesKicked" in amount) return ctx.sourceTimesKicked();
   if ("ifCondition" in amount) {
@@ -9480,6 +9506,11 @@ function signedAmountValue(
     const ref = ctx.targets[amount.forTarget];
     if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
     return ctx.countMatching(amount.countOf, except, ref.player) * (amount.times ?? 1);
+  }
+  if (amount.forPlayer !== undefined) {
+    const player = effectPlayer(amount.forPlayer, ctx);
+    if (player === undefined) return 0;
+    return ctx.countMatching(amount.countOf, except, player) * (amount.times ?? 1);
   }
   if (amount.forEachPlayer === true && each !== undefined) {
     return ctx.countMatching(amount.countOf, except, each) * (amount.times ?? 1);
@@ -9873,6 +9904,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("cardsInHand" in amount) return amount.cardsInHand === "each";
   if ("attackingPlayer" in amount) return true;
   if ("countOf" in amount) return amount.forEachPlayer === true;
+  if ("countInGraveyard" in amount) return amount.forEachPlayer === true;
   if ("thisWay" in amount) return amount.who === "each";
   if ("half" in amount) return readsEachPlayer(amount.half);
   if ("powerOfTwo" in amount) return readsEachPlayer(amount.powerOfTwo);
@@ -9886,12 +9918,16 @@ function readsEachPlayer(amount: EffectAmount): boolean {
 /** A `mill` / `discard` `target`: the player in a target slot, or every
  * player a scope names (`"you"` is a scope of one). */
 function scopedOrTargetedPlayers(
-  target: number | PlayerScope,
+  target: number | PlayerScope | ChosenPlayerRef,
   ctx: ResolutionContext,
 ): readonly TargetRef[] {
   if (typeof target === "number") {
     const ref = ctx.targets[target];
     return ref === undefined ? [] : [ref];
+  }
+  if (typeof target === "object") {
+    const player = effectPlayer(target, ctx);
+    return player === undefined ? [] : [{ kind: "player", player }];
   }
   if (target === "you") return [{ kind: "player", player: ctx.controller }];
   return ctx.playersInScope(target).map((player) => ({ kind: "player", player }));
@@ -10457,7 +10493,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (ref?.kind === "player") ctx.draw(ref.player, amountValue(spec.amount, ctx, ref.player));
         return;
       }
-      for (const player of ctx.playersInScope(spec.who ?? "you")) {
+      const drawers =
+        typeof spec.who === "object"
+          ? ((p) => (p === undefined ? [] : [p]))(effectPlayer(spec.who, ctx))
+          : ctx.playersInScope(spec.who ?? "you");
+      for (const player of drawers) {
         ctx.draw(player, amountValue(spec.amount, ctx, player));
       }
       return;
@@ -12460,7 +12500,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? scopedOrTargetedPlayers(spec.target, ctx).flatMap((ref) =>
               ref.kind === "player" ? [ref.player] : [],
             )
-          : ctx.playersInScope(spec.who ?? "you");
+          : typeof spec.who === "object"
+            ? ((p) => (p === undefined ? [] : [p]))(effectPlayer(spec.who, ctx))
+            : ctx.playersInScope(spec.who ?? "you");
       for (const player of players) {
         ctx.addPlayerCounters(player, spec.counter, amountValue(spec.amount, ctx, player));
       }

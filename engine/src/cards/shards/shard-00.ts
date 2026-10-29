@@ -39,6 +39,7 @@ import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAscendantPackleader from "../pool/ascendant-packleader.js";
 import _poolAshmouthHound from "../pool/ashmouth-hound.js";
+import _poolAssassinsStrike from "../pool/assassins-strike.js";
 import _poolAvatarOfSlaughter from "../pool/avatar-of-slaughter.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
@@ -903,6 +904,7 @@ const shard: CardShard = {
     _poolArvadTheCursed,
     _poolAscendantPackleader,
     _poolAshmouthHound,
+    _poolAssassinsStrike,
     _poolAvatarOfSlaughter,
     _poolAvenCloudchaser,
     _poolAvenSentry,

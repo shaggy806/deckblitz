@@ -2747,6 +2747,16 @@ export function partySizeOf(state: GameState, registry: CardRegistry, player: Pl
   return best;
 }
 
+/** The player a count on `object` reads "you" as: its controller, or with
+ * `forChosenPlayer` the player chosen for it (`GameObject.chosenPlayer`) —
+ * nobody when none was chosen or they've left the game (rule 800.4a), which
+ * a count reads as 0. */
+function countSide(state: GameState, object: GameObject, forChosenPlayer: true | undefined): PlayerId | undefined {
+  if (forChosenPlayer !== true) return object.controller;
+  const chosen = object.chosenPlayer;
+  return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
+}
+
 /** The current value of a CDA's dynamic count (rule 604.3). */
 export function countValue(
   spec: CountSpec,
@@ -3635,13 +3645,16 @@ function collectStaticEffects(
     // perspective — the same way `setBasePtFromCount` reads its own.
     let scaledPower = 0;
     let scaledToughness = 0;
+    // Whose side "you" is: the source's controller, or its chosen player.
+    const side = countSide(state, source, ability.grantPtPerCount?.forChosenPlayer) ?? source.controller;
+    const nobody = ability.grantPtPerCount?.forChosenPlayer === true && countSide(state, source, true) === undefined;
     // Cards in exile, which is one shared zone: "cards your opponents own
     // in exile" is `ownedBy`, read from the source's controller's side.
     const exiledMatching = (exiledFilter: CardFilter): number =>
       state.zones.shared.exile.filter(
         (id) =>
           state.objects[id]?.isToken !== true &&
-          matchesFilter(state, registry, id, exiledFilter, { you: source.controller }),
+          matchesFilter(state, registry, id, exiledFilter, { you: side }),
       ).length;
     // Cards in graveyards: "each creature card in your graveyard" is
     // `ownedBy`, read from the source's controller's side.
@@ -3649,7 +3662,7 @@ function collectStaticEffects(
       let n = 0;
       for (const player of state.turnOrder) {
         for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
-          if (matchesFilter(state, registry, id, graveyardFilter, { you: source.controller })) n += 1;
+          if (matchesFilter(state, registry, id, graveyardFilter, { you: side })) n += 1;
         }
       }
       return n;
@@ -3671,7 +3684,7 @@ function collectStaticEffects(
               state.zones.shared.battlefield.filter(
                 (id) =>
                   !(per.excludeSelf === true && id === source.id) &&
-                  matchesFilter(state, registry, id, f, { you: source.controller }),
+                  matchesFilter(state, registry, id, f, { you: side }),
               ),
             ) + (per.excludeSelf === true ? othersInOwnStack(state, registry, source, f) : 0)
           );
@@ -3679,18 +3692,21 @@ function collectStaticEffects(
           countInProgress.delete(source.id);
         }
       };
-      const n =
-        per.commanderCasts === true
-          ? Object.values(state.players[source.controller]?.commanderCastCounts ?? {}).reduce(
+      const n = nobody
+        ? 0
+        : per.cardsInHand === true
+          ? (state.zones.perPlayer[side]?.hand.length ?? 0)
+          : per.commanderCasts === true
+          ? Object.values(state.players[side]?.commanderCastCounts ?? {}).reduce(
               (total, casts) => total + casts,
               0,
             )
           : per.playerCounters !== undefined
-            ? (state.players[source.controller]?.counters[per.playerCounters] ?? 0)
+            ? (state.players[side]?.counters[per.playerCounters] ?? 0)
             : per.speed === true
-            ? speedOf(state, source.controller)
+            ? speedOf(state, side)
             : per.partySize === true
-            ? partySizeOf(state, registry, source.controller)
+            ? partySizeOf(state, registry, side)
             : per.countersOnAffected !== undefined
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined
@@ -3700,12 +3716,12 @@ function collectStaticEffects(
             : per.inGraveyard !== undefined
             ? graveyardMatching(per.inGraveyard)
             : per.commanderManaValue === "greatest"
-            ? greatestCommanderManaValue(state, registry, source.controller)
+            ? greatestCommanderManaValue(state, registry, side)
             : per.colorsAmong !== undefined
             ? colorsAmongPermanents(
                 state,
                 registry,
-                source.controller,
+                side,
                 per.colorsAmong,
                 per.excludeSelf === true ? [source.id] : [],
               )
@@ -4087,7 +4103,8 @@ function computeCharacteristicsUncached(
       let n: number;
       cdaInProgress.add(object.id);
       try {
-        n = countValue(ability.setBasePtFromCount.countOf, state, registry, object.controller);
+        const side = countSide(state, object, ability.setBasePtFromCount.forChosenPlayer);
+        n = side === undefined ? 0 : countValue(ability.setBasePtFromCount.countOf, state, registry, side);
       } finally {
         cdaInProgress.delete(object.id);
       }
@@ -4127,7 +4144,8 @@ function computeCharacteristicsUncached(
           let n: number;
           cdaInProgress.add(object.id);
           try {
-            n = countValue(from.countOf, state, registry, object.controller);
+            const side = countSide(state, object, from.forChosenPlayer);
+            n = side === undefined ? 0 : countValue(from.countOf, state, registry, side);
           } finally {
             cdaInProgress.delete(object.id);
           }

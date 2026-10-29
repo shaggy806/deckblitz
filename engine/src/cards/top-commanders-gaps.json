@@ -587,7 +587,14 @@
   "decision:choose-player",
   "effect:choose-opponent-most-life",
   "static:attacking-chosen-player-anthem",
-  "trigger:chosen-player-upkeep"
+  "trigger:chosen-player-upkeep",
+  "amount:count-for-chosen-player",
+  "amount:count-for-controller-of-target",
+  "amount:count-per-player",
+  "amount:count-that-player-controls",
+  "effect:discard-controller-of-target",
+  "effect:draw-controller-of-target",
+  "effect:player-counters-controller-of-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

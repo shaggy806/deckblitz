@@ -2350,6 +2350,50 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
   });
 
+  it("a count from the chosen player's side (amount:count-for-chosen-player)", () => {
+    const order = face(
+      "As this creature enters, choose an opponent.\nTest Card's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.",
+      "Creature — Human Knight",
+    );
+    expect(order.static[0].setBasePtFromCount).toEqual({
+      countOf: { countOf: { type: "creature", controlledBy: "you" } },
+      plusPower: 1,
+      plusToughness: 1,
+      forChosenPlayer: true,
+    });
+    expect(order.complete).toBe(true);
+    const specter = face(
+      "As this creature enters, choose an opponent.\nTest Card's power and toughness are each equal to the number of cards in the chosen player's hand.",
+      "Creature — Specter",
+    );
+    expect(specter.static[0].setBasePtFromCount).toEqual({
+      countOf: "cards-in-your-hand",
+      plusPower: 0,
+      plusToughness: 0,
+      forChosenPlayer: true,
+    });
+    const nyx = face(
+      "As this creature enters, choose an opponent.\nThis creature gets -1/-1 for each card in the chosen player's hand.",
+      "Creature — Elemental",
+    );
+    expect(nyx.static[0].grantPtPerCount).toEqual({ cardsInHand: true, forChosenPlayer: true, pt: [-1, -1] });
+    expect(nyx.complete).toBe(true);
+  });
+
+  it("its controller draws, discards or gets a poison counter (effect:player-scope-extensions)", () => {
+    const who = { controllerOfTarget: 0 };
+    const strike = face("Destroy target creature. Its controller discards a card.", "Sorcery");
+    expect(strike.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "destroy", target: 0 }, { kind: "discard", target: who, amount: 1 }],
+    });
+    expect(strike.complete).toBe(true);
+    const heel = face("Return target creature to its owner's hand. Its controller draws a card.", "Instant");
+    expect(heel.effect.effects[1]).toEqual({ kind: "draw", who, amount: 1 });
+    const pistus = face("Destroy target creature with flying. Its controller gets a poison counter.", "Instant");
+    expect(pistus.effect.effects[1]).toEqual({ kind: "add-player-counters", counter: "poison", who, amount: 1 });
+  });
+
   it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
     const titan = face(
       "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",

@@ -1512,6 +1512,14 @@ export interface StaticAbility {
      * creature in your party" is `{ partySize: true, pt: [1, 0] }`. Reads only
      * types and controllers (layers 2 and 4), so the P/T fold doesn't recurse. */
     readonly partySize?: true;
+    /** The number of cards in the hand of the player whose side it counts
+     * from — Nyxathid's "-1/-1 for each card in **the chosen player's**
+     * hand" (with `forChosenPlayer`). */
+    readonly cardsInHand?: true;
+    /** Count from **the chosen player**'s side rather than this permanent's
+     * controller's (`GameObject.chosenPlayer`): every "you" in the count is
+     * them. No bonus with nobody chosen or once they've left the game. */
+    readonly forChosenPlayer?: true;
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };
@@ -2402,6 +2410,13 @@ export interface StaticAbility {
      * over a printed 5 — "power is equal to the number of Islands you
      * control") or only its toughness; the other stays as printed. */
     readonly only?: "power" | "toughness";
+    /** Count from **the chosen player**'s side rather than its
+     * controller's (`GameObject.chosenPlayer`, `choosePlayerOnEnter`) —
+     * Lost Order of Jarkeld's "1 plus the number of creatures **the chosen
+     * player** controls", Entropic Specter's "cards in the chosen player's
+     * hand". 0 with nobody chosen (off the battlefield) or once they've left
+     * the game (rule 800.4a). */
+    readonly forChosenPlayer?: true;
   };
   /** Additional land drops per turn for this permanent's controller (rule
    * 305.2c-adjacent — needed-cards P16, Azusa, Lost but Seeking / Icetill Explorer).

@@ -2338,6 +2338,25 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: loss });
       continue;
     }
+    // "Its controller draws / discards a card", "… gets a poison counter"
+    // after the one sentence that targeted (Call to Heel, Assassin's Strike,
+    // Pistus Strike): that target's controller, as it last existed.
+    const itsM = /^its controller (draws|discards) (a|an|one|two|three) cards?\.$|^its controller gets (a|an|one|two|three) poison counters?\.$/i.exec(sentence);
+    if (itsM !== null && ctx.targets.length === 1 && parsed.length > 0) {
+      const who = { controllerOfTarget: 0 };
+      const n = numberOf(itsM[2] ?? itsM[3]);
+      if (typeof n === "number") {
+        const effect =
+          itsM[1]?.toLowerCase() === "draws"
+            ? { kind: "draw", who, amount: n }
+            : itsM[1]?.toLowerCase() === "discards"
+              ? { kind: "discard", target: who, amount: n }
+              : { kind: "add-player-counters", counter: "poison", who, amount: n };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
     const before = ctx.targets.length;
     // The rhystic cards (Prophecy): "[effect] unless any player pays {2}." /
     // "Unless any player pays {2}, [effect]." — the effect behind an
@@ -4078,6 +4097,42 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       setBasePtFromCount: { countOf: { basicLandTypes: "you" }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
+  // A CDA or a count-scaled bonus read from the chosen player's side
+  // (`forChosenPlayer`, beside `choosePlayerOnEnter`): Lost Order of
+  // Jarkeld's "~'s power and toughness are each equal to 1 plus the number of
+  // creatures the chosen player controls", Entropic Specter's "… the number
+  // of cards in the chosen player's hand", Nyxathid's "~ gets -1/-1 for each
+  // card in the chosen player's hand".
+  if ((m = /^~'s power and toughness are each equal to (?:(\w+) plus )?the number of (.+?) the chosen player controls\.$/.exec(line))) {
+    const plus = m[1] === undefined ? 0 : numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof plus === "number" && filter !== null && Object.keys(filter).length > 0) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: {
+          countOf: { countOf: { ...filter, controlledBy: "you" } },
+          plusPower: plus,
+          plusToughness: plus,
+          forChosenPlayer: true,
+        },
+        text,
+      };
+    }
+  }
+  if (line === "~'s power and toughness are each equal to the number of cards in the chosen player's hand.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: "cards-in-your-hand", plusPower: 0, plusToughness: 0, forChosenPlayer: true },
+      text,
+    };
+  }
+  if ((m = /^~ gets ([+-]\d+)\/([+-]\d+) for each card in the chosen player's hand\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      grantPtPerCount: { cardsInHand: true, forChosenPlayer: true, pt: [Number(m[1]), Number(m[2])] },
       text,
     };
   }

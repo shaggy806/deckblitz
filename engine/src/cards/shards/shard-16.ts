@@ -103,6 +103,7 @@ import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
+import _poolCallToHeel from "../pool/call-to-heel.js";
 import _poolCallToTheGrave from "../pool/call-to-the-grave.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
@@ -1019,6 +1020,7 @@ const shard: CardShard = {
     _poolBurdenOfProof,
     _poolCadaverLab,
     _poolCallTheBloodline,
+    _poolCallToHeel,
     _poolCallToTheGrave,
     _poolCanoptekTombSentinel,
     _poolCarnivorousMossBeast,

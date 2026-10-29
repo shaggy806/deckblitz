@@ -497,6 +497,7 @@ import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolMyojinOfNightsReach from "../pool/myojin-of-nights-reach.js";
 import _poolMysticSkull from "../pool/mystic-skull.js";
 import _poolMythosOfIlluna from "../pool/mythos-of-illuna.js";
+import _poolNaturesResurgence from "../pool/natures-resurgence.js";
 import _poolNecrosavant from "../pool/necrosavant.js";
 import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
 import _poolNeglectedHeirloom from "../pool/neglected-heirloom.js";
@@ -1333,6 +1334,7 @@ const shard: CardShard = {
     _poolMyojinOfNightsReach,
     _poolMysticSkull,
     _poolMythosOfIlluna,
+    _poolNaturesResurgence,
     _poolNecrosavant,
     _poolNefCropEntangler,
     _poolNeglectedHeirloom,

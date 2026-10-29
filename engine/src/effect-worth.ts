@@ -270,7 +270,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "grant-protection":
       return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx);
     case "draw": {
-      if (typeof effect.target === "number") return 0;
+      // A player named through a target ("its controller draws") is the
+      // target's to judge.
+      if (typeof effect.target === "number" || typeof effect.who === "object") return 0;
       const n = sizeOf(effect.amount);
       const players = playersIn(effect.who ?? "you", ctx);
       // Drawing from a library too small to draw from loses the game.
@@ -288,7 +290,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       if (effect.target !== undefined || effect.who === undefined) return 0;
       return lifeLossTo(playersIn(effect.who, ctx), sizeOf(effect.amount, 2), ctx);
     case "discard":
-      if (typeof effect.target === "number") return 0;
+      if (typeof effect.target !== "string") return 0;
       return onPlayers(playersIn(effect.target, ctx), -CARD * sizeOf(effect.amount), ctx);
     case "sacrifice":
       if (effect.who === "target") return 0;

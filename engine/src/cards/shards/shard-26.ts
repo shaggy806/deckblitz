@@ -496,6 +496,7 @@ import _poolNobleTemplar from "../pool/noble-templar.js";
 import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
+import _poolNyxathid from "../pool/nyxathid.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
@@ -1354,6 +1355,7 @@ const shard: CardShard = {
     _poolNorwoodRanger,
     _poolNothic,
     _poolNoxiousToad,
+    _poolNyxathid,
     _poolObyrasAttendants,
     _poolOffalsnout,
     _poolOgreErrant,

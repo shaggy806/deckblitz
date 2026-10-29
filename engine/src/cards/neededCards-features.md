@@ -321,6 +321,31 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Counts for one player, and its controller as the player — built 2026-10-29
+
+Two need-keys Phase 2 families, features only. **`amount:count-for-chosen-player`**:
+a `countOf`'s `forPlayer: EffectPlayerRef` (the chosen player, a target's
+controller, the player a trigger names — `EffectPlayerRef` gained
+`"chosen-player"`), `countInGraveyard`'s `forEachPlayer`, and `forChosenPlayer`
+on `setBasePtFromCount` and `grantPtPerCount` (with `grantPtPerCount`'s new
+`cardsInHand`) for a CDA or bonus counted for the chosen player; "each opponent
+… that player controls" was already `forEachPlayer` under a `who` scope.
+**`effect:player-scope-extensions`**: "its controller draws / discards / gets a
+poison counter" as `draw`'s `who`, `discard`'s `target` and
+`add-player-counters`' `who` taking `{ controllerOfTarget: n }` (any
+`ChosenPlayerRef`). Proving cards: Lost Order of Jarkeld, Entropic Specter,
+Nyxathid, Weight of Spires, Emissary of Hope, Typhoon, Nature's Resurgence,
+Assassin's Strike, Call to Heel, Pistus Strike. Keys:
+`amount:count-for-chosen-player`, `amount:count-for-controller-of-target`,
+`amount:count-per-player`, `amount:count-that-player-controls`,
+`effect:discard-controller-of-target`, `effect:draw-controller-of-target`,
+`effect:player-counters-controller-of-target`. Not covered: "its controller
+amasses" (Azog, `effect:amass-controller-of-target`), an opponent chosen by a
+land comparison (Boreas Charger), "permanents they control but don't own"
+(Blim), "each creature that player controls" inside `for-each-player`
+(Incite Rebellion), tapped/nonbasic counts the scaffolder can't phrase —
+`author-freed` narrows them.
+
 ### The chosen player — built 2026-10-29
 
 The need-keys Phase 2 family `decision:choose-player` (features only). A

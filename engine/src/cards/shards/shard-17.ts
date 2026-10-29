@@ -425,6 +425,7 @@ import _poolLithoformBlight from "../pool/lithoform-blight.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLiuBeiLordOfShu from "../pool/liu-bei-lord-of-shu.js";
 import _poolLoneRider from "../pool/lone-rider.js";
+import _poolLostOrderOfJarkeld from "../pool/lost-order-of-jarkeld.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
 import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
@@ -537,6 +538,7 @@ import _poolPhthisis from "../pool/phthisis.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
+import _poolPistusStrike from "../pool/pistus-strike.js";
 import _poolPlagueDrone from "../pool/plague-drone.js";
 import _poolPlagueRats from "../pool/plague-rats.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
@@ -1288,6 +1290,7 @@ const shard: CardShard = {
     _poolLithoformEngine,
     _poolLiuBeiLordOfShu,
     _poolLoneRider,
+    _poolLostOrderOfJarkeld,
     _poolLostToLegend,
     _poolLothlorienBlade,
     _poolLoxodonMender,
@@ -1400,6 +1403,7 @@ const shard: CardShard = {
     _poolPhyrexianBloodstock,
     _poolPhyrexianPegasus,
     _poolPhyrexianVault,
+    _poolPistusStrike,
     _poolPlagueDrone,
     _poolPlagueRats,
     _poolPleaForPower,

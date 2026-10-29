@@ -23472,11 +23472,11 @@ export class Game {
         );
         return greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
       },
-      countInGraveyard: (filter) => {
+      countInGraveyard: (filter, you = controller) => {
         let n = 0;
         for (const player of this.state.turnOrder) {
           for (const id of this.state.zones.perPlayer[player].graveyard) {
-            if (matchesFilter(this.state, this.registry, id, filter, { you: controller })) n += 1;
+            if (matchesFilter(this.state, this.registry, id, filter, { you })) n += 1;
           }
         }
         return n;
@@ -38656,9 +38656,9 @@ export class Game {
     const n = amountValue(amount, {
       ...ctx,
       conditionMet,
-      countInGraveyard: (filter) =>
-        ctx.countInGraveyard(filter) +
-        fromGraveyard.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: controller }))
+      countInGraveyard: (filter, you = controller) =>
+        ctx.countInGraveyard(filter, you) +
+        fromGraveyard.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you }))
           .length,
       countMatching: (filter, except = [], you) => ctx.countMatching(filter, [...except, ...notYet], you),
       aggregate: (spec, except = []) => ctx.aggregate(spec, [...except, ...notYet]),
