@@ -252,6 +252,11 @@ export interface CardFilter {
    * battle of theirs (Blessed Reversal's "each creature **attacking you**").
    * Off the battlefield nothing is attacking anyone. */
   readonly attackingYou?: boolean;
+  /** Attacking the filtering source's **chosen player** (`GameObject.
+   * chosenPlayer`) — the player, not a planeswalker or battle of theirs:
+   * Triarch Stalker's "creatures attacking **the last chosen player** have
+   * menace". With no source, or nobody chosen, nothing matches. */
+  readonly attackingChosenPlayer?: true;
   /** Currently blocking — the mirror of `attacking` (Kangee, Sky Warden's
    * "blocking creatures with flying get +0/+2"). */
   readonly blocking?: boolean;
@@ -1206,6 +1211,11 @@ export function matchesFilter(
   if (filter.attackingYou !== undefined) {
     const attackingYou = live?.zone === "battlefield" && live.attacking === ctx.you;
     if (attackingYou !== filter.attackingYou) return false;
+  }
+  if (filter.attackingChosenPlayer === true) {
+    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const chosen = from?.zone === "battlefield" ? from.chosenPlayer : undefined;
+    if (chosen === undefined || live?.zone !== "battlefield" || live.attacking !== chosen) return false;
   }
   if (filter.unblocked !== undefined) {
     const step = state.turn.step;

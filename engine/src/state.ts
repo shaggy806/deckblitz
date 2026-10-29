@@ -701,6 +701,13 @@ export interface GameObject {
    * change: a fresh entry chooses again (rule 400.7).
    */
   chosenNames?: string[];
+  /** "The chosen player": the player chosen as this permanent entered
+   * (`CardDefinition.choosePlayerOnEnter` — Black Vise, Saskia the
+   * Unyielding), or the last one an ability of it chose and kept
+   * (`choose-opponent { remember }` — Triarch Stalker's "the last chosen
+   * player"). What a `"chosen-player"` scope, trigger subject or filter
+   * reads off its source. Cleared on any zone change (rule 400.7). */
+  chosenPlayer?: PlayerId;
   /** A battle's protector (rule 310.9): the player who defends it — chosen
    * as it entered (310.9a; for a Siege, one of its controller's opponents,
    * 310.12a). It's the defending player of any creature attacking it, and
@@ -778,6 +785,10 @@ export interface GameObject {
      * put the counters on it. */
     readonly tributeFrom?: PlayerId | null;
     readonly tributePaid?: boolean;
+    /** The player chosen for it as it was about to enter
+     * (`CardDefinition.choosePlayerOnEnter`), or `null` with nobody to
+     * choose. Lands on `GameObject.chosenPlayer`. */
+    readonly chosenPlayer?: PlayerId | null;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -1791,6 +1802,9 @@ export interface LastKnownInfo {
   /** `GameObject.chosenNames` as it left — "the chosen name" for an ability
    * of it that resolves after it has gone (rule 608.2h). */
   readonly chosenNames?: readonly string[];
+  /** `GameObject.chosenPlayer` as it left — "the chosen player" for an
+   * ability of it that resolves after it has gone (rule 608.2h). */
+  readonly chosenPlayer?: PlayerId;
   /** The triggered abilities it had been *granted* — by another permanent's
    * static or a one-shot modifier — in the order `effectiveTriggered` lists
    * them after its printed ones; with `lostAbilities`, only those granted
@@ -2906,6 +2920,10 @@ export type AwaitingDecision =
        * naming a card as it enters (`CardNameOnEnter.look`) — `options` are
        * the opponents. */
       readonly lookAt?: true;
+      /** "As this enters, choose a player / an opponent"
+       * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
+       * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
+      readonly choosePlayer?: true;
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
       readonly then?: EffectSpec;
@@ -5157,6 +5175,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.chosenOnEnter ?? null,
     o.chosenCreatureType ?? null,
     o.chosenNames ?? null,
+    o.chosenPlayer ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

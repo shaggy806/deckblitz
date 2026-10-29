@@ -112,6 +112,10 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       // Who'll be attacking isn't known until the attack: the controller's
       // share is the part that's ours for sure.
       return [controller];
+    case "chosen-player": {
+      const chosen = ctx.source !== undefined ? state.objects[ctx.source]?.chosenPlayer : undefined;
+      return chosen !== undefined ? [chosen] : null;
+    }
     case "trigger-controller": {
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
       return object !== undefined ? [object.controller] : null;

@@ -177,6 +177,7 @@ import _poolCrypticCommand from "../pool/cryptic-command.js";
 import _poolCultHealer from "../pool/cult-healer.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
+import _poolCursedRack from "../pool/cursed-rack.js";
 import _poolCyclicalEvolution from "../pool/cyclical-evolution.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolCultHealer,
     _poolCultivatorsCaravan,
     _poolCuriosity,
+    _poolCursedRack,
     _poolCyclicalEvolution,
     _poolDaggerclawImp,
     _poolDaiLiCensor,

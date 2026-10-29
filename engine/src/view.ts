@@ -336,6 +336,9 @@ export interface VisibleObject {
    * card names chosen for it (Pithing Needle — comma-separated). Public:
    * the choice is announced. Absent when it had nothing to choose. */
   readonly chosen?: string;
+  /** On a permanent: "the chosen player" (`GameObject.chosenPlayer` —
+   * Black Vise's opponent, Triarch Stalker's last chosen). Public. */
+  readonly chosenPlayer?: PlayerId;
 }
 
 export interface PlayerView {
@@ -663,6 +666,9 @@ function visible(
     damageMarked: object.damageMarked,
     regenerationShields: object.regenerationShields ?? 0,
     ...(chosen !== null ? { chosen } : {}),
+    ...(object.chosenPlayer !== undefined && (object.zone === "battlefield" || object.zone === "phased-out")
+      ? { chosenPlayer: object.chosenPlayer }
+      : {}),
     counters: { ...object.counters },
     summoningSick: object.summoningSick,
     attacking: object.attacking,

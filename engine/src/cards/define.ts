@@ -2101,7 +2101,10 @@ export interface StaticAbility {
    * other way round (Twenty-Toed Toad). Never below 0.
    */
   readonly maxHandSize?: {
-    readonly who: "you" | "opponents";
+    /** `"chosen-player"`: the player chosen for this static's permanent
+     * (`GameObject.chosenPlayer` — Cursed Rack's "the chosen player's
+     * maximum hand size is four"). */
+    readonly who: "you" | "opponents" | "chosen-player";
     readonly set?: number;
     readonly minus?: CountSpec;
     readonly adjust?: number;
@@ -3202,6 +3205,16 @@ export interface CardDefinition {
    * mana abilities and trigger conditions then read.
    */
   readonly chooseOnEnter: readonly string[] | null;
+  /**
+   * "As this permanent enters, choose a player" (rule 614.1c — Saskia the
+   * Unyielding, Stuffy Doll) or "choose an opponent" (Black Vise, Cursed
+   * Rack): asked of its controller among the players still in the game —
+   * opponents first, in turn order from the next — and kept as
+   * `GameObject.chosenPlayer`, which a `"chosen-player"` scope, trigger
+   * subject (`who: "chosen-player"`) or `maxHandSize` reads. With one player
+   * to choose nobody is asked; with none, nobody is chosen. `null` for none.
+   */
+  readonly choosePlayerOnEnter: "player" | "opponent" | null;
   /** Starting loyalty for a planeswalker (rule 306.5b — it enters with this
    * many loyalty counters). `null` for a non-planeswalker. `defineCard`
    * synthesizes the enters-with-counters replacement from this. */
@@ -3753,6 +3766,7 @@ const PRINTED_ABILITY: {
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
+  choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   loyalty: false,
   defense: false,
   flashback: (def) => def.flashback !== null,
@@ -3976,6 +3990,7 @@ interface CardDraft {
   chooseCreatureTypeOnEnter?: boolean;
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
+  choosePlayerOnEnter?: "player" | "opponent";
   loyalty?: number;
   /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
    * for each Phyrexian mana symbol its caster paid life for (Nahiri, the
@@ -4209,6 +4224,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
+    choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
     loyalty,
     defense,
     flashback: draft.flashback ?? null,

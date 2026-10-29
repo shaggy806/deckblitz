@@ -612,6 +612,7 @@ import _poolSaheeliRai from "../pool/saheeli-rai.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
 import _poolSaprolingInfestation from "../pool/saproling-infestation.js";
+import _poolSaskiaTheUnyielding from "../pool/saskia-the-unyielding.js";
 import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
 import _poolSavaenElves from "../pool/savaen-elves.js";
 import _poolSavageGorger from "../pool/savage-gorger.js";
@@ -1463,6 +1464,7 @@ const shard: CardShard = {
     _poolSandstormCharger,
     _poolSanguinaryMage,
     _poolSaprolingInfestation,
+    _poolSaskiaTheUnyielding,
     _poolSaurianSymbiote,
     _poolSavaenElves,
     _poolSavageGorger,

@@ -1219,6 +1219,14 @@ export type PlayerScope =
    * of Unity): the effect's controller with those opponents, in turn order
    * from the active player. */
   | "you-and-opponents-who-voted-with-you"
+  /** "**The chosen player**": the player chosen for the effect's source — as
+   * it entered (`CardDefinition.choosePlayerOnEnter`: Black Vise, Saskia the
+   * Unyielding) or the last one an ability of it chose and kept
+   * (`choose-opponent { remember }`) — `GameObject.chosenPlayer`, read as
+   * the source last existed if it has left (rule 608.2h). Nobody when none
+   * was chosen or they've left the game. Not a target. Only a resolution
+   * knows its source, so elsewhere it names nobody. */
+  | "chosen-player"
   /** "That player" in an `"each-player-may"`'s `ifDid` / `ifDidnt`: the
    * player the follow-up is about. Elsewhere, the same as
    * `"trigger-player"`. Not a target. */
@@ -1620,10 +1628,22 @@ export type EffectSpec =
        * is asked — the game picks among them with its seeded randomness,
        * announced as a `chosen-at-random` event. */
       readonly random?: true;
-      /** "Choose a **player** at random" (Wildfire Devils): among every player
-       * still in the game, the effect's controller included. Only with
-       * `random`. */
+      /** "Choose a **player**": among every player still in the game, the
+       * effect's controller included — at random (Wildfire Devils), or by
+       * the effect's controller, asked only among two or more (Multiple
+       * Choice's "you may choose a player. They return a creature …"). */
       readonly anyPlayer?: true;
+      /** "Choose an opponent **with the most life** among your opponents"
+       * (The Master, Gallifrey's End), "a player with the most life or tied
+       * for most life" (The Black Gate): only those of the candidates whose
+       * life total is the greatest among them, read as this resolves. */
+      readonly mostLife?: true;
+      /** The one chosen is kept on the effect's source as "the chosen
+       * player" (`GameObject.chosenPlayer`), replacing any earlier one —
+       * Triarch Stalker's "at the beginning of combat on your turn, choose
+       * an opponent. Creatures attacking **the last chosen player** have
+       * menace". Nothing is kept once the source has left the battlefield. */
+      readonly remember?: true;
     }
   | {
       /**
@@ -1653,6 +1673,8 @@ export type EffectSpec =
       readonly kind: "about-player";
       readonly player: PlayerId;
       readonly effect: EffectSpec;
+      /** `choose-opponent`'s `remember`: keep `player` on the source first. */
+      readonly remember?: true;
     }
   | {
       /**
@@ -7118,6 +7140,10 @@ export interface EffectApi {
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
+  /** Keep `player` as the effect's source's "chosen player"
+   * (`choose-opponent { remember }`) — nothing once it has left the
+   * battlefield. */
+  rememberChosenPlayer(player: PlayerId): void;
   /** An index in `0…count-1` (`count` > 0) picked with the game's seeded
    * randomness, and announced as a `chosen-at-random` event naming what
    * `pick` says the index stands for — a `random` choice: `choose-opponent`,
@@ -10196,32 +10222,41 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyEffectSpec(spec.effect, ctx.withConvoker(spec.index));
       return;
     case "choose-opponent": {
+      let among = ctx.playersInScope(spec.anyPlayer === true ? "each-player" : "each-opponent");
+      if (spec.mostLife === true) {
+        const most = Math.max(...among.map((p) => ctx.lifeTotalOf(p)));
+        among = among.filter((p) => ctx.lifeTotalOf(p) === most);
+      }
+      if (among.length === 0) return;
+      const about = (player: PlayerId): EffectSpec => ({
+        kind: "about-player",
+        player,
+        effect: spec.then,
+        ...(spec.remember === true ? { remember: true as const } : {}),
+      });
       if (spec.random === true) {
         // Nobody is asked: the game picks, each with an equal chance.
-        const among = ctx.playersInScope(spec.anyPlayer === true ? "each-player" : "each-opponent");
-        if (among.length === 0) return;
         const chosen = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "player", player: among[i] }))];
-        applyEffectSpec(spec.then, ctx.aboutPlayer(chosen));
+        applyEffectSpec(about(chosen), ctx);
         return;
       }
-      const opponents = ctx.playersInScope("each-opponent");
-      if (opponents.length === 0) return;
-      if (opponents.length === 1) {
-        applyEffectSpec(spec.then, ctx.aboutPlayer(opponents[0]));
+      if (among.length === 1) {
+        applyEffectSpec(about(among[0]), ctx);
         return;
       }
       ctx.chooseModes(
         1,
         1,
-        opponents.map((player) => ({
+        among.map((player) => ({
           text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
-          effect: { kind: "about-player", player, effect: spec.then },
+          effect: about(player),
         })),
       );
       return;
     }
     case "about-player":
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
+      if (spec.remember === true) ctx.rememberChosenPlayer(spec.player);
       applyEffectSpec(spec.effect, ctx.aboutPlayer(spec.player));
       return;
     case "become-prepared": {

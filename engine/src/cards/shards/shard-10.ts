@@ -768,6 +768,7 @@ import _poolTransmogrify from "../pool/transmogrify.js";
 import _poolTreetopSnarespinner from "../pool/treetop-snarespinner.js";
 import _poolTrenchingSteed from "../pool/trenching-steed.js";
 import _poolTriSentinelActOfVengeance from "../pool/tri-sentinel-act-of-vengeance.js";
+import _poolTriarchStalker from "../pool/triarch-stalker.js";
 import _poolTrollNegotiations from "../pool/troll-negotiations.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
@@ -1629,6 +1630,7 @@ const shard: CardShard = {
     _poolTreetopSnarespinner,
     _poolTrenchingSteed,
     _poolTriSentinelActOfVengeance,
+    _poolTriarchStalker,
     _poolTrollNegotiations,
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,

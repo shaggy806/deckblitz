@@ -695,6 +695,12 @@ export type TriggerWho =
    * Curse), read as it last existed if it has left. The trigger is the
    * Curse's, and its controller's. */
   | "enchanted-player-controls"
+  /** "**The chosen player**" — the player chosen for this permanent
+   * (`GameObject.chosenPlayer`, as it last existed if it has left): a
+   * `step-begins` trigger's "at the beginning of the chosen player's upkeep"
+   * (Black Vise), whose step belongs to them — that player is then the
+   * `"active-player"`. Where the subject is an object, nothing matches. */
+  | "chosen-player"
   /** This ability's controller's **Ring-bearer** (rule 701.54a) — the Ring
    * emblem's "whenever your Ring-bearer attacks". */
   | "ring-bearer";

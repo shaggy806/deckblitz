@@ -2329,6 +2329,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Spells with the chosen name can't be cast.").complete).toBe(false);
   });
 
+  it("a player chosen as it enters, and the lines that read the chosen player (decision:choose-player)", () => {
+    const rack = face(
+      "As this artifact enters, choose an opponent.\nThe chosen player's maximum hand size is four.",
+      "Artifact",
+    );
+    expect(rack.choosePlayerOnEnter).toBe("opponent");
+    expect(rack.static).toEqual([
+      {
+        affects: { scope: "self" },
+        maxHandSize: { who: "chosen-player", set: 4 },
+        text: "The chosen player's maximum hand size is four.",
+      },
+    ]);
+    expect(face("As this creature enters, choose a player.", "Creature — Construct").choosePlayerOnEnter).toBe("player");
+    expect(parseTrigger("At the beginning of the chosen player's upkeep")).toEqual([
+      { on: "step-begins", step: "upkeep", who: "chosen-player" },
+    ]);
+    // "Choose two players" is another feature.
+    expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
+  });
+
   it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
     const titan = face(
       "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",

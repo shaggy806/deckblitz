@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-452 already implemented / 48 missing
+453 already implemented / 47 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -343,7 +343,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  337  Marwyn, the Nurturer                            8228 decks  {2}{G}           Legendary Creature — Elf Druid
 [x]  338  Ghave, Guru of Spores                           8185 decks  {2}{W}{B}{G}     Legendary Creature — Fungus Shaman
 [x]  339  Vnwxt, Verbose Host                             8171 decks  {1}{U}           Legendary Creature — Homunculus
-[ ]  340  Saskia the Unyielding                           8145 decks  {B}{R}{G}{W}     Legendary Creature — Human Soldier
+[x]  340  Saskia the Unyielding                           8145 decks  {B}{R}{G}{W}     Legendary Creature — Human Soldier
 [x]  341  Imotekh the Stormlord                           8137 decks  {2}{B}{B}        Legendary Artifact Creature — Necron
 [x]  342  Talion, the Kindly Lord                         8105 decks  {2}{U}{B}        Legendary Creature — Faerie Noble
 [x]  343  Maelstrom Wanderer                              8102 decks  {5}{G}{U}{R}     Legendary Creature — Elemental

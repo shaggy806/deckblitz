@@ -2386,7 +2386,10 @@ export class HeuristicBotController extends AutomaticController {
 
   /** "As this enters, choose a colour" (Valgavoth's Lair, the Thriving lands)
    * comes as a creature-type choice over colours: name the one the deck wants
-   * (`colorToName`). Anything else is a real creature type. */
+   * (`colorToName`). A choice among players ("as this enters, choose a
+   * player" — Black Vise, Stuffy Doll, a Siege's protector) is aimed at an
+   * opponent, the one with the most life: every such card's chosen player
+   * is the one it hurts. Anything else is a real creature type. */
   override chooseCreatureType(
     view: ControllerView,
     source: ObjectId,
@@ -2394,6 +2397,15 @@ export class HeuristicBotController extends AutomaticController {
     suggested: readonly string[],
   ): string {
     if (allColors(options)) return colorToName(view.state, this.registry, this.playerId, options);
+    const players = view.state.players;
+    if (options.length > 0 && options.every((o) => players[o as PlayerId] !== undefined)) {
+      const opponents = options.filter((o) => o !== this.playerId);
+      let best: string | undefined;
+      for (const o of opponents) {
+        if (best === undefined || players[o as PlayerId].life > players[best as PlayerId].life) best = o;
+      }
+      if (best !== undefined) return best;
+    }
     return super.chooseCreatureType(view, source, options, suggested);
   }
 

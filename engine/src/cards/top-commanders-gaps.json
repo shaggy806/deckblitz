@@ -583,7 +583,11 @@
   "effect:put-from-opponent-hand-onto-battlefield",
   "target:chosen-by-other-player",
   "decision:trigger-object-controller-chooses-target",
-  "decision:separate-into-piles"
+  "decision:separate-into-piles",
+  "decision:choose-player",
+  "effect:choose-opponent-most-life",
+  "static:attacking-chosen-player-anthem",
+  "trigger:chosen-player-upkeep"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

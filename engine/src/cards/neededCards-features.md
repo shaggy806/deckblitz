@@ -321,6 +321,28 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The chosen player — built 2026-10-29
+
+The need-keys Phase 2 family `decision:choose-player` (features only). A
+player chosen as a permanent enters (`choosePlayerOnEnter: "player" |
+"opponent"`, asked through the existing `choose-creature-type` decision with
+players as options — no new decision kind) or by an ability, kept
+(`choose-opponent { remember }`), on `GameObject.chosenPlayer`; read back by
+the `"chosen-player"` `PlayerScope`, the `step-begins` subject `who:
+"chosen-player"`, `maxHandSize { who: "chosen-player" }` and the
+`attackingChosenPlayer` filter. `choose-opponent` also gained a non-random
+`anyPlayer` and `mostLife`. The client flags the chosen player on the tile.
+Proving cards: Black Vise, The Rack, Cursed Rack, Saskia the Unyielding,
+Triarch Stalker, Beckoning Will-o'-Wisp, The Master, Gallifrey's End. Keys:
+`decision:choose-player`, `effect:choose-opponent-most-life`,
+`static:attacking-chosen-player-anthem`, `trigger:chosen-player-upkeep`. Not
+covered: two chosen players (Bitter Feud, Sower of Discord), a secret choice,
+mana added by a chosen player (Valleymaker, Victory Chimes, Stadium
+Vendors), "another target creature that player controls" (Strax), counts
+over the chosen player's permanents (`amount:count-for-chosen-player`, the
+next family), "deals 1 damage to itself" (Stuffy Doll) — `author-freed`
+narrows them.
+
 ### Separating into piles — built 2026-10-29
 
 The need-keys Phase 2 family `decision:separate-into-piles` (features only).

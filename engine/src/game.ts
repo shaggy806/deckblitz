@@ -5445,6 +5445,8 @@ export class Game {
         source.enterChoice = { ...source.enterChoice, tributeFrom: creatureType as PlayerId };
       } else if (awaiting.lookAt === true) {
         source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
+      } else if (awaiting.choosePlayer === true) {
+        source.enterChoice = { ...source.enterChoice, chosenPlayer: creatureType as PlayerId };
       } else if (awaiting.tribute === "pay") {
         // The first option pays (`tributeOptions`).
         source.enterChoice = { ...source.enterChoice, tributePaid: creatureType === awaiting.options[0] };
@@ -7226,7 +7228,12 @@ export class Game {
         }
         const rule = ability.maxHandSize;
         if (rule === undefined) continue;
-        const reaches = rule.who === "you" ? player === source.controller : player !== source.controller;
+        const reaches =
+          rule.who === "you"
+            ? player === source.controller
+            : rule.who === "chosen-player"
+              ? player === source.chosenPlayer
+              : player !== source.controller;
         if (!reaches || !this.staticActive(source, ability)) continue;
         changes.push({
           timestamp: source.timestamp,
@@ -9567,6 +9574,7 @@ export class Game {
     | { readonly kind: "amplify"; readonly as: CardDefinition }
     | { readonly kind: "protector"; readonly siege: boolean }
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
+    | { readonly kind: "player"; readonly among: "player" | "opponent" }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -9598,6 +9606,10 @@ export class Game {
     // printed, or a copy's.
     if (answered?.exchangeText === undefined && becoming.exchangeTextOnEnter !== null) {
       return { kind: "exchange-text", filter: becoming.exchangeTextOnEnter };
+    }
+    // "As this enters, choose a player / an opponent" — printed, or a copy's.
+    if (answered?.chosenPlayer === undefined && becoming.choosePlayerOnEnter !== null) {
+      return { kind: "player", among: becoming.choosePlayerOnEnter };
     }
     // Devour (rule 702.82a): "as this enters, you may sacrifice any number of
     // creatures" — printed, or a copy's.
@@ -9763,6 +9775,30 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "player") {
+        // "Choose a player / an opponent" (rule 614.1c): among those still
+        // in the game, opponents first in turn order from the next. Asked
+        // only among two or more.
+        const at = this.state.turnOrder.indexOf(chooser);
+        const rotated = [...this.state.turnOrder.slice(at + 1), ...this.state.turnOrder.slice(0, at + 1)];
+        const options = rotated.filter(
+          (p) => this.state.players[p]?.hasLost === false && (next.among === "player" || p !== chooser),
+        );
+        if (options.length > 1) {
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: chooser,
+            source: id,
+            options,
+            catalog: false,
+            choosePlayer: true,
+            prompt: next.among === "player" ? "Choose a player" : "Choose an opponent",
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, chosenPlayer: options[0] ?? null };
         continue;
       }
       if (next.kind === "protector") {
@@ -21451,7 +21487,9 @@ export class Game {
             (spec.who === "opponent" && this.activePlayer !== self.controller) ||
             // "Enchanted player's upkeep" (a Curse): the step belongs to the
             // player this Aura is attached to.
-            (spec.who === "attached" && this.matchesWhoPlayer("attached", this.activePlayer, self)))
+            (spec.who === "attached" && this.matchesWhoPlayer("attached", this.activePlayer, self)) ||
+            // "The chosen player's upkeep" (Black Vise).
+            (spec.who === "chosen-player" && this.matchesWhoPlayer("chosen-player", this.activePlayer, self)))
         );
       case "cast-spell": {
         if (spec.copyOnly === true && event.type !== "spell-copied") return false;
@@ -21860,6 +21898,11 @@ export class Game {
       const on =
         self.zone === "battlefield" ? self.attachedToPlayer : (self.lastKnown?.attachedToPlayer ?? self.attachedToPlayer);
       return on !== undefined && on === player;
+    }
+    // "The chosen player" — as it last existed, if it has left.
+    if (who === "chosen-player") {
+      const chosen = self.zone === "battlefield" ? self.chosenPlayer : (self.lastKnown?.chosenPlayer ?? self.chosenPlayer);
+      return chosen !== undefined && chosen === player;
     }
     return self.controller === player;
   }
@@ -22928,6 +22971,12 @@ export class Game {
       return held ?? refs.votes ?? [];
     };
     const scoped = (who: PlayerScope): PlayerId[] => {
+      if (who === "chosen-player") {
+        // The source's chosen player, in the stint this refers to (608.2h).
+        const departed = departedSource();
+        const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
+        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
       if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
         return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
@@ -23735,6 +23784,14 @@ export class Game {
       // it", its source blinked — `sourceLost`, rule 400.7) isn't "it".
       sacrificeSource: () =>
         opts.sourceLost === true ? false : this.sacrificeSourceByEffect(source, controller, refs.source),
+      rememberChosenPlayer: (player) => {
+        const object = this.state.objects[source];
+        if (object?.zone !== "battlefield" || (refs.source !== undefined && refs.source !== (object.zoneChangeCount ?? 0))) {
+          return;
+        }
+        object.chosenPlayer = player;
+        invalidateComputedCache();
+      },
       aboutPlayer: (player) =>
         this.makeResolutionContext(
           source,
@@ -36745,8 +36802,15 @@ export class Game {
     triggerSpellController?: PlayerId,
   ): PlayerId[] {
     if (who === "you") return [controller];
-    // Only a resolution knows a vote's votes (`makeResolutionContext`).
-    if (who === "opponents-who-voted-with-you" || who === "you-and-opponents-who-voted-with-you") return [];
+    // Only a resolution knows a vote's votes, and its source's chosen player
+    // (`makeResolutionContext`).
+    if (
+      who === "opponents-who-voted-with-you" ||
+      who === "you-and-opponents-who-voted-with-you" ||
+      who === "chosen-player"
+    ) {
+      return [];
+    }
     if (who === "you-and-opponents-attacking-trigger-player") {
       const attacking = new Set<PlayerId>();
       if (triggerPlayer !== undefined) {
@@ -38933,6 +38997,7 @@ export class Game {
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
+      ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
       ...(object.monstrous === true ? { monstrous: true as const } : {}),
       ...(object.renowned === true ? { renowned: true as const } : {}),
@@ -39708,6 +39773,7 @@ export class Game {
     object.chosenCreatureType = null;
     delete object.chosenOnEnter;
     delete object.chosenNames;
+    delete object.chosenPlayer;
     // A battle's protector was this stint's (rule 400.7).
     delete object.protector;
     // The "as this enters" choices made before this move (rule 614.12 —
@@ -39735,6 +39801,7 @@ export class Game {
         object.chosenOnEnter = enterChoice.chosen;
       }
       if (enterChoice.chosenName != null) object.chosenNames = [enterChoice.chosenName];
+      if (enterChoice.chosenPlayer != null) object.chosenPlayer = enterChoice.chosenPlayer;
       // A battle enters protected by the player chosen for it (rule 310.9a).
       if (enterChoice.protector !== undefined) object.protector = enterChoice.protector;
       // Deadpool's exchange (rule 612.5): it enters with the other's rules

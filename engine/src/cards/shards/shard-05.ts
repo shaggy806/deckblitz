@@ -77,6 +77,7 @@ import _poolBereavement from "../pool/bereavement.js";
 import _poolBilbosGambit from "../pool/bilbos-gambit.js";
 import _poolBishopOfWings from "../pool/bishop-of-wings.js";
 import _poolBlackPantherClawsOfBast from "../pool/black-panther-claws-of-bast.js";
+import _poolBlackVise from "../pool/black-vise.js";
 import _poolBladedSentinel from "../pool/bladed-sentinel.js";
 import _poolBlanchwoodArmor from "../pool/blanchwood-armor.js";
 import _poolBlastedLandscape from "../pool/blasted-landscape.js";
@@ -912,6 +913,7 @@ const shard: CardShard = {
     _poolBilbosGambit,
     _poolBishopOfWings,
     _poolBlackPantherClawsOfBast,
+    _poolBlackVise,
     _poolBladedSentinel,
     _poolBlanchwoodArmor,
     _poolBlastedLandscape,

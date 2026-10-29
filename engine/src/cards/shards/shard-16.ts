@@ -752,6 +752,7 @@ import _poolTheLastRonin from "../pool/the-last-ronin.js";
 import _poolTheLastRoninsTechnique from "../pool/the-last-ronins-technique.js";
 import _poolTheLegendOfKuruk from "../pool/the-legend-of-kuruk.js";
 import _poolTheLocustGod from "../pool/the-locust-god.js";
+import _poolTheMasterGallifreysEnd from "../pool/the-master-gallifreys-end.js";
 import _poolTheSpeedDemon from "../pool/the-speed-demon.js";
 import _poolTheThing from "../pool/the-thing.js";
 import _poolTheirNameIsDeath from "../pool/their-name-is-death.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolTheLastRoninsTechnique,
     _poolTheLegendOfKuruk,
     _poolTheLocustGod,
+    _poolTheMasterGallifreysEnd,
     _poolTheSpeedDemon,
     _poolTheThing,
     _poolTheirNameIsDeath,

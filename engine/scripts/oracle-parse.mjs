@@ -950,6 +950,8 @@ const WHO_STEP = {
   "each player's": "any",
   // A Curse's "enchanted player's upkeep": the step of the player it's attached to.
   "enchanted player's": "attached",
+  // Black Vise's "the chosen player's upkeep" (`choosePlayerOnEnter`).
+  "the chosen player's": "chosen-player",
 };
 
 /**
@@ -1179,7 +1181,7 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
-  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
+  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
   return null;
@@ -3173,6 +3175,12 @@ export function parseFace(face, ctx = {}) {
       out.chooseCreatureTypeOnEnter = true;
       continue;
     }
+    // "As ~ enters, choose a player / an opponent." (rule 614.1c) — the
+    // chosen player its "the chosen player" lines read.
+    if ((m = /^As ~ enters, choose (a player|an opponent)\.$/.exec(line))) {
+      out.choosePlayerOnEnter = m[1] === "a player" ? "player" : "opponent";
+      continue;
+    }
     // "As ~ enters, choose a nonland card name." (rule 201.4, asked as it
     // enters — 614.12), and the statics that read the name.
     if ((m = /^As ~ enters, choose (?:a|an|any) (.*?)card name\.$/.exec(line)) && cardNameFilterOf(m[1]) !== null) {
@@ -4045,6 +4053,10 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // Cursed Rack's "the chosen player's maximum hand size is four".
+  if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {
+    return { affects: { scope: "self" }, maxHandSize: { who: "chosen-player", set: numberOf(m[1]) }, text };
+  }
   // Devotion (rule 700.5). A Theros God's "as long as your devotion to white
   // [and black] is less than N, ~ isn't a creature" (`godDevotion`), a
   // Demigod's "~'s power is equal to your devotion to red" (a CDA), and Altar

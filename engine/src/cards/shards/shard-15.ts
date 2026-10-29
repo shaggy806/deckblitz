@@ -685,6 +685,7 @@ import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheOoze from "../pool/the-ooze.js";
+import _poolTheRack from "../pool/the-rack.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
@@ -1495,6 +1496,7 @@ const shard: CardShard = {
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
     _poolTheOoze,
+    _poolTheRack,
     _poolTheTerrorOfSerpentsPass,
     _poolThermokarst,
     _poolThinkTwice,
