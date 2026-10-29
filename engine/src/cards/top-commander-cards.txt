@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4025 already implemented / 975 missing (marks refreshed 2026-10-29)
+4027 already implemented / 973 missing (marks refreshed 2026-10-29)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -707,7 +707,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   708  Chain Reaction                           {2}{R}{R}        Sorcery
 [x]   709  Life from the Loam                       {1}{G}           Sorcery
 [ ]   710  Archaeomancer's Map                      {2}{W}           Artifact
-[ ]   711  Fact or Fiction                          {3}{U}           Instant
+[x]   711  Fact or Fiction                          {3}{U}           Instant
 [x]   712  Castle Ardenvale                         {0}              Land
 [x]   713  Whip of Erebos                           {2}{B}{B}        Legendary Enchantment Artifact
 [x]   714  Golgari Signet                           {2}              Artifact
@@ -2978,7 +2978,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2985  Abraded Bluffs                           {0}              Land — Desert
 [x]  2986  Athreos, God of Passage                  {1}{W}{B}        Legendary Enchantment Creature — God
 [ ]  2987  Zellix, Sanity Flayer                    {2}{U}           Legendary Creature — Horror
-[ ]  2988  Liliana of the Veil                      {1}{B}{B}        Legendary Planeswalker — Liliana
+[x]  2988  Liliana of the Veil                      {1}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2989  Kykar, Wind's Fury                       {1}{U}{R}{W}     Legendary Creature — Bird Wizard
 [x]  2990  Repercussion                             {1}{R}{R}        Enchantment
 [x]  2991  Regal Caracal                            {3}{W}{W}        Creature — Cat
