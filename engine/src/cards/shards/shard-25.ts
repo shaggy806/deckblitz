@@ -448,6 +448,7 @@ import _poolMothriderSamurai from "../pool/mothrider-samurai.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
 import _poolMurkySewer from "../pool/murky-sewer.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
+import _poolMutiny from "../pool/mutiny.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysteriousPathlighter from "../pool/mysterious-pathlighter.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolMuYanlingWindRider,
     _poolMurkySewer,
     _poolMutagenicGrowth,
+    _poolMutiny,
     _poolMycosynthGolem,
     _poolMyrkulsInvoker,
     _poolMysteriousPathlighter,

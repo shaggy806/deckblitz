@@ -489,6 +489,7 @@ import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
 import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
+import _poolPatriarchsBidding from "../pool/patriarchs-bidding.js";
 import _poolPearlLakeAncient from "../pool/pearl-lake-ancient.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
@@ -1323,6 +1324,7 @@ const shard: CardShard = {
     _poolParoxysm,
     _poolPatchedPlaything,
     _poolPatchworkAutomaton,
+    _poolPatriarchsBidding,
     _poolPearlLakeAncient,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,

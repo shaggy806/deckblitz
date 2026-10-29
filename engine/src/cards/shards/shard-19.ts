@@ -356,6 +356,7 @@ import _poolHalanaKessigRanger from "../pool/halana-kessig-ranger.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
 import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
+import _poolHarshMercy from "../pool/harsh-mercy.js";
 import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavengulSkaab from "../pool/havengul-skaab.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
@@ -1234,6 +1235,7 @@ const shard: CardShard = {
     _poolHallowedFountain,
     _poolHandOfSilumgar,
     _poolHardbristleBandit,
+    _poolHarshMercy,
     _poolHauntedHellride,
     _poolHavengulSkaab,
     _poolHavenwoodWurm,

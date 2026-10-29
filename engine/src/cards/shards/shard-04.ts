@@ -608,6 +608,7 @@ import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
 import _poolShivanReef from "../pool/shivan-reef.js";
 import _poolShizukoCallerOfAutumn from "../pool/shizuko-caller-of-autumn.js";
+import _poolShowAndTell from "../pool/show-and-tell.js";
 import _poolShuFarmer from "../pool/shu-farmer.js";
 import _poolShuGrainCaravan from "../pool/shu-grain-caravan.js";
 import _poolSigardianPriest from "../pool/sigardian-priest.js";
@@ -1436,6 +1437,7 @@ const shard: CardShard = {
     _poolShimmeringWings,
     _poolShivanReef,
     _poolShizukoCallerOfAutumn,
+    _poolShowAndTell,
     _poolShuFarmer,
     _poolShuGrainCaravan,
     _poolSigardianPriest,

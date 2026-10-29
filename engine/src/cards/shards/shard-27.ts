@@ -560,6 +560,7 @@ import _poolRundveltHordemaster from "../pool/rundvelt-hordemaster.js";
 import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
+import _poolSadisticShellGame from "../pool/sadistic-shell-game.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
@@ -616,6 +617,7 @@ import _poolSleepCursedFaerie from "../pool/sleep-cursed-faerie.js";
 import _poolSleepMagic from "../pool/sleep-magic.js";
 import _poolSlickshotVaultBuster from "../pool/slickshot-vault-buster.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
+import _poolSmallpox from "../pool/smallpox.js";
 import _poolSmeltWardGatekeepers from "../pool/smelt-ward-gatekeepers.js";
 import _poolSmeltWardIgnus from "../pool/smelt-ward-ignus.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
@@ -1378,6 +1380,7 @@ const shard: CardShard = {
     _poolRuneOfProtectionBlue,
     _poolRunedStalactite,
     _poolRustGoliath,
+    _poolSadisticShellGame,
     _poolSagesKnowledge,
     _poolSaguMauler,
     _poolSanctumGuardian,
@@ -1434,6 +1437,7 @@ const shard: CardShard = {
     _poolSleepMagic,
     _poolSlickshotVaultBuster,
     _poolSlinkingSkirge,
+    _poolSmallpox,
     _poolSmeltWardGatekeepers,
     _poolSmeltWardIgnus,
     _poolSnappingCreeper,

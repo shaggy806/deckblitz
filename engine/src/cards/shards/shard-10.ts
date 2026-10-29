@@ -181,6 +181,7 @@ import _poolDeathPitOffering from "../pool/death-pit-offering.js";
 import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
 import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
+import _poolDecompose from "../pool/decompose.js";
 import _poolDeepFreeze from "../pool/deep-freeze.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefendTheHearth from "../pool/defend-the-hearth.js";
@@ -315,6 +316,7 @@ import _poolGreedsGambit from "../pool/greeds-gambit.js";
 import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
+import _poolGrindstone from "../pool/grindstone.js";
 import _poolGrowingDread from "../pool/growing-dread.js";
 import _poolGryffwingCavalry from "../pool/gryffwing-cavalry.js";
 import _poolGuardianAugmenter from "../pool/guardian-augmenter.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolDeathlessBehemoth,
     _poolDeathsCaress,
     _poolDecodeTransmissions,
+    _poolDecompose,
     _poolDeepFreeze,
     _poolDefendTheCelestus,
     _poolDefendTheHearth,
@@ -1168,6 +1171,7 @@ const shard: CardShard = {
     _poolGreyHostReinforcements,
     _poolGrimMonolith,
     _poolGrimPhysician,
+    _poolGrindstone,
     _poolGrowingDread,
     _poolGryffwingCavalry,
     _poolGuardianAugmenter,

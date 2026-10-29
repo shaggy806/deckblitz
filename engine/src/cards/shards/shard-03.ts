@@ -196,6 +196,7 @@ import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExcavation from "../pool/excavation.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
+import _poolExpansionAlgorithm from "../pool/expansion-algorithm.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolExtortion from "../pool/extortion.js";
 import _poolEyeGouge from "../pool/eye-gouge.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolEvidenceExaminer,
     _poolExcavation,
     _poolExhibitionTidecaller,
+    _poolExpansionAlgorithm,
     _poolExplosiveDerailment,
     _poolExtortion,
     _poolEyeGouge,

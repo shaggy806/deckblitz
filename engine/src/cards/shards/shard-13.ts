@@ -662,6 +662,7 @@ import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
 import _poolStrongholdConfessor from "../pool/stronghold-confessor.js";
+import _poolStrongholdRats from "../pool/stronghold-rats.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
@@ -1486,6 +1487,7 @@ const shard: CardShard = {
     _poolStrefanMaurerProgenitor,
     _poolStromkirkBloodthief,
     _poolStrongholdConfessor,
+    _poolStrongholdRats,
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,
