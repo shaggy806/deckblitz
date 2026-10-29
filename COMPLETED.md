@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: the chosen player, features only** (2026-10-29;
+  `decision:choose-player`, `effect:choose-opponent-most-life`,
+  `static:attacking-chosen-player-anthem`, `trigger:chosen-player-upkeep`). "As this enters,
+  choose a player / an opponent" (rule 614.1c) and `choose-opponent { remember }` kept as
+  `GameObject.chosenPlayer`, read by the `"chosen-player"` scope, step trigger subject,
+  `maxHandSize` and `attackingChosenPlayer` filter; `choose-opponent`'s non-random `anyPlayer`
+  and `mostLife`; the chosen player flagged on the tile and named in the log; the bots aim a
+  player choice at the opponent with the most life; the scaffolder's templates. Black Vise, The
+  Rack, Cursed Rack, Saskia the Unyielding, Triarch Stalker, Beckoning Will-o'-Wisp and The
+  Master, Gallifrey's End authored to prove it. 10 freed cards wait for `author-freed`.
 - **Need-keys Phase 2: separating into two piles, features only** (2026-10-29, `5050664c6`;
   `decision:separate-into-piles`). Rule 700.3 as the `separate-into-piles` effect and the
   `separate-piles` / `choose-pile` decisions (face-down piles, permanents token by token, each

@@ -111,10 +111,14 @@ section keeps only what to do next.
   `ChosenPlayerRef`, `discard-chosen`'s `destination`, `targetsChosenBy`; 16 proving cards),
   separate-into-piles (2026-10-29: rule 700.3's piles as an effect and two decisions, the client's
   pile popup and board piles; 20 freed, 4 proving cards — Fact or Fiction, Curator of Destinies,
-  Liliana of the Veil, Death or Glory).
-  **145 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `decision:choose-player` (23), `amount:count-for-chosen-player` (24),
-  `decision:choose-permanent` (24), `effect:discard-all-matching` (22).
+  Liliana of the Veil, Death or Glory), choose-player (2026-10-29: "as this enters, choose a
+  player / an opponent" and `choose-opponent { remember }` as `GameObject.chosenPlayer`, read by
+  a `"chosen-player"` scope, trigger subject, hand size and filter; `mostLife`; 10 freed, 7
+  proving cards — Black Vise, The Rack, Cursed Rack, Saskia the Unyielding, Triarch Stalker,
+  Beckoning Will-o'-Wisp, The Master, Gallifrey's End).
+  **155 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `amount:count-for-chosen-player` (24, builds on `chosenPlayer`), `decision:choose-permanent`
+  (24), `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

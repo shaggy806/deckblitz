@@ -441,6 +441,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   Fates), piles to the bottom in any order, play or search from a pile, Bend or Break, the combat
   piles. 145 freed cards queued. Next: `decision:choose-player` (23),
   `amount:count-for-chosen-player` (24), `decision:choose-permanent` (24).
+- **2026-10-29: choose-player, one family** — `choosePlayerOnEnter` through the existing
+  player-option decision (no new kind), `GameObject.chosenPlayer` read by a `"chosen-player"`
+  scope, step trigger subject, `maxHandSize` and filter; `choose-opponent`'s `remember`,
+  non-random `anyPlayer` and `mostLife`; a chosen-player flag on the client's tile; 7 proving
+  cards. One family only: the session neared ~300K tokens with the account's weekly limit at
+  98%. 155 freed cards queued. Next: `amount:count-for-chosen-player` (24, builds on
+  `chosenPlayer`), `decision:choose-permanent` (24), `effect:discard-all-matching` (22).
 
 ## Rough size
 
