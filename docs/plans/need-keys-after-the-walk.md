@@ -311,7 +311,8 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **Tier A** (each group frees ten or more cards, ~100 groups and ~1,350 cards): one session per
   family. It builds that family's top two to four groups in one context load, then authors every
   card `--feature <key>` lists for them through `card-author` agents (a normal batch, ~100
-  cards, one verify). Up to five sessions run in parallel, each on its own families, under
+  cards, one verify). From 2026-10-29 the two halves are separate sessions: `build-family`
+  builds families with only their proving cards, and `author-freed` batches the freed cards. Up to five sessions run in parallel, each on its own families, under
   `author-walks-parallel`'s rules: ranges become families, and the same lock, numbering and
   hand-off apply. Banding (46) and other single large keys get a session of their own.
 - **Tier B** (2–9 cards each, ~1,000 keys and ~1,500 cards): no session of their own. A Tier A
@@ -423,6 +424,17 @@ missing. Re-run `--greedy` for Phase 2's order.
   (Banquet Guests' twice X, Chisei's unless, Death Cloud already worked). Next:
   `trigger:dies-after-dealt-damage-by-source` (26), `effect:choices-by-other-players`' chooser
   group (26), `decision:separate-into-piles` (24), `effect:switch-pt` (24).
+
+- **2026-10-29: five families, features only** — the user split the session shape: `build-family`
+  now builds family after family with a few proving cards each, and the new `author-freed` skill
+  authors what they free from `cards:needs -- --stale`. Built: dies-after-dealt-damage-by-source
+  (`damagedThisTurnBy.source`, by stint), switch-pt (layer 7d), the defending player's attack
+  restrictions (`PlayerTest`), a target slot's player as `for-each-player`/`vote` chooser,
+  `discard-chosen` destinations (the revealed-hand family; the scaffolder now reads Duress-style
+  spells whole) and a triggered ability's targets chosen by another player (`targetsChosenBy`).
+  The spell/activated form of other-player targets and opponent-chosen modes stay open: they need
+  a pause mid-cast. 125 freed cards queued. Next: `decision:separate-into-piles` (24),
+  `decision:choose-player` (23), `amount:count-for-chosen-player` (24).
 
 ## Rough size
 

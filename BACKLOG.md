@@ -103,9 +103,15 @@ section keeps only what to do next.
   `remove-counters` decision for chosen counter costs and the `remove-counters` effect, modal
   activated abilities offered once per mode, `hostOfSource` with `onlyTapAbilities` and
   `counter`'s `lockSource`, a scoped sacrifice's count per player; 112 cards authored, 26 blocked —
-  17 of them on other open keys, four new narrow keys). Next: `trigger:dies-after-dealt-damage-by-source`
-  (26), `effect:choices-by-other-players`' chooser group (26), `decision:separate-into-piles` (24)
-  and `effect:switch-pt` (24).
+  17 of them on other open keys, four new narrow keys), and — features only, from 2026-10-29
+  (`build-family` builds, `author-freed` authors) — dies-after-dealt-damage-by-source,
+  switch-pt, attack-restriction-defending-player-condition, the target-player chooser,
+  chosen-from-revealed-hand destinations and a triggered ability's other-player targets (the
+  `damagedThisTurnBy` source, layer 7d, a `PlayerTest` on the defending player,
+  `ChosenPlayerRef`, `discard-chosen`'s `destination`, `targetsChosenBy`; 16 proving cards).
+  **125 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `decision:separate-into-piles` (24), `decision:choose-player` (23),
+  `amount:count-for-chosen-player` (24), `decision:choose-permanent` (24).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

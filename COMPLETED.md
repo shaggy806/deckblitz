@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2, five families built features-only: damage by this source, power/toughness
+  switches, restrictions on the defending player, other players' choices** (2026-10-29,
+  `9f9770204`, `5d7521fdd`, `baa99e72e`; `trigger:dies-after-dealt-damage-by-source`,
+  `filter:damaged-this-turn-by-source`, `effect:switch-pt`,
+  `static:attack-restriction-defending-player-condition`, `effect:target-player-exiles-from-hand`,
+  `effect:player-exiles-chosen-from-hand`, `effect:target-opponent-chooses`,
+  `effect:each-opponent-exiles-choice`, `effect:target-player-hand-card-to-library-top`,
+  `effect:exile-chosen-from-revealed-hand`, `effect:put-from-opponent-hand-onto-battlefield`,
+  `target:chosen-by-other-player`, `decision:trigger-object-controller-chooses-target`): the
+  `damagedThisTurnBy` source by stint, `switch-pt` in layer 7d, `cantAttackUnlessDefender` and
+  kin, a target slot's player as chooser, `discard-chosen`'s `destination`, `targetsChosenBy`.
+  Sengir Vampire, Thought-Knot Seer, Tidehollow Sculler, Twisted Image, Sea Serpent, Imperial
+  Edict, Erithizon and 9 more as proving cards; 125 freed cards left for `author-freed`.
+
 - **Need-keys Phase 2, four families in one batch: counters removed by choice, modal activated
   abilities, an Aura's lock on its host, counts in fixed fields** (2026-10-29, B254, `8fffb2969`,
   `ed61cbdb5`, `702053837`; `cost:remove-counters-from-chosen`,

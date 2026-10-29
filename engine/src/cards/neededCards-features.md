@@ -321,6 +321,34 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage by this source, switches, the defending player's restrictions, other players' choices — built 2026-10-29
+
+Five need-keys Phase 2 families, features only (`build-family` since
+2026-10-29: the cards they free wait for `author-freed`). **`damagedThisTurnBy:
+{ source: "this" | "host" }`**, matched by the source's battlefield stint
+(`DamageSourceRecord.sourceZoneChangeCount`, 400.7, 603.10a), in a dies
+trigger's filter and a "would die, exile it instead" replacement's (which now
+gets its source). **`switch-pt`**: `PtModifier.switchPt`, layer 7d (613.4d).
+**`cantAttackUnlessDefender` / `cantAttackIfDefender` /
+`cantBlockUnlessAttacker`**: a `PlayerTest` asked of the player an attack or
+block involves (506.2, 508.1c, 509.1b). **A chooser a target slot names**
+(`ChosenPlayerRef`) for `for-each-player` and a `vote`'s `choose`.
+**`discard-chosen`'s `destination`** (exile, linked by default; top of
+library; the battlefield under the chooser) and a `target` the event names.
+**`TriggeredAbility.targetsChosenBy`**: another player answers the
+`choose-targets` decision (`targetsFor` its controller — 603.3d, 700.2e). Keys:
+`trigger:dies-after-dealt-damage-by-source`,
+`filter:damaged-this-turn-by-source`, `effect:switch-pt`,
+`static:attack-restriction-defending-player-condition`,
+`effect:target-player-exiles-from-hand`,
+`effect:player-exiles-chosen-from-hand`, `effect:target-opponent-chooses`,
+`effect:each-opponent-exiles-choice`,
+`effect:target-player-hand-card-to-library-top`,
+`effect:exile-chosen-from-revealed-hand`,
+`effect:put-from-opponent-hand-onto-battlefield`,
+`target:chosen-by-other-player`,
+`decision:trigger-object-controller-chooses-target`.
+
 ### Counters removed by choice, modal activated abilities, an Aura's lock, dynamic counts — built 2026-10-29
 
 Four need-keys Phase 2 families in one build (B254). **The `remove-counters`
