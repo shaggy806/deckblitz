@@ -463,6 +463,7 @@ import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
 import _poolLovisaColdeyes from "../pool/lovisa-coldeyes.js";
 import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLumengridDrake from "../pool/lumengrid-drake.js";
+import _poolLunarInsight from "../pool/lunar-insight.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
 import _poolLunkErrant from "../pool/lunk-errant.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
@@ -1351,6 +1352,7 @@ const shard: CardShard = {
     _poolLovisaColdeyes,
     _poolLoxodonBattlePriest,
     _poolLumengridDrake,
+    _poolLunarInsight,
     _poolLunarchVeteran,
     _poolLunkErrant,
     _poolLurkingPredators,

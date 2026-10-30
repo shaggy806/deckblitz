@@ -541,10 +541,13 @@ export interface ActivatedAbility {
   /** A live cost reduction printed on the ability itself, mirroring
    * `CardDefinition.selfCostReduction` for a spell — the Kamigawa Channel
    * lands' "This ability costs {1} less to activate for each legendary
-   * creature you control." Unlike `selfCostReduction` there's no gating
-   * `condition`; every card needing one so far applies unconditionally. */
+   * creature you control." `condition` gates it, read from the source's
+   * side as `selfCostReduction`'s is — Sewer Crocodile's "costs {3} less to
+   * activate **if** there are five or more mana values among cards in your
+   * graveyard". */
   readonly costReduction?: {
     readonly reduceGeneric: CostReductionAmount;
+    readonly condition?: StaticCondition;
   };
   /**
    * "This ability costs {N} less to activate if it targets [`count` objects

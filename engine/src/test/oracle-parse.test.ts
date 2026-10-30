@@ -3158,3 +3158,52 @@ describe("a value chosen as it resolves (choose-value)", () => {
     expect(spell("Mondo", "Choose a color. Target player loses 2 life for each permanent of that color.").effect).toBeNull();
   });
 });
+
+describe("distinct values and Equipment attached to the source", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Distinct", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'a card for each different mana value / power among …'", () => {
+    const lunar = face("Sorcery", "Draw a card for each different mana value among nonland permanents you control.");
+    expect(lunar.complete).toBe(true);
+    expect(lunar.effect).toEqual({
+      kind: "draw",
+      amount: { aggregate: "distinct", of: "mana-value", filter: { notTypes: ["land"], controlledBy: "you" } },
+    });
+    const ratio = face("Sorcery", "Draw a card for each different power among creatures you control.");
+    expect(ratio.effect).toEqual({
+      kind: "draw",
+      amount: { aggregate: "distinct", of: "power", filter: { type: "creature", controlledBy: "you" } },
+    });
+  });
+
+  it("reads 'five or more mana values among cards in your graveyard', differently named lands, and Equipment on it", () => {
+    const aven = face(
+      "Creature — Bird Assassin",
+      "As long as there are five or more mana values among cards in your graveyard, this creature gets +2/+2 and has deathtouch.",
+    );
+    expect(aven.static[0]).toMatchObject({
+      grantPt: [2, 2],
+      grantKeywords: ["deathtouch"],
+      condition: {
+        kind: "aggregate",
+        value: { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+        compare: { op: "gte", n: 5 },
+      },
+    });
+    const amalgam = face(
+      "Artifact Creature — Golem",
+      "Test Distinct's power and toughness are each equal to the number of differently named lands you control.",
+    );
+    expect(amalgam.static[0].setBasePtFromCount).toEqual({
+      countOf: { aggregate: "distinct", of: "name", filter: { type: "land", controlledBy: "you" } },
+      plusPower: 0,
+      plusToughness: 0,
+    });
+    const gaveleer = face("Creature — Goblin Warrior", "This creature gets +2/+0 for each Equipment attached to it.");
+    expect(gaveleer.static[0].grantPtPerCount).toEqual({
+      filter: { subtype: "Equipment", attachedTo: { isSource: true } },
+      pt: [2, 0],
+    });
+    expect(gaveleer.complete).toBe(true);
+  });
+});

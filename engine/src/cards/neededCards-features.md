@@ -321,6 +321,39 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Distinct values and player-sided counts — built 2026-10-30
+
+The need-keys Phase 2 family `effect:amount-new-variants`, its top five
+units, features only. **`aggregate: "distinct"`** on an `AggregateSpec`
+counts the different mana values, powers, names (`distinctNameOf`), colour
+pairs, permanent types or subtypes of a type among matching permanents —
+or, with **`in: "graveyards"`**, graveyard cards — in every place an
+aggregate goes: an amount, an `aggregate` condition, a cost reduction, and
+now a CDA's `CountSpec`. An activated ability's `costReduction` takes a
+`condition`. **`countInGraveyard`** reads from one player's side
+(`forTarget`, `forPlayer`, as `countOf` does). **`CardFilter.isSource`**
+makes "Equipment attached to it" countable (the static P/T count now passes
+its source to the filter). **`countPlayers`' `where`** counts the players a
+condition holds for, read as a `whoIf` is. Several keys turned out to be
+covered already by `countOf`'s `forTarget` / `forPlayer` / `forEachPlayer`
+and `cardsInHand: { target }` (built after their cards were triaged).
+Keys: count-distinct-mana-values, count-distinct-powers, distinct-names-count,
+count-subtypes-among, amount-color-pairs, permanent-types-in-graveyard,
+cards-in-target-player-hand, count-in-target-player-graveyard,
+per-player-count-in-graveyard, count-equipment-attached-to-source,
+count-for-trigger-player, count-from-chosen-player,
+count-of-damaged-players-permanents, count-of-target-players-permanents,
+players-controlling-more-amount, opponents-controlling-count,
+opponents-with-less-life-count, count-graveyards-with-n-cards,
+count-defending-player-controls, per-opponent-count-damage. 13 proving
+cards: Lunar Insight, Golden Ratio, Aven Heartstabber, Sewer Crocodile,
+Awakened Amalgam, Corpse Augur, Roiling Terrain, Goblin Gaveleer, Kemba,
+Kha Regent, Oreskos Explorer, Priest of the Blessed Graf, Terra Ravager,
+Treacherous Terrain. Left open: distinct *mana costs* (Embodiment of
+Agonies — the {X} ruling unchecked), counter kinds on one object, colours
+among spells cast, players who have lost, a sum over several target
+opponents (Call the Coppercoats), and a margin ("at least two more lands").
+
 ### A value chosen as it resolves — built 2026-10-30
 
 The need-keys Phase 2 family `decision:choose-card-name`'s chosen-value

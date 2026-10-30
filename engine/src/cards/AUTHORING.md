@@ -735,8 +735,9 @@ sacrifices half the non-God creatures they control" is a `sacrifice` of
 }, round: "down" }`, each player's count read before anyone sacrifices — and
 `damage`/`draw`/`lose-life` with a `who` scope read it for each player the
 same way (Typhoon's "each opponent … the number of Islands that player
-controls"; a `countInGraveyard` takes `forEachPlayer` too, Nature's
-Resurgence); `forPlayer: EffectPlayerRef` reads it from one named player's
+controls"; a `countInGraveyard` takes `forEachPlayer`, `forTarget` and
+`forPlayer` too — Nature's Resurgence, Corpse Augur's "target player's
+graveyard", Roiling Terrain's "that player's graveyard"); `forPlayer: EffectPlayerRef` reads it from one named player's
 side — `{ controllerOfTarget: 0 }` (Weight of Spires' "that creature's
 controller"), `"trigger-player"` (Emissary of Hope's "that player"),
 `"chosen-player"` — 0 when it names nobody),
@@ -748,7 +749,18 @@ or more **lore counters among Sagas you control**" (`of: { counters: "lore"
 }` in an `aggregate` condition). Computed values, so anthems and counters
 count; mana value off the printed cost with `{X}` as 0. A **sum counts a
 token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
-A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b),
+A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;
+`aggregate: "distinct"` counts the **different** values instead, each once —
+`of: "mana-value" | "power" | "name" | "color-pair" | "permanent-type" | {
+subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's "each different
+mana value among nonland permanents you control", Golden Ratio's "each
+different power", Awakened Amalgam's "differently named lands" (as a CDA's
+`setBasePtFromCount.countOf`), Tam's "planeswalker types among planeswalkers
+you control", a changeling every creature type; `in: "graveyards"` reads the
+cards in graveyards instead, `ownedBy: "you"` for yours — Aven Heartstabber's
+"five or more mana values among cards in your graveyard" is an `aggregate`
+condition, Sewer Crocodile's the `condition` on an activated ability's
+`costReduction`),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died
@@ -786,7 +798,14 @@ Preserve's X/X), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard
 Bearer; with `anyController: true`, the global one — Spymaster's Vault's
 "the number of creatures that died this turn"), `{ countPlayers: PlayerScope }` (Inspired Sphinx; counts living
-players, so it shrinks as a multiplayer game does),
+players, so it shrinks as a multiplayer game does; `where: StaticCondition`
+counts only the players it holds for, each read as a `for-each-player`'s
+`whoIf` — "you" the controller, the player asked about `"that-player"`:
+Oreskos Explorer's "players who control more lands than you" is `{
+countPlayers: "each-player", where: { kind: "player-compare", stat: {
+controls: { type: "land" } }, compare: "fewer", than: "that-player" } }`,
+"each graveyard with seven or more cards" an `of-player` over
+`cards-in-graveyard`),
 `{ castThisTurn: CardFilter, who?, greatest?: "mana-value" }` (the spells `who`
 — you by default — cast this turn that match, as they were cast: how many, or
 the greatest mana value among them, {X} counted — Rootha, Mastering the
@@ -2364,7 +2383,7 @@ them has to match as well (historic is `anyOf: [{ type: "artifact" },
 { supertype: "legendary" }, { subtype: "Saga" }]`; Dogmeat's "enchanted or
 equipped" is two). `attachedTo: CardFilter` is what an Aura or Equipment is attached
 to — Conqueror's Flail's "as long as this Equipment is attached to a creature" is a
-`source` condition of `{ attachedTo: { type: "creature" } }`. `equipmentAttached: NumCompare` counts the Equipment on it, whoever controls them — Balan's "as long as two or more Equipment are attached to it" is a `source` condition of `{ equipmentAttached: { op: "gte", n: 2 } }` (on the battlefield only). `equipped` / `enchanted` ask whether an Equipment / Aura is
+`source` condition of `{ attachedTo: { type: "creature" } }`; `isSource: true` is the source itself, so "**for each** Equipment attached to it" counts `{ subtype: "Equipment", attachedTo: { isSource: true } }` (Goblin Gaveleer's `grantPtPerCount`, Kemba, Kha Regent's `countOf`) and "attached to equipped creature" `attachedTo: { hostOfSource: true }`. `equipmentAttached: NumCompare` counts the Equipment on it, whoever controls them — Balan's "as long as two or more Equipment are attached to it" is a `source` condition of `{ equipmentAttached: { op: "gte", n: 2 } }` (on the battlefield only). `equipped` / `enchanted` ask whether an Equipment / Aura is
 attached, whoever controls it (`enchantedBy: "you"` — an Aura *you* control); `modified` is rule 700.9 — a counter, an
 Equipment, or an Aura controlled by the permanent's *own* controller.
 `manaSpent` compares the mana spent to cast it (The Emperor of Palamecia's

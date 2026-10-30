@@ -583,6 +583,7 @@ import _poolRitualChamber from "../pool/ritual-chamber.js";
 import _poolRixMaadiDungeonPalace from "../pool/rix-maadi-dungeon-palace.js";
 import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
+import _poolRoilingTerrain from "../pool/roiling-terrain.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
 import _poolRuthlessDisposal from "../pool/ruthless-disposal.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _poolRixMaadiDungeonPalace,
     _poolRoadsideBlowout,
     _poolRocOfKherRidges,
+    _poolRoilingTerrain,
     _poolRoxanneStarfallSavant,
     _poolRumblingSlum,
     _poolRuthlessDisposal,

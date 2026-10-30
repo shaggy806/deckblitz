@@ -34,7 +34,8 @@ import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
-import { hasSubtype } from "./subtypes.js";
+import { CREATURE_TYPES } from "./creature-types.js";
+import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
 import { thisWayEntries } from "./this-way.js";
@@ -335,6 +336,14 @@ export interface CardFilter {
    * nothing, nothing matches.
    */
   readonly hostOfSource?: boolean;
+  /**
+   * It is (or isn't) the one applying the filter itself — `FilterContext.
+   * source`. Mostly inside `attachedTo`: Goblin Gaveleer's "+2/+0 for each
+   * Equipment **attached to it**" counts `{ subtype: "Equipment",
+   * attachedTo: { isSource: true } }`, Kemba, Kha Regent's upkeep trigger the
+   * same. Without a source, nothing is it.
+   */
+  readonly isSource?: boolean;
   /**
    * It is the object in this target slot of the resolving spell or ability,
    * or has the same name as it (rule 201.2a) — Maelstrom Pulse's "destroy
@@ -1267,6 +1276,9 @@ export function matchesFilter(
     if (filter.bandedWithSource !== undefined && banded !== filter.bandedWithSource) return false;
     if (filter.bandedWith !== undefined && !banded) return false;
   }
+  if (filter.isSource !== undefined && (ctx.source !== undefined && ctx.source === id) !== filter.isSource) {
+    return false;
+  }
   if (filter.hostOfSource !== undefined) {
     const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
     const host =
@@ -1840,14 +1852,118 @@ export type AggregateOf = "power" | "toughness" | "mana-value" | { readonly coun
  *   greatest value), which is what every printed "greatest … among" means
  *   on an empty board.
  *
+ * - `distinct` counts the **different** values of one property among them,
+ *   each once however many share it — see {@link DistinctOf}. Lunar
+ *   Insight's "a card for each different mana value among nonland
+ *   permanents you control", Golden Ratio's "each different power among
+ *   creatures you control".
+ *
  * `filter` is evaluated from the ability's controller's perspective, as
- * `countOf` is. `excludeSelf` is "**other** creatures you control".
+ * `countOf` is. `excludeSelf` is "**other** creatures you control". `in:
+ * "graveyards"` reads the cards in every graveyard instead of the
+ * battlefield, the filter's `ownedBy: "you"` narrowing it to yours — Aven
+ * Heartstabber's "five or more mana values among cards in your graveyard"
+ * is a `distinct` `"mana-value"` there. Tokens aren't cards.
  */
-export interface AggregateSpec {
-  readonly aggregate: "sum" | "max";
-  readonly of: AggregateOf;
+export type AggregateSpec =
+  | (AggregateBase & { readonly aggregate: "sum" | "max"; readonly of: AggregateOf })
+  | (AggregateBase & { readonly aggregate: "distinct"; readonly of: DistinctOf });
+
+interface AggregateBase {
   readonly filter: CardFilter;
   readonly excludeSelf?: boolean;
+  readonly in?: "graveyards";
+}
+
+/**
+ * What a `distinct` aggregate tells apart:
+ *
+ * - `"mana-value"`: a land's is 0 and counts as one (rule 202.3a), `{X}` 0
+ *   off the stack (202.3e).
+ * - `"power"`: its power now.
+ * - `"name"` — "differently named lands" (Awakened Amalgam): a split card's
+ *   two names together are one; a face-down permanent has none (rule
+ *   708.2a) and adds nothing. See {@link distinctNameOf}.
+ * - `"color-pair"`: Niv-Mizzet, Guildpact's "different color pairs among
+ *   permanents you control that are exactly two colors" — only a permanent
+ *   of exactly two colours has one.
+ * - `"permanent-type"`: the permanent types among its card types (rule
+ *   110.4 — artifact, battle, creature, enchantment, land, planeswalker):
+ *   Korvold, Gleeful Glutton's "permanent types among cards in your
+ *   graveyard".
+ * - `{ subtypesOf }`: its subtypes of that card type — "creature types among
+ *   creatures you control" (Valiant Changeling, where a changeling is every
+ *   one of them, rule 702.73a), "planeswalker types among planeswalkers you
+ *   control" (Tam, the Possibility). Only an object of that type has any.
+ */
+export type DistinctOf =
+  | "mana-value"
+  | "power"
+  | "name"
+  | "color-pair"
+  | "permanent-type"
+  | { readonly subtypesOf: "creature" | "planeswalker" };
+
+/** The name a "differently named" count tells an object by: its names
+ * ({@link namesOf}) as one, a token's the one its maker gave it — a
+ * `tokenName` or a copy's — else, where its registry key is a generic "…
+ * Token", its subtypes plus "Token" (rule 111.4). `undefined` for none (face
+ * down). */
+export function distinctNameOf(registry: CardRegistry, object: GameObject): string | undefined {
+  const names = namesOf(registry, object);
+  if (names.length === 0) return undefined;
+  if (!object.isToken) return names.join(" // ");
+  const named = nameOf(object);
+  const key = printedCardName(object);
+  return named !== key || !/\bToken\b/.test(key) || !registry.has(key)
+    ? named
+    : `${registry.get(key).subtypes.join(" ")} Token`;
+}
+
+const PERMANENT_TYPES: readonly CardType[] = ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"];
+
+/** The values one object gives a `distinct` aggregate — none, one, or
+ * several (two permanent types, a creature's creature types). */
+function distinctValuesOf(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  of: DistinctOf,
+): readonly (string | number)[] {
+  const object = state.objects[id];
+  if (object === undefined) return [];
+  if (of === "mana-value") return [aggregateValueOf(state, registry, id, "mana-value")];
+  if (of === "name") {
+    const name = distinctNameOf(registry, object);
+    return name === undefined ? [] : [name];
+  }
+  const c = computeCharacteristics(state, registry, id);
+  if (of === "power") return [c.power];
+  if (of === "color-pair") return c.colors.size === 2 ? [[...c.colors].sort().join("")] : [];
+  if (of === "permanent-type") return c.types.filter((t) => PERMANENT_TYPES.includes(t));
+  if (!c.types.includes(of.subtypesOf)) return [];
+  if (of.subtypesOf === "creature") {
+    return hasSubtype(c.subtypes, EVERY_CREATURE_TYPE) ? CREATURE_TYPES : c.subtypes.filter(isCreatureType);
+  }
+  return c.subtypes.filter((s) => !isTypeMarker(s) && !isCreatureType(s) && !isLandType(s));
+}
+
+/** The cards in every graveyard matching `filter` from `you`'s side, one
+ * apiece — an aggregate's `in: "graveyards"`. Tokens aren't cards. */
+export function graveyardMatches(
+  state: GameState,
+  registry: CardRegistry,
+  filter: CardFilter,
+  you: PlayerId,
+): WeightedMatch[] {
+  const out: WeightedMatch[] = [];
+  for (const player of state.turnOrder) {
+    for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
+      if (state.objects[id]?.isToken === true) continue;
+      if (matchesFilter(state, registry, id, filter, { you })) out.push({ id, weight: 1 });
+    }
+  }
+  return out;
 }
 
 /** One permanent's current power, toughness or mana value — computed, so
@@ -1875,11 +1991,16 @@ export function aggregateOver(
   state: GameState,
   registry: CardRegistry,
   matches: readonly WeightedMatch[],
-  aggregate: "sum" | "max",
-  of: AggregateOf,
+  spec: AggregateSpec,
 ): number {
   if (matches.length === 0) return 0;
-  if (aggregate === "sum") {
+  if (spec.aggregate === "distinct") {
+    const seen = new Set<string | number>();
+    for (const m of matches) for (const v of distinctValuesOf(state, registry, m.id, spec.of)) seen.add(v);
+    return seen.size;
+  }
+  const of = spec.of;
+  if (spec.aggregate === "sum") {
     return matches.reduce((n, m) => n + aggregateValueOf(state, registry, m.id, of) * m.weight, 0);
   }
   return matches.reduce(

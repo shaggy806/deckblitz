@@ -559,6 +559,7 @@ import _poolPolisCrusher from "../pool/polis-crusher.js";
 import _poolPowderGanger from "../pool/powder-ganger.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
+import _poolPriestOfTheBlessedGraf from "../pool/priest-of-the-blessed-graf.js";
 import _poolPrismabasher from "../pool/prismabasher.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
@@ -1479,6 +1480,7 @@ const shard: CardShard = {
     _poolPowderGanger,
     _poolPredatorySliver,
     _poolPridefulParent,
+    _poolPriestOfTheBlessedGraf,
     _poolPrismabasher,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,

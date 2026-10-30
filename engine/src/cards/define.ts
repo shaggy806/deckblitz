@@ -482,6 +482,15 @@ export type CountSpec =
    * computes, so a CDA can read other permanents' without the dependency
    * problem a greatest *power* would have (AUTHORING §15). */
   | { readonly greatestManaValueOf: CardFilter }
+  /** A sum, maximum or count of different values over permanents or
+   * graveyard cards — the `EffectAmount` {@link AggregateSpec}. Awakened
+   * Amalgam's "power and toughness are each equal to the number of
+   * differently named lands you control" is `{ aggregate: "distinct", of:
+   * "name", filter: { type: "land", controlledBy: "you" } }`. Its own
+   * permanent counts when it matches. A power read here is the CDA
+   * dependency problem of AUTHORING §15; names, mana values and types aren't.
+   */
+  | AggregateSpec
   /** Its controller's devotion to these colours (rule 700.5) — Anax,
    * Hardened in the Forge's "power is equal to your devotion to red" is `{
    * devotionTo: ["R"] }` with `only: "power"`. Two colours are "devotion to

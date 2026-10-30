@@ -52,6 +52,7 @@ import _poolAvenWindGuide from "../pool/aven-wind-guide.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolAvianOddity from "../pool/avian-oddity.js";
 import _poolAviaryMechanic from "../pool/aviary-mechanic.js";
+import _poolAwakenedAmalgam from "../pool/awakened-amalgam.js";
 import _poolAzraOddsmaker from "../pool/azra-oddsmaker.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBadMoon from "../pool/bad-moon.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolAvengersUnderSiege,
     _poolAvianOddity,
     _poolAviaryMechanic,
+    _poolAwakenedAmalgam,
     _poolAzraOddsmaker,
     _poolBaSingSe,
     _poolBadMoon,

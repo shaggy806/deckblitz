@@ -286,6 +286,7 @@ import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoblinSwineRider from "../pool/goblin-swine-rider.js";
 import _poolGodtrackerOfJund from "../pool/godtracker-of-jund.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
+import _poolGoldenRatio from "../pool/golden-ratio.js";
 import _poolGoldhound from "../pool/goldhound.js";
 import _poolGoldmaneGriffin from "../pool/goldmane-griffin.js";
 import _poolGollumsBite from "../pool/gollums-bite.js";
@@ -726,6 +727,7 @@ import _poolTectonicBreak from "../pool/tectonic-break.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolTendoIceBridge from "../pool/tendo-ice-bridge.js";
+import _poolTerraRavager from "../pool/terra-ravager.js";
 import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
 import _poolThaliasGeistcaller from "../pool/thalias-geistcaller.js";
 import _poolThallidDevourer from "../pool/thallid-devourer.js";
@@ -1165,6 +1167,7 @@ const shard: CardShard = {
     _poolGoblinSwineRider,
     _poolGodtrackerOfJund,
     _poolGoldMyr,
+    _poolGoldenRatio,
     _poolGoldhound,
     _poolGoldmaneGriffin,
     _poolGollumsBite,
@@ -1605,6 +1608,7 @@ const shard: CardShard = {
     _poolTempestHarvester,
     _poolTemporalAdept,
     _poolTendoIceBridge,
+    _poolTerraRavager,
     _poolTerritorialAllosaurus,
     _poolThaliasGeistcaller,
     _poolThallidDevourer,

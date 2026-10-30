@@ -634,7 +634,27 @@
   "decision:choose-card-type",
   "amount:revealed-hand-cards-of-chosen-type",
   "decision:choose-counter-kind",
-  "effect:remove-counter-chosen-kind"
+  "effect:remove-counter-chosen-kind",
+  "effect:count-distinct-mana-values",
+  "effect:count-distinct-powers",
+  "effect:distinct-names-count",
+  "effect:count-subtypes-among",
+  "effect:amount-color-pairs",
+  "effect:permanent-types-in-graveyard",
+  "effect:cards-in-target-player-hand",
+  "effect:count-in-target-player-graveyard",
+  "effect:per-player-count-in-graveyard",
+  "effect:count-equipment-attached-to-source",
+  "amount:count-for-trigger-player",
+  "effect:count-from-chosen-player",
+  "effect:count-of-damaged-players-permanents",
+  "effect:count-of-target-players-permanents",
+  "effect:players-controlling-more-amount",
+  "effect:opponents-controlling-count",
+  "effect:opponents-with-less-life-count",
+  "effect:count-graveyards-with-n-cards",
+  "effect:count-defending-player-controls",
+  "effect:per-opponent-count-damage"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -1231,8 +1231,17 @@ export function parseSentence(sentence, ctx) {
   // X for a cast-time X.
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
-  if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   let m;
+  // "Draw a card for each different mana value among nonland permanents you
+  // control" (Lunar Insight), "… different power among creatures you
+  // control" (Golden Ratio): a `distinct` aggregate.
+  if ((m = /^draw a card for each different (mana value|power) among (.+?) you control\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    const of = m[1].toLowerCase() === "power" ? "power" : "mana-value";
+    return { kind: "draw", amount: { aggregate: "distinct", of, filter: { ...filter, controlledBy: "you" } } };
+  }
+  if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
   // ability with a duration. Its effect is read as a printed trigger's is —
@@ -3949,6 +3958,13 @@ const REVOLT_CONDITION = { kind: "turn-history", what: "left" };
  * changed control since. */
 const CELEBRATION_CONDITION = { kind: "turn-history", what: "entered", filter: { notTypes: ["land"] }, atLeast: 2 };
 
+/** "There are five or more mana values among cards in your graveyard". */
+const FIVE_MANA_VALUES = {
+  kind: "aggregate",
+  value: { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+  compare: { op: "gte", n: 5 },
+};
+
 /** A static's trailing "as long as …" by its words, and the `condition` it
  * becomes (`parseStatic`). */
 const STATIC_CONDITION_SUFFIXES = [
@@ -3964,6 +3980,9 @@ const STATIC_CONDITION_PREFIXES = [
   // Renowned (rule 702.112b): "As long as ~ is renowned, it has menace"
   // (Goblin Glory Chaser) — the "it" is ~.
   ["As long as ~ is renowned, ", { kind: "source", filter: { renowned: true } }],
+  // Murders at Karlov Manor's "five or more mana values among cards in your
+  // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
+  ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
 ];
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
@@ -4515,6 +4534,31 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       setBasePtFromCount: { countOf: { basicLandTypes: "you" }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
+  // A count of different names (a `distinct` aggregate) as a CDA: Awakened
+  // Amalgam's "… the number of differently named lands you control".
+  if ((m = /^~'s power and toughness are each equal to the number of differently named (.+?) you control\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: {
+          countOf: { aggregate: "distinct", of: "name", filter: { ...filter, controlledBy: "you" } },
+          plusPower: 0,
+          plusToughness: 0,
+        },
+        text,
+      };
+    }
+  }
+  // "~ gets +2/+0 for each Equipment attached to it" (Goblin Gaveleer): the
+  // Equipment whose host is the source itself.
+  if ((m = /^~ gets ([+-]\d+)\/([+-]\d+) for each (Aura|Equipment) attached to (?:it|~)\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      grantPtPerCount: { filter: { subtype: m[3], attachedTo: { isSource: true } }, pt: [Number(m[1]), Number(m[2])] },
       text,
     };
   }

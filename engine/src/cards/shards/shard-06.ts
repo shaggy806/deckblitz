@@ -503,6 +503,7 @@ import _poolOpalArchangel from "../pool/opal-archangel.js";
 import _poolOpalChampion from "../pool/opal-champion.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
+import _poolOreskosExplorer from "../pool/oreskos-explorer.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
 import _poolOvikaEnigmaGoliath from "../pool/ovika-enigma-goliath.js";
 import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolOpalChampion,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
+    _poolOreskosExplorer,
     _poolOutpostSiege,
     _poolOvikaEnigmaGoliath,
     _poolOwlbearShepherd,

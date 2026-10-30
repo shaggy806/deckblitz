@@ -457,6 +457,17 @@ export type EffectAmount =
        * on — "each player draws a card for each creature card in **their**
        * graveyard" (Nature's Resurgence). As `countOf`'s. */
       readonly forEachPlayer?: true;
+      /** Read the filter from the side of the player in this target slot —
+       * "the number of creature cards in **target player's** graveyard"
+       * (Corpse Augur: `{ countInGraveyard: { type: "creature", ownedBy:
+       * "you" }, forTarget: 0 }`). 0 when the slot holds no player, or one
+       * gone illegal. As `countOf`'s. */
+      readonly forTarget?: number;
+      /** Read the filter from the side of the one player this names — "land
+       * cards in **that player's** graveyard" after destroying their land
+       * (Roiling Terrain: `{ controllerOfTarget: 0 }`). 0 when it names
+       * nobody. As `countOf`'s. */
+      readonly forPlayer?: EffectPlayerRef;
     }
   /** How many suspended cards the effect's controller owns (rule 702.62b —
    * in exile, with suspend, with a time counter): Rose Tyler's "a time
@@ -552,8 +563,18 @@ export type EffectAmount =
   | { readonly opponentsControllingFewer: CardFilter }
   /** How many players a `PlayerScope` covers — Inspired Sphinx's "draw cards
    * equal to **the number of opponents you have**". Counts living players, so
-   * it shrinks as a multiplayer game does. */
-  | { readonly countPlayers: PlayerScope }
+   * it shrinks as a multiplayer game does.
+   *
+   * `where` counts only the players it holds for, each read as a
+   * `for-each-player`'s `whoIf` is — "you" still the controller, the player
+   * asked about `"that-player"` (an `of-player` reads that player's own
+   * state): Oreskos Explorer's "the number of players who control more lands
+   * than you" is `{ countPlayers: "each-player", where: { kind:
+   * "player-compare", stat: { controls: { type: "land" } }, compare:
+   * "fewer", than: "that-player" } }`; The Master of Lake-town's "each
+   * graveyard with seven or more cards in it" is an `of-player` over
+   * `cards-in-graveyard`. */
+  | { readonly countPlayers: PlayerScope; readonly where?: StaticCondition }
   /** How much life the players `who` names (default everyone) have lost so
    * far in the resolution under way — "each opponent loses 1 life and you
    * gain **that much** life" (extort), "you gain life equal to the life lost
@@ -9528,6 +9549,15 @@ function signedAmountValue(
     return amount.round === "up" ? Math.ceil(n) : Math.floor(n);
   }
   if ("countInGraveyard" in amount) {
+    if (amount.forTarget !== undefined) {
+      const ref = ctx.targets[amount.forTarget];
+      if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
+      return ctx.countInGraveyard(amount.countInGraveyard, ref.player);
+    }
+    if (amount.forPlayer !== undefined) {
+      const player = effectPlayer(amount.forPlayer, ctx);
+      return player === undefined ? 0 : ctx.countInGraveyard(amount.countInGraveyard, player);
+    }
     return ctx.countInGraveyard(amount.countInGraveyard, amount.forEachPlayer === true ? each : undefined);
   }
   if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
@@ -9613,7 +9643,11 @@ function signedAmountValue(
     }
     return done.reduce((n, entry) => n + valueOf(entry), 0);
   }
-  if ("countPlayers" in amount) return ctx.playersInScope(amount.countPlayers).length;
+  if ("countPlayers" in amount) {
+    const players = ctx.playersInScope(amount.countPlayers);
+    const where = amount.where;
+    return where === undefined ? players.length : players.filter((p) => ctx.aboutPlayer(p).conditionMet(where)).length;
+  }
   if ("lifeLostThisWay" in amount) {
     return ctx.lifeLostThisWay(amount.who === undefined ? undefined : ctx.playersInScope(amount.who));
   }

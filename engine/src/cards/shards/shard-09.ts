@@ -650,6 +650,7 @@ import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
 import _poolSerratedArrows from "../pool/serrated-arrows.js";
 import _poolSettleBeyondReality from "../pool/settle-beyond-reality.js";
+import _poolSewerCrocodile from "../pool/sewer-crocodile.js";
 import _poolShadowRider from "../pool/shadow-rider.js";
 import _poolShadowheartDarkJusticiar from "../pool/shadowheart-dark-justiciar.js";
 import _poolShaperParasite from "../pool/shaper-parasite.js";
@@ -1532,6 +1533,7 @@ const shard: CardShard = {
     _poolSerrasSanctum,
     _poolSerratedArrows,
     _poolSettleBeyondReality,
+    _poolSewerCrocodile,
     _poolShadowRider,
     _poolShadowheartDarkJusticiar,
     _poolShaperParasite,

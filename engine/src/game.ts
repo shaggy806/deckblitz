@@ -240,6 +240,8 @@ import type {
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
   aggregateOver,
+  distinctNameOf,
+  graveyardMatches,
   attachmentsOf,
   compareNum,
   manaValueOfObject,
@@ -15472,7 +15474,13 @@ export class Game {
       const floor = Math.max(0, 1 - otherSymbols);
       generic = Math.max(Math.min(generic, floor), generic - mod.reduceGenericLeavingOne);
     }
-    if (ability.costReduction !== undefined) {
+    const reducer = this.state.objects[sourceId];
+    if (
+      ability.costReduction !== undefined &&
+      (ability.costReduction.condition === undefined ||
+        (reducer !== undefined &&
+          staticConditionMet(this.state, this.registry, reducer, ability.costReduction.condition)))
+    ) {
       // Its own source: "costs {1} less for each page counter on this" (Diary
       // of Dreams) reads that permanent's counters.
       generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player, sourceId);
@@ -23717,15 +23725,13 @@ export class Game {
         // size or a note to tell it apart ("4/4 Vigilant Angel Token" is an
         // Angel Token), and a copy has the name of what it copies (rule
         // 707.2): a card's, or a token's worked out the same way.
+        // `distinctNameOf` names it so.
         const names = new Set<string>();
         for (const id of this.battlefieldMatching(controller, filter)) {
           const object = this.state.objects[id];
           if (!object.isToken) continue;
-          const named = nameOf(object);
-          const key = printedCardName(object);
-          names.add(
-            named !== key || !/\bToken\b/.test(key) ? named : `${this.registry.get(key).subtypes.join(" ")} Token`,
-          );
+          const name = distinctNameOf(this.registry, object);
+          if (name !== undefined) names.add(name);
         }
         return names.size;
       },
@@ -30480,13 +30486,16 @@ export class Game {
     spec: AggregateSpec,
     except: readonly ObjectId[] = [],
   ): number {
-    const matches = weightedMatches(
-      this.state,
-      this.state.zones.shared.battlefield,
-      (id) => matchesFilter(this.state, this.registry, id, spec.filter, { you }),
-      except,
-    );
-    return aggregateOver(this.state, this.registry, matches, spec.aggregate, spec.of);
+    const matches =
+      spec.in === "graveyards"
+        ? graveyardMatches(this.state, this.registry, spec.filter, you)
+        : weightedMatches(
+            this.state,
+            this.state.zones.shared.battlefield,
+            (id) => matchesFilter(this.state, this.registry, id, spec.filter, { you }),
+            except,
+          );
+    return aggregateOver(this.state, this.registry, matches, spec);
   }
 
   /** The generic mana a `CostReductionAmount` takes off, for `player`, with

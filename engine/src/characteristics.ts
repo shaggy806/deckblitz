@@ -41,6 +41,7 @@ import type {
 import { bestowedDefinition, printedHasAbility } from "./cards/define.js";
 import {
   aggregateOver,
+  graveyardMatches,
   aggregateValueOf,
   compareNum,
   matchesFilter,
@@ -868,14 +869,11 @@ function evalStaticCondition(
       const { value } = condition;
       const except =
         value.excludeSelf === true && opts.includeSelf === true ? [source.id] : [];
-      const matches = matchesWhere(
-        (id) => matchesFilter(state, registry, id, value.filter, { you }),
-        except,
-      );
-      return compareNum(
-        aggregateOver(state, registry, matches, value.aggregate, value.of),
-        condition.compare,
-      );
+      const matches =
+        value.in === "graveyards"
+          ? graveyardMatches(state, registry, value.filter, you)
+          : matchesWhere((id) => matchesFilter(state, registry, id, value.filter, { you }), except);
+      return compareNum(aggregateOver(state, registry, matches, value), condition.compare);
     }
     case "source-greatest": {
       if (source.zone !== "battlefield") return false;
@@ -2891,6 +2889,15 @@ export function countValue(
     if ("cardTypesInGraveyard" in spec) {
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
+    if ("aggregate" in spec) {
+      const matches =
+        spec.in === "graveyards"
+          ? graveyardMatches(state, registry, spec.filter, controller)
+          : weightedMatches(state, state.zones.shared.battlefield, (id) =>
+              matchesFilter(state, registry, id, spec.filter, { you: controller }),
+            );
+      return Math.max(0, aggregateOver(state, registry, matches, spec));
+    }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
     if ("partySize" in spec) return partySizeOf(state, registry, controller);
@@ -3792,7 +3799,7 @@ function collectStaticEffects(
               state.zones.shared.battlefield.filter(
                 (id) =>
                   !(per.excludeSelf === true && id === source.id) &&
-                  matchesFilter(state, registry, id, f, { you: side }),
+                  matchesFilter(state, registry, id, f, { you: side, source: source.id }),
               ),
             ) + (per.excludeSelf === true ? othersInOwnStack(state, registry, source, f) : 0)
           );
