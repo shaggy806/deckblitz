@@ -48,6 +48,9 @@ export interface PlayerPanelProps {
   readonly onOpenExile?: () => void
   readonly onOpenHand?: () => void
   readonly onOpenEmblems?: () => void
+  /** Opens this player's sideboard (rule 400.11a) — only ever your own, the
+   * one only you may look at; for anyone else the count alone shows. */
+  readonly onOpenSideboard?: () => void
   readonly targetable?: boolean
   /** Picked in a decision still being built (a proliferate's players). */
   readonly selected?: boolean
@@ -98,6 +101,7 @@ export function PlayerPanel({
   onOpenExile,
   onOpenHand,
   onOpenEmblems,
+  onOpenSideboard,
   targetable = false,
   selected = false,
   aimedBy = null,
@@ -329,6 +333,23 @@ export function PlayerPanel({
             }}
           >
             emblems {emblemCount}
+          </button>
+        ) : null}
+        {/* Cards outside the game (rule 400.11a), for a wish to bring in:
+            only a deck that brought a sideboard, never in Commander (903.5e). */}
+        {info.sideboardSize > 0 ? (
+          <button
+            type="button"
+            className="pp-zone-link"
+            title="Sideboard: cards outside the game"
+            data-sideboard-count-of={info.id}
+            disabled={!onOpenSideboard}
+            onClick={(e) => {
+              e.stopPropagation()
+              onOpenSideboard?.()
+            }}
+          >
+            sideboard {info.sideboardSize}
           </button>
         ) : null}
         <span>

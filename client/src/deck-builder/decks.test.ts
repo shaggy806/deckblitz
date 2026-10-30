@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { listDecks } from './decks.ts'
+import { listDecks, playableSideboard } from './decks.ts'
 
 const DECKS_KEY = 'mtg-engine:decks'
 
@@ -75,5 +75,15 @@ describe('saved-deck migrations', () => {
     const before = storage.writes
     expect(listDecks()).toEqual([{ id: 'a', name: 'New', commanders: [], cards: ['Forest'] }])
     expect(storage.writes).toBe(before)
+  })
+})
+
+describe('playableSideboard', () => {
+  it('brings a sideboard only without a commander (Commander games use none), fifteen at most', () => {
+    expect(playableSideboard({ commanders: [], sideboard: ['Burning Wish'] })).toEqual(['Burning Wish'])
+    expect(playableSideboard({ commanders: ['Ghalta, Primal Hunger'], sideboard: ['Burning Wish'] })).toBeUndefined()
+    expect(playableSideboard({ commanders: [], sideboard: [] })).toBeUndefined()
+    expect(playableSideboard({ commanders: [] })).toBeUndefined()
+    expect(playableSideboard({ commanders: [], sideboard: Array<string>(20).fill('Forest') })).toHaveLength(15)
   })
 })

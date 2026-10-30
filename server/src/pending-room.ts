@@ -55,6 +55,10 @@ const registry = (): CardRegistry => cardRegistry();
  * decklist built against an older pool could have dozens. */
 const MAX_REPORTED_UNKNOWN = 5;
 
+/** "In constructed play, a sideboard may contain no more than fifteen cards"
+ * (rule 100.4a). */
+const MAX_SIDEBOARD = 15;
+
 /** A deck's colours, for naming the bot that plays it: its commanders'
  * colour identity (rule 903.4), or, without a commander, every card's. */
 function deckIdentity(deck: PendingDeck): Set<Color> {
@@ -98,8 +102,18 @@ function assertDeckIsBuildable(deck: PendingDeck): void {
   if (commanders.length > 2) {
     throw new Error(`a deck has at most two commanders, this one names ${commanders.length}`);
   }
+  const sideboard: readonly unknown[] = deck.sideboard ?? [];
+  if (!Array.isArray(sideboard) || sideboard.some((name) => typeof name !== "string")) {
+    throw new Error("a sideboard is a list of card names");
+  }
+  if (sideboard.length > MAX_SIDEBOARD) {
+    throw new Error(`a sideboard holds at most ${MAX_SIDEBOARD} cards, this one has ${sideboard.length}`);
+  }
+  if (sideboard.length > 0 && commanders.length > 0) {
+    throw new Error("a Commander deck has no sideboard (Commander games use none, rule 903.5e)");
+  }
   const unknown = [
-    ...new Set([...deck.cards, ...commanders].filter((name) => !registry().has(name))),
+    ...new Set([...deck.cards, ...commanders, ...(sideboard as readonly string[])].filter((name) => !registry().has(name))),
   ];
   if (unknown.length === 0) return;
   const shown = unknown.slice(0, MAX_REPORTED_UNKNOWN).join(", ");
@@ -532,6 +546,7 @@ export class PendingRoom {
         cards: s.deck.cards,
         commanders: commandersOf(s.deck),
         printings: s.deck.printings,
+        ...(s.deck.sideboard !== undefined && s.deck.sideboard.length > 0 ? { sideboard: s.deck.sideboard } : {}),
       };
     });
     const { startingLife, firstPlayer } = this.settings;

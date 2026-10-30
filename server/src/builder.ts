@@ -24,7 +24,9 @@ import type { Connection } from "./room.js";
 /** The seats a scenario can have, in turn order. */
 export const SCENARIO_PLAYERS: readonly PlayerId[] = ["alice", "bob", "carol", "dave"].map(asPlayerId);
 const STEPS: readonly ScenarioStep[] = ["upkeep", "draw", "precombat-main", "begin-combat", "postcombat-main", "end"];
-const ZONES: readonly ScenarioZone[] = ["battlefield", "hand", "graveyard", "exile", "library", "command"];
+const ZONES: readonly ScenarioZone[] = ["battlefield", "hand", "graveyard", "exile", "library", "command", "sideboard"];
+/** Rule 100.4a's cap on a constructed sideboard. */
+const MAX_SIDEBOARD = 15;
 const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const MAX_CARDS = 600;
 const MAX_FILL = 200;
@@ -114,6 +116,16 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
       }
     }
   }
+  // A sideboard is outside the game (rule 400.11a): no commander in it, and
+  // none for a player with a commander, since Commander games use none
+  // (903.5e) — the engine would drop it.
+  for (const player of players) {
+    const sideboard = spec.cards.filter((c) => c.owner === player && c.zone === "sideboard");
+    if (sideboard.length === 0) continue;
+    if (sideboard.some((c) => c.commander === true)) throw new Error("a commander can't be in a sideboard");
+    if (commanders.has(player)) throw new Error(`${player} has a commander, and Commander games use no sideboards`);
+    if (sideboard.length > MAX_SIDEBOARD) throw new Error(`${player}'s sideboard holds at most ${MAX_SIDEBOARD} cards`);
+  }
   for (const card of spec.cards) {
     if (card.attachedTo === undefined) continue;
     const host = keys.get(card.attachedTo);
@@ -197,6 +209,7 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
       player,
       cards: fill,
       commanders: spec.cards.filter((c) => c.owner === player && c.commander === true).map((c) => c.name),
+      sideboard: spec.cards.filter((c) => c.owner === player && c.zone === "sideboard").map((c) => c.name),
     })),
   });
   if (turn > 1) {
@@ -239,7 +252,7 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     place(card, id);
     if (card.zone === "battlefield") {
       game.debugMove(id, "battlefield");
-    } else if (card.zone !== "command") {
+    } else if (card.zone !== "command" && card.zone !== "sideboard") {
       // Put there directly: a commander moved to a hand, library, graveyard
       // or exile asks its owner whether it goes to the command zone instead
       // (rule 903.9), which is a question about play, not about the board.
@@ -266,8 +279,17 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
   // Libraries are listed top first, and each spawn goes on top: last first.
   const libraryCards = spec.cards.filter((c) => c.commander !== true && c.zone === "library");
   for (const card of [...libraryCards].reverse()) place(card, game.debugSpawn(card.name, card.owner, "library"));
+  // The sideboards the game was given, in the scenario's order.
+  for (const player of players) {
+    const outside = s.outside?.[player] ?? [];
+    spec.cards
+      .filter((c) => c.owner === player && c.zone === "sideboard")
+      .forEach((card, i) => {
+        if (outside[i] !== undefined) place(card, outside[i]);
+      });
+  }
   for (const card of spec.cards) {
-    if (card.commander === true || card.zone === "library") continue;
+    if (card.commander === true || card.zone === "library" || card.zone === "sideboard") continue;
     const id = game.debugSpawn(card.name, card.owner, card.zone, {
       tapped: card.tapped === true,
       ...(card.sick === true ? {} : { summoningSick: false }),
@@ -368,6 +390,7 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     while (bottom > 0 && BASICS.includes(s.objects[library[bottom - 1]].cardName)) bottom -= 1;
     fill = Math.min(fill, library.length - bottom);
     for (const id of library.slice(0, bottom)) add(s.objects[id], "library");
+    for (const id of s.outside?.[seat.player] ?? []) add(s.objects[id], "sideboard");
   }
   for (const id of s.zones.shared.exile) {
     const o = s.objects[id];

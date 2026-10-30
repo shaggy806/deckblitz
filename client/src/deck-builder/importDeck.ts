@@ -45,6 +45,8 @@ export interface ResolvedImport {
   readonly cards: readonly string[]
   readonly commanders: readonly string[]
   readonly printings: Readonly<Record<string, string>>
+  /** The list's sideboard (rule 100.4), resolved the same way as the deck. */
+  readonly sideboard: readonly string[]
   readonly report: ImportReport
 }
 
@@ -70,7 +72,11 @@ export function looksLikeDecklist(text: string): boolean {
 export async function importDecklist(
   text: string,
   onProgress: (progress: ImportProgress) => void,
-): Promise<{ readonly cards: readonly ImportedCardReport[]; readonly format: DeckFormatReport | null }> {
+): Promise<{
+  readonly cards: readonly ImportedCardReport[]
+  readonly format: DeckFormatReport | null
+  readonly sideboard: readonly ImportedCardReport[]
+}> {
   const res = await fetch(importDeckUrl(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -85,7 +91,11 @@ export async function importDecklist(
 
   const decoder = new TextDecoder()
   let buffer = ''
-  let outcome: { cards: readonly ImportedCardReport[]; format: DeckFormatReport | null } | null = null
+  let outcome: {
+    cards: readonly ImportedCardReport[]
+    format: DeckFormatReport | null
+    sideboard: readonly ImportedCardReport[]
+  } | null = null
   let finished = false
   while (!finished) {
     const chunk = await reader.read()
@@ -99,7 +109,7 @@ export async function importDecklist(
       if (part.trim() === '') continue
       const line = JSON.parse(part) as ImportDeckLine
       if (line.type === 'progress') onProgress(line)
-      else if (line.type === 'result') outcome = { cards: line.cards, format: line.format }
+      else if (line.type === 'result') outcome = { cards: line.cards, format: line.format, sideboard: line.sideboard ?? [] }
       else throw new Error(line.error)
     }
   }
@@ -116,6 +126,7 @@ export async function importDecklist(
 export function resolveImport(
   cardReports: readonly ImportedCardReport[],
   format: DeckFormatReport | null,
+  sideboardReports: readonly ImportedCardReport[] = [],
 ): ResolvedImport {
   const commanderNames = format?.commanders ?? []
 
@@ -152,15 +163,29 @@ export function resolveImport(
     const as = commanderAs.get(n)
     return as === undefined ? [] : [as]
   })
+  // The sideboard, card by card as the deck was (rule 100.4).
+  const sideboard: string[] = []
+  for (const c of sideboardReports) {
+    const resolvedName = c.implemented ? c.name : c.suggestedReplacement
+    if (!resolvedName) {
+      dropped.push(c.name)
+      continue
+    }
+    if (c.implemented && c.printingId !== null) printings[c.name] ??= c.printingId
+    if (!c.implemented) substituted.push({ from: c.name, to: resolvedName, options: c.replacements })
+    for (let i = 0; i < c.count; i += 1) sideboard.push(resolvedName)
+  }
+  const total = cardReports.length + sideboardReports.length
 
   return {
     name: commanders.length > 0 ? `Imported: ${commanders.join(' & ')}` : 'Imported deck',
     cards,
     commanders,
     printings,
+    sideboard,
     report: {
-      total: cardReports.length,
-      asIs: cardReports.length - substituted.length - dropped.length,
+      total,
+      asIs: total - substituted.length - dropped.length,
       substituted,
       dropped,
       printings: Object.keys(printings).length,

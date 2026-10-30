@@ -51,6 +51,7 @@ const ZONE_LABEL: Record<ScenarioZone, string> = {
   exile: 'Exile',
   library: 'Library (top first)',
   command: 'Command zone',
+  sideboard: 'Sideboard (outside the game)',
 }
 
 function loadSaved(): Record<string, ScenarioSpec> {

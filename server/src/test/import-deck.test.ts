@@ -149,6 +149,20 @@ describe("parseDecklistText", () => {
     expect(parseDecklistText(text).commanders).toEqual(["Alice", "Bob"]);
   });
 
+  it("keeps a Sideboard section, and MTGO's SB: lines, out of the deck", () => {
+    const parsed = parseDecklistText(list("Deck", "4 Forest", "", "Sideboard", "1 Burning Wish", "2 Demonic Tutor", "SB: 1 Sol Ring"));
+    expect(parsed.entries).toEqual([{ name: "Forest", count: 4 }]);
+    expect(parsed.sideboard).toEqual([
+      { name: "Burning Wish", count: 1 },
+      { name: "Demonic Tutor", count: 2 },
+      { name: "Sol Ring", count: 1 },
+    ]);
+    // A blank line ends it, as it ends a Commander section.
+    expect(parseDecklistText(list("Sideboard", "1 Burning Wish", "", "1 Forest")).entries).toEqual([
+      { name: "Forest", count: 1 },
+    ]);
+  });
+
   it("a blank line ends the Commander section even without a following header", () => {
     const text = ["Commander", "1 Alice", "", "1 Bob"].join("\n");
     expect(parseDecklistText(text).commanders).toEqual(["Alice"]);
@@ -749,6 +763,19 @@ describe("runImportJob", () => {
     const last = out.lines.at(-1) as { type: string; cards: { name: string }[] };
     expect(last.type).toBe("result");
     expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
+  });
+
+  it("reports a Sideboard section's rows apart, counted in the progress", async () => {
+    const { out, sink } = recorder();
+    await runImportJob(
+      "1 Sol Ring\n1 Forest\n\nSideboard\n1 Burning Wish",
+      { registry, tags: () => null, cardData: () => null },
+      sink,
+    );
+    expect(out.lines[0]).toEqual({ type: "progress", done: 0, total: 3, name: null });
+    const last = out.lines.at(-1) as { type: string; cards: { name: string }[]; sideboard?: { name: string }[] };
+    expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
+    expect(last.sideboard?.map((c) => c.name)).toEqual(["Burning Wish"]);
   });
 
   it("refuses a list it can't read before any line, and reports a later failure in-band", async () => {

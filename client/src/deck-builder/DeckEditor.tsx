@@ -22,6 +22,7 @@ import { StableLabel } from '../ui/StableLabel.tsx'
 import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import type { SavedDeck } from './decks.ts'
+import { MAX_SIDEBOARD } from './decks.ts'
 
 const TYPE_FILTERS = [
   'creature',
@@ -256,6 +257,40 @@ export function DeckEditor({
   }
   const removeAll = (cardName: string) =>
     change({ ...deck, cards: deck.cards.filter((c) => c !== cardName) })
+
+  // The sideboard (rule 100.4): up to fifteen cards outside the game, for a
+  // wish or learn to bring in — never brought by a Commander deck (903.5e).
+  const sideboard = deck.sideboard ?? []
+  const sideboardOpen = deck.commanders.length === 0 && sideboard.length < MAX_SIDEBOARD
+  const withSideboard = (next: readonly string[], cards = deck.cards): SavedDeck => ({
+    ...deck,
+    cards,
+    sideboard: next.length === 0 ? undefined : next,
+  })
+  const withoutOne = (list: readonly string[], cardName: string): readonly string[] | null => {
+    const i = list.indexOf(cardName)
+    return i === -1 ? null : [...list.slice(0, i), ...list.slice(i + 1)]
+  }
+  const addToSideboard = (cardName: string) => {
+    if (sideboardOpen) change(withSideboard([...sideboard, cardName]))
+  }
+  const removeFromSideboard = (cardName: string) => {
+    const next = withoutOne(sideboard, cardName)
+    if (next !== null) change(withSideboard(next))
+  }
+  const moveToSideboard = (cardName: string) => {
+    const cards = withoutOne(deck.cards, cardName)
+    if (cards !== null && sideboardOpen) change(withSideboard([...sideboard, cardName], cards))
+  }
+  const moveToDeck = (cardName: string) => {
+    const next = withoutOne(sideboard, cardName)
+    if (next !== null) change(withSideboard(next, [...deck.cards, cardName]))
+  }
+  const sideboardRows = useMemo(() => {
+    const n = new Map<string, number>()
+    for (const name of deck.sideboard ?? []) n.set(name, (n.get(name) ?? 0) + 1)
+    return [...n.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([name, count]) => ({ name, n: count }))
+  }, [deck.sideboard])
   /**
    * Move a card into the command zone, or out of it.
    *
@@ -572,6 +607,9 @@ export function DeckEditor({
                     ...(n > 0
                       ? [{ label: 'Remove one', onSelect: () => removeCard(c.name) }]
                       : []),
+                    ...(deck.commanders.length === 0
+                      ? [{ label: 'Add to sideboard', onSelect: () => addToSideboard(c.name), disabled: !sideboardOpen }]
+                      : []),
                   ])}
                 >
                   <span className="db-card-name">{c.name}</span>
@@ -708,6 +746,15 @@ export function DeckEditor({
                           { label: 'Add another', onSelect: () => addCard(row.name) },
                           { label: 'Remove one', onSelect: () => removeCard(row.name) },
                           { label: 'Remove all copies', onSelect: () => removeAll(row.name) },
+                          ...(deck.commanders.length === 0
+                            ? [
+                                {
+                                  label: 'Move one to the sideboard',
+                                  onSelect: () => moveToSideboard(row.name),
+                                  disabled: !sideboardOpen,
+                                },
+                              ]
+                            : []),
                           // Promoting from here matters most right after an
                           // import: a decklist that didn't label its commander
                           // gets one guessed, and fixing that meant hunting the
@@ -759,6 +806,55 @@ export function DeckEditor({
                 </li>
               ))}
             </ul>
+          )}
+
+          {deck.commanders.length > 0 && sideboard.length === 0 ? null : (
+            <div className="db-sideboard" data-testid="db-sideboard">
+              <div className="db-deck-group-head muted">
+                Sideboard · {sideboard.length} / {MAX_SIDEBOARD}
+              </div>
+              {deck.commanders.length > 0 ? (
+                <p className="db-commander-hint muted">
+                  A Commander deck brings no sideboard to the table (Commander games use none).
+                </p>
+              ) : sideboard.length === 0 ? (
+                <p className="db-commander-hint muted">
+                  Cards outside the game, for a wish or learn to bring in. Right-click a card to add it.
+                </p>
+              ) : null}
+              <ul>
+                {sideboardRows.map((row) => {
+                  const def = cardNamed(row.name)
+                  return (
+                    <li
+                      key={row.name}
+                      className={def === undefined ? 'db-unknown-row' : undefined}
+                      {...hoverProps(def)}
+                      {...menuProps(def, [
+                        { label: 'Move one to the deck', onSelect: () => moveToDeck(row.name) },
+                        { label: 'Add another', onSelect: () => addToSideboard(row.name), disabled: !sideboardOpen },
+                        { label: 'Remove one', onSelect: () => removeFromSideboard(row.name) },
+                      ])}
+                    >
+                      <span className="db-count mono">{row.n}</span>
+                      <span className="db-card-name">{row.name}</span>
+                      {def?.manaCost ? <Symbols text={def.manaCost} /> : null}
+                      <span className="db-card-row-spacer" />
+                      {readOnly ? null : (
+                        <>
+                          <button type="button" title="Move one to the deck" onClick={() => moveToDeck(row.name)}>
+                            ↑
+                          </button>
+                          <button type="button" title="Remove one" onClick={() => removeFromSideboard(row.name)}>
+                            −
+                          </button>
+                        </>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           )}
         </section>
       </div>

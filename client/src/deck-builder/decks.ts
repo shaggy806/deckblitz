@@ -36,6 +36,28 @@ export interface SavedDeck {
    * every deck saved before the picker existed has.
    */
   readonly printings?: Readonly<Record<string, string>>;
+  /**
+   * The deck's sideboard (rule 100.4): up to fifteen cards (100.4a) kept
+   * outside the game, which a wish (Burning Wish, Karn, the Great Creator) or
+   * learn brings in. Brought to a table only by a deck with no commander:
+   * Commander games use no sideboards (903.5e) — `playableSideboard`.
+   * Absent on every deck saved before sideboards existed.
+   */
+  readonly sideboard?: readonly string[];
+}
+
+/** "In constructed play, a sideboard may contain no more than fifteen cards"
+ * (rule 100.4a) — the server's cap too. */
+export const MAX_SIDEBOARD = 15
+
+/** The sideboard a deck brings to a table: none for a Commander deck (rule
+ * 903.5e), and none when it's empty. */
+export function playableSideboard(deck: {
+  readonly commanders: readonly string[]
+  readonly sideboard?: readonly string[]
+}): readonly string[] | undefined {
+  if (deck.commanders.length > 0 || deck.sideboard === undefined || deck.sideboard.length === 0) return undefined
+  return deck.sideboard.slice(0, MAX_SIDEBOARD)
 }
 
 export type ActiveRef = { readonly kind: 'saved'; readonly id: string } | { readonly kind: 'starter'; readonly index: number }
@@ -100,12 +122,14 @@ function renameCards(deck: SavedDeck): SavedDeck {
   const touched =
     deck.cards.some(differs) ||
     deck.commanders.some(differs) ||
+    (deck.sideboard ?? []).some(differs) ||
     Object.keys(deck.printings ?? {}).some(differs)
   if (!touched) return deck
   return {
     ...deck,
     cards: deck.cards.map(renamed),
     commanders: deck.commanders.map(renamed),
+    ...(deck.sideboard !== undefined ? { sideboard: deck.sideboard.map(renamed) } : {}),
     ...(deck.printings
       ? {
           printings: Object.fromEntries(
@@ -149,12 +173,14 @@ export function createDeckFromImport(
   cards: readonly string[],
   commanders: readonly string[] = [],
   printings?: Readonly<Record<string, string>>,
+  sideboard: readonly string[] = [],
 ): SavedDeck {
   const deck: SavedDeck = {
     id: newId(),
     name,
     cards,
     commanders,
+    ...(sideboard.length > 0 ? { sideboard } : {}),
     // Omitted entirely when the pasted list carried no printing suffixes, so
     // an imported deck looks like any other hand-built one.
     ...(printings && Object.keys(printings).length > 0 ? { printings } : {}),
@@ -228,6 +254,7 @@ export interface DeckContents {
   readonly commanders: readonly string[]
   readonly cards: readonly string[]
   readonly printings?: Readonly<Record<string, string>>
+  readonly sideboard?: readonly string[]
 }
 
 /** A deck's commanders with the printing it brings for each — what the
@@ -274,6 +301,7 @@ export function listPickableDecks(): readonly PickableDeck[] {
       commanders: d.commanders,
       cards: d.cards,
       printings: d.printings,
+      ...(d.sideboard !== undefined ? { sideboard: d.sideboard } : {}),
     })),
     ...STARTER_DECKS.map((d, i) => ({
       key: `starter:${i}`,

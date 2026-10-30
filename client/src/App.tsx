@@ -384,7 +384,13 @@ type ChooseTargetsAction = Extract<LegalAction, { kind: 'choose-targets' }>
 
 /** What a `choose-from-zone` popup asks: where the chosen cards go, and for
  * cards going back on top, that the order picked is the order they go. */
-function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) => string): string {
+function zoneChoiceTitle(
+  action: ZoneChoiceAction,
+  nameOf: (player: PlayerId) => string,
+  /** Every candidate is outside the game — a wish's search of the sideboard
+   * (rule 701.23j). */
+  fromSideboard = false,
+): string {
   const n = action.max === action.min ? `${action.max}` : `up to ${action.max}`
   const together = action.together
   // A rule over the set says what to pick: "up to 2 cards that share a land
@@ -407,6 +413,11 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
     ? ` — the ${action.alsoTaken.length} in the graveyard go too`
     : ''
   const from = action.forPlayer === undefined ? '' : ` from ${whose} cards`
+  if (fromSideboard) {
+    return action.destination === 'library-top'
+      ? `Choose ${cards} from your sideboard to put on top of your library`
+      : `Choose ${cards} from your sideboard to put into your hand`
+  }
   switch (action.destination) {
     case 'hand':
       return `Choose ${cards} to put into ${whose} hand`
@@ -6157,6 +6168,7 @@ function Table({
         openZone(`${playerLabel(pid, game.seats)}'s graveyard`, view.zones.graveyards[pid] ?? [])
       }
       onOpenExile={() => openZone(`${playerLabel(pid, game.seats)}'s exile`, exileOf(pid))}
+      onOpenSideboard={pid === seat ? () => openZone('Your sideboard', view.zones.sideboard) : undefined}
       onOpenHand={
         pid === seat
           ? undefined
@@ -7018,7 +7030,11 @@ function Table({
 
       {mode === 'choose-from-zone' && zoneChoiceAction ? (
         <ZoneViewer
-          title={zoneChoiceTitle(zoneChoiceAction, (p) => playerLabel(p, game.seats))}
+          title={zoneChoiceTitle(
+            zoneChoiceAction,
+            (p) => playerLabel(p, game.seats),
+            zoneChoiceAction.ids.length > 0 && zoneChoiceAction.ids.every((id) => view.objects[id]?.zone === 'outside'),
+          )}
           ids={zoneChoiceAction.ids}
           resolve={(id) => view.objects[id]}
           selection={{

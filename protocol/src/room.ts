@@ -57,6 +57,11 @@ export interface WireDeck {
    * the room draws the art its owner chose. Absent for a deck built before
    * the picker existed, or one that never left a card's default printing. */
   readonly printings?: Readonly<Record<string, string>>;
+  /** The deck's sideboard (rule 100.4): cards outside the game (400.11a),
+   * which a wish can bring in — `DeckList.sideboard`. At most fifteen
+   * (100.4a), and none with `commanders` (903.5e: Commander games use no
+   * sideboards) — the server refuses either. Absent means none. */
+  readonly sideboard?: readonly string[];
 }
 
 /** A commander as the seat board shows it. */

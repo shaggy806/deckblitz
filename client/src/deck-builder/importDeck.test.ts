@@ -62,3 +62,22 @@ describe('resolveImport', () => {
     expect(resolveImport([card('Forest')], null).commanders).toEqual([])
   })
 })
+
+describe('resolveImport — a sideboard', () => {
+  it('resolves the sideboard rows apart from the deck, stand-ins and drops alike', () => {
+    const resolved = resolveImport(
+      [card('Forest', { count: 20 })],
+      null,
+      [
+        card('Burning Wish', { count: 2 }),
+        card('Unknown Wish', { implemented: false, suggestedReplacement: 'Demonic Tutor' }),
+        card('Nothing Like It', { implemented: false }),
+      ],
+    )
+    expect(resolved.cards).toHaveLength(20)
+    expect(resolved.sideboard).toEqual(['Burning Wish', 'Burning Wish', 'Demonic Tutor'])
+    expect(resolved.report.total).toBe(4)
+    expect(resolved.report.substituted.map((s) => s.to)).toEqual(['Demonic Tutor'])
+    expect(resolved.report.dropped).toEqual(['Nothing Like It'])
+  })
+})

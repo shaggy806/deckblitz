@@ -12,8 +12,10 @@
 
 import type { PlayerId } from "engine";
 
-/** The zones a card can be placed in. A library's cards are listed top first. */
-export type ScenarioZone = "battlefield" | "hand" | "graveyard" | "exile" | "library" | "command";
+/** The zones a card can be placed in. A library's cards are listed top first.
+ * `"sideboard"` isn't a zone: it's outside the game (rule 400.11a), where a
+ * wish finds it — never for a player with a commander (903.5e). */
+export type ScenarioZone = "battlefield" | "hand" | "graveyard" | "exile" | "library" | "command" | "sideboard";
 
 /** The steps a scenario can start in: every step with a priority window that
  * isn't inside a combat (a combat step needs attackers declared first). */

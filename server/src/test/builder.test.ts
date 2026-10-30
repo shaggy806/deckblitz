@@ -108,6 +108,12 @@ describe("buildScenario", () => {
     expect(() => validateScenario(spec([card("a", "Hill Giant"), card("a", "Hill Giant")]))).toThrow(/unique/);
     expect(() => validateScenario(spec([card("p", "Pacifism", { attachedTo: "nobody" })]))).toThrow(/attached/);
     expect(() => validateScenario(spec([card("h", "Hill Giant", { zone: "command" })]))).toThrow(/command zone/);
+    // A sideboard is never beside a commander (rule 903.5e).
+    expect(() =>
+      validateScenario(
+        spec([card("c", "Legion Angel", { zone: "command", commander: true }), card("s", "Forest", { zone: "sideboard" })]),
+      ),
+    ).toThrow(/no sideboards/);
     expect(() => validateScenario(spec([], { step: "declare-attackers" as never }))).toThrow(/step/);
   });
 
@@ -117,6 +123,8 @@ describe("buildScenario", () => {
       card("aura", "Pacifism", { attachedTo: "bears" }),
       card("bolt", "Lightning Bolt", { zone: "hand" }),
       card("top", "Hill Giant", { zone: "library" }),
+      // Each seat's zones in turn: alice's sideboard before bob's graveyard.
+      card("wish", "Demonic Tutor", { zone: "sideboard" }),
       card("dead", "Blood Artist", { owner: BOB, zone: "graveyard" }),
     ]);
     const { game } = buildScenario(original);

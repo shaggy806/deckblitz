@@ -58,6 +58,10 @@ export interface DecklistEntry {
 
 export interface ParsedDecklist {
   readonly entries: readonly DecklistEntry[];
+  /** The list's sideboard (rule 100.4) — a `Sideboard` section, or lines
+   * written `SB: 1 Name` (MTGO) — kept apart from `entries`: cards outside
+   * the game, which only a wish brings in. */
+  readonly sideboard: readonly DecklistEntry[];
   /**
    * Card name(s) the list identifies as its commander(s), still included among
    * `entries` too so the commander gets an ordinary feasibility row.
@@ -147,6 +151,11 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
   const printings = new Map<string, PrintingRef>();
   const commanders: string[] = [];
   let inCommanderSection = false;
+  // The sideboard, apart from the deck: its section ends as a "Commander"
+  // one does, at the next header or blank line.
+  const sideCounts = new Map<string, number>();
+  const sidePrintings = new Map<string, PrintingRef>();
+  let inSideboard = false;
   // Blank-line-separated runs of card lines. Moxfield writes the commander as
   // the last of these, alone and unlabelled, so the structure is the only clue
   // there is.
@@ -161,13 +170,17 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
     const line = rawLine.trim();
     if (line === "") {
       inCommanderSection = false;
+      inSideboard = false;
       endBlock();
       continue;
     }
     if (line.startsWith("//")) continue;
-    const match = LINE_PATTERN.exec(line);
+    // MTGO's "SB: 1 Name" is a sideboard line wherever it stands.
+    const sbLine = /^SB:\s*/i.exec(line);
+    const match = LINE_PATTERN.exec(sbLine === null ? line : line.slice(sbLine[0].length));
     if (match === null) {
-      inCommanderSection = /^commanders?$/i.test(line);
+      inCommanderSection = /^commanders?:?$/i.test(line);
+      inSideboard = /^sideboard:?$/i.test(line);
       // A header starts a new block as surely as a blank line does.
       endBlock();
       continue;
@@ -178,6 +191,11 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
     // one — the pool, Scryfall, oracle tags, the format check — sees its
     // Oracle name. The printing it named is still that card's.
     const name = poolNameOf(nameForFlavorName(written) ?? written, registry);
+    if (inSideboard || sbLine !== null) {
+      sideCounts.set(name, (sideCounts.get(name) ?? 0) + Number(match[1]));
+      if (printing !== undefined && !sidePrintings.has(name)) sidePrintings.set(name, printing);
+      continue;
+    }
     counts.set(name, (counts.get(name) ?? 0) + Number(match[1]));
     if (printing !== undefined && !printings.has(name)) printings.set(name, printing);
     if (inCommanderSection) commanders.push(name);
@@ -209,6 +227,11 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
       name,
       count,
       ...(printings.has(name) ? { printing: printings.get(name)! } : {}),
+    })),
+    sideboard: [...sideCounts.entries()].map(([name, count]) => ({
+      name,
+      count,
+      ...(sidePrintings.has(name) ? { printing: sidePrintings.get(name)! } : {}),
     })),
     commanders,
   };
@@ -832,17 +855,30 @@ export function importDeps(registry: CardRegistry): ImportDeps {
 export async function runImportJob(text: string, deps: ImportDeps, sink: ImportSink): Promise<void> {
   let streaming = false;
   try {
-    const { entries, commanders, commanderSource } = parseDecklistText(text, deps.registry);
+    const { entries, sideboard, commanders, commanderSource } = parseDecklistText(text, deps.registry);
     streaming = true;
-    sink.line({ type: "progress", done: 0, total: entries.length, name: null });
+    const total = entries.length + sideboard.length;
+    sink.line({ type: "progress", done: 0, total, name: null });
+    const evaluate = { commanders, tags: deps.tags(), cardData: deps.cardData() };
     const cards = await evaluateDecklist(
       entries,
       deps.registry,
-      (p) => sink.line({ type: "progress", ...p }),
-      { commanders, tags: deps.tags(), cardData: deps.cardData() },
+      (p) => sink.line({ type: "progress", ...p, total }),
+      evaluate,
     );
+    // The sideboard's rows the same way, after the deck's (its stand-ins
+    // chosen among themselves).
+    const side =
+      sideboard.length === 0
+        ? []
+        : await evaluateDecklist(
+            sideboard,
+            deps.registry,
+            (p) => sink.line({ type: "progress", ...p, done: entries.length + p.done, total }),
+            evaluate,
+          );
     const format = formatCheck(entries, deps.registry, commanders, commanderSource);
-    sink.line({ type: "result", cards, format });
+    sink.line({ type: "result", cards, format, ...(side.length > 0 ? { sideboard: side } : {}) });
     sink.end();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

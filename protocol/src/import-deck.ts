@@ -84,5 +84,8 @@ export type ImportDeckLine =
       readonly type: "result";
       readonly cards: readonly ImportedCardReport[];
       readonly format: DeckFormatReport;
+      /** The list's sideboard (rule 100.4), row by row like `cards`:
+       * a `Sideboard` section's cards, or `SB:` lines. Absent when it had none. */
+      readonly sideboard?: readonly ImportedCardReport[];
     }
   | { readonly type: "error"; readonly error: string };

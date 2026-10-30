@@ -5732,3 +5732,22 @@ engine terms. A second thing to check is a second test.
 ### Black Vise: choose an opponent, named on the card
 - **Do:** Cast Black Vise and choose one of the three opponents.
 - **Expect:** The banner reads "Black Vise — Choose an opponent" with a button per opponent and none for you. Once it's on the battlefield, its tile is flagged "chose" and that player's name, in their seat colour.
+
+## Cards outside the game: the sideboard (2026-10-30, need-keys Phase 2: build-family)
+
+### Burning Wish: take a sorcery from your sideboard
+- **Do:** Cast Burning Wish. In the popup, pick Demonic Tutor and confirm.
+- **Expect:** The popup reads "Choose a card from your sideboard to put into your hand" and offers Demonic Tutor alone, not Lightning Bolt or Grizzly Bears. Demonic Tutor is revealed to everyone and goes to your hand; Burning Wish goes to exile, and your panel's "sideboard" count drops from 3 to 2.
+
+### Your sideboard: only you can look at it
+- **Do:** Click "sideboard 2" in your player panel. Then open the Builder panel, click "Switch to Bob", and click "sideboard 2" on Alice's panel.
+- **Expect:** As Alice, a popup titled "Your sideboard" shows Demonic Tutor and Lightning Bolt. As Bob, Alice's panel still reads "sideboard 2" but the link can't be opened.
+
+### Coax from the Blind Eternities: an Eldrazi from your sideboard or from exile
+- **Do:** Cast Coax from the Blind Eternities.
+- **Expect:** The popup "Choose a card to put into your hand" offers both Angelic Aberration (from your sideboard) and the exiled Artisan of Kozilek, but not Lightning Bolt. Whichever you pick goes to your hand.
+
+### Study Break: learn fetches a Lesson from your sideboard
+- **Do:** Cast Study Break, skipping both targets. Answer No to "Learn: discard a card to draw a card?".
+- **Expect:** A popup offers Academic Probation from your sideboard (not Grizzly Bears); it goes to your hand.
+- **Not a bug:** Saying yes to the discard instead means no Lesson is offered.

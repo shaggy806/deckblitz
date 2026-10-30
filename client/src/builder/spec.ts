@@ -11,7 +11,7 @@ import type { ScenarioCard, ScenarioSeat, ScenarioSpec, ScenarioStep, ScenarioZo
 
 export const SEAT_IDS = ['alice', 'bob', 'carol', 'dave'] as unknown as readonly PlayerId[]
 
-export const ZONES: readonly ScenarioZone[] = ['battlefield', 'hand', 'graveyard', 'exile', 'library', 'command']
+export const ZONES: readonly ScenarioZone[] = ['battlefield', 'hand', 'graveyard', 'exile', 'library', 'command', 'sideboard']
 
 export const STEPS: readonly { readonly step: ScenarioStep; readonly label: string }[] = [
   { step: 'upkeep', label: 'Upkeep' },

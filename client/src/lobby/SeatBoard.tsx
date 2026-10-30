@@ -4,7 +4,7 @@ import type { PlayerId } from 'engine/client'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import type { SeatCommander, WireDeck } from 'protocol'
 import { playerLabel, SEAT_CLASSES } from '../format.ts'
-import { commanderPrintings, getActiveDeck, setActive } from '../deck-builder/decks.ts'
+import { commanderPrintings, getActiveDeck, playableSideboard, setActive } from '../deck-builder/decks.ts'
 import type { DeckContents, PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckPickerModal } from './DeckPickerModal.tsx'
@@ -17,12 +17,16 @@ import './lobby.css'
 const MIN_SEATS = 2
 const MAX_SEATS = 4
 
-const toWire = (d: DeckContents): WireDeck => ({
-  cards: d.cards,
-  commanders: d.commanders,
-  name: d.name,
-  printings: d.printings,
-})
+const toWire = (d: DeckContents): WireDeck => {
+  const sideboard = playableSideboard(d)
+  return {
+    cards: d.cards,
+    commanders: d.commanders,
+    name: d.name,
+    printings: d.printings,
+    ...(sideboard !== undefined ? { sideboard } : {}),
+  }
+}
 
 /**
  * The seat-picker/waiting-room board: one panel per seat, side by side, each

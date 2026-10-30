@@ -69,6 +69,31 @@ describe("PendingRoom", () => {
     expect(room.seatStatuses()[0].claimed).toBe(false);
   });
 
+  it("carries a sideboard through to its DeckList, and refuses one too big or beside a commander", () => {
+    const room = pendingRoom();
+    room.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, {
+      cards: ["Forest"],
+      sideboard: ["Burning Wish", "Demonic Tutor"],
+    });
+    room.claimSeat(BOB, "bob-token", { send: () => {} });
+    expect(room.toGameConfig().decks.find((d) => d.player === ALICE)?.sideboard).toEqual([
+      "Burning Wish",
+      "Demonic Tutor",
+    ]);
+
+    const other = pendingRoom();
+    const claim = (deck: Parameters<PendingRoom["claimSeat"]>[4]) => () =>
+      other.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, deck);
+    // Rule 100.4a: fifteen at most.
+    expect(claim({ cards: ["Forest"], sideboard: Array<string>(16).fill("Forest") })).toThrow("at most 15");
+    // Rule 903.5e: Commander games use no sideboards.
+    expect(claim({ cards: ["Forest"], commanders: ["Ureni of the Unwritten"], sideboard: ["Forest"] })).toThrow(
+      "903.5e",
+    );
+    expect(claim({ cards: ["Forest"], sideboard: ["Not A Real Card"] })).toThrow("doesn't know");
+    expect(claim({ cards: ["Forest"], sideboard: "Forest" as never })).toThrow("list of card names");
+  });
+
   it("carries a deck's chosen printings through to its DeckList and seat status", () => {
     const id = "3d3f4e6a-1c5d-4f8b-9a2e-7b1c0d5e6f70";
     const room = pendingRoom();

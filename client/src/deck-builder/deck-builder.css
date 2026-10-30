@@ -829,6 +829,36 @@
   text-decoration: line-through;
 }
 
+/* The sideboard (rule 100.4), under the deck list and drawn like one group of it. */
+.db-sideboard {
+  margin-top: 8px;
+  border: 1px solid var(--border-soft);
+  padding: 6px;
+  box-shadow: var(--frame-sunk);
+}
+.db-sideboard ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.db-sideboard li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+}
+.db-sideboard li:hover {
+  background: var(--panel-2);
+}
+.db-sideboard button {
+  font-size: var(--text-sm);
+  padding: 1px 8px;
+}
+.db-sideboard .db-count {
+  min-width: 1.6em;
+  text-align: right;
+}
+
 .db-unknown {
   padding: 8px 12px;
   border-radius: 0;

@@ -314,9 +314,15 @@ function ImportPanel({
     setProgress(null)
     setError(null)
     importDecklist(text, setProgress)
-      .then(({ cards: cardReports, format }) => {
-        const resolved = resolveImport(cardReports, format)
-        const deck = createDeckFromImport(resolved.name, resolved.cards, resolved.commanders, resolved.printings)
+      .then(({ cards: cardReports, format, sideboard }) => {
+        const resolved = resolveImport(cardReports, format, sideboard)
+        const deck = createDeckFromImport(
+          resolved.name,
+          resolved.cards,
+          resolved.commanders,
+          resolved.printings,
+          resolved.sideboard,
+        )
         onImported(deck, resolved.report)
       })
       .catch((err: unknown) => setError(err instanceof Error ? err.message : String(err)))

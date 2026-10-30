@@ -38,6 +38,9 @@ interface Side {
   readonly lib?: readonly Card[]
   /** Commanders left in the command zone. */
   readonly cmd?: readonly string[]
+  /** The sideboard: cards outside the game, for a wish — never beside a
+   * commander (Commander games use none). */
+  readonly side?: readonly Card[]
   readonly life?: number
   readonly poison?: number
   /** Played by you ("Sit" at the seat), not a bot. */
@@ -101,6 +104,7 @@ export function board(opts: BoardOpts): ScenarioSpec {
     put(side.gy, 'graveyard')
     put(side.exile, 'exile')
     put(side.lib, 'library')
+    put(side.side, 'sideboard')
     put(
       (side.cmd ?? []).map((name) => ({ name, commander: true })),
       'command',
@@ -8592,5 +8596,33 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Black Vise: choose an opponent, named on the card',
     // A four-player table: three opponents to choose among.
     board({ you: { bf: ['Wastes'], hand: ['Black Vise'] }, opp: [{}, {}, {}] }),
+  ),
+  // --- Cards outside the game: the sideboard (2026-10-30, build-family) ---
+  preset(
+    'Burning Wish: take a sorcery from your sideboard',
+    board({
+      you: { bf: ['Mountain*2'], hand: ['Burning Wish'], side: ['Demonic Tutor', 'Lightning Bolt', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Your sideboard: only you can look at it',
+    // A four-player table: every opponent sees the count, nobody the cards.
+    board({ you: { bf: ['Wastes'], side: ['Demonic Tutor', 'Lightning Bolt'] }, opp: [{ human: true }, {}, {}] }),
+  ),
+  preset(
+    'Coax from the Blind Eternities: an Eldrazi from your sideboard or from exile',
+    board({
+      you: {
+        bf: ['Island*3'],
+        hand: ['Coax from the Blind Eternities'],
+        exile: ['Artisan of Kozilek'],
+        side: ['Angelic Aberration', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    'Study Break: learn fetches a Lesson from your sideboard',
+    // A card in hand, so there's something to discard and the question is asked.
+    board({ you: { bf: ['Plains*2'], hand: ['Study Break', 'Wastes'], side: ['Academic Probation', 'Grizzly Bears'] } }),
   ),
 ]
