@@ -497,6 +497,15 @@ missing. Re-run `--greedy` for Phase 2's order.
   the whole resolution carried across a choice (`ResolutionResume`); 6 keys, 7 proving cards.
   22 freed (7 authored here, 15 queued: 364). Next: `effect:amount-new-variants` (20),
   `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18).
+- **2026-10-30: `effect:amount-new-variants`' top five units, engine-only** — a `distinct`
+  aggregate (different mana values, powers, names, colour pairs, permanent types, subtypes)
+  over permanents or graveyard cards, in amounts, conditions, cost reductions and CDAs; a
+  conditional activated `costReduction`; `countInGraveyard`'s `forTarget`/`forPlayer`;
+  `CardFilter.isSource`; `countPlayers`' `where`. 20 keys, half of them already covered by
+  `countOf`'s player references and only marked; 13 proving cards. 70 freed (13 authored here,
+  57 queued: 421). One family only: the session passed ~285K tokens. Next:
+  `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18),
+  `static:assign-damage-as-though-unblocked` (18).
 
 ## Rough size
 

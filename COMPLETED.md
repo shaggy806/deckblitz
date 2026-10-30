@@ -86,6 +86,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: distinct values and player-sided counts** (2026-10-30;
+  `effect:amount-new-variants`' top five units, 20 keys — `effect:count-distinct-mana-values`,
+  `effect:count-distinct-powers`, `effect:distinct-names-count`, `effect:count-subtypes-among`,
+  `effect:amount-color-pairs`, `effect:permanent-types-in-graveyard`,
+  `effect:count-in-target-player-graveyard`, `effect:count-equipment-attached-to-source`,
+  `effect:players-controlling-more-amount` and eleven already covered by `countOf`'s player
+  references). `aggregate: "distinct"` with `in: "graveyards"`, read by amounts, `aggregate`
+  conditions, cost reductions and a CDA's `CountSpec`; an activated ability's conditional
+  `costReduction`; `countInGraveyard`'s `forTarget`/`forPlayer`; `CardFilter.isSource`;
+  `countPlayers`' `where`; the scaffolder taught. 70 freed (57 queued for `author-freed`), 13
+  proving cards: Lunar Insight, Golden Ratio, Aven Heartstabber, Sewer Crocodile, Awakened
+  Amalgam, Corpse Augur, Roiling Terrain, Goblin Gaveleer, Kemba, Kha Regent, Oreskos Explorer,
+  Priest of the Blessed Graf, Terra Ravager, Treacherous Terrain.
 - **Need-keys Phase 2: a value chosen as it resolves** (2026-10-30, e8d996e60;
   `decision:choose-color-on-resolution`, `decision:choose-number-on-resolution`,
   `decision:choose-card-type`, `amount:revealed-hand-cards-of-chosen-type`,

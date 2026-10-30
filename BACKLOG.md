@@ -150,10 +150,17 @@ section keeps only what to do next.
   Stonewise Fortifier, Tajic, Legion's Edge), the chosen-value group (2026-10-30:
   `choose-value` — a colour, card type, counter kind or number chosen as it resolves — the
   `choose-number` decision and `reveal-hand`; 22 freed, 7 proving cards — Persecute, Sudden
-  Demise, Void, Blood Oath, Fertile Imagination, Ichormoon Gauntlet, Medicine Runner).
-  **364 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:amount-new-variants` (20), `static:combat-restriction-extensions` (19),
-  `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked` (18).
+  Demise, Void, Blood Oath, Fertile Imagination, Ichormoon Gauntlet, Medicine Runner),
+  amount-new-variants' top five units (2026-10-30: a `distinct` aggregate — different mana
+  values, powers, names — over permanents or graveyard cards, also as a condition, a cost
+  reduction and a CDA; `countInGraveyard`'s `forTarget`/`forPlayer`; `isSource` for "Equipment
+  attached to it"; `countPlayers`' `where`; 70 freed, 13 proving cards — Lunar Insight, Golden
+  Ratio, Aven Heartstabber, Sewer Crocodile, Awakened Amalgam, Corpse Augur, Roiling Terrain,
+  Goblin Gaveleer, Kemba, Kha Regent, Oreskos Explorer, Priest of the Blessed Graf, Terra
+  Ravager, Treacherous Terrain).
+  **421 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18),
+  `static:assign-damage-as-though-unblocked` (18), `effect:shuffle-hand-and-graveyard-into-library` (18).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
