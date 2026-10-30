@@ -92,6 +92,7 @@ import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
 import _poolBondOfPassion from "../pool/bond-of-passion.js";
 import _poolBoneyardWurm from "../pool/boneyard-wurm.js";
 import _poolBoommobile from "../pool/boommobile.js";
+import _poolBouncingBeebles from "../pool/bouncing-beebles.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBrackwaterElemental from "../pool/brackwater-elemental.js";
 import _poolBrainGorgers from "../pool/brain-gorgers.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolBondOfPassion,
     _poolBoneyardWurm,
     _poolBoommobile,
+    _poolBouncingBeebles,
     _poolBountyOfMight,
     _poolBrackwaterElemental,
     _poolBrainGorgers,

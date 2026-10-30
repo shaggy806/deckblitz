@@ -220,6 +220,7 @@ import _poolAerialManeuver from "./pool/aerial-maneuver.js";
 import _poolAerialModification from "./pool/aerial-modification.js";
 import _poolAerialPredation from "./pool/aerial-predation.js";
 import _poolAerialResponder from "./pool/aerial-responder.js";
+import _poolAerialSurveyor from "./pool/aerial-surveyor.js";
 import _poolAerialVolley from "./pool/aerial-volley.js";
 import _poolAeridKonstrari from "./pool/aerid-konstrari.js";
 import _poolAerieAuxiliary from "./pool/aerie-auxiliary.js";
@@ -2694,6 +2695,7 @@ import _poolBoulderfall from "./pool/boulderfall.js";
 import _poolBoulderloftPathway from "./pool/boulderloft-pathway.js";
 import _poolBounceOff from "./pool/bounce-off.js";
 import _poolBouncersBeatdown from "./pool/bouncers-beatdown.js";
+import _poolBouncingBeebles from "./pool/bouncing-beebles.js";
 import _poolBoundInSilence from "./pool/bound-in-silence.js";
 import _poolBoundaryLandsRanger from "./pool/boundary-lands-ranger.js";
 import _poolBoundingFelidar from "./pool/bounding-felidar.js";
@@ -10712,6 +10714,7 @@ import _poolHonorsReward from "./pool/honors-reward.js";
 import _poolHoodedAssassin from "./pool/hooded-assassin.js";
 import _poolHoodedBlightfang from "./pool/hooded-blightfang.js";
 import _poolHoodedBrawler from "./pool/hooded-brawler.js";
+import _poolHoodedHorror from "./pool/hooded-horror.js";
 import _poolHoodedHydra from "./pool/hooded-hydra.js";
 import _poolHoodedKavu from "./pool/hooded-kavu.js";
 import _poolHoodwink from "./pool/hoodwink.js";
@@ -27489,6 +27492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAerialModification,
   _poolAerialPredation,
   _poolAerialResponder,
+  _poolAerialSurveyor,
   _poolAerialVolley,
   _poolAeridKonstrari,
   _poolAerieAuxiliary,
@@ -29963,6 +29967,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoulderloftPathway,
   _poolBounceOff,
   _poolBouncersBeatdown,
+  _poolBouncingBeebles,
   _poolBoundInSilence,
   _poolBoundaryLandsRanger,
   _poolBoundingFelidar,
@@ -37981,6 +37986,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHoodedAssassin,
   _poolHoodedBlightfang,
   _poolHoodedBrawler,
+  _poolHoodedHorror,
   _poolHoodedHydra,
   _poolHoodedKavu,
   _poolHoodwink,
@@ -54771,6 +54777,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aerial-modification": _poolAerialModification,
   "pool/aerial-predation": _poolAerialPredation,
   "pool/aerial-responder": _poolAerialResponder,
+  "pool/aerial-surveyor": _poolAerialSurveyor,
   "pool/aerial-volley": _poolAerialVolley,
   "pool/aerid-konstrari": _poolAeridKonstrari,
   "pool/aerie-auxiliary": _poolAerieAuxiliary,
@@ -57245,6 +57252,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boulderloft-pathway": _poolBoulderloftPathway,
   "pool/bounce-off": _poolBounceOff,
   "pool/bouncers-beatdown": _poolBouncersBeatdown,
+  "pool/bouncing-beebles": _poolBouncingBeebles,
   "pool/bound-in-silence": _poolBoundInSilence,
   "pool/boundary-lands-ranger": _poolBoundaryLandsRanger,
   "pool/bounding-felidar": _poolBoundingFelidar,
@@ -65263,6 +65271,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hooded-assassin": _poolHoodedAssassin,
   "pool/hooded-blightfang": _poolHoodedBlightfang,
   "pool/hooded-brawler": _poolHoodedBrawler,
+  "pool/hooded-horror": _poolHoodedHorror,
   "pool/hooded-hydra": _poolHoodedHydra,
   "pool/hooded-kavu": _poolHoodedKavu,
   "pool/hoodwink": _poolHoodwink,

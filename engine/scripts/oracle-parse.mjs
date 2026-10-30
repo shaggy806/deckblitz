@@ -4166,6 +4166,19 @@ function parseStatic(line, text) {
     const inner = parseStatic(`${line.slice(0, -suffix.length)}.`, text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
+  // "… as long as defending player controls an artifact." — the player the
+  // creature attacks (rule 802.2a), Bouncing Beebles.
+  m = /^(.+) as long as defending player controls (?:an?|one or more) ([^.]+)\.$/.exec(line);
+  if (m !== null) {
+    const filter = parseTypePhrase(m[2]);
+    const inner = filter === null ? null : parseStatic(`${m[1]}.`, text);
+    if (inner !== null && inner.condition === undefined && inner.affects?.scope === "self") {
+      return {
+        ...inner,
+        condition: { kind: "of-player", player: "defending-player", condition: { kind: "controls", filter, atLeast: 1 } },
+      };
+    }
+  }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
     if (!line.startsWith(prefix)) continue;
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");

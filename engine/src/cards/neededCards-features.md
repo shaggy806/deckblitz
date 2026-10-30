@@ -344,6 +344,15 @@ Sunset Revelry, Rivalry, Tectonic Hellion, Speaker of the Heavens, Righteous
 Valkyrie, Planar Collapse, Harbor Serpent. The scaffolder's `playerStateIf`
 drafts the intervening-ifs.
 
+With it, `condition:defending-player-controls` (and Goblin Goon's
+controls-more-creatures-than-defending-player, already `youControlMore`): a
+`"defending-player"` `ConditionPlayer`, the player the source attacks (rule
+802.2a), for a static's "as long as defending player …"; the attack-trigger
+ifs are `"that-player"`, the attack restrictions `cantAttackUnlessDefender`. 3
+proving cards: Bouncing Beebles, Hooded Horror, Aerial Surveyor. Left to a
+narrow key: a non-attacking source's "defending player" (Kjeldoran Guard,
+Arcum's Sleigh), Avatar of Might's "at least four more".
+
 ### Cards outside the game: the sideboard — built 2026-10-30
 
 The need-keys Phase 2 family `mechanic:outside-the-game`, features only, and a

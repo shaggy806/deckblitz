@@ -310,6 +310,7 @@ import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHonoredHierarch from "../pool/honored-hierarch.js";
+import _poolHoodedHorror from "../pool/hooded-horror.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
 import _poolHorizonSpellbomb from "../pool/horizon-spellbomb.js";
 import _poolHornedKavu from "../pool/horned-kavu.js";
@@ -1170,6 +1171,7 @@ const shard: CardShard = {
     _poolHomunculusHorde,
     _poolHonorGuard,
     _poolHonoredHierarch,
+    _poolHoodedHorror,
     _poolHoppingAutomaton,
     _poolHorizonSpellbomb,
     _poolHornedKavu,

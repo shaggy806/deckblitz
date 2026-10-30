@@ -405,10 +405,21 @@ export function conditionPlayerOf(
   state: GameState,
   who: ConditionPlayer,
   opts: Pick<ConditionOptions, "thatPlayer" | "targets">,
+  source?: GameObject,
 ): PlayerId | undefined {
   let player: PlayerId | undefined;
   if (who === "that-player") player = opts.thatPlayer;
   else if (who === "active-player") player = state.turnOrder[state.turn.activePlayerIndex];
+  else if (who === "defending-player") {
+    // Rule 802.2a: the player the source attacks, or who defends what it
+    // attacks (`combat/eligibility.ts`'s `defendingPlayerOf`, not imported:
+    // that module reads conditions from here).
+    const at = source?.zone === "battlefield" ? source.attacking : null;
+    if (at !== null && at !== undefined) {
+      const attacked = state.objects[at as ObjectId];
+      player = attacked === undefined ? (at as PlayerId) : (attacked.protector ?? attacked.controller);
+    }
+  }
   else if ("target" in who) {
     const ref = opts.targets?.[who.target];
     player = ref?.kind === "player" ? ref.player : undefined;
@@ -819,7 +830,7 @@ function evalStaticCondition(
     }
     case "of-player": {
       // The inner condition with that player as its "you" (see `of-player`).
-      const player = conditionPlayerOf(state, condition.player, opts);
+      const player = conditionPlayerOf(state, condition.player, opts, source);
       return (
         player !== undefined && evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: player })
       );
@@ -831,10 +842,15 @@ function evalStaticCondition(
           ? (state.players[p]?.life ?? 0)
           : stat === "hand"
             ? (state.zones.perPlayer[p]?.hand.length ?? 0)
-            : countWhere(
+            : // The source counts on its controller's side, a static's too
+              // (Hooded Horror is one of "the most creatures"): keep the
+              // filter to type/subtype/colour clauses, as `countsSelf` does.
+              countWhere(
                 (id) =>
                   state.objects[id].controller === p &&
                   matchesFilter(state, registry, id, stat.controls, { you: p }),
+                [],
+                true,
               );
       const mine = statOf(you);
       const holds = (p: PlayerId): boolean => {
@@ -842,7 +858,7 @@ function evalStaticCondition(
         return condition.compare === "more" ? mine > theirs : condition.compare === "fewer" ? mine < theirs : mine >= theirs;
       };
       if (condition.than !== "each-opponent" && condition.than !== "an-opponent") {
-        const other = conditionPlayerOf(state, condition.than, opts);
+        const other = conditionPlayerOf(state, condition.than, opts, source);
         return other !== undefined && other !== you && holds(other);
       }
       const others = state.turnOrder.filter((p) => p !== you && state.players[p]?.hasLost !== true);

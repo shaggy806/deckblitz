@@ -577,10 +577,15 @@ export type TurnStat =
  * a `for-each-player` is about (the defending player of an attack trigger,
  * the player whose life changed …); `"active-player"` the player whose turn
  * it is ("at the beginning of each player's upkeep, if that player …"); a
- * target slot's player, or the controller of what a target slot points at. */
+ * target slot's player, or the controller of what a target slot points at.
+ * `"defending-player"` is the player the source creature is attacking (rule
+ * 802.2a — a planeswalker's controller, a battle's protector), so a static
+ * can read it: Bouncing Beebles' "can't be blocked as long as defending
+ * player controls an artifact". Nobody while the source isn't attacking. */
 export type ConditionPlayer =
   | "that-player"
   | "active-player"
+  | "defending-player"
   | { readonly target: number }
   | { readonly controllerOfTarget: number };
 

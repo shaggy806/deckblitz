@@ -619,7 +619,9 @@
   "condition:condition-count-all-permanents",
   "condition:target-player-turn-stat",
   "condition:that-player-turn-stat",
-  "condition:no-monarch"
+  "condition:no-monarch",
+  "condition:defending-player-controls",
+  "condition:controls-more-creatures-than-defending-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

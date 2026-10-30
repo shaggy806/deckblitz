@@ -11,6 +11,7 @@ import _poolAbzanBeastmaster from "../pool/abzan-beastmaster.js";
 import _poolAccumulateWisdom from "../pool/accumulate-wisdom.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAdventurersGuildhouse from "../pool/adventurers-guildhouse.js";
+import _poolAerialSurveyor from "../pool/aerial-surveyor.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAetherTheorist from "../pool/aether-theorist.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
@@ -875,6 +876,7 @@ const shard: CardShard = {
     _poolAccumulateWisdom,
     _poolAdultGoldDragon,
     _poolAdventurersGuildhouse,
+    _poolAerialSurveyor,
     _poolAerithLastAncient,
     _poolAetherTheorist,
     _poolAgentPhilCoulson,

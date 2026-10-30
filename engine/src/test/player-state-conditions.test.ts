@@ -10,6 +10,7 @@ import {
   attack,
   cast,
   hand,
+  keywords,
   life,
   lands,
   named,
@@ -17,9 +18,11 @@ import {
   pt,
   ref,
   registryOf,
+  settle,
   spawn,
   table,
   toHand,
+  toLibrary,
   toStep,
   tokensNamed,
   zone,
@@ -210,6 +213,57 @@ describe("player-compare: one number against other players'", () => {
     lands(game, "Plains", 3, B);
     toStep(game, "draw", B);
     expect(life(game, B)).toBe(20);
+  });
+});
+
+describe("defending-player: the player the source attacks (rule 802.2a)", () => {
+  it("is unblockable only against a player who controls an artifact (Bouncing Beebles)", () => {
+    const { game, a } = table({ players: 3 });
+    const beebles = spawn(game, "Bouncing Beebles");
+    spawn(game, "Sol Ring", C);
+    expect(keywords(game, beebles).has("unblockable")).toBe(false);
+    a.declareAttackersFn = () => [{ attacker: beebles, defender: C }];
+    toStep(game, "declare-blockers", A);
+    expect(keywords(game, beebles).has("unblockable")).toBe(true);
+  });
+
+  it("isn't unblockable attacking a player without one (Bouncing Beebles)", () => {
+    const { game, a } = table({ players: 3 });
+    const beebles = spawn(game, "Bouncing Beebles");
+    spawn(game, "Sol Ring", C);
+    a.declareAttackersFn = () => [{ attacker: beebles, defender: B }];
+    toStep(game, "declare-blockers", A);
+    expect(keywords(game, beebles).has("unblockable")).toBe(false);
+  });
+
+  it("counts itself on its controller's side of 'the most' (Hooded Horror)", () => {
+    const { game, a } = table();
+    const horror = spawn(game, "Hooded Horror");
+    spawn(game, "Grizzly Bears", B);
+    a.declareAttackersFn = () => [{ attacker: horror, defender: B }];
+    toStep(game, "declare-blockers", A);
+    // One each: Bob is tied for the most.
+    expect(keywords(game, horror).has("unblockable")).toBe(true);
+    spawn(game, "Grizzly Bears", A);
+    expect(keywords(game, horror).has("unblockable")).toBe(false);
+  });
+
+  it("compares the attacked player's lands with yours (Aerial Surveyor)", () => {
+    const crewAndAttack = (bobsPlains: number): Game => {
+      const { game, a } = table();
+      const surveyor = spawn(game, "Aerial Surveyor");
+      const bears = spawn(game, "Grizzly Bears");
+      lands(game, "Plains", 1, A);
+      lands(game, "Plains", bobsPlains, B);
+      toLibrary(game, "Plains", A);
+      game.dispatch({ type: "activate-ability", player: A, source: surveyor, abilityIndex: 0, targets: [], tap: [bears] });
+      settle(game);
+      a.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+      attack(game, a, [surveyor]);
+      return game;
+    };
+    expect(named(crewAndAttack(2), "Plains", A)).toHaveLength(2);
+    expect(named(crewAndAttack(1), "Plains", A)).toHaveLength(1);
   });
 });
 

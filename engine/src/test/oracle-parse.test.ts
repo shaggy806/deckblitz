@@ -1087,6 +1087,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       atLeast: 4,
       anyController: true,
     });
+    // A static's defending player: the one it attacks (rule 802.2a).
+    const beebles = face("~ can't be blocked as long as defending player controls an artifact.");
+    expect(beebles.static[0].condition).toEqual({
+      kind: "of-player",
+      player: "defending-player",
+      condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 1 },
+    });
+    expect(beebles.complete).toBe(true);
     // "That player" no trigger here names: left to a person.
     expect(
       face("When ~ enters, if that player has no cards in hand, draw a card.").triggered[0].condition,

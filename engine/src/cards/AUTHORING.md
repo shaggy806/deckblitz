@@ -4438,7 +4438,12 @@ clause (section 9):
   Muse's "at the beginning of each opponent's upkeep, if that player has two
   or fewer cards in hand" is `{ player: "active-player", condition: { kind:
   "hand-size", atMost: 2 } }`), `{ target: n }` (Hidetsugu's Second Rite's "if
-  target player has exactly 10 life") or `{ controllerOfTarget: n }`. Works
+  target player has exactly 10 life"), `{ controllerOfTarget: n }`, or
+  `"defending-player"` — the player the source creature is attacking (rule
+  802.2a), which a static can read: Bouncing Beebles' "can't be blocked as
+  long as defending player controls an artifact" (nobody while it isn't
+  attacking; "can't attack unless defending player …" is
+  `cantAttackUnlessDefender` instead, asked per attack declared). Works
   as an intervening-if (asked with the trigger's "that player" as it
   triggers and resolves), a `conditional`, an activation condition; on a
   static, only `"active-player"` and targets mean anything. Prefer it over a
