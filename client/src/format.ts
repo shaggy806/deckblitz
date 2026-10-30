@@ -314,6 +314,9 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       }`
     case 'number-chosen':
       return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
+    case 'crime-committed':
+      // Targeting an opponent or what they have (rule 700.13).
+      return `${who(event.player)} commits a crime with ${name(event.object)}`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
     case 'pile-chosen':
