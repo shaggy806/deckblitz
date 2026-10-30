@@ -141,10 +141,17 @@ section keeps only what to do next.
   `for-each-player`'s `whoIf`, starting-life bounds, `controls`' `anyController`, "no monarch";
   71 freed, 14 proving cards — Lavaborn Muse, Septic Rats, Hidetsugu's Second Rite, Depopulate,
   Sunset Revelry, Rivalry, Tectonic Hellion, Speaker of the Heavens, Righteous Valkyrie, Planar
-  Collapse, Harbor Serpent, Bouncing Beebles, Hooded Horror, Aerial Surveyor).
-  **321 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `static:skip-untap-step` (21), `decision:choose-card-name`'s chosen-value group (21),
-  `effect:prevent-combat-damage-to-and-by-target` (20), `effect:amount-new-variants` (20).
+  Collapse, Harbor Serpent, Bouncing Beebles, Hooded Horror, Aerial Surveyor), skip-untap-step
+  (2026-10-30: a static's `skipsSteps` and the one-shot `skip-step`, a skipped upkeep or draw
+  step passed as though it didn't exist; 13 freed, 7 proving cards — Stasis, Eon Hub,
+  Gibbering Descent, Damia, Sage of Stone, Fatigue, Molten Firebird, Elfhame Sanctuary),
+  prevent-combat-damage-to-and-by-target (2026-10-30: no engine code — B250's `damage-rule`
+  already ran it; the scaffolder taught; 15 freed, 4 proving cards — Ebony Horse, Awe Strike,
+  Stonewise Fortifier, Tajic, Legion's Edge).
+  **349 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `decision:choose-card-name`'s chosen-value group (21, new decisions: alone),
+  `effect:amount-new-variants` (20), `static:combat-restriction-extensions` (19),
+  `effect:modal-repeat-modes` (18).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: skipping steps** (2026-10-30, fda0164a5; `static:skip-untap-step`,
+  `static:skip-draw-step`, `static:skip-step`, `effect:skip-next-draw-step`). A static's
+  `skipsSteps` (untap, upkeep, draw; you, opponents or each player, timed by `condition`) and the
+  one-shot `skip-step` (the next one, or this turn's); a skipped upkeep or draw step is passed in
+  `Game.enterStep` as though it didn't exist (rules 500.11, 614.10), and a static's skip leaves a
+  "next" one waiting (614.10a). 7 proving cards, 13 cards freed for `author-freed`.
+- **Need-keys Phase 2: damage prevented to and by a target, marked built** (2026-10-30,
+  e96d12c3f; `effect:prevent-combat-damage-to-and-by-target`,
+  `replacement:prevent-damage-by-target-this-turn`, `replacement:prevent-damage-to-other-filter`).
+  No engine code: the keys predate B250's `damage-rule` and static prevention, which run them; the
+  scaffolder learned their lines. 4 proving cards, 15 cards freed.
 - **Need-keys Phase 2: player-state conditions on another player** (2026-10-30, b9325a20a and
   c8e45c3db; `condition:player-state-thresholds`, `condition:defending-player-controls`). A
   `StaticCondition` `of-player` reads any condition with another player as its "you" — "that

@@ -483,6 +483,14 @@ missing. Re-run `--greedy` for Phase 2's order.
   `playerStateIf`. 71 freed (321 queued). Next: `static:skip-untap-step` (21),
   `decision:choose-card-name`'s chosen-value group (21),
   `effect:prevent-combat-damage-to-and-by-target` (20).
+- **2026-10-30: skip-untap-step and prevent-combat-damage-to-and-by-target, engine-only** —
+  a static's `skipsSteps` and the one-shot `skip-step` (next, or this turn's), a skipped
+  upkeep or draw step passed in `enterStep` (rules 500.11, 614.10, 614.10a); 4 keys, 7
+  proving cards. The second family needed no engine code: its keys predate B250's
+  `damage-rule`, so it was the scaffolder taught and 3 keys marked built, 4 proving cards.
+  28 freed (349 queued). Skipped `decision:choose-card-name`'s chosen-value group, first in
+  the order: it adds decisions, so it goes alone. Next: that group (21),
+  `effect:amount-new-variants` (20), `static:combat-restriction-extensions` (19).
 
 ## Rough size
 
