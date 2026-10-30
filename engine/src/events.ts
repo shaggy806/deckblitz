@@ -105,6 +105,14 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `player`'s upkeep or draw step was skipped (rules 500.11, 614.10 —
+       * a static's `skipsSteps`, the `skip-step` effect): the turn went past
+       * it as though it didn't exist, with no `step-began` for it. */
+      readonly type: "step-skipped";
+      readonly player: PlayerId;
+      readonly step: "upkeep" | "draw";
+    })
+  | (Base & {
       /** Aggravated Assault queued an extra combat phase this turn. */
       readonly type: "additional-combat-queued";
       readonly player: PlayerId;

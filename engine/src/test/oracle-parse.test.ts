@@ -2499,6 +2499,25 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("When this enchantment enters, that player untaps a land they control.", "Enchantment").complete).toBe(false);
   });
 
+  it("step skips as statics and as one-shots (static:skip-untap-step, skip-draw-step)", () => {
+    expect(face("Skip your draw step.\nPay 1 life: Draw a card.", "Enchantment").static).toEqual([
+      { affects: { scope: "self" }, skipsSteps: { who: "you", steps: ["draw"] }, text: "Skip your draw step." },
+    ]);
+    expect(face("Players skip their untap steps.", "Enchantment").static?.[0]?.skipsSteps).toEqual({
+      who: "each-player",
+      steps: ["untap"],
+    });
+    expect(face("Players skip their upkeep steps.", "Artifact").static?.[0]?.skipsSteps).toEqual({
+      who: "each-player",
+      steps: ["upkeep"],
+    });
+    expect(face("Target player skips their next draw step.", "Sorcery").effect).toEqual({
+      kind: "skip-step",
+      step: "draw",
+      who: 0,
+    });
+  });
+
   it("a player chosen as it enters, and the lines that read the chosen player (decision:choose-player)", () => {
     const rack = face(
       "As this artifact enters, choose an opponent.\nThe chosen player's maximum hand size is four.",

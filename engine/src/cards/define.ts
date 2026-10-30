@@ -2252,6 +2252,19 @@ export interface StaticAbility {
    * untap); no player gets priority (502.4). `affects` is ignored. Usually
    * beside an effect lasting `"while-source-tapped"`. */
   readonly mayChooseNotToUntap?: true;
+  /** "Skip your draw step" (Necropotence, Damia, Sage of Stone), "players skip
+   * their untap steps" (Stasis), "players skip their upkeep steps" (Eon Hub)
+   * — rule 614.10's skip as a static: each of `who`'s (from this permanent's
+   * controller's side) steps of these kinds is passed as though it didn't
+   * exist (500.11) while this applies — time it with `condition` (Gibbering
+   * Descent's hellbent). A "next" skip (`skip-step`) isn't used up by a step
+   * this skips: it waits for the first one that isn't skipped (614.10a).
+   * One already under way can't be skipped (614.10): read as each begins.
+   * `affects` is ignored. */
+  readonly skipsSteps?: {
+    readonly who: "you" | "opponents" | "each-player";
+    readonly steps: readonly ("untap" | "upkeep" | "draw")[];
+  };
   /** "Creatures with swampwalk can be blocked as though they didn't have
    * swampwalk" (Legends' Quagmire, Lord Magnus — rule 702.14): every
    * creature's landwalk of these kinds is ignored when a block is declared,

@@ -263,6 +263,7 @@ import _poolGenjuOfTheFalls from "../pool/genju-of-the-falls.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
+import _poolGibberingDescent from "../pool/gibbering-descent.js";
 import _poolGideonsDefeat from "../pool/gideons-defeat.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,
+    _poolGibberingDescent,
     _poolGideonsDefeat,
     _poolGigastormTitan,
     _poolGingerbreadCabin,

@@ -4984,6 +4984,7 @@ import _poolDalekSquadron from "./pool/dalek-squadron.js";
 import _poolDalkovanEncampment from "./pool/dalkovan-encampment.js";
 import _poolDalkovanPackbeasts from "./pool/dalkovan-packbeasts.js";
 import _poolDamageControlCrew from "./pool/damage-control-crew.js";
+import _poolDamiaSageOfStone from "./pool/damia-sage-of-stone.js";
 import _poolDamn from "./pool/damn.js";
 import _poolDamnablePact from "./pool/damnable-pact.js";
 import _poolDamnation from "./pool/damnation.js";
@@ -6700,6 +6701,7 @@ import _poolEleshNornGrandCenobite from "./pool/elesh-norn-grand-cenobite.js";
 import _poolEleshNornMotherOfMachines from "./pool/elesh-norn-mother-of-machines.js";
 import _poolElfReplica from "./pool/elf-replica.js";
 import _poolElfhamePalace from "./pool/elfhame-palace.js";
+import _poolElfhameSanctuary from "./pool/elfhame-sanctuary.js";
 import _poolElfhameWurm from "./pool/elfhame-wurm.js";
 import _poolElfswornGiant from "./pool/elfsworn-giant.js";
 import _poolElgaudInquisitor from "./pool/elgaud-inquisitor.js";
@@ -7015,6 +7017,7 @@ import _poolEnvoyOfOkinecAhau from "./pool/envoy-of-okinec-ahau.js";
 import _poolEnvoyOfTheAncestors from "./pool/envoy-of-the-ancestors.js";
 import _poolEomerMarshalOfRohan from "./pool/eomer-marshal-of-rohan.js";
 import _poolEomerOfTheRiddermark from "./pool/eomer-of-the-riddermark.js";
+import _poolEonHub from "./pool/eon-hub.js";
 import _poolEowynShieldmaiden from "./pool/eowyn-shieldmaiden.js";
 import _poolEpfPointSquad from "./pool/epf-point-squad.js";
 import _poolEpharaEverSheltering from "./pool/ephara-ever-sheltering.js";
@@ -7596,6 +7599,7 @@ import _poolFathomFleetCutthroat from "./pool/fathom-fleet-cutthroat.js";
 import _poolFathomFleetFirebrand from "./pool/fathom-fleet-firebrand.js";
 import _poolFathomFleetSwordjack from "./pool/fathom-fleet-swordjack.js";
 import _poolFathomSeer from "./pool/fathom-seer.js";
+import _poolFatigue from "./pool/fatigue.js";
 import _poolFaultLine from "./pool/fault-line.js";
 import _poolFaultRiders from "./pool/fault-riders.js";
 import _poolFaultgrinder from "./pool/faultgrinder.js";
@@ -8996,6 +9000,7 @@ import _poolGiantsGrasp from "./pool/giants-grasp.js";
 import _poolGiantsIre from "./pool/giants-ire.js";
 import _poolGiantsSkewer from "./pool/giants-skewer.js";
 import _poolGibberingBarricade from "./pool/gibbering-barricade.js";
+import _poolGibberingDescent from "./pool/gibbering-descent.js";
 import _poolGibberingFiend from "./pool/gibbering-fiend.js";
 import _poolGibberingHyenas from "./pool/gibbering-hyenas.js";
 import _poolGibberingKami from "./pool/gibbering-kami.js";
@@ -14589,6 +14594,7 @@ import _poolMoltenCoreMaestro from "./pool/molten-core-maestro.js";
 import _poolMoltenDuplication from "./pool/molten-duplication.js";
 import _poolMoltenEchoes from "./pool/molten-echoes.js";
 import _poolMoltenExhale from "./pool/molten-exhale.js";
+import _poolMoltenFirebird from "./pool/molten-firebird.js";
 import _poolMoltenFrame from "./pool/molten-frame.js";
 import _poolMoltenGatekeeper from "./pool/molten-gatekeeper.js";
 import _poolMoltenInfluence from "./pool/molten-influence.js";
@@ -21677,6 +21683,7 @@ import _poolStasisCell from "./pool/stasis-cell.js";
 import _poolStasisCocoon from "./pool/stasis-cocoon.js";
 import _poolStasisField from "./pool/stasis-field.js";
 import _poolStasisSnare from "./pool/stasis-snare.js";
+import _poolStasis from "./pool/stasis.js";
 import _poolStatecraft from "./pool/statecraft.js";
 import _poolStaticNet from "./pool/static-net.js";
 import _poolStaticPrison from "./pool/static-prison.js";
@@ -32256,6 +32263,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDalkovanEncampment,
   _poolDalkovanPackbeasts,
   _poolDamageControlCrew,
+  _poolDamiaSageOfStone,
   _poolDamn,
   _poolDamnablePact,
   _poolDamnation,
@@ -33972,6 +33980,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEleshNornMotherOfMachines,
   _poolElfReplica,
   _poolElfhamePalace,
+  _poolElfhameSanctuary,
   _poolElfhameWurm,
   _poolElfswornGiant,
   _poolElgaudInquisitor,
@@ -34287,6 +34296,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnvoyOfTheAncestors,
   _poolEomerMarshalOfRohan,
   _poolEomerOfTheRiddermark,
+  _poolEonHub,
   _poolEowynShieldmaiden,
   _poolEpfPointSquad,
   _poolEpharaEverSheltering,
@@ -34868,6 +34878,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFathomFleetFirebrand,
   _poolFathomFleetSwordjack,
   _poolFathomSeer,
+  _poolFatigue,
   _poolFaultLine,
   _poolFaultRiders,
   _poolFaultgrinder,
@@ -36268,6 +36279,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGiantsIre,
   _poolGiantsSkewer,
   _poolGibberingBarricade,
+  _poolGibberingDescent,
   _poolGibberingFiend,
   _poolGibberingHyenas,
   _poolGibberingKami,
@@ -41861,6 +41873,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoltenDuplication,
   _poolMoltenEchoes,
   _poolMoltenExhale,
+  _poolMoltenFirebird,
   _poolMoltenFrame,
   _poolMoltenGatekeeper,
   _poolMoltenInfluence,
@@ -48949,6 +48962,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStasisCocoon,
   _poolStasisField,
   _poolStasisSnare,
+  _poolStasis,
   _poolStatecraft,
   _poolStaticNet,
   _poolStaticPrison,
@@ -59541,6 +59555,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dalkovan-encampment": _poolDalkovanEncampment,
   "pool/dalkovan-packbeasts": _poolDalkovanPackbeasts,
   "pool/damage-control-crew": _poolDamageControlCrew,
+  "pool/damia-sage-of-stone": _poolDamiaSageOfStone,
   "pool/damn": _poolDamn,
   "pool/damnable-pact": _poolDamnablePact,
   "pool/damnation": _poolDamnation,
@@ -61257,6 +61272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elesh-norn-mother-of-machines": _poolEleshNornMotherOfMachines,
   "pool/elf-replica": _poolElfReplica,
   "pool/elfhame-palace": _poolElfhamePalace,
+  "pool/elfhame-sanctuary": _poolElfhameSanctuary,
   "pool/elfhame-wurm": _poolElfhameWurm,
   "pool/elfsworn-giant": _poolElfswornGiant,
   "pool/elgaud-inquisitor": _poolElgaudInquisitor,
@@ -61572,6 +61588,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/envoy-of-the-ancestors": _poolEnvoyOfTheAncestors,
   "pool/eomer-marshal-of-rohan": _poolEomerMarshalOfRohan,
   "pool/eomer-of-the-riddermark": _poolEomerOfTheRiddermark,
+  "pool/eon-hub": _poolEonHub,
   "pool/eowyn-shieldmaiden": _poolEowynShieldmaiden,
   "pool/epf-point-squad": _poolEpfPointSquad,
   "pool/ephara-ever-sheltering": _poolEpharaEverSheltering,
@@ -62153,6 +62170,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fathom-fleet-firebrand": _poolFathomFleetFirebrand,
   "pool/fathom-fleet-swordjack": _poolFathomFleetSwordjack,
   "pool/fathom-seer": _poolFathomSeer,
+  "pool/fatigue": _poolFatigue,
   "pool/fault-line": _poolFaultLine,
   "pool/fault-riders": _poolFaultRiders,
   "pool/faultgrinder": _poolFaultgrinder,
@@ -63553,6 +63571,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/giants-ire": _poolGiantsIre,
   "pool/giants-skewer": _poolGiantsSkewer,
   "pool/gibbering-barricade": _poolGibberingBarricade,
+  "pool/gibbering-descent": _poolGibberingDescent,
   "pool/gibbering-fiend": _poolGibberingFiend,
   "pool/gibbering-hyenas": _poolGibberingHyenas,
   "pool/gibbering-kami": _poolGibberingKami,
@@ -69146,6 +69165,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/molten-duplication": _poolMoltenDuplication,
   "pool/molten-echoes": _poolMoltenEchoes,
   "pool/molten-exhale": _poolMoltenExhale,
+  "pool/molten-firebird": _poolMoltenFirebird,
   "pool/molten-frame": _poolMoltenFrame,
   "pool/molten-gatekeeper": _poolMoltenGatekeeper,
   "pool/molten-influence": _poolMoltenInfluence,
@@ -76234,6 +76254,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stasis-cocoon": _poolStasisCocoon,
   "pool/stasis-field": _poolStasisField,
   "pool/stasis-snare": _poolStasisSnare,
+  "pool/stasis": _poolStasis,
   "pool/statecraft": _poolStatecraft,
   "pool/static-net": _poolStaticNet,
   "pool/static-prison": _poolStaticPrison,

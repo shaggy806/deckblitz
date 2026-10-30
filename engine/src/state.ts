@@ -2292,6 +2292,13 @@ export interface PlayerState {
    * permanent that doesn't untap during it, an exert) waits for the first one
    * that isn't skipped. Absent with none. See the `skip-untap-step` effect. */
   untapStepsToSkip?: number;
+  /** "[That player] skips their next draw step" (Fatigue, Molten Firebird —
+   * rule 614.10) and the same for an upkeep step: how many of each are still
+   * to be skipped, each effect satisfied by one (614.10a). A step a static
+   * already skips (`skipsSteps`) doesn't count: what's scheduled for the
+   * "next" one waits for the first that isn't skipped. Absent with none. See
+   * the `skip-step` effect. */
+  stepsToSkip?: { upkeep?: number; draw?: number };
   /** What this player's turn so far has held — see {@link TurnHistory}.
    * Absent until something is recorded; reset as each turn begins. */
   turnHistory?: TurnHistory;
@@ -2494,6 +2501,10 @@ export interface TurnState {
    * its turn-based actions were done): when it ends, another cleanup step
    * begins rather than the next turn. */
   cleanupHadPriority?: boolean;
+  /** "You skip your draw step this turn" (Elfhame Sanctuary — the
+   * `skip-step` effect's `thisTurn`): the active player's steps of these
+   * kinds this turn are skipped, and none of a later turn. */
+  skipsThisTurn?: ("upkeep" | "draw")[];
   /** True when this turn was taken via an extra-turn effect (Time Warp) rather
    * than the normal rotation — ROADMAP Phase 7. */
   isExtra: boolean;

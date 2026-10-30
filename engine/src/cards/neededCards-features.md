@@ -321,6 +321,22 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Skipping steps — built 2026-10-30
+
+The need-keys Phase 2 family `static:skip-untap-step`, features only,
+engine-only. **`skipsSteps`** (a static: `who`, `steps`) skips a player's
+untap, upkeep or draw steps while it applies; the one-shot **`skip-step`**
+(`step`, `who`, `thisTurn`) skips their next one, or this turn's. A skipped
+upkeep or draw step is passed in `Game.enterStep` as though it didn't exist
+(500.11) — a `step-skipped` event and no `step-began`, so nothing "at the
+beginning of" it — and a static's skip leaves a "next" one waiting
+(614.10a). Keys: skip-untap-step, skip-draw-step, skip-step,
+skip-next-draw-step. 7 proving cards: Stasis, Eon Hub, Gibbering Descent,
+Damia, Sage of Stone, Fatigue, Molten Firebird, Elfhame Sanctuary. Left open:
+Possessed Portal's "skips that draw" (`replacement:skip-every-draw`, a draw
+replacement beside Notion Thief's), Fasting's optional skip, Sands of Time's
+tap swap.
+
 ### Player-state conditions on another player — built 2026-10-30
 
 The need-keys Phase 2 family `condition:player-state-thresholds`, features

@@ -208,6 +208,7 @@ import _poolEnshrinedMemories from "../pool/enshrined-memories.js";
 import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEnvelop from "../pool/envelop.js";
+import _poolEonHub from "../pool/eon-hub.js";
 import _poolEscapeProtocol from "../pool/escape-protocol.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
@@ -656,6 +657,7 @@ import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
 import _poolStarstorm from "../pool/starstorm.js";
 import _poolStasisField from "../pool/stasis-field.js";
+import _poolStasis from "../pool/stasis.js";
 import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStealArtifact from "../pool/steal-artifact.js";
 import _poolStealthMission from "../pool/stealth-mission.js";
@@ -1056,6 +1058,7 @@ const shard: CardShard = {
     _poolEntishRestoration,
     _poolEntryDenied,
     _poolEnvelop,
+    _poolEonHub,
     _poolEscapeProtocol,
     _poolEsikasChariot,
     _poolEssenceExtraction,
@@ -1504,6 +1507,7 @@ const shard: CardShard = {
     _poolStarfallInvocation,
     _poolStarstorm,
     _poolStasisField,
+    _poolStasis,
     _poolStaticPrison,
     _poolStealArtifact,
     _poolStealthMission,

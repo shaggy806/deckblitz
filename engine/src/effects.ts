@@ -4838,6 +4838,23 @@ export type EffectSpec =
     }
   | {
       /**
+       * "[That player] **skips their next draw step**" (Fatigue, Molten
+       * Firebird) or upkeep step — rule 614.10, as `skip-untap-step` is for
+       * an untap step (which `step: "untap"` is): the whole step passed as
+       * though it didn't exist (500.11), with no triggers "at the beginning
+       * of" it and no priority. Two skip the next two (614.10a); a step a
+       * static already skips (`skipsSteps`) doesn't use one up. `thisTurn`:
+       * "you skip your draw step **this turn**" (Elfhame Sanctuary) — only
+       * the active player's, this turn's, and nothing later. `who` is a
+       * player slot or a scope, `"you"` by default.
+       */
+      readonly kind: "skip-step";
+      readonly step: "untap" | "upkeep" | "draw";
+      readonly who?: number | PlayerScope;
+      readonly thisTurn?: true;
+    }
+  | {
+      /**
        * Phase out (rule 702.26b): the permanent `target` names (a slot,
        * `"source"` — "he phases out" — or `"trigger-object"`), the one the
        * effect's source is attached to as this resolves (`attachedToSource` —
@@ -7565,6 +7582,9 @@ export interface EffectApi {
   /** See the `"skip-untap-step"` {@link EffectSpec}: one more of `player`'s
    * untap steps to skip. */
   skipUntapStep(player: PlayerId): void;
+  /** See the `"skip-step"` {@link EffectSpec}: one more of `player`'s steps
+   * of this kind to skip, or — `thisTurn` — this turn's, if they're active. */
+  skipStep(player: PlayerId, step: "untap" | "upkeep" | "draw", thisTurn: boolean): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -11144,6 +11164,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "skip-untap-step": {
       for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
         if (target.kind === "player") ctx.skipUntapStep(target.player);
+      }
+      return;
+    }
+    case "skip-step": {
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
+        if (target.kind !== "player") continue;
+        if (spec.step === "untap" && spec.thisTurn !== true) ctx.skipUntapStep(target.player);
+        else ctx.skipStep(target.player, spec.step, spec.thisTurn === true);
       }
       return;
     }

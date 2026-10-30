@@ -6405,6 +6405,7 @@ export class Game {
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
     delete this.state.turn.endsAfterAddedCombat;
+    delete this.state.turn.skipsThisTurn;
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
@@ -6573,7 +6574,11 @@ export class Game {
     // Day → night if the previous turn's player cast no spells (726.3);
     // night → day if they cast two or more (726.4). Only once it's day or night.
     // It's the untap step's (502.2), so a skipped untap step has none.
-    if (prevActive !== null && (this.state.players[this.activePlayer]?.untapStepsToSkip ?? 0) === 0) {
+    if (
+      prevActive !== null &&
+      (this.state.players[this.activePlayer]?.untapStepsToSkip ?? 0) === 0 &&
+      !this.staticSkipsStep(this.activePlayer, "untap")
+    ) {
       if (this.state.dayNight === "day" && prevActiveSpells === 0) {
         this.setDayNight("night");
       } else if (this.state.dayNight === "night" && prevActiveSpells >= 2) {
@@ -6592,6 +6597,16 @@ export class Game {
 
   private enterStep(step: Step): void {
     this.state.turn.step = step;
+    // A skipped upkeep or draw step (rules 500.11, 614.10): the turn
+    // proceeds past it as though it didn't exist — no step-began, nothing
+    // "at the beginning of" it, no priority, no mana emptied — straight to
+    // what comes after it. (An untap step's skip is read inside it: the
+    // turn's own resets happen there all the same — `untapStep`.)
+    if ((step === "upkeep" || step === "draw") && !this.activeHasLeft() && this.skipsStepNow(step)) {
+      this.emit({ type: "step-skipped", player: this.activePlayer, step });
+      this.endStep();
+      return;
+    }
     // Which combat or main phase of the turn this is (Karlach's "the first
     // combat phase of the turn").
     if (step === "begin-combat") {
@@ -6978,12 +6993,16 @@ export class Game {
     // waits for "their next untap step" waits for the next one that happens
     // (614.10a). The turn's own resets below still happen: they're the turn
     // beginning, not the step.
+    // A static's skip (Stasis) leaves a "next" one waiting (614.10a).
     const activeState = this.state.players[active];
-    const skipping = (activeState?.untapStepsToSkip ?? 0) > 0;
+    const staticSkip = this.staticSkipsStep(active, "untap");
+    const skipping = staticSkip || (activeState?.untapStepsToSkip ?? 0) > 0;
     if (skipping && activeState !== undefined) {
-      const left = (activeState.untapStepsToSkip ?? 0) - 1;
-      if (left === 0) delete activeState.untapStepsToSkip;
-      else activeState.untapStepsToSkip = left;
+      if (!staticSkip) {
+        const left = (activeState.untapStepsToSkip ?? 0) - 1;
+        if (left === 0) delete activeState.untapStepsToSkip;
+        else activeState.untapStepsToSkip = left;
+      }
       this.emit({ type: "untap-step-skipped", player: active });
     }
     // First, phasing (rule 502.1), before anything untaps.
@@ -7189,6 +7208,49 @@ export class Game {
         );
       });
     });
+  }
+
+  /** Whether a static ability makes `player` skip their steps of this kind
+   * (`skipsSteps` — Stasis, Eon Hub, Necropotence), as it stands now. */
+  private staticSkipsStep(player: PlayerId, step: "untap" | "upkeep" | "draw"): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source) || this.state.players[source.controller]?.hasLost === true) {
+        continue;
+      }
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const rule = ability.skipsSteps;
+        if (rule === undefined || !rule.steps.includes(step)) continue;
+        const reaches = rule.who === "each-player" || (rule.who === "you") === (player === source.controller);
+        if (reaches && this.staticActive(source, ability)) return true;
+      }
+    }
+    return false;
+  }
+
+  /** Whether the active player's upkeep or draw step, about to begin, is
+   * skipped (rule 614.10) — using up the one-shot skip that does it. A
+   * static's skip first, which leaves a "next" one waiting for a step that
+   * isn't skipped (614.10a); then "this turn"'s; then a "next" one. */
+  private skipsStepNow(step: "upkeep" | "draw"): boolean {
+    const active = this.activePlayer;
+    if (this.staticSkipsStep(active, step)) return true;
+    const thisTurn = this.state.turn.skipsThisTurn;
+    const at = thisTurn?.indexOf(step) ?? -1;
+    if (thisTurn !== undefined && at >= 0) {
+      const left = thisTurn.filter((_, i) => i !== at);
+      if (left.length === 0) delete this.state.turn.skipsThisTurn;
+      else this.state.turn.skipsThisTurn = left;
+      return true;
+    }
+    const player = this.state.players[active];
+    const owed = player?.stepsToSkip?.[step] ?? 0;
+    if (player === undefined || owed === 0) return false;
+    const rest = { ...player.stepsToSkip, [step]: owed - 1 };
+    if (rest[step] === 0) delete rest[step];
+    if (rest.upkeep === undefined && rest.draw === undefined) delete player.stepsToSkip;
+    else player.stepsToSkip = rest;
+    return true;
   }
 
   private drawStep(): void {
@@ -24552,6 +24614,18 @@ export class Game {
       skipUntapStep: (player) => {
         const state = this.state.players[player];
         if (state !== undefined && !state.hasLost) state.untapStepsToSkip = (state.untapStepsToSkip ?? 0) + 1;
+      },
+      skipStep: (player, step, thisTurn) => {
+        const state = this.state.players[player];
+        if (state === undefined || state.hasLost || step === "untap") return;
+        if (thisTurn) {
+          // "This turn": the active player's alone — nobody else has a
+          // step of their own this turn to skip.
+          if (player !== this.activePlayer) return;
+          this.state.turn.skipsThisTurn = [...(this.state.turn.skipsThisTurn ?? []), step];
+          return;
+        }
+        state.stepsToSkip = { ...state.stepsToSkip, [step]: (state.stepsToSkip?.[step] ?? 0) + 1 };
       },
       exileFromLibrary: (target, count, withCounters) =>
         this.exileFromLibraryByEffect(target, count, controller, withCounters),

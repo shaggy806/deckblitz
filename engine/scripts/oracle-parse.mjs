@@ -1285,6 +1285,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) skips their next untap step`).exec(s))) {
     return { kind: "skip-untap-step", who: slot(m[1]) };
   }
+  // "Skips their next draw step" / upkeep step: the `skip-step` effect.
+  if ((m = re(`you skip your next (draw|upkeep) step`).exec(s))) return { kind: "skip-step", step: m[1], who: "you" };
+  if ((m = re(`each opponent skips their next (draw|upkeep) step`).exec(s))) {
+    return { kind: "skip-step", step: m[1], who: "each-opponent" };
+  }
+  if ((m = re(`(target player|target opponent) skips their next (draw|upkeep) step`).exec(s))) {
+    return { kind: "skip-step", step: m[2], who: slot(m[1]) };
+  }
   if ((m = re(`draw ${N} cards?, then discard ${N} cards?`).exec(s))) {
     return {
       kind: "sequence",
@@ -4326,6 +4334,12 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // A static step skip (rule 614.10): "skip your draw step", "players skip
+  // their untap steps", "each player skips their untap step".
+  if ((m = /^(Skip your|Players skip their|Each player skips their|Your opponents skip their|Each opponent skips their) (untap|upkeep|draw) steps?\.$/.exec(line))) {
+    const who = m[1] === "Skip your" ? "you" : /opponent/.test(m[1]) ? "opponents" : "each-player";
+    return { affects: { scope: "self" }, skipsSteps: { who, steps: [m[2]] }, text };
+  }
   // Cursed Rack's "the chosen player's maximum hand size is four".
   if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {
     return { affects: { scope: "self" }, maxHandSize: { who: "chosen-player", set: numberOf(m[1]) }, text };

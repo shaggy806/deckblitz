@@ -160,6 +160,7 @@ import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
 import _poolCunningBreezedancer from "../pool/cunning-breezedancer.js";
+import _poolDamiaSageOfStone from "../pool/damia-sage-of-stone.js";
 import _poolDampeningPulse from "../pool/dampening-pulse.js";
 import _poolDarknessDescends from "../pool/darkness-descends.js";
 import _poolDarkstarAugur from "../pool/darkstar-augur.js";
@@ -990,6 +991,7 @@ const shard: CardShard = {
     _poolCrushingDisappointment,
     _poolCrypticCaves,
     _poolCunningBreezedancer,
+    _poolDamiaSageOfStone,
     _poolDampeningPulse,
     _poolDarknessDescends,
     _poolDarkstarAugur,

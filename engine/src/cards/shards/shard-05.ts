@@ -488,6 +488,7 @@ import _poolMineCollapse from "../pool/mine-collapse.js";
 import _poolMiresMalice from "../pool/mires-malice.js";
 import _poolMirriTheCursed from "../pool/mirri-the-cursed.js";
 import _poolMishraEminentOne from "../pool/mishra-eminent-one.js";
+import _poolMoltenFirebird from "../pool/molten-firebird.js";
 import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
@@ -1327,6 +1328,7 @@ const shard: CardShard = {
     _poolMiresMalice,
     _poolMirriTheCursed,
     _poolMishraEminentOne,
+    _poolMoltenFirebird,
     _poolMoltenPrimordial,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,

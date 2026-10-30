@@ -243,6 +243,7 @@ import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFastFurious from "../pool/fast-furious.js";
 import _poolFateForetold from "../pool/fate-foretold.js";
+import _poolFatigue from "../pool/fatigue.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolFangOfShigeki,
     _poolFastFurious,
     _poolFateForetold,
+    _poolFatigue,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
     _poolFeralGhoul,
