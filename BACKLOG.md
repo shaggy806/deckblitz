@@ -120,10 +120,14 @@ section keeps only what to do next.
   count-scaled bonus, a per-player graveyard count, `{ controllerOfTarget }` as the player who
   draws, discards or gets poison; 33 freed, 10 proving cards — Lost Order of Jarkeld, Entropic
   Specter, Nyxathid, Weight of Spires, Emissary of Hope, Typhoon, Nature's Resurgence,
-  Assassin's Strike, Call to Heel, Pistus Strike).
-  **188 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `decision:choose-permanent` (24), `effect:discard-all-matching` (22),
-  `effect:look-and-choose-target-opponent-library` (22), `mechanic:outside-the-game` (21).
+  Assassin's Strike, Call to Heel, Pistus Strike), choose-permanent's first unit (2026-10-30:
+  `choosePermanentOnEnter` kept as `GameObject.chosenPermanent` and read as "the chosen
+  creature", `choose-permanents`' `chooser`, amount `min` and `exceptTriggerObject`; 16 freed,
+  9 proving cards — Tyrannical Pitlord, Dauntless Bodyguard, Grifter's Blade, Phylactery Lich,
+  Sunken Hope, Tangle Wire, Crashing Boars, Saw, Cloudstone Curio).
+  **204 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22),
+  `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

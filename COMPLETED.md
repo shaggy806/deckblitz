@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: the chosen creature, and choices by another player, features only**
+  (2026-10-30; `decision:choose-permanent`, `decision:as-enters-choose-permanent`,
+  `decision:choose-permanents-exclude-trigger-object`, `decision:that-player-chooses-permanent`).
+  "As this enters, choose another creature you control" (rule 614.1c) as
+  `choosePermanentOnEnter`, kept with its stint as `GameObject.chosenPermanent` and read by
+  the `"chosen"` target ref and a static's `{ scope: "chosen" }` (rules 607.2d, 400.7), with
+  `attach` and `counter` for what the choice does as it enters; `choose-permanents`'
+  `chooser`, an amount `min` and `exceptTriggerObject`; `sharesPermanentTypeWith` (rule
+  110.4); the search bot's candidates for a forced pick; the view naming the chosen permanent;
+  the scaffolder's templates. Tyrannical Pitlord, Dauntless Bodyguard, Grifter's Blade,
+  Phylactery Lich, Sunken Hope, Tangle Wire, Crashing Boars, Saw and Cloudstone Curio authored
+  to prove it. 204 freed cards wait for `author-freed`.
 - **Need-keys Phase 2: counts for one player, and its controller as the player, features
   only** (2026-10-29; `amount:count-for-chosen-player`, `amount:count-for-controller-of-target`,
   `amount:count-per-player`, `amount:count-that-player-controls`,

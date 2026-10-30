@@ -455,6 +455,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   Stopped at two with the account's weekly limit at 99%. 188 freed cards queued. Next:
   `decision:choose-permanent` (24), `effect:discard-all-matching` (22),
   `effect:look-and-choose-target-opponent-library` (22).
+- **2026-10-30: choose-permanent's first unit, engine-only** — on the existing
+  `choose-permanents` decision: a permanent chosen as another enters (`choosePermanentOnEnter`,
+  `GameObject.chosenPermanent`, the `"chosen"` ref and static scope), another player as the
+  chooser, an amount minimum, "another" sparing the trigger's object; 9 proving cards. One
+  family: the session passed ~300K tokens. 204 freed cards queued. Next:
+  `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22),
+  `mechanic:outside-the-game` (21).
 
 ## Rough size
 
