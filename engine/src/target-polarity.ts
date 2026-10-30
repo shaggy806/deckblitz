@@ -696,6 +696,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // opponents' graveyards, put onto the battlefield under your control).
   "look-and-choose": (n, v) => {
     if (n.zone === "targets") v.touch(EVERY_SLOT, "take", MAJOR);
+    // Another player's library: what's taken from it ("put one of them into
+    // their graveyard", "exile one of them") is a loss for them; a look or
+    // reorder alone (Portent) is anyone's to use.
+    if (n.from !== undefined && (n.destination === "graveyard" || n.destination.startsWith("exile"))) {
+      v.touch(n.from, "harm", MAJOR);
+    }
   },
 };
 

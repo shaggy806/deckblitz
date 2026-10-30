@@ -321,6 +321,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Another player's library — built 2026-10-30
+
+The need-keys Phase 2 family `effect:look-and-choose-target-opponent-library`,
+features only. `look-and-choose` gained **`from: EffectPlayerRef`**: another
+player's library (a target, "that player"), the effect's controller still
+looking and choosing — the zone's owner and picker of Tasigur's shape — with
+the chosen cards going to that player's zones; a **`"graveyard"`** destination
+("put one of them into their graveyard"); and **`leftover: "top-any-order"`**
+("the rest on top of their library in any order"), the chooser ordering them
+through `beginLibraryOrder`'s top. Proving cards: Architects of Will, Draugr
+Thought-Thief, Cruel Fate, Sealed Fate, Balshan Beguiler. Keys:
+`effect:look-and-choose-target-opponent-library`,
+`effect:look-and-choose-target-player`,
+`effect:reveal-top-opponent-library-you-choose-to-graveyard`. Not covered:
+fateseal (`effect:fateseal` — the `scry` decision over another library), "you
+may have that player shuffle" (`effect:shuffle-library`), the target player
+choosing (Ashnod's Cylix), face-down exile playable with any mana (Siphon
+Insight), a look at a hand (Vendilion Clique) — `author-freed` narrows them.
+
 ### Filtered discards — built 2026-10-30
 
 The need-keys Phase 2 family `effect:discard-all-matching`, features only.

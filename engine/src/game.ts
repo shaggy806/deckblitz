@@ -1113,6 +1113,10 @@ function autoSlotsOf(slots: readonly object[]): number[] {
 /** A convoke payment with its contribution settled — see `resolveConvoke`. */
 type PaidConvoke = ConvokePayment & { readonly pays: "generic" | Color };
 
+/** Cards a zone choice left to be ordered on the top or bottom of their
+ * library — see `beginLibraryOrder`. */
+type LibraryOrder = { readonly cards: readonly ObjectId[]; readonly position: "top" | "bottom" };
+
 /**
  * The faces of a card that may be cast or played, by index: each face of a
  * modal multi-face card (a modal DFC, an adventurer — rule 712), each half of
@@ -7462,7 +7466,7 @@ export class Game {
     const leftover = awaiting.ids.filter((id) => !chosenSet.has(id));
     // The chosen cards move together, so the ones a choice takes out of a
     // graveyard leave it as one move ("return up to two cards").
-    let toOrder: readonly ObjectId[] = [];
+    let toOrder: LibraryOrder = { cards: [], position: "bottom" };
     this.withGraveyardLeaveBatch(() => {
       toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
     });
@@ -7475,9 +7479,10 @@ export class Game {
       this.emit({ type: "evidence-collected", player, objects: [...chosen], amount: awaiting.collectEvidence });
     }
     this.state.awaiting = null;
-    // "…and the rest on the bottom of your library in any order": asked
-    // now, before `then` — the instruction that put them there comes first.
-    this.beginLibraryOrder(player, toOrder, "bottom");
+    // "…and the rest on the bottom of your library in any order" (or on
+    // top): asked now, before `then` — the instruction that put them there
+    // comes first.
+    this.beginLibraryOrder(player, toOrder.cards, toOrder.position);
     // A scry that keeps some cards and bottoms others orders the second
     // group once the first is placed (rule 701.22a).
     if (awaiting.thenOrder !== undefined && this.state.awaiting === null) {
@@ -7518,11 +7523,11 @@ export class Game {
       this.state.awaiting = next;
       return;
     }
-    let rest: readonly ObjectId[] = [];
+    let rest: LibraryOrder = { cards: [], position: "bottom" };
     this.withGraveyardLeaveBatch(() => {
       rest = this.moveChosenFromZone(next, player, [], leftover);
     });
-    this.beginLibraryOrder(player, rest, "bottom");
+    this.beginLibraryOrder(player, rest.cards, rest.position);
   }
 
   /**
@@ -7591,7 +7596,8 @@ export class Game {
   /** The moves half of {@link applyChooseFromZone}: the chosen cards to where
    * the choice sends them, and the ones left over. Returns the leftover cards
    * still to be ordered onto the bottom of the library (`"bottom-any-order"`
-   * — see `beginLibraryOrder`), which haven't moved yet. `toCommandZone`:
+   * — see `beginLibraryOrder`), which haven't moved yet, or on its top
+   * (`"top-any-order"`), where they already are. `toCommandZone`:
    * commanders whose owners put them into the command zone instead of the
    * library (rule 903.9b — see `finishZoneChoice`). */
   private moveChosenFromZone(
@@ -7600,16 +7606,15 @@ export class Game {
     chosen: readonly ObjectId[],
     leftover: readonly ObjectId[],
     toCommandZone: ReadonlySet<ObjectId> = new Set(),
-  ): readonly ObjectId[] {
+  ): LibraryOrder {
     // "You choose a card from it. That player discards that card" (Duress —
     // the `discard-chosen` effect): the hand's owner discards it, whoever
     // chose (rule 701.9a), so "whenever a player discards" sees them.
     if (awaiting.destination === "discard") {
       const owner = awaiting.forPlayer ?? player;
       const cards = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
-      if (cards.length === 0) return [];
-      this.discardCards(owner, cards);
-      return [];
+      if (cards.length > 0) this.discardCards(owner, cards);
+      return { cards: [], position: "bottom" };
     }
     // Cards a choice puts from a hand on the bottom of a library (Valakut
     // Awakening), announced together once they're there — what "that many"
@@ -7723,6 +7728,7 @@ export class Game {
       this.emit({ type: "cards-put-on-bottom", player, objects: bottomedFromHand });
     }
     let toOrder: readonly ObjectId[] = [];
+    let orderOnTop = false;
 
     // "Then if you control nine or more Gates, put the rest into your
     // graveyard. Otherwise, …" — asked now the chosen cards have moved.
@@ -7748,6 +7754,12 @@ export class Game {
       // In the order the chooser picks next — the caller asks, once this
       // choice is done (`beginLibraryOrder`).
       toOrder = leftover;
+    } else if (leftoverTo === "top-any-order") {
+      // "…and the rest on top of their library in any order" (Cruel Fate):
+      // still on top, the chosen cards gone from among them, so only their
+      // order is asked — by the chooser, whom the instruction names.
+      toOrder = leftover;
+      orderOnTop = true;
     } else if (leftoverTo === "shuffle") {
       // A library search — shuffle the whole library afterwards (rule 701.24b):
       // its owner's, when another player's was searched ("then that player
@@ -7782,7 +7794,7 @@ export class Game {
     if (awaiting.destination === "library-top") {
       for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putOnLibrary(id, "top");
     }
-    return toOrder;
+    return { cards: toOrder, position: orderOnTop ? "top" : "bottom" };
   }
 
   /** The rest of {@link applyChooseFromZone}, once the cards have moved and
@@ -26391,7 +26403,7 @@ export class Game {
     min: number,
     max: number,
     destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
-    leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
+    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
     then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number },

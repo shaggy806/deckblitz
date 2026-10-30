@@ -29,6 +29,7 @@ import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
 import _poolArchangelAvacyn from "../pool/archangel-avacyn.js";
 import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
+import _poolArchitectsOfWill from "../pool/architects-of-will.js";
 import _poolArchonOfRedemption from "../pool/archon-of-redemption.js";
 import _poolArdentElementalist from "../pool/ardent-elementalist.js";
 import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolArchaeomancer,
     _poolArchangelAvacyn,
     _poolArchfiendOfIfnir,
+    _poolArchitectsOfWill,
     _poolArchonOfRedemption,
     _poolArdentElementalist,
     _poolArgivianPhalanx,

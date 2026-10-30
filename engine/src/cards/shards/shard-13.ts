@@ -584,6 +584,7 @@ import _poolSculptorOfWinter from "../pool/sculptor-of-winter.js";
 import _poolSeaDrake from "../pool/sea-drake.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
+import _poolSealedFate from "../pool/sealed-fate.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
 import _poolSecretIdentity from "../pool/secret-identity.js";
 import _poolSeeTheUnwritten from "../pool/see-the-unwritten.js";
@@ -1413,6 +1414,7 @@ const shard: CardShard = {
     _poolSeaDrake,
     _poolSeaOfClouds,
     _poolSealOfRemoval,
+    _poolSealedFate,
     _poolSecludedCourtyard,
     _poolSecretIdentity,
     _poolSeeTheUnwritten,

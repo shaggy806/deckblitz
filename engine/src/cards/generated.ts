@@ -993,6 +993,7 @@ import _poolArchghoulOfThraben from "./pool/archghoul-of-thraben.js";
 import _poolArchipelagore from "./pool/archipelagore.js";
 import _poolArchitectOfRestoration from "./pool/architect-of-restoration.js";
 import _poolArchitectOfTheUntamed from "./pool/architect-of-the-untamed.js";
+import _poolArchitectsOfWill from "./pool/architects-of-will.js";
 import _poolArchiveArbiter from "./pool/archive-arbiter.js";
 import _poolArchiveDragon from "./pool/archive-dragon.js";
 import _poolArchiveHaunt from "./pool/archive-haunt.js";
@@ -1616,6 +1617,7 @@ import _poolBalothNull from "./pool/baloth-null.js";
 import _poolBalothPrime from "./pool/baloth-prime.js";
 import _poolBalothPup from "./pool/baloth-pup.js";
 import _poolBalothWoodcrasher from "./pool/baloth-woodcrasher.js";
+import _poolBalshanBeguiler from "./pool/balshan-beguiler.js";
 import _poolBalshanCollaborator from "./pool/balshan-collaborator.js";
 import _poolBalshanGriffin from "./pool/balshan-griffin.js";
 import _poolBalthorTheStout from "./pool/balthor-the-stout.js";
@@ -4720,6 +4722,7 @@ import _poolCruelBargain from "./pool/cruel-bargain.js";
 import _poolCruelCelebrant from "./pool/cruel-celebrant.js";
 import _poolCruelDeceiver from "./pool/cruel-deceiver.js";
 import _poolCruelEdict from "./pool/cruel-edict.js";
+import _poolCruelFate from "./pool/cruel-fate.js";
 import _poolCruelFeeding from "./pool/cruel-feeding.js";
 import _poolCruelFinality from "./pool/cruel-finality.js";
 import _poolCruelReality from "./pool/cruel-reality.js";
@@ -6129,6 +6132,7 @@ import _poolDrannithRuins from "./pool/drannith-ruins.js";
 import _poolDrannithStinger from "./pool/drannith-stinger.js";
 import _poolDrasticRevelation from "./pool/drastic-revelation.js";
 import _poolDraugrRecruiter from "./pool/draugr-recruiter.js";
+import _poolDraugrThoughtThief from "./pool/draugr-thought-thief.js";
 import _poolDraugrsHelm from "./pool/draugrs-helm.js";
 import _poolDrawnFromDreams from "./pool/drawn-from-dreams.js";
 import _poolDreadCharge from "./pool/dread-charge.js";
@@ -19520,6 +19524,7 @@ import _poolSealOfFire from "./pool/seal-of-fire.js";
 import _poolSealOfPrimordium from "./pool/seal-of-primordium.js";
 import _poolSealOfRemoval from "./pool/seal-of-removal.js";
 import _poolSealOfStrength from "./pool/seal-of-strength.js";
+import _poolSealedFate from "./pool/sealed-fate.js";
 import _poolSeamRip from "./pool/seam-rip.js";
 import _poolSeanceBoard from "./pool/seance-board.js";
 import _poolSeance from "./pool/seance.js";
@@ -28241,6 +28246,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchipelagore,
   _poolArchitectOfRestoration,
   _poolArchitectOfTheUntamed,
+  _poolArchitectsOfWill,
   _poolArchiveArbiter,
   _poolArchiveDragon,
   _poolArchiveHaunt,
@@ -28864,6 +28870,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBalothPrime,
   _poolBalothPup,
   _poolBalothWoodcrasher,
+  _poolBalshanBeguiler,
   _poolBalshanCollaborator,
   _poolBalshanGriffin,
   _poolBalthorTheStout,
@@ -31968,6 +31975,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCruelCelebrant,
   _poolCruelDeceiver,
   _poolCruelEdict,
+  _poolCruelFate,
   _poolCruelFeeding,
   _poolCruelFinality,
   _poolCruelReality,
@@ -33377,6 +33385,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrannithStinger,
   _poolDrasticRevelation,
   _poolDraugrRecruiter,
+  _poolDraugrThoughtThief,
   _poolDraugrsHelm,
   _poolDrawnFromDreams,
   _poolDreadCharge,
@@ -46768,6 +46777,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSealOfPrimordium,
   _poolSealOfRemoval,
   _poolSealOfStrength,
+  _poolSealedFate,
   _poolSeamRip,
   _poolSeanceBoard,
   _poolSeance,
@@ -55502,6 +55512,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archipelagore": _poolArchipelagore,
   "pool/architect-of-restoration": _poolArchitectOfRestoration,
   "pool/architect-of-the-untamed": _poolArchitectOfTheUntamed,
+  "pool/architects-of-will": _poolArchitectsOfWill,
   "pool/archive-arbiter": _poolArchiveArbiter,
   "pool/archive-dragon": _poolArchiveDragon,
   "pool/archive-haunt": _poolArchiveHaunt,
@@ -56125,6 +56136,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/baloth-prime": _poolBalothPrime,
   "pool/baloth-pup": _poolBalothPup,
   "pool/baloth-woodcrasher": _poolBalothWoodcrasher,
+  "pool/balshan-beguiler": _poolBalshanBeguiler,
   "pool/balshan-collaborator": _poolBalshanCollaborator,
   "pool/balshan-griffin": _poolBalshanGriffin,
   "pool/balthor-the-stout": _poolBalthorTheStout,
@@ -59229,6 +59241,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cruel-celebrant": _poolCruelCelebrant,
   "pool/cruel-deceiver": _poolCruelDeceiver,
   "pool/cruel-edict": _poolCruelEdict,
+  "pool/cruel-fate": _poolCruelFate,
   "pool/cruel-feeding": _poolCruelFeeding,
   "pool/cruel-finality": _poolCruelFinality,
   "pool/cruel-reality": _poolCruelReality,
@@ -60638,6 +60651,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/drannith-stinger": _poolDrannithStinger,
   "pool/drastic-revelation": _poolDrasticRevelation,
   "pool/draugr-recruiter": _poolDraugrRecruiter,
+  "pool/draugr-thought-thief": _poolDraugrThoughtThief,
   "pool/draugrs-helm": _poolDraugrsHelm,
   "pool/drawn-from-dreams": _poolDrawnFromDreams,
   "pool/dread-charge": _poolDreadCharge,
@@ -74029,6 +74043,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seal-of-primordium": _poolSealOfPrimordium,
   "pool/seal-of-removal": _poolSealOfRemoval,
   "pool/seal-of-strength": _poolSealOfStrength,
+  "pool/sealed-fate": _poolSealedFate,
   "pool/seam-rip": _poolSeamRip,
   "pool/seance-board": _poolSeanceBoard,
   "pool/seance": _poolSeance,

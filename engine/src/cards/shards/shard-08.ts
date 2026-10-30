@@ -200,6 +200,7 @@ import _poolDocentOfPerfection from "../pool/docent-of-perfection.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
 import _poolDrainingWhelk from "../pool/draining-whelk.js";
+import _poolDraugrThoughtThief from "../pool/draugr-thought-thief.js";
 import _poolDrifterIlDal from "../pool/drifter-il-dal.js";
 import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrogskolCaptain from "../pool/drogskol-captain.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolDowsingDevice,
     _poolDragonflySuit,
     _poolDrainingWhelk,
+    _poolDraugrThoughtThief,
     _poolDrifterIlDal,
     _poolDrixFatemaker,
     _poolDrogskolCaptain,

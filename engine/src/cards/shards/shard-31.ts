@@ -60,6 +60,7 @@ import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBalduvianWarMakers from "../pool/balduvian-war-makers.js";
 import _poolBallroom from "../pool/ballroom.js";
+import _poolBalshanBeguiler from "../pool/balshan-beguiler.js";
 import _poolBanshee from "../pool/banshee.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
@@ -969,6 +970,7 @@ const shard: CardShard = {
     _poolBalanWanderingKnight,
     _poolBalduvianWarMakers,
     _poolBallroom,
+    _poolBalshanBeguiler,
     _poolBanshee,
     _poolBaradDur,
     _poolBarbarianRiftcutter,

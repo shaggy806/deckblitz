@@ -2706,10 +2706,12 @@ export type AwaitingDecision =
        * library is shuffled (a library *search* / tutor — rule 701.23); or
        * put into the chooser's hand (Genesis Ultimatum — needed-cards P19).
        * `"bottom-any-order"`: on the bottom in an order the chooser picks
-       * next (`Game.beginLibraryOrder`). */
+       * next (`Game.beginLibraryOrder`); `"top-any-order"`: left on top, in an
+       * order the chooser picks next. */
       readonly leftover:
         | "bottom-random"
         | "bottom-any-order"
+        | "top-any-order"
         | "stay"
         | "shuffle"
         | "hand"

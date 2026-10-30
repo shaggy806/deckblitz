@@ -1321,6 +1321,25 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: slot(m[1]), amount: amount(m[2]) };
   }
+  // "Look at the top three cards of target player's library, then put them
+  // back in any order" (Architects of Will, Index): every card picked, the
+  // picks their order on top. Another player's is `from` — you still look.
+  if ((m = re(`look at the top ${N} cards of (your|target player's|target opponent's) library, then put them back in any order`).exec(s))) {
+    const count = amount(m[1]);
+    const from = m[2] === "your" ? undefined : slot(m[2].replace(/'s$/, ""));
+    if (typeof count === "number" && (m[2] === "your" || from !== undefined)) {
+      return {
+        kind: "look-and-choose",
+        ...(from !== undefined ? { from: { target: from } } : {}),
+        zone: "library",
+        count,
+        min: count,
+        max: count,
+        destination: "library-top",
+        leftover: "stay",
+      };
+    }
+  }
   // "Look at target player's hand" (Glasses of Urza): a look alone.
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };

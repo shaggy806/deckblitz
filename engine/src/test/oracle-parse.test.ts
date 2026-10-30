@@ -94,6 +94,19 @@ describe("effect templates", () => {
       { kind: "discard-hand", who: 0, filter: { colorless: true, notTypes: ["land"] }, reveal: true },
     ],
     [
+      "Look at the top three cards of target player's library, then put them back in any order.",
+      {
+        kind: "look-and-choose",
+        from: { target: 0 },
+        zone: "library",
+        count: 3,
+        min: 3,
+        max: 3,
+        destination: "library-top",
+        leftover: "stay",
+      },
+    ],
+    [
       "Target opponent reveals their hand and discards all multicolored cards.",
       { kind: "discard-hand", who: 0, filter: { multicolored: true }, reveal: true },
     ],

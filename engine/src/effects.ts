@@ -6467,6 +6467,15 @@ export type EffectSpec =
        * "return a nonland card **of an opponent's choice** from your
        * graveyard to your hand". A public zone only (a graveyard). */
       readonly chooser?: "that-player";
+      /** Another player's library, the effect's controller still looking
+       * and choosing: "look at the top three cards of **target player's**
+       * library" (Architects of Will: `{ target: 0 }`), "**that player**
+       * reveals the top two cards of their library. You choose one…"
+       * (Balshan Beguiler: `"that-player"`). The chosen cards go to that
+       * player's zones — "into their graveyard" is `"graveyard"`, "back on
+       * top" `"library-top"` — and `reveal` shows them as theirs. A library
+       * only; nothing at all with that player gone or the slot illegal. */
+      readonly from?: EffectPlayerRef;
       /** `"hand"` is the "you may put a land card **from your hand** onto the
        * battlefield" family (Growth Spiral, Ghalta) — nothing is revealed
        * there, the chooser is looking at their own hand, and `leftover` is
@@ -6540,7 +6549,16 @@ export type EffectSpec =
        * `filter`), whose "for each card revealed this way" a later effect of
        * the same `sequence` reads as `{ thisWay: "revealed" }`. With nothing
        * in the hand matching, nothing is asked. */
-      readonly destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "exile-face-down" | "exile" | "manifest" | "reveal";
+      readonly destination:
+        | "battlefield"
+        | "hand"
+        | "library-top"
+        | "library-bottom"
+        | "graveyard"
+        | "exile-face-down"
+        | "exile"
+        | "manifest"
+        | "reveal";
       /** `"exile"` without the link (rule 607.2a): a card exiled by an effect
        * that isn't one of a linked pair — Shadow Kin's "you may exile a
        * creature card from among them", which no "the exiled card" of its
@@ -6576,7 +6594,14 @@ export type EffectSpec =
        * `"library-bottom"` above), asked only when there are two or more
        * cards that aren't all the same card. `"bottom-random"` is "in a
        * random order". */
-      readonly leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable";
+      readonly leftover:
+        | "bottom-random"
+        | "bottom-any-order"
+        | "top-any-order"
+        | "stay"
+        | "hand"
+        | "graveyard"
+        | "exile-playable";
       /**
        * A leftover destination that depends on how things stand once the
        * chosen cards are where they're going — Nine-Fingers Keene's "you may
@@ -8339,7 +8364,7 @@ export interface EffectApi {
     min: number,
     max: number,
     destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "graveyard" | "exile-face-down" | "exile" | "manifest" | "reveal",
-    leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
+    leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped?: boolean,
     then?: EffectSpec,
@@ -13070,10 +13095,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "look-and-choose": {
       // "Each player looks at … their library": nobody, once that player has
       // left the game.
-      const chooser = spec.player === "that-player" ? ctx.playersInScope("that-player")[0] : undefined;
+      // "The top three cards of target player's library": theirs, you
+      // choosing — the zone's owner and the picker of the Tasigur shape.
+      const owner = spec.from === undefined ? undefined : effectPlayer(spec.from, ctx);
+      if (spec.from !== undefined && (owner === undefined || !ctx.playersInScope("each-player").includes(owner))) return;
+      const chooser =
+        owner ?? (spec.player === "that-player" ? ctx.playersInScope("that-player")[0] : undefined);
       if (spec.player === "that-player" && chooser === undefined) return;
       // "…of an opponent's choice" (Tasigur): they pick from your zone.
-      const picker = spec.chooser === "that-player" ? ctx.playersInScope("that-player")[0] : undefined;
+      const picker =
+        owner !== undefined
+          ? ctx.controller
+          : spec.chooser === "that-player"
+            ? ctx.playersInScope("that-player")[0]
+            : undefined;
       if (spec.chooser === "that-player" && picker === undefined) return;
       // "Up to one target card … for each opponent": the targets still legal
       // (an illegal one's slot is blank — rule 608.2b).
