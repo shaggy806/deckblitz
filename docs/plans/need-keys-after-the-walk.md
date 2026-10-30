@@ -475,6 +475,14 @@ missing. Re-run `--greedy` for Phase 2's order.
   cards, 4 manual checks. Alone: it touched every workspace. 250 freed cards queued. Next:
   `condition:player-state-thresholds` (21), `static:skip-untap-step` (21),
   `decision:choose-card-name`'s chosen-value group (21).
+- **2026-10-30: player-state-thresholds and defending-player-controls, engine-only** —
+  `of-player` (any condition read from that player's, the active player's, a target's or the
+  defending player's seat; "that player" now reaches an intervening-if as it triggers),
+  `player-compare`, `for-each-player`'s `whoIf`, `{ startingPlus }` life bounds, `controls`'
+  `anyController`, `monarch` `"nobody"`; 16 keys, 14 proving cards, the scaffolder's
+  `playerStateIf`. 71 freed (321 queued). Next: `static:skip-untap-step` (21),
+  `decision:choose-card-name`'s chosen-value group (21),
+  `effect:prevent-combat-damage-to-and-by-target` (20).
 
 ## Rough size
 

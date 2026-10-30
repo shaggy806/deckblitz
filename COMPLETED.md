@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: player-state conditions on another player** (2026-10-30, b9325a20a and
+  c8e45c3db; `condition:player-state-thresholds`, `condition:defending-player-controls`). A
+  `StaticCondition` `of-player` reads any condition with another player as its "you" — "that
+  player" (passed to intervening-ifs as they trigger now, not only as they resolve), the active
+  player, a target, the defending player (rule 802.2a); `player-compare` (more / fewer / the most
+  against each or an opponent); `for-each-player`'s `whoIf` ("each player who …", fixed before
+  anyone acts); `life-total`'s `{ startingPlus }`; `controls`' `anyController`; `monarch`
+  `"nobody"`. 16 keys, 14 proving cards, 71 cards freed for `author-freed`.
 - **Need-keys Phase 2: cards outside the game, with a real sideboard** (2026-10-30,
   5f8009a13 and 367433891; `mechanic:outside-the-game`). Decks bring a sideboard
   (`DeckList.sideboard`, rule 100.4; at most 15, 100.4a; none in a Commander game, 903.5e), kept

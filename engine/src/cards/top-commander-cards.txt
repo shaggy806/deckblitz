@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4028 already implemented / 972 missing (marks refreshed 2026-10-30)
+4030 already implemented / 970 missing (marks refreshed 2026-10-30)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2008,7 +2008,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2015  Mutational Advantage                     {1}{G}{U}        Instant
 [x]  2016  Falkenrath Noble                         {3}{B}           Creature — Vampire Noble
 [x]  2017  Daretti, Scrap Savant                    {3}{R}           Legendary Planeswalker — Daretti
-[ ]  2018  Righteous Valkyrie                       {2}{W}           Creature — Angel Cleric
+[x]  2018  Righteous Valkyrie                       {2}{W}           Creature — Angel Cleric
 [ ]  2019  Thirst for Knowledge                     {2}{U}           Instant
 [x]  2020  Wooded Bastion                           {0}              Land
 [ ]  2021  Sunforger                                {3}              Artifact — Equipment
@@ -3671,7 +3671,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3678  Arbaaz Mir                               {R}{W}           Legendary Creature — Human Assassin
 [x]  3679  Abzan Battle Priest                      {3}{W}           Creature — Human Cleric
 [x]  3680  Eden, Seat of the Sanctum                {0}              Land — Town
-[ ]  3681  Speaker of the Heavens                   {W}              Creature — Human Cleric
+[x]  3681  Speaker of the Heavens                   {W}              Creature — Human Cleric
 [x]  3682  Hidden Hideout                           {0}              Land
 [x]  3683  Coercive Recruiter                       {4}{R}           Creature — Orc Pirate
 [x]  3684  Scaled Nurturer                          {1}{G}           Creature — Dragon Druid

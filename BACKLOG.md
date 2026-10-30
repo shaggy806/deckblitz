@@ -135,11 +135,16 @@ section keeps only what to do next.
   `search-library`'s `outside` and `faceUpExile`; `learn()` whole, its Lesson from the
   sideboard; the wire, the import's `Sideboard` section, the deck editor, the player panel's
   "sideboard N" and the builder's zone; 16 freed, 5 proving cards — Burning Wish, Living Wish,
-  Coax from the Blind Eternities, Mastermind's Acquisition, Legion Angel).
-  **250 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `condition:player-state-thresholds` (21), `static:skip-untap-step` (21),
-  `decision:choose-card-name`'s chosen-value group (21),
-  `effect:prevent-combat-damage-to-and-by-target` (20).
+  Coax from the Blind Eternities, Mastermind's Acquisition, Legion Angel), player-state-thresholds
+  and defending-player-controls (2026-10-30: `of-player` — any condition read from that player's,
+  the active player's, a target's or the defending player's seat — `player-compare`,
+  `for-each-player`'s `whoIf`, starting-life bounds, `controls`' `anyController`, "no monarch";
+  71 freed, 14 proving cards — Lavaborn Muse, Septic Rats, Hidetsugu's Second Rite, Depopulate,
+  Sunset Revelry, Rivalry, Tectonic Hellion, Speaker of the Heavens, Righteous Valkyrie, Planar
+  Collapse, Harbor Serpent, Bouncing Beebles, Hooded Horror, Aerial Surveyor).
+  **321 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `static:skip-untap-step` (21), `decision:choose-card-name`'s chosen-value group (21),
+  `effect:prevent-combat-damage-to-and-by-target` (20), `effect:amount-new-variants` (20).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
