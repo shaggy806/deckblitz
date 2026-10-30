@@ -305,6 +305,7 @@ import _poolHeatRay from "../pool/heat-ray.js";
 import _poolHeiBaiForestGuardian from "../pool/hei-bai-forest-guardian.js";
 import _poolHengeGuardian from "../pool/henge-guardian.js";
 import _poolHeraldOfTheHost from "../pool/herald-of-the-host.js";
+import _poolHidetsugusSecondRite from "../pool/hidetsugus-second-rite.js";
 import _poolHighAlert from "../pool/high-alert.js";
 import _poolHighFaeNegotiator from "../pool/high-fae-negotiator.js";
 import _poolHighScore from "../pool/high-score.js";
@@ -682,6 +683,7 @@ import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
+import _poolTectonicHellion from "../pool/tectonic-hellion.js";
 import _poolTek from "../pool/tek.js";
 import _poolTelJiladOutrider from "../pool/tel-jilad-outrider.js";
 import _poolTellerOfTales from "../pool/teller-of-tales.js";
@@ -1133,6 +1135,7 @@ const shard: CardShard = {
     _poolHeiBaiForestGuardian,
     _poolHengeGuardian,
     _poolHeraldOfTheHost,
+    _poolHidetsugusSecondRite,
     _poolHighAlert,
     _poolHighFaeNegotiator,
     _poolHighScore,
@@ -1510,6 +1513,7 @@ const shard: CardShard = {
     _poolTalismanOfIndulgence,
     _poolTarriansSoulcleaver,
     _poolTawnossWand,
+    _poolTectonicHellion,
     _poolTek,
     _poolTelJiladOutrider,
     _poolTellerOfTales,

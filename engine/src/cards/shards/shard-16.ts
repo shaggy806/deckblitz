@@ -324,6 +324,7 @@ import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHaazdaMarshal from "../pool/haazda-marshal.js";
 import _poolHallow from "../pool/hallow.js";
 import _poolHammerfistGiant from "../pool/hammerfist-giant.js";
+import _poolHarborSerpent from "../pool/harbor-serpent.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHauntedDead from "../pool/haunted-dead.js";
 import _poolHeadstone from "../pool/headstone.js";
@@ -686,6 +687,7 @@ import _poolSolarBlast from "../pool/solar-blast.js";
 import _poolSonicSeizure from "../pool/sonic-seizure.js";
 import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
+import _poolSpeakerOfTheHeavens from "../pool/speaker-of-the-heavens.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSphinxsDisciple from "../pool/sphinxs-disciple.js";
@@ -1242,6 +1244,7 @@ const shard: CardShard = {
     _poolHaazdaMarshal,
     _poolHallow,
     _poolHammerfistGiant,
+    _poolHarborSerpent,
     _poolHarmlessOffering,
     _poolHauntedDead,
     _poolHeadstone,
@@ -1604,6 +1607,7 @@ const shard: CardShard = {
     _poolSonicSeizure,
     _poolSoullessRevival,
     _poolSoulsGrace,
+    _poolSpeakerOfTheHeavens,
     _poolSphinxOfLostTruths,
     _poolSphinxOfTheGuildpact,
     _poolSphinxsDisciple,

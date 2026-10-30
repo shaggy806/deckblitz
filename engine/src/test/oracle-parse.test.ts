@@ -1045,6 +1045,54 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(slung.complete).toBe(true);
   });
 
+  it("player-state intervening-ifs: that player's hand or poison, comparisons, starting life, everyone's permanents", () => {
+    // "That player" of an opponent's upkeep is the active player.
+    const muse = face(
+      "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, ~ deals 3 damage to that player.",
+    );
+    expect(muse.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "active-player",
+      condition: { kind: "hand-size", atMost: 2 },
+    });
+    // An attack trigger's defending player.
+    const rats = face("Whenever ~ attacks, if defending player is poisoned, it gets +1/+1 until end of turn.");
+    expect(rats.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "player-counters", counter: "poison", who: "you", atLeast: 1 },
+    });
+    expect(rats.complete).toBe(true);
+    const akuta = face(
+      "At the beginning of your upkeep, if you have more cards in hand than each opponent, you gain 1 life.",
+    );
+    expect(akuta.triggered[0].condition).toEqual({ kind: "player-compare", stat: "hand", compare: "more", than: "each-opponent" });
+    const linvala = face("When ~ enters, if an opponent has more life than you, you gain 5 life.");
+    expect(linvala.triggered[0].condition).toEqual({ kind: "player-compare", stat: "life", compare: "fewer", than: "an-opponent" });
+    expect(linvala.complete).toBe(true);
+    const greener = face(
+      "At the beginning of each player's upkeep, if that player controls more lands than each other player, ~ deals 2 damage to that player.",
+    );
+    expect(greener.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "active-player",
+      condition: { kind: "player-compare", stat: { controls: { type: "land" } }, compare: "more", than: "each-opponent" },
+    });
+    const elixir = face("At the beginning of your end step, if your life total is greater than your starting life total, draw a card.");
+    expect(elixir.triggered[0].condition).toEqual({ kind: "life-total", atLeast: { startingPlus: 1 } });
+    const collapse = face("At the beginning of your upkeep, if there are four or more creatures on the battlefield, draw a card.");
+    expect(collapse.triggered[0].condition).toEqual({
+      kind: "controls",
+      filter: { type: "creature" },
+      atLeast: 4,
+      anyController: true,
+    });
+    // "That player" no trigger here names: left to a person.
+    expect(
+      face("When ~ enters, if that player has no cards in hand, draw a card.").triggered[0].condition,
+    ).toBeUndefined();
+  });
+
   it("void and revolt (and disappear): the `left` turn history and a warped spell", () => {
     // Void (Edge of Eternities): anyone's nonland permanent, or a spell cast
     // for its warp cost (rule 702.185c). The ability word is dropped.

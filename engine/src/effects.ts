@@ -5083,6 +5083,14 @@ export type EffectSpec =
        * `player: "that-player"` inside is theirs to choose. */
       readonly who: PlayerScope | "owners-of-exiled-with-source" | ChosenPlayerRef;
       readonly effect: EffectSpec;
+      /** "Each player **who** …": only the players in `who` for whom this
+       * holds, read with that player as `"that-player"` (an `of-player`) —
+       * Depopulate's "each player who controls a multicolored creature draws
+       * a card". All of them are found as it begins, before any of them acts
+       * (Tectonic Hellion's "each player who controls the most lands
+       * sacrifices two lands": a tied player still sacrifices after the first
+       * has). */
+      readonly whoIf?: StaticCondition;
       /** One instruction, one event, as a `sequence`'s `simultaneous` is:
        * Adeline's Humans, one per opponent, enter together, so "whenever one
        * or more tokens enter" sees them once. Only where nothing in `effect`
@@ -12437,7 +12445,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // Player by player, as a `sequence`'s steps: one whose effect stops to
       // ask something is answered before the next player's happens, the rest
       // parked with the players fixed as they were when this began.
-      const players =
+      const scope =
         spec.remaining ??
         (spec.who === "owners-of-exiled-with-source"
           ? ((owners) => ctx.playersInScope("each-player").filter((p) => owners.has(p)))(
@@ -12446,6 +12454,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : typeof spec.who === "object"
             ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
             : ctx.playersInScope(spec.who));
+      // "Each player who …": fixed now, before anyone acts (`remaining` was).
+      const whoIf = spec.whoIf;
+      const players =
+        spec.remaining !== undefined || whoIf === undefined
+          ? scope
+          : scope.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
       if (spec.simultaneous === true) {
         ctx.simultaneously(() => {
           for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));

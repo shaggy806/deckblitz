@@ -403,6 +403,7 @@ import _poolLadyOfLaughter from "../pool/lady-of-laughter.js";
 import _poolLadyOrca from "../pool/lady-orca.js";
 import _poolLateToDinner from "../pool/late-to-dinner.js";
 import _poolLatullaKeldonOverseer from "../pool/latulla-keldon-overseer.js";
+import _poolLavabornMuse from "../pool/lavaborn-muse.js";
 import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
 import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolLadyOrca,
     _poolLateToDinner,
     _poolLatullaKeldonOverseer,
+    _poolLavabornMuse,
     _poolLavaspurBoots,
     _poolLayOfTheLand,
     _poolLazavDimirMastermind,

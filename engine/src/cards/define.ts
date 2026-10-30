@@ -572,6 +572,29 @@ export type TurnStat =
  * ({@link TriggeredAbility.condition} — rule 603.4), where it's checked as the
  * trigger fires and again as it resolves.
  */
+/** A player a condition asks about in place of its source's controller —
+ * see the `of-player` condition. `"that-player"` is the player a trigger or
+ * a `for-each-player` is about (the defending player of an attack trigger,
+ * the player whose life changed …); `"active-player"` the player whose turn
+ * it is ("at the beginning of each player's upkeep, if that player …"); a
+ * target slot's player, or the controller of what a target slot points at. */
+export type ConditionPlayer =
+  | "that-player"
+  | "active-player"
+  | { readonly target: number }
+  | { readonly controllerOfTarget: number };
+
+/** A starting-life-total bound for `life-total`: the game's starting life
+ * plus `startingPlus` (rule 103.4 — 20, or 40 in Commander). */
+export interface LifeFromStarting {
+  readonly startingPlus: number;
+}
+
+/** A per-player number a `player-compare` condition compares: life, cards
+ * in hand, or how many permanents matching a filter the player controls
+ * (the filter read with that player as its "you"). */
+export type ComparedStat = "life" | "hand" | { readonly controls: CardFilter };
+
 export type StaticCondition =
   /** You control at least `atLeast` permanents matching `filter` (Kird Ape —
    * "as long as you control a Forest"). A static's condition leaves its own
@@ -609,6 +632,11 @@ export type StaticCondition =
        * permanents of one name count once (the ruling), and a permanent with
        * no name (face down) not at all. */
       readonly distinctNames?: boolean;
+      /** Count every player's permanents, not only yours — "if there are
+       * **four or more creatures on the battlefield**" (Planar Collapse),
+       * Harbor Serpent's "five or more Islands on the battlefield". The
+       * filter is still read with you as its "you". */
+      readonly anyController?: true;
     }
   /**
    * A sum or maximum over matching battlefield permanents compared against a
@@ -765,8 +793,9 @@ export type StaticCondition =
       readonly atLeast: number;
     }
   /** Who is the monarch (rule 720): you, or any opponent (Queen Marchesa's
-   * "if an opponent is the monarch"). False while nobody is. */
-  | { readonly kind: "monarch"; readonly who: "you" | "opponent" }
+   * "if an opponent is the monarch") — false while nobody is — or
+   * `"nobody"`: "if there is no monarch" (M'Baku, Jabari Chieftain). */
+  | { readonly kind: "monarch"; readonly who: "you" | "opponent" | "nobody" }
   /** Who has the initiative (rule 726): you, or any opponent. False while
    * nobody does. */
   | { readonly kind: "initiative"; readonly who: "you" | "opponent" }
@@ -820,8 +849,67 @@ export type StaticCondition =
   | {
       readonly kind: "life-total";
       readonly who?: "you" | "opponent" | "each-opponent" | "that-player";
-      readonly atLeast?: number;
-      readonly atMost?: number | "half-starting";
+      /** `{ startingPlus: n }` is a bound on the starting life total (rule
+       * 103.4): Righteous Valkyrie's "at least 7 life more than your starting
+       * life total" is `atLeast: { startingPlus: 7 }`, Path of Bravery's
+       * "greater than or equal to your starting life total" `{ startingPlus:
+       * 0 }`, Cosmos Elixir's "greater than" `{ startingPlus: 1 }`. */
+      readonly atLeast?: number | LifeFromStarting;
+      readonly atMost?: number | "half-starting" | LifeFromStarting;
+    }
+  /**
+   * Another condition, read as though a different player were its "you" —
+   * the player an effect or trigger is about. Ghirapur Orrery's "at the
+   * beginning of each player's upkeep, if **that player** has no cards in
+   * hand" is `{ player: "active-player", condition: { kind: "hand-size",
+   * atMost: 0 } }`; Septic Rats' "if **defending player** is poisoned" is
+   * `"that-player"` (an attack trigger's "that player" is the defending
+   * player) over `player-counters`; Hidetsugu's Second Rite's "if **target
+   * player** has exactly 10 life" is `{ target: 0 }`; Depopulate's "each
+   * player **who controls** a multicolored creature" is a `for-each-player`'s
+   * `whoIf` of `"that-player"` over `controls`.
+   *
+   * Everything the inner condition reads as "you" becomes that player:
+   * their hand, life, graveyard, counters, turn stats, what they control
+   * (and a filter's `controlledBy: "you"`), and "an opponent" is one of
+   * *theirs*. Meant for a player's state; a condition about the source
+   * itself (`source`, `self-kicked`) has no business inside one.
+   *
+   * False when the player isn't there to ask about: no "that player" known
+   * (a static ability has none), an empty or non-player target slot, or a
+   * player who has left the game.
+   */
+  | {
+      readonly kind: "of-player";
+      readonly player: ConditionPlayer;
+      readonly condition: StaticCondition;
+    }
+  /**
+   * One number of yours compared against other players' — Akuta, Born of
+   * Ash's "if you have **more cards in hand than each opponent**" is `{
+   * stat: "hand", compare: "more", than: "each-opponent" }`; Sunset
+   * Revelry's "if **an opponent has more life than you**" is `{ stat:
+   * "life", compare: "fewer", than: "an-opponent" }` (you have fewer than
+   * some opponent); Robber of the Rich's "if **defending player has more
+   * cards in hand than you**" is `{ stat: "hand", compare: "fewer", than:
+   * "that-player" }`. Under `of-player`, "you" is that player: Rivalry's "if
+   * that player controls more lands than each other player". In a
+   * free-for-all every other player is an opponent (rule 102.3), so "each
+   * other player" is `"each-opponent"`.
+   *
+   * `compare` is `"more"` (strictly), `"fewer"` (strictly), or `"at-least"`
+   * — "the most", ties included (Tectonic Hellion's "each player who
+   * controls the most lands": every player tied for most). Against
+   * `"each-opponent"` it must hold against every opponent still in the game
+   * (and there must be one); against `"an-opponent"`, against some one of
+   * them; against a `ConditionPlayer`, against that player (false when
+   * there's none, or it's you).
+   */
+  | {
+      readonly kind: "player-compare";
+      readonly stat: ComparedStat;
+      readonly compare: "more" | "fewer" | "at-least";
+      readonly than: "each-opponent" | "an-opponent" | ConditionPlayer;
     }
   /** At least `atLeast` cards in exile, every player's (face-down ones
    * included; tokens aren't cards) — Ketramose, the New Dawn's "unless there

@@ -4424,7 +4424,49 @@ clause (section 9):
   "half-starting"` (rounded down). `who` is `"you"` (default), `"opponent"`
   (some opponent), `"each-opponent"` (every opponent) or `"that-player"` — the
   player a trigger or `for-each-player` is about, in a `conditional` (Ezio
-  Auditore da Firenze's "if that player has 10 or less life").
+  Auditore da Firenze's "if that player has 10 or less life"). A bound may be
+  `{ startingPlus: n }`, the starting life total plus `n` (rule 103.4):
+  Righteous Valkyrie's "at least 7 life more than your starting life total"
+  is `atLeast: { startingPlus: 7 }`, "greater than your starting life total"
+  `{ startingPlus: 1 }`, "greater than or equal to" `{ startingPlus: 0 }`.
+- `{ kind: "of-player", player: ConditionPlayer, condition }` — **any condition
+  read as though another player were its "you"** (2026-10-30): their hand,
+  life, poison, graveyard, turn stats, what they control. `player` is
+  `"that-player"` (a trigger's or `for-each-player`'s player — an attack
+  trigger's defending player: Septic Rats' "if defending player is
+  poisoned"), `"active-player"` (a step trigger's "that player": Lavaborn
+  Muse's "at the beginning of each opponent's upkeep, if that player has two
+  or fewer cards in hand" is `{ player: "active-player", condition: { kind:
+  "hand-size", atMost: 2 } }`), `{ target: n }` (Hidetsugu's Second Rite's "if
+  target player has exactly 10 life") or `{ controllerOfTarget: n }`. Works
+  as an intervening-if (asked with the trigger's "that player" as it
+  triggers and resolves), a `conditional`, an activation condition; on a
+  static, only `"active-player"` and targets mean anything. Prefer it over a
+  kind's own `who: "that-player"`.
+- `{ kind: "player-compare", stat, compare, than }` — one number of yours
+  against other players' (2026-10-30). `stat` is `"life"`, `"hand"` or `{
+  controls: CardFilter }`; `compare` `"more"`, `"fewer"` or `"at-least"` (the
+  most, ties included); `than` `"each-opponent"` (every one, and there must be
+  one — "each other player" in a free-for-all), `"an-opponent"` (some one) or a
+  `ConditionPlayer`. Akuta's "if you have more cards in hand than each
+  opponent": `{ stat: "hand", compare: "more", than: "each-opponent" }`;
+  "if an opponent has more life than you" is you having **fewer** than an
+  opponent: `{ stat: "life", compare: "fewer", than: "an-opponent" }`; Robber
+  of the Rich's "if defending player has more cards in hand than you" `than:
+  "that-player"`. Under `of-player` it's that player's number (Rivalry's "if
+  that player controls more lands than each other player").
+- `for-each-player`'s **`whoIf`** — "each player **who** …": only the players
+  for whom the condition holds, read with each as `"that-player"` and all
+  found before any acts. Depopulate's "each player who controls a
+  multicolored creature draws a card" is `whoIf: { kind: "of-player", player:
+  "that-player", condition: { kind: "controls", … } }`; Tectonic Hellion's
+  "each player who controls the most lands" an `of-player` over `{ kind:
+  "player-compare", stat: { controls: { type: "land" } }, compare: "at-least",
+  than: "each-opponent" }`.
+- `controls`' **`anyController: true`** counts every player's permanents —
+  "if there are four or more creatures on the battlefield" (Planar Collapse),
+  Harbor Serpent's "can't attack unless there are five or more Islands on the
+  battlefield". `monarch`'s `who: "nobody"` is "if there is no monarch".
 - `{ kind: "cards-in-exile", atLeast, filter? }` — cards in exile, every
   player's (face-down ones too; tokens aren't cards): Ketramose, the New
   Dawn's "can't attack or block unless there are seven or more cards in

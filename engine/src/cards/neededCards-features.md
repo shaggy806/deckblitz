@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Player-state conditions on another player — built 2026-10-30
+
+The need-keys Phase 2 family `condition:player-state-thresholds`, features
+only, engine-only. **`of-player`** reads any `StaticCondition` with another
+player as its "you" (`ConditionOptions.asPlayer`): `"that-player"` (the
+trigger's or `for-each-player`'s player — `ConditionOptions.thatPlayer`, now
+passed to an intervening-if as it triggers and as it resolves, and to a
+resolution's fallback), `"active-player"`, `{ target }`, `{ controllerOfTarget
+}`. **`player-compare`** compares your life, hand or count of a filter with
+each opponent's, some opponent's or one player's (`more` / `fewer` /
+`at-least`). `for-each-player` gained **`whoIf`** ("each player who …", fixed
+before anyone acts). `life-total` bounds take `{ startingPlus }` (rule 103.4);
+`controls` takes `anyController`; `monarch` `who: "nobody"`. Keys:
+defending-player-poisoned, target-player-life-total, target-player-zone-empty,
+that-player-hand-size, that-player-life-intervening-if,
+more-cards-in-hand-than-each-opponent, opponent-more-cards-in-hand,
+player-controls-most, life-above-starting, that-player-controls,
+condition-count-all-permanents, target-/that-player-turn-stat, no-monarch. 11
+proving cards: Lavaborn Muse, Septic Rats, Hidetsugu's Second Rite, Depopulate,
+Sunset Revelry, Rivalry, Tectonic Hellion, Speaker of the Heavens, Righteous
+Valkyrie, Planar Collapse, Harbor Serpent. The scaffolder's `playerStateIf`
+drafts the intervening-ifs.
+
 ### Cards outside the game: the sideboard — built 2026-10-30
 
 The need-keys Phase 2 family `mechanic:outside-the-game`, features only, and a

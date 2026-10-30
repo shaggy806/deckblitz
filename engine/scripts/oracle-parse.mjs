@@ -3531,7 +3531,11 @@ export function parseFace(face, ctx = {}) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.
         const clause = rest.slice(0, rest.indexOf(",") + 1);
-        const condition = INTERVENING_IFS[clause.toLowerCase()] ?? devotionIf(clause) ?? kickedWithIf(clause, out.kicker);
+        const condition =
+          INTERVENING_IFS[clause.toLowerCase()] ??
+          devotionIf(clause) ??
+          kickedWithIf(clause, out.kicker) ??
+          playerStateIf(clause, triggers);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
@@ -3895,6 +3899,71 @@ function devotionIf(clause) {
   const n = numberOf(m[3]);
   if (typeof n !== "number") return undefined;
   return { kind: "devotion", colors: devotionColors(m[1], m[2]), ...(m[4] === "greater" ? { atLeast: n } : { atMost: n }) };
+}
+
+/**
+ * An intervening-if on a player's state (`of-player`, `player-compare`, a
+ * starting-life bound, a count of everyone's permanents) — Lavaborn Muse's
+ * "if that player has two or fewer cards in hand,", Septic Rats' "if
+ * defending player is poisoned,", Akuta's "if you have more cards in hand
+ * than each opponent,", Planar Collapse's "if there are four or more
+ * creatures on the battlefield,". "That player" is the active player of a
+ * step trigger and the defending player of an attack trigger; `undefined`
+ * for any other clause, or a "that player" no trigger here names.
+ */
+function playerStateIf(clause, triggers) {
+  const c = clause.toLowerCase();
+  const that = triggers.every((t) => t.on === "step-begins" && t.who !== "you")
+    ? "active-player"
+    : triggers.every((t) => t.on === "attacks")
+      ? "that-player"
+      : undefined;
+  const ofThat = (condition) => (that === undefined ? undefined : { kind: "of-player", player: that, condition });
+  // `N` is a group of its own: m[2] the count's word ("no" too), m[4] the bound.
+  let m = new RegExp(`^if (that player|defending player|you) (?:has|have) (no|${N}) (or fewer |or more )?cards? in hand,$`).exec(c);
+  if (m !== null) {
+    const n = m[2] === "no" ? 0 : numberOf(m[2]);
+    if (typeof n !== "number" || (m[2] !== "no" && m[4] === undefined)) return undefined;
+    const bounds = m[2] === "no" ? { atMost: 0 } : m[4] === "or fewer " ? { atMost: n } : { atLeast: n };
+    return m[1] === "you" ? { kind: "hand-size", ...bounds } : ofThat({ kind: "hand-size", ...bounds });
+  }
+  m = new RegExp(`^if (that player|defending player) has ${N} or (less|more|greater) life,$`).exec(c);
+  if (m !== null) {
+    const n = numberOf(m[2]);
+    if (typeof n !== "number") return undefined;
+    return ofThat({ kind: "life-total", ...(m[3] === "less" ? { atMost: n } : { atLeast: n }) });
+  }
+  if (/^if (that player|defending player) is poisoned,$/.test(c)) {
+    return ofThat({ kind: "player-counters", counter: "poison", who: "you", atLeast: 1 });
+  }
+  const STATS = { "cards in hand": "hand", life: "life" };
+  m = /^if (you have|you control|that player has|that player controls) more (cards in hand|life|lands|creatures|artifacts|enchantments) than each (?:opponent|other player),$/.exec(c);
+  if (m !== null) {
+    const stat = STATS[m[2]] ?? { controls: { type: singular(m[2]) } };
+    const compare = { kind: "player-compare", stat, compare: "more", than: "each-opponent" };
+    return m[1].startsWith("you") ? compare : ofThat(compare);
+  }
+  m = /^if (an opponent|defending player) has more (cards in hand|life) than you,$/.exec(c);
+  if (m !== null) {
+    const than = m[1] === "an opponent" ? "an-opponent" : that === "that-player" ? "that-player" : undefined;
+    return than === undefined ? undefined : { kind: "player-compare", stat: STATS[m[2]], compare: "fewer", than };
+  }
+  m = /^if you have at least (\d+|a|an|one|two|three|four|five|six|seven|eight|nine|ten|fifteen) life more than your starting life total,$/.exec(c);
+  if (m !== null) {
+    const n = m[1] === "fifteen" ? 15 : numberOf(m[1]);
+    return typeof n === "number" ? { kind: "life-total", atLeast: { startingPlus: n } } : undefined;
+  }
+  if (c === "if your life total is greater than your starting life total,") {
+    return { kind: "life-total", atLeast: { startingPlus: 1 } };
+  }
+  m = new RegExp(`^if there are ${N} or more (other )?(.+) on the battlefield,$`).exec(c);
+  if (m !== null) {
+    const n = numberOf(m[1]);
+    const filter = parseTypePhrase(m[3]);
+    if (typeof n !== "number" || filter === null) return undefined;
+    return { kind: "controls", filter, atLeast: n, anyController: true, ...(m[2] !== undefined ? { excludeSelf: true } : {}) };
+  }
+  return undefined;
 }
 
 /**

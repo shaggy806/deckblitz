@@ -592,6 +592,7 @@ import _poolRestoreRelic from "../pool/restore-relic.js";
 import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
+import _poolRighteousValkyrie from "../pool/righteous-valkyrie.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
 import _poolRiparianTiger from "../pool/riparian-tiger.js";
 import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
@@ -1444,6 +1445,7 @@ const shard: CardShard = {
     _poolReturnOfTheMoleMan,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
+    _poolRighteousValkyrie,
     _poolRilsaRaelKingpin,
     _poolRiparianTiger,
     _poolRiteOfBelzenlok,

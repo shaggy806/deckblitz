@@ -30,8 +30,10 @@ import type {
   CardRegistry,
   CardType,
   CombatRestriction,
+  ConditionPlayer,
   CountSpec,
   Keyword,
+  LifeFromStarting,
   StaticAbility,
   StaticCondition,
   TurnStat,
@@ -365,6 +367,57 @@ export interface ConditionOptions {
    * by the intervening-if checks only.
    */
   readonly x?: number;
+  /**
+   * "That player" — the player the trigger or effect asking is about (the
+   * defending player of an attack trigger, the player a `for-each-player`
+   * is on), for an `of-player` or `player-compare` naming `"that-player"`.
+   * Passed by the intervening-if checks (from the trigger's refs) and by a
+   * resolution; a static ability has none, and reads such a condition false.
+   */
+  readonly thatPlayer?: PlayerId;
+  /**
+   * The player a condition is read as — its "you" — in place of the
+   * source's controller. Set only by `of-player` as it reads its inner
+   * condition.
+   */
+  readonly asPlayer?: PlayerId;
+}
+
+/** Whether `life` is within a `life-total` condition's bounds, the
+ * starting-life ones (rule 103.4) read off the game's rules. */
+export function lifeWithinBounds(
+  state: GameState,
+  life: number,
+  condition: Extract<StaticCondition, { kind: "life-total" }>,
+): boolean {
+  const start = state.rules.startingLife;
+  const bound = (b: number | "half-starting" | LifeFromStarting | undefined): number | undefined =>
+    b === undefined || typeof b === "number" ? b : b === "half-starting" ? Math.floor(start / 2) : start + b.startingPlus;
+  const atLeast = bound(condition.atLeast);
+  const atMost = bound(condition.atMost);
+  return (atLeast === undefined || life >= atLeast) && (atMost === undefined || life <= atMost);
+}
+
+/** The one player a `ConditionPlayer` names as `opts` see it, or
+ * `undefined` for nobody — no "that player" known, an empty or non-player
+ * target slot, or a player who has left the game. */
+export function conditionPlayerOf(
+  state: GameState,
+  who: ConditionPlayer,
+  opts: Pick<ConditionOptions, "thatPlayer" | "targets">,
+): PlayerId | undefined {
+  let player: PlayerId | undefined;
+  if (who === "that-player") player = opts.thatPlayer;
+  else if (who === "active-player") player = state.turnOrder[state.turn.activePlayerIndex];
+  else if ("target" in who) {
+    const ref = opts.targets?.[who.target];
+    player = ref?.kind === "player" ? ref.player : undefined;
+  } else {
+    const ref = opts.targets?.[who.controllerOfTarget];
+    player =
+      ref?.kind === "player" ? ref.player : ref?.kind === "object" ? state.objects[ref.object]?.controller : undefined;
+  }
+  return player !== undefined && state.players[player]?.hasLost === false ? player : undefined;
 }
 
 /**
@@ -472,7 +525,7 @@ function evalStaticCondition(
   condition: StaticCondition,
   opts: ConditionOptions,
 ): boolean {
-  const you = source.controller;
+  const you = opts.asPlayer ?? source.controller;
   const skipsSelf = (id: ObjectId): boolean =>
     opts.includeSelf !== true && id === source.id;
   const notYetHere = (id: ObjectId): boolean => opts.notYetHere?.has(id) === true;
@@ -577,7 +630,9 @@ function evalStaticCondition(
     case "monarch":
       return condition.who === "you"
         ? state.monarch === you
-        : state.monarch !== null && state.monarch !== you;
+        : condition.who === "nobody"
+          ? state.monarch === null
+          : state.monarch !== null && state.monarch !== you;
     case "spells-cast-last-turn": {
       const last = state.spellsCastLastTurn ?? { total: 0, mostByOnePlayer: 0 };
       if (condition.none === true && last.total !== 0) return false;
@@ -612,26 +667,23 @@ function evalStaticCondition(
     case "player-counters": {
       const has = (p: PlayerId): boolean =>
         (state.players[p]?.counters[condition.counter] ?? 0) >= condition.atLeast;
-      // "That player" is known only to a resolution (`Game`'s resolution
-      // context answers it); a static has nobody it's about.
-      if (condition.who === "that-player") return false;
+      // "That player" is known only to a trigger or a resolution
+      // (`thatPlayer`); a static has nobody it's about.
+      if (condition.who === "that-player") {
+        const that = conditionPlayerOf(state, "that-player", opts);
+        return that !== undefined && has(that);
+      }
       return condition.who === "you"
         ? has(you)
         : state.turnOrder.some((p) => p !== you && state.players[p]?.hasLost !== true && has(p));
     }
     case "life-total": {
-      const within = (p: PlayerId): boolean => {
-        const life = state.players[p]?.life ?? 0;
-        const atMost =
-          condition.atMost === "half-starting" ? Math.floor(state.rules.startingLife / 2) : condition.atMost;
-        return (
-          (condition.atLeast === undefined || life >= condition.atLeast) &&
-          (atMost === undefined || life <= atMost)
-        );
-      };
+      const within = (p: PlayerId): boolean => lifeWithinBounds(state, state.players[p]?.life ?? 0, condition);
       if (condition.who === undefined || condition.who === "you") return within(you);
-      // Only a resolution knows "that player" (`Game`'s `conditionMet`).
-      if (condition.who === "that-player") return false;
+      if (condition.who === "that-player") {
+        const that = conditionPlayerOf(state, "that-player", opts);
+        return that !== undefined && within(that);
+      }
       const opponents = state.turnOrder.filter((p) => p !== you && state.players[p]?.hasLost !== true);
       return condition.who === "opponent" ? opponents.some(within) : opponents.length > 0 && opponents.every(within);
     }
@@ -759,11 +811,42 @@ function evalStaticCondition(
       return reaches(
         condition.atLeast,
         (id) =>
-          state.objects[id].controller === you &&
+          (condition.anyController === true || state.objects[id].controller === you) &&
           matchesFilter(state, registry, id, condition.filter, { you }),
         except,
         condition.countsSelf === true,
       );
+    }
+    case "of-player": {
+      // The inner condition with that player as its "you" (see `of-player`).
+      const player = conditionPlayerOf(state, condition.player, opts);
+      return (
+        player !== undefined && evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: player })
+      );
+    }
+    case "player-compare": {
+      const { stat } = condition;
+      const statOf = (p: PlayerId): number =>
+        stat === "life"
+          ? (state.players[p]?.life ?? 0)
+          : stat === "hand"
+            ? (state.zones.perPlayer[p]?.hand.length ?? 0)
+            : countWhere(
+                (id) =>
+                  state.objects[id].controller === p &&
+                  matchesFilter(state, registry, id, stat.controls, { you: p }),
+              );
+      const mine = statOf(you);
+      const holds = (p: PlayerId): boolean => {
+        const theirs = statOf(p);
+        return condition.compare === "more" ? mine > theirs : condition.compare === "fewer" ? mine < theirs : mine >= theirs;
+      };
+      if (condition.than !== "each-opponent" && condition.than !== "an-opponent") {
+        const other = conditionPlayerOf(state, condition.than, opts);
+        return other !== undefined && other !== you && holds(other);
+      }
+      const others = state.turnOrder.filter((p) => p !== you && state.players[p]?.hasLost !== true);
+      return condition.than === "an-opponent" ? others.some(holds) : others.length > 0 && others.every(holds);
     }
     case "aggregate": {
       const { value } = condition;

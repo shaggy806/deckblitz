@@ -19547,6 +19547,7 @@ export class Game {
           // The X it snapshotted as it triggered (`triggerCastX`), or 0.
           object.xValue ?? 0,
           object.lastKnownRefs?.triggerSpell,
+          object.lastKnownRefs?.player,
         ) ||
         !this.attackConditionsStillHold(ability, object)
       ) {
@@ -20239,6 +20240,12 @@ export class Game {
             this.conditionTriggerObject(ability.trigger, event),
             // Ravenous's "if X is 5 or more": the X it was cast with, or 0.
             this.triggerCastX(ability.trigger, event, object) ?? 0,
+            undefined,
+            // "If defending player is poisoned" (Septic Rats): the "that
+            // player" the ability will carry, asked of the event now.
+            ability.condition === undefined
+              ? undefined
+              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
           ) &&
           // "Whenever … while …" — part of the trigger condition, asked only
           // now (rule 603.1), never again as it resolves.
@@ -21717,10 +21724,14 @@ export class Game {
     /** Which stint on the stack the spell that fired it was — see
      * `ConditionOptions.triggerSpellStint`. */
     triggerSpellStint?: number,
+    /** "That player" — see `ConditionOptions.thatPlayer`: the trigger's
+     * refs' `player`, as it triggers and as it resolves. */
+    thatPlayer?: PlayerId,
   ): boolean {
     if (condition === undefined) return true;
     return staticConditionMet(this.state, this.registry, source, condition, {
       includeSelf: true,
+      ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       ...(sourceTimestamp !== undefined ? { sourceTimestamp } : {}),
       ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
       ...(triggerObject !== undefined ? { triggerObject } : {}),
@@ -23162,26 +23173,6 @@ export class Game {
         return sacrificed !== undefined && matchesKnown(sacrificed.object, condition.filter);
       }
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
-      // "Each opponent who has three or more poison counters" (Ixhel): the
-      // player this effect is about (`"that-player"`), which only the
-      // resolution knows.
-      // "If that player has 10 or less life" (Ezio Auditore da Firenze).
-      if (condition.kind === "life-total" && condition.who === "that-player") {
-        const that = refs.player;
-        if (that === undefined || this.state.players[that]?.hasLost !== false) return false;
-        const life = this.state.players[that].life;
-        const atMost =
-          condition.atMost === "half-starting" ? Math.floor(this.state.rules.startingLife / 2) : condition.atMost;
-        return (condition.atLeast === undefined || life >= condition.atLeast) && (atMost === undefined || life <= atMost);
-      }
-      if (condition.kind === "player-counters" && condition.who === "that-player") {
-        const that = refs.player;
-        return (
-          that !== undefined &&
-          this.state.players[that]?.hasLost === false &&
-          (this.state.players[that].counters[condition.counter] ?? 0) >= condition.atLeast
-        );
-      }
       // "Each player who doesn't have max speed" (Outpace Oblivion): that
       // player's speed, 0 for none (rule 702.179f).
       if (condition.kind === "speed" && condition.who === "that-player") {
@@ -23279,6 +23270,10 @@ export class Game {
         staticConditionMet(this.state, this.registry, src, condition, {
           includeSelf: true,
           targets,
+          // "If that player has 10 or less life" (Ezio Auditore da Firenze),
+          // "each opponent who has three or more poison counters" (Ixhel),
+          // an `of-player`: the player this effect is about.
+          ...(refs.player !== undefined ? { thatPlayer: refs.player } : {}),
           ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
         })
       );

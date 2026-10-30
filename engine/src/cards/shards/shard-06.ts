@@ -583,6 +583,7 @@ import _poolRiotControl from "../pool/riot-control.js";
 import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiphookRaider from "../pool/riphook-raider.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
+import _poolRivalry from "../pool/rivalry.js";
 import _poolRoarOfTheWurm from "../pool/roar-of-the-wurm.js";
 import _poolRocketeerBoostbuggy from "../pool/rocketeer-boostbuggy.js";
 import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolRiotGear,
     _poolRiphookRaider,
     _poolRiptideCrab,
+    _poolRivalry,
     _poolRoarOfTheWurm,
     _poolRocketeerBoostbuggy,
     _poolRofellosLlanowarEmissary,

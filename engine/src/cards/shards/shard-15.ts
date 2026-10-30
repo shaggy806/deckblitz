@@ -598,6 +598,7 @@ import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
+import _poolSepticRats from "../pool/septic-rats.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
 import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
@@ -1411,6 +1412,7 @@ const shard: CardShard = {
     _poolSeasideHaven,
     _poolSeedbornMuse,
     _poolSelflessSpirit,
+    _poolSepticRats,
     _poolSerraRedeemer,
     _poolServantOfVolrath,
     _poolSethronHurloonGeneral,

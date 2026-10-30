@@ -605,7 +605,21 @@
   "decision:as-enters-choose-permanent",
   "decision:choose-permanents-exclude-trigger-object",
   "decision:that-player-chooses-permanent",
-  "mechanic:outside-the-game"
+  "mechanic:outside-the-game",
+  "condition:defending-player-poisoned",
+  "condition:target-player-life-total",
+  "condition:target-player-zone-empty",
+  "condition:that-player-hand-size",
+  "condition:that-player-life-intervening-if",
+  "condition:more-cards-in-hand-than-each-opponent",
+  "condition:opponent-more-cards-in-hand",
+  "condition:player-controls-most",
+  "condition:life-above-starting",
+  "condition:that-player-controls",
+  "condition:condition-count-all-permanents",
+  "condition:target-player-turn-stat",
+  "condition:that-player-turn-stat",
+  "condition:no-monarch"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
