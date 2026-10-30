@@ -124,10 +124,16 @@ section keeps only what to do next.
   `choosePermanentOnEnter` kept as `GameObject.chosenPermanent` and read as "the chosen
   creature", `choose-permanents`' `chooser`, amount `min` and `exceptTriggerObject`; 16 freed,
   9 proving cards — Tyrannical Pitlord, Dauntless Bodyguard, Grifter's Blade, Phylactery Lich,
-  Sunken Hope, Tangle Wire, Crashing Boars, Saw, Cloudstone Curio).
-  **204 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22),
-  `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21).
+  Sunken Hope, Tangle Wire, Crashing Boars, Saw, Cloudstone Curio), discard-all-matching
+  (2026-10-30: `discard`'s `filter`, `discard-hand`'s `filter`, `reveal` and target `who`; 15
+  freed, 7 proving cards — Amnesia, Trapfinder's Trick, Shatter Assumptions, Hidden Horror, Pack
+  Guardian, Nantuko Cultivator, Mind Maggots), look-and-choose-target-opponent-library
+  (2026-10-30: `look-and-choose`'s `from`, a `"graveyard"` destination, `"top-any-order"`; 15
+  freed, 5 proving cards — Architects of Will, Draugr Thought-Thief, Cruel Fate, Sealed Fate,
+  Balshan Beguiler).
+  **234 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21),
+  `static:skip-untap-step` (21), `decision:choose-card-name`'s chosen-value group (21).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

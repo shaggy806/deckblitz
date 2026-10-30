@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: another player's library, features only** (2026-10-30, 3c66633ad;
+  `effect:look-and-choose-target-opponent-library`, `effect:look-and-choose-target-player`,
+  `effect:reveal-top-opponent-library-you-choose-to-graveyard`). `look-and-choose`'s `from`
+  (another player's library, the effect's controller looking and choosing), a `"graveyard"`
+  destination and `leftover: "top-any-order"`; the scaffolder reads "look at the top N cards of
+  target player's library, then put them back in any order". 15 freed for `author-freed`; proving
+  cards Architects of Will, Draugr Thought-Thief, Cruel Fate, Sealed Fate, Balshan Beguiler.
+- **Need-keys Phase 2: filtered discards, features only** (2026-10-30, 21b12cf01;
+  `effect:discard-all-matching`, `effect:discard-any-number-filtered`, `effect:discard-filtered`).
+  `discard`'s `filter` ("discard a creature card", with `anyNumber` "any number of land cards"),
+  `discard-hand`'s `filter`, `reveal` and target-slot `who` ("reveals their hand and discards all
+  nonland cards"); the scaffolder reads all three lines. 15 freed for `author-freed`; proving
+  cards Amnesia, Trapfinder's Trick, Shatter Assumptions, Hidden Horror, Pack Guardian, Nantuko
+  Cultivator, Mind Maggots.
 - **Need-keys Phase 2: the chosen creature, and choices by another player, features only**
   (2026-10-30; `decision:choose-permanent`, `decision:as-enters-choose-permanent`,
   `decision:choose-permanents-exclude-trigger-object`, `decision:that-player-chooses-permanent`).

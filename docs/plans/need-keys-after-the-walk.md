@@ -462,6 +462,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   family: the session passed ~300K tokens. 204 freed cards queued. Next:
   `effect:discard-all-matching` (22), `effect:look-and-choose-target-opponent-library` (22),
   `mechanic:outside-the-game` (21).
+- **2026-10-30: discard-all-matching and look-and-choose-target-opponent-library, engine-only**
+  — `discard`'s and `discard-hand`'s `filter` (with `reveal` and a target `who`), and
+  `look-and-choose`'s `from`, `"graveyard"` destination and `"top-any-order"` leftover; 12
+  proving cards. Two families: the session neared ~300K tokens. 234 freed cards queued. Next:
+  `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21),
+  `static:skip-untap-step` (21).
 
 ## Rough size
 
