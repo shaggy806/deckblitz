@@ -104,7 +104,7 @@ describe("a permanent chosen as another enters", () => {
     expect(pt(game, lions)).toEqual({ power: 3, toughness: 2 });
 
     const empty = table();
-    lands(empty.game, "Plains", 2);
+    lands(empty.game, "Plains", 3);
     cast(empty.game, toHand(empty.game, "Grifter's Blade"));
     const [alone] = named(empty.game, "Grifter's Blade");
     expect(zone(empty.game, alone)).toBe("battlefield");

@@ -12,8 +12,8 @@ const PUMP = "Equipped creature gets +1/+1.";
 
 export default defineCard({
   name: "Grifter's Blade",
-  manaCost: "{1}{W}",
-  colors: ["W"],
+  manaCost: "{3}",
+  colors: [],
   types: ["artifact"],
   subtypes: ["Equipment"],
   keywords: ["flash"],

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4027 already implemented / 973 missing (marks refreshed 2026-10-29)
+4028 already implemented / 972 missing (marks refreshed 2026-10-30)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2695,7 +2695,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2702  Murmuring Bosk                           {0}              Land — Forest
 [ ]  2703  Heroes' Podium                           {5}              Legendary Artifact
 [x]  2704  Hyena Umbra                              {W}              Enchantment — Aura
-[ ]  2705  Cloudstone Curio                         {3}              Artifact
+[x]  2705  Cloudstone Curio                         {3}              Artifact
 [ ]  2706  Loading Zone                             {3}{G}           Enchantment
 [x]  2707  Transpose                                {2}{B}           Instant
 [x]  2708  Torrential Gearhulk                      {4}{U}{U}        Artifact Creature — Construct

@@ -12,7 +12,7 @@ const ATTACK =
 
 export default defineCard({
   name: "Saw",
-  manaCost: "{1}",
+  manaCost: "{2}",
   colors: [],
   types: ["artifact"],
   subtypes: ["Equipment"],
