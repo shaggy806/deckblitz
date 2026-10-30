@@ -2074,6 +2074,37 @@ export function parseSentence(sentence, ctx) {
     const asIt = parseSentence(`it ${m[1]}`, { ...ctx, it: "attached" });
     if (asIt !== null) return asIt;
   }
+  // "The chosen creature" (`choosePermanentOnEnter` — the `"chosen"`
+  // reference): "sacrifice the chosen creature" (Tyrannical Pitlord), "the
+  // chosen creature gains indestructible until end of turn" (Dauntless
+  // Bodyguard), read as "it" is.
+  if (re("sacrifice the chosen (?:creature|permanent)").test(s)) return { kind: "sacrifice-target", target: "chosen" };
+  if (ctx.it !== "chosen" && ctx.targets.length === 0 && (m = /^the chosen (?:creature|permanent) (.+)$/i.exec(s))) {
+    const asIt = parseSentence(`it ${m[1]}`, { ...ctx, it: "chosen" });
+    if (asIt !== null) return asIt;
+  }
+  // "That player returns a creature they control to its owner's hand"
+  // (Sunken Hope), "that player untaps a land they control" (Hokori, Dust
+  // Drinker), "defending player chooses an untapped creature they control"
+  // isn't read: what follows is the card's. The player the trigger names
+  // chooses (`chooser`) — not a target — from their own.
+  if (ctx.thatPlayer !== undefined && (m = re("(?:that|defending) player (returns|untaps|taps) (?:a|an) (.+?) they control( to its owner's hand)?").exec(s))) {
+    const verb = m[1].toLowerCase();
+    const untapped = verb === "taps" && /^untapped /.test(m[2]);
+    const filter = parseTypePhrase(untapped ? m[2].slice("untapped ".length) : m[2]);
+    if (filter !== null && (verb === "returns") === (m[3] !== undefined)) {
+      const then = verb === "returns" ? { kind: "return-to-hand", target: 0 } : { kind: verb === "untaps" ? "untap" : "tap", target: 0 };
+      return {
+        kind: "choose-permanents",
+        chooser: ctx.thatPlayer,
+        filter: { ...filter, controlledBy: "you", ...(untapped ? { tapped: false } : {}) },
+        min: 1,
+        upTo: 1,
+        then,
+        prompt: `${m[1][0].toUpperCase()}${m[1].slice(1, -1)} ${/^[aeiou]/i.test(m[2]) ? "an" : "a"} ${m[2]} you control${m[3] ?? ""}`,
+      };
+    }
+  }
 
   // "It": the object the ability is about — its source, or the object its
   // trigger names — and only while nothing has been targeted, which "it"
@@ -3196,6 +3227,15 @@ export function parseFace(face, ctx = {}) {
     }
     // "As ~ enters, choose a player / an opponent." (rule 614.1c) — the
     // chosen player its "the chosen player" lines read.
+    // "As ~ enters, choose another creature you control." (rule 614.1c) —
+    // the chosen permanent its "the chosen creature" lines read.
+    if ((m = /^As ~ enters, choose ((?:another|an?) (.+?) you control)\.$/.exec(line)) && parseTypePhrase(m[2]) !== null) {
+      out.choosePermanentOnEnter = {
+        filter: { ...parseTypePhrase(m[2]), controlledBy: "you" },
+        prompt: `Choose ${m[1]}`,
+      };
+      continue;
+    }
     if ((m = /^As ~ enters, choose (a player|an opponent)\.$/.exec(line))) {
       out.choosePlayerOnEnter = m[1] === "a player" ? "player" : "opponent";
       continue;
@@ -3409,7 +3449,13 @@ export function parseFace(face, ctx = {}) {
       const next = fillEffect(
         first,
         rest,
-        { tokenFor, onStack: true, it: itOf(triggers), departed: departedOf(triggers) },
+        {
+          tokenFor,
+          onStack: true,
+          it: itOf(triggers),
+          departed: departedOf(triggers),
+          ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
+        },
         lines,
         i,
       );
@@ -3743,6 +3789,17 @@ function devotionIf(clause) {
  * target"), or the object the trigger names ("Whenever a creature you control
  * attacks, it gets +1/+0"). Nothing for a trigger about a step or a player.
  */
+/**
+ * The player a trigger's "that player" / "defending player" names, as an
+ * effect's `chooser`: the active player of "each player's upkeep", the
+ * defending player of an attack trigger. `undefined` for any other trigger.
+ */
+function thatPlayerOf(triggers) {
+  if (triggers.every((t) => t.on === "step-begins" && t.who === "any")) return "active-player";
+  if (triggers.every((t) => t.on === "attacks")) return "trigger-player";
+  return undefined;
+}
+
 function itOf(triggers) {
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
@@ -3837,6 +3894,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     onStack: ctx.onStack,
     it: ctx.it,
     departed: ctx.departed,
+    ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
   });
   ability.effect = r.effect;
   if (r.effect === null) {
@@ -4187,6 +4245,12 @@ function parseStatic(line, text) {
   }
   if ((m = /^As long as (?:~|this creature) is paired with another creature, each of those creatures gets ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
     return { affects: { scope: "paired" }, grantPt: [Number(m[1]), Number(m[2])], text };
+  }
+  // "The chosen creature gets +3/+3 and has flying" (Tyrannical Pitlord —
+  // `choosePermanentOnEnter`).
+  if ((m = new RegExp(`^The chosen creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
+    const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    return { affects: { scope: "chosen" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);

@@ -154,6 +154,22 @@ export const choosePermanents = defineDecision({
       const each = helpers.order(legal.eligible).slice(0, Math.max(1, limit));
       return each.map((id) => ({ type: "choose-permanents", player, permanents: [id] }));
     }
+    // A forced pick of some but not all (Sunken Hope's "that player returns
+    // a creature they control", Tangle Wire's taps): which ones is the whole
+    // question — the effect may help or hurt what's picked — so the search
+    // weighs each single one (the least valuable first) or, for several,
+    // the least and the most valuable together.
+    const units = legal.eligible.reduce((n, id) => n + (legal.copies?.[id] ?? 1), 0);
+    if (legal.min === legal.max && legal.min >= 1 && units > legal.min) {
+      const ordered = helpers.order(legal.eligible);
+      if (legal.max === 1) {
+        const each = [...ordered].reverse().slice(0, Math.max(2, limit));
+        return each.map((id) => ({ type: "choose-permanents", player, permanents: [id] }));
+      }
+      const most = expand(ordered, legal.copies).slice(0, legal.max);
+      const least = expand([...ordered].reverse(), legal.copies).slice(0, legal.max);
+      return [least, most].map((permanents) => ({ type: "choose-permanents", player, permanents }));
+    }
     // "You may choose one" (a casualty, Deadpool's exchange): which one is
     // the whole question, so each is a candidate — the most valuable first,
     // as many as the search allows — beside choosing none.

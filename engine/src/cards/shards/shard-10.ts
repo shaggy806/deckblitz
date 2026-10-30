@@ -612,6 +612,7 @@ import _poolSaprolingCluster from "../pool/saproling-cluster.js";
 import _poolSarkhansDragonfire from "../pool/sarkhans-dragonfire.js";
 import _poolSavageSurge from "../pool/savage-surge.js";
 import _poolSavageVentmaw from "../pool/savage-ventmaw.js";
+import _poolSaw from "../pool/saw.js";
 import _poolScaleBlessing from "../pool/scale-blessing.js";
 import _poolScavengerDrake from "../pool/scavenger-drake.js";
 import _poolScorchingDragonfire from "../pool/scorching-dragonfire.js";
@@ -1474,6 +1475,7 @@ const shard: CardShard = {
     _poolSarkhansDragonfire,
     _poolSavageSurge,
     _poolSavageVentmaw,
+    _poolSaw,
     _poolScaleBlessing,
     _poolScavengerDrake,
     _poolScorchingDragonfire,

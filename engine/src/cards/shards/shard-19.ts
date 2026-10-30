@@ -763,6 +763,7 @@ import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolSynodCenturion from "../pool/synod-centurion.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
+import _poolTangleWire from "../pool/tangle-wire.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
@@ -1650,6 +1651,7 @@ const shard: CardShard = {
     _poolSynapseSliver,
     _poolSynodCenturion,
     _poolTajuruSnarecaster,
+    _poolTangleWire,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
     _poolTasteOfDeath,

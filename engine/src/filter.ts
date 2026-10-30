@@ -693,6 +693,13 @@ export interface CardFilter {
    */
   readonly sharesCardTypeWith?: "sacrificed" | "trigger-object";
   /**
+   * Shares at least one **permanent type** (rule 110.4: artifact, battle,
+   * creature, enchantment, land, planeswalker — not kindred) with the trigger
+   * object — Cloudstone Curio's "another permanent you control that shares a
+   * permanent type with it". Bound as `sharesCardTypeWith` is.
+   */
+  readonly sharesPermanentTypeWith?: "trigger-object";
+  /**
    * Shares at least one **creature type** with the trigger object, as it last
    * existed on the battlefield if it has left — Heirloom Blade's "a creature
    * card that shares a creature type with it" (its rulings: the dead creature
@@ -1055,7 +1062,13 @@ export function matchesFilter(
   // is bound to plain types by the effect applying it
   // (`bindDynamicCompares`); left unbound — anywhere nothing could answer
   // it — it matches nothing.
-  if (filter.sharesCardTypeWith !== undefined || filter.sharesCreatureTypeWith !== undefined) return false;
+  if (
+    filter.sharesCardTypeWith !== undefined ||
+    filter.sharesPermanentTypeWith !== undefined ||
+    filter.sharesCreatureTypeWith !== undefined
+  ) {
+    return false;
+  }
   if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id)) {
     return false;
   }

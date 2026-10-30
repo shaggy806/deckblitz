@@ -594,7 +594,11 @@
   "amount:count-that-player-controls",
   "effect:discard-controller-of-target",
   "effect:draw-controller-of-target",
-  "effect:player-counters-controller-of-target"
+  "effect:player-counters-controller-of-target",
+  "decision:choose-permanent",
+  "decision:as-enters-choose-permanent",
+  "decision:choose-permanents-exclude-trigger-object",
+  "decision:that-player-chooses-permanent"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

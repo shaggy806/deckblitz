@@ -524,6 +524,7 @@ import _poolPeerThroughDepths from "../pool/peer-through-depths.js";
 import _poolPeppersmoke from "../pool/peppersmoke.js";
 import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPharikasDisciple from "../pool/pharikas-disciple.js";
+import _poolPhylacteryLich from "../pool/phylactery-lich.js";
 import _poolPigmentStorm from "../pool/pigment-storm.js";
 import _poolPikemen from "../pool/pikemen.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolPeppersmoke,
     _poolPestProblem,
     _poolPharikasDisciple,
+    _poolPhylacteryLich,
     _poolPigmentStorm,
     _poolPikemen,
     _poolPilferedPlans,

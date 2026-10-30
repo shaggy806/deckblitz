@@ -281,6 +281,7 @@ import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
 import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGreenManaBattery from "../pool/green-mana-battery.js";
+import _poolGriftersBlade from "../pool/grifters-blade.js";
 import _poolGrimPoppet from "../pool/grim-poppet.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolGrayHarborMerfolk,
     _poolGreedyFreebooter,
     _poolGreenManaBattery,
+    _poolGriftersBlade,
     _poolGrimPoppet,
     _poolGrinningDemon,
     _poolGroundlingPouncer,

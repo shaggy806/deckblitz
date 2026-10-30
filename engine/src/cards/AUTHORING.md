@@ -2197,6 +2197,36 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   The scaffolder reads "As ~ enters, choose a player / an opponent.", "At the
   beginning of the chosen player's upkeep" and "The chosen player's maximum
   hand size is N."
+- **Choosing a permanent as it enters** ("the chosen creature"): the card
+  field `choosePermanentOnEnter: { filter, prompt, optional?, attach?,
+  counter? }` (rule 614.1c — Tyrannical Pitlord, Dauntless Bodyguard), asked
+  through `choose-permanents` among the permanents matching `filter` from its
+  controller's side, never itself ("another"); a forced choice of the only one
+  isn't asked. Kept as `GameObject.chosenPermanent` with the stint it was
+  chosen in, and read back by the `"chosen"` `EffectTargetRef`
+  (`sacrifice-target`, `grant-keyword`, … `target: "chosen"`) and a static's
+  `affects: { scope: "chosen" }` — only while it's still that object (rule
+  400.7), as the source last existed once it has left (Bodyguard sacrificed
+  for its own cost). `attach: true` enters an Equipment attached to it
+  (Grifter's Blade — unattached if it can't equip it, rule 301.5e);
+  `counter: "phylactery"` puts one such counter on it (Phylactery Lich). The
+  scaffolder reads "As ~ enters, choose another creature you control.", "The
+  chosen creature gets +N/+N and has K." and "sacrifice the chosen creature" /
+  "the chosen creature gains K until end of turn".
+- **A choice by another player**: `choose-permanents { chooser }` — "at the
+  beginning of each player's upkeep, **that player** returns a creature they
+  control" (`chooser: "active-player"` — Sunken Hope), "**defending player**
+  chooses an untapped creature they control" (`"trigger-player"` — Crashing
+  Boars). The filter is read from the chooser's side and `then` applies with
+  them as its controller. `min` is an amount: Tangle Wire's "taps … for each
+  fade counter" is `min` and `upTo` both `{ countersOn: "source", counter:
+  "fade" }`. `exceptTriggerObject: true` is "**another** permanent" beside
+  the one the trigger is about (Cloudstone Curio, Saw's "other than that
+  creature"), with `CardFilter.sharesPermanentTypeWith: "trigger-object"` for
+  "that shares a permanent type with it" (rule 110.4 — kindred doesn't
+  count). Several players each choosing is a `vote` with `choose`. The
+  scaffolder reads "that player / defending player returns, untaps or taps a
+  … they control" in an each-player upkeep or attack trigger.
 - **`conditional { condition: StaticCondition, then, else? }`** — apply `then`
   if `condition` holds at resolution (evaluated from the source's controller's
   view — same `{ controls, your-turn, threshold, metalcraft }` union as a

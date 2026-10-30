@@ -1886,7 +1886,7 @@ export function entersWithoutAbilities(state: GameState, registry: CardRegistry,
       for (const ability of staticsOf(registry, rulesTextName(source)).layer4) {
         if (!setsBasicLandType(ability)) continue;
         if (ability.setsChosenLandType === true && !isBasicLandType(String(source.chosenOnEnter))) continue;
-        if (ability.affects.scope === "attached" || ability.affects.scope === "paired") continue;
+        if (ability.affects.scope === "attached" || ability.affects.scope === "paired" || ability.affects.scope === "chosen") continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
         if (staticAffects(state, registry, ability.affects, source, object, { entering: true })) return true;
       }
@@ -1897,7 +1897,7 @@ export function entersWithoutAbilities(state: GameState, registry: CardRegistry,
     const source = state.objects[sourceId];
     if (source === undefined || source.id === object.id) continue;
     for (const ability of abilities) {
-      if (ability.affects.scope === "attached" || ability.affects.scope === "paired") continue;
+      if (ability.affects.scope === "attached" || ability.affects.scope === "paired" || ability.affects.scope === "chosen") continue;
       if (staticAffects(state, registry, ability.affects, source, object, { entering: true })) return true;
     }
   }
@@ -2909,6 +2909,15 @@ export function staticAffects(
     view.subtypes ?? effectiveSubtypes(state, registry, target);
   if (affects.scope === "self") return source.id === target.id;
   if (affects.scope === "attached") return source.attachedTo === target.id;
+  if (affects.scope === "chosen") {
+    const chosen = source.chosenPermanent;
+    return (
+      chosen !== undefined &&
+      chosen.id === target.id &&
+      chosen.stint === (target.zoneChangeCount ?? 0) &&
+      target.zone === "battlefield"
+    );
+  }
   if (affects.scope === "paired") {
     const partner = pairedPartner(state, source);
     return partner !== undefined && (target.id === source.id || target.id === partner.id);

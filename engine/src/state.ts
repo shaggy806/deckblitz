@@ -708,6 +708,14 @@ export interface GameObject {
    * player"). What a `"chosen-player"` scope, trigger subject or filter
    * reads off its source. Cleared on any zone change (rule 400.7). */
   chosenPlayer?: PlayerId;
+  /** "The chosen creature": the permanent chosen as this one entered
+   * (`CardDefinition.choosePermanentOnEnter` — Tyrannical Pitlord, Dauntless
+   * Bodyguard; rules 614.1c, 607.2d), with the stint it was chosen in
+   * (`zoneChangeCount`) — once it leaves the battlefield it's a new object
+   * the choice no longer names (rule 400.7). What the `"chosen"`
+   * {@link EffectTargetRef} and a static's `{ scope: "chosen" }` read.
+   * Cleared on any zone change of this one. */
+  chosenPermanent?: { readonly id: ObjectId; readonly stint: number };
   /** A battle's protector (rule 310.9): the player who defends it — chosen
    * as it entered (310.9a; for a Siege, one of its controller's opponents,
    * 310.12a). It's the defending player of any creature attacking it, and
@@ -789,6 +797,10 @@ export interface GameObject {
      * (`CardDefinition.choosePlayerOnEnter`), or `null` with nobody to
      * choose. Lands on `GameObject.chosenPlayer`. */
     readonly chosenPlayer?: PlayerId | null;
+    /** The permanent chosen for it as it was about to enter
+     * (`CardDefinition.choosePermanentOnEnter`), or `null` for none. Lands
+     * on `GameObject.chosenPermanent`. */
+    readonly chosenPermanent?: ObjectId | null;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -1805,6 +1817,10 @@ export interface LastKnownInfo {
   /** `GameObject.chosenPlayer` as it left — "the chosen player" for an
    * ability of it that resolves after it has gone (rule 608.2h). */
   readonly chosenPlayer?: PlayerId;
+  /** `GameObject.chosenPermanent` as it left — "the chosen creature" for an
+   * ability of it that resolves after it has gone (rule 608.2h: Tyrannical
+   * Pitlord's leaves trigger, Dauntless Bodyguard sacrificed for its cost). */
+  readonly chosenPermanent?: { readonly id: ObjectId; readonly stint: number };
   /** The triggered abilities it had been *granted* — by another permanent's
    * static or a one-shot modifier — in the order `effectiveTriggered` lists
    * them after its printed ones; with `lostAbilities`, only those granted
@@ -3175,6 +3191,11 @@ export type AwaitingDecision =
        * and what's picked (or nothing) is what it exchanges with as it
        * enters. `then` is unused. */
       readonly exchangeText?: true;
+      /** Set when the choice is an entering permanent's "as this enters,
+       * choose a [permanent]" (`CardDefinition.choosePermanentOnEnter`):
+       * `source` is the permanent about to enter, and what's picked (or
+       * nothing) is its chosen permanent as it enters. `then` is unused. */
+      readonly permanentOnEnter?: true;
       /** Set when the choice is an entering permanent's devour (rule
        * 702.82a — `CardDefinition.devour`): `source` is the permanent about
        * to enter, and what's picked is sacrificed now, before it enters with
@@ -5176,6 +5197,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.chosenCreatureType ?? null,
     o.chosenNames ?? null,
     o.chosenPlayer ?? null,
+    o.chosenPermanent ?? null,
     o.counters,
     o.counterTimestamps ?? null,
     o.modifiers,

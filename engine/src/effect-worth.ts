@@ -152,14 +152,18 @@ function lifeLossTo(players: readonly PlayerId[] | null, amount: number, ctx: Wo
   return total;
 }
 
-/** The permanent a `"source"`/`"trigger-object"`/`"attached"` reference
- * names — `"attached"` as the source is attached now. */
+/** The permanent a `"source"`/`"trigger-object"`/`"attached"`/`"chosen"`
+ * reference names — `"attached"` as the source is attached now, `"chosen"`
+ * the source's chosen permanent. */
 function objectRef(ref: EffectTargetRef, ctx: WorthContext): ObjectId | undefined {
   if (ref === "source") return ctx.source;
   if (ref === "trigger-object") return ctx.triggerObject;
   if (ref === "attached") {
     const host = ctx.source !== undefined ? ctx.state.objects[ctx.source]?.attachedTo : undefined;
     return host ?? undefined;
+  }
+  if (ref === "chosen") {
+    return ctx.source !== undefined ? ctx.state.objects[ctx.source]?.chosenPermanent?.id : undefined;
   }
   return undefined;
 }

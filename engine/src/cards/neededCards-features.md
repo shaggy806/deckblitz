@@ -321,6 +321,33 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The chosen creature, and choices by another player — built 2026-10-30
+
+The need-keys Phase 2 family `decision:choose-permanent`, its first unit
+(features only), on the existing `choose-permanents` decision — no new
+decision kind. "As this enters, choose another creature you control" (rule
+614.1c) is the card field `choosePermanentOnEnter { filter, optional?,
+prompt, attach?, counter? }`, kept with its stint as
+`GameObject.chosenPermanent` (rule 607.2d) and read back by the `"chosen"`
+`EffectTargetRef` and a static's `{ scope: "chosen" }` while it's still that
+object (rule 400.7), as the source last existed once it has left (608.2h);
+`attach` enters an Equipment attached to it (rule 301.5e), `counter` puts a
+counter on it. `choose-permanents` gained `chooser` (an `EffectPlayerRef`:
+"that player", "defending player" — filter from their side, `then` theirs),
+`min` as an amount (Tangle Wire's "for each fade counter"), and
+`exceptTriggerObject`; `CardFilter.sharesPermanentTypeWith` (rule 110.4). The
+search bot weighs each option of a forced pick; the view names the chosen
+permanent on its chooser's tile (`chosen`). Proving cards: Tyrannical
+Pitlord, Dauntless Bodyguard, Grifter's Blade, Phylactery Lich, Sunken Hope,
+Tangle Wire, Crashing Boars, Saw, Cloudstone Curio. Keys:
+`decision:choose-permanent`, `decision:as-enters-choose-permanent`,
+`decision:choose-permanents-exclude-trigger-object`,
+`decision:that-player-chooses-permanent`. Not covered: the family's other
+units — one per category (Tragic Arrogance, Global Ruin), a kept subset
+(Covetous Elegy), a choice among the spell's targets (Wicked Slumber), one
+per opponent (Ultimate Magic: Meteor) — and "gain its activated abilities"
+(Scheming Fence); `author-freed` narrows the rest.
+
 ### Counts for one player, and its controller as the player — built 2026-10-29
 
 Two need-keys Phase 2 families, features only. **`amount:count-for-chosen-player`**:

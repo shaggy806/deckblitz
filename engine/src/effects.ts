@@ -46,8 +46,12 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * gone from the battlefield, the permanent it was last attached to, if that
  * one is still there as the same object (the rulings of Starlit Mantle and
  * Wings of Hubris; rule 400.7); nothing once the host has left or the source
- * was attached to nothing. Not a target. */
-export type EffectTargetRef = number | "source" | "trigger-object" | "attached";
+ * was attached to nothing. Not a target. `"chosen"` is "the chosen
+ * creature": the permanent chosen as the source entered
+ * (`CardDefinition.choosePermanentOnEnter` — rule 607.2d), read as the source
+ * last existed if it has left; nothing once the chosen one has left the
+ * battlefield (rule 400.7). Not a target. */
+export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen";
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
 /** A `search-library`'s other player's zones and what follows the finds, as
@@ -1519,12 +1523,31 @@ export type EffectSpec =
       readonly kind: "choose-permanents";
       readonly filter: CardFilter;
       readonly upTo: EffectAmount;
-      readonly min?: number;
+      /** An amount too: Tangle Wire's "taps an untapped artifact, creature,
+       * or land they control **for each** fade counter" is `min` and `upTo`
+       * the same count — all of them, or every one there is. */
+      readonly min?: EffectAmount;
       readonly then: EffectSpec;
       readonly prompt: string;
       /** "Any number of **other** nonland permanents you control" (Abdel
        * Adrian, Gorion's Ward): never the effect's own source. */
       readonly exceptSource?: boolean;
+      /** "…return **another** permanent you control that shares a permanent
+       * type with it" (Cloudstone Curio), "a permanent **other than that
+       * creature**" (Saw): never the trigger's object. */
+      readonly exceptTriggerObject?: boolean;
+      /**
+       * Who chooses, when it isn't the effect's controller: "at the
+       * beginning of each player's upkeep, **that player** untaps a land
+       * they control" (Hokori, Dust Drinker — `"active-player"`), "**defending
+       * player** chooses an untapped creature they control" (Crashing Boars
+       * — `"trigger-player"`). One player; `filter` is read from their side
+       * (`controlledBy: "you"` is the chooser), and `then` applies with them
+       * as its controller — they're the one doing it. Nobody named, and
+       * nothing happens. Several players each choosing is a `vote` with
+       * `choose` (rule 101.4).
+       */
+      readonly chooser?: EffectPlayerRef;
     }
   | {
       /**
@@ -7143,6 +7166,8 @@ export interface EffectApi {
     exceptSource?: boolean,
     /** Never these (a `move-counters`' other end, and those chosen already). */
     except?: readonly ObjectId[],
+    /** Who chooses — the effect's controller when absent. */
+    chooser?: PlayerId,
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -7332,6 +7357,11 @@ export interface EffectApi {
    * source is attached to now, or — the source gone — what it was last
    * attached to, while that is still on the battlefield as the same object. */
   attachedHost(): ObjectId | undefined;
+  /** The permanent an {@link EffectTargetRef} `"chosen"` names: the source's
+   * chosen permanent (`GameObject.chosenPermanent`) — as the source last
+   * existed, if it has left (rule 608.2h) — while that one is still on the
+   * battlefield as the object that was chosen (rule 400.7). */
+  chosenPermanent(): ObjectId | undefined;
   /** How much damage from the effect's damage source (`from`) is lethal to
    * the creature `target` now — see the `damage` effect's
    * `excessToController`. */
@@ -9650,6 +9680,10 @@ function resolveEffectTarget(
     const host = ctx.attachedHost();
     return host === undefined ? undefined : { kind: "object", object: host };
   }
+  if (ref === "chosen") {
+    const chosen = ctx.chosenPermanent();
+    return chosen === undefined ? undefined : { kind: "object", object: chosen };
+  }
   return ctx.targets[ref];
 }
 
@@ -9743,6 +9777,7 @@ function containsDynamicCompare(value: unknown): boolean {
     ? value.some(containsDynamicCompare)
     : isAmountCompare(value as Record<string, unknown>) ||
       "sharesCardTypeWith" in value ||
+      "sharesPermanentTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
@@ -9756,6 +9791,16 @@ function containsDynamicCompare(value: unknown): boolean {
   dynamicCompareMemo.set(value, found);
   return found;
 }
+
+/** The permanent types (rule 110.4) — `sharesPermanentTypeWith`'s. */
+const PERMANENT_TYPES: ReadonlySet<CardType> = new Set<CardType>([
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "land",
+  "planeswalker",
+]);
 
 /**
  * `spec` with every filter comparison's `{ amount }` operand (see
@@ -9772,7 +9817,8 @@ function containsDynamicCompare(value: unknown): boolean {
  * `CardFilter.sharesCardTypeWith` is bound the same way, to the card types the
  * sacrificed permanent had as it last existed on the battlefield, or the
  * trigger object's (an `anyOf` of one `typesAnyOf`, so an `anyOf` the filter
- * already had still applies).
+ * already had still applies). `sharesPermanentTypeWith` keeps only the
+ * permanent types among the trigger object's (rule 110.4).
  */
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
   if (!containsDynamicCompare(spec)) return spec;
@@ -9883,6 +9929,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         target?.kind === "object"
           ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
           : walked;
+    }
+    if ("sharesPermanentTypeWith" in walked) {
+      // Rule 110.4: only the permanent types count — kindred doesn't.
+      const { sharesPermanentTypeWith: _with, anyOf, ...rest } = walked as CardFilter;
+      const other = ctx.triggerObject;
+      const types = (other === undefined ? [] : ctx.cardTypesOf({ kind: "object", object: other })).filter(
+        (t) => PERMANENT_TYPES.has(t),
+      );
+      const shares: CardFilter = { typesAnyOf: types, ...(anyOf !== undefined ? { anyOf } : {}) };
+      walked = { ...rest, anyOf: [shares] };
     }
     if (!("sharesCardTypeWith" in walked)) return walked;
     const { sharesCardTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
@@ -10337,16 +10393,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: chosen }]));
       return;
     }
-    case "choose-permanents":
+    case "choose-permanents": {
+      const chooser = spec.chooser === undefined ? ctx.controller : effectPlayer(spec.chooser, ctx);
+      if (chooser === undefined) return;
+      const except =
+        spec.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
       ctx.choosePermanents(
         spec.filter,
-        spec.min ?? 0,
+        Math.max(0, Math.floor(amountValue(spec.min ?? 0, ctx))),
         amountValue(spec.upTo, ctx),
         spec.then,
         spec.prompt,
         spec.exceptSource,
+        except,
+        chooser,
       );
       return;
+    }
     case "blight": {
       // One player at a time from the active player (rule 101.4), the rest
       // parked while one is asked, as `for-each-player` parks its players.
@@ -11186,8 +11249,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.triggerObject === undefined
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
-            : spec.target === "attached"
-              ? resolveEffectTarget("attached", ctx)
+            : spec.target === "attached" || spec.target === "chosen"
+              ? resolveEffectTarget(spec.target, ctx)
               : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);
       return;

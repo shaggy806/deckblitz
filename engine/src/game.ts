@@ -83,6 +83,7 @@ import type {
   CardNameOnEnter,
   CardType,
   CastModalSpec,
+  PermanentOnEnter,
   CombatRestriction,
   Keyword,
   StaticAbility,
@@ -4244,6 +4245,10 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const attached = this.state.objects[id].attachedTo;
       if (attached !== null) pinned.add(attached);
+      // A permanent's "chosen creature" (`chosenPermanent`): folded into a
+      // stack, the choice would name the whole stack.
+      const chosen = this.state.objects[id].chosenPermanent;
+      if (chosen !== undefined) pinned.add(chosen.id);
     }
     for (const trigger of this.state.delayedTriggers) {
       pinned.add(trigger.source);
@@ -9575,6 +9580,7 @@ export class Game {
     | { readonly kind: "protector"; readonly siege: boolean }
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
     | { readonly kind: "player"; readonly among: "player" | "opponent" }
+    | { readonly kind: "permanent"; readonly spec: PermanentOnEnter }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -9610,6 +9616,11 @@ export class Game {
     // "As this enters, choose a player / an opponent" — printed, or a copy's.
     if (answered?.chosenPlayer === undefined && becoming.choosePlayerOnEnter !== null) {
       return { kind: "player", among: becoming.choosePlayerOnEnter };
+    }
+    // "As this enters, choose another creature you control" — printed, or a
+    // copy's.
+    if (answered?.chosenPermanent === undefined && becoming.choosePermanentOnEnter !== null) {
+      return { kind: "permanent", spec: becoming.choosePermanentOnEnter };
     }
     // Devour (rule 702.82a): "as this enters, you may sacrifice any number of
     // creatures" — printed, or a copy's.
@@ -9775,6 +9786,36 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "permanent") {
+        // "As this enters, choose a [permanent]" (rule 614.1c): one already
+        // on the battlefield, not targeted, from its controller's side —
+        // never itself or one entering with it ("another"). A forced choice
+        // of the only one isn't asked; none, and nothing is chosen.
+        const eligible = this.state.zones.shared.battlefield.filter(
+          (other) =>
+            other !== id &&
+            this.enterBatch?.has(other) !== true &&
+            this.inGame(this.state.objects[other]) &&
+            matchesFilter(this.state, this.registry, other, next.spec.filter, { you: chooser, source: id }),
+        );
+        if (eligible.length > 1 || (eligible.length === 1 && next.spec.optional === true)) {
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: chooser,
+            eligible,
+            min: next.spec.optional === true ? 0 : 1,
+            max: 1,
+            prompt: next.spec.prompt,
+            then: { kind: "sequence", effects: [] },
+            source: id,
+            x: 0,
+            permanentOnEnter: true,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, chosenPermanent: eligible[0] ?? null };
         continue;
       }
       if (next.kind === "player") {
@@ -23308,6 +23349,21 @@ export class Game {
         if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
         return host;
       },
+      chosenPermanent: () => {
+        // "The chosen creature" (rule 607.2d): the source's choice — as the
+        // source last existed, if it has left or come back as a new object
+        // (608.2h) — while the chosen one is still there in the stint it was
+        // chosen in (400.7).
+        const object = this.state.objects[source];
+        const here =
+          opts.sourceLost !== true &&
+          object?.zone === "battlefield" &&
+          (refs.source === undefined || object.zoneChangeCount === refs.source);
+        const chosen = here ? object.chosenPermanent : departedSource()?.chosenPermanent;
+        if (chosen === undefined) return undefined;
+        const on = this.state.objects[chosen.id];
+        return on?.zone === "battlefield" && (on.zoneChangeCount ?? 0) === chosen.stint ? chosen.id : undefined;
+      },
       lethalDamageTo: (target, from) => {
         const by = damageSource(from);
         const object = this.state.objects[target];
@@ -25038,8 +25094,8 @@ export class Game {
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource, except) =>
-        this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true, except),
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser) =>
+        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -31776,6 +31832,13 @@ export class Game {
         }
       });
       entering.enterChoice = { ...entering.enterChoice, devoured };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    if (awaiting.permanentOnEnter === true) {
+      const entering = this.state.objects[awaiting.source];
+      entering.enterChoice = { ...entering.enterChoice, chosenPermanent: chosen[0] ?? null };
       this.state.awaiting = null;
       this.prepareForPriority(this.activePlayer);
       return;
@@ -38998,6 +39061,7 @@ export class Game {
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
       ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
+      ...(object.chosenPermanent !== undefined ? { chosenPermanent: object.chosenPermanent } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
       ...(object.monstrous === true ? { monstrous: true as const } : {}),
       ...(object.renowned === true ? { renowned: true as const } : {}),
@@ -39774,6 +39838,7 @@ export class Game {
     delete object.chosenOnEnter;
     delete object.chosenNames;
     delete object.chosenPlayer;
+    delete object.chosenPermanent;
     // A battle's protector was this stint's (rule 400.7).
     delete object.protector;
     // The "as this enters" choices made before this move (rule 614.12 —
@@ -39835,6 +39900,25 @@ export class Game {
       const enchanted = enterChoice.enchantPlayer;
       if (enchanted !== undefined && this.state.players[enchanted]?.hasLost === false) {
         object.attachedToPlayer = enchanted;
+      }
+      // "As this enters, choose another creature you control" (rule 614.1c):
+      // the chosen one, in the stint it was chosen in (rule 400.7), if it's
+      // still there. Then what the choice does as this enters: Phylactery
+      // Lich's counter on it, Grifter's Blade entering attached to it — only
+      // if it could equip it, else it enters unattached (rule 301.5e).
+      const picked = enterChoice.chosenPermanent ?? null;
+      if (picked !== null && this.state.objects[picked]?.zone === "battlefield" && this.inGame(this.state.objects[picked])) {
+        // One token of a stack is chosen, so it's singled out.
+        const chosen = this.state.objects[this.splitOneFromStack(picked)];
+        object.chosenPermanent = { id: chosen.id, stint: chosen.zoneChangeCount ?? 0 };
+        const spec = this.registry.get(rulesTextName(object)).choosePermanentOnEnter;
+        if (spec?.counter !== undefined) {
+          this.addCounter({ kind: "object", object: chosen.id }, spec.counter, 1, false, object.controller);
+        }
+        if (spec?.attach === true && object.attachedTo == null && this.canEquip(id, chosen.id)) {
+          object.attachedTo = chosen.id;
+          this.emit({ type: "permanent-attached", source: id, target: chosen.id });
+        }
       }
     }
     // Alt-cast zone markers (ROADMAP Phase 6) end on any zone change: a

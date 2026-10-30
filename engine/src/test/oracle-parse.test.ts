@@ -2329,6 +2329,52 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Spells with the chosen name can't be cast.").complete).toBe(false);
   });
 
+  it("a permanent chosen as it enters, the chosen creature, and a choice by the trigger's player (decision:choose-permanent)", () => {
+    const pitlord = face(
+      "Flying, trample\nAs this creature enters, choose another creature you control.\nThe chosen creature gets +3/+3 and has flying.\nWhen this creature leaves the battlefield, sacrifice the chosen creature.",
+      "Creature — Demon",
+    );
+    expect(pitlord.complete).toBe(true);
+    expect(pitlord.choosePermanentOnEnter).toEqual({
+      filter: { type: "creature", controlledBy: "you" },
+      prompt: "Choose another creature you control",
+    });
+    expect(pitlord.static).toEqual([
+      {
+        affects: { scope: "chosen" },
+        grantPt: [3, 3],
+        grantKeywords: ["flying"],
+        text: "The chosen creature gets +3/+3 and has flying.",
+      },
+    ]);
+    expect(pitlord.triggered[0].effect).toEqual({ kind: "sacrifice-target", target: "chosen" });
+    const guard = face(
+      "As this creature enters, choose another creature you control.\nSacrifice this creature: The chosen creature gains indestructible until end of turn.",
+      "Creature — Human Knight",
+    );
+    expect(guard.activated[0].effect).toEqual({
+      kind: "grant-keyword",
+      target: "chosen",
+      keyword: "indestructible",
+      duration: "end-of-turn",
+    });
+    const hope = face(
+      "At the beginning of each player's upkeep, that player returns a creature they control to its owner's hand.",
+      "Enchantment",
+    );
+    expect(hope.triggered[0].effect).toEqual({
+      kind: "choose-permanents",
+      chooser: "active-player",
+      filter: { type: "creature", controlledBy: "you" },
+      min: 1,
+      upTo: 1,
+      then: { kind: "return-to-hand", target: 0 },
+      prompt: "Return a creature you control to its owner's hand",
+    });
+    // "That player" outside a trigger that names one isn't read.
+    expect(face("When this enchantment enters, that player untaps a land they control.", "Enchantment").complete).toBe(false);
+  });
+
   it("a player chosen as it enters, and the lines that read the chosen player (decision:choose-player)", () => {
     const rack = face(
       "As this artifact enters, choose an opponent.\nThe chosen player's maximum hand size is four.",

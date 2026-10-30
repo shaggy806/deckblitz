@@ -60,6 +60,29 @@ export interface CardNameOnEnter extends CardNameChoice {
   readonly reveal?: "each-opponent-hand";
 }
 
+/** "As this enters, choose a [permanent]" — see
+ * `CardDefinition.choosePermanentOnEnter`. */
+export interface PermanentOnEnter {
+  /** What may be chosen: a permanent already on the battlefield matching
+   * this, read from the side of the player it's entering under — Tyrannical
+   * Pitlord's "another creature you control" is `{ type: "creature",
+   * controlledBy: "you" }`. Never itself, and never one entering at the same
+   * time ("another"). */
+  readonly filter: CardFilter;
+  /** "You **may** choose" (Scheming Fence): choosing none is an answer. */
+  readonly optional?: true;
+  /** What the choice is for, as the prompt says it. */
+  readonly prompt: string;
+  /** "If you do, it enters attached to that creature" (Grifter's Blade): an
+   * Equipment or Aura enters attached to the chosen permanent, if it could
+   * be (rule 301.5e — an Equipment that can't enters unattached). */
+  readonly attach?: true;
+  /** "As this enters, put a phylactery counter on an artifact you control"
+   * (Phylactery Lich): one counter of this kind goes on the chosen permanent
+   * as this one enters. */
+  readonly counter?: string;
+}
+
 export interface CopyOnEnter {
   /**
    * What it may copy: a permanent already on the battlefield matching this,
@@ -347,6 +370,13 @@ export type AffectSpec =
   /** Every land the source's controller controls (Chromatic Lantern). */
   | { readonly scope: "lands-you-control" }
   | { readonly scope: "attached" }
+  /**
+   * "**The chosen creature** gets +3/+3 and has flying" (Tyrannical
+   * Pitlord): the permanent chosen as the source entered
+   * (`GameObject.chosenPermanent` — rule 607.2d), while it's still the
+   * object that was chosen (rule 400.7); nothing when none was.
+   */
+  | { readonly scope: "chosen" }
   /**
    * Soulbond's "as long as this creature is paired with another creature,
    * **both creatures** have …" / "**each of those creatures** has …" (rule
@@ -3230,6 +3260,16 @@ export interface CardDefinition {
    * to choose nobody is asked; with none, nobody is chosen. `null` for none.
    */
   readonly choosePlayerOnEnter: "player" | "opponent" | null;
+  /**
+   * "As this enters, choose another creature you control" (rule 614.1c —
+   * Tyrannical Pitlord, Dauntless Bodyguard): asked of its controller among
+   * the permanents matching the filter — not targeted — and kept as
+   * `GameObject.chosenPermanent` for "the chosen creature" (rule 607.2d),
+   * which the `"chosen"` {@link EffectTargetRef} and a static's `{ scope:
+   * "chosen" }` read. With nothing to choose, nothing is. See
+   * {@link PermanentOnEnter} for its `attach` and `counter`. `null` for none.
+   */
+  readonly choosePermanentOnEnter: PermanentOnEnter | null;
   /** Starting loyalty for a planeswalker (rule 306.5b — it enters with this
    * many loyalty counters). `null` for a non-planeswalker. `defineCard`
    * synthesizes the enters-with-counters replacement from this. */
@@ -3782,6 +3822,7 @@ const PRINTED_ABILITY: {
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
+  choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
   defense: false,
   flashback: (def) => def.flashback !== null,
@@ -4006,6 +4047,7 @@ interface CardDraft {
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
   choosePlayerOnEnter?: "player" | "opponent";
+  choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
   /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
    * for each Phyrexian mana symbol its caster paid life for (Nahiri, the
@@ -4240,6 +4282,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseCardNameOnEnter: draft.chooseCardNameOnEnter ?? null,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     choosePlayerOnEnter: draft.choosePlayerOnEnter ?? null,
+    choosePermanentOnEnter: draft.choosePermanentOnEnter ?? null,
     loyalty,
     defense,
     flashback: draft.flashback ?? null,

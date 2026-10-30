@@ -131,6 +131,7 @@ import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
+import _poolCloudstoneCurio from "../pool/cloudstone-curio.js";
 import _poolClovenCasting from "../pool/cloven-casting.js";
 import _poolClutchOfCurrents from "../pool/clutch-of-currents.js";
 import _poolCoastalBreach from "../pool/coastal-breach.js";
@@ -959,6 +960,7 @@ const shard: CardShard = {
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
+    _poolCloudstoneCurio,
     _poolClovenCasting,
     _poolClutchOfCurrents,
     _poolCoastalBreach,

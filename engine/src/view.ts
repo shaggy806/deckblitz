@@ -462,9 +462,24 @@ function attackChoicePending(state: GameState, id: ObjectId): boolean {
   return (state.pendingEnterAttacking ?? []).some((q) => q.creatures.some((c) => c.object === id));
 }
 
-function chosenOf(object: GameObject): string | null {
+function chosenOf(state: GameState, object: GameObject): string | null {
   if (object.zone !== "battlefield" && object.zone !== "phased-out") return null;
-  return object.chosenOnEnter ?? object.chosenCreatureType ?? (object.chosenNames?.join(", ") || null);
+  return (
+    object.chosenOnEnter ??
+    object.chosenCreatureType ??
+    (object.chosenNames?.join(", ") || null) ??
+    chosenPermanentName(state, object)
+  );
+}
+
+/** The name of a permanent's chosen permanent (`GameObject.chosenPermanent`
+ * — Tyrannical Pitlord's creature) while it's still that object, or `null`.
+ * A face-down one is named only as that (rule 708.5). */
+function chosenPermanentName(state: GameState, object: GameObject): string | null {
+  const chosen = object.chosenPermanent;
+  const on = chosen !== undefined ? state.objects[chosen.id] : undefined;
+  if (on === undefined || on.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== chosen?.stint) return null;
+  return on.faceDown !== undefined ? "a face-down creature" : printedCardName(on);
 }
 
 function visible(
@@ -490,7 +505,7 @@ function visible(
   // aren't the permanent's).
   const roomDoors = zone === "battlefield" ? object.doors : undefined;
   const cardDef = roomDoors !== undefined ? registry.get(object.cardName) : def;
-  const chosen = chosenOf(object);
+  const chosen = chosenOf(state, object);
   const live = computeCharacteristics(state, registry, id);
   const computed =
     phased === undefined

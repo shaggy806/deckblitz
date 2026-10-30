@@ -667,6 +667,7 @@ import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunfireBalm from "../pool/sunfire-balm.js";
 import _poolSunkenCitadel from "../pool/sunken-citadel.js";
+import _poolSunkenHope from "../pool/sunken-hope.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
@@ -1493,6 +1494,7 @@ const shard: CardShard = {
     _poolSunastianFalconer,
     _poolSunfireBalm,
     _poolSunkenCitadel,
+    _poolSunkenHope,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwarmOfBloodflies,
