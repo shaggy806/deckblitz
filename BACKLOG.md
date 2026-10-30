@@ -130,10 +130,16 @@ section keeps only what to do next.
   Guardian, Nantuko Cultivator, Mind Maggots), look-and-choose-target-opponent-library
   (2026-10-30: `look-and-choose`'s `from`, a `"graveyard"` destination, `"top-any-order"`; 15
   freed, 5 proving cards — Architects of Will, Draugr Thought-Thief, Cruel Fate, Sealed Fate,
-  Balshan Beguiler).
-  **234 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21),
-  `static:skip-untap-step` (21), `decision:choose-card-name`'s chosen-value group (21).
+  Balshan Beguiler), outside-the-game (2026-10-30: a real **sideboard** — `DeckList.sideboard`
+  as `zone: "outside"` objects, none in Commander (rule 903.5e), at most 15 (100.4a);
+  `search-library`'s `outside` and `faceUpExile`; `learn()` whole, its Lesson from the
+  sideboard; the wire, the import's `Sideboard` section, the deck editor, the player panel's
+  "sideboard N" and the builder's zone; 16 freed, 5 proving cards — Burning Wish, Living Wish,
+  Coax from the Blind Eternities, Mastermind's Acquisition, Legion Angel).
+  **250 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `condition:player-state-thresholds` (21), `static:skip-untap-step` (21),
+  `decision:choose-card-name`'s chosen-value group (21),
+  `effect:prevent-combat-damage-to-and-by-target` (20).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

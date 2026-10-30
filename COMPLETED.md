@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: cards outside the game, with a real sideboard** (2026-10-30,
+  5f8009a13 and 367433891; `mechanic:outside-the-game`). Decks bring a sideboard
+  (`DeckList.sideboard`, rule 100.4; at most 15, 100.4a; none in a Commander game, 903.5e), kept
+  as `zone: "outside"` objects only their owner sees; `search-library`'s `outside` and
+  `faceUpExile` are the wishes (rule 701.23j); `learn()` is rule 701.48a whole, its Lesson from
+  the sideboard. The wire, the import's `Sideboard` section and `SB:` lines, the deck editor's
+  Sideboard section, the player panel's "sideboard N" and the builder's `"sideboard"` zone carry
+  it; four manual checks. 16 freed for `author-freed`; proving cards Burning Wish, Living Wish,
+  Coax from the Blind Eternities, Mastermind's Acquisition, Legion Angel.
 - **Need-keys Phase 2: another player's library, features only** (2026-10-30, 3c66633ad;
   `effect:look-and-choose-target-opponent-library`, `effect:look-and-choose-target-player`,
   `effect:reveal-top-opponent-library-you-choose-to-graveyard`). `look-and-choose`'s `from`

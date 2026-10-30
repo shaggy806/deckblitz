@@ -468,6 +468,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   proving cards. Two families: the session neared ~300K tokens. 234 freed cards queued. Next:
   `mechanic:outside-the-game` (21), `condition:player-state-thresholds` (21),
   `static:skip-untap-step` (21).
+- **2026-10-30: outside-the-game, with a real sideboard** (the user's call, over keeping
+  "outside the game is empty") — `DeckList.sideboard` as `zone: "outside"` objects (none in
+  Commander, rule 903.5e), `search-library`'s `outside` and `faceUpExile`, `learn()` whole,
+  and the sideboard through the wire, import, deck editor, player panel and builder; 5 proving
+  cards, 4 manual checks. Alone: it touched every workspace. 250 freed cards queued. Next:
+  `condition:player-state-thresholds` (21), `static:skip-untap-step` (21),
+  `decision:choose-card-name`'s chosen-value group (21).
 
 ## Rough size
 
