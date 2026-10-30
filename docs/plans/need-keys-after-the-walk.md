@@ -491,6 +491,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   28 freed (349 queued). Skipped `decision:choose-card-name`'s chosen-value group, first in
   the order: it adds decisions, so it goes alone. Next: that group (21),
   `effect:amount-new-variants` (20), `static:combat-restriction-extensions` (19).
+- **2026-10-30: the chosen-value group, alone (a new decision)** — `choose-value` (a colour,
+  card type, counter kind or number chosen as it resolves, substituted into `then` or read as
+  `"x"`), the `choose-number` decision (the 31st kind; the client's stepper), `reveal-hand`,
+  the whole resolution carried across a choice (`ResolutionResume`); 6 keys, 7 proving cards.
+  22 freed (7 authored here, 15 queued: 364). Next: `effect:amount-new-variants` (20),
+  `static:combat-restriction-extensions` (19), `effect:modal-repeat-modes` (18).
 
 ## Rough size
 

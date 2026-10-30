@@ -147,11 +147,13 @@ section keeps only what to do next.
   Gibbering Descent, Damia, Sage of Stone, Fatigue, Molten Firebird, Elfhame Sanctuary),
   prevent-combat-damage-to-and-by-target (2026-10-30: no engine code — B250's `damage-rule`
   already ran it; the scaffolder taught; 15 freed, 4 proving cards — Ebony Horse, Awe Strike,
-  Stonewise Fortifier, Tajic, Legion's Edge).
-  **349 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `decision:choose-card-name`'s chosen-value group (21, new decisions: alone),
+  Stonewise Fortifier, Tajic, Legion's Edge), the chosen-value group (2026-10-30:
+  `choose-value` — a colour, card type, counter kind or number chosen as it resolves — the
+  `choose-number` decision and `reveal-hand`; 22 freed, 7 proving cards — Persecute, Sudden
+  Demise, Void, Blood Oath, Fertile Imagination, Ichormoon Gauntlet, Medicine Runner).
+  **364 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
   `effect:amount-new-variants` (20), `static:combat-restriction-extensions` (19),
-  `effect:modal-repeat-modes` (18).
+  `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked` (18).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -350,6 +352,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet).
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **A soulbond pairing isn't drawn on the board** — the view carries `pairedWith` (2026-10-26); only the keywords it grants show.

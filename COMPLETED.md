@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a value chosen as it resolves** (2026-10-30, e8d996e60;
+  `decision:choose-color-on-resolution`, `decision:choose-number-on-resolution`,
+  `decision:choose-card-type`, `amount:revealed-hand-cards-of-chosen-type`,
+  `decision:choose-counter-kind`, `effect:remove-counter-chosen-kind`). `choose-value`: a
+  colour, a card type, a kind of counter on a target or a matching permanent, or a number chosen
+  as the effect resolves, `then` run with it; the `choose-number` decision (the 31st kind, a
+  stepper in the client's banner); `reveal-hand`; the whole resolution carried across the
+  choice. 7 proving cards, 15 cards freed for `author-freed`.
 - **Need-keys Phase 2: skipping steps** (2026-10-30, fda0164a5; `static:skip-untap-step`,
   `static:skip-draw-step`, `static:skip-step`, `effect:skip-next-draw-step`). A static's
   `skipsSteps` (untap, upkeep, draw; you, opponents or each player, timed by `condition`) and the

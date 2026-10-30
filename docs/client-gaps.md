@@ -5,6 +5,16 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **Playback stalls when your cast triggers your own targeted ability** (found 2026-10-30).
+  Casting a spell that triggers one of your own abilities with a target — Glacial Ray with
+  Briarknit Kami on the board, Lightning Bolt with Ichormoon Gauntlet — leaves the "ALICE CASTS"
+  showcase on screen and the top strip at "Resolving…" for good: `usePlayback`'s `shown.busy`
+  never clears, so the trigger's `choose-targets` banner never appears, though the engine is
+  waiting on it (its `awaiting` is the `choose-targets`, the stack holds the spell). No page
+  error. Reproduce with `node client/e2e/run-check.mjs "Ichormoon Gauntlet: choose a counter"
+  "cast:Lightning Bolt" "player:Bob" wait`. Not yet checked whether a real browser outside the
+  Playwright harness stalls too. Suspects: the cast frame's flight to the stack waiting in
+  `endWhenDrawn` on a landing that never comes, the stack column not drawn on that frame.
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or
   face-down card, no effects lasting a turn, and nothing on the stack — so "Edit from here"
