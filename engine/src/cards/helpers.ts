@@ -1426,22 +1426,39 @@ export const investigate = (times: EffectAmount = 1): EffectSpec => ({
 /**
  * Learn (rule 701.48a): "You may discard a card. If you do, draw a card. If
  * you didn't discard a card, you may reveal a Lesson card you own from
- * outside the game and put it into your hand." A deck here has no sideboard,
- * so no card a player owns is outside the game (rule 400.11a) and the Lesson
- * half never finds one: learn is the rummage alone (the user's call,
- * 2026-10-20). A Lesson is an ordinary sorcery in the deck. A madness card
- * discarded this way still counts as discarded, so the draw follows.
+ * outside the game and put it into your hand." The Lesson comes from the
+ * player's sideboard (rule 400.11a, `DeckList.sideboard`) — none in a
+ * Commander game (903.5e), where only the rummage can do anything. A madness
+ * card discarded this way still counts as discarded, so the draw follows.
  */
 export const learn = (): EffectSpec => ({
-  kind: "may",
-  prompt: "Learn: discard a card to draw a card?",
-  effect: {
-    kind: "sequence",
-    effects: [
-      { kind: "discard", target: "you", amount: 1 },
-      { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
-    ],
-  },
+  kind: "sequence",
+  effects: [
+    {
+      kind: "may",
+      prompt: "Learn: discard a card to draw a card?",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 1 },
+          { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
+        ],
+      },
+    },
+    {
+      kind: "conditional",
+      condition: { kind: "not", of: { kind: "this-way", what: "discarded" } },
+      then: {
+        kind: "search-library",
+        filter: { subtype: "Lesson" },
+        destination: "hand",
+        min: 0,
+        max: 1,
+        reveal: true,
+        outside: "only",
+      },
+    },
+  ],
 });
 
 /**

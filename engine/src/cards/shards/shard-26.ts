@@ -442,6 +442,7 @@ import _poolMarrowShards from "../pool/marrow-shards.js";
 import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterOfWaves from "../pool/master-of-waves.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
+import _poolMastermindsAcquisition from "../pool/masterminds-acquisition.js";
 import _poolMazeSentinel from "../pool/maze-sentinel.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolMassiveMight,
     _poolMasterOfWaves,
     _poolMasterTransmuter,
+    _poolMastermindsAcquisition,
     _poolMazeSentinel,
     _poolMeatLocker,
     _poolMechanNavigator,

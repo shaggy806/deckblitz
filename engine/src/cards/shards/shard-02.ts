@@ -124,6 +124,7 @@ import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
 import _poolClone from "../pool/clone.js";
 import _poolCloudMidgarMercenary from "../pool/cloud-midgar-mercenary.js";
 import _poolCoastalDiscovery from "../pool/coastal-discovery.js";
+import _poolCoaxFromTheBlindEternities from "../pool/coax-from-the-blind-eternities.js";
 import _poolColfenorsUrn from "../pool/colfenors-urn.js";
 import _poolCollectorsVault from "../pool/collectors-vault.js";
 import _poolColossalMight from "../pool/colossal-might.js";
@@ -956,6 +957,7 @@ const shard: CardShard = {
     _poolClone,
     _poolCloudMidgarMercenary,
     _poolCoastalDiscovery,
+    _poolCoaxFromTheBlindEternities,
     _poolColfenorsUrn,
     _poolCollectorsVault,
     _poolColossalMight,

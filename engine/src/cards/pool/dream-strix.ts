@@ -1,8 +1,7 @@
 import { defineCard } from "../define.js";
 import { learn } from "../helpers.js";
 
-// EDHREC rank 25160. Learn is the rummage alone: no deck here has a
-// sideboard (AUTHORING.md, "learn").
+// EDHREC rank 25160. Learn is `learn()` (AUTHORING.md, "learn").
 const TARGET_TEXT = "When this creature becomes the target of a spell, sacrifice it.";
 const DIES_TEXT =
   "When this creature dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)";

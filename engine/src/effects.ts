@@ -62,6 +62,8 @@ export interface SearchMore {
   readonly all?: boolean;
   readonly playable?: "while-exiled";
   readonly then?: EffectSpec;
+  readonly outside?: true | "only";
+  readonly faceUpExile?: true;
 }
 /**
  * What a `search-library`'s finds must be *together* — see its `together`.
@@ -6394,6 +6396,26 @@ export type EffectSpec =
        * allowed only in a hidden zone (rule 701.23b).
        */
       readonly zones?: SearchZones;
+      /**
+       * Outside the game too (rule 701.23j: "may choose an appropriate card
+       * they own from outside the game") — the cards in the searcher's
+       * sideboard (400.11a, `DeckList.sideboard`; none in a Commander game,
+       * 903.5e). `"only"` searches nothing else: the wishes' "you may reveal a
+       * sorcery card you own from outside the game and put it into your
+       * hand" (Burning Wish) — `min: 0`, `reveal` when the card says so, and
+       * the library isn't shuffled. `true` adds it to `zones`: "search your
+       * library, graveyard, **and/or outside the game**" (Invasion of
+       * Arcavios). Outside the game is hidden, so a search may fail to find
+       * there (701.23b); the cards not taken stay outside.
+       */
+      readonly outside?: true | "only";
+      /**
+       * "…or choose **a face-up** [artifact] **card you own in exile**"
+       * (Karn, the Great Creator; Coax from the Blind Eternities): the
+       * searcher's own face-up exiled cards matching `filter` are among the
+       * choices as well.
+       */
+      readonly faceUpExile?: true;
       /**
        * Whose zones are searched, when they aren't the searcher's own —
        * "search **target opponent's** library" (`{ target: 0 }`), "**its
@@ -13088,6 +13110,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.all === true ? { all: true } : {}),
           ...(spec.playable !== undefined ? { playable: spec.playable } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
+          ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
+          ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
         },
       );
       return;

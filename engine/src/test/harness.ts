@@ -71,6 +71,8 @@ export function table(
     life?: number;
     seed?: number;
     step?: GameState["turn"]["step"];
+    /** Alice's sideboard: her cards outside the game (rule 400.11a). */
+    sideboard?: readonly string[];
   } = {},
 ): Table {
   const players = SEATS.slice(0, opts.players ?? 2);
@@ -81,7 +83,11 @@ export function table(
     startingPlayer: A,
     rules: { skipFirstDraw: false, maxLandsPerTurn: 99, maxHandSize: 99, startingLife: opts.life ?? 20 },
     controllers: Object.fromEntries(players.map((p, i) => [p, seats[i]])),
-    decks: players.map((player) => ({ player, cards: Array<string>(40).fill(opts.deck ?? "Wastes") })),
+    decks: players.map((player) => ({
+      player,
+      cards: Array<string>(40).fill(opts.deck ?? "Wastes"),
+      ...(player === A && opts.sideboard !== undefined ? { sideboard: opts.sideboard } : {}),
+    })),
   });
   const step = opts.step ?? "precombat-main";
   game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === step && s.priority.holder === A);

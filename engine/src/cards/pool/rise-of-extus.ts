@@ -1,8 +1,7 @@
 import { defineCard } from "../define.js";
 import { learn } from "../helpers.js";
 
-// EDHREC rank 29211. Learn is the rummage alone: no deck here has a
-// sideboard (AUTHORING.md, "learn").
+// EDHREC rank 29211. Learn is `learn()` (AUTHORING.md, "learn").
 export default defineCard({
   name: "Rise of Extus",
   manaCost: "{4}{W/B}{W/B}",

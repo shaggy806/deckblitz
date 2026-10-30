@@ -94,6 +94,7 @@ import _poolBullAurochs from "../pool/bull-aurochs.js";
 import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolBurnTheAccursed from "../pool/burn-the-accursed.js";
 import _poolBurningAnger from "../pool/burning-anger.js";
+import _poolBurningWish from "../pool/burning-wish.js";
 import _poolBurrentonBombardier from "../pool/burrenton-bombardier.js";
 import _poolCabalSlaver from "../pool/cabal-slaver.js";
 import _poolCabalTorturer from "../pool/cabal-torturer.js";
@@ -972,6 +973,7 @@ const shard: CardShard = {
     _poolBullsStrength,
     _poolBurnTheAccursed,
     _poolBurningAnger,
+    _poolBurningWish,
     _poolBurrentonBombardier,
     _poolCabalSlaver,
     _poolCabalTorturer,

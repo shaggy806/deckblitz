@@ -47,7 +47,15 @@ export type SharedZone = "battlefield" | "stack" | "exile" | "command";
  * the battlefield, and every "is it still on the battlefield" check, passes
  * it over without being told to. See {@link PhasedOutStatus}.
  */
-export type ZoneType = PrivateZone | SharedZone | "phased-out";
+export type ZoneType = PrivateZone | SharedZone | "phased-out" | "outside";
+/*
+ * `"outside"` isn't a zone either (rule 400.11: "Outside the game is not a
+ * zone"): it is where a card in its owner's sideboard sits (400.11a), kept in
+ * `GameState.outside` by owner. Nothing in the game sees or affects it
+ * (400.11c) but an effect that brings it in — a search that takes in
+ * "outside the game" (`search-library`'s `zones`, rule 701.23j) — and once
+ * brought in it stays in the game (400.11b).
+ */
 
 /**
  * Why and how a permanent phased out (rule 702.26) — `GameObject.phasedOut`,
@@ -4247,6 +4255,12 @@ export interface GameState {
    * (702.26b). Absent while none is.
    */
   phasedOut?: ObjectId[];
+  /**
+   * Each player's cards outside the game — their sideboard (rule 400.11a),
+   * `DeckList.sideboard` — each with `zone: "outside"`, in the order the
+   * deck listed them. Seen by their owner alone. Absent while nobody has one.
+   */
+  outside?: Record<PlayerId, ObjectId[]>;
   turn: TurnState;
   priority: PriorityState;
   result: GameResult;

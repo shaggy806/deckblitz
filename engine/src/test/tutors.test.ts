@@ -148,8 +148,12 @@ describe("search-library — Demonic Tutor", () => {
     const searches = (node: unknown, out: { filter: object; min: number }[]): void => {
       if (Array.isArray(node)) for (const each of node) searches(each, out);
       else if (node !== null && typeof node === "object") {
-        const spec = node as { kind?: unknown; filter?: object; min?: number };
-        if (spec.kind === "search-library") out.push({ filter: spec.filter ?? {}, min: spec.min ?? 0 });
+        const spec = node as { kind?: unknown; filter?: object; min?: number; outside?: unknown };
+        // Outside the game is hidden, and its searcher "may choose" (rule
+        // 701.23j): Mastermind's Acquisition's second mode may find nothing.
+        if (spec.kind === "search-library" && spec.outside !== "only") {
+          out.push({ filter: spec.filter ?? {}, min: spec.min ?? 0 });
+        }
         for (const value of Object.values(node)) searches(value, out);
       }
     };

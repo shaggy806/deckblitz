@@ -470,6 +470,7 @@ import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
 import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
 import _poolLivingArmor from "../pool/living-armor.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
+import _poolLivingWish from "../pool/living-wish.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarDruid from "../pool/llanowar-druid.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolLivaanCultistOfTiamat,
     _poolLivingArmor,
     _poolLivingLightningChargedUp,
+    _poolLivingWish,
     _poolLizardWarrior,
     _poolLlanowarDruid,
     _poolLlanowarReborn,

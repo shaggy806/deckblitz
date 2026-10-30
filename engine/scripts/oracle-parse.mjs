@@ -1452,19 +1452,37 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
-  // Learn (rule 701.48a): the rummage alone — no deck here has a sideboard,
-  // so there's no Lesson outside the game to fetch (`learn()` in helpers.ts).
+  // Learn (rule 701.48a): the rummage, or else a Lesson from the sideboard
+  // (`learn()` in helpers.ts).
   if (re("learn").test(s)) {
     return {
-      kind: "may",
-      prompt: "Learn: discard a card to draw a card?",
-      effect: {
-        kind: "sequence",
-        effects: [
-          { kind: "discard", target: "you", amount: 1 },
-          { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
-        ],
-      },
+      kind: "sequence",
+      effects: [
+        {
+          kind: "may",
+          prompt: "Learn: discard a card to draw a card?",
+          effect: {
+            kind: "sequence",
+            effects: [
+              { kind: "discard", target: "you", amount: 1 },
+              { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
+            ],
+          },
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "not", of: { kind: "this-way", what: "discarded" } },
+          then: {
+            kind: "search-library",
+            filter: { subtype: "Lesson" },
+            destination: "hand",
+            min: 0,
+            max: 1,
+            reveal: true,
+            outside: "only",
+          },
+        },
+      ],
     };
   }
   // Amass [type] N (rule 701.47): "Amass Orcs 2." — the type singular.
@@ -1690,6 +1708,20 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^search your library for a card, put (?:it|that card) into your hand, then shuffle\.$/i.exec(s))) {
     // "A card", no quality: one must be found while there is one (701.23d).
     return { kind: "search-library", filter: {}, destination: "hand", min: 1, max: 1 };
+  }
+  // A wish (rule 701.23j): from the sideboard, which is hidden, so it may
+  // find nothing — Burning Wish. (Its "or choose a face-up … card you own in
+  // exile" form is two sentences: `parseEffect`.)
+  if ((m = /^you may reveal an? (.+?) card you own from outside the game and put it into your hand\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return { kind: "search-library", filter, destination: "hand", min: 0, max: 1, reveal: true, outside: "only" };
+  }
+  // Unrevealed: Mastermind's Acquisition, North Wind Avatar, The Raven's
+  // Warning's "on top of your library".
+  if ((m = /^(?:you may )?put a card you own from outside the game (into your hand|on top of your library)\.$/i.exec(s))) {
+    const destination = /hand/i.test(m[1]) ? "hand" : "library-top";
+    return { kind: "search-library", filter: {}, destination, min: 0, max: 1, outside: "only" };
   }
 
   // "For as long as ~ remains tapped" (rule 611.2b — Ashnod's Battle Gear).
@@ -2264,6 +2296,32 @@ export function parseEffect(text, outer) {
         parsed.push(reveal);
         hints.push({ sentence, effect: reveal });
         skip = 2;
+        continue;
+      }
+    }
+    // A wish that may take a face-up exiled card instead (rule 701.23j):
+    // "You may reveal an artifact card you own from outside the game or
+    // choose a face-up artifact card you own in exile. Put that card into
+    // your hand." (Karn, the Great Creator) — two sentences, one search.
+    const faceUp = /^you may reveal an? (.+?) card you own from outside the game or choose a face-up (.+?) card you own in exile\.$/i.exec(
+      sentence,
+    );
+    if (faceUp !== null && faceUp[1] === faceUp[2] && /^put that card into your hand\.$/i.test(sentences[i + 1] ?? "")) {
+      const filter = parseTypePhrase(faceUp[1], { cards: true });
+      if (filter !== null) {
+        const wish = {
+          kind: "search-library",
+          filter,
+          destination: "hand",
+          min: 0,
+          max: 1,
+          reveal: true,
+          outside: "only",
+          faceUpExile: true,
+        };
+        parsed.push(wish);
+        hints.push({ sentence, effect: wish });
+        skip = 1;
         continue;
       }
     }
@@ -3536,6 +3594,13 @@ export function parseFace(face, ctx = {}) {
     } else {
       const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true };
       let text = out.spellLines.map((l) => l.line).join(" ");
+      // "…. Exile Burning Wish." closing the spell: it's exiled as it
+      // resolves instead of going to the graveyard (`exileOnResolve`).
+      const exiles = /^(.+\.) Exile ~\.$/.exec(text);
+      if (exiles !== null) {
+        text = exiles[1];
+        out.exileOnResolve = true;
+      }
       // "If a Dragon was beheld, …" / "If this spell's additional cost was
       // paid, …" closing a "you may behold" spell (rules 701.4b, 607.2i):
       // the kicked cast does that too — its effect the spell's and then

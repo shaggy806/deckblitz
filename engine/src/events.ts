@@ -447,7 +447,7 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
       /** Where they were revealed from — the caption reads better for it
        * ("revealed from their library"). */
-      readonly from: "library" | "hand" | "graveyard" | "battlefield";
+      readonly from: "library" | "hand" | "graveyard" | "battlefield" | "sideboard";
     })
   | (Base & {
       readonly type: "cards-chosen-from-zone";

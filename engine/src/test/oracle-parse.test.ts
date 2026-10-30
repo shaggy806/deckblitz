@@ -188,6 +188,44 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads a wish as a search outside the game (rule 701.23j)", () => {
+    const burning = parseFace({
+      name: "Burning Wish",
+      type_line: "Sorcery",
+      oracle_text: "You may reveal a sorcery card you own from outside the game and put it into your hand. Exile Burning Wish.",
+    });
+    expect(burning.complete).toBe(true);
+    expect(burning.exileOnResolve).toBe(true);
+    expect(burning.effect).toEqual({
+      kind: "search-library",
+      filter: { type: "sorcery" },
+      destination: "hand",
+      min: 0,
+      max: 1,
+      reveal: true,
+      outside: "only",
+    });
+    const coax = parseFace({
+      name: "Coax from the Blind Eternities",
+      type_line: "Sorcery",
+      oracle_text:
+        "You may reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card you own in exile. Put that card into your hand.",
+    });
+    expect(coax.complete).toBe(true);
+    expect(coax.effect).toEqual({
+      kind: "search-library",
+      filter: { subtype: "Eldrazi" },
+      destination: "hand",
+      min: 0,
+      max: 1,
+      reveal: true,
+      outside: "only",
+      faceUpExile: true,
+    });
+    const raven = parseSentence("You may put a card you own from outside the game on top of your library.", ctx());
+    expect(raven).toEqual({ kind: "search-library", filter: {}, destination: "library-top", min: 0, max: 1, outside: "only" });
+  });
+
   it("reads a search of another player's zones, with its shuffle, as one search-library", () => {
     const memoricide = parseFace({
       name: "Lost Legacy",
@@ -2240,7 +2278,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(familiar.complete).toBe(true);
   });
 
-  it("learn (rule 701.48a): the rummage alone, as `learn()` writes it — no sideboard, so no Lesson to fetch", () => {
+  it("learn (rule 701.48a): the rummage, or else a Lesson from outside the game, as `learn()` writes it", () => {
     expect(parseSentence("Learn.", ctx())).toEqual(learn());
     const eyetwitch = face(
       "Flying\nWhen this creature dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)",

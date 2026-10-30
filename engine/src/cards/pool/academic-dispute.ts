@@ -2,8 +2,8 @@ import { defineCard } from "../define.js";
 import { learn } from "../helpers.js";
 
 // Strixhaven (STX). EDHREC rank 17952. "You may have it gain reach" is chosen
-// as the spell resolves (the ruling); learn is the rummage alone here
-// (`learn()` — no sideboards).
+// as the spell resolves (the ruling); learn is `learn()`, its Lesson
+// from the sideboard (none in a Commander game).
 
 export default defineCard({
   name: "Academic Dispute",

@@ -1,4 +1,5 @@
 import { defineCard } from "../define.js";
+import { learn } from "../helpers.js";
 
 // EDHREC rank 15806.
 
@@ -16,21 +17,7 @@ export default defineCard({
     {
       trigger: { on: "dies", who: "self" },
       targets: [],
-      effect: {
-        kind: "may",
-        prompt: "Learn: discard a card to draw a card?",
-        effect: {
-          kind: "sequence",
-          effects: [
-            { kind: "discard", target: "you", amount: 1 },
-            {
-              kind: "conditional",
-              condition: { kind: "this-way", what: "discarded" },
-              then: { kind: "draw", amount: 1 },
-            },
-          ],
-        },
-      },
+      effect: learn(),
       resolve: null,
       text: "When this creature dies, learn.",
     },

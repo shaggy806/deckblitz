@@ -3055,6 +3055,7 @@ import _poolBurningTreeEmissary from "./pool/burning-tree-emissary.js";
 import _poolBurningTreeShaman from "./pool/burning-tree-shaman.js";
 import _poolBurningTreeVandal from "./pool/burning-tree-vandal.js";
 import _poolBurningVengeance from "./pool/burning-vengeance.js";
+import _poolBurningWish from "./pool/burning-wish.js";
 import _poolBurningYardTrainer from "./pool/burning-yard-trainer.js";
 import _poolBurnishedDunestomper from "./pool/burnished-dunestomper.js";
 import _poolBurnishedHart from "./pool/burnished-hart.js";
@@ -4100,6 +4101,7 @@ import _poolCoastalWizard from "./pool/coastal-wizard.js";
 import _poolCoastlineChimera from "./pool/coastline-chimera.js";
 import _poolCoatWithVenom from "./pool/coat-with-venom.js";
 import _poolCoatiScavenger from "./pool/coati-scavenger.js";
+import _poolCoaxFromTheBlindEternities from "./pool/coax-from-the-blind-eternities.js";
 import _poolCobaltGolem from "./pool/cobalt-golem.js";
 import _poolCobblebrute from "./pool/cobblebrute.js";
 import _poolCobbledLancer from "./pool/cobbled-lancer.js";
@@ -12880,6 +12882,7 @@ import _poolLeeryFogbeast from "./pool/leery-fogbeast.js";
 import _poolLegacyWeapon from "./pool/legacy-weapon.js";
 import _poolLegacysAllure from "./pool/legacys-allure.js";
 import _poolLegateLaniusCaesarsAce from "./pool/legate-lanius-caesars-ace.js";
+import _poolLegionAngel from "./pool/legion-angel.js";
 import _poolLegionConquistador from "./pool/legion-conquistador.js";
 import _poolLegionExtruder from "./pool/legion-extruder.js";
 import _poolLegionGuildmage from "./pool/legion-guildmage.js";
@@ -13160,6 +13163,7 @@ import _poolLivingTotem from "./pool/living-totem.js";
 import _poolLivingTsunami from "./pool/living-tsunami.js";
 import _poolLivingTwister from "./pool/living-twister.js";
 import _poolLivingWall from "./pool/living-wall.js";
+import _poolLivingWish from "./pool/living-wish.js";
 import _poolLizardBlades from "./pool/lizard-blades.js";
 import _poolLizardConnorssCurse from "./pool/lizard-connorss-curse.js";
 import _poolLizardWarrior from "./pool/lizard-warrior.js";
@@ -13924,6 +13928,7 @@ import _poolMasterTrinketeer from "./pool/master-trinketeer.js";
 import _poolMasterfulFlourish from "./pool/masterful-flourish.js";
 import _poolMasterfulReplication from "./pool/masterful-replication.js";
 import _poolMastermindPlum from "./pool/mastermind-plum.js";
+import _poolMastermindsAcquisition from "./pool/masterminds-acquisition.js";
 import _poolMastersCall from "./pool/masters-call.js";
 import _poolMastersGuideMural from "./pool/masters-guide-mural.js";
 import _poolMastersManufactory from "./pool/masters-manufactory.js";
@@ -30308,6 +30313,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBurningTreeShaman,
   _poolBurningTreeVandal,
   _poolBurningVengeance,
+  _poolBurningWish,
   _poolBurningYardTrainer,
   _poolBurnishedDunestomper,
   _poolBurnishedHart,
@@ -31353,6 +31359,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCoastlineChimera,
   _poolCoatWithVenom,
   _poolCoatiScavenger,
+  _poolCoaxFromTheBlindEternities,
   _poolCobaltGolem,
   _poolCobblebrute,
   _poolCobbledLancer,
@@ -40133,6 +40140,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLegacyWeapon,
   _poolLegacysAllure,
   _poolLegateLaniusCaesarsAce,
+  _poolLegionAngel,
   _poolLegionConquistador,
   _poolLegionExtruder,
   _poolLegionGuildmage,
@@ -40413,6 +40421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLivingTsunami,
   _poolLivingTwister,
   _poolLivingWall,
+  _poolLivingWish,
   _poolLizardBlades,
   _poolLizardConnorssCurse,
   _poolLizardWarrior,
@@ -41177,6 +41186,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMasterfulFlourish,
   _poolMasterfulReplication,
   _poolMastermindPlum,
+  _poolMastermindsAcquisition,
   _poolMastersCall,
   _poolMastersGuideMural,
   _poolMastersManufactory,
@@ -57574,6 +57584,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/burning-tree-shaman": _poolBurningTreeShaman,
   "pool/burning-tree-vandal": _poolBurningTreeVandal,
   "pool/burning-vengeance": _poolBurningVengeance,
+  "pool/burning-wish": _poolBurningWish,
   "pool/burning-yard-trainer": _poolBurningYardTrainer,
   "pool/burnished-dunestomper": _poolBurnishedDunestomper,
   "pool/burnished-hart": _poolBurnishedHart,
@@ -58619,6 +58630,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/coastline-chimera": _poolCoastlineChimera,
   "pool/coat-with-venom": _poolCoatWithVenom,
   "pool/coati-scavenger": _poolCoatiScavenger,
+  "pool/coax-from-the-blind-eternities": _poolCoaxFromTheBlindEternities,
   "pool/cobalt-golem": _poolCobaltGolem,
   "pool/cobblebrute": _poolCobblebrute,
   "pool/cobbled-lancer": _poolCobbledLancer,
@@ -67399,6 +67411,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/legacy-weapon": _poolLegacyWeapon,
   "pool/legacys-allure": _poolLegacysAllure,
   "pool/legate-lanius-caesars-ace": _poolLegateLaniusCaesarsAce,
+  "pool/legion-angel": _poolLegionAngel,
   "pool/legion-conquistador": _poolLegionConquistador,
   "pool/legion-extruder": _poolLegionExtruder,
   "pool/legion-guildmage": _poolLegionGuildmage,
@@ -67679,6 +67692,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/living-tsunami": _poolLivingTsunami,
   "pool/living-twister": _poolLivingTwister,
   "pool/living-wall": _poolLivingWall,
+  "pool/living-wish": _poolLivingWish,
   "pool/lizard-blades": _poolLizardBlades,
   "pool/lizard-connorss-curse": _poolLizardConnorssCurse,
   "pool/lizard-warrior": _poolLizardWarrior,
@@ -68443,6 +68457,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/masterful-flourish": _poolMasterfulFlourish,
   "pool/masterful-replication": _poolMasterfulReplication,
   "pool/mastermind-plum": _poolMastermindPlum,
+  "pool/masterminds-acquisition": _poolMastermindsAcquisition,
   "pool/masters-call": _poolMastersCall,
   "pool/masters-guide-mural": _poolMastersGuideMural,
   "pool/masters-manufactory": _poolMastersManufactory,

@@ -321,6 +321,32 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Cards outside the game: the sideboard — built 2026-10-30
+
+The need-keys Phase 2 family `mechanic:outside-the-game`, features only, and a
+sideboard to make it real (the user's call, over keeping "outside the game is
+empty"). A deck brings a **sideboard** (rule 100.4; at most 15, 100.4a; none in
+a Commander game, 903.5e): `DeckList.sideboard`, kept as objects with
+`zone: "outside"` in `GameState.outside` (rule 400.11 — not a zone), seen by
+their owner alone (`zones.sideboard`, `sideboardSize` in the view).
+`search-library` gained **`outside: true | "only"`** (rule 701.23j: "you may
+reveal a sorcery card you own from outside the game") and **`faceUpExile`**
+("or choose a face-up Eldrazi card you own in exile"); the find is revealed
+"from their sideboard". **`learn()`** is now rule 701.48a whole: the rummage,
+or else a Lesson from the sideboard — the eleven learn cards written inline
+moved to it. The scaffolder drafts the wish lines and a spell's closing
+"Exile ~." (`exileOnResolve`). The wire's `WireDeck.sideboard`, the decklist
+import's `Sideboard` section and `SB:` lines, the deck editor's Sideboard
+section, a "sideboard N" link in the player panel, and the scenario builder's
+`"sideboard"` zone carry it. Proving cards: Burning Wish, Living Wish, Coax from
+the Blind Eternities, Mastermind's Acquisition, Legion Angel. Not covered:
+playing or casting from outside the game (Wish, Spawnsire of Ulamog), a draw
+replaced (Ring of Ma'rûf), an opponent choosing among the finds (Turtles
+Forever, Extrapolate the Impossible), a shuffle into the library (Research),
+the library/graveyard/outside choice of which zones to search (Invasion of
+Arcavios), copies of named cards (Garth One-Eye, a misfile) — `author-freed`
+narrows them.
+
 ### Another player's library — built 2026-10-30
 
 The need-keys Phase 2 family `effect:look-and-choose-target-opponent-library`,

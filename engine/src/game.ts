@@ -434,6 +434,14 @@ export interface DeckList {
    * back to the definition's own `art`.
    */
   readonly printings?: Readonly<Record<string, string>>;
+  /**
+   * The player's sideboard (rule 100.4): cards outside the game (400.11a),
+   * which only an effect that searches outside the game brings in — a wish
+   * (701.23j). At most fifteen in constructed play (100.4a) — the server's
+   * check, not the engine's. A Commander deck brings none: "Commander games
+   * do not use sideboards" (903.5e), so a deck with `commanders` drops it.
+   */
+  readonly sideboard?: readonly string[];
 }
 
 export interface GameConfig {
@@ -4802,7 +4810,7 @@ export class Game {
     shuffleLibrary: boolean,
     mulligans: boolean,
   ): void {
-    for (const { player, cards, commanders, printings } of decks) {
+    for (const { player, cards, commanders, printings, sideboard } of decks) {
       const commanderNames = commanders ?? [];
       this.state.players[player] = createPlayerState(player, this.state.rules);
       // Copied, not aliased: `GameState` has to stay a self-contained,
@@ -4835,6 +4843,14 @@ export class Game {
           isCommander: true,
         });
         this.state.zones.shared.command.push(id);
+      }
+
+      // Its sideboard, outside the game (rule 400.11a) — none in a Commander
+      // game (903.5e).
+      if (commanderNames.length === 0 && sideboard !== undefined && sideboard.length > 0) {
+        (this.state.outside ??= {})[player] = sideboard.map((name) =>
+          this.makeCardObject(name, player, { zone: "outside" }),
+        );
       }
     }
     this.state.rngState = this.rng.seed;
@@ -7375,7 +7391,11 @@ export class Game {
     // "…, reveal it, …" — before anything moves, so the event names the cards
     // where every player just saw them.
     if (awaiting.reveal === true && chosen.length > 0) {
-      this.revealCards(player, chosen, "library");
+      // A wish's find is revealed from outside the game (rule 701.23j); a
+      // face-up exiled card it may take instead is already public.
+      const zoneOf = (id: ObjectId): ZoneType | undefined => this.state.objects[id]?.zone;
+      this.revealCards(player, chosen.filter((id) => zoneOf(id) !== "outside" && zoneOf(id) !== "exile"), "library");
+      this.revealCards(player, chosen.filter((id) => zoneOf(id) === "outside"), "sideboard");
     }
     // "Reveal any number of green cards in your hand" (the Scents): revealed
     // where they are (rule 701.20a), and moved nowhere.
@@ -17286,7 +17306,8 @@ export class Game {
     return computedCacheMemo(`deckColors:${player}`, () => {
       const counts: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
       for (const object of Object.values(this.state.objects)) {
-        if (object.owner !== player || object.kind !== "card") continue;
+        // A sideboard isn't the deck (rule 100.4).
+        if (object.owner !== player || object.kind !== "card" || object.zone === "outside") continue;
         for (const c of this.registry.get(object.cardName).colors) counts[c] += 1;
       }
       const identity = this.state.players[player]?.commanderIdentity ?? [];
@@ -26576,15 +26597,40 @@ export class Game {
       this.state.zones.perPlayer[owner][zone].filter((id) =>
         matchesFilter(this.state, this.registry, id, filter, { you: player, x }),
       );
-    const library = zones !== "graveyard";
-    const inGraveyard = zones === "library" ? [] : matching("graveyard");
-    const inHand = zones === "graveyard-hand-library" ? matching("hand") : [];
+    // "You may reveal a sorcery card you own from outside the game" (rule
+    // 701.23j): its owner's sideboard alone, or beside the zones searched.
+    const outsideOnly = more?.outside === "only";
+    const library = zones !== "graveyard" && !outsideOnly;
+    const inGraveyard = zones === "library" || outsideOnly ? [] : matching("graveyard");
+    const inHand = zones === "graveyard-hand-library" && !outsideOnly ? matching("hand") : [];
+    const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
+    const inOutside = more?.outside !== undefined ? (this.state.outside?.[owner] ?? []).filter(fits) : [];
+    // "…or choose a face-up artifact card you own in exile" (Karn, the Great
+    // Creator).
+    const inExile =
+      more?.faceUpExile === true
+        ? this.state.zones.shared.exile.filter((id) => {
+            const object = this.state.objects[id];
+            return (
+              object?.owner === owner && object.exiledFaceDown === undefined && object.foretold !== true && fits(id)
+            );
+          })
+        : [];
+    // A wish with nothing outside the game it could find asks nothing: no
+    // library to shuffle, and nothing to go on with.
+    if (outsideOnly && inOutside.length === 0 && inExile.length === 0 && more?.then === undefined) return;
     // "All cards with that name": the graveyard's must be found (a public
     // zone — rule 701.23b), so they go whatever is picked from the hidden
     // zones, where any may be left (Counterbore's ruling).
     const all = more?.all === true;
     const alsoTaken = all ? inGraveyard : [];
-    const eligible = [...(all ? [] : inGraveyard), ...inHand, ...(library ? matching("library") : [])];
+    const eligible = [
+      ...(all ? [] : inGraveyard),
+      ...inHand,
+      ...inExile,
+      ...inOutside,
+      ...(library ? matching("library") : []),
+    ];
     // Only a hidden zone lets a search fail to find (rule 701.23b): a match
     // in the graveyard, which everyone can see, must be found when the
     // graveyard alone is searched. A search that takes in the library too
@@ -33477,7 +33523,7 @@ export class Game {
   private revealCards(
     player: PlayerId,
     ids: readonly ObjectId[],
-    from: "library" | "hand" | "graveyard",
+    from: "library" | "hand" | "graveyard" | "sideboard",
   ): void {
     const real = ids.filter((id) => this.state.objects[id] !== undefined);
     if (real.length === 0) return;
@@ -40745,6 +40791,7 @@ export class Game {
       return this.state.zones.perPlayer[owner][zone];
     }
     if (zone === "phased-out") return (this.state.phasedOut ??= []);
+    if (zone === "outside") return ((this.state.outside ??= {})[owner] ??= []);
     return this.state.zones.shared[zone];
   }
 

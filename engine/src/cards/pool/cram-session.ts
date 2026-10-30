@@ -1,4 +1,5 @@
 import { defineCard } from "../define.js";
+import { learn } from "../helpers.js";
 
 // EDHREC rank 25421.
 
@@ -12,21 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "gain-life", amount: 4 },
-      {
-        kind: "may",
-        prompt: "Learn: discard a card to draw a card?",
-        effect: {
-          kind: "sequence",
-          effects: [
-            { kind: "discard", target: "you", amount: 1 },
-            {
-              kind: "conditional",
-              condition: { kind: "this-way", what: "discarded" },
-              then: { kind: "draw", amount: 1 },
-            },
-          ],
-        },
-      },
+      learn(),
     ],
   },
 });

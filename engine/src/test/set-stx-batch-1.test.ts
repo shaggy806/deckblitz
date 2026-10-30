@@ -1,8 +1,7 @@
 /**
- * Strixhaven: School of Mages, batch 1 (B111): learn (rule 701.48a) — the
- * optional rummage alone, since no deck here has a sideboard to fetch a
- * Lesson from (`learn()` in cards/helpers.ts) — and the cards the scaffolder
- * finished with it.
+ * Strixhaven: School of Mages, batch 1 (B111): learn's rummage (rule 701.48a;
+ * its Lesson half, from a sideboard, is in outside-the-game.test.ts) — and
+ * the cards the scaffolder finished with it.
  */
 import { describe, expect, it } from "vitest";
 

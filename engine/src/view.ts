@@ -66,6 +66,9 @@ export interface PublicPlayerInfo {
   readonly handSize: number;
   readonly librarySize: number;
   readonly graveyardSize: number;
+  /** How many cards they have outside the game — their sideboard (rule
+   * 400.11a). What those are, only their owner's view says (`zones.sideboard`). */
+  readonly sideboardSize: number;
   readonly landsPlayedThisTurn: number;
   /** How many lands this player may play this turn — the rules' one, plus
    * extra land drops (Oracle of Mul Daya, Explore). */
@@ -387,6 +390,10 @@ export interface PlayerView {
      * was revealed. */
     readonly hands: Readonly<Record<PlayerId, readonly ObjectId[]>>;
     readonly graveyards: Readonly<Record<PlayerId, readonly ObjectId[]>>;
+    /** The viewer's own cards outside the game — their sideboard (rule
+     * 400.11a), which they may look at and nobody else sees. Empty for a
+     * player with none, and always in a Commander game (903.5e). */
+    readonly sideboard: readonly ObjectId[];
   };
   /** Each player's top library card, if some permanent they control makes it
    * public knowledge (e.g. Oracle of Mul Daya) — `null` otherwise. The
@@ -923,6 +930,7 @@ function viewForUncached(
       handSize: zones.hand.length,
       librarySize: zones.library.length,
       graveyardSize: zones.graveyard.length,
+      sideboardSize: state.outside?.[player]?.length ?? 0,
       landsPlayedThisTurn: playerState.landsPlayedThisTurn,
       maxLandsThisTurn:
         options.maxLands?.(player) ??
@@ -987,6 +995,8 @@ function viewForUncached(
     hands[player] = [...zones.hand];
     if (player === viewer) {
       visibleIds.push(...zones.hand);
+      // Their own sideboard, which they may look at (rule 400.11a).
+      visibleIds.push(...(state.outside?.[player] ?? []));
     }
   }
 
@@ -1091,6 +1101,7 @@ function viewForUncached(
       command: [...state.zones.shared.command],
       hands,
       graveyards,
+      sideboard: [...(state.outside?.[viewer] ?? [])],
     },
     revealedLibraryTop,
     dayNight: state.dayNight,

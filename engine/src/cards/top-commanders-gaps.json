@@ -604,7 +604,8 @@
   "decision:choose-permanent",
   "decision:as-enters-choose-permanent",
   "decision:choose-permanents-exclude-trigger-object",
-  "decision:that-player-chooses-permanent"
+  "decision:that-player-chooses-permanent",
+  "mechanic:outside-the-game"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
