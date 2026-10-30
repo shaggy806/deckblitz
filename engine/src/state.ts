@@ -2554,6 +2554,20 @@ export interface EnterAttackingChoice {
   readonly options: readonly (PlayerId | ObjectId)[];
 }
 
+/** A resolving spell or ability paused on a choice made partway through
+ * ("choose a card name / a colour / a number, then …"): what its rest needs
+ * to carry on as the same resolution — its controller, targets, X, trigger
+ * value and object, and the stints and zones its last-known reads use. */
+export interface ResolutionResume {
+  readonly controller: PlayerId;
+  readonly targets: ResolvedTargets;
+  readonly x: number;
+  readonly triggerValue: number;
+  readonly triggerObject?: ObjectId;
+  readonly targetZones: readonly (ZoneType | null)[];
+  readonly refs: LastKnownRefs;
+}
+
 export type AwaitingDecision =
   | { readonly kind: "attackers"; readonly player: PlayerId }
   | { readonly kind: "blockers"; readonly player: PlayerId }
@@ -2966,6 +2980,27 @@ export type AwaitingDecision =
       readonly then?: EffectSpec;
       readonly targets?: ResolvedTargets;
       readonly x?: number;
+      /** A `choose-value` effect's colour, card type or counter kind: the
+       * placeholder the answer replaces in `then` (`CHOSEN_COLOR`,
+       * `CHOSEN_CARD_TYPE`, `CHOSEN_COUNTER`), and the whole resolution to
+       * resume — `targets` and `x` above are left unset. */
+      readonly value?: { readonly sentinel: string; readonly resume: ResolutionResume };
+    }
+  | {
+      /**
+       * Choose a number as a spell or ability resolves (a `choose-value`
+       * effect of `value: "number"` — Void's "choose a number", Squee's
+       * Revenge): any whole number from `min`, up to `max` when there is one.
+       * Resolution resumes with `then`, the answer read there as `"x"`.
+       */
+      readonly kind: "choose-number";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly min: number;
+      readonly max?: number;
+      readonly prompt?: string;
+      readonly then: EffectSpec;
+      readonly resume: ResolutionResume;
     }
   | {
       /**
@@ -2999,15 +3034,7 @@ export type AwaitingDecision =
       /** The resolution `then` carries on: its controller (who may not be
        * the chooser — Vexing Arcanix's target player names the card), targets,
        * X and the rest of what it read. */
-      readonly resume?: {
-        readonly controller: PlayerId;
-        readonly targets: ResolvedTargets;
-        readonly x: number;
-        readonly triggerValue: number;
-        readonly triggerObject?: ObjectId;
-        readonly targetZones: readonly (ZoneType | null)[];
-        readonly refs: LastKnownRefs;
-      };
+      readonly resume?: ResolutionResume;
     }
   | {
       /** A scry / surveil (rule 701.18 / 701.43): `player` has looked at the

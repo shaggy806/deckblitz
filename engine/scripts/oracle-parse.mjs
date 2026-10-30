@@ -74,7 +74,18 @@ const NUMBERS = {
 };
 /** `effects.ts`'s `CHOSEN_CARD_NAME`: "a card with the chosen name". */
 export const CHOSEN_CARD_NAME = "$chosenName";
-const N = "(a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\\d+)";
+/** `effects.ts`'s `choose-value` placeholders: the colour, card type and
+ * kind of counter chosen as the effect resolves. */
+export const CHOSEN_COLOR = "$chosenColor";
+export const CHOSEN_CARD_TYPE = "$chosenCardType";
+export const CHOSEN_COUNTER = "$chosenCounter";
+const CHOSEN_CONSTANTS = {
+  [CHOSEN_CARD_NAME]: "CHOSEN_CARD_NAME",
+  [CHOSEN_COLOR]: "CHOSEN_COLOR",
+  [CHOSEN_CARD_TYPE]: "CHOSEN_CARD_TYPE",
+  [CHOSEN_COUNTER]: "CHOSEN_COUNTER",
+};
+const N ="(a|an|one|two|three|four|five|six|seven|eight|nine|ten|x|\\d+)";
 const numberOf = (word) => {
   const w = word.toLowerCase();
   if (w === "x") return "x";
@@ -2358,6 +2369,14 @@ export function parseEffect(text, outer) {
       skip = searched.used - 1;
       continue;
     }
+    // A value chosen as it resolves: "Choose a color. …", one `choose-value`.
+    const chosen = chosenValueAt(sentences, i, ctx);
+    if (chosen !== null) {
+      parsed.push(chosen.effect);
+      hints.push({ sentence, effect: chosen.effect });
+      skip = chosen.used - 1;
+      continue;
+    }
     // Rule 700.3's piles: two or three sentences, one `separate-into-piles`.
     const piles = pilesAt(sentences, i, ctx);
     if (piles !== null) {
@@ -2705,6 +2724,84 @@ function revealedHandChoiceAt(sentences, i, ctx) {
     ...(exile ? { destination: "exile" } : {}),
   };
   return { effect, used };
+}
+
+/**
+ * A value chosen as the effect resolves, then read by the sentences after it
+ * — `choose-value`:
+ *
+ * - "Choose a color. Target player reveals their hand and discards all cards
+ *   of that color." (Persecute)
+ * - "Choose a color. ~ deals X damage to each creature of the chosen color."
+ *   (Sudden Demise)
+ * - "Choose a card type. Target opponent reveals their hand. ~ deals 3 damage
+ *   to that player for each card of the chosen type revealed this way."
+ *   (Blood Oath)
+ * - "Choose a counter on target permanent. Put an additional counter of that
+ *   kind on that permanent." (Ichormoon Gauntlet)
+ */
+function chosenValueAt(sentences, i, ctx) {
+  const s = (k) => sentences[i + k] ?? "";
+  const wrap = (value, then, extra = {}) => ({ kind: "choose-value", value, ...extra, then });
+  const who = (phrase) => ctx.target(phrase.toLowerCase() === "target opponent" ? "opponent" : "player");
+  let m;
+  if (/^choose a color\.$/i.test(s(0))) {
+    m = /^(target player|target opponent) reveals their hand and discards all cards of (?:that|the chosen) color\.$/i.exec(s(1));
+    if (m !== null) {
+      return {
+        effect: wrap("color", { kind: "discard-hand", who: who(m[1]), filter: { colors: [CHOSEN_COLOR] }, reveal: true }),
+        used: 2,
+      };
+    }
+    m = new RegExp(`^~ deals ${N} damage to each creature of (?:that|the chosen) color\\.$`, "i").exec(s(1));
+    if (m !== null && numberOf(m[1]) !== undefined) {
+      return {
+        effect: wrap("color", {
+          kind: "damage-all",
+          filter: { type: "creature", colors: [CHOSEN_COLOR] },
+          amount: numberOf(m[1]),
+        }),
+        used: 2,
+      };
+    }
+    return null;
+  }
+  if (/^choose a card type\.$/i.test(s(0))) {
+    const reveal = /^(target player|target opponent) reveals their hand\.$/i.exec(s(1));
+    m = new RegExp(
+      `^~ deals ${N} damage to that player for each card of the chosen type revealed this way\\.$`,
+      "i",
+    ).exec(s(2));
+    const n = m === null ? undefined : numberOf(m[1]);
+    if (reveal === null || typeof n !== "number") return null;
+    const slot = who(reveal[1]);
+    const count = { thisWay: "revealed", filter: { type: CHOSEN_CARD_TYPE } };
+    return {
+      effect: wrap("card-type", {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who: slot },
+          { kind: "damage", target: slot, amount: n === 1 ? count : { product: [n, count] } },
+        ],
+      }),
+      used: 3,
+    };
+  }
+  if (
+    /^choose a counter on target permanent\.$/i.test(s(0)) &&
+    /^put an additional counter of that kind on that permanent\.$/i.test(s(1))
+  ) {
+    const slot = ctx.target("permanent");
+    return {
+      effect: wrap(
+        "counter-kind",
+        { kind: "add-counter", target: slot, counter: CHOSEN_COUNTER, amount: 1 },
+        { on: slot },
+      ),
+      used: 2,
+    };
+  }
+  return null;
 }
 
 /**
@@ -4606,9 +4703,9 @@ const IDENT = /^[A-Za-z_$][\w$]*$/;
 export function toSource(value, indent = "") {
   const inner = `${indent}  `;
   if (value === null) return "null";
-  // The chosen name's placeholder, as a hand-authored card writes it (the
-  // scaffold imports it).
-  if (value === CHOSEN_CARD_NAME) return "CHOSEN_CARD_NAME";
+  // A chosen name's, colour's, card type's or counter's placeholder, as a
+  // hand-authored card writes it (the scaffold imports it).
+  if (typeof value === "string" && Object.hasOwn(CHOSEN_CONSTANTS, value)) return CHOSEN_CONSTANTS[value];
   if (typeof value === "string") return JSON.stringify(value);
   if (typeof value !== "object") return String(value);
   if (Array.isArray(value)) {

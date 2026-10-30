@@ -64,6 +64,8 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 export type SeparatePilesOffer = Extract<LegalAction, { kind: "separate-piles" }>;
 /** A `choose-pile` offer — see `PlayerController.choosePile`. */
 export type ChoosePileOffer = Extract<LegalAction, { kind: "choose-pile" }>;
+/** A `choose-number` offer — see `PlayerController.chooseNumber`. */
+export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
@@ -334,6 +336,9 @@ export interface PlayerController {
   separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[];
   /** Choose one of the offered piles: its index. */
   choosePile(view: ControllerView, offer: ChoosePileOffer): number;
+  /** Choose a number as a spell or ability resolves: a whole number from the
+   * offer's `min`, up to its `max` when it has one. */
+  chooseNumber(view: ControllerView, offer: ChooseNumberOffer): number;
   /**
    * A modal spell/ability is resolving (rule 700.2), or a "you may" clause
    * (rule 601.3e). Return the indices of the modes to apply — distinct, and
@@ -741,6 +746,13 @@ export class AutomaticController implements PlayerController {
     return bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   }
 
+  chooseNumber(_view: ControllerView, offer: ChooseNumberOffer): number {
+    // The least allowed: nothing tells this controller what a number does
+    // (Void's mana value, Squee's Revenge's flips). v2 searches the numbers
+    // (the decision's `candidates`), and a tie keeps this answer.
+    return offer.min;
+  }
+
   chooseModes(
     _view: ControllerView,
     minModes: number,
@@ -826,6 +838,31 @@ export class AutomaticController implements PlayerController {
   ): readonly AttackTargetChoice[] {
     return attackLowestLife(view, creatures);
   }
+}
+
+/**
+ * The colour, of `options`, that most opponents' permanents have net of our
+ * own (a token stack counting as each token) — a resolving "choose a colour"
+ * aimed at them: Sudden Demise's damage, Persecute's discard, which reads a
+ * hand we can't see through the colours they play. Ties keep `options`'
+ * order.
+ */
+function colorAgainstOpponents(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  options: readonly Color[],
+): Color {
+  const score = new Map<Color, number>();
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined) continue;
+    const sign = object.controller === me ? -1 : 1;
+    for (const c of computeCharacteristics(state, registry, id).colors) {
+      score.set(c, (score.get(c) ?? 0) + sign * (object.stackCount ?? 1));
+    }
+  }
+  return options.reduce((best, c) => ((score.get(c) ?? 0) > (score.get(best) ?? 0) ? c : best));
 }
 
 /**
@@ -1067,6 +1104,7 @@ export class ScriptedController implements PlayerController {
     bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, view.player, offer.chooser);
   choosePileFn: (view: ControllerView, offer: ChoosePileOffer) => number = (view, offer) =>
     bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
+  chooseNumberFn: (view: ControllerView, offer: ChooseNumberOffer) => number = (_view, offer) => offer.min;
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
   chooseSacrificesFn: SacrificeChooser = (view, eligible, count) =>
@@ -1273,6 +1311,10 @@ export class ScriptedController implements PlayerController {
 
   choosePile(view: ControllerView, offer: ChoosePileOffer): number {
     return this.choosePileFn(view, offer);
+  }
+
+  chooseNumber(view: ControllerView, offer: ChooseNumberOffer): number {
+    return this.chooseNumberFn(view, offer);
   }
 
   chooseModes(
@@ -2396,7 +2438,16 @@ export class HeuristicBotController extends AutomaticController {
     options: readonly string[],
     suggested: readonly string[],
   ): string {
-    if (allColors(options)) return colorToName(view.state, this.registry, this.playerId, options);
+    if (allColors(options)) {
+      // A resolving "choose a colour" (Sudden Demise, Persecute) is aimed at
+      // the opponents: the colour most of their permanents have and fewest
+      // of ours. As a permanent enters, it's the colour our deck wants.
+      const awaiting = view.state.awaiting;
+      if (awaiting?.kind === "choose-creature-type" && awaiting.value !== undefined) {
+        return colorAgainstOpponents(view.state, this.registry, this.playerId, options);
+      }
+      return colorToName(view.state, this.registry, this.playerId, options);
+    }
     const players = view.state.players;
     if (options.length > 0 && options.every((o) => players[o as PlayerId] !== undefined)) {
       const opponents = options.filter((o) => o !== this.playerId);

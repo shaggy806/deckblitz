@@ -8625,4 +8625,40 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     // A card in hand, so there's something to discard and the question is asked.
     board({ you: { bf: ['Plains*2'], hand: ['Study Break', 'Wastes'], side: ['Academic Probation', 'Grizzly Bears'] } }),
   ),
+  // --- A value chosen as it resolves (2026-10-30, build-family) ---
+  preset(
+    'Void: choose a number as it resolves',
+    // A four-player table: the target is any opponent, chosen as it's cast.
+    board({
+      you: { bf: ['Swamp*4', 'Mountain'], hand: ['Void'] },
+      opp: [{ bf: ['Grizzly Bears', 'Mind Stone', 'Llanowar Elves'], hand: ['Grizzly Bears', 'Lightning Bolt'] }, {}, {}],
+    }),
+  ),
+  preset(
+    'Persecute: choose a color as it resolves',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Persecute'] },
+      opp: { hand: ['Lightning Bolt', 'Lightning Helix', 'Grizzly Bears', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Blood Oath: choose a card type',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Blood Oath'] },
+      opp: { hand: ['Grizzly Bears', 'Llanowar Elves', 'Lightning Bolt', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Ichormoon Gauntlet: choose a counter on the target',
+    board({
+      you: {
+        bf: [
+          'Ichormoon Gauntlet',
+          'Mountain',
+          { name: 'Grizzly Bears', counters: { '+1/+1': 2, shield: 1 } },
+        ],
+        hand: ['Lightning Bolt'],
+      },
+    }),
+  ),
 ]

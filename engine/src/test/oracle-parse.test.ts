@@ -20,7 +20,7 @@ import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 // @ts-expect-error — a plain .mjs script, typed only at runtime.
-import { parseFace, parseTrigger, parseCost, parseSentence, parseTypePhrase } from "../../scripts/oracle-parse.mjs";
+import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTypePhrase } from "../../scripts/oracle-parse.mjs";
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
@@ -3096,5 +3096,65 @@ describe("damage by this source, switches, defending-player restrictions, a targ
       "Look at the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.",
     );
     expect(look.effect).toBeNull();
+  });
+});
+
+describe("a value chosen as it resolves (choose-value)", () => {
+  const spell = (name: string, oracle_text: string) => parseFace({ name, type_line: "Sorcery", oracle_text });
+
+  it("reads a colour chosen, then a discard or a sweep of that colour", () => {
+    const persecute = spell(
+      "Persecute",
+      "Choose a color. Target player reveals their hand and discards all cards of that color.",
+    );
+    expect(persecute.complete).toBe(true);
+    expect(persecute.targets).toEqual(["player"]);
+    expect(persecute.effect).toEqual({
+      kind: "choose-value",
+      value: "color",
+      then: { kind: "discard-hand", who: 0, filter: { colors: ["$chosenColor"] }, reveal: true },
+    });
+    const demise = spell("Sudden Demise", "Choose a color. Sudden Demise deals X damage to each creature of the chosen color.");
+    expect(demise.effect).toEqual({
+      kind: "choose-value",
+      value: "color",
+      then: { kind: "damage-all", filter: { type: "creature", colors: ["$chosenColor"] }, amount: "x" },
+    });
+  });
+
+  it("reads a card type chosen and counted among a revealed hand", () => {
+    const oath = spell(
+      "Blood Oath",
+      "Choose a card type. Target opponent reveals their hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way. (Artifact, battle, creature, enchantment, instant, kindred, land, planeswalker, and sorcery are card types.)",
+    );
+    expect(oath.complete).toBe(true);
+    expect(oath.targets).toEqual(["opponent"]);
+    expect(oath.effect).toEqual({
+      kind: "choose-value",
+      value: "card-type",
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-hand", who: 0 },
+          { kind: "damage", target: 0, amount: { product: [3, { thisWay: "revealed", filter: { type: "$chosenCardType" } }] } },
+        ],
+      },
+    });
+  });
+
+  it("reads a counter chosen on a target, and leaves an unknown follow-up alone", () => {
+    const targets: unknown[] = [];
+    const counter = parseEffect("Choose a counter on target permanent. Put an additional counter of that kind on that permanent.", {
+      targets,
+    });
+    expect(counter.effect).toEqual({
+      kind: "choose-value",
+      value: "counter-kind",
+      on: 0,
+      then: { kind: "add-counter", target: 0, counter: "$chosenCounter", amount: 1 },
+    });
+    expect(targets).toEqual(["permanent"]);
+    // Not one of the shapes read: no choose-value, the sentence left to do.
+    expect(spell("Mondo", "Choose a color. Target player loses 2 life for each permanent of that color.").effect).toBeNull();
   });
 });

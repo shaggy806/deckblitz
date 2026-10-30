@@ -112,6 +112,7 @@ export const DECISION_ACTIONS = {
   scry: ["scry"],
   "separate-piles": ["separate-piles"],
   "choose-pile": ["choose-pile"],
+  "choose-number": ["choose-number"],
 } as const satisfies Record<DecisionKind, readonly Action["type"][]>;
 
 /**
@@ -155,6 +156,7 @@ export const DECISION_OFFERS = {
   scry: ["scry"],
   "separate-piles": ["separate-piles"],
   "choose-pile": ["choose-pile"],
+  "choose-number": ["choose-number"],
 } as const satisfies Record<DecisionKind, readonly LegalAction["kind"][]>;
 
 /**
@@ -295,6 +297,7 @@ export interface DecisionHost {
   readonly applyScry: (player: PlayerId, away: readonly ObjectId[]) => void;
   readonly applySeparatePiles: (player: PlayerId, piles: readonly (readonly ObjectId[])[]) => void;
   readonly applyChoosePile: (player: PlayerId, pile: number) => void;
+  readonly applyNumberChoice: (player: PlayerId, number: number) => void;
 }
 
 /**

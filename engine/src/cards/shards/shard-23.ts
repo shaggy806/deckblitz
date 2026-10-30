@@ -348,6 +348,7 @@ import _poolHungerOfTheHowlpack from "../pool/hunger-of-the-howlpack.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
 import _poolIcatianCrier from "../pool/icatian-crier.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
+import _poolIchormoonGauntlet from "../pool/ichormoon-gauntlet.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIlluminateHistory from "../pool/illuminate-history.js";
@@ -1213,6 +1214,7 @@ const shard: CardShard = {
     _poolHungrySpriggan,
     _poolIcatianCrier,
     _poolIcatianPriest,
+    _poolIchormoonGauntlet,
     _poolIdyllicTutor,
     _poolIgneousCur,
     _poolIlluminateHistory,

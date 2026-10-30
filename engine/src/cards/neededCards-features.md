@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A value chosen as it resolves — built 2026-10-30
+
+The need-keys Phase 2 family `decision:choose-card-name`'s chosen-value
+group, features only. **`choose-value`** chooses a colour, a card type (rule
+205.2a), a kind of counter on a target or a matching permanent, or a number
+as the effect resolves, and runs `then` with it: the word through the
+`choose-creature-type` decision's short menu, substituted for `CHOSEN_COLOR`
+/ `CHOSEN_CARD_TYPE` / `CHOSEN_COUNTER`; the number through the new
+**`choose-number`** decision (the 31st kind — a stepper in the client), read
+by `then` as `"x"`. The whole resolution is carried across the choice
+(`ResolutionResume`), so a trigger's targets and trigger value survive it.
+**`reveal-hand`** shows a hand, its cards counted as `{ thisWay: "revealed"
+}`. A resolving word menu now offers its options to the v2 search
+(`resolving` on the offer), and v1 aims a resolving colour at the opponents'
+permanents. Keys: choose-color-on-resolution, choose-number-on-resolution,
+choose-card-type, revealed-hand-cards-of-chosen-type, choose-counter-kind,
+remove-counter-chosen-kind (already `remove-counters { counter: "any" }`).
+7 proving cards: Persecute, Sudden Demise, Void, Blood Oath, Fertile
+Imagination, Ichormoon Gauntlet, Medicine Runner. Left open: "the last
+chosen color" kept on a permanent (Chromatic Armor), Liquid Fire's number
+chosen as it's cast, and the freed cards' other needs (Zombie Boa's delayed
+trigger, Skrelv's hexproof from a colour), which `author-freed` narrows.
+
 ### Damage prevented to and by a target — marked built 2026-10-30
 
 The need-keys Phase 2 family `effect:prevent-combat-damage-to-and-by-target`,

@@ -628,7 +628,13 @@
   "condition:that-player-turn-stat",
   "condition:no-monarch",
   "condition:defending-player-controls",
-  "condition:controls-more-creatures-than-defending-player"
+  "condition:controls-more-creatures-than-defending-player",
+  "decision:choose-color-on-resolution",
+  "decision:choose-number-on-resolution",
+  "decision:choose-card-type",
+  "amount:revealed-hand-cards-of-chosen-type",
+  "decision:choose-counter-kind",
+  "effect:remove-counter-chosen-kind"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

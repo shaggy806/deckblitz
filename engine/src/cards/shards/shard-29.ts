@@ -418,6 +418,7 @@ import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMartyrsBond from "../pool/martyrs-bond.js";
 import _poolMatsuTribeBirdstalker from "../pool/matsu-tribe-birdstalker.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
+import _poolMedicineRunner from "../pool/medicine-runner.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
@@ -1271,6 +1272,7 @@ const shard: CardShard = {
     _poolMartyrsBond,
     _poolMatsuTribeBirdstalker,
     _poolMechanAssembler,
+    _poolMedicineRunner,
     _poolMeldwebCurator,
     _poolMemorialToGenius,
     _poolMemorialToUnity,

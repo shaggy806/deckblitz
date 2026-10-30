@@ -164,6 +164,7 @@ import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
 import { separatePiles } from "./decisions/separate-piles.js";
 import { choosePile } from "./decisions/choose-pile.js";
+import { chooseNumber } from "./decisions/choose-number.js";
 import { enterAttacking } from "./decisions/enter-attacking.js";
 import { legendRule } from "./decisions/legend-rule.js";
 import { orderTriggers as orderTriggersDecision } from "./decisions/order-triggers.js";
@@ -193,9 +194,14 @@ import {
   isCountScalableEffect,
   opponentsVoting,
   protectionLabel,
+  substituteChosen,
   substituteChosenCreatureType,
   substituteChosenCardName,
   wardCostText,
+  CARD_TYPE_CHOICES,
+  CHOSEN_CARD_TYPE,
+  CHOSEN_COLOR,
+  CHOSEN_COUNTER,
 } from "./effects.js";
 import type {
   BeholdSpec,
@@ -345,6 +351,7 @@ import type {
   CastSpellRecord,
   LastKnownInfo,
   LastKnownRefs,
+  ResolutionResume,
   LeaveDestination,
   MulliganHandState,
   TurnHistory,
@@ -1523,6 +1530,7 @@ export class Game {
       applyChoosePermanents: (player, chosen) => this.applyChoosePermanents(player, chosen),
       applySeparatePiles: (player, piles) => this.applySeparatePiles(player, piles),
       applyChoosePile: (player, pile) => this.applyChoosePile(player, pile),
+      applyNumberChoice: (player, number) => this.applyNumberChoice(player, number),
       applyEnterAttacking: (player, assignments) => this.applyEnterAttacking(player, assignments),
       applyLegendRuleChoice: (player, keep) => this.applyLegendRuleChoice(player, keep),
       applyTriggerOrder: (player, order) => this.applyTriggerOrder(player, order),
@@ -5433,7 +5441,15 @@ export class Game {
     });
     this.state.awaiting = null;
 
-    if (awaiting.then !== undefined) {
+    if (awaiting.then !== undefined && awaiting.value !== undefined) {
+      // A `choose-value` colour, card type or counter kind: the rest of the
+      // resolution with the answer in its placeholder.
+      this.resumeResolution(
+        substituteChosen(awaiting.then, awaiting.value.sentinel, creatureType),
+        awaiting.source,
+        awaiting.value.resume,
+      );
+    } else if (awaiting.then !== undefined) {
       // A resolving spell or ability ("choose a creature type, then …"):
       // finish its resolution with the answer substituted in — one player's
       // choice of an "each player chooses a creature type", the option it
@@ -5572,6 +5588,41 @@ export class Game {
     this.state.pilesAnswer = { chosen: pile };
     this.emit({ type: "pile-chosen", player, source: awaiting.source, pile, objects: [...(awaiting.piles[pile] ?? [])] });
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** Answers a pending `choose-number` decision: the resolution resumes with
+   * the effect's `then`, the number read there as `"x"`. */
+  private applyNumberChoice(player: PlayerId, number: number): void {
+    const why = chooseNumber.whyCannot(this.decisionCtx, { type: "choose-number", player, number }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "choose-number") {
+      throw new Error("unreachable: whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    this.emit({ type: "number-chosen", player, object: awaiting.source, number });
+    this.resumeResolution(awaiting.then, awaiting.source, { ...awaiting.resume, x: number });
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** Finish a resolution paused on a choice, with `then` (the answer
+   * already substituted in) — see {@link ResolutionResume}. */
+  private resumeResolution(then: EffectSpec, source: ObjectId, resume: ResolutionResume): void {
+    applyEffectSpec(
+      then,
+      this.makeResolutionContext(
+        source,
+        resume.controller,
+        resume.targets,
+        resume.x,
+        resume.triggerValue,
+        resume.triggerObject,
+        1,
+        0,
+        resume.targetZones,
+        resume.refs,
+      ),
+    );
   }
 
   /** Kept because `applyCreatureTypeChoice` validates before applying and
@@ -23515,7 +23566,11 @@ export class Game {
       playersInScope: (who) => scoped(who),
       playersCountedInScope: (who) =>
         this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
-      discardHand: (player, filter, reveal) => this.discardWholeHand(player, filter, reveal),
+      discardHand: (player, filter, reveal) => this.discardWholeHand(player, filter, reveal, x),
+      revealHand: (player) => {
+        if (this.state.players[player]?.hasLost !== false) return;
+        this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
+      },
       // The object whose entering, dying, attacking… fired a trigger is read
       // as it last existed on the battlefield once it has left (rule 608.2h):
       // Clement, the Worrywort's "lesser mana value" after the entering
@@ -24244,6 +24299,75 @@ export class Game {
             refs,
           },
         });
+      },
+      chooseValue: (spec) => {
+        if (this.state.players[controller]?.hasLost !== false) return;
+        const resume: ResolutionResume = {
+          controller,
+          targets,
+          x,
+          triggerValue,
+          ...(triggerObject !== undefined ? { triggerObject } : {}),
+          targetZones,
+          refs,
+        };
+        if (spec.value === "number") {
+          this.state.awaiting = {
+            kind: "choose-number",
+            player: controller,
+            source,
+            min: spec.min ?? 0,
+            ...(spec.max !== undefined ? { max: spec.max } : {}),
+            prompt: "Choose a number",
+            then: spec.then,
+            resume,
+          };
+          return;
+        }
+        let options: readonly string[];
+        let sentinel: string;
+        let prompt: string;
+        if (spec.value === "color") {
+          options = COLORS;
+          sentinel = CHOSEN_COLOR;
+          prompt = "Choose a color";
+        } else if (spec.value === "card-type") {
+          options = CARD_TYPE_CHOICES;
+          sentinel = CHOSEN_CARD_TYPE;
+          prompt = "Choose a card type";
+        } else {
+          // A kind of counter on the target, or on a permanent matching
+          // `among`: only kinds actually there can be chosen, and with none
+          // nothing is chosen and the rest doesn't happen.
+          const holders: ObjectId[] = [];
+          if (spec.on !== undefined) {
+            const ref = targets[spec.on];
+            if (ref?.kind === "object" && this.state.objects[ref.object] !== undefined) holders.push(ref.object);
+          }
+          if (spec.among !== undefined) {
+            for (const id of this.state.zones.shared.battlefield) {
+              if (matchesFilter(this.state, this.registry, id, spec.among, { you: controller, source })) holders.push(id);
+            }
+          }
+          const kinds = new Set<string>();
+          for (const id of holders) {
+            for (const [kind, n] of Object.entries(this.state.objects[id].counters)) if (n > 0) kinds.add(kind);
+          }
+          options = [...kinds].sort();
+          sentinel = CHOSEN_COUNTER;
+          prompt = "Choose a kind of counter";
+        }
+        if (options.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: controller,
+          source,
+          options,
+          catalog: false,
+          prompt,
+          then: spec.then,
+          value: { sentinel, resume },
+        };
       },
       reflexiveTrigger: (specs, effect, text, value) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
@@ -35759,11 +35883,12 @@ export class Game {
   /** The cards in `player`'s hand a discard may take: those matching
    * `filter` (printed characteristics — layer effects don't reach a hand),
    * never `except` (an ability's own source card). */
-  private discardCandidates(player: PlayerId, filter?: CardFilter, except?: ObjectId): ObjectId[] {
+  private discardCandidates(player: PlayerId, filter?: CardFilter, except?: ObjectId, x?: number): ObjectId[] {
     return this.state.zones.perPlayer[player].hand.filter(
       (id) =>
         id !== except &&
-        (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
+        (filter === undefined ||
+          matchesFilter(this.state, this.registry, id, filter, { you: player, ...(x !== undefined ? { x } : {}) })),
     );
   }
 
@@ -35910,11 +36035,12 @@ export class Game {
 
   /** `player` discards their whole hand — or, with `filter`, every card in
    * it matching that ("discards all nonland cards", rule 701.9a), after
-   * revealing the whole hand when `reveal` (rule 701.20a). */
-  private discardWholeHand(player: PlayerId, filter?: CardFilter, reveal = false): void {
+   * revealing the whole hand when `reveal` (rule 701.20a). `x` is what the
+   * filter's `"x"` reads — Void's chosen number. */
+  private discardWholeHand(player: PlayerId, filter?: CardFilter, reveal = false, x?: number): void {
     if (this.state.players[player] === undefined) return;
     if (reveal) this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
-    const all = this.discardCandidates(player, filter);
+    const all = this.discardCandidates(player, filter, undefined, x);
     if (all.length === 0) return;
     this.discardCards(player, all);
   }

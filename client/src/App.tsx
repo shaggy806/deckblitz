@@ -76,6 +76,7 @@ import {
 } from './game/stackMembers.ts'
 import type { Members } from './game/stackMembers.ts'
 import { CountStepper } from './ui/CountStepper.tsx'
+import { NumberChoice } from './ui/NumberChoice.tsx'
 import {
   addToGroup,
   clickMembers,
@@ -377,6 +378,7 @@ type VentureAction = Extract<LegalAction, { kind: 'venture' }>
 type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }>
 type SeparatePilesAction = Extract<LegalAction, { kind: 'separate-piles' }>
 type ChoosePileAction = Extract<LegalAction, { kind: 'choose-pile' }>
+type ChooseNumberAction = Extract<LegalAction, { kind: 'choose-number' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
 type AssignDamageAction = Extract<LegalAction, { kind: 'assign-combat-damage' }>
@@ -689,6 +691,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'choose-card-name': 'choose a card name',
   'separate-piles': 'separate piles',
   'choose-pile': 'choose a pile',
+  'choose-number': 'choose a number',
   'choose-modes': 'choose a mode',
   'choose-targets': 'choose targets',
   'cast-now': 'decide whether to cast a spell',
@@ -2065,6 +2068,7 @@ function Table({
   )
   const separatePilesAction = actions.find((a): a is SeparatePilesAction => a.kind === 'separate-piles')
   const choosePileAction = actions.find((a): a is ChoosePileAction => a.kind === 'choose-pile')
+  const chooseNumberAction = actions.find((a): a is ChooseNumberAction => a.kind === 'choose-number')
   // Piles of permanents (Liliana of the Veil) are made and shown on the
   // board; piles of cards (Fact or Fiction) in a popup.
   const pilesOnBoard = useMemo(() => {
@@ -2179,6 +2183,7 @@ function Table({
     | 'choose-card-name'
     | 'separate-piles'
     | 'choose-pile'
+    | 'choose-number'
     | 'choose-modes'
     | 'sacrifice'
     | 'proliferate'
@@ -2227,6 +2232,8 @@ function Table({
           ? 'separate-piles'
         : choosePileAction
           ? 'choose-pile'
+        : chooseNumberAction
+          ? 'choose-number'
         : modesChoiceAction
           ? 'choose-modes'
         : sacrificeAction
@@ -5061,6 +5068,18 @@ function Table({
         </div>
       )
     }
+  } else if (mode === 'choose-number' && chooseNumberAction) {
+    controls = (
+      <NumberChoice
+        key={chooseNumberAction.source}
+        title={`${game.nameOf(chooseNumberAction.source)} — ${(chooseNumberAction.prompt ?? 'choose a number').toLowerCase()}${
+          chooseNumberAction.max === undefined ? '' : ` (${chooseNumberAction.min}–${chooseNumberAction.max})`
+        }`}
+        min={chooseNumberAction.min}
+        {...(chooseNumberAction.max !== undefined ? { max: chooseNumberAction.max } : {})}
+        onChoose={(number) => game.dispatch({ type: 'choose-number', player: seat, number })}
+      />
+    )
   } else if (mode === 'choose-pile' && choosePileAction) {
     const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''
     if (pilesOnBoard) {

@@ -243,6 +243,7 @@ import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
 import _poolFeralAnimist from "../pool/feral-animist.js";
+import _poolFertileImagination from "../pool/fertile-imagination.js";
 import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
@@ -1118,6 +1119,7 @@ const shard: CardShard = {
     _poolFearOfMissingOut,
     _poolFelidarCub,
     _poolFeralAnimist,
+    _poolFertileImagination,
     _poolFestergloom,
     _poolFestiveFuneral,
     _poolFeySteed,

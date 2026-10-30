@@ -257,6 +257,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-card-name": (n, v) => {
     if (n.then !== undefined) v.child(n.then);
   },
+  // The choice itself touches nothing: what `then` does with it does.
+  "choose-value": (n, v) => v.child(n.then),
   "return-exiled-by-source": none,
   "put-onto-battlefield": (n, v) => {
     if (n.underYourControl === true) v.touch(n.target, "take", MAJOR);
@@ -349,6 +351,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
   // Seeing a hidden hand: point it at an opponent.
   "look-at-hand": (n, v) => v.touch(n.target, "harm", MINOR),
+  // Showing everyone a hidden hand, as `look-at-hand`.
+  "reveal-hand": (n, v) => v.touch(n.who, "harm", MINOR),
   "modify-pt": (n, v) => {
     const power = amountSign(n.power);
     const toughness = amountSign(n.toughness);

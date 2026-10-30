@@ -587,6 +587,7 @@ import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
 import _poolPermafrostTrap from "../pool/permafrost-trap.js";
+import _poolPersecute from "../pool/persecute.js";
 import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
@@ -846,6 +847,7 @@ import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
+import _poolVoid from "../pool/void.js";
 import _poolVolatileRig from "../pool/volatile-rig.js";
 import _poolVolrathsDungeon from "../pool/volraths-dungeon.js";
 import _poolVowOfWildness from "../pool/vow-of-wildness.js";
@@ -1498,6 +1500,7 @@ const shard: CardShard = {
     _poolPeregrineGriffin,
     _poolPerfectedForm,
     _poolPermafrostTrap,
+    _poolPersecute,
     _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
@@ -1757,6 +1760,7 @@ const shard: CardShard = {
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
+    _poolVoid,
     _poolVolatileRig,
     _poolVolrathsDungeon,
     _poolVowOfWildness,

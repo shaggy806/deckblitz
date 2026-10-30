@@ -81,6 +81,7 @@ export const chooseCreatureType = defineDecision({
       options: [...awaiting.options],
       catalog: awaiting.catalog,
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
+      ...(awaiting.then !== undefined && !awaiting.catalog ? { resolving: true as const } : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu. Never one it leaves out ("other than Wall" —
       // Imagecrafter): a bot answers with a suggestion.
@@ -136,9 +137,15 @@ export const chooseCreatureType = defineDecision({
     };
   },
 
-  // candidates: deliberately absent — no rollout sees the difference between
-  // one named creature type and another, so every candidate scores the same
-  // and searching only costs time.
+  // No candidates for a catalog choice or an "as this enters" one — no
+  // rollout sees the difference between one named creature type and
+  // another, so every candidate scores the same and searching only costs
+  // time. A resolving effect's short menu is different: Sudden Demise's
+  // colour is which creatures take the damage.
+  candidates: (legal, player): Action[] => {
+    if (legal.kind !== "choose-creature-type" || legal.resolving !== true) return [];
+    return legal.options.map((creatureType) => ({ type: "choose-creature-type", player, creatureType }));
+  },
 
   randomAnswer: (legal, player, rng): Action => {
     // Mostly a suggested type, so a choice keyed to it (Urza's Incubator's

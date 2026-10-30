@@ -963,8 +963,46 @@ export const CHOSEN_CREATURE_TYPE = "$chosen";
  * effects needing to know a choice is involved.
  */
 export function substituteChosenCreatureType(spec: EffectSpec, creatureType: string): EffectSpec {
+  return substituteChosen(spec, CHOSEN_CREATURE_TYPE, creatureType);
+}
+
+/**
+ * The placeholders a `choose-value` effect's `then` uses for the value that
+ * ends up chosen, substituted by value (`substituteChosen`) before it applies:
+ * Persecute's `{ colors: [CHOSEN_COLOR] }`, Blood Oath's `{ type:
+ * CHOSEN_CARD_TYPE }`, Ichormoon Gauntlet's `add-counter` of `counter:
+ * CHOSEN_COUNTER`. Typed as what they stand in for, so a card can write them
+ * where a colour or card type goes; nothing reads one unsubstituted but a
+ * spec that never resolved (a bot's look at the text), where it matches
+ * nothing. A chosen number needs none: `then` reads it as `"x"`.
+ */
+export const CHOSEN_COLOR = "$chosenColor" as Color;
+export const CHOSEN_CARD_TYPE = "$chosenCardType" as CardType;
+export const CHOSEN_COUNTER = "$chosenCounter";
+
+/** The card types a "choose a card type" offers (rule 205.2a), in the
+ * rule's order. */
+export const CARD_TYPE_CHOICES: readonly CardType[] = [
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "instant",
+  "kindred",
+  "land",
+  "planeswalker",
+  "sorcery",
+];
+
+/**
+ * A copy of `spec` with every string exactly equal to `sentinel` replaced by
+ * `value`. `EffectSpec` is plain data, so a structural walk reaches every
+ * filter, subtype list and nested effect without the individual effects
+ * needing to know a choice is involved.
+ */
+export function substituteChosen(spec: EffectSpec, sentinel: string, chosen: string): EffectSpec {
   const walk = (value: unknown): unknown => {
-    if (value === CHOSEN_CREATURE_TYPE) return creatureType;
+    if (value === sentinel) return chosen;
     if (Array.isArray(value)) return value.map(walk);
     if (value !== null && typeof value === "object") {
       return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, walk(v)]));
@@ -2422,6 +2460,52 @@ export type EffectSpec =
       readonly chooser?: number;
       readonly remember?: true;
       readonly then?: EffectSpec;
+    }
+  | {
+      /**
+       * "Choose a colour / a card type / a number / a counter on …" as a
+       * spell or ability *resolves*, then do `then` with it — the controller
+       * chooses, and nobody can respond knowing the answer (Dromar's ruling:
+       * "you choose the color during resolution"). Unlike a resolution-time
+       * `modal` with one mode per value, the value can be any number, or one
+       * read off the game, and `then` is written once.
+       *
+       * - `"color"`: one of the five (rule 105.1), `CHOSEN_COLOR` in `then` —
+       *   Persecute's `discard-hand` of `{ colors: [CHOSEN_COLOR] }`.
+       * - `"card-type"`: one of rule 205.2a's (`CARD_TYPE_CHOICES`),
+       *   `CHOSEN_CARD_TYPE` in `then` — Blood Oath.
+       * - `"counter-kind"`: a kind of counter on the object in target slot
+       *   `on` ("choose a counter on target permanent" — Ichormoon Gauntlet),
+       *   or on any permanent its controller controls matching `among`;
+       *   `CHOSEN_COUNTER` in `then`. With no counter there, nothing is
+       *   chosen and `then` doesn't happen (Clockspinning's ruling: "nothing
+       *   happens").
+       * - `"number"`: a whole number from `min` (default 0), up to `max` when
+       *   the card bounds it — the `choose-number` decision. `then` reads it
+       *   as `"x"`, so `then` can't also read the spell's own {X}.
+       *
+       * The colour, card type and counter kind are asked as a short menu
+       * (the `choose-creature-type` decision with `options`). The enclosing
+       * ability's targets and X carry across.
+       */
+      readonly kind: "choose-value";
+      readonly value: "color" | "card-type" | "counter-kind" | "number";
+      readonly then: EffectSpec;
+      readonly on?: number;
+      readonly among?: CardFilter;
+      readonly min?: number;
+      readonly max?: number;
+    }
+  | {
+      /**
+       * "Target player reveals their hand" (rule 701.20a): every card in it
+       * is shown to every player and stays there. A later effect of the same
+       * `sequence` counts them as `{ thisWay: "revealed" }` — Blood Oath's
+       * "for each card of the chosen type revealed this way". `who` as
+       * `discard-hand`'s: a target slot, a scope, or one player named.
+       */
+      readonly kind: "reveal-hand";
+      readonly who: PlayerScope | number | ChosenPlayerRef;
     }
   | {
       /** Return everything this effect's source exiled with
@@ -7143,6 +7227,8 @@ export interface EffectApi {
    * `filter`, every card in it matching that; with `reveal`, the whole hand
    * is revealed first (rule 701.20a). */
   discardHand(player: PlayerId, filter?: CardFilter, reveal?: boolean): void;
+  /** `player` reveals their whole hand (rule 701.20a) — `reveal-hand`. */
+  revealHand(player: PlayerId): void;
   gainLife(player: PlayerId, amount: number): void;
   loseLife(player: PlayerId, amount: number): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
@@ -7421,6 +7507,8 @@ export interface EffectApi {
   ): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
+  /** See the `"choose-value"` {@link EffectSpec}. */
+  chooseValue(spec: Extract<EffectSpec, { kind: "choose-value" }>): void;
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
    * {@link EffectSpec}. */
   /** `value`: the reflexive ability's trigger value, when the spec sets one
@@ -10677,6 +10765,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (ref.kind === "player") ctx.discardHand(ref.player, spec.filter, spec.reveal === true);
       }
       return;
+    case "reveal-hand":
+      for (const ref of scopedOrTargetedPlayers(spec.who, ctx)) {
+        if (ref.kind === "player") ctx.revealHand(ref.player);
+      }
+      return;
     case "gain-life": {
       const gained = amountValue(spec.amount, ctx);
       if (spec.toControllerOfTarget !== undefined) {
@@ -11012,6 +11105,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "choose-card-name":
       ctx.chooseCardName(spec);
+      return;
+    case "choose-value":
+      ctx.chooseValue(spec);
       return;
     case "put-onto-battlefield": {
       const target = resolveEffectTarget(spec.target, ctx);

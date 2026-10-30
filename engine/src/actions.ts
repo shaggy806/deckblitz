@@ -644,6 +644,13 @@ export type Action =
       readonly creatureType: string;
     }
   | {
+      /** Answers a pending `choose-number` decision: a whole number from the
+       * offer's `min`, up to its `max` when it has one. */
+      readonly type: "choose-number";
+      readonly player: PlayerId;
+      readonly number: number;
+    }
+  | {
       /** Answers a pending `choose-card-name` decision (rule 201.4): `name`
        * must be one the offer allows. */
       readonly type: "choose-card-name";
@@ -1621,6 +1628,10 @@ export type LegalAction =
       readonly catalog: boolean;
       /** What the choice is, in words (tribute's), when set. */
       readonly prompt?: string;
+      /** A resolving spell's or ability's choice (a `choose-value` colour or
+       * card type, Tideshaper Mystic's land type): what it does next hangs on
+       * the answer, so a bot searches the options. */
+      readonly resolving?: true;
       /**
        * The creature types most represented among the chooser's own cards
        * (hand, library, graveyard, command zone) and everything on the
@@ -1667,6 +1678,16 @@ export type LegalAction =
       readonly worth: Readonly<Record<ObjectId, number>>;
       /** Who controls (a permanent) or owns (a card) each object. */
       readonly whose: Readonly<Record<ObjectId, PlayerId>>;
+    }
+  | {
+      /** Choose a number as a spell or ability resolves — see
+       * `AwaitingDecision`'s `choose-number`. */
+      readonly kind: "choose-number";
+      readonly source: ObjectId;
+      readonly min: number;
+      /** Absent: no upper bound ("choose a number"). */
+      readonly max?: number;
+      readonly prompt?: string;
     }
   | {
       /** Choose one of two piles — see `AwaitingDecision`'s `choose-pile`. */

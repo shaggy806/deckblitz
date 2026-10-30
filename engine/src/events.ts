@@ -1025,6 +1025,14 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** `player` chose `number` as `object` resolved (a `choose-value` of
+       * `value: "number"` — Void's "choose a number"). */
+      readonly type: "number-chosen";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+      readonly number: number;
+    })
+  | (Base & {
       readonly type: "permanent-entered-battlefield";
       readonly object: ObjectId;
       /** How many real permanents this one event stands for — set > 1 only

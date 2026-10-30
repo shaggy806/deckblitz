@@ -2330,6 +2330,7 @@ import _poolBloodLust from "./pool/blood-lust.js";
 import _poolBloodMist from "./pool/blood-mist.js";
 import _poolBloodMoney from "./pool/blood-money.js";
 import _poolBloodMoon from "./pool/blood-moon.js";
+import _poolBloodOath from "./pool/blood-oath.js";
 import _poolBloodOgre from "./pool/blood-ogre.js";
 import _poolBloodOnTheSnow from "./pool/blood-on-the-snow.js";
 import _poolBloodOperative from "./pool/blood-operative.js";
@@ -7743,6 +7744,7 @@ import _poolFerrousLake from "./pool/ferrous-lake.js";
 import _poolFerrovore from "./pool/ferrovore.js";
 import _poolFertileFootsteps from "./pool/fertile-footsteps.js";
 import _poolFertileGround from "./pool/fertile-ground.js";
+import _poolFertileImagination from "./pool/fertile-imagination.js";
 import _poolFertileThicket from "./pool/fertile-thicket.js";
 import _poolFertilid from "./pool/fertilid.js";
 import _poolFertilidsFavor from "./pool/fertilids-favor.js";
@@ -11046,6 +11048,7 @@ import _poolIchorSlick from "./pool/ichor-slick.js";
 import _poolIchorSynthesizer from "./pool/ichor-synthesizer.js";
 import _poolIchorWellspring from "./pool/ichor-wellspring.js";
 import _poolIchorclawMyr from "./pool/ichorclaw-myr.js";
+import _poolIchormoonGauntlet from "./pool/ichormoon-gauntlet.js";
 import _poolIchorplateGolem from "./pool/ichorplate-golem.js";
 import _poolIchorspitBasilisk from "./pool/ichorspit-basilisk.js";
 import _poolIchthyomorphosis from "./pool/ichthyomorphosis.js";
@@ -14013,6 +14016,7 @@ import _poolMechanozoa from "./pool/mechanozoa.js";
 import _poolMeddlingMage from "./pool/meddling-mage.js";
 import _poolMeddlingYouths from "./pool/meddling-youths.js";
 import _poolMedicineBag from "./pool/medicine-bag.js";
+import _poolMedicineRunner from "./pool/medicine-runner.js";
 import _poolMedicsKitesail from "./pool/medics-kitesail.js";
 import _poolMeditationPools from "./pool/meditation-pools.js";
 import _poolMeditationPuzzle from "./pool/meditation-puzzle.js";
@@ -16406,6 +16410,7 @@ import _poolPermafrostTrap from "./pool/permafrost-trap.js";
 import _poolPermissionDenied from "./pool/permission-denied.js";
 import _poolPerniciousDeed from "./pool/pernicious-deed.js";
 import _poolPerplexingTest from "./pool/perplexing-test.js";
+import _poolPersecute from "./pool/persecute.js";
 import _poolPersist from "./pool/persist.js";
 import _poolPersistentConstrictor from "./pool/persistent-constrictor.js";
 import _poolPersistentMarshstalker from "./pool/persistent-marshstalker.js";
@@ -22117,6 +22122,7 @@ import _poolSuccumbToTemptation from "./pool/succumb-to-temptation.js";
 import _poolSuccumbToTheCold from "./pool/succumb-to-the-cold.js";
 import _poolSuddenBreakthrough from "./pool/sudden-breakthrough.js";
 import _poolSuddenDeath from "./pool/sudden-death.js";
+import _poolSuddenDemise from "./pool/sudden-demise.js";
 import _poolSuddenDisappearance from "./pool/sudden-disappearance.js";
 import _poolSuddenEdict from "./pool/sudden-edict.js";
 import _poolSuddenImpact from "./pool/sudden-impact.js";
@@ -25249,6 +25255,7 @@ import _poolVoidShatter from "./pool/void-shatter.js";
 import _poolVoidSnare from "./pool/void-snare.js";
 import _poolVoidSquall from "./pool/void-squall.js";
 import _poolVoidStalker from "./pool/void-stalker.js";
+import _poolVoid from "./pool/void.js";
 import _poolVoidforgedTitan from "./pool/voidforged-titan.js";
 import _poolVoidmageApprentice from "./pool/voidmage-apprentice.js";
 import _poolVoidmageHusher from "./pool/voidmage-husher.js";
@@ -29613,6 +29620,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodMist,
   _poolBloodMoney,
   _poolBloodMoon,
+  _poolBloodOath,
   _poolBloodOgre,
   _poolBloodOnTheSnow,
   _poolBloodOperative,
@@ -35026,6 +35034,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFerrovore,
   _poolFertileFootsteps,
   _poolFertileGround,
+  _poolFertileImagination,
   _poolFertileThicket,
   _poolFertilid,
   _poolFertilidsFavor,
@@ -38329,6 +38338,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIchorSynthesizer,
   _poolIchorWellspring,
   _poolIchorclawMyr,
+  _poolIchormoonGauntlet,
   _poolIchorplateGolem,
   _poolIchorspitBasilisk,
   _poolIchthyomorphosis,
@@ -41296,6 +41306,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeddlingMage,
   _poolMeddlingYouths,
   _poolMedicineBag,
+  _poolMedicineRunner,
   _poolMedicsKitesail,
   _poolMeditationPools,
   _poolMeditationPuzzle,
@@ -43689,6 +43700,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPermissionDenied,
   _poolPerniciousDeed,
   _poolPerplexingTest,
+  _poolPersecute,
   _poolPersist,
   _poolPersistentConstrictor,
   _poolPersistentMarshstalker,
@@ -49400,6 +49412,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSuccumbToTheCold,
   _poolSuddenBreakthrough,
   _poolSuddenDeath,
+  _poolSuddenDemise,
   _poolSuddenDisappearance,
   _poolSuddenEdict,
   _poolSuddenImpact,
@@ -52532,6 +52545,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVoidSnare,
   _poolVoidSquall,
   _poolVoidStalker,
+  _poolVoid,
   _poolVoidforgedTitan,
   _poolVoidmageApprentice,
   _poolVoidmageHusher,
@@ -56909,6 +56923,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blood-mist": _poolBloodMist,
   "pool/blood-money": _poolBloodMoney,
   "pool/blood-moon": _poolBloodMoon,
+  "pool/blood-oath": _poolBloodOath,
   "pool/blood-ogre": _poolBloodOgre,
   "pool/blood-on-the-snow": _poolBloodOnTheSnow,
   "pool/blood-operative": _poolBloodOperative,
@@ -62322,6 +62337,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ferrovore": _poolFerrovore,
   "pool/fertile-footsteps": _poolFertileFootsteps,
   "pool/fertile-ground": _poolFertileGround,
+  "pool/fertile-imagination": _poolFertileImagination,
   "pool/fertile-thicket": _poolFertileThicket,
   "pool/fertilid": _poolFertilid,
   "pool/fertilids-favor": _poolFertilidsFavor,
@@ -65625,6 +65641,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ichor-synthesizer": _poolIchorSynthesizer,
   "pool/ichor-wellspring": _poolIchorWellspring,
   "pool/ichorclaw-myr": _poolIchorclawMyr,
+  "pool/ichormoon-gauntlet": _poolIchormoonGauntlet,
   "pool/ichorplate-golem": _poolIchorplateGolem,
   "pool/ichorspit-basilisk": _poolIchorspitBasilisk,
   "pool/ichthyomorphosis": _poolIchthyomorphosis,
@@ -68592,6 +68609,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meddling-mage": _poolMeddlingMage,
   "pool/meddling-youths": _poolMeddlingYouths,
   "pool/medicine-bag": _poolMedicineBag,
+  "pool/medicine-runner": _poolMedicineRunner,
   "pool/medics-kitesail": _poolMedicsKitesail,
   "pool/meditation-pools": _poolMeditationPools,
   "pool/meditation-puzzle": _poolMeditationPuzzle,
@@ -70985,6 +71003,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/permission-denied": _poolPermissionDenied,
   "pool/pernicious-deed": _poolPerniciousDeed,
   "pool/perplexing-test": _poolPerplexingTest,
+  "pool/persecute": _poolPersecute,
   "pool/persist": _poolPersist,
   "pool/persistent-constrictor": _poolPersistentConstrictor,
   "pool/persistent-marshstalker": _poolPersistentMarshstalker,
@@ -76696,6 +76715,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/succumb-to-the-cold": _poolSuccumbToTheCold,
   "pool/sudden-breakthrough": _poolSuddenBreakthrough,
   "pool/sudden-death": _poolSuddenDeath,
+  "pool/sudden-demise": _poolSuddenDemise,
   "pool/sudden-disappearance": _poolSuddenDisappearance,
   "pool/sudden-edict": _poolSuddenEdict,
   "pool/sudden-impact": _poolSuddenImpact,
@@ -79828,6 +79848,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/void-snare": _poolVoidSnare,
   "pool/void-squall": _poolVoidSquall,
   "pool/void-stalker": _poolVoidStalker,
+  "pool/void": _poolVoid,
   "pool/voidforged-titan": _poolVoidforgedTitan,
   "pool/voidmage-apprentice": _poolVoidmageApprentice,
   "pool/voidmage-husher": _poolVoidmageHusher,

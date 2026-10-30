@@ -5751,3 +5751,22 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Study Break, skipping both targets. Answer No to "Learn: discard a card to draw a card?".
 - **Expect:** A popup offers Academic Probation from your sideboard (not Grizzly Bears); it goes to your hand.
 - **Not a bug:** Saying yes to the discard instead means no Lesson is offered.
+
+## A value chosen as it resolves (2026-10-30, need-keys Phase 2: build-family)
+
+### Void: choose a number as it resolves
+- **Do:** Cast Void targeting Bob. When it resolves, step the number up to 2 and click Choose 2.
+- **Expect:** Nothing is asked until Void resolves. The banner reads "Void — choose a number" with a −/+ stepper starting at 0 and no "of N". Bob's Grizzly Bears and Mind Stone are destroyed and his Llanowar Elves stays; Bob reveals his hand and discards the Grizzly Bears in it, keeping Lightning Bolt. The log reads "You choose 2 for Void" (or your seat's name).
+
+### Persecute: choose a color as it resolves
+- **Do:** Cast Persecute targeting Bob, and choose Red.
+- **Expect:** The banner reads "Persecute — Choose a color" with White, Blue, Black, Red and Green buttons. Bob reveals his hand and discards Lightning Bolt and Lightning Helix (red and white); Grizzly Bears and Forest stay.
+
+### Blood Oath: choose a card type
+- **Do:** Cast Blood Oath targeting Bob, and choose creature.
+- **Expect:** The banner reads "Blood Oath — Choose a card type" with nine buttons, artifact to sorcery, kindred and battle among them. Bob reveals his hand and loses 6 life (two creature cards).
+
+### Ichormoon Gauntlet: choose a counter on the target
+- **Do:** Cast Lightning Bolt at Bob. Target your Grizzly Bears with the Gauntlet's trigger, and choose shield.
+- **Expect:** The banner reads "Ichormoon Gauntlet — Choose a kind of counter" with two buttons, +1/+1 and shield. The Bears end with two +1/+1 counters and two shield counters.
+- **Known bug:** the cast can stall on "Resolving…" before the trigger's target is asked — BACKLOG's "Playback stalls when your cast triggers your own targeted ability", not this feature.

@@ -9,6 +9,16 @@ import type { SeatStatus } from 'protocol'
 
 export type NameOf = (id: ObjectId) => string
 
+/** A colour chosen from a menu ("choose a color" — Persecute, Heraldic
+ * Banner), which the engine records as its letter. */
+const CHOSEN_COLOR_NAMES: Readonly<Record<string, string>> = {
+  W: 'white',
+  U: 'blue',
+  B: 'black',
+  R: 'red',
+  G: 'green',
+}
+
 /**
  * Bookkeeping the engine has to record but nobody reads back: priority going
  * round the table, every step boundary, mana entering and leaving a pool,
@@ -298,8 +308,12 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
     case 'creature-type-chosen':
       // A player chosen (Black Vise's opponent, a battle's protector) goes by name.
       return `${name(event.object)} chooses ${
-        seats.some((s) => s.player === event.creatureType) ? who(event.creatureType as PlayerId) : event.creatureType
+        seats.some((s) => s.player === event.creatureType)
+          ? who(event.creatureType as PlayerId)
+          : (CHOSEN_COLOR_NAMES[event.creatureType] ?? event.creatureType)
       }`
+    case 'number-chosen':
+      return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
     case 'pile-chosen':

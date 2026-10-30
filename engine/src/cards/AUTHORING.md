@@ -2133,6 +2133,32 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   popup with the chooser's most common creature types as suggestions. A
   *permanent* that remembers its type is `chooseCreatureTypeOnEnter` instead
   (Urza's Incubator), not this.
+- **`choose-value { value, then, on?, among?, min?, max? }`** — "Choose a
+  color / a card type / a number / a counter on …" as a spell or ability
+  **resolves**, then do `then` with it (nobody can respond knowing it —
+  Sudden Demise's ruling). Put everything after the choice in `then`:
+  - `value: "color"`: every `CHOSEN_COLOR` (from `effects.ts`) in `then`
+    becomes the colour — Persecute's `discard-hand { who: 0, filter: {
+    colors: [CHOSEN_COLOR] }, reveal: true }`, Sudden Demise's `damage-all`
+    (its own `"x"` still the spell's X).
+  - `value: "card-type"`: rule 205.2a's nine, `CHOSEN_CARD_TYPE` — Blood
+    Oath's `{ thisWay: "revealed", filter: { type: CHOSEN_CARD_TYPE } }`
+    after a **`reveal-hand { who }`** ("target opponent reveals their hand":
+    shown to all, left in the hand, counted as revealed this way).
+  - `value: "counter-kind"`: a kind of counter on the object in target slot
+    `on` ("choose a counter on target permanent" — Ichormoon Gauntlet), or
+    on a permanent matching `among`; `CHOSEN_COUNTER` is the kind (`add-counter
+    { counter: CHOSEN_COUNTER }`). None there: nothing is chosen and `then`
+    doesn't happen. "Remove a counter from …" of the player's choice is
+    `remove-counters { counter: "any" }`, not this (Medicine Runner).
+  - `value: "number"`: any whole number from `min` (0), up to `max` if the
+    card bounds it — the `choose-number` decision. `then` reads it as
+    **`"x"`** (Void's `manaValue: { op: "eq", n: "x" }`), so a card can't
+    also read its own {X} there.
+  A choice "as this enters" is `chooseOnEnter` instead. A colour or number
+  that does the same thing per value with no state is still fine as a
+  resolution-time `modal` (Addle, By Invitation Only). The scaffolder reads
+  Persecute's, Sudden Demise's, Blood Oath's and Ichormoon Gauntlet's lines.
 - **Choosing a card name** (rule 201.4 — `card-names.ts`; the
   `choose-card-name` decision, a search popup over every card name the
   registry holds, tokens and split cards' wholes aside, the suggestions picked

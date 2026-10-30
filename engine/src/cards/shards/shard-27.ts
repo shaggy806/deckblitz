@@ -669,6 +669,7 @@ import _poolStormOfSouls from "../pool/storm-of-souls.js";
 import _poolStormSpirit from "../pool/storm-spirit.js";
 import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
+import _poolSuddenDemise from "../pool/sudden-demise.js";
 import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
 import _poolSummonTheSchool from "../pool/summon-the-school.js";
 import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
@@ -1500,6 +1501,7 @@ const shard: CardShard = {
     _poolStormSpirit,
     _poolStormscapeFamiliar,
     _poolStrengthOfThePack,
+    _poolSuddenDemise,
     _poolSultaiScavenger,
     _poolSummonTheSchool,
     _poolSunCeYoungConquerer,
