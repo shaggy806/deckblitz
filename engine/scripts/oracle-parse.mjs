@@ -1958,6 +1958,20 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
+  // "Prevent all damage that would be dealt to ~ by target creature this
+  // turn" (Stonewise Fortifier).
+  if ((m = re(`prevent all (combat )?damage that would be dealt to ~ by (${TARGET}) this turn`).exec(s))) {
+    const target = slot(m[2]);
+    if (target === undefined) return null;
+    return { kind: "damage-rule", to: { target: "source" }, by: { target }, ...(m[1] ? { combat: true } : {}) };
+  }
+  // "The next time target creature would deal damage this turn, prevent that
+  // damage" (Awe Strike — rule 615.8).
+  if ((m = re(`the next time (${TARGET}) would deal damage this turn, prevent that damage`).exec(s))) {
+    const target = slot(m[1]);
+    if (target === undefined) return null;
+    return { kind: "damage-rule", by: { target }, amount: "next-time" };
+  }
   if ((m = re(`(?:prevent all (combat )?damage that would be dealt (?:this turn )?by (~|${TARGET})(?: this turn)?|prevent all (combat )?damage (~|${TARGET}) would deal this turn)`).exec(s))) {
     const phrase = m[2] ?? m[4];
     const target = phrase === "~" ? "source" : slot(phrase);
@@ -2458,6 +2472,29 @@ export function parseEffect(text, outer) {
       const out = { kind: "phase-out", target: 0 };
       parsed.push(out);
       hints.push({ sentence, effect: out });
+      continue;
+    }
+    // "Prevent all combat damage that would be dealt to and dealt by that
+    // creature this turn." after the one sentence that targeted (Ebony
+    // Horse, Foxfire — rule 615): that target, both ways.
+    const toAndByM = /^prevent all (combat )?damage that would be dealt to and dealt by (?:it|that creature|the creature) this turn\.$/i.exec(sentence);
+    if (toAndByM !== null && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const combat = toAndByM[1] ? { combat: true } : {};
+      const both = {
+        kind: "sequence",
+        effects: [
+          { kind: "damage-rule", to: { target: 0 }, ...combat },
+          { kind: "damage-rule", by: { target: 0 }, ...combat },
+        ],
+      };
+      parsed.push(...both.effects);
+      hints.push({ sentence, effect: both });
+      continue;
+    }
+    // "You gain life equal to the damage prevented this way." after a damage
+    // rule (Awe Strike).
+    if (/^you gain life equal to the damage prevented this way\.$/i.test(sentence) && parsed.at(-1)?.kind === "damage-rule") {
+      parsed[parsed.length - 1] = { ...parsed.at(-1), gainLifePrevented: true };
       continue;
     }
     // "If that creature would die this turn, exile it instead." after the one
@@ -4192,6 +4229,22 @@ function parseStatic(line, text) {
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  // A static prevention (rule 615): "prevent all noncombat damage that would
+  // be dealt to other creatures you control" (Crystal Barricade, Tajic).
+  m = /^Prevent all (combat |noncombat )?damage that would be dealt to (other )?creatures you control\.$/.exec(line);
+  if (m !== null) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        ...(m[1] !== undefined ? { combat: m[1] === "combat " } : {}),
+        prevent: true,
+        toFilter: { type: "creature", controlledBy: "you" },
+        ...(m[2] !== undefined ? { toOther: true } : {}),
+      },
+      text,
+    };
   }
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {

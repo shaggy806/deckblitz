@@ -683,6 +683,7 @@ import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneHavenPilgrim from "../pool/stone-haven-pilgrim.js";
 import _poolStoneforgeAcolyte from "../pool/stoneforge-acolyte.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
+import _poolStonewiseFortifier from "../pool/stonewise-fortifier.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
@@ -1549,6 +1550,7 @@ const shard: CardShard = {
     _poolStoneHavenPilgrim,
     _poolStoneforgeAcolyte,
     _poolStoneriseSpirit,
+    _poolStonewiseFortifier,
     _poolStoneworkPuma,
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,

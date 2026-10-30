@@ -2518,6 +2518,35 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("damage rules over a target, and the static prevention for other creatures (prevent-combat-damage-to-and-by-target)", () => {
+    expect(face("Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.", "Instant").effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "untap", target: 0 },
+        { kind: "damage-rule", to: { target: 0 }, combat: true },
+        { kind: "damage-rule", by: { target: 0 }, combat: true },
+      ],
+    });
+    expect(face("The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.", "Instant").effect).toEqual({
+      kind: "damage-rule",
+      by: { target: 0 },
+      amount: "next-time",
+      gainLifePrevented: true,
+    });
+    expect(face("{4}{W}: Prevent all damage that would be dealt to this creature by target creature this turn.", "Creature — Human Wizard").activated?.[0]?.effect).toEqual({
+      kind: "damage-rule",
+      to: { target: "source" },
+      by: { target: 0 },
+    });
+    expect(face("Prevent all noncombat damage that would be dealt to other creatures you control.", "Creature — Human Soldier").static?.[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      combat: false,
+      prevent: true,
+      toFilter: { type: "creature", controlledBy: "you" },
+      toOther: true,
+    });
+  });
+
   it("a player chosen as it enters, and the lines that read the chosen player (decision:choose-player)", () => {
     const rack = face(
       "As this artifact enters, choose an opponent.\nThe chosen player's maximum hand size is four.",

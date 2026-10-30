@@ -1487,6 +1487,7 @@ import _poolAwakeningZone from "./pool/awakening-zone.js";
 import _poolAwakening from "./pool/awakening.js";
 import _poolAway from "./pool/away.js";
 import _poolAweForTheGuilds from "./pool/awe-for-the-guilds.js";
+import _poolAweStrike from "./pool/awe-strike.js";
 import _poolAwokenDemon from "./pool/awoken-demon.js";
 import _poolAwokenHorror from "./pool/awoken-horror.js";
 import _poolAxebaneBeast from "./pool/axebane-beast.js";
@@ -6539,6 +6540,7 @@ import _poolEbonbladeReaper from "./pool/ebonblade-reaper.js";
 import _poolEbondeathDracolich from "./pool/ebondeath-dracolich.js";
 import _poolEbonyCharm from "./pool/ebony-charm.js";
 import _poolEbonyFly from "./pool/ebony-fly.js";
+import _poolEbonyHorse from "./pool/ebony-horse.js";
 import _poolEbonyRhino from "./pool/ebony-rhino.js";
 import _poolEbonyTreefolk from "./pool/ebony-treefolk.js";
 import _poolEccentricApprentice from "./pool/eccentric-apprentice.js";
@@ -21891,6 +21893,7 @@ import _poolStoneskin from "./pool/stoneskin.js";
 import _poolStonespeakerCrystal from "./pool/stonespeaker-crystal.js";
 import _poolStonesplitterBolt from "./pool/stonesplitter-bolt.js";
 import _poolStonewingAntagonizer from "./pool/stonewing-antagonizer.js";
+import _poolStonewiseFortifier from "./pool/stonewise-fortifier.js";
 import _poolStonewoodInvocation from "./pool/stonewood-invocation.js";
 import _poolStonewoodInvoker from "./pool/stonewood-invoker.js";
 import _poolStoneworkPackbeast from "./pool/stonework-packbeast.js";
@@ -22574,6 +22577,7 @@ import _poolTaintedWell from "./pool/tainted-well.js";
 import _poolTaintedWood from "./pool/tainted-wood.js";
 import _poolTajNarSwordsmith from "./pool/taj-nar-swordsmith.js";
 import _poolTajicBladeOfTheLegion from "./pool/tajic-blade-of-the-legion.js";
+import _poolTajicLegionsEdge from "./pool/tajic-legions-edge.js";
 import _poolTajuruArcher from "./pool/tajuru-archer.js";
 import _poolTajuruBeastmaster from "./pool/tajuru-beastmaster.js";
 import _poolTajuruBlightblade from "./pool/tajuru-blightblade.js";
@@ -28766,6 +28770,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAwakening,
   _poolAway,
   _poolAweForTheGuilds,
+  _poolAweStrike,
   _poolAwokenDemon,
   _poolAwokenHorror,
   _poolAxebaneBeast,
@@ -33818,6 +33823,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEbondeathDracolich,
   _poolEbonyCharm,
   _poolEbonyFly,
+  _poolEbonyHorse,
   _poolEbonyRhino,
   _poolEbonyTreefolk,
   _poolEccentricApprentice,
@@ -49170,6 +49176,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStonespeakerCrystal,
   _poolStonesplitterBolt,
   _poolStonewingAntagonizer,
+  _poolStonewiseFortifier,
   _poolStonewoodInvocation,
   _poolStonewoodInvoker,
   _poolStoneworkPackbeast,
@@ -49853,6 +49860,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTaintedWood,
   _poolTajNarSwordsmith,
   _poolTajicBladeOfTheLegion,
+  _poolTajicLegionsEdge,
   _poolTajuruArcher,
   _poolTajuruBeastmaster,
   _poolTajuruBlightblade,
@@ -56058,6 +56066,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/awakening": _poolAwakening,
   "pool/away": _poolAway,
   "pool/awe-for-the-guilds": _poolAweForTheGuilds,
+  "pool/awe-strike": _poolAweStrike,
   "pool/awoken-demon": _poolAwokenDemon,
   "pool/awoken-horror": _poolAwokenHorror,
   "pool/axebane-beast": _poolAxebaneBeast,
@@ -61110,6 +61119,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ebondeath-dracolich": _poolEbondeathDracolich,
   "pool/ebony-charm": _poolEbonyCharm,
   "pool/ebony-fly": _poolEbonyFly,
+  "pool/ebony-horse": _poolEbonyHorse,
   "pool/ebony-rhino": _poolEbonyRhino,
   "pool/ebony-treefolk": _poolEbonyTreefolk,
   "pool/eccentric-apprentice": _poolEccentricApprentice,
@@ -76462,6 +76472,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stonespeaker-crystal": _poolStonespeakerCrystal,
   "pool/stonesplitter-bolt": _poolStonesplitterBolt,
   "pool/stonewing-antagonizer": _poolStonewingAntagonizer,
+  "pool/stonewise-fortifier": _poolStonewiseFortifier,
   "pool/stonewood-invocation": _poolStonewoodInvocation,
   "pool/stonewood-invoker": _poolStonewoodInvoker,
   "pool/stonework-packbeast": _poolStoneworkPackbeast,
@@ -77145,6 +77156,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tainted-wood": _poolTaintedWood,
   "pool/taj-nar-swordsmith": _poolTajNarSwordsmith,
   "pool/tajic-blade-of-the-legion": _poolTajicBladeOfTheLegion,
+  "pool/tajic-legions-edge": _poolTajicLegionsEdge,
   "pool/tajuru-archer": _poolTajuruArcher,
   "pool/tajuru-beastmaster": _poolTajuruBeastmaster,
   "pool/tajuru-blightblade": _poolTajuruBlightblade,

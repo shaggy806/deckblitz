@@ -43,6 +43,7 @@ import _poolAureliaTheLawAbove from "../pool/aurelia-the-law-above.js";
 import _poolAuriokSalvagers from "../pool/auriok-salvagers.js";
 import _poolAvenMimeomancer from "../pool/aven-mimeomancer.js";
 import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
+import _poolAweStrike from "../pool/awe-strike.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
@@ -896,6 +897,7 @@ const shard: CardShard = {
     _poolAuriokSalvagers,
     _poolAvenMimeomancer,
     _poolAvenOfEnduringHope,
+    _poolAweStrike,
     _poolAxebaneGuardian,
     _poolAzureMage,
     _poolBackupAgent,

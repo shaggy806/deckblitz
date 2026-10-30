@@ -321,6 +321,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage prevented to and by a target — marked built 2026-10-30
+
+The need-keys Phase 2 family `effect:prevent-combat-damage-to-and-by-target`,
+features only: no engine code. Its keys were triaged before B250's
+`damage-rule` and static `would-deal-damage` prevention landed, which already
+run them — "to and dealt by that creature" is two `damage-rule`s (Ith, High
+Arcanist), "the next time target creature would deal damage" is `amount:
+"next-time"` with `gainLifePrevented`, Tajic's line is Crystal Barricade's
+static. The scaffolder learned the lines it missed. Keys:
+prevent-combat-damage-to-and-by-target, prevent-damage-by-target-this-turn,
+prevent-damage-to-other-filter. 4 proving cards: Ebony Horse, Awe Strike,
+Stonewise Fortifier, Tajic, Legion's Edge. Left open: Silhouette's "a spell or
+ability that targets that creature" (`replacement:prevent-damage-from-targeting-sources`);
+Energy Arc's and Soul Parry's several targets go to `author-freed` to narrow.
+
 ### Skipping steps — built 2026-10-30
 
 The need-keys Phase 2 family `static:skip-untap-step`, features only,
