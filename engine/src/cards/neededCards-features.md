@@ -321,6 +321,23 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Filtered discards — built 2026-10-30
+
+The need-keys Phase 2 family `effect:discard-all-matching`, features only.
+`discard` gained a **`filter`** (the engine's discard already took one for
+costs; the effect never passed it): "discard a creature card", and with
+`anyNumber` "discard any number of land cards"; a `may` over it isn't offered
+without enough matching cards (`mayBeDone` reads `handSizeOf(player, filter)`).
+`discard-hand` gained **`filter`** ("discards all [filter] cards", nothing
+chosen), **`reveal`** ("reveals their hand and discards…", rule 701.20a) and a
+`who` that takes a target slot or an `EffectPlayerRef` object. Proving cards:
+Amnesia, Trapfinder's Trick, Shatter Assumptions, Hidden Horror, Pack
+Guardian, Nantuko Cultivator, Mind Maggots. Keys: `effect:discard-all-matching`,
+`effect:discard-any-number-filtered`, `effect:discard-filtered`. Not covered:
+a colour chosen on resolution (Persecute, Crosis — `decision:choose-color-on-resolution`),
+the sacrificed creature's colours (Mind Extraction), the trigger spell's mana
+value (Infernal Kirin) — `author-freed` narrows them.
+
 ### The chosen creature, and choices by another player — built 2026-10-30
 
 The need-keys Phase 2 family `decision:choose-permanent`, its first unit

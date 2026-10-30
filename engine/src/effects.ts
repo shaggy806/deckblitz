@@ -1914,9 +1914,22 @@ export type EffectSpec =
        * "Each player discards their hand" (Dragon Mage, Runehorn Hellkite) —
        * a whole hand at once, with no choice to make, so it's distinct from
        * `discard`'s "choose N cards" and never raises a decision.
+       *
+       * With `filter`, "discards **all** [filter] cards" (rule 701.9a):
+       * every card in that hand matching it, still with nothing to choose —
+       * Amnesia's "all nonland cards", Trapfinder's Trick's "all Trap
+       * cards", Cabal Therapist's `{ hasName: CHOSEN_CARD_NAME }`. The filter
+       * reads printed characteristics with "you" as the discarding player.
        */
       readonly kind: "discard-hand";
-      readonly who: PlayerScope;
+      /** A scope, a player target slot ("**target player** reveals their
+       * hand and discards…"), or one player named through a target or
+       * the event ("**that player**"). */
+      readonly who: PlayerScope | number | ChosenPlayerRef;
+      readonly filter?: CardFilter;
+      /** "Reveals their hand and discards…": the whole hand is revealed to
+       * everyone first (rule 701.20a), matching or not. */
+      readonly reveal?: true;
     }
   | {
       readonly kind: "gain-life";
@@ -3327,6 +3340,13 @@ export type EffectSpec =
        * from none to their whole hand; `amount` is ignored. "That many" after
        * it is `{ thisWay: "discarded" }`. */
       readonly anyNumber?: true;
+      /** Only cards matching this can be discarded — "discard **a creature
+       * card**" (Hidden Horror, Pack Guardian), "discard any number of
+       * **land** cards" (Nantuko Cultivator, with `anyNumber`). With fewer
+       * matching cards than `amount`, all of them; with none, nothing. A
+       * `may` over it can't be chosen without enough matching cards (Pack
+       * Guardian with no land in hand), as `mayBeDone` says. */
+      readonly filter?: CardFilter;
       /** Engine-built, never authored: every player of a scoped discard has
        * chosen, so what they chose is discarded now, at once (rule 101.4). */
       readonly release?: true;
@@ -6877,8 +6897,10 @@ export interface EffectApi {
   countInGraveyard(filter: CardFilter, you?: PlayerId): number;
   /** See the `{ suspendedCardsYouOwn }` {@link EffectAmount}. */
   suspendedCardsYouOwn?(): number;
-  /** How many cards are in `player`'s hand — see `{ cardsInHand }`. */
-  handSizeOf(player: PlayerId): number;
+  /** How many cards are in `player`'s hand — see `{ cardsInHand }`. With
+   * `filter`, only those matching it (printed characteristics, "you" as
+   * that player) — the cards a filtered `discard` could take. */
+  handSizeOf(player: PlayerId, filter?: CardFilter): number;
   /** How many cards are in `player`'s library. */
   librarySizeOf(player: PlayerId): number;
   /** How many cards are in `player`'s graveyard — see `{ graveyardSize }`. */
@@ -7044,9 +7066,11 @@ export interface EffectApi {
    * "each opponent who lost life this turn" still counts one who then lost
    * (Tymna the Weaver's, Teysa, Opulent Oligarch's rulings). */
   playersCountedInScope(who: PlayerScope): readonly PlayerId[];
-  /** Discard a player's whole hand at once (rule 701.8) — no choice, so this
-   * never raises a `discard` decision the way `discardCards` does. */
-  discardHand(player: PlayerId): void;
+  /** Discard a player's whole hand at once (rule 701.9a) — no choice, so this
+   * never raises a `discard` decision the way `discardCards` does. With
+   * `filter`, every card in it matching that; with `reveal`, the whole hand
+   * is revealed first (rule 701.20a). */
+  discardHand(player: PlayerId, filter?: CardFilter, reveal?: boolean): void;
   gainLife(player: PlayerId, amount: number): void;
   loseLife(player: PlayerId, amount: number): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
@@ -7526,8 +7550,16 @@ export interface EffectApi {
       readonly totalManaValueAtMost?: number;
     },
   ): boolean;
-  /** `target` (a player) discards `amount` cards. */
-  discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter, anyNumber?: boolean): void;
+  /** `target` (a player) discards `amount` cards — only cards matching
+   * `filter`, when there is one. */
+  discardCards(
+    target: TargetRef,
+    amount: number,
+    random?: boolean,
+    unlessOne?: CardFilter,
+    anyNumber?: boolean,
+    filter?: CardFilter,
+  ): void;
   /** See the `discard-chosen` {@link EffectSpec}: `target` (a player) reveals
    * their hand (or the controller looks at it), the controller chooses, and
    * that player discards the card chosen. `upTo` is "up to that many" (0:
@@ -10004,7 +10036,7 @@ function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   if (action.kind === "mill" || action.kind === "discard") {
     return scopedOrTargetedPlayers(action.target, ctx).every((ref) => {
       if (ref.kind !== "player") return true;
-      const has = action.kind === "mill" ? ctx.librarySizeOf(ref.player) : ctx.handSizeOf(ref.player);
+      const has = action.kind === "mill" ? ctx.librarySizeOf(ref.player) : ctx.handSizeOf(ref.player, action.filter);
       return has >= amountValue(action.amount, ctx, ref.player);
     });
   }
@@ -10566,7 +10598,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "discard-hand":
-      for (const player of ctx.playersInScope(spec.who)) ctx.discardHand(player);
+      for (const ref of scopedOrTargetedPlayers(spec.who, ctx)) {
+        if (ref.kind === "player") ctx.discardHand(ref.player, spec.filter, spec.reveal === true);
+      }
       return;
     case "gain-life": {
       const gained = amountValue(spec.amount, ctx);
@@ -11350,6 +11384,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             false,
             spec.unlessOne,
             spec.anyNumber === true,
+            spec.filter,
           );
         }
         if (!pendingBefore && ctx.decisionPending()) {
@@ -11366,6 +11401,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.random === true,
           spec.unlessOne,
           spec.anyNumber === true,
+          spec.filter,
         );
       }
       return;

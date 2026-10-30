@@ -473,6 +473,7 @@ import _poolMurmuration from "../pool/murmuration.js";
 import _poolMuseDrake from "../pool/muse-drake.js";
 import _poolMyrScrapling from "../pool/myr-scrapling.js";
 import _poolMysticSanctuary from "../pool/mystic-sanctuary.js";
+import _poolNantukoCultivator from "../pool/nantuko-cultivator.js";
 import _poolNantukoShrine from "../pool/nantuko-shrine.js";
 import _poolNarcomoeba from "../pool/narcomoeba.js";
 import _poolNarsetJeskaiWaymaster from "../pool/narset-jeskai-waymaster.js";
@@ -1333,6 +1334,7 @@ const shard: CardShard = {
     _poolMuseDrake,
     _poolMyrScrapling,
     _poolMysticSanctuary,
+    _poolNantukoCultivator,
     _poolNantukoShrine,
     _poolNarcomoeba,
     _poolNarsetJeskaiWaymaster,

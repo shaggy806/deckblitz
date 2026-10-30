@@ -23425,7 +23425,7 @@ export class Game {
       playersInScope: (who) => scoped(who),
       playersCountedInScope: (who) =>
         this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
-      discardHand: (player) => this.discardWholeHand(player),
+      discardHand: (player, filter, reveal) => this.discardWholeHand(player, filter, reveal),
       // The object whose entering, dying, attacking… fired a trigger is read
       // as it last existed on the battlefield once it has left (rule 608.2h):
       // Clement, the Worrywort's "lesser mana value" after the entering
@@ -23537,7 +23537,12 @@ export class Game {
         }
         return n;
       },
-      handSizeOf: (player) => this.state.zones.perPlayer[player]?.hand.length ?? 0,
+      handSizeOf: (player, filter) =>
+        filter === undefined
+          ? (this.state.zones.perPlayer[player]?.hand.length ?? 0)
+          : this.state.players[player] === undefined
+            ? 0
+            : this.discardCandidates(player, filter).length,
       librarySizeOf: (player) => this.state.zones.perPlayer[player]?.library.length ?? 0,
       graveyardSizeOf: (player) => this.state.zones.perPlayer[player]?.graveyard.length ?? 0,
       doubleCounters: (target, counter) => {
@@ -24526,8 +24531,8 @@ export class Game {
       aggregate: (spec, except) => this.aggregateBattlefield(controller, spec, except),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
-      discardCards: (target, amount, random, unlessOne, anyNumber) =>
-        this.discardByEffect(target, amount, random === true, undefined, unlessOne, anyNumber === true),
+      discardCards: (target, amount, random, unlessOne, anyNumber, filter) =>
+        this.discardByEffect(target, amount, random === true, filter, unlessOne, anyNumber === true),
       discardChosen: (target, filter, lookOnly, optional, upTo, to) => {
         // "Exile that card": linked to the permanent, in the stint this
         // ability refers to (rule 607.2a), as `lookAndChoose`'s exile is.
@@ -35776,9 +35781,13 @@ export class Game {
     });
   }
 
-  private discardWholeHand(player: PlayerId): void {
+  /** `player` discards their whole hand — or, with `filter`, every card in
+   * it matching that ("discards all nonland cards", rule 701.9a), after
+   * revealing the whole hand when `reveal` (rule 701.20a). */
+  private discardWholeHand(player: PlayerId, filter?: CardFilter, reveal = false): void {
     if (this.state.players[player] === undefined) return;
-    const all = [...this.state.zones.perPlayer[player].hand];
+    if (reveal) this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
+    const all = this.discardCandidates(player, filter);
     if (all.length === 0) return;
     this.discardCards(player, all);
   }

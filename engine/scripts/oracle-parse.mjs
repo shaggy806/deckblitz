@@ -596,6 +596,20 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
 }
 
 /**
+ * The cards a filtered discard names — "nonland", "colorless nonland",
+ * "multicolored", "Trap" — as a filter over cards in hand; `null` for a
+ * phrase the type reader doesn't know, or one that names nothing.
+ */
+function discardFilterOf(phrase) {
+  const m = /^(?:(colorless|multicolored)(?: |$))?(.*)$/.exec(phrase);
+  if (m === null) return null;
+  const filter = m[2] === "" ? {} : parseTypePhrase(m[2], { cards: true });
+  if (filter === null) return null;
+  if (m[1] !== undefined) filter[m[1]] = true;
+  return Object.keys(filter).length === 0 ? null : filter;
+}
+
+/**
  * What "behold …" names (rule 701.4a) — "an Elf", "a Gamma creature",
  * "three Elementals" — as a `BeholdSpec`: its quality as a filter over a card
  * in hand or a permanent, and the phrase itself as its `text`. `null` for a
@@ -1281,6 +1295,22 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if ((m = re(`discard ${N} cards?`).exec(s))) return { kind: "discard", target: "you", amount: amount(m[1]) };
+  // "Discard a land card" (Pack Guardian), "discard any number of creature
+  // cards" (Mind Maggots): a discard limited to the cards a filter names.
+  if ((m = re(`discard an? (.+?) card`).exec(s))) {
+    const filter = discardFilterOf(m[1]);
+    if (filter !== null) return { kind: "discard", target: "you", amount: 1, filter };
+  }
+  if ((m = re(`discard any number of (.+?) cards`).exec(s))) {
+    const filter = discardFilterOf(m[1]);
+    if (filter !== null) return { kind: "discard", target: "you", amount: 0, anyNumber: true, filter };
+  }
+  // "Target player reveals their hand and discards all nonland cards"
+  // (Amnesia): every matching card, nothing chosen.
+  if ((m = re(`(target player|target opponent) reveals their hand and discards all (.+?) cards`).exec(s))) {
+    const filter = discardFilterOf(m[2]);
+    if (filter !== null) return { kind: "discard-hand", who: slot(m[1]), filter, reveal: true };
+  }
   if ((m = re(`(target player|target opponent) discards ${N} cards?`).exec(s))) {
     return { kind: "discard", target: slot(m[1]), amount: amount(m[2]) };
   }

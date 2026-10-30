@@ -187,7 +187,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "damage-divided-evenly": (n, v) => v.touch(n.from, "harm", MAJOR),
   "add-mana": none,
   draw: (n, v) => v.touch(n.target, "help", MAJOR),
-  "discard-hand": none,
+  "discard-hand": (n, v) => v.touch(n.who, "harm", MAJOR),
   "gain-life": (n, v) => v.touch(n.toControllerOfTarget, "help", MINOR),
   "lose-life": (n, v) => {
     v.touch(n.target, "harm", MINOR);

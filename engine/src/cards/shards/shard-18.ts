@@ -598,6 +598,7 @@ import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
+import _poolShatterAssumptions from "../pool/shatter-assumptions.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
 import _poolShelter from "../pool/shelter.js";
@@ -1445,6 +1446,7 @@ const shard: CardShard = {
     _poolSentinelSpider,
     _poolSeveredStrands,
     _poolShalaisAcolyte,
+    _poolShatterAssumptions,
     _poolShatteredAngel,
     _poolShellSkulkin,
     _poolShelter,

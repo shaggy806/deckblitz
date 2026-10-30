@@ -709,6 +709,7 @@ import _poolTragicBanshee from "../pool/tragic-banshee.js";
 import _poolTrailtrackerScout from "../pool/trailtracker-scout.js";
 import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTransguildPromenade from "../pool/transguild-promenade.js";
+import _poolTrapfindersTrick from "../pool/trapfinders-trick.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTribalFlames from "../pool/tribal-flames.js";
@@ -1521,6 +1522,7 @@ const shard: CardShard = {
     _poolTrailtrackerScout,
     _poolTranscendentArchaic,
     _poolTransguildPromenade,
+    _poolTrapfindersTrick,
     _poolTreasonousOgre,
     _poolTreasureCruise,
     _poolTribalFlames,

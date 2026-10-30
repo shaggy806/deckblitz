@@ -482,6 +482,7 @@ import _poolMerfolkOfThePearlTrident from "../pool/merfolk-of-the-pearl-trident.
 import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
 import _poolMightOfTheOldWays from "../pool/might-of-the-old-ways.js";
+import _poolMindMaggots from "../pool/mind-maggots.js";
 import _poolMindPeel from "../pool/mind-peel.js";
 import _poolMineCollapse from "../pool/mine-collapse.js";
 import _poolMiresMalice from "../pool/mires-malice.js";
@@ -1320,6 +1321,7 @@ const shard: CardShard = {
     _poolMerryEsquireOfRohan,
     _poolMightOfOaks,
     _poolMightOfTheOldWays,
+    _poolMindMaggots,
     _poolMindPeel,
     _poolMineCollapse,
     _poolMiresMalice,

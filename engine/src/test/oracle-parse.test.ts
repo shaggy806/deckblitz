@@ -80,6 +80,23 @@ describe("effect templates", () => {
     ["Add {R} or {G}.", { kind: "add-mana", mana: { oneOf: ["R", "G"] }, amount: 1 }],
     ["Each opponent skips their next untap step.", { kind: "skip-untap-step", who: "each-opponent" }],
     ["Target player skips their next untap step.", { kind: "skip-untap-step", who: 0 }],
+    ["Discard a land card.", { kind: "discard", target: "you", amount: 1, filter: { type: "land" } }],
+    [
+      "Discard any number of creature cards.",
+      { kind: "discard", target: "you", amount: 0, anyNumber: true, filter: { type: "creature" } },
+    ],
+    [
+      "Target player reveals their hand and discards all nonland cards.",
+      { kind: "discard-hand", who: 0, filter: { notTypes: ["land"] }, reveal: true },
+    ],
+    [
+      "Target opponent reveals their hand and discards all colorless nonland cards.",
+      { kind: "discard-hand", who: 0, filter: { colorless: true, notTypes: ["land"] }, reveal: true },
+    ],
+    [
+      "Target opponent reveals their hand and discards all multicolored cards.",
+      { kind: "discard-hand", who: 0, filter: { multicolored: true }, reveal: true },
+    ],
   ])("%s", (sentence, expected) => {
     expect(parseSentence(sentence, ctx())).toEqual(expected);
   });

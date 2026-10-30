@@ -599,6 +599,7 @@ import _poolAmbush from "./pool/ambush.js";
 import _poolAmethystDragon from "./pool/amethyst-dragon.js";
 import _poolAminatouTheFateshifter from "./pool/aminatou-the-fateshifter.js";
 import _poolAmmitEternal from "./pool/ammit-eternal.js";
+import _poolAmnesia from "./pool/amnesia.js";
 import _poolAmok from "./pool/amok.js";
 import _poolAmonkhetRaceway from "./pool/amonkhet-raceway.js";
 import _poolAmorphousAxe from "./pool/amorphous-axe.js";
@@ -10526,6 +10527,7 @@ import _poolHiddenGuerrillas from "./pool/hidden-guerrillas.js";
 import _poolHiddenHerbalists from "./pool/hidden-herbalists.js";
 import _poolHiddenHerd from "./pool/hidden-herd.js";
 import _poolHiddenHideout from "./pool/hidden-hideout.js";
+import _poolHiddenHorror from "./pool/hidden-horror.js";
 import _poolHiddenLair from "./pool/hidden-lair.js";
 import _poolHiddenNecropolis from "./pool/hidden-necropolis.js";
 import _poolHiddenNursery from "./pool/hidden-nursery.js";
@@ -14259,6 +14261,7 @@ import _poolMindGames from "./pool/mind-games.js";
 import _poolMindHarness from "./pool/mind-harness.js";
 import _poolMindIntoMatter from "./pool/mind-into-matter.js";
 import _poolMindKnives from "./pool/mind-knives.js";
+import _poolMindMaggots from "./pool/mind-maggots.js";
 import _poolMindMeanderer from "./pool/mind-meanderer.js";
 import _poolMindOverMatter from "./pool/mind-over-matter.js";
 import _poolMindPeel from "./pool/mind-peel.js";
@@ -15018,6 +15021,7 @@ import _poolNanoformSentinel from "./pool/nanoform-sentinel.js";
 import _poolNanogeneConversion from "./pool/nanogene-conversion.js";
 import _poolNantukoBlightcutter from "./pool/nantuko-blightcutter.js";
 import _poolNantukoCalmer from "./pool/nantuko-calmer.js";
+import _poolNantukoCultivator from "./pool/nantuko-cultivator.js";
 import _poolNantukoDisciple from "./pool/nantuko-disciple.js";
 import _poolNantukoElder from "./pool/nantuko-elder.js";
 import _poolNantukoHusk from "./pool/nantuko-husk.js";
@@ -16106,6 +16110,7 @@ import _poolPacesetterParagon from "./pool/pacesetter-paragon.js";
 import _poolPacificationArray from "./pool/pacification-array.js";
 import _poolPacifism from "./pool/pacifism.js";
 import _poolPackAPunch from "./pool/pack-a-punch.js";
+import _poolPackGuardian from "./pool/pack-guardian.js";
 import _poolPackHunt from "./pool/pack-hunt.js";
 import _poolPackLeader from "./pool/pack-leader.js";
 import _poolPackMastiff from "./pool/pack-mastiff.js";
@@ -19939,6 +19944,7 @@ import _poolSharpEyedRookie from "./pool/sharp-eyed-rookie.js";
 import _poolSharpenedPitchfork from "./pool/sharpened-pitchfork.js";
 import _poolSharpshooterElf from "./pool/sharpshooter-elf.js";
 import _poolSharuumTheHegemon from "./pool/sharuum-the-hegemon.js";
+import _poolShatterAssumptions from "./pool/shatter-assumptions.js";
 import _poolShatterTheOath from "./pool/shatter-the-oath.js";
 import _poolShatterTheSource from "./pool/shatter-the-source.js";
 import _poolShatter from "./pool/shatter.js";
@@ -23910,6 +23916,7 @@ import _poolTranspose from "./pool/transpose.js";
 import _poolTrapDigger from "./pool/trap-digger.js";
 import _poolTrapEssence from "./pool/trap-essence.js";
 import _poolTrapTheTrespassers from "./pool/trap-the-trespassers.js";
+import _poolTrapfindersTrick from "./pool/trapfinders-trick.js";
 import _poolTrapjawKelpie from "./pool/trapjaw-kelpie.js";
 import _poolTrapjawTyrant from "./pool/trapjaw-tyrant.js";
 import _poolTrapmakersSnare from "./pool/trapmakers-snare.js";
@@ -27840,6 +27847,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmethystDragon,
   _poolAminatouTheFateshifter,
   _poolAmmitEternal,
+  _poolAmnesia,
   _poolAmok,
   _poolAmonkhetRaceway,
   _poolAmorphousAxe,
@@ -37767,6 +37775,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHiddenHerbalists,
   _poolHiddenHerd,
   _poolHiddenHideout,
+  _poolHiddenHorror,
   _poolHiddenLair,
   _poolHiddenNecropolis,
   _poolHiddenNursery,
@@ -41500,6 +41509,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindHarness,
   _poolMindIntoMatter,
   _poolMindKnives,
+  _poolMindMaggots,
   _poolMindMeanderer,
   _poolMindOverMatter,
   _poolMindPeel,
@@ -42259,6 +42269,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNanogeneConversion,
   _poolNantukoBlightcutter,
   _poolNantukoCalmer,
+  _poolNantukoCultivator,
   _poolNantukoDisciple,
   _poolNantukoElder,
   _poolNantukoHusk,
@@ -43347,6 +43358,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPacificationArray,
   _poolPacifism,
   _poolPackAPunch,
+  _poolPackGuardian,
   _poolPackHunt,
   _poolPackLeader,
   _poolPackMastiff,
@@ -47180,6 +47192,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSharpenedPitchfork,
   _poolSharpshooterElf,
   _poolSharuumTheHegemon,
+  _poolShatterAssumptions,
   _poolShatterTheOath,
   _poolShatterTheSource,
   _poolShatter,
@@ -51151,6 +51164,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrapDigger,
   _poolTrapEssence,
   _poolTrapTheTrespassers,
+  _poolTrapfindersTrick,
   _poolTrapjawKelpie,
   _poolTrapjawTyrant,
   _poolTrapmakersSnare,
@@ -55094,6 +55108,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amethyst-dragon": _poolAmethystDragon,
   "pool/aminatou-the-fateshifter": _poolAminatouTheFateshifter,
   "pool/ammit-eternal": _poolAmmitEternal,
+  "pool/amnesia": _poolAmnesia,
   "pool/amok": _poolAmok,
   "pool/amonkhet-raceway": _poolAmonkhetRaceway,
   "pool/amorphous-axe": _poolAmorphousAxe,
@@ -65021,6 +65036,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hidden-herbalists": _poolHiddenHerbalists,
   "pool/hidden-herd": _poolHiddenHerd,
   "pool/hidden-hideout": _poolHiddenHideout,
+  "pool/hidden-horror": _poolHiddenHorror,
   "pool/hidden-lair": _poolHiddenLair,
   "pool/hidden-necropolis": _poolHiddenNecropolis,
   "pool/hidden-nursery": _poolHiddenNursery,
@@ -68754,6 +68770,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mind-harness": _poolMindHarness,
   "pool/mind-into-matter": _poolMindIntoMatter,
   "pool/mind-knives": _poolMindKnives,
+  "pool/mind-maggots": _poolMindMaggots,
   "pool/mind-meanderer": _poolMindMeanderer,
   "pool/mind-over-matter": _poolMindOverMatter,
   "pool/mind-peel": _poolMindPeel,
@@ -69513,6 +69530,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nanogene-conversion": _poolNanogeneConversion,
   "pool/nantuko-blightcutter": _poolNantukoBlightcutter,
   "pool/nantuko-calmer": _poolNantukoCalmer,
+  "pool/nantuko-cultivator": _poolNantukoCultivator,
   "pool/nantuko-disciple": _poolNantukoDisciple,
   "pool/nantuko-elder": _poolNantukoElder,
   "pool/nantuko-husk": _poolNantukoHusk,
@@ -70601,6 +70619,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pacification-array": _poolPacificationArray,
   "pool/pacifism": _poolPacifism,
   "pool/pack-a-punch": _poolPackAPunch,
+  "pool/pack-guardian": _poolPackGuardian,
   "pool/pack-hunt": _poolPackHunt,
   "pool/pack-leader": _poolPackLeader,
   "pool/pack-mastiff": _poolPackMastiff,
@@ -74434,6 +74453,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sharpened-pitchfork": _poolSharpenedPitchfork,
   "pool/sharpshooter-elf": _poolSharpshooterElf,
   "pool/sharuum-the-hegemon": _poolSharuumTheHegemon,
+  "pool/shatter-assumptions": _poolShatterAssumptions,
   "pool/shatter-the-oath": _poolShatterTheOath,
   "pool/shatter-the-source": _poolShatterTheSource,
   "pool/shatter": _poolShatter,
@@ -78405,6 +78425,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trap-digger": _poolTrapDigger,
   "pool/trap-essence": _poolTrapEssence,
   "pool/trap-the-trespassers": _poolTrapTheTrespassers,
+  "pool/trapfinders-trick": _poolTrapfindersTrick,
   "pool/trapjaw-kelpie": _poolTrapjawKelpie,
   "pool/trapjaw-tyrant": _poolTrapjawTyrant,
   "pool/trapmakers-snare": _poolTrapmakersSnare,
