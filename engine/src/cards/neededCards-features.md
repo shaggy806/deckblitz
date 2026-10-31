@@ -344,6 +344,28 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### The aggregate amount over any set — built 2026-10-31
+
+The need-keys Phase 2 family `effect:amount-aggregate`, its top group with
+Tier B, features only. One **`AggregateSpec`** read through
+`aggregateMatches`: `in` the battlefield, `"graveyards"`, `"exile"` or
+`"attackers"` (the ones that counted for the `attacks-batch`/`attack-with`
+trigger that fired — `LastKnownRefs.attackedTogether`, read as it resolves or
+as last on the battlefield, rule 608.2h), a list of zones, `plus` sets with
+filters of their own; `aggregate: "count"`; `of: "counters"`, every counter of
+every kind; an effect amount's `forTarget`. **`grantPtPerCount.aggregate`**
+(Carrion Grub, Emissary Escort); `thisWay`'s **`greatestOf`** (Heretic's
+Punishment). Keys: amount-aggregate, aggregate-over-graveyard,
+aggregate-of-target-players-permanents, amount-graveyard-total-mana-value,
+attack-batch-aggregates, count-in-exile, aggregate-all-counters,
+aggregate-all-counters-for-target, greatest-mana-value-this-way. Proving cards:
+Carrion Grub, Emissary Escort, Ambitious Dragonborn, Crackling Drake, Maester
+Seymour, Ferrafor, Young Yew, Shriekwood Devourer, Vulpine Harvester, Heretic's
+Punishment. Still open: a batch of cards that left a graveyard (Amzu), a static
+condition counting its own permanent (Backstreet Bruiser), the per-player
+greatest discard (Scythe Specter, Cait), the top card of a graveyard, the
+power of creatures that died together or this turn.
+
 ### "Has all activated abilities of …" — built 2026-10-31
 
 The need-keys Phase 2 family `static:gain-abilities-from-graveyard`, its top

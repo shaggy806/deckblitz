@@ -765,7 +765,22 @@ you control", a changeling every creature type; `in: "graveyards"` reads the
 cards in graveyards instead, `ownedBy: "you"` for yours — Aven Heartstabber's
 "five or more mana values among cards in your graveyard" is an `aggregate`
 condition, Sewer Crocodile's the `condition` on an activated ability's
-`costReduction`),
+`costReduction`. **Any set** (2026-10-31): `in` is `"battlefield"` (the
+default), `"graveyards"`, `"exile"` (a card exiled face down matches only an
+owner-only filter, rule 406.3a) or `"attackers"` — the attackers that counted
+for the `attacks-batch`/`attack-with` trigger that fired, read as it resolves
+(as last on the battlefield if gone; filter `{}`, the trigger already
+narrowed them: Shriekwood Devourer's "the greatest power among those
+creatures", Vulpine Harvester's "their total power"); a list is a union, and
+`plus: [{ filter, in? }]` adds a set with a filter of its own (Ambitious
+Dragonborn's "creatures you control and creature cards in your graveyard");
+`aggregate: "count"` counts them (Crackling Drake's "instant and sorcery cards
+you own in exile and in your graveyard" — `in: ["graveyards", "exile"]`);
+`of: "counters"` sums every counter of every kind (Maester Seymour); an
+effect amount's `forTarget: slot` reads it from a target player's side
+(Ferrafor's "creatures target player controls"). A static's
+`grantPtPerCount: { aggregate, pt }` is "+X/+0, where X is …" (Carrion Grub;
+Emissary Escort with the aggregate's `excludeSelf`)),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died
@@ -1025,7 +1040,9 @@ toughness", and Disciple of Bolas's edict ("sacrifice another creature … X
 is that creature's power") is `sumOf: "power"` after a `sacrifice` with
 `exceptSource`. `sumOf: "mana-value"` adds up mana values — Combustible
 Gearhulk's "the total mana value of those cards" (`thisWay: "milled"`), each
-card read where it went if that's a public zone (rule 701.17c), {X} as 0. The `this-way` condition (§10) asks the same
+card read where it went if that's a public zone (rule 701.17c), {X} as 0.
+`greatestOf` (same values) takes the greatest instead — Heretic's
+Punishment's "the greatest mana value among the milled cards". The `this-way` condition (§10) asks the same
 question as an "if" — Hakbal's "you may put a land card from your hand onto
 the battlefield. If you don't, draw a card" is a `look-and-choose` from the
 hand, then a `conditional` on `{ kind: "this-way", what:

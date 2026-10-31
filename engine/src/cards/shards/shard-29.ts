@@ -238,6 +238,7 @@ import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFarsightMask from "../pool/farsight-mask.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
+import _poolFerraforYoungYew from "../pool/ferrafor-young-yew.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendHunter from "../pool/fiend-hunter.js";
 import _poolFiendlash from "../pool/fiendlash.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolFarsightMask,
     _poolFatedReturn,
     _poolFeralLightning,
+    _poolFerraforYoungYew,
     _poolFertileGround,
     _poolFiendHunter,
     _poolFiendlash,

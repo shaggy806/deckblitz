@@ -23,6 +23,7 @@ import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
 import _poolAltarOfBone from "../pool/altar-of-bone.js";
 import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
+import _poolAmbitiousDragonborn from "../pool/ambitious-dragonborn.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
 import _poolAnepVizierOfHazoret from "../pool/anep-vizier-of-hazoret.js";
@@ -880,6 +881,7 @@ const shard: CardShard = {
     _poolAlphinaudLeveilleur,
     _poolAltarOfBone,
     _poolAltarOfThePantheon,
+    _poolAmbitiousDragonborn,
     _poolAmprynTactician,
     _poolAnabaShaman,
     _poolAnepVizierOfHazoret,

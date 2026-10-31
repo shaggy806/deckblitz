@@ -1632,6 +1632,14 @@ export interface StaticAbility {
      * has ("gets +1/+1 for each experience counter you have" — Kalemne,
      * Disciple of Iroas). */
     readonly filter?: CardFilter;
+    /** A sum, greatest value or count over a set of cards or permanents
+     * (see {@link AggregateSpec}), from this permanent's controller's side
+     * — Carrion Grub's "+X/+0, where X is the greatest power among creature
+     * cards in your graveyard" is `{ aggregate: { aggregate: "max", of:
+     * "power", filter: { type: "creature", ownedBy: "you" }, in:
+     * "graveyards" }, pt: [1, 0] }`; the aggregate's own `excludeSelf` is
+     * "other" (Emissary Escort). Clamped at 0. */
+    readonly aggregate?: AggregateSpec;
     readonly commanderCasts?: boolean;
     readonly playerCounters?: PlayerCounterKind;
     /** Counters of a kind on **the affected permanent itself** — Toxrill,

@@ -40,8 +40,8 @@ import type {
 } from "./cards.js";
 import { bestowedDefinition, printedHasAbility } from "./cards/define.js";
 import {
+  aggregateMatches,
   aggregateOver,
-  graveyardMatches,
   aggregateValueOf,
   compareNum,
   matchesFilter,
@@ -49,7 +49,7 @@ import {
   weightedMatches,
 } from "./filter.js";
 import type { EffectAmount } from "./effects.js";
-import type { CardFilter } from "./filter.js";
+import type { AggregateSpec, CardFilter } from "./filter.js";
 import { COLORS, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -885,10 +885,13 @@ function evalStaticCondition(
       const { value } = condition;
       const except =
         value.excludeSelf === true && opts.includeSelf === true ? [source.id] : [];
-      const matches =
-        value.in === "graveyards"
-          ? graveyardMatches(state, registry, value.filter, you)
-          : matchesWhere((id) => matchesFilter(state, registry, id, value.filter, { you }), except);
+      // The battlefield's half skips what isn't here yet and, unless asked
+      // to count it, the source (as every count of a condition does).
+      const matches = aggregateMatches(state, registry, value, you, {
+        except,
+        battlefieldMatch: (id, filter) =>
+          !notYetHere(id) && !skipsSelf(id) && matchesFilter(state, registry, id, filter, { you }),
+      });
       return compareNum(aggregateOver(state, registry, matches, value), condition.compare);
     }
     case "source-greatest": {
@@ -2972,13 +2975,7 @@ export function countValue(
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
     if ("aggregate" in spec) {
-      const matches =
-        spec.in === "graveyards"
-          ? graveyardMatches(state, registry, spec.filter, controller)
-          : weightedMatches(state, state.zones.shared.battlefield, (id) =>
-              matchesFilter(state, registry, id, spec.filter, { you: controller }),
-            );
-      return Math.max(0, aggregateOver(state, registry, matches, spec));
+      return Math.max(0, aggregateOver(state, registry, aggregateMatches(state, registry, spec, controller), spec));
     }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
@@ -3891,9 +3888,33 @@ function collectStaticEffects(
           countInProgress.delete(source.id);
         }
       };
+      // A sum, greatest or count over a set (`AggregateSpec`), behind the
+      // same guard: Carrion Grub's "the greatest power among creature cards
+      // in your graveyard", Emissary Escort's "the greatest mana value among
+      // other artifacts you control".
+      const aggregateMatching = (spec: AggregateSpec): number => {
+        if (countInProgress.has(source.id)) return 0;
+        countInProgress.add(source.id);
+        try {
+          const except = spec.excludeSelf === true ? [source.id] : [];
+          // A lone source left out is skipped before its filter is asked, as
+          // `battlefieldMatching` does; a stack's other tokens still count.
+          const skip = spec.excludeSelf === true && (source.stackCount ?? 1) === 1 ? source.id : undefined;
+          const matches = aggregateMatches(state, registry, spec, side, {
+            except,
+            battlefieldMatch: (id, f) =>
+              id !== skip && matchesFilter(state, registry, id, f, { you: side, source: source.id }),
+          });
+          return Math.max(0, aggregateOver(state, registry, matches, spec));
+        } finally {
+          countInProgress.delete(source.id);
+        }
+      };
       const n = nobody
         ? 0
-        : per.cardsInHand === true
+        : per.aggregate !== undefined
+          ? aggregateMatching(per.aggregate)
+          : per.cardsInHand === true
           ? (state.zones.perPlayer[side]?.hand.length ?? 0)
           : per.commanderCasts === true
           ? Object.values(state.players[side]?.commanderCastCounts ?? {}).reduce(

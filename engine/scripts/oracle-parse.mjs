@@ -615,6 +615,81 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
 }
 
 /**
+ * One set an aggregate reads ("creatures you control", "creature cards in
+ * your graveyard", "Dragon cards in all graveyards", "instant and sorcery
+ * cards you own in exile and in your graveyard") as `{ filter, in?,
+ * excludeSelf? }`, or `null`. "other" leaves the source out (the
+ * battlefield only).
+ */
+function aggregateSetOf(phrase) {
+  let m;
+  const typeOf = (words, cards) => {
+    if (words === "") return {};
+    if (words === "instant and sorcery") return { typesAnyOf: ["instant", "sorcery"] };
+    const f = parseTypePhrase(words, { cards });
+    return f;
+  };
+  if ((m = /^(other )?(.+?) you control$/.exec(phrase))) {
+    const filter = typeOf(m[2], false);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { filter: { ...filter, controlledBy: "you" }, ...(m[1] ? { excludeSelf: true } : {}) };
+  }
+  if ((m = /^(?:(.+?) )?cards? you own in exile and in your graveyard$/.exec(phrase))) {
+    const filter = typeOf(m[1] ?? "", true);
+    if (filter === null) return null;
+    return { filter: { ...filter, ownedBy: "you" }, in: ["graveyards", "exile"] };
+  }
+  if ((m = /^(?:(.+?) )?cards? in (your|all) graveyards?$/.exec(phrase))) {
+    const filter = typeOf(m[1] ?? "", true);
+    if (filter === null) return null;
+    return { filter: m[2] === "your" ? { ...filter, ownedBy: "you" } : filter, in: "graveyards" };
+  }
+  return null;
+}
+
+/**
+ * "the greatest power among creatures you control and creature cards in your
+ * graveyard", "the total mana value of instant and sorcery cards in your
+ * graveyard", "the total number of instant and sorcery cards you own in exile
+ * and in your graveyard", "the number of counters among creatures you
+ * control" — an `AggregateSpec`, or `null`. Two sets joined by "and" after a
+ * whole first set are a `plus`.
+ */
+export function aggregatePhraseOf(phrase) {
+  let m;
+  const STAT = { power: "power", toughness: "toughness", "mana value": "mana-value" };
+  let head;
+  let rest;
+  if ((m = /^the greatest (power|toughness|mana value) among (.+)$/.exec(phrase))) {
+    head = { aggregate: "max", of: STAT[m[1]] };
+    rest = m[2];
+  } else if ((m = /^the total (power|toughness|mana value) of (.+)$/.exec(phrase))) {
+    head = { aggregate: "sum", of: STAT[m[1]] };
+    rest = m[2];
+  } else if ((m = /^the number of counters (?:on|among) (.+)$/.exec(phrase))) {
+    head = { aggregate: "sum", of: "counters" };
+    rest = m[1];
+  } else if ((m = /^the total number of (.+)$/.exec(phrase))) {
+    head = { aggregate: "count" };
+    rest = m[1];
+  } else return null;
+  const whole = aggregateSetOf(rest);
+  const pair = whole === null ? /^(.+? you control) and (.+)$/.exec(rest) : null;
+  const first = whole ?? (pair === null ? null : aggregateSetOf(pair[1]));
+  const second = pair === null ? undefined : aggregateSetOf(pair[2]);
+  if (first === null || second === null || second?.excludeSelf === true) return null;
+  // A count only of what no `countOf` reaches.
+  if (head.aggregate === "count" && first.in === undefined) return null;
+  const { filter, ...where } = first;
+  return {
+    ...head,
+    filter,
+    ...where,
+    ...(second !== undefined ? { plus: [{ filter: second.filter, ...(second.in ? { in: second.in } : {}) }] } : {}),
+  };
+}
+
+/**
  * The cards a filtered discard names — "nonland", "colorless nonland",
  * "multicolored", "Trap" — as a filter over cards in hand; `null` for a
  * phrase the type reader doesn't know, or one that names nothing.
@@ -5100,6 +5175,38 @@ function parseStatic(line, text) {
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
+  }
+  // An aggregate over a set (`AggregateSpec`): Carrion Grub's "~ gets +X/+0,
+  // where X is the greatest power among creature cards in your graveyard",
+  // Ambitious Dragonborn's "~ enters with X +1/+1 counters on it, where X is
+  // the greatest power among creatures you control and creature cards in
+  // your graveyard", Crackling Drake's "~'s power is equal to the total
+  // number of instant and sorcery cards you own in exile and in your
+  // graveyard".
+  {
+    const w = /^~ gets \+X\/\+(0|X), where X is (.+)\.$/.exec(line);
+    const agg = w === null ? null : aggregatePhraseOf(w[2]);
+    if (agg !== null) return { affects: { scope: "self" }, grantPtPerCount: { aggregate: agg, pt: [1, w[1] === "X" ? 1 : 0] }, text };
+  }
+  {
+    const w = /^~ enters with X \+1\/\+1 counters on it, where X is (.+)\.$/.exec(line);
+    const agg = w === null ? null : aggregatePhraseOf(w[1]);
+    if (agg !== null) {
+      // An "other" is kept as printed, though the entering permanent is
+      // never among what's already there (rule 614.12 — Towering Titan).
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: agg } }, text };
+    }
+  }
+  {
+    const w = /^~'s power is equal to (.+)\.$/.exec(line);
+    const agg = w === null ? null : aggregatePhraseOf(w[1]);
+    if (agg !== null && (agg.in !== undefined || agg.plus !== undefined)) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: { countOf: agg, plusPower: 0, plusToughness: 0, only: "power" },
+        text,
+      };
+    }
   }
   // "~ enters with two oil counters on it" (rule 614.1c), any named kind —
   // "on him" / "on her" for a character (Captain America's shield counter).

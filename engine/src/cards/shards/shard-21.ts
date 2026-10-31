@@ -109,6 +109,7 @@ import _poolCaptainOfTheMists from "../pool/captain-of-the-mists.js";
 import _poolCaptainsClaws from "../pool/captains-claws.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
+import _poolCarrionGrub from "../pool/carrion-grub.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolCaptainsClaws,
     _poolCapturedByLagacs,
     _poolCarnivorousPlant,
+    _poolCarrionGrub,
     _poolCementShoes,
     _poolCephalidFacetaker,
     _poolCeremoniousRejection,

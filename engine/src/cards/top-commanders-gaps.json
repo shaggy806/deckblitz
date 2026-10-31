@@ -702,7 +702,16 @@
   "filter:chosen-color",
   "decision:choose-card-type-protection",
   "static:chosen-creature-type-reads",
-  "static:chosen-type-in-addition"
+  "static:chosen-type-in-addition",
+  "effect:amount-aggregate",
+  "effect:aggregate-over-graveyard",
+  "effect:aggregate-of-target-players-permanents",
+  "effect:amount-graveyard-total-mana-value",
+  "effect:attack-batch-aggregates",
+  "amount:count-in-exile",
+  "effect:aggregate-all-counters",
+  "effect:aggregate-all-counters-for-target",
+  "amount:greatest-mana-value-this-way"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

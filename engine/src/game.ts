@@ -242,9 +242,9 @@ import type {
 } from "./effects.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
+  aggregateMatches,
   aggregateOver,
   distinctNameOf,
-  graveyardMatches,
   attachmentsOf,
   compareNum,
   fixChosenColor,
@@ -254,7 +254,7 @@ import {
   supertypesOf,
   weightedMatches,
 } from "./filter.js";
-import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
 import { goadersOf } from "./goad.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
@@ -21619,7 +21619,20 @@ export class Game {
                 : // "Whenever players finish voting": that vote's votes.
                   ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
                   ? { ...(atTrigger ?? {}), votes: event.votes }
-                  : atTrigger;
+                  : // "Among them": the attackers that counted for it.
+                    (ability.trigger.on === "attacks-batch" || ability.trigger.on === "attack-with") &&
+                      event.type === "attackers-declared"
+                    ? {
+                        ...(atTrigger ?? {}),
+                        attackedTogether: (ability.trigger.on === "attacks-batch"
+                          ? this.batchedAttackers(ability.trigger, event.attackers, object)
+                          : this.attackWithCounted(ability.trigger, event.attackers, object)
+                        ).map((attacker) => ({
+                          object: attacker,
+                          zoneChangeCount: this.state.objects[attacker]?.zoneChangeCount ?? 0,
+                        })),
+                      }
+                    : atTrigger;
           // A printed ability its text box came with (rule 612.5) is that
           // card's, which it stays however this permanent changes.
           const textName = lastSeen !== undefined ? lastSeen.textName : textNameOf(object);
@@ -22266,6 +22279,26 @@ export class Game {
     return ids.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
   }
 
+  /** The attackers of a declaration that count for an `attack-with`
+   * trigger: its filter, "this or your commander", "attacking you". */
+  private attackWithCounted(
+    spec: Extract<TriggerSpec, { on: "attack-with" }>,
+    attackers: readonly ObjectId[],
+    self: GameObject,
+  ): readonly ObjectId[] {
+    return attackers.filter((id) => {
+      if (!this.triggerFilterOk(spec.filter, id, self)) return false;
+      if (spec.thisOrYourCommander === true && id !== self.id) {
+        const attacker = this.state.objects[id];
+        if (attacker?.isCommander !== true || attacker.owner !== self.controller) return false;
+      }
+      if (spec.attackingYou !== true) return true;
+      const at = this.state.objects[id]?.attacking;
+      if (at === null || at === undefined) return false;
+      return this.attacksYouOrYourPlaneswalker(at, self.controller);
+    });
+  }
+
   private batchedAttackers(
     spec: Extract<TriggerSpec, { on: "attacks-batch" }>,
     attackers: readonly ObjectId[],
@@ -22764,18 +22797,7 @@ export class Game {
         if (event.type !== "attackers-declared") return false;
         if (spec.who === "you" && event.player !== self.controller) return false;
         if (spec.who === "opponent" && event.player === self.controller) return false;
-        const counted = event.attackers.filter((id) => {
-          if (!this.triggerFilterOk(spec.filter, id, self)) return false;
-          if (spec.thisOrYourCommander === true && id !== self.id) {
-            const attacker = this.state.objects[id];
-            if (attacker?.isCommander !== true || attacker.owner !== self.controller) return false;
-          }
-          if (spec.attackingYou !== true) return true;
-          const at = this.state.objects[id]?.attacking;
-          if (at === null || at === undefined) return false;
-          return this.attacksYouOrYourPlaneswalker(at, self.controller);
-        });
-        return counted.length >= spec.atLeast;
+        return this.attackWithCounted(spec, event.attackers, self).length >= spec.atLeast;
       }
       case "fights":
         return (
@@ -25931,7 +25953,10 @@ export class Game {
       exileFromLibrary: (target, count, withCounters) =>
         this.exileFromLibraryByEffect(target, count, controller, withCounters),
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
-      aggregate: (spec, except) => this.aggregateBattlefield(controller, spec, except),
+      // "Among them": the attackers of the declaration that fired this
+      // trigger, as `AggregateZone` "attackers" reads them.
+      aggregate: (spec, except, you = controller) =>
+        this.aggregateBattlefield(you, spec, except, { attackers: refs.attackedTogether ?? [] }),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber, filter) =>
@@ -31879,16 +31904,9 @@ export class Game {
     you: PlayerId,
     spec: AggregateSpec,
     except: readonly ObjectId[] = [],
+    reads: AggregateReads = {},
   ): number {
-    const matches =
-      spec.in === "graveyards"
-        ? graveyardMatches(this.state, this.registry, spec.filter, you)
-        : weightedMatches(
-            this.state,
-            this.state.zones.shared.battlefield,
-            (id) => matchesFilter(this.state, this.registry, id, spec.filter, { you }),
-            except,
-          );
+    const matches = aggregateMatches(this.state, this.registry, spec, you, { ...reads, except });
     return aggregateOver(this.state, this.registry, matches, spec);
   }
 
@@ -40642,7 +40660,10 @@ export class Game {
         fromGraveyard.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you }))
           .length,
       countMatching: (filter, except = [], you) => ctx.countMatching(filter, [...except, ...notYet], you),
-      aggregate: (spec, except = []) => ctx.aggregate(spec, [...except, ...notYet]),
+      // A graveyard's half still has what is entering from it (rule 614.12,
+      // as `countInGraveyard` above); the battlefield's leaves it out.
+      aggregate: (spec, except = [], you = controller) =>
+        this.aggregateBattlefield(you, spec, [...except, ...notYet], { stillInGraveyard: fromGraveyard }),
       colorsAmong: (filter, except = []) => ctx.colorsAmong(filter, [...except, ...notYet]),
     });
     return Math.max(0, n);

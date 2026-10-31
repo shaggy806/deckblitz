@@ -86,6 +86,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: the aggregate amount over any set** (2026-10-31; `effect:amount-aggregate`,
+  `effect:aggregate-over-graveyard`, `effect:aggregate-of-target-players-permanents`,
+  `effect:amount-graveyard-total-mana-value`, `effect:attack-batch-aggregates`,
+  `amount:count-in-exile`, `effect:aggregate-all-counters`, `effect:aggregate-all-counters-for-target`,
+  `amount:greatest-mana-value-this-way`; rules 608.2h, 614.12, 406.3a, 122.1). `AggregateSpec`
+  reads its set through one `aggregateMatches` (`filter.ts`): `in` the battlefield, graveyards,
+  exile (a face-down card matching only an owner-only filter) or `"attackers"` — the ones that
+  counted for the `attacks-batch`/`attack-with` trigger that fired, kept as
+  `LastKnownRefs.attackedTogether` and read as they are, or as they last were on the battlefield —
+  a list of zones, and `plus` sets with filters of their own, each object once; `aggregate:
+  "count"`; `of: "counters"` for every counter of every kind; an effect amount's `forTarget`. A
+  count-scaled bonus's `grantPtPerCount.aggregate`; an entering replacement's graveyard half still
+  sees a card entering from it. `thisWay`'s `greatestOf` ("the greatest mana value among the
+  milled cards"). The scaffolder reads "+X/+0", "enters with X +1/+1 counters" and "~'s power is
+  equal to" over greatest / total / count / counters phrases (Prime Speaker Zegana's "other" now
+  authored as printed). 17 freed; proving cards Carrion Grub, Emissary Escort, Ambitious
+  Dragonborn, Crackling Drake, Maester Seymour, Ferrafor, Young Yew, Shriekwood Devourer, Vulpine
+  Harvester, Heretic's Punishment.
+
 - **Need-keys Phase 2: a value chosen as it enters, read by its other lines** (2026-10-31;
   `filter:chosen-color`, `decision:choose-card-type-protection`,
   `static:chosen-creature-type-reads`, `static:chosen-type-in-addition`; rules 608.2h, 702.16b,

@@ -157,6 +157,7 @@ import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCountNefaria from "../pool/count-nefaria.js";
 import _poolCounterintelligence from "../pool/counterintelligence.js";
 import _poolCowardice from "../pool/cowardice.js";
+import _poolCracklingDrake from "../pool/crackling-drake.js";
 import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCranialExtraction from "../pool/cranial-extraction.js";
@@ -1029,6 +1030,7 @@ const shard: CardShard = {
     _poolCountNefaria,
     _poolCounterintelligence,
     _poolCowardice,
+    _poolCracklingDrake,
     _poolCradleClearcutter,
     _poolCraftworkCrusher,
     _poolCranialExtraction,

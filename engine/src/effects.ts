@@ -335,11 +335,14 @@ export type EffectAmount =
        * scoped effect, the controller's side. */
       readonly forEachPlayer?: true;
     }
-  /** A sum or maximum over matching battlefield permanents — "X is the
-   * **total power** of creatures you control", "the **greatest mana value**
-   * among permanents you control". A token stack counts once per token in a
-   * sum. Clamped at 0 (rule 107.1b), so a board of negative-power creatures
-   * deals no damage rather than a negative amount. See {@link AggregateSpec}. */
+  /** A sum, maximum or count over a set of objects — "X is the **total
+   * power** of creatures you control", "the **greatest mana value** among
+   * cards in your graveyard", "the greatest power among them" (the
+   * attackers that fired the trigger), "the number of counters among
+   * creatures target player controls". A token stack counts once per token
+   * in a sum. Clamped at 0 (rule 107.1b), so a board of negative-power
+   * creatures deals no damage rather than a negative amount. See
+   * {@link AggregateSpec}. */
   | AggregateSpec
   /** A numeric quantity the triggering event supplies (ROADMAP P4b): the power
    * of the entering creature (Terror of the Peaks) or, for a "deals combat
@@ -787,6 +790,12 @@ export type EffectAmount =
        * value** of those cards" (milled): a card read where it went, if
        * that's a public zone (rule 701.17c), {X} counting 0 (rule 202.3e). */
       readonly sumOf?: "power" | "toughness" | "mana-value";
+      /** The **greatest** of this characteristic among the objects instead
+       * of their total, read as `sumOf` reads each — Heretic's Punishment's
+       * "the greatest mana value among the milled cards", Ill-Timed
+       * Explosion's "the greatest mana value among cards discarded this
+       * way". 0 with none. */
+      readonly greatestOf?: "power" | "toughness" | "mana-value";
     }
   /**
    * One amount or another, by a condition read as the amount is — Urza's
@@ -7967,9 +7976,10 @@ export interface EffectApi {
    * effect's controller as "you" (for an `EffectAmount` `{ countOf }`) —
    * or `you`, given one (a `countOf`'s `forTarget`). */
   countMatching(filter: CardFilter, except?: readonly ObjectId[], you?: PlayerId): number;
-  /** See the aggregate {@link EffectAmount}: the raw sum or maximum, with
-   * `except` left out one permanent apiece. */
-  aggregate(spec: AggregateSpec, except: readonly ObjectId[]): number;
+  /** See the aggregate {@link EffectAmount}: the raw sum, maximum or count,
+   * with `except` left out one permanent apiece, from the effect's
+   * controller's side — or `you`'s, given one (its `forTarget`). */
+  aggregate(spec: AggregateSpec, except: readonly ObjectId[], you?: PlayerId): number;
   /** See the `"return-from-graveyard"` {@link EffectSpec} — from the effect's
    * controller's graveyard.
    * Returns `true` when it stopped to ask an "as this enters" choice first
@@ -9979,6 +9989,11 @@ function signedAmountValue(
           : ctx.playersInScope(amount.who);
     const done = ctx.thisWay(amount.thisWay, players, amount.filter);
     if (amount.cardTypes === true) return ctx.cardTypesAmong(done);
+    const greatestOf = amount.greatestOf;
+    if (greatestOf !== undefined) {
+      // Each object once, however many tokens a stack of it stood for.
+      return Math.max(0, ...done.map((entry) => ctx.powerAmong([{ ...entry, count: 1 }], greatestOf)));
+    }
     const valueOf = (entry: ThisWayEntry): number =>
       amount.sumOf === undefined ? entry.count : ctx.powerAmong([entry], amount.sumOf);
     if (amount.perPlayer === "greatest") {
@@ -10098,7 +10113,13 @@ function signedAmountValue(
     return ref === undefined ? 0 : ctx.commanderCastsOf(ref);
   }
   if ("aggregate" in amount) {
-    return Math.max(0, ctx.aggregate(amount, amount.excludeSelf === true ? [ctx.source] : []));
+    const except = amount.excludeSelf === true ? [ctx.source] : [];
+    if (amount.forTarget !== undefined) {
+      const ref = ctx.targets[amount.forTarget];
+      if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
+      return Math.max(0, ctx.aggregate(amount, except, ref.player));
+    }
+    return Math.max(0, ctx.aggregate(amount, except));
   }
   const except: ObjectId[] = [];
   if (amount.excludeSelf === true) except.push(ctx.source);

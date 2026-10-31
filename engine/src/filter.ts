@@ -1902,6 +1902,9 @@ export function matchesFilter(
 export interface WeightedMatch {
   readonly id: ObjectId;
   readonly weight: number;
+  /** Read it as this snapshot — an aggregate's attacker that has left the
+   * battlefield, as it last existed there (rule 608.2h). */
+  readonly lastKnown?: LastKnownInfo;
 }
 
 /**
@@ -1930,8 +1933,43 @@ export function weightedMatches(
 /** What an aggregate reads off each permanent: its power, toughness or mana
  * value, or how many counters of one kind are on it — Tom Bombadil's "four
  * or more **lore counters among Sagas you control**" is a sum of `{
- * counters: "lore" }`. */
-export type AggregateOf = "power" | "toughness" | "mana-value" | { readonly counters: string };
+ * counters: "lore" }`. `"counters"` alone is every counter of every kind
+ * on it — Hydra Trainer's "the number of **counters** on permanents you
+ * control", Backstreet Bruiser's "two or more counters among creatures you
+ * control" (rule 122.1: each counter is one, whatever its kind). */
+export type AggregateOf = "power" | "toughness" | "mana-value" | "counters" | { readonly counters: string };
+
+/**
+ * Where an aggregate's set of objects comes from:
+ *
+ * - `"battlefield"` (the default): the permanents there, a token stack
+ *   counting as every token in it.
+ * - `"graveyards"`: the cards in every graveyard (the filter's `ownedBy:
+ *   "you"` narrows it to yours). Tokens aren't cards.
+ * - `"exile"`: the cards in exile — Crackling Drake's "instant and sorcery
+ *   cards you own **in exile** and in your graveyard". A card exiled face
+ *   down has no characteristics (rule 406.3a), so it matches only a filter
+ *   that asks about nothing but its owner — Kaya, Orzhov Usurper's "the
+ *   number of cards that player owns in exile" counts it.
+ * - `"attackers"`: the attackers that counted for the `attacks-batch` or
+ *   `attack-with` trigger whose ability is resolving — the ones its filter
+ *   matched as they were declared (`LastKnownRefs.attackedTogether`):
+ *   Aloy, Savior of Meridian's "the greatest power **among them**", Vulpine
+ *   Harvester's "**their** total power". Read as it resolves (rule
+ *   608.2h): each one still on the battlefield as it is now, whatever it
+ *   has become (the rulings: "even if the creature is no longer attacking or
+ *   no longer a Phyrexian"), one that has left as it last existed there. So
+ *   the aggregate's own filter is normally `{}`. Nothing outside such a
+ *   resolution.
+ */
+export type AggregateZone = "battlefield" | "graveyards" | "exile" | "attackers";
+
+/** One more set an aggregate folds in, with a filter of its own — see
+ * {@link AggregateSpec}'s `plus`. */
+export interface AggregateSource {
+  readonly filter: CardFilter;
+  readonly in?: AggregateZone | readonly AggregateZone[];
+}
 
 /**
  * A sum or a maximum over matching battlefield permanents (rule 208 /
@@ -1951,21 +1989,125 @@ export type AggregateOf = "power" | "toughness" | "mana-value" | { readonly coun
  *   permanents you control", Golden Ratio's "each different power among
  *   creatures you control".
  *
+ * - `count` is how many objects there are — the cards of a set no
+ *   `countOf` reaches: Serpentine Curve's "the total number of instant and
+ *   sorcery cards you own in exile and in your graveyard" is a `count` `in:
+ *   ["graveyards", "exile"]`.
+ *
  * `filter` is evaluated from the ability's controller's perspective, as
- * `countOf` is. `excludeSelf` is "**other** creatures you control". `in:
- * "graveyards"` reads the cards in every graveyard instead of the
- * battlefield, the filter's `ownedBy: "you"` narrowing it to yours — Aven
+ * `countOf` is. `excludeSelf` is "**other** creatures you control" (the
+ * battlefield only). `in` is where the set comes from — see
+ * {@link AggregateZone}; a list is their union, each object once. Aven
  * Heartstabber's "five or more mana values among cards in your graveyard"
- * is a `distinct` `"mana-value"` there. Tokens aren't cards.
+ * is a `distinct` `"mana-value"` `in: "graveyards"`.
+ *
+ * `plus` folds in more sets, each with its own filter and zone, when one
+ * filter can't say both halves — Ambitious Dragonborn's "the greatest power
+ * among creatures **you control** and creature cards **in your graveyard**"
+ * is `{ filter: { type: "creature", controlledBy: "you" }, plus: [{ filter:
+ * { type: "creature", ownedBy: "you" }, in: "graveyards" }] }`. An object
+ * two of the sets reach is counted once.
+ *
+ * `forTarget` (an effect's amount only) reads the filter from the side of
+ * the player in that target slot — Inscription of Abundance's "the greatest
+ * power among creatures **target player** controls" is `controlledBy:
+ * "you"` with `forTarget`. 0 when the slot holds no player or went illegal.
  */
 export type AggregateSpec =
   | (AggregateBase & { readonly aggregate: "sum" | "max"; readonly of: AggregateOf })
-  | (AggregateBase & { readonly aggregate: "distinct"; readonly of: DistinctOf });
+  | (AggregateBase & { readonly aggregate: "distinct"; readonly of: DistinctOf })
+  | (AggregateBase & { readonly aggregate: "count"; readonly of?: undefined });
 
 interface AggregateBase {
   readonly filter: CardFilter;
   readonly excludeSelf?: boolean;
-  readonly in?: "graveyards";
+  readonly in?: AggregateZone | readonly AggregateZone[];
+  readonly plus?: readonly AggregateSource[];
+  readonly forTarget?: number;
+}
+
+/** What an aggregate's sets read beyond the board: the attackers of the
+ * declaration that fired the resolving trigger, each with the battlefield
+ * stint it attacked in; cards that count as being in a graveyard though they
+ * are moving out of it (an entering permanent's own replacement, rule
+ * 614.12); and the permanents to leave out ("other", "not yet here"). */
+export interface AggregateReads {
+  readonly except?: readonly ObjectId[];
+  readonly attackers?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  readonly stillInGraveyard?: readonly ObjectId[];
+  /** Inside the layer fold: battlefield objects are matched by this
+   * instead (the fold's own guard against reading itself). */
+  readonly battlefieldMatch?: (id: ObjectId, filter: CardFilter) => boolean;
+}
+
+/** Whether a filter asks about nothing but whose a card is — what a card
+ * exiled face down (no characteristics, rule 406.3a) can still match. */
+function ownerOnly(filter: CardFilter): boolean {
+  return Object.keys(filter).every((k) => k === "ownedBy");
+}
+
+/**
+ * The objects an aggregate folds over — see {@link AggregateSpec} — each
+ * weighted by how many permanents it stands for, from `you`'s side. An
+ * attacker that has left the battlefield carries the snapshot it is read
+ * by (`lastKnown`).
+ */
+export function aggregateMatches(
+  state: GameState,
+  registry: CardRegistry,
+  spec: AggregateSpec,
+  you: PlayerId,
+  reads: AggregateReads = {},
+): WeightedMatch[] {
+  const out: WeightedMatch[] = [];
+  const seen = new Set<ObjectId>();
+  const push = (m: WeightedMatch): void => {
+    if (seen.has(m.id)) return;
+    seen.add(m.id);
+    out.push(m);
+  };
+  const zonesOf = (zone: AggregateSource["in"]): readonly AggregateZone[] =>
+    zone === undefined ? ["battlefield"] : typeof zone === "string" ? [zone] : zone;
+  const collect = (filter: CardFilter, zones: readonly AggregateZone[], except: readonly ObjectId[]): void => {
+    for (const zone of zones) {
+      if (zone === "battlefield") {
+        const keep = reads.battlefieldMatch ?? ((id: ObjectId, f: CardFilter) => matchesFilter(state, registry, id, f, { you }));
+        for (const m of weightedMatches(state, state.zones.shared.battlefield, (id) => keep(id, filter), except)) push(m);
+      } else if (zone === "graveyards") {
+        for (const m of graveyardMatches(state, registry, filter, you)) push(m);
+        for (const id of reads.stillInGraveyard ?? []) {
+          const object = state.objects[id];
+          if (object === undefined || object.isToken) continue;
+          if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
+        }
+      } else if (zone === "exile") {
+        for (const id of state.zones.shared.exile) {
+          const object = state.objects[id];
+          if (object === undefined || object.isToken) continue;
+          if (object.exiledFaceDown !== undefined && !ownerOnly(filter)) continue;
+          if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
+        }
+      } else {
+        for (const a of reads.attackers ?? []) {
+          const object = state.objects[a.object];
+          if (object === undefined) continue;
+          const here = object.zone === "battlefield" && (object.zoneChangeCount ?? 0) === a.zoneChangeCount;
+          if (here) {
+            if (matchesFilter(state, registry, a.object, filter, { you })) push({ id: a.object, weight: object.stackCount ?? 1 });
+            continue;
+          }
+          const snapshot = object.lastKnown;
+          if (snapshot === undefined || snapshot.zoneChangeCount !== a.zoneChangeCount) continue;
+          if (matchesFilter(state, registry, a.object, filter, { you, snapshot })) {
+            push({ id: a.object, weight: 1, lastKnown: snapshot });
+          }
+        }
+      }
+    }
+  };
+  collect(spec.filter, zonesOf(spec.in), reads.except ?? []);
+  for (const more of spec.plus ?? []) collect(more.filter, zonesOf(more.in), reads.except ?? []);
+  return out;
 }
 
 /**
@@ -2069,12 +2211,31 @@ export function aggregateValueOf(
   of: AggregateOf,
 ): number {
   if (typeof of === "object") return state.objects[id]?.counters[of.counters] ?? 0;
+  if (of === "counters") return totalCounters(state.objects[id]?.counters);
   if (of === "mana-value") {
     const object = state.objects[id];
     return object === undefined ? 0 : manaValue(parseManaCost(printedManaCost(registry, object)));
   }
   const c = computeCharacteristics(state, registry, id);
   return of === "power" ? c.power : c.toughness;
+}
+
+/** Every counter of every kind in a counters record (rule 122.1). */
+function totalCounters(counters: Readonly<Record<string, number>> | undefined): number {
+  let n = 0;
+  for (const k in counters) n += counters[k] ?? 0;
+  return n;
+}
+
+/** One match's value: as {@link aggregateValueOf} reads it, or — for an
+ * attacker that has left the battlefield — as it last existed there. */
+function matchValueOf(state: GameState, registry: CardRegistry, m: WeightedMatch, of: AggregateOf): number {
+  const known = m.lastKnown;
+  if (known === undefined) return aggregateValueOf(state, registry, m.id, of);
+  if (typeof of === "object") return known.counters[of.counters] ?? 0;
+  if (of === "counters") return totalCounters(known.counters);
+  if (of === "mana-value") return known.manaValue;
+  return of === "power" ? known.power : known.toughness;
 }
 
 /** Fold `matches` into one number — see {@link AggregateSpec}. The raw
@@ -2092,12 +2253,10 @@ export function aggregateOver(
     for (const m of matches) for (const v of distinctValuesOf(state, registry, m.id, spec.of)) seen.add(v);
     return seen.size;
   }
+  if (spec.aggregate === "count") return matches.reduce((n, m) => n + m.weight, 0);
   const of = spec.of;
   if (spec.aggregate === "sum") {
-    return matches.reduce((n, m) => n + aggregateValueOf(state, registry, m.id, of) * m.weight, 0);
+    return matches.reduce((n, m) => n + matchValueOf(state, registry, m, of) * m.weight, 0);
   }
-  return matches.reduce(
-    (best, m) => Math.max(best, aggregateValueOf(state, registry, m.id, of)),
-    -Infinity,
-  );
+  return matches.reduce((best, m) => Math.max(best, matchValueOf(state, registry, m, of)), -Infinity);
 }

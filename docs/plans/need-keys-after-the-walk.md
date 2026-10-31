@@ -658,6 +658,19 @@ missing. Re-run `--greedy` for Phase 2's order.
   two colours chosen as it enters (Seal of the Guildpact, Tablet of the Guilds). Next:
   `effect:amount-aggregate` (15), `mechanic:face-down` (14), `effect:aggregate-over-graveyard`
   (14).
+- **2026-10-31: `effect:amount-aggregate`'s top group, features only** (an overnight agent) — one
+  `AggregateSpec` over any set rather than a kind per key: `in` graveyards, exile or the attackers
+  that counted for the trigger that fired (`LastKnownRefs.attackedTogether`), lists of zones and
+  `plus` sets with their own filters, `aggregate: "count"`, `of: "counters"`, `forTarget`, read by
+  amounts, conditions, cost reductions, CDAs and now `grantPtPerCount.aggregate`; `thisWay`'s
+  `greatestOf`. Tier B rode along: the next family's `amount:count-in-exile` (a count over exile
+  and graveyards), the counters group's `effect:aggregate-all-counters` and `-for-target`, and
+  `amount:greatest-mana-value-this-way`. 9 keys; 9 proving cards; 17 freed (queued: 629). Adds no
+  decision kind and no client change. Not yet: Amzu's batch of cards that left a graveyard, a
+  static condition counting its own permanent's counters (Backstreet Bruiser), the per-player
+  "who discarded the greatest" of `effect:greatest-among-discarded`, `effect:top-card-of-graveyard`,
+  the died-together power sums. Next: `mechanic:face-down` (14), `effect:divide-among-targets`
+  (14), `cost:put-opponent-exiled-card-into-graveyard` (14).
 
 ## Rough size
 

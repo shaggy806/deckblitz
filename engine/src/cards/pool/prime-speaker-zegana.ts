@@ -24,7 +24,7 @@ export default defineCard({
         event: "enters-battlefield",
         counters: {
           kind: "+1/+1",
-          amount: { aggregate: "max", of: "power", filter: { type: "creature", controlledBy: "you" } },
+          amount: { aggregate: "max", of: "power", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true },
         },
       },
       text: ENTER_TEXT,

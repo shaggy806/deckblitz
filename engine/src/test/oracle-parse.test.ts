@@ -3957,3 +3957,67 @@ describe("a value chosen as it enters, read by its other lines", () => {
     });
   });
 });
+
+describe("an aggregate over a set, as a static's X", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a graveyard's greatest power and other permanents' greatest mana value", () => {
+    expect(
+      face("Carrion Grub", "Creature — Insect", "This creature gets +X/+0, where X is the greatest power among creature cards in your graveyard.")
+        .static[0].grantPtPerCount,
+    ).toEqual({
+      aggregate: { aggregate: "max", of: "power", filter: { type: "creature", ownedBy: "you" }, in: "graveyards" },
+      pt: [1, 0],
+    });
+    expect(
+      face("Emissary Escort", "Artifact Creature — Robot Soldier", "This creature gets +X/+0, where X is the greatest mana value among other artifacts you control.")
+        .static[0].grantPtPerCount,
+    ).toEqual({
+      aggregate: { aggregate: "max", of: "mana-value", filter: { type: "artifact", controlledBy: "you" }, excludeSelf: true },
+      pt: [1, 0],
+    });
+  });
+
+  it("reads a union of the battlefield and a graveyard, a graveyard total and a count over exile", () => {
+    expect(
+      face(
+        "Ambitious Dragonborn",
+        "Creature — Dragon Barbarian",
+        "This creature enters with X +1/+1 counters on it, where X is the greatest power among creatures you control and creature cards in your graveyard.",
+      ).static[0].replacement,
+    ).toEqual({
+      event: "enters-battlefield",
+      counters: {
+        kind: "+1/+1",
+        amount: {
+          aggregate: "max",
+          of: "power",
+          filter: { type: "creature", controlledBy: "you" },
+          plus: [{ filter: { type: "creature", ownedBy: "you" }, in: "graveyards" }],
+        },
+      },
+    });
+    expect(
+      face(
+        "Inferno Project",
+        "Creature — Elemental",
+        "This creature enters with X +1/+1 counters on it, where X is the total mana value of instant and sorcery cards in your graveyard.",
+      ).static[0].replacement.counters.amount,
+    ).toEqual({ aggregate: "sum", of: "mana-value", filter: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" }, in: "graveyards" });
+    expect(
+      face(
+        "Crackling Drake",
+        "Creature — Drake",
+        "Crackling Drake's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.",
+      ).static[0].setBasePtFromCount,
+    ).toEqual({
+      countOf: { aggregate: "count", filter: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" }, in: ["graveyards", "exile"] },
+      plusPower: 0,
+      plusToughness: 0,
+      only: "power",
+    });
+    // A plain battlefield count is `countOf`'s, not a CDA aggregate's.
+    expect(face("Not A Card", "Creature — Drake", "This creature's power is equal to the greatest power among creatures you control.").static).toHaveLength(0);
+  });
+});

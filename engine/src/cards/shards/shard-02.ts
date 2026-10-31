@@ -229,6 +229,7 @@ import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElusiveSpellfist from "../pool/elusive-spellfist.js";
 import _poolElusiveTormentor from "../pool/elusive-tormentor.js";
 import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
+import _poolEmissaryEscort from "../pool/emissary-escort.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
 import _poolEntourageOfTrest from "../pool/entourage-of-trest.js";
@@ -423,6 +424,7 @@ import _poolLumberingWorldwagon from "../pool/lumbering-worldwagon.js";
 import _poolLyraTolarianArchangel from "../pool/lyra-tolarian-archangel.js";
 import _poolMadameHydra from "../pool/madame-hydra.js";
 import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
+import _poolMaesterSeymour from "../pool/maester-seymour.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
@@ -1062,6 +1064,7 @@ const shard: CardShard = {
     _poolElusiveSpellfist,
     _poolElusiveTormentor,
     _poolElvishPathcutter,
+    _poolEmissaryEscort,
     _poolEnatuGolem,
     _poolEnshroudingMist,
     _poolEntourageOfTrest,
@@ -1256,6 +1259,7 @@ const shard: CardShard = {
     _poolLyraTolarianArchangel,
     _poolMadameHydra,
     _poolMadrushCyclops,
+    _poolMaesterSeymour,
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,

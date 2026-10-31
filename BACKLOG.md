@@ -268,10 +268,21 @@ section keeps only what to do next.
   Guilds still need two colours chosen, Zombie Boa a colour chosen on activation;
   `decision:choose-name-and-type-on-attach` (Psychic Paper — a choice as an Equipment attaches
   and a name-setting effect) left open; 7 proving cards — Pentarch Paladin, Curse of Wizardry,
-  Story Circle, Serra's Emissary, Runed Halo, Metallic Mimic, Roaming Throne).
-  **612 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:amount-aggregate` (15), `mechanic:face-down` (14), `effect:aggregate-over-graveyard`
-  (14), `effect:divide-among-targets` (14).
+  Story Circle, Serra's Emissary, Runed Halo, Metallic Mimic, Roaming Throne),
+  amount-aggregate (2026-10-31: the aggregate amount over any set — `in` graveyards, exile, the
+  attackers that fired an `attacks-batch`/`attack-with` trigger (`LastKnownRefs.attackedTogether`,
+  read as it resolves or as last on the battlefield), lists of zones and `plus` sets with filters of
+  their own, `aggregate: "count"`, `of: "counters"` (every kind), `forTarget`; a count-scaled
+  bonus's `aggregate`; `thisWay`'s `greatestOf`; also took the next family's `amount:count-in-exile`
+  and the counters group's two keys; 17 freed — Amzu's "those cards" (left a graveyard) still needs
+  its own batch ref, Backstreet Bruiser a static that counts its own counters, Angrath's −11 a
+  survivors-plus-destroyed sum (`thisWay` plus a target-side aggregate, each clamped);
+  `effect:top-card-of-graveyard` and `effect:greatest-among-discarded` left open; 9 proving cards —
+  Carrion Grub, Emissary Escort, Ambitious Dragonborn, Crackling Drake, Maester Seymour,
+  Ferrafor, Young Yew, Shriekwood Devourer, Vulpine Harvester, Heretic's Punishment).
+  **629 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `mechanic:face-down` (14), `effect:divide-among-targets` (14),
+  `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification` (14).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

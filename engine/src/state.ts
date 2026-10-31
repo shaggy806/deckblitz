@@ -1954,6 +1954,13 @@ export interface LastKnownRefs {
     readonly zoneChangeCount: number;
     readonly at: PlayerId | ObjectId | null;
   }[];
+  /** "Among them", "their total power" (Aloy, Savior of Meridian; Vulpine
+   * Harvester): the attackers that counted for the `attacks-batch` or
+   * `attack-with` trigger that fired — the ones its filter matched as they
+   * were declared — each with its battlefield stint. What an aggregate `in:
+   * "attackers"` reads as the ability resolves, whatever they've become
+   * since (the rulings: "even if the creature is … no longer a Phyrexian"). */
+  readonly attackedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** "One of them" (Colossal Grave-Reaver): the cards of the move a batched
    * `put-into-graveyard` trigger fired on that counted for it, each as the
    * object it became in that graveyard. */
