@@ -148,6 +148,7 @@ import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCreepyDoll from "../pool/creepy-doll.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
+import _poolCrownOfVigor from "../pool/crown-of-vigor.js";
 import _poolCruelFeeding from "../pool/cruel-feeding.js";
 import _poolCryoclasm from "../pool/cryoclasm.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
@@ -218,6 +219,7 @@ import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
 import _poolEverdawnChampion from "../pool/everdawn-champion.js";
 import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
+import _poolExclusionRitual from "../pool/exclusion-ritual.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
 import _poolExperimentalAugury from "../pool/experimental-augury.js";
@@ -1014,6 +1016,7 @@ const shard: CardShard = {
     _poolCreepyDoll,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
+    _poolCrownOfVigor,
     _poolCruelFeeding,
     _poolCryoclasm,
     _poolCryptSliver,
@@ -1084,6 +1087,7 @@ const shard: CardShard = {
     _poolEtherswornAdjudicator,
     _poolEverdawnChampion,
     _poolEvolutionaryLeap,
+    _poolExclusionRitual,
     _poolExemplarOfLight,
     _poolExorcist,
     _poolExperimentalAugury,

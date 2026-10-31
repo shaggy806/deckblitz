@@ -365,6 +365,7 @@ import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKeldonMarauders from "../pool/keldon-marauders.js";
+import _poolKiller from "../pool/killer.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKitsuneBlademaster from "../pool/kitsune-blademaster.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKeldonMarauders,
+    _poolKiller,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
     _poolKitsuneBlademaster,

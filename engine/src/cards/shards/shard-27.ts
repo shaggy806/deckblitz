@@ -480,6 +480,7 @@ import _poolPartWater from "../pool/part-water.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
+import _poolPatternMatcher from "../pool/pattern-matcher.js";
 import _poolPearlspearCourier from "../pool/pearlspear-courier.js";
 import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
@@ -1319,6 +1320,7 @@ const shard: CardShard = {
     _poolPartingGust,
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,
+    _poolPatternMatcher,
     _poolPearlspearCourier,
     _poolPerilousResearch,
     _poolPerimeterSergeant,

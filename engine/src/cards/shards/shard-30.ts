@@ -214,6 +214,7 @@ import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
 import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEmergentHaunting from "../pool/emergent-haunting.js";
 import _poolEmeriaCaptain from "../pool/emeria-captain.js";
+import _poolEndemicPlague from "../pool/endemic-plague.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
@@ -1074,6 +1075,7 @@ const shard: CardShard = {
     _poolEmeraldMedallion,
     _poolEmergentHaunting,
     _poolEmeriaCaptain,
+    _poolEndemicPlague,
     _poolEnergizer,
     _poolEngineeredMight,
     _poolEngulfTheShore,
