@@ -1357,6 +1357,15 @@ export type TriggerSpec =
       readonly asItAttacks?: boolean;
     }
   | {
+      /** A creature enlisted another (rule 702.154c): it tapped that one to
+       * pay its enlist cost as it attacked (`StaticAbility.enlist`) —
+       * Guardian of New Benalia's "whenever this creature enlists a
+       * creature" is `who: "self"`. `who` is asked of the enlisting
+       * creature; the trigger object is the creature it enlisted. */
+      readonly on: "enlists";
+      readonly who: TriggerWho;
+    }
+  | {
       /**
        * A permanent was tapped for mana — its mana ability with `{T}` in the
        * cost resolved (Roxanne, Starfall Savant's "whenever you tap an

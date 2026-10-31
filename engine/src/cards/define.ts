@@ -2550,6 +2550,24 @@ export interface StaticAbility {
    */
   readonly exertAsItAttacks?: { readonly unlessExertedThisTurn?: true };
   /**
+   * Enlist (rule 702.154a — the `enlist()` helper): "as this creature
+   * attacks, you may tap up to one untapped creature you control that you
+   * didn't choose to attack with and that either has haste or has been under
+   * your control continuously since this turn began. When you do, this
+   * creature gets +X/+0 until end of turn, where X is the tapped creature's
+   * power." An optional cost to attack (702.154b, 508.1g), asked of its
+   * controller as the attack is declared — after the attackers tap and
+   * before any of them becomes attacking or anything triggers on the attack
+   * (`Game.promptNextEnlist`, a `choose-permanents` of up to one) — and its
+   * linked "when you do" (607.2h), which the engine adds itself as a
+   * reflexive trigger reading the enlisted creature's power as it resolves.
+   * One instance per creature is asked (702.154d's several aren't). A
+   * creature that enlists another "enlists" it (702.154c): the `enlists`
+   * trigger, and the `enlistedThisCombat` filter clause. `affects` is
+   * ignored — it is always the permanent carrying it.
+   */
+  readonly enlist?: true;
+  /**
    * "Spells your opponents cast that target this creature cost an additional
    * 3 life to cast" (Terror of the Peaks): an additional cost of the spell,
    * part of its total cost as it's cast (rule 601.2f) — once per spell

@@ -756,6 +756,29 @@ creature and the player at once, Dementia Sliver's granted ability, River
 Song's Diary's imprint replacement); the family's other units (random target,
 random mode announced, random among chosen) are separate.
 
+### Enlist — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:enlist`, features only (rule 702.154).
+**`StaticAbility.enlist`** (the `enlist()` helper) is an optional cost to
+attack (702.154b, 508.1g): the declaration taps its attackers and pays any
+attack tax, then — before any attacker is announced, so before anything
+triggers on the attack (508.1k) — each attacker with enlist is asked a
+`choose-permanents` of up to one untapped, nonattacking creature its
+controller controls with haste or no summoning sickness
+(`GameState.pendingEnlist`, `Game.promptNextEnlist`/`applyEnlist`), and the
+attack is announced once the last is answered (`Game.announceAttackers`).
+The creature chosen taps, and the linked "when you do, +X/+0" (607.2h) is a
+reflexive trigger the engine adds, X the tapped creature's power as it
+resolves (`powerOf: "tapped"`). A **`creature-tapped-for`** event (`as:
+"enlist"`) fires the new **`enlists`** trigger (702.154c — the trigger object
+the enlisted creature), and the attacker records the combat
+(`GameObject.enlistedIn`, kept in last-known information) for the new
+**`enlistedThisCombat`** filter clause. No new decision kind: the bots'
+`choose-permanents` "you may choose one" candidates answer it. Key:
+keyword:enlist. Proving cards: Coalition Warbrute, Guardian of New Benalia,
+Aradesh, the Founder (`enlist.test.ts`). Not built: 702.154d's several
+instances on one creature (none printed).
+
 ### Cards a player owns, taken from exile — built 2026-10-31
 
 The need-keys Phase 2 family `cost:put-opponent-exiled-card-into-graveyard`,

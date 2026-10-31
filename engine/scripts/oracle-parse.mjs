@@ -43,6 +43,7 @@ import {
   mentor,
   crew,
   dethrone,
+  enlist,
   evolve,
   extort,
   increment,
@@ -185,6 +186,8 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
   // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
   if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
+  // Enlist (rule 702.154a): an optional cost to attack, its pump the engine's.
+  if (/^enlist$/i.test(p)) return { static: [enlist()] };
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
   // Bushido N (rule 702.45a): its blocks and becomes-blocked triggers.
   if ((m = /^bushido (\d+)$/i.exec(p))) return { triggered: bushido(Number(m[1])) };
@@ -1249,6 +1252,8 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
     return [{ on: "becomes-saddled", who: "self", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
   }
+  // Enlisting (rule 702.154c): it tapped a creature for its enlist cost.
+  if (/^Whenever ~ enlists a creature$/.test(c)) return self("enlists");
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }

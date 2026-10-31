@@ -341,6 +341,7 @@ import type {
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
+  DeclaredAttacker,
   EnterAttachHost,
   FaceDownAs,
   FaceDownKind,
@@ -8943,12 +8944,7 @@ export class Game {
     // complete (508.3), so an attack trigger's "if no other creatures are
     // attacking that player" sees every attacker, not just the ones declared
     // before its own.
-    const declaredNow: {
-      readonly id: ObjectId;
-      readonly defender: PlayerId | ObjectId;
-      readonly taps: boolean;
-      readonly first: boolean;
-    }[] = [];
+    const declaredNow: DeclaredAttacker[] = [];
     // Each band's members as they attack (rule 702.22c) — a stack's entry
     // woken into one creature per token, each a member.
     const bands = new Map<number, ObjectId[]>();
@@ -9002,6 +8998,135 @@ export class Game {
       if (payment === null) throw new Error(`${player} can't pay the {${tax}} it costs to attack`);
       this.executePayment(player, payment);
     }
+    // Enlist (rule 702.154b): an optional cost to attack, chosen and paid
+    // (508.1g-j) before any attacker becomes attacking (508.1k) — so the
+    // declaration is announced, and its attack triggers trigger, only once
+    // every enlist has been asked. Aradesh's "if it enlisted a creature
+    // this combat" sees it as its attack trigger triggers.
+    const enlisting = declaredNow.map((d) => d.id).filter((id) => this.hasEnlist(id));
+    if (enlisting.length > 0) {
+      this.state.pendingEnlist = { player, queue: enlisting, declared: declaredNow };
+      this.state.awaiting = null;
+      if (this.promptNextEnlist()) return;
+    }
+    this.announceAttackers(declaredNow);
+  }
+
+  /** Has `id`, a permanent, enlist (rule 702.154a — `StaticAbility.enlist`)? */
+  private hasEnlist(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    return object !== undefined && object.zone === "battlefield" && this.hasOwnStatic(object, (a) => a.enlist === true);
+  }
+
+  /** What `attacker` may enlist (rule 702.154a): an untapped creature its
+   * controller controls that wasn't chosen to attack, other than itself,
+   * with haste or under that player's control continuously since the turn
+   * began (as for a {T} ability — rule 302.6). */
+  private enlistCandidates(attacker: ObjectId): ObjectId[] {
+    const by = this.state.objects[attacker];
+    if (by === undefined || by.zone !== "battlefield") return [];
+    return this.state.zones.shared.battlefield.filter((id) => {
+      if (id === attacker) return false;
+      const object = this.state.objects[id];
+      return (
+        object !== undefined &&
+        object.controller === by.controller &&
+        !object.tapped &&
+        object.attacking === null &&
+        effectiveTypes(this.state, this.registry, object).includes("creature") &&
+        !this.tapAbilityBlockedBySickness(object)
+      );
+    });
+  }
+
+  /** Ask the next attacker's enlist (see `GameState.pendingEnlist`) as a
+   * `choose-permanents` of up to one creature, skipping any with nothing to
+   * enlist. False once none is left to ask — the caller then announces the
+   * attack. */
+  private promptNextEnlist(): boolean {
+    const pending = this.state.pendingEnlist;
+    if (pending === undefined) return false;
+    let queue = pending.queue;
+    while (queue.length > 0) {
+      const [attacker, ...rest] = queue;
+      queue = rest;
+      const eligible = this.enlistCandidates(attacker);
+      if (eligible.length === 0) continue;
+      this.state.pendingEnlist = { ...pending, queue };
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: pending.player,
+        eligible,
+        min: 0,
+        max: 1,
+        prompt: `Enlist — you may tap a nonattacking creature to add its power to ${nameOf(this.state.objects[attacker])}'s until end of turn`,
+        then: { kind: "sequence", effects: [] },
+        source: attacker,
+        x: 0,
+        enlist: true,
+      };
+      return true;
+    }
+    this.state.pendingEnlist = { ...pending, queue };
+    return false;
+  }
+
+  /**
+   * Answers an attacker's enlist (`promptNextEnlist`): the creature chosen,
+   * if any, is tapped as the cost (rule 702.154a) — the attacker enlists it
+   * (702.154c) — and the linked "when you do, this creature gets +X/+0 until
+   * end of turn, where X is the tapped creature's power" triggers (607.2h),
+   * a reflexive ability reading that power as it resolves, as it last
+   * existed if it has left. Then the next attacker is asked, and once none
+   * is left the attack is announced.
+   */
+  private applyEnlist(player: PlayerId, chosen: readonly ObjectId[], attacker: ObjectId): void {
+    this.state.awaiting = null;
+    const picked = chosen[0];
+    const by = this.state.objects[attacker];
+    if (picked !== undefined && by !== undefined && this.enlistCandidates(attacker).includes(picked)) {
+      const id = this.splitOneFromStack(picked);
+      const enlisted = this.state.objects[id];
+      enlisted.tapped = true;
+      invalidateComputedCache();
+      this.emit({ type: "permanent-tapped", object: id });
+      by.enlistedIn = { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 };
+      this.emit({ type: "creature-tapped-for", creature: id, for: attacker, as: "enlist" });
+      this.state.pendingTriggers.push({
+        sourceObjectId: attacker,
+        cardName: printedCardName(by),
+        abilityIndex: 0,
+        controller: player,
+        lastKnownRefs: {
+          source: by.zoneChangeCount ?? 0,
+          tapped: { object: id, zoneChangeCount: enlisted.zoneChangeCount ?? 0 },
+        },
+        reflexive: {
+          targets: [],
+          effect: {
+            kind: "modify-pt",
+            target: "source",
+            power: { powerOf: "tapped" },
+            toughness: 0,
+            duration: "end-of-turn",
+          },
+          text: "Enlist — this creature gets +X/+0 until end of turn, where X is the tapped creature's power.",
+        },
+      });
+    }
+    if (this.promptNextEnlist()) return;
+    const pending = this.state.pendingEnlist;
+    delete this.state.pendingEnlist;
+    if (pending !== undefined) this.announceAttackers(pending.declared);
+  }
+
+  /**
+   * The attack just declared becomes one (rule 508.1k), every cost to attack
+   * paid: each attacker's `attacker-declared` (after its `permanent-tapped`,
+   * 508.1f), the declaration's `attackers-declared` and each player's
+   * `player-attacked` (508.3d), then the exerts asked of its attackers.
+   */
+  private announceAttackers(declaredNow: readonly DeclaredAttacker[]): void {
     const allAttackers = declaredNow.map((d) => d.id);
     for (const { id, defender, taps, first } of declaredNow) {
       // Attacking *taps* the creature, so a "becomes tapped" trigger (rule
@@ -23295,6 +23420,12 @@ export class Game {
           (spec.asItAttacks !== true || event.asItAttacks) &&
           this.matchesWho(spec.who, event.object, self)
         );
+      case "enlists":
+        return (
+          event.type === "creature-tapped-for" &&
+          event.as === "enlist" &&
+          this.matchesWho(spec.who, event.for, self)
+        );
       case "becomes-monstrous":
         return (
           event.type === "became-monstrous" &&
@@ -23766,6 +23897,9 @@ export class Game {
         ? event.object
         : event.type === "chapter-resolved"
           ? event.saga
+        : // The creature enlisted, of an `enlists` trigger.
+          event.type === "creature-tapped-for"
+          ? event.creature
         : event.type === "ring-tempted"
           ? (event.chosen ?? undefined)
         : event.type === "attacker-declared" ||
@@ -34671,6 +34805,10 @@ export class Game {
       this.applyConspire(player, chosen, awaiting.conspire);
       return;
     }
+    if (awaiting.enlist === true) {
+      this.applyEnlist(player, chosen, awaiting.source);
+      return;
+    }
     // The untap step's "you may choose not to untap" (rule 502.3): what's
     // picked stays tapped, and the step carries on with no priority (502.4).
     if (awaiting.untapStep !== undefined) {
@@ -42387,6 +42525,7 @@ export class Game {
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),
       ...(object.saddled === true ? { saddled: true } : {}),
+      ...(object.enlistedIn !== undefined ? { enlistedIn: object.enlistedIn } : {}),
       ...(object.monstrous === true ? { monstrous: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
@@ -43114,6 +43253,8 @@ export class Game {
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;
+    // And what it enlisted (702.154c).
+    delete object.enlistedIn;
     // And solved (719.3b).
     delete object.solved;
     delete object.exertedBy;

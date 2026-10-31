@@ -984,6 +984,23 @@ export const saddle = (n: number, text = `Saddle ${n}`): ActivatedAbility => ({
 export const saddleText = (n: number): string =>
   `Saddle ${n} (Tap any number of other creatures you control with total power ${n} or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)`;
 
+/** Enlist's printed line with its reminder text (rule 702.154a). */
+export const ENLIST_TEXT =
+  "Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)";
+
+/**
+ * Enlist (rule 702.154a): the static ability `StaticAbility.enlist` — an
+ * optional cost to attack, asked as the attack is declared, whose linked
+ * "when you do, this creature gets +X/+0 until end of turn" the engine adds
+ * itself. Spread into `static`. `text` defaults to the keyword with its
+ * reminder.
+ */
+export const enlist = (text = ENLIST_TEXT): StaticAbility => ({
+  affects: { scope: "self" },
+  enlist: true,
+  text,
+});
+
 /** "Whenever this creature attacks while saddled" (rule 702.171b): an attack
  * trigger whose trigger condition — not an intervening "if" (603.4) — is
  * that it's saddled as it's declared an attacker (the rulings), so it

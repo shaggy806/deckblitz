@@ -364,6 +364,12 @@ export interface CardFilter {
    * `saddledBy` first. Without a source, nothing saddled it.
    */
   readonly saddledSource?: boolean;
+  /** It **enlisted** a creature this combat (rule 702.154c —
+   * `GameObject.enlistedIn`): Aradesh, the Founder's "whenever a creature
+   * you control attacks, if it enlisted a creature this combat" (an
+   * intervening-if on the trigger object). One that has left the
+   * battlefield is a new object and enlisted nothing. */
+  readonly enlistedThisCombat?: boolean;
   /** `saddledSource` bound to the permanent it means — written by
    * `bindDynamicCompares`, never authored. */
   readonly saddledBy?: ObjectId;
@@ -1576,6 +1582,21 @@ export function matchesFilter(
   if (filter.monstrous !== undefined) {
     const monstrous = live !== undefined ? live.zone === "battlefield" && live.monstrous === true : lki!.monstrous === true;
     if (monstrous !== filter.monstrous) return false;
+  }
+  if (filter.enlistedThisCombat !== undefined) {
+    // Rule 702.154c, in the combat under way: the mark is the combat's. A
+    // creature off the battlefield enlisted nothing (400.7), unless it's
+    // read as it last existed there (608.2h).
+    const mark = live !== undefined ? (live.zone === "battlefield" ? live.enlistedIn : undefined) : lki!.enlistedIn;
+    const enlisted =
+      mark !== undefined &&
+      mark.turn === state.turn.number &&
+      mark.phase === (state.turn.combatPhases ?? 1) &&
+      (state.turn.step === "declare-attackers" ||
+        state.turn.step === "declare-blockers" ||
+        state.turn.step === "combat-damage" ||
+        state.turn.step === "end-combat");
+    if (enlisted !== filter.enlistedThisCombat) return false;
   }
   if (filter.bandedWithSource !== undefined || filter.bandedWith !== undefined) {
     const with_ = filter.bandedWith ?? ctx.source;

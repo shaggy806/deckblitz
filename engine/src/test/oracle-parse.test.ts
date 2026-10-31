@@ -1632,6 +1632,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Ward—Waterbend {4}.").complete).toBe(false);
   });
 
+  it("enlist (rule 702.154): the keyword and 'whenever this creature enlists a creature'", () => {
+    const guardian = face(
+      "Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nWhenever this creature enlists a creature, scry 2.",
+      "Creature — Human Soldier",
+    );
+    expect(guardian.static[0]).toMatchObject({ affects: { scope: "self" }, enlist: true });
+    expect(guardian.triggered[0].trigger).toEqual({ on: "enlists", who: "self" });
+    expect(guardian.triggered[0].effect).toEqual({ kind: "scry", amount: 2 });
+    expect(guardian.complete).toBe(true);
+    // The bare keyword (Keldon Flamesage prints it without reminder text).
+    expect(face("Enlist").static[0]).toMatchObject({ enlist: true });
+  });
+
   it("saddle (rule 702.171): the keyword, 'attacks while saddled', 'becomes saddled' and the effect", () => {
     const lagac = face(
       "Deathtouch\nWhenever this creature attacks while saddled, it gets +0/+3 until end of turn.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",

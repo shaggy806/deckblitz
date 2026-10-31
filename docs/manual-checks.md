@@ -5894,3 +5894,15 @@ engine terms. A second thing to check is a second test.
 ### Jarad's Orders: pick which of the two finds goes to your hand
 - **Do:** Cast Jarad's Orders, pick Grizzly Bears and Llanowar Elves, then pick Llanowar Elves in the second popup.
 - **Expect:** The second popup says "Choose one to put into your hand — the other goes into your graveyard" and offers just the two finds. Llanowar Elves goes to your hand, Grizzly Bears to your graveyard, and your library is shuffled once.
+
+
+## Enlist (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Coalition Warbrute: enlist a creature as it attacks
+- **Do:** Attack Bob with Coalition Warbrute alone. When asked, choose Hill Giant.
+- **Expect:** Before the attack goes ahead you're asked "Enlist — you may tap a nonattacking creature to add its power to Coalition Warbrute's until end of turn", offered Hill Giant but not the summoning-sick Grizzly Bears. Click Hill Giant, then Confirm: it taps, and Coalition Warbrute deals 6 to Bob.
+
+### Aradesh, the Founder: an attacker that enlisted gains double strike, four players
+- **Do:** Attack Bob with Coalition Warbrute alone, enlisting Grizzly Bears.
+- **Expect:** Grizzly Bears taps. Coalition Warbrute becomes 5/4 with double strike and you draw a card; Bob takes 10.
+- **Not a bug:** Aradesh's trigger only happens for an attacker that enlisted — attacking without enlisting gives nothing.

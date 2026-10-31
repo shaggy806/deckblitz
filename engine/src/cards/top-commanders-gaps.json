@@ -789,7 +789,8 @@
   "effect:random-card-from-linked-exile",
   "effect:put-exiled-with-source-onto-battlefield",
   "effect:return-other-cards-exiled-with-source",
-  "effect:exile-graveyard-linked"
+  "effect:exile-graveyard-linked",
+  "keyword:enlist"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
