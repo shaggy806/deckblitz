@@ -4372,6 +4372,14 @@ export interface PlayerEffect {
   /** `owner` may cast matching spells from their hand without paying their
    * mana costs. */
   readonly castFromHandFree?: { readonly filter?: CardFilter };
+  /** `owner` may cast spells matching `filter` (every spell without one) as
+   * though they had flash (rule 601.3b) — "you may cast spells this turn as
+   * though they had flash" (Borne Upon a Wind). With `next`, only the next
+   * matching spell `owner` casts: the first one cast after this effect began
+   * ends it, whenever and however it's cast (Quicken's ruling — "even if you
+   * cast that sorcery at a time you normally could"), and several such
+   * effects all end on that one spell. See `Game.castsAsThoughFlash`. */
+  readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
   /** `owner` may cast matching spells from their graveyard (Liliana,
    * Untouched by Death's −3) — a graveyard grant whose `source` is the
    * effect's source, never used up. */

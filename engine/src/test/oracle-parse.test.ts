@@ -4298,3 +4298,53 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
     });
   });
 });
+
+describe("flash permissions (castAsThoughFlash for any player, first each turn, this turn, next spell)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads the statics: any player, a filter, the first spell each turn", () => {
+    expect(face("Vernal Equinox", "Enchantment", "Any player may cast creature and enchantment spells as though they had flash.").static[0]).toEqual({
+      affects: { scope: "self" },
+      castAsThoughFlash: { typesAnyOf: ["creature", "enchantment"] },
+      castAsThoughFlashAnyPlayer: true,
+      text: "Any player may cast creature and enchantment spells as though they had flash.",
+    });
+    expect(face("Test Sliver", "Creature — Sliver", "Any player may cast Sliver spells as though they had flash.").static[0]).toMatchObject({
+      castAsThoughFlash: { subtype: "Sliver" },
+      castAsThoughFlashAnyPlayer: true,
+    });
+    const heliod = face("Test Heliod", "Enchantment", "You may cast spells as though they had flash.").static[0];
+    expect(heliod.castAsThoughFlash).toBe(true);
+    expect(heliod.castAsThoughFlashAnyPlayer).toBeUndefined();
+    expect(
+      face("The Blue Spirit", "Legendary Creature — Human Rogue Ally", "You may cast the first creature spell you cast each turn as though it had flash.").static[0],
+    ).toMatchObject({ castAsThoughFlash: { type: "creature" }, castAsThoughFlashFirstEachTurn: true });
+    // Not a spell phrase: left alone.
+    expect(face("Test", "Enchantment", "Any player may cast blue and green spells as though they had flash.").static).toEqual([]);
+  });
+
+  it("reads this turn's permission and the next spell's", () => {
+    const borne = face("Borne Upon a Wind", "Instant", "You may cast spells this turn as though they had flash.\nDraw a card.");
+    expect(borne.complete).toBe(true);
+    expect(borne.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "player-effect", duration: "end-of-turn", castAsThoughFlash: {} }, { kind: "draw", amount: 1 }],
+    });
+    expect(parseSentence("You may cast creature spells this turn as though they had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { type: "creature" } },
+    });
+    expect(parseSentence("The next sorcery spell you cast this turn can be cast as though it had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { type: "sorcery" }, next: true },
+    });
+    expect(parseSentence("The next spell of the chosen type you cast this turn can be cast as though it had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { ofChosenType: true }, next: true },
+    });
+  });
+});

@@ -442,6 +442,27 @@ static:chosen-creature-type-reads, static:chosen-type-in-addition. Still open:
 decision:choose-name-and-type-on-attach (Psychic Paper), two colours chosen as
 it enters (Seal of the Guildpact, Tablet of the Guilds).
 
+### Flash permissions for any player, first each turn, this turn, next spell — built 2026-10-31
+
+The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top
+group again, features only. The static `castAsThoughFlash` grant generalised
+(rule 601.3b): **`castAsThoughFlashAnyPlayer`** ("any player may cast …" —
+the filter read from the permanent's controller's side) and
+**`castAsThoughFlashFirstEachTurn`** ("the first creature spell you cast each
+turn", spells cast this turn before the permanent arrived counting); and a
+`player-effect`'s **`castAsThoughFlash: { filter?, next? }`** — "you may cast
+spells this turn as though they had flash", or with `next` the next matching
+spell only, used up by that spell's cast however it's cast, several at once
+(`Game.spendNextSpellFlash`); `ofChosenType` fixed as it resolves. Suspend
+now reads every flash permission (702.62a). Keys: flash-for-each-player,
+first-creature-spell-flash, flash-permission-this-turn,
+next-sorcery-as-though-flash. Proving cards: Vernal Equinox, Quick Sliver,
+Tidal Barracuda, Radagast of Rhosgobel, The Blue Spirit, Borne Upon a Wind,
+Emergence Zone, Winding Canyons, Alchemist's Refuge, Quicken, Progenitor's
+Icon. Still open: "until your next turn" with an enters-with-counter rider
+(Arlinn, the Pack's Hope); "the next creature card you **play**" (Scout's
+Warning — whether playing Dryad Arbor as a land spends it).
+
 ### A spell's own conditional flash — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top

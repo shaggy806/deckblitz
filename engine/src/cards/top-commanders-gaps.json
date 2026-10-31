@@ -729,7 +729,11 @@
   "effect:each-creature-damages-itself",
   "effect:each-creature-deals-damage-to-each-opponent",
   "effect:each-creature-deals-power-damage-to-target",
-  "effect:each-permanent-deals-damage"
+  "effect:each-permanent-deals-damage",
+  "effect:first-creature-spell-flash",
+  "effect:flash-for-each-player",
+  "effect:flash-permission-this-turn",
+  "effect:next-sorcery-as-though-flash"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

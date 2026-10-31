@@ -560,6 +560,20 @@ export function craftMaterials(phrase) {
   return { count, ...(phrase.startsWith("one or more") ? { orMore: true } : {}), filter, text: phrase };
 }
 
+/**
+ * The spells a flash permission names, between "cast" and "spells": nothing
+ * (every spell — `true`), a type phrase ("creature", "Sliver"), or two card
+ * types joined by "and" ("creature and enchantment" — either type). `null`
+ * for anything else.
+ */
+function flashSpellsFilter(words) {
+  if (words === undefined || words === "") return true;
+  const both = /^(\w+) and (\w+)$/.exec(words);
+  if (both) return CARD_TYPES.includes(both[1]) && CARD_TYPES.includes(both[2]) ? { typesAnyOf: [both[1], both[2]] } : null;
+  const filter = parseTypePhrase(words);
+  return filter === null || Object.keys(filter).length === 0 ? null : filter;
+}
+
 export function parseTypePhrase(phrase, { cards = false } = {}) {
   const words = phrase.trim().split(/\s+/);
   const filter = {};
@@ -2132,6 +2146,27 @@ export function parseSentence(sentence, ctx) {
   // other than their hands."
   if (re("until your next turn, your opponents can't cast spells from anywhere other than their hands").test(s)) {
     return { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" };
+  }
+  // A flash permission for this turn (rule 601.3b): "You may cast [creature]
+  // spells this turn as though they had flash" (Borne Upon a Wind, Winding
+  // Canyons), and for the next matching spell, "the next sorcery spell / the
+  // next spell of the chosen type you cast this turn can be cast as though
+  // it had flash" (Quicken, Progenitor's Icon — `next`).
+  if ((m = re("you may cast (?:(.+?) )?spells this turn as though they had flash").exec(s))) {
+    const filter = flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return { kind: "player-effect", duration: "end-of-turn", castAsThoughFlash: filter === true ? {} : { filter } };
+    }
+  }
+  if ((m = re("the next (?:(.+?) )?spell( of the chosen type)? you cast this turn can be cast as though it had flash").exec(s))) {
+    const filter = m[2] !== undefined ? (m[1] === undefined ? { ofChosenType: true } : null) : flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return {
+        kind: "player-effect",
+        duration: "end-of-turn",
+        castAsThoughFlash: filter === true ? { next: true } : { filter, next: true },
+      };
+    }
   }
   if ((m = re(`return (${TARGET}) to its owner's hand`).exec(s))) {
     // A spell is on the stack: "return target spell to its owner's hand"
@@ -5801,6 +5836,29 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // A flash permission (rule 601.3b): "You may cast spells as though they
+  // had flash" (Heliod, the Warped Eclipse), every player's with "Any
+  // player may cast creature and enchantment spells …" (Vernal Equinox —
+  // `castAsThoughFlashAnyPlayer`), and "You may cast the first creature
+  // spell you cast each turn as though it had flash" (The Blue Spirit —
+  // `castAsThoughFlashFirstEachTurn`).
+  if ((m = /^(You|Any player) may cast (?:(.+?) )?spells as though they had flash\.$/.exec(line))) {
+    const filter = flashSpellsFilter(m[2]);
+    if (filter !== null) {
+      return {
+        affects: { scope: "self" },
+        castAsThoughFlash: filter,
+        ...(m[1] === "Any player" ? { castAsThoughFlashAnyPlayer: true } : {}),
+        text,
+      };
+    }
+  }
+  if ((m = /^You may cast the first (?:(.+?) )?spell you cast each turn as though it had flash\.$/.exec(line))) {
+    const filter = flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return { affects: { scope: "self" }, castAsThoughFlash: filter, castAsThoughFlashFirstEachTurn: true, text };
+    }
+  }
   // A static step skip (rule 614.10): "skip your draw step", "players skip
   // their untap steps", "each player skips their untap step".
   if ((m = /^(Skip your|Players skip their|Each player skips their|Your opponents skip their|Each opponent skips their) (untap|upkeep|draw) steps?\.$/.exec(line))) {

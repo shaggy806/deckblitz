@@ -10678,7 +10678,10 @@ export class Game {
     // stop it as they stop the cast.
     const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
     if (prohibited !== null) return prohibited;
-    if (!def.types.includes("instant") && !def.keywords.includes("flash")) {
+    // "If you could begin to cast this card" (702.62a): an effect letting it
+    // be cast as though it had flash lets it be suspended then too (Quicken's
+    // ruling).
+    if (!def.types.includes("instant") && !def.keywords.includes("flash") && !this.castsAsThoughFlash(player, cardId)) {
       const timing = this.whyNotSorcerySpeed(player, `suspend ${def.name}`);
       if (timing !== null) return timing;
     }
@@ -15168,6 +15171,7 @@ export class Game {
     }
     this.state.players[player].spellsCastThisTurn += 1;
     (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId, player, castFrom));
+    this.spendNextSpellFlash(player, cardId);
     this.recordCastName(player, cardId);
     this.state.spellsCastThisTurn += 1;
     object.castFrom = castFrom;
@@ -27089,6 +27093,19 @@ export class Game {
         this.emit({ type: "prohibition-imposed", players: live, spells: false, abilities: false, monarch: true });
       },
       addPlayerEffect: (effect) => {
+        const flash = effect.castAsThoughFlash;
+        if (flash?.filter?.ofChosenType === true) {
+          // "The next spell of the chosen type" (Progenitor's Icon): the type
+          // chosen for the source as this resolves — as it last existed, if
+          // it has left (608.2h) — fixed from then on. Nothing chosen: no
+          // effect (its ruling).
+          const from = this.state.objects[source];
+          const chosen =
+            from?.chosenCreatureType ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenCreatureType);
+          if (chosen == null) return;
+          const { ofChosenType: _chosen, ...rest } = flash.filter;
+          effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
+        }
         (this.state.playerEffects ??= []).push(effect);
       },
       flipCoin: () => {
@@ -32068,18 +32085,68 @@ export class Game {
     return all.map((slot, i) => (i === slots[0] ? fitting[i] : slot));
   }
 
+  /** Whether some effect lets `player` cast `cardId` as though it had flash
+   * (rule 601.3b) — asked as the cast begins, before it's recorded:
+   *
+   * - a static of a permanent's (`castAsThoughFlash`): its controller's
+   *   spells, or with `castAsThoughFlashAnyPlayer` every player's ("any
+   *   player may cast …" — Vernal Equinox), the filter read from the
+   *   permanent's controller's side; with `castAsThoughFlashFirstEachTurn`
+   *   only while `player` has cast no matching spell yet this turn (Radagast
+   *   of Rhosgobel);
+   * - a player effect of `player`'s (`PlayerEffect.castAsThoughFlash`): "you
+   *   may cast spells this turn as though they had flash" (Borne Upon a
+   *   Wind), or "the next sorcery spell you cast this turn …" (Quicken),
+   *   which `spendNextSpellFlash` ends once that spell is cast. */
   private castsAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
-      if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
+      if (hasLostAbilities(this.state, this.registry, source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const flash = ability.castAsThoughFlash;
         if (flash === undefined) continue;
+        if (source.controller !== player && ability.castAsThoughFlashAnyPlayer !== true) continue;
         if (ability.condition !== undefined && !this.staticActive(source, ability)) continue;
-        if (flash === true || matchesFilter(this.state, this.registry, cardId, flash, { you: player })) return true;
+        const filter = flash === true ? undefined : flash;
+        const context = { you: source.controller, source: source.id };
+        if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, context)) continue;
+        // "The first creature spell you cast each turn": none cast yet.
+        if (
+          ability.castAsThoughFlashFirstEachTurn === true &&
+          (this.state.players[player].spellsCastThisTurnAs ?? []).some(
+            ({ id: cast, spell }) =>
+              filter === undefined ||
+              matchesFilter(this.state, this.registry, cast, filter, { ...context, snapshot: spell }),
+          )
+        ) {
+          continue;
+        }
+        return true;
+      }
+    }
+    for (const effect of this.state.playerEffects ?? []) {
+      const flash = effect.castAsThoughFlash;
+      if (flash === undefined || effect.owner !== player) continue;
+      if (flash.filter === undefined || matchesFilter(this.state, this.registry, cardId, flash.filter, { you: player })) {
+        return true;
       }
     }
     return false;
+  }
+
+  /** "The next [filter] spell you cast this turn can be cast as though it had
+   * flash" (Quicken): `player` has just cast `cardId` (rule 601.2i), so each
+   * of their `next` flash permissions it matches ends — however it was cast,
+   * and all of them at once (Quicken's rulings). */
+  private spendNextSpellFlash(player: PlayerId, cardId: ObjectId): void {
+    const effects = this.state.playerEffects;
+    if (effects === undefined) return;
+    const spent = (e: (typeof effects)[number]): boolean =>
+      e.owner === player &&
+      e.castAsThoughFlash?.next === true &&
+      (e.castAsThoughFlash.filter === undefined ||
+        matchesFilter(this.state, this.registry, cardId, e.castAsThoughFlash.filter, { you: player }));
+    if (effects.some(spent)) this.state.playerEffects = effects.filter((e) => !spent(e));
   }
 
   /** See the `"restrict"` {@link EffectSpec}: `target`'s combat restrictions

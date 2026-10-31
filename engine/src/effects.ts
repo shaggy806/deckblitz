@@ -4244,6 +4244,15 @@ export type EffectSpec =
         readonly lands?: true;
       };
       readonly castFromHandFree?: { readonly filter?: CardFilter };
+      /** "You may cast spells this turn as though they had flash" (Borne
+       * Upon a Wind, Emergence Zone; Winding Canyons' `filter` "creature
+       * spells") — rule 601.3b; with `next`, "**the next** sorcery spell you
+       * cast this turn can be cast as though it had flash" (Quicken): the
+       * next matching spell the controller casts uses it up, whenever it's
+       * cast. A filter's `ofChosenType` is the source's chosen creature type
+       * as this resolves, fixed from then on (Progenitor's Icon — nothing
+       * chosen, no effect). */
+      readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
       /** "You may cast Zombie spells from your graveyard this turn"
        * (Liliana, Untouched by Death's −3): a permission over the
        * controller's graveyard cards matching `filter`, the ones that reach
@@ -12609,6 +12618,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.castFromHandFree !== undefined ? { castFromHandFree: spec.castFromHandFree } : {}),
+        ...(spec.castAsThoughFlash !== undefined ? { castAsThoughFlash: spec.castAsThoughFlash } : {}),
         ...(spec.castFromGraveyard !== undefined
           ? { castFromGraveyard: { filter: spec.castFromGraveyard.filter, source: ctx.source } }
           : {}),
