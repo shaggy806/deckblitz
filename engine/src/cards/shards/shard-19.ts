@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbolish from "../pool/abolish.js";
 import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
@@ -903,6 +904,7 @@ import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-
 
 const shard: CardShard = {
   pool: [
+    _poolAbolish,
     _poolAbyssalGorestalker,
     _poolAcademyWall,
     _poolAccessTunnel,

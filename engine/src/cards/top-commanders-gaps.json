@@ -771,7 +771,10 @@
   "static:next-spell-uncounterable",
   "effect:next-spell-has-convoke",
   "cost:kicker-nonmana-cost",
-  "cost:life-per-target"
+  "cost:life-per-target",
+  "cost:alt-cost-discard-cards",
+  "cost:alt-cost-exile-card-sets-x",
+  "cost:alt-cost-reveal-hand"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

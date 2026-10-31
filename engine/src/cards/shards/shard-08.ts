@@ -519,6 +519,7 @@ import _poolNihilith from "../pool/nihilith.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNoggleBridgebreaker from "../pool/noggle-bridgebreaker.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
+import _poolNourishingShoal from "../pool/nourishing-shoal.js";
 import _poolNulltreadGargantuan from "../pool/nulltread-gargantuan.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
@@ -1410,6 +1411,7 @@ const shard: CardShard = {
     _poolNinjasBlades,
     _poolNoggleBridgebreaker,
     _poolNorthPolePatrol,
+    _poolNourishingShoal,
     _poolNulltreadGargantuan,
     _poolOakhameRanger,
     _poolOathOfGideon,

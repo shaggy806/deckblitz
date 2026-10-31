@@ -867,6 +867,9 @@ export type StaticCondition =
        * bounds — Howltooth Hollow's "if each player has no cards in hand".
        * Your own hand when absent. */
       readonly who?: "you" | "each-player";
+      /** Only the cards matching this count — Land Grant's "if you have no
+       * **land** cards in hand" (`atMost: 0`, `{ type: "land" }`). */
+      readonly filter?: CardFilter;
     }
   /** How many cards are in a library, inclusive bounds: yours, or — with
    * `"any-player"` — some one player's still in the game, yours included
@@ -3491,12 +3494,38 @@ export interface CardDefinition {
    * and return a basic land you control" with `mana` `"{1}"`): the same,
    * paid as an activated ability's `returnToHand` cost is. Neither goes
    * beside another cost that asks as it's paid.
+   *
+   * `exileFromHand.manaValueX` is the Shoals' "you may exile a red card
+   * **with mana value X** from your hand rather than pay this spell's mana
+   * cost" (Blazing Shoal): the variant is offered once per X a matching card
+   * in hand has (`xCost` `minX` = `maxX`), X is that announced value (rule
+   * 601.2b, 107.3 — the spell's mana value on the stack counts it, 202.3e),
+   * and the card exiled must have that mana value.
+   *
+   * `discard` is "you may discard a Plains card rather than pay this spell's
+   * mana cost" (Abolish): `mana` `"{0}"`, `discard: { filter, text }`, and
+   * `others` more cards of any kind besides — Foil's "an Island card **and
+   * another card**". Offered only while the hand holds them besides the
+   * spell; which ones is chosen as the cost is paid, once the spell is on
+   * the stack (601.2h), the filtered card first.
+   *
+   * `revealHand` is Land Grant's "if you have no land cards in hand, you may
+   * **reveal your hand** rather than pay this spell's mana cost" (with that
+   * `condition`): every player sees the caster's hand as the cost is paid
+   * (rule 701.20a), the spell already on the stack.
    */
   readonly alternativeCost: {
     readonly mana: string;
     readonly keyword?: "spectacle" | "surge" | "prowl";
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
-    readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly exileFromHand?: {
+      readonly filter: CardFilter;
+      readonly count?: number;
+      readonly text: string;
+      readonly manaValueX?: true;
+    };
+    readonly discard?: { readonly filter: CardFilter; readonly others?: number; readonly text: string };
+    readonly revealHand?: true;
     readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly payLife?: number;

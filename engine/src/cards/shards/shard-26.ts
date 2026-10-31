@@ -404,6 +404,7 @@ import _poolKrosanCloudscraper from "../pool/krosan-cloudscraper.js";
 import _poolKyodaiSoulOfKamigawa from "../pool/kyodai-soul-of-kamigawa.js";
 import _poolKyrenLegate from "../pool/kyren-legate.js";
 import _poolKyrenToy from "../pool/kyren-toy.js";
+import _poolLandGrant from "../pool/land-grant.js";
 import _poolLeafCrownedElder from "../pool/leaf-crowned-elder.js";
 import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
@@ -1275,6 +1276,7 @@ const shard: CardShard = {
     _poolKyodaiSoulOfKamigawa,
     _poolKyrenLegate,
     _poolKyrenToy,
+    _poolLandGrant,
     _poolLeafCrownedElder,
     _poolLegacyWeapon,
     _poolLeoninLightscribe,

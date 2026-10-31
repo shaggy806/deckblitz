@@ -725,12 +725,17 @@ function evalStaticCondition(
       const inBounds = (n: number): boolean =>
         (condition.atMost === undefined || n <= condition.atMost) &&
         (condition.atLeast === undefined || n >= condition.atLeast);
+      // "If you have no **land** cards in hand" (Land Grant): only the
+      // cards matching `filter` count.
+      const handCount = (p: PlayerId): number => {
+        const cards = state.zones.perPlayer[p]?.hand ?? [];
+        const filter = condition.filter;
+        return filter === undefined ? cards.length : cards.filter((id) => matchesFilter(state, registry, id, filter, { you: p })).length;
+      };
       if (condition.who === "each-player") {
-        return state.turnOrder
-          .filter((p) => state.players[p]?.hasLost !== true)
-          .every((p) => inBounds(state.zones.perPlayer[p]?.hand.length ?? 0));
+        return state.turnOrder.filter((p) => state.players[p]?.hasLost !== true).every((p) => inBounds(handCount(p)));
       }
-      return inBounds(state.zones.perPlayer[you].hand.length);
+      return inBounds(handCount(you));
     }
     case "spells-cast-this-game":
       return (state.players[you]?.spellNamesCastThisGame?.[condition.named] ?? 0) >= condition.atLeast;

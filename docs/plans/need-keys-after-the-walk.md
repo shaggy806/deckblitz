@@ -719,6 +719,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   Then `cost:kicker-nonmana-cost` with `cost:life-per-target`: `kicker.also`'s `returnToHand`
   and `tapUntapped` (a plain kicker and entwine too) and `additionalCost.payLifePerTarget`
   (2 keys, 5 freed, 6 proving cards).
+  Then `cost:alt-cost-discard-cards` with the Shoals' and Land Grant's keys: an alternative
+  cost's `discard`, `exileFromHand.manaValueX` and `revealHand` (3 keys, 6 freed, 5 proving
+  cards).
 
 ## Rough size
 

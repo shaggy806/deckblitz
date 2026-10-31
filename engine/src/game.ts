@@ -3711,7 +3711,22 @@ export class Game {
           ? def.additionalCost.sacrifice
           : undefined;
       let sacrificeRange: { readonly least: number; readonly most: number } | null = null;
-      if (this.withFace(card, face ?? 0, () => this.costDependsOnTargets(player, card, def, variantCost))) {
+      // "Exile a red card with mana value X from your hand rather than pay"
+      // (the Shoals): X is announced as it's cast (rules 107.3a, 601.2b), so
+      // the variant is offered once per mana value a matching card in hand
+      // has — the card itself never one.
+      const pitchX = altCost === true && def.alternativeCost?.exileFromHand?.manaValueX === true;
+      if (pitchX) {
+        const pitch = def.alternativeCost!.exileFromHand!;
+        const values = new Set<number>();
+        for (const id of this.discardCandidates(player, pitch.filter, card)) {
+          values.add(manaValueOfObject(this.registry, this.state.objects[id]));
+        }
+        const xs = [...values].sort((a, b) => a - b).filter((x) => castsWith(0, undefined, x));
+        if (xs.length === 0) continue;
+        perX = xs;
+        manaAffordable = true;
+      } else if (this.withFace(card, face ?? 0, () => this.costDependsOnTargets(player, card, def, variantCost))) {
         const bounds = this.withFace(card, face ?? 0, () =>
           this.targetCountBoundsFor(def, player, card, kicked, overload),
         );
@@ -3976,7 +3991,11 @@ export class Game {
             }
           : altCost === true && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
-            : altCost === true && (def.alternativeCost?.sacrifice !== undefined || def.alternativeCost?.returnToHand !== undefined)
+            : altCost === true &&
+                (def.alternativeCost?.sacrifice !== undefined ||
+                  def.alternativeCost?.returnToHand !== undefined ||
+                  def.alternativeCost?.discard !== undefined ||
+                  def.alternativeCost?.revealHand === true)
               ? {
                   altCostText: [
                     ...(def.alternativeCost.mana !== "{0}" ? [`pay ${def.alternativeCost.mana}`] : []),
@@ -3984,6 +4003,8 @@ export class Game {
                     ...(def.alternativeCost.returnToHand !== undefined
                       ? [`return ${def.alternativeCost.returnToHand.text} to hand`]
                       : []),
+                    ...(def.alternativeCost.discard !== undefined ? [`discard ${def.alternativeCost.discard.text}`] : []),
+                    ...(def.alternativeCost.revealHand === true ? ["reveal your hand"] : []),
                   ].join(", "),
                 }
               : altCost === true && alternative?.payEnergy !== undefined
@@ -13085,6 +13106,16 @@ export class Game {
       ) {
         return `${def.name}'s alternative cost needs ${alt.tapCreatures.count} untapped creatures`;
       }
+      // "Exile a red card with mana value X from your hand" (the Shoals):
+      // one with the X announced (rules 107.3a, 601.2b).
+      const pitch = alt.exileFromHand;
+      if (
+        pitch?.manaValueX === true &&
+        this.discardCandidates(player, { ...pitch.filter, manaValue: { op: "eq", n: Math.max(0, Math.floor(xValue)) } }, cardId)
+          .length < (pitch.count ?? 1)
+      ) {
+        return `${player} has no ${pitch.text} with mana value ${xValue} to exile for ${def.name}`;
+      }
     }
     // It names the permission a graveyard-permission cast spends, or which of
     // several escapes or flashbacks an escape or flashback cast uses.
@@ -15003,7 +15034,9 @@ export class Game {
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
       def.additionalCost?.sacrificeCount === "x" ||
-      def.additionalCost?.discard === "x";
+      def.additionalCost?.discard === "x" ||
+      // The Shoals' "exile a … card with mana value X" (rule 107.3a).
+      (altCost && def.alternativeCost?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
@@ -15537,6 +15570,22 @@ export class Game {
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
     }
+    // "Discard a Plains card rather than pay" (Abolish), "an Island card and
+    // another card" (Foil): chosen as the cost is paid (601.2h), the
+    // filtered card first, then the others from what's left.
+    const altDiscard = altCost ? def.alternativeCost?.discard : undefined;
+    if (altDiscard !== undefined) {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, 1, false, altDiscard.filter);
+        if ((altDiscard.others ?? 0) > 0) this.discardByEffect({ kind: "player", player }, altDiscard.others ?? 0);
+      });
+      this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
+    // "Reveal your hand rather than pay" (Land Grant — rule 701.20a): every
+    // player sees it, the spell already on the stack.
+    if (altCost && def.alternativeCost?.revealHand === true) {
+      this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
+    }
     // Retrace's land card (rule 702.81a), chosen as the cost is paid.
     if (via === "retrace") {
       this.withDecisionSource(cardId, () => {
@@ -15603,7 +15652,14 @@ export class Game {
           ? def.evoke.exileFromHand
           : undefined;
     const beholdCost =
-      (pitchExile !== undefined ? Game.pitchSpec(pitchExile) : undefined) ??
+      (pitchExile !== undefined
+        ? Game.pitchSpec(
+            // "… with mana value X" (the Shoals): the X announced.
+            "manaValueX" in pitchExile && pitchExile.manaValueX === true
+              ? { ...pitchExile, filter: { ...pitchExile.filter, manaValue: { op: "eq", n: chosenX } } }
+              : pitchExile,
+          )
+        : undefined) ??
       chosenOption?.behold ??
       (kicked && (def.kicker?.keyword === "behold" || def.kicker?.keyword === "reveal") ? def.kicker.behold : undefined) ??
       def.additionalCost?.behold ??
@@ -37518,7 +37574,12 @@ export class Game {
   ): {
     readonly mana: string;
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
-    readonly exileFromHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    readonly exileFromHand?: {
+      readonly filter: CardFilter;
+      readonly count?: number;
+      readonly text: string;
+      readonly manaValueX?: true;
+    };
     readonly payLife?: number;
     readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
@@ -37538,7 +37599,7 @@ export class Game {
       // returns can be paid (601.2h).
       const own = def.alternativeCost;
       if (own.condition !== undefined || own.payLife !== undefined || own.exileFromHand !== undefined ||
-        own.sacrifice !== undefined || own.returnToHand !== undefined) {
+        own.sacrifice !== undefined || own.returnToHand !== undefined || own.discard !== undefined) {
         if (caster === undefined) return null;
         const card = this.state.objects[cardId];
         if (own.condition !== undefined &&
@@ -37557,6 +37618,13 @@ export class Game {
         if (own.returnToHand !== undefined &&
           permanentCount(this.state, this.battlefieldMatching(caster, { ...own.returnToHand.filter, controlledBy: "you" })) <
             (own.returnToHand.count ?? 1)) {
+          return null;
+        }
+        // "Discard a Plains card" (Abolish), "an Island card and another
+        // card" (Foil): in hand besides the spell itself (601.2h).
+        if (own.discard !== undefined &&
+          (this.discardCandidates(caster, own.discard.filter, cardId).length === 0 ||
+            this.discardCandidates(caster, undefined, cardId).length < 1 + (own.discard.others ?? 0))) {
           return null;
         }
       }

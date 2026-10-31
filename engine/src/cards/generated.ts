@@ -46,6 +46,7 @@ import _poolAbigaleEloquentFirstYear from "./pool/abigale-eloquent-first-year.js
 import _poolAbigalePoetLaureate from "./pool/abigale-poet-laureate.js";
 import _poolAbjure from "./pool/abjure.js";
 import _poolAbnormalEndurance from "./pool/abnormal-endurance.js";
+import _poolAbolish from "./pool/abolish.js";
 import _poolAbolisherOfBloodlines from "./pool/abolisher-of-bloodlines.js";
 import _poolAbominableTreefolk from "./pool/abominable-treefolk.js";
 import _poolAbominationIrradiatedBrute from "./pool/abomination-irradiated-brute.js";
@@ -8284,6 +8285,7 @@ import _poolFoggySwampSpiritKeeper from "./pool/foggy-swamp-spirit-keeper.js";
 import _poolFoggySwampVinebender from "./pool/foggy-swamp-vinebender.js";
 import _poolFogwalker from "./pool/fogwalker.js";
 import _poolFogwellsGym from "./pool/fogwells-gym.js";
+import _poolFoil from "./pool/foil.js";
 import _poolFolkMedicine from "./pool/folk-medicine.js";
 import _poolFolkOfAnHavva from "./pool/folk-of-an-havva.js";
 import _poolFolkOfThePines from "./pool/folk-of-the-pines.js";
@@ -12829,6 +12831,7 @@ import _poolLance from "./pool/lance.js";
 import _poolLancerSliver from "./pool/lancer-sliver.js";
 import _poolLancersEnKor from "./pool/lancers-en-kor.js";
 import _poolLandCap from "./pool/land-cap.js";
+import _poolLandGrant from "./pool/land-grant.js";
 import _poolLandLeeches from "./pool/land-leeches.js";
 import _poolLandTax from "./pool/land-tax.js";
 import _poolLandbindRitual from "./pool/landbind-ritual.js";
@@ -15630,6 +15633,7 @@ import _poolNotionThief from "./pool/notion-thief.js";
 import _poolNotoriousAssassin from "./pool/notorious-assassin.js";
 import _poolNotoriousThrong from "./pool/notorious-throng.js";
 import _poolNourish from "./pool/nourish.js";
+import _poolNourishingShoal from "./pool/nourishing-shoal.js";
 import _poolNovaChaser from "./pool/nova-chaser.js";
 import _poolNovaCleric from "./pool/nova-cleric.js";
 import _poolNovaFlame from "./pool/nova-flame.js";
@@ -20404,6 +20408,7 @@ import _poolSicarianInfiltrator from "./pool/sicarian-infiltrator.js";
 import _poolSickAndTired from "./pool/sick-and-tired.js";
 import _poolSicken from "./pool/sicken.js";
 import _poolSickeningDreams from "./pool/sickening-dreams.js";
+import _poolSickeningShoal from "./pool/sickening-shoal.js";
 import _poolSickleDancer from "./pool/sickle-dancer.js";
 import _poolSickleRipper from "./pool/sickle-ripper.js";
 import _poolSickleslicer from "./pool/sickleslicer.js";
@@ -27549,6 +27554,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbigalePoetLaureate,
   _poolAbjure,
   _poolAbnormalEndurance,
+  _poolAbolish,
   _poolAbolisherOfBloodlines,
   _poolAbominableTreefolk,
   _poolAbominationIrradiatedBrute,
@@ -35787,6 +35793,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFoggySwampVinebender,
   _poolFogwalker,
   _poolFogwellsGym,
+  _poolFoil,
   _poolFolkMedicine,
   _poolFolkOfAnHavva,
   _poolFolkOfThePines,
@@ -40332,6 +40339,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLancerSliver,
   _poolLancersEnKor,
   _poolLandCap,
+  _poolLandGrant,
   _poolLandLeeches,
   _poolLandTax,
   _poolLandbindRitual,
@@ -43133,6 +43141,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNotoriousAssassin,
   _poolNotoriousThrong,
   _poolNourish,
+  _poolNourishingShoal,
   _poolNovaChaser,
   _poolNovaCleric,
   _poolNovaFlame,
@@ -47907,6 +47916,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSickAndTired,
   _poolSicken,
   _poolSickeningDreams,
+  _poolSickeningShoal,
   _poolSickleDancer,
   _poolSickleRipper,
   _poolSickleslicer,
@@ -55065,6 +55075,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/abigale-poet-laureate": _poolAbigalePoetLaureate,
   "pool/abjure": _poolAbjure,
   "pool/abnormal-endurance": _poolAbnormalEndurance,
+  "pool/abolish": _poolAbolish,
   "pool/abolisher-of-bloodlines": _poolAbolisherOfBloodlines,
   "pool/abominable-treefolk": _poolAbominableTreefolk,
   "pool/abomination-irradiated-brute": _poolAbominationIrradiatedBrute,
@@ -63303,6 +63314,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/foggy-swamp-vinebender": _poolFoggySwampVinebender,
   "pool/fogwalker": _poolFogwalker,
   "pool/fogwells-gym": _poolFogwellsGym,
+  "pool/foil": _poolFoil,
   "pool/folk-medicine": _poolFolkMedicine,
   "pool/folk-of-an-havva": _poolFolkOfAnHavva,
   "pool/folk-of-the-pines": _poolFolkOfThePines,
@@ -67848,6 +67860,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lancer-sliver": _poolLancerSliver,
   "pool/lancers-en-kor": _poolLancersEnKor,
   "pool/land-cap": _poolLandCap,
+  "pool/land-grant": _poolLandGrant,
   "pool/land-leeches": _poolLandLeeches,
   "pool/land-tax": _poolLandTax,
   "pool/landbind-ritual": _poolLandbindRitual,
@@ -70649,6 +70662,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/notorious-assassin": _poolNotoriousAssassin,
   "pool/notorious-throng": _poolNotoriousThrong,
   "pool/nourish": _poolNourish,
+  "pool/nourishing-shoal": _poolNourishingShoal,
   "pool/nova-chaser": _poolNovaChaser,
   "pool/nova-cleric": _poolNovaCleric,
   "pool/nova-flame": _poolNovaFlame,
@@ -75423,6 +75437,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sick-and-tired": _poolSickAndTired,
   "pool/sicken": _poolSicken,
   "pool/sickening-dreams": _poolSickeningDreams,
+  "pool/sickening-shoal": _poolSickeningShoal,
   "pool/sickle-dancer": _poolSickleDancer,
   "pool/sickle-ripper": _poolSickleRipper,
   "pool/sickleslicer": _poolSickleslicer,

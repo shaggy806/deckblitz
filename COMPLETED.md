@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: alternative costs paid from the hand** (2026-10-31;
+  `cost:alt-cost-discard-cards`, `cost:alt-cost-exile-card-sets-x`, `cost:alt-cost-reveal-hand`) —
+  `alternativeCost.discard` (with `others`), `exileFromHand.manaValueX` (X from the exiled card,
+  rule 107.3a) and `revealHand` (701.20a), and `hand-size`'s `filter`; 6 freed. Abolish, Foil,
+  Sickening Shoal, Nourishing Shoal, Land Grant.
 - **Need-keys Phase 2: kicker costs that aren't mana, and life per target** (2026-10-31;
   `cost:kicker-nonmana-cost`, `cost:life-per-target`) — `kicker.also`'s `returnToHand` and
   `tapUntapped` beside its sacrifice, on a plain kicker and entwine (rule 702.33a, 702.42a), and

@@ -4291,6 +4291,32 @@ export function parseFace(face, ctx = {}) {
       };
       continue;
     }
+    // The Shoals (rule 118.9, X announced — 107.3a): "you may exile a red
+    // card with mana value X from your hand rather than pay this spell's mana
+    // cost" — `exileFromHand.manaValueX`.
+    if ((m = /^You may exile (an? (?:white|blue|black|red|green) card) with mana value X from your hand rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      out.alternativeCost = { mana: "{0}", exileFromHand: { ...pitchExile(m[1]), manaValueX: true } };
+      continue;
+    }
+    // "You may discard a Plains card [and another card] rather than pay this
+    // spell's mana cost" (Abolish, Foil): `alternativeCost.discard`.
+    if ((m = /^You may discard (an? (Plains|Island|Swamp|Mountain|Forest) card( and another card)?) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      out.alternativeCost = {
+        mana: "{0}",
+        discard: { filter: { subtype: m[2] }, ...(m[3] !== undefined ? { others: 1 } : {}), text: m[1] },
+      };
+      continue;
+    }
+    // "If you have no land cards in hand, you may reveal your hand rather
+    // than pay this spell's mana cost" (Land Grant — rule 701.20a).
+    if (/^If you have no land cards in hand, you may reveal your hand rather than pay (?:this spell's|~'s) mana cost\.$/.test(line)) {
+      out.alternativeCost = {
+        mana: "{0}",
+        revealHand: true,
+        condition: { kind: "hand-size", atMost: 0, filter: { type: "land" } },
+      };
+      continue;
+    }
     // Mercadian Masques' free spells (rule 118.9): "you may sacrifice a
     // Mountain rather than pay this spell's mana cost" (Crash, Fireblast's
     // two), "you may return three Islands you control to their owner's hand

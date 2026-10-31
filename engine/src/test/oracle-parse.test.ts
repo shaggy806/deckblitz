@@ -4471,6 +4471,30 @@ describe("kicker and entwine costs that aren't mana, and life per target", () =>
   });
 });
 
+describe("alternative costs paid from the hand: discard, exile for X, reveal", () => {
+  const alt = (name: string, oracle_text: string) =>
+    parseFace({ name, type_line: "Instant", oracle_text }, { tokenFor: () => null }).alternativeCost;
+  it("reads a discard of a land-type card, and one more card", () => {
+    expect(alt("Abolish", "You may discard a Plains card rather than pay this spell's mana cost.\nDestroy target artifact or enchantment.")).toEqual({
+      mana: "{0}",
+      discard: { filter: { subtype: "Plains" }, text: "a Plains card" },
+    });
+    expect(alt("Foil", "You may discard an Island card and another card rather than pay this spell's mana cost.\nCounter target spell.")).toEqual({
+      mana: "{0}",
+      discard: { filter: { subtype: "Island" }, others: 1, text: "an Island card and another card" },
+    });
+  });
+
+  it("reads the Shoals' card with mana value X, and Land Grant's revealed hand", () => {
+    expect(
+      alt("Sickening Shoal", "You may exile a black card with mana value X from your hand rather than pay this spell's mana cost.\nTarget creature gets -X/-X until end of turn."),
+    ).toEqual({ mana: "{0}", exileFromHand: { filter: { colors: ["B"] }, text: "a black card", manaValueX: true } });
+    expect(
+      alt("Land Grant", "If you have no land cards in hand, you may reveal your hand rather than pay this spell's mana cost.\nSearch your library for a Forest card, reveal that card, put it into your hand, then shuffle."),
+    ).toEqual({ mana: "{0}", revealHand: true, condition: { kind: "hand-size", atMost: 0, filter: { type: "land" } } });
+  });
+});
+
 describe("creatures in a blocking relation (blockingRelation)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

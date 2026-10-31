@@ -667,6 +667,7 @@ import _poolShivanEmissary from "../pool/shivan-emissary.js";
 import _poolShizoDeathsStorehouse from "../pool/shizo-deaths-storehouse.js";
 import _poolShorelineSalvager from "../pool/shoreline-salvager.js";
 import _poolShrewdNegotiation from "../pool/shrewd-negotiation.js";
+import _poolSickeningShoal from "../pool/sickening-shoal.js";
 import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolShizoDeathsStorehouse,
     _poolShorelineSalvager,
     _poolShrewdNegotiation,
+    _poolSickeningShoal,
     _poolSidisisPet,
     _poolSilkbindFaerie,
     _poolSilkguard,

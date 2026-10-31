@@ -563,6 +563,20 @@ Yawning Portal. Not built: "the next spell you cast this turn has
 improvise" (Archway of Innovation; convoke is built, below), and a
 `hasConvoke` filter still reads only a printed convoke.
 
+### Alternative costs paid from the hand: discard, exile for X, reveal — built 2026-10-31
+
+The need-keys Phase 2 family `cost:alt-cost-discard-cards` with
+cost:alt-cost-exile-card-sets-x and cost:alt-cost-reveal-hand, features only
+(rule 118.9). `alternativeCost.discard` ("discard a Plains card", `others`
+for Foil's "and another card"), chosen as the cost is paid (601.2h);
+`exileFromHand.manaValueX` (the Shoals: the variant offered once per X a
+matching card in hand has, X announced — 107.3a, 601.2b — and counted in the
+mana value on the stack, 202.3e); `revealHand` (701.20a) under a `hand-size`
+condition that now takes a `filter` ("no land cards in hand"). The scaffolder
+reads all three lines. Proving cards: Abolish, Foil, Sickening Shoal,
+Nourishing Shoal, Land Grant. Left to `author-freed`: Flameshot, Outbreak,
+Snag, Blazing Shoal, Disrupting Shoal, Shining Shoal.
+
 ### Kicker costs that aren't mana, and life per target — built 2026-10-31
 
 The need-keys Phase 2 family `cost:kicker-nonmana-cost` with
