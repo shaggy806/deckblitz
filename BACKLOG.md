@@ -300,11 +300,24 @@ section keeps only what to do next.
   Fluctuator, Eidolon of Obstruction, Carth the Lion) and each permanent of a kind deals damage
   (2026-10-31: `each-deals-damage` — its power or N, to itself, a target, the trigger's object or
   each opponent, each permanent its own source, one damage event; 8 freed, 6 proving cards —
-  Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko, Signature Slam, Alpha Brawl).
-  **682 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:cast-and-activate-restrictions`'s flash grants (14), `effect:search-destination-by-type`
-  (14), `condition:filter-dynamic-compare`'s shared types (14), `effect:attach-extensions` (13),
-  `static:grant-static-ability` (13).
+  Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko, Signature Slam, Alpha Brawl),
+  flash permissions (2026-10-31: `castAsThoughFlashAnyPlayer`, `castAsThoughFlashFirstEachTurn`,
+  the player-effect `castAsThoughFlash { filter?, next? }` spent by the next matching spell,
+  suspend reading every flash permission; 3 freed — Scout's Warning ("play") and Arlinn, the
+  Pack's Hope left; 11 proving cards — Vernal Equinox, Quick Sliver, Tidal Barracuda, Radagast of
+  Rhosgobel, The Blue Spirit, Borne Upon a Wind, Emergence Zone, Winding Canyons, Alchemist's
+  Refuge, Quicken, Progenitor's Icon) and a library search's finds card by card (2026-10-31:
+  `search-library.instead` — by the card, a condition, the searcher's choice or a split of one,
+  to the graveyard or under another's control — `withCounters`, `who: "that-player"`; 5 freed, 8
+  proving cards — Jarad's Orders, Dina's Guidance, Ruin in Their Wake, Guidelight Pathmaker,
+  Rootweaver Druid, Neoform, Magmatic Hellkite, Vision Quest). **691 freed cards wait for
+  `author-freed`** (`cards:needs -- --stale`); the user authors them in one sweep once the
+  reasonable keys are built. Building now, from 2026-10-31: three local agents (the shared-type
+  and same-name filters; attach extensions and granted statics; random choice and linked-exile
+  returns) and two cloud sessions (the combat-blocking families; graveyard casting and spell
+  keyword grants). Next after those: `static:pt-per-amount` (13) with `effect:set-base-power-only`
+  (12), `effect:this-way-results` (12) with `effect:distribute-counters` (12), `keyword:enlist`
+  (12) with `keyword:crew` (12), `keyword:hexproof-from-colors` (13).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -509,6 +522,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).
 - **A processor's move from exile reads as "takes"** — the log says "Alice takes Hill Giant" when a processor puts an opponent's exiled card into its owner's graveyard (found 2026-10-31).
 - **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet).
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.

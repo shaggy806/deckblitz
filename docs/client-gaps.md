@@ -5,6 +5,11 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **Cultivate's split prompt doesn't say which find goes where** (found 2026-10-31). The older
+  `restDestination` split (Cultivate, Kodama's Reach) asks "Choose up to 2 cards" without saying
+  that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards
+  to `search-library.instead` with `pick: "one"` (built 2026-10-31), which asks its own prompt.
+
 - **A processor's move from exile reads as "takes"** (found 2026-10-31). When a processor puts an
   opponent's exiled card into its owner's graveyard (Wasteland Strangler, `look-and-choose` with
   `zone: "exile"`), the log says "Alice takes Hill Giant", the wording of a card taken into a
