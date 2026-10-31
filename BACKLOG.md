@@ -218,10 +218,17 @@ section keeps only what to do next.
   activated (rule 107.3a) on the activation's existing `xCost`, up to the loyalty it has
   (606.6), the client's X prompt unchanged; v2 weighs each X from 1 up, v1 keeps a counter;
   "+X" has no card yet; 12 freed, 3 proving cards — Chandra Nalaar, Chandra, Flamecaller,
-  Tezzeret the Seeker).
-  **556 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `mechanic:meld` (15), `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
-  `effect:cast-and-activate-restrictions` (15).
+  Tezzeret the Seeker),
+  meld (2026-10-31: rules 701.42 and 712.4 — the `meld` effect exiles a meld card and its
+  counterpart, both owned and controlled, and puts them onto the battlefield as one new object,
+  `GameObject.melded`, with the combined back face's characteristics (a definition's `meldOf`)
+  and the fronts' mana values summed; several counterparts asked on `choose-permanents`; the
+  `meld-ready` intervening if; leaving, it is two cards, and a blink, an O-Ring or a "with this"
+  exile finds both (`leftWith`, mutate's components too); 11 freed, 4 proving cards — Graf Rats,
+  Chittering Host, Hanweir Battlements, Hanweir, the Writhing Township).
+  **567 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
+  `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -290,6 +297,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
 - **"Add one mana of the chosen color" with no colour chosen adds any colour**: the rulings say none (Shimmerwilds Growth; Heraldic Banner and Big Apple, 3 a.m. share the fallback). Only an object that never entered can be asked; found by B249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).

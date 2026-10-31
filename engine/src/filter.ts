@@ -989,6 +989,16 @@ export function printedManaCost(registry: CardRegistry, object: GameObject): str
   const override = manaCostOverride(object);
   if (override !== undefined) return override;
   const def = registry.get(printedCardName(object));
+  // A melded permanent: the combined mana cost of its cards' front faces
+  // (rules 202.3c, 712.8g) — but a copy of one (whose copy effect reads
+  // before its melded face) has its combined face's, none (202.3c).
+  const melded = object.melded;
+  if (melded !== undefined && def.name === melded.into) {
+    const costs = [object.cardName, ...melded.with.map((card) => card.cardName)]
+      .map((name) => (registry.has(name) ? registry.get(name).manaCost : null))
+      .filter((cost): cost is string => cost !== null);
+    return costs.length > 0 ? costs.join("") : null;
+  }
   const front = def.faces?.[0];
   if (def.transform === true && front !== undefined && front !== def.name && registry.has(front)) {
     return registry.get(front).manaCost;

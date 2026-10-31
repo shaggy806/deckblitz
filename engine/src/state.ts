@@ -674,6 +674,27 @@ export interface GameObject {
     readonly timesMutated: number;
   };
   /**
+   * A melded permanent (rules 701.42, 712.4): one object represented by two
+   * cards of a meld pair — this object's own card and `with`'s — put onto
+   * the battlefield combined, their back faces up (712.14c). It has only the
+   * characteristics of the combined back face `into` (712.8g — a registered
+   * definition whose `meldOf` names the pair; {@link faceName} returns it),
+   * and its mana value is its front faces' summed (202.3c). As it leaves the
+   * battlefield one permanent leaves and both cards go to the new zone
+   * (712.21), `with` as a card of its own. Set as it enters
+   * (`Game.meldPair`), cleared as it leaves.
+   */
+  melded?: MeldedInfo;
+  /**
+   * The other cards a merged or melded permanent became as it left the
+   * battlefield (rules 712.21, 730.3), each put into the zone this object
+   * went to: what "that card" also finds (730.3c; the meld ruling — "if an
+   * effect moves a melded permanent to a new zone and then affects 'that
+   * card,' it affects both cards"). Set by the move that scattered them,
+   * cleared on this object's next zone change.
+   */
+  leftWith?: readonly ObjectId[];
+  /**
    * The copy effects with a duration that apply to it, oldest first —
    * entering as a copy until end of turn (Cursed Mirror), a `become-copy`
    * until end of turn (Mirage Mirror), until the next end step (Niko, Light
@@ -5212,6 +5233,8 @@ function clonePlainTree(value: unknown): unknown {
  * its front face's name (`object.cardName`) unless a different face was chosen
  * / it was transformed. */
 export const faceName = (object: GameObject): string => {
+  // A melded permanent's up face is its pair's combined back face (712.8g).
+  if (object.melded !== undefined) return object.melded.into;
   const faces = object.faces;
   if (faces === undefined || faces.length < 2) return object.cardName;
   return faces[object.face ?? 0] ?? object.cardName;
@@ -5277,6 +5300,13 @@ export const isTokenNow = (object: Pick<GameObject, "isToken" | "merged">): bool
   const top = object.merged?.components[0];
   return top === undefined || "self" in top ? object.isToken : top.token;
 };
+
+/** What makes a permanent a melded one (`GameObject.melded`): the combined
+ * back face it has, and the other card of its pair, by name and owner. */
+export interface MeldedInfo {
+  readonly into: string;
+  readonly with: readonly { readonly cardName: string; readonly owner: PlayerId }[];
+}
 
 /** One card or token of a merged permanent (`GameObject.merged`). */
 export type MergedComponent =

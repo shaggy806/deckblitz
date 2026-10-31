@@ -39,6 +39,9 @@ export function isCardFront(def: CardDefinition): boolean {
   // A prepare spell that is no card of its own (rule 722.3c — Enroot) is
   // part of its preparation card, never a card.
   if (def.prepareSpellOnly) return false;
+  // A meld pair's combined back face is half of two cards, never a card
+  // (rule 712.4b).
+  if (def.meldOf !== null) return false;
   if (def.faces === null || def.faces.length < 2) return true;
   return def.faces[0] === def.name;
 }

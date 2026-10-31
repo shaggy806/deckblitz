@@ -201,7 +201,7 @@ export function hasPartner(registry: CardRegistry, name: string): boolean {
 function notACardReason(name: string, def: CardDefinition): string | null {
   if (isTokenCard(def)) return `"${name}" is a token, not a card`;
   if (!isCardFront(def)) {
-    return `"${name}" is the back face of ${def.faces?.[0] ?? "another card"} — list the front face instead`;
+    return `"${name}" is the back face of ${def.faces?.[0] ?? def.meldOf?.join(" and ") ?? "another card"} — list the front face instead`;
   }
   return null;
 }

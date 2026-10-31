@@ -3809,6 +3809,7 @@ import _poolChitinousCloak from "./pool/chitinous-cloak.js";
 import _poolChitinousGraspling from "./pool/chitinous-graspling.js";
 import _poolChitteringDispatcher from "./pool/chittering-dispatcher.js";
 import _poolChitteringHarvester from "./pool/chittering-harvester.js";
+import _poolChitteringHost from "./pool/chittering-host.js";
 import _poolChitteringSkitterling from "./pool/chittering-skitterling.js";
 import _poolChitteringWitch from "./pool/chittering-witch.js";
 import _poolChitterspitter from "./pool/chitterspitter.js";
@@ -9602,6 +9603,7 @@ import _poolGracefulTakedown from "./pool/graceful-takedown.js";
 import _poolGraduationDay from "./pool/graduation-day.js";
 import _poolGrafHarvest from "./pool/graf-harvest.js";
 import _poolGrafMole from "./pool/graf-mole.js";
+import _poolGrafRats from "./pool/graf-rats.js";
 import _poolGrafReaver from "./pool/graf-reaver.js";
 import _poolGraftSurgeon from "./pool/graft-surgeon.js";
 import _poolGraftedButcher from "./pool/grafted-butcher.js";
@@ -10146,9 +10148,11 @@ import _poolHangarbackWalker from "./pool/hangarback-walker.js";
 import _poolHangedExecutioner from "./pool/hanged-executioner.js";
 import _poolHannaShipsNavigator from "./pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "./pool/hannas-custody.js";
+import _poolHanweirBattlements from "./pool/hanweir-battlements.js";
 import _poolHanweirGarrison from "./pool/hanweir-garrison.js";
 import _poolHanweirLancer from "./pool/hanweir-lancer.js";
 import _poolHanweirMilitiaCaptain from "./pool/hanweir-militia-captain.js";
+import _poolHanweirTheWrithingTownship from "./pool/hanweir-the-writhing-township.js";
 import _poolHanweirWatchkeep from "./pool/hanweir-watchkeep.js";
 import _poolHapatraTheDesertFrost from "./pool/hapatra-the-desert-frost.js";
 import _poolHapatraVizierOfPoisons from "./pool/hapatra-vizier-of-poisons.js";
@@ -31179,6 +31183,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChitinousGraspling,
   _poolChitteringDispatcher,
   _poolChitteringHarvester,
+  _poolChitteringHost,
   _poolChitteringSkitterling,
   _poolChitteringWitch,
   _poolChitterspitter,
@@ -36972,6 +36977,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGraduationDay,
   _poolGrafHarvest,
   _poolGrafMole,
+  _poolGrafRats,
   _poolGrafReaver,
   _poolGraftSurgeon,
   _poolGraftedButcher,
@@ -37516,9 +37522,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHangedExecutioner,
   _poolHannaShipsNavigator,
   _poolHannasCustody,
+  _poolHanweirBattlements,
   _poolHanweirGarrison,
   _poolHanweirLancer,
   _poolHanweirMilitiaCaptain,
+  _poolHanweirTheWrithingTownship,
   _poolHanweirWatchkeep,
   _poolHapatraTheDesertFrost,
   _poolHapatraVizierOfPoisons,
@@ -58562,6 +58570,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chitinous-graspling": _poolChitinousGraspling,
   "pool/chittering-dispatcher": _poolChitteringDispatcher,
   "pool/chittering-harvester": _poolChitteringHarvester,
+  "pool/chittering-host": _poolChitteringHost,
   "pool/chittering-skitterling": _poolChitteringSkitterling,
   "pool/chittering-witch": _poolChitteringWitch,
   "pool/chitterspitter": _poolChitterspitter,
@@ -64355,6 +64364,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/graduation-day": _poolGraduationDay,
   "pool/graf-harvest": _poolGrafHarvest,
   "pool/graf-mole": _poolGrafMole,
+  "pool/graf-rats": _poolGrafRats,
   "pool/graf-reaver": _poolGrafReaver,
   "pool/graft-surgeon": _poolGraftSurgeon,
   "pool/grafted-butcher": _poolGraftedButcher,
@@ -64899,9 +64909,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hanged-executioner": _poolHangedExecutioner,
   "pool/hanna-ships-navigator": _poolHannaShipsNavigator,
   "pool/hannas-custody": _poolHannasCustody,
+  "pool/hanweir-battlements": _poolHanweirBattlements,
   "pool/hanweir-garrison": _poolHanweirGarrison,
   "pool/hanweir-lancer": _poolHanweirLancer,
   "pool/hanweir-militia-captain": _poolHanweirMilitiaCaptain,
+  "pool/hanweir-the-writhing-township": _poolHanweirTheWrithingTownship,
   "pool/hanweir-watchkeep": _poolHanweirWatchkeep,
   "pool/hapatra-the-desert-frost": _poolHapatraTheDesertFrost,
   "pool/hapatra-vizier-of-poisons": _poolHapatraVizierOfPoisons,

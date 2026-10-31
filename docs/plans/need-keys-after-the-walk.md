@@ -586,6 +586,17 @@ missing. Re-run `--greedy` for Phase 2's order.
   freed (queued: 556). Adds no decision kind and no client change (its X prompt covers it). v2's
   candidates are each X from 1 up; v1 keeps a counter. Next: `mechanic:meld` (15),
   `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15).
+- **2026-10-31: `mechanic:meld`, features only** (an overnight agent) — the `meld` effect
+  (rules 701.42, 712.4): a meld card and its counterpart, both owned and controlled, exiled and
+  put onto the battlefield as one new object (`GameObject.melded`) with the combined back face's
+  characteristics (`CardDefinition.meldOf`) and the fronts' mana values summed (712.8g); the
+  `meld-ready` intervening if; leaving, two cards (712.21), and `leftWith` lets a blink or an
+  exile link find both (mutate's components too). 1 key; 4 proving cards (two pairs); 11 freed
+  (queued: 567). Adds no decision kind (several counterparts reuse `choose-permanents`) and no
+  client change (the view's `faceName` is the back face). Not yet: the relative order of the two
+  cards put into a library or graveyard is not asked (730.3a, as for mutate). Next:
+  `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
+  `effect:cast-and-activate-restrictions` (15).
 
 ## Rough size
 

@@ -144,6 +144,7 @@ import {
   turnStatOf,
   speedWithin,
   withComputedCache,
+  meldPartners,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
 import type {
@@ -377,6 +378,7 @@ import type {
   CopyValues,
   CastNowAsk,
   OtherChoiceAsk,
+  MeldedInfo,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -856,6 +858,11 @@ interface EnterOptions {
    * so its own enters abilities neither trigger nor apply) — manifested or
    * cloaked. */
   readonly faceDown?: FaceDownKind;
+  /** It enters melded with the other card of its meld pair (rules 701.42a,
+   * 712.14c): one permanent, the combined back face up from the start, so
+   * its replacements and every trigger that sees it arrive see that face.
+   * Only `Game.meldByEffect` passes it. */
+  readonly melded?: MeldedInfo;
   /** Not about entering: a move to a library says where in it the card is
    * going (the move itself puts it on the bottom, and the caller places it
    * after), so a commander whose 903.9b choice defers the move still goes
@@ -25079,7 +25086,11 @@ export class Game {
         // "Until [this] leaves the battlefield" (rule 610.3): it comes back
         // as the source leaves in the stint it's in now.
         if (untilSourceLeaves === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before) {
-          exiled.exiledUntil = { source, zoneChangeCount: this.state.objects[source]?.zoneChangeCount ?? 0 };
+          const until = { source, zoneChangeCount: this.state.objects[source]?.zoneChangeCount ?? 0 };
+          // Each card a merged or melded permanent became (730.3c).
+          for (const card of [exiled.id, ...(exiled.leftWith ?? [])]) {
+            if (this.state.objects[card]?.zone === "exile") this.state.objects[card].exiledUntil = until;
+          }
         }
         // "Cards you exiled" (Haldan): this effect's controller exiled it.
         if (exiled?.zone === "exile" && exiled.zoneChangeCount !== before) exiled.exiledByPlayer = controller;
@@ -25122,9 +25133,11 @@ export class Game {
           const src = this.state.objects[source];
           const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
           if (src !== undefined && stint !== undefined) {
-            exiled.exiledWith = { source, zoneChangeCount: stint };
+            // Each card a merged or melded permanent became (730.3c).
+            const cards = [exiled.id, ...(exiled.leftWith ?? [])].filter((card) => this.state.objects[card]?.zone === "exile");
+            for (const card of cards) this.state.objects[card].exiledWith = { source, zoneChangeCount: stint };
             const sofar = src.exiledWithCount?.stint === stint ? src.exiledWithCount.count : 0;
-            src.exiledWithCount = { stint, count: sofar + 1 };
+            src.exiledWithCount = { stint, count: sofar + cards.length };
           }
         }
       },
@@ -25406,6 +25419,7 @@ export class Game {
           this.withGraveyardLeaveBatch(() => this.withEnterBatch(() => this.withDamageBatch(fn))),
         ),
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
+      meld: (self, partnerFilter, into, partner) => this.meldByEffect(controller, x, self, partnerFilter, into, partner),
       returnFlickered: (link, thenCounters, underYourControl, transformed, tapped) =>
         this.returnFlickeredByEffect(
           link,
@@ -34486,7 +34500,11 @@ export class Game {
     // After the move: `moveObject` clears zone-scoped state on the way out,
     // and this link has to survive until the O-Ring itself leaves.
     if (exiledBy !== undefined && this.state.objects[id]?.zone === "exile") {
-      this.state.objects[id].exiledBy = exiledBy;
+      // Every card a merged or melded permanent became is "the exiled card"
+      // that comes back (730.3c, the meld ruling).
+      for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+        if (this.state.objects[card]?.zone === "exile") this.state.objects[card].exiledBy = exiledBy;
+      }
     }
     // The event is about a permanent leaving the battlefield; a graveyard
     // card being exiled isn't one, and the log formatters read it that way.
@@ -34514,6 +34532,93 @@ export class Game {
     // It will never resolve now, so it has nothing left to aim at.
     this.forgetSpellTargets(object);
     this.moveObject(id, "exile");
+  }
+
+  /**
+   * A meld card's "if you both own and control ~ and a [type] named [its
+   * counterpart], exile them, then meld them into [the combined back face]"
+   * (rules 701.42, 712.4a). Nothing unless `self` — the resolving ability's
+   * source, still the same object — and a permanent matching `partnerFilter`
+   * are both owned and controlled by `controller` (`meldPartners`); with
+   * several such partners, `controller` chooses one (the ruling), and this
+   * runs again with it as `partner`.
+   *
+   * Then both are exiled, one event (603.10a — each one's leaves trigger
+   * sees the other go), and if both arrived there as cards of `into`'s meld
+   * pair they're put onto the battlefield combined: one new object
+   * (400.7 — the ruling: "they each leave the battlefield, then return
+   * together as one new object"), owned by their owner, with `into`'s
+   * characteristics from the moment it enters (712.14c, `EnterOptions.
+   * melded`). The object is the commander's card if either is one, so the
+   * melded permanent is that commander (903.3b), else the pair's first; the
+   * other card stops being an object of its own until the permanent leaves
+   * (712.21). Tokens, copies and cards of another pair can't be melded and
+   * stay in exile (701.42b–c), as does everything if the entry is refused.
+   */
+  private meldByEffect(
+    controller: PlayerId,
+    x: number,
+    self: ObjectId | undefined,
+    partnerFilter: CardFilter,
+    into: string,
+    partner?: ObjectId | null,
+  ): void {
+    if (self === undefined || partner === null) return;
+    const partners = meldPartners(this.state, this.registry, self, controller, partnerFilter);
+    if (partners === null) return;
+    if (partner !== undefined && !partners.includes(partner)) return;
+    if (partner === undefined && partners.length > 1) {
+      // Which one is exiled: a choice made as this resolves, not a target.
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: controller,
+        eligible: partners,
+        min: 1,
+        max: 1,
+        prompt: `Choose the permanent to meld into ${into}`,
+        then: { kind: "meld", partner: partnerFilter, into, chosen: true },
+        source: self,
+        x,
+      };
+      return;
+    }
+    const other = this.splitOneFromStack(partner ?? partners[0]);
+    const pair = [self, other];
+    // "Exile them": one event.
+    this.withLeaveBatch(() => {
+      this.snapshotLeaving(pair);
+      for (const id of pair) {
+        const object = this.state.objects[id];
+        if (object?.zone !== "battlefield") continue;
+        if (!this.moveObject(id, "exile")) continue;
+        if (this.state.objects[id]?.zone === "exile") this.emit({ type: "permanent-exiled", object: id });
+      }
+    });
+    // "Then meld them": only two cards of one meld pair can be (701.42b).
+    const meldOf = this.registry.has(into) ? this.registry.get(into).meldOf : null;
+    const cards = pair.map((id) => this.state.objects[id]);
+    if (meldOf === null) return;
+    for (const card of cards) {
+      if (card === undefined || card.zone !== "exile" || card.isToken || card.isCopy === true) return;
+    }
+    const [a, b] = cards as [GameObject, GameObject];
+    if (a.owner !== b.owner || a.cardName === b.cardName || !meldOf.includes(a.cardName) || !meldOf.includes(b.cardName)) {
+      return;
+    }
+    const [main, rest] = a.isCommander || (!b.isCommander && a.cardName === meldOf[0]) ? [a, b] : [b, a];
+    if (!this.moveObject(main.id, "battlefield", { melded: { into, with: [{ cardName: rest.cardName, owner: rest.owner }] } })) {
+      return;
+    }
+    if (this.state.objects[main.id]?.zone !== "battlefield") return;
+    // The other card is part of the permanent now.
+    const exile = this.state.zones.shared.exile;
+    const index = exile.indexOf(rest.id);
+    if (index >= 0) exile.splice(index, 1);
+    const stint = this.openStintOf(rest.id);
+    if (stint !== undefined) stint.until = this.state.eventSeq;
+    delete this.state.objects[rest.id];
+    invalidateComputedCache();
+    this.emit({ type: "permanent-entered-battlefield", object: main.id });
   }
 
   /** "Blink": exile permanents, then return them to the battlefield (rule
@@ -34574,8 +34679,16 @@ export class Game {
         if (isToken) continue;
         // After the move: `moveObject` clears the link on the way.
         const exileLink = linkNow();
-        if (exileLink !== undefined) this.state.objects[id].flickerLink = exileLink;
-        exiled.push(id);
+        // A merged or melded permanent became several cards, and the return
+        // finds every one of them (730.3c; the meld ruling: "if an effect
+        // moves a melded permanent to a new zone and then affects 'that
+        // card,' it affects both cards") — each back as a permanent of its
+        // own, front face up.
+        for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+          if (this.state.objects[card]?.zone !== "exile") continue;
+          if (exileLink !== undefined) this.state.objects[card].flickerLink = exileLink;
+          exiled.push(card);
+        }
       }
     });
     if (delayed === undefined) {
@@ -35518,6 +35631,18 @@ export class Game {
    * owner while Chaos Warp's shuffle went ahead) makes the same as
    * shuffling it in. */
   private placeInLibrary(id: ObjectId, position: CommanderLibraryPlacement): void {
+    const object = this.state.objects[id];
+    if (object?.zone !== "library") return;
+    // The other cards a merged or melded permanent became go where it went
+    // (rules 712.21, 730.3a — "if the cards are put on the top or bottom of
+    // your library, you choose their relative order": not asked).
+    for (const other of object.leftWith ?? []) {
+      if (this.state.objects[other]?.zone === "library") this.placeOneInLibrary(other, position);
+    }
+    this.placeOneInLibrary(id, position);
+  }
+
+  private placeOneInLibrary(id: ObjectId, position: CommanderLibraryPlacement): void {
     const object = this.state.objects[id];
     if (object?.zone !== "library") return;
     const library = this.state.zones.perPlayer[object.owner].library;
@@ -40643,15 +40768,44 @@ export class Game {
    * sent it (730.3d); the owner's arrangement of a graveyard or library is
    * the order they merged in (730.3a lets them choose — not asked).
    */
-  private scatterMergedComponents(merged: NonNullable<GameObject["merged"]>, to: ZoneType): void {
+  private scatterMergedComponents(merged: NonNullable<GameObject["merged"]>, to: ZoneType): ObjectId[] {
     const zone: ZoneType = to === "battlefield" || to === "stack" ? "graveyard" : to;
+    const made: ObjectId[] = [];
     for (const component of merged.components) {
       if ("self" in component || component.token) continue;
-      const id = this.makeCardObject(component.cardName, component.owner, { zone });
-      this.zoneList(zone, component.owner).push(id);
-      this.state.objects[id].zoneChangeCount = 1;
+      made.push(this.placeComponentCard(component.cardName, component.owner, zone));
     }
     invalidateComputedCache();
+    return made;
+  }
+
+  /**
+   * The other card of a melded permanent that has just left the battlefield
+   * (rule 712.21 — "one permanent leaves the battlefield and two cards are
+   * put into the appropriate zone"), put into `to` as a new card of its own,
+   * front face up (712.8a): wherever a replacement sent the permanent. Its
+   * owner's arrangement of a graveyard is the order they melded in, and a
+   * library move puts both cards where the permanent went
+   * (`placeInLibrary` moves `leftWith` beside it — their relative order
+   * isn't asked).
+   */
+  private scatterMeldedCards(melded: MeldedInfo, to: ZoneType): ObjectId[] {
+    const zone: ZoneType = to === "battlefield" || to === "stack" ? "graveyard" : to;
+    const made = melded.with.map((card) => this.placeComponentCard(card.cardName, card.owner, zone));
+    invalidateComputedCache();
+    return made;
+  }
+
+  /** A card that was part of a permanent made of several (a merged or
+   * melded one), put into `zone` as a new object of its own (rule 400.7). */
+  private placeComponentCard(cardName: string, owner: PlayerId, zone: ZoneType): ObjectId {
+    const id = this.makeCardObject(cardName, owner, { zone });
+    this.zoneList(zone, owner).push(id);
+    this.state.objects[id].zoneChangeCount = 1;
+    // Public from the moment it arrives, like any card put into a public
+    // zone (rule 400.2).
+    if (zone === "graveyard" || zone === "exile") this.openStint(id);
+    return id;
   }
 
   /**
@@ -41122,6 +41276,8 @@ export class Game {
     object.attacking = null;
     // What it did there was that object's (rule 400.7).
     delete object.tally;
+    // The cards it left the battlefield with were that move's (set below).
+    delete object.leftWith;
     // A permission to play it from exile was about that stint (rule 400.7):
     // exiled again later, it's a new object with none. Every grant sets it
     // after the move that exiles the card.
@@ -41193,7 +41349,16 @@ export class Game {
     // card it was goes to the same zone as a card of its own.
     const merged = object.merged;
     delete object.merged;
-    if (merged !== undefined) this.scatterMergedComponents(merged, to);
+    const leftWith: ObjectId[] = [];
+    if (merged !== undefined) leftWith.push(...this.scatterMergedComponents(merged, to));
+    // So does a melded permanent (rule 712.21): one permanent leaves, and
+    // both its cards go to the new zone, front faces up — the other as a
+    // card of its own.
+    const melded = object.melded;
+    delete object.melded;
+    if (melded !== undefined) leftWith.push(...this.scatterMeldedCards(melded, to));
+    // What "that card" finds too (730.3c, the meld ruling).
+    if (leftWith.length > 0) object.leftWith = leftWith;
     // An ETB "choose a creature type" choice ends when the object changes
     // zones — a fresh entry chooses again (Urza's Incubator — P14). So does
     // any other "as this enters" choice (a Heraldic Banner that comes back
@@ -41420,6 +41585,8 @@ export class Game {
       // the entry — its replacements, other permanents' replacements judging
       // it, the triggers that see it arrive — sees the face-down 2/2.
       if (enter.faceDown !== undefined) object.faceDown = { kind: enter.faceDown };
+      // Melded as it enters (712.14c): the combined back face from the start.
+      if (enter.melded !== undefined) object.melded = enter.melded;
       if (enter.flipped === true) {
         object.flipped = true;
         this.refreshFlippedName(object);

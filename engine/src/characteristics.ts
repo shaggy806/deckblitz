@@ -968,6 +968,8 @@ function evalStaticCondition(
         state.turnOrder.filter((p) => p !== you && !state.players[p].hasLost).length >=
         condition.atLeast
       );
+    case "meld-ready":
+      return meldPartners(state, registry, source.id, you, condition.partner) !== null;
     case "source":
       return matchesFilter(state, registry, source.id, condition.filter, {
         you,
@@ -1217,6 +1219,37 @@ function evalStaticCondition(
       // instead (see `Game`'s `conditionMet`).
       return false;
   }
+}
+
+/**
+ * A meld card's "if you both own and control ~ and a [type] named [its
+ * counterpart]" (rule 701.42): the permanents matching `partner` that `you`
+ * own and control, other than `source` — or `null` when there's none, or
+ * `source` isn't a permanent `you` own and control. More than one is a
+ * choice for the player melding (the ruling: "if you control more than one
+ * object with one of those names, you select one object with that name to
+ * exile"). The `meld-ready` condition and the `meld` effect both ask this.
+ */
+export function meldPartners(
+  state: GameState,
+  registry: CardRegistry,
+  source: ObjectId,
+  you: PlayerId,
+  partner: CardFilter,
+): ObjectId[] | null {
+  const self = state.objects[source];
+  if (self === undefined || self.zone !== "battlefield" || self.owner !== you || self.controller !== you) return null;
+  const found = state.zones.shared.battlefield.filter((id) => {
+    const object = state.objects[id];
+    return (
+      id !== source &&
+      object !== undefined &&
+      object.owner === you &&
+      object.controller === you &&
+      matchesFilter(state, registry, id, partner, { you })
+    );
+  });
+  return found.length > 0 ? found : null;
 }
 
 export interface Characteristics {

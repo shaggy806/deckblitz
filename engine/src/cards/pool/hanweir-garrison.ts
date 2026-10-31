@@ -1,8 +1,7 @@
 import { defineCard } from "../define.js";
 
 // The front half of a meld pair. Melding is Hanweir Battlements' ability, not
-// this card's, and the Battlements isn't in the pool, so nothing on this card
-// is left out: its line about melding is reminder text.
+// this card's, so its line about melding is reminder text.
 const ATTACK_TEXT =
   "Whenever this creature attacks, create two 1/1 red Human creature tokens that are tapped and attacking.";
 

@@ -5058,6 +5058,20 @@ vocabulary before adding one back.
   though Scryfall prints the cost on the normal half only; the scaffolder
   does). Cast only as the normal half (710.2); a `flip` effect flips it in
   place. `jushi-apprentice.ts` // `tomoya-the-revealer.ts`.
+- **Meld** (rules 701.42, 712.4) — three files: the two front faces are
+  ordinary cards (no `faces`), and the combined back face is a file of its own
+  with `meldOf: [counterpart, melder]` (the order rule 712.5 lists the pair:
+  the card without the melding ability first), no `manaCost`, its own colors
+  and P/T. It's never a deck card. The melding card's instruction — "if you
+  both own and control ~ and a creature named X, exile them, then meld them
+  into Y" — is the effect `{ kind: "meld", partner: { name: "X", type:
+  "creature" }, into: "Y" }`, which makes the test as it resolves; on a
+  trigger the same "if" is also its intervening if, `condition: { kind:
+  "meld-ready", partner: { … } }`. The melded permanent is one new object with
+  Y's characteristics and the fronts' mana values summed; leaving, it's two
+  cards. The counterpart's "(Melds with …)" line is reminder text.
+  `graf-rats.ts`, `midnight-scavengers.ts` → `chittering-host.ts`;
+  `hanweir-battlements.ts`; `meld.test.ts`.
 - **Adventure** — `adventure: true` on both faces + `faces: [creatureName,
   adventureName]`. `emberclaw-scout.ts`. Each face's `colors` are its own
   mana cost's — Frolicking Familiar is blue, Blow Off Steam red — though

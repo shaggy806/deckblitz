@@ -2760,6 +2760,28 @@ export type EffectSpec =
       readonly tapped?: boolean;
     }
   | {
+      /**
+       * A meld card's "if you both own and control ~ and a [type] named
+       * [its counterpart], exile them, then meld them into [the combined
+       * back face]" (rules 701.42, 712.4a — Graf Rats, Hanweir Battlements).
+       * As it resolves: if the source is still the permanent it was (rule
+       * 400.7) and its controller owns and controls it and a permanent
+       * matching `partner` (`{ name, type }`), both are exiled — one event —
+       * and then put onto the battlefield as one melded permanent with
+       * `into`'s characteristics (`GameObject.melded`, 712.14c). With more
+       * than one such partner, the controller chooses which (the
+       * `choose-permanents` decision). Cards that can't be melded — a token,
+       * a card that isn't of `into`'s pair — stay in exile (701.42b–c).
+       */
+      readonly kind: "meld";
+      readonly partner: CardFilter;
+      /** The combined back face: a definition whose `meldOf` is the pair. */
+      readonly into: string;
+      /** Never authored: the partner already chosen, in target slot 0 —
+       * the `choose-permanents` answer's `then`. */
+      readonly chosen?: true;
+    }
+  | {
       /** Counter a target spell on the stack — it moves to its owner's
        * graveyard without resolving (rule 701.5). A spell that can't be
        * countered stays on the stack and resolves, and a copy of a spell
@@ -7795,6 +7817,11 @@ export interface EffectApi {
     transformed: boolean,
     tapped: boolean,
   ): boolean;
+  /** See the `"meld"` {@link EffectSpec}: `partner` is the counterpart
+   * already chosen (`null`: chosen, and gone since), else it's found (and
+   * asked for, among several). The source is the resolving ability's own,
+   * `undefined` if it has become a new object since (rule 400.7). */
+  meld(source: ObjectId | undefined, partnerFilter: CardFilter, into: string, partner?: ObjectId | null): void;
   /** Grant flashback to `target` (an instant/sorcery card in a graveyard) for
    * the rest of the turn, at a flashback cost equal to its mana cost
    * (Snapcaster Mage), or at `cost` when given (Archmage's Newt's {0}). */
@@ -11452,6 +11479,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.tapped === true,
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
+      return;
+    }
+    case "meld": {
+      const source = resolveEffectTarget("source", ctx);
+      const chosen = spec.chosen === true ? ctx.targets[0] : undefined;
+      ctx.meld(
+        source?.kind === "object" ? source.object : undefined,
+        spec.partner,
+        spec.into,
+        spec.chosen !== true ? undefined : chosen?.kind === "object" ? chosen.object : null,
+      );
       return;
     }
     case "grant-flashback": {

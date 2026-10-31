@@ -126,6 +126,7 @@ import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChillbringer from "../pool/chillbringer.js";
 import _poolChiseiHeartOfOceans from "../pool/chisei-heart-of-oceans.js";
+import _poolChitteringHost from "../pool/chittering-host.js";
 import _poolChromeSteed from "../pool/chrome-steed.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
@@ -1008,6 +1009,7 @@ const shard: CardShard = {
     _poolChelonianTackle,
     _poolChillbringer,
     _poolChiseiHeartOfOceans,
+    _poolChitteringHost,
     _poolChromeSteed,
     _poolChronomancer,
     _poolCloakOfTheBat,

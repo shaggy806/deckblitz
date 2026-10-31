@@ -321,6 +321,7 @@ import _poolGyreSage from "../pool/gyre-sage.js";
 import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
 import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
+import _poolHanweirBattlements from "../pool/hanweir-battlements.js";
 import _poolHarbingerOfNight from "../pool/harbinger-of-night.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHarrowingJourney from "../pool/harrowing-journey.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolHallOfStormGiants,
     _poolHannaShipsNavigator,
     _poolHannasCustody,
+    _poolHanweirBattlements,
     _poolHarbingerOfNight,
     _poolHarmonizedCrescendo,
     _poolHarrowingJourney,

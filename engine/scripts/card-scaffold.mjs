@@ -255,6 +255,7 @@ function faceSource(face, ctx) {
     ...(ctx.flag ? { [ctx.flag]: true } : {}),
     prepareSpell: ctx.prepareSpell,
     prepareSpellOnly: ctx.prepareSpellOnly,
+    meldOf: ctx.meldOf,
   };
   const body = toSource(def).replace(/\n}$/, "");
   const todos = [
@@ -311,7 +312,7 @@ function wrap(text, prefix) {
 }
 
 const LAYOUT_FLAG = { transform: "transform", adventure: "adventure", modal_dfc: null, flip: "flip" };
-const SUPPORTED_LAYOUTS = new Set(["normal", "transform", "modal_dfc", "adventure", "saga", "token", "mutate", "leveler"]);
+const SUPPORTED_LAYOUTS = new Set(["normal", "transform", "modal_dfc", "adventure", "saga", "token", "mutate", "leveler", "meld"]);
 
 // ------------------------------------------------------------------ tokens
 
@@ -397,6 +398,15 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
     prepare && loadSnapshot().entries.some((e) => e.name === faces[1].name && e.layout !== "prepare");
   const layoutNote =
     SUPPORTED_LAYOUTS.has(entry.layout) || multi || prepare ? null : `layout "${entry.layout}" isn't modeled`;
+  // A meld pair's combined back face (rule 712.4): the card whose ability
+  // melds "into" it, and the counterpart that ability names — `meldOf`, the
+  // counterpart first (as rule 712.5 lists each pair).
+  const melder =
+    entry.layout === "meld"
+      ? loadSnapshot().entries.find((e) => e.name !== entry.name && (e.oracle_text ?? "").includes(`meld them into ${entry.name}.`))
+      : undefined;
+  const meldPartner = melder === undefined ? null : / and an? (?:creature|land|artifact) named (.+?), exile them, then meld them into /.exec(melder.oracle_text);
+  const meldOf = meldPartner === null ? undefined : [meldPartner[1], melder.name];
 
   // The tokens it makes, matched to ours or given a skeleton.
   const tokenNotes = [];
@@ -455,6 +465,7 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
       flag: multi ? (omen ? "omen" : LAYOUT_FLAG[entry.layout]) : undefined,
       prepareSpell: prepare && i === 0 ? faces[1].name : undefined,
       prepareSpellOnly: prepare && i > 0 ? true : undefined,
+      meldOf,
       layoutNote,
       rulings: i === 0 ? (entry.rulings ?? []) : [],
       headerNotes: [

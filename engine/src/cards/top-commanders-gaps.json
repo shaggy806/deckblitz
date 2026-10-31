@@ -685,7 +685,8 @@
   "decision:opponent-chooses-mode",
   "decision:opponent-chooses-target",
   "effect:opponent-chooses-among-targets",
-  "cost:loyalty-x"
+  "cost:loyalty-x",
+  "mechanic:meld"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

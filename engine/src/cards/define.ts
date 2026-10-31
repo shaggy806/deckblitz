@@ -1309,6 +1309,14 @@ export type StaticCondition =
    */
   | { readonly kind: "source-on-battlefield" }
   /**
+   * A meld card's "if you both own and control ~ and a creature named
+   * [the other card]" (rule 701.42 — Graf Rats): the source is on the
+   * battlefield, and both it and a permanent matching `partner` (`{ name,
+   * type }`) are owned and controlled by the ability's controller. The same
+   * test the `meld` effect makes as it resolves.
+   */
+  | { readonly kind: "meld-ready"; readonly partner: CardFilter }
+  /**
    * Echo's "if this permanent came under your control since the beginning
    * of your last upkeep" (rule 702.30a): it entered, or changed control to
    * you, after your previous upkeep began (`GameObject.controlSinceSeq`
@@ -3882,6 +3890,15 @@ export interface CardDefinition {
    * never transforms (a `transform` effect does nothing to it). Set on both
    * halves. */
   readonly flip: boolean;
+  /** The combined back face of a meld pair (rules 712.4, 712.5): the two
+   * front faces' names, the one without the melding ability first (as rule
+   * 712.5 lists them — "Midnight Scavengers and Graf Rats meld to form
+   * Chittering Host"). Never a card of its own: no decklist names it, nothing
+   * casts it, and it exists only as the face of a melded permanent
+   * (`GameObject.melded`, put there by the `meld` effect), whose mana value
+   * is the fronts' summed (712.8g). Its own `manaCost` is `null`, so a copy
+   * of it has mana value 0 (202.3c). `null` for every other card. */
+  readonly meldOf: readonly [string, string] | null;
   /** Disturb (rule 702.150 — ROADMAP Phase 10) — a transforming DFC whose back
    * face may be cast from the graveyard for `cost`; a spell so cast is exiled
    * instead of going anywhere else (like flashback), and a permanent back face
@@ -4089,6 +4106,7 @@ const PRINTED_ABILITY: {
   countersPersistAcrossZones: (def) => def.countersPersistAcrossZones,
   transform: false,
   flip: false,
+  meldOf: false,
   disturb: (def) => def.disturb !== null,
   adventure: false,
   omen: false,
@@ -4330,6 +4348,8 @@ interface CardDraft {
   transform?: boolean;
   /** See {@link CardDefinition.flip}. */
   flip?: true;
+  /** See {@link CardDefinition.meldOf}. */
+  meldOf?: readonly [string, string];
   split?: boolean;
   divided?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
   disturb?: { readonly cost: string };
@@ -4556,6 +4576,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     countersPersistAcrossZones: draft.countersPersistAcrossZones ?? false,
     transform: draft.transform ?? false,
     flip: draft.flip === true,
+    meldOf: draft.meldOf ?? null,
     disturb: draft.disturb ?? null,
     adventure: draft.adventure ?? false,
     omen: draft.omen ?? false,

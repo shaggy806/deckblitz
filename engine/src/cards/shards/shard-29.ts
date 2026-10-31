@@ -293,6 +293,7 @@ import _poolGoblinOffensive from "../pool/goblin-offensive.js";
 import _poolGoblinScouts from "../pool/goblin-scouts.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGorehornMinotaurs from "../pool/gorehorn-minotaurs.js";
+import _poolGrafRats from "../pool/graf-rats.js";
 import _poolGraveBramble from "../pool/grave-bramble.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolGoblinScouts,
     _poolGodPharaohsStatue,
     _poolGorehornMinotaurs,
+    _poolGrafRats,
     _poolGraveBramble,
     _poolGravelgillScoundrel,
     _poolGraveshifter,

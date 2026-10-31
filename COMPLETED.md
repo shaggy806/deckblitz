@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: meld** (2026-10-31; `mechanic:meld`, rules 701.42, 712.4, 712.8g, 712.21).
+  The `meld` effect — "if you both own and control ~ and a creature named X, exile them, then meld
+  them into Y" — checks that test as it resolves, exiles both (one event), and puts two cards of
+  Y's pair (`CardDefinition.meldOf`, the combined back face, never a deck card) onto the
+  battlefield as one new object: `GameObject.melded`, whose face (`faceName`) is Y from the moment
+  it enters, its mana value the fronts' summed (202.3c; a copy's 0), the commander card the object
+  if either is (903.3b). A token, a copy or a card of another pair stays in exile (701.42c).
+  Several counterparts are asked on the existing `choose-permanents`. The `meld-ready` condition is
+  a trigger's intervening if. Leaving, it is one permanent and two cards (712.21); `leftWith`
+  names the other cards a merged or melded permanent became, which a blink, an O-Ring's exile, an
+  "until it leaves" or a "with this" exile now finds too, and a library placement moves beside it
+  (730.3c and the meld ruling; mutate's components gained this too). The scaffolder reads both
+  meld templates and writes `meldOf` on a back face. 11 freed; proving cards Graf Rats, Chittering
+  Host, Hanweir Battlements, Hanweir, the Writhing Township.
 - **Need-keys Phase 2: loyalty-x** (2026-10-31; `cost:loyalty-x`, rules 606.4, 606.6, 107.3a).
   `ActivatedAbility.loyaltyCost: "-x"` is a "−X" cost: X is announced as it's activated on the
   activation's existing `xValue`, offered as `xCost` from 0 to the loyalty counters the source

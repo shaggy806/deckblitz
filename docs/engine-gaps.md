@@ -6,6 +6,18 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose.**
+  Rules 730.3a and the meld ruling ("if the cards are put on the top or bottom of your library,
+  you choose their relative order") let the owner arrange the cards a merged or melded permanent
+  becomes. `Game.scatterMergedComponents` / `scatterMeldedCards` put the other cards after the
+  object's own card, and `placeInLibrary` moves them (`GameObject.leftWith`) to the same place
+  first, so on top of a library the permanent's own card is on top. Only a library's top matters
+  in practice (a later draw). Effects that move the permanent and then act on "that card" find
+  every card (730.3c) only where they go through `leftWith`: a blink (`flickerByEffect`), an
+  O-Ring's `exiledBy`, an "until it leaves" `exiledUntil` and a "with this" `exiledWith`; any
+  other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
+  the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
+  `leftWith` wherever an effect follows a permanent into its new zone for the second.
 - **Assist isn't offered on a spell cast while something resolves.** Rule 702.132a lets the
   caster of any spell with assist choose a helper, however it's cast. `Game.castSpellActions`
   adds assist variants only for a cast from priority, and `judgeAssist` refuses `via: "effect"`:

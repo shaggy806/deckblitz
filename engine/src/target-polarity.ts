@@ -269,6 +269,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-graveyard": (n, v) => v.touch(n.target, "harm", MINOR),
   flicker: (n, v) => v.touch(n.target, "help", MINOR),
   "return-flickered": none,
+  // Melding (rule 701.42) targets nothing: both cards are your own.
+  meld: none,
   counter: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "gain-control": (n, v) => {
     v.touch(n.target, "harm", DECISIVE);

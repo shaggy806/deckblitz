@@ -3598,3 +3598,41 @@ describe("loyalty costs", () => {
     expect(face.activated[2].__todo).toEqual(["a +X loyalty cost"]);
   });
 });
+
+describe("meld (rule 701.42)", () => {
+  it("reads a meld trigger's intervening if as `meld-ready` and its instruction whole as `meld`", () => {
+    const gisela = parseFace(
+      {
+        name: "Gisela, the Broken Blade",
+        type_line: "Legendary Creature — Angel Horror",
+        oracle_text:
+          "Flying, first strike, lifelink\nAt the beginning of your end step, if you both own and control Gisela and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.",
+      },
+      { tokenFor: () => null },
+    );
+    const partner = { name: "Bruna, the Fading Light", type: "creature" };
+    expect(gisela.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "end", who: "you" },
+      condition: { kind: "meld-ready", partner },
+      effect: { kind: "meld", partner, into: "Brisela, Voice of Nightmares" },
+    });
+    expect(gisela.triggered[0].__todo).toBeUndefined();
+  });
+
+  it("reads an activated meld, keeping a back face named after the card itself", () => {
+    const urza = parseFace(
+      {
+        name: "Urza, Lord Protector",
+        type_line: "Legendary Creature — Human Artificer",
+        oracle_text:
+          "{7}: If you both own and control Urza, Lord Protector and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(urza.activated[0].effect).toEqual({
+      kind: "meld",
+      partner: { name: "The Mightstone and Weakstone", type: "artifact" },
+      into: "Urza, Planeswalker",
+    });
+  });
+});

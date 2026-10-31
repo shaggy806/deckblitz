@@ -344,6 +344,20 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Meld — built 2026-10-31
+
+The need-keys Phase 2 family `mechanic:meld`, features only (rules 701.42,
+712.4). The **`meld`** effect — "if you both own and control ~ and a creature
+named X, exile them, then meld them into Y" — makes that test as it resolves,
+exiles both, and puts two cards of Y's pair onto the battlefield as one new
+object (`GameObject.melded`) with Y's characteristics; Y is a definition with
+**`meldOf`** (the pair, never a deck card), and the permanent's mana value is
+its fronts' summed (712.8g). The **`meld-ready`** condition is a trigger's
+intervening if. Several counterparts are a `choose-permanents` choice. Leaving,
+it's two cards (712.21), and `leftWith` lets a blink or an exile link find both
+(mutate's components too). Key: meld. Proving cards: Graf Rats, Chittering
+Host, Hanweir Battlements, Hanweir, the Writhing Township.
+
 ### "−X" loyalty costs — built 2026-10-31
 
 The need-keys Phase 2 family `cost:loyalty-x`, features only. **`loyaltyCost:

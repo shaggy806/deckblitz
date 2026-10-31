@@ -300,10 +300,20 @@ describe("classify", () => {
     for (const def of POOL_CARDS) expect(isTokenCard(def), def.name).toBe(false);
   });
 
+  it("a meld pair's combined back face names two pool cards and has no mana cost (rule 712.4)", () => {
+    const names = new Set(POOL_CARDS.map((def) => def.name));
+    for (const def of POOL_CARDS) {
+      if (def.meldOf === null) continue;
+      expect(def.manaCost, def.name).toBeNull();
+      for (const front of def.meldOf) expect(names.has(front), `${def.name}: ${front}`).toBe(true);
+    }
+  });
+
   it("isCardFront picks the face a card is deck-listed under", () => {
     for (const def of POOL_CARDS) {
-      if (def.prepareSpellOnly) {
-        // A prepare spell that is no card of its own (rule 722.3c).
+      if (def.prepareSpellOnly || def.meldOf !== null) {
+        // A prepare spell that is no card of its own (rule 722.3c), or a
+        // meld pair's combined back face (712.4b).
         expect(isCardFront(def), def.name).toBe(false);
       } else if (def.faces === null) {
         expect(isCardFront(def), def.name).toBe(true);

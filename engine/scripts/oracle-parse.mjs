@@ -100,10 +100,16 @@ export const stripReminder = (line) => line.replace(/\s*\([^)]*\)/g, "").trim();
  * "this artifact" / … all written "~". */
 export function normalize(line, faceName) {
   let s = stripReminder(line);
+  // A meld card's combined back face is another card's name, though it may
+  // begin with this one's short name ("meld them into Urza, Planeswalker"):
+  // kept whole.
+  const meldInto = /meld them into (.+)\.$/.exec(s)?.[1];
+  if (meldInto !== undefined) s = s.replace(`meld them into ${meldInto}.`, "meld them into \u0001.");
   s = s.split(faceName).join("~");
   const short = faceName.split(",")[0];
   if (short !== faceName && short.length >= 3) s = s.replace(new RegExp(`\\b${escapeRe(short)}\\b`, "g"), "~");
   s = s.replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|spell|card|Saga)\b/gi, "~");
+  if (meldInto !== undefined) s = s.replace("\u0001", meldInto);
   return s.trim();
 }
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -1259,6 +1265,12 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // A meld card's "If you both own and control ~ and a creature named
+  // Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing
+  // Township." (rule 701.42 — the `meld` effect, which makes the test).
+  if ((m = MELD_SENTENCE.exec(s))) {
+    return { kind: "meld", partner: { name: m[2], type: m[1].toLowerCase() }, into: m[3] };
+  }
   // "Draw a card for each different mana value among nonland permanents you
   // control" (Lunar Insight), "… different power among creatures you
   // control" (Golden Ratio): a `distinct` aggregate.
@@ -3991,7 +4003,15 @@ export function parseFace(face, ctx = {}) {
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
       };
       let triggers = parsedTriggers;
-      if (/^if /i.test(rest)) {
+      const meldWhole = MELD_SENTENCE.exec(rest);
+      if (meldWhole !== null) {
+        // A meld trigger (Graf Rats, Gisela): its intervening if is the
+        // `meld-ready` condition, and the `meld` effect makes the same test
+        // again as it resolves, so the instruction is read whole — the
+        // counterpart's name may hold a comma ("Bruna, the Fading Light").
+        base.condition = { kind: "meld-ready", partner: { name: meldWhole[2], type: meldWhole[1].toLowerCase() } };
+        rest = rest[0].toUpperCase() + rest.slice(1);
+      } else if (/^if /i.test(rest)) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.
         const clause = rest.slice(0, rest.indexOf(",") + 1);
@@ -4356,6 +4376,11 @@ const TURN_TALLY_IFS = {
     atLeast: 3,
   },
 };
+
+/** A meld card's whole instruction (rule 701.42): the counterpart's card
+ * type and name, and the combined back face. "~" is the card itself. */
+const MELD_SENTENCE =
+  /^if you both own and control (?:~|this (?:creature|land|artifact)) and an? (creature|land|artifact) named (.+?), exile them, then meld them into (.+)\.$/i;
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
