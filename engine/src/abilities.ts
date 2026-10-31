@@ -245,10 +245,19 @@ export interface AbilityCost {
    * own give a time counter too (Rift Elemental). With `count: "x"`, X is
    * announced as it's activated, up to what there is to remove (`minX` 1 for
    * "one or more" — Ooze Flux). Never on a mana ability.
+   *
+   * `count: "all"` is "Remove all +1/+1 counters from [this]" (Catti-brie of
+   * Mithral Hall): every counter of `kind` on the source, however many —
+   * none at all is a legal payment (rule 118.3 asks only for what the cost
+   * names; its ruling: it can be activated with no counters). The number
+   * removed is the ability's X — "where X is the number of counters removed
+   * this way" — fixed as the cost is paid (rule 601.2h, via 602.2b), so the
+   * effect reads it as `"x"` and a copy keeps it (707.10). Only off the
+   * source, of one kind: never with `from`, `among`, `orKinds` or `"any"`.
    */
   readonly removeCounter?: {
     readonly kind: string;
-    readonly count: number | "x";
+    readonly count: number | "x" | "all";
     readonly orKinds?: readonly string[];
     readonly from?: CardFilter;
     readonly excludeSource?: true;

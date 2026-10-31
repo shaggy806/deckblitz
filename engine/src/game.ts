@@ -423,6 +423,7 @@ import {
   eventsSince as eventLogSince,
   excessDamageSince,
   lifeLostSince,
+  playerCountersRemovedSince,
   thisWayEntries,
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
@@ -17639,13 +17640,16 @@ export class Game {
         return `${def.name}'s ability can't remove chosen counters beside that cost`;
       }
       const removal = ability.cost.removeCounter;
+      // "Remove all" is off the source alone, of one kind.
+      if (removal.count === "all") return `${def.name}'s ability can't remove all of chosen counters`;
       const count = removal.count === "x" ? Math.max(0, Math.floor(x ?? ability.minX ?? 0)) : removal.count;
       // Rule 118.3: not enough counters to remove, no paying it.
       const can = this.costCounterSources(player, sourceId, ability);
       if ((removal.among === true ? can.total : can.most) < count) {
         return `${player} has too few counters to remove for ${def.name}'s cost`;
       }
-    } else if (ability.cost.removeCounter !== undefined) {
+    } else if (ability.cost.removeCounter !== undefined && ability.cost.removeCounter.count !== "all") {
+      // "Remove all …" is payable with none to remove (Catti-brie's ruling).
       const { kind } = ability.cost.removeCounter;
       const count =
         ability.cost.removeCounter.count === "x" ? Math.max(0, Math.floor(x ?? 0)) : ability.cost.removeCounter.count;
@@ -17920,8 +17924,11 @@ export class Game {
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
-      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
+      sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
     } = planned;
+    // The X announced — or, for a "remove all" cost, the counters it removed
+    // (set as the cost is paid, below).
+    let chosenX = planned.chosenX;
     let sacrificedRef: LastKnownRefs["sacrificed"];
 
     // Pay the cost.
@@ -17957,7 +17964,11 @@ export class Game {
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
-      const count = ability.cost.removeCounter.count === "x" ? chosenX : ability.cost.removeCounter.count;
+      const asked = ability.cost.removeCounter.count;
+      const count = asked === "x" ? chosenX : asked === "all" ? (source.counters[kind] ?? 0) : asked;
+      // "Where X is the number of counters removed this way": the X the
+      // ability carries from here (rule 601.2h, via 602.2b).
+      if (asked === "all") chosenX = count;
       // Removing none (X = 0) removes nothing, and announces nothing.
       if (count > 0) {
         source.counters[kind] = (source.counters[kind] ?? 0) - count;
@@ -18284,7 +18295,7 @@ export class Game {
     // "Remove a +1/+1 counter from a creature you control": which, chosen
     // now too (rules 602.2b, 601.2h).
     const removal = ability.cost.removeCounter;
-    if (removal !== undefined && chosenCounterCost(ability.cost)) {
+    if (removal !== undefined && removal.count !== "all" && chosenCounterCost(ability.cost)) {
       const count = removal.count === "x" ? chosenX : removal.count;
       const can = this.costCounterSources(player, sourceId, ability);
       this.withDecisionSource(sourceId, () =>
@@ -25846,6 +25857,7 @@ export class Game {
         cardTypesInGraveyards(this.state, this.registry, controller, filter),
       thisWay: thisWayDone,
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
+      playerCountersRemovedThisWay: (players) => playerCountersRemovedSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
@@ -34130,15 +34142,17 @@ export class Game {
    * effect's). Only a permanent still on the battlefield loses any (counters
    * on a card that left ceased to exist, rule 122.2). Each kind is one
    * `counter-removed`. `split`: one token of a stack loses them (a targeted
-   * removal); otherwise the whole stack does, together (`tokens`).
+   * removal); otherwise the whole stack does, together (`tokens`). Returns
+   * how many counters came off in all (a stack's, token by token).
    */
-  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): void {
-    if (amount !== "all" && amount <= 0) return;
-    if (counter === "any" && amount !== "all") return;
+  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): number {
+    if (amount !== "all" && amount <= 0) return 0;
+    if (counter === "any" && amount !== "all") return 0;
     const before = this.state.objects[id];
-    if (before === undefined || before.zone !== "battlefield") return;
+    if (before === undefined || before.zone !== "battlefield") return 0;
     const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter((k) => (before.counters[k] ?? 0) > 0);
-    if (kinds.length === 0) return;
+    if (kinds.length === 0) return 0;
+    let removed = 0;
     const at = split ? this.splitOneFromStack(id) : id;
     const object = this.state.objects[at];
     const tokens = split ? 1 : (object.stackCount ?? 1);
@@ -34148,6 +34162,7 @@ export class Game {
       if (n <= 0) continue;
       if (have - n <= 0) delete object.counters[kind];
       else object.counters[kind] = have - n;
+      removed += n * tokens;
       this.emit({
         type: "counter-removed",
         object: at,
@@ -34158,6 +34173,7 @@ export class Game {
       });
     }
     invalidateComputedCache();
+    return removed;
   }
 
   /**
@@ -42022,6 +42038,17 @@ export class Game {
       if (r.mayPayLife !== undefined) mayPayLife = r.mayPayLife;
       if (r.transformed) transformed = true;
       if (r.prepared === true) prepared = true;
+      // Thief of Blood's "as this creature enters, remove all counters from
+      // all permanents" (rule 614.1c): off what's already there, never itself
+      // or anything entering with it (614.12).
+      let removedAsEnters = 0;
+      if (r.removeAllCountersFrom !== undefined) {
+        const entering = this.enterBatch ?? new Set<ObjectId>();
+        for (const other of this.battlefieldMatching(object.controller, r.removeAllCountersFrom, undefined, id)) {
+          if (other === id || entering.has(other)) continue;
+          removedAsEnters += this.removeCountersFrom(other, "any", "all", false);
+        }
+      }
       if (r.counters) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
         // as it enters, never counting itself or what enters with it (Aeve,
@@ -42038,7 +42065,9 @@ export class Game {
                 ? object.castVia === "web-slinging"
                   ? (object.webSlingingManaValue ?? 0)
                   : 0
-                : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
+                : r.counters.amount === "removed-as-enters"
+                  ? removedAsEnters
+                  : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
       }
       // Sunburst (rule 702.44a): +1/+1 counters if it's entering as a

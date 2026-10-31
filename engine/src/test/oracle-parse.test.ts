@@ -4925,3 +4925,90 @@ describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, 
     });
   });
 });
+
+describe("counters put or removed this way", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads Fangs of Kalonia's doubling and Spectacular Showdown's goad on what had a counter put on it this way", () => {
+    const fangs = face(
+      "Fangs of Kalonia",
+      "Sorcery",
+      "Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way.",
+    );
+    expect(fangs.complete).toBe(true);
+    expect(fangs.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+        { kind: "double-counters-all", filter: { type: "creature", thisWay: "counters-put" }, counterKind: "+1/+1" },
+      ],
+    });
+    const showdown = face(
+      "Spectacular Showdown",
+      "Sorcery",
+      "Put a double strike counter on target creature, then goad each creature that had a double strike counter put on it this way.",
+    );
+    expect(showdown.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "double-strike", amount: 1 },
+        { kind: "goad", filter: { type: "creature", thisWay: "counters-put" } },
+      ],
+    });
+    // A different kind put than the one asked about isn't read.
+    expect(
+      face("Test", "Sorcery", "Put a +1/+1 counter on target creature, then goad each creature that had a shield counter put on it this way.").complete,
+    ).toBe(false);
+  });
+
+  it("reads 'that many' / 'that much' after a removal as the counters removed this way — a player's too", () => {
+    const leeches = face("Leeches", "Sorcery", "Target player loses all poison counters. Leeches deals that much damage to that player.");
+    expect(leeches.complete).toBe(true);
+    expect(leeches.targets).toEqual(["player"]);
+    expect(leeches.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-player-counters", counter: "poison", amount: "all", target: 0 },
+        { kind: "damage", amount: { thisWay: "counters-removed" }, target: 0 },
+      ],
+    });
+    const take = face("Take", "Sorcery", "Remove all +1/+1 counters from target creature you control. Draw that many cards.");
+    expect(take.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-counter", target: 0, counter: "+1/+1", amount: "all" },
+        { kind: "draw", amount: { thisWay: "counters-removed" } },
+      ],
+    });
+  });
+
+  it("reads a 'remove all … counters' cost, its count the ability's X", () => {
+    expect(parseCost("{T}, Remove all +1/+1 counters from ~")?.cost.removeCounter).toEqual({ kind: "+1/+1", count: "all" });
+    const hydra = face(
+      "Molten Hydra",
+      "Creature — Hydra",
+      "{T}, Remove all +1/+1 counters from this creature: It deals damage to any target equal to the number of +1/+1 counters removed this way.",
+    );
+    expect(hydra.activated[0]).toMatchObject({
+      cost: { tap: true, removeCounter: { kind: "+1/+1", count: "all" } },
+      targets: ["any-target"],
+      effect: { kind: "damage", amount: "x", target: 0 },
+    });
+    const amulet = face("Relic Amulet", "Artifact", "{2}, {T}, Remove all charge counters from this artifact: It deals that much damage to target creature.");
+    expect(amulet.activated[0].effect).toEqual({ kind: "damage", amount: "x", target: 0 });
+  });
+
+  it("reads Thief of Blood's removal as it enters and the counters it enters with", () => {
+    const thief = face(
+      "Thief of Blood",
+      "Creature — Vampire",
+      "As this creature enters, remove all counters from all permanents. This creature enters with a +1/+1 counter on it for each counter removed this way.",
+    );
+    expect(thief.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      removeAllCountersFrom: {},
+      counters: { kind: "+1/+1", amount: "removed-as-enters" },
+    });
+  });
+});

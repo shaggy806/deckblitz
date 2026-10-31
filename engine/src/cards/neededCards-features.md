@@ -707,6 +707,33 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Counters put or removed this way — built 2026-10-31
+
+The need-keys Phase 2 family `effect:this-way-results`, its top group, features
+only. Most of it was there already (`ThisWayKind`'s `"counters-put"` and
+`"counters-removed"`, the `thisWay` filter clause and amount); the records
+predate them. What was missing: **a player's counters** — the `thisWay:
+"counters-removed"` amount (no `filter`/`sumOf`) now adds the counters a
+`remove-player-counters` took off (rule 122.1 — Leeches' "loses all poison
+counters … that much damage"); **`removeCounter.count: "all"`** — the cost
+"Remove all +1/+1 counters from [this]", payable with none, the number removed
+the ability's X (rules 601.2h via 602.2b — Catti-brie of Mithral Hall, and
+Molten Hydra, Relic Amulet, Torture Chamber, Geometric Nexus, Vish Kal, Jar of
+Eyeballs, Essence Bottle, Sage of Hours, Hankyu untriaged); and **the
+enters-battlefield replacement's `removeAllCountersFrom`** with `counters`'
+`"removed-as-enters"` (rule 614.1c — Thief of Blood). The scaffolder reads
+"then double … / goad each creature that had a [kind] counter put on it this
+way", "that many / that much" after a removal (a player's too, "that player"
+its target), "[target player] loses all poison counters", the remove-all cost
+with its "where X is …", "damage … equal to the number of … removed this way"
+and "that much damage", and Thief of Blood's line. Keys:
+effect:counters-put-this-way, effect:counters-removed-this-way. Proving cards:
+Fangs of Kalonia, Spectacular Showdown, Give // Take, Leeches, Catti-brie of
+Mithral Hall, Thief of Blood (`counters-this-way.test.ts`). Not built:
+Magnanimous Magistrate's "you may remove that many … If you do" (whether
+fewer than that many may be removed is a rules question with no ruling);
+overload isn't scaffolded.
+
 ### Cards exiled with the source put onto the battlefield — built 2026-10-31
 
 The need-keys Phase 2 family `effect:put-onto-battlefield-options`, its top

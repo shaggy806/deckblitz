@@ -794,7 +794,9 @@
   "keyword:crewed-it-this-turn",
   "condition:crewed-by-this-turn",
   "trigger:crews-or-saddles",
-  "static:cant-crew"
+  "static:cant-crew",
+  "effect:counters-put-this-way",
+  "effect:counters-removed-this-way"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

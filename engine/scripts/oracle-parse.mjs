@@ -1112,7 +1112,11 @@ export function parseCost(text) {
     else if (part === "Discard your hand") cost.discardHand = true;
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
-    else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+    else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
+      // Every one there, none allowed; the number removed is the ability's X
+      // (Catti-brie of Mithral Hall).
+      cost.removeCounter = { kind: m[1], count: "all" };
+    } else if ((m = /^Remove (?:X|any number of) ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // X announced as it's activated (rules 601.2b, 602.2b), 0 allowed.
       cost.removeCounter = { kind: m[1], count: "x" };
     } else if ((m = new RegExp(`^Remove ${N} ([+-]\\d+/[+-]\\d+|\\w+) counters? from ~$`, "i").exec(part))) {
@@ -1861,6 +1865,13 @@ export function parseSentence(sentence, ctx) {
     const who = { "you get": undefined, "each player gets": "each-player", "each opponent gets": "each-opponent" }[m[1].toLowerCase()];
     return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), ...(who !== undefined ? { who } : {}) };
   }
+  // A player losing every counter of a kind (rule 122.8): "target player
+  // loses all poison counters" (Leeches), "… all rad counters" (Survivor's
+  // Med Kit's RadAway).
+  if ((m = re(`(target player|target opponent|you) loses? all (poison|rad|experience) counters`).exec(s))) {
+    const who = m[1].toLowerCase() === "you" ? {} : { target: slot(m[1]) };
+    return { kind: "remove-player-counters", counter: m[2].toLowerCase(), amount: "all", ...who };
+  }
 
   // Life.
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
@@ -2018,6 +2029,25 @@ export function parseSentence(sentence, ctx) {
     return { kind: "amass", amount: Number(m[2]), creatureType };
   }
 
+  // A counter put on a target, then something done to "each creature that
+  // had a [kind] counter put on it this way" (`thisWay: "counters-put"` — only
+  // that kind was put): Fangs of Kalonia's "then double the number of +1/+1
+  // counters on each …", Spectacular Showdown's "then goad each …".
+  if (
+    (m = /^put (a|an|one|two|three) ([+-]\d+\/[+-]\d+|[a-z]+(?: strike)?) counters? on (target [^,]+), then (double the number of ([+-]\d+\/[+-]\d+|[a-z]+) counters on|goad) each creature that had an? ([+-]\d+\/[+-]\d+|[a-z]+(?: strike)?) counter put on it this way\.$/i.exec(s)) &&
+    m[2].toLowerCase() === m[6].toLowerCase() &&
+    (m[5] === undefined || m[5].toLowerCase() === m[2].toLowerCase())
+  ) {
+    const counter = m[2].toLowerCase().replace(" ", "-");
+    // Read with a one-word stand-in for the kind ("double strike" is two).
+    const one = m[1] === "a" || m[1] === "an" || m[1] === "one";
+    const placed = parseSentence(`Put ${m[1]} plain counter${one ? "" : "s"} on ${m[3]}.`, ctx);
+    if (placed === null || placed.kind !== "add-counter") return null;
+    const put = { ...placed, counter };
+    const those = { type: "creature", thisWay: "counters-put" };
+    const then = m[5] !== undefined ? { kind: "double-counters-all", filter: those, counterKind: counter } : { kind: "goad", filter: those };
+    return { kind: "sequence", effects: [put, then] };
+  }
   // Counters.
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
@@ -3325,6 +3355,16 @@ export function parseEffect(text, outer) {
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
     // Barrin's Spite): two or three sentences, one `choose-among-targets`.
+    // A removal of counters and "that many" after it (`countersRemovedAt`).
+    const removedThen = countersRemovedAt(sentences, i, ctx);
+    if (removedThen !== null) {
+      for (const effect of removedThen.effects) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      skip = removedThen.used - 1;
+      continue;
+    }
     const among = amongTargetsAt(sentences, i, ctx);
     if (among !== null) {
       parsed.push(among.effect);
@@ -3740,6 +3780,49 @@ function energyAmountAt(sentences, i, ctx) {
     effect,
   };
   return { effects: [{ kind: "get-energy", amount: got[1].length / 3 }, may], used: j + 1 - i };
+}
+
+/**
+ * A removal of counters, then "that many" / "that much" in the next
+ * sentence: "Remove all +1/+1 counters from target creature you control.
+ * Draw that many cards." (Take), "Target player loses all poison counters.
+ * ~ deals that much damage to that player." (Leeches) — the count is the
+ * resolution's `thisWay: "counters-removed"` (a player's counters included,
+ * rule 122.1). `{ effects, used }`, or null.
+ */
+function countersRemovedAt(sentences, i, ctx) {
+  const next = sentences[i + 1];
+  if (next === undefined || /\bX\b/.test(next) || !/\bthat (?:many|much)\b/i.test(next)) return null;
+  if (!/^(?:remove|target (?:player|opponent) loses all|you lose all)\b/i.test(sentences[i])) return null;
+  const before = ctx.targets.length;
+  const fail = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  const removal = parseSentence(sentences[i], ctx);
+  if (removal === null || containsUndefined(removal)) return fail();
+  if (!["remove-counter", "remove-counter-all", "remove-player-counters"].includes(removal.kind)) return fail();
+  // "…to that player": the player the removal targeted, read as a target of
+  // its own and folded back onto that slot.
+  const thatPlayer = typeof removal.target === "number" && /\bthat player\b/i.test(next);
+  const text = next.replace(/\bthat (?:many|much)\b/gi, "X").replace(/\bthat player\b/i, "target player");
+  const own = ctx.targets.length;
+  const inner = parseSentence(text, ctx);
+  if (inner === null || containsUndefined(inner) || !JSON.stringify(inner).includes('"x"')) return fail();
+  if (thatPlayer && ctx.targets.length !== own + 1) return fail();
+  if (thatPlayer) ctx.targets.length = own;
+  const removed = { thisWay: "counters-removed" };
+  const swap = (v, key) =>
+    v === "x"
+      ? removed
+      : thatPlayer && key === "target" && v === own
+        ? removal.target
+        : Array.isArray(v)
+          ? v.map((w) => swap(w))
+          : v !== null && typeof v === "object"
+            ? Object.fromEntries(Object.entries(v).map(([k, w]) => [k, swap(w, k)]))
+            : v;
+  return { effects: [removal, swap(inner)], used: 2 };
 }
 
 function amongTargetsAt(sentences, i, ctx) {
@@ -5069,6 +5152,16 @@ export function parseFace(face, ctx = {}) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
       }
+      // A "remove all … counters" cost's count is the ability's X: "…, where
+      // X is the number of counters removed this way" reads it as X.
+      // So do "damage … equal to the number of … counters removed this way"
+      // (Molten Hydra, Torture Chamber) and "that much damage" (Relic Amulet).
+      if (ability.cost.removeCounter?.count === "all" && !/\bX\b/.test(rest.replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ""))) {
+        rest = rest
+          .replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ".")
+          .replace(/ deals damage to (.+?) equal to the number of (?:[\w+/-]+ )?counters removed this way\./, " deals X damage to $1.")
+          .replace(/ deals that much damage to /, " deals X damage to ");
+      }
       // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
       // Barbarian Lunatic): a permanent's own ability, so "it" is its source.
       i = fillEffect(ability, rest, { tokenFor, ...(/^It deals /.test(rest) ? { it: "source" } : {}) }, lines, i);
@@ -6255,6 +6348,20 @@ function parseStatic(line, text) {
       return {
         affects: { scope: "self" },
         setBasePtFromCount: { countOf: agg, plusPower: 0, plusToughness: 0, only: "power" },
+        text,
+      };
+    }
+  }
+  // Thief of Blood's "As ~ enters, remove all counters from all permanents.
+  // ~ enters with a +1/+1 counter on it for each counter removed this way."
+  // (rule 614.1c): one replacement, `removeAllCountersFrom` and the count.
+  {
+    const w = /^As ~ enters, remove all counters from all ([a-z ]+)\. ~ enters with an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on it for each counter removed this way\.$/.exec(line);
+    const filter = w === null ? null : w[1] === "permanents" ? {} : parseTypePhrase(w[1]);
+    if (filter !== null && w !== null) {
+      return {
+        affects: { scope: "self" },
+        replacement: { event: "enters-battlefield", removeAllCountersFrom: filter, counters: { kind: w[2], amount: "removed-as-enters" } },
         text,
       };
     }

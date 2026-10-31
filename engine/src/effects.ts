@@ -1399,7 +1399,10 @@ export type ThisWayKind =
   | "tapped"
   /** Counters it removed, counted one by one — Garnet, Princess of
    * Alexandria's "for each lore counter removed this way", Mister Hyde's "If
-   * you do" (a `remove-counters` effect's, or a `remove-counter`'s). */
+   * you do" (a `remove-counters` effect's, or a `remove-counter`'s). As an
+   * amount with no `filter` or `sumOf`, the counters a player lost count too
+   * (a `remove-player-counters` — rule 122.1): Leeches' "loses all poison
+   * counters … deals that much damage". */
   | "counters-removed"
   /** Permanents it put a counter on — Ripples of Potential's "permanents you
    * control that had a counter put on them this way", after a proliferate.
@@ -7827,6 +7830,10 @@ export interface EffectApi {
   /** How much life `players` (everyone when absent) have lost so far in
    * this resolution — see the `lifeLostThisWay` {@link EffectAmount}. */
   lifeLostThisWay(players?: readonly PlayerId[]): number;
+  /** How many counters `players` (everyone when absent) have had removed
+   * from themselves so far in this resolution — part of the `thisWay:
+   * "counters-removed"` amount (rule 122.1). */
+  playerCountersRemovedThisWay(players?: readonly PlayerId[]): number;
   /** See the `excessDamageThisWay` {@link EffectAmount}: dealt to `to`'s
    * object only, when given. */
   excessDamageThisWay(to?: ObjectId): number;
@@ -10495,7 +10502,14 @@ function signedAmountValue(
       for (const entry of done) byPlayer.set(entry.player, (byPlayer.get(entry.player) ?? 0) + valueOf(entry));
       return Math.max(0, ...byPlayer.values());
     }
-    return done.reduce((n, entry) => n + valueOf(entry), 0);
+    // "The number of counters removed this way" counts a player's too (rule
+    // 122.1 — Leeches' "loses all poison counters … that much damage"),
+    // unless the amount asks about objects only (a filter or a sum of them).
+    const fromPlayers =
+      amount.thisWay === "counters-removed" && amount.filter === undefined && amount.sumOf === undefined
+        ? ctx.playerCountersRemovedThisWay(players)
+        : 0;
+    return done.reduce((n, entry) => n + valueOf(entry), fromPlayers);
   }
   if ("countPlayers" in amount) {
     const players = ctx.playersInScope(amount.countPlayers);

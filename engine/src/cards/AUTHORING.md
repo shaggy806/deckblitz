@@ -1012,7 +1012,16 @@ do, this creature gets +X/+0": a `choose-permanents` that taps them, then `{
 thisWay: "tapped" }`; one already tapped isn't counted), `"counters-put"`
 (permanents it put a counter on — Ripples of Potential's "permanents you
 control that had a counter put on them this way", after its proliferate, as a
-`choose-permanents` filter's `thisWay`). "Draw a card for each card
+`choose-permanents` filter's `thisWay`; Fangs of Kalonia's "then double the
+number of +1/+1 counters on each creature that had a +1/+1 counter put on it
+this way" is a `double-counters-all` over `{ type: "creature", thisWay:
+"counters-put" }`, Spectacular Showdown's goad a `goad` with that filter — the
+kind isn't asked, so use it only when nothing else was put), and
+`"counters-removed"` (counters it removed, one by one — Take's "remove all
++1/+1 counters from target creature you control. Draw that many cards"; with
+no `filter` or `sumOf` it counts the counters a `remove-player-counters` took
+off a player too, rule 122.1 — Leeches' "loses all poison counters … that much
+damage to that player"). "Draw a card for each card
 discarded this way", Celes's "draw that many cards plus one" (`{ sum: [{
 thisWay: "discarded" }, 1] }`), Abdel Adrian's "create a Soldier for each
 permanent exiled this way", Dihada's "a Treasure for each card put into your
@@ -1728,6 +1737,8 @@ each damage would be dealt, rule 615.1),
 **"Whenever ~ attacks and isn't blocked"** is the `{ on: "attacks-unblocked", who }` trigger (rule 509.3g — Fallen Empires' Farrel's Zealot, Necrite; Guiltfeeder, Cybermat): once per attacker with no creatures declared as blockers, as the last defending player declares (or is skipped with nothing to block with); the attacker is the trigger object and the defending player the `"trigger-player"` (Mindstab Thrull's "defending player discards three cards"). Its delayed form, "this turn, when target creature attacks and isn't blocked" (Delif's Cone, Delif's Cube), is a `delayed-trigger` at `{ attacksUnblocked: <slot> }`, firing in each combat this turn (603.7c). **"Assigns no combat damage this turn"** is the `assigns-no-combat-damage` effect (510.1a) — the usual "if you do" price is the `may`'s `then` (Floral Spuzzem). The scaffolder reads the trigger and "If you do, ~ assigns no combat damage this turn." `attacks-unblocked.test.ts`.
 
 **"Remove X counters" / "remove any number of counters"** as a cost is `removeCounter: { kind, count: "x" }` (rules 601.2b, 602.2b — Fallen Empires' storage lands, the Mana Batteries, Arcbound Javelineer, Rasputin): X is announced as it's activated, up to the counters on the source (the offer's `xCost.maxX`), 0 allowed unless the ability's `minX` says otherwise ("one or more" — Rasputin's `minX: 1`), and the effect reads it as `"x"` ("add {B} for each storage counter removed this way", "deals that much damage"). With `{X}` in the mana cost too it's the same X (Chamber Sentry). A mana ability with it is activated by hand, never by the auto-payer. The scaffolder reads the cost and both Battery/storage-land mana sentences. `remove-x-counters.test.ts`.
+
+**"Remove all [kind] counters from [this]"** as a cost is `removeCounter: { kind, count: "all" }` (Catti-brie of Mithral Hall, Molten Hydra, Relic Amulet): every counter of that kind on the source, none at all a legal payment (Catti-brie's ruling), and the number removed is the ability's X — "where X is the number of counters removed this way", "damage equal to the number of … removed this way", "that much damage" all read `"x"` (rule 601.2h via 602.2b; a copy keeps it, 707.10). Off the source only, of one kind. The scaffolder reads the cost and those three phrasings. `counters-this-way.test.ts`.
 
 **Counters chosen as the cost is paid** — "Remove a +1/+1 counter from a creature you control" (Ghave, Guru of Spores), "Remove a counter from this creature" (Loch Mare: any kind it has), "Remove three counters from among creatures you control" (Tayam), "a +1/+1 counter or a charge counter from a permanent you control" (Ion Storm), "a time counter from a permanent you control or suspended card you own" (Rift Elemental) — is the same `removeCounter` with `kind: "any"` or `orKinds`, `from` (a filter over permanents you control; `excludeSource` for "another"), `among` and `orSuspended`. Which ones is the `remove-counters` decision, once the ability is on the stack and before anyone gets priority (rules 602.2b, 601.2h — as a blight is), asked only when there's a choice; gated on there being enough to remove (rule 118.3: `among` counts them all, otherwise the most any one has). `count: "x"` announces X up to that (Ooze Flux's "one or more" with `minX: 1`; Moxite Refinery's X counters from one permanent). Not on a mana ability, nor beside another cost that asks. The scaffolder reads these costs. `activation-choices.test.ts`.
 
@@ -5075,6 +5086,12 @@ clause (section 9):
   live amount, read as it enters and never counting itself or what enters
   with it (Aeve, Progenitor Ooze's "a +1/+1 counter on it for each other Ooze
   you control" is a plain `countOf`).
+  `removeAllCountersFrom: CardFilter` is "As this creature enters, remove all
+  counters from all permanents" (Thief of Blood — `{}`): every counter of
+  every kind off each permanent already there matching it, as it enters (rule
+  614.1c; never itself or what enters with it, 614.12; players' counters
+  stay), and `counters: { kind: "+1/+1", amount: "removed-as-enters" }` is
+  "a +1/+1 counter on it for each counter removed this way".
   `tapped` is unconditional; `tappedUnless: StaticCondition` is the check-land
   cycle (Rootbound Crag: `{ kind: "controls", filter: { subtypes: [...] },
   atLeast: 1 }`, via the `checkLandStatic`/`enterTappedUnlessLands` helpers),
