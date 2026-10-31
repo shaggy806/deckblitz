@@ -342,6 +342,34 @@ function whyCannotBlockUncached(
   blockerId: ObjectId,
   attackerId: ObjectId,
 ): string | null {
+  const alone = whyThisCannotBlock(state, registry, player, blockerId, attackerId);
+  if (alone !== null) return alone;
+  // "Can't be blocked unless all creatures defending player controls block
+  // it" (Tromokratis — rule 509.1b): one of theirs that can't block it
+  // leaves it unblockable by any. That every one *does* is the
+  // declaration's check (`blockingViolations`' `blocked-by-all`).
+  if (blockedOnlyByAll(state, registry, attackerId)) {
+    for (const id of state.zones.shared.battlefield) {
+      if (id === blockerId || state.objects[id].controller !== player) continue;
+      if (!effectiveTypes(state, registry, state.objects[id]).includes("creature")) continue;
+      if (whyThisCannotBlock(state, registry, player, id, attackerId) !== null) {
+        const attackerDef = registry.get(printedCardName(state.objects[attackerId]));
+        return `${attackerDef.name} can't be blocked unless all your creatures block it, and not all can`;
+      }
+    }
+  }
+  return null;
+}
+
+/** Whether `blockerId` can block `attackerId` judged on its own — every
+ * restriction but the one that asks about all the defender's creatures. */
+function whyThisCannotBlock(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  blockerId: ObjectId,
+  attackerId: ObjectId,
+): string | null {
   const blocker = state.objects[blockerId];
   const blockerDef = creatureDef(state, registry, blockerId);
   if (blocker === undefined || blockerDef === null) {
@@ -390,6 +418,16 @@ function whyCannotBlockUncached(
       const attackerDef = registry.get(printedCardName(attacker));
       return `${blockerDef.name} can't block ${attackerDef.name}`;
     }
+  }
+  // "Target creature can't block this creature this turn" (Kozilek's
+  // Pathfinder): this attacker, the object it was then (rule 400.7).
+  if (
+    blocker.modifiers.some((m) =>
+      m.cantBlock?.some((c) => c.object === attackerId && c.zoneChangeCount === (attacker.zoneChangeCount ?? 0)),
+    )
+  ) {
+    const attackerDef = registry.get(printedCardName(attacker));
+    return `${blockerDef.name} can't block ${attackerDef.name} this turn`;
   }
   // "Can't be blocked by [filter]" on the attacker (Delney, Streetwise
   // Lookout), "can block only [filter]" on the blocker.
@@ -546,7 +584,9 @@ function blockFilterSources(
         if (
           ability.cantBeBlockedBy !== undefined ||
           ability.canBlockOnly !== undefined ||
-          ability.blockedByAtMostOne === true
+          ability.blockedByAtMostOne === true ||
+          ability.blockedByAtLeast !== undefined ||
+          ability.blockedOnlyByAll === true
         ) {
           out.push({ source, ability });
         }
@@ -610,6 +650,39 @@ export function blockedByAtMostOne(state: GameState, registry: CardRegistry, att
   if (object === undefined) return false;
   for (const { source, ability } of blockFilterSources(state, registry)) {
     if (ability.blockedByAtMostOne !== true) continue;
+    if (!staticReaches(state, registry, source, ability, object)) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    return true;
+  }
+  return false;
+}
+
+/**
+ * The fewest creatures that may block `attacker` right now, if any do: 2 for
+ * menace (rule 702.111b), N for "can't be blocked except by N or more
+ * creatures" (`blockedByAtLeast` — Pathrazer of Ulamog), the largest when
+ * several apply; 1 otherwise. Read as blocks are declared (rule 509.1b).
+ */
+export function minimumBlockers(state: GameState, registry: CardRegistry, attacker: ObjectId): number {
+  const object = state.objects[attacker];
+  if (object === undefined) return 1;
+  let least = objHasKeyword(state, registry, attacker, "menace") ? 2 : 1;
+  for (const { source, ability } of blockFilterSources(state, registry)) {
+    if (ability.blockedByAtLeast === undefined || ability.blockedByAtLeast <= least) continue;
+    if (!staticReaches(state, registry, source, ability, object)) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    least = ability.blockedByAtLeast;
+  }
+  return least;
+}
+
+/** Whether `attacker` "can't be blocked unless all creatures defending
+ * player controls block it" right now (Tromokratis' `blockedOnlyByAll`). */
+export function blockedOnlyByAll(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
+  const object = state.objects[attacker];
+  if (object === undefined) return false;
+  for (const { source, ability } of blockFilterSources(state, registry)) {
+    if (ability.blockedOnlyByAll !== true) continue;
     if (!staticReaches(state, registry, source, ability, object)) continue;
     if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
     return true;

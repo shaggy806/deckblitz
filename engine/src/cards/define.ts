@@ -422,6 +422,12 @@ export type CombatRestriction =
    * to the creatures there as it resolved). */
   | "cant-be-blocked"
   | "must-attack"
+  /** "Blocks each combat if able" (Razorgrass Screen; with `must-attack`,
+   * Iron Golem's "attacks or blocks each combat if able" — it can attack only
+   * on its controller's turn and block only on another's): a blocking
+   * requirement (rule 509.1c) on the creature, joined to the blockers
+   * offer's `blockRequirements` like the `block-if-able` effect's. */
+  | "must-block"
   /** Lure: **every** creature able to block it must do so. */
   | "must-be-blocked"
   /** "Must be blocked if able" (Anzrag, the Quake-Mole): the defending
@@ -646,6 +652,11 @@ export type StaticCondition =
        * permanents of one name count once (the ruling), and a permanent with
        * no name (face down) not at all. */
       readonly distinctNames?: boolean;
+      /** Count only permanents that share one creature type — Graxiplon's
+       * "three or more creatures that share a creature type": the most of
+       * them with any one type, a changeling counting for every type (rule
+       * 702.73a). */
+      readonly sharingACreatureType?: boolean;
       /** Count every player's permanents, not only yours — "if there are
        * **four or more creatures on the battlefield**" (Planar Collapse),
        * Harbor Serpent's "five or more Islands on the battlefield". The
@@ -1713,6 +1724,20 @@ export interface StaticAbility {
    * like `cantBeBlockedBy`, so a scope reading power ("with power 4 or
    * greater") sees the creature as it is. */
   readonly blockedByAtMostOne?: boolean;
+  /** The affected creatures "can't be blocked except by N or more
+   * creatures" (Pathrazer of Ulamog's three, Sonorous Howlbonder's "each
+   * creature you control with menace …"): menace's restriction (rule
+   * 702.111b) with a larger N, a blocking restriction (509.1b) read as blocks
+   * are declared. Several reaching one creature, menace among them, ask for
+   * the largest. */
+  readonly blockedByAtLeast?: number;
+  /** The affected creatures "can't be blocked unless **all creatures
+   * defending player controls** block it" (Tromokratis — rule 509.1b): it
+   * can be blocked only if every creature that player controls blocks it,
+   * so one of theirs that can't (tapped, or barred from blocking it) leaves
+   * it unblockable, and a declaration blocking it with only some is
+   * illegal. */
+  readonly blockedOnlyByAll?: boolean;
   /**
    * A prohibition on casting and activating ("can't" beats "can" — rule
    * 101.2): `who` — `"opponents"`, `"you"` or `"each-player"`, from this

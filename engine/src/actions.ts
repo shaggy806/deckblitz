@@ -1405,8 +1405,20 @@ export type LegalAction =
          * every attacker it can block. Absent: one. */
         readonly maxBlocks?: number;
       }[];
-      /** Attackers with menace: block them with 0 or 2+ creatures, never 1. */
+      /** Attackers with menace — or any other "can't be blocked except by
+       * two or more creatures": block them with 0 or 2+ creatures, never 1. */
       readonly menaceAttackers: readonly ObjectId[];
+      /** Those of `menaceAttackers` that need **more** than two ("can't be
+       * blocked except by three or more creatures" — Pathrazer of Ulamog,
+       * `blockedByAtLeast`), with how many: 0 or that many. Absent when
+       * there are none. */
+      readonly minBlockers?: Readonly<Record<ObjectId, number>>;
+      /** Attackers that "can't be blocked unless all creatures defending
+       * player controls block" them (Tromokratis): blocked by every
+       * creature of this defender's, or by none. Only ones each of them can
+       * block are listed — otherwise none of them can. Absent when there are
+       * none. */
+      readonly blockedByAll?: readonly ObjectId[];
       /** Attackers that "can't be blocked by more than one creature"
        * (Challenger Troll — rule 509.1b): 0 or 1 creature on each. One
        * that must also be blocked (Lure) is listed under

@@ -5770,3 +5770,13 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Lightning Bolt at Bob. Target your Grizzly Bears with the Gauntlet's trigger, and choose shield.
 - **Expect:** The banner reads "Ichormoon Gauntlet — Choose a kind of counter" with two buttons, +1/+1 and shield. The Bears end with two +1/+1 counters and two shield counters.
 - **Known bug:** the cast can stall on "Resolving…" before the trigger's target is asked — BACKLOG's "Playback stalls when your cast triggers your own targeted ability", not this feature.
+
+## Blocking minimums and "all or none" (2026-10-30, need-keys Phase 2: build-family, features only)
+
+### Troll of Khazad-dûm: it takes three blockers
+- **Do:** Attack Bob with Troll of Khazad-dûm. As Bob, put two Grizzly Bears on it, then the third.
+- **Expect:** With two, Confirm stays disabled and the bar reads "Troll of Khazad-dûm needs 3+ blockers". With all three it confirms.
+
+### Tromokratis: all of Bob's creatures block it, or none
+- **Do:** Attack Bob with Tromokratis. As Bob, put one Grizzly Bears on it, then the other.
+- **Expect:** With one, Confirm stays disabled: "Tromokratis must be blocked by all your creatures or none". With both it confirms.

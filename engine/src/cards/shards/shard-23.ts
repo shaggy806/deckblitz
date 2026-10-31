@@ -779,6 +779,7 @@ import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
+import _poolTrollOfKhazadDum from "../pool/troll-of-khazad-dum.js";
 import _poolTrostanisJudgment from "../pool/trostanis-judgment.js";
 import _poolTunnel from "../pool/tunnel.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
@@ -1646,6 +1647,7 @@ const shard: CardShard = {
     _poolTreacherousBlessing,
     _poolTreetopAmbusher,
     _poolTrokinHighGuard,
+    _poolTrollOfKhazadDum,
     _poolTrostanisJudgment,
     _poolTunnel,
     _poolTwiceUponATime,

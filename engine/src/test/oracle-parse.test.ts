@@ -3207,3 +3207,51 @@ describe("distinct values and Equipment attached to the source", () => {
     expect(gaveleer.complete).toBe(true);
   });
 });
+
+describe("blocking restrictions and requirements on one creature", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Blocks", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'except by N or more creatures', on it or each creature you control with menace", () => {
+    expect(face("Creature — Troll", "This creature can't be blocked except by three or more creatures.").static[0]).toEqual({
+      affects: { scope: "self" },
+      blockedByAtLeast: 3,
+      text: "This creature can't be blocked except by three or more creatures.",
+    });
+    const howl = face("Creature — Human Warrior", "Each creature you control with menace can't be blocked except by three or more creatures.");
+    expect(howl.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", controlledBy: "you", keyword: "menace" } });
+  });
+
+  it("reads 'can't be blocked as long as / unless defending player …' as unblockable on an of-player condition", () => {
+    const defending = (condition: unknown) => ({ kind: "of-player", player: "defending-player", condition });
+    const hazy = face("Creature — Homunculus", "This creature can't be blocked as long as defending player controls an untapped land.");
+    expect(hazy.static[0].grantKeywords).toEqual(["unblockable"]);
+    expect(hazy.static[0].condition).toEqual(defending({ kind: "controls", filter: { type: "land", tapped: false }, atLeast: 1 }));
+    const ayesha = face("Creature — Human", "This creature can't be blocked as long as defending player controls three or more artifacts.");
+    expect(ayesha.static[0].condition).toEqual(defending({ kind: "controls", filter: { type: "artifact" }, atLeast: 3 }));
+    const ambusher = face("Creature — Mutant", "This creature can't be blocked as long as defending player has a rad counter.");
+    expect(ambusher.static[0].condition).toEqual(defending({ kind: "player-counters", counter: "rad", who: "you", atLeast: 1 }));
+    const grax = face(
+      "Creature — Beast",
+      "This creature can't be blocked unless defending player controls three or more creatures that share a creature type.",
+    );
+    expect(grax.static[0].condition).toEqual(
+      defending({ kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 3, sharingACreatureType: true } }),
+    );
+    const tromo = face("Legendary Creature — Kraken", "This creature can't be blocked unless all creatures defending player controls block it.");
+    expect(tromo.static[0].blockedOnlyByAll).toBe(true);
+  });
+
+  it("reads 'blocks each combat if able', 'attacks or blocks', and 'can't block ~ this turn'", () => {
+    expect(face("Artifact Creature — Wall", "This creature blocks each combat if able.").static[0].restrictions).toEqual(["must-block"]);
+    expect(face("Artifact Creature — Golem", "This creature attacks or blocks each combat if able.").static[0].restrictions).toEqual([
+      "must-attack",
+      "must-block",
+    ]);
+    expect(parseSentence("Target creature can't block ~ this turn.", ctx())).toEqual({
+      kind: "restrict",
+      target: 0,
+      restrictions: [],
+      cantBlockAttacker: "source",
+    });
+  });
+});

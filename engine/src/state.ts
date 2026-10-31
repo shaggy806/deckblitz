@@ -1455,6 +1455,11 @@ export interface PtModifier {
    * 509.1b). A rule about it, not an ability, so a loss of abilities doesn't
    * end it. Read with the statics' block filters (`combat/eligibility.ts`). */
   cantBeBlockedBy?: { readonly filter: CardFilter; readonly you: PlayerId }[];
+  /** "Target creature can't block **this creature** this turn" (the
+   * `restrict` effect's `cantBlockAttacker` — Kozilek's Pathfinder), on the
+   * creature that can't block: each attacker it can't block, held by its
+   * `zoneChangeCount` — that object, not a later one (rule 400.7). */
+  cantBlock?: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** Layer 6 — static abilities this modifier grants: "it gains 'This
    * creature can't be blocked by more than one creature' until end of turn"
    * (Full Steam Ahead), Earthbind's "this Aura gains 'Enchanted creature

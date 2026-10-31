@@ -2062,7 +2062,8 @@ export class EvalBotController extends HeuristicBotController {
         }
       }
       for (const attacker of legal.menaceAttackers) {
-        if (single.has(attacker)) continue;
+        // A pair is too few for "except by three or more" (Pathrazer).
+        if (single.has(attacker) || legal.minBlockers?.[attacker] !== undefined) continue;
         const able = free.filter((e) => e.canBlock.includes(attacker));
         let pairs = 0;
         for (let i = 0; i < able.length && pairs < MAX_MENACE_PAIRS; i += 1) {

@@ -19,12 +19,14 @@ import type { Action, BlockerDeclaration, LegalAction } from "../actions.js";
 import { blockingViolations, obeyingLure, withinSingleBlockers } from "../combat/blocking.js";
 import {
   blockedByAtMostOne,
+  blockedOnlyByAll,
   creatureDef,
   currentAttackers,
   defendingPlayerOf,
+  minimumBlockers,
   whyCannotBlock,
 } from "../combat/eligibility.js";
-import { blockLimitOf, objHasKeyword, restrictionsOf } from "../characteristics.js";
+import { blockLimitOf, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { whyMembersInvalid } from "../combat/blocking.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -55,8 +57,16 @@ function blockersOffer(
       };
     })
     .filter((entry) => entry.canBlock.length > 0);
-  const menaceAttackers = attacking.filter((id) =>
-    objHasKeyword(ctx.state, ctx.registry, id, "menace"),
+  // Menace, or "can't be blocked except by N or more creatures" (rule
+  // 702.111b, 509.1b): 0 or N creatures on it.
+  const leastOf = new Map(attacking.map((id) => [id, minimumBlockers(ctx.state, ctx.registry, id)]));
+  const menaceAttackers = attacking.filter((id) => (leastOf.get(id) ?? 1) >= 2);
+  const minBlockers: Record<ObjectId, number> = {};
+  for (const id of menaceAttackers) if ((leastOf.get(id) ?? 1) > 2) minBlockers[id] = leastOf.get(id) ?? 1;
+  // "Can't be blocked unless all creatures defending player controls block
+  // it" (Tromokratis): only when every one of them can (`whyCannotBlock`).
+  const blockedByAll = attacking.filter(
+    (id) => blockedOnlyByAll(ctx.state, ctx.registry, id) && eligible.some((e) => e.canBlock.includes(id)),
   );
   // Attackers that can't be blocked by more than one creature (Challenger
   // Troll — rule 509.1b).
@@ -88,6 +98,14 @@ function blockersOffer(
     if ((ctx.state.objects[r.attacker]?.zoneChangeCount ?? 0) !== r.attackerZoneChangeCount) continue;
     if (entry.canBlock.includes(r.attacker)) blockRequirements.push({ blocker: r.blocker, attacker: r.attacker });
   }
+  // "Blocks each combat if able" (Razorgrass Screen, Grand Melee): a
+  // requirement on the creature as a static or a `restrict` gives it.
+  for (const entry of eligible) {
+    if (blockRequirements.some((r) => r.blocker === entry.blocker && r.attacker === undefined)) continue;
+    if (restrictionsOf(ctx.state, ctx.registry, entry.blocker).has("must-block")) {
+      blockRequirements.push({ blocker: entry.blocker });
+    }
+  }
   // Token stacks attacking as one counted object (`Game.attackingStackPart`).
   const attackerTokens: Record<ObjectId, number> = {};
   for (const id of attacking) {
@@ -98,6 +116,8 @@ function blockersOffer(
     kind: "declare-blockers",
     eligible,
     menaceAttackers,
+    ...(Object.keys(minBlockers).length > 0 ? { minBlockers } : {}),
+    ...(blockedByAll.length > 0 ? { blockedByAll } : {}),
     ...(singleBlockerAttackers.length > 0 ? { singleBlockerAttackers } : {}),
     mustBlock,
     ...(mustBeBlockedIfAble.length > 0 ? { mustBeBlockedIfAble } : {}),
@@ -169,7 +189,11 @@ export const blockers = defineDecision({
     const violation = blockingViolations(action.blocks, offer)[0];
     if (violation === undefined) return null;
     return violation.kind === "menace"
-      ? `${name(violation.attacker)} has menace and must be blocked by two or more creatures`
+      ? violation.needs === 2
+        ? `${name(violation.attacker)} has menace and must be blocked by two or more creatures`
+        : `${name(violation.attacker)} can't be blocked except by ${violation.needs} or more creatures`
+      : violation.kind === "blocked-by-all"
+        ? `${name(violation.attacker)} can't be blocked unless all your creatures block it (${name(violation.blocker)} isn't)`
       : violation.kind === "single-blocker"
         ? `${name(violation.attacker)} can't be blocked by more than one creature`
       : violation.kind === "must-be-blocked"

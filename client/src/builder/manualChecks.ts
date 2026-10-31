@@ -8661,4 +8661,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- Blocking minimums and "all or none" (2026-10-30, build-family) ---
+  preset(
+    'Troll of Khazad-dûm: it takes three blockers',
+    board({
+      you: { bf: ['Troll of Khazad-dûm'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Grizzly Bears', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    "Tromokratis: all of Bob's creatures block it, or none",
+    board({ you: { bf: ['Tromokratis'] }, opp: { human: true, bf: ['Grizzly Bears', 'Grizzly Bears'] } }),
+  ),
 ]

@@ -51,6 +51,7 @@ import _poolAtmosphericGreenhouse from "../pool/atmospheric-greenhouse.js";
 import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
+import _poolAuriokSiegeSled from "../pool/auriok-siege-sled.js";
 import _poolAuriokSurvivors from "../pool/auriok-survivors.js";
 import _poolAuroraOfEmrakul from "../pool/aurora-of-emrakul.js";
 import _poolAvacynGuardianAngel from "../pool/avacyn-guardian-angel.js";
@@ -915,6 +916,7 @@ const shard: CardShard = {
     _poolAttrition,
     _poolAudacity,
     _poolAuraExtraction,
+    _poolAuriokSiegeSled,
     _poolAuriokSurvivors,
     _poolAuroraOfEmrakul,
     _poolAvacynGuardianAngel,

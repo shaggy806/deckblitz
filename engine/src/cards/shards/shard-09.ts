@@ -313,6 +313,7 @@ import _poolGolemArtisan from "../pool/golem-artisan.js";
 import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.js";
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
+import _poolGrandMelee from "../pool/grand-melee.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGraspOfTheHieromancer from "../pool/grasp-of-the-hieromancer.js";
 import _poolGraspingThrull from "../pool/grasping-thrull.js";
@@ -682,6 +683,7 @@ import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSoldeviMachinist from "../pool/soldevi-machinist.js";
 import _poolSoltariVisionary from "../pool/soltari-visionary.js";
 import _poolSonicBurst from "../pool/sonic-burst.js";
+import _poolSonorousHowlbonder from "../pool/sonorous-howlbonder.js";
 import _poolSoothsaying from "../pool/soothsaying.js";
 import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
@@ -1196,6 +1198,7 @@ const shard: CardShard = {
     _poolGoreclawTerrorOfQalSisma,
     _poolGraftedWargear,
     _poolGrahamObrien,
+    _poolGrandMelee,
     _poolGraspOfPhantoms,
     _poolGraspOfTheHieromancer,
     _poolGraspingThrull,
@@ -1565,6 +1568,7 @@ const shard: CardShard = {
     _poolSoldeviMachinist,
     _poolSoltariVisionary,
     _poolSonicBurst,
+    _poolSonorousHowlbonder,
     _poolSoothsaying,
     _poolSorcerousSight,
     _poolSparkTrooper,

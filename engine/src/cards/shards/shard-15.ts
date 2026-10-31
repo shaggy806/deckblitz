@@ -477,6 +477,7 @@ import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
 import _poolNecromasterDragon from "../pool/necromaster-dragon.js";
 import _poolNecropolisFiend from "../pool/necropolis-fiend.js";
 import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
+import _poolNeurokSpy from "../pool/neurok-spy.js";
 import _poolNeverendingTorment from "../pool/neverending-torment.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
@@ -1291,6 +1292,7 @@ const shard: CardShard = {
     _poolNecromasterDragon,
     _poolNecropolisFiend,
     _poolNeurokInvisimancer,
+    _poolNeurokSpy,
     _poolNeverendingTorment,
     _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,

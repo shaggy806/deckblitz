@@ -249,6 +249,7 @@ import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
 import _poolGenkuFutureShaper from "../pool/genku-future-shaper.js";
 import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGigantoplasm from "../pool/gigantoplasm.js";
+import _poolGingerbrute from "../pool/gingerbrute.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
@@ -326,6 +327,7 @@ import _poolInsolence from "../pool/insolence.js";
 import _poolInsomniaCrownCity from "../pool/insomnia-crown-city.js";
 import _poolIntoTheFloodMaw from "../pool/into-the-flood-maw.js";
 import _poolIntoTheTimeVortex from "../pool/into-the-time-vortex.js";
+import _poolIronGolem from "../pool/iron-golem.js";
 import _poolIrrigationDitch from "../pool/irrigation-ditch.js";
 import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvorytuskFortress from "../pool/ivorytusk-fortress.js";
@@ -1023,6 +1025,7 @@ const shard: CardShard = {
     _poolGenkuFutureShaper,
     _poolGiadaFontOfHope,
     _poolGigantoplasm,
+    _poolGingerbrute,
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
     _poolGlimmerSeeker,
@@ -1100,6 +1103,7 @@ const shard: CardShard = {
     _poolInsomniaCrownCity,
     _poolIntoTheFloodMaw,
     _poolIntoTheTimeVortex,
+    _poolIronGolem,
     _poolIrrigationDitch,
     _poolIsshinTwoHeavensAsOne,
     _poolIvorytuskFortress,

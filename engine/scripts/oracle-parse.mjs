@@ -2008,6 +2008,11 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Combat this turn.
+  // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
+  // one attacker, the source as it resolves (rule 400.7).
+  if ((m = re(`(${TARGET}) can't block ~ this turn`).exec(s))) {
+    return { kind: "restrict", target: slot(m[1]), restrictions: [], cantBlockAttacker: "source" };
+  }
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
@@ -4328,16 +4333,22 @@ function parseStatic(line, text) {
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
   // "… as long as defending player controls an artifact." — the player the
-  // creature attacks (rule 802.2a), Bouncing Beebles.
-  m = /^(.+) as long as defending player controls (?:an?|one or more) ([^.]+)\.$/.exec(line);
+  // creature attacks (rule 802.2a), Bouncing Beebles; "three or more
+  // artifacts" (Ayesha Tanaka), "an untapped land" (Hazy Homunculus), "has
+  // a rad counter" (Nightkin Ambusher).
+  m = /^(.+) as long as defending player (?:controls (an?|one or more|two or more|three or more|four or more|five or more) (untapped )?([^.]+)|has an? (rad|poison) counter)\.$/.exec(line);
   if (m !== null) {
-    const filter = parseTypePhrase(m[2]);
-    const inner = filter === null ? null : parseStatic(`${m[1]}.`, text);
+    const filter = m[4] === undefined ? undefined : parseTypePhrase(m[4]);
+    const atLeast = m[2] === undefined ? 1 : ({ two: 2, three: 3, four: 4, five: 5 }[m[2].split(" ")[0]] ?? 1);
+    const condition =
+      m[5] !== undefined
+        ? { kind: "player-counters", counter: m[5], who: "you", atLeast: 1 }
+        : filter === null || filter === undefined || Object.keys(filter).length === 0
+          ? null
+          : { kind: "controls", filter: { ...filter, ...(m[3] ? { tapped: false } : {}) }, atLeast };
+    const inner = condition === null ? null : parseStatic(`${m[1]}.`, text);
     if (inner !== null && inner.condition === undefined && inner.affects?.scope === "self") {
-      return {
-        ...inner,
-        condition: { kind: "of-player", player: "defending-player", condition: { kind: "controls", filter, atLeast: 1 } },
-      };
+      return { ...inner, condition: { kind: "of-player", player: "defending-player", condition } };
     }
   }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
@@ -4468,6 +4479,32 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
   }
   if (line === "~ attacks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-attack"], text };
+  // Rule 509.1c's requirement as a static; "attacks or blocks" is both, each
+  // meeting only its own kind of combat.
+  if (line === "~ blocks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-block"], text };
+  if (line === "~ attacks or blocks each combat if able.") {
+    return { affects: { scope: "self" }, restrictions: ["must-attack", "must-block"], text };
+  }
+  if (line === "All creatures block each combat if able.") return { affects: { scope: "all-creatures" }, restrictions: ["must-block"], text };
+  // Menace's restriction with a larger N (rules 702.111b, 509.1b).
+  if ((m = /^(~|Each creature you control with menace) can't be blocked except by (two|three|four|five|six) or more creatures\.$/.exec(line))) {
+    const n = { two: 2, three: 3, four: 4, five: 5, six: 6 }[m[2]];
+    const affects =
+      m[1] === "~" ? { scope: "self" } : { scope: "filter", filter: { type: "creature", controlledBy: "you", keyword: "menace" } };
+    return { affects, blockedByAtLeast: n, text };
+  }
+  if (line === "~ can't be blocked unless defending player controls three or more creatures that share a creature type.") {
+    const shared = { kind: "controls", filter: { type: "creature" }, atLeast: 3, sharingACreatureType: true };
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "of-player", player: "defending-player", condition: { kind: "not", of: shared } },
+      grantKeywords: ["unblockable"],
+      text,
+    };
+  }
+  if (line === "~ can't be blocked unless all creatures defending player controls block it.") {
+    return { affects: { scope: "self" }, blockedOnlyByAll: true, text };
+  }
   if (line === "~ can't be blocked.") return { affects: { scope: "self" }, grantKeywords: ["unblockable"], text };
   if ((m = new RegExp(`^During your turn, ~ has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
     // Avatar Kyoshi's shape.

@@ -452,6 +452,7 @@ import _poolKormusBell from "../pool/kormus-bell.js";
 import _poolKorozdaGorgon from "../pool/korozda-gorgon.js";
 import _poolKorozdaMonitor from "../pool/korozda-monitor.js";
 import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
+import _poolKozileksPathfinder from "../pool/kozileks-pathfinder.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolKrosanRestorer from "../pool/krosan-restorer.js";
@@ -1365,6 +1366,7 @@ const shard: CardShard = {
     _poolKorozdaGorgon,
     _poolKorozdaMonitor,
     _poolKotoriPilotProdigy,
+    _poolKozileksPathfinder,
     _poolKrarkClanIronworks,
     _poolKrosanGrip,
     _poolKrosanRestorer,

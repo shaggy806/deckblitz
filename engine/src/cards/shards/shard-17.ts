@@ -305,6 +305,7 @@ import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
 import _poolGrakmawSkyclaveRavager from "../pool/grakmaw-skyclave-ravager.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
+import _poolGraxiplon from "../pool/graxiplon.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
 import _poolGreatDefender from "../pool/great-defender.js";
 import _poolGreaterMossdog from "../pool/greater-mossdog.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolGrakmawSkyclaveRavager,
     _poolGrandArbiterAugustinIv,
     _poolGraspingShadows,
+    _poolGraxiplon,
     _poolGrazingKelpie,
     _poolGreatDefender,
     _poolGreaterMossdog,

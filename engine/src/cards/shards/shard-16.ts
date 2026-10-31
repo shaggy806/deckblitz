@@ -793,6 +793,7 @@ import _poolTrialOfKnowledge from "../pool/trial-of-knowledge.js";
 import _poolTribalForcemage from "../pool/tribal-forcemage.js";
 import _poolTrigonOfRage from "../pool/trigon-of-rage.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
+import _poolTromokratis from "../pool/tromokratis.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
 import _poolTrueFaithCenser from "../pool/true-faith-censer.js";
 import _poolTrustedPegasus from "../pool/trusted-pegasus.js";
@@ -1714,6 +1715,7 @@ const shard: CardShard = {
     _poolTribalForcemage,
     _poolTrigonOfRage,
     _poolTriplicateTitan,
+    _poolTromokratis,
     _poolTroopOfPonies,
     _poolTrueFaithCenser,
     _poolTrustedPegasus,

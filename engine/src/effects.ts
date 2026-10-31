@@ -4266,6 +4266,11 @@ export type EffectSpec =
        * abilities; with `filter`, a turn-wide rule like the rest (Dread
        * Charge). `restrictions` may then be empty. */
       readonly cantBeBlockedBy?: CardFilter;
+      /** "Target creature can't block **this creature** this turn" (Kozilek's
+       * Pathfinder — rule 509.1b): `target` can't block this one creature,
+       * usually `"source"`, the object it is as this resolves (rule 400.7).
+       * A `target` form only; `restrictions` may then be empty. */
+      readonly cantBlockAttacker?: EffectTargetRef;
       /** How long a `target`'s restrictions last — this turn when omitted;
        * `"while-source"` is Opportunistic Dragon's "for as long as this
        * creature remains on the battlefield, … it can't attack or block". */
@@ -7938,6 +7943,8 @@ export interface EffectApi {
     /** A `target`'s: this turn when omitted. */
     duration?: PtDuration,
     cantBeBlockedBy?: CardFilter,
+    /** The one attacker `target` can't block (`cantBlockAttacker`). */
+    cantBlock?: TargetRef,
   ): void;
   /** See the `"grant-static"` {@link EffectSpec}: `target`, or with `filter`
    * every permanent matching it now. */
@@ -12114,7 +12121,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy);
+      const cantBlock = spec.cantBlockAttacker === undefined ? undefined : resolveEffectTarget(spec.cantBlockAttacker, ctx);
+      if (target !== undefined) {
+        ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock);
+      }
       return;
     }
     case "grant-static": {

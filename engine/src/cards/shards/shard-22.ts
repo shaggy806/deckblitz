@@ -491,6 +491,7 @@ import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPainwrackerOni from "../pool/painwracker-oni.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
+import _poolPathrazerOfUlamog from "../pool/pathrazer-of-ulamog.js";
 import _poolPeakEruption from "../pool/peak-eruption.js";
 import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
 import _poolPelakkaPredation from "../pool/pelakka-predation.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolPainwrackerOni,
     _poolPalaceSiege,
     _poolParagonOfEternalWilds,
+    _poolPathrazerOfUlamog,
     _poolPeakEruption,
     _poolPeerlessRopemaster,
     _poolPelakkaPredation,

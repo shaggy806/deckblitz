@@ -5732,7 +5732,12 @@ function Table({
       [...blockEntries(blockAssign, blockPerToken), ...extraBlocks(blockExtra, blockAssign)],
       blockAction,
     )
-    const loneMenace = violations.flatMap((v) => (v.kind === 'menace' ? [v.attacker] : []))
+    const loneMenace = violations.flatMap((v) => (v.kind === 'menace' ? [v] : []))
+    // "Can't be blocked unless all creatures defending player controls block
+    // it" (Tromokratis), blocked by only some.
+    const partlyBlocked = [
+      ...new Set(violations.flatMap((v) => (v.kind === 'blocked-by-all' ? [v.attacker] : []))),
+    ]
     const unforcedBlockers = violations.flatMap((v) =>
       v.kind === 'must-be-blocked' ? [v.blocker] : [],
     )
@@ -5754,8 +5759,13 @@ function Table({
             : ''}
           {loneMenace.length > 0
             ? ` · ${loneMenace
+                .map((v) => `${game.nameOf(v.attacker)} needs ${v.needs}+ blockers`)
+                .join(', ')}`
+            : ''}
+          {partlyBlocked.length > 0
+            ? ` · ${partlyBlocked
                 .map((id) => game.nameOf(id))
-                .join(', ')} has menace (needs 2+ blockers)`
+                .join(', ')} must be blocked by all your creatures or none`
             : ''}
           {unforcedBlockers.length > 0
             ? ` · ${unforcedBlockers
@@ -5843,6 +5853,7 @@ function Table({
           type="button"
           disabled={
             loneMenace.length > 0 ||
+            partlyBlocked.length > 0 ||
             unforcedBlockers.length > 0 ||
             requiredBlockers.length > 0 ||
             unblockedMusts.length > 0 ||

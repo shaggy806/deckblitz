@@ -34,7 +34,7 @@ describe("Lure with menace, against the offer", () => {
     const o = offer([{ blocker: b1, canBlock: [A] }], [A], [A]);
     expect(lurePlan(o).required).toBe(0);
     expect(blockingViolations([], o)).toEqual([]);
-    expect(blockingViolations([block(b1, A)], o)).toEqual([{ kind: "menace", attacker: A }]);
+    expect(blockingViolations([block(b1, A)], o)).toEqual([{ kind: "menace", attacker: A, needs: 2 }]);
   });
 
   it("two creatures able to block both have to", () => {
@@ -52,7 +52,7 @@ describe("Lure with menace, against the offer", () => {
       { kind: "must-be-blocked", blocker: b2 },
     ]);
     expect(blockingViolations([block(b1, A)], o)).toEqual([
-      { kind: "menace", attacker: A },
+      { kind: "menace", attacker: A, needs: 2 },
       { kind: "must-be-blocked", blocker: b2 },
     ]);
     expect(blockingViolations([block(b1, A), block(b2, A)], o)).toEqual([]);
@@ -80,7 +80,7 @@ describe("Lure with menace, against the offer", () => {
     expect(blockingViolations([block(b1, A), block(f, A)], o)).toEqual([]);
     expect(blockingViolations([block(f, B)], o)).toEqual([{ kind: "must-be-blocked", blocker: b1 }]);
     expect(blockingViolations([block(b1, A), block(f, B)], o)).toEqual([
-      { kind: "menace", attacker: A },
+      { kind: "menace", attacker: A, needs: 2 },
     ]);
   });
 
@@ -102,7 +102,7 @@ describe("Lure with menace, against the offer", () => {
     expect(blockingViolations([block(b2, C), block(b3, C)], o)).toEqual([]);
     expect(blockingViolations([], o).map((v) => v.kind)).toContain("must-be-blocked");
     expect(blockingViolations([block(b1, A), block(b2, A), block(b3, C)], o)).toEqual([
-      { kind: "menace", attacker: C },
+      { kind: "menace", attacker: C, needs: 2 },
     ]);
   });
 

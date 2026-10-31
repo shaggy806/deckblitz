@@ -42,8 +42,12 @@ export type BlockOffer = Extract<LegalAction, { kind: "declare-blockers" }>;
 
 /** Which set-level rule a declaration breaks. */
 export type BlockingViolation =
-  /** `attacker` has menace and exactly one creature was assigned to it. */
-  | { readonly kind: "menace"; readonly attacker: ObjectId }
+  /** `attacker` has menace — or another "can't be blocked except by N or
+   * more creatures" — and fewer than `needs` (but some) were assigned to it. */
+  | { readonly kind: "menace"; readonly attacker: ObjectId; readonly needs: number }
+  /** `attacker` can't be blocked unless all the defender's creatures block
+   * it (Tromokratis), and some do while `blocker` doesn't. */
+  | { readonly kind: "blocked-by-all"; readonly attacker: ObjectId; readonly blocker: ObjectId }
   /** `attacker` can't be blocked by more than one creature and more were
    * assigned to it. */
   | { readonly kind: "single-blocker"; readonly attacker: ObjectId }
@@ -75,6 +79,12 @@ export interface LurePlan {
  * search only covers creatures able to block a Lured attacker with menace.
  */
 const LURE_SEARCH_LIMIT = 100_000;
+
+/** The fewest creatures that may block `attacker` under `offer`, if any do:
+ * its `minBlockers`, 2 with menace (`menaceAttackers`), else 1. */
+export function leastBlockers(offer: BlockOffer, attacker: ObjectId): number {
+  return offer.minBlockers?.[attacker] ?? (offer.menaceAttackers.includes(attacker) ? 2 : 1);
+}
 
 /**
  * How many creatures `offer` forces onto must-be-blocked attackers (rule
@@ -125,7 +135,7 @@ export function lurePlan(offer: BlockOffer): LurePlan {
     if (steps > LURE_SEARCH_LIMIT) return false;
     if (value + reachable[i] <= best) return true;
     if (i === pairable.length) {
-      for (const count of load.values()) if (count === 1) return true;
+      for (const [attacker, count] of load) if (count > 0 && count < leastBlockers(offer, attacker)) return true;
       best = value;
       bestChoice = [...choice];
       return true;
@@ -240,9 +250,22 @@ export function blockingViolations(
   }
   const flagged = new Set<ObjectId>();
   for (const { attacker, count } of perAttacker.values()) {
-    if (count === 1 && offer.menaceAttackers.includes(attacker) && !flagged.has(attacker)) {
+    const needs = leastBlockers(offer, attacker);
+    if (count < needs && !flagged.has(attacker)) {
       flagged.add(attacker);
-      out.push({ kind: "menace", attacker });
+      out.push({ kind: "menace", attacker, needs });
+    }
+  }
+  // "Can't be blocked unless all creatures defending player controls block
+  // it": blocked at all, then by every one — every token of a stack.
+  for (const attacker of offer.blockedByAll ?? []) {
+    const on = new Map<ObjectId, number>();
+    for (const b of blocks) if (b.attacker === attacker) on.set(b.blocker, (on.get(b.blocker) ?? 0) + weight(b));
+    if (on.size === 0) continue;
+    for (const entry of offer.eligible) {
+      if ((on.get(entry.blocker) ?? 0) < (entry.copies ?? 1)) {
+        out.push({ kind: "blocked-by-all", attacker, blocker: entry.blocker });
+      }
     }
   }
   // "Can't be blocked by more than one creature": every creature on it,
@@ -293,7 +316,7 @@ export function blockingViolations(
   const ifAble = offer.mustBeBlockedIfAble ?? [];
   if (ifAble.length > 0) {
     const plan = ifAblePlan(offer);
-    const need = (attacker: ObjectId): number => (offer.menaceAttackers.includes(attacker) ? 2 : 1);
+    const need = (attacker: ObjectId): number => leastBlockers(offer, attacker);
     // Blocked enough: on one creature of it, for an attacking stack.
     const most = (attacker: ObjectId): number =>
       Math.max(0, ...[...perAttacker.values()].filter((v) => v.attacker === attacker).map((v) => v.count));
@@ -347,11 +370,10 @@ export function requirementTargets(blocker: ObjectId, offer: BlockOffer): Object
   const named = reqs.some((r) => r.attacker === undefined)
     ? entry.canBlock
     : entry.canBlock.filter((a) => reqs.some((r) => r.attacker === a));
+  // Enough creatures able to block it, this one with them.
   return named.filter(
     (a) =>
-      !offer.menaceAttackers.includes(a) ||
-      (entry.copies ?? 1) >= 2 ||
-      offer.eligible.some((e) => e.blocker !== blocker && e.canBlock.includes(a)),
+      offer.eligible.reduce((n, e) => n + (e.canBlock.includes(a) ? (e.copies ?? 1) : 0), 0) >= leastBlockers(offer, a),
   );
 }
 
@@ -374,16 +396,29 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
   if (attackers.length === 0) return { required: 0, assignment };
   const needed = offer.mustBlock.length > 0 ? lurePlan(offer).assignment : new Map<ObjectId, ObjectId>();
   const free = offer.eligible.filter((e) => !needed.has(e.blocker));
-  const menace = new Set(offer.menaceAttackers);
-  // The ways each attacker can be blocked: one creature, or — with menace —
-  // one stack of two or more, or any two creatures.
+  // The ways each attacker can be blocked: one creature, or — with menace or
+  // another minimum of N — the smallest groups of entries that make N
+  // creatures between them (a stack counting as every token in it), no
+  // entry in a group it isn't needed in. Bounded like the search.
   const ways = attackers.map((attacker) => {
     const able = free.filter((e) => e.canBlock.includes(attacker));
-    if (!menace.has(attacker)) return able.map((e) => [e.blocker]);
-    const out: ObjectId[][] = able.filter((e) => (e.copies ?? 1) >= 2).map((e) => [e.blocker]);
-    for (let i = 0; i < able.length; i += 1) {
-      for (let j = i + 1; j < able.length; j += 1) out.push([able[i].blocker, able[j].blocker]);
-    }
+    const need = leastBlockers(offer, attacker);
+    if (need === 1) return able.map((e) => [e.blocker]);
+    const out: ObjectId[][] = [];
+    const group: (typeof able)[number][] = [];
+    const grow = (from: number, total: number): void => {
+      if (out.length >= LURE_SEARCH_LIMIT) return;
+      if (total >= need) {
+        if (group.every((g) => total - (g.copies ?? 1) < need)) out.push(group.map((g) => g.blocker));
+        return;
+      }
+      for (let i = from; i < able.length; i += 1) {
+        group.push(able[i]);
+        grow(i + 1, total + (able[i].copies ?? 1));
+        group.pop();
+      }
+    };
+    grow(0, 0);
     return out;
   });
   const used = new Set<ObjectId>();
@@ -450,14 +485,15 @@ export function obeyingLure(
     required.push([blocker, attacker]);
     taken.add(blocker);
     const entry = offer.eligible.find((e) => e.blocker === blocker);
-    if (offer.menaceAttackers.includes(attacker) && (entry?.copies ?? 1) < 2) {
+    let load = entry?.copies ?? 1;
+    while (load < leastBlockers(offer, attacker)) {
       const helper = offer.eligible.find(
         (e) => e.blocker !== blocker && !assignment.has(e.blocker) && !taken.has(e.blocker) && e.canBlock.includes(attacker),
       );
-      if (helper !== undefined) {
-        required.push([helper.blocker, attacker]);
-        taken.add(helper.blocker);
-      }
+      if (helper === undefined) break;
+      required.push([helper.blocker, attacker]);
+      taken.add(helper.blocker);
+      load += helper.copies ?? 1;
     }
   }
   const moved: BlockerDeclaration[] = [
@@ -470,8 +506,17 @@ export function obeyingLure(
   for (const { blocker, attacker, count } of moved) {
     load.set(attacker, (load.get(attacker) ?? 0) + (count ?? copies.get(blocker) ?? 1));
   }
+  // Short of an attacker's minimum, its blockers go; and one only all the
+  // defender's creatures may block loses them unless every one is on it.
+  const all = new Set(offer.blockedByAll ?? []);
+  const whole = (attacker: ObjectId): boolean =>
+    offer.eligible.every((e) =>
+      moved.some((b) => b.blocker === e.blocker && b.attacker === attacker && (b.count ?? e.copies ?? 1) >= (e.copies ?? 1)),
+    );
   return withinSingleBlockers(
-    moved.filter((b) => !offer.menaceAttackers.includes(b.attacker) || (load.get(b.attacker) ?? 0) >= 2),
+    moved.filter(
+      (b) => (load.get(b.attacker) ?? 0) >= leastBlockers(offer, b.attacker) && (!all.has(b.attacker) || whole(b.attacker)),
+    ),
     offer,
   );
 }

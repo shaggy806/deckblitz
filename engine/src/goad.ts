@@ -30,7 +30,7 @@ import {
 } from "./characteristics.js";
 import type { TargetView } from "./characteristics.js";
 import type { EffectAmount } from "./effects.js";
-import { printedManaCost } from "./filter.js";
+import { matchesFilter, printedManaCost, weightedMatches } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { rulesTextName } from "./state.js";
@@ -69,7 +69,8 @@ function goadingStatics(state: GameState, registry: CardRegistry): readonly Goad
  * power, toughness or mana value, read as they are now — Baeloth's "power
  * less than Baeloth Barrityl's power" is `{ amount: { powerOf: "source" } }`.
  * A static's block filter reads its source the same way (Champion of
- * Lambholt — `combat/eligibility.ts`).
+ * Lambholt — `combat/eligibility.ts`), and a plain `{ countOf }` of
+ * permanents from its controller's side (Kraken of the Straits).
  * Nothing else can be answered in a static, and `NaN` makes any comparison
  * with it false (fails closed, as a static's `{ amount }` does everywhere).
  */
@@ -89,6 +90,13 @@ export function sourceAmount(
     }
     if ("manaValueOf" in amount && amount.manaValueOf === "source") {
       return manaValue(parseManaCost(printedManaCost(registry, source)));
+    }
+    // "The number of Islands you control" (Kraken of the Straits): a plain
+    // count of permanents, from the source's controller's side.
+    if ("countOf" in amount && Object.keys(amount).length === 1) {
+      return weightedMatches(state, state.zones.shared.battlefield, (id) =>
+        matchesFilter(state, registry, id, amount.countOf, { you: source.controller, source: source.id }),
+      ).reduce((sum, match) => sum + match.weight, 0);
     }
     return Number.NaN;
   };

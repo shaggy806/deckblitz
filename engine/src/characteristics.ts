@@ -75,6 +75,7 @@ import {
   subtypeFitsTypes,
   subtypeKind,
 } from "./subtypes.js";
+import { CREATURE_TYPES } from "./creature-types.js";
 import type { TargetRef } from "./target.js";
 import { isMainPhase } from "./turn.js";
 import type { Step } from "./turn.js";
@@ -819,6 +820,21 @@ function evalStaticCondition(
           if (object.faceDown === undefined) names.add(printedCardName(object));
         }
         return names.size >= condition.atLeast;
+      }
+      if (condition.sharingACreatureType === true) {
+        // The most of them with any one creature type (Graxiplon): each type
+        // some of them have, a changeling counting toward every one — and
+        // changelings alone sharing any (rule 702.73a).
+        const found = matchesWhere(
+          (id) => state.objects[id].controller === you && matchesFilter(state, registry, id, condition.filter, { you }),
+          except,
+          condition.countsSelf === true,
+        ).map(({ id, weight }) => ({ subtypes: effectiveSubtypes(state, registry, state.objects[id]), weight }));
+        const types = new Set(found.flatMap((f) => f.subtypes.filter(isCreatureType)));
+        if (types.size === 0 && found.length > 0) types.add(CREATURE_TYPES[0]);
+        return [...types].some(
+          (type) => found.reduce((n, f) => n + (hasSubtype(f.subtypes, type) ? f.weight : 0), 0) >= condition.atLeast,
+        );
       }
       return reaches(
         condition.atLeast,

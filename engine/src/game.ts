@@ -25369,8 +25369,8 @@ export class Game {
           this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp);
         }
       },
-      restrict: (target, filter, restrictions, duration, cantBeBlockedBy) =>
-        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy),
+      restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock) =>
+        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock),
       grantStatic: (target, filter, ability, duration) => {
         const kept = lastingHere(duration);
         // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -30284,8 +30284,14 @@ export class Game {
     restrictions: readonly CombatRestriction[],
     duration: EffectDuration = "end-of-turn",
     cantBeBlockedBy?: CardFilter,
+    cantBlock?: TargetRef,
   ): void {
-    if (restrictions.length === 0 && cantBeBlockedBy === undefined) return;
+    // "Can't block this creature": the attacker as it is now (rule 400.7).
+    const attacker =
+      cantBlock?.kind === "object" && this.state.objects[cantBlock.object]?.zone === "battlefield"
+        ? { object: cantBlock.object, zoneChangeCount: this.state.objects[cantBlock.object].zoneChangeCount ?? 0 }
+        : undefined;
+    if (restrictions.length === 0 && cantBeBlockedBy === undefined && attacker === undefined) return;
     if (filter !== undefined) {
       (this.state.turnRestrictions ??= []).push({
         filter,
@@ -30306,6 +30312,7 @@ export class Game {
       keywords: [],
       ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
       ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
+      ...(attacker !== undefined ? { cantBlock: [attacker] } : {}),
       ...durationFields(duration),
     });
     this.emit({

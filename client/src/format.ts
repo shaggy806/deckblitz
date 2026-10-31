@@ -36,6 +36,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'cant-attack': "can't attack",
   'cant-block': "can't block",
   'must-attack': 'must attack',
+  'must-block': 'must block',
   'must-be-blocked': 'must be blocked by every creature able',
   'must-be-blocked-if-able': 'must be blocked if able',
   'cant-attack-owner': "can't attack its owner",

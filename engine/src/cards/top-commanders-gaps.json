@@ -654,7 +654,15 @@
   "effect:opponents-with-less-life-count",
   "effect:count-graveyards-with-n-cards",
   "effect:count-defending-player-controls",
-  "effect:per-opponent-count-damage"
+  "effect:per-opponent-count-damage",
+  "static:blockable-only-by-filter",
+  "static:cant-be-blocked-except-by-n",
+  "static:cant-be-blocked-unless-all-block",
+  "static:cant-be-blocked-unless-defender-controls-shared-type",
+  "static:unblockable-defending-player-condition",
+  "effect:target-cant-block-source-this-turn",
+  "effect:target-must-block-source-this-turn",
+  "static:must-block-each-combat"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
