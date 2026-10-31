@@ -24003,8 +24003,8 @@ export class Game {
           this.state,
           this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.attacking === player),
         ),
-      turnHistoryCount: (what, players, filter) =>
-        turnHistoryCount(this.state, this.registry, players, what, filter, controller),
+      turnHistoryCount: (what, players, filter, origin) =>
+        turnHistoryCount(this.state, this.registry, players, what, filter, controller, undefined, origin),
       cardTypesAmong: (objects) => {
         const types = new Set<CardType>();
         for (const { object: id, departed } of objects) {
@@ -34541,6 +34541,21 @@ export class Game {
         const object = this.state.objects[event.object];
         const lki = object?.lastKnown ?? this.state.ceasedTokens?.[event.object];
         if (lki === undefined) return;
+        // Put into its owner's graveyard (rule 400.3) from the battlefield —
+        // a token too (111.7) — with the stint it left, so a filter reads it
+        // as it last existed there (603.10a). The graveyard event below
+        // carries cards from every other zone; tokens never appear there.
+        if (event.toZone === "graveyard") {
+          const owner = historyOf(lki.owner);
+          if (owner !== undefined) {
+            (owner["to-graveyard"] ??= []).push({
+              object: event.object,
+              count: object?.stackCount ?? 1,
+              stint: lki.zoneChangeCount,
+              from: "battlefield",
+            });
+          }
+        }
         // Its controller as it left (rule 603.10a), wherever it went — a
         // token too, which still moved before it ceased to exist (rule 111.7).
         const history = historyOf(lki.controller);
@@ -34568,6 +34583,16 @@ export class Game {
         if (history !== undefined) history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
         return;
       }
+      case "cards-discarded": {
+        // Every discard announces itself here (`discardCards`), a madness
+        // card's into exile included (rule 702.35a).
+        const history = historyOf(event.player);
+        if (history !== undefined) {
+          const discarded = (history.discarded ??= []);
+          for (const id of event.objects) discarded.push({ object: id, count: 1 });
+        }
+        return;
+      }
       case "mana-expended": {
         const history = historyOf(event.player);
         if (history !== undefined) history.manaSpentOnSpells = event.after;
@@ -34584,6 +34609,12 @@ export class Game {
         for (const { object: id, from } of event.arrivals) {
           const card = this.state.objects[id];
           if (card === undefined) continue;
+          // From anywhere but the battlefield (whose arrivals, tokens with
+          // them, the leave event records): the zone it came from.
+          if (from !== "battlefield") {
+            const owner = historyOf(card.owner);
+            if (owner !== undefined) (owner["to-graveyard"] ??= []).push({ object: id, count: 1, from });
+          }
           if (from === "hand" || from === "library") {
             const history = historyOf(card.owner);
             if (history !== undefined) {
@@ -40600,8 +40631,14 @@ export class Game {
     // zone change ends both (400.7). `castSpell` reads the link first.
     object.prepared = undefined;
     object.preparedFor = undefined;
-    // "Discarded this turn" was about the card in the graveyard it went to.
-    object.discardedOnTurn = undefined;
+    // "Discarded this turn" was about the card in the graveyard it went to —
+    // or, a madness card, in the exile it was discarded into (702.35a): one
+    // whose owner declines to cast it goes on to the graveyard still a card
+    // they discarded this turn (Shadow of the Grave's ruling). Nothing else
+    // leaves a card discarded this turn in exile.
+    const madnessDeclined =
+      previousZone === "exile" && to === "graveyard" && object.discardedOnTurn === this.state.turn.number;
+    if (!madnessDeclined) object.discardedOnTurn = undefined;
     object.sneakAttacking = undefined;
     // A multi-face card reverts to its front face while not on the battlefield
     // or stack (rule 712); casting/playing it sets the face again.

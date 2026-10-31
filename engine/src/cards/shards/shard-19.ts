@@ -123,6 +123,7 @@ import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandraAblaze from "../pool/chandra-ablaze.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
+import _poolChangeOfFortune from "../pool/change-of-fortune.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChaosphere from "../pool/chaosphere.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolChanceMetElves,
     _poolChandraAblaze,
     _poolChandrasIgnition,
+    _poolChangeOfFortune,
     _poolChangelingSentinel,
     _poolChaosphere,
     _poolChargingMonstrosaur,

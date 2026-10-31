@@ -630,6 +630,16 @@ export interface CardFilter {
    * `GameObject.putIntoGraveyardFromLibraryOnTurn`.
    */
   readonly putIntoGraveyardFromLibraryThisTurn?: boolean;
+  /**
+   * Is (or isn't) a card that was discarded this turn and hasn't changed
+   * zones since — Shadow of the Grave's "all cards in your graveyard that you
+   * cycled or discarded this turn" (cycling discards, rule 702.29a), Ghost of
+   * Ramirez DePietro's "a card in a graveyard that was discarded or put there
+   * from a library this turn" (`anyOf` with the field above). A card that
+   * leaves its graveyard and comes back is a new object (rule 400.7) and
+   * wasn't. See `GameObject.discardedOnTurn`.
+   */
+  readonly discardedThisTurn?: boolean;
   /** Entered the battlefield this turn (or didn't) — "creatures that entered
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
@@ -1513,6 +1523,11 @@ export function matchesFilter(
       live.zone === "graveyard" &&
       live.putIntoGraveyardFromLibraryOnTurn === state.turn.number;
     if (milled !== filter.putIntoGraveyardFromLibraryThisTurn) return false;
+  }
+  if (filter.discardedThisTurn !== undefined) {
+    // A snapshot is of a permanent, which wasn't discarded.
+    const discarded = live !== undefined && live.discardedOnTurn === state.turn.number;
+    if (discarded !== filter.discardedThisTurn) return false;
   }
   // "Your Ring-bearer" (rule 701.54e) — the filtering player's, on the
   // battlefield now; "Ring-bearers" (`"any"`), anyone's.

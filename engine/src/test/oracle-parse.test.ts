@@ -3440,3 +3440,77 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
     });
   });
 });
+
+describe("the turn history's graveyard tallies (discarded, to-graveyard)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'draw a card for each card you've discarded this turn', after a discard or alone", () => {
+    const change = face("Change of Fortune", "Sorcery", "Discard your hand, then draw a card for each card you've discarded this turn.");
+    expect(change.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "discard-hand", who: "you" },
+        { kind: "draw", amount: { turnHistory: "discarded" } },
+      ],
+    });
+    expect(parseSentence("Then draw a card for each card you've discarded this turn.", ctx())).toEqual({
+      kind: "draw",
+      amount: { turnHistory: "discarded" },
+    });
+  });
+
+  it("reads 'cards put into target player's graveyard from their library this turn'", () => {
+    const cruel = face(
+      "Cruel Calculations",
+      "Sorcery",
+      "Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn.",
+    );
+    expect(cruel.complete).toBe(true);
+    expect(cruel.effect).toEqual({ kind: "draw", amount: { turnHistory: "to-graveyard", target: 0, from: ["library"] } });
+  });
+
+  it("reads 'if you've discarded a card this turn' as an activation restriction and a spell's condition", () => {
+    const prowler = face(
+      "Gilt-Blade Prowler",
+      "Creature — Human Rogue",
+      "{1}, {T}, Pay 1 life: Draw a card. Activate only if you've discarded a card this turn.",
+    );
+    expect(prowler.activated[0].condition).toEqual({ kind: "turn-history", what: "discarded" });
+    const recalibrate = face(
+      "Recalibrate",
+      "Instant",
+      "Return target creature to its owner's hand. If you've discarded a card this turn, draw a card.",
+    );
+    expect(recalibrate.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "turn-history", what: "discarded" },
+      then: { kind: "draw", amount: 1 },
+    });
+  });
+
+  it("reads 'put into a graveyard from the battlefield this turn' and 'from anywhere other than the battlefield' intervening ifs", () => {
+    const shade = face(
+      "Ichor Shade",
+      "Creature — Phyrexian Shade",
+      "At the beginning of your end step, if an artifact or creature was put into a graveyard from the battlefield this turn, put a +1/+1 counter on this creature.",
+    );
+    expect(shade.triggered[0].condition).toEqual({
+      kind: "turn-history",
+      what: "to-graveyard",
+      who: "any-player",
+      from: ["battlefield"],
+      filter: { typesAnyOf: ["artifact", "creature"] },
+    });
+    const strand = face(
+      "Dimir Strandcatcher",
+      "Creature — Faerie Rogue",
+      "At the beginning of each end step, if three or more cards were put into your graveyard from anywhere other than the battlefield this turn, draw a card.",
+    );
+    expect(strand.triggered[0].condition).toEqual({ kind: "turn-history", what: "to-graveyard", notFrom: ["battlefield"], atLeast: 3 });
+  });
+
+  it("reads 'all cards in your graveyard that you cycled or discarded this turn'", () => {
+    const shadow = face("Shadow of the Grave", "Instant", "Return to your hand all cards in your graveyard that you cycled or discarded this turn.");
+    expect(shadow.effect).toEqual({ kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" });
+  });
+});

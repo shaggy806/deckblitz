@@ -688,6 +688,7 @@ import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrengthOfIsolation from "../pool/strength-of-isolation.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolStrongholdMachinist from "../pool/stronghold-machinist.js";
+import _poolStructuralAssault from "../pool/structural-assault.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
@@ -1519,6 +1520,7 @@ const shard: CardShard = {
     _poolStrengthOfIsolation,
     _poolStrionicResonator,
     _poolStrongholdMachinist,
+    _poolStructuralAssault,
     _poolStunningShot,
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,

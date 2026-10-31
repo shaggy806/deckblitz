@@ -1266,6 +1266,24 @@ export function parseSentence(sentence, ctx) {
     const of = m[1].toLowerCase() === "power" ? "power" : "mana-value";
     return { kind: "draw", amount: { aggregate: "distinct", of, filter: { ...filter, controlledBy: "you" } } };
   }
+  // The turn history's graveyard tallies: "draw a card for each card you've
+  // discarded this turn" (Change of Fortune, Misty Knight), "cards that were
+  // put into target player's graveyard from their library this turn" (Cruel
+  // Calculations).
+  const discardedDraw = { kind: "draw", amount: { turnHistory: "discarded" } };
+  if (/^(?:then )?draw a card for each card you've discarded this turn\.$/i.test(s)) return discardedDraw;
+  if (/^discard your hand, then draw a card for each card you've discarded this turn\.$/i.test(s)) {
+    return { kind: "sequence", effects: [{ kind: "discard-hand", who: "you" }, discardedDraw] };
+  }
+  if ((m = /^draw X cards, where X is the number of cards that were put into (your|target player's) graveyard from (?:your|their) library this turn\.$/i.exec(s))) {
+    const whose = m[1].toLowerCase() === "your" ? {} : { target: ctx.target("player") };
+    return { kind: "draw", amount: { turnHistory: "to-graveyard", ...whose, from: ["library"] } };
+  }
+  // "All cards in your graveyard that you cycled or discarded this turn"
+  // (Shadow of the Grave): cycling is discarding (rule 702.29a).
+  if (/^return to your hand all cards in your graveyard that you (?:cycled or )?discarded this turn\.$/i.test(s)) {
+    return { kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" };
+  }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
@@ -2562,6 +2580,19 @@ export function parseEffect(text, outer) {
     // one that names "the blighted creature" (701.68c: that's the blight's
     // own `then`, a person's), nor "that land" or the like, which reaches
     // back past the may.
+    // "If you've discarded a card this turn, draw a card." (Recalibrate): a
+    // turn-tally condition asked as the effect resolves.
+    const tallyIf = /^(if [^,]+,) (.+)$/i.exec(sentence);
+    const tallyCondition = tallyIf === null ? undefined : TURN_TALLY_IFS[tallyIf[1].toLowerCase()];
+    if (tallyCondition !== undefined) {
+      const then = parseSentence(`${tallyIf[2][0].toUpperCase()}${tallyIf[2].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const conditional = { kind: "conditional", condition: tallyCondition, then };
+        parsed.push(conditional);
+        hints.push({ sentence, effect: conditional });
+        continue;
+      }
+    }
     const ifDid = /^if you do, (.+)$/i.exec(sentence);
     const mayKind = parsed.at(-1)?.kind === "may" ? parsed.at(-1).effect.kind : undefined;
     if (ifDid !== null && (mayKind === "blight" || mayKind === "behold") && parsed.at(-1).then === undefined && !/\b(blighted|beheld|that)\b/i.test(sentence)) {
@@ -3806,6 +3837,12 @@ export function parseFace(face, ctx = {}) {
         ability.condition = { kind: "citys-blessing" };
         return "";
       });
+      // "Activate only if you've discarded a card this turn" (Gilt-Blade
+      // Prowler): the turn history's discards.
+      rest = rest.replace(/ Activate only if you've discarded a card this turn\.$/, () => {
+        ability.condition = DISCARDED_THIS_TURN;
+        return "";
+      });
       if (/Activate only /.test(rest)) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
@@ -4173,10 +4210,46 @@ const STATIC_CONDITION_PREFIXES = [
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
 ];
 
+/** "If you've discarded a card this turn" — the turn history's discards. */
+const DISCARDED_THIS_TURN = { kind: "turn-history", what: "discarded" };
+/** The turn history's graveyard tallies as conditions, by their words: an
+ * intervening "if" of a trigger (Ichor Shade, Mysterio's Mirage), a spell's
+ * "If …, draw a card." (Recalibrate). */
+const TURN_TALLY_IFS = {
+  "if you discarded a card this turn,": DISCARDED_THIS_TURN,
+  "if you've discarded a card this turn,": DISCARDED_THIS_TURN,
+  "if an artifact or creature was put into a graveyard from the battlefield this turn,": {
+    kind: "turn-history",
+    what: "to-graveyard",
+    who: "any-player",
+    from: ["battlefield"],
+    filter: { typesAnyOf: ["artifact", "creature"] },
+  },
+  "if a permanent was put into a graveyard from the battlefield this turn,": {
+    kind: "turn-history",
+    what: "to-graveyard",
+    who: "any-player",
+    from: ["battlefield"],
+  },
+  "if an enchantment was put into your graveyard from the battlefield this turn,": {
+    kind: "turn-history",
+    what: "to-graveyard",
+    from: ["battlefield"],
+    filter: { type: "enchantment" },
+  },
+  "if three or more cards were put into your graveyard from anywhere other than the battlefield this turn,": {
+    kind: "turn-history",
+    what: "to-graveyard",
+    notFrom: ["battlefield"],
+    atLeast: 3,
+  },
+};
+
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
  * (Hidden Stockpile) and celebration (Pests of Honor). */
 const INTERVENING_IFS = {
+  ...TURN_TALLY_IFS,
   // Coven (Midnight Hunt) and day/night (rule 731.1).
   "if you control three or more creatures with different powers,": { kind: "coven" },
   "if it's night,": { kind: "day-night", is: "night" },

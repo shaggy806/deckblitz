@@ -3669,6 +3669,7 @@ import _poolChandrasRegulator from "./pool/chandras-regulator.js";
 import _poolChandrasRevolution from "./pool/chandras-revolution.js";
 import _poolChandrasSpitfire from "./pool/chandras-spitfire.js";
 import _poolChandrasTriumph from "./pool/chandras-triumph.js";
+import _poolChangeOfFortune from "./pool/change-of-fortune.js";
 import _poolChangeOfHeart from "./pool/change-of-heart.js";
 import _poolChangeOfPlans from "./pool/change-of-plans.js";
 import _poolChangeTheEquation from "./pool/change-the-equation.js";
@@ -4731,6 +4732,7 @@ import _poolCrudeRampart from "./pool/crude-rampart.js";
 import _poolCruelAdministrator from "./pool/cruel-administrator.js";
 import _poolCruelAlliance from "./pool/cruel-alliance.js";
 import _poolCruelBargain from "./pool/cruel-bargain.js";
+import _poolCruelCalculations from "./pool/cruel-calculations.js";
 import _poolCruelCelebrant from "./pool/cruel-celebrant.js";
 import _poolCruelDeceiver from "./pool/cruel-deceiver.js";
 import _poolCruelEdict from "./pool/cruel-edict.js";
@@ -8422,6 +8424,7 @@ import _poolFranticSalvage from "./pool/frantic-salvage.js";
 import _poolFranticSearch from "./pool/frantic-search.js";
 import _poolFranticStrength from "./pool/frantic-strength.js";
 import _poolFrayingOmnipotence from "./pool/fraying-omnipotence.js";
+import _poolFrayingSanity from "./pool/fraying-sanity.js";
 import _poolFrazzle from "./pool/frazzle.js";
 import _poolFreeFromFlesh from "./pool/free-from-flesh.js";
 import _poolFreeTheFae from "./pool/free-the-fae.js";
@@ -9073,6 +9076,7 @@ import _poolGildedPinions from "./pool/gilded-pinions.js";
 import _poolGildedScuttler from "./pool/gilded-scuttler.js";
 import _poolGildedSentinel from "./pool/gilded-sentinel.js";
 import _poolGilderBairn from "./pool/gilder-bairn.js";
+import _poolGiltBladeProwler from "./pool/gilt-blade-prowler.js";
 import _poolGiltLeafAmbush from "./pool/gilt-leaf-ambush.js";
 import _poolGiltLeafArchdruid from "./pool/gilt-leaf-archdruid.js";
 import _poolGiltLeafPalace from "./pool/gilt-leaf-palace.js";
@@ -11062,6 +11066,7 @@ import _poolIchneumonDruid from "./pool/ichneumon-druid.js";
 import _poolIchorDrinker from "./pool/ichor-drinker.js";
 import _poolIchorExplosion from "./pool/ichor-explosion.js";
 import _poolIchorRats from "./pool/ichor-rats.js";
+import _poolIchorShade from "./pool/ichor-shade.js";
 import _poolIchorSlick from "./pool/ichor-slick.js";
 import _poolIchorSynthesizer from "./pool/ichor-synthesizer.js";
 import _poolIchorWellspring from "./pool/ichor-wellspring.js";
@@ -17895,6 +17900,7 @@ import _poolRebornHope from "./pool/reborn-hope.js";
 import _poolRebuffTheWicked from "./pool/rebuff-the-wicked.js";
 import _poolRebuild from "./pool/rebuild.js";
 import _poolRebuke from "./pool/rebuke.js";
+import _poolRecalibrate from "./pool/recalibrate.js";
 import _poolRecall from "./pool/recall.js";
 import _poolRecantation from "./pool/recantation.js";
 import _poolRecklessAbandon from "./pool/reckless-abandon.js";
@@ -19932,6 +19938,7 @@ import _poolShadowInTheWarp from "./pool/shadow-in-the-warp.js";
 import _poolShadowKin from "./pool/shadow-kin.js";
 import _poolShadowLance from "./pool/shadow-lance.js";
 import _poolShadowMysteriousAssassin from "./pool/shadow-mysterious-assassin.js";
+import _poolShadowOfTheGrave from "./pool/shadow-of-the-grave.js";
 import _poolShadowProphecy from "./pool/shadow-prophecy.js";
 import _poolShadowRider from "./pool/shadow-rider.js";
 import _poolShadowRift from "./pool/shadow-rift.js";
@@ -22115,6 +22122,7 @@ import _poolStrongholdOverseer from "./pool/stronghold-overseer.js";
 import _poolStrongholdRats from "./pool/stronghold-rats.js";
 import _poolStrongholdTaskmaster from "./pool/stronghold-taskmaster.js";
 import _poolStrongholdZeppelin from "./pool/stronghold-zeppelin.js";
+import _poolStructuralAssault from "./pool/structural-assault.js";
 import _poolStructuralCollapse from "./pool/structural-collapse.js";
 import _poolStructuralDistortion from "./pool/structural-distortion.js";
 import _poolStruggleForProjectPurity from "./pool/struggle-for-project-purity.js";
@@ -31016,6 +31024,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandrasRevolution,
   _poolChandrasSpitfire,
   _poolChandrasTriumph,
+  _poolChangeOfFortune,
   _poolChangeOfHeart,
   _poolChangeOfPlans,
   _poolChangeTheEquation,
@@ -32078,6 +32087,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCruelAdministrator,
   _poolCruelAlliance,
   _poolCruelBargain,
+  _poolCruelCalculations,
   _poolCruelCelebrant,
   _poolCruelDeceiver,
   _poolCruelEdict,
@@ -35769,6 +35779,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFranticSearch,
   _poolFranticStrength,
   _poolFrayingOmnipotence,
+  _poolFrayingSanity,
   _poolFrazzle,
   _poolFreeFromFlesh,
   _poolFreeTheFae,
@@ -36420,6 +36431,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGildedScuttler,
   _poolGildedSentinel,
   _poolGilderBairn,
+  _poolGiltBladeProwler,
   _poolGiltLeafAmbush,
   _poolGiltLeafArchdruid,
   _poolGiltLeafPalace,
@@ -38409,6 +38421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIchorDrinker,
   _poolIchorExplosion,
   _poolIchorRats,
+  _poolIchorShade,
   _poolIchorSlick,
   _poolIchorSynthesizer,
   _poolIchorWellspring,
@@ -45242,6 +45255,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRebuffTheWicked,
   _poolRebuild,
   _poolRebuke,
+  _poolRecalibrate,
   _poolRecall,
   _poolRecantation,
   _poolRecklessAbandon,
@@ -47279,6 +47293,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShadowKin,
   _poolShadowLance,
   _poolShadowMysteriousAssassin,
+  _poolShadowOfTheGrave,
   _poolShadowProphecy,
   _poolShadowRider,
   _poolShadowRift,
@@ -49462,6 +49477,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStrongholdRats,
   _poolStrongholdTaskmaster,
   _poolStrongholdZeppelin,
+  _poolStructuralAssault,
   _poolStructuralCollapse,
   _poolStructuralDistortion,
   _poolStruggleForProjectPurity,
@@ -58376,6 +58392,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandras-revolution": _poolChandrasRevolution,
   "pool/chandras-spitfire": _poolChandrasSpitfire,
   "pool/chandras-triumph": _poolChandrasTriumph,
+  "pool/change-of-fortune": _poolChangeOfFortune,
   "pool/change-of-heart": _poolChangeOfHeart,
   "pool/change-of-plans": _poolChangeOfPlans,
   "pool/change-the-equation": _poolChangeTheEquation,
@@ -59438,6 +59455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cruel-administrator": _poolCruelAdministrator,
   "pool/cruel-alliance": _poolCruelAlliance,
   "pool/cruel-bargain": _poolCruelBargain,
+  "pool/cruel-calculations": _poolCruelCalculations,
   "pool/cruel-celebrant": _poolCruelCelebrant,
   "pool/cruel-deceiver": _poolCruelDeceiver,
   "pool/cruel-edict": _poolCruelEdict,
@@ -63129,6 +63147,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/frantic-search": _poolFranticSearch,
   "pool/frantic-strength": _poolFranticStrength,
   "pool/fraying-omnipotence": _poolFrayingOmnipotence,
+  "pool/fraying-sanity": _poolFrayingSanity,
   "pool/frazzle": _poolFrazzle,
   "pool/free-from-flesh": _poolFreeFromFlesh,
   "pool/free-the-fae": _poolFreeTheFae,
@@ -63780,6 +63799,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gilded-scuttler": _poolGildedScuttler,
   "pool/gilded-sentinel": _poolGildedSentinel,
   "pool/gilder-bairn": _poolGilderBairn,
+  "pool/gilt-blade-prowler": _poolGiltBladeProwler,
   "pool/gilt-leaf-ambush": _poolGiltLeafAmbush,
   "pool/gilt-leaf-archdruid": _poolGiltLeafArchdruid,
   "pool/gilt-leaf-palace": _poolGiltLeafPalace,
@@ -65769,6 +65789,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ichor-drinker": _poolIchorDrinker,
   "pool/ichor-explosion": _poolIchorExplosion,
   "pool/ichor-rats": _poolIchorRats,
+  "pool/ichor-shade": _poolIchorShade,
   "pool/ichor-slick": _poolIchorSlick,
   "pool/ichor-synthesizer": _poolIchorSynthesizer,
   "pool/ichor-wellspring": _poolIchorWellspring,
@@ -72602,6 +72623,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rebuff-the-wicked": _poolRebuffTheWicked,
   "pool/rebuild": _poolRebuild,
   "pool/rebuke": _poolRebuke,
+  "pool/recalibrate": _poolRecalibrate,
   "pool/recall": _poolRecall,
   "pool/recantation": _poolRecantation,
   "pool/reckless-abandon": _poolRecklessAbandon,
@@ -74639,6 +74661,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shadow-kin": _poolShadowKin,
   "pool/shadow-lance": _poolShadowLance,
   "pool/shadow-mysterious-assassin": _poolShadowMysteriousAssassin,
+  "pool/shadow-of-the-grave": _poolShadowOfTheGrave,
   "pool/shadow-prophecy": _poolShadowProphecy,
   "pool/shadow-rider": _poolShadowRider,
   "pool/shadow-rift": _poolShadowRift,
@@ -76822,6 +76845,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stronghold-rats": _poolStrongholdRats,
   "pool/stronghold-taskmaster": _poolStrongholdTaskmaster,
   "pool/stronghold-zeppelin": _poolStrongholdZeppelin,
+  "pool/structural-assault": _poolStructuralAssault,
   "pool/structural-collapse": _poolStructuralCollapse,
   "pool/structural-distortion": _poolStructuralDistortion,
   "pool/struggle-for-project-purity": _poolStruggleForProjectPurity,

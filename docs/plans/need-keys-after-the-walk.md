@@ -553,6 +553,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   permanent that can't phase out still phases out indirectly with its host (702.26g) has no
   clear rule. Engine-only. Next: `stat:turn-event-tallies` (17), `mechanic:assist` (16),
   `effect:choices-by-other-players` (16).
+- **2026-10-31: `stat:turn-event-tallies`' graveyard group, features only** (an overnight agent)
+  — the turn history's `discarded` and `to-graveyard` lists (each arrival with its origin zone,
+  a battlefield one with its stint, tokens included), `from` / `notFrom` on the `turnHistory`
+  amount and `turn-history` condition, the amount's `target` slot, the `discardedThisTurn`
+  filter. 4 keys (the group's 4); 8 proving cards. 10 freed (queued: 524). The family's other
+  units (attackers by filter, entered-as-entered, the one-card tallies) left open. Engine-only.
+  Next: `mechanic:assist` (16), `effect:choices-by-other-players` (16), `cost:loyalty-x` (15).
 
 ## Rough size
 

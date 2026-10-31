@@ -344,6 +344,30 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### The turn history's graveyard tallies — built 2026-10-31
+
+The need-keys Phase 2 family `stat:turn-event-tallies`, its graveyard group,
+features only. **`TurnHistory.discarded`** — every card a player discarded
+(rule 701.9a), a madness card discarded into exile too (702.35a): "for each
+card you've discarded this turn" (`{ turnHistory: "discarded" }`), "if you've
+discarded a card this turn" (`{ kind: "turn-history", what: "discarded" }`).
+**`TurnHistory["to-graveyard"]`** — everything put into a player's graveyard,
+each with the zone it came from: cards from a library, hand or the stack off
+the graveyard event, permanents from the battlefield (tokens too, 111.7) off
+the leave event with their stint, so a filter reads them as they last existed
+there (603.10a). The `turnHistory` amount and `turn-history` condition take
+**`from` / `notFrom`** (`TurnHistoryOrigin`); the amount a player **`target`**
+slot. The **`discardedThisTurn`** filter is a card discarded this turn and
+unmoved since — kept through a declined madness card's exile-to-graveyard move
+(Shadow of the Grave's ruling). Keys: cards-discarded-this-turn,
+cards-library-to-graveyard-this-turn, cards-put-into-graveyard-this-turn,
+permanents-to-graveyard-from-battlefield-this-turn. Proving cards: Change of
+Fortune, Gilt-Blade Prowler, Recalibrate, Cruel Calculations, Fraying Sanity,
+Structural Assault, Ichor Shade, Shadow of the Grave. Still open in the family:
+attackers by filter, entered-as-entered, and the one-card tallies (exiled,
+sacrificed, searched, surveilled, tokens created, turned face up); gravestorm
+(Follow the Bodies) is `effect:copy-spell-extensions`'.
+
 ### Can't-do effects for a duration — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cant-activate-abilities-until-next-turn`,

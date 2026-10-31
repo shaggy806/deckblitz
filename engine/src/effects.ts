@@ -34,6 +34,7 @@ import type {
   PlayerEffect,
   SpellSnapshot,
   TurnHistoryKind,
+  TurnHistoryOrigin,
   ZoneType,
 } from "./state.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
@@ -721,9 +722,26 @@ export type EffectAmount =
    * number of times you descended this turn" (`"descended"`), permanents that
    * entered under your control (`"entered"`), permanents you sacrificed.
    * `who` is whose (default `"you"`); `filter` narrows them as the
-   * `turn-history` condition does. See `TurnHistory`.
+   * `turn-history` condition does. See `TurnHistory`. `"discarded"` counts
+   * the cards a player discarded ("draw a card for each card you've
+   * discarded this turn" — Change of Fortune); `"to-graveyard"` what was put
+   * into a player's graveyard, `from` / `notFrom` narrowing it by the zone it
+   * came from ("the number of artifacts that were put into graveyards from
+   * the battlefield this turn" — Structural Assault: `who: "each-player",
+   * from: ["battlefield"], filter: { types: ["artifact"] }`). `target` reads
+   * a player target slot's list instead of `who`'s ("cards that were put
+   * into target player's graveyard from their library this turn" — Cruel
+   * Calculations: `{ turnHistory: "to-graveyard", target: 0, from:
+   * ["library"] }`).
    */
-  | { readonly turnHistory: TurnHistoryKind; readonly who?: PlayerScope; readonly filter?: CardFilter }
+  | {
+      readonly turnHistory: TurnHistoryKind;
+      readonly who?: PlayerScope;
+      readonly target?: number;
+      readonly filter?: CardFilter;
+      readonly from?: readonly ZoneType[];
+      readonly notFrom?: readonly ZoneType[];
+    }
   /** How many opponents the controller attacked with creatures this combat
    * — melee's "+1/+1 for each opponent you attacked with a creature this
    * combat" (rule 702.121): the players attackers were declared at
@@ -7277,7 +7295,12 @@ export interface EffectApi {
   /** See the `{ damageDealtThisTurn }` {@link EffectAmount}. */
   damageDealtThisTurn(players: readonly PlayerId[], combat?: boolean, colors?: readonly Color[]): number;
   /** See the `{ turnHistory }` {@link EffectAmount}. */
-  turnHistoryCount(what: TurnHistoryKind, players: readonly PlayerId[], filter?: CardFilter): number;
+  turnHistoryCount(
+    what: TurnHistoryKind,
+    players: readonly PlayerId[],
+    filter?: CardFilter,
+    origin?: TurnHistoryOrigin,
+  ): number;
   /** How many card types there are among `objects`, each once — as they
    * last existed on the battlefield if `departed` (a sacrificed or
    * destroyed permanent), else as they are now. */
@@ -9739,7 +9762,11 @@ function signedAmountValue(
     return ctx.damageDealtThisTurn(ctx.playersInScope(amount.who ?? "you"), amount.combat, amount.colors);
   }
   if ("turnHistory" in amount) {
-    return ctx.turnHistoryCount(amount.turnHistory, ctx.playersInScope(amount.who ?? "you"), amount.filter);
+    if (amount.target !== undefined) {
+      const ref = ctx.targets[amount.target];
+      return ref?.kind === "player" ? ctx.turnHistoryCount(amount.turnHistory, [ref.player], amount.filter, amount) : 0;
+    }
+    return ctx.turnHistoryCount(amount.turnHistory, ctx.playersInScope(amount.who ?? "you"), amount.filter, amount);
   }
   if ("thisWay" in amount) {
     const players =

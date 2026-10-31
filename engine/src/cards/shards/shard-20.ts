@@ -170,6 +170,7 @@ import _poolCrosstownCourier from "../pool/crosstown-courier.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
 import _poolCrownedCeratok from "../pool/crowned-ceratok.js";
+import _poolCruelCalculations from "../pool/cruel-calculations.js";
 import _poolCruelFate from "../pool/cruel-fate.js";
 import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolCrusadingKnight from "../pool/crusading-knight.js";
@@ -1074,6 +1075,7 @@ const shard: CardShard = {
     _poolCrosswayTroublemakers,
     _poolCrowdsFavor,
     _poolCrownedCeratok,
+    _poolCruelCalculations,
     _poolCruelFate,
     _poolCrumblingAshes,
     _poolCrusadingKnight,

@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: the turn history's graveyard tallies** (2026-10-31;
+  `stat:cards-discarded-this-turn`, `stat:cards-library-to-graveyard-this-turn`,
+  `stat:cards-put-into-graveyard-this-turn`,
+  `stat:permanents-to-graveyard-from-battlefield-this-turn`). `TurnHistory` gains `discarded`
+  (every card a player discarded, a madness card's discard into exile too — rule 702.35a) and
+  `to-graveyard` (everything put into a player's graveyard, each with its origin zone: cards from
+  any zone off the graveyard event, permanents and tokens from the battlefield off the leave event
+  with their stint, so a filter reads them as they last existed there — 603.10a). The
+  `turnHistory` amount and the `turn-history` condition take `from` / `notFrom`, the amount a
+  player `target` slot. The `discardedThisTurn` filter is a card discarded this turn and unmoved
+  since, kept through a declined madness card's exile-to-graveyard move (Shadow of the Grave's
+  ruling). The scaffolder reads the lines. 10 freed; proving cards Change of Fortune, Gilt-Blade
+  Prowler, Recalibrate, Cruel Calculations, Fraying Sanity, Structural Assault, Ichor Shade,
+  Shadow of the Grave.
 - **Need-keys Phase 2: can't-do effects for a duration** (2026-10-31;
   `effect:cant-be-regenerated-this-turn`, `effect:cant-become-monarch-this-turn`,
   `effect:target-player-becomes-monarch`, `effect:cant-activate-abilities-until-next-turn`).

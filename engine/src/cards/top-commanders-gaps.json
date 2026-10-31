@@ -676,7 +676,11 @@
   "effect:cant-be-regenerated-this-turn",
   "effect:cant-become-monarch-this-turn",
   "effect:target-player-becomes-monarch",
-  "effect:cant-activate-abilities-until-next-turn"
+  "effect:cant-activate-abilities-until-next-turn",
+  "stat:cards-discarded-this-turn",
+  "stat:cards-library-to-graveyard-this-turn",
+  "stat:cards-put-into-graveyard-this-turn",
+  "stat:permanents-to-graveyard-from-battlefield-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

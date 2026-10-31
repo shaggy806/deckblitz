@@ -191,10 +191,17 @@ section keeps only what to do next.
   abilities prohibition `until-your-next-turn`, a prevention replacement's
   `thenCountsUnprevented`; 14 freed — Bone Shaman's granted ability still needs its own key —
   `effect:cant-phase-out` left open; 5 proving cards — Incinerate, Flamebreak, Disintegrate,
-  Jared Carthalion, True Heir, Mythos of Vadrok).
-  **514 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `stat:turn-event-tallies` (17), `mechanic:assist` (16), `effect:choices-by-other-players`
-  (16), `cost:loyalty-x` (15).
+  Jared Carthalion, True Heir, Mythos of Vadrok),
+  turn-event-tallies' graveyard group (2026-10-31: the turn history's `discarded` list and its
+  `to-graveyard` list with each arrival's origin zone — `from` / `notFrom` on the `turnHistory`
+  amount and the `turn-history` condition, the amount's `target` slot — and the
+  `discardedThisTurn` filter, a declined madness card keeping it; 10 freed — Follow the Bodies
+  still needs gravestorm, and Dimir Strandcatcher's "opponents being attacked" wants a look; 8
+  proving cards — Change of Fortune, Gilt-Blade Prowler, Recalibrate, Cruel Calculations,
+  Fraying Sanity, Structural Assault, Ichor Shade, Shadow of the Grave).
+  **524 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `mechanic:assist` (16), `effect:choices-by-other-players` (16), `cost:loyalty-x` (15),
+  `mechanic:meld` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

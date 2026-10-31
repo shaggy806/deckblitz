@@ -841,7 +841,20 @@ countered spells too),
 scope have a nonzero total — "for each opponent who lost life this turn";
 Tymna the Weaver's "the number of opponents that were dealt combat damage this
 turn" is `"combat-damage-taken"`),
-`{ turnHistory: "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended", who?, filter? }`
+`{ turnHistory: "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended" | "discarded" | "to-graveyard", who?, target?, filter?, from?, notFrom? }`
+(`"discarded"`: the cards the scope's players discarded this turn, a madness
+card discarded into exile too — Change of Fortune's "draw a card for each card
+you've discarded this turn" is `{ turnHistory: "discarded" }`; `"to-graveyard"`:
+everything put into their graveyards this turn, each with the zone it came
+from, which `from` / `notFrom` narrow — cards from anywhere, permanents from
+the battlefield with tokens, a battlefield one read as it last existed there;
+Structural Assault's "the number of artifacts that were put into graveyards
+from the battlefield this turn" is `{ turnHistory: "to-graveyard", who:
+"each-player", from: ["battlefield"], filter: { type: "artifact" } }`, Fraying
+Sanity's "cards put into their graveyard from anywhere" `filter: { token:
+false }` (a token isn't a card); `target` reads a player target slot's list —
+Cruel Calculations' `{ turnHistory: "to-graveyard", target: 0, from:
+["library"] }`. A card counts though it has left the graveyard since. Else:
 (how many permanents entered under the scope's control, left the battlefield
 from under it — for anywhere, however, a token too, its controller as it left
 (Kutzil's Flanker's "for each creature that left the battlefield under your
@@ -2307,7 +2320,7 @@ subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, power, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
-enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
+discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
@@ -2410,7 +2423,12 @@ or any other library-to-graveyard move, never discarded or destroyed (Captain
 N'ghathrod's end-step target is `{ kind: "card-in-graveyard", whose:
 "opponent", filter: { typesAnyOf: ["artifact", "creature"],
 putIntoGraveyardFromLibraryThisTurn: true } }`). A card that leaves the
-graveyard and returns loses it (rule 400.7). `sharesCardTypeWith: "sacrificed"`
+graveyard and returns loses it (rule 400.7). `discardedThisTurn` is a card
+discarded this turn that hasn't moved since — a madness card its owner didn't
+cast still is, in the graveyard it went on to (Shadow of the Grave's "all
+cards in your graveyard that you cycled or discarded this turn" is
+`return-from-graveyard` with `filter: { discardedThisTurn: true }`; cycling is
+discarding, rule 702.29a). `sharesCardTypeWith: "sacrificed"`
 is "a permanent that **shares a card type with it**" — the permanent the
 spell or ability sacrificed, as it last existed (Braids, Arisen Nightmare);
 `"trigger-object"` is the trigger object's instead — "a spell … that shares a
@@ -4590,9 +4608,16 @@ clause (section 9):
   and never one put onto the battlefield attacking (rule 508.3b) — though it
   has left combat since. "Each creature attacking you" (Blessed Reversal) is
   the filter `attackingYou: true`, which also leaves planeswalkers out.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, from?, notFrom? }` —
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
-  this turn: Éowyn, Shieldmaiden's "if another Human entered the battlefield
+  this turn: "if you've discarded a card this turn" is `{ what: "discarded"
+  }` (Gilt-Blade Prowler's activation restriction, Recalibrate's
+  `conditional`); Ichor Shade's "if an artifact or creature was put into a
+  graveyard from the battlefield this turn" `{ what: "to-graveyard", who:
+  "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
+  "creature"] } }`; Dimir Strandcatcher's "three or more cards … into your
+  graveyard from anywhere other than the battlefield" `{ what: "to-graveyard",
+  notFrom: ["battlefield"], atLeast: 3 }`. Éowyn, Shieldmaiden's "if another Human entered the battlefield
   under your control this turn" is `{ what: "entered", filter: { subtype:
   "Human" }, excludeSelf: true }` (a Human that entered and left since still
   counts); "if a creature died under your control this turn" is `{ what:

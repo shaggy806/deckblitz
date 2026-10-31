@@ -626,6 +626,7 @@ import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSerpentineSpike from "../pool/serpentine-spike.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
+import _poolShadowOfTheGrave from "../pool/shadow-of-the-grave.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
 import _poolShatterskullMinotaur from "../pool/shatterskull-minotaur.js";
 import _poolShaukuEndbringer from "../pool/shauku-endbringer.js";
@@ -1494,6 +1495,7 @@ const shard: CardShard = {
     _poolSerpentineSpike,
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
+    _poolShadowOfTheGrave,
     _poolSharpshooterElf,
     _poolShatterskullMinotaur,
     _poolShaukuEndbringer,

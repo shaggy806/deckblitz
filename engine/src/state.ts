@@ -3606,10 +3606,33 @@ export interface TurnHistoryEntry {
    * it is now (Mechan Shieldmate's ruling): one that has stopped being an
    * artifact still counts, one that became one later doesn't. */
   readonly asEntered?: LastKnownInfo;
+  /** For something put into a graveyard (`to-graveyard`): the zone it came
+   * from — `"battlefield"` (with `stint`), `"library"`, `"hand"`, `"stack"`
+   * and the rest. */
+  readonly from?: ZoneType;
 }
 
 /** The lists a {@link TurnHistory} keeps. */
-export type TurnHistoryKind = "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended";
+export type TurnHistoryKind =
+  | "entered"
+  | "left"
+  | "died"
+  | "sacrificed"
+  | "exiled"
+  | "descended"
+  | "discarded"
+  | "to-graveyard";
+
+/** The zones a `to-graveyard` {@link TurnHistory} count takes its arrivals
+ * from (`from`: only these) or leaves out (`notFrom`) — "put into graveyards
+ * from the battlefield" (`from: ["battlefield"]`), "from their library"
+ * (`["library"]`), "from anywhere other than the battlefield" (`notFrom:
+ * ["battlefield"]`). Other lists have no origin, so `from` matches nothing
+ * there. */
+export interface TurnHistoryOrigin {
+  readonly from?: readonly ZoneType[];
+  readonly notFrom?: readonly ZoneType[];
+}
 
 /**
  * What one player's turn so far has held, for "this turn" conditions and
@@ -3643,6 +3666,26 @@ export interface TurnHistory {
   /** Permanent cards put into this player's graveyard from anywhere — each
    * is this player "descending". */
   descended?: TurnHistoryEntry[];
+  /** Cards this player discarded (rule 701.9a), wherever they went — a
+   * madness card discarded into exile too (702.35a) — "for each card you've
+   * discarded this turn" (Change of Fortune), "if you've discarded a card
+   * this turn" (Gilt-Blade Prowler). Cycling discards (702.29a). A card in
+   * a hand is always its owner's (rule 400.3), so the discarder is the owner. */
+  discarded?: TurnHistoryEntry[];
+  /** Everything put into this player's graveyard this turn, each with the
+   * zone it came from (`from`): cards from anywhere — a library (milled,
+   * surveilled), a hand (discarded), the stack (a resolved or countered
+   * spell) — and permanents from the battlefield, a token included (it is
+   * put there before it ceases to exist, rule 111.7), each with the stint it
+   * left so a filter reads it as it last existed there (603.10a). The
+   * graveyard is the owner's (rule 400.3), so the list is. "The number of
+   * artifacts that were put into graveyards from the battlefield this turn"
+   * (Structural Assault: every player's, `from: ["battlefield"]`), "cards
+   * put into target player's graveyard from their library this turn"
+   * (Cruel Calculations), "from anywhere other than the battlefield" (Dimir
+   * Strandcatcher: `notFrom`). A card that has left the graveyard since still
+   * counts — it was put there. */
+  "to-graveyard"?: TurnHistoryEntry[];
   /** Cards put into this player's graveyard from their hand or library —
    * discarded, milled, surveilled, cycled — Welcome the Dead's "the number
    * of cards that were put into your graveyard from your hand or library

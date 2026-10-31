@@ -63,7 +63,7 @@ import {
   rulesTextName,
   speedOf,
 } from "./state.js";
-import type { GameObject, GameState, LastKnownInfo, PtModifier, TurnHistoryKind } from "./state.js";
+import type { GameObject, GameState, LastKnownInfo, PtModifier, TurnHistoryKind, TurnHistoryOrigin } from "./state.js";
 import {
   BASIC_LAND_TYPE_COLORS,
   EVERY_CREATURE_TYPE,
@@ -1138,6 +1138,7 @@ function evalStaticCondition(
         condition.filter,
         you,
         condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
+        condition,
       );
       return n >= (condition.atLeast ?? 1);
     }
@@ -1448,7 +1449,10 @@ export function damageDealtThisTurn(
  * 603.10a), though it has come back and left again since; a card put into a
  * graveyard (`descended`), as it is now. `except` leaves one object out in
  * one stint ("another Human" — the source as it is now): the same card in
- * an earlier stint was a different object (rule 400.7) and counts.
+ * an earlier stint was a different object (rule 400.7) and counts. A card
+ * discarded (`discarded`) or put into a graveyard from anywhere but the
+ * battlefield (`to-graveyard`) is matched as it is now; `origin` narrows
+ * `to-graveyard` by the zone each came from.
  */
 export function turnHistoryCount(
   state: GameState,
@@ -1458,10 +1462,13 @@ export function turnHistoryCount(
   filter: CardFilter | undefined,
   you: PlayerId,
   except?: { readonly id: ObjectId; readonly stint: number },
+  origin?: TurnHistoryOrigin,
 ): number {
   let n = 0;
   for (const player of players) {
     for (const entry of state.players[player]?.turnHistory?.[what] ?? []) {
+      if (origin?.from !== undefined && (entry.from === undefined || !origin.from.includes(entry.from))) continue;
+      if (origin?.notFrom !== undefined && entry.from !== undefined && origin.notFrom.includes(entry.from)) continue;
       if (except !== undefined && entry.object === except.id) {
         const at = entry.stint ?? entry.asEntered?.zoneChangeCount;
         if (at === undefined || at === except.stint) continue;
@@ -1469,14 +1476,14 @@ export function turnHistoryCount(
       if (filter !== undefined) {
         const snapshot =
           entry.asEntered ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
+        const asNow =
+          what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.stint === undefined);
         const matched = matchesFilter(
           state,
           registry,
           entry.object,
           filter,
-          snapshot !== undefined
-            ? { you, snapshot }
-            : { you, ...(what === "descended" ? {} : { lastKnown: true }) },
+          snapshot !== undefined ? { you, snapshot } : { you, ...(asNow ? {} : { lastKnown: true }) },
         );
         if (!matched) continue;
       }

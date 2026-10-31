@@ -1026,7 +1026,16 @@ export type StaticCondition =
    * ["land"] } }`. `who` is whose (default `"you"`); `filter` narrows the
    * objects — one that has left the battlefield as it last existed there, a
    * card put into a graveyard as it is now; `excludeSelf` leaves this
-   * permanent out ("another").
+   * permanent out ("another"). `"discarded"` is the cards a player discarded
+   * ("if you've discarded a card this turn" — Gilt-Blade Prowler);
+   * `"to-graveyard"` everything put into a player's graveyard, narrowed by
+   * the zone it came from (`from` / `notFrom`, as `TurnHistoryOrigin` says):
+   * "if an artifact or creature was put into a graveyard from the
+   * battlefield this turn" (Ichor Shade: `{ what: "to-graveyard", who:
+   * "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
+   * "creature"] } }`), "if three or more cards were put into your graveyard
+   * from anywhere other than the battlefield this turn" (Dimir Strandcatcher:
+   * `notFrom: ["battlefield"], atLeast: 3`).
    */
   /**
    * Sources a player controlled dealt at least `atLeast` damage this turn —
@@ -1050,6 +1059,8 @@ export type StaticCondition =
       readonly filter?: CardFilter;
       readonly atLeast?: number;
       readonly excludeSelf?: boolean;
+      readonly from?: readonly ZoneType[];
+      readonly notFrom?: readonly ZoneType[];
     }
   /** The source's controller created a token this turn (Idol of Oblivion). */
   | { readonly kind: "created-token-this-turn" }
