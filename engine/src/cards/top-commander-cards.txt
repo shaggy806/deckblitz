@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4035 already implemented / 965 missing (marks refreshed 2026-10-31)
+4039 already implemented / 961 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1456,7 +1456,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1463  Vedalken Orrery                          {4}              Artifact
 [x]  1464  Concordant Crossroads                    {G}              World Enchantment
 [x]  1465  Dark Depths                              {0}              Legendary Snow Land
-[ ]  1466  Mystic Confluence                        {3}{U}{U}        Instant
+[x]  1466  Mystic Confluence                        {3}{U}{U}        Instant
 [ ]  1467  Treasure Nabber                          {2}{R}           Creature — Goblin Rogue
 [x]  1468  Isshin, Two Heavens as One               {R}{W}{B}        Legendary Creature — Human Samurai
 [x]  1469  Feign Death                              {B}              Instant
@@ -1589,7 +1589,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1596  Siege-Gang Commander                     {3}{R}{R}        Creature — Goblin
 [x]  1597  Eldrazi Conscription                     {8}              Kindred Enchantment — Eldrazi Aura
 [x]  1598  Sword of Vengeance                       {3}              Artifact — Equipment
-[ ]  1599  Fiery Confluence                         {2}{R}{R}        Sorcery
+[x]  1599  Fiery Confluence                         {2}{R}{R}        Sorcery
 [ ]  1600  Valakut Exploration                      {2}{R}           Enchantment
 [x]  1601  Rhox Faithmender                         {3}{W}           Creature — Rhino Monk
 [x]  1602  Return to Dust                           {2}{W}{W}        Instant
@@ -2420,7 +2420,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2427  Crowded Crypt                            {2}{B}           Artifact
 [x]  2428  Abundant Growth                          {G}              Enchantment — Aura
 [x]  2429  Force of Despair                         {1}{B}{B}        Instant
-[ ]  2430  Winds of Change                          {R}              Sorcery
+[x]  2430  Winds of Change                          {R}              Sorcery
 [x]  2431  Master Transmuter                        {3}{U}           Artifact Creature — Human Artificer
 [x]  2432  Gishath, Sun's Avatar                    {5}{R}{G}{W}     Legendary Creature — Dinosaur Avatar
 [x]  2433  Primordial Hydra                         {X}{G}{G}        Creature — Hydra
@@ -3479,7 +3479,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3486  Wirewood Symbiote                        {G}              Creature — Insect
 [ ]  3487  Tempting Contract                        {4}              Artifact
 [x]  3488  Master of the Pearl Trident              {U}{U}           Creature — Merfolk
-[ ]  3489  Timetwister                              {2}{U}           Sorcery
+[x]  3489  Timetwister                              {2}{U}           Sorcery
 [x]  3490  Hamza, Guardian of Arashin               {4}{G}{W}        Legendary Creature — Elephant Warrior
 [x]  3491  Prismatic Omen                           {1}{G}           Enchantment
 [x]  3492  Bloomvine Regent // Claim Territory      {3}{G}{G} // {2}{G} Creature — Dragon // Sorcery — Omen
