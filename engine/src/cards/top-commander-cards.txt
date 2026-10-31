@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4039 already implemented / 961 missing (marks refreshed 2026-10-31)
+4040 already implemented / 960 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4671,7 +4671,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4678  Maraleaf Pixie                           {G}{U}           Creature — Faerie
 [x]  4679  Divine Resilience                        {W}              Instant
 [ ]  4680  Breeches, Brazen Plunderer               {3}{R}           Legendary Creature — Goblin Pirate
-[ ]  4681  Indomitable Might                        {3}{G}           Enchantment — Aura
+[x]  4681  Indomitable Might                        {3}{G}           Enchantment — Aura
 [x]  4682  Spawning Bed                             {0}              Land
 [x]  4683  Of Herbs and Stewed Rabbit               {2}{W}           Enchantment — Saga
 [x]  4684  Hajar, Loyal Bodyguard                   {R}{G}           Legendary Creature — Human Soldier
