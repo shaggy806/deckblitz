@@ -82,6 +82,7 @@ import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
 import _poolBroodstar from "../pool/broodstar.js";
 import _poolBrutalNightstalker from "../pool/brutal-nightstalker.js";
+import _poolBureauHeadmaster from "../pool/bureau-headmaster.js";
 import _poolBurningSunsAvatar from "../pool/burning-suns-avatar.js";
 import _poolBurnwillowClearing from "../pool/burnwillow-clearing.js";
 import _poolBurrogBefuddler from "../pool/burrog-befuddler.js";
@@ -913,6 +914,7 @@ const shard: CardShard = {
     _poolBrokersHideout,
     _poolBroodstar,
     _poolBrutalNightstalker,
+    _poolBureauHeadmaster,
     _poolBurningSunsAvatar,
     _poolBurnwillowClearing,
     _poolBurrogBefuddler,

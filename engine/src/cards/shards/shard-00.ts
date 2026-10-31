@@ -828,6 +828,7 @@ import _poolWarBarge from "../pool/war-barge.js";
 import _poolWarOfTheLastAlliance from "../pool/war-of-the-last-alliance.js";
 import _poolWarbeastOfGorgoroth from "../pool/warbeast-of-gorgoroth.js";
 import _poolWasteNot from "../pool/waste-not.js";
+import _poolWastelandStrangler from "../pool/wasteland-strangler.js";
 import _poolWatchwingScarecrow from "../pool/watchwing-scarecrow.js";
 import _poolWateryGrasp from "../pool/watery-grasp.js";
 import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
@@ -1702,6 +1703,7 @@ const shard: CardShard = {
     _poolWarOfTheLastAlliance,
     _poolWarbeastOfGorgoroth,
     _poolWasteNot,
+    _poolWastelandStrangler,
     _poolWatchwingScarecrow,
     _poolWateryGrasp,
     _poolWaveskimmerAven,

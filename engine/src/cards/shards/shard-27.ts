@@ -25,6 +25,7 @@ import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAlertHeedbonder from "../pool/alert-heedbonder.js";
+import _poolAlphaBrawl from "../pool/alpha-brawl.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
@@ -862,6 +863,7 @@ const shard: CardShard = {
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
     _poolAlertHeedbonder,
+    _poolAlphaBrawl,
     _poolAltarsReap,
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,

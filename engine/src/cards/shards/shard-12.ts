@@ -543,6 +543,7 @@ import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
 import _poolPrimalEmpathy from "../pool/primal-empathy.js";
 import _poolPrismariPianist from "../pool/prismari-pianist.js";
+import _poolProcessorAssault from "../pool/processor-assault.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
 import _poolProstheticInjector from "../pool/prosthetic-injector.js";
@@ -1385,6 +1386,7 @@ const shard: CardShard = {
     _poolPretendingPoxbearers,
     _poolPrimalEmpathy,
     _poolPrismariPianist,
+    _poolProcessorAssault,
     _poolProphetOfThePeak,
     _poolProsperity,
     _poolProstheticInjector,

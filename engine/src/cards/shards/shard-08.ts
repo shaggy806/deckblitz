@@ -117,6 +117,7 @@ import _poolCaoRenWeiCommander from "../pool/cao-ren-wei-commander.js";
 import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
+import _poolCarthTheLion from "../pool/carth-the-lion.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
@@ -784,6 +785,7 @@ import _poolTumbleMagnet from "../pool/tumble-magnet.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolTwistedImage from "../pool/twisted-image.js";
+import _poolUlamogsNullifier from "../pool/ulamogs-nullifier.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUndercityInformer from "../pool/undercity-informer.js";
 import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
@@ -1004,6 +1006,7 @@ const shard: CardShard = {
     _poolCapriciousSorcerer,
     _poolCaptiveWeird,
     _poolCarnageAltar,
+    _poolCarthTheLion,
     _poolCartoucheOfZeal,
     _poolCateranOverlord,
     _poolCatharCommando,
@@ -1671,6 +1674,7 @@ const shard: CardShard = {
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolTwistedImage,
+    _poolUlamogsNullifier,
     _poolUltimateGreenGoblin,
     _poolUndercityInformer,
     _poolUnderdarkExplorer,

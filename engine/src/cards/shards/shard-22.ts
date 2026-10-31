@@ -199,6 +199,7 @@ import _poolDustToDust from "../pool/dust-to-dust.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
+import _poolEidolonOfObstruction from "../pool/eidolon-of-obstruction.js";
 import _poolEject from "../pool/eject.js";
 import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
@@ -1064,6 +1065,7 @@ const shard: CardShard = {
     _poolDwarvenGrunt,
     _poolEarthRift,
     _poolEaterOfTheDead,
+    _poolEidolonOfObstruction,
     _poolEject,
     _poolElectryte,
     _poolElementalMasterpiece,

@@ -81,6 +81,7 @@ import _poolBiteOfTheBlackRose from "../pool/bite-of-the-black-rose.js";
 import _poolBlackDragon from "../pool/black-dragon.js";
 import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
+import _poolBladeholdWarWhip from "../pool/bladehold-war-whip.js";
 import _poolBladesOfVelisVel from "../pool/blades-of-velis-vel.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolBlackDragon,
     _poolBlacksnagBuzzard,
     _poolBladedBattleFan,
+    _poolBladeholdWarWhip,
     _poolBladesOfVelisVel,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,

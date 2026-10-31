@@ -654,6 +654,7 @@ import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
 import _poolSidewinderSliver from "../pool/sidewinder-sliver.js";
+import _poolSignatureSlam from "../pool/signature-slam.js";
 import _poolSilumgarButcher from "../pool/silumgar-butcher.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
@@ -809,6 +810,7 @@ import _poolVivisurgeonsInsight from "../pool/vivisurgeons-insight.js";
 import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
+import _poolVoidAttendant from "../pool/void-attendant.js";
 import _poolVoidMirror from "../pool/void-mirror.js";
 import _poolVoidwalk from "../pool/voidwalk.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
@@ -1519,6 +1521,7 @@ const shard: CardShard = {
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
     _poolSidewinderSliver,
+    _poolSignatureSlam,
     _poolSilumgarButcher,
     _poolSilverErne,
     _poolSilverbeakGriffin,
@@ -1674,6 +1677,7 @@ const shard: CardShard = {
     _poolVodaSeaScavenger,
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,
+    _poolVoidAttendant,
     _poolVoidMirror,
     _poolVoidwalk,
     _poolVolatileFjord,

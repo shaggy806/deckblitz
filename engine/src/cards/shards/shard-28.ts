@@ -208,6 +208,7 @@ import _poolDrowned from "../pool/drowned.js";
 import _poolDruidsFamiliar from "../pool/druids-familiar.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolDuskMangler from "../pool/dusk-mangler.js";
+import _poolDwarvenMauler from "../pool/dwarven-mauler.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEchoCirclet from "../pool/echo-circlet.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
@@ -1084,6 +1085,7 @@ const shard: CardShard = {
     _poolDruidsFamiliar,
     _poolDunedainBlade,
     _poolDuskMangler,
+    _poolDwarvenMauler,
     _poolEarthrumbler,
     _poolEchoCirclet,
     _poolEiganjoDynastorian,

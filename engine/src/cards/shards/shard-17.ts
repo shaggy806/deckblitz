@@ -481,6 +481,7 @@ import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
+import _poolMoonlightHunt from "../pool/moonlight-hunt.js";
 import _poolMorningtidesLight from "../pool/morningtides-light.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
@@ -1350,6 +1351,7 @@ const shard: CardShard = {
     _poolMollyHayesRunaway,
     _poolMomentOfTriumph,
     _poolMonkIdealist,
+    _poolMoonlightHunt,
     _poolMorningtidesLight,
     _poolMountainValley,
     _poolNardoleResourcefulCyborg,

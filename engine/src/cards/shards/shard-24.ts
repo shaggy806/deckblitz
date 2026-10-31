@@ -84,6 +84,7 @@ import _poolBlinkmothInfusion from "../pool/blinkmoth-infusion.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
+import _poolBoomScholar from "../pool/boom-scholar.js";
 import _poolBoonSatyr from "../pool/boon-satyr.js";
 import _poolBorborygmos from "../pool/borborygmos.js";
 import _poolBorealCentaur from "../pool/boreal-centaur.js";
@@ -262,6 +263,7 @@ import _poolFlareOfFortitude from "../pool/flare-of-fortitude.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFleecemaneLion from "../pool/fleecemane-lion.js";
 import _poolFleshCarver from "../pool/flesh-carver.js";
+import _poolFluctuator from "../pool/fluctuator.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
@@ -938,6 +940,7 @@ const shard: CardShard = {
     _poolBlur,
     _poolBoggartShenanigans,
     _poolBonesplitter,
+    _poolBoomScholar,
     _poolBoonSatyr,
     _poolBorborygmos,
     _poolBorealCentaur,
@@ -1116,6 +1119,7 @@ const shard: CardShard = {
     _poolFlatline,
     _poolFleecemaneLion,
     _poolFleshCarver,
+    _poolFluctuator,
     _poolFootSoldiers,
     _poolFoulTongueShriek,
     _poolFoundryScreecher,

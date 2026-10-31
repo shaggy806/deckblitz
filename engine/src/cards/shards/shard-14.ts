@@ -674,6 +674,7 @@ import _poolSleeperAgent from "../pool/sleeper-agent.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
+import _poolSolarBlaze from "../pool/solar-blaze.js";
 import _poolSongstitcher from "../pool/songstitcher.js";
 import _poolSoratamiSavant from "../pool/soratami-savant.js";
 import _poolSoulsOfTheFaultless from "../pool/souls-of-the-faultless.js";
@@ -1532,6 +1533,7 @@ const shard: CardShard = {
     _poolSlinnVodaTheRisingDeep,
     _poolSmashingSuccess,
     _poolSnarlingWarg,
+    _poolSolarBlaze,
     _poolSongstitcher,
     _poolSoratamiSavant,
     _poolSoulsOfTheFaultless,

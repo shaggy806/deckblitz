@@ -460,6 +460,7 @@ import _poolMeddlingMage from "../pool/meddling-mage.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMeltdown from "../pool/meltdown.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
+import _poolMemoryTheft from "../pool/memory-theft.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
 import _poolMeteorBlast from "../pool/meteor-blast.js";
@@ -1327,6 +1328,7 @@ const shard: CardShard = {
     _poolMeditationPuzzle,
     _poolMeltdown,
     _poolMemorialVault,
+    _poolMemoryTheft,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,
     _poolMeteorBlast,

@@ -56,6 +56,7 @@ import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
 import _poolBarbedWire from "../pool/barbed-wire.js";
+import _poolBartzAndBoko from "../pool/bartz-and-boko.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBattleSliver from "../pool/battle-sliver.js";
@@ -914,6 +915,7 @@ const shard: CardShard = {
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,
     _poolBarbedWire,
+    _poolBartzAndBoko,
     _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
     _poolBattleSliver,

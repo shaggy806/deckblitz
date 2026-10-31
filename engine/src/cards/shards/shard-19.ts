@@ -545,6 +545,7 @@ import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolNuisanceEngine from "../pool/nuisance-engine.js";
 import _poolNyxbornHydra from "../pool/nyxborn-hydra.js";
 import _poolOathOfChandra from "../pool/oath-of-chandra.js";
+import _poolOblivionSower from "../pool/oblivion-sower.js";
 import _poolObservantAlseid from "../pool/observant-alseid.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreMarauder from "../pool/ogre-marauder.js";
@@ -847,6 +848,7 @@ import _poolWarPriestOfThune from "../pool/war-priest-of-thune.js";
 import _poolWarScreecher from "../pool/war-screecher.js";
 import _poolWartimeProtestors from "../pool/wartime-protestors.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
+import _poolWaveOfReckoning from "../pool/wave-of-reckoning.js";
 import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWaywardSwordtooth from "../pool/wayward-swordtooth.js";
 import _poolWeldingSparks from "../pool/welding-sparks.js";
@@ -1440,6 +1442,7 @@ const shard: CardShard = {
     _poolNuisanceEngine,
     _poolNyxbornHydra,
     _poolOathOfChandra,
+    _poolOblivionSower,
     _poolObservantAlseid,
     _poolOgreBerserker,
     _poolOgreMarauder,
@@ -1742,6 +1745,7 @@ const shard: CardShard = {
     _poolWarScreecher,
     _poolWartimeProtestors,
     _poolWaterbenderAscension,
+    _poolWaveOfReckoning,
     _poolWayOfTheParadox,
     _poolWaywardSwordtooth,
     _poolWeldingSparks,
