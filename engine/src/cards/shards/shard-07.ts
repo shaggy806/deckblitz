@@ -332,6 +332,7 @@ import _poolHolyLight from "../pool/holy-light.js";
 import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHowlingWolf from "../pool/howling-wolf.js";
+import _poolHungeringYeti from "../pool/hungering-yeti.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
 import _poolHydromorphGull from "../pool/hydromorph-gull.js";
@@ -1214,6 +1215,7 @@ const shard: CardShard = {
     _poolHomuraHumanAscendant,
     _poolHookhandMariner,
     _poolHowlingWolf,
+    _poolHungeringYeti,
     _poolHydraBroodmaster,
     _poolHydroform,
     _poolHydromorphGull,

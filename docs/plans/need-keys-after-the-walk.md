@@ -621,6 +621,17 @@ missing. Re-run `--greedy` for Phase 2's order.
   `cost:choose-creature-type-as-cast`, `cost:escalate-nonmana` and one-card units. Next:
   `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15),
   `decision:choose-card-type-protection` (15).
+- **2026-10-31: `effect:cast-and-activate-restrictions`' top group, features only** (an overnight
+  agent) — a spell's own conditional flash, `CardDefinition.flashIf`: a `condition` read from the
+  caster's side as the cast begins (601.3d; 601.6a keeps the cast going if it stops holding), or
+  `targets`, judged on the targets chosen (601.3b, 601.6) — the offer narrows the one fitting
+  slot to them when only this permission allows the cast now. 3 keys; 5 proving cards; 10 freed
+  (queued: 596). Adds no decision kind and no client change (the client reads the offer's
+  `targetOptions`). Not yet: Silver Scrutiny's X cap ("if X is 3 or less") — the offer's `maxX`
+  would need capping at instant speed; a permanent's "~ has flash as long as" (Colossal
+  Rattlewurm) needs its battlefield keyword grant beside `flashIf`; the family's grantee,
+  prohibition and cast-limit units. Next: `static:gain-abilities-from-graveyard` (15),
+  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15).
 
 ## Rough size
 

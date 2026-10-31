@@ -239,10 +239,18 @@ section keeps only what to do next.
   "any amount of {R}" its X, sent as 0 before; 15 freed, 8 proving cards — Harnessed Lightning,
   Die Young, Wrath of the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal
   Prayers, Amped Raptor, Jolted Awake; the family's creature-type-as-cast, nonmana-escalate and
-  one-card units still open).
-  **586 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15),
-  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15).
+  one-card units still open),
+  cast-and-activate-restrictions' top group (2026-10-31: a spell's own conditional flash,
+  `flashIf` — a `condition` read from the caster's side as the cast begins (rules 601.3d,
+  601.6a), or `targets`, one chosen target matching (601.3b, 601.6), its one fitting slot offered
+  only those when nothing else lets it be cast now; 10 freed — Silver Scrutiny's "if X is 3 or
+  less" still needs an X cap, Colossal Rattlewurm also its battlefield flash, Fated Clash, Take
+  for a Ride and Mutual Destruction conditions of their own to check; 5 proving cards — Hungering
+  Yeti, Crashing Tide, Swift Reckoning, Flash Photography, Timely Ward; the family's grantee and
+  prohibition units still open).
+  **596 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `static:gain-abilities-from-graveyard` (15), `decision:choose-card-type-protection` (15),
+  `effect:amount-aggregate` (15), `mechanic:face-down` (14).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

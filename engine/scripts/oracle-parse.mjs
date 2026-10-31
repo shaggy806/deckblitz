@@ -3834,6 +3834,24 @@ export function parseFace(face, ctx = {}) {
       out.flashThenSacrifice = true;
       continue;
     }
+    // A spell's own conditional flash (`flashIf`, rules 601.3b, 601.3d):
+    // "You may cast this spell as though it had flash if you control a
+    // Human / if it targets a commander", "As long as … / If …, you may cast
+    // this spell as though it had flash", "This spell has flash as long as …"
+    // — that last only when it says "this spell", or on an instant or
+    // sorcery: "Colossal Rattlewurm has flash as long as …" is the
+    // permanent's keyword too.
+    {
+      const clause =
+        /^You may cast ~ as though it had flash if (.+)\.$/.exec(line)?.[1] ??
+        /^(?:As long as|If) (.+), you may cast ~ as though it had flash\.$/.exec(line)?.[1] ??
+        ((isSpell || /^This spell has flash/.test(printed(raw))) ? /^~ has flash as long as (.+)\.$/.exec(line)?.[1] : undefined);
+      const flashIf = clause === undefined ? null : flashIfOf(clause);
+      if (flashIf !== null) {
+        out.flashIf = flashIf;
+        continue;
+      }
+    }
     if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
       continue;
@@ -4602,6 +4620,43 @@ function kickedWithIf(clause, kicker) {
   if (m[1] === kicker.cost) return { kind: "self-kicked", with: "first" };
   if (m[1] === kicker.second) return { kind: "self-kicked", with: "second" };
   return undefined;
+}
+
+/**
+ * A conditional flash's clause (`CardDefinition.flashIf`) — "you control a
+ * Human", "you control a green or blue permanent", "there are two or more
+ * instant and/or sorcery cards in your graveyard", "it targets a permanent
+ * you control", "it targets a commander" — or `null` for one the parser
+ * doesn't read.
+ */
+function flashIfOf(clause) {
+  const COLORS = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+  let m = /^it targets an? (.+)$/.exec(clause);
+  if (m !== null) {
+    if (m[1] === "commander") return { targets: { isCommander: true } };
+    const mine = / you control$/.test(m[1]);
+    const filter = parseTypePhrase(m[1].replace(/ you control$/, ""));
+    if (filter === null || (!mine && Object.keys(filter).length === 0)) return null;
+    return { targets: { ...filter, ...(mine ? { controlledBy: "you" } : {}) } };
+  }
+  m = /^you control an? (white|blue|black|red|green) or (white|blue|black|red|green) permanent$/.exec(clause);
+  if (m !== null) {
+    return { condition: { kind: "controls", filter: { anyOf: [{ colors: [COLORS[m[1]]] }, { colors: [COLORS[m[2]]] }] }, atLeast: 1 } };
+  }
+  m = /^you control an? (.+)$/.exec(clause);
+  if (m !== null) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { condition: { kind: "controls", filter, atLeast: 1 } };
+  }
+  m = new RegExp(`^there are ${N} or more (.+) cards in your graveyard$`).exec(clause);
+  if (m !== null) {
+    const n = numberOf(m[1]);
+    const filter = parseTypePhrase(m[2], { cards: true });
+    if (typeof n !== "number" || filter === null) return null;
+    return { condition: { kind: "cards-in-graveyard", atLeast: n, filter } };
+  }
+  return null;
 }
 
 function devotionIf(clause) {

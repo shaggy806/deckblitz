@@ -3769,3 +3769,46 @@ describe("energy paid in an amount the player chooses (costEnergyX)", () => {
     expect(reflexive.triggered[0].effect).toBeNull();
   });
 });
+
+describe("a spell's own conditional flash (flashIf)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a condition on what its caster controls or has in their graveyard", () => {
+    expect(
+      face("Bard's Company", "Creature — Human Citizen", "You may cast this spell as though it had flash if you control a Human.").flashIf,
+    ).toEqual({ condition: { kind: "controls", filter: { subtype: "Human" }, atLeast: 1 } });
+    expect(
+      face(
+        "Hungering Yeti",
+        "Creature — Yeti",
+        "As long as you control a green or blue permanent, you may cast this spell as though it had flash. (You may cast it any time you could cast an instant.)",
+      ).flashIf,
+    ).toEqual({ condition: { kind: "controls", filter: { anyOf: [{ colors: ["G"] }, { colors: ["U"] }] }, atLeast: 1 } });
+    expect(
+      face(
+        "Swift Reckoning",
+        "Sorcery",
+        "Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may cast this spell as though it had flash. (You may cast it any time you could cast an instant.)\nDestroy target tapped creature.",
+      ).flashIf,
+    ).toEqual({ condition: { kind: "cards-in-graveyard", atLeast: 2, filter: { typesAnyOf: ["instant", "sorcery"] } } });
+    expect(
+      face("Crashing Tide", "Sorcery", "This spell has flash as long as you control a Merfolk.\nReturn target creature to its owner's hand.\nDraw a card.").flashIf,
+    ).toEqual({ condition: { kind: "controls", filter: { subtype: "Merfolk" }, atLeast: 1 } });
+  });
+
+  it("reads a condition on its targets", () => {
+    expect(
+      face("Flash Photography", "Sorcery", "You may cast this spell as though it had flash if it targets a permanent you control.").flashIf,
+    ).toEqual({ targets: { controlledBy: "you" } });
+    expect(
+      face("Timely Ward", "Enchantment — Aura", "You may cast this spell as though it had flash if it targets a commander.").flashIf,
+    ).toEqual({ targets: { isCommander: true } });
+  });
+
+  it("leaves a permanent's own 'has flash as long as' to a person: that's its keyword on the battlefield too", () => {
+    const wurm = face("Colossal Rattlewurm", "Creature — Wurm", "Colossal Rattlewurm has flash as long as you control a Desert.");
+    expect(wurm.flashIf).toBeUndefined();
+    expect(wurm.complete).toBe(false);
+  });
+});

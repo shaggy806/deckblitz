@@ -3715,11 +3715,19 @@ export class Game {
       const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload);
       // "Costs {N} less if it targets …": offered with only the targets that
       // earn it when the full price isn't affordable.
-      const options = this.targetReductionOptions(
+      // "As though it had flash if it targets …": offered with only the
+      // targets that allow it when only that lets it be cast now.
+      const options = this.flashIfTargetOptions(
         def,
         player,
         card,
-        this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card))),
+        this.targetReductionOptions(
+          def,
+          player,
+          card,
+          this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card))),
+          () => castableAt(pricedAt).castable,
+        ),
         () => castableAt(pricedAt).castable,
       );
       const reducingTargets = this.reducingTargetsNeeded(def, player, card, options, () => castableAt(pricedAt).castable);
@@ -12776,7 +12784,10 @@ export class Game {
       !def.flashThenSacrifice &&
       // Judged as the spell it would be — an Omen or an adventure is its
       // instant or sorcery half (rules 715.3, 720.3a).
-      !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))
+      !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId)) &&
+      // "You may cast this spell as though it had flash if you control a
+      // Human" / "…if it targets a commander" (rules 601.3b, 601.3d).
+      !this.castsByConditionalFlash(player, cardId, def, modes, kicked, overload, targets)
     ) {
       const timing = this.whyNotSorcerySpeed(player, `cast ${def.name}`);
       if (timing !== null) return timing;
@@ -31294,6 +31305,87 @@ export class Game {
     if (kicked && def.kicker?.flash === true) return false;
     if (this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))) return false;
     return this.whyNotSorcerySpeed(player, "cast it") !== null;
+  }
+
+  /** While set, a `flashIf` that reads the spell's targets doesn't count —
+   * whether the spell could be cast now without that permission. */
+  private flashIfTargetsOff = false;
+
+  /** Whether `def`'s own conditional flash (`CardDefinition.flashIf`) lets
+   * `player` begin casting it now. Its `condition` is read as the cast
+   * begins, from the caster's side (rule 601.3d). Its `targets` are judged
+   * against the targets chosen once they are (601.6); before that — an offer
+   * being listed — whether some legal choice of them could satisfy it
+   * (601.3b). */
+  private castsByConditionalFlash(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    modes: readonly number[] | undefined,
+    kicked: boolean | number,
+    overload: boolean,
+    targets: readonly (TargetRef | null | undefined)[] | undefined,
+  ): boolean {
+    const flash = def.flashIf;
+    if (flash === undefined) return false;
+    const card = this.state.objects[cardId];
+    if (card === undefined) return false;
+    if (
+      flash.condition !== undefined &&
+      !staticConditionMet(this.state, this.registry, { ...card, controller: player }, flash.condition)
+    ) {
+      return false;
+    }
+    const filter = flash.targets;
+    if (filter === undefined) return true;
+    if (this.flashIfTargetsOff) return false;
+    const fits = (ref: TargetRef | null | undefined): boolean =>
+      ref?.kind === "object" &&
+      matchesFilter(this.state, this.registry, ref.object, filter, { you: player, source: cardId });
+    if (targets !== undefined) return targets.some(fits);
+    const specs = this.effectiveTargetSpecs(def, modes, kicked, overload);
+    return this.targetOptionsFor(specs, player, this.cardSource(def, cardId)).some((slot) => slot.some(fits));
+  }
+
+  /** The target options a spell with a target-reading `flashIf` is offered
+   * with: all of them while it could be cast now without that permission
+   * (`castable`, the variant's castability, asked once with the
+   * permission switched off and once on), and otherwise, in the one slot whose targets can
+   * satisfy it, only those — a cast the chosen targets would make illegal
+   * (rule 601.6) isn't offered. With several such slots, all are offered
+   * and the cast's targets are checked as it's made. */
+  private flashIfTargetOptions(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    options: readonly (readonly TargetRef[])[],
+    castable: () => boolean,
+  ): TargetRef[][] {
+    const all = options.map((slot) => [...slot]);
+    const filter = def.flashIf?.targets;
+    if (filter === undefined) return all;
+    const fitting = all.map((slot) =>
+      slot.filter(
+        (ref) =>
+          ref.kind === "object" &&
+          matchesFilter(this.state, this.registry, ref.object, filter, { you: player, source: cardId }),
+      ),
+    );
+    const slots = fitting.flatMap((slot, i) => (slot.length > 0 ? [i] : []));
+    if (slots.length > 1) return all;
+    this.flashIfTargetsOff = true;
+    let without: boolean;
+    try {
+      without = castable();
+    } finally {
+      this.flashIfTargetsOff = false;
+    }
+    // Castable without it, or not even with it (for want of mana, say):
+    // the permission isn't what decides the offer.
+    if (without || !castable()) return all;
+    // No slot can hold one: nothing is offered, and the cast isn't.
+    if (slots.length === 0) return all.map(() => []);
+    return all.map((slot, i) => (i === slots[0] ? fitting[i] : slot));
   }
 
   private castsAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {

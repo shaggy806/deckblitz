@@ -344,6 +344,22 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### A spell's own conditional flash — built 2026-10-31
+
+The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top
+group, features only. **`flashIf`** on a card: a `condition` ("you may cast
+this spell as though it had flash if you control a Human", "this spell has
+flash as long as you control a Merfolk", spell mastery) read from the caster's
+side as the cast begins (rule 601.3d — and 601.6a: it needn't hold once the
+cast is under way), or `targets` ("…if it targets a permanent you control",
+"…if it targets a commander"), one chosen target matching — offered if some
+choice could (601.3b), illegal if the chosen ones don't (601.6), and where
+only it lets the spell be cast now the one fitting slot is offered only those.
+Keys: self-flash-if-condition, conditional-flash-by-target,
+flash-if-targets-commander. Proving cards: Hungering Yeti, Crashing Tide,
+Swift Reckoning, Flash Photography, Timely Ward. Still open: an X cap ("if X
+is 3 or less", Silver Scrutiny).
+
 ### Energy paid in a chosen, fixed or computed amount — built 2026-10-31
 
 The need-keys Phase 2 family `cost:may-cost-non-mana`, its energy group,

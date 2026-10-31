@@ -4627,6 +4627,7 @@ import _poolCrashingBoars from "./pool/crashing-boars.js";
 import _poolCrashingCentaur from "./pool/crashing-centaur.js";
 import _poolCrashingDrawbridge from "./pool/crashing-drawbridge.js";
 import _poolCrashingFootfalls from "./pool/crashing-footfalls.js";
+import _poolCrashingTide from "./pool/crashing-tide.js";
 import _poolCraterHellion from "./pool/crater-hellion.js";
 import _poolCraterclawColossus from "./pool/craterclaw-colossus.js";
 import _poolCraterhoofBehemoth from "./pool/craterhoof-behemoth.js";
@@ -8077,6 +8078,7 @@ import _poolFlashConscription from "./pool/flash-conscription.js";
 import _poolFlashCounter from "./pool/flash-counter.js";
 import _poolFlashFlood from "./pool/flash-flood.js";
 import _poolFlashOfDefiance from "./pool/flash-of-defiance.js";
+import _poolFlashPhotography from "./pool/flash-photography.js";
 import _poolFlashThompsonSpiderFan from "./pool/flash-thompson-spider-fan.js";
 import _poolFlashback from "./pool/flashback.js";
 import _poolFlashfires from "./pool/flashfires.js";
@@ -10941,6 +10943,7 @@ import _poolHungerOfTheHowlpack from "./pool/hunger-of-the-howlpack.js";
 import _poolHungerOfTheNim from "./pool/hunger-of-the-nim.js";
 import _poolHungeringHydra from "./pool/hungering-hydra.js";
 import _poolHungeringPuppetbeast from "./pool/hungering-puppetbeast.js";
+import _poolHungeringYeti from "./pool/hungering-yeti.js";
 import _poolHungryFlames from "./pool/hungry-flames.js";
 import _poolHungryForMore from "./pool/hungry-for-more.js";
 import _poolHungryGhoul from "./pool/hungry-ghoul.js";
@@ -22512,6 +22515,7 @@ import _poolSwiftEnd from "./pool/swift-end.js";
 import _poolSwiftJustice from "./pool/swift-justice.js";
 import _poolSwiftKick from "./pool/swift-kick.js";
 import _poolSwiftManeuver from "./pool/swift-maneuver.js";
+import _poolSwiftReckoning from "./pool/swift-reckoning.js";
 import _poolSwiftReconfiguration from "./pool/swift-reconfiguration.js";
 import _poolSwiftResponse from "./pool/swift-response.js";
 import _poolSwiftSpinner from "./pool/swift-spinner.js";
@@ -23727,6 +23731,7 @@ import _poolTimelessWitness from "./pool/timeless-witness.js";
 import _poolTimelineInquiry from "./pool/timeline-inquiry.js";
 import _poolTimelyHordemate from "./pool/timely-hordemate.js";
 import _poolTimelyInterference from "./pool/timely-interference.js";
+import _poolTimelyWard from "./pool/timely-ward.js";
 import _poolTimetwister from "./pool/timetwister.js";
 import _poolTimidDrake from "./pool/timid-drake.js";
 import _poolTimidShieldbearer from "./pool/timid-shieldbearer.js";
@@ -32013,6 +32018,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrashingCentaur,
   _poolCrashingDrawbridge,
   _poolCrashingFootfalls,
+  _poolCrashingTide,
   _poolCraterHellion,
   _poolCraterclawColossus,
   _poolCraterhoofBehemoth,
@@ -35463,6 +35469,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlashCounter,
   _poolFlashFlood,
   _poolFlashOfDefiance,
+  _poolFlashPhotography,
   _poolFlashThompsonSpiderFan,
   _poolFlashback,
   _poolFlashfires,
@@ -38327,6 +38334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHungerOfTheNim,
   _poolHungeringHydra,
   _poolHungeringPuppetbeast,
+  _poolHungeringYeti,
   _poolHungryFlames,
   _poolHungryForMore,
   _poolHungryGhoul,
@@ -49898,6 +49906,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSwiftJustice,
   _poolSwiftKick,
   _poolSwiftManeuver,
+  _poolSwiftReckoning,
   _poolSwiftReconfiguration,
   _poolSwiftResponse,
   _poolSwiftSpinner,
@@ -51113,6 +51122,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimelineInquiry,
   _poolTimelyHordemate,
   _poolTimelyInterference,
+  _poolTimelyWard,
   _poolTimetwister,
   _poolTimidDrake,
   _poolTimidShieldbearer,
@@ -59412,6 +59422,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crashing-centaur": _poolCrashingCentaur,
   "pool/crashing-drawbridge": _poolCrashingDrawbridge,
   "pool/crashing-footfalls": _poolCrashingFootfalls,
+  "pool/crashing-tide": _poolCrashingTide,
   "pool/crater-hellion": _poolCraterHellion,
   "pool/craterclaw-colossus": _poolCraterclawColossus,
   "pool/craterhoof-behemoth": _poolCraterhoofBehemoth,
@@ -62862,6 +62873,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flash-counter": _poolFlashCounter,
   "pool/flash-flood": _poolFlashFlood,
   "pool/flash-of-defiance": _poolFlashOfDefiance,
+  "pool/flash-photography": _poolFlashPhotography,
   "pool/flash-thompson-spider-fan": _poolFlashThompsonSpiderFan,
   "pool/flashback": _poolFlashback,
   "pool/flashfires": _poolFlashfires,
@@ -65726,6 +65738,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hunger-of-the-nim": _poolHungerOfTheNim,
   "pool/hungering-hydra": _poolHungeringHydra,
   "pool/hungering-puppetbeast": _poolHungeringPuppetbeast,
+  "pool/hungering-yeti": _poolHungeringYeti,
   "pool/hungry-flames": _poolHungryFlames,
   "pool/hungry-for-more": _poolHungryForMore,
   "pool/hungry-ghoul": _poolHungryGhoul,
@@ -77297,6 +77310,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/swift-justice": _poolSwiftJustice,
   "pool/swift-kick": _poolSwiftKick,
   "pool/swift-maneuver": _poolSwiftManeuver,
+  "pool/swift-reckoning": _poolSwiftReckoning,
   "pool/swift-reconfiguration": _poolSwiftReconfiguration,
   "pool/swift-response": _poolSwiftResponse,
   "pool/swift-spinner": _poolSwiftSpinner,
@@ -78512,6 +78526,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timeline-inquiry": _poolTimelineInquiry,
   "pool/timely-hordemate": _poolTimelyHordemate,
   "pool/timely-interference": _poolTimelyInterference,
+  "pool/timely-ward": _poolTimelyWard,
   "pool/timetwister": _poolTimetwister,
   "pool/timid-drake": _poolTimidDrake,
   "pool/timid-shieldbearer": _poolTimidShieldbearer,

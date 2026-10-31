@@ -202,6 +202,7 @@ function faceSource(face, ctx) {
     beginsOnBattlefield: parsed.beginsOnBattlefield,
     cantBeCountered: parsed.cantBeCountered,
     flashThenSacrifice: parsed.flashThenSacrifice,
+    flashIf: parsed.flashIf,
     cycling: parsed.cycling,
     flashback: parsed.flashback,
     plot: parsed.plot,

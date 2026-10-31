@@ -691,7 +691,10 @@
   "mechanic:meld",
   "cost:pay-any-amount-of-energy",
   "cost:alternative-cost-for-spells-energy",
-  "cost:pay-variable-energy"
+  "cost:pay-variable-energy",
+  "effect:self-flash-if-condition",
+  "effect:conditional-flash-by-target",
+  "effect:flash-if-targets-commander"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

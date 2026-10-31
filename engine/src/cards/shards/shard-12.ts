@@ -144,6 +144,7 @@ import _poolCopperTablet from "../pool/copper-tablet.js";
 import _poolCoralAtoll from "../pool/coral-atoll.js";
 import _poolCorruptedGrafstone from "../pool/corrupted-grafstone.js";
 import _poolCrackdownConstruct from "../pool/crackdown-construct.js";
+import _poolCrashingTide from "../pool/crashing-tide.js";
 import _poolCratersClaws from "../pool/craters-claws.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrewCaptain from "../pool/crew-captain.js";
@@ -985,6 +986,7 @@ const shard: CardShard = {
     _poolCoralAtoll,
     _poolCorruptedGrafstone,
     _poolCrackdownConstruct,
+    _poolCrashingTide,
     _poolCratersClaws,
     _poolCreepingTarPit,
     _poolCrewCaptain,

@@ -708,6 +708,7 @@ import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
+import _poolSwiftReckoning from "../pool/swift-reckoning.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyggWanderwineWisdom from "../pool/sygg-wanderwine-wisdom.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
@@ -1563,6 +1564,7 @@ const shard: CardShard = {
     _poolSunscourgeChampion,
     _poolSwarmCuller,
     _poolSwelteringSuns,
+    _poolSwiftReckoning,
     _poolSwordOfForgeAndFrontier,
     _poolSyggWanderwineWisdom,
     _poolSyndicateTrafficker,

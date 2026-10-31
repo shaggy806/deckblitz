@@ -3218,6 +3218,29 @@ export interface CardDefinition {
    */
   readonly freeCastIf: { readonly condition: StaticCondition } | null;
   /**
+   * A conditional flash printed on the spell itself: "You may cast this
+   * spell as though it had flash if you control a Human" (Bard's Company),
+   * "This spell has flash as long as you control a Merfolk" (Crashing Tide),
+   * "…if it targets a permanent you control" (Flash Photography), "…if it
+   * targets a commander" (Timely Ward). Every part given must hold:
+   *
+   * - `condition`: read from the card's own controller's side, as
+   *   `freeCastIf`'s is. If it holds when the cast begins, the spell may be
+   *   cast any time its controller could cast an instant (rule 601.3d), and
+   *   the cast goes on even if it stops holding meanwhile — say, the
+   *   permanent it counted sacrificed as a cost (601.6a).
+   * - `targets`: one of the spell's chosen targets matches this filter
+   *   (`you` the caster). The cast may begin if some choice of targets could
+   *   satisfy it (601.3b), and is illegal if the targets chosen don't
+   *   (601.6) — so where only this permission allows the cast now, the one
+   *   target slot that can hold such a target is offered only those.
+   *
+   * Like every "as though it had flash" it changes only timing, and only for
+   * a cast that timing would otherwise stop. Functions wherever the card can
+   * be cast from (a flashback cast included).
+   */
+  readonly flashIf?: { readonly condition?: StaticCondition; readonly targets?: CardFilter };
+  /**
    * An alternative cost that replaces the mana cost and also taps permanents
    * (rule 601.2b) — Sephara, Sky's Blade's "You may pay {W} and tap four
    * untapped creatures you control with flying rather than pay this spell's
@@ -4046,6 +4069,7 @@ const PRINTED_ABILITY: {
   splice: (def) => def.splice !== null,
   overload: (def) => def.overload !== null,
   freeCastIf: (def) => def.freeCastIf !== null,
+  flashIf: (def) => def.flashIf !== undefined,
   alternativeCost: (def) => def.alternativeCost !== null,
   convoke: (def) => def.convoke,
   improvise: (def) => def.improvise,
@@ -4269,6 +4293,8 @@ interface CardDraft {
    * `affects: { scope: "attached" }`. */
   bestow?: string;
   freeCastIf?: { readonly condition: StaticCondition };
+  /** See {@link CardDefinition.flashIf}. */
+  flashIf?: NonNullable<CardDefinition["flashIf"]>;
   alternativeCost?: NonNullable<CardDefinition["alternativeCost"]>;
   convoke?: boolean;
   improvise?: boolean;
@@ -4516,6 +4542,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
             ? { cost: draft.bestow, keyword: "bestow", targets: [BESTOW_TARGET], effect: { kind: "sequence", effects: [] } }
             : null),
     freeCastIf: draft.freeCastIf ?? null,
+    ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,
     improvise: draft.improvise ?? false,

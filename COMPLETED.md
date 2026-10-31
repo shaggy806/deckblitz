@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a spell's own conditional flash** (2026-10-31;
+  `effect:self-flash-if-condition`, `effect:conditional-flash-by-target`,
+  `effect:flash-if-targets-commander`, rules 601.3b, 601.3d, 601.6, 601.6a). `flashIf` on a card:
+  a `condition` ("you may cast this spell as though it had flash if you control a Human", "this
+  spell has flash as long as you control a Merfolk", spell mastery) read from the caster's side as
+  the cast begins, or `targets` ("…if it targets a permanent you control / a commander"), one of
+  the chosen targets matching — the cast offered if some choice could, refused if the targets
+  chosen don't, and, when only that permission lets it be cast now, its one fitting slot offered
+  only those targets. A flashback cast keeps it. The scaffolder reads the three phrasings (a
+  permanent's "~ has flash as long as" left to a person: it's a battlefield keyword too). 10
+  freed; Silver Scrutiny's "if X is 3 or less" still needs an X cap. Proving cards: Hungering Yeti,
+  Crashing Tide, Swift Reckoning, Flash Photography, Timely Ward.
 - **Need-keys Phase 2: energy paid in a chosen, fixed or computed amount** (2026-10-31;
   `cost:pay-any-amount-of-energy`, `cost:alternative-cost-for-spells-energy`,
   `cost:pay-variable-energy`, rules 107.14, 107.1c, 118.9, 601.3c). A `may`'s `costEnergyX` —
