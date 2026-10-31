@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4068 already implemented / 932 missing (marks refreshed 2026-10-31)
+4073 already implemented / 927 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2822,7 +2822,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2829  Carmen, Cruel Skymarcher                 {3}{W}{B}        Legendary Creature — Vampire Soldier
 [x]  2830  Kozilek's Unsealing                      {2}{U}           Enchantment
 [ ]  2831  Price of Progress                        {1}{R}           Instant
-[ ]  2832  Urza's Bauble                            {0}              Artifact
+[x]  2832  Urza's Bauble                            {0}              Artifact
 [ ]  2833  Lae'zel's Acrobatics                     {3}{W}           Instant
 [x]  2834  Resonating Lute                          {2}{U}{R}        Artifact
 [x]  2835  Vorpal Sword                             {B}              Artifact — Equipment
@@ -2856,7 +2856,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2863  Sacrifice                                {B}              Instant
 [x]  2864  Gingerbread Cabin                        {0}              Land — Forest
 [x]  2865  Revenge of Ravens                        {3}{B}           Enchantment
-[ ]  2866  Inspiring Leader                         {2}{W}           Legendary Enchantment — Background
+[x]  2866  Inspiring Leader                         {2}{W}           Legendary Enchantment — Background
 [x]  2867  Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal {3}              Legendary Creature — Elder Wizard // Legendary Creature — God
 [x]  2868  Earthquake                               {X}{R}           Sorcery
 [x]  2869  Fell                                     {1}{B}           Sorcery
@@ -3230,7 +3230,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3237  Tolaria West                             {0}              Land
 [x]  3238  Rain-Slicked Copse                       {0}              Land — Forest Island
 [x]  3239  Redoubled Stormsinger                    {2}{R}           Creature — Orc Wizard
-[ ]  3240  Nautiloid Ship                           {4}              Artifact — Vehicle
+[x]  3240  Nautiloid Ship                           {4}              Artifact — Vehicle
 [x]  3241  Archpriest of Shadows                    {3}{B}{B}        Creature — Human Warlock
 [ ]  3242  The Warring Triad                        {3}              Legendary Artifact Creature — God
 [ ]  3243  Chain of Smog                            {1}{B}           Sorcery
@@ -3817,7 +3817,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3824  Avishkar Raceway                         {0}              Land
 [x]  3825  Healer's Hawk                            {W}              Creature — Bird
 [x]  3826  Orb of Dragonkind                        {1}{R}           Artifact
-[ ]  3827  Stonehewer Giant                         {3}{W}{W}        Creature — Giant Warrior
+[x]  3827  Stonehewer Giant                         {3}{W}{W}        Creature — Giant Warrior
 [x]  3828  Red XIII, Proud Warrior                  {1}{R}{G}        Legendary Creature — Beast Warrior
 [x]  3829  Blight Mound                             {2}{B}           Enchantment
 [x]  3830  Goblin Sharpshooter                      {2}{R}           Creature — Goblin
@@ -4612,7 +4612,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4619  Calamity of the Titans                   {4}{C}{C}        Sorcery
 [ ]  4620  Khârn the Betrayer                       {3}{R}           Legendary Creature — Astartes Berserker
 [x]  4621  Stolen Strategy                          {4}{R}           Enchantment
-[ ]  4622  Pyre of Heroes                           {2}              Artifact
+[x]  4622  Pyre of Heroes                           {2}              Artifact
 [x]  4623  Stormchaser's Talent                     {U}              Enchantment — Class
 [x]  4624  Remand                                   {1}{U}           Instant
 [x]  4625  Rite of Harmony                          {G}{W}           Instant
