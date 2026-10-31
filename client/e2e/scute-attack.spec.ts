@@ -114,7 +114,7 @@ for (const size of [
     for (let i = 0; i < count; i += 1) await bears.nth(i).click()
     await expect(page.getByText('Declare blockers — 4 assigned')).toBeVisible()
     // A token each, and every token has menace: not a legal block yet.
-    await expect(page.getByText(/has menace/)).toBeVisible()
+    await expect(page.getByText(/needs 2\+ blockers/)).toBeVisible()
     const block = page.locator('.controls').getByRole('button', { name: 'Block (4)' })
     await expect(block).toBeDisabled()
 
@@ -127,7 +127,7 @@ for (const size of [
     await expect(menu.getByText('4 blocking 2 tokens, 2 on each.')).toBeVisible()
     await page.screenshot({ path: test.info().outputPath(`SCUTB-${size.width}x${size.height}-split.png`) })
     await menu.getByRole('button', { name: 'Done' }).click()
-    await expect(page.getByText(/has menace/)).toHaveCount(0)
+    await expect(page.getByText(/needs 2\+ blockers/)).toHaveCount(0)
     await expect(block).toBeEnabled()
     await block.click()
 
