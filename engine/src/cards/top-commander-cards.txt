@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4051 already implemented / 949 missing (marks refreshed 2026-10-31)
+4055 already implemented / 945 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3183,7 +3183,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3190  Windgrace's Judgment                     {3}{B}{G}        Instant
 [ ]  3191  Mjölnir, Storm Hammer                    {4}              Legendary Artifact — Equipment
 [x]  3192  Honored Dreyleader                       {2}{G}           Creature — Squirrel Warrior
-[ ]  3193  Yedora, Grave Gardener                   {4}{G}           Legendary Creature — Treefolk Druid
+[x]  3193  Yedora, Grave Gardener                   {4}{G}           Legendary Creature — Treefolk Druid
 [ ]  3194  Phyrexian Vindicator                     {W}{W}{W}{W}     Creature — Phyrexian Horror
 [ ]  3195  Eclipsed Realms                          {0}              Land
 [x]  3196  Sauron, the Dark Lord                    {3}{U}{B}{R}     Legendary Creature — Avatar Horror
@@ -3874,7 +3874,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3881  Dress Down                               {1}{U}           Enchantment
 [x]  3882  Primal Might                             {X}{G}           Sorcery
 [ ]  3883  Flourishing Defenses                     {4}{G}           Enchantment
-[ ]  3884  Orochi Soul-Reaver                       {5}{B}           Creature — Snake Ninja Rogue
+[x]  3884  Orochi Soul-Reaver                       {5}{B}           Creature — Snake Ninja Rogue
 [x]  3885  Extinguish All Hope                      {4}{B}{B}        Sorcery
 [x]  3886  Nibelheim Aflame                         {2}{R}{R}        Sorcery
 [ ]  3887  Determined Iteration                     {1}{R}           Enchantment
@@ -3924,7 +3924,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3931  Spitfire Lagac                           {3}{R}           Creature — Lizard
 [x]  3932  Fiend Hunter                             {1}{W}{W}        Creature — Human Cleric
 [x]  3933  Commune with Lava                        {X}{R}{R}        Instant
-[ ]  3934  Unable to Scream                         {U}              Enchantment — Aura
+[x]  3934  Unable to Scream                         {U}              Enchantment — Aura
 [x]  3935  Workshop Assistant                       {3}              Artifact Creature — Construct
 [x]  3936  Roil Elemental                           {3}{U}{U}{U}     Creature — Elemental
 [ ]  3937  White Lotus Tile                         {4}              Artifact
@@ -4912,7 +4912,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4919  Loyal Subordinate                        {2}{B}           Creature — Zombie
 [x]  4920  High Score                               {2}{G}           Enchantment
 [x]  4921  Song of Creation                         {1}{G}{U}{R}     Enchantment
-[ ]  4922  Cyber Conversion                         {U}{U}           Instant
+[x]  4922  Cyber Conversion                         {U}{U}           Instant
 [ ]  4923  Doors of Durin                           {3}{R}{G}        Legendary Artifact
 [x]  4924  Pilgrim's Eye                            {3}              Artifact Creature — Thopter
 [x]  4925  Goblin War Drums                         {2}{R}           Enchantment
