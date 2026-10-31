@@ -387,6 +387,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
+- **A static can't require attacking one player**: `attack-requirement` is an effect's rule of the game; Public Enemy's "all creatures attack enchanted creature's controller each combat if able" needs a static form, Galactus a most-life opponent, Silver Surfer "until the end of your next turn".
+- **"Creatures it blocked this turn" has no record**: `blockingRelation` reads the blocks as they are now, so an attacker removed from combat (506.4) drops out; Defiant Vanguard needs a per-turn record of what a creature blocked.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
 - **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).

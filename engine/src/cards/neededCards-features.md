@@ -595,6 +595,53 @@ count of sacrifices (Scourge of Nel Toth), and the riders on a spell cast
 under a card's own permission (Worldheart Phoenix's counters, Undead
 Sprinter's) — `zone:graveyard-cast-rider-own-permission`.
 
+### Attack requirements narrowed — built 2026-10-31
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its top
+group, features only. Kardur's **`attack-requirement`** rule (`AttackRequirementRule`)
+narrowed by rule 508.1d: `target` (one creature, by stint — 400.7),
+`controlledByTarget` (a player's creatures as attackers are declared),
+`attacks` (`"you"`, `"source"` or a target slot: obeyed only by attacking that
+player or planeswalker, so binding only while it can be attacked — counted
+with encore's in `aimedRequirements`), and `duration` (`this-turn`,
+`that-players-next-turn`, `controllers-next-turn`, `controllers-next-combat`;
+until your next turn when absent). The scaffolder reads "target creature
+attacks you / target opponent this turn if able", "… during its controller's
+next combat phase if able", "creatures target opponent controls attack this
+turn if able" and "during target player's next turn, creatures that player
+controls attack you / ~ if able". Keys: effect:must-attack-specific-player,
+effect:target-attacks-target-player-this-turn,
+effect:must-attack-target-players-creatures,
+effect:must-attack-controllers-next-combat, static:must-attack-planeswalker,
+static:global-attack-requirement. Proving cards: Alluring Siren, Taunt, Dulcet
+Sirens, Trench Behemoth, Imaginary Threats, Maximum Carnage. Still open:
+static:must-attack-specific-player — a static's "all creatures attack enchanted
+creature's controller each combat if able" (Public Enemy), Galactus's "an
+opponent with the most life", Silver Surfer's "until the end of your next
+turn"; static:attacks-this-turn-if-able-target (Gogo).
+
+### Creatures in a blocking relation with the source — built 2026-10-31
+
+The need-keys Phase 2 families `effect:target-spec-additions` (its top group,
+the blocking-relation targets) and `filter:blocked-by-source`, built as one,
+features only. New filter **`blockingRelation: { relation, of? }`**: a creature
+blocking the permanent applying it (`"blocking"`), blocked by it
+(`"blocked-by"`) or either, or — `of: "host"` — the creature that one is
+attached to; through `blockedAttackersOf` (a band blocked whole, 702.22h), none
+for a creature removed from combat (506.4), and a source that has left read off
+its new `lastKnown.blockedAttackers`/`blockers` (608.2b, 608.2h — Tinder Wall
+sacrificed to its own ability). The same filter serves targets, `-all` effects
+and an `of: "host"` Aura or Equipment. The scaffolder reads the target phrases,
+"each/all creatures blocking …", "At end of combat," and "It deals" on a
+permanent's own activated ability. Keys: effect:target-creature-blocking-source,
+effect:target-creature-source-is-blocking, effect:target-creature-blocking-attached,
+filter:blocked-by-source, filter:blocking-or-blocked-by-source,
+filter:blocking-specific-creature, and Tier B effect:damage-each-creature-blocking-source.
+Proving cards: Goblin Javelineer, Tinder Wall, Plasma Caster, Wall of Nets,
+Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin. Still open:
+"all creatures it blocked this turn" (Defiant Vanguard — a creature removed from
+combat still counts, so a per-turn record).
+
 ### Each permanent of a kind deals damage — built 2026-10-31
 
 The need-keys Phase 2 family `effect:each-creature-damages-itself`, its group

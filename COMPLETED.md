@@ -86,6 +86,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: attack requirements narrowed** (2026-10-31;
+  `effect:must-attack-specific-player`, `effect:target-attacks-target-player-this-turn`,
+  `effect:must-attack-target-players-creatures`, `effect:must-attack-controllers-next-combat`,
+  `static:must-attack-planeswalker`, `static:global-attack-requirement`) — `attack-requirement`'s
+  `target`, `controlledByTarget`, `attacks` (obeyed only by attacking that player or planeswalker,
+  508.1d) and `duration` (this turn, that player's next turn, its controller's next turn or next
+  combat phase); 3 freed. Alluring Siren, Taunt, Dulcet Sirens, Trench Behemoth, Imaginary
+  Threats, Maximum Carnage.
+- **Need-keys Phase 2: creatures in a blocking relation with the source** (2026-10-31;
+  `effect:target-creature-blocking-source`, `effect:target-creature-source-is-blocking`,
+  `effect:target-creature-blocking-attached`, `filter:blocked-by-source`,
+  `filter:blocking-or-blocked-by-source`, `filter:blocking-specific-creature`,
+  `effect:damage-each-creature-blocking-source`) — `CardFilter.blockingRelation` (blocking,
+  blocked by or either, the source's or its host's; a source that left read off its last-known
+  blocks, 608.2b; none once removed from combat, 506.4); 21 freed. Goblin Javelineer, Tinder Wall,
+  Plasma Caster, Wall of Nets, Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin.
 - **Need-keys Phase 2: flash permissions** (2026-10-31; `effect:flash-for-each-player`,
   `effect:first-creature-spell-flash`, `effect:flash-permission-this-turn`,
   `effect:next-sorcery-as-though-flash`) — `castAsThoughFlashAnyPlayer` (every player's, read

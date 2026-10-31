@@ -1950,7 +1950,20 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   ETB: goad's requirements as a rule of the game until your next turn, over
   every creature matching `filter` from your side — including creatures an
   opponent gets later (rule 611.2c) — and none of them *goaded*.
-  `otherThanYou: false` is the bare "attack each combat if able".
+  `otherThanYou: false` is the bare "attack each combat if able" (both
+  default to it: `filter` `{}`, `otherThanYou` false). Maximum Carnage's
+  chapter I is `{ filter: { type: "creature" }, otherThanYou: true }`.
+  Narrowed (rule 508.1d): **`target`** binds that one creature, as the object
+  it is (Alluring Siren's "target creature an opponent controls attacks you
+  this turn if able"); **`controlledByTarget`** a target player's creatures
+  as attackers are declared (Taunt, Imaginary Threats); **`attacks`**
+  (`"you"`, `"source"` — Gideon Jura's "attack Gideon Jura" — or a target
+  slot, Dulcet Sirens' "attacks target opponent") is obeyed only by attacking
+  that one, so it binds only while that one can be attacked; **`duration`**
+  is `"this-turn"`, `"that-players-next-turn"` (the `controlledByTarget`
+  player's), `"controllers-next-turn"` or `"controllers-next-combat"` (the
+  `target`'s controller's — Trench Behemoth), until your next turn when
+  absent.
 - **`suspect { target }`** / **`unsuspect { target | filter }`** — suspect a
   creature (rule 701.60): a designation (`GameObject.suspectedAt`) that gives
   it menace and "can't block" until it leaves the battlefield or is no longer
@@ -2359,7 +2372,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
@@ -2430,7 +2443,16 @@ that saddled it this turn" (rule 702.171c): tapped for the cost of the saddle
 ability of the permanent applying the filter (as it is, or as it last was if it
 has left) this turn, and still the same object — read against the source in a
 target or trigger filter, bound to it in an effect's (`saddledBy`, never
-authored). `controlledBy` is `"you"`, `"opponent"` or
+authored). `blockingRelation: { relation, of? }` is a creature in a blocking
+relation with the permanent applying the filter — or, `of: "host"`, with the
+creature it's attached to: `"blocking"` is "creature blocking it" (Goblin
+Javelineer's target, Battle-Scarred Goblin's "each creature blocking it", Plasma
+Caster's "target creature that's blocking equipped creature"), `"blocked-by"`
+is "creature it's blocking" / "creatures blocked by this creature" (Tinder
+Wall, Wall of Nets), `"either"` both (Kjeldoran Frostbeast). A source that has
+left — Tinder Wall sacrificed to its own ability — is read as it last was
+(608.2b); a creature removed from combat is in no relation (506.4). Its `with`
+is bound at resolution, never authored. `controlledBy` is `"you"`, `"opponent"` or
 `"active-player"` (whoever's turn it is, whoever is asking). `anyOf: CardFilter[]` is the "or": at least one of
 them has to match as well (historic is `anyOf: [{ type: "artifact" },
 { supertype: "legendary" }, { subtype: "Saga" }]`; Dogmeat's "enchanted or

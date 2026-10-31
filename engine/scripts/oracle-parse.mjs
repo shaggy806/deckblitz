@@ -805,6 +805,28 @@ export function handRevealOf(phrase) {
 
 /** Target phrases, longest first, as the engine's target specs. */
 const TARGET_PHRASES = [
+  // A creature in a blocking relation with the source or its host
+  // (`blockingRelation`): Goblin Javelineer, Tinder Wall, Plasma Caster.
+  ...[
+    ["blocking or blocked by", "either"],
+    ["that's blocking", "blocking"],
+    ["blocking", "blocking"],
+  ].flatMap(([words, relation]) =>
+    ["it", "~", "this creature"].map((who) => [
+      `target creature ${words} ${who}`,
+      { kind: "permanent", filter: { type: "creature", blockingRelation: { relation } } },
+    ]),
+  ),
+  ...["it's blocking", "~ is blocking", "this creature is blocking"].map((words) => [
+    `target creature ${words}`,
+    { kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "blocked-by" } } },
+  ]),
+  ...["equipped creature", "enchanted creature"].flatMap((host) =>
+    ["blocking", "that's blocking"].map((words) => [
+      `target creature ${words} ${host}`,
+      { kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "blocking", of: "host" } } },
+    ]),
+  ),
   ["target creature or planeswalker an opponent controls", { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target creature or planeswalker", { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
@@ -981,6 +1003,23 @@ function quantifiedSlots(phrase, ctx) {
 // so a nested group never shifts the numbering of the ones after it. After the
 // fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
 const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
+
+/** "(non-Wall) creature(s) blocking or blocked by this creature", "creatures
+ * it's blocking", "creatures blocking enchanted creature": a creature filter
+ * with a `blockingRelation` to the source or its host. */
+const BLOCK_RELATION =
+  "(?:non-[A-Z][a-z]+ )?creatures? (?:blocking or blocked by|blocked by|blocking) (?:it|~|this creature|enchanted creature|equipped creature)";
+function blockRelationFilterOf(phrase) {
+  const m = /^(?:non-([A-Z][a-z]+) )?creatures? (blocking or blocked by|blocked by|blocking) (it|~|this creature|enchanted creature|equipped creature)$/.exec(phrase);
+  if (m === null) return undefined;
+  const relation = { "blocking or blocked by": "either", "blocked by": "blocked-by", blocking: "blocking" }[m[2]];
+  const host = /^(enchanted|equipped) creature$/.test(m[3]);
+  return {
+    type: "creature",
+    ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}),
+    blockingRelation: { relation, ...(host ? { of: "host" } : {}) },
+  };
+}
 
 /** "target creature card from your graveyard" and friends. */
 function graveyardTargetOf(phrase) {
@@ -1394,6 +1433,8 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
+  // Every combat's end of combat step (rule 511): Kjeldoran Frostbeast.
+  if (/^At end of combat$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "any" }];
   if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
@@ -2031,6 +2072,14 @@ export function parseSentence(sentence, ctx) {
     const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
     return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
   };
+  // "Destroy all creatures blocking or blocked by this creature" (Kjeldoran
+  // Frostbeast), "… all non-Wall creatures blocking enchanted creature"
+  // (Coils of the Medusa) — `blockingRelation`. Not exile: what the exile is
+  // linked to is the card's other abilities' business.
+  if ((m = re(`destroy all (${BLOCK_RELATION})`).exec(s))) {
+    const filter = blockRelationFilterOf(m[1]);
+    return filter === undefined ? null : { kind: "destroy-all", filter };
+  }
   if ((m = re(`(destroy|exile) (${TARGET}) ${NAMESAKES}`).exec(s))) {
     const filter = namesakes(m[3], slot(m[2]));
     return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
@@ -2528,6 +2577,33 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Combat this turn.
+  // Attack requirements narrowed (rule 508.1d — `attack-requirement`): one
+  // target creature, at you or a target player, this turn (Alluring Siren,
+  // Dulcet Sirens) or in its controller's next combat phase (Trench
+  // Behemoth); a target player's creatures this turn (Imaginary Threats) or
+  // during their next turn (Taunt, Gideon Jura).
+  const PLAYER_T = "target (?:player|opponent)";
+  if ((m = re(`(${TARGET}) attacks (you|${PLAYER_T}) this turn if able`).exec(s))) {
+    const target = slot(m[1]);
+    const attacks = m[2].toLowerCase() === "you" ? "you" : slot(m[2]);
+    return { kind: "attack-requirement", target, attacks, duration: "this-turn" };
+  }
+  if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
+    return { kind: "attack-requirement", target: slot(m[1]), duration: "controllers-next-combat" };
+  }
+  if ((m = re(`creatures (${PLAYER_T}) controls attack this turn if able`).exec(s))) {
+    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "this-turn" };
+  }
+  if ((m = re(`during (${PLAYER_T})'s next turn, creatures that player controls attack (you|~) if able`).exec(s))) {
+    const controlledByTarget = slot(m[1]);
+    return {
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget,
+      attacks: m[2] === "~" ? "source" : "you",
+      duration: "that-players-next-turn",
+    };
+  }
   // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
   // one attacker, the source as it resolves (rule 400.7).
   if ((m = re(`(${TARGET}) can't block ~ this turn`).exec(s))) {
@@ -2774,6 +2850,12 @@ export function parseSentence(sentence, ctx) {
   if (it !== undefined) {
     // A damage source is only the ability's own or the trigger's object
     // (`DamageFrom`): "enchanted creature deals …" has no shape.
+    // "It deals 1 damage to each creature blocking it" (Battle-Scarred
+    // Goblin — `blockingRelation`).
+    if (it === "source" && (m = re(`it deals ${N} damage to each (${BLOCK_RELATION})`).exec(s))) {
+      const filter = blockRelationFilterOf(m[2]);
+      return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+    }
     if ((it === "source" || it === "trigger-object") && (m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), target: slot(m[2]), ...(it === "source" ? {} : { from: it }) };
     }
@@ -4725,7 +4807,9 @@ export function parseFace(face, ctx = {}) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
       }
-      i = fillEffect(ability, rest, { tokenFor }, lines, i);
+      // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
+      // Barbarian Lunatic): a permanent's own ability, so "it" is its source.
+      i = fillEffect(ability, rest, { tokenFor, ...(/^It deals /.test(rest) ? { it: "source" } : {}) }, lines, i);
       manaAbilityExtras(ability);
       out.activated.push(ability);
       continue;

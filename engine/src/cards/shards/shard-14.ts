@@ -467,6 +467,7 @@ import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolMakindiPatrol from "../pool/makindi-patrol.js";
 import _poolManaFlare from "../pool/mana-flare.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
+import _poolMaximumCarnage from "../pool/maximum-carnage.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
 import _poolMeltstridersResolve from "../pool/meltstriders-resolve.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolMakindiPatrol,
     _poolManaFlare,
     _poolMasterOfBarbs,
+    _poolMaximumCarnage,
     _poolMedusaInhumanQueen,
     _poolMeltstridersResolve,
     _poolMemoryDeluge,

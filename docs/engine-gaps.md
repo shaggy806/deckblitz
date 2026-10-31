@@ -6,6 +6,24 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A static can't require attacking one player.** `AttackRequirementRule` (`state.ts`, read by
+  `combat/eligibility.ts`'s `attackRequirementRulesOf` and `aimedRequirements`) is created only by a
+  resolving `attack-requirement` effect. Public Enemy's "all creatures attack enchanted creature's
+  controller each combat if able" is a static (an Aura's, for as long as it's attached), so it needs
+  the same aimed requirement read off the battlefield's statics; Galactus, Devourer of Worlds' "an
+  opponent with the most life among your opponents … unless you control a creature named Silver
+  Surfer" a defender chosen by life total and a condition; Silver Surfer, Galactus's Herald's
+  "until the end of your next turn, target creature attacks that player each combat if able" a
+  duration ending with your next turn's end and the damaged player as `attacks`. Key:
+  static:must-attack-specific-player (The Brothers' War, under it too, is two `attack-requirement`
+  effects already).
+- **"Creatures it blocked this turn" has no record.** `CardFilter.blockingRelation`
+  (`filter.ts`, `inBlockingRelation`) reads the blocks as they stand — `blockedAttackersOf`, or a
+  partner's `lastKnown.blockedAttackers` once it has left — which is exact for "creatures blocked
+  by this creature" (a creature removed from combat is no longer blocked by it, rule 506.4). Defiant
+  Vanguard's "destroy it and all creatures it blocked this turn" also counts an attacker it blocked
+  that has since been removed from combat, so it needs a per-turn record on the blocker of the
+  attackers it was declared blocking (509.1g), kept like `saddledThisTurn`. Blocks: Defiant Vanguard.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose.**
   Rules 730.3a and the meld ruling ("if the cards are put on the top or bottom of your library,
   you choose their relative order") let the owner arrange the cards a merged or melded permanent

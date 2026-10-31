@@ -267,6 +267,7 @@ import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
 import _poolGoblinCratermaker from "../pool/goblin-cratermaker.js";
 import _poolGoblinFlectomancer from "../pool/goblin-flectomancer.js";
+import _poolGoblinJavelineer from "../pool/goblin-javelineer.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
 import _poolGoblinslide from "../pool/goblinslide.js";
@@ -657,6 +658,7 @@ import _poolSynodArtificer from "../pool/synod-artificer.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
 import _poolTarpan from "../pool/tarpan.js";
+import _poolTaunt from "../pool/taunt.js";
 import _poolTazeemRaptor from "../pool/tazeem-raptor.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTeferisRealm from "../pool/teferis-realm.js";
@@ -1047,6 +1049,7 @@ const shard: CardShard = {
     _poolGoblinCannon,
     _poolGoblinCratermaker,
     _poolGoblinFlectomancer,
+    _poolGoblinJavelineer,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
     _poolGoblinslide,
@@ -1437,6 +1440,7 @@ const shard: CardShard = {
     _poolTakeAGlance,
     _poolTangledIslet,
     _poolTarpan,
+    _poolTaunt,
     _poolTazeemRaptor,
     _poolTcriBuilding,
     _poolTeferisRealm,
