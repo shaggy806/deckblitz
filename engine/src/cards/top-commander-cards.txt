@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4055 already implemented / 945 missing (marks refreshed 2026-10-31)
+4057 already implemented / 943 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2315,7 +2315,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2322  Singularity Rupture                      {3}{U}{B}{B}     Sorcery
 [x]  2323  It That Heralds the End                  {1}{C}           Creature — Eldrazi Drone
 [x]  2324  Prized Statue                            {2}              Artifact
-[ ]  2325  Oblivion Sower                           {6}              Creature — Eldrazi
+[x]  2325  Oblivion Sower                           {6}              Creature — Eldrazi
 [x]  2326  Diregraf Captain                         {1}{U}{B}        Creature — Zombie Soldier
 [x]  2327  Manamorphose                             {1}{R/G}         Instant
 [x]  2328  Duty Beyond Death                        {1}{W}           Instant
@@ -3608,7 +3608,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3615  Detection Tower                          {0}              Land
 [x]  3616  Hunter's Talent                          {1}{G}           Enchantment — Class
 [x]  3617  Yavimaya Elder                           {1}{G}{G}        Creature — Human Druid
-[ ]  3618  Bureau Headmaster                        {R}{W}           Creature — Human Assassin
+[x]  3618  Bureau Headmaster                        {R}{W}           Creature — Human Assassin
 [x]  3619  Spellstutter Sprite                      {1}{U}           Creature — Faerie Wizard
 [x]  3620  Flamekin Village                         {0}              Land
 [x]  3621  Moon-Circuit Hacker                      {1}{U}           Enchantment Creature — Human Ninja
