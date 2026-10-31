@@ -24,6 +24,7 @@ import type {
   ManaSplitRiders,
   PileFateWord,
   ResolvedEnterAttacking,
+  ResolvedSearchInstead,
   ZoneSecondPick,
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
@@ -2951,6 +2952,29 @@ export type AwaitingDecision =
        * goes to `destination`. Distinct from `leftover`, which is about cards
        * that were **not** chosen. */
       readonly restDestination?: "battlefield" | "hand";
+      /** A library search whose finds go card by card (`search-library`'s
+       * `instead`): this choice only picks them — `destination` is
+       * `"stay"` and nothing is shuffled yet — and its answer raises the
+       * second choice, over the finds, of which go to `instead`'s
+       * destination (`searchRest` on it). `to`/`toTapped`: where the others
+       * go, the search's own destination; `shuffle`: whose library to
+       * shuffle once they've moved (none for a graveyard alone). */
+      readonly searchInstead?: ResolvedSearchInstead & {
+        readonly to: "battlefield" | "hand" | "graveyard";
+        readonly toTapped?: true;
+        readonly shuffle: PlayerId | null;
+        readonly x: number;
+      };
+      /** That second choice: the cards picked go to `destination`, every
+       * other card of `ids` to `searchRest.destination` (entering tapped
+       * with `enterTapped`, under their owner's control), and then
+       * `shuffle`'s library is shuffled (rule 701.24a). The picks were
+       * announced by the first choice. */
+      readonly searchRest?: {
+        readonly destination: "battlefield" | "hand" | "graveyard";
+        readonly enterTapped?: true;
+        readonly shuffle: PlayerId | null;
+      };
       /** A rule the chosen cards must obey as a set — a `search-library`'s
        * `together` (Myriad Landscape's "that share a land type"). */
       readonly together?: ZoneChoiceTogether;

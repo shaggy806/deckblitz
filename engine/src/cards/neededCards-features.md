@@ -407,6 +407,26 @@ and Linvala. Still open: the exiled-card unit (a counter or a chosen exiled
 card, triggered abilities too), an until-end-of-turn effect form (Grell
 Philosopher), a chosen permanent as the filter (Scheming Fence).
 
+### A library search's finds, card by card — built 2026-10-31
+
+The need-keys Phase 2 family `effect:search-destination-by-type`'s group,
+features only. **`search-library`'s `instead`** (`SearchInstead`): the finds
+are picked and revealed, then a second `choose-from-zone` over them — the
+existing decision, with its own prompt; the awaiting's `searchInstead` raises
+it, its `searchRest` sends the unpicked finds to the search's own destination
+and shuffles after both moves — picks the ones bound for `instead`'s
+destination: by a `filter` on the card (`pick: "all"`, no question), a
+`condition` read as it resolves, the searcher's choice (`"any"`), or a split of
+exactly one (`"one"`; a single find is that one, rule 609.3), those picked
+entering under the effect's controller with `under: "you"`.
+**`withCounters`** (rule 122.6, a live amount) and **`who: "that-player"`**
+(an `each-player-may`'s `ifDid`) beside it. Proving cards: Jarad's Orders,
+Dina's Guidance, Ruin in Their Wake, Guidelight Pathmaker, Rootweaver Druid,
+Neoform, Magmatic Hellkite, Vision Quest. Keys:
+effect:search-destination-by-type, effect:search-destination-choice,
+effect:search-split-control, effect:search-split-to-graveyard,
+effect:search-with-counters.
+
 ### Cost changes for one kind of ability — built 2026-10-31
 
 The need-keys Phase 2 family `cost:ability-cost-modification`'s group,

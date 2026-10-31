@@ -7833,6 +7833,16 @@ export class Game {
    */
   private finishZoneChoice(entry: Extract<PendingEntry, { kind: "zone-choice" }>): void {
     const { awaiting, player, chosen } = entry;
+    // A search's finds that go card by card: the ones not picked here go to
+    // the search's own destination, the battlefield too.
+    const restEntering =
+      awaiting.searchRest?.destination === "battlefield" ? awaiting.ids.filter((id) => !chosen.includes(id)) : [];
+    for (const id of restEntering) {
+      if (this.askEnterChoice(id, player)) {
+        this.state.suspendedResolutions.push({ effect: null, enter: entry });
+        return;
+      }
+    }
     for (const [index, id] of chosen.entries()) {
       if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
       // Face down, it has no "as this enters" choices (708.3).
@@ -7879,8 +7889,11 @@ export class Game {
       toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
     });
 
-    // An order takes nothing: it only says where each card goes.
-    if (awaiting.order !== true) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    // An order takes nothing: it only says where each card goes. A search's
+    // second choice, of where its finds go, took them already.
+    if (awaiting.order !== true && awaiting.searchRest === undefined) {
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
     // it before "if you do" runs.
     if (awaiting.collectEvidence !== undefined && chosen.length > 0) {
@@ -7897,6 +7910,11 @@ export class Game {
       this.beginLibraryOrder(player, awaiting.thenOrder.cards, awaiting.thenOrder.position);
     }
     this.applyChooseFromZoneThen(awaiting, player, chosen);
+    // A search whose finds go card by card: where each goes is asked now.
+    if (awaiting.searchInstead !== undefined) {
+      this.beginSearchInstead(awaiting, player, chosen);
+      return;
+    }
     // "Then put any number of land cards from among them onto the
     // battlefield tapped and the rest into your graveyard": a second choice
     // over what the first left, which the rest wait for. With nothing it
@@ -7936,6 +7954,80 @@ export class Game {
       rest = this.moveChosenFromZone(next, player, [], leftover);
     });
     this.beginLibraryOrder(player, rest.cards, rest.position);
+  }
+
+  /**
+   * A library search's finds going card by card (`search-library`'s
+   * `instead`), once they're picked and revealed: the second choice, over
+   * the finds, of which go to `instead`'s destination — every other one
+   * going to the search's own — and then the shuffle (`searchRest`). Asked
+   * only when it is a choice; every qualifying find of an `"all"`, a single
+   * find of a `"one"` (rule 609.3) or nothing qualifying moves at once.
+   */
+  private beginSearchInstead(
+    awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+    player: PlayerId,
+    finds: readonly ObjectId[],
+  ): void {
+    const instead = awaiting.searchInstead;
+    if (instead === undefined) return;
+    const filter = instead.filter;
+    const eligible =
+      filter === undefined
+        ? [...finds]
+        : finds.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player, x: instead.x }));
+    const [min, max] =
+      instead.pick === "all"
+        ? [eligible.length, eligible.length]
+        : instead.pick === "one"
+          ? [Math.min(1, eligible.length), Math.min(1, eligible.length)]
+          : [0, eligible.length];
+    const under = instead.under !== undefined && instead.under !== player ? instead.under : undefined;
+    const source = awaiting.thenSource === undefined ? undefined : this.state.objects[awaiting.thenSource];
+    const where = (to: "battlefield" | "hand" | "graveyard", tapped: boolean, controller: string | null): string =>
+      to === "hand"
+        ? "into your hand"
+        : to === "graveyard"
+          ? "into your graveyard"
+          : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
+    const picked = where(
+      instead.destination,
+      instead.enterTapped === true,
+      under === undefined ? null : `${source === undefined ? "its controller's" : `${nameOf(source)}'s controller's`}`,
+    );
+    const rest = where(instead.to, instead.toTapped === true, under === undefined ? null : "your");
+    const prompt =
+      instead.pick === "one"
+        ? `Choose one to put ${picked} — the ${finds.length === 2 ? "other goes" : "rest go"} ${rest}`
+        : eligible.length === 1 && finds.length === 1
+          ? `Choose it to put it ${picked}, or nothing to put it ${rest}`
+          : `Choose any of them to put ${picked} — the rest go ${rest}`;
+    const next: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
+      kind: "choose-from-zone",
+      player,
+      ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
+      ids: [...finds],
+      eligible,
+      min,
+      max,
+      destination: instead.destination,
+      leftover: "stay",
+      ...(instead.enterTapped === true && instead.destination === "battlefield" ? { enterTapped: true } : {}),
+      ...(under !== undefined && instead.destination === "battlefield" ? { enterUnder: under } : {}),
+      ...(awaiting.enterWithCounters !== undefined ? { enterWithCounters: awaiting.enterWithCounters } : {}),
+      ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
+      searchRest: {
+        destination: instead.to,
+        ...(instead.toTapped === true ? { enterTapped: true as const } : {}),
+        shuffle: instead.shuffle,
+      },
+      prompt,
+    };
+    if (min === max && min === eligible.length) {
+      this.finishZoneChoice({ kind: "zone-choice", awaiting: next, player, chosen: eligible });
+      return;
+    }
+    this.state.awaiting = next;
   }
 
   /**
@@ -8034,8 +8126,13 @@ export class Game {
     // A split tutor (Cultivate) sends the first find to `destination` and the
     // rest to `restDestination`; with no `restDestination` they all go to the
     // same place, which is every other tutor. Whatever goes onto the
-    // battlefield goes there at once.
-    this.withEnterBatch(() => chosen.forEach((id, index) => {
+    // battlefield goes there at once. A search's finds going card by card
+    // (`searchRest`): the ones not picked go to the search's own destination
+    // in the same move.
+    const rest = awaiting.searchRest;
+    const placed = rest === undefined ? chosen : [...chosen, ...leftover];
+    this.withEnterBatch(() => placed.forEach((id, index) => {
+      const isRest = rest !== undefined && index >= chosen.length;
       // "Exile the top two, choose one of them" — the chosen cards don't
       // move at all, they just gain the impulse permission.
       if (awaiting.destination === "exile-playable") {
@@ -8050,7 +8147,7 @@ export class Game {
         this.moveObject(id, "command");
         return;
       }
-      const to = this.chosenFromZoneTo(awaiting, index);
+      const to = isRest ? rest.destination : this.chosenFromZoneTo(awaiting, index);
       // A tutor-to-top's find is put on top *after* the search's shuffle
       // (below) — moving it now would only have it shuffled back in.
       if (to === "library-top" || to === "exile-playable") return;
@@ -8108,12 +8205,12 @@ export class Game {
       }
       // "Onto the battlefield attached to Light-Paws": an Aura that can't
       // be attached to it stays where it is (rule 303.4i, the ruling).
-      const host = to === "battlefield" ? awaiting.enterAttachedTo : undefined;
+      const host = to === "battlefield" && !isRest ? awaiting.enterAttachedTo : undefined;
       if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) return;
-      const under = to === "battlefield" ? awaiting.enterUnder : undefined;
-      const enterAs = to === "battlefield" ? awaiting.enterAs : undefined;
+      const under = to === "battlefield" && !isRest ? awaiting.enterUnder : undefined;
+      const enterAs = to === "battlefield" && !isRest ? awaiting.enterAs : undefined;
       const moved = this.moveObject(id, to, {
-        tapped: awaiting.enterTapped === true,
+        tapped: isRest ? rest.enterTapped === true : awaiting.enterTapped === true,
         ...(under !== undefined ? { under } : {}),
         ...(enterAs?.setTypes !== undefined ? { setTypes: enterAs.setTypes } : {}),
         ...(enterAs?.addSubtypes !== undefined ? { addSubtypes: enterAs.addSubtypes } : {}),
@@ -8199,6 +8296,11 @@ export class Game {
     }
     // leftover === "stay": nothing to do — those cards were only ever looked
     // at, never removed from wherever they already were.
+
+    // A search whose finds went card by card shuffles once they've all
+    // moved ("…Otherwise, put it into your hand. Then shuffle." — rule
+    // 701.24a).
+    if (rest !== undefined && rest.shuffle !== null) this.shuffleLibraryOf(rest.shuffle);
 
     // Now the shuffle has happened, the tutor's find goes on top (rule
     // 701.24b — "shuffle, *then* put that card on top"). Last chosen first,
@@ -28611,6 +28713,38 @@ export class Game {
         ? Math.min(max, together.oneEach.length)
         : max;
     const exiled = destination === "exile" || destination === "exile-face-down";
+    // Finds that go card by card (`instead`): this choice only picks them,
+    // and its answer asks where each goes (`beginSearchInstead`), the
+    // shuffle waiting for those moves.
+    const instead =
+      more?.instead !== undefined && (destination === "hand" || destination === "battlefield" || destination === "graveyard")
+        ? {
+            ...more.instead,
+            to: destination,
+            ...(enterTapped && destination === "battlefield" ? { toTapped: true as const } : {}),
+            shuffle: library ? owner : null,
+            x,
+          }
+        : undefined;
+    if (instead !== undefined) {
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ...(owner !== player ? { forPlayer: owner } : {}),
+        ids: eligible,
+        eligible,
+        min: Math.min(least, most, eligible.length),
+        max: Math.min(most, eligible.length),
+        destination: "stay",
+        leftover: "stay",
+        searchInstead: instead,
+        ...(reveal ? { reveal: true } : {}),
+        ...(more?.withCounters !== undefined ? { enterWithCounters: more.withCounters } : {}),
+        thenSource: more!.source,
+        thenX: x,
+      };
+      return;
+    }
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
@@ -28624,6 +28758,10 @@ export class Game {
       // "If you search your library this way, shuffle" — "then that player
       // shuffles": the library's owner (rule 701.24a).
       leftover: library ? "shuffle" : "stay",
+      // "…with an additional +1/+1 counter on it" (Neoform).
+      ...(more?.withCounters !== undefined && destination === "battlefield"
+        ? { enterWithCounters: more.withCounters }
+        : {}),
       ...(alsoTaken.length > 0 ? { alsoTaken } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       // "Put that card onto the battlefield under your control" (Bribery).

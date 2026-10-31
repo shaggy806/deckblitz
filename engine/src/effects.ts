@@ -66,6 +66,56 @@ export interface SearchMore {
   readonly then?: EffectSpec;
   readonly outside?: true | "only";
   readonly faceUpExile?: true;
+  /** Its `instead`, its `condition` already read (one that didn't hold is no
+   * `instead` at all) and its `under` named. */
+  readonly instead?: ResolvedSearchInstead;
+  /** Its `withCounters`, the amount read. */
+  readonly withCounters?: { readonly kind: string; readonly amount: number };
+}
+/**
+ * A `search-library`'s finds sent somewhere other than its `destination`,
+ * card by card (rule 701.23 leaves where a find goes to the instruction): the
+ * ones this picks go to **its** `destination` and every other find to the
+ * search's own. Picked once the finds are chosen and revealed, before
+ * anything moves; the library is shuffled after both moves.
+ *
+ * - `filter`: only finds matching it may go — Archdruid's Charm's "put it onto
+ *   the battlefield tapped **if it's a land card**. Otherwise, put it into
+ *   your hand", Guidelight Pathmaker's "if its mana value is 2 or less".
+ * - `condition`: only while this holds, read as the search resolves (nothing
+ *   happens between the search and the put that could change it) — Ruin in
+ *   Their Wake's "if you control a land named Wastes", Caravan Vigil's morbid.
+ * - `pick`: `"all"` — every find that qualifies, no choice (Archdruid's
+ *   Charm); `"any"` — the searcher picks any number of them, a "you may put"
+ *   (Ruin in Their Wake, Treasure Chest) or a choice between two places (Dina's
+ *   Guidance's "put it into your hand **or** graveyard"); `"one"` — exactly
+ *   one of the finds, the rest going to the search's `destination` (Jarad's
+ *   Orders' "put one into your hand and the other into your graveyard";
+ *   Rootweaver Druid's "one … under your control and the rest … under
+ *   their control"). A single find is that one: the instruction for "the
+ *   other" can't be followed, so it does only as much as it can (rule 609.3).
+ * - `under: "you"`: those picked enter under the **effect's controller's**
+ *   control while the rest enter under the searcher's (Rootweaver Druid's
+ *   opponent searching, in an `each-player-may`'s `ifDid`).
+ *
+ * Not combined with the search's `then`, `restDestination`, `together`,
+ * `all`, `attachedToSource` or a library-top / exile destination.
+ */
+export interface SearchInstead {
+  readonly destination: "battlefield" | "hand" | "graveyard";
+  readonly enterTapped?: true;
+  readonly filter?: CardFilter;
+  readonly condition?: StaticCondition;
+  readonly pick: "all" | "any" | "one";
+  readonly under?: "you";
+}
+/** A {@link SearchInstead} as `beginLibrarySearch` takes it. */
+export interface ResolvedSearchInstead {
+  readonly destination: "battlefield" | "hand" | "graveyard";
+  readonly enterTapped?: true;
+  readonly filter?: CardFilter;
+  readonly pick: "all" | "any" | "one";
+  readonly under?: PlayerId;
 }
 /**
  * What a `search-library`'s finds must be *together* — see its `together`.
@@ -6876,8 +6926,12 @@ export type EffectSpec =
        * for a basic land card" — Path to Exile) is theirs to decline: an
        * `each-player-may` of `who: { controllerOfTarget }` around a search
        * with no `who`, since `min: 0` alone still searches and shuffles.
+       * `"that-player"`: the player an `each-player-may`'s `ifDid` is about,
+       * the effect's controller still "you" — Rootweaver Druid's "each
+       * opponent may search … under your control" (with `instead`'s
+       * `under: "you"`).
        */
-      readonly who?: { readonly controllerOfTarget: number };
+      readonly who?: { readonly controllerOfTarget: number } | "that-player";
       /**
        * Which zones are searched: the library (the default), the graveyard,
        * or both — "search your library **and/or graveyard**" (Finale of
@@ -6960,6 +7014,15 @@ export type EffectSpec =
        * attached to it for any reason (not an Aura that can enchant it, or
        * it has left — rule 400.7) stays in the library (the ruling). */
       readonly attachedToSource?: boolean;
+      /** Each find sent to a destination of its own — by a condition on the
+       * card or the game, by the searcher's choice, or a split with the rest
+       * going elsewhere or to another controller. See {@link SearchInstead}. */
+      readonly instead?: SearchInstead;
+      /** Battlefield-bound finds enter **with these counters** on them (rule
+       * 122.6): Neoform's "with an additional +1/+1 counter on it", Vision
+       * Quest's "X additional +1/+1 counters" (a live amount), Magmatic
+       * Hellkite's "tapped with a stun counter on it". */
+      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
     }
   | {
       /** Reveal `count` cards from the top of the controller's library (or
@@ -13933,7 +13996,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "search-library": {
       let searcher: PlayerId | null = null;
-      if (spec.who !== undefined) {
+      if (spec.who === "that-player") {
+        // The player an `each-player-may`'s `ifDid` is about: nobody, no search.
+        const them = ctx.playersInScope("that-player")[0];
+        if (them === undefined) return;
+        searcher = them;
+      } else if (spec.who !== undefined) {
         const of = ctx.targets[spec.who.controllerOfTarget];
         // A target that has already gone (Path to Exile exiles first) still
         // names its last-known controller; nothing at all means no search.
@@ -13963,6 +14031,24 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
+          // "…if you control a land named Wastes": read now — nothing between
+          // the search and the put could change it. Not holding, every find
+          // goes to `destination`.
+          ...(spec.instead !== undefined &&
+          (spec.instead.condition === undefined || ctx.conditionMet(spec.instead.condition))
+            ? {
+                instead: {
+                  destination: spec.instead.destination,
+                  pick: spec.instead.pick,
+                  ...(spec.instead.enterTapped === true ? { enterTapped: true as const } : {}),
+                  ...(spec.instead.filter !== undefined ? { filter: spec.instead.filter } : {}),
+                  ...(spec.instead.under === "you" ? { under: ctx.controller } : {}),
+                },
+              }
+            : {}),
+          ...(spec.withCounters !== undefined
+            ? { withCounters: { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) } }
+            : {}),
         },
       );
       return;

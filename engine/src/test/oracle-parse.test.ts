@@ -4348,3 +4348,57 @@ describe("flash permissions (castAsThoughFlash for any player, first each turn, 
     });
   });
 });
+
+describe("a library search's finds going card by card (search-library's instead)", () => {
+  const spell = (name: string, type_line: string, oracle_text: string) => parseFace({ name, type_line, oracle_text });
+
+  it("reads the split to the graveyard, the choice of hand or graveyard, and a destination read from the card", () => {
+    const orders = spell(
+      "Jarad's Orders",
+      "Sorcery",
+      "Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle.",
+    );
+    expect(orders.complete).toBe(true);
+    expect(orders.effect).toEqual({
+      kind: "search-library",
+      filter: { type: "creature" },
+      destination: "graveyard",
+      min: 0,
+      max: 2,
+      reveal: true,
+      instead: { destination: "hand", pick: "one" },
+    });
+    const guidance = spell(
+      "Dina's Guidance",
+      "Instant",
+      "Search your library for a creature card, reveal it, put it into your hand or graveyard, then shuffle.",
+    );
+    expect(guidance.complete).toBe(true);
+    expect(guidance.effect).toMatchObject({ destination: "hand", instead: { destination: "graveyard", pick: "any" } });
+    const pathmaker = parseFace({
+      name: "Guidelight Pathmaker",
+      type_line: "Artifact — Vehicle",
+      oracle_text:
+        "When this Vehicle enters, you may search your library for an artifact card and reveal it. Put it onto the battlefield if its mana value is 2 or less. Otherwise, put it into your hand. If you search your library this way, shuffle.",
+    });
+    expect(pathmaker.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Search your library for an artifact card?",
+      effect: {
+        kind: "search-library",
+        filter: { type: "artifact" },
+        destination: "hand",
+        min: 0,
+        max: 1,
+        reveal: true,
+        instead: { destination: "battlefield", filter: { manaValue: { op: "lte", n: 2 } }, pick: "all" },
+      },
+    });
+    // Archdruid's Charm's mode: tapped, by the card's type.
+    const charm = parseEffect(
+      "Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.",
+      { targets: [] },
+    );
+    expect(charm.effect?.instead).toEqual({ destination: "battlefield", enterTapped: true, filter: { type: "land" }, pick: "all" });
+  });
+});

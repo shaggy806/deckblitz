@@ -733,7 +733,12 @@
   "effect:first-creature-spell-flash",
   "effect:flash-for-each-player",
   "effect:flash-permission-this-turn",
-  "effect:next-sorcery-as-though-flash"
+  "effect:next-sorcery-as-though-flash",
+  "effect:search-destination-by-type",
+  "effect:search-destination-choice",
+  "effect:search-split-control",
+  "effect:search-split-to-graveyard",
+  "effect:search-with-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

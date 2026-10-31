@@ -2235,6 +2235,21 @@ export function parseSentence(sentence, ctx) {
     if (filter === null) return null;
     return { kind: "search-library", filter, destination: "hand", min: 0, max: 1, reveal: true };
   }
+  // "…put it into your hand or graveyard" (Dina's Guidance): the searcher's
+  // choice once it's revealed (`instead`, `pick: "any"`).
+  if ((m = /^search your library for an? (.+?) card, reveal it, put it into your hand or graveyard, then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "search-library",
+      filter,
+      destination: "hand",
+      min: 0,
+      max: 1,
+      reveal: true,
+      instead: { destination: "graveyard", pick: "any" },
+    };
+  }
   if ((m = /^search your library for a card, put (?:it|that card) into your hand, then shuffle\.$/i.exec(s))) {
     // "A card", no quality: one must be found while there is one (701.23d).
     return { kind: "search-library", filter: {}, destination: "hand", min: 1, max: 1 };
@@ -2949,7 +2964,7 @@ export function parseEffect(text, outer) {
     // "[Choose a nonland card name.] Search target player's graveyard, hand,
     // and library for all cards with that name and exile them. Then that
     // player shuffles." — two or three sentences, one effect.
-    const searched = searchOthersAt(sentences, i, ctx);
+    const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);
       hints.push({ sentence, effect: searched.effect });
@@ -3467,6 +3482,62 @@ function chooserControlled(spec) {
  * exiled from their hand this way." — `{ effect, used }` (the sentences it
  * took), or null.
  */
+function searchInsteadAt(sentences, i) {
+  // A search whose finds go card by card (`search-library`'s `instead`).
+  // "Search your library for up to two creature cards and reveal them. Put
+  // one into your hand and the other into your graveyard. Then shuffle."
+  // (Jarad's Orders, Fork in the Road): exactly one to the hand.
+  const split = /^search your library for up to two (.+?) cards and reveal them\.$/i.exec(sentences[i] ?? "");
+  if (
+    split !== null &&
+    /^put one into your hand and the other into your graveyard\.$/i.test(sentences[i + 1] ?? "") &&
+    /^then shuffle\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    const filter = parseTypePhrase(split[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      effect: {
+        kind: "search-library",
+        filter,
+        destination: "graveyard",
+        min: 0,
+        max: 2,
+        reveal: true,
+        instead: { destination: "hand", pick: "one" },
+      },
+      used: 3,
+    };
+  }
+  // "[You may s]earch your library for an artifact card and reveal it. Put
+  // it onto the battlefield [tapped] if its mana value is 2 or less / if
+  // it's a land card. Otherwise, put it into your hand. Then shuffle. / If
+  // you search your library this way, shuffle." (Guidelight Pathmaker,
+  // Archdruid's Charm): read from the card, no choice.
+  const one = /^(you may )?search your library for an? (.+?) card and reveal it\.$/i.exec(sentences[i] ?? "");
+  const put = /^put it onto the battlefield( tapped)? if (?:its mana value is (\d+) or less|it's an? (.+?) card)\.$/i.exec(
+    sentences[i + 1] ?? "",
+  );
+  if (one === null || put === null || !/^otherwise, put it into your hand\.$/i.test(sentences[i + 2] ?? "")) return null;
+  const shuffle = sentences[i + 3] ?? "";
+  if (!(one[1] ? /^if you search your library this way, shuffle\.$/i : /^then shuffle\.$/i).test(shuffle)) return null;
+  const filter = parseTypePhrase(one[2], { cards: true });
+  const which = put[2] !== undefined ? { manaValue: { op: "lte", n: Number(put[2]) } } : parseTypePhrase(put[3], { cards: true });
+  if (filter === null || which === null) return null;
+  const search = {
+    kind: "search-library",
+    filter,
+    destination: "hand",
+    min: 0,
+    max: 1,
+    reveal: true,
+    instead: { destination: "battlefield", ...(put[1] ? { enterTapped: true } : {}), filter: which, pick: "all" },
+  };
+  return {
+    effect: one[1] ? { kind: "may", prompt: `Search your library for ${/^[aeiou]/i.test(one[2]) ? "an" : "a"} ${one[2]} card?`, effect: search } : search,
+    used: 4,
+  };
+}
+
 function searchOthersAt(sentences, i, ctx) {
   let at = i;
   let named = null;
