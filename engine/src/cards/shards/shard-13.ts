@@ -599,6 +599,7 @@ import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
+import _poolSerraAvatar from "../pool/serra-avatar.js";
 import _poolSerratedBiskelion from "../pool/serrated-biskelion.js";
 import _poolShadowbornDemon from "../pool/shadowborn-demon.js";
 import _poolShapesharer from "../pool/shapesharer.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolSelflessCathar,
     _poolSenselessRage,
     _poolSereneHeart,
+    _poolSerraAvatar,
     _poolSerratedBiskelion,
     _poolShadowbornDemon,
     _poolShapesharer,

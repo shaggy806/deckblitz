@@ -550,6 +550,7 @@ import _poolRethink from "../pool/rethink.js";
 import _poolRhetCropSpearmaster from "../pool/rhet-crop-spearmaster.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
+import _poolRighteousAuthority from "../pool/righteous-authority.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRingsight from "../pool/ringsight.js";
 import _poolRiptideDirector from "../pool/riptide-director.js";
@@ -1408,6 +1409,7 @@ const shard: CardShard = {
     _poolRhetCropSpearmaster,
     _poolRhoxBrute,
     _poolRickJonesDestinedSidekick,
+    _poolRighteousAuthority,
     _poolRikuOfManyPaths,
     _poolRingsight,
     _poolRiptideDirector,

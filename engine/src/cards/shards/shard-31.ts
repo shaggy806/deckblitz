@@ -819,6 +819,7 @@ import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
 import _poolTroublemakerOuphe from "../pool/troublemaker-ouphe.js";
 import _poolTrudgeGarden from "../pool/trudge-garden.js";
 import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
+import _poolTurtleDuck from "../pool/turtle-duck.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
 import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
@@ -1735,6 +1736,7 @@ const shard: CardShard = {
     _poolTroublemakerOuphe,
     _poolTrudgeGarden,
     _poolTurncoatKunoichi,
+    _poolTurtleDuck,
     _poolTuvasaTheSunlit,
     _poolTweeze,
     _poolUlvenwaldMystics,

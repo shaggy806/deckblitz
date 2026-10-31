@@ -384,6 +384,7 @@ import _poolIonStorm from "../pool/ion-storm.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolIriniSengir from "../pool/irini-sengir.js";
 import _poolIronsoulEnforcer from "../pool/ironsoul-enforcer.js";
+import _poolIslandOfWakWak from "../pool/island-of-wak-wak.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJackalopeHerd from "../pool/jackalope-herd.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
@@ -1274,6 +1275,7 @@ const shard: CardShard = {
     _poolIorethOfTheHealingHouse,
     _poolIriniSengir,
     _poolIronsoulEnforcer,
+    _poolIslandOfWakWak,
     _poolJackOfHeartsVolatileHero,
     _poolJackalopeHerd,
     _poolJadeBearer,
