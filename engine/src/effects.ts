@@ -987,6 +987,25 @@ export interface MoveCountersProgress {
   readonly picking?: true;
 }
 
+/**
+ * How far a `remove-counters` from a targeted **player** has got — set by
+ * the engine on the copy each `choose-modes` answer carries on with. Never
+ * authored. The player was the target as it began; nothing else happens
+ * while the effect resolves (rule 608.2), so their counters don't change in
+ * between.
+ */
+export interface PlayerCounterRemovalProgress {
+  readonly player: PlayerId;
+  /** Counters still to be chosen at most (`null`: any number). */
+  readonly left: number | null;
+  /** Counters that must still be chosen (0 with "up to"). */
+  readonly least: number;
+  /** The kinds still to ask about, each with how many the player has. */
+  readonly kinds: readonly { readonly kind: string; readonly n: number }[];
+  /** What's been chosen so far, removed together once every kind is asked. */
+  readonly chosen: Readonly<Record<string, number>>;
+}
+
 /** @deprecated Use {@link CardFilter} directly — kept as an alias so existing
  * `look-and-choose` / `matchesZoneChoiceFilter` call sites still type-check. */
 export type ZoneChoiceFilter = CardFilter;
@@ -3773,9 +3792,27 @@ export type EffectSpec =
        * included) be removed. Fewer than `count` there to remove: as many as
        * there are, the rest of the instruction still done. What came off is
        * the resolution's `thisWay: "counters-removed"`.
+       *
+       * `counter: "any"` is counters of whatever kinds the player chooses
+       * (rule 122.1): Render Inert's "remove up to five counters from target
+       * permanent", Thornmantle Striker's "remove X counters from target
+       * permanent", Rhys, the Evermore's "remove any number of counters from
+       * target creature you control". `anyController` lets `from` reach
+       * every permanent on the battlefield, not only the controller's —
+       * Eventide's Shadow's "remove any number of counters from among
+       * permanents on the battlefield".
+       *
+       * A **player** as the target (a slot with `orPlayer` — Price of
+       * Betrayal's "target artifact, creature, planeswalker, or opponent")
+       * gives up their own counters (rule 122.1: poison, energy, experience,
+       * rad): how many of each kind is asked kind by kind (a `choose-modes`,
+       * only where there's a choice), and all of them come off together once
+       * every kind is answered. A player's counters aren't counted "this way"
+       * (no card reads it).
        */
       readonly kind: "remove-counters";
       readonly from?: CardFilter;
+      readonly anyController?: true;
       readonly target?: EffectTargetRef;
       readonly counter: string;
       readonly orKinds?: readonly string[];
@@ -3783,6 +3820,9 @@ export type EffectSpec =
       readonly among?: true;
       readonly perObject?: number;
       readonly upTo?: true;
+      /** Set by the engine as a player's counters are asked kind by kind
+       * (see above). Never authored. */
+      readonly playerProgress?: PlayerCounterRemovalProgress;
     }
   | {
       /**
@@ -8586,6 +8626,12 @@ export interface EffectApi {
   /** How many counters of `counter` `player` has — see the `playerCounters`
    * {@link EffectAmount}. */
   playerCountersOf(player: PlayerId, counter: PlayerCounterKind): number;
+  /** Every kind of counter `player` has now (rule 122.1), energy included,
+   * each with how many — `{}` for a player who has left the game. */
+  playerCounterKinds(player: PlayerId): Readonly<Record<string, number>>;
+  /** Take these counters off `player`, all at once (a `remove-counters`
+   * effect's, rule 122.1): each kind at most as many as they have. */
+  removePlayerCounters(player: PlayerId, counts: Readonly<Record<string, number>>): void;
   /** `owner` (the effect's controller when absent) gets an emblem (rule
    * 114) — see the `create-emblem` {@link EffectSpec}. */
   createEmblem(
@@ -8704,6 +8750,7 @@ export interface EffectApi {
   removeChosenCounters(
     spec: {
       readonly from?: CardFilter;
+      readonly anyController?: boolean;
       readonly target?: TargetRef;
       readonly counter: string;
       readonly orKinds?: readonly string[];
@@ -8900,9 +8947,9 @@ function libraryPositionText(at: LibraryPosition): string {
   return at.fromTop === 2 ? "Put it second from the top of your library" : `Put it ${at.fromTop}th from the top of your library`;
 }
 
-/** "a +1/+1 counter", "2 flying counters". */
+/** "a +1/+1 counter", "an energy counter", "2 flying counters". */
 function countersText(n: number, kind: string): string {
-  return `${n === 1 ? "a" : n} ${kind} counter${n === 1 ? "" : "s"}`;
+  return `${n === 1 ? (/^[aeiou]/i.test(kind) ? "an" : "a") : n} ${kind} counter${n === 1 ? "" : "s"}`;
 }
 
 function isMoveChooser(end: EffectTargetRef | MoveCountersChooser): end is MoveCountersChooser {
@@ -8925,6 +8972,48 @@ function kindsHere(ctx: ResolutionContext, ref: TargetRef, counter: string | und
  * question is asked; with a chosen end, a `choose-permanents` for it before
  * each pair, until none is chosen or nothing is left to move.
  */
+type RemoveCountersSpec = Extract<EffectSpec, { kind: "remove-counters" }>;
+
+/**
+ * A `remove-counters` from a targeted player (rule 122.1): kind by kind, how
+ * many of it — a `choose-modes` whenever there's more than one answer, the
+ * copy each answer applies carrying `p` — never fewer than the kinds still to
+ * come leave owed, never more than the count allows; then every chosen
+ * counter comes off together.
+ */
+function applyPlayerCounterRemoval(spec: RemoveCountersSpec, p: PlayerCounterRemovalProgress, ctx: ResolutionContext): void {
+  if (p.kinds.length === 0) {
+    if (Object.values(p.chosen).some((n) => n > 0)) ctx.removePlayerCounters(p.player, p.chosen);
+    return;
+  }
+  const [{ kind, n }, ...rest] = p.kinds;
+  const later = rest.reduce((sum, k) => sum + k.n, 0);
+  const most = p.left === null ? n : Math.min(n, p.left);
+  const fewest = Math.min(most, Math.max(0, p.least - later));
+  const next = (i: number): RemoveCountersSpec => ({
+    ...spec,
+    playerProgress: {
+      player: p.player,
+      left: p.left === null ? null : p.left - i,
+      least: Math.max(0, p.least - i),
+      kinds: rest,
+      chosen: i > 0 ? { ...p.chosen, [kind]: i } : p.chosen,
+    },
+  });
+  if (fewest >= most) {
+    applyPlayerCounterRemoval(spec, next(most).playerProgress!, ctx);
+    return;
+  }
+  ctx.chooseModes(
+    1,
+    1,
+    Array.from({ length: most - fewest + 1 }, (_unused, k) => fewest + k).map((i) => ({
+      text: i === 0 ? `Remove no ${kind} counters` : `Remove ${countersText(i, kind)}`,
+      effect: next(i),
+    })),
+  );
+}
+
 type MoveCountersSpec = Extract<EffectSpec, { kind: "move-counters" }>;
 
 function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void {
@@ -12163,11 +12252,34 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.removeCounterAll(spec.filter, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
       return;
     case "remove-counters": {
+      if (spec.playerProgress !== undefined) {
+        applyPlayerCounterRemoval(spec, spec.playerProgress, ctx);
+        return;
+      }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (spec.target !== undefined && (target === undefined || illegalSlot(spec.target, ctx))) return;
+      if (target?.kind === "player") {
+        // A player's own counters (rule 122.1), of the kinds it allows.
+        const has = ctx.playerCounterKinds(target.player);
+        const allowed = spec.counter === "any" ? null : [spec.counter, ...(spec.orKinds ?? [])];
+        const kinds = Object.entries(has)
+          .filter(([kind, n]) => n > 0 && (allowed === null || allowed.includes(kind)))
+          .map(([kind, n]) => ({ kind, n }));
+        const total = kinds.reduce((sum, k) => sum + k.n, 0);
+        const count = spec.count === "any" ? null : Math.max(0, amountValue(spec.count, ctx));
+        // Fewer there than it says: as many as there are (rule 609.3).
+        const least = spec.upTo === true || count === null ? 0 : Math.min(count, total);
+        applyPlayerCounterRemoval(
+          spec,
+          { player: target.player, left: count === null ? null : Math.min(count, total), least, kinds, chosen: {} },
+          ctx,
+        );
+        return;
+      }
       ctx.removeChosenCounters(
         {
           ...(spec.from !== undefined ? { from: spec.from } : {}),
+          ...(spec.anyController === true ? { anyController: true } : {}),
           ...(target !== undefined ? { target } : {}),
           counter: spec.counter,
           ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),

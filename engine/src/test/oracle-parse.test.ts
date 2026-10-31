@@ -3636,3 +3636,74 @@ describe("meld (rule 701.42)", () => {
     });
   });
 });
+
+describe("counters of chosen kinds removed (remove-counters, a target's orPlayer)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'remove up to N counters from target …, or opponent' with the slot taking a player", () => {
+    const price = face("Price of Betrayal", "Sorcery", "Remove up to five counters from target artifact, creature, planeswalker, or opponent.");
+    expect(price.targets).toEqual([
+      { kind: "permanent", filter: { typesAnyOf: ["artifact", "creature", "planeswalker"] }, orPlayer: "opponent" },
+    ]);
+    expect(price.effect).toEqual({ kind: "remove-counters", target: 0, counter: "any", count: 5, upTo: true });
+  });
+
+  it("reads 'a counter', 'any number of counters', 'you may remove a counter' and 'up to N [kind]'", () => {
+    expect(parseSentence("Remove a counter from target nonland permanent.", ctx())).toMatchObject({
+      kind: "remove-counters",
+      counter: "any",
+      count: 1,
+    });
+    expect(parseSentence("Remove any number of counters from target creature you control.", ctx())).toMatchObject({
+      kind: "remove-counters",
+      counter: "any",
+      count: "any",
+    });
+    expect(parseSentence("You may remove a counter from target permanent.", ctx())).toMatchObject({
+      kind: "remove-counters",
+      counter: "any",
+      count: 1,
+      upTo: true,
+    });
+    expect(parseSentence("Remove up to four charge counters from target noncreature artifact.", ctx())).toMatchObject({
+      kind: "remove-counters",
+      counter: "charge",
+      count: 4,
+      upTo: true,
+    });
+    // A "may" over more than one is all or none — a `may` around exactly
+    // two — and one named kind a fixed number has nothing to choose.
+    expect(parseSentence("You may remove two counters from target permanent.", ctx())).toMatchObject({
+      kind: "may",
+      effect: { kind: "remove-counters", counter: "any", count: 2 },
+    });
+    expect(parseSentence("You may remove two counters from target permanent.", ctx()).effect.upTo).toBeUndefined();
+    expect(parseSentence("Remove a +1/+1 counter from target creature.", ctx())?.kind).not.toBe("remove-counters");
+  });
+
+  it("reads Hex Parasite's 'up to X' and its pump by the counters removed this way", () => {
+    const hex = face(
+      "Hex Parasite",
+      "Artifact Creature — Phyrexian Insect",
+      "{X}{B/P}: Remove up to X counters from target permanent. For each counter removed this way, this creature gets +1/+0 until end of turn.",
+    );
+    expect(hex.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-counters", target: 0, counter: "any", count: "x", upTo: true },
+        { kind: "modify-pt", target: "source", power: { thisWay: "counters-removed" }, toughness: 0, duration: "end-of-turn" },
+      ],
+    });
+  });
+
+  it("reads Eventide's Shadow's 'from among permanents on the battlefield' as anyone's", () => {
+    const shadow = face(
+      "Eventide's Shadow",
+      "Sorcery",
+      "Remove any number of counters from among permanents on the battlefield. You draw cards and lose life equal to the number of counters removed this way.",
+    );
+    expect(shadow.complete).toBe(true);
+    expect(JSON.stringify(shadow.effect)).toContain('"anyController":true');
+    expect(JSON.stringify(shadow.effect)).toContain('"kind":"lose-life","amount":{"thisWay":"counters-removed"}');
+  });
+});

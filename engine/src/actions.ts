@@ -1864,7 +1864,13 @@ export type LegalAction =
       readonly prompt: string;
       /** Each object that may give up counters, with the ones of an allowed
        * kind it has. */
-      readonly eligible: readonly { readonly object: ObjectId; readonly counters: Readonly<Record<string, number>> }[];
+      readonly eligible: readonly {
+        readonly object: ObjectId;
+        readonly counters: Readonly<Record<string, number>>;
+        /** Who controls it (who owns it, for a suspended card) — the bots'
+         * answer takes an opponent's best counters, its own worst. */
+        readonly controller?: PlayerId;
+      }[];
       readonly min: number;
       readonly max: number;
       /** All of them from one object. */

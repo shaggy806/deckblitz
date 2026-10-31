@@ -219,6 +219,7 @@ import _poolEternalFlame from "../pool/eternal-flame.js";
 import _poolEternalTaskmaster from "../pool/eternal-taskmaster.js";
 import _poolEtheriumSpinner from "../pool/etherium-spinner.js";
 import _poolEtherswornShieldmage from "../pool/ethersworn-shieldmage.js";
+import _poolEventidesShadow from "../pool/eventides-shadow.js";
 import _poolEverquillPhoenix from "../pool/everquill-phoenix.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolEvolutionaryEscalation from "../pool/evolutionary-escalation.js";
@@ -294,6 +295,7 @@ import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGiftOfEstates from "../pool/gift-of-estates.js";
 import _poolGigadrowse from "../pool/gigadrowse.js";
 import _poolGigapede from "../pool/gigapede.js";
+import _poolGlenElendraGuardian from "../pool/glen-elendra-guardian.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
@@ -1104,6 +1106,7 @@ const shard: CardShard = {
     _poolEternalTaskmaster,
     _poolEtheriumSpinner,
     _poolEtherswornShieldmage,
+    _poolEventidesShadow,
     _poolEverquillPhoenix,
     _poolEvolutionCharm,
     _poolEvolutionaryEscalation,
@@ -1179,6 +1182,7 @@ const shard: CardShard = {
     _poolGiftOfEstates,
     _poolGigadrowse,
     _poolGigapede,
+    _poolGlenElendraGuardian,
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,

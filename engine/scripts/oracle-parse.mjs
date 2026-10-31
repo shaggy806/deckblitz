@@ -698,6 +698,12 @@ const TARGET_PHRASES = [
   ["target enchantment", "enchantment"],
   ["target land", "land"],
   ["target permanent or player", "permanent-or-player"],
+  // "…, or opponent": a permanent slot a player fits too (`orPlayer`).
+  [
+    "target artifact, creature, planeswalker, or opponent",
+    { kind: "permanent", filter: { typesAnyOf: ["artifact", "creature", "planeswalker"] }, orPlayer: "opponent" },
+  ],
+  ["target permanent or opponent", { kind: "permanent", filter: {}, orPlayer: "opponent" }],
   ["target permanent you control", { kind: "permanent", whose: "you", filter: {} }],
   ["target permanent", "permanent"],
   ["target player or planeswalker", "player-or-planeswalker"],
@@ -1298,6 +1304,29 @@ export function parseSentence(sentence, ctx) {
   if (/^return to your hand all cards in your graveyard that you (?:cycled or )?discarded this turn\.$/i.test(s)) {
     return { kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" };
   }
+  // What a `remove-counters` just before took off, counted one by one:
+  // "For each counter removed this way, ~ gets +1/+0 until end of turn" (Hex
+  // Parasite), "You draw cards and lose life equal to the number of counters
+  // removed this way" (Eventide's Shadow).
+  const removedThisWay = { thisWay: "counters-removed" };
+  if ((m = /^for each counter removed this way, ~ gets \+1\/\+(0|1) until end of turn\.$/i.exec(s))) {
+    return {
+      kind: "modify-pt",
+      target: "source",
+      power: removedThisWay,
+      toughness: m[1] === "1" ? removedThisWay : 0,
+      duration: "end-of-turn",
+    };
+  }
+  if (/^you draw cards and lose life equal to the number of counters removed this way\.$/i.test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: removedThisWay },
+        { kind: "lose-life", amount: removedThisWay },
+      ],
+    };
+  }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
   // your next turn, whenever …, …" (rule 603.7c): a delayed triggered
@@ -1662,6 +1691,48 @@ export function parseSentence(sentence, ctx) {
     if (each !== null && each[2].toLowerCase() !== "counter") {
       return { kind: "remove-counter-all", filter, counter: each[2].toLowerCase(), amount: amount(each[1]) };
     }
+  }
+  // Counters the controller chooses as it resolves (the `remove-counters`
+  // decision, rule 608.2c): of any kinds — "remove up to five counters from
+  // target permanent" (Render Inert), "remove a counter from target nonland
+  // permanent" (Thrull Parasite), "remove any number of counters from target
+  // creature you control" (Rhys, the Evermore) — or "up to N" of one kind
+  // ("remove up to four charge counters from target noncreature artifact" —
+  // Gremlin Mine). "You may remove a counter" is up to one; a "may" over more
+  // is all or none, which this isn't. A player target gives up their own
+  // (Price of Betrayal's "…, or opponent").
+  if (
+    (m = re(
+      `(you may )?remove (up to )?(${N.slice(1, -1)}|any number of) (?:([+-]\\d+/[+-]\\d+|[a-z]+) )?counters? from (~|${TARGET})`,
+    ).exec(s)) &&
+    !/^all /i.test(m[5])
+  ) {
+    const may = m[1] !== undefined;
+    const upTo = m[2] !== undefined;
+    const any = /^any number/i.test(m[3]);
+    const count = any ? "any" : amount(m[3]);
+    const kind = m[4]?.toLowerCase();
+    const target = m[5] === "~" ? "source" : slot(m[5]);
+    const fits =
+      count !== undefined &&
+      target !== undefined &&
+      !(may && (upTo || any || count !== 1)) &&
+      // One named kind, a fixed number: `remove-counter`, nothing to choose.
+      (kind === undefined || upTo || any);
+    if (fits) {
+      return {
+        kind: "remove-counters",
+        target,
+        counter: kind ?? "any",
+        count,
+        ...(upTo || may ? { upTo: true } : {}),
+      };
+    }
+  }
+  // "Remove any number of counters from among permanents on the battlefield"
+  // (Eventide's Shadow): anyone's.
+  if (re(`remove any number of counters from among permanents on the battlefield`).test(s)) {
+    return { kind: "remove-counters", from: {}, anyController: true, counter: "any", count: "any", among: true };
   }
   // "Put its counters on …" / "put those counters on …" of a permanent that
   // left (rule 122.8): each kind it had, put on — the ability's own object

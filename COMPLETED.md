@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: counters of chosen kinds removed** (2026-10-31;
+  `cost:remove-any-counter-cost`, `effect:remove-counters-any-kind`, rule 122.1). Most of it was
+  already there since B254 (the `remove-counters` decision, `removeCounter.kind: "any"`, the
+  `remove-counters` effect's `counter: "any"`), unmarked; what was added: a target slot's
+  `orPlayer` on the `permanent` spec ("…, or opponent" / "…, or player"); a `remove-counters`
+  aimed at a player, their poison, energy, experience and rad counters asked kind by kind on
+  `choose-modes` and taken off together; `anyController` for "from among permanents on the
+  battlefield"; the bots' plain answer taking an opponent's best counters and its own worst. The
+  scaffolder reads "remove (up to) N / any number of counters from target …", "you may remove a
+  counter …", the "…, or opponent" slots and the "removed this way" pump and draw. Proving cards:
+  Price of Betrayal, Eventide's Shadow, Hex Parasite, Glen Elendra Guardian; 12 freed.
+
 - **Need-keys Phase 2: meld** (2026-10-31; `mechanic:meld`, rules 701.42, 712.4, 712.8g, 712.21).
   The `meld` effect — "if you both own and control ~ and a creature named X, exile them, then meld
   them into Y" — checks that test as it resolves, exiles both (one event), and puts two cards of

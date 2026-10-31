@@ -7209,6 +7209,7 @@ import _poolEvaporate from "./pool/evaporate.js";
 import _poolEvasiveAction from "./pool/evasive-action.js";
 import _poolEvendoBrushrazer from "./pool/evendo-brushrazer.js";
 import _poolEvendoWakingHaven from "./pool/evendo-waking-haven.js";
+import _poolEventidesShadow from "./pool/eventides-shadow.js";
 import _poolEverWatchingThreshold from "./pool/ever-watching-threshold.js";
 import _poolEverbarkShaman from "./pool/everbark-shaman.js";
 import _poolEverdawnChampion from "./pool/everdawn-champion.js";
@@ -9178,6 +9179,7 @@ import _poolGleefulArsonist from "./pool/gleeful-arsonist.js";
 import _poolGleefulDemolition from "./pool/gleeful-demolition.js";
 import _poolGleefulSabotage from "./pool/gleeful-sabotage.js";
 import _poolGlenElendraArchmage from "./pool/glen-elendra-archmage.js";
+import _poolGlenElendraGuardian from "./pool/glen-elendra-guardian.js";
 import _poolGlenElendraLiege from "./pool/glen-elendra-liege.js";
 import _poolGlenElendraPranksters from "./pool/glen-elendra-pranksters.js";
 import _poolGlidediveDuo from "./pool/glidedive-duo.js";
@@ -10551,6 +10553,7 @@ import _poolHerosResolve from "./pool/heros-resolve.js";
 import _poolHesitation from "./pool/hesitation.js";
 import _poolHewTheEntwood from "./pool/hew-the-entwood.js";
 import _poolHewedStoneRetainers from "./pool/hewed-stone-retainers.js";
+import _poolHexParasite from "./pool/hex-parasite.js";
 import _poolHex from "./pool/hex.js";
 import _poolHexavus from "./pool/hexavus.js";
 import _poolHexdrinker from "./pool/hexdrinker.js";
@@ -17002,6 +17005,7 @@ import _poolPretendingPoxbearers from "./pool/pretending-poxbearers.js";
 import _poolPreyUpon from "./pool/prey-upon.js";
 import _poolPreysVengeance from "./pool/preys-vengeance.js";
 import _poolPriceOfBeauty from "./pool/price-of-beauty.js";
+import _poolPriceOfBetrayal from "./pool/price-of-betrayal.js";
 import _poolPriceOfFame from "./pool/price-of-fame.js";
 import _poolPriceOfFreedom from "./pool/price-of-freedom.js";
 import _poolPriceOfLoyalty from "./pool/price-of-loyalty.js";
@@ -34583,6 +34587,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEvasiveAction,
   _poolEvendoBrushrazer,
   _poolEvendoWakingHaven,
+  _poolEventidesShadow,
   _poolEverWatchingThreshold,
   _poolEverbarkShaman,
   _poolEverdawnChampion,
@@ -36552,6 +36557,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGleefulDemolition,
   _poolGleefulSabotage,
   _poolGlenElendraArchmage,
+  _poolGlenElendraGuardian,
   _poolGlenElendraLiege,
   _poolGlenElendraPranksters,
   _poolGlidediveDuo,
@@ -37925,6 +37931,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHesitation,
   _poolHewTheEntwood,
   _poolHewedStoneRetainers,
+  _poolHexParasite,
   _poolHex,
   _poolHexavus,
   _poolHexdrinker,
@@ -44376,6 +44383,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPreyUpon,
   _poolPreysVengeance,
   _poolPriceOfBeauty,
+  _poolPriceOfBetrayal,
   _poolPriceOfFame,
   _poolPriceOfFreedom,
   _poolPriceOfLoyalty,
@@ -61970,6 +61978,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/evasive-action": _poolEvasiveAction,
   "pool/evendo-brushrazer": _poolEvendoBrushrazer,
   "pool/evendo-waking-haven": _poolEvendoWakingHaven,
+  "pool/eventides-shadow": _poolEventidesShadow,
   "pool/ever-watching-threshold": _poolEverWatchingThreshold,
   "pool/everbark-shaman": _poolEverbarkShaman,
   "pool/everdawn-champion": _poolEverdawnChampion,
@@ -63939,6 +63948,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gleeful-demolition": _poolGleefulDemolition,
   "pool/gleeful-sabotage": _poolGleefulSabotage,
   "pool/glen-elendra-archmage": _poolGlenElendraArchmage,
+  "pool/glen-elendra-guardian": _poolGlenElendraGuardian,
   "pool/glen-elendra-liege": _poolGlenElendraLiege,
   "pool/glen-elendra-pranksters": _poolGlenElendraPranksters,
   "pool/glidedive-duo": _poolGlidediveDuo,
@@ -65312,6 +65322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hesitation": _poolHesitation,
   "pool/hew-the-entwood": _poolHewTheEntwood,
   "pool/hewed-stone-retainers": _poolHewedStoneRetainers,
+  "pool/hex-parasite": _poolHexParasite,
   "pool/hex": _poolHex,
   "pool/hexavus": _poolHexavus,
   "pool/hexdrinker": _poolHexdrinker,
@@ -71763,6 +71774,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prey-upon": _poolPreyUpon,
   "pool/preys-vengeance": _poolPreysVengeance,
   "pool/price-of-beauty": _poolPriceOfBeauty,
+  "pool/price-of-betrayal": _poolPriceOfBetrayal,
   "pool/price-of-fame": _poolPriceOfFame,
   "pool/price-of-freedom": _poolPriceOfFreedom,
   "pool/price-of-loyalty": _poolPriceOfLoyalty,

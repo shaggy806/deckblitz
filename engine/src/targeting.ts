@@ -393,6 +393,14 @@ function isLegalTargetUncached(
   // A filtered battlefield permanent (see `TargetSpec`). Like the graveyard
   // spec below, handled ahead of the string switch rather than inside it.
   if (typeof spec === "object" && spec.kind === "permanent") {
+    // "…or opponent" / "…or player": a living player, as `orPlayer` allows.
+    if (ref.kind === "player") {
+      return (
+        spec.orPlayer !== undefined &&
+        isLivingPlayer(state, ref) &&
+        (spec.orPlayer === "any" || ref.player !== forPlayer)
+      );
+    }
     if (ref.kind !== "object") return false;
     const object = state.objects[ref.object];
     if (object === undefined || object.zone !== "battlefield") return false;

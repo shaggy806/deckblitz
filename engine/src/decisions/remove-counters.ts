@@ -13,7 +13,7 @@
  */
 
 import type { Action, LegalAction } from "../actions.js";
-import type { ObjectId } from "../primitives.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import { defineDecision } from "./define.js";
 
@@ -44,7 +44,9 @@ export function removalOffer(state: GameState, awaiting: Awaiting): Offer {
         )
         .map(([kind, n]) => [kind, n * tokens]),
     );
-    return Object.keys(allowed).length > 0 ? [{ object, counters: allowed }] : [];
+    return Object.keys(allowed).length > 0
+      ? [{ object, counters: allowed, controller: suspended ? here.owner : here.controller }]
+      : [];
   });
   return {
     kind: "remove-counters",
@@ -100,13 +102,17 @@ function keepScore(kind: string): number {
 /**
  * The plain answer: as many as it may (`max`), the cheapest counters first —
  * see {@link keepScore} — from the object that has the most of a kind, and
- * for `single` all from the one object that can give them.
+ * for `single` all from the one object that can give them. Given the
+ * answering `player`, an opponent's object gives up its best counters first
+ * (Heartless Act's "remove up to three counters from target creature").
  */
-export function defaultCounterRemovals(offer: Offer): Removal[] {
+export function defaultCounterRemovals(offer: Offer, player?: PlayerId): Removal[] {
+  const score = (e: Offer["eligible"][number], kind: string): number =>
+    player !== undefined && e.controller !== undefined && e.controller !== player ? 2 - keepScore(kind) : keepScore(kind);
   const fill = (entries: Offer["eligible"]): Removal[] | null => {
     const pairs = entries
-      .flatMap((e) => Object.entries(e.counters).map(([kind, n]) => ({ object: e.object, kind, n })))
-      .sort((a, b) => keepScore(a.kind) - keepScore(b.kind) || b.n - a.n);
+      .flatMap((e) => Object.entries(e.counters).map(([kind, n]) => ({ object: e.object, kind, n, s: score(e, kind) })))
+      .sort((a, b) => a.s - b.s || b.n - a.n);
     const out: Removal[] = [];
     const share = new Map<ObjectId, number>();
     let left = offer.max;
@@ -161,10 +167,10 @@ export const removeCounters = defineDecision({
   // to give up more is worth a look (Gremlin Mine on your own artifact).
   candidates: (legal, player): Action[] => {
     if (legal.kind !== "remove-counters") return [];
-    const most = defaultCounterRemovals(legal);
+    const most = defaultCounterRemovals(legal, player);
     const out: Action[] = [{ type: "remove-counters", player, removals: most }];
     if (legal.min < legal.max) {
-      const fewest = defaultCounterRemovals({ ...legal, max: legal.min });
+      const fewest = defaultCounterRemovals({ ...legal, max: legal.min }, player);
       out.push({ type: "remove-counters", player, removals: fewest });
     }
     return out;

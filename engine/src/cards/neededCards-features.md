@@ -453,6 +453,23 @@ a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
 
+### Counters of chosen kinds removed — built 2026-10-31
+
+The need-keys Phase 2 family `cost:remove-any-counter-cost`, features only.
+Both keys' core was B254's, unmarked: the `remove-counters` decision, the
+cost's `removeCounter.kind: "any"` ("remove a counter from this creature" —
+Glen Elendra Guardian) and the `remove-counters` effect's `counter: "any"`
+("remove up to X counters from target permanent" — Hex Parasite). Added: a
+`permanent` target slot's **`orPlayer`** ("target artifact, creature,
+planeswalker, or opponent" — Price of Betrayal), a `remove-counters` aimed at
+a **player** (rule 122.1: poison, energy, experience, rad, asked kind by kind
+on `choose-modes` and removed together), **`anyController`** ("from among
+permanents on the battlefield" — Eventide's Shadow), and the bots' plain
+answer taking an opponent's best counters. Keys: remove-any-counter-cost,
+remove-counters-any-kind. Still open on its cards: Cemetery Desecrator
+(`decision:choose-from-any-graveyard`), Gwen Stacy
+(`zone:impulse-while-you-control-source`).
+
 ### Removing counters in bulk — built 2026-10-31
 
 The need-keys Phase 2 family `effect:remove-all-counters`, features only.

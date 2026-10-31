@@ -831,8 +831,8 @@ export class AutomaticController implements PlayerController {
     return defaultTimeTravel(view, eligible);
   }
 
-  chooseCounterRemovals(_view: ControllerView, offer: CounterRemovalOffer): readonly CounterRemoval[] {
-    return defaultCounterRemovals(offer);
+  chooseCounterRemovals(view: ControllerView, offer: CounterRemovalOffer): readonly CounterRemoval[] {
+    return defaultCounterRemovals(offer, view.player);
   }
 
   chooseVenture(_view: ControllerView, offer: VentureOffer): VentureAnswer {
@@ -1135,8 +1135,8 @@ export class ScriptedController implements PlayerController {
     colors.length === 0 ? {} : { [colors[0]]: amount };
   /** As `AutomaticController`'s (`defaultTimeTravel`). */
   chooseTimeTravelFn: TimeTravelChooser = (view, eligible) => defaultTimeTravel(view, eligible);
-  chooseCounterRemovalsFn: (view: ControllerView, offer: CounterRemovalOffer) => readonly CounterRemoval[] = (_view, offer) =>
-    defaultCounterRemovals(offer);
+  chooseCounterRemovalsFn: (view: ControllerView, offer: CounterRemovalOffer) => readonly CounterRemoval[] = (view, offer) =>
+    defaultCounterRemovals(offer, view.player);
   /** The first offered dungeon or room (`defaultVenture`). */
   chooseVentureFn: (view: ControllerView, offer: VentureOffer) => VentureAnswer = (_view, offer) => defaultVenture(offer);
   /** Your own first, up to `max` — see `ownPermanentsFirst`; under a power

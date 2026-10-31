@@ -225,10 +225,15 @@ section keeps only what to do next.
   and the fronts' mana values summed; several counterparts asked on `choose-permanents`; the
   `meld-ready` intervening if; leaving, it is two cards, and a blink, an O-Ring or a "with this"
   exile finds both (`leftWith`, mutate's components too); 11 freed, 4 proving cards — Graf Rats,
-  Chittering Host, Hanweir Battlements, Hanweir, the Writhing Township).
-  **567 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
-  `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15).
+  Chittering Host, Hanweir Battlements, Hanweir, the Writhing Township),
+  remove-any-counter-cost (2026-10-31: counters of chosen kinds — B254's `remove-counters`
+  already covered both keys' core; added a `permanent` slot's `orPlayer` for "…, or opponent", a
+  player's own counters removed kind by kind on `choose-modes`, `anyController` for "from among
+  permanents on the battlefield", the bots taking an opponent's best counters; 12 freed, 4
+  proving cards — Price of Betrayal, Eventide's Shadow, Hex Parasite, Glen Elendra Guardian).
+  **579 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `cost:may-cost-non-mana` (15), `effect:cast-and-activate-restrictions` (15),
+  `static:gain-abilities-from-graveyard` (15), `decision:choose-card-type-protection` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

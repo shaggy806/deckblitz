@@ -26212,6 +26212,7 @@ export class Game {
             kind: spec.counter,
             ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),
             ...(spec.from !== undefined ? { from: spec.from } : {}),
+            ...(spec.anyController === true ? { anyController: true as const } : {}),
             ...(target !== undefined ? { target } : {}),
           },
           single,
@@ -27218,6 +27219,18 @@ export class Game {
       addPlayerCounters: (player, counter, amount) =>
         this.changePlayerCounters(player, counter, amount),
       playerCountersOf: (player, counter) => this.state.players[player]?.counters[counter] ?? 0,
+      playerCounterKinds: (player) => {
+        const ps = this.state.players[player];
+        if (ps === undefined || ps.hasLost) return {};
+        return { ...(ps.energy > 0 ? { energy: ps.energy } : {}), ...ps.counters };
+      },
+      removePlayerCounters: (player, counts) => {
+        for (const [kind, n] of Object.entries(counts)) {
+          if (n <= 0) continue;
+          if (kind === "energy") this.changeEnergy(player, -Math.min(n, this.state.players[player]?.energy ?? 0));
+          else if (kind === "poison" || kind === "experience" || kind === "rad") this.changePlayerCounters(player, kind, -n);
+        }
+      },
       createEmblem: (text, staticAbility, triggered, owner) => {
         const from = this.state.objects[source];
         this.createEmblem(
@@ -32207,6 +32220,9 @@ export class Game {
       readonly kind: string;
       readonly orKinds?: readonly string[];
       readonly from?: CardFilter;
+      /** `from` over every permanent, not only `player`'s (Eventide's
+       * Shadow's "from among permanents on the battlefield"). */
+      readonly anyController?: true;
       readonly target?: ObjectId;
       readonly excludeSource?: true;
       readonly orSuspended?: true;
@@ -32219,7 +32235,12 @@ export class Game {
         ? [spec.target]
         : spec.from === undefined
           ? [sourceId]
-          : this.battlefieldMatching(player, { ...spec.from, controlledBy: "you" }, undefined, sourceId).filter(
+          : this.battlefieldMatching(
+              player,
+              spec.anyController === true ? spec.from : { ...spec.from, controlledBy: "you" },
+              undefined,
+              sourceId,
+            ).filter(
               (id) => spec.excludeSource !== true || id !== sourceId,
             );
     const candidates = ids.filter((id) => this.state.objects[id]?.zone === "battlefield");

@@ -371,6 +371,7 @@ import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHeraldOfDromoka from "../pool/herald-of-dromoka.js";
 import _poolHeroOfOxidRidge from "../pool/hero-of-oxid-ridge.js";
 import _poolHesitation from "../pool/hesitation.js";
+import _poolHexParasite from "../pool/hex-parasite.js";
 import _poolHexdrinker from "../pool/hexdrinker.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolHeraldOfDromoka,
     _poolHeroOfOxidRidge,
     _poolHesitation,
+    _poolHexParasite,
     _poolHexdrinker,
     _poolHibernationSliver,
     _poolHiddenVolcano,

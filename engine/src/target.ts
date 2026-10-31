@@ -144,6 +144,12 @@ export type TargetSpec =
        * a planeswalker they control, which is a different thing to attack
        * (rules 506.3, 509.1a). Needs `TargetSource.triggerPlayer`. */
       readonly attacking?: "trigger-player";
+      /** "…**or opponent**" / "…**or player**": a player is a legal target
+       * of this slot too — Price of Betrayal's "target artifact, creature,
+       * planeswalker, or opponent", Etched Slith's "another target permanent
+       * or opponent" (`"opponent"`: a player other than the one choosing;
+       * `"any"`: any player). `whose` and `filter` are only the permanent's. */
+      readonly orPlayer?: "opponent" | "any";
     }
   /**
    * "Target opponent who has **more life than you do** as you activate this
@@ -1061,6 +1067,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     if (spec.whose === "you") return `${noun} you control`;
     if (spec.whose === "opponent") return `${noun} an opponent controls`;
     if (spec.whose === "defending-player") return `${noun} defending player controls`;
+    if (spec.orPlayer !== undefined) return `${noun} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
     return noun;
   }
   const whose =

@@ -597,6 +597,18 @@ missing. Re-run `--greedy` for Phase 2's order.
   cards put into a library or graveyard is not asked (730.3a, as for mutate). Next:
   `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
   `effect:cast-and-activate-restrictions` (15).
+- **2026-10-31: `cost:remove-any-counter-cost`, features only** (an overnight agent) — counters
+  of chosen kinds removed (rule 122.1). B254 had built both keys' core unmarked (the
+  `remove-counters` decision and effect, `removeCounter.kind: "any"`); added: a `permanent` target
+  slot's `orPlayer` ("…, or opponent"), a `remove-counters` aimed at a player (their counters,
+  energy included, kind by kind on `choose-modes`, removed together), `anyController` for "from
+  among permanents on the battlefield", and the bots' plain answer taking an opponent's best
+  counters. 2 keys; 4 proving cards; 12 freed (queued: 579). Adds no decision kind and no client
+  change (player targets were already clickable). Not yet: a player's removed counters aren't
+  counted "this way" (no card reads it); Cemetery Desecrator still needs
+  `decision:choose-from-any-graveyard`, Gwen Stacy `zone:impulse-while-you-control-source`. Next:
+  `cost:may-cost-non-mana` (15), `effect:cast-and-activate-restrictions` (15),
+  `static:gain-abilities-from-graveyard` (15).
 
 ## Rough size
 

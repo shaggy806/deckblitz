@@ -521,6 +521,7 @@ import _poolPowerOfFire from "../pool/power-of-fire.js";
 import _poolPrairieStream from "../pool/prairie-stream.js";
 import _poolPrescientChimera from "../pool/prescient-chimera.js";
 import _poolPreysVengeance from "../pool/preys-vengeance.js";
+import _poolPriceOfBetrayal from "../pool/price-of-betrayal.js";
 import _poolPricklyMarmoset from "../pool/prickly-marmoset.js";
 import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
 import _poolPrimalCocoon from "../pool/primal-cocoon.js";
@@ -1377,6 +1378,7 @@ const shard: CardShard = {
     _poolPrairieStream,
     _poolPrescientChimera,
     _poolPreysVengeance,
+    _poolPriceOfBetrayal,
     _poolPricklyMarmoset,
     _poolPriestOfAncientLore,
     _poolPrimalCocoon,
