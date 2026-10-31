@@ -7897,6 +7897,16 @@ export class Game {
    */
   private finishZoneChoice(entry: Extract<PendingEntry, { kind: "zone-choice" }>): void {
     const { awaiting, player, chosen } = entry;
+    // A search's finds that go card by card: the ones not picked here go to
+    // the search's own destination, the battlefield too.
+    const restEntering =
+      awaiting.searchRest?.destination === "battlefield" ? awaiting.ids.filter((id) => !chosen.includes(id)) : [];
+    for (const id of restEntering) {
+      if (this.askEnterChoice(id, player)) {
+        this.state.suspendedResolutions.push({ effect: null, enter: entry });
+        return;
+      }
+    }
     for (const [index, id] of chosen.entries()) {
       if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
       // Face down, it has no "as this enters" choices (708.3).
@@ -7943,8 +7953,11 @@ export class Game {
       toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
     });
 
-    // An order takes nothing: it only says where each card goes.
-    if (awaiting.order !== true) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    // An order takes nothing: it only says where each card goes. A search's
+    // second choice, of where its finds go, took them already.
+    if (awaiting.order !== true && awaiting.searchRest === undefined) {
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
     // it before "if you do" runs.
     if (awaiting.collectEvidence !== undefined && chosen.length > 0) {
@@ -7961,6 +7974,11 @@ export class Game {
       this.beginLibraryOrder(player, awaiting.thenOrder.cards, awaiting.thenOrder.position);
     }
     this.applyChooseFromZoneThen(awaiting, player, chosen);
+    // A search whose finds go card by card: where each goes is asked now.
+    if (awaiting.searchInstead !== undefined) {
+      this.beginSearchInstead(awaiting, player, chosen);
+      return;
+    }
     // "Then put any number of land cards from among them onto the
     // battlefield tapped and the rest into your graveyard": a second choice
     // over what the first left, which the rest wait for. With nothing it
@@ -8000,6 +8018,80 @@ export class Game {
       rest = this.moveChosenFromZone(next, player, [], leftover);
     });
     this.beginLibraryOrder(player, rest.cards, rest.position);
+  }
+
+  /**
+   * A library search's finds going card by card (`search-library`'s
+   * `instead`), once they're picked and revealed: the second choice, over
+   * the finds, of which go to `instead`'s destination — every other one
+   * going to the search's own — and then the shuffle (`searchRest`). Asked
+   * only when it is a choice; every qualifying find of an `"all"`, a single
+   * find of a `"one"` (rule 609.3) or nothing qualifying moves at once.
+   */
+  private beginSearchInstead(
+    awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+    player: PlayerId,
+    finds: readonly ObjectId[],
+  ): void {
+    const instead = awaiting.searchInstead;
+    if (instead === undefined) return;
+    const filter = instead.filter;
+    const eligible =
+      filter === undefined
+        ? [...finds]
+        : finds.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player, x: instead.x }));
+    const [min, max] =
+      instead.pick === "all"
+        ? [eligible.length, eligible.length]
+        : instead.pick === "one"
+          ? [Math.min(1, eligible.length), Math.min(1, eligible.length)]
+          : [0, eligible.length];
+    const under = instead.under !== undefined && instead.under !== player ? instead.under : undefined;
+    const source = awaiting.thenSource === undefined ? undefined : this.state.objects[awaiting.thenSource];
+    const where = (to: "battlefield" | "hand" | "graveyard", tapped: boolean, controller: string | null): string =>
+      to === "hand"
+        ? "into your hand"
+        : to === "graveyard"
+          ? "into your graveyard"
+          : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
+    const picked = where(
+      instead.destination,
+      instead.enterTapped === true,
+      under === undefined ? null : `${source === undefined ? "its controller's" : `${nameOf(source)}'s controller's`}`,
+    );
+    const rest = where(instead.to, instead.toTapped === true, under === undefined ? null : "your");
+    const prompt =
+      instead.pick === "one"
+        ? `Choose one to put ${picked} — the ${finds.length === 2 ? "other goes" : "rest go"} ${rest}`
+        : eligible.length === 1 && finds.length === 1
+          ? `Choose it to put it ${picked}, or nothing to put it ${rest}`
+          : `Choose any of them to put ${picked} — the rest go ${rest}`;
+    const next: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
+      kind: "choose-from-zone",
+      player,
+      ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
+      ids: [...finds],
+      eligible,
+      min,
+      max,
+      destination: instead.destination,
+      leftover: "stay",
+      ...(instead.enterTapped === true && instead.destination === "battlefield" ? { enterTapped: true } : {}),
+      ...(under !== undefined && instead.destination === "battlefield" ? { enterUnder: under } : {}),
+      ...(awaiting.enterWithCounters !== undefined ? { enterWithCounters: awaiting.enterWithCounters } : {}),
+      ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
+      searchRest: {
+        destination: instead.to,
+        ...(instead.toTapped === true ? { enterTapped: true as const } : {}),
+        shuffle: instead.shuffle,
+      },
+      prompt,
+    };
+    if (min === max && min === eligible.length) {
+      this.finishZoneChoice({ kind: "zone-choice", awaiting: next, player, chosen: eligible });
+      return;
+    }
+    this.state.awaiting = next;
   }
 
   /**
@@ -8098,8 +8190,13 @@ export class Game {
     // A split tutor (Cultivate) sends the first find to `destination` and the
     // rest to `restDestination`; with no `restDestination` they all go to the
     // same place, which is every other tutor. Whatever goes onto the
-    // battlefield goes there at once.
-    this.withEnterBatch(() => chosen.forEach((id, index) => {
+    // battlefield goes there at once. A search's finds going card by card
+    // (`searchRest`): the ones not picked go to the search's own destination
+    // in the same move.
+    const rest = awaiting.searchRest;
+    const placed = rest === undefined ? chosen : [...chosen, ...leftover];
+    this.withEnterBatch(() => placed.forEach((id, index) => {
+      const isRest = rest !== undefined && index >= chosen.length;
       // "Exile the top two, choose one of them" — the chosen cards don't
       // move at all, they just gain the impulse permission.
       if (awaiting.destination === "exile-playable") {
@@ -8114,7 +8211,7 @@ export class Game {
         this.moveObject(id, "command");
         return;
       }
-      const to = this.chosenFromZoneTo(awaiting, index);
+      const to = isRest ? rest.destination : this.chosenFromZoneTo(awaiting, index);
       // A tutor-to-top's find is put on top *after* the search's shuffle
       // (below) — moving it now would only have it shuffled back in.
       if (to === "library-top" || to === "exile-playable") return;
@@ -8172,12 +8269,12 @@ export class Game {
       }
       // "Onto the battlefield attached to Light-Paws": an Aura that can't
       // be attached to it stays where it is (rule 303.4i, the ruling).
-      const host = to === "battlefield" ? awaiting.enterAttachedTo : undefined;
+      const host = to === "battlefield" && !isRest ? awaiting.enterAttachedTo : undefined;
       if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) return;
-      const under = to === "battlefield" ? awaiting.enterUnder : undefined;
-      const enterAs = to === "battlefield" ? awaiting.enterAs : undefined;
+      const under = to === "battlefield" && !isRest ? awaiting.enterUnder : undefined;
+      const enterAs = to === "battlefield" && !isRest ? awaiting.enterAs : undefined;
       const moved = this.moveObject(id, to, {
-        tapped: awaiting.enterTapped === true,
+        tapped: isRest ? rest.enterTapped === true : awaiting.enterTapped === true,
         ...(under !== undefined ? { under } : {}),
         ...(enterAs?.setTypes !== undefined ? { setTypes: enterAs.setTypes } : {}),
         ...(enterAs?.addSubtypes !== undefined ? { addSubtypes: enterAs.addSubtypes } : {}),
@@ -8263,6 +8360,11 @@ export class Game {
     }
     // leftover === "stay": nothing to do — those cards were only ever looked
     // at, never removed from wherever they already were.
+
+    // A search whose finds went card by card shuffles once they've all
+    // moved ("…Otherwise, put it into your hand. Then shuffle." — rule
+    // 701.24a).
+    if (rest !== undefined && rest.shuffle !== null) this.shuffleLibraryOf(rest.shuffle);
 
     // Now the shuffle has happened, the tutor's find goes on top (rule
     // 701.24b — "shuffle, *then* put that card on top"). Last chosen first,
@@ -10742,7 +10844,10 @@ export class Game {
     // stop it as they stop the cast.
     const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
     if (prohibited !== null) return prohibited;
-    if (!def.types.includes("instant") && !def.keywords.includes("flash")) {
+    // "If you could begin to cast this card" (702.62a): an effect letting it
+    // be cast as though it had flash lets it be suspended then too (Quicken's
+    // ruling).
+    if (!def.types.includes("instant") && !def.keywords.includes("flash") && !this.castsAsThoughFlash(player, cardId)) {
       const timing = this.whyNotSorcerySpeed(player, `suspend ${def.name}`);
       if (timing !== null) return timing;
     }
@@ -15280,6 +15385,7 @@ export class Game {
     }
     this.state.players[player].spellsCastThisTurn += 1;
     (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId, player, castFrom));
+    this.spendNextSpellFlash(player, cardId);
     this.recordCastName(player, cardId);
     this.state.spellsCastThisTurn += 1;
     object.castFrom = castFrom;
@@ -27222,6 +27328,19 @@ export class Game {
         this.emit({ type: "prohibition-imposed", players: live, spells: false, abilities: false, monarch: true });
       },
       addPlayerEffect: (effect) => {
+        const flash = effect.castAsThoughFlash;
+        if (flash?.filter?.ofChosenType === true) {
+          // "The next spell of the chosen type" (Progenitor's Icon): the type
+          // chosen for the source as this resolves — as it last existed, if
+          // it has left (608.2h) — fixed from then on. Nothing chosen: no
+          // effect (its ruling).
+          const from = this.state.objects[source];
+          const chosen =
+            from?.chosenCreatureType ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenCreatureType);
+          if (chosen == null) return;
+          const { ofChosenType: _chosen, ...rest } = flash.filter;
+          effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
+        }
         (this.state.playerEffects ??= []).push(effect);
       },
       flipCoin: () => {
@@ -28727,6 +28846,38 @@ export class Game {
         ? Math.min(max, together.oneEach.length)
         : max;
     const exiled = destination === "exile" || destination === "exile-face-down";
+    // Finds that go card by card (`instead`): this choice only picks them,
+    // and its answer asks where each goes (`beginSearchInstead`), the
+    // shuffle waiting for those moves.
+    const instead =
+      more?.instead !== undefined && (destination === "hand" || destination === "battlefield" || destination === "graveyard")
+        ? {
+            ...more.instead,
+            to: destination,
+            ...(enterTapped && destination === "battlefield" ? { toTapped: true as const } : {}),
+            shuffle: library ? owner : null,
+            x,
+          }
+        : undefined;
+    if (instead !== undefined) {
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ...(owner !== player ? { forPlayer: owner } : {}),
+        ids: eligible,
+        eligible,
+        min: Math.min(least, most, eligible.length),
+        max: Math.min(most, eligible.length),
+        destination: "stay",
+        leftover: "stay",
+        searchInstead: instead,
+        ...(reveal ? { reveal: true } : {}),
+        ...(more?.withCounters !== undefined ? { enterWithCounters: more.withCounters } : {}),
+        thenSource: more!.source,
+        thenX: x,
+      };
+      return;
+    }
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
@@ -28740,6 +28891,10 @@ export class Game {
       // "If you search your library this way, shuffle" — "then that player
       // shuffles": the library's owner (rule 701.24a).
       leftover: library ? "shuffle" : "stay",
+      // "…with an additional +1/+1 counter on it" (Neoform).
+      ...(more?.withCounters !== undefined && destination === "battlefield"
+        ? { enterWithCounters: more.withCounters }
+        : {}),
       ...(alsoTaken.length > 0 ? { alsoTaken } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       // "Put that card onto the battlefield under your control" (Bribery).
@@ -32293,18 +32448,68 @@ export class Game {
     return all.map((slot, i) => (i === slots[0] ? fitting[i] : slot));
   }
 
+  /** Whether some effect lets `player` cast `cardId` as though it had flash
+   * (rule 601.3b) — asked as the cast begins, before it's recorded:
+   *
+   * - a static of a permanent's (`castAsThoughFlash`): its controller's
+   *   spells, or with `castAsThoughFlashAnyPlayer` every player's ("any
+   *   player may cast …" — Vernal Equinox), the filter read from the
+   *   permanent's controller's side; with `castAsThoughFlashFirstEachTurn`
+   *   only while `player` has cast no matching spell yet this turn (Radagast
+   *   of Rhosgobel);
+   * - a player effect of `player`'s (`PlayerEffect.castAsThoughFlash`): "you
+   *   may cast spells this turn as though they had flash" (Borne Upon a
+   *   Wind), or "the next sorcery spell you cast this turn …" (Quicken),
+   *   which `spendNextSpellFlash` ends once that spell is cast. */
   private castsAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
-      if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
+      if (hasLostAbilities(this.state, this.registry, source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const flash = ability.castAsThoughFlash;
         if (flash === undefined) continue;
+        if (source.controller !== player && ability.castAsThoughFlashAnyPlayer !== true) continue;
         if (ability.condition !== undefined && !this.staticActive(source, ability)) continue;
-        if (flash === true || matchesFilter(this.state, this.registry, cardId, flash, { you: player })) return true;
+        const filter = flash === true ? undefined : flash;
+        const context = { you: source.controller, source: source.id };
+        if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, context)) continue;
+        // "The first creature spell you cast each turn": none cast yet.
+        if (
+          ability.castAsThoughFlashFirstEachTurn === true &&
+          (this.state.players[player].spellsCastThisTurnAs ?? []).some(
+            ({ id: cast, spell }) =>
+              filter === undefined ||
+              matchesFilter(this.state, this.registry, cast, filter, { ...context, snapshot: spell }),
+          )
+        ) {
+          continue;
+        }
+        return true;
+      }
+    }
+    for (const effect of this.state.playerEffects ?? []) {
+      const flash = effect.castAsThoughFlash;
+      if (flash === undefined || effect.owner !== player) continue;
+      if (flash.filter === undefined || matchesFilter(this.state, this.registry, cardId, flash.filter, { you: player })) {
+        return true;
       }
     }
     return false;
+  }
+
+  /** "The next [filter] spell you cast this turn can be cast as though it had
+   * flash" (Quicken): `player` has just cast `cardId` (rule 601.2i), so each
+   * of their `next` flash permissions it matches ends — however it was cast,
+   * and all of them at once (Quicken's rulings). */
+  private spendNextSpellFlash(player: PlayerId, cardId: ObjectId): void {
+    const effects = this.state.playerEffects;
+    if (effects === undefined) return;
+    const spent = (e: (typeof effects)[number]): boolean =>
+      e.owner === player &&
+      e.castAsThoughFlash?.next === true &&
+      (e.castAsThoughFlash.filter === undefined ||
+        matchesFilter(this.state, this.registry, cardId, e.castAsThoughFlash.filter, { you: player }));
+    if (effects.some(spent)) this.state.playerEffects = effects.filter((e) => !spent(e));
   }
 
   /** See the `"restrict"` {@link EffectSpec}: `target`'s combat restrictions

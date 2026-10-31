@@ -4383,3 +4383,107 @@ describe("casting abilities given to the spells you cast (grantsToSpells)", () =
     });
   });
 });
+
+describe("flash permissions (castAsThoughFlash for any player, first each turn, this turn, next spell)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads the statics: any player, a filter, the first spell each turn", () => {
+    expect(face("Vernal Equinox", "Enchantment", "Any player may cast creature and enchantment spells as though they had flash.").static[0]).toEqual({
+      affects: { scope: "self" },
+      castAsThoughFlash: { typesAnyOf: ["creature", "enchantment"] },
+      castAsThoughFlashAnyPlayer: true,
+      text: "Any player may cast creature and enchantment spells as though they had flash.",
+    });
+    expect(face("Test Sliver", "Creature — Sliver", "Any player may cast Sliver spells as though they had flash.").static[0]).toMatchObject({
+      castAsThoughFlash: { subtype: "Sliver" },
+      castAsThoughFlashAnyPlayer: true,
+    });
+    const heliod = face("Test Heliod", "Enchantment", "You may cast spells as though they had flash.").static[0];
+    expect(heliod.castAsThoughFlash).toBe(true);
+    expect(heliod.castAsThoughFlashAnyPlayer).toBeUndefined();
+    expect(
+      face("The Blue Spirit", "Legendary Creature — Human Rogue Ally", "You may cast the first creature spell you cast each turn as though it had flash.").static[0],
+    ).toMatchObject({ castAsThoughFlash: { type: "creature" }, castAsThoughFlashFirstEachTurn: true });
+    // Not a spell phrase: left alone.
+    expect(face("Test", "Enchantment", "Any player may cast blue and green spells as though they had flash.").static).toEqual([]);
+  });
+
+  it("reads this turn's permission and the next spell's", () => {
+    const borne = face("Borne Upon a Wind", "Instant", "You may cast spells this turn as though they had flash.\nDraw a card.");
+    expect(borne.complete).toBe(true);
+    expect(borne.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "player-effect", duration: "end-of-turn", castAsThoughFlash: {} }, { kind: "draw", amount: 1 }],
+    });
+    expect(parseSentence("You may cast creature spells this turn as though they had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { type: "creature" } },
+    });
+    expect(parseSentence("The next sorcery spell you cast this turn can be cast as though it had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { type: "sorcery" }, next: true },
+    });
+    expect(parseSentence("The next spell of the chosen type you cast this turn can be cast as though it had flash.", ctx())).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      castAsThoughFlash: { filter: { ofChosenType: true }, next: true },
+    });
+  });
+});
+
+describe("a library search's finds going card by card (search-library's instead)", () => {
+  const spell = (name: string, type_line: string, oracle_text: string) => parseFace({ name, type_line, oracle_text });
+
+  it("reads the split to the graveyard, the choice of hand or graveyard, and a destination read from the card", () => {
+    const orders = spell(
+      "Jarad's Orders",
+      "Sorcery",
+      "Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle.",
+    );
+    expect(orders.complete).toBe(true);
+    expect(orders.effect).toEqual({
+      kind: "search-library",
+      filter: { type: "creature" },
+      destination: "graveyard",
+      min: 0,
+      max: 2,
+      reveal: true,
+      instead: { destination: "hand", pick: "one" },
+    });
+    const guidance = spell(
+      "Dina's Guidance",
+      "Instant",
+      "Search your library for a creature card, reveal it, put it into your hand or graveyard, then shuffle.",
+    );
+    expect(guidance.complete).toBe(true);
+    expect(guidance.effect).toMatchObject({ destination: "hand", instead: { destination: "graveyard", pick: "any" } });
+    const pathmaker = parseFace({
+      name: "Guidelight Pathmaker",
+      type_line: "Artifact — Vehicle",
+      oracle_text:
+        "When this Vehicle enters, you may search your library for an artifact card and reveal it. Put it onto the battlefield if its mana value is 2 or less. Otherwise, put it into your hand. If you search your library this way, shuffle.",
+    });
+    expect(pathmaker.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Search your library for an artifact card?",
+      effect: {
+        kind: "search-library",
+        filter: { type: "artifact" },
+        destination: "hand",
+        min: 0,
+        max: 1,
+        reveal: true,
+        instead: { destination: "battlefield", filter: { manaValue: { op: "lte", n: 2 } }, pick: "all" },
+      },
+    });
+    // Archdruid's Charm's mode: tapped, by the card's type.
+    const charm = parseEffect(
+      "Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.",
+      { targets: [] },
+    );
+    expect(charm.effect?.instead).toEqual({ destination: "battlefield", enterTapped: true, filter: { type: "land" }, pick: "all" });
+  });
+});

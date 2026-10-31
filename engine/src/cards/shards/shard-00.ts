@@ -318,6 +318,7 @@ import _poolGrotagThrasher from "../pool/grotag-thrasher.js";
 import _poolGruulWarChant from "../pool/gruul-war-chant.js";
 import _poolGuardianAutomaton from "../pool/guardian-automaton.js";
 import _poolGuardianZendikon from "../pool/guardian-zendikon.js";
+import _poolGuidelightPathmaker from "../pool/guidelight-pathmaker.js";
 import _poolGustWalker from "../pool/gust-walker.js";
 import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
@@ -844,6 +845,7 @@ import _poolWildSlash from "../pool/wild-slash.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWildbornPreserver from "../pool/wildborn-preserver.js";
 import _poolWindKinRaiders from "../pool/wind-kin-raiders.js";
+import _poolWindingCanyons from "../pool/winding-canyons.js";
 import _poolWindriderWizard from "../pool/windrider-wizard.js";
 import _poolWindwrightMage from "../pool/windwright-mage.js";
 import _poolWitchingWell from "../pool/witching-well.js";
@@ -1193,6 +1195,7 @@ const shard: CardShard = {
     _poolGruulWarChant,
     _poolGuardianAutomaton,
     _poolGuardianZendikon,
+    _poolGuidelightPathmaker,
     _poolGustWalker,
     _poolGwaihirTheWindlord,
     _poolGyreSage,
@@ -1719,6 +1722,7 @@ const shard: CardShard = {
     _poolWildUnraveling,
     _poolWildbornPreserver,
     _poolWindKinRaiders,
+    _poolWindingCanyons,
     _poolWindriderWizard,
     _poolWindwrightMage,
     _poolWitchingWell,

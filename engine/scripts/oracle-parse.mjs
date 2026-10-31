@@ -560,6 +560,20 @@ export function craftMaterials(phrase) {
   return { count, ...(phrase.startsWith("one or more") ? { orMore: true } : {}), filter, text: phrase };
 }
 
+/**
+ * The spells a flash permission names, between "cast" and "spells": nothing
+ * (every spell — `true`), a type phrase ("creature", "Sliver"), or two card
+ * types joined by "and" ("creature and enchantment" — either type). `null`
+ * for anything else.
+ */
+function flashSpellsFilter(words) {
+  if (words === undefined || words === "") return true;
+  const both = /^(\w+) and (\w+)$/.exec(words);
+  if (both) return CARD_TYPES.includes(both[1]) && CARD_TYPES.includes(both[2]) ? { typesAnyOf: [both[1], both[2]] } : null;
+  const filter = parseTypePhrase(words);
+  return filter === null || Object.keys(filter).length === 0 ? null : filter;
+}
+
 export function parseTypePhrase(phrase, { cards = false } = {}) {
   const words = phrase.trim().split(/\s+/);
   const filter = {};
@@ -2133,6 +2147,27 @@ export function parseSentence(sentence, ctx) {
   if (re("until your next turn, your opponents can't cast spells from anywhere other than their hands").test(s)) {
     return { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" };
   }
+  // A flash permission for this turn (rule 601.3b): "You may cast [creature]
+  // spells this turn as though they had flash" (Borne Upon a Wind, Winding
+  // Canyons), and for the next matching spell, "the next sorcery spell / the
+  // next spell of the chosen type you cast this turn can be cast as though
+  // it had flash" (Quicken, Progenitor's Icon — `next`).
+  if ((m = re("you may cast (?:(.+?) )?spells this turn as though they had flash").exec(s))) {
+    const filter = flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return { kind: "player-effect", duration: "end-of-turn", castAsThoughFlash: filter === true ? {} : { filter } };
+    }
+  }
+  if ((m = re("the next (?:(.+?) )?spell( of the chosen type)? you cast this turn can be cast as though it had flash").exec(s))) {
+    const filter = m[2] !== undefined ? (m[1] === undefined ? { ofChosenType: true } : null) : flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return {
+        kind: "player-effect",
+        duration: "end-of-turn",
+        castAsThoughFlash: filter === true ? { next: true } : { filter, next: true },
+      };
+    }
+  }
   if ((m = re(`return (${TARGET}) to its owner's hand`).exec(s))) {
     // A spell is on the stack: "return target spell to its owner's hand"
     // (Unsubstantiate, Take It Back) takes it from there. Without `from`,
@@ -2199,6 +2234,21 @@ export function parseSentence(sentence, ctx) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
     return { kind: "search-library", filter, destination: "hand", min: 0, max: 1, reveal: true };
+  }
+  // "…put it into your hand or graveyard" (Dina's Guidance): the searcher's
+  // choice once it's revealed (`instead`, `pick: "any"`).
+  if ((m = /^search your library for an? (.+?) card, reveal it, put it into your hand or graveyard, then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "search-library",
+      filter,
+      destination: "hand",
+      min: 0,
+      max: 1,
+      reveal: true,
+      instead: { destination: "graveyard", pick: "any" },
+    };
   }
   if ((m = /^search your library for a card, put (?:it|that card) into your hand, then shuffle\.$/i.exec(s))) {
     // "A card", no quality: one must be found while there is one (701.23d).
@@ -2914,7 +2964,7 @@ export function parseEffect(text, outer) {
     // "[Choose a nonland card name.] Search target player's graveyard, hand,
     // and library for all cards with that name and exile them. Then that
     // player shuffles." — two or three sentences, one effect.
-    const searched = searchOthersAt(sentences, i, ctx);
+    const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);
       hints.push({ sentence, effect: searched.effect });
@@ -3432,6 +3482,62 @@ function chooserControlled(spec) {
  * exiled from their hand this way." — `{ effect, used }` (the sentences it
  * took), or null.
  */
+function searchInsteadAt(sentences, i) {
+  // A search whose finds go card by card (`search-library`'s `instead`).
+  // "Search your library for up to two creature cards and reveal them. Put
+  // one into your hand and the other into your graveyard. Then shuffle."
+  // (Jarad's Orders, Fork in the Road): exactly one to the hand.
+  const split = /^search your library for up to two (.+?) cards and reveal them\.$/i.exec(sentences[i] ?? "");
+  if (
+    split !== null &&
+    /^put one into your hand and the other into your graveyard\.$/i.test(sentences[i + 1] ?? "") &&
+    /^then shuffle\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    const filter = parseTypePhrase(split[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      effect: {
+        kind: "search-library",
+        filter,
+        destination: "graveyard",
+        min: 0,
+        max: 2,
+        reveal: true,
+        instead: { destination: "hand", pick: "one" },
+      },
+      used: 3,
+    };
+  }
+  // "[You may s]earch your library for an artifact card and reveal it. Put
+  // it onto the battlefield [tapped] if its mana value is 2 or less / if
+  // it's a land card. Otherwise, put it into your hand. Then shuffle. / If
+  // you search your library this way, shuffle." (Guidelight Pathmaker,
+  // Archdruid's Charm): read from the card, no choice.
+  const one = /^(you may )?search your library for an? (.+?) card and reveal it\.$/i.exec(sentences[i] ?? "");
+  const put = /^put it onto the battlefield( tapped)? if (?:its mana value is (\d+) or less|it's an? (.+?) card)\.$/i.exec(
+    sentences[i + 1] ?? "",
+  );
+  if (one === null || put === null || !/^otherwise, put it into your hand\.$/i.test(sentences[i + 2] ?? "")) return null;
+  const shuffle = sentences[i + 3] ?? "";
+  if (!(one[1] ? /^if you search your library this way, shuffle\.$/i : /^then shuffle\.$/i).test(shuffle)) return null;
+  const filter = parseTypePhrase(one[2], { cards: true });
+  const which = put[2] !== undefined ? { manaValue: { op: "lte", n: Number(put[2]) } } : parseTypePhrase(put[3], { cards: true });
+  if (filter === null || which === null) return null;
+  const search = {
+    kind: "search-library",
+    filter,
+    destination: "hand",
+    min: 0,
+    max: 1,
+    reveal: true,
+    instead: { destination: "battlefield", ...(put[1] ? { enterTapped: true } : {}), filter: which, pick: "all" },
+  };
+  return {
+    effect: one[1] ? { kind: "may", prompt: `Search your library for ${/^[aeiou]/i.test(one[2]) ? "an" : "a"} ${one[2]} card?`, effect: search } : search,
+    used: 4,
+  };
+}
+
 function searchOthersAt(sentences, i, ctx) {
   let at = i;
   let named = null;
@@ -5898,6 +6004,29 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // A flash permission (rule 601.3b): "You may cast spells as though they
+  // had flash" (Heliod, the Warped Eclipse), every player's with "Any
+  // player may cast creature and enchantment spells …" (Vernal Equinox —
+  // `castAsThoughFlashAnyPlayer`), and "You may cast the first creature
+  // spell you cast each turn as though it had flash" (The Blue Spirit —
+  // `castAsThoughFlashFirstEachTurn`).
+  if ((m = /^(You|Any player) may cast (?:(.+?) )?spells as though they had flash\.$/.exec(line))) {
+    const filter = flashSpellsFilter(m[2]);
+    if (filter !== null) {
+      return {
+        affects: { scope: "self" },
+        castAsThoughFlash: filter,
+        ...(m[1] === "Any player" ? { castAsThoughFlashAnyPlayer: true } : {}),
+        text,
+      };
+    }
+  }
+  if ((m = /^You may cast the first (?:(.+?) )?spell you cast each turn as though it had flash\.$/.exec(line))) {
+    const filter = flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return { affects: { scope: "self" }, castAsThoughFlash: filter, castAsThoughFlashFirstEachTurn: true, text };
+    }
+  }
   // A static step skip (rule 614.10): "skip your draw step", "players skip
   // their untap steps", "each player skips their untap step".
   if ((m = /^(Skip your|Players skip their|Each player skips their|Your opponents skip their|Each opponent skips their) (untap|upkeep|draw) steps?\.$/.exec(line))) {

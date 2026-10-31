@@ -14,6 +14,7 @@ import _poolAgentOfTheFates from "../pool/agent-of-the-fates.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
+import _poolAlchemistsRefuge from "../pool/alchemists-refuge.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
 import _poolAnafenzaKinTreeSpirit from "../pool/anafenza-kin-tree-spirit.js";
@@ -886,6 +887,7 @@ const shard: CardShard = {
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
+    _poolAlchemistsRefuge,
     _poolAlienInvasion,
     _poolAmbitionsCost,
     _poolAnafenzaKinTreeSpirit,

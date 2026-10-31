@@ -695,6 +695,12 @@ missing. Re-run `--greedy` for Phase 2's order.
   `static:grant-abilities-to-spells`'s group: `grantsToSpells`' `convoke`, `improvise` (both on
   one spell in one payment) and `prowl`, and an exile permission's `undaunted`; 9 freed, 4
   proving cards.
+- **2026-10-31: flash permissions and search destinations** (two more worktree agents) —
+  `effect:cast-and-activate-restrictions`' flash-grant group (4 keys, 11 proving cards, 3 freed)
+  and `effect:search-destination-by-type` (5 keys, 8 proving cards, 5 freed). 691 freed. From
+  here three local agents run at once, each given two related families, and two cloud sessions
+  build fixed lists of families of their own (combat blocking; graveyard casting), landing on
+  `main` themselves. The freed cards wait for one authoring sweep at the end (the user's call).
 
 ## Rough size
 

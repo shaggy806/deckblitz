@@ -8818,4 +8818,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- A library search's finds, card by card (2026-10-31, need-keys Phase 2) ------
+  preset(
+    "Jarad's Orders: pick which of the two finds goes to your hand",
+    board({
+      you: { bf: ['Swamp*2', 'Forest*2'], hand: ["Jarad's Orders"], lib: ['Grizzly Bears', 'Llanowar Elves'] },
+    }),
+  ),
 ]

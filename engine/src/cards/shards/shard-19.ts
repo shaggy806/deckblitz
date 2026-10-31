@@ -534,6 +534,7 @@ import _poolNazgulBattleMace from "../pool/nazgul-battle-mace.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
+import _poolNeoform from "../pool/neoform.js";
 import _poolNephaliaSeakite from "../pool/nephalia-seakite.js";
 import _poolNetworkTerminal from "../pool/network-terminal.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
@@ -1433,6 +1434,7 @@ const shard: CardShard = {
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
     _poolNekusarTheMindrazer,
+    _poolNeoform,
     _poolNephaliaSeakite,
     _poolNetworkTerminal,
     _poolNewBenalia,

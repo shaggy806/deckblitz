@@ -727,7 +727,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Searching a targeted player's library, or the zones of a target's owner
   // or controller (Extract, Surgical Extraction), takes from them.
   "search-library": (n, v) => {
-    v.touch(n.who?.controllerOfTarget, "help", MINOR);
+    v.touch(typeof n.who === "object" ? n.who.controllerOfTarget : undefined, "help", MINOR);
     const whose = n.whose;
     if (typeof whose !== "object") return;
     v.touch("target" in whose ? whose.target : "controllerOfTarget" in whose ? whose.controllerOfTarget : whose.ownerOfTarget, "harm", MINOR);

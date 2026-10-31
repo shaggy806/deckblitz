@@ -1858,6 +1858,19 @@ export interface StaticAbility {
    * Eclipse) — every spell (`true`) or ones matching a filter ("creature
    * spells"), for this permanent's controller. */
   readonly castAsThoughFlash?: true | CardFilter;
+  /** `castAsThoughFlash` for **every** player, not only this permanent's
+   * controller — "**Any player** may cast creature and enchantment spells as
+   * though they had flash" (Vernal Equinox, Quick Sliver, Tidal Barracuda).
+   * The filter is still read from this permanent's controller's side. */
+  readonly castAsThoughFlashAnyPlayer?: true;
+  /** `castAsThoughFlash` for only the first spell matching it that its
+   * caster casts each turn — "the first creature spell you cast each turn
+   * … can be cast as though it had flash" (Radagast of Rhosgobel, The Blue
+   * Spirit). Spells cast earlier this turn count, even ones cast before
+   * this permanent arrived (`PlayerState.spellsCastThisTurnAs`, each read
+   * as it was cast — Radagast's ruling), so a matching spell already cast
+   * this turn leaves nothing to grant. */
+  readonly castAsThoughFlashFirstEachTurn?: true;
   /** "Each player may attack only the nearest opponent in the last chosen
    * direction and planeswalkers controlled by that player" (Pramikon, Sky
    * Rampart, with `chooseOnEnter: ["left", "right"]`). A rule for every

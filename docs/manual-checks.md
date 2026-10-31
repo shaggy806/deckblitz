@@ -5888,3 +5888,9 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Siege Wurm from your hand.
 - **Expect:** The bar reads "Siege Wurm: convoke or improvise — tap up to 7 creature or artifacts to help pay". Click "Convoke and improvise 6" (the Elves, the Ornithopters and the Statuary, chosen for you): the last {1} comes from a Wastes and the Wurm resolves.
 
+
+## A library search's finds, card by card (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Jarad's Orders: pick which of the two finds goes to your hand
+- **Do:** Cast Jarad's Orders, pick Grizzly Bears and Llanowar Elves, then pick Llanowar Elves in the second popup.
+- **Expect:** The second popup says "Choose one to put into your hand — the other goes into your graveyard" and offers just the two finds. Llanowar Elves goes to your hand, Grizzly Bears to your graveyard, and your library is shuffled once.

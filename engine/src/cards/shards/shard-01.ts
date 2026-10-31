@@ -512,6 +512,7 @@ import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
+import _poolProgenitorsIcon from "../pool/progenitors-icon.js";
 import _poolPrognosticSphinx from "../pool/prognostic-sphinx.js";
 import _poolPropheticRavings from "../pool/prophetic-ravings.js";
 import _poolProtectServe from "../pool/protect-serve.js";
@@ -561,6 +562,7 @@ import _poolRiveteersCharm from "../pool/riveteers-charm.js";
 import _poolRoamingGhostlight from "../pool/roaming-ghostlight.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
 import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
+import _poolRootweaverDruid from "../pool/rootweaver-druid.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRowansBattleguard from "../pool/rowans-battleguard.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolPrismaticLens,
     _poolPrivateEye,
     _poolPrizefighterConstruct,
+    _poolProgenitorsIcon,
     _poolPrognosticSphinx,
     _poolPropheticRavings,
     _poolProtectServe,
@@ -1393,6 +1396,7 @@ const shard: CardShard = {
     _poolRoamingGhostlight,
     _poolRockyTarPit,
     _poolRoomOfRefuge,
+    _poolRootweaverDruid,
     _poolRottingFensnake,
     _poolRowansBattleguard,
     _poolRummagingWizard,
