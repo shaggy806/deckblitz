@@ -44,6 +44,7 @@ import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
 import _poolAssembledAlphas from "../pool/assembled-alphas.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
 import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
+import _poolAuraGraft from "../pool/aura-graft.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
 import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
@@ -974,6 +975,7 @@ const shard: CardShard = {
     _poolAssembledAlphas,
     _poolAtlaPalaniNestTender,
     _poolAugustaDeanOfOrder,
+    _poolAuraGraft,
     _poolAuraOfSilence,
     _poolAuramancer,
     _poolAutarchMammoth,

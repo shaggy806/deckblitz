@@ -612,6 +612,7 @@ import _poolRollickOfAbandon from "../pool/rollick-of-abandon.js";
 import _poolRootOut from "../pool/root-out.js";
 import _poolRotfeasterMaggot from "../pool/rotfeaster-maggot.js";
 import _poolRovingKeep from "../pool/roving-keep.js";
+import _poolRuneOfSpeed from "../pool/rune-of-speed.js";
 import _poolRustMonster from "../pool/rust-monster.js";
 import _poolRuthlessPredation from "../pool/ruthless-predation.js";
 import _poolSabertoothAlleyCat from "../pool/sabertooth-alley-cat.js";
@@ -1483,6 +1484,7 @@ const shard: CardShard = {
     _poolRootOut,
     _poolRotfeasterMaggot,
     _poolRovingKeep,
+    _poolRuneOfSpeed,
     _poolRustMonster,
     _poolRuthlessPredation,
     _poolSabertoothAlleyCat,

@@ -56,6 +56,7 @@ import _poolBifurcate from "../pool/bifurcate.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
+import _poolBitterheartWitch from "../pool/bitterheart-witch.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlazingSpecter from "../pool/blazing-specter.js";
 import _poolBlightwingBandit from "../pool/blightwing-bandit.js";
@@ -482,6 +483,7 @@ import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
+import _poolONaginata from "../pool/o-naginata.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOffBalance from "../pool/off-balance.js";
@@ -913,6 +915,7 @@ const shard: CardShard = {
     _poolBighornerRancher,
     _poolBindingAgony,
     _poolBirdMaiden,
+    _poolBitterheartWitch,
     _poolBlackWidowDoubleAgent,
     _poolBlazingSpecter,
     _poolBlightwingBandit,
@@ -1339,6 +1342,7 @@ const shard: CardShard = {
     _poolNineTailWhiteFox,
     _poolNovelNunchaku,
     _poolNykthosShrineToNyx,
+    _poolONaginata,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
     _poolOffBalance,

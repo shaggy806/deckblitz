@@ -279,6 +279,7 @@ import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
+import _poolGateSmasher from "../pool/gate-smasher.js";
 import _poolGateToTheAether from "../pool/gate-to-the-aether.js";
 import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
 import _poolGenesis from "../pool/genesis.js";
@@ -1116,6 +1117,7 @@ const shard: CardShard = {
     _poolGaleriderSliver,
     _poolGalvanicGiant,
     _poolGamble,
+    _poolGateSmasher,
     _poolGateToTheAether,
     _poolGenasiEnforcers,
     _poolGenesis,

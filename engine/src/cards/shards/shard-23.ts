@@ -539,6 +539,7 @@ import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
 import _poolPortentTracker from "../pool/portent-tracker.js";
+import _poolPreWarFormalwear from "../pool/pre-war-formalwear.js";
 import _poolPrickleboar from "../pool/prickleboar.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
@@ -1413,6 +1414,7 @@ const shard: CardShard = {
     _poolPollutedMire,
     _poolPongify,
     _poolPortentTracker,
+    _poolPreWarFormalwear,
     _poolPrickleboar,
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,

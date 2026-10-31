@@ -703,6 +703,7 @@ import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
+import _poolStonehewerGiant from "../pool/stonehewer-giant.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormSculptor from "../pool/storm-sculptor.js";
 import _poolStormclawRager from "../pool/stormclaw-rager.js";
@@ -1582,6 +1583,7 @@ const shard: CardShard = {
     _poolSteelburrChampion,
     _poolSteelshaperApprentice,
     _poolStickyFingers,
+    _poolStonehewerGiant,
     _poolStonybrookBanneret,
     _poolStormSculptor,
     _poolStormclawRager,

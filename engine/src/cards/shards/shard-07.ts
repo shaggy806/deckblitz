@@ -605,6 +605,7 @@ import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRottingGiant from "../pool/rotting-giant.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
+import _poolRuneOfMortality from "../pool/rune-of-mortality.js";
 import _poolRunoStromkirk from "../pool/runo-stromkirk.js";
 import _poolRust from "../pool/rust.js";
 import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js";
@@ -1491,6 +1492,7 @@ const shard: CardShard = {
     _poolRosemaneCentaur,
     _poolRottingGiant,
     _poolRoyalTrooper,
+    _poolRuneOfMortality,
     _poolRunoStromkirk,
     _poolRust,
     _poolSHIELDDeploymentDrone,

@@ -506,6 +506,7 @@ import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOliviaVoldaren from "../pool/olivia-voldaren.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
+import _poolOneLastJob from "../pool/one-last-job.js";
 import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
@@ -1377,6 +1378,7 @@ const shard: CardShard = {
     _poolOgreErrant,
     _poolOliviaVoldaren,
     _poolOmnathLocusOfTheRoil,
+    _poolOneLastJob,
     _poolOnward,
     _poolOpportunity,
     _poolOpt,

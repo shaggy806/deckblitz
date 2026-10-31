@@ -596,6 +596,7 @@ import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
 import _poolRottingRegisaur from "../pool/rotting-regisaur.js";
 import _poolRuinationGuide from "../pool/ruination-guide.js";
+import _poolRuneOfFlight from "../pool/rune-of-flight.js";
 import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
@@ -1439,6 +1440,7 @@ const shard: CardShard = {
     _poolRottingLegion,
     _poolRottingRegisaur,
     _poolRuinationGuide,
+    _poolRuneOfFlight,
     _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
