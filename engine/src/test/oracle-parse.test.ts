@@ -4660,3 +4660,31 @@ describe("restrict over a set of creatures this turn (controlledByTarget, rule 6
     });
   });
 });
+
+describe("prevention shields: to you, and divided among any number of targets (rules 601.2d, 615.7)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads the next N (combat) damage to you as a damage-rule with an amount", () => {
+    const conservator = face("Conservator", "Artifact", "{3}, {T}: Prevent the next 2 damage that would be dealt to you this turn.");
+    expect(conservator.activated[0].effect).toEqual({ kind: "damage-rule", to: { players: "you" }, amount: 2 });
+    const griffin = face(
+      "Decorated Griffin",
+      "Creature — Griffin",
+      "Flying\n{1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.",
+    );
+    expect(griffin.activated[0].effect).toEqual({ kind: "damage-rule", to: { players: "you" }, amount: 1, combat: true });
+  });
+
+  it("reads a divided prevention as shields over an any-number group", () => {
+    const remedy = face(
+      "Remedy",
+      "Instant",
+      "Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.",
+    );
+    expect(remedy.complete).toBe(true);
+    expect(remedy.targets).toEqual([{ kind: "any-number", of: "any-target", max: 5 }]);
+    expect(remedy.divided).toEqual({ total: 5, slot: 0, of: "damage to prevent" });
+    expect(remedy.effect).toEqual({ kind: "prevent-damage-divided", from: 0 });
+  });
+});

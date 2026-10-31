@@ -527,6 +527,7 @@ import _poolReclusiveTaxidermist from "../pool/reclusive-taxidermist.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolReefPirates from "../pool/reef-pirates.js";
+import _poolRemedy from "../pool/remedy.js";
 import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolReprocess from "../pool/reprocess.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
@@ -1362,6 +1363,7 @@ const shard: CardShard = {
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
     _poolReefPirates,
+    _poolRemedy,
     _poolRepelTheDarkness,
     _poolReprocess,
     _poolRepudiateReplicate,

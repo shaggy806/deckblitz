@@ -1629,6 +1629,18 @@ export function parseSentence(sentence, ctx) {
   if (ctx?.divided !== undefined) {
     const d = dividedDamageOf(s, ctx);
     if (d !== undefined) return d;
+    // "Prevent the next 5 damage that would be dealt this turn to any number
+    // of targets, divided as you choose" (Remedy — rules 601.2d, 615.7): a
+    // shield per target of an `any-number` group, its share of the total.
+    const p = /^Prevent the next (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) damage that would be dealt this turn to any number of targets, divided as you choose\.$/.exec(s);
+    if (p !== null) {
+      const total = numberOf(p[1].toLowerCase());
+      if (typeof total === "number") {
+        const slot = ctx.target({ kind: "any-number", of: "any-target", max: total });
+        ctx.divided.value = { total, slot, of: "damage to prevent" };
+        return { kind: "prevent-damage-divided", from: slot };
+      }
+    }
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
@@ -2508,6 +2520,13 @@ export function parseSentence(sentence, ctx) {
       ...(untilEndOfTurn ? { until: "end-of-turn" } : {}),
       ...(thisAbility ? { exceptions: { thisAbility: THIS_ABILITY } } : {}),
     };
+  }
+  // An untargeted shield on the controller (rule 615.7 — `damage-rule`'s
+  // amount): Conservator's "prevent the next 2 damage that would be dealt to
+  // you this turn", Decorated Griffin's "… combat damage …", Festival of the
+  // Guildpact's X.
+  if ((m = re(`prevent the next ${N} (combat )?damage that would be dealt to you this turn`).exec(s))) {
+    return { kind: "damage-rule", to: { players: "you" }, amount: amount(m[1]), ...(m[2] !== undefined ? { combat: true } : {}) };
   }
   if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };

@@ -5210,6 +5210,18 @@ export type EffectSpec =
       readonly counter: string;
     }
   | {
+      /** "Prevent the next N damage that would be dealt this turn to any
+       * number of targets, divided as you choose" (Remedy, Embolden — rules
+       * 601.2d, 615.7): each target of the group starting at slot `from`
+       * gets a shield of its share of the `divided` total, at least 1 each
+       * (`prevent-damage`'s, on `GameState.preventionShields`). A target gone
+       * illegal gets none, and its share goes nowhere (608.2b). Give the
+       * `divided` `of: "damage to prevent"` for the division prompt. */
+      readonly kind: "prevent-damage-divided";
+      readonly from: number;
+      readonly combatOnly?: boolean;
+    }
+  | {
       /** "Shuffle your library" on its own (Ponder's "You may shuffle", inside
        * a `may`): the effect's controller shuffles (rule 701.24). */
       readonly kind: "shuffle-library";
@@ -13748,6 +13760,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     }
+    case "prevent-damage-divided":
+      ctx.division.forEach((amount, i) => {
+        const target = ctx.targets[spec.from + i];
+        if (target !== undefined && amount > 0) ctx.preventDamage(target, amount, spec.combatOnly ?? false);
+      });
+      return;
     case "prevent-damage": {
       const ref = resolveEffectTarget(spec.target, ctx);
       if (ref === undefined) return;

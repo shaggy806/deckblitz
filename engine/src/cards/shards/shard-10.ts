@@ -645,6 +645,7 @@ import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
 import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
 import _poolShefetMonitor from "../pool/shefet-monitor.js";
+import _poolShieldOfTheAges from "../pool/shield-of-the-ages.js";
 import _poolShieldedAetherThief from "../pool/shielded-aether-thief.js";
 import _poolShimmerwingChimera from "../pool/shimmerwing-chimera.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
@@ -1515,6 +1516,7 @@ const shard: CardShard = {
     _poolShadowspear,
     _poolShamblingCieth,
     _poolShefetMonitor,
+    _poolShieldOfTheAges,
     _poolShieldedAetherThief,
     _poolShimmerwingChimera,
     _poolShineshadowSnarl,

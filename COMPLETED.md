@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: prevention divided among targets, and the next N damage to you**
+  (2026-10-31; `effect:prevention-divided`, `effect:prevent-next-n-damage-to-you`) — the
+  `prevent-damage-divided` effect (601.2d, 615.7); the second was already `damage-rule`'s
+  `players: "you"` with an amount, only marked; 11 freed (5 authored here). Remedy, Embolden,
+  Conservator, Shield of the Ages, Decorated Griffin.
 - **Need-keys Phase 2: a restriction over a target player's creatures, or the ones there now**
   (2026-10-31; `effect:cant-be-blocked-rule-this-turn`, `effect:restrict-controlled-by-target`,
   `effect:restrict-each-matching-at-resolution`, `effect:restrict-rule-for-player`) — `restrict`'s

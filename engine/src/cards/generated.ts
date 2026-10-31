@@ -4359,6 +4359,7 @@ import _poolConsecrateConsume from "./pool/consecrate-consume.js";
 import _poolConsecrate from "./pool/consecrate.js";
 import _poolConsecratedByBlood from "./pool/consecrated-by-blood.js";
 import _poolConsecratedSphinx from "./pool/consecrated-sphinx.js";
+import _poolConservator from "./pool/conservator.js";
 import _poolConservatory from "./pool/conservatory.js";
 import _poolConsider from "./pool/consider.js";
 import _poolConsignOblivion from "./pool/consign-oblivion.js";
@@ -5385,6 +5386,7 @@ import _poolDecompose from "./pool/decompose.js";
 import _poolDecomposition from "./pool/decomposition.js";
 import _poolDeconstruct from "./pool/deconstruct.js";
 import _poolDecoratedChampion from "./pool/decorated-champion.js";
+import _poolDecoratedGriffin from "./pool/decorated-griffin.js";
 import _poolDecoyPloy from "./pool/decoy-ploy.js";
 import _poolDecreeOfJustice from "./pool/decree-of-justice.js";
 import _poolDecreeOfPain from "./pool/decree-of-pain.js";
@@ -6875,6 +6877,7 @@ import _poolEmblemOfTheWarmind from "./pool/emblem-of-the-warmind.js";
 import _poolEmbodimentOfFury from "./pool/embodiment-of-fury.js";
 import _poolEmbodimentOfInsight from "./pool/embodiment-of-insight.js";
 import _poolEmbodimentOfSpring from "./pool/embodiment-of-spring.js";
+import _poolEmbolden from "./pool/embolden.js";
 import _poolEmbraalBruiser from "./pool/embraal-bruiser.js";
 import _poolEmbraalGearSmasher from "./pool/embraal-gear-smasher.js";
 import _poolEmbraceOblivion from "./pool/embrace-oblivion.js";
@@ -18192,6 +18195,7 @@ import _poolRelmsSketching from "./pool/relms-sketching.js";
 import _poolReluctantDounguard from "./pool/reluctant-dounguard.js";
 import _poolReluctantRoleModel from "./pool/reluctant-role-model.js";
 import _poolRemand from "./pool/remand.js";
+import _poolRemedy from "./pool/remedy.js";
 import _poolRememberTheFallen from "./pool/remember-the-fallen.js";
 import _poolReminisce from "./pool/reminisce.js";
 import _poolRemnantElemental from "./pool/remnant-elemental.js";
@@ -20208,6 +20212,7 @@ import _poolShieldMare from "./pool/shield-mare.js";
 import _poolShieldMate from "./pool/shield-mate.js";
 import _poolShieldOfDutyAndReason from "./pool/shield-of-duty-and-reason.js";
 import _poolShieldOfKaldra from "./pool/shield-of-kaldra.js";
+import _poolShieldOfTheAges from "./pool/shield-of-the-ages.js";
 import _poolShieldOfTheOversoul from "./pool/shield-of-the-oversoul.js";
 import _poolShieldOfTheRealm from "./pool/shield-of-the-realm.js";
 import _poolShieldOfTheRighteous from "./pool/shield-of-the-righteous.js";
@@ -31858,6 +31863,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConsecrate,
   _poolConsecratedByBlood,
   _poolConsecratedSphinx,
+  _poolConservator,
   _poolConservatory,
   _poolConsider,
   _poolConsignOblivion,
@@ -32884,6 +32890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDecomposition,
   _poolDeconstruct,
   _poolDecoratedChampion,
+  _poolDecoratedGriffin,
   _poolDecoyPloy,
   _poolDecreeOfJustice,
   _poolDecreeOfPain,
@@ -34374,6 +34381,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmbodimentOfFury,
   _poolEmbodimentOfInsight,
   _poolEmbodimentOfSpring,
+  _poolEmbolden,
   _poolEmbraalBruiser,
   _poolEmbraalGearSmasher,
   _poolEmbraceOblivion,
@@ -45691,6 +45699,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReluctantDounguard,
   _poolReluctantRoleModel,
   _poolRemand,
+  _poolRemedy,
   _poolRememberTheFallen,
   _poolReminisce,
   _poolRemnantElemental,
@@ -47707,6 +47716,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShieldMate,
   _poolShieldOfDutyAndReason,
   _poolShieldOfKaldra,
+  _poolShieldOfTheAges,
   _poolShieldOfTheOversoul,
   _poolShieldOfTheRealm,
   _poolShieldOfTheRighteous,
@@ -59370,6 +59380,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/consecrate": _poolConsecrate,
   "pool/consecrated-by-blood": _poolConsecratedByBlood,
   "pool/consecrated-sphinx": _poolConsecratedSphinx,
+  "pool/conservator": _poolConservator,
   "pool/conservatory": _poolConservatory,
   "pool/consider": _poolConsider,
   "pool/consign-oblivion": _poolConsignOblivion,
@@ -60396,6 +60407,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/decomposition": _poolDecomposition,
   "pool/deconstruct": _poolDeconstruct,
   "pool/decorated-champion": _poolDecoratedChampion,
+  "pool/decorated-griffin": _poolDecoratedGriffin,
   "pool/decoy-ploy": _poolDecoyPloy,
   "pool/decree-of-justice": _poolDecreeOfJustice,
   "pool/decree-of-pain": _poolDecreeOfPain,
@@ -61886,6 +61898,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/embodiment-of-fury": _poolEmbodimentOfFury,
   "pool/embodiment-of-insight": _poolEmbodimentOfInsight,
   "pool/embodiment-of-spring": _poolEmbodimentOfSpring,
+  "pool/embolden": _poolEmbolden,
   "pool/embraal-bruiser": _poolEmbraalBruiser,
   "pool/embraal-gear-smasher": _poolEmbraalGearSmasher,
   "pool/embrace-oblivion": _poolEmbraceOblivion,
@@ -73203,6 +73216,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reluctant-dounguard": _poolReluctantDounguard,
   "pool/reluctant-role-model": _poolReluctantRoleModel,
   "pool/remand": _poolRemand,
+  "pool/remedy": _poolRemedy,
   "pool/remember-the-fallen": _poolRememberTheFallen,
   "pool/reminisce": _poolReminisce,
   "pool/remnant-elemental": _poolRemnantElemental,
@@ -75219,6 +75233,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shield-mate": _poolShieldMate,
   "pool/shield-of-duty-and-reason": _poolShieldOfDutyAndReason,
   "pool/shield-of-kaldra": _poolShieldOfKaldra,
+  "pool/shield-of-the-ages": _poolShieldOfTheAges,
   "pool/shield-of-the-oversoul": _poolShieldOfTheOversoul,
   "pool/shield-of-the-realm": _poolShieldOfTheRealm,
   "pool/shield-of-the-righteous": _poolShieldOfTheRighteous,

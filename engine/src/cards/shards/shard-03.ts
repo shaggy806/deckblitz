@@ -107,6 +107,7 @@ import _poolConcordantCrossroads from "../pool/concordant-crossroads.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolConfrontThePast from "../pool/confront-the-past.js";
+import _poolConservator from "../pool/conservator.js";
 import _poolConsulateTurret from "../pool/consulate-turret.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
@@ -183,6 +184,7 @@ import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmbalmedAscendant from "../pool/embalmed-ascendant.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
+import _poolEmbolden from "../pool/embolden.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
@@ -891,6 +893,7 @@ const shard: CardShard = {
     _poolCondemn,
     _poolCondescend,
     _poolConfrontThePast,
+    _poolConservator,
     _poolConsulateTurret,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
@@ -967,6 +970,7 @@ const shard: CardShard = {
     _poolElvishRejuvenator,
     _poolEmbalmedAscendant,
     _poolEmberwildeCaptain,
+    _poolEmbolden,
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,

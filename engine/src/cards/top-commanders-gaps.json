@@ -770,7 +770,9 @@
   "effect:cant-be-blocked-rule-this-turn",
   "effect:restrict-controlled-by-target",
   "effect:restrict-each-matching-at-resolution",
-  "effect:restrict-rule-for-player"
+  "effect:restrict-rule-for-player",
+  "effect:prevent-next-n-damage-to-you",
+  "effect:prevention-divided"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

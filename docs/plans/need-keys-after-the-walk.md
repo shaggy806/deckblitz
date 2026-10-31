@@ -720,6 +720,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   `static:combat-restriction-extensions`' next group, on the restriction code of the earlier
   combat families: `restrict`'s `controlledByTarget`, `exceptTarget` and `asItResolves` (4 keys,
   12 freed, 6 proving cards).
+- **2026-10-31: prevention divided, and the next N damage to you** (the same session) —
+  `effect:prevention-divided`: the `prevent-damage-divided` effect, a shield per target of its
+  share (601.2d, 615.7); `effect:prevent-next-n-damage-to-you` was already `damage-rule`'s
+  `players: "you"` with an amount (2 keys, 11 freed, 5 proving cards).
 
 ## Rough size
 
