@@ -557,6 +557,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // aims at nothing.
   manifest: none,
   "manifest-dread": none,
+  // Turning a creature face down makes it a vanilla 2/2 (or a Cyberman) that
+  // its controller can't turn back without a morph cost: removal-like
+  // (Cyber Conversion, Backslide); a morph's own "turn this face down" aims
+  // at itself, to be turned up again (Wall of Deceit).
+  "turn-face-down": (n, v) => v.touch(n.target, "harm", MAJOR),
   "create-token": (n, v) => v.touch(n.who === "target-controller" ? 0 : undefined, "help", MINOR),
   // A copy goes to the copied permanent's controller unless the card says
   // it's yours (Hate Mirage).

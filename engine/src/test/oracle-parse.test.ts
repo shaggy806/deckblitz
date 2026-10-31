@@ -4097,3 +4097,63 @@ describe("damage divided as you choose (rule 601.2d), its total fixed or read as
     expect(bare.activated[0].divided).toBeUndefined();
   });
 });
+
+describe("face down by an effect (rule 708.2)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads turning face down, with the characteristics the next sentence lists", () => {
+    const conversion = face("Cyber Conversion", "Instant", "Turn target creature face down. It's a 2/2 Cyberman artifact creature.");
+    expect(conversion.complete).toBe(true);
+    expect(conversion.effect).toEqual({ kind: "turn-face-down", target: 0, as: "2/2 Cyberman artifact creature" });
+    expect(conversion.targets).toEqual(["creature"]);
+    const wall = face("Wall of Deceit", "Creature — Wall", "{3}: Turn this creature face down.");
+    expect(wall.activated[0].effect).toEqual({ kind: "turn-face-down", target: "source" });
+    // A listing the engine has no definition for stays to author.
+    expect(face("Test Horror", "Instant", "Turn target creature face down. It's a 2/2 Horror creature.").complete).toBe(false);
+  });
+
+  it("reads entering face down: a dying creature returned, cards from hand put", () => {
+    const yedora = face(
+      "Yedora, Grave Gardener",
+      "Legendary Creature — Treefolk Druid",
+      "Whenever another nontoken creature you control dies, you may return it to the battlefield face down under its owner's control. It's a Forest land. (It has no other types or abilities.)",
+    );
+    expect(yedora.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Return it to the battlefield face down under its owner's control?",
+      effect: { kind: "put-onto-battlefield", target: "trigger-object", faceDown: "Forest land" },
+    });
+    const tezzeret = parseEffect("Put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures.", ctx());
+    expect(tezzeret.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 99,
+      destination: "battlefield",
+      leftover: "stay",
+      enterAs: { faceDown: "5/5 artifact creature" },
+    });
+  });
+
+  it("reads manifest from another player's library, and can't be turned face up", () => {
+    const amalgam = face(
+      "Thieving Amalgam",
+      "Creature — Ape Snake",
+      "At the beginning of each opponent's upkeep, you manifest the top card of that player's library.",
+    );
+    expect(amalgam.triggered[0].effect).toEqual({ kind: "manifest", who: "you", from: "active-player" });
+    const scream = face(
+      "Unable to Scream",
+      "Enchantment — Aura",
+      "Enchant creature\nAs long as enchanted creature is face down, it can't be turned face up.",
+    );
+    expect(scream.static[0]).toMatchObject({ affects: { scope: "attached" }, restrictions: ["cant-turn-face-up"] });
+    const watchdog = face("Karlov Watchdog", "Creature — Dog", "Permanents your opponents control can't be turned face up during your turn.");
+    expect(watchdog.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { controlledBy: "opponent" } },
+      restrictions: ["cant-turn-face-up"],
+      condition: { kind: "your-turn" },
+    });
+  });
+});

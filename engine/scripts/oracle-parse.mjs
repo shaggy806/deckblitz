@@ -2032,6 +2032,27 @@ export function parseSentence(sentence, ctx) {
     if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
     return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
   }
+  // Turning face down (rule 708.2a — the `turn-face-down` effect): "turn ~
+  // face down" (Wall of Deceit), "turn target creature face down" (Cyber
+  // Conversion, whose "It's a 2/2 Cyberman artifact creature" is
+  // `faceDownAsAt`'s), one target, "up to one" or "any number of" them.
+  if ((m = /^turn (.+?) face down\.$/i.exec(s)) && !/^(?:it|that \w+|them|those \w+)$/i.test(m[1])) {
+    const who = m[1];
+    if (/^~$/.test(who)) return { kind: "turn-face-down", target: "source" };
+    const got = quantifiedSlots(who, ctx);
+    if (got === undefined) return null;
+    const one = (target) => ({ kind: "turn-face-down", target });
+    if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
+    return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
+  }
+  // Manifest (rule 701.40a): "manifest the top card of your library", and
+  // "(you) manifest the top card of that player's library" — another
+  // player's library (Thieving Amalgam, Orochi Soul-Reaver), when the
+  // trigger names that player.
+  if (re("manifest the top card of your library").test(s)) return { kind: "manifest", who: "you" };
+  if (ctx.thatPlayer !== undefined && re("(?:you )?manifest the top card of that player's library").test(s)) {
+    return { kind: "manifest", who: "you", from: ctx.thatPlayer };
+  }
   // "Choose up to one target creature, then airbend all other creatures"
   // (Avatar's Wrath): every other one, together.
   if ((m = /^choose up to one target (\w+), then airbend all other (\w+)\.$/i.exec(s)) && singularTarget(m[2]) === m[1]) {
@@ -2667,6 +2688,26 @@ export function parseSentence(sentence, ctx) {
     if (re("it explores").test(s)) return { kind: "explore", target: it };
     // "He phases out" (Kaito Shizuki), "it phases out" (rule 702.26b).
     if (re("(?:it|he|she) phases out").test(s)) return { kind: "phase-out", target: it };
+    // "Return it to the battlefield face down under your control" (Ashcloud
+    // Phoenix), "… under your control face down and tapped" (Missy), "…
+    // face down under its owner's control" (Yedora): entering face down
+    // (rule 708.3), with what it is (708.2) from `faceDownAsAt`'s next
+    // sentence. A card in a graveyard or exile only — the trigger's object.
+    if (
+      it === "trigger-object" &&
+      (m = re("return it to the battlefield (?:under (your|its owner's) control )?face down( and tapped)?(?: under (your|its owner's) control)?").exec(s)) &&
+      !(m[1] !== undefined && m[3] !== undefined)
+    ) {
+      const whose = (m[1] ?? m[3] ?? "its owner's").toLowerCase();
+      return {
+        kind: "put-onto-battlefield",
+        target: it,
+        ...(whose === "your" ? { underYourControl: true } : {}),
+        ...(m[2] !== undefined ? { enterTapped: true } : {}),
+        faceDown: true,
+      };
+    }
+    if (re("turn it face down").test(s)) return { kind: "turn-face-down", target: it };
   }
 
   // Everything else that's a whole instruction by itself.
@@ -2812,6 +2853,15 @@ export function parseEffect(text, outer) {
       parsed.push(piles.effect);
       hints.push({ sentence, effect: piles.effect });
       skip = piles.used - 1;
+      continue;
+    }
+    // Face down with what it is: "Turn target creature face down. It's a 2/2
+    // Cyberman artifact creature." — two sentences, one effect.
+    const faceDownAs = faceDownAsAt(sentences, i, ctx);
+    if (faceDownAs !== null) {
+      parsed.push(faceDownAs.effect);
+      hints.push({ sentence, effect: faceDownAs.effect });
+      skip = faceDownAs.used - 1;
       continue;
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
@@ -4985,7 +5035,64 @@ function playerStateIf(clause, triggers) {
 function thatPlayerOf(triggers) {
   if (triggers.every((t) => t.on === "step-begins" && t.who === "any")) return "active-player";
   if (triggers.every((t) => t.on === "attacks")) return "trigger-player";
+  // "At the beginning of each opponent's upkeep, … that player's library"
+  // (Thieving Amalgam); "deal combat damage to a player, … that player's
+  // library" (Orochi Soul-Reaver).
+  if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
+  if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true)) return "trigger-player";
+  if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
   return undefined;
+}
+
+/** The characteristics a face-down permanent has when its effect lists them
+ * (rule 708.2), by the words of the sentence that lists them — the engine's
+ * `FaceDownAs`. */
+const FACE_DOWN_AS = {
+  "2/2 cyberman artifact creature": "2/2 Cyberman artifact creature",
+  "5/5 artifact creature": "5/5 artifact creature",
+  "forest land": "Forest land",
+};
+
+/**
+ * "Turn target creature face down. It's a 2/2 Cyberman artifact creature."
+ * (Cyber Conversion), "… return it to the battlefield face down … It's a
+ * Forest land." (Yedora), "Put any number of cards from your hand onto the
+ * battlefield face down. They're 5/5 artifact creatures." (Tezzeret): the
+ * face-down effect of the first sentence, with the characteristics the
+ * second lists (rule 708.2 — `turn-face-down`'s `as`, a `put-onto-
+ * battlefield`'s or look-and-choose's `faceDown`). `null` unless the second
+ * sentence lists one the engine has.
+ */
+function faceDownAsAt(sentences, i, ctx) {
+  const listed = /^(?:it's|they're) (?:an? )?(.+?)\.$/i.exec(sentences[i + 1] ?? "");
+  if (listed === null || !/face down/i.test(sentences[i])) return null;
+  const words = listed[1].toLowerCase().replace(/creatures$/, "creature");
+  const as = FACE_DOWN_AS[words];
+  if (as === undefined) return null;
+  // "Put any number of cards from your hand onto the battlefield face down."
+  const before = ctx.targets.length;
+  let effect = /^put any number of cards from your hand onto the battlefield face down\.$/i.test(sentences[i])
+    ? { kind: "look-and-choose", zone: "hand", min: 0, max: 99, destination: "battlefield", leftover: "stay", enterAs: { faceDown: true } }
+    : parseSentence(sentences[i], ctx);
+  // A sentence that isn't one of these leaves no target slot behind for the
+  // plain parse that follows.
+  const fail = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  if (effect === null || containsUndefined(effect)) return fail();
+  const withAs = (e) => {
+    if (e.kind === "turn-face-down") return { ...e, as };
+    if (e.kind === "put-onto-battlefield" && e.faceDown === true) return { ...e, faceDown: as };
+    if (e.kind === "look-and-choose" && e.enterAs?.faceDown === true) return { ...e, enterAs: { ...e.enterAs, faceDown: as } };
+    if (e.kind === "may") {
+      const inner = withAs(e.effect);
+      return inner === null ? null : { ...e, effect: inner };
+    }
+    return null;
+  };
+  effect = withAs(effect);
+  return effect === null ? fail() : { effect, used: 2 };
 }
 
 function itOf(triggers) {
@@ -5733,6 +5840,22 @@ function parseStatic(line, text) {
   // (rule 502.3 — Tractor Beam, Watery Grasp).
   if (/^(?:Enchanted|Equipped) (?:creature|permanent|land|artifact) doesn't untap during its controller's untap step\.$/.test(line)) {
     return { affects: { scope: "attached" }, restrictions: ["doesnt-untap"], text };
+  }
+  // "Can't be turned face up" (rule 708.7 — the `cant-turn-face-up`
+  // restriction): Unable to Scream's "as long as enchanted creature is face
+  // down, it can't be turned face up" (only a face-down one could be),
+  // Karlov Watchdog's "permanents your opponents control can't be turned
+  // face up during your turn".
+  if (/^As long as enchanted creature is face down, it can't be turned face up\.$/.test(line)) {
+    return { affects: { scope: "attached" }, restrictions: ["cant-turn-face-up"], text };
+  }
+  if (/^Permanents your opponents control can't be turned face up during your turn\.$/.test(line)) {
+    return {
+      affects: { scope: "filter", filter: { controlledBy: "opponent" } },
+      restrictions: ["cant-turn-face-up"],
+      condition: { kind: "your-turn" },
+      text,
+    };
   }
   return null;
 }

@@ -42,6 +42,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'cant-attack-owner': "can't attack its owner",
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",
+  'cant-turn-face-up': "can't be turned face up",
 }
 
 /** A colour as the log says it — "becomes black". */
@@ -235,7 +236,11 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         ? `${who(event.player)} reveals face-down ${event.objects.map(name).join(', ')}`
         : `${who(event.player)} reveals ${event.objects.map(name).join(', ')} from their ${event.from}`
     case 'card-manifested':
-      return `${who(event.player)} ${event.kind === 'cloak' ? 'cloaks' : 'manifests'} the top card of their library`
+      return `${who(event.player)} ${event.kind === 'cloak' ? 'cloaks' : 'manifests'} the top card of ${
+        event.library !== undefined && event.library !== event.player ? `${who(event.library)}'s` : 'their'
+      } library`
+    case 'permanent-turned-face-down':
+      return `${name(event.object)} is turned face down`
     case 'permanent-turned-face-up':
       return `${who(event.player)} turns ${name(event.object)} face up`
     case 'cards-chosen-from-zone':

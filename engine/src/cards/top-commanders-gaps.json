@@ -713,7 +713,12 @@
   "effect:aggregate-all-counters-for-target",
   "amount:greatest-mana-value-this-way",
   "effect:divided-dynamic-total",
-  "effect:reflexive-divided-damage"
+  "effect:reflexive-divided-damage",
+  "mechanic:face-down",
+  "effect:turn-face-down",
+  "effect:put-onto-battlefield-face-down",
+  "effect:manifest-from-other-library",
+  "static:cant-turn-face-up"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

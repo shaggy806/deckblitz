@@ -448,7 +448,14 @@ export type CombatRestriction =
    * it at another time (an effect, Seedborn Muse during another player's)
    * still does. A permanent's own "this doesn't untap" is the static's
    * `doesntUntap` (Mana Vault). */
-  | "doesnt-untap";
+  | "doesnt-untap"
+  /** "Can't be turned face up" (rule 708.7 — the special actions of
+   * 701.40b, 701.58b, 702.37e and 702.168d refused): Unable to Scream's "as
+   * long as enchanted creature is face down, it can't be turned face up"
+   * (only a face-down permanent can be turned face up, so "enchanted
+   * creature can't be"), Karlov Watchdog's "permanents your opponents
+   * control can't be turned face up during your turn". */
+  | "cant-turn-face-up";
 
 /**
  * A dynamic quantity a characteristic-defining ability can read (rule 604.3).

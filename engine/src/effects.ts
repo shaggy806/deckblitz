@@ -29,6 +29,7 @@ import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
   DelayedTriggerTiming,
+  FaceDownAs,
   LeaveDestination,
   PlayerCounterKind,
   PlayerEffect,
@@ -2670,6 +2671,11 @@ export type EffectSpec =
        * having left (rule 400.7) — stays where it is; an Equipment that
        * can't equip it, and anything else, enters unattached. */
       readonly attachedTo?: EffectTargetRef;
+      /** "…onto the battlefield **face down**" — see {@link EnterTypes}'
+       * `faceDown`: Missy's "return it to the battlefield under your control
+       * face down and tapped. It's a 2/2 Cyberman artifact creature" is
+       * `faceDown: "2/2 Cyberman artifact creature"`. */
+      readonly faceDown?: true | FaceDownAs;
     }
   | {
       /** Exile every card in a target *player's* graveyard (rule 406 — Bojuka
@@ -5286,6 +5292,32 @@ export type EffectSpec =
        * it"), each one a manifest of its own. */
       readonly count?: EffectAmount;
       readonly cloak?: true;
+      /** Whose library the card comes from, when it isn't the manifesting
+       * player's own: "you manifest the top card of **that player's**
+       * library" (Thieving Amalgam: `"active-player"`; Orochi Soul-Reaver:
+       * `"trigger-player"`). It enters under the manifesting player's
+       * control (rule 110.2a); its owner can't look at it (708.5). Nothing
+       * when that player has left the game or the slot is illegal. */
+      readonly from?: EffectPlayerRef;
+    }
+  | {
+      /**
+       * "Turn target creature face down" (rule 708.2a): the same permanent,
+       * now a face-down 2/2 with no name, text, subtypes or mana cost — or
+       * with the characteristics `as` lists (708.2: Cyber Conversion's "It's
+       * a 2/2 Cyberman artifact creature"). Its counters, attachments and
+       * the effects on it stay; it doesn't leave the battlefield. Only its
+       * controller may look at it (708.5), and it's turned face up only by
+       * its morph or disguise cost (702.37e — Backslide's "turn target
+       * creature with a morph ability face down"). Nothing happens to one
+       * already face down (708.2b) or to a double-faced permanent (712.16).
+       * `target` may be `"source"` (Wall of Deceit's "{3}: Turn this
+       * creature face down"); Weaver of Lies' "any number of target
+       * creatures" wraps it in a `for-each-target`.
+       */
+      readonly kind: "turn-face-down";
+      readonly target: EffectTargetRef;
+      readonly as?: FaceDownAs;
     }
   | {
       /** Manifest dread (rule 701.62a): the player looks at the top two cards
@@ -7080,6 +7112,18 @@ export interface EnterTypes {
    * Zombie in addition to its other colors and types" — a colourless card
    * is then simply black, its ruling). */
   readonly addColors?: readonly Color[];
+  /** It enters **face down** (rule 708.3 — turned face down before it
+   * enters, so it has no "as this enters" choices and its enters abilities
+   * neither trigger nor apply): `true` as a 2/2 with no name, text,
+   * subtypes or mana cost (708.2a — Ashcloud Phoenix's "return it to the
+   * battlefield face down under your control"), or with the characteristics
+   * the effect lists (708.2 — Missy's "face down and tapped. It's a 2/2
+   * Cyberman artifact creature", Tezzeret's "They're 5/5 artifact
+   * creatures", Yedora's "It's a Forest land"). Neither manifested nor
+   * cloaked (the `"effect"` face-down kind): it's turned face up only by its
+   * morph or disguise cost (702.37e). Any card may enter so, an instant or
+   * sorcery too. */
+  readonly faceDown?: true | FaceDownAs;
 }
 
 /**
@@ -8552,8 +8596,12 @@ export interface EffectApi {
     },
   ): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
-   * `"manifest"` {@link EffectSpec}. */
-  manifestTop(player: PlayerId, kind: "manifest" | "cloak"): void;
+   * `"manifest"` {@link EffectSpec}; `library` is another player's library
+   * it comes from (its `from`). */
+  manifestTop(player: PlayerId, kind: "manifest" | "cloak", library?: PlayerId): void;
+  /** Turn the permanent `target` face down — see the `"turn-face-down"`
+   * {@link EffectSpec}. */
+  turnFaceDown(target: TargetRef, as?: FaceDownAs): void;
   /** Create `count` copies of the named token, controlled by `ctx.controller`. */
   createToken(
     token: string,
@@ -11471,10 +11519,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const player = ref === undefined ? undefined : ctx.controllerOf(ref);
         players = player === undefined ? [] : [player];
       }
+      // "The top card of that player's library": theirs, nobody's if
+      // they've gone (or the slot is illegal — rule 608.2b).
+      const library = spec.from === undefined ? undefined : effectPlayer(spec.from, ctx);
+      if (spec.from !== undefined && library === undefined) return;
       const count = spec.count === undefined ? 1 : Math.min(amountValue(spec.count, ctx), MAX_COPY_COUNT);
       for (const player of players) {
-        for (let i = 0; i < count; i += 1) ctx.manifestTop(player, spec.cloak === true ? "cloak" : "manifest");
+        for (let i = 0; i < count; i += 1) ctx.manifestTop(player, spec.cloak === true ? "cloak" : "manifest", library);
       }
+      return;
+    }
+    case "turn-face-down": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.turnFaceDown(target, spec.as);
       return;
     }
     case "exile": {
@@ -11545,10 +11602,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           spec.withCounters,
           spec.exileIfItWouldLeave,
           spec.flipped === true ? "flipped" : spec.transformed === true,
-          spec.setTypes !== undefined || spec.addSubtypes !== undefined
+          spec.setTypes !== undefined || spec.addSubtypes !== undefined || spec.faceDown !== undefined
             ? {
                 ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
                 ...(spec.addSubtypes !== undefined ? { addSubtypes: spec.addSubtypes } : {}),
+                ...(spec.faceDown !== undefined ? { faceDown: spec.faceDown } : {}),
               }
             : undefined,
           resolveEnterAttacking(spec.attacking, ctx),

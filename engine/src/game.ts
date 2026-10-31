@@ -317,6 +317,7 @@ import {
   clonePlain,
   createPlayerState,
   doorsFace,
+  faceDownCardName,
   faceName,
   isTokenNow,
   manaCostOverride,
@@ -335,6 +336,7 @@ import type {
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
+  FaceDownAs,
   FaceDownKind,
   GiftAsk,
   CombatDamageState,
@@ -874,8 +876,11 @@ interface EnterOptions {
   readonly addColors?: readonly Color[];
   /** It enters face down (rule 708.3: turned face down *before* it enters,
    * so its own enters abilities neither trigger nor apply) — manifested or
-   * cloaked. */
+   * cloaked, or put there face down by an effect (`"effect"`). */
   readonly faceDown?: FaceDownKind;
+  /** …with the characteristics its effect lists instead of the 2/2's (rule
+   * 708.2 — "It's a 2/2 Cyberman artifact creature"). */
+  readonly faceDownAs?: FaceDownAs;
   /** It enters melded with the other card of its meld pair (rules 701.42a,
    * 712.14c): one permanent, the combined back face up from the start, so
    * its replacements and every trigger that sees it arrive see that face.
@@ -886,6 +891,15 @@ interface EnterOptions {
    * after), so a commander whose 903.9b choice defers the move still goes
    * there if its owner declines the command zone. */
   readonly libraryPlacement?: CommanderLibraryPlacement;
+}
+
+/** The {@link EnterOptions} of an entry an effect puts face down (its
+ * {@link EnterTypes}' `faceDown` — rule 708.3): the `"effect"` kind, with
+ * the characteristics it lists (708.2). Nothing when it enters face up. */
+function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceDown" | "faceDownAs"> {
+  const down = types?.faceDown;
+  if (down === undefined) return {};
+  return { faceDown: "effect", ...(down !== true ? { faceDownAs: down } : {}) };
 }
 
 /** Everything the enters-battlefield replacements decided about one entry
@@ -7803,6 +7817,8 @@ export class Game {
     const { awaiting, player, chosen } = entry;
     for (const [index, id] of chosen.entries()) {
       if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
+      // Face down, it has no "as this enters" choices (708.3).
+      if (awaiting.enterAs?.faceDown !== undefined) continue;
       if (this.askEnterChoice(id, player)) {
         this.state.suspendedResolutions.push({ effect: null, enter: entry });
         return;
@@ -8081,6 +8097,7 @@ export class Game {
         ...(enterAs?.setTypes !== undefined ? { setTypes: enterAs.setTypes } : {}),
         ...(enterAs?.addSubtypes !== undefined ? { addSubtypes: enterAs.addSubtypes } : {}),
         ...(enterAs?.addColors !== undefined ? { addColors: enterAs.addColors } : {}),
+        ...faceDownEntry(enterAs),
       });
       // Kept there by a control effect, as a reanimation "under your
       // control" is (see `putOntoBattlefieldByEffect`).
@@ -9476,7 +9493,7 @@ export class Game {
     // (rules 708.2a, 708.4): no name, text or mana cost to cast it for, or
     // abilities for it to resolve with.
     const down = this.state.objects[cardId]?.faceDown;
-    if (down !== undefined) return this.registry.get(FACE_DOWN_CARDS[down.kind]);
+    if (down !== undefined) return this.registry.get(faceDownCardName(down));
     const own = this.registry.get(this.state.objects[cardId].cardName);
     const faceName = own.faces?.[face];
     return faceName !== undefined ? this.registry.get(faceName) : own;
@@ -27329,7 +27346,10 @@ export class Game {
           this.animate({ kind: "object", object: id }, kept, false, timestamp);
         }
       },
-      manifestTop: (player, kind) => this.manifestTop(player, kind),
+      manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
+      turnFaceDown: (target, as) => {
+        if (target.kind === "object") this.turnFaceDown(target.object, as);
+      },
       createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo) => {
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
@@ -27943,6 +27963,11 @@ export class Game {
           enterAs,
           picker,
           withCounters,
+          // "Put the top two cards of that player's library onto the
+          // battlefield … under your control" (Cybership): from another
+          // player's library (`from`), the one putting them there is this
+          // effect's controller, under whose control they enter (rule 110.2a).
+          chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
         );
       },
     };
@@ -27990,6 +28015,9 @@ export class Game {
     picker?: PlayerId,
     /** Chosen cards bound for the battlefield enter with these counters. */
     withCounters?: { readonly kind: string; readonly amount: number },
+    /** Chosen cards bound for the battlefield enter under this player's
+     * control — the one putting them there, from another's library. */
+    enterUnder?: PlayerId,
   ): void {
     // Every graveyard, in turn order — all public (Necromantic Selection).
     // Or the resolving ability's own target cards, still in a graveyard
@@ -28053,6 +28081,7 @@ export class Game {
       // A card from another player's graveyard enters under the chooser's
       // control ("to the battlefield under your control").
       ...(fromAnyGraveyard && destination === "battlefield" ? { enterUnder: player } : {}),
+      ...(enterUnder !== undefined && destination === "battlefield" ? { enterUnder } : {}),
       ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
@@ -34717,8 +34746,9 @@ export class Game {
       return false;
     }
     // Its "as this enters" choices first (rule 614.12 — a reanimated Clone
-    // copies something): nothing moves until they're made.
-    if (this.askEnterChoice(target.object, under ?? object.owner)) return true;
+    // copies something): nothing moves until they're made. Face down, it has
+    // none (708.3: turned face down before it enters).
+    if (types?.faceDown === undefined && this.askEnterChoice(target.object, under ?? object.owner)) return true;
     this.moveObject(target.object, "battlefield", {
       tapped: enterTapped,
       ...(under !== undefined ? { under } : {}),
@@ -34727,6 +34757,7 @@ export class Game {
       ...(types?.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
       ...(types?.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
       ...(types?.addColors !== undefined ? { addColors: types.addColors } : {}),
+      ...faceDownEntry(types),
     });
     const entered = this.state.objects[target.object];
     if (entered === undefined || entered.zone !== "battlefield") return false;
@@ -34800,16 +34831,54 @@ export class Game {
    * asked and its enters abilities don't trigger; other permanents'
    * replacements and triggers see a 2/2 with no name. Nobody else learns
    * what it is (708.5). An empty library manifests nothing.
+   *
+   * `library` is another player's library it comes from — "you manifest the
+   * top card of that player's library" (Thieving Amalgam): it enters under
+   * the manifesting player's control (rule 110.2a), kept there by a control
+   * effect as a reanimation "under your control" is, and its owner can no
+   * longer look at it (708.5).
    */
-  private manifestTop(player: PlayerId, kind: "manifest" | "cloak"): void {
+  private manifestTop(player: PlayerId, kind: "manifest" | "cloak", library: PlayerId = player): void {
     if (this.state.players[player]?.hasLost !== false) return;
-    const top = this.state.zones.perPlayer[player].library[0];
+    if (this.state.players[library]?.hasLost !== false) return;
+    const top = this.state.zones.perPlayer[library].library[0];
     if (top === undefined) return;
-    this.moveObject(top, "battlefield", { faceDown: kind });
+    this.moveObject(top, "battlefield", { faceDown: kind, ...(library !== player ? { under: player } : {}) });
     const entered = this.state.objects[top];
     if (entered === undefined || entered.zone !== "battlefield") return;
-    this.emit({ type: "card-manifested", player, object: top, kind });
+    if (entered.controller !== player) {
+      this.gainControlByEffect(player, { kind: "object", object: top }, false, true);
+      entered.summoningSick = true;
+    }
+    this.emit({ type: "card-manifested", player, object: top, kind, ...(library !== player ? { library } : {}) });
     this.emit({ type: "permanent-entered-battlefield", object: top });
+  }
+
+  /**
+   * Turn the permanent `id` face down (rule 708.2a) — Cyber Conversion's
+   * "turn target creature face down. It's a 2/2 Cyberman artifact
+   * creature", Backslide's, Wall of Deceit's own. The same permanent: it
+   * doesn't leave or enter the battlefield, and every effect, counter and
+   * attachment on it stays (as turning one face up keeps them, 708.8). It
+   * becomes a face-down 2/2 with no name, text, subtypes or mana cost, or
+   * the characteristics `as` lists (708.2); only its controller may look at
+   * it (708.5). Nothing happens to one already face down (708.2b), to a
+   * double-faced or melded permanent (712.16), or to a merged one (rule
+   * 730.2: its face-up components aren't one card to turn). Turned face down
+   * this way, it can be turned face up only by its morph or disguise cost
+   * (702.37e, 702.168d) — the `"effect"` kind.
+   */
+  private turnFaceDown(id: ObjectId, as?: FaceDownAs): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || object.faceDown !== undefined) return;
+    if (this.isDoubleFacedCard(id) || object.melded !== undefined || object.merged !== undefined) return;
+    // A stack of tokens: only the one this names turns.
+    const one = this.splitOneFromStack(id);
+    const turned = this.state.objects[one];
+    if (turned === undefined) return;
+    turned.faceDown = { kind: "effect", ...(as !== undefined ? { as } : {}) };
+    invalidateComputedCache();
+    this.emit({ type: "permanent-turned-face-down", player: turned.controller, object: one });
   }
 
   /** Why `player` can't turn the face-down permanent `id` face up: a special
@@ -34827,6 +34896,10 @@ export class Game {
       return "that isn't a face-down permanent";
     }
     if (object.controller !== player) return `${player} doesn't control that permanent`;
+    // "As long as enchanted creature is face down, it can't be turned face
+    // up" (Unable to Scream), "permanents your opponents control can't be
+    // turned face up during your turn" (Karlov Watchdog).
+    if (restrictionsOf(this.state, this.registry, id).has("cant-turn-face-up")) return "it can't be turned face up";
     const card = this.registry.get(object.cardName);
     const cost = this.turnFaceUpCost(id, morph);
     if (cost === null) {
@@ -34834,6 +34907,7 @@ export class Game {
       if (object.faceDown.kind === "morph" || object.faceDown.kind === "disguise") {
         return "a card cast face down is turned face up for its morph or disguise cost";
       }
+      if (object.faceDown.kind === "effect") return "only a manifested or cloaked permanent is turned face up for its mana cost";
       if (!card.types.includes("creature")) return "that card isn't a creature card";
       return "that card has no mana cost to pay";
     }
@@ -34876,7 +34950,10 @@ export class Game {
     if (object?.faceDown === undefined) return null;
     const card = this.registry.get(object.cardName);
     if (morph) return card.morph?.cost ?? null;
-    if (object.faceDown.kind === "morph" || object.faceDown.kind === "disguise") return null;
+    // For its mana cost: a manifested or cloaked permanent only (701.40b,
+    // 701.58b) — not one cast face down, nor one an effect put or turned
+    // face down (708.2a).
+    if (object.faceDown.kind !== "manifest" && object.faceDown.kind !== "cloak") return null;
     return card.types.includes("creature") ? card.manaCost : null;
   }
 
@@ -42091,7 +42168,9 @@ export class Game {
       // Turned face down before it enters (rule 708.3), so everything about
       // the entry — its replacements, other permanents' replacements judging
       // it, the triggers that see it arrive — sees the face-down 2/2.
-      if (enter.faceDown !== undefined) object.faceDown = { kind: enter.faceDown };
+      if (enter.faceDown !== undefined) {
+        object.faceDown = { kind: enter.faceDown, ...(enter.faceDownAs !== undefined ? { as: enter.faceDownAs } : {}) };
+      }
       // Melded as it enters (712.14c): the combined back face from the start.
       if (enter.melded !== undefined) object.melded = enter.melded;
       if (enter.flipped === true) {

@@ -1069,8 +1069,11 @@ export interface GameObject {
    * the internal {@link FACE_DOWN_CARDS} definitions and every
    * characteristic and ability read follows. Only its controller may look at
    * it (708.5). Cleared on any zone change, where it's revealed (708.9);
-   * turned face up as a special action (701.40b). */
-  faceDown?: { readonly kind: FaceDownKind };
+   * turned face up as a special action (701.40b). `as` is the
+   * characteristics the effect that put or turned it face down listed in
+   * place of the 2/2's (rule 708.2 — "It's a 2/2 Cyberman artifact
+   * creature"), read through {@link FACE_DOWN_AS_CARDS}. */
+  faceDown?: { readonly kind: FaceDownKind; readonly as?: FaceDownAs };
   /**
    * A **Room**'s unlocked designations (rule 709.5c — a split permanent with
    * a shared type line): which of its doors, the card's left and right
@@ -5270,7 +5273,7 @@ export const faceName = (object: GameObject): string => {
  * {@link rulesTextName}. */
 export const printedCardName = (object: GameObject): string =>
   object.faceDown !== undefined
-    ? FACE_DOWN_CARDS[object.faceDown.kind]
+    ? faceDownCardName(object.faceDown)
     : object.doors !== undefined && !object.doors.left && !object.doors.right
       ? LOCKED_ROOM
       : (object.flippedName ?? mergedTopName(object) ?? object.copyOf ?? faceName(object));
@@ -5295,9 +5298,36 @@ export const doorsFace = (doors: { readonly left: boolean; readonly right: boole
   doors.left && doors.right ? 0 : doors.left ? 1 : doors.right ? 2 : 0;
 
 /** How a permanent (or spell) came to be face down: manifested (rule
- * 701.40), cloaked (701.58, a manifest with ward {2}), or cast face down
- * with morph or megamorph (702.37c) or disguise (702.168a, ward {2}). */
-export type FaceDownKind = "manifest" | "cloak" | "morph" | "disguise";
+ * 701.40), cloaked (701.58, a manifest with ward {2}), cast face down
+ * with morph or megamorph (702.37c) or disguise (702.168a, ward {2}), or
+ * `"effect"` — put onto the battlefield face down or turned face down by
+ * an effect that neither manifests nor cloaks it (rule 708.2a: Cyber
+ * Conversion, Ashcloud Phoenix, Yedora). That one is turned face up only
+ * by its morph or disguise cost (702.37e, 702.168d) or by an effect, never
+ * for its mana cost (701.40b is manifest's alone). */
+export type FaceDownKind = "manifest" | "cloak" | "morph" | "disguise" | "effect";
+
+/** The characteristics an effect lists for what it puts or turns face down,
+ * in place of the plain 2/2's (rule 708.2): "They're 2/2 Cyberman artifact
+ * creatures" (Cybership, Missy, Cyber Conversion), "They're 5/5 artifact
+ * creatures" (Tezzeret, Cruel Machinist), "It's a Forest land" (Yedora,
+ * Grave Gardener — a land with Forest's intrinsic "{T}: Add {G}", rule
+ * 305.6, and nothing else). Each is an internal definition
+ * (`cards/face-down.ts`), named in {@link FACE_DOWN_AS_CARDS}; a new set of
+ * listed characteristics is a new member and a new definition. */
+export type FaceDownAs = "2/2 Cyberman artifact creature" | "5/5 artifact creature" | "Forest land";
+
+/** The registry names of the {@link FaceDownAs} definitions. */
+export const FACE_DOWN_AS_CARDS: Readonly<Record<FaceDownAs, string>> = {
+  "2/2 Cyberman artifact creature": "Face-Down Cyberman (2/2 Artifact Creature)",
+  "5/5 artifact creature": "Face-Down Artifact Creature (5/5)",
+  "Forest land": "Face-Down Forest Land",
+};
+
+/** The registry name of what a face-down object is (rule 708.2): the
+ * characteristics its effect listed, else its kind's 2/2. */
+export const faceDownCardName = (faceDown: { readonly kind: FaceDownKind; readonly as?: FaceDownAs }): string =>
+  faceDown.as !== undefined ? FACE_DOWN_AS_CARDS[faceDown.as] : FACE_DOWN_CARDS[faceDown.kind];
 
 /** The registry names of the face-down 2/2s (rule 708.2a): internal
  * definitions, not cards — `cards/face-down.ts` defines them, and
@@ -5313,6 +5343,8 @@ export const FACE_DOWN_CARDS: Readonly<Record<FaceDownKind, string>> = {
   // {2}, as a cloak's (702.168a).
   morph: "Face-Down Creature",
   disguise: "Face-Down Creature (Ward {2})",
+  // Put or turned face down by an effect listing nothing (708.2a).
+  effect: "Face-Down Creature",
 };
 
 /** Whether a permanent is a token (rule 111.1): a merged permanent is one

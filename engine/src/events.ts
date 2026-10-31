@@ -978,6 +978,17 @@ export type GameEvent =
       readonly player: PlayerId;
       readonly object: ObjectId;
       readonly kind: "manifest" | "cloak";
+      /** The player whose library it came from, when not `player`'s own
+       * ("you manifest the top card of that player's library"). */
+      readonly library?: PlayerId;
+    })
+  | (Base & {
+      /** The permanent `object`, controlled by `player`, was turned face
+       * down by an effect (rule 708.2a — Cyber Conversion): now a face-down
+       * permanent, the same object. */
+      readonly type: "permanent-turned-face-down";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
     })
   | (Base & {
       /** `player` turned the face-down permanent `object` face up (rule

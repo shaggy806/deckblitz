@@ -270,11 +270,13 @@ export interface VisibleObject {
   /** Plotted in exile (rule 702.170), face up: its owner may cast it free,
    * as a sorcery, on a later turn. Absent when not. */
   readonly plotted?: true;
-  /** A face-down permanent (rule 708 — manifested or cloaked): everything
-   * else here is the face-down 2/2's (`cardName` is its internal name, no
-   * art), and `card` — the card it really is — is in its controller's view
-   * only, who may look at it (708.5). */
-  readonly faceDown?: { readonly kind: "manifest" | "cloak" | "morph" | "disguise"; readonly card?: string };
+  /** A face-down permanent (rule 708 — manifested, cloaked, cast face down,
+   * or put or turned face down by an effect, `"effect"`): everything else
+   * here is what it is face down (`cardName` is its internal name — the 2/2,
+   * or the characteristics its effect listed, rule 708.2 — no art), and
+   * `card` — the card it really is — is in its controller's view only, who
+   * may look at it (708.5). */
+  readonly faceDown?: { readonly kind: "manifest" | "cloak" | "morph" | "disguise" | "effect"; readonly card?: string };
   /** A Room on the battlefield (rule 709.5): its two doors — the card's
    * left and right halves, each with its name, mana cost and rules text —
    * and whether each is unlocked. The rest of this object is what the

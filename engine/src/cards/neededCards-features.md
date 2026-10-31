@@ -458,6 +458,32 @@ pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
 the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
 Amped Raptor, Jolted Awake.
 
+### Face down by an effect — built 2026-10-31
+
+The need-keys Phase 2 family `mechanic:face-down`, features only (rule 708.2).
+A fifth face-down kind, **`"effect"`**: put or turned face down by an effect
+that neither manifests nor cloaks, turned face up only by a morph or disguise
+cost (702.37e). **`turn-face-down`** turns a permanent face down in place
+(708.2a; nothing to one already face down, 708.2b, or a double-faced one,
+712.16). **`faceDown`** on `put-onto-battlefield` and on `look-and-choose`'s
+`enterAs` enters a card face down (708.3) — `true` the plain 2/2, or the
+characteristics the effect lists (**`FaceDownAs`**, `GameObject.faceDown.as`:
+"2/2 Cyberman artifact creature", "5/5 artifact creature", "Forest land",
+each an internal definition in `cards/face-down.ts`). **`manifest`'s `from`**
+manifests the top card of another player's library under the manifesting
+player (110.2a), and a look-and-choose from another's library puts its cards
+under the effect's controller. The **`cant-turn-face-up`** restriction
+refuses the turn-face-up special actions. Keys: mechanic:face-down (partial),
+effect:turn-face-down, effect:put-onto-battlefield-face-down,
+effect:manifest-from-other-library, static:cant-turn-face-up. Proving cards:
+Cyber Conversion, Yedora, Grave Gardener, Tezzeret, Cruel Machinist, Orochi
+Soul-Reaver, Unable to Scream. Still open: casting face down for X
+(Illusionary Mask), a face-down exile linked to a token (Ugin, the
+Ineffable), manifest from a hand with a "for each card manifested this way"
+count (Kozilek, the Broken Reality), "as this enters, turn all other …
+face down" (Ixidron), a copy that lasts until turned face down (Vesuvan
+Shapeshifter), a trigger's "its owner" player (Thieving Amalgam).
+
 ### Meld — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:meld`, features only (rules 701.42,

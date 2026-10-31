@@ -8,7 +8,7 @@
  * face-down permanent has no name (708.2a), which `nameOf` answers.
  */
 
-import { FACE_DOWN_CARDS } from "../state.js";
+import { FACE_DOWN_AS_CARDS, FACE_DOWN_CARDS } from "../state.js";
 import { defineCard } from "./define.js";
 import type { CardDefinition } from "./define.js";
 import { ward } from "./helpers.js";
@@ -30,5 +30,33 @@ export const FACE_DOWN_DEFINITIONS: readonly CardDefinition[] = [
     toughness: 2,
     text: "Ward {2}",
     triggered: [ward({ mana: "{2}" })],
+  }),
+  // The characteristics an effect lists for what it puts or turns face down
+  // (rule 708.2 — `FaceDownAs`): no name, text or mana cost beyond them.
+  defineCard({
+    name: FACE_DOWN_AS_CARDS["2/2 Cyberman artifact creature"],
+    colors: [],
+    types: ["artifact", "creature"],
+    subtypes: ["Cyberman"],
+    power: 2,
+    toughness: 2,
+    text: "",
+  }),
+  defineCard({
+    name: FACE_DOWN_AS_CARDS["5/5 artifact creature"],
+    colors: [],
+    types: ["artifact", "creature"],
+    power: 5,
+    toughness: 5,
+    text: "",
+  }),
+  // A Forest land: its "{T}: Add {G}" is Forest's intrinsic ability (rule
+  // 305.6), which `intrinsicManaColors` gives it from the subtype.
+  defineCard({
+    name: FACE_DOWN_AS_CARDS["Forest land"],
+    colors: [],
+    types: ["land"],
+    subtypes: ["Forest"],
+    text: "",
   }),
 ];

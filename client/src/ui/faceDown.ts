@@ -9,6 +9,9 @@ import type { VisibleObject } from 'engine/client'
 export function faceDownLabel(obj: VisibleObject): string | null {
   const down = obj.faceDown
   if (down === undefined) return null
+  // Put or turned face down by an effect (rule 708.2a — Cyber Conversion,
+  // Yedora): neither manifested nor cloaked, just face down.
+  if (down.kind === 'effect') return down.card !== undefined ? `Face-down: ${down.card}` : 'Face-down'
   const how =
     down.kind === 'cloak' ? 'Cloaked' : down.kind === 'morph' ? 'Morph' : down.kind === 'disguise' ? 'Disguised' : 'Manifested'
   return down.card !== undefined ? `${how}: ${down.card}` : `Face-down (${how.toLowerCase()})`
