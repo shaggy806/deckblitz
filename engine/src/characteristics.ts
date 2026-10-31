@@ -1364,11 +1364,28 @@ export interface Characteristics {
     readonly colors: ReadonlySet<Color>;
     readonly types: ReadonlySet<CardType>;
     readonly filters: readonly CardFilter[];
+    /** The printed "can't be the target of …" instances that aren't the
+     * keyword — spells only, abilities only, any player's, or every spell
+     * or ability (no quality) — each judged alone (`hexproofFromBlocks`). */
+    readonly qualified: readonly NonNullable<StaticAbility["hexproofFrom"]>[];
   };
   /** Each "bands with other [quality]" it has (rule 702.22b), the quality as
    * a filter — none lost to a later loss of banding or of "bands with
    * other" (Tolaria, Shelkin Brownie). Read by `combat/banding.ts`. */
   readonly bandsWithOther: readonly CardFilter[];
+}
+
+/** Whether a "hexproof from" instance has to be judged alone rather than
+ * merged into the keyword's union: it's limited to spells or abilities, it
+ * stops every player and not only opponents, or it names no quality at all
+ * (every spell or ability — "can't be the target of spells"). */
+function isQualifiedHexproof(h: NonNullable<StaticAbility["hexproofFrom"]>): boolean {
+  return (
+    h.spellsOnly === true ||
+    h.abilitiesOnly === true ||
+    h.anyController === true ||
+    ((h.colors ?? []).length === 0 && (h.types ?? []).length === 0 && h.filter === undefined)
+  );
 }
 
 /** The colours and card types a protection names, "the chosen color" and
@@ -3797,12 +3814,9 @@ interface AppliedEffect {
     /** The Aura this instance doesn't remove (702.16n). */
     sparesAura?: ObjectId;
   } | null;
-  /** "Hexproof from …" it grants — the same shape as `protection`. */
-  readonly hexproofFrom: {
-    colors?: readonly Color[];
-    types?: readonly CardType[];
-    filter?: CardFilter;
-  } | null;
+  /** "Hexproof from …" it grants — the same shape as `protection`, with the
+   * qualifiers of a printed "can't be the target of …". */
+  readonly hexproofFrom: NonNullable<StaticAbility["hexproofFrom"]> | null;
   /** "Bands with other [quality]" it grants (rule 702.22b). */
   readonly bandsWithOther: CardFilter | null;
   /** Layer 7b — a `setBasePt`. */
@@ -4304,6 +4318,7 @@ function assertSameCharacteristics(
       hexColors: [...c.hexproofFrom.colors].sort(),
       hexTypes: [...c.hexproofFrom.types].sort(),
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
+      hexQualified: c.hexproofFrom.qualified.map((q) => JSON.stringify(q)).sort(),
       bandsWithOther: c.bandsWithOther.map((f) => JSON.stringify(f)).sort(),
     });
   const a = show(cached);
@@ -4377,6 +4392,7 @@ function computeCharacteristicsUncached(
   const hexColors = new Set<Color>();
   const hexTypes = new Set<CardType>();
   const hexFilters: CardFilter[] = [];
+  const hexQualified: NonNullable<StaticAbility["hexproofFrom"]>[] = [];
   const bandsWithOther: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
   let assignsNoCombatDamage = false;
@@ -4428,7 +4444,9 @@ function computeCharacteristicsUncached(
       for (const t of effect.protection.types ?? []) protTypes.add(t);
       if (effect.protection.filter !== undefined) protFilters.push(effect.protection.filter);
     }
-    if (effect.hexproofFrom && granted) {
+    if (effect.hexproofFrom && granted && isQualifiedHexproof(effect.hexproofFrom)) {
+      hexQualified.push(effect.hexproofFrom);
+    } else if (effect.hexproofFrom && granted) {
       for (const c of effect.hexproofFrom.colors ?? []) hexColors.add(c);
       for (const t of effect.hexproofFrom.types ?? []) hexTypes.add(t);
       if (effect.hexproofFrom.filter !== undefined) hexFilters.push(effect.hexproofFrom.filter);
@@ -4645,7 +4663,7 @@ function computeCharacteristicsUncached(
       filters: protFilters,
       ...(protSparing.length > 0 ? { sparing: { otherColors: protOtherColors, instances: protSparing } } : {}),
     },
-    hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters },
+    hexproofFrom: { colors: hexColors, types: hexTypes, filters: hexFilters, qualified: hexQualified },
     bandsWithOther,
   };
 }
@@ -4746,6 +4764,22 @@ export function assignedCombatDamage(
   return combatDamageOf(computeCharacteristics(state, registry, id));
 }
 
+/** Whether a turn-wide `restrict` rule (`GameState.turnRestrictions`) binds
+ * `id` now: it matches the rule's filter from `you`'s side, and isn't the
+ * permanent the rule leaves out (`except`, the same object only — 400.7). */
+export function turnRuleCovers(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  rule: NonNullable<GameState["turnRestrictions"]>[number],
+): boolean {
+  const except = rule.except;
+  if (except !== undefined && except.object === id && (state.objects[id]?.zoneChangeCount ?? 0) === except.zoneChangeCount) {
+    return false;
+  }
+  return matchesFilter(state, registry, id, rule.filter, { you: rule.you });
+}
+
 /**
  * Combat restrictions on `id`: from static abilities (Pacifism, Juggernaut)
  * and `restrict` modifiers — the characteristics' own — plus any turn-wide
@@ -4768,7 +4802,7 @@ export function restrictionsOf(
   if (rules === undefined || rules.length === 0) return own;
   let out: Set<CombatRestriction> | null = null;
   for (const rule of rules) {
-    if (!matchesFilter(state, registry, id, rule.filter, { you: rule.you })) continue;
+    if (!turnRuleCovers(state, registry, id, rule)) continue;
     out ??= new Set(own);
     for (const r of rule.restrictions) out.add(r);
   }

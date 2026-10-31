@@ -722,6 +722,19 @@ missing. Re-run `--greedy` for Phase 2's order.
   Then `cost:alt-cost-discard-cards` with the Shoals' and Land Grant's keys: an alternative
   cost's `discard`, `exileFromHand.manaValueX` and `revealHand` (3 keys, 6 freed, 5 proving
   cards).
+- **2026-10-31: "can't be the target of …" statics** (a cloud session on a fixed list of three
+  families) — `keyword:hexproof-from-colors`' group: `hexproofFrom`'s `spellsOnly`,
+  `abilitiesOnly` and `anyController` qualifiers and a quality-less instance, and the
+  `graveyardCardsUntargetable` static (4 keys, 12 freed, 5 proving cards; Display of Dominance's
+  one-shot, Lurker and the Flagbearers left open).
+- **2026-10-31: a restriction over a target player's creatures** (the same session) —
+  `static:combat-restriction-extensions`' next group, on the restriction code of the earlier
+  combat families: `restrict`'s `controlledByTarget`, `exceptTarget` and `asItResolves` (4 keys,
+  12 freed, 6 proving cards).
+- **2026-10-31: prevention divided, and the next N damage to you** (the same session) —
+  `effect:prevention-divided`: the `prevent-damage-divided` effect, a shield per target of its
+  share (601.2d, 615.7); `effect:prevent-next-n-damage-to-you` was already `damage-rule`'s
+  `players: "you"` with an amount (2 keys, 11 freed, 5 proving cards).
 
 ## Rough size
 

@@ -25,6 +25,7 @@ import {
   hasLostAbilities,
   objHasKeyword,
   restrictionsOf,
+  turnRuleCovers,
   canAttackDespiteDefender,
   staticConditionMet,
   staticReaches,
@@ -633,7 +634,7 @@ function blockFilters(
     }
     for (const rule of state.turnRestrictions ?? []) {
       if (rule.cantBeBlockedBy === undefined) continue;
-      if (!matchesFilter(state, registry, object.id, rule.filter, { you: rule.you })) continue;
+      if (!turnRuleCovers(state, registry, object.id, rule)) continue;
       out.push({ filter: rule.cantBeBlockedBy, you: rule.you, amount: sourceAmount(state, registry, object) });
     }
   }

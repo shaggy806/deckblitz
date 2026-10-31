@@ -792,6 +792,7 @@ import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
 import _poolVanishing from "../pool/vanishing.js";
 import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
+import _poolVeilingOddity from "../pool/veiling-oddity.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolVanishing,
     _poolVantressPaladin,
     _poolVectorAsp,
+    _poolVeilingOddity,
     _poolVenerableKnight,
     _poolVexingDevil,
     _poolViashinoRacketeer,

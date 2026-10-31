@@ -398,6 +398,7 @@ import _poolLeapOfFaith from "../pool/leap-of-faith.js";
 import _poolLedevChampion from "../pool/ledev-champion.js";
 import _poolLeechGauntlet from "../pool/leech-gauntlet.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
+import _poolLeitmotifComposer from "../pool/leitmotif-composer.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
 import _poolLichLordOfUnx from "../pool/lich-lord-of-unx.js";
 import _poolLictor from "../pool/lictor.js";
@@ -1257,6 +1258,7 @@ const shard: CardShard = {
     _poolLedevChampion,
     _poolLeechGauntlet,
     _poolLegionLieutenant,
+    _poolLeitmotifComposer,
     _poolLibraryOfAlexandria,
     _poolLichLordOfUnx,
     _poolLictor,

@@ -5169,6 +5169,9 @@ export interface GameState {
     /** "… can't be blocked by [this] this turn" (Dread Charge's "except by
      * black creatures"): read with the block filters, not `restrictionsOf`. */
     readonly cantBeBlockedBy?: CardFilter;
+    /** The one permanent left out — Mark for Death's "**other** creatures
+     * that player controls" — held by its stint (rule 400.7). */
+    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   }[];
   /** Blocking requirements on one creature each (rule 509.1c) — "target
    * creature blocks this turn if able", or blocks `attacker` if able

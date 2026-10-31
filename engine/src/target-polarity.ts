@@ -542,6 +542,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // The split's targets take the damage (Inferno Titan, Electrolyze).
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
   // +1/+1 counters help; a stun counter (Crashing Wave) harms.
+  "prevent-damage-divided": (n, v) => v.touch(n.from, "help", MINOR),
   "counters-divided": (n, v) => v.touch(n.from, n.counter === "+1/+1" ? "help" : "harm", MAJOR),
   "untap-all": (n, v) => {
     v.touch(n.controlledByTarget, "help", MINOR);
