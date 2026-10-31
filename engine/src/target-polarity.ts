@@ -580,7 +580,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.of, n.target === "source" ? "take" : "either", MINOR);
   },
   "day-night": none,
-  "become-monarch": none,
+  // "Target opponent becomes the monarch" (Jared Carthalion) gives them a card a turn.
+  "become-monarch": (n, v) => v.touch(n.who, "help", MINOR),
   "take-initiative": none,
   "mutate-merge": none,
   venture: none,

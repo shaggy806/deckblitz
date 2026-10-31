@@ -543,6 +543,16 @@ missing. Re-run `--greedy` for Phase 2's order.
   modal spell's modes share one "this way"). Engine-only. Next:
   `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17),
   `mechanic:assist` (16).
+- **2026-10-31: `effect:cant-activate-abilities-until-next-turn`, features only** (an overnight
+  agent) — can't-do effects for a duration: `prohibit`'s `regeneration` (a target, or the
+  creatures dealt damage this way — rule 701.19c) and `monarch` (rule 725.4, with
+  `become-monarch`'s target slot), a target's abilities prohibition `until-your-next-turn`, a
+  prevention replacement's `thenCountsUnprevented` (rule 615.12). 4 keys (3 of the group's 4
+  plus `effect:target-player-becomes-monarch`); 5 proving cards. 14 freed (queued: 514).
+  `effect:cant-phase-out` left open: its "until your next upkeep" duration is new, and whether a
+  permanent that can't phase out still phases out indirectly with its host (702.26g) has no
+  clear rule. Engine-only. Next: `stat:turn-event-tallies` (17), `mechanic:assist` (16),
+  `effect:choices-by-other-players` (16).
 
 ## Rough size
 

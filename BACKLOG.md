@@ -184,10 +184,17 @@ section keeps only what to do next.
   token this way; 11 freed — Relic Amulet still needs `cost:remove-all-counters`, and Nexus
   Mentality's draw would count its first mode's moved counters too when both modes are chosen,
   since a modal spell's modes share one "this way"; 6 proving cards — Vampire Hexmage, Blitz
-  Leech, Enchanted River's Grasp, Oblivion Stone, Aether Snap, Pestilent Haze).
-  **500 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17),
-  `mechanic:assist` (16), `effect:choices-by-other-players` (16).
+  Leech, Enchanted River's Grasp, Oblivion Stone, Aether Snap, Pestilent Haze),
+  cant-activate-abilities-until-next-turn (2026-10-31: `prohibit`'s `regeneration` — on a
+  target or the creatures dealt damage this way, rule 701.19c — and `monarch` ("you can't
+  become the monarch this turn", rule 725.4), `become-monarch`'s target slot, a target's
+  abilities prohibition `until-your-next-turn`, a prevention replacement's
+  `thenCountsUnprevented`; 14 freed — Bone Shaman's granted ability still needs its own key —
+  `effect:cant-phase-out` left open; 5 proving cards — Incinerate, Flamebreak, Disintegrate,
+  Jared Carthalion, True Heir, Mythos of Vadrok).
+  **514 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `stat:turn-event-tallies` (17), `mechanic:assist` (16), `effect:choices-by-other-players`
+  (16), `cost:loyalty-x` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

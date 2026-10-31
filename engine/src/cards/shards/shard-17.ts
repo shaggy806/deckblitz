@@ -368,6 +368,7 @@ import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIncendiarySabotage from "../pool/incendiary-sabotage.js";
+import _poolIncinerate from "../pool/incinerate.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInertiaBubble from "../pool/inertia-bubble.js";
 import _poolInexorableBlob from "../pool/inexorable-blob.js";
@@ -1235,6 +1236,7 @@ const shard: CardShard = {
     _poolImodanesRecruiter,
     _poolImpsMischief,
     _poolIncendiarySabotage,
+    _poolIncinerate,
     _poolIndulgentTormentor,
     _poolInertiaBubble,
     _poolInexorableBlob,

@@ -517,6 +517,9 @@ type DamageStep =
       readonly controller: PlayerId;
       readonly then?: EffectSpec;
       readonly perEvent?: true;
+      /** `then`'s "that many" is the damage even when it can't be prevented
+       * (Jared Carthalion's ruling, rule 615.12). */
+      readonly thenCountsUnprevented?: true;
       /** Only when the damage is this much or less (Callous Giant). */
       readonly ifAtMost?: number;
     }
@@ -560,14 +563,19 @@ function runDamageSteps(
   readonly dealt: number;
   readonly shieldUsed: number;
   readonly shields: readonly { readonly shield: PreventionShield; readonly prevented: number }[];
-  readonly preventedAll?: { readonly step: Extract<DamageStep, { kind: "prevent-all" }>; readonly amount: number };
+  readonly preventedAll?: {
+    readonly step: Extract<DamageStep, { kind: "prevent-all" }>;
+    readonly amount: number;
+    /** `then`'s amount, when it isn't `amount` (`thenCountsUnprevented`). */
+    readonly thenAmount?: number;
+  };
   readonly shieldCounter?: { readonly step: Extract<DamageStep, { kind: "shield-counter" }>; readonly amount: number };
   readonly redirected?: { readonly step: Extract<DamageStep, { kind: "redirect" }>; readonly amount: number };
 } {
   let total = amount * sources;
   let shieldUsed = 0;
   const shields: { shield: PreventionShield; prevented: number }[] = [];
-  let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number } | undefined;
+  let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number; thenAmount?: number } | undefined;
   let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
   const rest = () => ({
     shieldUsed,
@@ -597,7 +605,7 @@ function runDamageSteps(
       case "prevent-all":
         if (step.ifAtMost !== undefined && each() > step.ifAtMost) break;
         if (unpreventable) {
-          preventedAll ??= { step, amount: 0 };
+          preventedAll ??= { step, amount: 0, ...(step.thenCountsUnprevented === true ? { thenAmount: total } : {}) };
           break;
         }
         preventedAll = { step, amount: total };
@@ -25546,7 +25554,42 @@ export class Game {
         if (object === undefined || object.zone !== "battlefield" || object.isCommander !== true) return;
         this.moveObject(target.object, "command");
       },
-      prohibit: (players, object, spells, abilities) => this.prohibit(players, object, spells, abilities),
+      prohibit: (players, object, spells, abilities, untilYourNextTurn) =>
+        this.prohibit(players, object, spells, abilities, untilYourNextTurn === true ? controller : undefined),
+      prohibitRegeneration: (target) => {
+        const turn = this.state.turn.number;
+        if (target === "dealt-damage-this-way") {
+          // Every creature this resolution has dealt damage to so far —
+          // damage prevented was never dealt (rule 615.1). A token stack
+          // dealt damage as one object is every token in it, each dealt
+          // damage.
+          const marked: ObjectId[] = [];
+          for (const event of eventLogSince(this.state, since)) {
+            if (event.type !== "damage-dealt" || event.target.kind !== "object") continue;
+            const object = this.state.objects[event.target.object];
+            if (object?.zone !== "battlefield" || marked.includes(object.id)) continue;
+            if (!effectiveTypes(this.state, this.registry, object).includes("creature")) continue;
+            object.cantBeRegeneratedTurn = turn;
+            marked.push(object.id);
+          }
+          if (marked.length > 0) {
+            this.emit({ type: "prohibition-imposed", players: [], objects: marked, spells: false, abilities: false, regeneration: true });
+          }
+          return;
+        }
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined || object.zone !== "battlefield") return;
+        object.cantBeRegeneratedTurn = turn;
+        this.emit({ type: "prohibition-imposed", players: [], object: id, spells: false, abilities: false, regeneration: true });
+      },
+      prohibitMonarch: (players) => {
+        const live = players.filter((p) => this.state.players[p]?.hasLost === false);
+        if (live.length === 0) return;
+        for (const p of live) this.state.players[p].cantBecomeMonarchTurn = this.state.turn.number;
+        this.emit({ type: "prohibition-imposed", players: live, spells: false, abilities: false, monarch: true });
+      },
       addPlayerEffect: (effect) => {
         (this.state.playerEffects ??= []).push(effect);
       },
@@ -26324,6 +26367,9 @@ export class Game {
         for (const p of scoped(who ?? "you")) {
           this.setMonarch(p, via ?? "effect");
         }
+      },
+      becomeMonarchPlayer: (player) => {
+        if (this.state.players[player]?.hasLost === false) this.setMonarch(player, "effect");
       },
       takeInitiative: (who, via) => {
         for (const p of scoped(who ?? "you")) this.takeInitiative(p, via ?? "effect");
@@ -30155,7 +30201,35 @@ export class Game {
     target: TargetRef | undefined,
     spells: boolean | { readonly filter: CardFilter; readonly label: string; readonly you: PlayerId },
     abilities: boolean,
+    /** An object's prohibition lasts until this player's next turn (Dovin
+     * Baan): a modifier like detain's, ending when their next turn begins. */
+    untilTurnOf?: PlayerId,
   ): void {
+    if (target !== undefined && untilTurnOf !== undefined) {
+      if (target.kind !== "object") return;
+      const id = this.splitOneFromStack(target.object);
+      const object = this.state.objects[id];
+      if (object === undefined || object.zone !== "battlefield") return;
+      object.modifiers.push({
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        abilitiesCantBeActivated: true,
+        untilEndOfTurn: false,
+        untilTurnOf,
+      });
+      invalidateComputedCache();
+      this.emit({
+        type: "prohibition-imposed",
+        players: [],
+        object: id,
+        spells: false,
+        abilities: true,
+        untilYourNextTurn: true,
+        by: untilTurnOf,
+      });
+      return;
+    }
     const record = (this.state.turnProhibitions ??= { players: [], permanents: [] });
     if (target !== undefined) {
       if (target.kind !== "object") return;
@@ -30520,7 +30594,7 @@ export class Game {
       restrictions: [...restrictions],
       duration: { untilTurnOf: detainer },
     });
-    this.emit({ type: "prohibition-imposed", players: [], object: id, spells: false, abilities: true });
+    this.emit({ type: "prohibition-imposed", players: [], object: id, spells: false, abilities: true, untilYourNextTurn: true, by: detainer });
   }
 
   /**
@@ -32490,6 +32564,9 @@ export class Game {
     const object = this.state.objects[id];
     const shields = object?.regenerationShields ?? 0;
     if (shields <= 0) return false;
+    // "It can't be regenerated this turn" (rule 701.19c): its shields aren't
+    // applied, and stay until cleanup.
+    if (object.cantBeRegeneratedTurn === this.state.turn.number) return false;
     if (shields === 1) delete object.regenerationShields;
     else object.regenerationShields = shields - 1;
     if (object.damageMarked !== 0 || object.markedByDeathtouch) {
@@ -36483,6 +36560,7 @@ export class Game {
         controller: by.controller,
         ...(r.then !== undefined ? { then: r.then } : {}),
         ...(r.perEvent === true ? { perEvent: true as const } : {}),
+        ...(r.thenCountsUnprevented === true ? { thenCountsUnprevented: true as const } : {}),
         ...(r.ifAtMost !== undefined ? { ifAtMost: r.ifAtMost } : {}),
       });
     }
@@ -36943,16 +37021,17 @@ export class Game {
       if (outcome.preventedAll !== undefined) {
         const { step, amount: prevented } = outcome.preventedAll;
         if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        const thatMany = outcome.preventedAll.thenAmount ?? prevented;
         const owed = this.preventedThisEvent;
         if (step.then !== undefined && step.perEvent === true && owed !== null) {
           // Part of a simultaneous event: once for all of it, after it.
           const to = target.kind === "player" ? `player:${target.player}` : `object:${target.object}`;
           const same = owed.find((o) => o.by === step.by && o.then === step.then && o.to === to);
-          if (same !== undefined) same.amount += prevented;
-          else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: prevented });
+          if (same !== undefined) same.amount += thatMany;
+          else owed.push({ by: step.by, controller: step.controller, then: step.then, to, amount: thatMany });
         } else if (step.then !== undefined) {
           // The damage's source is "that source" (Swans of Bryn Argoll).
-          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented, 0, source));
+          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source));
         }
         if (outcome.dealt <= 0) return 0;
       }
@@ -37454,9 +37533,17 @@ export class Game {
    * whoever is the monarch as they trigger. */
   private setMonarch(player: PlayerId, via: "effect" | "combat-damage" | "monarch-left"): void {
     if (this.state.monarch === player) return;
+    // "You can't become the monarch this turn" — a "can't" wins (rule 101.2).
+    if (!this.canBecomeMonarch(player)) return;
     this.state.monarch = player;
     this.ensureMonarchAbility();
     this.emit({ type: "monarch-changed", player, via });
+  }
+
+  /** Whether `player` can become the monarch now: not under a "you can't
+   * become the monarch this turn" (`PlayerState.cantBecomeMonarchTurn`). */
+  private canBecomeMonarch(player: PlayerId): boolean {
+    return this.state.players[player]?.cantBecomeMonarchTurn !== this.state.turn.number;
   }
 
   /** `player` takes the initiative (rule 726) — also when they already have
@@ -38267,8 +38354,10 @@ export class Game {
       const order = this.state.turnOrder;
       const active = this.activePlayer;
       const start = active !== player ? order.indexOf(active) : order.indexOf(player) + 1;
+      // The next player in turn order who can become the monarch; none, and
+      // the game goes on without one (rule 725.4).
       const next = [...order.slice(start), ...order.slice(0, start)].find(
-        (p) => !this.state.players[p].hasLost,
+        (p) => !this.state.players[p].hasLost && p !== player && this.canBecomeMonarch(p),
       );
       if (next === undefined) this.state.monarch = null;
       else this.setMonarch(next, "monarch-left");
@@ -40272,6 +40361,7 @@ export class Game {
     object.blocked = false;
     object.markedByDeathtouch = false;
     delete object.regenerationShields;
+    delete object.cantBeRegeneratedTurn;
     if (!keepCounters) {
       object.counters = {};
       delete object.counterTimestamps;

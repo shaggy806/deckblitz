@@ -1245,10 +1245,22 @@ export type GameEvent =
       readonly type: "prohibition-imposed";
       readonly players: readonly PlayerId[];
       readonly object?: ObjectId;
+      /** Several permanents at once — "creatures dealt damage this way can't
+       * be regenerated this turn". */
+      readonly objects?: readonly ObjectId[];
       readonly spells: boolean;
       /** Only these spells — "noncreature spells" — when not every one. */
       readonly spellsLabel?: string;
       readonly abilities: boolean;
+      /** The permanents can't be regenerated this turn (rule 701.19c). */
+      readonly regeneration?: true;
+      /** The players can't become the monarch this turn (rule 725.4). */
+      readonly monarch?: true;
+      /** Until the imposing player's next turn rather than this turn
+       * (detain, Dovin Baan). */
+      readonly untilYourNextTurn?: true;
+      /** The player imposing it, when `untilYourNextTurn`. */
+      readonly by?: PlayerId;
     })
   | (Base & {
       /** Combat restrictions (the `restrict` effect): on `object`, or —

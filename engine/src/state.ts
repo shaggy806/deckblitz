@@ -272,6 +272,12 @@ export interface GameObject {
    * many.
    */
   regenerationShields?: number;
+  /** "It can't be regenerated this turn" (the `prohibit` effect's
+   * `regeneration` — rule 701.19c): the turn number it was said on. While
+   * `state.turn.number` still equals it, its regeneration shields aren't
+   * applied (they stay, and still end at cleanup); a zone change clears it
+   * (rule 400.7). Not an ability, so a loss of abilities doesn't end it. */
+  cantBeRegeneratedTurn?: number;
   /** Turn number this object last entered the battlefield; `null` otherwise. */
   enteredBattlefieldOnTurn: number | null;
   /**
@@ -2121,6 +2127,12 @@ export interface PlayerState {
    */
   lastUpkeepSeq?: number;
   previousUpkeepSeq?: number;
+  /** "You can't become the monarch this turn" (the `prohibit` effect's
+   * `monarch` — Jared Carthalion, True Heir): the turn number it was said
+   * on. While `state.turn.number` still equals it, nothing makes this player
+   * the monarch (rule 725.4's "a player who can become the monarch"); "this
+   * turn" ends with the turn, so no sweep clears it. */
+  cantBecomeMonarchTurn?: number;
   /** How many times the Ring has tempted this player this game (rule
    * 701.54c) — what the Ring emblem's later abilities are gated on. Absent
    * until it first does. */
@@ -5297,6 +5309,8 @@ export function tokenFoldKey(o: GameObject): string {
     o.counterTimestamps ?? null,
     o.modifiers,
     o.regenerationShields ?? 0,
+    o.cantBeRegeneratedTurn ?? null,
+    o.exileIfDiesTurn ?? null,
   ]);
 }
 

@@ -162,6 +162,7 @@ import _poolDiminish from "../pool/diminish.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
+import _poolDisintegrate from "../pool/disintegrate.js";
 import _poolDispersal from "../pool/dispersal.js";
 import _poolDistrictMascot from "../pool/district-mascot.js";
 import _poolDoesMachines from "../pool/does-machines.js";
@@ -345,6 +346,7 @@ import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
+import _poolJaredCarthalionTrueHeir from "../pool/jared-carthalion-true-heir.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
 import _poolJeweledSpirit from "../pool/jeweled-spirit.js";
@@ -1013,6 +1015,7 @@ const shard: CardShard = {
     _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
+    _poolDisintegrate,
     _poolDispersal,
     _poolDistrictMascot,
     _poolDoesMachines,
@@ -1196,6 +1199,7 @@ const shard: CardShard = {
     _poolIzzetCharm,
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
+    _poolJaredCarthalionTrueHeir,
     _poolJeditOjanenMercenary,
     _poolJeditOjanenOfEfrava,
     _poolJeweledSpirit,

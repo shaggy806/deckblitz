@@ -427,6 +427,7 @@ import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolMurderousCut from "../pool/murderous-cut.js";
+import _poolMythosOfVadrok from "../pool/mythos-of-vadrok.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNakayaShade from "../pool/nakaya-shade.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolMoxPearl,
     _poolMurasaSproutling,
     _poolMurderousCut,
+    _poolMythosOfVadrok,
     _poolNadirKraken,
     _poolNajalTheStormRunner,
     _poolNakayaShade,

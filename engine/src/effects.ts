@@ -4269,12 +4269,34 @@ export type EffectSpec =
        * ["creature"] }, label: "noncreature spells" }` — the filter matched
        * against the card as it would be cast, from this effect's controller's
        * side; `label` is how the log names them.
+       *
+       * The forbidden action can also be:
+       * - `regeneration`: "target creature can't be regenerated this turn"
+       *   (Hurr Jackal — rule 701.19c: its regeneration shields aren't
+       *   applied; activating or casting a regeneration effect still works).
+       *   On `target`, or with `dealtDamageThisWay: "creature"` on every
+       *   creature the resolution under way has dealt damage to so far
+       *   ("creatures dealt damage this way can't be regenerated this turn"
+       *   — Flamebreak; damage prevented was never dealt, rule 615.1). Not
+       *   an ability the creature has: it follows the permanent through a
+       *   loss of abilities and ends with the turn or a zone change (400.7).
+       * - `monarch`: "you can't become the monarch this turn" (Jared
+       *   Carthalion, True Heir — rule 725.4's "a player who can become the
+       *   monarch"): on the `who` players.
+       * On `target`, `abilities` is the default when neither is named.
+       * `duration: "until-your-next-turn"` makes a `target`'s abilities
+       * prohibition last until this effect's controller's next turn (Dovin
+       * Baan's +1) instead of this turn.
        */
       readonly kind: "prohibit";
       readonly who?: number | PlayerScope;
       readonly target?: EffectTargetRef;
       readonly spells?: boolean | { readonly filter: CardFilter; readonly label: string };
       readonly abilities?: boolean;
+      readonly regeneration?: boolean;
+      readonly monarch?: boolean;
+      readonly dealtDamageThisWay?: "creature";
+      readonly duration?: "until-your-next-turn";
     }
   | {
       /**
@@ -5660,9 +5682,10 @@ export type EffectSpec =
       /** A player becomes the monarch (rule 725 — ROADMAP Phase 10). `who`
        * defaults to the effect's controller. `via: "combat-damage"` is the
        * monarch's own steal ability (725.2 — `cards/monarch.ts`), so the
-       * event says how. */
+       * event says how. A number is a target slot holding a player: "target
+       * opponent becomes the monarch" (Jared Carthalion, True Heir). */
       readonly kind: "become-monarch";
-      readonly who?: PlayerScope;
+      readonly who?: PlayerScope | number;
       readonly via?: "combat-damage";
     }
   | {
@@ -8003,7 +8026,17 @@ export interface EffectApi {
     object: TargetRef | undefined,
     spells: boolean | { readonly filter: CardFilter; readonly label: string; readonly you: PlayerId },
     abilities: boolean,
+    /** An `object`'s abilities prohibition until the controller's next turn
+     * rather than this turn. */
+    untilYourNextTurn?: boolean,
   ): void;
+  /** See the `"prohibit"` {@link EffectSpec}'s `regeneration`: `target`, or
+   * every creature this resolution has dealt damage to so far, can't be
+   * regenerated this turn (rule 701.19c). */
+  prohibitRegeneration(target: TargetRef | "dealt-damage-this-way"): void;
+  /** See the `"prohibit"` {@link EffectSpec}'s `monarch`: `players` can't
+   * become the monarch this turn. */
+  prohibitMonarch(players: readonly PlayerId[]): void;
   /** See the `"restrict"` {@link EffectSpec}: `target`'s restrictions until
    * end of turn, or with `filter` a turn-wide rule. */
   restrict(
@@ -8424,6 +8457,8 @@ export interface EffectApi {
   setDayNight(value: "day" | "night"): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
+  /** One player becomes the monarch — a `become-monarch`'s target slot's. */
+  becomeMonarchPlayer(player: PlayerId): void;
   /** See the `"take-initiative"` {@link EffectSpec}. */
   takeInitiative(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** See the `"mutate-merge"` {@link EffectSpec}: the resolving spell merges
@@ -12177,9 +12212,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyRepeat(spec, ctx);
       return;
     case "prohibit": {
+      if (spec.regeneration === true && spec.dealtDamageThisWay !== undefined) {
+        ctx.prohibitRegeneration("dealt-damage-this-way");
+        return;
+      }
       if (spec.target !== undefined) {
         const target = resolveEffectTarget(spec.target, ctx);
-        if (target !== undefined) ctx.prohibit([], target, false, true);
+        if (target === undefined) return;
+        if (spec.regeneration === true) ctx.prohibitRegeneration(target);
+        // Abilities: named, or the default when nothing else is.
+        if (spec.abilities === true || spec.regeneration !== true) {
+          ctx.prohibit([], target, false, true, spec.duration === "until-your-next-turn");
+        }
         return;
       }
       const slot = typeof spec.who === "number" ? ctx.targets[spec.who] : undefined;
@@ -12191,6 +12235,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               ? [slot.player]
               : []
             : ctx.playersInScope(spec.who);
+      if (spec.monarch === true) ctx.prohibitMonarch(players);
+      if (spec.monarch === true && spec.spells === undefined && spec.abilities === undefined) return;
       ctx.prohibit(
         players,
         undefined,
@@ -12865,9 +12911,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "day-night":
       ctx.setDayNight(spec.value);
       return;
-    case "become-monarch":
+    case "become-monarch": {
+      if (typeof spec.who === "number") {
+        // "Target opponent becomes the monarch" (Jared Carthalion).
+        const slot = ctx.targets[spec.who];
+        if (slot?.kind === "player") ctx.becomeMonarchPlayer(slot.player);
+        return;
+      }
       ctx.becomeMonarch(spec.who, spec.via);
       return;
+    }
     case "take-initiative":
       ctx.takeInitiative(spec.who, spec.via);
       return;

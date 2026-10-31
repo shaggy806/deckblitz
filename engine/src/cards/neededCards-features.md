@@ -344,6 +344,33 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Can't-do effects for a duration — built 2026-10-31
+
+The need-keys Phase 2 family `effect:cant-activate-abilities-until-next-turn`,
+features only. **`prohibit`'s `regeneration`** — "target creature can't be
+regenerated this turn" (rule 701.19c: its shields stay but aren't applied),
+on a target or, with `dealtDamageThisWay: "creature"`, on every creature the
+resolution has dealt damage to so far (Incinerate, Flamebreak; damage
+prevented was never dealt), kept as `GameObject.cantBeRegeneratedTurn`.
+**`prohibit`'s `monarch`** — "you can't become the monarch this turn"
+(`PlayerState.cantBecomeMonarchTurn`; a monarch leaving passes it to the next
+player who can, rule 725.4), with **`become-monarch`'s target slot** ("target
+opponent becomes the monarch"). **`prohibit`'s `duration:
+"until-your-next-turn"`** for a target's abilities alone (Dovin Baan's +1,
+still blocked by its emblem); "can't attack or block and its activated
+abilities can't be activated until your next turn" is `detain` (Mythos of
+Vadrok). A damage-prevention replacement's **`thenCountsUnprevented`** keeps
+"that many" when the damage can't be prevented (Jared's ruling, rule 615.12).
+Keys: cant-be-regenerated-this-turn, cant-become-monarch-this-turn,
+target-player-becomes-monarch, cant-activate-abilities-until-next-turn.
+Proving cards: Incinerate, Flamebreak, Disintegrate, Jared Carthalion, True
+Heir, Mythos of Vadrok. Still open beside it: `effect:cant-phase-out` (Spatial
+Binding, Ertai's Familiar — "until your next upkeep", and whether a
+permanent that can't phase out still phases out indirectly with its host is
+a rules question); Bone Shaman's granted "creatures dealt damage by this
+creature this turn can't be regenerated this turn", Whippoorwill's and
+Runesword's other halves.
+
 ### Removing counters in bulk — built 2026-10-31
 
 The need-keys Phase 2 family `effect:remove-all-counters`, features only.

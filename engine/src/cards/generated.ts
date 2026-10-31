@@ -5815,6 +5815,7 @@ import _poolDisentomb from "./pool/disentomb.js";
 import _poolDisfigure from "./pool/disfigure.js";
 import _poolDisharmony from "./pool/disharmony.js";
 import _poolDisinformationCampaign from "./pool/disinformation-campaign.js";
+import _poolDisintegrate from "./pool/disintegrate.js";
 import _poolDismalBackwater from "./pool/dismal-backwater.js";
 import _poolDismantlingBlow from "./pool/dismantling-blow.js";
 import _poolDismantlingWave from "./pool/dismantling-wave.js";
@@ -8021,6 +8022,7 @@ import _poolFlameblastDragon from "./pool/flameblast-dragon.js";
 import _poolFlamebornHellion from "./pool/flameborn-hellion.js";
 import _poolFlamebornViron from "./pool/flameborn-viron.js";
 import _poolFlamebraider from "./pool/flamebraider.js";
+import _poolFlamebreak from "./pool/flamebreak.js";
 import _poolFlamecacheGecko from "./pool/flamecache-gecko.js";
 import _poolFlamecastWheel from "./pool/flamecast-wheel.js";
 import _poolFlamecoreElemental from "./pool/flamecore-elemental.js";
@@ -11249,6 +11251,7 @@ import _poolIncendiaryCommand from "./pool/incendiary-command.js";
 import _poolIncendiaryFlow from "./pool/incendiary-flow.js";
 import _poolIncendiarySabotage from "./pool/incendiary-sabotage.js";
 import _poolIncendiary from "./pool/incendiary.js";
+import _poolIncinerate from "./pool/incinerate.js";
 import _poolIncineratingBlast from "./pool/incinerating-blast.js";
 import _poolIncisorGlider from "./pool/incisor-glider.js";
 import _poolIncite from "./pool/incite.js";
@@ -11774,6 +11777,7 @@ import _poolJanglingAutomaton from "./pool/jangling-automaton.js";
 import _poolJanjeetSentry from "./pool/janjeet-sentry.js";
 import _poolJaradGolgariLichLord from "./pool/jarad-golgari-lich-lord.js";
 import _poolJarakuTheInterloper from "./pool/jaraku-the-interloper.js";
+import _poolJaredCarthalionTrueHeir from "./pool/jared-carthalion-true-heir.js";
 import _poolJaredCarthalion from "./pool/jared-carthalion.js";
 import _poolJarethLeonineTitan from "./pool/jareth-leonine-titan.js";
 import _poolJarlOfTheForsaken from "./pool/jarl-of-the-forsaken.js";
@@ -15037,6 +15041,7 @@ import _poolMythicProportions from "./pool/mythic-proportions.js";
 import _poolMythosOfBrokkos from "./pool/mythos-of-brokkos.js";
 import _poolMythosOfIlluna from "./pool/mythos-of-illuna.js";
 import _poolMythosOfNethroi from "./pool/mythos-of-nethroi.js";
+import _poolMythosOfVadrok from "./pool/mythos-of-vadrok.js";
 import _poolNabanDeanOfIteration from "./pool/naban-dean-of-iteration.js";
 import _poolNacatlHuntPride from "./pool/nacatl-hunt-pride.js";
 import _poolNacatlOutlander from "./pool/nacatl-outlander.js";
@@ -33157,6 +33162,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDisfigure,
   _poolDisharmony,
   _poolDisinformationCampaign,
+  _poolDisintegrate,
   _poolDismalBackwater,
   _poolDismantlingBlow,
   _poolDismantlingWave,
@@ -35363,6 +35369,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlamebornHellion,
   _poolFlamebornViron,
   _poolFlamebraider,
+  _poolFlamebreak,
   _poolFlamecacheGecko,
   _poolFlamecastWheel,
   _poolFlamecoreElemental,
@@ -38591,6 +38598,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIncendiaryFlow,
   _poolIncendiarySabotage,
   _poolIncendiary,
+  _poolIncinerate,
   _poolIncineratingBlast,
   _poolIncisorGlider,
   _poolIncite,
@@ -39116,6 +39124,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJanjeetSentry,
   _poolJaradGolgariLichLord,
   _poolJarakuTheInterloper,
+  _poolJaredCarthalionTrueHeir,
   _poolJaredCarthalion,
   _poolJarethLeonineTitan,
   _poolJarlOfTheForsaken,
@@ -42379,6 +42388,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMythosOfBrokkos,
   _poolMythosOfIlluna,
   _poolMythosOfNethroi,
+  _poolMythosOfVadrok,
   _poolNabanDeanOfIteration,
   _poolNacatlHuntPride,
   _poolNacatlOutlander,
@@ -60512,6 +60522,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disfigure": _poolDisfigure,
   "pool/disharmony": _poolDisharmony,
   "pool/disinformation-campaign": _poolDisinformationCampaign,
+  "pool/disintegrate": _poolDisintegrate,
   "pool/dismal-backwater": _poolDismalBackwater,
   "pool/dismantling-blow": _poolDismantlingBlow,
   "pool/dismantling-wave": _poolDismantlingWave,
@@ -62718,6 +62729,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flameborn-hellion": _poolFlamebornHellion,
   "pool/flameborn-viron": _poolFlamebornViron,
   "pool/flamebraider": _poolFlamebraider,
+  "pool/flamebreak": _poolFlamebreak,
   "pool/flamecache-gecko": _poolFlamecacheGecko,
   "pool/flamecast-wheel": _poolFlamecastWheel,
   "pool/flamecore-elemental": _poolFlamecoreElemental,
@@ -65946,6 +65958,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/incendiary-flow": _poolIncendiaryFlow,
   "pool/incendiary-sabotage": _poolIncendiarySabotage,
   "pool/incendiary": _poolIncendiary,
+  "pool/incinerate": _poolIncinerate,
   "pool/incinerating-blast": _poolIncineratingBlast,
   "pool/incisor-glider": _poolIncisorGlider,
   "pool/incite": _poolIncite,
@@ -66471,6 +66484,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/janjeet-sentry": _poolJanjeetSentry,
   "pool/jarad-golgari-lich-lord": _poolJaradGolgariLichLord,
   "pool/jaraku-the-interloper": _poolJarakuTheInterloper,
+  "pool/jared-carthalion-true-heir": _poolJaredCarthalionTrueHeir,
   "pool/jared-carthalion": _poolJaredCarthalion,
   "pool/jareth-leonine-titan": _poolJarethLeonineTitan,
   "pool/jarl-of-the-forsaken": _poolJarlOfTheForsaken,
@@ -69734,6 +69748,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mythos-of-brokkos": _poolMythosOfBrokkos,
   "pool/mythos-of-illuna": _poolMythosOfIlluna,
   "pool/mythos-of-nethroi": _poolMythosOfNethroi,
+  "pool/mythos-of-vadrok": _poolMythosOfVadrok,
   "pool/naban-dean-of-iteration": _poolNabanDeanOfIteration,
   "pool/nacatl-hunt-pride": _poolNacatlHuntPride,
   "pool/nacatl-outlander": _poolNacatlOutlander,

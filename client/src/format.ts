@@ -349,11 +349,24 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
     case 'prohibition-imposed': {
+      if (event.regeneration === true) {
+        const objects = event.objects ?? (event.object !== undefined ? [event.object] : [])
+        return `${objects.map(name).join(', ')} can't be regenerated this turn`
+      }
+      if (event.monarch === true) {
+        return `${event.players.map((p) => who(p)).join(', ')} can't become the monarch this turn`
+      }
       const what = [event.spells ? `cast ${event.spellsLabel ?? 'spells'}` : null, event.abilities ? 'activate abilities' : null]
         .filter((w) => w !== null)
         .join(' or ')
       return event.object !== undefined
-        ? `${name(event.object)}'s activated abilities can't be activated this turn`
+        ? `${name(event.object)}'s activated abilities can't be activated ${
+            event.untilYourNextTurn === true
+              ? event.by !== undefined
+                ? `until ${who(event.by)}'s next turn`
+                : 'until their next turn'
+              : 'this turn'
+          }`
         : `${event.players.map((p) => who(p)).join(', ')} can't ${what} this turn`
     }
     case 'restrictions-imposed': {

@@ -162,6 +162,14 @@ export const makeFormatter = (game) => {
           e.duration === "end-of-turn" ? " until EOT" : ""
         }`;
       case "prohibition-imposed": {
+        if (e.regeneration === true) {
+          const objects = e.objects ?? (e.object !== undefined ? [e.object] : []);
+          return `${objects.map(name).join(", ")} can't be regenerated this turn`;
+        }
+        if (e.monarch === true) return `${e.players.join(", ")} can't become the monarch this turn`;
+        if (e.object !== undefined && e.untilYourNextTurn === true) {
+          return `${name(e.object)}'s activated abilities can't be activated until ${e.by ?? "their"}'s next turn`;
+        }
         const what = [e.spells ? `cast ${e.spellsLabel ?? "spells"}` : null, e.abilities ? "activate abilities" : null]
           .filter((w) => w !== null)
           .join(" or ");

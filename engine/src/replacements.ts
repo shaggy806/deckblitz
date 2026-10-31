@@ -428,6 +428,11 @@ export interface DamageMultiplierReplacement {
    * creature" applies per source (Ironscale Hydra's ruling: a counter per
    * creature). */
   readonly perEvent?: true;
+  /** With `prevent` and `then`: `then`'s "that many" is the damage even
+   * when it can't be prevented and so isn't (rule 615.12 — Jared Carthalion,
+   * True Heir's ruling). Without it, "x" is the damage actually prevented
+   * (Swans of Bryn Argoll's "prevented this way"). */
+  readonly thenCountsUnprevented?: true;
   readonly source?: CardFilter;
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */

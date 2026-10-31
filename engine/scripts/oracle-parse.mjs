@@ -2086,6 +2086,9 @@ export function parseSentence(sentence, ctx) {
     return { kind: "restrict", target: slot(m[1]), restrictions: [], cantBlockAttacker: "source" };
   }
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
+  // "Target creature can't be regenerated this turn" (Hurr Jackal — rule
+  // 701.19c).
+  if ((m = re(`(${TARGET}) can't be regenerated this turn`).exec(s))) return { kind: "prohibit", target: slot(m[1]), regeneration: true };
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
   }
@@ -2165,14 +2168,15 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
-  if ((m = re(`~ deals ${N} damage to each creature and each player`).exec(s))) {
-    // One event (Pestilence): the creatures and the players are dealt it at once.
+  if ((m = re(`~ deals ${N} damage to each creature( without flying)? and each player`).exec(s))) {
+    // One event (Pestilence; Earthquake, Flamebreak "without flying"): the
+    // creatures and the players are dealt it at once.
     const n = amount(m[1]);
     return {
       kind: "sequence",
       simultaneous: true,
       effects: [
-        { kind: "damage-all", filter: { type: "creature" }, amount: n },
+        { kind: "damage-all", filter: m[2] ? { type: "creature", notKeyword: "flying" } : { type: "creature" }, amount: n },
         { kind: "damage", amount: n, who: "each-player" },
       ],
     };
@@ -2357,6 +2361,10 @@ export function parseSentence(sentence, ctx) {
 
   // Everything else that's a whole instruction by itself.
   if (re("you become the monarch").test(s)) return { kind: "become-monarch" };
+  // "Target opponent becomes the monarch" (Jared Carthalion, True Heir).
+  if ((m = re("(target player|target opponent) becomes the monarch").exec(s))) return { kind: "become-monarch", who: slot(m[1]) };
+  // "You can't become the monarch this turn" (rule 725.4).
+  if (re("you can't become the monarch this turn").test(s)) return { kind: "prohibit", who: "you", monarch: true };
   // The initiative (rule 726) — its abilities venture into Undercity — and
   // venturing (701.49): into one of the three Forgotten Realms dungeons.
   if (re("you take the initiative").test(s)) return { kind: "take-initiative" };
@@ -2629,6 +2637,35 @@ export function parseEffect(text, outer) {
       const instead = { kind: "exile-if-dies-this-turn", dealtDamageThisWay: damagedM[1].toLowerCase() };
       parsed.push(instead);
       hints.push({ sentence, effect: instead });
+      continue;
+    }
+    // "It can't be regenerated this turn." after the one sentence that
+    // targeted (Engulfing Flames, Rage of Purphoros — rule 701.19c).
+    if (/^(?:it|that creature) can't be regenerated this turn\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const cant = { kind: "prohibit", target: 0, regeneration: true };
+      parsed.push(cant);
+      hints.push({ sentence, effect: cant });
+      continue;
+    }
+    // "A creature dealt damage this way can't be regenerated this turn." after
+    // the damage (Incinerate, Flamebreak): whatever creature it damaged.
+    if (/^(?:a creature|creatures) dealt damage this way can't be regenerated this turn\.$/i.test(sentence) && parsed.some(dealsDamage)) {
+      const cant = { kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" };
+      parsed.push(cant);
+      hints.push({ sentence, effect: cant });
+      continue;
+    }
+    // "If it's a creature, it can't be regenerated this turn, and if it would
+    // die this turn, exile it instead." after the one sentence that targeted
+    // (Disintegrate, Carbonize): read as it resolves, damage dealt or not.
+    if (/^if it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const cant = {
+        kind: "conditional",
+        condition: { kind: "target", index: 0, filter: { type: "creature" } },
+        then: { kind: "sequence", effects: [{ kind: "prohibit", target: 0, regeneration: true }, { kind: "exile-if-dies-this-turn", target: 0 }] },
+      };
+      parsed.push(cant);
+      hints.push({ sentence, effect: cant });
       continue;
     }
     // "~ deals 2 damage to that creature's controller" after the one sentence

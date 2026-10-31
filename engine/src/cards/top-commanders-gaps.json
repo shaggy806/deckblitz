@@ -672,7 +672,11 @@
   "static:assign-damage-as-though-unblocked",
   "cost:additional-cost-reveal",
   "effect:remove-all-counters",
-  "effect:remove-counters-all"
+  "effect:remove-counters-all",
+  "effect:cant-be-regenerated-this-turn",
+  "effect:cant-become-monarch-this-turn",
+  "effect:target-player-becomes-monarch",
+  "effect:cant-activate-abilities-until-next-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

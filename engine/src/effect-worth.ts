@@ -471,6 +471,9 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     // Matters only to this turn's combat damage (Gurzigost).
     case "assign-as-though-unblocked":
       return true;
+    // "Target creature can't be regenerated this turn" (Hurr Jackal) alone.
+    case "prohibit":
+      return effect.regeneration === true && effect.abilities !== true && effect.spells === undefined;
     default:
       return false;
   }

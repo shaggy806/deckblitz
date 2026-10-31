@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: can't-do effects for a duration** (2026-10-31;
+  `effect:cant-be-regenerated-this-turn`, `effect:cant-become-monarch-this-turn`,
+  `effect:target-player-becomes-monarch`, `effect:cant-activate-abilities-until-next-turn`).
+  `prohibit`'s `regeneration` keeps a creature's regeneration shields from applying for the
+  turn (rule 701.19c) — on a target, or with `dealtDamageThisWay` on every creature the
+  resolution dealt damage to; `monarch` is "you can't become the monarch this turn" (a
+  departing monarch's title passes to the next player who can, 725.4); `become-monarch` takes a
+  target player; a target's abilities prohibition can last `until-your-next-turn`; a prevention
+  replacement's `thenCountsUnprevented` still puts "that many" counters on for unpreventable
+  damage (615.12). The scaffolder reads the lines (and Earthquake's "each creature without
+  flying and each player"). 14 freed; proving cards Incinerate, Flamebreak, Disintegrate, Jared
+  Carthalion, True Heir, Mythos of Vadrok. `effect:cant-phase-out` stays open.
 - **Need-keys Phase 2: removing counters in bulk** (2026-10-31; `effect:remove-all-counters`,
   `effect:remove-counters-all`). `remove-counter`'s `amount: "all"` takes every counter of its
   kind off one permanent, and with `counter: "any"` every kind ("remove all counters from

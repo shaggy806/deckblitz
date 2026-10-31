@@ -272,6 +272,7 @@ import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
+import _poolFlamebreak from "../pool/flamebreak.js";
 import _poolFlameshadowConjuring from "../pool/flameshadow-conjuring.js";
 import _poolFlickeringHound from "../pool/flickering-hound.js";
 import _poolFlitterstepEidolon from "../pool/flitterstep-eidolon.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolFistOfSuns,
     _poolFlameJavelin,
     _poolFlameRift,
+    _poolFlamebreak,
     _poolFlameshadowConjuring,
     _poolFlickeringHound,
     _poolFlitterstepEidolon,

@@ -3373,3 +3373,70 @@ describe("removing counters in bulk (remove-counter's 'all', remove-counter-all)
     expect(layer.triggered[0].effect).toEqual({ kind: "remove-counter-all", filter: { type: "land" }, counter: "mine", amount: "all" });
   });
 });
+
+describe("can't-do effects for a duration (prohibit's regeneration and monarch)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'target creature can't be regenerated this turn', and 'it' after a targeted sentence", () => {
+    expect(face("Hurr Jackal", "Creature — Jackal", "{T}: Target creature can't be regenerated this turn.").activated[0].effect).toEqual({
+      kind: "prohibit",
+      target: 0,
+      regeneration: true,
+    });
+    const flames = face("Engulfing Flames", "Instant", "Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.");
+    expect(flames.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 1, target: 0 },
+        { kind: "prohibit", target: 0, regeneration: true },
+      ],
+    });
+  });
+
+  it("reads 'creatures dealt damage this way can't be regenerated this turn' after the damage", () => {
+    const flamebreak = face(
+      "Flamebreak",
+      "Sorcery",
+      "Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.",
+    );
+    expect(flamebreak.complete).toBe(true);
+    expect(flamebreak.effect.effects[1]).toEqual({ kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" });
+    const incinerate = face("Incinerate", "Instant", "Incinerate deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.");
+    expect(incinerate.effect.effects[1]).toEqual({ kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" });
+  });
+
+  it("reads Disintegrate's 'if it's a creature' pair as one conditional", () => {
+    const disintegrate = face(
+      "Disintegrate",
+      "Sorcery",
+      "Disintegrate deals X damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.",
+    );
+    expect(disintegrate.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { type: "creature" } },
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "prohibit", target: 0, regeneration: true },
+          { kind: "exile-if-dies-this-turn", target: 0 },
+        ],
+      },
+    });
+  });
+
+  it("reads 'target opponent becomes the monarch' and 'you can't become the monarch this turn'", () => {
+    const jared = face(
+      "Jared Carthalion, True Heir",
+      "Legendary Creature — Human Warrior",
+      "When Jared Carthalion enters, target opponent becomes the monarch. You can't become the monarch this turn.",
+    );
+    expect(jared.triggered[0].targets).toEqual(["opponent"]);
+    expect(jared.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "become-monarch", who: 0 },
+        { kind: "prohibit", who: "you", monarch: true },
+      ],
+    });
+  });
+});
