@@ -4368,3 +4368,44 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
     expect(nets.complete).toBe(false);
   });
 });
+
+describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a target creature's requirement, aimed and timed", () => {
+    const siren = face("Alluring Siren", "Creature — Siren", "{T}: Target creature an opponent controls attacks you this turn if able.");
+    expect(siren.complete).toBe(true);
+    expect(siren.activated[0].targets).toEqual(["creature-an-opponent-controls"]);
+    expect(siren.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: "you", duration: "this-turn" });
+    const sirens = face("Dulcet Sirens", "Creature — Siren", "{U}, {T}: Target creature attacks target opponent this turn if able.");
+    expect(sirens.activated[0].targets).toEqual(["creature", "opponent"]);
+    expect(sirens.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: 1, duration: "this-turn" });
+    const behemoth = face(
+      "Test",
+      "Creature — Kraken",
+      "Landfall — Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able.",
+    );
+    expect(behemoth.triggered[0].effect).toEqual({ kind: "attack-requirement", target: 0, duration: "controllers-next-combat" });
+  });
+
+  it("reads a target player's creatures' requirement, this turn or during their next", () => {
+    const taunt = face("Taunt", "Sorcery", "During target player's next turn, creatures that player controls attack you if able.");
+    expect(taunt.complete).toBe(true);
+    expect(taunt.targets).toEqual(["player"]);
+    expect(taunt.effect).toEqual({
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget: 0,
+      attacks: "you",
+      duration: "that-players-next-turn",
+    });
+    const threats = face("Test", "Instant", "Creatures target opponent controls attack this turn if able.");
+    expect(threats.effect).toEqual({
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget: 0,
+      duration: "this-turn",
+    });
+  });
+});

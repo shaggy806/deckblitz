@@ -1947,7 +1947,20 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   ETB: goad's requirements as a rule of the game until your next turn, over
   every creature matching `filter` from your side — including creatures an
   opponent gets later (rule 611.2c) — and none of them *goaded*.
-  `otherThanYou: false` is the bare "attack each combat if able".
+  `otherThanYou: false` is the bare "attack each combat if able" (both
+  default to it: `filter` `{}`, `otherThanYou` false). Maximum Carnage's
+  chapter I is `{ filter: { type: "creature" }, otherThanYou: true }`.
+  Narrowed (rule 508.1d): **`target`** binds that one creature, as the object
+  it is (Alluring Siren's "target creature an opponent controls attacks you
+  this turn if able"); **`controlledByTarget`** a target player's creatures
+  as attackers are declared (Taunt, Imaginary Threats); **`attacks`**
+  (`"you"`, `"source"` — Gideon Jura's "attack Gideon Jura" — or a target
+  slot, Dulcet Sirens' "attacks target opponent") is obeyed only by attacking
+  that one, so it binds only while that one can be attacked; **`duration`**
+  is `"this-turn"`, `"that-players-next-turn"` (the `controlledByTarget`
+  player's), `"controllers-next-turn"` or `"controllers-next-combat"` (the
+  `target`'s controller's — Trench Behemoth), until your next turn when
+  absent.
 - **`suspect { target }`** / **`unsuspect { target | filter }`** — suspect a
   creature (rule 701.60): a designation (`GameObject.suspectedAt`) that gives
   it menace and "can't block" until it leaves the battlefield or is no longer

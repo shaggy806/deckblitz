@@ -36,7 +36,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { matchesFilter, weightedMatches } from "../filter.js";
 import { goadersOf, sourceAmount } from "../goad.js";
 import { hasRingBearerDesignation } from "../ring.js";
-import { printedCardName, rulesTextName } from "../state.js";
+import { attackRequirementActive, printedCardName, rulesTextName } from "../state.js";
 import type { AttackRequirementRule, GameObject, GameState } from "../state.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
 
@@ -714,7 +714,32 @@ export function attackRequirementRulesOf(
   if (rules === undefined || rules.length === 0) return [];
   const object = state.objects[id];
   if (object === undefined || object.zone !== "battlefield") return [];
-  return rules.filter((rule) => matchesFilter(state, registry, id, rule.filter, { you: rule.by }));
+  return rules.filter(
+    (rule) =>
+      attackRequirementActive(state, rule) &&
+      (rule.object === undefined || (rule.object.id === id && rule.object.stint === (object.zoneChangeCount ?? 0))) &&
+      (rule.controlledBy === undefined || object.controller === rule.controlledBy) &&
+      matchesFilter(state, registry, id, rule.filter, { you: rule.by }),
+  );
+}
+
+/**
+ * The players and planeswalkers `attacker` must attack if able — one entry
+ * per requirement (rule 508.1d): encore's opponent (`mustAttackPlayer`) and
+ * each binding attack-requirement rule's `attacks` (Alluring Siren's "attacks
+ * you", Taunt's, Gideon Jura's "attack Gideon Jura").
+ */
+function aimedRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): (PlayerId | ObjectId)[] {
+  const aimedAt = state.objects[attacker]?.mustAttackPlayer;
+  return [
+    ...(aimedAt !== undefined ? [aimedAt] : []),
+    ...attackRequirementRulesOf(state, registry, attacker).flatMap((rule) =>
+      rule.attacks === undefined ||
+      (rule.attacksStint !== undefined && (state.objects[rule.attacks as ObjectId]?.zoneChangeCount ?? 0) !== rule.attacksStint)
+        ? []
+        : [rule.attacks],
+    ),
+  ];
 }
 
 /**
@@ -744,10 +769,10 @@ function otherThanRequirements(state: GameState, registry: CardRegistry, attacke
 function aimedRequirementsObeyed(
   state: GameState,
   others: readonly PlayerId[],
-  aimedAt: PlayerId | undefined,
+  aimed: readonly (PlayerId | ObjectId)[],
   defender: PlayerId | ObjectId,
 ): number {
-  let obeyed = defender === aimedAt ? 1 : 0;
+  let obeyed = aimed.filter((a) => a === defender).length;
   if (!isPlaneswalkerTarget(state, defender)) {
     for (const other of others) if (other !== defender) obeyed += 1;
   }
@@ -785,13 +810,13 @@ export function attackRequirementsForbid(
   const object = state.objects[attacker];
   if (object === undefined) return false;
   const others = otherThanRequirements(state, registry, attacker);
-  const aimedAt = object.mustAttackPlayer;
-  if (others.length === 0 && aimedAt === undefined) return false;
-  const here = aimedRequirementsObeyed(state, others, aimedAt, defender);
+  const aimed = aimedRequirements(state, registry, attacker);
+  if (others.length === 0 && aimed.length === 0) return false;
+  const here = aimedRequirementsObeyed(state, others, aimed, defender);
   return legalDefenders(state, registry, player).some(
     (other) =>
       other !== defender &&
-      aimedRequirementsObeyed(state, others, aimedAt, other) > here &&
+      aimedRequirementsObeyed(state, others, aimed, other) > here &&
       whyCannotAttack(state, registry, player, attacker, other, asOf) === null,
   );
 }
@@ -806,7 +831,8 @@ export function attackRequirementsReason(state: GameState, registry: CardRegistr
   if (otherThanRequirements(state, registry, attacker).length > 0) {
     return `${name} must attack a player other than ${otherThanRequirements(state, registry, attacker).join(", ")} if able`;
   }
-  return `${name} must attack the opponent it was made to attack`;
+  if (state.objects[attacker]?.mustAttackPlayer !== undefined) return `${name} must attack the opponent it was made to attack`;
+  return `${name} must attack the player or planeswalker it was made to attack`;
 }
 
 /**
@@ -880,15 +906,14 @@ function mustAttackUncached(state: GameState, registry: CardRegistry, attacker: 
   if (object === undefined) return false;
   if (
     goadersOf(state, registry, attacker).length > 0 ||
-    attackRequirementRulesOf(state, registry, attacker).length > 0 ||
+    attackRequirementRulesOf(state, registry, attacker).some((rule) => rule.attacks === undefined) ||
     restrictionsOf(state, registry, attacker).has("must-attack")
   ) {
     return true;
   }
-  const aimedAt = object.mustAttackPlayer;
-  return (
-    aimedAt !== undefined &&
-    legalDefenders(state, registry, object.controller).includes(aimedAt) &&
-    whyCannotAttack(state, registry, object.controller, attacker, aimedAt) === null
+  const defenders = legalDefenders(state, registry, object.controller);
+  return aimedRequirements(state, registry, attacker).some(
+    (aimedAt) =>
+      defenders.includes(aimedAt) && whyCannotAttack(state, registry, object.controller, attacker, aimedAt) === null,
   );
 }

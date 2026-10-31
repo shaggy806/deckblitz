@@ -691,6 +691,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   `blockingRelation` filter (blocking, blocked by or either, the source's or its host's, a gone
   source read off its last-known blocks; 21 freed, 7 proving cards; Defiant Vanguard's "blocked
   this turn" left open).
+- **2026-10-31: attack requirements narrowed** (the same cloud session) —
+  `static:combat-restriction-extensions`' top group: Kardur's `attack-requirement` rule by one
+  creature or a player's creatures, aimed at a player or planeswalker, for this turn, a player's
+  next turn or next combat phase (3 freed, 6 proving cards; Public Enemy's static, Galactus and
+  Silver Surfer left open).
 
 ## Rough size
 

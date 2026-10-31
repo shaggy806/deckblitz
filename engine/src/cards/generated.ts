@@ -531,6 +531,7 @@ import _poolAlloyGolem from "./pool/alloy-golem.js";
 import _poolAlloyMyr from "./pool/alloy-myr.js";
 import _poolAllureOfPower from "./pool/allure-of-power.js";
 import _poolAlluringScent from "./pool/alluring-scent.js";
+import _poolAlluringSiren from "./pool/alluring-siren.js";
 import _poolAllyEncampment from "./pool/ally-encampment.js";
 import _poolAlmightyBrushwagg from "./pool/almighty-brushwagg.js";
 import _poolAlmostPerfect from "./pool/almost-perfect.js";
@@ -6385,6 +6386,7 @@ import _poolDugganPrivateDetective from "./pool/duggan-private-detective.js";
 import _poolDukeUlderRavengard from "./pool/duke-ulder-ravengard.js";
 import _poolDukharaPeafowl from "./pool/dukhara-peafowl.js";
 import _poolDukharaScavenger from "./pool/dukhara-scavenger.js";
+import _poolDulcetSirens from "./pool/dulcet-sirens.js";
 import _poolDundoolinWeaver from "./pool/dundoolin-weaver.js";
 import _poolDuneBeetle from "./pool/dune-beetle.js";
 import _poolDuneBroodNephilim from "./pool/dune-brood-nephilim.js";
@@ -11193,6 +11195,7 @@ import _poolIllvoiOperative from "./pool/illvoi-operative.js";
 import _poolIlysianCaryatid from "./pool/ilysian-caryatid.js";
 import _poolImagecrafter from "./pool/imagecrafter.js";
 import _poolImaginaryPet from "./pool/imaginary-pet.js";
+import _poolImaginaryThreats from "./pool/imaginary-threats.js";
 import _poolImmaculateMagistrate from "./pool/immaculate-magistrate.js";
 import _poolImmersturmPredator from "./pool/immersturm-predator.js";
 import _poolImmersturmRaider from "./pool/immersturm-raider.js";
@@ -14066,6 +14069,7 @@ import _poolMawcor from "./pool/mawcor.js";
 import _poolMawloc from "./pool/mawloc.js";
 import _poolMaximizeAltitude from "./pool/maximize-altitude.js";
 import _poolMaximizeVelocity from "./pool/maximize-velocity.js";
+import _poolMaximumCarnage from "./pool/maximum-carnage.js";
 import _poolMaximumOverdrive from "./pool/maximum-overdrive.js";
 import _poolMayaelTheAnima from "./pool/mayael-the-anima.js";
 import _poolMayaelsAria from "./pool/mayaels-aria.js";
@@ -22859,6 +22863,7 @@ import _poolTattermungeManiac from "./pool/tattermunge-maniac.js";
 import _poolTattermungeWitch from "./pool/tattermunge-witch.js";
 import _poolTatyovaStewardOfTides from "./pool/tatyova-steward-of-tides.js";
 import _poolTatyova from "./pool/tatyova.js";
+import _poolTaunt from "./pool/taunt.js";
 import _poolTauntingArbormage from "./pool/taunting-arbormage.js";
 import _poolTauntingChallenge from "./pool/taunting-challenge.js";
 import _poolTauntingElf from "./pool/taunting-elf.js";
@@ -24173,6 +24178,7 @@ import _poolTreetopVillage from "./pool/treetop-village.js";
 import _poolTrelasarraMoonDancer from "./pool/trelasarra-moon-dancer.js";
 import _poolTremble from "./pool/tremble.js";
 import _poolTremor from "./pool/tremor.js";
+import _poolTrenchBehemoth from "./pool/trench-behemoth.js";
 import _poolTrenchStalker from "./pool/trench-stalker.js";
 import _poolTrenchWurm from "./pool/trench-wurm.js";
 import _poolTrenchingSteed from "./pool/trenching-steed.js";
@@ -27983,6 +27989,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAlloyMyr,
   _poolAllureOfPower,
   _poolAlluringScent,
+  _poolAlluringSiren,
   _poolAllyEncampment,
   _poolAlmightyBrushwagg,
   _poolAlmostPerfect,
@@ -33837,6 +33844,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDukeUlderRavengard,
   _poolDukharaPeafowl,
   _poolDukharaScavenger,
+  _poolDulcetSirens,
   _poolDundoolinWeaver,
   _poolDuneBeetle,
   _poolDuneBroodNephilim,
@@ -38645,6 +38653,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIlysianCaryatid,
   _poolImagecrafter,
   _poolImaginaryPet,
+  _poolImaginaryThreats,
   _poolImmaculateMagistrate,
   _poolImmersturmPredator,
   _poolImmersturmRaider,
@@ -41518,6 +41527,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMawloc,
   _poolMaximizeAltitude,
   _poolMaximizeVelocity,
+  _poolMaximumCarnage,
   _poolMaximumOverdrive,
   _poolMayaelTheAnima,
   _poolMayaelsAria,
@@ -50311,6 +50321,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTattermungeWitch,
   _poolTatyovaStewardOfTides,
   _poolTatyova,
+  _poolTaunt,
   _poolTauntingArbormage,
   _poolTauntingChallenge,
   _poolTauntingElf,
@@ -51625,6 +51636,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrelasarraMoonDancer,
   _poolTremble,
   _poolTremor,
+  _poolTrenchBehemoth,
   _poolTrenchStalker,
   _poolTrenchWurm,
   _poolTrenchingSteed,
@@ -55448,6 +55460,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/alloy-myr": _poolAlloyMyr,
   "pool/allure-of-power": _poolAllureOfPower,
   "pool/alluring-scent": _poolAlluringScent,
+  "pool/alluring-siren": _poolAlluringSiren,
   "pool/ally-encampment": _poolAllyEncampment,
   "pool/almighty-brushwagg": _poolAlmightyBrushwagg,
   "pool/almost-perfect": _poolAlmostPerfect,
@@ -61302,6 +61315,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/duke-ulder-ravengard": _poolDukeUlderRavengard,
   "pool/dukhara-peafowl": _poolDukharaPeafowl,
   "pool/dukhara-scavenger": _poolDukharaScavenger,
+  "pool/dulcet-sirens": _poolDulcetSirens,
   "pool/dundoolin-weaver": _poolDundoolinWeaver,
   "pool/dune-beetle": _poolDuneBeetle,
   "pool/dune-brood-nephilim": _poolDuneBroodNephilim,
@@ -66110,6 +66124,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ilysian-caryatid": _poolIlysianCaryatid,
   "pool/imagecrafter": _poolImagecrafter,
   "pool/imaginary-pet": _poolImaginaryPet,
+  "pool/imaginary-threats": _poolImaginaryThreats,
   "pool/immaculate-magistrate": _poolImmaculateMagistrate,
   "pool/immersturm-predator": _poolImmersturmPredator,
   "pool/immersturm-raider": _poolImmersturmRaider,
@@ -68983,6 +68998,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mawloc": _poolMawloc,
   "pool/maximize-altitude": _poolMaximizeAltitude,
   "pool/maximize-velocity": _poolMaximizeVelocity,
+  "pool/maximum-carnage": _poolMaximumCarnage,
   "pool/maximum-overdrive": _poolMaximumOverdrive,
   "pool/mayael-the-anima": _poolMayaelTheAnima,
   "pool/mayaels-aria": _poolMayaelsAria,
@@ -77776,6 +77792,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tattermunge-witch": _poolTattermungeWitch,
   "pool/tatyova-steward-of-tides": _poolTatyovaStewardOfTides,
   "pool/tatyova": _poolTatyova,
+  "pool/taunt": _poolTaunt,
   "pool/taunting-arbormage": _poolTauntingArbormage,
   "pool/taunting-challenge": _poolTauntingChallenge,
   "pool/taunting-elf": _poolTauntingElf,
@@ -79090,6 +79107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trelasarra-moon-dancer": _poolTrelasarraMoonDancer,
   "pool/tremble": _poolTremble,
   "pool/tremor": _poolTremor,
+  "pool/trench-behemoth": _poolTrenchBehemoth,
   "pool/trench-stalker": _poolTrenchStalker,
   "pool/trench-wurm": _poolTrenchWurm,
   "pool/trenching-steed": _poolTrenchingSteed,

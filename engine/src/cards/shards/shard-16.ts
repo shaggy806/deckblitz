@@ -18,6 +18,7 @@ import _poolAladdin from "../pool/aladdin.js";
 import _poolAlchemistsGreeting from "../pool/alchemists-greeting.js";
 import _poolAliriosEnraptured from "../pool/alirios-enraptured.js";
 import _poolAliveWell from "../pool/alive-well.js";
+import _poolAlluringSiren from "../pool/alluring-siren.js";
 import _poolAlmightyBrushwagg from "../pool/almighty-brushwagg.js";
 import _poolAmbuscade from "../pool/ambuscade.js";
 import _poolAmonkhetRaceway from "../pool/amonkhet-raceway.js";
@@ -946,6 +947,7 @@ const shard: CardShard = {
     _poolAlchemistsGreeting,
     _poolAliriosEnraptured,
     _poolAliveWell,
+    _poolAlluringSiren,
     _poolAlmightyBrushwagg,
     _poolAmbuscade,
     _poolAmonkhetRaceway,

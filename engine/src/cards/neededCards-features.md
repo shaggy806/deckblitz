@@ -501,6 +501,31 @@ count (Kozilek, the Broken Reality), "as this enters, turn all other …
 face down" (Ixidron), a copy that lasts until turned face down (Vesuvan
 Shapeshifter), a trigger's "its owner" player (Thieving Amalgam).
 
+### Attack requirements narrowed — built 2026-10-31
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its top
+group, features only. Kardur's **`attack-requirement`** rule (`AttackRequirementRule`)
+narrowed by rule 508.1d: `target` (one creature, by stint — 400.7),
+`controlledByTarget` (a player's creatures as attackers are declared),
+`attacks` (`"you"`, `"source"` or a target slot: obeyed only by attacking that
+player or planeswalker, so binding only while it can be attacked — counted
+with encore's in `aimedRequirements`), and `duration` (`this-turn`,
+`that-players-next-turn`, `controllers-next-turn`, `controllers-next-combat`;
+until your next turn when absent). The scaffolder reads "target creature
+attacks you / target opponent this turn if able", "… during its controller's
+next combat phase if able", "creatures target opponent controls attack this
+turn if able" and "during target player's next turn, creatures that player
+controls attack you / ~ if able". Keys: effect:must-attack-specific-player,
+effect:target-attacks-target-player-this-turn,
+effect:must-attack-target-players-creatures,
+effect:must-attack-controllers-next-combat, static:must-attack-planeswalker,
+static:global-attack-requirement. Proving cards: Alluring Siren, Taunt, Dulcet
+Sirens, Trench Behemoth, Imaginary Threats, Maximum Carnage. Still open:
+static:must-attack-specific-player — a static's "all creatures attack enchanted
+creature's controller each combat if able" (Public Enemy), Galactus's "an
+opponent with the most life", Silver Surfer's "until the end of your next
+turn"; static:attacks-this-turn-if-able-target (Gogo).
+
 ### Creatures in a blocking relation with the source — built 2026-10-31
 
 The need-keys Phase 2 families `effect:target-spec-additions` (its top group,

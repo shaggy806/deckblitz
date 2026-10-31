@@ -736,7 +736,13 @@
   "filter:blocked-by-source",
   "filter:blocking-or-blocked-by-source",
   "filter:blocking-specific-creature",
-  "effect:damage-each-creature-blocking-source"
+  "effect:damage-each-creature-blocking-source",
+  "effect:must-attack-specific-player",
+  "effect:target-attacks-target-player-this-turn",
+  "effect:must-attack-target-players-creatures",
+  "effect:must-attack-controllers-next-combat",
+  "static:must-attack-planeswalker",
+  "static:global-attack-requirement"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: attack requirements narrowed** (2026-10-31;
+  `effect:must-attack-specific-player`, `effect:target-attacks-target-player-this-turn`,
+  `effect:must-attack-target-players-creatures`, `effect:must-attack-controllers-next-combat`,
+  `static:must-attack-planeswalker`, `static:global-attack-requirement`) — `attack-requirement`'s
+  `target`, `controlledByTarget`, `attacks` (obeyed only by attacking that player or planeswalker,
+  508.1d) and `duration` (this turn, that player's next turn, its controller's next turn or next
+  combat phase); 3 freed. Alluring Siren, Taunt, Dulcet Sirens, Trench Behemoth, Imaginary
+  Threats, Maximum Carnage.
 - **Need-keys Phase 2: creatures in a blocking relation with the source** (2026-10-31;
   `effect:target-creature-blocking-source`, `effect:target-creature-source-is-blocking`,
   `effect:target-creature-blocking-attached`, `filter:blocked-by-source`,

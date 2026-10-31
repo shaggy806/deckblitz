@@ -6644,10 +6644,33 @@ export type EffectSpec =
        * after this resolved (rule 611.2c) — and none of them is *goaded*: a
        * `goaded` filter doesn't see them. `otherThanYou: false` is the bare
        * "attack each combat if able". See `AttackRequirementRule`.
+       *
+       * The same requirement, narrowed (rule 508.1d):
+       * - `target`: only that creature, as the object it is now (400.7) —
+       *   "target creature an opponent controls attacks you this turn if
+       *   able" (Alluring Siren);
+       * - `controlledByTarget`: only creatures the player in that slot
+       *   controls as attackers are declared — "creatures target player
+       *   controls attack you if able" (Taunt, Imaginary Threats);
+       * - `attacks`: obeyed only by attacking that one — `"you"`, the
+       *   `"source"` (Gideon Jura's "attack Gideon Jura"), or the player in
+       *   a target slot (Ravener's "attacks target opponent");
+       * - `duration`: until your next turn (absent — Kardur), `"this-turn"`,
+       *   `"that-players-next-turn"` (during the `controlledByTarget`
+       *   player's next turn — Taunt), `"controllers-next-combat"` (the
+       *   `target`'s controller's next combat phase — Trench Behemoth),
+       *   `"controllers-next-turn"` (their next turn — Gideon,
+       *   Battle-Forged).
+       *
+       * An illegal or missing target leaves nothing to require (608.2b).
        */
       readonly kind: "attack-requirement";
-      readonly filter: CardFilter;
-      readonly otherThanYou: boolean;
+      readonly filter?: CardFilter;
+      readonly otherThanYou?: boolean;
+      readonly target?: EffectTargetRef;
+      readonly controlledByTarget?: number;
+      readonly attacks?: "you" | "source" | number;
+      readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
     }
   | {
       /**
@@ -8302,8 +8325,16 @@ export interface EffectApi {
   unsuspect(target: TargetRef | { readonly filter: CardFilter }): void;
   /** See the `"become-saddled"` {@link EffectSpec}. */
   becomeSaddled(target: TargetRef): void;
-  /** See the `"attack-requirement"` {@link EffectSpec}. */
-  addAttackRequirement(filter: CardFilter, otherThanYou: boolean): void;
+  /** See the `"attack-requirement"` {@link EffectSpec}: the rule, its
+   * targets resolved. */
+  addAttackRequirement(rule: {
+    readonly filter: CardFilter;
+    readonly otherThanYou: boolean;
+    readonly object?: ObjectId;
+    readonly controlledBy?: PlayerId;
+    readonly attacks?: PlayerId | ObjectId;
+    readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
+  }): void;
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
@@ -13837,9 +13868,30 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.becomeSaddled(target);
       return;
     }
-    case "attack-requirement":
-      ctx.addAttackRequirement(spec.filter, spec.otherThanYou);
+    case "attack-requirement": {
+      const slot = (ref: EffectTargetRef): TargetRef | undefined =>
+        illegalSlot(ref, ctx) ? undefined : resolveEffectTarget(ref, ctx);
+      const object = spec.target === undefined ? undefined : slot(spec.target);
+      if (spec.target !== undefined && object?.kind !== "object") return;
+      const player = spec.controlledByTarget === undefined ? undefined : slot(spec.controlledByTarget);
+      if (spec.controlledByTarget !== undefined && player?.kind !== "player") return;
+      const aimed =
+        spec.attacks === undefined
+          ? undefined
+          : spec.attacks === "you"
+            ? ({ kind: "player", player: ctx.controller } as const)
+            : slot(spec.attacks);
+      if (spec.attacks !== undefined && aimed === undefined) return;
+      ctx.addAttackRequirement({
+        filter: spec.filter ?? {},
+        otherThanYou: spec.otherThanYou ?? false,
+        ...(object?.kind === "object" ? { object: object.object } : {}),
+        ...(player?.kind === "player" ? { controlledBy: player.player } : {}),
+        ...(aimed !== undefined ? { attacks: aimed.kind === "player" ? aimed.player : aimed.object } : {}),
+        ...(spec.duration !== undefined ? { duration: spec.duration } : {}),
+      });
       return;
+    }
     case "impulse-exile": {
       const whoseIf = spec.whoseIf;
       const players =

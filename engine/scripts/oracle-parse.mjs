@@ -2527,6 +2527,33 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Combat this turn.
+  // Attack requirements narrowed (rule 508.1d — `attack-requirement`): one
+  // target creature, at you or a target player, this turn (Alluring Siren,
+  // Dulcet Sirens) or in its controller's next combat phase (Trench
+  // Behemoth); a target player's creatures this turn (Imaginary Threats) or
+  // during their next turn (Taunt, Gideon Jura).
+  const PLAYER_T = "target (?:player|opponent)";
+  if ((m = re(`(${TARGET}) attacks (you|${PLAYER_T}) this turn if able`).exec(s))) {
+    const target = slot(m[1]);
+    const attacks = m[2].toLowerCase() === "you" ? "you" : slot(m[2]);
+    return { kind: "attack-requirement", target, attacks, duration: "this-turn" };
+  }
+  if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
+    return { kind: "attack-requirement", target: slot(m[1]), duration: "controllers-next-combat" };
+  }
+  if ((m = re(`creatures (${PLAYER_T}) controls attack this turn if able`).exec(s))) {
+    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "this-turn" };
+  }
+  if ((m = re(`during (${PLAYER_T})'s next turn, creatures that player controls attack (you|~) if able`).exec(s))) {
+    const controlledByTarget = slot(m[1]);
+    return {
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget,
+      attacks: m[2] === "~" ? "source" : "you",
+      duration: "that-players-next-turn",
+    };
+  }
   // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
   // one attacker, the source as it resolves (rule 400.7).
   if ((m = re(`(${TARGET}) can't block ~ this turn`).exec(s))) {

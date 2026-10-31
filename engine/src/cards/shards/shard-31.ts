@@ -394,6 +394,7 @@ import _poolIcyPrison from "../pool/icy-prison.js";
 import _poolIlluminate from "../pool/illuminate.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
+import _poolImaginaryThreats from "../pool/imaginary-threats.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolImpalerShrike from "../pool/impaler-shrike.js";
 import _poolInactionInjunction from "../pool/inaction-injunction.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolIlluminate,
     _poolIllusoryAmbusher,
     _poolIllvoiOperative,
+    _poolImaginaryThreats,
     _poolImmersturmRaider,
     _poolImpalerShrike,
     _poolInactionInjunction,

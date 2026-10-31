@@ -315,6 +315,7 @@ import {
   FACE_DOWN_CARDS,
   POISON_LETHAL,
   activePlayerOf,
+  attackRequirementActive,
   cloneGameState,
   clonePlain,
   createPlayerState,
@@ -384,6 +385,7 @@ import type {
   CastNowAsk,
   OtherChoiceAsk,
   MeldedInfo,
+  AttackRequirementRule,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -6864,11 +6866,24 @@ export class Game {
     );
     // So do attack-requirement rules (Kardur, Doomscourge's "until your next
     // turn, creatures your opponents control attack each combat …").
+    // A "this turn" one ends with its turn, a "during that player's next
+    // turn" one starts with that turn and ends with it (Taunt).
     const rules = this.state.attackRequirements;
-    if (rules !== undefined && rules.some((rule) => beginningFor.includes(rule.by))) {
-      const left = rules.filter((rule) => !beginningFor.includes(rule.by));
+    if (rules !== undefined && rules.length > 0) {
+      const turn = this.state.turn.number;
+      const left = rules.flatMap((rule): AttackRequirementRule[] => {
+        const d = rule.duration;
+        if (d === undefined) return beginningFor.includes(rule.by) ? [] : [rule];
+        if (d.kind === "this-turn") return d.turn >= turn ? [rule] : [];
+        if (d.kind === "next-turn-of") {
+          if (d.started !== undefined) return [];
+          return d.player === this.activePlayer && turn > d.after ? [{ ...rule, duration: { ...d, started: turn } }] : [rule];
+        }
+        return [rule];
+      });
       if (left.length === 0) delete this.state.attackRequirements;
       else this.state.attackRequirements = left;
+      invalidateComputedCache();
     }
     // "Until your next end step" of a player who has left the game lasts
     // until their turn would have begun (rule 800.4m) — the others' end with
@@ -9480,6 +9495,16 @@ export class Game {
       object.blocked = false;
       delete object.blockingAlso;
       delete object.band;
+    }
+    // "Attacks during its controller's next combat phase if able" (Trench
+    // Behemoth) ends with that combat phase — not with one under way as it
+    // was made.
+    const rules = this.state.attackRequirements;
+    if (rules !== undefined && rules.some((rule) => rule.duration?.kind === "next-combat-of")) {
+      const left = rules.filter((rule) => !(rule.duration?.kind === "next-combat-of" && attackRequirementActive(this.state, rule)));
+      if (left.length === 0) delete this.state.attackRequirements;
+      else this.state.attackRequirements = left;
+      invalidateComputedCache();
     }
   }
 
@@ -26772,10 +26797,42 @@ export class Game {
               : [];
         for (const id of ids) this.unsuspect(id);
       },
-      addAttackRequirement: (filter, otherThanYou) => {
+      addAttackRequirement: ({ filter, otherThanYou, object, controlledBy, attacks, duration }) => {
+        const held = object === undefined ? undefined : this.state.objects[object];
+        if (object !== undefined && held?.zone !== "battlefield") return;
+        const turn = this.state.turn.number;
+        let lasts: AttackRequirementRule["duration"];
+        if (duration === "this-turn") lasts = { kind: "this-turn", turn };
+        else if (duration === "that-players-next-turn") {
+          if (controlledBy === undefined) return;
+          lasts = { kind: "next-turn-of", player: controlledBy, after: turn };
+        } else if (duration === "controllers-next-turn") {
+          if (held === undefined) return;
+          lasts = { kind: "next-turn-of", player: held.controller, after: turn };
+        } else if (duration === "controllers-next-combat") {
+          if (held === undefined) return;
+          // Its controller's next combat phase: not the one under way, if it
+          // is theirs (rule 506.1 — a combat phase runs from its beginning
+          // of combat step through its end of combat step).
+          const player = held.controller;
+          const inCombat = this.activePlayer === player && PHASE_OF_STEP[this.state.turn.step] === "combat";
+          const now = this.state.players[player]?.currentCombat;
+          lasts = { kind: "next-combat-of", player, ...(inCombat && now !== undefined ? { after: now } : {}) };
+        }
         this.state.attackRequirements = [
           ...(this.state.attackRequirements ?? []),
-          { by: controller, filter, otherThanYou },
+          {
+            by: controller,
+            filter,
+            otherThanYou,
+            ...(held !== undefined ? { object: { id: held.id, stint: held.zoneChangeCount ?? 0 } } : {}),
+            ...(controlledBy !== undefined ? { controlledBy } : {}),
+            ...(attacks !== undefined ? { attacks } : {}),
+            ...(attacks !== undefined && this.state.objects[attacks as ObjectId] !== undefined
+              ? { attacksStint: this.state.objects[attacks as ObjectId].zoneChangeCount ?? 0 }
+              : {}),
+            ...(lasts !== undefined ? { duration: lasts } : {}),
+          },
         ];
         invalidateComputedCache();
       },

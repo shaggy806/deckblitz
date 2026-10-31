@@ -657,6 +657,7 @@ import _poolSynodArtificer from "../pool/synod-artificer.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
 import _poolTarpan from "../pool/tarpan.js";
+import _poolTaunt from "../pool/taunt.js";
 import _poolTazeemRaptor from "../pool/tazeem-raptor.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTeferisRealm from "../pool/teferis-realm.js";
@@ -1437,6 +1438,7 @@ const shard: CardShard = {
     _poolTakeAGlance,
     _poolTangledIslet,
     _poolTarpan,
+    _poolTaunt,
     _poolTazeemRaptor,
     _poolTcriBuilding,
     _poolTeferisRealm,
