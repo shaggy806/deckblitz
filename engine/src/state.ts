@@ -883,6 +883,13 @@ export interface GameObject {
    * own slice of `targets`. Absent for a non-modal spell; cleared on any zone
    * change. */
   chosenModes?: readonly number[];
+  /** The opponent who chose some of this spell's or ability's targets, or
+   * its modes, as it was cast or activated (rules 601.2c, 700.2e —
+   * `CardDefinition.opponentChoosesTargets`, `CastModalSpec.chosenBy`):
+   * what a target filter's `controlledBy: "chooser"` reads as its targets
+   * are checked again (608.2b), and "that player" of modes they chose.
+   * Cleared on any zone change. */
+  otherChooser?: PlayerId;
   /** How a spell's divided amount was split among its group's targets as it
    * was cast (rule 601.2d — `CardDefinition.divided`), one per target in
    * order. Cleared on any zone change. */
@@ -1389,6 +1396,8 @@ export interface SpellSnapshot {
   readonly autoTargetSlots?: readonly number[];
   readonly xValue: number | null;
   readonly chosenModes?: readonly number[];
+  /** See `GameObject.otherChooser` — a copy's targets were chosen by them too. */
+  readonly otherChooser?: PlayerId;
   readonly division?: readonly number[];
   readonly kicked?: boolean;
   readonly kickedByControl?: true;
@@ -2470,6 +2479,40 @@ export interface GiftAsk {
  * (733.2). `need` is the least the caster's own mana leaves to be paid, for
  * the prompt.
  */
+/** What a `cast-now` offers — to whom, which cards, on what terms (see the
+ * `cast-now` {@link EffectSpec}) — as `Game.castNowOffer` reads it. */
+export interface CastNowAsk {
+  readonly player: PlayerId;
+  readonly cards: readonly ObjectId[];
+  readonly free: boolean;
+  readonly byDiscarding?: true;
+  /** The madness cost paid rather than the mana cost (rule 702.35a). */
+  readonly madness?: string;
+  /** The miracle cost paid rather than the mana cost (rule 702.94a). */
+  readonly miracle?: string;
+  readonly exileAfter: boolean | "instants-and-sorceries";
+  readonly spell?: CardFilter;
+  readonly freeCastOf?: "cascade" | "suspend";
+}
+
+/**
+ * A cast or activation waiting on the opponent its caster named
+ * (`otherChooser`) to choose some of its targets (rule 601.2c —
+ * `CardDefinition.opponentChoosesTargets`, `ActivatedAbility
+ * .opponentChoosesTargets`), asked as a `choose-targets` for those `slots`,
+ * or its modes (rule 700.2e — `CastModalSpec.chosenBy`), asked as a
+ * `choose-modes`. `action` is the caster's whole action — its `targets`
+ * only the slots that are theirs — carried out once the opponent answers,
+ * or reversed if their answer leaves it impossible (rule 733.1).
+ * `castNow` is the `cast-now` offer it was cast under, for a spell cast as
+ * something resolves.
+ */
+export interface OtherChoiceAsk {
+  readonly action: Extract<Action, { type: "cast-spell" }> | Extract<Action, { type: "activate-ability" }>;
+  readonly slots: readonly number[];
+  readonly castNow?: CastNowAsk;
+}
+
 export interface AssistAsk {
   readonly cast: Extract<Action, { type: "cast-spell" }>;
   readonly need: number;
@@ -2718,6 +2761,15 @@ export type AwaitingDecision =
         /** The chosen cards don't move; `then` acts on them where they are —
          * a `search-library`'s `"stay"` (Knowledge Exploitation). */
         | "stay";
+      /** What the choice is for, shown instead of what `destination` says —
+       * see the offer's `prompt`. */
+      readonly prompt?: string;
+      /** Set for a `choose-among-targets` choice (Barrin's Spite, Wake to
+       * Slaughter) among cards in a graveyard: nothing moves by
+       * `destination` (`"stay"`); what's picked is collected in
+       * `GameState.keptByChoice` for the resolving effect, which resumes
+       * once it's answered — as a `choose-permanents`' `keepChoice` is. */
+      readonly keepChoice?: true;
       /** Cards that go with the chosen ones whatever is picked — a
        * `search-library`'s `all`: the matches in a graveyard, a public zone,
        * which must be found (rule 701.23b), while the hidden zones' are
@@ -3382,6 +3434,10 @@ export type AwaitingDecision =
        * discards a card") are its controller's, with the chooser as
        * `"that-player"`. Omitted = the chooser's. */
       readonly modesController?: PlayerId;
+      /** Set when these are a spell's modes an opponent chooses as it's
+       * cast (rule 700.2e — see {@link OtherChoiceAsk}): nothing is applied;
+       * the cast goes on with them. */
+      readonly otherCast?: OtherChoiceAsk;
       /** A secret vote's question (rule 701.38 — secret council): the answer
        * is kept out of the event log, so no other player learns it before
        * the votes are revealed together. */
@@ -3490,6 +3546,11 @@ export type AwaitingDecision =
        * are legal or not as its controller would choose them, whoever is
        * changing them (`GameState.pendingRetarget`). */
       readonly targetsFor?: PlayerId;
+      /** Set when these are an opponent's targets for a spell being cast or
+       * an ability being activated (rule 601.2c — see {@link
+       * OtherChoiceAsk}): the cast goes on once they're chosen. `source` is
+       * the card (or the ability's source). */
+      readonly otherCast?: OtherChoiceAsk;
     }
   | {
       /**

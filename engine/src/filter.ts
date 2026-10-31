@@ -519,8 +519,12 @@ export interface CardFilter {
    * (`"opponent"`), or whoever's turn it is (`"active-player"` — "creatures
    * **the active player** controls", "each creature attacking player
    * controls" outside combat). The active player is read off the state, so
-   * it is the same answer whoever is asking. */
-  readonly controlledBy?: "you" | "opponent" | "active-player";
+   * it is the same answer whoever is asking. `"chooser"`: the player
+   * choosing the target this filter is on, when that isn't the filtering
+   * player (rule 601.2c) — "target creature of an opponent's choice **they
+   * control**" (Evangelize, `CardDefinition.opponentChoosesTargets`); with
+   * no such chooser (`FilterContext.chooser`), nothing matches. */
+  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser";
   /** Controlled by one of these players — set by the engine, never authored:
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
@@ -859,6 +863,9 @@ function spellTargetsMatch(
 export interface FilterContext {
   /** Whose perspective `"you"` / `"opponent"` are evaluated from. */
   readonly you: PlayerId;
+  /** The player choosing the target being judged, when another than `you`
+   * chooses it — what `controlledBy: "chooser"` reads. */
+  readonly chooser?: PlayerId;
   /** The `{X}` of the spell or ability applying this filter, for a
    * `NumCompare` written as `{ n: "x" }`. Defaults to 0. */
   readonly x?: number;
@@ -1413,6 +1420,7 @@ export function matchesFilter(
   if (filter.controlledBy === "you" && controller !== ctx.you) return false;
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
+  if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;

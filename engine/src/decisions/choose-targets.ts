@@ -125,6 +125,9 @@ export const chooseTargets = defineDecision({
       return `${player} is not being asked to choose targets`;
     }
     if (awaiting.current !== undefined) return whyNotCopyTargets(ctx, awaiting, normalizeTargets(action.targets), player);
+    // An opponent's targets for a spell being cast (rule 601.2c): judged as
+    // its caster would choose them, with that opponent choosing.
+    if (awaiting.otherCast !== undefined) return ctx.whyCannotOtherTargets(normalizeTargets(action.targets));
     // A divided amount (rule 603.3d): one share per target of the group, at
     // least 1 each, all of it — or none said, and an even split.
     if (awaiting.divide === undefined) {

@@ -3857,6 +3857,10 @@ export type EffectSpec =
        * "you" }` with slot 0. That player gone (an illegal target), it puts
        * none (rule 608.2b). */
       readonly controlledByTarget?: number;
+      /** The filter read from the side of "that player" instead — Misfortune's
+       * "each creature **that player** controls", the opponent who chose its
+       * mode (`CastModalSpec.chosenBy`). Nobody there, and it puts none. */
+      readonly controlledByPlayer?: "that-player";
       /** With `controlledByTarget`: that player is the one who puts them —
        * Shadrix Silverquill's "target player **puts** a +1/+1 counter on
        * each creature they control" — for "whenever you put" (Hapatra). */
@@ -6316,6 +6320,43 @@ export type EffectSpec =
     }
   | {
       /**
+       * A player chooses among the resolving spell's or ability's own targets
+       * — "Choose two target creatures controlled by the same player. **Their
+       * controller chooses and sacrifices one of them.** Return the other to
+       * its owner's hand" (Barrin's Spite), "Choose up to two target creature
+       * cards in your graveyard. **An opponent chooses one of them.** Return
+       * that card to your hand. Return the other to the battlefield" (Wake to
+       * Slaughter). The choice is made as it resolves, among the target
+       * objects still legal (rule 608.2b) — not a target itself, so nothing
+       * chosen can make it fizzle — and `chosen` is done to the `count`
+       * picked, then `rest` to the others, each as one instruction: the fates
+       * a `separate-into-piles` pile has (`PileFate`), a zone or `{ effect }`
+       * with each object as its target 0. With `count` or fewer still legal,
+       * every one of them is chosen, unasked: if only one of Barrin's Spite's
+       * creatures is still legal, that one is sacrificed (the rulings).
+       *
+       * `chooser` is `"their-controller"` for "their controller" / "that
+       * player" of targets an earlier relation ties to one controller (a
+       * `sameController` slot), read off the first still legal; "an opponent
+       * chooses" is a `choose-opponent` around this naming `"that-player"`.
+       * Nothing is chosen, and nothing done, when the chooser has left the
+       * game.
+       */
+      readonly kind: "choose-among-targets";
+      readonly chooser: EffectPlayerRef | "their-controller";
+      readonly count: number;
+      /** What happens to the chosen objects — nothing when absent (Deliver
+       * Unto Evil's "leave the chosen cards in your graveyard"). */
+      readonly chosen?: PileFate;
+      /** What happens to the others — nothing when absent (Incriminate). */
+      readonly rest?: PileFate;
+      /** What the choice is for, as the chooser's prompt. */
+      readonly prompt?: string;
+      /** Set only by the engine, while the choice is asked. */
+      readonly progress?: { readonly objects: readonly ObjectId[] };
+    }
+  | {
+      /**
        * Encore (rule 702.141) — "For each opponent, create a token copy of
        * this card that attacks that opponent this turn if able. They gain
        * haste. Sacrifice them at the beginning of the next end step."
@@ -7971,7 +8012,12 @@ export interface EffectApi {
   /** Carry out the piles' fates: `chosen`'s on the chosen pile, then
    * `rest`'s on the other — each as one instruction, still only on objects
    * where they were separated (rule 400.7). */
-  finishPiles(chosenPile: readonly ObjectId[], otherPile: readonly ObjectId[], chosen: PileFate, rest: PileFate | undefined): void;
+  finishPiles(chosenPile: readonly ObjectId[], otherPile: readonly ObjectId[], chosen: PileFate | undefined, rest: PileFate | undefined): void;
+  /** See the `"choose-among-targets"` {@link EffectSpec}: ask `chooser` to
+   * pick exactly `count` of `objects` (more than `count` of them, all
+   * targets still legal), the answer waiting for `takeKept`. `false` when
+   * they've left the game, and nothing was asked. */
+  askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string): boolean;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
@@ -11829,8 +11875,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.renown(amountValue(spec.amount, ctx));
       return;
     case "add-counter-all": {
-      const scopeTo = scopedController(spec.controlledByTarget, ctx);
-      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      const scopeTo =
+        spec.controlledByPlayer !== undefined
+          ? effectPlayer(spec.controlledByPlayer, ctx)
+          : scopedController(spec.controlledByTarget, ctx);
+      if ((spec.controlledByTarget !== undefined || spec.controlledByPlayer !== undefined) && scopeTo === undefined) return;
       const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
       ctx.addCounterAll(
         spec.filter,
@@ -13303,6 +13352,35 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.finishPiles(
         piles[chosen] ?? [],
         piles.flatMap((pile, i) => (i === chosen ? [] : pile)),
+        spec.chosen,
+        spec.rest,
+      );
+      return;
+    }
+    case "choose-among-targets": {
+      // Among the targets still legal (rule 608.2b): an illegal one is
+      // blanked in `ctx.targets`, and isn't there to be chosen.
+      const below = ctx.parkedCount();
+      const objects =
+        spec.progress?.objects ?? ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : []));
+      if (objects.length === 0) return;
+      if (spec.progress === undefined && objects.length > spec.count) {
+        const chooser =
+          spec.chooser === "their-controller"
+            ? ctx.controllerOf({ kind: "object", object: objects[0] })
+            : effectPlayer(spec.chooser, ctx);
+        if (chooser === undefined) return;
+        const prompt = spec.prompt ?? `Choose ${spec.count} of them`;
+        if (!ctx.askChooseAmong(chooser, objects, spec.count, prompt)) return;
+        ctx.resumeAfterDecisions({ ...spec, progress: { objects } }, below);
+        return;
+      }
+      // With `count` or fewer, every one is chosen, unasked.
+      const picked = spec.progress === undefined ? objects : ctx.takeKept();
+      const chosen = new Set(picked);
+      ctx.finishPiles(
+        objects.filter((id) => chosen.has(id)),
+        objects.filter((id) => !chosen.has(id)),
         spec.chosen,
         spec.rest,
       );

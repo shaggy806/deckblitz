@@ -321,8 +321,10 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return event.amount === 0
         ? `${who(event.player)} offers nothing toward ${name(event.object)}`
         : `${who(event.player)} offers ${event.amount} generic mana toward ${name(event.object)}`
+    case 'choice-requested':
+      return `${who(event.caster)} asks ${who(event.player)} to choose ${event.what === 'modes' ? 'the mode' : 'targets'} for ${name(event.object)}`
     case 'cast-reversed':
-      return `${who(event.player)}'s cast of ${name(event.object)} is undone — not enough mana`
+      return `${who(event.player)}'s cast of ${name(event.object)} is undone — ${event.reason}`
     case 'crime-committed':
       // Targeting an opponent or what they have (rule 700.13).
       return `${who(event.player)} commits a crime with ${name(event.object)}`

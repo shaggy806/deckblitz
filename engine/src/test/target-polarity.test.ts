@@ -227,8 +227,10 @@ describe("slot polarity", () => {
     // 0.967 until B253 (2026-10-29) took it to 96.43%: three dozen "target
     // land becomes [a basic land type]" cards (Tideshaper Mystic, Spreading
     // Seas, Convincing Mirage) — your own colour fixing or an opponent's
-    // lock, the board's call.
-    expect(decided / slots).toBeGreaterThan(0.964);
+    // lock, the board's call. 0.964 until 2026-10-31 (96.397%): Magus of the
+    // Arena's "tap target creature you control and … Those creatures fight"
+    // — tapping your own fighter is a minor harm, the fight a minor help.
+    expect(decided / slots).toBeGreaterThan(0.9635);
   });
 });
 

@@ -8716,4 +8716,42 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Gray Ogre'] }, { human: true, bf: ['Island*3'] }, { bf: ['Grizzly Bears'] }],
     }),
   ),
+  // --- Choices by other players (2026-10-31, build-family) ---
+  preset(
+    'Evangelize: Bob picks the creature you take',
+    board({ you: { bf: ['Plains*5'], hand: ['Evangelize'] }, opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] } }),
+  ),
+  preset(
+    'Magus of the Arena: Bob picks the creature it fights',
+    board({ you: { bf: ['Mountain*3', 'Magus of the Arena'] }, opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] } }),
+  ),
+  preset(
+    'Library of Lat-Nam: Bob picks the mode',
+    board({ you: { bf: ['Island*5'], hand: ['Library of Lat-Nam'] }, opp: { human: true, bf: ['Forest'] } }),
+  ),
+  preset(
+    "Barrin's Spite: Bob picks the one he sacrifices",
+    board({
+      you: { bf: ['Island*2', 'Swamp*2'], hand: ["Barrin's Spite"] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Wake to Slaughter: Bob picks the card for your hand',
+    board({
+      you: { bf: ['Swamp*3', 'Mountain*2'], hand: ['Wake to Slaughter'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: { human: true, bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    'Volcanic Offering: Carol picks the other two, four players',
+    board({
+      you: { bf: ['Mountain*5', 'Badlands'], hand: ['Volcanic Offering'] },
+      opp: [
+        { bf: ['Tropical Island', 'Hill Giant'] },
+        { human: true, bf: ['Volcanic Island', 'Grizzly Bears'] },
+        { bf: ['Savannah', 'Gray Ogre'] },
+      ],
+    }),
+  ),
 ]

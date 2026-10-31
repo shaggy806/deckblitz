@@ -674,6 +674,18 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (typeof n.chosen === "object") v.child(n.chosen.effect);
     if (typeof n.rest === "object") v.child(n.rest.effect);
   },
+  // Whichever target is picked gets one fate and the others the other
+  // (Barrin's Spite: sacrificed or bounced), so every slot gets what the
+  // fates do to their objects — read off each fate's slot 0 — and a return
+  // to the battlefield (Wake to Slaughter) takes the card.
+  "choose-among-targets": (n, v) => {
+    for (const fate of [n.chosen, n.rest]) {
+      if (fate === "battlefield") v.touch(EVERY_SLOT, "take", MAJOR);
+      if (typeof fate !== "object") continue;
+      const read = slotStrengths(fate.effect, 1)[0];
+      if (read !== null) v.touch(EVERY_SLOT, read.polarity, read.weight);
+    }
+  },
   "sacrifice-all": none,
   "choose-exiled-to-play": none,
   "put-exiled-this-way-onto-battlefield": none,

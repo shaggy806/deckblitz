@@ -1719,6 +1719,11 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
+  // "Gain control of target creature [until end of turn]" — for as long as
+  // the effect lasts, which without a duration is the rest of the game.
+  if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {
+    return { kind: "gain-control", target: slot(m[1]), untilEndOfTurn: m[2] !== undefined };
+  }
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };
   // Airbend (rule 701.65a): exiled, its owner may cast it for {2}. Several
   // targets are one instruction, exiled together (603.10a).
@@ -2511,6 +2516,15 @@ export function parseEffect(text, outer) {
       skip = piles.used - 1;
       continue;
     }
+    // A choice among the spell's own targets as it resolves (Incriminate,
+    // Barrin's Spite): two or three sentences, one `choose-among-targets`.
+    const among = amongTargetsAt(sentences, i, ctx);
+    if (among !== null) {
+      parsed.push(among.effect);
+      hints.push({ sentence, effect: among.effect });
+      skip = among.used - 1;
+      continue;
+    }
     const fromHand = revealedHandChoiceAt(sentences, i, ctx);
     if (fromHand !== null) {
       parsed.push(fromHand.effect);
@@ -2753,8 +2767,14 @@ export function parseEffect(text, outer) {
     // whatever that sentence was about.
     const sentenceCtx = i === 0 ? ctx : { ...ctx, it: undefined, departed: undefined };
     const inner = rhystic === null ? null : parseSentence(`${rhystic[1]}.`, sentenceCtx);
-    const effect =
-      rhystic === null
+    // "Target creature of an opponent's choice [they control]" (Evangelize,
+    // Volcanic Offering): read without the choice, then that slot marked as
+    // an opponent's (`opponentChoosesTargets` — rule 601.2c).
+    const theirs = rhystic === null && outer.opponentChoosesTargets !== undefined ? opponentChoiceIn(sentence) : null;
+    let effect =
+      theirs !== null
+        ? parseSentence(theirs.sentence, sentenceCtx)
+        : rhystic === null
         ? parseSentence(sentence, sentenceCtx)
         : inner === null
           ? null
@@ -2768,6 +2788,18 @@ export function parseEffect(text, outer) {
               ],
               otherwise: inner,
             };
+    if (theirs !== null && effect !== null && !containsUndefined(effect)) {
+      for (const { occurrence, theyControl } of theirs.slots) {
+        const slot = before + occurrence;
+        const spec = theyControl ? chooserControlled(ctx.targets[slot]) : ctx.targets[slot];
+        if (spec === null || spec === undefined) {
+          effect = null;
+          break;
+        }
+        ctx.targets[slot] = spec;
+        outer.opponentChoosesTargets.push(slot);
+      }
+    }
     if (effect === null || containsUndefined(effect)) {
       ctx.targets.length = before;
       todo.push(sentence);
@@ -2778,6 +2810,79 @@ export function parseEffect(text, outer) {
   }
   if (todo.length > 0) return { effect: null, todo, hints };
   return { effect: parsed.length === 1 ? parsed[0] : { kind: "sequence", effects: parsed }, todo: [], hints: [] };
+}
+
+/**
+ * "Choose two target creatures controlled by the same player (opponent).
+ * That player sacrifices one of them of their choice." (Incriminate) /
+ * "Their controller (That player) chooses and sacrifices one of them (those
+ * creatures)." then "Return the other to its owner's hand." (Barrin's Spite)
+ * or "Put a -1/-1 counter on the other." (Retribution): a
+ * `choose-among-targets` by the targets' controller — `{ effect, used }`, or
+ * null.
+ */
+function amongTargetsAt(sentences, i, ctx) {
+  const s = (k) => sentences[i + k] ?? "";
+  const m = /^choose two target creatures controlled by the same (player|opponent)\.$/i.exec(s(0));
+  if (m === null) return null;
+  const sacrifice = { effect: { kind: "sacrifice-target", target: 0, byItsController: true } };
+  let used;
+  let rest;
+  if (/^that player sacrifices one of them of their choice\.$/i.test(s(1))) used = 2;
+  else if (/^(?:their controller|that player) chooses and sacrifices one of (?:them|those creatures)\.$/i.test(s(1))) {
+    used = 2;
+    if (/^return the other to its owner's hand\.$/i.test(s(2))) {
+      rest = "hand";
+      used = 3;
+    } else if (/^put a -1\/-1 counter on the other\.$/i.test(s(2))) {
+      rest = { effect: { kind: "add-counter", target: 0, counter: "-1/-1", amount: 1 } };
+      used = 3;
+    }
+  } else return null;
+  const spec = m[1].toLowerCase() === "opponent" ? "creature-an-opponent-controls" : "creature";
+  const first = ctx.target(spec);
+  ctx.target({ kind: "other", of: spec, than: { slot: first }, sameController: true });
+  return {
+    effect: {
+      kind: "choose-among-targets",
+      chooser: "their-controller",
+      count: 1,
+      chosen: sacrifice,
+      ...(rest !== undefined ? { rest } : {}),
+    },
+    used,
+  };
+}
+
+/**
+ * The "target … of an opponent's choice [they control]" slots of a sentence
+ * (rule 601.2c — `opponentChoosesTargets`): which "target" of the sentence
+ * each is (its occurrence, counted from 0), and the sentence without the
+ * choice — "they control" read as "you control" for now, the slot then
+ * turned into the chooser's (`chooserControlled`). Null when there's none.
+ */
+function opponentChoiceIn(sentence) {
+  const choice = / of an opponent's choice( they control)?/g;
+  if (!choice.test(sentence)) return null;
+  choice.lastIndex = 0;
+  const slots = [];
+  let m;
+  while ((m = choice.exec(sentence)) !== null) {
+    const occurrence = (sentence.slice(0, m.index).match(/\btarget\b/gi) ?? []).length - 1;
+    if (occurrence < 0) return null;
+    slots.push({ occurrence, theyControl: m[1] !== undefined });
+  }
+  return { sentence: sentence.replace(/ of an opponent's choice( they control)?/g, (_m, they) => (they ? " you control" : "")), slots };
+}
+
+/** A "… you control" target slot read for "they control" of an opponent's
+ * choice: controlled by the player choosing it (`controlledBy: "chooser"`). */
+function chooserControlled(spec) {
+  if (spec === "creature-you-control") return { kind: "permanent", filter: { type: "creature", controlledBy: "chooser" } };
+  if (typeof spec === "object" && spec?.kind === "permanent" && spec.filter?.controlledBy === "you") {
+    return { ...spec, filter: { ...spec.filter, controlledBy: "chooser" } };
+  }
+  return null;
 }
 
 /**
@@ -3953,7 +4058,7 @@ export function parseFace(face, ctx = {}) {
         if (out.kicker?.keyword === "entwine") out.castModal = { ...out.castModal, kickedModes: out.castModal.modes.length };
       }
     } else {
-      const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true };
+      const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true, opponentChoosesTargets: [] };
       let text = out.spellLines.map((l) => l.line).join(" ");
       // "…. Exile Burning Wish." closing the spell: it's exiled as it
       // resolves instead of going to the graveyard (`exileOnResolve`).
@@ -3996,6 +4101,9 @@ export function parseFace(face, ctx = {}) {
       if (r.effect === null) {
         out.todo.push(...r.todo);
         out.effectHints = r.hints;
+      } else if (ctx2.opponentChoosesTargets.length > 0) {
+        // "Target … of an opponent's choice" (rule 601.2c).
+        out.opponentChoosesTargets = [...ctx2.opponentChoosesTargets];
       }
       // Awaken (rule 702.113a): the awaken cast's targets and effect are the
       // spell's own and then the land's.
@@ -4495,6 +4603,9 @@ function fillEffect(ability, text, ctx, lines, i) {
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }
+  // An activated ability's "target … of an opponent's choice" (rules 602.2b,
+  // 601.2c); a triggered one has no opponent to name.
+  const theirSlots = ability.cost !== undefined && ability.trigger === undefined ? [] : undefined;
   const r = parseEffect(text, {
     targets: ability.targets,
     tokenFor: ctx.tokenFor,
@@ -4502,7 +4613,9 @@ function fillEffect(ability, text, ctx, lines, i) {
     it: ctx.it,
     departed: ctx.departed,
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
+    ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
+  if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;
   ability.effect = r.effect;
   if (r.effect === null) {
     ability.__todo = [...(ability.__todo ?? []), ...r.todo];
@@ -4524,7 +4637,10 @@ function parseModalSpell(spellLines, ctx) {
   // "Choose three. You may choose the same mode more than once." (rule
   // 700.2d — the Confluences): exactly that many, a mode repeatable.
   const repeated = /^Choose (two|three|four|five)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);
-  const head = repeated ?? /^Choose (one|two|one or both|one or more) —$/.exec(spellLines[0].line);
+  // "An opponent chooses one —" (rule 700.2e): its modes an opponent's to
+  // choose (`castModal.chosenBy`), when they need no targets.
+  const theirs = repeated === null ? /^An opponent chooses (one|two|one or both|one or more) —$/.exec(spellLines[0].line) : null;
+  const head = repeated ?? theirs ?? /^Choose (one|two|one or both|one or more) —$/.exec(spellLines[0].line);
   if (!head) return undefined;
   const modes = [];
   for (const l of spellLines.slice(1)) {
@@ -4540,7 +4656,8 @@ function parseModalSpell(spellLines, ctx) {
     return { castModal: { minModes: n, maxModes: n, repeatModes: true, modes }, effect: null, targets: [] };
   }
   const [minModes, maxModes] = modeCounts(head[1], modes.length);
-  return { castModal: { minModes, maxModes, modes }, effect: null, targets: [] };
+  if (theirs !== null && modes.some((mode) => mode.targets !== undefined)) return null;
+  return { castModal: { minModes, maxModes, ...(theirs !== null ? { chosenBy: "opponent" } : {}), modes }, effect: null, targets: [] };
 }
 
 /** Static lines the engine models in one shape. */

@@ -86,6 +86,26 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: choices by other players** (2026-10-31; `effect:choices-by-other-players`'
+  top group — `decision:opponent-chooses-target`, `decision:opponent-chooses-mode`,
+  `effect:opponent-chooses-among-targets`). The `choose-among-targets` effect: as a spell
+  resolves, a player (`"their-controller"` of the targets, or an opponent through
+  `choose-opponent`) picks `count` of its still-legal targets (608.2b) — all of them, unasked,
+  with no more than that — on the existing `choose-permanents` (battlefield) or `choose-from-zone`
+  (a graveyard's, its new `keepChoice` and `prompt`), and the chosen and the rest each take a
+  `PileFate`. `CardDefinition.opponentChoosesTargets` / `ActivatedAbility.opponentChoosesTargets`
+  (rule 601.2c): offers come once per opponent who could choose (`otherChooser`), the caster's
+  own slots only; the cast or activation waits on that opponent's `choose-targets` (an
+  `OtherChoiceAsk` continuation, `targetsFor` the caster), then goes on whole or is reversed
+  (rule 733.1) — a `cast-now` cast (cascade) too; a filter's `controlledBy: "chooser"` is "they
+  control", checked again on resolution through the spell's `otherChooser`. `castModal.chosenBy:
+  "opponent"` (rule 700.2e): the opponent answers `choose-modes` as it's cast and is "that
+  player" of the modes; `add-counter-all`'s `controlledByPlayer`. The client echoes
+  `otherChooser`, labels "(Bob chooses)" and logs the request; the spell is shown while they
+  choose. Not yet: a trigger's "of an opponent's choice", Mogg Assassin's "that opponent", targets
+  chosen after an opponent's mode (Fatal Lore). The scaffolder reads the three shapes and "gain
+  control of target …". 7 freed; proving cards Incriminate, Barrin's Spite, Retribution, Wake to
+  Slaughter, Evangelize, Volcanic Offering, Magus of the Arena, Library of Lat-Nam, Misfortune.
 - **Need-keys Phase 2: assist** (2026-10-31; `mechanic:assist`, rule 702.132a). A card's
   `assist: true`; its cast offers come again once per other player whose mana could pay some of
   it (`assist`, `assistMax`), judged as though that player paid all they could, an `{X}` spell's

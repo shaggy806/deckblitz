@@ -234,6 +234,7 @@ import _poolEtherealGuidance from "../pool/ethereal-guidance.js";
 import _poolEtherealHaze from "../pool/ethereal-haze.js";
 import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvanescentIntellect from "../pool/evanescent-intellect.js";
+import _poolEvangelize from "../pool/evangelize.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
@@ -1102,6 +1103,7 @@ const shard: CardShard = {
     _poolEtherealHaze,
     _poolEumidianHatchery,
     _poolEvanescentIntellect,
+    _poolEvangelize,
     _poolEvendoWakingHaven,
     _poolEvolvingAdaptive,
     _poolExclusionMage,

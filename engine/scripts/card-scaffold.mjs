@@ -229,6 +229,7 @@ function faceSource(face, ctx) {
     convoke: parsed.convoke,
     improvise: parsed.improvise,
     assist: parsed.assist,
+    opponentChoosesTargets: parsed.opponentChoosesTargets,
     toxic: parsed.toxic,
     devour: parsed.devour,
     tribute: parsed.tribute,

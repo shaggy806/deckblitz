@@ -55,6 +55,7 @@ import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
 import _poolAzoriusJusticiar from "../pool/azorius-justiciar.js";
 import _poolBaldinCenturyHerdmaster from "../pool/baldin-century-herdmaster.js";
+import _poolBarrinsSpite from "../pool/barrins-spite.js";
 import _poolBattleRageBlessing from "../pool/battle-rage-blessing.js";
 import _poolBattlegraceAngel from "../pool/battlegrace-angel.js";
 import _poolBayFalcon from "../pool/bay-falcon.js";
@@ -979,6 +980,7 @@ const shard: CardShard = {
     _poolAxgardArmory,
     _poolAzoriusJusticiar,
     _poolBaldinCenturyHerdmaster,
+    _poolBarrinsSpite,
     _poolBattleRageBlessing,
     _poolBattlegraceAngel,
     _poolBayFalcon,

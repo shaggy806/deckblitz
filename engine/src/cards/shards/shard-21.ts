@@ -410,6 +410,7 @@ import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMadAuntie from "../pool/mad-auntie.js";
 import _poolMagaTraitorToMortals from "../pool/maga-traitor-to-mortals.js";
 import _poolMagmasaur from "../pool/magmasaur.js";
+import _poolMagusOfTheArena from "../pool/magus-of-the-arena.js";
 import _poolMakeshiftMannequin from "../pool/makeshift-mannequin.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolManaSeism from "../pool/mana-seism.js";
@@ -1238,6 +1239,7 @@ const shard: CardShard = {
     _poolMadAuntie,
     _poolMagaTraitorToMortals,
     _poolMagmasaur,
+    _poolMagusOfTheArena,
     _poolMakeshiftMannequin,
     _poolMalevolentWhispers,
     _poolManaSeism,

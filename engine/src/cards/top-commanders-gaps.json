@@ -681,7 +681,10 @@
   "stat:cards-library-to-graveyard-this-turn",
   "stat:cards-put-into-graveyard-this-turn",
   "stat:permanents-to-graveyard-from-battlefield-this-turn",
-  "mechanic:assist"
+  "mechanic:assist",
+  "decision:opponent-chooses-mode",
+  "decision:opponent-chooses-target",
+  "effect:opponent-chooses-among-targets"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

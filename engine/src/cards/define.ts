@@ -2727,6 +2727,17 @@ export interface CastModalSpec {
    * (Collective Brutality) or tap (Collective Effort) aren't modelled.
    */
   readonly costPerExtraMode?: string;
+  /**
+   * "**An opponent chooses** one —" (Misfortune, Library of Lat-Nam): the
+   * modes are chosen by an opponent, when the caster would choose them
+   * (rule 700.2e) — as it's cast (601.2b), the caster naming which opponent
+   * (the cast's `otherChooser`, a variant per opponent). That opponent is
+   * asked with `choose-modes`, the cast waiting on it, and is "that player"
+   * of the modes (`"that-player"`) as the spell resolves. Its modes take no
+   * targets (the caster would have to choose them after: Fatal Lore isn't
+   * built).
+   */
+  readonly chosenBy?: "opponent";
   /** Spree (rule 702.172a) is each mode's `ModeOption.spreeCost`: "choose
    * one or more modes; as an additional cost to cast this spell, pay the
    * costs associated with those modes". */
@@ -3273,6 +3284,20 @@ export interface CardDefinition {
    * value are its own.
    */
   readonly assist: boolean;
+  /**
+   * The target slots **an opponent** chooses — "destroy target nonbasic land
+   * you don't control and target nonbasic land **of an opponent's choice**
+   * you don't control" (Volcanic Offering: `[1, 3]`), "gain control of target
+   * creature **of an opponent's choice they control**" (Evangelize: `[0]`).
+   * As it's cast its caster names the opponent (the cast's `otherChooser`, a
+   * variant per opponent — rule 700.2e's way, as for a mode), chooses the
+   * other targets, and that opponent then chooses these, still as part of
+   * announcing the targets (rule 601.2c) — the `choose-targets` decision,
+   * the cast waiting on it. The targets stay the caster's, legal or not as
+   * the caster would choose them; "they control" is a slot's filter's
+   * `controlledBy: "chooser"`. Empty for most cards.
+   */
+  readonly opponentChoosesTargets: readonly number[];
   /**
    * A cost reduction printed on the spell itself, gated on a board-state
    * condition (rule 601.2f — Ferocious: "if you control a creature with
@@ -3996,6 +4021,7 @@ const PRINTED_ABILITY: {
   becomesDayAsEnters: (def) => def.becomesDayAsEnters,
   delve: (def) => def.delve,
   assist: (def) => def.assist,
+  opponentChoosesTargets: (def) => def.opponentChoosesTargets.length > 0,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
@@ -4218,6 +4244,8 @@ interface CardDraft {
   delve?: boolean;
   /** Assist (rule 702.132a) — see {@link CardDefinition.assist}. */
   assist?: boolean;
+  /** See {@link CardDefinition.opponentChoosesTargets}. */
+  opponentChoosesTargets?: readonly number[];
   selfCostReduction?: {
     readonly condition: StaticCondition;
     readonly reduceGeneric: CostReductionAmount;
@@ -4460,6 +4488,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     becomesDayAsEnters: draft.becomesDayAsEnters ?? false,
     delve: draft.delve ?? false,
     assist: draft.assist ?? false,
+    opponentChoosesTargets: draft.opponentChoosesTargets ?? [],
     selfCostReduction: draft.selfCostReduction ?? null,
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,

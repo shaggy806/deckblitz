@@ -374,6 +374,8 @@ import type {
   ZoneType,
   CopyEnds,
   CopyValues,
+  CastNowAsk,
+  OtherChoiceAsk,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -387,6 +389,7 @@ import {
   groupPowerExceeded,
   groupReadsAmount,
   groupReadsX,
+  otherSlotConflict,
   otherThanSlots,
   specsAtX,
   specsWithAmounts,
@@ -1231,21 +1234,6 @@ type ManaExtra = {
   readonly producing?: "C";
 };
 
-/** What a `cast-now` offers — to whom, which cards, on what terms (see the
- * `cast-now` {@link EffectSpec}) — as `Game.castNowOffer` reads it. */
-interface CastNowAsk {
-  readonly player: PlayerId;
-  readonly cards: readonly ObjectId[];
-  readonly free: boolean;
-  readonly byDiscarding?: true;
-  /** The madness cost paid rather than the mana cost (rule 702.35a). */
-  readonly madness?: string;
-  /** The miracle cost paid rather than the mana cost (rule 702.94a). */
-  readonly miracle?: string;
-  readonly exileAfter: boolean | "instants-and-sorceries";
-  readonly spell?: CardFilter;
-  readonly freeCastOf?: "cascade" | "suspend";
-}
 
 /** `cost` with `n` less generic mana — "{4}{B}{R}" less 1 is "{3}{B}{R}",
  * never below none. Only the generic number moves; coloured symbols and X
@@ -1538,6 +1526,10 @@ export class Game {
         return pending === null ? undefined : this.abilityTargetSource(pending);
       },
       spellTargetSource: (spell) => this.cardSource(this.registry.get(this.state.objects[spell].cardName), spell),
+      whyCannotOtherTargets: (targets) => {
+        const awaiting = this.state.awaiting;
+        return awaiting?.kind === "choose-targets" ? this.whyCannotOtherTargets(awaiting, targets) : "no targets are being chosen";
+      },
       whyCannotCastNow: (cast) => this.canDispatch(cast),
       whyCannotPlayLandNow: (land) => this.whyCannotPlayLandNow(land.player, land.card, land.face ?? 0),
       attackTaxOf: (defender) => this.attackTaxPerCreature(defender),
@@ -1832,6 +1824,14 @@ export class Game {
         this.cycleCard(action.player, action.card);
         break;
       case "cast-spell":
+        // "Of an opponent's choice" (rules 601.2c, 700.2e): the opponent
+        // named answers first; the cast comes back through here, its targets
+        // and modes whole, once they have.
+        if (action.otherChooser !== undefined) {
+          if (this.otherChoice?.for !== action.card) this.requestOtherChoice(action);
+          else this.dispatchOne(this.expandOtherChoice(action));
+          break;
+        }
         // Assist (rule 702.132a): the chosen player answers first; the cast
         // itself comes back through here with their amount in hand.
         if (action.assist !== undefined && this.assistChoice?.for !== action.card) {
@@ -1877,6 +1877,12 @@ export class Game {
         }
         break;
       case "activate-ability": {
+        // "Of an opponent's choice" (rules 602.2b, 601.2c), as a cast's.
+        if (action.otherChooser !== undefined) {
+          if (this.otherChoice?.for !== action.source) this.requestOtherChoice(action);
+          else this.dispatchOne(this.expandOtherChoice(action));
+          break;
+        }
         // A {T} cost taps one token of a stack, not every token in it: that
         // one is split off first and activates (a stack is a representation
         // — it may not change a result).
@@ -1886,6 +1892,8 @@ export class Game {
           const ability = this.effectiveActivated(source)[action.abilityIndex];
           if (ability?.cost.tap === true && this.whyCannotActivateAbility(action.player, source, action.abilityIndex, action.tap, action.xValue ?? 0, normalizeTargets(action.targets)) === null) {
             source = this.splitOneFromStack(source);
+            // The opponent's choice goes with the token that activates.
+            if (this.otherChoice?.for === action.source) this.otherChoice = { ...this.otherChoice, for: source };
           }
         }
         this.phyrexianLifeChoice = action.phyrexianLife;
@@ -2049,6 +2057,13 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        // Naming the opponent who chooses (rules 601.2c, 700.2e): legal when
+        // the cast would be with a choice of theirs in place.
+        if (action.otherChooser !== undefined) {
+          return this.otherChoice?.for !== action.card
+            ? this.whyCannotRequestOtherChoice(action)
+            : this.canDispatch(this.expandOtherChoice(action));
+        }
         // Assist (rule 702.132a): asking is legal when the caster could pay
         // the rest with as much as the chosen player's mana pays paid for
         // them — what they'll really pay is theirs to choose.
@@ -2105,6 +2120,11 @@ export class Game {
           ) ?? this.whyCastTargetsInvalid(action),
         );
       case "activate-ability": {
+        if (action.otherChooser !== undefined) {
+          return this.otherChoice?.for !== action.source
+            ? this.whyCannotRequestOtherChoice(action)
+            : this.canDispatch(this.expandOtherChoice(action));
+        }
         const modes = action.modes === undefined ? undefined : [...action.modes];
         const why = this.withActivationModes(modes, () =>
           this.withWaterbendChoice(action.source, action.waterbend, () =>
@@ -2754,6 +2774,24 @@ export class Game {
       makes: readonly ManaType[] | undefined = manaColors,
       manaSplit?: ManaSplitOffer,
     ): void => {
+      // "Of an opponent's choice" (rules 602.2b, 601.2c): a variant per
+      // opponent who could choose, each judged with them choosing.
+      const theirSlots = ability.opponentChoosesTargets ?? [];
+      if (theirSlots.length > 0 && this.otherChoice?.for !== source) {
+        for (const chooser of this.otherChoosers(player)) {
+          const from = out.length;
+          this.withOtherChoice({ for: source, chooser }, () =>
+            pushActivateAbility(source, cardName, ability, index, manaColors, makes, manaSplit),
+          );
+          const variants = out
+            .splice(from)
+            .flatMap((offer) =>
+              offer.kind === "activate-ability" ? this.otherChoiceVariant(offer, theirSlots, false, chooser) : [],
+            );
+          out.push(...variants);
+        }
+        return;
+      }
       if (this.whyCannotActivateAbility(player, source, index) !== null) return;
       const manaX =
         parseManaCost(ability.cost.mana).x > 0
@@ -3078,9 +3116,18 @@ export class Game {
     // until it's been chosen. A target filter's `n: "x"` (Stolen by the
     // Fae's "with mana value X") reads it too.
     const spellX = x ?? (card.zone === "stack" ? card.xValue ?? undefined : undefined);
+    // The opponent choosing some of its targets (rule 601.2c): named on the
+    // spell once it's cast, on the cast being judged until then.
+    const chooser =
+      this.otherChoice?.for === object
+        ? this.otherChoice.chooser
+        : card.zone === "stack"
+          ? card.otherChooser
+          : undefined;
     return {
       ...base,
       ...(spellX !== undefined ? { x: spellX } : {}),
+      ...(chooser !== undefined ? { chooser } : {}),
       amount: this.filterAmounts({ source: object, controller: card.controller, x: spellX ?? card.xValue ?? 0 }),
     };
   }
@@ -4220,9 +4267,13 @@ export class Game {
     const base = permanentSource(this.state, this.registry, id);
     const object = this.state.objects[id];
     if (object === undefined) return base;
+    // The opponent choosing some of the targets of an ability of it being
+    // activated (rules 602.2b, 601.2c).
+    const chooser = this.otherChoice?.for === id ? this.otherChoice.chooser : undefined;
     return {
       ...base,
       ...(x !== undefined ? { x } : {}),
+      ...(chooser !== undefined ? { chooser } : {}),
       amount: this.filterAmounts({
         source: id,
         controller: object.controller,
@@ -5870,6 +5921,13 @@ export class Game {
       throw new Error("unreachable: whyCannotChooseModes should have caught this");
     }
 
+    // A spell's modes an opponent chooses as it's cast (rule 700.2e): the
+    // cast goes on with them, in ascending order (as a caster's are kept).
+    if (awaiting.otherCast !== undefined) {
+      this.resumeOtherChoice(player, awaiting.otherCast, { modes: [...modeIndices].sort((p, q) => p - q) });
+      return;
+    }
+
     // A gift's opponent, chosen as its cost is paid (rule 702.174a).
     if (awaiting.giftAsk !== undefined) {
       this.applyGiftChoice(player, modeIndices, awaiting.giftAsk);
@@ -6054,6 +6112,13 @@ export class Game {
   private applyChooseTargets(player: PlayerId, chosen: ResolvedTargets, division?: readonly number[]): void {
     const why = this.whyCannotChooseTargets(player, chosen, division);
     if (why !== null) throw new Error(why);
+    // An opponent's targets for a spell or ability being cast or activated
+    // (rule 601.2c): the cast goes on with them.
+    const asked = this.state.awaiting;
+    if (asked?.kind === "choose-targets" && asked.otherCast !== undefined) {
+      this.resumeOtherChoice(player, asked.otherCast, { targets: chosen });
+      return;
+    }
     // A triggered ability's divided amount, split as it goes on the stack
     // (rule 603.3d) — the answer's, or an even one.
     const awaitingNow = this.state.awaiting;
@@ -7541,6 +7606,15 @@ export class Game {
     // A behold (rule 701.4a) moves nothing by `destination`: its own answer.
     if (awaiting.behold !== undefined) {
       this.applyBehold(player, chosen, awaiting);
+      return;
+    }
+    // A `choose-among-targets` choice (Wake to Slaughter): nothing moves
+    // here; what's picked is collected for the resolving effect.
+    if (awaiting.keepChoice === true) {
+      this.state.awaiting = null;
+      this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...chosen];
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
     // Amplify (rule 702.38a): the cards are revealed where they are, and how
@@ -12250,6 +12324,11 @@ export class Game {
         : this.whyCannotAct(player);
     if (blocked !== null) return blocked;
     const def = this.faceDef(cardId, face);
+    // "Of an opponent's choice" (rules 601.2c, 700.2e): cast naming the
+    // opponent who chooses (the cast's `otherChooser`).
+    if (this.castNeedsOtherChooser(def) && this.otherChoice?.for !== cardId) {
+      return `an opponent chooses for ${def.name}: cast it naming one`;
+    }
     // Judged as the face being cast: only a split card's half exists as a
     // spell (rule 709.3), so "spells with the chosen name" reads its name.
     const prohibited = this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def));
@@ -13124,6 +13203,19 @@ export class Game {
       graveyardGrant?: GraveyardGrant;
     },
   ): LegalAction[] {
+    // "Of an opponent's choice" (rules 601.2c, 700.2e): a variant per
+    // opponent who could choose, each judged with them choosing.
+    if (this.castNeedsOtherChooser(def) && this.otherChoice?.for !== card) {
+      return this.otherChoosers(player).flatMap((chooser) =>
+        this.withOtherChoice({ for: card, chooser }, () =>
+          this.castSpellActionsAlone(player, card, cardName, def, opts).flatMap((offer) =>
+            offer.kind === "cast-spell"
+              ? this.otherChoiceVariant(offer, def.opponentChoosesTargets, def.castModal?.chosenBy === "opponent", chooser)
+              : [],
+          ),
+        ),
+      );
+    }
     const alone = this.castSpellActionsAlone(player, card, cardName, def, opts);
     if (!def.assist || opts.via === "effect" || this.assistChoice !== undefined) return alone;
     const helped: LegalAction[] = [];
@@ -13230,6 +13322,281 @@ export class Game {
       return;
     }
     this.withAssistChoice(choice, () => this.dispatchOne(cast));
+  }
+
+  // --- another player's choices as it's cast (rules 601.2c, 700.2e) -------
+
+  /**
+   * The opponent's choice the cast of `for` (a card), or the activation of an
+   * ability of `for` (a permanent), is being judged or carried out with: the
+   * opponent its caster named (`chooser`), and once they've answered, their
+   * targets for the slots that are theirs (`targets`) or the modes they
+   * chose (`modes`). Unset, or for another object, nobody else chooses — and
+   * a card or ability that needs someone to can't be cast or activated.
+   */
+  private otherChoice:
+    | {
+        readonly for: ObjectId;
+        readonly chooser: PlayerId;
+        readonly targets?: ResolvedTargets;
+        readonly modes?: readonly number[];
+      }
+    | undefined = undefined;
+
+  private withOtherChoice<T>(choice: Game["otherChoice"], run: () => T): T {
+    const before = this.otherChoice;
+    this.otherChoice = choice;
+    try {
+      return run();
+    } finally {
+      this.otherChoice = before;
+    }
+  }
+
+  /** Is the cast of `def` one an opponent chooses for — some of its
+   * targets, or its modes? */
+  private castNeedsOtherChooser(def: CardDefinition): boolean {
+    return def.opponentChoosesTargets.length > 0 || def.castModal?.chosenBy === "opponent";
+  }
+
+  /** The opponents `player` may name to choose: every one still in the game. */
+  private otherChoosers(player: PlayerId): PlayerId[] {
+    return this.state.turnOrder.filter((p) => p !== player && this.state.players[p]?.hasLost !== true);
+  }
+
+  /**
+   * What the opponent named for `action` chooses: the target slots that are
+   * theirs, with each slot's spec and its legal targets — legal as the caster
+   * would choose them, read with that opponent choosing (a filter's
+   * `controlledBy: "chooser"`) — or, for modes, none (`modes` set).
+   */
+  private otherChoiceOffer(
+    action: OtherChoiceAsk["action"],
+    chooser: PlayerId,
+  ): { readonly slots: readonly number[]; readonly specs: readonly TargetSpec[]; readonly options: readonly (readonly TargetRef[])[]; readonly cardName: string; readonly modes: boolean } | string {
+    if (action.type === "cast-spell") {
+      const def = this.faceDef(action.card, action.face ?? 0);
+      if (!this.castNeedsOtherChooser(def)) return `no opponent chooses anything for ${def.name}`;
+      if (def.castModal?.chosenBy === "opponent") {
+        return { slots: [], specs: [], options: [], cardName: def.name, modes: true };
+      }
+      const slots = def.opponentChoosesTargets;
+      const specs = slots.map((i) => def.targets[i]);
+      const options = this.withOtherChoice({ for: action.card, chooser }, () =>
+        this.targetOptionsFor(specs, action.player, this.cardSource(def, action.card, action.xValue)),
+      );
+      return { slots, specs, options, cardName: def.name, modes: false };
+    }
+    const ability = this.effectiveActivated(action.source)[action.abilityIndex];
+    const slots = ability?.opponentChoosesTargets ?? [];
+    if (ability === undefined || slots.length === 0) return "no opponent chooses targets for that ability";
+    const specs = slots.map((i) => ability.targets[i]);
+    const options = this.withOtherChoice({ for: action.source, chooser }, () =>
+      this.targetOptionsFor(specs, action.player, this.permanentSource(action.source, action.xValue)),
+    );
+    return { slots, specs, options, cardName: printedCardName(this.state.objects[action.source]), modes: false };
+  }
+
+  /**
+   * `action` with the opponent's answer (`otherChoice`) in place: its targets
+   * whole, the caster's own in their slots and the opponent's in theirs, and
+   * the modes they chose — the cast or activation as though one player had
+   * made every choice, carried out (and judged) under `otherChoice`.
+   */
+  private expandOtherChoice<A extends OtherChoiceAsk["action"]>(action: A): A {
+    const choice = this.otherChoice;
+    const offer = choice === undefined ? null : this.otherChoiceOffer(action, choice.chooser);
+    const slots = offer === null || typeof offer === "string" ? [] : offer.slots;
+    const mine = [...(action.targets ?? [])];
+    const theirs = [...(choice?.targets ?? [])];
+    const targets: (TargetRef | null)[] = [];
+    for (let i = 0; mine.length > 0 || theirs.length > 0; i += 1) {
+      const next = slots.includes(i) ? theirs.shift() : mine.shift();
+      targets.push(next ?? null);
+    }
+    const { otherChooser: _named, ...rest } = action;
+    return {
+      ...rest,
+      targets,
+      ...(choice?.modes !== undefined ? { modes: [...choice.modes] } : {}),
+    } as unknown as A;
+  }
+
+  /**
+   * Why `action` can't be cast or activated naming its `otherChooser`, or
+   * `null`: they must be an opponent still in the game, each slot of theirs
+   * must have a legal target, and the rest must be legal with a choice of
+   * theirs in place (the first legal target for each slot, or the first
+   * modes) — what they'll really choose is theirs.
+   */
+  private whyCannotRequestOtherChoice(action: OtherChoiceAsk["action"], castNow?: CastNowAsk): string | null {
+    const chooser = action.otherChooser;
+    if (chooser === undefined) return "no opponent named to choose";
+    if (!this.otherChoosers(action.player).includes(chooser)) return `${chooser} isn't an opponent who can choose`;
+    if (action.type === "cast-spell" && action.modes !== undefined && action.modes.length > 0) {
+      return "the opponent chooses the modes";
+    }
+    const offer = this.otherChoiceOffer(action, chooser);
+    if (typeof offer === "string") return offer;
+    const missing = offer.specs.findIndex((spec, i) => !isOptionalSpec(spec) && offer.options[i].length === 0);
+    if (missing >= 0) return `${chooser} has no legal target to choose for ${offer.cardName}`;
+    const key = action.type === "cast-spell" ? action.card : action.source;
+    const def = action.type === "cast-spell" ? this.faceDef(action.card, action.face ?? 0) : null;
+    const probe = {
+      for: key,
+      chooser,
+      targets: offer.options.map((o) => o[0]),
+      ...(offer.modes && def?.castModal != null
+        ? { modes: Array.from({ length: Math.max(1, def.castModal.minModes) }, (_m, i) => i) }
+        : {}),
+    };
+    const castNowBefore = this.castNowProbe;
+    if (castNow !== undefined) this.castNowProbe = castNow;
+    try {
+      return this.withOtherChoice(probe, () => this.canDispatch(this.expandOtherChoice(action)));
+    } finally {
+      this.castNowProbe = castNowBefore;
+    }
+  }
+
+  /**
+   * A cast or activation naming an opponent to choose (rules 601.2c,
+   * 700.2e): they're asked — `choose-targets` for their slots, with
+   * `targetsFor` the caster, or `choose-modes` — before it goes on
+   * (`resumeOtherChoice`). The caster holds priority meanwhile; a spell cast
+   * as something resolves (`castNow`) keeps that resolution waiting.
+   */
+  private requestOtherChoice(action: OtherChoiceAsk["action"], castNow?: CastNowAsk): void {
+    const why = this.whyCannotRequestOtherChoice(action, castNow);
+    if (why !== null) throw new Error(why);
+    const chooser = action.otherChooser as PlayerId;
+    const offer = this.otherChoiceOffer(action, chooser);
+    if (typeof offer === "string") throw new Error(offer);
+    const ask: OtherChoiceAsk = { action, slots: [...offer.slots], ...(castNow !== undefined ? { castNow } : {}) };
+    const object = action.type === "cast-spell" ? action.card : action.source;
+    const castModal = action.type === "cast-spell" ? this.faceDef(action.card, action.face ?? 0).castModal : null;
+    if (offer.modes && castModal !== null) {
+      this.state.awaiting = {
+        kind: "choose-modes",
+        player: chooser,
+        about: action.player,
+        source: object,
+        minModes: castModal.minModes,
+        maxModes: castModal.maxModes,
+        modes: castModal.modes.map((m) => ({ text: m.text, effect: m.effect })),
+        x: action.type === "cast-spell" ? (action.xValue ?? 0) : 0,
+        targets: [],
+        modesController: action.player,
+        otherCast: ask,
+      };
+    } else {
+      this.state.awaiting = {
+        kind: "choose-targets",
+        player: chooser,
+        targetsFor: action.player,
+        source: object,
+        cardName: offer.cardName,
+        prompt: `Choose ${offer.specs.length === 1 ? "a target" : "targets"} for another player's ${offer.cardName}`,
+        specs: [...offer.specs],
+        options: offer.options.map((o) => [...o]),
+        otherCast: ask,
+      };
+    }
+    this.emit({ type: "choice-requested", player: chooser, caster: action.player, object, what: offer.modes ? "modes" : "targets" });
+    if (castNow === undefined) this.afterPlayerAction(action.player);
+  }
+
+  /**
+   * The opponent answered (`answer`: their targets, or the modes): the cast
+   * or activation goes on with it, as though its caster had made every
+   * choice — or, if it can't be completed now, it's reversed (rule 733.1),
+   * the caster keeping priority (733.2). A spell cast as something resolves
+   * goes on under the same `cast-now` offer.
+   */
+  private resumeOtherChoice(
+    chooser: PlayerId,
+    ask: OtherChoiceAsk,
+    answer: { readonly targets?: ResolvedTargets; readonly modes?: readonly number[] },
+  ): void {
+    const action = ask.action;
+    this.state.awaiting = null;
+    if (ask.castNow === undefined) this.state.priority.holder = action.player;
+    const object = action.type === "cast-spell" ? action.card : action.source;
+    const choice = { for: object, chooser, ...answer };
+    const castNowBefore = this.castNowProbe;
+    if (ask.castNow !== undefined) this.castNowProbe = ask.castNow;
+    try {
+      this.withOtherChoice(choice, () => {
+        const whole = this.expandOtherChoice(action);
+        const why = this.canDispatch(whole);
+        if (why !== null) {
+          this.emit({ type: "cast-reversed", player: action.player, object, reason: why });
+          this.prepareForPriority(ask.castNow === undefined ? action.player : this.activePlayer);
+          return;
+        }
+        if (ask.castNow !== undefined && whole.type === "cast-spell") this.carryOutCastNow(whole);
+        else this.dispatchOne(whole);
+      });
+    } finally {
+      this.castNowProbe = castNowBefore;
+    }
+  }
+
+  /**
+   * A cast or activation offer, judged with `chooser` choosing, as the
+   * variant naming them (`otherChooser`): their target slots (`slots`) left
+   * out of its `targetSpecs` / `targetOptions` — none at all if one of them
+   * has no legal target — and a spell whose modes they choose offered
+   * without `castModal`.
+   */
+  private otherChoiceVariant<O extends Extract<LegalAction, { kind: "cast-spell" | "activate-ability" }>>(
+    offer: O,
+    slots: readonly number[],
+    modes: boolean,
+    chooser: PlayerId,
+  ): O[] {
+    if (modes) {
+      const { castModal: _modes, ...rest } = offer as Extract<LegalAction, { kind: "cast-spell" }>;
+      return [{ ...rest, otherChooser: chooser } as O];
+    }
+    for (const i of slots) {
+      const spec = offer.targetSpecs[i];
+      if (spec === undefined) return [];
+      if (!isOptionalSpec(spec) && (offer.targetOptions[i]?.length ?? 0) === 0) return [];
+    }
+    const keep = (_x: unknown, i: number): boolean => !slots.includes(i);
+    const divide = offer.divide;
+    return [
+      {
+        ...offer,
+        targetSpecs: offer.targetSpecs.filter(keep),
+        targetOptions: offer.targetOptions.filter(keep),
+        ...(divide !== undefined ? { divide: { ...divide, slot: divide.slot - slots.filter((i) => i < divide.slot).length } } : {}),
+        otherChooser: chooser,
+      },
+    ];
+  }
+
+  /** Validate an opponent's targets for a cast waiting on them (the
+   * `choose-targets` with `otherCast`): each from its slot's options, and
+   * legal together as the caster would choose them. */
+  private whyCannotOtherTargets(
+    awaiting: Extract<NonNullable<GameState["awaiting"]>, { kind: "choose-targets" }>,
+    targets: ResolvedTargets,
+  ): string | null {
+    const ask = awaiting.otherCast;
+    if (ask === undefined) return "these aren't another player's targets";
+    if (targets.length !== awaiting.specs.length) return `choose ${awaiting.specs.length} target(s)`;
+    for (const [i, t] of targets.entries()) {
+      if (t === undefined) {
+        if (!isOptionalSpec(awaiting.specs[i])) return `target ${i + 1} is required`;
+        continue;
+      }
+      if (!awaiting.options[i].some((o) => sameTargetRef(o, t))) return `that isn't a legal target for slot ${i + 1}`;
+    }
+    // Two of their slots can't name the same object for one "target".
+    const conflict = otherSlotConflict(awaiting.specs, targets);
+    return conflict === null ? null : `target ${conflict.slot + 1} must be another than target ${conflict.than + 1}`;
   }
 
   // --- waterbend (rule 701.67) -------------------------------------------
@@ -13939,6 +14306,14 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "Of an opponent's choice" (rules 601.2c, 700.2e): the opponent named
+    // answers first, under the same offer; the resolution waits on them too.
+    if (cast.otherChooser !== undefined) {
+      const offer = this.castNowOffer(player, cast.card);
+      if (offer === null) throw new Error("that card isn't being offered to cast now");
+      this.requestOtherChoice(cast, offer);
+      return;
+    }
     const why = this.canDispatch(cast);
     if (why !== null) throw new Error(why);
     // Checked against the decision; cast with it answered, so the cast's own
@@ -13946,6 +14321,17 @@ export class Game {
     this.castNowProbe = this.castNowOffer(player, cast.card);
     this.state.awaiting = null;
     try {
+      this.carryOutCastNow(cast);
+    } finally {
+      this.castNowProbe = null;
+    }
+  }
+
+  /** A `cast-now` cast carried out, its offer in `castNowProbe` — once
+   * answered, or once the opponent it named has chosen
+   * (`resumeOtherChoice`). */
+  private carryOutCastNow(cast: Extract<Action, { type: "cast-spell" }>): void {
+    {
       this.withWaterbendChoice(cast.card, cast.waterbend, () =>
         this.castSpell(
           cast.player,
@@ -13968,8 +14354,6 @@ export class Game {
           cast.prototype === true,
         ),
       );
-    } finally {
-      this.castNowProbe = null;
     }
   }
 
@@ -14405,6 +14789,9 @@ export class Game {
     }
     object.stormCount = stormCount;
     if (sortedModes !== undefined) object.chosenModes = sortedModes;
+    // The opponent who chose some of its targets or its modes (rules
+    // 601.2c, 700.2e).
+    if (this.otherChoice?.for === cardId) object.otherChooser = this.otherChoice.chooser;
     if (chosenDivision !== undefined) object.division = chosenDivision;
     if (kicked) {
       object.kicked = true;
@@ -14575,7 +14962,9 @@ export class Game {
     this.announceTargeted(chosen, player, cardId, true);
     this.commitCrimeIfAny(chosen, player, cardId);
     if (sortedModes !== undefined) {
-      this.emit({ type: "modes-chosen", source: cardId, player, modes: [...sortedModes] });
+      // Chosen by the opponent its caster named (rule 700.2e), when one did.
+      const modesBy = this.otherChoice?.for === cardId ? this.otherChoice.chooser : player;
+      this.emit({ type: "modes-chosen", source: cardId, player: modesBy, modes: [...sortedModes] });
     }
     // The rest of the additional cost (rule 601.2f-h). Paid as the spell is
     // cast, so — like the sacrifice above — it stands even if the spell is
@@ -16029,6 +16418,11 @@ export class Game {
     if (ability === undefined) {
       return `${def.name} has no ability #${abilityIndex}`;
     }
+    // "Of an opponent's choice" (rules 602.2b, 601.2c): activated naming the
+    // opponent who chooses (the action's `otherChooser`).
+    if ((ability.opponentChoosesTargets?.length ?? 0) > 0 && this.otherChoice?.for !== sourceId) {
+      return `an opponent chooses targets for ${def.name}'s ability: activate it naming one`;
+    }
     if (ability.zone !== undefined) {
       // Channel (702.51a) from hand, a graveyard ability or a command-zone
       // one (Derevi) — activatable only from that zone, never as a
@@ -16822,6 +17216,8 @@ export class Game {
       chosen,
     );
     if (chosenX > 0) this.state.objects[abilityId].xValue = chosenX;
+    // The opponent who chose some of its targets (rules 602.2b, 601.2c).
+    if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
     // A modal ability's modes, chosen as it was activated (rule 700.2b): what
@@ -19450,7 +19846,16 @@ export class Game {
           offset += count;
           if (mode === undefined) continue;
           steps.push({
-            effect: mode.effect,
+            // Modes an opponent chose (rule 700.2e) name them "that player"
+            // (Misfortune's "each creature that player controls").
+            effect:
+              // One who has left the game is no one: what's about them does nothing.
+              chosenModes !== undefined &&
+              def.castModal?.chosenBy === "opponent" &&
+              object.otherChooser !== undefined &&
+              this.state.players[object.otherChooser]?.hasLost === false
+                ? { kind: "about-player", player: object.otherChooser, effect: mode.effect }
+                : mode.effect,
             ctx: this.makeResolutionContext(
               id,
               object.controller,
@@ -20161,7 +20566,11 @@ export class Game {
       object.targets ?? [],
       targets,
       object.controller,
-      targetSource,
+      // The opponent who chose some of them (rule 601.2c): what "they
+      // control" reads again now.
+      targetSource !== undefined && object.otherChooser !== undefined
+        ? { ...targetSource, chooser: object.otherChooser }
+        : targetSource,
       object.autoTargetSlots,
     );
     if (legality.fizzles) {
@@ -25512,6 +25921,41 @@ export class Game {
         };
         return true;
       },
+      askChooseAmong: (chooser, objects, count, prompt) => {
+        if (this.state.players[chooser]?.hasLost !== false) return false;
+        // Permanents are pointed at on the battlefield; cards elsewhere (a
+        // graveyard's — all public) are shown in a list.
+        if (objects.every((id) => this.state.objects[id]?.zone === "battlefield")) {
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: chooser,
+            eligible: [...objects],
+            min: count,
+            max: count,
+            prompt,
+            then: { kind: "sequence", effects: [] },
+            source,
+            x,
+            keepChoice: true,
+          };
+          return true;
+        }
+        const owner = this.state.objects[objects[0]]?.owner;
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: chooser,
+          ...(owner !== undefined && owner !== chooser ? { forPlayer: owner } : {}),
+          ids: [...objects],
+          eligible: [...objects],
+          min: count,
+          max: count,
+          destination: "stay",
+          leftover: "stay",
+          prompt,
+          keepChoice: true,
+        };
+        return true;
+      },
       takeKept: () => {
         const kept = this.state.keptByChoice ?? [];
         delete this.state.keptByChoice;
@@ -29596,6 +30040,7 @@ export class Game {
       ...(object.autoTargetSlots !== undefined ? { autoTargetSlots: [...object.autoTargetSlots] } : {}),
       xValue: object.xValue ?? null,
       ...(object.chosenModes !== undefined ? { chosenModes: [...object.chosenModes] } : {}),
+      ...(object.otherChooser !== undefined ? { otherChooser: object.otherChooser } : {}),
       ...(object.division !== undefined ? { division: [...object.division] } : {}),
       ...(object.kicked === true ? { kicked: true } : {}),
       ...(object.kickedByControl === true ? { kickedByControl: true as const } : {}),
@@ -29669,6 +30114,7 @@ export class Game {
       ...(spell.targetStints !== undefined ? { targetStints: [...spell.targetStints] } : {}),
       ...(spell.autoTargetSlots !== undefined ? { autoTargetSlots: [...spell.autoTargetSlots] } : {}),
       ...(spell.chosenModes !== undefined ? { chosenModes: [...spell.chosenModes] } : {}),
+      ...(spell.otherChooser !== undefined ? { otherChooser: spell.otherChooser } : {}),
       ...(spell.division !== undefined ? { division: [...spell.division] } : {}),
       // Kicked only by controlling a Dragon as it was cast: a copy wasn't
       // cast, so not it (`kickedByControl` — the Draconic Roar ruling).
@@ -40856,6 +41302,7 @@ export class Game {
     // Modes chosen for a targeted modal spell (Phase 11 EG-2) and a kicker
     // paid as it was cast (P8) both end with the stack.
     object.chosenModes = undefined;
+    object.otherChooser = undefined;
     object.division = undefined;
     object.kicked = undefined;
     object.kickedByControl = undefined;

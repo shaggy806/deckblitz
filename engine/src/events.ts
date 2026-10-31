@@ -1057,6 +1057,16 @@ export type GameEvent =
       readonly amount: number;
     })
   | (Base & {
+      /** `caster` cast `object` (or activated an ability of it) naming
+       * `player`, an opponent, to choose some of its targets (rule 601.2c)
+       * or its modes (rule 700.2e) — `what` — which they're now asked. */
+      readonly type: "choice-requested";
+      readonly player: PlayerId;
+      readonly caster: PlayerId;
+      readonly object: ObjectId;
+      readonly what: "targets" | "modes";
+    })
+  | (Base & {
       /** `player` started casting `object` but couldn't complete it (rule
        * 733.1): the whole cast is undone, nothing paid, and they keep
        * priority (733.2) — an assisted spell whose helper paid too little

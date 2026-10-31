@@ -329,6 +329,7 @@ import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
 import _poolImperialSubduer from "../pool/imperial-subduer.js";
+import _poolIncriminate from "../pool/incriminate.js";
 import _poolIncursionSpecialist from "../pool/incursion-specialist.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
@@ -782,6 +783,7 @@ import _poolViolentImpact from "../pool/violent-impact.js";
 import _poolViolentOutburst from "../pool/violent-outburst.js";
 import _poolViscidLemures from "../pool/viscid-lemures.js";
 import _poolVoidRend from "../pool/void-rend.js";
+import _poolVolcanicOffering from "../pool/volcanic-offering.js";
 import _poolVolunteerReserves from "../pool/volunteer-reserves.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
@@ -1182,6 +1184,7 @@ const shard: CardShard = {
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
     _poolImperialSubduer,
+    _poolIncriminate,
     _poolIncursionSpecialist,
     _poolIndependentTroops,
     _poolInfernoFist,
@@ -1635,6 +1638,7 @@ const shard: CardShard = {
     _poolViolentOutburst,
     _poolViscidLemures,
     _poolVoidRend,
+    _poolVolcanicOffering,
     _poolVolunteerReserves,
     _poolVraskaGolgariQueen,
     _poolVraskaTheUnseen,

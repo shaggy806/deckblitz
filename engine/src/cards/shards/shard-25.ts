@@ -393,6 +393,7 @@ import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
+import _poolLibraryOfLatNam from "../pool/library-of-lat-nam.js";
 import _poolLiegeOfTheAxe from "../pool/liege-of-the-axe.js";
 import _poolLifeBurst from "../pool/life-burst.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
@@ -439,6 +440,7 @@ import _poolMinotaurIllusionist from "../pool/minotaur-illusionist.js";
 import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
+import _poolMisfortune from "../pool/misfortune.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
 import _poolMistsOfLorien from "../pool/mists-of-lorien.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
@@ -1225,6 +1227,7 @@ const shard: CardShard = {
     _poolLeatherArmor,
     _poolLeechCollector,
     _poolLiberatingCombustion,
+    _poolLibraryOfLatNam,
     _poolLiegeOfTheAxe,
     _poolLifeBurst,
     _poolLifecraftCavalry,
@@ -1271,6 +1274,7 @@ const shard: CardShard = {
     _poolMirranMettle,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,
+    _poolMisfortune,
     _poolMistralSinger,
     _poolMistsOfLorien,
     _poolMistveilPlains,

@@ -426,6 +426,15 @@ export interface AbilityCost {
 export interface ActivatedAbility {
   readonly cost: AbilityCost;
   readonly targets: readonly TargetSpec[];
+  /**
+   * The target slots **an opponent** chooses, as for a spell's
+   * (`CardDefinition.opponentChoosesTargets`): "tap target creature you
+   * control and target creature **of an opponent's choice they control**"
+   * (Magus of the Arena: `[1]`). The activator names the opponent (the
+   * action's `otherChooser`), who answers a `choose-targets` as it's
+   * activated (rules 602.2b, 601.2c).
+   */
+  readonly opponentChoosesTargets?: readonly number[];
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
   readonly text: string;

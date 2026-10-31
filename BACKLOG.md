@@ -203,10 +203,20 @@ section keeps only what to do next.
   an assist variant per player whose mana could help; they answer a `choose-number` of how much
   of the total cost's generic mana they pay, the caster paying the rest or the cast reversed
   (rule 733.1); the client's "(assist: Bob may pay up to N)" buttons; bots never ask, v1 offers
-  nothing; 16 freed, 3 proving cards — Charging Binox, Gang Up, Out of Bounds).
-  **537 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:choices-by-other-players` (16), `cost:loyalty-x` (15), `mechanic:meld` (15),
-  `cost:remove-any-counter-cost` (15).
+  nothing; 16 freed, 3 proving cards — Charging Binox, Gang Up, Out of Bounds),
+  choices-by-other-players' top group (2026-10-31: `choose-among-targets` — a player picks among
+  a spell's own still-legal targets as it resolves, the chosen and the rest each a pile fate;
+  `opponentChoosesTargets` on a spell or activated ability — the caster names the opponent (the
+  cast's `otherChooser`, a variant per opponent) who answers the existing `choose-targets` for
+  those slots mid-cast, `controlledBy: "chooser"` for "they control", a `cast-now` cast too;
+  `castModal.chosenBy: "opponent"` — the named opponent answers `choose-modes` as it's cast and is
+  "that player" of the modes; not yet: a trigger's "of an opponent's choice" (Mausoleum Turnkey),
+  Mogg Assassin's "that opponent", targets after an opponent's mode (Fatal Lore); 7 freed beside
+  9 proving cards — Incriminate, Barrin's Spite, Retribution, Wake to Slaughter, Evangelize,
+  Volcanic Offering, Magus of the Arena, Library of Lat-Nam, Misfortune).
+  **544 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `cost:loyalty-x` (15), `mechanic:meld` (15), `cost:remove-any-counter-cost` (15),
+  `cost:may-cost-non-mana` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

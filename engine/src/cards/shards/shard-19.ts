@@ -836,6 +836,7 @@ import _poolVoidStalker from "../pool/void-stalker.js";
 import _poolVolcanicDragon from "../pool/volcanic-dragon.js";
 import _poolVoyagesEnd from "../pool/voyages-end.js";
 import _poolVulshokHeartstoker from "../pool/vulshok-heartstoker.js";
+import _poolWakeToSlaughter from "../pool/wake-to-slaughter.js";
 import _poolWakingNightmare from "../pool/waking-nightmare.js";
 import _poolWalkingDream from "../pool/walking-dream.js";
 import _poolWallOfMulch from "../pool/wall-of-mulch.js";
@@ -1729,6 +1730,7 @@ const shard: CardShard = {
     _poolVolcanicDragon,
     _poolVoyagesEnd,
     _poolVulshokHeartstoker,
+    _poolWakeToSlaughter,
     _poolWakingNightmare,
     _poolWalkingDream,
     _poolWallOfMulch,

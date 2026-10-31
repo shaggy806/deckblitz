@@ -916,6 +916,14 @@ function viewForUncached(
   if (state.awaiting?.kind === "choose-number" && state.awaiting.assist !== undefined) {
     visibleIds.push(state.awaiting.assist.cast.card);
   }
+  // So is one waiting on the opponent its caster named to choose some of
+  // its targets or its modes (rules 601.2c, 700.2e).
+  if (
+    (state.awaiting?.kind === "choose-targets" || state.awaiting?.kind === "choose-modes") &&
+    state.awaiting.otherCast?.action.type === "cast-spell"
+  ) {
+    visibleIds.push(state.awaiting.otherCast.action.card);
+  }
   // And a hand looked at before naming a card (Sorcerous Spyglass).
   if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
     visibleIds.push(...(state.awaiting.looked ?? []));

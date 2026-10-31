@@ -5815,3 +5815,29 @@ engine terms. A second thing to check is a second test.
 ### Gang Up: Carol helps pay for X, four players
 - **Do:** Click "Cast Gang Up (X=3) (assist: Carol may pay up to 3)" and target Bob's Gray Ogre. As Carol, choose 3.
 - **Expect:** Only Carol is offered (the others have no mana), at X=2 to 4. Carol's three Islands and one of your Swamps are tapped, and Gray Ogre dies.
+
+## Choices by other players (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Evangelize: Bob picks the creature you take
+- **Do:** Cast Evangelize without buyback. As Bob, click Hill Giant.
+- **Expect:** Bob's bar asks him to choose a target for your Evangelize, and only his creatures light up. Hill Giant comes under your control.
+
+### Magus of the Arena: Bob picks the creature it fights
+- **Do:** Activate Magus of the Arena and target Magus itself. As Bob, click Grizzly Bears.
+- **Expect:** The ability's entry says "(Bob chooses)". Magus is tapped and Grizzly Bears dies.
+
+### Library of Lat-Nam: Bob picks the mode
+- **Do:** Cast Library of Lat-Nam. As Bob, choose the search. As you, pass priority.
+- **Expect:** Bob, not you, is shown the two modes, and the log says Bob chose mode 2. As it resolves you search your library for a card to put into your hand.
+
+### Barrin's Spite: Bob picks the one he sacrifices
+- **Do:** Cast Barrin's Spite targeting Grizzly Bears and Hill Giant. As Bob, click Grizzly Bears and Confirm.
+- **Expect:** Grizzly Bears goes to Bob's graveyard and Hill Giant to his hand.
+
+### Wake to Slaughter: Bob picks the card for your hand
+- **Do:** Cast Wake to Slaughter targeting Grizzly Bears and Hill Giant in your graveyard, and pass priority. As Bob, pick Hill Giant and Confirm.
+- **Expect:** Bob's popup reads "Choose the card that returns to its owner's hand — the other enters the battlefield with haste". Hill Giant goes to your hand; Grizzly Bears enters your battlefield with haste.
+
+### Volcanic Offering: Carol picks the other two, four players
+- **Do:** Click "Cast Volcanic Offering (Carol chooses)", target Bob's Tropical Island and Hill Giant. As Carol, click Dave's Savannah and Gray Ogre. As you, pass priority.
+- **Expect:** Carol is offered only lands and creatures you don't control (her own too). Both lands are destroyed, and Hill Giant and Gray Ogre die.

@@ -568,6 +568,17 @@ missing. Re-run `--greedy` for Phase 2's order.
   echoes `assist` and labels the variant. Bots never ask (v1 answers 0, v2 searches). Not on a
   `cast-now` cast (an Engine rules gap). Next: `effect:choices-by-other-players` (16),
   `cost:loyalty-x` (15), `mechanic:meld` (15).
+- **2026-10-31: `effect:choices-by-other-players`' top group, features only** (an overnight
+  agent) — `choose-among-targets` (a player picks among a spell's own targets as it resolves, the
+  chosen and the rest each a pile fate), `opponentChoosesTargets` on spells and activated
+  abilities (the caster names the opponent, `otherChooser`; they answer the existing
+  `choose-targets` mid-cast, an `OtherChoiceAsk` continuation; `controlledBy: "chooser"`), and
+  `castModal.chosenBy: "opponent"` (they answer `choose-modes` as it's cast, "that player" of the
+  modes). 3 keys, each partly: not a trigger's "of an opponent's choice", Mogg Assassin's "that
+  opponent", or targets after an opponent's mode. 9 proving cards; 7 freed (queued: 544). Adds no
+  decision kind; the client echoes `otherChooser` and labels it; six manual checks (one
+  four-player). Next: `cost:loyalty-x` (15), `mechanic:meld` (15),
+  `cost:remove-any-counter-cost` (15).
 
 ## Rough size
 

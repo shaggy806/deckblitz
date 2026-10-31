@@ -55,6 +55,11 @@ export interface TargetSource {
   /** The `{X}` chosen for the spell or ability doing the targeting, for a
    * target filter's `n: "x"` ("target Saga card with mana value X"). */
   readonly x?: number;
+  /** The player choosing these targets, when another than the one they're
+   * for chooses them (rule 601.2c — `CardDefinition.opponentChoosesTargets`):
+   * what a filter's `controlledBy: "chooser"` ("of an opponent's choice
+   * **they control**") reads. */
+  readonly chooser?: PlayerId;
 }
 
 /** What a target filter is matched with on behalf of `source` — the
@@ -66,6 +71,7 @@ function targetFilterContext(forPlayer: PlayerId, source: TargetSource | undefin
     ...(source?.object !== undefined ? { source: source.object } : {}),
     ...(source?.amount !== undefined ? { amount: source.amount } : {}),
     ...(source?.x !== undefined ? { x: source.x } : {}),
+    ...(source?.chooser !== undefined ? { chooser: source.chooser } : {}),
   };
 }
 

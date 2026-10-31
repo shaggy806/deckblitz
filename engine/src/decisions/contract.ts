@@ -216,6 +216,10 @@ export interface DecisionReadCtx {
    * (rule 115.7, 707.10c) are offered from it, so they're judged from it too.
    */
   readonly spellTargetSource: (spell: ObjectId) => TargetSource;
+  /** Why `targets` aren't a legal answer from an opponent choosing some of
+   * the targets of a spell or ability being cast or activated (the pending
+   * `choose-targets`' `otherCast` — rule 601.2c). */
+  readonly whyCannotOtherTargets: (targets: ResolvedTargets) => string | null;
   /** Why `cast` isn't a legal answer to the pending `cast-now` decision —
    * the whole of `whyCannotCastSpell`, which only `Game` can run. */
   readonly whyCannotCastNow: (cast: Extract<Action, { type: "cast-spell" }>) => string | null;

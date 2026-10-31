@@ -231,6 +231,7 @@ function graveyardVariantLabel(
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
     if (a.assist !== undefined) parts.push('asking for assist')
+    if (a.otherChooser !== undefined) parts.push(`${playerLabel(a.otherChooser)} chooses`)
   }
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
 }
@@ -268,6 +269,9 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.phyrexianPips !== undefined ? { phyrexianPips: cast.phyrexianPips } : {}),
   // An assist variant (rule 702.132a): the player asked to help pay.
   ...(cast.assist !== undefined ? { assist: cast.assist } : {}),
+  // The opponent named to choose some of its targets or its modes (rules
+  // 601.2c, 700.2e): the targets asked here are only the caster's own.
+  ...(cast.otherChooser !== undefined ? { otherChooser: cast.otherChooser } : {}),
   // Not echoed either: how many distinct targets are affordable, which the
   // targeting steps keep inside (`currentSlotOptions`).
   ...(cast.targetCount !== undefined ? { targetCount: cast.targetCount } : {}),
@@ -396,6 +400,9 @@ function zoneChoiceTitle(
    * (rule 701.23j). */
   fromSideboard = false,
 ): string {
+  // What the choice is for, when the engine says (a choice among a spell's
+  // targets — Wake to Slaughter).
+  if (action.prompt !== undefined) return action.prompt
   const n = action.max === action.min ? `${action.max}` : `up to ${action.max}`
   const together = action.together
   // A rule over the set says what to pick: "up to 2 cards that share a land
@@ -502,6 +509,9 @@ interface Targeting {
   /** The other player asked to help pay (assist, rule 702.132a) — echoed
    * back like `kicked`. */
   readonly assist?: PlayerId
+  /** The opponent named to choose some of its targets or its modes (rules
+   * 601.2c, 700.2e) — echoed back like `assist`. */
+  readonly otherChooser?: PlayerId
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -2362,6 +2372,7 @@ function Table({
         | 'divide'
         | 'phyrexianPips'
         | 'assist'
+        | 'otherChooser'
       >,
       targets: readonly (TargetRef | null)[],
       division?: readonly number[],
@@ -2390,6 +2401,7 @@ function Table({
                 ...(t.prototype === true ? { prototype: true } : {}),
                 ...(t.offspring === true ? { offspring: true } : {}),
                 ...(t.assist !== undefined ? { assist: t.assist } : {}),
+                ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
                 ...(t.evoke === true ? { evoke: true, evokeCost: t.evokeCost } : {}),
                 ...(t.overload === true ? { overload: true } : {}),
                 ...(t.free === true ? { free: true } : {}),
@@ -2413,6 +2425,7 @@ function Table({
                 abilityIndex: t.abilityIndex,
                 targets: [...targets],
                 ...(t.modes !== undefined ? { modes: [...t.modes] } : {}),
+                ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
@@ -2708,6 +2721,7 @@ function Table({
         options: action.targetOptions,
         xValue: value,
         ...(action.modes !== undefined ? { modes: action.modes } : {}),
+        ...(action.otherChooser !== undefined ? { otherChooser: action.otherChooser } : {}),
         ...(action.tapCost !== undefined ? { tapCost: action.tapCost } : {}),
         ...(action.waterbend !== undefined && action.waterbend.choices.length > 0
           ? { waterbendOffer: action.waterbend }
@@ -2759,6 +2773,8 @@ function Table({
         ...(ab.manaColors !== undefined ? { manaColors: ab.manaColors } : {}),
         // A modal ability is offered once per mode (rule 700.2b).
         ...(ab.modes !== undefined ? { modes: ab.modes } : {}),
+        // The opponent named to choose some of its targets (rule 601.2c).
+        ...(ab.otherChooser !== undefined ? { otherChooser: ab.otherChooser } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
@@ -6704,6 +6720,9 @@ function Table({
                       {a.kind === 'cast-spell' && a.assist !== undefined
                         ? ` (assist: ${playerLabel(a.assist, game.seats)} may pay up to ${a.assistMax ?? 0})`
                         : ''}
+                      {a.kind === 'cast-spell' && a.otherChooser !== undefined
+                        ? ` (${playerLabel(a.otherChooser, game.seats)} chooses)`
+                        : ''}
                       {a.kind === 'cast-spell' && a.evoke ? (
                         a.altCostText !== undefined ? (
                           ` (evoke: ${a.altCostText})`
@@ -6966,8 +6985,11 @@ function Table({
             // colour, all sharing an index -- the colours are what tell them
             // apart, so they belong in the key too.
             // So is a modal ability, once per mode.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}`,
-            label: ab.text || `Ability ${ab.abilityIndex + 1}`,
+            // And one naming each opponent who may choose its targets.
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}`,
+            label:
+              (ab.text || `Ability ${ab.abilityIndex + 1}`) +
+              (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : ''),
             onSelect: () => {
               setSelectedSource(null)
               clickAbility(ab)

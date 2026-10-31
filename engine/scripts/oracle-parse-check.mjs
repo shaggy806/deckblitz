@@ -72,7 +72,7 @@ function canon(v) {
     if (val === undefined || k === "text" || k === "resolve" || k.startsWith("__")) continue;
     if (k === "targets" && Array.isArray(val) && val.length === 0 && v.effect !== undefined && v.trigger === undefined && v.cost === undefined) continue;
     if (k === "token" && v.kind === "create-token") continue;
-    if (k === "prompt" && v.kind === "may") continue;
+    if (k === "prompt" && (v.kind === "may" || v.kind === "choose-among-targets")) continue;
     // `who: "you"` is the default for life, draws and the like.
     if (k === "who" && val === "you" && ["gain-life", "lose-life", "draw"].includes(v.kind)) continue;
     // A `{0}` mana cost is no mana cost (Equip {0}).
@@ -93,7 +93,7 @@ function canon(v) {
   return out;
 }
 /** The card-level fields the parser may set. */
-const CARD_FIELDS = ["convoke", "improvise", "assist", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "miracle", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "conspire", "cipher", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "chooseCreatureTypeOnEnter", "chooseCardNameOnEnter", "emerge", "dash", "splice"];
+const CARD_FIELDS = ["convoke", "improvise", "assist", "opponentChoosesTargets", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "miracle", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "conspire", "cipher", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "chooseCreatureTypeOnEnter", "chooseCardNameOnEnter", "emerge", "dash", "splice"];
 
 /** A trigger written two equivalent ways: `who: "you"` plus a
  * `controlledBy: "you"` filter is `who: "you-control"`. */

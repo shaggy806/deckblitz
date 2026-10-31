@@ -1547,6 +1547,9 @@ function castExtras(
     })(),
     // An assist variant (rule 702.132a) names the player asked to help.
     ...(legal.assist !== undefined ? { assist: legal.assist } : {}),
+    // The opponent named to choose some of its targets or its modes (rules
+    // 601.2c, 700.2e).
+    ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
   };
 }
 
@@ -1823,6 +1826,7 @@ export class RandomController extends AutomaticController {
           abilityIndex: legal.abilityIndex,
           targets: this.pickTargets(legal.targetOptions, legal.targetSpecs),
           ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
+          ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
           ...(sac !== undefined && sac.choices.length > 0
             ? { sacrifice: sac.choices[this.pickIndex(sac.choices.length)] }
             : {}),
@@ -3107,6 +3111,7 @@ export class HeuristicBotController extends AutomaticController {
         : {}),
       ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
       ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
+      ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
     };
   }
 

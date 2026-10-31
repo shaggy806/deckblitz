@@ -593,6 +593,7 @@ import _poolResoluteBlademaster from "../pool/resolute-blademaster.js";
 import _poolResourcefulReturn from "../pool/resourceful-return.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolRestock from "../pool/restock.js";
+import _poolRetribution from "../pool/retribution.js";
 import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolRevivingVapors from "../pool/reviving-vapors.js";
@@ -1449,6 +1450,7 @@ const shard: CardShard = {
     _poolResourcefulReturn,
     _poolRestlessPrairie,
     _poolRestock,
+    _poolRetribution,
     _poolReturnUponTheTide,
     _poolReverseDamage,
     _poolRevivingVapors,

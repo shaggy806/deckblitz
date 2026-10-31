@@ -493,6 +493,13 @@ export type Action =
        * reversed (rule 733.1). Only for a spell with assist cast from
        * priority. */
       readonly assist?: PlayerId;
+      /** The opponent who chooses some of its targets (rule 601.2c —
+       * `CardDefinition.opponentChoosesTargets`) or its modes (rule 700.2e —
+       * `CastModalSpec.chosenBy`): the offer's `otherChooser`, echoed.
+       * `targets` then hold only the caster's own slots, in order (and
+       * `modes` nothing); the cast waits on that opponent's answer and goes
+       * on with it. Required for such a spell, meaningless for any other. */
+      readonly otherChooser?: PlayerId;
     }
   | {
       readonly type: "activate-ability";
@@ -500,6 +507,9 @@ export type Action =
       readonly source: ObjectId;
       readonly abilityIndex: number;
       readonly targets?: ChosenTargets;
+      /** The opponent who chooses some of its targets — see the cast's
+       * `otherChooser` (`ActivatedAbility.opponentChoosesTargets`). */
+      readonly otherChooser?: PlayerId;
       /** A modal ability's modes ("{2}, {T}: Choose one —"), chosen as it's
        * activated (rules 602.2b, 700.2b): indices into its `modal` effect's
        * modes, distinct, in listed order — the offer's `modes`, echoed back.
@@ -1007,6 +1017,12 @@ export type LegalAction =
        * plain variant comes first when the caster can pay alone. */
       readonly assist?: PlayerId;
       readonly assistMax?: number;
+      /** A variant naming the opponent who chooses some of its targets (rule
+       * 601.2c) or its modes (rule 700.2e) — one per opponent who could,
+       * echoed back as the cast's `otherChooser`. Its `targetSpecs` /
+       * `targetOptions` are then only the caster's own slots, and a spell
+       * whose modes the opponent chooses has no `castModal`. */
+      readonly otherChooser?: PlayerId;
       readonly card: ObjectId;
       readonly cardName: string;
       readonly targetSpecs: readonly TargetSpec[];
@@ -1317,6 +1333,11 @@ export type LegalAction =
       readonly abilityIndex: number;
       readonly cardName: string;
       readonly text: string;
+      /** A variant naming the opponent who chooses some of its targets, as a
+       * cast's (`ActivatedAbility.opponentChoosesTargets`): echoed back as
+       * the action's `otherChooser`, its `targetSpecs` only the activator's
+       * own slots. */
+      readonly otherChooser?: PlayerId;
       readonly targetSpecs: readonly TargetSpec[];
       readonly targetOptions: readonly (readonly TargetRef[])[];
       /** Present when the cost includes sacrificing a creature you control:
@@ -1586,6 +1607,10 @@ export type LegalAction =
         /** The chosen cards stay where they are, for what follows — a
          * search's find cast from the library (Knowledge Exploitation). */
         | "stay";
+      /** What the choice is for, when `destination` can't say it — a
+       * `choose-among-targets`' "Choose one: it goes to Alice's hand, the
+       * other onto the battlefield". A client shows it instead. */
+      readonly prompt?: string;
       /** Cards that go with the chosen ones whatever is picked: the
        * graveyard's matches of a search for "all cards with that name"
        * (rule 701.23b — Cranial Extraction). */

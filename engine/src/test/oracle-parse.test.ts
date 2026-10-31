@@ -3516,3 +3516,62 @@ describe("the turn history's graveyard tallies (discarded, to-graveyard)", () =>
     expect(shadow.effect).toEqual({ kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" });
   });
 });
+
+describe("choices by other players: among the targets, an opponent's targets, an opponent's mode", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const sacrifice = { effect: { kind: "sacrifice-target", target: 0, byItsController: true } };
+
+  it("reads 'their controller chooses and sacrifices one of them' as a choice among the targets", () => {
+    const spite = face(
+      "Barrin's Spite",
+      "Sorcery",
+      "Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.",
+    );
+    expect(spite.targets).toEqual(["creature", { kind: "other", of: "creature", than: { slot: 0 }, sameController: true }]);
+    expect(spite.effect).toEqual({ kind: "choose-among-targets", chooser: "their-controller", count: 1, chosen: sacrifice, rest: "hand" });
+    const incriminate = face(
+      "Incriminate",
+      "Sorcery",
+      "Choose two target creatures controlled by the same player. That player sacrifices one of them of their choice.",
+    );
+    expect(incriminate.effect).toEqual({ kind: "choose-among-targets", chooser: "their-controller", count: 1, chosen: sacrifice });
+    const retribution = face(
+      "Retribution",
+      "Sorcery",
+      "Choose two target creatures controlled by the same opponent. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other.",
+    );
+    expect(retribution.targets?.[0]).toBe("creature-an-opponent-controls");
+    expect(retribution.effect).toMatchObject({ rest: { effect: { kind: "add-counter", counter: "-1/-1", amount: 1 } } });
+  });
+
+  it("reads 'target creature of an opponent's choice they control' as that slot an opponent's to choose", () => {
+    const evangelize = face("Evangelize", "Sorcery", "Gain control of target creature of an opponent's choice they control.");
+    expect(evangelize.targets).toEqual([{ kind: "permanent", filter: { type: "creature", controlledBy: "chooser" } }]);
+    expect(evangelize.opponentChoosesTargets).toEqual([0]);
+    expect(evangelize.effect).toEqual({ kind: "gain-control", target: 0, untilEndOfTurn: false });
+    // Without the choice, an ordinary target.
+    const plain = face("Act of Treason", "Sorcery", "Gain control of target creature until end of turn.");
+    expect(plain.opponentChoosesTargets).toBeUndefined();
+    expect(plain.effect).toEqual({ kind: "gain-control", target: 0, untilEndOfTurn: true });
+  });
+
+  it("reads 'An opponent chooses one —' as modes an opponent chooses, never with targets", () => {
+    const theirs = face("Their Choice", "Sorcery", "An opponent chooses one —\n• You draw three cards.\n• You gain 3 life.");
+    expect(theirs.castModal).toEqual({
+      minModes: 1,
+      maxModes: 1,
+      chosenBy: "opponent",
+      modes: [
+        { text: "You draw three cards.", effect: { kind: "draw", amount: 3 } },
+        { text: "You gain 3 life.", effect: { kind: "gain-life", amount: 3 } },
+      ],
+    });
+    const fatal = face(
+      "Fatal Lore",
+      "Sorcery",
+      "An opponent chooses one —\n• You draw three cards.\n• You destroy up to two target creatures that player controls. They can't be regenerated. That player draws up to three cards.",
+    );
+    expect(fatal.castModal).toBeUndefined();
+  });
+});

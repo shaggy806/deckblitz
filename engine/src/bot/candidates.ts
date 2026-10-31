@@ -246,6 +246,8 @@ function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Actio
       : {}),
     ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
     ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
+    // The opponent named to choose some of its targets (rule 601.2c).
+    ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
   };
   return targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs).map(
     (targets) => ({ ...common, targets }),

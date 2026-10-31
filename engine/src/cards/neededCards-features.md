@@ -344,6 +344,24 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Choices by other players — built 2026-10-31
+
+The need-keys Phase 2 family `effect:choices-by-other-players`, its top group,
+features only. **`choose-among-targets`**: as a spell resolves, a player (its
+targets' controller, or an opponent through `choose-opponent`) picks `count`
+of its still-legal targets, and the chosen and the rest each take a pile fate.
+**`opponentChoosesTargets`** on a spell or activated ability (rule 601.2c):
+offered once per opponent (`otherChooser`), the named opponent answers the
+existing `choose-targets` mid-cast — a `cast-now` cast too — with
+`controlledBy: "chooser"` for "they control". **`castModal.chosenBy:
+"opponent"`** (rule 700.2e): they answer `choose-modes` as it's cast and are
+"that player" of the modes. Not yet: a triggered ability's "of an opponent's
+choice" (Mausoleum Turnkey), Mogg Assassin's "that opponent", targets chosen
+after an opponent's mode (Fatal Lore). Keys: opponent-chooses-target,
+opponent-chooses-mode, opponent-chooses-among-targets. Proving cards:
+Incriminate, Barrin's Spite, Retribution, Wake to Slaughter, Evangelize,
+Volcanic Offering, Magus of the Arena, Library of Lat-Nam, Misfortune.
+
 ### Assist — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:assist`, features only. A card's
