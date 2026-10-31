@@ -5,6 +5,11 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **A processor's move from exile reads as "takes"** (found 2026-10-31). When a processor puts an
+  opponent's exiled card into its owner's graveyard (Wasteland Strangler, `look-and-choose` with
+  `zone: "exile"`), the log says "Alice takes Hill Giant", the wording of a card taken into a
+  hand. Fix: word the `look-and-choose` result by its destination (a graveyard, the battlefield).
+
 - **Playback stalls when your cast triggers your own targeted ability** (found 2026-10-30).
   Casting a spell that triggers one of your own abilities with a target — Glacial Ray with
   Briarknit Kami on the board, Lightning Bolt with Ichormoon Gauntlet — leaves the "ALICE CASTS"

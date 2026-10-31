@@ -27,6 +27,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
   name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
   and offer a variant each, its `altCostText` telling them apart.
+- **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
+  creature enters, you may put two cards your opponents own from exile into their owners'
+  graveyards. If you do, it enters with four +1/+1 counters" needs a choice and a cost inside an
+  enters replacement (rule 614.12); the processors' `putFromExile` cost exists (2026-10-31) but
+  only as an activation or additional cost.
 - **A divided total beyond plain X isn't offered.** Meteor Shower ("X plus 1") and Shatterskull
   Smashing ("twice X") divide a total computed from X, but a cast offer's `divide` names only a
   number or `x`, so the client can't show the total to split. Fix: send the amount (or the total

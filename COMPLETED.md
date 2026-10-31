@@ -86,6 +86,26 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: cards a player owns, taken from exile** (2026-10-31;
+  `cost:put-opponent-exiled-card-into-graveyard`, `effect:put-exiled-card-into-graveyard`,
+  `effect:put-exiled-lands-under-your-control`) — `look-and-choose`'s `zone: "exile"` (an
+  `ownedBy` filter, or `from` one player), `needsMin` (all of `min` or none), `this-way:
+  "chosen"` (a processor's "if you do" under Rest in Peace), `AbilityCost.putFromExile` and
+  `additionalCost.putFromExile`, a face-down exiled card taken from its pile at random (406.4,
+  `exiledFaceDown.group`) and picked by its back in the client's zone viewer; 8 freed. Wasteland
+  Strangler, Ulamog's Nullifier, Oblivion Sower, Memory Theft, Void Attendant, Processor Assault.
+- **Need-keys Phase 2: cost changes for one kind of ability** (2026-10-31;
+  `cost:equip-ability-cost-reduction`, `cost:ability-cost-reduction-exhaust`,
+  `static:cycling-cost-reduction`, `cost:loyalty-cost-increase`) — `abilityCostModification`'s
+  `abilityKind` (equip, exhaust, cycling, loyalty), `byYou`, `targetingSource` (settled by the
+  chosen targets, 601.2c) and `increaseLoyalty` (Carth's additional [+1], merged into one loyalty
+  cost, 606.5); 7 freed. Bureau Headmaster, Bladehold War-Whip, Dwarven Mauler, Boom Scholar,
+  Fluctuator, Eidolon of Obstruction, Carth the Lion.
+- **Need-keys Phase 2: each permanent of a kind deals damage** (2026-10-31; the four
+  `effect:each-…-damage` keys) — `each-deals-damage`: every matching permanent deals its power or
+  N to itself, a target, the trigger's object or each opponent, each its own source (120.1), what
+  each deals read before any is dealt (608.2h), as one damage event (enrage once); 8 freed. Solar
+  Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko, Signature Slam, Alpha Brawl.
 - **Need-keys Phase 2: face down by an effect** (2026-10-31; `mechanic:face-down` partly,
   `effect:turn-face-down`, `effect:put-onto-battlefield-face-down`,
   `effect:manifest-from-other-library`, `static:cant-turn-face-up`) — the `"effect"` face-down

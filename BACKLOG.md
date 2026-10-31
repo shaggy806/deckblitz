@@ -288,10 +288,23 @@ section keeps only what to do next.
   announced, and a reflexive trigger that divides; 8 freed — Meteor Shower and Shatterskull
   Smashing still blocked on a total beyond plain X; 6 proving cards — Volcanic Wind, Monstrous
   Onslaught, Lukka, Bound to Ruin, Ureni, the Song Unending, Orca, Siege Demon, Death to Our
-  Enemies). **659 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next
-  families: `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification`
-  (14), `effect:each-creature-damages-itself` (14), `effect:cast-and-activate-restrictions`'s
-  flash grants (14), `effect:search-destination-by-type` (14).
+  Enemies), cards a player owns taken from exile (2026-10-31: `look-and-choose`'s `zone:
+  "exile"`, `needsMin`, `this-way: "chosen"`, `AbilityCost.putFromExile` and
+  `additionalCost.putFromExile`, a face-down exiled card taken from its pile at random (rule
+  406.4) and picked by its back in the client's zone viewer; 8 freed — Ulamog's Despoiler still
+  needs an optional cost as it enters; 6 proving cards — Wasteland Strangler, Ulamog's Nullifier,
+  Oblivion Sower, Memory Theft, Void Attendant, Processor Assault), cost changes for one kind of
+  ability (2026-10-31: `abilityCostModification`'s `abilityKind` — equip, exhaust, cycling,
+  loyalty — `byYou`, `targetingSource`, `increaseLoyalty` merged into one loyalty cost (606.5); 7
+  freed, 7 proving cards — Bureau Headmaster, Bladehold War-Whip, Dwarven Mauler, Boom Scholar,
+  Fluctuator, Eidolon of Obstruction, Carth the Lion) and each permanent of a kind deals damage
+  (2026-10-31: `each-deals-damage` — its power or N, to itself, a target, the trigger's object or
+  each opponent, each permanent its own source, one damage event; 8 freed, 6 proving cards —
+  Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko, Signature Slam, Alpha Brawl).
+  **682 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:cast-and-activate-restrictions`'s flash grants (14), `effect:search-destination-by-type`
+  (14), `condition:filter-dynamic-compare`'s shared types (14), `effect:attach-extensions` (13),
+  `static:grant-static-ability` (13).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -362,6 +375,7 @@ there and move this line to `COMPLETED.md`.
 
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
+- **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).
 - **A divided total beyond plain X isn't offered**: Meteor Shower's "X plus 1" and Shatterskull Smashing's "twice X" need the offer to carry the amount, not just `x` (`docs/engine-gaps.md`).
 - **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
 - **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
@@ -495,6 +509,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **A processor's move from exile reads as "takes"** — the log says "Alice takes Hill Giant" when a processor puts an opponent's exiled card into its owner's graveyard (found 2026-10-31).
 - **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet).
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.

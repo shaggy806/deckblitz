@@ -679,6 +679,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   it's announced, and a reflexive trigger that divides; 8 freed, 6 proving cards). Next:
   `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification` (14),
   `effect:each-creature-damages-itself` (14).
+- **2026-10-31: three more side by side** (a third agent started as soon as one of the pair
+  landed) — `cost:put-opponent-exiled-card-into-graveyard` (look-and-choose over exile, processor
+  costs, face-down piles at random; 8 freed, 6 proving cards), `cost:ability-cost-modification`
+  (an ability-kind predicate on the existing modification; 7 freed, 7 proving cards) and
+  `effect:each-creature-damages-itself` (`each-deals-damage`; 8 freed, 6 proving cards). 682
+  freed in all. Next: the flash grants, `effect:search-destination-by-type`, the shared-type
+  filters.
 
 ## Rough size
 
