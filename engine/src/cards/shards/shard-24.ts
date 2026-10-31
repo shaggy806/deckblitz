@@ -168,6 +168,7 @@ import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurryFavor from "../pool/curry-favor.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCursedLand from "../pool/cursed-land.js";
+import _poolCursedScroll from "../pool/cursed-scroll.js";
 import _poolCustodiSoulcaller from "../pool/custodi-soulcaller.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolCytoplastManipulator from "../pool/cytoplast-manipulator.js";
@@ -1025,6 +1026,7 @@ const shard: CardShard = {
     _poolCurryFavor,
     _poolCurseOfClingingWebs,
     _poolCursedLand,
+    _poolCursedScroll,
     _poolCustodiSoulcaller,
     _poolCylianElf,
     _poolCytoplastManipulator,

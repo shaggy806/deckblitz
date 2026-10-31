@@ -785,6 +785,7 @@ import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
+import _poolUrzasBauble from "../pool/urzas-bauble.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
 import _poolVaevictisAsmadi from "../pool/vaevictis-asmadi.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
@@ -1655,6 +1656,7 @@ const shard: CardShard = {
     _poolUnravelTheAether,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
+    _poolUrzasBauble,
     _poolUtvaraScalper,
     _poolVaevictisAsmadi,
     _poolValleyMightcaller,

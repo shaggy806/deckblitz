@@ -101,6 +101,7 @@ import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolChainwhipCyclops from "../pool/chainwhip-cyclops.js";
 import _poolChampionsDrake from "../pool/champions-drake.js";
 import _poolChance from "../pool/chance.js";
+import _poolChaosShrinesBlackCrystal from "../pool/chaos-shrines-black-crystal.js";
 import _poolChargingBandits from "../pool/charging-bandits.js";
 import _poolCinderStorm from "../pool/cinder-storm.js";
 import _poolClaimTerritory from "../pool/claim-territory.js";
@@ -936,6 +937,7 @@ const shard: CardShard = {
     _poolChainwhipCyclops,
     _poolChampionsDrake,
     _poolChance,
+    _poolChaosShrinesBlackCrystal,
     _poolChargingBandits,
     _poolCinderStorm,
     _poolClaimTerritory,

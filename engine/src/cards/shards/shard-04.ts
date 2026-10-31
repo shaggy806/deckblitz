@@ -319,6 +319,7 @@ import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
 import _poolHidetsuguDevouringChaos from "../pool/hidetsugu-devouring-chaos.js";
 import _poolHighSpeedHoverbike from "../pool/high-speed-hoverbike.js";
+import _poolHiredTorturer from "../pool/hired-torturer.js";
 import _poolHoofprintsOfTheStag from "../pool/hoofprints-of-the-stag.js";
 import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolHerosDownfall,
     _poolHidetsuguDevouringChaos,
     _poolHighSpeedHoverbike,
+    _poolHiredTorturer,
     _poolHoofprintsOfTheStag,
     _poolHorizonOfProgress,
     _poolHornOfGreed,

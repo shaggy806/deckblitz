@@ -660,6 +660,7 @@ import _poolSilentSubmersible from "../pool/silent-submersible.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
 import _poolSimulacrum from "../pool/simulacrum.js";
+import _poolSingeMindOgre from "../pool/singe-mind-ogre.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSivvisRuse from "../pool/sivvis-ruse.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolSilkNet,
     _poolSilversmoteGhoul,
     _poolSimulacrum,
+    _poolSingeMindOgre,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
     _poolSivvisRuse,

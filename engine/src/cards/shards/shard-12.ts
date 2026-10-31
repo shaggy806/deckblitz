@@ -662,6 +662,7 @@ import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
+import _poolSkyshipWeatherlight from "../pool/skyship-weatherlight.js";
 import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
@@ -1506,6 +1507,7 @@ const shard: CardShard = {
     _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
+    _poolSkyshipWeatherlight,
     _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,

@@ -399,6 +399,7 @@ import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
 import _poolMagnigothTreefolk from "../pool/magnigoth-treefolk.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
+import _poolMagusOfTheScroll from "../pool/magus-of-the-scroll.js";
 import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
 import _poolMakeshiftBattalion from "../pool/makeshift-battalion.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
@@ -1239,6 +1240,7 @@ const shard: CardShard = {
     _poolMagmaw,
     _poolMagnigothTreefolk,
     _poolMagusLuceaKane,
+    _poolMagusOfTheScroll,
     _poolMakeYourOwnLuck,
     _poolMakeshiftBattalion,
     _poolMalachOfTheDawn,
