@@ -718,6 +718,7 @@ import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
 import _poolThallidGerminator from "../pool/thallid-germinator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
+import _poolTheBlueSpirit from "../pool/the-blue-spirit.js";
 import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
@@ -1553,6 +1554,7 @@ const shard: CardShard = {
     _poolTextbookTabulator,
     _poolThallidGerminator,
     _poolThatsMine,
+    _poolTheBlueSpirit,
     _poolTheDestinedBlackMage,
     _poolTheLegendOfRoku,
     _poolThePartingOfTheWays,

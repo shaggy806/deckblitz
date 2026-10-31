@@ -5877,3 +5877,9 @@ engine terms. A second thing to check is a second test.
 ### Void Attendant: a face-down exiled card is picked as its back, four players
 - **Do:** Pass priority. As Carol, cast Expensive Taste (Decadent Dragon's Adventure) targeting Bob, and let it resolve. Back as Alice, activate Void Attendant's ability and pick one of the two "Face down" backs.
 - **Expect:** The popup shows Bob's two face-down cards as backs you can pick, never their names, beside Carol's Decadent Dragon (on an adventure, face up). One of Bob's two (at random) goes to Bob's graveyard, face up; the other stays in exile.
+
+## A library search's finds, card by card (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Jarad's Orders: pick which of the two finds goes to your hand
+- **Do:** Cast Jarad's Orders, pick Grizzly Bears and Llanowar Elves, then pick Llanowar Elves in the second popup.
+- **Expect:** The second popup says "Choose one to put into your hand — the other goes into your graveyard" and offers just the two finds. Llanowar Elves goes to your hand, Grizzly Bears to your graveyard, and your library is shuffled once.

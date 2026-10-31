@@ -528,6 +528,7 @@ import _poolQuicksilverGeyser from "../pool/quicksilver-geyser.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
 import _poolQuietContemplation from "../pool/quiet-contemplation.js";
+import _poolRadagastOfRhosgobel from "../pool/radagast-of-rhosgobel.js";
 import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRamosianLieutenant from "../pool/ramosian-lieutenant.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,
     _poolQuietContemplation,
+    _poolRadagastOfRhosgobel,
     _poolRaggedShortSpear,
     _poolRakdosLordOfRiots,
     _poolRamosianLieutenant,

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4057 already implemented / 943 missing (marks refreshed 2026-10-31)
+4064 already implemented / 936 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -534,7 +534,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   535  Ignoble Hierarch                         {G}              Creature — Goblin Shaman
 [x]   536  Relic of Legends                         {3}              Artifact
 [x]   537  The Reaver Cleaver                       {2}{R}           Legendary Artifact — Equipment
-[ ]   538  Emergence Zone                           {0}              Land
+[x]   538  Emergence Zone                           {0}              Land
 [x]   539  Dread Return                             {2}{B}{B}        Sorcery
 [x]   540  Green Sun's Zenith                       {X}{G}           Sorcery
 [x]   541  Temple of Abandon                        {0}              Land
@@ -639,7 +639,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   640  Altar of Dementia                        {2}              Artifact
 [x]   641  Incubation Druid                         {1}{G}           Creature — Elf Druid
 [x]   642  Ozolith, the Shattered Spire             {1}{G}           Legendary Artifact
-[ ]   643  Borne Upon a Wind                        {1}{U}           Instant
+[x]   643  Borne Upon a Wind                        {1}{U}           Instant
 [ ]   644  Midnight Clock                           {2}{U}           Artifact
 [x]   645  Savage Lands                             {0}              Land
 [x]   646  Goreclaw, Terror of Qal Sisma            {3}{G}           Legendary Creature — Bear
@@ -1101,7 +1101,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1105  Wall of Omens                            {1}{W}           Creature — Wall
 [ ]  1106  Mishra's Bauble                          {0}              Artifact
 [x]  1107  Disenchant                               {1}{W}           Instant
-[ ]  1108  Alchemist's Refuge                       {0}              Land
+[x]  1108  Alchemist's Refuge                       {0}              Land
 [x]  1109  Prismari Command                         {1}{U}{R}        Instant
 [x]  1110  Circle of Dreams Druid                   {G}{G}{G}        Creature — Elf Druid
 [x]  1111  Nezahal, Primal Tide                     {5}{U}{U}        Legendary Creature — Elder Dinosaur
@@ -2277,7 +2277,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2284  Dance of the Dead                        {1}{B}           Enchantment — Aura
 [x]  2285  Blacksmith's Skill                       {W}              Instant
 [x]  2286  Agent of the Iron Throne                 {2}{B}           Legendary Enchantment — Background
-[ ]  2287  Neoform                                  {G}{U}           Sorcery
+[x]  2287  Neoform                                  {G}{U}           Sorcery
 [x]  2288  Kokusho, the Evening Star                {4}{B}{B}        Legendary Creature — Dragon Spirit
 [x]  2289  Memnite                                  {0}              Artifact Creature — Construct
 [x]  2290  Shire Terrace                            {0}              Land
@@ -4376,7 +4376,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4383  Ob Nixilis Reignited                     {3}{B}{B}        Legendary Planeswalker — Nixilis
 [x]  4384  Tezzeret, Artifice Master                {3}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  4385  Moss Diamond                             {2}              Artifact
-[ ]  4386  Tidal Barracuda                          {3}{U}           Creature — Fish
+[x]  4386  Tidal Barracuda                          {3}{U}           Creature — Fish
 [ ]  4387  Tato Farmer                              {2}{G}           Creature — Zombie Mutant Peasant
 [x]  4388  Ajani, Caller of the Pride               {1}{W}{W}        Legendary Planeswalker — Ajani
 [x]  4389  Deeproot Waters                          {2}{U}           Enchantment
@@ -4701,7 +4701,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4708  Guardian Scalelord                       {4}{W}           Creature — Dragon
 [x]  4709  Felisa, Fang of Silverquill              {2}{W}{B}        Legendary Creature — Vampire Wizard
 [x]  4710  Raffine, Scheming Seer                   {W}{U}{B}        Legendary Creature — Sphinx Demon
-[ ]  4711  Dina's Guidance                          {1}{B}{G}        Instant
+[x]  4711  Dina's Guidance                          {1}{B}{G}        Instant
 [x]  4712  Garnet, Princess of Alexandria           {G}{W}           Legendary Creature — Human Noble Cleric
 [x]  4713  Metropolis Reformer                      {2}{W}           Creature — Angel Cleric
 [x]  4714  Terisian Mindbreaker                     {7}              Artifact Creature — Juggernaut
@@ -4717,7 +4717,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4724  Rabanastre, Royal City                   {0}              Land — Town
 [x]  4725  Brightglass Gearhulk                     {G}{G}{W}{W}     Artifact Creature — Construct
 [x]  4726  Research Thief                           {4}{U}           Artifact Creature — Moonfolk Wizard
-[ ]  4727  Quick Sliver                             {1}{G}           Creature — Sliver
+[x]  4727  Quick Sliver                             {1}{G}           Creature — Sliver
 [x]  4728  Trail of Crumbs                          {1}{G}           Enchantment
 [x]  4729  Invigorating Hot Spring                  {1}{R}{G}        Enchantment
 [x]  4730  Creative Technique                       {4}{R}           Sorcery

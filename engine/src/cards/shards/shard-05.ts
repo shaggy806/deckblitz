@@ -203,6 +203,7 @@ import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
 import _poolDiamondFaerie from "../pool/diamond-faerie.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
+import _poolDinasGuidance from "../pool/dinas-guidance.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolDeviantGlee,
     _poolDiamondFaerie,
     _poolDigsiteEngineer,
+    _poolDinasGuidance,
     _poolDireStrainDemolisher,
     _poolDismember,
     _poolDiveDown,

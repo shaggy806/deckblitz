@@ -596,6 +596,7 @@ import _poolRotShambler from "../pool/rot-shambler.js";
 import _poolRovingHarper from "../pool/roving-harper.js";
 import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
 import _poolRubblebeltBoar from "../pool/rubblebelt-boar.js";
+import _poolRuinInTheirWake from "../pool/ruin-in-their-wake.js";
 import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
 import _poolRuneflareTrap from "../pool/runeflare-trap.js";
 import _poolRyanSinclair from "../pool/ryan-sinclair.js";
@@ -1463,6 +1464,7 @@ const shard: CardShard = {
     _poolRovingHarper,
     _poolRowdySnowballers,
     _poolRubblebeltBoar,
+    _poolRuinInTheirWake,
     _poolRuinousUltimatum,
     _poolRuneflareTrap,
     _poolRyanSinclair,

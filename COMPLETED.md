@@ -102,6 +102,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   blocked by or either, the source's or its host's; a source that left read off its last-known
   blocks, 608.2b; none once removed from combat, 506.4); 21 freed. Goblin Javelineer, Tinder Wall,
   Plasma Caster, Wall of Nets, Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin.
+- **Need-keys Phase 2: flash permissions** (2026-10-31; `effect:flash-for-each-player`,
+  `effect:first-creature-spell-flash`, `effect:flash-permission-this-turn`,
+  `effect:next-sorcery-as-though-flash`) — `castAsThoughFlashAnyPlayer` (every player's, read
+  from the permanent's controller's side), `castAsThoughFlashFirstEachTurn` (from
+  `spellsCastThisTurnAs`), a player-effect's `castAsThoughFlash { filter?, next? }` (rule 601.3b;
+  `next` spent by the next matching spell, `Game.spendNextSpellFlash`), and suspend reading every
+  flash permission (702.62a); 3 freed. Vernal Equinox, Quick Sliver, Tidal Barracuda, Radagast of
+  Rhosgobel, The Blue Spirit, Borne Upon a Wind, Emergence Zone, Winding Canyons, Alchemist's
+  Refuge, Quicken, Progenitor's Icon.
+- **Need-keys Phase 2: a library search's finds card by card** (2026-10-31; the five
+  `effect:search-…` keys) — `search-library.instead`: the found cards chosen first, then a second
+  `choose-from-zone` over them picks which go elsewhere — by a filter, a condition, the
+  searcher's choice or a split of exactly one (609.3) — to the graveyard or under another's
+  control; `withCounters` (122.6) and `who: "that-player"`; a manual check for Jarad's Orders; 5
+  freed. Jarad's Orders, Dina's Guidance, Ruin in Their Wake, Guidelight Pathmaker, Rootweaver
+  Druid, Neoform, Magmatic Hellkite, Vision Quest.
 - **Need-keys Phase 2: cards a player owns, taken from exile** (2026-10-31;
   `cost:put-opponent-exiled-card-into-graveyard`, `effect:put-exiled-card-into-graveyard`,
   `effect:put-exiled-lands-under-your-control`) — `look-and-choose`'s `zone: "exile"` (an

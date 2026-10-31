@@ -542,6 +542,7 @@ import _poolPyrewoodGearhulk from "../pool/pyrewood-gearhulk.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuench from "../pool/quench.js";
+import _poolQuicken from "../pool/quicken.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
 import _poolRapaciousDragon from "../pool/rapacious-dragon.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolPyrotechnicPerformer,
     _poolQuakefootCyclops,
     _poolQuench,
+    _poolQuicken,
     _poolRagingGoblinoids,
     _poolRakdosTrumpeter,
     _poolRapaciousDragon,

@@ -555,6 +555,7 @@ import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolQuestForAncientSecrets from "../pool/quest-for-ancient-secrets.js";
 import _poolQuestForTheGoblinLord from "../pool/quest-for-the-goblin-lord.js";
+import _poolQuickSliver from "../pool/quick-sliver.js";
 import _poolRackAndRuin from "../pool/rack-and-ruin.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
 import _poolRakshasaGravecaller from "../pool/rakshasa-gravecaller.js";
@@ -1439,6 +1440,7 @@ const shard: CardShard = {
     _poolPyromanticPilgrim,
     _poolQuestForAncientSecrets,
     _poolQuestForTheGoblinLord,
+    _poolQuickSliver,
     _poolRackAndRuin,
     _poolRakdosTheMuscle,
     _poolRakshasaGravecaller,

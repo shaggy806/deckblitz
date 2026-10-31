@@ -198,6 +198,7 @@ import _poolElvenWarhounds from "../pool/elven-warhounds.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmberethVeteran from "../pool/embereth-veteran.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
+import _poolEmergenceZone from "../pool/emergence-zone.js";
 import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
@@ -768,6 +769,7 @@ import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVenomousFangs from "../pool/venomous-fangs.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
+import _poolVernalEquinox from "../pool/vernal-equinox.js";
 import _poolVeteranOfTheDepths from "../pool/veteran-of-the-depths.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
@@ -1041,6 +1043,7 @@ const shard: CardShard = {
     _poolElvishWarrior,
     _poolEmberethVeteran,
     _poolEmergeFromTheCocoon,
+    _poolEmergenceZone,
     _poolEmeritusOfConflict,
     _poolEnemyOfTheGuildpact,
     _poolEngineRat,
@@ -1611,6 +1614,7 @@ const shard: CardShard = {
     _poolVenomizedCat,
     _poolVenomousFangs,
     _poolVergeRangers,
+    _poolVernalEquinox,
     _poolVeteranOfTheDepths,
     _poolVexingGull,
     _poolViashinoBladescout,
