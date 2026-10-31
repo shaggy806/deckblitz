@@ -340,6 +340,7 @@ import type {
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
+  EnterAttachHost,
   FaceDownAs,
   FaceDownKind,
   GiftAsk,
@@ -7926,6 +7927,11 @@ export class Game {
       if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
       // Face down, it has no "as this enters" choices (708.3).
       if (awaiting.enterAs?.faceDown !== undefined) continue;
+      // What it enters attached to first: an Aura the effect names a host
+      // for isn't asked one (rule 303.4f), and one that can't go there stays
+      // without asking anything (303.4i).
+      const host = awaiting.enterAttachedTo;
+      if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) continue;
       if (this.askEnterChoice(id, player)) {
         this.state.suspendedResolutions.push({ effect: null, enter: entry });
         return;
@@ -10257,6 +10263,7 @@ export class Game {
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
     | { readonly kind: "player"; readonly among: "player" | "opponent" }
     | { readonly kind: "permanent"; readonly spec: PermanentOnEnter }
+    | { readonly kind: "attach-host"; readonly filter: CardFilter }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -10270,6 +10277,9 @@ export class Game {
       }
       if (answered?.protector === undefined && def.types.includes("battle")) {
         return { kind: "protector", siege: def.subtypes.includes("Siege") };
+      }
+      if (answered?.attachAmong !== undefined && answered.attachHost === undefined && !def.subtypes.includes("Aura")) {
+        return { kind: "attach-host", filter: answered.attachAmong };
       }
       return null;
     }
@@ -10328,6 +10338,11 @@ export class Game {
     }
     if (becoming.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
       return { kind: "enchant", as: becoming };
+    }
+    // "…attached to a creature you control" (One Last Job): an Equipment's
+    // host, chosen as it enters — the effect's choice, not an ability's.
+    if (answered?.attachAmong !== undefined && answered.attachHost === undefined && !becoming.subtypes.includes("Aura")) {
+      return { kind: "attach-host", filter: answered.attachAmong };
     }
     if (answered?.reveal === undefined) {
       for (const ability of becoming.static) {
@@ -10462,6 +10477,36 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "attach-host") {
+        // An Equipment put onto the battlefield "attached to a creature you
+        // control": one already there matching, that it could equip (rule
+        // 301.5), chosen as it enters, not targeted. The only one isn't
+        // asked; with none it enters unattached (301.5e).
+        const eligible = this.state.zones.shared.battlefield.filter(
+          (host) =>
+            host !== id &&
+            this.enterBatch?.has(host) !== true &&
+            matchesFilter(this.state, this.registry, host, next.filter, { you: chooser, source: id }) &&
+            this.canEquipEntering(id, host),
+        );
+        if (eligible.length > 1) {
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: chooser,
+            eligible,
+            min: 1,
+            max: 1,
+            prompt: `Choose what ${nameOf(object)} enters attached to`,
+            then: { kind: "sequence", effects: [] },
+            source: id,
+            x: 0,
+            attachOnEnter: true,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, attachHost: eligible[0] ?? null };
         continue;
       }
       if (next.kind === "permanent") {
@@ -10666,11 +10711,19 @@ export class Game {
         return true;
       }
       if (next.kind === "enchant") {
-        const options = this.state.zones.shared.battlefield.filter((host) =>
-          this.canEnchant(id, host, chooser, next.as),
+        // "…attached to a creature you control" (Nomad Mythmaker): only
+        // those, of what it could enchant (rule 303.4f), and no player.
+        const among = object.enterChoice?.attachAmong;
+        const options = this.state.zones.shared.battlefield.filter(
+          (host) =>
+            this.canEnchant(id, host, chooser, next.as) &&
+            (among === undefined ||
+              (this.enterBatch?.has(host) !== true &&
+                matchesFilter(this.state, this.registry, host, among, { you: chooser, source: id }))),
         );
         // An "Enchant player" Aura (a Curse) chooses among players instead.
-        const players = this.state.turnOrder.filter((p) => this.canEnchantPlayer(id, p, chooser, next.as));
+        const players =
+          among !== undefined ? [] : this.state.turnOrder.filter((p) => this.canEnchantPlayer(id, p, chooser, next.as));
         if (options.length > 0 || players.length > 0) {
           this.state.awaiting = {
             kind: "choose-enchant",
@@ -10814,6 +10867,11 @@ export class Game {
     ) {
       return false;
     }
+    // "This Equipment can be attached only to a creature with power 3 or
+    // greater" (O-Naginata): any other is an illegal permanent for it to
+    // equip (rule 301.5c), so it doesn't move there (701.3b) and falls off
+    // one that stops qualifying (704.5n).
+    if (!this.attachOnlyToAllows(equipment, host)) return false;
     return !protectionBlocks(this.state, this.registry, host, this.permanentSource(equipment));
   }
 
@@ -28139,6 +28197,7 @@ export class Game {
         }
         if (attachment.kind === "object") this.attachPermanent(attachment.object, target);
       },
+      attachableHosts: (attachment, filter, another) => this.attachableHosts(attachment, filter, controller, another),
       attachAll: (target, filter) => {
         // Every match now, each in turn; a stack of Equipment tokens one
         // token at a time, each its own attachment.
@@ -28566,7 +28625,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -28607,6 +28666,7 @@ export class Game {
           // effect's controller, under whose control they enter (rule 110.2a).
           chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
           needsMin === true,
+          attachTo,
         );
       },
     };
@@ -28659,6 +28719,9 @@ export class Game {
     enterUnder?: PlayerId,
     /** All of `min` or nothing — see `look-and-choose`'s `needsMin`. */
     needsMin = false,
+    /** What battlefield-bound picks enter attached to — see
+     * `look-and-choose`'s `attachedTo`. */
+    enterAttachedTo?: EnterAttachHost,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -28767,6 +28830,7 @@ export class Game {
       ...(fromAnyGraveyard && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(enterUnder !== undefined && destination === "battlefield" ? { enterUnder } : {}),
       ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
+      ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
@@ -28846,7 +28910,7 @@ export class Game {
     x = 0,
     zones: SearchZones = "library",
     together?: SearchTogether,
-    enterAttachedTo?: ObjectId | null,
+    enterAttachedTo?: EnterAttachHost,
     more?: SearchMore & { readonly source: ObjectId; readonly sourceStint?: number },
   ): void {
     // Whose zones: the searcher's own, or another player's ("search target
@@ -34508,6 +34572,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    if (awaiting.attachOnEnter === true) {
+      const entering = this.state.objects[awaiting.source];
+      entering.enterChoice = {
+        ...entering.enterChoice,
+        attachHost: chosen[0] === undefined ? null : this.splitOneFromStack(chosen[0]),
+      };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     if (awaiting.permanentOnEnter === true) {
       const entering = this.state.objects[awaiting.source];
       entering.enterChoice = { ...entering.enterChoice, chosenPermanent: chosen[0] ?? null };
@@ -35644,7 +35718,7 @@ export class Game {
     underPlayer?: PlayerId,
     types?: EnterTypes,
     attacking?: ResolvedEnterAttacking,
-    attachTo?: ObjectId | null,
+    attachTo?: EnterAttachHost,
   ): boolean {
     const transformed = turned === true;
     const flipped = turned === "flipped";
@@ -35713,16 +35787,34 @@ export class Game {
 
   /**
    * Ready `id` to be put onto the battlefield under `player` attached to
-   * `host` (`null`: nothing there). An Aura enchants it as it enters — or,
-   * if it can't legally enchant it, stays where it is (rule 303.4i):
-   * `false`. Anything else enters, an Equipment attached as it does
-   * (`attachEntered`), anything else unattached (303.4h).
+   * `host` (see {@link EnterAttachHost}). An Aura enchants a permanent or
+   * player as it enters — or, if it can't legally enchant it, stays where it
+   * is (rule 303.4i): `false`. A host chosen as it enters (`among`) is left
+   * to its "as this enters" choices: an Aura's what-it-enchants (303.4f,
+   * limited to the filter), an Equipment's `attachHost`. Anything else
+   * enters, an Equipment attached as it does (`attachEntered`), anything
+   * else unattached (303.4h). Asked again when an entry resumes after a
+   * choice, so it never undoes one.
    */
-  private readyToEnterAttached(id: ObjectId, host: ObjectId | null, player: PlayerId): boolean {
+  private readyToEnterAttached(id: ObjectId, host: EnterAttachHost, player: PlayerId): boolean {
     const card = this.state.objects[id];
     if (card === undefined) return false;
     const def = this.registry.get(printedCardName(card));
-    if (!def.subtypes.includes("Aura")) return true;
+    const aura = def.subtypes.includes("Aura");
+    if (host !== null && typeof host === "object" && "among" in host) {
+      if (aura || def.subtypes.includes("Equipment")) {
+        if (card.enterChoice?.attachAmong === undefined) {
+          card.enterChoice = { ...card.enterChoice, attachAmong: host.among };
+        }
+      }
+      return true;
+    }
+    if (!aura) return true;
+    if (host !== null && typeof host === "object") {
+      if (!this.canEnchantPlayer(id, host.player, player, def)) return false;
+      card.enterChoice = { ...card.enterChoice, enchantPlayer: host.player };
+      return true;
+    }
     if (host === null || !this.canEnchant(id, host, player, def)) return false;
     card.enterChoice = { ...card.enterChoice, enchant: host };
     return true;
@@ -35731,12 +35823,75 @@ export class Game {
   /** An Equipment just put onto the battlefield attached to `host`: attached
    * now, before its entry is announced — or, if it can't equip it, left
    * unattached (rule 301.5e). An Aura was attached as it entered
-   * (`readyToEnterAttached`). */
-  private attachEntered(id: ObjectId, host: ObjectId | null): void {
+   * (`readyToEnterAttached`); an Equipment can't equip a player (301.5e), and
+   * one whose host was chosen as it entered was attached as it did. */
+  private attachEntered(id: ObjectId, host: EnterAttachHost): void {
+    if (host === null || typeof host === "object") return;
     const entered = this.state.objects[id];
-    if (host === null || entered?.zone !== "battlefield" || entered.attachedTo !== null) return;
+    if (entered?.zone !== "battlefield" || entered.attachedTo !== null) return;
     if (!this.registry.get(printedCardName(entered)).subtypes.includes("Equipment")) return;
     this.attachPermanent(id, { kind: "object", object: host });
+  }
+
+  /**
+   * Could the Equipment `id`, about to enter the battlefield (or on it),
+   * equip `host`? Rule 301.5: a creature, not itself, and not while it's a
+   * creature itself (without reconfigure); nor one its source's quality has
+   * protection from (702.16c). Off the battlefield it's read as its card.
+   */
+  private canEquipEntering(id: ObjectId, host: ObjectId): boolean {
+    const card = this.state.objects[id];
+    if (card === undefined) return false;
+    if (card.zone === "battlefield") return this.canEquip(id, host, true);
+    if (host === id) return false;
+    const target = this.state.objects[host];
+    if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
+    if (!effectiveTypes(this.state, this.registry, target).includes("creature")) return false;
+    const def = this.registry.get(printedCardName(card));
+    if (def.types.includes("creature") && !def.activated.some((a) => a.reconfigure !== undefined)) return false;
+    if (!this.attachOnlyToAllows(id, host)) return false;
+    return !protectionBlocks(this.state, this.registry, host, this.cardSource(def, id));
+  }
+
+  /**
+   * Whether `host` passes every "this Equipment can be attached only to …"
+   * of `id`'s (`StaticAbility.attachOnlyTo` — O-Naginata, Gate Smasher),
+   * read from its controller's side: on the battlefield, the statics it has
+   * now; elsewhere, its card's.
+   */
+  private attachOnlyToAllows(id: ObjectId, host: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined) return false;
+    const fails = (ability: StaticAbility): boolean =>
+      ability.attachOnlyTo !== undefined &&
+      !matchesFilter(this.state, this.registry, host, ability.attachOnlyTo, { you: object.controller, source: id });
+    if (object.zone !== "battlefield") return !this.registry.get(rulesTextName(object)).static.some(fails);
+    return !this.hasOwnStatic(object, fails);
+  }
+
+  /**
+   * The permanents matching `filter` from `player`'s side that `attachment`
+   * — an Aura or Equipment on the battlefield — could legally be attached to
+   * now (rules 301.5, 303.4j, 701.3a); `another` leaves out the one it's on.
+   * See the `attach` effect's `ontoChosen`.
+   */
+  private attachableHosts(attachment: ObjectId, filter: CardFilter, player: PlayerId, another: boolean): ObjectId[] {
+    const object = this.state.objects[attachment];
+    if (object === undefined || object.zone !== "battlefield") return [];
+    const printed = this.registry.get(printedCardName(object));
+    const def =
+      object.bestowed === true
+        ? bestowedDefinition(printed)
+        : object.licid !== undefined
+          ? licidDefinition(printed)
+          : printed;
+    const aura = def.subtypes.includes("Aura");
+    if (!aura && !def.subtypes.includes("Equipment")) return [];
+    return this.battlefieldMatching(player, filter).filter(
+      (host) =>
+        (!another || host !== object.attachedTo) &&
+        (aura ? this.canEnchant(attachment, host, object.controller, def) : this.canEquip(attachment, host, true)),
+    );
   }
 
   /**
@@ -38209,7 +38364,7 @@ export class Game {
       readonly underOwners?: boolean;
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
-      readonly attachTo?: ObjectId | null;
+      readonly attachTo?: EnterAttachHost;
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
       /** The spell's X, for a filter that reads it (Rally the Ancestors). */
@@ -38261,7 +38416,15 @@ export class Game {
       // nothing moves until they are all made, and this runs again with each.
       const ownerOrPlayer = (id: ObjectId): PlayerId =>
         opts.underOwners === true ? (this.state.objects[id]?.owner ?? player) : player;
-      if (destination === "battlefield" && eligible.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
+      // What each enters attached to is settled before its choices, so an
+      // Aura's isn't asked when the effect names it (rule 303.4f), and one
+      // that can't go there stays without asking anything (303.4i).
+      const attachTo = destination === "battlefield" ? opts.attachTo : undefined;
+      const entering =
+        attachTo === undefined
+          ? eligible
+          : eligible.filter((id) => this.readyToEnterAttached(id, attachTo, ownerOrPlayer(id)));
+      if (destination === "battlefield" && entering.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
         return true;
       }
       // "Return all land cards from your graveyard" moves them at once: one
@@ -42964,6 +43127,19 @@ export class Game {
           object.attachedTo = chosen.id;
           this.emit({ type: "permanent-attached", source: id, target: chosen.id });
         }
+      }
+      // An Equipment put onto the battlefield "attached to a creature you
+      // control" (One Last Job): the one chosen as it entered, if it's still
+      // there and it can equip it — else it enters unattached (301.5e).
+      const attachHost = enterChoice.attachHost ?? null;
+      if (
+        attachHost !== null &&
+        object.attachedTo == null &&
+        this.state.objects[attachHost]?.zone === "battlefield" &&
+        this.canEquip(id, attachHost, true)
+      ) {
+        object.attachedTo = attachHost;
+        this.emit({ type: "permanent-attached", source: id, target: attachHost });
       }
     }
     // Alt-cast zone markers (ROADMAP Phase 6) end on any zone change: a

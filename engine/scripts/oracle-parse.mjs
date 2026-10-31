@@ -2288,6 +2288,77 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "return-to-hand", target: i, from: "graveyard" };
   }
+  // What a card put onto the battlefield "attached to …" enters attached to
+  // (`AttachHostRef`): a creature of yours chosen as it enters, this
+  // permanent, what this is attached to, or a target (a player too).
+  const attachHostOf = (phrase) => {
+    if (/^a creature you control$/i.test(phrase)) return { among: { type: "creature", controlledBy: "you" } };
+    if (/^(?:~|this creature)$/i.test(phrase)) return "source";
+    if (/^(?:enchanted|equipped) creature$/i.test(phrase)) return "attached";
+    if (/^target /i.test(phrase)) return slot(phrase);
+    return undefined;
+  };
+  // "Return target Aura or Equipment card from your graveyard to the
+  // battlefield attached to a creature you control" (One Last Job); "put
+  // target Aura card from a graveyard onto the battlefield under your
+  // control attached to a creature you control" (Nomad Mythmaker).
+  if (
+    (m = /^(?:return (target .+? card from your graveyard) to the battlefield|put (target .+? card from a graveyard) onto the battlefield( under your control)?) attached to (.+?)\.$/i.exec(s))
+  ) {
+    const i = slot(m[1] ?? m[2]);
+    if (i === undefined) return null;
+    const attachedTo = attachHostOf(m[4]);
+    if (attachedTo === undefined) return null;
+    return { kind: "put-onto-battlefield", target: i, ...(m[3] ? { underYourControl: true } : {}), attachedTo };
+  }
+  // "Return target creature card … from your graveyard to the battlefield
+  // and attach ~ to it" (Pre-War Formalwear): onto what was put there.
+  if ((m = /^return (target .+? card from your graveyard) to the battlefield and attach ~ to it\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    if (i === undefined) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "put-onto-battlefield", target: i },
+        { kind: "attach", target: "put-this-way" },
+      ],
+    };
+  }
+  // "You may put an Aura card from your hand onto the battlefield attached to
+  // ~" (Academy Researchers).
+  if ((m = /^you may put an? (.+?) card from your hand onto the battlefield attached to (.+?)\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    const attachedTo = attachHostOf(m[2]);
+    if (filter === null || attachedTo === undefined) return null;
+    return { kind: "look-and-choose", zone: "hand", min: 0, max: 1, destination: "battlefield", leftover: "stay", filter, attachedTo };
+  }
+  // "Search your library for a Curse card, put it onto the battlefield
+  // attached to target player, then shuffle" (Bitterheart Witch); "…, put it
+  // onto the battlefield, attach it to a creature you control, then shuffle"
+  // (Stonehewer Giant — the host chosen as it resolves, `ontoChosen`).
+  if ((m = /^search your library for an? (.+?) card, put it onto the battlefield attached to (.+?), then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    const attachedTo = attachHostOf(m[2]);
+    if (filter === null || attachedTo === undefined) return null;
+    return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, attachedTo };
+  }
+  if ((m = /^search your library for an? (.+?) card, put it onto the battlefield, attach it to a creature you control, then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "search-library",
+      filter,
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+      then: {
+        kind: "attach",
+        target: 0,
+        attachment: 0,
+        ontoChosen: { filter: { type: "creature", controlledBy: "you" }, prompt: "Choose a creature you control to attach it to" },
+      },
+    };
+  }
   if ((m = /^return (target .+? card from your graveyard) to the battlefield( tapped)?\.$/i.exec(s))) {
     // An Aura put onto the battlefield this way isn't attached to anything
     // (BACKLOG), so a card that names one (Rise to Glory) is left to author.
@@ -6148,6 +6219,15 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // "This Equipment can be attached only to a creature with power 3 or
+  // greater" (O-Naginata, Gate Smasher — rule 301.5c).
+  if ((m = /^~ can be attached only to a creature with (power|toughness) (\d+) or (greater|less)\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      attachOnlyTo: { type: "creature", [m[1]]: { op: m[3] === "greater" ? "gte" : "lte", n: Number(m[2]) } },
+      text,
+    };
+  }
   // A flash permission (rule 601.3b): "You may cast spells as though they
   // had flash" (Heliod, the Warped Eclipse), every player's with "Any
   // player may cast creature and enchantment spells …" (Vernal Equinox —

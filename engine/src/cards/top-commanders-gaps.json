@@ -770,7 +770,15 @@
   "filter:shares-land-type-with-controlled",
   "condition:filter-same-name-as-source",
   "filter:same-name-as-a-permanent",
-  "condition:filter-same-name-as-permanent-you-control"
+  "condition:filter-same-name-as-permanent-you-control",
+  "effect:attach-extensions",
+  "effect:put-onto-battlefield-attached",
+  "effect:search-library-attach-to-trigger-object",
+  "effect:put-aura-cards-onto-battlefield-attached-to-self",
+  "effect:aura-returns-attached",
+  "effect:attach-aura-to-chosen-creature",
+  "effect:attach-to-chosen-permanent-it-can-enchant",
+  "static:equip-only-to-filter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -4681,3 +4681,59 @@ describe("a library search's finds going card by card (search-library's instead)
     expect(charm.effect?.instead).toEqual({ destination: "battlefield", enterTapped: true, filter: { type: "land" }, pick: "all" });
   });
 });
+
+describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, attachOnlyTo)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const YOURS = { among: { type: "creature", controlledBy: "you" } };
+
+  it("reads a card put onto the battlefield attached to a creature you control", () => {
+    const myth = face("Nomad Mythmaker", "Creature — Human Nomad Cleric", "{W}, {T}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.");
+    expect(myth.complete).toBe(true);
+    expect(myth.activated[0].effect).toEqual({ kind: "put-onto-battlefield", target: 0, underYourControl: true, attachedTo: YOURS });
+    expect(
+      parseSentence("Return target Aura card from your graveyard to the battlefield attached to a creature you control.", ctx()),
+    ).toEqual({ kind: "put-onto-battlefield", target: 0, attachedTo: YOURS });
+  });
+
+  it("reads a search attached to target player, and a hand card attached to this creature", () => {
+    const witch = face("Bitterheart Witch", "Creature — Human Shaman", "Deathtouch\nWhen this creature dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle.");
+    expect(witch.complete).toBe(true);
+    expect(witch.triggered[0].targets).toEqual(["player"]);
+    expect(witch.triggered[0].effect).toMatchObject({ kind: "may", effect: { kind: "search-library", filter: { subtype: "Curse" }, attachedTo: 0 } });
+    const researchers = face("Academy Researchers", "Creature — Human Wizard", "When this creature enters, you may put an Aura card from your hand onto the battlefield attached to this creature.");
+    expect(researchers.complete).toBe(true);
+    expect(researchers.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 1,
+      destination: "battlefield",
+      leftover: "stay",
+      filter: { subtype: "Aura" },
+      attachedTo: "source",
+    });
+  });
+
+  it("reads attach onto what was returned, and onto a creature chosen as it resolves", () => {
+    expect(parseSentence("Return target creature card from your graveyard to the battlefield and attach ~ to it.", ctx())).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "put-onto-battlefield", target: 0 }, { kind: "attach", target: "put-this-way" }],
+    });
+    const giant = face("Stonehewer Giant", "Creature — Giant Warrior", "Vigilance\n{1}{W}, {T}: Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle.");
+    expect(giant.complete).toBe(true);
+    expect(giant.activated[0].effect).toMatchObject({
+      kind: "search-library",
+      filter: { subtype: "Equipment" },
+      then: { kind: "attach", target: 0, attachment: 0, ontoChosen: { filter: { type: "creature", controlledBy: "you" } } },
+    });
+  });
+
+  it("reads an attach-only-to restriction", () => {
+    expect(face("Gate Smasher", "Artifact — Equipment", "This Equipment can be attached only to a creature with toughness 4 or greater.").static[0]).toEqual({
+      affects: { scope: "self" },
+      attachOnlyTo: { type: "creature", toughness: { op: "gte", n: 4 } },
+      text: "This Equipment can be attached only to a creature with toughness 4 or greater.",
+    });
+  });
+});

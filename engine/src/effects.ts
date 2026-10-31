@@ -29,6 +29,7 @@ import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
   DelayedTriggerTiming,
+  EnterAttachHost,
   FaceDownAs,
   LeaveDestination,
   PlayerCounterKind,
@@ -54,6 +55,43 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * last existed if it has left; nothing once the chosen one has left the
  * battlefield (rule 400.7). Not a target. */
 export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen";
+/**
+ * What a card put onto the battlefield "attached to" something enters
+ * attached to — an effect's `attachedTo`:
+ *
+ * - an {@link EffectTargetRef}: the permanent it names — a target slot (or a
+ *   **player** in that slot: Bitterheart Witch's "a Curse card … attached to
+ *   target player", rule 303.4), the source, the trigger object, or what the
+ *   source is attached to ("attached to enchanted creature" — Mantle of the
+ *   Ancients);
+ * - `{ among }`: a permanent matching this filter, read from the side of the
+ *   player it enters under, chosen **as it enters** rather than targeted —
+ *   One Last Job's "return target Aura or Equipment card from your graveyard
+ *   to the battlefield attached to a creature you control", Nomad
+ *   Mythmaker's. An Aura's choice is the one rule 303.4f has its controller
+ *   make, limited to these (none it can enchant, and it stays where it is —
+ *   303.4g); an Equipment's is among those it could equip (none, and it
+ *   enters unattached — 301.5e).
+ *
+ * See {@link EnterAttachHost} for what happens when it can't be attached.
+ */
+export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
+/**
+ * What an `attach` acts on — the attachment, or what it's attached to:
+ * an {@link EffectTargetRef}, or
+ *
+ * - `"created"`: the token an earlier step of this resolution created (living
+ *   weapon's "create a 0/0 black Phyrexian Germ creature token, then attach
+ *   this to it" — rule 702.92a);
+ * - `"put-this-way"`: the card an earlier step of this resolution put onto
+ *   the battlefield (the `"put-onto-battlefield"` this-way kind) — Pre-War
+ *   Formalwear's "return target creature card … to the battlefield and
+ *   attach this Equipment to **it**", Stonehewer Giant's "search your library
+ *   for an Equipment card, put it onto the battlefield, attach **it** to a
+ *   creature you control". The first of them still on the battlefield, as
+ *   the same object (rule 400.7).
+ */
+export type AttachRef = EffectTargetRef | "created" | "put-this-way";
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
 /** A `search-library`'s other player's zones and what follows the finds, as
@@ -2771,8 +2809,11 @@ export type EffectSpec =
        * `"source"`, `"trigger-object"` — and it enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
        * can't legally enchant it — or with nothing there, the permanent
        * having left (rule 400.7) — stays where it is; an Equipment that
-       * can't equip it, and anything else, enters unattached. */
-      readonly attachedTo?: EffectTargetRef;
+       * can't equip it, and anything else, enters unattached. A player in
+       * the slot, or a permanent chosen as it enters (`{ among }` — Nomad
+       * Mythmaker's "attached to a creature you control"): see
+       * {@link AttachHostRef}. */
+      readonly attachedTo?: AttachHostRef;
       /** "…onto the battlefield **face down**" — see {@link EnterTypes}'
        * `faceDown`: Missy's "return it to the battlefield under your control
        * face down and tapped. It's a 2/2 Cyberman artifact creature" is
@@ -3156,8 +3197,9 @@ export type EffectSpec =
        * permanent this names, and each card enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
        * can't legally enchant it — or with nothing there, the permanent
        * having left (rule 400.7) — stays where it is; an Equipment that
-       * can't equip it, and anything else, enters unattached. */
-      readonly attachedTo?: EffectTargetRef;
+       * can't equip it, and anything else, enters unattached. `{ among }`:
+       * each one's host chosen as it enters — see {@link AttachHostRef}. */
+      readonly attachedTo?: AttachHostRef;
     }
   | {
       /**
@@ -5844,15 +5886,38 @@ export type EffectSpec =
        * only by an Aura that can enchant them (a Curse — rule 303.4); one
        * that can't go there stays where it is (701.3b). */
       readonly kind: "attach";
-      readonly target: EffectTargetRef | "created";
-      readonly attachment?: EffectTargetRef;
+      /** What it's attached to — see {@link AttachRef} (`"put-this-way"`:
+       * Pre-War Formalwear's "return target creature card … and attach this
+       * Equipment to it"). Ignored with `ontoChosen`. */
+      readonly target: AttachRef;
+      /** What's attached, when it isn't the source — see {@link AttachRef}
+       * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
+      readonly attachment?: AttachRef;
       readonly attachments?: CardFilter;
       /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
        * Equipment you control to it" is `upTo: 1`. */
       readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number };
+      /** Attach it to **a permanent chosen as this resolves**, not targeted
+       * (rule 608.2c): Stonehewer Giant's "attach it to a creature you
+       * control", Aura Graft's "attach it to another permanent it can
+       * enchant". The choice is the effect's controller's, among the
+       * permanents matching `filter` (read from their side) that the
+       * attachment could legally be attached to now (rules 301.5, 303.4,
+       * 701.3a) — `another`: not the one it's attached to already. Exactly
+       * one, or with `optional` none ("you may attach it"); with none it
+       * could go on, nothing happens. */
+      readonly ontoChosen?: {
+        readonly filter: CardFilter;
+        readonly prompt: string;
+        readonly optional?: true;
+        readonly another?: true;
+      };
       /** Engine-built: where a `choose`'s picks go, carried past the choice
        * (which rebinds target 0 to each pick). */
       readonly onto?: TargetRef;
+      /** Engine-built: what an `ontoChosen` attaches, carried past the
+       * choice (which rebinds target 0 to the permanent chosen). */
+      readonly attaching?: TargetRef;
     }
   | {
       /** Unattach `target` (an Aura or Equipment) from whatever it's attached
@@ -7080,6 +7145,13 @@ export type EffectSpec =
        * Quest's "X additional +1/+1 counters" (a live amount), Magmatic
        * Hellkite's "tapped with a stun counter on it". */
       readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
+      /** With `destination: "battlefield"`: the find enters attached to what
+       * this names — see {@link AttachHostRef}: Arachnus Spinner's "put it
+       * onto the battlefield attached to target creature", Bitterheart
+       * Witch's "a Curse card … attached to target player". An Aura that
+       * can't be attached there stays where it was found (rule 303.4i); an
+       * Equipment enters unattached (301.5e). */
+      readonly attachedTo?: AttachHostRef;
     }
   | {
       /** Reveal `count` cards from the top of the controller's library (or
@@ -7233,6 +7305,12 @@ export type EffectSpec =
        * battlefield tapped and attacking that opponent", Winota's. See
        * {@link EnterAttacking}. */
       readonly attacking?: EnterAttacking;
+      /** …and **attached to** what this names (see {@link AttachHostRef}) —
+       * Academy Researchers' "you may put an Aura card from your hand onto
+       * the battlefield attached to this creature". An Aura that can't be
+       * attached there stays where it is (rule 303.4i); an Equipment enters
+       * unattached (301.5e). */
+      readonly attachedTo?: AttachHostRef;
       /** `"hand"` (needed-cards P19 — Genesis Ultimatum: "…and the rest into
        * your hand") puts every non-chosen looked-at card into the chooser's
        * hand, regardless of `filter`; `"graveyard"` ("…put the rest into your
@@ -8282,7 +8360,7 @@ export interface EffectApi {
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
       /** See the spec's `attachedTo`; `null` for nothing there. */
-      readonly attachTo?: ObjectId | null;
+      readonly attachTo?: EnterAttachHost;
       /** See the spec's `upTo` and `totalManaValueAtMost`. */
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
@@ -8905,6 +8983,11 @@ export interface EffectApi {
    * controller's view) to `target`, each in turn — the `"attach"`
    * {@link EffectSpec}'s `attachments`. */
   attachAll(target: TargetRef, filter: CardFilter): void;
+  /** The permanents matching `filter` (from the controller's side) that the
+   * Aura or Equipment `attachment` could legally be attached to now (rules
+   * 301.5, 303.4, 701.3a) — `another`: not the one it's attached to. See the
+   * `attach` effect's `ontoChosen`. */
+  attachableHosts(attachment: ObjectId, filter: CardFilter, another: boolean): readonly ObjectId[];
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. */
   transform(target: TargetRef): void;
@@ -9055,7 +9138,7 @@ export interface EffectApi {
     attacking?: ResolvedEnterAttacking,
     /** What it enters attached to — see the effect's `attachedTo`; `null`
      * for nothing there. */
-    attachTo?: ObjectId | null,
+    attachTo?: EnterAttachHost,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
   searchLibrary(
@@ -9069,9 +9152,9 @@ export interface EffectApi {
     reveal?: boolean,
     zones?: SearchZones,
     together?: SearchTogether,
-    /** A `search-library`'s `attachedToSource`: the source, or `null` once
-     * it has left (nothing can be attached to it). */
-    attachTo?: ObjectId | null,
+    /** A `search-library`'s `attachedToSource` (the source, or `null` once
+     * it has left — nothing can be attached to it) or `attachedTo`. */
+    attachTo?: EnterAttachHost,
     /** Its `whose` resolved (`owner`), `all`, `playable` and `then`. */
     more?: SearchMore,
   ): void;
@@ -9146,6 +9229,9 @@ export interface EffectApi {
     unlinked?: boolean,
     /** See `look-and-choose`'s `needsMin`. */
     needsMin?: boolean,
+    /** What battlefield-bound picks enter attached to — see
+     * `look-and-choose`'s `attachedTo`. */
+    attachTo?: EnterAttachHost,
   ): void;
 }
 
@@ -10454,12 +10540,17 @@ function scopedController(
 }
 
 /** What an `attachedTo` names, for a card put onto the battlefield attached
- * to it: the permanent, `null` for none (it has left, or the slot names a
- * player — rule 303.4i), or `undefined` for no `attachedTo` at all. */
-function attachHost(ref: EffectTargetRef | undefined, ctx: ResolutionContext): ObjectId | null | undefined {
+ * to it (see {@link EnterAttachHost}): the permanent, the player in the slot
+ * (rule 303.4), the filter its host is chosen from as it enters, `null` for
+ * nothing there (it has left — rule 400.7 — or the slot was found illegal,
+ * 608.2b), or `undefined` for no `attachedTo` at all. */
+function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {
   if (ref === undefined) return undefined;
+  if (typeof ref === "object") return { among: ref.among };
   if (ref === "source" && ctx.sourceLost === true) return null;
+  if (illegalSlot(ref, ctx)) return null;
   const target = resolveEffectTarget(ref, ctx);
+  if (target?.kind === "player") return { player: target.player };
   return target?.kind === "object" ? target.object : null;
 }
 
@@ -10468,6 +10559,21 @@ function attachHost(ref: EffectTargetRef | undefined, ctx: ResolutionContext): O
 function createdThisWay(ctx: ResolutionContext): TargetRef | undefined {
   const made = ctx.thisWay("created").find((entry) => !entry.departed);
   return made === undefined ? undefined : { kind: "object", object: made.object };
+}
+
+/** The first card this resolution has put onto the battlefield that is still
+ * there as the same object — Pre-War Formalwear's "return target creature
+ * card … and attach this Equipment to it". */
+function putThisWay(ctx: ResolutionContext): TargetRef | undefined {
+  const put = ctx.thisWay("put-onto-battlefield").find((entry) => !entry.departed);
+  return put === undefined ? undefined : { kind: "object", object: put.object };
+}
+
+/** What an {@link AttachRef} names now. */
+function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (ref === "created") return createdThisWay(ctx);
+  if (ref === "put-this-way") return putThisWay(ctx);
+  return resolveEffectTarget(ref, ctx);
 }
 
 /** Imperative escape hatch for a spell or ability the vocab can't express. */
@@ -13532,8 +13638,37 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "attach": {
-      const target =
-        spec.onto ?? (spec.target === "created" ? createdThisWay(ctx) : resolveEffectTarget(spec.target, ctx));
+      if (spec.ontoChosen !== undefined && spec.attaching === undefined) {
+        // What's attached is settled now; the host is chosen next, among
+        // those it could legally go on (rule 701.3a).
+        const attaching =
+          spec.attachment === undefined
+            ? ctx.sourceLost === true
+              ? undefined
+              : ({ kind: "object", object: ctx.source } as const)
+            : resolveAttachRef(spec.attachment, ctx);
+        if (attaching?.kind !== "object") return;
+        const { filter, prompt, optional, another } = spec.ontoChosen;
+        const hosts = ctx.attachableHosts(attaching.object, filter, another === true);
+        if (hosts.length === 0) return;
+        ctx.choosePermanents(
+          filter,
+          optional === true ? 0 : 1,
+          1,
+          { kind: "attach", target: 0, attachment: 0, attaching },
+          prompt,
+          false,
+          ctx.permanentsMatching(filter).flatMap((m) => (hosts.includes(m.object) ? [] : [m.object])),
+        );
+        return;
+      }
+      if (spec.attaching !== undefined) {
+        // An `ontoChosen`'s answer: target 0 is the permanent chosen.
+        const host = ctx.targets[0];
+        if (host !== undefined) ctx.attach(host, spec.attaching);
+        return;
+      }
+      const target = spec.onto ?? resolveAttachRef(spec.target, ctx);
       if (target === undefined) return;
       if (spec.choose !== undefined) {
         const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
@@ -13558,7 +13693,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.attach(target);
         return;
       }
-      const attachment = resolveEffectTarget(spec.attachment, ctx);
+      const attachment = resolveAttachRef(spec.attachment, ctx);
       if (attachment !== undefined) ctx.attach(target, attachment);
       return;
     }
@@ -14179,7 +14314,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.reveal === true,
         spec.zones,
         spec.together,
-        spec.attachedToSource === true ? attachHost("source", ctx) : undefined,
+        spec.attachedToSource === true ? attachHost("source", ctx) : attachHost(spec.attachedTo, ctx),
         {
           ...(owner !== undefined ? { owner } : {}),
           ...(spec.all === true ? { all: true } : {}),
@@ -14262,6 +14397,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.withCounters,
         spec.unlinked === true,
         spec.needsMin === true,
+        attachHost(spec.attachedTo, ctx),
       );
       return;
     }

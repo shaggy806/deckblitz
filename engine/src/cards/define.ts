@@ -1967,6 +1967,16 @@ export interface StaticAbility {
    */
   readonly cantBeSacrificed?: boolean;
   /**
+   * "This Equipment can be attached only to a creature with power 3 or
+   * greater" (O-Naginata; Gate Smasher's "toughness 4 or greater"), with
+   * `affects: { scope: "self" }`: a permanent not matching this, from its
+   * controller's side, is one it can't legally equip (rule 301.5c) — an
+   * equip ability or other effect targeting one resolves without moving it
+   * (701.3b), and it becomes unattached from a creature that stops matching
+   * (704.5n). Lost with its other abilities.
+   */
+  readonly attachOnlyTo?: CardFilter;
+  /**
    * "Can block an additional creature each combat" (rule 509.1a lets a
    * creature block one attacker; this is how many more): `1` for Brave the
    * Sands' and Two-Headed Giant of Foriys', `99` for Hundred-Handed One's

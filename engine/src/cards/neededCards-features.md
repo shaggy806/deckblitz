@@ -462,6 +462,33 @@ static:chosen-creature-type-reads, static:chosen-type-in-addition. Still open:
 decision:choose-name-and-type-on-attach (Psychic Paper), two colours chosen as
 it enters (Seal of the Guildpact, Tablet of the Guilds).
 
+### Attach hosts: chosen as it enters, a player, what was put this way, chosen as it resolves — built 2026-10-31
+
+The need-keys Phase 2 family `effect:attach-extensions`, features only. An
+`attachedTo` (`AttachHostRef`) on `put-onto-battlefield`,
+`return-from-graveyard`, `search-library` and `look-and-choose` may name a
+**player** in a slot (a Curse, rule 303.4) or `{ among }` — a permanent
+chosen as the card enters (an Aura's 303.4f choice limited to the filter; an
+Equipment's `enterChoice.attachHost`, none and it enters unattached, 301.5e).
+`attach` takes `"put-this-way"` (the card the resolution put onto the
+battlefield) and `ontoChosen` (a host chosen as it resolves among those it
+can legally go on, `another` for "another permanent"). The static
+`attachOnlyTo` ("can be attached only to a creature with power 3 or greater",
+rule 301.5c) is read by `canEquip`, so equip resolves without moving it and
+704.5n unattaches it. Keys: effect:attach-extensions (partly),
+put-onto-battlefield-attached, search-library-attach-to-trigger-object,
+put-aura-cards-onto-battlefield-attached-to-self, aura-returns-attached,
+attach-aura-to-chosen-creature, attach-to-chosen-permanent-it-can-enchant,
+static:equip-only-to-filter. Proving cards: One Last Job, Nomad Mythmaker,
+Bitterheart Witch, Arachnus Spinner, Academy Researchers, Pre-War Formalwear,
+Stonehewer Giant, Aura Graft, O-Naginata, Gate Smasher. Still open: Animate
+Dead's and Necromancy's enchant-ability swap, a for-each choice per Aura and
+Equipment (Inventory Management), "the creature this is attached to" as an
+effect's object (Ring of Valkas), Auras that could enchant a creature as a
+search filter (Sovereigns of Lost Alara), any number of target cards each
+entering attached (Mantle of the Ancients), delayed returns attached to a
+returned creature (Gift of Immortality, Next of Kin).
+
 ### Flash permissions for any player, first each turn, this turn, next spell — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top
