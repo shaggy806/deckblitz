@@ -453,6 +453,7 @@ import _poolLongBodiedGreyDog from "../pool/long-bodied-grey-dog.js";
 import _poolLotusField from "../pool/lotus-field.js";
 import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
+import _poolLukkaBoundToRuin from "../pool/lukka-bound-to-ruin.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolLuminollusk from "../pool/luminollusk.js";
 import _poolLureOfPrey from "../pool/lure-of-prey.js";
@@ -798,6 +799,7 @@ import _poolUnwaveringInitiate from "../pool/unwavering-initiate.js";
 import _poolUnwind from "../pool/unwind.js";
 import _poolUpriserRenegade from "../pool/upriser-renegade.js";
 import _poolUrborgVolcano from "../pool/urborg-volcano.js";
+import _poolUreniTheSongUnending from "../pool/ureni-the-song-unending.js";
 import _poolUsherOfTheFallen from "../pool/usher-of-the-fallen.js";
 import _poolUtvaraHellkite from "../pool/utvara-hellkite.js";
 import _poolVagrantPlowbeasts from "../pool/vagrant-plowbeasts.js";
@@ -1338,6 +1340,7 @@ const shard: CardShard = {
     _poolLotusField,
     _poolLoxodonPartisan,
     _poolLuckyThePizzaDog,
+    _poolLukkaBoundToRuin,
     _poolLumberingFalls,
     _poolLuminollusk,
     _poolLureOfPrey,
@@ -1683,6 +1686,7 @@ const shard: CardShard = {
     _poolUnwind,
     _poolUpriserRenegade,
     _poolUrborgVolcano,
+    _poolUreniTheSongUnending,
     _poolUsherOfTheFallen,
     _poolUtvaraHellkite,
     _poolVagrantPlowbeasts,

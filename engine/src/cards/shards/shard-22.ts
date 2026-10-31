@@ -480,6 +480,7 @@ import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
 import _poolOrcusPrinceOfUndeath from "../pool/orcus-prince-of-undeath.js";
 import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
 import _poolOrochiRanger from "../pool/orochi-ranger.js";
+import _poolOrochiSoulReaver from "../pool/orochi-soul-reaver.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
 import _poolOtterballAntics from "../pool/otterball-antics.js";
 import _poolOust from "../pool/oust.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolOrcusPrinceOfUndeath,
     _poolOrderOfTheMirror,
     _poolOrochiRanger,
+    _poolOrochiSoulReaver,
     _poolOtepecHuntmaster,
     _poolOtterballAntics,
     _poolOust,

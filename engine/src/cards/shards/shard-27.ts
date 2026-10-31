@@ -826,6 +826,7 @@ import _tokensHomunculusToken22 from "../tokens/homunculus-token-2-2.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensMarkOfTheRaniToken from "../tokens/mark-of-the-rani-token.js";
 import _tokensOozeToken from "../tokens/ooze-token.js";
+import _tokensPhyrexianBeastTokenToxic from "../tokens/phyrexian-beast-token-toxic.js";
 import _tokensPhyrexianGoblinTokenHaste from "../tokens/phyrexian-goblin-token-haste.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
@@ -1664,6 +1665,7 @@ const shard: CardShard = {
     _tokensHumanToken,
     _tokensMarkOfTheRaniToken,
     _tokensOozeToken,
+    _tokensPhyrexianBeastTokenToxic,
     _tokensPhyrexianGoblinTokenHaste,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,

@@ -456,6 +456,7 @@ import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
 import _poolMonkeyCage from "../pool/monkey-cage.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
+import _poolMonstrousOnslaught from "../pool/monstrous-onslaught.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
 import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
 import _poolMoongloveExtract from "../pool/moonglove-extract.js";
@@ -1329,6 +1330,7 @@ const shard: CardShard = {
     _poolMongooseLizard,
     _poolMonkeyCage,
     _poolMonstrousGrowth,
+    _poolMonstrousOnslaught,
     _poolMoonCircuitHacker,
     _poolMoonVigilAdherents,
     _poolMoongloveExtract,

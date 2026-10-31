@@ -435,6 +435,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Pest Token (Attacks)",
   "Pest Token (Colorless Artifact, 0/1)",
   "Phobos",
+  "Phyrexian Beast Token",
   "Phyrexian Germ Token",
   "Phyrexian Goblin Token",
   "Phyrexian Goblin Token (Haste)",

@@ -178,6 +178,7 @@ import _poolCultHealer from "../pool/cult-healer.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
 import _poolCursedRack from "../pool/cursed-rack.js";
+import _poolCyberConversion from "../pool/cyber-conversion.js";
 import _poolCyclicalEvolution from "../pool/cyclical-evolution.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
@@ -772,6 +773,7 @@ import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
+import _poolVolcanicWind from "../pool/volcanic-wind.js";
 import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolVulpikeet from "../pool/vulpikeet.js";
 import _poolWalkingArchive from "../pool/walking-archive.js";
@@ -1023,6 +1025,7 @@ const shard: CardShard = {
     _poolCultivatorsCaravan,
     _poolCuriosity,
     _poolCursedRack,
+    _poolCyberConversion,
     _poolCyclicalEvolution,
     _poolDaggerclawImp,
     _poolDaiLiCensor,
@@ -1617,6 +1620,7 @@ const shard: CardShard = {
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,
     _poolVolcanicHammer,
+    _poolVolcanicWind,
     _poolVoltstormAngel,
     _poolVulpikeet,
     _poolWalkingArchive,

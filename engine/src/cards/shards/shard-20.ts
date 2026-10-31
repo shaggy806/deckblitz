@@ -826,6 +826,7 @@ import _poolTwiddle from "../pool/twiddle.js";
 import _poolTwinbladePaladin from "../pool/twinblade-paladin.js";
 import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolTyrantOfValakut from "../pool/tyrant-of-valakut.js";
+import _poolUnableToScream from "../pool/unable-to-scream.js";
 import _poolUncageTheMenagerie from "../pool/uncage-the-menagerie.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUndertaker from "../pool/undertaker.js";
@@ -1736,6 +1737,7 @@ const shard: CardShard = {
     _poolTwinbladePaladin,
     _poolTwistedFealty,
     _poolTyrantOfValakut,
+    _poolUnableToScream,
     _poolUncageTheMenagerie,
     _poolUndeadAugur,
     _poolUndertaker,

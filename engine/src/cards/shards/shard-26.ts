@@ -840,6 +840,7 @@ import _poolWreckingOgre from "../pool/wrecking-ogre.js";
 import _poolWringFlesh from "../pool/wring-flesh.js";
 import _poolYavimayaGranger from "../pool/yavimaya-granger.js";
 import _poolYawgmothDemon from "../pool/yawgmoth-demon.js";
+import _poolYedoraGraveGardener from "../pool/yedora-grave-gardener.js";
 import _poolYokedOx from "../pool/yoked-ox.js";
 import _poolZagothTriome from "../pool/zagoth-triome.js";
 import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js";
@@ -1704,6 +1705,7 @@ const shard: CardShard = {
     _poolWringFlesh,
     _poolYavimayaGranger,
     _poolYawgmothDemon,
+    _poolYedoraGraveGardener,
     _poolYokedOx,
     _poolZagothTriome,
     _poolZarielArchdukeOfAvernus,
