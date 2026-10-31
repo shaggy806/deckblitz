@@ -344,6 +344,27 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### A divided total read as it's announced, and a reflexive trigger that divides — built 2026-10-31
+
+The need-keys Phase 2 family `effect:divide-among-targets`, its top group,
+features only. A **`divided.total` is any `EffectAmount`** (a spell's, an
+activated ability's, a triggered ability's), read when the division is
+announced — as the spell is cast, the ability activated, the trigger put on
+the stack (rules 601.2d, 602.2b, 603.3d) — and fixed from then on
+(`Game.dividedNow`, `triggerDivided` with the trigger's last-known refs); the
+offer carries the number read and caps the group at one target per point
+(`specsCappedByDivision`). A **reflexive trigger can carry `divided`**
+(`ReflexiveTrigger.divided`, the `reflexive-trigger` effect's), its targets
+and split announced as it's put on the stack (603.12). The scaffolder reads
+"~/it deals N / X / damage equal to its power divided as you choose among
+…, where X is …". Keys: divided-dynamic-total, reflexive-divided-damage.
+Proving cards: Volcanic Wind, Monstrous Onslaught, Lukka, Bound to Ruin,
+Ureni, the Song Unending, Orca, Siege Demon, Death to Our Enemies. Still
+open: an X-reading total beyond a plain X (Meteor Shower's "X plus 1",
+Shatterskull Smashing's "twice X if X is 6 or more") — the offer names a
+number or `x`, so the client would need the amount; the scaffolder doesn't
+read "When you do" at all.
+
 ### The aggregate amount over any set — built 2026-10-31
 
 The need-keys Phase 2 family `effect:amount-aggregate`, its top group with

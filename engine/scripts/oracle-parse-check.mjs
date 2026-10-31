@@ -96,7 +96,7 @@ function canon(v) {
   return out;
 }
 /** The card-level fields the parser may set. */
-const CARD_FIELDS = ["convoke", "improvise", "assist", "opponentChoosesTargets", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "miracle", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "conspire", "cipher", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "flashIf", "chooseCreatureTypeOnEnter", "chooseCardNameOnEnter", "emerge", "dash", "splice"];
+const CARD_FIELDS = ["divided", "convoke", "improvise", "assist", "opponentChoosesTargets", "morph", "disturb", "suspend", "selfCostReduction", "cycling", "flashback", "plot", "madness", "miracle", "evoke", "alternativeCost", "mayhem", "rebound", "retrace", "conspire", "cipher", "becomesDayAsEnters", "sneak", "webSlinging", "additionalCost", "cantBeCountered", "flashThenSacrifice", "flashIf", "chooseCreatureTypeOnEnter", "chooseCardNameOnEnter", "emerge", "dash", "splice"];
 
 /** A trigger written two equivalent ways: `who: "you"` plus a
  * `controlledBy: "you"` filter is `who: "you-control"`. */
@@ -227,8 +227,8 @@ export function checkPool(poolCards, tokenName = "Treasure Token") {
           continue;
         }
         const fields = kind === "activated"
-          ? ["cost", "targets", "effect", "sorcerySpeed", "oncePerTurn", "loyaltyCost", "zone", "otherOnly", "condition"]
-          : ["trigger", "targets", "effect", "oncePerTurn"];
+          ? ["cost", "targets", "effect", "sorcerySpeed", "oncePerTurn", "loyaltyCost", "zone", "otherOnly", "condition", "divided"]
+          : ["trigger", "targets", "effect", "oncePerTurn", "divided"];
         let differ = fields.filter((f) => !same(p[f] ?? null, match[f] ?? null) && !(f === "sorcerySpeed" && !p[f] && !match[f]));
         if (differ.length === 1 && differ[0] === "effect" && manaSplit(p.effect, match.effect)) differ = [];
         if (differ.length === 0) stats.agreed += 1;

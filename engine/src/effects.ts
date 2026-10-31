@@ -3423,6 +3423,16 @@ export type EffectSpec =
        * reflexive ability carries the creating one's own trigger value.
        */
       readonly value?: EffectAmount;
+      /**
+       * "When you do, it deals 7 damage divided as you choose among one or
+       * two targets" (Death to Our Enemies): the reflexive ability divides an
+       * amount among its `any-number` group, as a triggered ability's
+       * `divided` does — `{ total, slot }`, with `effect` a `damage-divided`
+       * (or `counters-divided`). The number of targets and the split are
+       * announced as it's put on the stack (rules 603.12, 603.3d, 601.2d),
+       * and a `total` that is an amount is read then.
+       */
+      readonly divided?: TriggeredAbility["divided"];
     }
   | {
       /**
@@ -7797,8 +7807,15 @@ export interface EffectApi {
   /** Trigger a reflexive ability — see the `"reflexive-trigger"`
    * {@link EffectSpec}. */
   /** `value`: the reflexive ability's trigger value, when the spec sets one
-   * (see its `value`). */
-  reflexiveTrigger(targets: readonly TargetSpec[], effect: EffectSpec, text: string, value?: number): void;
+   * (see its `value`); `divided`, what it divides among its group (see its
+   * `divided`). */
+  reflexiveTrigger(
+    targets: readonly TargetSpec[],
+    effect: EffectSpec,
+    text: string,
+    value?: number,
+    divided?: TriggeredAbility["divided"],
+  ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
   exileGraveyard(target: TargetRef, filter?: CardFilter): void;
@@ -13690,6 +13707,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.effect,
         spec.text,
         spec.value === undefined ? undefined : amountValue(spec.value, ctx),
+        spec.divided,
       );
       return;
     case "ward":

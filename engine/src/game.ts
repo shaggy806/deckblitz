@@ -396,6 +396,7 @@ import {
   otherSlotConflict,
   otherThanSlots,
   specsAtX,
+  specsCappedByDivision,
   specsWithAmounts,
   describeTargetSpec,
   isOptionalSpec,
@@ -2871,9 +2872,17 @@ export class Game {
       const push = (
         targetOptions: readonly (readonly TargetRef[])[],
         xCost?: { readonly maxX: number; readonly minX?: number },
-        targetSpecs: readonly TargetSpec[] = ability.targets,
+        specsAsActivated: readonly TargetSpec[] = ability.targets,
         modes?: readonly number[],
       ): void => {
+        // A divided total read as it would be activated (rules 602.2b,
+        // 601.2d), capping its group at one target per point.
+        const divide =
+          ability.divided === undefined
+            ? undefined
+            : this.dividedNow(ability.divided, source, player, xCost?.minX === xCost?.maxX ? xCost?.maxX : undefined);
+        const targetSpecs =
+          divide === undefined ? specsAsActivated : specsCappedByDivision(specsAsActivated, divide);
         const modal = ability.effect?.kind === "modal" ? ability.effect : undefined;
         const label =
           modes !== undefined && modal !== undefined
@@ -2916,7 +2925,7 @@ export class Game {
           ...(isManaAbility(ability) ? { manaAbility: true as const } : {}),
           ...(plainMana !== undefined ? { plainMana } : {}),
           ...(xCost !== undefined ? { xCost } : {}),
-          ...(ability.divided !== undefined ? { divide: ability.divided } : {}),
+          ...(divide !== undefined ? { divide } : {}),
           ...(modes !== undefined ? { modes } : {}),
         });
       };
@@ -3845,16 +3854,20 @@ export class Game {
           : null;
       // No number of targets leaves room for an X at or above the floor.
       if (xGroup === "none") continue;
+      // A divided total read as it would be cast (rule 601.2d), capping its
+      // group at one target per point — an X total waits for the X chosen.
+      const divide = def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined);
+      const offerSpecs = payableX === undefined ? specsAtX(specs, 0) : specs;
       const offer: Extract<LegalAction, { kind: "cast-spell" }> = {
         kind: "cast-spell",
         card,
         cardName,
         // Cast with no {X} to pay — free, say — X is 0 (rule 107.3b), and a
         // group tied to it is fixed there.
-        targetSpecs: payableX === undefined ? specsAtX(specs, 0) : specs,
+        targetSpecs: divide === undefined || divide.x === true ? offerSpecs : specsCappedByDivision(offerSpecs, divide),
         targetOptions: options,
         ...this.phyrexianPipsOffer(player, variantCost),
-        ...(def.divided !== null ? { divide: def.divided } : {}),
+        ...(divide !== undefined ? { divide } : {}),
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),
         ...(face !== undefined ? { face } : {}),
@@ -14680,11 +14693,7 @@ export class Game {
     const chosenDivision =
       def.divided === null
         ? undefined
-        : spellDivision(
-            def.divided.x === true ? { ...def.divided, total: chosenX } : def.divided,
-            targets,
-            division,
-          );
+        : spellDivision(this.dividedNow(def.divided, cardId, player, chosenX), targets, division);
     if (typeof chosenDivision === "string") throw new Error(`${def.name}: ${chosenDivision}`);
 
     const castingFromCommand = this.isCastableCommander(player, cardId);
@@ -17136,7 +17145,10 @@ export class Game {
       );
       if (badTarget !== null) throw new Error(badTarget);
       // A divided amount, split as it's activated (rules 602.2b, 601.2d).
-      const shares = ability.divided === undefined ? undefined : spellDivision(ability.divided, targets, division);
+      const shares =
+        ability.divided === undefined
+          ? undefined
+          : spellDivision(this.dividedNow(ability.divided, sourceId, player, xValue), targets, division);
       if (typeof shares === "string") throw new Error(`${def.name}'s ability: ${shares}`);
       if (ability.divided === undefined && division !== undefined && division.length > 0) {
         throw new Error(`${def.name}'s ability divides nothing`);
@@ -23886,7 +23898,7 @@ export class Game {
       if (trigger.miracle !== undefined) this.state.objects[abilityId].sourceZoneChangeCount = trigger.miracle.stint;
       // A divided amount with nothing to choose (rule 603.3d): all of it on
       // the one target, or nothing among none.
-      const dividedNow = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
+      const dividedNow = this.triggerDivided(ability as TriggeredAbility, trigger);
       if (dividedNow !== undefined) {
         const shares = spellDivision(dividedNow, targets, undefined);
         if (typeof shares !== "string") this.state.objects[abilityId].division = shares;
@@ -23918,7 +23930,7 @@ export class Game {
     };
     // A divided amount (rule 603.3d): its group is the last slot, so in the
     // answer it starts after the chooser's other slots.
-    const divided = this.triggerDivided(ability as TriggeredAbility, trigger.triggerValue, trigger.controller);
+    const divided = this.triggerDivided(ability as TriggeredAbility, trigger);
     const group = anyNumberSlot(specs);
     const answerSlot = group < 0 ? -1 : slots.slice(0, group).filter((s) => "spec" in s).length;
     // "Target creature of their choice" (rule 700.2e's way): another player
@@ -23980,19 +23992,63 @@ export class Game {
     return player !== undefined && this.state.players[player]?.hasLost === false ? player : undefined;
   }
 
-  /** A triggered ability's `divided`, its total read: the value it
-   * triggered with for `byTriggerValue` (Lathiel's "that many"). */
-  private triggerDivided(
-    ability: TriggeredAbility,
-    triggerValue: number | undefined,
+  /** A spell's or activated ability's `divided`, its total read as it's
+   * cast or activated, when the division is announced (rules 601.2d,
+   * 602.2b) and before any cost is paid: a spell's X for `x: true` (0 while
+   * none is announced — the offer's `x` says to read the X chosen), a
+   * number as it is, and an amount read for `source` and `controller` now —
+   * Volcanic Wind's "the number of creatures on the battlefield as you cast
+   * this spell", Lukka's "the greatest power among creatures you control as
+   * you activate this ability". Fixed from then on: the shares are. */
+  private dividedNow<D extends { readonly total: EffectAmount; readonly x?: true }>(
+    divided: D,
+    source: ObjectId,
     controller: PlayerId,
-  ): TriggeredAbility["divided"] {
+    x: number | undefined,
+  ): Omit<D, "total"> & { readonly total: number } {
+    if (divided.x === true) return { ...divided, total: x ?? 0 };
+    if (typeof divided.total === "number") return { ...divided, total: divided.total };
+    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0);
+    return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
+  }
+
+  /** A triggered ability's `divided`, its total read as it's put on the
+   * stack, when the division is announced (rules 603.3d, 601.2d): the value
+   * it triggered with for `byTriggerValue` (Lathiel's "that many"), its
+   * controller's turn stat for `byTurnStat`, and an amount `total` read
+   * for it now (Ureni's lands, Orca's last-known power). A reflexive
+   * ability's `divided` reads the same way (603.12). */
+  private triggerDivided(
+    ability: { readonly divided?: TriggeredAbility["divided"] },
+    trigger: {
+      readonly sourceObjectId: ObjectId;
+      readonly controller: PlayerId;
+      readonly triggerValue?: number;
+      readonly triggerObject?: ObjectId;
+      readonly x?: number;
+      readonly lastKnownRefs?: LastKnownRefs;
+    },
+  ): (Omit<NonNullable<TriggeredAbility["divided"]>, "total"> & { readonly total: number }) | undefined {
     const divided = ability.divided;
-    if (divided?.byTurnStat !== undefined) {
-      return { ...divided, total: turnStatOf(this.state, controller, divided.byTurnStat) };
+    if (divided === undefined) return undefined;
+    if (divided.byTurnStat !== undefined) {
+      return { ...divided, total: turnStatOf(this.state, trigger.controller, divided.byTurnStat) };
     }
-    if (divided?.byTriggerValue !== true) return divided;
-    return { ...divided, total: triggerValue ?? 0 };
+    if (divided.byTriggerValue === true) return { ...divided, total: trigger.triggerValue ?? 0 };
+    if (typeof divided.total === "number") return { ...divided, total: divided.total };
+    const ctx = this.makeResolutionContext(
+      trigger.sourceObjectId,
+      trigger.controller,
+      [],
+      trigger.x ?? 0,
+      trigger.triggerValue ?? 0,
+      trigger.triggerObject,
+      1,
+      0,
+      [],
+      trigger.lastKnownRefs,
+    );
+    return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
   }
 
   /**
@@ -25569,7 +25625,7 @@ export class Game {
           value: { sentinel, resume },
         };
       },
-      reflexiveTrigger: (specs, effect, text, value) => {
+      reflexiveTrigger: (specs, effect, text, value, divided) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
         // on the stack the next time a player would receive priority.
         const object = this.state.objects[source];
@@ -25589,7 +25645,7 @@ export class Game {
           ...((value ?? triggerValue) !== 0 ? { triggerValue: value ?? triggerValue } : {}),
           ...(triggerObject !== undefined ? { triggerObject } : {}),
           ...(Object.keys(refs).length > 0 ? { lastKnownRefs: refs } : {}),
-          reflexive: { targets: [...specs], effect, text },
+          reflexive: { targets: [...specs], effect, text, ...(divided !== undefined ? { divided } : {}) },
         });
       },
       returnExiledBySource: (linked) => {

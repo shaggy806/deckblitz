@@ -724,6 +724,26 @@ export function divisionOf(
   return [...chosen];
 }
 
+/**
+ * `specs` with the divided group at `divide.slot` capped at `divide.total`
+ * members: each target gets at least 1 of what's divided (rule 601.2d), so
+ * no more targets than there is to divide — Volcanic Wind's "any number of
+ * target creatures" with three creatures on the battlefield is three at
+ * most. A bound that is a number already keeps the smaller; one that isn't
+ * a number yet (an unread `"x"`) is left as it is.
+ */
+export function specsCappedByDivision(
+  specs: readonly TargetSpec[],
+  divide: { readonly total: number; readonly slot: number },
+): readonly TargetSpec[] {
+  const spec = specs[divide.slot];
+  if (typeof spec !== "object" || spec.kind !== "any-number") return specs;
+  if (spec.max !== undefined && typeof spec.max !== "number") return specs;
+  const max = Math.min(spec.max ?? Number.POSITIVE_INFINITY, divide.total);
+  if (max === spec.max) return specs;
+  return specs.map((s, i) => (i === divide.slot ? { ...spec, max } : s));
+}
+
 /** Whether two target references name the same player or object. */
 export function sameTargetRef(a: TargetRef, b: TargetRef): boolean {
   return a.kind === "player"

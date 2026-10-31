@@ -16,6 +16,7 @@ import type { ActivatedAbility, CostReductionAmount, TriggeredAbility } from "..
 import type {
   BeholdSpec,
   CopyExceptions,
+  EffectAmount,
   EffectSpec,
   ModeOption,
   PlayerScope,
@@ -4070,9 +4071,17 @@ export interface CardDefinition {
    * `total` of it. Carried on the spell (`GameObject.division`, a copy keeps
    * it) and dealt by a `damage-divided` effect. `null` for every other card.
    * `x: true` is "X damage divided as you choose" (Fire Covenant): the total
-   * is the X the spell is cast with, and `total` is ignored.
+   * is the X the spell is cast with, and `total` is ignored. A `total` that
+   * is an amount is read as the spell is cast, when the division is announced
+   * (rule 601.2d) — "X damage …, where X is the number of creatures on the
+   * battlefield as you cast this spell" (Volcanic Wind: `{ countOf: … }`),
+   * "the greatest power among creatures you control as you cast this spell"
+   * (Monstrous Onslaught) — and fixed from then on. Give its group no `max`:
+   * the total caps it (at least 1 each). An amount reading X other than a
+   * plain X (Meteor Shower's "X plus 1") isn't offered right yet: the offer
+   * names a number or `x`.
    */
-  readonly divided: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true } | null;
+  readonly divided: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true } | null;
   /** The partner-family ability that lets this card be one of *two*
    * commanders (rule 702.124), or `null` for a card that can only command
    * alone. A deckbuilding rule, read by `deck-validation.ts`'s
@@ -4476,7 +4485,7 @@ interface CardDraft {
   /** See {@link CardDefinition.meldOf}. */
   meldOf?: readonly [string, string];
   split?: boolean;
-  divided?: { readonly total: number; readonly slot: number; readonly of?: string; readonly x?: true };
+  divided?: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true };
   disturb?: { readonly cost: string };
   adventure?: boolean;
   omen?: boolean;

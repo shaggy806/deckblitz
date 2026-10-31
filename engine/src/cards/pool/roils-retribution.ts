@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // Deft Dismissal's divided damage among attacking or blocking creatures: the
 // division is chosen as it's cast, each target getting at least 1, so at most
-// five targets (the rulings).
+// five targets (the rulings) — and "any number" may be none (rule 107.1c).
 
 export default defineCard({
   name: "Roil's Retribution",
@@ -12,7 +12,7 @@ export default defineCard({
   colors: ["W"],
   types: ["instant"],
   text: "Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.",
-  targets: [{ kind: "any-number", of: "attacking-or-blocking-creature", min: 1, max: 5 }],
+  targets: [{ kind: "any-number", of: "attacking-or-blocking-creature", max: 5 }],
   divided: { total: 5, slot: 0 },
   effect: { kind: "damage-divided", from: 0 },
 });

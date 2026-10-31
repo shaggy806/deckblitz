@@ -711,7 +711,9 @@
   "amount:count-in-exile",
   "effect:aggregate-all-counters",
   "effect:aggregate-all-counters-for-target",
-  "amount:greatest-mana-value-this-way"
+  "amount:greatest-mana-value-this-way",
+  "effect:divided-dynamic-total",
+  "effect:reflexive-divided-damage"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

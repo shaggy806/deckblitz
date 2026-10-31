@@ -2144,6 +2144,11 @@ export interface ReflexiveTrigger {
   readonly targets: readonly TargetSpec[];
   readonly effect: EffectSpec;
   readonly text: string;
+  /** "When you do, it deals 7 damage divided as you choose among one or two
+   * targets" (Death to Our Enemies): an amount divided among its group, as a
+   * triggered ability's `divided` — announced as it's put on the stack
+   * (rules 603.12, 603.3d, 601.2d), after the creating resolution is done. */
+  readonly divided?: TriggeredAbility["divided"];
 }
 
 /** A kind of counter a player can have (rule 122.1), apart from energy — see

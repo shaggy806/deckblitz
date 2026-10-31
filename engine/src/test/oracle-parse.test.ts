@@ -4021,3 +4021,79 @@ describe("an aggregate over a set, as a static's X", () => {
     expect(face("Not A Card", "Creature — Drake", "This creature's power is equal to the greatest power among creatures you control.").static).toHaveLength(0);
   });
 });
+
+describe("damage divided as you choose (rule 601.2d), its total fixed or read as it's announced", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a spell's fixed total, capping the group as authored", () => {
+    const p = face("Arc Lightning", "Sorcery", "Arc Lightning deals 3 damage divided as you choose among one, two, or three targets.");
+    expect(p.targets).toEqual([{ kind: "any-number", of: "any-target", min: 1, max: 3 }]);
+    expect(p.divided).toEqual({ total: 3, slot: 0 });
+    expect(p.effect).toEqual({ kind: "damage-divided", from: 0 });
+  });
+
+  it("reads a spell's count or aggregate total, the group uncapped", () => {
+    const wind = face(
+      "Volcanic Wind",
+      "Sorcery",
+      "Volcanic Wind deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell.",
+    );
+    expect(wind.targets).toEqual([{ kind: "any-number", of: "creature" }]);
+    expect(wind.divided).toEqual({ total: { countOf: { type: "creature" } }, slot: 0 });
+    expect(
+      face(
+        "Monstrous Onslaught",
+        "Sorcery",
+        "Monstrous Onslaught deals X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast this spell.",
+      ).divided,
+    ).toEqual({ total: { aggregate: "max", of: "power", filter: { type: "creature", controlledBy: "you" } }, slot: 0 });
+  });
+
+  it("reads a trigger's and an activation's totals: lands, its power, counters on it, greatest power", () => {
+    const ureni = face(
+      "Ureni, the Song Unending",
+      "Legendary Creature — Spirit Dragon",
+      "When Ureni enters, it deals X damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control, where X is the number of lands you control.",
+    ).triggered[0];
+    expect(ureni.targets).toEqual([
+      { kind: "any-number", of: { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"] } } },
+    ]);
+    expect(ureni.divided).toEqual({ total: { countOf: { type: "land", controlledBy: "you" } }, slot: 0 });
+    expect(
+      face(
+        "Orca, Siege Demon",
+        "Legendary Creature — Demon",
+        "When Orca dies, it deals damage equal to its power divided as you choose among any number of targets.",
+      ).triggered[0].divided,
+    ).toEqual({ total: { powerOf: "source" }, slot: 0 });
+    expect(
+      face(
+        "Magmatic Core",
+        "Enchantment",
+        "At the beginning of your end step, this enchantment deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.",
+      ).triggered[0].divided,
+    ).toEqual({ total: { countersOn: "source", counter: "age" }, slot: 0 });
+    const lukka = parseFace(
+      {
+        name: "Lukka, Bound to Ruin",
+        type_line: "Legendary Planeswalker — Lukka",
+        loyalty: "5",
+        oracle_text:
+          "−4: Lukka deals X damage divided as you choose among any number of target creatures and/or planeswalkers, where X is the greatest power among creatures you control as you activate this ability.",
+      },
+      { tokenFor: () => null },
+    ).activated[0];
+    expect(lukka.divided).toEqual({
+      total: { aggregate: "max", of: "power", filter: { type: "creature", controlledBy: "you" } },
+      slot: 0,
+    });
+  });
+
+  it("leaves what it can't read whole: an X plus 1, an ability's bare X", () => {
+    expect(face("Meteor Shower", "Sorcery", "Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.").effect).toBeNull();
+    const bare = face("Not A Card", "Creature — Elemental", "{T}: This creature deals X damage divided as you choose among any number of targets.");
+    expect(bare.activated[0].effect).toBeNull();
+    expect(bare.activated[0].divided).toBeUndefined();
+  });
+});

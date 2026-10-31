@@ -248,6 +248,7 @@ function faceSource(face, ctx) {
     chooseOnEnter: parsed.chooseOnEnter,
     text: face.oracle_text ?? "",
     targets: parsed.targets?.length ? parsed.targets : undefined,
+    divided: parsed.divided,
     effect: parsed.effect ?? undefined,
     castModal: parsed.castModal,
     activated: parsed.activated.length ? parsed.activated : undefined,

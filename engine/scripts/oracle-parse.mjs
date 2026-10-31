@@ -1360,6 +1360,98 @@ function sentenceRe(src) {
   return r;
 }
 
+/**
+ * A divided total that is read as the division is announced (rule 601.2d):
+ * "the number of lands you control", "the number of creatures on the
+ * battlefield", "the greatest power among creatures you control" (an
+ * aggregate), "the number of age counters on it", "its power" — an
+ * `EffectAmount`, or `null`.
+ */
+function dividedTotalOf(phrase) {
+  let m;
+  const agg = aggregatePhraseOf(phrase);
+  if (agg !== null) return agg;
+  if ((m = /^the number of (.+?) (you control|on the battlefield)$/.exec(phrase))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { countOf: m[2] === "you control" ? { ...filter, controlledBy: "you" } : filter };
+  }
+  if ((m = /^the number of ([a-z]+|[+-]\d\/[+-]\d) counters on (?:it|~)$/.exec(phrase))) {
+    return { countersOn: "source", counter: m[1] };
+  }
+  if (/^(?:its|~'s) power$/.test(phrase)) return { powerOf: "source" };
+  return null;
+}
+
+/**
+ * "~ deals 3 damage divided as you choose among one, two, or three targets",
+ * "it deals X damage divided as you choose among any number of target
+ * creatures, where X is …", "~ deals damage equal to its power divided as
+ * you choose among any number of targets" (rule 601.2d): a `damage-divided`
+ * over the `any-number` group it adds, with `ctx.divided.value` set to the
+ * spell's or ability's `divided`. `undefined` for any other sentence, `null`
+ * for one of these it can't read. A fixed total caps the group as authored
+ * (`max`); one read as it's announced caps it in the engine (no `max`); a
+ * spell's bare X is `x: true` with the group `max: "x"` (Fire Covenant).
+ */
+function dividedDamageOf(s, ctx) {
+  const m =
+    /^(~|[Ii]t) deals (?:(a|an|one|two|three|four|five|six|seven|eight|nine|ten|X|\d+) damage|damage equal to (?:its|~'s) power) divided as you choose among (.+?)(?:, where X is (.+?))?\.$/.exec(
+      s,
+    );
+  if (m === null) return undefined;
+  // "It" is the ability's own source only while nothing is targeted yet.
+  if (m[1] !== "~" && (ctx.it !== "source" || ctx.targets.length > 0)) return null;
+  const [, , word, groupPhrase, where] = m;
+  let total;
+  let x = false;
+  if (word === undefined) {
+    if (where !== undefined) return null;
+    total = { powerOf: "source" };
+  } else if (word === "X") {
+    if (where === undefined) {
+      // A spell's own X (Fire Covenant); an ability's X is a person's.
+      if (!ctx.spell) return null;
+      x = true;
+      total = 0;
+    } else {
+      // "… as you cast this spell" / "… as you activate this ability" says
+      // when the division reads it, which is when the engine reads it.
+      const phrase = where.replace(ctx.spell ? / as you cast (?:~|this spell)$/ : / as you activate this ability$/, "");
+      total = dividedTotalOf(phrase);
+      if (total === null) return null;
+    }
+  } else {
+    if (where !== undefined) return null;
+    total = numberOf(word.toLowerCase());
+    if (typeof total !== "number") return null;
+  }
+  const fixed = typeof total === "number" && !x;
+  let g;
+  let of;
+  let bounds;
+  if ((g = /^(any number of|one or two|one, two, or three) (targets|target (.+))$/.exec(groupPhrase))) {
+    if (g[3] === undefined) of = "any-target";
+    else {
+      const plural = g[3].replace(/ your opponents control$/, " an opponent controls");
+      const either = /^creatures and\/or planeswalkers/;
+      of = targetOf(`target ${either.test(plural) ? plural.replace(either, "creature or planeswalker") : singularTarget(plural)}`);
+    }
+    if (of === undefined) return null;
+    if (g[1] === "any number of") {
+      bounds = x ? { max: "x" } : fixed ? { max: total } : {};
+    } else {
+      // "One or two": a fixed total of at least the most targets.
+      const most = g[1] === "one or two" ? 2 : 3;
+      if (!fixed || total < most) return null;
+      bounds = { min: 1, max: most };
+    }
+  } else return null;
+  const slot = ctx.target({ kind: "any-number", of, ...bounds });
+  ctx.divided.value = { total, slot, ...(x ? { x: true } : {}) };
+  return { kind: "damage-divided", from: slot };
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "…, where X is the number of …" / "for each …" define an amount by a rule
@@ -1423,6 +1515,16 @@ export function parseSentence(sentence, ctx) {
         { kind: "lose-life", amount: removedThisWay },
       ],
     };
+  }
+  // "~ deals 5 damage divided as you choose among any number of targets"
+  // (rule 601.2d), and a total read as the division is announced — "X
+  // damage …, where X is the number of lands you control", "damage equal to
+  // its power …": a `damage-divided` over an `any-number` group, the
+  // ability's or spell's `divided` set through `ctx.divided`. Ahead of the
+  // "where X" guard below, since it reads its own X.
+  if (ctx?.divided !== undefined) {
+    const d = dividedDamageOf(s, ctx);
+    if (d !== undefined) return d;
   }
   if (/\bwhere X\b|\bfor each\b/i.test(s) && !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s)) return null;
   // "Until end of turn, whenever …, …", "whenever … this turn, …" and "until
@@ -4381,7 +4483,7 @@ export function parseFace(face, ctx = {}) {
         if (out.kicker?.keyword === "entwine") out.castModal = { ...out.castModal, kickedModes: out.castModal.modes.length };
       }
     } else {
-      const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true, opponentChoosesTargets: [] };
+      const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true, opponentChoosesTargets: [], divided: {} };
       let text = out.spellLines.map((l) => l.line).join(" ");
       // "…. Exile Burning Wish." closing the spell: it's exiled as it
       // resolves instead of going to the graveyard (`exileOnResolve`).
@@ -4420,7 +4522,13 @@ export function parseFace(face, ctx = {}) {
       const r = parseEffect(text, ctx2);
       const ownTargets = [...spellTargets];
       out.targets = ownTargets;
-      out.effect = r.effect;
+      // A divided amount (rule 601.2d): the spell's `divided`, its group the
+      // last slot — any other place is a person's.
+      const division = r.effect === null ? undefined : ctx2.divided.value;
+      const misplaced = division !== undefined && division.slot !== ownTargets.length - 1;
+      out.effect = misplaced ? null : r.effect;
+      if (division !== undefined && !misplaced) out.divided = division;
+      if (misplaced) out.todo.push("a divided amount whose group isn't the last target");
       if (r.effect === null) {
         out.todo.push(...r.todo);
         out.effectHints = r.hints;
@@ -4971,16 +5079,27 @@ function fillEffect(ability, text, ctx, lines, i) {
   // An activated ability's "target … of an opponent's choice" (rules 602.2b,
   // 601.2c); a triggered one has no opponent to name.
   const theirSlots = ability.cost !== undefined && ability.trigger === undefined ? [] : undefined;
+  // A divided amount (rules 602.2b, 603.3d, 601.2d): the ability's
+  // `divided`, its group the last slot.
+  const divided = {};
   const r = parseEffect(text, {
     targets: ability.targets,
     tokenFor: ctx.tokenFor,
     onStack: ctx.onStack,
     it: ctx.it,
     departed: ctx.departed,
+    divided,
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;
+  const division = r.effect === null ? undefined : divided.value;
+  if (division !== undefined && division.slot !== ability.targets.length - 1) {
+    ability.effect = null;
+    ability.__todo = [...(ability.__todo ?? []), "a divided amount whose group isn't the last target"];
+    return i;
+  }
+  if (division !== undefined) ability.divided = division;
   ability.effect = r.effect;
   if (r.effect === null) {
     ability.__todo = [...(ability.__todo ?? []), ...r.todo];

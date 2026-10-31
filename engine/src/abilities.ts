@@ -10,7 +10,7 @@
  */
 
 import type { StaticCondition, TurnStat } from "./cards/define.js";
-import type { EffectSpec, SpellResolver } from "./effects.js";
+import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
 import type { GameEvent } from "./events.js";
 import type { Color } from "./mana.js";
 import type { GameState, PlayerCounterKind, TurnHistoryKind, ZoneType } from "./state.js";
@@ -612,8 +612,12 @@ export interface ActivatedAbility {
    * Hellkite): the targets from `slot` on — an `any-number` group — share
    * `total`, split as the ability is activated (rules 602.2b, 601.2d: the
    * `activate-ability` action's `division`, at least 1 each) and dealt by a
-   * `damage-divided` effect. A target gone illegal loses its share. */
-  readonly divided?: { readonly total: number; readonly slot: number; readonly of?: string };
+   * `damage-divided` effect. A target gone illegal loses its share. A
+   * `total` that is an amount is read as it's activated, when the division
+   * is announced — "where X is the greatest power among creatures you
+   * control as you activate this ability" (Lukka, Bound to Ruin) — and caps
+   * its group (at least 1 each), so give the group no `max`. */
+  readonly divided?: { readonly total: EffectAmount; readonly slot: number; readonly of?: string };
 }
 
 /**
@@ -2111,9 +2115,13 @@ export interface TriggeredAbility {
    * stat this turn as it goes on the stack (Lathiel's "that many" — the life
    * gained this turn; more gained in response changes nothing, the ruling).
    * `upTo`: "distribute **up to** that many", so the shares may add up to
-   * less. */
+   * less. A `total` that is an amount is read as it's put on the stack, when
+   * the division is announced (rules 603.3d, 601.2d) — "where X is the number
+   * of lands you control" (Ureni, the Song Unending), "damage equal to its
+   * power" (Orca, Siege Demon, its last-known power once it has died) — and
+   * caps its group, so give the group no `max`. */
   readonly divided?: {
-    readonly total: number;
+    readonly total: EffectAmount;
     readonly slot: number;
     readonly of?: string;
     readonly byTriggerValue?: true;
