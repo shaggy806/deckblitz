@@ -873,6 +873,7 @@ import _poolWellRested from "../pool/well-rested.js";
 import _poolWerewolfRansacker from "../pool/werewolf-ransacker.js";
 import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
+import _poolWildMagicSorcerer from "../pool/wild-magic-sorcerer.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWindSail from "../pool/wind-sail.js";
 import _poolWingPuncture from "../pool/wing-puncture.js";
@@ -1785,6 +1786,7 @@ const shard: CardShard = {
     _poolWerewolfRansacker,
     _poolWidowsWalk,
     _poolWildCantor,
+    _poolWildMagicSorcerer,
     _poolWillowrushVerge,
     _poolWindSail,
     _poolWingPuncture,

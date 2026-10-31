@@ -63,7 +63,16 @@ import {
   rulesTextName,
   speedOf,
 } from "./state.js";
-import type { GameObject, GameState, LastKnownInfo, PtModifier, TurnHistoryKind, TurnHistoryOrigin } from "./state.js";
+import type {
+  GameObject,
+  GameState,
+  LastKnownInfo,
+  PtModifier,
+  SpellGrantThisTurn,
+  TurnHistoryKind,
+  TurnHistoryOrigin,
+  ZoneType,
+} from "./state.js";
 import {
   BASIC_LAND_TYPE_COLORS,
   EVERY_CREATURE_TYPE,
@@ -1656,6 +1665,47 @@ export function castGrantReaches(
   return true;
 }
 
+/**
+ * Whether `grant` — what a `grant-spells-this-turn` gave its controller's
+ * spells this turn — reaches `spell`, a spell on the stack. A `next` grant is
+ * the spell's that used it up (`usedBy`, this stint on the stack) and no
+ * other's; any other reaches each of its controller's spells cast from one of
+ * `castFrom` that matches `filter`.
+ */
+export function turnSpellGrantReaches(
+  state: GameState,
+  registry: CardRegistry,
+  grant: SpellGrantThisTurn,
+  spell: GameObject,
+): boolean {
+  if (spell.zone !== "stack" || spell.kind !== "card" || spell.controller !== grant.player) return false;
+  if (grant.next === true) {
+    return grant.usedBy?.id === spell.id && grant.usedBy.zoneChangeCount === (spell.zoneChangeCount ?? 0);
+  }
+  if (grant.castFrom !== undefined && (spell.castFrom == null || !grant.castFrom.includes(spell.castFrom))) return false;
+  return grant.filter === undefined || matchesFilter(state, registry, spell.id, grant.filter, { you: grant.player });
+}
+
+/**
+ * Whether `grant` reaches `cardId` as `player` casts it, before it's cast
+ * (rule 601.2b–h — convoke is paid then): their grant, from a zone of
+ * `castFrom`, matching `filter`, and for a `next` grant one nothing has used
+ * up yet — this spell would. `from` is where the card is cast from (the card
+ * may already be on the stack, rule 601.2a).
+ */
+export function turnCastGrantReaches(
+  state: GameState,
+  registry: CardRegistry,
+  grant: SpellGrantThisTurn,
+  cardId: ObjectId,
+  player: PlayerId,
+  from: ZoneType | undefined,
+): boolean {
+  if (grant.player !== player || (grant.next === true && grant.usedBy !== undefined)) return false;
+  if (grant.castFrom !== undefined && (from === undefined || !grant.castFrom.includes(from))) return false;
+  return grant.filter === undefined || matchesFilter(state, registry, cardId, grant.filter, { you: player });
+}
+
 /** Whether `spell`, on the stack, has split second (rule 702.61): printed, or
  * given by a `grantsToSpells` static on the battlefield. */
 export function spellHasSplitSecond(state: GameState, registry: CardRegistry, spell: GameObject): boolean {
@@ -1690,7 +1740,11 @@ export function spellCantBeCountered(state: GameState, registry: CardRegistry, s
       }
     }
   }
-  return false;
+  // "The next instant or sorcery spell you cast this turn can't be
+  // countered" (Overmaster — `grant-spells-this-turn`).
+  return (state.spellGrantsThisTurn ?? []).some(
+    (grant) => grant.cantBeCountered === true && turnSpellGrantReaches(state, registry, grant, spell),
+  );
 }
 
 /** Whether `player` has hexproof (rule 702.11d): from an effect that gave it

@@ -627,6 +627,7 @@ import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSauronTheNecromancer from "../pool/sauron-the-necromancer.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavageStomp from "../pool/savage-stomp.js";
+import _poolSavageSummoning from "../pool/savage-summoning.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
 import _poolScabland from "../pool/scabland.js";
 import _poolScaleOfChissGoria from "../pool/scale-of-chiss-goria.js";
@@ -1517,6 +1518,7 @@ const shard: CardShard = {
     _poolSauronTheNecromancer,
     _poolSavageKnuckleblade,
     _poolSavageStomp,
+    _poolSavageSummoning,
     _poolSavaiCrystal,
     _poolScabland,
     _poolScaleOfChissGoria,

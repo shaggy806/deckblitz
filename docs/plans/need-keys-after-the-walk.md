@@ -711,6 +711,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   creature or a player's creatures, aimed at a player or planeswalker, for this turn, a player's
   next turn or next combat phase (3 freed, 6 proving cards; Public Enemy's static, Galactus and
   Silver Surfer left open).
+- **2026-10-31: the next spell's grants** (a cloud session given three fixed families) —
+  `static:grant-abilities-to-spells`' remaining group: `grant-spells-this-turn`'s `filter` and
+  `next` (used up as the next matching spell becomes cast) with `cantBeCountered`, `convoke` and
+  `entersWithCounters`, a granted sunburst, and `firstEachTurn` over `castFrom`/`manaFrom`
+  (7 keys, 4 freed, 9 proving cards).
 
 ## Rough size
 

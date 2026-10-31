@@ -559,10 +559,37 @@ prowl's condition, answering `self-prowl-paid`. `allow-cast-from-exile` takes
 `undaunted`, beside a printed one — 702.125c). The scaffolder reads "[kind]
 spells you cast [from exile] have convoke / improvise / prowl {cost}". Proving
 cards: Chief Engineer, Inspiring Statuary, Hunting Velociraptor, Durnan of the
-Yawning Portal. Not built: "the next spell you cast this turn has convoke /
-improvise" (Flockchaser Phantom, Archway of Innovation —
-`effect:next-spell-has-convoke`), and a `hasConvoke` filter still reads only a
-printed convoke.
+Yawning Portal. Not built: "the next spell you cast this turn has
+improvise" (Archway of Innovation; convoke is built, below), and a
+`hasConvoke` filter still reads only a printed convoke.
+
+### One-shot grants to the next or first matching spell — built 2026-10-31
+
+The rest of the need-keys Phase 2 family `static:grant-abilities-to-spells`,
+its group (grant-cascade, grant-cascade-next-spell,
+grant-sunburst-to-next-artifact, grant-to-first-matching-spell,
+next-creature-spell-flash, next-spell-uncounterable) and the Tier B
+effect:next-spell-has-convoke, features only. **`grant-spells-this-turn`**
+takes `filter` and `next`: the first matching spell its controller casts
+after it resolves uses it up as it becomes cast (rule 601.2i,
+`Game.spendNextSpellGrants` — the record's `usedBy`), so the grant is that
+spell's alone, cascade included (its "costs less" reads that spell, 702.85a).
+Beside `triggered` (now optional) it gives `cantBeCountered` (701.5f,
+`spellCantBeCountered`), `convoke` (702.51a, offered while the spell that
+would use it up is cast) and `entersWithCounters`. Savage Summoning's flash
+is Quicken's `castAsThoughFlash` `next`, already there. **`enters-with-counters`'
+`counter: "sunburst"`** is a granted sunburst (702.44a), set by a next-spell
+delayed trigger from a mana ability. **`grantsToSpells.firstEachTurn`** over a
+filter's `castFrom` or `manaFrom` reads each earlier spell as it was cast. The
+scaffolder reads "the next [kind] spell you cast this turn has cascade / has
+convoke / can't be countered", "the next instant spell and the next sorcery
+spell … each have cascade" and "the first spell you cast [from exile] each
+turn [that mana from a Treasure was spent to cast] has cascade". Proving
+cards: Dark Apostle, Sloppity Bilepiper, Overmaster, Insist, Savage
+Summoning, Wand of the Worldsoul, Solar Array, Wild-Magic Sorcerer, Rain of
+Riches. Left to `author-freed`: Smoldering Stagecoach, TARDIS (its "you may
+planeswalk" does nothing outside Planechase, rule 701.31a), Bigger on the
+Inside (a granted ability adding mana for a target player), Theorist's Proxy.
 
 ### Graveyard cast permissions: other graveyards, and a card's own costs — built 2026-10-31
 

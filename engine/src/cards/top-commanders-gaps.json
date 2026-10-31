@@ -762,7 +762,14 @@
   "effect:search-destination-choice",
   "effect:search-split-control",
   "effect:search-split-to-graveyard",
-  "effect:search-with-counters"
+  "effect:search-with-counters",
+  "static:grant-cascade",
+  "static:grant-cascade-next-spell",
+  "static:grant-sunburst-to-next-artifact",
+  "static:grant-to-first-matching-spell",
+  "static:next-creature-spell-flash",
+  "static:next-spell-uncounterable",
+  "effect:next-spell-has-convoke"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

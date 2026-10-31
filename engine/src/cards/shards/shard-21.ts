@@ -496,6 +496,7 @@ import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOutwit from "../pool/outwit.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOvergrowthElemental from "../pool/overgrowth-elemental.js";
+import _poolOvermaster from "../pool/overmaster.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
 import _poolPain from "../pool/pain.js";
 import _poolPalinchron from "../pool/palinchron.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolOutwit,
     _poolOvalchaseDragster,
     _poolOvergrowthElemental,
+    _poolOvermaster,
     _poolOverwriteTheMultiverse,
     _poolPain,
     _poolPalinchron,

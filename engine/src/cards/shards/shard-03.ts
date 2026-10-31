@@ -589,6 +589,7 @@ import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
 import _poolSnarlingUndorak from "../pool/snarling-undorak.js";
+import _poolSolarArray from "../pool/solar-array.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSoltariGuerrillas from "../pool/soltari-guerrillas.js";
 import _poolSomberwaldAlpha from "../pool/somberwald-alpha.js";
@@ -1371,6 +1372,7 @@ const shard: CardShard = {
     _poolSmokebraider,
     _poolSnakeOfTheGoldenGrove,
     _poolSnarlingUndorak,
+    _poolSolarArray,
     _poolSolemnOffering,
     _poolSoltariGuerrillas,
     _poolSomberwaldAlpha,

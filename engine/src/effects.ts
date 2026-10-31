@@ -33,6 +33,7 @@ import type {
   LeaveDestination,
   PlayerCounterKind,
   PlayerEffect,
+  SpellGrantThisTurn,
   SpellSnapshot,
   TurnHistoryKind,
   TurnHistoryOrigin,
@@ -3210,7 +3211,13 @@ export type EffectSpec =
        * (Yuna, Grand Summoner): a spell on the stack — usually the trigger
        * object of a `nextSpell` delayed trigger — enters the battlefield with
        * these counters as it resolves (rule 614.1c: an ETB trigger sees
-       * them). Nothing for anything else. */
+       * them). Nothing for anything else.
+       *
+       * `counter: "sunburst"` is "that spell **gains sunburst**" (Solar
+       * Array, rule 702.44a): `amount` is ignored, and the spell enters with
+       * a counter for each color of mana spent to cast it — +1/+1 counters if
+       * it enters as a creature (its copiable types, as a printed sunburst
+       * reads them), else charge counters. */
       readonly kind: "enters-with-counters";
       readonly target: EffectTargetRef;
       readonly counter: string;
@@ -4094,10 +4101,37 @@ export type EffectSpec =
        * `triggered` (a `this-cast` cascade) as they're cast, whatever happens
        * to the source. Each resolution adds its own (the ruling: twice is
        * cascade twice). Ends with the turn (rule 514.2).
+       *
+       * With `next`, only **the next** spell matching `filter` (and
+       * `castFrom`) the controller casts this turn: "the next noncreature
+       * spell you cast this turn has cascade" (Dark Apostle), "the next
+       * instant or sorcery spell you cast this turn can't be countered"
+       * (Overmaster), "the next spell you cast this turn has convoke" (Wand
+       * of the Worldsoul). The first such spell cast after this resolves
+       * uses it up as it becomes cast (rule 601.2i), whatever else it has —
+       * and the grant is then that spell's alone, for as long as it's on the
+       * stack; a later spell, or one already on the stack, never has it.
+       * `convoke` is judged as the spell is being cast (rule 702.51a — its
+       * costs are paid before 601.2i), by the spell that would use the grant
+       * up. Without `next`, every matching spell cast this turn has it.
        */
       readonly kind: "grant-spells-this-turn";
       readonly castFrom?: readonly ZoneType[];
-      readonly triggered: readonly TriggeredAbility[];
+      /** Which spells, read from the controller's side as each is cast
+       * ("noncreature", "creature", "instant or sorcery"). */
+      readonly filter?: CardFilter;
+      /** Only the next matching spell this turn (see above). */
+      readonly next?: true;
+      readonly triggered?: readonly TriggeredAbility[];
+      /** The spell **can't be countered** (rule 701.5f) — read as
+       * `grantsToSpells.cantBeCountered` is. */
+      readonly cantBeCountered?: true;
+      /** The spell has **convoke** (rule 702.51). */
+      readonly convoke?: true;
+      /** "That creature enters with an additional +1/+1 counter on it"
+       * (Savage Summoning): the spell enters the battlefield with these
+       * counters as it resolves, as `enters-with-counters` gives. */
+      readonly entersWithCounters?: { readonly counter: string; readonly amount: number };
     }
   | {
       /**
@@ -8351,7 +8385,7 @@ export interface EffectApi {
   /** See the `"grant-player-hexproof"` {@link EffectSpec}. */
   grantPlayerHexproof(who: PlayerScope): void;
   /** See the `"grant-spells-this-turn"` {@link EffectSpec}. */
-  grantSpellsThisTurn(castFrom: readonly ZoneType[] | undefined, triggered: readonly TriggeredAbility[]): void;
+  grantSpellsThisTurn(grant: Omit<SpellGrantThisTurn, "player" | "usedBy">): void;
   /** See the `"keep-total-power"` {@link EffectSpec}: ask `player` which of
    * their permanents matching `filter` to keep, total power at most `max`.
    * `false` when they control none, and nothing was asked. */
@@ -12391,7 +12425,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.grantPlayerHexproof(spec.who ?? "you");
       return;
     case "grant-spells-this-turn":
-      ctx.grantSpellsThisTurn(spec.castFrom, spec.triggered);
+      ctx.grantSpellsThisTurn({
+        ...(spec.castFrom !== undefined ? { castFrom: spec.castFrom } : {}),
+        ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+        ...(spec.next === true ? { next: true } : {}),
+        triggered: spec.triggered ?? [],
+        ...(spec.cantBeCountered === true ? { cantBeCountered: true } : {}),
+        ...(spec.convoke === true ? { convoke: true } : {}),
+        ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
+      });
       return;
     case "populate":
       ctx.populate();

@@ -141,6 +141,8 @@ import {
   staticConditionMet,
   spellGrantReaches,
   castGrantReaches,
+  turnCastGrantReaches,
+  turnSpellGrantReaches,
   staticReaches,
   suspendComputedCache,
   turnStatOf,
@@ -4347,6 +4349,15 @@ export class Game {
           if (grant.improvise === true) improvise = true;
         }
       }
+    }
+    // "The next spell you cast this turn has convoke" (Wand of the
+    // Worldsoul): an unused grant this spell would use up as it's cast.
+    if (!convoke) {
+      const object = this.state.objects[card];
+      const from = object?.zone === "stack" ? (object.castFrom ?? undefined) : object?.zone;
+      convoke = (this.state.spellGrantsThisTurn ?? []).some(
+        (grant) => grant.convoke === true && turnCastGrantReaches(this.state, this.registry, grant, card, player, from),
+      );
     }
     return { convoke, improvise };
   }
@@ -15411,6 +15422,7 @@ export class Game {
     this.state.players[player].spellsCastThisTurn += 1;
     (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId, player, castFrom));
     this.spendNextSpellFlash(player, cardId);
+    this.spendNextSpellGrants(player, cardId, castFrom);
     this.recordCastName(player, cardId);
     this.state.spellsCastThisTurn += 1;
     object.castFrom = castFrom;
@@ -16436,10 +16448,10 @@ export class Game {
         });
       }
       // And what a resolved effect gave its controller's spells this turn
-      // (`grant-spells-this-turn` — Yidris), in the order it was given.
+      // (`grant-spells-this-turn` — Yidris; Dark Apostle's "the next
+      // noncreature spell"), in the order it was given.
       for (const grant of this.state.spellGrantsThisTurn ?? []) {
-        if (grant.player !== target.controller) continue;
-        if (grant.castFrom !== undefined && (target.castFrom == null || !grant.castFrom.includes(target.castFrom))) continue;
+        if (!turnSpellGrantReaches(this.state, this.registry, grant, target)) continue;
         for (const grantedAbility of grant.triggered) {
           granted.push({ ability: grantedAbility, ref: { kind: "modifier", ability: grantedAbility } });
         }
@@ -20410,7 +20422,12 @@ export class Game {
       });
     }
     if (extraCounters !== undefined && this.state.objects[id]?.zone === "battlefield") {
-      for (const c of extraCounters) this.addCounter({ kind: "object", object: id }, c.kind, c.amount);
+      for (const c of extraCounters) {
+        // A granted sunburst (Solar Array — rule 702.44a): +1/+1 counters if
+        // it entered as a creature by its copiable types, else charge.
+        const kind = c.kind === "sunburst" ? (def.types.includes("creature") ? "+1/+1" : "charge") : c.kind;
+        this.addCounter({ kind: "object", object: id }, kind, c.amount);
+      }
     }
     // "This creature escapes with a +1/+1 counter on it" — before the
     // enters-battlefield event, so an ETB trigger reads the counter the
@@ -26488,10 +26505,17 @@ export class Game {
             refs,
           },
         ),
-      entersWithCounters: (target, counter, amount) => {
-        if (target.kind !== "object" || amount <= 0) return;
+      entersWithCounters: (target, counter, given) => {
+        if (target.kind !== "object") return;
         const spell = this.state.objects[target.object];
         if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
+        // "That spell gains sunburst" (Solar Array): one for each color of
+        // mana spent to cast it, fixed as it was cast (rule 702.44a).
+        const amount =
+          counter === "sunburst"
+            ? Object.values(spell.manaSpentByColor ?? {}).filter((n) => (n ?? 0) > 0).length
+            : given;
+        if (amount <= 0) return;
         spell.entersWithCounters = [...(spell.entersWithCounters ?? []), { kind: counter, amount }];
       },
       allowCastFromExile: (target, free, laterTurns, opts) => {
@@ -27520,12 +27544,9 @@ export class Game {
         }
         invalidateComputedCache();
       },
-      grantSpellsThisTurn: (castFrom, triggered) => {
-        (this.state.spellGrantsThisTurn ??= []).push({
-          player: controller,
-          ...(castFrom !== undefined ? { castFrom: [...castFrom] } : {}),
-          triggered: [...triggered],
-        });
+      grantSpellsThisTurn: (grant) => {
+        (this.state.spellGrantsThisTurn ??= []).push({ ...grant, player: controller });
+        invalidateComputedCache();
       },
       grantPlayerHexproof: (who) => {
         for (const player of scoped(who)) {
@@ -32567,6 +32588,29 @@ export class Game {
       (e.castAsThoughFlash.filter === undefined ||
         matchesFilter(this.state, this.registry, cardId, e.castAsThoughFlash.filter, { you: player }));
     if (effects.some(spent)) this.state.playerEffects = effects.filter((e) => !spent(e));
+  }
+
+  /** "The next [filter] spell you cast this turn has cascade / can't be
+   * countered / has convoke" (`grant-spells-this-turn` with `next`):
+   * `player` has just cast `cardId` from `castFrom` (rule 601.2i), so each of
+   * their unused `next` grants it matches becomes this spell's — all of them
+   * at once — and a counter it brings ("that creature enters with an
+   * additional +1/+1 counter", Savage Summoning) goes on the spell. Read
+   * before the spell-cast event, so a granted cascade triggers on this cast. */
+  private spendNextSpellGrants(player: PlayerId, cardId: ObjectId, castFrom: ZoneType): void {
+    const spell = this.state.objects[cardId];
+    if (spell === undefined) return;
+    for (const grant of this.state.spellGrantsThisTurn ?? []) {
+      if (grant.next !== true || !turnCastGrantReaches(this.state, this.registry, grant, cardId, player, castFrom)) {
+        continue;
+      }
+      grant.usedBy = { id: cardId, zoneChangeCount: spell.zoneChangeCount ?? 0 };
+      const counters = grant.entersWithCounters;
+      if (counters !== undefined && counters.amount > 0 && spell.kind === "card") {
+        spell.entersWithCounters = [...(spell.entersWithCounters ?? []), { kind: counters.counter, amount: counters.amount }];
+      }
+    }
+    invalidateComputedCache();
   }
 
   /** See the `"restrict"` {@link EffectSpec}: `target`'s combat restrictions

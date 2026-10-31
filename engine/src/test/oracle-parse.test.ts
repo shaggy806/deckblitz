@@ -4384,6 +4384,65 @@ describe("casting abilities given to the spells you cast (grantsToSpells)", () =
   });
 });
 
+describe("one-shot grants to the next or first matching spell", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const CASCADE = { trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" };
+  it("reads the next spell's cascade, convoke and can't-be-countered as a next grant-spells-this-turn", () => {
+    const apostle = face(
+      "Dark Apostle",
+      "Creature — Astartes Warlock",
+      "Gift of Chaos — {3}, {T}: The next noncreature spell you cast this turn has cascade.",
+    );
+    expect(apostle.activated?.[0]?.effect).toEqual({
+      kind: "grant-spells-this-turn",
+      next: true,
+      filter: { notTypes: ["creature"] },
+      triggered: [CASCADE],
+    });
+    expect(face("Wand of the Worldsoul", "Artifact", "{T}: The next spell you cast this turn has convoke.").activated?.[0]?.effect).toEqual({
+      kind: "grant-spells-this-turn",
+      next: true,
+      convoke: true,
+    });
+    expect(
+      face("Overmaster", "Sorcery", "The next instant or sorcery spell you cast this turn can't be countered.\nDraw a card.").effect,
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "grant-spells-this-turn", next: true, filter: { typesAnyOf: ["instant", "sorcery"] }, cantBeCountered: true },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+    expect(
+      face(
+        "Smoldering Stagecoach",
+        "Artifact — Vehicle",
+        "Whenever this Vehicle attacks, the next instant spell and the next sorcery spell you cast this turn each have cascade.",
+      ).triggered?.[0]?.effect,
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "grant-spells-this-turn", next: true, filter: { type: "instant" }, triggered: [CASCADE] },
+        { kind: "grant-spells-this-turn", next: true, filter: { type: "sorcery" }, triggered: [CASCADE] },
+      ],
+    });
+  });
+
+  it("reads cascade for the first spell each turn, from exile or paid for with Treasure mana", () => {
+    const grant = (name: string, text: string) => face(name, "Creature — Orc", text).static?.[0]?.grantsToSpells;
+    expect(grant("Maelstrom Nexus", "The first spell you cast each turn has cascade.")).toEqual({ firstEachTurn: true, triggered: [CASCADE] });
+    expect(grant("Wild-Magic Sorcerer", "The first spell you cast from exile each turn has cascade.")).toEqual({
+      filter: { castFrom: "exile" },
+      firstEachTurn: true,
+      triggered: [CASCADE],
+    });
+    expect(
+      grant("Rain of Riches", "The first spell you cast each turn that mana from a Treasure was spent to cast has cascade."),
+    ).toEqual({ filter: { manaFrom: { subtype: "Treasure" } }, firstEachTurn: true, triggered: [CASCADE] });
+  });
+});
+
 describe("creatures in a blocking relation (blockingRelation)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

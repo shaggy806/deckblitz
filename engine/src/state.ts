@@ -1915,6 +1915,26 @@ export interface LastKnownInfo {
  * Adventure cast as its instant half is a creature card in exile a moment
  * later, and a creature spell's permanent can change type.
  */
+/**
+ * What a resolved `grant-spells-this-turn` gave its controller's spells for
+ * the rest of the turn (`GameState.spellGrantsThisTurn`): abilities and
+ * properties the matching spells have as they're cast and while they're on
+ * the stack. With `next`, only the next matching spell `player` casts: the
+ * one that used it up is `usedBy` (that spell, in that stint on the stack),
+ * set as it becomes cast (rule 601.2i).
+ */
+export interface SpellGrantThisTurn {
+  readonly player: PlayerId;
+  readonly castFrom?: readonly ZoneType[];
+  readonly filter?: CardFilter;
+  readonly next?: true;
+  readonly triggered: readonly TriggeredAbility[];
+  readonly cantBeCountered?: true;
+  readonly convoke?: true;
+  readonly entersWithCounters?: { readonly counter: string; readonly amount: number };
+  usedBy?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+}
+
 export interface CastSpellRecord {
   readonly id: ObjectId;
   /** The spell's snapshot on the stack. Its `entry.cast` is how it was cast
@@ -5185,11 +5205,7 @@ export interface GameState {
   /** Abilities each player's spells gain as they're cast for the rest of the
    * turn (`grant-spells-this-turn` — Yidris, Maelstrom Wielder's cascade),
    * one entry per resolution. Ends with the turn. Absent when empty. */
-  spellGrantsThisTurn?: {
-    readonly player: PlayerId;
-    readonly castFrom?: readonly ZoneType[];
-    readonly triggered: readonly TriggeredAbility[];
-  }[];
+  spellGrantsThisTurn?: SpellGrantThisTurn[];
   /** How many creatures have died this turn — Liliana's Devotee's "if a
    * creature died this turn". Turn-scoped; reset as each turn begins. */
   creaturesDiedThisTurn: number;

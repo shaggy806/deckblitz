@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: one-shot grants to the next or first matching spell** (2026-10-31;
+  `static:grant-cascade`, `static:grant-cascade-next-spell`, `static:grant-sunburst-to-next-artifact`,
+  `static:grant-to-first-matching-spell`, `static:next-creature-spell-flash`,
+  `static:next-spell-uncounterable`, `effect:next-spell-has-convoke`) — `grant-spells-this-turn`'s
+  `filter` and `next` (used up as the next matching spell becomes cast, rule 601.2i) with
+  `cantBeCountered`, `convoke` and `entersWithCounters`; `enters-with-counters`' granted sunburst;
+  `grantsToSpells.firstEachTurn` over `castFrom`/`manaFrom`; 4 freed. Dark Apostle, Sloppity
+  Bilepiper, Overmaster, Insist, Savage Summoning, Wand of the Worldsoul, Solar Array, Wild-Magic
+  Sorcerer, Rain of Riches.
 - **Need-keys Phase 2: attack requirements narrowed** (2026-10-31;
   `effect:must-attack-specific-player`, `effect:target-attacks-target-player-this-turn`,
   `effect:must-attack-target-players-creatures`, `effect:must-attack-controllers-next-combat`,

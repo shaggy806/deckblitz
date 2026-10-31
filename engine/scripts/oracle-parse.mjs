@@ -566,6 +566,16 @@ export function craftMaterials(phrase) {
  * types joined by "and" ("creature and enchantment" — either type). `null`
  * for anything else.
  */
+/** Granted cascade: a `this-cast` trigger, as the keyword's own. */
+const CASCADE_TRIGGER = { trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" };
+
+/** What "the next … spell you cast this turn" gets, by the phrase. */
+function nextSpellGrant(phrase) {
+  if (phrase === "has cascade") return { triggered: [CASCADE_TRIGGER] };
+  if (phrase === "has convoke") return { convoke: true };
+  return { cantBeCountered: true };
+}
+
 function flashSpellsFilter(words) {
   if (words === undefined || words === "") return true;
   const both = /^(\w+) and (\w+)$/.exec(words);
@@ -2214,6 +2224,37 @@ export function parseSentence(sentence, ctx) {
         kind: "player-effect",
         duration: "end-of-turn",
         castAsThoughFlash: filter === true ? { next: true } : { filter, next: true },
+      };
+    }
+  }
+  // A one-shot grant to the next matching spell (`grant-spells-this-turn`
+  // with `next`): "the next noncreature spell you cast this turn has
+  // cascade" (Dark Apostle), "the next instant or sorcery spell you cast this
+  // turn can't be countered" (Overmaster), "the next spell you cast this turn
+  // has convoke" (Wand of the Worldsoul), and "the next instant spell and the
+  // next sorcery spell you cast this turn each have cascade" (Smoldering
+  // Stagecoach — one grant each).
+  if ((m = re("the next (?:(.+?) )?spell you cast this turn (has cascade|has convoke|can't be countered)").exec(s))) {
+    const filter = flashSpellsFilter(m[1]);
+    if (filter !== null) {
+      return {
+        kind: "grant-spells-this-turn",
+        next: true,
+        ...(filter === true ? {} : { filter }),
+        ...nextSpellGrant(m[2]),
+      };
+    }
+  }
+  if ((m = re("the next (\\w+) spell and the next (\\w+) spell you cast this turn each have cascade").exec(s))) {
+    if (CARD_TYPES.includes(m[1]) && CARD_TYPES.includes(m[2])) {
+      return {
+        kind: "sequence",
+        effects: [m[1], m[2]].map((type) => ({
+          kind: "grant-spells-this-turn",
+          next: true,
+          filter: { type },
+          ...nextSpellGrant("has cascade"),
+        })),
       };
     }
   }
@@ -5826,6 +5867,31 @@ function parseStatic(line, text) {
           ...(m[1] !== undefined ? { filter } : {}),
           ...(m[2] !== undefined ? { castFrom: ["exile"] } : {}),
           ...grant,
+        },
+        text,
+      };
+    }
+  }
+  // Cascade for the first matching spell each turn (`grantsToSpells` with
+  // `firstEachTurn`): "The first spell you cast each turn has cascade"
+  // (Maelstrom Nexus), "… from exile …" (Wild-Magic Sorcerer — the filter's
+  // `castFrom`, so each earlier spell is asked where it was cast from), "…
+  // that mana from a Treasure was spent to cast …" (Rain of Riches).
+  m = /^The first (?:(.+?) )?spell you cast( from exile)? each turn( that mana from an? (\w+) was spent to cast)? has cascade\.$/.exec(line);
+  if (m !== null) {
+    const typed = m[1] === undefined ? {} : flashSpellsFilter(m[1]);
+    if (typed !== null && typed !== true) {
+      const filter = {
+        ...typed,
+        ...(m[2] !== undefined ? { castFrom: "exile" } : {}),
+        ...(m[4] !== undefined ? { manaFrom: CARD_TYPES.includes(m[4].toLowerCase()) ? { type: m[4].toLowerCase() } : { subtype: m[4] } } : {}),
+      };
+      return {
+        affects: { scope: "self" },
+        grantsToSpells: {
+          ...(Object.keys(filter).length > 0 ? { filter } : {}),
+          firstEachTurn: true,
+          triggered: [CASCADE_TRIGGER],
         },
         text,
       };
