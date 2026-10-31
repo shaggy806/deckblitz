@@ -1991,19 +1991,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Dread Return: River Kelpie draws twice',
     board({
-      you: { bf: ['River Kelpie', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], gy: ['Dread Return', 'Serra Angel'] },
+      you: { bf: ['River Kelpie', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre'], gy: ['Dread Return', 'Serra Angel'] },
     }),
   ),
   preset(
     'Dread Return: sacrificing River Kelpie',
     board({
-      you: { bf: ['River Kelpie', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], gy: ['Dread Return', 'Serra Angel'] },
+      you: { bf: ['River Kelpie', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre'], gy: ['Dread Return', 'Serra Angel'] },
     }),
   ),
   preset(
     'Dread Return: exactly three creatures need no prompt',
     board({
-      you: { bf: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], gy: ['Dread Return', 'Serra Angel'] },
+      you: { bf: ['Grizzly Bears', 'Hill Giant', 'Gray Ogre'], gy: ['Dread Return', 'Serra Angel'] },
     }),
   ),
   preset(
@@ -2030,7 +2030,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Zopandrel, Hunger Dominus: sacrifice two other creatures',
     board({
-      you: { bf: ['Zopandrel, Hunger Dominus', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves', 'Sol Ring', 'Forest*2'] },
+      you: { bf: ['Zopandrel, Hunger Dominus', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre', 'Sol Ring', 'Forest*2'] },
     }),
   ),
   preset(
@@ -2161,7 +2161,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Lithoform Engine: a copied divided trigger keeps its split',
     board({
       you: { bf: ['Lithoform Engine', 'Mountain*6', 'Island*2'], hand: ['Inferno Titan'] },
-      opp: { bf: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant', 'Gray Ogre'] },
     }),
   ),
   preset(
@@ -7473,7 +7473,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Geological Appraiser: discover offers a free cast',
     board({
-      you: { bf: ['Mountain*4'], hand: ['Geological Appraiser'], lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'] },
+      you: { bf: ['Mountain*4'], hand: ['Geological Appraiser'], lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre'] },
     }),
   ),
   preset(
@@ -7482,7 +7482,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: {
         bf: ["Curator of Sun's Creation", 'Mountain*4'],
         hand: ['Geological Appraiser'],
-        lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'],
+        lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre'],
       },
     }),
   ),
@@ -7492,7 +7492,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: {
         bf: ["Curator of Sun's Creation", 'Mountain*8'],
         hand: ['Geological Appraiser*2'],
-        lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves', 'Grizzly Bears', 'Llanowar Elves'],
+        lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Gray Ogre', 'Grizzly Bears', 'Llanowar Elves'],
       },
     }),
   ),
@@ -8666,11 +8666,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Troll of Khazad-dûm: it takes three blockers',
     board({
       you: { bf: ['Troll of Khazad-dûm'] },
-      opp: { human: true, bf: ['Grizzly Bears', 'Grizzly Bears', 'Grizzly Bears'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant', 'Gray Ogre'] },
     }),
   ),
   preset(
     "Tromokratis: all of Bob's creatures block it, or none",
-    board({ you: { bf: ['Tromokratis'] }, opp: { human: true, bf: ['Grizzly Bears', 'Grizzly Bears'] } }),
+    board({ you: { bf: ['Tromokratis'] }, opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] } }),
   ),
 ]

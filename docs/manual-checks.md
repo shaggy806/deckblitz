@@ -5774,9 +5774,9 @@ engine terms. A second thing to check is a second test.
 ## Blocking minimums and "all or none" (2026-10-30, need-keys Phase 2: build-family, features only)
 
 ### Troll of Khazad-dûm: it takes three blockers
-- **Do:** Attack Bob with Troll of Khazad-dûm. As Bob, put two Grizzly Bears on it, then the third.
+- **Do:** Attack Bob with Troll of Khazad-dûm. As Bob, block it with Grizzly Bears and Hill Giant, then add Gray Ogre.
 - **Expect:** With two, Confirm stays disabled and the bar reads "Troll of Khazad-dûm needs 3+ blockers". With all three it confirms.
 
 ### Tromokratis: all of Bob's creatures block it, or none
-- **Do:** Attack Bob with Tromokratis. As Bob, put one Grizzly Bears on it, then the other.
+- **Do:** Attack Bob with Tromokratis. As Bob, block it with Grizzly Bears, then add Hill Giant.
 - **Expect:** With one, Confirm stays disabled: "Tromokratis must be blocked by all your creatures or none". With both it confirms.
