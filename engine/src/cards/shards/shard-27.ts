@@ -776,6 +776,7 @@ import _poolVileDeacon from "../pool/vile-deacon.js";
 import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
+import _poolVisionQuest from "../pool/vision-quest.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVoiceOfTheWoods from "../pool/voice-of-the-woods.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
@@ -1614,6 +1615,7 @@ const shard: CardShard = {
     _poolVilespawnSpider,
     _poolVirulentEmissary,
     _poolVisceraSeer,
+    _poolVisionQuest,
     _poolVodalianMerchant,
     _poolVoiceOfTheWoods,
     _poolVolcanicFissure,
