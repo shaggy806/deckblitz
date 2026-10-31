@@ -298,6 +298,11 @@ Fill in the family and the skip list; keep the rest as written.
 >
 > Check with `npm run typecheck -w engine`, your test files, the engine suite
 > (`npx vitest run --maxWorkers=8` from `engine/`) and `card:parse-check`.
+> Skip the fuzzer and `card:verify`: the coordinator's verify runs both on
+> your cards. Search the card pool (~27,000 files) with the Grep tool, never
+> a shell `grep … *.ts` in `cards/pool/` (a minute or two each); keep
+> `grep -a` for `game.ts` alone. Batch reads: several `sed -n` ranges or
+> greps in one call, not one call each.
 > Don't run `npm run verify`, don't push, don't merge: commit locally as
 > `Engine, Cards: <the features in words> — <the proving cards>`, ending
 > with the co-author line, and leave no process running.
@@ -314,6 +319,49 @@ Fill in the family and the skip list; keep the rest as written.
 > units; the proving cards; the freed count (`cards:needs -- --stale`); the
 > commit hash; each check you ran and its result; whether it added a player
 > decision; anything you're unsure of, with file and line.
+
+### Two at a time
+
+The user's call, 2026-10-31, after measuring twelve agents: ~45 minutes a
+family, 60% of it waiting on tools. Run **two families at once**, each agent
+in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
+
+- **Pick** the first two families of the order not on the skip list. Never
+  two that each add a player decision or touch the client (they'd share the
+  E2E ports and `App.tsx`); pair such a family with an engine-only one.
+- **Push first**: a worktree is cut from `origin/main`, not local `main`.
+- **The brief** is the one above with this paragraph added:
+
+  > You work in your own git worktree, beside one other agent building
+  > another family in another worktree. Setup: `git merge --ff-only main`,
+  > then link the main checkout's node_modules with PowerShell `New-Item
+  > -ItemType Junction -Path node_modules -Target "<main>\node_modules"` (and
+  > the workspace links a client or server check needs:
+  > `client/node_modules/{engine,protocol}`, `server/node_modules/{engine,protocol}`,
+  > `protocol/node_modules/engine` to your worktree's own); never delete
+  > through a junction or remove the worktree. Run every typecheck, build and
+  > the engine suite through the machine gate: `node scripts/typecheck-turn.mjs
+  > npm run typecheck -w engine`, and the suite once, at the end, as `node
+  > ../scripts/typecheck-turn.mjs npx vitest run --maxWorkers=4` from
+  > `engine/`. **Don't edit** `BACKLOG.md`, `COMPLETED.md`, the plan,
+  > `docs/engine-gaps.md` or `docs/client-gaps.md`: put the lines you'd have
+  > written there in your report. Leave `cards/generated.ts`,
+  > `generated-index.ts` and `cards/shards/` out of your commit.
+
+- **Integrate** after both report (or one, while the other still runs, when
+  it touches different files): `git cherry-pick <commit>` each onto `main`
+  (`.git/info/attributes` holds `engine/src/game.ts merge=text`). Resolve by
+  keeping both sides: the `built` array's union, both parser templates and
+  pins, both engine.md edits. After any conflict in `game.ts`, check its CRLF
+  count equals its line count and it still holds one NUL byte. Then `npm run
+  gen:cards -w engine`, commit the generated files, run both families' test
+  files and `card:parse-check`, and write the shared docs from the reports.
+- **Verify and push after every pair**, as one run.
+- **Clean up** each worktree: unlink every junction by absolute path
+  (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
+  (`Get-ChildItem -Recurse -Attributes ReparsePoint`), confirm none is left,
+  then `git worktree remove` (never `--force`, which follows junctions into
+  main's node_modules) and delete the branch.
 
 ### Reviewing
 
