@@ -1792,6 +1792,35 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) reveals a card at random from their hand`).exec(s))) {
     return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "reveal" };
   }
+  // "Exile target player's graveyard" (Bojuka Bog, Nautiloid Ship): every card
+  // in it at once.
+  if ((m = re(`exile (target player|target opponent)'s graveyard`).exec(s))) {
+    return { kind: "exile-graveyard", target: slot(m[1]) };
+  }
+  // "[You may] put a creature card exiled with ~ onto the battlefield under
+  // your control" (Nautiloid Ship, Sisters of Stone Death): one of the cards
+  // linked to the source (rule 607.2a), chosen.
+  if ((m = re(`(you may )?put an? (creature|artifact|land|permanent) card exiled with ~ onto the battlefield under your control`).exec(s))) {
+    const kind = m[2].toLowerCase();
+    const filter =
+      kind === "permanent"
+        ? { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }
+        : { type: kind };
+    return {
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: m[1] === undefined ? 1 : 0,
+      max: 1,
+      filter,
+      destination: "battlefield",
+      leftover: "stay",
+    };
+  }
+  // "Put all cards exiled with ~ onto the battlefield" (Underworld Sentinel):
+  // under the putting player's control (rule 110.2a).
+  if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
+    return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
+  }
   // "Choose a card at random [that was] exiled with ~. Put that card into its
   // owner's hand" (Skyship Weatherlight, Gorex): rule 607.2a's linked cards.
   if ((m = re(`choose a card at random (?:that was )?exiled with ~(?:\\.|,)? (?:and )?put that card into its owner's hand`).exec(s))) {
@@ -5197,6 +5226,12 @@ export function parseFace(face, ctx = {}) {
       if (Array.isArray(node)) node.forEach(linkExiles);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile" && node.untilSourceLeaves !== true) node.linked = true;
+        // Nautiloid Ship's "exile target player's graveyard", Skyship
+        // Weatherlight's "search … exile them".
+        if (node.kind === "exile-graveyard") node.linked = true;
+        if (node.kind === "search-library" && (node.destination === "exile" || node.destination === "exile-face-down")) {
+          node.linked = true;
+        }
         for (const v of Object.values(node)) linkExiles(v);
       }
     };

@@ -92,6 +92,18 @@ export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
  *   the same object (rule 400.7).
  */
 export type AttachRef = EffectTargetRef | "created" | "put-this-way";
+/** A `look-and-choose`'s zone as `ResolutionContext.lookAndChoose` takes it:
+ * its `"targets"` resolved to `{ cards }`, its `"exiled-with-source"` to the
+ * linked cards in exile, `{ exiled }`. */
+export type LookAndChooseZone =
+  | "library"
+  | "graveyard"
+  | "hand"
+  | "graveyards"
+  | "command"
+  | "exile"
+  | { readonly cards: readonly ObjectId[] }
+  | { readonly exiled: readonly ObjectId[] };
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
 /** A `search-library`'s other player's zones and what follows the finds, as
@@ -2770,6 +2782,21 @@ export type EffectSpec =
        * the cards its `exile { linked }` put there, found though the Urn has
        * just been sacrificed. */
       readonly linked?: "hand" | "battlefield";
+      /** With `linked: "battlefield"`: "**put** all cards exiled with it
+       * onto the battlefield" (Underworld Sentinel) — under the control of
+       * the player putting them there, the effect's controller (rule
+       * 110.2a), not their owners' as a "return" is (610.3c). */
+      readonly under?: "you";
+      /** With `linked: "battlefield"`: only the **other** cards exiled with
+       * it — not the ones this resolution has just exiled (Mirror of Life
+       * Trapping's "exile it, then return all other permanent cards exiled
+       * with this artifact", Mysterious Limousine's "return each other card
+       * exiled with this Vehicle"). */
+      readonly others?: true;
+      /** With `linked: "battlefield"`: only the linked cards this takes
+       * ("all other **permanent** cards" — rule 110.4b), read in exile. The
+       * rest stay exiled with it. */
+      readonly filter?: CardFilter;
     }
   | {
       /**
@@ -2864,6 +2891,11 @@ export type EffectSpec =
       /** Only the cards matching this — Living Death's "each player exiles
        * all **creature cards** from their graveyard". */
       readonly filter?: CardFilter;
+      /** Exiled **with this source** (rule 607.2a), as `exile`'s `linked`:
+       * Nautiloid Ship's "exile target player's graveyard", whose "a
+       * creature card exiled with this Vehicle" reads them. Nothing is
+       * linked when the source isn't a permanent. */
+      readonly linked?: true;
     }
   | {
       /** Each player in `who` sacrifices every permanent matching `filter`
@@ -7257,8 +7289,19 @@ export type EffectSpec =
        * be chosen are shown. A face-down card there has no characteristics
        * (rule 406.3a), so it's choosable only when `filter` asks nothing
        * but its owner, and then by its group, at random (the
-       * `choose-from-zone` decision's `faceDownGroups`). */
-      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile";
+       * `choose-from-zone` decision's `faceDownGroups`).
+       * `"exiled-with-source"` is only the cards in exile linked to this
+       * effect's source (rule 607.2a — `GameObject.exiledWith`), in the
+       * stint the resolving ability refers to — "put a creature card exiled
+       * with ~ onto the battlefield under your control" (Nautiloid Ship,
+       * Yggdrasil, Rebirth Engine: `filter: { type: "creature" }`,
+       * `destination: "battlefield"`), its riders the usual ones:
+       * `withCounters` (Chaos Shrine's Black Crystal's finality counter),
+       * `enterTapped`, `enterAs` (Ashiok's "is a Nightmare in addition to
+       * its other types"), `attacking`, `then` (Yggdrasil's "it gains haste
+       * until end of turn"). Under the chooser's control (rule 110.2a), as
+       * `"exile"`'s are. */
+      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source";
       /** All of `min` or nothing: with fewer than `min` cards that may be
        * chosen, nothing is asked and nothing moves — a cost can't be paid in
        * part (rule 118.3), so "you may put **two** cards your opponents own
@@ -8095,7 +8138,11 @@ export interface EffectApi {
    * Returns `true` when it stopped to ask an "as this enters" choice first
    * (rule 614.12 — a Clone's copy): nothing has moved, and the step runs
    * again once it's answered. */
-  returnExiledBySource(linked?: boolean): boolean;
+  returnExiledBySource(
+    linked?: boolean,
+    /** The linked return's `under`, `others` and `filter`. */
+    options?: { readonly underYou?: boolean; readonly others?: boolean; readonly filter?: CardFilter },
+  ): boolean;
   /** Sacrifice one named permanent — see the `"sacrifice-target"`
    * {@link EffectSpec}. */
   sacrificeTarget(target: TargetRef, byItsController?: boolean): void;
@@ -8212,7 +8259,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
    * control, at once — see the `"sacrifice-all"` {@link EffectSpec}. */
   sacrificeAll(players: readonly PlayerId[], filter: CardFilter): void;
@@ -9253,8 +9300,9 @@ export interface EffectApi {
   singleOut(target: TargetRef): TargetRef;
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   lookAndChoose(
-    /** `{ cards }` — the look-and-choose's `"targets"`, already resolved. */
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
+    /** `{ cards }` — the look-and-choose's `"targets"`, already resolved;
+     * `{ exiled }` — its `"exiled-with-source"`, the linked cards. */
+    zone: LookAndChooseZone,
     count: number | undefined,
     min: number,
     max: number,
@@ -12057,7 +12105,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // first to ask an "as this enters" choice (a Clone's copy — rule
       // 614.12); it moved nothing, and runs again once that's answered.
       const parked = ctx.parkedCount();
-      if (ctx.returnExiledBySource(spec.linked === "battlefield")) ctx.resumeAfterDecisions(spec, parked);
+      const linkedOptions =
+        spec.linked === "battlefield"
+          ? {
+              ...(spec.under === "you" ? { underYou: true } : {}),
+              ...(spec.others === true ? { others: true } : {}),
+              ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+            }
+          : undefined;
+      if (ctx.returnExiledBySource(spec.linked === "battlefield", linkedOptions)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "choose-creature-type":
@@ -12114,7 +12170,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const scope = spec.target;
         ctx.simultaneously(() => {
           for (const player of ctx.playersInScope(scope)) {
-            ctx.exileGraveyard({ kind: "player", player }, spec.filter);
+            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true);
           }
         });
         return;
@@ -12123,7 +12179,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.target === "you"
           ? ({ kind: "player", player: ctx.controller } as const)
           : ctx.targets[spec.target];
-      if (target !== undefined) ctx.exileGraveyard(target, spec.filter);
+      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true);
       return;
     }
     case "sacrifice-all":
@@ -14446,7 +14502,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const zone =
         spec.zone === "targets"
           ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
-          : spec.zone;
+          : spec.zone === "exiled-with-source"
+            ? // Rule 607.2a: only what the linked ability exiled.
+              { exiled: ctx.cardsExiledWithSource() }
+            : spec.zone;
       ctx.lookAndChoose(
         zone,
         spec.count === undefined ? undefined : amountValue(spec.count, ctx),

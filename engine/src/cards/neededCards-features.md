@@ -707,6 +707,31 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Cards exiled with the source put onto the battlefield — built 2026-10-31
+
+The need-keys Phase 2 family `effect:put-onto-battlefield-options`, its top
+group, features only (rules 110.2a, 607.2a, 610.3c). **`look-and-choose`'s
+`zone: "exiled-with-source"`** offers only the cards linked to the source in
+the stint the ability refers to, under the chooser's control, with the exile
+branch now carrying `withCounters`, `enterAs` and `attacking` as the others
+do — Nautiloid Ship's "you may put a creature card exiled with this Vehicle
+onto the battlefield under your control", Chaos Shrine's Black Crystal's
+finality counter. **`return-exiled-by-source`'s linked battlefield return**
+takes `under: "you"` ("put all cards exiled with it onto the battlefield" —
+the putting player's control, 110.2a, Underworld Sentinel), `others` (not the
+cards this resolution just exiled) and `filter` ("all other permanent cards"
+— Mirror of Life Trapping). **`exile-graveyard`'s `linked`** exiles a
+graveyard with the source. Keys: effect:put-exiled-with-source-onto-battlefield,
+effect:return-other-cards-exiled-with-source, effect:exile-graveyard-linked.
+Proving cards: Nautiloid Ship, Chaos Shrine's Black Crystal, Underworld
+Sentinel, Mirror of Life Trapping (`put-exiled-with-source.test.ts`). Left:
+effect:return-with-counters-this-way (Lagrella's "when an exiled card enters
+under your control this way, put two +1/+1 counters on it" is a trigger on
+the until-leaves return), Ghost Vacuum's "1/1 Spirit in addition" (a base
+P/T as it enters), The Darkness Crystal's replacement exile and its target
+card in exile, Yggdrasil's linked library exile, Sisters of Stone Death's
+blocking filter.
+
 ### A card at random from a hand or from the cards exiled with the source — built 2026-10-31
 
 The need-keys Phase 2 family `effect:random-choice`, its top group, features

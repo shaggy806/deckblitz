@@ -2168,6 +2168,34 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseEffect("Target player reveals a card at random from their hand, then loses life equal to that card's mana value.", ctx()).effect?.kind).not.toBe("choose-random-card");
   });
 
+  it("cards exiled with ~ put onto the battlefield (Nautiloid Ship, Sisters of Stone Death, Underworld Sentinel)", () => {
+    const ship = face(
+      "When this Vehicle enters, exile target player's graveyard.\nWhenever this Vehicle deals combat damage to a player, you may put a creature card exiled with this Vehicle onto the battlefield under your control.",
+      "Artifact — Vehicle",
+    );
+    expect(ship.triggered[0].effect).toEqual({ kind: "exile-graveyard", target: 0, linked: true });
+    expect(ship.triggered[1].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 0,
+      max: 1,
+      filter: { type: "creature" },
+      destination: "battlefield",
+      leftover: "stay",
+    });
+    expect(parseEffect("Put a creature card exiled with ~ onto the battlefield under your control.", ctx()).effect).toMatchObject({
+      zone: "exiled-with-source",
+      min: 1,
+    });
+    expect(parseEffect("Put all cards exiled with it onto the battlefield.", ctx()).effect).toEqual({
+      kind: "return-exiled-by-source",
+      linked: "battlefield",
+      under: "you",
+    });
+    // "Under their owners' control" is a return, not this put.
+    expect(parseEffect("Put all cards exiled with it onto the battlefield under their owners' control.", ctx()).effect?.under).toBeUndefined();
+  });
+
   it("look at target player's hand (Glasses of Urza, Sorcerous Sight)", () => {
     const glasses = face("{T}: Look at target player's hand.", "Artifact");
     expect(glasses.activated[0].targets).toEqual(["player"]);

@@ -225,6 +225,7 @@ import type {
   FlickerCounters,
   FlickerOptions,
   LookAndChooseLeftoverIf,
+  LookAndChooseZone,
   CopyExceptions,
   ZoneSecondPick,
   BoundUnlessOption,
@@ -18276,10 +18277,13 @@ export class Game {
     filter: CardFilter | undefined,
     owner?: PlayerId,
     source?: ObjectId,
+    /** Only these — the cards exiled with a source (rule 607.2a). */
+    among?: readonly ObjectId[],
   ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
     const eligible: ObjectId[] = [];
     const groups = new Map<string, ObjectId[]>();
     for (const id of this.state.zones.shared.exile) {
+      if (among !== undefined && !among.includes(id)) continue;
       const object = this.state.objects[id];
       if (object === undefined || object.isToken || (owner !== undefined && object.owner !== owner)) continue;
       const faceDown = object.exiledFaceDown !== undefined || object.foretold === true;
@@ -26361,7 +26365,7 @@ export class Game {
           reflexive: { targets: [...specs], effect, text, ...(divided !== undefined ? { divided } : {}) },
         });
       },
-      returnExiledBySource: (linked) => {
+      returnExiledBySource: (linked, options) => {
         // A token exiled this way ceased to exist (rule 111.7) and never
         // comes back; anything that moved on from exile in the meantime is
         // no longer linked, because `moveObject` cleared the mark. They all
@@ -26372,18 +26376,42 @@ export class Game {
         const sourceObject = this.state.objects[source];
         const stint =
           refs.source ?? (sourceObject?.zone === "battlefield" ? (sourceObject.zoneChangeCount ?? 0) : undefined);
+        // "All other … cards exiled with" it: not the ones this resolution
+        // has just exiled (Mirror of Life Trapping).
+        const justExiled =
+          options?.others === true ? new Set(thisWayEntries(this.state, "exiled").map((e) => e.object)) : undefined;
         const returning = this.state.zones.shared.exile.filter((id) => {
           const object = this.state.objects[id];
           if (object === undefined || object.isToken) return false;
           if (linked !== true) return object.exiledBy === source;
           const link = object.exiledWith;
-          return stint !== undefined && link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          if (stint === undefined || link === undefined || link.source !== source || link.zoneChangeCount !== stint) {
+            return false;
+          }
+          if (justExiled?.has(id) === true) return false;
+          return (
+            options?.filter === undefined ||
+            matchesFilter(this.state, this.registry, id, options.filter, { you: controller, source })
+          );
         });
-        if (returning.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;
+        // "Put … onto the battlefield" names no controller: the player
+        // putting them there (rule 110.2a); a "return" is its owner's
+        // (610.3c).
+        const underYou = options?.underYou === true;
+        const enterer = (id: ObjectId): PlayerId => (underYou ? controller : this.state.objects[id].owner);
+        if (returning.some((id) => this.askEnterChoice(id, enterer(id)))) return true;
         this.withEnterBatch(() => {
           for (const id of returning) {
             this.state.objects[id].exiledBy = undefined;
-            if (this.moveObject(id, "battlefield")) {
+            const under = enterer(id);
+            if (this.moveObject(id, "battlefield", under !== this.state.objects[id].owner ? { under } : {})) {
+              // Kept there by a control effect, as a reanimation "under your
+              // control" is (see `putOntoBattlefieldByEffect`).
+              const entered = this.state.objects[id];
+              if (entered?.zone === "battlefield" && entered.controller !== under) {
+                this.gainControlByEffect(under, { kind: "object", object: id }, false, true);
+                entered.summoningSick = true;
+              }
               this.emit({ type: "permanent-entered-battlefield", object: id });
             }
           }
@@ -26404,7 +26432,7 @@ export class Game {
           attacking,
           attachTo,
         ),
-      exileGraveyard: (target, filter) => {
+      exileGraveyard: (target, filter, linked) => {
         if (target.kind !== "player") return;
         // Snapshot: `moveObject` mutates the graveyard array as it goes. The
         // whole graveyard goes at once — or every card in it matching
@@ -26412,9 +26440,25 @@ export class Game {
         const going = [...this.state.zones.perPlayer[target.player].graveyard].filter(
           (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }),
         );
+        const exiled: ObjectId[] = [];
         this.withGraveyardLeaveBatch(() => {
-          for (const id of going) this.moveObject(id, "exile");
+          for (const id of going) {
+            const moved = this.moveObject(id, "exile");
+            const object = this.state.objects[id];
+            if (moved && object?.zone === "exile" && object.isToken !== true) exiled.push(id);
+          }
         });
+        // "Exile … with this" (rule 607.2a): linked to the stint the
+        // resolving ability refers to, and counted by it for good.
+        if (linked === true) {
+          const src = this.state.objects[source];
+          const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+          if (src !== undefined && stint !== undefined && exiled.length > 0) {
+            for (const id of exiled) this.state.objects[id].exiledWith = { source, zoneChangeCount: stint };
+            const sofar = src.exiledWithCount?.stint === stint ? src.exiledWithCount.count : 0;
+            src.exiledWithCount = { stint, count: sofar + exiled.length };
+          }
+        }
       },
       sacrificeAll: (players, filter) => {
         // Every one at once, nobody choosing (rule 603.10a — each one's dies
@@ -28744,7 +28788,7 @@ export class Game {
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   private beginZoneChoice(
     player: PlayerId,
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
+    zone: LookAndChooseZone,
     count: number | undefined,
     min: number,
     max: number,
@@ -28778,13 +28822,17 @@ export class Game {
     // chosen is shown — the cards `player` owns when someone else is
     // choosing from them ("land cards that player owns"), else everyone's
     // that `filter` takes; a face-down one by its group, at random.
-    if (zone === "exile") {
+    // Or only the cards exiled with the source (rule 607.2a — Nautiloid
+    // Ship's "a creature card exiled with this Vehicle").
+    const linked = typeof zone === "object" && "exiled" in zone ? zone.exiled : undefined;
+    if (zone === "exile" || linked !== undefined) {
       const chooser = picker ?? player;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(
         chooser,
         filter,
         picker !== undefined ? player : undefined,
         source,
+        linked,
       );
       if (eligible.length === 0 || (needsMin && eligible.length < min)) return;
       const most = Math.min(max, eligible.length);
@@ -28811,6 +28859,9 @@ export class Game {
         // "Onto the battlefield under your control" (rule 110.2a).
         ...(destination === "battlefield" ? { enterUnder: enterUnder ?? chooser } : {}),
         ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
+        ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
+        ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
+        ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
         ...(then?.effect !== undefined ? { then: then.effect } : {}),
         ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
         ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
@@ -28823,7 +28874,7 @@ export class Game {
     const fromAnyGraveyard = zone === "graveyards" || typeof zone === "object";
     const zoneCards =
       typeof zone === "object"
-        ? zone.cards.filter((id) => this.state.objects[id]?.zone === "graveyard")
+        ? ("cards" in zone ? zone.cards : []).filter((id) => this.state.objects[id]?.zone === "graveyard")
         : zone === "graveyards"
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
         : zone === "command"
