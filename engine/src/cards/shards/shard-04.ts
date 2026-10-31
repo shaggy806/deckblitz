@@ -228,6 +228,7 @@ import _poolFemerefHealer from "../pool/femeref-healer.js";
 import _poolFesterhideBoar from "../pool/festerhide-boar.js";
 import _poolFickleEfreet from "../pool/fickle-efreet.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
+import _poolFiendslayerPaladin from "../pool/fiendslayer-paladin.js";
 import _poolFierceEmpath from "../pool/fierce-empath.js";
 import _poolFigureOfDestiny from "../pool/figure-of-destiny.js";
 import _poolFiligreeCrawler from "../pool/filigree-crawler.js";
@@ -1073,6 +1074,7 @@ const shard: CardShard = {
     _poolFesterhideBoar,
     _poolFickleEfreet,
     _poolFieldSurgeon,
+    _poolFiendslayerPaladin,
     _poolFierceEmpath,
     _poolFigureOfDestiny,
     _poolFiligreeCrawler,

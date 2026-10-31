@@ -711,6 +711,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   creature or a player's creatures, aimed at a player or planeswalker, for this turn, a player's
   next turn or next combat phase (3 freed, 6 proving cards; Public Enemy's static, Galactus and
   Silver Surfer left open).
+- **2026-10-31: "can't be the target of …" statics** (a cloud session on a fixed list of three
+  families) — `keyword:hexproof-from-colors`' group: `hexproofFrom`'s `spellsOnly`,
+  `abilitiesOnly` and `anyController` qualifiers and a quality-less instance, and the
+  `graveyardCardsUntargetable` static (4 keys, 12 freed, 5 proving cards; Display of Dominance's
+  one-shot, Lurker and the Flagbearers left open).
 
 ## Rough size
 

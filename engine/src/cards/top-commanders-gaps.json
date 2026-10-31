@@ -762,7 +762,11 @@
   "effect:search-destination-choice",
   "effect:search-split-control",
   "effect:search-split-to-graveyard",
-  "effect:search-with-counters"
+  "effect:search-with-counters",
+  "static:cant-be-targeted-by-filter",
+  "keyword:hexproof-from-multicolored",
+  "static:hexproof-from-spells-only",
+  "static:untargetable-by-color-any-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

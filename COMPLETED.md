@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: "can't be the target of …" statics** (2026-10-31;
+  `static:cant-be-targeted-by-filter`, `keyword:hexproof-from-multicolored`,
+  `static:hexproof-from-spells-only`, `static:untargetable-by-color-any-player`) — `hexproofFrom`'s
+  `spellsOnly`, `abilitiesOnly` and `anyController` qualifiers and a quality-less instance ("can't be
+  the targets of spells"), judged alone (`Characteristics.hexproofFrom.qualified`), and the
+  `graveyardCardsUntargetable` static ("cards in graveyards can't be the targets of spells or
+  abilities"); 12 freed. Fiendslayer Paladin, Mercenary Informer, Dense Foliage, Ground Seal,
+  Silent Gravestone.
 - **Need-keys Phase 2: attack requirements narrowed** (2026-10-31;
   `effect:must-attack-specific-player`, `effect:target-attacks-target-player-this-turn`,
   `effect:must-attack-target-players-creatures`, `effect:must-attack-controllers-next-combat`,

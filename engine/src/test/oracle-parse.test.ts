@@ -4598,3 +4598,41 @@ describe("a library search's finds going card by card (search-library's instead)
     expect(charm.effect?.instead).toEqual({ destination: "battlefield", enterTapped: true, filter: { type: "land" }, pick: "all" });
   });
 });
+
+describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsUntargetable)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads spells only, any player's, abilities only and no quality", () => {
+    const paladin = face(
+      "Fiendslayer Paladin",
+      "Creature — Human Knight",
+      "First strike\nLifelink\nThis creature can't be the target of black or red spells your opponents control.",
+    );
+    expect(paladin.static[0]).toMatchObject({ affects: { scope: "self" }, hexproofFrom: { colors: ["B", "R"], spellsOnly: true } });
+    const informer = face(
+      "Suq'Ata Firewalker",
+      "Creature — Human Wizard",
+      "This creature can't be the target of red spells or abilities from red sources.",
+    );
+    expect(informer.static[0].hexproofFrom).toEqual({ colors: ["R"], anyController: true });
+    const ward = face("Ward A", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of abilities from artifact sources.").static[0];
+    expect(ward.hexproofFrom).toEqual({ types: ["artifact"], abilitiesOnly: true, anyController: true });
+    expect(face("Dense Foliage", "Enchantment", "Creatures can't be the targets of spells.").static[0]).toMatchObject({
+      affects: { scope: "all-creatures" },
+      hexproofFrom: { spellsOnly: true, anyController: true },
+    });
+    expect(face("Tetsuo B", "Creature — Human", "This creature can't be the target of Aura spells.").static[0].hexproofFrom).toEqual({
+      filter: { subtype: "Aura" },
+      spellsOnly: true,
+      anyController: true,
+    });
+    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].hexproofFrom).toEqual({});
+  });
+
+  it("reads the graveyard rule", () => {
+    expect(face("Ground Seal", "Enchantment", "Cards in graveyards can't be the targets of spells or abilities.").static[0]).toMatchObject({
+      graveyardCardsUntargetable: {},
+    });
+  });
+});

@@ -5766,6 +5766,42 @@ function grantsActivatedOfPhrase(phrase) {
   };
 }
 
+/** What a "can't be the target(s) of …" names, as a `hexproofFrom` with its
+ * qualifiers, or `null`: "spells", "[quality] spells", "abilities from
+ * [quality] sources", "[quality] spells or abilities from [quality]
+ * sources" (one quality, said twice), each with or without "your opponents
+ * control" (without it, `anyController`). A quality is colour words joined
+ * by "or" ("blue or black"), a card type, or "Aura". */
+function untargetablePhrase(phrase) {
+  let rest = phrase;
+  const opponents = / your opponents control$/.test(rest);
+  if (opponents) rest = rest.slice(0, -" your opponents control".length);
+  const quality = (words) => {
+    if (words === "Aura") return { filter: { subtype: "Aura" } };
+    const parts = words.split(/,? or |, /);
+    if (parts.every((w) => COLOR_WORDS[w] !== undefined)) return { colors: parts.map((w) => COLOR_WORDS[w]) };
+    if (parts.every((w) => /^(artifact|creature|enchantment|land|planeswalker|instant|sorcery)$/.test(w))) return { types: parts };
+    return null;
+  };
+  const owner = opponents ? {} : { anyController: true };
+  let m;
+  if (rest === "spells") return { spellsOnly: true, ...owner };
+  if (rest === "spells or abilities") return { ...owner };
+  if ((m = /^abilities from (.+) sources$/.exec(rest)) !== null) {
+    const q = quality(m[1]);
+    return q === null ? null : { ...q, abilitiesOnly: true, ...owner };
+  }
+  if ((m = /^(.+) spells or abilities from (.+) sources$/.exec(rest)) !== null) {
+    const q = m[1] === m[2] ? quality(m[1]) : null;
+    return q === null ? null : { ...q, ...owner };
+  }
+  if ((m = /^(.+) spells$/.exec(rest)) !== null) {
+    const q = quality(m[1]);
+    return q === null ? null : { ...q, spellsOnly: true, ...owner };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // "… as long as [condition]." on a static the rest reads whole and that
@@ -5830,6 +5866,32 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // A printed "can't be the target of …" that isn't the keyword
+  // (`hexproofFrom` with its qualifiers — rules 601.2c, 602.2b): "~ can't be
+  // the target of black or red spells your opponents control" (Fiendslayer
+  // Paladin), "… of black spells or abilities from black sources"
+  // (Mercenary Informer, any player's), "Creatures can't be the targets of
+  // spells" (Dense Foliage), "… of abilities from artifact sources".
+  m = /^(~|Enchanted creature|Equipped creature|Creatures you control|Creatures) can't be the targets? of (.+?)\.$/.exec(line);
+  if (m !== null) {
+    const hexproof = untargetablePhrase(m[2]);
+    if (hexproof !== null) {
+      const affects =
+        m[1] === "~"
+          ? { scope: "self" }
+          : m[1] === "Creatures you control"
+            ? { scope: "creatures-you-control" }
+            : m[1] === "Creatures"
+              ? { scope: "all-creatures" }
+              : { scope: "attached" };
+      return { affects, hexproofFrom: hexproof, text };
+    }
+  }
+  // "Cards in graveyards can't be the targets of spells or abilities"
+  // (Ground Seal, Silent Gravestone — `graveyardCardsUntargetable`).
+  if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
+    return { affects: { scope: "self" }, graveyardCardsUntargetable: {}, text };
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).

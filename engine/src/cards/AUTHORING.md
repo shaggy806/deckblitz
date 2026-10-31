@@ -4406,6 +4406,24 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   opponents control or abilities from nongreen sources" `{ filter: {
   notColors: ["G"] } }`. Targeting only — not blocking, damage or enchanting.
   Granting it until end of turn (Skrelv's chosen color) isn't built.
+  The printed "can't be the target of …" lines that aren't the keyword take
+  qualifiers (rules 601.2c, 602.2b): `spellsOnly` ("… of black or red spells
+  your opponents control" — Fiendslayer Paladin; Tetsuo's "Aura spells" is
+  `{ filter: { subtype: "Aura" }, spellsOnly: true, anyController: true }`),
+  `abilitiesOnly` ("… of abilities from artifact sources" — `types:
+  ["artifact"]`), `anyController` (no "your opponents control" — Mercenary
+  Informer's "black spells or abilities from black sources" stops its own
+  controller too). No colour, type or filter names every spell or ability:
+  Dense Foliage's "Creatures can't be the targets of spells" is `affects: {
+  scope: "all-creatures" }, hexproofFrom: { spellsOnly: true, anyController:
+  true }`; Shielding Plax's "spells or abilities your opponents control" is
+  `{}`. A one-shot "… this turn" form isn't built.
+- `graveyardCardsUntargetable: { filter?, byOpponents? }` — "Cards in
+  graveyards can't be the targets of spells or abilities" (Ground Seal, Silent
+  Gravestone, Dennick): no spell or ability may target a card in any graveyard
+  while this permanent is on the battlefield; `filter` narrows the cards
+  (Tomik's "land cards in graveyards" `{ type: "land" }`), `byOpponents` only
+  stops its controller's opponents ("… your opponents control").
 - `bandsWithOther: CardFilter` — "bands with other [quality]" (rule 702.22b),
   the quality as a filter: the Legends lands grant "bands with other legendary
   creatures" `{ type: "creature", supertype: "legendary" }` to a colour's

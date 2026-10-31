@@ -145,6 +145,7 @@ import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonPossessedWitch from "../pool/demon-possessed-witch.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
+import _poolDenseFoliage from "../pool/dense-foliage.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
 import _poolDestinedLead from "../pool/destined-lead.js";
@@ -406,6 +407,7 @@ import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
 import _poolMentalVapors from "../pool/mental-vapors.js";
+import _poolMercenaryInformer from "../pool/mercenary-informer.js";
 import _poolMercilessEternal from "../pool/merciless-eternal.js";
 import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
@@ -927,6 +929,7 @@ const shard: CardShard = {
     _poolDementiaBat,
     _poolDemonPossessedWitch,
     _poolDemonsHorn,
+    _poolDenseFoliage,
     _poolDesmondMiles,
     _poolDespair,
     _poolDestinedLead,
@@ -1188,6 +1191,7 @@ const shard: CardShard = {
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
     _poolMentalVapors,
+    _poolMercenaryInformer,
     _poolMercilessEternal,
     _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,

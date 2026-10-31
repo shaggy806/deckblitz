@@ -5553,6 +5553,7 @@ import _poolDenProtector from "./pool/den-protector.js";
 import _poolDenethorRulingSteward from "./pool/denethor-ruling-steward.js";
 import _poolDenryKlinEditorInChief from "./pool/denry-klin-editor-in-chief.js";
 import _poolDenseCanopy from "./pool/dense-canopy.js";
+import _poolDenseFoliage from "./pool/dense-foliage.js";
 import _poolDenyEntry from "./pool/deny-entry.js";
 import _poolDenyExistence from "./pool/deny-existence.js";
 import _poolDenyReality from "./pool/deny-reality.js";
@@ -7855,6 +7856,7 @@ import _poolFiendHunter from "./pool/fiend-hunter.js";
 import _poolFiendishDuo from "./pool/fiendish-duo.js";
 import _poolFiendishPanda from "./pool/fiendish-panda.js";
 import _poolFiendlash from "./pool/fiendlash.js";
+import _poolFiendslayerPaladin from "./pool/fiendslayer-paladin.js";
 import _poolFierceEmpath from "./pool/fierce-empath.js";
 import _poolFierceGuardianship from "./pool/fierce-guardianship.js";
 import _poolFierceInvocation from "./pool/fierce-invocation.js";
@@ -9926,6 +9928,7 @@ import _poolGrotesqueHybrid from "./pool/grotesque-hybrid.js";
 import _poolGrotesqueMutation from "./pool/grotesque-mutation.js";
 import _poolGroundAssault from "./pool/ground-assault.js";
 import _poolGroundRift from "./pool/ground-rift.js";
+import _poolGroundSeal from "./pool/ground-seal.js";
 import _poolGroundbreaker from "./pool/groundbreaker.js";
 import _poolGroundchuckDirtbag from "./pool/groundchuck-dirtbag.js";
 import _poolGroundedForLife from "./pool/grounded-for-life.js";
@@ -14192,6 +14195,7 @@ import _poolMephiticVapors from "./pool/mephitic-vapors.js";
 import _poolMerEkNightblade from "./pool/mer-ek-nightblade.js";
 import _poolMercadianBazaar from "./pool/mercadian-bazaar.js";
 import _poolMercadianLift from "./pool/mercadian-lift.js";
+import _poolMercenaryInformer from "./pool/mercenary-informer.js";
 import _poolMerchantOfManyHats from "./pool/merchant-of-many-hats.js";
 import _poolMerchantOfSecrets from "./pool/merchant-of-secrets.js";
 import _poolMerchantOfTheVale from "./pool/merchant-of-the-vale.js";
@@ -20478,6 +20482,7 @@ import _poolSilentChantZubera from "./pool/silent-chant-zubera.js";
 import _poolSilentClearing from "./pool/silent-clearing.js";
 import _poolSilentDart from "./pool/silent-dart.js";
 import _poolSilentDeparture from "./pool/silent-departure.js";
+import _poolSilentGravestone from "./pool/silent-gravestone.js";
 import _poolSilentHallcreeper from "./pool/silent-hallcreeper.js";
 import _poolSilentObserver from "./pool/silent-observer.js";
 import _poolSilentSentinel from "./pool/silent-sentinel.js";
@@ -33041,6 +33046,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDenethorRulingSteward,
   _poolDenryKlinEditorInChief,
   _poolDenseCanopy,
+  _poolDenseFoliage,
   _poolDenyEntry,
   _poolDenyExistence,
   _poolDenyReality,
@@ -35343,6 +35349,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFiendishDuo,
   _poolFiendishPanda,
   _poolFiendlash,
+  _poolFiendslayerPaladin,
   _poolFierceEmpath,
   _poolFierceGuardianship,
   _poolFierceInvocation,
@@ -37414,6 +37421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrotesqueMutation,
   _poolGroundAssault,
   _poolGroundRift,
+  _poolGroundSeal,
   _poolGroundbreaker,
   _poolGroundchuckDirtbag,
   _poolGroundedForLife,
@@ -41680,6 +41688,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMerEkNightblade,
   _poolMercadianBazaar,
   _poolMercadianLift,
+  _poolMercenaryInformer,
   _poolMerchantOfManyHats,
   _poolMerchantOfSecrets,
   _poolMerchantOfTheVale,
@@ -47966,6 +47975,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilentClearing,
   _poolSilentDart,
   _poolSilentDeparture,
+  _poolSilentGravestone,
   _poolSilentHallcreeper,
   _poolSilentObserver,
   _poolSilentSentinel,
@@ -60542,6 +60552,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/denethor-ruling-steward": _poolDenethorRulingSteward,
   "pool/denry-klin-editor-in-chief": _poolDenryKlinEditorInChief,
   "pool/dense-canopy": _poolDenseCanopy,
+  "pool/dense-foliage": _poolDenseFoliage,
   "pool/deny-entry": _poolDenyEntry,
   "pool/deny-existence": _poolDenyExistence,
   "pool/deny-reality": _poolDenyReality,
@@ -62844,6 +62855,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fiendish-duo": _poolFiendishDuo,
   "pool/fiendish-panda": _poolFiendishPanda,
   "pool/fiendlash": _poolFiendlash,
+  "pool/fiendslayer-paladin": _poolFiendslayerPaladin,
   "pool/fierce-empath": _poolFierceEmpath,
   "pool/fierce-guardianship": _poolFierceGuardianship,
   "pool/fierce-invocation": _poolFierceInvocation,
@@ -64915,6 +64927,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grotesque-mutation": _poolGrotesqueMutation,
   "pool/ground-assault": _poolGroundAssault,
   "pool/ground-rift": _poolGroundRift,
+  "pool/ground-seal": _poolGroundSeal,
   "pool/groundbreaker": _poolGroundbreaker,
   "pool/groundchuck-dirtbag": _poolGroundchuckDirtbag,
   "pool/grounded-for-life": _poolGroundedForLife,
@@ -69181,6 +69194,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mer-ek-nightblade": _poolMerEkNightblade,
   "pool/mercadian-bazaar": _poolMercadianBazaar,
   "pool/mercadian-lift": _poolMercadianLift,
+  "pool/mercenary-informer": _poolMercenaryInformer,
   "pool/merchant-of-many-hats": _poolMerchantOfManyHats,
   "pool/merchant-of-secrets": _poolMerchantOfSecrets,
   "pool/merchant-of-the-vale": _poolMerchantOfTheVale,
@@ -75467,6 +75481,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silent-clearing": _poolSilentClearing,
   "pool/silent-dart": _poolSilentDart,
   "pool/silent-departure": _poolSilentDeparture,
+  "pool/silent-gravestone": _poolSilentGravestone,
   "pool/silent-hallcreeper": _poolSilentHallcreeper,
   "pool/silent-observer": _poolSilentObserver,
   "pool/silent-sentinel": _poolSilentSentinel,

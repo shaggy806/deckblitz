@@ -321,6 +321,32 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Can't be the target of …" statics — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:hexproof-from-colors`, its one group,
+features only. The printed restrictions that aren't the keyword (rules 601.2c,
+602.2b) are `hexproofFrom` with qualifiers: **`spellsOnly`** ("… of black or red
+spells your opponents control"), **`abilitiesOnly`** ("… of abilities from
+artifact sources"), **`anyController`** (no "your opponents control": its own
+controller's too), and no colour, type or filter for every spell or ability
+("can't be the targets of spells"). A qualified instance is kept apart from the
+keyword's union (`Characteristics.hexproofFrom.qualified`) and judged alone in
+`hexproofFromBlocks`, which tells a spell's targeting from an ability's by
+`TargetSource.spell` (set by `cardSource`). New static
+**`graveyardCardsUntargetable: { filter?, byOpponents? }`** — "cards in
+graveyards can't be the targets of spells or abilities" — read by
+`isLegalTarget` (`graveyardCardShielded`). "Hexproof from multicolored" was
+already `hexproofFrom: { filter: { multicolored: true } }`. The scaffolder reads
+"~ / Enchanted creature / Creatures [you control] can't be the target(s) of …"
+and the graveyard line. Keys: static:cant-be-targeted-by-filter,
+keyword:hexproof-from-multicolored, static:hexproof-from-spells-only,
+static:untargetable-by-color-any-player. Proving cards: Fiendslayer Paladin,
+Mercenary Informer, Dense Foliage, Ground Seal, Silent Gravestone. Still open:
+a one-shot "… can't be the targets of blue or black spells your opponents
+control this turn" over permanents you control (Display of Dominance — a
+turn-wide rule, not a characteristic), "unless it attacked or blocked this
+turn" (Lurker), the Flagbearers' targeting requirement.
+
 ### Combat damage as though unblocked — built 2026-10-30
 
 The need-keys Phase 2 family `static:assign-damage-as-though-unblocked`,

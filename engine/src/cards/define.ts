@@ -2643,11 +2643,41 @@ export interface StaticAbility {
    * `{ types: [...] }`; a `filter` the qualities neither names (Thrun's
    * "nongreen": `{ filter: { notColors: ["G"] } }`). The clauses are ORed
    * and evaluated as `protection`'s are (`protectionBlocks`). Unlike
-   * protection it stops targeting only — not blocking, enchanting or damage. */
+   * protection it stops targeting only — not blocking, enchanting or damage.
+   *
+   * The printed "can't be the target of …" statics that aren't the keyword
+   * (a restriction on the legal targets a player may choose — rules 601.2c,
+   * 602.2b)
+   * are the same instance with qualifiers: `spellsOnly` ("…of black or red
+   * **spells** your opponents control" — Fiendslayer Paladin; Tetsuo
+   * Umezawa's "Aura spells", `filter: { subtype: "Aura" }`),
+   * `abilitiesOnly` ("…of **abilities** from artifact sources" — Artifact
+   * Ward), and `anyController` (no "your opponents control": every
+   * player's, its own controller's included — Mercenary Informer's "black
+   * spells or abilities from black sources"). With no colour, type or
+   * filter it names every spell or ability ("can't be the target of
+   * spells" — Spectral Shield, Dense Foliage). */
   readonly hexproofFrom?: {
     readonly colors?: readonly Color[];
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
+    readonly spellsOnly?: true;
+    readonly abilitiesOnly?: true;
+    readonly anyController?: true;
+  };
+  /**
+   * "Cards in graveyards can't be the targets of spells or abilities"
+   * (Ground Seal, Silent Gravestone, Dennick) — a restriction on legal targets (rules 115.2, 601.2c) this static
+   * lays on every card in every graveyard while its permanent is on the
+   * battlefield; `filter` narrows the cards ("land cards in graveyards" —
+   * Tomik, `{ type: "land" }`), and `byOpponents` only stops spells and
+   * abilities the source's controller's opponents control ("…your
+   * opponents control"). Read by `isLegalTarget` (`graveyardCardShielded`).
+   * `affects` is irrelevant to it (`"self"` by convention).
+   */
+  readonly graveyardCardsUntargetable?: {
+    readonly filter?: CardFilter;
+    readonly byOpponents?: true;
   };
   /** "Bands with other [quality]" (rule 702.22b-c) for the affected
    * creatures, the quality as a filter: the Legends lands' "bands with other
