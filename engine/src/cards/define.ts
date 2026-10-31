@@ -2099,6 +2099,26 @@ export interface StaticAbility {
     readonly only?: "loyalty";
   };
   /**
+   * **Static** abilities this static grants to every object it `affects`
+   * (rule 613.1f, layer 6) — Inspiring Leader's "commander creatures you own
+   * have 'Creature tokens you control get +2/+2'", Rune of Might's "as long
+   * as enchanted permanent is an Equipment, it has 'Equipped creature gets
+   * +1/+1 and has trample'", Sedge Sliver's "all Sliver creatures have 'This
+   * creature gets +1/+1 as long as you control a Swamp'".
+   *
+   * Each granted static works from the object that has it, as its own would
+   * (rule 113.10 — the granted text's "this creature" and "you" are that
+   * object and its controller, "equipped creature" what it's attached to),
+   * its effects timestamped by the later of that object's and this static's
+   * source's (rule 613.7a). A loss of all abilities on the object later than
+   * the grant takes it away (613.7). Read through `grantedStatics`, so every
+   * scan that reads a `grant-static`'s statics reads these: P/T, keywords and
+   * restrictions in the layer fold, "you can't lose the game", untap
+   * restrictions and block rules. Not a layer-4 part (no card grants one), a
+   * cost modification, or another `grantsStatic`.
+   */
+  readonly grantsStatic?: readonly StaticAbility[];
+  /**
    * Triggered abilities this static grants to every object it `affects` —
    * Tyrant's Familiar's Lieutenant clause, "… and has 'Whenever this creature
    * attacks, it deals 7 damage to target creature defending player

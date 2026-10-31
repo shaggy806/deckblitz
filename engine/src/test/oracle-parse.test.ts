@@ -4729,6 +4729,37 @@ describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, 
     });
   });
 
+  it("reads a static granting a static (grantsStatic)", () => {
+    expect(face("Inspiring Leader", "Legendary Enchantment — Background", 'Commander creatures you own have "Creature tokens you control get +2/+2."').static[0]).toEqual({
+      affects: { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+      grantsStatic: [{ affects: { scope: "creatures-you-control", tokenOnly: true }, grantPt: [2, 2], text: "Creature tokens you control get +2/+2." }],
+      text: 'Commander creatures you own have "Creature tokens you control get +2/+2."',
+    });
+    expect(face("Test Sliver", "Creature — Sliver", 'All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."').static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      grantsStatic: [
+        {
+          affects: { scope: "self" },
+          condition: { kind: "controls", filter: { subtype: "Swamp" }, atLeast: 1 },
+          grantPt: [1, 1],
+          text: "This creature gets +1/+1 as long as you control a Swamp.",
+        },
+      ],
+    });
+    expect(
+      face("Cloudsteel Kirin", "Artifact Creature — Equipment Kirin", 'Equipped creature has flying and "You can\'t lose the game and your opponents can\'t win the game."').static[0],
+    ).toMatchObject({ affects: { scope: "attached" }, grantKeywords: ["flying"], grantsStatic: [{ cantLoseGame: true, opponentsCantWinGame: true }] });
+    const rune = face("Rune of Might", "Enchantment — Aura Rune", 'Enchant permanent\nWhen this Aura enters, draw a card.\nAs long as enchanted permanent is a creature, it gets +1/+1 and has trample.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+1 and has trample."');
+    expect(rune.complete).toBe(true);
+    expect(rune.static[1]).toMatchObject({
+      affects: { scope: "attached" },
+      condition: { kind: "source", filter: { attachedTo: { subtype: "Equipment" } } },
+      grantsStatic: [{ affects: { scope: "attached" }, grantPt: [1, 1], grantKeywords: ["trample"] }],
+    });
+    // A quoted line it can't read: left alone.
+    expect(face("Test", "Enchantment", 'Creatures you control have "This creature can\'t be the target of anything weird."').static).toEqual([]);
+  });
+
   it("reads an attach-only-to restriction", () => {
     expect(face("Gate Smasher", "Artifact — Equipment", "This Equipment can be attached only to a creature with toughness 4 or greater.").static[0]).toEqual({
       affects: { scope: "self" },

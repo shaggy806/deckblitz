@@ -462,6 +462,25 @@ static:chosen-creature-type-reads, static:chosen-type-in-addition. Still open:
 decision:choose-name-and-type-on-attach (Psychic Paper), two colours chosen as
 it enters (Seal of the Guildpact, Tablet of the Guilds).
 
+### A static granting a static — built 2026-10-31
+
+The need-keys Phase 2 family `static:grant-static-ability`, features only.
+`StaticAbility.grantsStatic` grants static abilities to every object a
+static affects (rule 613.1f, layer 6), each working from the object that has
+it (113.10 — its "you", "this creature" and "equipped creature"), timestamped
+by the later of the two (613.7a) and lost to a later loss of all abilities.
+`grantedStatics` now returns these beside a `grant-static`'s, so the layer
+fold (`contributingStaticSources`), `playerStaticHolds`, `hasOwnStatic` and
+the block rules read them; `staticGrantSources` is gated by an epoch-memoized
+scan and guarded against re-entry (`staticGrantsInProgress`). Key:
+static:grant-static-ability. Proving cards: Inspiring Leader, Criminal Past,
+Sedge Sliver, Cloudsteel Kirin, Rune of Might, Rune of Speed, Rune of Flight,
+Rune of Mortality. Still open: a granted cost reduction (Acolyte of Bahamut —
+`costModificationFor` reads printed statics only), a granted prevention
+replacement (Caduceus, Staff of Hermes), Blood tokens becoming Equipment with
+a granted static and equip (Arterial Alchemy — layer 4 plus the grant), job
+select (Dancer's Chakrams), absorb (Lymph Sliver).
+
 ### Attach hosts: chosen as it enters, a player, what was put this way, chosen as it resolves — built 2026-10-31
 
 The need-keys Phase 2 family `effect:attach-extensions`, features only. An

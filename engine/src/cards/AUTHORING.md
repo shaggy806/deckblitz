@@ -4254,6 +4254,23 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   trigger and the stack object both carry — never shifts. The one-shot
   "gains '[trigger]' until end of turn" equivalent is the `grant-triggered`
   *effect* (§6).
+- `grantsStatic: [StaticAbility, ...]` — the same in layer 6 for **static**
+  abilities (rule 613.1f): Inspiring Leader's "commander creatures you own
+  have 'Creature tokens you control get +2/+2'", Rune of Might's "as long as
+  enchanted permanent is an Equipment, it has 'Equipped creature gets +1/+1
+  and has trample'", Sedge Sliver, Cloudsteel Kirin, Criminal Past. Each
+  granted static works from the object that has it (rule 113.10): its
+  `affects` and `condition` read from there — `"self"` is that object, "you"
+  its controller, `"attached"` what it's attached to — and two granting
+  sources grant two instances. Its effects take the later of the two
+  timestamps; a later loss of all abilities takes it away (613.7). Read
+  through `grantedStatics`, so it reaches the layer fold (P/T, keywords,
+  restrictions), "can't lose the game", untap restrictions and block rules —
+  not a cost modification (Acolyte of Bahamut), a layer-4 part, or another
+  `grantsStatic`. Each granted static needs its own `text` (the quoted line).
+  The scaffolder reads "Equipped creature / Commander creatures you own / All
+  Sliver creatures / Creatures you control has|have [keyword and] '<static>'"
+  when it can read the quoted line. `granted-statics.test.ts`.
 - `setBasePtFromCount: { countOf, plusPower, plusToughness, only? }` — a layer-7b CDA
   (`"self"` only). `only: "power"` defines just the power, the toughness
   staying as printed (Eluge, the Shoreless Sea's "*/5"); `"toughness"` the

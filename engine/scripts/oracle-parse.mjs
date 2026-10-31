@@ -5897,6 +5897,45 @@ function grantsActivatedOfPhrase(phrase) {
   };
 }
 
+/** Whether a parsed static changes types (a layer-4 part), which a granted
+ * static may not have (`StaticAbility.grantsStatic`). */
+function hasLayerFourPartOf(st) {
+  return ["addTypes", "addSubtypes", "setTypes", "setSubtypes", "loseAllCreatureTypes", "setsChosenLandType"].some(
+    (k) => st[k] !== undefined,
+  );
+}
+
+/**
+ * A quoted static another static grants (`grantsStatic`), read as a static of
+ * the object that has it: any line `parseStatic` reads ("This creature" as
+ * ~), and the few shapes only seen quoted — "Creature tokens you control get
+ * +2/+2" (Inspiring Leader), "This creature gets +1/+1 as long as you control
+ * a Swamp" (Sedge Sliver), "You can't lose the game and your opponents can't
+ * win the game" (Cloudsteel Kirin). `null` for anything else.
+ */
+function parseGrantedStatic(quoted) {
+  const own = parseStatic(quoted.replace(/^This creature /, "~ "), quoted);
+  if (own !== null) return own;
+  let m;
+  if ((m = /^Creature tokens you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(quoted))) {
+    return { affects: { scope: "creatures-you-control", tokenOnly: true }, grantPt: [Number(m[1]), Number(m[2])], text: quoted };
+  }
+  if ((m = /^(?:This creature|~) gets ([+-]\d+)\/([+-]\d+) as long as you control an? ([A-Z][a-z]+)\.$/.exec(quoted))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "controls", filter, atLeast: 1 },
+      grantPt: [Number(m[1]), Number(m[2])],
+      text: quoted,
+    };
+  }
+  if (quoted === "You can't lose the game and your opponents can't win the game.") {
+    return { affects: { scope: "self" }, cantLoseGame: true, opponentsCantWinGame: true, text: quoted };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // "… as long as [condition]." on a static the rest reads whole and that
@@ -5960,6 +5999,17 @@ function parseStatic(line, text) {
         },
         text,
       };
+    }
+  }
+  // The Runes: "As long as enchanted permanent is a creature, it gets +1/+1
+  // and has trample" / "… is an Equipment, it has 'Equipped creature gets
+  // …'" — the enchanted permanent's static, gated on what it is.
+  m = /^As long as enchanted permanent is (a creature|an Equipment), it (.+(?:\.|\."))$/.exec(line);
+  if (m !== null) {
+    const inner = parseStatic(`Enchanted creature ${m[2]}`, text);
+    if (inner !== null && inner.condition === undefined && inner.affects?.scope === "attached") {
+      const host = m[1] === "a creature" ? { type: "creature" } : { subtype: "Equipment" };
+      return { ...inner, condition: { kind: "source", filter: { attachedTo: host } } };
     }
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
@@ -6442,6 +6492,33 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
+  // A static granting a static (`grantsStatic` — rule 613.1f): "Equipped
+  // creature has [flying and] 'You can't lose the game …'" (Cloudsteel
+  // Kirin), "Commander creatures you own have 'Creature tokens you control
+  // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
+  // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
+  // line is read as a static of the object that has it.
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+    const affects = {
+      "Equipped creature": { scope: "attached" },
+      "Enchanted creature": { scope: "attached" },
+      "Commander creatures you own": { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+      "All Sliver creatures": { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      "Creatures you control": { scope: "creatures-you-control" },
+    }[m[1]];
+    const quoted = m[3];
+    const granted = parseGrantedStatic(quoted);
+    if (granted !== null && granted.grantsStatic === undefined && !hasLayerFourPartOf(granted)) {
+      // Its text as printed ("This creature …"), not as normalized.
+      const printed = /"([^"]+\.)"$/.exec(text)?.[1] ?? quoted;
+      return {
+        affects,
+        ...(m[2] !== undefined ? { grantKeywords: [KEYWORDS[m[2].toLowerCase()]] } : {}),
+        grantsStatic: [{ ...granted, text: printed }],
+        text,
+      };
+    }
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
     return { affects: { scope: "attached" }, grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]), text };

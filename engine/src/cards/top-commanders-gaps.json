@@ -778,7 +778,8 @@
   "effect:aura-returns-attached",
   "effect:attach-aura-to-chosen-creature",
   "effect:attach-to-chosen-permanent-it-can-enchant",
-  "static:equip-only-to-filter"
+  "static:equip-only-to-filter",
+  "static:grant-static-ability"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
