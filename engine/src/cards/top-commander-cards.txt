@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4047 already implemented / 953 missing (marks refreshed 2026-10-31)
+4051 already implemented / 949 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -129,7 +129,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   130  Black Market Connections                 {2}{B}           Enchantment
 [x]   131  Deadly Dispute                           {1}{B}           Instant
 [x]   132  Sunpetal Grove                           {0}              Land
-[ ]   133  Roaming Throne                           {4}              Artifact Creature — Golem
+[x]   133  Roaming Throne                           {4}              Artifact Creature — Golem
 [x]   134  Ashnod's Altar                           {3}              Artifact
 [x]   135  Talisman of Hierarchy                    {2}              Artifact
 [x]   136  Yavimaya Coast                           {0}              Land
@@ -957,7 +957,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   961  Sunken Ruins                             {0}              Land
 [x]   962  Ichor Wellspring                         {2}              Artifact
 [x]   963  Chain of Vapor                           {U}              Instant
-[ ]   964  Metallic Mimic                           {2}              Artifact Creature — Shapeshifter
+[x]   964  Metallic Mimic                           {2}              Artifact Creature — Shapeshifter
 [x]   965  Crashing Drawbridge                      {2}              Artifact Creature — Wall
 [x]   966  Devoted Druid                            {1}{G}           Creature — Elf Druid
 [x]   967  Emeria, the Sky Ruin                     {0}              Land
@@ -2625,7 +2625,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2632  Valorous Stance                          {1}{W}           Instant
 [x]  2633  Impulse                                  {1}{U}           Instant
 [ ]  2634  Wrathful Raptors                         {4}{R}           Creature — Dinosaur
-[ ]  2635  Serra's Emissary                         {4}{W}{W}{W}     Creature — Angel
+[x]  2635  Serra's Emissary                         {4}{W}{W}{W}     Creature — Angel
 [ ]  2636  Planar Nexus                             {0}              Land
 [ ]  2637  Lich-Knights' Conquest                   {4}{B}           Sorcery
 [x]  2638  Heritage Reclamation                     {1}{G}           Instant
@@ -3675,7 +3675,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3682  Hidden Hideout                           {0}              Land
 [x]  3683  Coercive Recruiter                       {4}{R}           Creature — Orc Pirate
 [x]  3684  Scaled Nurturer                          {1}{G}           Creature — Dragon Druid
-[ ]  3685  Maester Seymour                          {2}{G}           Legendary Creature — Human Elf Cleric
+[x]  3685  Maester Seymour                          {2}{G}           Legendary Creature — Human Elf Cleric
 [x]  3686  Jazal Goldmane                           {2}{W}{W}        Legendary Creature — Cat Warrior
 [x]  3687  Deathsprout                              {1}{B}{B}{G}     Instant
 [x]  3688  Behemoth Sledge                          {1}{G}{W}        Artifact — Equipment
