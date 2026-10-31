@@ -4407,6 +4407,26 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   planner prices it — unless `exceptManaAbilities` ("…unless they're mana
   abilities": Suppression Field, Zirda). `legalActions`, activation and the
   `{X}` ceiling all read the modified cost.
+  **One kind of ability** (2026-10-31): `abilityKind: "equip" | "exhaust" |
+  "cycling" | "loyalty"` beside `applies` (which still filters the source).
+  `byYou: true` is "…you activate"; `targetingSource: true` is "…that target
+  this creature" (only an activation that chose the static's source as a
+  target — offered with only those targets when the full price is out of
+  reach); `increaseLoyalty: N` (with `"loyalty"`) is "cost an additional
+  [+N]", combined into the loyalty cost by rule 606.5 ([+1] → [+2], [−4] →
+  [−3], [−X] removes X−1; 606.6 reads the combined cost). An equip ability
+  is one whose text starts "Equip" (`isEquipAbility` — the `equip()` helper
+  and every hand-written one); cycling is `CardDefinition.cycling`'s, reached
+  in the hand. Bureau Headmaster `{ applies: {}, abilityKind: "equip", byYou:
+  true, reduceGeneric: 1 }`; Bladehold War-Whip's "of other Equipment"
+  `applies: { subtype: "Equipment", isSource: false }`; Dwarven Mauler adds
+  `targetingSource: true`; Boom Scholar's "exhaust abilities of other
+  permanents you control" `applies: { controlledBy: "you", isSource: false }`
+  without `byYou`; Fluctuator `abilityKind: "cycling", byYou: true`; Eidolon
+  of Obstruction `applies: { type: "planeswalker", controlledBy: "opponent"
+  }, abilityKind: "loyalty", increaseGeneric: 1`; Carth the Lion `applies: {
+  type: "planeswalker" }, abilityKind: "loyalty", byYou: true,
+  increaseLoyalty: 1`.
 - `playFromGraveyard: CardFilter` — while this permanent is on the battlefield
   its controller may *play* matching cards from their graveyard (Ramunap
   Excavator: `{ type: "land" }`). `affects` is ignored. Still costs the land

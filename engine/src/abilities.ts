@@ -557,6 +557,10 @@ export interface ActivatedAbility {
    * the card is revealed from the hand as it's activated (702.49b). What "a
    * ninjutsu ability" names. */
   readonly ninjutsu?: true;
+  /** A cycling ability (rule 702.29a, typecycling 702.29e–f too), as
+   * `Game.cyclingAbilityOf` builds it from `CardDefinition.cycling`: what
+   * "cycling abilities you activate" (Fluctuator) names. */
+  readonly cycling?: true;
   /** "Activate only once each turn" (rule 602.5g — Steel Hellkite). Tracked
    * per ability index on `GameObject.abilitiesUsedThisTurn`, so a permanent
    * with two such abilities limits each separately. */
@@ -2136,6 +2140,15 @@ export interface StackAbility {
   readonly targets: readonly TargetSpec[];
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
+}
+
+/** An equip ability (rule 702.6a, its "Equip [quality]" and "Equip
+ * planeswalker" variants 702.6c/e) — the keyword as its text begins it,
+ * which the `equip()` helper and every hand-written one (`text: "Equip
+ * {1}{W}"`, "Equip—Pay 3 life") do. What "equip abilities you activate"
+ * (Bureau Headmaster) names; "Equipped …" isn't one. */
+export function isEquipAbility(ability: ActivatedAbility): boolean {
+  return /^Equip\b/.test(ability.text);
 }
 
 /** A mana ability adds mana, has no targets, and never uses the stack. A cost

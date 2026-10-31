@@ -12,6 +12,7 @@ import {
   abilityLifeCost,
   chosenCounterCost,
   costAnnouncesX,
+  isEquipAbility,
   isManaAbility,
   loyaltyDelta,
   sacrificeCostFilters,
@@ -2873,8 +2874,12 @@ export class Game {
             ? this.costCounterSources(player, source, ability)[ability.cost.removeCounter.among === true ? "total" : "most"]
             : (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
           : undefined;
-      // "−X": up to the loyalty it has (rules 107.3a, 606.6).
-      const loyaltyX = ability.loyaltyCost === "-x" ? (this.state.objects[source]?.counters.loyalty ?? 0) : undefined;
+      // "−X": up to the loyalty it has (rules 107.3a, 606.6) — and one more
+      // for each [+1] added to the cost (Carth the Lion, 606.5).
+      const loyaltyX =
+        ability.loyaltyCost === "-x"
+          ? (this.state.objects[source]?.counters.loyalty ?? 0) + this.loyaltyCostIncrease(player, source, ability)
+          : undefined;
       const caps = [manaX, sacrificeX, exileX, discardX, revealX, counterX, loyaltyX].filter(
         (n): n is number => n !== undefined,
       );
@@ -2935,7 +2940,15 @@ export class Game {
           ...(ability.cost.waterbend === true
             ? { waterbend: this.abilityWaterbendOffer(player, source, ability, xCost) }
             : {}),
-          ...(ability.loyaltyCost !== undefined ? { loyalty: ability.loyaltyCost } : {}),
+          // With any "additional [+1]" folded in (Carth the Lion, rule 606.5).
+          ...(ability.loyaltyCost !== undefined
+            ? {
+                loyalty:
+                  ability.loyaltyCost === "-x"
+                    ? ("-x" as const)
+                    : ability.loyaltyCost + this.loyaltyCostIncrease(player, source, ability),
+              }
+            : {}),
           ...(isManaAbility(ability) ? { manaAbility: true as const } : {}),
           ...(plainMana !== undefined ? { plainMana } : {}),
           ...(xCost !== undefined ? { xCost } : {}),
@@ -2981,6 +2994,7 @@ export class Game {
           source,
           this.targetOptionsFor(ability.targets, player, this.permanentSource(source)),
           () => this.whyCannotActivateAbility(player, source, index) === null,
+          (targets) => this.whyCannotActivateAbility(player, source, index, undefined, undefined, targets) === null,
         ),
         maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined,
         // "Up to X target …, where X is …": the count it has as activated.
@@ -10721,6 +10735,7 @@ export class Game {
           : { kind: "search-library", filter: cycling.search, destination: "hand", min: 0, max: 1, reveal: true },
       resolve: null,
       zone: "hand",
+      cycling: true,
       text: `${cycling.search === undefined ? "Cycling" : "Landcycling"} ${cycling.cost}`,
     };
   }
@@ -11253,10 +11268,12 @@ export class Game {
     sourceId: ObjectId,
     options: readonly (readonly TargetRef[])[],
     fullPriceOk: () => boolean,
+    /** Whether the activation is affordable with these targets chosen. */
+    affordableWith: (targets: readonly TargetRef[]) => boolean,
   ): TargetRef[][] {
     const all = options.map((slot) => [...slot]);
     const reduction = ability.targetCostReduction;
-    if (reduction === undefined) return all;
+    if (reduction === undefined) return this.targetingSourceOptions(ability, player, sourceId, all, fullPriceOk, affordableWith);
     const earning = all.map((slot) =>
       slot.filter(
         (ref) =>
@@ -11275,6 +11292,38 @@ export class Game {
     }
     if (full) return all;
     return all.map((slot, i) => (slots.includes(i) ? earning[i] : slot));
+  }
+
+  /** The target options of a one-target ability that a `targetingSource`
+   * static reaches ("equip abilities you activate that target this creature
+   * cost {2} less" — Dwarven Mauler): all of them while the full price is
+   * affordable, and otherwise only the targets the activation is affordable
+   * with — what would be refused for want of mana isn't offered. */
+  private targetingSourceOptions(
+    ability: ActivatedAbility,
+    player: PlayerId,
+    sourceId: ObjectId,
+    all: TargetRef[][],
+    fullPriceOk: () => boolean,
+    affordableWith: (targets: readonly TargetRef[]) => boolean,
+  ): TargetRef[][] {
+    if (all.length !== 1) return all;
+    const reaches = this.abilityCostModifiers().some(
+      ({ controller, source, mod }) =>
+        mod.targetingSource === true &&
+        all[0].some((ref) => ref.kind === "object" && ref.object === source) &&
+        this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod),
+    );
+    if (!reaches) return all;
+    this.targetCostReductionOff = true;
+    let full: boolean;
+    try {
+      full = fullPriceOk();
+    } finally {
+      this.targetCostReductionOff = false;
+    }
+    if (full) return all;
+    return [all[0].filter((ref) => affordableWith([ref]))];
   }
 
   /** The target options a spell with a `targetCostReduction` is offered with:
@@ -16559,7 +16608,7 @@ export class Game {
     // So does a "−X" loyalty cost (rule 107.3a).
     const hasX = parsed.x > 0 || costAnnouncesX(ability.cost) || ability.loyaltyCost === "-x";
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
-    const mod = this.abilityCostModificationFor(sourceId, ability, player);
+    const mod = this.abilityCostModificationFor(sourceId, ability, player, targets);
     // Increases first, then the reductions (rule 601.2f).
     let generic = parsed.generic + parsed.x * chosenX + mod.increaseGeneric;
     // "This effect can't reduce the mana in that cost to less than one mana"
@@ -16652,8 +16701,19 @@ export class Game {
    * apart. Only an ability of a permanent: every one of them reads
    * "activated abilities of [permanents] you control", and a card in a hand
    * or graveyard is no permanent (Forensic Gadgeteer's ruling on cycling) —
-   * bar the `ninjutsu` ones, which name abilities of cards in a hand. */
-  private abilityCostModificationFor(sourceId: ObjectId, ability: ActivatedAbility, player: PlayerId): {
+   * bar the `ninjutsu` and `abilityKind: "cycling"` ones, which name
+   * abilities of cards in a hand. A loyalty cost's own change is
+   * `loyaltyCostIncrease`'s. */
+  private abilityCostModificationFor(
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    player: PlayerId,
+    /** The chosen targets, once they are — what a `targetingSource` static
+     * reads. Left out, as while the ability is only offered, the single
+     * target that earns the most is assumed (unless
+     * `targetCostReductionOff` asks for the full price). */
+    targets?: readonly (TargetRef | null | undefined)[],
+  ): {
     increaseGeneric: number;
     reduceGeneric: number;
     reduceGenericLeavingOne: number;
@@ -16661,24 +16721,131 @@ export class Game {
     let increaseGeneric = 0;
     let reduceGeneric = 0;
     let reduceGenericLeavingOne = 0;
-    const manaAbility = isManaAbility(ability);
-    const onBattlefield = this.state.objects[sourceId]?.zone === "battlefield";
+    // "…that target this creature": the reductions earned per target, kept
+    // apart until the targets settle which apply.
+    const perTarget = new Map<ObjectId, { increase: number; reduce: number; leavingOne: number }>();
     for (const { controller, source, mod } of this.abilityCostModifiers()) {
-      // A Room's unlock costs aren't abilities' (`unlockCost` reads these).
-      if (mod.unlock === true) continue;
-      // "Ninjutsu abilities you activate" (Silver-Fur Master), wherever the
-      // card is; every other kind, only a permanent's.
-      if (mod.ninjutsu === true ? ability.ninjutsu !== true || player !== controller : !onBattlefield && mod.anyZone !== true) {
+      if (!this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) continue;
+      if (mod.targetingSource === true) {
+        const sum = perTarget.get(source) ?? { increase: 0, reduce: 0, leavingOne: 0 };
+        sum.increase += mod.increaseGeneric ?? 0;
+        if (mod.leavesOneMana === true) sum.leavingOne += mod.reduceGeneric ?? 0;
+        else sum.reduce += mod.reduceGeneric ?? 0;
+        perTarget.set(source, sum);
         continue;
       }
-      // "…unless they're mana abilities" (Suppression Field, Zirda).
-      if (manaAbility && mod.exceptManaAbilities === true) continue;
-      if (!matchesFilter(this.state, this.registry, sourceId, mod.applies, { you: controller, source })) continue;
       increaseGeneric += mod.increaseGeneric ?? 0;
       if (mod.leavesOneMana === true) reduceGenericLeavingOne += mod.reduceGeneric ?? 0;
       else reduceGeneric += mod.reduceGeneric ?? 0;
     }
+    if (perTarget.size > 0) {
+      // Chosen: every targeted static's source counts (rule 601.2c fixed the
+      // targets before 601.2f totals the cost). Not yet: the best one target
+      // among the legal options — an equip ability's only slot.
+      let earned: ObjectId[] = [];
+      if (targets !== undefined) {
+        earned = [...new Set(targets.flatMap((t) => (t?.kind === "object" && perTarget.has(t.object) ? [t.object] : [])))];
+      } else if (!this.targetCostReductionOff) {
+        const legal = new Set(
+          this.targetOptionsFor(ability.targets, player, this.permanentSource(sourceId))
+            .flat()
+            .flatMap((t) => (t.kind === "object" ? [t.object] : [])),
+        );
+        let best = 0;
+        for (const [id, sum] of perTarget) {
+          const worth = sum.reduce + sum.leavingOne - sum.increase;
+          if (legal.has(id) && (earned.length === 0 || worth > best)) {
+            earned = [id];
+            best = worth;
+          }
+        }
+      }
+      for (const id of earned) {
+        const sum = perTarget.get(id);
+        if (sum === undefined) continue;
+        increaseGeneric += sum.increase;
+        reduceGeneric += sum.reduce;
+        reduceGenericLeavingOne += sum.leavingOne;
+      }
+    }
     return { increaseGeneric, reduceGeneric, reduceGenericLeavingOne };
+  }
+
+  /** Whether one `abilityCostModification` static (its `controller`'s, on
+   * `source`) reaches an ability of `sourceId` that `player` activates —
+   * all but a `targetingSource` static's target, which only the chosen
+   * targets settle. */
+  private abilityCostModificationReaches(
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    player: PlayerId,
+    controller: PlayerId,
+    source: ObjectId,
+    mod: NonNullable<StaticAbility["abilityCostModification"]>,
+  ): boolean {
+    // A Room's unlock costs aren't abilities' (`unlockCost` reads these).
+    if (mod.unlock === true) return false;
+    // "Ninjutsu abilities you activate" (Silver-Fur Master) and "cycling
+    // abilities you activate" (Fluctuator), wherever the card is; every
+    // other kind, only a permanent's.
+    const onBattlefield = this.state.objects[sourceId]?.zone === "battlefield";
+    if (mod.ninjutsu === true) {
+      if (ability.ninjutsu !== true || player !== controller) return false;
+    } else if (!onBattlefield && mod.anyZone !== true && mod.abilityKind !== "cycling") {
+      return false;
+    }
+    // "…you activate" (rule 602.2b: the activating player pays the cost).
+    if (mod.byYou === true && player !== controller) return false;
+    // Only one kind of ability: equip (702.6), exhaust (702.177), cycling
+    // (702.29), loyalty (606).
+    switch (mod.abilityKind) {
+      case "equip":
+        if (!isEquipAbility(ability)) return false;
+        break;
+      case "exhaust":
+        if (ability.exhaust !== true) return false;
+        break;
+      case "cycling":
+        if (ability.cycling !== true) return false;
+        break;
+      case "loyalty":
+        if (ability.loyaltyCost === undefined) return false;
+        break;
+      case undefined:
+        break;
+    }
+    // "…unless they're mana abilities" (Suppression Field, Zirda).
+    if (mod.exceptManaAbilities === true && isManaAbility(ability)) return false;
+    return matchesFilter(this.state, this.registry, sourceId, mod.applies, { you: controller, source });
+  }
+
+  /** The loyalty cost a loyalty ability of `sourceId` has as `player`
+   * activates it at `x` (rule 606.4): its own, combined with every
+   * "costs an additional [+N]" (Carth the Lion) into one (606.5) —
+   * `undefined` for an ability that isn't a loyalty ability. */
+  private modifiedLoyaltyDelta(
+    player: PlayerId,
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    x: number | undefined,
+  ): number | undefined {
+    const own = loyaltyDelta(ability, x);
+    if (own === undefined) return undefined;
+    return own + this.loyaltyCostIncrease(player, sourceId, ability);
+  }
+
+  /** The "[+N]" added to a loyalty ability's cost (rule 606.5) — 0 for any
+   * other ability, and nearly always 0. */
+  private loyaltyCostIncrease(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility): number {
+    if (ability.loyaltyCost === undefined) return 0;
+    let increase = 0;
+    for (const { controller, source, mod } of this.abilityCostModifiers()) {
+      if (mod.abilityKind !== "loyalty" || mod.increaseLoyalty === undefined) continue;
+      if (this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) {
+        increase += mod.increaseLoyalty;
+      }
+    }
+    return increase;
   }
 
   /** The `abilityCostModification` statics in force, with whose each is —
@@ -16834,7 +17001,7 @@ export class Game {
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
       // many (606.6).
       const loyalty = source.counters.loyalty ?? 0;
-      const delta = loyaltyDelta(ability, x) ?? 0;
+      const delta = this.modifiedLoyaltyDelta(player, sourceId, ability, x) ?? 0;
       if (loyalty + delta < 0) {
         return `${def.name} does not have ${-delta} loyalty to remove`;
       }
@@ -17354,7 +17521,7 @@ export class Game {
       this.putCostCounters(sourceId, ability.cost.addCounter.kind, ability.cost.addCounter.count, player);
     }
     // A "−X" cost removes the X announced (rule 107.3a).
-    const loyaltyPaid = loyaltyDelta(ability, chosenX);
+    const loyaltyPaid = this.modifiedLoyaltyDelta(player, sourceId, ability, chosenX);
     if (loyaltyPaid !== undefined) {
       source.counters.loyalty = (source.counters.loyalty ?? 0) + loyaltyPaid;
       source.loyaltyActivatedThisTurn = true;

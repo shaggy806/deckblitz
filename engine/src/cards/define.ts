@@ -2703,6 +2703,33 @@ export interface StaticAbility {
     /** "Activated abilities of **sources** with the chosen name" (Skyseer's
      * Chariot): abilities of cards in every zone, not only permanents'. */
     readonly anyZone?: true;
+    /**
+     * Only abilities of one kind, named by its keyword or symbol (rule
+     * 602.2b): `"equip"` (702.6 — Bureau Headmaster's "Equip abilities you
+     * activate cost {1} less", `isEquipAbility`), `"exhaust"` (702.177 —
+     * Boom Scholar), `"cycling"` (702.29 — Fluctuator; a card in a hand, so
+     * this kind reaches a card that isn't a permanent, as `ninjutsu` does)
+     * and `"loyalty"` (606 — Eidolon of Obstruction's "loyalty abilities of
+     * planeswalkers your opponents control cost {1} more"). `applies` still
+     * filters the ability's source.
+     */
+    readonly abilityKind?: "equip" | "exhaust" | "cycling" | "loyalty";
+    /** "…you activate" (Fluctuator, Bureau Headmaster, Carth the Lion): only
+     * abilities this static's controller activates. */
+    readonly byYou?: true;
+    /** "Equip abilities you activate **that target this creature**" (Dwarven
+     * Mauler): only an activation with this static's source among its chosen
+     * targets — fixed once they are (rule 601.2c, before 601.2f's total).
+     * Offered before targets are chosen, the best single target is assumed,
+     * and an activation affordable only through it is offered only with the
+     * targets that earn it. */
+    readonly targetingSource?: true;
+    /** A loyalty cost change with `abilityKind: "loyalty"`: "cost an
+     * additional [+1] to activate" (Carth the Lion) is `increaseLoyalty: 1`.
+     * Combined with the ability's own loyalty cost into one (rule 606.5): a
+     * [+1] costs [+2], a [−4] costs [−3], a [−X] removes X−1; 606.6's "at
+     * least that many loyalty counters" reads the combined cost. */
+    readonly increaseLoyalty?: number;
   };
   /** Layer 7b: set base power and toughness to a dynamic count (+ the given
    * offsets). Only meaningful with `affects.scope === "self"` (a CDA). */

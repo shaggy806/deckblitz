@@ -4157,3 +4157,54 @@ describe("face down by an effect (rule 708.2)", () => {
     });
   });
 });
+
+describe("cost changes for one kind of ability (rule 602.2b)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const mod = (name: string, type_line: string, oracle_text: string) => face(name, type_line, oracle_text).static[0]?.abilityCostModification;
+
+  it("reads equip, exhaust and cycling reductions, with who activates and whose abilities", () => {
+    expect(mod("Bureau Test", "Creature — Human", "Equip abilities you activate cost {1} less to activate.")).toEqual({
+      applies: {},
+      abilityKind: "equip",
+      byYou: true,
+      reduceGeneric: 1,
+    });
+    expect(mod("Dwarven Mauler", "Creature — Dwarf Warrior", "Equip abilities you activate that target this creature cost {2} less to activate.")).toEqual({
+      applies: {},
+      abilityKind: "equip",
+      byYou: true,
+      targetingSource: true,
+      reduceGeneric: 2,
+    });
+    expect(mod("Whip Test", "Artifact — Equipment", "Equip abilities you activate of other Equipment cost {1} less to activate.")).toEqual({
+      applies: { subtype: "Equipment", isSource: false },
+      abilityKind: "equip",
+      byYou: true,
+      reduceGeneric: 1,
+    });
+    expect(mod("Auriok Steelshaper", "Creature — Human Soldier", "Equip costs you pay cost {1} less.")).toMatchObject({ abilityKind: "equip", byYou: true, reduceGeneric: 1 });
+    expect(mod("Boom Scholar", "Creature — Goblin Advisor", "Exhaust abilities of other permanents you control cost {2} less to activate.")).toEqual({
+      applies: { controlledBy: "you", isSource: false },
+      abilityKind: "exhaust",
+      reduceGeneric: 2,
+    });
+    expect(mod("Fluctuator", "Artifact", "Cycling abilities you activate cost {2} less to activate.")).toMatchObject({ abilityKind: "cycling", byYou: true, reduceGeneric: 2 });
+    // "Equip costs you pay cost {1} more" isn't a line any card prints.
+    expect(mod("Test", "Artifact", "Equip costs you pay cost {1} more.")).toBeUndefined();
+  });
+
+  it("reads loyalty abilities' mana tax and an added loyalty cost", () => {
+    expect(mod("Eidolon of Obstruction", "Enchantment Creature — Spirit", "Loyalty abilities of planeswalkers your opponents control cost {1} more to activate.")).toEqual({
+      applies: { type: "planeswalker", controlledBy: "opponent" },
+      abilityKind: "loyalty",
+      increaseGeneric: 1,
+    });
+    expect(mod("Carth Test", "Legendary Creature — Human Warrior", "Planeswalkers' loyalty abilities you activate cost an additional [+1] to activate.")).toEqual({
+      applies: { type: "planeswalker" },
+      abilityKind: "loyalty",
+      byYou: true,
+      increaseLoyalty: 1,
+    });
+  });
+});

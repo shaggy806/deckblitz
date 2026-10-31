@@ -1352,7 +1352,9 @@ export type LegalAction =
       readonly waterbend?: WaterbendOffer;
       /** Present for a planeswalker loyalty ability — the loyalty counters it
        * adds (negative = removes), so a UI can label it "+1" / "−3"; `"-x"`
-       * for a "−X" cost, whose X is the offer's `xCost` choice. */
+       * for a "−X" cost, whose X is the offer's `xCost` choice. Any
+       * "additional [+1]" is folded in (Carth the Lion, rule 606.5): a [+1]
+       * offers `2`. */
       readonly loyalty?: number | "-x";
       /** A modal ability's modes this offer chooses (rule 700.2b) — the
        * ability is offered once per choice, each with those modes' targets

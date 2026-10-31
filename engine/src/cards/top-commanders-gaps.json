@@ -718,7 +718,11 @@
   "effect:turn-face-down",
   "effect:put-onto-battlefield-face-down",
   "effect:manifest-from-other-library",
-  "static:cant-turn-face-up"
+  "static:cant-turn-face-up",
+  "cost:equip-ability-cost-reduction",
+  "cost:ability-cost-reduction-exhaust",
+  "static:cycling-cost-reduction",
+  "cost:loyalty-cost-increase"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

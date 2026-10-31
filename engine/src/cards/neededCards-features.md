@@ -407,6 +407,23 @@ and Linvala. Still open: the exiled-card unit (a counter or a chosen exiled
 card, triggered abilities too), an until-end-of-turn effect form (Grell
 Philosopher), a chosen permanent as the filter (Scheming Fence).
 
+### Cost changes for one kind of ability — built 2026-10-31
+
+The need-keys Phase 2 family `cost:ability-cost-modification`'s group,
+features only. **`abilityCostModification.abilityKind`** — `"equip"`
+(`isEquipAbility`: text starting "Equip"), `"exhaust"`, `"cycling"` (the new
+`ActivatedAbility.cycling`, reached in the hand) or `"loyalty"` — beside its
+source filter, with **`byYou`** ("…you activate"), **`targetingSource`**
+("…that target this creature": only an activation that chose the static's
+source, fixed at 601.2c; the offer narrows to the affordable targets) and
+**`increaseLoyalty`** (Carth's "additional [+1]", combined into one loyalty
+cost by rule 606.5 and read by 606.6, the −X ceiling one higher; the offer's
+`loyalty` shows it). Proving cards: Bureau Headmaster, Bladehold War-Whip,
+Dwarven Mauler, Boom Scholar, Fluctuator, Eidolon of Obstruction, Carth the
+Lion. Keys: cost:equip-ability-cost-reduction,
+cost:ability-cost-reduction-exhaust, static:cycling-cost-reduction,
+cost:loyalty-cost-increase.
+
 ### A value chosen as it enters, read by its other lines — built 2026-10-31
 
 The need-keys Phase 2 family `decision:choose-card-type-protection`'s group,

@@ -4283,6 +4283,61 @@ export function parseFace(face, ctx = {}) {
       });
       continue;
     }
+    // Cost changes for one kind of ability (rule 602.2b): equip (702.6 —
+    // Bureau Headmaster, Bladehold War-Whip's "of other Equipment", Dwarven
+    // Mauler's "that target ~", Auriok Steelshaper's "Equip costs you pay"),
+    // exhaust (702.177 — Boom Scholar), cycling (702.29 — Fluctuator),
+    // loyalty (606 — Eidolon of Obstruction; Carth the Lion's added [+1],
+    // 606.5).
+    if (
+      (m =
+        /^(?:(Equip|Exhaust|Cycling) abilities (you activate|you activate of other Equipment|you activate that target ~|of other permanents you control)|(Equip) costs you pay) cost \{(\d+)\} (less|more)(?: to activate)?\.$/.exec(
+          line,
+        )) &&
+      (m[3] === undefined || m[5] === "less")
+    ) {
+      const kind = (m[1] ?? m[3]).toLowerCase();
+      const who = m[2] ?? "you activate";
+      const n = Number(m[4]);
+      out.static.push({
+        affects: { scope: "self" },
+        abilityCostModification: {
+          applies:
+            who === "of other permanents you control"
+              ? { controlledBy: "you", isSource: false }
+              : who === "you activate of other Equipment"
+                ? { subtype: "Equipment", isSource: false }
+                : {},
+          abilityKind: kind,
+          ...(who.startsWith("you activate") ? { byYou: true } : {}),
+          ...(who === "you activate that target ~" ? { targetingSource: true } : {}),
+          ...(m[5] === "less" ? { reduceGeneric: n } : { increaseGeneric: n }),
+        },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if ((m = /^Loyalty abilities of planeswalkers (you|your opponents) control cost \{(\d+)\} (less|more) to activate\.$/.exec(line))) {
+      const n = Number(m[2]);
+      out.static.push({
+        affects: { scope: "self" },
+        abilityCostModification: {
+          applies: { type: "planeswalker", controlledBy: m[1] === "you" ? "you" : "opponent" },
+          abilityKind: "loyalty",
+          ...(m[3] === "less" ? { reduceGeneric: n } : { increaseGeneric: n }),
+        },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if ((m = /^Planeswalkers' loyalty abilities you activate cost an additional \[\+(\d+)\] to activate\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "self" },
+        abilityCostModification: { applies: { type: "planeswalker" }, abilityKind: "loyalty", byYou: true, increaseLoyalty: Number(m[1]) },
+        text: printed(raw),
+      });
+      continue;
+    }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Spells with the chosen name cost \{(\d+)\} (more|less) to cast\.$/.exec(line))) {
       const n = Number(m[1]);
       out.static.push({
