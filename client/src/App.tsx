@@ -4531,13 +4531,19 @@ function Table({
             )}
             <button
               type="button"
-              onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX })}
+              onClick={() => {
+                setModeX(null)
+                game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX })
+              }}
             >
               {ward || xCost !== undefined ? 'Pay' : 'Yes'}
             </button>
             <button
               type="button"
-              onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [] })}
+              onClick={() => {
+                setModeX(null)
+                game.dispatch({ type: 'choose-modes', player: seat, modes: [] })
+              }}
             >
               {ward || xCost !== undefined ? `Don't pay` : 'No'}
             </button>
@@ -4548,18 +4554,20 @@ function Table({
                 <button
                   type="button"
                   title={`The same answer for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
-                  onClick={() =>
+                  onClick={() => {
+                    setModeX(null)
                     game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX })
-                  }
+                  }}
                 >
                   Yes to all {sameForAll + 1}
                 </button>
                 <button
                   type="button"
                   title={`The same answer for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
-                  onClick={() =>
+                  onClick={() => {
+                    setModeX(null)
                     game.dispatch({ type: 'choose-modes', player: seat, modes: [], forAll: true })
-                  }
+                  }}
                 >
                   No to all {sameForAll + 1}
                 </button>
