@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4040 already implemented / 960 missing (marks refreshed 2026-10-31)
+4041 already implemented / 959 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2882,7 +2882,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2889  Outcaster Trailblazer                    {2}{G}           Creature — Human Druid
 [x]  2890  Chief of the Foundry                     {3}              Artifact Creature — Construct
 [ ]  2891  Paradox Haze                             {2}{U}           Enchantment — Aura
-[ ]  2892  Fraying Sanity                           {2}{U}           Enchantment — Aura Curse
+[x]  2892  Fraying Sanity                           {2}{U}           Enchantment — Aura Curse
 [x]  2893  Shadow Rift                              {U}              Instant
 [x]  2894  Wrecking Ball Arm                        {2}              Legendary Artifact — Equipment
 [x]  2895  Cackling Counterpart                     {1}{U}{U}        Instant
