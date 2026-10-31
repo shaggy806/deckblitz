@@ -3718,6 +3718,7 @@ import _poolChargeThrough from "./pool/charge-through.js";
 import _poolCharge from "./pool/charge.js";
 import _poolChargingBadger from "./pool/charging-badger.js";
 import _poolChargingBandits from "./pool/charging-bandits.js";
+import _poolChargingBinox from "./pool/charging-binox.js";
 import _poolChargingCinderhorn from "./pool/charging-cinderhorn.js";
 import _poolChargingGriffin from "./pool/charging-griffin.js";
 import _poolChargingHooligan from "./pool/charging-hooligan.js";
@@ -8706,6 +8707,7 @@ import _poolGandalfWhiteRider from "./pool/gandalf-white-rider.js";
 import _poolGandalfsSanction from "./pool/gandalfs-sanction.js";
 import _poolGangOfDevils from "./pool/gang-of-devils.js";
 import _poolGangOfElk from "./pool/gang-of-elk.js";
+import _poolGangUp from "./pool/gang-up.js";
 import _poolGanglyStompling from "./pool/gangly-stompling.js";
 import _poolGangrenousGoliath from "./pool/gangrenous-goliath.js";
 import _poolGangrenousZombies from "./pool/gangrenous-zombies.js";
@@ -16085,6 +16087,7 @@ import _poolOuroboroid from "./pool/ouroboroid.js";
 import _poolOust from "./pool/oust.js";
 import _poolOutCold from "./pool/out-cold.js";
 import _poolOutOfAir from "./pool/out-of-air.js";
+import _poolOutOfBounds from "./pool/out-of-bounds.js";
 import _poolOutOfTheWay from "./pool/out-of-the-way.js";
 import _poolOutcasterGreenblade from "./pool/outcaster-greenblade.js";
 import _poolOutcasterTrailblazer from "./pool/outcaster-trailblazer.js";
@@ -31073,6 +31076,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCharge,
   _poolChargingBadger,
   _poolChargingBandits,
+  _poolChargingBinox,
   _poolChargingCinderhorn,
   _poolChargingGriffin,
   _poolChargingHooligan,
@@ -36061,6 +36065,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGandalfsSanction,
   _poolGangOfDevils,
   _poolGangOfElk,
+  _poolGangUp,
   _poolGanglyStompling,
   _poolGangrenousGoliath,
   _poolGangrenousZombies,
@@ -43440,6 +43445,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOust,
   _poolOutCold,
   _poolOutOfAir,
+  _poolOutOfBounds,
   _poolOutOfTheWay,
   _poolOutcasterGreenblade,
   _poolOutcasterTrailblazer,
@@ -58441,6 +58447,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/charge": _poolCharge,
   "pool/charging-badger": _poolChargingBadger,
   "pool/charging-bandits": _poolChargingBandits,
+  "pool/charging-binox": _poolChargingBinox,
   "pool/charging-cinderhorn": _poolChargingCinderhorn,
   "pool/charging-griffin": _poolChargingGriffin,
   "pool/charging-hooligan": _poolChargingHooligan,
@@ -63429,6 +63436,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gandalfs-sanction": _poolGandalfsSanction,
   "pool/gang-of-devils": _poolGangOfDevils,
   "pool/gang-of-elk": _poolGangOfElk,
+  "pool/gang-up": _poolGangUp,
   "pool/gangly-stompling": _poolGanglyStompling,
   "pool/gangrenous-goliath": _poolGangrenousGoliath,
   "pool/gangrenous-zombies": _poolGangrenousZombies,
@@ -70808,6 +70816,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oust": _poolOust,
   "pool/out-cold": _poolOutCold,
   "pool/out-of-air": _poolOutOfAir,
+  "pool/out-of-bounds": _poolOutOfBounds,
   "pool/out-of-the-way": _poolOutOfTheWay,
   "pool/outcaster-greenblade": _poolOutcasterGreenblade,
   "pool/outcaster-trailblazer": _poolOutcasterTrailblazer,

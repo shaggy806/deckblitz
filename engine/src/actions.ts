@@ -486,6 +486,13 @@ export type Action =
        * `phyrexianPips`, and only as many as the player's life covers.
        * Omitted, life pays a Phyrexian pip only when mana can't. */
       readonly phyrexianLife?: number;
+      /** Assist (rule 702.132a): the other player chosen to help pay — the
+       * offer's `assist`, echoed. The cast then waits on that player's
+       * `choose-number` (how much of the total cost's generic mana they
+       * pay), and the caster pays the rest; if the caster can't, the cast is
+       * reversed (rule 733.1). Only for a spell with assist cast from
+       * priority. */
+      readonly assist?: PlayerId;
     }
   | {
       readonly type: "activate-ability";
@@ -993,6 +1000,13 @@ export type LegalAction =
        * `phyrexianLife` up to this. Absent when there are none or the player
        * can't pay life. */
       readonly phyrexianPips?: number;
+      /** An assist variant (rule 702.132a): cast asking this other player to
+       * help pay, echoed back as the cast's `assist`. Listed when the caster
+       * could pay the rest with `assistMax` — the most of the total cost's
+       * generic mana that player's mana could pay now — paid for them; the
+       * plain variant comes first when the caster can pay alone. */
+      readonly assist?: PlayerId;
+      readonly assistMax?: number;
       readonly card: ObjectId;
       readonly cardName: string;
       readonly targetSpecs: readonly TargetSpec[];

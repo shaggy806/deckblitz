@@ -6,7 +6,7 @@
  * instance and is the only thing that writes to it; everything else reads.
  */
 
-import type { CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
+import type { Action, CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
@@ -2461,6 +2461,21 @@ export interface GiftAsk {
 }
 
 /**
+ * A cast waiting on its assisting player (rule 702.132a): the player its
+ * caster chose may pay any amount of the generic mana in its total cost
+ * before the caster pays the rest, asked as a `choose-number` from 0 to the
+ * most their mana pays. `cast` is the caster's whole cast, its `assist`
+ * naming that player, carried out once they answer — or reversed if the
+ * caster can't pay what's left (rule 733.1), the caster keeping priority
+ * (733.2). `need` is the least the caster's own mana leaves to be paid, for
+ * the prompt.
+ */
+export interface AssistAsk {
+  readonly cast: Extract<Action, { type: "cast-spell" }>;
+  readonly need: number;
+}
+
+/**
  * A spell's casualty costs being offered as it's cast (rule 702.153a): its
  * caster may sacrifice a creature with power N or greater, asked as a
  * `choose-permanents` of up to one. Each instance of casualty is its own
@@ -3015,12 +3030,16 @@ export type AwaitingDecision =
        * resume — `targets` and `x` above are left unset. */
       readonly value?: { readonly sentinel: string; readonly resume: ResolutionResume };
     }
-  | {
+  | ({
       /**
        * Choose a number as a spell or ability resolves (a `choose-value`
        * effect of `value: "number"` — Void's "choose a number", Squee's
        * Revenge): any whole number from `min`, up to `max` when there is one.
        * Resolution resumes with `then`, the answer read there as `"x"`.
+       *
+       * Or, with `assist`, how much of a spell's generic mana the player its
+       * caster chose pays (rule 702.132a): `source` is the spell, from 0 up
+       * to `max`, and the cast goes on with that much paid for its caster.
        */
       readonly kind: "choose-number";
       readonly player: PlayerId;
@@ -3028,9 +3047,10 @@ export type AwaitingDecision =
       readonly min: number;
       readonly max?: number;
       readonly prompt?: string;
-      readonly then: EffectSpec;
-      readonly resume: ResolutionResume;
-    }
+    } & (
+      | { readonly then: EffectSpec; readonly resume: ResolutionResume; readonly assist?: undefined }
+      | { readonly assist: AssistAsk; readonly then?: undefined; readonly resume?: undefined }
+    ))
   | {
       /**
        * Choose a card name (rule 201.4): any name the registry has that

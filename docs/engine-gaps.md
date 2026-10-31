@@ -6,6 +6,15 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Assist isn't offered on a spell cast while something resolves.** Rule 702.132a lets the
+  caster of any spell with assist choose a helper, however it's cast. `Game.castSpellActions`
+  adds assist variants only for a cast from priority, and `judgeAssist` refuses `via: "effect"`:
+  a `cast-now` cast happens inside the resolution that offered it, which would have to suspend
+  on the helper's `choose-number` (`requestAssist` raises it and returns). The caster can still
+  cast it paying everything. Only an assist card cast by an effect that makes its caster pay
+  (not "without paying its mana cost", which leaves no generic) is affected; no such pairing is
+  known in the pool. Fix: suspend the resolution as `cast-now` does around a discard, and
+  resume it after `resumeAssistedCast`.
 - **"Add one mana of the chosen color" with no colour chosen adds any colour.** `add-mana`'s
   `"chosen"` (`effects.ts`, around line 9232) falls back to `"any-color"` when its source has
   no `chosenOnEnter` colour; Shimmerwilds Growth's ruling says it adds no mana then. Only an

@@ -476,6 +476,7 @@ import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
 import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOtarianJuggernaut from "../pool/otarian-juggernaut.js";
+import _poolOutOfBounds from "../pool/out-of-bounds.js";
 import _poolOutriderEnKor from "../pool/outrider-en-kor.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
@@ -1306,6 +1307,7 @@ const shard: CardShard = {
     _poolOrnateKanzashi,
     _poolOssuaryRats,
     _poolOtarianJuggernaut,
+    _poolOutOfBounds,
     _poolOutriderEnKor,
     _poolOverTheEdge,
     _poolOwlinShieldmage,

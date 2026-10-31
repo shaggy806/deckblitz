@@ -92,6 +92,7 @@ export function randomCast(
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
     ...(legal.webSlingingReturn !== undefined ? { webSlingingReturn: legal.webSlingingReturn.object } : {}),
     ...(convoke.length > 0 ? { convoke } : {}),
+    ...(legal.assist !== undefined ? { assist: legal.assist } : {}),
     // Delve: only the fewest it needs, newest first — the other end from the
     // bots' most-and-oldest, so the fuzzer walks both. No random draw, so
     // seeds without a delve card replay unchanged.

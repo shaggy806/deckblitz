@@ -1497,6 +1497,7 @@ function castExtras(
   prototype?: boolean;
   tap?: ObjectId[];
   webSlingingReturn?: ObjectId;
+  assist?: PlayerId;
 } {
   const sac = legal.sacrifice;
   const convokeInfo = legal.convoke;
@@ -1544,6 +1545,8 @@ function castExtras(
       const convoke = convokeProofFor(convokeInfo, xValue);
       return convoke.length > 0 ? { convoke } : {};
     })(),
+    // An assist variant (rule 702.132a) names the player asked to help.
+    ...(legal.assist !== undefined ? { assist: legal.assist } : {}),
   };
 }
 
@@ -4208,6 +4211,9 @@ export class HeuristicBotController extends AutomaticController {
    * drop's `castableAfter` counts. */
   private wouldCast(state: GameState, o: CastSpellLegal): boolean {
     return (
+      // Never asks another player to help pay (rule 702.132a): in a game of
+      // opponents the help rarely comes, and a refusal leaves nothing done.
+      o.assist === undefined &&
       !this.taxWouldKill(state, o) &&
       !this.aimsOnlyAtWrongSide(state, o) &&
       !this.wastedNow(state, o) &&
@@ -4239,7 +4245,9 @@ export class HeuristicBotController extends AutomaticController {
     if (awaited !== null) return awaited;
 
     const player = this.playerId;
-    const options = view.legalActions();
+    // Not a cast that asks another player to help pay (rule 702.132a) — see
+    // `wouldCast`.
+    const options = view.legalActions().filter((o) => o.kind !== "cast-spell" || o.assist === undefined);
 
     const lands = options.filter((o): o is PlayLandLegal => o.kind === "play-land");
     const fetch = options.find(

@@ -135,6 +135,7 @@ import _poolChainwebAracnir from "../pool/chainweb-aracnir.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChamberSentry from "../pool/chamber-sentry.js";
 import _poolChandraTheFirebrand from "../pool/chandra-the-firebrand.js";
+import _poolChargingBinox from "../pool/charging-binox.js";
 import _poolChargingRhino from "../pool/charging-rhino.js";
 import _poolChocoComet from "../pool/choco-comet.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
@@ -1040,6 +1041,7 @@ const shard: CardShard = {
     _poolChakramSlinger,
     _poolChamberSentry,
     _poolChandraTheFirebrand,
+    _poolChargingBinox,
     _poolChargingRhino,
     _poolChocoComet,
     _poolCircleOfProtectionWhite,

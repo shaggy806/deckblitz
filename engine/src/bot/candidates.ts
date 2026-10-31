@@ -122,6 +122,10 @@ function xValueOf(
 }
 
 function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
+  // An assist variant (rule 702.132a) waits on another player's help, which
+  // an opponent rarely gives: the bot casts what it pays for itself, as v1
+  // does (`wouldCast`). Asked to help, it searches the amounts.
+  if (legal.assist !== undefined) return [];
   const common = {
     type: "cast-spell" as const,
     player,

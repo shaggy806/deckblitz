@@ -83,7 +83,8 @@ export function findUntapPlans(
   if (state.turnOrder[state.turn.activePlayerIndex] !== me) return [];
   if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return [];
   const castableNow = new Set(
-    legal.flatMap((l) => (l.kind === "cast-spell" ? [l.card] : [])),
+    // Not a cast that waits on another player's help (rule 702.132a).
+    legal.flatMap((l) => (l.kind === "cast-spell" && l.assist === undefined ? [l.card] : [])),
   );
   const isOurUntappedLand = (id: ObjectId): boolean => {
     const object = state.objects[id];

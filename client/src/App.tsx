@@ -230,6 +230,7 @@ function graveyardVariantLabel(
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
+    if (a.assist !== undefined) parts.push('asking for assist')
   }
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
 }
@@ -265,6 +266,8 @@ const castExtras = (cast: CastAction) => ({
   // "4 damage divided as you choose" (Magma Opus): asked once the targets are in.
   ...(cast.divide !== undefined ? { divide: cast.divide } : {}),
   ...(cast.phyrexianPips !== undefined ? { phyrexianPips: cast.phyrexianPips } : {}),
+  // An assist variant (rule 702.132a): the player asked to help pay.
+  ...(cast.assist !== undefined ? { assist: cast.assist } : {}),
   // Not echoed either: how many distinct targets are affordable, which the
   // targeting steps keep inside (`currentSlotOptions`).
   ...(cast.targetCount !== undefined ? { targetCount: cast.targetCount } : {}),
@@ -496,6 +499,9 @@ interface Targeting {
   /** How many of its cost's Phyrexian pips could be paid with 2 life each
    * (rule 107.4f): asked once the targets are in, before it goes out. */
   readonly phyrexianPips?: number
+  /** The other player asked to help pay (assist, rule 702.132a) — echoed
+   * back like `kicked`. */
+  readonly assist?: PlayerId
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -2355,6 +2361,7 @@ function Table({
         | 'waterbendOffer'
         | 'divide'
         | 'phyrexianPips'
+        | 'assist'
       >,
       targets: readonly (TargetRef | null)[],
       division?: readonly number[],
@@ -2382,6 +2389,7 @@ function Table({
                 ...(t.kickCount !== undefined ? { kickCount: t.kickCount } : {}),
                 ...(t.prototype === true ? { prototype: true } : {}),
                 ...(t.offspring === true ? { offspring: true } : {}),
+                ...(t.assist !== undefined ? { assist: t.assist } : {}),
                 ...(t.evoke === true ? { evoke: true, evokeCost: t.evokeCost } : {}),
                 ...(t.overload === true ? { overload: true } : {}),
                 ...(t.free === true ? { free: true } : {}),
@@ -2904,7 +2912,9 @@ function Table({
       const opts = playFacesByCard.get(id) ?? []
       // A multi-face card shows a button per face (below the tile) — a bare
       // click does nothing so the choice stays explicit.
-      if (opts.length === 1) playFace(opts[0])
+      // So does a lone cast that asks another player to help pay (assist):
+      // its button says so.
+      if (opts.length === 1 && !(opts[0].kind === 'cast-spell' && opts[0].assist !== undefined)) playFace(opts[0])
     },
     [bottomAction, discardAction, revealChoiceAction, mode, playFace, playFacesByCard],
   )
@@ -6641,8 +6651,10 @@ function Table({
           // or a kickable spell's kicked / unkicked casts (P8). An emerge
           // cast sacrifices a creature, so even alone it's a button that
           // names it — never a click on the card that sacrifices silently.
+          // So is a cast that asks another player to help pay (assist).
           const multiFace =
-            faceOpts.length > 1 || faceOpts.some((a) => a.kind === 'cast-spell' && a.emergeSacrifice !== undefined)
+            faceOpts.length > 1 ||
+            faceOpts.some((a) => a.kind === 'cast-spell' && (a.emergeSacrifice !== undefined || a.assist !== undefined))
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
@@ -6689,6 +6701,9 @@ function Table({
                       {a.kind === 'cast-spell' && a.offspring ? (
                         <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>
                       ) : null}
+                      {a.kind === 'cast-spell' && a.assist !== undefined
+                        ? ` (assist: ${playerLabel(a.assist, game.seats)} may pay up to ${a.assistMax ?? 0})`
+                        : ''}
                       {a.kind === 'cast-spell' && a.evoke ? (
                         a.altCostText !== undefined ? (
                           ` (evoke: ${a.altCostText})`

@@ -418,6 +418,8 @@ function keywordPart(part, faceName, typeLine = "") {
       triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" }],
     }),
     convoke: () => ({ card: { convoke: true } }),
+    // Assist (rule 702.132a): another player may pay generic mana of its cost.
+    assist: () => ({ card: { assist: true } }),
     // Improvise (rule 702.126a): convoke's machinery, artifacts paying generic mana.
     improvise: () => ({ card: { improvise: true } }),
     // Undaunted (rule 702.125a): {1} less for each opponent, the always-true

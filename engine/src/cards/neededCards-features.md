@@ -344,6 +344,21 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Assist — built 2026-10-31
+
+The need-keys Phase 2 family `mechanic:assist`, features only. A card's
+**`assist: true`** (rule 702.132a): its cast offers come again once per other
+player whose mana could pay some of it — the offer's **`assist`** and
+**`assistMax`** — judged as though that player paid all they could, an `{X}`
+spell's X reaching further. A cast naming one (`Action.assist`) waits on that
+player's **`choose-number`** (the existing decision, with an `AssistAsk`
+continuation): 0 up to the most their mana pays of the total cost's generic,
+increases and reductions included. Their mana pays first and counts as spent on
+the spell; the caster pays the rest, or the whole cast is reversed (rule 733.1).
+Bots never ask; v1 answers 0 and v2 searches. Not offered on a `cast-now` cast
+(Engine rules gaps). Key: assist. Proving cards: Charging Binox, Gang Up, Out of
+Bounds.
+
 ### The turn history's graveyard tallies — built 2026-10-31
 
 The need-keys Phase 2 family `stat:turn-event-tallies`, its graveyard group,

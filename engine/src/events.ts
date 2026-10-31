@@ -1037,6 +1037,36 @@ export type GameEvent =
       readonly number: number;
     })
   | (Base & {
+      /** `caster` cast `object`, a spell with assist, choosing `player` to
+       * help pay (rule 702.132a), who may pay up to `max` of its generic
+       * mana. */
+      readonly type: "assist-requested";
+      readonly player: PlayerId;
+      readonly caster: PlayerId;
+      readonly object: ObjectId;
+      readonly max: number;
+    })
+  | (Base & {
+      /** The assisting `player` chose to pay `amount` of `object`'s generic
+       * mana (rule 702.132a) — paid as the cast goes on, or not at all if
+       * it's reversed (`cast-reversed`). */
+      readonly type: "assist-chosen";
+      readonly player: PlayerId;
+      readonly caster: PlayerId;
+      readonly object: ObjectId;
+      readonly amount: number;
+    })
+  | (Base & {
+      /** `player` started casting `object` but couldn't complete it (rule
+       * 733.1): the whole cast is undone, nothing paid, and they keep
+       * priority (733.2) — an assisted spell whose helper paid too little
+       * for its caster to pay the rest. */
+      readonly type: "cast-reversed";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+      readonly reason: string;
+    })
+  | (Base & {
       readonly type: "permanent-entered-battlefield";
       readonly object: ObjectId;
       /** How many real permanents this one event stands for — set > 1 only

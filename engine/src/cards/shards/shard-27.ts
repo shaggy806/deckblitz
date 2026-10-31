@@ -261,6 +261,7 @@ import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolFurorOfTheBitten from "../pool/furor-of-the-bitten.js";
 import _poolFuturistSentinel from "../pool/futurist-sentinel.js";
 import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
+import _poolGangUp from "../pool/gang-up.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolFurorOfTheBitten,
     _poolFuturistSentinel,
     _poolGaladrielElvenQueen,
+    _poolGangUp,
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,
     _poolGhaltaTheImmovable,

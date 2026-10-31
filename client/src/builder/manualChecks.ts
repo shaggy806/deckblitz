@@ -8700,4 +8700,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, bf: ['Wall of Denial', 'Hill Giant'] }, { bf: ['Gray Ogre'] }, { bf: ['Forest'] }],
     }),
   ),
+  // --- Assist (2026-10-31, build-family) ---
+  preset(
+    'Charging Binox: Bob helps pay',
+    board({ you: { bf: ['Forest*4'], hand: ['Charging Binox'] }, opp: { human: true, bf: ['Island*5'] } }),
+  ),
+  preset(
+    'Charging Binox: too little help undoes the cast',
+    board({ you: { bf: ['Forest*4'], hand: ['Charging Binox'] }, opp: { human: true, bf: ['Island*5'] } }),
+  ),
+  preset(
+    'Gang Up: Carol helps pay for X, four players',
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Gang Up'] },
+      opp: [{ bf: ['Gray Ogre'] }, { human: true, bf: ['Island*3'] }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
 ]

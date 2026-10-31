@@ -328,6 +328,7 @@ import {
   speedOf,
 } from "./state.js";
 import type {
+  AssistAsk,
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
@@ -1307,6 +1308,23 @@ interface StandaloneManaVariant {
   readonly manaSplit?: ManaSplitOffer;
 }
 
+/**
+ * The assist a cast is judged or carried out with (rule 702.132a): the
+ * spell, the player helping, and how much of its total cost's generic mana
+ * they pay — a number once they've answered, or `"max"` while it's only
+ * asked or offered (judged as though they paid all their mana could).
+ * `strict` for a real cast, which needs generic mana there for them to pay
+ * (an offer of an `{X}` spell is judged before X is chosen). `seen` is what
+ * `whyCannotCastSpell` found: that generic and the amount it judged with.
+ */
+interface AssistChoice {
+  readonly for: ObjectId;
+  readonly player: PlayerId;
+  readonly amount: number | "max";
+  readonly strict: boolean;
+  seen?: { readonly generic: number; readonly amount: number };
+}
+
 /** Whether an effect lasting `duration` on `object` begins at all: one
  * "for as long as it has a [kind] counter on it" does nothing if it has none
  * as it would begin, and one "for as long as [its source] remains on the
@@ -1814,6 +1832,12 @@ export class Game {
         this.cycleCard(action.player, action.card);
         break;
       case "cast-spell":
+        // Assist (rule 702.132a): the chosen player answers first; the cast
+        // itself comes back through here with their amount in hand.
+        if (action.assist !== undefined && this.assistChoice?.for !== action.card) {
+          this.requestAssist(action);
+          break;
+        }
         this.sneakReturnChoice = action.sneakReturn;
         this.webSlingingReturnChoice = action.webSlingingReturn;
         this.phyrexianLifeChoice = action.phyrexianLife;
@@ -2025,6 +2049,16 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        // Assist (rule 702.132a): asking is legal when the caster could pay
+        // the rest with as much as the chosen player's mana pays paid for
+        // them — what they'll really pay is theirs to choose.
+        if (action.assist !== undefined && this.assistChoice?.for !== action.card) {
+          const probe: AssistChoice = { for: action.card, player: action.assist, amount: "max", strict: true };
+          const why = this.withAssistChoice(probe, () => this.canDispatch(action));
+          if (why !== null) return why;
+          // Judged without reaching its total cost (a cast for free).
+          return probe.seen === undefined ? "that cast has no generic mana for another player to pay" : null;
+        }
         if (
           action.via === "sneak" &&
           action.sneakReturn !== undefined &&
@@ -3166,8 +3200,10 @@ export class Game {
    * yields up to two, unkicked and kicked, each with its own cost, target specs
    * and affordability — the same "one entry per playable variant" shape `via`
    * and `face` already use, so a driver just offers both buttons.
+   *
+   * The caster's own offers; `castSpellActions` adds the assisted ones.
    */
-  private castSpellActions(
+  private castSpellActionsAlone(
     player: PlayerId,
     card: ObjectId,
     cardName: string,
@@ -5606,7 +5642,8 @@ export class Game {
   }
 
   /** Answers a pending `choose-number` decision: the resolution resumes with
-   * the effect's `then`, the number read there as `"x"`. */
+   * the effect's `then`, the number read there as `"x"` — or an assisted
+   * cast goes on (`resumeAssistedCast`). */
   private applyNumberChoice(player: PlayerId, number: number): void {
     const why = chooseNumber.whyCannot(this.decisionCtx, { type: "choose-number", player, number }, player);
     if (why !== null) throw new Error(why);
@@ -5615,6 +5652,12 @@ export class Game {
       throw new Error("unreachable: whyCannot should have caught this");
     }
     this.state.awaiting = null;
+    // How much of a spell's generic mana its assisting player pays (rule
+    // 702.132a): the cast goes on, or is reversed.
+    if (awaiting.assist !== undefined) {
+      this.resumeAssistedCast(player, awaiting.assist, number);
+      return;
+    }
     this.emit({ type: "number-chosen", player, object: awaiting.source, number });
     this.resumeResolution(awaiting.then, awaiting.source, { ...awaiting.resume, x: number });
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -11583,8 +11626,46 @@ export class Game {
     const plan = this.xPlanByConvoke(player, cardId, def, costString, face, targetCount, manaOnly);
     const byDelve = this.maxXByDelve(player, cardId, def, costString, face, targetCount, plan.maxX);
     const byWaterbend = this.maxXByWaterbend(player, cardId, def, costString, face, targetCount, plan.maxX);
-    const most = Math.max(byDelve, byWaterbend);
+    const byAssist = this.maxXByAssist(player, cardId, def, costString, face, targetCount, plan.maxX);
+    const most = Math.max(byDelve, byWaterbend, byAssist);
     return most > plan.maxX ? { maxX: most, convoke: [] } : plan;
+  }
+
+  /**
+   * The largest `{X}` the caster's mana reaches with the assist being judged
+   * (`assistChoice` — rule 702.132a: the helper pays some of the total cost's
+   * generic mana, X's included), at least `floor` — or `floor` with none.
+   * Dearer as X rises, so tried upwards until it fails.
+   */
+  private maxXByAssist(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    costString: string | null,
+    face: number,
+    targetCount: number,
+    floor: number,
+  ): number {
+    const choice = this.assistChoice;
+    if (choice === undefined || choice.for !== cardId || !def.assist) return floor;
+    return this.withFace(cardId, face, () => {
+      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const payable = (k: number): boolean => {
+        const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
+        const helped =
+          choice.amount === "max"
+            ? this.assistCapacity(choice.player, cardId, cost.generic)
+            : Math.min(choice.amount, cost.generic);
+        return this.payMana(player, { ...cost, generic: cost.generic - helped }, undefined, undefined, purpose) !== null;
+      };
+      const cap = this.manaCapacityOf(player) + this.manaCapacityOf(choice.player);
+      let best = floor;
+      for (let k = floor + 1; k <= cap; k += 1) {
+        if (!payable(k)) break;
+        best = k;
+      }
+      return best;
+    });
   }
 
   /**
@@ -12754,9 +12835,14 @@ export class Game {
     if (costString === null) return `${def.name} has no mana cost to pay (rule 118.6)`;
     // At the X being cast for: convoking creatures can pay for X (Chord of
     // Calling), so a convoke can't be judged against the cost at X=0.
-    const baseCost = this.withFace(cardId, face, () =>
+    const totalCost = this.withFace(cardId, face, () =>
       this.castingCostOf(player, cardId, def, Math.max(0, Math.floor(xValue)), costString, targetCount, targets),
     );
+    // Assist (rule 702.132a): the helper's share of the generic mana is paid
+    // before the caster begins to pay — so before delve, convoke or mana.
+    const assisted = this.assistChoice?.for === cardId ? this.judgeAssist(player, cardId, def, totalCost.generic, via) : 0;
+    if (typeof assisted === "string") return assisted;
+    const baseCost = assisted > 0 ? { ...totalCost, generic: totalCost.generic - assisted } : totalCost;
     // Delve (rule 702.66): each card exiled pays {1} of the total cost.
     if (delve !== undefined && delve.length > 0) {
       if (!this.hasDelve(player, def)) return `${def.name} does not have delve`;
@@ -12946,6 +13032,204 @@ export class Game {
       else colored[pays] -= 1;
     }
     return { ...cost, generic, colored };
+  }
+
+  // --- assist (rule 702.132) ---------------------------------------------
+
+  /** The assist the cast of `assistChoice.for` is being judged or carried
+   * out with — see {@link AssistChoice}. Never part of the state: set only
+   * around one judgement or one cast. */
+  private assistChoice: AssistChoice | undefined = undefined;
+
+  private withAssistChoice<T>(choice: AssistChoice, run: () => T): T {
+    const before = this.assistChoice;
+    this.assistChoice = choice;
+    try {
+      return run();
+    } finally {
+      this.assistChoice = before;
+    }
+  }
+
+  /** Who `caster` may choose to assist them (rule 702.132a, "another
+   * player"): every other player still in the game. */
+  private assistCandidates(caster: PlayerId): PlayerId[] {
+    return this.state.turnOrder.filter((p) => p !== caster && this.state.players[p]?.hasLost !== true);
+  }
+
+  /** The most generic mana, up to `limit`, `assistant`'s mana could pay
+   * toward the spell `card` now — dearer as it rises, so tried upwards. */
+  private assistCapacity(assistant: PlayerId, card: ObjectId, limit: number): number {
+    const purpose: ManaPurpose = { kind: "cast", card };
+    let best = 0;
+    for (let k = 1; k <= limit; k += 1) {
+      if (this.payMana(assistant, parseManaCost(`{${k}}`), undefined, undefined, purpose) === null) break;
+      best = k;
+    }
+    return best;
+  }
+
+  /**
+   * The assist being judged (`assistChoice`) for `player`'s cast of `def`,
+   * whose total cost has `generic` generic mana: why it can't be, or how
+   * much of that generic it pays — the amount chosen, or for `"max"` all
+   * the helper's mana could. Rule 702.132a: "another player", "any amount of
+   * the generic mana in the spell's total cost" — cost increases and
+   * reductions included, the printed {N} only the reminder.
+   */
+  private judgeAssist(player: PlayerId, cardId: ObjectId, def: CardDefinition, generic: number, via?: CastVia): string | number {
+    const choice = this.assistChoice;
+    if (choice === undefined) return 0;
+    if (!def.assist) return `${def.name} doesn't have assist`;
+    // A spell cast as something resolves (a `cast-now`) is cast inside that
+    // resolution, which can't wait on another player.
+    if (via === "effect") return "assist isn't offered for a spell cast while something resolves";
+    if (!this.assistCandidates(player).includes(choice.player)) return `${choice.player} can't assist ${player}`;
+    if (choice.strict && generic === 0) return `${def.name}'s total cost has no generic mana for another player to pay`;
+    let amount: number;
+    if (choice.amount === "max") {
+      amount = this.assistCapacity(choice.player, cardId, generic);
+    } else {
+      amount = choice.amount;
+      if (!Number.isSafeInteger(amount) || amount < 0) return `${amount} is not an amount of mana`;
+      if (amount > generic) return `${choice.player} can pay at most ${generic} of ${def.name}'s cost`;
+      if (
+        amount > 0 &&
+        this.payMana(choice.player, parseManaCost(`{${amount}}`), undefined, undefined, { kind: "cast", card: cardId }) === null
+      ) {
+        return `${choice.player} can't pay {${amount}}`;
+      }
+    }
+    choice.seen = { generic, amount };
+    return amount;
+  }
+
+  /**
+   * A spell's cast offers (`castSpellActionsAlone`), and for a spell with
+   * assist (rule 702.132a) the same again for each other player whose mana
+   * could pay some of it, each tagged with that player (`assist`) and judged
+   * as though they paid all they could. A variant whose total cost has no
+   * generic mana isn't one assist can help (an `{X}` spell's least X moves up
+   * to one that has some).
+   */
+  private castSpellActions(
+    player: PlayerId,
+    card: ObjectId,
+    cardName: string,
+    def: CardDefinition,
+    opts: {
+      via?: CastVia;
+      face?: number;
+      costString: string | null;
+      graveyardGrant?: GraveyardGrant;
+    },
+  ): LegalAction[] {
+    const alone = this.castSpellActionsAlone(player, card, cardName, def, opts);
+    if (!def.assist || opts.via === "effect" || this.assistChoice !== undefined) return alone;
+    const helped: LegalAction[] = [];
+    for (const other of this.assistCandidates(player)) {
+      const most = this.assistCapacity(other, card, this.manaCapacityOf(other));
+      if (most === 0) continue;
+      const choice: AssistChoice = { for: card, player: other, amount: "max", strict: false };
+      for (const offer of this.withAssistChoice(choice, () => this.castSpellActionsAlone(player, card, cardName, def, opts))) {
+        if (offer.kind !== "cast-spell") continue;
+        const genericAt = (x: number): number =>
+          this.withFace(card, offer.face ?? 0, () =>
+            this.castingCostOf(player, card, def, x, opts.costString, 0),
+          ).generic;
+        let xCost = offer.xCost;
+        if (offer.free === true) continue;
+        if (xCost === undefined) {
+          if (genericAt(0) === 0) continue;
+        } else {
+          const minX = xCost.minX ?? 0;
+          if (genericAt(minX) === 0) {
+            if (xCost.maxX <= minX) continue;
+            xCost = { ...xCost, minX: minX + 1 };
+          }
+        }
+        helped.push({
+          ...offer,
+          ...(xCost !== undefined ? { xCost } : {}),
+          assist: other,
+          assistMax: most,
+        });
+      }
+    }
+    return [...alone, ...helped];
+  }
+
+  /** Every unit of mana `player` could make now, floating mana included —
+   * the most any payment of theirs could reach. */
+  private manaCapacityOf(player: PlayerId): number {
+    return (
+      this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
+      this.state.players[player].manaPool.length
+    );
+  }
+
+  /**
+   * A cast with `assist` (rule 702.132a): the chosen player is asked how much
+   * of the total cost's generic mana they pay — anything from 0 to all their
+   * mana pays — before the cast goes on (`resumeAssistedCast`). Legal when
+   * the caster could pay the rest were all of that paid for them. The spell
+   * is shown to everyone while they decide: it's on the stack by then (rule
+   * 601.2a), here only in the hand until the cast is done.
+   */
+  private requestAssist(action: Extract<Action, { type: "cast-spell" }>): void {
+    const assistant = action.assist;
+    if (assistant === undefined) return;
+    const why = this.canDispatch(action);
+    if (why !== null) throw new Error(why);
+    const probe: AssistChoice = { for: action.card, player: assistant, amount: "max", strict: true };
+    this.withAssistChoice(probe, () => this.canDispatch(action));
+    const max = probe.seen?.amount ?? 0;
+    // The least the caster's own mana leaves for the helper to pay.
+    let need = 0;
+    while (
+      need < max &&
+      this.withAssistChoice({ for: action.card, player: assistant, amount: need, strict: true }, () =>
+        this.canDispatch(action),
+      ) !== null
+    ) {
+      need += 1;
+    }
+    this.state.awaiting = {
+      kind: "choose-number",
+      player: assistant,
+      source: action.card,
+      min: 0,
+      max,
+      prompt:
+        `Assist: pay up to ${max} of this spell's generic mana` +
+        (need > 0 ? ` (less than ${need} and the cast is undone)` : ""),
+      assist: { cast: action, need },
+    };
+    this.emit({ type: "assist-requested", player: assistant, caster: action.player, object: action.card, max });
+    this.afterPlayerAction(action.player);
+  }
+
+  /**
+   * The assisting player chose to pay `amount` (rule 702.132a): the cast goes
+   * on with that much of its generic mana theirs to pay (`castSpell`), the
+   * caster paying the rest — or, if the caster can't, the whole cast is
+   * reversed and nothing is paid (rule 733.1), the caster keeping priority
+   * (733.2).
+   */
+  private resumeAssistedCast(assistant: PlayerId, ask: AssistAsk, amount: number): void {
+    const cast = ask.cast;
+    this.emit({ type: "assist-chosen", player: assistant, caster: cast.player, object: cast.card, amount });
+    // The caster held priority as they began casting: theirs again for the
+    // rest of it, the helper's turn to answer over.
+    this.state.priority.holder = cast.player;
+    const choice: AssistChoice = { for: cast.card, player: assistant, amount, strict: true };
+    const why = this.withAssistChoice(choice, () => this.canDispatch(cast));
+    if (why !== null) {
+      this.emit({ type: "cast-reversed", player: cast.player, object: cast.card, reason: why });
+      this.prepareForPriority(cast.player);
+      return;
+    }
+    this.withAssistChoice(choice, () => this.dispatchOne(cast));
   }
 
   // --- waterbend (rule 701.67) -------------------------------------------
@@ -13890,8 +14174,16 @@ export class Game {
     if (targetingLife > 0 && !this.canPayLife(player, taxLife + targetingLife)) {
       throw new Error(`${player} has too little life to pay the ${targetingLife} life targeting costs`);
     }
+    const totalCost = this.castingCostOf(player, cardId, def, chosenX, costString, targetCount, targets);
+    // Assist (rule 702.132a): the generic mana the helper chose to pay
+    // (judged above) comes off before the caster pays any of it.
+    const assistChoice = this.assistChoice;
+    const assist =
+      assistChoice?.for === cardId && typeof assistChoice.amount === "number" && assistChoice.amount > 0
+        ? { player: assistChoice.player, amount: Math.min(assistChoice.amount, totalCost.generic) }
+        : undefined;
     const fullCost = this.reduceCostByDelve(
-      this.castingCostOf(player, cardId, def, chosenX, costString, targetCount, targets),
+      assist === undefined ? totalCost : { ...totalCost, generic: totalCost.generic - assist.amount },
       delve,
     );
     let convoked: PaidConvoke[] = [];
@@ -14151,19 +14443,32 @@ export class Game {
     // Cast bestowed: an Aura spell with enchant creature from here on (rule
     // 702.103b), what it targets chosen as an Aura's is.
     if (overload && def.overload?.keyword === "bestow") object.bestowed = true;
-    this.executePayment(player, payment);
+    // Assist (rule 702.132a): the helper pays their share before the caster
+    // begins to pay — with their own mana, which is still mana spent to cast
+    // the spell (its colours and sources read with the caster's below).
+    if (assist !== undefined) {
+      const help = this.payMana(assist.player, parseManaCost(`{${assist.amount}}`), undefined, undefined, payment.purpose);
+      if (help === null) throw new Error(`${assist.player} cannot pay {${assist.amount}} of ${def.name}'s cost`);
+      this.executePayment(assist.player, help);
+      // Expend (rule 700.14) counts "the amount of mana that player spent
+      // this turn to cast spells": the helper paid part of a cost to cast one.
+      const before = this.state.players[assist.player]?.turnHistory?.manaSpentOnSpells ?? 0;
+      this.emit({ type: "mana-expended", player: assist.player, before, after: before + assist.amount });
+    }
+    this.executePayment(player, payment, assist !== undefined);
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
     // life paid for a Phyrexian pip isn't counted as mana.
-    object.manaSpent = manaValue(payment.resolved);
+    const ownSpent = manaValue(payment.resolved);
+    object.manaSpent = ownSpent + (assist?.amount ?? 0);
     // Each Phyrexian pip paid with life cost 2 (rule 107.4f) — compleated
     // (702.150a) reads how many.
     if (payment.life > 0) object.phyrexianPaidWithLife = payment.life / 2;
     // Expend (rule 700.14): the mana this player has spent on spells this
     // turn, before and after this payment — `turnHistory` counts it as the
     // event passes.
-    if (object.manaSpent > 0) {
+    if (ownSpent > 0) {
       const before = this.state.players[player]?.turnHistory?.manaSpentOnSpells ?? 0;
-      this.emit({ type: "mana-expended", player, before, after: before + object.manaSpent });
+      this.emit({ type: "mana-expended", player, before, after: before + ownSpent });
     }
     // The commander tax, paid in life rather than mana (Liesa). Part of the
     // total cost, so paid alongside the mana; it isn't mana spent.
@@ -17575,9 +17880,12 @@ export class Game {
   /** Carry out a {@link payMana} result: tap/sacrifice each planned source and
    * add its mana, spend the resolved cost from the pool, then pay any
    * Phyrexian life. */
-  private executePayment(player: PlayerId, payment: ManaPayment): void {
+  /** Carry out `payment`. `adding`: a cast's second payment, after an
+   * assisting player's (rule 702.132a) — what the spell records of the mana
+   * spent on it is added to theirs rather than replacing it. */
+  private executePayment(player: PlayerId, payment: ManaPayment, adding = false): void {
     for (const step of payment.steps) this.useManaSource(step);
-    this.spendFromPool(player, payment.resolved, payment.purpose);
+    this.spendFromPool(player, payment.resolved, payment.purpose, adding);
     if (payment.life > 0) this.changeLife(player, -payment.life);
   }
 
@@ -18044,7 +18352,7 @@ export class Game {
    *
    * Each unit spent fires its `onSpend` rider (Path of Ancestry).
    */
-  private spendFromPool(player: PlayerId, cost: ManaCost, purpose: ManaPurpose = null): void {
+  private spendFromPool(player: PlayerId, cost: ManaCost, purpose: ManaPurpose = null, adding = false): void {
     const pool = this.state.players[player].manaPool;
     const spent: ManaUnit[] = [];
 
@@ -18143,19 +18451,22 @@ export class Game {
       }
     }
     // Where the mana that cast it came from ("if mana from an artifact was
-    // spent to cast it"). Paid for only once, so this is all of it.
+    // spent to cast it"). Paid for only once, so this is all of it — or,
+    // `adding`, the rest of it after an assisting player's share.
     if (purpose !== null && purpose.kind === "cast") {
       const spell = this.state.objects[purpose.card];
       if (spell !== undefined) {
-        spell.manaSpentFrom = spent.flatMap((u) => (u.from === undefined ? [] : [u.from]));
+        const from = spent.flatMap((u) => (u.from === undefined ? [] : [u.from]));
+        spell.manaSpentFrom = adding ? [...(spell.manaSpentFrom ?? []), ...from] : from;
         // Converge's "colors of mana spent" — colourless isn't one (rule 105.1).
-        spell.manaSpentColors = COLORS.filter((c) => spent.some((u) => u.type === c));
+        const before = adding ? (spell.manaSpentByColor ?? {}) : {};
         // Adamant's "at least three black mana": how much of each.
         const byColor: Partial<Record<Color, number>> = {};
         for (const c of COLORS) {
-          const n = spent.filter((u) => u.type === c).length;
+          const n = spent.filter((u) => u.type === c).length + (before[c] ?? 0);
           if (n > 0) byColor[c] = n;
         }
+        spell.manaSpentColors = COLORS.filter((c) => (byColor[c] ?? 0) > 0);
         spell.manaSpentByColor = byColor;
       }
     }

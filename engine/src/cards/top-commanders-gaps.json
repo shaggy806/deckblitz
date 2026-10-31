@@ -680,7 +680,8 @@
   "stat:cards-discarded-this-turn",
   "stat:cards-library-to-graveyard-this-turn",
   "stat:cards-put-into-graveyard-this-turn",
-  "stat:permanents-to-graveyard-from-battlefield-this-turn"
+  "stat:permanents-to-graveyard-from-battlefield-this-turn",
+  "mechanic:assist"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

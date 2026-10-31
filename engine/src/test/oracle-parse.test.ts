@@ -835,6 +835,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Morph—Reveal a blue card in your hand.").morph).toBeUndefined();
     expect(face("Convoke", "Instant", {}).convoke).toBe(true);
     expect(face("Improvise", "Sorcery", {}).improvise).toBe(true);
+    // Assist (rule 702.132a), its reminder text stripped.
+    expect(face("Assist (Another player can pay up to {5} of this spell's cost.)", "Sorcery", {}).assist).toBe(true);
     expect(face("Undaunted", "Sorcery", {}).selfCostReduction?.reduceGeneric).toEqual({ opponents: true });
     // Mayhem: a cost, or none on a land (played from the graveyard).
     expect(face("Mayhem {4}{R}").mayhem).toEqual({ cost: "{4}{R}" });

@@ -228,6 +228,7 @@ function faceSource(face, ctx) {
     splice: parsed.splice,
     convoke: parsed.convoke,
     improvise: parsed.improvise,
+    assist: parsed.assist,
     toxic: parsed.toxic,
     devour: parsed.devour,
     tribute: parsed.tribute,

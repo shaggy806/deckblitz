@@ -198,10 +198,15 @@ section keeps only what to do next.
   `discardedThisTurn` filter, a declined madness card keeping it; 10 freed — Follow the Bodies
   still needs gravestorm, and Dimir Strandcatcher's "opponents being attacked" wants a look; 8
   proving cards — Change of Fortune, Gilt-Blade Prowler, Recalibrate, Cruel Calculations,
-  Fraying Sanity, Structural Assault, Ichor Shade, Shadow of the Grave).
-  **524 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `mechanic:assist` (16), `effect:choices-by-other-players` (16), `cost:loyalty-x` (15),
-  `mechanic:meld` (15).
+  Fraying Sanity, Structural Assault, Ichor Shade, Shadow of the Grave),
+  assist (2026-10-31: rule 702.132a — a cast's `assist` names the other player asked, its offer
+  an assist variant per player whose mana could help; they answer a `choose-number` of how much
+  of the total cost's generic mana they pay, the caster paying the rest or the cast reversed
+  (rule 733.1); the client's "(assist: Bob may pay up to N)" buttons; bots never ask, v1 offers
+  nothing; 16 freed, 3 proving cards — Charging Binox, Gang Up, Out of Bounds).
+  **537 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:choices-by-other-players` (16), `cost:loyalty-x` (15), `mechanic:meld` (15),
+  `cost:remove-any-counter-cost` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -270,6 +275,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
 - **"Add one mana of the chosen color" with no colour chosen adds any colour**: the rulings say none (Shimmerwilds Growth; Heraldic Banner and Big Apple, 3 a.m. share the fallback). Only an object that never entered can be asked; found by B249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).
 - **A mana ability with a `discard` cost never pays it**: the mana-ability activation resolves before the discard is paid, and nothing refuses one, so "Discard a card: Add {B}" would make free mana (Skirge Familiar, `cost:mana-ability-discard-cost`, batch 236).

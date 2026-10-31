@@ -560,6 +560,14 @@ missing. Re-run `--greedy` for Phase 2's order.
   filter. 4 keys (the group's 4); 8 proving cards. 10 freed (queued: 524). The family's other
   units (attackers by filter, entered-as-entered, the one-card tallies) left open. Engine-only.
   Next: `mechanic:assist` (16), `effect:choices-by-other-players` (16), `cost:loyalty-x` (15).
+- **2026-10-31: `mechanic:assist`, features only** (an overnight agent) — rule 702.132a: assist
+  variants of a cast per other player whose mana could help, the cast's `assist`, that player's
+  answer as the existing `choose-number` decision (an `AssistAsk` continuation, as gift's
+  `giftAsk` rides on `choose-modes`), the caster paying the rest or the cast reversed (rule
+  733.1). 1 key; 3 proving cards. 16 freed (queued: 537). Adds no decision kind; the client
+  echoes `assist` and labels the variant. Bots never ask (v1 answers 0, v2 searches). Not on a
+  `cast-now` cast (an Engine rules gap). Next: `effect:choices-by-other-players` (16),
+  `cost:loyalty-x` (15), `mechanic:meld` (15).
 
 ## Rough size
 

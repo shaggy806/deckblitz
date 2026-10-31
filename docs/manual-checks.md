@@ -5800,3 +5800,18 @@ engine terms. A second thing to check is a second test.
 ### Siege Behemoth: each blocked attacker its own choice, four players
 - **Do:** Attack Bob with Siege Behemoth and Grizzly Bears. As Bob, block Siege Behemoth with Hill Giant and Grizzly Bears with Wall of Denial. As you, click "Confirm" for Siege Behemoth, then "All to Bob" for Grizzly Bears.
 - **Expect:** You're asked once per attacker. Hill Giant dies, Wall of Denial survives, and Bob goes to 38.
+
+## Another player helps pay (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Charging Binox: Bob helps pay
+- **Do:** Click "Cast Charging Binox (assist: Bob may pay up to 5)" under the card. As Bob, choose 4.
+- **Expect:** Bob's bar reads "Charging Binox — assist: pay up to 5 of this spell's generic mana (less than 4 and the cast is undone) (0–5)". Charging Binox resolves onto your battlefield; four of Bob's Islands and your four Forests are tapped.
+- **Not a bug:** clicking the card itself does nothing — the button says who you're asking.
+
+### Charging Binox: too little help undoes the cast
+- **Do:** Click "Cast Charging Binox (assist: Bob may pay up to 5)". As Bob, choose 2.
+- **Expect:** The log says your cast of Charging Binox is undone. It's back in your hand, nothing is tapped, and you can try again.
+
+### Gang Up: Carol helps pay for X, four players
+- **Do:** Click "Cast Gang Up (X=3) (assist: Carol may pay up to 3)" and target Bob's Gray Ogre. As Carol, choose 3.
+- **Expect:** Only Carol is offered (the others have no mana), at X=2 to 4. Carol's three Islands and one of your Swamps are tapped, and Gray Ogre dies.

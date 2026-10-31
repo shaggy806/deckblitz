@@ -3264,6 +3264,16 @@ export interface CardDefinition {
    */
   readonly delve: boolean;
   /**
+   * Assist (rule 702.132a — Charging Binox): "Another player can pay up to
+   * {N} of this spell's cost." As it's cast, its caster may choose another
+   * player (the cast's `assist`), who may pay any amount of the generic mana
+   * in its total cost before the caster pays the rest (601.2g–h) — the
+   * assisting player's `choose-number`, the cast waiting on it (`Game`'s
+   * `requestAssist`). Not a cost change: the spell's mana cost and mana
+   * value are its own.
+   */
+  readonly assist: boolean;
+  /**
    * A cost reduction printed on the spell itself, gated on a board-state
    * condition (rule 601.2f — Ferocious: "if you control a creature with
    * power 4 or greater, this spell costs {2} less to cast"). Unlike
@@ -3985,6 +3995,7 @@ const PRINTED_ABILITY: {
   improvise: (def) => def.improvise,
   becomesDayAsEnters: (def) => def.becomesDayAsEnters,
   delve: (def) => def.delve,
+  assist: (def) => def.assist,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
@@ -4205,6 +4216,8 @@ interface CardDraft {
   improvise?: boolean;
   becomesDayAsEnters?: boolean;
   delve?: boolean;
+  /** Assist (rule 702.132a) — see {@link CardDefinition.assist}. */
+  assist?: boolean;
   selfCostReduction?: {
     readonly condition: StaticCondition;
     readonly reduceGeneric: CostReductionAmount;
@@ -4446,6 +4459,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     improvise: draft.improvise ?? false,
     becomesDayAsEnters: draft.becomesDayAsEnters ?? false,
     delve: draft.delve ?? false,
+    assist: draft.assist ?? false,
     selfCostReduction: draft.selfCostReduction ?? null,
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
     targetCostReduction: draft.targetCostReduction ?? null,

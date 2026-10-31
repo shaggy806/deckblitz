@@ -910,6 +910,12 @@ function viewForUncached(
   if (state.awaiting?.kind === "cast-now" && state.awaiting.player === viewer) {
     visibleIds.push(...(state.awaiting.looked ?? []));
   }
+  // A spell waiting on its assisting player (rule 702.132a) is one being
+  // cast — on the stack for everyone to see (601.2a) — though it waits in
+  // its caster's hand here until the cast is done.
+  if (state.awaiting?.kind === "choose-number" && state.awaiting.assist !== undefined) {
+    visibleIds.push(state.awaiting.assist.cast.card);
+  }
   // And a hand looked at before naming a card (Sorcerous Spyglass).
   if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
     visibleIds.push(...(state.awaiting.looked ?? []));

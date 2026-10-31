@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: assist** (2026-10-31; `mechanic:assist`, rule 702.132a). A card's
+  `assist: true`; its cast offers come again once per other player whose mana could pay some of
+  it (`assist`, `assistMax`), judged as though that player paid all they could, an `{X}` spell's
+  X reaching further. A cast with `assist` raises that player's `choose-number` (0 to the most
+  their mana pays of the total cost's generic — increases and reductions included, the
+  rulings), the spell shown to everyone meanwhile; their answer resumes the cast, their mana
+  paid first and counted as spent on it (colours, sources, expend), or reverses it whole when
+  the caster can't pay the rest (rule 733.1, the caster keeping priority, 733.2). The client
+  labels the variant "(assist: Bob may pay up to N)" and the log says who offered what. Bots
+  never ask; v1 offers nothing, v2 searches the amounts. Not on a `cast-now` cast (Engine rules
+  gaps). The scaffolder reads the keyword. 16 freed; proving cards Charging Binox, Gang Up, Out
+  of Bounds.
 - **Need-keys Phase 2: the turn history's graveyard tallies** (2026-10-31;
   `stat:cards-discarded-this-turn`, `stat:cards-library-to-graveyard-this-turn`,
   `stat:cards-put-into-graveyard-this-turn`,
