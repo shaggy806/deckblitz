@@ -501,6 +501,59 @@ count (Kozilek, the Broken Reality), "as this enters, turn all other …
 face down" (Ixidron), a copy that lasts until turned face down (Vesuvan
 Shapeshifter), a trigger's "its owner" player (Thieving Amalgam).
 
+### Casting abilities given to the spells you cast — built 2026-10-31
+
+The need-keys Phase 2 family `static:grant-abilities-to-spells`, its group
+(grant-convoke, grant-improvise, grant-prowl-to-spells,
+grant-undaunted-to-exiled-spell), features only. `grantsToSpells` takes
+`convoke`, `improvise` and `prowl` (a cost), judged through `castGrantReaches`
+where the card is as it's cast — which now honours `firstEachTurn` there too
+(Peri Brown). Convoke and improvise on one spell (one printed, one granted) tap
+creatures for convoke and artifacts for improvise in one payment: a creature
+pays generic or one of its colours, an artifact that isn't a creature only
+generic (rules 702.51a, 702.126a); the offer says `alsoImprovise` and the
+client words it. A granted prowl is an alternative cost under the printed
+prowl's condition, answering `self-prowl-paid`. `allow-cast-from-exile` takes
+`whileExiled` and `undaunted` (rule 702.125, an impulse permission's
+`undaunted`, beside a printed one — 702.125c). The scaffolder reads "[kind]
+spells you cast [from exile] have convoke / improvise / prowl {cost}". Proving
+cards: Chief Engineer, Inspiring Statuary, Hunting Velociraptor, Durnan of the
+Yawning Portal. Not built: "the next spell you cast this turn has convoke /
+improvise" (Flockchaser Phantom, Archway of Innovation —
+`effect:next-spell-has-convoke`), and a `hasConvoke` filter still reads only a
+printed convoke.
+
+### Graveyard cast permissions: other graveyards, and a card's own costs — built 2026-10-31
+
+The need-keys Phase 2 family `zone:graveyard-cast-permissions`, both of its
+groups, features only. **Another player's graveyard**: the resolved
+`player-effect` `castFromGraveyard` takes `whose` (a `PlayerScope` fixed as it
+resolves — The Great Work's "any graveyard", Whispersteel Dagger's "that
+player's"), `once` (one spell, then used up), `spendAs` (mana as though any
+color, for that spell only — rule 609.4b, read through the permission the cast
+names) and `exileAfterwards`; a one-shot grant on a card (`grant-graveyard-cast`)
+now reaches a card its caster doesn't own; and `cast-now` takes `from:
+"any-graveyard"` (Spectral Arcanist). The caster controls such a spell and its
+owner owns it (rule 108.3). **A card's own permission with costs**
+(`castSelfFromGraveyard`, the costs `GraveyardCastCosts` shared with a
+permanent's `castFromGraveyard`): life, discards (chosen after the mana, as
+retrace's), a sacrifice, exiling N other cards of a kind, an alternative mana
+cost (rule 118.9 — no other alternative cost with it), {1} more per other card
+of a kind (rule 601.2f), and "or from exile". None is offered that can't be
+paid (601.2h). The scaffolder reads "You may cast ~ from your graveyard [or from
+exile] by … in addition to paying its other costs / by paying {cost} [and …]
+rather than paying its mana cost / if you pay {1} more … for each other
+creature card in your graveyard". Keys: graveyard-cast-permissions,
+cast-from-any-graveyard, cast-self-from-graveyard, graveyard-self-cast-extra-cost,
+self-graveyard-cast-cost-increase, self-graveyard-cast-discard-cost,
+graveyard-cast-exile-cost. Proving cards: Whispersteel Dagger, Spectral
+Arcanist, Demonic Embrace, Raffine's Guidance, Helbrute, Risen Executioner,
+Squee, the Immortal. Not built: Yawgmoth's Will (its turn-long exile
+replacement, and the owner's choice between it and buyback — rule 616.1), a
+count of sacrifices (Scourge of Nel Toth), and the riders on a spell cast
+under a card's own permission (Worldheart Phoenix's counters, Undead
+Sprinter's) — `zone:graveyard-cast-rider-own-permission`.
+
 ### Each permanent of a kind deals damage — built 2026-10-31
 
 The need-keys Phase 2 family `effect:each-creature-damages-itself`, its group

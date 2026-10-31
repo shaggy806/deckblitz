@@ -18,6 +18,17 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
+- **Buyback always beats an "exile it instead" replacement.** Rule 616.1 lets the affected
+  object's owner (or controller) choose which of two replacement effects applies first; a
+  resolving spell whose buyback was paid (rule 702.27a, itself "put into its owner's hand
+  instead") under Rest in Peace, Yawgmoth's Agenda or Yawgmoth's Will's "if a card would be put
+  into your graveyard from anywhere this turn, exile that card instead" should let its owner pick
+  (Yawgmoth's Will's ruling: "You get to choose if the Buyback returns the card to your hand or
+  the card gets exiled"). `Game`'s spell-resolution finish moves a bought-back spell to the hand
+  before any graveyard replacement is asked (beside Feather's 616.1 choice, which it could
+  follow: `beginModesChoice` with the two outcomes). Blocks Yawgmoth's Will, together with its
+  turn-long graveyard-to-exile replacement (a `player-effect` the engine doesn't have yet — the
+  battlefield statics are scanned by `graveyardExileReplacements`).
 - **Of several granted alternative costs, only the first is offered.** Rule 118.9 lets the
   caster choose any one alternative cost that applies (118.9a: only one). `Game.alternativeCostOf`
   returns the first `alternativeCostForSpells` static that matches the spell (skipping an energy

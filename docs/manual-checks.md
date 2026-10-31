@@ -5877,3 +5877,14 @@ engine terms. A second thing to check is a second test.
 ### Void Attendant: a face-down exiled card is picked as its back, four players
 - **Do:** Pass priority. As Carol, cast Expensive Taste (Decadent Dragon's Adventure) targeting Bob, and let it resolve. Back as Alice, activate Void Attendant's ability and pick one of the two "Face down" backs.
 - **Expect:** The popup shows Bob's two face-down cards as backs you can pick, never their names, beside Carol's Decadent Dragon (on an adventure, face up). One of Bob's two (at random) goes to Bob's graveyard, face up; the other stays in exile.
+
+## Graveyard cast permissions and granted casting abilities (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Spectral Arcanist: casting a spell from an opponent's graveyard
+- **Do:** Cast Spectral Arcanist.
+- **Expect:** As it enters you're asked whether to cast a spell, offered Bob's Opt from his graveyard but not his Divination. Cast it: you scry 1 and draw a card, and Opt goes to exile, not a graveyard.
+
+### Inspiring Statuary: convoke and improvise on one spell
+- **Do:** Cast Siege Wurm from your hand.
+- **Expect:** The bar reads "Siege Wurm: convoke or improvise — tap up to 7 creature or artifacts to help pay". Click "Convoke and improvise 6" (the Elves, the Ornithopters and the Statuary, chosen for you): the last {1} comes from a Wastes and the Wurm resolves.
+

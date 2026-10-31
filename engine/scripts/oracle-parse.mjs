@@ -4319,6 +4319,20 @@ export function parseFace(face, ctx = {}) {
       out.additionalCost = { exileFromGraveyard: { count, ...(m[2] ? { filter: { type: "creature" } } : {}) } };
       continue;
     }
+    // The card's own graveyard permission with costs of its own (rule
+    // 601.2f — `castSelfFromGraveyard`): "You may cast ~ from your
+    // graveyard by paying 3 life and discarding a card in addition to paying
+    // its other costs" (Demonic Embrace), "… by paying {2}{W} rather than
+    // paying its mana cost" (Raffine's Guidance), "… if you pay {1} more to
+    // cast it for each other creature card in your graveyard" (Risen
+    // Executioner), "… or from exile" (Squee, the Immortal).
+    if (castable) {
+      const self = selfGraveyardCast(line);
+      if (self !== null) {
+        out.castSelfFromGraveyard = self;
+        continue;
+      }
+    }
     // A processor's additional cost (Processor Assault): which card, chosen
     // as the cost is paid (`additionalCost.putFromExile`).
     if (castable && /^As an additional cost to cast ~, put a card an opponent owns from exile into that player's graveyard\.$/.test(line)) {
@@ -4883,6 +4897,60 @@ export function parseFace(face, ctx = {}) {
         a.trigger = { on: "leaves-battlefield", who: "self", to: ["graveyard"] };
       }
     }
+  }
+  return out;
+}
+
+/** One cost of a "by …" graveyard permission ("paying 3 life", "discarding
+ * a card", "exiling another creature card from your graveyard", "sacrificing
+ * an artifact or creature") as `GraveyardCastCosts` fields, or `null`. */
+function graveyardCastCost(part) {
+  let m;
+  if ((m = /^paying (\d+) life$/.exec(part))) return { payLife: Number(m[1]) };
+  if ((m = /^discarding (a|one|two|three) cards?$/.exec(part))) return { discard: NUMBERS[m[1]] };
+  if ((m = /^exiling (another|one other|two other|three other|four other|five other|six other) (creature )?cards? from your graveyard$/.exec(part))) {
+    const count = m[1] === "another" ? 1 : NUMBERS[m[1].split(" ")[0]];
+    return { exileOthers: count, ...(m[2] ? { exileFilter: { type: "creature" } } : {}) };
+  }
+  const SACRIFICE = {
+    "an artifact or creature": { typesAnyOf: ["artifact", "creature"] },
+    "a creature": { type: "creature" },
+    "an artifact": { type: "artifact" },
+    "a land": { type: "land" },
+  };
+  if ((m = /^sacrificing (.+)$/.exec(part)) && SACRIFICE[m[1]] !== undefined) return { sacrifice: SACRIFICE[m[1]] };
+  return null;
+}
+
+/**
+ * "You may cast ~ from your graveyard [or from exile] [by … in addition to
+ * paying its other costs | by paying {cost} [and …] rather than paying its
+ * mana cost | if you pay {1} more to cast it for each other creature card
+ * in your graveyard]." — a card's `castSelfFromGraveyard`, or `null`.
+ */
+function selfGraveyardCast(line) {
+  const m = /^You may cast ~ from your graveyard( or from exile)?(?: (.+))?\.$/.exec(line);
+  if (m === null) return null;
+  const out = m[1] ? { fromExile: true } : {};
+  const rest = m[2];
+  if (rest === undefined) return m[1] ? out : null;
+  if (rest === "if you pay {1} more to cast it for each other creature card in your graveyard") {
+    return { ...out, costIncreasePerOther: { type: "creature" } };
+  }
+  let costs;
+  let alt;
+  if ((alt = /^by paying ((?:\{[^}]+\})+)(?: and (.+))? rather than paying its mana cost$/.exec(rest))) {
+    out.mana = alt[1];
+    costs = alt[2] === undefined ? [] : alt[2].split(/, and |, | and /);
+  } else if ((alt = /^by (.+) in addition to paying its other costs$/.exec(rest))) {
+    costs = alt[1].split(/, and |, | and /);
+  } else {
+    return null;
+  }
+  for (const part of costs) {
+    const cost = graveyardCastCost(part);
+    if (cost === null) return null;
+    Object.assign(out, cost);
   }
   return out;
 }
@@ -5543,6 +5611,35 @@ function parseStatic(line, text) {
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  // A casting ability given to the spells you cast (`grantsToSpells`):
+  // "Artifact spells you cast have convoke" (Chief Engineer), "Nonartifact
+  // spells you cast have improvise" (Inspiring Statuary), "Spells you cast
+  // from exile have convoke" (Hoarding Broodlord), "Dinosaur spells you cast
+  // have prowl {2}{R}" (Hunting Velociraptor).
+  m = /^(?:(.+?) )?[Ss]pells you cast( from exile)? have (convoke|improvise|prowl ((?:\{[^}]+\})+))\.$/.exec(line);
+  if (m !== null) {
+    // The sentence's capital belongs to a type word ("Nonartifact",
+    // "Legendary creature"), not a subtype's ("Dinosaur").
+    const lowered = m[1] === undefined ? null : parseTypePhrase(m[1].charAt(0).toLowerCase() + m[1].slice(1));
+    const filter =
+      m[1] === undefined
+        ? {}
+        : lowered !== null && !(typeof lowered.subtype === "string" && /^[a-z]/.test(lowered.subtype))
+          ? lowered
+          : parseTypePhrase(m[1]);
+    if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
+      const grant = m[3] === "convoke" ? { convoke: true } : m[3] === "improvise" ? { improvise: true } : { prowl: m[4] };
+      return {
+        affects: { scope: "self" },
+        grantsToSpells: {
+          ...(m[1] !== undefined ? { filter } : {}),
+          ...(m[2] !== undefined ? { castFrom: ["exile"] } : {}),
+          ...grant,
+        },
+        text,
+      };
+    }
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).

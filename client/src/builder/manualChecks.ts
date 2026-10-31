@@ -8804,4 +8804,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       ],
     }),
   ),
+  // --- Graveyard cast permissions, granted casting abilities (2026-10-31, need-keys Phase 2)
+  preset(
+    "Spectral Arcanist: casting a spell from an opponent's graveyard",
+    board({ you: { bf: ['Island*4'], hand: ['Spectral Arcanist'] }, opp: { gy: ['Opt', 'Divination'] } }),
+  ),
+  preset(
+    'Inspiring Statuary: convoke and improvise on one spell',
+    board({
+      you: {
+        bf: ['Inspiring Statuary', 'Llanowar Elves*2', 'Ornithopter*3', 'Wastes*2'],
+        hand: ['Siege Wurm'],
+      },
+    }),
+  ),
 ]

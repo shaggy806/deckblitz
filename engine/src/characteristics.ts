@@ -1641,7 +1641,19 @@ export function castGrantReaches(
   if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) {
     return false;
   }
-  return grant.filter === undefined || matchesFilter(state, registry, cardId, grant.filter, { you: source.controller });
+  const filter = grant.filter;
+  if (filter !== undefined && !matchesFilter(state, registry, cardId, filter, { you: source.controller })) return false;
+  // "The first [filter] spell you cast each turn" (Peri Brown): no spell
+  // that matched as it was cast has been cast this turn yet.
+  if (grant.firstEachTurn === true) {
+    const earlier = (state.players[player]?.spellsCastThisTurnAs ?? []).some(
+      (cast) =>
+        filter === undefined ||
+        matchesFilter(state, registry, cast.id, filter, { you: source.controller, snapshot: cast.spell }),
+    );
+    if (earlier) return false;
+  }
+  return true;
 }
 
 /** Whether `spell`, on the stack, has split second (rule 702.61): printed, or

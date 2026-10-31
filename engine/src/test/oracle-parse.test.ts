@@ -4298,3 +4298,88 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
     });
   });
 });
+
+describe("a card's own graveyard permission with costs (castSelfFromGraveyard)", () => {
+  const read = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).castSelfFromGraveyard;
+  it("reads the costs, the alternative cost, the per-card increase and 'or from exile'", () => {
+    expect(
+      read(
+        "Demonic Embrace",
+        "Enchantment — Aura",
+        "Enchant creature\nYou may cast this card from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.",
+      ),
+    ).toEqual({ payLife: 3, discard: 1 });
+    expect(
+      read("Raffine's Guidance", "Enchantment — Aura", "Enchant creature\nYou may cast this card from your graveyard by paying {2}{W} rather than paying its mana cost."),
+    ).toEqual({ mana: "{2}{W}" });
+    expect(
+      read(
+        "Squee, Dubious Monarch",
+        "Legendary Creature — Goblin Noble",
+        "You may cast this card from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.",
+      ),
+    ).toEqual({ mana: "{3}{R}", exileOthers: 4 });
+    expect(
+      read(
+        "Helbrute",
+        "Artifact Creature — Astartes Dreadnought",
+        "Sarcophagus — You may cast this card from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.",
+      ),
+    ).toEqual({ exileOthers: 1, exileFilter: { type: "creature" } });
+    expect(
+      read(
+        "Wickerfolk Indomitable",
+        "Artifact Creature — Scarecrow",
+        "You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.",
+      ),
+    ).toEqual({ payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } });
+    expect(
+      read(
+        "Risen Executioner",
+        "Creature — Zombie Warrior",
+        "You may cast this creature from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.",
+      ),
+    ).toEqual({ costIncreasePerOther: { type: "creature" } });
+    expect(read("Squee, the Immortal", "Legendary Creature — Goblin", "You may cast this card from your graveyard or from exile.")).toEqual({
+      fromExile: true,
+    });
+    // A count of sacrifices isn't a cost the permission can take.
+    expect(
+      read(
+        "Scourge of Nel Toth",
+        "Creature — Zombie Dragon",
+        "You may cast this creature from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.",
+      ),
+    ).toBeUndefined();
+  });
+});
+
+describe("casting abilities given to the spells you cast (grantsToSpells)", () => {
+  const statics = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).static;
+  it("reads convoke, improvise and prowl for a kind of spell, and from exile", () => {
+    expect(
+      statics(
+        "Chief Engineer",
+        "Creature — Vedalken Artificer",
+        "Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)",
+      )[0]?.grantsToSpells,
+    ).toEqual({ filter: { type: "artifact" }, convoke: true });
+    expect(
+      statics(
+        "Inspiring Statuary",
+        "Artifact",
+        "Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)",
+      )[0]?.grantsToSpells,
+    ).toEqual({ filter: { notTypes: ["artifact"] }, improvise: true });
+    expect(
+      statics("Hunting Velociraptor", "Creature — Dinosaur", "First strike\nDinosaur spells you cast have prowl {2}{R}.")[0]
+        ?.grantsToSpells,
+    ).toEqual({ filter: { subtype: "Dinosaur" }, prowl: "{2}{R}" });
+    expect(statics("Test Broodlord", "Creature — Dragon", "Spells you cast from exile have convoke.")[0]?.grantsToSpells).toEqual({
+      castFrom: ["exile"],
+      convoke: true,
+    });
+  });
+});

@@ -173,6 +173,7 @@ import _poolDeathmaskNezumi from "../pool/deathmask-nezumi.js";
 import _poolDecisionParalysis from "../pool/decision-paralysis.js";
 import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
+import _poolDemonicEmbrace from "../pool/demonic-embrace.js";
 import _poolDemonlordBelzenlok from "../pool/demonlord-belzenlok.js";
 import _poolDemoralize from "../pool/demoralize.js";
 import _poolDesist from "../pool/desist.js";
@@ -1008,6 +1009,7 @@ const shard: CardShard = {
     _poolDecisionParalysis,
     _poolDefiledCryptCadaverLab,
     _poolDemandingDragon,
+    _poolDemonicEmbrace,
     _poolDemonlordBelzenlok,
     _poolDemoralize,
     _poolDesist,

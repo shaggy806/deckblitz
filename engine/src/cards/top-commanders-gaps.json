@@ -729,7 +729,18 @@
   "effect:each-creature-damages-itself",
   "effect:each-creature-deals-damage-to-each-opponent",
   "effect:each-creature-deals-power-damage-to-target",
-  "effect:each-permanent-deals-damage"
+  "effect:each-permanent-deals-damage",
+  "zone:graveyard-cast-permissions",
+  "zone:cast-from-any-graveyard",
+  "zone:cast-self-from-graveyard",
+  "zone:graveyard-self-cast-extra-cost",
+  "cost:self-graveyard-cast-cost-increase",
+  "cost:self-graveyard-cast-discard-cost",
+  "zone:graveyard-cast-exile-cost",
+  "static:grant-convoke",
+  "static:grant-improvise",
+  "static:grant-prowl-to-spells",
+  "static:grant-undaunted-to-exiled-spell"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

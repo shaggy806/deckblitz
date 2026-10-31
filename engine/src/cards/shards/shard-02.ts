@@ -212,6 +212,7 @@ import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDungeonGeists from "../pool/dungeon-geists.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
+import _poolDurnanOfTheYawningPortal from "../pool/durnan-of-the-yawning-portal.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolDuskmantleSeer from "../pool/duskmantle-seer.js";
 import _poolDuskwalker from "../pool/duskwalker.js";
@@ -327,6 +328,7 @@ import _poolHateflayer from "../pool/hateflayer.js";
 import _poolHauntingEchoes from "../pool/haunting-echoes.js";
 import _poolHazoretsFavor from "../pool/hazorets-favor.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
+import _poolHelbrute from "../pool/helbrute.js";
 import _poolHelionaut from "../pool/helionaut.js";
 import _poolHelvault from "../pool/helvault.js";
 import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
@@ -1047,6 +1049,7 @@ const shard: CardShard = {
     _poolDuneBeetle,
     _poolDungeonGeists,
     _poolDurableHandicraft,
+    _poolDurnanOfTheYawningPortal,
     _poolDuskmantleHouseOfShadow,
     _poolDuskmantleSeer,
     _poolDuskwalker,
@@ -1162,6 +1165,7 @@ const shard: CardShard = {
     _poolHauntingEchoes,
     _poolHazoretsFavor,
     _poolHeartstringPuller,
+    _poolHelbrute,
     _poolHelionaut,
     _poolHelvault,
     _poolHeraldOfHadar,

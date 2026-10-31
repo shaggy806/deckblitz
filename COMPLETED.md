@@ -94,6 +94,23 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   `additionalCost.putFromExile`, a face-down exiled card taken from its pile at random (406.4,
   `exiledFaceDown.group`) and picked by its back in the client's zone viewer; 8 freed. Wasteland
   Strangler, Ulamog's Nullifier, Oblivion Sower, Memory Theft, Void Attendant, Processor Assault.
+- **Need-keys Phase 2: casting abilities given to the spells you cast** (2026-10-31;
+  `static:grant-convoke`, `static:grant-improvise`, `static:grant-prowl-to-spells`,
+  `static:grant-undaunted-to-exiled-spell`) — `grantsToSpells`' `convoke`, `improvise` and
+  `prowl`, convoke and improvise together in one payment, `firstEachTurn` at cast time, and
+  `allow-cast-from-exile`'s `whileExiled` and `undaunted`; 9 freed. Chief Engineer, Inspiring
+  Statuary, Hunting Velociraptor, Durnan of the Yawning Portal.
+- **Need-keys Phase 2: graveyard cast permissions — other graveyards, and a card's own costs**
+  (2026-10-31; `zone:graveyard-cast-permissions`, `zone:cast-from-any-graveyard`,
+  `zone:cast-self-from-graveyard`, `zone:graveyard-self-cast-extra-cost`,
+  `cost:self-graveyard-cast-cost-increase`, `cost:self-graveyard-cast-discard-cost`,
+  `zone:graveyard-cast-exile-cost`) — a resolved permission over another player's graveyard
+  (`whose`), for one spell (`once`), with any-color mana for it (`spendAs`, 609.4b) and
+  `exileAfterwards`; one-shot grants on cards you don't own; `cast-now` from any graveyard; a
+  card's own `castSelfFromGraveyard` with `GraveyardCastCosts` (life, discard, sacrifice, exile N
+  of a kind, alternative mana, {1} more per card, or from exile); 20 freed. Whispersteel Dagger,
+  Spectral Arcanist, Demonic Embrace, Raffine's Guidance, Helbrute, Risen Executioner, Squee, the
+  Immortal.
 - **Need-keys Phase 2: cost changes for one kind of ability** (2026-10-31;
   `cost:equip-ability-cost-reduction`, `cost:ability-cost-reduction-exhaust`,
   `static:cycling-cost-reduction`, `cost:loyalty-cost-increase`) — `abilityCostModification`'s

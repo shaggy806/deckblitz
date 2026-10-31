@@ -582,6 +582,10 @@ export interface GameObject {
      * Raiser): how freely mana may pay for a spell cast under this permission
      * — and only one cast this way (rule 118.14). */
     readonly spendAs?: SpendAs;
+    /** "That spell has **undaunted**" (Durnan of the Yawning Portal — rule
+     * 702.125): a spell cast under this permission costs {1} less for each
+     * of its caster's opponents, beside any undaunted of its own (702.125c). */
+    readonly undaunted?: true;
   };
   /** The turn a `oncePerTurn` impulse permission this permanent gave was
    * last used (Maralen, Fae Ascendant). Cleared on any zone change: the
@@ -4374,8 +4378,24 @@ export interface PlayerEffect {
   readonly castFromHandFree?: { readonly filter?: CardFilter };
   /** `owner` may cast matching spells from their graveyard (Liliana,
    * Untouched by Death's −3) — a graveyard grant whose `source` is the
-   * effect's source, never used up. */
-  readonly castFromGraveyard?: { readonly filter: CardFilter; readonly source: ObjectId };
+   * effect's source, never used up.
+   *
+   * `graveyards`: whose graveyards it reaches, fixed as it resolved (The
+   Great Work's "any graveyard", Whispersteel Dagger's "that player's");
+   * absent, `owner`'s alone. `once`: one cast, after which `used` is set
+   * (Whispersteel Dagger's "a creature spell"). `spendAs`: how freely mana
+   * may pay for a spell cast this way (rule 609.4b). `exileAfterwards`: a
+   * spell cast this way is exiled rather than put into a graveyard. See the
+   * `player-effect` {@link EffectSpec}. */
+  readonly castFromGraveyard?: {
+    readonly filter: CardFilter;
+    readonly source: ObjectId;
+    readonly graveyards?: readonly PlayerId[];
+    readonly once?: true;
+    readonly used?: true;
+    readonly spendAs?: SpendAs;
+    readonly exileAfterwards?: true;
+  };
   /** Damage any source would deal to one of `players` — or, with
    * `permanentsToo`, to a permanent one of them controls — is multiplied. */
   readonly damageTo?: {

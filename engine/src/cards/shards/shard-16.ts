@@ -344,6 +344,7 @@ import _poolHornedSliver from "../pool/horned-sliver.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
 import _poolHuatliDinosaurKnight from "../pool/huatli-dinosaur-knight.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
+import _poolHuntingVelociraptor from "../pool/hunting-velociraptor.js";
 import _poolHydrasGrowth from "../pool/hydras-growth.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolHoverstonePilgrim,
     _poolHuatliDinosaurKnight,
     _poolHulkingCyclops,
+    _poolHuntingVelociraptor,
     _poolHydrasGrowth,
     _poolHydroChanneler,
     _poolIchorspitBasilisk,

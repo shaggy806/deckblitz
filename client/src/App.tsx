@@ -5036,8 +5036,9 @@ function Table({
     const { action, offer, picks } = pendingConvoke
     const name = action.type === 'cast-spell' ? game.nameOf(action.card) : ''
     // Improvise (rule 702.126a) rides the same offer: artifacts, generic only.
-    const verb = offer.improvise === true ? 'improvise' : 'convoke'
-    const what = offer.improvise === true ? 'artifact' : 'creature'
+    // A spell with both (one granted): creatures convoke, artifacts improvise.
+    const verb = offer.improvise === true ? 'improvise' : offer.alsoImprovise === true ? 'convoke or improvise' : 'convoke'
+    const what = offer.improvise === true ? 'artifact' : offer.alsoImprovise === true ? 'creature or artifact' : 'creature'
     controls = (
       <div className="controls">
         <span>
@@ -5056,7 +5057,9 @@ function Table({
             )
           }}
         >
-          {picks.length === 0 ? 'Pay with mana' : `${offer.improvise === true ? 'Improvise' : 'Convoke'} ${picks.length}`}
+          {picks.length === 0
+            ? 'Pay with mana'
+            : `${offer.improvise === true ? 'Improvise' : offer.alsoImprovise === true ? 'Convoke and improvise' : 'Convoke'} ${picks.length}`}
         </button>
         <button type="button" onClick={() => setPendingConvoke(null)}>
           Cancel

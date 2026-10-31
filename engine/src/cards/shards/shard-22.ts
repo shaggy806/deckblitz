@@ -530,6 +530,7 @@ import _poolPyroconvergence from "../pool/pyroconvergence.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
+import _poolRaffinesGuidance from "../pool/raffines-guidance.js";
 import _poolRagsRiches from "../pool/rags-riches.js";
 import _poolRags from "../pool/rags.js";
 import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
@@ -667,6 +668,7 @@ import _poolSplinterTwin from "../pool/splinter-twin.js";
 import _poolSpotterThopter from "../pool/spotter-thopter.js";
 import _poolSpreadTheSickness from "../pool/spread-the-sickness.js";
 import _poolSquall from "../pool/squall.js";
+import _poolSqueeTheImmortal from "../pool/squee-the-immortal.js";
 import _poolSquelch from "../pool/squelch.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStamina from "../pool/stamina.js";
@@ -1396,6 +1398,7 @@ const shard: CardShard = {
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
     _poolRadhaHeartOfKeld,
+    _poolRaffinesGuidance,
     _poolRagsRiches,
     _poolRags,
     _poolRallyAtTheHornburg,
@@ -1533,6 +1536,7 @@ const shard: CardShard = {
     _poolSpotterThopter,
     _poolSpreadTheSickness,
     _poolSquall,
+    _poolSqueeTheImmortal,
     _poolSquelch,
     _poolStaggershock,
     _poolStamina,

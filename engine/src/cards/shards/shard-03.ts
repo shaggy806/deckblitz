@@ -511,6 +511,7 @@ import _poolRestlessApparition from "../pool/restless-apparition.js";
 import _poolRhysticLightning from "../pool/rhystic-lightning.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRingOfKalonia from "../pool/ring-of-kalonia.js";
+import _poolRisenExecutioner from "../pool/risen-executioner.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRiverDelta from "../pool/river-delta.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolRhysticLightning,
     _poolRighteousBlow,
     _poolRingOfKalonia,
+    _poolRisenExecutioner,
     _poolRithsAttendant,
     _poolRiverDelta,
     _poolRoarOfEndlessSong,

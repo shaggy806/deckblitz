@@ -413,6 +413,7 @@ function castableFromGraveyard(registry: CardRegistry, object: GameObject): bool
     def.escape !== null ||
     def.disturb !== null ||
     def.castFromGraveyardIf !== undefined ||
+    def.castSelfFromGraveyard !== undefined ||
     (def.activated ?? []).some((a) => a.zone === "graveyard")
   );
 }

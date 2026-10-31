@@ -686,6 +686,15 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:each-creature-damages-itself` (`each-deals-damage`; 8 freed, 6 proving cards). 682
   freed in all. Next: the flash grants, `effect:search-destination-by-type`, the shared-type
   filters.
+- **2026-10-31: the graveyard cast permissions** (a cloud session given a fixed list of
+  families, beside the local agents and a combat session) — `zone:graveyard-cast-permissions`,
+  both groups: a resolved permission over other graveyards (`whose`, `once`, `spendAs`,
+  `exileAfterwards`), `cast-now` from any graveyard, and a card's own `castSelfFromGraveyard`
+  with `GraveyardCastCosts`; 20 freed, 7 proving cards. Yawgmoth's Will left in
+  `docs/engine-gaps.md` (buyback against its exile replacement, rule 616.1). Then
+  `static:grant-abilities-to-spells`'s group: `grantsToSpells`' `convoke`, `improvise` (both on
+  one spell in one payment) and `prowl`, and an exile permission's `undaunted`; 9 freed, 4
+  proving cards.
 
 ## Rough size
 

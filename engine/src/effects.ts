@@ -3218,6 +3218,11 @@ export type EffectSpec =
       readonly from?:
         | "hand"
         | "graveyard"
+        /** Every player's graveyard — Spectral Arcanist's "you may cast an
+         * instant or sorcery spell … **from a graveyard**". A spell cast from
+         * another player's graveyard is the caster's to control and its
+         * owner's still (rule 108.3). */
+        | "any-graveyard"
         | "exiled-with-source"
         | "exiled-this-way"
         /** The cards this resolution has had the effect's controller draw,
@@ -3385,6 +3390,13 @@ export type EffectSpec =
        * owner, not the effect's controller; from the next turn on; with no
        * end but its leaving exile. */
       readonly laterTurns?: boolean;
+      /** "**For as long as that card remains exiled**, you may cast it"
+       * (Durnan of the Yawning Portal): the effect's controller, with no end
+       * but its leaving exile, rather than this turn. */
+      readonly whileExiled?: true;
+      /** "That spell has **undaunted**" (rule 702.125 — Durnan): cast this
+       * way, it costs {1} less for each of its caster's opponents. */
+      readonly undaunted?: true;
     }
   | {
       /**
@@ -4249,8 +4261,30 @@ export type EffectSpec =
        * controller's graveyard cards matching `filter`, the ones that reach
        * it later this turn included (its ruling), each cast following its
        * own timing and costs — the same graveyard-permission cast a
-       * `castFromGraveyard` static offers, never used up. */
-      readonly castFromGraveyard?: { readonly filter: CardFilter };
+       * `castFromGraveyard` static offers, never used up.
+       *
+       * The rest widen it (rule 601.3: an effect that allows a player to
+       * cast a spell from a zone other than their hand):
+       * - `whose`: whose graveyards it reaches, fixed as this resolves —
+       *   `"each-player"` is The Great Work's "from any graveyard",
+       *   `"trigger-player"` Whispersteel Dagger's "from that player's
+       *   graveyard". The caster controls a spell cast from another
+       *   player's graveyard; its owner still owns it (rule 108.3).
+       * - `once`: "you may cast **a** creature spell from that player's
+       *   graveyard this turn" (Whispersteel Dagger) — one cast, then it's
+       *   used up.
+       * - `spendAs`: "…and you may spend mana as though it were mana of any
+       *   color to cast that spell" (rule 609.4b), only for a spell cast
+       *   under this permission.
+       * - `exileAfterwards`: "if a spell cast this way would be put into a
+       *   graveyard, exile it instead" (The Great Work's chapter III). */
+      readonly castFromGraveyard?: {
+        readonly filter: CardFilter;
+        readonly whose?: PlayerScope;
+        readonly once?: true;
+        readonly spendAs?: SpendAs;
+        readonly exileAfterwards?: true;
+      };
       readonly damageTo?: {
         readonly who: PlayerScope;
         readonly multiplier: number;
@@ -7866,7 +7900,12 @@ export interface EffectApi {
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number): void;
   /** See the `"allow-cast-from-exile"` {@link EffectSpec}. */
-  allowCastFromExile(target: TargetRef, free: boolean, laterTurns?: boolean): void;
+  allowCastFromExile(
+    target: TargetRef,
+    free: boolean,
+    laterTurns?: boolean,
+    opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean },
+  ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter, free: boolean): void;
   /** See the `"cast-now"` {@link EffectSpec}: offer the effect's
@@ -9901,6 +9940,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsDrawnThisWay();
     } else if (from === "source-exiled-this-way") {
       cards = ctx.sourceExiledThisWay();
+    } else if (from === "any-graveyard") {
+      cards = ctx.playersInScope("each-player").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "targets") {
       // An illegal target's slot is blank (rule 608.2b); one already cast
       // is on the stack now, which the offer passes over.
@@ -12002,7 +12043,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "allow-cast-from-exile": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true);
+      if (target !== undefined) {
+        ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true, {
+          whileExiled: spec.whileExiled === true,
+          undaunted: spec.undaunted === true,
+        });
+      }
       return;
     }
     case "unlock-door": {
@@ -12610,7 +12656,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : {}),
         ...(spec.castFromHandFree !== undefined ? { castFromHandFree: spec.castFromHandFree } : {}),
         ...(spec.castFromGraveyard !== undefined
-          ? { castFromGraveyard: { filter: spec.castFromGraveyard.filter, source: ctx.source } }
+          ? (() => {
+              const grant = spec.castFromGraveyard;
+              return {
+                castFromGraveyard: {
+                  filter: grant.filter,
+                  source: ctx.source,
+                  ...(grant.whose !== undefined ? { graveyards: ctx.playersInScope(grant.whose) } : {}),
+                  ...(grant.once === true ? { once: true as const } : {}),
+                  ...(grant.spendAs !== undefined ? { spendAs: grant.spendAs } : {}),
+                  ...(grant.exileAfterwards === true ? { exileAfterwards: true as const } : {}),
+                },
+              };
+            })()
           : {}),
         ...(spec.damageTo !== undefined
           ? {
