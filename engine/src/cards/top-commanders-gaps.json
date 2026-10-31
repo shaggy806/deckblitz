@@ -790,7 +790,11 @@
   "effect:put-exiled-with-source-onto-battlefield",
   "effect:return-other-cards-exiled-with-source",
   "effect:exile-graveyard-linked",
-  "keyword:enlist"
+  "keyword:enlist",
+  "keyword:crewed-it-this-turn",
+  "condition:crewed-by-this-turn",
+  "trigger:crews-or-saddles",
+  "static:cant-crew"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

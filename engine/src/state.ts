@@ -481,6 +481,17 @@ export interface GameObject {
    */
   saddledThisTurn?: { readonly mount: ObjectId; readonly stint: number }[];
   /**
+   * The Vehicles this creature **crewed** this turn (rule 702.122b: it did as
+   * it was tapped to pay one's crew cost), each with the `zoneChangeCount`
+   * that Vehicle had then — "a creature that crewed it this turn"
+   * (`CardFilter.crewedSource`, 702.122c) and "a Vehicle crewed by ~ this
+   * turn" (`CardFilter.crewedBySource`). Kept on the creature, as
+   * `saddledThisTurn` is, so the Vehicle leaving doesn't erase it; a zone
+   * change of the creature clears it (rule 400.7), and so does the cleanup
+   * step.
+   */
+  crewedThisTurn?: { readonly vehicle: ObjectId; readonly stint: number }[];
+  /**
    * Exerted (rule 701.43a): it won't untap during this player's next untap
    * step — the player who exerted it, whoever controls it then (a creature
    * borrowed until end of turn and exerted still untaps in its owner's untap
@@ -5713,6 +5724,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.renowned ?? false,
     o.saddled ?? false,
     o.saddledThisTurn ?? null,
+    o.crewedThisTurn ?? null,
     o.enlistedIn ?? null,
     o.exertedBy ?? null,
     o.exertedOnTurn ?? null,

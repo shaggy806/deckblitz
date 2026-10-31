@@ -5906,3 +5906,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** Attack Bob with Coalition Warbrute alone, enlisting Grizzly Bears.
 - **Expect:** Grizzly Bears taps. Coalition Warbrute becomes 5/4 with double strike and you draw a card; Bob takes 10.
 - **Not a bug:** Aradesh's trigger only happens for an attacker that enlisted — attacking without enlisting gives nothing.
+
+
+## Who crewed what (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Revoke Privileges: the enchanted creature can't crew
+- **Do:** Click Smuggler's Copter, then **Crew**. Click Hill Giant, then Grizzly Bears.
+- **Expect:** The bar reads "Smuggler's Copter: tap creatures with total power 1". Hill Giant, wearing Revoke Privileges, can't be picked ("power 0/1" stays); Grizzly Bears can ("power 2/1").
+
+### Speedway Fanatic: the Vehicle it crews gains haste
+- **Do:** Click Smuggler's Copter, then **Crew**, tapping Speedway Fanatic, and Confirm.
+- **Expect:** The log says "Speedway Fanatic crews Smuggler's Copter", then Speedway Fanatic's trigger resolves before the crew ability: "Smuggler's Copter gains haste until EOT". The Copter, new this turn, can attack.

@@ -2374,7 +2374,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
@@ -2463,7 +2463,12 @@ that saddled it this turn" (rule 702.171c): tapped for the cost of the saddle
 ability of the permanent applying the filter (as it is, or as it last was if it
 has left) this turn, and still the same object — read against the source in a
 target or trigger filter, bound to it in an effect's (`saddledBy`, never
-authored). `enlistedThisCombat: true` is a creature that enlisted another this
+authored). `crewedSource: true` is "a creature that crewed it this turn" (rule
+702.122b-c), read the same way (`GameObject.crewedThisTurn`; bound to `crewedBy`
+in an effect's filter) — Subterranean Schooner, Getaway Car. `crewedBySource:
+true` is the other way round, "a Vehicle crewed by ~ this turn" (Balthier and
+Fran's attack trigger filter): the source, on the battlefield, crewed this
+very permanent this turn. `enlistedThisCombat: true` is a creature that enlisted another this
 combat (rule 702.154c — Aradesh, the Founder's intervening "if it enlisted a
 creature this combat", a `trigger-object` condition; true as its attack
 trigger triggers, since enlist is paid before the attack is announced).
@@ -3525,6 +3530,7 @@ triggered: [
 | `becomes-monstrous` | `who`, `filter?` | a permanent became monstrous (the `monstrosity` effect) — "when this creature becomes monstrous" is `who: "self"`. The permanent is the trigger object, `{ triggerValue: true }` its N (701.37c's X). Never for one already monstrous, nor one gone before the ability resolved. |
 | `becomes-renowned` | `who`, `filter?` | a permanent became renowned (the `renown` effect) — "when this creature becomes renowned" is `who: "self"` (Relic Seeker), "whenever a creature you control becomes renowned" `who: "you-control"` with `filter: { type: "creature" }` (Valeron Wardens). The permanent is the trigger object. Never for one already renowned, nor one gone before its renown trigger resolved. |
 | `becomes-saddled` | `who`, `filter?`, `firstTimeEachTurn?` | a permanent became saddled (rule 702.171b — the `become-saddled` effect, a saddle ability's or another's) — "whenever this creature becomes saddled" is `who: "self"`, the permanent the trigger object. It fires again for one saddled again; `firstTimeEachTurn` (Stubborn Burrowfiend) only when it wasn't saddled already. |
+| `crews-or-saddles` | `who`, `as` | a creature crewed a Vehicle or saddled a Mount (rules 702.122b, 702.171c): it was tapped for that permanent's crew or saddle cost, as the cost was paid, whether or not the ability resolves. `as: ["crew"]` is "whenever this creature crews a Vehicle" (Speedway Fanatic), `["crew", "saddle"]` "saddles a Mount or crews a Vehicle" (Reckless Velocitaur). `who` is asked of the creature tapped; the trigger object is the Vehicle or Mount ("that Vehicle"). "During your main phase" is a `condition` of `your-turn` and `turn-structure` `steps: ["precombat-main", "postcombat-main"]`. |
 | `enlists` | `who` | a creature enlisted another (rule 702.154c): it tapped one for its enlist cost as it attacked (Guardian of New Benalia's "whenever this creature enlists a creature" is `who: "self"`). `who` is asked of the enlisting attacker; the trigger object is the creature it enlisted. |
 | `exerted` | `who`, `asItAttacks?` | a permanent was exerted (rule 701.43). `asItAttacks: true` is the "when you do" linked to its own "you may exert this creature as it attacks" (rule 607.2h — Glorybringer, Combat Celebrant), which no other exert fires. |
 | `blocks` | `who`, `filter?`, `otherOnly?`, `object?` | the mirror of `attacks` (Kangee, Sky Warden), once per blocker, which is the trigger object — Doran, Besieged by Time's "whenever a creature you control attacks or blocks, **it** gets +X/+X" is an `attacks` and a `blocks` trigger reading `"trigger-object"`. `object: "blocked"` makes the creature it blocks the trigger object — "whenever this creature blocks a creature, … that creature" (Wall of Frost, Wall of Tears's end-of-combat `delayed-trigger`, Meglonoth's `"trigger-controller"`). |
@@ -4377,6 +4383,9 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   702.168d) for what the static reaches — Unable to Scream's "as long as enchanted
   creature is face down, it can't be turned face up" (`"attached"`), Karlov Watchdog's
   "permanents your opponents control … during your turn" (`"filter"` + `condition`).
+  `"cant-crew"` is "can't crew Vehicles" (rule 702.122d — Revoke Privileges'
+  "can't attack, block, or crew Vehicles"): never offered for, or accepted
+  in, a crew cost; a saddle cost or any other tap cost still takes it.
   The same list, until end of turn, is what the `restrict` effect imposes
   (§6).
 - `combatDamageByToughness: "always" | "if-toughness-greater"` — the affected

@@ -43,6 +43,7 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",
   'cant-turn-face-up': "can't be turned face up",
+  'cant-crew': "can't crew Vehicles",
 }
 
 /** A colour as the log says it — "becomes black". */
@@ -154,6 +155,12 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} becomes saddled`
     case 'permanent-exerted':
       return `${who(event.player)} exerts ${name(event.object)}`
+    case 'creature-tapped-for':
+      return event.as === 'enlist'
+        ? `${name(event.for)} enlists ${name(event.creature)}`
+        : event.as === 'crew'
+          ? `${name(event.creature)} crews ${name(event.for)}`
+          : `${name(event.creature)} saddles ${name(event.for)}`
     case 'permanents-phased-out':
       return `${event.objects.map(name).join(', ')} phase${event.objects.length === 1 ? 's' : ''} out`
     case 'permanents-phased-in':

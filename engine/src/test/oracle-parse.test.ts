@@ -1645,6 +1645,33 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Enlist").static[0]).toMatchObject({ enlist: true });
   });
 
+  it("crewing and saddling (rules 702.122b-d, 702.171c): 'crews a Vehicle' triggers, 'that crewed it this turn', 'can't crew Vehicles'", () => {
+    const fanatic = face("Haste\nWhenever this creature crews a Vehicle, that Vehicle gains haste until end of turn.", "Creature — Human Pilot");
+    expect(fanatic.triggered[0].trigger).toEqual({ on: "crews-or-saddles", who: "self", as: ["crew"] });
+    expect(fanatic.triggered[0].effect).toEqual({ kind: "grant-keyword", target: "trigger-object", keyword: "haste", duration: "end-of-turn" });
+    expect(fanatic.complete).toBe(true);
+    const vaulter = face(
+      "Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying until end of turn.",
+      "Creature — Kor Pilot",
+    );
+    expect(vaulter.triggered[0].trigger).toEqual({ on: "crews-or-saddles", who: "self", as: ["crew", "saddle"] });
+    expect(vaulter.triggered[0].condition).toEqual({
+      kind: "all",
+      of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+    });
+    expect(vaulter.complete).toBe(true);
+    // "During your main phase" on any other trigger is a person's.
+    expect(face("Whenever this creature attacks during your main phase, draw a card.").complete).toBe(false);
+    const schooner = face("Whenever this Vehicle attacks, target creature that crewed it this turn explores.\nCrew 1", "Artifact — Vehicle");
+    expect(schooner.triggered[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", crewedSource: true } }]);
+    expect(schooner.complete).toBe(true);
+    expect(face("Enchant creature\nEnchanted creature can't attack, block, or crew Vehicles.", "Enchantment — Aura").static[0]).toEqual({
+      affects: { scope: "attached" },
+      restrictions: ["cant-attack", "cant-block", "cant-crew"],
+      text: "Enchanted creature can't attack, block, or crew Vehicles.",
+    });
+  });
+
   it("saddle (rule 702.171): the keyword, 'attacks while saddled', 'becomes saddled' and the effect", () => {
     const lagac = face(
       "Deathtouch\nWhenever this creature attacks while saddled, it gets +0/+3 until end of turn.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",

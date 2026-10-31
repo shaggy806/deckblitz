@@ -779,6 +779,28 @@ keyword:enlist. Proving cards: Coalition Warbrute, Guardian of New Benalia,
 Aradesh, the Founder (`enlist.test.ts`). Not built: 702.154d's several
 instances on one creature (none printed).
 
+### Who crewed what: crew tallies, crews-or-saddles triggers, can't crew — built 2026-10-31
+
+The need-keys Phase 2 family `keyword:crew`, its top group and a Tier B key,
+features only (rules 702.122b-d, 702.171c). Each creature tapped for a crew
+cost records the Vehicle and its stint (`GameObject.crewedThisTurn`, cleared
+at cleanup and by a zone change, as `saddledThisTurn` is): the new filter
+clauses **`crewedSource`** ("a creature that crewed it this turn", bound to
+`crewedBy` in an effect) and **`crewedBySource`** ("a Vehicle crewed by ~
+this turn"). Crew and saddle costs now announce each creature as a
+`creature-tapped-for` (`as: "crew" | "saddle"`), firing the new
+**`crews-or-saddles`** trigger (`as` the keywords, the trigger object the
+Vehicle or Mount). The **`cant-crew`** restriction keeps a creature out of a
+crew cost's offer and payment. The client's log reads the new event. Keys:
+crewed-it-this-turn, crews-or-saddles, cant-crew, and crewed-by-this-turn
+(partly). Proving cards: Speedway Fanatic, Veteran Motorist, Reckless
+Velocitaur, Subterranean Schooner, Getaway Car, Balthier and Fran, Revoke
+Privileges (`crew-tallies.test.ts`). Still open: Golden Argosy's "exile each
+creature that crewed it this turn, return them" (a `flicker` over a group),
+Luxurious Locomotive's count of crewers including departed ones (the
+ruling), Adrestia's "if an Assassin crewed it this turn", Mindlink Mech's
+becomes-crewed trigger.
+
 ### Cards a player owns, taken from exile — built 2026-10-31
 
 The need-keys Phase 2 family `cost:put-opponent-exiled-card-into-graveyard`,

@@ -8583,10 +8583,12 @@ export class Game {
     for (const id of permanents) {
       const object = this.state.objects[id];
       // Regeneration shields last only this turn (rule 514.2), as does being
-      // saddled (702.171b) and what a creature saddled this turn (702.171c).
+      // saddled (702.171b) and what a creature saddled this turn (702.171c)
+      // or crewed (702.122b).
       delete object.regenerationShields;
       delete object.saddled;
       delete object.saddledThisTurn;
+      delete object.crewedThisTurn;
       if (object.damageMarked !== 0 || object.markedByDeathtouch) {
         object.damageMarked = 0;
         object.markedByDeathtouch = false;
@@ -17938,6 +17940,14 @@ export class Game {
     // Saddle (rule 702.171c): each creature tapped for the cost saddles the
     // source as it's tapped — whether or not the ability goes on to resolve.
     if (ability.saddle === true) this.recordSaddlers(sourceId, tapped);
+    // Crew (rule 702.122b): each creature tapped for the cost crews the
+    // Vehicle, likewise. Each one's crewing or saddling is announced for
+    // "whenever this creature crews a Vehicle / saddles a Mount".
+    if (ability.crew === true) this.recordCrewers(sourceId, tapped);
+    const tappedAs = tapCostKeyword(ability);
+    if (tappedAs !== undefined) {
+      for (const id of tapped) this.emit({ type: "creature-tapped-for", creature: id, for: sourceId, as: tappedAs });
+    }
     const tappedRef: LastKnownRefs["tapped"] =
       tapped.length === 1
         ? { object: tapped[0], zoneChangeCount: this.state.objects[tapped[0]].zoneChangeCount ?? 0 }
@@ -23426,6 +23436,13 @@ export class Game {
           event.as === "enlist" &&
           this.matchesWho(spec.who, event.for, self)
         );
+      case "crews-or-saddles":
+        return (
+          event.type === "creature-tapped-for" &&
+          event.as !== "enlist" &&
+          spec.as.includes(event.as) &&
+          this.matchesWho(spec.who, event.creature, self)
+        );
       case "becomes-monstrous":
         return (
           event.type === "became-monstrous" &&
@@ -23897,9 +23914,12 @@ export class Game {
         ? event.object
         : event.type === "chapter-resolved"
           ? event.saga
-        : // The creature enlisted, of an `enlists` trigger.
+        : // The creature enlisted, of an `enlists` trigger; the Vehicle
+          // crewed or Mount saddled, of a `crews-or-saddles` ("that Vehicle").
           event.type === "creature-tapped-for"
-          ? event.creature
+          ? trigger.on === "crews-or-saddles"
+            ? event.for
+            : event.creature
         : event.type === "ring-tempted"
           ? (event.chosen ?? undefined)
         : event.type === "attacker-declared" ||
@@ -30560,7 +30580,10 @@ export class Game {
     purpose: ManaPurpose,
     keyword?: "crew" | "saddle",
   ): TapCostOffer | null {
-    const candidates = this.tapOthersCandidates(player, sourceId, spec);
+    // "Can't crew Vehicles" (rule 702.122d): never tapped for a crew cost.
+    const candidates = this.tapOthersCandidates(player, sourceId, spec).filter(
+      (id) => keyword !== "crew" || !computeCharacteristics(this.state, this.registry, id).restrictions.has("cant-crew"),
+    );
     const plan = this.payMana(player, manaCost, avoid, exclude, purpose, {
       last: new Set(candidates),
     });
@@ -33111,6 +33134,19 @@ export class Game {
       const had = creature.saddledThisTurn ?? [];
       if (had.some((r) => r.mount === mount && r.stint === stint)) continue;
       creature.saddledThisTurn = [...had, { mount, stint }];
+    }
+  }
+
+  /** The creatures tapped to pay `vehicle`'s crew cost crew it (rule
+   * 702.122b): each remembers it, in the stint it's in, for the turn. */
+  private recordCrewers(vehicle: ObjectId, creatures: readonly ObjectId[]): void {
+    const stint = this.state.objects[vehicle]?.zoneChangeCount ?? 0;
+    for (const id of creatures) {
+      const creature = this.state.objects[id];
+      if (creature === undefined) continue;
+      const had = creature.crewedThisTurn ?? [];
+      if (had.some((r) => r.vehicle === vehicle && r.stint === stint)) continue;
+      creature.crewedThisTurn = [...had, { vehicle, stint }];
     }
   }
 
@@ -43253,6 +43289,7 @@ export class Game {
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;
+    delete object.crewedThisTurn;
     // And what it enlisted (702.154c).
     delete object.enlistedIn;
     // And solved (719.3b).

@@ -885,7 +885,10 @@ const TARGET_PHRASES = [
 function modifiedTargetOf(phrase) {
   const m = new RegExp(
     "^target (.+?)(?: (you control|an opponent controls|you don't control))?" +
-      "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?$",
+      "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?" +
+      // "…that crewed it this turn" / "…that saddled it this turn" (rules
+      // 702.122c, 702.171c): tapped for the source's crew or saddle cost.
+      "(?: that (crewed|saddled) it this turn)?$",
     "i",
   ).exec(phrase);
   if (m === null) return undefined;
@@ -917,6 +920,7 @@ function modifiedTargetOf(phrase) {
     else if (m[6] !== undefined) filter.toughness = cmp(m[6], m[7]);
     else if (m[8] !== undefined) filter.manaValue = cmp(m[8], m[9]);
   }
+  if (m[10] !== undefined) filter[m[10].toLowerCase() === "crewed" ? "crewedSource" : "saddledSource"] = true;
   const whose = m[2] === undefined ? undefined : m[2].toLowerCase() === "you control" ? "you" : "opponent";
   return { kind: "permanent", ...(whose !== undefined ? { whose } : {}), filter };
 }
@@ -1254,6 +1258,13 @@ export function parseTrigger(clause) {
   }
   // Enlisting (rule 702.154c): it tapped a creature for its enlist cost.
   if (/^Whenever ~ enlists a creature$/.test(c)) return self("enlists");
+  // Crewing and saddling (rules 702.122b, 702.171c): it was tapped for a
+  // Vehicle's crew cost or a Mount's saddle cost — that Vehicle or Mount the
+  // trigger object. "During your main phase" is read with the clause.
+  if ((m = /^Whenever ~ (crews a Vehicle|saddles a Mount|saddles a Mount or crews a Vehicle|crews a Vehicle or saddles a Mount)$/.exec(c))) {
+    const as = [...(/crews/.test(m[1]) ? ["crew"] : []), ...(/saddles/.test(m[1]) ? ["saddle"] : [])];
+    return [{ on: "crews-or-saddles", who: "self", as }];
+  }
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
@@ -5075,12 +5086,25 @@ export function parseFace(face, ctx = {}) {
       // intervening "if" (the rulings).
       const whileSaddled = / while saddled$/.test(clause);
       if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
+      // "Whenever ~ crews a Vehicle during your main phase" (Canyon Vaulter):
+      // part of when it triggers — the turn can't move on with it on the
+      // stack, so the ability's condition, asked again, agrees.
+      const duringMain = / during your main phase$/.test(clause);
+      if (duringMain) clause = clause.replace(/ during your main phase$/, "");
       const parsedTriggers = parseTrigger(clause);
-      if (parsedTriggers === null || (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self"))) {
+      if (
+        parsedTriggers === null ||
+        (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self")) ||
+        (duringMain && !parsedTriggers.every((t) => t.on === "crews-or-saddles"))
+      ) {
         out.todo.push(printed(raw));
         continue;
       }
       let rest = comma > 0 ? line.slice(comma + 2) : "";
+      // "That Vehicle" / "that Mount or Vehicle": the trigger object, as "it".
+      if (parsedTriggers.every((t) => t.on === "crews-or-saddles")) {
+        rest = rest.replace(/^that (?:Mount or Vehicle|Vehicle or Mount|Vehicle|Mount) /, "it ");
+      }
       let oncePerTurn = false;
       rest = rest.replace(/ This ability triggers only once each turn\.$/, () => {
         oncePerTurn = true;
@@ -5093,6 +5117,14 @@ export function parseFace(face, ctx = {}) {
         text: printed(raw),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
+        ...(duringMain
+          ? {
+              condition: {
+                kind: "all",
+                of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] }],
+              },
+            }
+          : {}),
       };
       let triggers = parsedTriggers;
       const meldWhole = MELD_SENTENCE.exec(rest);
@@ -5796,6 +5828,9 @@ function faceDownAsAt(sentences, i, ctx) {
 }
 
 function itOf(triggers) {
+  // "That Vehicle" / "that Mount" (read as "it"): the permanent crewed or
+  // saddled, the trigger object.
+  if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
@@ -6691,6 +6726,10 @@ function parseStatic(line, text) {
   }
   if ((m = /^(?:Enchanted|Equipped) creature can't attack or block\.$/.exec(line))) {
     return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  // "…, or crew Vehicles" (rule 702.122d — Revoke Privileges).
+  if (/^Enchanted (?:creature|permanent) can't attack, block, or crew Vehicles\.$/.test(line)) {
+    return { affects: { scope: "attached" }, restrictions: ["cant-attack", "cant-block", "cant-crew"], text };
   }
   // Arrest's "…, and its activated abilities can't be activated" — the
   // host's abilities, for every player (`hostOfSource`); "unless they're

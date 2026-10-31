@@ -10891,6 +10891,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesLandTypeWith" in value ||
       "sameNameWith" in value ||
       "saddledSource" in value ||
+      "crewedSource" in value ||
       "bandedWithSource" in value ||
       "blockingRelation" in value ||
       "sameNameAsTarget" in value ||
@@ -11004,6 +11005,11 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
+    }
+    // "Each creature that crewed it this turn" (rule 702.122c), likewise.
+    if (walked["crewedSource"] === true) {
+      const { crewedSource: _crewed, ...rest } = walked;
+      walked = { ...rest, crewedBy: ctx.source };
     }
     // "Creatures banded with it" (rule 702.22): the resolving ability's
     // source's band.

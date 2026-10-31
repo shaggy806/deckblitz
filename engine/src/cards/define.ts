@@ -455,7 +455,11 @@ export type CombatRestriction =
    * (only a face-down permanent can be turned face up, so "enchanted
    * creature can't be"), Karlov Watchdog's "permanents your opponents
    * control can't be turned face up during your turn". */
-  | "cant-turn-face-up";
+  | "cant-turn-face-up"
+  /** "Can't crew Vehicles" (rule 702.122d — Revoke Privileges,
+   * Intercessor's Arrest): it can't be tapped to pay a crew cost. A saddle
+   * cost, or any other "tap an untapped creature" cost, still can. */
+  | "cant-crew";
 
 /**
  * A dynamic quantity a characteristic-defining ability can read (rule 604.3).

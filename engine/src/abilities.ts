@@ -1366,6 +1366,19 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A creature crewed a Vehicle or saddled a Mount (rules 702.122b,
+       * 702.171c): it was tapped to pay that permanent's crew or saddle
+       * cost, as the cost was paid — whether or not the ability goes on to
+       * resolve. `as` is which: Speedway Fanatic's "whenever this creature
+       * crews a Vehicle" is `["crew"]`, Canyon Vaulter's "saddles a Mount
+       * or crews a Vehicle" both. `who` is asked of the creature tapped;
+       * the trigger object is the Vehicle or Mount ("that Vehicle"). "During
+       * your main phase" is a `condition` (turn-structure and your-turn). */
+      readonly on: "crews-or-saddles";
+      readonly who: TriggerWho;
+      readonly as: readonly ("crew" | "saddle")[];
+    }
+  | {
       /**
        * A permanent was tapped for mana — its mana ability with `{T}` in the
        * cost resolved (Roxanne, Starfall Savant's "whenever you tap an
