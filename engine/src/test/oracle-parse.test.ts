@@ -354,6 +354,42 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads \"with the same name as\" a reference object", () => {
+    const ritual = parseFace({
+      name: "Exclusion Ritual",
+      type_line: "Enchantment",
+      oracle_text:
+        "Imprint — When this enchantment enters, exile target nonland permanent.\nPlayers can't cast spells with the same name as the exiled card.",
+    });
+    expect(ritual.complete).toBe(true);
+    // The exile is linked to the lock that reads it (rule 607.2a).
+    expect(ritual.triggered[0].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(ritual.static[0].prohibits).toEqual({ who: "each-player", spells: { sameNameWith: "exiled-with-source" } });
+    const market = parseFace({
+      name: "Cornered Market",
+      type_line: "Enchantment",
+      oracle_text:
+        "Players can't cast spells with the same name as a nontoken permanent.\nPlayers can't play nonbasic lands with the same name as a nontoken permanent.",
+    });
+    expect(market.complete).toBe(true);
+    expect(market.static.map((s: { prohibits: unknown }) => s.prohibits)).toEqual([
+      { who: "each-player", spells: { sameNameWith: { permanents: { token: false } } } },
+      { who: "each-player", lands: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } } },
+    ]);
+    const singer = parseFace({
+      name: "Cylian Sunsinger",
+      type_line: "Creature — Elf Shaman",
+      oracle_text: "{R}{G}{W}: This creature and each other creature with the same name as it get +3/+3 until end of turn.",
+    });
+    expect(singer.activated[0].effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sameNameWith: "source" },
+      power: 3,
+      toughness: 3,
+      duration: "end-of-turn",
+    });
+  });
+
   it("reads \"shares a creature / land type with\" a reference object", () => {
     const killer = parseFace({
       name: "Killer",

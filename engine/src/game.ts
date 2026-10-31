@@ -25442,7 +25442,9 @@ export class Game {
           matchesFilter(this.state, this.registry, id, filter, { you: controller }),
         ),
       permanentsMatching: (filter) =>
-        this.battlefieldMatching(controller, filter).map((object) => ({
+        // Read with the source, so a clause about it answers ("another
+        // creature you control" — `isSource: false`).
+        this.battlefieldMatching(controller, filter, undefined, source).map((object) => ({
           object,
           count: this.state.objects[object].stackCount ?? 1,
         })),
@@ -27445,7 +27447,7 @@ export class Game {
         this.state.objects[source]?.zone === "exile"
           ? [source]
           : [],
-      cardsExiledWithSource: () => {
+      cardsExiledWithSource: (orUntil) => {
         // The stint the resolving spell or ability refers to (rule 607.2a):
         // the one it came from, though the source may have left since.
         const object = this.state.objects[source];
@@ -27453,8 +27455,10 @@ export class Game {
           refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
         if (stint === undefined) return [];
         return this.state.zones.shared.exile.filter((id) => {
-          const link = this.state.objects[id]?.exiledWith;
-          return link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          const card = this.state.objects[id];
+          const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+            link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          return linked(card?.exiledWith) || (orUntil === true && linked(card?.exiledUntil));
         });
       },
       setClassLevel: (level) => {

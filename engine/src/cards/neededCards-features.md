@@ -692,6 +692,33 @@ a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
 
+### The same name as a reference object — built 2026-10-31
+
+The need-keys Phase 2 family `condition:filter-card-property-clauses`, its
+same-name group, features only, on the shared-type group's `ShareReference`
+(below), which gains `"exiled-with-source"` (the cards exiled with the source,
+rule 607.2a, or until it leaves, 610.3) and `{ permanents: filter }`. One
+**`sameNameWith`** clause (rule 201.2a, a reference object itself included):
+bound in an effect to `sameNameAsAny`, read live in a static's prohibition or
+a trigger's filter for the source, exiled-with-source, controlled and
+permanents references. `ResolutionContext.permanentsMatching` now reads with
+the source (`isSource: false` — "another creature you control"). The
+scaffolder reads "(Your opponents | Players) can't (cast spells | play
+nonbasic lands) with the same name as (the exiled card | a nontoken
+permanent)" — linking the card's own exile — and "this creature and each
+other creature with the same name as it get …". Keys:
+condition:filter-same-name-as-source, filter:same-name-as-a-permanent,
+condition:filter-same-name-as-permanent-you-control. Left in the group:
+filter:same-name-as-trigger-spell (Harness the Storm's target filter, read as
+the trigger is put on the stack — target legality, not an effect's filter),
+condition:filter-same-name-as-chosen (Canoptek Wraith's land chosen as it
+resolves), filter:same-name-as-card-in-casters-graveyard (Dragonlord
+Kolaghan: "their graveyard", the caster's, from a trigger filter). Still open
+on built keys' cards: the copy-with-an-ability cards (Callidus Assassin, Evil
+Twin, Pirated Copy), Retraced Image's reveal-then-maybe, Search the City.
+Proving cards: Ixalan's Binding, Exclusion Ritual, Cornered Market, Mitotic
+Manipulation, Pattern Matcher, Cylian Sunsinger.
+
 ### Shares a type with a reference object — built 2026-10-31
 
 The need-keys Phase 2 family `condition:filter-dynamic-compare`, its

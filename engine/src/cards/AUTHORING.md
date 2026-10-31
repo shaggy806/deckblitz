@@ -2358,7 +2358,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn,
 discardedThisTurn, enteredThisTurn, attackedThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, thisWay, attacking, blocking, goaded, suspected, saddled, saddledSource, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameAsTarget, sameNameAsTriggerObject, sharesColorWithTarget, ofChosenType, targets, greatestAmongItsController }`,
 every present clause ANDed. `greatestAmongItsController: { of, among }` is "with
@@ -2408,6 +2408,24 @@ as that spell**" (Aven Shrine): `{ countInGraveyard: { sameNameAsTriggerObject:
 true } }` on a `cast-spell` trigger, bound to the spell's name as the effect
 applies (a spell countered in response still has its name, and counts itself
 from the graveyard).
+**`sameNameWith: <ShareReference>`** is "with the same name as" any object a
+reference names (see "shares a type with it" below for the references),
+itself included: Cylian Sunsinger's "this creature and each other creature
+with the same name as it get +3/+3" is `modify-pt-all` of `{ type:
+"creature", sameNameWith: "source" }`; Exclusion Ritual's "players can't cast
+spells with the same name as the exiled card" is a `prohibits` of `{ spells: {
+sameNameWith: "exiled-with-source" } }` over its own linked exile (`exile {
+linked: true }`) — Ixalan's Binding's over an `untilSourceLeaves` exile, which
+counts as "the exiled card" too; Cornered Market's "a nontoken permanent" is
+`{ permanents: { token: false } }` (spells, and `lands` with `notSupertype:
+"basic"`); Mitotic Manipulation's look-and-choose `{ sameNameWith: {
+permanents: {} } }`; Pattern Matcher's "another creature you control" `{
+controlled: { type: "creature", isSource: false } }`. In an effect it's bound
+to the names as the effect applies; in a static or a trigger's filter the
+source, exiled-with-source, controlled and permanents references are read
+live, the others match nothing. Prefer it to `sameNameAsSource` in an effect:
+an effect's matching has no source, so `sameNameAsSource` there matches
+nothing.
 `sharesColorWithTarget: n` is radiance's "target X **and each other** X **that
 shares a color with it**" (rule 105.2; Ravnica: City of Guilds' ability word),
 the same way: the target itself, or one sharing any of its colors as the
@@ -2479,7 +2497,9 @@ the host read as the Aura was sacrificed), `"chosen"`, a **target slot**
 type with it" is one `damage-all` of `{ type: "creature",
 sharesCreatureTypeWith: 0 }`; Counterlash's `cast-now` `spell: {
 sharesCardTypeWith: 0 }`; Reality Scramble's `reveal-until` after the target
-went to the library, read as it last existed), or `{ controlled: <filter> }`
+went to the library, read as it last existed), `"exiled-with-source"` (the
+cards exiled with it, rule 607.2a, or until it leaves), `{ permanents:
+<filter> }` — every permanent matching it — or `{ controlled: <filter> }`
 — every permanent you control matching it (Hiveheart Shaman's "a basic land
 card that **doesn't** share a land type with a land you control" is `not: {
 sharesLandTypeWith: { controlled: { type: "land" } } }`). The reference

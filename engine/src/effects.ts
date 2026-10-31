@@ -7580,7 +7580,8 @@ export interface EffectApi {
    * choice (nothing has moved; do it again once that's answered). */
   putOntoBattlefieldTogether(cards: readonly ObjectId[]): boolean;
   /** The permanents matching `filter` (from the effect's controller's
-   * side), each with how many tokens it stands for — a token stack is one
+   * side, with the source as `FilterContext.source`), each with how many
+   * tokens it stands for — a token stack is one
    * object for every token in it. */
   permanentsMatching(filter: CardFilter): readonly { readonly object: ObjectId; readonly count: number }[];
   /** See the `{ cardTypesInGraveyard }` {@link EffectAmount}. */
@@ -7970,8 +7971,10 @@ export interface EffectApi {
   sourceExiledThisWay(): readonly ObjectId[];
   /** The cards in exile linked to this effect's source (rule 607.2a — see
    * `GameObject.exiledWith`), in the battlefield stint the resolving spell
-   * or ability refers to. */
-  cardsExiledWithSource(): readonly ObjectId[];
+   * or ability refers to. `orUntil`: the cards it exiled "until [it] leaves
+   * the battlefield" too (`GameObject.exiledUntil` — rule 610.3), which an
+   * ability of it also calls "the exiled card". */
+  cardsExiledWithSource(orUntil?: boolean): readonly ObjectId[];
   /** See the `"ninjutsu"` {@link EffectSpec}: whether it stopped to ask an
    * "as this enters" choice, after which it's applied again. */
   ninjutsu(): boolean;
@@ -10598,6 +10601,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesPermanentTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
       "sharesLandTypeWith" in value ||
+      "sameNameWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
       "sameNameAsTarget" in value ||
@@ -10739,6 +10743,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       walked =
         object !== undefined ? { ...rest, sameNameAs: { object, name: ctx.nameForMatching(object) } } : walked;
     }
+    // "With the same name as it / the exiled card / a permanent": the names
+    // of what the reference names now (or last had) — every reference, since
+    // an effect's matching has no source to read the live ones from.
+    if ("sameNameWith" in walked) {
+      const { sameNameWith: reference, ...rest } = walked;
+      const names = shareReferenceObjects(reference as ShareReference, ctx)
+        .map((object) => ctx.nameForMatching(object))
+        .filter((name): name is string => name !== null);
+      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
+    }
     // "For each card exiled this way, … with the same name as that card"
     // (Haunting Echoes): the names of what this resolution has done that to.
     if (typeof walked["sameNameAsThisWay"] === "string") {
@@ -10782,12 +10796,14 @@ function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext
   if (reference === "sacrificed") return one(ctx.sacrificed);
   if (reference === "attached") return one(ctx.attachedHost());
   if (reference === "chosen") return one(ctx.chosenPermanent());
+  if (reference === "exiled-with-source") return ctx.cardsExiledWithSource(true);
   if (typeof reference === "number") {
     if (illegalSlot(reference, ctx)) return [];
     const target = ctx.targets[reference];
     return target?.kind === "object" ? [target.object] : [];
   }
-  return ctx.permanentsMatching({ ...reference.controlled, controlledBy: "you" }).map((m) => m.object);
+  const filter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" as const } : reference.permanents;
+  return ctx.permanentsMatching(filter).map((m) => m.object);
 }
 
 /** Does `amount` read a per-player value (`lifeTotal: "each"`, a `thisWay`

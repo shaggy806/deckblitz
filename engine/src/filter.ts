@@ -194,7 +194,13 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *   moved since (Reality Scramble's permanent put on the bottom of the
  *   library); an illegal or empty slot is nothing;
  * - `{ controlled }` — every permanent the effect's controller controls
- *   that matches the filter: "a land you control" (Hiveheart Shaman).
+ *   that matches the filter: "a land you control" (Hiveheart Shaman);
+ * - `{ permanents }` — every permanent on the battlefield that matches it,
+ *   whoever controls it: "a nontoken permanent" (Cornered Market);
+ * - `"exiled-with-source"` — the cards in exile linked to the source's
+ *   battlefield stint (rule 607.2a, `GameObject.exiledWith`) or exiled until
+ *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
+ *   this" (Exclusion Ritual, Ixalan's Binding).
  *
  * Nothing to compare with: nothing shares a type with it.
  */
@@ -204,8 +210,10 @@ export type ShareReference =
   | "sacrificed"
   | "attached"
   | "chosen"
+  | "exiled-with-source"
   | number
-  | { readonly controlled: CardFilter };
+  | { readonly controlled: CardFilter }
+  | { readonly permanents: CardFilter };
 
 /** One bound `shares…TypeWith` clause: the reference objects themselves
  * (each always matches — "target creature and each other creature that
@@ -422,6 +430,24 @@ export interface CardFilter {
    * shares a name with nothing; without a source, nothing has its name.
    */
   readonly sameNameAsSource?: boolean;
+  /**
+   * Has the same name as one of the objects a `ShareReference` names (rule
+   * 201.2a: one name in common is enough — a split card's either half; an
+   * object with no name shares it with nothing) — a reference object itself
+   * included: Cylian Sunsinger's "this creature and each other creature with
+   * the same name as it" is `{ type: "creature", sameNameWith: "source" }`;
+   * "another" goes in the reference's filter (Pattern Matcher's "a card with
+   * the same name as another creature you control" is `{ controlled: { type:
+   * "creature", isSource: false } }`). In an effect every reference is bound
+   * to `sameNameAsAny` as it applies (`bindDynamicCompares`); elsewhere — a
+   * static's prohibition, a trigger's filter — `"source"`,
+   * `"exiled-with-source"` (Ixalan's Binding's "your opponents can't cast
+   * spells with the same name as the exiled card"), `{ controlled }` and `{
+   * permanents }` (Cornered Market's "a nontoken permanent") are read live
+   * off `FilterContext.source` and `.you`, and the others match nothing.
+   * Fails closed inside the layer fold.
+   */
+  readonly sameNameWith?: ShareReference;
   /**
    * Has the same name as one of the cards the resolving spell or ability
    * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
@@ -1127,6 +1153,46 @@ function damagingStint(
   return stint(host ?? undefined);
 }
 
+/**
+ * The objects a `ShareReference` names, read from the state and the filter's
+ * context alone — `undefined` for a reference only a resolving effect can
+ * read (`bindDynamicCompares` binds those). `"exiled-with-source"` is the
+ * cards in exile linked to the source's battlefield stint (rule 607.2a): the
+ * one it's in, or the last one it had if it has left (Mindreaver,
+ * sacrificed).
+ */
+export function liveReferenceObjects(
+  state: GameState,
+  registry: CardRegistry,
+  reference: ShareReference,
+  ctx: FilterContext,
+): readonly ObjectId[] | undefined {
+  if (reference === "source") return ctx.source === undefined ? [] : [ctx.source];
+  if (reference === "exiled-with-source") {
+    const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    if (source === undefined) return [];
+    const stint = source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount;
+    if (stint === undefined) return [];
+    // Linked (`exiledWith`), or exiled until it leaves (`exiledUntil`, rule
+    // 610.3) — both "the exiled card" to an ability of it.
+    const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+      link !== undefined && link.source === source.id && link.zoneChangeCount === stint;
+    return state.zones.shared.exile.filter((card) => {
+      const object = state.objects[card];
+      return linked(object?.exiledWith) || linked(object?.exiledUntil);
+    });
+  }
+  if (typeof reference !== "object") return undefined;
+  const inner: CardFilter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" } : reference.permanents;
+  const innerCtx: FilterContext = {
+    you: ctx.you,
+    ...(ctx.x !== undefined ? { x: ctx.x } : {}),
+    ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
+    ...(ctx.source !== undefined ? { source: ctx.source } : {}),
+  };
+  return state.zones.shared.battlefield.filter((other) => matchesFilter(state, registry, other, inner, innerCtx));
+}
+
 /** `filter` with its `ofChosenColor` read now, off `source`, into a fixed
  * colour — for a filter kept past the resolution that applied it (a
  * prevention shield's "a source of your choice of the chosen color"), which
@@ -1319,6 +1385,20 @@ export function matchesFilter(
       from === undefined || from.faceDown !== undefined || printedCardName(from) === LOCKED_ROOM;
     const same = !nameless && !fromNameless && nameOf(from) === named;
     if (same !== filter.sameNameAsSource) return false;
+  }
+  if (filter.sameNameWith !== undefined) {
+    // Rule 201.2a over the objects the reference names now. A reference
+    // only an effect can read is bound before it gets here; one left
+    // unbound, or asked inside the layer fold, matches nothing.
+    if (layered !== undefined) return false;
+    const others = liveReferenceObjects(state, registry, filter.sameNameWith, ctx);
+    if (others === undefined) return false;
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    const shared = others.some((other) => {
+      const object = state.objects[other];
+      return object !== undefined && namesOf(registry, object).some((n) => names.includes(n));
+    });
+    if (!shared) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
   if (filter.hasName !== undefined || filter.chosenName === true) {

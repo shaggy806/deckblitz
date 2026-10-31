@@ -743,7 +743,10 @@
   "filter:shares-creature-type-with-sacrificed",
   "filter:shares-creature-type-with-target",
   "filter:shares-card-type-with-target",
-  "filter:shares-land-type-with-controlled"
+  "filter:shares-land-type-with-controlled",
+  "condition:filter-same-name-as-source",
+  "filter:same-name-as-a-permanent",
+  "condition:filter-same-name-as-permanent-you-control"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

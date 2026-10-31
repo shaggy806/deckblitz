@@ -2073,6 +2073,18 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`${CROWN} gain ${KW} until end of turn`).exec(s))) {
     return { kind: "grant-keyword-all", filter: crowned, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
   }
+  // "This creature and each other creature with the same name as it get
+  // +3/+3" (Cylian Sunsinger): the source and its namesakes
+  // (`sameNameWith: "source"`, rule 201.2a).
+  if ((m = re(`(?:~|this creature) and each other creature with the same name as it gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", sameNameWith: "source" },
+      power: Number(m[1]),
+      toughness: Number(m[2]),
+      duration: "end-of-turn",
+    };
+  }
   // "Destroy all creatures that share a creature type with the sacrificed
   // creature" (Endemic Plague).
   if ((m = re(`destroy all creatures that share a creature type with the sacrificed creature`).exec(s))) {
@@ -4539,6 +4551,18 @@ export function parseFace(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: { chosenName: true } }, text: printed(raw) });
       continue;
     }
+    // A name lock on a reference (`sameNameWith`, rule 201.2a): "the exiled
+    // card" (Ixalan's Binding, Exclusion Ritual — the card's own exile, rule
+    // 607.2a) or "a nontoken permanent" (Cornered Market's spells and
+    // nonbasic lands).
+    if ((m = /^(Your opponents|Players) can't (cast spells|play nonbasic lands) with the same name as (the exiled card|a nontoken permanent)\.$/.exec(line))) {
+      const who = m[1] === "Players" ? "each-player" : "opponents";
+      const sameNameWith = m[3] === "the exiled card" ? "exiled-with-source" : { permanents: { token: false } };
+      const prohibits =
+        m[2] === "cast spells" ? { who, spells: { sameNameWith } } : { who, lands: { notSupertype: "basic", sameNameWith } };
+      out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
+      continue;
+    }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
       out.static.push({
@@ -4961,6 +4985,7 @@ export function parseFace(face, ctx = {}) {
   if (
     /\bexiled with (?:this \w+|it)\b/.test(oracleText) ||
     /\breturn the exiled card\b/.test(oracleText) ||
+    /\bsame name as the exiled card\b/.test(oracleText) ||
     (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
   ) {
     const linkExiles = (node) => {
