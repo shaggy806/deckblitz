@@ -1473,6 +1473,53 @@ export interface PlayerTest {
 }
 
 /**
+ * What casting a spell from a graveyard under a permission costs beyond, or
+ * instead of, its mana cost — shared by a permanent's `castFromGraveyard`
+ * static (Kotis, Sibsig Champion) and a card's own
+ * {@link CardDefinition.castSelfFromGraveyard} (Wickerfolk Indomitable).
+ * Each is part of the total cost (rule 601.2f), paid as the spell is cast
+ * (601.2h), so a spell countered afterwards keeps them paid; none is offered
+ * when it can't be paid (rule 601.2h: a cost must be paid in full).
+ */
+export interface GraveyardCastCosts {
+  /** "By paying 3 life in addition to paying their other costs" — life
+   * paid only up to what the caster has (rule 119.4). */
+  readonly payLife?: number;
+  /** An additional sacrifice for a cast this way — Exploration
+   * Broodship's "by sacrificing a land in addition to paying its other
+   * costs". Offered and paid like a spell's own `additionalCost.sacrifice`
+   * (the offer's `sacrifice.choices`, the action's `sacrifice`), after the
+   * mana, so the land may tap for the spell first (rule 601.2g–h). Not
+   * offered for a card with a sacrifice cost of its own. */
+  readonly sacrifice?: CardFilter;
+  /** An additional cost of exiling this many *other* cards from the
+   * graveyard — Kotis, Sibsig Champion's "by exiling three other cards
+   * from your graveyard in addition to paying its other costs". Picked by
+   * the caster as escape's are (the offer's `escapeExile`, the action's
+   * `escapeExile`) and paid as the spell is cast; not offered with too few.
+   * The spell isn't escaped (`castVia` stays `"graveyard-permission"`). */
+  readonly exileOthers?: number;
+  /** Which other cards `exileOthers` may exile — Helbrute's "by exiling
+   * **another creature card** from your graveyard". Absent: any. */
+  readonly exileFilter?: CardFilter;
+  /** "By discarding a card in addition to paying its other costs" (Alien
+   * Symbiosis; Rona's two): cards from the caster's hand, chosen as the cost
+   * is paid after the mana (rule 601.2h), as retrace's is. Not offered with
+   * too few cards in hand. */
+  readonly discard?: number;
+  /** "By paying {2}{W} **rather than** paying its mana cost" (Raffine's
+   * Guidance): an alternative cost (rule 118.9), so no other alternative
+   * cost — a free cast, Jodah's — goes with it (118.9a); additional costs
+   * and cost changes still apply (118.9d). */
+  readonly mana?: string;
+  /** "If you pay {1} more to cast it **for each other creature card in your
+   * graveyard**" (Risen Executioner): {1} more per other card in the
+   * caster's graveyard matching this, counted as the cost is determined
+   * (rule 601.2f) — an increase, so before any reduction. */
+  readonly costIncreasePerOther?: CardFilter;
+}
+
+/**
  * A static ability: continuously modifies characteristics (rule 613 layers 6 /
  * 7b / 7d), and/or carries a `replacement` clause (rule 614 — applied by
  * `game.ts`, not by the layer fold).
@@ -2086,22 +2133,7 @@ export interface StaticAbility {
     readonly yourTurnOnly?: boolean;
     readonly perType?: readonly CardType[];
     readonly exileAfterwards?: boolean;
-    readonly payLife?: number;
-    /** An additional sacrifice for a cast this way — Exploration
-     * Broodship's "by sacrificing a land in addition to paying its other
-     * costs". Offered and paid like a spell's own `additionalCost.sacrifice`
-     * (the offer's `sacrifice.choices`, the action's `sacrifice`), after the
-     * mana, so the land may tap for the spell first (rule 601.2g–h). Not
-     * offered for a card with a sacrifice cost of its own. */
-    readonly sacrifice?: CardFilter;
-    /** An additional cost of exiling this many *other* cards from the
-     * graveyard — Kotis, Sibsig Champion's "by exiling three other cards
-     * from your graveyard in addition to paying its other costs". Picked by
-     * the caster as escape's are (the offer's `escapeExile`, the action's
-     * `escapeExile`) and paid as the spell is cast; not offered with too few.
-     * The spell isn't escaped (`castVia` stays `"graveyard-permission"`). */
-    readonly exileOthers?: number;
-  };
+  } & GraveyardCastCosts;
   /**
    * Keywords this permanent gives cards in its controller's **graveyard**
    * (rule 604.1 — a static ability reaches another zone when its text says
@@ -2291,6 +2323,24 @@ export interface StaticAbility {
      * Spider-Man's "each legendary spell you cast that's one or more colors
      * has web-slinging {G}{W}{U}". */
     readonly webSlinging?: string;
+    /** The spells have **convoke** (rule 702.51) — Chief Engineer's
+     * "artifact spells you cast have convoke", Hoarding Broodlord's "spells
+     * you cast from exile" (`castFrom: ["exile"]`). Judged as the spell is
+     * cast, where the card is then; several instances are redundant
+     * (702.51b). With improvise too (printed or granted), the caster taps
+     * creatures for convoke and artifacts for improvise in one payment. */
+    readonly convoke?: true;
+    /** The spells have **improvise** (rule 702.126) — Inspiring Statuary's
+     * "nonartifact spells you cast have improvise": each artifact tapped
+     * pays {1}. Read as `convoke` is. */
+    readonly improvise?: true;
+    /** The spells have **prowl** for this cost (rule 702.76) — Hunting
+     * Velociraptor's "Dinosaur spells you cast have prowl {2}{R}": an
+     * alternative cost (118.9) offered while a source you controlled with
+     * any of the spell's creature types dealt combat damage to a player this
+     * turn, as a printed prowl is; a card with an alternative cost of its
+     * own offers that one instead. */
+    readonly prowl?: string;
     /** Only the first spell matching `filter` its controller casts each turn
      * — Anhelo, the Painter's "**the first** instant or sorcery spell you
      * cast each turn has casualty 2". Spells cast earlier this turn count,
@@ -3838,6 +3888,26 @@ export interface CardDefinition {
    * the card itself the grant's source), and it spends nothing.
    */
   readonly castFromGraveyardIf?: StaticCondition;
+  /**
+   * "You may cast this card from your graveyard **by** [costs]" — the card's
+   * own permission with costs of its own (rule 601.2f), as a static ability
+   * that functions from the graveyard (rule 113.6f): Wickerfolk
+   * Indomitable's "by paying 2 life and sacrificing an artifact or creature
+   * in addition to paying its other costs", Raffine's Guidance's "by paying
+   * {2}{W} rather than paying its mana cost", Helbrute's "by exiling another
+   * creature card from your graveyard", Risen Executioner's "if you pay {1}
+   * more … for each other creature card in your graveyard" — see
+   * {@link GraveyardCastCosts}. `if` gates it as `castFromGraveyardIf` does
+   * (that field is this one's condition-only form; a card has one or the
+   * other). Offered like any graveyard permission (`via:
+   * "graveyard-permission"`, the card itself the grant's source), under the
+   * card's normal timing.
+   *
+   * `fromExile`: "you may cast this card from your graveyard **or from
+   * exile**" (Squee, the Immortal) — the same permission over the card in
+   * exile, its owner casting it there as an `"impulse"` cast does.
+   */
+  readonly castSelfFromGraveyard?: { readonly if?: StaticCondition; readonly fromExile?: true } & GraveyardCastCosts;
   /** Foretell (rule 702.144 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -4283,6 +4353,7 @@ const PRINTED_ABILITY: {
   suspend: (def) => def.suspend !== null,
   cycling: (def) => def.cycling !== null,
   castFromGraveyardIf: (def) => def.castFromGraveyardIf !== undefined,
+  castSelfFromGraveyard: (def) => def.castSelfFromGraveyard !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -4503,6 +4574,7 @@ interface CardDraft {
   emerge?: NonNullable<CardDefinition["emerge"]>;
   flashback?: NonNullable<CardDefinition["flashback"]>;
   castFromGraveyardIf?: StaticCondition;
+  castSelfFromGraveyard?: NonNullable<CardDefinition["castSelfFromGraveyard"]>;
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
@@ -4756,6 +4828,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     suspend: draft.suspend ?? null,
     cycling: draft.cycling ?? null,
     ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
+    ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
     escape: draft.escape ?? null,
     chapters: draft.chapters ?? null,
     readAhead: draft.readAhead === true,

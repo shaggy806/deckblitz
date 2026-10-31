@@ -32,7 +32,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { LOCKED_ROOM, activePlayerOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
+import { LOCKED_ROOM, activePlayerOf, blockedAttackersOf, isTokenNow, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -379,6 +379,36 @@ export interface CardFilter {
   /** `bandedWithSource` bound to the permanent it means — written by
    * `bindDynamicCompares`, never authored. */
   readonly bandedWith?: ObjectId;
+  /**
+   * It's in a **blocking relation** with the permanent applying the filter, or
+   * with the permanent that one is attached to (`of: "host"`) — the partner:
+   * - `"blocking"`: it's blocking the partner (Goblin Javelineer's "target
+   *   creature blocking it", Plasma Caster's "target creature that's blocking
+   *   equipped creature", Battle-Scarred Goblin's "each creature blocking
+   *   it");
+   * - `"blocked-by"`: the partner is blocking it (Tinder Wall's "target
+   *   creature it's blocking", Wall of Nets' "all creatures blocked by this
+   *   creature");
+   * - `"either"`: Kjeldoran Frostbeast's "all creatures blocking or blocked
+   *   by this creature".
+   *
+   * Read through `blockedAttackersOf` (a band blocked is blocked whole, rule
+   * 702.22h): a creature removed from combat is in no relation (rule 506.4),
+   * and an attacker stays blocked by a blocker that left — the blocker's
+   * relations are then read off its last-known information (rules 608.2b,
+   * 608.2h): Tinder Wall sacrificed to its own ability still finds the
+   * creature it was blocking. The matched creature itself must be on the
+   * battlefield and still in combat. Read against `FilterContext.source`; in
+   * an effect, `bindDynamicCompares` binds the partner to `with` first.
+   */
+  readonly blockingRelation?: {
+    readonly relation: "blocking" | "blocked-by" | "either";
+    /** Whose relation: the source itself (the default) or its host — the
+     * permanent it's attached to now, or was as it left. */
+    readonly of?: "source" | "host";
+    /** The partner, bound by `bindDynamicCompares` — never authored. */
+    readonly with?: ObjectId;
+  };
   /**
    * It's (or isn't) the permanent the one applying the filter is **attached
    * to** — an Aura's "enchanted creature", an Equipment's "equipped
@@ -1033,6 +1063,53 @@ export function saddledMount(state: GameState, creature: GameObject, mount: Obje
   return stint !== undefined && records.some((r) => r.mount === mount && r.stint === stint);
 }
 
+/** The partner of a `blockingRelation` clause: `source` itself, or the
+ * permanent it's attached to — now, or as it last was on the battlefield. */
+export function blockingPartnerOf(
+  state: GameState,
+  of: "source" | "host",
+  source: ObjectId | undefined,
+): ObjectId | undefined {
+  if (source === undefined || of === "source") return source;
+  const object = state.objects[source];
+  if (object === undefined) return undefined;
+  const host = object.zone === "battlefield" ? object.attachedTo : object.lastKnown?.attachedTo;
+  return host ?? undefined;
+}
+
+/**
+ * Whether `creature` (on the battlefield) is blocking `partner`, is blocked by
+ * it, or either (rules 509.1g-h) — `CardFilter.blockingRelation`. A partner
+ * that has left the battlefield is read as it last was there: the attackers
+ * it was blocking and the blockers it had as it left (rules 608.2b, 608.2h),
+ * with `creature` still a blocker, or still a blocked attacker (509.1h).
+ */
+export function inBlockingRelation(
+  state: GameState,
+  creature: GameObject,
+  partner: ObjectId,
+  relation: "blocking" | "blocked-by" | "either",
+): boolean {
+  if (creature.zone !== "battlefield" || creature.id === partner) return false;
+  const other = state.objects[partner];
+  if (other === undefined) return false;
+  const here = other.zone === "battlefield";
+  const blocking = (): boolean =>
+    creature.blocking !== null &&
+    (here
+      ? blockedAttackersOf(state, creature.id).includes(partner)
+      : (other.lastKnown?.blockers ?? []).includes(creature.id));
+  const blockedBy = (): boolean =>
+    creature.attacking !== null &&
+    creature.blocked &&
+    (here
+      ? blockedAttackersOf(state, partner).includes(creature.id)
+      : (other.lastKnown?.blockedAttackers ?? []).includes(creature.id));
+  if (relation === "blocking") return blocking();
+  if (relation === "blocked-by") return blockedBy();
+  return blocking() || blockedBy();
+}
+
 /** What is attached to `id` on the battlefield, for the attachment clauses.
  * Attachments leave with the permanent, so off the battlefield it's none —
  * which is why a leaving permanent's snapshot records them first
@@ -1513,6 +1590,11 @@ export function matchesFilter(
       other.attacking !== null;
     if (filter.bandedWithSource !== undefined && banded !== filter.bandedWithSource) return false;
     if (filter.bandedWith !== undefined && !banded) return false;
+  }
+  if (filter.blockingRelation !== undefined) {
+    const { relation, of, with: bound } = filter.blockingRelation;
+    const partner = bound ?? blockingPartnerOf(state, of ?? "source", ctx.source);
+    if (live === undefined || partner === undefined || !inBlockingRelation(state, live, partner, relation)) return false;
   }
   if (filter.isSource !== undefined && (ctx.source !== undefined && ctx.source === id) !== filter.isSource) {
     return false;

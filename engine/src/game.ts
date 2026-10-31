@@ -87,6 +87,7 @@ import type {
   CastModalSpec,
   PermanentOnEnter,
   CombatRestriction,
+  GraveyardCastCosts,
   Keyword,
   StaticAbility,
   StaticCondition,
@@ -315,6 +316,7 @@ import {
   FACE_DOWN_CARDS,
   POISON_LETHAL,
   activePlayerOf,
+  attackRequirementActive,
   cloneGameState,
   clonePlain,
   createPlayerState,
@@ -384,6 +386,7 @@ import type {
   CastNowAsk,
   OtherChoiceAsk,
   MeldedInfo,
+  AttackRequirementRule,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -1234,6 +1237,12 @@ function arrangeManaSources(
 type GraveyardGrantOption = {
   readonly grant: GraveyardGrant;
   readonly permission: NonNullable<StaticAbility["castFromGraveyard"]> | null;
+  /** The `state.playerEffects` index of the resolved permission this is —
+   * spent there when it's a `once` one (Whispersteel Dagger). */
+  readonly playerEffect?: number;
+  /** "You may spend mana as though it were mana of any color to cast that
+   * spell" (rule 609.4b): only for a spell cast under this permission. */
+  readonly spendAs?: SpendAs;
 };
 
 /** One flashback a graveyard card has (rule 702.34) — see `Game.flashbacksOf`. */
@@ -2579,8 +2588,23 @@ export class Game {
     // once per permission that applies — and, for Muldrotha, once per
     // permanent type the card could spend — so which permission is used up is
     // the player's choice, carried as `graveyardGrant`. Each face of a modal
-    // double-faced card is its own option, as it is from the hand.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    // double-faced card is its own option, as it is from the hand. Another
+    // player's graveyard only when something reaches it: a resolved
+    // permission over it (The Great Work), or a one-shot grant on the card.
+    const reachesOthers = (this.state.playerEffects ?? []).some(
+      (e) => e.owner === player && e.castFromGraveyard?.used !== true && e.castFromGraveyard?.graveyards?.some((p) => p !== player),
+    );
+    const graveyardCards = [
+      ...this.state.zones.perPlayer[player].graveyard,
+      ...this.state.turnOrder.flatMap((other) =>
+        other === player
+          ? []
+          : this.state.zones.perPlayer[other].graveyard.filter(
+              (id) => reachesOthers || this.state.objects[id].graveyardCastPermission?.player === player,
+            ),
+      ),
+    ];
+    for (const card of graveyardCards) {
       const ownDef = this.registry.get(this.state.objects[card].cardName);
       const faceList = castableFaces(ownDef);
       for (const face of faceList) {
@@ -3583,7 +3607,7 @@ export class Game {
         // Convoke (rule 702.51): not affordable with mana alone doesn't mean
         // not castable — check again assuming every untapped creature helps,
         // maximally, before giving up on this variant.
-        if (!castable && Game.tapsToPay(def)) {
+        if (!castable && this.tapsToPay(def, card, player)) {
           // At the X being checked: a library-top cast's X floor (Glarb)
           // is part of what the creatures must pay.
           const baseCost = this.withFace(card, face ?? 0, () =>
@@ -3609,7 +3633,7 @@ export class Game {
               targetCount,
             ),
           );
-          const proof = this.maxConvokeFor(this.convokeCandidates(player, def), baseCost, def);
+          const proof = this.maxConvokeFor(this.convokeCandidates(player, def, card), baseCost, def, card, player);
           if (
             proof.length > 0 &&
             this.whyCannotCastSpell(
@@ -4002,13 +4026,14 @@ export class Game {
         // graveyard" (Kotis, Sibsig Champion) is chosen the same way.
         ...(via === "graveyard-permission"
           ? (() => {
-              const count = this.findGraveyardGrant(player, card, face ?? 0, graveyardGrant)?.permission?.exileOthers;
-              return count === undefined
+              const permission = this.findGraveyardGrant(player, card, face ?? 0, graveyardGrant)?.permission;
+              const count = permission?.exileOthers;
+              return count === undefined || permission == null
                 ? {}
                 : {
                     escapeExile: {
                       count,
-                      choices: this.state.zones.perPlayer[player].graveyard.filter((id) => id !== card),
+                      choices: this.graveyardExileChoices(player, card, permission),
                     },
                   };
             })()
@@ -4063,9 +4088,9 @@ export class Game {
               return { delve: { choices: delvePool, minCards, maxCards, byX } };
             })()
           : {}),
-        ...(Game.tapsToPay(def)
+        ...(this.tapsToPay(def, card, player)
           ? (() => {
-              const candidates = this.convokeCandidates(player, def);
+              const candidates = this.convokeCandidates(player, def, card);
               const full = this.castingCostOf(player, card, def, 0, cost, pricedAt);
               // As many creatures as the largest X on offer could use.
               const atMaxX =
@@ -4084,11 +4109,14 @@ export class Game {
                   // convoking for generic leaves the {W}{W}{W} it would have
                   // made unpaid). Otherwise it's the allocation `castableAt`
                   // proved.
-                  proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full, def),
-                  ...(Game.improvisesOnly(def) ? { improvise: true as const } : {}),
+                  proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full, def, card, player),
+                  ...(this.improvisesOnly(def, card, player) ? { improvise: true as const } : {}),
+                  ...(this.tapPayKinds(def, card, player).convoke && this.tapPayKinds(def, card, player).improvise
+                    ? { alsoImprovise: true as const }
+                    : {}),
                   manaAffordable,
                   // Improvise pays only the generic part.
-                  maxCreatures: Game.improvisesOnly(def)
+                  maxCreatures: this.improvisesOnly(def, card, player)
                     ? atMaxX.generic
                     : atMaxX.generic + COLORS.reduce((n, c) => n + atMaxX.colored[c], 0),
                   ...(xPlan !== null
@@ -4281,17 +4309,16 @@ export class Game {
    * last: a creature that convokes can't also tap for mana (see
    * `whyCannotCastSpell`), so a proof built from this order leaves the mana
    * creatures for the mana whenever it can. */
-  private convokeCandidates(player: PlayerId, def: CardDefinition): ObjectId[] {
-    // Improvise (rule 702.126a) taps untapped artifacts instead, through the
-    // same payment: each pays one generic mana and nothing else.
-    const type = Game.improvisesOnly(def) ? "artifact" : "creature";
+  private convokeCandidates(player: PlayerId, def: CardDefinition, card: ObjectId): ObjectId[] {
+    // Improvise (rule 702.126a) taps untapped artifacts, through the same
+    // payment: each pays one generic mana and nothing else. A spell with
+    // both taps either.
+    const kinds = this.tapPayKinds(def, card, player);
     const creatures = this.state.zones.shared.battlefield.filter((id) => {
       const object = this.state.objects[id];
-      return (
-        object.controller === player &&
-        !object.tapped &&
-        computeCharacteristics(this.state, this.registry, id).types.includes(type)
-      );
+      if (object.controller !== player || object.tapped) return false;
+      const types = computeCharacteristics(this.state, this.registry, id).types;
+      return (kinds.convoke && types.includes("creature")) || (kinds.improvise && types.includes("artifact"));
     });
     const makesMana = new Set(this.manaSources(player).map((s) => s.id));
     return [
@@ -4300,16 +4327,49 @@ export class Game {
     ];
   }
 
-  /** Whether `def` taps permanents to pay for itself — convoke (rule 702.51)
-   * or improvise (702.126). */
-  private static tapsToPay(def: CardDefinition): boolean {
-    return def.convoke || def.improvise;
+  /** Whether `card` (as `def`) has convoke (rule 702.51) and improvise
+   * (702.126) as `player` casts it: printed, or given by a `grantsToSpells`
+   * static that reaches it as it's cast (Chief Engineer, Inspiring
+   * Statuary — `castGrantReaches`, where the card is now). */
+  private tapPayKinds(def: CardDefinition, card: ObjectId, player: PlayerId): { convoke: boolean; improvise: boolean } {
+    let convoke = def.convoke;
+    let improvise = def.improvise;
+    if (!convoke || !improvise) {
+      for (const id of this.state.zones.shared.battlefield) {
+        const source = this.state.objects[id];
+        if (source === undefined) continue;
+        for (const ability of this.registry.get(rulesTextName(source)).static) {
+          const grant = ability.grantsToSpells;
+          if (grant === undefined || (grant.convoke !== true && grant.improvise !== true)) continue;
+          if ((convoke || grant.convoke !== true) && (improvise || grant.improvise !== true)) continue;
+          if (!castGrantReaches(this.state, this.registry, source, ability, card, player)) continue;
+          if (grant.convoke === true) convoke = true;
+          if (grant.improvise === true) improvise = true;
+        }
+      }
+    }
+    return { convoke, improvise };
+  }
+
+  /** Whether `card` taps permanents to pay for itself as `player` casts it —
+   * convoke (rule 702.51) or improvise (702.126). */
+  private tapsToPay(def: CardDefinition, card: ObjectId, player: PlayerId): boolean {
+    const kinds = this.tapPayKinds(def, card, player);
+    return kinds.convoke || kinds.improvise;
   }
 
   /** Improvise without convoke (rule 702.126a): the tapped permanents are
-   * artifacts, each paying one generic mana. No card has both. */
-  private static improvisesOnly(def: CardDefinition): boolean {
-    return def.improvise && !def.convoke;
+   * artifacts, each paying one generic mana. */
+  private improvisesOnly(def: CardDefinition, card: ObjectId, player: PlayerId): boolean {
+    const kinds = this.tapPayKinds(def, card, player);
+    return kinds.improvise && !kinds.convoke;
+  }
+
+  /** Whether `permanent`, tapped to help pay for a spell with `kinds`, may
+   * pay coloured mana — only as a creature convoking (rule 702.51a); an
+   * artifact improvising pays {1} alone (702.126a). */
+  private convokesForColor(permanent: ObjectId, kinds: { convoke: boolean; improvise: boolean }): boolean {
+    return kinds.convoke && computeCharacteristics(this.state, this.registry, permanent).types.includes("creature");
   }
 
   /** A greedy convoke allocation using as many of `candidates` as usefully
@@ -4319,13 +4379,19 @@ export class Game {
    * a convokable spell is affordable *at all* — enumerated in
    * `castSpellActions`, never dispatched as-is; the real cast can use any
    * subset/allocation the driver actually chooses. */
-  private maxConvokeFor(candidates: readonly ObjectId[], cost: ManaCost, def: CardDefinition): PaidConvoke[] {
+  private maxConvokeFor(
+    candidates: readonly ObjectId[],
+    cost: ManaCost,
+    def: CardDefinition,
+    card: ObjectId,
+    player: PlayerId,
+  ): PaidConvoke[] {
     const out: PaidConvoke[] = [];
     const colorLeft = { ...cost.colored };
     let genericLeft = cost.generic;
-    const genericOnly = Game.improvisesOnly(def);
+    const kinds = this.tapPayKinds(def, card, player);
     for (const creature of candidates) {
-      const colors = genericOnly
+      const colors = !this.convokesForColor(creature, kinds)
         ? new Set<Color>()
         : computeCharacteristics(this.state, this.registry, creature).colors;
       // A compacted token stack helps once per token.
@@ -6864,11 +6930,24 @@ export class Game {
     );
     // So do attack-requirement rules (Kardur, Doomscourge's "until your next
     // turn, creatures your opponents control attack each combat …").
+    // A "this turn" one ends with its turn, a "during that player's next
+    // turn" one starts with that turn and ends with it (Taunt).
     const rules = this.state.attackRequirements;
-    if (rules !== undefined && rules.some((rule) => beginningFor.includes(rule.by))) {
-      const left = rules.filter((rule) => !beginningFor.includes(rule.by));
+    if (rules !== undefined && rules.length > 0) {
+      const turn = this.state.turn.number;
+      const left = rules.flatMap((rule): AttackRequirementRule[] => {
+        const d = rule.duration;
+        if (d === undefined) return beginningFor.includes(rule.by) ? [] : [rule];
+        if (d.kind === "this-turn") return d.turn >= turn ? [rule] : [];
+        if (d.kind === "next-turn-of") {
+          if (d.started !== undefined) return [];
+          return d.player === this.activePlayer && turn > d.after ? [{ ...rule, duration: { ...d, started: turn } }] : [rule];
+        }
+        return [rule];
+      });
       if (left.length === 0) delete this.state.attackRequirements;
       else this.state.attackRequirements = left;
+      invalidateComputedCache();
     }
     // "Until your next end step" of a player who has left the game lasts
     // until their turn would have begun (rule 800.4m) — the others' end with
@@ -9583,6 +9662,16 @@ export class Game {
       delete object.blockingAlso;
       delete object.band;
     }
+    // "Attacks during its controller's next combat phase if able" (Trench
+    // Behemoth) ends with that combat phase — not with one under way as it
+    // was made.
+    const rules = this.state.attackRequirements;
+    if (rules !== undefined && rules.some((rule) => rule.duration?.kind === "next-combat-of")) {
+      const left = rules.filter((rule) => !(rule.duration?.kind === "next-combat-of" && attackRequirementActive(this.state, rule)));
+      if (left.length === 0) delete this.state.attackRequirements;
+      else this.state.attackRequirements = left;
+      invalidateComputedCache();
+    }
   }
 
   // --- player actions ----------------------------------------------
@@ -11268,6 +11357,13 @@ export class Game {
     ) {
       reduction += this.costReductionAmount(def.selfCostReduction.reduceGeneric, player, cardId);
     }
+    // "That spell has undaunted" (Durnan of the Yawning Portal — rule
+    // 702.125a), from the permission it's cast from exile under; another
+    // instance, printed, applies as well (702.125c).
+    const exiled = this.state.objects[cardId];
+    if (exiled?.zone === "exile" && exiled.impulse?.undaunted === true && this.impulsePlayable(player, cardId)) {
+      reduction += this.costReductionAmount({ opponents: true }, player, cardId);
+    }
     // "This spell costs {N} less to cast if it targets …" (Price of Fame).
     if (def.targetCostReduction !== null) {
       const earned =
@@ -12135,12 +12231,12 @@ export class Game {
     targetCount: number,
     manaOnly: number,
   ): { maxX: number; convoke: PaidConvoke[] } {
-    if (!Game.tapsToPay(def)) return { maxX: manaOnly, convoke: [] };
+    if (!this.tapsToPay(def, cardId, player)) return { maxX: manaOnly, convoke: [] };
     return this.withFace(cardId, face, () => {
       const purpose: ManaPurpose = { kind: "cast", card: cardId };
       const payable = (k: number, pool: readonly ObjectId[]): PaidConvoke[] | null => {
         const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
-        const proof = this.maxConvokeFor(pool, cost, def);
+        const proof = this.maxConvokeFor(pool, cost, def, cardId, player);
         const arrangement =
           proof.length > 0 ? { withheld: new Set(proof.map((p) => p.creature)) } : undefined;
         const rest = proof.length > 0 ? this.reduceCostByConvoke(cost, proof) : cost;
@@ -12151,7 +12247,7 @@ export class Game {
       // `maxAffordableX` reports 0 even when X=0 itself isn't affordable.
       let best: { maxX: number; convoke: PaidConvoke[] } =
         payable(0, []) !== null ? { maxX: manaOnly, convoke: [] } : { maxX: -1, convoke: [] };
-      const candidates = this.convokeCandidates(player, def);
+      const candidates = this.convokeCandidates(player, def, cardId);
       const sources = this.manaSources(player);
       const makesMana = new Set(sources.map((s) => s.id));
       const spare = candidates.filter((id) => !makesMana.has(id));
@@ -12351,6 +12447,8 @@ export class Game {
         ? (def.harmonize?.cost ?? null)
         : via === "retrace"
         ? def.manaCost
+        : via === "graveyard-permission"
+          ? this.graveyardPermissionCost(caster ?? this.state.objects[cardId]?.owner, cardId, face, def, graveyardGrant)
         : // Mayhem (rule 702.187b): its cost; with none, its mana cost (702.187c).
           via === "mayhem"
           ? (this.mayhemCostOf(cardId) ?? def.manaCost)
@@ -12888,6 +12986,19 @@ export class Game {
       if (exileOthers !== undefined && escapeExile !== undefined) {
         const wrong = this.whyEscapeExileIsWrong(player, cardId, def.name, exileOthers, escapeExile);
         if (wrong !== null) return wrong;
+        // "By exiling another creature card" (Helbrute): only those.
+        const allowed = this.graveyardExileChoices(player, cardId, found.permission ?? {});
+        const off = escapeExile.find((id) => !allowed.includes(id));
+        if (off !== undefined) return `that card can't be exiled to cast ${def.name} this way`;
+      }
+      // "Rather than paying its mana cost" is an alternative cost: no other
+      // goes with it (rule 118.9a).
+      if (found.permission?.mana !== undefined && (altCost || free)) {
+        return `${def.name} is cast from the graveyard this way for its own alternative cost`;
+      }
+      // Rule 601.2h: the costs can be paid in full.
+      if (found.permission !== null && !this.graveyardCostsPayable(player, cardId, def, found.permission)) {
+        return `${player} can't pay the costs to cast ${def.name} from their graveyard this way`;
       }
       if (exileOthers === undefined && escapeExile !== undefined) {
         return `that permission exiles nothing from ${player}'s graveyard`;
@@ -13250,10 +13361,10 @@ export class Game {
     const delved = this.reduceCostByDelve(baseCost, delve);
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
-      if (!Game.tapsToPay(def)) return `${def.name} does not have convoke or improvise`;
-      const resolved = this.resolveConvoke(convoke, delved, def);
+      if (!this.tapsToPay(def, cardId, player)) return `${def.name} does not have convoke or improvise`;
+      const resolved = this.resolveConvoke(convoke, delved, def, cardId, player);
       if (typeof resolved === "string") return resolved;
-      const convokeError = this.whyCannotConvoke(player, resolved, delved, def);
+      const convokeError = this.whyCannotConvoke(player, resolved, delved, def, cardId);
       if (convokeError !== null) return convokeError;
       convoked = resolved;
     }
@@ -13342,8 +13453,9 @@ export class Game {
     convoke: readonly PaidConvoke[],
     cost: ManaCost,
     def: CardDefinition,
+    card: ObjectId,
   ): string | null {
-    const improvise = Game.improvisesOnly(def);
+    const kinds = this.tapPayKinds(def, card, player);
     const seen = new Map<ObjectId, number>();
     let genericPay = 0;
     const colorPay: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
@@ -13358,11 +13470,14 @@ export class Game {
       seen.set(creature, times);
       if (object.tapped) return "that creature is already tapped";
       const c = computeCharacteristics(this.state, this.registry, creature);
-      // Improvise (rule 702.126a): an artifact, for one generic mana.
-      if (improvise) {
+      // Improvise (rule 702.126a): an artifact, for one generic mana; a
+      // creature convoking (702.51a) for generic or one of its colours.
+      const convokes = kinds.convoke && c.types.includes("creature");
+      if (!convokes) {
+        if (!kinds.improvise) return "only a creature can convoke";
         if (!c.types.includes("artifact")) return "only an artifact can improvise";
         if (pays !== "generic") return "improvise pays only generic mana";
-      } else if (!c.types.includes("creature")) return "only a creature can convoke";
+      }
       if (pays === "generic") {
         genericPay += 1;
       } else {
@@ -13389,8 +13504,10 @@ export class Game {
     convoke: readonly ConvokePayment[],
     cost: ManaCost,
     def: CardDefinition,
+    card: ObjectId,
+    player: PlayerId,
   ): PaidConvoke[] | string {
-    const genericOnly = Game.improvisesOnly(def);
+    const kinds = this.tapPayKinds(def, card, player);
     const colorLeft = { ...cost.colored };
     let genericLeft = cost.generic;
     for (const { pays } of convoke) {
@@ -13405,7 +13522,9 @@ export class Game {
       }
       const object = this.state.objects[creature];
       if (object === undefined) return "that creature does not exist";
-      const colors = genericOnly ? new Set<Color>() : computeCharacteristics(this.state, this.registry, creature).colors;
+      const colors = !this.convokesForColor(creature, kinds)
+        ? new Set<Color>()
+        : computeCharacteristics(this.state, this.registry, creature).colors;
       const color = COLORS.find((c) => colors.has(c) && colorLeft[c] > 0);
       if (color !== undefined) {
         colorLeft[color] -= 1;
@@ -13522,6 +13641,9 @@ export class Game {
       graveyardGrant?: GraveyardGrant;
     },
   ): LegalAction[] {
+    if (opts.via === "graveyard-permission" && this.castGrantScope?.card !== card) {
+      return this.withCastGrantScope(card, opts.graveyardGrant, () => this.castSpellActions(player, card, cardName, def, opts));
+    }
     // "Of an opponent's choice" (rules 601.2c, 700.2e): a variant per
     // opponent who could choose, each judged with them choosing.
     if (this.castNeedsOtherChooser(def) && this.otherChoice?.for !== card) {
@@ -14711,6 +14833,15 @@ export class Game {
     division?: readonly number[],
     delve?: readonly ObjectId[],
   ): void {
+    // From a graveyard under a named permission: what the payment below may
+    // spend reads it (`spendAsFor`).
+    if (via === "graveyard-permission" && this.castGrantScope?.card !== cardId) {
+      this.withCastGrantScope(cardId, graveyardGrant, () =>
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+      );
+      return;
+    }
     // Harmonize (rule 702.180a): every cost below is priced with the tapped
     // creature's power off.
     if (via === "harmonize" && tap !== undefined && tap.length > 0 && !this.harmonizeProbed) {
@@ -14812,6 +14943,9 @@ export class Game {
     // alternative cost belongs to it there.
     const escape = via === "escape" ? this.escapeOf(cardId, face, graveyardGrant) : null;
     const flashback = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant) : null;
+    // Prowl, printed or granted (Hunting Velociraptor), for "if its prowl
+    // cost was paid".
+    const prowled = altCost && this.alternativeCostOf(cardId, def, via, player)?.keyword === "prowl";
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
     // A granted alternative cost's energy (Nissa, Worldsoul Speaker), or a
     // resolving effect's "by paying an amount of {E} equal to its mana
@@ -14906,7 +15040,7 @@ export class Game {
     );
     let convoked: PaidConvoke[] = [];
     if (convoke !== undefined && convoke.length > 0) {
-      const resolved = this.resolveConvoke(convoke, fullCost, def);
+      const resolved = this.resolveConvoke(convoke, fullCost, def, cardId, player);
       if (typeof resolved === "string") throw new Error(resolved);
       convoked = resolved;
     }
@@ -14990,13 +15124,16 @@ export class Game {
     // time the stack is named.
     // Which creatures convoked it, each as the object it was then — "each
     // creature that convoked this spell" (Lethal Scheme).
+    // A spell with improvise too: an artifact tapped for it didn't convoke.
+    const convokeKinds = this.tapPayKinds(def, cardId, player);
     const convokers: { object: ObjectId; stint: number }[] = [];
     for (const { creature } of convoked) {
       if (this.state.objects[creature] === undefined) continue;
+      const convoking = this.convokesForColor(creature, convokeKinds);
       const id = this.splitOneFromStack(creature);
       this.state.objects[id].tapped = true;
       this.emit({ type: "permanent-tapped", object: id });
-      convokers.push({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 });
+      if (convoking) convokers.push({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 });
     }
 
     // Escape (rule 702.139a): exile N other cards from the graveyard as part
@@ -15074,7 +15211,7 @@ export class Game {
     object.castFrom = castFrom;
     // Improvise's tapped artifacts didn't convoke it (Lethal Scheme's "each
     // creature that convoked this spell").
-    if (convokers.length > 0 && def.convoke) object.convokedBy = convokers;
+    if (convokers.length > 0 && convokeKinds.convoke) object.convokedBy = convokers;
     if (impulseUsed?.oncePerTurn === true && impulseUsed.source !== undefined) {
       const linked = this.state.objects[impulseUsed.source.id];
       if (linked !== undefined) linked.impulseCastOnTurn = this.state.turn.number;
@@ -15159,7 +15296,7 @@ export class Game {
     if (flashSacrificeOwed) object.flashSacrificeOwed = true;
     if (altCost && def.alternativeCost?.keyword === "spectacle") object.spectaclePaid = true;
     if (altCost && def.alternativeCost?.keyword === "surge") object.surgePaid = true;
-    if (altCost && def.alternativeCost?.keyword === "prowl") object.prowlPaid = true;
+    if (prowled) object.prowlPaid = true;
     if (overload) object.overloaded = true;
     // Cast bestowed: an Aura spell with enchant creature from here on (rule
     // 702.103b), what it targets chosen as an Aura's is.
@@ -15236,8 +15373,8 @@ export class Game {
     // (Kotis, Sibsig Champion): the ones the caster chose, or for a driver
     // that doesn't choose the oldest — one move, as escape's is.
     const permissionExile = graveyardPermission?.exileOthers;
-    if (permissionExile !== undefined) {
-      const others = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
+    if (permissionExile !== undefined && graveyardPermission !== null) {
+      const others = this.graveyardExileChoices(player, cardId, graveyardPermission);
       const exiled = escapeExile !== undefined ? [...escapeExile] : others.slice(0, permissionExile);
       this.withGraveyardLeaveBatch(() => {
         for (const id of exiled) this.moveObject(id, "exile");
@@ -15381,6 +15518,15 @@ export class Game {
         this.discardByEffect({ kind: "player", player }, costDiscard, def.additionalCost?.discardAtRandom === true);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
+    // A graveyard permission's "by discarding a card in addition to paying
+    // its other costs" (Alien Symbiosis), chosen as it's paid, as retrace's.
+    const permissionDiscard = graveyardPermission?.discard;
+    if (permissionDiscard !== undefined && permissionDiscard > 0) {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, permissionDiscard);
+      });
+      this.costDiscardPriorityTo(player);
     }
     // Cast by discarding a card rather than paying its mana cost (the
     // `cast-now` effect's `byDiscarding`): that card, chosen as it's paid.
@@ -19010,6 +19156,14 @@ export class Game {
     }
     if (spellCard !== undefined) {
       const card = this.state.objects[spellCard];
+      // From a graveyard, the permission it's cast under (Whispersteel
+      // Dagger's "as though it were mana of any color"): the one the cast
+      // in progress names, else the one a cast naming none would use.
+      if (card?.zone === "graveyard") {
+        const scope = this.castGrantScope;
+        const grant = scope?.card === spellCard ? scope.grant : undefined;
+        out = widerSpendAs(out, this.findGraveyardGrant(player, spellCard, castFace, grant)?.spendAs);
+      }
       if (card?.zone === "exile") {
         if (card.impulse?.spendAs !== undefined && this.impulsePlayable(player, spellCard)) {
           out = widerSpendAs(out, card.impulse.spendAs);
@@ -26342,7 +26496,7 @@ export class Game {
         if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
         spell.entersWithCounters = [...(spell.entersWithCounters ?? []), { kind: counter, amount }];
       },
-      allowCastFromExile: (target, free, laterTurns) => {
+      allowCastFromExile: (target, free, laterTurns, opts) => {
         if (target.kind !== "object") return;
         const card = this.state.objects[target.object];
         if (card === undefined || card.zone !== "exile") return;
@@ -26357,9 +26511,13 @@ export class Game {
             }
           : {
               player: controller,
-              expiry: { kind: "end-of-turn", turn: this.state.turn.number },
+              expiry:
+                opts?.whileExiled === true
+                  ? { kind: "while-exiled" }
+                  : { kind: "end-of-turn", turn: this.state.turn.number },
               castOnly: true,
               ...(free ? { free: { only: true } } : {}),
+              ...(opts?.undaunted === true ? { undaunted: true as const } : {}),
             };
       },
       chooseExiledToPlay: (filter, free) => {
@@ -26880,10 +27038,42 @@ export class Game {
               : [];
         for (const id of ids) this.unsuspect(id);
       },
-      addAttackRequirement: (filter, otherThanYou) => {
+      addAttackRequirement: ({ filter, otherThanYou, object, controlledBy, attacks, duration }) => {
+        const held = object === undefined ? undefined : this.state.objects[object];
+        if (object !== undefined && held?.zone !== "battlefield") return;
+        const turn = this.state.turn.number;
+        let lasts: AttackRequirementRule["duration"];
+        if (duration === "this-turn") lasts = { kind: "this-turn", turn };
+        else if (duration === "that-players-next-turn") {
+          if (controlledBy === undefined) return;
+          lasts = { kind: "next-turn-of", player: controlledBy, after: turn };
+        } else if (duration === "controllers-next-turn") {
+          if (held === undefined) return;
+          lasts = { kind: "next-turn-of", player: held.controller, after: turn };
+        } else if (duration === "controllers-next-combat") {
+          if (held === undefined) return;
+          // Its controller's next combat phase: not the one under way, if it
+          // is theirs (rule 506.1 — a combat phase runs from its beginning
+          // of combat step through its end of combat step).
+          const player = held.controller;
+          const inCombat = this.activePlayer === player && PHASE_OF_STEP[this.state.turn.step] === "combat";
+          const now = this.state.players[player]?.currentCombat;
+          lasts = { kind: "next-combat-of", player, ...(inCombat && now !== undefined ? { after: now } : {}) };
+        }
         this.state.attackRequirements = [
           ...(this.state.attackRequirements ?? []),
-          { by: controller, filter, otherThanYou },
+          {
+            by: controller,
+            filter,
+            otherThanYou,
+            ...(held !== undefined ? { object: { id: held.id, stint: held.zoneChangeCount ?? 0 } } : {}),
+            ...(controlledBy !== undefined ? { controlledBy } : {}),
+            ...(attacks !== undefined ? { attacks } : {}),
+            ...(attacks !== undefined && this.state.objects[attacks as ObjectId] !== undefined
+              ? { attacksStint: this.state.objects[attacks as ObjectId].zoneChangeCount ?? 0 }
+              : {}),
+            ...(lasts !== undefined ? { duration: lasts } : {}),
+          },
         ];
         invalidateComputedCache();
       },
@@ -29613,6 +29803,75 @@ export class Game {
     return out;
   }
 
+  /** Whether `player` could pay a graveyard permission's own costs for
+   * `card` (as `def`) — rule 601.2h: none is offered that can't be paid in
+   * full. Life only up to what they have (119.4); enough other cards to
+   * exile, and enough in hand to discard; and a sacrifice only for a card
+   * without one of its own, since one cast names one `sacrifice`. */
+  private graveyardCostsPayable(player: PlayerId, card: ObjectId, def: CardDefinition, costs: GraveyardCastCosts): boolean {
+    if (costs.payLife !== undefined && !this.canPayLife(player, costs.payLife)) return false;
+    if (costs.exileOthers !== undefined && this.graveyardExileChoices(player, card, costs).length < costs.exileOthers) {
+      return false;
+    }
+    if (costs.discard !== undefined && this.state.zones.perPlayer[player].hand.length < costs.discard) return false;
+    if (
+      costs.sacrifice !== undefined &&
+      (def.additionalCost?.sacrifice !== undefined ||
+        def.additionalCost?.options?.some((o) => o.sacrifice !== undefined) === true)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  /** The graveyard permission a cast being offered or made names — for
+   * `spendAsFor`, which is asked about the card alone. Set only around
+   * `castSpell` and `castSpellActions` (`withCastGrantScope`). */
+  private castGrantScope: { readonly card: ObjectId; readonly grant: GraveyardGrant | undefined } | null = null;
+
+  private withCastGrantScope<T>(card: ObjectId, grant: GraveyardGrant | undefined, run: () => T): T {
+    const before = this.castGrantScope;
+    this.castGrantScope = { card, grant };
+    try {
+      return run();
+    } finally {
+      this.castGrantScope = before;
+    }
+  }
+
+  /** The mana cost of casting `cardId` (as `def`) from a graveyard under
+   * the permission `grant` names: its own mana cost (a prototype's, rule
+   * 718.3b), or the permission's alternative cost (Raffine's Guidance's
+   * {2}{W} — rule 118.9), plus {1} for each other card in the caster's
+   * graveyard its `costIncreasePerOther` counts (Risen Executioner — an
+   * increase, determined with the total cost, rule 601.2f). */
+  private graveyardPermissionCost(
+    player: PlayerId | undefined,
+    cardId: ObjectId,
+    face: number,
+    def: CardDefinition,
+    grant: GraveyardGrant | undefined,
+  ): string | null {
+    const printed = this.prototypeApplied(cardId) ? (manaCostOverride(this.state.objects[cardId]) ?? def.manaCost) : def.manaCost;
+    const permission = player === undefined ? null : this.findGraveyardGrant(player, cardId, face, grant)?.permission;
+    if (permission == null || player === undefined) return printed;
+    const base = permission.mana ?? printed;
+    const per = permission.costIncreasePerOther;
+    if (per === undefined || base === null) return base;
+    const more = this.graveyardExileChoices(player, cardId, { exileFilter: per }).length;
+    return base + "{1}".repeat(more);
+  }
+
+  /** The other cards in `player`'s graveyard a permission's `exileOthers`
+   * may exile to cast `card` — those its `exileFilter` picks out (Helbrute's
+   * "another creature card"), or any. */
+  private graveyardExileChoices(player: PlayerId, card: ObjectId, costs: GraveyardCastCosts): ObjectId[] {
+    const filter = costs.exileFilter;
+    return this.state.zones.perPlayer[player].graveyard.filter(
+      (id) => id !== card && (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
+    );
+  }
+
   /**
    * Every permission `player` could play `card` (as face `face`) from their
    * graveyard under right now, each with the permission it would spend:
@@ -29636,55 +29895,65 @@ export class Game {
     face = 0,
   ): GraveyardGrantOption[] {
     const object = this.state.objects[card];
-    if (object === undefined || object.zone !== "graveyard" || object.owner !== player) {
-      return [];
-    }
+    if (object === undefined || object.zone !== "graveyard") return [];
+    // "Your graveyard": a printed permission and the card's own reach only
+    // the cards `player` owns; a one-shot grant or a resolved permission may
+    // reach another player's graveyard (rule 601.3 — The Great Work's "any
+    // graveyard"), the spell then the caster's to control (rule 108.3).
+    const mine = object.owner === player;
     const def = this.faceDef(card, face);
     const isLand = def.types.includes("land");
     const out: GraveyardGrantOption[] = [];
     const own = object.graveyardCastPermission;
-    // The card's own "you may cast this card from your graveyard as long as
-    // …" (Gravecrawler — rule 113.6f), asked of its owner as it's cast.
-    const ownIf = this.registry.get(rulesTextName(object)).castFromGraveyardIf;
-    if (
-      !isLand &&
-      ((own !== undefined && own.player === player && own.turn === this.state.turn.number) ||
-        (ownIf !== undefined &&
-          staticConditionMet(this.state, this.registry, object, ownIf, { includeSelf: true })))
-    ) {
+    if (!isLand && own !== undefined && own.player === player && own.turn === this.state.turn.number) {
       out.push({ grant: { source: card }, permission: null });
     }
+    // The card's own "you may cast this card from your graveyard as long as
+    // …" (Gravecrawler — rule 113.6f) or "… by [costs]" (Wickerfolk
+    // Indomitable), asked of its owner as it's cast.
+    const ownDef = this.registry.get(rulesTextName(object));
+    const self = ownDef.castSelfFromGraveyard;
+    const selfIf = ownDef.castFromGraveyardIf ?? self?.if;
+    if (
+      mine &&
+      !isLand &&
+      (ownDef.castFromGraveyardIf !== undefined || self !== undefined) &&
+      out.length === 0 &&
+      (selfIf === undefined || staticConditionMet(this.state, this.registry, object, selfIf, { includeSelf: true })) &&
+      (self === undefined || this.graveyardCostsPayable(player, card, def, self))
+    ) {
+      out.push({ grant: { source: card }, permission: self === undefined ? null : { filter: {}, ...self } });
+    }
     // A resolved "you may cast [filter] spells from your graveyard this turn"
-    // (a `player-effect` — Liliana, Untouched by Death's −3): never used up,
-    // so it spends nothing.
-    for (const effect of this.state.playerEffects ?? []) {
+    // (a `player-effect` — Liliana, Untouched by Death's −3): spends nothing,
+    // unless it's for one spell (Whispersteel Dagger).
+    (this.state.playerEffects ?? []).forEach((effect, index) => {
       const permission = effect.castFromGraveyard;
-      if (isLand || effect.owner !== player || permission === undefined) continue;
+      if (isLand || effect.owner !== player || permission === undefined || permission.used === true) return;
+      if (!(permission.graveyards ?? [effect.owner]).includes(object.owner)) return;
       if (
         this.withFace(card, face, () =>
           matchesFilter(this.state, this.registry, card, permission.filter, { you: player }),
         )
       ) {
-        out.push({ grant: { source: permission.source }, permission: { filter: permission.filter } });
+        out.push({
+          grant: { source: permission.source },
+          permission: {
+            filter: permission.filter,
+            ...(permission.exileAfterwards === true ? { exileAfterwards: true } : {}),
+          },
+          playerEffect: index,
+          ...(permission.spendAs !== undefined ? { spendAs: permission.spendAs } : {}),
+        });
       }
-    }
+    });
+    if (!mine) return out;
     for (const id of this.state.zones.shared.battlefield) {
       const grantor = this.state.objects[id];
       if (grantor.controller !== player) continue;
       for (const permission of this.graveyardCastAbilities(id)) {
         if (permission.yourTurnOnly === true && this.activePlayer !== player) continue;
         if (permission.oncePerTurn === true && grantor.graveyardCastUsedThisTurn === true) {
-          continue;
-        }
-        // Rule 119.4: life can be paid only up to what you have.
-        if (permission.payLife !== undefined && !this.canPayLife(player, permission.payLife)) {
-          continue;
-        }
-        // Nor can a cost exile more other cards than the graveyard holds.
-        if (
-          permission.exileOthers !== undefined &&
-          this.state.zones.perPlayer[player].graveyard.length - 1 < permission.exileOthers
-        ) {
           continue;
         }
         // Judged as the spell it would be (rule 601.3e): "a creature spell"
@@ -29696,16 +29965,7 @@ export class Game {
         ) {
           continue;
         }
-        // A permission that sacrifices (Exploration Broodship) isn't offered
-        // for a card with a sacrifice cost of its own: one cast has only one
-        // `sacrifice` to name.
-        if (
-          permission.sacrifice !== undefined &&
-          (def.additionalCost?.sacrifice !== undefined ||
-            def.additionalCost?.options?.some((o) => o.sacrifice !== undefined) === true)
-        ) {
-          continue;
-        }
+        if (!this.graveyardCostsPayable(player, card, def, permission)) continue;
         if (permission.perType !== undefined) {
           const spent = grantor.graveyardCastTypesUsedThisTurn ?? [];
           for (const type of permission.perType) {
@@ -29744,7 +30004,16 @@ export class Game {
    * it. */
   private spendGraveyardGrant(found: GraveyardGrantOption): void {
     const { grant, permission } = found;
-    if (permission === null) return;
+    // A resolved permission for one spell is used up by it.
+    const effects = this.state.playerEffects;
+    const index = found.playerEffect;
+    const resolved = index === undefined ? undefined : effects?.[index]?.castFromGraveyard;
+    if (effects !== undefined && index !== undefined && resolved?.once === true) {
+      effects[index] = { ...effects[index], castFromGraveyard: { ...resolved, used: true } };
+      invalidateComputedCache();
+      return;
+    }
+    if (permission === null || index !== undefined) return;
     const grantor = this.state.objects[grant.source];
     if (grantor === undefined) return;
     if (grant.asType !== undefined) {
@@ -29780,6 +30049,19 @@ export class Game {
   private impulsePlayable(player: PlayerId, card: ObjectId): boolean {
     const object = this.state.objects[card];
     const impulse = object?.impulse;
+    // The card's own "you may cast this card from your graveyard or from
+    // exile" (Squee, the Immortal — rule 113.6f: it functions there), for
+    // its owner, while it's face up.
+    if (
+      object !== undefined &&
+      object.zone === "exile" &&
+      object.owner === player &&
+      object.exiledFaceDown === undefined &&
+      object.faceDown === undefined &&
+      this.registry.get(rulesTextName(object)).castSelfFromGraveyard?.fromExile === true
+    ) {
+      return true;
+    }
     if (object === undefined || impulse === undefined) return false;
     if (object.zone !== "exile" || impulse.player !== player) return false;
     // "Exiled with Maralen": a static ability of that permanent, so only
@@ -36071,7 +36353,7 @@ export class Game {
   /** The cost of an alternative cost `key` that a `grantsToSpells` static
    * gives `cardId` as `player` would cast it (Ezio's freerunning {B}{B}, Amazing
    * Spider-Man's web-slinging {G}{W}{U}) — the first one found — or `null`. */
-  private grantedCastCost(player: PlayerId, cardId: ObjectId, key: "freerunning" | "webSlinging"): string | null {
+  private grantedCastCost(player: PlayerId, cardId: ObjectId, key: "freerunning" | "webSlinging" | "prowl"): string | null {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
@@ -37174,6 +37456,9 @@ export class Game {
     readonly payEnergy?: number;
     /** Cast for it, the spell may be begun as though it had flash (601.3c). */
     readonly flash?: true;
+    /** The keyword it is, when it's one (`"prowl"`: "if its prowl cost was
+     * paid"). */
+    readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"];
   } | null {
     // Cast for airbend's {2}, an alternative cost already (118.9a).
     if (via === "airbend") return null;
@@ -37214,6 +37499,15 @@ export class Game {
       return null;
     }
     if (caster === undefined) return null;
+    // Granted prowl (rule 702.76a — Hunting Velociraptor's "Dinosaur spells
+    // you cast have prowl {2}{R}"): while a source the caster controlled
+    // with any of the card's creature types dealt combat damage to a player
+    // this turn, as a printed prowl's condition reads.
+    const prowl = this.grantedCastCost(caster, cardId, "prowl");
+    const card = this.state.objects[cardId];
+    if (prowl !== null && card !== undefined && staticConditionMet(this.state, this.registry, card, { kind: "prowl" })) {
+      return { mana: prowl, keyword: "prowl" };
+    }
     for (const { ability } of this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined)) {
       const grant = ability.alternativeCostForSpells!;
       // Energy only while the caster has that much (601.2h, 107.14).
@@ -41779,6 +42073,10 @@ export class Game {
         : {}),
       attacking: object.attacking !== null,
       blocking: object.blocking !== null,
+      ...(blockedAttackersOf(this.state, id).length > 0
+        ? { blockedAttackers: blockedAttackersOf(this.state, id) }
+        : {}),
+      ...(object.attacking !== null && object.blockedBy.length > 0 ? { blockers: [...object.blockedBy] } : {}),
       equipped: attached.equipped,
       enchanted: attached.enchanted,
       ...(object.faceDown !== undefined ? { faceDown: true } : {}),

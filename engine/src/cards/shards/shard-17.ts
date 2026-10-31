@@ -62,6 +62,7 @@ import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
 import _poolBattalionFootSoldier from "../pool/battalion-foot-soldier.js";
 import _poolBatterbone from "../pool/batterbone.js";
 import _poolBattleOfHooverDam from "../pool/battle-of-hoover-dam.js";
+import _poolBattleScarredGoblin from "../pool/battle-scarred-goblin.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolBattalionFootSoldier,
     _poolBatterbone,
     _poolBattleOfHooverDam,
+    _poolBattleScarredGoblin,
     _poolBattleflightEagle,
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,

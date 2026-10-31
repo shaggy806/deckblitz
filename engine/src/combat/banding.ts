@@ -136,18 +136,8 @@ export function bandMatesOf(state: GameState, id: ObjectId): ObjectId[] {
   });
 }
 
-/** Every attacker `blockerId` blocks that is still attacking and still
- * blocked by it: the one it was declared blocking and the rest of that
- * attacker's band (rule 702.22h). An attacker removed from combat leaves it
- * blocking nothing there (506.4), though it stays a blocking creature. */
-export function blockedAttackersOf(state: GameState, blockerId: ObjectId): ObjectId[] {
-  const blocker = state.objects[blockerId];
-  if (blocker === undefined || blocker.blocking === null) return [];
-  return [blocker.blocking, ...(blocker.blockingAlso ?? [])].filter((id) => {
-    const attacker = state.objects[id];
-    return attacker?.zone === "battlefield" && attacker.attacking !== null && attacker.blockedBy.includes(blockerId);
-  });
-}
+/** Re-exported from `state.ts`, where `filter.ts` reads it too. */
+export { blockedAttackersOf } from "../state.js";
 
 /** Whether `creatures` (all on one side of a block) carry banding into the
  * damage step (rules 702.22j-k): one with banding, or a creature of some

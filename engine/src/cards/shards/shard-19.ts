@@ -128,6 +128,7 @@ import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChaosphere from "../pool/chaosphere.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
 import _poolCharringBite from "../pool/charring-bite.js";
+import _poolChiefEngineer from "../pool/chief-engineer.js";
 import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
@@ -401,6 +402,7 @@ import _poolInfernoJet from "../pool/inferno-jet.js";
 import _poolInsidiousRoots from "../pool/insidious-roots.js";
 import _poolInspiration from "../pool/inspiration.js";
 import _poolInspiredSphinx from "../pool/inspired-sphinx.js";
+import _poolInspiringStatuary from "../pool/inspiring-statuary.js";
 import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolIntellectualOffering from "../pool/intellectual-offering.js";
@@ -1028,6 +1030,7 @@ const shard: CardShard = {
     _poolChaosphere,
     _poolChargingMonstrosaur,
     _poolCharringBite,
+    _poolChiefEngineer,
     _poolChokingSands,
     _poolChromeHostHulk,
     _poolChromeMox,
@@ -1301,6 +1304,7 @@ const shard: CardShard = {
     _poolInsidiousRoots,
     _poolInspiration,
     _poolInspiredSphinx,
+    _poolInspiringStatuary,
     _poolInspiritFlagshipVessel,
     _poolIntangibleVirtue,
     _poolIntellectualOffering,

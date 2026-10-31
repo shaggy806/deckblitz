@@ -583,6 +583,10 @@ export interface GameObject {
      * Raiser): how freely mana may pay for a spell cast under this permission
      * — and only one cast this way (rule 118.14). */
     readonly spendAs?: SpendAs;
+    /** "That spell has **undaunted**" (Durnan of the Yawning Portal — rule
+     * 702.125): a spell cast under this permission costs {1} less for each
+     * of its caster's opponents, beside any undaunted of its own (702.125c). */
+    readonly undaunted?: true;
   };
   /** The turn a `oncePerTurn` impulse permission this permanent gave was
    * last used (Maralen, Fae Ascendant). Cleared on any zone change: the
@@ -1826,6 +1830,12 @@ export interface LastKnownInfo {
   readonly dealtDamageToCreatureOnTurn?: number;
   readonly attacking: boolean;
   readonly blocking: boolean;
+  /** The attackers it was blocking as it left (`blockedAttackersOf`), and
+   * the creatures blocking it — so "target creature it's blocking" and
+   * "creatures blocking it" still find them once it has gone (rules 608.2b,
+   * 608.2h; `CardFilter.blockingRelation`). Absent for none. */
+  readonly blockedAttackers?: readonly ObjectId[];
+  readonly blockers?: readonly ObjectId[];
   readonly equipped: boolean;
   readonly enchanted: boolean;
   /** It was face down (rule 708) — a face-down spell as cast, or a face-down
@@ -4406,8 +4416,24 @@ export interface PlayerEffect {
   readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
   /** `owner` may cast matching spells from their graveyard (Liliana,
    * Untouched by Death's −3) — a graveyard grant whose `source` is the
-   * effect's source, never used up. */
-  readonly castFromGraveyard?: { readonly filter: CardFilter; readonly source: ObjectId };
+   * effect's source, never used up.
+   *
+   * `graveyards`: whose graveyards it reaches, fixed as it resolved (The
+   Great Work's "any graveyard", Whispersteel Dagger's "that player's");
+   * absent, `owner`'s alone. `once`: one cast, after which `used` is set
+   * (Whispersteel Dagger's "a creature spell"). `spendAs`: how freely mana
+   * may pay for a spell cast this way (rule 609.4b). `exileAfterwards`: a
+   * spell cast this way is exiled rather than put into a graveyard. See the
+   * `player-effect` {@link EffectSpec}. */
+  readonly castFromGraveyard?: {
+    readonly filter: CardFilter;
+    readonly source: ObjectId;
+    readonly graveyards?: readonly PlayerId[];
+    readonly once?: true;
+    readonly used?: true;
+    readonly spendAs?: SpendAs;
+    readonly exileAfterwards?: true;
+  };
   /** Damage any source would deal to one of `players` — or, with
    * `permanentsToo`, to a permanent one of them controls — is multiplied. */
   readonly damageTo?: {
@@ -4474,6 +4500,44 @@ export interface AttackRequirementRule {
   /** "…and attack a player other than you if able", as well as "attack
    * each combat if able". */
   readonly otherThanYou: boolean;
+  /** Only this creature, in this battlefield stint — "target creature
+   * attacks … if able" (Alluring Siren): once it leaves, the creature that
+   * comes back is a new object the rule doesn't bind (rule 400.7). */
+  readonly object?: { readonly id: ObjectId; readonly stint: number };
+  /** Only creatures this player controls as attackers are declared —
+   * "creatures target player controls attack … if able" (Taunt). */
+  readonly controlledBy?: PlayerId;
+  /** "Attacks [this player or planeswalker] if able" (rule 508.1d): obeyed
+   * only by attacking it, so it binds only while it can be attacked. */
+  readonly attacks?: PlayerId | ObjectId;
+  /** The battlefield stint of an `attacks` planeswalker: once it has left,
+   * the one that comes back is a new object (rule 400.7) it doesn't name. */
+  readonly attacksStint?: number;
+  /** How long it lasts — absent, until `by`'s next turn (Kardur):
+   * - `this-turn`: the turn numbered `turn` (Alluring Siren);
+   * - `next-turn-of`: during `player`'s next turn after the turn numbered
+   *   `after` (Taunt's "during target player's next turn", Gideon,
+   *   Battle-Forged's "during its controller's next turn"), `started` once
+   *   that turn has begun;
+   * - `next-combat-of`: `player`'s next combat phase — not `after`, the
+   *   one under way as it was created (Trench Behemoth's "attacks during its
+   *   controller's next combat phase if able"). */
+  readonly duration?:
+    | { readonly kind: "this-turn"; readonly turn: number }
+    | { readonly kind: "next-turn-of"; readonly player: PlayerId; readonly after: number; readonly started?: number }
+    | { readonly kind: "next-combat-of"; readonly player: PlayerId; readonly after?: CombatId };
+}
+
+/** Whether `rule` is in force now (`AttackRequirementRule.duration`). */
+export function attackRequirementActive(state: GameState, rule: AttackRequirementRule): boolean {
+  const d = rule.duration;
+  if (d === undefined) return true;
+  if (d.kind === "this-turn") return state.turn.number === d.turn;
+  const active = activePlayerOf(state);
+  if (d.kind === "next-turn-of") return d.started === state.turn.number && active === d.player;
+  if (active !== d.player) return false;
+  const now = state.players[d.player]?.currentCombat;
+  return d.after === undefined || now === undefined || now.turn !== d.after.turn || now.phase !== d.after.phase;
 }
 
 /**
@@ -5491,6 +5555,19 @@ export const permanentCount = (state: GameState, ids: readonly ObjectId[]): numb
  * damage removal and end of "until end of turn" effects (514.2), effects
  * expiring (702.26f), a player leaving (702.26k), and a view. */
 export const phasedOutIds = (state: GameState): readonly ObjectId[] => state.phasedOut ?? [];
+
+/** Every attacker `blockerId` blocks that is still attacking and still
+ * blocked by it: the one it was declared blocking and the rest of that
+ * attacker's band (rule 702.22h). An attacker removed from combat leaves it
+ * blocking nothing there (506.4), though it stays a blocking creature. */
+export function blockedAttackersOf(state: GameState, blockerId: ObjectId): ObjectId[] {
+  const blocker = state.objects[blockerId];
+  if (blocker === undefined || blocker.blocking === null) return [];
+  return [blocker.blocking, ...(blocker.blockingAlso ?? [])].filter((id) => {
+    const attacker = state.objects[id];
+    return attacker?.zone === "battlefield" && attacker.attacking !== null && attacker.blockedBy.includes(blockerId);
+  });
+}
 
 export const activePlayerOf = (state: GameState): PlayerId =>
   state.turnOrder[state.turn.activePlayerIndex];

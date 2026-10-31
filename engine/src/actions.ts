@@ -1293,6 +1293,11 @@ export type LegalAction =
         /** Improvise (rule 702.126a), not convoke: the candidates are
          * artifacts, and each pays one generic mana. */
         readonly improvise?: true;
+        /** Convoke **and** improvise (one printed, one granted — Inspiring
+         * Statuary on a convoke spell): the candidates are creatures and
+         * artifacts; a creature pays generic or one of its colours, an
+         * artifact that isn't a creature only generic. */
+        readonly alsoImprovise?: true;
         /** The most creatures that can help pay — every generic and
          * coloured pip in the cost, at the largest X offered (`xCost.maxX`)
          * when it has one. Each pays one; past that, a creature has nothing

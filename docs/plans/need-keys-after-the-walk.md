@@ -686,12 +686,31 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:each-creature-damages-itself` (`each-deals-damage`; 8 freed, 6 proving cards). 682
   freed in all. Next: the flash grants, `effect:search-destination-by-type`, the shared-type
   filters.
+- **2026-10-31: the graveyard cast permissions** (a cloud session given a fixed list of
+  families, beside the local agents and a combat session) — `zone:graveyard-cast-permissions`,
+  both groups: a resolved permission over other graveyards (`whose`, `once`, `spendAs`,
+  `exileAfterwards`), `cast-now` from any graveyard, and a card's own `castSelfFromGraveyard`
+  with `GraveyardCastCosts`; 20 freed, 7 proving cards. Yawgmoth's Will left in
+  `docs/engine-gaps.md` (buyback against its exile replacement, rule 616.1). Then
+  `static:grant-abilities-to-spells`'s group: `grantsToSpells`' `convoke`, `improvise` (both on
+  one spell in one payment) and `prowl`, and an exile permission's `undaunted`; 9 freed, 4
+  proving cards.
 - **2026-10-31: flash permissions and search destinations** (two more worktree agents) —
   `effect:cast-and-activate-restrictions`' flash-grant group (4 keys, 11 proving cards, 3 freed)
   and `effect:search-destination-by-type` (5 keys, 8 proving cards, 5 freed). 691 freed. From
   here three local agents run at once, each given two related families, and two cloud sessions
   build fixed lists of families of their own (combat blocking; graveyard casting), landing on
   `main` themselves. The freed cards wait for one authoring sweep at the end (the user's call).
+- **2026-10-31: the blocking-relation families** (a cloud session, beside the local agents) —
+  `effect:target-spec-additions`' top group and `filter:blocked-by-source`, as one
+  `blockingRelation` filter (blocking, blocked by or either, the source's or its host's, a gone
+  source read off its last-known blocks; 21 freed, 7 proving cards; Defiant Vanguard's "blocked
+  this turn" left open).
+- **2026-10-31: attack requirements narrowed** (the same cloud session) —
+  `static:combat-restriction-extensions`' top group: Kardur's `attack-requirement` rule by one
+  creature or a player's creatures, aimed at a player or planeswalker, for this turn, a player's
+  next turn or next combat phase (3 freed, 6 proving cards; Public Enemy's static, Galactus and
+  Silver Surfer left open).
 
 ## Rough size
 

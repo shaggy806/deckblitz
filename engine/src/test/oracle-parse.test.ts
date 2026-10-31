@@ -4382,6 +4382,202 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
   });
 });
 
+describe("a card's own graveyard permission with costs (castSelfFromGraveyard)", () => {
+  const read = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).castSelfFromGraveyard;
+  it("reads the costs, the alternative cost, the per-card increase and 'or from exile'", () => {
+    expect(
+      read(
+        "Demonic Embrace",
+        "Enchantment — Aura",
+        "Enchant creature\nYou may cast this card from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.",
+      ),
+    ).toEqual({ payLife: 3, discard: 1 });
+    expect(
+      read("Raffine's Guidance", "Enchantment — Aura", "Enchant creature\nYou may cast this card from your graveyard by paying {2}{W} rather than paying its mana cost."),
+    ).toEqual({ mana: "{2}{W}" });
+    expect(
+      read(
+        "Squee, Dubious Monarch",
+        "Legendary Creature — Goblin Noble",
+        "You may cast this card from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.",
+      ),
+    ).toEqual({ mana: "{3}{R}", exileOthers: 4 });
+    expect(
+      read(
+        "Helbrute",
+        "Artifact Creature — Astartes Dreadnought",
+        "Sarcophagus — You may cast this card from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.",
+      ),
+    ).toEqual({ exileOthers: 1, exileFilter: { type: "creature" } });
+    expect(
+      read(
+        "Wickerfolk Indomitable",
+        "Artifact Creature — Scarecrow",
+        "You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.",
+      ),
+    ).toEqual({ payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } });
+    expect(
+      read(
+        "Risen Executioner",
+        "Creature — Zombie Warrior",
+        "You may cast this creature from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.",
+      ),
+    ).toEqual({ costIncreasePerOther: { type: "creature" } });
+    expect(read("Squee, the Immortal", "Legendary Creature — Goblin", "You may cast this card from your graveyard or from exile.")).toEqual({
+      fromExile: true,
+    });
+    // A count of sacrifices isn't a cost the permission can take.
+    expect(
+      read(
+        "Scourge of Nel Toth",
+        "Creature — Zombie Dragon",
+        "You may cast this creature from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost.",
+      ),
+    ).toBeUndefined();
+  });
+});
+
+describe("casting abilities given to the spells you cast (grantsToSpells)", () => {
+  const statics = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).static;
+  it("reads convoke, improvise and prowl for a kind of spell, and from exile", () => {
+    expect(
+      statics(
+        "Chief Engineer",
+        "Creature — Vedalken Artificer",
+        "Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)",
+      )[0]?.grantsToSpells,
+    ).toEqual({ filter: { type: "artifact" }, convoke: true });
+    expect(
+      statics(
+        "Inspiring Statuary",
+        "Artifact",
+        "Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)",
+      )[0]?.grantsToSpells,
+    ).toEqual({ filter: { notTypes: ["artifact"] }, improvise: true });
+    expect(
+      statics("Hunting Velociraptor", "Creature — Dinosaur", "First strike\nDinosaur spells you cast have prowl {2}{R}.")[0]
+        ?.grantsToSpells,
+    ).toEqual({ filter: { subtype: "Dinosaur" }, prowl: "{2}{R}" });
+    expect(statics("Test Broodlord", "Creature — Dragon", "Spells you cast from exile have convoke.")[0]?.grantsToSpells).toEqual({
+      castFrom: ["exile"],
+      convoke: true,
+    });
+  });
+});
+
+describe("creatures in a blocking relation (blockingRelation)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const relation = (rel: string, of?: string) => ({
+    type: "creature",
+    blockingRelation: { relation: rel, ...(of !== undefined ? { of } : {}) },
+  });
+
+  it("reads a target creature blocking, or blocked by, the source or its host", () => {
+    const javelineer = face(
+      "Goblin Javelineer",
+      "Creature — Goblin Warrior",
+      "Haste\nWhenever this creature becomes blocked, it deals 1 damage to target creature blocking it.",
+    );
+    expect(javelineer.complete).toBe(true);
+    expect(javelineer.triggered[0].targets).toEqual([{ kind: "permanent", filter: relation("blocking") }]);
+    expect(javelineer.triggered[0].effect).toEqual({ kind: "damage", amount: 1, target: 0 });
+    // "It deals" on a permanent's own activated ability is its source.
+    const tinder = face(
+      "Tinder Wall",
+      "Creature — Plant Wall",
+      "Defender\nSacrifice this creature: Add {R}{R}.\n{R}, Sacrifice this creature: It deals 2 damage to target creature it's blocking.",
+    );
+    expect(tinder.complete).toBe(true);
+    expect(tinder.activated[1].targets).toEqual([{ kind: "permanent", filter: relation("blocked-by") }]);
+    expect(tinder.activated[1].effect).toEqual({ kind: "damage", amount: 2, target: 0 });
+    const corpses = face(
+      "Wall of Corpses",
+      "Creature — Wall",
+      "Defender\n{B}, Sacrifice this creature: Destroy target creature this creature is blocking.",
+    );
+    expect(corpses.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("blocked-by") }]);
+    const cromat = face("Test", "Creature — Illusion", "{W}{B}: Destroy target creature blocking or blocked by this creature.");
+    expect(cromat.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("either") }]);
+    const host = face("Test", "Artifact — Equipment", "{1}: Tap target creature blocking equipped creature.");
+    expect(host.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("blocking", "host") }]);
+  });
+
+  it("reads each and all creatures in one, and the end of combat trigger", () => {
+    const goblin = face(
+      "Battle-Scarred Goblin",
+      "Creature — Goblin Warrior",
+      "Whenever this creature becomes blocked, it deals 1 damage to each creature blocking it.",
+    );
+    expect(goblin.complete).toBe(true);
+    expect(goblin.triggered[0].effect).toEqual({ kind: "damage-all", amount: 1, filter: relation("blocking") });
+    const beast = face(
+      "Kjeldoran Frostbeast",
+      "Creature — Elemental Beast",
+      "At end of combat, destroy all creatures blocking or blocked by this creature.",
+    );
+    expect(beast.complete).toBe(true);
+    expect(beast.triggered[0].trigger).toEqual({ on: "step-begins", step: "end-combat", who: "any" });
+    expect(beast.triggered[0].effect).toEqual({ kind: "destroy-all", filter: relation("either") });
+    const coils = face(
+      "Coils of the Medusa",
+      "Enchantment — Aura",
+      "Enchant creature\nEnchanted creature gets +1/-1.\nSacrifice this Aura: Destroy all non-Wall creatures blocking enchanted creature.",
+    );
+    expect(coils.complete).toBe(true);
+    expect(coils.activated[0].effect).toEqual({
+      kind: "destroy-all",
+      filter: { type: "creature", notSubtypes: ["Wall"], blockingRelation: { relation: "blocking", of: "host" } },
+    });
+    // An exile's link to the card's other abilities is a person's to read.
+    const nets = face("Wall of Nets", "Creature — Wall", "Defender\nAt end of combat, exile all creatures blocked by this creature.");
+    expect(nets.complete).toBe(false);
+  });
+});
+
+describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a target creature's requirement, aimed and timed", () => {
+    const siren = face("Alluring Siren", "Creature — Siren", "{T}: Target creature an opponent controls attacks you this turn if able.");
+    expect(siren.complete).toBe(true);
+    expect(siren.activated[0].targets).toEqual(["creature-an-opponent-controls"]);
+    expect(siren.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: "you", duration: "this-turn" });
+    const sirens = face("Dulcet Sirens", "Creature — Siren", "{U}, {T}: Target creature attacks target opponent this turn if able.");
+    expect(sirens.activated[0].targets).toEqual(["creature", "opponent"]);
+    expect(sirens.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: 1, duration: "this-turn" });
+    const behemoth = face(
+      "Test",
+      "Creature — Kraken",
+      "Landfall — Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able.",
+    );
+    expect(behemoth.triggered[0].effect).toEqual({ kind: "attack-requirement", target: 0, duration: "controllers-next-combat" });
+  });
+
+  it("reads a target player's creatures' requirement, this turn or during their next", () => {
+    const taunt = face("Taunt", "Sorcery", "During target player's next turn, creatures that player controls attack you if able.");
+    expect(taunt.complete).toBe(true);
+    expect(taunt.targets).toEqual(["player"]);
+    expect(taunt.effect).toEqual({
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget: 0,
+      attacks: "you",
+      duration: "that-players-next-turn",
+    });
+    const threats = face("Test", "Instant", "Creatures target opponent controls attack this turn if able.");
+    expect(threats.effect).toEqual({
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget: 0,
+      duration: "this-turn",
+    });
+  });
+});
+
 describe("flash permissions (castAsThoughFlash for any player, first each turn, this turn, next spell)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

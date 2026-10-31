@@ -3268,6 +3268,11 @@ export type EffectSpec =
       readonly from?:
         | "hand"
         | "graveyard"
+        /** Every player's graveyard — Spectral Arcanist's "you may cast an
+         * instant or sorcery spell … **from a graveyard**". A spell cast from
+         * another player's graveyard is the caster's to control and its
+         * owner's still (rule 108.3). */
+        | "any-graveyard"
         | "exiled-with-source"
         | "exiled-this-way"
         /** The cards this resolution has had the effect's controller draw,
@@ -3435,6 +3440,13 @@ export type EffectSpec =
        * owner, not the effect's controller; from the next turn on; with no
        * end but its leaving exile. */
       readonly laterTurns?: boolean;
+      /** "**For as long as that card remains exiled**, you may cast it"
+       * (Durnan of the Yawning Portal): the effect's controller, with no end
+       * but its leaving exile, rather than this turn. */
+      readonly whileExiled?: true;
+      /** "That spell has **undaunted**" (rule 702.125 — Durnan): cast this
+       * way, it costs {1} less for each of its caster's opponents. */
+      readonly undaunted?: true;
     }
   | {
       /**
@@ -4308,8 +4320,30 @@ export type EffectSpec =
        * controller's graveyard cards matching `filter`, the ones that reach
        * it later this turn included (its ruling), each cast following its
        * own timing and costs — the same graveyard-permission cast a
-       * `castFromGraveyard` static offers, never used up. */
-      readonly castFromGraveyard?: { readonly filter: CardFilter };
+       * `castFromGraveyard` static offers, never used up.
+       *
+       * The rest widen it (rule 601.3: an effect that allows a player to
+       * cast a spell from a zone other than their hand):
+       * - `whose`: whose graveyards it reaches, fixed as this resolves —
+       *   `"each-player"` is The Great Work's "from any graveyard",
+       *   `"trigger-player"` Whispersteel Dagger's "from that player's
+       *   graveyard". The caster controls a spell cast from another
+       *   player's graveyard; its owner still owns it (rule 108.3).
+       * - `once`: "you may cast **a** creature spell from that player's
+       *   graveyard this turn" (Whispersteel Dagger) — one cast, then it's
+       *   used up.
+       * - `spendAs`: "…and you may spend mana as though it were mana of any
+       *   color to cast that spell" (rule 609.4b), only for a spell cast
+       *   under this permission.
+       * - `exileAfterwards`: "if a spell cast this way would be put into a
+       *   graveyard, exile it instead" (The Great Work's chapter III). */
+      readonly castFromGraveyard?: {
+        readonly filter: CardFilter;
+        readonly whose?: PlayerScope;
+        readonly once?: true;
+        readonly spendAs?: SpendAs;
+        readonly exileAfterwards?: true;
+      };
       readonly damageTo?: {
         readonly who: PlayerScope;
         readonly multiplier: number;
@@ -6703,10 +6737,33 @@ export type EffectSpec =
        * after this resolved (rule 611.2c) — and none of them is *goaded*: a
        * `goaded` filter doesn't see them. `otherThanYou: false` is the bare
        * "attack each combat if able". See `AttackRequirementRule`.
+       *
+       * The same requirement, narrowed (rule 508.1d):
+       * - `target`: only that creature, as the object it is now (400.7) —
+       *   "target creature an opponent controls attacks you this turn if
+       *   able" (Alluring Siren);
+       * - `controlledByTarget`: only creatures the player in that slot
+       *   controls as attackers are declared — "creatures target player
+       *   controls attack you if able" (Taunt, Imaginary Threats);
+       * - `attacks`: obeyed only by attacking that one — `"you"`, the
+       *   `"source"` (Gideon Jura's "attack Gideon Jura"), or the player in
+       *   a target slot (Ravener's "attacks target opponent");
+       * - `duration`: until your next turn (absent — Kardur), `"this-turn"`,
+       *   `"that-players-next-turn"` (during the `controlledByTarget`
+       *   player's next turn — Taunt), `"controllers-next-combat"` (the
+       *   `target`'s controller's next combat phase — Trench Behemoth),
+       *   `"controllers-next-turn"` (their next turn — Gideon,
+       *   Battle-Forged).
+       *
+       * An illegal or missing target leaves nothing to require (608.2b).
        */
       readonly kind: "attack-requirement";
-      readonly filter: CardFilter;
-      readonly otherThanYou: boolean;
+      readonly filter?: CardFilter;
+      readonly otherThanYou?: boolean;
+      readonly target?: EffectTargetRef;
+      readonly controlledByTarget?: number;
+      readonly attacks?: "you" | "source" | number;
+      readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
     }
   | {
       /**
@@ -7939,7 +7996,12 @@ export interface EffectApi {
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number): void;
   /** See the `"allow-cast-from-exile"` {@link EffectSpec}. */
-  allowCastFromExile(target: TargetRef, free: boolean, laterTurns?: boolean): void;
+  allowCastFromExile(
+    target: TargetRef,
+    free: boolean,
+    laterTurns?: boolean,
+    opts?: { readonly whileExiled?: boolean; readonly undaunted?: boolean },
+  ): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter, free: boolean): void;
   /** See the `"cast-now"` {@link EffectSpec}: offer the effect's
@@ -8377,8 +8439,16 @@ export interface EffectApi {
   unsuspect(target: TargetRef | { readonly filter: CardFilter }): void;
   /** See the `"become-saddled"` {@link EffectSpec}. */
   becomeSaddled(target: TargetRef): void;
-  /** See the `"attack-requirement"` {@link EffectSpec}. */
-  addAttackRequirement(filter: CardFilter, otherThanYou: boolean): void;
+  /** See the `"attack-requirement"` {@link EffectSpec}: the rule, its
+   * targets resolved. */
+  addAttackRequirement(rule: {
+    readonly filter: CardFilter;
+    readonly otherThanYou: boolean;
+    readonly object?: ObjectId;
+    readonly controlledBy?: PlayerId;
+    readonly attacks?: PlayerId | ObjectId;
+    readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
+  }): void;
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
@@ -9976,6 +10046,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsDrawnThisWay();
     } else if (from === "source-exiled-this-way") {
       cards = ctx.sourceExiledThisWay();
+    } else if (from === "any-graveyard") {
+      cards = ctx.playersInScope("each-player").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "targets") {
       // An illegal target's slot is blank (rule 608.2b); one already cast
       // is on the stack now, which the offer passes over.
@@ -10604,6 +10676,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sameNameWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
+      "blockingRelation" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
       "sameNameAsThisWay" in value ||
@@ -10721,6 +10794,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["bandedWithSource"] === true) {
       const { bandedWithSource: _banded, ...rest } = walked;
       walked = { ...rest, bandedWith: ctx.source };
+    }
+    // "Each creature blocking it", "creatures blocking enchanted creature":
+    // the resolving ability's source, or its host — now, or as it left.
+    const relation = walked["blockingRelation"] as CardFilter["blockingRelation"];
+    if (relation !== undefined && relation.with === undefined) {
+      const partner = relation.of === "host" ? ctx.attachedHost() : ctx.source;
+      if (partner !== undefined) walked = { ...walked, blockingRelation: { relation: relation.relation, with: partner } };
     }
     // "And all other permanents with the same name as that permanent": the
     // target itself and its name now (rule 201.2a). A target that's gone
@@ -12112,7 +12192,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "allow-cast-from-exile": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true);
+      if (target !== undefined) {
+        ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true, {
+          whileExiled: spec.whileExiled === true,
+          undaunted: spec.undaunted === true,
+        });
+      }
       return;
     }
     case "unlock-door": {
@@ -12721,7 +12806,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.castFromHandFree !== undefined ? { castFromHandFree: spec.castFromHandFree } : {}),
         ...(spec.castAsThoughFlash !== undefined ? { castAsThoughFlash: spec.castAsThoughFlash } : {}),
         ...(spec.castFromGraveyard !== undefined
-          ? { castFromGraveyard: { filter: spec.castFromGraveyard.filter, source: ctx.source } }
+          ? (() => {
+              const grant = spec.castFromGraveyard;
+              return {
+                castFromGraveyard: {
+                  filter: grant.filter,
+                  source: ctx.source,
+                  ...(grant.whose !== undefined ? { graveyards: ctx.playersInScope(grant.whose) } : {}),
+                  ...(grant.once === true ? { once: true as const } : {}),
+                  ...(grant.spendAs !== undefined ? { spendAs: grant.spendAs } : {}),
+                  ...(grant.exileAfterwards === true ? { exileAfterwards: true as const } : {}),
+                },
+              };
+            })()
           : {}),
         ...(spec.damageTo !== undefined
           ? {
@@ -13940,9 +14037,30 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.becomeSaddled(target);
       return;
     }
-    case "attack-requirement":
-      ctx.addAttackRequirement(spec.filter, spec.otherThanYou);
+    case "attack-requirement": {
+      const slot = (ref: EffectTargetRef): TargetRef | undefined =>
+        illegalSlot(ref, ctx) ? undefined : resolveEffectTarget(ref, ctx);
+      const object = spec.target === undefined ? undefined : slot(spec.target);
+      if (spec.target !== undefined && object?.kind !== "object") return;
+      const player = spec.controlledByTarget === undefined ? undefined : slot(spec.controlledByTarget);
+      if (spec.controlledByTarget !== undefined && player?.kind !== "player") return;
+      const aimed =
+        spec.attacks === undefined
+          ? undefined
+          : spec.attacks === "you"
+            ? ({ kind: "player", player: ctx.controller } as const)
+            : slot(spec.attacks);
+      if (spec.attacks !== undefined && aimed === undefined) return;
+      ctx.addAttackRequirement({
+        filter: spec.filter ?? {},
+        otherThanYou: spec.otherThanYou ?? false,
+        ...(object?.kind === "object" ? { object: object.object } : {}),
+        ...(player?.kind === "player" ? { controlledBy: player.player } : {}),
+        ...(aimed !== undefined ? { attacks: aimed.kind === "player" ? aimed.player : aimed.object } : {}),
+        ...(spec.duration !== undefined ? { duration: spec.duration } : {}),
+      });
       return;
+    }
     case "impulse-exile": {
       const whoseIf = spec.whoseIf;
       const players =

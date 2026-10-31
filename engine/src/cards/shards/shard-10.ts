@@ -399,6 +399,7 @@ import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
 import _poolKingTchalla from "../pool/king-tchalla.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
+import _poolKjeldoranFrostbeast from "../pool/kjeldoran-frostbeast.js";
 import _poolKnightsCharge from "../pool/knights-charge.js";
 import _poolKrarkClanOgre from "../pool/krark-clan-ogre.js";
 import _poolKratosGodOfWar from "../pool/kratos-god-of-war.js";
@@ -1269,6 +1270,7 @@ const shard: CardShard = {
     _poolKingTchalla,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
+    _poolKjeldoranFrostbeast,
     _poolKnightsCharge,
     _poolKrarkClanOgre,
     _poolKratosGodOfWar,

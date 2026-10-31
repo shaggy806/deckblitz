@@ -682,6 +682,7 @@ import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
+import _poolSpectralArcanist from "../pool/spectral-arcanist.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
 import _poolSpectralSteel from "../pool/spectral-steel.js";
 import _poolSphereOfPurity from "../pool/sphere-of-purity.js";
@@ -833,6 +834,7 @@ import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
 import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
+import _poolWhispersteelDagger from "../pool/whispersteel-dagger.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWindingWay from "../pool/winding-way.js";
 import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
@@ -1551,6 +1553,7 @@ const shard: CardShard = {
     _poolSpaceMarineDevastator,
     _poolSpawnGangCommander,
     _poolSpearSpewer,
+    _poolSpectralArcanist,
     _poolSpectralReserves,
     _poolSpectralSteel,
     _poolSphereOfPurity,
@@ -1702,6 +1705,7 @@ const shard: CardShard = {
     _poolWelcomeHome,
     _poolWeldingJar,
     _poolWhispergearSneak,
+    _poolWhispersteelDagger,
     _poolWildRoads,
     _poolWindingWay,
     _poolWineOfBloodAndIron,

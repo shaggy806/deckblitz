@@ -212,6 +212,7 @@ import _poolDrownInSorrow from "../pool/drown-in-sorrow.js";
 import _poolDrudgeReavers from "../pool/drudge-reavers.js";
 import _poolDruidLyrist from "../pool/druid-lyrist.js";
 import _poolDruidOfTheCowl from "../pool/druid-of-the-cowl.js";
+import _poolDulcetSirens from "../pool/dulcet-sirens.js";
 import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDusk from "../pool/dusk.js";
@@ -1101,6 +1102,7 @@ const shard: CardShard = {
     _poolDrudgeReavers,
     _poolDruidLyrist,
     _poolDruidOfTheCowl,
+    _poolDulcetSirens,
     _poolDuneDiviner,
     _poolDuskUrchins,
     _poolDusk,

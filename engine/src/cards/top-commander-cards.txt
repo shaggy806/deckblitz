@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4064 already implemented / 936 missing (marks refreshed 2026-10-31)
+4068 already implemented / 932 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -974,7 +974,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   978  Decimate                                 {2}{R}{G}        Sorcery
 [x]   979  Last March of the Ents                   {6}{G}{G}        Sorcery
 [ ]   980  Moraug, Fury of Akoum                    {4}{R}{R}        Legendary Creature — Minotaur Warrior
-[ ]   981  Inspiring Statuary                       {3}              Artifact
+[x]   981  Inspiring Statuary                       {3}              Artifact
 [x]   982  Blightsteel Colossus                     {12}             Artifact Creature — Phyrexian Golem
 [x]   983  Kardur, Doomscourge                      {2}{B}{R}        Legendary Creature — Demon Berserker
 [x]   984  Mask of Memory                           {2}              Artifact — Equipment
@@ -2253,7 +2253,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2260  Ancestral Mask                           {2}{G}           Enchantment — Aura
 [x]  2261  Court of Garenbrig                       {1}{G}{G}        Enchantment
 [x]  2262  General Kreat, the Boltbringer           {2}{R}           Legendary Creature — Goblin Soldier
-[ ]  2263  Squee, the Immortal                      {1}{R}{R}        Legendary Creature — Goblin
+[x]  2263  Squee, the Immortal                      {1}{R}{R}        Legendary Creature — Goblin
 [ ]  2264  Wrathful Red Dragon                      {3}{R}{R}        Creature — Dragon
 [x]  2265  Elder Gargaroth                          {3}{G}{G}        Creature — Beast
 [x]  2266  End the Festivities                      {R}              Sorcery
@@ -2414,7 +2414,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2421  Lightning, Army of One                   {1}{R}{W}        Legendary Creature — Human Soldier
 [x]  2422  Insight Engine                           {2}{U}           Artifact
 [x]  2423  Wear Down                                {1}{G}           Sorcery
-[ ]  2424  Tinder Wall                              {G}              Creature — Plant Wall
+[x]  2424  Tinder Wall                              {G}              Creature — Plant Wall
 [x]  2425  God-Eternal Oketra                       {3}{W}{W}        Legendary Creature — Zombie God
 [ ]  2426  Not of This World                        {7}              Kindred Instant — Eldrazi
 [x]  2427  Crowded Crypt                            {2}{B}           Artifact
@@ -3854,7 +3854,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3861  Ozai, the Phoenix King                   {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  3862  Broodcaller Scourge                      {5}{G}{G}        Creature — Dragon
 [x]  3863  Rite of Oblivion                         {W}{B}           Sorcery
-[ ]  3864  Hunting Velociraptor                     {2}{R}           Creature — Dinosaur
+[x]  3864  Hunting Velociraptor                     {2}{R}           Creature — Dinosaur
 [x]  3865  Spinner of Souls                         {2}{G}           Creature — Spider Spirit
 [ ]  3866  Zanarkand, Ancient Metropolis // Lasting Fayth {4}{G}{G}        Land — Town // Sorcery — Adventure
 [x]  3867  Gadrak, the Crown-Scourge                {2}{R}           Legendary Creature — Dragon

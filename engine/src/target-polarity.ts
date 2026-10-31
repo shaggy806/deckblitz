@@ -717,7 +717,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   unsuspect: (n, v) => v.touch(n.target, "either", MINOR),
   // Saddled only switches on its own Mount's "while saddled" abilities.
   "become-saddled": (n, v) => v.touch(n.target, "help", MINOR),
-  "attack-requirement": none,
+  // Forced to attack (and at whom), as a goad is: a drawback on its creature
+  // or its player's creatures. The player attacked is the one it's aimed at.
+  "attack-requirement": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "harm", MINOR);
+    if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, "harm", MINOR);
+    if (typeof n.attacks === "number") v.touch(n.attacks, "harm", MINOR);
+  },
   // Exiling the top of a targeted player's library (Rashmi and Ragavan) is
   // taken from them.
   "impulse-exile": (n, v) => v.touch(n.whose, "harm", MINOR),

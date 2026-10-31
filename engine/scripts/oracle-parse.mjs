@@ -805,6 +805,28 @@ export function handRevealOf(phrase) {
 
 /** Target phrases, longest first, as the engine's target specs. */
 const TARGET_PHRASES = [
+  // A creature in a blocking relation with the source or its host
+  // (`blockingRelation`): Goblin Javelineer, Tinder Wall, Plasma Caster.
+  ...[
+    ["blocking or blocked by", "either"],
+    ["that's blocking", "blocking"],
+    ["blocking", "blocking"],
+  ].flatMap(([words, relation]) =>
+    ["it", "~", "this creature"].map((who) => [
+      `target creature ${words} ${who}`,
+      { kind: "permanent", filter: { type: "creature", blockingRelation: { relation } } },
+    ]),
+  ),
+  ...["it's blocking", "~ is blocking", "this creature is blocking"].map((words) => [
+    `target creature ${words}`,
+    { kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "blocked-by" } } },
+  ]),
+  ...["equipped creature", "enchanted creature"].flatMap((host) =>
+    ["blocking", "that's blocking"].map((words) => [
+      `target creature ${words} ${host}`,
+      { kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "blocking", of: "host" } } },
+    ]),
+  ),
   ["target creature or planeswalker an opponent controls", { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target creature or planeswalker", { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
@@ -981,6 +1003,23 @@ function quantifiedSlots(phrase, ctx) {
 // so a nested group never shifts the numbering of the ones after it. After the
 // fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
 const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
+
+/** "(non-Wall) creature(s) blocking or blocked by this creature", "creatures
+ * it's blocking", "creatures blocking enchanted creature": a creature filter
+ * with a `blockingRelation` to the source or its host. */
+const BLOCK_RELATION =
+  "(?:non-[A-Z][a-z]+ )?creatures? (?:blocking or blocked by|blocked by|blocking) (?:it|~|this creature|enchanted creature|equipped creature)";
+function blockRelationFilterOf(phrase) {
+  const m = /^(?:non-([A-Z][a-z]+) )?creatures? (blocking or blocked by|blocked by|blocking) (it|~|this creature|enchanted creature|equipped creature)$/.exec(phrase);
+  if (m === null) return undefined;
+  const relation = { "blocking or blocked by": "either", "blocked by": "blocked-by", blocking: "blocking" }[m[2]];
+  const host = /^(enchanted|equipped) creature$/.test(m[3]);
+  return {
+    type: "creature",
+    ...(m[1] !== undefined ? { notSubtypes: [m[1]] } : {}),
+    blockingRelation: { relation, ...(host ? { of: "host" } : {}) },
+  };
+}
 
 /** "target creature card from your graveyard" and friends. */
 function graveyardTargetOf(phrase) {
@@ -1394,6 +1433,8 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
+  // Every combat's end of combat step (rule 511): Kjeldoran Frostbeast.
+  if (/^At end of combat$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "any" }];
   if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
@@ -2037,6 +2078,14 @@ export function parseSentence(sentence, ctx) {
     const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
     return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
   };
+  // "Destroy all creatures blocking or blocked by this creature" (Kjeldoran
+  // Frostbeast), "… all non-Wall creatures blocking enchanted creature"
+  // (Coils of the Medusa) — `blockingRelation`. Not exile: what the exile is
+  // linked to is the card's other abilities' business.
+  if ((m = re(`destroy all (${BLOCK_RELATION})`).exec(s))) {
+    const filter = blockRelationFilterOf(m[1]);
+    return filter === undefined ? null : { kind: "destroy-all", filter };
+  }
   if ((m = re(`(destroy|exile) (${TARGET}) ${NAMESAKES}`).exec(s))) {
     const filter = namesakes(m[3], slot(m[2]));
     return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
@@ -2570,6 +2619,33 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Combat this turn.
+  // Attack requirements narrowed (rule 508.1d — `attack-requirement`): one
+  // target creature, at you or a target player, this turn (Alluring Siren,
+  // Dulcet Sirens) or in its controller's next combat phase (Trench
+  // Behemoth); a target player's creatures this turn (Imaginary Threats) or
+  // during their next turn (Taunt, Gideon Jura).
+  const PLAYER_T = "target (?:player|opponent)";
+  if ((m = re(`(${TARGET}) attacks (you|${PLAYER_T}) this turn if able`).exec(s))) {
+    const target = slot(m[1]);
+    const attacks = m[2].toLowerCase() === "you" ? "you" : slot(m[2]);
+    return { kind: "attack-requirement", target, attacks, duration: "this-turn" };
+  }
+  if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
+    return { kind: "attack-requirement", target: slot(m[1]), duration: "controllers-next-combat" };
+  }
+  if ((m = re(`creatures (${PLAYER_T}) controls attack this turn if able`).exec(s))) {
+    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "this-turn" };
+  }
+  if ((m = re(`during (${PLAYER_T})'s next turn, creatures that player controls attack (you|~) if able`).exec(s))) {
+    const controlledByTarget = slot(m[1]);
+    return {
+      kind: "attack-requirement",
+      filter: { type: "creature" },
+      controlledByTarget,
+      attacks: m[2] === "~" ? "source" : "you",
+      duration: "that-players-next-turn",
+    };
+  }
   // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
   // one attacker, the source as it resolves (rule 400.7).
   if ((m = re(`(${TARGET}) can't block ~ this turn`).exec(s))) {
@@ -2816,6 +2892,12 @@ export function parseSentence(sentence, ctx) {
   if (it !== undefined) {
     // A damage source is only the ability's own or the trigger's object
     // (`DamageFrom`): "enchanted creature deals …" has no shape.
+    // "It deals 1 damage to each creature blocking it" (Battle-Scarred
+    // Goblin — `blockingRelation`).
+    if (it === "source" && (m = re(`it deals ${N} damage to each (${BLOCK_RELATION})`).exec(s))) {
+      const filter = blockRelationFilterOf(m[2]);
+      return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
+    }
     if ((it === "source" || it === "trigger-object") && (m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), target: slot(m[2]), ...(it === "source" ? {} : { from: it }) };
     }
@@ -4472,6 +4554,20 @@ export function parseFace(face, ctx = {}) {
       out.additionalCost = { exileFromGraveyard: { count, ...(m[2] ? { filter: { type: "creature" } } : {}) } };
       continue;
     }
+    // The card's own graveyard permission with costs of its own (rule
+    // 601.2f — `castSelfFromGraveyard`): "You may cast ~ from your
+    // graveyard by paying 3 life and discarding a card in addition to paying
+    // its other costs" (Demonic Embrace), "… by paying {2}{W} rather than
+    // paying its mana cost" (Raffine's Guidance), "… if you pay {1} more to
+    // cast it for each other creature card in your graveyard" (Risen
+    // Executioner), "… or from exile" (Squee, the Immortal).
+    if (castable) {
+      const self = selfGraveyardCast(line);
+      if (self !== null) {
+        out.castSelfFromGraveyard = self;
+        continue;
+      }
+    }
     // A processor's additional cost (Processor Assault): which card, chosen
     // as the cost is paid (`additionalCost.putFromExile`).
     if (castable && /^As an additional cost to cast ~, put a card an opponent owns from exile into that player's graveyard\.$/.test(line)) {
@@ -4770,7 +4866,9 @@ export function parseFace(face, ctx = {}) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
       }
-      i = fillEffect(ability, rest, { tokenFor }, lines, i);
+      // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
+      // Barbarian Lunatic): a permanent's own ability, so "it" is its source.
+      i = fillEffect(ability, rest, { tokenFor, ...(/^It deals /.test(rest) ? { it: "source" } : {}) }, lines, i);
       manaAbilityExtras(ability);
       out.activated.push(ability);
       continue;
@@ -5049,6 +5147,60 @@ export function parseFace(face, ctx = {}) {
         a.trigger = { on: "leaves-battlefield", who: "self", to: ["graveyard"] };
       }
     }
+  }
+  return out;
+}
+
+/** One cost of a "by …" graveyard permission ("paying 3 life", "discarding
+ * a card", "exiling another creature card from your graveyard", "sacrificing
+ * an artifact or creature") as `GraveyardCastCosts` fields, or `null`. */
+function graveyardCastCost(part) {
+  let m;
+  if ((m = /^paying (\d+) life$/.exec(part))) return { payLife: Number(m[1]) };
+  if ((m = /^discarding (a|one|two|three) cards?$/.exec(part))) return { discard: NUMBERS[m[1]] };
+  if ((m = /^exiling (another|one other|two other|three other|four other|five other|six other) (creature )?cards? from your graveyard$/.exec(part))) {
+    const count = m[1] === "another" ? 1 : NUMBERS[m[1].split(" ")[0]];
+    return { exileOthers: count, ...(m[2] ? { exileFilter: { type: "creature" } } : {}) };
+  }
+  const SACRIFICE = {
+    "an artifact or creature": { typesAnyOf: ["artifact", "creature"] },
+    "a creature": { type: "creature" },
+    "an artifact": { type: "artifact" },
+    "a land": { type: "land" },
+  };
+  if ((m = /^sacrificing (.+)$/.exec(part)) && SACRIFICE[m[1]] !== undefined) return { sacrifice: SACRIFICE[m[1]] };
+  return null;
+}
+
+/**
+ * "You may cast ~ from your graveyard [or from exile] [by … in addition to
+ * paying its other costs | by paying {cost} [and …] rather than paying its
+ * mana cost | if you pay {1} more to cast it for each other creature card
+ * in your graveyard]." — a card's `castSelfFromGraveyard`, or `null`.
+ */
+function selfGraveyardCast(line) {
+  const m = /^You may cast ~ from your graveyard( or from exile)?(?: (.+))?\.$/.exec(line);
+  if (m === null) return null;
+  const out = m[1] ? { fromExile: true } : {};
+  const rest = m[2];
+  if (rest === undefined) return m[1] ? out : null;
+  if (rest === "if you pay {1} more to cast it for each other creature card in your graveyard") {
+    return { ...out, costIncreasePerOther: { type: "creature" } };
+  }
+  let costs;
+  let alt;
+  if ((alt = /^by paying ((?:\{[^}]+\})+)(?: and (.+))? rather than paying its mana cost$/.exec(rest))) {
+    out.mana = alt[1];
+    costs = alt[2] === undefined ? [] : alt[2].split(/, and |, | and /);
+  } else if ((alt = /^by (.+) in addition to paying its other costs$/.exec(rest))) {
+    costs = alt[1].split(/, and |, | and /);
+  } else {
+    return null;
+  }
+  for (const part of costs) {
+    const cost = graveyardCastCost(part);
+    if (cost === null) return null;
+    Object.assign(out, cost);
   }
   return out;
 }
@@ -5709,6 +5861,35 @@ function parseStatic(line, text) {
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
+  // A casting ability given to the spells you cast (`grantsToSpells`):
+  // "Artifact spells you cast have convoke" (Chief Engineer), "Nonartifact
+  // spells you cast have improvise" (Inspiring Statuary), "Spells you cast
+  // from exile have convoke" (Hoarding Broodlord), "Dinosaur spells you cast
+  // have prowl {2}{R}" (Hunting Velociraptor).
+  m = /^(?:(.+?) )?[Ss]pells you cast( from exile)? have (convoke|improvise|prowl ((?:\{[^}]+\})+))\.$/.exec(line);
+  if (m !== null) {
+    // The sentence's capital belongs to a type word ("Nonartifact",
+    // "Legendary creature"), not a subtype's ("Dinosaur").
+    const lowered = m[1] === undefined ? null : parseTypePhrase(m[1].charAt(0).toLowerCase() + m[1].slice(1));
+    const filter =
+      m[1] === undefined
+        ? {}
+        : lowered !== null && !(typeof lowered.subtype === "string" && /^[a-z]/.test(lowered.subtype))
+          ? lowered
+          : parseTypePhrase(m[1]);
+    if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
+      const grant = m[3] === "convoke" ? { convoke: true } : m[3] === "improvise" ? { improvise: true } : { prowl: m[4] };
+      return {
+        affects: { scope: "self" },
+        grantsToSpells: {
+          ...(m[1] !== undefined ? { filter } : {}),
+          ...(m[2] !== undefined ? { castFrom: ["exile"] } : {}),
+          ...grant,
+        },
+        text,
+      };
+    }
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).
