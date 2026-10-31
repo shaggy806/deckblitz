@@ -430,6 +430,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${who(event.player)} attacks with ${event.attackers.length}`
     case 'attacked-alone':
       return `${name(event.attacker)} attacked alone`
+    case 'attacker-unblocked':
+      return `${name(event.attacker)} isn't blocked`
     case 'cards-put-into-graveyard':
       return `${event.arrivals.map((a) => name(a.object)).join(', ')} put into a graveyard`
     case 'dice-rolled':
