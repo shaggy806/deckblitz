@@ -66,7 +66,9 @@ export interface WhileSource {
 }
 
 /** What a random choice picked — the `chosen-at-random` event: a player, a
- * card (in a public zone, so everyone sees which), or a mode by its text. */
+ * card (in a graveyard everyone sees which; in a hand or face down in exile,
+ * only the players who may see it learn what it is — the rest see which
+ * object, not its face), or a mode by its text. */
 export type RandomPick =
   | { readonly kind: "player"; readonly player: PlayerId }
   | { readonly kind: "card"; readonly object: ObjectId }

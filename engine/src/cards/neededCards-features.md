@@ -707,6 +707,30 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### A card at random from a hand or from the cards exiled with the source — built 2026-10-31
+
+The need-keys Phase 2 family `effect:random-choice`, its top group, features
+only (rules 400.2, 607.2a, 701.20a). **`choose-random-card`'s `zone: "hand"`**
+picks from a hand — `whose` now also a player named through a target
+(`{ controllerOfTarget: 0 }`) — and **`show`** says how it's seen: `"reveal"`
+to every player (`revealedThisTurn`), `"look"` to the effect's controller
+alone (a one-card `choose-from-zone` with nothing to pick, closed by its
+viewer), or nothing when `then`'s move shows it. **`zone:
+"exiled-with-source"`** picks among the cards linked to the source in the
+stint the ability refers to (`cardsExiledWithSource`). **`slot`** puts the
+picked card beside the ability's own targets (`ResolutionContext.withFoundAt`)
+instead of replacing them as target 0 — Cursed Scroll's "any target" and
+Singe-Mind Ogre's "that card's mana value". `then` is optional (a bare reveal
+or look). Riding along: **`search-library`'s `linked`** exiles the finds with
+the source. Keys: effect:random-card-from-hand,
+effect:random-card-from-linked-exile. Proving cards: Cursed Scroll, Magus of
+the Scroll, Hired Torturer, Singe-Mind Ogre, Urza's Bauble, Skyship
+Weatherlight (`random-card-from-zone.test.ts`). The freed cards each need a
+look (Wand of Ith's "unless they pay life", Friendly Fire's damage to the
+creature and the player at once, Dementia Sliver's granted ability, River
+Song's Diary's imprint replacement); the family's other units (random target,
+random mode announced, random among chosen) are separate.
+
 ### Cards a player owns, taken from exile — built 2026-10-31
 
 The need-keys Phase 2 family `cost:put-opponent-exiled-card-into-graveyard`,

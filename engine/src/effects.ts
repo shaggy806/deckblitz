@@ -101,6 +101,8 @@ export interface SearchMore {
   readonly owner?: PlayerId;
   readonly all?: boolean;
   readonly playable?: "while-exiled";
+  /** Its `linked`. */
+  readonly linked?: true;
   readonly then?: EffectSpec;
   readonly outside?: true | "only";
   readonly faceUpExile?: true;
@@ -1909,14 +1911,44 @@ export type EffectSpec =
        * is there as this resolves, a card put there in response included
        * (the ruling). Nothing happens when nothing matches. Announced as a
        * `chosen-at-random` event.
+       *
+       * `zone: "hand"` picks from a **hand**, a hidden zone (rule 400.2):
+       * "target player reveals a card at random from their hand" (Hired
+       * Torturer, Singe-Mind Ogre — `show: "reveal"`, shown to every player,
+       * rule 701.20a), "look at a card at random in target player's hand"
+       * (Urza's Bauble — `show: "look"`, seen by the effect's controller
+       * alone, who closes the look; nothing follows it, so no `then`), or
+       * "exiles a card at random from their hand" (Crabomination — no
+       * `show`: `then`'s move shows it). `zone: "exiled-with-source"` picks
+       * from the cards in exile linked to this effect's source (rule 607.2a
+       * — `GameObject.exiledWith`), in the stint the resolving ability
+       * refers to, `whose` unread: Skyship Weatherlight's "choose a card at
+       * random that was exiled with Skyship Weatherlight", Cosmium
+       * Catalyst's "an exiled card used to craft this artifact" (702.167c).
+       * A face-down one is picked like any other; the event names it to
+       * those who may look at it.
        */
       readonly kind: "choose-random-card";
-      readonly zone: "graveyard";
-      /** Whose graveyard: the effect's controller's (the default),
-       * `"that-player"`, or a target slot holding a player. */
-      readonly whose?: "you" | "that-player" | number;
+      readonly zone: "graveyard" | "hand" | "exiled-with-source";
+      /** Whose graveyard or hand: the effect's controller's (the default),
+       * `"that-player"`, a target slot holding a player, or a player named
+       * through a target ("target creature's controller reveals a card at
+       * random from their hand" — Friendly Fire: `{ controllerOfTarget: 0
+       * }`). */
+      readonly whose?: "you" | "that-player" | number | ChosenPlayerRef;
       readonly filter?: CardFilter;
-      readonly then: EffectSpec;
+      /** How a card picked from a hand is shown — see `zone`. */
+      readonly show?: "reveal" | "look";
+      /** The picked card goes in this target slot, **beside** the effect's
+       * own targets, rather than replacing them all as target 0 — Cursed
+       * Scroll's "reveal a card at random from your hand. If that card has
+       * the chosen name, this artifact deals 2 damage to **any target**"
+       * (`slot: 1`, the damage still at target 0), Singe-Mind Ogre's "target
+       * player … then loses life equal to that card's mana value". */
+      readonly slot?: number;
+      /** What's done with the picked card; nothing for a bare reveal or
+       * look. */
+      readonly then?: EffectSpec;
     }
   | {
       /** `effect` with `"that-player"` naming `player` — the mode a
@@ -7116,6 +7148,13 @@ export type EffectSpec =
        * Grasp): with an exile destination, the searcher may play the finds
        * (rule 305.1 for a land) while they stay in exile. */
       readonly playable?: "while-exiled";
+      /** With an exile destination, the finds are exiled **with this
+       * source** (rule 607.2a — `GameObject.exiledWith`), as `exile`'s
+       * `linked`: Skyship Weatherlight's "search your library for any number
+       * of artifact and/or creature cards, exile them", which its "a card at
+       * random that was exiled with Skyship Weatherlight" reads. Nothing is
+       * linked when the source isn't a permanent. */
+      readonly linked?: true;
       /** Applied once the finds have moved and the library is shuffled, with
        * **the finds as its targets** — `target: 0` is the first, as
        * `look-and-choose`'s `then` sees its chosen cards; `"that-player"` is
@@ -7953,6 +7992,10 @@ export interface EffectApi {
    * where it was when targeted, whether it was found illegal — moves with
    * it. */
   withTargetAt(from: number, index: number): ResolutionContext;
+  /** This context with `card`, which the resolution found rather than
+   * chose, in slot `slot` — every other target, and what was known about
+   * it, kept as it is (`choose-random-card`'s `slot`). */
+  withFoundAt(slot: number, card: ObjectId): ResolutionContext;
   /** How many creatures convoked the resolving spell (its `convokedBy`). */
   convokerCount(): number;
   /** See the `{ phyrexianPaidWithLife }` {@link EffectAmount}. */
@@ -8011,6 +8054,14 @@ export interface EffectApi {
    * `pick` says the index stands for — a `random` choice: `choose-opponent`,
    * `choose-random-card`, a `modal`'s mode. */
   pickAtRandom(count: number, pick: (index: number) => RandomPick): number;
+  /** Whether the card `id` matches `filter`, read from the effect's
+   * controller's side — `choose-random-card`'s filter over a hand or the
+   * cards exiled with the source. */
+  cardMatches(id: ObjectId, filter: CardFilter): boolean;
+  /** Show `card`, in `owner`'s hand, as `choose-random-card`'s `show` says:
+   * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
+   * controller alone — a look they close, as `look-at-hand`'s is. */
+  showCardFromHand(owner: PlayerId, card: ObjectId, how: "reveal" | "look"): void;
   /** The cards in `owner`'s graveyard matching `filter`, read from the
    * effect's controller's side, in graveyard order. */
   graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
@@ -11420,19 +11471,46 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "choose-random-card": {
-      const whose = spec.whose ?? "you";
+      let cards: readonly ObjectId[];
       let owner: PlayerId | undefined;
-      if (whose === "you") owner = ctx.controller;
-      else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
-      else {
-        const ref = ctx.targets[whose];
-        owner = ref?.kind === "player" ? ref.player : undefined;
+      if (spec.zone === "exiled-with-source") {
+        // Rule 607.2a: only the cards the linked ability exiled, still there.
+        const filter = spec.filter;
+        cards = ctx
+          .cardsExiledWithSource()
+          .filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+      } else {
+        const whose = spec.whose ?? "you";
+        if (whose === "you") owner = ctx.controller;
+        else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
+        else if (typeof whose === "object") owner = effectPlayer(whose, ctx);
+        else {
+          const ref = ctx.targets[whose];
+          owner = ref?.kind === "player" ? ref.player : undefined;
+        }
+        if (owner === undefined) return;
+        if (spec.zone === "graveyard") cards = ctx.graveyardMatching(owner, spec.filter ?? {});
+        else {
+          const filter = spec.filter;
+          cards = ctx
+            .cardsIn(owner, "hand")
+            .filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+        }
       }
-      if (owner === undefined) return;
-      const cards = ctx.graveyardMatching(owner, spec.filter ?? {});
       if (cards.length === 0) return;
       const chosen = cards[ctx.pickAtRandom(cards.length, (i) => ({ kind: "card", object: cards[i] }))];
-      applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: chosen }]));
+      if (spec.zone === "hand" && spec.show !== undefined && owner !== undefined) {
+        if (spec.show === "look" && spec.then !== undefined) {
+          throw new Error("choose-random-card: a look takes no `then` — nothing follows it on the card");
+        }
+        // Rule 701.20a: a reveal shows it to every player; a look, to the
+        // effect's controller alone (it stays hidden to the rest, 400.2).
+        ctx.showCardFromHand(owner, chosen, spec.show);
+      }
+      if (spec.then === undefined) return;
+      const picked: TargetRef = { kind: "object", object: chosen };
+      if (spec.slot === undefined) applyEffectSpec(spec.then, ctx.withTargets([picked]));
+      else applyEffectSpec(spec.then, ctx.withFoundAt(spec.slot, chosen));
       return;
     }
     case "choose-permanents": {
@@ -14319,6 +14397,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(owner !== undefined ? { owner } : {}),
           ...(spec.all === true ? { all: true } : {}),
           ...(spec.playable !== undefined ? { playable: spec.playable } : {}),
+          ...(spec.linked === true ? { linked: true } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),

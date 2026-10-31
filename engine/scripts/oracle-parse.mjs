@@ -1782,6 +1782,25 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };
   }
+  // "Look at a card at random in target player's hand" (Urza's Bauble): the
+  // controller alone sees the one card picked.
+  if ((m = re(`look at a card at random in (target player|target opponent)'s hand`).exec(s))) {
+    return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "look" };
+  }
+  // "Target opponent reveals a card at random from their hand" (Hired
+  // Torturer's tail): shown to every player, and it stays there.
+  if ((m = re(`(target player|target opponent) reveals a card at random from their hand`).exec(s))) {
+    return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "reveal" };
+  }
+  // "Choose a card at random [that was] exiled with ~. Put that card into its
+  // owner's hand" (Skyship Weatherlight, Gorex): rule 607.2a's linked cards.
+  if ((m = re(`choose a card at random (?:that was )?exiled with ~(?:\\.|,)? (?:and )?put that card into its owner's hand`).exec(s))) {
+    return {
+      kind: "choose-random-card",
+      zone: "exiled-with-source",
+      then: { kind: "return-to-hand", target: 0, from: "exile" },
+    };
+  }
   if ((m = re(`each opponent mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: "each-opponent", amount: amount(m[1]) };
   }
@@ -3128,6 +3147,23 @@ export function parseEffect(text, outer) {
         skip = 2;
         continue;
       }
+    }
+    // "Choose a card at random that was exiled with ~. Put that card into its
+    // owner's hand." (Skyship Weatherlight) — two sentences, one pick among
+    // the cards linked to the source (rule 607.2a).
+    if (
+      /^choose a card at random (?:that was )?exiled with ~\.$/i.test(sentence) &&
+      /^put that card into its owner's hand\.$/i.test(sentences[i + 1] ?? "")
+    ) {
+      const pick = {
+        kind: "choose-random-card",
+        zone: "exiled-with-source",
+        then: { kind: "return-to-hand", target: 0, from: "exile" },
+      };
+      parsed.push(pick);
+      hints.push({ sentence, effect: pick });
+      skip = 1;
+      continue;
     }
     // A wish that may take a face-up exiled card instead (rule 701.23j):
     // "You may reveal an artifact card you own from outside the game or

@@ -779,7 +779,9 @@
   "effect:attach-aura-to-chosen-creature",
   "effect:attach-to-chosen-permanent-it-can-enchant",
   "static:equip-only-to-filter",
-  "static:grant-static-ability"
+  "static:grant-static-ability",
+  "effect:random-card-from-hand",
+  "effect:random-card-from-linked-exile"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

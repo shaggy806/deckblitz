@@ -2144,6 +2144,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
   });
 
+  it("a card at random from a hand, or from the cards exiled with ~ (Urza's Bauble, Hired Torturer, Skyship Weatherlight)", () => {
+    expect(parseEffect("Look at a card at random in target player's hand.", ctx()).effect).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "look",
+    });
+    expect(parseEffect("Target opponent reveals a card at random from their hand.", ctx()).effect).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "reveal",
+    });
+    const pick = { kind: "choose-random-card", zone: "exiled-with-source", then: { kind: "return-to-hand", target: 0, from: "exile" } };
+    const skyship = face(
+      "{4}, {T}: Choose a card at random that was exiled with ~. Put that card into its owner's hand.",
+      "Legendary Artifact",
+    );
+    expect(skyship.activated[0].effect).toEqual(pick);
+    expect(parseEffect("Choose a card at random exiled with ~ and put that card into its owner's hand.", ctx()).effect).toEqual(pick);
+    // A reveal whose card is then used is a different sentence, not this one.
+    expect(parseEffect("Target player reveals a card at random from their hand, then loses life equal to that card's mana value.", ctx()).effect?.kind).not.toBe("choose-random-card");
+  });
+
   it("look at target player's hand (Glasses of Urza, Sorcerous Sight)", () => {
     const glasses = face("{T}: Look at target player's hand.", "Artifact");
     expect(glasses.activated[0].targets).toEqual(["player"]);

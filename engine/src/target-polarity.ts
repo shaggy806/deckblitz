@@ -169,8 +169,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Its `then` reads the card it picked as target 0. A card taken from a
   // targeted player's graveyard onto your battlefield costs that player it —
   // Tariel, Reckoner of Souls.
+  // A card shown or taken from a targeted player's hand costs them its
+  // secrecy at least (Hired Torturer, Wand of Ith).
   "choose-random-card": (n, v) => {
-    if (typeof n.whose === "number" && n.then.kind === "put-onto-battlefield" && n.then.underYourControl === true) {
+    if (typeof n.whose !== "number") return;
+    if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {
       v.touch(n.whose, "harm", MINOR);
     }
   },

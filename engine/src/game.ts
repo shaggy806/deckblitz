@@ -25649,6 +25649,30 @@ export class Game {
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
+      cardMatches: (id, filter) =>
+        this.state.objects[id] !== undefined &&
+        matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+      showCardFromHand: (owner, card, how) => {
+        if (this.state.objects[card]?.zone !== "hand") return;
+        if (how === "reveal") {
+          this.revealCards(owner, [card], "hand");
+          return;
+        }
+        // A look (rule 400.2: the hand stays hidden to everyone else): the
+        // one card, offered with nothing to pick, as `look-at-hand`'s whole
+        // hand is, so the look waits for its viewer to close it.
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          ...(controller !== owner ? { forPlayer: owner } : {}),
+          ids: [card],
+          eligible: [],
+          min: 0,
+          max: 0,
+          destination: "discard",
+          leftover: "stay",
+        };
+      },
       graveyardMatching: (owner, filter) =>
         (this.state.zones.perPlayer[owner]?.graveyard ?? []).filter((id) =>
           matchesFilter(this.state, this.registry, id, filter, { you: controller }),
@@ -26021,6 +26045,33 @@ export class Game {
                   ],
                 }
               : {}),
+          },
+        );
+      },
+      withFoundAt: (slot, card) => {
+        const set = <T,>(list: readonly T[], value: T): T[] => {
+          const copy = [...list];
+          copy[slot] = value;
+          return copy;
+        };
+        const found: TargetRef = { kind: "object", object: card };
+        const illegal = opts.illegalTargets;
+        return this.makeResolutionContext(
+          source,
+          controller,
+          set<TargetRef | undefined>(targets, found),
+          x,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          // Where it was found, for last-known information.
+          set<ZoneType | null>(targetZones, this.state.objects[card]?.zone ?? null),
+          refs,
+          {
+            ...opts,
+            ...(opts.readTargets !== undefined ? { readTargets: set<TargetRef | undefined>(opts.readTargets, found) } : {}),
+            ...(illegal !== undefined ? { illegalTargets: illegal.filter((s) => s !== slot) } : {}),
           },
         );
       },
@@ -29032,6 +29083,9 @@ export class Game {
       ...(exiled && more?.playable === "while-exiled"
         ? { impulseGrant: { player, expiry: { kind: "while-exiled" as const } } }
         : {}),
+      // "Exile them" with this source (rule 607.2a), in the stint the
+      // resolving ability refers to.
+      ...(exiled && more?.linked === true ? this.searchExileLink(more.source, more.sourceStint) : {}),
       ...(more?.then !== undefined
         ? {
             then: more.then,
@@ -29042,6 +29096,18 @@ export class Game {
           }
         : {}),
     };
+  }
+
+  /** A linked search's `exileLink`: `source` in `stint`, or in the stint
+   * it's in now if it's on the battlefield — none for a source that isn't a
+   * permanent (rule 607.2a links only a permanent's abilities). */
+  private searchExileLink(
+    source: ObjectId,
+    stint: number | undefined,
+  ): { exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number } } {
+    const object = this.state.objects[source];
+    const at = stint ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+    return at === undefined ? {} : { exileLink: { source, zoneChangeCount: at } };
   }
 
   /** A search's `together` as the decision carries it: each eligible card's
