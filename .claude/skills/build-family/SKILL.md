@@ -357,6 +357,16 @@ in its own worktree (`isolation: "worktree"`), integrated by cherry-pick.
   gen:cards -w engine`, commit the generated files, run both families' test
   files and `card:parse-check`, and write the shared docs from the reports.
 - **Verify and push after every pair**, as one run.
+- **Later the same night** (the user's call): **three agents at once, each given two related
+  families** (code that overlaps — two filter groups, attach and granted statics), committed one
+  by one; start the next agent as soon as one lands rather than waiting for a pair. Cloud
+  sessions take fixed family lists of their own and land on `main` themselves (they don't edit
+  BACKLOG's Next line); a session can only be started from a message typed in the desktop app, so
+  over Remote Control hand the user the prompt to paste into claude.ai/code. After a pick that
+  touched the parser, `npm run build -w engine` before `oracle-parse.test.ts` (it imports
+  helpers from `dist/`). The same-file conflicts are routine: the `built` array (keep both, fix
+  the comma), parser templates and pins (keep both blocks, each closed), engine.md and AUTHORING
+  (a word-level merge; check the length is base plus both sides).
 - **Clean up** each worktree: unlink every junction by absolute path
   (`[IO.Directory]::Delete("<path>", $false)`), sweep for any other
   (`Get-ChildItem -Recurse -Attributes ReparsePoint`), confirm none is left,
