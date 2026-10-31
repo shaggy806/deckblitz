@@ -30,6 +30,21 @@ triaged by people and Haiku reading Oracle text, so they over-count in both
 directions: a key you mark built may cover only some of its cards. That's
 expected — `author-freed` gives each card that's still blocked a narrow key.
 
+**Keep the task list current** (the user's call, 2026-10-30): the app's
+pinned task list is how the user follows a long session, so it has to move
+as the work does, not sit on "Orient" for an hour.
+
+- Start it with the first tool call: Orient, Pick, Build, Docs, Verify and
+  land.
+- As soon as step 1 settles the family and its units, **replace the list**
+  (`update_plan` with `items`) with one step per unit — "Engine: <unit>",
+  "Tests and proving cards: <cards>" — then the scaffolder and gaps array,
+  docs, verify and land. A second family taken later gets its own steps the
+  same way.
+- **Advance** with the call that starts each step, and send a fresh `items`
+  list whenever the plan changes (a unit dropped, a Tier B key added, a
+  verify failure to fix).
+
 ## 0. Orient
 
 - **Unmerged work first**: the SessionStart hook prints
