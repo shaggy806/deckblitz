@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4031 already implemented / 969 missing (marks refreshed 2026-10-30)
+4035 already implemented / 965 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1665,7 +1665,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1672  Ba Sing Se                               {0}              Land
 [x]  1673  Metalwork Colossus                       {11}             Artifact Creature — Construct
 [x]  1674  Moonsilver Key                           {2}              Artifact
-[ ]  1675  Gingerbrute                              {1}              Artifact Creature — Food Golem
+[x]  1675  Gingerbrute                              {1}              Artifact Creature — Food Golem
 [x]  1676  Savage Ventmaw                           {4}{R}{G}        Creature — Dragon
 [x]  1677  Valgavoth's Lair                         {0}              Enchantment Land
 [ ]  1678  Open the Way                             {X}{G}{G}        Sorcery
@@ -2403,7 +2403,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2410  Liliana's Caress                         {1}{B}           Enchantment
 [x]  2411  Wavebreak Hippocamp                      {2}{U}           Enchantment Creature — Horse Fish
 [x]  2412  Hull Breach                              {R}{G}           Sorcery
-[ ]  2413  Pathrazer of Ulamog                      {11}             Creature — Eldrazi
+[x]  2413  Pathrazer of Ulamog                      {11}             Creature — Eldrazi
 [x]  2414  Dawn of Hope                             {1}{W}           Enchantment
 [x]  2415  God-Pharaoh's Statue                     {6}              Legendary Artifact
 [x]  2416  Icon of Ancestry                         {3}              Artifact
@@ -2766,7 +2766,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2773  Dwarven Mine                             {0}              Land — Mountain
 [x]  2774  Expel the Interlopers                    {3}{W}{W}        Sorcery
 [x]  2775  Golgari Grave-Troll                      {4}{G}           Creature — Troll Skeleton
-[ ]  2776  Troll of Khazad-dûm                      {5}{B}           Creature — Troll
+[x]  2776  Troll of Khazad-dûm                      {5}{B}           Creature — Troll
 [x]  2777  Great Divide Guide                       {1}{G}           Creature — Human Scout Ally
 [ ]  2778  Aerial Extortionist                      {3}{W}{W}        Creature — Bird Soldier
 [ ]  2779  Tishana's Tidebinder                     {2}{U}           Creature — Merfolk Wizard
@@ -4985,7 +4985,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4992  Lightning Runner                         {3}{R}{R}        Creature — Human Warrior
 [x]  4993  Phyrexian Swarmlord                      {4}{G}{G}        Creature — Phyrexian Insect Horror
 [ ]  4994  Xu-Ifit, Osteoharmonist                  {1}{B}{B}        Legendary Creature — Human Wizard
-[ ]  4995  Tromokratis                              {5}{U}{U}        Legendary Creature — Kraken
+[x]  4995  Tromokratis                              {5}{U}{U}        Legendary Creature — Kraken
 [x]  4996  Sokka, Tenacious Tactician               {1}{U}{R}{W}     Legendary Creature — Human Warrior Ally
 [x]  4997  Reclaim                                  {G}              Instant
 [x]  4998  Ruin Grinder                             {5}{R}           Artifact Creature — Construct
