@@ -190,7 +190,12 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return runStep(page, `hand:${arg}`)
     }
     case 'click':
-      return visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) }))
+      // The decision bar's own buttons first: a card tile is a button too,
+      // and a mode's text is also its card's (Fiery Confluence in hand).
+      return (
+        (await visibleFirst(page.locator('.controls button', { hasText: pattern(arg) }))) ||
+        visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) }))
+      )
     case 'player':
       return visibleFirst(page.locator('[data-player-id]', { has: page.locator('.pp-name', { hasText: pattern(arg) }) }))
     case 'pass':
