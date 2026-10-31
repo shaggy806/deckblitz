@@ -3048,6 +3048,23 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
 }
 
+/** The hand size a count-scaled bonus reads (`grantPtPerCount.cardsInHand`):
+ * the counting player's own (`true`), their opponents' together, or the
+ * affected creature's controller's. A player who has left the game has no
+ * hand to count (rule 800.4a). */
+function cardsInHandFor(
+  state: GameState,
+  whose: true | "opponents" | "affected-controller",
+  side: PlayerId,
+  affected: GameObject,
+): number {
+  const handOf = (p: PlayerId): number =>
+    state.players[p]?.hasLost === true ? 0 : (state.zones.perPlayer[p]?.hand.length ?? 0);
+  if (whose === true) return handOf(side);
+  if (whose === "affected-controller") return handOf(affected.controller);
+  return state.turnOrder.reduce((n, p) => (p === side ? n : n + handOf(p)), 0);
+}
+
 /** The current value of a CDA's dynamic count (rule 604.3). */
 export function countValue(
   spec: CountSpec,
@@ -3098,6 +3115,8 @@ export function countValue(
       return allGraveyards().length;
     case "cards-in-your-hand":
       return state.zones.perPlayer[controller]?.hand.length ?? 0;
+    case "your-life-total":
+      return state.players[controller]?.life ?? 0;
     case "cards-in-all-hands":
       return Object.values(state.zones.perPlayer).reduce((n, zones) => n + zones.hand.length, 0);
     default:
@@ -4031,8 +4050,10 @@ function collectStaticEffects(
         ? 0
         : per.aggregate !== undefined
           ? aggregateMatching(per.aggregate)
-          : per.cardsInHand === true
-          ? (state.zones.perPlayer[side]?.hand.length ?? 0)
+          : per.cardsInHand !== undefined
+          ? cardsInHandFor(state, per.cardsInHand, side, target)
+          : per.lifeTotal === true
+          ? (state.players[side]?.life ?? 0)
           : per.commanderCasts === true
           ? Object.values(state.players[side]?.commanderCastCounts ?? {}).reduce(
               (total, casts) => total + casts,

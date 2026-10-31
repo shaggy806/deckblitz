@@ -3753,7 +3753,7 @@ for its own tax, and a creature that must attack isn't obliged to pay it (508.1d
 their declarations to it (`withinAttackTax`), and the client shows the running cost.
 
 - `grantPt: [p, t]` — layer 7d P/T bonus.
-- `grantPtPerCount: { filter?, commanderCasts?, playerCounters?, countersOnAffected?, countersOnSource?, exiled?, inGraveyard?, colorsAmong?, commanderManaValue?, pt, excludeSelf? }` — a layer 7d bonus that
+- `grantPtPerCount: { filter?, commanderCasts?, playerCounters?, countersOnAffected?, countersOnSource?, exiled?, inGraveyard?, colorsAmong?, commanderManaValue?, cardsInHand?, lifeTotal?, pt, excludeSelf? }` — a layer 7d bonus that
   *scales* with a live count (Skycat Sovereign's "+1/+1 for each **other**
   creature you control with flying"). Distinct from `setBasePtFromCount`,
   which is a CDA in layer 7b that *replaces* the printed P/T; this adds on
@@ -3776,7 +3776,18 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   `excludeSelf` for "other"); `commanderManaValue: "greatest"` is the greatest
   mana value among its controller's commanders, wherever they are (Tangleweave
   Armor's "+X/+X, where X is the greatest mana value among your commanders" —
-  `pt: [1, 1]` on an `attached` scope), a commander on the stack with its {X}.
+  `pt: [1, 1]` on an `attached` scope), a commander on the stack with its {X};
+  `cardsInHand: true` counts the cards in its controller's hand (Grim
+  Strider's "this creature gets -1/-1 for each card in your hand" is `pt: [-1,
+  -1]`; Meishin, the Mind Cage's "all creatures get -X/-0, where X is the
+  number of cards in your hand" is `pt: [-1, 0]` on `all-creatures`),
+  `cardsInHand: "opponents"` every opponent's hand together (Enemy of
+  Enlightenment), `cardsInHand: "affected-controller"` the hand of **each
+  affected creature's** controller (Righteous Authority's "+1/+1 for each card
+  in its controller's hand"); `lifeTotal: true` is its controller's life
+  total, unclamped (rule 107.1b — Death's Shadow's "-X/-X, where X is your
+  life total" is `pt: [-1, -1]`, a bonus at negative life). A CDA equal to a
+  life total is `setBasePtFromCount`'s `"your-life-total"` (Serra Avatar).
 - `maxHandSize: { who, set?, minus?, adjust? }` — a maximum hand size, read
   at cleanup: "your maximum hand size is eleven" is `{ who: "you", set: 11 }`;
   Winter, Misanthropic Guide's "each opponent's maximum hand size is equal to
@@ -4285,7 +4296,9 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
     the filter (Mortivore: `{ type: "creature" }`); add `ownedBy: "you"` for
     "in your graveyard".
   - `"cards-in-all-graveyards"` (Lord of Extinction), `"cards-in-all-hands"` (Werewolf of Ancient Hunger), `"cards-in-your-hand"`
-    (Psychosis Crawler).
+    (Psychosis Crawler), `"your-life-total"` (Serra Avatar's "power and
+    toughness are each equal to your life total" — negative at negative life,
+    rule 107.1b).
   - `{ playerCounters: "experience" }` — the counters of that kind its
     controller has (Daxos the Returned's Spirit: "power and toughness are each
     equal to the number of experience counters you have").

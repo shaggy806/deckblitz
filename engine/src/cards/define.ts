@@ -467,6 +467,12 @@ export type CountSpec =
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
   | "cards-in-your-hand"
+  /** Its controller's life total (its owner's off the battlefield) — Serra
+   * Avatar's "power and toughness are each equal to your life total". A
+   * negative life total sets a negative P/T: an effect that sets a
+   * creature's power or toughness uses a negative result as it is (rule
+   * 107.1b). */
+  | "your-life-total"
   /** How many cards are in all players' hands together (Werewolf of
    * Ancient Hunger). */
   | "cards-in-all-hands"
@@ -1737,10 +1743,22 @@ export interface StaticAbility {
      * creature in your party" is `{ partySize: true, pt: [1, 0] }`. Reads only
      * types and controllers (layers 2 and 4), so the P/T fold doesn't recurse. */
     readonly partySize?: true;
-    /** The number of cards in the hand of the player whose side it counts
-     * from — Nyxathid's "-1/-1 for each card in **the chosen player's**
-     * hand" (with `forChosenPlayer`). */
-    readonly cardsInHand?: true;
+    /** The number of cards in a hand. `true` is the hand of the player whose
+     * side it counts from: Grim Strider's "this creature gets -1/-1 for each
+     * card in your hand" (`pt: [-1, -1]`), Empyrial Armor's "enchanted
+     * creature gets +1/+1 for each card in your hand", Nyxathid's "… in **the
+     * chosen player's** hand" (with `forChosenPlayer`). `"opponents"` is
+     * every card in that player's opponents' hands together (Enemy of
+     * Enlightenment); `"affected-controller"` is the hand of **the affected
+     * creature's** controller, each creature by its own (Righteous
+     * Authority's "+1/+1 for each card in its controller's hand"). */
+    readonly cardsInHand?: true | "opponents" | "affected-controller";
+    /** That player's life total — Death's Shadow's "this creature gets
+     * -X/-X, where X is your life total" is `{ lifeTotal: true, pt: [-1, -1]
+     * }`. Not clamped: a negative life total is used as it is (rule 107.1b —
+     * "if a calculation … needs to use a negative value, it does so"), so at
+     * -2 life Death's Shadow gets +2/+2. */
+    readonly lifeTotal?: true;
     /** Count from **the chosen player**'s side rather than this permanent's
      * controller's (`GameObject.chosenPlayer`): every "you" in the count is
      * them. No bonus with nobody chosen or once they've left the game. */

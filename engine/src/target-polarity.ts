@@ -932,7 +932,12 @@ export function auraPolarity(def: CardDefinition): Polarity {
       if (grantedTriggerHarms(granted)) harm = true;
       else help = true;
     }
-    if (ability.grantPtPerCount !== undefined) help = true;
+    // A count-scaled bonus helps or hurts by its sign: Kagemaro's Clutch's
+    // "-X/-X, where X is the number of cards in your hand" is a shrink.
+    if (ability.grantPtPerCount !== undefined) {
+      if (ability.grantPtPerCount.pt[0] + ability.grantPtPerCount.pt[1] < 0) harm = true;
+      else help = true;
+    }
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
     if (ability.prohibits !== undefined) harm = true;

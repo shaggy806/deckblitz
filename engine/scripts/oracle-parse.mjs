@@ -6467,6 +6467,45 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A bonus scaled by a hand size or a life total (`grantPtPerCount`'s
+  // `cardsInHand` and `lifeTotal`): Grim Strider's "~ gets -1/-1 for each
+  // card in your hand", Righteous Authority's "enchanted creature gets
+  // +1/+1 for each card in its controller's hand", Enemy of Enlightenment's
+  // "… in your opponents' hands", Death's Shadow's "~ gets -X/-X, where X is
+  // your life total", Meishin's "all creatures get -X/-0, where X is the
+  // number of cards in your hand".
+  {
+    const subject = "(~|Enchanted creature|Equipped creature|All creatures|Creatures you control)";
+    const hands = { "your hand": true, "your opponents' hands": "opponents", "its controller's hand": "affected-controller" };
+    const affectsOf = (s) =>
+      s === "~"
+        ? { scope: "self" }
+        : s === "All creatures"
+          ? { scope: "all-creatures" }
+          : s === "Creatures you control"
+            ? { scope: "creatures-you-control" }
+            : { scope: "attached" };
+    const per = new RegExp(`^${subject} gets? ([+-]\\d+)/([+-]\\d+) for each card in (your hand|your opponents' hands|its controller's hand)\\.$`).exec(line);
+    if (per !== null) {
+      return { affects: affectsOf(per[1]), grantPtPerCount: { cardsInHand: hands[per[4]], pt: [Number(per[2]), Number(per[3])] }, text };
+    }
+    const x = new RegExp(`^${subject} gets? ([+-])X/([+-])(X|0), where X is (your life total|the number of cards in your hand)\\.$`).exec(line);
+    if (x !== null) {
+      const sign = (s) => (s === "-" ? -1 : 1);
+      const pt = [sign(x[2]), x[4] === "0" ? 0 : sign(x[3])];
+      const count = x[5] === "your life total" ? { lifeTotal: true } : { cardsInHand: true };
+      return { affects: affectsOf(x[1]), grantPtPerCount: { ...count, pt }, text };
+    }
+  }
+  // Serra Avatar's "~'s power and toughness are each equal to your life
+  // total" — a CDA (rule 604.3).
+  if (line === "~'s power and toughness are each equal to your life total.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: "your-life-total", plusPower: 0, plusToughness: 0 },
+      text,
+    };
+  }
   // Party (rule 700.8): Archpriest of Iona's CDA.
   if (line === "~'s power is equal to the number of creatures in your party.") {
     return {

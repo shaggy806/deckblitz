@@ -887,6 +887,29 @@ a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
 
+### P/T scaled by a hand size or a life total — built 2026-10-31
+
+The need-keys Phase 2 family `static:pt-per-amount`, its first group (a
+granted P/T amount read from a player's own state), features only.
+`grantPtPerCount.cardsInHand` (layer 7c) widens from the counting player's
+own hand (`true`) to `"opponents"` (every opponent's hand together — Enemy of
+Enlightenment) and `"affected-controller"` (each affected creature's
+controller's — Righteous Authority); a new `grantPtPerCount.lifeTotal` reads
+the controller's life total, unclamped (rule 107.1b — Death's Shadow at
+negative life gets a bonus); and a `CountSpec` `"your-life-total"` is the CDA
+(rule 604.3 — Serra Avatar, Soul of Eternity). The scaffolder reads "(~ |
+Enchanted creature | Equipped creature | All creatures | Creatures you
+control) get(s) ±N/±N for each card in (your hand | your opponents' hands |
+its controller's hand)", "… get(s) ±X/±X|0, where X is (your life total |
+the number of cards in your hand)" and "~'s power and toughness are each
+equal to your life total". Keys: static:pt-per-cards-in-hand,
+static:pt-per-life-total, static:cda-life-total. Still open on these keys'
+cards: Alrund (filter:foretold), Enduring Angel (effect:double-life-total and
+its transform-instead replacement), Roiling Horror (life minus an opponent's,
+suspend X), Ajani Goldmane's Avatar token (a token with the CDA, authorable).
+Proving cards: Grim Strider, Enemy of Enlightenment, Righteous Authority,
+Death's Shadow, Serra Avatar.
+
 ### The same name as a reference object — built 2026-10-31
 
 The need-keys Phase 2 family `condition:filter-card-property-clauses`, its

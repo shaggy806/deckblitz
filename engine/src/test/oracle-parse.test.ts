@@ -2840,6 +2840,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(nyx.complete).toBe(true);
   });
 
+  it("a bonus scaled by a hand size or a life total, and a life-total CDA (static:pt-per-amount)", () => {
+    const strider = face("This creature gets -1/-1 for each card in your hand.", "Creature — Horror");
+    expect(strider.static[0]).toMatchObject({ affects: { scope: "self" }, grantPtPerCount: { cardsInHand: true, pt: [-1, -1] } });
+    expect(strider.complete).toBe(true);
+    const enemy = face("This creature gets -1/-1 for each card in your opponents' hands.", "Creature — Demon");
+    expect(enemy.static[0].grantPtPerCount).toEqual({ cardsInHand: "opponents", pt: [-1, -1] });
+    const authority = face("Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.", "Enchantment — Aura");
+    expect(authority.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPtPerCount: { cardsInHand: "affected-controller", pt: [1, 1] },
+    });
+    const meishin = face("All creatures get -X/-0, where X is the number of cards in your hand.", "Legendary Enchantment");
+    expect(meishin.static[0]).toMatchObject({ affects: { scope: "all-creatures" }, grantPtPerCount: { cardsInHand: true, pt: [-1, 0] } });
+    const shadow = face("This creature gets -X/-X, where X is your life total.", "Creature — Avatar");
+    expect(shadow.static[0].grantPtPerCount).toEqual({ lifeTotal: true, pt: [-1, -1] });
+    expect(shadow.complete).toBe(true);
+    const avatar = face("Test Card's power and toughness are each equal to your life total.", "Creature — Avatar");
+    expect(avatar.static[0].setBasePtFromCount).toEqual({ countOf: "your-life-total", plusPower: 0, plusToughness: 0 });
+    expect(avatar.complete).toBe(true);
+  });
+
   it("its controller draws, discards or gets a poison counter (effect:player-scope-extensions)", () => {
     const who = { controllerOfTarget: 0 };
     const strike = face("Destroy target creature. Its controller discards a card.", "Sorcery");
