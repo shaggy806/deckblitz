@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4073 already implemented / 927 missing (marks refreshed 2026-10-31)
+4078 already implemented / 922 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1479,7 +1479,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1486  Witty Roastmaster                        {2}{R}           Creature — Devil Citizen
 [x]  1487  Twitching Doll                           {1}{G}           Artifact Creature — Spider Toy
 [x]  1488  Apex Altisaur                            {7}{G}{G}        Creature — Dinosaur
-[ ]  1489  Rain of Riches                           {3}{R}{R}        Enchantment
+[x]  1489  Rain of Riches                           {3}{R}{R}        Enchantment
 [ ]  1490  Echoes of Eternity                       {3}{C}{C}{C}     Kindred Enchantment — Eldrazi
 [x]  1491  Planar Genesis                           {G}{U}           Instant
 [x]  1492  Crystal Vein                             {0}              Land
@@ -1634,7 +1634,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1641  Traverse the Outlands                    {4}{G}           Sorcery
 [x]  1642  Felidar Sovereign                        {4}{W}{W}        Creature — Cat Beast
 [x]  1643  Trumpeting Carnosaur                     {4}{R}{R}        Creature — Dinosaur
-[ ]  1644  Wild-Magic Sorcerer                      {3}{R}           Creature — Orc Shaman Sorcerer
+[x]  1644  Wild-Magic Sorcerer                      {3}{R}           Creature — Orc Shaman Sorcerer
 [x]  1645  Grenzo, Havoc Raiser                     {R}{R}           Legendary Creature — Goblin Rogue
 [x]  1646  Loyal Warhound                           {1}{W}           Creature — Dog
 [x]  1647  Galadriel's Dismissal                    {W}              Instant
@@ -3132,7 +3132,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3139  Naya Charm                               {R}{G}{W}        Instant
 [x]  3140  Mask of Griselbrand                      {1}{B}{B}        Legendary Artifact — Equipment
 [x]  3141  Mightform Harmonizer                     {2}{G}{G}        Creature — Insect Druid
-[ ]  3142  Overmaster                               {R}              Sorcery
+[x]  3142  Overmaster                               {R}              Sorcery
 [x]  3143  Herald of War                            {3}{W}{W}        Creature — Angel
 [x]  3144  Canopy Gargantuan                        {5}{G}{G}        Creature — Dragon
 [x]  3145  Karametra, God of Harvests               {3}{G}{W}        Legendary Enchantment Creature — God
@@ -4256,7 +4256,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4263  Jaws of Defeat                           {3}{B}           Enchantment
 [x]  4264  Heartbeat of Spring                      {2}{G}           Enchantment
 [x]  4265  Mysidian Elder                           {2}{R}           Creature — Human Wizard
-[ ]  4266  Foil                                     {2}{U}{U}        Instant
+[x]  4266  Foil                                     {2}{U}{U}        Instant
 [x]  4267  Throat Slitter                           {4}{B}           Creature — Rat Ninja
 [x]  4268  Polluted Mire                            {0}              Land
 [x]  4269  Gargos, Vicious Watcher                  {3}{G}{G}{G}     Legendary Creature — Hydra
@@ -4603,7 +4603,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4610  Skittering Invasion                      {7}              Kindred Sorcery — Eldrazi
 [x]  4611  Entrapment Maneuver                      {3}{W}           Instant
 [x]  4612  Xyris, the Writhing Storm                {2}{G}{U}{R}     Legendary Creature — Snake Leviathan
-[ ]  4613  Solar Array                              {3}              Artifact
+[x]  4613  Solar Array                              {3}              Artifact
 [x]  4614  Furnace of Rath                          {1}{R}{R}{R}     Enchantment
 [x]  4615  Witherbloom Apprentice                   {B}{G}           Creature — Human Druid
 [x]  4616  Summon: Fat Chocobo                      {4}{G}           Enchantment Creature — Saga Bird
