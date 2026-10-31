@@ -1,6 +1,6 @@
 ---
 name: build-family
-description: Build the next families of missing engine features in the need-keys plan's greedy order (Phase 2 of docs/plans/need-keys-after-the-walk.md) — pick the families that `cards:needs -- --greedy --groups` puts first, build their generalisation groups as general implementations, prove each with its own tests and the few real cards that exercise it, mark the keys built, teach the scaffolder, verify once, ship, and hand off. Features only: the cards they free are authored later by the `author-freed` skill. Use when the user says to build the next family, build features in greedy order, work down the need keys, do Phase 2, or runs this skill with no other instructions.
+description: Build the next families of missing engine features in the need-keys plan's greedy order (Phase 2 of docs/plans/need-keys-after-the-walk.md) — pick the families that `cards:needs -- --greedy --groups` puts first, build their generalisation groups as general implementations, prove each with its own tests and the few real cards that exercise it, mark the keys built, teach the scaffolder, verify once, ship, and hand off. Features only: the cards they free are authored later by the `author-freed` skill. Run as `/build-family overnight`, it coordinates instead — one fresh agent per family in series, reviewed, verified and pushed every few families — so it can run unattended for hours. Use when the user says to build the next family, build features in greedy order, work down the need keys, do Phase 2, run families overnight or with agents, or runs this skill with no other instructions.
 ---
 
 # Build the next feature families
@@ -44,6 +44,13 @@ as the work does, not sit on "Orient" for an hour.
 - **Advance** with the call that starts each step, and send a fresh `items`
   list whenever the plan changes (a unit dropped, a Tier B key added, a
   verify failure to fix).
+
+**Two ways to run it.** Interactively (the default) you build the families
+yourself, steps 0–4 below. **Overnight** — invoked as `/build-family
+overnight`, or when the user asks to run several families with agents or
+leave it running — you coordinate instead: one fresh agent per family, in
+series, while your own context stays small. See *Overnight* at the end; it
+uses steps 1–3 as the agents' instructions.
 
 ## 0. Orient
 
@@ -201,3 +208,132 @@ A few lines:
 
 Offer the next: more families (`/clear`, then this skill), or a batch of the
 freed cards (`/clear`, then `author-freed`). Don't start it here.
+
+## Overnight: one agent per family
+
+The user's call, 2026-10-31: let a session run the greedy order unattended,
+for hours, by handing each family to a fresh agent. This overrides, for this
+mode only, "features by me, agents author" and the families-per-session
+budget in step 1.2: each agent starts from ~40K of orientation and ends with
+its family, so no context carries one family's code into the next. You, the
+coordinator, never read engine code beyond reviewing diffs. Your context
+grows ~15–25K a family, so a night is 8–15 families.
+
+**Before starting.** The user starts the session in **auto mode** (an
+unattended run can't answer permission prompts) and runs `/build-family
+overnight`. Nothing else is asked of them until morning; never stop to ask a
+question. A choice that is genuinely theirs (a family needing a design call)
+is a skip with a reason, for the morning report.
+
+### Setup
+
+1. Step 0's orient, briefly: unmerged branches, level with `origin/main`, the
+   BACKLOG Next line. Don't read `engine/CLAUDE.md` or the roadmap yourself.
+2. `ToolSearch` `select:mcp__ccd_host__request_keep_awake,mcp__ccd_session_mgmt__get_usage,PushNotification`,
+   then request keep-awake for the night (the PC mustn't sleep under a
+   running agent).
+3. Task list: "Family 1" … as you go — replace the list with `items` each time
+   a family is picked, naming its key — plus "Verify and push" steps.
+4. Keep a **skip list** in your context: families an agent found blocked,
+   with the reason. Never hand out a skipped family again this run.
+
+### The loop
+
+For each family:
+
+1. **Budget** (`get_usage`). Stop the run (go to *Morning report*) when your
+   own context passes ~500K, the weekly all-models window passes 90%, or
+   extra usage has spent 80% of its monthly limit. When the **5-hour window**
+   passes 90%, wait it out rather than stop: a Bash `sleep <seconds until
+   resetsAt, plus 60>` with `run_in_background` (you're notified when it
+   exits; a foreground sleep is refused), then carry on.
+2. **Pick.** `npm run -s build -w engine` if `dist` is stale, then `npm run
+   -s cards:needs -w engine -- --greedy --groups --top 8 | cut -c1-230`. Take
+   the first family not on the skip list. Stop the run when the best one
+   left frees fewer than 5 cards: the long tail isn't overnight work.
+3. **Dispatch** one `general-purpose` agent (no worktree: it works in this
+   checkout, alone, so nothing needs merging), with the brief below, and wait
+   for its notification. Don't do its work meanwhile and don't poll.
+4. **Review** before anything else starts (see *Reviewing*). Fix small things
+   yourself; send bigger ones back to the same agent with `SendMessage`.
+5. **Verify and push** after every third family, after any family that added
+   a player decision, and when the run ends: `git fetch origin main && git
+   merge origin/main`, `npm run verify` in the background (logged to a file
+   in the OS temp dir; tail it when notified), a failure fixed and
+   re-checked with `--only <step>`, then `git push origin HEAD:main`. Commit
+   `scripts/verify-state.json` if verify rewrote it. A failure you can't fix
+   in two tries **stops the run**: nothing broken is pushed; the commits stay
+   local, named in the report.
+6. Check nothing the agent started is still running (the `dev-down` skill's
+   port check: 4000, 4010, 4099, 5173, 4173 and the `E2E_*` ports), then the
+   next family.
+
+Three families blocked in a row also stops the run: something is wrong with
+the order or the brief, which a person should look at.
+
+### The agent's brief
+
+Fill in the family and the skip list; keep the rest as written.
+
+> Build the need-keys family `<FAMILY>` (from `npm run -s cards:needs -w
+> engine -- --greedy --groups`; its group's keys are `<KEYS>`). You are one
+> of several agents building families in series overnight; nobody is
+> watching, so never wait on a question.
+>
+> Read `.claude/skills/build-family/SKILL.md` steps 1 (from 1.3) to 3, then
+> `engine/CLAUDE.md`, `ROADMAP.md`'s *Architecture constraints* and
+> `engine/src/cards/AUTHORING.md` §0 — and follow them for this one family:
+> its top units as general implementations, tests in
+> `engine/src/test/<feature>.test.ts`, two or three faithful proving cards a
+> unit, the keys in `top-commanders-gaps.json`'s `built` array, the
+> scaffolder taught (`npm run card:parse-check -w engine`: zero
+> disagreements, pinned in `test/oracle-parse.test.ts`), the docs of step 3
+> (BACKLOG's Next line with the `--stale` count and the next families,
+> COMPLETED, the plan's Phase 2 progress line, `docs/architecture/engine.md`,
+> AUTHORING's vocabulary, `neededCards-features.md`). A new player decision
+> means the client too, by `docs/plans/decision-registry.md`'s checklist,
+> with manual checks and their boards, each played with
+> `client/e2e/run-check.mjs` (a 4-player one too) and `npm run test:e2e -w
+> client`.
+>
+> Check with `npm run typecheck -w engine`, your test files, the engine suite
+> (`npx vitest run --maxWorkers=8` from `engine/`) and `card:parse-check`.
+> Don't run `npm run verify`, don't push, don't merge: commit locally as
+> `Engine, Cards: <the features in words> — <the proving cards>`, ending
+> with the co-author line, and leave no process running.
+>
+> If the family can't be built faithfully tonight — it needs a design call,
+> a rules question with no clear answer, or something out of reach — build
+> nothing half-way: stash what you changed or created, **by path** (`git
+> stash push -u -m "build-family <FAMILY>" -- <your paths>` — never a bare
+> stash, which would take the user's own untracked files with it), and
+> report BLOCKED with why. A key that turns out to be only
+> partly covered is fine: mark what you built, say what's left.
+>
+> Report, in under 300 words: BUILT or BLOCKED; the keys built and the
+> units; the proving cards; the freed count (`cards:needs -- --stale`); the
+> commit hash; each check you ran and its result; whether it added a player
+> decision; anything you're unsure of, with file and line.
+
+### Reviewing
+
+Read the report, then only what checks it: `git show --stat HEAD`, the new
+test file whole, and the engine hunks of `git show HEAD -- engine/src
+':!engine/src/cards'` (cap the output). Check that the implementation is one
+general shape and not a special case per card, that each rule number cited
+exists (`grep` the Comprehensive Rules), that the tests assert the behaviour
+(not just that nothing throws), that the `built` array and BACKLOG line
+changed, and that the proving cards' text matches Oracle. Run the family's
+test file yourself once. A BLOCKED report: check `git status` shows none of
+its changes (the user's own untracked files stay) and the stash exists, add the family to the skip list, and record it on
+BACKLOG's Next line as skipped with its reason (one clause), committed with
+the next family or at the end.
+
+### Morning report
+
+When the run stops, for whatever reason: push what's verified, then re-run
+`--greedy --groups --top 5`. Send a `PushNotification` ("build-family
+overnight: N families on main, M skipped") and end with the report of step 4
+for every family, plus: why the run stopped, the skipped families with
+reasons and their stash names, any commits left unpushed and why, the plan
+usage at the end, and anything from your reviews the user should look at.
