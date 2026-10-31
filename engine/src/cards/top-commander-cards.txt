@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4064 already implemented / 936 missing (marks refreshed 2026-10-31)
+4065 already implemented / 935 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2414,7 +2414,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2421  Lightning, Army of One                   {1}{R}{W}        Legendary Creature — Human Soldier
 [x]  2422  Insight Engine                           {2}{U}           Artifact
 [x]  2423  Wear Down                                {1}{G}           Sorcery
-[ ]  2424  Tinder Wall                              {G}              Creature — Plant Wall
+[x]  2424  Tinder Wall                              {G}              Creature — Plant Wall
 [x]  2425  God-Eternal Oketra                       {3}{W}{W}        Legendary Creature — Zombie God
 [ ]  2426  Not of This World                        {7}              Kindred Instant — Eldrazi
 [x]  2427  Crowded Crypt                            {2}{B}           Artifact
