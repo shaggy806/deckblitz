@@ -282,6 +282,7 @@ import _poolGibberingKami from "../pool/gibbering-kami.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
 import _poolGigantiform from "../pool/gigantiform.js";
 import _poolGildedPinions from "../pool/gilded-pinions.js";
+import _poolGive from "../pool/give.js";
 import _poolGlarecaster from "../pool/glarecaster.js";
 import _poolGlassblowersPuzzleknot from "../pool/glassblowers-puzzleknot.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
@@ -1163,6 +1164,7 @@ const shard: CardShard = {
     _poolGideonChampionOfJustice,
     _poolGigantiform,
     _poolGildedPinions,
+    _poolGive,
     _poolGlarecaster,
     _poolGlassblowersPuzzleknot,
     _poolGlasspoolMimic,

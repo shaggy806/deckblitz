@@ -531,6 +531,7 @@ import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
 import _poolPyroconvergence from "../pool/pyroconvergence.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
+import _poolQuirionBeastcaller from "../pool/quirion-beastcaller.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
 import _poolRaffinesGuidance from "../pool/raffines-guidance.js";
 import _poolRagsRiches from "../pool/rags-riches.js";
@@ -707,6 +708,7 @@ import _poolSyphonEssence from "../pool/syphon-essence.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
 import _poolTakeInventory from "../pool/take-inventory.js";
+import _poolTake from "../pool/take.js";
 import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
@@ -1402,6 +1404,7 @@ const shard: CardShard = {
     _poolPyroconvergence,
     _poolQalaAjanisPridemate,
     _poolQuickDraw,
+    _poolQuirionBeastcaller,
     _poolRadhaHeartOfKeld,
     _poolRaffinesGuidance,
     _poolRagsRiches,
@@ -1578,6 +1581,7 @@ const shard: CardShard = {
     _poolTaigamsScheming,
     _poolTaintedField,
     _poolTakeInventory,
+    _poolTake,
     _poolTakenumaBleeder,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,

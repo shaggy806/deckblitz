@@ -284,6 +284,7 @@ import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
+import _poolGiveTake from "../pool/give-take.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGleefulSabotage from "../pool/gleeful-sabotage.js";
 import _poolGliderKids from "../pool/glider-kids.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolGiantCaterpillar,
     _poolGiganticBigBear,
     _poolGimlisAxe,
+    _poolGiveTake,
     _poolGlarbCalamitysAugur,
     _poolGleefulSabotage,
     _poolGliderKids,

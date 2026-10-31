@@ -53,6 +53,7 @@ import _poolBileBlight from "../pool/bile-blight.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
+import _poolBlessingOfFrost from "../pool/blessing-of-frost.js";
 import _poolBlight from "../pool/blight.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodHost from "../pool/blood-host.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
     _poolBlessedHippogriff,
+    _poolBlessingOfFrost,
     _poolBlight,
     _poolBlightstepPathway,
     _poolBloodHost,

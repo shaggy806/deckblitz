@@ -109,6 +109,7 @@ import _poolBreathOfLife from "../pool/breath-of-life.js";
 import _poolBreedingPit from "../pool/breeding-pit.js";
 import _poolBrightmare from "../pool/brightmare.js";
 import _poolBrokersAscendancy from "../pool/brokers-ascendancy.js";
+import _poolBroodlord from "../pool/broodlord.js";
 import _poolBullRush from "../pool/bull-rush.js";
 import _poolBurningProphet from "../pool/burning-prophet.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
@@ -980,6 +981,7 @@ const shard: CardShard = {
     _poolBreedingPit,
     _poolBrightmare,
     _poolBrokersAscendancy,
+    _poolBroodlord,
     _poolBullRush,
     _poolBurningProphet,
     _poolBurningShieldAskari,

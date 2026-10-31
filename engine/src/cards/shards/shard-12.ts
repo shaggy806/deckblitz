@@ -732,6 +732,7 @@ import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
 import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
+import _poolThiefOfBlood from "../pool/thief-of-blood.js";
 import _poolThievingMagpie from "../pool/thieving-magpie.js";
 import _poolThirstForDiscovery from "../pool/thirst-for-discovery.js";
 import _poolThopterFoundry from "../pool/thopter-foundry.js";
@@ -1577,6 +1578,7 @@ const shard: CardShard = {
     _poolTheMycosynthGardens,
     _poolTheRoyalScions,
     _poolTheScarabGod,
+    _poolThiefOfBlood,
     _poolThievingMagpie,
     _poolThirstForDiscovery,
     _poolThopterFoundry,

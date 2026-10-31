@@ -241,6 +241,7 @@ import _poolFanaticOfMogis from "../pool/fanatic-of-mogis.js";
 import _poolFarTraveler from "../pool/far-traveler.js";
 import _poolFarm from "../pool/farm.js";
 import _poolFeastOfSanity from "../pool/feast-of-sanity.js";
+import _poolFeastOfTheVictoriousDead from "../pool/feast-of-the-victorious-dead.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
 import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
 import _poolFellThePheasant from "../pool/fell-the-pheasant.js";
@@ -1080,6 +1081,7 @@ const shard: CardShard = {
     _poolFarTraveler,
     _poolFarm,
     _poolFeastOfSanity,
+    _poolFeastOfTheVictoriousDead,
     _poolFeiyiSnake,
     _poolFeldonRonomExcavator,
     _poolFellThePheasant,

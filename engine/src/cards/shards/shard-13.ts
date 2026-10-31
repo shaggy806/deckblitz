@@ -636,6 +636,7 @@ import _poolSoulStrikeTechnique from "../pool/soul-strike-technique.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
 import _poolSpearpointOread from "../pool/spearpoint-oread.js";
+import _poolSpectacularShowdown from "../pool/spectacular-showdown.js";
 import _poolSpellSnuff from "../pool/spell-snuff.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
@@ -1473,6 +1474,7 @@ const shard: CardShard = {
     _poolSoulstoneSanctuary,
     _poolSpawningPit,
     _poolSpearpointOread,
+    _poolSpectacularShowdown,
     _poolSpellSnuff,
     _poolSphinxSummoner,
     _poolSpiderGwenFreeSpirit,
