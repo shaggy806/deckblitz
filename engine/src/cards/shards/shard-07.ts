@@ -363,6 +363,7 @@ import _poolJeeringInstigator from "../pool/jeering-instigator.js";
 import _poolJeskaiCharm from "../pool/jeskai-charm.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJoragaAuxiliary from "../pool/joraga-auxiliary.js";
+import _poolJoragaInvocation from "../pool/joraga-invocation.js";
 import _poolJubilantMascot from "../pool/jubilant-mascot.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
@@ -1249,6 +1250,7 @@ const shard: CardShard = {
     _poolJeskaiCharm,
     _poolJetmirsGarden,
     _poolJoragaAuxiliary,
+    _poolJoragaInvocation,
     _poolJubilantMascot,
     _poolJwariRuins,
     _poolKabiraPlateau,

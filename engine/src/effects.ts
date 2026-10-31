@@ -4579,6 +4579,27 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly filter?: CardFilter;
       readonly restrictions: readonly CombatRestriction[];
+      /** With `filter`: "creatures **target player** controls can't attack
+       * this turn" (Oriss, Samite Guardian), "… controlled by that player or
+       * by that planeswalker's controller" (Concussive Bolt), "other
+       * creatures **that player** controls" (Mark for Death — the target
+       * creature's controller): `filter` read from the side of whoever the
+       * permanent or player in this target slot is, as it resolves — its
+       * `controlledBy: "you"` is them. Nothing happens once that target is
+       * illegal. */
+      readonly controlledByTarget?: number;
+      /** With `filter`: the permanent in this target slot is left out —
+       * Mark for Death's "**other** creatures that player controls" (the
+       * object it is as this resolves, rule 400.7). */
+      readonly exceptTarget?: number;
+      /** With `filter`: the permanents matching it **as this resolves**, each
+       * given the restrictions as a modifier until end of turn, rather than a
+       * rule binding later arrivals — where the sentence also changes their
+       * characteristics, which fixes the set (rule 611.2c): Joraga
+       * Invocation's "each creature you control gets +3/+3 until end of turn
+       * and must be blocked this turn if able", Suicidal Charge's "those
+       * creatures attack this turn if able". A token stack is bound whole. */
+      readonly asItResolves?: true;
       /** "Can't be blocked by [this] this turn" (rule 509.1b): no creature
        * matching it, from this effect's controller's side, can block —
        * Ghirapur Guide's `{ types: ["creature"], power: { lte: 2 } }`;
@@ -8514,6 +8535,9 @@ export interface EffectApi {
     cantBeBlockedBy?: CardFilter,
     /** The one attacker `target` can't block (`cantBlockAttacker`). */
     cantBlock?: TargetRef,
+    /** A `filter`'s scope: read from `scopeTo`'s side (`controlledByTarget`),
+     * leaving out `except` (`exceptTarget`), or fixed `asItResolves`. */
+    scope?: { readonly scopeTo?: PlayerId; readonly except?: ObjectId; readonly asItResolves?: boolean },
   ): void;
   /** See the `"grant-static"` {@link EffectSpec}: `target`, or with `filter`
    * every permanent matching it now. */
@@ -12897,7 +12921,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "restrict": {
       if (spec.filter !== undefined) {
-        ctx.restrict(undefined, spec.filter, spec.restrictions, undefined, spec.cantBeBlockedBy);
+        const scopeTo = scopedController(spec.controlledByTarget, ctx);
+        if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+        const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+        ctx.restrict(undefined, spec.filter, spec.restrictions, undefined, spec.cantBeBlockedBy, undefined, {
+          ...(scopeTo !== undefined ? { scopeTo } : {}),
+          ...(spared?.kind === "object" ? { except: spared.object } : {}),
+          ...(spec.asItResolves === true ? { asItResolves: true } : {}),
+        });
         return;
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);

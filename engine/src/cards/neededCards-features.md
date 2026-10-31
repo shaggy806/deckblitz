@@ -321,6 +321,27 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A restriction over a target player's creatures, or the ones there now — built 2026-10-31
+
+The need-keys Phase 2 family `static:combat-restriction-extensions`, its top
+group, features only. `restrict`'s `filter` form (a turn-wide rule, rule
+611.2c) takes **`controlledByTarget`** (read from the side of the player in a
+target slot, or the controller of the permanent there — "creatures target
+player controls can't attack this turn", "… controlled by that player or by
+that planeswalker's controller") and **`exceptTarget`** ("other creatures that
+player controls", the rule's `except` held by stint, 400.7 —
+`turnRuleCovers`), and **`asItResolves`**: the restrictions as modifiers on
+what matches now, where the same sentence's bonus fixes the set ("each creature
+you control gets +3/+3 … and must be blocked this turn if able"). "Can't be
+blocked this turn" as a rule over a name or every creature was already
+`restrictions: ["cant-be-blocked"]`, only marked. The scaffolder reads
+"creatures target player controls / you control / your opponents control /
+[every creature] can't attack / block / be blocked this turn". Keys:
+effect:cant-be-blocked-rule-this-turn, effect:restrict-controlled-by-target,
+effect:restrict-each-matching-at-resolution, effect:restrict-rule-for-player.
+Proving cards: Concussive Bolt, Mark for Death, Joraga Invocation, Suicidal
+Charge, Leitmotif Composer, Veiling Oddity.
+
 ### "Can't be the target of …" statics — built 2026-10-31
 
 The need-keys Phase 2 family `keyword:hexproof-from-colors`, its one group,

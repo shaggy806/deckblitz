@@ -4311,6 +4311,7 @@ import _poolConcoct from "./pool/concoct.js";
 import _poolConcordWithTheKami from "./pool/concord-with-the-kami.js";
 import _poolConcordantCrossroads from "./pool/concordant-crossroads.js";
 import _poolConcordiaPegasus from "./pool/concordia-pegasus.js";
+import _poolConcussiveBolt from "./pool/concussive-bolt.js";
 import _poolCondemn from "./pool/condemn.js";
 import _poolCondescend from "./pool/condescend.js";
 import _poolConductElectricity from "./pool/conduct-electricity.js";
@@ -11967,6 +11968,7 @@ import _poolJorKadeenFirstGoldwarden from "./pool/jor-kadeen-first-goldwarden.js
 import _poolJorKadeenThePrevailer from "./pool/jor-kadeen-the-prevailer.js";
 import _poolJoragaAuxiliary from "./pool/joraga-auxiliary.js";
 import _poolJoragaBard from "./pool/joraga-bard.js";
+import _poolJoragaInvocation from "./pool/joraga-invocation.js";
 import _poolJoragaTreespeaker from "./pool/joraga-treespeaker.js";
 import _poolJoragaVisionary from "./pool/joraga-visionary.js";
 import _poolJoragaWarcaller from "./pool/joraga-warcaller.js";
@@ -13011,6 +13013,7 @@ import _poolLegolasGreenleaf from "./pool/legolas-greenleaf.js";
 import _poolLegolasMasterArcher from "./pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "./pool/legolass-quick-reflexes.js";
 import _poolLeinoreAutumnSovereign from "./pool/leinore-autumn-sovereign.js";
+import _poolLeitmotifComposer from "./pool/leitmotif-composer.js";
 import _poolLenaSelflessChampion from "./pool/lena-selfless-champion.js";
 import _poolLensFlare from "./pool/lens-flare.js";
 import _poolLeonardoBigBrother from "./pool/leonardo-big-brother.js";
@@ -13921,6 +13924,7 @@ import _poolMarisiBreakerOfTheCoil from "./pool/marisi-breaker-of-the-coil.js";
 import _poolMarisisTwinclaws from "./pool/marisis-twinclaws.js";
 import _poolMaritLagesSlumber from "./pool/marit-lages-slumber.js";
 import _poolMaritimeGuard from "./pool/maritime-guard.js";
+import _poolMarkForDeath from "./pool/mark-for-death.js";
 import _poolMarkOfAsylum from "./pool/mark-of-asylum.js";
 import _poolMarkOfFury from "./pool/mark-of-fury.js";
 import _poolMarkOfMutiny from "./pool/mark-of-mutiny.js";
@@ -22303,6 +22307,7 @@ import _poolSuffocatingBlast from "./pool/suffocating-blast.js";
 import _poolSuffocatingFumes from "./pool/suffocating-fumes.js";
 import _poolSugarCoat from "./pool/sugar-coat.js";
 import _poolSugarRush from "./pool/sugar-rush.js";
+import _poolSuicidalCharge from "./pool/suicidal-charge.js";
 import _poolSuitUp from "./pool/suit-up.js";
 import _poolSukiCourageousRescuer from "./pool/suki-courageous-rescuer.js";
 import _poolSukiKyoshiWarrior from "./pool/suki-kyoshi-warrior.js";
@@ -25040,6 +25045,7 @@ import _poolVeilbornGhoul from "./pool/veilborn-ghoul.js";
 import _poolVeiledAscension from "./pool/veiled-ascension.js";
 import _poolVeiledSentry from "./pool/veiled-sentry.js";
 import _poolVeiledShade from "./pool/veiled-shade.js";
+import _poolVeilingOddity from "./pool/veiling-oddity.js";
 import _poolVeinRipper from "./pool/vein-ripper.js";
 import _poolVeinfireBorderpost from "./pool/veinfire-borderpost.js";
 import _poolVeinwitchCoven from "./pool/veinwitch-coven.js";
@@ -31804,6 +31810,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConcordWithTheKami,
   _poolConcordantCrossroads,
   _poolConcordiaPegasus,
+  _poolConcussiveBolt,
   _poolCondemn,
   _poolCondescend,
   _poolConductElectricity,
@@ -39460,6 +39467,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJorKadeenThePrevailer,
   _poolJoragaAuxiliary,
   _poolJoragaBard,
+  _poolJoragaInvocation,
   _poolJoragaTreespeaker,
   _poolJoragaVisionary,
   _poolJoragaWarcaller,
@@ -40504,6 +40512,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLegolasMasterArcher,
   _poolLegolassQuickReflexes,
   _poolLeinoreAutumnSovereign,
+  _poolLeitmotifComposer,
   _poolLenaSelflessChampion,
   _poolLensFlare,
   _poolLeonardoBigBrother,
@@ -41414,6 +41423,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarisisTwinclaws,
   _poolMaritLagesSlumber,
   _poolMaritimeGuard,
+  _poolMarkForDeath,
   _poolMarkOfAsylum,
   _poolMarkOfFury,
   _poolMarkOfMutiny,
@@ -49796,6 +49806,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSuffocatingFumes,
   _poolSugarCoat,
   _poolSugarRush,
+  _poolSuicidalCharge,
   _poolSuitUp,
   _poolSukiCourageousRescuer,
   _poolSukiKyoshiWarrior,
@@ -52533,6 +52544,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVeiledAscension,
   _poolVeiledSentry,
   _poolVeiledShade,
+  _poolVeilingOddity,
   _poolVeinRipper,
   _poolVeinfireBorderpost,
   _poolVeinwitchCoven,
@@ -59310,6 +59322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/concord-with-the-kami": _poolConcordWithTheKami,
   "pool/concordant-crossroads": _poolConcordantCrossroads,
   "pool/concordia-pegasus": _poolConcordiaPegasus,
+  "pool/concussive-bolt": _poolConcussiveBolt,
   "pool/condemn": _poolCondemn,
   "pool/condescend": _poolCondescend,
   "pool/conduct-electricity": _poolConductElectricity,
@@ -66966,6 +66979,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jor-kadeen-the-prevailer": _poolJorKadeenThePrevailer,
   "pool/joraga-auxiliary": _poolJoragaAuxiliary,
   "pool/joraga-bard": _poolJoragaBard,
+  "pool/joraga-invocation": _poolJoragaInvocation,
   "pool/joraga-treespeaker": _poolJoragaTreespeaker,
   "pool/joraga-visionary": _poolJoragaVisionary,
   "pool/joraga-warcaller": _poolJoragaWarcaller,
@@ -68010,6 +68024,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/legolas-master-archer": _poolLegolasMasterArcher,
   "pool/legolass-quick-reflexes": _poolLegolassQuickReflexes,
   "pool/leinore-autumn-sovereign": _poolLeinoreAutumnSovereign,
+  "pool/leitmotif-composer": _poolLeitmotifComposer,
   "pool/lena-selfless-champion": _poolLenaSelflessChampion,
   "pool/lens-flare": _poolLensFlare,
   "pool/leonardo-big-brother": _poolLeonardoBigBrother,
@@ -68920,6 +68935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marisis-twinclaws": _poolMarisisTwinclaws,
   "pool/marit-lages-slumber": _poolMaritLagesSlumber,
   "pool/maritime-guard": _poolMaritimeGuard,
+  "pool/mark-for-death": _poolMarkForDeath,
   "pool/mark-of-asylum": _poolMarkOfAsylum,
   "pool/mark-of-fury": _poolMarkOfFury,
   "pool/mark-of-mutiny": _poolMarkOfMutiny,
@@ -77302,6 +77318,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/suffocating-fumes": _poolSuffocatingFumes,
   "pool/sugar-coat": _poolSugarCoat,
   "pool/sugar-rush": _poolSugarRush,
+  "pool/suicidal-charge": _poolSuicidalCharge,
   "pool/suit-up": _poolSuitUp,
   "pool/suki-courageous-rescuer": _poolSukiCourageousRescuer,
   "pool/suki-kyoshi-warrior": _poolSukiKyoshiWarrior,
@@ -80039,6 +80056,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/veiled-ascension": _poolVeiledAscension,
   "pool/veiled-sentry": _poolVeiledSentry,
   "pool/veiled-shade": _poolVeiledShade,
+  "pool/veiling-oddity": _poolVeilingOddity,
   "pool/vein-ripper": _poolVeinRipper,
   "pool/veinfire-borderpost": _poolVeinfireBorderpost,
   "pool/veinwitch-coven": _poolVeinwitchCoven,

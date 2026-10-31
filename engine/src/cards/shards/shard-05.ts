@@ -468,6 +468,7 @@ import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
+import _poolMarkForDeath from "../pool/mark-for-death.js";
 import _poolMarkOfSakiko from "../pool/mark-of-sakiko.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
 import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
@@ -1311,6 +1312,7 @@ const shard: CardShard = {
     _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
+    _poolMarkForDeath,
     _poolMarkOfSakiko,
     _poolMarkovBlademaster,
     _poolMarshalOfTheLost,

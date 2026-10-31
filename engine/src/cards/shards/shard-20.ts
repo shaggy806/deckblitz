@@ -148,6 +148,7 @@ import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolColossalBadger from "../pool/colossal-badger.js";
 import _poolComparativeAnalysis from "../pool/comparative-analysis.js";
 import _poolConcertedDefense from "../pool/concerted-defense.js";
+import _poolConcussiveBolt from "../pool/concussive-bolt.js";
 import _poolConduitOfStorms from "../pool/conduit-of-storms.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolConsumeTheMeek from "../pool/consume-the-meek.js";
@@ -1060,6 +1061,7 @@ const shard: CardShard = {
     _poolColossalBadger,
     _poolComparativeAnalysis,
     _poolConcertedDefense,
+    _poolConcussiveBolt,
     _poolConduitOfStorms,
     _poolConsulateDreadnought,
     _poolConsumeTheMeek,

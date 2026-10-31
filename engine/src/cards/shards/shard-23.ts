@@ -717,6 +717,7 @@ import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSublimeExhalation from "../pool/sublime-exhalation.js";
 import _poolSubmerge from "../pool/submerge.js";
 import _poolSuddenReclamation from "../pool/sudden-reclamation.js";
+import _poolSuicidalCharge from "../pool/suicidal-charge.js";
 import _poolSulfuricVapors from "../pool/sulfuric-vapors.js";
 import _poolSummitApes from "../pool/summit-apes.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
@@ -1590,6 +1591,7 @@ const shard: CardShard = {
     _poolSublimeExhalation,
     _poolSubmerge,
     _poolSuddenReclamation,
+    _poolSuicidalCharge,
     _poolSulfuricVapors,
     _poolSummitApes,
     _poolSunBlessedHealer,

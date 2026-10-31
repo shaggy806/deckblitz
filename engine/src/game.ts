@@ -27295,8 +27295,8 @@ export class Game {
           this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp);
         }
       },
-      restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock) =>
-        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock),
+      restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock, scope) =>
+        this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock, scope),
       grantStatic: (target, filter, ability, duration) => {
         const kept = lastingHere(duration);
         // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -32640,6 +32640,7 @@ export class Game {
     duration: EffectDuration = "end-of-turn",
     cantBeBlockedBy?: CardFilter,
     cantBlock?: TargetRef,
+    scope: { readonly scopeTo?: PlayerId; readonly except?: ObjectId; readonly asItResolves?: boolean } = {},
   ): void {
     // "Can't block this creature": the attacker as it is now (rule 400.7).
     const attacker =
@@ -32648,11 +32649,39 @@ export class Game {
         : undefined;
     if (restrictions.length === 0 && cantBeBlockedBy === undefined && attacker === undefined) return;
     if (filter !== undefined) {
+      // Read from the side of a target player, or a target's controller
+      // (`controlledByTarget`); the one permanent left out by its stint.
+      const you = scope.scopeTo ?? controller;
+      const spared = scope.except !== undefined ? this.state.objects[scope.except] : undefined;
+      const except =
+        spared !== undefined && spared.zone === "battlefield"
+          ? { object: spared.id, zoneChangeCount: spared.zoneChangeCount ?? 0 }
+          : undefined;
+      if (scope.asItResolves === true) {
+        // The set fixed as it resolves (rule 611.2c): a modifier on each
+        // match until end of turn, a token stack bound whole.
+        for (const id of this.battlefieldMatching(you, filter)) {
+          if (id === except?.object) continue;
+          const object = this.state.objects[id];
+          object.modifiers.push({
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
+            ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
+            ...durationFields(duration),
+          });
+          this.emit({ type: "restrictions-imposed", object: id, player: controller, restrictions: [...restrictions] });
+        }
+        invalidateComputedCache();
+        return;
+      }
       (this.state.turnRestrictions ??= []).push({
         filter,
-        you: controller,
+        you,
         restrictions: [...restrictions],
         ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy } : {}),
+        ...(except !== undefined ? { except } : {}),
       });
       this.emit({ type: "restrictions-imposed", player: controller, restrictions: [...restrictions] });
       return;

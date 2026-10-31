@@ -2610,6 +2610,26 @@ export function parseSentence(sentence, ctx) {
     return { kind: "restrict", target: slot(m[1]), restrictions: [], cantBlockAttacker: "source" };
   }
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
+  // A turn-wide rule over a set of creatures (rule 611.2c — `restrict`'s
+  // `filter` form): "creatures target player controls can't attack this
+  // turn" (Oriss, read from that player's side — `controlledByTarget`),
+  // "creatures your opponents control can't block this turn", "creatures
+  // can't be blocked this turn" (Veiling Oddity).
+  {
+    const RESTRICTION = { attack: "cant-attack", block: "cant-block", "be blocked": "cant-be-blocked" };
+    if ((m = re(`creatures (${PLAYER_T}) controls can't (attack|block|be blocked) this turn`).exec(s))) {
+      return {
+        kind: "restrict",
+        filter: { type: "creature", controlledBy: "you" },
+        controlledByTarget: slot(m[1]),
+        restrictions: [RESTRICTION[m[2].toLowerCase()]],
+      };
+    }
+    if ((m = re(`creatures( you control| your opponents control)? can't (attack|block|be blocked) this turn`).exec(s))) {
+      const side = m[1] === undefined ? {} : { controlledBy: m[1] === " you control" ? "you" : "opponent" };
+      return { kind: "restrict", filter: { type: "creature", ...side }, restrictions: [RESTRICTION[m[2].toLowerCase()]] };
+    }
+  }
   // "Target creature can't be regenerated this turn" (Hurr Jackal — rule
   // 701.19c).
   if ((m = re(`(${TARGET}) can't be regenerated this turn`).exec(s))) return { kind: "prohibit", target: slot(m[1]), regeneration: true };

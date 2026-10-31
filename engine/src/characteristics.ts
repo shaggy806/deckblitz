@@ -4600,6 +4600,22 @@ export function assignedCombatDamage(
   return combatDamageOf(computeCharacteristics(state, registry, id));
 }
 
+/** Whether a turn-wide `restrict` rule (`GameState.turnRestrictions`) binds
+ * `id` now: it matches the rule's filter from `you`'s side, and isn't the
+ * permanent the rule leaves out (`except`, the same object only — 400.7). */
+export function turnRuleCovers(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  rule: NonNullable<GameState["turnRestrictions"]>[number],
+): boolean {
+  const except = rule.except;
+  if (except !== undefined && except.object === id && (state.objects[id]?.zoneChangeCount ?? 0) === except.zoneChangeCount) {
+    return false;
+  }
+  return matchesFilter(state, registry, id, rule.filter, { you: rule.you });
+}
+
 /**
  * Combat restrictions on `id`: from static abilities (Pacifism, Juggernaut)
  * and `restrict` modifiers — the characteristics' own — plus any turn-wide
@@ -4622,7 +4638,7 @@ export function restrictionsOf(
   if (rules === undefined || rules.length === 0) return own;
   let out: Set<CombatRestriction> | null = null;
   for (const rule of rules) {
-    if (!matchesFilter(state, registry, id, rule.filter, { you: rule.you })) continue;
+    if (!turnRuleCovers(state, registry, id, rule)) continue;
     out ??= new Set(own);
     for (const r of rule.restrictions) out.add(r);
   }

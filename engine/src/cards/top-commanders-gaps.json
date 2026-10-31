@@ -766,7 +766,11 @@
   "static:cant-be-targeted-by-filter",
   "keyword:hexproof-from-multicolored",
   "static:hexproof-from-spells-only",
-  "static:untargetable-by-color-any-player"
+  "static:untargetable-by-color-any-player",
+  "effect:cant-be-blocked-rule-this-turn",
+  "effect:restrict-controlled-by-target",
+  "effect:restrict-each-matching-at-resolution",
+  "effect:restrict-rule-for-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

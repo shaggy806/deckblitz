@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a restriction over a target player's creatures, or the ones there now**
+  (2026-10-31; `effect:cant-be-blocked-rule-this-turn`, `effect:restrict-controlled-by-target`,
+  `effect:restrict-each-matching-at-resolution`, `effect:restrict-rule-for-player`) — `restrict`'s
+  `controlledByTarget`, `exceptTarget` and `asItResolves` (611.2c); 12 freed (6 authored here).
+  Concussive Bolt, Mark for Death, Joraga Invocation, Suicidal Charge, Leitmotif Composer, Veiling
+  Oddity.
 - **Need-keys Phase 2: "can't be the target of …" statics** (2026-10-31;
   `static:cant-be-targeted-by-filter`, `keyword:hexproof-from-multicolored`,
   `static:hexproof-from-spells-only`, `static:untargetable-by-color-any-player`) — `hexproofFrom`'s

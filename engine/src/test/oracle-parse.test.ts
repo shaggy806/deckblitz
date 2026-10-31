@@ -4636,3 +4636,27 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
     });
   });
 });
+
+describe("restrict over a set of creatures this turn (controlledByTarget, rule 611.2c)", () => {
+  it("reads a target player's creatures, a side's, and every creature", () => {
+    const targets: unknown[] = [];
+    const oriss = parseEffect("Creatures target player controls can't attack this turn.", { targets });
+    expect(oriss.effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByTarget: 0,
+      restrictions: ["cant-attack"],
+    });
+    expect(targets).toHaveLength(1);
+    expect(parseEffect("Creatures your opponents control can't block this turn.", { targets: [] }).effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature", controlledBy: "opponent" },
+      restrictions: ["cant-block"],
+    });
+    expect(parseEffect("Creatures can't be blocked this turn.", { targets: [] }).effect).toEqual({
+      kind: "restrict",
+      filter: { type: "creature" },
+      restrictions: ["cant-be-blocked"],
+    });
+  });
+});

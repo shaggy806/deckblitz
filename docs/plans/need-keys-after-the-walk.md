@@ -716,6 +716,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   `abilitiesOnly` and `anyController` qualifiers and a quality-less instance, and the
   `graveyardCardsUntargetable` static (4 keys, 12 freed, 5 proving cards; Display of Dominance's
   one-shot, Lurker and the Flagbearers left open).
+- **2026-10-31: a restriction over a target player's creatures** (the same session) —
+  `static:combat-restriction-extensions`' next group, on the restriction code of the earlier
+  combat families: `restrict`'s `controlledByTarget`, `exceptTarget` and `asItResolves` (4 keys,
+  12 freed, 6 proving cards).
 
 ## Rough size
 
