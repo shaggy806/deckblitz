@@ -716,6 +716,9 @@ missing. Re-run `--greedy` for Phase 2's order.
   `next` (used up as the next matching spell becomes cast) with `cantBeCountered`, `convoke` and
   `entersWithCounters`, a granted sunburst, and `firstEachTurn` over `castFrom`/`manaFrom`
   (7 keys, 4 freed, 9 proving cards).
+  Then `cost:kicker-nonmana-cost` with `cost:life-per-target`: `kicker.also`'s `returnToHand`
+  and `tapUntapped` (a plain kicker and entwine too) and `additionalCost.payLifePerTarget`
+  (2 keys, 5 freed, 6 proving cards).
 
 ## Rough size
 

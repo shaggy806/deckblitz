@@ -76,6 +76,7 @@ import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodMoon from "../pool/blood-moon.js";
+import _poolBloodTribute from "../pool/blood-tribute.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodcurdler from "../pool/bloodcurdler.js";
 import _poolBloodfireColossus from "../pool/bloodfire-colossus.js";
@@ -953,6 +954,7 @@ const shard: CardShard = {
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodMoon,
+    _poolBloodTribute,
     _poolBloodcrazedNeonate,
     _poolBloodcurdler,
     _poolBloodfireColossus,

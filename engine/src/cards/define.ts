@@ -145,6 +145,19 @@ export interface KickerAlsoCost {
   readonly discard?: number;
   readonly discardAtRandom?: boolean;
   readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+  /** "Kicker—Return a creature you control to its owner's hand" (Arctic
+   * Merfolk, Chocobo Kick — rule 702.33a, any cost): `count` permanents the
+   * caster controls matching `filter`, which ones chosen as the cost is paid
+   * once the spell is on the stack (601.2h, the `choose-permanents`
+   * decision — asked only when there's a choice), as an alternative cost's
+   * `returnToHand` is. Offered only while they control that many. */
+  readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
+  /** "Kicker—Tap an untapped Vampire you control" (Blood Tribute): `count`
+   * untapped permanents the caster controls matching `filter`, picked from
+   * the kicked variant's `tapCost` offer (the `cast-spell` action's `tap`),
+   * as teamwork's creatures are. A creature with summoning sickness may be
+   * tapped (rule 302.6 restricts only its own {T} abilities). */
+  readonly tapUntapped?: { readonly filter: CardFilter; readonly count: number };
 }
 
 export interface AdditionalCostOption {
@@ -3108,6 +3121,12 @@ export interface CardDefinition {
     readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
+    /** "This spell costs **3 life more** to cast **for each target**"
+     * (Phyrexian Purge — a cost increase, rule 601.2f): this much life for
+     * each distinct target, the targets chosen before the cost is locked in
+     * (601.2c). The offer's `targetCount` range is what the caster's life
+     * can pay (rule 119.4). */
+    readonly payLifePerTarget?: number;
     /**
      * "As an additional cost to cast this spell, **waterbend {5}**" (rule
      * 701.67a — Water Whip): the generic mana is added to the total cost
@@ -4463,6 +4482,7 @@ interface CardDraft {
     readonly discardAtRandom?: boolean;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
+    readonly payLifePerTarget?: number;
     readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
     readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };

@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: kicker costs that aren't mana, and life per target** (2026-10-31;
+  `cost:kicker-nonmana-cost`, `cost:life-per-target`) — `kicker.also`'s `returnToHand` and
+  `tapUntapped` beside its sacrifice, on a plain kicker and entwine (rule 702.33a, 702.42a), and
+  `additionalCost.payLifePerTarget` (601.2f); 5 freed. Vicious Offering, Goblin Barrage, Betrayal
+  of Flesh, Arctic Merfolk, Blood Tribute, Phyrexian Purge.
 - **Need-keys Phase 2: one-shot grants to the next or first matching spell** (2026-10-31;
   `static:grant-cascade`, `static:grant-cascade-next-spell`, `static:grant-sunburst-to-next-artifact`,
   `static:grant-to-first-matching-spell`, `static:next-creature-spell-flash`,

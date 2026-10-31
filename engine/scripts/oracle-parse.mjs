@@ -1071,6 +1071,31 @@ function buybackAlso(text) {
   return also;
 }
 
+/** A kicker's or entwine's cost that isn't mana (rule 702.33a, 702.42a —
+ * any cost), as `kicker.also`: buyback's parts, a sacrifice of N of a kind
+ * ("Sacrifice three lands"), "Return a creature you control to its owner's
+ * hand" and "Tap an untapped Vampire you control". One part only. */
+function kickerAlso(text) {
+  let m;
+  if ((m = new RegExp(`^Sacrifice (an?|${N.slice(1, -1)}) (.+)$`).exec(text))) {
+    const count = /^an?$/.test(m[1]) ? 1 : numberOf(m[1]);
+    const filter = parseTypePhrase(m[2]);
+    if (typeof count !== "number" || filter === null || Object.keys(filter).length === 0) return null;
+    return { text, sacrifice: { filter, count } };
+  }
+  if ((m = /^Return an? (.+?) you control to its owner's hand$/.exec(text))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { text, returnToHand: { filter, count: 1 } };
+  }
+  if ((m = /^Tap an untapped (.+?) you control$/.exec(text))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { text, tapUntapped: { filter, count: 1 } };
+  }
+  return null;
+}
+
 /** A morph cost that isn't mana, as `MorphCost.also` — one part, never one
  * that reveals ("Morph—Reveal a blue card in your hand" isn't modeled). */
 function morphNonManaCost(text) {
@@ -4369,6 +4394,17 @@ export function parseFace(face, ctx = {}) {
     // Entwine [cost] (rule 702.42a): a kicker that chooses every mode — the
     // modal spell's `kickedModes`, set once its modes are read.
     if (isSpell && (m = /^Entwine ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "entwine" }; continue; }
+    // A kicker or entwine whose cost isn't mana (rule 702.33a, 702.42a):
+    // "Kicker—Return a creature you control to its owner's hand" (Arctic
+    // Merfolk), "Entwine—Sacrifice three lands" (Betrayal of Flesh) —
+    // `kicker.also`. A spell's kicker stays a person's, as above.
+    if ((m = /^(Kicker|Entwine)—(.+?)\.$/.exec(line)) && (m[1] === "Entwine") === isSpell) {
+      const also = kickerAlso(m[2]);
+      if (also !== null) {
+        out.kicker = { cost: "", ...(m[1] === "Entwine" ? { keyword: "entwine" } : {}), also };
+        continue;
+      }
+    }
     // Buyback [cost] (rule 702.27a): a kicker whose cast goes back to its
     // owner's hand as it resolves. A mana cost only.
     if (isSpell && (m = /^Buyback ((?:\{[^}]+\})+)$/.exec(line))) { out.kicker = { cost: m[1], keyword: "buyback" }; continue; }
@@ -4561,6 +4597,12 @@ export function parseFace(face, ctx = {}) {
         out.castSelfFromGraveyard = self;
         continue;
       }
+    }
+    // "This spell costs 3 life more to cast for each target" (Phyrexian
+    // Purge — a cost increase, rule 601.2f): `additionalCost.payLifePerTarget`.
+    if (castable && (m = /^~ costs (\d+) life more to cast for each target\.$/.exec(line))) {
+      out.additionalCost = { payLifePerTarget: Number(m[1]) };
+      continue;
     }
     // A processor's additional cost (Processor Assault): which card, chosen
     // as the cost is paid (`additionalCost.putFromExile`).

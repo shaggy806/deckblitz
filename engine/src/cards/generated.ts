@@ -1029,6 +1029,7 @@ import _poolArclightPhoenix from "./pool/arclight-phoenix.js";
 import _poolArcoFlagellant from "./pool/arco-flagellant.js";
 import _poolArcticAven from "./pool/arctic-aven.js";
 import _poolArcticFlats from "./pool/arctic-flats.js";
+import _poolArcticMerfolk from "./pool/arctic-merfolk.js";
 import _poolArcticNishoba from "./pool/arctic-nishoba.js";
 import _poolArcticTreeline from "./pool/arctic-treeline.js";
 import _poolArcticWolves from "./pool/arctic-wolves.js";
@@ -2028,6 +2029,7 @@ import _poolBestowGreatness from "./pool/bestow-greatness.js";
 import _poolBetorAncestorsVoice from "./pool/betor-ancestors-voice.js";
 import _poolBetorKinToAll from "./pool/betor-kin-to-all.js";
 import _poolBetrayalAtTheVault from "./pool/betrayal-at-the-vault.js";
+import _poolBetrayalOfFlesh from "./pool/betrayal-of-flesh.js";
 import _poolBetrayal from "./pool/betrayal.js";
 import _poolBetrayersBargain from "./pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "./pool/betroth-the-beast.js";
@@ -2360,6 +2362,7 @@ import _poolBloodServitor from "./pool/blood-servitor.js";
 import _poolBloodSpeaker from "./pool/blood-speaker.js";
 import _poolBloodTithe from "./pool/blood-tithe.js";
 import _poolBloodTollHarpy from "./pool/blood-toll-harpy.js";
+import _poolBloodTribute from "./pool/blood-tribute.js";
 import _poolBloodVassal from "./pool/blood-vassal.js";
 import _poolBlood from "./pool/blood.js";
 import _poolBloodboilSorcerer from "./pool/bloodboil-sorcerer.js";
@@ -9358,6 +9361,7 @@ import _poolGoblinAssaultTeam from "./pool/goblin-assault-team.js";
 import _poolGoblinAssault from "./pool/goblin-assault.js";
 import _poolGoblinBalloonBrigade from "./pool/goblin-balloon-brigade.js";
 import _poolGoblinBanneret from "./pool/goblin-banneret.js";
+import _poolGoblinBarrage from "./pool/goblin-barrage.js";
 import _poolGoblinBattleJester from "./pool/goblin-battle-jester.js";
 import _poolGoblinBerserker from "./pool/goblin-berserker.js";
 import _poolGoblinBirdGrabber from "./pool/goblin-bird-grabber.js";
@@ -16689,6 +16693,7 @@ import _poolPhyrexianObliterator from "./pool/phyrexian-obliterator.js";
 import _poolPhyrexianPegasus from "./pool/phyrexian-pegasus.js";
 import _poolPhyrexianPlaguelord from "./pool/phyrexian-plaguelord.js";
 import _poolPhyrexianProwler from "./pool/phyrexian-prowler.js";
+import _poolPhyrexianPurge from "./pool/phyrexian-purge.js";
 import _poolPhyrexianRager from "./pool/phyrexian-rager.js";
 import _poolPhyrexianReaper from "./pool/phyrexian-reaper.js";
 import _poolPhyrexianRebirth from "./pool/phyrexian-rebirth.js";
@@ -25217,6 +25222,7 @@ import _poolViciousClown from "./pool/vicious-clown.js";
 import _poolViciousConquistador from "./pool/vicious-conquistador.js";
 import _poolViciousHunger from "./pool/vicious-hunger.js";
 import _poolViciousKavu from "./pool/vicious-kavu.js";
+import _poolViciousOffering from "./pool/vicious-offering.js";
 import _poolViciousRivalry from "./pool/vicious-rivalry.js";
 import _poolViciousRumors from "./pool/vicious-rumors.js";
 import _poolViciousShadows from "./pool/vicious-shadows.js";
@@ -28526,6 +28532,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArcoFlagellant,
   _poolArcticAven,
   _poolArcticFlats,
+  _poolArcticMerfolk,
   _poolArcticNishoba,
   _poolArcticTreeline,
   _poolArcticWolves,
@@ -29525,6 +29532,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBetorAncestorsVoice,
   _poolBetorKinToAll,
   _poolBetrayalAtTheVault,
+  _poolBetrayalOfFlesh,
   _poolBetrayal,
   _poolBetrayersBargain,
   _poolBetrothTheBeast,
@@ -29857,6 +29865,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodSpeaker,
   _poolBloodTithe,
   _poolBloodTollHarpy,
+  _poolBloodTribute,
   _poolBloodVassal,
   _poolBlood,
   _poolBloodboilSorcerer,
@@ -36855,6 +36864,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinAssault,
   _poolGoblinBalloonBrigade,
   _poolGoblinBanneret,
+  _poolGoblinBarrage,
   _poolGoblinBattleJester,
   _poolGoblinBerserker,
   _poolGoblinBirdGrabber,
@@ -44186,6 +44196,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianPegasus,
   _poolPhyrexianPlaguelord,
   _poolPhyrexianProwler,
+  _poolPhyrexianPurge,
   _poolPhyrexianRager,
   _poolPhyrexianReaper,
   _poolPhyrexianRebirth,
@@ -52714,6 +52725,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolViciousConquistador,
   _poolViciousHunger,
   _poolViciousKavu,
+  _poolViciousOffering,
   _poolViciousRivalry,
   _poolViciousRumors,
   _poolViciousShadows,
@@ -56036,6 +56048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arco-flagellant": _poolArcoFlagellant,
   "pool/arctic-aven": _poolArcticAven,
   "pool/arctic-flats": _poolArcticFlats,
+  "pool/arctic-merfolk": _poolArcticMerfolk,
   "pool/arctic-nishoba": _poolArcticNishoba,
   "pool/arctic-treeline": _poolArcticTreeline,
   "pool/arctic-wolves": _poolArcticWolves,
@@ -57035,6 +57048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/betor-ancestors-voice": _poolBetorAncestorsVoice,
   "pool/betor-kin-to-all": _poolBetorKinToAll,
   "pool/betrayal-at-the-vault": _poolBetrayalAtTheVault,
+  "pool/betrayal-of-flesh": _poolBetrayalOfFlesh,
   "pool/betrayal": _poolBetrayal,
   "pool/betrayers-bargain": _poolBetrayersBargain,
   "pool/betroth-the-beast": _poolBetrothTheBeast,
@@ -57367,6 +57381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blood-speaker": _poolBloodSpeaker,
   "pool/blood-tithe": _poolBloodTithe,
   "pool/blood-toll-harpy": _poolBloodTollHarpy,
+  "pool/blood-tribute": _poolBloodTribute,
   "pool/blood-vassal": _poolBloodVassal,
   "pool/blood": _poolBlood,
   "pool/bloodboil-sorcerer": _poolBloodboilSorcerer,
@@ -64365,6 +64380,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-assault": _poolGoblinAssault,
   "pool/goblin-balloon-brigade": _poolGoblinBalloonBrigade,
   "pool/goblin-banneret": _poolGoblinBanneret,
+  "pool/goblin-barrage": _poolGoblinBarrage,
   "pool/goblin-battle-jester": _poolGoblinBattleJester,
   "pool/goblin-berserker": _poolGoblinBerserker,
   "pool/goblin-bird-grabber": _poolGoblinBirdGrabber,
@@ -71696,6 +71712,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-pegasus": _poolPhyrexianPegasus,
   "pool/phyrexian-plaguelord": _poolPhyrexianPlaguelord,
   "pool/phyrexian-prowler": _poolPhyrexianProwler,
+  "pool/phyrexian-purge": _poolPhyrexianPurge,
   "pool/phyrexian-rager": _poolPhyrexianRager,
   "pool/phyrexian-reaper": _poolPhyrexianReaper,
   "pool/phyrexian-rebirth": _poolPhyrexianRebirth,
@@ -80224,6 +80241,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vicious-conquistador": _poolViciousConquistador,
   "pool/vicious-hunger": _poolViciousHunger,
   "pool/vicious-kavu": _poolViciousKavu,
+  "pool/vicious-offering": _poolViciousOffering,
   "pool/vicious-rivalry": _poolViciousRivalry,
   "pool/vicious-rumors": _poolViciousRumors,
   "pool/vicious-shadows": _poolViciousShadows,

@@ -81,6 +81,7 @@ import _poolBenalishEmissary from "../pool/benalish-emissary.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
 import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
+import _poolBetrayalOfFlesh from "../pool/betrayal-of-flesh.js";
 import _poolBhaalLordOfMurder from "../pool/bhaal-lord-of-murder.js";
 import _poolBileVialBoggart from "../pool/bile-vial-boggart.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolBenevolentAncestor,
     _poolBenthicBehemoth,
     _poolBeornTheFierce,
+    _poolBetrayalOfFlesh,
     _poolBhaalLordOfMurder,
     _poolBileVialBoggart,
     _poolBitterTriumph,

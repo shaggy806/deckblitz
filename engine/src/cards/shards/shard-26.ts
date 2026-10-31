@@ -297,6 +297,7 @@ import _poolGiveNoGround from "../pool/give-no-ground.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
 import _poolGloomwidowsFeast from "../pool/gloomwidows-feast.js";
+import _poolGoblinBarrage from "../pool/goblin-barrage.js";
 import _poolGoblinBoarders from "../pool/goblin-boarders.js";
 import _poolGoblinBully from "../pool/goblin-bully.js";
 import _poolGoblinDiggingTeam from "../pool/goblin-digging-team.js";
@@ -1167,6 +1168,7 @@ const shard: CardShard = {
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
     _poolGloomwidowsFeast,
+    _poolGoblinBarrage,
     _poolGoblinBoarders,
     _poolGoblinBully,
     _poolGoblinDiggingTeam,

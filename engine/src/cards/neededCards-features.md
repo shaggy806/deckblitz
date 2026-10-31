@@ -563,6 +563,24 @@ Yawning Portal. Not built: "the next spell you cast this turn has
 improvise" (Archway of Innovation; convoke is built, below), and a
 `hasConvoke` filter still reads only a printed convoke.
 
+### Kicker costs that aren't mana, and life per target — built 2026-10-31
+
+The need-keys Phase 2 family `cost:kicker-nonmana-cost` with
+cost:life-per-target, features only. `kicker.also` (buyback's non-mana
+costs, rule 702.33a — any cost) already sacrificed a filtered permanent; it
+now takes `returnToHand` (paid as an alternative cost's, 601.2h) and
+`tapUntapped` (the kicked variant's `tapCost`, as teamwork's), and works on a
+plain kicker and on entwine (702.42a) alike. `additionalCost.payLifePerTarget`
+is "this spell costs N life more to cast for each target" (601.2f, the
+targets chosen first, 601.2c): the offer's `targetCount` range stops at what
+the caster's life pays (119.4). The scaffolder reads "Kicker—[return / tap /
+sacrifice]" on a permanent, "Entwine—[cost]" and the life-per-target line.
+Proving cards: Vicious Offering, Goblin Barrage, Betrayal of Flesh, Arctic
+Merfolk, Blood Tribute, Phyrexian Purge. Left to `author-freed`: the sacrifice
+kickers' other cards (Final Flourish, Stomped by the Foot, Vayne's Treachery,
+Primal Growth) and Chocobo Kick; Dralnu's Pet still needs the discarded
+card's mana value (`effect:cost-discarded-card-ref`).
+
 ### One-shot grants to the next or first matching spell — built 2026-10-31
 
 The rest of the need-keys Phase 2 family `static:grant-abilities-to-spells`,

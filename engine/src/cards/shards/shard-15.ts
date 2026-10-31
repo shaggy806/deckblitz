@@ -29,6 +29,7 @@ import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
 import _poolArchangelOfWrath from "../pool/archangel-of-wrath.js";
 import _poolArcticAven from "../pool/arctic-aven.js";
+import _poolArcticMerfolk from "../pool/arctic-merfolk.js";
 import _poolArdenvaleTactician from "../pool/ardenvale-tactician.js";
 import _poolArenaTrickster from "../pool/arena-trickster.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
@@ -846,6 +847,7 @@ const shard: CardShard = {
     _poolArcboundWhelp,
     _poolArchangelOfWrath,
     _poolArcticAven,
+    _poolArcticMerfolk,
     _poolArdenvaleTactician,
     _poolArenaTrickster,
     _poolAresGodOfWar,

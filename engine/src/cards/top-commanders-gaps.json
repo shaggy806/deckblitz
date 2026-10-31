@@ -769,7 +769,9 @@
   "static:grant-to-first-matching-spell",
   "static:next-creature-spell-flash",
   "static:next-spell-uncounterable",
-  "effect:next-spell-has-convoke"
+  "effect:next-spell-has-convoke",
+  "cost:kicker-nonmana-cost",
+  "cost:life-per-target"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

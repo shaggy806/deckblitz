@@ -4443,6 +4443,34 @@ describe("one-shot grants to the next or first matching spell", () => {
   });
 });
 
+describe("kicker and entwine costs that aren't mana, and life per target", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads a kicker that returns or taps a permanent, and an entwine that sacrifices", () => {
+    expect(face("Arctic Merfolk", "Creature — Merfolk", "Kicker—Return a creature you control to its owner's hand.").kicker).toEqual({
+      cost: "",
+      also: { text: "Return a creature you control to its owner's hand", returnToHand: { filter: { type: "creature" }, count: 1 } },
+    });
+    expect(face("Test Vampire", "Creature — Vampire", "Kicker—Tap an untapped Vampire you control.").kicker).toEqual({
+      cost: "",
+      also: { text: "Tap an untapped Vampire you control", tapUntapped: { filter: { subtype: "Vampire" }, count: 1 } },
+    });
+    expect(face("Betrayal of Flesh", "Instant", "Choose one —\n• Destroy target creature.\n• Return target creature card from your graveyard to the battlefield.\nEntwine—Sacrifice three lands.").kicker).toEqual({
+      cost: "",
+      keyword: "entwine",
+      also: { text: "Sacrifice three lands", sacrifice: { filter: { type: "land" }, count: 3 } },
+    });
+    // A spell's kicker stays a person's: what kicking changes isn't read.
+    expect(face("Vicious Offering", "Instant", "Kicker—Sacrifice a creature.\nTarget creature gets -2/-2 until end of turn.").kicker).toBeUndefined();
+  });
+
+  it("reads \"costs N life more to cast for each target\"", () => {
+    expect(
+      face("Phyrexian Purge", "Sorcery", "This spell costs 3 life more to cast for each target.\nDestroy any number of target creatures.").additionalCost,
+    ).toEqual({ payLifePerTarget: 3 });
+  });
+});
+
 describe("creatures in a blocking relation (blockingRelation)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

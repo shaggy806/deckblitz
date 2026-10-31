@@ -4015,7 +4015,7 @@ export class Game {
               const tapCost = this.altCostTapOffer(player, card, via, face ?? 0);
               return tapCost === null ? { altCost: true } : { altCost: true, tapCost };
             })()
-          : kicked === true && def.kicker?.teamwork !== undefined
+          : kicked === true && (def.kicker?.teamwork !== undefined || def.kicker?.also?.tapUntapped !== undefined)
             ? (() => {
                 const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, true);
                 return tapCost === null ? {} : { tapCost };
@@ -11612,7 +11612,7 @@ export class Game {
     def: CardDefinition,
     costString: string | null,
   ): boolean {
-    if (def.costPerExtraTarget !== null) return true;
+    if (def.costPerExtraTarget !== null || def.additionalCost?.payLifePerTarget !== undefined) return true;
     const anyPerTarget = [...this.state.zones.shared.battlefield, ...this.state.zones.shared.command].some(
       (id) => {
         const source = this.state.objects[id];
@@ -13206,6 +13206,22 @@ export class Game {
       ) {
         return `${player} has too few permanents to sacrifice for ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
       }
+      // "Kicker—Return a creature you control to its owner's hand" (Arctic
+      // Merfolk): that many to return (rule 702.33a, 601.2h).
+      if (
+        kickerAlso.returnToHand !== undefined &&
+        permanentCount(this.state, this.battlefieldMatching(player, { ...kickerAlso.returnToHand.filter, controlledBy: "you" })) <
+          kickerAlso.returnToHand.count
+      ) {
+        return `${player} controls too few permanents to return for ${def.name}'s ${def.kicker?.keyword ?? "kicker"} cost`;
+      }
+    }
+    // "This spell costs 3 life more to cast for each target" (Phyrexian
+    // Purge — rule 601.2f, the targets chosen first, 601.2c): life the
+    // caster can pay (119.4).
+    const lifePerTarget = def.additionalCost?.payLifePerTarget;
+    if (lifePerTarget !== undefined && !this.canPayLife(player, lifePerTarget * targetCount)) {
+      return `${player} can't pay ${lifePerTarget * targetCount} life to cast ${def.name} with ${targetCount} targets`;
     }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
     // spell itself (on its way to the stack, 601.2a) not among them. "You
@@ -13397,7 +13413,9 @@ export class Game {
       if (!this.tapOfferPayable(offer)) {
         return offer.totalPower !== undefined
           ? `${def.name}'s teamwork needs untapped creatures with total power ${offer.totalPower}`
-          : `${def.name}'s alternative cost needs ${offer.count} untapped creatures`;
+          : altCost
+            ? `${def.name}'s alternative cost needs ${offer.count} untapped creatures`
+            : `${def.name}'s kicker needs ${offer.count} untapped permanents to tap`;
       }
       return tap === undefined ? null : this.whyTapChoiceIsWrong(def.name, offer, tap);
     }
@@ -15458,6 +15476,13 @@ export class Game {
     if (def.additionalCost?.payLife !== undefined) {
       this.changeLife(player, -def.additionalCost.payLife);
     }
+    // "This spell costs 3 life more to cast for each target" (Phyrexian
+    // Purge — rule 601.2f), counted over the targets just locked in.
+    if (def.additionalCost?.payLifePerTarget !== undefined) {
+      const chosen = this.state.objects[cardId]?.targets ?? [];
+      const count = distinctTargetCount(chosen, this.targetCopies(chosen));
+      if (count > 0) this.changeLife(player, -def.additionalCost.payLifePerTarget * count);
+    }
     // A pitch spell's "pay 1 life" (Force of Will), part of its alternative
     // cost, paid the same way.
     if (altCost && def.alternativeCost?.payLife !== undefined) {
@@ -15589,7 +15614,10 @@ export class Game {
     // "Return three Islands you control to their owner's hand rather than
     // pay" (Thwart): which, chosen now too, as an activated ability's
     // `returnToHand` cost is.
-    const altReturn = altCost ? def.alternativeCost?.returnToHand : undefined;
+    // A kicker's "return a creature you control to its owner's hand"
+    // (Arctic Merfolk — rule 702.33a) is paid the same way.
+    const kickReturn = kicked !== false && kicked !== 0 ? def.kicker?.also?.returnToHand : undefined;
+    const altReturn = altCost ? def.alternativeCost?.returnToHand : kickReturn;
     if (altReturn !== undefined) {
       this.payReturnToHandCost(player, cardId, { count: altReturn.count ?? 1, filter: altReturn.filter }, cardId);
       const awaiting = this.state.awaiting;
@@ -30228,6 +30256,8 @@ export class Game {
     if (kicked && def.kicker?.teamwork !== undefined) {
       return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
     }
+    // "Kicker—Tap an untapped Vampire you control" (Blood Tribute).
+    if (kicked && def.kicker?.also?.tapUntapped !== undefined) return def.kicker.also.tapUntapped;
     return undefined;
   }
 

@@ -512,6 +512,7 @@ import _poolPeopleOfTheWoods from "../pool/people-of-the-woods.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
 import _poolPhantomWings from "../pool/phantom-wings.js";
 import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
+import _poolPhyrexianPurge from "../pool/phyrexian-purge.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
 import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolPhantomNinja,
     _poolPhantomWings,
     _poolPhyrexianDragonEngine,
+    _poolPhyrexianPurge,
     _poolPhyrexiasCore,
     _poolPileOn,
     _poolPitchstoneWall,
