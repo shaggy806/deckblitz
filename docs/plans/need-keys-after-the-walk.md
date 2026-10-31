@@ -671,6 +671,14 @@ missing. Re-run `--greedy` for Phase 2's order.
   "who discarded the greatest" of `effect:greatest-among-discarded`, `effect:top-card-of-graveyard`,
   the died-together power sums. Next: `mechanic:face-down` (14), `effect:divide-among-targets`
   (14), `cost:put-opponent-exiled-card-into-graveyard` (14).
+- **2026-10-31: the first pair side by side** (two overnight agents in worktrees, cherry-picked)
+  — `mechanic:face-down` (+4 riders: the `"effect"` face-down kind, `turn-face-down`, `faceDown`
+  entry with `FaceDownAs`, manifest `from`, `cant-turn-face-up`; 22 freed, 5 proving cards;
+  Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron and the rest left in
+  `docs/engine-gaps.md`) and `effect:divide-among-targets` (a divided total as any amount, fixed as
+  it's announced, and a reflexive trigger that divides; 8 freed, 6 proving cards). Next:
+  `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification` (14),
+  `effect:each-creature-damages-itself` (14).
 
 ## Rough size
 

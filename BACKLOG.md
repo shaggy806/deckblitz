@@ -279,15 +279,24 @@ section keeps only what to do next.
   survivors-plus-destroyed sum (`thisWay` plus a target-side aggregate, each clamped);
   `effect:top-card-of-graveyard` and `effect:greatest-among-discarded` left open; 9 proving cards —
   Carrion Grub, Emissary Escort, Ambitious Dragonborn, Crackling Drake, Maester Seymour,
-  Ferrafor, Young Yew, Shriekwood Devourer, Vulpine Harvester, Heretic's Punishment).
-  **629 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `mechanic:face-down` (14), `effect:divide-among-targets` (14),
-  `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification` (14).
+  Ferrafor, Young Yew, Shriekwood Devourer, Vulpine Harvester, Heretic's Punishment), and — the
+  first pair built side by side in worktrees — face down by an effect (2026-10-31: the `"effect"`
+  face-down kind, `turn-face-down`, `faceDown` entry with `FaceDownAs`, `manifest`'s `from`,
+  `cant-turn-face-up`; `mechanic:face-down` partial; 22 freed, 5 proving cards — Cyber
+  Conversion, Yedora, Grave Gardener, Tezzeret, Cruel Machinist, Orochi Soul-Reaver, Unable to
+  Scream) and divide-among-targets (2026-10-31: `divided.total` any `EffectAmount`, fixed as it's
+  announced, and a reflexive trigger that divides; 8 freed — Meteor Shower and Shatterskull
+  Smashing still blocked on a total beyond plain X; 6 proving cards — Volcanic Wind, Monstrous
+  Onslaught, Lukka, Bound to Ruin, Ureni, the Song Unending, Orca, Siege Demon, Death to Our
+  Enemies). **659 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next
+  families: `cost:put-opponent-exiled-card-into-graveyard` (14), `cost:ability-cost-modification`
+  (14), `effect:each-creature-damages-itself` (14), `effect:cast-and-activate-restrictions`'s
+  flash grants (14), `effect:search-destination-by-type` (14).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 20 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 19 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
   banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
@@ -353,6 +362,8 @@ there and move this line to `COMPLETED.md`.
 
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
+- **A divided total beyond plain X isn't offered**: Meteor Shower's "X plus 1" and Shatterskull Smashing's "twice X" need the offer to carry the amount, not just `x` (`docs/engine-gaps.md`).
+- **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
 - **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
 - **"Add one mana of the chosen color" with no colour chosen adds any colour**: the rulings say none (Shimmerwilds Growth; Heraldic Banner and Big Apple, 3 a.m. share the fallback). Only an object that never entered can be asked; found by B249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).

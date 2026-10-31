@@ -27,6 +27,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
   name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
   and offer a variant each, its `altCostText` telling them apart.
+- **A divided total beyond plain X isn't offered.** Meteor Shower ("X plus 1") and Shatterskull
+  Smashing ("twice X") divide a total computed from X, but a cast offer's `divide` names only a
+  number or `x`, so the client can't show the total to split. Fix: send the amount (or the total
+  per X) on the offer and have the client compute it.
+- **Face-down leftovers.** Built 2026-10-31: faces down by an effect, manifest from another's
+  library, `cant-turn-face-up`. Still open: Illusionary Mask (cast face down for X); Ugin, the
+  Ineffable and Gustha's Scepter (a face-down exile linked to a token or source); Kozilek, the
+  Broken Reality (manifest from hands with a "manifested this way" count); Ixidron (as it enters,
+  turn others face down); Vesuvan Shapeshifter; Thieving Amalgam (a trigger's "its owner"
+  player); Death in Heaven (an exile linked to the Saga).
 - **Assist isn't offered on a spell cast while something resolves.** Rule 702.132a lets the
   caster of any spell with assist choose a helper, however it's cast. `Game.castSpellActions`
   adds assist variants only for a cast from priority, and `judgeAssist` refuses `via: "effect"`:

@@ -86,6 +86,22 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: face down by an effect** (2026-10-31; `mechanic:face-down` partly,
+  `effect:turn-face-down`, `effect:put-onto-battlefield-face-down`,
+  `effect:manifest-from-other-library`, `static:cant-turn-face-up`) — the `"effect"` face-down
+  kind (rule 708.2a, turned face up only by a morph or disguise cost, 702.37e), `turn-face-down`
+  (708.2b, 712.16), `faceDown` on `put-onto-battlefield` and look-and-choose's `enterAs` with the
+  characteristics an effect lists (`FaceDownAs`, `cards/face-down.ts`), `manifest`'s `from`
+  (another player's library, under the manifesting player, 110.2a), `cant-turn-face-up`; the
+  client's "Face-down" label; 22 freed. Cyber Conversion, Yedora, Grave Gardener, Tezzeret, Cruel
+  Machinist, Orochi Soul-Reaver, Unable to Scream.
+- **Need-keys Phase 2: a divided total read as it's announced** (2026-10-31;
+  `effect:divided-dynamic-total`, `effect:reflexive-divided-damage`) — `divided.total` any
+  `EffectAmount` on spells, activated and triggered abilities, fixed as the division is announced
+  (601.2d, 602.2b, 603.3d; a dies trigger's from last-known power, 608.2h), the group capped at
+  one target per point; `ReflexiveTrigger.divided` (603.12); 8 freed. Volcanic Wind, Monstrous
+  Onslaught, Lukka, Bound to Ruin, Ureni, the Song Unending, Orca, Siege Demon, Death to Our
+  Enemies.
 - **Need-keys Phase 2: the aggregate amount over any set** (2026-10-31; `effect:amount-aggregate`,
   `effect:aggregate-over-graveyard`, `effect:aggregate-of-target-players-permanents`,
   `effect:amount-graveyard-total-mana-value`, `effect:attack-batch-aggregates`,
