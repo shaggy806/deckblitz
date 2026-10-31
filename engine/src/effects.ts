@@ -6462,6 +6462,20 @@ export type EffectSpec =
        */
       readonly kind: "shuffle-graveyard-into-library";
       readonly target: number | PlayerScope;
+      /** Which of the player's zones go in, all in one move (default
+       * `["graveyard"]`): Timetwister's "shuffles their hand and graveyard
+       * into their library" is `["hand", "graveyard"]`, Winds of Change's
+       * "the cards from their hand" `["hand"]`, and Sway of the Stars' "all
+       * permanents they own" adds `"permanents"` — every permanent on the
+       * battlefield the player owns, whoever controls it (a token ceases to
+       * exist in the library, rule 111.7; a phased-out one isn't there,
+       * 702.26b). */
+      readonly zones?: readonly ("hand" | "graveyard" | "permanents")[];
+      /** "…then draws that many cards" (Winds of Change, The Great
+       * Aurora): once every library is shuffled, each player draws as many
+       * cards as they put into their library this way — a token counting
+       * (The Great Aurora's ruling), each player in turn order. */
+      readonly drawThatMany?: true;
     }
   | {
       /** Surveil `amount` (rule 701.43) — look at the top N, put any number
@@ -7689,8 +7703,10 @@ export interface EffectApi {
   grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PtDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
-  /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}. */
-  shuffleGraveyardIntoLibrary(target: TargetRef): void;
+  /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
+   * many objects the player put into their library (a token stack each
+   * token in it). */
+  shuffleZonesIntoLibrary(target: TargetRef, zones: readonly ("hand" | "graveyard" | "permanents")[]): number;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
   skipNextUntap(target: TargetRef, filter: CardFilter): void;
   /** See the `"skip-untap-step"` {@link EffectSpec}: one more of `player`'s
@@ -11314,9 +11330,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "shuffle-graveyard-into-library": {
       const players = scopedOrTargetedPlayers(spec.target, ctx);
+      const moved = new Map<PlayerId, number>();
       ctx.simultaneously(() => {
-        for (const target of players) ctx.shuffleGraveyardIntoLibrary(target);
+        for (const target of players) {
+          const n = ctx.shuffleZonesIntoLibrary(target, spec.zones ?? ["graveyard"]);
+          if (target.kind === "player") moved.set(target.player, n);
+        }
       });
+      if (spec.drawThatMany === true) {
+        for (const [player, n] of moved) if (n > 0) ctx.draw(player, n);
+      }
       return;
     }
     case "exile-from-library": {

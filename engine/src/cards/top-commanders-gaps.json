@@ -664,7 +664,11 @@
   "effect:target-must-block-source-this-turn",
   "static:must-block-each-combat",
   "effect:modal-repeat-modes",
-  "effect:mode-not-chosen-this-turn"
+  "effect:mode-not-chosen-this-turn",
+  "effect:shuffle-hand-and-graveyard-into-library",
+  "effect:shuffle-hand-draw-that-many",
+  "effect:shuffle-hand-and-permanents-draw-that-many",
+  "effect:shuffle-permanents-owned-into-library"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

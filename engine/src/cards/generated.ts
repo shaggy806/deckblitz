@@ -23668,6 +23668,7 @@ import _poolTimelessWitness from "./pool/timeless-witness.js";
 import _poolTimelineInquiry from "./pool/timeline-inquiry.js";
 import _poolTimelyHordemate from "./pool/timely-hordemate.js";
 import _poolTimelyInterference from "./pool/timely-interference.js";
+import _poolTimetwister from "./pool/timetwister.js";
 import _poolTimidDrake from "./pool/timid-drake.js";
 import _poolTimidShieldbearer from "./pool/timid-shieldbearer.js";
 import _poolTiminYouthfulGeist from "./pool/timin-youthful-geist.js";
@@ -25889,6 +25890,7 @@ import _poolWhirlingCatapult from "./pool/whirling-catapult.js";
 import _poolWhirlingStrike from "./pool/whirling-strike.js";
 import _poolWhirlpoolDrake from "./pool/whirlpool-drake.js";
 import _poolWhirlpoolRider from "./pool/whirlpool-rider.js";
+import _poolWhirlpoolWarrior from "./pool/whirlpool-warrior.js";
 import _poolWhirlpoolWhelm from "./pool/whirlpool-whelm.js";
 import _poolWhirlwindAdept from "./pool/whirlwind-adept.js";
 import _poolWhirlwindOfThought from "./pool/whirlwind-of-thought.js";
@@ -26071,6 +26073,7 @@ import _poolWindreaperFalcon from "./pool/windreaper-falcon.js";
 import _poolWindriderEel from "./pool/windrider-eel.js";
 import _poolWindriderPatrol from "./pool/windrider-patrol.js";
 import _poolWindriderWizard from "./pool/windrider-wizard.js";
+import _poolWindsOfChange from "./pool/winds-of-change.js";
 import _poolWindsOfQalSisma from "./pool/winds-of-qal-sisma.js";
 import _poolWindsOfRath from "./pool/winds-of-rath.js";
 import _poolWindsOfRebuke from "./pool/winds-of-rebuke.js";
@@ -50988,6 +50991,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimelineInquiry,
   _poolTimelyHordemate,
   _poolTimelyInterference,
+  _poolTimetwister,
   _poolTimidDrake,
   _poolTimidShieldbearer,
   _poolTiminYouthfulGeist,
@@ -53209,6 +53213,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhirlingStrike,
   _poolWhirlpoolDrake,
   _poolWhirlpoolRider,
+  _poolWhirlpoolWarrior,
   _poolWhirlpoolWhelm,
   _poolWhirlwindAdept,
   _poolWhirlwindOfThought,
@@ -53391,6 +53396,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWindriderEel,
   _poolWindriderPatrol,
   _poolWindriderWizard,
+  _poolWindsOfChange,
   _poolWindsOfQalSisma,
   _poolWindsOfRath,
   _poolWindsOfRebuke,
@@ -78321,6 +78327,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timeline-inquiry": _poolTimelineInquiry,
   "pool/timely-hordemate": _poolTimelyHordemate,
   "pool/timely-interference": _poolTimelyInterference,
+  "pool/timetwister": _poolTimetwister,
   "pool/timid-drake": _poolTimidDrake,
   "pool/timid-shieldbearer": _poolTimidShieldbearer,
   "pool/timin-youthful-geist": _poolTiminYouthfulGeist,
@@ -80542,6 +80549,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whirling-strike": _poolWhirlingStrike,
   "pool/whirlpool-drake": _poolWhirlpoolDrake,
   "pool/whirlpool-rider": _poolWhirlpoolRider,
+  "pool/whirlpool-warrior": _poolWhirlpoolWarrior,
   "pool/whirlpool-whelm": _poolWhirlpoolWhelm,
   "pool/whirlwind-adept": _poolWhirlwindAdept,
   "pool/whirlwind-of-thought": _poolWhirlwindOfThought,
@@ -80724,6 +80732,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/windrider-eel": _poolWindriderEel,
   "pool/windrider-patrol": _poolWindriderPatrol,
   "pool/windrider-wizard": _poolWindriderWizard,
+  "pool/winds-of-change": _poolWindsOfChange,
   "pool/winds-of-qal-sisma": _poolWindsOfQalSisma,
   "pool/winds-of-rath": _poolWindsOfRath,
   "pool/winds-of-rebuke": _poolWindsOfRebuke,

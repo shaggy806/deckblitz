@@ -1,9 +1,7 @@
 import { defineCard } from "../define.js";
 
-// Apocalypse (APC). Every card in the hand goes into the library (Teferi's
-// Puzzle Box's forced all-cards pick — the order is moot, as the library is
-// shuffled at once), then that many are drawn: the cards that left the hand
-// this way, so none when the hand was empty.
+// Apocalypse (APC). Every card in the hand goes into the library, which is
+// shuffled, then that many are drawn — none when the hand was empty.
 const TEXT =
   "When this creature enters, shuffle the cards from your hand into your library, then draw that many cards.";
 
@@ -20,21 +18,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: {
-        kind: "sequence",
-        effects: [
-          {
-            kind: "look-and-choose",
-            zone: "hand",
-            min: { cardsInHand: "you" },
-            max: { cardsInHand: "you" },
-            destination: "library-bottom",
-            leftover: "stay",
-          },
-          { kind: "shuffle-library" },
-          { kind: "draw", amount: { thisWay: "put-on-bottom", who: "you" } },
-        ],
-      },
+      effect: { kind: "shuffle-graveyard-into-library", target: "you", zones: ["hand"], drawThatMany: true },
       resolve: null,
       text: TEXT,
     },

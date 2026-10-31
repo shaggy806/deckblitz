@@ -1299,6 +1299,27 @@ export function parseSentence(sentence, ctx) {
     return { kind: "draw", amount: amount(m[2]), target: slot(m[1]) };
   }
   if ((m = re(`each player draws ${N} cards?`).exec(s))) return { kind: "draw", amount: amount(m[1]), who: "each-player" };
+  // "Each player shuffles their hand and graveyard into their library" (rule
+  // 701.24a): the zones named, all in one move; "the cards from their hand
+  // …, then draws that many cards" draws back what each put in.
+  if (
+    (m = re(
+      `(each player shuffles|shuffle) (?:the cards from )?(?:their|your) (hand and graveyard|hand, graveyard, and all permanents (?:they|you) own|hand|graveyard) into (?:their|your) library(, then draws? that many cards)?(?:, then draws? ${N} cards)?`,
+    ).exec(s))
+  ) {
+    const zones = { "hand and graveyard": ["hand", "graveyard"], hand: ["hand"], graveyard: ["graveyard"] }[m[2].toLowerCase()] ??
+      ["hand", "graveyard", "permanents"];
+    const who = m[1].toLowerCase() === "shuffle" ? "you" : "each-player";
+    const shuffle = {
+      kind: "shuffle-graveyard-into-library",
+      target: who,
+      ...(zones.length === 1 && zones[0] === "graveyard" ? {} : { zones }),
+      ...(m[3] !== undefined ? { drawThatMany: true } : {}),
+    };
+    if (m[4] === undefined) return shuffle;
+    const draw = { kind: "draw", amount: amount(m[4]), ...(who === "you" ? {} : { who }) };
+    return { kind: "sequence", effects: [shuffle, draw] };
+  }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
   if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };

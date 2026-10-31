@@ -2262,6 +2262,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.castModal.modes[2].effect).toEqual({ kind: "gain-life", amount: 5 });
   });
 
+  it("'shuffles their hand and graveyard into their library' (rule 701.24a): the zones, then the draw", () => {
+    const twister = face("Each player shuffles their hand and graveyard into their library, then draws seven cards.", "Sorcery");
+    expect(twister.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "shuffle-graveyard-into-library", target: "each-player", zones: ["hand", "graveyard"] },
+        { kind: "draw", amount: 7, who: "each-player" },
+      ],
+    });
+    const winds = face("Each player shuffles the cards from their hand into their library, then draws that many cards.", "Sorcery");
+    expect(winds.effect).toEqual({ kind: "shuffle-graveyard-into-library", target: "each-player", zones: ["hand"], drawThatMany: true });
+    const nexus = face("Each player shuffles their graveyard into their library.", "Instant");
+    expect(nexus.effect).toEqual({ kind: "shuffle-graveyard-into-library", target: "each-player" });
+  });
+
   it("buyback (rule 702.27): a kicker whose cast returns to its owner's hand", () => {
     const spell = face(
       "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.",

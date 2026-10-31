@@ -773,6 +773,7 @@ import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolThwartTheEnemy from "../pool/thwart-the-enemy.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
+import _poolTimetwister from "../pool/timetwister.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTinStreetHooligan from "../pool/tin-street-hooligan.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
@@ -1695,6 +1696,7 @@ const shard: CardShard = {
     _poolThunderingTanadon,
     _poolThwartTheEnemy,
     _poolTigerSharkAbyssalHunter,
+    _poolTimetwister,
     _poolTimidShieldbearer,
     _poolTinStreetHooligan,
     _poolTitheDrinker,

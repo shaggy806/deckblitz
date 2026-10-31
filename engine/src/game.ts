@@ -24741,7 +24741,7 @@ export class Game {
       grantBlockAdditional: (target, amount, duration) =>
         this.grantBlockAdditional(target, amount, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
-      shuffleGraveyardIntoLibrary: (target) => this.shuffleGraveyardIntoLibraryByEffect(target),
+      shuffleZonesIntoLibrary: (target, zones) => this.shuffleZonesIntoLibraryByEffect(target, zones),
       skipNextUntap: (target, filter) => {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
         if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
@@ -35443,15 +35443,34 @@ export class Game {
   }
 
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: the
-   * player's whole graveyard into their library as one leave, then the
-   * library shuffled (rule 701.24a), the graveyard empty or not. */
-  private shuffleGraveyardIntoLibraryByEffect(target: TargetRef): void {
-    if (target.kind !== "player" || this.state.players[target.player] === undefined) return;
+   * player's whole graveyard — and hand, and the permanents they own, as
+   * `zones` says — into their library as one move, then the library
+   * shuffled (rule 701.24a), the zones empty or not. How many objects went
+   * in, a token stack each token in it. */
+  private shuffleZonesIntoLibraryByEffect(
+    target: TargetRef,
+    zones: readonly ("hand" | "graveyard" | "permanents")[],
+  ): number {
+    if (target.kind !== "player" || this.state.players[target.player] === undefined) return 0;
     const player = target.player;
-    this.withGraveyardLeaveBatch(() => {
-      for (const id of [...this.state.zones.perPlayer[player].graveyard]) this.moveObject(id, "library");
+    let moved = 0;
+    const move = (id: ObjectId): void => {
+      const count = this.state.objects[id]?.stackCount ?? 1;
+      if (this.moveObject(id, "library")) moved += count;
+    };
+    this.withLeaveBatch(() => {
+      this.withGraveyardLeaveBatch(() => {
+        if (zones.includes("hand")) for (const id of [...this.state.zones.perPlayer[player].hand]) move(id);
+        if (zones.includes("graveyard")) for (const id of [...this.state.zones.perPlayer[player].graveyard]) move(id);
+        if (zones.includes("permanents")) {
+          for (const id of [...this.state.zones.shared.battlefield]) {
+            if (this.state.objects[id]?.owner === player) move(id);
+          }
+        }
+      });
     });
     this.shuffleLibraryOf(player);
+    return moved;
   }
 
   private millByEffect(target: TargetRef, amount: number): void {

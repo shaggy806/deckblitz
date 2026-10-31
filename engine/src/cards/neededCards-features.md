@@ -321,6 +321,20 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Shuffling a hand, graveyard and permanents in — built 2026-10-30
+
+The need-keys Phase 2 family `effect:shuffle-library`'s top unit, features
+only. `shuffle-graveyard-into-library` takes **`zones`** — hand, graveyard,
+and the permanents a player owns (whoever controls them; a phased-out one
+isn't there) — all in one move, then the shuffle (rule 701.24a); and
+**`drawThatMany`**, "then draws that many cards": each player draws what
+they put in, a token counting (The Great Aurora's ruling). Whirlpool Rider
+and Whirlpool Drake moved to it from a forced look-and-choose of the whole
+hand. Keys: shuffle-hand-and-graveyard-into-library,
+shuffle-hand-draw-that-many, shuffle-hand-and-permanents-draw-that-many,
+shuffle-permanents-owned-into-library. Worldpurge's "keeps up to seven" is
+still open.
+
 ### A mode chosen more than once — built 2026-10-30
 
 The need-keys Phase 2 family `effect:modal-repeat-modes`, features only.
