@@ -339,6 +339,19 @@ export interface AbilityCost {
    */
   readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
   /**
+   * Put `count` cards an opponent owns from exile into their owners'
+   * graveyards as part of the cost — a processor's "{2}{U}, Put a card an
+   * opponent owns from exile into that player's graveyard: Tap target
+   * creature" (Cryptic Cruiser, Void Attendant). Which ones is chosen as the
+   * cost is paid, once the ability is on the stack (rules 602.2b, 601.2h —
+   * nobody can respond in between, its ruling), with a `choose-from-zone`
+   * (`destination: "graveyard"`); cards of different opponents may be
+   * chosen, and a face-down one is taken from its group at random (the
+   * rulings). Gates activation on there being that many (rule 118.3). Not on
+   * a mana ability, nor beside another cost that asks.
+   */
+  readonly putFromExile?: number;
+  /**
    * Reveal `count` cards from your hand matching `filter` as part of the
    * cost — the Coldsnap Martyrs' "{1}, Reveal X white cards from your hand,
    * Sacrifice this creature" (rule 701.20a). `count: "x"` is that X,

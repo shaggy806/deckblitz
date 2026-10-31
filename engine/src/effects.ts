@@ -1308,7 +1308,15 @@ export type ThisWayKind =
    * `who` and this
    * with `filter: { notTypes: ["land"] }`. Counted by the player who
    * revealed them. */
-  | "revealed";
+  | "revealed"
+  /** Cards a player picked in a choice from a zone (a `look-and-choose`'s
+   * picks — the `cards-chosen-from-zone` event), wherever they then went:
+   * a processor's "you may put a card an opponent owns from exile into that
+   * player's graveyard. **If you do**, …" holds though a replacement exiled
+   * the card again instead (Rest in Peace — the processors' ruling: "you can
+   * still put an exiled card into its opponent's graveyard"). Counted by the
+   * player who chose. */
+  | "chosen";
 
 export type PlayerScope =
   | "each-player"
@@ -6997,8 +7005,26 @@ export type EffectSpec =
        * target creature card from that player's graveyard onto the
        * battlefield under your control" (they enter simultaneously, its
        * ruling). Ones from another player's graveyard enter under the
-       * chooser's control, as `"graveyards"`' do. */
-      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets";
+       * chooser's control, as `"graveyards"`' do.
+       * `"exile"` is the exile zone, every player's cards in it — or, with
+       * `from`, only the cards that player owns (rule 108.3): the processors'
+       * "put a card an opponent owns from exile into that player's
+       * graveyard" (`filter: { ownedBy: "opponent" }`, `destination:
+       * "graveyard"` — each card to its owner's), Oblivion Sower's "put any
+       * number of land cards that player owns from exile onto the
+       * battlefield under your control" (`from: { target: 0 }`; under the
+       * chooser's control, as `"graveyards"`' are). Only the cards that may
+       * be chosen are shown. A face-down card there has no characteristics
+       * (rule 406.3a), so it's choosable only when `filter` asks nothing
+       * but its owner, and then by its group, at random (the
+       * `choose-from-zone` decision's `faceDownGroups`). */
+      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile";
+      /** All of `min` or nothing: with fewer than `min` cards that may be
+       * chosen, nothing is asked and nothing moves — a cost can't be paid in
+       * part (rule 118.3), so "you may put **two** cards your opponents own
+       * from exile into their owners' graveyards. If you do, …" (Ulamog's
+       * Nullifier) with only one there puts none. */
+      readonly needsMin?: true;
       /** How deep into a library to look. An amount, so it can be read at
        * resolution: Gishath, Sun's Avatar's "reveal **that many** cards" is
        * `{ triggerValue: true }`, the combat damage it dealt. */
@@ -8949,7 +8975,7 @@ export interface EffectApi {
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   lookAndChoose(
     /** `{ cards }` — the look-and-choose's `"targets"`, already resolved. */
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | { readonly cards: readonly ObjectId[] },
+    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
     count: number | undefined,
     min: number,
     max: number,
@@ -8973,6 +8999,8 @@ export interface EffectApi {
     withCounters?: { readonly kind: string; readonly amount: number },
     /** See `look-and-choose`'s `unlinked`. */
     unlinked?: boolean,
+    /** See `look-and-choose`'s `needsMin`. */
+    needsMin?: boolean,
   ): void;
 }
 
@@ -13981,6 +14009,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         picker,
         spec.withCounters,
         spec.unlinked === true,
+        spec.needsMin === true,
       );
       return;
     }

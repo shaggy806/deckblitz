@@ -251,6 +251,7 @@ import {
   fixChosenColor,
   manaValueOfObject,
   matchesFilter,
+  ownerOnly,
   printedManaCost,
   supertypesOf,
   weightedMatches,
@@ -7739,6 +7740,9 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-from-zone") {
       throw new Error("unreachable: whyCannotChooseFromZone should have caught this");
     }
+    // A face-down card in exile picked is its group picked: the card is
+    // taken from that group at random (a processor — its ruling).
+    if (awaiting.faceDownGroups !== undefined) chosen = this.drawFromFaceDownGroups(chosen, awaiting.faceDownGroups);
     // A behold (rule 701.4a) moves nothing by `destination`: its own answer.
     if (awaiting.behold !== undefined) {
       this.applyBehold(player, chosen, awaiting);
@@ -8011,6 +8015,9 @@ export class Game {
     leftover: readonly ObjectId[],
     toCommandZone: ReadonlySet<ObjectId> = new Set(),
   ): LibraryOrder {
+    // The cards this choice exiles face down are one group of them (what
+    // exiled them and when — the processors' ruling).
+    const faceDownGroup = this.state.eventSeq;
     // "You choose a card from it. That player discards that card" (Duress —
     // the `discard-chosen` effect): the hand's owner discards it, whoever
     // chose (rule 701.9a), so "whenever a player discards" sees them.
@@ -8055,7 +8062,7 @@ export class Game {
         const since = this.state.eventSeq;
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
-          object.exiledFaceDown = { lookers: [player] };
+          object.exiledFaceDown = { lookers: [player], group: faceDownGroup };
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           // "You may play that card for as long as it remains exiled"
           // (Praetor's Grasp): a permission dies with any move, so after it.
@@ -13064,6 +13071,12 @@ export class Game {
       ) {
         return `${player} has too few cards in their graveyard to cast ${def.name}`;
       }
+      // "Put a card an opponent owns from exile into that player's
+      // graveyard" (Processor Assault): enough of them there (rule 118.3).
+      const putFromExile = def.additionalCost.putFromExile;
+      if (putFromExile !== undefined && this.putFromExileCandidateCount(player, cardId) < putFromExile) {
+        return `${player}'s opponents own too few cards in exile to cast ${def.name}`;
+      }
       const payLife = def.additionalCost.payLife;
       // Rule 118.4 — a player may pay any life they have, down to 0.
       if (payLife !== undefined && !this.canPayLife(player, payLife)) {
@@ -15323,6 +15336,12 @@ export class Game {
     if (graveyardExile !== undefined) {
       this.withDecisionSource(cardId, () => this.payGraveyardExileCost(player, cardId, graveyardExile, priorityTo));
     }
+    // "Put a card an opponent owns from exile into that player's graveyard"
+    // (Processor Assault): which, chosen now too (601.2h).
+    const putFromExile = def.additionalCost?.putFromExile;
+    if (putFromExile !== undefined) {
+      this.withDecisionSource(cardId, () => this.payPutFromExileCost(player, cardId, putFromExile, priorityTo));
+    }
     if (beholdCost !== undefined) {
       const onStack = this.state.objects[cardId];
       this.withDecisionSource(cardId, () =>
@@ -17278,6 +17297,28 @@ export class Game {
         return `${player} lacks the materials to craft with ${ability.cost.craft.text}`;
       }
     }
+    if (ability.cost.putFromExile !== undefined) {
+      // Chosen once the ability is on the stack, as a graveyard exile is —
+      // so never on a mana ability, nor beside another cost that asks.
+      if (
+        isManaAbility(ability) ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        ability.cost.reveal !== undefined ||
+        costReturn !== undefined ||
+        ability.cost.blight !== undefined ||
+        ability.cost.collectEvidence !== undefined ||
+        ability.cost.craft !== undefined ||
+        chosenCounterCost(ability.cost)
+      ) {
+        return `${def.name}'s ability can't put cards from exile into a graveyard beside that cost`;
+      }
+      // Rule 118.3: not enough such cards, no paying it.
+      if (this.putFromExileCandidateCount(player, sourceId) < ability.cost.putFromExile) {
+        return `${player}'s opponents own too few cards in exile to pay ${def.name}'s cost`;
+      }
+    }
     return null;
   }
 
@@ -17768,6 +17809,12 @@ export class Game {
         this.payGraveyardExileCost(player, sourceId, { count, ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}) }),
       );
     }
+    // A processor's "Put a card an opponent owns from exile into that
+    // player's graveyard" likewise.
+    const costPutFromExile = ability.cost.putFromExile;
+    if (costPutFromExile !== undefined) {
+      this.withDecisionSource(sourceId, () => this.payPutFromExileCost(player, sourceId, costPutFromExile));
+    }
     // "Reveal X white cards from your hand" likewise: which, chosen now
     // (rules 602.2b, 601.2h); they stay in the hand.
     const costReveal = ability.cost.reveal;
@@ -17901,6 +17948,115 @@ export class Game {
       leftover: "stay",
       priorityTo,
     };
+  }
+
+  /**
+   * The cards in exile a choice may take — a `look-and-choose`'s `"exile"`
+   * zone, a processor's `putFromExile` cost: the ones `owner` owns when given
+   * (rule 108.3), else every player's, matching `filter` read from
+   * `chooser`'s side. A token there has ceased to exist (rule 111.7). A
+   * face-down card — exiled face down, or foretold (rules 406.3, 702.144a)
+   * — has no characteristics (406.3a), so it's one only when `filter` asks
+   * nothing but its owner; those also come back grouped by what exiled them
+   * face down and when, since one is chosen by its group and taken from it
+   * at random (the processors' ruling).
+   */
+  private exileChoiceCandidates(
+    chooser: PlayerId,
+    filter: CardFilter | undefined,
+    owner?: PlayerId,
+    source?: ObjectId,
+  ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
+    const eligible: ObjectId[] = [];
+    const groups = new Map<string, ObjectId[]>();
+    for (const id of this.state.zones.shared.exile) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.isToken || (owner !== undefined && object.owner !== owner)) continue;
+      const faceDown = object.exiledFaceDown !== undefined || object.foretold === true;
+      if (faceDown && filter !== undefined && !ownerOnly(filter)) continue;
+      if (!this.matchesZoneChoiceFilter(id, filter, chooser, source)) continue;
+      eligible.push(id);
+      if (faceDown) {
+        const key = this.faceDownExileGroup(id);
+        groups.set(key, [...(groups.get(key) ?? []), id]);
+      }
+    }
+    return { eligible, faceDownGroups: [...groups.values()] };
+  }
+
+  /** Which face-down group in exile a card is in: the cards one instruction
+   * exiled face down at one time (`exiledFaceDown.group`), else the card
+   * alone — a foretold card, foretold by its own special action. */
+  private faceDownExileGroup(id: ObjectId): string {
+    const group = this.state.objects[id]?.exiledFaceDown?.group;
+    return group !== undefined ? `g${group}` : `c${id}`;
+  }
+
+  /**
+   * A choice's picks with every face-down one (`faceDownGroups`) carried out
+   * on a card of its group at random — choosing a face-down card in exile is
+   * choosing its group, then a card from within it at random (the
+   * processors' ruling) — each pick a different card.
+   */
+  private drawFromFaceDownGroups(
+    chosen: readonly ObjectId[],
+    groups: readonly (readonly ObjectId[])[],
+  ): ObjectId[] {
+    const taken = new Set<ObjectId>();
+    let drew = false;
+    const out = chosen.map((id) => {
+      const group = groups.find((g) => g.includes(id));
+      if (group === undefined) return id;
+      const pool = group.filter((c) => !taken.has(c));
+      const pick = pool[Math.min(pool.length - 1, Math.floor(this.rng.next() * pool.length))];
+      drew = true;
+      taken.add(pick);
+      return pick;
+    });
+    if (drew) this.state.rngState = this.rng.seed;
+    return out;
+  }
+
+  /**
+   * Pay a "put N cards an opponent owns from exile into that player's
+   * graveyard" cost — a processor's (`AbilityCost.putFromExile`, a spell's
+   * `additionalCost.putFromExile`) — as the spell or ability goes on the
+   * stack (rules 601.2h, 602.2b): the player picks which with a
+   * `choose-from-zone` (`destination: "graveyard"`, each to its owner's),
+   * cards of different opponents allowed, and gets priority back once it's
+   * paid (117.3c). No more such cards than that is no choice.
+   */
+  private payPutFromExileCost(player: PlayerId, source: ObjectId, count: number, priorityTo: PlayerId = player): void {
+    if (count <= 0) return;
+    const { eligible, faceDownGroups } = this.exileChoiceCandidates(player, { ownedBy: "opponent" }, undefined, source);
+    if (eligible.length <= count) {
+      this.withGraveyardEnterBatch(() => {
+        for (const id of eligible) this.moveObject(id, "graveyard");
+      });
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: count,
+      max: count,
+      destination: "graveyard",
+      leftover: "stay",
+      prompt:
+        count === 1
+          ? "Choose a card an opponent owns in exile to put into its owner's graveyard"
+          : `Choose ${count} cards your opponents own in exile to put into their owners' graveyards`,
+      ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
+      priorityTo,
+    };
+  }
+
+  /** How many cards an opponent of `player` owns in exile — what a
+   * `putFromExile` cost can take (rule 118.3: no paying it without enough). */
+  private putFromExileCandidateCount(player: PlayerId, source: ObjectId): number {
+    return this.exileChoiceCandidates(player, { ownedBy: "opponent" }, undefined, source).eligible.length;
   }
 
   /** Pay an activated ability's `returnToHand` cost: every permanent that
@@ -18242,6 +18398,7 @@ export class Game {
           ability.cost.discard !== undefined ||
           ability.cost.returnToHand !== undefined ||
           ability.cost.exileFromGraveyard !== undefined ||
+          ability.cost.putFromExile !== undefined ||
           ability.cost.returnSelfToHand === true ||
           ability.cost.exertSelf === true ||
           ability.exhaust === true ||
@@ -28096,7 +28253,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -28136,6 +28293,7 @@ export class Game {
           // player's library (`from`), the one putting them there is this
           // effect's controller, under whose control they enter (rule 110.2a).
           chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
+          needsMin === true,
         );
       },
     };
@@ -28162,7 +28320,7 @@ export class Game {
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   private beginZoneChoice(
     player: PlayerId,
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | { readonly cards: readonly ObjectId[] },
+    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
     count: number | undefined,
     min: number,
     max: number,
@@ -28186,7 +28344,52 @@ export class Game {
     /** Chosen cards bound for the battlefield enter under this player's
      * control — the one putting them there, from another's library. */
     enterUnder?: PlayerId,
+    /** All of `min` or nothing — see `look-and-choose`'s `needsMin`. */
+    needsMin = false,
   ): void {
+    // The exile zone (a processor, Oblivion Sower): only what may be
+    // chosen is shown — the cards `player` owns when someone else is
+    // choosing from them ("land cards that player owns"), else everyone's
+    // that `filter` takes; a face-down one by its group, at random.
+    if (zone === "exile") {
+      const chooser = picker ?? player;
+      const { eligible, faceDownGroups } = this.exileChoiceCandidates(
+        chooser,
+        filter,
+        picker !== undefined ? player : undefined,
+        source,
+      );
+      if (eligible.length === 0 || (needsMin && eligible.length < min)) return;
+      const most = Math.min(max, eligible.length);
+      const cards = most === 1 ? "a card" : min >= most ? `${most} cards` : `up to ${most} cards`;
+      // The client's own title would say "your graveyard": these go to
+      // their owners'.
+      const prompt =
+        destination === "graveyard"
+          ? `Choose ${cards} in exile to put into ${most === 1 ? "its owner's graveyard" : "their owners' graveyards"}`
+          : destination === "battlefield"
+            ? `Choose ${cards} in exile to put onto the battlefield under your control`
+            : undefined;
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player: chooser,
+        ids: eligible,
+        eligible,
+        min: Math.min(min, eligible.length),
+        max: most,
+        destination,
+        leftover: "stay",
+        ...(prompt !== undefined ? { prompt } : {}),
+        ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
+        // "Onto the battlefield under your control" (rule 110.2a).
+        ...(destination === "battlefield" ? { enterUnder: enterUnder ?? chooser } : {}),
+        ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
+        ...(then?.effect !== undefined ? { then: then.effect } : {}),
+        ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
+        ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
+      };
+      return;
+    }
     // Every graveyard, in turn order — all public (Necromantic Selection).
     // Or the resolving ability's own target cards, still in a graveyard
     // (Sepulchral Primordial).
@@ -29125,7 +29328,7 @@ export class Game {
     // it is — its owner included.
     if (opts.faceDown === true) {
       const exiled = taken.filter((id) => this.state.objects[id]?.zone === "exile");
-      for (const id of exiled) this.state.objects[id].exiledFaceDown = { lookers: [controller] };
+      for (const id of exiled) this.state.objects[id].exiledFaceDown = { lookers: [controller], group: since };
       this.forgetStints(exiled, since);
     }
 
@@ -41551,7 +41754,7 @@ export class Game {
       if (link === undefined || faceDown === undefined) continue;
       if (link.source !== permanent || link.zoneChangeCount !== stint) continue;
       if (!faceDown.lookers.includes(controller)) {
-        card.exiledFaceDown = { lookers: [...faceDown.lookers, controller] };
+        card.exiledFaceDown = { ...faceDown, lookers: [...faceDown.lookers, controller] };
       }
     }
   }

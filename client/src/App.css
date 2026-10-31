@@ -4162,6 +4162,21 @@
 .zone-viewer-card {
   position: relative;
 }
+/* A face-down card in exile a choice may take (a processor's, by its group,
+   at random): its back is the button, outlined like a highlighted tile, and
+   says so once picked. Written after the rule above so its padding wins. */
+.zone-viewer-card > button.card-back.zv-hidden-pick {
+  padding: 0;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.zone-viewer-card > button.card-back.zv-hidden-pick.picked {
+  color: var(--text);
+  outline-width: 3px;
+}
 /* Where the card is, when a choice spans zones (behold: hand or battlefield). */
 .zone-viewer-card > .zv-zone {
   display: block;

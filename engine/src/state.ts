@@ -1060,8 +1060,12 @@ export interface GameObject {
    * of that player's library, then exile it face down" — Edward Kenway), who
    * may go on looking for as long as it stays exiled. Its owner isn't one
    * unless named. Cleared on any zone change: it's turned face up as it
-   * leaves exile. */
-  exiledFaceDown?: { readonly lookers: readonly PlayerId[] };
+   * leaves exile. `group` says which cards were exiled face down by the same
+   * instruction at the same time (the event sequence number it began at):
+   * a processor choosing a face-down card chooses one of these groups and
+   * takes a card from it at random (the processors' ruling — see
+   * {@link faceDownExileGroup}). */
+  exiledFaceDown?: { readonly lookers: readonly PlayerId[]; readonly group?: number };
   /** A **face-down permanent** (rule 708): manifested (701.40) or cloaked
    * (701.58). It has no characteristics but a face-down 2/2's — no name, no
    * text, no subtypes, no mana cost, and ward {2} if cloaked (708.2a) — which
@@ -2903,6 +2907,18 @@ export type AwaitingDecision =
       /** Battlefield-bound cards enter under this player's control — a
        * `look-and-choose` over every graveyard (Necromantic Selection). */
       readonly enterUnder?: PlayerId;
+      /**
+       * Face-down cards in exile among the candidates (rule 406.3), grouped
+       * by what exiled them face down and when (`faceDownExileGroup`): a
+       * processor's "put a card an opponent owns from exile into that
+       * player's graveyard" may take one, but choosing one is choosing its
+       * group, and the card is then taken from that group **at random** (the
+       * processors' ruling). Each group's cards are all in `eligible`, hidden
+       * from a chooser who may not look at them; a pick of any of them is
+       * carried out on a random card of its group not already taken
+       * (`Game.applyChooseFromZone`).
+       */
+      readonly faceDownGroups?: readonly (readonly ObjectId[])[];
       /** Battlefield-bound cards enter attached to this permanent — a
        * `search-library`'s `attachedToSource` (Light-Paws, Emperor's Voice).
        * One that can't be attached to it stays where it is; `null`, nothing

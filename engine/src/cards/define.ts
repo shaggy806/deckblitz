@@ -3083,6 +3083,15 @@ export interface CardDefinition {
      */
     readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
     /**
+     * "As an additional cost to cast this spell, **put a card an opponent
+     * owns from exile into that player's graveyard**" (Processor Assault;
+     * rule 601.2b): castable only with `count` such cards in exile, which
+     * ones chosen as the cost is paid, once the spell is on the stack
+     * (601.2h) — the same payment as an activated ability's
+     * `AbilityCost.putFromExile`. Exactly `count`, never more (its ruling).
+     */
+    readonly putFromExile?: number;
+    /**
      * A **choice** between whole costs, of which the caster pays exactly one
      * (Bitter Triumph: "discard a card **or** pay 3 life").
      *
@@ -4373,6 +4382,7 @@ interface CardDraft {
     readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
     readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+    readonly putFromExile?: number;
     readonly options?: readonly AdditionalCostOption[];
   };
   splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string };

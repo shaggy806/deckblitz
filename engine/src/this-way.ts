@@ -182,6 +182,13 @@ export function thisWayEntries(
           add(event.object, fromBattlefield ? leftBy(event.object) : event.owner, fromBattlefield);
         }
         break;
+      case "chosen":
+        // Whoever chose them, wherever they went (a replacement may have
+        // sent them somewhere else).
+        if (event.type === "cards-chosen-from-zone") {
+          for (const object of event.objects) add(object, event.player, false);
+        }
+        break;
       case "put-into-graveyard":
         // Whose graveyard: its owner's, wherever it came from.
         if (event.type === "cards-put-into-graveyard") {

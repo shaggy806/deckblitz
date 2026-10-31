@@ -2042,7 +2042,7 @@ export interface AggregateReads {
 
 /** Whether a filter asks about nothing but whose a card is — what a card
  * exiled face down (no characteristics, rule 406.3a) can still match. */
-function ownerOnly(filter: CardFilter): boolean {
+export function ownerOnly(filter: CardFilter): boolean {
   return Object.keys(filter).every((k) => k === "ownedBy");
 }
 

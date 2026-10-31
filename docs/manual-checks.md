@@ -5867,3 +5867,13 @@ engine terms. A second thing to check is a second test.
 ### Amped Raptor: casting the exiled card for energy
 - **Do:** Cast Amped Raptor.
 - **Expect:** As it enters you get 2 energy, Grizzly Bears is exiled from the top of your library, and you're asked to cast it "by paying {E} equal to its mana value". Casting it leaves you no energy and taps no land.
+
+## Cards a player owns, taken from exile (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Void Attendant: choose which of an opponent's exiled cards goes to their graveyard
+- **Do:** Activate Void Attendant's ability.
+- **Expect:** A popup asks you to "Choose a card an opponent owns in exile to put into its owner's graveyard", offering Bob's Hill Giant and Lightning Bolt but not your own exiled Grizzly Bears. The one you pick goes to Bob's graveyard and you get an Eldrazi Scion token.
+
+### Void Attendant: a face-down exiled card is picked as its back, four players
+- **Do:** Pass priority. As Carol, cast Expensive Taste (Decadent Dragon's Adventure) targeting Bob, and let it resolve. Back as Alice, activate Void Attendant's ability and pick one of the two "Face down" backs.
+- **Expect:** The popup shows Bob's two face-down cards as backs you can pick, never their names, beside Carol's Decadent Dragon (on an adventure, face up). One of Bob's two (at random) goes to Bob's graveyard, face up; the other stays in exile.

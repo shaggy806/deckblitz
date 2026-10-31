@@ -520,6 +520,28 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Cards a player owns, taken from exile — built 2026-10-31
+
+The need-keys Phase 2 family `cost:put-opponent-exiled-card-into-graveyard`,
+features only (rules 108.3, 406.3, 601.2h). **`look-and-choose`'s `zone:
+"exile"`** offers the exiled cards a filter takes (`ownedBy: "opponent"`), or
+with `from` the cards that player owns, to a graveyard (each to its owner's)
+or onto the battlefield under the chooser's control; **`needsMin`** makes it
+all of `min` or nothing. **`this-way: "chosen"`** reads the picks wherever
+they went, so a processor's "If you do" holds under Rest in Peace (the
+ruling). As a cost: **`AbilityCost.putFromExile`** and
+**`additionalCost.putFromExile`**, chosen once on the stack. A face-down card
+in exile (exiled face down — now stamped with `exiledFaceDown.group` — or
+foretold) is choosable only by an owner-only filter, hidden from a chooser who
+can't look, and taken from its group at random (the `choose-from-zone`
+decision's `faceDownGroups`; the client's zone viewer picks it as its back).
+Keys: cost:put-opponent-exiled-card-into-graveyard,
+effect:put-exiled-card-into-graveyard, effect:put-exiled-lands-under-your-control.
+Left: Ulamog's Despoiler's "As this creature enters, you may put two …" (an
+optional cost in an enters replacement) and Pull from Eternity's
+`target:card-in-exile`. Proving cards: Wasteland Strangler, Ulamog's
+Nullifier, Oblivion Sower, Memory Theft, Void Attendant, Processor Assault.
+
 ### Meld — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:meld`, features only (rules 701.42,

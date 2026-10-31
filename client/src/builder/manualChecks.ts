@@ -8785,4 +8785,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Amped Raptor: casting the exiled card for energy',
     board({ you: { bf: ['Mountain*2'], hand: ['Amped Raptor'], lib: ['Grizzly Bears'] } }),
   ),
+  // --- Cards a player owns, taken from exile (2026-10-31, need-keys Phase 2) ------
+  preset(
+    "Void Attendant: choose which of an opponent's exiled cards goes to their graveyard",
+    board({
+      you: { bf: ['Void Attendant', 'Forest*2'], exile: ['Grizzly Bears'] },
+      opp: { exile: ['Hill Giant', 'Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Void Attendant: a face-down exiled card is picked as its back, four players',
+    board({
+      you: { bf: ['Void Attendant', 'Forest*2'] },
+      opp: [
+        { lib: ['Hill Giant', 'Lightning Bolt'] },
+        { human: true, bf: ['Swamp*3'], hand: ['Decadent Dragon'] },
+        {},
+      ],
+    }),
+  ),
 ]

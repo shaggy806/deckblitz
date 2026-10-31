@@ -1102,6 +1102,9 @@ export function parseCost(text) {
       if (typeof count !== "number") return null;
       cost.exileTop = count;
     }
+    // A processor's "Put a card an opponent owns from exile into that
+    // player's graveyard" (Void Attendant), chosen as it's paid.
+    else if (part === "Put a card an opponent owns from exile into that player's graveyard") cost.putFromExile = 1;
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
     else if (part === "Exert ~") cost.exertSelf = true;
     // Blight N (rule 701.68a), chosen as it's paid.
@@ -2996,6 +2999,47 @@ export function parseEffect(text, outer) {
       }
       continue;
     }
+    // A processor (Battle for Zendikar): "You may put a card an opponent owns
+    // from exile into that player's graveyard. If you do, …" — a
+    // `look-and-choose` over the exile zone, and the next sentence on the
+    // card chosen (`this-way: "chosen"`, which a Rest in Peace exiling it
+    // again doesn't undo — the ruling); "two cards your opponents own … into
+    // their owners' graveyards" is all or nothing (`needsMin`).
+    const processM =
+      /^you may put (a card an opponent owns|two cards your opponents own) from exile into (?:that player's graveyard|their owners' graveyards)\.$/i.exec(sentence);
+    if (processM !== null) {
+      const two = processM[1].toLowerCase().startsWith("two");
+      const doneM = /^if you do, (.+)$/i.exec(sentences[i + 1] ?? "");
+      const then = doneM === null ? null : parseSentence(`${doneM[1][0].toUpperCase()}${doneM[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const may = {
+          kind: "may",
+          prompt: two
+            ? "Put two cards your opponents own from exile into their graveyards?"
+            : "Put a card an opponent owns from exile into their graveyard?",
+          effect: {
+            kind: "sequence",
+            effects: [
+              {
+                kind: "look-and-choose",
+                zone: "exile",
+                filter: { ownedBy: "opponent" },
+                min: two ? 2 : 1,
+                max: two ? 2 : 1,
+                ...(two ? { needsMin: true } : {}),
+                destination: "graveyard",
+                leftover: "stay",
+              },
+              { kind: "conditional", condition: { kind: "this-way", what: "chosen", ...(two ? { atLeast: 2 } : {}) }, then },
+            ],
+          },
+        };
+        parsed.push(may);
+        hints.push({ sentence, effect: may });
+        skip = 1;
+        continue;
+      }
+    }
     // "If you do" after "you may discard a card": the draw happens only if a
     // card was discarded (the pool's this-way conditional).
     if (/^if you do, draw (a|one|two|three) cards?\.$/i.test(sentence) && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "discard" && parsed.at(-1).effect.target === "you") {
@@ -4273,6 +4317,12 @@ export function parseFace(face, ctx = {}) {
     if (castable && (m = /^As an additional cost to cast ~, exile (a|an|one|two|three|four|five|six|seven|eight) (creature )?cards? from your graveyard\.$/.exec(line))) {
       const count = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8 }[m[1]];
       out.additionalCost = { exileFromGraveyard: { count, ...(m[2] ? { filter: { type: "creature" } } : {}) } };
+      continue;
+    }
+    // A processor's additional cost (Processor Assault): which card, chosen
+    // as the cost is paid (`additionalCost.putFromExile`).
+    if (castable && /^As an additional cost to cast ~, put a card an opponent owns from exile into that player's graveyard\.$/.test(line)) {
+      out.additionalCost = { putFromExile: 1 };
       continue;
     }
     if (castable && (m = /^As an additional cost to cast ~, behold (.+) and exile it\.$/.exec(line)) && beholdOf(m[1]) !== null) {

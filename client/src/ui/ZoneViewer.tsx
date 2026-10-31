@@ -190,6 +190,25 @@ export function ZoneViewer({
           {ids.map((id) => {
             const obj = resolve(id)
             if (!obj) {
+              // A face-down card in exile a choice may still take — a
+              // processor's, by its group, at random (the engine's
+              // `faceDownGroups`): picked as its back.
+              if (selection && selection.eligible.includes(id)) {
+                const isPicked = picked.includes(id)
+                return (
+                  <div key={id} className="zone-viewer-card">
+                    <button
+                      type="button"
+                      className={`card-back zv-hidden-pick${isPicked ? ' picked' : ''}`}
+                      title="face-down card — one of its group is taken at random"
+                      aria-pressed={isPicked}
+                      onClick={() => toggle(id)}
+                    >
+                      {isPicked ? '✓ Picked' : 'Face down'}
+                    </button>
+                  </div>
+                )
+              }
               return <div key={id} className="card-back" title="face-down card" />
             }
             const isEligible = !selection || selection.eligible.includes(obj.id)

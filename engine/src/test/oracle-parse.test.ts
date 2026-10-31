@@ -1456,6 +1456,47 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toBe(false);
   });
 
+  it("a processor's 'put a card an opponent owns from exile into that player's graveyard': a cost, an additional cost, a may with 'if you do'", () => {
+    expect(parseCost("{1}{G}, Put a card an opponent owns from exile into that player's graveyard").cost).toEqual({
+      mana: "{1}{G}",
+      tap: false,
+      putFromExile: 1,
+    });
+    const assault = face(
+      "As an additional cost to cast this spell, put a card an opponent owns from exile into that player's graveyard.\nThis spell deals 5 damage to target creature.",
+      "Sorcery",
+      {},
+    );
+    expect(assault.additionalCost).toEqual({ putFromExile: 1 });
+    const choose = (n: number) => ({
+      kind: "look-and-choose",
+      zone: "exile",
+      filter: { ownedBy: "opponent" },
+      min: n,
+      max: n,
+      ...(n === 2 ? { needsMin: true } : {}),
+      destination: "graveyard",
+      leftover: "stay",
+    });
+    const strangler = face(
+      "When this creature enters, you may put a card an opponent owns from exile into that player's graveyard. If you do, target creature gets -3/-3 until end of turn.",
+    );
+    expect(strangler.complete).toBe(true);
+    expect(strangler.triggered[0].effect.effect.effects).toEqual([
+      choose(1),
+      {
+        kind: "conditional",
+        condition: { kind: "this-way", what: "chosen" },
+        then: { kind: "modify-pt", target: 0, power: -3, toughness: -3, duration: "end-of-turn" },
+      },
+    ]);
+    const nullifier = face(
+      "When this creature enters, you may put two cards your opponents own from exile into their owners' graveyards. If you do, counter target spell.",
+    );
+    expect(nullifier.triggered[0].effect.effect.effects[0]).toEqual(choose(2));
+    expect(nullifier.triggered[0].effect.effect.effects[1].condition).toEqual({ kind: "this-way", what: "chosen", atLeast: 2 });
+  });
+
   it("waterbend (rule 701.67a): an ability's cost, a spell's additional cost ({N} or {X}), and an optional one", () => {
     expect(parseCost("Waterbend {4}").cost).toEqual({ mana: "{4}", tap: false, waterbend: true });
     expect(parseCost("Waterbend {X}").cost).toEqual({ mana: "{X}", tap: false, waterbend: true });

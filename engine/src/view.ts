@@ -892,7 +892,18 @@ function viewForUncached(
   // become visible (graveyard candidates are already public via `graveyards`
   // below, but pushing them again here is harmless).
   if (state.awaiting?.kind === "choose-from-zone" && state.awaiting.player === viewer) {
-    visibleIds.push(...state.awaiting.ids);
+    // A face-down card in exile a processor may take stays hidden from a
+    // chooser who may not look at it (rule 406.3): it's picked by its group,
+    // as a face-down back.
+    const hidden = new Set((state.awaiting.faceDownGroups ?? []).flat());
+    visibleIds.push(
+      ...state.awaiting.ids.filter((id) => {
+        if (!hidden.has(id)) return true;
+        const object = state.objects[id];
+        if (object?.exiledFaceDown !== undefined) return object.exiledFaceDown.lookers.includes(viewer);
+        return object?.foretold !== true || object.owner === viewer;
+      }),
+    );
   }
   // Objects being separated into piles are seen by the separator (rule
   // 700.3: they looked at them, or they were revealed); a face-down pile, by
