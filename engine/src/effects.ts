@@ -844,10 +844,14 @@ export interface BeholdSpec {
   readonly text: string;
   readonly count?: number;
   readonly exile?: boolean;
-  /** Not a behold at all but the pitch spells' "exile a blue card from your
-   * hand" (`CardDefinition.alternativeCost.exileFromHand`, an evoke's): the
-   * same choice made as the cost is paid, from the hand alone and with no
-   * reveal — the card is simply exiled. Always with `exile`. */
+  /** Not a behold at all but the same choice from the hand alone. With
+   * `exile`, the pitch spells' "exile a blue card from your hand"
+   * (`CardDefinition.alternativeCost.exileFromHand`, an evoke's): no reveal,
+   * the card is simply exiled. Without, "reveal a Kithkin card from your
+   * hand" as a cost (Lorwyn's "… or pay {3}", Dragons of Tarkir's "you may
+   * reveal a Dragon card", the Martyrs' "Reveal X white cards" — rule
+   * 701.20a): the cards are revealed and stay in the hand, asked with the
+   * `choose-from-zone` decision's `"reveal"` destination. */
   readonly fromHand?: boolean;
 }
 

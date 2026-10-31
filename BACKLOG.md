@@ -173,10 +173,15 @@ section keeps only what to do next.
   (2026-10-30: the `assignAsThoughUnblocked` static and `assign-as-though-unblocked` effect,
   answered on `assign-combat-damage`'s `mayUnblocked` with the client's "All to [defender]";
   the `blocked` filter; 11 freed, 5 proving cards — Thorn Elemental, Indomitable Might, Siege
-  Behemoth, Outmaneuver, Predatory Focus).
-  **480 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `cost:additional-cost-reveal` (17), `effect:remove-all-counters` (17),
-  `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17).
+  Behemoth, Outmaneuver, Predatory Focus), additional-cost-reveal (2026-10-30: a `fromHand`
+  behold spec without `exile` as a reveal from the hand — "reveal a Kithkin card or pay {3}",
+  the kicker `keyword: "reveal"` with `orControls` ("or controlled a Dragon as you cast this
+  spell", not inherited by a copy), the activated `reveal` cost's "Reveal X white cards"; 9
+  freed, 8 proving cards — Goldmeadow Stalwart, Silvergill Adept, Draconic Roar, Orator of
+  Ojutai, Scaleguard Sentinels, Martyr of Sands, Martyr of Spores, Martyr of Ashes).
+  **489 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17),
+  `stat:turn-event-tallies` (17), `mechanic:assist` (16).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

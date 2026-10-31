@@ -425,6 +425,7 @@ import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
+import _poolMartyrOfAshes from "../pool/martyr-of-ashes.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolMarchFromTheTomb,
     _poolMarrowBats,
     _poolMarshLurker,
+    _poolMartyrOfAshes,
     _poolMarvelousMelee,
     _poolMascotExhibition,
     _poolMasterPiandao,

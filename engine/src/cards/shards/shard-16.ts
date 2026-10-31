@@ -661,6 +661,7 @@ import _poolSigilBlessing from "../pool/sigil-blessing.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilkenStrength from "../pool/silken-strength.js";
 import _poolSilkwrap from "../pool/silkwrap.js";
+import _poolSilvergillAdept from "../pool/silvergill-adept.js";
 import _poolSilvergladeElemental from "../pool/silverglade-elemental.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
@@ -1584,6 +1585,7 @@ const shard: CardShard = {
     _poolSigilOfMyrkul,
     _poolSilkenStrength,
     _poolSilkwrap,
+    _poolSilvergillAdept,
     _poolSilvergladeElemental,
     _poolSilverquillCommand,
     _poolSilverwingSquadron,

@@ -453,8 +453,11 @@ function zoneChoiceTitle(
       return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
     case 'reveal':
       // "Reveal any number of green cards in your hand" (the Scents): they
-      // stay in hand.
-      return `Choose any number of cards to reveal from your hand`
+      // stay in hand. A cost's "reveal a Kithkin card" / "reveal X white
+      // cards" takes exactly that many.
+      return action.min === action.max && action.max > 0
+        ? `Choose ${cards} to reveal from your hand`
+        : `Choose any number of cards to reveal from your hand`
     case 'discard':
       // "Look at target player's hand" (Glasses of Urza): nothing to pick.
       if (action.max === 0) return `Looking at ${whose} hand`

@@ -470,6 +470,7 @@ import _poolOmitVariables from "../pool/omit-variables.js";
 import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOneDozenEyes from "../pool/one-dozen-eyes.js";
 import _poolOraclesAttendants from "../pool/oracles-attendants.js";
+import _poolOratorOfOjutai from "../pool/orator-of-ojutai.js";
 import _poolOrchardSpirit from "../pool/orchard-spirit.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
@@ -1301,6 +1302,7 @@ const shard: CardShard = {
     _poolOnduSkyruins,
     _poolOneDozenEyes,
     _poolOraclesAttendants,
+    _poolOratorOfOjutai,
     _poolOrchardSpirit,
     _poolOrcishLumberjack,
     _poolOrphansOfTheWheat,

@@ -275,6 +275,7 @@ import _poolGoblinGeneral from "../pool/goblin-general.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
 import _poolGoblinWarrens from "../pool/goblin-warrens.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
+import _poolGoldmeadowStalwart from "../pool/goldmeadow-stalwart.js";
 import _poolGoldnightRedeemer from "../pool/goldnight-redeemer.js";
 import _poolGorbagOfMinasMorgul from "../pool/gorbag-of-minas-morgul.js";
 import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
@@ -1125,6 +1126,7 @@ const shard: CardShard = {
     _poolGoblinSharpshooter,
     _poolGoblinWarrens,
     _poolGoldenBear,
+    _poolGoldmeadowStalwart,
     _poolGoldnightRedeemer,
     _poolGorbagOfMinasMorgul,
     _poolGrandmotherSengir,

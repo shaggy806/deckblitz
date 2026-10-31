@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: revealing cards from your hand as a cost** (2026-10-30;
+  `cost:additional-cost-reveal`). A `BeholdSpec` with `fromHand` and no `exile` reveals from
+  the hand (rule 701.20a, the `"reveal"` destination, the cards staying there): Lorwyn's
+  "reveal a Kithkin card from your hand or pay {3}" as an `additionalCost.options` branch; the
+  kicker `keyword: "reveal"` with `orControls` — Dragons of Tarkir's "if you revealed a Dragon
+  card or controlled a Dragon as you cast this spell", a cast kicked by control marked
+  `kickedByControl` so a copy doesn't get it; the activated cost `AbilityCost.reveal` ("Reveal
+  X white cards from your hand", X capped by the matches). The client's reveal prompt names the
+  count; the scaffolder reads all three, and "~ deals N damage to that creature's controller".
+  9 freed; proving cards Goldmeadow Stalwart, Silvergill Adept, Draconic Roar, Orator of
+  Ojutai, Scaleguard Sentinels, Martyr of Sands, Martyr of Spores, Martyr of Ashes.
 - **Need-keys Phase 2: combat damage as though unblocked** (2026-10-30;
   `static:assign-damage-as-though-unblocked`). The static `assignAsThoughUnblocked` and the
   `assign-as-though-unblocked` effect (`target`, or `filter` as a rule for the turn;

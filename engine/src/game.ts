@@ -2742,6 +2742,9 @@ export class Game {
         ability.cost.discard?.count === "x"
           ? this.discardCandidates(player, ability.cost.discard.filter, source).length
           : undefined;
+      // "Reveal X white cards from your hand": as many as there are.
+      const revealX =
+        ability.cost.reveal?.count === "x" ? this.revealCostCandidates(player, ability.cost.reveal, source).length : undefined;
       // "Remove any number of storage counters": as many as it has — or, a
       // chosen removal, as many as there are to choose from.
       const counterX =
@@ -2750,7 +2753,7 @@ export class Game {
             ? this.costCounterSources(player, source, ability)[ability.cost.removeCounter.among === true ? "total" : "most"]
             : (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
           : undefined;
-      const caps = [manaX, sacrificeX, exileX, discardX, counterX].filter((n): n is number => n !== undefined);
+      const caps = [manaX, sacrificeX, exileX, discardX, revealX, counterX].filter((n): n is number => n !== undefined);
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
       // "X can't be 0" (Ruthless Technomancer).
       const minX = ability.minX ?? 0;
@@ -3739,7 +3742,7 @@ export class Game {
                   ? String(def.kicker.blight)
                   : def.kicker.keyword === "collect-evidence" && def.kicker.collectEvidence !== undefined
                   ? String(def.kicker.collectEvidence)
-                  : def.kicker.keyword === "behold" && def.kicker.behold !== undefined
+                  : (def.kicker.keyword === "behold" || def.kicker.keyword === "reveal") && def.kicker.behold !== undefined
                     ? def.kicker.behold.text
                     : def.kicker.also !== undefined
                       ? def.kicker.also.text
@@ -12602,8 +12605,10 @@ export class Game {
       }
     }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
-    // spell itself (on its way to the stack, 601.2a) not among them.
-    const kickerBehold = kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined;
+    // spell itself (on its way to the stack, 601.2a) not among them. "You
+    // may reveal a Dragon card from your hand" likewise.
+    const kickerBehold =
+      kicked && (def.kicker?.keyword === "behold" || def.kicker?.keyword === "reveal") ? def.kicker.behold : undefined;
     if (kickerBehold !== undefined && !this.canBehold(player, kickerBehold, cardId)) {
       return `${player} has nothing to behold ${kickerBehold.text} for ${def.name}`;
     }
@@ -14112,6 +14117,15 @@ export class Game {
         object.kickedWith = which;
         object.timesKicked = which === 3 ? 2 : 1;
       }
+    } else if (
+      def.kicker?.orControls !== undefined &&
+      this.countBattlefieldMatching(player, { ...def.kicker.orControls, controlledBy: "you" }) > 0
+    ) {
+      // "If you revealed a Dragon card or controlled a Dragon as you cast
+      // this spell" (Dragons of Tarkir): its costs are paid, so a Dragon
+      // still controlled now was controlled as it was cast (the ruling).
+      object.kicked = true;
+      object.kickedByControl = true;
     }
     if (offspring) object.offspringGrantPaid = true;
     // Splice (rule 702.47a): the spliced cards are revealed and stay in hand;
@@ -14369,7 +14383,7 @@ export class Game {
     const beholdCost =
       (pitchExile !== undefined ? Game.pitchSpec(pitchExile) : undefined) ??
       chosenOption?.behold ??
-      (kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined) ??
+      (kicked && (def.kicker?.keyword === "behold" || def.kicker?.keyword === "reveal") ? def.kicker.behold : undefined) ??
       def.additionalCost?.behold ??
       flashback?.behold;
     // "Exile two creature cards from your graveyard" (Skaab Ruinator):
@@ -15939,6 +15953,27 @@ export class Game {
         return `${player} has too few cards in their graveyard to pay ${def.name}'s cost`;
       }
     }
+    if (ability.cost.reveal !== undefined) {
+      // Chosen once the ability is on the stack, as a graveyard exile is.
+      if (isManaAbility(ability)) return `${def.name}'s mana ability can't reveal cards as a cost`;
+      if (
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        ability.cost.returnToHand !== undefined ||
+        ability.cost.blight !== undefined ||
+        ability.cost.collectEvidence !== undefined ||
+        ability.cost.craft !== undefined ||
+        chosenCounterCost(ability.cost) ||
+        sacrificeParts !== null
+      ) {
+        return `${def.name}'s ability can't ask for two cost choices at once yet`;
+      }
+      const reveal = ability.cost.reveal;
+      const n = reveal.count === "x" ? (x ?? ability.minX ?? 0) : reveal.count;
+      if (this.revealCostCandidates(player, reveal, sourceId).length < n) {
+        return `${player} has too few ${reveal.text} in hand to pay ${def.name}'s cost`;
+      }
+    }
     if (ability.cost.removeCounter !== undefined && chosenCounterCost(ability.cost)) {
       // Chosen once the ability is on the stack (see `activateAbility`), as
       // a blight is — so never on a mana ability, nor beside another cost
@@ -16535,6 +16570,22 @@ export class Game {
         this.payGraveyardExileCost(player, sourceId, { count, ...(costExile.filter !== undefined ? { filter: costExile.filter } : {}) }),
       );
     }
+    // "Reveal X white cards from your hand" likewise: which, chosen now
+    // (rules 602.2b, 601.2h); they stay in the hand.
+    const costReveal = ability.cost.reveal;
+    if (costReveal !== undefined) {
+      const count = costReveal.count === "x" ? chosenX : costReveal.count;
+      if (count > 0) {
+        this.withDecisionSource(sourceId, () =>
+          this.beginBehold(
+            player,
+            sourceId,
+            { filter: costReveal.filter, text: costReveal.text, count, fromHand: true },
+            { priorityTo: player, except: sourceId },
+          ),
+        );
+      }
+    }
     // "Return a Forest you control to its owner's hand": which, asked now
     // too (rules 602.2b, 601.2h).
     const costReturn = ability.cost.returnToHand;
@@ -16602,6 +16653,13 @@ export class Game {
   /** The cards in `player`'s graveyard an "exile N cards from your
    * graveyard" cost may take: those matching `filter`, never `except` (the
    * ability's own source, a card in the graveyard paying for itself). */
+  /** The cards in `player`'s hand that could pay an activated ability's
+   * `reveal` cost (`AbilityCost.reveal`) — never the source, wherever it is
+   * (a hand-activated ability can't reveal itself for its own cost). */
+  private revealCostCandidates(player: PlayerId, cost: NonNullable<AbilityCost["reveal"]>, except: ObjectId): ObjectId[] {
+    return this.beholdCandidates(player, { filter: cost.filter, text: cost.text, fromHand: true }, except);
+  }
+
   private graveyardCostCandidates(player: PlayerId, filter: CardFilter | undefined, except: ObjectId): ObjectId[] {
     return this.state.zones.perPlayer[player].graveyard.filter(
       (id) =>
@@ -29185,6 +29243,7 @@ export class Game {
       ...(object.chosenModes !== undefined ? { chosenModes: [...object.chosenModes] } : {}),
       ...(object.division !== undefined ? { division: [...object.division] } : {}),
       ...(object.kicked === true ? { kicked: true } : {}),
+      ...(object.kickedByControl === true ? { kickedByControl: true as const } : {}),
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
       ...(object.kickedWith !== undefined ? { kickedWith: object.kickedWith } : {}),
       ...(object.spliced !== undefined ? { spliced: [...object.spliced] } : {}),
@@ -29256,7 +29315,9 @@ export class Game {
       ...(spell.autoTargetSlots !== undefined ? { autoTargetSlots: [...spell.autoTargetSlots] } : {}),
       ...(spell.chosenModes !== undefined ? { chosenModes: [...spell.chosenModes] } : {}),
       ...(spell.division !== undefined ? { division: [...spell.division] } : {}),
-      ...(spell.kicked === true ? { kicked: true } : {}),
+      // Kicked only by controlling a Dragon as it was cast: a copy wasn't
+      // cast, so not it (`kickedByControl` — the Draconic Roar ruling).
+      ...(spell.kicked === true && spell.kickedByControl !== true ? { kicked: true } : {}),
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
       ...(spell.kickedWith !== undefined ? { kickedWith: spell.kickedWith } : {}),
       // A copy has what was spliced onto the original (the splice rulings).
@@ -31908,7 +31969,9 @@ export class Game {
       eligible,
       min: opts.optional === true ? 0 : count,
       max: count,
-      destination: spec.exile === true ? "exile" : "behold",
+      // "Reveal a Kithkin card from your hand" (`fromHand` without `exile`)
+      // is asked as the reveal it is.
+      destination: spec.exile === true ? "exile" : spec.fromHand === true ? "reveal" : "behold",
       leftover: "stay",
       behold,
       ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),
@@ -31959,8 +32022,9 @@ export class Game {
     behold: { readonly source: ObjectId; readonly x: number; readonly then?: EffectSpec; readonly fromHand?: true },
   ): void {
     const fromHand = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
-    // A pitch cost's exile reveals nothing first: it's no behold.
-    if (fromHand.length > 0 && behold.fromHand !== true) this.revealCards(player, fromHand, "hand");
+    // A pitch cost's exile reveals nothing first: it's no behold. A reveal
+    // from the hand (`fromHand` without exiling) is all reveal.
+    if (fromHand.length > 0 && !(behold.fromHand === true && exile)) this.revealCards(player, fromHand, "hand");
     const beheld = chosen.map((id) =>
       this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id,
     );
@@ -40327,6 +40391,7 @@ export class Game {
     object.chosenModes = undefined;
     object.division = undefined;
     object.kicked = undefined;
+    object.kickedByControl = undefined;
     object.timesKicked = undefined;
     object.kickedWith = undefined;
     object.spliced = undefined;

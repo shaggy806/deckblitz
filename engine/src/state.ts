@@ -885,6 +885,12 @@ export interface GameObject {
    * kicker cost was paid, so `resolveTopOfStack` applies the kicked `effect`.
    * Absent for an unkicked or unkickable spell; cleared on any zone change. */
   kicked?: boolean;
+  /** With `kicked`: this spell is kicked only because its caster controlled
+   * a `kicker.orControls` permanent as it was cast (Dragons of Tarkir's "or
+   * controlled a Dragon as you cast this spell"), nothing revealed. A copy
+   * of it wasn't cast, so it isn't kicked (the Draconic Roar ruling).
+   * Cleared with `kicked`. */
+  kickedByControl?: true;
   /** The cards spliced onto this spell as it was cast (rule 702.47), by
    * name, in order: their targets follow the spell's own and their effects
    * are followed after its own (702.47b). Copied to a copy of the spell;
@@ -1379,6 +1385,7 @@ export interface SpellSnapshot {
   readonly chosenModes?: readonly number[];
   readonly division?: readonly number[];
   readonly kicked?: boolean;
+  readonly kickedByControl?: true;
   readonly timesKicked?: number;
   readonly kickedWith?: number;
   readonly spliced?: readonly string[];

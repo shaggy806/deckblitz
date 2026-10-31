@@ -3016,8 +3016,14 @@ export interface CardDefinition {
      * multikicker's), and no `targets` / `effect` of its own — the copies are
      * the whole difference. The one copy trigger is queued as the spell is
      * cast (`queueReplicate`).
+     *
+     * `"reveal"` is "as an additional cost to cast this spell, you may
+     * reveal a [quality] card from your hand": `cost` is `""`, `behold` the
+     * quality with `fromHand`, and the kicked variant the one that reveals,
+     * offered only with such a card in hand (the spell itself, already on the
+     * stack, never one). See `orControls`.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -3035,6 +3041,20 @@ export interface CardDefinition {
      * `targets` / `effect` say what changes.
      */
     readonly behold?: BeholdSpec;
+    /**
+     * With `keyword: "reveal"` (`cost: ""`, `behold` a `fromHand` spec):
+     * Dragons of Tarkir's "as an additional cost to cast this spell, you may
+     * reveal a Dragon card from your hand" (rule 601.2b), whose bonus is "if
+     * you revealed a Dragon card **or controlled a Dragon** as you cast this
+     * spell" — `orControls` is that quality. A cast that doesn't reveal is
+     * kicked anyway when its caster controls a matching permanent as the
+     * casting finishes (its ruling: once the costs are paid, so a Dragon
+     * sacrificed for mana while casting doesn't count; one lost afterwards
+     * still does). So every "if you revealed … or controlled …" is the spell
+     * being kicked — `targets` / `effect`, `self-kicked` on a permanent —
+     * and a spell kicked this way is not a *kicked* spell to anything else.
+     */
+    readonly orControls?: CardFilter;
     /**
      * The kicked variant may be cast as though it had flash (Molten
      * Exhale's "you may cast this spell as though it had flash if you behold
@@ -4128,9 +4148,10 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
+    readonly orControls?: CardFilter;
     readonly flash?: boolean;
     readonly blight?: number;
     readonly collectEvidence?: number;

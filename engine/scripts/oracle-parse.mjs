@@ -638,6 +638,26 @@ export function beholdOf(phrase) {
   return { filter, text: phrase, ...(count > 1 ? { count } : {}) };
 }
 
+/**
+ * What "reveal … from your hand" names as a cost (rule 701.20a) — "a Kithkin
+ * card", "a Dragon card", "X white cards", "two blue cards": its `count`
+ * (`"x"` for X), its `filter` over cards in hand (a colour, a type or
+ * subtype, or both), and `noun`, the phrase without its count ("white
+ * cards"). `null` for a phrase the reader doesn't know.
+ */
+export function handRevealOf(phrase) {
+  const m = /^(a|an|X|two|three|four|five) (?:(white|blue|black|red|green) )?(.*?)\s*cards?$/.exec(phrase);
+  if (m === null) return null;
+  const count = m[1] === "X" ? "x" : numberOf(m[1]);
+  if (count === undefined) return null;
+  const filter = m[3] === "" ? {} : parseTypePhrase(m[3], { cards: true });
+  if (filter === null) return null;
+  if (Object.keys(filter).some((k) => k !== "type" && k !== "subtype")) return null;
+  if (m[2] !== undefined) filter.colors = [COLOR_WORDS[m[2]]];
+  if (Object.keys(filter).length === 0) return null;
+  return { count, filter, noun: phrase.slice(m[1].length + 1) };
+}
+
 // --------------------------------------------------------------- targets
 
 /** Target phrases, longest first, as the engine's target specs. */
@@ -921,6 +941,11 @@ export function parseCost(text) {
         ...(m[3].toLowerCase() === "another" ? { excludeSource: true } : {}),
         ...(m[3].toLowerCase() === "among" ? { among: true } : {}),
       };
+    } else if ((m = /^Reveal (.+) from your hand$/.exec(part)) && handRevealOf(m[1]) !== null) {
+      // "Reveal X white cards from your hand" (the Coldsnap Martyrs, rule
+      // 701.20a): X announced as it's activated, the cards chosen as it's paid.
+      const { count, filter, noun } = handRevealOf(m[1]);
+      cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
     else if ((m = new RegExp(`^Tap ${N} untapped (.+?) you control$`, "i").exec(part))) {
       const count = numberOf(m[1]);
@@ -2577,6 +2602,15 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: instead });
       continue;
     }
+    // "~ deals 2 damage to that creature's controller" after the one sentence
+    // that targeted (Consign to the Pit, Draconic Roar).
+    const controllerDamageM = /^~ deals (\w+) damage to that (?:creature|permanent)'s controller\.$/.exec(sentence);
+    if (controllerDamageM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(controllerDamageM[1]) === "number") {
+      const damage = { kind: "damage", amount: numberOf(controllerDamageM[1]), toControllerOfTarget: 0 };
+      parsed.push(damage);
+      hints.push({ sentence, effect: damage });
+      continue;
+    }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
     if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
       const loss = { kind: "lose-life", amount: numberOf(lossM[1]), toControllerOfTarget: 0 };
@@ -3473,6 +3507,38 @@ export function parseFace(face, ctx = {}) {
       out.kicker = { cost: "", keyword: "behold", behold: beholdOf(m[1]) };
       continue;
     }
+    // Revealing a card from the hand as a spell's cost (rule 701.20a):
+    // Lorwyn's "reveal a Kithkin card from your hand or pay {3}" (a choice of
+    // whole costs), and Dragons of Tarkir's "you may reveal a Dragon card
+    // from your hand" (a kicker by another name), whose "if you revealed a
+    // Dragon card or controlled a Dragon as you cast this spell" adds
+    // `orControls` and is read with the spell's text below.
+    if (
+      castable &&
+      (m = /^As an additional cost to cast ~, reveal (.+) from your hand or pay ((?:\{[^}]+\})+)\.$/.exec(line)) &&
+      handRevealOf(m[1])?.count === 1
+    ) {
+      const { filter } = handRevealOf(m[1]);
+      out.additionalCost = {
+        options: [
+          { text: `Reveal ${m[1]}`, behold: { filter, text: m[1], fromHand: true } },
+          { text: `Pay ${m[2]}`, mana: m[2] },
+        ],
+      };
+      continue;
+    }
+    if (
+      castable &&
+      (m = /^As an additional cost to cast ~, you may reveal (.+) from your hand\.$/.exec(line)) &&
+      handRevealOf(m[1])?.count === 1
+    ) {
+      const { filter } = handRevealOf(m[1]);
+      out.kicker = { cost: "", keyword: "reveal", behold: { filter, text: m[1], fromHand: true } };
+      const controlled = /if you revealed (?:a|an) .+? card or controlled (?:a|an) (\w+) as you cast/i.exec(face.oracle_text ?? "");
+      const quality = controlled === null ? null : parseTypePhrase(controlled[1]);
+      if (quality !== null) out.kicker.orControls = quality;
+      continue;
+    }
     // Waterbend (rule 701.67a) as a spell's cost: "waterbend {5}" / "{X}"
     // (an X the mana cost needn't have), and "you may waterbend {N}" (a
     // kicker by another name, whose "if this spell's additional cost was
@@ -3797,11 +3863,19 @@ export function parseFace(face, ctx = {}) {
       // this, with any target it adds after the spell's own. Not an
       // "instead", which rewrites the spell's text: that's a person's.
       let kickedTail;
-      if (out.kicker?.keyword === "behold" || out.kicker?.keyword === "waterbend" || out.kicker?.keyword === "bargain") {
+      if (
+        out.kicker?.keyword === "behold" ||
+        out.kicker?.keyword === "waterbend" ||
+        out.kicker?.keyword === "bargain" ||
+        out.kicker?.keyword === "reveal"
+      ) {
         const sentences = sentencesOf(text);
         const last = sentences.at(-1) ?? "";
         const tail =
           /^If (?:a|an) .+ was beheld, (.+)$/.exec(last) ??
+          // "If you revealed a Dragon card or controlled a Dragon as you
+          // cast this spell, …" (`kicker.orControls`).
+          /^If you revealed (?:a|an) .+ card or controlled (?:a|an) .+ as you cast ~, (.+)$/.exec(last) ??
           /^If ~'s additional cost was paid, (.+)$/.exec(last) ??
           // "If this spell was bargained, …" (rule 702.166b).
           /^If ~ was bargained, (.+)$/.exec(last);
@@ -3824,8 +3898,21 @@ export function parseFace(face, ctx = {}) {
         out.overload = awaken(out.awakenKeyword.n, out.awakenKeyword.cost, { targets: ownTargets, effect: r.effect });
       }
       if (kickedTail !== undefined) {
-        const extra = r.effect === null ? { effect: null } : parseEffect(kickedTail.rest, ctx2);
-        if (extra.effect === null) out.todo.push(kickedTail.sentence);
+        let extra = r.effect === null ? { effect: null } : parseEffect(kickedTail.rest, ctx2);
+        // A bonus that reads back into the spell ("… deals 3 damage to that
+        // creature's controller" — Draconic Roar) is read with it: the whole
+        // text as the kicked effect, when it names no target of its own.
+        if (r.effect !== null && extra.effect === null) {
+          const both = parseEffect(`${text} ${kickedTail.rest}`, { ...ctx2, targets: [] });
+          const steps = (e) => (e.kind === "sequence" && e.simultaneous !== true ? e.effects : [e]);
+          if (both.effect !== null && steps(both.effect).length > steps(r.effect).length && ctx2.targets.length === ownTargets.length) {
+            out.kicker = { ...out.kicker, effect: both.effect };
+            extra = { effect: null, done: true };
+          }
+        }
+        if (extra.done === true) {
+          // Read whole above.
+        } else if (extra.effect === null) out.todo.push(kickedTail.sentence);
         else {
           const steps = (e) => (e.kind === "sequence" && e.simultaneous !== true ? e.effects : [e]);
           out.kicker = {

@@ -344,6 +344,25 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Revealing cards from your hand as a cost — built 2026-10-30
+
+The need-keys Phase 2 family `cost:additional-cost-reveal`, features only.
+A `BeholdSpec` with `fromHand` and no `exile` is now a **reveal from the
+hand** (rule 701.20a): asked as a `choose-from-zone` with the `"reveal"`
+destination, the cards revealed to every player and left in the hand. Three
+shapes use it: an `additionalCost.options` branch for Lorwyn's "reveal a
+Kithkin card from your hand or pay {3}"; the kicker **`keyword: "reveal"`**
+for Dragons of Tarkir's "you may reveal a Dragon card from your hand", with
+**`kicker.orControls`** — "or controlled a Dragon as you cast this spell" —
+kicking a cast whose caster controls one once its costs are paid
+(`GameObject.kickedByControl`, which a copy of the spell doesn't inherit: the
+Draconic Roar ruling); and the activated cost **`AbilityCost.reveal`**, the
+Martyrs' "Reveal X white cards from your hand", X announced and capped by the
+matching cards. The client's reveal prompt names the count. Key:
+additional-cost-reveal. Proving cards: Goldmeadow Stalwart, Silvergill
+Adept, Draconic Roar, Orator of Ojutai, Scaleguard Sentinels, Martyr of
+Sands, Martyr of Spores, Martyr of Ashes.
+
 ### Shuffling a hand, graveyard and permanents in — built 2026-10-30
 
 The need-keys Phase 2 family `effect:shuffle-library`'s top unit, features

@@ -415,6 +415,7 @@ import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMarshCrocodile from "../pool/marsh-crocodile.js";
+import _poolMartyrOfSands from "../pool/martyr-of-sands.js";
 import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMausoleumSecrets from "../pool/mausoleum-secrets.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
     _poolMarshCrocodile,
+    _poolMartyrOfSands,
     _poolMasterSymmetrist,
     _poolMausoleumGuard,
     _poolMausoleumSecrets,

@@ -1216,6 +1216,45 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As an additional cost to cast this spell, blight 2.\nDraw a card.", "Sorcery", {}).complete).toBe(false);
   });
 
+  it("revealing from the hand as a cost (rule 701.20a): 'or pay {3}', 'you may reveal a Dragon card' with its bonus, 'Reveal X white cards'", () => {
+    const stalwart = face("As an additional cost to cast this spell, reveal a Kithkin card from your hand or pay {3}.");
+    expect(stalwart.additionalCost).toEqual({
+      options: [
+        { text: "Reveal a Kithkin card", behold: { filter: { subtype: "Kithkin" }, text: "a Kithkin card", fromHand: true } },
+        { text: "Pay {3}", mana: "{3}" },
+      ],
+    });
+    expect(stalwart.complete).toBe(true);
+    // "If you revealed a Dragon card or controlled a Dragon as you cast this
+    // spell" closes the spell: the kicked cast, which controlling a Dragon
+    // also gives (`orControls`).
+    const roar = face(
+      "As an additional cost to cast this spell, you may reveal a Dragon card from your hand.\nThis spell deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast this spell, this spell deals 3 damage to that creature's controller.",
+      "Instant",
+    );
+    expect(roar.kicker).toEqual({
+      cost: "",
+      keyword: "reveal",
+      behold: { filter: { subtype: "Dragon" }, text: "a Dragon card", fromHand: true },
+      orControls: { subtype: "Dragon" },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "damage", amount: 3, target: 0 },
+          { kind: "damage", amount: 3, toControllerOfTarget: 0 },
+        ],
+      },
+    });
+    expect(roar.complete).toBe(true);
+    // The Martyrs' activated cost: X announced, a colour of card.
+    expect(parseCost("{1}, Reveal X white cards from your hand, Sacrifice ~")?.cost).toEqual({
+      mana: "{1}",
+      tap: false,
+      reveal: { count: "x", filter: { colors: ["W"] }, text: "white cards" },
+      sacrifice: "self",
+    });
+  });
+
   it("behold (rule 701.4a): a choice of costs, an optional cost and its 'if … was beheld', 'and exile it' with its return, flashback, a land, an effect", () => {
     const dragon = { filter: { subtype: "Dragon" }, text: "a Dragon" };
     expect(parseSentence("Target opponent blights 2.", ctx())).toEqual({ kind: "blight", amount: 2, who: { target: 0 } });

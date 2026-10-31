@@ -488,6 +488,7 @@ import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
 import _poolMarkOfMutiny from "../pool/mark-of-mutiny.js";
 import _poolMarkovPurifier from "../pool/markov-purifier.js";
+import _poolMartyrOfSpores from "../pool/martyr-of-spores.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
@@ -656,6 +657,7 @@ import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
 import _poolSanguineSavior from "../pool/sanguine-savior.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
 import _poolSatyrFiredancer from "../pool/satyr-firedancer.js";
+import _poolScaleguardSentinels from "../pool/scaleguard-sentinels.js";
 import _poolScaretiller from "../pool/scaretiller.js";
 import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
 import _poolScentOfIvy from "../pool/scent-of-ivy.js";
@@ -1378,6 +1380,7 @@ const shard: CardShard = {
     _poolMarduHeartPiercer,
     _poolMarkOfMutiny,
     _poolMarkovPurifier,
+    _poolMartyrOfSpores,
     _poolMaskedMeower,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
@@ -1546,6 +1549,7 @@ const shard: CardShard = {
     _poolSanguineSavior,
     _poolSaruliCaretaker,
     _poolSatyrFiredancer,
+    _poolScaleguardSentinels,
     _poolScaretiller,
     _poolScavengerGrounds,
     _poolScentOfIvy,

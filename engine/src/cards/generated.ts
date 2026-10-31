@@ -6043,6 +6043,7 @@ import _poolDraconicDestiny from "./pool/draconic-destiny.js";
 import _poolDraconicDisciple from "./pool/draconic-disciple.js";
 import _poolDraconicLore from "./pool/draconic-lore.js";
 import _poolDraconicMuralists from "./pool/draconic-muralists.js";
+import _poolDraconicRoar from "./pool/draconic-roar.js";
 import _poolDracosaurAuxiliary from "./pool/dracosaur-auxiliary.js";
 import _poolDrafnaFounderOfLatNam from "./pool/drafna-founder-of-lat-nam.js";
 import _poolDragDown from "./pool/drag-down.js";
@@ -9491,6 +9492,7 @@ import _poolGoldmeadowDodger from "./pool/goldmeadow-dodger.js";
 import _poolGoldmeadowHarrier from "./pool/goldmeadow-harrier.js";
 import _poolGoldmeadowLookout from "./pool/goldmeadow-lookout.js";
 import _poolGoldmeadowNomad from "./pool/goldmeadow-nomad.js";
+import _poolGoldmeadowStalwart from "./pool/goldmeadow-stalwart.js";
 import _poolGoldmireBridge from "./pool/goldmire-bridge.js";
 import _poolGoldnightCastigator from "./pool/goldnight-castigator.js";
 import _poolGoldnightCommander from "./pool/goldnight-commander.js";
@@ -13890,7 +13892,10 @@ import _poolMartialGlory from "./pool/martial-glory.js";
 import _poolMartialLaw from "./pool/martial-law.js";
 import _poolMartonStromgald from "./pool/marton-stromgald.js";
 import _poolMartyrForTheCause from "./pool/martyr-for-the-cause.js";
+import _poolMartyrOfAshes from "./pool/martyr-of-ashes.js";
 import _poolMartyrOfDusk from "./pool/martyr-of-dusk.js";
+import _poolMartyrOfSands from "./pool/martyr-of-sands.js";
+import _poolMartyrOfSpores from "./pool/martyr-of-spores.js";
 import _poolMartyredRusalka from "./pool/martyred-rusalka.js";
 import _poolMartyrsBond from "./pool/martyrs-bond.js";
 import _poolMartyrsCause from "./pool/martyrs-cause.js";
@@ -15915,6 +15920,7 @@ import _poolOranRiefOoze from "./pool/oran-rief-ooze.js";
 import _poolOranRiefRecluse from "./pool/oran-rief-recluse.js";
 import _poolOranRiefSurvivalist from "./pool/oran-rief-survivalist.js";
 import _poolOranRiefTheVastwood from "./pool/oran-rief-the-vastwood.js";
+import _poolOratorOfOjutai from "./pool/orator-of-ojutai.js";
 import _poolOraxid from "./pool/oraxid.js";
 import _poolOrazcaFrillback from "./pool/orazca-frillback.js";
 import _poolOrazcaPuzzleDoor from "./pool/orazca-puzzle-door.js";
@@ -19319,6 +19325,7 @@ import _poolScaledHerbalist from "./pool/scaled-herbalist.js";
 import _poolScaledHulk from "./pool/scaled-hulk.js";
 import _poolScaledNurturer from "./pool/scaled-nurturer.js";
 import _poolScaledWurm from "./pool/scaled-wurm.js";
+import _poolScaleguardSentinels from "./pool/scaleguard-sentinels.js";
 import _poolScalesOfShale from "./pool/scales-of-shale.js";
 import _poolScalestormSummoner from "./pool/scalestorm-summoner.js";
 import _poolScalpelexis from "./pool/scalpelexis.js";
@@ -20412,6 +20419,7 @@ import _poolSilverclawGriffin from "./pool/silverclaw-griffin.js";
 import _poolSilvercoatLion from "./pool/silvercoat-lion.js";
 import _poolSilverflameRitual from "./pool/silverflame-ritual.js";
 import _poolSilverflameSquire from "./pool/silverflame-squire.js";
+import _poolSilvergillAdept from "./pool/silvergill-adept.js";
 import _poolSilvergillDouser from "./pool/silvergill-douser.js";
 import _poolSilvergillMentor from "./pool/silvergill-mentor.js";
 import _poolSilvergillPeddler from "./pool/silvergill-peddler.js";
@@ -33371,6 +33379,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDraconicDisciple,
   _poolDraconicLore,
   _poolDraconicMuralists,
+  _poolDraconicRoar,
   _poolDracosaurAuxiliary,
   _poolDrafnaFounderOfLatNam,
   _poolDragDown,
@@ -36819,6 +36828,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoldmeadowHarrier,
   _poolGoldmeadowLookout,
   _poolGoldmeadowNomad,
+  _poolGoldmeadowStalwart,
   _poolGoldmireBridge,
   _poolGoldnightCastigator,
   _poolGoldnightCommander,
@@ -41218,7 +41228,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMartialLaw,
   _poolMartonStromgald,
   _poolMartyrForTheCause,
+  _poolMartyrOfAshes,
   _poolMartyrOfDusk,
+  _poolMartyrOfSands,
+  _poolMartyrOfSpores,
   _poolMartyredRusalka,
   _poolMartyrsBond,
   _poolMartyrsCause,
@@ -43243,6 +43256,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOranRiefRecluse,
   _poolOranRiefSurvivalist,
   _poolOranRiefTheVastwood,
+  _poolOratorOfOjutai,
   _poolOraxid,
   _poolOrazcaFrillback,
   _poolOrazcaPuzzleDoor,
@@ -46647,6 +46661,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScaledHulk,
   _poolScaledNurturer,
   _poolScaledWurm,
+  _poolScaleguardSentinels,
   _poolScalesOfShale,
   _poolScalestormSummoner,
   _poolScalpelexis,
@@ -47740,6 +47755,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilvercoatLion,
   _poolSilverflameRitual,
   _poolSilverflameSquire,
+  _poolSilvergillAdept,
   _poolSilvergillDouser,
   _poolSilvergillMentor,
   _poolSilvergillPeddler,
@@ -60712,6 +60728,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/draconic-disciple": _poolDraconicDisciple,
   "pool/draconic-lore": _poolDraconicLore,
   "pool/draconic-muralists": _poolDraconicMuralists,
+  "pool/draconic-roar": _poolDraconicRoar,
   "pool/dracosaur-auxiliary": _poolDracosaurAuxiliary,
   "pool/drafna-founder-of-lat-nam": _poolDrafnaFounderOfLatNam,
   "pool/drag-down": _poolDragDown,
@@ -64160,6 +64177,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goldmeadow-harrier": _poolGoldmeadowHarrier,
   "pool/goldmeadow-lookout": _poolGoldmeadowLookout,
   "pool/goldmeadow-nomad": _poolGoldmeadowNomad,
+  "pool/goldmeadow-stalwart": _poolGoldmeadowStalwart,
   "pool/goldmire-bridge": _poolGoldmireBridge,
   "pool/goldnight-castigator": _poolGoldnightCastigator,
   "pool/goldnight-commander": _poolGoldnightCommander,
@@ -68559,7 +68577,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/martial-law": _poolMartialLaw,
   "pool/marton-stromgald": _poolMartonStromgald,
   "pool/martyr-for-the-cause": _poolMartyrForTheCause,
+  "pool/martyr-of-ashes": _poolMartyrOfAshes,
   "pool/martyr-of-dusk": _poolMartyrOfDusk,
+  "pool/martyr-of-sands": _poolMartyrOfSands,
+  "pool/martyr-of-spores": _poolMartyrOfSpores,
   "pool/martyred-rusalka": _poolMartyredRusalka,
   "pool/martyrs-bond": _poolMartyrsBond,
   "pool/martyrs-cause": _poolMartyrsCause,
@@ -70584,6 +70605,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oran-rief-recluse": _poolOranRiefRecluse,
   "pool/oran-rief-survivalist": _poolOranRiefSurvivalist,
   "pool/oran-rief-the-vastwood": _poolOranRiefTheVastwood,
+  "pool/orator-of-ojutai": _poolOratorOfOjutai,
   "pool/oraxid": _poolOraxid,
   "pool/orazca-frillback": _poolOrazcaFrillback,
   "pool/orazca-puzzle-door": _poolOrazcaPuzzleDoor,
@@ -73988,6 +74010,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scaled-hulk": _poolScaledHulk,
   "pool/scaled-nurturer": _poolScaledNurturer,
   "pool/scaled-wurm": _poolScaledWurm,
+  "pool/scaleguard-sentinels": _poolScaleguardSentinels,
   "pool/scales-of-shale": _poolScalesOfShale,
   "pool/scalestorm-summoner": _poolScalestormSummoner,
   "pool/scalpelexis": _poolScalpelexis,
@@ -75081,6 +75104,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silvercoat-lion": _poolSilvercoatLion,
   "pool/silverflame-ritual": _poolSilverflameRitual,
   "pool/silverflame-squire": _poolSilverflameSquire,
+  "pool/silvergill-adept": _poolSilvergillAdept,
   "pool/silvergill-douser": _poolSilvergillDouser,
   "pool/silvergill-mentor": _poolSilvergillMentor,
   "pool/silvergill-peddler": _poolSilvergillPeddler,

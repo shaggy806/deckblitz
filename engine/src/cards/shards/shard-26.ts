@@ -188,6 +188,7 @@ import _poolDiveBomber from "../pool/dive-bomber.js";
 import _poolDjinnOfInfiniteDeceits from "../pool/djinn-of-infinite-deceits.js";
 import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
+import _poolDraconicRoar from "../pool/draconic-roar.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
 import _poolDragonTyrant from "../pool/dragon-tyrant.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolDjinnOfInfiniteDeceits,
     _poolDownwindAmbusher,
     _poolDrEggman,
+    _poolDraconicRoar,
     _poolDragonFodder,
     _poolDragonTyrant,
     _poolDragonlordDromoka,

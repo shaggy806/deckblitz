@@ -95,6 +95,7 @@ export function costAnnouncesX(cost: AbilityCost): boolean {
     sacrificeCostReadsX(cost) ||
     cost.discard?.count === "x" ||
     cost.exileFromGraveyard?.count === "x" ||
+    cost.reveal?.count === "x" ||
     cost.removeCounter?.count === "x"
   );
 }
@@ -328,6 +329,19 @@ export interface AbilityCost {
    * graveyard": the same X as the mana's, capped at the cards there.
    */
   readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
+  /**
+   * Reveal `count` cards from your hand matching `filter` as part of the
+   * cost — the Coldsnap Martyrs' "{1}, Reveal X white cards from your hand,
+   * Sacrifice this creature" (rule 701.20a). `count: "x"` is that X,
+   * announced as it's activated (601.2b, through 602.2b) and capped by the
+   * matching cards there are; the effect reads it as `x`. Which cards is
+   * chosen as the cost is paid, once the ability is on the stack (601.2h), a
+   * `choose-from-zone` with the `"reveal"` destination — `Game.beginBehold`
+   * over a `fromHand` spec — unasked when every matching card is needed.
+   * They stay in the hand. Not on a mana ability, nor beside another cost
+   * that asks.
+   */
+  readonly reveal?: { readonly count: number | "x"; readonly filter: CardFilter; readonly text: string };
   /**
    * Tap *other* permanents you control as part of the cost — Gravespawn
    * Sovereign's "Tap five untapped Zombies you control". Distinct from

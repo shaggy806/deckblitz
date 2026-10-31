@@ -527,6 +527,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   11 freed (queued: 480). Taken alone: it changed a decision's offer and the client. Next:
   `cost:additional-cost-reveal` (17), `effect:remove-all-counters` (17),
   `effect:cant-activate-abilities-until-next-turn` (17).
+- **2026-10-30: `cost:additional-cost-reveal`, features only** — revealing cards from the hand
+  as a cost: `behold`'s hand-only mode as a reveal (a cost option, the kicker `keyword:
+  "reveal"` with `orControls`, the activated `reveal` cost's "Reveal X"), the existing
+  `choose-from-zone` decision's `"reveal"` destination. 1 key; 8 proving cards. 9 freed
+  (queued: 489). Taken alone: the session reached ~260K tokens on it. Next:
+  `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17),
+  `stat:turn-event-tallies` (17).
 
 ## Rough size
 

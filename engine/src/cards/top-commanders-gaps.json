@@ -669,7 +669,8 @@
   "effect:shuffle-hand-draw-that-many",
   "effect:shuffle-hand-and-permanents-draw-that-many",
   "effect:shuffle-permanents-owned-into-library",
-  "static:assign-damage-as-though-unblocked"
+  "static:assign-damage-as-though-unblocked",
+  "cost:additional-cost-reveal"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
