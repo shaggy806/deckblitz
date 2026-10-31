@@ -726,6 +726,11 @@ export type Action =
        * attacking tokens each blocked alike answered once. Each is still its
        * own assignment, checked on its own. */
       readonly forAll?: true;
+      /** Answers a `mayUnblocked` offer yes: the attacker assigns all its
+       * combat damage as though it weren't blocked, to what it's attacking
+       * (rule 510.1b); `assignment` is then ignored. Leaving it off answers
+       * no — an `unblockedOnly` offer's `assignment` is ignored too. */
+      readonly asThoughUnblocked?: true;
     }
   | {
       /** Answers a pending `sacrifice` decision (a sacrifice effect — Diabolic
@@ -1509,6 +1514,15 @@ export type LegalAction =
        * 702.22j-k), so their interest is its damage killing as little as it
        * can (`combat/banding.ts`'s `opposedAssignment`). */
       readonly forOpponent?: true;
+      /** The answer may instead be `asThoughUnblocked`: all the attacker's
+       * combat damage to `defender`, what it's attacking (Thorn Elemental). */
+      readonly mayUnblocked?: true;
+      /** With `mayUnblocked`, that's the only question: the division, if
+       * declined, is the other side's (banding) and asked of them next. */
+      readonly unblockedOnly?: true;
+      /** What the attacker is attacking — a player, or a planeswalker or
+       * battle's id — with `mayUnblocked`. */
+      readonly defender?: PlayerId | ObjectId;
     }
   | {
       readonly kind: "discard";

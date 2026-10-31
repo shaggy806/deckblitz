@@ -778,6 +778,7 @@ import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThereAndBackAgain from "../pool/there-and-back-again.js";
+import _poolThornElemental from "../pool/thorn-elemental.js";
 import _poolThoughtEater from "../pool/thought-eater.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTimeOfHeroes from "../pool/time-of-heroes.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThereAndBackAgain,
+    _poolThornElemental,
     _poolThoughtEater,
     _poolThrabenHeretic,
     _poolTimeOfHeroes,

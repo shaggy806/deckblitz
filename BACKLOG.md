@@ -169,10 +169,14 @@ section keeps only what to do next.
   `notChosenBefore`; 15 freed, 3 proving cards — Fiery Confluence, Mystic Confluence, Kimoyo
   Beads) and shuffle-library's top unit (2026-10-30: `shuffle-graveyard-into-library`'s `zones` —
   hand, graveyard, permanents owned — and `drawThatMany`; 15 freed, 3 proving cards —
-  Timetwister, Winds of Change, Whirlpool Warrior).
-  **469 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `static:assign-damage-as-though-unblocked` (18), `cost:additional-cost-reveal` (17),
-  `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17).
+  Timetwister, Winds of Change, Whirlpool Warrior) and assign-damage-as-though-unblocked
+  (2026-10-30: the `assignAsThoughUnblocked` static and `assign-as-though-unblocked` effect,
+  answered on `assign-combat-damage`'s `mayUnblocked` with the client's "All to [defender]";
+  the `blocked` filter; 11 freed, 5 proving cards — Thorn Elemental, Indomitable Might, Siege
+  Behemoth, Outmaneuver, Predatory Focus).
+  **480 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `cost:additional-cost-reveal` (17), `effect:remove-all-counters` (17),
+  `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

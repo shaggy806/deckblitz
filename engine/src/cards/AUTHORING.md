@@ -1280,6 +1280,7 @@ own object, so it reaches every one.
 | `grant-static` | `target` or `filter`, `ability: StaticAbility`, `duration` | "It gains '[static ability]'": Full Steam Ahead's "This creature can't be blocked by more than one creature" (`filter`, locked as it resolves — 611.2c), Carnage's "This creature attacks each combat if able" (`restrictions: ["must-attack"]`, `"permanent"`), Earthbind's Aura gaining "Enchanted creature loses flying" (`target: "source"`, `affects: { scope: "attached" }`). The ability works from that permanent as its own static would, its effects timestamped by the later of the permanent and the grant (613.7a), and a later loss of all abilities takes it (613.7). Read for P/T, keyword and restriction statics, block filters, `grantsActivated`/`grantsTriggered`, `doesntUntap`, `cantLoseGame`, and a granted "base power is equal to …" (`setBasePtFromCount` — layer 7b by timestamp, not a CDA once granted, 604.3a). A layer-4 part isn't applied. `grant-static.test.ts`. |
 | `attack-despite-defender` | `target` or `filter` | "Can attack this turn as though it didn't have defender" (rule 702.3b). On `target` (Assault Formation) a modifier until end of turn; with `filter` a rule for the rest of the turn over everything matching it from your side, so a defender that comes under your control later is covered too (Wakestone Gargoyle's ruling; `GameState.turnDefenderAttacks`). A rule about the creature rather than an ability it gains, so a loss of all abilities doesn't end it. The static form is §10's `canAttackAsThoughNoDefender`. |
 | `damage-by-toughness` | `target` | "Assigns combat damage equal to its toughness rather than its power" until end of turn (rule 510.1a — Walking Bulwark). Its power is unchanged for everything else (a fight still uses power). The static form is §10's `combatDamageByToughness`. |
+| `assign-as-though-unblocked` | `target` or `filter`, `optional?` | "[It] assign[s] its combat damage this turn as though it weren't blocked": as combat damage is assigned, a blocked creature assigns all of it to the player, planeswalker or battle it's attacking (rule 510.1b), none to its blockers. `optional` is "you may have …" — its controller chooses then, on the `assign-combat-damage` decision (Gurzigost's `target: "source"`); without it there's no choice (Outmaneuver's "X target blocked creatures", the `blocked` filter). On `target` a modifier until end of turn; with `filter` a rule for the turn over everything matching it from your side, one arriving later too (Predatory Focus — it changes no characteristic, so 611.2c doesn't lock the set in; `GameState.turnUnblockedAssignments`). Not an ability. The static form is §10's `assignAsThoughUnblocked`. `assign-as-though-unblocked.test.ts`. |
 | `attack-random-opponent` | `target`, `notAttackedLastCombat?`, `else?` | Territorial Hellkite's "choose an opponent at random that this creature didn't attack during your last combat. This creature attacks that player this combat if able. If you can't choose an opponent this way, tap this creature" (`{ target: "source", notAttackedLastCombat: true, else: { kind: "tap", target: "source" } }`): the game picks among the effect's controller's opponents still in the game — with `notAttackedLastCombat`, not the one `target` attacked during its controller's previous combat phase (any, if it didn't attack then) — and `target` must attack that player this combat if able, as encore's tokens must theirs (`GameObject.mustAttackPlayer`, only this combat): not a planeswalker of theirs, and nothing forces a cost to be paid. `else` happens when nobody can be picked. Logged as `random-player-chosen`. |
 | `put-in-command-zone` | `target` | "Return it to the command zone" (Hellkite Courser's delayed trigger): a commander still on the battlefield as the same object goes there (its ruling — gone elsewhere, it stays); anything else isn't moved. |
 | `exchange-life-toughness` | `target`, `player?: EffectPlayerRef` | "Exchange your life total with this creature's toughness" (Tree of Redemption; Tree of Perdition's "target opponent's life total" is `player: { target: 0 }`) — rule 701.12g: the toughness becomes the player's former life total, a layer-7b set with no end (`PtModifier.setToughness`; counters and bonuses still apply on top — the Lunarch Mantle ruling), and the player gains or loses the life to reach its former toughness, so life-gain replacements and triggers see it. Gone before it resolves, nothing happens (the ruling); a player who can't gain, or can't lose, that life, and neither half does (701.12a). |
@@ -2467,7 +2468,9 @@ made `separate`). `attacking` asks whether the permanent is currently attacking
 (Kangee's Lieutenant); `unblocked` whether it's an unblocked attacker (rule
 509.1h: attacking, with blockers declared and none for it, or put onto the
 battlefield attacking since — 508.4d) — from the declare blockers step on,
-never before. `subtypes`/`typesAnyOf` are an OR
+never before; `blocked` whether it's a blocked one (attacking and blocked
+this combat, though its blockers have left — Outmaneuver's "target blocked
+creatures"), also never before blockers are declared. `subtypes`/`typesAnyOf` are an OR
 within themselves (Farseek: "a Plains, Island, Swamp, or Mountain card";
 Takenuma's Channel: "a creature or planeswalker card"). A changeling matches
 every creature-type clause, `notSubtypes` included (it *is* a Zombie).
@@ -4178,6 +4181,14 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   their own most recent turn — not one who only attacked a planeswalker, nor
   one whose creature was put onto the battlefield attacking (the O-Kagachi
   ruling on "attacked you"; `attackedYouDuringTheirLastTurn`).
+- `assignAsThoughUnblocked: true` — "you may have [the affected creature] assign its
+  combat damage as though it weren't blocked" (Thorn Elemental on `"self"`, Indomitable
+  Might's `"attached"` — "enchanted creature's controller may have it …" — Siege Behemoth's
+  creatures you control under a `source` `attacking` condition). Asked of a blocked one's
+  controller as combat damage is assigned, even with a lone blocker or none left: all of it
+  to what it's attacking, or the usual division — never split between them. A rule about
+  how it assigns damage, not an ability it has. The one-shot form is the
+  `assign-as-though-unblocked` effect (§6).
 - `spellsHaveDelve: true` — "spells you cast have delve" (Teval, Arbiter of Virtue): every
   spell this permanent's controller casts, from anywhere, has delve as it's cast, read wherever
   a printed `delve` is (§3).

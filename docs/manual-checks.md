@@ -5790,3 +5790,13 @@ engine terms. A second thing to check is a second test.
 ### Mystic Confluence: one mode twice, each with its own target, four players
 - **Do:** Cast Mystic Confluence. Click "Return target creature to its owner's hand" twice and "Draw a card" once, then Confirm. Target Bob's Grizzly Bears, then Carol's Hill Giant.
 - **Expect:** You're asked for two creature targets, one after the other. Both creatures go back to their owners' hands, Dave's Gray Ogre stays, and you draw a card.
+
+## Combat damage as though unblocked (2026-10-30, need-keys Phase 2: build-family, features only)
+
+### Thorn Elemental: all of its damage past a blocker
+- **Do:** Attack Bob with Thorn Elemental. As Bob, block it with Grizzly Bears. As you, click "All to Bob".
+- **Expect:** The damage bar offers Confirm and "All to Bob" though there's one blocker and no trample. Bob goes to 33; Grizzly Bears survives and Thorn Elemental has 2 damage.
+
+### Siege Behemoth: each blocked attacker its own choice, four players
+- **Do:** Attack Bob with Siege Behemoth and Grizzly Bears. As Bob, block Siege Behemoth with Hill Giant and Grizzly Bears with Wall of Denial. As you, click "Confirm" for Siege Behemoth, then "All to Bob" for Grizzly Bears.
+- **Expect:** You're asked once per attacker. Hill Giant dies, Wall of Denial survives, and Bob goes to 38.

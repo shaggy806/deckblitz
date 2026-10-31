@@ -1845,6 +1845,18 @@ export interface StaticAbility {
    */
   readonly canAttackAsThoughNoDefender?: boolean | "players-who-attacked-you";
   /**
+   * "You may have [the affected creature] assign its combat damage as though
+   * it weren't blocked" (Thorn Elemental on `"self"`, Indomitable Might's
+   * enchanted creature, Siege Behemoth's creatures you control while it's
+   * attacking): as combat damage is assigned, a blocked creature's
+   * controller may have it assign all of it to the player, planeswalker or
+   * battle it's attacking (rule 510.1b) instead of to its blockers (510.1c)
+   * — even when no blocker is left. A rule about how it assigns damage, not
+   * an ability it has. The one-shot form is the `assign-as-though-unblocked`
+   * effect (Gurzigost, Predatory Focus, Outmaneuver's mandatory one).
+   */
+  readonly assignAsThoughUnblocked?: true;
+  /**
    * The affected permanents can't be sacrificed — Alexios, Deimos of
    * Kosmos's "~ can't be sacrificed" (`"self"`), Zurgo, Thunder's Decree's
    * "during your end step, Warrior tokens you control have 'This token can't

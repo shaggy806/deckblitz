@@ -282,7 +282,12 @@ export interface DecisionHost {
   readonly applyCommanderChoice: (player: PlayerId, toCommandZone: boolean) => void;
   readonly applyMulligan: (player: PlayerId, keep: boolean) => void;
   readonly applyPutOnBottom: (player: PlayerId, cards: readonly ObjectId[]) => void;
-  readonly applyAssignCombatDamage: (player: PlayerId, assignment: readonly number[], forAll?: boolean) => void;
+  readonly applyAssignCombatDamage: (
+    player: PlayerId,
+    assignment: readonly number[],
+    forAll?: boolean,
+    asThoughUnblocked?: boolean,
+  ) => void;
   readonly applyAttackerDeclarations: (player: PlayerId, declarations: readonly AttackerDeclaration[]) => void;
   readonly applyBlockerDeclarations: (player: PlayerId, blocks: readonly BlockerDeclaration[]) => void;
   readonly applyChooseTargets: (

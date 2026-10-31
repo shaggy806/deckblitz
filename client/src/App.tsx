@@ -2099,10 +2099,13 @@ function Table({
   )
   // The split as it stands, which the board draws as well as the bar (a
   // badge on each blocker), so it's worked out up here: the engine's
-  // standard split until the player changes it.
+  // standard split until the player changes it. None when the question is
+  // only "as though it weren't blocked?" (the division is the other side's).
   const damageAnswer = useMemo(
     () =>
-      assignDamageAction ? (damagePicks ?? defaultAssignment(assignDamageAction)) : null,
+      assignDamageAction && assignDamageAction.unblockedOnly !== true
+        ? (damagePicks ?? defaultAssignment(assignDamageAction))
+        : null,
     [assignDamageAction, damagePicks],
   )
   const damageGroups = useMemo(
@@ -5945,6 +5948,35 @@ function Table({
         ) : null}
       </div>
     )
+  } else if (mode === 'assign-combat-damage' && assignDamageAction?.unblockedOnly === true) {
+    // "You may have it assign its combat damage as though it weren't
+    // blocked" while banding hands the division to the other side: only the
+    // yes or no is ours, the division theirs if we decline.
+    const offer = assignDamageAction
+    const attacked = view.objects[offer.attacker]?.attacking ?? null
+    const to = attacked === null ? 'the defender' : attackTargetLabel(attacked)
+    controls = (
+      <div className="controls damage-assign">
+        <span>
+          {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage as though it weren&rsquo;t blocked?
+          <span className="muted"> · banding: if not, they divide it</span>
+        </span>
+        <button
+          type="button"
+          onClick={() =>
+            game.dispatch({ type: 'assign-combat-damage', player: seat, assignment: [], asThoughUnblocked: true })
+          }
+        >
+          All to {to}
+        </button>
+        <button
+          type="button"
+          onClick={() => game.dispatch({ type: 'assign-combat-damage', player: seat, assignment: [] })}
+        >
+          No
+        </button>
+      </div>
+    )
   } else if (mode === 'assign-combat-damage' && assignDamageAction && damageAnswer) {
     // Starts at the engine's standard split: kill as many blockers as
     // possible, the cheapest first, then trample the rest over or leave it on
@@ -5967,7 +5999,9 @@ function Table({
     const attacked = view.objects[offer.attacker]?.attacking ?? null
     const overTo = attacked === null ? 'the defender' : attackTargetLabel(attacked)
     const status =
-      free > 0
+      offer.blockers.length === 0
+        ? 'no blocker left: no damage'
+        : free > 0
         ? offer.trample
           ? allLethal
             ? `→ ${overTo}: ${free}`
@@ -6061,6 +6095,24 @@ function Table({
         >
           Confirm
         </button>
+        {/* "You may have it assign its combat damage as though it weren't
+            blocked" (Thorn Elemental): all of it to what it's attacking. */}
+        {offer.mayUnblocked === true ? (
+          <button
+            type="button"
+            title={`As though it weren't blocked: all ${offer.power} to ${overTo}`}
+            onClick={() =>
+              game.dispatch({
+                type: 'assign-combat-damage',
+                player: seat,
+                assignment: [],
+                asThoughUnblocked: true,
+              })
+            }
+          >
+            All to {overTo}
+          </button>
+        ) : null}
         {/* Attackers still to assign that are in the same situation as this
             one (a stack of tokens each blocked alike): the same split for
             all of them, rather than a prompt per token (the user,

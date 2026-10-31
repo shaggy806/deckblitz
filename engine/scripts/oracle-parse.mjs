@@ -2053,6 +2053,15 @@ export function parseSentence(sentence, ctx) {
       return { kind: "restrict", target: m[1] === "~" ? "source" : slot(m[1]), restrictions: [], cantBeBlockedBy: by };
     }
   }
+  // "You may have ~ assign its combat damage this turn as though it weren't
+  // blocked" (Gurzigost), and over creatures you control (Predatory Focus):
+  // the `assign-as-though-unblocked` effect.
+  if (re(`you may have ~ assign its combat damage this turn as though it weren't blocked`).test(s)) {
+    return { kind: "assign-as-though-unblocked", target: "source", optional: true };
+  }
+  if (re(`you may have creatures you control assign their combat damage this turn as though they weren't blocked`).test(s)) {
+    return { kind: "assign-as-though-unblocked", filter: { type: "creature", controlledBy: "you" }, optional: true };
+  }
   // Rule 701.12b: two permanents change hands at once, all or nothing.
   if ((m = re(`exchange control of ~ and (${TARGET})`).exec(s))) {
     return { kind: "exchange-control", objects: ["source", slot(m[1])] };
@@ -4564,6 +4573,15 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, setSubtypes: [m[1]], text };
   }
   if (line === "Enchanted land is the chosen type.") return { affects: { scope: "attached" }, setsChosenLandType: true, text };
+  // "You may have ~ assign its combat damage as though it weren't blocked"
+  // (Thorn Elemental; Wolverine's "his … he"), and an Aura's or Equipment's
+  // "enchanted creature's controller may have it …" (Indomitable Might).
+  if (/^You may have ~ assign (?:its|his|her|their) combat damage as though (?:it|he|she|they) weren't blocked\.$/.test(line)) {
+    return { affects: { scope: "self" }, assignAsThoughUnblocked: true, text };
+  }
+  if (/^(?:Enchanted|Equipped) creature's controller may have it assign its combat damage as though it weren't blocked\.$/.test(line)) {
+    return { affects: { scope: "attached" }, assignAsThoughUnblocked: true, text };
+  }
   if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }

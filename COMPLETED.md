@@ -86,6 +86,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: combat damage as though unblocked** (2026-10-30;
+  `static:assign-damage-as-though-unblocked`). The static `assignAsThoughUnblocked` and the
+  `assign-as-though-unblocked` effect (`target`, or `filter` as a rule for the turn;
+  `optional`, else mandatory), read by `unblockedAssignmentOf`; a blocked attacker that may is
+  always asked on `assign-combat-damage` (`mayUnblocked`, the answer's `asThoughUnblocked`: all
+  of it to what it's attacking, rule 510.1b), under banding first and alone (`unblockedOnly`);
+  a blocked creature with no blocker left and no trample may now answer "nothing" (510.1c);
+  the `blocked` filter; the bots' `damageThrough` and `prefersUnblocked`; the client's "All to
+  [defender]" button and a banding yes/no bar; two manual checks; the scaffolder taught. 11
+  freed (queued: 480), 5 proving cards: Thorn Elemental, Indomitable Might, Siege Behemoth,
+  Outmaneuver, Predatory Focus.
 - **Need-keys Phase 2: a mode chosen more than once, and shuffling zones into a library**
   (2026-10-30; `effect:modal-repeat-modes` and `effect:mode-not-chosen-this-turn`, then
   `effect:shuffle-library`'s top unit — `effect:shuffle-hand-and-graveyard-into-library`,

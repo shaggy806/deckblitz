@@ -271,6 +271,12 @@ export interface CardFilter {
    * an unblocked attacker you control" (702.49a).
    */
   readonly unblocked?: boolean;
+  /** A **blocked** creature (rule 509.1h): attacking, and blocked this
+   * combat — by a creature, or made blocked by an effect — and stays so
+   * through the end of combat though its blockers leave (Outmaneuver's "X
+   * target blocked creatures"; Smite's ruling). Not before blockers are
+   * declared, where `unblocked: false` would match any attacker. */
+  readonly blocked?: boolean;
   /**
    * Is (or isn't) **goaded** (rule 701.15b), by anyone and whichever way — a
    * one-shot goad, one for the rest of the game, or a static one (`goadersOf`
@@ -1248,6 +1254,10 @@ export function matchesFilter(
       !live.blocked &&
       (step === "declare-blockers" || step === "combat-damage" || step === "end-combat");
     if (unblocked !== filter.unblocked) return false;
+  }
+  if (filter.blocked !== undefined) {
+    const blocked = live !== undefined && live.zone === "battlefield" && live.attacking !== null && live.blocked;
+    if (blocked !== filter.blocked) return false;
   }
   if (filter.suspected !== undefined) {
     const suspected =

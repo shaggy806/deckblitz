@@ -1569,6 +1569,11 @@ export interface PtModifier {
    * Farrel's Zealot's "this creature assigns no combat damage this turn",
    * rule 510.1a). Like the above, a rule about it, not an ability. */
   assignsNoCombatDamage?: true;
+  /** It assigns its combat damage this turn as though it weren't blocked
+   * (the `assign-as-though-unblocked` effect): `"may"`, its controller's
+   * choice as damage is assigned (Gurzigost), or `"must"` (Outmaneuver).
+   * Like the above, a rule about it, not an ability. */
+  assignAsThoughUnblocked?: "may" | "must";
   /** Layer 6 — it gains "This creature can't be sacrificed" (the
    * `"cant-be-sacrificed"` effect). The static equivalent is
    * `StaticAbility.cantBeSacrificed`. */
@@ -3519,6 +3524,14 @@ export type AwaitingDecision =
       /** `player` doesn't control the creature: banding hands the division
        * to the other side (rules 702.22j-k). */
       readonly forOpponent?: true;
+      /** `player` may instead have the attacker assign all its combat damage
+       * as though it weren't blocked, to what it's attacking (a
+       * `assignAsThoughUnblocked` permission — Thorn Elemental): the answer's
+       * `asThoughUnblocked`. */
+      readonly mayUnblocked?: true;
+      /** With `mayUnblocked`: that's the whole question — the division, if
+       * declined, is the other side's (banding) and asked of them next. */
+      readonly unblockedOnly?: true;
     };
 
 /**
@@ -4104,6 +4117,14 @@ export interface CombatDamageState {
    * amount dealt to each of its blockers, in `blockedBy` order (leftover, if
    * trample, goes to the defender). */
   readonly assigned: Readonly<Record<string, readonly number[]>>;
+  /** Blocked attackers whose controller chose this sub-pass to have them
+   * assign their combat damage as though they weren't blocked — all of it
+   * to what they're attacking (rule 510.1b; `unblockedAssignmentOf`). */
+  readonly asThoughUnblocked?: readonly ObjectId[];
+  /** Blocked attackers whose controller has been asked that and declined,
+   * where the division itself is the other side's (banding, 702.22j): the
+   * next question about them is the division. */
+  readonly unblockedDeclined?: readonly ObjectId[];
   /** The attackers and blockers that had first strike or double strike as the
    * first-strike step began (rule 510.4), id → battlefield timestamp then —
    * the second step's roster is everyone *not* here plus whoever has double
@@ -4806,6 +4827,14 @@ export interface GameState {
    * from `you`'s side, including ones that arrive later. Read through
    * `canAttackDespiteDefender`. Turn-scoped. */
   turnDefenderAttacks?: { readonly filter: CardFilter; readonly you: PlayerId }[];
+  /** "You may have creatures you control assign their combat damage this
+   * turn as though they weren't blocked" (the `assign-as-though-unblocked`
+   * effect's `filter` form — Predatory Focus): a rule about how they assign
+   * damage, not a characteristic, so it binds whatever matches it from
+   * `you`'s side as damage is assigned, a creature that arrives later too
+   * (611.2c doesn't lock it in). Read through `unblockedAssignmentOf`.
+   * Turn-scoped. */
+  turnUnblockedAssignments?: { readonly filter: CardFilter; readonly you: PlayerId; readonly must?: true }[];
   /** Attack requirements imposed as a rule of the game until a player's next
    * turn — the `attack-requirement` effect (Kardur, Doomscourge). See
    * {@link AttackRequirementRule}. Absent when there are none. */

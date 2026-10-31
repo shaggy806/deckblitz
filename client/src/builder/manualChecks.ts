@@ -8688,4 +8688,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Gray Ogre'] }],
     }),
   ),
+  // --- Combat damage as though unblocked (2026-10-30, build-family) ---
+  preset(
+    'Thorn Elemental: all of its damage past a blocker',
+    board({ you: { bf: ['Thorn Elemental'] }, opp: { human: true, bf: ['Grizzly Bears'] } }),
+  ),
+  preset(
+    'Siege Behemoth: each blocked attacker its own choice, four players',
+    board({
+      you: { bf: ['Siege Behemoth', 'Grizzly Bears'] },
+      opp: [{ human: true, bf: ['Wall of Denial', 'Hill Giant'] }, { bf: ['Gray Ogre'] }, { bf: ['Forest'] }],
+    }),
+  ),
 ]

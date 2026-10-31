@@ -352,6 +352,7 @@ import _poolIcehideGolem from "../pool/icehide-golem.js";
 import _poolIllusionaryForces from "../pool/illusionary-forces.js";
 import _poolImpetuousProtege from "../pool/impetuous-protege.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
+import _poolIndomitableMight from "../pool/indomitable-might.js";
 import _poolInfernalIdol from "../pool/infernal-idol.js";
 import _poolInfernalOffering from "../pool/infernal-offering.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
@@ -497,6 +498,7 @@ import _poolOrdruunCommando from "../pool/ordruun-commando.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOrnamentalCourage from "../pool/ornamental-courage.js";
+import _poolOutmaneuver from "../pool/outmaneuver.js";
 import _poolOutrageShaman from "../pool/outrage-shaman.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
@@ -1191,6 +1193,7 @@ const shard: CardShard = {
     _poolIllusionaryForces,
     _poolImpetuousProtege,
     _poolIncreasingDevotion,
+    _poolIndomitableMight,
     _poolInfernalIdol,
     _poolInfernalOffering,
     _poolInfernalRebirth,
@@ -1336,6 +1339,7 @@ const shard: CardShard = {
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOrnamentalCourage,
+    _poolOutmaneuver,
     _poolOutrageShaman,
     _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,

@@ -21,7 +21,6 @@ import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, ta
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
-import type { DamageAssignmentOffer } from "./combat/damage.js";
 import { polarityBias } from "./deck-bias.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
@@ -177,24 +176,12 @@ export interface PlayerController {
    * `lethal[i]` is what counts as lethal to each blocker: any division among
    * them is legal, but damage may trample over only once every blocker has
    * its lethal (rule 702.19b). Reached via `act` when
-   * `awaiting.kind === "assign-combat-damage"`.
+   * `awaiting.kind === "assign-combat-damage"`. With `mayUnblocked`,
+   * `"unblocked"` has it assign all its damage as though it weren't blocked
+   * (Thorn Elemental); with `unblockedOnly` that's the whole question, and
+   * anything else declines.
    */
-  assignCombatDamage(
-    view: ControllerView,
-    assignment: {
-      readonly attacker: ObjectId;
-      readonly blockers: readonly ObjectId[];
-      readonly power: number;
-      readonly lethal: readonly number[];
-      readonly trample: boolean;
-      readonly indestructible: readonly boolean[];
-      /** The answering player doesn't control the creature (banding —
-       * rules 702.22j-k). */
-      readonly forOpponent?: boolean;
-      /** The creature is a blocker dividing among a band (510.1d). */
-      readonly blocking?: boolean;
-    },
-  ): readonly number[];
+  assignCombatDamage(view: ControllerView, assignment: DamageAssignmentAsk): readonly number[] | "unblocked";
   /**
    * Choose one target per spec for a triggered ability being put on the stack.
    * `legalOptions[i]` is the non-empty list of legal targets for `specs[i]`.
@@ -529,6 +516,45 @@ const firstOfEach = (
  */
 export const standardDamageAssignment = defaultAssignment;
 
+/** What `PlayerController.assignCombatDamage` is asked. */
+export interface DamageAssignmentAsk {
+  readonly attacker: ObjectId;
+  readonly blockers: readonly ObjectId[];
+  readonly power: number;
+  readonly lethal: readonly number[];
+  readonly trample: boolean;
+  readonly indestructible: readonly boolean[];
+  /** The answering player doesn't control the creature (banding — rules
+   * 702.22j-k). */
+  readonly forOpponent?: boolean;
+  /** The creature is a blocker dividing among a band (510.1d). */
+  readonly blocking?: boolean;
+  /** `"unblocked"` is an answer too (Thorn Elemental). */
+  readonly mayUnblocked?: boolean;
+  /** …and the only question: the division, if declined, is the other
+   * side's (banding). */
+  readonly unblockedOnly?: boolean;
+}
+
+/**
+ * The automatic answer to "you may have it assign its combat damage as
+ * though it weren't blocked": yes when the division would kill nothing, when
+ * the damage is lethal to the player it's attacking, when only tokens would
+ * die, or when the other side would make the division (banding, which kills
+ * as little as it can). Otherwise the blockers it kills are worth more.
+ */
+export function prefersUnblocked(view: ControllerView, a: DamageAssignmentAsk): boolean {
+  if (a.mayUnblocked !== true) return false;
+  if (a.unblockedOnly === true) return true;
+  const split = defaultAssignment(a);
+  const kills = a.blockers.filter((_, i) => a.indestructible[i] !== true && (split[i] ?? 0) >= a.lethal[i]);
+  if (kills.length === 0) return true;
+  const defender = view.state.objects[a.attacker]?.attacking;
+  const life = defender != null ? view.state.players[defender as PlayerId]?.life : undefined;
+  if (life !== undefined && life <= a.power) return true;
+  return kills.every((id) => view.state.objects[id]?.isToken === true);
+}
+
 /**
  * Answer whatever the engine is waiting on, or `null` if it isn't waiting.
  * Shared by every controller so `act` only has to handle priority choices.
@@ -598,8 +624,8 @@ export class AutomaticController implements PlayerController {
     return [];
   }
 
-  assignCombatDamage(_view: ControllerView, a: DamageAssignmentOffer): readonly number[] {
-    return standardDamageAssignment(a);
+  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): readonly number[] | "unblocked" {
+    return prefersUnblocked(view, a) ? "unblocked" : standardDamageAssignment(a);
   }
 
   chooseTargets(
@@ -1036,19 +1062,7 @@ type TimeTravelChooser = (
   view: ControllerView,
   eligible: readonly ObjectId[],
 ) => { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
-type DamageAssigner = (
-  view: ControllerView,
-  assignment: {
-    readonly attacker: ObjectId;
-    readonly blockers: readonly ObjectId[];
-    readonly power: number;
-    readonly lethal: readonly number[];
-    readonly trample: boolean;
-    readonly indestructible: readonly boolean[];
-    readonly forOpponent?: boolean;
-    readonly blocking?: boolean;
-  },
-) => readonly number[];
+type DamageAssigner = (view: ControllerView, assignment: DamageAssignmentAsk) => readonly number[] | "unblocked";
 
 /**
  * Plays a fixed queue of priority actions (each firing when its `when` guard is
@@ -1187,22 +1201,7 @@ export class ScriptedController implements PlayerController {
     return this.declareBlockersFn(view);
   }
 
-  assignCombatDamage(
-    view: ControllerView,
-    a: {
-      readonly attacker: ObjectId;
-      readonly blockers: readonly ObjectId[];
-      readonly power: number;
-      readonly lethal: readonly number[];
-      readonly trample: boolean;
-      readonly indestructible: readonly boolean[];
-      /** The answering player doesn't control the creature (banding —
-       * rules 702.22j-k). */
-      readonly forOpponent?: boolean;
-      /** The creature is a blocker dividing among a band (510.1d). */
-      readonly blocking?: boolean;
-    },
-  ): readonly number[] {
+  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): readonly number[] | "unblocked" {
     return this.assignCombatDamageFn(view, a);
   }
 

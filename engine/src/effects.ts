@@ -4361,6 +4361,27 @@ export type EffectSpec =
     }
   | {
       /**
+       * "[It] assign[s] its combat damage this turn as though it weren't
+       * blocked": as combat damage is assigned, a blocked creature assigns
+       * all of it to the player, planeswalker or battle it's attacking (rule
+       * 510.1b) rather than to its blockers (510.1c). `target` until end of
+       * turn, as a modifier (Gurzigost's `"source"`, Outmaneuver's targets);
+       * or with `filter`, a rule for the rest of the turn over every
+       * permanent matching it from the controller's side, one that arrives
+       * later too (Predatory Focus's "creatures you control" — it changes no
+       * characteristic, so 611.2c doesn't lock the set in). `optional`: "you
+       * may have …", the creature's controller choosing as damage is
+       * assigned; without it there's no choice (Outmaneuver). Not an ability
+       * the creature gains. The static form is
+       * `StaticAbility.assignAsThoughUnblocked`.
+       */
+      readonly kind: "assign-as-though-unblocked";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly optional?: boolean;
+    }
+  | {
+      /**
        * "Return it to the command zone" (Hellkite Courser's delayed
        * trigger): a commander still on the battlefield as the same object
        * (rule 400.7 — its ruling: "only if it's still on the battlefield")
@@ -7981,6 +8002,8 @@ export interface EffectApi {
   damageByToughness(target: TargetRef): void;
   /** See the `"assigns-no-combat-damage"` {@link EffectSpec}. */
   assignsNoCombatDamage(target: TargetRef): void;
+  /** See the `"assign-as-though-unblocked"` {@link EffectSpec}. */
+  assignAsThoughUnblocked(target: TargetRef | undefined, filter: CardFilter | undefined, must: boolean): void;
   /** See the `"put-in-command-zone"` {@link EffectSpec}. */
   putInCommandZone(target: TargetRef): void;
   /** See the `"exchange-life-toughness"` {@link EffectSpec}. */
@@ -12194,6 +12217,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "assigns-no-combat-damage": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.assignsNoCombatDamage(target);
+      return;
+    }
+    case "assign-as-though-unblocked": {
+      const must = spec.optional !== true;
+      if (spec.filter !== undefined) {
+        ctx.assignAsThoughUnblocked(undefined, spec.filter, must);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.assignAsThoughUnblocked(target, undefined, must);
       return;
     }
     case "attack-random-opponent": {

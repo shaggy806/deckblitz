@@ -321,6 +321,29 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Combat damage as though unblocked — built 2026-10-30
+
+The need-keys Phase 2 family `static:assign-damage-as-though-unblocked`,
+features only. **`assignAsThoughUnblocked: true`** on a static is "you may
+have [it] assign its combat damage as though it weren't blocked" — on
+`"self"` (Thorn Elemental), the enchanted creature (Indomitable Might) or a
+filter under a condition (Siege Behemoth): a rule about how it assigns
+damage, so no loss of abilities ends it. The one-shot form is the
+**`assign-as-though-unblocked`** effect (`target`, or `filter` as a rule for
+the turn — Predatory Focus — and `optional`; without it there's no choice:
+Outmaneuver). `unblockedAssignmentOf` reads it, "must" over "may". A blocked
+attacker that may is always a question on the `assign-combat-damage`
+decision (`mayUnblocked`; the answer's `asThoughUnblocked` sends all of it to
+what it's attacking, rule 510.1b), even with one blocker or none left; under
+banding the choice comes first, alone (`unblockedOnly`), and the other side
+divides if declined. A blocked creature with no blocker left and no trample
+assigns nothing, now a legal answer (510.1c). The client's damage bar has
+"All to [defender]". New filter **`blocked`** (Outmaneuver's "target blocked
+creatures"). The bots' `damageThrough` lets such an attacker's damage past
+blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
+Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
+`static:attack-as-though-haste` (2 cards) is separate code and still open.
+
 ### Shuffling a hand, graveyard and permanents in — built 2026-10-30
 
 The need-keys Phase 2 family `effect:shuffle-library`'s top unit, features

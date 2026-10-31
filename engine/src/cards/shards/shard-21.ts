@@ -523,6 +523,7 @@ import _poolPlagueFiend from "../pool/plague-fiend.js";
 import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
+import _poolPredatoryFocus from "../pool/predatory-focus.js";
 import _poolPrimalForcemage from "../pool/primal-forcemage.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolPrisonBarricade from "../pool/prison-barricade.js";
@@ -1350,6 +1351,7 @@ const shard: CardShard = {
     _poolPlarggDeanOfChaos,
     _poolPotionOfHealing,
     _poolPrecipitousDrop,
+    _poolPredatoryFocus,
     _poolPrimalForcemage,
     _poolPrimalWellspring,
     _poolPrisonBarricade,

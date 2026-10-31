@@ -468,6 +468,9 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "grant-protection":
     case "animate":
       return effect.duration === "end-of-turn";
+    // Matters only to this turn's combat damage (Gurzigost).
+    case "assign-as-though-unblocked":
+      return true;
     default:
       return false;
   }

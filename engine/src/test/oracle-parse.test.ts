@@ -3279,4 +3279,22 @@ describe("blocking restrictions and requirements on one creature", () => {
       cantBlockAttacker: "source",
     });
   });
+
+  it("reads 'assign its combat damage as though it weren't blocked', on it, an Aura's creature, or this turn", () => {
+    expect(face("Creature — Elemental", "You may have this creature assign its combat damage as though it weren't blocked.").static[0]).toMatchObject({
+      affects: { scope: "self" },
+      assignAsThoughUnblocked: true,
+    });
+    expect(
+      face("Enchantment — Aura", "Enchant creature\nEnchanted creature's controller may have it assign its combat damage as though it weren't blocked.").static[0],
+    ).toMatchObject({ affects: { scope: "attached" }, assignAsThoughUnblocked: true });
+    expect(parseSentence("You may have ~ assign its combat damage this turn as though it weren't blocked.", ctx())).toEqual({
+      kind: "assign-as-though-unblocked",
+      target: "source",
+      optional: true,
+    });
+    expect(
+      parseSentence("You may have creatures you control assign their combat damage this turn as though they weren't blocked.", ctx()),
+    ).toEqual({ kind: "assign-as-though-unblocked", filter: { type: "creature", controlledBy: "you" }, optional: true });
+  });
 });

@@ -16,6 +16,13 @@
  * shared with `Game`; only the "is this player being asked" guard is here,
  * because that message is asserted by two tests and reaches the client
  * verbatim.
+ *
+ * "You may have it assign its combat damage as though it weren't blocked"
+ * (Thorn Elemental) is part of the same announcement (510.1): the offer's
+ * `mayUnblocked`, answered by the action's `asThoughUnblocked` — all of it
+ * to what the attacker's attacking (510.1b), nothing to divide. Under
+ * banding, where the division is the other side's, it's asked first and
+ * alone (`unblockedOnly`).
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -28,7 +35,9 @@ export const assignCombatDamage = defineDecision({
   // Combat damage is the rules' own bookkeeping; no card is behind it.
   hasSource: false,
 
-  legal: (_ctx, awaiting): LegalAction[] => [
+  legal: (ctx, awaiting): LegalAction[] => {
+    const defender = ctx.state.objects[awaiting.attacker]?.attacking;
+    return [
     {
       kind: "assign-combat-damage",
       attacker: awaiting.attacker,
@@ -40,8 +49,12 @@ export const assignCombatDamage = defineDecision({
       ...(awaiting.alike !== undefined && awaiting.alike > 0 ? { alike: awaiting.alike } : {}),
       ...(awaiting.blocking === true ? { blocking: true as const } : {}),
       ...(awaiting.forOpponent === true ? { forOpponent: true as const } : {}),
+      ...(awaiting.mayUnblocked === true ? { mayUnblocked: true as const } : {}),
+      ...(awaiting.unblockedOnly === true ? { unblockedOnly: true as const } : {}),
+      ...(awaiting.mayUnblocked === true && defender != null ? { defender } : {}),
     },
-  ],
+  ];
+  },
 
   whyCannot: (ctx, action, player): string | null => {
     if (action.type !== "assign-combat-damage") {
@@ -55,18 +68,23 @@ export const assignCombatDamage = defineDecision({
     ) {
       return `${player} is not being asked to assign combat damage`;
     }
+    // "As though it weren't blocked" (Thorn Elemental): all of it to what
+    // it's attacking, so no division to check.
+    if (action.asThoughUnblocked === true) {
+      return awaiting.mayUnblocked === true ? null : "that creature can't assign its combat damage as though it weren't blocked";
+    }
+    // Declining when that's the whole question: the division comes next.
+    if (awaiting.unblockedOnly === true) return null;
     return damageAssignmentViolations(awaiting, action.assignment);
   },
 
   apply: (host, action): void => {
     if (action.type !== "assign-combat-damage") return;
-    host.applyAssignCombatDamage(action.player, action.assignment, action.forAll === true);
+    host.applyAssignCombatDamage(action.player, action.assignment, action.forAll === true, action.asThoughUnblocked === true);
   },
 
-  ask: (controller, view, awaiting, player): Action => ({
-    type: "assign-combat-damage",
-    player,
-    assignment: controller.assignCombatDamage(view, {
+  ask: (controller, view, awaiting, player): Action => {
+    const answer = controller.assignCombatDamage(view, {
       attacker: awaiting.attacker,
       blockers: awaiting.blockers,
       power: awaiting.power,
@@ -75,8 +93,18 @@ export const assignCombatDamage = defineDecision({
       indestructible: awaiting.indestructible,
       ...(awaiting.forOpponent === true ? { forOpponent: true } : {}),
       ...(awaiting.blocking === true ? { blocking: true } : {}),
-    }),
-  }),
+      ...(awaiting.mayUnblocked === true ? { mayUnblocked: true } : {}),
+      ...(awaiting.unblockedOnly === true ? { unblockedOnly: true } : {}),
+    });
+    if (answer === "unblocked" && awaiting.mayUnblocked === true) {
+      return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
+    }
+    return {
+      type: "assign-combat-damage",
+      player,
+      assignment: awaiting.unblockedOnly === true ? [] : answer === "unblocked" ? defaultAssignment(awaiting) : answer,
+    };
+  },
 
   // candidates: not searched yet. This opted out when damage had to go
   // lethal-in-order, which left almost nothing to choose. Now that any split
@@ -87,6 +115,10 @@ export const assignCombatDamage = defineDecision({
   // candidates re-point every `bot:bench` number.
 
   randomAnswer: (legal, player, rng): Action => {
+    if (legal.mayUnblocked === true && rng.random() < 0.5) {
+      return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
+    }
+    if (legal.unblockedOnly === true) return { type: "assign-combat-damage", player, assignment: [] };
     // Any division among the blockers is legal (510.1c), so half the time deal
     // the power out a point at a time to random blockers; it always sums to
     // the power, so nothing tramples over.

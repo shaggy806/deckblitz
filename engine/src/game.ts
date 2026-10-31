@@ -91,6 +91,7 @@ import type {
 } from "./cards.js";
 import {
   assignedCombatDamage,
+  unblockedAssignmentOf,
   cantBeSacrificed,
   countValue,
   damageDealtThisTurn,
@@ -1551,7 +1552,7 @@ export class Game {
       applyCommanderChoice: (player, toCz) => this.applyCommanderChoice(player, toCz),
       applyMulligan: (player, keep) => this.applyMulligan(player, keep),
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
-      applyAssignCombatDamage: (p, a, forAll) => this.applyAssignCombatDamage(p, a, forAll),
+      applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
       applyAttackerDeclarations: (p, d) => this.applyAttackerDeclarations(p, d),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -6455,6 +6456,7 @@ export class Game {
     delete this.state.turnRestrictions;
     delete this.state.blockRequirements;
     delete this.state.turnDefenderAttacks;
+    delete this.state.turnUnblockedAssignments;
     delete this.state.turnProhibitions;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
@@ -8754,11 +8756,14 @@ export class Game {
     if (cd === null) return;
     const kind = this.subPassKind(cd.pass);
     const attackers = this.currentAttackers();
+    // A blocked attacker that may assign as though unblocked is always a
+    // choice; one that must has none.
     const pending = attackers.filter(
       (id) =>
         this.state.objects[id].blocked &&
         this.dealsInPass(id, kind) &&
-        this.needsDamageAssignmentChoice(id),
+        (this.mayAssignAsThoughUnblocked(id) ||
+          (unblockedAssignmentOf(this.state, this.registry, id) !== "must" && this.needsDamageAssignmentChoice(id))),
     );
     const blockers = new Set(attackers.flatMap((id) => this.liveBlockersOf(id)));
     for (const id of blockers) {
@@ -8780,6 +8785,21 @@ export class Game {
     return needsDamageAssignmentChoice(this.state, this.registry, attackerId);
   }
 
+  /** Whether blocked `attackerId`'s controller may have it assign its combat
+   * damage as though it weren't blocked (`unblockedAssignmentOf` — Thorn
+   * Elemental), with damage to assign and something it's attacking to take
+   * it (rule 510.1b), and hasn't yet declined this sub-pass. Even with no
+   * blocker left (the rulings), where it would otherwise assign none. */
+  private mayAssignAsThoughUnblocked(attackerId: ObjectId): boolean {
+    const attacker = this.state.objects[attackerId];
+    return (
+      attacker?.attacking != null &&
+      unblockedAssignmentOf(this.state, this.registry, attackerId) === "may" &&
+      assignedCombatDamage(this.state, this.registry, attackerId) > 0 &&
+      !(this.state.combatDamage?.unblockedDeclined ?? []).includes(attackerId)
+    );
+  }
+
   /** The auto-assignment for `dealerId`'s combat damage this sub-pass: the
    * standard one (kill as many as possible), or the other side's under
    * banding (`autoAssignFor`). One entry per recipient. */
@@ -8795,9 +8815,14 @@ export class Game {
       const q = damageQuestionFor(this.state, this.registry, dealerId);
       const situation = this.damageSituation(dealerId);
       const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
+      // "As though it weren't blocked" is its controller's choice; where the
+      // division is the other side's (banding, 702.22j), that choice comes
+      // first, on its own.
+      const mayUnblocked = this.mayAssignAsThoughUnblocked(dealerId);
+      const unblockedOnly = mayUnblocked && q.forOpponent;
       this.state.awaiting = {
         kind: "assign-combat-damage",
-        player: q.player,
+        player: unblockedOnly ? this.state.objects[dealerId].controller : q.player,
         attacker: dealerId,
         blockers: [...q.recipients],
         power: q.power,
@@ -8806,7 +8831,9 @@ export class Game {
         indestructible: [...q.indestructible],
         ...(alike > 0 ? { alike } : {}),
         ...(q.blocking ? { blocking: true as const } : {}),
-        ...(q.forOpponent ? { forOpponent: true as const } : {}),
+        ...(q.forOpponent && !unblockedOnly ? { forOpponent: true as const } : {}),
+        ...(mayUnblocked ? { mayUnblocked: true as const } : {}),
+        ...(unblockedOnly ? { unblockedOnly: true as const } : {}),
       };
       return;
     }
@@ -8832,6 +8859,7 @@ export class Game {
       q.power,
       q.trample,
       q.blocking,
+      this.mayAssignAsThoughUnblocked(dealerId),
       q.recipients.map((r, i) => [this.state.objects[r]?.cardName, q.lethal[i], q.indestructible[i]]),
     ]);
   }
@@ -8841,16 +8869,22 @@ export class Game {
   private whyCannotAssignCombatDamage(
     player: PlayerId,
     assignment: readonly number[],
+    asThoughUnblocked: boolean,
   ): string | null {
-    return assignCombatDamage.whyCannot(this.decisionCtx, { type: "assign-combat-damage", player, assignment }, player);
+    return assignCombatDamage.whyCannot(
+      this.decisionCtx,
+      { type: "assign-combat-damage", player, assignment, ...(asThoughUnblocked ? { asThoughUnblocked: true } : {}) },
+      player,
+    );
   }
 
   private applyAssignCombatDamage(
     player: PlayerId,
     assignment: readonly number[],
     forAll = false,
+    asThoughUnblocked = false,
   ): void {
-    const why = this.whyCannotAssignCombatDamage(player, assignment);
+    const why = this.whyCannotAssignCombatDamage(player, assignment, asThoughUnblocked);
     if (why !== null) throw new Error(why);
     const awaiting = this.state.awaiting as Extract<
       AwaitingDecision,
@@ -8859,23 +8893,39 @@ export class Game {
     const cd = this.state.combatDamage;
     if (cd === null) throw new Error("unreachable: no combat-damage step in progress");
 
-    const assigned: Record<string, readonly number[]> = { ...cd.assigned, [awaiting.attacker]: [...assignment] };
-    let pending = cd.pendingAssignments.slice(1);
-    if (forAll) {
-      // The same split for each attacker still to assign in the same
-      // situation: each still its own assignment (rule 510.1c), made the
-      // same way, so each is checked as the decision would check it.
-      const situation = this.damageSituation(awaiting.attacker);
-      const same = pending.filter((id) => this.damageSituation(id) === situation);
+    // With `forAll`, each attacker still to assign in the same situation is
+    // answered the same way: each still its own assignment (rule 510.1c).
+    const situation = forAll ? this.damageSituation(awaiting.attacker) : null;
+    const same = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation);
+    const dealers = [awaiting.attacker, ...same];
+    let pending = cd.pendingAssignments.slice(1).filter((id) => !same.includes(id));
+    const assigned: Record<string, readonly number[]> = { ...cd.assigned };
+    let unblocked = cd.asThoughUnblocked ?? [];
+    let declined = cd.unblockedDeclined ?? [];
+    if (asThoughUnblocked) {
+      unblocked = [...unblocked, ...dealers];
+    } else if (awaiting.unblockedOnly === true) {
+      // Declined: the division, where it's a choice, is the other side's
+      // (banding), asked of them next.
+      declined = [...declined, ...dealers];
+      pending = [...dealers.filter((id) => this.needsDamageAssignmentChoice(id)), ...pending];
+    } else {
+      assigned[awaiting.attacker] = [...assignment];
+      // Each of the others is checked as the decision would check it.
       for (const id of same) {
         const q = damageQuestionFor(this.state, this.registry, id);
         const wrong = damageAssignmentViolations({ ...q, blockers: q.recipients }, assignment);
         if (wrong !== null) throw new Error(wrong);
         assigned[id] = [...assignment];
       }
-      pending = pending.filter((id) => !same.includes(id));
     }
-    this.state.combatDamage = { ...cd, assigned, pendingAssignments: pending };
+    this.state.combatDamage = {
+      ...cd,
+      assigned,
+      pendingAssignments: pending,
+      ...(unblocked.length > 0 ? { asThoughUnblocked: unblocked } : {}),
+      ...(declined.length > 0 ? { unblockedDeclined: declined } : {}),
+    };
     this.state.awaiting = null;
     this.promptNextDamageAssignment();
     // `promptNextDamageAssignment` may have set `awaiting` for the next
@@ -8891,7 +8941,9 @@ export class Game {
   private applyCombatDamageSubPass(): void {
     const cd = this.state.combatDamage;
     if (cd === null) return;
-    this.withDamageBatch(() => this.dealCombatDamage(this.subPassKind(cd.pass), cd.assigned));
+    this.withDamageBatch(() =>
+      this.dealCombatDamage(this.subPassKind(cd.pass), cd.assigned, cd.asThoughUnblocked ?? []),
+    );
     this.runStateBasedActions();
     if (this.state.result.over) {
       this.state.combatDamage = null;
@@ -8901,7 +8953,10 @@ export class Game {
       // Rule 510.4 — players get priority between the first-strike and regular
       // combat-damage sub-passes. `endStep` starts the regular one once they
       // all pass. Keep `pass: "first"` as the marker for that.
-      this.state.combatDamage = { ...cd, pendingAssignments: [], assigned: {} };
+      // Each sub-pass's assignment is its own (510.1), "as though unblocked"
+      // chosen afresh in the next.
+      const { asThoughUnblocked: _u, unblockedDeclined: _d, ...rest } = cd;
+      this.state.combatDamage = { ...rest, pendingAssignments: [], assigned: {} };
       return;
     }
     this.state.combatDamage = null;
@@ -8976,6 +9031,7 @@ export class Game {
   private dealCombatDamage(
     pass: "first" | "regular" | "all",
     assigned: Readonly<Record<string, readonly number[]>> = {},
+    chosenUnblocked: readonly ObjectId[] = [],
   ): void {
     const assignments: {
       source: ObjectId;
@@ -8999,7 +9055,14 @@ export class Game {
       if (this.dealsInPass(attackerId, pass)) {
         const power = powerOf(attackerId);
         if (power > 0) {
-          if (!attacker.blocked) {
+          // "As though it weren't blocked" (Thorn Elemental, Outmaneuver):
+          // all of it to what it's attacking (rule 510.1b), none to its
+          // blockers, trample or not.
+          const asUnblocked =
+            attacker.blocked &&
+            (chosenUnblocked.includes(attackerId) ||
+              unblockedAssignmentOf(this.state, this.registry, attackerId) === "must");
+          if (!attacker.blocked || asUnblocked) {
             if (attacker.attacking !== null) {
               // A counted attacking stack (`attackingStackPart`) is that
               // many unblocked attackers, each dealing its power.
@@ -25410,6 +25473,14 @@ export class Game {
       },
       damageByToughness: (target) => this.markUntilEndOfTurn(target, { combatDamageByToughness: true }),
       assignsNoCombatDamage: (target) => this.markUntilEndOfTurn(target, { assignsNoCombatDamage: true }),
+      assignAsThoughUnblocked: (target, filter, must) => {
+        if (filter !== undefined) {
+          (this.state.turnUnblockedAssignments ??= []).push({ filter, you: controller, ...(must ? { must: true } : {}) });
+          invalidateComputedCache();
+          return;
+        }
+        this.markUntilEndOfTurn(target, { assignAsThoughUnblocked: must ? "must" : "may" });
+      },
       exchangeLifeToughness: (target, player) => this.exchangeLifeToughness(player, target),
       putInCommandZone: (target) => {
         // A commander still here as the same object (rule 400.7 — the
@@ -30272,7 +30343,10 @@ export class Game {
 
   private markUntilEndOfTurn(
     target: TargetRef | undefined,
-    fields: Pick<PtModifier, "canAttackAsThoughNoDefender" | "combatDamageByToughness" | "assignsNoCombatDamage">,
+    fields: Pick<
+      PtModifier,
+      "canAttackAsThoughNoDefender" | "combatDamageByToughness" | "assignsNoCombatDamage" | "assignAsThoughUnblocked"
+    >,
   ): void {
     if (target?.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);

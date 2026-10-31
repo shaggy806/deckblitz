@@ -232,7 +232,9 @@ export function damageAssignmentViolations(
   const total = assignment.reduce((sum, n) => sum + n, 0);
   const over = power - total;
   if (over < 0) return "assigned more than the attacker's power";
-  if (over > 0 && !trample) {
+  // With no blocker left, a blocked creature without trample assigns no
+  // combat damage at all (510.1c) — so nothing is the answer.
+  if (over > 0 && !trample && blockers.length > 0) {
     return "only a trampling attacker can assign combat damage to the defending player";
   }
   if (over > 0) {

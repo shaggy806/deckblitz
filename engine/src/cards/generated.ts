@@ -11278,6 +11278,7 @@ import _poolIndex from "./pool/index.js";
 import _poolIndoctrinationAttendant from "./pool/indoctrination-attendant.js";
 import _poolIndomitableAncients from "./pool/indomitable-ancients.js";
 import _poolIndomitableArchangel from "./pool/indomitable-archangel.js";
+import _poolIndomitableMight from "./pool/indomitable-might.js";
 import _poolIndomitableWill from "./pool/indomitable-will.js";
 import _poolIndrikStomphowler from "./pool/indrik-stomphowler.js";
 import _poolInduceParanoia from "./pool/induce-paranoia.js";
@@ -16074,6 +16075,7 @@ import _poolOutlandLiberator from "./pool/outland-liberator.js";
 import _poolOutlawMedic from "./pool/outlaw-medic.js";
 import _poolOutlawStitcher from "./pool/outlaw-stitcher.js";
 import _poolOutlawsFury from "./pool/outlaws-fury.js";
+import _poolOutmaneuver from "./pool/outmaneuver.js";
 import _poolOutmuscle from "./pool/outmuscle.js";
 import _poolOutnumber from "./pool/outnumber.js";
 import _poolOutpaceOblivion from "./pool/outpace-oblivion.js";
@@ -16933,6 +16935,7 @@ import _poolPredatorsHowl from "./pool/predators-howl.js";
 import _poolPredatorsRapport from "./pool/predators-rapport.js";
 import _poolPredatorsStrike from "./pool/predators-strike.js";
 import _poolPredatoryAdvantage from "./pool/predatory-advantage.js";
+import _poolPredatoryFocus from "./pool/predatory-focus.js";
 import _poolPredatoryHunger from "./pool/predatory-hunger.js";
 import _poolPredatoryImpetus from "./pool/predatory-impetus.js";
 import _poolPredatoryNightstalker from "./pool/predatory-nightstalker.js";
@@ -20286,6 +20289,7 @@ import _poolSidisiBroodTyrant from "./pool/sidisi-brood-tyrant.js";
 import _poolSidisiUndeadVizier from "./pool/sidisi-undead-vizier.js";
 import _poolSidisisFaithful from "./pool/sidisis-faithful.js";
 import _poolSidisisPet from "./pool/sidisis-pet.js";
+import _poolSiegeBehemoth from "./pool/siege-behemoth.js";
 import _poolSiegeGangCommander from "./pool/siege-gang-commander.js";
 import _poolSiegeGangLieutenant from "./pool/siege-gang-lieutenant.js";
 import _poolSiegeMastodon from "./pool/siege-mastodon.js";
@@ -23354,6 +23358,7 @@ import _poolThorOdinson from "./pool/thor-odinson.js";
 import _poolThorinOakenshield from "./pool/thorin-oakenshield.js";
 import _poolThorin from "./pool/thorin.js";
 import _poolThorinsLastStand from "./pool/thorins-last-stand.js";
+import _poolThornElemental from "./pool/thorn-elemental.js";
 import _poolThornLieutenant from "./pool/thorn-lieutenant.js";
 import _poolThornMammoth from "./pool/thorn-mammoth.js";
 import _poolThornOfAmethyst from "./pool/thorn-of-amethyst.js";
@@ -38601,6 +38606,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIndoctrinationAttendant,
   _poolIndomitableAncients,
   _poolIndomitableArchangel,
+  _poolIndomitableMight,
   _poolIndomitableWill,
   _poolIndrikStomphowler,
   _poolInduceParanoia,
@@ -43397,6 +43403,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOutlawMedic,
   _poolOutlawStitcher,
   _poolOutlawsFury,
+  _poolOutmaneuver,
   _poolOutmuscle,
   _poolOutnumber,
   _poolOutpaceOblivion,
@@ -44256,6 +44263,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPredatorsRapport,
   _poolPredatorsStrike,
   _poolPredatoryAdvantage,
+  _poolPredatoryFocus,
   _poolPredatoryHunger,
   _poolPredatoryImpetus,
   _poolPredatoryNightstalker,
@@ -47609,6 +47617,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSidisiUndeadVizier,
   _poolSidisisFaithful,
   _poolSidisisPet,
+  _poolSiegeBehemoth,
   _poolSiegeGangCommander,
   _poolSiegeGangLieutenant,
   _poolSiegeMastodon,
@@ -50677,6 +50686,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThorinOakenshield,
   _poolThorin,
   _poolThorinsLastStand,
+  _poolThornElemental,
   _poolThornLieutenant,
   _poolThornMammoth,
   _poolThornOfAmethyst,
@@ -65937,6 +65947,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/indoctrination-attendant": _poolIndoctrinationAttendant,
   "pool/indomitable-ancients": _poolIndomitableAncients,
   "pool/indomitable-archangel": _poolIndomitableArchangel,
+  "pool/indomitable-might": _poolIndomitableMight,
   "pool/indomitable-will": _poolIndomitableWill,
   "pool/indrik-stomphowler": _poolIndrikStomphowler,
   "pool/induce-paranoia": _poolInduceParanoia,
@@ -70733,6 +70744,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/outlaw-medic": _poolOutlawMedic,
   "pool/outlaw-stitcher": _poolOutlawStitcher,
   "pool/outlaws-fury": _poolOutlawsFury,
+  "pool/outmaneuver": _poolOutmaneuver,
   "pool/outmuscle": _poolOutmuscle,
   "pool/outnumber": _poolOutnumber,
   "pool/outpace-oblivion": _poolOutpaceOblivion,
@@ -71592,6 +71604,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/predators-rapport": _poolPredatorsRapport,
   "pool/predators-strike": _poolPredatorsStrike,
   "pool/predatory-advantage": _poolPredatoryAdvantage,
+  "pool/predatory-focus": _poolPredatoryFocus,
   "pool/predatory-hunger": _poolPredatoryHunger,
   "pool/predatory-impetus": _poolPredatoryImpetus,
   "pool/predatory-nightstalker": _poolPredatoryNightstalker,
@@ -74945,6 +74958,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sidisi-undead-vizier": _poolSidisiUndeadVizier,
   "pool/sidisis-faithful": _poolSidisisFaithful,
   "pool/sidisis-pet": _poolSidisisPet,
+  "pool/siege-behemoth": _poolSiegeBehemoth,
   "pool/siege-gang-commander": _poolSiegeGangCommander,
   "pool/siege-gang-lieutenant": _poolSiegeGangLieutenant,
   "pool/siege-mastodon": _poolSiegeMastodon,
@@ -78013,6 +78027,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thorin-oakenshield": _poolThorinOakenshield,
   "pool/thorin": _poolThorin,
   "pool/thorins-last-stand": _poolThorinsLastStand,
+  "pool/thorn-elemental": _poolThornElemental,
   "pool/thorn-lieutenant": _poolThornLieutenant,
   "pool/thorn-mammoth": _poolThornMammoth,
   "pool/thorn-of-amethyst": _poolThornOfAmethyst,

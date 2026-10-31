@@ -1265,6 +1265,11 @@ export interface Characteristics {
    * "players-who-attacked-you"` static — Weathered Sentinels). Read through
    * {@link canAttackDespiteDefender} with the defender. */
   readonly canAttackAttackersDespiteDefender: boolean;
+  /** It assigns its combat damage as though it weren't blocked: `"may"` by
+   * an `assignAsThoughUnblocked` static or a may-effect on it, `"must"` by a
+   * mandatory effect (Outmaneuver). Read through
+   * {@link unblockedAssignmentOf}, which adds the turn-wide rules. */
+  readonly assignAsThoughUnblocked?: "may" | "must";
   /** It can't be sacrificed (a `cantBeSacrificed` static, or the ability
    * granted by the `"cant-be-sacrificed"` effect) — rule 701.21a. Read it
    * through {@link cantBeSacrificed}, which skips the fold on the boards
@@ -3555,6 +3560,7 @@ interface AppliedEffect {
   readonly combatDamageByToughness: StaticAbility["combatDamageByToughness"];
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
+  readonly assignAsThoughUnblocked: boolean;
   readonly cantBeSacrificed: boolean;
   /** "Can block an additional creature" (`blockAdditional`), 0 for none. */
   readonly blockAdditional: number | "any";
@@ -3645,6 +3651,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.restrictions !== undefined ||
     ability.combatDamageByToughness !== undefined ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
+    ability.assignAsThoughUnblocked === true ||
     ability.cantBeSacrificed === true ||
     ability.blockAdditional !== undefined ||
     ability.protection !== undefined ||
@@ -3873,6 +3880,7 @@ function collectStaticEffects(
       combatDamageByToughness: ability.combatDamageByToughness,
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
+      assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
       cantBeSacrificed: ability.cantBeSacrificed === true,
       blockAdditional: ability.blockAdditional ?? 0,
       protection: staticProtection(ability, source),
@@ -3925,6 +3933,7 @@ function collectStaticEffects(
       combatDamageByToughness: ability.combatDamageByToughness,
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
+      assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
       cantBeSacrificed: ability.cantBeSacrificed === true,
       blockAdditional: ability.blockAdditional ?? 0,
       protection: ability.protection ?? null,
@@ -4026,6 +4035,7 @@ function assertSameCharacteristics(
       extraBlocks: c.extraBlocks ?? 0,
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
       canAttackAttackersDespiteDefender: c.canAttackAttackersDespiteDefender,
+      assignAsThoughUnblocked: c.assignAsThoughUnblocked ?? null,
       cantBeSacrificed: c.cantBeSacrificed,
       protColors: [...c.protectionFrom.colors].sort(),
       protTypes: [...c.protectionFrom.types].sort(),
@@ -4114,6 +4124,7 @@ function computeCharacteristicsUncached(
   let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
+  let assignAsThoughUnblocked: "may" | "must" | undefined;
   let cantBeSacrificed = false;
   let extraBlocks: number | "any" = 0;
   const addBlocks = (more: number | "any"): void => {
@@ -4143,6 +4154,10 @@ function computeCharacteristicsUncached(
     }
     if (effect.canAttackAsThoughNoDefender) canAttackAsThoughNoDefender = true;
     if (effect.canAttackAttackersDespiteDefender) canAttackAttackersDespiteDefender = true;
+    // A rule about how it assigns damage, not an ability it has (Indomitable
+    // Might's "enchanted creature's controller may have it …"), so no loss
+    // of abilities ends it.
+    if (effect.assignAsThoughUnblocked) assignAsThoughUnblocked ??= "may";
     if (effect.cantBeSacrificed) cantBeSacrificed = true;
     if (granted && effect.blockAdditional !== 0) addBlocks(effect.blockAdditional);
     if (effect.protection && granted) {
@@ -4203,6 +4218,10 @@ function computeCharacteristicsUncached(
     if (modifier.canAttackAsThoughNoDefender === true) canAttackAsThoughNoDefender = true;
     if (modifier.combatDamageByToughness === true) byToughness = "always";
     if (modifier.assignsNoCombatDamage === true) assignsNoCombatDamage = true;
+    // "Must" outweighs "may": Outmaneuver leaves no choice.
+    if (modifier.assignAsThoughUnblocked !== undefined && assignAsThoughUnblocked !== "must") {
+      assignAsThoughUnblocked = modifier.assignAsThoughUnblocked;
+    }
   }
   for (const keyword of keywordCountersOn(object)) {
     const at = keywordCounterTimestamp(object, keyword);
@@ -4360,6 +4379,7 @@ function computeCharacteristicsUncached(
     ...(extraBlocks !== 0 ? { extraBlocks } : {}),
     canAttackAsThoughNoDefender,
     canAttackAttackersDespiteDefender,
+    ...(assignAsThoughUnblocked !== undefined ? { assignAsThoughUnblocked } : {}),
     cantBeSacrificed,
     protectionFrom: {
       colors: protColors,
@@ -4524,6 +4544,28 @@ export function canAttackDespiteDefender(
   return (state.turnDefenderAttacks ?? []).some((rule) =>
     matchesFilter(state, registry, id, rule.filter, { you: rule.you }),
   );
+}
+
+/** Whether blocked `id` assigns its combat damage as though it weren't
+ * blocked — to what it's attacking (rule 510.1b) rather than its blockers
+ * (510.1c): `"must"` (Outmaneuver), `"may"` (its controller's choice as
+ * damage is assigned — Thorn Elemental), or `null`. Its characteristics',
+ * plus any turn-wide `assign-as-though-unblocked` rule it matches
+ * (`GameState.turnUnblockedAssignments` — Predatory Focus), matched here
+ * as `restrictionsOf` matches turn-wide restrictions. */
+export function unblockedAssignmentOf(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+): "may" | "must" | null {
+  let out = computeCharacteristics(state, registry, id).assignAsThoughUnblocked ?? null;
+  if (out === "must") return out;
+  for (const rule of state.turnUnblockedAssignments ?? []) {
+    if (!matchesFilter(state, registry, id, rule.filter, { you: rule.you })) continue;
+    if (rule.must === true) return "must";
+    out = "may";
+  }
+  return out;
 }
 
 /** Whether `id` currently has `keyword`, counting every layer-6 grant and

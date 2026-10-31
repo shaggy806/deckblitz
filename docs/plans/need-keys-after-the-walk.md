@@ -520,6 +520,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   (`drawThatMany`). 6 keys; 6 proving cards. 30 freed (queued: 469). Next:
   `static:assign-damage-as-though-unblocked` (18), `cost:additional-cost-reveal` (17),
   `effect:remove-all-counters` (17).
+- **2026-10-30: `static:assign-damage-as-though-unblocked`, features only** — "you may have
+  it assign its combat damage as though it weren't blocked", as a static, an effect (Outmaneuver's
+  mandatory one, Predatory Focus's rule for the turn) and an option on the existing
+  `assign-combat-damage` decision with the client's "All to [defender]". 1 key; 5 proving cards.
+  11 freed (queued: 480). Taken alone: it changed a decision's offer and the client. Next:
+  `cost:additional-cost-reveal` (17), `effect:remove-all-counters` (17),
+  `effect:cant-activate-abilities-until-next-turn` (17).
 
 ## Rough size
 

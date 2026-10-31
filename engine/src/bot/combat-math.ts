@@ -19,7 +19,7 @@
 
 import type { CardType, Keyword } from "../cards/define.js";
 import type { Color } from "../mana.js";
-import { combatDamageOf, computeCharacteristics, withComputedCache } from "../characteristics.js";
+import { combatDamageOf, computeCharacteristics, unblockedAssignmentOf, withComputedCache } from "../characteristics.js";
 import { LANDWALK, landTypesControlledBy } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -47,6 +47,9 @@ export interface CombatCreature {
   /** Land types its controller controls, which a landwalker attacking them
    * can't be blocked past (rule 702.14). */
   readonly controllerLands: ReadonlySet<string>;
+  /** It may (or must) assign its combat damage as though it weren't blocked
+   * (Thorn Elemental): a block stops none of it. */
+  readonly assignsPastBlockers?: boolean;
 }
 
 /** A token stack is expanded to at most this many copies — enough for any
@@ -99,6 +102,7 @@ function combatCreaturesUncached(
         combatDamageOf(c) > 0,
       isCommander: object.isCommander,
       controllerLands,
+      ...(unblockedAssignmentOf(state, registry, id) !== null ? { assignsPastBlockers: true } : {}),
     };
     const copies = Math.min(object.stackCount ?? 1, MAX_COPIES);
     for (let i = 0; i < copies; i += 1) out.push(creature);
@@ -191,7 +195,7 @@ export function damageThrough(
       );
 
     let through = full;
-    if (available.length >= needed) {
+    if (available.length >= needed && attacker.assignsPastBlockers !== true) {
       const chosen = available.slice(0, needed);
       // Blocking only stops a trampler's damage up to the blockers' toughness.
       const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].toughness), 0);
