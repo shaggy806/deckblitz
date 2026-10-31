@@ -693,6 +693,10 @@ const TARGET_PHRASES = [
   ["target instant or sorcery spell", "instant-or-sorcery-spell"],
   ["target creature spell", "creature-spell"],
   ["target spell", "spell"],
+  // "Of the chosen color" (Pentarch Paladin): the colour chosen as it
+  // entered (`ofChosenColor`).
+  ["target permanent of the chosen color", { kind: "permanent", filter: { ofChosenColor: true } }],
+  ["target creature of the chosen color", { kind: "permanent", filter: { type: "creature", ofChosenColor: true } }],
   ["target creature", "creature"],
   ["target artifact", "artifact"],
   ["target enchantment", "enchantment"],
@@ -1202,6 +1206,13 @@ export function parseTrigger(clause) {
       }
     }
     return [spec];
+  }
+  // "A spell of the chosen color" (Curse of Wizardry) / "a creature spell of
+  // the chosen type" (Vanquisher's Banner): what was chosen as it entered.
+  if ((m = /^Whenever (you|an opponent|a player) casts? an? (creature )?spell of the chosen (color|type)$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    const filter = m[3] === "color" ? { ofChosenColor: true } : { ofChosenType: true };
+    return [{ on: "cast-spell", who, filter: m[2] ? { type: "creature", ...filter } : filter }];
   }
   // "A spell that has convoke" (Kasla, the Broken Halo): convoked or not.
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
@@ -2135,10 +2146,13 @@ export function parseSentence(sentence, ctx) {
     return { kind: "prevent-damage", target, amount: amount(m[1]), redirectTo };
   }
   // A source of your choice (rule 609.7): the Circles of Protection.
-  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage to you this turn, prevent that damage`).exec(s))) {
+  // "Of the chosen color" (Story Circle): the colour chosen as it entered.
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice( of the chosen color)? would deal damage to you this turn, prevent that damage`).exec(s))) {
+    if (m[1] !== undefined && m[2] !== undefined) return null;
     return {
       kind: "prevent-damage-from-chosen-source",
       ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      ...(m[2] !== undefined ? { filter: { ofChosenColor: true } } : {}),
       to: "you",
       amount: "next-time",
     };
@@ -4040,6 +4054,37 @@ export function parseFace(face, ctx = {}) {
       });
       continue;
     }
+    // "As ~ enters, choose a color / a card type." (rule 614.12) — the word
+    // its "of the chosen color" / "the chosen card type" lines read
+    // (`chosenOnEnter`).
+    if (line === "As ~ enters, choose a color.") {
+      out.chooseOnEnter = ["W", "U", "B", "R", "G"];
+      continue;
+    }
+    if (line === "As ~ enters, choose a card type.") {
+      // Rule 205.2a's, as `CARD_TYPE_CHOICES` lists them.
+      out.chooseOnEnter = ["artifact", "battle", "creature", "enchantment", "instant", "kindred", "land", "planeswalker", "sorcery"];
+      continue;
+    }
+    // "You (and creatures you control) have protection from the chosen card
+    // type" (Serra's Emissary): the player's half is `playerProtection`
+    // (rule 702.16), the creatures' a `protection`.
+    if (
+      out.chooseOnEnter?.includes("creature") === true &&
+      (m = /^You (and creatures you control )?have protection from the chosen card type\.$/.exec(line))
+    ) {
+      if (m[1] !== undefined) {
+        out.static.push({ affects: { scope: "creatures-you-control" }, protection: { chosenCardType: true }, text: printed(raw) });
+      }
+      out.static.push({ affects: { scope: "self" }, playerProtection: { chosenCardType: true }, text: printed(raw) });
+      continue;
+    }
+    // "You have protection from the chosen card name" (Runed Halo).
+    if (out.chooseCardNameOnEnter !== undefined && line.startsWith("You have protection from the chosen card name.")) {
+      out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
+      out.static.push({ affects: { scope: "self" }, playerProtection: { filter: { chosenName: true } }, text: printed(raw) });
+      continue;
+    }
     if (out.chooseCreatureTypeOnEnter === true && line === "~ is the chosen type in addition to its other types.") {
       out.static.push({ affects: { scope: "self" }, addsChosenCreatureType: true, text: printed(raw) });
       continue;
@@ -5349,6 +5394,41 @@ function parseStatic(line, text) {
   }
   if ((m = /^Other ([A-Z][a-z]+) creatures you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
     return { affects: { scope: "creatures-you-control", excludeSelf: true, subtype: m[1] }, grantPt: [Number(m[2]), Number(m[3])], text };
+  }
+  // "Creatures you control of the chosen type get +1/+1" (Patchwork Banner,
+  // Icon of Ancestry) — the type chosen as it entered (`ofChosenType`).
+  if ((m = /^(Other c|C)reatures you control of the chosen type get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+    return {
+      affects: {
+        scope: "filter",
+        filter: { type: "creature", controlledBy: "you", ofChosenType: true },
+        ...(m[1] === "Other c" ? { excludeSelf: true } : {}),
+      },
+      grantPt: [Number(m[2]), Number(m[3])],
+      text,
+    };
+  }
+  // "Each other creature you control of the chosen type enters with an
+  // additional +1/+1 counter on it" (Metallic Mimic).
+  if (line === "Each other creature you control of the chosen type enters with an additional +1/+1 counter on it.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { type: "creature", controlledBy: "you", ofChosenType: true },
+        counters: { kind: "+1/+1", amount: 1 },
+      },
+      text,
+    };
+  }
+  // "If a triggered ability of another creature you control of the chosen
+  // type triggers, it triggers an additional time" (Roaming Throne).
+  if (line === "If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.") {
+    return {
+      affects: { scope: "self" },
+      doubleTriggersOf: { filter: { type: "creature", controlledBy: "you", ofChosenType: true }, others: true },
+      text,
+    };
   }
   if ((m = new RegExp(`^(Other )?creatures you control have ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
     return {

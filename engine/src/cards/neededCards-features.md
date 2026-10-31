@@ -364,6 +364,24 @@ and Linvala. Still open: the exiled-card unit (a counter or a chosen exiled
 card, triggered abilities too), an until-end-of-turn effect form (Grell
 Philosopher), a chosen permanent as the filter (Scheming Fence).
 
+### A value chosen as it enters, read by its other lines — built 2026-10-31
+
+The need-keys Phase 2 family `decision:choose-card-type-protection`'s group,
+features only. New filter **`ofChosenColor`** — the colour chosen for the
+permanent applying it (`chosenOnEnter`), its last-known one once it has left
+(608.2h) — in targets (Pentarch Paladin), triggers (Curse of Wizardry; Paradise
+Plume and four more moved onto it) and a source of your choice (Story Circle,
+the shield fixing the colour). **`playerProtection`** on a static (rule
+702.16b, c, e): its controller protected from a colour, card type or a filter
+read off the permanent (Runed Halo's `chosenName`) — targeting, Auras, damage.
+**`chosenCardType`** on it and on `protection` (Serra's Emissary). An entering
+replacement's and `doubleTriggersOf`'s filters read their permanent
+("of the chosen type": Metallic Mimic, Roaming Throne), `doubleTriggersOf.others`.
+Keys: filter:chosen-color, decision:choose-card-type-protection,
+static:chosen-creature-type-reads, static:chosen-type-in-addition. Still open:
+decision:choose-name-and-type-on-attach (Psychic Paper), two colours chosen as
+it enters (Seal of the Guildpact, Tablet of the Guilds).
+
 ### A spell's own conditional flash — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top

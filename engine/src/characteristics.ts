@@ -1343,6 +1343,31 @@ export interface Characteristics {
   readonly bandsWithOther: readonly CardFilter[];
 }
 
+/** The colours and card types a protection names, "the chosen color" and
+ * "the chosen card type" read off `source`'s `chosenOnEnter` — nothing for
+ * either while none was chosen. Shared by a permanent's protection and a
+ * player's (`playerProtection`). */
+export function chosenProtectionQualities(
+  p: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly chosenColor?: true;
+    readonly chosenCardType?: true;
+  },
+  source: GameObject,
+): { colors: Color[]; types: CardType[] | undefined } {
+  const chosen = source.chosenOnEnter;
+  const colors = [
+    ...(p.colors ?? []),
+    ...(p.chosenColor === true && chosen != null && (COLORS as readonly string[]).includes(chosen) ? [chosen as Color] : []),
+  ];
+  // A chosen word that isn't a colour is the card type (rule 205.2a — the
+  // menu `chooseOnEnter` offered was `CARD_TYPE_CHOICES`).
+  const chosenType = p.chosenCardType === true && chosen != null && !(COLORS as readonly string[]).includes(chosen);
+  const types = chosenType ? [...(p.types ?? []), chosen as CardType] : p.types !== undefined ? [...p.types] : undefined;
+  return { colors, types };
+}
+
 /** A static's protection as it applies now: "the chosen color" read off the
  * source (its `chosenOnEnter`, if a colour), and the Aura a "doesn't remove
  * this Aura" instance spares (rule 702.16n). */
@@ -1352,15 +1377,11 @@ function staticProtection(
 ): AppliedEffect["protection"] {
   const p = ability.protection;
   if (p === undefined) return null;
-  if (p.chosenColor !== true && p.doesntRemoveSource !== true) return p;
-  const chosen = source.chosenOnEnter;
-  const colors = [
-    ...(p.colors ?? []),
-    ...(p.chosenColor === true && chosen != null && (COLORS as readonly string[]).includes(chosen) ? [chosen as Color] : []),
-  ];
+  if (p.chosenColor !== true && p.chosenCardType !== true && p.doesntRemoveSource !== true) return p;
+  const { colors, types } = chosenProtectionQualities(p, source);
   return {
     colors,
-    ...(p.types !== undefined ? { types: p.types } : {}),
+    ...(types !== undefined ? { types } : {}),
     ...(p.filter !== undefined ? { filter: p.filter } : {}),
     ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
   };

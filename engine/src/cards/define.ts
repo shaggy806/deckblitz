@@ -2308,6 +2308,27 @@ export interface StaticAbility {
    * `affects` is ignored. */
   readonly playerHexproof?: boolean;
   /**
+   * "**You** have protection from …" (rule 702.16 — Serra's Emissary's "you
+   * … have protection from the chosen card type", Runed Halo's "from the
+   * chosen card name", Gor Muldrak's "from Salamanders"): this permanent's
+   * controller can't be the target of a spell with the quality or an
+   * ability from a source with it (702.16b), can't be enchanted by an Aura
+   * with it — a Curse already on them falls off as a state-based action
+   * (702.16c) — and damage a source with it would deal them is prevented
+   * (702.16e). The qualities are `protection`'s, ORed, with `chosenColor` /
+   * `chosenCardType` read off this permanent's `chosenOnEnter` and a
+   * `filter` read with this permanent as its source (`chosenName`). Like
+   * `playerHexproof`, a property of the player read off the battlefield
+   * (`playerProtectionBlocks`); `affects` is ignored.
+   */
+  readonly playerProtection?: {
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+    readonly chosenColor?: true;
+    readonly chosenCardType?: true;
+  };
+  /**
    * "**You can't lose the game**" (Platinum Angel, Herald of Eternal Dawn):
    * no state-based action and no effect that says so makes this permanent's
    * controller lose — 0 life, ten poison counters, a draw from an empty
@@ -2524,6 +2545,11 @@ export interface StaticAbility {
      * Flickering Ward's "As this Aura enters, choose a color"). Nothing
      * while none was chosen. */
     readonly chosenColor?: true;
+    /** "Protection from **the chosen card type**" — the card type chosen
+     * for the static's source as it entered (`chooseOnEnter` over
+     * `CARD_TYPE_CHOICES` — Serra's Emissary). Nothing while none was
+     * chosen. */
+    readonly chosenCardType?: true;
     /** "This effect doesn't remove this Aura" (rule 702.16n): this
      * instance doesn't make the static's own Aura fall off as a
      * state-based action; it still stops everything else, and any other
@@ -2745,11 +2771,15 @@ export interface StaticAbility {
    * leaves-the-battlefield ability, as it last existed there. Only abilities
    * of permanents: a spell's "when you cast this" isn't one, and nor is a
    * command-zone card's. Only its controller's triggers; stacks with the
-   * cause-keyed doublers.
+   * cause-keyed doublers. The filter reads this static's permanent as its
+   * source — Roaming Throne's "another creature you control **of the chosen
+   * type**" (`ofChosenType`), with `others` leaving the doubler itself out.
    */
   readonly doubleTriggersOf?: {
     readonly filter?: CardFilter;
     readonly selfAndEquipment?: boolean;
+    /** "Another …": the filter never matches this static's own permanent. */
+    readonly others?: true;
   };
   /**
    * "Permanents entering don't cause abilities of permanents your opponents

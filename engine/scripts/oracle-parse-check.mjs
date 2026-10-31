@@ -182,10 +182,14 @@ export function checkPool(poolCards, tokenName = "Treasure Token") {
       else mismatches.push({ card: def.name, kind: "spell", text: "(its modes)", differ: ["castModal"], parsed: { castModal: canon(parsed.castModal) }, authored: { castModal: canon(def.castModal ?? null) } });
     }
 
-    // Static abilities, paired by their printed text.
+    // Static abilities, paired by their printed text — each authored one with
+    // one parsed one at most: a line can be two statics (Serra's Emissary's
+    // "you and creatures you control have protection …").
+    const usedStatics = new Set();
     for (const st of parsed.static) {
-      const match = def.static.find((a) => tidy(a.text) === tidy(st.text));
+      const match = def.static.find((a) => !usedStatics.has(a) && tidy(a.text) === tidy(st.text));
       if (match === undefined) continue;
+      usedStatics.add(match);
       stats.staticsClaimed += 1;
       if (same(st, match)) stats.staticsAgreed += 1;
       else mismatches.push({ card: def.name, kind: "static", text: st.text, differ: ["static"], parsed: { static: canon(st) }, authored: { static: canon(match) } });

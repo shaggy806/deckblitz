@@ -581,6 +581,7 @@ import _poolRiverSerpent from "../pool/river-serpent.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
+import _poolRoamingThrone from "../pool/roaming-throne.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRogueKavu from "../pool/rogue-kavu.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
@@ -1448,6 +1449,7 @@ const shard: CardShard = {
     _poolRiverchurnMonument,
     _poolRiverwalkTechnique,
     _poolRiveteersDecoy,
+    _poolRoamingThrone,
     _poolRobTheArchives,
     _poolRogueKavu,
     _poolRohgahhOfKherKeep,

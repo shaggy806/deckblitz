@@ -2515,7 +2515,13 @@ knows its source, a static's `filter` scope, a trigger's filter and a
 `look-and-choose`'s `filter` (Herald's Horn: "if it's a creature card of the
 chosen type"); with nothing chosen, nothing matches. A source that has left
 the battlefield before its ability resolves is read for the type it had
-(rule 608.2h). Numeric fields take
+(rule 608.2h). `ofChosenColor: true` is "of the chosen color" the same way:
+the colour chosen for that permanent as it entered (`chooseOnEnter` over the
+five, its `chosenOnEnter`) — Pentarch Paladin's "target permanent of the
+chosen color", Curse of Wizardry's "a spell of the chosen color" — and in a
+`prevent-damage-from-chosen-source`'s filter ("a source of your choice of the
+chosen color", Story Circle), the shield keeping the colour chosen as it
+resolved. Prefer it to one conditional copy per colour. Numeric fields take
 `{ op: "eq"|"ne"|"lt"|"lte"|"gt"|"gte", n }`.
 
 Clauses about the card's own properties:
@@ -3724,6 +3730,15 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   opponent controls, read as a target is checked (`playerHasHexproof`, which
   also reads the one-shot `grant-player-hexproof`). `affects` is ignored; a
   "your creatures have hexproof" half is a separate static.
+- `playerProtection: { colors?, types?, filter?, chosenColor?, chosenCardType? }` —
+  "**You** have protection from …" (rule 702.16b, c, e): its controller can't
+  be targeted by a spell with the quality or an ability from a source with it,
+  can't be enchanted by an Aura with it (a Curse already on them falls off),
+  and damage from a source with it is prevented (`playerProtectionBlocks`).
+  The filter reads this permanent as its source — Runed Halo's "the chosen
+  card name" is `{ filter: { chosenName: true } }`; Serra's Emissary's "you and
+  creatures you control" is this beside a `protection: { chosenCardType: true }`
+  over `creatures-you-control`. `affects` is ignored.
 - `doesntUntap: true` — "This artifact doesn't untap during your untap step"
   (Mana Vault, Basalt Monolith). Only its controller's own untap step. On
   anything else — "enchanted creature", "nonbasic lands" — it's the
@@ -4290,11 +4305,13 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   battlefield — for the legend rule and for every "legendary" filter
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
-- `protection: { colors?, types?, filter?, chosenColor?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
+- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
   ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
   multicolored, `{}` for everything). `chosenColor` is "protection from **the
   chosen color**", the colour the source named as it entered (`chooseOnEnter`
-  over the five — Flickering Ward); `doesntRemoveSource` is "This effect
+  over the five — Flickering Ward), `chosenCardType` "from the chosen card
+  type" (`chooseOnEnter: [...CARD_TYPE_CHOICES]` — Serra's Emissary);
+  `doesntRemoveSource` is "This effect
   doesn't remove this Aura" (rule 702.16n): that instance doesn't make its own
   Aura fall off, though it stops everything else and another instance of the
   same colour removes the Aura as normal. Granting protection for a while is
@@ -4460,7 +4477,7 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   creature dying" — dies and leaves-the-battlefield triggers, `filter`
   matched as it last existed). `filter` narrows the permanent, spell or copy
   the event is about.
-- `doubleTriggersOf: { filter?, selfAndEquipment? }` — the same, keyed on
+- `doubleTriggersOf: { filter?, selfAndEquipment?, others? }` — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:
   "you" }`), "…of a creature you control with power 2 or less" (Delney).
@@ -4468,7 +4485,10 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   Mercenary, with `condition: { kind: "source", filter: { equipped: true } }`
   for "as long as ~ is equipped"). Only permanents' abilities — a spell's
   "when you cast this" and a command-zone card's aren't — and a
-  leaves-the-battlefield ability's source is matched as it last existed. All
+  leaves-the-battlefield ability's source is matched as it last existed. The
+  filter reads this permanent as its source: Roaming Throne's "another
+  creature you control of the chosen type" is `{ filter: { type: "creature",
+  controlledBy: "you", ofChosenType: true }, others: true }`. All
   the doublers add up: an Ally's attack trigger under Katara and Isshin fires
   three times.
 
@@ -5461,10 +5481,10 @@ Delete an entry in the same commit as the feature that retires it.
   enters with nothing chosen, as before — for a token copy of such a card
   (never the case for a copy of a Clone that copied something, which copies
   what it copied), and `debugSpawn`.
-  Metallic Mimic ("each other creature you control **of the chosen type**
-  enters with an additional +1/+1 counter") has its filter now (`ofChosenType`),
-  but an `others-enter-battlefield` replacement doesn't hand its filter a
-  source to read the choice off. "Is the chosen type in addition to its other
+  An `others-enter-battlefield` replacement's filter reads its permanent as
+  its source, so Metallic Mimic's "each other creature you control **of the
+  chosen type** enters with an additional +1/+1 counter" is `ofChosenType`
+  there. "Is the chosen type in addition to its other
   types" is a static's `addsChosenCreatureType` (Titan of Littjara — §4).
 - **Embalm** (rule 702.128 — Vizier of Many Faces, whose Clone ability has
   to carry it) is an unmodeled alt-cast mechanic (needed-cards P18); retrace

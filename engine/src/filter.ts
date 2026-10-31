@@ -508,6 +508,17 @@ export interface CardFilter {
    */
   readonly ofChosenType?: true;
   /**
+   * Is of the colour chosen for the permanent applying the filter (its
+   * `chosenOnEnter`, when that is a colour — `chooseOnEnter` over the
+   * colours, via `FilterContext.source`): Pentarch Paladin's "target
+   * permanent **of the chosen color**", Curse of Wizardry's "a spell of the
+   * chosen color", Psychic Allergy's "nontoken permanents of the chosen
+   * color". A source that has left the battlefield reads the colour it had
+   * (rule 608.2h). With no source, or no colour chosen for it, nothing
+   * matches — a colourless object never does (rule 105.2c).
+   */
+  readonly ofChosenColor?: true;
+  /**
    * Has this name (rule 201.2) — one of its names, so either half of a split
    * card (709.4a). What a chosen name becomes in a resolving effect: `{
    * hasName: CHOSEN_CARD_NAME }` in a `choose-card-name`'s `then` is "a card
@@ -1065,6 +1076,21 @@ function damagingStint(
   return stint(host ?? undefined);
 }
 
+/** `filter` with its `ofChosenColor` read now, off `source`, into a fixed
+ * colour — for a filter kept past the resolution that applied it (a
+ * prevention shield's "a source of your choice of the chosen color"), which
+ * uses the colour chosen as the ability resolved (rule 608.2h), not one a
+ * later return of its source chooses. With no colour chosen, the clause is
+ * kept and, read with no source, matches nothing. */
+export function fixChosenColor(state: GameState, filter: CardFilter, source: ObjectId | undefined): CardFilter {
+  if (filter.ofChosenColor !== true || source === undefined) return filter;
+  const from = state.objects[source];
+  const chosen = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
+  if (chosen == null || !(COLORS as readonly string[]).includes(chosen)) return filter;
+  const { ofChosenColor: _read, ...rest } = filter;
+  return { ...rest, colors: [...(filter.colors ?? []), chosen as Color] };
+}
+
 /** Does object `id` satisfy every clause of `filter`?
  *
  * With a snapshot in play (`FilterContext.lastKnown` / `.snapshot`) every
@@ -1247,10 +1273,17 @@ export function matchesFilter(
     filter.colors !== undefined ||
     filter.notColors !== undefined ||
     filter.colorless !== undefined ||
-    filter.multicolored !== undefined
+    filter.multicolored !== undefined ||
+    filter.ofChosenColor !== undefined
   ) {
     const colors: ReadonlySet<Color> =
       live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
+    if (filter.ofChosenColor === true) {
+      // As `ofChosenType`: a source that has left reads its last choice.
+      const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+      const chosen = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
+      if (chosen == null || !colors.has(chosen as Color)) return false;
+    }
     if (filter.colors !== undefined && !filter.colors.every((col) => colors.has(col))) {
       return false;
     }

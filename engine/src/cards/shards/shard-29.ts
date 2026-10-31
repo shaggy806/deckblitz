@@ -425,6 +425,7 @@ import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMemorialToUnity from "../pool/memorial-to-unity.js";
 import _poolMemoricide from "../pool/memoricide.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
+import _poolMetallicMimic from "../pool/metallic-mimic.js";
 import _poolMightstone from "../pool/mightstone.js";
 import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMinamoScrollkeeper from "../pool/minamo-scrollkeeper.js";
@@ -1282,6 +1283,7 @@ const shard: CardShard = {
     _poolMemorialToUnity,
     _poolMemoricide,
     _poolMessengersSpeed,
+    _poolMetallicMimic,
     _poolMightstone,
     _poolMightstonesAnimation,
     _poolMinamoScrollkeeper,

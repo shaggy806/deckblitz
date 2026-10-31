@@ -3878,3 +3878,82 @@ describe("has all activated abilities of … (grantsActivatedOf)", () => {
     expect(fence.static).toHaveLength(0);
   });
 });
+
+describe("a value chosen as it enters, read by its other lines", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads a chosen color: a target, a cast trigger and a source of your choice", () => {
+    const paladin = face(
+      "Pentarch Paladin",
+      "Creature — Human Knight",
+      "As this creature enters, choose a color.\n{W}{W}, {T}: Destroy target permanent of the chosen color.",
+    );
+    expect(paladin.chooseOnEnter).toEqual(["W", "U", "B", "R", "G"]);
+    expect(paladin.activated[0].targets).toEqual([{ kind: "permanent", filter: { ofChosenColor: true } }]);
+    expect(parseTrigger("Whenever a player casts a spell of the chosen color")).toEqual([
+      { on: "cast-spell", who: "any", filter: { ofChosenColor: true } },
+    ]);
+    expect(parseTrigger("Whenever you cast a creature spell of the chosen type")).toEqual([
+      { on: "cast-spell", who: "you", filter: { type: "creature", ofChosenType: true } },
+    ]);
+    const circle = face(
+      "Story Circle",
+      "Enchantment",
+      "As this enchantment enters, choose a color.\n{W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.",
+    );
+    expect(circle.activated[0].effect).toEqual({
+      kind: "prevent-damage-from-chosen-source",
+      filter: { ofChosenColor: true },
+      to: "you",
+      amount: "next-time",
+    });
+  });
+
+  it("reads a chosen card type and name as a player's protection", () => {
+    const emissary = face(
+      "Serra's Emissary",
+      "Creature — Angel",
+      "Flying\nAs this creature enters, choose a card type.\nYou and creatures you control have protection from the chosen card type.",
+    );
+    expect(emissary.chooseOnEnter).toContain("instant");
+    expect(emissary.static).toMatchObject([
+      { affects: { scope: "creatures-you-control" }, protection: { chosenCardType: true } },
+      { affects: { scope: "self" }, playerProtection: { chosenCardType: true } },
+    ]);
+    const halo = face(
+      "Runed Halo",
+      "Enchantment",
+      "As this enchantment enters, choose a card name.\nYou have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)",
+    );
+    expect(halo.static).toMatchObject([{ playerProtection: { filter: { chosenName: true } } }]);
+    // Without a card type chosen, the line is a person's.
+    expect(face("Not A Card", "Enchantment", "You have protection from the chosen card type.").static).toHaveLength(0);
+  });
+
+  it("reads a chosen creature type in a lord, an entering replacement and a trigger doubler", () => {
+    expect(
+      face("Patchwork Banner", "Artifact", "As this artifact enters, choose a creature type.\nCreatures you control of the chosen type get +1/+1.")
+        .static[0],
+    ).toMatchObject({ affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", ofChosenType: true } }, grantPt: [1, 1] });
+    const mimic = face(
+      "Metallic Mimic",
+      "Artifact Creature — Shapeshifter",
+      "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.\nEach other creature you control of the chosen type enters with an additional +1/+1 counter on it.",
+    );
+    expect(mimic.static[1].replacement).toEqual({
+      event: "others-enter-battlefield",
+      filter: { type: "creature", controlledBy: "you", ofChosenType: true },
+      counters: { kind: "+1/+1", amount: 1 },
+    });
+    const throne = face(
+      "Roaming Throne",
+      "Artifact Creature — Golem",
+      "As this creature enters, choose a creature type.\nIf a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.",
+    );
+    expect(throne.static[0].doubleTriggersOf).toEqual({
+      filter: { type: "creature", controlledBy: "you", ofChosenType: true },
+      others: true,
+    });
+  });
+});

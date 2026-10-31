@@ -1,20 +1,19 @@
 import type { TriggeredAbility } from "../../abilities.js";
 import { defineCard } from "../define.js";
 
-const COLORS = ["W", "U", "B", "R", "G"] as const;
 const TRIGGER_TEXT = "Whenever a player casts a spell of the chosen color, you may gain 1 life.";
 const MANA_TEXT = "{T}: Add one mana of the chosen color.";
 
-// One trigger per colour, live only for the colour chosen as it entered: with
-// no colour chosen none triggers (the ruling), and a colorless spell never does.
-const triggered: TriggeredAbility[] = COLORS.map((color) => ({
-  trigger: { on: "cast-spell", who: "any", filter: { colors: [color] } },
-  whileCondition: { kind: "chosen-on-enter", value: color },
+// "A spell of the chosen color" reads the colour chosen as it entered
+// (`ofChosenColor`): with no colour chosen nothing triggers it (the ruling),
+// and a colorless spell never does.
+const triggered: TriggeredAbility[] = [{
+  trigger: { on: "cast-spell", who: "any", filter: { ofChosenColor: true } },
   targets: [],
   effect: { kind: "may", prompt: "Gain 1 life?", effect: { kind: "gain-life", amount: 1 } },
   resolve: null,
   text: TRIGGER_TEXT,
-}));
+}];
 
 export default defineCard({
   name: "Paradise Plume",

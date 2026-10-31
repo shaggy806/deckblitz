@@ -634,6 +634,7 @@ import _poolSereneOffering from "../pool/serene-offering.js";
 import _poolSerpentAssassin from "../pool/serpent-assassin.js";
 import _poolSerraAdvocate from "../pool/serra-advocate.js";
 import _poolSerraAngel from "../pool/serra-angel.js";
+import _poolSerrasEmissary from "../pool/serras-emissary.js";
 import _poolShamanOfSpring from "../pool/shaman-of-spring.js";
 import _poolShamblingGoblin from "../pool/shambling-goblin.js";
 import _poolSharkShredderKillerClone from "../pool/shark-shredder-killer-clone.js";
@@ -1475,6 +1476,7 @@ const shard: CardShard = {
     _poolSerpentAssassin,
     _poolSerraAdvocate,
     _poolSerraAngel,
+    _poolSerrasEmissary,
     _poolShamanOfSpring,
     _poolShamblingGoblin,
     _poolSharkShredderKillerClone,

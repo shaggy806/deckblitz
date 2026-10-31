@@ -701,6 +701,7 @@ import _poolStonefury from "../pool/stonefury.js";
 import _poolStormWorld from "../pool/storm-world.js";
 import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStormscapeMaster from "../pool/stormscape-master.js";
+import _poolStoryCircle from "../pool/story-circle.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSummonLeviathan from "../pool/summon-leviathan.js";
@@ -1557,6 +1558,7 @@ const shard: CardShard = {
     _poolStormWorld,
     _poolStormfrontRiders,
     _poolStormscapeMaster,
+    _poolStoryCircle,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
     _poolSummonLeviathan,

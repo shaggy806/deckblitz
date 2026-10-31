@@ -3,17 +3,21 @@
 import type { CardDefinition, CardRegistry, CardType } from "./cards.js";
 import type { EffectAmount } from "./effects.js";
 import {
+  chosenProtectionQualities,
   computeCharacteristics,
   effectiveTypes,
+  grantedStatics,
+  hasLostAbilities,
   playerHasHexproof,
   playerHasProtectionFromEverything,
+  staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
 import { filterReadsX, manaValueOfObject, matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { printedCardName } from "./state.js";
+import { printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState } from "./state.js";
 import {
   anyNumberSlot,
@@ -170,8 +174,38 @@ export function hexproofFromBlocks(
   return qualityMatches(state, registry, object.controller, computeCharacteristics(state, registry, target).hexproofFrom, source);
 }
 
+/** Does `player`'s protection from a quality (a `playerProtection` static of
+ * a permanent they control — rule 702.16: Serra's Emissary, Runed Halo) stop
+ * `source` from targeting, enchanting or damaging them (702.16b, c, e)?
+ * Matched as a permanent's protection is, each static's `filter` read with
+ * its own permanent as the source ("the chosen card name"). Protection from
+ * everything is `playerHasProtectionFromEverything`'s. */
+export function playerProtectionBlocks(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  source: TargetSource,
+): boolean {
+  if (state.players[player]?.hasLost !== false) return false;
+  for (const id of state.zones.shared.battlefield) {
+    const holder = state.objects[id];
+    if (holder === undefined || holder.controller !== player) continue;
+    const own = hasLostAbilities(state, registry, holder) ? [] : registry.get(rulesTextName(holder)).static;
+    for (const ability of [...own, ...grantedStatics(state, registry, holder)]) {
+      const p = ability.playerProtection;
+      if (p === undefined) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, holder, ability.condition)) continue;
+      const { colors, types } = chosenProtectionQualities(p, holder);
+      const prot = { colors: new Set(colors), types: new Set(types ?? []), filters: p.filter === undefined ? [] : [p.filter] };
+      if (qualityMatches(state, registry, player, prot, source, holder.id)) return true;
+    }
+  }
+  return false;
+}
+
 /** Whether `source` has one of the qualities `prot` names — a colour, a card
- * type, or a filter (see `protectionBlocks`). */
+ * type, or a filter (see `protectionBlocks`). `filterSource` is the
+ * permanent whose protection it is, for a filter that reads it. */
 /** Whether protection from `from` (fixed qualities, as a `grant-protection`
  * names them) would match `source`, read from `controller`'s side as
  * `protectionBlocks` reads it — the bots' "which colour stops that?". */
@@ -197,6 +231,7 @@ function qualityMatches(
   controller: PlayerId,
   prot: { readonly colors: ReadonlySet<Color>; readonly types: ReadonlySet<CardType>; readonly filters: readonly CardFilter[] },
   source: TargetSource,
+  filterSource?: ObjectId,
 ): boolean {
   if (prot.colors.size === 0 && prot.types.size === 0 && prot.filters.length === 0) return false;
   for (const c of source.colors) if (prot.colors.has(c)) return true;
@@ -212,7 +247,10 @@ function qualityMatches(
     const from = source.object;
     if (
       prot.filters.some((filter) =>
-        matchesFilter(state, registry, from, filter, { you: controller }),
+        matchesFilter(state, registry, from, filter, {
+          you: controller,
+          ...(filterSource !== undefined ? { source: filterSource } : {}),
+        }),
       )
     ) {
       return true;
@@ -377,6 +415,10 @@ function isLegalTargetUncached(
   } else if (playerHasProtectionFromEverything(state, ref.player)) {
     // Protection from everything: no spell or ability targets them, their
     // own included (rule 702.16j).
+    return false;
+  } else if (source !== undefined && playerProtectionBlocks(state, registry, ref.player, source)) {
+    // Protection from a quality: no spell with it, nor ability from a
+    // source with it, targets them (rule 702.16b).
     return false;
   }
   // An optional slot accepts exactly what its inner spec accepts; whether it

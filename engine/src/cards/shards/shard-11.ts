@@ -540,6 +540,7 @@ import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
+import _poolPentarchPaladin from "../pool/pentarch-paladin.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
 import _poolPestInfestation from "../pool/pest-infestation.js";
 import _poolPestilentKathari from "../pool/pestilent-kathari.js";
@@ -1405,6 +1406,7 @@ const shard: CardShard = {
     _poolPathOfTheAnimist,
     _poolPearlEarImperialAdvisor,
     _poolPelakkaWurm,
+    _poolPentarchPaladin,
     _poolPerennialBehemoth,
     _poolPestInfestation,
     _poolPestilentKathari,

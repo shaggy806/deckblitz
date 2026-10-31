@@ -567,6 +567,7 @@ import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
 import _poolRundveltHordemaster from "../pool/rundvelt-hordemaster.js";
 import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
+import _poolRunedHalo from "../pool/runed-halo.js";
 import _poolRunedStalactite from "../pool/runed-stalactite.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSadisticShellGame from "../pool/sadistic-shell-game.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolRuhanOfTheFomori,
     _poolRundveltHordemaster,
     _poolRuneOfProtectionBlue,
+    _poolRunedHalo,
     _poolRunedStalactite,
     _poolRustGoliath,
     _poolSadisticShellGame,

@@ -644,6 +644,20 @@ missing. Re-run `--greedy` for Phase 2's order.
   until-end-of-turn effect form, Scheming Fence's chosen permanent as the filter. Next:
   `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15),
   `mechanic:face-down` (14).
+- **2026-10-31: `decision:choose-card-type-protection`'s group, features only** (an overnight
+  agent) — a value chosen as it enters, read by its other lines: the `ofChosenColor` filter
+  clause (targets, triggers, a source of your choice with its shield fixing the colour), a
+  player's protection from a quality (`StaticAbility.playerProtection`, rule 702.16b, c, e),
+  `chosenCardType` on it and on `protection`, and "of the chosen type" read by an entering
+  replacement and a trigger doubler (`doubleTriggersOf.others`). Two of the keys
+  (`static:chosen-creature-type-reads`, `static:chosen-type-in-addition`) were already built at
+  their core and only needed those two filters handed their source. 4 keys; 7 proving cards; 8
+  freed (queued: 612). Adds no decision kind and no client change — the card type is
+  `chooseOnEnter`'s existing menu. Not yet: `decision:choose-name-and-type-on-attach` (Psychic
+  Paper: a choice as an Equipment becomes attached and an effect setting a creature's name),
+  two colours chosen as it enters (Seal of the Guildpact, Tablet of the Guilds). Next:
+  `effect:amount-aggregate` (15), `mechanic:face-down` (14), `effect:aggregate-over-graveyard`
+  (14).
 
 ## Rough size
 

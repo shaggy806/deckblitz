@@ -247,6 +247,7 @@ import {
   graveyardMatches,
   attachmentsOf,
   compareNum,
+  fixChosenColor,
   manaValueOfObject,
   matchesFilter,
   printedManaCost,
@@ -422,6 +423,7 @@ import {
   isLegalTarget,
   legalTargets,
   permanentSource,
+  playerProtectionBlocks,
   protectionBlocks,
   stateTargetFacts,
   targetSpecReadsX,
@@ -10534,6 +10536,18 @@ export class Game {
     const spec = def.targets[0];
     if (spec === undefined) return false;
     const onBattlefield = this.state.objects[aura]?.zone === "battlefield";
+    // Protection from a quality the Aura has (rule 702.16c — a Curse of
+    // Serra's Emissary's chosen "enchantment").
+    if (
+      playerProtectionBlocks(
+        this.state,
+        this.registry,
+        player,
+        onBattlefield ? this.permanentSource(aura) : this.cardSource(def, aura),
+      )
+    ) {
+      return false;
+    }
     const types = onBattlefield ? computeCharacteristics(this.state, this.registry, aura).types : def.types;
     if (types.includes("creature")) return false;
     return isLegalTarget(this.state, this.registry, spec, { kind: "player", player }, controller, undefined, {
@@ -11715,8 +11729,11 @@ export class Game {
               effectiveSubtypes(this.state, this.registry, source).includes("Equipment")));
         const matches =
           d.filter !== undefined &&
+          !(d.others === true && sourceId === id) &&
           matchesFilter(this.state, this.registry, sourceId, d.filter, {
             you: controller,
+            // What "of the chosen type" reads (Roaming Throne).
+            source: id,
             ...(departed ? { lastKnown: true } : {}),
           });
         if (ofSelfOrEquipment || matches) count += 1;
@@ -27632,6 +27649,9 @@ export class Game {
         // existed (608.2h). (A waiting replacement or delayed trigger's
         // object and face-up command-zone objects aren't offered —
         // docs/engine-gaps.md.)
+        // "Of the chosen color" (Story Circle) reads the colour chosen for
+        // this ability's source, as it is now (rule 608.2h).
+        filter = fixChosenColor(this.state, filter, source);
         const spells = this.state.zones.shared.stack.filter((id) => {
           const object = this.state.objects[id];
           return object?.kind === "card" && matchesFilter(this.state, this.registry, id, filter, { you: controller });
@@ -27683,7 +27703,8 @@ export class Game {
             object: from.object,
             zoneChangeCount: chosen.zoneChangeCount ?? 0,
             ...(chosen.zone === "stack" ? { orBecomes: true as const } : {}),
-            ...(filter !== undefined ? { filter } : {}),
+            // A chosen colour is fixed as the shield is made (608.2h).
+            ...(filter !== undefined ? { filter: fixChosenColor(this.state, filter, source) } : {}),
             you: controller,
           },
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
@@ -38373,6 +38394,23 @@ export class Game {
         this.emit({ type: "damage-prevented", source, target, amount });
         return 0;
       }
+      // Protection from a quality the source has (rule 702.16e — Serra's
+      // Emissary naming creature).
+      if (
+        !unpreventable &&
+        (sourceLastKnown !== undefined || this.state.objects[source] !== undefined) &&
+        playerProtectionBlocks(
+          this.state,
+          this.registry,
+          target.player,
+          sourceLastKnown !== undefined
+            ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types }
+            : this.permanentSource(source),
+        )
+      ) {
+        this.emit({ type: "damage-prevented", source, target, amount });
+        return 0;
+      }
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
       this.tallyDamage(source, target, amount);
       // The damage is dealt in full — lifelink, commander damage and "is
@@ -40512,7 +40550,9 @@ export class Game {
         const r = ability.replacement;
         if (r?.event !== "others-enter-battlefield") continue;
         if (!this.staticActive(source, ability)) continue;
-        if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller })) {
+        // `source` for a clause about the replacement's permanent — Metallic
+        // Mimic's "of the chosen type".
+        if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller, source: sourceId })) {
           continue;
         }
         if (r.tapped === true) tapped = true;

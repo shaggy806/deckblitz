@@ -1,17 +1,15 @@
 import type { TriggeredAbility } from "../../abilities.js";
 import { defineCard } from "../define.js";
 
-const COLORS = ["W", "U", "B", "R", "G"] as const;
 const TRIGGER_TEXT = "Whenever you cast a spell of the chosen color, you gain 1 life.";
 
-const triggered: TriggeredAbility[] = COLORS.map((color) => ({
-  trigger: { on: "cast-spell", who: "you", filter: { colors: [color] } },
-  whileCondition: { kind: "chosen-on-enter", value: color },
+const triggered: TriggeredAbility[] = [{
+  trigger: { on: "cast-spell", who: "you", filter: { ofChosenColor: true } },
   targets: [],
   effect: { kind: "gain-life", amount: 1 },
   resolve: null,
   text: TRIGGER_TEXT,
-}));
+}];
 
 export default defineCard({
   name: "Diamond Mare",

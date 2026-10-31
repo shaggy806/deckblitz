@@ -168,6 +168,7 @@ import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
 import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
+import _poolCurseOfWizardry from "../pool/curse-of-wizardry.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
 import _poolCutTheEarthlyBond from "../pool/cut-the-earthly-bond.js";
@@ -1039,6 +1040,7 @@ const shard: CardShard = {
     _poolCryptcallerChariot,
     _poolCultOfTheWaxingMoon,
     _poolCunningCoyote,
+    _poolCurseOfWizardry,
     _poolCursedMinotaur,
     _poolCursedRecording,
     _poolCutTheEarthlyBond,

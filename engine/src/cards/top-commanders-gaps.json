@@ -698,7 +698,11 @@
   "static:gain-abilities-from-graveyard",
   "static:gain-activated-abilities-of-others",
   "static:gain-other-planeswalkers-loyalty-abilities",
-  "static:gain-top-card-activated-abilities"
+  "static:gain-top-card-activated-abilities",
+  "filter:chosen-color",
+  "decision:choose-card-type-protection",
+  "static:chosen-creature-type-reads",
+  "static:chosen-type-in-addition"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

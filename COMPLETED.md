@@ -86,6 +86,25 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a value chosen as it enters, read by its other lines** (2026-10-31;
+  `filter:chosen-color`, `decision:choose-card-type-protection`,
+  `static:chosen-creature-type-reads`, `static:chosen-type-in-addition`; rules 608.2h, 702.16b,
+  c, e, 205.2a). The `ofChosenColor` filter clause — the colour chosen for the permanent applying
+  it (its `chosenOnEnter`), read as it last was once it has left — in target slots, trigger
+  filters and counts, and in "a source of your choice of the chosen color", whose prevention
+  shield fixes the colour as it's made (`fixChosenColor`); Paradise Plume, Jeweled Torque, Prism
+  Ring, Diamond Knight and Diamond Mare moved onto it from five conditional triggers. A static's
+  `playerProtection` — "you have protection from …" by colour, card type or a filter read off its
+  own permanent (`chosenName`): no targeting by a spell or ability source with the quality, no
+  Aura with it (a Curse already there falls off), its damage prevented
+  (`playerProtectionBlocks`). `chosenCardType` on `playerProtection` and `protection`, over
+  `chooseOnEnter: CARD_TYPE_CHOICES`. An entering replacement's and `doubleTriggersOf`'s filters
+  now read their own permanent as source ("of the chosen type"), and `doubleTriggersOf.others`.
+  The scaffolder reads "choose a color / a card type", the lord, replacement, doubler, cast
+  trigger, target, prevention and protection lines over them; `card:parse-check` pairs a
+  line's statics one to one. `decision:choose-name-and-type-on-attach` (Psychic Paper) stays
+  open. Pentarch Paladin, Curse of Wizardry, Story Circle, Serra's Emissary, Runed Halo, Metallic
+  Mimic, Roaming Throne.
 - **Need-keys Phase 2: "has all activated abilities of …"** (2026-10-31;
   `static:gain-abilities-from-graveyard`, `static:gain-activated-abilities-of-others`,
   `static:gain-other-planeswalkers-loyalty-abilities`, `static:gain-top-card-activated-abilities`,

@@ -4905,6 +4905,7 @@ import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
 import _poolCurseOfUnbinding from "./pool/curse-of-unbinding.js";
 import _poolCurseOfVerbosity from "./pool/curse-of-verbosity.js";
 import _poolCurseOfVitality from "./pool/curse-of-vitality.js";
+import _poolCurseOfWizardry from "./pool/curse-of-wizardry.js";
 import _poolCursebreak from "./pool/cursebreak.js";
 import _poolCursecatcher from "./pool/cursecatcher.js";
 import _poolCursedCourtier from "./pool/cursed-courtier.js";
@@ -14226,6 +14227,7 @@ import _poolMessengersSpeed from "./pool/messengers-speed.js";
 import _poolMetalFatigue from "./pool/metal-fatigue.js";
 import _poolMetalhead from "./pool/metalhead.js";
 import _poolMetallicMastery from "./pool/metallic-mastery.js";
+import _poolMetallicMimic from "./pool/metallic-mimic.js";
 import _poolMetallicRebuke from "./pool/metallic-rebuke.js";
 import _poolMetallicSliver from "./pool/metallic-sliver.js";
 import _poolMetallurgeon from "./pool/metallurgeon.js";
@@ -16447,6 +16449,7 @@ import _poolPensiveMinotaur from "./pool/pensive-minotaur.js";
 import _poolPensiveProfessor from "./pool/pensive-professor.js";
 import _poolPentadPrism from "./pool/pentad-prism.js";
 import _poolPentagramOfTheAges from "./pool/pentagram-of-the-ages.js";
+import _poolPentarchPaladin from "./pool/pentarch-paladin.js";
 import _poolPentavus from "./pool/pentavus.js";
 import _poolPenumbraBobcat from "./pool/penumbra-bobcat.js";
 import _poolPenumbraKavu from "./pool/penumbra-kavu.js";
@@ -18631,6 +18634,7 @@ import _poolRoadsideReliquary from "./pool/roadside-reliquary.js";
 import _poolRoaleskApexHybrid from "./pool/roalesk-apex-hybrid.js";
 import _poolRoamersRoutine from "./pool/roamers-routine.js";
 import _poolRoamingGhostlight from "./pool/roaming-ghostlight.js";
+import _poolRoamingThrone from "./pool/roaming-throne.js";
 import _poolRoarOfChallenge from "./pool/roar-of-challenge.js";
 import _poolRoarOfEndlessSong from "./pool/roar-of-endless-song.js";
 import _poolRoarOfTheCrowd from "./pool/roar-of-the-crowd.js";
@@ -18924,6 +18928,7 @@ import _poolRuneboundWolf from "./pool/runebound-wolf.js";
 import _poolRunechantersPike from "./pool/runechanters-pike.js";
 import _poolRuneclawBear from "./pool/runeclaw-bear.js";
 import _poolRunedArch from "./pool/runed-arch.js";
+import _poolRunedHalo from "./pool/runed-halo.js";
 import _poolRunedServitor from "./pool/runed-servitor.js";
 import _poolRunedStalactite from "./pool/runed-stalactite.js";
 import _poolRuneflareTrap from "./pool/runeflare-trap.js";
@@ -19902,6 +19907,7 @@ import _poolSerraZealot from "./pool/serra-zealot.js";
 import _poolSerrasBlessing from "./pool/serras-blessing.js";
 import _poolSerrasBoon from "./pool/serras-boon.js";
 import _poolSerrasEmbrace from "./pool/serras-embrace.js";
+import _poolSerrasEmissary from "./pool/serras-emissary.js";
 import _poolSerrasGuardian from "./pool/serras-guardian.js";
 import _poolSerrasLiturgy from "./pool/serras-liturgy.js";
 import _poolSerrasSanctum from "./pool/serras-sanctum.js";
@@ -22070,6 +22076,7 @@ import _poolStormwatchEagle from "./pool/stormwatch-eagle.js";
 import _poolStormwildCapridor from "./pool/stormwild-capridor.js";
 import _poolStormwingDragon from "./pool/stormwing-dragon.js";
 import _poolStorvaldFrostGiantJarl from "./pool/storvald-frost-giant-jarl.js";
+import _poolStoryCircle from "./pool/story-circle.js";
 import _poolStorySeeker from "./pool/story-seeker.js";
 import _poolStorytellerPixie from "./pool/storyteller-pixie.js";
 import _poolStrafe from "./pool/strafe.js";
@@ -32303,6 +32310,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfUnbinding,
   _poolCurseOfVerbosity,
   _poolCurseOfVitality,
+  _poolCurseOfWizardry,
   _poolCursebreak,
   _poolCursecatcher,
   _poolCursedCourtier,
@@ -41624,6 +41632,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMetalFatigue,
   _poolMetalhead,
   _poolMetallicMastery,
+  _poolMetallicMimic,
   _poolMetallicRebuke,
   _poolMetallicSliver,
   _poolMetallurgeon,
@@ -43845,6 +43854,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPensiveProfessor,
   _poolPentadPrism,
   _poolPentagramOfTheAges,
+  _poolPentarchPaladin,
   _poolPentavus,
   _poolPenumbraBobcat,
   _poolPenumbraKavu,
@@ -46029,6 +46039,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoaleskApexHybrid,
   _poolRoamersRoutine,
   _poolRoamingGhostlight,
+  _poolRoamingThrone,
   _poolRoarOfChallenge,
   _poolRoarOfEndlessSong,
   _poolRoarOfTheCrowd,
@@ -46322,6 +46333,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRunechantersPike,
   _poolRuneclawBear,
   _poolRunedArch,
+  _poolRunedHalo,
   _poolRunedServitor,
   _poolRunedStalactite,
   _poolRuneflareTrap,
@@ -47300,6 +47312,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSerrasBlessing,
   _poolSerrasBoon,
   _poolSerrasEmbrace,
+  _poolSerrasEmissary,
   _poolSerrasGuardian,
   _poolSerrasLiturgy,
   _poolSerrasSanctum,
@@ -49468,6 +49481,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStormwildCapridor,
   _poolStormwingDragon,
   _poolStorvaldFrostGiantJarl,
+  _poolStoryCircle,
   _poolStorySeeker,
   _poolStorytellerPixie,
   _poolStrafe,
@@ -59714,6 +59728,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-unbinding": _poolCurseOfUnbinding,
   "pool/curse-of-verbosity": _poolCurseOfVerbosity,
   "pool/curse-of-vitality": _poolCurseOfVitality,
+  "pool/curse-of-wizardry": _poolCurseOfWizardry,
   "pool/cursebreak": _poolCursebreak,
   "pool/cursecatcher": _poolCursecatcher,
   "pool/cursed-courtier": _poolCursedCourtier,
@@ -69035,6 +69050,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/metal-fatigue": _poolMetalFatigue,
   "pool/metalhead": _poolMetalhead,
   "pool/metallic-mastery": _poolMetallicMastery,
+  "pool/metallic-mimic": _poolMetallicMimic,
   "pool/metallic-rebuke": _poolMetallicRebuke,
   "pool/metallic-sliver": _poolMetallicSliver,
   "pool/metallurgeon": _poolMetallurgeon,
@@ -71256,6 +71272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pensive-professor": _poolPensiveProfessor,
   "pool/pentad-prism": _poolPentadPrism,
   "pool/pentagram-of-the-ages": _poolPentagramOfTheAges,
+  "pool/pentarch-paladin": _poolPentarchPaladin,
   "pool/pentavus": _poolPentavus,
   "pool/penumbra-bobcat": _poolPenumbraBobcat,
   "pool/penumbra-kavu": _poolPenumbraKavu,
@@ -73440,6 +73457,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roalesk-apex-hybrid": _poolRoaleskApexHybrid,
   "pool/roamers-routine": _poolRoamersRoutine,
   "pool/roaming-ghostlight": _poolRoamingGhostlight,
+  "pool/roaming-throne": _poolRoamingThrone,
   "pool/roar-of-challenge": _poolRoarOfChallenge,
   "pool/roar-of-endless-song": _poolRoarOfEndlessSong,
   "pool/roar-of-the-crowd": _poolRoarOfTheCrowd,
@@ -73733,6 +73751,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/runechanters-pike": _poolRunechantersPike,
   "pool/runeclaw-bear": _poolRuneclawBear,
   "pool/runed-arch": _poolRunedArch,
+  "pool/runed-halo": _poolRunedHalo,
   "pool/runed-servitor": _poolRunedServitor,
   "pool/runed-stalactite": _poolRunedStalactite,
   "pool/runeflare-trap": _poolRuneflareTrap,
@@ -74711,6 +74730,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/serras-blessing": _poolSerrasBlessing,
   "pool/serras-boon": _poolSerrasBoon,
   "pool/serras-embrace": _poolSerrasEmbrace,
+  "pool/serras-emissary": _poolSerrasEmissary,
   "pool/serras-guardian": _poolSerrasGuardian,
   "pool/serras-liturgy": _poolSerrasLiturgy,
   "pool/serras-sanctum": _poolSerrasSanctum,
@@ -76879,6 +76899,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stormwild-capridor": _poolStormwildCapridor,
   "pool/stormwing-dragon": _poolStormwingDragon,
   "pool/storvald-frost-giant-jarl": _poolStorvaldFrostGiantJarl,
+  "pool/story-circle": _poolStoryCircle,
   "pool/story-seeker": _poolStorySeeker,
   "pool/storyteller-pixie": _poolStorytellerPixie,
   "pool/strafe": _poolStrafe,

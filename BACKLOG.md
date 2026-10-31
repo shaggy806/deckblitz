@@ -257,10 +257,21 @@ section keeps only what to do next.
   chosen permanent, Cairn Wanderer's are keywords, not activated abilities; 7 proving cards —
   Necrotic Ooze, Thranduil, the Elvenking, Skill Borrower, Experiment Kraj, Marvin, Murderous
   Mimic, Sharkey, Tyrant of the Shire, Drana and Linvala; the family's exiled-card units and Grell
-  Philosopher's until-end-of-turn form still open).
-  **604 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15),
-  `mechanic:face-down` (14), `effect:aggregate-over-graveyard` (14).
+  Philosopher's until-end-of-turn form still open),
+  choose-card-type-protection's group (2026-10-31: a value chosen as it enters read by its other
+  lines — the `ofChosenColor` filter clause (targets, triggers, counts, a source of your choice,
+  whose shield keeps the colour, rule 608.2h; Paradise Plume, Jeweled Torque, Prism Ring and the
+  Diamonds moved onto it from five conditional copies), a player's protection from a quality,
+  `playerProtection` (rule 702.16b, c, e — targeting, Curses, damage), `chosenCardType` on it and
+  on `protection`, and the chosen creature type read by an entering replacement and by
+  `doubleTriggersOf` (now with `others`); 8 freed — Seal of the Guildpact and Tablet of the
+  Guilds still need two colours chosen, Zombie Boa a colour chosen on activation;
+  `decision:choose-name-and-type-on-attach` (Psychic Paper — a choice as an Equipment attaches
+  and a name-setting effect) left open; 7 proving cards — Pentarch Paladin, Curse of Wizardry,
+  Story Circle, Serra's Emissary, Runed Halo, Metallic Mimic, Roaming Throne).
+  **612 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:amount-aggregate` (15), `mechanic:face-down` (14), `effect:aggregate-over-graveyard`
+  (14), `effect:divide-among-targets` (14).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
