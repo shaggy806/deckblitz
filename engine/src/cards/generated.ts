@@ -3646,9 +3646,11 @@ import _poolChandraAblaze from "./pool/chandra-ablaze.js";
 import _poolChandraAcolyteOfFlame from "./pool/chandra-acolyte-of-flame.js";
 import _poolChandraBoldPyromancer from "./pool/chandra-bold-pyromancer.js";
 import _poolChandraFireArtisan from "./pool/chandra-fire-artisan.js";
+import _poolChandraFlamecaller from "./pool/chandra-flamecaller.js";
 import _poolChandraFlamesCatalyst from "./pool/chandra-flames-catalyst.js";
 import _poolChandraFlamesFury from "./pool/chandra-flames-fury.js";
 import _poolChandraFlameshaper from "./pool/chandra-flameshaper.js";
+import _poolChandraNalaar from "./pool/chandra-nalaar.js";
 import _poolChandraNovicePyromancer from "./pool/chandra-novice-pyromancer.js";
 import _poolChandraSparkHunter from "./pool/chandra-spark-hunter.js";
 import _poolChandraTheFirebrand from "./pool/chandra-the-firebrand.js";
@@ -23067,6 +23069,7 @@ import _poolTezzeretArtificeMaster from "./pool/tezzeret-artifice-master.js";
 import _poolTezzeretCruelCaptain from "./pool/tezzeret-cruel-captain.js";
 import _poolTezzeretMasterOfMetal from "./pool/tezzeret-master-of-metal.js";
 import _poolTezzeretTheSchemer from "./pool/tezzeret-the-schemer.js";
+import _poolTezzeretTheSeeker from "./pool/tezzeret-the-seeker.js";
 import _poolTezzeretsAmbition from "./pool/tezzerets-ambition.js";
 import _poolTezzeretsBetrayal from "./pool/tezzerets-betrayal.js";
 import _poolTezzeretsGambit from "./pool/tezzerets-gambit.js";
@@ -31013,9 +31016,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandraAcolyteOfFlame,
   _poolChandraBoldPyromancer,
   _poolChandraFireArtisan,
+  _poolChandraFlamecaller,
   _poolChandraFlamesCatalyst,
   _poolChandraFlamesFury,
   _poolChandraFlameshaper,
+  _poolChandraNalaar,
   _poolChandraNovicePyromancer,
   _poolChandraSparkHunter,
   _poolChandraTheFirebrand,
@@ -50434,6 +50439,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTezzeretCruelCaptain,
   _poolTezzeretMasterOfMetal,
   _poolTezzeretTheSchemer,
+  _poolTezzeretTheSeeker,
   _poolTezzeretsAmbition,
   _poolTezzeretsBetrayal,
   _poolTezzeretsGambit,
@@ -58393,9 +58399,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandra-acolyte-of-flame": _poolChandraAcolyteOfFlame,
   "pool/chandra-bold-pyromancer": _poolChandraBoldPyromancer,
   "pool/chandra-fire-artisan": _poolChandraFireArtisan,
+  "pool/chandra-flamecaller": _poolChandraFlamecaller,
   "pool/chandra-flames-catalyst": _poolChandraFlamesCatalyst,
   "pool/chandra-flames-fury": _poolChandraFlamesFury,
   "pool/chandra-flameshaper": _poolChandraFlameshaper,
+  "pool/chandra-nalaar": _poolChandraNalaar,
   "pool/chandra-novice-pyromancer": _poolChandraNovicePyromancer,
   "pool/chandra-spark-hunter": _poolChandraSparkHunter,
   "pool/chandra-the-firebrand": _poolChandraTheFirebrand,
@@ -77814,6 +77822,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tezzeret-cruel-captain": _poolTezzeretCruelCaptain,
   "pool/tezzeret-master-of-metal": _poolTezzeretMasterOfMetal,
   "pool/tezzeret-the-schemer": _poolTezzeretTheSchemer,
+  "pool/tezzeret-the-seeker": _poolTezzeretTheSeeker,
   "pool/tezzerets-ambition": _poolTezzeretsAmbition,
   "pool/tezzerets-betrayal": _poolTezzeretsBetrayal,
   "pool/tezzerets-gambit": _poolTezzeretsGambit,

@@ -702,7 +702,7 @@ function tokenRate(registry: CardRegistry, def: CardDefinition, opponents: numbe
     rate = engineRate(
       def,
       (effect) => tokensPerFiring(registry, effect),
-      (a) => a.cost.sacrifice !== "self" && !isManaAbility(a) && (a.loyaltyCost ?? 0) >= 0,
+      (a) => a.cost.sacrifice !== "self" && !isManaAbility(a) && a.loyaltyCost !== "-x" && (a.loyaltyCost ?? 0) >= 0,
     );
     tokenMemo.set(def, rate);
   }

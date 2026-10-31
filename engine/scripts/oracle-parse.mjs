@@ -3879,11 +3879,13 @@ export function parseFace(face, ctx = {}) {
 
     // Loyalty abilities.
     if ((m = /^([+−-]?)(\d+|X): (.+)$/.exec(line)) && face.loyalty !== undefined) {
+      const minusX = m[2] === "X" && (m[1] === "−" || m[1] === "-");
       const n = m[2] === "X" ? null : Number(m[2]) * (m[1] === "" || m[1] === "+" ? 1 : -1);
-      // The engine has no X loyalty cost; 0 keeps the skeleton compiling, and
-      // the TODO keeps it out of review/.
-      const ability = { loyaltyCost: n ?? 0, cost: { mana: null, tap: false }, targets: [], effect: null, resolve: null, text: printed(raw) };
-      if (n === null) { ability.__todo = ["an X loyalty cost"]; }
+      // "−X" is `"-x"` (its X announced as it's activated, rule 107.3a). The
+      // engine has no "+X" cost; 0 keeps the skeleton compiling, and the TODO
+      // keeps it out of review/.
+      const ability = { loyaltyCost: minusX ? "-x" : n ?? 0, cost: { mana: null, tap: false }, targets: [], effect: null, resolve: null, text: printed(raw) };
+      if (n === null && !minusX) { ability.__todo = ["a +X loyalty cost"]; }
       fillEffect(ability, m[3], { tokenFor, onStack: true }, lines, i);
       out.activated.push(ability);
       continue;

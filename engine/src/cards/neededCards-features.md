@@ -344,6 +344,17 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### "−X" loyalty costs — built 2026-10-31
+
+The need-keys Phase 2 family `cost:loyalty-x`, features only. **`loyaltyCost:
+"-x"`**: X is announced as the ability is activated (rule 107.3a) on the
+activation's existing `xValue`, offered as `xCost` from 0 to the loyalty the
+source has (606.6), and that many loyalty counters are removed; the ability's X
+is that value (107.3k), read as `amount: "x"` or a filter's `n: "x"`. No new
+decision: the client's X prompt covers it. v2 weighs each X from 1 up; v1 keeps
+a counter. No card has "+X" yet. Key: loyalty-x. Proving cards: Chandra Nalaar,
+Chandra, Flamecaller, Tezzeret the Seeker.
+
 ### Choices by other players — built 2026-10-31
 
 The need-keys Phase 2 family `effect:choices-by-other-players`, its top group,

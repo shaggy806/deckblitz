@@ -213,10 +213,15 @@ section keeps only what to do next.
   "that player" of the modes; not yet: a trigger's "of an opponent's choice" (Mausoleum Turnkey),
   Mogg Assassin's "that opponent", targets after an opponent's mode (Fatal Lore); 7 freed beside
   9 proving cards — Incriminate, Barrin's Spite, Retribution, Wake to Slaughter, Evangelize,
-  Volcanic Offering, Magus of the Arena, Library of Lat-Nam, Misfortune).
-  **544 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `cost:loyalty-x` (15), `mechanic:meld` (15), `cost:remove-any-counter-cost` (15),
-  `cost:may-cost-non-mana` (15).
+  Volcanic Offering, Magus of the Arena, Library of Lat-Nam, Misfortune),
+  loyalty-x (2026-10-31: a "−X" loyalty cost, `loyaltyCost: "-x"` — X announced as it's
+  activated (rule 107.3a) on the activation's existing `xCost`, up to the loyalty it has
+  (606.6), the client's X prompt unchanged; v2 weighs each X from 1 up, v1 keeps a counter;
+  "+X" has no card yet; 12 freed, 3 proving cards — Chandra Nalaar, Chandra, Flamecaller,
+  Tezzeret the Seeker).
+  **556 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `mechanic:meld` (15), `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15),
+  `effect:cast-and-activate-restrictions` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

@@ -3575,3 +3575,26 @@ describe("choices by other players: among the targets, an opponent's targets, an
     expect(fatal.castModal).toBeUndefined();
   });
 });
+
+describe("loyalty costs", () => {
+  it("reads a −X cost as `\"-x\"`, its X the effect's, and leaves a +X one a TODO", () => {
+    const face = parseFace(
+      {
+        name: "Chandra Nalaar",
+        type_line: "Legendary Planeswalker — Chandra",
+        loyalty: "6",
+        oracle_text:
+          "+1: Chandra Nalaar deals 1 damage to target player or planeswalker.\n−X: Chandra Nalaar deals X damage to target creature.\n+X: Draw X cards.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.activated[1]).toMatchObject({
+      loyaltyCost: "-x",
+      targets: ["creature"],
+      effect: { kind: "damage", amount: "x", target: 0 },
+    });
+    expect(face.activated[1].__todo).toBeUndefined();
+    // The engine has no "+X" cost.
+    expect(face.activated[2].__todo).toEqual(["a +X loyalty cost"]);
+  });
+});

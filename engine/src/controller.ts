@@ -3109,7 +3109,13 @@ export class HeuristicBotController extends AutomaticController {
       ...(sac !== undefined && sac.choices.length > 0
         ? { sacrifice: this.cheapestPermanents(state, sac.choices, 1)[0] }
         : {}),
-      ...(legal.xCost !== undefined ? { xValue: legal.xCost.maxX } : {}),
+      // A "−X" loyalty ability: one counter kept, so the planeswalker stays.
+      ...(legal.xCost !== undefined
+        ? {
+            xValue:
+              legal.loyalty === "-x" ? Math.max(legal.xCost.minX ?? 0, legal.xCost.maxX - 1) : legal.xCost.maxX,
+          }
+        : {}),
       ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
       ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
     };

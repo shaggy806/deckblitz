@@ -249,9 +249,20 @@ function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Actio
     // The opponent named to choose some of its targets (rule 601.2c).
     ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
   };
-  return targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs).map(
-    (targets) => ({ ...common, targets }),
-  );
+  const combos = targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs);
+  // A "−X" loyalty ability (rule 107.3a): X at its maximum spends every
+  // counter and the planeswalker with them (704.5i), so each X from 1 up is
+  // a candidate of its own — few, a planeswalker's loyalty being small — and
+  // the search weighs what X buys against what it leaves.
+  if (legal.loyalty === "-x" && legal.xCost !== undefined) {
+    const low = Math.max(1, legal.xCost.minX ?? 0);
+    const xs: number[] = [];
+    for (let x = legal.xCost.maxX; x >= low; x -= 1) xs.push(x);
+    if (xs.length === 0) xs.push(legal.xCost.maxX);
+    const perX = Math.max(1, Math.floor((MAX_TARGET_COMBOS * 3) / xs.length));
+    return xs.flatMap((xValue) => combos.slice(0, perX).map((targets) => ({ ...common, xValue, targets })));
+  }
+  return combos.map((targets) => ({ ...common, targets }));
 }
 
 /**

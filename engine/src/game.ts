@@ -13,6 +13,7 @@ import {
   chosenCounterCost,
   costAnnouncesX,
   isManaAbility,
+  loyaltyDelta,
   sacrificeCostFilters,
   sacrificeCostParts,
   sacrificeCostReadsX,
@@ -2833,7 +2834,11 @@ export class Game {
             ? this.costCounterSources(player, source, ability)[ability.cost.removeCounter.among === true ? "total" : "most"]
             : (this.state.objects[source]?.counters[ability.cost.removeCounter.kind] ?? 0)
           : undefined;
-      const caps = [manaX, sacrificeX, exileX, discardX, revealX, counterX].filter((n): n is number => n !== undefined);
+      // "−X": up to the loyalty it has (rules 107.3a, 606.6).
+      const loyaltyX = ability.loyaltyCost === "-x" ? (this.state.objects[source]?.counters.loyalty ?? 0) : undefined;
+      const caps = [manaX, sacrificeX, exileX, discardX, revealX, counterX, loyaltyX].filter(
+        (n): n is number => n !== undefined,
+      );
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
       // "X can't be 0" (Ruthless Technomancer).
       const minX = ability.minX ?? 0;
@@ -16243,7 +16248,8 @@ export class Game {
     const parsed = parseManaCost(ability.cost.mana);
     // "Sacrifice X Treasures", "Discard X cards" announce an X the mana cost
     // needn't have.
-    const hasX = parsed.x > 0 || costAnnouncesX(ability.cost);
+    // So does a "−X" loyalty cost (rule 107.3a).
+    const hasX = parsed.x > 0 || costAnnouncesX(ability.cost) || ability.loyaltyCost === "-x";
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     const mod = this.abilityCostModificationFor(sourceId, ability, player);
     // Increases first, then the reductions (rule 601.2f).
@@ -16517,9 +16523,12 @@ export class Game {
       if (source.loyaltyActivatedThisTurn) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
+      // A "−X" cost removes the X announced (rule 107.3a), so it needs that
+      // many (606.6).
       const loyalty = source.counters.loyalty ?? 0;
-      if (loyalty + ability.loyaltyCost < 0) {
-        return `${def.name} does not have ${-ability.loyaltyCost} loyalty to remove`;
+      const delta = loyaltyDelta(ability, x) ?? 0;
+      if (loyalty + delta < 0) {
+        return `${def.name} does not have ${-delta} loyalty to remove`;
       }
     }
     if (ability.cost.tap) {
@@ -17033,24 +17042,26 @@ export class Game {
     if (ability.cost.addCounter !== undefined) {
       this.putCostCounters(sourceId, ability.cost.addCounter.kind, ability.cost.addCounter.count, player);
     }
-    if (ability.loyaltyCost !== undefined) {
-      source.counters.loyalty = (source.counters.loyalty ?? 0) + ability.loyaltyCost;
+    // A "−X" cost removes the X announced (rule 107.3a).
+    const loyaltyPaid = loyaltyDelta(ability, chosenX);
+    if (loyaltyPaid !== undefined) {
+      source.counters.loyalty = (source.counters.loyalty ?? 0) + loyaltyPaid;
       source.loyaltyActivatedThisTurn = true;
       this.emit({
         type: "loyalty-changed",
         object: sourceId,
-        delta: ability.loyaltyCost,
+        delta: loyaltyPaid,
         loyalty: source.counters.loyalty,
       });
       // A plus cost *puts* loyalty counters on it (rules 606.4, 122.6) —
       // Inspired Tethermage's "whenever you put one or more loyalty counters".
-      if (ability.loyaltyCost > 0) {
-        this.emit({ type: "counter-added", object: sourceId, counter: "loyalty", amount: ability.loyaltyCost, by: player, after: source.counters.loyalty });
+      if (loyaltyPaid > 0) {
+        this.emit({ type: "counter-added", object: sourceId, counter: "loyalty", amount: loyaltyPaid, by: player, after: source.counters.loyalty });
       }
       // A minus cost removes them (606.4) — Chandra, Fire Artisan's
       // "whenever one or more loyalty counters are removed".
-      if (ability.loyaltyCost < 0) {
-        this.emit({ type: "counter-removed", object: sourceId, counter: "loyalty", amount: -ability.loyaltyCost, after: source.counters.loyalty });
+      if (loyaltyPaid < 0) {
+        this.emit({ type: "counter-removed", object: sourceId, counter: "loyalty", amount: -loyaltyPaid, after: source.counters.loyalty });
       }
     }
     if (sacrificeVictim !== null) {

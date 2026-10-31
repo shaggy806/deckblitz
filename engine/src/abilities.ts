@@ -87,6 +87,15 @@ export function chosenCounterCost(cost: AbilityCost): boolean {
   );
 }
 
+/** The loyalty counters a loyalty ability's cost puts on its source at this
+ * X (negative removes them, rule 606.4) — a "−X" cost's X announced as it's
+ * activated (107.3a); `undefined` for an ability that isn't a loyalty one. */
+export function loyaltyDelta(ability: ActivatedAbility, x: number | undefined): number | undefined {
+  const cost = ability.loyaltyCost;
+  if (cost === "-x") return 0 - Math.max(0, Math.floor(x ?? 0));
+  return cost;
+}
+
 /** Does any part of this cost besides its mana take X — so X is announced
  * though the mana cost needn't have `{X}` (Grim Hireling's "Sacrifice X
  * Treasures", Gix, Yawgmoth Praetor's "Discard X cards")? */
@@ -478,8 +487,15 @@ export interface ActivatedAbility {
    * permanent may be activated each turn. `cost.mana` / `cost.tap` are
    * ignored; a loyalty ability with a target is fine ("+1: Untap two target
    * lands"). Uses the stack like any other activated ability.
+   *
+   * `"-x"` is a "−X" cost (Chandra Nalaar's "−X: … deals X damage to target
+   * creature"): its controller announces X as it's activated (rule 107.3a,
+   * the `xValue` an `{X}` mana cost takes, offered as the `xCost` range up
+   * to the loyalty it has, 606.6), and that many loyalty counters are
+   * removed. The ability's X is that value (107.3k), read as `ctx.x` /
+   * amount `"x"` like any activated ability's.
    */
-  readonly loyaltyCost?: number;
+  readonly loyaltyCost?: number | "-x";
   /** "Sacrifice **another** black creature" (Ayara, First of Locthwain) —
    * keeps the source out of its own **sacrifice cost**; without it Ayara
    * could eat herself to draw. Targets are another matter: "another target

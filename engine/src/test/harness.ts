@@ -208,7 +208,8 @@ export function activate(
 export function loyalty(
   game: Game,
   source: ObjectId,
-  cost: number,
+  /** The printed cost, `"-x"` for a "−X" one (whose X is `opts.x`). */
+  cost: number | "-x",
   opts: Parameters<typeof activate>[3] & { atLeast?: number } = {},
 ): void {
   const { atLeast, ...rest } = opts;
@@ -217,7 +218,9 @@ export function loyalty(
   const index = registryOf(game)
     .get(object.cardName)
     .activated.findIndex((a) => a.loyaltyCost === cost);
-  if (index < 0) throw new Error(`${object.cardName} has no ${cost >= 0 ? "+" : ""}${cost} loyalty ability`);
+  if (index < 0) {
+    throw new Error(`${object.cardName} has no ${cost === "-x" ? "−X" : `${cost >= 0 ? "+" : ""}${cost}`} loyalty ability`);
+  }
   activate(game, source, index, rest);
 }
 

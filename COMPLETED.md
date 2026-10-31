@@ -86,6 +86,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: loyalty-x** (2026-10-31; `cost:loyalty-x`, rules 606.4, 606.6, 107.3a).
+  `ActivatedAbility.loyaltyCost: "-x"` is a "−X" cost: X is announced as it's activated on the
+  activation's existing `xValue`, offered as `xCost` from 0 to the loyalty counters the source
+  has (606.6), and that many are removed (`loyaltyDelta`, the `counter-removed` event too); the
+  ability's X is that value (107.3k), read as `amount: "x"` or a filter's `n: "x"`. The offer's
+  `loyalty` says `"-x"`; the client's X prompt needed nothing. v2's candidates are each X from 1
+  up (X at the most spends the planeswalker); v1 keeps one counter. "+X" has no card yet. The
+  scaffolder reads "−X:" lines. 12 freed; proving cards Chandra Nalaar, Chandra, Flamecaller,
+  Tezzeret the Seeker.
 - **Need-keys Phase 2: choices by other players** (2026-10-31; `effect:choices-by-other-players`'
   top group — `decision:opponent-chooses-target`, `decision:opponent-chooses-mode`,
   `effect:opponent-chooses-among-targets`). The `choose-among-targets` effect: as a spell

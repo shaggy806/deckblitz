@@ -3288,6 +3288,11 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
 - `loyaltyCost: 1` (or `-3`) — marks a **loyalty ability**: `cost.mana` /
   `cost.tap` are ignored, it's sorcery-speed, once per planeswalker per turn,
   and paid by adding/removing loyalty counters. Requires `loyalty` on the card.
+  `loyaltyCost: "-x"` is a **"−X"** cost (Chandra Nalaar, Tezzeret the Seeker):
+  X is announced as it's activated, 0 up to the loyalty it has (rules 107.3a,
+  606.6), and that many counters are removed; the effect reads it as
+  `amount: "x"` or a filter's `n: "x"`, as an `{X}` ability's. There is no
+  "+X" yet. The scaffolder reads "−X:" lines. `loyalty-x.test.ts`.
 - `otherOnly: true` — "Sacrifice **another** …": keeps the source out of its
   own sacrifice cost (Ayara, First of Locthwain; Dina, Soul Steeper). It says
   nothing about targets any more — "untap **another** target artifact"

@@ -579,6 +579,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   decision kind; the client echoes `otherChooser` and labels it; six manual checks (one
   four-player). Next: `cost:loyalty-x` (15), `mechanic:meld` (15),
   `cost:remove-any-counter-cost` (15).
+- **2026-10-31: `cost:loyalty-x`, features only** (an overnight agent) — `loyaltyCost: "-x"`, a
+  "−X" loyalty cost: X announced as it's activated (rule 107.3a) on the activation's existing
+  `xValue` / `xCost`, capped at the loyalty the source has (606.6), and that many counters
+  removed; the ability's X is that value (107.3k). 1 key ("+X" has no card); 3 proving cards; 12
+  freed (queued: 556). Adds no decision kind and no client change (its X prompt covers it). v2's
+  candidates are each X from 1 up; v1 keeps a counter. Next: `mechanic:meld` (15),
+  `cost:remove-any-counter-cost` (15), `cost:may-cost-non-mana` (15).
 
 ## Rough size
 

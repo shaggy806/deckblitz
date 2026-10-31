@@ -128,6 +128,7 @@ import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
 import _poolChamberOfManipulation from "../pool/chamber-of-manipulation.js";
+import _poolChandraNalaar from "../pool/chandra-nalaar.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
@@ -997,6 +998,7 @@ const shard: CardShard = {
     _poolCephalidScout,
     _poolCerebralDownload,
     _poolChamberOfManipulation,
+    _poolChandraNalaar,
     _poolChaosWand,
     _poolChaosWarp,
     _poolCharismaBobblehead,

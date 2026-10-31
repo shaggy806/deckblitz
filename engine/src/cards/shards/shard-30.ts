@@ -112,6 +112,7 @@ import _poolCeruleanSphinx from "../pool/cerulean-sphinx.js";
 import _poolChainToMemory from "../pool/chain-to-memory.js";
 import _poolChainbreaker from "../pool/chainbreaker.js";
 import _poolChampionOfStraySouls from "../pool/champion-of-stray-souls.js";
+import _poolChandraFlamecaller from "../pool/chandra-flamecaller.js";
 import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChaosImps from "../pool/chaos-imps.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolChainToMemory,
     _poolChainbreaker,
     _poolChampionOfStraySouls,
+    _poolChandraFlamecaller,
     _poolChannelerInitiate,
     _poolChaosImps,
     _poolChariotOfVictory,

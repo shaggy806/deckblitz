@@ -1351,8 +1351,9 @@ export type LegalAction =
        * {@link WaterbendOffer}. */
       readonly waterbend?: WaterbendOffer;
       /** Present for a planeswalker loyalty ability — the loyalty counters it
-       * adds (negative = removes), so a UI can label it "+1" / "−3". */
-      readonly loyalty?: number;
+       * adds (negative = removes), so a UI can label it "+1" / "−3"; `"-x"`
+       * for a "−X" cost, whose X is the offer's `xCost` choice. */
+      readonly loyalty?: number | "-x";
       /** A modal ability's modes this offer chooses (rule 700.2b) — the
        * ability is offered once per choice, each with those modes' targets
        * as its `targetSpecs` and its `text` naming them. Echo it back as the
