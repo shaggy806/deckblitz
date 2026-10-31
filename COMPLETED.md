@@ -86,6 +86,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: a mode chosen more than once, and shuffling zones into a library**
+  (2026-10-30; `effect:modal-repeat-modes` and `effect:mode-not-chosen-this-turn`, then
+  `effect:shuffle-library`'s top unit — `effect:shuffle-hand-and-graveyard-into-library`,
+  `effect:shuffle-hand-draw-that-many`, `effect:shuffle-hand-and-permanents-draw-that-many`,
+  `effect:shuffle-permanents-owned-into-library`). `castModal.repeatModes` (rule 700.2d: the
+  cast's modes may repeat, each copy with its own target slots), read by the offer, target-count
+  bounds, the bots' candidates (`modeChoicesBetween`), the drivers (`fillModes`) and the
+  client's mode picker (a click adds a copy, "×N", Clear); `shuffle-graveyard-into-library`'s
+  `zones` (hand, graveyard, permanents owned, in one move — rule 701.24a) and `drawThatMany`;
+  Whirlpool Rider and Drake moved to it; run-check's `click:` tries the decision bar first; two
+  manual checks; the scaffolder taught both. 30 freed (all queued: 469), 6 proving cards: Fiery
+  Confluence, Mystic Confluence, Kimoyo Beads, Timetwister, Winds of Change, Whirlpool Warrior.
 - **Need-keys Phase 2: block minimums, "all must block" and one-blocker requirements**
   (2026-10-30; `static:combat-restriction-extensions`' top two units, 8 keys —
   `static:cant-be-blocked-except-by-n`, `static:cant-be-blocked-unless-all-block`,

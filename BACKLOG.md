@@ -163,10 +163,16 @@ section keeps only what to do next.
   restriction; 32 freed, 14 proving cards — Troll of Khazad-dûm, Pathrazer of Ulamog, Sonorous
   Howlbonder, Neurok Spy, Hazy Homunculus, Graxiplon, Tromokratis, Kraken of the Straits,
   Gingerbrute, Kozilek's Pathfinder, Auriok Siege Sled, Razorgrass Screen, Iron Golem, Grand
-  Melee; the family's must-attack and attack-limit units still open).
-  **439 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked` (18),
-  `effect:shuffle-hand-and-graveyard-into-library` (18), `cost:additional-cost-reveal` (17).
+  Melee; the family's must-attack and attack-limit units still open), modal-repeat-modes
+  (2026-10-30: `castModal.repeatModes`, "you may choose the same mode more than once" — the
+  client's mode picker counts copies; "choose one that hasn't been chosen" was already
+  `notChosenBefore`; 15 freed, 3 proving cards — Fiery Confluence, Mystic Confluence, Kimoyo
+  Beads) and shuffle-library's top unit (2026-10-30: `shuffle-graveyard-into-library`'s `zones` —
+  hand, graveyard, permanents owned — and `drawThatMany`; 15 freed, 3 proving cards —
+  Timetwister, Winds of Change, Whirlpool Warrior).
+  **469 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `static:assign-damage-as-though-unblocked` (18), `cost:additional-cost-reveal` (17),
+  `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

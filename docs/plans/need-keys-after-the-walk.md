@@ -513,6 +513,13 @@ missing. Re-run `--greedy` for Phase 2's order.
   already built and only marked; 14 proving cards. 32 freed (14 authored here, 18 queued:
   439). Next: `effect:modal-repeat-modes` (18), `static:assign-damage-as-though-unblocked`
   (18), `effect:shuffle-hand-and-graveyard-into-library` (18).
+- **2026-10-30: `effect:modal-repeat-modes` and `effect:shuffle-library`'s top unit,
+  features only** — "you may choose the same mode more than once" (`castModal.repeatModes`,
+  the client's picker counting copies) and Kimoyo Beads on the existing `notChosenBefore`;
+  "shuffles their hand and graveyard into their library" (`zones`) and "then draws that many"
+  (`drawThatMany`). 6 keys; 6 proving cards. 30 freed (queued: 469). Next:
+  `static:assign-damage-as-though-unblocked` (18), `cost:additional-cost-reveal` (17),
+  `effect:remove-all-counters` (17).
 
 ## Rough size
 
