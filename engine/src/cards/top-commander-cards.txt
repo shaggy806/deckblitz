@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4043 already implemented / 957 missing (marks refreshed 2026-10-31)
+4047 already implemented / 953 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1076,7 +1076,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1080  Selesnya Signet                          {2}              Artifact
 [ ]  1081  Tataru Taru                              {1}{W}           Legendary Creature — Dwarf Advisor
 [x]  1082  Door of Destinies                        {4}              Artifact
-[ ]  1083  Marvin, Murderous Mimic                  {2}              Legendary Artifact Creature — Toy
+[x]  1083  Marvin, Murderous Mimic                  {2}              Legendary Artifact Creature — Toy
 [x]  1084  Genji Glove                              {5}              Artifact — Equipment
 [x]  1085  Mesmeric Orb                             {2}              Artifact
 [x]  1086  Krenko, Mob Boss                         {2}{R}{R}        Legendary Creature — Goblin Warrior
@@ -1693,7 +1693,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1700  Glen Elendra Archmage                    {3}{U}           Creature — Faerie Wizard
 [x]  1701  Curiosity Crafter                        {3}{U}           Creature — Bird Wizard
 [ ]  1702  Extraplanar Lens                         {3}              Artifact
-[ ]  1703  Timely Ward                              {2}{W}           Enchantment — Aura
+[x]  1703  Timely Ward                              {2}{W}           Enchantment — Aura
 [x]  1704  Oversold Cemetery                        {1}{B}           Enchantment
 [ ]  1705  Mirror Box                               {3}              Artifact
 [x]  1706  Sublime Epiphany                         {4}{U}{U}        Instant
@@ -1910,7 +1910,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1917  Temur Sabertooth                         {2}{G}{G}        Creature — Cat
 [x]  1918  Herald of the Pantheon                   {1}{G}           Creature — Centaur Shaman
 [x]  1919  Winged Boots                             {1}{U}           Artifact — Equipment
-[ ]  1920  Drana and Linvala                        {1}{W}{W}{B}     Legendary Creature — Vampire Angel
+[x]  1920  Drana and Linvala                        {1}{W}{W}{B}     Legendary Creature — Vampire Angel
 [x]  1921  Bitterbloom Bearer                       {B}{B}           Creature — Faerie Rogue
 [x]  1922  Spellbook                                {0}              Artifact — Book
 [x]  1923  Guardian of Faith                        {1}{W}{W}        Creature — Spirit Knight
@@ -4559,7 +4559,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4566  Everything Comes to Dust                 {7}{W}{W}{W}     Sorcery
 [x]  4567  Earthbending Lesson                      {3}{G}           Sorcery — Lesson
 [x]  4568  Nightshade Harvester                     {3}{B}           Creature — Elf Shaman
-[ ]  4569  Necrotic Ooze                            {2}{B}{B}        Creature — Ooze
+[x]  4569  Necrotic Ooze                            {2}{B}{B}        Creature — Ooze
 [x]  4570  Battle Mastery                           {2}{W}           Enchantment — Aura
 [x]  4571  Serum Snare                              {1}{U}           Instant
 [x]  4572  Stifle                                   {U}              Instant

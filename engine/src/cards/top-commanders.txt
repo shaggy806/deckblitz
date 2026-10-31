@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-453 already implemented / 47 missing
+454 already implemented / 46 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -287,7 +287,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  281  Tatyova, Benthic Druid                          9394 decks  {3}{G}{U}        Legendary Creature — Merfolk Druid
 [x]  282  Kratos, God of War                              9391 decks  {R}{R}{R}        Legendary Creature — God Warrior
 [x]  283  Iron Man, Titan of Innovation                   9372 decks  {3}{U}{R}        Legendary Artifact Creature — Human Hero
-[ ]  284  Thranduil, the Elvenking                        9332 decks  {2}{B}{G}{U}     Legendary Creature — Elf Noble
+[x]  284  Thranduil, the Elvenking                        9332 decks  {2}{B}{G}{U}     Legendary Creature — Elf Noble
 [x]  285  Mirko, Obsessive Theorist                       9330 decks  {1}{U}{B}        Legendary Creature — Vampire Detective
 [x]  286  Rowan, Scion of War                             9315 decks  {1}{B}{R}        Legendary Creature — Human Wizard
 [x]  287  The Mycotyrant                                  9270 decks  {1}{B}{G}        Legendary Creature — Elder Fungus
