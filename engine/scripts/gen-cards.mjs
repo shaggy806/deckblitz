@@ -38,6 +38,7 @@
  */
 
 import { mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -121,16 +122,33 @@ function readCard(file, source) {
   return { name: unescape(named[1]), art: art === null ? null : unescape(art[1]) };
 }
 
-function collect() {
+/** Every file's text, in order, read 64 at a time: one at a time, the ~27,000
+ * card files took 8 s on Windows (each open is slow there), together ~2 s. */
+async function readAll(files) {
+  const texts = new Array(files.length);
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: 64 }, async () => {
+      while (next < files.length) {
+        const i = next++;
+        texts[i] = await readFile(files[i], "utf8");
+      }
+    }),
+  );
+  return texts;
+}
+
+async function collect() {
   const bySub = new Map(SUBDIRS.map((sub) => [sub, []]));
   for (const sub of SUBDIRS) {
     const dir = path.join(CARDS_DIR, sub);
     const files = readdirSync(dir)
       .filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts"))
       .sort();
-    for (const file of files) {
+    const texts = await readAll(files.map((file) => path.join(dir, file)));
+    for (const [i, file] of files.entries()) {
       const base = file.slice(0, -3);
-      const card = readCard(`${sub}/${file}`, readFileSync(path.join(dir, file), "utf8"));
+      const card = readCard(`${sub}/${file}`, texts[i]);
       bySub.get(sub).push({ id: identifier(`${sub}-${base}`), sub, base, ...card });
     }
   }
@@ -274,7 +292,7 @@ function write(file, source) {
   return true;
 }
 
-const collected = collect();
+const collected = await collect();
 const count = SUBDIRS.reduce((n, sub) => n + collected.get(sub).length, 0);
 
 const shards = Array.from({ length: SHARD_COUNT }, () => []);
@@ -306,8 +324,9 @@ console.log(
 // The pool index card:brief, card:find and card:vocab read (`pool-index.mjs`,
 // engine/.cache/), rebuilt when a card file is newer than it. A convenience, so
 // a failure here warns rather than fails the build (the tools rebuild a missing
-// or stale index themselves), and CI, which never runs the tools, skips it.
-if (!process.env.CI) {
+// or stale index themselves), and CI, which never runs the tools, skips it —
+// as does `card:parse-check` (`GEN_CARDS_NO_POOL_INDEX`), which doesn't read it.
+if (!process.env.CI && !process.env.GEN_CARDS_NO_POOL_INDEX) {
   try {
     const built = await ensurePoolIndex();
     console.log(

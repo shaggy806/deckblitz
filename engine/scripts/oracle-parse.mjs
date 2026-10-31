@@ -1349,6 +1349,17 @@ export function parseTrigger(clause) {
  * creature", the one it excludes is the target (Exhilarating Elocution). */
 const otherMeansSource = (ctx) => !ctx.spell && ctx.targets.length === 0;
 
+/** `parseSentence`'s whole-sentence template, `^…\.$` case-blind, compiled
+ * once per source: building ~170 of them for every sentence was the parse
+ * check's largest cost (4 of its 9 s, 2026-10-31). Safe to share: the flag
+ * is only `i`, so a match keeps no `lastIndex` state. */
+const sentenceReCache = new Map();
+function sentenceRe(src) {
+  let r = sentenceReCache.get(src);
+  if (r === undefined) sentenceReCache.set(src, (r = new RegExp(`^${src}\\.$`, "i")));
+  return r;
+}
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "…, where X is the number of …" / "for each …" define an amount by a rule
@@ -1458,7 +1469,7 @@ export function parseSentence(sentence, ctx) {
       then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: Number(m[1]) },
     };
   }
-  const re = (src) => new RegExp(`^${src}\\.$`, "i");
+  const re = sentenceRe;
   const amount = (w) => numberOf(w);
   const slot = (phrase) => {
     const spec = targetOf(phrase) ?? graveyardTargetOf(phrase);

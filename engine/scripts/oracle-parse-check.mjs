@@ -7,6 +7,9 @@
 // and then, an authoring choice worth a look); the report lists them.
 //
 // Usage: npm run card:parse-check -w engine [-- --all]   (--all lists every mismatch)
+// That command runs `parse-check.mjs`, which checks the sources as they are
+// (no build) and caches by content; `node scripts/oracle-parse-check.mjs`
+// alone checks `dist/` as the last build left it.
 
 import { pathToFileURL } from "node:url";
 
@@ -237,27 +240,36 @@ export function checkPool(poolCards, tokenName = "Treasure Token") {
   return { stats, mismatches };
 }
 
-const isMain = process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
-if (isMain) {
-  const { POOL_CARDS } = await import("../dist/cards/generated.js");
-  const { stats, mismatches } = checkPool(POOL_CARDS);
+/** The report's text, one line each: what `npm run card:parse-check` prints
+ * (through `parse-check.mjs`, from the sources) and this script's own run
+ * prints (from `dist/`, after a build). */
+export function reportLines(poolCards, all = showAll) {
+  const { stats, mismatches } = checkPool(poolCards);
+  const lines = [];
+  const log = (s) => lines.push(s);
   const pct = (a, b) => `${a}/${b} (${b ? ((100 * a) / b).toFixed(1) : 0}%)`;
-  console.log(`${stats.cards} pool cards with a snapshot entry`);
-  console.log(`keywords agree on ${pct(stats.keywordAgreed, stats.keywordCards)} of cards`);
-  console.log(`abilities found: ${stats.abilities}; parser claims ${stats.claimed} complete; ${pct(stats.agreed, stats.claimed)} agree with the authored ability`);
-  console.log(`card fields set: ${stats.fieldsClaimed}; ${pct(stats.fieldsAgreed, stats.fieldsClaimed)} agree with the authored card`);
-  console.log(`spells read whole: ${stats.spellsClaimed}; ${pct(stats.spellsAgreed, stats.spellsClaimed)} agree with the authored spell`);
-  console.log(`statics read: ${stats.staticsClaimed}; ${pct(stats.staticsAgreed, stats.staticsClaimed)} agree with the authored static`);
-  console.log(`\n${mismatches.length} disagreement(s)${showAll ? "" : " — the first 30 (--all for every one)"}:`);
-  for (const m of showAll ? mismatches : mismatches.slice(0, 30)) {
-    console.log(`\n• ${m.card} — ${m.kind}: ${m.text}`);
-    if (m.why) console.log(`    ${m.why}`);
+  log(`${stats.cards} pool cards with a snapshot entry`);
+  log(`keywords agree on ${pct(stats.keywordAgreed, stats.keywordCards)} of cards`);
+  log(`abilities found: ${stats.abilities}; parser claims ${stats.claimed} complete; ${pct(stats.agreed, stats.claimed)} agree with the authored ability`);
+  log(`card fields set: ${stats.fieldsClaimed}; ${pct(stats.fieldsAgreed, stats.fieldsClaimed)} agree with the authored card`);
+  log(`spells read whole: ${stats.spellsClaimed}; ${pct(stats.spellsAgreed, stats.spellsClaimed)} agree with the authored spell`);
+  log(`statics read: ${stats.staticsClaimed}; ${pct(stats.staticsAgreed, stats.staticsClaimed)} agree with the authored static`);
+  log(`\n${mismatches.length} disagreement(s)${all ? "" : " — the first 30 (--all for every one)"}:`);
+  for (const m of all ? mismatches : mismatches.slice(0, 30)) {
+    log(`\n• ${m.card} — ${m.kind}: ${m.text}`);
+    if (m.why) log(`    ${m.why}`);
     else {
       for (const f of m.differ) {
-        console.log(`    ${f}: parsed   ${JSON.stringify(m.parsed[f] ?? null)}`);
-        console.log(`    ${" ".repeat(f.length)}  authored ${JSON.stringify(m.authored[f] ?? null)}`);
+        log(`    ${f}: parsed   ${JSON.stringify(m.parsed[f] ?? null)}`);
+        log(`    ${" ".repeat(f.length)}  authored ${JSON.stringify(m.authored[f] ?? null)}`);
       }
     }
   }
+  return lines;
+}
 
+const isMain = process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMain) {
+  const { POOL_CARDS } = await import("../dist/cards/generated.js");
+  for (const line of reportLines(POOL_CARDS)) console.log(line);
 }
