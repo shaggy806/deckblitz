@@ -688,7 +688,10 @@
   "decision:opponent-chooses-target",
   "effect:opponent-chooses-among-targets",
   "cost:loyalty-x",
-  "mechanic:meld"
+  "mechanic:meld",
+  "cost:pay-any-amount-of-energy",
+  "cost:alternative-cost-for-spells-energy",
+  "cost:pay-variable-energy"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -1964,7 +1964,7 @@ export class Game {
     if (kept.length > 0) this.state.standingModeAnswers = kept;
     else delete this.state.standingModeAnswers;
     if (match === undefined || awaiting === null) return null;
-    if (this.whyCannotChooseModes(match.player, match.modes) !== null) return null;
+    if (this.whyCannotChooseModes(match.player, match.modes, match.xValue) !== null) return null;
     return {
       type: "choose-modes",
       player: match.player,
@@ -3893,7 +3893,14 @@ export class Game {
                       : []),
                   ].join(", "),
                 }
-              : {}),
+              : altCost === true && alternative?.payEnergy !== undefined
+                ? {
+                    altCostText: [
+                      ...(alternative.mana !== "{0}" ? [`pay ${alternative.mana}`] : []),
+                      `pay ${"{E}".repeat(alternative.payEnergy)}`,
+                    ].join(", "),
+                  }
+                : {}),
         // Jump-start rides the flashback cast: label it as printed.
         ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
           ? { altCostText: "jump-start, discarding a card" }
@@ -5800,6 +5807,8 @@ export class Game {
       readonly xColor?: Color;
       /** The most that X may be — see `may`'s `maxX`. */
       readonly maxX?: number;
+      /** X paid in energy rather than mana — see `may`'s `costEnergyX`. */
+      readonly energyX?: "one-or-more" | "any";
       /** A vote's question (rule 701.38): never answered along with
        * identical triggers', and with `secret`, see the `choose-modes`
        * decision's `secret`. */
@@ -5864,11 +5873,41 @@ export class Game {
       decline();
       return;
     }
+    // "You may pay one or more {E}" / "any amount of {E}" (rule 107.14): X
+    // up to the energy the player has. With none, one or more can't be paid
+    // — declined — and any amount is 0, nothing to ask (107.1c): the effect
+    // happens with X = 0.
+    const energyX = ability.energyX;
+    const energyCap =
+      energyX === undefined ? undefined : Math.min(this.state.players[controller].energy, ability.maxX ?? Infinity);
+    if (energyX !== undefined && energyCap !== undefined && energyCap < 1) {
+      if (energyX === "one-or-more") {
+        decline();
+        return;
+      }
+      const context = this.makeResolutionContext(
+        source,
+        controller,
+        targets,
+        0,
+        triggerValue,
+        triggerObject,
+        1,
+        0,
+        targetZones ?? [],
+        lastKnownRefs,
+        identity,
+      );
+      for (const mode of modes) applyEffectSpec(mode.effect, context);
+      return;
+    }
     // A resolving trigger's "you may": the same question for identical
-    // triggers under it can be answered along with this one.
+    // triggers under it can be answered along with this one. Not an amount
+    // of energy, which each pays from what is left.
     const resolving = this.resolvingTrigger;
     const trigger =
-      resolving !== null && ability.vote === undefined && minModes === 0 && maxModes === 1 && offered.length === 1
+      resolving !== null && ability.vote === undefined && energyX === undefined && minModes === 0 &&
+        maxModes === 1 && offered.length === 1
         ? { ...resolving, ...this.identicalTriggers(resolving.signature, resolving.object) }
         : undefined;
     this.state.awaiting = {
@@ -5893,7 +5932,8 @@ export class Game {
         : {}),
       ...(cost !== undefined ? { cost } : {}),
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
-      ...(ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
+      ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
+      ...(energyX !== undefined ? { energyX } : {}),
       ...(key !== undefined ? { abilityKey: key } : {}),
       ...(onlyUnchosen ? { notChosenThisTurn: offered } : {}),
       ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
@@ -5926,7 +5966,7 @@ export class Game {
     xValue?: number,
     forAll = false,
   ): void {
-    const why = this.whyCannotChooseModes(player, modeIndices);
+    const why = this.whyCannotChooseModes(player, modeIndices, xValue);
     if (why !== null) throw new Error(why);
     const awaiting = this.state.awaiting;
     if (awaiting === null || awaiting.kind !== "choose-modes") {
@@ -6027,10 +6067,24 @@ export class Game {
       if (payment === null) chosen = [];
       else this.executePayment(player, payment);
     }
+    // An amount of energy (`may.costEnergyX`): X counters removed (rule
+    // 107.14), all of them or — the board having moved — none.
+    const energyX = awaiting.energyX;
+    if (energyX !== undefined && chosen.length > 0) {
+      chosenX = Math.max(0, Math.floor(xValue ?? 0));
+      if (this.state.players[player].energy < chosenX + costEnergy) {
+        chosen = [];
+        chosenX = 0;
+      }
+    }
     if (chosen.length > 0) {
       if (costLife > 0) this.changeLife(player, -costLife);
       if (costEnergy > 0) this.changeEnergy(player, -costEnergy);
+      if (energyX !== undefined && chosenX > 0) this.changeEnergy(player, -chosenX);
     }
+    // "Pay any amount of {E}": paying none is paying 0, and the effect still
+    // happens, with X = 0 (Wrath of the Skies destroys what has mana value 0).
+    if (energyX === "any" && chosen.length === 0) chosen = awaiting.modes.map((_mode, i) => i);
     // Listed order, not the order the player named them (rule 700.2b).
     const ordered = chosen.sort((a, b) => a - b);
     // Offered out of fewer than all of them ("that hasn't been chosen this
@@ -6057,11 +6111,14 @@ export class Game {
     // 0 on a trigger. A villainous choice's option is its controller's
     // effect, about the player who chose it.
     const modesBy = awaiting.modesController;
+    // An amount of energy is the X its effect reads, 0 included — never the
+    // spell's own X (Wrath of the Skies' "you get X {E}").
+    const effectX = energyX !== undefined ? chosenX : chosenX > 0 ? chosenX : x;
     const context = this.makeResolutionContext(
       source,
       modesBy ?? player,
       targets,
-      chosenX > 0 ? chosenX : x,
+      effectX,
       triggerValue ?? 0,
       triggerObject,
       1,
@@ -6110,10 +6167,11 @@ export class Game {
   private whyCannotChooseModes(
     player: PlayerId,
     modeIndices: readonly number[],
+    xValue?: number,
   ): string | null {
     return chooseModes.whyCannot(
       this.decisionCtx,
-      { type: "choose-modes", player, modes: modeIndices },
+      { type: "choose-modes", player, modes: modeIndices, ...(xValue !== undefined ? { xValue } : {}) },
       player,
     );
   }
@@ -12370,6 +12428,11 @@ export class Game {
     ) {
       return `${player} has no card to discard to cast ${def.name}`;
     }
+    // "By paying an amount of {E} equal to its mana value" (Amped Raptor):
+    // that much energy (rule 107.14).
+    if (offered?.byPayingEnergy === true && this.state.players[player].energy < this.castNowEnergyOf(cardId, face ?? 0)) {
+      return `${player} doesn't have enough {E} to cast ${def.name}`;
+    }
     // The offer's own terms: "without paying its mana cost" is the only way
     // it allows — an alternative cost, so no other goes with it (rule
     // 118.9a) — and only a spell its filter matches, judged as the spell it
@@ -12703,6 +12766,10 @@ export class Game {
       // "As though it had flash if you behold a Dragon as an additional
       // cost" (Molten Exhale): the kicked cast may begin any time (601.3c).
       !(kicked && def.kicker?.flash === true) &&
+      // "If you cast a spell this way, you may cast it as though it had
+      // flash" (Primal Prayers): cast for that alternative cost, it may
+      // begin any time (601.3c).
+      !(altCost && this.alternativeCostOf(cardId, def, via, player)?.flash === true) &&
       // "You may cast this spell as though it had flash. If you cast it any
       // time a sorcery couldn't have been cast, … sacrifices it" (Spider
       // Climb) — `flashSacrificeOwed` says which casts owe the sacrifice.
@@ -14131,6 +14198,14 @@ export class Game {
   /** The `cast-now` offer that lets `player` cast `cardId` `via: "effect"`
    * right now — the pending decision's, or the one being raised or answered
    * — or `null`. */
+  /** The energy a `byPayingEnergy` cast of `cardId` as `face` costs: the
+   * spell's mana value as it's cast (its face's, X 0 — rule 107.3b). */
+  private castNowEnergyOf(cardId: ObjectId, face: number): number {
+    const object = this.state.objects[cardId];
+    if (object === undefined) return 0;
+    return this.withFace(cardId, face, () => manaValueOfObject(this.registry, this.state.objects[cardId], 0));
+  }
+
   private castNowOffer(player: PlayerId | undefined, cardId: ObjectId): CastNowAsk | null {
     const awaiting = this.state.awaiting;
     const asked: CastNowAsk | null =
@@ -14140,6 +14215,7 @@ export class Game {
             cards: awaiting.cards,
             free: awaiting.free,
             ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
+            ...(awaiting.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
             ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
             ...(awaiting.miracle !== undefined ? { miracle: awaiting.miracle } : {}),
             exileAfter: awaiting.exileAfter,
@@ -14183,6 +14259,7 @@ export class Game {
       cards,
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
+      ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
       exileAfter: options.exileAfter,
@@ -14248,6 +14325,7 @@ export class Game {
       ...(lands.length > 0 ? { lands } : {}),
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
+      ...(options.byPayingEnergy === true ? { byPayingEnergy: true as const } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
@@ -14495,6 +14573,14 @@ export class Game {
     const escape = via === "escape" ? this.escapeOf(cardId, face, graveyardGrant) : null;
     const flashback = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant) : null;
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
+    // A granted alternative cost's energy (Nissa, Worldsoul Speaker), or a
+    // resolving effect's "by paying an amount of {E} equal to its mana
+    // value" (Amped Raptor), paid with the rest of the cost below.
+    const alternativeEnergy = altCost
+      ? (this.alternativeCostOf(cardId, def, via, player)?.payEnergy ?? 0)
+      : via === "effect" && this.castNowOffer(player, cardId)?.byPayingEnergy === true
+        ? this.castNowEnergyOf(cardId, face)
+        : 0;
     const costString = this.castCostString(
       cardId,
       via,
@@ -14991,6 +15077,8 @@ export class Game {
     if (altCost && def.alternativeCost?.payLife !== undefined) {
       this.changeLife(player, -def.alternativeCost.payLife);
     }
+    // "Pay eight {E} rather than pay the mana cost" (rule 107.14).
+    if (alternativeEnergy > 0) this.changeEnergy(player, -alternativeEnergy);
     if (targetingLife > 0) this.changeLife(player, -targetingLife);
     if (def.additionalCost?.payLifeX === true && chosenX > 0) {
       this.changeLife(player, -chosenX);
@@ -27467,6 +27555,7 @@ export class Game {
             ...(otherCost?.life !== undefined ? { costLife: otherCost.life } : {}),
             ...(otherCost?.energy !== undefined ? { costEnergy: otherCost.energy } : {}),
             ...(otherCost?.maxX !== undefined ? { maxX: otherCost.maxX } : {}),
+            ...(otherCost?.energyX !== undefined ? { energyX: otherCost.energyX } : {}),
             ...(about !== undefined ? { about } : {}),
             ...(xColor !== undefined ? { xColor } : {}),
           },
@@ -36005,6 +36094,10 @@ export class Game {
     readonly payLife?: number;
     readonly sacrifice?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
     readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
+    /** Energy paid with it — an `alternativeCostForSpells`' `energy`. */
+    readonly payEnergy?: number;
+    /** Cast for it, the spell may be begun as though it had flash (601.3c). */
+    readonly flash?: true;
   } | null {
     // Cast for airbend's {2}, an alternative cost already (118.9a).
     if (via === "airbend") return null;
@@ -36047,11 +36140,17 @@ export class Game {
     if (caster === undefined) return null;
     for (const { ability } of this.activeStaticsOf(caster, (a) => a.alternativeCostForSpells !== undefined)) {
       const grant = ability.alternativeCostForSpells!;
+      // Energy only while the caster has that much (601.2h, 107.14).
+      if (grant.energy !== undefined && this.state.players[caster].energy < grant.energy) continue;
       if (
         grant.filter === undefined ||
         matchesFilter(this.state, this.registry, cardId, grant.filter, { you: caster })
       ) {
-        return { mana: grant.mana };
+        return {
+          mana: grant.mana,
+          ...(grant.energy !== undefined ? { payEnergy: grant.energy } : {}),
+          ...(grant.flash === true ? { flash: true as const } : {}),
+        };
       }
     }
     return null;

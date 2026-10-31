@@ -176,6 +176,7 @@ import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
+import _poolDieYoung from "../pool/die-young.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDirgeOfDread from "../pool/dirge-of-dread.js";
@@ -1063,6 +1064,7 @@ const shard: CardShard = {
     _poolDesiccatedNaga,
     _poolDevastatingDreams,
     _poolDiamondPickAxe,
+    _poolDieYoung,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDirgeOfDread,

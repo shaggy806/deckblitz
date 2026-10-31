@@ -1740,6 +1740,9 @@ function Table({
   // until the player edits one, meaning the engine's standard split.
   const [damagePicks, setDamagePicks] = useState<readonly number[] | null>(null)
   const [modePicks, setModePicks] = useState<readonly number[]>([])
+  // The X typed for a "you may pay {X}" / "any amount of {E}" (the offer's
+  // `xCost`): null until edited, meaning the most it may be.
+  const [modeX, setModeX] = useState<number | null>(null)
   const [sacrificePicks, setSacrificePicks] = useState<readonly ObjectId[]>([])
   const [permanentPicks, setPermanentPicks] = useState<readonly ObjectId[]>([])
   // The permanents put into the first pile so far, separating on the board.
@@ -4462,7 +4465,13 @@ function Table({
       </div>
     )
   } else if (mode === 'choose-modes' && modesChoiceAction) {
-    const { minModes, maxModes, modeTexts, modePlayers, source, ward, about, sameForAll, orNone } = modesChoiceAction
+    const { minModes, maxModes, modeTexts, modePlayers, source, ward, about, sameForAll, orNone, xCost } = modesChoiceAction
+    // "You may pay {X}" / "one or more {E}" / "any amount of {E}": the X
+    // sent with a yes, from `minX` (0 unless one or more) to `maxX`.
+    const xMin = xCost?.minX ?? 0
+    const xMax = xCost?.maxX ?? 0
+    const xPaid = Math.max(xMin, Math.min(xMax, modeX ?? xMax))
+    const withX = xCost !== undefined ? { xValue: xPaid } : {}
     // A choice among players (Tasigur's "you choose an opponent") reads with
     // their names; the engine's own text names the seat.
     const modeLabel = (i: number): ReactNode => {
@@ -4503,17 +4512,34 @@ function Table({
         </span>
         {optional ? (
           <>
+            {xCost !== undefined && (
+              <>
+                <span>{xCost.energy ? <>Pay <Symbols text="{E}" /> ×</> : 'X ='}</span>
+                <input
+                  type="number"
+                  aria-label="X"
+                  min={xMin}
+                  max={xMax}
+                  value={xPaid}
+                  onChange={(e) =>
+                    setModeX(Math.max(xMin, Math.min(xMax, Math.floor(Number(e.target.value) || 0))))
+                  }
+                  style={{ width: '4rem' }}
+                />
+                <span>(max {xMax})</span>
+              </>
+            )}
             <button
               type="button"
-              onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [0] })}
+              onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX })}
             >
-              {ward ? 'Pay' : 'Yes'}
+              {ward || xCost !== undefined ? 'Pay' : 'Yes'}
             </button>
             <button
               type="button"
               onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [] })}
             >
-              {ward ? `Don't pay` : 'No'}
+              {ward || xCost !== undefined ? `Don't pay` : 'No'}
             </button>
             {/* Identical triggers still on the stack under this one: answer
                 them all now. Each still resolves on its own. */}
@@ -4523,7 +4549,7 @@ function Table({
                   type="button"
                   title={`The same answer for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
                   onClick={() =>
-                    game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true })
+                    game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX })
                   }
                 >
                   Yes to all {sameForAll + 1}
@@ -5310,6 +5336,8 @@ function Table({
             <> for its madness cost, <Symbols text={castNowAction.madness} /></>
           ) : castNowAction.byDiscarding === true && ways.length > 0
             ? ' by discarding a card rather than paying its mana cost'
+            : castNowAction.byPayingEnergy === true && ways.length > 0
+            ? <> by paying <Symbols text="{E}" /> equal to its mana value rather than its mana cost</>
             : castNowAction.free && ways.length > 0
               ? ' without paying its mana cost'
               : ' now'}
@@ -5346,7 +5374,9 @@ function Table({
             ) : null}
             {castNowAction.madness !== undefined ? (
               <> (madness <Symbols text={castNowAction.madness} />)</>
-            ) : castNowAction.byDiscarding === true ? ' (discard a card)' : c.free ? ' (free)' : ''}
+            ) : castNowAction.byDiscarding === true ? ' (discard a card)' : castNowAction.byPayingEnergy === true ? (
+              <> (pay <Symbols text="{E}" /> × its mana value)</>
+            ) : c.free ? ' (free)' : ''}
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
             {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}
@@ -6733,7 +6763,7 @@ function Table({
                       {a.kind === 'cast-spell' && a.prototype ? (
                         <> (prototype <Symbols text={a.prototypeCost ?? ''} />)</>
                       ) : null}
-                      {a.kind === 'cast-spell' && a.altCost ? ` (${a.altCostText ?? 'alternative cost'})` : ''}
+                      {a.kind === 'cast-spell' && a.altCost ? <> (<Symbols text={a.altCostText ?? 'alternative cost'} />)</> : ''}
                       {a.kind === 'cast-spell' && a.via === 'harmonize'
                         ? a.harmonizeTap
                           ? ` (harmonize, tapping ${a.harmonizeTap.cardName}: −${a.harmonizeTap.power})`

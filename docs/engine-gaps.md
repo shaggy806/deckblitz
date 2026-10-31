@@ -18,6 +18,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
+- **Of several granted alternative costs, only the first is offered.** Rule 118.9 lets the
+  caster choose any one alternative cost that applies (118.9a: only one). `Game.alternativeCostOf`
+  returns the first `alternativeCostForSpells` static that matches the spell (skipping an energy
+  one the caster can't pay), and the cast's `altCost: true` names no grant: with Jodah, Archmage
+  Eternal and Nissa, Worldsoul Speaker both out, a permanent spell is offered only Jodah's
+  {W}{U}{B}{R}{G}; Fist of Suns, Runeforge Champion and Primal Prayers pair the same way. A
+  card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
+  name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
+  and offer a variant each, its `altCostText` telling them apart.
 - **Assist isn't offered on a spell cast while something resolves.** Rule 702.132a lets the
   caster of any spell with assist choose a helper, however it's cast. `Game.castSpellActions`
   adds assist variants only for a cast from priority, and `judgeAssist` refuses `via: "effect"`:

@@ -3707,3 +3707,65 @@ describe("counters of chosen kinds removed (remove-counters, a target's orPlayer
     expect(JSON.stringify(shadow.effect)).toContain('"kind":"lose-life","amount":{"thisWay":"counters-removed"}');
   });
 });
+
+describe("energy paid in an amount the player chooses (costEnergyX)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads 'you get {E}' as get-energy", () => {
+    expect(parseSentence("You get {E}{E}.", ctx())).toEqual({ kind: "get-energy", amount: 2 });
+  });
+
+  it("reads Harnessed Lightning's 'any amount of {E}' and 'that much damage to that creature'", () => {
+    const lightning = face(
+      "Harnessed Lightning",
+      "Instant",
+      "Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.",
+    );
+    expect(lightning.complete).toBe(true);
+    expect(lightning.targets).toEqual(["creature"]);
+    expect(lightning.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "get-energy", amount: 3 },
+        { kind: "may", prompt: "Pay any amount of {E}?", costEnergyX: "any", effect: { kind: "damage", amount: "x", target: 0 } },
+      ],
+    });
+  });
+
+  it("reads Die Young's '-1/-1 … for each {E} paid this way' as -X/-X", () => {
+    const die = face(
+      "Die Young",
+      "Sorcery",
+      "Choose target creature. You get {E}{E} (two energy counters), then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.",
+    );
+    expect(die.complete).toBe(true);
+    expect(JSON.stringify(die.effect)).toContain('"power":{"product":["x",-1]}');
+  });
+
+  it("reads 'one or more {E}. If you do, …' and leaves one with no 'if you do', or 'when you do', alone", () => {
+    const more = face(
+      "Test Energy",
+      "Creature — Snake",
+      "When this creature enters, you get {E}{E}. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.",
+    );
+    expect(more.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "get-energy", amount: 2 },
+        {
+          kind: "may",
+          prompt: "Pay one or more {E}?",
+          costEnergyX: "one-or-more",
+          effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
+        },
+      ],
+    });
+    const reflexive = face(
+      "Territorial Aetherkite",
+      "Creature — Cat Dragon",
+      "When this creature enters, you get {E}{E}. Then you may pay one or more {E}. When you do, this creature deals that much damage to each other creature.",
+    );
+    expect(reflexive.triggered[0].effect).toBeNull();
+  });
+});

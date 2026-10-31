@@ -38,6 +38,7 @@ import _poolAlliedReinforcements from "../pool/allied-reinforcements.js";
 import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
+import _poolAmpedRaptor from "../pool/amped-raptor.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAncientKavu from "../pool/ancient-kavu.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
@@ -921,6 +922,7 @@ const shard: CardShard = {
     _poolAloeAlchemist,
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
+    _poolAmpedRaptor,
     _poolAnaraWolvidFamiliar,
     _poolAncientKavu,
     _poolAngelicQuartermaster,

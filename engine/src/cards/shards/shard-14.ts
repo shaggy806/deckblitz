@@ -827,6 +827,7 @@ import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
 import _poolWizardsLightning from "../pool/wizards-lightning.js";
 import _poolWojekEmbermage from "../pool/wojek-embermage.js";
+import _poolWrathOfTheSkies from "../pool/wrath-of-the-skies.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYavimayaScion from "../pool/yavimaya-scion.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
@@ -1684,6 +1685,7 @@ const shard: CardShard = {
     _poolWitherbloomCharm,
     _poolWizardsLightning,
     _poolWojekEmbermage,
+    _poolWrathOfTheSkies,
     _poolYahennisExpertise,
     _poolYavimayaScion,
     _poolYoureConfrontedByRobbers,

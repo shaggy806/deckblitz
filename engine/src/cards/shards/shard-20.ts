@@ -347,6 +347,7 @@ import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHaloChargedSkaab from "../pool/halo-charged-skaab.js";
 import _poolHamatoGuardianStance from "../pool/hamato-guardian-stance.js";
 import _poolHanweirTheWrithingTownship from "../pool/hanweir-the-writhing-township.js";
+import _poolHarnessedLightning from "../pool/harnessed-lightning.js";
 import _poolHarrow from "../pool/harrow.js";
 import _poolHarshAnnotation from "../pool/harsh-annotation.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
@@ -395,6 +396,7 @@ import _poolJaliraMasterPolymorphist from "../pool/jalira-master-polymorphist.js
 import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
+import _poolJoltedAwake from "../pool/jolted-awake.js";
 import _poolJoyousRespite from "../pool/joyous-respite.js";
 import _poolJudgmentBolt from "../pool/judgment-bolt.js";
 import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
@@ -1254,6 +1256,7 @@ const shard: CardShard = {
     _poolHaloChargedSkaab,
     _poolHamatoGuardianStance,
     _poolHanweirTheWrithingTownship,
+    _poolHarnessedLightning,
     _poolHarrow,
     _poolHarshAnnotation,
     _poolHateMirage,
@@ -1302,6 +1305,7 @@ const shard: CardShard = {
     _poolJawboneSkulkin,
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
+    _poolJoltedAwake,
     _poolJoyousRespite,
     _poolJudgmentBolt,
     _poolJuniperOrderRootweaver,

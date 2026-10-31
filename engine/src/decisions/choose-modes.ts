@@ -38,8 +38,19 @@ export const chooseModes = defineDecision({
         : {}),
       ...(awaiting.about !== undefined ? { about: awaiting.about } : {}),
       ...(awaiting.ward !== undefined ? { ward: { spell: awaiting.ward.spell } } : {}),
+      // "You may pay one or more {E}" / "any amount of {E}": X in energy,
+      // up to what the chooser has (the raise capped `maxX` at it).
+      ...(awaiting.energyX !== undefined
+        ? {
+            xCost: {
+              maxX: Math.min(awaiting.maxX ?? 0, ctx.state.players[awaiting.player].energy),
+              ...(awaiting.energyX === "one-or-more" ? { minX: 1 } : {}),
+              energy: true as const,
+            },
+          }
+        : {}),
       // "You may pay {X}{R}" — tell the driver how large X may be.
-      ...(awaiting.cost !== undefined && parseManaCost(awaiting.cost).x > 0
+      ...(awaiting.energyX === undefined && awaiting.cost !== undefined && parseManaCost(awaiting.cost).x > 0
         ? {
             xCost: {
               maxX: Math.min(
@@ -86,6 +97,10 @@ export const chooseModes = defineDecision({
     if (awaiting.maxX !== undefined && (action.xValue ?? 0) > awaiting.maxX) {
       return `X can't be greater than ${awaiting.maxX}`;
     }
+    // "One or more {E}": saying yes pays at least one.
+    if (awaiting.energyX === "one-or-more" && chosen.length > 0 && (action.xValue ?? 0) < 1) {
+      return `${player} must pay at least one {E}`;
+    }
     return null;
   },
 
@@ -94,16 +109,22 @@ export const chooseModes = defineDecision({
     host.applyModesChoice(action.player, action.modes, action.xValue, action.forAll === true);
   },
 
-  ask: (controller, view, awaiting, player): Action => ({
-    type: "choose-modes",
-    player,
-    modes: controller.chooseModes(
+  ask: (controller, view, awaiting, player): Action => {
+    const modes = controller.chooseModes(
       view,
       awaiting.minModes,
       awaiting.maxModes,
       awaiting.modes.map((m) => m.text),
-    ),
-  }),
+    );
+    // A controller that answers modes alone pays all the energy it may
+    // (`may.costEnergyX`) when it says yes.
+    return {
+      type: "choose-modes",
+      player,
+      modes,
+      ...(awaiting.energyX !== undefined && modes.length > 0 ? { xValue: awaiting.maxX ?? 0 } : {}),
+    };
+  },
 
   /**
    * Every legal combination of modes, smallest first, crossed with the two X
@@ -117,7 +138,10 @@ export const chooseModes = defineDecision({
   candidates: (legal, player, limit): Action[] => {
     if (legal.kind !== "choose-modes") return [];
     const indices = legal.modeTexts.map((_, i) => i);
-    const xValues = legal.xCost === undefined ? [undefined] : [legal.xCost.maxX, 0];
+    const xValues =
+      legal.xCost === undefined
+        ? [undefined]
+        : [...new Set([legal.xCost.maxX, legal.xCost.minX ?? 0])];
     const subsets = subsetsBetween(indices, legal.minModes, legal.maxModes, limit);
     // "You may choose two": choosing none is an answer too.
     if (legal.orNone === true && legal.minModes > 0) subsets.unshift([]);
@@ -144,6 +168,12 @@ export const chooseModes = defineDecision({
     const modes: number[] = [];
     for (let i = 0; i < count && pool.length > 0; i += 1) {
       modes.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
+    }
+    // An amount of energy: any amount it may pay.
+    const energy = legal.xCost?.energy === true ? legal.xCost : undefined;
+    if (energy !== undefined && modes.length > 0) {
+      const min = energy.minX ?? 0;
+      return { type: "choose-modes", player, modes, xValue: min + rng.pickIndex(energy.maxX - min + 1) };
     }
     return { type: "choose-modes", player, modes };
   },

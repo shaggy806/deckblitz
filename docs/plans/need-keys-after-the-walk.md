@@ -609,6 +609,18 @@ missing. Re-run `--greedy` for Phase 2's order.
   `decision:choose-from-any-graveyard`, Gwen Stacy `zone:impulse-while-you-control-source`. Next:
   `cost:may-cost-non-mana` (15), `effect:cast-and-activate-restrictions` (15),
   `static:gain-abilities-from-graveyard` (15).
+- **2026-10-31: `cost:may-cost-non-mana`'s energy group, features only** (an overnight agent) —
+  energy paid in a chosen, fixed or computed amount (rule 107.14). A `may`'s `costEnergyX`
+  (`"one-or-more"` / `"any"`) on `choose-modes`' existing X — "any amount" applies its effect at
+  X 0 when declined, and X is the payment alone, never the spell's own; `alternativeCostForSpells`'
+  `energy` and `flash` (601.3c); a `cast-now`'s `byPayingEnergy`; Jolted Awake's computed amount
+  was Confiscation Coup's `costEnergy` already. 3 keys; 8 proving cards; 15 freed (queued: 586).
+  Adds no decision kind; the client gained an X field on a "you may pay" (it had sent X 0 for
+  Leyline Tyrant's mana X too) and "(pay {E})" labels. Not yet: several alternative-cost grants
+  (Jodah beside Nissa) still offer only the first that applies; the family's
+  `cost:choose-creature-type-as-cast`, `cost:escalate-nonmana` and one-card units. Next:
+  `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15),
+  `decision:choose-card-type-protection` (15).
 
 ## Rough size
 

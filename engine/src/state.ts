@@ -2507,6 +2507,9 @@ export interface CastNowAsk {
   readonly cards: readonly ObjectId[];
   readonly free: boolean;
   readonly byDiscarding?: true;
+  /** Energy equal to the spell's mana value paid instead — the `cast-now`
+   * effect's `byPayingEnergy`. */
+  readonly byPayingEnergy?: true;
   /** The madness cost paid rather than the mana cost (rule 702.35a). */
   readonly madness?: string;
   /** The miracle cost paid rather than the mana cost (rule 702.94a). */
@@ -3478,8 +3481,13 @@ export type AwaitingDecision =
        * amount of {R}"). */
       readonly xColor?: Color;
       /** The most `cost`'s X may be — a `may`'s `maxX` ("X can't be greater
-       * than the amount of life you lost this turn"). */
+       * than the amount of life you lost this turn"). With `energyX`, the
+       * most energy the chooser can pay (what they have, under `maxX`). */
       readonly maxX?: number;
+      /** X is an amount of energy, not mana — a `may`'s `costEnergyX`: from
+       * 1 (`"one-or-more"`) or from 0 (`"any"`, where choosing no mode is
+       * paying 0 and the mode still applies) up to `maxX`. */
+      readonly energyX?: "one-or-more" | "any";
       /** Set when this is a ward payment (rule 702.21a): the one mode pays
        * the ward cost of `warded`, declining counters `spell` (also the
        * decision's target 0). Choosing to pay logs `ward-paid`. */
@@ -3601,6 +3609,9 @@ export type AwaitingDecision =
       readonly free: boolean;
       /** …by discarding a card instead — see the effect's `byDiscarding`. */
       readonly byDiscarding?: true;
+      /** …by paying energy equal to its mana value instead — see the
+       * effect's `byPayingEnergy`. */
+      readonly byPayingEnergy?: true;
       /** …for its madness cost instead (rule 702.35a) — the cost. */
       readonly madness?: string;
       /** …for its miracle cost instead (rule 702.94a) — the cost. */

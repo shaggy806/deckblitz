@@ -8754,4 +8754,28 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       ],
     }),
   ),
+  // --- Energy paid in an amount you choose (2026-10-31, need-keys Phase 2) --------
+  preset(
+    'Harnessed Lightning: pay any amount of energy',
+    board({ you: { bf: ['Mountain*2'], hand: ['Harnessed Lightning'] }, opp: { bf: ['Hill Giant'] } }),
+  ),
+  preset(
+    'Territorial Aetherkite: one or more energy, then damage to each other creature',
+    board({ you: { bf: ['Mountain*6'], hand: ['Territorial Aetherkite'] }, opp: { bf: ['Grizzly Bears', 'Hill Giant'] } }),
+  ),
+  preset(
+    'Territorial Aetherkite: damage to each other creature, four players',
+    board({
+      you: { bf: ['Mountain*6'], hand: ['Territorial Aetherkite'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Grizzly Bears', 'Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Primal Prayers: a small creature for one energy',
+    board({ you: { bf: ['Forest*6'], hand: ['Primal Prayers', 'Grizzly Bears'] } }),
+  ),
+  preset(
+    'Amped Raptor: casting the exiled card for energy',
+    board({ you: { bf: ['Mountain*2'], hand: ['Amped Raptor'], lib: ['Grizzly Bears'] } }),
+  ),
 ]

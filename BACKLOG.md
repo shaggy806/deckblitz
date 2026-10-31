@@ -230,10 +230,19 @@ section keeps only what to do next.
   already covered both keys' core; added a `permanent` slot's `orPlayer` for "…, or opponent", a
   player's own counters removed kind by kind on `choose-modes`, `anyController` for "from among
   permanents on the battlefield", the bots taking an opponent's best counters; 12 freed, 4
-  proving cards — Price of Betrayal, Eventide's Shadow, Hex Parasite, Glen Elendra Guardian).
-  **579 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `cost:may-cost-non-mana` (15), `effect:cast-and-activate-restrictions` (15),
-  `static:gain-abilities-from-graveyard` (15), `decision:choose-card-type-protection` (15).
+  proving cards — Price of Betrayal, Eventide's Shadow, Hex Parasite, Glen Elendra Guardian),
+  may-cost-non-mana's energy group (2026-10-31: a `may`'s `costEnergyX` — "you may pay one or
+  more {E}" / "any amount of {E}", X the amount paid on `choose-modes`' existing X, its offer's
+  `xCost` marked `energy`, "any amount" applying its effect at X 0 when declined and never the
+  spell's own X; `alternativeCostForSpells`' `energy` and `flash` (rule 601.3c); a `cast-now`'s
+  `byPayingEnergy`; the client's X field on a "you may pay" — which also gives Leyline Tyrant's
+  "any amount of {R}" its X, sent as 0 before; 15 freed, 8 proving cards — Harnessed Lightning,
+  Die Young, Wrath of the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal
+  Prayers, Amped Raptor, Jolted Awake; the family's creature-type-as-cast, nonmana-escalate and
+  one-card units still open).
+  **586 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:cast-and-activate-restrictions` (15), `static:gain-abilities-from-graveyard` (15),
+  `decision:choose-card-type-protection` (15), `effect:amount-aggregate` (15).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -303,6 +312,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
+- **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
 - **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
 - **"Add one mana of the chosen color" with no colour chosen adds any colour**: the rulings say none (Shimmerwilds Growth; Heraldic Banner and Big Apple, 3 a.m. share the fallback). Only an object that never entered can be asked; found by B249's group A.
 - **A permanent spell's changed characteristics don't follow it onto the battlefield**: "target spell becomes white until end of turn" is lost as the spell resolves into a permanent, where rule 400.7a keeps it (Blind Seer, in the pool, is wrong for a permanent spell; blocks Eight-and-a-Half-Tails, `effect:spell-color-change-carries-to-permanent`, batch 244).

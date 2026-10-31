@@ -2071,8 +2071,22 @@ export interface StaticAbility {
    * of any spell cast for its mana cost (not one already cast for another
    * alternative cost — flashback, escape, foretell, a free cast); a card
    * with an alternative cost of its own (Sephara) offers that one instead.
+   *
+   * `energy`: energy paid with it (rule 107.14) — Nissa, Worldsoul
+   * Speaker's "you may pay eight {E} rather than pay the mana cost for
+   * permanent spells you cast" is `mana: "{0}"`, `energy: 8`; offered only
+   * while the caster has that much, and paid as the spell is cast. An {X}
+   * in the spell's mana cost is then 0 (rule 107.3b). `flash`: a spell cast
+   * for this cost may be cast as though it had flash (Primal Prayers' "if
+   * you cast a spell this way, you may cast it as though it had flash" —
+   * rule 601.3c: it may be begun any time an instant could).
    */
-  readonly alternativeCostForSpells?: { readonly mana: string; readonly filter?: CardFilter };
+  readonly alternativeCostForSpells?: {
+    readonly mana: string;
+    readonly filter?: CardFilter;
+    readonly energy?: number;
+    readonly flash?: true;
+  };
   /**
    * Cards matching `filter` in this permanent's controller's hand have warp
    * for `cost` (rule 702.185) — Tannuk, Steadfast Second's "artifact cards

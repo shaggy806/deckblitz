@@ -605,6 +605,7 @@ import _poolAmnesia from "./pool/amnesia.js";
 import _poolAmok from "./pool/amok.js";
 import _poolAmonkhetRaceway from "./pool/amonkhet-raceway.js";
 import _poolAmorphousAxe from "./pool/amorphous-axe.js";
+import _poolAmpedRaptor from "./pool/amped-raptor.js";
 import _poolAmphibianDownpour from "./pool/amphibian-downpour.js";
 import _poolAmphinCutthroat from "./pool/amphin-cutthroat.js";
 import _poolAmphinMutineer from "./pool/amphin-mutineer.js";
@@ -5708,6 +5709,7 @@ import _poolDictateOfTheTwinGods from "./pool/dictate-of-the-twin-gods.js";
 import _poolDidactEcho from "./pool/didact-echo.js";
 import _poolDidgeridoo from "./pool/didgeridoo.js";
 import _poolDidntSayPlease from "./pool/didnt-say-please.js";
+import _poolDieYoung from "./pool/die-young.js";
 import _poolDiffusionSliver from "./pool/diffusion-sliver.js";
 import _poolDigDeep from "./pool/dig-deep.js";
 import _poolDigSiteInventory from "./pool/dig-site-inventory.js";
@@ -10198,6 +10200,7 @@ import _poolHarmonizedCrescendo from "./pool/harmonized-crescendo.js";
 import _poolHarmonizedTrio from "./pool/harmonized-trio.js";
 import _poolHarmonyOfNature from "./pool/harmony-of-nature.js";
 import _poolHarnessByForce from "./pool/harness-by-force.js";
+import _poolHarnessedLightning from "./pool/harnessed-lightning.js";
 import _poolHarnessedSnubhorn from "./pool/harnessed-snubhorn.js";
 import _poolHarnesserOfStorms from "./pool/harnesser-of-storms.js";
 import _poolHarpoonSniper from "./pool/harpoon-sniper.js";
@@ -11912,6 +11915,7 @@ import _poolJolraelVoiceOfZhalfir from "./pool/jolrael-voice-of-zhalfir.js";
 import _poolJolraelsCentaur from "./pool/jolraels-centaur.js";
 import _poolJolraelsFavor from "./pool/jolraels-favor.js";
 import _poolJolt from "./pool/jolt.js";
+import _poolJoltedAwake from "./pool/jolted-awake.js";
 import _poolJoltingMerfolk from "./pool/jolting-merfolk.js";
 import _poolJonIrenicusShatteredOne from "./pool/jon-irenicus-shattered-one.js";
 import _poolJooDeeOneOfMany from "./pool/joo-dee-one-of-many.js";
@@ -15478,6 +15482,7 @@ import _poolNissaVastwoodSeer from "./pool/nissa-vastwood-seer.js";
 import _poolNissaVitalForce from "./pool/nissa-vital-force.js";
 import _poolNissaVoiceOfZendikar from "./pool/nissa-voice-of-zendikar.js";
 import _poolNissaWhoShakesTheWorld from "./pool/nissa-who-shakes-the-world.js";
+import _poolNissaWorldsoulSpeaker from "./pool/nissa-worldsoul-speaker.js";
 import _poolNissaWorldwaker from "./pool/nissa-worldwaker.js";
 import _poolNissasDefeat from "./pool/nissas-defeat.js";
 import _poolNissasEncouragement from "./pool/nissas-encouragement.js";
@@ -17048,6 +17053,7 @@ import _poolPrimalFrenzy from "./pool/primal-frenzy.js";
 import _poolPrimalHuntbeast from "./pool/primal-huntbeast.js";
 import _poolPrimalMight from "./pool/primal-might.js";
 import _poolPrimalOrder from "./pool/primal-order.js";
+import _poolPrimalPrayers from "./pool/primal-prayers.js";
 import _poolPrimalRage from "./pool/primal-rage.js";
 import _poolPrimalSurge from "./pool/primal-surge.js";
 import _poolPrimalVisitation from "./pool/primal-visitation.js";
@@ -23024,6 +23030,7 @@ import _poolTerravore from "./pool/terravore.js";
 import _poolTerrianWorldTyrant from "./pool/terrian-world-tyrant.js";
 import _poolTerrificTeamUp from "./pool/terrific-team-up.js";
 import _poolTerrifyingPresence from "./pool/terrifying-presence.js";
+import _poolTerritorialAetherkite from "./pool/territorial-aetherkite.js";
 import _poolTerritorialAllosaurus from "./pool/territorial-allosaurus.js";
 import _poolTerritorialBaloth from "./pool/territorial-baloth.js";
 import _poolTerritorialBoar from "./pool/territorial-boar.js";
@@ -26385,6 +26392,7 @@ import _poolWrapInVigor from "./pool/wrap-in-vigor.js";
 import _poolWrathOfGod from "./pool/wrath-of-god.js";
 import _poolWrathOfMaritLage from "./pool/wrath-of-marit-lage.js";
 import _poolWrathOfTheBloodmane from "./pool/wrath-of-the-bloodmane.js";
+import _poolWrathOfTheSkies from "./pool/wrath-of-the-skies.js";
 import _poolWrathfulJailbreaker from "./pool/wrathful-jailbreaker.js";
 import _poolWreakHavoc from "./pool/wreak-havoc.js";
 import _poolWreathOfGeists from "./pool/wreath-of-geists.js";
@@ -27983,6 +27991,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmok,
   _poolAmonkhetRaceway,
   _poolAmorphousAxe,
+  _poolAmpedRaptor,
   _poolAmphibianDownpour,
   _poolAmphinCutthroat,
   _poolAmphinMutineer,
@@ -33086,6 +33095,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDidactEcho,
   _poolDidgeridoo,
   _poolDidntSayPlease,
+  _poolDieYoung,
   _poolDiffusionSliver,
   _poolDigDeep,
   _poolDigSiteInventory,
@@ -37576,6 +37586,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarmonizedTrio,
   _poolHarmonyOfNature,
   _poolHarnessByForce,
+  _poolHarnessedLightning,
   _poolHarnessedSnubhorn,
   _poolHarnesserOfStorms,
   _poolHarpoonSniper,
@@ -39290,6 +39301,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJolraelsCentaur,
   _poolJolraelsFavor,
   _poolJolt,
+  _poolJoltedAwake,
   _poolJoltingMerfolk,
   _poolJonIrenicusShatteredOne,
   _poolJooDeeOneOfMany,
@@ -42856,6 +42868,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNissaVitalForce,
   _poolNissaVoiceOfZendikar,
   _poolNissaWhoShakesTheWorld,
+  _poolNissaWorldsoulSpeaker,
   _poolNissaWorldwaker,
   _poolNissasDefeat,
   _poolNissasEncouragement,
@@ -44426,6 +44439,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrimalHuntbeast,
   _poolPrimalMight,
   _poolPrimalOrder,
+  _poolPrimalPrayers,
   _poolPrimalRage,
   _poolPrimalSurge,
   _poolPrimalVisitation,
@@ -50402,6 +50416,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerrianWorldTyrant,
   _poolTerrificTeamUp,
   _poolTerrifyingPresence,
+  _poolTerritorialAetherkite,
   _poolTerritorialAllosaurus,
   _poolTerritorialBaloth,
   _poolTerritorialBoar,
@@ -53763,6 +53778,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWrathOfGod,
   _poolWrathOfMaritLage,
   _poolWrathOfTheBloodmane,
+  _poolWrathOfTheSkies,
   _poolWrathfulJailbreaker,
   _poolWreakHavoc,
   _poolWreathOfGeists,
@@ -55374,6 +55390,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amok": _poolAmok,
   "pool/amonkhet-raceway": _poolAmonkhetRaceway,
   "pool/amorphous-axe": _poolAmorphousAxe,
+  "pool/amped-raptor": _poolAmpedRaptor,
   "pool/amphibian-downpour": _poolAmphibianDownpour,
   "pool/amphin-cutthroat": _poolAmphinCutthroat,
   "pool/amphin-mutineer": _poolAmphinMutineer,
@@ -60477,6 +60494,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/didact-echo": _poolDidactEcho,
   "pool/didgeridoo": _poolDidgeridoo,
   "pool/didnt-say-please": _poolDidntSayPlease,
+  "pool/die-young": _poolDieYoung,
   "pool/diffusion-sliver": _poolDiffusionSliver,
   "pool/dig-deep": _poolDigDeep,
   "pool/dig-site-inventory": _poolDigSiteInventory,
@@ -64967,6 +64985,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harmonized-trio": _poolHarmonizedTrio,
   "pool/harmony-of-nature": _poolHarmonyOfNature,
   "pool/harness-by-force": _poolHarnessByForce,
+  "pool/harnessed-lightning": _poolHarnessedLightning,
   "pool/harnessed-snubhorn": _poolHarnessedSnubhorn,
   "pool/harnesser-of-storms": _poolHarnesserOfStorms,
   "pool/harpoon-sniper": _poolHarpoonSniper,
@@ -66681,6 +66700,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jolraels-centaur": _poolJolraelsCentaur,
   "pool/jolraels-favor": _poolJolraelsFavor,
   "pool/jolt": _poolJolt,
+  "pool/jolted-awake": _poolJoltedAwake,
   "pool/jolting-merfolk": _poolJoltingMerfolk,
   "pool/jon-irenicus-shattered-one": _poolJonIrenicusShatteredOne,
   "pool/joo-dee-one-of-many": _poolJooDeeOneOfMany,
@@ -70247,6 +70267,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nissa-vital-force": _poolNissaVitalForce,
   "pool/nissa-voice-of-zendikar": _poolNissaVoiceOfZendikar,
   "pool/nissa-who-shakes-the-world": _poolNissaWhoShakesTheWorld,
+  "pool/nissa-worldsoul-speaker": _poolNissaWorldsoulSpeaker,
   "pool/nissa-worldwaker": _poolNissaWorldwaker,
   "pool/nissas-defeat": _poolNissasDefeat,
   "pool/nissas-encouragement": _poolNissasEncouragement,
@@ -71817,6 +71838,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/primal-huntbeast": _poolPrimalHuntbeast,
   "pool/primal-might": _poolPrimalMight,
   "pool/primal-order": _poolPrimalOrder,
+  "pool/primal-prayers": _poolPrimalPrayers,
   "pool/primal-rage": _poolPrimalRage,
   "pool/primal-surge": _poolPrimalSurge,
   "pool/primal-visitation": _poolPrimalVisitation,
@@ -77793,6 +77815,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/terrian-world-tyrant": _poolTerrianWorldTyrant,
   "pool/terrific-team-up": _poolTerrificTeamUp,
   "pool/terrifying-presence": _poolTerrifyingPresence,
+  "pool/territorial-aetherkite": _poolTerritorialAetherkite,
   "pool/territorial-allosaurus": _poolTerritorialAllosaurus,
   "pool/territorial-baloth": _poolTerritorialBaloth,
   "pool/territorial-boar": _poolTerritorialBoar,
@@ -81154,6 +81177,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wrath-of-god": _poolWrathOfGod,
   "pool/wrath-of-marit-lage": _poolWrathOfMaritLage,
   "pool/wrath-of-the-bloodmane": _poolWrathOfTheBloodmane,
+  "pool/wrath-of-the-skies": _poolWrathOfTheSkies,
   "pool/wrathful-jailbreaker": _poolWrathfulJailbreaker,
   "pool/wreak-havoc": _poolWreakHavoc,
   "pool/wreath-of-geists": _poolWreathOfGeists,

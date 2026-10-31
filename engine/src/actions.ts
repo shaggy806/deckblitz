@@ -1811,8 +1811,11 @@ export type LegalAction =
       readonly about?: PlayerId;
       /** Present when the decision's cost contains `{X}` (Flameblast
        * Dragon): the largest X the chooser could pay for right now. The
-       * driver echoes its pick back as `xValue`. */
-      readonly xCost?: { readonly maxX: number };
+       * driver echoes its pick back as `xValue`. `energy`: X is paid in
+       * energy (a `may`'s `costEnergyX` — "you may pay one or more {E}",
+       * `minX` 1, or "any amount of {E}", where choosing no mode pays 0 and
+       * the mode still happens). */
+      readonly xCost?: { readonly maxX: number; readonly minX?: number; readonly energy?: true };
       /** Rules text of each mode, in order — index into this is what the
        * `choose-modes` action submits. */
       readonly modeTexts: readonly string[];
@@ -1964,6 +1967,10 @@ export type LegalAction =
        * discarding a card rather than paying its mana cost"), chosen as
        * it's paid. */
       readonly byDiscarding?: true;
+      /** …and costs energy equal to the spell's mana value instead (Amped
+       * Raptor's "by paying an amount of {E} equal to its mana value rather
+       * than paying its mana cost"). */
+      readonly byPayingEnergy?: true;
       /** …for its madness cost rather than its mana cost (rule 702.35a): the
        * madness cost, the only way offered. */
       readonly madness?: string;

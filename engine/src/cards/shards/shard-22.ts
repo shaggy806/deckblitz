@@ -714,6 +714,7 @@ import _poolTemperedVeteran from "../pool/tempered-veteran.js";
 import _poolTerashisGrasp from "../pool/terashis-grasp.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
 import _poolTergridsShadow from "../pool/tergrids-shadow.js";
+import _poolTerritorialAetherkite from "../pool/territorial-aetherkite.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolTezzeretTheSeeker from "../pool/tezzeret-the-seeker.js";
@@ -1577,6 +1578,7 @@ const shard: CardShard = {
     _poolTerashisGrasp,
     _poolTergridsLantern,
     _poolTergridsShadow,
+    _poolTerritorialAetherkite,
     _poolTerrorOfMountVelus,
     _poolTevalTheBalancedScale,
     _poolTezzeretTheSeeker,

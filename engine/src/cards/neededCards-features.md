@@ -344,6 +344,23 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Energy paid in a chosen, fixed or computed amount — built 2026-10-31
+
+The need-keys Phase 2 family `cost:may-cost-non-mana`, its energy group,
+features only (rule 107.14). A `may`'s **`costEnergyX`**: `"one-or-more"` ("you
+may pay one or more {E}. If you do, …", X from 1, not offered with no energy)
+or `"any"` ("you may pay any amount of {E}. …", X from 0, the effect applied
+whatever was paid — declining pays 0), asked on `choose-modes`' existing X (the
+offer's `xCost` marked `energy`), X the payment alone and never the spell's
+own. **`alternativeCostForSpells`' `energy`** (offered while the caster has
+it) and **`flash`** (rule 601.3c); a `cast-now`'s **`byPayingEnergy`** — the
+spell's mana value in energy. A computed amount ("equal to that card's mana
+value") was `costEnergy` already. The client's "you may pay" has an X field.
+Keys: pay-any-amount-of-energy, alternative-cost-for-spells-energy,
+pay-variable-energy. Proving cards: Harnessed Lightning, Die Young, Wrath of
+the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers,
+Amped Raptor, Jolted Awake.
+
 ### Meld — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:meld`, features only (rules 701.42,

@@ -5841,3 +5841,25 @@ engine terms. A second thing to check is a second test.
 ### Volcanic Offering: Carol picks the other two, four players
 - **Do:** Click "Cast Volcanic Offering (Carol chooses)", target Bob's Tropical Island and Hill Giant. As Carol, click Dave's Savannah and Gray Ogre. As you, pass priority.
 - **Expect:** Carol is offered only lands and creatures you don't control (her own too). Both lands are destroyed, and Hill Giant and Gray Ogre die.
+
+## Energy paid in an amount you choose (2026-10-31, need-keys Phase 2: build-family, features only)
+
+### Harnessed Lightning: pay any amount of energy
+- **Do:** Cast Harnessed Lightning on Bob's Hill Giant. Set the number to 2 and click Pay.
+- **Expect:** The bar reads "Pay {E} × [3] (max 3)" with Pay and Don't pay. Hill Giant takes 2 damage and survives; you have 1 energy left.
+
+### Territorial Aetherkite: one or more energy, then damage to each other creature
+- **Do:** Cast Territorial Aetherkite. As it enters, leave the number at 2 and click Pay.
+- **Expect:** The number can't go below 1. A second ability goes on the stack; when it resolves, Grizzly Bears dies, Hill Giant has 2 damage and the Aetherkite none.
+
+### Territorial Aetherkite: damage to each other creature, four players
+- **Do:** Cast Territorial Aetherkite. As it enters, leave the number at 2 and click Pay.
+- **Expect:** Every other creature at the table — Bob's, Carol's and Dave's — takes 2 damage: the Grizzly Bears die, the Hill Giants survive.
+
+### Primal Prayers: a small creature for one energy
+- **Do:** Cast Primal Prayers. Then open Grizzly Bears in your hand.
+- **Expect:** Its menu has a cast marked "(pay {E})" beside the ordinary one. Casting that way taps no land and leaves you 1 energy.
+
+### Amped Raptor: casting the exiled card for energy
+- **Do:** Cast Amped Raptor.
+- **Expect:** As it enters you get 2 energy, Grizzly Bears is exiled from the top of your library, and you're asked to cast it "by paying {E} equal to its mana value". Casting it leaves you no energy and taps no land.

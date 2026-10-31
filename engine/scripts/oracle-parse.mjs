@@ -2493,6 +2493,8 @@ export function parseSentence(sentence, ctx) {
     const { filter, text, count } = beholdOf(m[1]);
     return { kind: "behold", filter, text, ...(count !== undefined ? { count } : {}) };
   }
+  // "You get {E}{E}." (rule 122.1 — energy counters).
+  if ((m = re("you get ((?:\\{E\\})+)").exec(s))) return { kind: "get-energy", amount: m[1].length / 3 };
 
   // "You may <sentence>." wraps whatever the inner sentence is.
   if ((m = /^you may (.+)\.$/i.exec(s))) {
@@ -2523,6 +2525,17 @@ export function parseEffect(text, outer) {
   for (const [i, sentence] of sentences.entries()) {
     if (skip > 0) {
       skip -= 1;
+      continue;
+    }
+    // "You get {E}{E}{E}, then you may pay any amount of {E}." and what it
+    // pays for (`energyAmountAt`).
+    const energyPay = energyAmountAt(sentences, i, ctx);
+    if (energyPay !== null) {
+      for (const effect of energyPay.effects) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      skip = energyPay.used - 1;
       continue;
     }
     // Parley (an ability word): "Each player reveals the top card of their
@@ -2904,6 +2917,74 @@ export function parseEffect(text, outer) {
  * `choose-among-targets` by the targets' controller — `{ effect, used }`, or
  * null.
  */
+/**
+ * Energy paid in an amount the player chooses (rule 107.14): "[Choose
+ * target creature.] You get {E}{E}{E}, then you may pay any amount of
+ * {E}. ~ deals that much damage to that creature." (Harnessed Lightning)
+ * or "You get {E}{E}. Then you may pay one or more {E}. If you do, put that
+ * many +1/+1 counters on ~." — a `get-energy` and a `may` with
+ * `costEnergyX`, the sentence after it read with X for "that much", "that
+ * many" and "the amount of {E} paid this way", "-1/-1 … for each {E} paid
+ * this way" -X/-X. "Any amount" applies its effect whatever was paid, so it
+ * takes no "if you do"; "one or more" needs one. `{ effects, used }`, or
+ * null.
+ */
+function energyAmountAt(sentences, i, ctx) {
+  let j = i;
+  const chosen = /^choose target (creature|artifact|permanent)\.$/i.exec(sentences[j] ?? "");
+  if (chosen !== null) j += 1;
+  const got = /^you get ((?:\{E\})+)(?:, then you may pay (any amount of|one or more) \{E\})?\.$/i.exec(sentences[j] ?? "");
+  if (got === null) return null;
+  let how = got[2];
+  j += 1;
+  if (how === undefined) {
+    const then = /^then you may pay (any amount of|one or more) \{E\}\.$/i.exec(sentences[j] ?? "");
+    if (then === null) return null;
+    how = then[1];
+    j += 1;
+  }
+  const energyX = how.toLowerCase().startsWith("any") ? "any" : "one-or-more";
+  const follow = sentences[j];
+  if (follow === undefined) return null;
+  const lead = /^if you do, (.+)$/i.exec(follow);
+  if ((energyX === "one-or-more") !== (lead !== null)) return null;
+  let text = lead === null ? follow : `${lead[1][0].toUpperCase()}${lead[1].slice(1)}`;
+  if (chosen !== null) {
+    const that = new RegExp(`\\b(?:that|the) ${chosen[1]}\\b`, "i");
+    if (!that.test(text)) return null;
+    text = text.replace(that, `target ${chosen[1].toLowerCase()}`);
+    text = `${text[0].toUpperCase()}${text.slice(1)}`;
+  }
+  let perEach = false;
+  text = text.replace(/ for each \{E\} paid this way\.$/i, () => {
+    perEach = true;
+    return ".";
+  });
+  text = text.replace(/\bthat (?:much|many)\b/gi, "X").replace(/\bthe amount of \{E\} paid this way\b/gi, "X");
+  const before = ctx.targets.length;
+  const inner = parseSentence(text, ctx);
+  const fail = () => {
+    ctx.targets.length = before;
+    return null;
+  };
+  if (inner === null || containsUndefined(inner)) return fail();
+  if (chosen !== null && ctx.targets.length !== before + 1) return fail();
+  let effect = inner;
+  if (perEach) {
+    if (inner.kind !== "modify-pt" || typeof inner.power !== "number" || typeof inner.toughness !== "number") return fail();
+    effect = { ...inner, power: { product: ["x", inner.power] }, toughness: { product: ["x", inner.toughness] } };
+  } else if (!JSON.stringify(inner).includes('"x"')) {
+    return fail();
+  }
+  const may = {
+    kind: "may",
+    prompt: energyX === "any" ? "Pay any amount of {E}?" : "Pay one or more {E}?",
+    costEnergyX: energyX,
+    effect,
+  };
+  return { effects: [{ kind: "get-energy", amount: got[1].length / 3 }, may], used: j + 1 - i };
+}
+
 function amongTargetsAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const m = /^choose two target creatures controlled by the same (player|opponent)\.$/i.exec(s(0));

@@ -86,6 +86,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: energy paid in a chosen, fixed or computed amount** (2026-10-31;
+  `cost:pay-any-amount-of-energy`, `cost:alternative-cost-for-spells-energy`,
+  `cost:pay-variable-energy`, rules 107.14, 107.1c, 118.9, 601.3c). A `may`'s `costEnergyX` —
+  "you may pay one or more {E}. If you do, …" (X from 1, declined with no energy) and "you may
+  pay any amount of {E}. …" (X from 0, the effect applied whatever was paid, a decline paying 0) —
+  asked on `choose-modes`' existing X, the offer's `xCost` marked `energy` with `minX`, X the
+  amount paid and never the spell's own; `alternativeCostForSpells`' `energy` (offered while the
+  caster has it) and `flash` ("if you cast a spell this way, you may cast it as though it had
+  flash"); a `cast-now`'s `byPayingEnergy`. Jolted Awake's "an amount of {E} equal to that card's
+  mana value" was Confiscation Coup's `costEnergy` already. The client's "you may pay" now has an
+  X field (Leyline Tyrant's "any amount of {R}" had been sent as X 0). The scaffolder reads "you
+  get {E}…" and the energy-amount templates. Proving cards: Harnessed Lightning, Die Young, Wrath
+  of the Skies, Territorial Aetherkite, Nissa, Worldsoul Speaker, Primal Prayers, Amped Raptor,
+  Jolted Awake; 15 freed.
 - **Need-keys Phase 2: counters of chosen kinds removed** (2026-10-31;
   `cost:remove-any-counter-cost`, `effect:remove-counters-any-kind`, rule 122.1). Most of it was
   already there since B254 (the `remove-counters` decision, `removeCounter.kind: "any"`, the

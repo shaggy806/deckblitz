@@ -1474,6 +1474,10 @@ export interface CastNowOptions {
   /** "By discarding a card rather than paying its mana cost" — with `free`;
    * see the `cast-now` effect's `byDiscarding`. */
   readonly byDiscarding?: boolean;
+  /** "By paying an amount of {E} equal to its mana value rather than paying
+   * its mana cost" — with `free`; see the `cast-now` effect's
+   * `byPayingEnergy`. */
+  readonly byPayingEnergy?: boolean;
   /** Paying the card's madness cost rather than its mana cost — see the
    * `cast-now` effect's `madness`. */
   readonly madness?: boolean;
@@ -3224,6 +3228,14 @@ export type EffectSpec =
        * cost increases apply (118.9d). Not offered with an empty hand.
        */
       readonly byDiscarding?: boolean;
+      /**
+       * "You may cast that card **by paying an amount of {E} equal to its
+       * mana value rather than paying its mana cost**" (Amped Raptor): an
+       * alternative cost (rule 118.9) of that much energy (107.14) — `free`
+       * with the energy on top, the mana value the spell's as it's cast (its
+       * face's, X 0 — 107.3b). Not offered without that much energy.
+       */
+      readonly byPayingEnergy?: boolean;
       /** "Its owner may cast it **by paying [its madness cost]** rather
        * than paying its mana cost" (rule 702.35a): the card's own madness
        * cost as an alternative cost (702.35b), the only way offered — the
@@ -6156,6 +6168,27 @@ export type EffectSpec =
        * the `may` applies (so "an amount of {E} equal to its mana value" is an
        * amount); payable only with that much energy. */
       readonly costEnergy?: EffectAmount;
+      /**
+       * Energy paid in an amount the player chooses (rule 107.14: each {E}
+       * one energy counter removed), up to the energy they have (and `maxX`,
+       * if any); the amount paid is the X `effect` reads ("that much",
+       * "that many", "for each {E} paid this way"):
+       *
+       * - `"one-or-more"` — "you may pay one or more {E}. If you do, …"
+       *   (Territorial Aetherkite, Rampaging Aetherhood): X from 1, not
+       *   offered with no energy; declining lands on `else`.
+       * - `"any"` — "you may pay any amount of {E}. [It] deals that much
+       *   damage …" (Harnessed Lightning, Die Young, Wrath of the Skies): X
+       *   from 0 (rule 107.1c), and `effect` happens whatever was paid —
+       *   declining is paying 0, so `effect` applies with X = 0 (Wrath of the
+       *   Skies still destroys what has mana value 0). Not asked with no
+       *   energy at all.
+       *
+       * The question is the `choose-modes` decision's, its offer's `xCost`
+       * marked `energy`; X is that payment alone, never the spell's own X
+       * ("you get X {E}, then you may pay any amount of {E}").
+       */
+      readonly costEnergyX?: "one-or-more" | "any";
       /** "If you do, [effect]" (rule 608.2h) — applied only when `effect` was
        * actually chosen (Ob Nixilis, the Fallen: "you may have target player
        * lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis.").
@@ -8681,8 +8714,14 @@ export interface EffectApi {
      * `modal`'s `notChosenThisTurn` and `may`'s `oncePerTurn` — or, `"ever"`,
      * as long as its object has been on the battlefield (`notChosenBefore`). */
     notChosenThisTurn?: boolean | "ever",
-    /** The rest of a `may`'s cost: life and energy, as numbers. */
-    otherCost?: { readonly life?: number; readonly energy?: number; readonly maxX?: number },
+    /** The rest of a `may`'s cost: life and energy, as numbers, and energy
+     * paid in a chosen amount (`may.costEnergyX`). */
+    otherCost?: {
+      readonly life?: number;
+      readonly energy?: number;
+      readonly maxX?: number;
+      readonly energyX?: "one-or-more" | "any";
+    },
     /** The player the question is about — see `may`'s `aboutThatPlayer`. */
     about?: PlayerId,
     /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
@@ -9659,8 +9698,9 @@ function offerCastNow(
   if (cards.length > 0) {
     ctx.castNow(cards, {
       ...(by !== undefined ? { by } : {}),
-      free: spec.free === true || spec.byDiscarding === true,
+      free: spec.free === true || spec.byDiscarding === true || spec.byPayingEnergy === true,
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
+      ...(spec.byPayingEnergy === true ? { byPayingEnergy: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
       ...(spec.miracle === true ? { miracle: true } : {}),
       exileAfter: spec.exileAfter ?? false,
@@ -13411,12 +13451,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.else,
         spec.cost,
         spec.oncePerTurn === true,
-        spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined
+        spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined &&
+          spec.costEnergyX === undefined
           ? undefined
           : {
               ...(spec.costLife !== undefined ? { life: amountValue(spec.costLife, ctx) } : {}),
               ...(spec.costEnergy !== undefined ? { energy: amountValue(spec.costEnergy, ctx) } : {}),
               ...(spec.maxX !== undefined ? { maxX: amountValue(spec.maxX, ctx) } : {}),
+              ...(spec.costEnergyX !== undefined ? { energyX: spec.costEnergyX } : {}),
             },
         spec.aboutThatPlayer === true ? effectPlayer("that-player", ctx) : undefined,
         spec.xColor,
