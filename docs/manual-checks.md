@@ -5780,3 +5780,13 @@ engine terms. A second thing to check is a second test.
 ### Tromokratis: all of Bob's creatures block it, or none
 - **Do:** Attack Bob with Tromokratis. As Bob, block it with Grizzly Bears, then add Hill Giant.
 - **Expect:** With one, Confirm stays disabled: "Tromokratis must be blocked by all your creatures or none". With both it confirms.
+
+## A mode chosen more than once (2026-10-30, need-keys Phase 2: build-family, features only)
+
+### Fiery Confluence: choose the same mode three times
+- **Do:** Cast Fiery Confluence. Click "deals 2 damage to each opponent" three times, then Confirm.
+- **Expect:** The bar reads "Fiery Confluence — choose 3 (a mode may repeat — 0/3)", counting up as you click, and the mode shows "×3". Every mode greys out at 3/3 until Clear. Bob loses 6 life; his Grizzly Bears and Sol Ring stay.
+
+### Mystic Confluence: one mode twice, each with its own target, four players
+- **Do:** Cast Mystic Confluence. Click "Return target creature to its owner's hand" twice and "Draw a card" once, then Confirm. Target Bob's Grizzly Bears, then Carol's Hill Giant.
+- **Expect:** You're asked for two creature targets, one after the other. Both creatures go back to their owners' hands, Dave's Gray Ogre stays, and you draw a card.

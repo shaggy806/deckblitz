@@ -31,12 +31,16 @@ export function randomCast(
       if (cm.modeSets.length === 0) return null;
       modes = [...cm.modeSets[rng.pickIndex(cm.modeSets.length)]];
     } else {
-      const most = Math.min(cm.maxModes, castable.length);
+      // A mode that may repeat (rule 700.2d) is drawn with replacement.
+      const repeat = cm.repeatModes === true && castable.length > 0;
+      const most = repeat ? cm.maxModes : Math.min(cm.maxModes, castable.length);
       if (most < cm.minModes) return null;
       const want = cm.minModes + rng.pickIndex(most - cm.minModes + 1);
       const pool = [...castable];
       modes = [];
-      for (let i = 0; i < want; i += 1) modes.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
+      for (let i = 0; i < want; i += 1) {
+        modes.push(repeat ? pool[rng.pickIndex(pool.length)] : pool.splice(rng.pickIndex(pool.length), 1)[0]);
+      }
     }
     modes.sort((a, b) => a - b);
     options = modes.flatMap((i) => cm.modes[i].targetOptions);

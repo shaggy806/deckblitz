@@ -13,9 +13,9 @@
  */
 
 import type { Action, ConvokePayment, LegalAction } from "../actions.js";
-import { convokeProofFor, delvePicks, fitModeSet } from "../actions.js";
+import { convokeProofFor, delvePicks, fillModes, fitModeSet } from "../actions.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { subsetsBetween } from "../decisions/shared/subsets.js";
+import { modeChoicesBetween } from "../decisions/shared/subsets.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
 import { fitModalXGroup, fitTargetCount, maxXForTargets } from "../target-count.js";
 import { anyNumberSlot, concatModeSpecs } from "../target.js";
@@ -147,18 +147,20 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     const fillable = modal.modes
       .map((_mode, index) => index)
       .filter((index) => modal.modes[index].targetOptions.every((o) => o.length > 0));
-    if (fillable.length < modal.minModes) return [];
-    // Spree (rule 702.172a): only the sets of modes it can pay for.
+    const repeat = modal.repeatModes === true;
+    if (fillable.length < (repeat ? Math.min(1, modal.minModes) : modal.minModes)) return [];
+    // Spree (rule 702.172a): only the sets of modes it can pay for. A mode
+    // that may repeat (rule 700.2d) also comes as every multiset of them.
     const sets = modal.modeSets;
     const most =
       sets !== undefined
         ? fitModeSet(sets, fillable)
-        : fillable.slice(0, Math.max(modal.minModes, Math.min(modal.maxModes, fillable.length)));
+        : fillModes(fillable, modal.minModes, modal.maxModes, repeat);
     if (most === null) return [];
     const choices = [most];
     const seenModes = new Set([JSON.stringify(most)]);
     for (const modes of sets ??
-      subsetsBetween(fillable, Math.max(1, modal.minModes), modal.maxModes, MAX_TARGET_COMBOS * 2)) {
+      modeChoicesBetween(fillable, Math.max(1, modal.minModes), modal.maxModes, repeat, MAX_TARGET_COMBOS * 2)) {
       if (choices.length >= MAX_TARGET_COMBOS) break;
       const key = JSON.stringify(modes);
       if (seenModes.has(key)) continue;

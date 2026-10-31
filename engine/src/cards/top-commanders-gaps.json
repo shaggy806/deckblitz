@@ -662,7 +662,9 @@
   "static:unblockable-defending-player-condition",
   "effect:target-cant-block-source-this-turn",
   "effect:target-must-block-source-this-turn",
-  "static:must-block-each-combat"
+  "static:must-block-each-combat",
+  "effect:modal-repeat-modes",
+  "effect:mode-not-chosen-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

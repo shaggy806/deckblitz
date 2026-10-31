@@ -8673,4 +8673,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Tromokratis: all of Bob's creatures block it, or none",
     board({ you: { bf: ['Tromokratis'] }, opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] } }),
   ),
+  // --- A mode chosen more than once (2026-10-30, build-family) ---
+  preset(
+    'Fiery Confluence: choose the same mode three times',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Fiery Confluence'] },
+      opp: { bf: ['Grizzly Bears', 'Sol Ring'] },
+    }),
+  ),
+  preset(
+    'Mystic Confluence: one mode twice, each with its own target, four players',
+    board({
+      you: { bf: ['Island*5'], hand: ['Mystic Confluence'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Gray Ogre'] }],
+    }),
+  ),
 ]

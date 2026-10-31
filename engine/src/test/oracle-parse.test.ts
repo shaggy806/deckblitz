@@ -2252,6 +2252,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spell.complete).toBe(true);
   });
 
+  it("'you may choose the same mode more than once' (rule 700.2d): a repeatable castModal", () => {
+    const spell = face(
+      "Choose three. You may choose the same mode more than once.\n• Create a 2/2 white Knight creature token with vigilance.\n• Exile target enchantment.\n• You gain 5 life.",
+      "Sorcery",
+    );
+    expect(spell.castModal).toMatchObject({ minModes: 3, maxModes: 3, repeatModes: true });
+    expect(spell.castModal.modes[1]).toMatchObject({ targets: ["enchantment"] });
+    expect(spell.castModal.modes[2].effect).toEqual({ kind: "gain-life", amount: 5 });
+  });
+
   it("buyback (rule 702.27): a kicker whose cast returns to its owner's hand", () => {
     const spell = face(
       "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.",

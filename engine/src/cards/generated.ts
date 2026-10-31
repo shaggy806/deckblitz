@@ -7816,6 +7816,7 @@ import _poolFierceRetribution from "./pool/fierce-retribution.js";
 import _poolFierceWitchstalker from "./pool/fierce-witchstalker.js";
 import _poolFieryCannonade from "./pool/fiery-cannonade.js";
 import _poolFieryConclusion from "./pool/fiery-conclusion.js";
+import _poolFieryConfluence from "./pool/fiery-confluence.js";
 import _poolFieryEmancipation from "./pool/fiery-emancipation.js";
 import _poolFieryEncore from "./pool/fiery-encore.js";
 import _poolFieryFall from "./pool/fiery-fall.js";
@@ -12300,6 +12301,7 @@ import _poolKilnWalker from "./pool/kiln-walker.js";
 import _poolKilnmouthDragon from "./pool/kilnmouth-dragon.js";
 import _poolKiloApogeeMind from "./pool/kilo-apogee-mind.js";
 import _poolKimahriValiantGuardian from "./pool/kimahri-valiant-guardian.js";
+import _poolKimoyoBeads from "./pool/kimoyo-beads.js";
 import _poolKinTreeInvocation from "./pool/kin-tree-invocation.js";
 import _poolKinTreeNurturer from "./pool/kin-tree-nurturer.js";
 import _poolKinTreeSeverance from "./pool/kin-tree-severance.js";
@@ -14987,6 +14989,7 @@ import _poolMysteriousTome from "./pool/mysterious-tome.js";
 import _poolMysteryKey from "./pool/mystery-key.js";
 import _poolMysticArchaeologist from "./pool/mystic-archaeologist.js";
 import _poolMysticCompass from "./pool/mystic-compass.js";
+import _poolMysticConfluence from "./pool/mystic-confluence.js";
 import _poolMysticCrusader from "./pool/mystic-crusader.js";
 import _poolMysticDecree from "./pool/mystic-decree.js";
 import _poolMysticDenial from "./pool/mystic-denial.js";
@@ -35133,6 +35136,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFierceWitchstalker,
   _poolFieryCannonade,
   _poolFieryConclusion,
+  _poolFieryConfluence,
   _poolFieryEmancipation,
   _poolFieryEncore,
   _poolFieryFall,
@@ -39617,6 +39621,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKilnmouthDragon,
   _poolKiloApogeeMind,
   _poolKimahriValiantGuardian,
+  _poolKimoyoBeads,
   _poolKinTreeInvocation,
   _poolKinTreeNurturer,
   _poolKinTreeSeverance,
@@ -42304,6 +42309,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMysteryKey,
   _poolMysticArchaeologist,
   _poolMysticCompass,
+  _poolMysticConfluence,
   _poolMysticCrusader,
   _poolMysticDecree,
   _poolMysticDenial,
@@ -62463,6 +62469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fierce-witchstalker": _poolFierceWitchstalker,
   "pool/fiery-cannonade": _poolFieryCannonade,
   "pool/fiery-conclusion": _poolFieryConclusion,
+  "pool/fiery-confluence": _poolFieryConfluence,
   "pool/fiery-emancipation": _poolFieryEmancipation,
   "pool/fiery-encore": _poolFieryEncore,
   "pool/fiery-fall": _poolFieryFall,
@@ -66947,6 +66954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kilnmouth-dragon": _poolKilnmouthDragon,
   "pool/kilo-apogee-mind": _poolKiloApogeeMind,
   "pool/kimahri-valiant-guardian": _poolKimahriValiantGuardian,
+  "pool/kimoyo-beads": _poolKimoyoBeads,
   "pool/kin-tree-invocation": _poolKinTreeInvocation,
   "pool/kin-tree-nurturer": _poolKinTreeNurturer,
   "pool/kin-tree-severance": _poolKinTreeSeverance,
@@ -69634,6 +69642,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mystery-key": _poolMysteryKey,
   "pool/mystic-archaeologist": _poolMysticArchaeologist,
   "pool/mystic-compass": _poolMysticCompass,
+  "pool/mystic-confluence": _poolMysticConfluence,
   "pool/mystic-crusader": _poolMysticCrusader,
   "pool/mystic-decree": _poolMysticDecree,
   "pool/mystic-denial": _poolMysticDenial,

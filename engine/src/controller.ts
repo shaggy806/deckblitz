@@ -17,7 +17,7 @@ import type {
   TapCostOffer,
 } from "./actions.js";
 import { abilityLifeCost } from "./abilities.js";
-import { convokeProofFor, defaultTapPicks, delvePicks, fitModeSet, tapPicksPower } from "./actions.js";
+import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapPicksPower } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
@@ -1724,17 +1724,21 @@ export class RandomController extends AutomaticController {
           const castable = cm.modes
             .map((_m, i) => i)
             .filter((i) => cm.modes[i].targetOptions.every((o) => o.length > 0));
-          if (castable.length < cm.minModes) return passFor(player);
+          // A mode that may repeat (rule 700.2d) is drawn with replacement.
+          const repeat = cm.repeatModes === true && castable.length > 0;
+          if (!repeat && castable.length < cm.minModes) return passFor(player);
+          if (castable.length === 0 && cm.minModes > 0) return passFor(player);
           const modes: number[] = [];
           if (cm.modeSets !== undefined) {
             // Spree (rule 702.172a): one of the sets it can pay for.
             if (cm.modeSets.length === 0) return passFor(player);
             modes.push(...cm.modeSets[this.pickIndex(cm.modeSets.length)]);
           } else {
-            const want = cm.minModes + this.pickIndex(Math.min(cm.maxModes, castable.length) - cm.minModes + 1);
+            const most = repeat ? cm.maxModes : Math.min(cm.maxModes, castable.length);
+            const want = cm.minModes + this.pickIndex(most - cm.minModes + 1);
             const pool = [...castable];
             for (let i = 0; i < want && pool.length > 0; i += 1) {
-              modes.push(pool.splice(this.pickIndex(pool.length), 1)[0]);
+              modes.push(repeat ? pool[this.pickIndex(pool.length)] : pool.splice(this.pickIndex(pool.length), 1)[0]);
             }
           }
           modes.sort((a, b) => a - b);
@@ -3631,7 +3635,8 @@ export class HeuristicBotController extends AutomaticController {
     offer: CastSpellLegal | ActivateAbilityLegal,
   ): boolean {
     if (offer.kind === "cast-spell" && offer.castModal !== undefined) {
-      return this.aimableModes(state, offer).length < offer.castModal.minModes;
+      const aimable = this.aimableModes(state, offer).length;
+      return offer.castModal.repeatModes === true && aimable > 0 ? false : aimable < offer.castModal.minModes;
     }
     if (offer.targetOptions.length === 0) return false;
     const polarities = offerPolarities(this.registry, offer, polarityBias(state, this.playerId));
@@ -3680,9 +3685,9 @@ export class HeuristicBotController extends AutomaticController {
       cm.modes.map((_mode, i) => i).filter((i) => cm.modes[i].targetOptions.every((options) => options.length > 0));
     // Spree (rule 702.172a): the most of them it can pay for together.
     if (cm.modeSets !== undefined) return fitModeSet(cm.modeSets, aimable) ?? fitModeSet(cm.modeSets, fillable());
-    const usable = aimable.length >= cm.minModes ? aimable : fillable();
-    if (usable.length < cm.minModes) return null;
-    return usable.slice(0, Math.max(cm.minModes, Math.min(cm.maxModes, usable.length)));
+    const repeat = cm.repeatModes === true;
+    const enough = (modes: readonly number[]) => (repeat && modes.length > 0) || modes.length >= cm.minModes;
+    return fillModes(enough(aimable) ? aimable : fillable(), cm.minModes, cm.maxModes, repeat);
   }
 
   /** "You may cast [a card]": cast it — of several, the one of highest mana

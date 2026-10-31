@@ -4263,7 +4263,10 @@ const modeCounts = (head, n) =>
  * target). `undefined` when the spell isn't modal; `null` when a mode
  * didn't parse. */
 function parseModalSpell(spellLines, ctx) {
-  const head = /^Choose (one|two|one or both|one or more) —$/.exec(spellLines[0].line);
+  // "Choose three. You may choose the same mode more than once." (rule
+  // 700.2d — the Confluences): exactly that many, a mode repeatable.
+  const repeated = /^Choose (two|three|four|five)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);
+  const head = repeated ?? /^Choose (one|two|one or both|one or more) —$/.exec(spellLines[0].line);
   if (!head) return undefined;
   const modes = [];
   for (const l of spellLines.slice(1)) {
@@ -4273,6 +4276,10 @@ function parseModalSpell(spellLines, ctx) {
     const r = parseEffect(text, { targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack, spell: ctx.spell });
     if (r.effect === null) return null;
     modes.push({ text: stripReminder(l.raw).replace(/^•\s*/, ""), ...(targets.length ? { targets } : {}), effect: r.effect });
+  }
+  if (repeated) {
+    const n = { two: 2, three: 3, four: 4, five: 5 }[repeated[1]];
+    return { castModal: { minModes: n, maxModes: n, repeatModes: true, modes }, effect: null, targets: [] };
   }
   const [minModes, maxModes] = modeCounts(head[1], modes.length);
   return { castModal: { minModes, maxModes, modes }, effect: null, targets: [] };

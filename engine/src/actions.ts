@@ -380,7 +380,8 @@ export type Action =
        * goes, the earlier targets taking the remainder. */
       readonly division?: readonly number[];
       /** The modes chosen for a targeted modal spell (rule 700.2 — ROADMAP
-       * Phase 11 EG-2): indices into `CardDefinition.castModal.modes`, distinct.
+       * Phase 11 EG-2): indices into `CardDefinition.castModal.modes`, distinct
+       * unless the spell lets a mode repeat (`castModal.repeatModes`, rule 700.2d).
        * `targets` are then the concatenation of those modes' target slots, in
        * mode order. Required (and only meaningful) for a `castModal` card. */
       readonly modes?: readonly number[];
@@ -833,6 +834,27 @@ export function convokeProofFor(offer: ConvokeOffer, xValue = 0): ConvokePayment
 }
 
 /**
+ * As many of a modal spell's modes as it allows, taken from `usable` (the
+ * modes a driver would choose, best first), in mode order — or `null` when
+ * they don't make its minimum. Where a mode may be chosen more than once
+ * (rule 700.2d — `castModal.repeatModes`), the usable modes are taken again
+ * in turn until the most is reached: Fiery Confluence with one good mode is
+ * that mode three times.
+ */
+export function fillModes(
+  usable: readonly number[],
+  minModes: number,
+  maxModes: number,
+  repeatModes: boolean,
+): number[] | null {
+  if (!repeatModes || usable.length === 0) {
+    if (usable.length < minModes) return null;
+    return usable.slice(0, Math.max(minModes, Math.min(maxModes, usable.length))).sort((a, b) => a - b);
+  }
+  return Array.from({ length: Math.max(minModes, maxModes) }, (_v, i) => usable[i % usable.length]).sort((a, b) => a - b);
+}
+
+/**
  * The modes to cast a spree spell with (rule 702.172a), out of the sets its
  * offer can pay for (`castModal.modeSets`): the largest made only of modes in
  * `wanted`, which lists the modes a driver would choose, best first — between
@@ -1024,6 +1046,10 @@ export type LegalAction =
          * `minModes..maxModes` of the modes with legal targets will do.
          */
         readonly modeSets?: readonly (readonly number[])[];
+        /** "You may choose the same mode more than once" (rule 700.2d): the
+         * `modes` a cast sends may repeat an index, each copy taking its own
+         * target slots (`CastModalSpec.repeatModes`). */
+        readonly repeatModes?: true;
       };
       /** Set when the spell's cost contains `{X}`. `maxX` is the largest value
        * of X this player could currently pay for (0 when only X=0 is

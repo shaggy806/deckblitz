@@ -410,6 +410,7 @@ import _poolKenkuArtificer from "../pool/kenku-artificer.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
+import _poolKimoyoBeads from "../pool/kimoyo-beads.js";
 import _poolKindleTheCarnage from "../pool/kindle-the-carnage.js";
 import _poolKindle from "../pool/kindle.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
@@ -1291,6 +1292,7 @@ const shard: CardShard = {
     _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
     _poolKillZoneAcrobat,
+    _poolKimoyoBeads,
     _poolKindleTheCarnage,
     _poolKindle,
     _poolKinsbaileSkirmisher,

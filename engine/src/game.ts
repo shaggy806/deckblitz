@@ -171,7 +171,7 @@ import { orderTriggers as orderTriggersDecision } from "./decisions/order-trigge
 import { miracleReveal as miracleRevealDecision } from "./decisions/miracle-reveal.js";
 import { mulligan } from "./decisions/mulligan.js";
 import { mulliganCardsOwed } from "./decisions/shared/mulligan-math.js";
-import { subsetsBetween } from "./decisions/shared/subsets.js";
+import { modeChoicesBetween, subsetsBetween } from "./decisions/shared/subsets.js";
 import { commanderReplacement } from "./decisions/commander-replacement.js";
 import { discard } from "./decisions/discard.js";
 import { sacrifice } from "./decisions/sacrifice.js";
@@ -3111,6 +3111,7 @@ export class Game {
           ...(m.spreeCost !== undefined ? { cost: m.spreeCost } : {}),
         })),
         ...(modeSets !== undefined ? { modeSets: modeSets.map((set) => [...set]) } : {}),
+        ...(def.castModal.repeatModes === true ? { repeatModes: true as const } : {}),
       },
     };
   }
@@ -11073,9 +11074,10 @@ export class Game {
     let min = Number.POSITIVE_INFINITY;
     let max = -1;
     const maxModes = this.castModalMaxModes(modal, card);
-    for (let mask = 0; mask < 1 << modal.modes.length; mask += 1) {
-      const modes = modal.modes.map((_m, i) => i).filter((i) => (mask & (1 << i)) !== 0);
-      if (modes.length < modal.minModes || modes.length > maxModes) continue;
+    // Every choice of modes — a mode repeated, when the spell allows it
+    // (rule 700.2d): a repeated targeted mode adds its slots again.
+    const indices = modal.modes.map((_m, i) => i);
+    for (const modes of modeChoicesBetween(indices, modal.minModes, maxModes, modal.repeatModes === true, 512)) {
       const bounds = boundsOf(modes);
       if (bounds === null) continue;
       min = Math.min(min, bounds.min);
@@ -12001,7 +12003,10 @@ export class Game {
     modes: readonly number[],
     kicked = false,
   ): string | null {
-    if (new Set(modes).size !== modes.length) return "the same mode was chosen twice";
+    // Rule 700.2d: a mode once, unless the spell says it may repeat.
+    if (castModal.repeatModes === undefined && new Set(modes).size !== modes.length) {
+      return "the same mode was chosen twice";
+    }
     const { minModes, maxModes } = this.castModalRange(castModal, card, kicked);
     if (modes.length < minModes || modes.length > maxModes) {
       return `choose between ${minModes} and ${maxModes} mode(s)`;

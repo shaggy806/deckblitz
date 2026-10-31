@@ -260,6 +260,7 @@ import _poolFendeepSummoner from "../pool/fendeep-summoner.js";
 import _poolFerocification from "../pool/ferocification.js";
 import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
+import _poolFieryConfluence from "../pool/fiery-confluence.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFirjasRetribution from "../pool/firjas-retribution.js";
@@ -1162,6 +1163,7 @@ const shard: CardShard = {
     _poolFerocification,
     _poolFeywildTrickster,
     _poolFierceWitchstalker,
+    _poolFieryConfluence,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
     _poolFirjasRetribution,

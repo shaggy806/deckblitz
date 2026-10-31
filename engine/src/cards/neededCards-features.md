@@ -321,6 +321,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A mode chosen more than once — built 2026-10-30
+
+The need-keys Phase 2 family `effect:modal-repeat-modes`, features only.
+**`castModal.repeatModes`** is "You may choose the same mode more than
+once" (rule 700.2d — the Confluences): the cast's `modes` may repeat an
+index, sorted into printed order, each copy taking its own target slots
+(`concatModeSpecs`). The offer carries `repeatModes`; the target-count bounds,
+the bots' candidates (`modeChoicesBetween`, multisets), the heuristic and
+random drivers (`fillModes`, drawn with replacement) and the client's picker
+(a click adds a copy, "×N", Clear) all read it. "Choose one that hasn't been
+chosen" was built already (`modal`'s `notChosenBefore`, Silent Hallcreeper):
+Kimoyo Beads proves it. Keys: modal-repeat-modes, mode-not-chosen-this-turn.
+
 ### Block minimums, "all must block" and one-blocker requirements — built 2026-10-30
 
 The need-keys Phase 2 family `static:combat-restriction-extensions`, its top

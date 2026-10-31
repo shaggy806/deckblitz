@@ -2689,6 +2689,11 @@ export interface CastModalSpec {
    * (its teamwork cost paid — `CardDefinition.kicker`), both chosen as it's
    * cast (rule 601.2b). */
   readonly kickedModes?: number;
+  /** "You may choose the same mode more than once" (rule 700.2d — the
+   * Confluences): the chosen modes may repeat, and the spell is treated as
+   * though a mode chosen n times appeared n times in sequence, each copy with
+   * its own target slots, which may name the same target or different ones. */
+  readonly repeatModes?: true;
   /**
    * Escalate (rule 702.120a): "For each mode you choose beyond the first as
    * you cast this spell, you pay an additional [cost]." This mana, once per

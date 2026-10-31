@@ -4580,13 +4580,22 @@ function Table({
       sets === undefined
         ? picked.length >= cm.minModes && picked.length <= cm.maxModes
         : sets.some((s) => s.length === picked.length && picked.every((p) => s.includes(p)))
+    // "You may choose the same mode more than once" (rule 700.2d): each
+    // click adds another copy of the mode, up to the most allowed; Clear
+    // starts over.
+    const repeat = cm.repeatModes === true
+    const copies = (i: number) => picked.filter((p) => p === i).length
     const toggle = (i: number) =>
       setPendingModes((prev) =>
         prev === null
           ? prev
           : {
               ...prev,
-              picked: prev.picked.includes(i)
+              picked: repeat
+                ? prev.picked.length >= cm.maxModes
+                  ? prev.picked
+                  : [...prev.picked, i]
+                : prev.picked.includes(i)
                 ? prev.picked.filter((x) => x !== i)
                 : prev.picked.length >= cm.maxModes
                   ? [...prev.picked.slice(1), i]
@@ -4598,6 +4607,7 @@ function Table({
         <span>
           {pendingModes.cast.cardName} — choose{' '}
           {cm.minModes === cm.maxModes ? cm.minModes : `${cm.minModes}–${cm.maxModes}`}
+          {cm.repeatModes === true && ` (a mode may repeat — ${picked.length}/${cm.maxModes})`}
         </span>
         {cm.modes.map((m, i) => (
           <button
@@ -4605,12 +4615,26 @@ function Table({
             type="button"
             className={picked.includes(i) ? 'selected' : undefined}
             aria-pressed={picked.includes(i)}
-            disabled={(uncastable(i) || !fits([...picked, i])) && !picked.includes(i)}
+            disabled={
+              repeat
+                ? uncastable(i) || picked.length >= cm.maxModes
+                : (uncastable(i) || !fits([...picked, i])) && !picked.includes(i)
+            }
             onClick={() => toggle(i)}
           >
             <Symbols text={m.text} />
+            {repeat && copies(i) > 0 && ` ×${copies(i)}`}
           </button>
         ))}
+        {repeat && (
+          <button
+            type="button"
+            disabled={picked.length === 0}
+            onClick={() => setPendingModes((prev) => (prev === null ? prev : { ...prev, picked: [] }))}
+          >
+            Clear
+          </button>
+        )}
         <button
           type="button"
           disabled={!complete}
