@@ -56,6 +56,14 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
   name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
   and offer a variant each, its `altCostText` telling them apart.
+- **A resolve-time either/or between two effects.** Vhati il-Dal's "target creature's base power
+  or base toughness becomes 1" chooses between two effects as it resolves (608.2d); nothing can
+  say that yet (`animate`'s lone power/toughness exists since 2026-10-31).
+- **Simultaneous as-enters removals of every counter.** Two Thieves of Blood entering at once:
+  the first applied takes every counter, where the player should choose which gets them
+  (`removeAllCountersFrom`, 2026-10-31; 616.1).
+- **Enlist leftovers.** Enlist ×N (702.154d) isn't built, and an attack tax paid by auto-tapping a
+  mana creature is paid before enlist is asked, so it can tap the creature meant to be enlisted.
 - **Granted statics don't reach cost changes or prevention.** `StaticAbility.grantsStatic` (built
   2026-10-31) reaches the layer fold, "can't lose the game", untap and block rules, but not
   cost modifications or prevention replacements: Acolyte of Bahamut, Caduceus, Staff of Hermes,

@@ -102,6 +102,31 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   blocked by or either, the source's or its host's; a source that left read off its last-known
   blocks, 608.2b; none once removed from combat, 506.4); 21 freed. Goblin Javelineer, Tinder Wall,
   Plasma Caster, Wall of Nets, Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin.
+- **Need-keys Phase 2: P/T scaled by a hand size or a life total; base power or toughness alone**
+  (2026-10-31; `static:pt-per-cards-in-hand`, `static:pt-per-life-total`, `static:cda-life-total`,
+  `effect:set-base-power-only`, `effect:set-base-toughness-only`) — `grantPtPerCount.cardsInHand`
+  (`true`, `"opponents"`, `"affected-controller"`), `grantPtPerCount.lifeTotal`, the CDA count
+  `"your-life-total"` (604.3), `animate`'s `power` and `toughness` each optional with
+  `PtModifier.setPower` (613.4b); 17 freed. Grim Strider, Enemy of Enlightenment, Righteous
+  Authority, Death's Shadow, Serra Avatar, Island of Wak-Wak, Turtle-Duck, Riptide Mangler,
+  Chariot of the Sun, Wall of Tombstones.
+- **Need-keys Phase 2: counters this way, and distributing counters** (2026-10-31; the two
+  `effect:counters-…-this-way` keys, `effect:distribute-counters-among-chosen`,
+  `effect:distribute-counters-variable-total`) — a player's counters among those removed (122.1),
+  `removeCounter.count: "all"` as a cost whose count is X, `removeAllCountersFrom` as it enters
+  (614.1c), `counters-distributed` among permanents chosen as it resolves (608.2d, through
+  `choose-permanents` and `choose-number`); 12 freed. Fangs of Kalonia, Spectacular Showdown,
+  Give // Take, Leeches, Catti-brie of Mithral Hall, Thief of Blood, Undercity Upheaval, Quirion
+  Beastcaller, Broodlord, Vastwood Hydra, Feast of the Victorious Dead, Blessing of Frost.
+- **Need-keys Phase 2: enlist, and who crewed what** (2026-10-31; `keyword:enlist`,
+  `keyword:crewed-it-this-turn`, `trigger:crews-or-saddles`, `static:cant-crew`,
+  `condition:crewed-by-this-turn` partly) — `StaticAbility.enlist` asked through
+  `choose-permanents` after the attackers tap (702.154, 508.1), the pump a reflexive trigger, the
+  `enlists` trigger and `enlistedThisCombat`; `GameObject.crewedThisTurn`, `crewedSource`,
+  `crewedBy`, `crewedBySource`, the `crews-or-saddles` trigger and a `cant-crew` restriction
+  (702.122d); four manual checks; 16 freed. Coalition Warbrute, Guardian of New Benalia, Aradesh,
+  the Founder, Speedway Fanatic, Veteran Motorist, Reckless Velocitaur, Subterranean Schooner,
+  Getaway Car, Balthier and Fran, Revoke Privileges.
 - **Need-keys Phase 2: CardFilter clauses against a reference object** (2026-10-31; the
   shared-type group of `condition:filter-dynamic-compare` and the same-name group of
   `condition:filter-card-property-clauses`) — one `ShareReference` (the sacrificed permanent, the
