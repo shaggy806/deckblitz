@@ -722,7 +722,11 @@
   "cost:equip-ability-cost-reduction",
   "cost:ability-cost-reduction-exhaust",
   "static:cycling-cost-reduction",
-  "cost:loyalty-cost-increase"
+  "cost:loyalty-cost-increase",
+  "effect:each-creature-damages-itself",
+  "effect:each-creature-deals-damage-to-each-opponent",
+  "effect:each-creature-deals-power-damage-to-target",
+  "effect:each-permanent-deals-damage"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

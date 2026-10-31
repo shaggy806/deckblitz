@@ -2222,6 +2222,50 @@ export type EffectSpec =
       readonly amount: EffectAmount;
     }
   | {
+      /** Each battlefield permanent matching `filter` deals damage — its own
+       * power (`"its-power"`), or a fixed amount — to `to`, each permanent a
+       * source of its own (rule 120.1): its lifelink, deathtouch, infect and
+       * colours apply to what it deals, and a lifelinker's life is a gain of
+       * its own (702.15e). Who deals what is read once, before any of it is
+       * dealt (608.2h), and it is all dealt at once — one damage event, so a
+       * wither creature's -1/-1 counters can't shrink another's power first,
+       * and a creature dealt damage by three of them is dealt damage once.
+       *
+       * `to` is:
+       * - `"itself"` — "each creature deals damage to itself equal to its
+       *   power" (Solar Blaze; The Akroan War's "each **tapped** creature");
+       * - a target slot — "choose target creature you don't control. Each
+       *   creature you control that's a Wolf or a Werewolf deals damage equal
+       *   to its power to that creature" (Moonlight Hunt; Bartz and Boko's
+       *   "each **other** Bird", with `exceptSource`). Nothing is dealt when
+       *   the target has gone illegal (608.2b);
+       * - `"trigger-object"` — "each Dragon you control deals 1 damage to
+       *   **that creature**" (Sarkhan the Masterless's attacker), nothing
+       *   once it has left the battlefield;
+       * - `{ who }` — "each creature you control deals damage equal to its
+       *   power to **each opponent**" (Lukka, Coppercoat Outcast).
+       *
+       * A token stack deals its damage once per token: to itself, each
+       * token to itself; to anything else, as that many identical sources
+       * (`Game.dealDamage`'s `sources`). */
+      readonly kind: "each-deals-damage";
+      readonly filter: CardFilter;
+      readonly amount: EffectAmount | "its-power";
+      readonly to: "itself" | number | "trigger-object" | { readonly who: PlayerScope };
+      /** Only permanents the player in this target slot controls — or that
+       * permanent's controller: Alpha Brawl's "each of those creatures" (each
+       * other creature **that player** controls). Nothing when that target
+       * has gone illegal. */
+      readonly controlledByTarget?: number;
+      /** Not the effect's own source — Bartz and Boko's "each **other** Bird
+       * you control". */
+      readonly exceptSource?: true;
+      /** Not the permanent in this target slot — Alpha Brawl's "each
+       * **other** creature that player controls … deals damage equal to its
+       * power to that creature". */
+      readonly exceptTarget?: number;
+    }
+  | {
       /** Each affected player sacrifices `count` permanents matching `filter`
        * that they control (Diabolic Edict — `who: "target"`; Fleshbag
        * Marauder — `who: "each-player"`). Raises a `sacrifice` decision per
@@ -7636,6 +7680,20 @@ export interface EffectApi {
    * its own controller — see the `"creatures-damage-controllers"`
    * {@link EffectSpec}. */
   creaturesDamageControllers(filter: CardFilter, amount: number): void;
+  /** Every battlefield permanent matching `filter` (`whose` controls it, not
+   * the effect's source with `exceptSource`, not `except`) deals `amount` —
+   * or its own power — damage to itself or to each of `to`, all at once —
+   * see the `"each-deals-damage"` {@link EffectSpec}. */
+  eachDealsDamage(
+    dealers: {
+      readonly filter: CardFilter;
+      readonly exceptSource: boolean;
+      readonly except?: ObjectId;
+      readonly whose?: PlayerId;
+    },
+    amount: number | "its-power",
+    to: "itself" | readonly TargetRef[],
+  ): void;
   /** Each of `who` (a scope, or `{ player }` for a targeted edict) sacrifices
    * `count` permanents matching `filter`. */
   sacrificePermanents(
@@ -11358,6 +11416,38 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "creatures-damage-controllers":
       ctx.creaturesDamageControllers(spec.filter, amountValue(spec.amount, ctx));
       return;
+    case "each-deals-damage": {
+      // "Each of those creatures … that player controls": nothing once that
+      // target has gone illegal (rule 608.2b — its slot is blank).
+      let whose: PlayerId | undefined;
+      if (spec.controlledByTarget !== undefined) {
+        whose = scopedController(spec.controlledByTarget, ctx);
+        if (whose === undefined) return;
+      }
+      let to: "itself" | readonly TargetRef[];
+      if (spec.to === "itself") to = "itself";
+      else if (typeof spec.to === "object") {
+        to = ctx.playersInScope(spec.to.who).map((player): TargetRef => ({ kind: "player", player }));
+      } else {
+        // A target gone illegal, or a trigger's object that has left, is
+        // dealt nothing — and nothing deals it anything.
+        const recipient = resolveEffectTarget(spec.to, ctx);
+        if (recipient === undefined) return;
+        to = [recipient];
+      }
+      const except = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+      ctx.eachDealsDamage(
+        {
+          filter: spec.filter,
+          exceptSource: spec.exceptSource === true,
+          ...(except?.kind === "object" ? { except: except.object } : {}),
+          ...(whose !== undefined ? { whose } : {}),
+        },
+        spec.amount === "its-power" ? "its-power" : amountValue(spec.amount, ctx),
+        to,
+      );
+      return;
+    }
     case "sacrifice": {
       const exceptId = spec.exceptSource ? ctx.source : undefined;
       if (spec.who === "target") {

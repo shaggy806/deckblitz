@@ -25406,6 +25406,7 @@ export class Game {
       },
       creaturesDamageControllers: (filter, amount) =>
         this.creaturesDamageControllersByEffect(controller, filter, amount),
+      eachDealsDamage: (dealers, amount, to) => this.eachDealsDamageByEffect(source, controller, dealers, amount, to),
       sacrificePermanents: (who, filter, count, exceptId, exploit, andEach) => {
         // An exploit ability's sacrifice: its source exploits what's
         // sacrificed (rule 702.110b).
@@ -34418,6 +34419,60 @@ export class Game {
         }
       }
     }
+  }
+
+  /** See the `"each-deals-damage"` {@link EffectSpec}: every battlefield
+   * permanent matching the dealers' filter deals `amount` (or its own power)
+   * damage to itself or to each of `to`, each permanent its own source (rule
+   * 120.1). Who deals what is read first, once (608.2h), then all of it is
+   * dealt as one damage event (`withDamageBatch`): a wither creature's -1/-1
+   * counters don't shrink a later dealer's power, a lifelinker's life is its
+   * own gain (702.15e), and a creature dealt damage by several is dealt
+   * damage once. A source that would deal 0 deals nothing (120.8). */
+  private eachDealsDamageByEffect(
+    source: ObjectId,
+    you: PlayerId,
+    dealers: {
+      readonly filter: CardFilter;
+      readonly exceptSource: boolean;
+      readonly except?: ObjectId;
+      readonly whose?: PlayerId;
+    },
+    amount: number | "its-power",
+    to: "itself" | readonly TargetRef[],
+  ): void {
+    if (amount !== "its-power" && amount <= 0) return;
+    if (to !== "itself" && to.length === 0) return;
+    const dealing: { readonly id: ObjectId; readonly amount: number }[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      if (dealers.exceptSource && id === source) continue;
+      if (id === dealers.except) continue;
+      if (dealers.whose !== undefined && this.state.objects[id].controller !== dealers.whose) continue;
+      if (!matchesFilter(this.state, this.registry, id, dealers.filter, { you })) continue;
+      const dealt = amount === "its-power" ? computeCharacteristics(this.state, this.registry, id).power : amount;
+      if (dealt > 0) dealing.push({ id, amount: dealt });
+    }
+    if (dealing.length === 0) return;
+    this.withDamageBatch(() => {
+      for (const { id, amount: dealt } of dealing) {
+        if (this.state.objects[id]?.zone !== "battlefield") continue;
+        const tokens = this.state.objects[id].stackCount ?? 1;
+        if (to === "itself") {
+          // Each token of a stack deals its damage to itself: wake them
+          // into one object each (a stack is only a representation).
+          const each = tokens > 1 ? this.materializeStack(id, undefined, Game.MAX_EFFECT_INSTANCES) : [id];
+          for (const token of each) this.dealDamage(token, { kind: "object", object: token }, dealt);
+          continue;
+        }
+        // To anything else, a stack's tokens are that many identical
+        // sources dealing it at once (`dealDamage`'s `sources`).
+        const sources = Math.min(tokens, Game.MAX_EFFECT_INSTANCES);
+        for (const recipient of to) {
+          if (recipient.kind === "object" && this.state.objects[recipient.object]?.zone !== "battlefield") continue;
+          this.dealDamage(id, recipient, dealt, false, undefined, sources);
+        }
+      }
+    });
   }
 
   // --- sacrifice as an effect (edicts) -----------------------------

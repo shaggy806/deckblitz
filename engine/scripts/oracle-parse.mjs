@@ -648,6 +648,52 @@ function aggregateSetOf(phrase) {
 }
 
 /**
+ * The permanents of an "each … deals damage" (`each-deals-damage`): "creature",
+ * "tapped creature", "other Bird you control", "modified creature you
+ * control", "creature you control that's a Wolf or a Werewolf", "creature
+ * with power 4 or greater you control", "creature you control with a +1/+1
+ * counter on it" — as `{ filter, exceptSource? }`, or `null`. With `power`
+ * (the damage is its power) a bare subtype is a creature's: a noncreature
+ * permanent has no power to deal (rule 208.3).
+ */
+function dealersOf(phrase, power) {
+  let rest = phrase;
+  const filter = {};
+  let exceptSource = false;
+  let m;
+  if ((m = /^other (.+)$/.exec(rest))) {
+    exceptSource = true;
+    rest = m[1];
+  }
+  if ((m = /^(.+) you control that's an? ([A-Z][a-z]+) or an? ([A-Z][a-z]+)$/.exec(rest))) {
+    filter.controlledBy = "you";
+    filter.subtypes = [m[2], m[3]];
+    rest = m[1];
+  } else if ((m = /^(.+) you control with an? \+1\/\+1 counter on it$/.exec(rest))) {
+    filter.controlledBy = "you";
+    filter.counters = { kind: "+1/+1", compare: { op: "gte", n: 1 } };
+    rest = m[1];
+  } else if ((m = /^(.+) you control$/.exec(rest))) {
+    filter.controlledBy = "you";
+    rest = m[1];
+  }
+  if ((m = /^(.+) with power (\d+) or greater$/.exec(rest))) {
+    filter.power = { op: "gte", n: Number(m[2]) };
+    rest = m[1];
+  }
+  if ((m = /^(tapped|modified) (.+)$/.exec(rest))) {
+    filter[m[1]] = true;
+    rest = m[2];
+  }
+  const kind = parseTypePhrase(rest);
+  if (kind === null || Object.keys(kind).length === 0) return null;
+  if (kind.typesAnyOf !== undefined || kind.types !== undefined) return null;
+  if (filter.subtypes !== undefined && kind.subtype !== undefined) return null;
+  if (power && kind.type === undefined && kind.subtype !== undefined) kind.type = "creature";
+  return { filter: { ...kind, ...filter }, ...(exceptSource ? { exceptSource: true } : {}) };
+}
+
+/**
  * "the greatest power among creatures you control and creature cards in your
  * graveyard", "the total mana value of instant and sorcery cards in your
  * graveyard", "the total number of instant and sorcery cards you own in exile
@@ -1749,6 +1795,24 @@ export function parseSentence(sentence, ctx) {
     return { kind: "damage-all", amount: amount(m[1]), filter: { type: "creature", controlledBy: "opponent" } };
   }
   if ((m = re(`~ fights (${TARGET})`).exec(s))) return { kind: "fight", a: "source", b: slot(m[1]) };
+  // Every permanent of a kind its own source (`each-deals-damage`): "each
+  // creature deals damage to itself equal to its power" (Solar Blaze), "each
+  // other Bird you control deals damage equal to its power to target creature
+  // an opponent controls" (Bartz and Boko), "each creature you control deals
+  // damage equal to its power to each opponent" (Lukka), "each Dragon you
+  // control deals 1 damage to …".
+  if ((m = re(`each (.+?) deals damage to itself equal to its power`).exec(s))) {
+    const dealers = dealersOf(m[1], true);
+    if (dealers !== null) return { kind: "each-deals-damage", ...dealers, amount: "its-power", to: "itself" };
+  }
+  if ((m = re(`each (.+?) deals (?:damage equal to its power|${N} damage) to (each opponent|${TARGET})`).exec(s))) {
+    const power = m[2] === undefined;
+    const dealers = dealersOf(m[1], power);
+    const to = dealers === null ? undefined : m[3].toLowerCase() === "each opponent" ? { who: "each-opponent" } : slot(m[3]);
+    if (dealers !== null && to !== undefined) {
+      return { kind: "each-deals-damage", ...dealers, amount: power ? "its-power" : amount(m[2]), to };
+    }
+  }
 
   // Tokens.
   // One kind of token, its "with" a list of keywords only: "create a Food
@@ -2780,6 +2844,21 @@ export function parseEffect(text, outer) {
       }
       skip = energyPay.used - 1;
       continue;
+    }
+    // "Choose target creature you don't control. Each creature you control
+    // that's a Wolf or a Werewolf deals damage equal to its power to that
+    // creature." (Moonlight Hunt): the second sentence, read with the target
+    // in place of "that creature" (`each-deals-damage`).
+    const chooseM = /^choose (target [a-z' ]+)\.$/i.exec(sentence);
+    const thatM = chooseM === null ? null : /^(each .+ deals .+ to )that (?:creature|permanent)\.$/i.exec(sentences[i + 1] ?? "");
+    if (chooseM !== null && thatM !== null) {
+      const effect = parseSentence(`${thatM[1]}${chooseM[1]}.`, ctx);
+      if (effect !== null && effect.kind === "each-deals-damage" && !containsUndefined(effect)) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        skip = 1;
+        continue;
+      }
     }
     // Parley (an ability word): "Each player reveals the top card of their
     // library. For each nonland card revealed this way, X. Then each player

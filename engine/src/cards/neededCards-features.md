@@ -501,6 +501,25 @@ count (Kozilek, the Broken Reality), "as this enters, turn all other …
 face down" (Ixidron), a copy that lasts until turned face down (Vesuvan
 Shapeshifter), a trigger's "its owner" player (Thieving Amalgam).
 
+### Each permanent of a kind deals damage — built 2026-10-31
+
+The need-keys Phase 2 family `effect:each-creature-damages-itself`, its group
+whole, features only. One **`each-deals-damage`** effect: every permanent
+matching a filter deals damage — its own power (`"its-power"`) or a fixed
+amount — to `to`: `"itself"`, a target slot, the trigger's object, or `{ who }`
+(each opponent), with `controlledByTarget`, `exceptSource` and `exceptTarget`.
+Each permanent is its own source (rule 120.1: its lifelink, deathtouch, infect;
+a lifelinker's own gain, 702.15e), who deals what is read once before any is
+dealt (608.2h), and it is one damage event (`withDamageBatch` — enrage once); a
+token stack deals once per token (to itself, each token woken; else as that
+many sources). The scaffolder reads "each [kind] deals damage to itself equal
+to its power", "… equal to its power / N damage to [target | each opponent]",
+and "Choose target X. Each … to that creature." Keys:
+each-creature-damages-itself, each-creature-deals-damage-to-each-opponent,
+each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
+Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
+Signature Slam, Alpha Brawl.
+
 ### Meld — built 2026-10-31
 
 The need-keys Phase 2 family `mechanic:meld`, features only (rules 701.42,

@@ -219,6 +219,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.filter.sharesColorWithTarget, "harm", MAJOR);
   },
   "creatures-damage-controllers": none,
+  // "Each creature you control deals damage equal to its power to target
+  // creature you don't control" (Moonlight Hunt): the target is the victim.
+  // Alpha Brawl's "each other creature that player controls … to that
+  // creature": that player's creatures do the damage to their own.
+  "each-deals-damage": (n, v) => {
+    if (typeof n.to === "number") v.touch(n.to, "harm", MAJOR);
+    v.touch(n.controlledByTarget, "harm", MAJOR);
+  },
   // An edict: the targeted player picks what goes, so it is major rather
   // than decisive — nothing in particular is removed.
   sacrifice: (n, v) => v.touch(n.who === "target" ? 0 : undefined, "harm", MAJOR),

@@ -4208,3 +4208,52 @@ describe("cost changes for one kind of ability (rule 602.2b)", () => {
     });
   });
 });
+
+describe("each permanent of a kind deals damage (each-deals-damage)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+
+  it("reads damage to itself, to a target, and to each opponent", () => {
+    const blaze = face("Solar Blaze", "Sorcery", "Each creature deals damage to itself equal to its power.");
+    expect(blaze.complete).toBe(true);
+    expect(blaze.effect).toEqual({ kind: "each-deals-damage", filter: { type: "creature" }, amount: "its-power", to: "itself" });
+    const war = face("Test War", "Sorcery", "Each tapped creature deals damage to itself equal to its power.");
+    expect(war.effect).toMatchObject({ filter: { type: "creature", tapped: true }, to: "itself" });
+    const bartz = face(
+      "Bartz and Boko",
+      "Legendary Creature — Human Bird",
+      "When Bartz and Boko enters, each other Bird you control deals damage equal to its power to target creature an opponent controls.",
+    );
+    expect(bartz.triggered[0].effect).toEqual({
+      kind: "each-deals-damage",
+      filter: { type: "creature", subtype: "Bird", controlledBy: "you" },
+      exceptSource: true,
+      amount: "its-power",
+      to: 0,
+    });
+    expect(bartz.triggered[0].targets).toEqual(["creature-an-opponent-controls"]);
+    const lukka = face("Test Lukka", "Sorcery", "Each creature you control deals damage equal to its power to each opponent.");
+    expect(lukka.effect).toMatchObject({ amount: "its-power", to: { who: "each-opponent" } });
+    // A fixed amount: a noncreature Dragon deals it too, so no creature type is added.
+    const dragons = face("Test Dragons", "Sorcery", "Each Dragon you control deals 1 damage to target creature.");
+    expect(dragons.effect).toEqual({ kind: "each-deals-damage", filter: { subtype: "Dragon", controlledBy: "you" }, amount: 1, to: 0 });
+    // Not a kind of permanent: left alone.
+    expect(face("Test", "Sorcery", "Each opponent deals damage to itself equal to its power.").complete).toBe(false);
+  });
+
+  it("reads \"choose target …\" with the next sentence's \"that creature\"", () => {
+    const hunt = face(
+      "Moonlight Hunt",
+      "Instant",
+      "Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.",
+    );
+    expect(hunt.complete).toBe(true);
+    expect(hunt.targets).toEqual(["creature-an-opponent-controls"]);
+    expect(hunt.effect).toEqual({
+      kind: "each-deals-damage",
+      filter: { type: "creature", controlledBy: "you", subtypes: ["Wolf", "Werewolf"] },
+      amount: "its-power",
+      to: 0,
+    });
+  });
+});
