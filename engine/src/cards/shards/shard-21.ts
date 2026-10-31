@@ -551,6 +551,7 @@ import _poolRavensCrime from "../pool/ravens-crime.js";
 import _poolRaze from "../pool/raze.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
+import _poolRecklessVelocitaur from "../pool/reckless-velocitaur.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
@@ -1381,6 +1382,7 @@ const shard: CardShard = {
     _poolRaze,
     _poolRazortoothRats,
     _poolReaveSoul,
+    _poolRecklessVelocitaur,
     _poolRedHerring,
     _poolRedeem,
     _poolRefuse,

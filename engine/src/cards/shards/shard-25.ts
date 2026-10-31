@@ -571,6 +571,7 @@ import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
 import _poolRevelOfTheFallenGod from "../pool/revel-of-the-fallen-god.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
+import _poolRevokePrivileges from "../pool/revoke-privileges.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
 import _poolRibbonSnake from "../pool/ribbon-snake.js";
@@ -1409,6 +1410,7 @@ const shard: CardShard = {
     _poolRevelOfTheFallenGod,
     _poolReverberatingSummons,
     _poolReverentHoplite,
+    _poolRevokePrivileges,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
     _poolRibbonSnake,

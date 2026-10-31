@@ -772,6 +772,7 @@ import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
 import _poolVengefulRebirth from "../pool/vengeful-rebirth.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVeteranCathar from "../pool/veteran-cathar.js";
+import _poolVeteranMotorist from "../pool/veteran-motorist.js";
 import _poolVeteranWarleader from "../pool/veteran-warleader.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
 import _poolVileDeacon from "../pool/vile-deacon.js";
@@ -1613,6 +1614,7 @@ const shard: CardShard = {
     _poolVengefulRebirth,
     _poolVesselOfVolatility,
     _poolVeteranCathar,
+    _poolVeteranMotorist,
     _poolVeteranWarleader,
     _poolVigorbloomVanguard,
     _poolVileDeacon,

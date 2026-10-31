@@ -36,6 +36,7 @@ import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolApexHawks from "../pool/apex-hawks.js";
 import _poolApprenticeSorcerer from "../pool/apprentice-sorcerer.js";
 import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
+import _poolAradeshTheFounder from "../pool/aradesh-the-founder.js";
 import _poolArcaneSpyglass from "../pool/arcane-spyglass.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
@@ -291,6 +292,7 @@ import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGavonySilversmith from "../pool/gavony-silversmith.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
 import _poolGetLost from "../pool/get-lost.js";
+import _poolGetawayCar from "../pool/getaway-car.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
 import _poolGhirapurGuide from "../pool/ghirapur-guide.js";
 import _poolGhirapurOsprey from "../pool/ghirapur-osprey.js";
@@ -904,6 +906,7 @@ const shard: CardShard = {
     _poolApexHawks,
     _poolApprenticeSorcerer,
     _poolAquaticAlchemist,
+    _poolAradeshTheFounder,
     _poolArcaneSpyglass,
     _poolArcboundRavager,
     _poolArcboundStinger,
@@ -1159,6 +1162,7 @@ const shard: CardShard = {
     _poolGavonySilversmith,
     _poolGearbaneOrangutan,
     _poolGetLost,
+    _poolGetawayCar,
     _poolGethsGrimoire,
     _poolGhirapurGuide,
     _poolGhirapurOsprey,

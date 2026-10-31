@@ -710,6 +710,7 @@ import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
+import _poolSubterraneanSchooner from "../pool/subterranean-schooner.js";
 import _poolSuddenShock from "../pool/sudden-shock.js";
 import _poolSugarCoat from "../pool/sugar-coat.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
@@ -1590,6 +1591,7 @@ const shard: CardShard = {
     _poolStormwildCapridor,
     _poolStrixhavenStadium,
     _poolStruggleForSkemfar,
+    _poolSubterraneanSchooner,
     _poolSuddenShock,
     _poolSugarCoat,
     _poolSunWarriors,

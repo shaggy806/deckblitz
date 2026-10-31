@@ -600,6 +600,7 @@ import _poolSparkmageApprentice from "../pool/sparkmage-apprentice.js";
 import _poolSpecterOfMortality from "../pool/specter-of-mortality.js";
 import _poolSpectralDeluge from "../pool/spectral-deluge.js";
 import _poolSpectralSailor from "../pool/spectral-sailor.js";
+import _poolSpeedwayFanatic from "../pool/speedway-fanatic.js";
 import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSphinxOfForesight from "../pool/sphinx-of-foresight.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
@@ -1382,6 +1383,7 @@ const shard: CardShard = {
     _poolSpecterOfMortality,
     _poolSpectralDeluge,
     _poolSpectralSailor,
+    _poolSpeedwayFanatic,
     _poolSpellSnip,
     _poolSphinxOfForesight,
     _poolSpiderManNoir,
