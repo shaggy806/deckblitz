@@ -169,6 +169,7 @@ import _poolConversion from "../pool/conversion.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
 import _poolCourtHomunculus from "../pool/court-homunculus.js";
+import _poolCoward from "../pool/coward.js";
 import _poolCranialArchive from "../pool/cranial-archive.js";
 import _poolCrashingBoars from "../pool/crashing-boars.js";
 import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
@@ -368,6 +369,7 @@ import _poolHiddenPredators from "../pool/hidden-predators.js";
 import _poolHighlandBerserker from "../pool/highland-berserker.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
+import _poolHiveheartShaman from "../pool/hiveheart-shaman.js";
 import _poolHomarid from "../pool/homarid.js";
 import _poolHonoredCropCaptain from "../pool/honored-crop-captain.js";
 import _poolHopefulInitiate from "../pool/hopeful-initiate.js";
@@ -408,6 +410,7 @@ import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIthHighArcanist from "../pool/ith-high-arcanist.js";
+import _poolIxalansBinding from "../pool/ixalans-binding.js";
 import _poolIzzetChemister from "../pool/izzet-chemister.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJaggedPoppet from "../pool/jagged-poppet.js";
@@ -1013,6 +1016,7 @@ const shard: CardShard = {
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
     _poolCourtHomunculus,
+    _poolCoward,
     _poolCranialArchive,
     _poolCrashingBoars,
     _poolCrimestopperSprite,
@@ -1212,6 +1216,7 @@ const shard: CardShard = {
     _poolHighlandBerserker,
     _poolHinderingLight,
     _poolHireACrew,
+    _poolHiveheartShaman,
     _poolHomarid,
     _poolHonoredCropCaptain,
     _poolHopefulInitiate,
@@ -1252,6 +1257,7 @@ const shard: CardShard = {
     _poolIsaoEnlightenedBushi,
     _poolIsolationCell,
     _poolIthHighArcanist,
+    _poolIxalansBinding,
     _poolIzzetChemister,
     _poolJacesSanctum,
     _poolJaggedPoppet,

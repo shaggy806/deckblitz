@@ -148,6 +148,7 @@ import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCreepyDoll from "../pool/creepy-doll.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
+import _poolCrownOfVigor from "../pool/crown-of-vigor.js";
 import _poolCruelFeeding from "../pool/cruel-feeding.js";
 import _poolCryoclasm from "../pool/cryoclasm.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
@@ -218,6 +219,7 @@ import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
 import _poolEverdawnChampion from "../pool/everdawn-champion.js";
 import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
+import _poolExclusionRitual from "../pool/exclusion-ritual.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
 import _poolExperimentalAugury from "../pool/experimental-augury.js";
@@ -783,6 +785,7 @@ import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
+import _poolUrzasBauble from "../pool/urzas-bauble.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
 import _poolVaevictisAsmadi from "../pool/vaevictis-asmadi.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
@@ -1017,6 +1020,7 @@ const shard: CardShard = {
     _poolCreepyDoll,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
+    _poolCrownOfVigor,
     _poolCruelFeeding,
     _poolCryoclasm,
     _poolCryptSliver,
@@ -1087,6 +1091,7 @@ const shard: CardShard = {
     _poolEtherswornAdjudicator,
     _poolEverdawnChampion,
     _poolEvolutionaryLeap,
+    _poolExclusionRitual,
     _poolExemplarOfLight,
     _poolExorcist,
     _poolExperimentalAugury,
@@ -1652,6 +1657,7 @@ const shard: CardShard = {
     _poolUnravelTheAether,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
+    _poolUrzasBauble,
     _poolUtvaraScalper,
     _poolVaevictisAsmadi,
     _poolValleyMightcaller,

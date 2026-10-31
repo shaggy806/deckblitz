@@ -176,6 +176,7 @@ import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolCunning from "../pool/cunning.js";
 import _poolCursedRonin from "../pool/cursed-ronin.js";
+import _poolCylianSunsinger from "../pool/cylian-sunsinger.js";
 import _poolCytoplastRootKin from "../pool/cytoplast-root-kin.js";
 import _poolDangerous from "../pool/dangerous.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
@@ -512,6 +513,7 @@ import _poolMinotaurExplorer from "../pool/minotaur-explorer.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
+import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
 import _poolMoonveilDragon from "../pool/moonveil-dragon.js";
@@ -1076,6 +1078,7 @@ const shard: CardShard = {
     _poolCunningSurvivor,
     _poolCunning,
     _poolCursedRonin,
+    _poolCylianSunsinger,
     _poolCytoplastRootKin,
     _poolDangerous,
     _poolDaringApprentice,
@@ -1412,6 +1415,7 @@ const shard: CardShard = {
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMirozel,
+    _poolMitoticManipulation,
     _poolMoldervineReclamation,
     _poolMonoistCircuitFeeder,
     _poolMoonveilDragon,

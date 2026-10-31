@@ -104,6 +104,7 @@ import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolClockworkHydra from "../pool/clockwork-hydra.js";
+import _poolCloudsteelKirin from "../pool/cloudsteel-kirin.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolCoilingWoodworm from "../pool/coiling-woodworm.js";
 import _poolCoinOfMastery from "../pool/coin-of-mastery.js";
@@ -118,6 +119,7 @@ import _poolCoralReef from "../pool/coral-reef.js";
 import _poolCoronationOfChaos from "../pool/coronation-of-chaos.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
+import _poolCriminalPast from "../pool/criminal-past.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
@@ -318,6 +320,7 @@ import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
 import _poolHidetsuguDevouringChaos from "../pool/hidetsugu-devouring-chaos.js";
 import _poolHighSpeedHoverbike from "../pool/high-speed-hoverbike.js";
+import _poolHiredTorturer from "../pool/hired-torturer.js";
 import _poolHoofprintsOfTheStag from "../pool/hoofprints-of-the-stag.js";
 import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
@@ -950,6 +953,7 @@ const shard: CardShard = {
     _poolCitanulCentaurs,
     _poolCleverConjurer,
     _poolClockworkHydra,
+    _poolCloudsteelKirin,
     _poolCocoon,
     _poolCoilingWoodworm,
     _poolCoinOfMastery,
@@ -964,6 +968,7 @@ const shard: CardShard = {
     _poolCoronationOfChaos,
     _poolCranialPlating,
     _poolCrawlingSensation,
+    _poolCriminalPast,
     _poolCrimsonCaravaneer,
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
@@ -1164,6 +1169,7 @@ const shard: CardShard = {
     _poolHerosDownfall,
     _poolHidetsuguDevouringChaos,
     _poolHighSpeedHoverbike,
+    _poolHiredTorturer,
     _poolHoofprintsOfTheStag,
     _poolHorizonOfProgress,
     _poolHornOfGreed,

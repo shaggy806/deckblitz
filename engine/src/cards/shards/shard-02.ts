@@ -485,6 +485,7 @@ import _poolNissasEncouragement from "../pool/nissas-encouragement.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
 import _poolNivixGuildmage from "../pool/nivix-guildmage.js";
 import _poolNobleBanneret from "../pool/noble-banneret.js";
+import _poolNomadMythmaker from "../pool/nomad-mythmaker.js";
 import _poolNorwoodRiders from "../pool/norwood-riders.js";
 import _poolNotionRain from "../pool/notion-rain.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
@@ -605,6 +606,7 @@ import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
 import _poolScytheclaw from "../pool/scytheclaw.js";
 import _poolSearingBarrage from "../pool/searing-barrage.js";
+import _poolSedgeSliver from "../pool/sedge-sliver.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
@@ -1322,6 +1324,7 @@ const shard: CardShard = {
     _poolNissasExpedition,
     _poolNivixGuildmage,
     _poolNobleBanneret,
+    _poolNomadMythmaker,
     _poolNorwoodRiders,
     _poolNotionRain,
     _poolNoviceInspector,
@@ -1442,6 +1445,7 @@ const shard: CardShard = {
     _poolScrybSprites,
     _poolScytheclaw,
     _poolSearingBarrage,
+    _poolSedgeSliver,
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,

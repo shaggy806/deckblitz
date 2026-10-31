@@ -56,6 +56,7 @@ import _poolBifurcate from "../pool/bifurcate.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
+import _poolBitterheartWitch from "../pool/bitterheart-witch.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlazingSpecter from "../pool/blazing-specter.js";
 import _poolBlightwingBandit from "../pool/blightwing-bandit.js";
@@ -365,6 +366,7 @@ import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKeldonMarauders from "../pool/keldon-marauders.js";
+import _poolKiller from "../pool/killer.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKitsuneBlademaster from "../pool/kitsune-blademaster.js";
@@ -445,6 +447,7 @@ import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMindstabThrull from "../pool/mindstab-thrull.js";
 import _poolMiracleWorker from "../pool/miracle-worker.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
+import _poolMirrorOfLifeTrapping from "../pool/mirror-of-life-trapping.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMisstep from "../pool/misstep.js";
@@ -481,6 +484,7 @@ import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
+import _poolONaginata from "../pool/o-naginata.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOffBalance from "../pool/off-balance.js";
@@ -913,6 +917,7 @@ const shard: CardShard = {
     _poolBighornerRancher,
     _poolBindingAgony,
     _poolBirdMaiden,
+    _poolBitterheartWitch,
     _poolBlackWidowDoubleAgent,
     _poolBlazingSpecter,
     _poolBlightwingBandit,
@@ -1222,6 +1227,7 @@ const shard: CardShard = {
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKeldonMarauders,
+    _poolKiller,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
     _poolKitsuneBlademaster,
@@ -1302,6 +1308,7 @@ const shard: CardShard = {
     _poolMindstabThrull,
     _poolMiracleWorker,
     _poolMirkwoodSpider,
+    _poolMirrorOfLifeTrapping,
     _poolMirrorshellCrab,
     _poolMisleadingMotes,
     _poolMisstep,
@@ -1338,6 +1345,7 @@ const shard: CardShard = {
     _poolNineTailWhiteFox,
     _poolNovelNunchaku,
     _poolNykthosShrineToNyx,
+    _poolONaginata,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
     _poolOffBalance,

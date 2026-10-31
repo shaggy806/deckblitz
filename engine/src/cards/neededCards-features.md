@@ -525,6 +525,52 @@ static:chosen-creature-type-reads, static:chosen-type-in-addition. Still open:
 decision:choose-name-and-type-on-attach (Psychic Paper), two colours chosen as
 it enters (Seal of the Guildpact, Tablet of the Guilds).
 
+### A static granting a static — built 2026-10-31
+
+The need-keys Phase 2 family `static:grant-static-ability`, features only.
+`StaticAbility.grantsStatic` grants static abilities to every object a
+static affects (rule 613.1f, layer 6), each working from the object that has
+it (113.10 — its "you", "this creature" and "equipped creature"), timestamped
+by the later of the two (613.7a) and lost to a later loss of all abilities.
+`grantedStatics` now returns these beside a `grant-static`'s, so the layer
+fold (`contributingStaticSources`), `playerStaticHolds`, `hasOwnStatic` and
+the block rules read them; `staticGrantSources` is gated by an epoch-memoized
+scan and guarded against re-entry (`staticGrantsInProgress`). Key:
+static:grant-static-ability. Proving cards: Inspiring Leader, Criminal Past,
+Sedge Sliver, Cloudsteel Kirin, Rune of Might, Rune of Speed, Rune of Flight,
+Rune of Mortality. Still open: a granted cost reduction (Acolyte of Bahamut —
+`costModificationFor` reads printed statics only), a granted prevention
+replacement (Caduceus, Staff of Hermes), Blood tokens becoming Equipment with
+a granted static and equip (Arterial Alchemy — layer 4 plus the grant), job
+select (Dancer's Chakrams), absorb (Lymph Sliver).
+
+### Attach hosts: chosen as it enters, a player, what was put this way, chosen as it resolves — built 2026-10-31
+
+The need-keys Phase 2 family `effect:attach-extensions`, features only. An
+`attachedTo` (`AttachHostRef`) on `put-onto-battlefield`,
+`return-from-graveyard`, `search-library` and `look-and-choose` may name a
+**player** in a slot (a Curse, rule 303.4) or `{ among }` — a permanent
+chosen as the card enters (an Aura's 303.4f choice limited to the filter; an
+Equipment's `enterChoice.attachHost`, none and it enters unattached, 301.5e).
+`attach` takes `"put-this-way"` (the card the resolution put onto the
+battlefield) and `ontoChosen` (a host chosen as it resolves among those it
+can legally go on, `another` for "another permanent"). The static
+`attachOnlyTo` ("can be attached only to a creature with power 3 or greater",
+rule 301.5c) is read by `canEquip`, so equip resolves without moving it and
+704.5n unattaches it. Keys: effect:attach-extensions (partly),
+put-onto-battlefield-attached, search-library-attach-to-trigger-object,
+put-aura-cards-onto-battlefield-attached-to-self, aura-returns-attached,
+attach-aura-to-chosen-creature, attach-to-chosen-permanent-it-can-enchant,
+static:equip-only-to-filter. Proving cards: One Last Job, Nomad Mythmaker,
+Bitterheart Witch, Arachnus Spinner, Academy Researchers, Pre-War Formalwear,
+Stonehewer Giant, Aura Graft, O-Naginata, Gate Smasher. Still open: Animate
+Dead's and Necromancy's enchant-ability swap, a for-each choice per Aura and
+Equipment (Inventory Management), "the creature this is attached to" as an
+effect's object (Ring of Valkas), Auras that could enchant a creature as a
+search filter (Sovereigns of Lost Alara), any number of target cards each
+entering attached (Mantle of the Ancients), delayed returns attached to a
+returned creature (Gift of Immortality, Next of Kin).
+
 ### Flash permissions for any player, first each turn, this turn, next spell — built 2026-10-31
 
 The need-keys Phase 2 family `effect:cast-and-activate-restrictions`, its top
@@ -724,6 +770,55 @@ each-creature-deals-power-damage-to-target, each-permanent-deals-damage.
 Proving cards: Solar Blaze, Wave of Reckoning, Moonlight Hunt, Bartz and Boko,
 Signature Slam, Alpha Brawl.
 
+### Cards exiled with the source put onto the battlefield — built 2026-10-31
+
+The need-keys Phase 2 family `effect:put-onto-battlefield-options`, its top
+group, features only (rules 110.2a, 607.2a, 610.3c). **`look-and-choose`'s
+`zone: "exiled-with-source"`** offers only the cards linked to the source in
+the stint the ability refers to, under the chooser's control, with the exile
+branch now carrying `withCounters`, `enterAs` and `attacking` as the others
+do — Nautiloid Ship's "you may put a creature card exiled with this Vehicle
+onto the battlefield under your control", Chaos Shrine's Black Crystal's
+finality counter. **`return-exiled-by-source`'s linked battlefield return**
+takes `under: "you"` ("put all cards exiled with it onto the battlefield" —
+the putting player's control, 110.2a, Underworld Sentinel), `others` (not the
+cards this resolution just exiled) and `filter` ("all other permanent cards"
+— Mirror of Life Trapping). **`exile-graveyard`'s `linked`** exiles a
+graveyard with the source. Keys: effect:put-exiled-with-source-onto-battlefield,
+effect:return-other-cards-exiled-with-source, effect:exile-graveyard-linked.
+Proving cards: Nautiloid Ship, Chaos Shrine's Black Crystal, Underworld
+Sentinel, Mirror of Life Trapping (`put-exiled-with-source.test.ts`). Left:
+effect:return-with-counters-this-way (Lagrella's "when an exiled card enters
+under your control this way, put two +1/+1 counters on it" is a trigger on
+the until-leaves return), Ghost Vacuum's "1/1 Spirit in addition" (a base
+P/T as it enters), The Darkness Crystal's replacement exile and its target
+card in exile, Yggdrasil's linked library exile, Sisters of Stone Death's
+blocking filter.
+
+### A card at random from a hand or from the cards exiled with the source — built 2026-10-31
+
+The need-keys Phase 2 family `effect:random-choice`, its top group, features
+only (rules 400.2, 607.2a, 701.20a). **`choose-random-card`'s `zone: "hand"`**
+picks from a hand — `whose` now also a player named through a target
+(`{ controllerOfTarget: 0 }`) — and **`show`** says how it's seen: `"reveal"`
+to every player (`revealedThisTurn`), `"look"` to the effect's controller
+alone (a one-card `choose-from-zone` with nothing to pick, closed by its
+viewer), or nothing when `then`'s move shows it. **`zone:
+"exiled-with-source"`** picks among the cards linked to the source in the
+stint the ability refers to (`cardsExiledWithSource`). **`slot`** puts the
+picked card beside the ability's own targets (`ResolutionContext.withFoundAt`)
+instead of replacing them as target 0 — Cursed Scroll's "any target" and
+Singe-Mind Ogre's "that card's mana value". `then` is optional (a bare reveal
+or look). Riding along: **`search-library`'s `linked`** exiles the finds with
+the source. Keys: effect:random-card-from-hand,
+effect:random-card-from-linked-exile. Proving cards: Cursed Scroll, Magus of
+the Scroll, Hired Torturer, Singe-Mind Ogre, Urza's Bauble, Skyship
+Weatherlight (`random-card-from-zone.test.ts`). The freed cards each need a
+look (Wand of Ith's "unless they pay life", Friendly Fire's damage to the
+creature and the player at once, Dementia Sliver's granted ability, River
+Song's Diary's imprint replacement); the family's other units (random target,
+random mode announced, random among chosen) are separate.
+
 ### Cards a player owns, taken from exile — built 2026-10-31
 
 The need-keys Phase 2 family `cost:put-opponent-exiled-card-into-graveyard`,
@@ -854,6 +949,60 @@ permanent that can't phase out still phases out indirectly with its host is
 a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
+
+### The same name as a reference object — built 2026-10-31
+
+The need-keys Phase 2 family `condition:filter-card-property-clauses`, its
+same-name group, features only, on the shared-type group's `ShareReference`
+(below), which gains `"exiled-with-source"` (the cards exiled with the source,
+rule 607.2a, or until it leaves, 610.3) and `{ permanents: filter }`. One
+**`sameNameWith`** clause (rule 201.2a, a reference object itself included):
+bound in an effect to `sameNameAsAny`, read live in a static's prohibition or
+a trigger's filter for the source, exiled-with-source, controlled and
+permanents references. `ResolutionContext.permanentsMatching` now reads with
+the source (`isSource: false` — "another creature you control"). The
+scaffolder reads "(Your opponents | Players) can't (cast spells | play
+nonbasic lands) with the same name as (the exiled card | a nontoken
+permanent)" — linking the card's own exile — and "this creature and each
+other creature with the same name as it get …". Keys:
+condition:filter-same-name-as-source, filter:same-name-as-a-permanent,
+condition:filter-same-name-as-permanent-you-control. Left in the group:
+filter:same-name-as-trigger-spell (Harness the Storm's target filter, read as
+the trigger is put on the stack — target legality, not an effect's filter),
+condition:filter-same-name-as-chosen (Canoptek Wraith's land chosen as it
+resolves), filter:same-name-as-card-in-casters-graveyard (Dragonlord
+Kolaghan: "their graveyard", the caster's, from a trigger filter). Still open
+on built keys' cards: the copy-with-an-ability cards (Callidus Assassin, Evil
+Twin, Pirated Copy), Retraced Image's reveal-then-maybe, Search the City.
+Proving cards: Ixalan's Binding, Exclusion Ritual, Cornered Market, Mitotic
+Manipulation, Pattern Matcher, Cylian Sunsinger.
+
+### Shares a type with a reference object — built 2026-10-31
+
+The need-keys Phase 2 family `condition:filter-dynamic-compare`, its
+shared-type group, features only. The `CardFilter` clauses
+**`sharesCardTypeWith`**, **`sharesPermanentTypeWith`**,
+**`sharesCreatureTypeWith`** and the new **`sharesLandTypeWith`** all take one
+**`ShareReference`**: `"sacrificed"`, `"trigger-object"`, `"source"`,
+`"attached"` (the host, or the one last attached to as the Aura was
+sacrificed), `"chosen"`, a target slot (as it last existed if it moved), or
+`{ controlled: filter }` (every permanent you control matching it). Bound as
+the effect applies to a `sharesTypeWith` entry: the reference objects always
+match ("target creature **and each other** creature that shares…"), anything
+else needs one of their types of that kind (rules 205.2a, 110.4, 205.3i,
+205.3m; changeling 702.73a through `hasSubtype`). The scaffolder reads
+radiance's "and each other X that shares a creature/card type with it", the
+Crowns' "enchanted creature and other creatures that share a creature type
+with it get / gain …", "destroy all creatures that share a creature type with
+the sacrificed creature" with "They can't be regenerated.", and Hiveheart
+Shaman's search. Keys: shares-creature-type-with-attached,
+shares-creature-type-with-sacrificed, shares-creature-type-with-target,
+shares-card-type-with-target, shares-land-type-with-controlled. Left on their
+cards: Raise the Draugr's two targets sharing a type with each other (a
+target-legality constraint between slots), Cemetery Gatekeeper's linked
+exiled card, Spirit-Sister's Call's granted replacement. Proving cards: Crown
+of Vigor, Crown of Ascension, Endemic Plague, Pyre of Heroes, Coward //
+Killer, Counterlash, Reality Scramble, Hiveheart Shaman.
 
 ### Counters of chosen kinds removed — built 2026-10-31
 

@@ -67,6 +67,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
   name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
   and offer a variant each, its `altCostText` telling them apart.
+- **Granted statics don't reach cost changes or prevention.** `StaticAbility.grantsStatic` (built
+  2026-10-31) reaches the layer fold, "can't lose the game", untap and block rules, but not
+  cost modifications or prevention replacements: Acolyte of Bahamut, Caduceus, Staff of Hermes,
+  Arterial Alchemy, Dancer's Chakrams and Lymph Sliver wait on it.
+- **A split card's two names aren't both compared.** `sameNameAsAny` (built 2026-10-31) compares
+  one name, so a split card's second name (rule 201.2a) never matches "the same name as".
 - **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
   creature enters, you may put two cards your opponents own from exile into their owners'
   graveyards. If you do, it enters with four +1/+1 counters" needs a choice and a cost inside an

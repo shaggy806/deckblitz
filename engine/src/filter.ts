@@ -178,6 +178,53 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
   return out;
 }
 
+/**
+ * The object (or objects) a `CardFilter` "shares a … type with it" clause
+ * compares with, read in the resolving spell or ability:
+ *
+ * - `"trigger-object"` — the trigger object;
+ * - `"source"` — the resolving spell's or ability's source;
+ * - `"sacrificed"` — the permanent sacrificed to pay its cost (or by an
+ *   earlier step), as it last existed;
+ * - `"attached"` — what the source is attached to ("enchanted creature"),
+ *   or was last attached to when the source has gone (as `EffectTargetRef`'s
+ *   `"attached"`);
+ * - `"chosen"` — the permanent chosen as the source entered;
+ * - a number — the object in that target slot, as it last existed if it has
+ *   moved since (Reality Scramble's permanent put on the bottom of the
+ *   library); an illegal or empty slot is nothing;
+ * - `{ controlled }` — every permanent the effect's controller controls
+ *   that matches the filter: "a land you control" (Hiveheart Shaman);
+ * - `{ permanents }` — every permanent on the battlefield that matches it,
+ *   whoever controls it: "a nontoken permanent" (Cornered Market);
+ * - `"exiled-with-source"` — the cards in exile linked to the source's
+ *   battlefield stint (rule 607.2a, `GameObject.exiledWith`) or exiled until
+ *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
+ *   this" (Exclusion Ritual, Ixalan's Binding).
+ *
+ * Nothing to compare with: nothing shares a type with it.
+ */
+export type ShareReference =
+  | "trigger-object"
+  | "source"
+  | "sacrificed"
+  | "attached"
+  | "chosen"
+  | "exiled-with-source"
+  | number
+  | { readonly controlled: CardFilter }
+  | { readonly permanents: CardFilter };
+
+/** One bound `shares…TypeWith` clause: the reference objects themselves
+ * (each always matches — "target creature and each other creature that
+ * shares a creature type with it") and the types they had of that `kind`,
+ * changeling's every-creature-type marker included. */
+export interface SharedTypes {
+  readonly kind: "card" | "permanent" | "creature" | "land";
+  readonly objects: readonly ObjectId[];
+  readonly types: readonly string[];
+}
+
 export interface CardFilter {
   /** Must have ALL of these card types. */
   readonly types?: readonly CardType[];
@@ -413,6 +460,24 @@ export interface CardFilter {
    * shares a name with nothing; without a source, nothing has its name.
    */
   readonly sameNameAsSource?: boolean;
+  /**
+   * Has the same name as one of the objects a `ShareReference` names (rule
+   * 201.2a: one name in common is enough — a split card's either half; an
+   * object with no name shares it with nothing) — a reference object itself
+   * included: Cylian Sunsinger's "this creature and each other creature with
+   * the same name as it" is `{ type: "creature", sameNameWith: "source" }`;
+   * "another" goes in the reference's filter (Pattern Matcher's "a card with
+   * the same name as another creature you control" is `{ controlled: { type:
+   * "creature", isSource: false } }`). In an effect every reference is bound
+   * to `sameNameAsAny` as it applies (`bindDynamicCompares`); elsewhere — a
+   * static's prohibition, a trigger's filter — `"source"`,
+   * `"exiled-with-source"` (Ixalan's Binding's "your opponents can't cast
+   * spells with the same name as the exiled card"), `{ controlled }` and `{
+   * permanents }` (Cornered Market's "a nontoken permanent") are read live
+   * off `FilterContext.source` and `.you`, and the others match nothing.
+   * Fails closed inside the layer fold.
+   */
+  readonly sameNameWith?: ShareReference;
   /**
    * Has the same name as one of the cards the resolving spell or ability
    * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
@@ -760,36 +825,48 @@ export interface CardFilter {
    */
   readonly targets?: SpellTargetsFilter;
   /**
-   * Shares at least one card type with the permanent sacrificed to pay for
-   * (or earlier in) the spell or ability applying this filter — "a permanent
-   * that shares a card type with it" (Braids, Arisen Nightmare), read from
-   * the sacrificed permanent as it last existed on the battlefield — or with
-   * the trigger object: "a spell … that shares a card type with it" (Baral
-   * and Kari Zev), the spell whose casting fired the trigger. Bound to a
-   * plain `typesAnyOf` as the effect applies (`bindDynamicCompares`); with
-   * nothing to share with, or anywhere else, it matches nothing.
+   * It is the reference object (see `ShareReference`), or shares at least
+   * one **card type** (rule 205.2a) with it — "a permanent that shares a
+   * card type with it" (Braids, Arisen Nightmare: the sacrificed permanent),
+   * "a spell … that shares a card type with it" (Baral and Kari Zev: the
+   * trigger object), "a spell that shares a card type with it" (Counterlash:
+   * the countered spell in target slot 0). The reference is read as it last
+   * existed if it has left since (rule 608.2h). Bound to `sharesTypeWith`
+   * as the effect applies (`bindDynamicCompares`); unbound, anywhere
+   * nothing could answer it, it matches nothing.
    */
-  readonly sharesCardTypeWith?: "sacrificed" | "trigger-object";
+  readonly sharesCardTypeWith?: ShareReference;
   /**
-   * Shares at least one **permanent type** (rule 110.4: artifact, battle,
-   * creature, enchantment, land, planeswalker — not kindred) with the trigger
-   * object — Cloudstone Curio's "another permanent you control that shares a
-   * permanent type with it". Bound as `sharesCardTypeWith` is.
+   * As `sharesCardTypeWith`, but only the **permanent types** count (rule
+   * 110.4: artifact, battle, creature, enchantment, land, planeswalker — not
+   * kindred) — Cloudstone Curio's "another permanent you control that shares
+   * a permanent type with it".
    */
-  readonly sharesPermanentTypeWith?: "trigger-object";
+  readonly sharesPermanentTypeWith?: ShareReference;
   /**
-   * Shares at least one **creature type** with the trigger object, as it last
-   * existed on the battlefield if it has left — Heirloom Blade's "a creature
-   * card that shares a creature type with it" (its rulings: the dead creature
-   * as it last existed, and one with no creature type shares none). Bound to
-   * a plain `subtypes` of its creature types as the effect applies
-   * (`bindDynamicCompares`), so a changeling on either side shares one with
-   * anything that has a creature type (`hasSubtype`). Unbound, it matches
-   * nothing. `"source"` is the resolving ability's source instead, the same
-   * way — kinship's "if it shares a creature type with this creature"
-   * (Morningtide's ability word: Waterspout Weavers).
+   * It is the reference object, or shares at least one **creature type**
+   * (rule 205.3m) with it — Heirloom Blade's "a creature card that shares a
+   * creature type with it" (its rulings: the dead creature as it last
+   * existed, and one with no creature type shares none), kinship's "if it
+   * shares a creature type with this creature" (`"source"`), the Crowns'
+   * "enchanted creature and other creatures that share a creature type with
+   * it" (`"attached"`: the host is in even with no creature type), Endemic
+   * Plague's sacrificed creature, Killer's "target creature and each other
+   * creature that shares a creature type with it" (slot 0). A changeling on
+   * either side (rule 702.73a) shares one with anything that has a creature
+   * type (`hasSubtype`). Bound to `sharesTypeWith` as the effect applies.
    */
-  readonly sharesCreatureTypeWith?: "trigger-object" | "source";
+  readonly sharesCreatureTypeWith?: ShareReference;
+  /**
+   * As `sharesCreatureTypeWith`, for **land types** (rule 205.3i) — Hiveheart
+   * Shaman's "a basic land card that **doesn't** share a land type with a
+   * land you control" is `{ not: { sharesLandTypeWith: { controlled: { type:
+   * "land" } } } }`.
+   */
+  readonly sharesLandTypeWith?: ShareReference;
+  /** The `shares…TypeWith` clauses bound — written by `bindDynamicCompares`,
+   * never authored. Every entry must hold. */
+  readonly sharesTypeWith?: readonly SharedTypes[];
   /**
    * One of the objects the spell or ability now resolving has done this to
    * (see `ThisWayKind`) — choosing among the cards just moved: "you may put
@@ -1153,6 +1230,46 @@ function damagingStint(
   return stint(host ?? undefined);
 }
 
+/**
+ * The objects a `ShareReference` names, read from the state and the filter's
+ * context alone — `undefined` for a reference only a resolving effect can
+ * read (`bindDynamicCompares` binds those). `"exiled-with-source"` is the
+ * cards in exile linked to the source's battlefield stint (rule 607.2a): the
+ * one it's in, or the last one it had if it has left (Mindreaver,
+ * sacrificed).
+ */
+export function liveReferenceObjects(
+  state: GameState,
+  registry: CardRegistry,
+  reference: ShareReference,
+  ctx: FilterContext,
+): readonly ObjectId[] | undefined {
+  if (reference === "source") return ctx.source === undefined ? [] : [ctx.source];
+  if (reference === "exiled-with-source") {
+    const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    if (source === undefined) return [];
+    const stint = source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount;
+    if (stint === undefined) return [];
+    // Linked (`exiledWith`), or exiled until it leaves (`exiledUntil`, rule
+    // 610.3) — both "the exiled card" to an ability of it.
+    const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+      link !== undefined && link.source === source.id && link.zoneChangeCount === stint;
+    return state.zones.shared.exile.filter((card) => {
+      const object = state.objects[card];
+      return linked(object?.exiledWith) || linked(object?.exiledUntil);
+    });
+  }
+  if (typeof reference !== "object") return undefined;
+  const inner: CardFilter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" } : reference.permanents;
+  const innerCtx: FilterContext = {
+    you: ctx.you,
+    ...(ctx.x !== undefined ? { x: ctx.x } : {}),
+    ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
+    ...(ctx.source !== undefined ? { source: ctx.source } : {}),
+  };
+  return state.zones.shared.battlefield.filter((other) => matchesFilter(state, registry, other, inner, innerCtx));
+}
+
 /** `filter` with its `ofChosenColor` read now, off `source`, into a fixed
  * colour — for a filter kept past the resolution that applied it (a
  * prevention shield's "a source of your choice of the chosen color"), which
@@ -1218,7 +1335,8 @@ export function matchesFilter(
   if (
     filter.sharesCardTypeWith !== undefined ||
     filter.sharesPermanentTypeWith !== undefined ||
-    filter.sharesCreatureTypeWith !== undefined
+    filter.sharesCreatureTypeWith !== undefined ||
+    filter.sharesLandTypeWith !== undefined
   ) {
     return false;
   }
@@ -1291,6 +1409,25 @@ export function matchesFilter(
       if (chosen == null || !hasSubtype(subtypes, chosen)) return false;
     }
   }
+  if (filter.sharesTypeWith !== undefined) {
+    // Each bound "shares a … type with it": the reference objects are in
+    // whatever their types; anything else needs one of theirs — card and
+    // permanent types (rule 205.2a, 110.4) among its card types, creature
+    // and land types (205.3m, 205.3i) through `hasSubtype`, so a changeling
+    // on either side shares (702.73a).
+    for (const shared of filter.sharesTypeWith) {
+      if (shared.objects.includes(id)) continue;
+      if (shared.kind === "card" || shared.kind === "permanent") {
+        if (!shared.types.some((t) => types().includes(t as CardType))) return false;
+        continue;
+      }
+      const subtypes =
+        live !== undefined
+          ? (layered?.subtypes ?? effectiveSubtypes(state, registry, live))
+          : lki!.subtypes;
+      if (!shared.types.some((t) => hasSubtype(subtypes, t))) return false;
+    }
+  }
   const name = live !== undefined ? printedCardName(live) : lki!.name;
   if (filter.supertype !== undefined || filter.notSupertype !== undefined) {
     const supertypes = live !== undefined ? supertypesOf(registry, live) : lki!.supertypes;
@@ -1325,6 +1462,20 @@ export function matchesFilter(
       from === undefined || from.faceDown !== undefined || printedCardName(from) === LOCKED_ROOM;
     const same = !nameless && !fromNameless && nameOf(from) === named;
     if (same !== filter.sameNameAsSource) return false;
+  }
+  if (filter.sameNameWith !== undefined) {
+    // Rule 201.2a over the objects the reference names now. A reference
+    // only an effect can read is bound before it gets here; one left
+    // unbound, or asked inside the layer fold, matches nothing.
+    if (layered !== undefined) return false;
+    const others = liveReferenceObjects(state, registry, filter.sameNameWith, ctx);
+    if (others === undefined) return false;
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    const shared = others.some((other) => {
+      const object = state.objects[other];
+      return object !== undefined && namesOf(registry, object).some((n) => names.includes(n));
+    });
+    if (!shared) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
   if (filter.hasName !== undefined || filter.chosenName === true) {

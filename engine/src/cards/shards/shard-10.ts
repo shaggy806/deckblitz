@@ -155,6 +155,7 @@ import _poolCreditVoucher from "../pool/credit-voucher.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
+import _poolCrownOfAscension from "../pool/crown-of-ascension.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
 import _poolCrypsis from "../pool/crypsis.js";
 import _poolCryptCobra from "../pool/crypt-cobra.js";
@@ -1026,6 +1027,7 @@ const shard: CardShard = {
     _poolCrescendoOfWar,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
+    _poolCrownOfAscension,
     _poolCrushContraband,
     _poolCrypsis,
     _poolCryptCobra,
