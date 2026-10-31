@@ -808,6 +808,7 @@ import _poolVoltaicBrawler from "../pool/voltaic-brawler.js";
 import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
 import _poolWalkerOfTheWastes from "../pool/walker-of-the-wastes.js";
 import _poolWallOfLostThoughts from "../pool/wall-of-lost-thoughts.js";
+import _poolWallOfNets from "../pool/wall-of-nets.js";
 import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
 import _poolWanderwineDistracter from "../pool/wanderwine-distracter.js";
 import _poolWanderwineHub from "../pool/wanderwine-hub.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolVulpineGoliath,
     _poolWalkerOfTheWastes,
     _poolWallOfLostThoughts,
+    _poolWallOfNets,
     _poolWanderersIntervention,
     _poolWanderwineDistracter,
     _poolWanderwineHub,

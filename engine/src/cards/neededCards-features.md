@@ -501,6 +501,28 @@ count (Kozilek, the Broken Reality), "as this enters, turn all other …
 face down" (Ixidron), a copy that lasts until turned face down (Vesuvan
 Shapeshifter), a trigger's "its owner" player (Thieving Amalgam).
 
+### Creatures in a blocking relation with the source — built 2026-10-31
+
+The need-keys Phase 2 families `effect:target-spec-additions` (its top group,
+the blocking-relation targets) and `filter:blocked-by-source`, built as one,
+features only. New filter **`blockingRelation: { relation, of? }`**: a creature
+blocking the permanent applying it (`"blocking"`), blocked by it
+(`"blocked-by"`) or either, or — `of: "host"` — the creature that one is
+attached to; through `blockedAttackersOf` (a band blocked whole, 702.22h), none
+for a creature removed from combat (506.4), and a source that has left read off
+its new `lastKnown.blockedAttackers`/`blockers` (608.2b, 608.2h — Tinder Wall
+sacrificed to its own ability). The same filter serves targets, `-all` effects
+and an `of: "host"` Aura or Equipment. The scaffolder reads the target phrases,
+"each/all creatures blocking …", "At end of combat," and "It deals" on a
+permanent's own activated ability. Keys: effect:target-creature-blocking-source,
+effect:target-creature-source-is-blocking, effect:target-creature-blocking-attached,
+filter:blocked-by-source, filter:blocking-or-blocked-by-source,
+filter:blocking-specific-creature, and Tier B effect:damage-each-creature-blocking-source.
+Proving cards: Goblin Javelineer, Tinder Wall, Plasma Caster, Wall of Nets,
+Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin. Still open:
+"all creatures it blocked this turn" (Defiant Vanguard — a creature removed from
+combat still counts, so a per-turn record).
+
 ### Each permanent of a kind deals damage — built 2026-10-31
 
 The need-keys Phase 2 family `effect:each-creature-damages-itself`, its group

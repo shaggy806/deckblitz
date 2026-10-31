@@ -780,6 +780,7 @@ import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
 import _poolThunderousSnapper from "../pool/thunderous-snapper.js";
 import _poolTilonallisSummoner from "../pool/tilonallis-summoner.js";
 import _poolTimeStretch from "../pool/time-stretch.js";
+import _poolTinderWall from "../pool/tinder-wall.js";
 import _poolTitaniasBoon from "../pool/titanias-boon.js";
 import _poolTitansRevenge from "../pool/titans-revenge.js";
 import _poolTocasiaDigSiteMentor from "../pool/tocasia-dig-site-mentor.js";
@@ -1669,6 +1670,7 @@ const shard: CardShard = {
     _poolThunderousSnapper,
     _poolTilonallisSummoner,
     _poolTimeStretch,
+    _poolTinderWall,
     _poolTitaniasBoon,
     _poolTitansRevenge,
     _poolTocasiaDigSiteMentor,

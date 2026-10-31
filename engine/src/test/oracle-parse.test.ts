@@ -4298,3 +4298,73 @@ describe("each permanent of a kind deals damage (each-deals-damage)", () => {
     });
   });
 });
+
+describe("creatures in a blocking relation (blockingRelation)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const relation = (rel: string, of?: string) => ({
+    type: "creature",
+    blockingRelation: { relation: rel, ...(of !== undefined ? { of } : {}) },
+  });
+
+  it("reads a target creature blocking, or blocked by, the source or its host", () => {
+    const javelineer = face(
+      "Goblin Javelineer",
+      "Creature — Goblin Warrior",
+      "Haste\nWhenever this creature becomes blocked, it deals 1 damage to target creature blocking it.",
+    );
+    expect(javelineer.complete).toBe(true);
+    expect(javelineer.triggered[0].targets).toEqual([{ kind: "permanent", filter: relation("blocking") }]);
+    expect(javelineer.triggered[0].effect).toEqual({ kind: "damage", amount: 1, target: 0 });
+    // "It deals" on a permanent's own activated ability is its source.
+    const tinder = face(
+      "Tinder Wall",
+      "Creature — Plant Wall",
+      "Defender\nSacrifice this creature: Add {R}{R}.\n{R}, Sacrifice this creature: It deals 2 damage to target creature it's blocking.",
+    );
+    expect(tinder.complete).toBe(true);
+    expect(tinder.activated[1].targets).toEqual([{ kind: "permanent", filter: relation("blocked-by") }]);
+    expect(tinder.activated[1].effect).toEqual({ kind: "damage", amount: 2, target: 0 });
+    const corpses = face(
+      "Wall of Corpses",
+      "Creature — Wall",
+      "Defender\n{B}, Sacrifice this creature: Destroy target creature this creature is blocking.",
+    );
+    expect(corpses.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("blocked-by") }]);
+    const cromat = face("Test", "Creature — Illusion", "{W}{B}: Destroy target creature blocking or blocked by this creature.");
+    expect(cromat.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("either") }]);
+    const host = face("Test", "Artifact — Equipment", "{1}: Tap target creature blocking equipped creature.");
+    expect(host.activated[0].targets).toEqual([{ kind: "permanent", filter: relation("blocking", "host") }]);
+  });
+
+  it("reads each and all creatures in one, and the end of combat trigger", () => {
+    const goblin = face(
+      "Battle-Scarred Goblin",
+      "Creature — Goblin Warrior",
+      "Whenever this creature becomes blocked, it deals 1 damage to each creature blocking it.",
+    );
+    expect(goblin.complete).toBe(true);
+    expect(goblin.triggered[0].effect).toEqual({ kind: "damage-all", amount: 1, filter: relation("blocking") });
+    const beast = face(
+      "Kjeldoran Frostbeast",
+      "Creature — Elemental Beast",
+      "At end of combat, destroy all creatures blocking or blocked by this creature.",
+    );
+    expect(beast.complete).toBe(true);
+    expect(beast.triggered[0].trigger).toEqual({ on: "step-begins", step: "end-combat", who: "any" });
+    expect(beast.triggered[0].effect).toEqual({ kind: "destroy-all", filter: relation("either") });
+    const coils = face(
+      "Coils of the Medusa",
+      "Enchantment — Aura",
+      "Enchant creature\nEnchanted creature gets +1/-1.\nSacrifice this Aura: Destroy all non-Wall creatures blocking enchanted creature.",
+    );
+    expect(coils.complete).toBe(true);
+    expect(coils.activated[0].effect).toEqual({
+      kind: "destroy-all",
+      filter: { type: "creature", notSubtypes: ["Wall"], blockingRelation: { relation: "blocking", of: "host" } },
+    });
+    // An exile's link to the card's other abilities is a person's to read.
+    const nets = face("Wall of Nets", "Creature — Wall", "Defender\nAt end of combat, exile all creatures blocked by this creature.");
+    expect(nets.complete).toBe(false);
+  });
+});

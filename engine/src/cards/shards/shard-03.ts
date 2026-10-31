@@ -267,6 +267,7 @@ import _poolGoblinBushwhacker from "../pool/goblin-bushwhacker.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
 import _poolGoblinCratermaker from "../pool/goblin-cratermaker.js";
 import _poolGoblinFlectomancer from "../pool/goblin-flectomancer.js";
+import _poolGoblinJavelineer from "../pool/goblin-javelineer.js";
 import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
 import _poolGoblinslide from "../pool/goblinslide.js";
@@ -1046,6 +1047,7 @@ const shard: CardShard = {
     _poolGoblinCannon,
     _poolGoblinCratermaker,
     _poolGoblinFlectomancer,
+    _poolGoblinJavelineer,
     _poolGoblinNegotiation,
     _poolGoblinTunneler,
     _poolGoblinslide,

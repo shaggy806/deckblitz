@@ -499,6 +499,7 @@ import _poolPithingNeedle from "../pool/pithing-needle.js";
 import _poolPlanarOutburst from "../pool/planar-outburst.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
+import _poolPlasmaCaster from "../pool/plasma-caster.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
 import _poolPopQuiz from "../pool/pop-quiz.js";
 import _poolPowderKeg from "../pool/powder-keg.js";
@@ -1331,6 +1332,7 @@ const shard: CardShard = {
     _poolPlanarOutburst,
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
+    _poolPlasmaCaster,
     _poolPlunderingBarbarian,
     _poolPopQuiz,
     _poolPowderKeg,

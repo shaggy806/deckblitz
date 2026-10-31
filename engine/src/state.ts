@@ -1825,6 +1825,12 @@ export interface LastKnownInfo {
   readonly dealtDamageToCreatureOnTurn?: number;
   readonly attacking: boolean;
   readonly blocking: boolean;
+  /** The attackers it was blocking as it left (`blockedAttackersOf`), and
+   * the creatures blocking it — so "target creature it's blocking" and
+   * "creatures blocking it" still find them once it has gone (rules 608.2b,
+   * 608.2h; `CardFilter.blockingRelation`). Absent for none. */
+  readonly blockedAttackers?: readonly ObjectId[];
+  readonly blockers?: readonly ObjectId[];
   readonly equipped: boolean;
   readonly enchanted: boolean;
   /** It was face down (rule 708) — a face-down spell as cast, or a face-down
@@ -5459,6 +5465,19 @@ export const permanentCount = (state: GameState, ids: readonly ObjectId[]): numb
  * damage removal and end of "until end of turn" effects (514.2), effects
  * expiring (702.26f), a player leaving (702.26k), and a view. */
 export const phasedOutIds = (state: GameState): readonly ObjectId[] => state.phasedOut ?? [];
+
+/** Every attacker `blockerId` blocks that is still attacking and still
+ * blocked by it: the one it was declared blocking and the rest of that
+ * attacker's band (rule 702.22h). An attacker removed from combat leaves it
+ * blocking nothing there (506.4), though it stays a blocking creature. */
+export function blockedAttackersOf(state: GameState, blockerId: ObjectId): ObjectId[] {
+  const blocker = state.objects[blockerId];
+  if (blocker === undefined || blocker.blocking === null) return [];
+  return [blocker.blocking, ...(blocker.blockingAlso ?? [])].filter((id) => {
+    const attacker = state.objects[id];
+    return attacker?.zone === "battlefield" && attacker.attacking !== null && attacker.blockedBy.includes(blockerId);
+  });
+}
 
 export const activePlayerOf = (state: GameState): PlayerId =>
   state.turnOrder[state.turn.activePlayerIndex];

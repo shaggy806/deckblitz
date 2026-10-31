@@ -144,6 +144,7 @@ import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
 import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
+import _poolCoilsOfTheMedusa from "../pool/coils-of-the-medusa.js";
 import _poolColossus from "../pool/colossus.js";
 import _poolCombust from "../pool/combust.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolCodeOfConstraint,
     _poolCogworkArchivist,
     _poolCoilingRebirth,
+    _poolCoilsOfTheMedusa,
     _poolColossus,
     _poolCombust,
     _poolConcealedCourtyard,

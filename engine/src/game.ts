@@ -41570,6 +41570,10 @@ export class Game {
         : {}),
       attacking: object.attacking !== null,
       blocking: object.blocking !== null,
+      ...(blockedAttackersOf(this.state, id).length > 0
+        ? { blockedAttackers: blockedAttackersOf(this.state, id) }
+        : {}),
+      ...(object.attacking !== null && object.blockedBy.length > 0 ? { blockers: [...object.blockedBy] } : {}),
       equipped: attached.equipped,
       enchanted: attached.enchanted,
       ...(object.faceDown !== undefined ? { faceDown: true } : {}),

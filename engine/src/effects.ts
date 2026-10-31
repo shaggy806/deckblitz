@@ -10527,6 +10527,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCreatureTypeWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
+      "blockingRelation" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
       "sameNameAsThisWay" in value ||
@@ -10634,6 +10635,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["bandedWithSource"] === true) {
       const { bandedWithSource: _banded, ...rest } = walked;
       walked = { ...rest, bandedWith: ctx.source };
+    }
+    // "Each creature blocking it", "creatures blocking enchanted creature":
+    // the resolving ability's source, or its host — now, or as it left.
+    const relation = walked["blockingRelation"] as CardFilter["blockingRelation"];
+    if (relation !== undefined && relation.with === undefined) {
+      const partner = relation.of === "host" ? ctx.attachedHost() : ctx.source;
+      if (partner !== undefined) walked = { ...walked, blockingRelation: { relation: relation.relation, with: partner } };
     }
     // "And all other permanents with the same name as that permanent": the
     // target itself and its name now (rule 201.2a). A target that's gone

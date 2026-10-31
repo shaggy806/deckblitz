@@ -729,7 +729,14 @@
   "effect:each-creature-damages-itself",
   "effect:each-creature-deals-damage-to-each-opponent",
   "effect:each-creature-deals-power-damage-to-target",
-  "effect:each-permanent-deals-damage"
+  "effect:each-permanent-deals-damage",
+  "effect:target-creature-blocking-attached",
+  "effect:target-creature-blocking-source",
+  "effect:target-creature-source-is-blocking",
+  "filter:blocked-by-source",
+  "filter:blocking-or-blocked-by-source",
+  "filter:blocking-specific-creature",
+  "effect:damage-each-creature-blocking-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

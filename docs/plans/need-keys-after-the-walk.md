@@ -686,6 +686,11 @@ missing. Re-run `--greedy` for Phase 2's order.
   `effect:each-creature-damages-itself` (`each-deals-damage`; 8 freed, 6 proving cards). 682
   freed in all. Next: the flash grants, `effect:search-destination-by-type`, the shared-type
   filters.
+- **2026-10-31: the blocking-relation families** (a cloud session, beside the local agents) —
+  `effect:target-spec-additions`' top group and `filter:blocked-by-source`, as one
+  `blockingRelation` filter (blocking, blocked by or either, the source's or its host's, a gone
+  source read off its last-known blocks; 21 freed, 7 proving cards; Defiant Vanguard's "blocked
+  this turn" left open).
 
 ## Rough size
 
