@@ -2822,6 +2822,57 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
+  // Base power or base toughness alone (layer 7b, rule 613.4b — `animate`
+  // with only a `power` or a `toughness`): Island of Wak-Wak's "target
+  // creature with flying has base power 0 until end of turn", Turtle-Duck's
+  // "until end of turn, ~ has base power 4 and gains trample", Chariot of the
+  // Sun's "until end of turn, target creature you control gains flying and
+  // has base toughness 1", Riptide Mangler's "~'s base power becomes equal to
+  // target creature's power" and Wall of Tombstones' "~'s base toughness
+  // becomes equal to 1 plus the number of creature cards in your graveyard"
+  // (both indefinitely).
+  {
+    const baseOne = (who, which, value, keywords, duration) => {
+      const target = who === "~" ? "source" : slot(who);
+      if (target === undefined || value === null) return null;
+      const kws = keywords.filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+      return {
+        kind: "animate",
+        target,
+        [which.toLowerCase()]: value,
+        addTypes: [],
+        addSubtypes: [],
+        ...(kws.length > 0 ? { keywords: kws } : {}),
+        duration,
+      };
+    };
+    // The keyword form first: a lazy target phrase would otherwise swallow
+    // "target creature gains flying and" as the target.
+    let b;
+    let r = null;
+    if ((b = re(`until end of turn, (~|${TARGET}) gains ${KW} and has base (power|toughness) (\\d+)`).exec(s))) {
+      r = baseOne(b[1], b[3], Number(b[4]), [b[2]], "end-of-turn");
+    } else if ((b = re(`(~|${TARGET}) has base (power|toughness) (\\d+) until end of turn`).exec(s))) {
+      r = baseOne(b[1], b[2], Number(b[3]), [], "end-of-turn");
+    } else if ((b = re(`until end of turn, (~|${TARGET}) has base (power|toughness) (\\d+)(?: and gains ${KW})?`).exec(s))) {
+      r = baseOne(b[1], b[2], Number(b[3]), [b[4]], "end-of-turn");
+    }
+    if (r !== null) return r;
+    if ((b = re(`~'s base (power|toughness) becomes equal to (?:(\\w+) plus )?(.+?)(?: \\(This effect lasts indefinitely\\.\\))?`).exec(s))) {
+      const plus = b[2] === undefined ? 0 : numberOf(b[2]);
+      let value = null;
+      const of = /^(target creature)'s power$/i.exec(b[3]);
+      const grave = /^the number of (.+?) cards in your graveyard$/i.exec(b[3]);
+      if (of !== null) value = { powerOf: slot(of[1]) };
+      else if (grave !== null) {
+        const filter = parseTypePhrase(grave[1]);
+        value = filter === null ? null : { countInGraveyard: { ...filter, ownedBy: "you" } };
+      } else value = dividedTotalOf(b[3]);
+      if (value !== null && typeof plus === "number") {
+        return baseOne("~", b[1], plus === 0 ? value : { sum: [plus, value] }, [], "permanent");
+      }
+    }
+  }
   // Rule 613.4d: a switch, applied in layer 7d.
   if ((m = re(`switch (~|${TARGET})'s power and toughness until end of turn`).exec(s))) {
     return { kind: "switch-pt", target: m[1] === "~" ? "source" : slot(m[1]), duration: "end-of-turn" };

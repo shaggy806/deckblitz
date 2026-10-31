@@ -887,6 +887,31 @@ a rules question); Bone Shaman's granted "creatures dealt damage by this
 creature this turn can't be regenerated this turn", Whippoorwill's and
 Runesword's other halves.
 
+### Base power or base toughness alone — built 2026-10-31
+
+The need-keys Phase 2 family `effect:set-base-power-only`, features only.
+`animate`'s `power` and `toughness` are each optional: one alone sets base
+power or base toughness alone in layer 7b (rule 613.4b — a new
+`PtModifier.setPower` beside the existing `setToughness`, ordered with
+`setPt` by timestamp), fixed or a live amount read once as it resolves
+(608.2h), until end of turn or indefinitely, the other left as it is;
+counters and pumps still add on top. Only a full set emits
+`permanent-animated`. The bots read a small lone set without keywords as a
+shrink. The scaffolder reads "(~ | target …) has base (power | toughness) N
+until end of turn", "until end of turn, … has base … N (and gains K)", "until
+end of turn, … gains K and has base … N" and "~'s base (power | toughness)
+becomes equal to [N plus] (target creature's power | the number of … cards
+in your graveyard | a battlefield count)". Keys:
+effect:set-base-power-only, effect:set-base-toughness-only. Still open on
+their cards: Vhati il-Dal ("base power 1 **or** base toughness 1", a choice
+as it resolves — no effect-level "or" choice), Sentinel (a target "blocking
+or blocked by this creature", effect:target-creature-source-is-blocking),
+Belligerent Yearling ("you may", the entering Dinosaur's power — likely
+authorable), PuPu UFO (Towns), Crater Elemental (formidable's activation
+condition), Symmetry Sage, Singing Tree (likely authorable). Proving cards:
+Island of Wak-Wak, Turtle-Duck, Riptide Mangler, Chariot of the Sun, Wall of
+Tombstones.
+
 ### P/T scaled by a hand size or a life total — built 2026-10-31
 
 The need-keys Phase 2 family `static:pt-per-amount`, its first group (a

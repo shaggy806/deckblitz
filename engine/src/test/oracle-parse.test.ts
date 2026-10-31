@@ -2861,6 +2861,50 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(avatar.complete).toBe(true);
   });
 
+  it("base power or base toughness alone (effect:set-base-power-only)", () => {
+    const wak = face("{T}: Target creature with flying has base power 0 until end of turn.", "Land");
+    expect(wak.activated[0].effect).toEqual({
+      kind: "animate",
+      target: 0,
+      power: 0,
+      addTypes: [],
+      addSubtypes: [],
+      duration: "end-of-turn",
+    });
+    expect(wak.complete).toBe(true);
+    const duck = face("{3}: Until end of turn, this creature has base power 4 and gains trample.", "Creature — Turtle Bird");
+    expect(duck.activated[0].effect).toEqual({
+      kind: "animate",
+      target: "source",
+      power: 4,
+      addTypes: [],
+      addSubtypes: [],
+      keywords: ["trample"],
+      duration: "end-of-turn",
+    });
+    const chariot = face(
+      "{2}, {T}: Until end of turn, target creature you control gains flying and has base toughness 1.",
+      "Artifact",
+    );
+    expect(chariot.activated[0].effect).toMatchObject({ kind: "animate", target: 0, toughness: 1, keywords: ["flying"] });
+    expect(chariot.activated[0].effect.power).toBeUndefined();
+    const mangler = face(
+      "{1}{U}: This creature's base power becomes equal to target creature's power. (This effect lasts indefinitely.)",
+      "Creature — Beast",
+    );
+    expect(mangler.activated[0].effect).toMatchObject({ kind: "animate", target: "source", power: { powerOf: 0 }, duration: "permanent" });
+    const wall = face(
+      "At the beginning of your upkeep, this creature's base toughness becomes equal to 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)",
+      "Creature — Wall",
+    );
+    expect(wall.triggered[0].effect).toMatchObject({
+      kind: "animate",
+      target: "source",
+      toughness: { sum: [1, { countInGraveyard: { type: "creature", ownedBy: "you" } }] },
+      duration: "permanent",
+    });
+  });
+
   it("its controller draws, discards or gets a poison counter (effect:player-scope-extensions)", () => {
     const who = { controllerOfTarget: 0 };
     const strike = face("Destroy target creature. Its controller discards a card.", "Sorcery");

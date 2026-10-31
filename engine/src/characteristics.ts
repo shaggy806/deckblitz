@@ -4499,9 +4499,13 @@ function computeCharacteristicsUncached(
       if (modifier.setPt) {
         sets.push({ key: modifierKey(modifier), power: modifier.setPt[0], toughness: modifier.setPt[1] });
       }
-      // Toughness alone (an exchange with a life total — rule 701.12g).
+      // Toughness alone (an exchange with a life total — rule 701.12g — or
+      // "has base toughness 1"), power alone ("has base power 0").
       if (modifier.setToughness !== undefined) {
         sets.push({ key: modifierKey(modifier), toughness: modifier.setToughness });
+      }
+      if (modifier.setPower !== undefined) {
+        sets.push({ key: modifierKey(modifier), power: modifier.setPower });
       }
       // A granted "base power is equal to …" (Ms. Marvel, Kamala Khan): not a
       // characteristic-defining ability (rule 604.3a(2)), so a 7b set at the

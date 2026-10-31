@@ -1601,8 +1601,15 @@ export interface PtModifier {
   /** Layer 7b — sets base toughness alone, ordered with `setPt` by
    * timestamp: an exchange of a life total with a toughness (rule 701.12g —
    * Tree of Redemption's "exchange your life total with this creature's
-   * toughness"), which leaves its power as it was. */
+   * toughness"), which leaves its power as it was, or an `animate` with only
+   * a `toughness` (Chariot of the Sun's "has base toughness 1"). */
   setToughness?: number;
+  /** Layer 7b — sets base power alone, ordered with `setPt` by timestamp:
+   * an `animate` with only a `power` ("target creature with flying has base
+   * power 0 until end of turn" — Island of Wak-Wak; Riptide Mangler's "base
+   * power becomes equal to target creature's power"). Its toughness stays as
+   * it was. An `animate` with only a `toughness` sets `setToughness`. */
+  setPower?: number;
   /** Layer 7d — "switch its power and toughness" (rule 613.4d, the
    * `switch-pt` effect): applied after every other P/T effect and counter,
    * its power becomes its toughness and its toughness its power. Two

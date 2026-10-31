@@ -864,6 +864,11 @@ function animatePolarity(n: Extract<EffectSpec, { kind: "animate" }>): Polarity 
   const toughness = fixed(n.toughness);
   const keywords = (n.keywords ?? []).filter((k) => k !== "defender");
   if (power !== null && toughness !== null && power + toughness <= 2 && keywords.length === 0) return "harm";
+  // Base power or toughness alone (Island of Wak-Wak's "base power 0",
+  // Chariot of the Sun's "base toughness 1"): a small one is a shrink, unless
+  // keywords come with it (Chariot's flying).
+  if (n.toughness === undefined && power !== null && power <= 1 && keywords.length === 0) return "harm";
+  if (n.power === undefined && toughness !== null && toughness <= 1 && keywords.length === 0) return "harm";
   if (keywords.length > 0) return "help";
   if (power !== null && power >= 4) return "help";
   if ((n.addTypes ?? []).includes("creature")) return "help";

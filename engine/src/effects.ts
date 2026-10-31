@@ -5447,9 +5447,19 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       /** Its base P/T. A live amount is read once, as the effect applies
        * (rule 608.2h — Zur, Eternal Schemer's "base power and base
-       * toughness each equal to its mana value"), and stays that. */
-      readonly power: EffectAmount;
-      readonly toughness: EffectAmount;
+       * toughness each equal to its mana value"), and stays that.
+       *
+       * Either alone sets **base power or base toughness alone** in layer
+       * 7b (rule 613.4b), the other left as it is: Island of Wak-Wak's
+       * "target creature with flying has base power 0 until end of turn" is
+       * `{ power: 0, addTypes: [], addSubtypes: [] }`, Riptide Mangler's
+       * "this creature's base power becomes equal to target creature's
+       * power" `power: { powerOf: 0 }` with `duration: "permanent"`, Chariot
+       * of the Sun's "has base toughness 1" `toughness: 1`. With no
+       * `addTypes` nothing becomes a creature; it only sets the value. At
+       * least one of the two is given. */
+      readonly power?: EffectAmount;
+      readonly toughness?: EffectAmount;
       readonly addTypes: readonly CardType[];
       /** "Becomes a [type]" with no "in addition" and no "it's still a …":
        * these card types *replace* its others (rule 205.1a), and a subtype
@@ -8961,12 +8971,13 @@ export interface EffectApi {
     readonly untilSourceLeaves?: boolean;
     readonly tappedOnReturn?: boolean;
   }): void;
-  /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}. */
+  /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}.
+   * A `power` or `toughness` left out is left as it is. */
   animate(
     target: TargetRef,
     opts: {
-      readonly power: number;
-      readonly toughness: number;
+      readonly power?: number;
+      readonly toughness?: number;
       readonly addTypes: readonly CardType[];
       readonly setTypes?: readonly CardType[];
       readonly addSubtypes: readonly string[];
@@ -13521,8 +13532,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {
         ctx.animate(target, {
-          power: amountValue(spec.power, ctx),
-          toughness: amountValue(spec.toughness, ctx),
+          ...(spec.power !== undefined ? { power: amountValue(spec.power, ctx) } : {}),
+          ...(spec.toughness !== undefined ? { toughness: amountValue(spec.toughness, ctx) } : {}),
           addTypes: spec.addTypes,
           setTypes: spec.setTypes,
           addSubtypes: spec.addSubtypes,

@@ -33159,12 +33159,15 @@ export class Game {
   /** A permanent becomes a creature via a single modifier spanning layers 4
    * (types/subtypes), 5 (`setColors`), 6 (`keywords` / `loseAbilities`) and
    * 7b (set P/T). A man-land adds a type and keeps its printed types; Turn to
-   * Frog replaces the subtypes, sets the colour, and strips abilities. */
+   * Frog replaces the subtypes, sets the colour, and strips abilities. With
+   * only a `power` or only a `toughness` it sets that alone (7b, rule
+   * 613.4b — Island of Wak-Wak's "has base power 0"), the other left as it
+   * is. */
   private animate(
     target: TargetRef,
     opts: {
-      readonly power: number;
-      readonly toughness: number;
+      readonly power?: number;
+      readonly toughness?: number;
       readonly addTypes: readonly CardType[];
       readonly setTypes?: readonly CardType[];
       readonly addSubtypes: readonly string[];
@@ -33194,16 +33197,28 @@ export class Game {
       ...(opts.setSubtypes ? { setSubtypes: [...opts.setSubtypes] } : {}),
       ...(opts.setColors ? { setColors: [...opts.setColors] } : {}),
       ...(opts.loseAbilities ? { loseAbilities: true } : {}),
-      setPt: [opts.power, opts.toughness],
+      ...(opts.power !== undefined && opts.toughness !== undefined
+        ? { setPt: [opts.power, opts.toughness] as [number, number] }
+        : opts.power !== undefined
+          ? { setPower: opts.power }
+          : opts.toughness !== undefined
+            ? { setToughness: opts.toughness }
+            : {}),
       ...durationFields(opts.duration),
     });
-    this.emit({
-      type: "permanent-animated",
-      object: id,
-      power: opts.power,
-      toughness: opts.toughness,
-      duration: opts.duration,
-    });
+    if (opts.power !== undefined && opts.toughness !== undefined) {
+      this.emit({
+        type: "permanent-animated",
+        object: id,
+        power: opts.power,
+        toughness: opts.toughness,
+        duration: opts.duration,
+      });
+    } else {
+      // Base power or toughness alone: nothing "became an N/N", but the
+      // computed P/T changed, so drop what's been read.
+      invalidateComputedCache();
+    }
   }
 
   /** See the `"add-types"` {@link EffectSpec}: layer 4 alone. */
