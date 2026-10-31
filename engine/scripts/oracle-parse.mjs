@@ -1817,6 +1817,54 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`look at (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "look-at-hand", target: slot(m[1]) };
   }
+  // "Look at a card at random in target player's hand" (Urza's Bauble): the
+  // controller alone sees the one card picked.
+  if ((m = re(`look at a card at random in (target player|target opponent)'s hand`).exec(s))) {
+    return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "look" };
+  }
+  // "Target opponent reveals a card at random from their hand" (Hired
+  // Torturer's tail): shown to every player, and it stays there.
+  if ((m = re(`(target player|target opponent) reveals a card at random from their hand`).exec(s))) {
+    return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "reveal" };
+  }
+  // "Exile target player's graveyard" (Bojuka Bog, Nautiloid Ship): every card
+  // in it at once.
+  if ((m = re(`exile (target player|target opponent)'s graveyard`).exec(s))) {
+    return { kind: "exile-graveyard", target: slot(m[1]) };
+  }
+  // "[You may] put a creature card exiled with ~ onto the battlefield under
+  // your control" (Nautiloid Ship, Sisters of Stone Death): one of the cards
+  // linked to the source (rule 607.2a), chosen.
+  if ((m = re(`(you may )?put an? (creature|artifact|land|permanent) card exiled with ~ onto the battlefield under your control`).exec(s))) {
+    const kind = m[2].toLowerCase();
+    const filter =
+      kind === "permanent"
+        ? { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }
+        : { type: kind };
+    return {
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: m[1] === undefined ? 1 : 0,
+      max: 1,
+      filter,
+      destination: "battlefield",
+      leftover: "stay",
+    };
+  }
+  // "Put all cards exiled with ~ onto the battlefield" (Underworld Sentinel):
+  // under the putting player's control (rule 110.2a).
+  if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
+    return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
+  }
+  // "Choose a card at random [that was] exiled with ~. Put that card into its
+  // owner's hand" (Skyship Weatherlight, Gorex): rule 607.2a's linked cards.
+  if ((m = re(`choose a card at random (?:that was )?exiled with ~(?:\\.|,)? (?:and )?put that card into its owner's hand`).exec(s))) {
+    return {
+      kind: "choose-random-card",
+      zone: "exiled-with-source",
+      then: { kind: "return-to-hand", target: 0, from: "exile" },
+    };
+  }
   if ((m = re(`each opponent mills ${N} cards?`).exec(s))) {
     return { kind: "mill", target: "each-opponent", amount: amount(m[1]) };
   }
@@ -1864,12 +1912,18 @@ export function parseSentence(sentence, ctx) {
   // Damage.
   // Radiance (Ravnica: City of Guilds): "target X and each other X that
   // shares a color with it" — one `-all` effect over the target and the
-  // others sharing a color with it (`sharesColorWithTarget`).
-  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a color with it`;
-  const kin = (type, target) =>
-    target === undefined ? undefined : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), sharesColorWithTarget: target };
+  // others sharing a color with it (`sharesColorWithTarget`) — or a creature
+  // or card type (`sharesCreatureTypeWith` / `sharesCardTypeWith` of the
+  // slot: Killer's "target creature and each other creature that shares a
+  // creature type with it").
+  const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a (color|creature type|card type) with it`;
+  const SHARES_KEY = { color: "sharesColorWithTarget", "creature type": "sharesCreatureTypeWith", "card type": "sharesCardTypeWith" };
+  const kin = (type, what, target) =>
+    target === undefined
+      ? undefined
+      : { ...(type.toLowerCase() !== "permanent" ? { type: type.toLowerCase() } : {}), [SHARES_KEY[what.toLowerCase()]]: target };
   if ((m = re(`~ deals ${N} damage to (${TARGET}) ${KIN}`).exec(s))) {
-    const filter = kin(m[3], slot(m[2]));
+    const filter = kin(m[3], m[4], slot(m[2]));
     return filter === undefined ? null : { kind: "damage-all", amount: amount(m[1]), filter };
   }
   if ((m = re(`~ deals ${N} damage to (${TARGET})`).exec(s))) {
@@ -2130,14 +2184,43 @@ export function parseSentence(sentence, ctx) {
       : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
   }
   if ((m = re(`(destroy|untap|tap) (${TARGET}) ${KIN}`).exec(s))) {
-    const filter = kin(m[3], slot(m[2]));
+    const filter = kin(m[3], m[4], slot(m[2]));
     return filter === undefined ? null : { kind: `${m[1].toLowerCase()}-all`, filter };
   }
   if ((m = re(`(${TARGET}) ${KIN} gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
-    const filter = kin(m[2], slot(m[1]));
+    const filter = kin(m[2], m[3], slot(m[1]));
     return filter === undefined
       ? null
-      : { kind: "modify-pt-all", filter, power: Number(m[3]), toughness: Number(m[4]), duration: "end-of-turn" };
+      : { kind: "modify-pt-all", filter, power: Number(m[4]), toughness: Number(m[5]), duration: "end-of-turn" };
+  }
+  // The Crowns: "enchanted creature and other creatures that share a
+  // creature type with it get +1/+1 / gain flying until end of turn" — one
+  // `-all` effect over the host and its kin (`sharesCreatureTypeWith:
+  // "attached"`, the host in whatever its types).
+  const CROWN = `enchanted creature and other creatures that share a creature type with it`;
+  const crowned = { type: "creature", sharesCreatureTypeWith: "attached" };
+  if ((m = re(`${CROWN} get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return { kind: "modify-pt-all", filter: crowned, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
+  }
+  if ((m = re(`${CROWN} gain ${KW} until end of turn`).exec(s))) {
+    return { kind: "grant-keyword-all", filter: crowned, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
+  }
+  // "This creature and each other creature with the same name as it get
+  // +3/+3" (Cylian Sunsinger): the source and its namesakes
+  // (`sameNameWith: "source"`, rule 201.2a).
+  if ((m = re(`(?:~|this creature) and each other creature with the same name as it gets? ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", sameNameWith: "source" },
+      power: Number(m[1]),
+      toughness: Number(m[2]),
+      duration: "end-of-turn",
+    };
+  }
+  // "Destroy all creatures that share a creature type with the sacrificed
+  // creature" (Endemic Plague).
+  if ((m = re(`destroy all creatures that share a creature type with the sacrificed creature`).exec(s))) {
+    return { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" } };
   }
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
@@ -2319,6 +2402,77 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "return-to-hand", target: i, from: "graveyard" };
   }
+  // What a card put onto the battlefield "attached to …" enters attached to
+  // (`AttachHostRef`): a creature of yours chosen as it enters, this
+  // permanent, what this is attached to, or a target (a player too).
+  const attachHostOf = (phrase) => {
+    if (/^a creature you control$/i.test(phrase)) return { among: { type: "creature", controlledBy: "you" } };
+    if (/^(?:~|this creature)$/i.test(phrase)) return "source";
+    if (/^(?:enchanted|equipped) creature$/i.test(phrase)) return "attached";
+    if (/^target /i.test(phrase)) return slot(phrase);
+    return undefined;
+  };
+  // "Return target Aura or Equipment card from your graveyard to the
+  // battlefield attached to a creature you control" (One Last Job); "put
+  // target Aura card from a graveyard onto the battlefield under your
+  // control attached to a creature you control" (Nomad Mythmaker).
+  if (
+    (m = /^(?:return (target .+? card from your graveyard) to the battlefield|put (target .+? card from a graveyard) onto the battlefield( under your control)?) attached to (.+?)\.$/i.exec(s))
+  ) {
+    const i = slot(m[1] ?? m[2]);
+    if (i === undefined) return null;
+    const attachedTo = attachHostOf(m[4]);
+    if (attachedTo === undefined) return null;
+    return { kind: "put-onto-battlefield", target: i, ...(m[3] ? { underYourControl: true } : {}), attachedTo };
+  }
+  // "Return target creature card … from your graveyard to the battlefield
+  // and attach ~ to it" (Pre-War Formalwear): onto what was put there.
+  if ((m = /^return (target .+? card from your graveyard) to the battlefield and attach ~ to it\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    if (i === undefined) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "put-onto-battlefield", target: i },
+        { kind: "attach", target: "put-this-way" },
+      ],
+    };
+  }
+  // "You may put an Aura card from your hand onto the battlefield attached to
+  // ~" (Academy Researchers).
+  if ((m = /^you may put an? (.+?) card from your hand onto the battlefield attached to (.+?)\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    const attachedTo = attachHostOf(m[2]);
+    if (filter === null || attachedTo === undefined) return null;
+    return { kind: "look-and-choose", zone: "hand", min: 0, max: 1, destination: "battlefield", leftover: "stay", filter, attachedTo };
+  }
+  // "Search your library for a Curse card, put it onto the battlefield
+  // attached to target player, then shuffle" (Bitterheart Witch); "…, put it
+  // onto the battlefield, attach it to a creature you control, then shuffle"
+  // (Stonehewer Giant — the host chosen as it resolves, `ontoChosen`).
+  if ((m = /^search your library for an? (.+?) card, put it onto the battlefield attached to (.+?), then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    const attachedTo = attachHostOf(m[2]);
+    if (filter === null || attachedTo === undefined) return null;
+    return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, attachedTo };
+  }
+  if ((m = /^search your library for an? (.+?) card, put it onto the battlefield, attach it to a creature you control, then shuffle\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "search-library",
+      filter,
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+      then: {
+        kind: "attach",
+        target: 0,
+        attachment: 0,
+        ontoChosen: { filter: { type: "creature", controlledBy: "you" }, prompt: "Choose a creature you control to attach it to" },
+      },
+    };
+  }
   if ((m = /^return (target .+? card from your graveyard) to the battlefield( tapped)?\.$/i.exec(s))) {
     // An Aura put onto the battlefield this way isn't attached to anything
     // (BACKLOG), so a card that names one (Rise to Glory) is left to author.
@@ -2340,6 +2494,13 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Searching.
+  // "A basic land card that doesn't share a land type with a land you
+  // control" (Hiveheart Shaman): the land types of your lands, negated
+  // (`sharesLandTypeWith: { controlled }`).
+  if ((m = /^search your library for a basic land card that doesn't share a land type with a land you control, put (?:it|that card) onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
+    const filter = { type: "land", supertype: "basic", not: { sharesLandTypeWith: { controlled: { type: "land" } } } };
+    return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[1] ? { enterTapped: true } : {}) };
+  }
   if ((m = /^search your library for an? (.+?) card, put it onto the battlefield( tapped)?, then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
@@ -3082,6 +3243,23 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Choose a card at random that was exiled with ~. Put that card into its
+    // owner's hand." (Skyship Weatherlight) — two sentences, one pick among
+    // the cards linked to the source (rule 607.2a).
+    if (
+      /^choose a card at random (?:that was )?exiled with ~\.$/i.test(sentence) &&
+      /^put that card into its owner's hand\.$/i.test(sentences[i + 1] ?? "")
+    ) {
+      const pick = {
+        kind: "choose-random-card",
+        zone: "exiled-with-source",
+        then: { kind: "return-to-hand", target: 0, from: "exile" },
+      };
+      parsed.push(pick);
+      hints.push({ sentence, effect: pick });
+      skip = 1;
+      continue;
+    }
     // A wish that may take a face-up exiled card instead (rule 701.23j):
     // "You may reveal an artifact card you own from outside the game or
     // choose a face-up artifact card you own in exile. Put that card into
@@ -3302,6 +3480,11 @@ export function parseEffect(text, outer) {
     }
     // "It can't be regenerated." (rule 701.19c) after the destroy it's about.
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
+      parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
+      continue;
+    }
+    // "They can't be regenerated." after a sweep (Catastrophe, Endemic Plague).
+    if (/^they can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy-all") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;
     }
@@ -4709,6 +4892,18 @@ export function parseFace(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: { chosenName: true } }, text: printed(raw) });
       continue;
     }
+    // A name lock on a reference (`sameNameWith`, rule 201.2a): "the exiled
+    // card" (Ixalan's Binding, Exclusion Ritual — the card's own exile, rule
+    // 607.2a) or "a nontoken permanent" (Cornered Market's spells and
+    // nonbasic lands).
+    if ((m = /^(Your opponents|Players) can't (cast spells|play nonbasic lands) with the same name as (the exiled card|a nontoken permanent)\.$/.exec(line))) {
+      const who = m[1] === "Players" ? "each-player" : "opponents";
+      const sameNameWith = m[3] === "the exiled card" ? "exiled-with-source" : { permanents: { token: false } };
+      const prohibits =
+        m[2] === "cast spells" ? { who, spells: { sameNameWith } } : { who, lands: { notSupertype: "basic", sameNameWith } };
+      out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
+      continue;
+    }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
       out.static.push({
@@ -5133,12 +5328,19 @@ export function parseFace(face, ctx = {}) {
   if (
     /\bexiled with (?:this \w+|it)\b/.test(oracleText) ||
     /\breturn the exiled card\b/.test(oracleText) ||
+    /\bsame name as the exiled card\b/.test(oracleText) ||
     (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
   ) {
     const linkExiles = (node) => {
       if (Array.isArray(node)) node.forEach(linkExiles);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile" && node.untilSourceLeaves !== true) node.linked = true;
+        // Nautiloid Ship's "exile target player's graveyard", Skyship
+        // Weatherlight's "search … exile them".
+        if (node.kind === "exile-graveyard") node.linked = true;
+        if (node.kind === "search-library" && (node.destination === "exile" || node.destination === "exile-face-down")) {
+          node.linked = true;
+        }
         for (const v of Object.values(node)) linkExiles(v);
       }
     };
@@ -5875,6 +6077,45 @@ function grantsActivatedOfPhrase(phrase) {
   };
 }
 
+/** Whether a parsed static changes types (a layer-4 part), which a granted
+ * static may not have (`StaticAbility.grantsStatic`). */
+function hasLayerFourPartOf(st) {
+  return ["addTypes", "addSubtypes", "setTypes", "setSubtypes", "loseAllCreatureTypes", "setsChosenLandType"].some(
+    (k) => st[k] !== undefined,
+  );
+}
+
+/**
+ * A quoted static another static grants (`grantsStatic`), read as a static of
+ * the object that has it: any line `parseStatic` reads ("This creature" as
+ * ~), and the few shapes only seen quoted — "Creature tokens you control get
+ * +2/+2" (Inspiring Leader), "This creature gets +1/+1 as long as you control
+ * a Swamp" (Sedge Sliver), "You can't lose the game and your opponents can't
+ * win the game" (Cloudsteel Kirin). `null` for anything else.
+ */
+function parseGrantedStatic(quoted) {
+  const own = parseStatic(quoted.replace(/^This creature /, "~ "), quoted);
+  if (own !== null) return own;
+  let m;
+  if ((m = /^Creature tokens you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(quoted))) {
+    return { affects: { scope: "creatures-you-control", tokenOnly: true }, grantPt: [Number(m[1]), Number(m[2])], text: quoted };
+  }
+  if ((m = /^(?:This creature|~) gets ([+-]\d+)\/([+-]\d+) as long as you control an? ([A-Z][a-z]+)\.$/.exec(quoted))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "controls", filter, atLeast: 1 },
+      grantPt: [Number(m[1]), Number(m[2])],
+      text: quoted,
+    };
+  }
+  if (quoted === "You can't lose the game and your opponents can't win the game.") {
+    return { affects: { scope: "self" }, cantLoseGame: true, opponentsCantWinGame: true, text: quoted };
+  }
+  return null;
+}
+
 function parseStatic(line, text) {
   let m;
   // "… as long as [condition]." on a static the rest reads whole and that
@@ -5963,6 +6204,17 @@ function parseStatic(line, text) {
         },
         text,
       };
+    }
+  }
+  // The Runes: "As long as enchanted permanent is a creature, it gets +1/+1
+  // and has trample" / "… is an Equipment, it has 'Equipped creature gets
+  // …'" — the enchanted permanent's static, gated on what it is.
+  m = /^As long as enchanted permanent is (a creature|an Equipment), it (.+(?:\.|\."))$/.exec(line);
+  if (m !== null) {
+    const inner = parseStatic(`Enchanted creature ${m[2]}`, text);
+    if (inner !== null && inner.condition === undefined && inner.affects?.scope === "attached") {
+      const host = m[1] === "a creature" ? { type: "creature" } : { subtype: "Equipment" };
+      return { ...inner, condition: { kind: "source", filter: { attachedTo: host } } };
     }
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
@@ -6222,6 +6474,15 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // "This Equipment can be attached only to a creature with power 3 or
+  // greater" (O-Naginata, Gate Smasher — rule 301.5c).
+  if ((m = /^~ can be attached only to a creature with (power|toughness) (\d+) or (greater|less)\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      attachOnlyTo: { type: "creature", [m[1]]: { op: m[3] === "greater" ? "gte" : "lte", n: Number(m[2]) } },
+      text,
+    };
+  }
   // A flash permission (rule 601.3b): "You may cast spells as though they
   // had flash" (Heliod, the Warped Eclipse), every player's with "Any
   // player may cast creature and enchantment spells …" (Vernal Equinox —
@@ -6436,6 +6697,33 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
+  // A static granting a static (`grantsStatic` — rule 613.1f): "Equipped
+  // creature has [flying and] 'You can't lose the game …'" (Cloudsteel
+  // Kirin), "Commander creatures you own have 'Creature tokens you control
+  // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
+  // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
+  // line is read as a static of the object that has it.
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+    const affects = {
+      "Equipped creature": { scope: "attached" },
+      "Enchanted creature": { scope: "attached" },
+      "Commander creatures you own": { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+      "All Sliver creatures": { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      "Creatures you control": { scope: "creatures-you-control" },
+    }[m[1]];
+    const quoted = m[3];
+    const granted = parseGrantedStatic(quoted);
+    if (granted !== null && granted.grantsStatic === undefined && !hasLayerFourPartOf(granted)) {
+      // Its text as printed ("This creature …"), not as normalized.
+      const printed = /"([^"]+\.)"$/.exec(text)?.[1] ?? quoted;
+      return {
+        affects,
+        ...(m[2] !== undefined ? { grantKeywords: [KEYWORDS[m[2].toLowerCase()]] } : {}),
+        grantsStatic: [{ ...granted, text: printed }],
+        text,
+      };
+    }
   }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
     return { affects: { scope: "attached" }, grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]), text };

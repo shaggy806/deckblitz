@@ -508,6 +508,7 @@ import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOliviaVoldaren from "../pool/olivia-voldaren.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
+import _poolOneLastJob from "../pool/one-last-job.js";
 import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
@@ -572,6 +573,7 @@ import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
 import _poolRayOfFrost from "../pool/ray-of-frost.js";
 import _poolRayOfRuin from "../pool/ray-of-ruin.js";
+import _poolRealityScramble from "../pool/reality-scramble.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
@@ -1380,6 +1382,7 @@ const shard: CardShard = {
     _poolOgreErrant,
     _poolOliviaVoldaren,
     _poolOmnathLocusOfTheRoil,
+    _poolOneLastJob,
     _poolOnward,
     _poolOpportunity,
     _poolOpt,
@@ -1444,6 +1447,7 @@ const shard: CardShard = {
     _poolRavenousLindwurm,
     _poolRayOfFrost,
     _poolRayOfRuin,
+    _poolRealityScramble,
     _poolReassemblingSkeleton,
     _poolReckonerShakedown,
     _poolReclamationSage,

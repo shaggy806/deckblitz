@@ -214,6 +214,7 @@ import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
 import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEmergentHaunting from "../pool/emergent-haunting.js";
 import _poolEmeriaCaptain from "../pool/emeria-captain.js";
+import _poolEndemicPlague from "../pool/endemic-plague.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngineeredMight from "../pool/engineered-might.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
@@ -495,6 +496,7 @@ import _poolMyriadConstruct from "../pool/myriad-construct.js";
 import _poolMysteriesOfTheDeep from "../pool/mysteries-of-the-deep.js";
 import _poolNahirisStoneblades from "../pool/nahiris-stoneblades.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
+import _poolNautiloidShip from "../pool/nautiloid-ship.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNeckBreaker from "../pool/neck-breaker.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
@@ -1075,6 +1077,7 @@ const shard: CardShard = {
     _poolEmeraldMedallion,
     _poolEmergentHaunting,
     _poolEmeriaCaptain,
+    _poolEndemicPlague,
     _poolEnergizer,
     _poolEngineeredMight,
     _poolEngulfTheShore,
@@ -1356,6 +1359,7 @@ const shard: CardShard = {
     _poolMysteriesOfTheDeep,
     _poolNahirisStoneblades,
     _poolNarsetEnlightenedExile,
+    _poolNautiloidShip,
     _poolNayaBattlemage,
     _poolNeckBreaker,
     _poolNessianBoar,

@@ -156,6 +156,7 @@ import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCorruptOfficial from "../pool/corrupt-official.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
+import _poolCounterlash from "../pool/counterlash.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCradleGuard from "../pool/cradle-guard.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
@@ -538,6 +539,7 @@ import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
 import _poolPortentTracker from "../pool/portent-tracker.js";
+import _poolPreWarFormalwear from "../pool/pre-war-formalwear.js";
 import _poolPrickleboar from "../pool/prickleboar.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
@@ -658,6 +660,7 @@ import _poolSilentSubmersible from "../pool/silent-submersible.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSilversmoteGhoul from "../pool/silversmote-ghoul.js";
 import _poolSimulacrum from "../pool/simulacrum.js";
+import _poolSingeMindOgre from "../pool/singe-mind-ogre.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSivvisRuse from "../pool/sivvis-ruse.js";
@@ -1029,6 +1032,7 @@ const shard: CardShard = {
     _poolCoordinatedCharge,
     _poolCorruptOfficial,
     _poolCostumeCloset,
+    _poolCounterlash,
     _poolCracklingSpellslinger,
     _poolCradleGuard,
     _poolCreepingBloodsucker,
@@ -1411,6 +1415,7 @@ const shard: CardShard = {
     _poolPollutedMire,
     _poolPongify,
     _poolPortentTracker,
+    _poolPreWarFormalwear,
     _poolPrickleboar,
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,
@@ -1531,6 +1536,7 @@ const shard: CardShard = {
     _poolSilkNet,
     _poolSilversmoteGhoul,
     _poolSimulacrum,
+    _poolSingeMindOgre,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
     _poolSivvisRuse,

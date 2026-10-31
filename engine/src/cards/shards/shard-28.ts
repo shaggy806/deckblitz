@@ -156,6 +156,7 @@ import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCoursersAccord from "../pool/coursers-accord.js";
 import _poolCourtArchers from "../pool/court-archers.js";
+import _poolCowardKiller from "../pool/coward-killer.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
 import _poolCragsmasherYeti from "../pool/cragsmasher-yeti.js";
 import _poolCrimsonMage from "../pool/crimson-mage.js";
@@ -702,6 +703,7 @@ import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
+import _poolStonehewerGiant from "../pool/stonehewer-giant.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormSculptor from "../pool/storm-sculptor.js";
 import _poolStormclawRager from "../pool/stormclaw-rager.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolCounselOfTheSoratami,
     _poolCoursersAccord,
     _poolCourtArchers,
+    _poolCowardKiller,
     _poolCowerInFear,
     _poolCragsmasherYeti,
     _poolCrimsonMage,
@@ -1580,6 +1583,7 @@ const shard: CardShard = {
     _poolSteelburrChampion,
     _poolSteelshaperApprentice,
     _poolStickyFingers,
+    _poolStonehewerGiant,
     _poolStonybrookBanneret,
     _poolStormSculptor,
     _poolStormclawRager,

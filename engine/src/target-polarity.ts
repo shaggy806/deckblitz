@@ -169,8 +169,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Its `then` reads the card it picked as target 0. A card taken from a
   // targeted player's graveyard onto your battlefield costs that player it —
   // Tariel, Reckoner of Souls.
+  // A card shown or taken from a targeted player's hand costs them its
+  // secrecy at least (Hired Torturer, Wand of Ith).
   "choose-random-card": (n, v) => {
-    if (typeof n.whose === "number" && n.then.kind === "put-onto-battlefield" && n.then.underYourControl === true) {
+    if (typeof n.whose !== "number") return;
+    if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {
       v.touch(n.whose, "harm", MINOR);
     }
   },
@@ -208,8 +211,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
+    v.touch(n.filter.sharesCreatureTypeWith, "harm", DECISIVE);
   },
-  regenerate: (n, v) => v.touch(n.target, "help", MINOR),
+  regenerate:(n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
   "damage-all": (n, v) => {
     v.touch(n.from, "help", MINOR);
@@ -217,6 +221,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameAsTarget, "harm", MAJOR);
     v.touch(n.filter.sharesColorWithTarget, "harm", MAJOR);
+    // Killer's "target creature and each other creature that shares a
+    // creature type with it" (a slot number; other references touch none).
+    v.touch(n.filter.sharesCreatureTypeWith, "harm", MAJOR);
   },
   "creatures-damage-controllers": none,
   // "Each creature you control deals damage equal to its power to target

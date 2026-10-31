@@ -310,14 +310,24 @@ section keeps only what to do next.
   `search-library.instead` — by the card, a condition, the searcher's choice or a split of one,
   to the graveyard or under another's control — `withCounters`, `who: "that-player"`; 5 freed, 8
   proving cards — Jarad's Orders, Dina's Guidance, Ruin in Their Wake, Guidelight Pathmaker,
-  Rootweaver Druid, Neoform, Magmatic Hellkite, Vision Quest). **691 freed cards wait for
-  `author-freed`** (`cards:needs -- --stale`); the user authors them in one sweep once the
-  reasonable keys are built. Building now, from 2026-10-31: three local agents (the shared-type
-  and same-name filters; attach extensions and granted statics; random choice and linked-exile
-  returns) and two cloud sessions (the combat-blocking families; graveyard casting and spell
-  keyword grants). Next after those: `static:pt-per-amount` (13) with `effect:set-base-power-only`
-  (12), `effect:this-way-results` (12) with `effect:distribute-counters` (12), `keyword:enlist`
-  (12) with `keyword:crew` (12), `keyword:hexproof-from-colors` (13).
+  Rootweaver Druid, Neoform, Magmatic Hellkite, Vision Quest); then, three local agents at once
+  with two families each, and cloud sessions (each on `COMPLETED.md`'s list for 2026-10-31): the
+  shared-type and same-name filters (`ShareReference`, `sameNameWith`; 11 freed, 14 proving
+  cards), attach hosts and statics granting statics (`attachedTo` with `{ among }` or a player,
+  `ontoChosen`, `attachOnlyTo`; `grantsStatic`; 21 freed, 18 proving cards — Animate Dead's
+  enchant swap and granted cost reductions left), a random card from a hand or a linked exile and
+  the linked exile put onto the battlefield (`choose-random-card`'s `zone`, `look-and-choose`'s
+  `"exiled-with-source"`; ~15 freed, 10 proving cards — Lagrella's counters left), and in the
+  cloud the blocking-relation families (`blockingRelation`, attack requirements) and graveyard
+  casting with keyword grants to spells. **791 freed cards wait for the authoring sweep**
+  (`cards:needs -- --stale`); the user authors them in one sweep once the reasonable keys are
+  built. Building now: P/T per amount with base power alone, the counter families
+  (`effect:this-way-results`, `effect:distribute-counters`), enlist with crew. Next:
+  `decision:library-ordering` (12), `decision:choose-from-zone-extensions` (12),
+  `effect:put-onto-battlefield-options`' entry riders (12) — and, for cloud sessions,
+  `keyword:hexproof-from-colors`, the combat-restriction second group,
+  `effect:prevent-next-n-damage-to-you`, the cascade/sunburst grants, `cost:kicker-nonmana-cost`
+  and `cost:alt-cost-discard-cards`.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
@@ -391,6 +401,8 @@ there and move this line to `COMPLETED.md`.
 - **"Creatures it blocked this turn" has no record**: `blockingRelation` reads the blocks as they are now, so an attacker removed from combat (506.4) drops out; Defiant Vanguard needs a per-turn record of what a creature blocked.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
+- **Granted statics don't reach cost changes or prevention**: Acolyte of Bahamut, Caduceus, Lymph Sliver and others (`docs/engine-gaps.md`).
+- **A split card's two names aren't both compared**: `sameNameAsAny` reads one name (201.2a; `docs/engine-gaps.md`).
 - **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).
 - **A divided total beyond plain X isn't offered**: Meteor Shower's "X plus 1" and Shatterskull Smashing's "twice X" need the offer to carry the amount, not just `x` (`docs/engine-gaps.md`).
 - **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).

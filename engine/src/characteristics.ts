@@ -151,6 +151,16 @@ const layer4InProgress = new Set<ObjectId>();
 const grantedAbilitiesInProgress = new Set<ObjectId>();
 
 /**
+ * Ids whose statics granted by other statics (`StaticAbility.grantsStatic`)
+ * are being looked up. Whether a granting static reaches a permanent can mean
+ * matching a filter against it, which folds its characteristics, which reads
+ * its granted statics again. Re-entry for an id on this stack answers with
+ * none of those: conservative, like the guards above, and likewise never
+ * cached. Transient scaffolding.
+ */
+const staticGrantsInProgress = new Set<ObjectId>();
+
+/**
  * Sources whose count-scaled bonus (`grantPtPerCount`) is counting the
  * battlefield. Counting matches the filter against each permanent, which
  * folds its characteristics — and if one of those carries the same kind of
@@ -172,6 +182,7 @@ function guardActive(): boolean {
     layer4InProgress.size > 0 ||
     ownStackInProgress.size > 0 ||
     grantedAbilitiesInProgress.size > 0 ||
+    staticGrantsInProgress.size > 0 ||
     countInProgress.size > 0 ||
     staticLossesInProgress
   );
@@ -2099,6 +2110,24 @@ let loseAllSourceMemo: {
  * a face or text change — calls {@link invalidateComputedCache}, which moves
  * the epoch; `setComputedCacheCheck` re-derives it on every hit.
  */
+/** Whether any permanent's text has a static that grants statics
+ * (`StaticAbility.grantsStatic`) — the cheap gate in front of
+ * `staticGrantSources`, kept by mutation epoch like {@link anyLoseAllSource}
+ * so the usual board, with none, pays one battlefield scan per mutation. */
+let staticGrantSourceMemo: { state: GameState; registry: CardRegistry; epoch: number; any: boolean } | null = null;
+function anyStaticGrantSource(state: GameState, registry: CardRegistry): boolean {
+  const memo = staticGrantSourceMemo;
+  if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
+    return memo.any;
+  }
+  const any = state.zones.shared.battlefield.some((id) => {
+    const object = state.objects[id];
+    return object !== undefined && (staticsInfo(registry, rulesTextName(object))?.grantsStatic.length ?? 0) > 0;
+  });
+  staticGrantSourceMemo = { state, registry, epoch: mutationEpoch, any };
+  return any;
+}
+
 function anyLoseAllSource(state: GameState, registry: CardRegistry): boolean {
   const memo = loseAllSourceMemo;
   if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
@@ -2259,13 +2288,81 @@ export function modifierGrantApplies(modifier: PtModifier, lostAt: number | null
  * — the `grant-static` effect) that it still has: not taken away by a later
  * loss of all abilities (rule 613.7). Usually none, and then cheaply. */
 export function grantedStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
-  if (!object.modifiers.some((m) => m.grantsStatic !== undefined)) return [];
+  const timed = grantedStaticsTimed(state, registry, object);
+  return timed.length === 0 ? [] : timed.map((g) => g.ability);
+}
+
+/** A static ability an object has by a grant, with the timestamp its effects
+ * take: the later of the object's and the grant's (rule 613.7a). */
+interface GrantedStatic {
+  readonly ability: StaticAbility;
+  readonly timestamp: number;
+}
+
+/**
+ * {@link grantedStatics} with each one's timestamp: those a `grant-static`
+ * gave `object` (`PtModifier.grantsStatic`), then those a battlefield static
+ * grants it (`StaticAbility.grantsStatic` — Inspiring Leader, Rune of Might,
+ * Sedge Sliver): its scope reaches `object` (as {@link staticReaches}
+ * decides) and its condition holds, read for the granting permanent. Either
+ * is taken away by a loss of all abilities later than the grant (rule
+ * 613.7). Guarded by `staticGrantsInProgress`.
+ */
+function grantedStaticsTimed(state: GameState, registry: CardRegistry, object: GameObject): readonly GrantedStatic[] {
+  const fromModifiers = object.modifiers.some((m) => m.grantsStatic !== undefined);
+  const granting = object.zone === "battlefield" ? staticGrantSources(state, registry) : NO_STATICS;
+  if (!fromModifiers && granting.length === 0) return [];
   const lostAt = abilitiesLostAt(state, registry, object);
-  const out: StaticAbility[] = [];
-  for (const m of object.modifiers) {
-    if (m.grantsStatic !== undefined && modifierGrantApplies(m, lostAt)) out.push(...m.grantsStatic);
+  const out: GrantedStatic[] = [];
+  if (fromModifiers) {
+    for (const m of object.modifiers) {
+      if (m.grantsStatic === undefined || !modifierGrantApplies(m, lostAt)) continue;
+      const timestamp = Math.max(object.timestamp, m.timestamp ?? object.timestamp);
+      for (const ability of m.grantsStatic) out.push({ ability, timestamp });
+    }
+  }
+  if (granting.length > 0 && !staticGrantsInProgress.has(object.id)) {
+    staticGrantsInProgress.add(object.id);
+    try {
+      for (const { source, ability } of granting) {
+        if (!grantOutlastsLoss(lostAt, source.timestamp)) continue;
+        if (!staticReaches(state, registry, source, ability, object)) continue;
+        if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+        const timestamp = Math.max(object.timestamp, source.timestamp);
+        for (const granted of ability.grantsStatic ?? []) out.push({ ability: granted, timestamp });
+      }
+    } finally {
+      staticGrantsInProgress.delete(object.id);
+    }
   }
   return out;
+}
+
+/**
+ * Every battlefield static that grants static abilities
+ * (`StaticAbility.grantsStatic`), in battlefield order — what
+ * {@link grantedStaticsTimed} matches each object against. Usually none. A
+ * permanent that has lost its abilities grants nothing (bar a static with a
+ * layer-4 part — rule 613.6), and neither does one whose controller has left
+ * the game. Memoized in the active cache region.
+ */
+function staticGrantSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
+  if (!anyStaticGrantSource(state, registry)) return NO_STATICS;
+  return computedCacheMemo("staticGrantSources", () => {
+    let out: ContributingStatic[] | null = null;
+    for (const sourceId of state.zones.shared.battlefield) {
+      const source = state.objects[sourceId];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      const grants = staticsOf(registry, rulesTextName(source)).grantsStatic;
+      if (grants.length === 0) continue;
+      const lost = hasLostAbilities(state, registry, source);
+      for (const ability of grants) {
+        if (lost && !staticOutlivesLoss(state, registry, source, ability)) continue;
+        (out ??= []).push({ source, ability });
+      }
+    }
+    return out ?? NO_STATICS;
+  });
 }
 
 /** Whether `object` has the granted ability "If this creature would leave the
@@ -3734,6 +3831,8 @@ interface StaticsInfo {
   readonly grants: readonly StaticAbility[];
   /** What {@link staticAbilityLosses} takes (`loseAllAbilities`). */
   readonly loseAll: readonly StaticAbility[];
+  /** What {@link staticGrantSources} takes (`grantsStatic`). */
+  readonly grantsStatic: readonly StaticAbility[];
 }
 
 const staticsInfoByRegistry = new WeakMap<CardRegistry, Map<string, StaticsInfo>>();
@@ -3757,6 +3856,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
+    grantsStatic: statics.filter((a) => a.grantsStatic !== undefined),
   };
   byName.set(name, info);
   return info;
@@ -3827,7 +3927,13 @@ function contributingStaticSources(
     // 614 — "enters tapped") or a CDA (`setBasePtFromCount`, handled in its
     // own pass) modifies nothing. See `StaticsInfo`.
     const contributing = staticsOf(registry, rulesTextName(source)).contributing;
-    if (contributing.length === 0 && !source.modifiers.some((m) => m.grantsStatic !== undefined)) continue;
+    if (
+      contributing.length === 0 &&
+      !source.modifiers.some((m) => m.grantsStatic !== undefined) &&
+      staticGrantSources(state, registry).length === 0
+    ) {
+      continue;
+    }
     // An eliminated player's permanents stay on the board to be looked at but
     // stop affecting the game — so their anthems and lords stop applying too.
     // See the note in `matchesFilter`: they leave play, not view — rule
@@ -3844,14 +3950,11 @@ function contributingStaticSources(
       out.push({ source, ability });
     }
     // What a `grant-static` gave it (Earthbind's "Enchanted creature loses
-    // flying"), timestamped by the later of it and the grant (613.7a).
-    for (const m of source.modifiers) {
-      if (m.grantsStatic === undefined) continue;
-      if (!modifierGrantApplies(m, abilitiesLostAt(state, registry, source))) continue;
-      const timestamp = Math.max(source.timestamp, m.timestamp ?? source.timestamp);
-      for (const ability of m.grantsStatic) {
-        if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability, timestamp });
-      }
+    // flying") or another permanent's static grants it (Inspiring Leader's
+    // "commander creatures you own have 'Creature tokens you control get
+    // +2/+2'"), timestamped by the later of it and the grant (613.7a).
+    for (const { ability, timestamp } of grantedStaticsTimed(state, registry, source)) {
+      if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability, timestamp });
     }
   }
   // A card's static that functions from its owner's graveyard (rule 113.6b
@@ -3874,7 +3977,9 @@ function contributingStaticSources(
       for (const ability of fromGraveyard) out.push({ source, ability });
     }
   }
-  if (activeCache !== null) activeCache.staticSources = out;
+  // Not while a granted static's lookup is in progress: what it found may
+  // be the guard's conservative answer.
+  if (activeCache !== null && staticGrantsInProgress.size === 0) activeCache.staticSources = out;
   return out;
 }
 

@@ -349,6 +349,7 @@ import _poolIngeniousSmith from "../pool/ingenious-smith.js";
 import _poolInitiateOfBlood from "../pool/initiate-of-blood.js";
 import _poolInsidiousMist from "../pool/insidious-mist.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
+import _poolInspiringLeader from "../pool/inspiring-leader.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
 import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
@@ -1167,6 +1168,7 @@ const shard: CardShard = {
     _poolInitiateOfBlood,
     _poolInsidiousMist,
     _poolInsightEngine,
+    _poolInspiringLeader,
     _poolInvasionOfMercadia,
     _poolInvasionOfMuraganda,
     _poolInventiveWingsmith,

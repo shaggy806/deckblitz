@@ -139,6 +139,7 @@ import _poolConfrontTheUnknown from "../pool/confront-the-unknown.js";
 import _poolConquerorsGalleon from "../pool/conquerors-galleon.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
+import _poolCorneredMarket from "../pool/cornered-market.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
 import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrashOfRhinoBeetles from "../pool/crash-of-rhino-beetles.js";
@@ -605,6 +606,7 @@ import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRottingGiant from "../pool/rotting-giant.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
+import _poolRuneOfMortality from "../pool/rune-of-mortality.js";
 import _poolRunoStromkirk from "../pool/runo-stromkirk.js";
 import _poolRust from "../pool/rust.js";
 import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js";
@@ -1025,6 +1027,7 @@ const shard: CardShard = {
     _poolConquerorsGalleon,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
+    _poolCorneredMarket,
     _poolCorporealProjection,
     _poolCourtOfVantress,
     _poolCrashOfRhinoBeetles,
@@ -1491,6 +1494,7 @@ const shard: CardShard = {
     _poolRosemaneCentaur,
     _poolRottingGiant,
     _poolRoyalTrooper,
+    _poolRuneOfMortality,
     _poolRunoStromkirk,
     _poolRust,
     _poolSHIELDDeploymentDrone,

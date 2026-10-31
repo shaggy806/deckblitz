@@ -121,6 +121,35 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   blocked by or either, the source's or its host's; a source that left read off its last-known
   blocks, 608.2b; none once removed from combat, 506.4); 21 freed. Goblin Javelineer, Tinder Wall,
   Plasma Caster, Wall of Nets, Kjeldoran Frostbeast, Coils of the Medusa, Battle-Scarred Goblin.
+- **Need-keys Phase 2: CardFilter clauses against a reference object** (2026-10-31; the
+  shared-type group of `condition:filter-dynamic-compare` and the same-name group of
+  `condition:filter-card-property-clauses`) — one `ShareReference` (the sacrificed permanent, the
+  trigger object, the source, the enchanted creature, a chosen or linked-exiled card, a target
+  slot, the permanents you control) for `sharesCardTypeWith`, `sharesPermanentTypeWith`,
+  `sharesCreatureTypeWith` (through `hasSubtype`), the new `sharesLandTypeWith`, and
+  `sameNameWith` (bound in an effect, read live in a static or trigger); 11 freed. Crown of
+  Vigor, Crown of Ascension, Endemic Plague, Pyre of Heroes, Coward // Killer, Counterlash,
+  Reality Scramble, Hiveheart Shaman, Ixalan's Binding, Exclusion Ritual, Cornered Market,
+  Mitotic Manipulation, Pattern Matcher, Cylian Sunsinger.
+- **Need-keys Phase 2: attach hosts, and statics granting statics** (2026-10-31;
+  `effect:attach-extensions` partly and seven riders, `static:equip-only-to-filter`,
+  `static:grant-static-ability`) — `attachedTo` on put-onto-battlefield, return, search and
+  look-and-choose, naming a player (303.4) or `{ among }` chosen as it enters (303.4f/g, 301.5e);
+  `attach` onto `"put-this-way"` or `ontoChosen`; static `attachOnlyTo` (301.5c);
+  `StaticAbility.grantsStatic` (layer 6, 613.1f; the granted static works from its holder, 113.10);
+  21 freed. One Last Job, Nomad Mythmaker, Bitterheart Witch, Arachnus Spinner, Academy
+  Researchers, Pre-War Formalwear, Stonehewer Giant, Aura Graft, O-Naginata, Gate Smasher,
+  Inspiring Leader, Criminal Past, Sedge Sliver, Cloudsteel Kirin, Rune of Might, Rune of Speed,
+  Rune of Flight, Rune of Mortality.
+- **Need-keys Phase 2: a random card from a hand or a linked exile, and the linked exile onto the
+  battlefield** (2026-10-31; `effect:random-card-from-hand`, `effect:random-card-from-linked-exile`,
+  `effect:put-exiled-with-source-onto-battlefield`, `effect:return-other-cards-exiled-with-source`,
+  `effect:exile-graveyard-linked`) — `choose-random-card`'s `zone: "hand"` (revealed, 701.20a, or
+  looked at alone) and `"exiled-with-source"` (607.2a) with a `slot` for the pick;
+  `look-and-choose`'s `"exiled-with-source"`; `return-exiled-by-source`'s `under`, `others`,
+  `filter`; `exile-graveyard`'s `linked`; ~15 freed. Cursed Scroll, Magus of the Scroll, Hired
+  Torturer, Singe-Mind Ogre, Urza's Bauble, Skyship Weatherlight, Nautiloid Ship, Chaos Shrine's
+  Black Crystal, Underworld Sentinel, Mirror of Life Trapping.
 - **Need-keys Phase 2: flash permissions** (2026-10-31; `effect:flash-for-each-player`,
   `effect:first-creature-spell-flash`, `effect:flash-permission-this-turn`,
   `effect:next-sorcery-as-though-flash`) — `castAsThoughFlashAnyPlayer` (every player's, read

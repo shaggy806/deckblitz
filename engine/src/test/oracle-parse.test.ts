@@ -354,6 +354,89 @@ describe("costs and triggers", () => {
     });
   });
 
+  it("reads \"with the same name as\" a reference object", () => {
+    const ritual = parseFace({
+      name: "Exclusion Ritual",
+      type_line: "Enchantment",
+      oracle_text:
+        "Imprint — When this enchantment enters, exile target nonland permanent.\nPlayers can't cast spells with the same name as the exiled card.",
+    });
+    expect(ritual.complete).toBe(true);
+    // The exile is linked to the lock that reads it (rule 607.2a).
+    expect(ritual.triggered[0].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(ritual.static[0].prohibits).toEqual({ who: "each-player", spells: { sameNameWith: "exiled-with-source" } });
+    const market = parseFace({
+      name: "Cornered Market",
+      type_line: "Enchantment",
+      oracle_text:
+        "Players can't cast spells with the same name as a nontoken permanent.\nPlayers can't play nonbasic lands with the same name as a nontoken permanent.",
+    });
+    expect(market.complete).toBe(true);
+    expect(market.static.map((s: { prohibits: unknown }) => s.prohibits)).toEqual([
+      { who: "each-player", spells: { sameNameWith: { permanents: { token: false } } } },
+      { who: "each-player", lands: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } } },
+    ]);
+    const singer = parseFace({
+      name: "Cylian Sunsinger",
+      type_line: "Creature — Elf Shaman",
+      oracle_text: "{R}{G}{W}: This creature and each other creature with the same name as it get +3/+3 until end of turn.",
+    });
+    expect(singer.activated[0].effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sameNameWith: "source" },
+      power: 3,
+      toughness: 3,
+      duration: "end-of-turn",
+    });
+  });
+
+  it("reads \"shares a creature / land type with\" a reference object", () => {
+    const killer = parseFace({
+      name: "Killer",
+      type_line: "Sorcery",
+      oracle_text: "Killer deals 3 damage to target creature and each other creature that shares a creature type with it.",
+    });
+    expect(killer.complete).toBe(true);
+    expect(killer.effect).toEqual({ kind: "damage-all", amount: 3, filter: { type: "creature", sharesCreatureTypeWith: 0 } });
+    const crown = parseFace({
+      name: "Crown of Vigor",
+      type_line: "Enchantment — Aura",
+      oracle_text:
+        "Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice this Aura: Enchanted creature and other creatures that share a creature type with it get +1/+1 until end of turn.",
+    });
+    expect(crown.activated[0].effect).toEqual({
+      kind: "modify-pt-all",
+      filter: { type: "creature", sharesCreatureTypeWith: "attached" },
+      power: 1,
+      toughness: 1,
+      duration: "end-of-turn",
+    });
+    const plague = parseFace({
+      name: "Endemic Plague",
+      type_line: "Sorcery",
+      oracle_text:
+        "As an additional cost to cast this spell, sacrifice a creature.\nDestroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated.",
+    });
+    expect(plague.complete).toBe(true);
+    expect(plague.effect).toEqual({
+      kind: "destroy-all",
+      filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" },
+      cantBeRegenerated: true,
+    });
+    expect(
+      parseEffect(
+        "Search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "search-library",
+      filter: { type: "land", supertype: "basic", not: { sharesLandTypeWith: { controlled: { type: "land" } } } },
+      destination: "battlefield",
+      min: 0,
+      max: 1,
+    });
+  });
+
   it("reads a Scent's reveal from hand, the next sentence scaled by the cards revealed", () => {
     const jasmine = parseFace({
       name: "Scent of Jasmine",
@@ -2059,6 +2142,58 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(crime.retrace).toBe(true);
     expect(crime.complete).toBe(true);
     expect(parseCost("{1}{W}, {Q}").cost).toEqual({ mana: "{1}{W}", tap: false, untap: true });
+  });
+
+  it("a card at random from a hand, or from the cards exiled with ~ (Urza's Bauble, Hired Torturer, Skyship Weatherlight)", () => {
+    expect(parseEffect("Look at a card at random in target player's hand.", ctx()).effect).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "look",
+    });
+    expect(parseEffect("Target opponent reveals a card at random from their hand.", ctx()).effect).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "reveal",
+    });
+    const pick = { kind: "choose-random-card", zone: "exiled-with-source", then: { kind: "return-to-hand", target: 0, from: "exile" } };
+    const skyship = face(
+      "{4}, {T}: Choose a card at random that was exiled with ~. Put that card into its owner's hand.",
+      "Legendary Artifact",
+    );
+    expect(skyship.activated[0].effect).toEqual(pick);
+    expect(parseEffect("Choose a card at random exiled with ~ and put that card into its owner's hand.", ctx()).effect).toEqual(pick);
+    // A reveal whose card is then used is a different sentence, not this one.
+    expect(parseEffect("Target player reveals a card at random from their hand, then loses life equal to that card's mana value.", ctx()).effect?.kind).not.toBe("choose-random-card");
+  });
+
+  it("cards exiled with ~ put onto the battlefield (Nautiloid Ship, Sisters of Stone Death, Underworld Sentinel)", () => {
+    const ship = face(
+      "When this Vehicle enters, exile target player's graveyard.\nWhenever this Vehicle deals combat damage to a player, you may put a creature card exiled with this Vehicle onto the battlefield under your control.",
+      "Artifact — Vehicle",
+    );
+    expect(ship.triggered[0].effect).toEqual({ kind: "exile-graveyard", target: 0, linked: true });
+    expect(ship.triggered[1].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 0,
+      max: 1,
+      filter: { type: "creature" },
+      destination: "battlefield",
+      leftover: "stay",
+    });
+    expect(parseEffect("Put a creature card exiled with ~ onto the battlefield under your control.", ctx()).effect).toMatchObject({
+      zone: "exiled-with-source",
+      min: 1,
+    });
+    expect(parseEffect("Put all cards exiled with it onto the battlefield.", ctx()).effect).toEqual({
+      kind: "return-exiled-by-source",
+      linked: "battlefield",
+      under: "you",
+    });
+    // "Under their owners' control" is a return, not this put.
+    expect(parseEffect("Put all cards exiled with it onto the battlefield under their owners' control.", ctx()).effect?.under).toBeUndefined();
   });
 
   it("look at target player's hand (Glasses of Urza, Sorcerous Sight)", () => {
@@ -4707,5 +4842,92 @@ describe("a library search's finds going card by card (search-library's instead)
       { targets: [] },
     );
     expect(charm.effect?.instead).toEqual({ destination: "battlefield", enterTapped: true, filter: { type: "land" }, pick: "all" });
+  });
+});
+
+describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, attachOnlyTo)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  const YOURS = { among: { type: "creature", controlledBy: "you" } };
+
+  it("reads a card put onto the battlefield attached to a creature you control", () => {
+    const myth = face("Nomad Mythmaker", "Creature — Human Nomad Cleric", "{W}, {T}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.");
+    expect(myth.complete).toBe(true);
+    expect(myth.activated[0].effect).toEqual({ kind: "put-onto-battlefield", target: 0, underYourControl: true, attachedTo: YOURS });
+    expect(
+      parseSentence("Return target Aura card from your graveyard to the battlefield attached to a creature you control.", ctx()),
+    ).toEqual({ kind: "put-onto-battlefield", target: 0, attachedTo: YOURS });
+  });
+
+  it("reads a search attached to target player, and a hand card attached to this creature", () => {
+    const witch = face("Bitterheart Witch", "Creature — Human Shaman", "Deathtouch\nWhen this creature dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle.");
+    expect(witch.complete).toBe(true);
+    expect(witch.triggered[0].targets).toEqual(["player"]);
+    expect(witch.triggered[0].effect).toMatchObject({ kind: "may", effect: { kind: "search-library", filter: { subtype: "Curse" }, attachedTo: 0 } });
+    const researchers = face("Academy Researchers", "Creature — Human Wizard", "When this creature enters, you may put an Aura card from your hand onto the battlefield attached to this creature.");
+    expect(researchers.complete).toBe(true);
+    expect(researchers.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 1,
+      destination: "battlefield",
+      leftover: "stay",
+      filter: { subtype: "Aura" },
+      attachedTo: "source",
+    });
+  });
+
+  it("reads attach onto what was returned, and onto a creature chosen as it resolves", () => {
+    expect(parseSentence("Return target creature card from your graveyard to the battlefield and attach ~ to it.", ctx())).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "put-onto-battlefield", target: 0 }, { kind: "attach", target: "put-this-way" }],
+    });
+    const giant = face("Stonehewer Giant", "Creature — Giant Warrior", "Vigilance\n{1}{W}, {T}: Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle.");
+    expect(giant.complete).toBe(true);
+    expect(giant.activated[0].effect).toMatchObject({
+      kind: "search-library",
+      filter: { subtype: "Equipment" },
+      then: { kind: "attach", target: 0, attachment: 0, ontoChosen: { filter: { type: "creature", controlledBy: "you" } } },
+    });
+  });
+
+  it("reads a static granting a static (grantsStatic)", () => {
+    expect(face("Inspiring Leader", "Legendary Enchantment — Background", 'Commander creatures you own have "Creature tokens you control get +2/+2."').static[0]).toEqual({
+      affects: { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+      grantsStatic: [{ affects: { scope: "creatures-you-control", tokenOnly: true }, grantPt: [2, 2], text: "Creature tokens you control get +2/+2." }],
+      text: 'Commander creatures you own have "Creature tokens you control get +2/+2."',
+    });
+    expect(face("Test Sliver", "Creature — Sliver", 'All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."').static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      grantsStatic: [
+        {
+          affects: { scope: "self" },
+          condition: { kind: "controls", filter: { subtype: "Swamp" }, atLeast: 1 },
+          grantPt: [1, 1],
+          text: "This creature gets +1/+1 as long as you control a Swamp.",
+        },
+      ],
+    });
+    expect(
+      face("Cloudsteel Kirin", "Artifact Creature — Equipment Kirin", 'Equipped creature has flying and "You can\'t lose the game and your opponents can\'t win the game."').static[0],
+    ).toMatchObject({ affects: { scope: "attached" }, grantKeywords: ["flying"], grantsStatic: [{ cantLoseGame: true, opponentsCantWinGame: true }] });
+    const rune = face("Rune of Might", "Enchantment — Aura Rune", 'Enchant permanent\nWhen this Aura enters, draw a card.\nAs long as enchanted permanent is a creature, it gets +1/+1 and has trample.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+1 and has trample."');
+    expect(rune.complete).toBe(true);
+    expect(rune.static[1]).toMatchObject({
+      affects: { scope: "attached" },
+      condition: { kind: "source", filter: { attachedTo: { subtype: "Equipment" } } },
+      grantsStatic: [{ affects: { scope: "attached" }, grantPt: [1, 1], grantKeywords: ["trample"] }],
+    });
+    // A quoted line it can't read: left alone.
+    expect(face("Test", "Enchantment", 'Creatures you control have "This creature can\'t be the target of anything weird."').static).toEqual([]);
+  });
+
+  it("reads an attach-only-to restriction", () => {
+    expect(face("Gate Smasher", "Artifact — Equipment", "This Equipment can be attached only to a creature with toughness 4 or greater.").static[0]).toEqual({
+      affects: { scope: "self" },
+      attachOnlyTo: { type: "creature", toughness: { op: "gte", n: 4 } },
+      text: "This Equipment can be attached only to a creature with toughness 4 or greater.",
+    });
   });
 });

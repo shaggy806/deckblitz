@@ -113,6 +113,30 @@ export interface ControlEffect {
   readonly whileSource?: WhileSource;
 }
 
+/**
+ * What a card being put onto the battlefield "attached to" something enters
+ * attached to, as the effect resolved it:
+ *
+ * - a permanent — an Aura that can't legally enchant it stays where it is
+ *   (rule 303.4i), an Equipment that can't equip it enters unattached
+ *   (301.5e), anything else enters unattached (303.4h);
+ * - `null` — nothing there (it has left, rule 400.7): an Aura stays, anything
+ *   else enters unattached;
+ * - `{ player }` — a player (Bitterheart Witch's "a Curse card … attached to
+ *   target player"): only an Aura that can enchant that player goes (303.4i);
+ *   anything else enters unattached;
+ * - `{ among }` — a permanent matching this filter, from the side of the
+ *   player it enters under, chosen as it enters (One Last Job's "attached to
+ *   a creature you control"; rule 303.4f for an Aura, limited to these). None
+ *   it could be attached to: an Aura stays (303.4g), an Equipment enters
+ *   unattached.
+ */
+export type EnterAttachHost =
+  | ObjectId
+  | null
+  | { readonly player: PlayerId }
+  | { readonly among: CardFilter };
+
 /** An instance of a card (or token) somewhere in the game. */
 export interface GameObject {
   readonly id: ObjectId;
@@ -841,6 +865,16 @@ export interface GameObject {
      * (`CardDefinition.choosePermanentOnEnter`), or `null` for none. Lands
      * on `GameObject.chosenPermanent`. */
     readonly chosenPermanent?: ObjectId | null;
+    /** What it's being put onto the battlefield attached to is chosen as it
+     * enters, among the permanents matching this from its controller's side
+     * — `EnterAttachHost`'s `among` (One Last Job's "attached to a creature
+     * you control"). An Aura's choice is its `enchant` (rule 303.4f, limited
+     * to these); an Equipment's is `attachHost`. */
+    readonly attachAmong?: CardFilter;
+    /** The permanent an Equipment entering with `attachAmong` was chosen to
+     * enter attached to, or `null` for none it could equip (it enters
+     * unattached — rule 301.5e). */
+    readonly attachHost?: ObjectId | null;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -2950,11 +2984,12 @@ export type AwaitingDecision =
        * (`Game.applyChooseFromZone`).
        */
       readonly faceDownGroups?: readonly (readonly ObjectId[])[];
-      /** Battlefield-bound cards enter attached to this permanent — a
-       * `search-library`'s `attachedToSource` (Light-Paws, Emperor's Voice).
-       * One that can't be attached to it stays where it is; `null`, nothing
-       * can (the source has left). */
-      readonly enterAttachedTo?: ObjectId | null;
+      /** Battlefield-bound cards enter attached to this — a
+       * `search-library`'s `attachedToSource` (Light-Paws, Emperor's Voice)
+       * or `attachedTo`, a `look-and-choose`'s `attachedTo`: see
+       * {@link EnterAttachHost}. An Aura that can't be attached to it stays
+       * where it is; `null`, nothing can (the source has left). */
+      readonly enterAttachedTo?: EnterAttachHost;
       /** …with these types and colours in addition to their own, in place as
        * they enter (a `look-and-choose`'s `enterAs`). */
       readonly enterAs?: EnterTypes;
@@ -3454,6 +3489,12 @@ export type AwaitingDecision =
        * `source` is the permanent about to enter, and what's picked (or
        * nothing) is its chosen permanent as it enters. `then` is unused. */
       readonly permanentOnEnter?: true;
+      /** Set when the choice is what an Equipment put onto the battlefield
+       * "attached to a creature you control" enters attached to
+       * (`EnterAttachHost`'s `among`): `source` is the Equipment about to
+       * enter, and what's picked is its `enterChoice.attachHost`. `then` is
+       * unused. */
+      readonly attachOnEnter?: true;
       /** Set when the choice is an entering permanent's devour (rule
        * 702.82a — `CardDefinition.devour`): `source` is the permanent about
        * to enter, and what's picked is sacrificed now, before it enters with

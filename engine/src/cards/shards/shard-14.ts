@@ -8,6 +8,7 @@ import _poolAberrant from "../pool/aberrant.js";
 import _poolAbominationOfGudul from "../pool/abomination-of-gudul.js";
 import _poolAbsorbVis from "../pool/absorb-vis.js";
 import _poolAbunasChant from "../pool/abunas-chant.js";
+import _poolAcademyResearchers from "../pool/academy-researchers.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
 import _poolAetherHerder from "../pool/aether-herder.js";
 import _poolAetherwindBasker from "../pool/aetherwind-basker.js";
@@ -868,6 +869,7 @@ const shard: CardShard = {
     _poolAbominationOfGudul,
     _poolAbsorbVis,
     _poolAbunasChant,
+    _poolAcademyResearchers,
     _poolAeronautsWings,
     _poolAetherHerder,
     _poolAetherwindBasker,

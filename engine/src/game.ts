@@ -227,6 +227,7 @@ import type {
   FlickerCounters,
   FlickerOptions,
   LookAndChooseLeftoverIf,
+  LookAndChooseZone,
   CopyExceptions,
   ZoneSecondPick,
   BoundUnlessOption,
@@ -342,6 +343,7 @@ import type {
   AwaitingDecision,
   CasualtyAsk,
   ConspireAsk,
+  EnterAttachHost,
   FaceDownAs,
   FaceDownKind,
   GiftAsk,
@@ -7958,6 +7960,11 @@ export class Game {
       if (this.chosenFromZoneTo(awaiting, index) !== "battlefield") continue;
       // Face down, it has no "as this enters" choices (708.3).
       if (awaiting.enterAs?.faceDown !== undefined) continue;
+      // What it enters attached to first: an Aura the effect names a host
+      // for isn't asked one (rule 303.4f), and one that can't go there stays
+      // without asking anything (303.4i).
+      const host = awaiting.enterAttachedTo;
+      if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) continue;
       if (this.askEnterChoice(id, player)) {
         this.state.suspendedResolutions.push({ effect: null, enter: entry });
         return;
@@ -10289,6 +10296,7 @@ export class Game {
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
     | { readonly kind: "player"; readonly among: "player" | "opponent" }
     | { readonly kind: "permanent"; readonly spec: PermanentOnEnter }
+    | { readonly kind: "attach-host"; readonly filter: CardFilter }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -10302,6 +10310,9 @@ export class Game {
       }
       if (answered?.protector === undefined && def.types.includes("battle")) {
         return { kind: "protector", siege: def.subtypes.includes("Siege") };
+      }
+      if (answered?.attachAmong !== undefined && answered.attachHost === undefined && !def.subtypes.includes("Aura")) {
+        return { kind: "attach-host", filter: answered.attachAmong };
       }
       return null;
     }
@@ -10360,6 +10371,11 @@ export class Game {
     }
     if (becoming.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
       return { kind: "enchant", as: becoming };
+    }
+    // "…attached to a creature you control" (One Last Job): an Equipment's
+    // host, chosen as it enters — the effect's choice, not an ability's.
+    if (answered?.attachAmong !== undefined && answered.attachHost === undefined && !becoming.subtypes.includes("Aura")) {
+      return { kind: "attach-host", filter: answered.attachAmong };
     }
     if (answered?.reveal === undefined) {
       for (const ability of becoming.static) {
@@ -10494,6 +10510,36 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "attach-host") {
+        // An Equipment put onto the battlefield "attached to a creature you
+        // control": one already there matching, that it could equip (rule
+        // 301.5), chosen as it enters, not targeted. The only one isn't
+        // asked; with none it enters unattached (301.5e).
+        const eligible = this.state.zones.shared.battlefield.filter(
+          (host) =>
+            host !== id &&
+            this.enterBatch?.has(host) !== true &&
+            matchesFilter(this.state, this.registry, host, next.filter, { you: chooser, source: id }) &&
+            this.canEquipEntering(id, host),
+        );
+        if (eligible.length > 1) {
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: chooser,
+            eligible,
+            min: 1,
+            max: 1,
+            prompt: `Choose what ${nameOf(object)} enters attached to`,
+            then: { kind: "sequence", effects: [] },
+            source: id,
+            x: 0,
+            attachOnEnter: true,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, attachHost: eligible[0] ?? null };
         continue;
       }
       if (next.kind === "permanent") {
@@ -10698,11 +10744,19 @@ export class Game {
         return true;
       }
       if (next.kind === "enchant") {
-        const options = this.state.zones.shared.battlefield.filter((host) =>
-          this.canEnchant(id, host, chooser, next.as),
+        // "…attached to a creature you control" (Nomad Mythmaker): only
+        // those, of what it could enchant (rule 303.4f), and no player.
+        const among = object.enterChoice?.attachAmong;
+        const options = this.state.zones.shared.battlefield.filter(
+          (host) =>
+            this.canEnchant(id, host, chooser, next.as) &&
+            (among === undefined ||
+              (this.enterBatch?.has(host) !== true &&
+                matchesFilter(this.state, this.registry, host, among, { you: chooser, source: id }))),
         );
         // An "Enchant player" Aura (a Curse) chooses among players instead.
-        const players = this.state.turnOrder.filter((p) => this.canEnchantPlayer(id, p, chooser, next.as));
+        const players =
+          among !== undefined ? [] : this.state.turnOrder.filter((p) => this.canEnchantPlayer(id, p, chooser, next.as));
         if (options.length > 0 || players.length > 0) {
           this.state.awaiting = {
             kind: "choose-enchant",
@@ -10846,6 +10900,11 @@ export class Game {
     ) {
       return false;
     }
+    // "This Equipment can be attached only to a creature with power 3 or
+    // greater" (O-Naginata): any other is an illegal permanent for it to
+    // equip (rule 301.5c), so it doesn't move there (701.3b) and falls off
+    // one that stops qualifying (704.5n).
+    if (!this.attachOnlyToAllows(equipment, host)) return false;
     return !protectionBlocks(this.state, this.registry, host, this.permanentSource(equipment));
   }
 
@@ -18314,10 +18373,13 @@ export class Game {
     filter: CardFilter | undefined,
     owner?: PlayerId,
     source?: ObjectId,
+    /** Only these — the cards exiled with a source (rule 607.2a). */
+    among?: readonly ObjectId[],
   ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
     const eligible: ObjectId[] = [];
     const groups = new Map<string, ObjectId[]>();
     for (const id of this.state.zones.shared.exile) {
+      if (among !== undefined && !among.includes(id)) continue;
       const object = this.state.objects[id];
       if (object === undefined || object.isToken || (owner !== undefined && object.owner !== owner)) continue;
       const faceDown = object.exiledFaceDown !== undefined || object.foretold === true;
@@ -25692,12 +25754,38 @@ export class Game {
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
+      cardMatches: (id, filter) =>
+        this.state.objects[id] !== undefined &&
+        matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+      showCardFromHand: (owner, card, how) => {
+        if (this.state.objects[card]?.zone !== "hand") return;
+        if (how === "reveal") {
+          this.revealCards(owner, [card], "hand");
+          return;
+        }
+        // A look (rule 400.2: the hand stays hidden to everyone else): the
+        // one card, offered with nothing to pick, as `look-at-hand`'s whole
+        // hand is, so the look waits for its viewer to close it.
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          ...(controller !== owner ? { forPlayer: owner } : {}),
+          ids: [card],
+          eligible: [],
+          min: 0,
+          max: 0,
+          destination: "discard",
+          leftover: "stay",
+        };
+      },
       graveyardMatching: (owner, filter) =>
         (this.state.zones.perPlayer[owner]?.graveyard ?? []).filter((id) =>
           matchesFilter(this.state, this.registry, id, filter, { you: controller }),
         ),
       permanentsMatching: (filter) =>
-        this.battlefieldMatching(controller, filter).map((object) => ({
+        // Read with the source, so a clause about it answers ("another
+        // creature you control" — `isSource: false`).
+        this.battlefieldMatching(controller, filter, undefined, source).map((object) => ({
           object,
           count: this.state.objects[object].stackCount ?? 1,
         })),
@@ -26065,6 +26153,33 @@ export class Game {
           },
         );
       },
+      withFoundAt: (slot, card) => {
+        const set = <T,>(list: readonly T[], value: T): T[] => {
+          const copy = [...list];
+          copy[slot] = value;
+          return copy;
+        };
+        const found: TargetRef = { kind: "object", object: card };
+        const illegal = opts.illegalTargets;
+        return this.makeResolutionContext(
+          source,
+          controller,
+          set<TargetRef | undefined>(targets, found),
+          x,
+          triggerValue,
+          triggerObject,
+          stackMultiplier,
+          resolutionCount,
+          // Where it was found, for last-known information.
+          set<ZoneType | null>(targetZones, this.state.objects[card]?.zone ?? null),
+          refs,
+          {
+            ...opts,
+            ...(opts.readTargets !== undefined ? { readTargets: set<TargetRef | undefined>(opts.readTargets, found) } : {}),
+            ...(illegal !== undefined ? { illegalTargets: illegal.filter((s) => s !== slot) } : {}),
+          },
+        );
+      },
       withSacrificed: (object) => {
         // It was just sacrificed, so its latest snapshot is that departure.
         const lki = this.state.objects[object]?.lastKnown ?? this.state.ceasedTokens?.[object];
@@ -26351,7 +26466,7 @@ export class Game {
           reflexive: { targets: [...specs], effect, text, ...(divided !== undefined ? { divided } : {}) },
         });
       },
-      returnExiledBySource: (linked) => {
+      returnExiledBySource: (linked, options) => {
         // A token exiled this way ceased to exist (rule 111.7) and never
         // comes back; anything that moved on from exile in the meantime is
         // no longer linked, because `moveObject` cleared the mark. They all
@@ -26362,18 +26477,42 @@ export class Game {
         const sourceObject = this.state.objects[source];
         const stint =
           refs.source ?? (sourceObject?.zone === "battlefield" ? (sourceObject.zoneChangeCount ?? 0) : undefined);
+        // "All other … cards exiled with" it: not the ones this resolution
+        // has just exiled (Mirror of Life Trapping).
+        const justExiled =
+          options?.others === true ? new Set(thisWayEntries(this.state, "exiled").map((e) => e.object)) : undefined;
         const returning = this.state.zones.shared.exile.filter((id) => {
           const object = this.state.objects[id];
           if (object === undefined || object.isToken) return false;
           if (linked !== true) return object.exiledBy === source;
           const link = object.exiledWith;
-          return stint !== undefined && link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          if (stint === undefined || link === undefined || link.source !== source || link.zoneChangeCount !== stint) {
+            return false;
+          }
+          if (justExiled?.has(id) === true) return false;
+          return (
+            options?.filter === undefined ||
+            matchesFilter(this.state, this.registry, id, options.filter, { you: controller, source })
+          );
         });
-        if (returning.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;
+        // "Put … onto the battlefield" names no controller: the player
+        // putting them there (rule 110.2a); a "return" is its owner's
+        // (610.3c).
+        const underYou = options?.underYou === true;
+        const enterer = (id: ObjectId): PlayerId => (underYou ? controller : this.state.objects[id].owner);
+        if (returning.some((id) => this.askEnterChoice(id, enterer(id)))) return true;
         this.withEnterBatch(() => {
           for (const id of returning) {
             this.state.objects[id].exiledBy = undefined;
-            if (this.moveObject(id, "battlefield")) {
+            const under = enterer(id);
+            if (this.moveObject(id, "battlefield", under !== this.state.objects[id].owner ? { under } : {})) {
+              // Kept there by a control effect, as a reanimation "under your
+              // control" is (see `putOntoBattlefieldByEffect`).
+              const entered = this.state.objects[id];
+              if (entered?.zone === "battlefield" && entered.controller !== under) {
+                this.gainControlByEffect(under, { kind: "object", object: id }, false, true);
+                entered.summoningSick = true;
+              }
               this.emit({ type: "permanent-entered-battlefield", object: id });
             }
           }
@@ -26394,7 +26533,7 @@ export class Game {
           attacking,
           attachTo,
         ),
-      exileGraveyard: (target, filter) => {
+      exileGraveyard: (target, filter, linked) => {
         if (target.kind !== "player") return;
         // Snapshot: `moveObject` mutates the graveyard array as it goes. The
         // whole graveyard goes at once — or every card in it matching
@@ -26402,9 +26541,25 @@ export class Game {
         const going = [...this.state.zones.perPlayer[target.player].graveyard].filter(
           (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }),
         );
+        const exiled: ObjectId[] = [];
         this.withGraveyardLeaveBatch(() => {
-          for (const id of going) this.moveObject(id, "exile");
+          for (const id of going) {
+            const moved = this.moveObject(id, "exile");
+            const object = this.state.objects[id];
+            if (moved && object?.zone === "exile" && object.isToken !== true) exiled.push(id);
+          }
         });
+        // "Exile … with this" (rule 607.2a): linked to the stint the
+        // resolving ability refers to, and counted by it for good.
+        if (linked === true) {
+          const src = this.state.objects[source];
+          const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+          if (src !== undefined && stint !== undefined && exiled.length > 0) {
+            for (const id of exiled) this.state.objects[id].exiledWith = { source, zoneChangeCount: stint };
+            const sofar = src.exiledWithCount?.stint === stint ? src.exiledWithCount.count : 0;
+            src.exiledWithCount = { stint, count: sofar + exiled.length };
+          }
+        }
       },
       sacrificeAll: (players, filter) => {
         // Every one at once, nobody choosing (rule 603.10a — each one's dies
@@ -27740,7 +27895,7 @@ export class Game {
         this.state.objects[source]?.zone === "exile"
           ? [source]
           : [],
-      cardsExiledWithSource: () => {
+      cardsExiledWithSource: (orUntil) => {
         // The stint the resolving spell or ability refers to (rule 607.2a):
         // the one it came from, though the source may have left since.
         const object = this.state.objects[source];
@@ -27748,8 +27903,10 @@ export class Game {
           refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
         if (stint === undefined) return [];
         return this.state.zones.shared.exile.filter((id) => {
-          const link = this.state.objects[id]?.exiledWith;
-          return link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          const card = this.state.objects[id];
+          const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+            link !== undefined && link.source === source && link.zoneChangeCount === stint;
+          return linked(card?.exiledWith) || (orUntil === true && linked(card?.exiledUntil));
         });
       },
       setClassLevel: (level) => {
@@ -28240,6 +28397,7 @@ export class Game {
         }
         if (attachment.kind === "object") this.attachPermanent(attachment.object, target);
       },
+      attachableHosts: (attachment, filter, another) => this.attachableHosts(attachment, filter, controller, another),
       attachAll: (target, filter) => {
         // Every match now, each in turn; a stack of Equipment tokens one
         // token at a time, each its own attachment.
@@ -28667,7 +28825,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
@@ -28708,6 +28866,7 @@ export class Game {
           // effect's controller, under whose control they enter (rule 110.2a).
           chooser !== undefined && chooser !== controller && picker === controller ? controller : undefined,
           needsMin === true,
+          attachTo,
         );
       },
     };
@@ -28734,7 +28893,7 @@ export class Game {
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   private beginZoneChoice(
     player: PlayerId,
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
+    zone: LookAndChooseZone,
     count: number | undefined,
     min: number,
     max: number,
@@ -28760,18 +28919,25 @@ export class Game {
     enterUnder?: PlayerId,
     /** All of `min` or nothing — see `look-and-choose`'s `needsMin`. */
     needsMin = false,
+    /** What battlefield-bound picks enter attached to — see
+     * `look-and-choose`'s `attachedTo`. */
+    enterAttachedTo?: EnterAttachHost,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
     // choosing from them ("land cards that player owns"), else everyone's
     // that `filter` takes; a face-down one by its group, at random.
-    if (zone === "exile") {
+    // Or only the cards exiled with the source (rule 607.2a — Nautiloid
+    // Ship's "a creature card exiled with this Vehicle").
+    const linked = typeof zone === "object" && "exiled" in zone ? zone.exiled : undefined;
+    if (zone === "exile" || linked !== undefined) {
       const chooser = picker ?? player;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(
         chooser,
         filter,
         picker !== undefined ? player : undefined,
         source,
+        linked,
       );
       if (eligible.length === 0 || (needsMin && eligible.length < min)) return;
       const most = Math.min(max, eligible.length);
@@ -28798,6 +28964,9 @@ export class Game {
         // "Onto the battlefield under your control" (rule 110.2a).
         ...(destination === "battlefield" ? { enterUnder: enterUnder ?? chooser } : {}),
         ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
+        ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
+        ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
+        ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
         ...(then?.effect !== undefined ? { then: then.effect } : {}),
         ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
         ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
@@ -28810,7 +28979,7 @@ export class Game {
     const fromAnyGraveyard = zone === "graveyards" || typeof zone === "object";
     const zoneCards =
       typeof zone === "object"
-        ? zone.cards.filter((id) => this.state.objects[id]?.zone === "graveyard")
+        ? ("cards" in zone ? zone.cards : []).filter((id) => this.state.objects[id]?.zone === "graveyard")
         : zone === "graveyards"
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
         : zone === "command"
@@ -28868,6 +29037,7 @@ export class Game {
       ...(fromAnyGraveyard && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(enterUnder !== undefined && destination === "battlefield" ? { enterUnder } : {}),
       ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
+      ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
@@ -28947,7 +29117,7 @@ export class Game {
     x = 0,
     zones: SearchZones = "library",
     together?: SearchTogether,
-    enterAttachedTo?: ObjectId | null,
+    enterAttachedTo?: EnterAttachHost,
     more?: SearchMore & { readonly source: ObjectId; readonly sourceStint?: number },
   ): void {
     // Whose zones: the searcher's own, or another player's ("search target
@@ -29069,6 +29239,9 @@ export class Game {
       ...(exiled && more?.playable === "while-exiled"
         ? { impulseGrant: { player, expiry: { kind: "while-exiled" as const } } }
         : {}),
+      // "Exile them" with this source (rule 607.2a), in the stint the
+      // resolving ability refers to.
+      ...(exiled && more?.linked === true ? this.searchExileLink(more.source, more.sourceStint) : {}),
       ...(more?.then !== undefined
         ? {
             then: more.then,
@@ -29079,6 +29252,18 @@ export class Game {
           }
         : {}),
     };
+  }
+
+  /** A linked search's `exileLink`: `source` in `stint`, or in the stint
+   * it's in now if it's on the battlefield — none for a source that isn't a
+   * permanent (rule 607.2a links only a permanent's abilities). */
+  private searchExileLink(
+    source: ObjectId,
+    stint: number | undefined,
+  ): { exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number } } {
+    const object = this.state.objects[source];
+    const at = stint ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+    return at === undefined ? {} : { exileLink: { source, zoneChangeCount: at } };
   }
 
   /** A search's `together` as the decision carries it: each eligible card's
@@ -34634,6 +34819,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    if (awaiting.attachOnEnter === true) {
+      const entering = this.state.objects[awaiting.source];
+      entering.enterChoice = {
+        ...entering.enterChoice,
+        attachHost: chosen[0] === undefined ? null : this.splitOneFromStack(chosen[0]),
+      };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     if (awaiting.permanentOnEnter === true) {
       const entering = this.state.objects[awaiting.source];
       entering.enterChoice = { ...entering.enterChoice, chosenPermanent: chosen[0] ?? null };
@@ -35770,7 +35965,7 @@ export class Game {
     underPlayer?: PlayerId,
     types?: EnterTypes,
     attacking?: ResolvedEnterAttacking,
-    attachTo?: ObjectId | null,
+    attachTo?: EnterAttachHost,
   ): boolean {
     const transformed = turned === true;
     const flipped = turned === "flipped";
@@ -35839,16 +36034,34 @@ export class Game {
 
   /**
    * Ready `id` to be put onto the battlefield under `player` attached to
-   * `host` (`null`: nothing there). An Aura enchants it as it enters — or,
-   * if it can't legally enchant it, stays where it is (rule 303.4i):
-   * `false`. Anything else enters, an Equipment attached as it does
-   * (`attachEntered`), anything else unattached (303.4h).
+   * `host` (see {@link EnterAttachHost}). An Aura enchants a permanent or
+   * player as it enters — or, if it can't legally enchant it, stays where it
+   * is (rule 303.4i): `false`. A host chosen as it enters (`among`) is left
+   * to its "as this enters" choices: an Aura's what-it-enchants (303.4f,
+   * limited to the filter), an Equipment's `attachHost`. Anything else
+   * enters, an Equipment attached as it does (`attachEntered`), anything
+   * else unattached (303.4h). Asked again when an entry resumes after a
+   * choice, so it never undoes one.
    */
-  private readyToEnterAttached(id: ObjectId, host: ObjectId | null, player: PlayerId): boolean {
+  private readyToEnterAttached(id: ObjectId, host: EnterAttachHost, player: PlayerId): boolean {
     const card = this.state.objects[id];
     if (card === undefined) return false;
     const def = this.registry.get(printedCardName(card));
-    if (!def.subtypes.includes("Aura")) return true;
+    const aura = def.subtypes.includes("Aura");
+    if (host !== null && typeof host === "object" && "among" in host) {
+      if (aura || def.subtypes.includes("Equipment")) {
+        if (card.enterChoice?.attachAmong === undefined) {
+          card.enterChoice = { ...card.enterChoice, attachAmong: host.among };
+        }
+      }
+      return true;
+    }
+    if (!aura) return true;
+    if (host !== null && typeof host === "object") {
+      if (!this.canEnchantPlayer(id, host.player, player, def)) return false;
+      card.enterChoice = { ...card.enterChoice, enchantPlayer: host.player };
+      return true;
+    }
     if (host === null || !this.canEnchant(id, host, player, def)) return false;
     card.enterChoice = { ...card.enterChoice, enchant: host };
     return true;
@@ -35857,12 +36070,75 @@ export class Game {
   /** An Equipment just put onto the battlefield attached to `host`: attached
    * now, before its entry is announced — or, if it can't equip it, left
    * unattached (rule 301.5e). An Aura was attached as it entered
-   * (`readyToEnterAttached`). */
-  private attachEntered(id: ObjectId, host: ObjectId | null): void {
+   * (`readyToEnterAttached`); an Equipment can't equip a player (301.5e), and
+   * one whose host was chosen as it entered was attached as it did. */
+  private attachEntered(id: ObjectId, host: EnterAttachHost): void {
+    if (host === null || typeof host === "object") return;
     const entered = this.state.objects[id];
-    if (host === null || entered?.zone !== "battlefield" || entered.attachedTo !== null) return;
+    if (entered?.zone !== "battlefield" || entered.attachedTo !== null) return;
     if (!this.registry.get(printedCardName(entered)).subtypes.includes("Equipment")) return;
     this.attachPermanent(id, { kind: "object", object: host });
+  }
+
+  /**
+   * Could the Equipment `id`, about to enter the battlefield (or on it),
+   * equip `host`? Rule 301.5: a creature, not itself, and not while it's a
+   * creature itself (without reconfigure); nor one its source's quality has
+   * protection from (702.16c). Off the battlefield it's read as its card.
+   */
+  private canEquipEntering(id: ObjectId, host: ObjectId): boolean {
+    const card = this.state.objects[id];
+    if (card === undefined) return false;
+    if (card.zone === "battlefield") return this.canEquip(id, host, true);
+    if (host === id) return false;
+    const target = this.state.objects[host];
+    if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
+    if (!effectiveTypes(this.state, this.registry, target).includes("creature")) return false;
+    const def = this.registry.get(printedCardName(card));
+    if (def.types.includes("creature") && !def.activated.some((a) => a.reconfigure !== undefined)) return false;
+    if (!this.attachOnlyToAllows(id, host)) return false;
+    return !protectionBlocks(this.state, this.registry, host, this.cardSource(def, id));
+  }
+
+  /**
+   * Whether `host` passes every "this Equipment can be attached only to …"
+   * of `id`'s (`StaticAbility.attachOnlyTo` — O-Naginata, Gate Smasher),
+   * read from its controller's side: on the battlefield, the statics it has
+   * now; elsewhere, its card's.
+   */
+  private attachOnlyToAllows(id: ObjectId, host: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined) return false;
+    const fails = (ability: StaticAbility): boolean =>
+      ability.attachOnlyTo !== undefined &&
+      !matchesFilter(this.state, this.registry, host, ability.attachOnlyTo, { you: object.controller, source: id });
+    if (object.zone !== "battlefield") return !this.registry.get(rulesTextName(object)).static.some(fails);
+    return !this.hasOwnStatic(object, fails);
+  }
+
+  /**
+   * The permanents matching `filter` from `player`'s side that `attachment`
+   * — an Aura or Equipment on the battlefield — could legally be attached to
+   * now (rules 301.5, 303.4j, 701.3a); `another` leaves out the one it's on.
+   * See the `attach` effect's `ontoChosen`.
+   */
+  private attachableHosts(attachment: ObjectId, filter: CardFilter, player: PlayerId, another: boolean): ObjectId[] {
+    const object = this.state.objects[attachment];
+    if (object === undefined || object.zone !== "battlefield") return [];
+    const printed = this.registry.get(printedCardName(object));
+    const def =
+      object.bestowed === true
+        ? bestowedDefinition(printed)
+        : object.licid !== undefined
+          ? licidDefinition(printed)
+          : printed;
+    const aura = def.subtypes.includes("Aura");
+    if (!aura && !def.subtypes.includes("Equipment")) return [];
+    return this.battlefieldMatching(player, filter).filter(
+      (host) =>
+        (!another || host !== object.attachedTo) &&
+        (aura ? this.canEnchant(attachment, host, object.controller, def) : this.canEquip(attachment, host, true)),
+    );
   }
 
   /**
@@ -38347,7 +38623,7 @@ export class Game {
       readonly underOwners?: boolean;
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
-      readonly attachTo?: ObjectId | null;
+      readonly attachTo?: EnterAttachHost;
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
       /** The spell's X, for a filter that reads it (Rally the Ancestors). */
@@ -38399,7 +38675,15 @@ export class Game {
       // nothing moves until they are all made, and this runs again with each.
       const ownerOrPlayer = (id: ObjectId): PlayerId =>
         opts.underOwners === true ? (this.state.objects[id]?.owner ?? player) : player;
-      if (destination === "battlefield" && eligible.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
+      // What each enters attached to is settled before its choices, so an
+      // Aura's isn't asked when the effect names it (rule 303.4f), and one
+      // that can't go there stays without asking anything (303.4i).
+      const attachTo = destination === "battlefield" ? opts.attachTo : undefined;
+      const entering =
+        attachTo === undefined
+          ? eligible
+          : eligible.filter((id) => this.readyToEnterAttached(id, attachTo, ownerOrPlayer(id)));
+      if (destination === "battlefield" && entering.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
         return true;
       }
       // "Return all land cards from your graveyard" moves them at once: one
@@ -43102,6 +43386,19 @@ export class Game {
           object.attachedTo = chosen.id;
           this.emit({ type: "permanent-attached", source: id, target: chosen.id });
         }
+      }
+      // An Equipment put onto the battlefield "attached to a creature you
+      // control" (One Last Job): the one chosen as it entered, if it's still
+      // there and it can equip it — else it enters unattached (301.5e).
+      const attachHost = enterChoice.attachHost ?? null;
+      if (
+        attachHost !== null &&
+        object.attachedTo == null &&
+        this.state.objects[attachHost]?.zone === "battlefield" &&
+        this.canEquip(id, attachHost, true)
+      ) {
+        object.attachedTo = attachHost;
+        this.emit({ type: "permanent-attached", source: id, target: attachHost });
       }
     }
     // Alt-cast zone markers (ROADMAP Phase 6) end on any zone change: a

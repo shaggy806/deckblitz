@@ -19,16 +19,17 @@ import type {
   Supertype,
   TurnStat,
 } from "./cards.js";
-import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { AggregateSpec, CardFilter, ShareReference, SharedTypes } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { manaOriginMatches, type Color, type ManaFromSpec, type ManaOrigin, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
   DelayedTriggerTiming,
+  EnterAttachHost,
   FaceDownAs,
   LeaveDestination,
   PlayerCounterKind,
@@ -55,6 +56,55 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
  * last existed if it has left; nothing once the chosen one has left the
  * battlefield (rule 400.7). Not a target. */
 export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen";
+/**
+ * What a card put onto the battlefield "attached to" something enters
+ * attached to — an effect's `attachedTo`:
+ *
+ * - an {@link EffectTargetRef}: the permanent it names — a target slot (or a
+ *   **player** in that slot: Bitterheart Witch's "a Curse card … attached to
+ *   target player", rule 303.4), the source, the trigger object, or what the
+ *   source is attached to ("attached to enchanted creature" — Mantle of the
+ *   Ancients);
+ * - `{ among }`: a permanent matching this filter, read from the side of the
+ *   player it enters under, chosen **as it enters** rather than targeted —
+ *   One Last Job's "return target Aura or Equipment card from your graveyard
+ *   to the battlefield attached to a creature you control", Nomad
+ *   Mythmaker's. An Aura's choice is the one rule 303.4f has its controller
+ *   make, limited to these (none it can enchant, and it stays where it is —
+ *   303.4g); an Equipment's is among those it could equip (none, and it
+ *   enters unattached — 301.5e).
+ *
+ * See {@link EnterAttachHost} for what happens when it can't be attached.
+ */
+export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
+/**
+ * What an `attach` acts on — the attachment, or what it's attached to:
+ * an {@link EffectTargetRef}, or
+ *
+ * - `"created"`: the token an earlier step of this resolution created (living
+ *   weapon's "create a 0/0 black Phyrexian Germ creature token, then attach
+ *   this to it" — rule 702.92a);
+ * - `"put-this-way"`: the card an earlier step of this resolution put onto
+ *   the battlefield (the `"put-onto-battlefield"` this-way kind) — Pre-War
+ *   Formalwear's "return target creature card … to the battlefield and
+ *   attach this Equipment to **it**", Stonehewer Giant's "search your library
+ *   for an Equipment card, put it onto the battlefield, attach **it** to a
+ *   creature you control". The first of them still on the battlefield, as
+ *   the same object (rule 400.7).
+ */
+export type AttachRef = EffectTargetRef | "created" | "put-this-way";
+/** A `look-and-choose`'s zone as `ResolutionContext.lookAndChoose` takes it:
+ * its `"targets"` resolved to `{ cards }`, its `"exiled-with-source"` to the
+ * linked cards in exile, `{ exiled }`. */
+export type LookAndChooseZone =
+  | "library"
+  | "graveyard"
+  | "hand"
+  | "graveyards"
+  | "command"
+  | "exile"
+  | { readonly cards: readonly ObjectId[] }
+  | { readonly exiled: readonly ObjectId[] };
 /** What a `search-library` searches — see its `zones`. */
 export type SearchZones = "library" | "graveyard" | "library-and-graveyard" | "graveyard-hand-library";
 /** A `search-library`'s other player's zones and what follows the finds, as
@@ -64,6 +114,8 @@ export interface SearchMore {
   readonly owner?: PlayerId;
   readonly all?: boolean;
   readonly playable?: "while-exiled";
+  /** Its `linked`. */
+  readonly linked?: true;
   readonly then?: EffectSpec;
   readonly outside?: true | "only";
   readonly faceUpExile?: true;
@@ -1872,14 +1924,44 @@ export type EffectSpec =
        * is there as this resolves, a card put there in response included
        * (the ruling). Nothing happens when nothing matches. Announced as a
        * `chosen-at-random` event.
+       *
+       * `zone: "hand"` picks from a **hand**, a hidden zone (rule 400.2):
+       * "target player reveals a card at random from their hand" (Hired
+       * Torturer, Singe-Mind Ogre — `show: "reveal"`, shown to every player,
+       * rule 701.20a), "look at a card at random in target player's hand"
+       * (Urza's Bauble — `show: "look"`, seen by the effect's controller
+       * alone, who closes the look; nothing follows it, so no `then`), or
+       * "exiles a card at random from their hand" (Crabomination — no
+       * `show`: `then`'s move shows it). `zone: "exiled-with-source"` picks
+       * from the cards in exile linked to this effect's source (rule 607.2a
+       * — `GameObject.exiledWith`), in the stint the resolving ability
+       * refers to, `whose` unread: Skyship Weatherlight's "choose a card at
+       * random that was exiled with Skyship Weatherlight", Cosmium
+       * Catalyst's "an exiled card used to craft this artifact" (702.167c).
+       * A face-down one is picked like any other; the event names it to
+       * those who may look at it.
        */
       readonly kind: "choose-random-card";
-      readonly zone: "graveyard";
-      /** Whose graveyard: the effect's controller's (the default),
-       * `"that-player"`, or a target slot holding a player. */
-      readonly whose?: "you" | "that-player" | number;
+      readonly zone: "graveyard" | "hand" | "exiled-with-source";
+      /** Whose graveyard or hand: the effect's controller's (the default),
+       * `"that-player"`, a target slot holding a player, or a player named
+       * through a target ("target creature's controller reveals a card at
+       * random from their hand" — Friendly Fire: `{ controllerOfTarget: 0
+       * }`). */
+      readonly whose?: "you" | "that-player" | number | ChosenPlayerRef;
       readonly filter?: CardFilter;
-      readonly then: EffectSpec;
+      /** How a card picked from a hand is shown — see `zone`. */
+      readonly show?: "reveal" | "look";
+      /** The picked card goes in this target slot, **beside** the effect's
+       * own targets, rather than replacing them all as target 0 — Cursed
+       * Scroll's "reveal a card at random from your hand. If that card has
+       * the chosen name, this artifact deals 2 damage to **any target**"
+       * (`slot: 1`, the damage still at target 0), Singe-Mind Ogre's "target
+       * player … then loses life equal to that card's mana value". */
+      readonly slot?: number;
+      /** What's done with the picked card; nothing for a bare reveal or
+       * look. */
+      readonly then?: EffectSpec;
     }
   | {
       /** `effect` with `"that-player"` naming `player` — the mode a
@@ -2701,6 +2783,21 @@ export type EffectSpec =
        * the cards its `exile { linked }` put there, found though the Urn has
        * just been sacrificed. */
       readonly linked?: "hand" | "battlefield";
+      /** With `linked: "battlefield"`: "**put** all cards exiled with it
+       * onto the battlefield" (Underworld Sentinel) — under the control of
+       * the player putting them there, the effect's controller (rule
+       * 110.2a), not their owners' as a "return" is (610.3c). */
+      readonly under?: "you";
+      /** With `linked: "battlefield"`: only the **other** cards exiled with
+       * it — not the ones this resolution has just exiled (Mirror of Life
+       * Trapping's "exile it, then return all other permanent cards exiled
+       * with this artifact", Mysterious Limousine's "return each other card
+       * exiled with this Vehicle"). */
+      readonly others?: true;
+      /** With `linked: "battlefield"`: only the linked cards this takes
+       * ("all other **permanent** cards" — rule 110.4b), read in exile. The
+       * rest stay exiled with it. */
+      readonly filter?: CardFilter;
     }
   | {
       /**
@@ -2772,8 +2869,11 @@ export type EffectSpec =
        * `"source"`, `"trigger-object"` — and it enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
        * can't legally enchant it — or with nothing there, the permanent
        * having left (rule 400.7) — stays where it is; an Equipment that
-       * can't equip it, and anything else, enters unattached. */
-      readonly attachedTo?: EffectTargetRef;
+       * can't equip it, and anything else, enters unattached. A player in
+       * the slot, or a permanent chosen as it enters (`{ among }` — Nomad
+       * Mythmaker's "attached to a creature you control"): see
+       * {@link AttachHostRef}. */
+      readonly attachedTo?: AttachHostRef;
       /** "…onto the battlefield **face down**" — see {@link EnterTypes}'
        * `faceDown`: Missy's "return it to the battlefield under your control
        * face down and tapped. It's a 2/2 Cyberman artifact creature" is
@@ -2792,6 +2892,11 @@ export type EffectSpec =
       /** Only the cards matching this — Living Death's "each player exiles
        * all **creature cards** from their graveyard". */
       readonly filter?: CardFilter;
+      /** Exiled **with this source** (rule 607.2a), as `exile`'s `linked`:
+       * Nautiloid Ship's "exile target player's graveyard", whose "a
+       * creature card exiled with this Vehicle" reads them. Nothing is
+       * linked when the source isn't a permanent. */
+      readonly linked?: true;
     }
   | {
       /** Each player in `who` sacrifices every permanent matching `filter`
@@ -3157,8 +3262,9 @@ export type EffectSpec =
        * permanent this names, and each card enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
        * can't legally enchant it — or with nothing there, the permanent
        * having left (rule 400.7) — stays where it is; an Equipment that
-       * can't equip it, and anything else, enters unattached. */
-      readonly attachedTo?: EffectTargetRef;
+       * can't equip it, and anything else, enters unattached. `{ among }`:
+       * each one's host chosen as it enters — see {@link AttachHostRef}. */
+      readonly attachedTo?: AttachHostRef;
     }
   | {
       /**
@@ -5878,15 +5984,38 @@ export type EffectSpec =
        * only by an Aura that can enchant them (a Curse — rule 303.4); one
        * that can't go there stays where it is (701.3b). */
       readonly kind: "attach";
-      readonly target: EffectTargetRef | "created";
-      readonly attachment?: EffectTargetRef;
+      /** What it's attached to — see {@link AttachRef} (`"put-this-way"`:
+       * Pre-War Formalwear's "return target creature card … and attach this
+       * Equipment to it"). Ignored with `ontoChosen`. */
+      readonly target: AttachRef;
+      /** What's attached, when it isn't the source — see {@link AttachRef}
+       * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
+      readonly attachment?: AttachRef;
       readonly attachments?: CardFilter;
       /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
        * Equipment you control to it" is `upTo: 1`. */
       readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number };
+      /** Attach it to **a permanent chosen as this resolves**, not targeted
+       * (rule 608.2c): Stonehewer Giant's "attach it to a creature you
+       * control", Aura Graft's "attach it to another permanent it can
+       * enchant". The choice is the effect's controller's, among the
+       * permanents matching `filter` (read from their side) that the
+       * attachment could legally be attached to now (rules 301.5, 303.4,
+       * 701.3a) — `another`: not the one it's attached to already. Exactly
+       * one, or with `optional` none ("you may attach it"); with none it
+       * could go on, nothing happens. */
+      readonly ontoChosen?: {
+        readonly filter: CardFilter;
+        readonly prompt: string;
+        readonly optional?: true;
+        readonly another?: true;
+      };
       /** Engine-built: where a `choose`'s picks go, carried past the choice
        * (which rebinds target 0 to each pick). */
       readonly onto?: TargetRef;
+      /** Engine-built: what an `ontoChosen` attaches, carried past the
+       * choice (which rebinds target 0 to the permanent chosen). */
+      readonly attaching?: TargetRef;
     }
   | {
       /** Unattach `target` (an Aura or Equipment) from whatever it's attached
@@ -7085,6 +7214,13 @@ export type EffectSpec =
        * Grasp): with an exile destination, the searcher may play the finds
        * (rule 305.1 for a land) while they stay in exile. */
       readonly playable?: "while-exiled";
+      /** With an exile destination, the finds are exiled **with this
+       * source** (rule 607.2a — `GameObject.exiledWith`), as `exile`'s
+       * `linked`: Skyship Weatherlight's "search your library for any number
+       * of artifact and/or creature cards, exile them", which its "a card at
+       * random that was exiled with Skyship Weatherlight" reads. Nothing is
+       * linked when the source isn't a permanent. */
+      readonly linked?: true;
       /** Applied once the finds have moved and the library is shuffled, with
        * **the finds as its targets** — `target: 0` is the first, as
        * `look-and-choose`'s `then` sees its chosen cards; `"that-player"` is
@@ -7114,6 +7250,13 @@ export type EffectSpec =
        * Quest's "X additional +1/+1 counters" (a live amount), Magmatic
        * Hellkite's "tapped with a stun counter on it". */
       readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
+      /** With `destination: "battlefield"`: the find enters attached to what
+       * this names — see {@link AttachHostRef}: Arachnus Spinner's "put it
+       * onto the battlefield attached to target creature", Bitterheart
+       * Witch's "a Curse card … attached to target player". An Aura that
+       * can't be attached there stays where it was found (rule 303.4i); an
+       * Equipment enters unattached (301.5e). */
+      readonly attachedTo?: AttachHostRef;
     }
   | {
       /** Reveal `count` cards from the top of the controller's library (or
@@ -7180,8 +7323,19 @@ export type EffectSpec =
        * be chosen are shown. A face-down card there has no characteristics
        * (rule 406.3a), so it's choosable only when `filter` asks nothing
        * but its owner, and then by its group, at random (the
-       * `choose-from-zone` decision's `faceDownGroups`). */
-      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile";
+       * `choose-from-zone` decision's `faceDownGroups`).
+       * `"exiled-with-source"` is only the cards in exile linked to this
+       * effect's source (rule 607.2a — `GameObject.exiledWith`), in the
+       * stint the resolving ability refers to — "put a creature card exiled
+       * with ~ onto the battlefield under your control" (Nautiloid Ship,
+       * Yggdrasil, Rebirth Engine: `filter: { type: "creature" }`,
+       * `destination: "battlefield"`), its riders the usual ones:
+       * `withCounters` (Chaos Shrine's Black Crystal's finality counter),
+       * `enterTapped`, `enterAs` (Ashiok's "is a Nightmare in addition to
+       * its other types"), `attacking`, `then` (Yggdrasil's "it gains haste
+       * until end of turn"). Under the chooser's control (rule 110.2a), as
+       * `"exile"`'s are. */
+      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source";
       /** All of `min` or nothing: with fewer than `min` cards that may be
        * chosen, nothing is asked and nothing moves — a cost can't be paid in
        * part (rule 118.3), so "you may put **two** cards your opponents own
@@ -7267,6 +7421,12 @@ export type EffectSpec =
        * battlefield tapped and attacking that opponent", Winota's. See
        * {@link EnterAttacking}. */
       readonly attacking?: EnterAttacking;
+      /** …and **attached to** what this names (see {@link AttachHostRef}) —
+       * Academy Researchers' "you may put an Aura card from your hand onto
+       * the battlefield attached to this creature". An Aura that can't be
+       * attached there stays where it is (rule 303.4i); an Equipment enters
+       * unattached (301.5e). */
+      readonly attachedTo?: AttachHostRef;
       /** `"hand"` (needed-cards P19 — Genesis Ultimatum: "…and the rest into
        * your hand") puts every non-chosen looked-at card into the chooser's
        * hand, regardless of `filter`; `"graveyard"` ("…put the rest into your
@@ -7671,7 +7831,8 @@ export interface EffectApi {
    * choice (nothing has moved; do it again once that's answered). */
   putOntoBattlefieldTogether(cards: readonly ObjectId[]): boolean;
   /** The permanents matching `filter` (from the effect's controller's
-   * side), each with how many tokens it stands for — a token stack is one
+   * side, with the source as `FilterContext.source`), each with how many
+   * tokens it stands for — a token stack is one
    * object for every token in it. */
   permanentsMatching(filter: CardFilter): readonly { readonly object: ObjectId; readonly count: number }[];
   /** See the `{ cardTypesInGraveyard }` {@link EffectAmount}. */
@@ -7908,6 +8069,10 @@ export interface EffectApi {
    * where it was when targeted, whether it was found illegal — moves with
    * it. */
   withTargetAt(from: number, index: number): ResolutionContext;
+  /** This context with `card`, which the resolution found rather than
+   * chose, in slot `slot` — every other target, and what was known about
+   * it, kept as it is (`choose-random-card`'s `slot`). */
+  withFoundAt(slot: number, card: ObjectId): ResolutionContext;
   /** How many creatures convoked the resolving spell (its `convokedBy`). */
   convokerCount(): number;
   /** See the `{ phyrexianPaidWithLife }` {@link EffectAmount}. */
@@ -7966,6 +8131,14 @@ export interface EffectApi {
    * `pick` says the index stands for — a `random` choice: `choose-opponent`,
    * `choose-random-card`, a `modal`'s mode. */
   pickAtRandom(count: number, pick: (index: number) => RandomPick): number;
+  /** Whether the card `id` matches `filter`, read from the effect's
+   * controller's side — `choose-random-card`'s filter over a hand or the
+   * cards exiled with the source. */
+  cardMatches(id: ObjectId, filter: CardFilter): boolean;
+  /** Show `card`, in `owner`'s hand, as `choose-random-card`'s `show` says:
+   * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
+   * controller alone — a look they close, as `look-at-hand`'s is. */
+  showCardFromHand(owner: PlayerId, card: ObjectId, how: "reveal" | "look"): void;
   /** The cards in `owner`'s graveyard matching `filter`, read from the
    * effect's controller's side, in graveyard order. */
   graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
@@ -7999,7 +8172,11 @@ export interface EffectApi {
    * Returns `true` when it stopped to ask an "as this enters" choice first
    * (rule 614.12 — a Clone's copy): nothing has moved, and the step runs
    * again once it's answered. */
-  returnExiledBySource(linked?: boolean): boolean;
+  returnExiledBySource(
+    linked?: boolean,
+    /** The linked return's `under`, `others` and `filter`. */
+    options?: { readonly underYou?: boolean; readonly others?: boolean; readonly filter?: CardFilter },
+  ): boolean;
   /** Sacrifice one named permanent — see the `"sacrifice-target"`
    * {@link EffectSpec}. */
   sacrificeTarget(target: TargetRef, byItsController?: boolean): void;
@@ -8066,8 +8243,10 @@ export interface EffectApi {
   sourceExiledThisWay(): readonly ObjectId[];
   /** The cards in exile linked to this effect's source (rule 607.2a — see
    * `GameObject.exiledWith`), in the battlefield stint the resolving spell
-   * or ability refers to. */
-  cardsExiledWithSource(): readonly ObjectId[];
+   * or ability refers to. `orUntil`: the cards it exiled "until [it] leaves
+   * the battlefield" too (`GameObject.exiledUntil` — rule 610.3), which an
+   * ability of it also calls "the exiled card". */
+  cardsExiledWithSource(orUntil?: boolean): readonly ObjectId[];
   /** See the `"ninjutsu"` {@link EffectSpec}: whether it stopped to ask an
    * "as this enters" choice, after which it's applied again. */
   ninjutsu(): boolean;
@@ -8114,7 +8293,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean): void;
   /** Each of `players` sacrifices every permanent matching `filter` they
    * control, at once — see the `"sacrifice-all"` {@link EffectSpec}. */
   sacrificeAll(players: readonly PlayerId[], filter: CardFilter): void;
@@ -8313,7 +8492,7 @@ export interface EffectApi {
       readonly handToo?: boolean;
       readonly enterAs?: EnterTypes;
       /** See the spec's `attachedTo`; `null` for nothing there. */
-      readonly attachTo?: ObjectId | null;
+      readonly attachTo?: EnterAttachHost;
       /** See the spec's `upTo` and `totalManaValueAtMost`. */
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
@@ -8936,6 +9115,11 @@ export interface EffectApi {
    * controller's view) to `target`, each in turn — the `"attach"`
    * {@link EffectSpec}'s `attachments`. */
   attachAll(target: TargetRef, filter: CardFilter): void;
+  /** The permanents matching `filter` (from the controller's side) that the
+   * Aura or Equipment `attachment` could legally be attached to now (rules
+   * 301.5, 303.4, 701.3a) — `another`: not the one it's attached to. See the
+   * `attach` effect's `ontoChosen`. */
+  attachableHosts(attachment: ObjectId, filter: CardFilter, another: boolean): readonly ObjectId[];
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. */
   transform(target: TargetRef): void;
@@ -9086,7 +9270,7 @@ export interface EffectApi {
     attacking?: ResolvedEnterAttacking,
     /** What it enters attached to — see the effect's `attachedTo`; `null`
      * for nothing there. */
-    attachTo?: ObjectId | null,
+    attachTo?: EnterAttachHost,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
   searchLibrary(
@@ -9100,9 +9284,9 @@ export interface EffectApi {
     reveal?: boolean,
     zones?: SearchZones,
     together?: SearchTogether,
-    /** A `search-library`'s `attachedToSource`: the source, or `null` once
-     * it has left (nothing can be attached to it). */
-    attachTo?: ObjectId | null,
+    /** A `search-library`'s `attachedToSource` (the source, or `null` once
+     * it has left — nothing can be attached to it) or `attachedTo`. */
+    attachTo?: EnterAttachHost,
     /** Its `whose` resolved (`owner`), `all`, `playable` and `then`. */
     more?: SearchMore,
   ): void;
@@ -9150,8 +9334,9 @@ export interface EffectApi {
   singleOut(target: TargetRef): TargetRef;
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   lookAndChoose(
-    /** `{ cards }` — the look-and-choose's `"targets"`, already resolved. */
-    zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "exile" | { readonly cards: readonly ObjectId[] },
+    /** `{ cards }` — the look-and-choose's `"targets"`, already resolved;
+     * `{ exiled }` — its `"exiled-with-source"`, the linked cards. */
+    zone: LookAndChooseZone,
     count: number | undefined,
     min: number,
     max: number,
@@ -9177,6 +9362,9 @@ export interface EffectApi {
     unlinked?: boolean,
     /** See `look-and-choose`'s `needsMin`. */
     needsMin?: boolean,
+    /** What battlefield-bound picks enter attached to — see
+     * `look-and-choose`'s `attachedTo`. */
+    attachTo?: EnterAttachHost,
   ): void;
 }
 
@@ -10485,12 +10673,17 @@ function scopedController(
 }
 
 /** What an `attachedTo` names, for a card put onto the battlefield attached
- * to it: the permanent, `null` for none (it has left, or the slot names a
- * player — rule 303.4i), or `undefined` for no `attachedTo` at all. */
-function attachHost(ref: EffectTargetRef | undefined, ctx: ResolutionContext): ObjectId | null | undefined {
+ * to it (see {@link EnterAttachHost}): the permanent, the player in the slot
+ * (rule 303.4), the filter its host is chosen from as it enters, `null` for
+ * nothing there (it has left — rule 400.7 — or the slot was found illegal,
+ * 608.2b), or `undefined` for no `attachedTo` at all. */
+function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {
   if (ref === undefined) return undefined;
+  if (typeof ref === "object") return { among: ref.among };
   if (ref === "source" && ctx.sourceLost === true) return null;
+  if (illegalSlot(ref, ctx)) return null;
   const target = resolveEffectTarget(ref, ctx);
+  if (target?.kind === "player") return { player: target.player };
   return target?.kind === "object" ? target.object : null;
 }
 
@@ -10499,6 +10692,21 @@ function attachHost(ref: EffectTargetRef | undefined, ctx: ResolutionContext): O
 function createdThisWay(ctx: ResolutionContext): TargetRef | undefined {
   const made = ctx.thisWay("created").find((entry) => !entry.departed);
   return made === undefined ? undefined : { kind: "object", object: made.object };
+}
+
+/** The first card this resolution has put onto the battlefield that is still
+ * there as the same object — Pre-War Formalwear's "return target creature
+ * card … and attach this Equipment to it". */
+function putThisWay(ctx: ResolutionContext): TargetRef | undefined {
+  const put = ctx.thisWay("put-onto-battlefield").find((entry) => !entry.departed);
+  return put === undefined ? undefined : { kind: "object", object: put.object };
+}
+
+/** What an {@link AttachRef} names now. */
+function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (ref === "created") return createdThisWay(ctx);
+  if (ref === "put-this-way") return putThisWay(ctx);
+  return resolveEffectTarget(ref, ctx);
 }
 
 /** Imperative escape hatch for a spell or ability the vocab can't express. */
@@ -10703,6 +10911,8 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCardTypeWith" in value ||
       "sharesPermanentTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
+      "sharesLandTypeWith" in value ||
+      "sameNameWith" in value ||
       "saddledSource" in value ||
       "bandedWithSource" in value ||
       "blockingRelation" in value ||
@@ -10739,11 +10949,9 @@ const PERMANENT_TYPES: ReadonlySet<CardType> = new Set<CardType>([
  * one greater" reads the sacrifice that has just happened. `{ own }` operands
  * are left alone: they're about each object matched, not about the effect.
  *
- * `CardFilter.sharesCardTypeWith` is bound the same way, to the card types the
- * sacrificed permanent had as it last existed on the battlefield, or the
- * trigger object's (an `anyOf` of one `typesAnyOf`, so an `anyOf` the filter
- * already had still applies). `sharesPermanentTypeWith` keeps only the
- * permanent types among the trigger object's (rule 110.4).
+ * The `CardFilter.shares…TypeWith` clauses are bound the same way, to a
+ * `sharesTypeWith` entry holding the reference objects and their types of
+ * that kind as the effect applies (as they last existed if they've left).
  */
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
   if (!containsDynamicCompare(spec)) return spec;
@@ -10778,32 +10986,44 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         NESTED_EFFECT_KEYS.has(key) || (liveFilter && key === "filter") ? v : walk(v),
       ]),
     );
-    if ("sharesCreatureTypeWith" in walked) {
-      // "Shares a creature type with it" (Heirloom Blade): the trigger
-      // object's creature types as it last existed — the changeling marker
-      // included, which `hasSubtype` reads as "any creature type" — ANDed
-      // with whatever `anyOf` the filter already had. None: nothing shares.
-      // `"source"`: the resolving ability's source (kinship's "this creature").
-      const { sharesCreatureTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
-      const other = withWhat === "source" ? ctx.source : ctx.triggerObject;
-      const subtypes =
-        other === undefined
-          ? []
-          : ctx
-              .subtypesOf({ kind: "object", object: other })
-              .filter((s) => s === EVERY_CREATURE_TYPE || isCreatureType(s));
-      const shares: CardFilter = { subtypes, ...(anyOf !== undefined ? { anyOf } : {}) };
-      return bindShares({ ...rest, anyOf: [shares] });
-    }
     return bindShares(walked);
   };
-  // "Shares a card type with it": the sacrificed permanent's types as it
-  // last existed, or the trigger object's — the spell whose casting fired
-  // the trigger — ANDed with whatever `anyOf` the filter already had.
-  const bindShares = (bound: Record<string, unknown>): unknown => {
+  // "Shares a card / permanent / creature / land type with it": the
+  // reference objects (`ShareReference`) and their types of that kind as
+  // they are now, or as they last existed if they've left (`cardTypesOf`,
+  // `subtypesOf`) — the changeling marker included, which `hasSubtype` reads
+  // as "any creature type".
+  const bindSharedTypes = (filter: Record<string, unknown>): Record<string, unknown> => {
+    let rest = filter;
+    const bound: SharedTypes[] = [];
+    for (const [key, kind] of SHARE_CLAUSES) {
+      if (!(key in rest)) continue;
+      const { [key]: reference, ...others } = rest;
+      rest = others;
+      const objects = shareReferenceObjects(reference as ShareReference, ctx);
+      const types = new Set<string>();
+      for (const object of objects) {
+        const ref: TargetRef = { kind: "object", object };
+        if (kind === "card" || kind === "permanent") {
+          for (const t of ctx.cardTypesOf(ref)) if (kind === "card" || PERMANENT_TYPES.has(t)) types.add(t);
+        } else {
+          for (const s of ctx.subtypesOf(ref)) {
+            const fits =
+              kind === "creature" ? s === EVERY_CREATURE_TYPE || isCreatureType(s) : s === EVERY_LAND_TYPE || isLandType(s);
+            if (fits) types.add(s);
+          }
+        }
+      }
+      bound.push({ kind, objects, types: [...types] });
+    }
+    if (bound.length === 0) return filter;
+    const already = (rest["sharesTypeWith"] as readonly SharedTypes[] | undefined) ?? [];
+    return { ...rest, sharesTypeWith: [...already, ...bound] };
+  };
+  const bindShares = (unbound: Record<string, unknown>): unknown => {
     // "A creature that saddled it this turn" (rule 702.171c): the resolving
     // ability's source, which the matching then reads by id.
-    let walked = bound;
+    let walked = bindSharedTypes(unbound);
     if (walked["saddledSource"] === true) {
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
@@ -10842,6 +11062,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       walked =
         object !== undefined ? { ...rest, sameNameAs: { object, name: ctx.nameForMatching(object) } } : walked;
     }
+    // "With the same name as it / the exiled card / a permanent": the names
+    // of what the reference names now (or last had) — every reference, since
+    // an effect's matching has no source to read the live ones from.
+    if ("sameNameWith" in walked) {
+      const { sameNameWith: reference, ...rest } = walked;
+      const names = shareReferenceObjects(reference as ShareReference, ctx)
+        .map((object) => ctx.nameForMatching(object))
+        .filter((name): name is string => name !== null);
+      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
+    }
     // "For each card exiled this way, … with the same name as that card"
     // (Haunting Echoes): the names of what this resolution has done that to.
     if (typeof walked["sameNameAsThisWay"] === "string") {
@@ -10862,24 +11092,37 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
           ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
           : walked;
     }
-    if ("sharesPermanentTypeWith" in walked) {
-      // Rule 110.4: only the permanent types count — kindred doesn't.
-      const { sharesPermanentTypeWith: _with, anyOf, ...rest } = walked as CardFilter;
-      const other = ctx.triggerObject;
-      const types = (other === undefined ? [] : ctx.cardTypesOf({ kind: "object", object: other })).filter(
-        (t) => PERMANENT_TYPES.has(t),
-      );
-      const shares: CardFilter = { typesAnyOf: types, ...(anyOf !== undefined ? { anyOf } : {}) };
-      walked = { ...rest, anyOf: [shares] };
-    }
-    if (!("sharesCardTypeWith" in walked)) return walked;
-    const { sharesCardTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
-    const other = withWhat === "trigger-object" ? ctx.triggerObject : ctx.sacrificed;
-    const types = other === undefined ? [] : ctx.cardTypesOf({ kind: "object", object: other });
-    const shares: CardFilter = { typesAnyOf: types, ...(anyOf !== undefined ? { anyOf } : {}) };
-    return { ...rest, anyOf: [shares] };
+    return walked;
   };
   return walk(spec) as EffectSpec;
+}
+
+/** The `shares…TypeWith` clauses and the kind of type each compares (rule
+ * 205.2a card types, 110.4 permanent types, 205.3m creature types, 205.3i
+ * land types). */
+const SHARE_CLAUSES = [
+  ["sharesCardTypeWith", "card"],
+  ["sharesPermanentTypeWith", "permanent"],
+  ["sharesCreatureTypeWith", "creature"],
+  ["sharesLandTypeWith", "land"],
+] as const satisfies readonly (readonly [keyof CardFilter, SharedTypes["kind"]])[];
+
+/** The objects a `ShareReference` names in this resolution — see its doc. */
+function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext): readonly ObjectId[] {
+  const one = (object: ObjectId | undefined): readonly ObjectId[] => (object === undefined ? [] : [object]);
+  if (reference === "source") return [ctx.source];
+  if (reference === "trigger-object") return one(ctx.triggerObject);
+  if (reference === "sacrificed") return one(ctx.sacrificed);
+  if (reference === "attached") return one(ctx.attachedHost());
+  if (reference === "chosen") return one(ctx.chosenPermanent());
+  if (reference === "exiled-with-source") return ctx.cardsExiledWithSource(true);
+  if (typeof reference === "number") {
+    if (illegalSlot(reference, ctx)) return [];
+    const target = ctx.targets[reference];
+    return target?.kind === "object" ? [target.object] : [];
+  }
+  const filter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" as const } : reference.permanents;
+  return ctx.permanentsMatching(filter).map((m) => m.object);
 }
 
 /** Does `amount` read a per-player value (`lifeTotal: "each"`, a `thisWay`
@@ -11310,19 +11553,46 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "choose-random-card": {
-      const whose = spec.whose ?? "you";
+      let cards: readonly ObjectId[];
       let owner: PlayerId | undefined;
-      if (whose === "you") owner = ctx.controller;
-      else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
-      else {
-        const ref = ctx.targets[whose];
-        owner = ref?.kind === "player" ? ref.player : undefined;
+      if (spec.zone === "exiled-with-source") {
+        // Rule 607.2a: only the cards the linked ability exiled, still there.
+        const filter = spec.filter;
+        cards = ctx
+          .cardsExiledWithSource()
+          .filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+      } else {
+        const whose = spec.whose ?? "you";
+        if (whose === "you") owner = ctx.controller;
+        else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
+        else if (typeof whose === "object") owner = effectPlayer(whose, ctx);
+        else {
+          const ref = ctx.targets[whose];
+          owner = ref?.kind === "player" ? ref.player : undefined;
+        }
+        if (owner === undefined) return;
+        if (spec.zone === "graveyard") cards = ctx.graveyardMatching(owner, spec.filter ?? {});
+        else {
+          const filter = spec.filter;
+          cards = ctx
+            .cardsIn(owner, "hand")
+            .filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+        }
       }
-      if (owner === undefined) return;
-      const cards = ctx.graveyardMatching(owner, spec.filter ?? {});
       if (cards.length === 0) return;
       const chosen = cards[ctx.pickAtRandom(cards.length, (i) => ({ kind: "card", object: cards[i] }))];
-      applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: chosen }]));
+      if (spec.zone === "hand" && spec.show !== undefined && owner !== undefined) {
+        if (spec.show === "look" && spec.then !== undefined) {
+          throw new Error("choose-random-card: a look takes no `then` — nothing follows it on the card");
+        }
+        // Rule 701.20a: a reveal shows it to every player; a look, to the
+        // effect's controller alone (it stays hidden to the rest, 400.2).
+        ctx.showCardFromHand(owner, chosen, spec.show);
+      }
+      if (spec.then === undefined) return;
+      const picked: TargetRef = { kind: "object", object: chosen };
+      if (spec.slot === undefined) applyEffectSpec(spec.then, ctx.withTargets([picked]));
+      else applyEffectSpec(spec.then, ctx.withFoundAt(spec.slot, chosen));
       return;
     }
     case "choose-permanents": {
@@ -11869,7 +12139,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // first to ask an "as this enters" choice (a Clone's copy — rule
       // 614.12); it moved nothing, and runs again once that's answered.
       const parked = ctx.parkedCount();
-      if (ctx.returnExiledBySource(spec.linked === "battlefield")) ctx.resumeAfterDecisions(spec, parked);
+      const linkedOptions =
+        spec.linked === "battlefield"
+          ? {
+              ...(spec.under === "you" ? { underYou: true } : {}),
+              ...(spec.others === true ? { others: true } : {}),
+              ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+            }
+          : undefined;
+      if (ctx.returnExiledBySource(spec.linked === "battlefield", linkedOptions)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "choose-creature-type":
@@ -11926,7 +12204,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const scope = spec.target;
         ctx.simultaneously(() => {
           for (const player of ctx.playersInScope(scope)) {
-            ctx.exileGraveyard({ kind: "player", player }, spec.filter);
+            ctx.exileGraveyard({ kind: "player", player }, spec.filter, spec.linked === true);
           }
         });
         return;
@@ -11935,7 +12213,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.target === "you"
           ? ({ kind: "player", player: ctx.controller } as const)
           : ctx.targets[spec.target];
-      if (target !== undefined) ctx.exileGraveyard(target, spec.filter);
+      if (target !== undefined) ctx.exileGraveyard(target, spec.filter, spec.linked === true);
       return;
     }
     case "sacrifice-all":
@@ -13536,8 +13814,37 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "attach": {
-      const target =
-        spec.onto ?? (spec.target === "created" ? createdThisWay(ctx) : resolveEffectTarget(spec.target, ctx));
+      if (spec.ontoChosen !== undefined && spec.attaching === undefined) {
+        // What's attached is settled now; the host is chosen next, among
+        // those it could legally go on (rule 701.3a).
+        const attaching =
+          spec.attachment === undefined
+            ? ctx.sourceLost === true
+              ? undefined
+              : ({ kind: "object", object: ctx.source } as const)
+            : resolveAttachRef(spec.attachment, ctx);
+        if (attaching?.kind !== "object") return;
+        const { filter, prompt, optional, another } = spec.ontoChosen;
+        const hosts = ctx.attachableHosts(attaching.object, filter, another === true);
+        if (hosts.length === 0) return;
+        ctx.choosePermanents(
+          filter,
+          optional === true ? 0 : 1,
+          1,
+          { kind: "attach", target: 0, attachment: 0, attaching },
+          prompt,
+          false,
+          ctx.permanentsMatching(filter).flatMap((m) => (hosts.includes(m.object) ? [] : [m.object])),
+        );
+        return;
+      }
+      if (spec.attaching !== undefined) {
+        // An `ontoChosen`'s answer: target 0 is the permanent chosen.
+        const host = ctx.targets[0];
+        if (host !== undefined) ctx.attach(host, spec.attaching);
+        return;
+      }
+      const target = spec.onto ?? resolveAttachRef(spec.target, ctx);
       if (target === undefined) return;
       if (spec.choose !== undefined) {
         const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
@@ -13562,7 +13869,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.attach(target);
         return;
       }
-      const attachment = resolveEffectTarget(spec.attachment, ctx);
+      const attachment = resolveAttachRef(spec.attachment, ctx);
       if (attachment !== undefined) ctx.attach(target, attachment);
       return;
     }
@@ -14183,11 +14490,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.reveal === true,
         spec.zones,
         spec.together,
-        spec.attachedToSource === true ? attachHost("source", ctx) : undefined,
+        spec.attachedToSource === true ? attachHost("source", ctx) : attachHost(spec.attachedTo, ctx),
         {
           ...(owner !== undefined ? { owner } : {}),
           ...(spec.all === true ? { all: true } : {}),
           ...(spec.playable !== undefined ? { playable: spec.playable } : {}),
+          ...(spec.linked === true ? { linked: true } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
@@ -14236,7 +14544,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const zone =
         spec.zone === "targets"
           ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
-          : spec.zone;
+          : spec.zone === "exiled-with-source"
+            ? // Rule 607.2a: only what the linked ability exiled.
+              { exiled: ctx.cardsExiledWithSource() }
+            : spec.zone;
       ctx.lookAndChoose(
         zone,
         spec.count === undefined ? undefined : amountValue(spec.count, ctx),
@@ -14266,6 +14577,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.withCounters,
         spec.unlinked === true,
         spec.needsMin === true,
+        attachHost(spec.attachedTo, ctx),
       );
       return;
     }

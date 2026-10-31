@@ -596,6 +596,7 @@ import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
 import _poolRottingRegisaur from "../pool/rotting-regisaur.js";
 import _poolRuinationGuide from "../pool/ruination-guide.js";
+import _poolRuneOfFlight from "../pool/rune-of-flight.js";
 import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
@@ -661,6 +662,7 @@ import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkirsdagSupplicant from "../pool/skirsdag-supplicant.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
+import _poolSkyshipWeatherlight from "../pool/skyship-weatherlight.js";
 import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
@@ -1439,6 +1441,7 @@ const shard: CardShard = {
     _poolRottingLegion,
     _poolRottingRegisaur,
     _poolRuinationGuide,
+    _poolRuneOfFlight,
     _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
@@ -1504,6 +1507,7 @@ const shard: CardShard = {
     _poolSkirsdagSupplicant,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
+    _poolSkyshipWeatherlight,
     _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
