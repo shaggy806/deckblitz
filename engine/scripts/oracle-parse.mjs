@@ -1605,6 +1605,32 @@ export function parseSentence(sentence, ctx) {
       ...(/^any/i.test(m[1]) ? { amount: "any" } : {}),
     };
   }
+  // Removing counters in bulk: "remove all counters from target permanent"
+  // (every kind — Vampire Hexmage), "remove all charge counters from ~" (one
+  // kind), and off every permanent matching: "remove all fate counters from
+  // all permanents" (Oblivion Stone), "remove two loyalty counters from each
+  // planeswalker" (Pestilent Haze), "remove a -1/-1 counter from each
+  // creature you control" (Heartmender).
+  if ((m = re(`remove all (?:([+-]\\d+/[+-]\\d+|[a-z]+) )?counters from (~|${TARGET})`).exec(s)) && !/^all /i.test(m[2])) {
+    const target = m[2] === "~" ? "source" : slot(m[2]);
+    return target === undefined ? null : { kind: "remove-counter", target, counter: m[1]?.toLowerCase() ?? "any", amount: "all" };
+  }
+  {
+    const massFilter = (phrase) => {
+      const own = / (you control|an opponent controls|your opponents control)$/i.exec(phrase);
+      const filter = parseTypePhrase(own === null ? phrase : phrase.slice(0, own.index));
+      if (filter === null) return null;
+      return own === null ? filter : { ...filter, controlledBy: /^you /i.test(own[1]) ? "you" : "opponent" };
+    };
+    const all = re(`remove all (?:([+-]\\d+/[+-]\\d+|[a-z]+) )?counters from all ([a-z ]+)`).exec(s);
+    const each = all === null ? re(`remove ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? from each ([a-z ]+)`).exec(s) : null;
+    const filter = all !== null ? massFilter(all[2]) : each !== null ? massFilter(each[3]) : undefined;
+    if (filter === null) return null;
+    if (all !== null) return { kind: "remove-counter-all", filter, counter: all[1]?.toLowerCase() ?? "any", amount: "all" };
+    if (each !== null && each[2].toLowerCase() !== "counter") {
+      return { kind: "remove-counter-all", filter, counter: each[2].toLowerCase(), amount: amount(each[1]) };
+    }
+  }
   // "Put its counters on …" / "put those counters on …" of a permanent that
   // left (rule 122.8): each kind it had, put on — the ability's own object
   // (a self dies or leaves trigger) or the one its trigger names.
@@ -2312,6 +2338,9 @@ export function parseSentence(sentence, ctx) {
     }
     if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on it`).exec(s))) {
       return { kind: "add-counter", target: it, counter: m[2].toLowerCase(), amount: amount(m[1]) };
+    }
+    if ((m = re(`remove all (?:([+-]\\d+/[+-]\\d+|[a-z]+) )?counters from it`).exec(s))) {
+      return { kind: "remove-counter", target: it, counter: m[1]?.toLowerCase() ?? "any", amount: "all" };
     }
     if (re("untap it").test(s)) return { kind: "untap", target: it };
     if (re("tap it").test(s)) return { kind: "tap", target: it };

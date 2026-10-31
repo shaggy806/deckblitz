@@ -31,7 +31,7 @@ export default defineCard({
         kind: "remove-counter",
         target: "source",
         counter: "+1/+1",
-        amount: { countersOn: "source", counter: "+1/+1" },
+        amount: "all",
       },
       resolve: null,
       text: END,

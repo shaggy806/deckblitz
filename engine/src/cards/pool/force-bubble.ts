@@ -46,7 +46,7 @@ export default defineCard({
         kind: "remove-counter",
         target: "source",
         counter: "depletion",
-        amount: { countersOn: "source", counter: "depletion" },
+        amount: "all",
       },
       resolve: null,
       text: "At the beginning of each end step, remove all depletion counters from this enchantment.",

@@ -501,6 +501,7 @@ import _poolPartTheVeil from "../pool/part-the-veil.js";
 import _poolPatriarchsDesire from "../pool/patriarchs-desire.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPersistentNightmare from "../pool/persistent-nightmare.js";
+import _poolPestilentHaze from "../pool/pestilent-haze.js";
 import _poolPetalsOfInsight from "../pool/petals-of-insight.js";
 import _poolPetrahydrox from "../pool/petrahydrox.js";
 import _poolPhantomBeast from "../pool/phantom-beast.js";
@@ -1331,6 +1332,7 @@ const shard: CardShard = {
     _poolPatriarchsDesire,
     _poolPelargirSurvivor,
     _poolPersistentNightmare,
+    _poolPestilentHaze,
     _poolPetalsOfInsight,
     _poolPetrahydrox,
     _poolPhantomBeast,

@@ -178,10 +178,16 @@ section keeps only what to do next.
   the kicker `keyword: "reveal"` with `orControls` ("or controlled a Dragon as you cast this
   spell", not inherited by a copy), the activated `reveal` cost's "Reveal X white cards"; 9
   freed, 8 proving cards — Goldmeadow Stalwart, Silvergill Adept, Draconic Roar, Orator of
-  Ojutai, Scaleguard Sentinels, Martyr of Sands, Martyr of Spores, Martyr of Ashes).
-  **489 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
-  `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17),
-  `stat:turn-event-tallies` (17), `mechanic:assist` (16).
+  Ojutai, Scaleguard Sentinels, Martyr of Sands, Martyr of Spores, Martyr of Ashes),
+  remove-all-counters (2026-10-31: `remove-counter`'s `amount: "all"`, with `counter: "any"`
+  every kind, and `remove-counter-all` over a filter; a token stack's removal counted token by
+  token this way; 11 freed — Relic Amulet still needs `cost:remove-all-counters`, and Nexus
+  Mentality's draw would count its first mode's moved counters too when both modes are chosen,
+  since a modal spell's modes share one "this way"; 6 proving cards — Vampire Hexmage, Blitz
+  Leech, Enchanted River's Grasp, Oblivion Stone, Aether Snap, Pestilent Haze).
+  **500 freed cards wait for `author-freed`** (`cards:needs -- --stale`). Next families:
+  `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17),
+  `mechanic:assist` (16), `effect:choices-by-other-players` (16).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

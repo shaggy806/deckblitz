@@ -218,7 +218,9 @@ export function thisWayEntries(
         // removal, counted by the counters it took.
         if (event.type === "counter-removed" && event.amount > 0) {
           const object = state.objects[event.object];
-          if (object !== undefined) out.push({ object: event.object, player: object.controller, departed: false, count: event.amount });
+          if (object !== undefined) {
+            out.push({ object: event.object, player: object.controller, departed: false, count: event.amount * (event.tokens ?? 1) });
+          }
         } else if (event.type === "time-counter-removed") {
           const object = state.objects[event.object];
           if (object !== undefined) out.push({ object: event.object, player: object.owner, departed: false, count: 1 });

@@ -24715,22 +24715,20 @@ export class Game {
           ? ref.player
           : (this.state.objects[ref.object]?.owner ?? lastKnownOf(ref)?.owner),
       removeCounter: (target, counter, amount) => {
-        if (target.kind !== "object" || amount <= 0) return;
+        if (target.kind !== "object" || amount === 0) return;
         const before = this.state.objects[target.object];
         // A suspended card's time counter (rule 702.62a — suspend's own
         // upkeep trigger, or an effect): its last one triggers the cast.
-        if (before?.zone === "exile" && before.suspended === true && counter === "time") {
-          this.removeTimeCounter(target.object, amount);
+        if (before?.zone === "exile" && before.suspended === true && (counter === "time" || (counter === "any" && amount === "all"))) {
+          this.removeTimeCounter(target.object, amount === "all" ? (before.counters.time ?? 0) : amount);
           return;
         }
-        if (before === undefined || before.zone !== "battlefield" || (before.counters[counter] ?? 0) <= 0) return;
-        // One token of a stack loses it, not every token in it.
-        const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        const n = Math.min(amount, object.counters[counter] ?? 0);
-        object.counters[counter] = (object.counters[counter] ?? 0) - n;
-        if (object.counters[counter] <= 0) delete object.counters[counter];
-        this.emit({ type: "counter-removed", object: id, counter, amount: n, after: object.counters[counter] ?? 0 });
+        this.removeCountersFrom(target.object, counter, amount, true);
+      },
+      removeCounterAll: (filter, counter, amount) => {
+        // Who matches is read once, before any counter comes off — "remove
+        // all fate counters from all permanents" isn't emptied as it goes.
+        for (const id of this.battlefieldMatching(controller, filter, x, source)) this.removeCountersFrom(id, counter, amount, false);
       },
       moveCounters: (from, to, counter, amount) => this.moveCounters(from, to, counter, amount, controller),
       countersHere: (target) => {
@@ -31535,6 +31533,43 @@ export class Game {
     if (after > 0) object.counters.shield = after;
     else delete object.counters.shield;
     this.emit({ type: "counter-removed", object: id, counter: "shield", amount: 1, after });
+  }
+
+  /**
+   * Take up to `amount` counters of kind `counter` off the permanent `id` —
+   * `"all"` of them, and with `counter` `"any"` every kind it has (only with
+   * `"all"`: which kind a number would take is a choice, the `remove-counters`
+   * effect's). Only a permanent still on the battlefield loses any (counters
+   * on a card that left ceased to exist, rule 122.2). Each kind is one
+   * `counter-removed`. `split`: one token of a stack loses them (a targeted
+   * removal); otherwise the whole stack does, together (`tokens`).
+   */
+  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): void {
+    if (amount !== "all" && amount <= 0) return;
+    if (counter === "any" && amount !== "all") return;
+    const before = this.state.objects[id];
+    if (before === undefined || before.zone !== "battlefield") return;
+    const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter((k) => (before.counters[k] ?? 0) > 0);
+    if (kinds.length === 0) return;
+    const at = split ? this.splitOneFromStack(id) : id;
+    const object = this.state.objects[at];
+    const tokens = split ? 1 : (object.stackCount ?? 1);
+    for (const kind of kinds) {
+      const have = object.counters[kind] ?? 0;
+      const n = amount === "all" ? have : Math.min(amount, have);
+      if (n <= 0) continue;
+      if (have - n <= 0) delete object.counters[kind];
+      else object.counters[kind] = have - n;
+      this.emit({
+        type: "counter-removed",
+        object: at,
+        counter: kind,
+        amount: n,
+        after: object.counters[kind] ?? 0,
+        ...(tokens > 1 ? { tokens } : {}),
+      });
+    }
+    invalidateComputedCache();
   }
 
   /**

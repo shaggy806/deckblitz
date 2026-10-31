@@ -86,6 +86,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Need-keys Phase 2: removing counters in bulk** (2026-10-31; `effect:remove-all-counters`,
+  `effect:remove-counters-all`). `remove-counter`'s `amount: "all"` takes every counter of its
+  kind off one permanent, and with `counter: "any"` every kind ("remove all counters from
+  target permanent"); `remove-counter-all` does either, or a number, to every permanent
+  matching a filter, read before any counter comes off ("remove all fate counters from all
+  permanents", "remove two loyalty counters from each planeswalker"). A token stack loses them
+  together, one `counter-removed` with its `tokens`, so "counters removed this way" counts
+  each token's. The scaffolder reads all of them. 11 freed (Relic Amulet still needs
+  `cost:remove-all-counters`); proving cards Vampire Hexmage, Blitz Leech, Enchanted River's
+  Grasp, Oblivion Stone, Aether Snap, Pestilent Haze.
 - **Need-keys Phase 2: revealing cards from your hand as a cost** (2026-10-30;
   `cost:additional-cost-reveal`). A `BeholdSpec` with `fromHand` and no `exile` reveals from
   the hand (rule 701.20a, the `"reveal"` destination, the cards staying there): Lorwyn's

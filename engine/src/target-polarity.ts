@@ -390,8 +390,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "add-counter-all": (n, v) =>
     v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
   // The reverse of `add-counter`: losing a harmful counter helps.
+  // Every kind at once (`"any"` — Vampire Hexmage) reads as the loyalty and
+  // +1/+1 counters it nearly always takes: a harm, like a good kind's.
   "remove-counter": (n, v) =>
-    v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR),
+    v.touch(n.target, n.counter !== "any" && HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR),
+  "remove-counter-all": none,
   // Chosen counters off a target (Gremlin Mine): the same lean.
   "remove-counters": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR);

@@ -525,6 +525,7 @@ import _poolNullify from "../pool/nullify.js";
 import _poolOakenBrawler from "../pool/oaken-brawler.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
+import _poolOblivionStone from "../pool/oblivion-stone.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnAlert from "../pool/on-alert.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
@@ -785,6 +786,7 @@ import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasGuilt from "../pool/urzas-guilt.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolValorousCharge from "../pool/valorous-charge.js";
+import _poolVampireHexmage from "../pool/vampire-hexmage.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
 import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
@@ -1379,6 +1381,7 @@ const shard: CardShard = {
     _poolOakenBrawler,
     _poolOasis,
     _poolObeliskOfNaya,
+    _poolOblivionStone,
     _poolOldFlitterfang,
     _poolOnAlert,
     _poolOnyxGoblet,
@@ -1639,6 +1642,7 @@ const shard: CardShard = {
     _poolUrzasGuilt,
     _poolUrzasIncubator,
     _poolValorousCharge,
+    _poolVampireHexmage,
     _poolVampireNighthawk,
     _poolVampireScrivener,
     _poolVanguardOfTheRose,

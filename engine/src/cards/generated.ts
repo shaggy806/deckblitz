@@ -257,6 +257,7 @@ import _poolAetherPoisoner from "./pool/aether-poisoner.js";
 import _poolAetherRift from "./pool/aether-rift.js";
 import _poolAetherSearcher from "./pool/aether-searcher.js";
 import _poolAetherShockwave from "./pool/aether-shockwave.js";
+import _poolAetherSnap from "./pool/aether-snap.js";
 import _poolAetherSpellbomb from "./pool/aether-spellbomb.js";
 import _poolAetherSting from "./pool/aether-sting.js";
 import _poolAetherStorm from "./pool/aether-storm.js";
@@ -2292,6 +2293,7 @@ import _poolBlisterspitGremlin from "./pool/blisterspit-gremlin.js";
 import _poolBlisterstickShaman from "./pool/blisterstick-shaman.js";
 import _poolBlitzAutomaton from "./pool/blitz-automaton.js";
 import _poolBlitzHellion from "./pool/blitz-hellion.js";
+import _poolBlitzLeech from "./pool/blitz-leech.js";
 import _poolBlitzOfTheThunderRaptor from "./pool/blitz-of-the-thunder-raptor.js";
 import _poolBlitzballShot from "./pool/blitzball-shot.js";
 import _poolBlizzardBrawl from "./pool/blizzard-brawl.js";
@@ -6895,6 +6897,7 @@ import _poolEncaseInIce from "./pool/encase-in-ice.js";
 import _poolEnchantedBeing from "./pool/enchanted-being.js";
 import _poolEnchantedCarriage from "./pool/enchanted-carriage.js";
 import _poolEnchantedEvening from "./pool/enchanted-evening.js";
+import _poolEnchantedRiversGrasp from "./pool/enchanted-rivers-grasp.js";
 import _poolEnchantresssPresence from "./pool/enchantresss-presence.js";
 import _poolEnclaveCryptologist from "./pool/enclave-cryptologist.js";
 import _poolEnclaveElite from "./pool/enclave-elite.js";
@@ -15668,6 +15671,7 @@ import _poolObliterate from "./pool/obliterate.js";
 import _poolObliteratingBolt from "./pool/obliterating-bolt.js";
 import _poolOblivionCrown from "./pool/oblivion-crown.js";
 import _poolOblivionRing from "./pool/oblivion-ring.js";
+import _poolOblivionStone from "./pool/oblivion-stone.js";
 import _poolOblivionStrike from "./pool/oblivion-strike.js";
 import _poolOblivion from "./pool/oblivion.js";
 import _poolOblivionsHunger from "./pool/oblivions-hunger.js";
@@ -16464,6 +16468,7 @@ import _poolPestermite from "./pool/pestermite.js";
 import _poolPestilenceDemon from "./pool/pestilence-demon.js";
 import _poolPestilence from "./pool/pestilence.js";
 import _poolPestilentCauldron from "./pool/pestilent-cauldron.js";
+import _poolPestilentHaze from "./pool/pestilent-haze.js";
 import _poolPestilentKathari from "./pool/pestilent-kathari.js";
 import _poolPestilentSouleater from "./pool/pestilent-souleater.js";
 import _poolPestilentSpirit from "./pool/pestilent-spirit.js";
@@ -24776,6 +24781,7 @@ import _poolVampireChampion from "./pool/vampire-champion.js";
 import _poolVampireCutthroat from "./pool/vampire-cutthroat.js";
 import _poolVampireEnvoy from "./pool/vampire-envoy.js";
 import _poolVampireGourmand from "./pool/vampire-gourmand.js";
+import _poolVampireHexmage from "./pool/vampire-hexmage.js";
 import _poolVampireHounds from "./pool/vampire-hounds.js";
 import _poolVampireInterloper from "./pool/vampire-interloper.js";
 import _poolVampireLacerator from "./pool/vampire-lacerator.js";
@@ -27593,6 +27599,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAetherRift,
   _poolAetherSearcher,
   _poolAetherShockwave,
+  _poolAetherSnap,
   _poolAetherSpellbomb,
   _poolAetherSting,
   _poolAetherStorm,
@@ -29628,6 +29635,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlisterstickShaman,
   _poolBlitzAutomaton,
   _poolBlitzHellion,
+  _poolBlitzLeech,
   _poolBlitzOfTheThunderRaptor,
   _poolBlitzballShot,
   _poolBlizzardBrawl,
@@ -34231,6 +34239,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnchantedBeing,
   _poolEnchantedCarriage,
   _poolEnchantedEvening,
+  _poolEnchantedRiversGrasp,
   _poolEnchantresssPresence,
   _poolEnclaveCryptologist,
   _poolEnclaveElite,
@@ -43004,6 +43013,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolObliteratingBolt,
   _poolOblivionCrown,
   _poolOblivionRing,
+  _poolOblivionStone,
   _poolOblivionStrike,
   _poolOblivion,
   _poolOblivionsHunger,
@@ -43800,6 +43810,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPestilenceDemon,
   _poolPestilence,
   _poolPestilentCauldron,
+  _poolPestilentHaze,
   _poolPestilentKathari,
   _poolPestilentSouleater,
   _poolPestilentSpirit,
@@ -52112,6 +52123,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVampireCutthroat,
   _poolVampireEnvoy,
   _poolVampireGourmand,
+  _poolVampireHexmage,
   _poolVampireHounds,
   _poolVampireInterloper,
   _poolVampireLacerator,
@@ -54942,6 +54954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aether-rift": _poolAetherRift,
   "pool/aether-searcher": _poolAetherSearcher,
   "pool/aether-shockwave": _poolAetherShockwave,
+  "pool/aether-snap": _poolAetherSnap,
   "pool/aether-spellbomb": _poolAetherSpellbomb,
   "pool/aether-sting": _poolAetherSting,
   "pool/aether-storm": _poolAetherStorm,
@@ -56977,6 +56990,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blisterstick-shaman": _poolBlisterstickShaman,
   "pool/blitz-automaton": _poolBlitzAutomaton,
   "pool/blitz-hellion": _poolBlitzHellion,
+  "pool/blitz-leech": _poolBlitzLeech,
   "pool/blitz-of-the-thunder-raptor": _poolBlitzOfTheThunderRaptor,
   "pool/blitzball-shot": _poolBlitzballShot,
   "pool/blizzard-brawl": _poolBlizzardBrawl,
@@ -61580,6 +61594,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enchanted-being": _poolEnchantedBeing,
   "pool/enchanted-carriage": _poolEnchantedCarriage,
   "pool/enchanted-evening": _poolEnchantedEvening,
+  "pool/enchanted-rivers-grasp": _poolEnchantedRiversGrasp,
   "pool/enchantresss-presence": _poolEnchantresssPresence,
   "pool/enclave-cryptologist": _poolEnclaveCryptologist,
   "pool/enclave-elite": _poolEnclaveElite,
@@ -70353,6 +70368,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/obliterating-bolt": _poolObliteratingBolt,
   "pool/oblivion-crown": _poolOblivionCrown,
   "pool/oblivion-ring": _poolOblivionRing,
+  "pool/oblivion-stone": _poolOblivionStone,
   "pool/oblivion-strike": _poolOblivionStrike,
   "pool/oblivion": _poolOblivion,
   "pool/oblivions-hunger": _poolOblivionsHunger,
@@ -71149,6 +71165,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pestilence-demon": _poolPestilenceDemon,
   "pool/pestilence": _poolPestilence,
   "pool/pestilent-cauldron": _poolPestilentCauldron,
+  "pool/pestilent-haze": _poolPestilentHaze,
   "pool/pestilent-kathari": _poolPestilentKathari,
   "pool/pestilent-souleater": _poolPestilentSouleater,
   "pool/pestilent-spirit": _poolPestilentSpirit,
@@ -79461,6 +79478,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vampire-cutthroat": _poolVampireCutthroat,
   "pool/vampire-envoy": _poolVampireEnvoy,
   "pool/vampire-gourmand": _poolVampireGourmand,
+  "pool/vampire-hexmage": _poolVampireHexmage,
   "pool/vampire-hounds": _poolVampireHounds,
   "pool/vampire-interloper": _poolVampireInterloper,
   "pool/vampire-lacerator": _poolVampireLacerator,

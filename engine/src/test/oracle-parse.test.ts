@@ -3337,3 +3337,39 @@ describe("blocking restrictions and requirements on one creature", () => {
     ).toEqual({ kind: "assign-as-though-unblocked", filter: { type: "creature", controlledBy: "you" }, optional: true });
   });
 });
+
+describe("removing counters in bulk (remove-counter's 'all', remove-counter-all)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Remover", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads 'remove all counters from target permanent' and one kind's 'all' from it", () => {
+    const hexmage = face("Creature — Vampire Shaman", "First strike\nSacrifice this creature: Remove all counters from target permanent.");
+    expect(hexmage.activated[0].effect).toEqual({ kind: "remove-counter", target: 0, counter: "any", amount: "all" });
+    const hound = face("Creature — Elemental Dog", "At the beginning of your end step, remove all +1/+1 counters from this creature.");
+    expect(hound.triggered[0].effect).toEqual({ kind: "remove-counter", target: "source", counter: "+1/+1", amount: "all" });
+  });
+
+  it("reads 'remove all [kind] counters from all …' and 'remove N [kind] counters from each …'", () => {
+    const stone = parseSentence("Remove all fate counters from all permanents.", ctx());
+    expect(stone).toEqual({ kind: "remove-counter-all", filter: {}, counter: "fate", amount: "all" });
+    expect(parseSentence("Remove all counters from all permanents.", ctx())).toEqual({
+      kind: "remove-counter-all",
+      filter: {},
+      counter: "any",
+      amount: "all",
+    });
+    expect(parseSentence("Remove two loyalty counters from each planeswalker.", ctx())).toEqual({
+      kind: "remove-counter-all",
+      filter: { type: "planeswalker" },
+      counter: "loyalty",
+      amount: 2,
+    });
+    expect(parseSentence("Remove a -1/-1 counter from each creature you control.", ctx())).toEqual({
+      kind: "remove-counter-all",
+      filter: { type: "creature", controlledBy: "you" },
+      counter: "-1/-1",
+      amount: 1,
+    });
+    const layer = face("Creature — Dwarf", "When this creature leaves the battlefield, remove all mine counters from all lands.");
+    expect(layer.triggered[0].effect).toEqual({ kind: "remove-counter-all", filter: { type: "land" }, counter: "mine", amount: "all" });
+  });
+});

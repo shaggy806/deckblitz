@@ -12,6 +12,7 @@ import _poolAdventurousEater from "../pool/adventurous-eater.js";
 import _poolAerialAssault from "../pool/aerial-assault.js";
 import _poolAesthirGlider from "../pool/aesthir-glider.js";
 import _poolAetherCharge from "../pool/aether-charge.js";
+import _poolAetherSnap from "../pool/aether-snap.js";
 import _poolAgentOfAtlas from "../pool/agent-of-atlas.js";
 import _poolAgentOfStromgald from "../pool/agent-of-stromgald.js";
 import _poolAgentOfTreachery from "../pool/agent-of-treachery.js";
@@ -864,6 +865,7 @@ const shard: CardShard = {
     _poolAerialAssault,
     _poolAesthirGlider,
     _poolAetherCharge,
+    _poolAetherSnap,
     _poolAgentOfAtlas,
     _poolAgentOfStromgald,
     _poolAgentOfTreachery,

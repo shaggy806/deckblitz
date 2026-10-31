@@ -762,6 +762,10 @@ export type GameEvent =
       /** How many of that kind it has left — 0 is vanishing's "the last"
        * (the `counters-removed` trigger's `last`). */
       readonly after: number;
+      /** A token stack that lost them together (`remove-counter-all`): how
+       * many tokens, each losing `amount` — what "the number of counters
+       * removed this way" counts. Absent, one object. */
+      readonly tokens?: number;
     })
   | (Base & {
       /** An Aura or Equipment stopped being attached to a permanent while it

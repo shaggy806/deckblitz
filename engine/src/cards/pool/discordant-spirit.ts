@@ -35,7 +35,7 @@ export default defineCard({
         kind: "remove-counter",
         target: "source",
         counter: "+1/+1",
-        amount: { countersOn: "source", counter: "+1/+1" },
+        amount: "all",
       },
       resolve: null,
       text: "At the beginning of your end step, remove all +1/+1 counters from this creature.",

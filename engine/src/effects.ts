@@ -3679,11 +3679,40 @@ export type EffectSpec =
        * announces what it removed (`counter-removed`). Only a permanent
        * still on the battlefield as the same object (rule 400.7) loses any:
        * counters on a card that has left simply ceased to exist (rule 122.2).
+       *
+       * `amount: "all"` removes every counter of that kind it has — Relic
+       * Amulet's kin "remove all +1/+1 counters from it" — and with
+       * `counter: "any"`, every counter of every kind: Vampire Hexmage's
+       * "remove all counters from target permanent", Blitz Leech's "remove
+       * all counters from that creature". `"any"` means nothing with a
+       * number (which kind would be the player's choice: that's
+       * `remove-counters`). How many came off is the resolution's `thisWay:
+       * "counters-removed"` (Nexus Mentality's "draw a card for each counter
+       * removed this way").
        */
       readonly kind: "remove-counter";
       readonly target: EffectTargetRef;
       readonly counter: string;
-      readonly amount: EffectAmount;
+      readonly amount: EffectAmount | "all";
+    }
+  | {
+      /**
+       * Remove counters from **every** battlefield permanent matching
+       * `filter` — the untargeted, mass form of `remove-counter`: Oblivion
+       * Stone's "then remove all fate counters from all permanents" (`amount:
+       * "all"`), Aether Snap's "remove all counters from all permanents"
+       * (`counter: "any"` too), Pestilent Haze's "remove two loyalty
+       * counters from each planeswalker", Heartmender's "remove a -1/-1
+       * counter from each creature you control". Which permanents match is
+       * read once, before any counter comes off (a "with a fate counter"
+       * filter isn't emptied as it goes); each loses as many as it has, up
+       * to `amount`. A token stack loses them token by token, all at once —
+       * one `counter-removed` with its `tokens`.
+       */
+      readonly kind: "remove-counter-all";
+      readonly filter: CardFilter;
+      readonly counter: string;
+      readonly amount: EffectAmount | "all";
     }
   | {
       /**
@@ -8536,7 +8565,9 @@ export interface EffectApi {
    * ceased to exist — or the player itself. */
   ownerOf(target: TargetRef): PlayerId | undefined;
   /** See the `"remove-counter"` {@link EffectSpec}. */
-  removeCounter(target: TargetRef, counter: string, amount: number): void;
+  removeCounter(target: TargetRef, counter: string, amount: number | "all"): void;
+  /** See the `"remove-counter-all"` {@link EffectSpec}. */
+  removeCounterAll(filter: CardFilter, counter: string, amount: number | "all"): void;
   /** See the `"remove-counters"` {@link EffectSpec}: ask the controller which
    * counters to remove, from what — `count` `null` for any number. */
   removeChosenCounters(
@@ -11976,9 +12007,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "remove-counter": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.removeCounter(target, spec.counter, amountValue(spec.amount, ctx));
+      if (target !== undefined) ctx.removeCounter(target, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
       return;
     }
+    case "remove-counter-all":
+      ctx.removeCounterAll(spec.filter, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
+      return;
     case "remove-counters": {
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (spec.target !== undefined && (target === undefined || illegalSlot(spec.target, ctx))) return;

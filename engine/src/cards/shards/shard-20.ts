@@ -239,6 +239,7 @@ import _poolElectrosBolt from "../pool/electros-bolt.js";
 import _poolEmancipationAngel from "../pool/emancipation-angel.js";
 import _poolEmberethShieldbreaker from "../pool/embereth-shieldbreaker.js";
 import _poolEmeriasCall from "../pool/emerias-call.js";
+import _poolEnchantedRiversGrasp from "../pool/enchanted-rivers-grasp.js";
 import _poolEnduringTenacity from "../pool/enduring-tenacity.js";
 import _poolEnlistedWurm from "../pool/enlisted-wurm.js";
 import _poolEsperCormorants from "../pool/esper-cormorants.js";
@@ -1142,6 +1143,7 @@ const shard: CardShard = {
     _poolEmancipationAngel,
     _poolEmberethShieldbreaker,
     _poolEmeriasCall,
+    _poolEnchantedRiversGrasp,
     _poolEnduringTenacity,
     _poolEnlistedWurm,
     _poolEsperCormorants,

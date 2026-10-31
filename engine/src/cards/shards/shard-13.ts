@@ -76,6 +76,7 @@ import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBladegriffPrototype from "../pool/bladegriff-prototype.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
+import _poolBlitzLeech from "../pool/blitz-leech.js";
 import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
@@ -908,6 +909,7 @@ const shard: CardShard = {
     _poolBiteDown,
     _poolBladegriffPrototype,
     _poolBlazemireVerge,
+    _poolBlitzLeech,
     _poolBloodLust,
     _poolBloodPact,
     _poolBloodfireExpert,

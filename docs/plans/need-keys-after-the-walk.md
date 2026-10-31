@@ -534,6 +534,15 @@ missing. Re-run `--greedy` for Phase 2's order.
   (queued: 489). Taken alone: the session reached ~260K tokens on it. Next:
   `effect:remove-all-counters` (17), `effect:cant-activate-abilities-until-next-turn` (17),
   `stat:turn-event-tallies` (17).
+- **2026-10-31: `effect:remove-all-counters`, features only** (an overnight agent) — removing
+  counters in bulk: `remove-counter`'s `amount: "all"` (every kind with `counter: "any"`) and
+  `remove-counter-all` over a filter, a token stack's removal counted token by token this way.
+  2 keys; 6 proving cards. 11 freed (queued: 500), two still short: Relic Amulet's "remove all
+  charge counters" is a cost (`cost:remove-all-counters`), and Nexus Mentality's "for each counter
+  removed this way" would count its first mode's moved counters too with both modes chosen (a
+  modal spell's modes share one "this way"). Engine-only. Next:
+  `effect:cant-activate-abilities-until-next-turn` (17), `stat:turn-event-tallies` (17),
+  `mechanic:assist` (16).
 
 ## Rough size
 

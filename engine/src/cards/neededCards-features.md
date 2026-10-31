@@ -344,6 +344,24 @@ blocks. Key: assign-damage-as-though-unblocked. Proving cards: Thorn
 Elemental, Indomitable Might, Siege Behemoth, Outmaneuver, Predatory Focus.
 `static:attack-as-though-haste` (2 cards) is separate code and still open.
 
+### Removing counters in bulk — built 2026-10-31
+
+The need-keys Phase 2 family `effect:remove-all-counters`, features only.
+**`remove-counter`'s `amount: "all"`** takes every counter of its kind off one
+permanent, and with **`counter: "any"`** every kind — "remove all counters
+from target permanent" (Vampire Hexmage), "from that creature" (Blitz Leech),
+"from it" (Enchanted River's Grasp). **`remove-counter-all`** does the same,
+or a number, to every permanent matching a filter, read before any counter
+comes off: "then remove all fate counters from all permanents" (Oblivion
+Stone), "remove all counters from all permanents" (Aether Snap), "remove two
+loyalty counters from each planeswalker" (Pestilent Haze). A token stack loses
+them together in one `counter-removed` carrying its `tokens`, which "the
+number of counters removed this way" multiplies. Keys: remove-all-counters,
+remove-counters-all. Still open beside it: "remove all [kind] counters from
+this" as a **cost** (`cost:remove-all-counters` — Relic Amulet, Sage of
+Hours, Catti-brie), and a modal spell's modes sharing one "this way" (Nexus
+Mentality, with both modes chosen).
+
 ### Revealing cards from your hand as a cost — built 2026-10-30
 
 The need-keys Phase 2 family `cost:additional-cost-reveal`, features only.
