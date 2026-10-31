@@ -241,6 +241,9 @@ function addedCards() {
     // Nor is a prepare spell that is no card of its own (rule 722 — Enroot):
     // the preparation card that names it (also new) brings it into games.
     if (/^\s*prepareSpellOnly:\s*true/m.test(source)) continue;
+    // Nor is a melded permanent's combined back face (rule 712.4a — Chittering
+    // Host): its two front cards bring it into games.
+    if (/^\s*meldOf:\s*\[/m.test(source)) continue;
     names.push(name);
   }
   return names;
