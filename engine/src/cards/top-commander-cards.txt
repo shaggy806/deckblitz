@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4041 already implemented / 959 missing (marks refreshed 2026-10-31)
+4043 already implemented / 957 missing (marks refreshed 2026-10-31)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1728,7 +1728,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1735  Molten Duplication                       {1}{R}           Sorcery
 [x]  1736  Flame of Anor                            {1}{U}{R}        Instant
 [x]  1737  Ancient Brass Dragon                     {5}{B}{B}        Creature — Elder Dragon
-[ ]  1738  Tezzeret the Seeker                      {3}{U}{U}        Legendary Planeswalker — Tezzeret
+[x]  1738  Tezzeret the Seeker                      {3}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  1739  Voltaic Key                              {1}              Artifact
 [ ]  1740  Leyline of the Guildpact                 {G/W}{G/U}{B/G}{R/G} Enchantment
 [x]  1741  Alesha, Who Laughs at Fate               {1}{B}{R}        Legendary Creature — Human Warrior
@@ -3220,7 +3220,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3227  Ingenious Prodigy                        {X}{U}           Creature — Human Wizard
 [x]  3228  Marang River Regent // Coil and Catch    {4}{U}{U} // {3}{U} Creature — Dragon // Instant — Omen
 [x]  3229  Tangled Florahedron // Tangled Vale      {2}              Creature — Elemental // Land
-[ ]  3230  Hanweir Battlements                      {0}              Land
+[x]  3230  Hanweir Battlements                      {0}              Land
 [x]  3231  Mishra's Factory                         {0}              Land
 [x]  3232  Canopy Tactician                         {3}{G}           Creature — Elf Warrior
 [x]  3233  Desert of the True                       {0}              Land — Desert
